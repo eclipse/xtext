@@ -1,0 +1,137 @@
+/*******************************************************************************
+* Copyright (c) 2008 itemis AG and others.
+* All rights reserved. This program and the accompanying materials
+* are made available under the terms of the Eclipse Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+* Contributors:
+* committers of openArchitectureWare - initial API and implementation
+*******************************************************************************/
+
+import ecore;
+import xtext;
+import xtextutil; 
+
+extension org::openarchitectureware::util::stdlib::io; 
+
+// ***********************************************************************************
+// Containers
+
+Grammar grammar(emf::EObject e) :
+	(Grammar) e.eRootContainer
+;
+
+Grammar grammar(ResolvedType t) :
+	t.metaModel.grammar()
+;
+
+Grammar grammar(MetaModel mm) :
+	mm.declaration.grammar()
+;
+
+ParserRule containingParserRule(emf::EObject e) :
+	if e.metaType==ParserRule then
+		e
+	else 
+		if e.eContainer != null then
+			e.eContainer.containingParserRule()
+		else
+			null
+; 
+
+Assignment containingAssignment(emf::EObject e) :
+	if e.metaType==Assignment then
+		e
+	else 
+		if e.eContainer != null then
+			e.eContainer.containingAssignment()
+		else
+			null
+; 
+
+// ***********************************************************************************
+// Containment
+
+List[Action] allActions(emf::EObject o) :
+	o.eAllContents.typeSelect(Action)
+;
+
+List[RuleCall] allRuleCalls(emf::EObject o) :
+	o.eAllContents.typeSelect(RuleCall)
+;
+
+List[Assignment] allAssignments(emf::EObject o) :
+	o.eAllContents.typeSelect(Assignment)
+;
+
+List[AbstractRule] allRules(Grammar this) :
+	parserRules.union(allLexerRules());
+
+
+// ***********************************************************************************
+// Shortcuts
+	 
+ParserRule calledParserRule(RuleCall this) :
+	if ParserRule.isInstance(calledRule()) then calledRule();
+	
+AbstractRule calledRule(RuleCall this) :
+	grammar().allRules().select(p | p.name == name).first()
+;
+
+String getReturnTypeName(ParserRule p) :
+	if p.type != null then
+		p.type.name 
+	else 
+		p.name
+;
+		
+boolean referenced(ResolvedType t) :
+	t.metaModel.referenced
+;
+
+boolean isKeywordAssignment(Assignment a) :
+	Keyword.isInstance(a.terminal) || 
+	a.eAllContents.forAll(e | !(RuleCall.isInstance(e)));
+	
+boolean isRuleAssignment(Assignment a) :
+	RuleCall.isInstance(a.terminal);
+
+withoutQuotes(Keyword this) :
+	value.trimFromStartAndEnd(1);
+
+trimFromStartAndEnd(String this, Integer i) :
+	this.subString(i,this.length-i);
+	
+isAssigned(RuleCall this) : isAssigned(eContainer);
+isAssigned(Alternatives this) : isAssigned(eContainer);
+isAssigned(Assignment this) : true;
+isAssigned(Object this) : false;	
+	
+	
+// ***********************************************************************************
+// Built-in lexer Rules
+
+cached allLexerRules(Grammar this) :
+	lexerRules.union(builtinRules().select(e|lexerRules.forAll(e1|e1.name != e.name)));
+		
+
+private create LexerRule lr(String name, String body) :
+	setName(name) ->
+	setBody(body);
+	
+cached builtinRules() :
+	{
+	lr('ID',"('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*"),
+	lr('INT',"('0'..'9')+"),
+	lr('LEXER_BODY',"'<#' ( options {greedy=false;} : . )* '#>'"),
+ 	lr('STRING', "'"+dq()+"' ( '"+bs2()+"' ('b'|'t'|'n'|'f'|'r'|'"+bs()+""+dq()+"'|'"+bs()+"''|'"+bs2()+"') | ~('"+bs2()+"'|'"+dq()+"') )* '"+dq()+"' |
+	'"+bs()+"'' ( '"+bs2()+"' ('b'|'t'|'n'|'f'|'r'|'"+bs()+""+dq()+"'|'"+bs()+"''|'"+bs2()+"') | ~('"+bs2()+"'|'"+bs()+"'') )* '"+bs()+"''"),
+	lr('ML_COMMENT',"'/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}"),
+	lr('SL_COMMENT',"'//' ~('"+bs()+"n'|'"+bs()+"r')* '"+bs()+"r'? '"+bs()+"n' {$channel=HIDDEN;}"),
+	lr('WS',"(' '|'"+bs()+"t'|'"+bs()+"r'|'"+bs()+"n')+ {$channel=HIDDEN;}")
+	};
+
+private dq() : '"';
+private bs() : '\\';
+private bs2() : bs()+bs();
