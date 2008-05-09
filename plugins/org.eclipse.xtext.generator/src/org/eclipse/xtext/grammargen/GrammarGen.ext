@@ -1,0 +1,40 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+import xtext;
+
+extension org::eclipse::xtext::Properties reexport;
+extension org::eclipse::xtext::Extensions reexport;
+extension org::openarchitectureware::util::stdlib::io;
+
+factoryName() : languageName()+'Factory';
+
+ruleName(ParserRule this) : 'rule'+name;
+ruleName(LexerRule this) : 'RULE_'+name.toUpperCase();
+ruleName(AbstractRule this) : error("Unsupported");
+
+
+typeName(Action this) : typeName.name;
+typeName(ParserRule this) : getReturnTypeName();
+
+setOrAdd(Action this) : if operator=='+=' then 'add' else 'set';
+
+
+setOrAdd(Assignment this) : if operator=='+=' then 'add' else 'set';
+
+//TODO make localVars unique
+localVar(Assignment this) : 'lv_'+feature;
+localVar(RuleCall this) : 'this_'+name;
+
+
+mustBeParenthesized(AbstractElement this) : true;
+mustBeParenthesized(Group this) : true;
+mustBeParenthesized(Alternatives this) : true;
+mustBeParenthesized(Keyword this) : false;
+mustBeParenthesized(RuleCall this) : false;
+	

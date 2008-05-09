@@ -1,0 +1,79 @@
+import ecore;
+import xtext;
+import xtextutil; 
+
+extension org::openarchitectureware::util::stdlib::io; 
+
+extension org::eclipse::xtext::Extensions;
+extension org::eclipse::xtext::TypeResolution;
+extension org::eclipse::xtext::xtext2ecore::FeatureNormalization;
+
+List[EPackage] transform (Grammar g) :
+	g.createdMetamodels().createEPackage().normalizeFeatures()
+;
+
+create EPackage createEPackage(MetaModel mm) :
+	mm.setEPackage(this)->
+	setName(((GeneratedMetamodel) mm.declaration).name) ->
+	setNsURI(((GeneratedMetamodel) mm.declaration).nsURI.trimFromStartAndEnd(1)) ->
+	setNsPrefix(((GeneratedMetamodel) mm.declaration).name) ->
+	mm.grammar().parserRules.resolveReturnType().createOrGetEClass() ->
+	mm.grammar().allActions().resolveCreatedType().createOrGetEClass() 
+	//->this.eClassifiers.typeSelect(EClass).format().toString("\n").syserr()
+;
+
+EClassifier createOrGetEClass(AbstractType t) :
+	if t.eClassifier == null then
+		((ResolvedType) t).createAndAddEClass()
+	else 
+		t.eClassifier
+;
+
+create EClass createAndAddEClass(ResolvedType type) :
+	// info("createAndAddEClass " + type.name) ->
+	setName(type.name) ->
+	type.setEClassifier(this) ->
+	eSuperTypes.addAll(type.inferredSuperTypes().createOrGetEClass()) ->
+	type.assignments().createAndAddEStructuralFeature(this) ->
+	type.metaModel.ePackage.eClassifiers.add(this) ->
+	if type.isAbstract() then
+		setAbstract(true)
+	//-> syserr(format(this)) 
+;
+
+Void createAndAddEStructuralFeature(Assignment a, EClass owningClass) :
+	if owningClass.eStructuralFeatures.select(f|f.name == a.feature).isEmpty then (
+		let f = a.createEStructuralFeature() :
+			f.setName(a.feature) ->
+			(if a.operator == "+=" then
+				f.setUpperBound(-1)) -> 
+			owningClass.eStructuralFeatures.add(f)
+			//-> syserr("Adding " + f.name + " to " + owningClass)
+	)
+;
+
+EStructuralFeature createEStructuralFeature(Assignment a) :
+	if a.featureIsReference() then
+		a.createEReference() 
+	else 
+		a.createEAttribute()
+;
+
+create EAttribute createEAttribute(Assignment a) :
+	setEType(a.featureType().createOrGetEClass())
+;
+
+create EReference createEReference(Assignment a) :
+	setEType(a.featureType().createOrGetEClass()) ->
+	setContainment(true) ->
+	setResolveProxies(false)
+;
+
+String format(EClass eClass) :
+	"Type: " + eClass.name + ": EPackage: "+ eClass.ePackage
+	+ "\n\t" 
+	+ eClass.eStructuralFeatures.toString("\n\t")
+;
+
+
+	

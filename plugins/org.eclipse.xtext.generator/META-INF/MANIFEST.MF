@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext22ecore Plug-in
+Bundle-SymbolicName: org.eclipse.xtext.generator
+Bundle-Version: 1.0.0
+Bundle-Vendor: itemis AG
+Require-Bundle: org.eclipse.xtext,
+ org.apache.commons.logging,
+ org.openarchitectureware.dependencies;bundle-version="4.3.0",
+ org.antlr;bundle-version="3.0.0"
+Export-Package: org.eclipse.xtext,
+ org.eclipse.xtext.util,
+ org.eclipse.xtext.xtext2ecore
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

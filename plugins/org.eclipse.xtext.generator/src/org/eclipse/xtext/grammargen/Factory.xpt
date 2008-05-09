@@ -1,0 +1,33 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+
+«EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
+
+«DEFINE factory FOR Grammar»
+«FILE pathName()+'/parser/'+factoryName()+'.java'-»
+package «packageName()».parser;
+
+import org.eclipse.emf.ecore.EPackage;
+
+public class «factoryName()» extends org.eclipse.xtext.core.parser.AbstractEcoreElementFactory {
+	private EPackage[] ePackages = new EPackage[] {
+	«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS e SEPARATOR ','»
+		«packageName()».«languageName()»EPackageAccess.get«e.name»EPackage()
+	«ENDFOREACH»
+	};
+	protected EPackage[] getEPackages() {
+		return ePackages;
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
