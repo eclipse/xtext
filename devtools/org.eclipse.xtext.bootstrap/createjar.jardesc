@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<jardesc>
+<jar path="org.eclipse.xtext.bootstrap/lastversion.jar"/>
+<options buildIfNeeded="true" compress="true" descriptionLocation="/org.eclipse.xtext.bootstrap/createjar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+<storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+<selectedProjects/>
+<manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+<sealing sealJar="false">
+<packagesToSeal/>
+<packagesToUnSeal/>
+</sealing>
+</manifest>
+<selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+<file path="/org.eclipse.xtext/.classpath"/>
+<file path="/org.eclipse.xtext.generator/.classpath"/>
+<folder path="/org.eclipse.xtext.generator/branches"/>
+<javaElement handleIdentifier="=org.eclipse.xtext/emf-gen"/>
+<folder path="/org.eclipse.xtext/text"/>
+<file path="/org.eclipse.xtext/plugin.properties"/>
+<folder path="/org.eclipse.xtext/META-INF"/>
+<folder path="/org.eclipse.xtext.generator/tags"/>
+<file path="/org.eclipse.xtext.generator/build.properties"/>
+<file path="/org.eclipse.xtext/build.properties"/>
+<file path="/org.eclipse.xtext.generator/.project"/>
+<folder path="/org.eclipse.xtext.core/META-INF"/>
+<file path="/org.eclipse.xtext.core/build.properties"/>
+<javaElement handleIdentifier="=org.eclipse.xtext/src-gen"/>
+<file path="/org.eclipse.xtext/plugin.xml"/>
+<file path="/org.eclipse.xtext.core/.project"/>
+<javaElement handleIdentifier="=org.eclipse.xtext.core/src"/>
+<file path="/org.eclipse.xtext/.project"/>
+<folder path="/org.eclipse.xtext.generator/META-INF"/>
+<javaElement handleIdentifier="=org.eclipse.xtext/src"/>
+<javaElement handleIdentifier="=org.eclipse.xtext.generator/src"/>
+<javaElement handleIdentifier="=org.eclipse.xtext/model"/>
+<file path="/org.eclipse.xtext.core/.classpath"/>
+<folder path="/org.eclipse.xtext.generator/trunk"/>
+</selectedElements>
+<fatjar builder="org.eclipse.jdt.ui.plain_jar_builder" launchConfig=""/>
+</jardesc>

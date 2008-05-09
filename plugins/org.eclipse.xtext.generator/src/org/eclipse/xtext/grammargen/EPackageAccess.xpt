@@ -1,0 +1,70 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+
+«EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
+
+«DEFINE file FOR Grammar»
+«FILE pathName()+'/'+languageName()+'EPackageAccess.java'-»
+package «packageName()»;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+public class «languageName()»EPackageAccess {
+
+	static {
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"ecore", new XMIResourceFactoryImpl());
+	}
+
+	«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm»
+	public static final String «gmm.name.toUpperCase()»_NS_URI = "«gmm.nsURI.trimFromStartAndEnd(1)»";
+	
+	public static EPackage get«gmm.name»EPackage() {	
+		if (!EPackage.Registry.INSTANCE.containsKey(«gmm.name.toUpperCase()»_NS_URI)) {
+			EPackage p = loadEcoreFile("«pathName()»/«gmm.name».ecore");
+			if (p!=null) {
+				EPackage.Registry.INSTANCE.put(«gmm.name.toUpperCase()»_NS_URI,p);
+			}
+		}
+		return EPackage.Registry.INSTANCE.getEPackage(«gmm.name.toUpperCase()»_NS_URI);
+	}
+	
+	«ENDFOREACH»
+	private static EPackage loadEcoreFile(String string) {
+		InputStream in = «languageName()»EPackageAccess.class.getClassLoader().getResourceAsStream(string);
+		Resource resource = new ResourceSetImpl().createResource(URI.createURI("classpath:/"+string));
+		try {
+			resource.load(in, null);
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
+		EList<EObject> contents = resource.getContents();
+		if (contents.size()!=1) {
+			throw new IllegalStateException("loading classpath:"+string+" : Expected one root element but found "+contents.size());
+		}
+		return (EPackage) contents.get(0);
+	}
+
+}
+«ENDFILE»
+«ENDDEFINE»

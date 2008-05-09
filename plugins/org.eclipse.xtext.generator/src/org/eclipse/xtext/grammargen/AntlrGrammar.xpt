@@ -1,0 +1,87 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+
+«EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
+
+«DEFINE grammar FOR Grammar»
+«FILE pathName()+'/parser/internal/Internal'+languageName()+'.g'»
+grammar Internal«languageName()»;
+
+@lexer::header {
+package «packageName()».parser.internal;
+}
+
+@parser::header {
+package «packageName()».parser.internal; 
+
+import org.eclipse.xtext.core.parser.IElementFactory;
+}
+
+@parser::members {
+private IElementFactory factory;
+public Internal«languageName()»Parser(TokenStream input, IElementFactory factory) {
+	this(input);
+	this.factory = factory;
+}
+
+}
+
+parse returns [Object current] :
+	«parserRules.first().ruleName()» {$current=$«parserRules.first().ruleName()».current;} EOF;
+
+«EXPAND rule FOREACH parserRules»
+
+«EXPAND rule FOREACH allLexerRules()»
+
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE rule FOR ParserRule»
+«ruleName()» returns [Object current=null] : {Object temp=null;}
+	«EXPAND ebnf FOR this.alternatives»;
+«ENDDEFINE»
+
+«DEFINE rule FOR LexerRule»
+«ruleName()» : «body»;
+«ENDDEFINE»
+
+«DEFINE ebnf FOR AbstractElement»
+«IF mustBeParenthesized()»(«EXPAND ebnf2»)«ELSE»«EXPAND ebnf2»«ENDIF»«cardinality-»
+«ENDDEFINE»
+
+«DEFINE ebnf2 FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
+
+«DEFINE ebnf2 FOR Alternatives»«EXPAND ebnf FOREACH groups SEPARATOR '|'»«ENDDEFINE»
+
+«DEFINE ebnf2 FOR Group»«EXPAND ebnf FOREACH abstractTokens»«ENDDEFINE»
+
+«DEFINE ebnf2 FOR Assignment»
+	«localVar()»=«EXPAND ebnf FOR terminal» {if ($current==null) {$current = factory.create("«containingParserRule().typeName()»");}factory.«setOrAdd()»($current, "«feature»",«localVar()»);}
+«ENDDEFINE»
+
+«DEFINE ebnf2 FOR Action»
+	{temp=factory.create("«typeName()»");
+	 factory.«setOrAdd()»(temp, "«feature»",$current);
+	 $current = temp; temp = null;}
+«ENDDEFINE»
+
+«DEFINE ebnf2 FOR Keyword»'«withoutQuotes()»'«ENDDEFINE»
+
+«DEFINE ebnf2 FOR RuleCall-»
+«IF ParserRule.isInstance(calledRule()) && !isAssigned()»«localVar()»=«ENDIF-»
+«calledRule().ruleName()-»
+«IF ParserRule.isInstance(calledRule()) && !isAssigned()»{$current = $«localVar()».current;}«ENDIF-»
+«ENDDEFINE»
+
+«ENDFILE»
+«ENDDEFINE»

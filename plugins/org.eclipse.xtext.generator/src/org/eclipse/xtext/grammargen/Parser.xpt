@@ -1,0 +1,69 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+
+«EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
+
+«DEFINE parser FOR Grammar»
+«FILE pathName()+'/parser/'+languageName()+'Parser.java'»
+package «packageName()».parser;
+
+
+import org.antlr.runtime.ANTLRInputStream;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.Token;
+import org.eclipse.xtext.core.parser.IElementFactory;
+import org.eclipse.xtext.core.parser.IParseErrorHandler;
+import org.eclipse.xtext.core.parser.antlr.AntlrExceptionTool;
+import org.eclipse.xtext.core.parser.antlr.TokenTool;
+
+import «packageName()».parser.internal.Internal«languageName()»Lexer;
+import «packageName()».parser.internal.Internal«languageName()»Parser;
+
+
+public class «languageName()»Parser extends org.eclipse.xtext.core.parser.AbstractParser {
+	@Override
+	protected Object parse(ANTLRInputStream in, IElementFactory factory,
+			final IParseErrorHandler handler) {
+		Internal«languageName()»Lexer lexer = new Internal«languageName()»Lexer(in) {
+			@Override
+			public void reportError(RecognitionException re) {
+				Token t = AntlrExceptionTool.getToken(re);
+				handler.handleParserError(TokenTool.getOffset(t), TokenTool
+						.getLength(t), TokenTool.getText(t), getErrorMessage(
+						re, getTokenNames()));
+			}
+		};
+		CommonTokenStream stream = new CommonTokenStream(lexer);
+		Internal«languageName()»Parser parser = new Internal«languageName()»Parser(
+				stream, factory) {
+			@Override
+			public void reportError(RecognitionException re) {
+				Token t = AntlrExceptionTool.getToken(re);
+				handler.handleParserError(TokenTool.getOffset(t), TokenTool
+						.getLength(t), TokenTool.getText(t), getErrorMessage(
+						re, getTokenNames()));
+			}
+		};
+		try {
+			return parser.parse();
+		} catch (RecognitionException re) {
+			Token t = AntlrExceptionTool.getToken(re);
+			handler.handleParserError(TokenTool.getOffset(t), TokenTool
+					.getLength(t), TokenTool.getText(t), re.getMessage());
+		}
+		return null;
+	}
+}
+«ENDFILE»
+«ENDDEFINE»

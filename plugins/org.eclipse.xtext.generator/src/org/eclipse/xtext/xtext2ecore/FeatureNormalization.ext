@@ -1,0 +1,55 @@
+import ecore;
+
+extension org::openarchitectureware::util::stdlib::io; 
+
+List[EPackage] normalizeFeatures(List[EPackage] ePackages) :
+	let allClassifiers = ePackages.eClassifiers.flatten().typeSelect(EClass)	 :
+		allClassifiers.collect(
+			superType | 
+			normalizeFeatures(
+				superType, superType.findSubTypes(allClassifiers)
+			)
+		) ->
+		ePackages	
+;
+
+List[EClass] findSubTypes(EClass superType, List[EClass] candidates) :
+	candidates.select(subType|subType.eSuperTypes.contains(superType))
+;
+
+normalizeFeatures(EClass superType, List[EClass] subTypes) :
+	subTypes.commonFeatures().collect(cf | 
+		info("Lifting common feature " + cf.name + " to superclass " + superType.name) ->
+		superType.eStructuralFeatures.add(cf) ->
+		subTypes.eStructuralFeatures.select(f|cf.isSameAs(f))
+			.collect(f1| f1.eContainingClass.eStructuralFeatures.remove(f1))
+	) ->
+	subTypes.commonFeatures(superType).collect(cf | 
+		info("Removing superclass feature " + cf.name + " from subclass " + cf.eContainingClass.name) ->
+		cf.eContainingClass.eStructuralFeatures.remove(cf))
+;
+
+List[EStructuralFeature] commonFeatures(List[EClass] subTypes) :
+	subTypes.first().eStructuralFeatures.select(
+		candidate | candidate.isCommonFeature(subTypes)) 
+;
+
+List[EStructuralFeature] commonFeatures(EClass this, EClass that) :
+	this.eStructuralFeatures.select(
+		candidate | candidate.isCommonFeature({that})) 
+;
+
+boolean isCommonFeature(EStructuralFeature candidate, List[EClass] subTypes) :
+	subTypes.forAll(
+		subType | subType.eStructuralFeatures.exists(
+			feature | feature.isSameAs(candidate)
+		)
+	)
+;
+
+boolean isSameAs(EStructuralFeature this, EStructuralFeature that) :
+	this.metaType == that.metaType 
+	&& this.name == that.name 
+	&& this.eType == that.eType 
+	&& this.upperBound == that.upperBound
+;
