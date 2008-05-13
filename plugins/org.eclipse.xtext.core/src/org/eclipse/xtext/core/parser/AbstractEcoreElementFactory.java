@@ -9,30 +9,35 @@
 
 package org.eclipse.xtext.core.parser;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collection;
 
 import org.antlr.runtime.Token;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
 public abstract class AbstractEcoreElementFactory implements IElementFactory {
-	public Object create(String typeName) {
-		EPackage[] packages = getEPackages();
+	public Object create(String fullTypeName) {
+		String[] split = fullTypeName.split("::");
+		String typeName = fullTypeName;
+		String alias = null;
+		if (split.length>1) {
+			alias = split[0];
+			typeName = split[1];
+		}
+		EPackage[] packages = getEPackages(alias);
+		if (packages == null || packages.length==0) {
+			throw new IllegalStateException("Couldn't find any epackages for alias '"+alias+"'");
+		}
 		for (EPackage package1 : packages) {
+			if (package1==null)
+				throw new IllegalStateException("Problems loading EPackages for alias '"+alias+"' - one entry was null.");
 			EClassifier classifier = package1.getEClassifier(typeName);
 			if (classifier instanceof EClass) {
 				EClass clazz = (EClass) classifier;
@@ -58,6 +63,6 @@ public abstract class AbstractEcoreElementFactory implements IElementFactory {
 		((Collection)eo.eGet(structuralFeature)).add(value);
 	}
 	
-	protected abstract EPackage[] getEPackages();
+	protected abstract EPackage[] getEPackages(String alias);
 	
 }

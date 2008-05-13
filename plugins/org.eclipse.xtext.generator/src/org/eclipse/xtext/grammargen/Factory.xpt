@@ -20,13 +20,23 @@ package «packageName()».parser;
 import org.eclipse.emf.ecore.EPackage;
 
 public class «factoryName()» extends org.eclipse.xtext.core.parser.AbstractEcoreElementFactory {
-	private EPackage[] ePackages = new EPackage[] {
-	«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS e SEPARATOR ','»
-		«packageName()».«languageName()»EPackageAccess.get«e.name»EPackage()
+	private final java.util.Map<String, EPackage[]> map = new java.util.HashMap<String, EPackage[]>();
+	{
+	«FOREACH metamodelDeclarations.alias.toSet() AS name »
+		map.put(«name==null?'null':'"'+name+'"'», new EPackage[] {
+		«FOREACH metamodelDeclarations.select(mmd| mmd.alias==name) AS mmd SEPARATOR ','»
+			«IF GeneratedMetamodel.isInstance(mmd)»
+			«packageName()».«languageName()»EPackageAccess.get«((GeneratedMetamodel)mmd).name»EPackage()
+			«ELSE»
+			«packageName()».«languageName()»EPackageAccess.get(«((ReferencedMetamodel)mmd).uri»)
+			«ENDIF»
+		«ENDFOREACH»
+		});
 	«ENDFOREACH»
 	};
-	protected EPackage[] getEPackages() {
-		return ePackages;
+	
+	protected EPackage[] getEPackages(String alias) {
+		return map.get(alias);
 	}
 }
 «ENDFILE»
