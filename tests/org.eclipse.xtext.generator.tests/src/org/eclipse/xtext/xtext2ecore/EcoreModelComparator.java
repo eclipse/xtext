@@ -103,7 +103,7 @@ public class EcoreModelComparator {
 			System.err.println("\t" + change.getRightElement());
 		} else {
 			// TODO: add more sysouts here...
-			System.err.println(diffElement.getClass());
+			System.err.println(diffElement.toString());
 		}
 	}
 }
