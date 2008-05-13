@@ -7,7 +7,7 @@
  *
  *******************************************************************************/
  
- generate XtextTest "http://www.eclipse.org/2008/Test/XtextTest"
+generate XtextTest "http://www.eclipse.org/2008/Test/XtextTest"
 
 Grammar  :
 	metamodelDeclarations+=AbstractMetamodelDeclaration* 
@@ -39,9 +39,8 @@ ParserRule :
 ;
 
 TypeRef :
-	name=ID
+	(alias=ID '::')? name=ID
 ;
-
 Alternatives returns AbstractElement:
     Group ({Alternatives.groups+=current} '|' groups+=Group)*
 ;
