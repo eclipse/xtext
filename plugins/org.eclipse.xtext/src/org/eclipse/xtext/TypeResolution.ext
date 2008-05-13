@@ -195,6 +195,9 @@ private String getAlias(String fqn) :
 	fqn.split("::").first()
 ;
 
+qualifiedName(ResolvedType this) :
+	(if metaModel.alias!=null then metaModel.alias+'::' else '') + name;
+
 
 // ***********************************************************************************
 // Metamodels
@@ -218,7 +221,7 @@ private create MetaModel createMetamodel(GeneratedMetamodel gmm) :
 ;
 
 create MetaModel loadMetaModel(ReferencedMetamodel rmm) :
-	setEPackage(loadEPackage(rmm.uri)) ->
+	setEPackage(loadEPackage(rmm.uri.trimFromStartAndEnd(1))) ->
 	setReferenced(true) ->
 	setAlias(rmm.alias) ->
 	setDeclaration(rmm)

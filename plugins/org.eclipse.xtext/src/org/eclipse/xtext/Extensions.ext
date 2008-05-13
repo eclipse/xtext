@@ -81,7 +81,7 @@ AbstractRule calledRule(RuleCall this) :
 
 String getReturnTypeName(ParserRule p) :
 	if p.type != null then
-		p.type.name 
+		(if p.type.alias!=null then p.type.alias+'::' else '')+p.type.name 
 	else 
 		p.name
 ;

@@ -41,7 +41,7 @@ ParserRule :
 ;
 
 TypeRef :
-	name=ID
+	(alias=ID '::')? name=ID
 ;
 
 Alternatives returns AbstractElement:
