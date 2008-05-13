@@ -12,6 +12,7 @@
 «IMPORT xtext»
 
 «EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
+«EXTENSION org::eclipse::xtext::TypeResolution»
 
 «DEFINE grammar FOR Grammar»
 «FILE pathName()+'/parser/internal/Internal'+languageName()+'.g'»
@@ -66,11 +67,11 @@ parse returns [Object current] :
 «DEFINE ebnf2 FOR Group»«EXPAND ebnf FOREACH abstractTokens»«ENDDEFINE»
 
 «DEFINE ebnf2 FOR Assignment»
-	«localVar()»=«EXPAND ebnf FOR terminal» {if ($current==null) {$current = factory.create("«containingParserRule().typeName()»");}factory.«setOrAdd()»($current, "«feature»",«localVar()»);}
+	«localVar()»=«EXPAND ebnf FOR terminal» {if ($current==null) {$current = factory.create("«containingParserRule().getReturnTypeName()»");}factory.«setOrAdd()»($current, "«feature»",«localVar()»);}
 «ENDDEFINE»
 
 «DEFINE ebnf2 FOR Action»
-	{temp=factory.create("«typeName()»");
+	{temp=factory.create("«currentType().qualifiedName()»");
 	 factory.«setOrAdd()»(temp, "«feature»",$current);
 	 $current = temp; temp = null;}
 «ENDDEFINE»

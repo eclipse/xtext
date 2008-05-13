@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-public class «languageName()»EPackageAccess {
+public class «languageName()»EPackageAccess extends org.eclipse.xtext.core.parser.BaseEPackageAccess {
 
 	static {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
@@ -41,7 +41,7 @@ public class «languageName()»EPackageAccess {
 	
 	public static EPackage get«gmm.name»EPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(«gmm.name.toUpperCase()»_NS_URI)) {
-			EPackage p = loadEcoreFile("«pathName()»/«gmm.name».ecore");
+			EPackage p = loadEcoreFile(«languageName()»EPackageAccess.class.getClassLoader(),"«pathName()»/«gmm.name».ecore");
 			if (p!=null) {
 				EPackage.Registry.INSTANCE.put(«gmm.name.toUpperCase()»_NS_URI,p);
 			}
@@ -50,20 +50,6 @@ public class «languageName()»EPackageAccess {
 	}
 	
 	«ENDFOREACH»
-	private static EPackage loadEcoreFile(String string) {
-		InputStream in = «languageName()»EPackageAccess.class.getClassLoader().getResourceAsStream(string);
-		Resource resource = new ResourceSetImpl().createResource(URI.createURI("classpath:/"+string));
-		try {
-			resource.load(in, null);
-		} catch (IOException e) {
-			throw new WrappedException(e);
-		}
-		EList<EObject> contents = resource.getContents();
-		if (contents.size()!=1) {
-			throw new IllegalStateException("loading classpath:"+string+" : Expected one root element but found "+contents.size());
-		}
-		return (EPackage) contents.get(0);
-	}
 
 }
 «ENDFILE»

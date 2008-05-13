@@ -20,10 +20,10 @@ import org.openarchitectureware.xtend.XtendFacade;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
 public abstract class AbstractGeneratorTest extends TestCase {
-	
+
 	public Object parse(String model, IElementFactory factory) throws Exception {
 		String name = getClass().getPackage().getName() + ".parser." + getClass().getSimpleName();
 		String parser = name + "Parser";
@@ -33,15 +33,15 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		return parserClass.getMethod("parse", InputStream.class, IElementFactory.class).invoke(parserInstance,
 				new StringInputStream(model), factory);
 	}
-	
+
 	public Object parse(InputStream model, IElementFactory factory) throws Exception {
 		String name = getClass().getPackage().getName() + ".parser." + getClass().getSimpleName();
 		String parser = name + "Parser";
-		
+
 		Class<?> parserClass = getClass().getClassLoader().loadClass(parser);
 		Object parserInstance = parserClass.newInstance();
-		return parserClass.getMethod("parse", InputStream.class, IElementFactory.class).invoke(parserInstance,
-				model, factory);
+		return parserClass.getMethod("parse", InputStream.class, IElementFactory.class).invoke(parserInstance, model,
+				factory);
 	}
 
 	public List<Invocation> parse(String model) throws Exception {
@@ -65,12 +65,21 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	}
 
 	protected void assertWithXtend(String left, String right, Object _this) {
-		assertWithXtend(left+" != "+right, left, right, _this);
+		assertWithXtend(left + " != " + right, left, right, _this);
 	}
+
 	protected void assertWithXtend(String message, String left, String right, Object _this) {
 		XtendFacade f = getXtendFacade();
-		f = f.cloneWithExtensions("__compare(Object this) : __left(this) == __right(this);__left(Object this) : "+left+"; __right(Object this) :"+right+";");
-		assertTrue(message,(Boolean) f.call("__compare",_this));
+		f = f.cloneWithExtensions("__compare(Object this) : __left(this) == __right(this);__left(Object this) : "
+				+ left + "; __right(Object this) :" + right + ";");
+		Boolean result = (Boolean) f.call("__compare", _this);
+		if (!result) {
+			Object leftResult = f.call("__left", _this);
+			Object rightResult = f.call("__right", _this);
+			fail(message + " was : " + leftResult + "("
+					+ (leftResult != null ? leftResult.getClass().getSimpleName() : "") + ") != " + rightResult + "("
+					+ (leftResult != null ? leftResult.getClass().getSimpleName() : "") + ")");
+		}
 	}
 
 	protected XtendFacade getXtendFacade() {

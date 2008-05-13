@@ -12,7 +12,7 @@ extension org::eclipse::xtext::Properties reexport;
 extension org::eclipse::xtext::Extensions reexport;
 extension org::openarchitectureware::util::stdlib::io;
 
-factoryName() : languageName()+'Factory';
+factoryName() : languageName()+'ASTFactory';
 
 ruleName(ParserRule this) : 'rule'+name;
 ruleName(LexerRule this) : 'RULE_'+name.toUpperCase();
