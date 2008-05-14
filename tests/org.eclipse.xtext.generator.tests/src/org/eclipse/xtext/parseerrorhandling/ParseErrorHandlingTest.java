@@ -1,8 +1,9 @@
-package org.eclipse.xtext;
+package org.eclipse.xtext.parseerrorhandling;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.xtext.XtextGrammarTest;
 import org.eclipse.xtext.core.parser.IParseErrorHandler;
 import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
 
