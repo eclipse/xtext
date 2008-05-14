@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeFactory.java,v 1.1 2008/05/14 13:29:32 jkohnlein Exp $
+ * $Id: ParsetreeFactory.java,v 1.2 2008/05/14 15:56:00 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -26,13 +26,22 @@ public interface ParsetreeFactory extends EFactory {
 	ParsetreeFactory eINSTANCE = org.eclipse.xtext.parsetree.impl.ParsetreeFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Parser Node</em>'.
+	 * Returns a new object of class '<em>Composite Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parser Node</em>'.
+	 * @return a new object of class '<em>Composite Node</em>'.
 	 * @generated
 	 */
-	ParserNode createParserNode();
+	CompositeNode createCompositeNode();
+
+	/**
+	 * Returns a new object of class '<em>Leaf Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Leaf Node</em>'.
+	 * @generated
+	 */
+	LeafNode createLeafNode();
 
 	/**
 	 * Returns the package supported by this factory.

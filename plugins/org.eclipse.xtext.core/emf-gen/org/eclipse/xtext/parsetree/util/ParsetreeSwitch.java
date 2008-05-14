@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeSwitch.java,v 1.1 2008/05/14 13:29:32 jkohnlein Exp $
+ * $Id: ParsetreeSwitch.java,v 1.2 2008/05/14 15:56:00 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.util;
 
@@ -87,9 +87,23 @@ public class ParsetreeSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case ParsetreePackage.PARSER_NODE: {
-				ParserNode parserNode = (ParserNode)theEObject;
-				T result = caseParserNode(parserNode);
+			case ParsetreePackage.COMPOSITE_NODE: {
+				CompositeNode compositeNode = (CompositeNode)theEObject;
+				T result = caseCompositeNode(compositeNode);
+				if (result == null) result = caseAbstractParserNode(compositeNode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ParsetreePackage.ABSTRACT_PARSER_NODE: {
+				AbstractParserNode abstractParserNode = (AbstractParserNode)theEObject;
+				T result = caseAbstractParserNode(abstractParserNode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ParsetreePackage.LEAF_NODE: {
+				LeafNode leafNode = (LeafNode)theEObject;
+				T result = caseLeafNode(leafNode);
+				if (result == null) result = caseAbstractParserNode(leafNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -98,17 +112,47 @@ public class ParsetreeSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parser Node</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Composite Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parser Node</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Composite Node</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseParserNode(ParserNode object) {
+	public T caseCompositeNode(CompositeNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Parser Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Parser Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractParserNode(AbstractParserNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Leaf Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Leaf Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLeafNode(LeafNode object) {
 		return null;
 	}
 

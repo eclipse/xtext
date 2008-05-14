@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeAdapterFactory.java,v 1.1 2008/05/14 13:29:32 jkohnlein Exp $
+ * $Id: ParsetreeAdapterFactory.java,v 1.2 2008/05/14 15:56:00 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.util;
 
@@ -72,8 +72,16 @@ public class ParsetreeAdapterFactory extends AdapterFactoryImpl {
 	protected ParsetreeSwitch<Adapter> modelSwitch =
 		new ParsetreeSwitch<Adapter>() {
 			@Override
-			public Adapter caseParserNode(ParserNode object) {
-				return createParserNodeAdapter();
+			public Adapter caseCompositeNode(CompositeNode object) {
+				return createCompositeNodeAdapter();
+			}
+			@Override
+			public Adapter caseAbstractParserNode(AbstractParserNode object) {
+				return createAbstractParserNodeAdapter();
+			}
+			@Override
+			public Adapter caseLeafNode(LeafNode object) {
+				return createLeafNodeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -96,16 +104,44 @@ public class ParsetreeAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.ParserNode <em>Parser Node</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.CompositeNode <em>Composite Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.parsetree.ParserNode
+	 * @see org.eclipse.xtext.parsetree.CompositeNode
 	 * @generated
 	 */
-	public Adapter createParserNodeAdapter() {
+	public Adapter createCompositeNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.AbstractParserNode <em>Abstract Parser Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.parsetree.AbstractParserNode
+	 * @generated
+	 */
+	public Adapter createAbstractParserNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.LeafNode <em>Leaf Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.parsetree.LeafNode
+	 * @generated
+	 */
+	public Adapter createLeafNodeAdapter() {
 		return null;
 	}
 
