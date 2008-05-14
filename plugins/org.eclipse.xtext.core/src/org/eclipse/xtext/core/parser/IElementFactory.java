@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.core.parser;
 
+import org.antlr.runtime.TokenStream;
+
 
 /**
  * @author svenefftinge
@@ -40,4 +42,22 @@ public interface IElementFactory {
 	 * @param value
 	 */
 	public void add(Object _this, String feature, Object value);
+	
+	/**
+	 * Creates a new ParserNode as a child of the given parentParserNode.
+	 * 
+	 * @param input
+	 * @param currentGrammarElement
+	 * @param parentParserNode
+	 * @return 
+	 */
+	public Object createParserNode(TokenStream input, Object currentGrammarElement, 
+			Object parentParserNode);
+	
+	/**
+	 * Associates the parserNode with the astElement
+	 * @param parserNode
+	 * @param astNode
+	 */
+	public void associate(Object parserNode, Object astNode);
 }

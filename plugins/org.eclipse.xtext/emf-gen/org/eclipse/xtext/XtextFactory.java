@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextFactory.java,v 1.1 2008/05/13 13:07:22 sefftinge Exp $
+ * $Id: XtextFactory.java,v 1.2 2008/05/14 13:29:34 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -16,139 +16,140 @@ import org.eclipse.emf.ecore.EFactory;
  * @see org.eclipse.xtext.XtextPackage
  * @generated
  */
-public interface XtextFactory extends EFactory {
-	/**
+public interface XtextFactory extends EFactory
+{
+  /**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	XtextFactory eINSTANCE = org.eclipse.xtext.impl.XtextFactoryImpl.init();
+  XtextFactory eINSTANCE = org.eclipse.xtext.impl.XtextFactoryImpl.init();
 
-	/**
+  /**
 	 * Returns a new object of class '<em>Abstract Element</em>'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Abstract Element</em>'.
 	 * @generated
 	 */
-	AbstractElement createAbstractElement();
+  AbstractElement createAbstractElement();
 
-	/**
+  /**
 	 * Returns a new object of class '<em>Type Ref</em>'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Type Ref</em>'.
 	 * @generated
 	 */
-	TypeRef createTypeRef();
+  TypeRef createTypeRef();
 
-	/**
+  /**
 	 * Returns a new object of class '<em>Parser Rule</em>'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Parser Rule</em>'.
 	 * @generated
 	 */
-	ParserRule createParserRule();
+  ParserRule createParserRule();
 
-	/**
+  /**
 	 * Returns a new object of class '<em>Lexer Rule</em>'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Lexer Rule</em>'.
 	 * @generated
 	 */
-	LexerRule createLexerRule();
+  LexerRule createLexerRule();
 
-	/**
+  /**
 	 * Returns a new object of class '<em>Grammar</em>'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Grammar</em>'.
 	 * @generated
 	 */
-	Grammar createGrammar();
+  Grammar createGrammar();
 
-	/**
+  /**
 	 * Returns a new object of class '<em>Generated Metamodel</em>'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Generated Metamodel</em>'.
 	 * @generated
 	 */
-	GeneratedMetamodel createGeneratedMetamodel();
+  GeneratedMetamodel createGeneratedMetamodel();
 
-	/**
+  /**
 	 * Returns a new object of class '<em>Referenced Metamodel</em>'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Referenced Metamodel</em>'.
 	 * @generated
 	 */
-	ReferencedMetamodel createReferencedMetamodel();
+  ReferencedMetamodel createReferencedMetamodel();
 
-	/**
+  /**
 	 * Returns a new object of class '<em>Assignment</em>'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Assignment</em>'.
 	 * @generated
 	 */
-	Assignment createAssignment();
+  Assignment createAssignment();
 
-	/**
+  /**
 	 * Returns a new object of class '<em>Action</em>'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Action</em>'.
 	 * @generated
 	 */
-	Action createAction();
+  Action createAction();
 
-	/**
+  /**
 	 * Returns a new object of class '<em>Keyword</em>'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Keyword</em>'.
 	 * @generated
 	 */
-	Keyword createKeyword();
+  Keyword createKeyword();
 
-	/**
+  /**
 	 * Returns a new object of class '<em>Rule Call</em>'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Rule Call</em>'.
 	 * @generated
 	 */
-	RuleCall createRuleCall();
+  RuleCall createRuleCall();
 
-	/**
+  /**
 	 * Returns a new object of class '<em>Group</em>'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Group</em>'.
 	 * @generated
 	 */
-	Group createGroup();
+  Group createGroup();
 
-	/**
+  /**
 	 * Returns a new object of class '<em>Alternatives</em>'.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Alternatives</em>'.
 	 * @generated
 	 */
-	Alternatives createAlternatives();
+  Alternatives createAlternatives();
 
-	/**
+  /**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	XtextPackage getXtextPackage();
+  XtextPackage getXtextPackage();
 
 } //XtextFactory

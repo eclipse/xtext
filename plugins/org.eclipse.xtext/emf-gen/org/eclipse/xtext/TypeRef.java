@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeRef.java,v 1.1 2008/05/13 13:07:22 sefftinge Exp $
+ * $Id: TypeRef.java,v 1.2 2008/05/14 13:29:34 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.TypeRef#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.TypeRef#getAlias <em>Alias</em>}</li>
+ *   <li>{@link org.eclipse.xtext.TypeRef#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,34 +25,9 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface TypeRef extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.eclipse.xtext.XtextPackage#getTypeRef_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.TypeRef#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
-	/**
+public interface TypeRef extends EObject
+{
+  /**
 	 * Returns the value of the '<em><b>Alias</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -77,5 +52,31 @@ public interface TypeRef extends EObject {
 	 * @generated
 	 */
 	void setAlias(String value);
+
+		/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Name</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.eclipse.xtext.XtextPackage#getTypeRef_Name()
+	 * @model
+	 * @generated
+	 */
+  String getName();
+
+  /**
+	 * Sets the value of the '{@link org.eclipse.xtext.TypeRef#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+  void setName(String value);
 
 } // TypeRef

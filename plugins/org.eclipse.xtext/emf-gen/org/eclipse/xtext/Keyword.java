@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Keyword.java,v 1.1 2008/05/13 13:07:22 sefftinge Exp $
+ * $Id: Keyword.java,v 1.2 2008/05/14 13:29:34 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -23,31 +23,32 @@ package org.eclipse.xtext;
  * @model
  * @generated
  */
-public interface Keyword extends AbstractElement {
-	/**
+public interface Keyword extends AbstractElement
+{
+  /**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Value</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
 	 * @see org.eclipse.xtext.XtextPackage#getKeyword_Value()
 	 * @model
 	 * @generated
 	 */
-	String getValue();
+  String getValue();
 
-	/**
+  /**
 	 * Sets the value of the '{@link org.eclipse.xtext.Keyword#getValue <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Value</em>' attribute.
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(String value);
+  void setValue(String value);
 
 } // Keyword

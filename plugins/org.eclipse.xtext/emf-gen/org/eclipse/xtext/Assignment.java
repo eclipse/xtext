@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Assignment.java,v 1.1 2008/05/13 13:07:22 sefftinge Exp $
+ * $Id: Assignment.java,v 1.2 2008/05/14 13:29:34 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -15,8 +15,8 @@ package org.eclipse.xtext;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.Assignment#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipse.xtext.Assignment#getFeature <em>Feature</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Assignment#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipse.xtext.Assignment#getTerminal <em>Terminal</em>}</li>
  * </ul>
  * </p>
@@ -25,83 +25,84 @@ package org.eclipse.xtext;
  * @model
  * @generated
  */
-public interface Assignment extends AbstractElement {
-	/**
+public interface Assignment extends AbstractElement
+{
+  /**
 	 * Returns the value of the '<em><b>Feature</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Feature</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Feature</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
 	 * @return the value of the '<em>Feature</em>' attribute.
 	 * @see #setFeature(String)
 	 * @see org.eclipse.xtext.XtextPackage#getAssignment_Feature()
 	 * @model
 	 * @generated
 	 */
-	String getFeature();
+  String getFeature();
 
-	/**
+  /**
 	 * Sets the value of the '{@link org.eclipse.xtext.Assignment#getFeature <em>Feature</em>}' attribute.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Feature</em>' attribute.
 	 * @see #getFeature()
 	 * @generated
 	 */
-	void setFeature(String value);
+  void setFeature(String value);
 
-	/**
+  /**
 	 * Returns the value of the '<em><b>Operator</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Operator</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Operator</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
 	 * @return the value of the '<em>Operator</em>' attribute.
 	 * @see #setOperator(String)
 	 * @see org.eclipse.xtext.XtextPackage#getAssignment_Operator()
 	 * @model
 	 * @generated
 	 */
-	String getOperator();
+  String getOperator();
 
-	/**
+  /**
 	 * Sets the value of the '{@link org.eclipse.xtext.Assignment#getOperator <em>Operator</em>}' attribute.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Operator</em>' attribute.
 	 * @see #getOperator()
 	 * @generated
 	 */
-	void setOperator(String value);
+  void setOperator(String value);
 
-	/**
+  /**
 	 * Returns the value of the '<em><b>Terminal</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Terminal</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Terminal</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
 	 * @return the value of the '<em>Terminal</em>' containment reference.
 	 * @see #setTerminal(AbstractElement)
 	 * @see org.eclipse.xtext.XtextPackage#getAssignment_Terminal()
 	 * @model containment="true"
 	 * @generated
 	 */
-	AbstractElement getTerminal();
+  AbstractElement getTerminal();
 
-	/**
+  /**
 	 * Sets the value of the '{@link org.eclipse.xtext.Assignment#getTerminal <em>Terminal</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Terminal</em>' containment reference.
 	 * @see #getTerminal()
 	 * @generated
 	 */
-	void setTerminal(AbstractElement value);
+  void setTerminal(AbstractElement value);
 
 } // Assignment

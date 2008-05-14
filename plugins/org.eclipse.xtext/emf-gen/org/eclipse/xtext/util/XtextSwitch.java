@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextSwitch.java,v 1.1 2008/05/13 13:07:23 sefftinge Exp $
+ * $Id: XtextSwitch.java,v 1.2 2008/05/14 13:29:35 jkohnlein Exp $
  */
 package org.eclipse.xtext.util;
 
@@ -26,46 +26,50 @@ import org.eclipse.xtext.*;
  * @see org.eclipse.xtext.XtextPackage
  * @generated
  */
-public class XtextSwitch<T> {
-	/**
+public class XtextSwitch<T>
+{
+  /**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static XtextPackage modelPackage;
+  protected static XtextPackage modelPackage;
 
-	/**
+  /**
 	 * Creates an instance of the switch.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public XtextSwitch() {
+  public XtextSwitch()
+  {
 		if (modelPackage == null) {
 			modelPackage = XtextPackage.eINSTANCE;
 		}
 	}
 
-	/**
+  /**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	public T doSwitch(EObject theEObject) {
+  public T doSwitch(EObject theEObject)
+  {
 		return doSwitch(theEObject.eClass(), theEObject);
 	}
 
-	/**
+  /**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected T doSwitch(EClass theEClass, EObject theEObject) {
+  protected T doSwitch(EClass theEClass, EObject theEObject)
+  {
 		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
@@ -78,24 +82,32 @@ public class XtextSwitch<T> {
 		}
 	}
 
-	/**
+  /**
 	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected T doSwitch(int classifierID, EObject theEObject) {
+  protected T doSwitch(int classifierID, EObject theEObject)
+  {
 		switch (classifierID) {
+			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION: {
+				AbstractMetamodelDeclaration abstractMetamodelDeclaration = (AbstractMetamodelDeclaration)theEObject;
+				T result = caseAbstractMetamodelDeclaration(abstractMetamodelDeclaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case XtextPackage.ABSTRACT_RULE: {
 				AbstractRule abstractRule = (AbstractRule)theEObject;
 				T result = caseAbstractRule(abstractRule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtextPackage.ABSTRACT_ELEMENT: {
-				AbstractElement abstractElement = (AbstractElement)theEObject;
-				T result = caseAbstractElement(abstractElement);
+			case XtextPackage.LEXER_RULE: {
+				LexerRule lexerRule = (LexerRule)theEObject;
+				T result = caseLexerRule(lexerRule);
+				if (result == null) result = caseAbstractRule(lexerRule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -105,23 +117,16 @@ public class XtextSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XtextPackage.ABSTRACT_ELEMENT: {
+				AbstractElement abstractElement = (AbstractElement)theEObject;
+				T result = caseAbstractElement(abstractElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case XtextPackage.PARSER_RULE: {
 				ParserRule parserRule = (ParserRule)theEObject;
 				T result = caseParserRule(parserRule);
 				if (result == null) result = caseAbstractRule(parserRule);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION: {
-				AbstractMetamodelDeclaration abstractMetamodelDeclaration = (AbstractMetamodelDeclaration)theEObject;
-				T result = caseAbstractMetamodelDeclaration(abstractMetamodelDeclaration);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XtextPackage.LEXER_RULE: {
-				LexerRule lexerRule = (LexerRule)theEObject;
-				T result = caseLexerRule(lexerRule);
-				if (result == null) result = caseAbstractRule(lexerRule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -173,13 +178,6 @@ public class XtextSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtextPackage.ALTERNATIVES: {
-				Alternatives alternatives = (Alternatives)theEObject;
-				T result = caseAlternatives(alternatives);
-				if (result == null) result = caseAbstractElement(alternatives);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case XtextPackage.GROUP: {
 				Group group = (Group)theEObject;
 				T result = caseGroup(group);
@@ -187,247 +185,270 @@ public class XtextSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XtextPackage.ALTERNATIVES: {
+				Alternatives alternatives = (Alternatives)theEObject;
+				T result = caseAlternatives(alternatives);
+				if (result == null) result = caseAbstractElement(alternatives);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Abstract Rule</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Abstract Rule</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAbstractRule(AbstractRule object) {
+  public T caseAbstractRule(AbstractRule object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Abstract Element</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Abstract Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAbstractElement(AbstractElement object) {
+  public T caseAbstractElement(AbstractElement object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Type Ref</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Type Ref</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeRef(TypeRef object) {
+  public T caseTypeRef(TypeRef object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Parser Rule</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Parser Rule</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseParserRule(ParserRule object) {
+  public T caseParserRule(ParserRule object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Abstract Metamodel Declaration</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Abstract Metamodel Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAbstractMetamodelDeclaration(AbstractMetamodelDeclaration object) {
+  public T caseAbstractMetamodelDeclaration(AbstractMetamodelDeclaration object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Lexer Rule</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Lexer Rule</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLexerRule(LexerRule object) {
+  public T caseLexerRule(LexerRule object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Grammar</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Grammar</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseGrammar(Grammar object) {
+  public T caseGrammar(Grammar object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Generated Metamodel</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Generated Metamodel</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseGeneratedMetamodel(GeneratedMetamodel object) {
+  public T caseGeneratedMetamodel(GeneratedMetamodel object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Referenced Metamodel</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Referenced Metamodel</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseReferencedMetamodel(ReferencedMetamodel object) {
+  public T caseReferencedMetamodel(ReferencedMetamodel object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Assignment</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Assignment</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAssignment(Assignment object) {
+  public T caseAssignment(Assignment object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Action</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Action</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAction(Action object) {
+  public T caseAction(Action object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Keyword</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Keyword</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseKeyword(Keyword object) {
+  public T caseKeyword(Keyword object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Rule Call</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Rule Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRuleCall(RuleCall object) {
+  public T caseRuleCall(RuleCall object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Group</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Group</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseGroup(Group object) {
+  public T caseGroup(Group object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>Alternatives</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>Alternatives</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAlternatives(Alternatives object) {
+  public T caseAlternatives(Alternatives object)
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch, but this is the last case anyway.
-	 * <!-- end-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch, but this is the last case anyway.
+   * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
-	public T defaultCase(EObject object) {
+  public T defaultCase(EObject object)
+  {
 		return null;
 	}
 

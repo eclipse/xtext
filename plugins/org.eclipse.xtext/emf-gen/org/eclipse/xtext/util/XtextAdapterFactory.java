@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextAdapterFactory.java,v 1.1 2008/05/13 13:07:23 sefftinge Exp $
+ * $Id: XtextAdapterFactory.java,v 1.2 2008/05/14 13:29:35 jkohnlein Exp $
  */
 package org.eclipse.xtext.util;
 
@@ -23,37 +23,40 @@ import org.eclipse.xtext.*;
  * @see org.eclipse.xtext.XtextPackage
  * @generated
  */
-public class XtextAdapterFactory extends AdapterFactoryImpl {
-	/**
+public class XtextAdapterFactory extends AdapterFactoryImpl
+{
+  /**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static XtextPackage modelPackage;
+  protected static XtextPackage modelPackage;
 
-	/**
+  /**
 	 * Creates an instance of the adapter factory.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public XtextAdapterFactory() {
+  public XtextAdapterFactory()
+  {
 		if (modelPackage == null) {
 			modelPackage = XtextPackage.eINSTANCE;
 		}
 	}
 
-	/**
+  /**
 	 * Returns whether this factory is applicable for the type of the object.
 	 * <!-- begin-user-doc -->
-	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
-	 * <!-- end-user-doc -->
+   * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+   * <!-- end-user-doc -->
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
-	@Override
-	public boolean isFactoryForType(Object object) {
+  @Override
+  public boolean isFactoryForType(Object object)
+  {
 		if (object == modelPackage) {
 			return true;
 		}
@@ -63,37 +66,37 @@ public class XtextAdapterFactory extends AdapterFactoryImpl {
 		return false;
 	}
 
-	/**
+  /**
 	 * The switch the delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected XtextSwitch<Adapter> modelSwitch =
-		new XtextSwitch<Adapter>() {
+  protected XtextSwitch<Adapter> modelSwitch =
+    new XtextSwitch<Adapter>() {
+			@Override
+			public Adapter caseAbstractMetamodelDeclaration(AbstractMetamodelDeclaration object) {
+				return createAbstractMetamodelDeclarationAdapter();
+			}
 			@Override
 			public Adapter caseAbstractRule(AbstractRule object) {
 				return createAbstractRuleAdapter();
 			}
 			@Override
-			public Adapter caseAbstractElement(AbstractElement object) {
-				return createAbstractElementAdapter();
+			public Adapter caseLexerRule(LexerRule object) {
+				return createLexerRuleAdapter();
 			}
 			@Override
 			public Adapter caseTypeRef(TypeRef object) {
 				return createTypeRefAdapter();
 			}
 			@Override
+			public Adapter caseAbstractElement(AbstractElement object) {
+				return createAbstractElementAdapter();
+			}
+			@Override
 			public Adapter caseParserRule(ParserRule object) {
 				return createParserRuleAdapter();
-			}
-			@Override
-			public Adapter caseAbstractMetamodelDeclaration(AbstractMetamodelDeclaration object) {
-				return createAbstractMetamodelDeclarationAdapter();
-			}
-			@Override
-			public Adapter caseLexerRule(LexerRule object) {
-				return createLexerRuleAdapter();
 			}
 			@Override
 			public Adapter caseGrammar(Grammar object) {
@@ -124,12 +127,12 @@ public class XtextAdapterFactory extends AdapterFactoryImpl {
 				return createRuleCallAdapter();
 			}
 			@Override
-			public Adapter caseAlternatives(Alternatives object) {
-				return createAlternativesAdapter();
-			}
-			@Override
 			public Adapter caseGroup(Group object) {
 				return createGroupAdapter();
+			}
+			@Override
+			public Adapter caseAlternatives(Alternatives object) {
+				return createAlternativesAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -137,239 +140,256 @@ public class XtextAdapterFactory extends AdapterFactoryImpl {
 			}
 		};
 
-	/**
+  /**
 	 * Creates an adapter for the <code>target</code>.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @param target the object to adapt.
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
-	@Override
-	public Adapter createAdapter(Notifier target) {
+  @Override
+  public Adapter createAdapter(Notifier target)
+  {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.AbstractRule <em>Abstract Rule</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.AbstractRule
 	 * @generated
 	 */
-	public Adapter createAbstractRuleAdapter() {
+  public Adapter createAbstractRuleAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.AbstractElement <em>Abstract Element</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.AbstractElement
 	 * @generated
 	 */
-	public Adapter createAbstractElementAdapter() {
+  public Adapter createAbstractElementAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.TypeRef <em>Type Ref</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.TypeRef
 	 * @generated
 	 */
-	public Adapter createTypeRefAdapter() {
+  public Adapter createTypeRefAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ParserRule <em>Parser Rule</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.ParserRule
 	 * @generated
 	 */
-	public Adapter createParserRuleAdapter() {
+  public Adapter createParserRuleAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.AbstractMetamodelDeclaration <em>Abstract Metamodel Declaration</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.AbstractMetamodelDeclaration
 	 * @generated
 	 */
-	public Adapter createAbstractMetamodelDeclarationAdapter() {
+  public Adapter createAbstractMetamodelDeclarationAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.LexerRule <em>Lexer Rule</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.LexerRule
 	 * @generated
 	 */
-	public Adapter createLexerRuleAdapter() {
+  public Adapter createLexerRuleAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.Grammar <em>Grammar</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.Grammar
 	 * @generated
 	 */
-	public Adapter createGrammarAdapter() {
+  public Adapter createGrammarAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.GeneratedMetamodel <em>Generated Metamodel</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.GeneratedMetamodel
 	 * @generated
 	 */
-	public Adapter createGeneratedMetamodelAdapter() {
+  public Adapter createGeneratedMetamodelAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ReferencedMetamodel <em>Referenced Metamodel</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.ReferencedMetamodel
 	 * @generated
 	 */
-	public Adapter createReferencedMetamodelAdapter() {
+  public Adapter createReferencedMetamodelAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.Assignment <em>Assignment</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.Assignment
 	 * @generated
 	 */
-	public Adapter createAssignmentAdapter() {
+  public Adapter createAssignmentAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.Action <em>Action</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.Action
 	 * @generated
 	 */
-	public Adapter createActionAdapter() {
+  public Adapter createActionAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.Keyword <em>Keyword</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.Keyword
 	 * @generated
 	 */
-	public Adapter createKeywordAdapter() {
+  public Adapter createKeywordAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.RuleCall <em>Rule Call</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.RuleCall
 	 * @generated
 	 */
-	public Adapter createRuleCallAdapter() {
+  public Adapter createRuleCallAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.Group <em>Group</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.Group
 	 * @generated
 	 */
-	public Adapter createGroupAdapter() {
+  public Adapter createGroupAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.Alternatives <em>Alternatives</em>}'.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.Alternatives
 	 * @generated
 	 */
-	public Adapter createAlternativesAdapter() {
+  public Adapter createAlternativesAdapter()
+  {
 		return null;
 	}
 
-	/**
+  /**
 	 * Creates a new adapter for the default case.
 	 * <!-- begin-user-doc -->
-	 * This default implementation returns null.
-	 * <!-- end-user-doc -->
+   * This default implementation returns null.
+   * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @generated
 	 */
-	public Adapter createEObjectAdapter() {
+  public Adapter createEObjectAdapter()
+  {
 		return null;
 	}
 

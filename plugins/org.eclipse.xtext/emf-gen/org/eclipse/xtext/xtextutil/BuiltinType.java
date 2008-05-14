@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuiltinType.java,v 1.1 2008/05/13 13:07:23 sefftinge Exp $
+ * $Id: BuiltinType.java,v 1.2 2008/05/14 13:29:35 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextutil;
 
@@ -17,5 +17,6 @@ package org.eclipse.xtext.xtextutil;
  * @model
  * @generated
  */
-public interface BuiltinType extends AbstractType {
+public interface BuiltinType extends AbstractType
+{
 } // BuiltinType

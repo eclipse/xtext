@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextutilFactory.java,v 1.1 2008/05/13 13:07:23 sefftinge Exp $
+ * $Id: XtextutilFactory.java,v 1.2 2008/05/14 13:29:35 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextutil;
 
@@ -16,49 +16,50 @@ import org.eclipse.emf.ecore.EFactory;
  * @see org.eclipse.xtext.xtextutil.XtextutilPackage
  * @generated
  */
-public interface XtextutilFactory extends EFactory {
-	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	XtextutilFactory eINSTANCE = org.eclipse.xtext.xtextutil.impl.XtextutilFactoryImpl.init();
+public interface XtextutilFactory extends EFactory
+{
+  /**
+   * The singleton instance of the factory.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  XtextutilFactory eINSTANCE = org.eclipse.xtext.xtextutil.impl.XtextutilFactoryImpl.init();
 
-	/**
-	 * Returns a new object of class '<em>Resolved Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Resolved Type</em>'.
-	 * @generated
-	 */
-	ResolvedType createResolvedType();
+  /**
+   * Returns a new object of class '<em>Resolved Type</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Resolved Type</em>'.
+   * @generated
+   */
+  ResolvedType createResolvedType();
 
-	/**
-	 * Returns a new object of class '<em>Meta Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Meta Model</em>'.
-	 * @generated
-	 */
-	MetaModel createMetaModel();
+  /**
+   * Returns a new object of class '<em>Meta Model</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Meta Model</em>'.
+   * @generated
+   */
+  MetaModel createMetaModel();
 
-	/**
-	 * Returns a new object of class '<em>Builtin Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Builtin Type</em>'.
-	 * @generated
-	 */
-	BuiltinType createBuiltinType();
+  /**
+   * Returns a new object of class '<em>Builtin Type</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Builtin Type</em>'.
+   * @generated
+   */
+  BuiltinType createBuiltinType();
 
-	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
-	XtextutilPackage getXtextutilPackage();
+  /**
+   * Returns the package supported by this factory.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the package supported by this factory.
+   * @generated
+   */
+  XtextutilPackage getXtextutilPackage();
 
 } //XtextutilFactory

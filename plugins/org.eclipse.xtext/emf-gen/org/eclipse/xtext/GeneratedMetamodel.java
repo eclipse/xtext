@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GeneratedMetamodel.java,v 1.1 2008/05/13 13:07:22 sefftinge Exp $
+ * $Id: GeneratedMetamodel.java,v 1.2 2008/05/14 13:29:34 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -24,57 +24,58 @@ package org.eclipse.xtext;
  * @model
  * @generated
  */
-public interface GeneratedMetamodel extends AbstractMetamodelDeclaration {
-	/**
+public interface GeneratedMetamodel extends AbstractMetamodelDeclaration
+{
+  /**
 	 * Returns the value of the '<em><b>Ns URI</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Ns URI</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Ns URI</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ns URI</em>' attribute.
 	 * @see #setNsURI(String)
 	 * @see org.eclipse.xtext.XtextPackage#getGeneratedMetamodel_NsURI()
 	 * @model
 	 * @generated
 	 */
-	String getNsURI();
+  String getNsURI();
 
-	/**
+  /**
 	 * Sets the value of the '{@link org.eclipse.xtext.GeneratedMetamodel#getNsURI <em>Ns URI</em>}' attribute.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ns URI</em>' attribute.
 	 * @see #getNsURI()
 	 * @generated
 	 */
-	void setNsURI(String value);
+  void setNsURI(String value);
 
-	/**
+  /**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Name</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.eclipse.xtext.XtextPackage#getGeneratedMetamodel_Name()
 	 * @model
 	 * @generated
 	 */
-	String getName();
+  String getName();
 
-	/**
+  /**
 	 * Sets the value of the '{@link org.eclipse.xtext.GeneratedMetamodel#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
 	 */
-	void setName(String value);
+  void setName(String value);
 
 } // GeneratedMetamodel

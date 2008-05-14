@@ -1,11 +1,18 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext2 Runtime Plug-in
-Bundle-SymbolicName: org.eclipse.xtext.core
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.xtext.core; singleton:=true
 Bundle-Version: 1.0.0
-Bundle-Vendor: eclipse.org
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.3.2",
- org.antlr;bundle-version="3.0.0"
 Export-Package: org.eclipse.xtext.core.parser,
- org.eclipse.xtext.core.parser.antlr
+ org.eclipse.xtext.core.parser.antlr,
+ org.eclipse.xtext.parsetree,
+ org.eclipse.xtext.parsetree.impl,
+ org.eclipse.xtext.parsetree.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.antlr.runtime;bundle-version="3.0.0"
+Eclipse-LazyStart: true

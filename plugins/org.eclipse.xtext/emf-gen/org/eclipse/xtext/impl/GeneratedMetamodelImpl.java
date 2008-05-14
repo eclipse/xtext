@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GeneratedMetamodelImpl.java,v 1.1 2008/05/13 13:07:22 sefftinge Exp $
+ * $Id: GeneratedMetamodelImpl.java,v 1.2 2008/05/14 13:29:34 jkohnlein Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -29,115 +29,123 @@ import org.eclipse.xtext.XtextPackage;
  *
  * @generated
  */
-public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl implements GeneratedMetamodel {
-	/**
+public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl implements GeneratedMetamodel
+{
+  /**
 	 * The default value of the '{@link #getNsURI() <em>Ns URI</em>}' attribute.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @see #getNsURI()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NS_URI_EDEFAULT = null;
+  protected static final String NS_URI_EDEFAULT = null;
 
-	/**
+  /**
 	 * The cached value of the '{@link #getNsURI() <em>Ns URI</em>}' attribute.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @see #getNsURI()
 	 * @generated
 	 * @ordered
 	 */
-	protected String nsURI = NS_URI_EDEFAULT;
+  protected String nsURI = NS_URI_EDEFAULT;
 
-	/**
+  /**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
-	/**
+  /**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
-	/**
+  /**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected GeneratedMetamodelImpl() {
+  protected GeneratedMetamodelImpl()
+  {
 		super();
 	}
 
-	/**
+  /**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	protected EClass eStaticClass() {
+  @Override
+  protected EClass eStaticClass()
+  {
 		return XtextPackage.Literals.GENERATED_METAMODEL;
 	}
 
-	/**
+  /**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getNsURI() {
+  public String getNsURI()
+  {
 		return nsURI;
 	}
 
-	/**
+  /**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setNsURI(String newNsURI) {
+  public void setNsURI(String newNsURI)
+  {
 		String oldNsURI = nsURI;
 		nsURI = newNsURI;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.GENERATED_METAMODEL__NS_URI, oldNsURI, nsURI));
 	}
 
-	/**
+  /**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
+  public String getName()
+  {
 		return name;
 	}
 
-	/**
+  /**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
+  public void setName(String newName)
+  {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.GENERATED_METAMODEL__NAME, oldName, name));
 	}
 
-	/**
+  /**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+  @Override
+  public Object eGet(int featureID, boolean resolve, boolean coreType)
+  {
 		switch (featureID) {
 			case XtextPackage.GENERATED_METAMODEL__NS_URI:
 				return getNsURI();
@@ -147,13 +155,14 @@ public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl imp
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-	/**
+  /**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void eSet(int featureID, Object newValue) {
+  @Override
+  public void eSet(int featureID, Object newValue)
+  {
 		switch (featureID) {
 			case XtextPackage.GENERATED_METAMODEL__NS_URI:
 				setNsURI((String)newValue);
@@ -165,13 +174,14 @@ public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl imp
 		super.eSet(featureID, newValue);
 	}
 
-	/**
+  /**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public void eUnset(int featureID) {
+  @Override
+  public void eUnset(int featureID)
+  {
 		switch (featureID) {
 			case XtextPackage.GENERATED_METAMODEL__NS_URI:
 				setNsURI(NS_URI_EDEFAULT);
@@ -183,13 +193,14 @@ public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl imp
 		super.eUnset(featureID);
 	}
 
-	/**
+  /**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public boolean eIsSet(int featureID) {
+  @Override
+  public boolean eIsSet(int featureID)
+  {
 		switch (featureID) {
 			case XtextPackage.GENERATED_METAMODEL__NS_URI:
 				return NS_URI_EDEFAULT == null ? nsURI != null : !NS_URI_EDEFAULT.equals(nsURI);
@@ -199,13 +210,14 @@ public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl imp
 		return super.eIsSet(featureID);
 	}
 
-	/**
+  /**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public String toString() {
+  @Override
+  public String toString()
+  {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());

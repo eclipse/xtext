@@ -5,16 +5,16 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.1 2008/05/09 15:57:38 sefftinge Exp $
+ $Id: plugin.xml,v 1.2 2008/05/14 13:29:35 jkohnlein Exp $
 -->
 
 <plugin>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.ecipse.org/tmf/xtext2" 
-       class = "org.eclispe.tmf.xtext2.Xtext2Package"
-       genModel = "model/xtext2.genmodel" /> 
+       uri = "http://www.eclipse.org/2008/Xtext" 
+       class = "org.eclipse.xtext.XtextPackage"
+       genModel = "model/xtext.genmodel" /> 
   </extension>
 
 </plugin>

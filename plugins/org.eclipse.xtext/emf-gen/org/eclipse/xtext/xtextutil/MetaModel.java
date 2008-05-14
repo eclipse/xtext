@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetaModel.java,v 1.1 2008/05/13 13:07:23 sefftinge Exp $
+ * $Id: MetaModel.java,v 1.2 2008/05/14 13:29:35 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextutil;
 
@@ -30,109 +30,110 @@ import org.eclipse.xtext.AbstractMetamodelDeclaration;
  * @model
  * @generated
  */
-public interface MetaModel extends EObject {
-	/**
-	 * Returns the value of the '<em><b>EPackage</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>EPackage</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>EPackage</em>' reference.
-	 * @see #setEPackage(EPackage)
-	 * @see org.eclipse.xtext.xtextutil.XtextutilPackage#getMetaModel_EPackage()
-	 * @model
-	 * @generated
-	 */
-	EPackage getEPackage();
+public interface MetaModel extends EObject
+{
+  /**
+   * Returns the value of the '<em><b>EPackage</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>EPackage</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>EPackage</em>' reference.
+   * @see #setEPackage(EPackage)
+   * @see org.eclipse.xtext.xtextutil.XtextutilPackage#getMetaModel_EPackage()
+   * @model
+   * @generated
+   */
+  EPackage getEPackage();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xtextutil.MetaModel#getEPackage <em>EPackage</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>EPackage</em>' reference.
-	 * @see #getEPackage()
-	 * @generated
-	 */
-	void setEPackage(EPackage value);
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.xtextutil.MetaModel#getEPackage <em>EPackage</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>EPackage</em>' reference.
+   * @see #getEPackage()
+   * @generated
+   */
+  void setEPackage(EPackage value);
 
-	/**
-	 * Returns the value of the '<em><b>Alias</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Alias</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Alias</em>' attribute.
-	 * @see #setAlias(String)
-	 * @see org.eclipse.xtext.xtextutil.XtextutilPackage#getMetaModel_Alias()
-	 * @model
-	 * @generated
-	 */
-	String getAlias();
+  /**
+   * Returns the value of the '<em><b>Alias</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Alias</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Alias</em>' attribute.
+   * @see #setAlias(String)
+   * @see org.eclipse.xtext.xtextutil.XtextutilPackage#getMetaModel_Alias()
+   * @model
+   * @generated
+   */
+  String getAlias();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xtextutil.MetaModel#getAlias <em>Alias</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Alias</em>' attribute.
-	 * @see #getAlias()
-	 * @generated
-	 */
-	void setAlias(String value);
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.xtextutil.MetaModel#getAlias <em>Alias</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Alias</em>' attribute.
+   * @see #getAlias()
+   * @generated
+   */
+  void setAlias(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Referenced</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Referenced</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referenced</em>' attribute.
-	 * @see #setReferenced(boolean)
-	 * @see org.eclipse.xtext.xtextutil.XtextutilPackage#getMetaModel_Referenced()
-	 * @model
-	 * @generated
-	 */
-	boolean isReferenced();
+  /**
+   * Returns the value of the '<em><b>Referenced</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Referenced</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Referenced</em>' attribute.
+   * @see #setReferenced(boolean)
+   * @see org.eclipse.xtext.xtextutil.XtextutilPackage#getMetaModel_Referenced()
+   * @model
+   * @generated
+   */
+  boolean isReferenced();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xtextutil.MetaModel#isReferenced <em>Referenced</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referenced</em>' attribute.
-	 * @see #isReferenced()
-	 * @generated
-	 */
-	void setReferenced(boolean value);
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.xtextutil.MetaModel#isReferenced <em>Referenced</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Referenced</em>' attribute.
+   * @see #isReferenced()
+   * @generated
+   */
+  void setReferenced(boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Declaration</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Declaration</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Declaration</em>' reference.
-	 * @see #setDeclaration(AbstractMetamodelDeclaration)
-	 * @see org.eclipse.xtext.xtextutil.XtextutilPackage#getMetaModel_Declaration()
-	 * @model
-	 * @generated
-	 */
-	AbstractMetamodelDeclaration getDeclaration();
+  /**
+   * Returns the value of the '<em><b>Declaration</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Declaration</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Declaration</em>' reference.
+   * @see #setDeclaration(AbstractMetamodelDeclaration)
+   * @see org.eclipse.xtext.xtextutil.XtextutilPackage#getMetaModel_Declaration()
+   * @model
+   * @generated
+   */
+  AbstractMetamodelDeclaration getDeclaration();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xtextutil.MetaModel#getDeclaration <em>Declaration</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Declaration</em>' reference.
-	 * @see #getDeclaration()
-	 * @generated
-	 */
-	void setDeclaration(AbstractMetamodelDeclaration value);
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.xtextutil.MetaModel#getDeclaration <em>Declaration</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Declaration</em>' reference.
+   * @see #getDeclaration()
+   * @generated
+   */
+  void setDeclaration(AbstractMetamodelDeclaration value);
 
 } // MetaModel
