@@ -16,7 +16,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	public void testLexError() throws Exception {
 		final List<String> errors = new ArrayList<String>();
 		parse("import 'holla' % as foo", new IParseErrorHandler() {
-			public void handleParserError(int offset, int length, String text, String message) {
+			public void handleParserError(int line, int offset, int length, int token, String text, String message, Object context) {
 				System.out.println(message + ":'" + text + "' (" + offset + "," + length + ")");
 				errors.add(text);
 			}
