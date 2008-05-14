@@ -29,6 +29,8 @@ import org.eclipse.xtext.core.parser.IElementFactory;
 }
 
 @parser::members {
+private Object currentParserNode;
+
 private IElementFactory factory;
 public Internal«languageName()»Parser(TokenStream input, IElementFactory factory) {
 	this(input);
@@ -48,7 +50,7 @@ parse returns [Object current] :
 «ENDDEFINE»
 
 «DEFINE rule FOR ParserRule»
-«ruleName()» returns [Object current=null] : {Object temp=null;}
+«ruleName()» returns [Object current=null] : {Object temp=null; currentParserNode=«EXPAND createParserNode» }
 	«EXPAND ebnf FOR this.alternatives»;
 «ENDDEFINE»
 
@@ -67,16 +69,19 @@ parse returns [Object current] :
 «DEFINE ebnf2 FOR Group»«EXPAND ebnf FOREACH abstractTokens»«ENDDEFINE»
 
 «DEFINE ebnf2 FOR Assignment»
-	«localVar()»=«EXPAND ebnf FOR terminal» {if ($current==null) {$current = factory.create("«containingParserRule().getReturnTypeName()»");}factory.«setOrAdd()»($current, "«feature»",«localVar()»);}
+	«localVar()»=«EXPAND ebnf FOR terminal» {if ($current==null) {
+	$current = factory.create("«containingParserRule().getReturnTypeName()»");
+	«EXPAND associateParserNode»}factory.«setOrAdd()»($current, "«feature»",«localVar()»);}
 «ENDDEFINE»
 
 «DEFINE ebnf2 FOR Action»
 	{temp=factory.create("«currentType().qualifiedName()»");
 	 factory.«setOrAdd()»(temp, "«feature»",$current);
-	 $current = temp; temp = null;}
+	 $current = temp; temp = null;
+	 «EXPAND createParserNode»}
 «ENDDEFINE»
 
-«DEFINE ebnf2 FOR Keyword»'«withoutQuotes()»'«ENDDEFINE»
+«DEFINE ebnf2 FOR Keyword»'«withoutQuotes()»' {«EXPAND createParserNode»}«ENDDEFINE»
 
 «DEFINE ebnf2 FOR RuleCall-»
 «IF ParserRule.isInstance(calledRule()) && !isAssigned()»«localVar()»=«ENDIF-»
@@ -84,5 +89,7 @@ parse returns [Object current] :
 «IF ParserRule.isInstance(calledRule()) && !isAssigned()»{$current = $«localVar()».current;}«ENDIF-»
 «ENDDEFINE»
 
-«ENDFILE»
-«ENDDEFINE»
+«DEFINE createParserNode FOR emf::EObject-»
+factory.createParserNode(input, null, currentParserNode);«ENDDEFINE»
+
+«DEFINE associateParserNode FOR Object-»factory.associate(currentParserNode, $current);«ENDDEFINE»
