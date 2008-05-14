@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="org.eclipse.xtext" default="build.jars" basedir=".">
+
+	<property name="basews" value="${ws}"/>
+	<property name="baseos" value="${os}"/>
+	<property name="basearch" value="${arch}"/>
+	<property name="basenl" value="${nl}"/>
+	<property name="bundleId" value="org.eclipse.xtext"/>
+	<property name="bundleVersion" value="1.0.0"/>
+
+	<available property="customBuildCallbacks" file=".//customBuildCallbacks.xml" value="/customBuildCallbacks.xml"/>
+
+	<!-- Compiler settings. -->
+	<property name="javacFailOnError" value="false"/>
+	<property name="javacDebugInfo" value="on"/>
+	<property name="javacVerbose" value="false"/>
+	<property name="logExtension" value=".log"/>
+	<property name="compilerArg" value=""/>
+	<property name="javacSource" value="1.3"/>
+	<property name="javacTarget" value="1.2"/>
+	<condition property="dir_bootclasspath" value="${java.home}/../Classes">
+		<os family="mac"/>
+	</condition>
+	<property name="dir_bootclasspath" value="${java.home}/lib"/>
+	<path id="path_bootclasspath">
+		<fileset dir="${dir_bootclasspath}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	<property name="bootclasspath" refid="path_bootclasspath"/>
+<condition property="bundleBootClasspath" value="${J2SE-1.5}"	>
+		<isset property="J2SE-1.5"/>
+	</condition>
+<condition property="bundleJavacSource" value="1.5"	>
+		<isset property="J2SE-1.5"/>
+	</condition>
+<condition property="bundleJavacTarget" value="1.5"	>
+		<isset property="J2SE-1.5"/>
+	</condition>
+	<property name="bundleJavacSource" value="${javacSource}"/>
+	<property name="bundleJavacTarget" value="${javacTarget}"/>
+	<property name="bundleBootClasspath" value="${bootclasspath}"/>
+
+	<target name="init" depends="properties">
+<condition property="pluginTemp" value="${buildTempFolder}/plugins"		>
+			<isset property="buildTempFolder"/>
+		</condition>
+		<property name="pluginTemp" value="${basedir}"/>
+<condition property="build.result.folder" value="${pluginTemp}/org.eclipse.xtext_1.0.0"		>
+			<isset property="buildTempFolder"/>
+		</condition>
+		<property name="build.result.folder" value="${basedir}"/>
+		<property name="temp.folder" value="${basedir}/temp.folder"/>
+		<property name="plugin.destination" value="${basedir}"/>
+	</target>
+
+	<target name="properties" if="eclipse.running">
+		<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+
+	</target>
+
+	<target name="build.update.jar" depends="init" description="Build the plug-in: org.eclipse.xtext for an update site.">
+		<delete dir="${temp.folder}"/>
+		<mkdir dir="${temp.folder}"/>
+		<antcall target="build.jars"/>
+		<antcall target="gather.bin.parts">
+			<param name="destination.temp.folder" value="${temp.folder}/"/>
+		</antcall>
+		<jar destfile="${plugin.destination}/org.eclipse.xtext_1.0.0.jar" basedir="${temp.folder}/org.eclipse.xtext_1.0.0" filesetmanifest="merge"/>
+		<delete dir="${temp.folder}"/>
+	</target>
+
+	<target name="@dot" depends="init" unless="@dot" description="Create jar: org.eclipse.xtext @dot.">
+		<delete dir="${temp.folder}/@dot.bin"/>
+		<mkdir dir="${temp.folder}/@dot.bin"/>
+		<path id="@dot.classpath">
+			<pathelement path="../../eclipse/plugins/org.eclipse.emf.ecore_2.3.2.v200802051830.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.core.runtime_3.4.0.v20080421-1805.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.osgi_3.4.0.v20080427-0830.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.equinox.common_3.4.0.v20080421-2006.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.core.jobs_3.4.0.v20080310.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.core.runtime.compatibility.registry_3.2.200.v20070717/runtime_registry_compatibility.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.core.runtime.compatibility.registry_3.2.200.v20070717"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.equinox.registry_3.4.0.v20080421-2006.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.equinox.preferences_3.2.200.v20080421-2006.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.core.runtime.compatibility.registry_3.2.200.v20070717/@dot"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.core.contenttype_3.3.0.v20080414.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.core.runtime.compatibility.auth_3.2.100.v20070502.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.equinox.app_1.1.0.v20080421-2006.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.osgi.services_3.1.200.v20071203.jar"/>
+			<pathelement path="../../eclipse/plugins/javax.servlet_2.4.0.v200803061910.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.emf.common_2.3.2.v200802051830.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.core.resources_3.4.0.v20080430-0005.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.core.resources.compatibility_3.4.0.v20071204.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.ant.core_3.2.0.v20080425.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.core.variables_3.2.100.v20080324-1600.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.core.expressions_3.4.0.v20080430-0100.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.core.filesystem_1.2.0.v20080421-1805.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.core.filesystem.macosx_1.0.0.v20071126.jar"/>
+			<pathelement path="../../eclipse/plugins/org.antlr_3.0.0/stringtemplate-3.0.jar"/>
+			<pathelement path="../../eclipse/plugins/org.antlr_3.0.0/antlr-3.0-patched.jar"/>
+			<pathelement path="../../eclipse/plugins/org.antlr_3.0.0/antlr-2.7.7.jar"/>
+			<pathelement path="../../eclipse/plugins/org.antlr.runtime_3.0.0/antlr-runtime-3.0.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.commons.logging_1.0.4.v200803061811.jar"/>
+			<pathelement path="../../eclipse/plugins/org.openarchitectureware.util.stdlib_4.3.0.20080508-1430PRD.jar"/>
+			<pathelement path="../../eclipse/plugins/org.openarchitectureware.core.workflow_4.3.0.20080508-1430PRD.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-antlr.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-apache-bcel.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-apache-bsf.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-apache-log4j.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-apache-oro.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-apache-regexp.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-apache-resolver.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-commons-logging.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-commons-net.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-jai.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-javamail.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-jdepend.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-jmf.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-jsch.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-junit.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-launcher.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-netrexx.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-nodeps.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-starteam.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-stylebook.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-swing.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-trax.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.ant_1.7.0.v200803061910/lib/ant-weblogic.jar"/>
+			<pathelement path="../../eclipse/plugins/org.apache.commons.cli_1.0.0.jar"/>
+			<pathelement path="../../eclipse/plugins/org.openarchitectureware.core.emftools_4.3.0.20080508-1430PRD.jar"/>
+			<pathelement path="../../eclipse/plugins/org.openarchitectureware.core.expressions_4.3.0.20080508-1430PRD.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.emf.ecore.xmi_2.3.2.v200802051830.jar"/>
+			<pathelement path="../../eclipse/plugins/org.openarchitectureware.core.xpand2_4.3.0.20080508-1430PRD.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.jdt.core_3.4.0.v_858.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.jdt.compiler.apt_1.0.100.v20080414-2145.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.jdt.compiler.tool_1.0.100.v_858.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.text_3.4.0.v20080430-0100.jar"/>
+			<pathelement path="../../eclipse/plugins/com.ibm.icu_3.8.1.v20080402.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.core.commands_3.4.0.v20080408-0800.jar"/>
+			<pathelement path="../../eclipse/plugins/org.eclipse.team.core_3.4.0.I20080428.jar"/>
+			<pathelement path="../org.eclipse.xtext.core/bin/"/>
+			<pathelement path="../org.eclipse.xtext.core/@dot"/>
+		</path>
+		<subant antfile="${customBuildCallbacks}" target="pre.@dot" failonerror="false" buildpath=".">
+			<property name="source.folder1" value="src/"/>
+			<property name="source.folder2" value="emf-gen/"/>
+			<property name="source.folder4" value="src-gen/"/>
+			<property name="target.folder" value="${temp.folder}/@dot.bin"/>
+			<property name="source.folder3" value="model/"/>
+			<reference refid="@dot.classpath"/>
+		</subant>
+		<!-- compile the source code -->
+		<javac destdir="${temp.folder}/@dot.bin" failonerror="${javacFailOnError}" verbose="${javacVerbose}" debug="${javacDebugInfo}" includeAntRuntime="no" bootclasspath="${bundleBootClasspath}" source="${bundleJavacSource}" target="${bundleJavacTarget}"		>
+			<compilerarg line="${compilerArg}" compiler="${build.compiler}"/>
+			<classpath refid="@dot.classpath" />
+			<src path="src/"			/>
+			<src path="emf-gen/"			/>
+			<src path="model/"			/>
+			<src path="src-gen/"			/>
+			<compilerarg value="@${basedir}/javaCompiler...args" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+			<compilerarg line="-log '${temp.folder}/@dot.bin${logExtension}'" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+		</javac>
+		<!-- Copy necessary resources -->
+		<copy todir="${temp.folder}/@dot.bin" failonerror="true" overwrite="false">
+			<fileset dir="src/">
+				<exclude name="**/*.java"/>
+				<exclude name="**/package.htm*"/>
+			</fileset>
+			<fileset dir="emf-gen/">
+				<exclude name="**/*.java"/>
+				<exclude name="**/package.htm*"/>
+			</fileset>
+			<fileset dir="model/">
+				<exclude name="**/*.java"/>
+				<exclude name="**/package.htm*"/>
+			</fileset>
+			<fileset dir="src-gen/">
+				<exclude name="**/*.java"/>
+				<exclude name="**/package.htm*"/>
+			</fileset>
+		</copy>
+		<subant antfile="${customBuildCallbacks}" target="post.compile.@dot" failonerror="false" buildpath=".">
+			<property name="source.folder1" value="src/"/>
+			<property name="source.folder2" value="emf-gen/"/>
+			<property name="source.folder4" value="src-gen/"/>
+			<property name="target.folder" value="${temp.folder}/@dot.bin"/>
+			<property name="source.folder3" value="model/"/>
+			<reference refid="@dot.classpath"/>
+		</subant>
+		<mkdir dir="${build.result.folder}"/>
+		<copy todir="${build.result.folder}/@dot" failonerror="true" overwrite="false">
+			<fileset dir="${temp.folder}/@dot.bin">
+			</fileset>
+		</copy>
+		<delete dir="${temp.folder}/@dot.bin"/>
+		<subant antfile="${customBuildCallbacks}" target="post.@dot" failonerror="false" buildpath=".">
+			<property name="jar.Location" value="${build.result.folder}/@dot"/>
+			<reference refid="@dot.classpath"/>
+		</subant>
+	</target>
+
+	<target name="src.zip" depends="init" unless="src.zip">
+		<mkdir dir="${build.result.folder}"/>
+		<antcall target="zip.src.zip"/>
+	</target>
+	<target name="zip.src.zip">
+		<zip destfile="${build.result.folder}/src.zip" filesonly="false" whenempty="skip" update="false">
+			<fileset dir="src/">
+				<include name="**/*.java"/>
+			</fileset>
+			<fileset dir="emf-gen/">
+				<include name="**/*.java"/>
+			</fileset>
+			<fileset dir="model/">
+				<include name="**/*.java"/>
+			</fileset>
+			<fileset dir="src-gen/">
+				<include name="**/*.java"/>
+			</fileset>
+		</zip>
+	</target>
+	<target name="copy.src.zip">
+		<copy todir="${source.destination.folder}/" failonerror="true" overwrite="true">
+			<fileset dir="src/">
+				<include name="**/*.java"/>
+			</fileset>
+			<fileset dir="emf-gen/">
+				<include name="**/*.java"/>
+			</fileset>
+			<fileset dir="model/">
+				<include name="**/*.java"/>
+			</fileset>
+			<fileset dir="src-gen/">
+				<include name="**/*.java"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="build.jars" depends="init" description="Compile classes and build nested jars for the plug-in: org.eclipse.xtext.">
+		<subant antfile="${customBuildCallbacks}" target="pre.build.jars" failonerror="false" buildpath=".">
+			<property name="build.result.folder" value="${build.result.folder}"/>
+		</subant>
+		<available property="@dot" file="${build.result.folder}/@dot"/>
+		<antcall target="@dot"/>
+		<subant antfile="${customBuildCallbacks}" target="post.build.jars" failonerror="false" buildpath=".">
+			<property name="build.result.folder" value="${build.result.folder}"/>
+		</subant>
+	</target>
+
+	<target name="build.sources" depends="init">
+		<subant antfile="${customBuildCallbacks}" target="pre.build.sources" failonerror="false" buildpath=".">
+			<property name="build.result.folder" value="${build.result.folder}"/>
+		</subant>
+		<available property="src.zip" file="${build.result.folder}/src.zip"/>
+		<antcall target="src.zip"/>
+		<subant antfile="${customBuildCallbacks}" target="post.build.sources" failonerror="false" buildpath=".">
+			<property name="build.result.folder" value="${build.result.folder}"/>
+		</subant>
+	</target>
+
+	<target name="gather.bin.parts" depends="init" if="destination.temp.folder">
+		<mkdir dir="${destination.temp.folder}/org.eclipse.xtext_1.0.0"/>
+		<subant antfile="${customBuildCallbacks}" target="pre.gather.bin.parts" failonerror="false" buildpath=".">
+			<property name="build.result.folder" value="${build.result.folder}"/>
+			<property name="target.folder" value="${destination.temp.folder}/org.eclipse.xtext_1.0.0"/>
+		</subant>
+		<copy todir="${destination.temp.folder}/org.eclipse.xtext_1.0.0" failonerror="true" overwrite="false">
+			<fileset dir="${build.result.folder}/@dot">
+				<include name="**"/>
+			</fileset>
+		</copy>
+		<copy todir="${destination.temp.folder}/org.eclipse.xtext_1.0.0" failonerror="true" overwrite="false">
+			<fileset dir="${basedir}">
+				<include name="model/"/>
+				<include name="META-INF/"/>
+				<include name="plugin.xml"/>
+				<include name="plugin.properties"/>
+			</fileset>
+		</copy>
+		<subant antfile="${customBuildCallbacks}" target="post.gather.bin.parts" failonerror="false" buildpath=".">
+			<property name="build.result.folder" value="${build.result.folder}"/>
+			<property name="target.folder" value="${destination.temp.folder}/org.eclipse.xtext_1.0.0"/>
+		</subant>
+	</target>
+
+	<target name="build.zips" depends="init">
+	</target>
+
+	<target name="gather.sources" depends="init" if="destination.temp.folder">
+		<subant antfile="${customBuildCallbacks}" target="pre.gather.sources" failonerror="false" buildpath=".">
+			<property name="target.folder" value="${destination.temp.folder}/org.eclipse.xtext_1.0.0"/>
+		</subant>
+		<mkdir dir="${destination.temp.folder}/org.eclipse.xtext_1.0.0"/>
+		<copy file="${build.result.folder}/src.zip" todir="${destination.temp.folder}/org.eclipse.xtext_1.0.0" failonerror="false" overwrite="false"/>
+		<antcall target="copy.src.includes">
+			<param name="source.destination.folder" value="${destination.temp.folder}/org.eclipse.xtext_1.0.0"/>
+		</antcall>
+		<subant antfile="${customBuildCallbacks}" target="post.gather.sources" failonerror="false" buildpath=".">
+			<property name="target.folder" value="${destination.temp.folder}/org.eclipse.xtext_1.0.0"/>
+		</subant>
+	</target>
+
+	<target name="gather.individual.sources" depends="init">
+		<subant antfile="${customBuildCallbacks}" target="pre.gather.sources" failonerror="false" buildpath=".">
+			<property name="target.folder" value="${destination.temp.folder}"/>
+		</subant>
+		<antcall target="copy.src.zip">
+			<param name="source.destination.folder" value="${destination.temp.folder}"/>
+		</antcall>
+		<antcall target="copy.src.includes">
+			<param name="source.destination.folder" value="${destination.temp.folder}"/>
+		</antcall>
+		<subant antfile="${customBuildCallbacks}" target="post.gather.sources" failonerror="false" buildpath=".">
+			<property name="target.folder" value="${destination.temp.folder}"/>
+		</subant>
+	</target>
+
+	<target name="copy.src.includes" depends="init">
+	</target>
+
+	<target name="gather.logs" depends="init" if="destination.temp.folder">
+		<subant antfile="${customBuildCallbacks}" target="pre.gather.logs" failonerror="false" buildpath=".">
+			<property name="destination.temp.folder" value="${destination.temp.folder}/org.eclipse.xtext_1.0.0"/>
+		</subant>
+		<mkdir dir="${destination.temp.folder}/org.eclipse.xtext_1.0.0"/>
+		<copy todir="${destination.temp.folder}/org.eclipse.xtext_1.0.0" failonerror="false" overwrite="false">
+			<fileset dir="${temp.folder}">
+				<include name="@dot.bin${logExtension}"/>
+			</fileset>
+		</copy>
+		<subant antfile="${customBuildCallbacks}" target="post.gather.logs" failonerror="false" buildpath=".">
+			<property name="destination.temp.folder" value="${destination.temp.folder}/org.eclipse.xtext_1.0.0"/>
+		</subant>
+	</target>
+
+	<target name="clean" depends="init" description="Clean the plug-in: org.eclipse.xtext of all the zips, jars and logs created.">
+		<subant antfile="${customBuildCallbacks}" target="pre.clean" failonerror="false" buildpath=".">
+			<property name="plugin.destination" value="${plugin.destination}"/>
+			<property name="build.result.folder" value="${build.result.folder}"/>
+			<property name="temp.folder" value="${temp.folder}"/>
+		</subant>
+		<delete dir="${build.result.folder}/@dot"/>
+		<delete file="${build.result.folder}/src.zip"/>
+		<delete file="${plugin.destination}/org.eclipse.xtext_1.0.0.jar"/>
+		<delete file="${plugin.destination}/org.eclipse.xtext_1.0.0.zip"/>
+		<delete dir="${temp.folder}"/>
+		<subant antfile="${customBuildCallbacks}" target="post.clean" failonerror="false" buildpath=".">
+			<property name="plugin.destination" value="${plugin.destination}"/>
+			<property name="build.result.folder" value="${build.result.folder}"/>
+			<property name="temp.folder" value="${temp.folder}"/>
+		</subant>
+	</target>
+
+	<target name="refresh" depends="init" if="eclipse.running" description="Refresh this folder.">
+		<eclipse.convertPath fileSystemPath="/Users/koehnlein/Documents/devel/oaw5/workspace/org.eclipse.xtext" property="resourcePath"/>
+		<eclipse.refreshLocal resource="${resourcePath}" depth="infinite"/>
+	</target>
+
+	<target name="zip.plugin" depends="init" description="Create a zip containing all the elements for the plug-in: org.eclipse.xtext.">
+		<delete dir="${temp.folder}"/>
+		<mkdir dir="${temp.folder}"/>
+		<antcall target="build.jars"/>
+		<antcall target="build.sources"/>
+		<antcall target="gather.bin.parts">
+			<param name="destination.temp.folder" value="${temp.folder}/"/>
+		</antcall>
+		<antcall target="gather.sources">
+			<param name="destination.temp.folder" value="${temp.folder}/"/>
+		</antcall>
+		<delete>
+			<fileset dir="${temp.folder}">
+				<include name="**/*.bin${logExtension}"/>
+			</fileset>
+		</delete>
+		<zip destfile="${plugin.destination}/org.eclipse.xtext_1.0.0.zip" basedir="${temp.folder}" filesonly="true" whenempty="skip" update="false"/>
+		<delete dir="${temp.folder}"/>
+	</target>
+
+</project>
