@@ -67,6 +67,7 @@ public abstract class AbstractGeneratorTest extends TestCase {
 
 	public List<Invocation> parse(String model, IParseErrorHandler errorHandler) throws Exception {
 		final List<Invocation> calls = new ArrayList<Invocation>();
+		final List<DummyParserNode> nodes = new ArrayList<DummyParserNode>();
 		parse(model, new IElementFactory() {
 
 			public void add(Object _this, String feature, Object value) {
@@ -82,16 +83,6 @@ public abstract class AbstractGeneratorTest extends TestCase {
 				calls.add(new Invocation("set", feature, value));
 			}
 
-			public void associate(Object parserNode, Object astNode) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			public Object createParserNode(TokenStream input,
-					Object currentGrammarElement, Object parentParserNode) {
-				// TODO Auto-generated method stub
-				return null;
-			}
 		}, errorHandler);
 		return calls;
 	}
