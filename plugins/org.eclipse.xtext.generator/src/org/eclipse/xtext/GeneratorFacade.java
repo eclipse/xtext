@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
-import org.eclipse.xtext.grammargen.GenerateTokensEnum;
 import org.eclipse.xtext.util.GenProperties;
 import org.eclipse.xtext.xtextutil.XtextutilPackage;
 import org.openarchitectureware.expression.ExecutionContextImpl;
@@ -35,9 +34,15 @@ import org.openarchitectureware.xtend.XtendFacade;
  *
  */
 public class GeneratorFacade {
+	
 	@SuppressWarnings("unchecked")
 	public static void generate(Grammar grammarModel, String languageName, String languageNamespace, String srcGenPath)
 			throws IOException {
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"ecore", new XMIResourceFactoryImpl());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"xmi", new XMIResourceFactoryImpl());
+		
 		OutputImpl output = new OutputImpl();
 		Outlet outlet = new Outlet();
 		outlet.setPath(srcGenPath);
@@ -58,9 +63,10 @@ public class GeneratorFacade {
 
 		XpandFacade facade = XpandFacade.create(execCtx);
 		facade.evaluate("org::eclipse::xtext::grammargen::AntlrGrammar::grammar", grammarModel);
-		facade.evaluate("org::eclipse::xtext::grammargen::EPackageAccess::file", grammarModel);
-		facade.evaluate("org::eclipse::xtext::grammargen::Parser::parser", grammarModel);
-		facade.evaluate("org::eclipse::xtext::grammargen::Factory::factory", grammarModel);
+		facade.evaluate("org::eclipse::xtext::Constants::file", grammarModel);
+		facade.evaluate("org::eclipse::xtext::StandaloneSetup::file", grammarModel);
+		facade.evaluate("org::eclipse::xtext::ParserFacade::parser", grammarModel);
+		facade.evaluate("org::eclipse::xtext::ASTFactory::factory", grammarModel);
 
 		String grammar = languageNamespace + "/parser/internal/Internal" + languageName + ".g";
 
@@ -83,5 +89,10 @@ public class GeneratorFacade {
 			metaModelResource.getContents().add(pack);
 			metaModelResource.save(null);
 		}
+		
+		ResourceSetImpl setImpl = new ResourceSetImpl();
+		Resource resource = setImpl.createResource(URI.createURI(srcGenPath+"/"+languageNamespace+"/"+languageName+".xmi"));
+		resource.getContents().add(grammarModel);
+		resource.save(null);
 	}
 }

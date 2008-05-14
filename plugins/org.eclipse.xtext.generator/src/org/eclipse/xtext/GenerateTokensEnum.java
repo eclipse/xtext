@@ -1,4 +1,4 @@
-package org.eclipse.xtext.grammargen;
+package org.eclipse.xtext;
 
 import java.io.BufferedReader;
 import java.io.File;

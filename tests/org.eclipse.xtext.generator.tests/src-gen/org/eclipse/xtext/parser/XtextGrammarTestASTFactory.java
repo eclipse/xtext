@@ -7,11 +7,7 @@ public class XtextGrammarTestASTFactory extends org.eclipse.xtext.core.parser.Ab
 	{
 	
 		map.put(null, new EPackage[] {
-		
-			
-			org.eclipse.xtext.XtextGrammarTestEPackageAccess.getXtextTestEPackage()
-			
-		
+			org.eclipse.xtext.XtextGrammarTestConstants.getXtextTestEPackage()
 		});
 	
 	};

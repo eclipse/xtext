@@ -7,19 +7,11 @@ public class MetamodelRefTestASTFactory extends org.eclipse.xtext.core.parser.Ab
 	{
 	
 		map.put("xtext", new EPackage[] {
-		
-			
-			org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestEPackageAccess.get("http://www.eclipse.org/2008/Xtext")
-			
-		
+			org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestConstants.get("http://www.eclipse.org/2008/Xtext")
 		});
 	
 		map.put(null, new EPackage[] {
-		
-			
-			org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestEPackageAccess.getSimpleTestEPackage()
-			
-		
+			org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestConstants.getSimpleTestEPackage()
 		});
 	
 	};
