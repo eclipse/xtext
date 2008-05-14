@@ -16,8 +16,6 @@ import xtextutil;
 extension org::eclipse::xtext::Extensions;
 extension org::eclipse::xtext::TypeResolution;
 
-
-
 context Action ERROR "Created class " + typeName.name + " cannot be resolved" :
 	resolveCreatedType() != null;
 	

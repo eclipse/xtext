@@ -113,7 +113,7 @@ isAssigned(Object this) : false;
 // Built-in lexer Rules
 
 cached allLexerRules(Grammar this) :
-	lexerRules.union(builtinRules().select(e|lexerRules.forAll(e1|e1.name != e.name)));
+	lexerRules.union(builtinRules().select(e|lexerRules.forAll(e1|e1.name != e.name))).union({lr('ANY_OTHER','.')}).toList().sortBy(e|e.name=='ANY_OTHER'?1:0);
 		
 
 private create LexerRule lr(String name, String body) :

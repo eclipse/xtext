@@ -43,7 +43,7 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 		assertEquals("set(name,[@6,19:21='Foo',<4>,1:19])", iter.next().toString());
 		assertEquals("create(Assignment)", iter.next().toString());
 		assertEquals("set(feature,[@10,25:28='name',<4>,1:25])", iter.next().toString());
-		assertEquals("set(operator,[@11,29:29='=',<24>,1:29])", iter.next().toString());
+		assertEquals("set(operator,[@11,29:29='=',<25>,1:29])", iter.next().toString());
 		assertEquals("create(RuleCall)", iter.next().toString());
 		assertEquals("set(name,[@12,30:31='ID',<4>,1:30])", iter.next().toString());
 		assertEquals("set(terminal,RuleCall)", iter.next().toString());
