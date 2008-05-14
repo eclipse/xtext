@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-14 13:50:28
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-14 14:22:09
 
 package org.eclipse.xtext.grammargen.tests.parser.internal;
 
@@ -9,15 +9,16 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalSimpleTestLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=6;
+    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
     public static final int RULE_WS=5;
     public static final int EOF=-1;
     public static final int RULE_INT=9;
     public static final int RULE_STRING=8;
-    public static final int Tokens=11;
+    public static final int Tokens=12;
+    public static final int RULE_ANY_OTHER=11;
     public static final int RULE_SL_COMMENT=10;
-    public static final int RULE_LEXER_BODY=7;
+    public static final int RULE_LEXER_BODY=6;
     public InternalSimpleTestLexer() {;} 
     public InternalSimpleTestLexer(CharStream input) {
         super(input);
@@ -81,14 +82,14 @@ public class InternalSimpleTestLexer extends Lexer {
     }
     // $ANTLR end RULE_WS
 
-    // $ANTLR start RULE_ML_COMMENT
-    public final void mRULE_ML_COMMENT() throws RecognitionException {
+    // $ANTLR start RULE_LEXER_BODY
+    public final void mRULE_LEXER_BODY() throws RecognitionException {
         try {
-            int _type = RULE_ML_COMMENT;
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:38:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:38:19: '/*' ( options {greedy=false; } : . )* '*/'
+            int _type = RULE_LEXER_BODY;
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:38:17: ( '<#' ( options {greedy=false; } : . )* '#>' )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:38:19: '<#' ( options {greedy=false; } : . )* '#>'
             {
-            match("/*"); 
+            match("<#"); 
 
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:38:24: ( options {greedy=false; } : . )*
             loop2:
@@ -96,19 +97,19 @@ public class InternalSimpleTestLexer extends Lexer {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( (LA2_0=='*') ) {
+                if ( (LA2_0=='#') ) {
                     int LA2_1 = input.LA(2);
 
-                    if ( (LA2_1=='/') ) {
+                    if ( (LA2_1=='>') ) {
                         alt2=2;
                     }
-                    else if ( ((LA2_1>='\u0000' && LA2_1<='.')||(LA2_1>='0' && LA2_1<='\uFFFE')) ) {
+                    else if ( ((LA2_1>='\u0000' && LA2_1<='=')||(LA2_1>='?' && LA2_1<='\uFFFE')) ) {
                         alt2=1;
                     }
 
 
                 }
-                else if ( ((LA2_0>='\u0000' && LA2_0<=')')||(LA2_0>='+' && LA2_0<='\uFFFE')) ) {
+                else if ( ((LA2_0>='\u0000' && LA2_0<='\"')||(LA2_0>='$' && LA2_0<='\uFFFE')) ) {
                     alt2=1;
                 }
 
@@ -127,9 +128,8 @@ public class InternalSimpleTestLexer extends Lexer {
                 }
             } while (true);
 
-            match("*/"); 
+            match("#>"); 
 
-            channel=HIDDEN;
 
             }
 
@@ -138,16 +138,16 @@ public class InternalSimpleTestLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end RULE_ML_COMMENT
+    // $ANTLR end RULE_LEXER_BODY
 
-    // $ANTLR start RULE_LEXER_BODY
-    public final void mRULE_LEXER_BODY() throws RecognitionException {
+    // $ANTLR start RULE_ML_COMMENT
+    public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
-            int _type = RULE_LEXER_BODY;
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:40:17: ( '<#' ( options {greedy=false; } : . )* '#>' )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:40:19: '<#' ( options {greedy=false; } : . )* '#>'
+            int _type = RULE_ML_COMMENT;
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:40:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:40:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
-            match("<#"); 
+            match("/*"); 
 
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:40:24: ( options {greedy=false; } : . )*
             loop3:
@@ -155,19 +155,19 @@ public class InternalSimpleTestLexer extends Lexer {
                 int alt3=2;
                 int LA3_0 = input.LA(1);
 
-                if ( (LA3_0=='#') ) {
+                if ( (LA3_0=='*') ) {
                     int LA3_1 = input.LA(2);
 
-                    if ( (LA3_1=='>') ) {
+                    if ( (LA3_1=='/') ) {
                         alt3=2;
                     }
-                    else if ( ((LA3_1>='\u0000' && LA3_1<='=')||(LA3_1>='?' && LA3_1<='\uFFFE')) ) {
+                    else if ( ((LA3_1>='\u0000' && LA3_1<='.')||(LA3_1>='0' && LA3_1<='\uFFFE')) ) {
                         alt3=1;
                     }
 
 
                 }
-                else if ( ((LA3_0>='\u0000' && LA3_0<='\"')||(LA3_0>='$' && LA3_0<='\uFFFE')) ) {
+                else if ( ((LA3_0>='\u0000' && LA3_0<=')')||(LA3_0>='+' && LA3_0<='\uFFFE')) ) {
                     alt3=1;
                 }
 
@@ -186,8 +186,9 @@ public class InternalSimpleTestLexer extends Lexer {
                 }
             } while (true);
 
-            match("#>"); 
+            match("*/"); 
 
+            channel=HIDDEN;
 
             }
 
@@ -196,7 +197,7 @@ public class InternalSimpleTestLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end RULE_LEXER_BODY
+    // $ANTLR end RULE_ML_COMMENT
 
     // $ANTLR start RULE_STRING
     public final void mRULE_STRING() throws RecognitionException {
@@ -551,126 +552,99 @@ public class InternalSimpleTestLexer extends Lexer {
     }
     // $ANTLR end RULE_ID
 
-    public void mTokens() throws RecognitionException {
-        // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:1:8: ( RULE_WS | RULE_ML_COMMENT | RULE_LEXER_BODY | RULE_STRING | RULE_INT | RULE_SL_COMMENT | RULE_ID )
-        int alt12=7;
-        switch ( input.LA(1) ) {
-        case '\t':
-        case '\n':
-        case '\r':
-        case ' ':
+    // $ANTLR start RULE_ANY_OTHER
+    public final void mRULE_ANY_OTHER() throws RecognitionException {
+        try {
+            int _type = RULE_ANY_OTHER;
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:51:16: ( . )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:51:18: .
             {
-            alt12=1;
+            matchAny(); 
+
             }
-            break;
-        case '/':
-            {
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end RULE_ANY_OTHER
+
+    public void mTokens() throws RecognitionException {
+        // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:1:8: ( RULE_WS | RULE_LEXER_BODY | RULE_ML_COMMENT | RULE_STRING | RULE_INT | RULE_SL_COMMENT | RULE_ID | RULE_ANY_OTHER )
+        int alt12=8;
+        int LA12_0 = input.LA(1);
+
+        if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
+            alt12=1;
+        }
+        else if ( (LA12_0=='<') ) {
             int LA12_2 = input.LA(2);
 
-            if ( (LA12_2=='/') ) {
-                alt12=6;
-            }
-            else if ( (LA12_2=='*') ) {
+            if ( (LA12_2=='#') ) {
                 alt12=2;
             }
             else {
-                NoViableAltException nvae =
-                    new NoViableAltException("1:1: Tokens : ( RULE_WS | RULE_ML_COMMENT | RULE_LEXER_BODY | RULE_STRING | RULE_INT | RULE_SL_COMMENT | RULE_ID );", 12, 2, input);
+                alt12=8;}
+        }
+        else if ( (LA12_0=='/') ) {
+            switch ( input.LA(2) ) {
+            case '/':
+                {
+                alt12=6;
+                }
+                break;
+            case '*':
+                {
+                alt12=3;
+                }
+                break;
+            default:
+                alt12=8;}
 
-                throw nvae;
+        }
+        else if ( (LA12_0=='\"') ) {
+            int LA12_4 = input.LA(2);
+
+            if ( ((LA12_4>='\u0000' && LA12_4<='\uFFFE')) ) {
+                alt12=4;
             }
+            else {
+                alt12=8;}
+        }
+        else if ( (LA12_0=='\'') ) {
+            int LA12_5 = input.LA(2);
+
+            if ( ((LA12_5>='\u0000' && LA12_5<='\uFFFE')) ) {
+                alt12=4;
             }
-            break;
-        case '<':
-            {
-            alt12=3;
-            }
-            break;
-        case '\"':
-        case '\'':
-            {
-            alt12=4;
-            }
-            break;
-        case '0':
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9':
-            {
+            else {
+                alt12=8;}
+        }
+        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
             alt12=5;
+        }
+        else if ( (LA12_0=='^') ) {
+            int LA12_7 = input.LA(2);
+
+            if ( ((LA12_7>='A' && LA12_7<='Z')||LA12_7=='_'||(LA12_7>='a' && LA12_7<='z')) ) {
+                alt12=7;
             }
-            break;
-        case 'A':
-        case 'B':
-        case 'C':
-        case 'D':
-        case 'E':
-        case 'F':
-        case 'G':
-        case 'H':
-        case 'I':
-        case 'J':
-        case 'K':
-        case 'L':
-        case 'M':
-        case 'N':
-        case 'O':
-        case 'P':
-        case 'Q':
-        case 'R':
-        case 'S':
-        case 'T':
-        case 'U':
-        case 'V':
-        case 'W':
-        case 'X':
-        case 'Y':
-        case 'Z':
-        case '^':
-        case '_':
-        case 'a':
-        case 'b':
-        case 'c':
-        case 'd':
-        case 'e':
-        case 'f':
-        case 'g':
-        case 'h':
-        case 'i':
-        case 'j':
-        case 'k':
-        case 'l':
-        case 'm':
-        case 'n':
-        case 'o':
-        case 'p':
-        case 'q':
-        case 'r':
-        case 's':
-        case 't':
-        case 'u':
-        case 'v':
-        case 'w':
-        case 'x':
-        case 'y':
-        case 'z':
-            {
+            else {
+                alt12=8;}
+        }
+        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='z')) ) {
             alt12=7;
-            }
-            break;
-        default:
+        }
+        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<=';')||(LA12_0>='=' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFE')) ) {
+            alt12=8;
+        }
+        else {
             NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( RULE_WS | RULE_ML_COMMENT | RULE_LEXER_BODY | RULE_STRING | RULE_INT | RULE_SL_COMMENT | RULE_ID );", 12, 0, input);
+                new NoViableAltException("1:1: Tokens : ( RULE_WS | RULE_LEXER_BODY | RULE_ML_COMMENT | RULE_STRING | RULE_INT | RULE_SL_COMMENT | RULE_ID | RULE_ANY_OTHER );", 12, 0, input);
 
             throw nvae;
         }
-
         switch (alt12) {
             case 1 :
                 // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:1:10: RULE_WS
@@ -680,16 +654,16 @@ public class InternalSimpleTestLexer extends Lexer {
                 }
                 break;
             case 2 :
-                // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:1:18: RULE_ML_COMMENT
+                // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:1:18: RULE_LEXER_BODY
                 {
-                mRULE_ML_COMMENT(); 
+                mRULE_LEXER_BODY(); 
 
                 }
                 break;
             case 3 :
-                // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:1:34: RULE_LEXER_BODY
+                // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:1:34: RULE_ML_COMMENT
                 {
-                mRULE_LEXER_BODY(); 
+                mRULE_ML_COMMENT(); 
 
                 }
                 break;
@@ -718,6 +692,13 @@ public class InternalSimpleTestLexer extends Lexer {
                 // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:1:87: RULE_ID
                 {
                 mRULE_ID(); 
+
+                }
+                break;
+            case 8 :
+                // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:1:95: RULE_ANY_OTHER
+                {
+                mRULE_ANY_OTHER(); 
 
                 }
                 break;
