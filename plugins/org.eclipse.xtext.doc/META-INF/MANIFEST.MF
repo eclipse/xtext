@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Doc Plug-in
+Bundle-SymbolicName: org.eclipse.xtext.doc
+Bundle-Version: 1.0.0
+Bundle-Vendor: itemis AG
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
