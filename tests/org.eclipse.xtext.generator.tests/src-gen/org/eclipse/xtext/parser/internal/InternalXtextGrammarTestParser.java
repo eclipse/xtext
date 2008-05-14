@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g 2008-05-13 15:03:39
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g 2008-05-14 13:50:30
 
 package org.eclipse.xtext.parser.internal; 
 
@@ -12,15 +12,15 @@ import java.util.ArrayList;
 
 public class InternalXtextGrammarTestParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_LEXER_BODY", "RULE_ML_COMMENT", "RULE_WS", "RULE_SL_COMMENT", "RULE_INT", "'lexing'", "':'", "'generate'", "'as'", "'import'", "'returns'", "';'", "'::'", "'|'", "'?'", "'*'", "'+'", "'+='", "'='", "'?='", "'{'", "'current'", "'.'", "'}'", "'('", "')'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_LEXER_BODY", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_INT", "'lexing'", "':'", "'generate'", "'as'", "'import'", "'returns'", "';'", "'::'", "'|'", "'?'", "'*'", "'+'", "'+='", "'='", "'?='", "'{'", "'current'", "'.'", "'}'", "'('", "')'"
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=8;
+    public static final int RULE_WS=9;
     public static final int RULE_INT=10;
     public static final int EOF=-1;
     public static final int RULE_STRING=5;
-    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_SL_COMMENT=8;
     public static final int RULE_LEXER_BODY=6;
 
         public InternalXtextGrammarTestParser(TokenStream input) {
@@ -43,14 +43,14 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start parse
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:23:1: parse returns [Object current] : ruleGrammar EOF ;
-    public Object parse() throws RecognitionException {
+    public final Object parse() throws RecognitionException {
         Object current = null;
 
         Object ruleGrammar1 = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:24:2: ( ruleGrammar EOF )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:23:32: ( ruleGrammar EOF )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:24:2: ruleGrammar EOF
             {
             pushFollow(FOLLOW_ruleGrammar_in_parse43);
@@ -76,7 +76,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleGrammar
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:27:1: ruleGrammar returns [Object current=null] : ( ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )? ) ;
-    public Object ruleGrammar() throws RecognitionException {
+    public final Object ruleGrammar() throws RecognitionException {
         Object current = null;
 
         Object lv_metamodelDeclarations = null;
@@ -87,7 +87,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:27:45: ( ( ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )? ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:27:43: ( ( ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )? ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:27:45: ( ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )? )
             {
             Object temp=null;
@@ -237,7 +237,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleAbstractRule
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:48:1: ruleAbstractRule returns [Object current=null] : (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) ;
-    public Object ruleAbstractRule() throws RecognitionException {
+    public final Object ruleAbstractRule() throws RecognitionException {
         Object current = null;
 
         Object this_LexerRule = null;
@@ -246,7 +246,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:48:50: ( (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:48:48: ( (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:48:50: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )
             {
             Object temp=null;
@@ -332,7 +332,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleAbstractMetamodelDeclaration
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:54:1: ruleAbstractMetamodelDeclaration returns [Object current=null] : (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel ) ;
-    public Object ruleAbstractMetamodelDeclaration() throws RecognitionException {
+    public final Object ruleAbstractMetamodelDeclaration() throws RecognitionException {
         Object current = null;
 
         Object this_GeneratedMetamodel = null;
@@ -341,7 +341,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:54:66: ( (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:54:64: ( (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:54:66: (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel )
             {
             Object temp=null;
@@ -404,7 +404,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleGeneratedMetamodel
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:60:1: ruleGeneratedMetamodel returns [Object current=null] : ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) ;
-    public Object ruleGeneratedMetamodel() throws RecognitionException {
+    public final Object ruleGeneratedMetamodel() throws RecognitionException {
         Object current = null;
 
         Token lv_name=null;
@@ -412,7 +412,7 @@ public class InternalXtextGrammarTestParser extends Parser {
         Token lv_alias=null;
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:60:56: ( ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:60:54: ( ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:60:56: ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
             {
             Object temp=null;
@@ -497,14 +497,14 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleReferencedMetamodel
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:81:1: ruleReferencedMetamodel returns [Object current=null] : ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) ;
-    public Object ruleReferencedMetamodel() throws RecognitionException {
+    public final Object ruleReferencedMetamodel() throws RecognitionException {
         Object current = null;
 
         Token lv_uri=null;
         Token lv_alias=null;
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:81:57: ( ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:81:55: ( ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:81:57: ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
             {
             Object temp=null;
@@ -574,14 +574,14 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleLexerRule
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:97:1: ruleLexerRule returns [Object current=null] : ( ( (lv_name= RULE_ID ) ':' ) (lv_body= RULE_LEXER_BODY ) ) ;
-    public Object ruleLexerRule() throws RecognitionException {
+    public final Object ruleLexerRule() throws RecognitionException {
         Object current = null;
 
         Token lv_name=null;
         Token lv_body=null;
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:97:47: ( ( ( (lv_name= RULE_ID ) ':' ) (lv_body= RULE_LEXER_BODY ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:97:45: ( ( ( (lv_name= RULE_ID ) ':' ) (lv_body= RULE_LEXER_BODY ) ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:97:47: ( ( (lv_name= RULE_ID ) ':' ) (lv_body= RULE_LEXER_BODY ) )
             {
             Object temp=null;
@@ -633,7 +633,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleParserRule
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:111:1: ruleParserRule returns [Object current=null] : ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' ) ;
-    public Object ruleParserRule() throws RecognitionException {
+    public final Object ruleParserRule() throws RecognitionException {
         Object current = null;
 
         Token lv_name=null;
@@ -643,7 +643,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:111:48: ( ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:111:46: ( ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:111:48: ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' )
             {
             Object temp=null;
@@ -739,14 +739,14 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleTypeRef
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:134:1: ruleTypeRef returns [Object current=null] : ( ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID ) ) ;
-    public Object ruleTypeRef() throws RecognitionException {
+    public final Object ruleTypeRef() throws RecognitionException {
         Object current = null;
 
         Token lv_alias=null;
         Token lv_name=null;
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:134:45: ( ( ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:134:43: ( ( ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID ) ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:134:45: ( ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID ) )
             {
             Object temp=null;
@@ -813,7 +813,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleAlternatives
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:148:1: ruleAlternatives returns [Object current=null] : (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* ) ;
-    public Object ruleAlternatives() throws RecognitionException {
+    public final Object ruleAlternatives() throws RecognitionException {
         Object current = null;
 
         Object this_Group = null;
@@ -822,7 +822,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:148:50: ( (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:148:48: ( (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:148:50: (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* )
             {
             Object temp=null;
@@ -905,7 +905,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleGroup
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:165:1: ruleGroup returns [Object current=null] : (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* ) ;
-    public Object ruleGroup() throws RecognitionException {
+    public final Object ruleGroup() throws RecognitionException {
         Object current = null;
 
         Object this_AbstractToken = null;
@@ -914,7 +914,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:165:43: ( (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:165:41: ( (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:165:43: (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* )
             {
             Object temp=null;
@@ -990,7 +990,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleAbstractToken
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:180:1: ruleAbstractToken returns [Object current=null] : ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? ) ;
-    public Object ruleAbstractToken() throws RecognitionException {
+    public final Object ruleAbstractToken() throws RecognitionException {
         Object current = null;
 
         Token lv_cardinality=null;
@@ -1002,7 +1002,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:180:51: ( ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:180:49: ( ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:180:51: ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? )
             {
             Object temp=null;
@@ -1160,7 +1160,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleAssignment
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:197:1: ruleAssignment returns [Object current=null] : ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) ) ;
-    public Object ruleAssignment() throws RecognitionException {
+    public final Object ruleAssignment() throws RecognitionException {
         Object current = null;
 
         Token lv_feature=null;
@@ -1169,7 +1169,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:197:48: ( ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:197:46: ( ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:197:48: ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) )
             {
             Object temp=null;
@@ -1240,7 +1240,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleAction
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:218:1: ruleAction returns [Object current=null] : ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) ( ( ( '.' (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' )? ) '}' ) ;
-    public Object ruleAction() throws RecognitionException {
+    public final Object ruleAction() throws RecognitionException {
         Object current = null;
 
         Token lv_feature=null;
@@ -1249,7 +1249,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:218:44: ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) ( ( ( '.' (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' )? ) '}' ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:218:42: ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) ( ( ( '.' (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' )? ) '}' ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:218:44: ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) ( ( ( '.' (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' )? ) '}' )
             {
             Object temp=null;
@@ -1384,7 +1384,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleAbstractTerminal
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:249:1: ruleAbstractTerminal returns [Object current=null] : ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) ;
-    public Object ruleAbstractTerminal() throws RecognitionException {
+    public final Object ruleAbstractTerminal() throws RecognitionException {
         Object current = null;
 
         Object this_Keyword = null;
@@ -1395,7 +1395,7 @@ public class InternalXtextGrammarTestParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:249:54: ( ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:249:52: ( ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:249:54: ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement )
             {
             Object temp=null;
@@ -1495,14 +1495,14 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleParenthesizedElement
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:257:1: ruleParenthesizedElement returns [Object current=null] : ( ( '(' this_Alternatives= ruleAlternatives ) ')' ) ;
-    public Object ruleParenthesizedElement() throws RecognitionException {
+    public final Object ruleParenthesizedElement() throws RecognitionException {
         Object current = null;
 
         Object this_Alternatives = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:257:58: ( ( ( '(' this_Alternatives= ruleAlternatives ) ')' ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:257:56: ( ( ( '(' this_Alternatives= ruleAlternatives ) ')' ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:257:58: ( ( '(' this_Alternatives= ruleAlternatives ) ')' )
             {
             Object temp=null;
@@ -1542,13 +1542,13 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleKeyword
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:265:1: ruleKeyword returns [Object current=null] : (lv_value= RULE_STRING ) ;
-    public Object ruleKeyword() throws RecognitionException {
+    public final Object ruleKeyword() throws RecognitionException {
         Object current = null;
 
         Token lv_value=null;
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:265:45: ( (lv_value= RULE_STRING ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:265:43: ( (lv_value= RULE_STRING ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:265:45: (lv_value= RULE_STRING )
             {
             Object temp=null;
@@ -1578,13 +1578,13 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     // $ANTLR start ruleRuleCall
     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:272:1: ruleRuleCall returns [Object current=null] : (lv_name= RULE_ID ) ;
-    public Object ruleRuleCall() throws RecognitionException {
+    public final Object ruleRuleCall() throws RecognitionException {
         Object current = null;
 
         Token lv_name=null;
 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:272:46: ( (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:272:44: ( (lv_name= RULE_ID ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:272:46: (lv_name= RULE_ID )
             {
             Object temp=null;

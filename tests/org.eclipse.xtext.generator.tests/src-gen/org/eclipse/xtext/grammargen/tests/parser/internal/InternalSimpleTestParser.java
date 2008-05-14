@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-13 15:03:38
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-14 13:50:28
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
@@ -12,16 +12,16 @@ import java.util.ArrayList;
 
 public class InternalSimpleTestParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_LEXER_BODY", "RULE_INT", "RULE_STRING", "RULE_SL_COMMENT", "RULE_WS", "RULE_ML_COMMENT"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_WS", "RULE_ML_COMMENT", "RULE_LEXER_BODY", "RULE_STRING", "RULE_INT", "RULE_SL_COMMENT"
     };
-    public static final int RULE_ML_COMMENT=10;
+    public static final int RULE_ML_COMMENT=6;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
+    public static final int RULE_WS=5;
+    public static final int RULE_INT=9;
     public static final int EOF=-1;
-    public static final int RULE_INT=6;
-    public static final int RULE_STRING=7;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int RULE_LEXER_BODY=5;
+    public static final int RULE_STRING=8;
+    public static final int RULE_SL_COMMENT=10;
+    public static final int RULE_LEXER_BODY=7;
 
         public InternalSimpleTestParser(TokenStream input) {
             super(input);
@@ -43,14 +43,14 @@ public class InternalSimpleTestParser extends Parser {
 
     // $ANTLR start parse
     // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:23:1: parse returns [Object current] : ruleFoo EOF ;
-    public Object parse() throws RecognitionException {
+    public final Object parse() throws RecognitionException {
         Object current = null;
 
         Object ruleFoo1 = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:24:2: ( ruleFoo EOF )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:23:32: ( ruleFoo EOF )
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:24:2: ruleFoo EOF
             {
             pushFollow(FOLLOW_ruleFoo_in_parse43);
@@ -76,13 +76,13 @@ public class InternalSimpleTestParser extends Parser {
 
     // $ANTLR start ruleFoo
     // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:27:1: ruleFoo returns [Object current=null] : (lv_name= RULE_ID ) ;
-    public Object ruleFoo() throws RecognitionException {
+    public final Object ruleFoo() throws RecognitionException {
         Object current = null;
 
         Token lv_name=null;
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:27:41: ( (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:27:39: ( (lv_name= RULE_ID ) )
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:27:41: (lv_name= RULE_ID )
             {
             Object temp=null;

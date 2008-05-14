@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g 2008-05-13 15:03:40
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g 2008-05-14 13:50:31
 
 package org.eclipse.xtext.metamodelreferencing.tests.parser.internal; 
 
@@ -12,15 +12,15 @@ import java.util.ArrayList;
 
 public class InternalMetamodelRefTestParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_INT", "RULE_LEXER_BODY", "RULE_SL_COMMENT", "RULE_WS"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_WS", "RULE_LEXER_BODY", "RULE_ML_COMMENT", "RULE_SL_COMMENT"
     };
-    public static final int RULE_ML_COMMENT=6;
+    public static final int RULE_ML_COMMENT=9;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=10;
+    public static final int RULE_WS=7;
     public static final int EOF=-1;
-    public static final int RULE_INT=7;
+    public static final int RULE_INT=6;
     public static final int RULE_STRING=5;
-    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_SL_COMMENT=10;
     public static final int RULE_LEXER_BODY=8;
 
         public InternalMetamodelRefTestParser(TokenStream input) {
@@ -43,14 +43,14 @@ public class InternalMetamodelRefTestParser extends Parser {
 
     // $ANTLR start parse
     // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:23:1: parse returns [Object current] : ruleFoo EOF ;
-    public Object parse() throws RecognitionException {
+    public final Object parse() throws RecognitionException {
         Object current = null;
 
         Object ruleFoo1 = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:24:2: ( ruleFoo EOF )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:23:32: ( ruleFoo EOF )
             // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:24:2: ruleFoo EOF
             {
             pushFollow(FOLLOW_ruleFoo_in_parse43);
@@ -76,7 +76,7 @@ public class InternalMetamodelRefTestParser extends Parser {
 
     // $ANTLR start ruleFoo
     // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:27:1: ruleFoo returns [Object current=null] : ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) ;
-    public Object ruleFoo() throws RecognitionException {
+    public final Object ruleFoo() throws RecognitionException {
         Object current = null;
 
         Token lv_name=null;
@@ -84,7 +84,7 @@ public class InternalMetamodelRefTestParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:27:41: ( ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:27:39: ( ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) )
             // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:27:41: ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* )
             {
             Object temp=null;
@@ -149,13 +149,13 @@ public class InternalMetamodelRefTestParser extends Parser {
 
     // $ANTLR start ruleNameRef
     // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:39:1: ruleNameRef returns [Object current=null] : (lv_name= RULE_STRING ) ;
-    public Object ruleNameRef() throws RecognitionException {
+    public final Object ruleNameRef() throws RecognitionException {
         Object current = null;
 
         Token lv_name=null;
 
         try {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:39:45: ( (lv_name= RULE_STRING ) )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:39:43: ( (lv_name= RULE_STRING ) )
             // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:39:45: (lv_name= RULE_STRING )
             {
             Object temp=null;
