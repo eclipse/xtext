@@ -7,11 +7,7 @@ public class SimpleTestASTFactory extends org.eclipse.xtext.core.parser.Abstract
 	{
 	
 		map.put(null, new EPackage[] {
-		
-			
-			org.eclipse.xtext.grammargen.tests.SimpleTestEPackageAccess.getSimpleTestEPackage()
-			
-		
+			org.eclipse.xtext.grammargen.tests.SimpleTestConstants.getSimpleTestEPackage()
 		});
 	
 	};

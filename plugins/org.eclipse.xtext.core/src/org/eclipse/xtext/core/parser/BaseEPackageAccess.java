@@ -19,9 +19,14 @@ public abstract class BaseEPackageAccess {
 		return package1;
 	}
 	
-	protected static EPackage loadEcoreFile(ClassLoader loader, String string) {
+	protected static Resource loadResource(ClassLoader loader, String string) {
 		InputStream in = loader.getResourceAsStream(string);
-		Resource resource = new ResourceSetImpl().createResource(URI.createURI("classpath:/"+string));
+		if (in ==null) 
+			throw new IllegalArgumentException("Couldn't load resource from classpath : "+string);
+		URI uri = URI.createURI("classpath:/"+string);
+		Resource resource = new ResourceSetImpl().createResource(uri);
+		if (resource ==null) 
+			throw new IllegalArgumentException("Couldn't create resource for URI : "+uri);
 		try {
 			resource.load(in, null);
 		} catch (IOException e) {
@@ -31,6 +36,16 @@ public abstract class BaseEPackageAccess {
 		if (contents.size()!=1) {
 			throw new IllegalStateException("loading classpath:"+string+" : Expected one root element but found "+contents.size());
 		}
-		return (EPackage) contents.get(0);
+		return resource;
+	}
+	
+	protected static EPackage loadEcoreFile(ClassLoader loader, String string) {
+		Resource resource = loadResource(loader, string);
+		return (EPackage) resource.getContents().get(0);
+	}
+	
+	protected static Object loadGrammarFile(ClassLoader loader, String string) {
+		Resource resource = loadResource(loader, string);
+		return resource.getContents().get(0);
 	}
 }
