@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g 2008-05-13 15:03:38
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g 2008-05-14 13:50:29
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
@@ -12,15 +12,15 @@ import java.util.ArrayList;
 
 public class InternalSimpleTest2Parser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_SL_COMMENT", "RULE_LEXER_BODY", "RULE_WS", "RULE_ML_COMMENT", "RULE_STRING", "'optional'", "'keyword'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_WS", "RULE_LEXER_BODY", "RULE_SL_COMMENT", "RULE_STRING", "RULE_ML_COMMENT", "'optional'", "'keyword'", "'{'", "'}'"
     };
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=10;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=8;
+    public static final int RULE_WS=6;
     public static final int EOF=-1;
     public static final int RULE_INT=5;
-    public static final int RULE_STRING=10;
-    public static final int RULE_SL_COMMENT=6;
+    public static final int RULE_STRING=9;
+    public static final int RULE_SL_COMMENT=8;
     public static final int RULE_LEXER_BODY=7;
 
         public InternalSimpleTest2Parser(TokenStream input) {
@@ -43,14 +43,14 @@ public class InternalSimpleTest2Parser extends Parser {
 
     // $ANTLR start parse
     // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:23:1: parse returns [Object current] : ruleModel EOF ;
-    public Object parse() throws RecognitionException {
+    public final Object parse() throws RecognitionException {
         Object current = null;
 
         Object ruleModel1 = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:24:2: ( ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:23:32: ( ruleModel EOF )
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:24:2: ruleModel EOF
             {
             pushFollow(FOLLOW_ruleModel_in_parse43);
@@ -76,14 +76,14 @@ public class InternalSimpleTest2Parser extends Parser {
 
     // $ANTLR start ruleModel
     // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:27:1: ruleModel returns [Object current=null] : (lv_contents= ruleChild )* ;
-    public Object ruleModel() throws RecognitionException {
+    public final Object ruleModel() throws RecognitionException {
         Object current = null;
 
         Object lv_contents = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:27:43: ( (lv_contents= ruleChild )* )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:27:41: ( (lv_contents= ruleChild )* )
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:27:43: (lv_contents= ruleChild )*
             {
             Object temp=null;
@@ -133,7 +133,7 @@ public class InternalSimpleTest2Parser extends Parser {
 
     // $ANTLR start ruleChild
     // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:34:1: ruleChild returns [Object current=null] : ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) ;
-    public Object ruleChild() throws RecognitionException {
+    public final Object ruleChild() throws RecognitionException {
         Object current = null;
 
         Token lv_optional=null;
@@ -141,7 +141,7 @@ public class InternalSimpleTest2Parser extends Parser {
         Token lv_number=null;
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:34:43: ( ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:34:41: ( ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) )
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:34:43: ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' )
             {
             Object temp=null;

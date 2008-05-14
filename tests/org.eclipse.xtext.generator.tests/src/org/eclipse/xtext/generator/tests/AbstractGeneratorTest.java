@@ -16,6 +16,7 @@ import junit.framework.TestCase;
 
 import org.apache.tools.ant.filters.StringInputStream;
 import org.eclipse.xtext.core.parser.IElementFactory;
+import org.eclipse.xtext.core.parser.IParseErrorHandler;
 import org.openarchitectureware.xtend.XtendFacade;
 
 /**
@@ -24,27 +25,38 @@ import org.openarchitectureware.xtend.XtendFacade;
  */
 public abstract class AbstractGeneratorTest extends TestCase {
 
-	public Object parse(String model, IElementFactory factory) throws Exception {
-		String name = getClass().getPackage().getName() + ".parser." + getClass().getSimpleName();
-		String parser = name + "Parser";
-
-		Class<?> parserClass = getClass().getClassLoader().loadClass(parser);
-		Object parserInstance = parserClass.newInstance();
-		return parserClass.getMethod("parse", InputStream.class, IElementFactory.class).invoke(parserInstance,
-				new StringInputStream(model), factory);
+	protected Class<?> getTheClass() {
+		return getClass();
 	}
 
-	public Object parse(InputStream model, IElementFactory factory) throws Exception {
-		String name = getClass().getPackage().getName() + ".parser." + getClass().getSimpleName();
+	public Object parse(String model, IElementFactory factory) throws Exception {
+		return parse(model, factory, null);
+	}
+
+	public Object parse(String model, IElementFactory factory, IParseErrorHandler errorHandler) throws Exception {
+		return parse(new StringInputStream(model),factory,errorHandler);
+	}
+
+	public Object parse(InputStream model, IElementFactory factory, IParseErrorHandler errorHandler) throws Exception {
+		String name = getTheClass().getPackage().getName() + ".parser." + getTheClass().getSimpleName();
 		String parser = name + "Parser";
 
-		Class<?> parserClass = getClass().getClassLoader().loadClass(parser);
+		Class<?> parserClass = getTheClass().getClassLoader().loadClass(parser);
 		Object parserInstance = parserClass.newInstance();
-		return parserClass.getMethod("parse", InputStream.class, IElementFactory.class).invoke(parserInstance, model,
-				factory);
+		if (errorHandler != null) {
+			return parserClass.getMethod("parse", InputStream.class, IElementFactory.class, IParseErrorHandler.class)
+					.invoke(parserInstance, model, factory, errorHandler);
+		} else {
+			return parserClass.getMethod("parse", InputStream.class, IElementFactory.class).invoke(parserInstance,
+					model, factory);
+		}
 	}
 
 	public List<Invocation> parse(String model) throws Exception {
+		return parse(model, (IParseErrorHandler) null);
+	}
+
+	public List<Invocation> parse(String model, IParseErrorHandler errorHandler) throws Exception {
 		final List<Invocation> calls = new ArrayList<Invocation>();
 		parse(model, new IElementFactory() {
 
@@ -60,7 +72,7 @@ public abstract class AbstractGeneratorTest extends TestCase {
 			public void set(Object _this, String feature, Object value) {
 				calls.add(new Invocation("set", feature, value));
 			}
-		});
+		}, errorHandler);
 		return calls;
 	}
 

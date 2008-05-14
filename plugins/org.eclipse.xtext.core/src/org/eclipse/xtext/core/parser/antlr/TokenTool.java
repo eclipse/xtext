@@ -21,7 +21,7 @@ public class TokenTool {
 	 * @return
 	 */
 	public static String getText(Token t) {
-		return t.getText();
+		return t!=null ? t.getText() : null;
 	}
 	
 	/**

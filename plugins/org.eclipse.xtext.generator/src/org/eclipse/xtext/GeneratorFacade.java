@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
+import org.eclipse.xtext.grammargen.GenerateTokensEnum;
 import org.eclipse.xtext.util.GenProperties;
 import org.eclipse.xtext.xtextutil.XtextutilPackage;
 import org.openarchitectureware.expression.ExecutionContextImpl;
@@ -65,6 +66,9 @@ public class GeneratorFacade {
 
 		Tool antlr = new Tool(new String[] { srcGenPath+"/" + grammar });
 		antlr.process();
+		
+		// generate Lexer constants
+		GenerateTokensEnum.doGenerate(srcGenPath, languageNamespace, languageName);
 
 		// generate EPackage
 		ExecutionContextImpl executionContext = new ExecutionContextImpl();

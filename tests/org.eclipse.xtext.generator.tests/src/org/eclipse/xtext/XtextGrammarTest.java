@@ -59,7 +59,7 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 	
 	public void testInstantiateXtextGrammar() throws Exception {
 		InputStream bootGrammar = getClass().getClassLoader().getResourceAsStream(getClass().getName().replace('.','/')+".xtext");
-		EObject grammar = (EObject) parse(bootGrammar , new XtextGrammarTestASTFactory());
+		EObject grammar = (EObject) parse(bootGrammar , new XtextGrammarTestASTFactory(),null);
 		assertWithXtend("true","parserRules.select(e|e.name=='AbstractToken').first()!=null",grammar);
 		assertWithXtend("'AbstractElement'","parserRules.select(e|e.name=='AbstractToken').first().type.name",grammar);
 //		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
