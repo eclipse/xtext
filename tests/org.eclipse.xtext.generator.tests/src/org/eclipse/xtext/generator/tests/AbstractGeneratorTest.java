@@ -14,6 +14,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.antlr.runtime.TokenStream;
 import org.apache.tools.ant.filters.StringInputStream;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.IParseErrorHandler;
@@ -71,6 +72,17 @@ public abstract class AbstractGeneratorTest extends TestCase {
 
 			public void set(Object _this, String feature, Object value) {
 				calls.add(new Invocation("set", feature, value));
+			}
+
+			public void associate(Object parserNode, Object astNode) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public Object createParserNode(TokenStream input,
+					Object currentGrammarElement, Object parentParserNode) {
+				// TODO Auto-generated method stub
+				return null;
 			}
 		}, errorHandler);
 		return calls;

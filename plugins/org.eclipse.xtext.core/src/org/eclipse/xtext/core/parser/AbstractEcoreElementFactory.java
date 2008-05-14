@@ -12,11 +12,16 @@ package org.eclipse.xtext.core.parser;
 import java.util.Collection;
 
 import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenStream;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.parsetree.ParserNode;
+import org.eclipse.xtext.parsetree.ParserNodeAdapter;
+import org.eclipse.xtext.parsetree.ParserNodeAdapterFactory;
+import org.eclipse.xtext.parsetree.ParsetreeFactory;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -41,9 +46,11 @@ public abstract class AbstractEcoreElementFactory implements IElementFactory {
 			EClassifier classifier = package1.getEClassifier(typeName);
 			if (classifier instanceof EClass) {
 				EClass clazz = (EClass) classifier;
-				return clazz.getEPackage().getEFactoryInstance().create(clazz);
+				EObject newObject = clazz.getEPackage().getEFactoryInstance().create(clazz);
+				return newObject;
 			}
 		}
+		
 		return null;
 	}
 		
@@ -65,4 +72,18 @@ public abstract class AbstractEcoreElementFactory implements IElementFactory {
 	
 	protected abstract EPackage[] getEPackages(String alias);
 	
+	public Object createParserNode(TokenStream input, Object currentGrammarElement, 
+			Object parentParserNode) {
+		Token token = input.LT(0);
+		ParserNode parserNode = ParsetreeFactory.eINSTANCE.createParserNode();
+		parserNode.setText(token.getText());
+		parserNode.setGrammarElement((EObject) currentGrammarElement);
+		return parserNode;
+	}
+	
+	public void associate(Object parserNode, Object astNode) {
+		((ParserNode) parserNode).setElement((EObject) astNode);
+		Object nodeAdapter = ParserNodeAdapterFactory.INSTANCE.adapt(astNode, ParserNode.class);
+		((ParserNodeAdapter) nodeAdapter).setParserNode((ParserNode) parserNode);
+	}
 }

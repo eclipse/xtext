@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.core/emf-gen"
+    modelPluginID="org.eclipse.xtext.core" modelName="Parsetree" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>parsetree.ecore</foreignModel>
+  <genPackages prefix="Parsetree" basePackage="org.eclipse.xtext" disposableProviderFactory="true"
+      ecorePackage="parsetree.ecore#/">
+    <genClasses ecoreClass="parsetree.ecore#//ParserNode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//ParserNode/text"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference parsetree.ecore#//ParserNode/element"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference parsetree.ecore#//ParserNode/grammarElement"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
