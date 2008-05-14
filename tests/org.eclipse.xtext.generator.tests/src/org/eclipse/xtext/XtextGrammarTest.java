@@ -77,7 +77,7 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 		ctx.registerMetaModel(new EmfRegistryMetaModel() {
 			@Override
 			protected EPackage[] allPackages() {
-				return new EPackage[]{XtextGrammarTestEPackageAccess.getXtextTestEPackage()};
+				return new EPackage[]{XtextGrammarTestConstants.getXtextTestEPackage()};
 			}
 		});
 		return XtendFacade.create(ctx);
