@@ -14,41 +14,37 @@
 «EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
 
 «DEFINE file FOR Grammar»
-«FILE pathName()+'/'+languageName()+'EPackageAccess.java'-»
+«FILE pathName()+'/'+languageName()+'Constants.java'-»
 package «packageName()»;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.Grammar;
 
-public class «languageName()»EPackageAccess extends org.eclipse.xtext.core.parser.BaseEPackageAccess {
-
-	static {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new XMIResourceFactoryImpl());
+public class «languageName()»Constants extends org.eclipse.xtext.core.parser.BaseEPackageAccess {
+	public static final String «languageName().toUpperCase()»_GRAMMAR_CP_URI = "«pathName()»/«languageName()».xmi";
+	private static Grammar GRAMMAR = null;
+	
+	public static Grammar get«languageName()»Grammar() {	
+		if (GRAMMAR==null) {
+			GRAMMAR = (Grammar) loadGrammarFile(«languageName()»Constants.class.getClassLoader(),«languageName().toUpperCase()»_GRAMMAR_CP_URI);
+		}
+		return GRAMMAR;
 	}
+	
 
 	«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm»
 	public static final String «gmm.name.toUpperCase()»_NS_URI = "«gmm.nsURI.trimFromStartAndEnd(1)»";
+	public static final String «gmm.name.toUpperCase()»_CP_URI = "«pathName()»/«gmm.name».ecore";
 	
 	public static EPackage get«gmm.name»EPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(«gmm.name.toUpperCase()»_NS_URI)) {
-			EPackage p = loadEcoreFile(«languageName()»EPackageAccess.class.getClassLoader(),"«pathName()»/«gmm.name».ecore");
+			EPackage p = loadEcoreFile(«languageName()»Constants.class.getClassLoader(),«gmm.name.toUpperCase()»_CP_URI);
 			if (p!=null) {
 				EPackage.Registry.INSTANCE.put(«gmm.name.toUpperCase()»_NS_URI,p);
 			}
 		}
 		return EPackage.Registry.INSTANCE.getEPackage(«gmm.name.toUpperCase()»_NS_URI);
 	}
-	
 	«ENDFOREACH»
 
 }

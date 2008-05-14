@@ -24,13 +24,13 @@ public class «factoryName()» extends org.eclipse.xtext.core.parser.AbstractEcore
 	{
 	«FOREACH metamodelDeclarations.alias.toSet() AS name »
 		map.put(«name==null?'null':'"'+name+'"'», new EPackage[] {
-		«FOREACH metamodelDeclarations.select(mmd| mmd.alias==name) AS mmd SEPARATOR ','»
-			«IF GeneratedMetamodel.isInstance(mmd)»
-			«packageName()».«languageName()»EPackageAccess.get«((GeneratedMetamodel)mmd).name»EPackage()
-			«ELSE»
-			«packageName()».«languageName()»EPackageAccess.get(«((ReferencedMetamodel)mmd).uri»)
-			«ENDIF»
-		«ENDFOREACH»
+		«FOREACH metamodelDeclarations.select(mmd| mmd.alias==name) AS mmd SEPARATOR ','-»
+			«IF GeneratedMetamodel.isInstance(mmd)-»
+			«packageName()».«languageName()»Constants.get«((GeneratedMetamodel)mmd).name»EPackage()
+			«ELSE-»
+			«packageName()».«languageName()»Constants.get(«((ReferencedMetamodel)mmd).uri»)
+			«ENDIF-»
+		«ENDFOREACH-»
 		});
 	«ENDFOREACH»
 	};
