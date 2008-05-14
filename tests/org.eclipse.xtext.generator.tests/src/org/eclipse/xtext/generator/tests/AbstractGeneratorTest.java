@@ -25,7 +25,15 @@ import org.openarchitectureware.xtend.XtendFacade;
  * 
  */
 public abstract class AbstractGeneratorTest extends TestCase {
-
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		Class<?> class1 = getTheClass();
+		Class<?> setupClass = class1.getClassLoader().loadClass(class1.getName()+"StandaloneSetup");
+		setupClass.getMethod("doSetup").invoke(null);
+	}
+	
 	protected Class<?> getTheClass() {
 		return getClass();
 	}
