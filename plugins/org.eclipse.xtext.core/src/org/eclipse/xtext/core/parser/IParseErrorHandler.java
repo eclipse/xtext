@@ -13,5 +13,5 @@ package org.eclipse.xtext.core.parser;
  *
  */
 public interface IParseErrorHandler {
-	public void handleParserError(int offset, int length, String text, String message);
+	public void handleParserError(int line, int offset, int length, int token, String text, String message, Object context);
 }

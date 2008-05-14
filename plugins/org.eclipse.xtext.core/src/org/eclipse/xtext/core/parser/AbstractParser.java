@@ -41,8 +41,8 @@ public abstract class AbstractParser implements IParser {
 	protected IParseErrorHandler getDefaultHandler() {
 		return new IParseErrorHandler() {
 
-			public void handleParserError(int offset, int length, String text,
-					String message) {
+			public void handleParserError(int line, int offset, int length, int tokenType, String text,
+					String message, Object context) {
 				throw new ParseException(offset,length,text,message);
 			}};
 	}
