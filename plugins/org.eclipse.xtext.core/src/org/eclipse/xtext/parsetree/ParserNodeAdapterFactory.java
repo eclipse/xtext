@@ -18,6 +18,6 @@ public class ParserNodeAdapterFactory extends AdapterFactoryImpl {
 	
 	@Override
 	public boolean isFactoryForType(Object type) {
-		return type == ParserNode.class;
+		return type == AbstractParserNode.class;
 	}
 }

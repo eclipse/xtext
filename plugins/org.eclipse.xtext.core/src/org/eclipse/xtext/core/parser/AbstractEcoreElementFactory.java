@@ -12,78 +12,72 @@ package org.eclipse.xtext.core.parser;
 import java.util.Collection;
 
 import org.antlr.runtime.Token;
-import org.antlr.runtime.TokenStream;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.parsetree.ParserNode;
+import org.eclipse.xtext.parsetree.AbstractParserNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParserNodeAdapter;
 import org.eclipse.xtext.parsetree.ParserNodeAdapterFactory;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
 public abstract class AbstractEcoreElementFactory implements IElementFactory {
+
 	public Object create(String fullTypeName) {
 		String[] split = fullTypeName.split("::");
 		String typeName = fullTypeName;
 		String alias = null;
-		if (split.length>1) {
+		if (split.length > 1) {
 			alias = split[0];
 			typeName = split[1];
 		}
 		EPackage[] packages = getEPackages(alias);
-		if (packages == null || packages.length==0) {
-			throw new IllegalStateException("Couldn't find any epackages for alias '"+alias+"'");
+		if (packages == null || packages.length == 0) {
+			throw new IllegalStateException(
+					"Couldn't find any epackages for alias '" + alias + "'");
 		}
 		for (EPackage package1 : packages) {
-			if (package1==null)
-				throw new IllegalStateException("Problems loading EPackages for alias '"+alias+"' - one entry was null.");
+			if (package1 == null)
+				throw new IllegalStateException(
+						"Problems loading EPackages for alias '" + alias
+								+ "' - one entry was null.");
 			EClassifier classifier = package1.getEClassifier(typeName);
 			if (classifier instanceof EClass) {
 				EClass clazz = (EClass) classifier;
-				EObject newObject = clazz.getEPackage().getEFactoryInstance().create(clazz);
+				EObject newObject = clazz.getEPackage().getEFactoryInstance()
+						.create(clazz);
 				return newObject;
 			}
 		}
-		
+
 		return null;
 	}
-		
+
 	public void set(Object _this, String feature, Object value) {
 		if (value instanceof Token) {
-			value = ((Token)value).getText();
+			value = ((Token) value).getText();
 		}
 		EObject eo = (EObject) _this;
-		EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
+		EStructuralFeature structuralFeature = eo.eClass()
+				.getEStructuralFeature(feature);
 		eo.eSet(structuralFeature, value);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void add(Object _this, String feature, Object value) {
 		EObject eo = (EObject) _this;
-		EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
-		((Collection)eo.eGet(structuralFeature)).add(value);
+		EStructuralFeature structuralFeature = eo.eClass()
+				.getEStructuralFeature(feature);
+		((Collection) eo.eGet(structuralFeature)).add(value);
 	}
-	
+
 	protected abstract EPackage[] getEPackages(String alias);
-	
-	public Object createParserNode(TokenStream input, Object currentGrammarElement, 
-			Object parentParserNode) {
-		Token token = input.LT(0);
-		ParserNode parserNode = ParsetreeFactory.eINSTANCE.createParserNode();
-		parserNode.setText(token.getText());
-		parserNode.setGrammarElement((EObject) currentGrammarElement);
-		return parserNode;
-	}
-	
-	public void associate(Object parserNode, Object astNode) {
-		((ParserNode) parserNode).setElement((EObject) astNode);
-		Object nodeAdapter = ParserNodeAdapterFactory.INSTANCE.adapt(astNode, ParserNode.class);
-		((ParserNodeAdapter) nodeAdapter).setParserNode((ParserNode) parserNode);
-	}
+
 }

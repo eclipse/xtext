@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="&quot;http://eclipse.org/xtext/tests/SimpleTest2&quot;" name="SimpleTest2"/>
   <parserRules name="Model">
-    <alternatives xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="contents">
+    <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="contents" operator="+=">
       <terminal xsi:type="xtext:RuleCall" name="Child"/>
     </alternatives>
   </parserRules>
@@ -11,16 +12,16 @@
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Group">
             <abstractTokens xsi:type="xtext:Group">
-              <abstractTokens xsi:type="xtext:Assignment" cardinality="?" operator="?=" feature="optional">
+              <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="optional" operator="?=">
                 <terminal xsi:type="xtext:Keyword" value="'optional'"/>
               </abstractTokens>
               <abstractTokens xsi:type="xtext:Keyword" value="&quot;keyword&quot;"/>
             </abstractTokens>
-            <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+            <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
               <terminal xsi:type="xtext:RuleCall" name="ID"/>
             </abstractTokens>
           </abstractTokens>
-          <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="number">
+          <abstractTokens xsi:type="xtext:Assignment" feature="number" operator="=">
             <terminal xsi:type="xtext:RuleCall" name="INT"/>
           </abstractTokens>
         </abstractTokens>
@@ -29,5 +30,4 @@
       <abstractTokens xsi:type="xtext:Keyword" value="'}'"/>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="&quot;http://eclipse.org/xtext/tests/SimpleTest2&quot;" name="SimpleTest2"/>
 </xtext:Grammar>

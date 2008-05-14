@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="xtext" uri="&quot;http://www.eclipse.org/2008/Xtext&quot;"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="&quot;http://eclipse.org/xtext/tests/SimpleTest&quot;" name="SimpleTest"/>
   <parserRules name="Foo">
     <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+      <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
         <terminal xsi:type="xtext:RuleCall" name="ID"/>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="nameRefs">
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="nameRefs" operator="+=">
         <terminal xsi:type="xtext:RuleCall" name="NameRef"/>
       </abstractTokens>
     </alternatives>
   </parserRules>
   <parserRules name="NameRef">
-    <alternatives xsi:type="xtext:Assignment" operator="=" feature="name">
+    <type alias="xtext" name="RuleCall"/>
+    <alternatives xsi:type="xtext:Assignment" feature="name" operator="=">
       <terminal xsi:type="xtext:RuleCall" name="STRING"/>
     </alternatives>
-    <type name="RuleCall" alias="xtext"/>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="xtext" uri="&quot;http://www.eclipse.org/2008/Xtext&quot;"/>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="&quot;http://eclipse.org/xtext/tests/SimpleTest&quot;" name="SimpleTest"/>
 </xtext:Grammar>

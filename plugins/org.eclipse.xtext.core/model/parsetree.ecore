@@ -3,9 +3,19 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="parsetree"
     nsURI="http://www.eclipse.org/2008/xtext/parsetree" nsPrefix="parsetree">
-  <eClassifiers xsi:type="ecore:EClass" name="ParserNode">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeNode" eSuperTypes="#//AbstractParserNode">
     <eStructuralFeatures xsi:type="ecore:EReference" name="grammarElement" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//AbstractParserNode" eOpposite="#//AbstractParserNode/parent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractParserNode" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//CompositeNode"
+        eOpposite="#//CompositeNode/children"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="element" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LeafNode" eSuperTypes="#//AbstractParserNode">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="grammarElement" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="feature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

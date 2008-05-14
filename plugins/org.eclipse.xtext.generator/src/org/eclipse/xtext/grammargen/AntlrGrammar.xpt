@@ -26,10 +26,11 @@ package «packageName()».parser.internal;
 package «packageName()».parser.internal; 
 
 import org.eclipse.xtext.core.parser.IElementFactory;
+import org.eclipse.xtext.parsetree.*;
+import org.eclipse.emf.ecore.EObject;
 }
 
 @parser::members {
-private Object currentParserNode;
 
 private IElementFactory factory;
 public Internal«languageName()»Parser(TokenStream input, IElementFactory factory) {
@@ -37,9 +38,42 @@ public Internal«languageName()»Parser(TokenStream input, IElementFactory factory
 	this.factory = factory;
 }
 
+private CompositeNode currentParserNode;
+
+	public CompositeNode createCompositeNode(EObject currentGrammarElement,
+			CompositeNode parentNode) {
+		CompositeNode compositeNode = ParsetreeFactory.eINSTANCE
+				.createCompositeNode();
+		compositeNode.setGrammarElement(currentGrammarElement);
+		parentNode.getChildren().add(compositeNode);
+		return compositeNode;
+	}
+
+	public Object createLeafNode(String text, EObject currentGrammarElement,
+			CompositeNode parentNode, String feature) {
+		LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+		leafNode.setText(text);
+		leafNode.setGrammarElement(currentGrammarElement);
+		leafNode.setFeature(feature);
+		parentNode.getChildren().add(leafNode);
+		return leafNode;
+	}
+	
+	public void associateNodeWithAstElement(AbstractParserNode node, Object astElement) {
+		node.setElement(astElement);
+		if(astElement instanceof EObject) {
+			EObject eObject = (EObject) astElement;
+			ParserNodeAdapter adapter = (org.eclipse.xtext.parsetree.ParserNodeAdapter) 
+				org.eclipse.xtext.parsetree.ParserNodeAdapterFactory.INSTANCE.adapt(eObject, 
+					org.eclipse.xtext.parsetree.AbstractParserNode.class);
+			adapter.setParserNode(node); 
+		}
+	}
+
 }
 
 parse returns [Object current] :
+	{ currentParserNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); }
 	«parserRules.first().ruleName()» {$current=$«parserRules.first().ruleName()».current;} EOF;
 
 «EXPAND rule FOREACH parserRules»
@@ -50,8 +84,8 @@ parse returns [Object current] :
 «ENDDEFINE»
 
 «DEFINE rule FOR ParserRule»
-«ruleName()» returns [Object current=null] : {Object temp=null; currentParserNode=«EXPAND createParserNode» }
-	«EXPAND ebnf FOR this.alternatives»;
+«ruleName()» returns [Object current=null] : {Object temp=null; currentParserNode=«EXPAND createCompositeNode» }
+	«EXPAND ebnf FOR this.alternatives» { currentParserNode = currentParserNode.getParent(); };
 «ENDDEFINE»
 
 «DEFINE rule FOR LexerRule»
@@ -70,26 +104,31 @@ parse returns [Object current] :
 
 «DEFINE ebnf2 FOR Assignment»
 	«localVar()»=«EXPAND ebnf FOR terminal» {if ($current==null) {
-	$current = factory.create("«containingParserRule().getReturnTypeName()»");
-	«EXPAND associateParserNode»}factory.«setOrAdd()»($current, "«feature»",«localVar()»);}
+	$current = factory.create("«containingParserRule().getReturnTypeName()»");}
+	factory.«setOrAdd()»($current, "«feature»",«localVar()»);
+	associateNodeWithAstElement(currentParserNode, $current);}
 «ENDDEFINE»
 
 «DEFINE ebnf2 FOR Action»
 	{temp=factory.create("«currentType().qualifiedName()»");
 	 factory.«setOrAdd()»(temp, "«feature»",$current);
-	 $current = temp; temp = null;
-	 «EXPAND createParserNode»}
+	 $current = temp; 
+	 temp = null;
+	 associateNodeWithAstElement(currentParserNode, $current);}
 «ENDDEFINE»
 
-«DEFINE ebnf2 FOR Keyword»'«withoutQuotes()»' {«EXPAND createParserNode»}«ENDDEFINE»
+«DEFINE ebnf2 FOR Keyword»'«withoutQuotes()»' {«EXPAND createLeafNode»}«ENDDEFINE»
 
 «DEFINE ebnf2 FOR RuleCall-»
 «IF ParserRule.isInstance(calledRule()) && !isAssigned()»«localVar()»=«ENDIF-»
 «calledRule().ruleName()-»
 «IF ParserRule.isInstance(calledRule()) && !isAssigned()»{$current = $«localVar()».current;}«ENDIF-»
+«IF LexerRule.isInstance(calledRule())»{«EXPAND createLeafNode»}«ENDIF»
 «ENDDEFINE»
 
-«DEFINE createParserNode FOR emf::EObject-»
-factory.createParserNode(input, null, currentParserNode);«ENDDEFINE»
+«DEFINE createCompositeNode FOR ParserRule-»
+createCompositeNode(null, currentParserNode);«ENDDEFINE»
 
-«DEFINE associateParserNode FOR Object-»factory.associate(currentParserNode, $current);«ENDDEFINE»
+«DEFINE createLeafNode FOR AbstractElement-»createLeafNode(input.LT(-1).getText(), null, currentParserNode, 
+«IF isAssigned()»"«containingAssignment().feature»"«ELSE»null«ENDIF»);«ENDDEFINE»
+

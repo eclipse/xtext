@@ -8,14 +8,14 @@ public class ParserNodeAdapter implements Adapter {
 
 	private Notifier target;
 	
-	private ParserNode parserNode; 
+	private AbstractParserNode parserNode; 
 	
 	public Notifier getTarget() {
 		return target;
 	}
 
 	public boolean isAdapterForType(Object type) {
-		return type==ParserNode.class;
+		return type==AbstractParserNode.class;
 	}
 
 	public void notifyChanged(Notification notification) {
@@ -26,11 +26,11 @@ public class ParserNodeAdapter implements Adapter {
 		target = newTarget;
 	}
 
-	public ParserNode getParserNode() {
+	public AbstractParserNode getParserNode() {
 		return parserNode;
 	}
 
-	public void setParserNode(ParserNode parserNode) {
+	public void setParserNode(AbstractParserNode parserNode) {
 		this.parserNode = parserNode;
 	}
 

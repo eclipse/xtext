@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeFactoryImpl.java,v 1.1 2008/05/14 13:29:32 jkohnlein Exp $
+ * $Id: ParsetreeFactoryImpl.java,v 1.2 2008/05/14 15:56:00 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -60,7 +60,8 @@ public class ParsetreeFactoryImpl extends EFactoryImpl implements ParsetreeFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ParsetreePackage.PARSER_NODE: return createParserNode();
+			case ParsetreePackage.COMPOSITE_NODE: return createCompositeNode();
+			case ParsetreePackage.LEAF_NODE: return createLeafNode();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -71,9 +72,19 @@ public class ParsetreeFactoryImpl extends EFactoryImpl implements ParsetreeFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ParserNode createParserNode() {
-		ParserNodeImpl parserNode = new ParserNodeImpl();
-		return parserNode;
+	public CompositeNode createCompositeNode() {
+		CompositeNodeImpl compositeNode = new CompositeNodeImpl();
+		return compositeNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LeafNode createLeafNode() {
+		LeafNodeImpl leafNode = new LeafNodeImpl();
+		return leafNode;
 	}
 
 	/**
