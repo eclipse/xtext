@@ -21,7 +21,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 				errors.add(text);
 			}
 		});
-		//TODO assertEquals("%",errors.get(0));
+		assertEquals("%",errors.get(0));
 		assertEquals(1, errors.size());
 	}
 }
