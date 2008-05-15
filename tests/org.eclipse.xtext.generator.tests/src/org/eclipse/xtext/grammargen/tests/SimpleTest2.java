@@ -11,6 +11,7 @@ package org.eclipse.xtext.grammargen.tests;
 import java.util.List;
 
 import org.antlr.runtime.CommonToken;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.generator.tests.Invocation;
 
@@ -38,7 +39,7 @@ public class SimpleTest2 extends AbstractGeneratorTest {
 		
 		assertEquals("add", parse.get(4).method);
 		assertEquals("contents", parse.get(4).feature);
-		assertEquals("Child",parse.get(4).param);
+		assertEquals("Child",((EClass)parse.get(4).param).getName());
 	}
 	
 	
