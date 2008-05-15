@@ -35,17 +35,17 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 			System.out.println(invocation);
 		}
 		assertEquals("create(GeneratedMetamodel)", iter.next().toString());
-		assertEquals("set(name,[@2,9:11='foo',<4>,1:9])", iter.next().toString());
-		assertEquals("set(nsURI,[@4,13:17=''bar'',<5>,1:13])", iter.next().toString());
+		assertEquals("set(name,foo)", iter.next().toString());
+		assertEquals("set(nsURI,'bar')", iter.next().toString());
 		assertEquals("create(Grammar)", iter.next().toString());
 		assertEquals("add(metamodelDeclarations,GeneratedMetamodel)", iter.next().toString());
 		assertEquals("create(ParserRule)", iter.next().toString());
-		assertEquals("set(name,[@6,19:21='Foo',<4>,1:19])", iter.next().toString());
+		assertEquals("set(name,Foo)", iter.next().toString());
 		assertEquals("create(Assignment)", iter.next().toString());
-		assertEquals("set(feature,[@10,25:28='name',<4>,1:25])", iter.next().toString());
-		assertEquals("set(operator,[@11,29:29='=',<25>,1:29])", iter.next().toString());
+		assertEquals("set(feature,name)", iter.next().toString());
+		assertEquals("set(operator,=)", iter.next().toString());
 		assertEquals("create(RuleCall)", iter.next().toString());
-		assertEquals("set(name,[@12,30:31='ID',<4>,1:30])", iter.next().toString());
+		assertEquals("set(name,ID)", iter.next().toString());
 		assertEquals("set(terminal,RuleCall)", iter.next().toString());
 		assertEquals("set(alternatives,Assignment)", iter.next().toString());
 		assertEquals("add(parserRules,ParserRule)", iter.next().toString());
