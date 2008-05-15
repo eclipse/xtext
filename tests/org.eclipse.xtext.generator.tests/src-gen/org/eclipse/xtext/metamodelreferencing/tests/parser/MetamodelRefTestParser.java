@@ -24,8 +24,7 @@ public class MetamodelRefTestParser extends org.eclipse.xtext.core.parser.Abstra
 			@Override
 			public void reportError(RecognitionException re) {
 				Token t = AntlrExceptionTool.getToken(re);
-				handler.handleParserError(TokenTool.getLine(t), TokenTool.getOffset(t), TokenTool.getLength(t), t
-						.getType(), TokenTool.getText(t), getErrorMessage(
+				handler.handleParserError(TokenTool.getLine(t), TokenTool.getOffset(t), TokenTool.getLength(t), -1, TokenTool.getText(t), getErrorMessage(
 						re, getTokenNames()), re);
 			}
 		};

@@ -1,5 +1,5 @@
 
-package org.eclipse.xtext.grammargen.tests.parser;
+package org.eclipse.xtext.dummy.parser;
 
 
 import org.antlr.runtime.ANTLRInputStream;
@@ -12,15 +12,15 @@ import org.eclipse.xtext.core.parser.antlr.AntlrExceptionTool;
 import org.eclipse.xtext.core.parser.antlr.TokenTool;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.grammargen.tests.parser.internal.InternalSimpleTestLexer;
-import org.eclipse.xtext.grammargen.tests.parser.internal.InternalSimpleTestParser;
+import org.eclipse.xtext.dummy.parser.internal.InternalDummyLanguageLexer;
+import org.eclipse.xtext.dummy.parser.internal.InternalDummyLanguageParser;
 
 
-public class SimpleTestParser extends org.eclipse.xtext.core.parser.AbstractParser {
+public class DummyLanguageParser extends org.eclipse.xtext.core.parser.AbstractParser {
 	@Override
 	protected EObject parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
-		InternalSimpleTestLexer lexer = new InternalSimpleTestLexer(in) {
+		InternalDummyLanguageLexer lexer = new InternalDummyLanguageLexer(in) {
 			@Override
 			public void reportError(RecognitionException re) {
 				Token t = AntlrExceptionTool.getToken(re);
@@ -29,7 +29,7 @@ public class SimpleTestParser extends org.eclipse.xtext.core.parser.AbstractPars
 			}
 		};
 		CommonTokenStream stream = new CommonTokenStream(lexer);
-		InternalSimpleTestParser parser = new InternalSimpleTestParser(
+		InternalDummyLanguageParser parser = new InternalDummyLanguageParser(
 				stream, factory) {
 			@Override
 			public void reportError(RecognitionException re) {

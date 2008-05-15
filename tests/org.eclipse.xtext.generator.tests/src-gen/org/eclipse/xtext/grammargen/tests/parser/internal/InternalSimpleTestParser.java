@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-15 14:54:05
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-15 15:08:56
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
@@ -14,17 +14,17 @@ import java.util.ArrayList;
 
 public class InternalSimpleTestParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_LEXER_BODY", "RULE_WS", "RULE_ML_COMMENT", "RULE_STRING", "RULE_SL_COMMENT", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_LEXER_BODY", "RULE_INT", "RULE_WS", "RULE_SL_COMMENT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_ANY_OTHER"
     };
-    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ML_COMMENT=10;
     public static final int RULE_ID=4;
     public static final int RULE_WS=7;
     public static final int EOF=-1;
-    public static final int RULE_INT=5;
+    public static final int RULE_INT=6;
     public static final int RULE_STRING=9;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=10;
-    public static final int RULE_LEXER_BODY=6;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_LEXER_BODY=5;
 
         public InternalSimpleTestParser(TokenStream input) {
             super(input);
