@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GeneratedMetamodelImpl.java,v 1.4 2008/05/15 14:37:59 sefftinge Exp $
+ * $Id: GeneratedMetamodelImpl.java,v 1.5 2008/05/15 15:53:45 jkohnlein Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -22,8 +22,8 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.GeneratedMetamodelImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GeneratedMetamodelImpl#getNsURI <em>Ns URI</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.GeneratedMetamodelImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,26 +32,6 @@ import org.eclipse.xtext.XtextPackage;
 public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl implements GeneratedMetamodel
 {
   /**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-  protected String name = NAME_EDEFAULT;
-
-		/**
 	 * The default value of the '{@link #getNsURI() <em>Ns URI</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -70,6 +50,26 @@ public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl imp
 	 * @ordered
 	 */
   protected String nsURI = NS_URI_EDEFAULT;
+
+		/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+  protected static final String NAME_EDEFAULT = null;
+
+		/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+  protected String name = NAME_EDEFAULT;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -147,10 +147,10 @@ public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl imp
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
 		switch (featureID) {
-			case XtextPackage.GENERATED_METAMODEL__NAME:
-				return getName();
 			case XtextPackage.GENERATED_METAMODEL__NS_URI:
 				return getNsURI();
+			case XtextPackage.GENERATED_METAMODEL__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -164,11 +164,11 @@ public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl imp
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
-			case XtextPackage.GENERATED_METAMODEL__NAME:
-				setName((String)newValue);
-				return;
 			case XtextPackage.GENERATED_METAMODEL__NS_URI:
 				setNsURI((String)newValue);
+				return;
+			case XtextPackage.GENERATED_METAMODEL__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -183,11 +183,11 @@ public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl imp
   public void eUnset(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.GENERATED_METAMODEL__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case XtextPackage.GENERATED_METAMODEL__NS_URI:
 				setNsURI(NS_URI_EDEFAULT);
+				return;
+			case XtextPackage.GENERATED_METAMODEL__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -202,10 +202,10 @@ public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl imp
   public boolean eIsSet(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.GENERATED_METAMODEL__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XtextPackage.GENERATED_METAMODEL__NS_URI:
 				return NS_URI_EDEFAULT == null ? nsURI != null : !NS_URI_EDEFAULT.equals(nsURI);
+			case XtextPackage.GENERATED_METAMODEL__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -221,10 +221,10 @@ public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl imp
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", nsURI: ");
+		result.append(" (nsURI: ");
 		result.append(nsURI);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

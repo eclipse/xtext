@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParserRule.java,v 1.4 2008/05/15 14:38:02 sefftinge Exp $
+ * $Id: ParserRule.java,v 1.5 2008/05/15 15:53:45 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -15,8 +15,8 @@ package org.eclipse.xtext;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.ParserRule#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ParserRule#getAlternatives <em>Alternatives</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ParserRule#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *

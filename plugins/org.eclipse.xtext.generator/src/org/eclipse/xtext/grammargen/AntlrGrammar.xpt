@@ -28,6 +28,7 @@ package «packageName()».parser.internal;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
+
 }
 
 @parser::members {
@@ -43,6 +44,7 @@ public CompositeNode createCompositeNode(EObject currentGrammarElement,
 	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
 	compositeNode.setGrammarElement(currentGrammarElement);
 	if (parentNode!=null) parentNode.getChildren().add(compositeNode);
+	compositeNode.setGrammarElement(currentGrammarElement);
 	return compositeNode;
 }
 
@@ -92,6 +94,7 @@ public void associateNodeWithAstElement(AbstractNode node, EObject astElement) {
 	
 private CompositeNode currentNode;
 
+private org.eclipse.xtext.Grammar grammar = «packageName()».«constantsClassName()».get«languageName()»Grammar();
 }
 
 parse returns [EObject current] :
@@ -149,8 +152,11 @@ parse returns [EObject current] :
 «ENDDEFINE»
 
 «DEFINE createCompositeNode FOR ParserRule-»
-createCompositeNode(null, currentNode);«ENDDEFINE»
+createCompositeNode(«EXPAND getObjectByID», currentNode);«ENDDEFINE»
 
-«DEFINE createLeafNode FOR AbstractElement-»createLeafNode(null, currentNode, 
+«DEFINE createLeafNode FOR AbstractElement-»createLeafNode(«EXPAND getObjectByID», currentNode, 
 «IF isAssigned()»"«containingAssignment().feature»"«ELSE»null«ENDIF»);«ENDDEFINE»
 
+«DEFINE getObjectByID FOR emf::EObject-»
+grammar.eResource().getEObject("«getID()»")
+«ENDDEFINE»

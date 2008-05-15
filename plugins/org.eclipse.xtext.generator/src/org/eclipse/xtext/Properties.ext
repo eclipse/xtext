@@ -21,4 +21,5 @@ packageName() :
 pathName() :
 	namespace();
 	
-	
+constantsClassName() :
+	languageName() + "Constants";

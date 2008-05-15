@@ -11,6 +11,7 @@ package org.eclipse.xtext.dummy.parser.internal;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
+
 }
 
 @parser::members {
@@ -26,6 +27,7 @@ public CompositeNode createCompositeNode(EObject currentGrammarElement,
 	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
 	compositeNode.setGrammarElement(currentGrammarElement);
 	if (parentNode!=null) parentNode.getChildren().add(compositeNode);
+	compositeNode.setGrammarElement(currentGrammarElement);
 	return compositeNode;
 }
 
@@ -75,13 +77,15 @@ public void associateNodeWithAstElement(AbstractNode node, EObject astElement) {
 	
 private CompositeNode currentNode;
 
+private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.dummy.DummyLanguageConstants.getDummyLanguageGrammar();
 }
 
 parse returns [EObject current] :
 	ruleModel {$current=$ruleModel.current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
 
-ruleModel returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleModel returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.0")
+, currentNode); }
 	
 (
 	lv_elements=
@@ -93,7 +97,8 @@ ruleElement
 	}
 )* { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
-ruleElement returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleElement returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.1")
+, currentNode); }
 	
 (
 (
@@ -105,14 +110,17 @@ ruleElement returns [EObject current=null] : {EObject temp=null; currentNode=cre
 	$current = factory.create("Element");}
 	factory.set($current, "optional",lv_optional);
 	associateNodeWithAstElement(currentNode, $current);
-createLeafNode(null, currentNode, 
+createLeafNode(grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0")
+, currentNode, 
 "optional");}
 )?
-'element' {createLeafNode(null, currentNode, 
+'element' {createLeafNode(grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1")
+, currentNode, 
 null);})
 (
 	lv_name=
-RULE_ID{createLeafNode(null, currentNode, 
+RULE_ID{createLeafNode(grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal")
+, currentNode, 
 "name");}
  {if ($current==null) {
 	$current = factory.create("Element");}
@@ -122,7 +130,8 @@ RULE_ID{createLeafNode(null, currentNode,
 ))
 (
 	lv_descriptions=
-RULE_STRING{createLeafNode(null, currentNode, 
+RULE_STRING{createLeafNode(grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal")
+, currentNode, 
 "descriptions");}
  {if ($current==null) {
 	$current = factory.create("Element");}
@@ -130,7 +139,8 @@ RULE_STRING{createLeafNode(null, currentNode,
 	associateNodeWithAstElement(currentNode, $current);
 	}
 )*)
-';' {createLeafNode(null, currentNode, 
+';' {createLeafNode(grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1")
+, currentNode, 
 null);}) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 
@@ -138,17 +148,17 @@ null);}) { currentNode = currentNode.getParent()!=null?currentNode.getParent():c
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-RULE_INT : ('0'..'9')+;
+RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+RULE_INT : ('0'..'9')+;
+
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_ANY_OTHER : .;
 

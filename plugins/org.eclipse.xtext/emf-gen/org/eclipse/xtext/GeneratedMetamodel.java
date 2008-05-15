@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GeneratedMetamodel.java,v 1.4 2008/05/15 14:38:02 sefftinge Exp $
+ * $Id: GeneratedMetamodel.java,v 1.5 2008/05/15 15:53:45 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -15,8 +15,8 @@ package org.eclipse.xtext;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.GeneratedMetamodel#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.GeneratedMetamodel#getNsURI <em>Ns URI</em>}</li>
+ *   <li>{@link org.eclipse.xtext.GeneratedMetamodel#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *

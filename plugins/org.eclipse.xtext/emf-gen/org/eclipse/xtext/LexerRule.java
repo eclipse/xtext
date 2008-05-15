@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LexerRule.java,v 1.4 2008/05/15 14:38:02 sefftinge Exp $
+ * $Id: LexerRule.java,v 1.5 2008/05/15 15:53:45 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -16,6 +16,7 @@ package org.eclipse.xtext;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.LexerRule#getBody <em>Body</em>}</li>
+ *   <li>{@link org.eclipse.xtext.LexerRule#getTokenType <em>Token Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,5 +51,31 @@ public interface LexerRule extends AbstractRule
 	 * @generated
 	 */
   void setBody(String value);
+
+		/**
+	 * Returns the value of the '<em><b>Token Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Token Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Token Type</em>' attribute.
+	 * @see #setTokenType(String)
+	 * @see org.eclipse.xtext.XtextPackage#getLexerRule_TokenType()
+	 * @model
+	 * @generated
+	 */
+	String getTokenType();
+
+		/**
+	 * Sets the value of the '{@link org.eclipse.xtext.LexerRule#getTokenType <em>Token Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Token Type</em>' attribute.
+	 * @see #getTokenType()
+	 * @generated
+	 */
+	void setTokenType(String value);
 
 } // LexerRule

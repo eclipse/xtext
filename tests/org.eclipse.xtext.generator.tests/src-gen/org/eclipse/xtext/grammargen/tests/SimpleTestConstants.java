@@ -2,6 +2,7 @@ package org.eclipse.xtext.grammargen.tests;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.XtextPackage;
 
 public class SimpleTestConstants extends org.eclipse.xtext.core.parser.BaseEPackageAccess {
 	public static final String SIMPLETEST_GRAMMAR_CP_URI = "org/eclipse/xtext/grammargen/tests/SimpleTest.xmi";
@@ -9,6 +10,8 @@ public class SimpleTestConstants extends org.eclipse.xtext.core.parser.BaseEPack
 	
 	public static Grammar getSimpleTestGrammar() {	
 		if (GRAMMAR==null) {
+			// assert the XtextPackage implementation is loaded
+			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
 			GRAMMAR = (Grammar) loadGrammarFile(SimpleTestConstants.class.getClassLoader(),SIMPLETEST_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;

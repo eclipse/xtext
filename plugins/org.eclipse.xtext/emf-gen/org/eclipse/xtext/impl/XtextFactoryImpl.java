@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextFactoryImpl.java,v 1.4 2008/05/15 14:37:59 sefftinge Exp $
+ * $Id: XtextFactoryImpl.java,v 1.5 2008/05/15 15:53:45 jkohnlein Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -64,10 +64,10 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
   public EObject create(EClass eClass)
   {
 		switch (eClass.getClassifierID()) {
-			case XtextPackage.TYPE_REF: return createTypeRef();
-			case XtextPackage.ABSTRACT_ELEMENT: return createAbstractElement();
-			case XtextPackage.PARSER_RULE: return createParserRule();
 			case XtextPackage.LEXER_RULE: return createLexerRule();
+			case XtextPackage.ABSTRACT_ELEMENT: return createAbstractElement();
+			case XtextPackage.TYPE_REF: return createTypeRef();
+			case XtextPackage.PARSER_RULE: return createParserRule();
 			case XtextPackage.GRAMMAR: return createGrammar();
 			case XtextPackage.GENERATED_METAMODEL: return createGeneratedMetamodel();
 			case XtextPackage.REFERENCED_METAMODEL: return createReferencedMetamodel();

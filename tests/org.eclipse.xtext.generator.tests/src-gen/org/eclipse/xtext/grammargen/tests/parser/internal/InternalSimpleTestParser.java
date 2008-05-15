@@ -1,10 +1,11 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-15 16:43:18
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-15 17:51:02
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
+
 
 
 import org.antlr.runtime.*;
@@ -14,16 +15,16 @@ import java.util.ArrayList;
 
 public class InternalSimpleTestParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_WS", "RULE_SL_COMMENT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_LEXER_BODY", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_SL_COMMENT", "RULE_ML_COMMENT", "RULE_WS", "RULE_INT", "RULE_STRING", "RULE_LEXER_BODY", "RULE_ANY_OTHER"
     };
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=6;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=6;
+    public static final int RULE_WS=7;
+    public static final int RULE_INT=8;
     public static final int EOF=-1;
-    public static final int RULE_INT=5;
-    public static final int RULE_STRING=8;
+    public static final int RULE_STRING=9;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=7;
+    public static final int RULE_SL_COMMENT=5;
     public static final int RULE_LEXER_BODY=10;
 
         public InternalSimpleTestParser(TokenStream input) {
@@ -47,6 +48,7 @@ public class InternalSimpleTestParser extends Parser {
     	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
     	compositeNode.setGrammarElement(currentGrammarElement);
     	if (parentNode!=null) parentNode.getChildren().add(compositeNode);
+    	compositeNode.setGrammarElement(currentGrammarElement);
     	return compositeNode;
     }
 
@@ -96,20 +98,21 @@ public class InternalSimpleTestParser extends Parser {
     	
     private CompositeNode currentNode;
 
+    private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.grammargen.tests.SimpleTestConstants.getSimpleTestGrammar();
 
 
 
     // $ANTLR start parse
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:80:1: parse returns [EObject current] : ruleFoo EOF ;
-    public final EObject parse() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:83:1: parse returns [EObject current] : ruleFoo EOF ;
+    public EObject parse() throws RecognitionException {
         EObject current = null;
 
         EObject ruleFoo1 = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:80:33: ( ruleFoo EOF )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:81:2: ruleFoo EOF
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:84:2: ( ruleFoo EOF )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:84:2: ruleFoo EOF
             {
             pushFollow(FOLLOW_ruleFoo_in_parse43);
             ruleFoo1=ruleFoo();
@@ -134,23 +137,25 @@ public class InternalSimpleTestParser extends Parser {
 
 
     // $ANTLR start ruleFoo
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:84:1: ruleFoo returns [EObject current=null] : (lv_name= RULE_ID ) ;
-    public final EObject ruleFoo() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:87:1: ruleFoo returns [EObject current=null] : (lv_name= RULE_ID ) ;
+    public EObject ruleFoo() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:84:40: ( (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:84:42: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:87:42: ( (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:87:42: (lv_name= RULE_ID )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:86:1: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:87:2: lv_name= RULE_ID
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.0")
+            , currentNode); 
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:90:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:91:2: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo72); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal")
+            , currentNode, 
             "name");
             if (current==null) {
             	current = factory.create("Foo");}

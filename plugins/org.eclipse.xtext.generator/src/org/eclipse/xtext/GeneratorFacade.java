@@ -61,6 +61,11 @@ public class GeneratorFacade {
 		p.setProperty("language.namespace", languageNamespace);
 		GenProperties.setProperties(p);
 
+		ResourceSetImpl setImpl = new ResourceSetImpl();
+		Resource resource = setImpl.createResource(URI.createURI(srcGenPath+"/"+languageNamespace+"/"+languageName+".xmi"));
+		resource.getContents().add(grammarModel);
+		resource.save(null);
+
 		XpandFacade facade = XpandFacade.create(execCtx);
 		facade.evaluate("org::eclipse::xtext::grammargen::AntlrGrammar::grammar", grammarModel);
 		facade.evaluate("org::eclipse::xtext::Constants::file", grammarModel);
@@ -90,9 +95,5 @@ public class GeneratorFacade {
 			metaModelResource.save(null);
 		}
 		
-		ResourceSetImpl setImpl = new ResourceSetImpl();
-		Resource resource = setImpl.createResource(URI.createURI(srcGenPath+"/"+languageNamespace+"/"+languageName+".xmi"));
-		resource.getContents().add(grammarModel);
-		resource.save(null);
 	}
 }

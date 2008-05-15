@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Action.java,v 1.4 2008/05/15 14:38:02 sefftinge Exp $
+ * $Id: Action.java,v 1.5 2008/05/15 15:53:45 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -16,8 +16,8 @@ package org.eclipse.xtext;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.Action#getFeature <em>Feature</em>}</li>
- *   <li>{@link org.eclipse.xtext.Action#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipse.xtext.Action#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Action#getOperator <em>Operator</em>}</li>
  * </ul>
  * </p>
  *

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextSwitch.java,v 1.4 2008/05/15 14:38:04 sefftinge Exp $
+ * $Id: XtextSwitch.java,v 1.5 2008/05/15 15:53:45 jkohnlein Exp $
  */
 package org.eclipse.xtext.util;
 
@@ -98,25 +98,6 @@ public class XtextSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtextPackage.TYPE_REF: {
-				TypeRef typeRef = (TypeRef)theEObject;
-				T result = caseTypeRef(typeRef);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XtextPackage.ABSTRACT_ELEMENT: {
-				AbstractElement abstractElement = (AbstractElement)theEObject;
-				T result = caseAbstractElement(abstractElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XtextPackage.PARSER_RULE: {
-				ParserRule parserRule = (ParserRule)theEObject;
-				T result = caseParserRule(parserRule);
-				if (result == null) result = caseAbstractRule(parserRule);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case XtextPackage.LEXER_RULE: {
 				LexerRule lexerRule = (LexerRule)theEObject;
 				T result = caseLexerRule(lexerRule);
@@ -127,6 +108,25 @@ public class XtextSwitch<T>
 			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION: {
 				AbstractMetamodelDeclaration abstractMetamodelDeclaration = (AbstractMetamodelDeclaration)theEObject;
 				T result = caseAbstractMetamodelDeclaration(abstractMetamodelDeclaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.ABSTRACT_ELEMENT: {
+				AbstractElement abstractElement = (AbstractElement)theEObject;
+				T result = caseAbstractElement(abstractElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.TYPE_REF: {
+				TypeRef typeRef = (TypeRef)theEObject;
+				T result = caseTypeRef(typeRef);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.PARSER_RULE: {
+				ParserRule parserRule = (ParserRule)theEObject;
+				T result = caseParserRule(parserRule);
+				if (result == null) result = caseAbstractRule(parserRule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

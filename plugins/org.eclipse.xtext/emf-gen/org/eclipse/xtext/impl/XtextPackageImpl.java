@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextPackageImpl.java,v 1.4 2008/05/15 14:37:59 sefftinge Exp $
+ * $Id: XtextPackageImpl.java,v 1.5 2008/05/15 15:53:45 jkohnlein Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -300,7 +300,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
   public EReference getParserRule_Alternatives()
   {
-		return (EReference)parserRuleEClass.getEStructuralFeatures().get(1);
+		return (EReference)parserRuleEClass.getEStructuralFeatures().get(0);
 	}
 
   /**
@@ -310,7 +310,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
   public EReference getParserRule_Type()
   {
-		return (EReference)parserRuleEClass.getEStructuralFeatures().get(0);
+		return (EReference)parserRuleEClass.getEStructuralFeatures().get(1);
 	}
 
   /**
@@ -355,6 +355,15 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 
   /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLexerRule_TokenType() {
+		return (EAttribute)lexerRuleEClass.getEStructuralFeatures().get(1);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -370,7 +379,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
   public EReference getGrammar_ParserRules()
   {
-		return (EReference)grammarEClass.getEStructuralFeatures().get(0);
+		return (EReference)grammarEClass.getEStructuralFeatures().get(2);
 	}
 
   /**
@@ -380,7 +389,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
   public EReference getGrammar_MetamodelDeclarations()
   {
-		return (EReference)grammarEClass.getEStructuralFeatures().get(2);
+		return (EReference)grammarEClass.getEStructuralFeatures().get(1);
 	}
 
   /**
@@ -390,7 +399,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
   public EReference getGrammar_LexerRules()
   {
-		return (EReference)grammarEClass.getEStructuralFeatures().get(1);
+		return (EReference)grammarEClass.getEStructuralFeatures().get(0);
 	}
 
   /**
@@ -410,7 +419,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
   public EAttribute getGeneratedMetamodel_NsURI()
   {
-		return (EAttribute)generatedMetamodelEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)generatedMetamodelEClass.getEStructuralFeatures().get(0);
 	}
 
   /**
@@ -420,7 +429,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
   public EAttribute getGeneratedMetamodel_Name()
   {
-		return (EAttribute)generatedMetamodelEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)generatedMetamodelEClass.getEStructuralFeatures().get(1);
 	}
 
   /**
@@ -460,7 +469,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
   public EAttribute getAssignment_Feature()
   {
-		return (EAttribute)assignmentEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)assignmentEClass.getEStructuralFeatures().get(0);
 	}
 
   /**
@@ -470,7 +479,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
   public EAttribute getAssignment_Operator()
   {
-		return (EAttribute)assignmentEClass.getEStructuralFeatures().get(0);
+		return (EAttribute)assignmentEClass.getEStructuralFeatures().get(2);
 	}
 
   /**
@@ -480,7 +489,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
   public EReference getAssignment_Terminal()
   {
-		return (EReference)assignmentEClass.getEStructuralFeatures().get(2);
+		return (EReference)assignmentEClass.getEStructuralFeatures().get(1);
 	}
 
   /**
@@ -500,7 +509,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
   public EAttribute getAction_Operator()
   {
-		return (EAttribute)actionEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)actionEClass.getEStructuralFeatures().get(2);
 	}
 
   /**
@@ -520,7 +529,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
   public EReference getAction_TypeName()
   {
-		return (EReference)actionEClass.getEStructuralFeatures().get(2);
+		return (EReference)actionEClass.getEStructuralFeatures().get(1);
 	}
 
   /**
@@ -636,44 +645,45 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 		abstractRuleEClass = createEClass(ABSTRACT_RULE);
 		createEAttribute(abstractRuleEClass, ABSTRACT_RULE__NAME);
 
-		typeRefEClass = createEClass(TYPE_REF);
-		createEAttribute(typeRefEClass, TYPE_REF__ALIAS);
-		createEAttribute(typeRefEClass, TYPE_REF__NAME);
-
-		abstractElementEClass = createEClass(ABSTRACT_ELEMENT);
-		createEAttribute(abstractElementEClass, ABSTRACT_ELEMENT__CARDINALITY);
-
-		parserRuleEClass = createEClass(PARSER_RULE);
-		createEReference(parserRuleEClass, PARSER_RULE__TYPE);
-		createEReference(parserRuleEClass, PARSER_RULE__ALTERNATIVES);
-
 		lexerRuleEClass = createEClass(LEXER_RULE);
 		createEAttribute(lexerRuleEClass, LEXER_RULE__BODY);
+		createEAttribute(lexerRuleEClass, LEXER_RULE__TOKEN_TYPE);
 
 		abstractMetamodelDeclarationEClass = createEClass(ABSTRACT_METAMODEL_DECLARATION);
 		createEAttribute(abstractMetamodelDeclarationEClass, ABSTRACT_METAMODEL_DECLARATION__ALIAS);
 
+		abstractElementEClass = createEClass(ABSTRACT_ELEMENT);
+		createEAttribute(abstractElementEClass, ABSTRACT_ELEMENT__CARDINALITY);
+
+		typeRefEClass = createEClass(TYPE_REF);
+		createEAttribute(typeRefEClass, TYPE_REF__ALIAS);
+		createEAttribute(typeRefEClass, TYPE_REF__NAME);
+
+		parserRuleEClass = createEClass(PARSER_RULE);
+		createEReference(parserRuleEClass, PARSER_RULE__ALTERNATIVES);
+		createEReference(parserRuleEClass, PARSER_RULE__TYPE);
+
 		grammarEClass = createEClass(GRAMMAR);
-		createEReference(grammarEClass, GRAMMAR__PARSER_RULES);
 		createEReference(grammarEClass, GRAMMAR__LEXER_RULES);
 		createEReference(grammarEClass, GRAMMAR__METAMODEL_DECLARATIONS);
+		createEReference(grammarEClass, GRAMMAR__PARSER_RULES);
 
 		generatedMetamodelEClass = createEClass(GENERATED_METAMODEL);
-		createEAttribute(generatedMetamodelEClass, GENERATED_METAMODEL__NAME);
 		createEAttribute(generatedMetamodelEClass, GENERATED_METAMODEL__NS_URI);
+		createEAttribute(generatedMetamodelEClass, GENERATED_METAMODEL__NAME);
 
 		referencedMetamodelEClass = createEClass(REFERENCED_METAMODEL);
 		createEAttribute(referencedMetamodelEClass, REFERENCED_METAMODEL__URI);
 
 		assignmentEClass = createEClass(ASSIGNMENT);
-		createEAttribute(assignmentEClass, ASSIGNMENT__OPERATOR);
 		createEAttribute(assignmentEClass, ASSIGNMENT__FEATURE);
 		createEReference(assignmentEClass, ASSIGNMENT__TERMINAL);
+		createEAttribute(assignmentEClass, ASSIGNMENT__OPERATOR);
 
 		actionEClass = createEClass(ACTION);
 		createEAttribute(actionEClass, ACTION__FEATURE);
-		createEAttribute(actionEClass, ACTION__OPERATOR);
 		createEReference(actionEClass, ACTION__TYPE_NAME);
+		createEAttribute(actionEClass, ACTION__OPERATOR);
 
 		keywordEClass = createEClass(KEYWORD);
 		createEAttribute(keywordEClass, KEYWORD__VALUE);
@@ -717,8 +727,8 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		parserRuleEClass.getESuperTypes().add(this.getAbstractRule());
 		lexerRuleEClass.getESuperTypes().add(this.getAbstractRule());
+		parserRuleEClass.getESuperTypes().add(this.getAbstractRule());
 		generatedMetamodelEClass.getESuperTypes().add(this.getAbstractMetamodelDeclaration());
 		referencedMetamodelEClass.getESuperTypes().add(this.getAbstractMetamodelDeclaration());
 		assignmentEClass.getESuperTypes().add(this.getAbstractElement());
@@ -732,44 +742,45 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 		initEClass(abstractRuleEClass, AbstractRule.class, "AbstractRule", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAbstractRule_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(typeRefEClass, TypeRef.class, "TypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTypeRef_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, TypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTypeRef_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(abstractElementEClass, AbstractElement.class, "AbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAbstractElement_Cardinality(), ecorePackage.getEString(), "cardinality", null, 0, 1, AbstractElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(parserRuleEClass, ParserRule.class, "ParserRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getParserRule_Type(), this.getTypeRef(), null, "type", null, 0, 1, ParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParserRule_Alternatives(), this.getAbstractElement(), null, "alternatives", null, 0, 1, ParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(lexerRuleEClass, LexerRule.class, "LexerRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLexerRule_Body(), ecorePackage.getEString(), "body", null, 0, 1, LexerRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLexerRule_TokenType(), ecorePackage.getEString(), "tokenType", null, 0, 1, LexerRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractMetamodelDeclarationEClass, AbstractMetamodelDeclaration.class, "AbstractMetamodelDeclaration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAbstractMetamodelDeclaration_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, AbstractMetamodelDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(abstractElementEClass, AbstractElement.class, "AbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAbstractElement_Cardinality(), ecorePackage.getEString(), "cardinality", null, 0, 1, AbstractElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typeRefEClass, TypeRef.class, "TypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTypeRef_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, TypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTypeRef_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(parserRuleEClass, ParserRule.class, "ParserRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParserRule_Alternatives(), this.getAbstractElement(), null, "alternatives", null, 0, 1, ParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParserRule_Type(), this.getTypeRef(), null, "type", null, 0, 1, ParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(grammarEClass, Grammar.class, "Grammar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGrammar_ParserRules(), this.getParserRule(), null, "parserRules", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGrammar_LexerRules(), this.getLexerRule(), null, "lexerRules", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGrammar_MetamodelDeclarations(), this.getAbstractMetamodelDeclaration(), null, "metamodelDeclarations", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGrammar_ParserRules(), this.getParserRule(), null, "parserRules", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(generatedMetamodelEClass, GeneratedMetamodel.class, "GeneratedMetamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getGeneratedMetamodel_Name(), ecorePackage.getEString(), "name", null, 0, 1, GeneratedMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGeneratedMetamodel_NsURI(), ecorePackage.getEString(), "nsURI", null, 0, 1, GeneratedMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGeneratedMetamodel_Name(), ecorePackage.getEString(), "name", null, 0, 1, GeneratedMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(referencedMetamodelEClass, ReferencedMetamodel.class, "ReferencedMetamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getReferencedMetamodel_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, ReferencedMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAssignment_Operator(), ecorePackage.getEString(), "operator", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAssignment_Feature(), ecorePackage.getEString(), "feature", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssignment_Terminal(), this.getAbstractElement(), null, "terminal", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssignment_Operator(), ecorePackage.getEString(), "operator", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(actionEClass, Action.class, "Action", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAction_Feature(), ecorePackage.getEString(), "feature", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAction_Operator(), ecorePackage.getEString(), "operator", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAction_TypeName(), this.getTypeRef(), null, "typeName", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAction_Operator(), ecorePackage.getEString(), "operator", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(keywordEClass, Keyword.class, "Keyword", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getKeyword_Value(), ecorePackage.getEString(), "value", null, 0, 1, Keyword.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

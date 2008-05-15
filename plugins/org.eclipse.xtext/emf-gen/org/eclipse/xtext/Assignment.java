@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Assignment.java,v 1.4 2008/05/15 14:38:02 sefftinge Exp $
+ * $Id: Assignment.java,v 1.5 2008/05/15 15:53:45 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -15,9 +15,9 @@ package org.eclipse.xtext;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.Assignment#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipse.xtext.Assignment#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.Assignment#getTerminal <em>Terminal</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Assignment#getOperator <em>Operator</em>}</li>
  * </ul>
  * </p>
  *

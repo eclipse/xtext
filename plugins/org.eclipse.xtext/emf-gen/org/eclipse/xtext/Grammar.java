@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Grammar.java,v 1.4 2008/05/15 14:38:03 sefftinge Exp $
+ * $Id: Grammar.java,v 1.5 2008/05/15 15:53:45 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.Grammar#getParserRules <em>Parser Rules</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getLexerRules <em>Lexer Rules</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Grammar#getParserRules <em>Parser Rules</em>}</li>
  * </ul>
  * </p>
  *

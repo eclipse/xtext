@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParserRuleImpl.java,v 1.4 2008/05/15 14:37:59 sefftinge Exp $
+ * $Id: ParserRuleImpl.java,v 1.5 2008/05/15 15:53:45 jkohnlein Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -26,8 +26,8 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.ParserRuleImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.ParserRuleImpl#getAlternatives <em>Alternatives</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.ParserRuleImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,16 +36,6 @@ import org.eclipse.xtext.XtextPackage;
 public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 {
   /**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-    protected TypeRef type;
-
-				/**
 	 * The cached value of the '{@link #getAlternatives() <em>Alternatives</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -54,6 +44,16 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 	 * @ordered
 	 */
 				protected AbstractElement alternatives;
+
+				/**
+				* The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+				* <!-- begin-user-doc -->
+				 * <!-- end-user-doc -->
+				* @see #getType()
+				* @generated
+				* @ordered
+				*/
+				  protected TypeRef type;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -177,10 +177,10 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
 		switch (featureID) {
-			case XtextPackage.PARSER_RULE__TYPE:
-				return basicSetType(null, msgs);
 			case XtextPackage.PARSER_RULE__ALTERNATIVES:
 				return basicSetAlternatives(null, msgs);
+			case XtextPackage.PARSER_RULE__TYPE:
+				return basicSetType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -194,10 +194,10 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
 		switch (featureID) {
-			case XtextPackage.PARSER_RULE__TYPE:
-				return getType();
 			case XtextPackage.PARSER_RULE__ALTERNATIVES:
 				return getAlternatives();
+			case XtextPackage.PARSER_RULE__TYPE:
+				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -211,11 +211,11 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
-			case XtextPackage.PARSER_RULE__TYPE:
-				setType((TypeRef)newValue);
-				return;
 			case XtextPackage.PARSER_RULE__ALTERNATIVES:
 				setAlternatives((AbstractElement)newValue);
+				return;
+			case XtextPackage.PARSER_RULE__TYPE:
+				setType((TypeRef)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -230,11 +230,11 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
   public void eUnset(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.PARSER_RULE__TYPE:
-				setType((TypeRef)null);
-				return;
 			case XtextPackage.PARSER_RULE__ALTERNATIVES:
 				setAlternatives((AbstractElement)null);
+				return;
+			case XtextPackage.PARSER_RULE__TYPE:
+				setType((TypeRef)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -249,10 +249,10 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
   public boolean eIsSet(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.PARSER_RULE__TYPE:
-				return type != null;
 			case XtextPackage.PARSER_RULE__ALTERNATIVES:
 				return alternatives != null;
+			case XtextPackage.PARSER_RULE__TYPE:
+				return type != null;
 		}
 		return super.eIsSet(featureID);
 	}

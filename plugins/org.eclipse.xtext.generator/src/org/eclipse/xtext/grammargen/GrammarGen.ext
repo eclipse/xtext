@@ -37,4 +37,8 @@ mustBeParenthesized(Group this) : true;
 mustBeParenthesized(Alternatives this) : true;
 mustBeParenthesized(Keyword this) : false;
 mustBeParenthesized(RuleCall this) : false;
+
+String getID(emf::EObject object) :
+	JAVA org.eclipse.xtext.grammargen.GrammarGenExtensions.getID(org.eclipse.emf.ecore.EObject);
+	 
 	

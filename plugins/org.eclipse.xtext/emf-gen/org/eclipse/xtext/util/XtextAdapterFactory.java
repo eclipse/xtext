@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextAdapterFactory.java,v 1.4 2008/05/15 14:38:04 sefftinge Exp $
+ * $Id: XtextAdapterFactory.java,v 1.5 2008/05/15 15:53:45 jkohnlein Exp $
  */
 package org.eclipse.xtext.util;
 
@@ -79,24 +79,24 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
 				return createAbstractRuleAdapter();
 			}
 			@Override
-			public Adapter caseTypeRef(TypeRef object) {
-				return createTypeRefAdapter();
-			}
-			@Override
-			public Adapter caseAbstractElement(AbstractElement object) {
-				return createAbstractElementAdapter();
-			}
-			@Override
-			public Adapter caseParserRule(ParserRule object) {
-				return createParserRuleAdapter();
-			}
-			@Override
 			public Adapter caseLexerRule(LexerRule object) {
 				return createLexerRuleAdapter();
 			}
 			@Override
 			public Adapter caseAbstractMetamodelDeclaration(AbstractMetamodelDeclaration object) {
 				return createAbstractMetamodelDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseAbstractElement(AbstractElement object) {
+				return createAbstractElementAdapter();
+			}
+			@Override
+			public Adapter caseTypeRef(TypeRef object) {
+				return createTypeRefAdapter();
+			}
+			@Override
+			public Adapter caseParserRule(ParserRule object) {
+				return createParserRuleAdapter();
 			}
 			@Override
 			public Adapter caseGrammar(Grammar object) {
