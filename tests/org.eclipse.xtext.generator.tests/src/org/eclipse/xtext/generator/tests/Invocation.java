@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.tests;
 
+import org.antlr.runtime.Token;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
@@ -26,7 +28,16 @@ public class Invocation {
 	
 	@Override
 	public String toString() {
-		return method+"("+feature+(param!=null?","+param:"")+")";
+		return method+"("+feature+(param!=null?","+toString(param):"")+")";
+	}
+
+	private String toString(Object param2) {
+		if (param2 instanceof Token) {
+			return ((Token)param2).getText();
+		} if (param2 instanceof String) {
+			return (String) param2;
+		}
+		return param2.getClass().getSimpleName();
 	}
 	
 }	
