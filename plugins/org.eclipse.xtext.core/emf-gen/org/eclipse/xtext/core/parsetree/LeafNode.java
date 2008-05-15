@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LeafNode.java,v 1.1 2008/05/15 11:39:43 sefftinge Exp $
+ * $Id: LeafNode.java,v 1.2 2008/05/15 12:04:26 sefftinge Exp $
  */
 package org.eclipse.xtext.core.parsetree;
 
@@ -17,6 +17,7 @@ package org.eclipse.xtext.core.parsetree;
  * <ul>
  *   <li>{@link org.eclipse.xtext.core.parsetree.LeafNode#getText <em>Text</em>}</li>
  *   <li>{@link org.eclipse.xtext.core.parsetree.LeafNode#getFeature <em>Feature</em>}</li>
+ *   <li>{@link org.eclipse.xtext.core.parsetree.LeafNode#isHidden <em>Hidden</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,5 +77,31 @@ public interface LeafNode extends AbstractNode {
 	 * @generated
 	 */
 	void setFeature(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Hidden</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Hidden</em>' attribute.
+	 * @see #setHidden(boolean)
+	 * @see org.eclipse.xtext.core.parsetree.ParsetreePackage#getLeafNode_Hidden()
+	 * @model
+	 * @generated
+	 */
+	boolean isHidden();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.core.parsetree.LeafNode#isHidden <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Hidden</em>' attribute.
+	 * @see #isHidden()
+	 * @generated
+	 */
+	void setHidden(boolean value);
 
 } // LeafNode

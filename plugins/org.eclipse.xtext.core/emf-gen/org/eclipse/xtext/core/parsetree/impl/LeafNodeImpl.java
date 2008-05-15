@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LeafNodeImpl.java,v 1.1 2008/05/15 11:39:43 sefftinge Exp $
+ * $Id: LeafNodeImpl.java,v 1.2 2008/05/15 12:04:26 sefftinge Exp $
  */
 package org.eclipse.xtext.core.parsetree.impl;
 
@@ -24,6 +24,7 @@ import org.eclipse.xtext.core.parsetree.ParsetreePackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.core.parsetree.impl.LeafNodeImpl#getText <em>Text</em>}</li>
  *   <li>{@link org.eclipse.xtext.core.parsetree.impl.LeafNodeImpl#getFeature <em>Feature</em>}</li>
+ *   <li>{@link org.eclipse.xtext.core.parsetree.impl.LeafNodeImpl#isHidden <em>Hidden</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,6 +70,26 @@ public class LeafNodeImpl extends AbstractNodeImpl implements LeafNode {
 	 * @ordered
 	 */
 	protected String feature = FEATURE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHidden() <em>Hidden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHidden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hidden = HIDDEN_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -136,6 +157,27 @@ public class LeafNodeImpl extends AbstractNodeImpl implements LeafNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHidden(boolean newHidden) {
+		boolean oldHidden = hidden;
+		hidden = newHidden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.LEAF_NODE__HIDDEN, oldHidden, hidden));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -143,6 +185,8 @@ public class LeafNodeImpl extends AbstractNodeImpl implements LeafNode {
 				return getText();
 			case ParsetreePackage.LEAF_NODE__FEATURE:
 				return getFeature();
+			case ParsetreePackage.LEAF_NODE__HIDDEN:
+				return isHidden() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -160,6 +204,9 @@ public class LeafNodeImpl extends AbstractNodeImpl implements LeafNode {
 				return;
 			case ParsetreePackage.LEAF_NODE__FEATURE:
 				setFeature((String)newValue);
+				return;
+			case ParsetreePackage.LEAF_NODE__HIDDEN:
+				setHidden(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -179,6 +226,9 @@ public class LeafNodeImpl extends AbstractNodeImpl implements LeafNode {
 			case ParsetreePackage.LEAF_NODE__FEATURE:
 				setFeature(FEATURE_EDEFAULT);
 				return;
+			case ParsetreePackage.LEAF_NODE__HIDDEN:
+				setHidden(HIDDEN_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -195,6 +245,8 @@ public class LeafNodeImpl extends AbstractNodeImpl implements LeafNode {
 				return TEXT_EDEFAULT == null ? text != null : !TEXT_EDEFAULT.equals(text);
 			case ParsetreePackage.LEAF_NODE__FEATURE:
 				return FEATURE_EDEFAULT == null ? feature != null : !FEATURE_EDEFAULT.equals(feature);
+			case ParsetreePackage.LEAF_NODE__HIDDEN:
+				return hidden != HIDDEN_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -213,6 +265,8 @@ public class LeafNodeImpl extends AbstractNodeImpl implements LeafNode {
 		result.append(text);
 		result.append(", feature: ");
 		result.append(feature);
+		result.append(", hidden: ");
+		result.append(hidden);
 		result.append(')');
 		return result.toString();
 	}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackageImpl.java,v 1.1 2008/05/15 11:39:43 sefftinge Exp $
+ * $Id: ParsetreePackageImpl.java,v 1.2 2008/05/15 12:04:26 sefftinge Exp $
  */
 package org.eclipse.xtext.core.parsetree.impl;
 
@@ -201,6 +201,15 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getLeafNode_Hidden() {
+		return (EAttribute)leafNodeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ParsetreeFactory getParsetreeFactory() {
 		return (ParsetreeFactory)getEFactoryInstance();
 	}
@@ -235,6 +244,7 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 		leafNodeEClass = createEClass(LEAF_NODE);
 		createEAttribute(leafNodeEClass, LEAF_NODE__TEXT);
 		createEAttribute(leafNodeEClass, LEAF_NODE__FEATURE);
+		createEAttribute(leafNodeEClass, LEAF_NODE__HIDDEN);
 	}
 
 	/**
@@ -288,6 +298,7 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 		initEClass(leafNodeEClass, LeafNode.class, "LeafNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLeafNode_Text(), ecorePackage.getEString(), "text", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLeafNode_Feature(), ecorePackage.getEString(), "feature", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLeafNode_Hidden(), ecorePackage.getEBoolean(), "hidden", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
