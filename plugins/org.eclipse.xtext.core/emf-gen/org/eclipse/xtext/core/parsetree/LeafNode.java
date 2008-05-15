@@ -2,11 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LeafNode.java,v 1.2 2008/05/15 09:22:48 jkohnlein Exp $
+ * $Id: LeafNode.java,v 1.1 2008/05/15 11:39:43 sefftinge Exp $
  */
-package org.eclipse.xtext.parsetree;
-
-import org.eclipse.emf.ecore.EObject;
+package org.eclipse.xtext.core.parsetree;
 
 
 /**
@@ -17,17 +15,16 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.parsetree.LeafNode#getText <em>Text</em>}</li>
- *   <li>{@link org.eclipse.xtext.parsetree.LeafNode#getFeature <em>Feature</em>}</li>
+ *   <li>{@link org.eclipse.xtext.core.parsetree.LeafNode#getText <em>Text</em>}</li>
+ *   <li>{@link org.eclipse.xtext.core.parsetree.LeafNode#getFeature <em>Feature</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtext.parsetree.ParsetreePackage#getLeafNode()
+ * @see org.eclipse.xtext.core.parsetree.ParsetreePackage#getLeafNode()
  * @model
  * @generated
  */
-public interface LeafNode extends AbstractParserNode {
-
+public interface LeafNode extends AbstractNode {
 	/**
 	 * Returns the value of the '<em><b>Text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -38,14 +35,14 @@ public interface LeafNode extends AbstractParserNode {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Text</em>' attribute.
 	 * @see #setText(String)
-	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getLeafNode_Text()
+	 * @see org.eclipse.xtext.core.parsetree.ParsetreePackage#getLeafNode_Text()
 	 * @model
 	 * @generated
 	 */
 	String getText();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.parsetree.LeafNode#getText <em>Text</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.xtext.core.parsetree.LeafNode#getText <em>Text</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Text</em>' attribute.
@@ -64,14 +61,14 @@ public interface LeafNode extends AbstractParserNode {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Feature</em>' attribute.
 	 * @see #setFeature(String)
-	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getLeafNode_Feature()
+	 * @see org.eclipse.xtext.core.parsetree.ParsetreePackage#getLeafNode_Feature()
 	 * @model
 	 * @generated
 	 */
 	String getFeature();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.parsetree.LeafNode#getFeature <em>Feature</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.xtext.core.parsetree.LeafNode#getFeature <em>Feature</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Feature</em>' attribute.
@@ -79,4 +76,5 @@ public interface LeafNode extends AbstractParserNode {
 	 * @generated
 	 */
 	void setFeature(String value);
+
 } // LeafNode

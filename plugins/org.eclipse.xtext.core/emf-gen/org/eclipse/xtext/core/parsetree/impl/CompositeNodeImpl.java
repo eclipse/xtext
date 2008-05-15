@@ -2,27 +2,25 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CompositeNodeImpl.java,v 1.2 2008/05/15 09:22:48 jkohnlein Exp $
+ * $Id: CompositeNodeImpl.java,v 1.1 2008/05/15 11:39:43 sefftinge Exp $
  */
-package org.eclipse.xtext.parsetree.impl;
+package org.eclipse.xtext.core.parsetree.impl;
 
 import java.util.Collection;
-import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.xtext.parsetree.AbstractParserNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.ParsetreePackage;
+
+import org.eclipse.xtext.core.parsetree.AbstractNode;
+import org.eclipse.xtext.core.parsetree.CompositeNode;
+import org.eclipse.xtext.core.parsetree.ParsetreePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,13 +29,13 @@ import org.eclipse.xtext.parsetree.ParsetreePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.parsetree.impl.CompositeNodeImpl#getChildren <em>Children</em>}</li>
+ *   <li>{@link org.eclipse.xtext.core.parsetree.impl.CompositeNodeImpl#getChildren <em>Children</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CompositeNodeImpl extends AbstractParserNodeImpl implements CompositeNode {
+public class CompositeNodeImpl extends AbstractNodeImpl implements CompositeNode {
 	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -46,7 +44,7 @@ public class CompositeNodeImpl extends AbstractParserNodeImpl implements Composi
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractParserNode> children;
+	protected EList<AbstractNode> children;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -72,9 +70,9 @@ public class CompositeNodeImpl extends AbstractParserNodeImpl implements Composi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractParserNode> getChildren() {
+	public EList<AbstractNode> getChildren() {
 		if (children == null) {
-			children = new EObjectWithInverseResolvingEList<AbstractParserNode>(AbstractParserNode.class, this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, ParsetreePackage.ABSTRACT_PARSER_NODE__PARENT);
+			children = new EObjectWithInverseResolvingEList<AbstractNode>(AbstractNode.class, this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, ParsetreePackage.ABSTRACT_NODE__PARENT);
 		}
 		return children;
 	}
@@ -133,7 +131,7 @@ public class CompositeNodeImpl extends AbstractParserNodeImpl implements Composi
 		switch (featureID) {
 			case ParsetreePackage.COMPOSITE_NODE__CHILDREN:
 				getChildren().clear();
-				getChildren().addAll((Collection<? extends AbstractParserNode>)newValue);
+				getChildren().addAll((Collection<? extends AbstractNode>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

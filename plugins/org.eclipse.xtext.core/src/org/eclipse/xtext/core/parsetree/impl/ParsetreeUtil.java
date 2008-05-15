@@ -1,14 +1,14 @@
-package org.eclipse.xtext.parsetree.impl;
+package org.eclipse.xtext.core.parsetree.impl;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.parsetree.AbstractParserNode;
-import org.eclipse.xtext.parsetree.ParsetreePackage;
+import org.eclipse.xtext.core.parsetree.AbstractNode;
+import org.eclipse.xtext.core.parsetree.ParsetreePackage;
 
 public class ParsetreeUtil {
 
 	public static int length(CompositeNodeImpl compositeNodeImpl) {
 		int length = 0;
-		for (AbstractParserNode node : compositeNodeImpl.getChildren()) {
+		for (AbstractNode node : compositeNodeImpl.getChildren()) {
 			length += node.length();
 		}
 		return length;
@@ -18,13 +18,13 @@ public class ParsetreeUtil {
 		return leafNodeImpl.getText().length();
 	}
 
-	public static int length(AbstractParserNode abstractParserNode) {
+	public static int length(AbstractNodeImpl abstractParserNode) {
 		throw new IllegalArgumentException(
 				"Illegal subtype of AbstarctParserNode "
 						+ abstractParserNode.eClass().getName());
 	}
 
-	public static int offset(AbstractParserNode abstractParserNode) {
+	public static int offset(AbstractNodeImpl abstractParserNode) {
 		int classifierID = abstractParserNode.eClass().getClassifierID();
 		if(classifierID != ParsetreePackage.COMPOSITE_NODE
 				&& classifierID != ParsetreePackage.LEAF_NODE) {
@@ -33,7 +33,7 @@ public class ParsetreeUtil {
 							+ abstractParserNode.eClass().getName());
 		}
 		int offset = 0;
-		EList<AbstractParserNode> siblings = abstractParserNode.getParent()
+		EList<AbstractNode> siblings = abstractParserNode.getParent()
 				.getChildren();
 		int indexOf = siblings.indexOf(abstractParserNode);
 		for (int i = 0; i < indexOf; ++i) {
@@ -52,10 +52,28 @@ public class ParsetreeUtil {
 		return 0;
 	}
 
-	public static int line(AbstractParserNode abstractParserNode) {
+	public static int line(AbstractNodeImpl abstractParserNode) {
 		throw new IllegalArgumentException(
 				"Illegal subtype of AbstarctParserNode "
 						+ abstractParserNode.eClass().getName());
+	}
+
+	public static String serialize(CompositeNodeImpl compositeNodeImpl) {
+		StringBuffer buff = new StringBuffer();
+		for (AbstractNode child : compositeNodeImpl.getChildren()) {
+			buff.append(child.serialize());
+		}
+		return buff.toString();
+	}
+
+	public static String serialize(LeafNodeImpl leafNodeImpl) {
+		return leafNodeImpl.getText();
+	}
+
+	public static String serialize(AbstractNodeImpl abstractNodeImpl) {
+		throw new IllegalArgumentException(
+				"Illegal subtype of AbstarctParserNode "
+						+ abstractNodeImpl.eClass().getName());
 	}
 
 }

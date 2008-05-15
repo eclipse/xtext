@@ -2,9 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackage.java,v 1.3 2008/05/15 09:22:48 jkohnlein Exp $
+ * $Id: ParsetreePackage.java,v 1.1 2008/05/15 11:39:43 sefftinge Exp $
  */
-package org.eclipse.xtext.parsetree;
+package org.eclipse.xtext.core.parsetree;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see org.eclipse.xtext.parsetree.ParsetreeFactory
+ * @see org.eclipse.xtext.core.parsetree.ParsetreeFactory
  * @model kind="package"
  * @generated
  */
@@ -57,17 +57,17 @@ public interface ParsetreePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ParsetreePackage eINSTANCE = org.eclipse.xtext.parsetree.impl.ParsetreePackageImpl.init();
+	ParsetreePackage eINSTANCE = org.eclipse.xtext.core.parsetree.impl.ParsetreePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.parsetree.impl.AbstractParserNodeImpl <em>Abstract Parser Node</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.core.parsetree.impl.AbstractNodeImpl <em>Abstract Node</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.parsetree.impl.AbstractParserNodeImpl
-	 * @see org.eclipse.xtext.parsetree.impl.ParsetreePackageImpl#getAbstractParserNode()
+	 * @see org.eclipse.xtext.core.parsetree.impl.AbstractNodeImpl
+	 * @see org.eclipse.xtext.core.parsetree.impl.ParsetreePackageImpl#getAbstractNode()
 	 * @generated
 	 */
-	int ABSTRACT_PARSER_NODE = 1;
+	int ABSTRACT_NODE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -76,7 +76,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PARSER_NODE__PARENT = 0;
+	int ABSTRACT_NODE__PARENT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Element</b></em>' attribute.
@@ -85,7 +85,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PARSER_NODE__ELEMENT = 1;
+	int ABSTRACT_NODE__ELEMENT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Grammar Element</b></em>' reference.
@@ -94,23 +94,23 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT = 2;
+	int ABSTRACT_NODE__GRAMMAR_ELEMENT = 2;
 
 	/**
-	 * The number of structural features of the '<em>Abstract Parser Node</em>' class.
+	 * The number of structural features of the '<em>Abstract Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PARSER_NODE_FEATURE_COUNT = 3;
+	int ABSTRACT_NODE_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.parsetree.impl.CompositeNodeImpl <em>Composite Node</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.core.parsetree.impl.CompositeNodeImpl <em>Composite Node</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.parsetree.impl.CompositeNodeImpl
-	 * @see org.eclipse.xtext.parsetree.impl.ParsetreePackageImpl#getCompositeNode()
+	 * @see org.eclipse.xtext.core.parsetree.impl.CompositeNodeImpl
+	 * @see org.eclipse.xtext.core.parsetree.impl.ParsetreePackageImpl#getCompositeNode()
 	 * @generated
 	 */
 	int COMPOSITE_NODE = 0;
@@ -122,7 +122,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_NODE__PARENT = ABSTRACT_PARSER_NODE__PARENT;
+	int COMPOSITE_NODE__PARENT = ABSTRACT_NODE__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Element</b></em>' attribute.
@@ -131,7 +131,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_NODE__ELEMENT = ABSTRACT_PARSER_NODE__ELEMENT;
+	int COMPOSITE_NODE__ELEMENT = ABSTRACT_NODE__ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Grammar Element</b></em>' reference.
@@ -140,7 +140,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_NODE__GRAMMAR_ELEMENT = ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT;
+	int COMPOSITE_NODE__GRAMMAR_ELEMENT = ABSTRACT_NODE__GRAMMAR_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' reference list.
@@ -149,7 +149,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_NODE__CHILDREN = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 0;
+	int COMPOSITE_NODE__CHILDREN = ABSTRACT_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Composite Node</em>' class.
@@ -158,14 +158,14 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_NODE_FEATURE_COUNT = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 1;
+	int COMPOSITE_NODE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.parsetree.impl.LeafNodeImpl <em>Leaf Node</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.core.parsetree.impl.LeafNodeImpl <em>Leaf Node</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.parsetree.impl.LeafNodeImpl
-	 * @see org.eclipse.xtext.parsetree.impl.ParsetreePackageImpl#getLeafNode()
+	 * @see org.eclipse.xtext.core.parsetree.impl.LeafNodeImpl
+	 * @see org.eclipse.xtext.core.parsetree.impl.ParsetreePackageImpl#getLeafNode()
 	 * @generated
 	 */
 	int LEAF_NODE = 2;
@@ -177,7 +177,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE__PARENT = ABSTRACT_PARSER_NODE__PARENT;
+	int LEAF_NODE__PARENT = ABSTRACT_NODE__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Element</b></em>' attribute.
@@ -186,7 +186,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE__ELEMENT = ABSTRACT_PARSER_NODE__ELEMENT;
+	int LEAF_NODE__ELEMENT = ABSTRACT_NODE__ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Grammar Element</b></em>' reference.
@@ -195,7 +195,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE__GRAMMAR_ELEMENT = ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT;
+	int LEAF_NODE__GRAMMAR_ELEMENT = ABSTRACT_NODE__GRAMMAR_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -204,7 +204,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE__TEXT = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 0;
+	int LEAF_NODE__TEXT = ABSTRACT_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -213,7 +213,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE__FEATURE = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 1;
+	int LEAF_NODE__FEATURE = ABSTRACT_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Leaf Node</em>' class.
@@ -222,100 +222,100 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE_FEATURE_COUNT = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 2;
+	int LEAF_NODE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 2;
 
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.CompositeNode <em>Composite Node</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.core.parsetree.CompositeNode <em>Composite Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Composite Node</em>'.
-	 * @see org.eclipse.xtext.parsetree.CompositeNode
+	 * @see org.eclipse.xtext.core.parsetree.CompositeNode
 	 * @generated
 	 */
 	EClass getCompositeNode();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.parsetree.CompositeNode#getChildren <em>Children</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.core.parsetree.CompositeNode#getChildren <em>Children</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Children</em>'.
-	 * @see org.eclipse.xtext.parsetree.CompositeNode#getChildren()
+	 * @see org.eclipse.xtext.core.parsetree.CompositeNode#getChildren()
 	 * @see #getCompositeNode()
 	 * @generated
 	 */
 	EReference getCompositeNode_Children();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.AbstractParserNode <em>Abstract Parser Node</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.core.parsetree.AbstractNode <em>Abstract Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract Parser Node</em>'.
-	 * @see org.eclipse.xtext.parsetree.AbstractParserNode
+	 * @return the meta object for class '<em>Abstract Node</em>'.
+	 * @see org.eclipse.xtext.core.parsetree.AbstractNode
 	 * @generated
 	 */
-	EClass getAbstractParserNode();
+	EClass getAbstractNode();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.parsetree.AbstractParserNode#getParent <em>Parent</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Parent</em>'.
-	 * @see org.eclipse.xtext.parsetree.AbstractParserNode#getParent()
-	 * @see #getAbstractParserNode()
+	 * @see org.eclipse.xtext.core.parsetree.AbstractNode#getParent()
+	 * @see #getAbstractNode()
 	 * @generated
 	 */
-	EReference getAbstractParserNode_Parent();
+	EReference getAbstractNode_Parent();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.AbstractParserNode#getElement <em>Element</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getElement <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Element</em>'.
-	 * @see org.eclipse.xtext.parsetree.AbstractParserNode#getElement()
-	 * @see #getAbstractParserNode()
+	 * @see org.eclipse.xtext.core.parsetree.AbstractNode#getElement()
+	 * @see #getAbstractNode()
 	 * @generated
 	 */
-	EAttribute getAbstractParserNode_Element();
+	EAttribute getAbstractNode_Element();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.parsetree.AbstractParserNode#getGrammarElement <em>Grammar Element</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getGrammarElement <em>Grammar Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Grammar Element</em>'.
-	 * @see org.eclipse.xtext.parsetree.AbstractParserNode#getGrammarElement()
-	 * @see #getAbstractParserNode()
+	 * @see org.eclipse.xtext.core.parsetree.AbstractNode#getGrammarElement()
+	 * @see #getAbstractNode()
 	 * @generated
 	 */
-	EReference getAbstractParserNode_GrammarElement();
+	EReference getAbstractNode_GrammarElement();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.LeafNode <em>Leaf Node</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.core.parsetree.LeafNode <em>Leaf Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Leaf Node</em>'.
-	 * @see org.eclipse.xtext.parsetree.LeafNode
+	 * @see org.eclipse.xtext.core.parsetree.LeafNode
 	 * @generated
 	 */
 	EClass getLeafNode();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.LeafNode#getText <em>Text</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.core.parsetree.LeafNode#getText <em>Text</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Text</em>'.
-	 * @see org.eclipse.xtext.parsetree.LeafNode#getText()
+	 * @see org.eclipse.xtext.core.parsetree.LeafNode#getText()
 	 * @see #getLeafNode()
 	 * @generated
 	 */
 	EAttribute getLeafNode_Text();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.LeafNode#getFeature <em>Feature</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.core.parsetree.LeafNode#getFeature <em>Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Feature</em>'.
-	 * @see org.eclipse.xtext.parsetree.LeafNode#getFeature()
+	 * @see org.eclipse.xtext.core.parsetree.LeafNode#getFeature()
 	 * @see #getLeafNode()
 	 * @generated
 	 */
@@ -344,11 +344,11 @@ public interface ParsetreePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.parsetree.impl.CompositeNodeImpl <em>Composite Node</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.core.parsetree.impl.CompositeNodeImpl <em>Composite Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.parsetree.impl.CompositeNodeImpl
-		 * @see org.eclipse.xtext.parsetree.impl.ParsetreePackageImpl#getCompositeNode()
+		 * @see org.eclipse.xtext.core.parsetree.impl.CompositeNodeImpl
+		 * @see org.eclipse.xtext.core.parsetree.impl.ParsetreePackageImpl#getCompositeNode()
 		 * @generated
 		 */
 		EClass COMPOSITE_NODE = eINSTANCE.getCompositeNode();
@@ -362,14 +362,14 @@ public interface ParsetreePackage extends EPackage {
 		EReference COMPOSITE_NODE__CHILDREN = eINSTANCE.getCompositeNode_Children();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.parsetree.impl.AbstractParserNodeImpl <em>Abstract Parser Node</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.core.parsetree.impl.AbstractNodeImpl <em>Abstract Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.parsetree.impl.AbstractParserNodeImpl
-		 * @see org.eclipse.xtext.parsetree.impl.ParsetreePackageImpl#getAbstractParserNode()
+		 * @see org.eclipse.xtext.core.parsetree.impl.AbstractNodeImpl
+		 * @see org.eclipse.xtext.core.parsetree.impl.ParsetreePackageImpl#getAbstractNode()
 		 * @generated
 		 */
-		EClass ABSTRACT_PARSER_NODE = eINSTANCE.getAbstractParserNode();
+		EClass ABSTRACT_NODE = eINSTANCE.getAbstractNode();
 
 		/**
 		 * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
@@ -377,7 +377,7 @@ public interface ParsetreePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_PARSER_NODE__PARENT = eINSTANCE.getAbstractParserNode_Parent();
+		EReference ABSTRACT_NODE__PARENT = eINSTANCE.getAbstractNode_Parent();
 
 		/**
 		 * The meta object literal for the '<em><b>Element</b></em>' attribute feature.
@@ -385,7 +385,7 @@ public interface ParsetreePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_PARSER_NODE__ELEMENT = eINSTANCE.getAbstractParserNode_Element();
+		EAttribute ABSTRACT_NODE__ELEMENT = eINSTANCE.getAbstractNode_Element();
 
 		/**
 		 * The meta object literal for the '<em><b>Grammar Element</b></em>' reference feature.
@@ -393,14 +393,14 @@ public interface ParsetreePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT = eINSTANCE.getAbstractParserNode_GrammarElement();
+		EReference ABSTRACT_NODE__GRAMMAR_ELEMENT = eINSTANCE.getAbstractNode_GrammarElement();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.parsetree.impl.LeafNodeImpl <em>Leaf Node</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.core.parsetree.impl.LeafNodeImpl <em>Leaf Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.parsetree.impl.LeafNodeImpl
-		 * @see org.eclipse.xtext.parsetree.impl.ParsetreePackageImpl#getLeafNode()
+		 * @see org.eclipse.xtext.core.parsetree.impl.LeafNodeImpl
+		 * @see org.eclipse.xtext.core.parsetree.impl.ParsetreePackageImpl#getLeafNode()
 		 * @generated
 		 */
 		EClass LEAF_NODE = eINSTANCE.getLeafNode();

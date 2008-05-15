@@ -2,18 +2,18 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LeafNodeImpl.java,v 1.2 2008/05/15 09:22:47 jkohnlein Exp $
+ * $Id: LeafNodeImpl.java,v 1.1 2008/05/15 11:39:43 sefftinge Exp $
  */
-package org.eclipse.xtext.parsetree.impl;
+package org.eclipse.xtext.core.parsetree.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.ParsetreePackage;
+
+import org.eclipse.xtext.core.parsetree.LeafNode;
+import org.eclipse.xtext.core.parsetree.ParsetreePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,14 +22,14 @@ import org.eclipse.xtext.parsetree.ParsetreePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.parsetree.impl.LeafNodeImpl#getText <em>Text</em>}</li>
- *   <li>{@link org.eclipse.xtext.parsetree.impl.LeafNodeImpl#getFeature <em>Feature</em>}</li>
+ *   <li>{@link org.eclipse.xtext.core.parsetree.impl.LeafNodeImpl#getText <em>Text</em>}</li>
+ *   <li>{@link org.eclipse.xtext.core.parsetree.impl.LeafNodeImpl#getFeature <em>Feature</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class LeafNodeImpl extends AbstractParserNodeImpl implements LeafNode {
+public class LeafNodeImpl extends AbstractNodeImpl implements LeafNode {
 	/**
 	 * The default value of the '{@link #getText() <em>Text</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -39,6 +39,7 @@ public class LeafNodeImpl extends AbstractParserNodeImpl implements LeafNode {
 	 * @ordered
 	 */
 	protected static final String TEXT_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getText() <em>Text</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -48,6 +49,7 @@ public class LeafNodeImpl extends AbstractParserNodeImpl implements LeafNode {
 	 * @ordered
 	 */
 	protected String text = TEXT_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getFeature() <em>Feature</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -57,6 +59,7 @@ public class LeafNodeImpl extends AbstractParserNodeImpl implements LeafNode {
 	 * @ordered
 	 */
 	protected static final String FEATURE_EDEFAULT = null;
+
 	/**
 	 * The cached value of the '{@link #getFeature() <em>Feature</em>}' attribute.
 	 * <!-- begin-user-doc -->

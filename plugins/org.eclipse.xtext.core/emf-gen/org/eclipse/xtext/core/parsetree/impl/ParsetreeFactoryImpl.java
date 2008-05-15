@@ -2,9 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeFactoryImpl.java,v 1.2 2008/05/14 15:56:00 jkohnlein Exp $
+ * $Id: ParsetreeFactoryImpl.java,v 1.1 2008/05/15 11:39:43 sefftinge Exp $
  */
-package org.eclipse.xtext.parsetree.impl;
+package org.eclipse.xtext.core.parsetree.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import org.eclipse.xtext.parsetree.*;
+import org.eclipse.xtext.core.parsetree.*;
 
 /**
  * <!-- begin-user-doc -->

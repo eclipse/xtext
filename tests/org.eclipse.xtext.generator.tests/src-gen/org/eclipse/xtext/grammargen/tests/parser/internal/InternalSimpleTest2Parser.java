@@ -1,9 +1,9 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g 2008-05-15 08:40:59
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g 2008-05-15 13:37:14
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
 import org.eclipse.xtext.core.parser.IElementFactory;
-import org.eclipse.xtext.parsetree.*;
+import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 
 
@@ -42,7 +42,7 @@ public class InternalSimpleTest2Parser extends Parser {
     	this.factory = factory;
     }
 
-    private CompositeNode currentParserNode;
+    private CompositeNode currentNode;
 
     	public CompositeNode createCompositeNode(EObject currentGrammarElement,
     			CompositeNode parentNode) {
@@ -63,13 +63,11 @@ public class InternalSimpleTest2Parser extends Parser {
     		return leafNode;
     	}
     	
-    	public void associateNodeWithAstElement(AbstractParserNode node, Object astElement) {
+    	public void associateNodeWithAstElement(AbstractNode node, Object astElement) {
     		node.setElement(astElement);
     		if(astElement instanceof EObject) {
     			EObject eObject = (EObject) astElement;
-    			ParserNodeAdapter adapter = (org.eclipse.xtext.parsetree.ParserNodeAdapter) 
-    				org.eclipse.xtext.parsetree.ParserNodeAdapterFactory.INSTANCE.adapt(eObject, 
-    					org.eclipse.xtext.parsetree.AbstractParserNode.class);
+    			NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
     			adapter.setParserNode(node); 
     		}
     	}
@@ -78,7 +76,7 @@ public class InternalSimpleTest2Parser extends Parser {
 
 
     // $ANTLR start parse
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:58:1: parse returns [Object current] : ruleModel EOF ;
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:56:1: parse returns [Object current] : ruleModel EOF ;
     public final Object parse() throws RecognitionException {
         Object current = null;
 
@@ -86,10 +84,10 @@ public class InternalSimpleTest2Parser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:58:32: ( ruleModel EOF )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:59:2: ruleModel EOF
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:56:32: ( ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:57:2: ruleModel EOF
             {
-             currentParserNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); 
+             currentNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); 
             pushFollow(FOLLOW_ruleModel_in_parse46);
             ruleModel1=ruleModel();
             _fsp--;
@@ -112,7 +110,7 @@ public class InternalSimpleTest2Parser extends Parser {
 
 
     // $ANTLR start ruleModel
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:63:1: ruleModel returns [Object current=null] : (lv_contents= ruleChild )* ;
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:61:1: ruleModel returns [Object current=null] : (lv_contents= ruleChild )* ;
     public final Object ruleModel() throws RecognitionException {
         Object current = null;
 
@@ -120,11 +118,11 @@ public class InternalSimpleTest2Parser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:63:41: ( (lv_contents= ruleChild )* )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:63:43: (lv_contents= ruleChild )*
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:61:41: ( (lv_contents= ruleChild )* )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:61:43: (lv_contents= ruleChild )*
             {
-            Object temp=null; currentParserNode=createCompositeNode(null, currentParserNode); 
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:65:1: (lv_contents= ruleChild )*
+            Object temp=null; currentNode=createCompositeNode(null, currentNode); 
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:63:1: (lv_contents= ruleChild )*
             loop1:
             do {
                 int alt1=2;
@@ -137,7 +135,7 @@ public class InternalSimpleTest2Parser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:66:2: lv_contents= ruleChild
+            	    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:64:2: lv_contents= ruleChild
             	    {
             	    pushFollow(FOLLOW_ruleChild_in_ruleModel73);
             	    lv_contents=ruleChild();
@@ -146,7 +144,7 @@ public class InternalSimpleTest2Parser extends Parser {
             	    if (current==null) {
             	    	current = factory.create("Model");}
             	    	factory.add(current, "contents",lv_contents);
-            	    	associateNodeWithAstElement(currentParserNode, current);
+            	    	associateNodeWithAstElement(currentNode, current);
 
             	    }
             	    break;
@@ -156,7 +154,7 @@ public class InternalSimpleTest2Parser extends Parser {
                 }
             } while (true);
 
-             currentParserNode = currentParserNode.getParent(); 
+             currentNode = currentNode.getParent(); 
 
             }
 
@@ -173,7 +171,7 @@ public class InternalSimpleTest2Parser extends Parser {
 
 
     // $ANTLR start ruleChild
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:74:1: ruleChild returns [Object current=null] : ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) ;
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:72:1: ruleChild returns [Object current=null] : ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) ;
     public final Object ruleChild() throws RecognitionException {
         Object current = null;
 
@@ -182,26 +180,26 @@ public class InternalSimpleTest2Parser extends Parser {
         Token lv_number=null;
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:74:41: ( ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:74:43: ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:72:41: ( ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:72:43: ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' )
             {
-            Object temp=null; currentParserNode=createCompositeNode(null, currentParserNode); 
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:76:1: ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:77:1: ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}'
+            Object temp=null; currentNode=createCompositeNode(null, currentNode); 
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:74:1: ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:75:1: ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}'
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:77:1: ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:78:1: ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{'
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:75:1: ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:76:1: ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{'
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:78:1: ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:79:1: ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:76:1: ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:77:1: ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT )
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:79:1: ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:80:1: ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:77:1: ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:78:1: ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:80:1: ( (lv_optional= 'optional' )? 'keyword' )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:81:1: (lv_optional= 'optional' )? 'keyword'
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:78:1: ( (lv_optional= 'optional' )? 'keyword' )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:79:1: (lv_optional= 'optional' )? 'keyword'
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:81:1: (lv_optional= 'optional' )?
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:79:1: (lv_optional= 'optional' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -210,16 +208,16 @@ public class InternalSimpleTest2Parser extends Parser {
             }
             switch (alt2) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:82:2: lv_optional= 'optional'
+                    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:80:2: lv_optional= 'optional'
                     {
                     lv_optional=(Token)input.LT(1);
                     match(input,12,FOLLOW_12_in_ruleChild113); 
-                    createLeafNode(input.LT(-1).getText(), null, currentParserNode, 
+                    createLeafNode(input.LT(-1).getText(), null, currentNode, 
                     null);
                     if (current==null) {
                     	current = factory.create("Child");}
                     	factory.set(current, "optional",lv_optional);
-                    	associateNodeWithAstElement(currentParserNode, current);
+                    	associateNodeWithAstElement(currentNode, current);
 
                     }
                     break;
@@ -227,39 +225,39 @@ public class InternalSimpleTest2Parser extends Parser {
             }
 
             match(input,13,FOLLOW_13_in_ruleChild122); 
-            createLeafNode(input.LT(-1).getText(), null, currentParserNode, 
+            createLeafNode(input.LT(-1).getText(), null, currentNode, 
             null);
 
             }
 
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:91:1: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:92:2: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:89:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:90:2: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChild133); 
-            createLeafNode(input.LT(-1).getText(), null, currentParserNode, 
+            createLeafNode(input.LT(-1).getText(), null, currentNode, 
             "name");
             if (current==null) {
             	current = factory.create("Child");}
             	factory.set(current, "name",lv_name);
-            	associateNodeWithAstElement(currentParserNode, current);
+            	associateNodeWithAstElement(currentNode, current);
 
             }
 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:100:1: (lv_number= RULE_INT )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:101:2: lv_number= RULE_INT
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:98:1: (lv_number= RULE_INT )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:99:2: lv_number= RULE_INT
             {
             lv_number=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleChild148); 
-            createLeafNode(input.LT(-1).getText(), null, currentParserNode, 
+            createLeafNode(input.LT(-1).getText(), null, currentNode, 
             "number");
             if (current==null) {
             	current = factory.create("Child");}
             	factory.set(current, "number",lv_number);
-            	associateNodeWithAstElement(currentParserNode, current);
+            	associateNodeWithAstElement(currentNode, current);
 
             }
 
@@ -267,18 +265,18 @@ public class InternalSimpleTest2Parser extends Parser {
             }
 
             match(input,14,FOLLOW_14_in_ruleChild157); 
-            createLeafNode(input.LT(-1).getText(), null, currentParserNode, 
+            createLeafNode(input.LT(-1).getText(), null, currentNode, 
             null);
 
             }
 
             match(input,15,FOLLOW_15_in_ruleChild162); 
-            createLeafNode(input.LT(-1).getText(), null, currentParserNode, 
+            createLeafNode(input.LT(-1).getText(), null, currentNode, 
             null);
 
             }
 
-             currentParserNode = currentParserNode.getParent(); 
+             currentNode = currentNode.getParent(); 
 
             }
 
