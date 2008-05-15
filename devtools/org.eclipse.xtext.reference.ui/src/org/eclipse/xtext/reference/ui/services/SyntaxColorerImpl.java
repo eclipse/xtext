@@ -1,0 +1,42 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+
+package org.eclipse.xtext.reference.ui.services;
+
+import org.eclipse.jface.text.TextAttribute;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.xtext.ui.core.editor.utils.CustomResourceLibrary;
+import org.eclipse.xtext.ui.core.service.ILexer;
+import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
+
+/**
+ * @author Dennis Hübner
+ * 
+ */
+public class SyntaxColorerImpl implements ISyntaxColorer {
+
+	private static RGB KEYWORD_COLOR = new RGB(127, 0, 85);
+	private static RGB DEFAULT_COLOR = new RGB(0, 0, 0);
+
+	public TextAttribute color(ILexer lexer, Object token) {
+		CustomResourceLibrary lib = new CustomResourceLibrary(Display
+				.getDefault());
+		TextAttribute ta = null;
+		switch (lexer.getTokenType(token)) {
+		case 1:
+			ta = new TextAttribute(lib.getColor(KEYWORD_COLOR), null, SWT.BOLD);
+			break;
+		default:
+			ta = new TextAttribute(lib.getColor(DEFAULT_COLOR), null, SWT.BOLD);
+		}
+		return ta;
+	}
+}
