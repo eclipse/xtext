@@ -1,12 +1,12 @@
 
-grammar InternalSimpleTest2;
+grammar InternalDummyLanguage;
 
 @lexer::header {
-package org.eclipse.xtext.grammargen.tests.parser.internal;
+package org.eclipse.xtext.dummy.parser.internal;
 }
 
 @parser::header {
-package org.eclipse.xtext.grammargen.tests.parser.internal; 
+package org.eclipse.xtext.dummy.parser.internal; 
 
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parsetree.*;
@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 @parser::members {
 
 private IElementFactory factory;
-public InternalSimpleTest2Parser(TokenStream input, IElementFactory factory) {
+public InternalDummyLanguageParser(TokenStream input, IElementFactory factory) {
 	this(input);
 	this.factory = factory;
 }
@@ -84,17 +84,16 @@ parse returns [EObject current] :
 ruleModel returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
-	lv_contents=
-ruleChild
+	lv_elements=
+ruleElement
  {if ($current==null) {
 	$current = factory.create("Model");}
-	factory.add($current, "contents",lv_contents);
+	factory.add($current, "elements",lv_elements);
 	associateNodeWithAstElement(currentNode, $current);}
 )* { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
-ruleChild returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleElement returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
-(
 (
 (
 (
@@ -103,51 +102,49 @@ ruleChild returns [EObject current=null] : {EObject temp=null; currentNode=creat
 	lv_optional=
 'optional' {createLeafNode(null, currentNode, 
 null);} {if ($current==null) {
-	$current = factory.create("Child");}
+	$current = factory.create("Element");}
 	factory.set($current, "optional",lv_optional);
 	associateNodeWithAstElement(currentNode, $current);}
 )?
-'keyword' {createLeafNode(null, currentNode, 
+'element' {createLeafNode(null, currentNode, 
 null);})
 (
 	lv_name=
 RULE_ID{createLeafNode(null, currentNode, 
 "name");}
  {if ($current==null) {
-	$current = factory.create("Child");}
+	$current = factory.create("Element");}
 	factory.set($current, "name",lv_name);
 	associateNodeWithAstElement(currentNode, $current);}
 ))
 (
-	lv_number=
-RULE_INT{createLeafNode(null, currentNode, 
-"number");}
+	lv_descriptions=
+RULE_STRING{createLeafNode(null, currentNode, 
+"descriptions");}
  {if ($current==null) {
-	$current = factory.create("Child");}
-	factory.set($current, "number",lv_number);
+	$current = factory.create("Element");}
+	factory.add($current, "descriptions",lv_descriptions);
 	associateNodeWithAstElement(currentNode, $current);}
-))
-'{' {createLeafNode(null, currentNode, 
-null);})
-'}' {createLeafNode(null, currentNode, 
+)*)
+';' {createLeafNode(null, currentNode, 
 null);}) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 
-
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
-
-RULE_INT : ('0'..'9')+;
-
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
-
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+
+RULE_INT : ('0'..'9')+;
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 
