@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNode.java,v 1.1 2008/05/15 11:39:43 sefftinge Exp $
+ * $Id: AbstractNode.java,v 1.2 2008/05/15 12:46:48 jkohnlein Exp $
  */
 package org.eclipse.xtext.core.parsetree;
 
@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.core.parsetree.AbstractNode#getParent <em>Parent</em>}</li>
- *   <li>{@link org.eclipse.xtext.core.parsetree.AbstractNode#getElement <em>Element</em>}</li>
  *   <li>{@link org.eclipse.xtext.core.parsetree.AbstractNode#getGrammarElement <em>Grammar Element</em>}</li>
+ *   <li>{@link org.eclipse.xtext.core.parsetree.AbstractNode#getElement <em>Element</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,30 +56,30 @@ public interface AbstractNode extends EObject {
 	void setParent(CompositeNode value);
 
 	/**
-	 * Returns the value of the '<em><b>Element</b></em>' attribute.
+	 * Returns the value of the '<em><b>Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Element</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Element</em>' attribute.
-	 * @see #setElement(Object)
+	 * @return the value of the '<em>Element</em>' reference.
+	 * @see #setElement(EObject)
 	 * @see org.eclipse.xtext.core.parsetree.ParsetreePackage#getAbstractNode_Element()
 	 * @model
 	 * @generated
 	 */
-	Object getElement();
+	EObject getElement();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getElement <em>Element</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getElement <em>Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Element</em>' attribute.
+	 * @param value the new value of the '<em>Element</em>' reference.
 	 * @see #getElement()
 	 * @generated
 	 */
-	void setElement(Object value);
+	void setElement(EObject value);
 
 	/**
 	 * Returns the value of the '<em><b>Grammar Element</b></em>' reference.

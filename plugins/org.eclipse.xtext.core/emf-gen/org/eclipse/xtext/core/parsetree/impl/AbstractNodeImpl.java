@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNodeImpl.java,v 1.1 2008/05/15 11:39:43 sefftinge Exp $
+ * $Id: AbstractNodeImpl.java,v 1.2 2008/05/15 12:46:48 jkohnlein Exp $
  */
 package org.eclipse.xtext.core.parsetree.impl;
 
@@ -28,8 +28,8 @@ import org.eclipse.xtext.core.parsetree.ParsetreePackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.core.parsetree.impl.AbstractNodeImpl#getParent <em>Parent</em>}</li>
- *   <li>{@link org.eclipse.xtext.core.parsetree.impl.AbstractNodeImpl#getElement <em>Element</em>}</li>
  *   <li>{@link org.eclipse.xtext.core.parsetree.impl.AbstractNodeImpl#getGrammarElement <em>Grammar Element</em>}</li>
+ *   <li>{@link org.eclipse.xtext.core.parsetree.impl.AbstractNodeImpl#getElement <em>Element</em>}</li>
  * </ul>
  * </p>
  *
@@ -47,26 +47,6 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	protected CompositeNode parent;
 
 	/**
-	 * The default value of the '{@link #getElement() <em>Element</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getElement()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final Object ELEMENT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getElement() <em>Element</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getElement()
-	 * @generated
-	 * @ordered
-	 */
-	protected Object element = ELEMENT_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getGrammarElement() <em>Grammar Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,6 +55,16 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * @ordered
 	 */
 	protected EObject grammarElement;
+
+	/**
+	 * The cached value of the '{@link #getElement() <em>Element</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getElement()
+	 * @generated
+	 * @ordered
+	 */
+	protected EObject element;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -160,7 +150,15 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object getElement() {
+	public EObject getElement() {
+		if (element != null && element.eIsProxy()) {
+			InternalEObject oldElement = (InternalEObject)element;
+			element = eResolveProxy(oldElement);
+			if (element != oldElement) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ParsetreePackage.ABSTRACT_NODE__ELEMENT, oldElement, element));
+			}
+		}
 		return element;
 	}
 
@@ -169,8 +167,17 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setElement(Object newElement) {
-		Object oldElement = element;
+	public EObject basicGetElement() {
+		return element;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setElement(EObject newElement) {
+		EObject oldElement = element;
 		element = newElement;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__ELEMENT, oldElement, element));
@@ -291,11 +298,12 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 			case ParsetreePackage.ABSTRACT_NODE__PARENT:
 				if (resolve) return getParent();
 				return basicGetParent();
-			case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
-				return getElement();
 			case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
 				if (resolve) return getGrammarElement();
 				return basicGetGrammarElement();
+			case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
+				if (resolve) return getElement();
+				return basicGetElement();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -311,11 +319,11 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 			case ParsetreePackage.ABSTRACT_NODE__PARENT:
 				setParent((CompositeNode)newValue);
 				return;
-			case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
-				setElement(newValue);
-				return;
 			case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
 				setGrammarElement((EObject)newValue);
+				return;
+			case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
+				setElement((EObject)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -332,11 +340,11 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 			case ParsetreePackage.ABSTRACT_NODE__PARENT:
 				setParent((CompositeNode)null);
 				return;
-			case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
-				setElement(ELEMENT_EDEFAULT);
-				return;
 			case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
 				setGrammarElement((EObject)null);
+				return;
+			case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
+				setElement((EObject)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -352,28 +360,12 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 		switch (featureID) {
 			case ParsetreePackage.ABSTRACT_NODE__PARENT:
 				return parent != null;
-			case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
-				return ELEMENT_EDEFAULT == null ? element != null : !ELEMENT_EDEFAULT.equals(element);
 			case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
 				return grammarElement != null;
+			case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
+				return element != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (element: ");
-		result.append(element);
-		result.append(')');
-		return result.toString();
 	}
 
 } //AbstractNodeImpl

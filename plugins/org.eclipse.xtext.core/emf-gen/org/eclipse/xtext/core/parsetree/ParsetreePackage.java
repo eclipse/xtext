@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackage.java,v 1.2 2008/05/15 12:04:26 sefftinge Exp $
+ * $Id: ParsetreePackage.java,v 1.3 2008/05/15 12:46:48 jkohnlein Exp $
  */
 package org.eclipse.xtext.core.parsetree;
 
@@ -79,22 +79,22 @@ public interface ParsetreePackage extends EPackage {
 	int ABSTRACT_NODE__PARENT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Element</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_NODE__ELEMENT = 1;
-
-	/**
 	 * The feature id for the '<em><b>Grammar Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__GRAMMAR_ELEMENT = 2;
+	int ABSTRACT_NODE__GRAMMAR_ELEMENT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__ELEMENT = 2;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Node</em>' class.
@@ -125,15 +125,6 @@ public interface ParsetreePackage extends EPackage {
 	int COMPOSITE_NODE__PARENT = ABSTRACT_NODE__PARENT;
 
 	/**
-	 * The feature id for the '<em><b>Element</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_NODE__ELEMENT = ABSTRACT_NODE__ELEMENT;
-
-	/**
 	 * The feature id for the '<em><b>Grammar Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -141,6 +132,15 @@ public interface ParsetreePackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_NODE__GRAMMAR_ELEMENT = ABSTRACT_NODE__GRAMMAR_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__ELEMENT = ABSTRACT_NODE__ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' reference list.
@@ -180,15 +180,6 @@ public interface ParsetreePackage extends EPackage {
 	int LEAF_NODE__PARENT = ABSTRACT_NODE__PARENT;
 
 	/**
-	 * The feature id for the '<em><b>Element</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE__ELEMENT = ABSTRACT_NODE__ELEMENT;
-
-	/**
 	 * The feature id for the '<em><b>Grammar Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -196,6 +187,15 @@ public interface ParsetreePackage extends EPackage {
 	 * @ordered
 	 */
 	int LEAF_NODE__GRAMMAR_ELEMENT = ABSTRACT_NODE__GRAMMAR_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LEAF_NODE__ELEMENT = ABSTRACT_NODE__ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -277,15 +277,15 @@ public interface ParsetreePackage extends EPackage {
 	EReference getAbstractNode_Parent();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getElement <em>Element</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getElement <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Element</em>'.
+	 * @return the meta object for the reference '<em>Element</em>'.
 	 * @see org.eclipse.xtext.core.parsetree.AbstractNode#getElement()
 	 * @see #getAbstractNode()
 	 * @generated
 	 */
-	EAttribute getAbstractNode_Element();
+	EReference getAbstractNode_Element();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getGrammarElement <em>Grammar Element</em>}'.
@@ -400,12 +400,12 @@ public interface ParsetreePackage extends EPackage {
 		EReference ABSTRACT_NODE__PARENT = eINSTANCE.getAbstractNode_Parent();
 
 		/**
-		 * The meta object literal for the '<em><b>Element</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Element</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_NODE__ELEMENT = eINSTANCE.getAbstractNode_Element();
+		EReference ABSTRACT_NODE__ELEMENT = eINSTANCE.getAbstractNode_Element();
 
 		/**
 		 * The meta object literal for the '<em><b>Grammar Element</b></em>' reference feature.

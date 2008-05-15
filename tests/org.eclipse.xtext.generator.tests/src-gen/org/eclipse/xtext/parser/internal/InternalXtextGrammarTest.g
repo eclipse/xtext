@@ -64,7 +64,7 @@ private void appendTrailingHiddenTokens(CompositeNode parentNode) {
 	}
 }
 	
-public void associateNodeWithAstElement(AbstractNode node, Object astElement) {
+public void associateNodeWithAstElement(AbstractNode node, EObject astElement) {
 	node.setElement(astElement);
 	if(astElement instanceof EObject) {
 		EObject eObject = (EObject) astElement;
@@ -74,11 +74,6 @@ public void associateNodeWithAstElement(AbstractNode node, Object astElement) {
 }
 	
 private CompositeNode currentNode;
-private CompositeNode rootNode;
-
-public CompositeNode getRootNode() {
-	return rootNode;
-}
 
 }
 
@@ -500,20 +495,20 @@ RULE_ID{createLeafNode(null, currentNode,
 
 
 
-RULE_INT : ('0'..'9')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
-
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
-
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
+
+RULE_INT : ('0'..'9')+;
+
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 
