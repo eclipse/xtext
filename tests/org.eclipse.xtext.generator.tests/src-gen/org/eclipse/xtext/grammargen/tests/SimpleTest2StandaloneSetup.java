@@ -11,7 +11,7 @@ public abstract class SimpleTest2StandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@c674d8 (alias: null) (nsURI: "http://eclipse.org/xtext/tests/SimpleTest2", name: SimpleTest2)
+		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@342e4a (alias: null) (nsURI: "http://eclipse.org/xtext/tests/SimpleTest2", name: SimpleTest2)
 		
 	}
 

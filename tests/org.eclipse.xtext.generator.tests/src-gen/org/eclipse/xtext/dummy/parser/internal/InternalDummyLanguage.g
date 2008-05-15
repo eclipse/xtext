@@ -89,7 +89,8 @@ ruleElement
  {if ($current==null) {
 	$current = factory.create("Model");}
 	factory.add($current, "elements",lv_elements);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 )* { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleElement returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
@@ -100,11 +101,12 @@ ruleElement returns [EObject current=null] : {EObject temp=null; currentNode=cre
 (
 (
 	lv_optional=
-'optional' {createLeafNode(null, currentNode, 
-null);} {if ($current==null) {
+'optional'  {if ($current==null) {
 	$current = factory.create("Element");}
 	factory.set($current, "optional",lv_optional);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+createLeafNode(null, currentNode, 
+"optional");}
 )?
 'element' {createLeafNode(null, currentNode, 
 null);})
@@ -115,7 +117,8 @@ RULE_ID{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("Element");}
 	factory.set($current, "name",lv_name);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ))
 (
 	lv_descriptions=
@@ -124,27 +127,28 @@ RULE_STRING{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("Element");}
 	factory.add($current, "descriptions",lv_descriptions);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 )*)
 ';' {createLeafNode(null, currentNode, 
 null);}) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 
 
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
-
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
-	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
-
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_INT : ('0'..'9')+;
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
+	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+
+RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_ANY_OTHER : .;
 

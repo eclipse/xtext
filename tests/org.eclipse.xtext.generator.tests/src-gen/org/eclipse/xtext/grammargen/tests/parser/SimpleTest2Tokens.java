@@ -6,8 +6,8 @@ public interface SimpleTest2Tokens {
     public final static int RULE_INT = 5;	// RULE_INT
     public final static int RULE_STRING = 10;	// RULE_STRING
     public final static int RULE_ANY_OTHER = 11;	// RULE_ANY_OTHER
-    public final static int RULE_SL_COMMENT = 6;	// RULE_SL_COMMENT
-    public final static int RULE_LEXER_BODY = 9;	// RULE_LEXER_BODY
+    public final static int RULE_SL_COMMENT = 9;	// RULE_SL_COMMENT
+    public final static int RULE_LEXER_BODY = 6;	// RULE_LEXER_BODY
     public final static int KW_keyword = 13;	// 'keyword'
     public final static int KW_optional = 12;	// 'optional'
     public final static int TOKEN_ClosingCurlyBracket = 15;	// '}'
