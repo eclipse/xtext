@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackage.java,v 1.1 2008/05/15 11:39:43 sefftinge Exp $
+ * $Id: ParsetreePackage.java,v 1.2 2008/05/15 12:04:26 sefftinge Exp $
  */
 package org.eclipse.xtext.core.parsetree;
 
@@ -216,13 +216,22 @@ public interface ParsetreePackage extends EPackage {
 	int LEAF_NODE__FEATURE = ABSTRACT_NODE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Hidden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LEAF_NODE__HIDDEN = ABSTRACT_NODE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Leaf Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 2;
+	int LEAF_NODE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 3;
 
 
 	/**
@@ -320,6 +329,17 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getLeafNode_Feature();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.core.parsetree.LeafNode#isHidden <em>Hidden</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Hidden</em>'.
+	 * @see org.eclipse.xtext.core.parsetree.LeafNode#isHidden()
+	 * @see #getLeafNode()
+	 * @generated
+	 */
+	EAttribute getLeafNode_Hidden();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -420,6 +440,14 @@ public interface ParsetreePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute LEAF_NODE__FEATURE = eINSTANCE.getLeafNode_Feature();
+
+		/**
+		 * The meta object literal for the '<em><b>Hidden</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LEAF_NODE__HIDDEN = eINSTANCE.getLeafNode_Hidden();
 
 	}
 
