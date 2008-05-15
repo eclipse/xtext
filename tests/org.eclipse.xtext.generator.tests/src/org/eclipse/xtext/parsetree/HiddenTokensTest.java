@@ -1,11 +1,13 @@
 package org.eclipse.xtext.parsetree;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.XtextGrammarTest;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.NodeAdapter;
 import org.eclipse.xtext.dummy.DummyLanguage;
 import org.eclipse.xtext.dummy.parser.DummyLanguageASTFactory;
 import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.parser.XtextGrammarTestASTFactory;
 
 public class HiddenTokensTest extends AbstractGeneratorTest {
 
