@@ -38,19 +38,16 @@ public Internal«languageName()»Parser(TokenStream input, IElementFactory factory
 	this.factory = factory;
 }
 
-private CompositeNode currentNode;
-
-	public CompositeNode createCompositeNode(EObject currentGrammarElement,
-			CompositeNode parentNode) {
-		CompositeNode compositeNode = ParsetreeFactory.eINSTANCE
-				.createCompositeNode();
-		compositeNode.setGrammarElement(currentGrammarElement);
-		parentNode.getChildren().add(compositeNode);
-		return compositeNode;
-	}
+public CompositeNode createCompositeNode(EObject currentGrammarElement,
+		CompositeNode parentNode) {
+	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
+	compositeNode.setGrammarElement(currentGrammarElement);
+	parentNode.getChildren().add(compositeNode);
+	return compositeNode;
+}
 
 	public Object createLeafNode(EObject currentGrammarElement,
-			CompositeNode parentNode, String feature) {
+		CompositeNode parentNode, String feature) {
 		Token token = input.LT(-1);
 		Token tokenBefore = input.LT(-2);
 		int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : 0;
@@ -63,27 +60,35 @@ private CompositeNode currentNode;
 				parentNode.getChildren().add(leafNode);
 			}
 		}
-		LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+	LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
 		leafNode.setText(token.getText());
-		leafNode.setGrammarElement(currentGrammarElement);
-		leafNode.setFeature(feature);
-		parentNode.getChildren().add(leafNode);
-		return leafNode;
-	}
+	leafNode.setGrammarElement(currentGrammarElement);
+	leafNode.setFeature(feature);
+	parentNode.getChildren().add(leafNode);
+	return leafNode;
+}
 	
-	public void associateNodeWithAstElement(AbstractNode node, Object astElement) {
-		node.setElement(astElement);
-		if(astElement instanceof EObject) {
-			EObject eObject = (EObject) astElement;
-			NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
-			adapter.setParserNode(node); 
-		}
+public void associateNodeWithAstElement(AbstractNode node, Object astElement) {
+	node.setElement(astElement);
+	if(astElement instanceof EObject) {
+		EObject eObject = (EObject) astElement;
+		NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
+		adapter.setParserNode(node); 
 	}
+}
+	
+private CompositeNode currentNode;
+private CompositeNode rootNode;
+
+public CompositeNode getRootNode() {
+	return rootNode;
+}
 
 }
 
-parse returns [Object current] :
-	{ currentNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); }
+parse returns [EObject current] :
+	{ rootNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); 
+	currentNode = rootNode; }
 	«parserRules.first().ruleName()» {$current=$«parserRules.first().ruleName()».current;} EOF;
 
 «EXPAND rule FOREACH parserRules»
@@ -94,7 +99,7 @@ parse returns [Object current] :
 «ENDDEFINE»
 
 «DEFINE rule FOR ParserRule»
-«ruleName()» returns [Object current=null] : {Object temp=null; currentNode=«EXPAND createCompositeNode» }
+«ruleName()» returns [EObject current=null] : {EObject temp=null; currentNode=«EXPAND createCompositeNode» }
 	«EXPAND ebnf FOR this.alternatives» { currentNode = currentNode.getParent(); };
 «ENDDEFINE»
 

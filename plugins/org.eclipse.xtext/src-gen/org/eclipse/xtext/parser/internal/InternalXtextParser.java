@@ -2,13 +2,16 @@
 
 package org.eclipse.xtext.parser.internal; 
 
+import org.antlr.runtime.BitSet;
+import org.antlr.runtime.EarlyExitException;
+import org.antlr.runtime.MismatchedSetException;
+import org.antlr.runtime.NoViableAltException;
+import org.antlr.runtime.Parser;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenStream;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.core.parser.IElementFactory;
-
-
-import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
 
 public class InternalXtextParser extends Parser {
     public static final String[] tokenNames = new String[] {
@@ -78,7 +81,7 @@ public class InternalXtextParser extends Parser {
     // $ANTLR start ruleGrammar
     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:27:1: ruleGrammar returns [Object current=null] : ( ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )? ) ;
     public final Object ruleGrammar() throws RecognitionException {
-        Object current = null;
+        EObject current = null;
 
         Object lv_metamodelDeclarations = null;
 
@@ -237,13 +240,13 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleAbstractRule
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:48:1: ruleAbstractRule returns [Object current=null] : (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) ;
-    public final Object ruleAbstractRule() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:48:1: ruleAbstractRule returns [EObject current=null] : (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) ;
+    public final EObject ruleAbstractRule() throws RecognitionException {
+        EObject current = null;
 
-        Object this_LexerRule = null;
+        EObject this_LexerRule = null;
 
-        Object this_ParserRule = null;
+        EObject this_ParserRule = null;
 
 
         try {
@@ -332,13 +335,13 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleAbstractMetamodelDeclaration
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:54:1: ruleAbstractMetamodelDeclaration returns [Object current=null] : (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel ) ;
-    public final Object ruleAbstractMetamodelDeclaration() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:54:1: ruleAbstractMetamodelDeclaration returns [EObject current=null] : (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel ) ;
+    public final EObject ruleAbstractMetamodelDeclaration() throws RecognitionException {
+        EObject current = null;
 
-        Object this_GeneratedMetamodel = null;
+        EObject this_GeneratedMetamodel = null;
 
-        Object this_ReferencedMetamodel = null;
+        EObject this_ReferencedMetamodel = null;
 
 
         try {
@@ -404,9 +407,9 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleGeneratedMetamodel
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:60:1: ruleGeneratedMetamodel returns [Object current=null] : ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) ;
-    public final Object ruleGeneratedMetamodel() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:60:1: ruleGeneratedMetamodel returns [EObject current=null] : ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) ;
+    public final EObject ruleGeneratedMetamodel() throws RecognitionException {
+        EObject current = null;
 
         Token lv_name=null;
         Token lv_nsURI=null;
@@ -497,9 +500,9 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleReferencedMetamodel
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:81:1: ruleReferencedMetamodel returns [Object current=null] : ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) ;
-    public final Object ruleReferencedMetamodel() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:81:1: ruleReferencedMetamodel returns [EObject current=null] : ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) ;
+    public final EObject ruleReferencedMetamodel() throws RecognitionException {
+        EObject current = null;
 
         Token lv_uri=null;
         Token lv_alias=null;
@@ -574,9 +577,9 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleLexerRule
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:97:1: ruleLexerRule returns [Object current=null] : ( ( (lv_name= RULE_ID ) ':' ) (lv_body= RULE_LEXER_BODY ) ) ;
-    public final Object ruleLexerRule() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:97:1: ruleLexerRule returns [EObject current=null] : ( ( (lv_name= RULE_ID ) ':' ) (lv_body= RULE_LEXER_BODY ) ) ;
+    public final EObject ruleLexerRule() throws RecognitionException {
+        EObject current = null;
 
         Token lv_name=null;
         Token lv_body=null;
@@ -633,9 +636,9 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleParserRule
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:111:1: ruleParserRule returns [Object current=null] : ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' ) ;
-    public final Object ruleParserRule() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:111:1: ruleParserRule returns [EObject current=null] : ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' ) ;
+    public final EObject ruleParserRule() throws RecognitionException {
+        EObject current = null;
 
         Token lv_name=null;
         Object lv_type = null;
@@ -739,9 +742,9 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleTypeRef
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:134:1: ruleTypeRef returns [Object current=null] : ( ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID ) ) ;
-    public final Object ruleTypeRef() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:134:1: ruleTypeRef returns [EObject current=null] : ( ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID ) ) ;
+    public final EObject ruleTypeRef() throws RecognitionException {
+        EObject current = null;
 
         Token lv_alias=null;
         Token lv_name=null;
@@ -813,20 +816,20 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleAlternatives
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:148:1: ruleAlternatives returns [Object current=null] : (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* ) ;
-    public final Object ruleAlternatives() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:148:1: ruleAlternatives returns [EObject current=null] : (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* ) ;
+    public final EObject ruleAlternatives() throws RecognitionException {
+        EObject current = null;
 
-        Object this_Group = null;
+        EObject this_Group = null;
 
-        Object lv_groups = null;
+        EObject lv_groups = null;
 
 
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:148:48: ( (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* ) )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:148:50: (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* )
             {
-            Object temp=null;
+            EObject temp=null;
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:150:1: (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:151:1: this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )*
             {
@@ -905,20 +908,20 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleGroup
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:165:1: ruleGroup returns [Object current=null] : (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* ) ;
-    public final Object ruleGroup() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:165:1: ruleGroup returns [EObject current=null] : (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* ) ;
+    public final EObject ruleGroup() throws RecognitionException {
+        EObject current = null;
 
-        Object this_AbstractToken = null;
+        EObject this_AbstractToken = null;
 
-        Object lv_abstractTokens = null;
+        EObject lv_abstractTokens = null;
 
 
         try {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:165:41: ( (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* ) )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:165:43: (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* )
             {
-            Object temp=null;
+            EObject temp=null;
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:167:1: (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:168:1: this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )*
             {
@@ -990,16 +993,16 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleAbstractToken
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:180:1: ruleAbstractToken returns [Object current=null] : ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? ) ;
-    public final Object ruleAbstractToken() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:180:1: ruleAbstractToken returns [EObject current=null] : ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? ) ;
+    public final EObject ruleAbstractToken() throws RecognitionException {
+        EObject current = null;
 
         Token lv_cardinality=null;
-        Object this_Assignment = null;
+        EObject this_Assignment = null;
 
-        Object this_Action = null;
+        EObject this_Action = null;
 
-        Object this_AbstractTerminal = null;
+        EObject this_AbstractTerminal = null;
 
 
         try {
@@ -1160,9 +1163,9 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleAssignment
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:197:1: ruleAssignment returns [Object current=null] : ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) ) ;
-    public final Object ruleAssignment() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:197:1: ruleAssignment returns [EObject current=null] : ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) ) ;
+    public final EObject ruleAssignment() throws RecognitionException {
+        EObject current = null;
 
         Token lv_feature=null;
         Token lv_operator=null;
@@ -1240,9 +1243,9 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleAction
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:218:1: ruleAction returns [Object current=null] : ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' ) ;
-    public final Object ruleAction() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:218:1: ruleAction returns [EObject current=null] : ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' ) ;
+    public final EObject ruleAction() throws RecognitionException {
+        EObject current = null;
 
         Token lv_feature=null;
         Token lv_operator=null;
@@ -1373,15 +1376,15 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleAbstractTerminal
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:249:1: ruleAbstractTerminal returns [Object current=null] : ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) ;
-    public final Object ruleAbstractTerminal() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:249:1: ruleAbstractTerminal returns [EObject current=null] : ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) ;
+    public final EObject ruleAbstractTerminal() throws RecognitionException {
+        EObject current = null;
 
-        Object this_Keyword = null;
+        EObject this_Keyword = null;
 
-        Object this_RuleCall = null;
+        EObject this_RuleCall = null;
 
-        Object this_ParenthesizedElement = null;
+        EObject this_ParenthesizedElement = null;
 
 
         try {
@@ -1484,11 +1487,11 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleParenthesizedElement
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:257:1: ruleParenthesizedElement returns [Object current=null] : ( ( '(' this_Alternatives= ruleAlternatives ) ')' ) ;
-    public final Object ruleParenthesizedElement() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:257:1: ruleParenthesizedElement returns [EObject current=null] : ( ( '(' this_Alternatives= ruleAlternatives ) ')' ) ;
+    public final EObject ruleParenthesizedElement() throws RecognitionException {
+        EObject current = null;
 
-        Object this_Alternatives = null;
+        EObject this_Alternatives = null;
 
 
         try {
@@ -1531,9 +1534,9 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleKeyword
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:265:1: ruleKeyword returns [Object current=null] : (lv_value= RULE_STRING ) ;
-    public final Object ruleKeyword() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:265:1: ruleKeyword returns [EObject current=null] : (lv_value= RULE_STRING ) ;
+    public final EObject ruleKeyword() throws RecognitionException {
+        EObject current = null;
 
         Token lv_value=null;
 
@@ -1541,7 +1544,7 @@ public class InternalXtextParser extends Parser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:265:43: ( (lv_value= RULE_STRING ) )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:265:45: (lv_value= RULE_STRING )
             {
-            Object temp=null;
+            EObject temp=null;
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:267:1: (lv_value= RULE_STRING )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:268:2: lv_value= RULE_STRING
             {
@@ -1567,9 +1570,9 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleRuleCall
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:272:1: ruleRuleCall returns [Object current=null] : (lv_name= RULE_ID ) ;
-    public final Object ruleRuleCall() throws RecognitionException {
-        Object current = null;
+    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:272:1: ruleRuleCall returns [EObject current=null] : (lv_name= RULE_ID ) ;
+    public final EObject ruleRuleCall() throws RecognitionException {
+        EObject current = null;
 
         Token lv_name=null;
 

@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  */
 public abstract class AbstractEcoreElementFactory implements IElementFactory {
 
-	public Object create(String fullTypeName) {
+	public EObject create(String fullTypeName) {
 		String[] split = fullTypeName.split("::");
 		String typeName = fullTypeName;
 		String alias = null;
@@ -54,7 +54,7 @@ public abstract class AbstractEcoreElementFactory implements IElementFactory {
 		return null;
 	}
 
-	public void set(Object _this, String feature, Object value) {
+	public void set(EObject _this, String feature, Object value) {
 		if (value instanceof Token) {
 			value = ((Token) value).getText();
 		}
@@ -65,7 +65,7 @@ public abstract class AbstractEcoreElementFactory implements IElementFactory {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void add(Object _this, String feature, Object value) {
+	public void add(EObject _this, String feature, Object value) {
 		EObject eo = (EObject) _this;
 		EStructuralFeature structuralFeature = eo.eClass()
 				.getEStructuralFeature(feature);

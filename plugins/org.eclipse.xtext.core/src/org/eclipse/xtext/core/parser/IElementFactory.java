@@ -9,6 +9,7 @@
 package org.eclipse.xtext.core.parser;
 
 import org.antlr.runtime.TokenStream;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * @author svenefftinge
@@ -22,7 +23,7 @@ public interface IElementFactory {
 	 * @param typeName
 	 * @return
 	 */
-	public Object create(String typeName);
+	public EObject create(String typeName);
 
 	/**
 	 * 
@@ -32,7 +33,7 @@ public interface IElementFactory {
 	 * @param feature
 	 * @param value
 	 */
-	public void set(Object _this, String feature, Object value);
+	public void set(EObject _this, String feature, Object value);
 
 	/**
 	 * adds the value to the feature of _this element
@@ -41,6 +42,6 @@ public interface IElementFactory {
 	 * @param feature
 	 * @param value
 	 */
-	public void add(Object _this, String feature, Object value);
+	public void add(EObject _this, String feature, Object value);
 
 }
