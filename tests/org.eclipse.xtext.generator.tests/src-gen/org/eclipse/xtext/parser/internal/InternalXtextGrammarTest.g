@@ -21,44 +21,61 @@ public InternalXtextGrammarTestParser(TokenStream input, IElementFactory factory
 	this.factory = factory;
 }
 
-private CompositeNode currentNode;
+public CompositeNode createCompositeNode(EObject currentGrammarElement,
+		CompositeNode parentNode) {
+	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
+	compositeNode.setGrammarElement(currentGrammarElement);
+	parentNode.getChildren().add(compositeNode);
+	return compositeNode;
+}
 
-	public CompositeNode createCompositeNode(EObject currentGrammarElement,
-			CompositeNode parentNode) {
-		CompositeNode compositeNode = ParsetreeFactory.eINSTANCE
-				.createCompositeNode();
-		compositeNode.setGrammarElement(currentGrammarElement);
-		parentNode.getChildren().add(compositeNode);
-		return compositeNode;
-	}
-
-	public Object createLeafNode(String text, EObject currentGrammarElement,
-			CompositeNode parentNode, String feature) {
-		LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-		leafNode.setText(text);
-		leafNode.setGrammarElement(currentGrammarElement);
-		leafNode.setFeature(feature);
-		parentNode.getChildren().add(leafNode);
-		return leafNode;
-	}
-	
-	public void associateNodeWithAstElement(AbstractNode node, Object astElement) {
-		node.setElement(astElement);
-		if(astElement instanceof EObject) {
-			EObject eObject = (EObject) astElement;
-			NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
-			adapter.setParserNode(node); 
+	public Object createLeafNode(EObject currentGrammarElement,
+		CompositeNode parentNode, String feature) {
+		Token token = input.LT(-1);
+		Token tokenBefore = input.LT(-2);
+		int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : 0;
+		if (indexOfTokenBefore+1<token.getTokenIndex()) {
+			for (int x = token.getTokenIndex()-1; x>indexOfTokenBefore;x--) {
+				Token hidden = input.get(x);
+				LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+				leafNode.setText(hidden.getText());
+				leafNode.setHidden(true);
+				parentNode.getChildren().add(leafNode);
+			}
 		}
+	LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+		leafNode.setText(token.getText());
+	leafNode.setGrammarElement(currentGrammarElement);
+	leafNode.setFeature(feature);
+	parentNode.getChildren().add(leafNode);
+	return leafNode;
+}
+	
+public void associateNodeWithAstElement(AbstractNode node, Object astElement) {
+	node.setElement(astElement);
+	if(astElement instanceof EObject) {
+		EObject eObject = (EObject) astElement;
+		NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
+		adapter.setParserNode(node); 
 	}
+}
+	
+private CompositeNode currentNode;
+private CompositeNode rootNode;
+
+public CompositeNode getRootNode() {
+	return rootNode;
+}
 
 }
 
-parse returns [Object current] :
-	{ currentNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); }
+parse returns [EObject current] :
+	{ rootNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); 
+	currentNode = rootNode; }
 	ruleGrammar {$current=$ruleGrammar.current;} EOF;
 
 
-ruleGrammar returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleGrammar returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 (
@@ -80,9 +97,9 @@ ruleParserRule
 )*)
 (
 (
-'lexing' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'lexing' {createLeafNode(null, currentNode, 
 null);}
-':' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+':' {createLeafNode(null, currentNode, 
 null);})
 (
 	lv_lexerRules=
@@ -93,7 +110,7 @@ ruleLexerRule
 	associateNodeWithAstElement(currentNode, $current);}
 )+)?) { currentNode = currentNode.getParent(); };
 
-ruleAbstractRule returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleAbstractRule returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 this_LexerRule=ruleLexerRule{$current = $this_LexerRule.current;}
@@ -101,7 +118,7 @@ this_LexerRule=ruleLexerRule{$current = $this_LexerRule.current;}
 this_ParserRule=ruleParserRule{$current = $this_ParserRule.current;}
 ) { currentNode = currentNode.getParent(); };
 
-ruleAbstractMetamodelDeclaration returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleAbstractMetamodelDeclaration returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 this_GeneratedMetamodel=ruleGeneratedMetamodel{$current = $this_GeneratedMetamodel.current;}
@@ -109,16 +126,16 @@ this_GeneratedMetamodel=ruleGeneratedMetamodel{$current = $this_GeneratedMetamod
 this_ReferencedMetamodel=ruleReferencedMetamodel{$current = $this_ReferencedMetamodel.current;}
 ) { currentNode = currentNode.getParent(); };
 
-ruleGeneratedMetamodel returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleGeneratedMetamodel returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 (
 (
-'generate' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'generate' {createLeafNode(null, currentNode, 
 null);}
 (
 	lv_name=
-RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode, 
+RULE_ID{createLeafNode(null, currentNode, 
 "name");}
  {if ($current==null) {
 	$current = factory.create("GeneratedMetamodel");}
@@ -127,7 +144,7 @@ RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode,
 ))
 (
 	lv_nsURI=
-RULE_STRING{createLeafNode(input.LT(-1).getText(), null, currentNode, 
+RULE_STRING{createLeafNode(null, currentNode, 
 "nsURI");}
  {if ($current==null) {
 	$current = factory.create("GeneratedMetamodel");}
@@ -135,11 +152,11 @@ RULE_STRING{createLeafNode(input.LT(-1).getText(), null, currentNode,
 	associateNodeWithAstElement(currentNode, $current);}
 ))
 (
-'as' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'as' {createLeafNode(null, currentNode, 
 null);}
 (
 	lv_alias=
-RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode, 
+RULE_ID{createLeafNode(null, currentNode, 
 "alias");}
  {if ($current==null) {
 	$current = factory.create("GeneratedMetamodel");}
@@ -147,15 +164,15 @@ RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode,
 	associateNodeWithAstElement(currentNode, $current);}
 ))?) { currentNode = currentNode.getParent(); };
 
-ruleReferencedMetamodel returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleReferencedMetamodel returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 (
-'import' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'import' {createLeafNode(null, currentNode, 
 null);}
 (
 	lv_uri=
-RULE_STRING{createLeafNode(input.LT(-1).getText(), null, currentNode, 
+RULE_STRING{createLeafNode(null, currentNode, 
 "uri");}
  {if ($current==null) {
 	$current = factory.create("ReferencedMetamodel");}
@@ -163,11 +180,11 @@ RULE_STRING{createLeafNode(input.LT(-1).getText(), null, currentNode,
 	associateNodeWithAstElement(currentNode, $current);}
 ))
 (
-'as' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'as' {createLeafNode(null, currentNode, 
 null);}
 (
 	lv_alias=
-RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode, 
+RULE_ID{createLeafNode(null, currentNode, 
 "alias");}
  {if ($current==null) {
 	$current = factory.create("ReferencedMetamodel");}
@@ -175,24 +192,24 @@ RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode,
 	associateNodeWithAstElement(currentNode, $current);}
 ))?) { currentNode = currentNode.getParent(); };
 
-ruleLexerRule returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleLexerRule returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 (
 (
 	lv_name=
-RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode, 
+RULE_ID{createLeafNode(null, currentNode, 
 "name");}
  {if ($current==null) {
 	$current = factory.create("LexerRule");}
 	factory.set($current, "name",lv_name);
 	associateNodeWithAstElement(currentNode, $current);}
 )
-':' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+':' {createLeafNode(null, currentNode, 
 null);})
 (
 	lv_body=
-RULE_LEXER_BODY{createLeafNode(input.LT(-1).getText(), null, currentNode, 
+RULE_LEXER_BODY{createLeafNode(null, currentNode, 
 "body");}
  {if ($current==null) {
 	$current = factory.create("LexerRule");}
@@ -200,7 +217,7 @@ RULE_LEXER_BODY{createLeafNode(input.LT(-1).getText(), null, currentNode,
 	associateNodeWithAstElement(currentNode, $current);}
 )) { currentNode = currentNode.getParent(); };
 
-ruleParserRule returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleParserRule returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 (
@@ -208,7 +225,7 @@ ruleParserRule returns [Object current=null] : {Object temp=null; currentNode=cr
 (
 (
 	lv_name=
-RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode, 
+RULE_ID{createLeafNode(null, currentNode, 
 "name");}
  {if ($current==null) {
 	$current = factory.create("ParserRule");}
@@ -216,7 +233,7 @@ RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode,
 	associateNodeWithAstElement(currentNode, $current);}
 )
 (
-'returns' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'returns' {createLeafNode(null, currentNode, 
 null);}
 (
 	lv_type=
@@ -226,7 +243,7 @@ ruleTypeRef
 	factory.set($current, "type",lv_type);
 	associateNodeWithAstElement(currentNode, $current);}
 ))?)
-':' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+':' {createLeafNode(null, currentNode, 
 null);})
 (
 	lv_alternatives=
@@ -236,27 +253,27 @@ ruleAlternatives
 	factory.set($current, "alternatives",lv_alternatives);
 	associateNodeWithAstElement(currentNode, $current);}
 ))
-';' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+';' {createLeafNode(null, currentNode, 
 null);}) { currentNode = currentNode.getParent(); };
 
-ruleTypeRef returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleTypeRef returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 (
 (
 	lv_alias=
-RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode, 
+RULE_ID{createLeafNode(null, currentNode, 
 "alias");}
  {if ($current==null) {
 	$current = factory.create("TypeRef");}
 	factory.set($current, "alias",lv_alias);
 	associateNodeWithAstElement(currentNode, $current);}
 )
-'::' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'::' {createLeafNode(null, currentNode, 
 null);})?
 (
 	lv_name=
-RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode, 
+RULE_ID{createLeafNode(null, currentNode, 
 "name");}
  {if ($current==null) {
 	$current = factory.create("TypeRef");}
@@ -264,7 +281,7 @@ RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode,
 	associateNodeWithAstElement(currentNode, $current);}
 )) { currentNode = currentNode.getParent(); };
 
-ruleAlternatives returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleAlternatives returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 this_Group=ruleGroup{$current = $this_Group.current;}
@@ -278,7 +295,7 @@ this_Group=ruleGroup{$current = $this_Group.current;}
 	 temp = null;
 	 associateNodeWithAstElement(currentNode, $current);}
 )
-'|' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'|' {createLeafNode(null, currentNode, 
 null);})
 (
 	lv_groups=
@@ -289,7 +306,7 @@ ruleGroup
 	associateNodeWithAstElement(currentNode, $current);}
 ))*) { currentNode = currentNode.getParent(); };
 
-ruleGroup returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleGroup returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 this_AbstractToken=ruleAbstractToken{$current = $this_AbstractToken.current;}
@@ -311,7 +328,7 @@ ruleAbstractToken
 	associateNodeWithAstElement(currentNode, $current);}
 ))*) { currentNode = currentNode.getParent(); };
 
-ruleAbstractToken returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleAbstractToken returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 (
@@ -326,24 +343,24 @@ this_AbstractTerminal=ruleAbstractTerminal{$current = $this_AbstractTerminal.cur
 	lv_cardinality=
 (
 (
-'?' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'?' {createLeafNode(null, currentNode, 
 null);}|
-'*' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'*' {createLeafNode(null, currentNode, 
 null);})|
-'+' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'+' {createLeafNode(null, currentNode, 
 null);}) {if ($current==null) {
 	$current = factory.create("AbstractElement");}
 	factory.set($current, "cardinality",lv_cardinality);
 	associateNodeWithAstElement(currentNode, $current);}
 )?) { currentNode = currentNode.getParent(); };
 
-ruleAssignment returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleAssignment returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 (
 (
 	lv_feature=
-RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode, 
+RULE_ID{createLeafNode(null, currentNode, 
 "feature");}
  {if ($current==null) {
 	$current = factory.create("Assignment");}
@@ -354,11 +371,11 @@ RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode,
 	lv_operator=
 (
 (
-'+=' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'+=' {createLeafNode(null, currentNode, 
 null);}|
-'=' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'=' {createLeafNode(null, currentNode, 
 null);})|
-'?=' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'?=' {createLeafNode(null, currentNode, 
 null);}) {if ($current==null) {
 	$current = factory.create("Assignment");}
 	factory.set($current, "operator",lv_operator);
@@ -373,18 +390,18 @@ ruleAbstractTerminal
 	associateNodeWithAstElement(currentNode, $current);}
 )) { currentNode = currentNode.getParent(); };
 
-ruleAction returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleAction returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 (
 (
 (
-'{' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'{' {createLeafNode(null, currentNode, 
 null);}
 (
-'current' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'current' {createLeafNode(null, currentNode, 
 null);}
-'=' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'=' {createLeafNode(null, currentNode, 
 null);})?)
 (
 	lv_typeName=
@@ -397,11 +414,11 @@ ruleTypeRef
 (
 (
 (
-'.' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'.' {createLeafNode(null, currentNode, 
 null);}
 (
 	lv_feature=
-RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode, 
+RULE_ID{createLeafNode(null, currentNode, 
 "feature");}
  {if ($current==null) {
 	$current = factory.create("Action");}
@@ -411,20 +428,20 @@ RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode,
 (
 	lv_operator=
 (
-'=' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'=' {createLeafNode(null, currentNode, 
 null);}|
-'+=' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'+=' {createLeafNode(null, currentNode, 
 null);}) {if ($current==null) {
 	$current = factory.create("Action");}
 	factory.set($current, "operator",lv_operator);
 	associateNodeWithAstElement(currentNode, $current);}
 ))
-'current' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'current' {createLeafNode(null, currentNode, 
 null);})?)
-'}' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'}' {createLeafNode(null, currentNode, 
 null);}) { currentNode = currentNode.getParent(); };
 
-ruleAbstractTerminal returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleAbstractTerminal returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 (
@@ -435,22 +452,22 @@ this_RuleCall=ruleRuleCall{$current = $this_RuleCall.current;}
 this_ParenthesizedElement=ruleParenthesizedElement{$current = $this_ParenthesizedElement.current;}
 ) { currentNode = currentNode.getParent(); };
 
-ruleParenthesizedElement returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleParenthesizedElement returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 (
-'(' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+'(' {createLeafNode(null, currentNode, 
 null);}
 this_Alternatives=ruleAlternatives{$current = $this_Alternatives.current;}
 )
-')' {createLeafNode(input.LT(-1).getText(), null, currentNode, 
+')' {createLeafNode(null, currentNode, 
 null);}) { currentNode = currentNode.getParent(); };
 
-ruleKeyword returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleKeyword returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 	lv_value=
-RULE_STRING{createLeafNode(input.LT(-1).getText(), null, currentNode, 
+RULE_STRING{createLeafNode(null, currentNode, 
 "value");}
  {if ($current==null) {
 	$current = factory.create("Keyword");}
@@ -458,11 +475,11 @@ RULE_STRING{createLeafNode(input.LT(-1).getText(), null, currentNode,
 	associateNodeWithAstElement(currentNode, $current);}
 ) { currentNode = currentNode.getParent(); };
 
-ruleRuleCall returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleRuleCall returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 	lv_name=
-RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode, 
+RULE_ID{createLeafNode(null, currentNode, 
 "name");}
  {if ($current==null) {
 	$current = factory.create("RuleCall");}
@@ -476,16 +493,16 @@ RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+RULE_INT : ('0'..'9')+;
 
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
-
-RULE_INT : ('0'..'9')+;
 
 RULE_ANY_OTHER : .;
 

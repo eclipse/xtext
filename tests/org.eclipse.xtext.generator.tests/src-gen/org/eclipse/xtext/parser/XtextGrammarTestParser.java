@@ -10,6 +10,7 @@ import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.IParseErrorHandler;
 import org.eclipse.xtext.core.parser.antlr.AntlrExceptionTool;
 import org.eclipse.xtext.core.parser.antlr.TokenTool;
+import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.parser.internal.InternalXtextGrammarTestLexer;
 import org.eclipse.xtext.parser.internal.InternalXtextGrammarTestParser;
@@ -17,7 +18,7 @@ import org.eclipse.xtext.parser.internal.InternalXtextGrammarTestParser;
 
 public class XtextGrammarTestParser extends org.eclipse.xtext.core.parser.AbstractParser {
 	@Override
-	protected Object parse(ANTLRInputStream in, IElementFactory factory,
+	protected EObject parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
 		InternalXtextGrammarTestLexer lexer = new InternalXtextGrammarTestLexer(in) {
 			@Override

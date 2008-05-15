@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-15 13:57:14
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-15 14:11:01
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
@@ -14,17 +14,17 @@ import java.util.ArrayList;
 
 public class InternalSimpleTestParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_LEXER_BODY", "RULE_WS", "RULE_ML_COMMENT", "RULE_STRING", "RULE_SL_COMMENT", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_INT", "RULE_STRING", "RULE_LEXER_BODY", "RULE_ANY_OTHER"
     };
-    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ML_COMMENT=5;
     public static final int RULE_ID=4;
     public static final int RULE_WS=7;
+    public static final int RULE_INT=8;
     public static final int EOF=-1;
-    public static final int RULE_INT=5;
     public static final int RULE_STRING=9;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=10;
-    public static final int RULE_LEXER_BODY=6;
+    public static final int RULE_SL_COMMENT=6;
+    public static final int RULE_LEXER_BODY=10;
 
         public InternalSimpleTestParser(TokenStream input) {
             super(input);
@@ -42,52 +42,69 @@ public class InternalSimpleTestParser extends Parser {
     	this.factory = factory;
     }
 
-    private CompositeNode currentNode;
+    public CompositeNode createCompositeNode(EObject currentGrammarElement,
+    		CompositeNode parentNode) {
+    	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
+    	compositeNode.setGrammarElement(currentGrammarElement);
+    	parentNode.getChildren().add(compositeNode);
+    	return compositeNode;
+    }
 
-    	public CompositeNode createCompositeNode(EObject currentGrammarElement,
-    			CompositeNode parentNode) {
-    		CompositeNode compositeNode = ParsetreeFactory.eINSTANCE
-    				.createCompositeNode();
-    		compositeNode.setGrammarElement(currentGrammarElement);
-    		parentNode.getChildren().add(compositeNode);
-    		return compositeNode;
-    	}
-
-    	public Object createLeafNode(String text, EObject currentGrammarElement,
-    			CompositeNode parentNode, String feature) {
-    		LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-    		leafNode.setText(text);
-    		leafNode.setGrammarElement(currentGrammarElement);
-    		leafNode.setFeature(feature);
-    		parentNode.getChildren().add(leafNode);
-    		return leafNode;
-    	}
-    	
-    	public void associateNodeWithAstElement(AbstractNode node, Object astElement) {
-    		node.setElement(astElement);
-    		if(astElement instanceof EObject) {
-    			EObject eObject = (EObject) astElement;
-    			NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
-    			adapter.setParserNode(node); 
+    	public Object createLeafNode(EObject currentGrammarElement,
+    		CompositeNode parentNode, String feature) {
+    		Token token = input.LT(-1);
+    		Token tokenBefore = input.LT(-2);
+    		int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : 0;
+    		if (indexOfTokenBefore+1<token.getTokenIndex()) {
+    			for (int x = token.getTokenIndex()-1; x>indexOfTokenBefore;x--) {
+    				Token hidden = input.get(x);
+    				LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+    				leafNode.setText(hidden.getText());
+    				leafNode.setHidden(true);
+    				parentNode.getChildren().add(leafNode);
+    			}
     		}
+    	LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+    		leafNode.setText(token.getText());
+    	leafNode.setGrammarElement(currentGrammarElement);
+    	leafNode.setFeature(feature);
+    	parentNode.getChildren().add(leafNode);
+    	return leafNode;
+    }
+    	
+    public void associateNodeWithAstElement(AbstractNode node, Object astElement) {
+    	node.setElement(astElement);
+    	if(astElement instanceof EObject) {
+    		EObject eObject = (EObject) astElement;
+    		NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
+    		adapter.setParserNode(node); 
     	}
+    }
+    	
+    private CompositeNode currentNode;
+    private CompositeNode rootNode;
+
+    public CompositeNode getRootNode() {
+    	return rootNode;
+    }
 
 
 
 
     // $ANTLR start parse
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:56:1: parse returns [Object current] : ruleFoo EOF ;
-    public final Object parse() throws RecognitionException {
-        Object current = null;
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:72:1: parse returns [EObject current] : ruleFoo EOF ;
+    public EObject parse() throws RecognitionException {
+        EObject current = null;
 
-        Object ruleFoo1 = null;
+        EObject ruleFoo1 = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:56:32: ( ruleFoo EOF )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:57:2: ruleFoo EOF
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:73:2: ( ruleFoo EOF )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:73:2: ruleFoo EOF
             {
-             currentNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); 
+             rootNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); 
+            	currentNode = rootNode; 
             pushFollow(FOLLOW_ruleFoo_in_parse46);
             ruleFoo1=ruleFoo();
             _fsp--;
@@ -110,23 +127,23 @@ public class InternalSimpleTestParser extends Parser {
 
 
     // $ANTLR start ruleFoo
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:61:1: ruleFoo returns [Object current=null] : (lv_name= RULE_ID ) ;
-    public final Object ruleFoo() throws RecognitionException {
-        Object current = null;
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:78:1: ruleFoo returns [EObject current=null] : (lv_name= RULE_ID ) ;
+    public EObject ruleFoo() throws RecognitionException {
+        EObject current = null;
 
         Token lv_name=null;
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:61:39: ( (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:61:41: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:78:42: ( (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:78:42: (lv_name= RULE_ID )
             {
-            Object temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:63:1: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:64:2: lv_name= RULE_ID
+            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:80:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:81:2: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo73); 
-            createLeafNode(input.LT(-1).getText(), null, currentNode, 
+            createLeafNode(null, currentNode, 
             "name");
             if (current==null) {
             	current = factory.create("Foo");}
