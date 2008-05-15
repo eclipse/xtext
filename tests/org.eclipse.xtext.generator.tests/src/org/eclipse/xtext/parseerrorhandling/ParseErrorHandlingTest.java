@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.XtextGrammarTest;
+import org.eclipse.xtext.XtextGrammarTestConstants;
 import org.eclipse.xtext.core.parser.IParseErrorHandler;
 import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.parser.XtextGrammarTestASTFactory;
+import org.openarchitectureware.expression.ExecutionContextImpl;
+import org.openarchitectureware.xtend.XtendFacade;
 
 public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 
@@ -28,6 +34,25 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		assertEquals(31, errors.get(0).offset);
 		assertEquals(2, errors.get(0).length);
 		assertEquals(1, errors.size());
+	}
+	
+	public void testParseError2() throws Exception {
+		ErrorHandler errors = new ErrorHandler();
+		Object object = parse("import 'holla' foo returns y::Z : name=ID #;", new XtextGrammarTestASTFactory(), errors);
+		assertWithXtend("'ID'", "parserRules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
+	}
+	
+	public void testParseError3() throws Exception {
+		ErrorHandler errors = new ErrorHandler();
+		Object object = parse("import 'holla' foo returns y::Z : name=ID #############", new XtextGrammarTestASTFactory(), errors);
+		assertWithXtend("'ID'", "parserRules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
+	}
+	
+	public void testParseError4() throws Exception {
+		ErrorHandler errors = new ErrorHandler();
+		Object object = parse("import 'holla' foo returns y::Z : name=ID #############; bar : 'stuff'", new XtextGrammarTestASTFactory(), errors);
+		assertWithXtend("'ID'", "parserRules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
+		assertWithXtend("\"'stuff'\"", "parserRules.get(1).eAllContents.typeSelect(XtextTest::Keyword).first().value", object);
 	}
 
 	private final class ErrorHandler implements IParseErrorHandler {
@@ -123,6 +148,18 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	@Override
 	protected Class<?> getTheClass() {
 		return XtextGrammarTest.class;
+	}
+	
+	@Override
+	protected XtendFacade getXtendFacade() {
+		ExecutionContextImpl ctx = new ExecutionContextImpl();
+		ctx.registerMetaModel(new EmfRegistryMetaModel() {
+			@Override
+			protected EPackage[] allPackages() {
+				return new EPackage[]{XtextGrammarTestConstants.getXtextTestEPackage()};
+			}
+		});
+		return XtendFacade.create(ctx);
 	}
 
 }
