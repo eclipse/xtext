@@ -16,6 +16,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextEPackageAccess;
 import org.eclipse.xtext.XtextGrammarTest;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.dummy.DummyLanguage;
 import org.eclipse.xtext.grammargen.tests.SimpleTest;
 import org.eclipse.xtext.grammargen.tests.SimpleTest2;
 import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest;
@@ -31,7 +32,7 @@ public class GenerateAllTestGrammars {
 
 	private final static Class<?>[] testclasses = new Class[] { 
 		SimpleTest.class, SimpleTest2.class, XtextGrammarTest.class,
-		MetamodelRefTest.class};
+		MetamodelRefTest.class, DummyLanguage.class};
 
 	public static void main(String[] args) throws Exception {
 		for (Class<?> c : testclasses) {
