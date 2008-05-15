@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.xtext.ui.core.languageDescriptor">
+      <languageDescriptor
+            id="org.eclipse.xtext.ui.core.reference.referenceLanguageDescriptor"
+            name="Reference Project">
+      </languageDescriptor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.xtext.ui.core.editor.BaseTextEditor"
+            default="true"
+            extensions="test, tst"
+            id="org.eclipse.xtext.ui.core.reference.editor2"
+            name="Test Editor">
+      </editor>
+   </extension>
+
+</plugin>
