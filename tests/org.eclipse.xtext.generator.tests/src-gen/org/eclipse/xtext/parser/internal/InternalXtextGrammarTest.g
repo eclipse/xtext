@@ -91,7 +91,8 @@ ruleAbstractMetamodelDeclaration
  {if ($current==null) {
 	$current = factory.create("Grammar");}
 	factory.add($current, "metamodelDeclarations",lv_metamodelDeclarations);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 )*
 (
 	lv_parserRules=
@@ -99,7 +100,8 @@ ruleParserRule
  {if ($current==null) {
 	$current = factory.create("Grammar");}
 	factory.add($current, "parserRules",lv_parserRules);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 )*)
 (
 (
@@ -113,7 +115,8 @@ ruleLexerRule
  {if ($current==null) {
 	$current = factory.create("Grammar");}
 	factory.add($current, "lexerRules",lv_lexerRules);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 )+)?) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleAbstractRule returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
@@ -146,7 +149,8 @@ RULE_ID{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("GeneratedMetamodel");}
 	factory.set($current, "name",lv_name);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ))
 (
 	lv_nsURI=
@@ -155,7 +159,8 @@ RULE_STRING{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("GeneratedMetamodel");}
 	factory.set($current, "nsURI",lv_nsURI);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ))
 (
 'as' {createLeafNode(null, currentNode, 
@@ -167,7 +172,8 @@ RULE_ID{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("GeneratedMetamodel");}
 	factory.set($current, "alias",lv_alias);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ))?) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleReferencedMetamodel returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
@@ -183,7 +189,8 @@ RULE_STRING{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("ReferencedMetamodel");}
 	factory.set($current, "uri",lv_uri);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ))
 (
 'as' {createLeafNode(null, currentNode, 
@@ -195,7 +202,8 @@ RULE_ID{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("ReferencedMetamodel");}
 	factory.set($current, "alias",lv_alias);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ))?) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleLexerRule returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
@@ -209,7 +217,8 @@ RULE_ID{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("LexerRule");}
 	factory.set($current, "name",lv_name);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 )
 ':' {createLeafNode(null, currentNode, 
 null);})
@@ -220,7 +229,8 @@ RULE_LEXER_BODY{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("LexerRule");}
 	factory.set($current, "body",lv_body);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 )) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleParserRule returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
@@ -236,7 +246,8 @@ RULE_ID{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("ParserRule");}
 	factory.set($current, "name",lv_name);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 )
 (
 'returns' {createLeafNode(null, currentNode, 
@@ -247,7 +258,8 @@ ruleTypeRef
  {if ($current==null) {
 	$current = factory.create("ParserRule");}
 	factory.set($current, "type",lv_type);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ))?)
 ':' {createLeafNode(null, currentNode, 
 null);})
@@ -257,7 +269,8 @@ ruleAlternatives
  {if ($current==null) {
 	$current = factory.create("ParserRule");}
 	factory.set($current, "alternatives",lv_alternatives);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ))
 ';' {createLeafNode(null, currentNode, 
 null);}) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
@@ -273,7 +286,8 @@ RULE_ID{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("TypeRef");}
 	factory.set($current, "alias",lv_alias);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 )
 '::' {createLeafNode(null, currentNode, 
 null);})?
@@ -284,7 +298,8 @@ RULE_ID{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("TypeRef");}
 	factory.set($current, "name",lv_name);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 )) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleAlternatives returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
@@ -309,7 +324,8 @@ ruleGroup
  {if ($current==null) {
 	$current = factory.create("AbstractElement");}
 	factory.add($current, "groups",lv_groups);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ))*) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleGroup returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
@@ -331,7 +347,8 @@ ruleAbstractToken
  {if ($current==null) {
 	$current = factory.create("AbstractElement");}
 	factory.add($current, "abstractTokens",lv_abstractTokens);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ))*) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleAbstractToken returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
@@ -349,15 +366,14 @@ this_AbstractTerminal=ruleAbstractTerminal{$current = $this_AbstractTerminal.cur
 	lv_cardinality=
 (
 (
-'?' {createLeafNode(null, currentNode, 
-null);}|
-'*' {createLeafNode(null, currentNode, 
-null);})|
-'+' {createLeafNode(null, currentNode, 
-null);}) {if ($current==null) {
+'?' |
+'*' )|
+'+' ) {if ($current==null) {
 	$current = factory.create("AbstractElement");}
 	factory.set($current, "cardinality",lv_cardinality);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+createLeafNode(null, currentNode, 
+"cardinality");}
 )?) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleAssignment returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
@@ -371,21 +387,21 @@ RULE_ID{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("Assignment");}
 	factory.set($current, "feature",lv_feature);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 )
 (
 	lv_operator=
 (
 (
-'+=' {createLeafNode(null, currentNode, 
-null);}|
-'=' {createLeafNode(null, currentNode, 
-null);})|
-'?=' {createLeafNode(null, currentNode, 
-null);}) {if ($current==null) {
+'+=' |
+'=' )|
+'?=' ) {if ($current==null) {
 	$current = factory.create("Assignment");}
 	factory.set($current, "operator",lv_operator);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+createLeafNode(null, currentNode, 
+"operator");}
 ))
 (
 	lv_terminal=
@@ -393,7 +409,8 @@ ruleAbstractTerminal
  {if ($current==null) {
 	$current = factory.create("Assignment");}
 	factory.set($current, "terminal",lv_terminal);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 )) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleAction returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
@@ -415,7 +432,8 @@ ruleTypeRef
  {if ($current==null) {
 	$current = factory.create("Action");}
 	factory.set($current, "typeName",lv_typeName);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ))
 (
 (
@@ -429,18 +447,19 @@ RULE_ID{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("Action");}
 	factory.set($current, "feature",lv_feature);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ))
 (
 	lv_operator=
 (
-'=' {createLeafNode(null, currentNode, 
-null);}|
-'+=' {createLeafNode(null, currentNode, 
-null);}) {if ($current==null) {
+'=' |
+'+=' ) {if ($current==null) {
 	$current = factory.create("Action");}
 	factory.set($current, "operator",lv_operator);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+createLeafNode(null, currentNode, 
+"operator");}
 ))
 'current' {createLeafNode(null, currentNode, 
 null);})?)
@@ -478,7 +497,8 @@ RULE_STRING{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("Keyword");}
 	factory.set($current, "value",lv_value);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleRuleCall returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
@@ -490,25 +510,26 @@ RULE_ID{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("RuleCall");}
 	factory.set($current, "name",lv_name);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 
-
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 RULE_INT : ('0'..'9')+;
 
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+
+RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 

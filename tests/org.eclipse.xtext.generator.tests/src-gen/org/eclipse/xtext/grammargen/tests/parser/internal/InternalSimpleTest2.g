@@ -89,7 +89,8 @@ ruleChild
  {if ($current==null) {
 	$current = factory.create("Model");}
 	factory.add($current, "contents",lv_contents);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 )* { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleChild returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
@@ -101,11 +102,12 @@ ruleChild returns [EObject current=null] : {EObject temp=null; currentNode=creat
 (
 (
 	lv_optional=
-'optional' {createLeafNode(null, currentNode, 
-null);} {if ($current==null) {
+'optional'  {if ($current==null) {
 	$current = factory.create("Child");}
 	factory.set($current, "optional",lv_optional);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+createLeafNode(null, currentNode, 
+"optional");}
 )?
 'keyword' {createLeafNode(null, currentNode, 
 null);})
@@ -116,7 +118,8 @@ RULE_ID{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("Child");}
 	factory.set($current, "name",lv_name);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ))
 (
 	lv_number=
@@ -125,7 +128,8 @@ RULE_INT{createLeafNode(null, currentNode,
  {if ($current==null) {
 	$current = factory.create("Child");}
 	factory.set($current, "number",lv_number);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	}
 ))
 '{' {createLeafNode(null, currentNode, 
 null);})
@@ -134,20 +138,20 @@ null);}) { currentNode = currentNode.getParent()!=null?currentNode.getParent():c
 
 
 
+RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
+
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_INT : ('0'..'9')+;
 
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
-
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
-
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
-
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_ANY_OTHER : .;
 

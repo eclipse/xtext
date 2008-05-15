@@ -9,6 +9,7 @@
 package org.eclipse.xtext.generator.tests;
 
 import org.antlr.runtime.Token;
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -36,6 +37,8 @@ public class Invocation {
 			return ((Token)param2).getText();
 		} if (param2 instanceof String) {
 			return (String) param2;
+		} if (param2 instanceof EClass) {
+			return ((EClass) param2).getName();
 		}
 		return param2.getClass().getSimpleName();
 	}
