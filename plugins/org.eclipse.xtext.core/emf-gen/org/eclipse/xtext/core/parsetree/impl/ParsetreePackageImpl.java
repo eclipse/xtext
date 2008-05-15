@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackageImpl.java,v 1.2 2008/05/15 12:04:26 sefftinge Exp $
+ * $Id: ParsetreePackageImpl.java,v 1.3 2008/05/15 12:46:48 jkohnlein Exp $
  */
 package org.eclipse.xtext.core.parsetree.impl;
 
@@ -156,8 +156,8 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAbstractNode_Element() {
-		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(1);
+	public EReference getAbstractNode_Element() {
+		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 	 * @generated
 	 */
 	public EReference getAbstractNode_GrammarElement() {
-		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(2);
+		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -238,8 +238,8 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 
 		abstractNodeEClass = createEClass(ABSTRACT_NODE);
 		createEReference(abstractNodeEClass, ABSTRACT_NODE__PARENT);
-		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__ELEMENT);
 		createEReference(abstractNodeEClass, ABSTRACT_NODE__GRAMMAR_ELEMENT);
+		createEReference(abstractNodeEClass, ABSTRACT_NODE__ELEMENT);
 
 		leafNodeEClass = createEClass(LEAF_NODE);
 		createEAttribute(leafNodeEClass, LEAF_NODE__TEXT);
@@ -284,8 +284,8 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 
 		initEClass(abstractNodeEClass, AbstractNode.class, "AbstractNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractNode_Parent(), this.getCompositeNode(), this.getCompositeNode_Children(), "parent", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAbstractNode_Element(), ecorePackage.getEJavaObject(), "element", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractNode_GrammarElement(), ecorePackage.getEObject(), null, "grammarElement", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractNode_Element(), ecorePackage.getEObject(), null, "element", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "length", 0, 1, IS_UNIQUE, IS_ORDERED);
 
