@@ -25,30 +25,43 @@ public CompositeNode createCompositeNode(EObject currentGrammarElement,
 		CompositeNode parentNode) {
 	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
 	compositeNode.setGrammarElement(currentGrammarElement);
-	parentNode.getChildren().add(compositeNode);
+	if (parentNode!=null) parentNode.getChildren().add(compositeNode);
 	return compositeNode;
 }
 
-	public Object createLeafNode(EObject currentGrammarElement,
-		CompositeNode parentNode, String feature) {
-		Token token = input.LT(-1);
-		Token tokenBefore = input.LT(-2);
-		int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : 0;
-		if (indexOfTokenBefore+1<token.getTokenIndex()) {
-			for (int x = token.getTokenIndex()-1; x>indexOfTokenBefore;x--) {
-				Token hidden = input.get(x);
-				LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-				leafNode.setText(hidden.getText());
-				leafNode.setHidden(true);
-				parentNode.getChildren().add(leafNode);
-			}
+public Object createLeafNode(EObject currentGrammarElement, CompositeNode parentNode, String feature) {
+	Token token = input.LT(-1);
+	Token tokenBefore = input.LT(-2);
+	int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : 0;
+	if (indexOfTokenBefore+1<token.getTokenIndex()) {
+		for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
+			Token hidden = input.get(x);
+			LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+			leafNode.setText(hidden.getText());
+			leafNode.setHidden(true);
+			parentNode.getChildren().add(leafNode);
 		}
+	}
 	LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
 		leafNode.setText(token.getText());
 	leafNode.setGrammarElement(currentGrammarElement);
 	leafNode.setFeature(feature);
 	parentNode.getChildren().add(leafNode);
 	return leafNode;
+}
+
+private void appendTrailingHiddenTokens(CompositeNode parentNode) {
+	Token tokenBefore = input.LT(-1);
+	int size = input.size();
+	if (tokenBefore!=null && tokenBefore.getTokenIndex()<size) {
+		for (int x = tokenBefore.getTokenIndex()+1; x<size;x++) {
+			Token hidden = input.get(x);
+			LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+			leafNode.setText(hidden.getText());
+			leafNode.setHidden(true);
+			parentNode.getChildren().add(leafNode);
+		}
+	}
 }
 	
 public void associateNodeWithAstElement(AbstractNode node, Object astElement) {
@@ -70,9 +83,7 @@ public CompositeNode getRootNode() {
 }
 
 parse returns [EObject current] :
-	{ rootNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); 
-	currentNode = rootNode; }
-	ruleFoo {$current=$ruleFoo.current;} EOF;
+	ruleFoo {$current=$ruleFoo.current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
 
 ruleFoo returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
@@ -94,7 +105,7 @@ ruleNameRef
 	$current = factory.create("Foo");}
 	factory.add($current, "nameRefs",lv_nameRefs);
 	associateNodeWithAstElement(currentNode, $current);}
-)*) { currentNode = currentNode.getParent(); };
+)*) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleNameRef returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -106,12 +117,13 @@ RULE_STRING{createLeafNode(null, currentNode,
 	$current = factory.create("xtext::RuleCall");}
 	factory.set($current, "name",lv_name);
 	associateNodeWithAstElement(currentNode, $current);}
-) { currentNode = currentNode.getParent(); };
+) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 
 
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
-	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+RULE_INT : ('0'..'9')+;
+
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
@@ -119,11 +131,10 @@ RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
+RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
+	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-RULE_INT : ('0'..'9')+;
-
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 

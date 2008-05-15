@@ -29,7 +29,7 @@ public class TokenTool {
 	 * @return
 	 */
 	public static int getLine(Token t) {
-		return t.getLine();
+		return  t!=null ? t.getLine() : -1;
 	}
 	
 	/**
