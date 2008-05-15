@@ -16,7 +16,9 @@ import junit.framework.TestCase;
 
 import org.antlr.runtime.TokenStream;
 import org.apache.tools.ant.filters.StringInputStream;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.IParseErrorHandler;
 import org.openarchitectureware.xtend.XtendFacade;
@@ -77,7 +79,9 @@ public abstract class AbstractGeneratorTest extends TestCase {
 
 			public EObject create(String typeName) {
 				calls.add(new Invocation("create", typeName, null));
-				return null;
+				EClass class1 = EcorePackage.eINSTANCE.getEcoreFactory().createEClass();
+				class1.setName(typeName);
+				return class1;
 			}
 
 			public void set(EObject _this, String feature, Object value) {
