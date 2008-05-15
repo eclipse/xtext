@@ -47,5 +47,7 @@ public class GenerateAllTestGrammars {
 			GeneratorFacade.generate(grammarModel,c.getSimpleName(),c.getPackage().getName().replace('.', '/'),PATH);
 		}
 	}
+	
+	
 
 }
