@@ -32,7 +32,7 @@ public CompositeNode createCompositeNode(EObject currentGrammarElement,
 public Object createLeafNode(EObject currentGrammarElement, CompositeNode parentNode, String feature) {
 	Token token = input.LT(-1);
 	Token tokenBefore = input.LT(-2);
-	int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : 0;
+	int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
 	if (indexOfTokenBefore+1<token.getTokenIndex()) {
 		for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
 			Token hidden = input.get(x);
@@ -116,20 +116,20 @@ RULE_STRING{createLeafNode(null, currentNode,
 
 
 
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
-	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
+RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
+
 RULE_INT : ('0'..'9')+;
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
+	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
-
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_ANY_OTHER : .;
 
