@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g 2008-05-15 13:37:15
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g 2008-05-15 13:57:16
 
 package org.eclipse.xtext.parser.internal; 
 
@@ -55,6 +55,18 @@ public class InternalXtextGrammarTestParser extends Parser {
 
     	public Object createLeafNode(String text, EObject currentGrammarElement,
     			CompositeNode parentNode, String feature) {
+    		Token token = input.LT(-1);
+    		Token tokenBefore = input.LT(-2);
+    		int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : 0;
+    		if (indexOfTokenBefore+1<token.getTokenIndex()) {
+    			for (int x = token.getTokenIndex()-1; x>indexOfTokenBefore;x--) {
+    				Token hidden = input.get(x);
+    				LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+    				leafNode.setText(hidden.getText());
+    				leafNode.setHidden(true);
+    				parentNode.getChildren().add(leafNode);
+    			}
+    		}
     		LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
     		leafNode.setText(text);
     		leafNode.setGrammarElement(currentGrammarElement);
