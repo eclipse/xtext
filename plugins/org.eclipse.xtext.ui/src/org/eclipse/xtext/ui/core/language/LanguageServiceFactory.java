@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
@@ -26,7 +27,6 @@ public class LanguageServiceFactory {
 	private static final String CLASS = "class";
 
 	private static final String SYNTAXCOLORER = "syntaxColorer";
-
 	private static LanguageServiceFactory instance;
 
 	private LanguageServiceFactory() {
@@ -56,7 +56,7 @@ public class LanguageServiceFactory {
 			LanguageDescriptor languageDescriptor,
 			String serviceName) {
 		IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
-				.getExtensionPoint("org.eclipse.xtext.ui.core", serviceName);
+				.getExtensionPoint(Activator.PLUGIN_ID, serviceName);
 		if (extensionPoint == null) {
 			return null;
 		}
