@@ -42,30 +42,43 @@ public CompositeNode createCompositeNode(EObject currentGrammarElement,
 		CompositeNode parentNode) {
 	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
 	compositeNode.setGrammarElement(currentGrammarElement);
-	parentNode.getChildren().add(compositeNode);
+	if (parentNode!=null) parentNode.getChildren().add(compositeNode);
 	return compositeNode;
 }
 
-	public Object createLeafNode(EObject currentGrammarElement,
-		CompositeNode parentNode, String feature) {
-		Token token = input.LT(-1);
-		Token tokenBefore = input.LT(-2);
-		int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : 0;
-		if (indexOfTokenBefore+1<token.getTokenIndex()) {
-			for (int x = token.getTokenIndex()-1; x>indexOfTokenBefore;x--) {
-				Token hidden = input.get(x);
-				LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-				leafNode.setText(hidden.getText());
-				leafNode.setHidden(true);
-				parentNode.getChildren().add(leafNode);
-			}
+public Object createLeafNode(EObject currentGrammarElement, CompositeNode parentNode, String feature) {
+	Token token = input.LT(-1);
+	Token tokenBefore = input.LT(-2);
+	int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : 0;
+	if (indexOfTokenBefore+1<token.getTokenIndex()) {
+		for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
+			Token hidden = input.get(x);
+			LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+			leafNode.setText(hidden.getText());
+			leafNode.setHidden(true);
+			parentNode.getChildren().add(leafNode);
 		}
+	}
 	LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
 		leafNode.setText(token.getText());
 	leafNode.setGrammarElement(currentGrammarElement);
 	leafNode.setFeature(feature);
 	parentNode.getChildren().add(leafNode);
 	return leafNode;
+}
+
+private void appendTrailingHiddenTokens(CompositeNode parentNode) {
+	Token tokenBefore = input.LT(-1);
+	int size = input.size();
+	if (tokenBefore!=null && tokenBefore.getTokenIndex()<size) {
+		for (int x = tokenBefore.getTokenIndex()+1; x<size;x++) {
+			Token hidden = input.get(x);
+			LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+			leafNode.setText(hidden.getText());
+			leafNode.setHidden(true);
+			parentNode.getChildren().add(leafNode);
+		}
+	}
 }
 	
 public void associateNodeWithAstElement(AbstractNode node, Object astElement) {
@@ -87,9 +100,7 @@ public CompositeNode getRootNode() {
 }
 
 parse returns [EObject current] :
-	{ rootNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); 
-	currentNode = rootNode; }
-	«parserRules.first().ruleName()» {$current=$«parserRules.first().ruleName()».current;} EOF;
+	«parserRules.first().ruleName()» {$current=$«parserRules.first().ruleName()».current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
 «EXPAND rule FOREACH parserRules»
 
@@ -100,7 +111,7 @@ parse returns [EObject current] :
 
 «DEFINE rule FOR ParserRule»
 «ruleName()» returns [EObject current=null] : {EObject temp=null; currentNode=«EXPAND createCompositeNode» }
-	«EXPAND ebnf FOR this.alternatives» { currentNode = currentNode.getParent(); };
+	«EXPAND ebnf FOR this.alternatives» { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 «ENDDEFINE»
 
 «DEFINE rule FOR LexerRule»
