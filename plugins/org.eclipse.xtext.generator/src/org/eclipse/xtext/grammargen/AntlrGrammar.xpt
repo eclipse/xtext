@@ -49,7 +49,7 @@ public CompositeNode createCompositeNode(EObject currentGrammarElement,
 public Object createLeafNode(EObject currentGrammarElement, CompositeNode parentNode, String feature) {
 	Token token = input.LT(-1);
 	Token tokenBefore = input.LT(-2);
-	int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : 0;
+	int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
 	if (indexOfTokenBefore+1<token.getTokenIndex()) {
 		for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
 			Token hidden = input.get(x);
