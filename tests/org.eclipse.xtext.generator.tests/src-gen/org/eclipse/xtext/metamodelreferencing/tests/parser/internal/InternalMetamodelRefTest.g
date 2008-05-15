@@ -9,7 +9,7 @@ package org.eclipse.xtext.metamodelreferencing.tests.parser.internal;
 package org.eclipse.xtext.metamodelreferencing.tests.parser.internal; 
 
 import org.eclipse.xtext.core.parser.IElementFactory;
-import org.eclipse.xtext.parsetree.*;
+import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 }
 
@@ -21,7 +21,7 @@ public InternalMetamodelRefTestParser(TokenStream input, IElementFactory factory
 	this.factory = factory;
 }
 
-private CompositeNode currentParserNode;
+private CompositeNode currentNode;
 
 	public CompositeNode createCompositeNode(EObject currentGrammarElement,
 			CompositeNode parentNode) {
@@ -42,13 +42,11 @@ private CompositeNode currentParserNode;
 		return leafNode;
 	}
 	
-	public void associateNodeWithAstElement(AbstractParserNode node, Object astElement) {
+	public void associateNodeWithAstElement(AbstractNode node, Object astElement) {
 		node.setElement(astElement);
 		if(astElement instanceof EObject) {
 			EObject eObject = (EObject) astElement;
-			ParserNodeAdapter adapter = (org.eclipse.xtext.parsetree.ParserNodeAdapter) 
-				org.eclipse.xtext.parsetree.ParserNodeAdapterFactory.INSTANCE.adapt(eObject, 
-					org.eclipse.xtext.parsetree.AbstractParserNode.class);
+			NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
 			adapter.setParserNode(node); 
 		}
 	}
@@ -56,21 +54,21 @@ private CompositeNode currentParserNode;
 }
 
 parse returns [Object current] :
-	{ currentParserNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); }
+	{ currentNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); }
 	ruleFoo {$current=$ruleFoo.current;} EOF;
 
 
-ruleFoo returns [Object current=null] : {Object temp=null; currentParserNode=createCompositeNode(null, currentParserNode); }
+ruleFoo returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 (
 	lv_name=
-RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentParserNode, 
+RULE_ID{createLeafNode(input.LT(-1).getText(), null, currentNode, 
 "name");}
  {if ($current==null) {
 	$current = factory.create("Foo");}
 	factory.set($current, "name",lv_name);
-	associateNodeWithAstElement(currentParserNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);}
 )
 (
 	lv_nameRefs=
@@ -78,20 +76,20 @@ ruleNameRef
  {if ($current==null) {
 	$current = factory.create("Foo");}
 	factory.add($current, "nameRefs",lv_nameRefs);
-	associateNodeWithAstElement(currentParserNode, $current);}
-)*) { currentParserNode = currentParserNode.getParent(); };
+	associateNodeWithAstElement(currentNode, $current);}
+)*) { currentNode = currentNode.getParent(); };
 
-ruleNameRef returns [Object current=null] : {Object temp=null; currentParserNode=createCompositeNode(null, currentParserNode); }
+ruleNameRef returns [Object current=null] : {Object temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
 (
 	lv_name=
-RULE_STRING{createLeafNode(input.LT(-1).getText(), null, currentParserNode, 
+RULE_STRING{createLeafNode(input.LT(-1).getText(), null, currentNode, 
 "name");}
  {if ($current==null) {
 	$current = factory.create("xtext::RuleCall");}
 	factory.set($current, "name",lv_name);
-	associateNodeWithAstElement(currentParserNode, $current);}
-) { currentParserNode = currentParserNode.getParent(); };
+	associateNodeWithAstElement(currentNode, $current);}
+) { currentNode = currentNode.getParent(); };
 
 
 

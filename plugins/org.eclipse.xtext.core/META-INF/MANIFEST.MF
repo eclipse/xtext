@@ -9,9 +9,8 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.core.parser,
  org.eclipse.xtext.core.parser.antlr,
- org.eclipse.xtext.parsetree,
- org.eclipse.xtext.parsetree.impl,
- org.eclipse.xtext.parsetree.util
+ org.eclipse.xtext.core.parsetree,
+ org.eclipse.xtext.core.parsetree.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.antlr.runtime;bundle-version="3.0.0"

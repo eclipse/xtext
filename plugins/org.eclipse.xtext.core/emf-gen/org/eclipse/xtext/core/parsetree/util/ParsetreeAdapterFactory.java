@@ -2,9 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeAdapterFactory.java,v 1.2 2008/05/14 15:56:00 jkohnlein Exp $
+ * $Id: ParsetreeAdapterFactory.java,v 1.1 2008/05/15 11:39:44 sefftinge Exp $
  */
-package org.eclipse.xtext.parsetree.util;
+package org.eclipse.xtext.core.parsetree.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -13,14 +13,14 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.parsetree.*;
+import org.eclipse.xtext.core.parsetree.*;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.xtext.parsetree.ParsetreePackage
+ * @see org.eclipse.xtext.core.parsetree.ParsetreePackage
  * @generated
  */
 public class ParsetreeAdapterFactory extends AdapterFactoryImpl {
@@ -76,8 +76,8 @@ public class ParsetreeAdapterFactory extends AdapterFactoryImpl {
 				return createCompositeNodeAdapter();
 			}
 			@Override
-			public Adapter caseAbstractParserNode(AbstractParserNode object) {
-				return createAbstractParserNodeAdapter();
+			public Adapter caseAbstractNode(AbstractNode object) {
+				return createAbstractNodeAdapter();
 			}
 			@Override
 			public Adapter caseLeafNode(LeafNode object) {
@@ -104,13 +104,13 @@ public class ParsetreeAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.CompositeNode <em>Composite Node</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.core.parsetree.CompositeNode <em>Composite Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.parsetree.CompositeNode
+	 * @see org.eclipse.xtext.core.parsetree.CompositeNode
 	 * @generated
 	 */
 	public Adapter createCompositeNodeAdapter() {
@@ -118,27 +118,27 @@ public class ParsetreeAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.AbstractParserNode <em>Abstract Parser Node</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.core.parsetree.AbstractNode <em>Abstract Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.parsetree.AbstractParserNode
+	 * @see org.eclipse.xtext.core.parsetree.AbstractNode
 	 * @generated
 	 */
-	public Adapter createAbstractParserNodeAdapter() {
+	public Adapter createAbstractNodeAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.LeafNode <em>Leaf Node</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.core.parsetree.LeafNode <em>Leaf Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.parsetree.LeafNode
+	 * @see org.eclipse.xtext.core.parsetree.LeafNode
 	 * @generated
 	 */
 	public Adapter createLeafNodeAdapter() {

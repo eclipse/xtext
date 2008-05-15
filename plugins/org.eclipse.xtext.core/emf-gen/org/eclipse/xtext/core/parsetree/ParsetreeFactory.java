@@ -2,9 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeFactory.java,v 1.2 2008/05/14 15:56:00 jkohnlein Exp $
+ * $Id: ParsetreeFactory.java,v 1.1 2008/05/15 11:39:43 sefftinge Exp $
  */
-package org.eclipse.xtext.parsetree;
+package org.eclipse.xtext.core.parsetree;
 
 import org.eclipse.emf.ecore.EFactory;
 
@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.xtext.parsetree.ParsetreePackage
+ * @see org.eclipse.xtext.core.parsetree.ParsetreePackage
  * @generated
  */
 public interface ParsetreeFactory extends EFactory {
@@ -23,7 +23,7 @@ public interface ParsetreeFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ParsetreeFactory eINSTANCE = org.eclipse.xtext.parsetree.impl.ParsetreeFactoryImpl.init();
+	ParsetreeFactory eINSTANCE = org.eclipse.xtext.core.parsetree.impl.ParsetreeFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Composite Node</em>'.

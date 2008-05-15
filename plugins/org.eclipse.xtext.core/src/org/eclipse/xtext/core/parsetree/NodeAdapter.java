@@ -1,21 +1,21 @@
-package org.eclipse.xtext.parsetree;
+package org.eclipse.xtext.core.parsetree;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 
-public class ParserNodeAdapter implements Adapter {
+public class NodeAdapter implements Adapter {
 
 	private Notifier target;
 	
-	private AbstractParserNode parserNode; 
+	private AbstractNode parserNode; 
 	
 	public Notifier getTarget() {
 		return target;
 	}
 
 	public boolean isAdapterForType(Object type) {
-		return type==AbstractParserNode.class;
+		return type==AbstractNode.class;
 	}
 
 	public void notifyChanged(Notification notification) {
@@ -26,11 +26,11 @@ public class ParserNodeAdapter implements Adapter {
 		target = newTarget;
 	}
 
-	public AbstractParserNode getParserNode() {
+	public AbstractNode getParserNode() {
 		return parserNode;
 	}
 
-	public void setParserNode(AbstractParserNode parserNode) {
+	public void setParserNode(AbstractNode parserNode) {
 		this.parserNode = parserNode;
 	}
 

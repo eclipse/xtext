@@ -5,12 +5,20 @@
     modelPluginID="org.eclipse.xtext.core" modelName="Parsetree" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="5.0" copyrightFields="false">
   <foreignModel>parsetree.ecore</foreignModel>
-  <genPackages prefix="Parsetree" basePackage="org.eclipse.xtext" disposableProviderFactory="true"
+  <genPackages prefix="Parsetree" basePackage="org.eclipse.xtext.core" disposableProviderFactory="true"
       ecorePackage="parsetree.ecore#/">
-    <genClasses ecoreClass="parsetree.ecore#//ParserNode">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//ParserNode/text"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference parsetree.ecore#//ParserNode/element"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference parsetree.ecore#//ParserNode/grammarElement"/>
+    <genClasses ecoreClass="parsetree.ecore#//CompositeNode">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference parsetree.ecore#//CompositeNode/grammarElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference parsetree.ecore#//CompositeNode/children"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="parsetree.ecore#//AbstractNode">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference parsetree.ecore#//AbstractNode/parent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//AbstractNode/element"/>
+    </genClasses>
+    <genClasses ecoreClass="parsetree.ecore#//LeafNode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//LeafNode/text"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference parsetree.ecore#//LeafNode/grammarElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//LeafNode/feature"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

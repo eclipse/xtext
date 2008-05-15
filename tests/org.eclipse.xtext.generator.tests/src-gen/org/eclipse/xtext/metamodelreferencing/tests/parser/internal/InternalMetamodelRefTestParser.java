@@ -1,9 +1,9 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g 2008-05-15 08:41:01
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g 2008-05-15 13:37:16
 
 package org.eclipse.xtext.metamodelreferencing.tests.parser.internal; 
 
 import org.eclipse.xtext.core.parser.IElementFactory;
-import org.eclipse.xtext.parsetree.*;
+import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 
 
@@ -42,7 +42,7 @@ public class InternalMetamodelRefTestParser extends Parser {
     	this.factory = factory;
     }
 
-    private CompositeNode currentParserNode;
+    private CompositeNode currentNode;
 
     	public CompositeNode createCompositeNode(EObject currentGrammarElement,
     			CompositeNode parentNode) {
@@ -63,13 +63,11 @@ public class InternalMetamodelRefTestParser extends Parser {
     		return leafNode;
     	}
     	
-    	public void associateNodeWithAstElement(AbstractParserNode node, Object astElement) {
+    	public void associateNodeWithAstElement(AbstractNode node, Object astElement) {
     		node.setElement(astElement);
     		if(astElement instanceof EObject) {
     			EObject eObject = (EObject) astElement;
-    			ParserNodeAdapter adapter = (org.eclipse.xtext.parsetree.ParserNodeAdapter) 
-    				org.eclipse.xtext.parsetree.ParserNodeAdapterFactory.INSTANCE.adapt(eObject, 
-    					org.eclipse.xtext.parsetree.AbstractParserNode.class);
+    			NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
     			adapter.setParserNode(node); 
     		}
     	}
@@ -78,7 +76,7 @@ public class InternalMetamodelRefTestParser extends Parser {
 
 
     // $ANTLR start parse
-    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:58:1: parse returns [Object current] : ruleFoo EOF ;
+    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:56:1: parse returns [Object current] : ruleFoo EOF ;
     public final Object parse() throws RecognitionException {
         Object current = null;
 
@@ -86,10 +84,10 @@ public class InternalMetamodelRefTestParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:58:32: ( ruleFoo EOF )
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:59:2: ruleFoo EOF
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:56:32: ( ruleFoo EOF )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:57:2: ruleFoo EOF
             {
-             currentParserNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); 
+             currentNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); 
             pushFollow(FOLLOW_ruleFoo_in_parse46);
             ruleFoo1=ruleFoo();
             _fsp--;
@@ -112,7 +110,7 @@ public class InternalMetamodelRefTestParser extends Parser {
 
 
     // $ANTLR start ruleFoo
-    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:63:1: ruleFoo returns [Object current=null] : ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) ;
+    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:61:1: ruleFoo returns [Object current=null] : ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) ;
     public final Object ruleFoo() throws RecognitionException {
         Object current = null;
 
@@ -121,28 +119,28 @@ public class InternalMetamodelRefTestParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:63:39: ( ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) )
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:63:41: ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:61:39: ( ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:61:41: ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* )
             {
-            Object temp=null; currentParserNode=createCompositeNode(null, currentParserNode); 
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:65:1: ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* )
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:66:1: (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )*
+            Object temp=null; currentNode=createCompositeNode(null, currentNode); 
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:63:1: ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:64:1: (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )*
             {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:66:1: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:67:2: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:64:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:65:2: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo75); 
-            createLeafNode(input.LT(-1).getText(), null, currentParserNode, 
+            createLeafNode(input.LT(-1).getText(), null, currentNode, 
             "name");
             if (current==null) {
             	current = factory.create("Foo");}
             	factory.set(current, "name",lv_name);
-            	associateNodeWithAstElement(currentParserNode, current);
+            	associateNodeWithAstElement(currentNode, current);
 
             }
 
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:75:1: (lv_nameRefs= ruleNameRef )*
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:73:1: (lv_nameRefs= ruleNameRef )*
             loop1:
             do {
                 int alt1=2;
@@ -155,7 +153,7 @@ public class InternalMetamodelRefTestParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:76:2: lv_nameRefs= ruleNameRef
+            	    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:74:2: lv_nameRefs= ruleNameRef
             	    {
             	    pushFollow(FOLLOW_ruleNameRef_in_ruleFoo89);
             	    lv_nameRefs=ruleNameRef();
@@ -164,7 +162,7 @@ public class InternalMetamodelRefTestParser extends Parser {
             	    if (current==null) {
             	    	current = factory.create("Foo");}
             	    	factory.add(current, "nameRefs",lv_nameRefs);
-            	    	associateNodeWithAstElement(currentParserNode, current);
+            	    	associateNodeWithAstElement(currentNode, current);
 
             	    }
             	    break;
@@ -177,7 +175,7 @@ public class InternalMetamodelRefTestParser extends Parser {
 
             }
 
-             currentParserNode = currentParserNode.getParent(); 
+             currentNode = currentNode.getParent(); 
 
             }
 
@@ -194,32 +192,32 @@ public class InternalMetamodelRefTestParser extends Parser {
 
 
     // $ANTLR start ruleNameRef
-    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:84:1: ruleNameRef returns [Object current=null] : (lv_name= RULE_STRING ) ;
+    // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:82:1: ruleNameRef returns [Object current=null] : (lv_name= RULE_STRING ) ;
     public final Object ruleNameRef() throws RecognitionException {
         Object current = null;
 
         Token lv_name=null;
 
         try {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:84:43: ( (lv_name= RULE_STRING ) )
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:84:45: (lv_name= RULE_STRING )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:82:43: ( (lv_name= RULE_STRING ) )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:82:45: (lv_name= RULE_STRING )
             {
-            Object temp=null; currentParserNode=createCompositeNode(null, currentParserNode); 
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:86:1: (lv_name= RULE_STRING )
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:87:2: lv_name= RULE_STRING
+            Object temp=null; currentNode=createCompositeNode(null, currentNode); 
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:84:1: (lv_name= RULE_STRING )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:85:2: lv_name= RULE_STRING
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNameRef120); 
-            createLeafNode(input.LT(-1).getText(), null, currentParserNode, 
+            createLeafNode(input.LT(-1).getText(), null, currentNode, 
             "name");
             if (current==null) {
             	current = factory.create("xtext::RuleCall");}
             	factory.set(current, "name",lv_name);
-            	associateNodeWithAstElement(currentParserNode, current);
+            	associateNodeWithAstElement(currentNode, current);
 
             }
 
-             currentParserNode = currentParserNode.getParent(); 
+             currentNode = currentNode.getParent(); 
 
             }
 

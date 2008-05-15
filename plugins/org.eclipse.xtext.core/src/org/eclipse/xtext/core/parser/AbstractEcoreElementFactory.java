@@ -17,12 +17,6 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.parsetree.AbstractParserNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.ParserNodeAdapter;
-import org.eclipse.xtext.parsetree.ParserNodeAdapterFactory;
-import org.eclipse.xtext.parsetree.ParsetreeFactory;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
