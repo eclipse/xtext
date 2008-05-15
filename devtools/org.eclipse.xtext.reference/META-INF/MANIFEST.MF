@@ -1,10 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Reference Plug-in
+Bundle-Name: Xtext Reference Plug-in
 Bundle-SymbolicName: org.eclipse.xtext.reference
 Bundle-Version: 1.0.0
-Bundle-Activator: org.eclipse.xtext.reference.Activator
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
-Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext.core;bundle-version="1.0.0",
+ org.eclipse.xtext;bundle-version="1.0.0",
+ org.eclipse.xtext.generator;bundle-version="1.0.0",
+ org.openarchitectureware.xtext.core;bundle-version="4.3.0",
+ org.openarchitectureware.xtext.core.base;bundle-version="4.3.0",
+ org.openarchitectureware.xtext.generator;bundle-version="4.3.0",
+ org.junit,
+ org.antlr;bundle-version="3.0.0",
+ org.openarchitectureware.dependencies;bundle-version="4.3.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: itemis AG
