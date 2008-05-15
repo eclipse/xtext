@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackage.java,v 1.2 2008/05/14 15:56:00 jkohnlein Exp $
+ * $Id: ParsetreePackage.java,v 1.3 2008/05/15 09:22:48 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -88,13 +88,22 @@ public interface ParsetreePackage extends EPackage {
 	int ABSTRACT_PARSER_NODE__ELEMENT = 1;
 
 	/**
+	 * The feature id for the '<em><b>Grammar Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT = 2;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Parser Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_PARSER_NODE_FEATURE_COUNT = 2;
+	int ABSTRACT_PARSER_NODE_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.parsetree.impl.CompositeNodeImpl <em>Composite Node</em>}' class.
@@ -131,7 +140,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_NODE__GRAMMAR_ELEMENT = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 0;
+	int COMPOSITE_NODE__GRAMMAR_ELEMENT = ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' reference list.
@@ -140,7 +149,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_NODE__CHILDREN = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 1;
+	int COMPOSITE_NODE__CHILDREN = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Composite Node</em>' class.
@@ -149,7 +158,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_NODE_FEATURE_COUNT = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 2;
+	int COMPOSITE_NODE_FEATURE_COUNT = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.parsetree.impl.LeafNodeImpl <em>Leaf Node</em>}' class.
@@ -180,6 +189,15 @@ public interface ParsetreePackage extends EPackage {
 	int LEAF_NODE__ELEMENT = ABSTRACT_PARSER_NODE__ELEMENT;
 
 	/**
+	 * The feature id for the '<em><b>Grammar Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LEAF_NODE__GRAMMAR_ELEMENT = ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT;
+
+	/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -189,22 +207,13 @@ public interface ParsetreePackage extends EPackage {
 	int LEAF_NODE__TEXT = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Grammar Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEAF_NODE__GRAMMAR_ELEMENT = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Feature</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE__FEATURE = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 2;
+	int LEAF_NODE__FEATURE = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Leaf Node</em>' class.
@@ -213,7 +222,7 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE_FEATURE_COUNT = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 3;
+	int LEAF_NODE_FEATURE_COUNT = ABSTRACT_PARSER_NODE_FEATURE_COUNT + 2;
 
 
 	/**
@@ -225,17 +234,6 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCompositeNode();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.parsetree.CompositeNode#getGrammarElement <em>Grammar Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Grammar Element</em>'.
-	 * @see org.eclipse.xtext.parsetree.CompositeNode#getGrammarElement()
-	 * @see #getCompositeNode()
-	 * @generated
-	 */
-	EReference getCompositeNode_GrammarElement();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.parsetree.CompositeNode#getChildren <em>Children</em>}'.
@@ -281,6 +279,17 @@ public interface ParsetreePackage extends EPackage {
 	EAttribute getAbstractParserNode_Element();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.parsetree.AbstractParserNode#getGrammarElement <em>Grammar Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Grammar Element</em>'.
+	 * @see org.eclipse.xtext.parsetree.AbstractParserNode#getGrammarElement()
+	 * @see #getAbstractParserNode()
+	 * @generated
+	 */
+	EReference getAbstractParserNode_GrammarElement();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.LeafNode <em>Leaf Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -300,17 +309,6 @@ public interface ParsetreePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getLeafNode_Text();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.parsetree.LeafNode#getGrammarElement <em>Grammar Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Grammar Element</em>'.
-	 * @see org.eclipse.xtext.parsetree.LeafNode#getGrammarElement()
-	 * @see #getLeafNode()
-	 * @generated
-	 */
-	EReference getLeafNode_GrammarElement();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.LeafNode#getFeature <em>Feature</em>}'.
@@ -356,14 +354,6 @@ public interface ParsetreePackage extends EPackage {
 		EClass COMPOSITE_NODE = eINSTANCE.getCompositeNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Grammar Element</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPOSITE_NODE__GRAMMAR_ELEMENT = eINSTANCE.getCompositeNode_GrammarElement();
-
-		/**
 		 * The meta object literal for the '<em><b>Children</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -398,6 +388,14 @@ public interface ParsetreePackage extends EPackage {
 		EAttribute ABSTRACT_PARSER_NODE__ELEMENT = eINSTANCE.getAbstractParserNode_Element();
 
 		/**
+		 * The meta object literal for the '<em><b>Grammar Element</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT = eINSTANCE.getAbstractParserNode_GrammarElement();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.parsetree.impl.LeafNodeImpl <em>Leaf Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -414,14 +412,6 @@ public interface ParsetreePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute LEAF_NODE__TEXT = eINSTANCE.getLeafNode_Text();
-
-		/**
-		 * The meta object literal for the '<em><b>Grammar Element</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LEAF_NODE__GRAMMAR_ELEMENT = eINSTANCE.getLeafNode_GrammarElement();
 
 		/**
 		 * The meta object literal for the '<em><b>Feature</b></em>' attribute feature.
