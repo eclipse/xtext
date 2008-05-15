@@ -1,0 +1,232 @@
+/*******************************************************************************
+* Copyright (c) 2008 itemis AG and others.
+* All rights reserved. This program and the accompanying materials
+* are made available under the terms of the Eclipse Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+* Contributors:
+* committers of openArchitectureWare - initial API and implementation
+*******************************************************************************/
+
+import ecore;
+import xtext;
+import xtextutil; 
+
+extension org::openarchitectureware::util::stdlib::io; 
+extension org::eclipse::xtext::Extensions;
+
+// ***********************************************************************************
+// Assignment
+
+cached List[Assignment] assignments(ResolvedType t) :
+	t.grammar().allAssignments().select(a | a.currentType() == t)
+;
+
+boolean isBoolean(Assignment a) :
+	a.operator == "?="
+;
+
+boolean featureIsReference(Assignment a) :
+	!a.isBoolean() 
+	&& a.isRuleAssignment() 
+	&& ParserRule.isInstance(((RuleCall) a.terminal).calledRule())
+;
+
+AbstractType featureType(Assignment a) :
+	if a.featureIsReference() then
+		((RuleCall) a.terminal).calledParserRule().resolveReturnType()
+	else if a.isBoolean() then
+		BuiltinBoolean()
+	else if a.isKeywordAssignment() then
+		BuiltinString()
+	else 
+		((RuleCall) a.terminal).calledRule().resolveReturnType()
+;
+
+// ***********************************************************************************
+// Supertype inference
+
+cached Set[ResolvedType] inferredSuperTypes(ResolvedType t) :
+	allActionsReturning(t).inferredSuperType().removeNulls().union(
+		allRuleCallsReturning(t).inferredSuperType().removeNulls()).toSet().remove(t)
+;
+
+private ResolvedType inferredSuperType(Action a) :
+	a.containingParserRule().resolveReturnType()
+;
+
+private ResolvedType inferredSuperType(RuleCall r) :
+	if r.containingAssignment() == null then 
+		r.containingParserRule().resolveReturnType()
+	else 
+		null
+;
+
+private List[ResolvedType] removeNulls(List[ResolvedType] l) :
+	l.reject(t|t==null)
+;  
+	
+// ***********************************************************************************
+// Lookup
+
+List[Action] allActionsReturning(ResolvedType t) :
+	t.grammar().allActions().select(a | a.resolveCreatedType() == t)
+;
+
+List[RuleCall] allRuleCallsReturning(ResolvedType t) :
+	t.grammar().allRuleCalls().select(r | r.calledParserRule() != null 
+		&& r.calledParserRule().resolveReturnType() == t)
+;
+
+// ***********************************************************************************
+// Current type
+
+ResolvedType currentType(emf::EObject o) :
+	let containmentList = o.eContainer.eContents:
+		let index = containmentList.indexOf(o) :
+			if index==0 then
+				currentType(o.eContainer)
+			else 
+				currentType(getLastChild(containmentList.get(index - 1)))
+;
+
+emf::EObject getLastChild(emf::EObject o) :
+	if o.eContents.isEmpty then
+		o
+	else getLastChild(o.eContents.last()) 
+;
+
+ResolvedType currentType(Action a) :
+	a.resolveCreatedType()
+;
+	
+ResolvedType currentType(ParserRule p) :
+	p.resolveReturnType()
+;
+	
+Boolean isAbstract(ResolvedType type) :
+	!type.grammar().allActions().resolveCreatedType().contains(type)
+	&& !type.grammar().allAssignments().currentType().contains(type)
+;
+
+	
+// ***********************************************************************************
+// Type resolution
+
+cached ResolvedType resolveReturnType(ParserRule p) :
+	resolveType(p.grammar(), p.getReturnTypeName())
+;
+
+cached ResolvedType resolveReturnType(LexerRule p) :
+	if p.name == "INT" then
+		BuiltinInteger()
+	else if p.name == "REAL" then
+		BuiltinDouble()
+	else
+		BuiltinString()
+;
+
+cached ResolvedType resolveReturnType(AbstractRule p) :
+	error("AbstractRule must be either ParserRule or LexerRule") ->
+	null
+;
+
+cached ResolvedType resolveCreatedType(Action a) :
+	resolveType(a.grammar(), a.typeName.name)
+;
+
+cached ResolvedType resolveType(Grammar g, String name) :
+	if name.isQualified() then 
+		g.allMetamodels().select(mm | mm.alias == name.getAlias())
+			.resolveType(name.getClassName()).first()
+	else 
+		g.allMetamodels().select(mm | mm.alias == null || mm.alias == "")
+			.resolveType(name.getClassName()).first()
+		// TODO handle first / null
+;	
+
+private cached ResolvedType resolveType(MetaModel mm, String className) :
+	//info("resolveType " + mm.alias + "::" + className) ->
+	if !mm.referenced then
+		// type has to be created
+		createResolvedType(mm, null, className)
+	else 
+		let eClass = mm.ePackage.eClassifiers.typeSelect(EClass).select(c|c.name == className).first():
+			if eClass != null then
+				createResolvedType(mm, eClass, className)
+			else 
+				null
+;
+
+private create ResolvedType createResolvedType(MetaModel mm, EClass eClass, String className) :
+	setEClassifier(eClass) ->
+	setName(className) ->
+	setMetaModel(mm)
+; 
+
+// ***********************************************************************************
+// Builtin Types
+
+BuiltinType BuiltinBoolean() :
+	JAVA org.eclipse.xtext.Xtext2Extensions.BuiltinEBoolean();
+
+BuiltinType BuiltinInteger() :
+	JAVA org.eclipse.xtext.Xtext2Extensions.BuiltinEInt();
+
+BuiltinType BuiltinDouble() :
+	JAVA org.eclipse.xtext.Xtext2Extensions.BuiltinEDouble();
+
+BuiltinType BuiltinString() :
+	JAVA org.eclipse.xtext.Xtext2Extensions.BuiltinEString();
+
+// ***********************************************************************************
+// Type names
+
+private boolean isQualified(String name) :	
+	name.contains("::")
+;
+
+private String getClassName(String fqn) :
+	fqn.split("::").last()
+;
+
+private String getAlias(String fqn) :
+	fqn.split("::").first()
+;
+
+qualifiedName(ResolvedType this) :
+	(if metaModel.alias!=null then metaModel.alias+'::' else '') + name;
+
+
+// ***********************************************************************************
+// Metamodels
+
+cached List[MetaModel] allMetamodels(Grammar g) :
+	g.referencedMetamodels().union(g.createdMetamodels())
+;
+
+cached List[MetaModel] referencedMetamodels(Grammar g) :
+	g.metamodelDeclarations.typeSelect(ReferencedMetamodel).loadMetaModel()
+;
+
+cached List[MetaModel] createdMetamodels(Grammar g) :
+	g.metamodelDeclarations.typeSelect(GeneratedMetamodel).createMetamodel()
+;	
+	
+private create MetaModel createMetamodel(GeneratedMetamodel gmm) :
+	setReferenced(false) ->
+	setAlias(alias)->
+	setDeclaration(gmm)
+;
+
+create MetaModel loadMetaModel(ReferencedMetamodel rmm) :
+	setEPackage(loadEPackage(rmm.uri.trimFromStartAndEnd(1))) ->
+	setReferenced(true) ->
+	setAlias(rmm.alias) ->
+	setDeclaration(rmm)
+;
+
+cached EPackage loadEPackage(String uri) :
+	JAVA org.eclipse.xtext.Xtext2Extensions.loadEPackage(java.lang.String)
+;
