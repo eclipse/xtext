@@ -2,6 +2,7 @@ package org.eclipse.xtext.metamodelreferencing.tests;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.XtextPackage;
 
 public class MetamodelRefTestConstants extends org.eclipse.xtext.core.parser.BaseEPackageAccess {
 	public static final String METAMODELREFTEST_GRAMMAR_CP_URI = "org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi";
@@ -9,6 +10,8 @@ public class MetamodelRefTestConstants extends org.eclipse.xtext.core.parser.Bas
 	
 	public static Grammar getMetamodelRefTestGrammar() {	
 		if (GRAMMAR==null) {
+			// assert the XtextPackage implementation is loaded
+			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
 			GRAMMAR = (Grammar) loadGrammarFile(MetamodelRefTestConstants.class.getClassLoader(),METAMODELREFTEST_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;

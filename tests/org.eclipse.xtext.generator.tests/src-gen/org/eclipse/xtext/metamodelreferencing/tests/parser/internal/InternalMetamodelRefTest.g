@@ -11,6 +11,7 @@ package org.eclipse.xtext.metamodelreferencing.tests.parser.internal;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
+
 }
 
 @parser::members {
@@ -26,6 +27,7 @@ public CompositeNode createCompositeNode(EObject currentGrammarElement,
 	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
 	compositeNode.setGrammarElement(currentGrammarElement);
 	if (parentNode!=null) parentNode.getChildren().add(compositeNode);
+	compositeNode.setGrammarElement(currentGrammarElement);
 	return compositeNode;
 }
 
@@ -75,18 +77,21 @@ public void associateNodeWithAstElement(AbstractNode node, EObject astElement) {
 	
 private CompositeNode currentNode;
 
+private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestConstants.getMetamodelRefTestGrammar();
 }
 
 parse returns [EObject current] :
 	ruleFoo {$current=$ruleFoo.current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
 
-ruleFoo returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleFoo returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.0")
+, currentNode); }
 	
 (
 (
 	lv_name=
-RULE_ID{createLeafNode(null, currentNode, 
+RULE_ID{createLeafNode(grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@terminal")
+, currentNode, 
 "name");}
  {if ($current==null) {
 	$current = factory.create("Foo");}
@@ -104,11 +109,13 @@ ruleNameRef
 	}
 )*) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
-ruleNameRef returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleNameRef returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.1")
+, currentNode); }
 	
 (
 	lv_name=
-RULE_STRING{createLeafNode(null, currentNode, 
+RULE_STRING{createLeafNode(grammar.eResource().getEObject("//@parserRules.1/@alternatives/@terminal")
+, currentNode, 
 "name");}
  {if ($current==null) {
 	$current = factory.create("xtext::RuleCall");}
@@ -121,16 +128,16 @@ RULE_STRING{createLeafNode(null, currentNode,
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-RULE_INT : ('0'..'9')+;
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+RULE_INT : ('0'..'9')+;
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 

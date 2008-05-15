@@ -11,6 +11,7 @@ package org.eclipse.xtext.grammargen.tests.parser.internal;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
+
 }
 
 @parser::members {
@@ -26,6 +27,7 @@ public CompositeNode createCompositeNode(EObject currentGrammarElement,
 	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
 	compositeNode.setGrammarElement(currentGrammarElement);
 	if (parentNode!=null) parentNode.getChildren().add(compositeNode);
+	compositeNode.setGrammarElement(currentGrammarElement);
 	return compositeNode;
 }
 
@@ -75,17 +77,20 @@ public void associateNodeWithAstElement(AbstractNode node, EObject astElement) {
 	
 private CompositeNode currentNode;
 
+private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.grammargen.tests.SimpleTestConstants.getSimpleTestGrammar();
 }
 
 parse returns [EObject current] :
 	ruleFoo {$current=$ruleFoo.current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
 
-ruleFoo returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
+ruleFoo returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.0")
+, currentNode); }
 	
 (
 	lv_name=
-RULE_ID{createLeafNode(null, currentNode, 
+RULE_ID{createLeafNode(grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal")
+, currentNode, 
 "name");}
  {if ($current==null) {
 	$current = factory.create("Foo");}
@@ -96,18 +101,18 @@ RULE_ID{createLeafNode(null, currentNode,
 
 
 
-RULE_INT : ('0'..'9')+;
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
-
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+RULE_INT : ('0'..'9')+;
 
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
