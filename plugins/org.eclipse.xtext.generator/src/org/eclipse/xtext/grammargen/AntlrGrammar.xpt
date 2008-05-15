@@ -127,7 +127,8 @@ parse returns [EObject current] :
 	«localVar()»=«EXPAND ebnf FOR terminal» {if ($current==null) {
 	$current = factory.create("«containingParserRule().getReturnTypeName()»");}
 	factory.«setOrAdd()»($current, "«feature»",«localVar()»);
-	associateNodeWithAstElement(currentNode, $current);}
+	associateNodeWithAstElement(currentNode, $current);
+	«IF isKeywordAssignment()»«EXPAND createLeafNode»«ENDIF»}
 «ENDDEFINE»
 
 «DEFINE ebnf2 FOR Action»
@@ -138,7 +139,7 @@ parse returns [EObject current] :
 	 associateNodeWithAstElement(currentNode, $current);}
 «ENDDEFINE»
 
-«DEFINE ebnf2 FOR Keyword»'«withoutQuotes()»' {«EXPAND createLeafNode»}«ENDDEFINE»
+«DEFINE ebnf2 FOR Keyword»'«withoutQuotes()»' «IF !isAssigned()»{«EXPAND createLeafNode»}«ENDIF»«ENDDEFINE»
 
 «DEFINE ebnf2 FOR RuleCall-»
 «IF ParserRule.isInstance(calledRule()) && !isAssigned()»«localVar()»=«ENDIF-»
