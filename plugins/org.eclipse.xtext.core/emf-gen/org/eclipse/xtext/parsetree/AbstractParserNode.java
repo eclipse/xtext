@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractParserNode.java,v 1.1 2008/05/14 15:56:00 jkohnlein Exp $
+ * $Id: AbstractParserNode.java,v 1.2 2008/05/15 08:15:23 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -80,4 +80,28 @@ public interface AbstractParserNode extends EObject {
 	 * @generated
 	 */
 	void setElement(Object value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.length((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.length((LeafNodeImpl) this);} else {return ParsetreeUtil.length((AbstractParserNodeImpl) this);}'"
+	 * @generated
+	 */
+	int length();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.offset((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.offset((LeafNodeImpl) this);} else {return ParsetreeUtil.offset((AbstractParserNodeImpl) this);}'"
+	 * @generated
+	 */
+	int offset();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.line((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.line((LeafNodeImpl) this);} else {return ParsetreeUtil.line((AbstractParserNodeImpl) this);}'"
+	 * @generated
+	 */
+	int line();
 } // AbstractParserNode
