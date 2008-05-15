@@ -8,15 +8,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.language;
 
+import org.eclipse.core.runtime.IConfigurationElement;
+
 /**
  * @author Peter Friese - Initial contribution and API
  * 
  */
 public class LanguageDescriptor {
+	public final static String ID_ATTRIBUTE = "id";
+	public final static String NAME_ATTRIBUTE = "name";
 
 	private String id;
 	private String name;
-	
+	private String[] fileExtensions;
+
 	public LanguageDescriptor(String id, String name) {
 		this.id = id;
 		this.name = name;
@@ -24,6 +29,17 @@ public class LanguageDescriptor {
 
 	public LanguageDescriptor(String id) {
 		this.id = id;
+	}
+
+	public LanguageDescriptor(IConfigurationElement element) {
+		if (element == null)
+			throw new IllegalArgumentException(
+					"ConfigurationElement cannot be null.");
+		this.id = element.getAttribute(LanguageDescriptor.ID_ATTRIBUTE);
+		if (getId() == null)
+			throw new IllegalArgumentException(
+					"Id is requered and cannot be null.");
+		this.name = element.getAttribute(LanguageDescriptor.NAME_ATTRIBUTE);
 	}
 
 	public void setId(String id) {
@@ -40,6 +56,14 @@ public class LanguageDescriptor {
 
 	public String getName() {
 		return name;
+	}
+
+	public String[] getFileExtensions() {
+		return fileExtensions;
+	}
+
+	public void setFileExtensions(String[] fileExtensions) {
+		this.fileExtensions = fileExtensions;
 	}
 
 }
