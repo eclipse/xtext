@@ -14,7 +14,6 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.antlr.runtime.TokenStream;
 import org.apache.tools.ant.filters.StringInputStream;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -70,7 +69,6 @@ public abstract class AbstractGeneratorTest extends TestCase {
 
 	public List<Invocation> parse(String model, IParseErrorHandler errorHandler) throws Exception {
 		final List<Invocation> calls = new ArrayList<Invocation>();
-		final List<DummyParserNode> nodes = new ArrayList<DummyParserNode>();
 		parse(model, new IElementFactory() {
 
 			public void add(EObject _this, String feature, Object value) {
