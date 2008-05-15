@@ -2,6 +2,7 @@ package org.eclipse.xtext.parsetree.impl;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.parsetree.AbstractParserNode;
+import org.eclipse.xtext.parsetree.ParsetreePackage;
 
 public class ParsetreeUtil {
 
@@ -24,6 +25,13 @@ public class ParsetreeUtil {
 	}
 
 	public static int offset(AbstractParserNode abstractParserNode) {
+		int classifierID = abstractParserNode.eClass().getClassifierID();
+		if(classifierID != ParsetreePackage.COMPOSITE_NODE
+				&& classifierID != ParsetreePackage.LEAF_NODE) {
+			throw new IllegalArgumentException(
+					"Illegal subtype of AbstarctParserNode "
+							+ abstractParserNode.eClass().getName());
+		}
 		int offset = 0;
 		EList<AbstractParserNode> siblings = abstractParserNode.getParent()
 				.getChildren();
