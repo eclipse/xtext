@@ -49,10 +49,22 @@ private CompositeNode currentNode;
 		return compositeNode;
 	}
 
-	public Object createLeafNode(String text, EObject currentGrammarElement,
+	public Object createLeafNode(EObject currentGrammarElement,
 			CompositeNode parentNode, String feature) {
+		Token token = input.LT(-1);
+		Token tokenBefore = input.LT(-2);
+		int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : 0;
+		if (indexOfTokenBefore+1<token.getTokenIndex()) {
+			for (int x = token.getTokenIndex()-1; x>indexOfTokenBefore;x--) {
+				Token hidden = input.get(x);
+				LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+				leafNode.setText(hidden.getText());
+				leafNode.setHidden(true);
+				parentNode.getChildren().add(leafNode);
+			}
+		}
 		LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-		leafNode.setText(text);
+		leafNode.setText(token.getText());
 		leafNode.setGrammarElement(currentGrammarElement);
 		leafNode.setFeature(feature);
 		parentNode.getChildren().add(leafNode);
@@ -127,6 +139,6 @@ parse returns [Object current] :
 «DEFINE createCompositeNode FOR ParserRule-»
 createCompositeNode(null, currentNode);«ENDDEFINE»
 
-«DEFINE createLeafNode FOR AbstractElement-»createLeafNode(input.LT(-1).getText(), null, currentNode, 
+«DEFINE createLeafNode FOR AbstractElement-»createLeafNode(null, currentNode, 
 «IF isAssigned()»"«containingAssignment().feature»"«ELSE»null«ENDIF»);«ENDDEFINE»
 

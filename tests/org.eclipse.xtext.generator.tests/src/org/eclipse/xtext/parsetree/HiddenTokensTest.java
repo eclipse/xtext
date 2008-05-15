@@ -10,10 +10,19 @@ import org.eclipse.xtext.parser.XtextGrammarTestASTFactory;
 public class HiddenTokensTest extends AbstractGeneratorTest {
 
 	public void testWhitespaceIsIncluded() throws Exception {
-		EObject object = (EObject) parse("generate foo 'bar'\nFoo : name=ID (bars+=Bar)*;\nBar : x=STRING;",new XtextGrammarTestASTFactory());
+		String model = "generate foo 'bar'\nFoo : name=ID (bars+=Bar)*;\nBar : x=STRING;";
+		EObject object = (EObject) parse(model,new XtextGrammarTestASTFactory());
 		NodeAdapter adapter = (NodeAdapter) object.eAdapters().get(0);
 		AbstractNode node = adapter.getParserNode();
-		assertNotNull(node);
+		assertEquals(node.serialize(),model);
+	}
+	
+	public void testWhitespaceIsIncluded2() throws Exception {
+		String model = "generate foo /* foo bar */ 'bar'\n\t\t   //Foo : name=ID (bars+=Bar)*;\nBar : x=STRING;";
+		EObject object = (EObject) parse(model,new XtextGrammarTestASTFactory());
+		NodeAdapter adapter = (NodeAdapter) object.eAdapters().get(0);
+		AbstractNode node = adapter.getParserNode();
+		assertEquals(node.serialize(),model);
 	}
 	
 	@Override
