@@ -25,30 +25,43 @@ public CompositeNode createCompositeNode(EObject currentGrammarElement,
 		CompositeNode parentNode) {
 	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
 	compositeNode.setGrammarElement(currentGrammarElement);
-	parentNode.getChildren().add(compositeNode);
+	if (parentNode!=null) parentNode.getChildren().add(compositeNode);
 	return compositeNode;
 }
 
-	public Object createLeafNode(EObject currentGrammarElement,
-		CompositeNode parentNode, String feature) {
-		Token token = input.LT(-1);
-		Token tokenBefore = input.LT(-2);
-		int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : 0;
-		if (indexOfTokenBefore+1<token.getTokenIndex()) {
-			for (int x = token.getTokenIndex()-1; x>indexOfTokenBefore;x--) {
-				Token hidden = input.get(x);
-				LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-				leafNode.setText(hidden.getText());
-				leafNode.setHidden(true);
-				parentNode.getChildren().add(leafNode);
-			}
+public Object createLeafNode(EObject currentGrammarElement, CompositeNode parentNode, String feature) {
+	Token token = input.LT(-1);
+	Token tokenBefore = input.LT(-2);
+	int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : 0;
+	if (indexOfTokenBefore+1<token.getTokenIndex()) {
+		for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
+			Token hidden = input.get(x);
+			LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+			leafNode.setText(hidden.getText());
+			leafNode.setHidden(true);
+			parentNode.getChildren().add(leafNode);
 		}
+	}
 	LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
 		leafNode.setText(token.getText());
 	leafNode.setGrammarElement(currentGrammarElement);
 	leafNode.setFeature(feature);
 	parentNode.getChildren().add(leafNode);
 	return leafNode;
+}
+
+private void appendTrailingHiddenTokens(CompositeNode parentNode) {
+	Token tokenBefore = input.LT(-1);
+	int size = input.size();
+	if (tokenBefore!=null && tokenBefore.getTokenIndex()<size) {
+		for (int x = tokenBefore.getTokenIndex()+1; x<size;x++) {
+			Token hidden = input.get(x);
+			LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+			leafNode.setText(hidden.getText());
+			leafNode.setHidden(true);
+			parentNode.getChildren().add(leafNode);
+		}
+	}
 }
 	
 public void associateNodeWithAstElement(AbstractNode node, Object astElement) {
@@ -70,9 +83,7 @@ public CompositeNode getRootNode() {
 }
 
 parse returns [EObject current] :
-	{ rootNode = ParsetreeFactory.eINSTANCE.createCompositeNode(); 
-	currentNode = rootNode; }
-	ruleGrammar {$current=$ruleGrammar.current;} EOF;
+	ruleGrammar {$current=$ruleGrammar.current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
 
 ruleGrammar returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
@@ -108,7 +119,7 @@ ruleLexerRule
 	$current = factory.create("Grammar");}
 	factory.add($current, "lexerRules",lv_lexerRules);
 	associateNodeWithAstElement(currentNode, $current);}
-)+)?) { currentNode = currentNode.getParent(); };
+)+)?) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleAbstractRule returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -116,7 +127,7 @@ ruleAbstractRule returns [EObject current=null] : {EObject temp=null; currentNod
 this_LexerRule=ruleLexerRule{$current = $this_LexerRule.current;}
 |
 this_ParserRule=ruleParserRule{$current = $this_ParserRule.current;}
-) { currentNode = currentNode.getParent(); };
+) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleAbstractMetamodelDeclaration returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -124,7 +135,7 @@ ruleAbstractMetamodelDeclaration returns [EObject current=null] : {EObject temp=
 this_GeneratedMetamodel=ruleGeneratedMetamodel{$current = $this_GeneratedMetamodel.current;}
 |
 this_ReferencedMetamodel=ruleReferencedMetamodel{$current = $this_ReferencedMetamodel.current;}
-) { currentNode = currentNode.getParent(); };
+) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleGeneratedMetamodel returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -162,7 +173,7 @@ RULE_ID{createLeafNode(null, currentNode,
 	$current = factory.create("GeneratedMetamodel");}
 	factory.set($current, "alias",lv_alias);
 	associateNodeWithAstElement(currentNode, $current);}
-))?) { currentNode = currentNode.getParent(); };
+))?) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleReferencedMetamodel returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -190,7 +201,7 @@ RULE_ID{createLeafNode(null, currentNode,
 	$current = factory.create("ReferencedMetamodel");}
 	factory.set($current, "alias",lv_alias);
 	associateNodeWithAstElement(currentNode, $current);}
-))?) { currentNode = currentNode.getParent(); };
+))?) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleLexerRule returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -215,7 +226,7 @@ RULE_LEXER_BODY{createLeafNode(null, currentNode,
 	$current = factory.create("LexerRule");}
 	factory.set($current, "body",lv_body);
 	associateNodeWithAstElement(currentNode, $current);}
-)) { currentNode = currentNode.getParent(); };
+)) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleParserRule returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -254,7 +265,7 @@ ruleAlternatives
 	associateNodeWithAstElement(currentNode, $current);}
 ))
 ';' {createLeafNode(null, currentNode, 
-null);}) { currentNode = currentNode.getParent(); };
+null);}) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleTypeRef returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -279,7 +290,7 @@ RULE_ID{createLeafNode(null, currentNode,
 	$current = factory.create("TypeRef");}
 	factory.set($current, "name",lv_name);
 	associateNodeWithAstElement(currentNode, $current);}
-)) { currentNode = currentNode.getParent(); };
+)) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleAlternatives returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -304,7 +315,7 @@ ruleGroup
 	$current = factory.create("AbstractElement");}
 	factory.add($current, "groups",lv_groups);
 	associateNodeWithAstElement(currentNode, $current);}
-))*) { currentNode = currentNode.getParent(); };
+))*) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleGroup returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -326,7 +337,7 @@ ruleAbstractToken
 	$current = factory.create("AbstractElement");}
 	factory.add($current, "abstractTokens",lv_abstractTokens);
 	associateNodeWithAstElement(currentNode, $current);}
-))*) { currentNode = currentNode.getParent(); };
+))*) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleAbstractToken returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -352,7 +363,7 @@ null);}) {if ($current==null) {
 	$current = factory.create("AbstractElement");}
 	factory.set($current, "cardinality",lv_cardinality);
 	associateNodeWithAstElement(currentNode, $current);}
-)?) { currentNode = currentNode.getParent(); };
+)?) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleAssignment returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -388,7 +399,7 @@ ruleAbstractTerminal
 	$current = factory.create("Assignment");}
 	factory.set($current, "terminal",lv_terminal);
 	associateNodeWithAstElement(currentNode, $current);}
-)) { currentNode = currentNode.getParent(); };
+)) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleAction returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -439,7 +450,7 @@ null);}) {if ($current==null) {
 'current' {createLeafNode(null, currentNode, 
 null);})?)
 '}' {createLeafNode(null, currentNode, 
-null);}) { currentNode = currentNode.getParent(); };
+null);}) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleAbstractTerminal returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -450,7 +461,7 @@ this_Keyword=ruleKeyword{$current = $this_Keyword.current;}
 this_RuleCall=ruleRuleCall{$current = $this_RuleCall.current;}
 )|
 this_ParenthesizedElement=ruleParenthesizedElement{$current = $this_ParenthesizedElement.current;}
-) { currentNode = currentNode.getParent(); };
+) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleParenthesizedElement returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -461,7 +472,7 @@ null);}
 this_Alternatives=ruleAlternatives{$current = $this_Alternatives.current;}
 )
 ')' {createLeafNode(null, currentNode, 
-null);}) { currentNode = currentNode.getParent(); };
+null);}) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleKeyword returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -473,7 +484,7 @@ RULE_STRING{createLeafNode(null, currentNode,
 	$current = factory.create("Keyword");}
 	factory.set($current, "value",lv_value);
 	associateNodeWithAstElement(currentNode, $current);}
-) { currentNode = currentNode.getParent(); };
+) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 ruleRuleCall returns [EObject current=null] : {EObject temp=null; currentNode=createCompositeNode(null, currentNode); }
 	
@@ -485,24 +496,24 @@ RULE_ID{createLeafNode(null, currentNode,
 	$current = factory.create("RuleCall");}
 	factory.set($current, "name",lv_name);
 	associateNodeWithAstElement(currentNode, $current);}
-) { currentNode = currentNode.getParent(); };
+) { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
 
 
-
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_INT : ('0'..'9')+;
 
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+
+RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_ANY_OTHER : .;
 
