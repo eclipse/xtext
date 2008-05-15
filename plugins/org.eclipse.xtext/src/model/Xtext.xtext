@@ -30,7 +30,7 @@ ReferencedMetamodel :
 	'import' uri=STRING ('as' alias=ID)?;
 
 LexerRule :
-	name=ID ':' 
+	name=ID ('tokentype' tokenType=ID)?':' 
 	body=LEXER_BODY
 ;
 
