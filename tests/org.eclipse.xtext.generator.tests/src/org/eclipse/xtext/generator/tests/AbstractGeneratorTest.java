@@ -16,6 +16,7 @@ import junit.framework.TestCase;
 
 import org.antlr.runtime.TokenStream;
 import org.apache.tools.ant.filters.StringInputStream;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.IParseErrorHandler;
 import org.openarchitectureware.xtend.XtendFacade;
@@ -70,16 +71,16 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		final List<DummyParserNode> nodes = new ArrayList<DummyParserNode>();
 		parse(model, new IElementFactory() {
 
-			public void add(Object _this, String feature, Object value) {
+			public void add(EObject _this, String feature, Object value) {
 				calls.add(new Invocation("add", feature, value));
 			}
 
-			public Object create(String typeName) {
+			public EObject create(String typeName) {
 				calls.add(new Invocation("create", typeName, null));
-				return typeName;
+				return null;
 			}
 
-			public void set(Object _this, String feature, Object value) {
+			public void set(EObject _this, String feature, Object value) {
 				calls.add(new Invocation("set", feature, value));
 			}
 
