@@ -7,11 +7,7 @@ public class XtextASTFactory extends org.eclipse.xtext.core.parser.AbstractEcore
 	{
 	
 		map.put(null, new EPackage[] {
-		
-			
-			org.eclipse.xtext.XtextEPackageAccess.getxtextEPackage()
-			
-		
+			org.eclipse.xtext.XtextConstants.getxtextEPackage()
 		});
 	
 	};

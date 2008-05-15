@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParserRule.java,v 1.2 2008/05/14 13:29:34 jkohnlein Exp $
+ * $Id: ParserRule.java,v 1.3 2008/05/15 13:25:59 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -15,8 +15,8 @@ package org.eclipse.xtext;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.ParserRule#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ParserRule#getAlternatives <em>Alternatives</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ParserRule#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,55 +27,55 @@ package org.eclipse.xtext;
 public interface ParserRule extends AbstractRule
 {
   /**
-	 * Returns the value of the '<em><b>Alternatives</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Alternatives</b></em>' containment reference.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Alternatives</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Alternatives</em>' containment reference.
-	 * @see #setAlternatives(AbstractElement)
-	 * @see org.eclipse.xtext.XtextPackage#getParserRule_Alternatives()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Alternatives</em>' containment reference.
+   * @see #setAlternatives(AbstractElement)
+   * @see org.eclipse.xtext.XtextPackage#getParserRule_Alternatives()
+   * @model containment="true"
+   * @generated
+   */
   AbstractElement getAlternatives();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.xtext.ParserRule#getAlternatives <em>Alternatives</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.xtext.ParserRule#getAlternatives <em>Alternatives</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Alternatives</em>' containment reference.
-	 * @see #getAlternatives()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Alternatives</em>' containment reference.
+   * @see #getAlternatives()
+   * @generated
+   */
   void setAlternatives(AbstractElement value);
 
   /**
-	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Type</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(TypeRef)
-	 * @see org.eclipse.xtext.XtextPackage#getParserRule_Type()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Type</em>' containment reference.
+   * @see #setType(TypeRef)
+   * @see org.eclipse.xtext.XtextPackage#getParserRule_Type()
+   * @model containment="true"
+   * @generated
+   */
   TypeRef getType();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.xtext.ParserRule#getType <em>Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.xtext.ParserRule#getType <em>Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' containment reference.
-	 * @see #getType()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Type</em>' containment reference.
+   * @see #getType()
+   * @generated
+   */
   void setType(TypeRef value);
 
 } // ParserRule

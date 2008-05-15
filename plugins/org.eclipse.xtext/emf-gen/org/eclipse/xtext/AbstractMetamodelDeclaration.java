@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractMetamodelDeclaration.java,v 1.2 2008/05/14 13:29:34 jkohnlein Exp $
+ * $Id: AbstractMetamodelDeclaration.java,v 1.3 2008/05/15 13:25:59 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -27,29 +27,29 @@ import org.eclipse.emf.ecore.EObject;
 public interface AbstractMetamodelDeclaration extends EObject
 {
   /**
-	 * Returns the value of the '<em><b>Alias</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Alias</b></em>' attribute.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Alias</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Alias</em>' attribute.
-	 * @see #setAlias(String)
-	 * @see org.eclipse.xtext.XtextPackage#getAbstractMetamodelDeclaration_Alias()
-	 * @model
-	 * @generated
-	 */
+   * @return the value of the '<em>Alias</em>' attribute.
+   * @see #setAlias(String)
+   * @see org.eclipse.xtext.XtextPackage#getAbstractMetamodelDeclaration_Alias()
+   * @model
+   * @generated
+   */
   String getAlias();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.xtext.AbstractMetamodelDeclaration#getAlias <em>Alias</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.xtext.AbstractMetamodelDeclaration#getAlias <em>Alias</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Alias</em>' attribute.
-	 * @see #getAlias()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Alias</em>' attribute.
+   * @see #getAlias()
+   * @generated
+   */
   void setAlias(String value);
 
 } // AbstractMetamodelDeclaration

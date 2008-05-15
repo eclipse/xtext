@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Alternatives.java,v 1.2 2008/05/14 13:29:34 jkohnlein Exp $
+ * $Id: Alternatives.java,v 1.3 2008/05/15 13:25:59 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -27,19 +27,19 @@ import org.eclipse.emf.common.util.EList;
 public interface Alternatives extends AbstractElement
 {
   /**
-	 * Returns the value of the '<em><b>Groups</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.AbstractElement}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Groups</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.AbstractElement}.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Groups</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Groups</em>' containment reference list.
-	 * @see org.eclipse.xtext.XtextPackage#getAlternatives_Groups()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Groups</em>' containment reference list.
+   * @see org.eclipse.xtext.XtextPackage#getAlternatives_Groups()
+   * @model containment="true"
+   * @generated
+   */
   EList<AbstractElement> getGroups();
 
 } // Alternatives
