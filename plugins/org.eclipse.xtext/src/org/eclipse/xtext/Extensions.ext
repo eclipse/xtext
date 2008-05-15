@@ -114,23 +114,26 @@ isAssigned(Object this) : false;
 // Built-in lexer Rules
 
 cached allLexerRules(Grammar this) :
-	lexerRules.union(builtinRules().select(e|lexerRules.forAll(e1|e1.name != e.name))).union({lr('ANY_OTHER','.')}).toList().sortBy(e|e.name=='ANY_OTHER'?1:0);
+	lexerRules.union(builtinRules().select(e|lexerRules.forAll(e1|e1.name != e.name))).union({anyOtherRule()}).toList().sortBy(e|e.name=='ANY_OTHER'?1:0);
 		
 
-private create LexerRule lr(String name, String body) :
+private create LexerRule lr(String name, String tokenType, String body) :
 	setName(name) ->
+	setTokenType(tokenType)->
 	setBody(body);
+	
+cached anyOtherRule() : lr('ANY_OTHER','anyother','.');
 	
 cached builtinRules() :
 	{
-	lr('ID',"('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*"),
-	lr('INT',"('0'..'9')+"),
-	lr('LEXER_BODY',"'<#' ( options {greedy=false;} : . )* '#>'"),
- 	lr('STRING', "'"+dq()+"' ( '"+bs2()+"' ('b'|'t'|'n'|'f'|'r'|'"+bs()+""+dq()+"'|'"+bs()+"''|'"+bs2()+"') | ~('"+bs2()+"'|'"+dq()+"') )* '"+dq()+"' |
+	lr('ID','identifier', "('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*"),
+	lr('INT','integer',"('0'..'9')+"),
+	lr('LEXER_BODY','stringliteral',"'<#' ( options {greedy=false;} : . )* '#>'"),
+ 	lr('STRING','stringliteral', "'"+dq()+"' ( '"+bs2()+"' ('b'|'t'|'n'|'f'|'r'|'"+bs()+""+dq()+"'|'"+bs()+"''|'"+bs2()+"') | ~('"+bs2()+"'|'"+dq()+"') )* '"+dq()+"' |
 	'"+bs()+"'' ( '"+bs2()+"' ('b'|'t'|'n'|'f'|'r'|'"+bs()+""+dq()+"'|'"+bs()+"''|'"+bs2()+"') | ~('"+bs2()+"'|'"+bs()+"'') )* '"+bs()+"''"),
-	lr('ML_COMMENT',"'/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}"),
-	lr('SL_COMMENT',"'//' ~('"+bs()+"n'|'"+bs()+"r')* '"+bs()+"r'? '"+bs()+"n' {$channel=HIDDEN;}"),
-	lr('WS',"(' '|'"+bs()+"t'|'"+bs()+"r'|'"+bs()+"n')+ {$channel=HIDDEN;}")
+	lr('ML_COMMENT','comment',"'/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}"),
+	lr('SL_COMMENT','comment',"'//' ~('"+bs()+"n'|'"+bs()+"r')* '"+bs()+"r'? '"+bs()+"n' {$channel=HIDDEN;}"),
+	lr('WS','whitespace',"(' '|'"+bs()+"t'|'"+bs()+"r'|'"+bs()+"n')+ {$channel=HIDDEN;}")
 	};
 
 private dq() : '"';
