@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackageImpl.java,v 1.2 2008/05/14 15:56:00 jkohnlein Exp $
+ * $Id: ParsetreePackageImpl.java,v 1.3 2008/05/15 08:15:23 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -286,6 +286,12 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 		initEClass(abstractParserNodeEClass, AbstractParserNode.class, "AbstractParserNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractParserNode_Parent(), this.getCompositeNode(), this.getCompositeNode_Children(), "parent", null, 0, 1, AbstractParserNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractParserNode_Element(), ecorePackage.getEJavaObject(), "element", null, 0, 1, AbstractParserNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(abstractParserNodeEClass, ecorePackage.getEInt(), "length", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(abstractParserNodeEClass, ecorePackage.getEInt(), "offset", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(abstractParserNodeEClass, ecorePackage.getEInt(), "line", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(leafNodeEClass, LeafNode.class, "LeafNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLeafNode_Text(), ecorePackage.getEString(), "text", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
