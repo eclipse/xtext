@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextutilFactoryImpl.java,v 1.2 2008/05/14 13:29:35 jkohnlein Exp $
+ * $Id: XtextutilFactoryImpl.java,v 1.3 2008/05/15 14:38:04 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextutil.impl;
 
@@ -25,110 +25,106 @@ import org.eclipse.xtext.xtextutil.*;
 public class XtextutilFactoryImpl extends EFactoryImpl implements XtextutilFactory
 {
   /**
-   * Creates the default factory implementation.
-   * <!-- begin-user-doc -->
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public static XtextutilFactory init()
   {
-    try
-    {
-      XtextutilFactory theXtextutilFactory = (XtextutilFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/Xtext/Utilities"); 
-      if (theXtextutilFactory != null)
-      {
-        return theXtextutilFactory;
-      }
-    }
-    catch (Exception exception)
-    {
-      EcorePlugin.INSTANCE.log(exception);
-    }
-    return new XtextutilFactoryImpl();
-  }
+		try {
+			XtextutilFactory theXtextutilFactory = (XtextutilFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/Xtext/Utilities"); 
+			if (theXtextutilFactory != null) {
+				return theXtextutilFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new XtextutilFactoryImpl();
+	}
 
   /**
-   * Creates an instance of the factory.
-   * <!-- begin-user-doc -->
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public XtextutilFactoryImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public EObject create(EClass eClass)
   {
-    switch (eClass.getClassifierID())
-    {
-      case XtextutilPackage.RESOLVED_TYPE: return createResolvedType();
-      case XtextutilPackage.META_MODEL: return createMetaModel();
-      case XtextutilPackage.BUILTIN_TYPE: return createBuiltinType();
-      default:
-        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
+		switch (eClass.getClassifierID()) {
+			case XtextutilPackage.RESOLVED_TYPE: return createResolvedType();
+			case XtextutilPackage.META_MODEL: return createMetaModel();
+			case XtextutilPackage.BUILTIN_TYPE: return createBuiltinType();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public ResolvedType createResolvedType()
   {
-    ResolvedTypeImpl resolvedType = new ResolvedTypeImpl();
-    return resolvedType;
-  }
+		ResolvedTypeImpl resolvedType = new ResolvedTypeImpl();
+		return resolvedType;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public MetaModel createMetaModel()
   {
-    MetaModelImpl metaModel = new MetaModelImpl();
-    return metaModel;
-  }
+		MetaModelImpl metaModel = new MetaModelImpl();
+		return metaModel;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public BuiltinType createBuiltinType()
   {
-    BuiltinTypeImpl builtinType = new BuiltinTypeImpl();
-    return builtinType;
-  }
+		BuiltinTypeImpl builtinType = new BuiltinTypeImpl();
+		return builtinType;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public XtextutilPackage getXtextutilPackage()
   {
-    return (XtextutilPackage)getEPackage();
-  }
+		return (XtextutilPackage)getEPackage();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @deprecated
-   * @generated
-   */
+	 * @deprecated
+	 * @generated
+	 */
   @Deprecated
   public static XtextutilPackage getPackage()
   {
-    return XtextutilPackage.eINSTANCE;
-  }
+		return XtextutilPackage.eINSTANCE;
+	}
 
 } //XtextutilFactoryImpl

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuiltinTypeImpl.java,v 1.2 2008/05/14 13:29:35 jkohnlein Exp $
+ * $Id: BuiltinTypeImpl.java,v 1.3 2008/05/15 14:38:04 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextutil.impl;
 
@@ -23,24 +23,24 @@ import org.eclipse.xtext.xtextutil.XtextutilPackage;
 public class BuiltinTypeImpl extends AbstractTypeImpl implements BuiltinType
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected BuiltinTypeImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return XtextutilPackage.Literals.BUILTIN_TYPE;
-  }
+		return XtextutilPackage.Literals.BUILTIN_TYPE;
+	}
 
 } //BuiltinTypeImpl

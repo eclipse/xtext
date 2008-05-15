@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextutilPackageImpl.java,v 1.2 2008/05/14 13:29:35 jkohnlein Exp $
+ * $Id: XtextutilPackageImpl.java,v 1.3 2008/05/15 14:38:04 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextutil.impl;
 
@@ -31,315 +31,315 @@ import org.eclipse.xtext.xtextutil.XtextutilPackage;
 public class XtextutilPackageImpl extends EPackageImpl implements XtextutilPackage
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   private EClass resolvedTypeEClass = null;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   private EClass metaModelEClass = null;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   private EClass abstractTypeEClass = null;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   private EClass builtinTypeEClass = null;
 
   /**
-   * Creates an instance of the model <b>Package</b>, registered with
-   * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
-   * package URI value.
-   * <p>Note: the correct way to create the package is via the static
-   * factory method {@link #init init()}, which also performs
-   * initialization of the package, or returns the registered package,
-   * if one already exists.
-   * <!-- begin-user-doc -->
+	 * Creates an instance of the model <b>Package</b>, registered with
+	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+	 * package URI value.
+	 * <p>Note: the correct way to create the package is via the static
+	 * factory method {@link #init init()}, which also performs
+	 * initialization of the package, or returns the registered package,
+	 * if one already exists.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.emf.ecore.EPackage.Registry
-   * @see org.eclipse.xtext.xtextutil.XtextutilPackage#eNS_URI
-   * @see #init()
-   * @generated
-   */
+	 * @see org.eclipse.emf.ecore.EPackage.Registry
+	 * @see org.eclipse.xtext.xtextutil.XtextutilPackage#eNS_URI
+	 * @see #init()
+	 * @generated
+	 */
   private XtextutilPackageImpl()
   {
-    super(eNS_URI, XtextutilFactory.eINSTANCE);
-  }
+		super(eNS_URI, XtextutilFactory.eINSTANCE);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   private static boolean isInited = false;
 
   /**
-   * Creates, registers, and initializes the <b>Package</b> for this
-   * model, and for any others upon which it depends.  Simple
-   * dependencies are satisfied by calling this method on all
-   * dependent packages before doing anything else.  This method drives
-   * initialization for interdependent packages directly, in parallel
-   * with this package, itself.
-   * <p>Of this package and its interdependencies, all packages which
-   * have not yet been registered by their URI values are first created
-   * and registered.  The packages are then initialized in two steps:
-   * meta-model objects for all of the packages are created before any
-   * are initialized, since one package's meta-model objects may refer to
-   * those of another.
-   * <p>Invocation of this method will not affect any packages that have
-   * already been initialized.
-   * <!-- begin-user-doc -->
+	 * Creates, registers, and initializes the <b>Package</b> for this
+	 * model, and for any others upon which it depends.  Simple
+	 * dependencies are satisfied by calling this method on all
+	 * dependent packages before doing anything else.  This method drives
+	 * initialization for interdependent packages directly, in parallel
+	 * with this package, itself.
+	 * <p>Of this package and its interdependencies, all packages which
+	 * have not yet been registered by their URI values are first created
+	 * and registered.  The packages are then initialized in two steps:
+	 * meta-model objects for all of the packages are created before any
+	 * are initialized, since one package's meta-model objects may refer to
+	 * those of another.
+	 * <p>Invocation of this method will not affect any packages that have
+	 * already been initialized.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #eNS_URI
-   * @see #createPackageContents()
-   * @see #initializePackageContents()
-   * @generated
-   */
+	 * @see #eNS_URI
+	 * @see #createPackageContents()
+	 * @see #initializePackageContents()
+	 * @generated
+	 */
   public static XtextutilPackage init()
   {
-    if (isInited) return (XtextutilPackage)EPackage.Registry.INSTANCE.getEPackage(XtextutilPackage.eNS_URI);
+		if (isInited) return (XtextutilPackage)EPackage.Registry.INSTANCE.getEPackage(XtextutilPackage.eNS_URI);
 
-    // Obtain or create and register package
-    XtextutilPackageImpl theXtextutilPackage = (XtextutilPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof XtextutilPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new XtextutilPackageImpl());
+		// Obtain or create and register package
+		XtextutilPackageImpl theXtextutilPackage = (XtextutilPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof XtextutilPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new XtextutilPackageImpl());
 
-    isInited = true;
+		isInited = true;
 
-    // Initialize simple dependencies
-    XtextPackage.eINSTANCE.eClass();
+		// Initialize simple dependencies
+		XtextPackage.eINSTANCE.eClass();
 
-    // Create package meta-data objects
-    theXtextutilPackage.createPackageContents();
+		// Create package meta-data objects
+		theXtextutilPackage.createPackageContents();
 
-    // Initialize created meta-data
-    theXtextutilPackage.initializePackageContents();
+		// Initialize created meta-data
+		theXtextutilPackage.initializePackageContents();
 
-    // Mark meta-data to indicate it can't be changed
-    theXtextutilPackage.freeze();
+		// Mark meta-data to indicate it can't be changed
+		theXtextutilPackage.freeze();
 
-    return theXtextutilPackage;
-  }
+		return theXtextutilPackage;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EClass getResolvedType()
   {
-    return resolvedTypeEClass;
-  }
+		return resolvedTypeEClass;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EReference getResolvedType_MetaModel()
   {
-    return (EReference)resolvedTypeEClass.getEStructuralFeatures().get(0);
-  }
+		return (EReference)resolvedTypeEClass.getEStructuralFeatures().get(0);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EClass getMetaModel()
   {
-    return metaModelEClass;
-  }
+		return metaModelEClass;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EReference getMetaModel_EPackage()
   {
-    return (EReference)metaModelEClass.getEStructuralFeatures().get(0);
-  }
+		return (EReference)metaModelEClass.getEStructuralFeatures().get(0);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EAttribute getMetaModel_Alias()
   {
-    return (EAttribute)metaModelEClass.getEStructuralFeatures().get(1);
-  }
+		return (EAttribute)metaModelEClass.getEStructuralFeatures().get(1);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EAttribute getMetaModel_Referenced()
   {
-    return (EAttribute)metaModelEClass.getEStructuralFeatures().get(2);
-  }
+		return (EAttribute)metaModelEClass.getEStructuralFeatures().get(2);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EReference getMetaModel_Declaration()
   {
-    return (EReference)metaModelEClass.getEStructuralFeatures().get(3);
-  }
+		return (EReference)metaModelEClass.getEStructuralFeatures().get(3);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EClass getAbstractType()
   {
-    return abstractTypeEClass;
-  }
+		return abstractTypeEClass;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EReference getAbstractType_EClassifier()
   {
-    return (EReference)abstractTypeEClass.getEStructuralFeatures().get(0);
-  }
+		return (EReference)abstractTypeEClass.getEStructuralFeatures().get(0);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EAttribute getAbstractType_Name()
   {
-    return (EAttribute)abstractTypeEClass.getEStructuralFeatures().get(1);
-  }
+		return (EAttribute)abstractTypeEClass.getEStructuralFeatures().get(1);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EClass getBuiltinType()
   {
-    return builtinTypeEClass;
-  }
+		return builtinTypeEClass;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public XtextutilFactory getXtextutilFactory()
   {
-    return (XtextutilFactory)getEFactoryInstance();
-  }
+		return (XtextutilFactory)getEFactoryInstance();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   private boolean isCreated = false;
 
   /**
-   * Creates the meta-model objects for the package.  This method is
-   * guarded to have no affect on any invocation but its first.
-   * <!-- begin-user-doc -->
+	 * Creates the meta-model objects for the package.  This method is
+	 * guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void createPackageContents()
   {
-    if (isCreated) return;
-    isCreated = true;
+		if (isCreated) return;
+		isCreated = true;
 
-    // Create classes and their features
-    resolvedTypeEClass = createEClass(RESOLVED_TYPE);
-    createEReference(resolvedTypeEClass, RESOLVED_TYPE__META_MODEL);
+		// Create classes and their features
+		resolvedTypeEClass = createEClass(RESOLVED_TYPE);
+		createEReference(resolvedTypeEClass, RESOLVED_TYPE__META_MODEL);
 
-    metaModelEClass = createEClass(META_MODEL);
-    createEReference(metaModelEClass, META_MODEL__EPACKAGE);
-    createEAttribute(metaModelEClass, META_MODEL__ALIAS);
-    createEAttribute(metaModelEClass, META_MODEL__REFERENCED);
-    createEReference(metaModelEClass, META_MODEL__DECLARATION);
+		metaModelEClass = createEClass(META_MODEL);
+		createEReference(metaModelEClass, META_MODEL__EPACKAGE);
+		createEAttribute(metaModelEClass, META_MODEL__ALIAS);
+		createEAttribute(metaModelEClass, META_MODEL__REFERENCED);
+		createEReference(metaModelEClass, META_MODEL__DECLARATION);
 
-    abstractTypeEClass = createEClass(ABSTRACT_TYPE);
-    createEReference(abstractTypeEClass, ABSTRACT_TYPE__ECLASSIFIER);
-    createEAttribute(abstractTypeEClass, ABSTRACT_TYPE__NAME);
+		abstractTypeEClass = createEClass(ABSTRACT_TYPE);
+		createEReference(abstractTypeEClass, ABSTRACT_TYPE__ECLASSIFIER);
+		createEAttribute(abstractTypeEClass, ABSTRACT_TYPE__NAME);
 
-    builtinTypeEClass = createEClass(BUILTIN_TYPE);
-  }
+		builtinTypeEClass = createEClass(BUILTIN_TYPE);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   private boolean isInitialized = false;
 
   /**
-   * Complete the initialization of the package and its meta-model.  This
-   * method is guarded to have no affect on any invocation but its first.
-   * <!-- begin-user-doc -->
+	 * Complete the initialization of the package and its meta-model.  This
+	 * method is guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void initializePackageContents()
   {
-    if (isInitialized) return;
-    isInitialized = true;
+		if (isInitialized) return;
+		isInitialized = true;
 
-    // Initialize package
-    setName(eNAME);
-    setNsPrefix(eNS_PREFIX);
-    setNsURI(eNS_URI);
+		// Initialize package
+		setName(eNAME);
+		setNsPrefix(eNS_PREFIX);
+		setNsURI(eNS_URI);
 
-    // Obtain other dependent packages
-    XtextPackage theXtextPackage = (XtextPackage)EPackage.Registry.INSTANCE.getEPackage(XtextPackage.eNS_URI);
+		// Obtain other dependent packages
+		XtextPackage theXtextPackage = (XtextPackage)EPackage.Registry.INSTANCE.getEPackage(XtextPackage.eNS_URI);
 
-    // Create type parameters
+		// Create type parameters
 
-    // Set bounds for type parameters
+		// Set bounds for type parameters
 
-    // Add supertypes to classes
-    resolvedTypeEClass.getESuperTypes().add(this.getAbstractType());
-    builtinTypeEClass.getESuperTypes().add(this.getAbstractType());
+		// Add supertypes to classes
+		resolvedTypeEClass.getESuperTypes().add(this.getAbstractType());
+		builtinTypeEClass.getESuperTypes().add(this.getAbstractType());
 
-    // Initialize classes and features; add operations and parameters
-    initEClass(resolvedTypeEClass, ResolvedType.class, "ResolvedType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getResolvedType_MetaModel(), this.getMetaModel(), null, "metaModel", null, 0, 1, ResolvedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		// Initialize classes and features; add operations and parameters
+		initEClass(resolvedTypeEClass, ResolvedType.class, "ResolvedType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getResolvedType_MetaModel(), this.getMetaModel(), null, "metaModel", null, 0, 1, ResolvedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(metaModelEClass, MetaModel.class, "MetaModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMetaModel_EPackage(), ecorePackage.getEPackage(), null, "ePackage", null, 0, 1, MetaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getMetaModel_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, MetaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getMetaModel_Referenced(), ecorePackage.getEBoolean(), "referenced", null, 0, 1, MetaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getMetaModel_Declaration(), theXtextPackage.getAbstractMetamodelDeclaration(), null, "declaration", null, 0, 1, MetaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(metaModelEClass, MetaModel.class, "MetaModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMetaModel_EPackage(), ecorePackage.getEPackage(), null, "ePackage", null, 0, 1, MetaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetaModel_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, MetaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetaModel_Referenced(), ecorePackage.getEBoolean(), "referenced", null, 0, 1, MetaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMetaModel_Declaration(), theXtextPackage.getAbstractMetamodelDeclaration(), null, "declaration", null, 0, 1, MetaModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(abstractTypeEClass, AbstractType.class, "AbstractType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getAbstractType_EClassifier(), ecorePackage.getEClassifier(), null, "eClassifier", null, 0, 1, AbstractType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAbstractType_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(abstractTypeEClass, AbstractType.class, "AbstractType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAbstractType_EClassifier(), ecorePackage.getEClassifier(), null, "eClassifier", null, 0, 1, AbstractType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAbstractType_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(builtinTypeEClass, BuiltinType.class, "BuiltinType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(builtinTypeEClass, BuiltinType.class, "BuiltinType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    // Create resource
-    createResource(eNS_URI);
-  }
+		// Create resource
+		createResource(eNS_URI);
+	}
 
 } //XtextutilPackageImpl
