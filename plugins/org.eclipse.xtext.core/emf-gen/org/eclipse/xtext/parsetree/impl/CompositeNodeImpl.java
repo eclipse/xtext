@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CompositeNodeImpl.java,v 1.1 2008/05/14 15:56:00 jkohnlein Exp $
+ * $Id: CompositeNodeImpl.java,v 1.2 2008/05/15 09:22:48 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -31,7 +31,6 @@ import org.eclipse.xtext.parsetree.ParsetreePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.parsetree.impl.CompositeNodeImpl#getGrammarElement <em>Grammar Element</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.CompositeNodeImpl#getChildren <em>Children</em>}</li>
  * </ul>
  * </p>
@@ -39,16 +38,6 @@ import org.eclipse.xtext.parsetree.ParsetreePackage;
  * @generated
  */
 public class CompositeNodeImpl extends AbstractParserNodeImpl implements CompositeNode {
-	/**
-	 * The cached value of the '{@link #getGrammarElement() <em>Grammar Element</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getGrammarElement()
-	 * @generated
-	 * @ordered
-	 */
-	protected EObject grammarElement;
-
 	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -76,44 +65,6 @@ public class CompositeNodeImpl extends AbstractParserNodeImpl implements Composi
 	@Override
 	protected EClass eStaticClass() {
 		return ParsetreePackage.Literals.COMPOSITE_NODE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EObject getGrammarElement() {
-		if (grammarElement != null && grammarElement.eIsProxy()) {
-			InternalEObject oldGrammarElement = (InternalEObject)grammarElement;
-			grammarElement = eResolveProxy(oldGrammarElement);
-			if (grammarElement != oldGrammarElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ParsetreePackage.COMPOSITE_NODE__GRAMMAR_ELEMENT, oldGrammarElement, grammarElement));
-			}
-		}
-		return grammarElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EObject basicGetGrammarElement() {
-		return grammarElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setGrammarElement(EObject newGrammarElement) {
-		EObject oldGrammarElement = grammarElement;
-		grammarElement = newGrammarElement;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.COMPOSITE_NODE__GRAMMAR_ELEMENT, oldGrammarElement, grammarElement));
 	}
 
 	/**
@@ -165,9 +116,6 @@ public class CompositeNodeImpl extends AbstractParserNodeImpl implements Composi
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ParsetreePackage.COMPOSITE_NODE__GRAMMAR_ELEMENT:
-				if (resolve) return getGrammarElement();
-				return basicGetGrammarElement();
 			case ParsetreePackage.COMPOSITE_NODE__CHILDREN:
 				return getChildren();
 		}
@@ -183,9 +131,6 @@ public class CompositeNodeImpl extends AbstractParserNodeImpl implements Composi
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ParsetreePackage.COMPOSITE_NODE__GRAMMAR_ELEMENT:
-				setGrammarElement((EObject)newValue);
-				return;
 			case ParsetreePackage.COMPOSITE_NODE__CHILDREN:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends AbstractParserNode>)newValue);
@@ -202,9 +147,6 @@ public class CompositeNodeImpl extends AbstractParserNodeImpl implements Composi
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ParsetreePackage.COMPOSITE_NODE__GRAMMAR_ELEMENT:
-				setGrammarElement((EObject)null);
-				return;
 			case ParsetreePackage.COMPOSITE_NODE__CHILDREN:
 				getChildren().clear();
 				return;
@@ -220,8 +162,6 @@ public class CompositeNodeImpl extends AbstractParserNodeImpl implements Composi
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ParsetreePackage.COMPOSITE_NODE__GRAMMAR_ELEMENT:
-				return grammarElement != null;
 			case ParsetreePackage.COMPOSITE_NODE__CHILDREN:
 				return children != null && !children.isEmpty();
 		}

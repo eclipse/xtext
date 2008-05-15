@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackageImpl.java,v 1.3 2008/05/15 08:15:23 jkohnlein Exp $
+ * $Id: ParsetreePackageImpl.java,v 1.4 2008/05/15 09:22:47 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -129,17 +129,8 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompositeNode_GrammarElement() {
-		return (EReference)compositeNodeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getCompositeNode_Children() {
-		return (EReference)compositeNodeEClass.getEStructuralFeatures().get(1);
+		return (EReference)compositeNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -174,6 +165,15 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAbstractParserNode_GrammarElement() {
+		return (EReference)abstractParserNodeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getLeafNode() {
 		return leafNodeEClass;
 	}
@@ -192,17 +192,8 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLeafNode_GrammarElement() {
-		return (EReference)leafNodeEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getLeafNode_Feature() {
-		return (EAttribute)leafNodeEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)leafNodeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -234,16 +225,15 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 
 		// Create classes and their features
 		compositeNodeEClass = createEClass(COMPOSITE_NODE);
-		createEReference(compositeNodeEClass, COMPOSITE_NODE__GRAMMAR_ELEMENT);
 		createEReference(compositeNodeEClass, COMPOSITE_NODE__CHILDREN);
 
 		abstractParserNodeEClass = createEClass(ABSTRACT_PARSER_NODE);
 		createEReference(abstractParserNodeEClass, ABSTRACT_PARSER_NODE__PARENT);
 		createEAttribute(abstractParserNodeEClass, ABSTRACT_PARSER_NODE__ELEMENT);
+		createEReference(abstractParserNodeEClass, ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT);
 
 		leafNodeEClass = createEClass(LEAF_NODE);
 		createEAttribute(leafNodeEClass, LEAF_NODE__TEXT);
-		createEReference(leafNodeEClass, LEAF_NODE__GRAMMAR_ELEMENT);
 		createEAttribute(leafNodeEClass, LEAF_NODE__FEATURE);
 	}
 
@@ -280,12 +270,12 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(compositeNodeEClass, CompositeNode.class, "CompositeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCompositeNode_GrammarElement(), ecorePackage.getEObject(), null, "grammarElement", null, 0, 1, CompositeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeNode_Children(), this.getAbstractParserNode(), this.getAbstractParserNode_Parent(), "children", null, 0, -1, CompositeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractParserNodeEClass, AbstractParserNode.class, "AbstractParserNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractParserNode_Parent(), this.getCompositeNode(), this.getCompositeNode_Children(), "parent", null, 0, 1, AbstractParserNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractParserNode_Element(), ecorePackage.getEJavaObject(), "element", null, 0, 1, AbstractParserNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractParserNode_GrammarElement(), ecorePackage.getEObject(), null, "grammarElement", null, 0, 1, AbstractParserNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(abstractParserNodeEClass, ecorePackage.getEInt(), "length", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -295,7 +285,6 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 
 		initEClass(leafNodeEClass, LeafNode.class, "LeafNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLeafNode_Text(), ecorePackage.getEString(), "text", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLeafNode_GrammarElement(), ecorePackage.getEObject(), null, "grammarElement", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLeafNode_Feature(), ecorePackage.getEString(), "feature", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource

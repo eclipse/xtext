@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractParserNode.java,v 1.2 2008/05/15 08:15:23 jkohnlein Exp $
+ * $Id: AbstractParserNode.java,v 1.3 2008/05/15 09:22:48 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.AbstractParserNode#getParent <em>Parent</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.AbstractParserNode#getElement <em>Element</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.AbstractParserNode#getGrammarElement <em>Grammar Element</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,6 +81,32 @@ public interface AbstractParserNode extends EObject {
 	 * @generated
 	 */
 	void setElement(Object value);
+
+	/**
+	 * Returns the value of the '<em><b>Grammar Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Grammar Element</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Grammar Element</em>' reference.
+	 * @see #setGrammarElement(EObject)
+	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getAbstractParserNode_GrammarElement()
+	 * @model
+	 * @generated
+	 */
+	EObject getGrammarElement();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.parsetree.AbstractParserNode#getGrammarElement <em>Grammar Element</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Grammar Element</em>' reference.
+	 * @see #getGrammarElement()
+	 * @generated
+	 */
+	void setGrammarElement(EObject value);
 
 	/**
 	 * <!-- begin-user-doc -->

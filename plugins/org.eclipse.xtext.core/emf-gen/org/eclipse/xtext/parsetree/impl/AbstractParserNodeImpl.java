@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractParserNodeImpl.java,v 1.2 2008/05/15 08:15:23 jkohnlein Exp $
+ * $Id: AbstractParserNodeImpl.java,v 1.3 2008/05/15 09:22:48 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.parsetree.ParsetreePackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractParserNodeImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractParserNodeImpl#getElement <em>Element</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractParserNodeImpl#getGrammarElement <em>Grammar Element</em>}</li>
  * </ul>
  * </p>
  *
@@ -61,6 +63,16 @@ public abstract class AbstractParserNodeImpl extends EObjectImpl implements Abst
 	 * @ordered
 	 */
 	protected Object element = ELEMENT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getGrammarElement() <em>Grammar Element</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGrammarElement()
+	 * @generated
+	 * @ordered
+	 */
+	protected EObject grammarElement;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -167,6 +179,44 @@ public abstract class AbstractParserNodeImpl extends EObjectImpl implements Abst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EObject getGrammarElement() {
+		if (grammarElement != null && grammarElement.eIsProxy()) {
+			InternalEObject oldGrammarElement = (InternalEObject)grammarElement;
+			grammarElement = eResolveProxy(oldGrammarElement);
+			if (grammarElement != oldGrammarElement) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ParsetreePackage.ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT, oldGrammarElement, grammarElement));
+			}
+		}
+		return grammarElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EObject basicGetGrammarElement() {
+		return grammarElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGrammarElement(EObject newGrammarElement) {
+		EObject oldGrammarElement = grammarElement;
+		grammarElement = newGrammarElement;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT, oldGrammarElement, grammarElement));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public int length() {
 		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.length((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.length((LeafNodeImpl) this);} else {return ParsetreeUtil.length((AbstractParserNodeImpl) this);}
 	}
@@ -232,6 +282,9 @@ public abstract class AbstractParserNodeImpl extends EObjectImpl implements Abst
 				return basicGetParent();
 			case ParsetreePackage.ABSTRACT_PARSER_NODE__ELEMENT:
 				return getElement();
+			case ParsetreePackage.ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT:
+				if (resolve) return getGrammarElement();
+				return basicGetGrammarElement();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -249,6 +302,9 @@ public abstract class AbstractParserNodeImpl extends EObjectImpl implements Abst
 				return;
 			case ParsetreePackage.ABSTRACT_PARSER_NODE__ELEMENT:
 				setElement(newValue);
+				return;
+			case ParsetreePackage.ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT:
+				setGrammarElement((EObject)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -268,6 +324,9 @@ public abstract class AbstractParserNodeImpl extends EObjectImpl implements Abst
 			case ParsetreePackage.ABSTRACT_PARSER_NODE__ELEMENT:
 				setElement(ELEMENT_EDEFAULT);
 				return;
+			case ParsetreePackage.ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT:
+				setGrammarElement((EObject)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -284,6 +343,8 @@ public abstract class AbstractParserNodeImpl extends EObjectImpl implements Abst
 				return parent != null;
 			case ParsetreePackage.ABSTRACT_PARSER_NODE__ELEMENT:
 				return ELEMENT_EDEFAULT == null ? element != null : !ELEMENT_EDEFAULT.equals(element);
+			case ParsetreePackage.ABSTRACT_PARSER_NODE__GRAMMAR_ELEMENT:
+				return grammarElement != null;
 		}
 		return super.eIsSet(featureID);
 	}
