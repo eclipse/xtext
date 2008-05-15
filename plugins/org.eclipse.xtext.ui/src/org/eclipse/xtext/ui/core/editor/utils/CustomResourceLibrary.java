@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.utils;
 
 import java.util.HashMap;
@@ -12,8 +20,7 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 
 /**
- * Hier werden unterschiedliche stilistische Komponente erzeugt, aufbewahrt und
- * zur Verfügung gestellt.
+ * Here different stylistic component are produced, kept and made available
  * 
  * @author Dennis Hübner
  */
