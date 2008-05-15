@@ -103,6 +103,7 @@ withoutQuotes(Keyword this) :
 trimFromStartAndEnd(String this, Integer i) :
 	this.subString(i,this.length-i);
 	
+isAssigned(Keyword this): isAssigned(eContainer);
 isAssigned(RuleCall this) : isAssigned(eContainer);
 isAssigned(Alternatives this) : isAssigned(eContainer);
 isAssigned(Assignment this) : true;
