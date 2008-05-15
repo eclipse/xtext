@@ -211,6 +211,7 @@ ruleLexerRule returns [EObject current=null] : {EObject temp=null; currentNode=c
 (
 (
 (
+(
 	lv_name=
 RULE_ID{createLeafNode(null, currentNode, 
 "name");}
@@ -220,6 +221,19 @@ RULE_ID{createLeafNode(null, currentNode,
 	associateNodeWithAstElement(currentNode, $current);
 	}
 )
+(
+'tokentype' {createLeafNode(null, currentNode, 
+null);}
+(
+	lv_tokenType=
+RULE_ID{createLeafNode(null, currentNode, 
+"tokenType");}
+ {if ($current==null) {
+	$current = factory.create("LexerRule");}
+	factory.set($current, "tokenType",lv_tokenType);
+	associateNodeWithAstElement(currentNode, $current);
+	}
+))?)
 ':' {createLeafNode(null, currentNode, 
 null);})
 (
@@ -516,20 +530,20 @@ RULE_ID{createLeafNode(null, currentNode,
 
 
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
-
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
-
-RULE_INT : ('0'..'9')+;
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+
+RULE_INT : ('0'..'9')+;
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 

@@ -11,7 +11,7 @@ public abstract class XtextStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@b4dcd9 (alias: null) (nsURI: "http://www.eclipse.org/2008/Xtext", name: xtext)
+		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@952be0 (alias: null) (name: xtext, nsURI: "http://www.eclipse.org/2008/Xtext")
 		
 	}
 
