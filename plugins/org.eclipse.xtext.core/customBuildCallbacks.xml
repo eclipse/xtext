@@ -66,6 +66,16 @@
 			generateEditProject="false"
 			generateEditorProject="false">
 		</emf.Ecore2Java>
+		<emf.Ecore2Java model="${basedir}/src-gen/org/eclipse/xtext/xtext.ecore" 
+			genModel="${basedir}/model/xtext.genmodel" 
+			modelProject="${basedir}/org.eclipse.xtext" 
+			modelProjectFragmentPath="emf-gen"
+			reconcilegenmodel="keep"
+			generateModelProject="false"
+			generateJavaCode="true"
+			generateEditProject="false"
+			generateEditorProject="false">
+		</emf.Ecore2Java>
 	</target>
 
 	<!-- ===================================================================== -->
