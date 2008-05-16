@@ -39,12 +39,10 @@ public Internal«languageName()»Parser(TokenStream input, IElementFactory factory
 	this.factory = factory;
 }
 
-public CompositeNode createCompositeNode(EObject currentGrammarElement,
-		CompositeNode parentNode) {
+public CompositeNode createCompositeNode(EObject grammarElement, CompositeNode parentNode) {
 	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
-	compositeNode.setGrammarElement(currentGrammarElement);
 	if (parentNode!=null) parentNode.getChildren().add(compositeNode);
-	compositeNode.setGrammarElement(currentGrammarElement);
+	compositeNode.setGrammarElement(grammarElement);
 	return compositeNode;
 }
 
@@ -84,6 +82,7 @@ private void appendTrailingHiddenTokens(CompositeNode parentNode) {
 }
 	
 public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
+	assert node.getElement() == null || node.getElement() == astElement;
 	node.setElement(astElement);
 	if(astElement instanceof EObject) {
 		EObject eObject = (EObject) astElement;
@@ -97,7 +96,7 @@ private CompositeNode currentNode;
 private org.eclipse.xtext.Grammar grammar = «packageName()».«constantsClassName()».get«languageName()»Grammar();
 }
 
-parse returns [EObject current] :
+parse returns [EObject current] : {currentNode = «EXPAND createCompositeNode FOR parserRules.first()»}
 	«parserRules.first().ruleName()» {$current=$«parserRules.first().ruleName()».current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
 «EXPAND rule FOREACH parserRules»
@@ -108,55 +107,62 @@ parse returns [EObject current] :
 «ENDDEFINE»
 
 «DEFINE rule FOR ParserRule»
-«ruleName()» returns [EObject current=null] : {EObject temp=null; currentNode=«EXPAND createCompositeNode» }
-	«EXPAND ebnf FOR this.alternatives» { currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode; };
+
+// Rule «name»
+«ruleName()» returns [EObject current=null] : { EObject temp=null; }
+   «EXPAND ebnf FOR this.alternatives» ;
 «ENDDEFINE»
 
 «DEFINE rule FOR LexerRule»
 «ruleName()» : «body»;
 «ENDDEFINE»
 
-«DEFINE ebnf FOR AbstractElement»
+«DEFINE ebnf FOR AbstractElement-»
 «IF mustBeParenthesized()»(«EXPAND ebnf2»)«ELSE»«EXPAND ebnf2»«ENDIF»«cardinality-»
 «ENDDEFINE»
 
 «DEFINE ebnf2 FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
 
-«DEFINE ebnf2 FOR Alternatives»«EXPAND ebnf FOREACH groups SEPARATOR '|'»«ENDDEFINE»
+«DEFINE ebnf2 FOR Alternatives-»«EXPAND ebnf FOREACH groups SEPARATOR '|'»«ENDDEFINE»
 
 «DEFINE ebnf2 FOR Group»«EXPAND ebnf FOREACH abstractTokens»«ENDDEFINE»
 
 «DEFINE ebnf2 FOR Assignment»
-	«localVar()»=«EXPAND ebnf FOR terminal» {if ($current==null) {
-	$current = factory.create("«containingParserRule().getReturnTypeName()»");}
-	factory.«setOrAdd()»($current, "«feature»",«localVar()»);
-	associateNodeWithAstElement(currentNode, $current);
-	«IF isKeywordAssignment()»«EXPAND createLeafNode»«ENDIF»}
+	«IF isParserRuleAssignment()»{ currentNode=«EXPAND createCompositeNode FOR terminal»} «ENDIF»
+	«localVar()»=«EXPAND ebnf FOR terminal» 
+{ if ($current==null) {
+     $current = factory.create("«containingParserRule().getReturnTypeName()»");
+  }
+  factory.«setOrAdd()»($current, "«feature»", «IF isBoolean()»true«ELSE»«localVar()»«ENDIF»);
+  «IF isKeywordAssignment()»«EXPAND createLeafNode FOR terminal»«ENDIF-»
+  «IF isParserRuleAssignment()»currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode;«ENDIF»
+  associateNodeWithAstElement(currentNode, $current); }
 «ENDDEFINE»
 
 «DEFINE ebnf2 FOR Action»
-	{temp=factory.create("«currentType().qualifiedName()»");
-	 factory.«setOrAdd()»(temp, "«feature»",$current);
-	 $current = temp; 
-	 temp = null;
-	 associateNodeWithAstElement(currentNode, $current);}
+{ temp=factory.create("«currentType().qualifiedName()»");
+  factory.«setOrAdd()»(temp, "«feature»",$current);
+  $current = temp; 
+  temp = null;
+  associateNodeWithAstElement(currentNode, $current); }
 «ENDDEFINE»
 
-«DEFINE ebnf2 FOR Keyword»'«withoutQuotes()»' «IF !isAssigned()»{«EXPAND createLeafNode»}«ENDIF»«ENDDEFINE»
+«DEFINE ebnf2 FOR Keyword»'«withoutQuotes()»' «IF !isAssigned()»{ «EXPAND createLeafNode» }«ENDIF»«ENDDEFINE»
 
 «DEFINE ebnf2 FOR RuleCall-»
 «IF ParserRule.isInstance(calledRule()) && !isAssigned()»«localVar()»=«ENDIF-»
 «calledRule().ruleName()-»
 «IF ParserRule.isInstance(calledRule()) && !isAssigned()»{$current = $«localVar()».current;}«ENDIF-»
-«IF LexerRule.isInstance(calledRule())»{«EXPAND createLeafNode»}«ENDIF»
+«IF LexerRule.isInstance(calledRule())»{ «EXPAND createLeafNode» }«ENDIF»
 «ENDDEFINE»
 
-«DEFINE createCompositeNode FOR ParserRule-»
-createCompositeNode(«EXPAND getObjectByID», currentNode);«ENDDEFINE»
+«DEFINE createCompositeNode FOR emf::EObject-»
+createCompositeNode(// «this.toString()»
+«EXPAND getObjectByID», currentNode);«ENDDEFINE»
 
-«DEFINE createLeafNode FOR AbstractElement-»createLeafNode(«EXPAND getObjectByID», currentNode, 
+«DEFINE createLeafNode FOR emf::EObject-»
+createLeafNode(// «this.toString()»
+«EXPAND getObjectByID», currentNode,«REM»«ENDREM-»
 «IF isAssigned()»"«containingAssignment().feature»"«ELSE»null«ENDIF»);«ENDDEFINE»
 
-«DEFINE getObjectByID FOR emf::EObject-»
-grammar.eResource().getEObject("«getID()»")
-«ENDDEFINE»
+«DEFINE getObjectByID FOR emf::EObject-»grammar.eResource().getEObject("«getID()»")«ENDDEFINE»

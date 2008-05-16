@@ -97,6 +97,9 @@ boolean isKeywordAssignment(Assignment a) :
 boolean isRuleAssignment(Assignment a) :
 	RuleCall.isInstance(a.terminal);
 
+boolean isParserRuleAssignment(Assignment a) :
+	a.isRuleAssignment() && ((RuleCall) a.terminal).calledParserRule() != null ;
+	
 withoutQuotes(Keyword this) :
 	value.trimFromStartAndEnd(1);
 
