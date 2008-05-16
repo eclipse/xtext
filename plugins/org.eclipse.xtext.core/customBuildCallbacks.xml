@@ -29,7 +29,7 @@
 	</target>
 
 	<target name="cleanGenerated">
-		<delete verbose="true" includeemptydirs="true">
+		<delete verbose="true" quiet="true" includeemptydirs="true">
 			<fileset dir="${basedir}/emf-gen" includes="**/*" />
 		</delete>
 		<eclipse.refreshLocal resource="/" depth="infinite"/>
