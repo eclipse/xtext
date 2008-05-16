@@ -11,28 +11,28 @@
     <genClasses image="false" ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//AbstractRule">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//AbstractRule/name"/>
     </genClasses>
-    <genClasses ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//LexerRule">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//LexerRule/body"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//LexerRule/tokenType"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//AbstractMetamodelDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//AbstractMetamodelDeclaration/alias"/>
-    </genClasses>
     <genClasses ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//AbstractElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//AbstractElement/cardinality"/>
     </genClasses>
     <genClasses ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//TypeRef">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//TypeRef/alias"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//TypeRef/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//TypeRef/alias"/>
     </genClasses>
     <genClasses ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//ParserRule">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ../src-gen/org/eclipse/xtext/xtext.ecore#//ParserRule/alternatives"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../src-gen/org/eclipse/xtext/xtext.ecore#//ParserRule/type"/>
     </genClasses>
+    <genClasses ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//LexerRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//LexerRule/tokenType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//LexerRule/body"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//AbstractMetamodelDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//AbstractMetamodelDeclaration/alias"/>
+    </genClasses>
     <genClasses ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//Grammar">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../src-gen/org/eclipse/xtext/xtext.ecore#//Grammar/parserRules"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../src-gen/org/eclipse/xtext/xtext.ecore#//Grammar/lexerRules"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../src-gen/org/eclipse/xtext/xtext.ecore#//Grammar/metamodelDeclarations"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../src-gen/org/eclipse/xtext/xtext.ecore#//Grammar/parserRules"/>
     </genClasses>
     <genClasses ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//GeneratedMetamodel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//GeneratedMetamodel/nsURI"/>
@@ -42,14 +42,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//ReferencedMetamodel/uri"/>
     </genClasses>
     <genClasses ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//Assignment">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//Assignment/feature"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../src-gen/org/eclipse/xtext/xtext.ecore#//Assignment/terminal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//Assignment/feature"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//Assignment/operator"/>
     </genClasses>
     <genClasses ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//Action">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//Action/feature"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../src-gen/org/eclipse/xtext/xtext.ecore#//Action/typeName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//Action/operator"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../src-gen/org/eclipse/xtext/xtext.ecore#//Action/typeName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//Action/feature"/>
     </genClasses>
     <genClasses ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//Keyword">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//Keyword/value"/>
@@ -57,11 +57,11 @@
     <genClasses ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//RuleCall">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../src-gen/org/eclipse/xtext/xtext.ecore#//RuleCall/name"/>
     </genClasses>
-    <genClasses ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//Group">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../src-gen/org/eclipse/xtext/xtext.ecore#//Group/abstractTokens"/>
-    </genClasses>
     <genClasses ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//Alternatives">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../src-gen/org/eclipse/xtext/xtext.ecore#//Alternatives/groups"/>
+    </genClasses>
+    <genClasses ecoreClass="../src-gen/org/eclipse/xtext/xtext.ecore#//Group">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../src-gen/org/eclipse/xtext/xtext.ecore#//Group/abstractTokens"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

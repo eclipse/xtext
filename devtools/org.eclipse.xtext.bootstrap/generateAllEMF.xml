@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="org.eclipse.xtext.bootstrap" default="generateAll" basedir=".">
+	
+	<target name="generateAll">
+		<eclipse.refreshLocal resource="/" depth="infinite"/>
+		<ant dir="../org.eclipse.xtext/" antfile="customBuildCallbacks.xml"/>	
+		<ant dir="../org.eclipse.xtext.core/" antfile="customBuildCallbacks.xml"/>	
+	</target>
+	
+</project>

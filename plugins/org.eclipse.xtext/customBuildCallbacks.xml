@@ -2,14 +2,34 @@
 <!-- Custom targets called from a project's generated build.xml            -->
 <!-- Set customBuildCallbacks=<path/to/this/file> in your build.properties.-->
 <!-- ===================================================================== -->
-<project name="Build specific targets and properties" default="noDefault">
+<project name="Build specific targets and properties" default="regenerateAll">
 
-	<!-- ===================================================================== -->
-	<!-- Default target                                                        -->
-	<!-- ===================================================================== -->
-	<target name="noDefault">
-		<echo message="This file must be called with explicit targets" />
+	<target name="regenerateAll" depends="cleanGenerated,generateAll"/>
+
+	<target name="generateAll">
+		<emf.Ecore2Java model="${basedir}/model/xtextutil.ecore" 
+					genModel="${basedir}/model/xtextutil.genmodel" 
+					modelProject="${basedir}/org.eclipse.xtext" 
+					modelProjectFragmentPath="emf-gen"
+					reconcileGenmodel="keep"
+					generateModelProject="false"
+					generateJavaCode="true"
+					generateEditProject="false"
+					generateEditorProject="false">
+		</emf.Ecore2Java>
+		<eclipse.refreshLocal resource="/" depth="infinite"/>
 	</target>
+	
+	<target name="cleanGenerated">
+		<delete verbose="true" includeemptydirs="true">
+			<fileset dir="${basedir}/emf-gen" includes="**/*"/>
+		</delete>		
+		<eclipse.refreshLocal resource="/" depth="infinite"/>
+	</target>
+		
+	<target name="pre.@dot" depends="generateAll"/>
+	
+	<target name="pre.clean" depends="cleanGenerated"/>  
 	
 	<!-- ===================================================================== -->
 	<!-- Steps to do before the target build.jars                              -->
@@ -53,19 +73,6 @@
 	<!--                      reference to the classpath structure.            -->
 	<!-- ===================================================================== -->
 	<target name="pre.name">
-	</target>
-
-	<target name="pre.@dot">
-		<emf.Ecore2Java model="${basedir}/model/xtextutil.ecore" 
-			genModel="${basedir}/model/xtextutil.genmodel" 
-			modelProject="${basedir}/org.eclipse.xtext" 
-			modelProjectFragmentPath="emf-gen"
-			reconcileGenmodel="keep"
-			generateModelProject="false"
-			generateJavaCode="true"
-			generateEditProject="false"
-			generateEditorProject="false">
-		</emf.Ecore2Java>
 	</target>
 
 	<!-- ===================================================================== -->
@@ -146,19 +153,6 @@
 	<!--   destination.temp.folder - destination folder                        -->
 	<!-- ===================================================================== -->
 	<target name="post.gather.logs">       
-	</target>
-
-	<!-- ===================================================================== -->
-	<!-- Steps to do before the target clean                                   -->
-	<!-- Available parameters :                                                -->
-	<!--   destination.temp.folder - destination folder                        -->
-	<!-- ===================================================================== -->
-	<target name="pre.clean">  
-		<delete verbose="true">
-			<fileset dir="${basedir}">
-	    		<include name="emf-gen/**/*.*"/>
-			</fileset>
-		</delete>
 	</target>
 
 	<!-- ===================================================================== -->
