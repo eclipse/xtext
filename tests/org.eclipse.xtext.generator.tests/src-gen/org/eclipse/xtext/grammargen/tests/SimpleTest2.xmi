@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="&quot;http://eclipse.org/xtext/tests/SimpleTest2&quot;" name="SimpleTest2"/>
   <parserRules name="Model">
     <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="contents" operator="+=">
       <terminal xsi:type="xtext:RuleCall" name="Child"/>
@@ -30,4 +29,5 @@
       <abstractTokens xsi:type="xtext:Keyword" value="'}'"/>
     </alternatives>
   </parserRules>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="&quot;http://eclipse.org/xtext/tests/SimpleTest2&quot;" name="SimpleTest2"/>
 </xtext:Grammar>
