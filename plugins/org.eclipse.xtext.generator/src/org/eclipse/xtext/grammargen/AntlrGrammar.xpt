@@ -83,7 +83,7 @@ private void appendTrailingHiddenTokens(CompositeNode parentNode) {
 	}
 }
 	
-public void associateNodeWithAstElement(AbstractNode node, EObject astElement) {
+public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
 	node.setElement(astElement);
 	if(astElement instanceof EObject) {
 		EObject eObject = (EObject) astElement;
