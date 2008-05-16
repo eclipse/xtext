@@ -74,8 +74,16 @@
   <parserRules name="LexerRule">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall" name="ID"/>
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+            <terminal xsi:type="xtext:RuleCall" name="ID"/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Group" cardinality="?">
+            <abstractTokens xsi:type="xtext:Keyword" value="'tokentype'"/>
+            <abstractTokens xsi:type="xtext:Assignment" feature="tokenType" operator="=">
+              <terminal xsi:type="xtext:RuleCall" name="ID"/>
+            </abstractTokens>
+          </abstractTokens>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value="':'"/>
       </abstractTokens>
