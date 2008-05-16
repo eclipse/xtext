@@ -2,6 +2,7 @@ package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.XtextPackage;
 
 public class XtextConstants extends org.eclipse.xtext.core.parser.BaseEPackageAccess {
 	public static final String XTEXT_GRAMMAR_CP_URI = "org/eclipse/xtext/Xtext.xmi";
@@ -9,6 +10,8 @@ public class XtextConstants extends org.eclipse.xtext.core.parser.BaseEPackageAc
 	
 	public static Grammar getXtextGrammar() {	
 		if (GRAMMAR==null) {
+			// assert the XtextPackage implementation is loaded
+			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
 			GRAMMAR = (Grammar) loadGrammarFile(XtextConstants.class.getClassLoader(),XTEXT_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;

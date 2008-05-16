@@ -11,6 +11,8 @@ package org.eclipse.xtext.generator.tests;
 import java.io.InputStream;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextConstants;
@@ -35,6 +37,10 @@ public class GenerateAllTestGrammars {
 		MetamodelRefTest.class, DummyLanguage.class};
 
 	public static void main(String[] args) throws Exception {
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"ecore", new XMIResourceFactoryImpl());
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"xmi", new XMIResourceFactoryImpl());
 		for (Class<?> c : testclasses) {
 			String filename = c.getName().replace('.', '/') + ".xtext";
 			System.out.println("loading " + filename);
