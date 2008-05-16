@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CompositeNode.java,v 1.1 2008/05/15 11:39:43 sefftinge Exp $
+ * $Id: CompositeNode.java,v 1.2 2008/05/16 06:47:21 sefftinge Exp $
  */
 package org.eclipse.xtext.core.parsetree;
 
@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface CompositeNode extends AbstractNode {
 	/**
-	 * Returns the value of the '<em><b>Children</b></em>' reference list.
+	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.core.parsetree.AbstractNode}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
@@ -35,10 +35,10 @@ public interface CompositeNode extends AbstractNode {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Children</em>' reference list.
+	 * @return the value of the '<em>Children</em>' containment reference list.
 	 * @see org.eclipse.xtext.core.parsetree.ParsetreePackage#getCompositeNode_Children()
 	 * @see org.eclipse.xtext.core.parsetree.AbstractNode#getParent
-	 * @model opposite="parent"
+	 * @model opposite="parent" containment="true"
 	 * @generated
 	 */
 	EList<AbstractNode> getChildren();

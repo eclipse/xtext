@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CompositeNodeImpl.java,v 1.1 2008/05/15 11:39:43 sefftinge Exp $
+ * $Id: CompositeNodeImpl.java,v 1.2 2008/05/16 06:47:21 sefftinge Exp $
  */
 package org.eclipse.xtext.core.parsetree.impl;
 
@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -37,7 +38,7 @@ import org.eclipse.xtext.core.parsetree.ParsetreePackage;
  */
 public class CompositeNodeImpl extends AbstractNodeImpl implements CompositeNode {
 	/**
-	 * The cached value of the '{@link #getChildren() <em>Children</em>}' reference list.
+	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getChildren()
@@ -72,7 +73,7 @@ public class CompositeNodeImpl extends AbstractNodeImpl implements CompositeNode
 	 */
 	public EList<AbstractNode> getChildren() {
 		if (children == null) {
-			children = new EObjectWithInverseResolvingEList<AbstractNode>(AbstractNode.class, this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, ParsetreePackage.ABSTRACT_NODE__PARENT);
+			children = new EObjectContainmentWithInverseEList<AbstractNode>(AbstractNode.class, this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, ParsetreePackage.ABSTRACT_NODE__PARENT);
 		}
 		return children;
 	}

@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNode.java,v 1.2 2008/05/15 12:46:48 jkohnlein Exp $
+ * $Id: AbstractNode.java,v 1.3 2008/05/16 06:47:21 sefftinge Exp $
  */
 package org.eclipse.xtext.core.parsetree;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -28,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface AbstractNode extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Parent</b></em>' reference.
+	 * Returns the value of the '<em><b>Parent</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.core.parsetree.CompositeNode#getChildren <em>Children</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -36,20 +37,20 @@ public interface AbstractNode extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent</em>' reference.
+	 * @return the value of the '<em>Parent</em>' container reference.
 	 * @see #setParent(CompositeNode)
 	 * @see org.eclipse.xtext.core.parsetree.ParsetreePackage#getAbstractNode_Parent()
 	 * @see org.eclipse.xtext.core.parsetree.CompositeNode#getChildren
-	 * @model opposite="children"
+	 * @model opposite="children" transient="false"
 	 * @generated
 	 */
 	CompositeNode getParent();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getParent <em>Parent</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getParent <em>Parent</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent</em>' reference.
+	 * @param value the new value of the '<em>Parent</em>' container reference.
 	 * @see #getParent()
 	 * @generated
 	 */
@@ -138,5 +139,23 @@ public interface AbstractNode extends EObject {
 	 * @generated
 	 */
 	String serialize();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.getLeafNodes((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.getLeafNodes((LeafNodeImpl) this);} else {return ParsetreeUtil.getLeafNodes((AbstractNodeImpl) this);}'"
+	 * @generated
+	 */
+	EList<LeafNode> getLeafNodes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model toRequired="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.getLeafNodes((CompositeNodeImpl) this, to);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.getLeafNodes((LeafNodeImpl) this, to);} else {return ParsetreeUtil.getLeafNodes((AbstractNodeImpl) this, to);}'"
+	 * @generated
+	 */
+	EList<LeafNode> getLeafNodes(AbstractNode to);
 
 } // AbstractNode

@@ -1,7 +1,12 @@
 package org.eclipse.xtext.core.parsetree.impl;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
+import org.eclipse.xtext.core.parsetree.LeafNode;
 import org.eclipse.xtext.core.parsetree.ParsetreePackage;
 
 public class ParsetreeUtil {
@@ -25,6 +30,17 @@ public class ParsetreeUtil {
 	}
 
 	public static int offset(AbstractNodeImpl abstractParserNode) {
+		checkArgument(abstractParserNode);
+		AbstractNode rootContainer = (AbstractNode) EcoreUtil.getRootContainer(abstractParserNode);
+		EList<LeafNode> leafNodes = rootContainer.getLeafNodes(abstractParserNode);
+		int offset = 0;
+		for (LeafNode leafNode : leafNodes) {
+			offset+=leafNode.length();
+		}
+		return offset;
+	}
+
+	private static void checkArgument(AbstractNodeImpl abstractParserNode) {
 		int classifierID = abstractParserNode.eClass().getClassifierID();
 		if(classifierID != ParsetreePackage.COMPOSITE_NODE
 				&& classifierID != ParsetreePackage.LEAF_NODE) {
@@ -32,30 +48,23 @@ public class ParsetreeUtil {
 					"Illegal subtype of AbstarctParserNode "
 							+ abstractParserNode.eClass().getName());
 		}
-		int offset = 0;
-		EList<AbstractNode> siblings = abstractParserNode.getParent()
-				.getChildren();
-		int indexOf = siblings.indexOf(abstractParserNode);
-		for (int i = 0; i < indexOf; ++i) {
-			offset += siblings.get(i).length();
+	}
+
+	public static int line(AbstractNodeImpl _this) {
+		checkArgument(_this);
+		AbstractNode rootContainer = (AbstractNode) EcoreUtil.getRootContainer(_this);
+		EList<LeafNode> leafNodes = rootContainer.getLeafNodes(_this);
+		int line = 0;
+		for (LeafNode leafNode : leafNodes) {
+			String text = leafNode.getText();
+			char[] charArray = text.toCharArray();
+			for (char c : charArray) {
+				//TODO handle os specific newlines
+				if (c=='\n' || c=='\r') 
+					line++;
+			}
 		}
-		return offset;
-	}
-
-	public static int line(CompositeNodeImpl leafNodeImpl) {
-		// TODO implement as soon as whitespaces are in node model
-		return 0;
-	}
-
-	public static int line(LeafNodeImpl leafNodeImpl) {
-		// TODO implement as soon as whitespaces are in node model
-		return 0;
-	}
-
-	public static int line(AbstractNodeImpl abstractParserNode) {
-		throw new IllegalArgumentException(
-				"Illegal subtype of AbstarctParserNode "
-						+ abstractParserNode.eClass().getName());
+		return line;
 	}
 
 	public static String serialize(CompositeNodeImpl compositeNodeImpl) {
@@ -74,6 +83,25 @@ public class ParsetreeUtil {
 		throw new IllegalArgumentException(
 				"Illegal subtype of AbstarctParserNode "
 						+ abstractNodeImpl.eClass().getName());
+	}
+
+	public static EList<LeafNode> getLeafNodes(AbstractNodeImpl _this) {
+		return getLeafNodes(_this, null);
+	}
+
+	public static EList<LeafNode> getLeafNodes(AbstractNodeImpl _this, AbstractNode to) {
+		checkArgument(_this);
+		BasicEList<LeafNode> result = new BasicEList<LeafNode>();
+		TreeIterator<EObject> allContents = _this.eAllContents();
+		while (allContents.hasNext()) {
+			EObject current = allContents.next();
+			if (current.equals(to)) 
+				return result;
+			if (current instanceof LeafNode) {
+				result.add((LeafNode) current);
+			}
+		}
+		return result;
 	}
 
 }
