@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g 2008-05-16 09:48:08
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g 2008-05-16 10:06:33
 
 package org.eclipse.xtext.parser.internal;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class InternalXtextGrammarTestLexer extends Lexer {
     public static final int T21=21;
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=7;
     public static final int T14=14;
     public static final int T29=29;
     public static final int RULE_ID=4;
@@ -36,7 +36,7 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     public static final int RULE_ANY_OTHER=11;
     public static final int T16=16;
     public static final int T27=27;
-    public static final int RULE_SL_COMMENT=7;
+    public static final int RULE_SL_COMMENT=9;
     public static final int T30=30;
     public static final int T24=24;
     public static final int T19=19;
@@ -453,31 +453,57 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     }
     // $ANTLR end T33
 
-    // $ANTLR start RULE_SL_COMMENT
-    public final void mRULE_SL_COMMENT() throws RecognitionException {
+    // $ANTLR start RULE_ID
+    public final void mRULE_ID() throws RecognitionException {
         try {
-            int _type = RULE_SL_COMMENT;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:592:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:592:19: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+            int _type = RULE_ID;
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:592:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:592:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            match("//"); 
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:592:11: ( '^' )?
+            int alt1=2;
+            int LA1_0 = input.LA(1);
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:592:24: (~ ( '\\n' | '\\r' ) )*
-            loop1:
+            if ( (LA1_0=='^') ) {
+                alt1=1;
+            }
+            switch (alt1) {
+                case 1 :
+                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:592:12: '^'
+                    {
+                    match('^'); 
+
+                    }
+                    break;
+
+            }
+
+            if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+                input.consume();
+
+            }
+            else {
+                MismatchedSetException mse =
+                    new MismatchedSetException(null,input);
+                recover(mse);    throw mse;
+            }
+
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:592:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            loop2:
             do {
-                int alt1=2;
-                int LA1_0 = input.LA(1);
+                int alt2=2;
+                int LA2_0 = input.LA(1);
 
-                if ( ((LA1_0>='\u0000' && LA1_0<='\t')||(LA1_0>='\u000B' && LA1_0<='\f')||(LA1_0>='\u000E' && LA1_0<='\uFFFE')) ) {
-                    alt1=1;
+                if ( ((LA2_0>='0' && LA2_0<='9')||(LA2_0>='A' && LA2_0<='Z')||LA2_0=='_'||(LA2_0>='a' && LA2_0<='z')) ) {
+                    alt2=1;
                 }
 
 
-                switch (alt1) {
+                switch (alt2) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:592:24: ~ ( '\\n' | '\\r' )
+            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:
             	    {
-            	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
+            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
 
             	    }
@@ -492,30 +518,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop1;
+            	    break loop2;
                 }
             } while (true);
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:592:38: ( '\\r' )?
-            int alt2=2;
-            int LA2_0 = input.LA(1);
-
-            if ( (LA2_0=='\r') ) {
-                alt2=1;
-            }
-            switch (alt2) {
-                case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:592:38: '\\r'
-                    {
-                    match('\r'); 
-
-                    }
-                    break;
-
-            }
-
-            match('\n'); 
-            channel=HIDDEN;
 
             }
 
@@ -524,7 +530,7 @@ public class InternalXtextGrammarTestLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end RULE_SL_COMMENT
+    // $ANTLR end RULE_ID
 
     // $ANTLR start RULE_STRING
     public final void mRULE_STRING() throws RecognitionException {
@@ -680,28 +686,87 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     }
     // $ANTLR end RULE_STRING
 
-    // $ANTLR start RULE_INT
-    public final void mRULE_INT() throws RecognitionException {
+    // $ANTLR start RULE_ML_COMMENT
+    public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
-            int _type = RULE_INT;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:597:10: ( ( '0' .. '9' )+ )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:597:12: ( '0' .. '9' )+
+            int _type = RULE_ML_COMMENT;
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:597:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:597:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:597:12: ( '0' .. '9' )+
-            int cnt6=0;
+            match("/*"); 
+
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:597:24: ( options {greedy=false; } : . )*
             loop6:
             do {
                 int alt6=2;
                 int LA6_0 = input.LA(1);
 
-                if ( ((LA6_0>='0' && LA6_0<='9')) ) {
+                if ( (LA6_0=='*') ) {
+                    int LA6_1 = input.LA(2);
+
+                    if ( (LA6_1=='/') ) {
+                        alt6=2;
+                    }
+                    else if ( ((LA6_1>='\u0000' && LA6_1<='.')||(LA6_1>='0' && LA6_1<='\uFFFE')) ) {
+                        alt6=1;
+                    }
+
+
+                }
+                else if ( ((LA6_0>='\u0000' && LA6_0<=')')||(LA6_0>='+' && LA6_0<='\uFFFE')) ) {
                     alt6=1;
                 }
 
 
                 switch (alt6) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:597:13: '0' .. '9'
+            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:597:52: .
+            	    {
+            	    matchAny(); 
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop6;
+                }
+            } while (true);
+
+            match("*/"); 
+
+            channel=HIDDEN;
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end RULE_ML_COMMENT
+
+    // $ANTLR start RULE_INT
+    public final void mRULE_INT() throws RecognitionException {
+        try {
+            int _type = RULE_INT;
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:599:10: ( ( '0' .. '9' )+ )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:599:12: ( '0' .. '9' )+
+            {
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:599:12: ( '0' .. '9' )+
+            int cnt7=0;
+            loop7:
+            do {
+                int alt7=2;
+                int LA7_0 = input.LA(1);
+
+                if ( ((LA7_0>='0' && LA7_0<='9')) ) {
+                    alt7=1;
+                }
+
+
+                switch (alt7) {
+            	case 1 :
+            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:599:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -709,12 +774,12 @@ public class InternalXtextGrammarTestLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt6 >= 1 ) break loop6;
+            	    if ( cnt7 >= 1 ) break loop7;
                         EarlyExitException eee =
-                            new EarlyExitException(6, input);
+                            new EarlyExitException(7, input);
                         throw eee;
                 }
-                cnt6++;
+                cnt7++;
             } while (true);
 
 
@@ -731,37 +796,37 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     public final void mRULE_LEXER_BODY() throws RecognitionException {
         try {
             int _type = RULE_LEXER_BODY;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:599:17: ( '<#' ( options {greedy=false; } : . )* '#>' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:599:19: '<#' ( options {greedy=false; } : . )* '#>'
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:601:17: ( '<#' ( options {greedy=false; } : . )* '#>' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:601:19: '<#' ( options {greedy=false; } : . )* '#>'
             {
             match("<#"); 
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:599:24: ( options {greedy=false; } : . )*
-            loop7:
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:601:24: ( options {greedy=false; } : . )*
+            loop8:
             do {
-                int alt7=2;
-                int LA7_0 = input.LA(1);
+                int alt8=2;
+                int LA8_0 = input.LA(1);
 
-                if ( (LA7_0=='#') ) {
-                    int LA7_1 = input.LA(2);
+                if ( (LA8_0=='#') ) {
+                    int LA8_1 = input.LA(2);
 
-                    if ( (LA7_1=='>') ) {
-                        alt7=2;
+                    if ( (LA8_1=='>') ) {
+                        alt8=2;
                     }
-                    else if ( ((LA7_1>='\u0000' && LA7_1<='=')||(LA7_1>='?' && LA7_1<='\uFFFE')) ) {
-                        alt7=1;
+                    else if ( ((LA8_1>='\u0000' && LA8_1<='=')||(LA8_1>='?' && LA8_1<='\uFFFE')) ) {
+                        alt8=1;
                     }
 
 
                 }
-                else if ( ((LA7_0>='\u0000' && LA7_0<='\"')||(LA7_0>='$' && LA7_0<='\uFFFE')) ) {
-                    alt7=1;
+                else if ( ((LA8_0>='\u0000' && LA8_0<='\"')||(LA8_0>='$' && LA8_0<='\uFFFE')) ) {
+                    alt8=1;
                 }
 
 
-                switch (alt7) {
+                switch (alt8) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:599:52: .
+            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:601:52: .
             	    {
             	    matchAny(); 
 
@@ -769,7 +834,7 @@ public class InternalXtextGrammarTestLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop7;
+            	    break loop8;
                 }
             } while (true);
 
@@ -785,57 +850,31 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     }
     // $ANTLR end RULE_LEXER_BODY
 
-    // $ANTLR start RULE_ID
-    public final void mRULE_ID() throws RecognitionException {
+    // $ANTLR start RULE_SL_COMMENT
+    public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
-            int _type = RULE_ID;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:601:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:601:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            int _type = RULE_SL_COMMENT;
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:603:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:603:19: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:601:11: ( '^' )?
-            int alt8=2;
-            int LA8_0 = input.LA(1);
+            match("//"); 
 
-            if ( (LA8_0=='^') ) {
-                alt8=1;
-            }
-            switch (alt8) {
-                case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:601:12: '^'
-                    {
-                    match('^'); 
-
-                    }
-                    break;
-
-            }
-
-            if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
-                input.consume();
-
-            }
-            else {
-                MismatchedSetException mse =
-                    new MismatchedSetException(null,input);
-                recover(mse);    throw mse;
-            }
-
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:601:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:603:24: (~ ( '\\n' | '\\r' ) )*
             loop9:
             do {
                 int alt9=2;
                 int LA9_0 = input.LA(1);
 
-                if ( ((LA9_0>='0' && LA9_0<='9')||(LA9_0>='A' && LA9_0<='Z')||LA9_0=='_'||(LA9_0>='a' && LA9_0<='z')) ) {
+                if ( ((LA9_0>='\u0000' && LA9_0<='\t')||(LA9_0>='\u000B' && LA9_0<='\f')||(LA9_0>='\u000E' && LA9_0<='\uFFFE')) ) {
                     alt9=1;
                 }
 
 
                 switch (alt9) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:
+            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:603:24: ~ ( '\\n' | '\\r' )
             	    {
-            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
 
             	    }
@@ -854,64 +893,25 @@ public class InternalXtextGrammarTestLexer extends Lexer {
                 }
             } while (true);
 
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:603:38: ( '\\r' )?
+            int alt10=2;
+            int LA10_0 = input.LA(1);
+
+            if ( (LA10_0=='\r') ) {
+                alt10=1;
+            }
+            switch (alt10) {
+                case 1 :
+                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:603:38: '\\r'
+                    {
+                    match('\r'); 
+
+                    }
+                    break;
 
             }
 
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end RULE_ID
-
-    // $ANTLR start RULE_ML_COMMENT
-    public final void mRULE_ML_COMMENT() throws RecognitionException {
-        try {
-            int _type = RULE_ML_COMMENT;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:603:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:603:19: '/*' ( options {greedy=false; } : . )* '*/'
-            {
-            match("/*"); 
-
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:603:24: ( options {greedy=false; } : . )*
-            loop10:
-            do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
-
-                if ( (LA10_0=='*') ) {
-                    int LA10_1 = input.LA(2);
-
-                    if ( (LA10_1=='/') ) {
-                        alt10=2;
-                    }
-                    else if ( ((LA10_1>='\u0000' && LA10_1<='.')||(LA10_1>='0' && LA10_1<='\uFFFE')) ) {
-                        alt10=1;
-                    }
-
-
-                }
-                else if ( ((LA10_0>='\u0000' && LA10_0<=')')||(LA10_0>='+' && LA10_0<='\uFFFE')) ) {
-                    alt10=1;
-                }
-
-
-                switch (alt10) {
-            	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:603:52: .
-            	    {
-            	    matchAny(); 
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop10;
-                }
-            } while (true);
-
-            match("*/"); 
-
+            match('\n'); 
             channel=HIDDEN;
 
             }
@@ -921,7 +921,7 @@ public class InternalXtextGrammarTestLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end RULE_ML_COMMENT
+    // $ANTLR end RULE_SL_COMMENT
 
     // $ANTLR start RULE_WS
     public final void mRULE_WS() throws RecognitionException {
@@ -999,7 +999,7 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:8: ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | RULE_SL_COMMENT | RULE_STRING | RULE_INT | RULE_LEXER_BODY | RULE_ID | RULE_ML_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:8: ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_INT | RULE_LEXER_BODY | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=30;
         int LA12_0 = input.LA(1);
 
@@ -1022,25 +1022,25 @@ public class InternalXtextGrammarTestLexer extends Lexer {
                                 int LA12_77 = input.LA(7);
 
                                 if ( ((LA12_77>='0' && LA12_77<='9')||(LA12_77>='A' && LA12_77<='Z')||LA12_77=='_'||(LA12_77>='a' && LA12_77<='z')) ) {
-                                    alt12=27;
+                                    alt12=23;
                                 }
                                 else {
                                     alt12=1;}
                             }
                             else {
-                                alt12=27;}
+                                alt12=23;}
                         }
                         else {
-                            alt12=27;}
+                            alt12=23;}
                     }
                     else {
-                        alt12=27;}
+                        alt12=23;}
                 }
                 else {
-                    alt12=27;}
+                    alt12=23;}
             }
             else {
-                alt12=27;}
+                alt12=23;}
         }
         else if ( (LA12_0==':') ) {
             int LA12_2 = input.LA(2);
@@ -1076,31 +1076,31 @@ public class InternalXtextGrammarTestLexer extends Lexer {
                                         int LA12_89 = input.LA(9);
 
                                         if ( ((LA12_89>='0' && LA12_89<='9')||(LA12_89>='A' && LA12_89<='Z')||LA12_89=='_'||(LA12_89>='a' && LA12_89<='z')) ) {
-                                            alt12=27;
+                                            alt12=23;
                                         }
                                         else {
                                             alt12=3;}
                                     }
                                     else {
-                                        alt12=27;}
+                                        alt12=23;}
                                 }
                                 else {
-                                    alt12=27;}
+                                    alt12=23;}
                             }
                             else {
-                                alt12=27;}
+                                alt12=23;}
                         }
                         else {
-                            alt12=27;}
+                            alt12=23;}
                     }
                     else {
-                        alt12=27;}
+                        alt12=23;}
                 }
                 else {
-                    alt12=27;}
+                    alt12=23;}
             }
             else {
-                alt12=27;}
+                alt12=23;}
         }
         else if ( (LA12_0=='a') ) {
             int LA12_4 = input.LA(2);
@@ -1109,13 +1109,13 @@ public class InternalXtextGrammarTestLexer extends Lexer {
                 int LA12_34 = input.LA(3);
 
                 if ( ((LA12_34>='0' && LA12_34<='9')||(LA12_34>='A' && LA12_34<='Z')||LA12_34=='_'||(LA12_34>='a' && LA12_34<='z')) ) {
-                    alt12=27;
+                    alt12=23;
                 }
                 else {
                     alt12=4;}
             }
             else {
-                alt12=27;}
+                alt12=23;}
         }
         else if ( (LA12_0=='i') ) {
             int LA12_5 = input.LA(2);
@@ -1136,25 +1136,25 @@ public class InternalXtextGrammarTestLexer extends Lexer {
                                 int LA12_79 = input.LA(7);
 
                                 if ( ((LA12_79>='0' && LA12_79<='9')||(LA12_79>='A' && LA12_79<='Z')||LA12_79=='_'||(LA12_79>='a' && LA12_79<='z')) ) {
-                                    alt12=27;
+                                    alt12=23;
                                 }
                                 else {
                                     alt12=5;}
                             }
                             else {
-                                alt12=27;}
+                                alt12=23;}
                         }
                         else {
-                            alt12=27;}
+                            alt12=23;}
                     }
                     else {
-                        alt12=27;}
+                        alt12=23;}
                 }
                 else {
-                    alt12=27;}
+                    alt12=23;}
             }
             else {
-                alt12=27;}
+                alt12=23;}
         }
         else if ( (LA12_0=='t') ) {
             int LA12_6 = input.LA(2);
@@ -1184,34 +1184,34 @@ public class InternalXtextGrammarTestLexer extends Lexer {
                                             int LA12_94 = input.LA(10);
 
                                             if ( ((LA12_94>='0' && LA12_94<='9')||(LA12_94>='A' && LA12_94<='Z')||LA12_94=='_'||(LA12_94>='a' && LA12_94<='z')) ) {
-                                                alt12=27;
+                                                alt12=23;
                                             }
                                             else {
                                                 alt12=6;}
                                         }
                                         else {
-                                            alt12=27;}
+                                            alt12=23;}
                                     }
                                     else {
-                                        alt12=27;}
+                                        alt12=23;}
                                 }
                                 else {
-                                    alt12=27;}
+                                    alt12=23;}
                             }
                             else {
-                                alt12=27;}
+                                alt12=23;}
                         }
                         else {
-                            alt12=27;}
+                            alt12=23;}
                     }
                     else {
-                        alt12=27;}
+                        alt12=23;}
                 }
                 else {
-                    alt12=27;}
+                    alt12=23;}
             }
             else {
-                alt12=27;}
+                alt12=23;}
         }
         else if ( (LA12_0=='r') ) {
             int LA12_7 = input.LA(2);
@@ -1235,28 +1235,28 @@ public class InternalXtextGrammarTestLexer extends Lexer {
                                     int LA12_87 = input.LA(8);
 
                                     if ( ((LA12_87>='0' && LA12_87<='9')||(LA12_87>='A' && LA12_87<='Z')||LA12_87=='_'||(LA12_87>='a' && LA12_87<='z')) ) {
-                                        alt12=27;
+                                        alt12=23;
                                     }
                                     else {
                                         alt12=7;}
                                 }
                                 else {
-                                    alt12=27;}
+                                    alt12=23;}
                             }
                             else {
-                                alt12=27;}
+                                alt12=23;}
                         }
                         else {
-                            alt12=27;}
+                            alt12=23;}
                     }
                     else {
-                        alt12=27;}
+                        alt12=23;}
                 }
                 else {
-                    alt12=27;}
+                    alt12=23;}
             }
             else {
-                alt12=27;}
+                alt12=23;}
         }
         else if ( (LA12_0==';') ) {
             alt12=8;
@@ -1313,28 +1313,28 @@ public class InternalXtextGrammarTestLexer extends Lexer {
                                     int LA12_88 = input.LA(8);
 
                                     if ( ((LA12_88>='0' && LA12_88<='9')||(LA12_88>='A' && LA12_88<='Z')||LA12_88=='_'||(LA12_88>='a' && LA12_88<='z')) ) {
-                                        alt12=27;
+                                        alt12=23;
                                     }
                                     else {
                                         alt12=18;}
                                 }
                                 else {
-                                    alt12=27;}
+                                    alt12=23;}
                             }
                             else {
-                                alt12=27;}
+                                alt12=23;}
                         }
                         else {
-                            alt12=27;}
+                            alt12=23;}
                     }
                     else {
-                        alt12=27;}
+                        alt12=23;}
                 }
                 else {
-                    alt12=27;}
+                    alt12=23;}
             }
             else {
-                alt12=27;}
+                alt12=23;}
         }
         else if ( (LA12_0=='.') ) {
             alt12=19;
@@ -1348,32 +1348,19 @@ public class InternalXtextGrammarTestLexer extends Lexer {
         else if ( (LA12_0==')') ) {
             alt12=22;
         }
-        else if ( (LA12_0=='/') ) {
-            switch ( input.LA(2) ) {
-            case '/':
-                {
+        else if ( (LA12_0=='^') ) {
+            int LA12_20 = input.LA(2);
+
+            if ( ((LA12_20>='A' && LA12_20<='Z')||LA12_20=='_'||(LA12_20>='a' && LA12_20<='z')) ) {
                 alt12=23;
-                }
-                break;
-            case '*':
-                {
-                alt12=28;
-                }
-                break;
-            default:
-                alt12=30;}
-
-        }
-        else if ( (LA12_0=='\"') ) {
-            int LA12_21 = input.LA(2);
-
-            if ( ((LA12_21>='\u0000' && LA12_21<='\uFFFE')) ) {
-                alt12=24;
             }
             else {
                 alt12=30;}
         }
-        else if ( (LA12_0=='\'') ) {
+        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='b'||(LA12_0>='d' && LA12_0<='f')||LA12_0=='h'||(LA12_0>='j' && LA12_0<='k')||(LA12_0>='m' && LA12_0<='q')||LA12_0=='s'||(LA12_0>='u' && LA12_0<='z')) ) {
+            alt12=23;
+        }
+        else if ( (LA12_0=='\"') ) {
             int LA12_22 = input.LA(2);
 
             if ( ((LA12_22>='\u0000' && LA12_22<='\uFFFE')) ) {
@@ -1382,29 +1369,42 @@ public class InternalXtextGrammarTestLexer extends Lexer {
             else {
                 alt12=30;}
         }
-        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
-            alt12=25;
-        }
-        else if ( (LA12_0=='<') ) {
-            int LA12_24 = input.LA(2);
+        else if ( (LA12_0=='\'') ) {
+            int LA12_23 = input.LA(2);
 
-            if ( (LA12_24=='#') ) {
-                alt12=26;
+            if ( ((LA12_23>='\u0000' && LA12_23<='\uFFFE')) ) {
+                alt12=24;
             }
             else {
                 alt12=30;}
         }
-        else if ( (LA12_0=='^') ) {
-            int LA12_25 = input.LA(2);
+        else if ( (LA12_0=='/') ) {
+            switch ( input.LA(2) ) {
+            case '/':
+                {
+                alt12=28;
+                }
+                break;
+            case '*':
+                {
+                alt12=25;
+                }
+                break;
+            default:
+                alt12=30;}
 
-            if ( ((LA12_25>='A' && LA12_25<='Z')||LA12_25=='_'||(LA12_25>='a' && LA12_25<='z')) ) {
+        }
+        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
+            alt12=26;
+        }
+        else if ( (LA12_0=='<') ) {
+            int LA12_26 = input.LA(2);
+
+            if ( (LA12_26=='#') ) {
                 alt12=27;
             }
             else {
                 alt12=30;}
-        }
-        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='b'||(LA12_0>='d' && LA12_0<='f')||LA12_0=='h'||(LA12_0>='j' && LA12_0<='k')||(LA12_0>='m' && LA12_0<='q')||LA12_0=='s'||(LA12_0>='u' && LA12_0<='z')) ) {
-            alt12=27;
         }
         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
             alt12=29;
@@ -1414,7 +1414,7 @@ public class InternalXtextGrammarTestLexer extends Lexer {
         }
         else {
             NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | RULE_SL_COMMENT | RULE_STRING | RULE_INT | RULE_LEXER_BODY | RULE_ID | RULE_ML_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
+                new NoViableAltException("1:1: Tokens : ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_INT | RULE_LEXER_BODY | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
 
             throw nvae;
         }
@@ -1574,44 +1574,44 @@ public class InternalXtextGrammarTestLexer extends Lexer {
                 }
                 break;
             case 23 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:98: RULE_SL_COMMENT
+                // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:98: RULE_ID
                 {
-                mRULE_SL_COMMENT(); 
+                mRULE_ID(); 
 
                 }
                 break;
             case 24 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:114: RULE_STRING
+                // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:106: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 25 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:126: RULE_INT
+                // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:118: RULE_ML_COMMENT
+                {
+                mRULE_ML_COMMENT(); 
+
+                }
+                break;
+            case 26 :
+                // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:134: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 26 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:135: RULE_LEXER_BODY
+            case 27 :
+                // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:143: RULE_LEXER_BODY
                 {
                 mRULE_LEXER_BODY(); 
 
                 }
                 break;
-            case 27 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:151: RULE_ID
-                {
-                mRULE_ID(); 
-
-                }
-                break;
             case 28 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:159: RULE_ML_COMMENT
+                // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:159: RULE_SL_COMMENT
                 {
-                mRULE_ML_COMMENT(); 
+                mRULE_SL_COMMENT(); 
 
                 }
                 break;
