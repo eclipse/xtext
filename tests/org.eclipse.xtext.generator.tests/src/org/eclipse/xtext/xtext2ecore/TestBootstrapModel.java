@@ -25,9 +25,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextEPackageAccess;
+import org.eclipse.xtext.XtextConstants;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.parser.XtextFactory;
+import org.eclipse.xtext.parser.XtextASTFactory;
 import org.eclipse.xtext.parser.XtextParser;
 import org.eclipse.xtext.xtextutil.XtextutilPackage;
 import org.openarchitectureware.expression.ExecutionContextImpl;
@@ -46,9 +46,9 @@ public class TestBootstrapModel extends TestCase {
 
 		// TODO make Xtext2Factory manual so one can overwrite' getEPackages' in
 		// order to support generated epackages
-		EPackage.Registry.INSTANCE.put(XtextEPackageAccess.XTEXT_NS_URI, XtextPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(XtextConstants.XTEXT_NS_URI, XtextPackage.eINSTANCE);
 		XtextParser xtext2Parser = new XtextParser();
-		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextFactory());
+		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory());
 
 		ResourceSetImpl resourceSet = new ResourceSetImpl();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
