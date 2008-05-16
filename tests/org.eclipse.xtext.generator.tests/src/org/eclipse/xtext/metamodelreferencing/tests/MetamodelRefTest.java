@@ -28,7 +28,7 @@ public class MetamodelRefTest extends AbstractGeneratorTest {
 		ctx.registerMetaModel(new EmfRegistryMetaModel() {
 			@Override
 			protected EPackage[] allPackages() {
-				return new EPackage[]{MetamodelRefTestEPackageAccess.getSimpleTestEPackage()};
+				return new EPackage[]{MetamodelRefTestConstants.getSimpleTestEPackage()};
 			}
 		});
 		XtendFacade facade = XtendFacade.create(ctx);
