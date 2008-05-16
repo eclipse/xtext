@@ -8,8 +8,6 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext,
- org.eclipse.xtext.parser,
- org.eclipse.xtext.util,
  org.eclipse.xtext.xtextutil,
  org.eclipse.xtext.xtextutil.util
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,

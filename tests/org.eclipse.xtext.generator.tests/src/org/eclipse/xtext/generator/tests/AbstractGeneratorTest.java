@@ -94,6 +94,12 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		assertWithXtend(left + " != " + right, left, right, _this);
 	}
 
+	protected Object invokeWithXtend( String expression, Object _this) {
+		XtendFacade f = getXtendFacade();
+		f = f.cloneWithExtensions("invoke(Object this) : " + expression+ ";");
+		return f.call("invoke",_this);
+	}
+	
 	protected void assertWithXtend(String message, String left, String right, Object _this) {
 		XtendFacade f = getXtendFacade();
 		f = f.cloneWithExtensions("__compare(Object this) : __left(this) == __right(this);__left(Object this) : "

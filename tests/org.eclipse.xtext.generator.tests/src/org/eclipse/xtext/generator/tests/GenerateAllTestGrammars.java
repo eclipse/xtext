@@ -13,14 +13,14 @@ import java.io.InputStream;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextEPackageAccess;
+import org.eclipse.xtext.XtextConstants;
 import org.eclipse.xtext.XtextGrammarTest;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.dummy.DummyLanguage;
 import org.eclipse.xtext.grammargen.tests.SimpleTest;
 import org.eclipse.xtext.grammargen.tests.SimpleTest2;
 import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest;
-import org.eclipse.xtext.parser.XtextFactory;
+import org.eclipse.xtext.parser.XtextASTFactory;
 import org.eclipse.xtext.parser.XtextParser;
 
 /**
@@ -41,9 +41,9 @@ public class GenerateAllTestGrammars {
 			InputStream resourceAsStream = c.getClassLoader().getResourceAsStream(filename);
 			
 			//TODO make Xtext2Factory manual so one can overwrite 'getEPackages' in order to support generated epackages
-			EPackage.Registry.INSTANCE.put(XtextEPackageAccess.XTEXT_NS_URI, XtextPackage.eINSTANCE);
+			EPackage.Registry.INSTANCE.put(XtextConstants.XTEXT_NS_URI, XtextPackage.eINSTANCE);
 			XtextParser xtext2Parser= new XtextParser();
-			Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextFactory());
+			Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory());
 			
 			GeneratorFacade.generate(grammarModel,c.getSimpleName(),c.getPackage().getName().replace('.', '/'),PATH);
 		}

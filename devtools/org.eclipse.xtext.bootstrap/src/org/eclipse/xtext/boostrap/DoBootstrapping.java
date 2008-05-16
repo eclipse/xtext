@@ -27,8 +27,8 @@ public class DoBootstrapping {
 
 	public static void main(String[] args) throws Exception {
 
-		String srcGenPath = "../org.eclipse.xtext/src-gen";
-		String filename = "../org.eclipse.xtext/src/model/Xtext.xtext";
+		String srcGenPath = "../org.eclipse.xtext.core/src-gen";
+		String filename = "../org.eclipse.xtext.core/src/org/eclipse/xtext/Xtext.xtext";
 		String languageName = "Xtext";
 		String languageNamespace = "org/eclipse/xtext";
 		
