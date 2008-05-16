@@ -2,13 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNodeImpl.java,v 1.2 2008/05/15 12:46:48 jkohnlein Exp $
+ * $Id: AbstractNodeImpl.java,v 1.3 2008/05/16 06:47:21 sefftinge Exp $
  */
 package org.eclipse.xtext.core.parsetree.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -16,8 +17,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.CompositeNode;
+import org.eclipse.xtext.core.parsetree.LeafNode;
 import org.eclipse.xtext.core.parsetree.ParsetreePackage;
 
 /**
@@ -36,16 +39,6 @@ import org.eclipse.xtext.core.parsetree.ParsetreePackage;
  * @generated
  */
 public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNode {
-	/**
-	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParent()
-	 * @generated
-	 * @ordered
-	 */
-	protected CompositeNode parent;
-
 	/**
 	 * The cached value of the '{@link #getGrammarElement() <em>Grammar Element</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -91,24 +84,8 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * @generated
 	 */
 	public CompositeNode getParent() {
-		if (parent != null && parent.eIsProxy()) {
-			InternalEObject oldParent = (InternalEObject)parent;
-			parent = (CompositeNode)eResolveProxy(oldParent);
-			if (parent != oldParent) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ParsetreePackage.ABSTRACT_NODE__PARENT, oldParent, parent));
-			}
-		}
-		return parent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CompositeNode basicGetParent() {
-		return parent;
+		if (eContainerFeatureID != ParsetreePackage.ABSTRACT_NODE__PARENT) return null;
+		return (CompositeNode)eContainer();
 	}
 
 	/**
@@ -117,12 +94,7 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * @generated
 	 */
 	public NotificationChain basicSetParent(CompositeNode newParent, NotificationChain msgs) {
-		CompositeNode oldParent = parent;
-		parent = newParent;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__PARENT, oldParent, newParent);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
+		msgs = eBasicSetContainer((InternalEObject)newParent, ParsetreePackage.ABSTRACT_NODE__PARENT, msgs);
 		return msgs;
 	}
 
@@ -132,10 +104,12 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * @generated
 	 */
 	public void setParent(CompositeNode newParent) {
-		if (newParent != parent) {
+		if (newParent != eInternalContainer() || (eContainerFeatureID != ParsetreePackage.ABSTRACT_NODE__PARENT && newParent != null)) {
+			if (EcoreUtil.isAncestor(this, newParent))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (parent != null)
-				msgs = ((InternalEObject)parent).eInverseRemove(this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, CompositeNode.class, msgs);
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
 			if (newParent != null)
 				msgs = ((InternalEObject)newParent).eInverseAdd(this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, CompositeNode.class, msgs);
 			msgs = basicSetParent(newParent, msgs);
@@ -262,12 +236,32 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<LeafNode> getLeafNodes() {
+		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.getLeafNodes((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.getLeafNodes((LeafNodeImpl) this);} else {return ParsetreeUtil.getLeafNodes((AbstractNodeImpl) this);}
+	}
+
+	
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<LeafNode> getLeafNodes(AbstractNode to) {
+		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.getLeafNodes((CompositeNodeImpl) this, to);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.getLeafNodes((LeafNodeImpl) this, to);} else {return ParsetreeUtil.getLeafNodes((AbstractNodeImpl) this, to);}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ParsetreePackage.ABSTRACT_NODE__PARENT:
-				if (parent != null)
-					msgs = ((InternalEObject)parent).eInverseRemove(this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, CompositeNode.class, msgs);
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetParent((CompositeNode)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -293,11 +287,24 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case ParsetreePackage.ABSTRACT_NODE__PARENT:
+				return eInternalContainer().eInverseRemove(this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, CompositeNode.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ParsetreePackage.ABSTRACT_NODE__PARENT:
-				if (resolve) return getParent();
-				return basicGetParent();
+				return getParent();
 			case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
 				if (resolve) return getGrammarElement();
 				return basicGetGrammarElement();
@@ -359,7 +366,7 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ParsetreePackage.ABSTRACT_NODE__PARENT:
-				return parent != null;
+				return getParent() != null;
 			case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
 				return grammarElement != null;
 			case ParsetreePackage.ABSTRACT_NODE__ELEMENT:

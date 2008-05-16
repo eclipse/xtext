@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackage.java,v 1.3 2008/05/15 12:46:48 jkohnlein Exp $
+ * $Id: ParsetreePackage.java,v 1.4 2008/05/16 06:47:21 sefftinge Exp $
  */
 package org.eclipse.xtext.core.parsetree;
 
@@ -70,7 +70,7 @@ public interface ParsetreePackage extends EPackage {
 	int ABSTRACT_NODE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -116,7 +116,7 @@ public interface ParsetreePackage extends EPackage {
 	int COMPOSITE_NODE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -143,7 +143,7 @@ public interface ParsetreePackage extends EPackage {
 	int COMPOSITE_NODE__ELEMENT = ABSTRACT_NODE__ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -171,7 +171,7 @@ public interface ParsetreePackage extends EPackage {
 	int LEAF_NODE = 2;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -245,10 +245,10 @@ public interface ParsetreePackage extends EPackage {
 	EClass getCompositeNode();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.core.parsetree.CompositeNode#getChildren <em>Children</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.core.parsetree.CompositeNode#getChildren <em>Children</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Children</em>'.
+	 * @return the meta object for the containment reference list '<em>Children</em>'.
 	 * @see org.eclipse.xtext.core.parsetree.CompositeNode#getChildren()
 	 * @see #getCompositeNode()
 	 * @generated
@@ -266,10 +266,10 @@ public interface ParsetreePackage extends EPackage {
 	EClass getAbstractNode();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getParent <em>Parent</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Parent</em>'.
+	 * @return the meta object for the container reference '<em>Parent</em>'.
 	 * @see org.eclipse.xtext.core.parsetree.AbstractNode#getParent()
 	 * @see #getAbstractNode()
 	 * @generated
@@ -374,7 +374,7 @@ public interface ParsetreePackage extends EPackage {
 		EClass COMPOSITE_NODE = eINSTANCE.getCompositeNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Children</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Children</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -392,7 +392,7 @@ public interface ParsetreePackage extends EPackage {
 		EClass ABSTRACT_NODE = eINSTANCE.getAbstractNode();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Parent</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
