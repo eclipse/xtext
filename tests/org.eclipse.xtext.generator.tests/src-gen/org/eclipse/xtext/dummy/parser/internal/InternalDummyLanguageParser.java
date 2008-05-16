@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g 2008-05-16 09:48:09
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g 2008-05-16 10:06:34
 
 package org.eclipse.xtext.dummy.parser.internal; 
 
@@ -15,13 +15,13 @@ import java.util.ArrayList;
 
 public class InternalDummyLanguageParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_LEXER_BODY", "RULE_ML_COMMENT", "RULE_WS", "RULE_SL_COMMENT", "RULE_ANY_OTHER", "'optional'", "'element'", "';'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_WS", "RULE_LEXER_BODY", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_ANY_OTHER", "'optional'", "'element'", "';'"
     };
-    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ML_COMMENT=9;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
+    public static final int RULE_WS=6;
+    public static final int RULE_INT=8;
     public static final int EOF=-1;
-    public static final int RULE_INT=6;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=11;
     public static final int RULE_SL_COMMENT=10;

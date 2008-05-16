@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g 2008-05-16 09:47:56
+// $ANTLR 3.0.1 ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g 2008-05-16 10:08:19
 
 package org.eclipse.xtext.parser.internal; 
 
@@ -15,16 +15,16 @@ import java.util.ArrayList;
 
 public class InternalXtextParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_LEXER_BODY", "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_INT", "RULE_ANY_OTHER", "'lexing'", "':'", "'generate'", "'as'", "'import'", "'tokentype'", "'returns'", "';'", "'::'", "'|'", "'?'", "'*'", "'+'", "'+='", "'='", "'?='", "'{'", "'current'", "'.'", "'}'", "'('", "')'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_LEXER_BODY", "RULE_INT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ML_COMMENT", "RULE_ANY_OTHER", "'lexing'", "':'", "'generate'", "'as'", "'import'", "'tokentype'", "'returns'", "';'", "'::'", "'|'", "'?'", "'*'", "'+'", "'+='", "'='", "'?='", "'{'", "'current'", "'.'", "'}'", "'('", "')'"
     };
-    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ML_COMMENT=10;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=7;
-    public static final int RULE_INT=10;
+    public static final int RULE_WS=9;
     public static final int EOF=-1;
+    public static final int RULE_INT=7;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_SL_COMMENT=8;
     public static final int RULE_LEXER_BODY=6;
 
         public InternalXtextParser(TokenStream input) {

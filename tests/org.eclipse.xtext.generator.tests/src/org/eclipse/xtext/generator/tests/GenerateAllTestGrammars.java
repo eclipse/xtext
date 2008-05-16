@@ -10,6 +10,8 @@ package org.eclipse.xtext.generator.tests;
 
 import java.io.InputStream;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -31,6 +33,7 @@ import org.eclipse.xtext.parser.XtextParser;
  */
 public class GenerateAllTestGrammars {
 	private static final String PATH = "./src-gen";
+	private static Log log = LogFactory.getLog(GenerateAllTestGrammars.class);
 
 	private final static Class<?>[] testclasses = new Class[] { 
 		SimpleTest.class, SimpleTest2.class, XtextGrammarTest.class,
@@ -41,9 +44,11 @@ public class GenerateAllTestGrammars {
 				"ecore", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
+		
+		GeneratorFacade.cleanFolder(PATH);
 		for (Class<?> c : testclasses) {
 			String filename = c.getName().replace('.', '/') + ".xtext";
-			System.out.println("loading " + filename);
+			log.info("loading " + filename);
 			InputStream resourceAsStream = c.getClassLoader().getResourceAsStream(filename);
 			
 			//TODO make Xtext2Factory manual so one can overwrite 'getEPackages' in order to support generated epackages

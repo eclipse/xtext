@@ -8,11 +8,15 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
 import org.antlr.Tool;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -34,14 +38,28 @@ import org.openarchitectureware.xtend.XtendFacade;
  *
  */
 public class GeneratorFacade {
+	private static Log log = LogFactory.getLog(GeneratorFacade.class);
+	// Deletes all files and subdirectories under dir.
+    // Returns true if all deletions were successful.
+    // If a deletion fails, the method stops attempting to delete and returns
+    // false.
+    private static boolean delete(final File file) {
+        if (file.isDirectory()) {
+            final String[] children = file.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = delete(new File(file, children[i]));
+                if (!success)
+                    return false;
+            }
+        }
+
+        // The directory is now empty so delete it
+        return file.delete();
+    }
 	
 	@SuppressWarnings("unchecked")
 	public static void generate(Grammar grammarModel, String languageName, String languageNamespace, String srcGenPath)
 			throws IOException {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new XMIResourceFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xmi", new XMIResourceFactoryImpl());
 		
 		OutputImpl output = new OutputImpl();
 		Outlet outlet = new Outlet();
@@ -95,5 +113,20 @@ public class GeneratorFacade {
 			metaModelResource.save(null);
 		}
 		
+	}
+
+	public static void cleanFolder(String srcGenPath) throws FileNotFoundException {
+		File f = new File(srcGenPath);
+		if (!f.exists()) {
+			throw new FileNotFoundException(srcGenPath);
+		}
+		log.info("Cleaning folder "+srcGenPath);
+		final File[] contents = f.listFiles();
+        for (int j = 0; j < contents.length; j++) {
+            final File file = contents[j];
+            if (!delete(file)) {
+            	log.error("Couldn't delete " + file.getAbsolutePath());
+            }
+        }
 	}
 }
