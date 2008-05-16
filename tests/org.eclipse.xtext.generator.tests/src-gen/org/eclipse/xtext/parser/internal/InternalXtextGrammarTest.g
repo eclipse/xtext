@@ -231,8 +231,9 @@ ruleLexerRule returns [EObject current=null] : {EObject temp=null; currentNode=c
 (
 (
 (
+(
 	lv_name=
-RULE_ID{createLeafNode(grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal")
+RULE_ID{createLeafNode(grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal")
 , currentNode, 
 "name");}
  {if ($current==null) {
@@ -241,6 +242,21 @@ RULE_ID{createLeafNode(grammar.eResource().getEObject("//@parserRules.5/@alterna
 	associateNodeWithAstElement(currentNode, $current);
 	}
 )
+(
+'tokentype' {createLeafNode(grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0")
+, currentNode, 
+null);}
+(
+	lv_tokenType=
+RULE_ID{createLeafNode(grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal")
+, currentNode, 
+"tokenType");}
+ {if ($current==null) {
+	$current = factory.create("LexerRule");}
+	factory.set($current, "tokenType",lv_tokenType);
+	associateNodeWithAstElement(currentNode, $current);
+	}
+))?)
 ':' {createLeafNode(grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1")
 , currentNode, 
 null);})
@@ -573,20 +589,20 @@ RULE_ID{createLeafNode(grammar.eResource().getEObject("//@parserRules.16/@altern
 
 
 
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
+RULE_INT : ('0'..'9')+;
+
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
-
-RULE_INT : ('0'..'9')+;
-
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 
