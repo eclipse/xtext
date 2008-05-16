@@ -23,15 +23,15 @@
 <file path="/org.eclipse.xtext.generator/.project"/>
 <folder path="/org.eclipse.xtext.core/META-INF"/>
 <file path="/org.eclipse.xtext.core/build.properties"/>
-<javaElement handleIdentifier="=org.eclipse.xtext/src-gen"/>
 <file path="/org.eclipse.xtext/plugin.xml"/>
 <file path="/org.eclipse.xtext.core/.project"/>
 <javaElement handleIdentifier="=org.eclipse.xtext.core/src"/>
 <file path="/org.eclipse.xtext/.project"/>
+<javaElement handleIdentifier="=org.eclipse.xtext.core/src-gen"/>
 <folder path="/org.eclipse.xtext.generator/META-INF"/>
 <javaElement handleIdentifier="=org.eclipse.xtext/src"/>
-<javaElement handleIdentifier="=org.eclipse.xtext/model"/>
 <javaElement handleIdentifier="=org.eclipse.xtext.generator/src"/>
+<javaElement handleIdentifier="=org.eclipse.xtext/model"/>
 <file path="/org.eclipse.xtext.core/.classpath"/>
 </selectedElements>
 <fatjar builder="org.eclipse.jdt.ui.plain_jar_builder" launchConfig=""/>

@@ -1,10 +1,11 @@
-// $ANTLR 3.0.1 ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g 2008-05-16 09:21:19
+// $ANTLR 3.0.1 ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g 2008-05-16 09:47:56
 
 package org.eclipse.xtext.parser.internal; 
 
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
+
 
 
 import org.antlr.runtime.*;
@@ -14,16 +15,16 @@ import java.util.ArrayList;
 
 public class InternalXtextParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_LEXER_BODY", "RULE_WS", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_ANY_OTHER", "'lexing'", "':'", "'generate'", "'as'", "'import'", "'tokentype'", "'returns'", "';'", "'::'", "'|'", "'?'", "'*'", "'+'", "'+='", "'='", "'?='", "'{'", "'current'", "'.'", "'}'", "'('", "')'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_LEXER_BODY", "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_INT", "RULE_ANY_OTHER", "'lexing'", "':'", "'generate'", "'as'", "'import'", "'tokentype'", "'returns'", "';'", "'::'", "'|'", "'?'", "'*'", "'+'", "'+='", "'='", "'?='", "'{'", "'current'", "'.'", "'}'", "'('", "')'"
     };
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=8;
     public static final int RULE_ID=4;
     public static final int RULE_WS=7;
-    public static final int RULE_INT=8;
+    public static final int RULE_INT=10;
     public static final int EOF=-1;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=10;
+    public static final int RULE_SL_COMMENT=9;
     public static final int RULE_LEXER_BODY=6;
 
         public InternalXtextParser(TokenStream input) {
@@ -47,6 +48,7 @@ public class InternalXtextParser extends Parser {
     	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
     	compositeNode.setGrammarElement(currentGrammarElement);
     	if (parentNode!=null) parentNode.getChildren().add(compositeNode);
+    	compositeNode.setGrammarElement(currentGrammarElement);
     	return compositeNode;
     }
 
@@ -96,11 +98,12 @@ public class InternalXtextParser extends Parser {
     	
     private CompositeNode currentNode;
 
+    private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.XtextConstants.getXtextGrammar();
 
 
 
     // $ANTLR start parse
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:80:1: parse returns [EObject current] : ruleGrammar EOF ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:83:1: parse returns [EObject current] : ruleGrammar EOF ;
     public final EObject parse() throws RecognitionException {
         EObject current = null;
 
@@ -108,8 +111,8 @@ public class InternalXtextParser extends Parser {
 
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:80:33: ( ruleGrammar EOF )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:81:2: ruleGrammar EOF
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:83:33: ( ruleGrammar EOF )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:84:2: ruleGrammar EOF
             {
             pushFollow(FOLLOW_ruleGrammar_in_parse43);
             ruleGrammar1=ruleGrammar();
@@ -134,7 +137,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleGrammar
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:84:1: ruleGrammar returns [EObject current=null] : ( ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )? ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:87:1: ruleGrammar returns [EObject current=null] : ( ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )? ) ;
     public final EObject ruleGrammar() throws RecognitionException {
         EObject current = null;
 
@@ -146,17 +149,18 @@ public class InternalXtextParser extends Parser {
 
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:84:44: ( ( ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )? ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:84:46: ( ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )? )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:87:44: ( ( ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )? ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:87:46: ( ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )? )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:86:1: ( ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )? )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:87:1: ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )?
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.0")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:90:1: ( ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )? )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:91:1: ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* ) ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )?
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:87:1: ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:88:1: (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )*
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:91:1: ( (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )* )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:92:1: (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )* (lv_parserRules= ruleParserRule )*
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:88:1: (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )*
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:92:1: (lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration )*
             loop1:
             do {
                 int alt1=2;
@@ -169,7 +173,7 @@ public class InternalXtextParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:89:2: lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration
+            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:93:2: lv_metamodelDeclarations= ruleAbstractMetamodelDeclaration
             	    {
             	    pushFollow(FOLLOW_ruleAbstractMetamodelDeclaration_in_ruleGrammar76);
             	    lv_metamodelDeclarations=ruleAbstractMetamodelDeclaration();
@@ -189,7 +193,7 @@ public class InternalXtextParser extends Parser {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:97:1: (lv_parserRules= ruleParserRule )*
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:101:1: (lv_parserRules= ruleParserRule )*
             loop2:
             do {
                 int alt2=2;
@@ -202,7 +206,7 @@ public class InternalXtextParser extends Parser {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:98:2: lv_parserRules= ruleParserRule
+            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:102:2: lv_parserRules= ruleParserRule
             	    {
             	    pushFollow(FOLLOW_ruleParserRule_in_ruleGrammar90);
             	    lv_parserRules=ruleParserRule();
@@ -225,7 +229,7 @@ public class InternalXtextParser extends Parser {
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:106:1: ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )?
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:110:1: ( ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+ )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -234,21 +238,23 @@ public class InternalXtextParser extends Parser {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:107:1: ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:111:1: ( 'lexing' ':' ) (lv_lexerRules= ruleLexerRule )+
                     {
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:107:1: ( 'lexing' ':' )
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:108:1: 'lexing' ':'
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:111:1: ( 'lexing' ':' )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:112:1: 'lexing' ':'
                     {
                     match(input,12,FOLLOW_12_in_ruleGrammar103); 
-                    createLeafNode(null, currentNode, 
+                    createLeafNode(grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0")
+                    , currentNode, 
                     null);
                     match(input,13,FOLLOW_13_in_ruleGrammar107); 
-                    createLeafNode(null, currentNode, 
+                    createLeafNode(grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1")
+                    , currentNode, 
                     null);
 
                     }
 
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:112:1: (lv_lexerRules= ruleLexerRule )+
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:118:1: (lv_lexerRules= ruleLexerRule )+
                     int cnt3=0;
                     loop3:
                     do {
@@ -262,7 +268,7 @@ public class InternalXtextParser extends Parser {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:113:2: lv_lexerRules= ruleLexerRule
+                    	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:119:2: lv_lexerRules= ruleLexerRule
                     	    {
                     	    pushFollow(FOLLOW_ruleLexerRule_in_ruleGrammar118);
                     	    lv_lexerRules=ruleLexerRule();
@@ -312,7 +318,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleAbstractRule
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:122:1: ruleAbstractRule returns [EObject current=null] : (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:128:1: ruleAbstractRule returns [EObject current=null] : (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) ;
     public final EObject ruleAbstractRule() throws RecognitionException {
         EObject current = null;
 
@@ -322,11 +328,12 @@ public class InternalXtextParser extends Parser {
 
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:122:49: ( (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:122:51: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:128:49: ( (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:128:51: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:124:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.1")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:131:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -349,7 +356,7 @@ public class InternalXtextParser extends Parser {
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("124:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 5, 3, input);
+                            new NoViableAltException("131:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 5, 3, input);
 
                         throw nvae;
                     }
@@ -362,7 +369,7 @@ public class InternalXtextParser extends Parser {
                     break;
                 default:
                     NoViableAltException nvae =
-                        new NoViableAltException("124:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 5, 1, input);
+                        new NoViableAltException("131:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 5, 1, input);
 
                     throw nvae;
                 }
@@ -370,13 +377,13 @@ public class InternalXtextParser extends Parser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("124:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 5, 0, input);
+                    new NoViableAltException("131:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 5, 0, input);
 
                 throw nvae;
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:125:1: this_LexerRule= ruleLexerRule
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:132:1: this_LexerRule= ruleLexerRule
                     {
                     pushFollow(FOLLOW_ruleLexerRule_in_ruleAbstractRule149);
                     this_LexerRule=ruleLexerRule();
@@ -387,7 +394,7 @@ public class InternalXtextParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:127:1: this_ParserRule= ruleParserRule
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:134:1: this_ParserRule= ruleParserRule
                     {
                     pushFollow(FOLLOW_ruleParserRule_in_ruleAbstractRule156);
                     this_ParserRule=ruleParserRule();
@@ -417,7 +424,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleAbstractMetamodelDeclaration
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:130:1: ruleAbstractMetamodelDeclaration returns [EObject current=null] : (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:137:1: ruleAbstractMetamodelDeclaration returns [EObject current=null] : (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel ) ;
     public final EObject ruleAbstractMetamodelDeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -427,11 +434,12 @@ public class InternalXtextParser extends Parser {
 
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:130:65: ( (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:130:67: (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:137:65: ( (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:137:67: (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:132:1: (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel )
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.2")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:140:1: (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -443,13 +451,13 @@ public class InternalXtextParser extends Parser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("132:1: (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel )", 6, 0, input);
+                    new NoViableAltException("140:1: (this_GeneratedMetamodel= ruleGeneratedMetamodel | this_ReferencedMetamodel= ruleReferencedMetamodel )", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:133:1: this_GeneratedMetamodel= ruleGeneratedMetamodel
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:141:1: this_GeneratedMetamodel= ruleGeneratedMetamodel
                     {
                     pushFollow(FOLLOW_ruleGeneratedMetamodel_in_ruleAbstractMetamodelDeclaration181);
                     this_GeneratedMetamodel=ruleGeneratedMetamodel();
@@ -460,7 +468,7 @@ public class InternalXtextParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:135:1: this_ReferencedMetamodel= ruleReferencedMetamodel
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:143:1: this_ReferencedMetamodel= ruleReferencedMetamodel
                     {
                     pushFollow(FOLLOW_ruleReferencedMetamodel_in_ruleAbstractMetamodelDeclaration188);
                     this_ReferencedMetamodel=ruleReferencedMetamodel();
@@ -490,7 +498,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleGeneratedMetamodel
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:138:1: ruleGeneratedMetamodel returns [EObject current=null] : ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:146:1: ruleGeneratedMetamodel returns [EObject current=null] : ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) ;
     public final EObject ruleGeneratedMetamodel() throws RecognitionException {
         EObject current = null;
 
@@ -499,28 +507,31 @@ public class InternalXtextParser extends Parser {
         Token lv_alias=null;
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:138:55: ( ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:138:57: ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:146:55: ( ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:146:57: ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:140:1: ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:141:1: ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )?
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.3")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:149:1: ( ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:150:1: ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )?
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:141:1: ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:142:1: ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:150:1: ( ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:151:1: ( 'generate' (lv_name= RULE_ID ) ) (lv_nsURI= RULE_STRING )
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:142:1: ( 'generate' (lv_name= RULE_ID ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:143:1: 'generate' (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:151:1: ( 'generate' (lv_name= RULE_ID ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:152:1: 'generate' (lv_name= RULE_ID )
             {
             match(input,14,FOLLOW_14_in_ruleGeneratedMetamodel215); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0")
+            , currentNode, 
             null);
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:145:1: (lv_name= RULE_ID )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:146:2: lv_name= RULE_ID
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:155:1: (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:156:2: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGeneratedMetamodel225); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal")
+            , currentNode, 
             "name");
             if (current==null) {
             	current = factory.create("GeneratedMetamodel");}
@@ -533,12 +544,13 @@ public class InternalXtextParser extends Parser {
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:155:1: (lv_nsURI= RULE_STRING )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:156:2: lv_nsURI= RULE_STRING
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:166:1: (lv_nsURI= RULE_STRING )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:167:2: lv_nsURI= RULE_STRING
             {
             lv_nsURI=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleGeneratedMetamodel240); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal")
+            , currentNode, 
             "nsURI");
             if (current==null) {
             	current = factory.create("GeneratedMetamodel");}
@@ -551,7 +563,7 @@ public class InternalXtextParser extends Parser {
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:165:1: ( 'as' (lv_alias= RULE_ID ) )?
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:177:1: ( 'as' (lv_alias= RULE_ID ) )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -560,17 +572,19 @@ public class InternalXtextParser extends Parser {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:166:1: 'as' (lv_alias= RULE_ID )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:178:1: 'as' (lv_alias= RULE_ID )
                     {
                     match(input,15,FOLLOW_15_in_ruleGeneratedMetamodel251); 
-                    createLeafNode(null, currentNode, 
+                    createLeafNode(grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.0")
+                    , currentNode, 
                     null);
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:168:1: (lv_alias= RULE_ID )
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:169:2: lv_alias= RULE_ID
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:181:1: (lv_alias= RULE_ID )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:182:2: lv_alias= RULE_ID
                     {
                     lv_alias=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGeneratedMetamodel261); 
-                    createLeafNode(null, currentNode, 
+                    createLeafNode(grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal")
+                    , currentNode, 
                     "alias");
                     if (current==null) {
                     	current = factory.create("GeneratedMetamodel");}
@@ -606,7 +620,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleReferencedMetamodel
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:179:1: ruleReferencedMetamodel returns [EObject current=null] : ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:193:1: ruleReferencedMetamodel returns [EObject current=null] : ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) ;
     public final EObject ruleReferencedMetamodel() throws RecognitionException {
         EObject current = null;
 
@@ -614,25 +628,28 @@ public class InternalXtextParser extends Parser {
         Token lv_alias=null;
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:179:56: ( ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:179:58: ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:193:56: ( ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:193:58: ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:181:1: ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:182:1: ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )?
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.4")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:196:1: ( ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )? )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:197:1: ( 'import' (lv_uri= RULE_STRING ) ) ( 'as' (lv_alias= RULE_ID ) )?
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:182:1: ( 'import' (lv_uri= RULE_STRING ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:183:1: 'import' (lv_uri= RULE_STRING )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:197:1: ( 'import' (lv_uri= RULE_STRING ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:198:1: 'import' (lv_uri= RULE_STRING )
             {
             match(input,16,FOLLOW_16_in_ruleReferencedMetamodel292); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0")
+            , currentNode, 
             null);
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:185:1: (lv_uri= RULE_STRING )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:186:2: lv_uri= RULE_STRING
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:201:1: (lv_uri= RULE_STRING )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:202:2: lv_uri= RULE_STRING
             {
             lv_uri=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleReferencedMetamodel302); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal")
+            , currentNode, 
             "uri");
             if (current==null) {
             	current = factory.create("ReferencedMetamodel");}
@@ -645,7 +662,7 @@ public class InternalXtextParser extends Parser {
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:195:1: ( 'as' (lv_alias= RULE_ID ) )?
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:212:1: ( 'as' (lv_alias= RULE_ID ) )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -654,17 +671,19 @@ public class InternalXtextParser extends Parser {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:196:1: 'as' (lv_alias= RULE_ID )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:213:1: 'as' (lv_alias= RULE_ID )
                     {
                     match(input,15,FOLLOW_15_in_ruleReferencedMetamodel313); 
-                    createLeafNode(null, currentNode, 
+                    createLeafNode(grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.1/@abstractTokens.0")
+                    , currentNode, 
                     null);
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:198:1: (lv_alias= RULE_ID )
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:199:2: lv_alias= RULE_ID
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:216:1: (lv_alias= RULE_ID )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:217:2: lv_alias= RULE_ID
                     {
                     lv_alias=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleReferencedMetamodel323); 
-                    createLeafNode(null, currentNode, 
+                    createLeafNode(grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal")
+                    , currentNode, 
                     "alias");
                     if (current==null) {
                     	current = factory.create("ReferencedMetamodel");}
@@ -700,7 +719,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleLexerRule
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:209:1: ruleLexerRule returns [EObject current=null] : ( ( ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? ) ':' ) (lv_body= RULE_LEXER_BODY ) ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:228:1: ruleLexerRule returns [EObject current=null] : ( ( ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? ) ':' ) (lv_body= RULE_LEXER_BODY ) ) ;
     public final EObject ruleLexerRule() throws RecognitionException {
         EObject current = null;
 
@@ -709,25 +728,27 @@ public class InternalXtextParser extends Parser {
         Token lv_body=null;
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:209:46: ( ( ( ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? ) ':' ) (lv_body= RULE_LEXER_BODY ) ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:209:48: ( ( ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? ) ':' ) (lv_body= RULE_LEXER_BODY ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:228:46: ( ( ( ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? ) ':' ) (lv_body= RULE_LEXER_BODY ) ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:228:48: ( ( ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? ) ':' ) (lv_body= RULE_LEXER_BODY ) )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:211:1: ( ( ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? ) ':' ) (lv_body= RULE_LEXER_BODY ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:212:1: ( ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? ) ':' ) (lv_body= RULE_LEXER_BODY )
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.5")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:231:1: ( ( ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? ) ':' ) (lv_body= RULE_LEXER_BODY ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:232:1: ( ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? ) ':' ) (lv_body= RULE_LEXER_BODY )
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:212:1: ( ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? ) ':' )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:213:1: ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? ) ':'
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:232:1: ( ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? ) ':' )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:233:1: ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? ) ':'
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:213:1: ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:214:1: (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )?
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:233:1: ( (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )? )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:234:1: (lv_name= RULE_ID ) ( 'tokentype' (lv_tokenType= RULE_ID ) )?
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:214:1: (lv_name= RULE_ID )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:215:2: lv_name= RULE_ID
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:234:1: (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:235:2: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLexerRule362); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal")
+            , currentNode, 
             "name");
             if (current==null) {
             	current = factory.create("LexerRule");}
@@ -737,7 +758,7 @@ public class InternalXtextParser extends Parser {
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:224:1: ( 'tokentype' (lv_tokenType= RULE_ID ) )?
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:245:1: ( 'tokentype' (lv_tokenType= RULE_ID ) )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -746,17 +767,19 @@ public class InternalXtextParser extends Parser {
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:225:1: 'tokentype' (lv_tokenType= RULE_ID )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:246:1: 'tokentype' (lv_tokenType= RULE_ID )
                     {
                     match(input,17,FOLLOW_17_in_ruleLexerRule372); 
-                    createLeafNode(null, currentNode, 
+                    createLeafNode(grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0")
+                    , currentNode, 
                     null);
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:227:1: (lv_tokenType= RULE_ID )
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:228:2: lv_tokenType= RULE_ID
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:249:1: (lv_tokenType= RULE_ID )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:250:2: lv_tokenType= RULE_ID
                     {
                     lv_tokenType=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLexerRule382); 
-                    createLeafNode(null, currentNode, 
+                    createLeafNode(grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal")
+                    , currentNode, 
                     "tokenType");
                     if (current==null) {
                     	current = factory.create("LexerRule");}
@@ -776,17 +799,19 @@ public class InternalXtextParser extends Parser {
             }
 
             match(input,13,FOLLOW_13_in_ruleLexerRule393); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1")
+            , currentNode, 
             null);
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:239:1: (lv_body= RULE_LEXER_BODY )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:240:2: lv_body= RULE_LEXER_BODY
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:263:1: (lv_body= RULE_LEXER_BODY )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:264:2: lv_body= RULE_LEXER_BODY
             {
             lv_body=(Token)input.LT(1);
             match(input,RULE_LEXER_BODY,FOLLOW_RULE_LEXER_BODY_in_ruleLexerRule404); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.1/@terminal")
+            , currentNode, 
             "body");
             if (current==null) {
             	current = factory.create("LexerRule");}
@@ -816,7 +841,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleParserRule
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:250:1: ruleParserRule returns [EObject current=null] : ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:275:1: ruleParserRule returns [EObject current=null] : ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' ) ;
     public final EObject ruleParserRule() throws RecognitionException {
         EObject current = null;
 
@@ -827,28 +852,30 @@ public class InternalXtextParser extends Parser {
 
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:250:47: ( ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:250:49: ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:275:47: ( ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:275:49: ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:252:1: ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:253:1: ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';'
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.6")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:278:1: ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';' )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:279:1: ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) ) ';'
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:253:1: ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:254:1: ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:279:1: ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:280:1: ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_alternatives= ruleAlternatives )
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:254:1: ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:255:1: ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':'
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:280:1: ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:281:1: ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':'
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:255:1: ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:256:1: (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )?
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:281:1: ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:282:1: (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )?
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:256:1: (lv_name= RULE_ID )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:257:2: lv_name= RULE_ID
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:282:1: (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:283:2: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleParserRule443); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal")
+            , currentNode, 
             "name");
             if (current==null) {
             	current = factory.create("ParserRule");}
@@ -858,7 +885,7 @@ public class InternalXtextParser extends Parser {
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:266:1: ( 'returns' (lv_type= ruleTypeRef ) )?
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:293:1: ( 'returns' (lv_type= ruleTypeRef ) )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -867,13 +894,14 @@ public class InternalXtextParser extends Parser {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:267:1: 'returns' (lv_type= ruleTypeRef )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:294:1: 'returns' (lv_type= ruleTypeRef )
                     {
                     match(input,18,FOLLOW_18_in_ruleParserRule453); 
-                    createLeafNode(null, currentNode, 
+                    createLeafNode(grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0")
+                    , currentNode, 
                     null);
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:269:1: (lv_type= ruleTypeRef )
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:270:2: lv_type= ruleTypeRef
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:297:1: (lv_type= ruleTypeRef )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:298:2: lv_type= ruleTypeRef
                     {
                     pushFollow(FOLLOW_ruleTypeRef_in_ruleParserRule463);
                     lv_type=ruleTypeRef();
@@ -897,13 +925,14 @@ public class InternalXtextParser extends Parser {
             }
 
             match(input,13,FOLLOW_13_in_ruleParserRule473); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1")
+            , currentNode, 
             null);
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:280:1: (lv_alternatives= ruleAlternatives )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:281:2: lv_alternatives= ruleAlternatives
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:309:1: (lv_alternatives= ruleAlternatives )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:310:2: lv_alternatives= ruleAlternatives
             {
             pushFollow(FOLLOW_ruleAlternatives_in_ruleParserRule484);
             lv_alternatives=ruleAlternatives();
@@ -921,7 +950,8 @@ public class InternalXtextParser extends Parser {
             }
 
             match(input,19,FOLLOW_19_in_ruleParserRule492); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.1")
+            , currentNode, 
             null);
 
             }
@@ -943,7 +973,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleTypeRef
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:292:1: ruleTypeRef returns [EObject current=null] : ( ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID ) ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:322:1: ruleTypeRef returns [EObject current=null] : ( ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID ) ) ;
     public final EObject ruleTypeRef() throws RecognitionException {
         EObject current = null;
 
@@ -951,14 +981,15 @@ public class InternalXtextParser extends Parser {
         Token lv_name=null;
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:292:44: ( ( ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID ) ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:292:46: ( ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:322:44: ( ( ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID ) ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:322:46: ( ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID ) )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:294:1: ( ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:295:1: ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID )
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.7")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:325:1: ( ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:326:1: ( (lv_alias= RULE_ID ) '::' )? (lv_name= RULE_ID )
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:295:1: ( (lv_alias= RULE_ID ) '::' )?
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:326:1: ( (lv_alias= RULE_ID ) '::' )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -971,14 +1002,15 @@ public class InternalXtextParser extends Parser {
             }
             switch (alt11) {
                 case 1 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:296:1: (lv_alias= RULE_ID ) '::'
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:327:1: (lv_alias= RULE_ID ) '::'
                     {
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:296:1: (lv_alias= RULE_ID )
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:297:2: lv_alias= RULE_ID
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:327:1: (lv_alias= RULE_ID )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:328:2: lv_alias= RULE_ID
                     {
                     lv_alias=(Token)input.LT(1);
                     match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTypeRef523); 
-                    createLeafNode(null, currentNode, 
+                    createLeafNode(grammar.eResource().getEObject("//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal")
+                    , currentNode, 
                     "alias");
                     if (current==null) {
                     	current = factory.create("TypeRef");}
@@ -989,7 +1021,8 @@ public class InternalXtextParser extends Parser {
                     }
 
                     match(input,20,FOLLOW_20_in_ruleTypeRef531); 
-                    createLeafNode(null, currentNode, 
+                    createLeafNode(grammar.eResource().getEObject("//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.1")
+                    , currentNode, 
                     null);
 
                     }
@@ -997,12 +1030,13 @@ public class InternalXtextParser extends Parser {
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:308:1: (lv_name= RULE_ID )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:309:2: lv_name= RULE_ID
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:341:1: (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:342:2: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTypeRef543); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.7/@alternatives/@abstractTokens.1/@terminal")
+            , currentNode, 
             "name");
             if (current==null) {
             	current = factory.create("TypeRef");}
@@ -1032,7 +1066,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleAlternatives
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:319:1: ruleAlternatives returns [EObject current=null] : (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:353:1: ruleAlternatives returns [EObject current=null] : (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* ) ;
     public final EObject ruleAlternatives() throws RecognitionException {
         EObject current = null;
 
@@ -1042,19 +1076,20 @@ public class InternalXtextParser extends Parser {
 
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:319:49: ( (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:319:51: (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:353:49: ( (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:353:51: (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:321:1: (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:322:1: this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )*
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.8")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:356:1: (this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )* )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:357:1: this_Group= ruleGroup ( ( () '|' ) (lv_groups= ruleGroup ) )*
             {
             pushFollow(FOLLOW_ruleGroup_in_ruleAlternatives572);
             this_Group=ruleGroup();
             _fsp--;
 
             current = this_Group;
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:324:1: ( ( () '|' ) (lv_groups= ruleGroup ) )*
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:359:1: ( ( () '|' ) (lv_groups= ruleGroup ) )*
             loop12:
             do {
                 int alt12=2;
@@ -1067,13 +1102,13 @@ public class InternalXtextParser extends Parser {
 
                 switch (alt12) {
             	case 1 :
-            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:325:1: ( () '|' ) (lv_groups= ruleGroup )
+            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:360:1: ( () '|' ) (lv_groups= ruleGroup )
             	    {
-            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:325:1: ( () '|' )
-            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:326:1: () '|'
+            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:360:1: ( () '|' )
+            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:361:1: () '|'
             	    {
-            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:326:1: ()
-            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:327:2: 
+            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:361:1: ()
+            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:362:2: 
             	    {
             	    temp=factory.create("Alternatives");
             	    	 factory.add(temp, "groups",current);
@@ -1084,13 +1119,14 @@ public class InternalXtextParser extends Parser {
             	    }
 
             	    match(input,21,FOLLOW_21_in_ruleAlternatives587); 
-            	    createLeafNode(null, currentNode, 
+            	    createLeafNode(grammar.eResource().getEObject("//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1")
+            	    , currentNode, 
             	    null);
 
             	    }
 
-            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:335:1: (lv_groups= ruleGroup )
-            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:336:2: lv_groups= ruleGroup
+            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:371:1: (lv_groups= ruleGroup )
+            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:372:2: lv_groups= ruleGroup
             	    {
             	    pushFollow(FOLLOW_ruleGroup_in_ruleAlternatives598);
             	    lv_groups=ruleGroup();
@@ -1133,7 +1169,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleGroup
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:345:1: ruleGroup returns [EObject current=null] : (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:381:1: ruleGroup returns [EObject current=null] : (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* ) ;
     public final EObject ruleGroup() throws RecognitionException {
         EObject current = null;
 
@@ -1143,19 +1179,20 @@ public class InternalXtextParser extends Parser {
 
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:345:42: ( (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:345:44: (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:381:42: ( (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:381:44: (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:347:1: (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:348:1: this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )*
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.9")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:384:1: (this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )* )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:385:1: this_AbstractToken= ruleAbstractToken ( () (lv_abstractTokens= ruleAbstractToken ) )*
             {
             pushFollow(FOLLOW_ruleAbstractToken_in_ruleGroup628);
             this_AbstractToken=ruleAbstractToken();
             _fsp--;
 
             current = this_AbstractToken;
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:350:1: ( () (lv_abstractTokens= ruleAbstractToken ) )*
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:387:1: ( () (lv_abstractTokens= ruleAbstractToken ) )*
             loop13:
             do {
                 int alt13=2;
@@ -1168,10 +1205,10 @@ public class InternalXtextParser extends Parser {
 
                 switch (alt13) {
             	case 1 :
-            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:351:1: () (lv_abstractTokens= ruleAbstractToken )
+            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:388:1: () (lv_abstractTokens= ruleAbstractToken )
             	    {
-            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:351:1: ()
-            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:352:2: 
+            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:388:1: ()
+            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:389:2: 
             	    {
             	    temp=factory.create("Group");
             	    	 factory.add(temp, "abstractTokens",current);
@@ -1181,8 +1218,8 @@ public class InternalXtextParser extends Parser {
 
             	    }
 
-            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:358:1: (lv_abstractTokens= ruleAbstractToken )
-            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:359:2: lv_abstractTokens= ruleAbstractToken
+            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:395:1: (lv_abstractTokens= ruleAbstractToken )
+            	    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:396:2: lv_abstractTokens= ruleAbstractToken
             	    {
             	    pushFollow(FOLLOW_ruleAbstractToken_in_ruleGroup647);
             	    lv_abstractTokens=ruleAbstractToken();
@@ -1225,7 +1262,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleAbstractToken
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:368:1: ruleAbstractToken returns [EObject current=null] : ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:405:1: ruleAbstractToken returns [EObject current=null] : ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? ) ;
     public final EObject ruleAbstractToken() throws RecognitionException {
         EObject current = null;
 
@@ -1238,14 +1275,15 @@ public class InternalXtextParser extends Parser {
 
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:368:50: ( ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:368:52: ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:405:50: ( ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:405:52: ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:370:1: ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:371:1: ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )?
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.10")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:408:1: ( ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )? )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:409:1: ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal ) (lv_cardinality= ( ( '?' | '*' ) | '+' ) )?
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:371:1: ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:409:1: ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal )
             int alt15=2;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -1260,7 +1298,7 @@ public class InternalXtextParser extends Parser {
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("371:1: ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal )", 15, 1, input);
+                        new NoViableAltException("409:1: ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal )", 15, 1, input);
 
                     throw nvae;
                 }
@@ -1279,16 +1317,16 @@ public class InternalXtextParser extends Parser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("371:1: ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal )", 15, 0, input);
+                    new NoViableAltException("409:1: ( (this_Assignment= ruleAssignment | this_Action= ruleAction ) | this_AbstractTerminal= ruleAbstractTerminal )", 15, 0, input);
 
                 throw nvae;
             }
 
             switch (alt15) {
                 case 1 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:372:1: (this_Assignment= ruleAssignment | this_Action= ruleAction )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:410:1: (this_Assignment= ruleAssignment | this_Action= ruleAction )
                     {
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:372:1: (this_Assignment= ruleAssignment | this_Action= ruleAction )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:410:1: (this_Assignment= ruleAssignment | this_Action= ruleAction )
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -1300,13 +1338,13 @@ public class InternalXtextParser extends Parser {
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("372:1: (this_Assignment= ruleAssignment | this_Action= ruleAction )", 14, 0, input);
+                            new NoViableAltException("410:1: (this_Assignment= ruleAssignment | this_Action= ruleAction )", 14, 0, input);
 
                         throw nvae;
                     }
                     switch (alt14) {
                         case 1 :
-                            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:373:1: this_Assignment= ruleAssignment
+                            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:411:1: this_Assignment= ruleAssignment
                             {
                             pushFollow(FOLLOW_ruleAssignment_in_ruleAbstractToken681);
                             this_Assignment=ruleAssignment();
@@ -1317,7 +1355,7 @@ public class InternalXtextParser extends Parser {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:375:1: this_Action= ruleAction
+                            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:413:1: this_Action= ruleAction
                             {
                             pushFollow(FOLLOW_ruleAction_in_ruleAbstractToken688);
                             this_Action=ruleAction();
@@ -1334,7 +1372,7 @@ public class InternalXtextParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:377:1: this_AbstractTerminal= ruleAbstractTerminal
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:415:1: this_AbstractTerminal= ruleAbstractTerminal
                     {
                     pushFollow(FOLLOW_ruleAbstractTerminal_in_ruleAbstractToken696);
                     this_AbstractTerminal=ruleAbstractTerminal();
@@ -1347,7 +1385,7 @@ public class InternalXtextParser extends Parser {
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:379:1: (lv_cardinality= ( ( '?' | '*' ) | '+' ) )?
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:417:1: (lv_cardinality= ( ( '?' | '*' ) | '+' ) )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -1356,7 +1394,7 @@ public class InternalXtextParser extends Parser {
             }
             switch (alt16) {
                 case 1 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:380:2: lv_cardinality= ( ( '?' | '*' ) | '+' )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:418:2: lv_cardinality= ( ( '?' | '*' ) | '+' )
                     {
                     lv_cardinality=(Token)input.LT(1);
                     if ( (input.LA(1)>=22 && input.LA(1)<=24) ) {
@@ -1373,7 +1411,8 @@ public class InternalXtextParser extends Parser {
                     	current = factory.create("AbstractElement");}
                     	factory.set(current, "cardinality",lv_cardinality);
                     	associateNodeWithAstElement(currentNode, current);
-                    createLeafNode(null, currentNode, 
+                    createLeafNode(grammar.eResource().getEObject("//@parserRules.10/@alternatives/@abstractTokens.1")
+                    , currentNode, 
                     "cardinality");
 
                     }
@@ -1401,7 +1440,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleAssignment
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:393:1: ruleAssignment returns [EObject current=null] : ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:432:1: ruleAssignment returns [EObject current=null] : ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) ) ;
     public final EObject ruleAssignment() throws RecognitionException {
         EObject current = null;
 
@@ -1411,22 +1450,24 @@ public class InternalXtextParser extends Parser {
 
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:393:47: ( ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:393:49: ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:432:47: ( ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:432:49: ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:395:1: ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:396:1: ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal )
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.11")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:435:1: ( ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:436:1: ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) ) (lv_terminal= ruleAbstractTerminal )
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:396:1: ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:397:1: (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:436:1: ( (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:437:1: (lv_feature= RULE_ID ) (lv_operator= ( ( '+=' | '=' ) | '?=' ) )
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:397:1: (lv_feature= RULE_ID )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:398:2: lv_feature= RULE_ID
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:437:1: (lv_feature= RULE_ID )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:438:2: lv_feature= RULE_ID
             {
             lv_feature=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAssignment756); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal")
+            , currentNode, 
             "feature");
             if (current==null) {
             	current = factory.create("Assignment");}
@@ -1436,8 +1477,8 @@ public class InternalXtextParser extends Parser {
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:407:1: (lv_operator= ( ( '+=' | '=' ) | '?=' ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:408:2: lv_operator= ( ( '+=' | '=' ) | '?=' )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:448:1: (lv_operator= ( ( '+=' | '=' ) | '?=' ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:449:2: lv_operator= ( ( '+=' | '=' ) | '?=' )
             {
             lv_operator=(Token)input.LT(1);
             if ( (input.LA(1)>=25 && input.LA(1)<=27) ) {
@@ -1454,7 +1495,8 @@ public class InternalXtextParser extends Parser {
             	current = factory.create("Assignment");}
             	factory.set(current, "operator",lv_operator);
             	associateNodeWithAstElement(currentNode, current);
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1")
+            , currentNode, 
             "operator");
 
             }
@@ -1462,8 +1504,8 @@ public class InternalXtextParser extends Parser {
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:420:1: (lv_terminal= ruleAbstractTerminal )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:421:2: lv_terminal= ruleAbstractTerminal
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:462:1: (lv_terminal= ruleAbstractTerminal )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:463:2: lv_terminal= ruleAbstractTerminal
             {
             pushFollow(FOLLOW_ruleAbstractTerminal_in_ruleAssignment798);
             lv_terminal=ruleAbstractTerminal();
@@ -1497,7 +1539,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleAction
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:430:1: ruleAction returns [EObject current=null] : ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:472:1: ruleAction returns [EObject current=null] : ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' ) ;
     public final EObject ruleAction() throws RecognitionException {
         EObject current = null;
 
@@ -1507,35 +1549,37 @@ public class InternalXtextParser extends Parser {
 
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:430:43: ( ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:430:45: ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:472:43: ( ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:472:45: ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:432:1: ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:433:1: ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}'
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.12")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:475:1: ( ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}' )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:476:1: ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' ) '}'
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:433:1: ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:434:1: ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current'
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:476:1: ( ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current' )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:477:1: ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) ) 'current'
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:434:1: ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:435:1: ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:477:1: ( ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:478:1: ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) ) (lv_operator= ( '=' | '+=' ) )
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:435:1: ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:436:1: ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:478:1: ( ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:479:1: ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' ) (lv_feature= RULE_ID )
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:436:1: ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:437:1: ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.'
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:479:1: ( ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.' )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:480:1: ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) ) '.'
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:437:1: ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:438:1: ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:480:1: ( ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:481:1: ( '{' ( 'current' '=' )? ) (lv_typeName= ruleTypeRef )
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:438:1: ( '{' ( 'current' '=' )? )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:439:1: '{' ( 'current' '=' )?
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:481:1: ( '{' ( 'current' '=' )? )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:482:1: '{' ( 'current' '=' )?
             {
             match(input,28,FOLLOW_28_in_ruleAction836); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0")
+            , currentNode, 
             null);
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:441:1: ( 'current' '=' )?
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:485:1: ( 'current' '=' )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -1544,13 +1588,15 @@ public class InternalXtextParser extends Parser {
             }
             switch (alt17) {
                 case 1 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:442:1: 'current' '='
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:486:1: 'current' '='
                     {
                     match(input,29,FOLLOW_29_in_ruleAction842); 
-                    createLeafNode(null, currentNode, 
+                    createLeafNode(grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0")
+                    , currentNode, 
                     null);
                     match(input,26,FOLLOW_26_in_ruleAction846); 
-                    createLeafNode(null, currentNode, 
+                    createLeafNode(grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1")
+                    , currentNode, 
                     null);
 
                     }
@@ -1561,8 +1607,8 @@ public class InternalXtextParser extends Parser {
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:446:1: (lv_typeName= ruleTypeRef )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:447:2: lv_typeName= ruleTypeRef
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:492:1: (lv_typeName= ruleTypeRef )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:493:2: lv_typeName= ruleTypeRef
             {
             pushFollow(FOLLOW_ruleTypeRef_in_ruleAction859);
             lv_typeName=ruleTypeRef();
@@ -1580,17 +1626,19 @@ public class InternalXtextParser extends Parser {
             }
 
             match(input,30,FOLLOW_30_in_ruleAction867); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1")
+            , currentNode, 
             null);
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:457:1: (lv_feature= RULE_ID )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:458:2: lv_feature= RULE_ID
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:504:1: (lv_feature= RULE_ID )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:505:2: lv_feature= RULE_ID
             {
             lv_feature=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAction878); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal")
+            , currentNode, 
             "feature");
             if (current==null) {
             	current = factory.create("Action");}
@@ -1603,8 +1651,8 @@ public class InternalXtextParser extends Parser {
 
             }
 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:467:1: (lv_operator= ( '=' | '+=' ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:468:2: lv_operator= ( '=' | '+=' )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:515:1: (lv_operator= ( '=' | '+=' ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:516:2: lv_operator= ( '=' | '+=' )
             {
             lv_operator=(Token)input.LT(1);
             if ( (input.LA(1)>=25 && input.LA(1)<=26) ) {
@@ -1621,7 +1669,8 @@ public class InternalXtextParser extends Parser {
             	current = factory.create("Action");}
             	factory.set(current, "operator",lv_operator);
             	associateNodeWithAstElement(currentNode, current);
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1")
+            , currentNode, 
             "operator");
 
             }
@@ -1630,13 +1679,15 @@ public class InternalXtextParser extends Parser {
             }
 
             match(input,29,FOLLOW_29_in_ruleAction908); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1")
+            , currentNode, 
             null);
 
             }
 
             match(input,31,FOLLOW_31_in_ruleAction913); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.1")
+            , currentNode, 
             null);
 
             }
@@ -1658,7 +1709,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleAbstractTerminal
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:483:1: ruleAbstractTerminal returns [EObject current=null] : ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:534:1: ruleAbstractTerminal returns [EObject current=null] : ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) ;
     public final EObject ruleAbstractTerminal() throws RecognitionException {
         EObject current = null;
 
@@ -1670,11 +1721,12 @@ public class InternalXtextParser extends Parser {
 
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:483:53: ( ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:483:55: ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:534:53: ( ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:534:55: ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:485:1: ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement )
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.13")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:537:1: ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement )
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -1686,15 +1738,15 @@ public class InternalXtextParser extends Parser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("485:1: ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement )", 19, 0, input);
+                    new NoViableAltException("537:1: ( (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall ) | this_ParenthesizedElement= ruleParenthesizedElement )", 19, 0, input);
 
                 throw nvae;
             }
             switch (alt19) {
                 case 1 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:486:1: (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:538:1: (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall )
                     {
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:486:1: (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall )
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:538:1: (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall )
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -1706,13 +1758,13 @@ public class InternalXtextParser extends Parser {
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("486:1: (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall )", 18, 0, input);
+                            new NoViableAltException("538:1: (this_Keyword= ruleKeyword | this_RuleCall= ruleRuleCall )", 18, 0, input);
 
                         throw nvae;
                     }
                     switch (alt18) {
                         case 1 :
-                            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:487:1: this_Keyword= ruleKeyword
+                            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:539:1: this_Keyword= ruleKeyword
                             {
                             pushFollow(FOLLOW_ruleKeyword_in_ruleAbstractTerminal940);
                             this_Keyword=ruleKeyword();
@@ -1723,7 +1775,7 @@ public class InternalXtextParser extends Parser {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:489:1: this_RuleCall= ruleRuleCall
+                            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:541:1: this_RuleCall= ruleRuleCall
                             {
                             pushFollow(FOLLOW_ruleRuleCall_in_ruleAbstractTerminal947);
                             this_RuleCall=ruleRuleCall();
@@ -1740,7 +1792,7 @@ public class InternalXtextParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:491:1: this_ParenthesizedElement= ruleParenthesizedElement
+                    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:543:1: this_ParenthesizedElement= ruleParenthesizedElement
                     {
                     pushFollow(FOLLOW_ruleParenthesizedElement_in_ruleAbstractTerminal955);
                     this_ParenthesizedElement=ruleParenthesizedElement();
@@ -1770,7 +1822,7 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleParenthesizedElement
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:494:1: ruleParenthesizedElement returns [EObject current=null] : ( ( '(' this_Alternatives= ruleAlternatives ) ')' ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:546:1: ruleParenthesizedElement returns [EObject current=null] : ( ( '(' this_Alternatives= ruleAlternatives ) ')' ) ;
     public final EObject ruleParenthesizedElement() throws RecognitionException {
         EObject current = null;
 
@@ -1778,18 +1830,20 @@ public class InternalXtextParser extends Parser {
 
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:494:57: ( ( ( '(' this_Alternatives= ruleAlternatives ) ')' ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:494:59: ( ( '(' this_Alternatives= ruleAlternatives ) ')' )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:546:57: ( ( ( '(' this_Alternatives= ruleAlternatives ) ')' ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:546:59: ( ( '(' this_Alternatives= ruleAlternatives ) ')' )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:496:1: ( ( '(' this_Alternatives= ruleAlternatives ) ')' )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:497:1: ( '(' this_Alternatives= ruleAlternatives ) ')'
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.14")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:549:1: ( ( '(' this_Alternatives= ruleAlternatives ) ')' )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:550:1: ( '(' this_Alternatives= ruleAlternatives ) ')'
             {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:497:1: ( '(' this_Alternatives= ruleAlternatives )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:498:1: '(' this_Alternatives= ruleAlternatives
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:550:1: ( '(' this_Alternatives= ruleAlternatives )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:551:1: '(' this_Alternatives= ruleAlternatives
             {
             match(input,32,FOLLOW_32_in_ruleParenthesizedElement980); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.0")
+            , currentNode, 
             null);
             pushFollow(FOLLOW_ruleAlternatives_in_ruleParenthesizedElement986);
             this_Alternatives=ruleAlternatives();
@@ -1800,7 +1854,8 @@ public class InternalXtextParser extends Parser {
             }
 
             match(input,33,FOLLOW_33_in_ruleParenthesizedElement991); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.14/@alternatives/@abstractTokens.1")
+            , currentNode, 
             null);
 
             }
@@ -1822,23 +1877,25 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleKeyword
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:505:1: ruleKeyword returns [EObject current=null] : (lv_value= RULE_STRING ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:560:1: ruleKeyword returns [EObject current=null] : (lv_value= RULE_STRING ) ;
     public final EObject ruleKeyword() throws RecognitionException {
         EObject current = null;
 
         Token lv_value=null;
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:505:44: ( (lv_value= RULE_STRING ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:505:46: (lv_value= RULE_STRING )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:560:44: ( (lv_value= RULE_STRING ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:560:46: (lv_value= RULE_STRING )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:507:1: (lv_value= RULE_STRING )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:508:2: lv_value= RULE_STRING
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.15")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:563:1: (lv_value= RULE_STRING )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:564:2: lv_value= RULE_STRING
             {
             lv_value=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleKeyword1018); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.15/@alternatives/@terminal")
+            , currentNode, 
             "value");
             if (current==null) {
             	current = factory.create("Keyword");}
@@ -1865,23 +1922,25 @@ public class InternalXtextParser extends Parser {
 
 
     // $ANTLR start ruleRuleCall
-    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:518:1: ruleRuleCall returns [EObject current=null] : (lv_name= RULE_ID ) ;
+    // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:575:1: ruleRuleCall returns [EObject current=null] : (lv_name= RULE_ID ) ;
     public final EObject ruleRuleCall() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
 
         try {
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:518:45: ( (lv_name= RULE_ID ) )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:518:47: (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:575:45: ( (lv_name= RULE_ID ) )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:575:47: (lv_name= RULE_ID )
             {
-            EObject temp=null; currentNode=createCompositeNode(null, currentNode); 
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:520:1: (lv_name= RULE_ID )
-            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:521:2: lv_name= RULE_ID
+            EObject temp=null; currentNode=createCompositeNode(grammar.eResource().getEObject("//@parserRules.16")
+            , currentNode); 
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:578:1: (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.core/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:579:2: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRuleCall1048); 
-            createLeafNode(null, currentNode, 
+            createLeafNode(grammar.eResource().getEObject("//@parserRules.16/@alternatives/@terminal")
+            , currentNode, 
             "name");
             if (current==null) {
             	current = factory.create("RuleCall");}
