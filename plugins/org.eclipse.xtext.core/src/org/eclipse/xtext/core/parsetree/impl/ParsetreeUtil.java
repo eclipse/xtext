@@ -67,22 +67,14 @@ public class ParsetreeUtil {
 		return line;
 	}
 
-	public static String serialize(CompositeNodeImpl compositeNodeImpl) {
+	public static String serialize(AbstractNodeImpl _this) {
+		checkArgument(_this);
 		StringBuffer buff = new StringBuffer();
-		for (AbstractNode child : compositeNodeImpl.getChildren()) {
-			buff.append(child.serialize());
+		EList<LeafNode> leafNodes = _this.getLeafNodes();
+		for (LeafNode leafNode : leafNodes) {
+			buff.append(leafNode.getText());
 		}
 		return buff.toString();
-	}
-
-	public static String serialize(LeafNodeImpl leafNodeImpl) {
-		return leafNodeImpl.getText();
-	}
-
-	public static String serialize(AbstractNodeImpl abstractNodeImpl) {
-		throw new IllegalArgumentException(
-				"Illegal subtype of AbstarctParserNode "
-						+ abstractNodeImpl.eClass().getName());
 	}
 
 	public static EList<LeafNode> getLeafNodes(AbstractNodeImpl _this) {
