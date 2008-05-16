@@ -31,9 +31,9 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 	public void testBootstrapping() throws Exception {
 		List<Invocation> parse = parse("generate foo 'bar' Foo : name=ID;");
 		Iterator<Invocation> iter = parse.iterator();
-		for (Invocation invocation : parse) {
-			System.out.println(invocation);
-		}
+//		for (Invocation invocation : parse) {
+//			System.out.println(invocation);
+//		}
 		assertEquals("create(GeneratedMetamodel)", iter.next().toString());
 		assertEquals("set(name,foo)", iter.next().toString());
 		assertEquals("set(nsURI,'bar')", iter.next().toString());
