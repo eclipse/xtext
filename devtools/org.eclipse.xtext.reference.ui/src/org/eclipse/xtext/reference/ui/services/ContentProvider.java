@@ -16,6 +16,6 @@ import org.eclipse.xtext.ui.core.service.IContentProvider;
  * @author Dennis Hübner - Initial contribution and API
  *
  */
-public class ContentProviderImpl
+public class ContentProvider
 		implements IContentProvider {
 }
