@@ -23,11 +23,15 @@ cached List[Assignment] assignments(ResolvedType t) :
 	t.grammar().allAssignments().select(a | a.currentType() == t)
 ;
 
-boolean isBoolean(Assignment a) :
+Boolean isBoolean(Assignment a) :
 	a.operator == "?="
 ;
 
-boolean featureIsReference(Assignment a) :
+Boolean isMultiple(Assignment a) :
+	a.operator == "+="
+;
+
+Boolean featureIsReference(Assignment a) :
 	!a.isBoolean() 
 	&& a.isRuleAssignment() 
 	&& ParserRule.isInstance(((RuleCall) a.terminal).calledRule())

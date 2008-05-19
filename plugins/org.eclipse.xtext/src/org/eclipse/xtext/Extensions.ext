@@ -50,6 +50,15 @@ Assignment containingAssignment(emf::EObject e) :
 			null
 ; 
 
+Group containingGroup(emf::EObject e) :
+	if e.metaType==Group then
+		e
+	else 
+		if e.eContainer != null then
+			e.eContainer.containingGroup()
+		else
+			null;
+
 // ***********************************************************************************
 // Containment
 
@@ -112,6 +121,14 @@ isAssigned(Alternatives this) : isAssigned(eContainer);
 isAssigned(Assignment this) : true;
 isAssigned(Object this) : false;	
 	
+isMultipleCardinality(AbstractElement this) :
+	{'*','+'}.contains(this.cardinality);
+
+isOptional(AbstractElement this) :
+	{'*','?'}.contains(this.cardinality);
+	
+qualifiedName(TypeRef this) :
+	(alias!=null?alias+"::":"")+name;
 	
 // ***********************************************************************************
 // Built-in lexer Rules
@@ -142,3 +159,11 @@ cached builtinRules() :
 private dq() : '"';
 private bs() : '\\';
 private bs2() : bs()+bs();
+
+// *************************
+// generic utilities
+
+subList(List this, Object start, Object end) :
+	let s = (contains(start) ? indexOf(start) : 0) :
+		let e = (contains(end) ? indexOf(end) : this.size) :
+			select(x|let ix = indexOf(x) : info(ix)>=info(s) && ix<=info(e));
