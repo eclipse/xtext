@@ -14,23 +14,22 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.ui.core.editor.utils.CustomResourceLibrary;
-import org.eclipse.xtext.ui.core.service.ILexer;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
 /**
  * @author Dennis Hübner
  * 
  */
-public class SyntaxColorerImpl implements ISyntaxColorer {
+public class SyntaxColorer implements ISyntaxColorer {
 
 	private static RGB KEYWORD_COLOR = new RGB(127, 0, 85);
 	private static RGB DEFAULT_COLOR = new RGB(0, 0, 0);
 
-	public TextAttribute color(ILexer lexer, Object token) {
+	public TextAttribute color(Object token) {
 		CustomResourceLibrary lib = new CustomResourceLibrary(Display
 				.getDefault());
 		TextAttribute ta = null;
-		switch (lexer.getTokenType(token)) {
+		switch (getTokenType(token)) {
 		case 1:
 			ta = new TextAttribute(lib.getColor(KEYWORD_COLOR), null, SWT.BOLD);
 			break;
@@ -38,5 +37,9 @@ public class SyntaxColorerImpl implements ISyntaxColorer {
 			ta = new TextAttribute(lib.getColor(DEFAULT_COLOR), null, SWT.BOLD);
 		}
 		return ta;
+	}
+
+	private int getTokenType(Object token) {
+		return 0;
 	}
 }

@@ -9,16 +9,15 @@
 
 package org.eclipse.xtext.reference.ui.services;
 
-import org.eclipse.xtext.ui.core.service.ILexer;
 import org.eclipse.xtext.ui.core.service.IParser;
 
 /**
  * @author Dennis Hübner
  * 
  */
-public class ParserImpl implements IParser {
+public class Parser implements IParser {
 
-	public Object parse(ILexer lexer) {
+	public Object parse(String string) {
 		// TODO Auto-generated method stub
 		return null;
 	}

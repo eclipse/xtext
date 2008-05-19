@@ -15,18 +15,4 @@
             languageId="org.eclipse.xtext.ui.core.tests.dummylanguage">
       </syntaxColorer>
    </extension>
-   <extension
-         point="org.eclipse.xtext.ui.core.languageDescriptor">
-      <languageDescriptor
-            id="org.eclipse.xtexte.ui.core.tests.language.ServiceWithoutClass"
-            name="Language with a Service without a class">
-      </languageDescriptor>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.ui.core.syntaxColorer">
-      <syntaxColorer
-            class="org.eclipse.xtext.ui.core.tests.SyntaxColorerThisClassDoesNotExist"
-            languageId="org.eclipse.xtexte.ui.core.tests.language.ServiceWithoutClass">
-      </syntaxColorer>
-   </extension>
 </plugin>

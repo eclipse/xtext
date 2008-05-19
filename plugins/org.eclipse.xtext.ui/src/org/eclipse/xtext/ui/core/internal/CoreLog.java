@@ -24,6 +24,10 @@ public class CoreLog {
 		log(IStatus.INFO, IStatus.OK, msg, null);
 	}
 
+	public final static void logWarning(String msg) {
+		log(IStatus.WARNING, IStatus.OK, msg, null);
+	}
+
 	public final static void logError(Throwable t) {
 		logError(t.getMessage(), t);
 	}
@@ -35,7 +39,7 @@ public class CoreLog {
 	public final static void log(IStatus status) {
 		Activator.getDefault().getLog().log(status);
 	}
-	
+
 	private final static void log(int severity, int code, String message,
 			Throwable exception) {
 		log(createStatus(severity, code, message, exception));

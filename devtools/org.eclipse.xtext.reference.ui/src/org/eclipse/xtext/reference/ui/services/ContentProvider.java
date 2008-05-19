@@ -7,13 +7,15 @@
  *
  *******************************************************************************/
 
-package org.eclipse.xtext.ui.core.service;
+package org.eclipse.xtext.reference.ui.services;
+
+import org.eclipse.xtext.ui.core.service.IContentProvider;
+
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
+ *
  */
-public interface IParser extends
-		org.eclipse.xtext.ui.core.language.ILanguageService {
-	Object parse(String lexer);
+public class ContentProvider
+		implements IContentProvider {
 }

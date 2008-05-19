@@ -17,5 +17,9 @@ import org.eclipse.xtext.ui.core.language.ILanguageService;
  * 
  */
 public interface ISyntaxColorer extends ILanguageService {
-	TextAttribute color(ILexer lexer, Object token);
+	/**
+	 * @param token
+	 * @return TextAttribute for given token
+	 */
+	TextAttribute color(Object token);
 }

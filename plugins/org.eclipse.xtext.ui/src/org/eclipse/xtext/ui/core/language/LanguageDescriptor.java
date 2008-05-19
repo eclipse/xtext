@@ -20,7 +20,6 @@ public class LanguageDescriptor {
 
 	private String id;
 	private String name;
-	private String[] fileExtensions;
 
 	public LanguageDescriptor(String id, String name) {
 		this.id = id;
@@ -42,28 +41,12 @@ public class LanguageDescriptor {
 		this.name = element.getAttribute(LanguageDescriptor.NAME_ATTRIBUTE);
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	public String getId() {
 		return id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getName() {
 		return name;
-	}
-
-	public String[] getFileExtensions() {
-		return fileExtensions;
-	}
-
-	public void setFileExtensions(String[] fileExtensions) {
-		this.fileExtensions = fileExtensions;
 	}
 
 }

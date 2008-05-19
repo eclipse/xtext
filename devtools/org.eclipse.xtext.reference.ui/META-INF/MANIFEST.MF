@@ -4,5 +4,6 @@ Bundle-Name: Reference
 Bundle-SymbolicName: org.eclipse.xtext.ui.core.reference;singleton:=true
 Bundle-Version: 1.0.0
 Export-Package: org.eclipse.xtext.reference.ui.services
-Bundle-Activator: org.eclipse.xtext.reference.ui.internal.Activator
+Bundle-Activator: org.eclipse.xtext.reference.ui.Activator
 Require-Bundle: org.eclipse.xtext.ui.core;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
