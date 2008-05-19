@@ -9,25 +9,15 @@
 package org.eclipse.xtext.ui.core.language;
 
 import org.eclipse.jface.text.TextAttribute;
-import org.eclipse.xtext.ui.core.service.ILexer;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
 /**
  * @author Peter Friese - Initial contribution and API
- *
+ * 
  */
 public class SyntaxColorer1 implements ISyntaxColorer {
 
-	/**
-	 * 
-	 */
-	public SyntaxColorer1() {
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.core.service.ISyntaxColorer#color(org.eclipse.xtext.ui.core.service.ILexer, java.lang.Object)
-	 */
-	public TextAttribute color(ILexer lexer, Object token) {
+	public TextAttribute color(Object token) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -6,14 +6,21 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
+package org.eclipse.xtext.ui.core.language;
 
-package org.eclipse.xtext.ui.core.service;
+import junit.framework.TestCase;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public interface IParser extends
-		org.eclipse.xtext.ui.core.language.ILanguageService {
-	Object parse(String lexer);
+public class LanguageFactoryTest extends TestCase {
+	public void testgetLanguageDescriptor() throws Exception {
+		LanguageDescriptor descr = LanguageDescriptorFactory
+				.createLanguageDescriptor(org.eclipse.xtext.ui.core.tests.Activator.PLUGIN_ID);
+		assertNotNull("LanguageDescriptor Initializing failed", descr);
+		assertEquals("org.eclipse.xtext.ui.core.tests.dummylanguage", descr
+				.getId());
+		assertEquals("Dummy Language", descr.getName());
+	}
 }

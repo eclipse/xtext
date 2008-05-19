@@ -8,31 +8,42 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.IEditorInput;
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
-import org.eclipse.xtext.ui.core.language.LanguageRegistry;
+import org.eclipse.xtext.ui.core.language.LanguageDescriptorFactory;
 
 /**
- * @author Dennis Hübner
+ * @author Dennis Hübner - Initial contribution and API
  * 
  */
 public class BaseTextEditor extends TextEditor {
 	public static final String ID = "org.eclipse.xtext.baseEditor";
-	private LanguageDescriptor langDescr;
+
+	public BaseTextEditor() {
+		SourceViewerConfiguration configuration = new XtextSourceViewerConfiguration(
+				getPreferenceStore());
+		setSourceViewerConfiguration(configuration);
+	}
 
 	@Override
-	public void createPartControl(Composite parent) {
-		super.createPartControl(parent);
-		IEditorInput input = getEditorInput();
-		if (input.getAdapter(IFile.class) instanceof IFile) {
-			IFile file = (IFile) input.getAdapter(IFile.class);
-			String fileExtension = file.getFileExtension();
-			langDescr = LanguageRegistry.getLanguageDescriptor(fileExtension);
-			setPartName(getPartName() + " - For '" + langDescr.getName()
-					+ "' language");
-		}
+	public void setInitializationData(IConfigurationElement cfig,
+			String propertyName, Object data) {
+		super.setInitializationData(cfig, propertyName, data);
+		((XtextSourceViewerConfiguration) getSourceViewerConfiguration())
+				.setLanguageDescriptor(initializeLanguageDescriptor());
 	}
+
+	private LanguageDescriptor initializeLanguageDescriptor() {
+		String namespace = this.getConfigurationElement()
+				.getNamespaceIdentifier();
+		LanguageDescriptor langDescr = LanguageDescriptorFactory
+				.createLanguageDescriptor(namespace);
+		Assert.isNotNull(langDescr, "LanguageDescriptor is not provided for "
+				+ namespace + " plugin");
+		return langDescr;
+	}
+
 }
