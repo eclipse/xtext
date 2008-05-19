@@ -7,6 +7,7 @@
  *
  *******************************************************************************/
 import xtext;
+import predicate;
 
 extension org::eclipse::xtext::Properties reexport;
 extension org::eclipse::xtext::Extensions reexport;
@@ -15,42 +16,42 @@ extension org::openarchitectureware::util::stdlib::io;
 
 methodName(AbstractRule this) :
 	'proceed'+name.toFirstUpper();
-	
-List[AbstractElement] selectNonOptionalChildren(AbstractElement this) :
-	let x = eContents.typeSelect(AbstractElement).select(e|!e.isOptional()) :
-		{}.union(x).union(x.selectNonOptionalChildren()).flatten();
-	
-delegatedCheckPath(AbstractElement this) :
-	let x = checkPath() :
-	if x==null || !isOptional() 
-		then x 
-		else '(true ||'+x+')';
 		
-checkPath(AbstractElement this) : info(metaType.name) -> null;
+List inverse(List this) :
+	let x = {} : x.addAll(this) -> x.reverse();
+	
+	
+List[String] internalCheckPath(AbstractElement this) : 
+	if isOptional() 
+		then {"true"}.union(checkPath())
+		else checkPath();
+		
+List[String] checkPath(AbstractElement this) : {"true"}; 
+List[String] checkPath(Action this) : 
+	{'obj.isOfType("'+typeName.qualifiedName()+'") && 
+	obj.checkConsume("'+feature+'") && obj.isConsumed()'};
+List[String] checkPath(Assignment this) : 
+	{'obj.checkConsume("'+feature+'")'};
+List[String] checkPath(RuleCall this) : 
+	{if calledParserRule()!=null then 'obj.isInstanceOf("'+calledParserRule().getReturnTypeName()+'")' else "true"};
 
-checkPath(Alternatives this) : 
-	let x = groups.delegatedCheckPath().select(x|x!=null) :
-		x.isEmpty ? null : '('+x.toString(" || ")+')';
 		
-checkPath(Group this) : 
-	let x = abstractTokens.delegatedCheckPath().select(x|x!=null) :
-		x.isEmpty ? null : '('+x.toString(" && ")+')';
-		
-checkPath(Assignment this) : 'obj.isConsumable("'+feature+'")';
-	
-checkPath(RuleCall this) :
-	if containingAssignment()!=null && calledParserRule()!=null then null 
-		else
-		calledRule().methodName()+'(obj.newLookaheadDescription())';
-	
-checkPath(Action this) :
-	'obj.isOfType("'+typeName.qualifiedName()+'")';	
+List[String] checkPath(Alternatives this) : 
+	groups.internalCheckPath();
 
-followingElementInGroup(AbstractElement this) :
-	containingGroup().abstractTokens.get(1);
-	
-followingActions(AbstractElement this) :
-	let x = followingElementInGroup().eAllContents.typeSelect(Action) :
-		x==null?{}:x;
+List[String] checkPath(Group this) : 
+	recCheckPath(this.abstractTokens.inverse(),0,null);
 		
+private List[String] recCheckPath(List[AbstractElement] abstractTokens, Integer counter, List[String] currentResult) :
+	if abstractTokens.size<=counter 
+		then currentResult
+		else 
+			(let newChecks = abstractTokens.get(counter).internalCheckPath():
+			recCheckPath(abstractTokens,counter+1, 
+				(if currentResult == null 
+					then newChecks 
+					else newChecks.collect(e1| currentResult.collect(e2|e2+'&&'+e1)).flatten()
+				))
+			);
+				
 	

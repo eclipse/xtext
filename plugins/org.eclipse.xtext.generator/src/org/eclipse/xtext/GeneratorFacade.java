@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.util.GenProperties;
 import org.eclipse.xtext.xtextutil.XtextutilPackage;
+import org.openarchitectureware.emf.EcoreUtil2;
 import org.openarchitectureware.expression.ExecutionContextImpl;
 import org.openarchitectureware.xpand2.XpandExecutionContextImpl;
 import org.openarchitectureware.xpand2.XpandFacade;
@@ -56,7 +57,7 @@ public class GeneratorFacade {
         // The directory is now empty so delete it
         return file.delete();
     }
-	
+    
 	@SuppressWarnings("unchecked")
 	public static void generate(Grammar grammarModel, String languageName, String languageNamespace, String srcGenPath)
 			throws IOException {
@@ -71,6 +72,7 @@ public class GeneratorFacade {
 			protected EPackage[] allPackages() {
 				return new EPackage[] { XtextPackage.eINSTANCE, XtextutilPackage.eINSTANCE, EcorePackage.eINSTANCE };
 			}
+
 		};
 		execCtx.registerMetaModel(metamodel);
 
