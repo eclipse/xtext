@@ -79,7 +79,7 @@ private CompositeNode currentNode;
 private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestConstants.getMetamodelRefTestGrammar();
 }
 
-parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@fc3a11 (name: Foo)
+parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@97359b (name: Foo)
 grammar.eResource().getEObject("//@parserRules.0"), currentNode);}
 	ruleFoo {$current=$ruleFoo.current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
@@ -89,7 +89,7 @@ grammar.eResource().getEObject("//@parserRules.0"), currentNode);}
 ruleFoo returns [EObject current=null] : { EObject temp=null; }
 ((
 	
-	lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@59ae8f (cardinality: null) (name: ID)
+	lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@b91a50 (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@terminal"), currentNode,"name"); }
  
 { if ($current==null) {
@@ -99,7 +99,7 @@ grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0
   
   associateNodeWithAstElement(currentNode, $current); }
 )(
-	{ currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@352742 (cardinality: null) (name: NameRef)
+	{ currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@62d8b (cardinality: null) (name: NameRef)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@terminal"), currentNode);} 
 	lv_nameRefs=ruleNameRef
  
@@ -116,7 +116,7 @@ grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1
 ruleNameRef returns [EObject current=null] : { EObject temp=null; }
 (
 	
-	lv_name=RULE_STRING{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@8132ba (cardinality: null) (name: STRING)
+	lv_name=RULE_STRING{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@fc0000 (cardinality: null) (name: STRING)
 grammar.eResource().getEObject("//@parserRules.1/@alternatives/@terminal"), currentNode,"name"); }
  
 { if ($current==null) {
@@ -129,20 +129,20 @@ grammar.eResource().getEObject("//@parserRules.1/@alternatives/@terminal"), curr
 
 
 
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
-
-RULE_INT : ('0'..'9')+;
-
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
-	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
-
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
-
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+
+RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+
+RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
+	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+
+RULE_INT : ('0'..'9')+;
 
 RULE_ANY_OTHER : .;
 

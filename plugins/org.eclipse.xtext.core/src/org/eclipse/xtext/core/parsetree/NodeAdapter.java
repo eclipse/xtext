@@ -3,8 +3,6 @@ package org.eclipse.xtext.core.parsetree;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAttribute;
 
 public class NodeAdapter implements Adapter {
 

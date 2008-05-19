@@ -79,7 +79,7 @@ private CompositeNode currentNode;
 private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.grammargen.tests.SimpleTest2Constants.getSimpleTest2Grammar();
 }
 
-parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@3099cc (name: Model)
+parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@c76b4c (name: Model)
 grammar.eResource().getEObject("//@parserRules.0"), currentNode);}
 	ruleModel {$current=$ruleModel.current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
@@ -88,7 +88,7 @@ grammar.eResource().getEObject("//@parserRules.0"), currentNode);}
 // Rule Model
 ruleModel returns [EObject current=null] : { EObject temp=null; }
 (
-	{ currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@2aa3fb (cardinality: null) (name: Child)
+	{ currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@e80f0d (cardinality: null) (name: Child)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal"), currentNode);} 
 	lv_contents=ruleChild
  
@@ -110,13 +110,13 @@ ruleChild returns [EObject current=null] : { EObject temp=null; }
      $current = factory.create("Child");
   }
   factory.set($current, "optional", true);
-createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@af1cf6 (cardinality: null) (value: 'optional')
+createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@1fcb35 (cardinality: null) (value: 'optional')
 grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"), currentNode,"optional");  
   associateNodeWithAstElement(currentNode, $current); }
-)?'keyword' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@6c50af (cardinality: null) (value: "keyword")
+)?'keyword' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@e7fe8e (cardinality: null) (value: "keyword")
 grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })(
 	
-	lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@2934a1 (cardinality: null) (name: ID)
+	lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@cc678a (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"name"); }
  
 { if ($current==null) {
@@ -127,7 +127,7 @@ grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0
   associateNodeWithAstElement(currentNode, $current); }
 ))(
 	
-	lv_number=RULE_INT{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@b22abc (cardinality: null) (name: INT)
+	lv_number=RULE_INT{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@c61c91 (cardinality: null) (name: INT)
 grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"number"); }
  
 { if ($current==null) {
@@ -136,13 +136,15 @@ grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0
   factory.set($current, "number", lv_number);
   
   associateNodeWithAstElement(currentNode, $current); }
-))'{' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@201ad7 (cardinality: null) (value: '{')
-grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })'}' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@27e2d8 (cardinality: null) (value: '}')
+))'{' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@4e92a (cardinality: null) (value: '{')
+grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })'}' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@420a71 (cardinality: null) (value: '}')
 grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1"), currentNode,null); }) ;
 
 
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_INT : ('0'..'9')+;
 
@@ -153,9 +155,7 @@ RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 
