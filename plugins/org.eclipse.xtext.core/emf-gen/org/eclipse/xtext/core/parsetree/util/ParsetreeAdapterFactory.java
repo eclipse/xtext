@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeAdapterFactory.java,v 1.4 2008/05/19 10:08:48 sefftinge Exp $
+ * $Id: ParsetreeAdapterFactory.java,v 1.5 2008/05/19 12:11:17 jkohnlein Exp $
  */
 package org.eclipse.xtext.core.parsetree.util;
 

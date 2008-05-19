@@ -1,8 +1,9 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-19 12:04:44
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-19 14:09:35
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
 import org.eclipse.xtext.core.parser.IElementFactory;
+import org.eclipse.xtext.core.parser.ParseException;
 import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 
@@ -15,17 +16,17 @@ import java.util.ArrayList;
 
 public class InternalSimpleTestParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_LEXER_BODY", "RULE_STRING", "RULE_WS", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_WS", "RULE_INT", "RULE_LEXER_BODY", "RULE_SL_COMMENT", "RULE_ANY_OTHER"
     };
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=6;
     public static final int RULE_ID=4;
     public static final int RULE_WS=7;
     public static final int RULE_INT=8;
     public static final int EOF=-1;
-    public static final int RULE_STRING=6;
+    public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=11;
     public static final int RULE_SL_COMMENT=10;
-    public static final int RULE_LEXER_BODY=5;
+    public static final int RULE_LEXER_BODY=9;
 
         public InternalSimpleTestParser(TokenStream input) {
             super(input);
@@ -86,7 +87,9 @@ public class InternalSimpleTestParser extends Parser {
     }
     	
     public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
-    	assert node.getElement() == null || node.getElement() == astElement;
+    	if(node.getElement() != null && node.getElement() != astElement) {
+    		throw new ParseException(node, "Reassignment of astElement in parse tree node");
+    	}
     	node.setElement(astElement);
     	if(astElement instanceof EObject) {
     		EObject eObject = (EObject) astElement;
@@ -102,18 +105,18 @@ public class InternalSimpleTestParser extends Parser {
 
 
     // $ANTLR start parse
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:82:1: parse returns [EObject current] : ruleFoo EOF ;
-    public final EObject parse() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:85:1: parse returns [EObject current] : ruleFoo EOF ;
+    public EObject parse() throws RecognitionException {
         EObject current = null;
 
         EObject ruleFoo1 = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:82:33: ( ruleFoo EOF )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:82:35: ruleFoo EOF
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:85:35: ( ruleFoo EOF )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:85:35: ruleFoo EOF
             {
-            currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@2ad6a0 (name: Foo)
+            currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@75cea3 (name: Foo)
             grammar.eResource().getEObject("//@parserRules.0"), currentNode);
             pushFollow(FOLLOW_ruleFoo_in_parse45);
             ruleFoo1=ruleFoo();
@@ -138,30 +141,30 @@ public class InternalSimpleTestParser extends Parser {
 
 
     // $ANTLR start ruleFoo
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:89:1: ruleFoo returns [EObject current=null] : (lv_name= RULE_ID ) ;
-    public final EObject ruleFoo() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:92:1: ruleFoo returns [EObject current=null] : (lv_name= RULE_ID ) ;
+    public EObject ruleFoo() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
 
+         EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:89:40: ( (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:89:42: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:95:1: ( (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:95:1: (lv_name= RULE_ID )
             {
-             EObject temp=null; 
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:90:1: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:92:2: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:95:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:97:4: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo75); 
-             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@a6001 (cardinality: null) (name: ID)
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo89); 
+             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@2b6fc7 (cardinality: null) (name: ID)
             grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal"), currentNode,"name"); 
-             if (current==null) {
-                 current = factory.create("Foo");
-              }
-              factory.set(current, "name", lv_name);
-              
-              associateNodeWithAstElement(currentNode, current); 
+                 if (current==null) {
+                  current = factory.create("Foo");
+                  associateNodeWithAstElement(currentNode, current);
+               }
+               factory.set(current, "name", lv_name);
+
 
             }
 
@@ -184,6 +187,6 @@ public class InternalSimpleTestParser extends Parser {
 
     public static final BitSet FOLLOW_ruleFoo_in_parse45 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_parse49 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFoo75 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFoo89 = new BitSet(new long[]{0x0000000000000002L});
 
 }

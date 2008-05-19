@@ -9,6 +9,7 @@ package org.eclipse.xtext.grammargen.tests.parser.internal;
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
 import org.eclipse.xtext.core.parser.IElementFactory;
+import org.eclipse.xtext.core.parser.ParseException;
 import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 
@@ -65,7 +66,9 @@ private void appendTrailingHiddenTokens(CompositeNode parentNode) {
 }
 	
 public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
-	assert node.getElement() == null || node.getElement() == astElement;
+	if(node.getElement() != null && node.getElement() != astElement) {
+		throw new ParseException(node, "Reassignment of astElement in parse tree node");
+	}
 	node.setElement(astElement);
 	if(astElement instanceof EObject) {
 		EObject eObject = (EObject) astElement;
@@ -79,41 +82,43 @@ private CompositeNode currentNode;
 private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.grammargen.tests.SimpleTestConstants.getSimpleTestGrammar();
 }
 
-parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@2ad6a0 (name: Foo)
+parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@75cea3 (name: Foo)
 grammar.eResource().getEObject("//@parserRules.0"), currentNode);}
 	ruleFoo {$current=$ruleFoo.current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
 
 
 // Rule Foo
-ruleFoo returns [EObject current=null] : { EObject temp=null; }
+ruleFoo returns [EObject current=null] 
+   @init { EObject temp=null; }
+   :
 (
-	
-	lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@a6001 (cardinality: null) (name: ID)
+   
+   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@2b6fc7 (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal"), currentNode,"name"); }
  
-{ if ($current==null) {
-     $current = factory.create("Foo");
-  }
-  factory.set($current, "name", lv_name);
-  
-  associateNodeWithAstElement(currentNode, $current); }
-) ;
+{     if ($current==null) {
+      $current = factory.create("Foo");
+      associateNodeWithAstElement(currentNode, $current);
+   }
+   factory.set($current, "name", lv_name);
+}
+);
 
 
-
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 RULE_INT : ('0'..'9')+;
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
-
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 

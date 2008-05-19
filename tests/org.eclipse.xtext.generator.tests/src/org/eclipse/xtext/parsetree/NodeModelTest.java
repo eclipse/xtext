@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
@@ -14,15 +15,16 @@ import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.CompositeNode;
 import org.eclipse.xtext.core.parsetree.LeafNode;
 import org.eclipse.xtext.core.parsetree.NodeAdapter;
-import org.eclipse.xtext.dummy.DummyLanguage;
-import org.eclipse.xtext.dummy.parser.DummyLanguageASTFactory;
 import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.test.TestLanguage;
+import org.eclipse.xtext.test.parser.TestLanguageASTFactory;
 
 public class NodeModelTest extends AbstractGeneratorTest {
 
+	private static final String MODEL = "reducible 'x' choice optional y choice z reducible 'x' 'y'";
+
 	public void testNavigabilityAst2Node() throws Exception {
-		String model = "element foo 'dummdidumm'; optional element bar;";
-		EObject object = (EObject) parse(model,new DummyLanguageASTFactory());
+		EObject object = getRootAstElement(MODEL);
 		checkNavigabilityAst2Node(object);
 		for(Iterator<EObject> i = object.eAllContents(); i.hasNext();) {
 			checkNavigabilityAst2Node(i.next());
@@ -30,8 +32,7 @@ public class NodeModelTest extends AbstractGeneratorTest {
 	}
 
 	public void testNavigabilityNode2Ast() throws Exception {
-		String model = "element foo 'dummdidumm'; optional element bar;";
-		EObject object = (EObject) parse(model,new DummyLanguageASTFactory());
+		EObject object = getRootAstElement(MODEL);
 		EList<Adapter> adapters = object.eAdapters();
 		assert(adapters.size()==1);
 		NodeAdapter adapter = (NodeAdapter) adapters.get(0);
@@ -42,9 +43,10 @@ public class NodeModelTest extends AbstractGeneratorTest {
 			checkNavigabilityNode2Ast((AbstractNode) i.next());
 		}
 	}
+
 	
 	public void testGrammarElement() throws Exception {
-		AbstractNode rootNode = getRootNode("element foo 'dummdidumm'; optional element bar;");
+		AbstractNode rootNode = getRootNode(MODEL);
 		EObject rootGrammarElement = rootNode.getGrammarElement();
 		assertTrue(rootGrammarElement instanceof ParserRule);
 		for (Iterator<EObject> i = rootNode.eAllContents(); i.hasNext();) {
@@ -52,7 +54,7 @@ public class NodeModelTest extends AbstractGeneratorTest {
 			if (next instanceof CompositeNode) {
 				CompositeNode compositeNode = (CompositeNode) next;
 				EObject grammarElement = compositeNode.getGrammarElement();
-				assertTrue(isParserRuleCall(grammarElement));
+				assertTrue(isParserRuleCall(grammarElement) || grammarElement instanceof Action);
 			} else if (next instanceof LeafNode) {
 				LeafNode leafNode = (LeafNode) next;
 				EObject grammarElement = leafNode.getGrammarElement();
@@ -86,10 +88,9 @@ public class NodeModelTest extends AbstractGeneratorTest {
 	
 	public void testTokenTexts() throws Exception {
 		Pattern whitespacePattern = Pattern.compile("\\s*");
-		String model = "element foo 'dummdidumm' ; optional element bar ;";
-		String[] tokenTexts = model.split(" ");
+		String[] tokenTexts = MODEL.split(" ");
 		int tokenIndex = 0;
-		AbstractNode rootNode = getRootNode(model);
+		AbstractNode rootNode = getRootNode(MODEL);
 		for(Iterator<EObject> i = rootNode.eAllContents(); i.hasNext();) {
 			EObject next = i.next();
 			if (next instanceof LeafNode) {
@@ -119,8 +120,13 @@ public class NodeModelTest extends AbstractGeneratorTest {
 		return false;
 	}
 	
+	private EObject getRootAstElement(String model) throws Exception {
+		EObject object = (EObject) parse(model ,new TestLanguageASTFactory());
+		return object;
+	}
+
 	private AbstractNode getRootNode(String model) throws Exception {
-		EObject object = (EObject) parse(model, new DummyLanguageASTFactory());
+		EObject object = getRootAstElement(model);
 		NodeAdapter adapter = (NodeAdapter) object.eAdapters().get(0);
 		AbstractNode node = adapter.getParserNode();
 		return node;
@@ -128,7 +134,7 @@ public class NodeModelTest extends AbstractGeneratorTest {
 
 	@Override
 	protected Class<?> getTheClass() {
-		return DummyLanguage.class;
+		return TestLanguage.class;
 	}
 
 	
