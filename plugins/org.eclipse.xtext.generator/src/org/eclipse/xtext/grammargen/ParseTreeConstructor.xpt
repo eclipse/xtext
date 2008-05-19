@@ -1,0 +1,138 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+
+«EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
+«EXTENSION org::eclipse::xtext::grammargen::ParseTreeConstructor»
+«EXTENSION org::eclipse::xtext::TypeResolution»
+«EXTENSION org::openarchitectureware::util::stdlib::collections»
+«EXTENSION org::openarchitectureware::util::stdlib::io»
+
+«DEFINE file FOR Grammar»
+«FILE pathName()+'/'+languageName()+'ParseTreeConstructor.java'»
+package «packageName()»;
+
+import java.util.*;
+
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.core.parser.*;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import «packageName()».parser.«languageName()»ASTFactory;
+
+public class «languageName()»ParseTreeConstructor extends AbstractParseTreeRewriter{
+	private AbstractEcoreElementFactory factory = new «languageName()»ASTFactory();
+	
+	protected AbstractEcoreElementFactory getFactory() {
+		return factory;
+	}
+
+«EXPAND method FOREACH parserRules»
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE method FOR ParserRule»
+public void «methodName()»(EObject obj) {
+	if (!«methodName()»(getDescr(obj)))
+		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+}
+
+private final Set<ConsumationState> «methodName()»Lock = new HashSet<ConsumationState>();
+
+protected boolean «methodName()»(InstanceDescription obj) {
+	obj.push("«methodName()»");
+	try {
+		if (! obj.isInstanceOf("«resolveReturnType().qualifiedName()»"))
+		   return false;
+		«EXPAND statement FOR this.alternatives»
+		return obj.isConsumed();
+	} finally {
+		obj.pop();
+	}
+}
+«ENDDEFINE»
+
+
+«DEFINE statement FOR AbstractElement»
+/* «metaType.name» */ 
+«IF isOptional() && checkPath()!=null»
+«cardinality=='?'?'if':'while'» («checkPath()»)«ENDIF»{
+«EXPAND statement2 FOR this»
+}
+«ENDDEFINE»
+
+«DEFINE statement2 FOR AbstractElement»//Do nothing for '«metaType.name»'\n«ENDDEFINE»
+«DEFINE statement2 FOR Assignment»
+	if (!obj.isConsumable("«feature»")) return false;
+    Object value = obj.consume("«feature»");
+    «IF this.featureIsReference()»
+    	«EXPAND statement FOR terminal»
+    «ELSE»
+    	«IF isBoolean()»
+    	«EXPAND statement FOR terminal»
+    	«ELSE»
+    	if (!obj.isLookahead())
+    		System.out.print(value);
+    	«ENDIF»
+    «ENDIF»
+«ENDDEFINE»
+
+«DEFINE statement2 FOR Keyword»
+	if (!obj.isLookahead())
+    	System.out.print("«value.trimFromStartAndEnd(1)»");
+«ENDDEFINE»
+
+«DEFINE statement2 FOR Action»
+	if (!obj.isConsumable("«feature»")) return false;
+	EObject newObj = (EObject) obj.consume("«feature»");
+	«containingParserRule().methodName()»(getDescr(newObj,obj.isLookahead()));
+«ENDDEFINE»
+
+«DEFINE statement2 FOR RuleCall»
+	«IF this.isAssigned()»
+	«calledRule().methodName()»(getDescr((EObject)value,obj.isLookahead()));
+	«ELSE»
+	«IF followingElementInGroup()!=null && 
+		!followingElementInGroup().eAllContents.typeSelect(Action).isEmpty»
+	{
+		InstanceDescription temp = obj;
+		obj = obj.newLookaheadDescription();
+		«EXPAND statement FOR followingElementInGroup()»
+		if (!obj.isConsumed() && !obj.isRecursion()) //«followingElementInGroup().checkPath()»
+			«calledRule().methodName()»(temp);
+		obj = temp;
+	}
+	«ELSE»
+	«calledRule().methodName()»(obj);
+	«ENDIF»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE statement2 FOR Group»
+	«FOREACH abstractTokens AS t SEPARATOR 'if (!obj.isLookahead()) System.out.print(" ");\n\t'-»
+		«EXPAND statement FOR t»
+	«ENDFOREACH-»
+«ENDDEFINE»
+
+«DEFINE statement2 FOR Alternatives»
+	«FOREACH this.groups AS alt SEPARATOR "else"-»
+		if («alt.checkPath()») {
+			«EXPAND statement FOR alt»
+		}
+	«ENDFOREACH-»
+«ENDDEFINE»
+
+«ENDDEFINE»
+
+

@@ -9,6 +9,7 @@ import org.eclipse.xtext.core.parsetree.NodeAdapter;
 import org.eclipse.xtext.core.parsetree.ParsetreePackage;
 import org.eclipse.xtext.dummy.DummyLanguage;
 import org.eclipse.xtext.dummy.DummyLanguageConstants;
+import org.eclipse.xtext.dummy.DummyLanguageParseTreeConstructor;
 import org.eclipse.xtext.dummy.parser.DummyLanguageASTFactory;
 import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
 import org.openarchitectureware.expression.ExecutionContextImpl;
@@ -16,10 +17,11 @@ import org.openarchitectureware.xtend.XtendFacade;
 
 public class ParseTreeConstructionTest extends AbstractGeneratorTest {
 
-	public void testWhitespaceIsIncluded() throws Exception {
+	public void testParseTreeConstruction() throws Exception {
 		String model = "element foo ; element bar ;";
 		AbstractNode node = getRootNode(model);
 		EObject me = node.getElement();
+		new DummyLanguageParseTreeConstructor().proceedModel(me);
 //		assertEquals("element stuff;\nelement bar;", node.serialize());
 	}
 
