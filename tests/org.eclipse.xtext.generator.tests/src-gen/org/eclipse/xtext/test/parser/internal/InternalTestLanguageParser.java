@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g 2008-05-19 14:09:39
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g 2008-05-19 20:58:04
 
 package org.eclipse.xtext.test.parser.internal; 
 
@@ -16,17 +16,17 @@ import java.util.ArrayList;
 
 public class InternalTestLanguageParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_LEXER_BODY", "RULE_SL_COMMENT", "RULE_INT", "RULE_ML_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'choice'", "'optional'", "'reducible'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_LEXER_BODY", "RULE_WS", "RULE_SL_COMMENT", "RULE_ML_COMMENT", "RULE_ANY_OTHER", "'choice'", "'optional'", "'reducible'"
     };
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=10;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=10;
-    public static final int RULE_INT=8;
+    public static final int RULE_WS=8;
     public static final int EOF=-1;
+    public static final int RULE_INT=6;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=7;
-    public static final int RULE_LEXER_BODY=6;
+    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_LEXER_BODY=7;
 
         public InternalTestLanguageParser(TokenStream input) {
             super(input);
@@ -106,17 +106,17 @@ public class InternalTestLanguageParser extends Parser {
 
     // $ANTLR start parse
     // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:85:1: parse returns [EObject current] : ruleEntryRule EOF ;
-    public EObject parse() throws RecognitionException {
+    public final EObject parse() throws RecognitionException {
         EObject current = null;
 
         EObject ruleEntryRule1 = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:85:35: ( ruleEntryRule EOF )
+            // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:85:33: ( ruleEntryRule EOF )
             // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:85:35: ruleEntryRule EOF
             {
-            currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@8db0c6 (name: EntryRule)
+            currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@356966 (name: EntryRule)
             grammar.eResource().getEObject("//@parserRules.0"), currentNode);
             pushFollow(FOLLOW_ruleEntryRule_in_parse45);
             ruleEntryRule1=ruleEntryRule();
@@ -142,7 +142,7 @@ public class InternalTestLanguageParser extends Parser {
 
     // $ANTLR start ruleEntryRule
     // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:92:1: ruleEntryRule returns [EObject current=null] : (lv_multiFeature= ruleAbstractRule )* ;
-    public EObject ruleEntryRule() throws RecognitionException {
+    public final EObject ruleEntryRule() throws RecognitionException {
         EObject current = null;
 
         EObject lv_multiFeature = null;
@@ -150,7 +150,7 @@ public class InternalTestLanguageParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:95:1: ( (lv_multiFeature= ruleAbstractRule )* )
+            // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:94:4: ( (lv_multiFeature= ruleAbstractRule )* )
             // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:95:1: (lv_multiFeature= ruleAbstractRule )*
             {
             // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:95:1: (lv_multiFeature= ruleAbstractRule )*
@@ -168,7 +168,7 @@ public class InternalTestLanguageParser extends Parser {
             	case 1 :
             	    // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:96:4: lv_multiFeature= ruleAbstractRule
             	    {
-            	     currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@aaf6a5 (cardinality: null) (name: AbstractRule)
+            	     currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@305c3d (cardinality: null) (name: AbstractRule)
             	    grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal"), currentNode); 
             	    pushFollow(FOLLOW_ruleAbstractRule_in_ruleEntryRule91);
             	    lv_multiFeature=ruleAbstractRule();
@@ -206,7 +206,7 @@ public class InternalTestLanguageParser extends Parser {
 
     // $ANTLR start ruleAbstractRule
     // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:110:1: ruleAbstractRule returns [EObject current=null] : (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule ) ;
-    public EObject ruleAbstractRule() throws RecognitionException {
+    public final EObject ruleAbstractRule() throws RecognitionException {
         EObject current = null;
 
         EObject this_ChoiceRule = null;
@@ -216,7 +216,7 @@ public class InternalTestLanguageParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:113:1: ( (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule ) )
+            // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:112:4: ( (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule ) )
             // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:113:1: (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule )
             {
             // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:113:1: (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule )
@@ -278,7 +278,7 @@ public class InternalTestLanguageParser extends Parser {
 
     // $ANTLR start ruleChoiceRule
     // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:119:1: ruleChoiceRule returns [EObject current=null] : ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) ) ;
-    public EObject ruleChoiceRule() throws RecognitionException {
+    public final EObject ruleChoiceRule() throws RecognitionException {
         EObject current = null;
 
         Token lv_optionalKeyword=null;
@@ -286,7 +286,7 @@ public class InternalTestLanguageParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:122:1: ( ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:121:4: ( ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) ) )
             // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:122:1: ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) )
             {
             // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:122:1: ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) )
@@ -296,7 +296,7 @@ public class InternalTestLanguageParser extends Parser {
             // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:122:3: 'choice' (lv_optionalKeyword= 'optional' )?
             {
             match(input,12,FOLLOW_12_in_ruleChoiceRule164); 
-             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@2c5d2f (cardinality: null) (value: "choice")
+             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@16a5eb (cardinality: null) (value: "choice")
             grammar.eResource().getEObject("//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0"), currentNode,null); 
             // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:123:123: (lv_optionalKeyword= 'optional' )?
             int alt3=2;
@@ -316,7 +316,7 @@ public class InternalTestLanguageParser extends Parser {
                           associateNodeWithAstElement(currentNode, current);
                        }
                        factory.set(current, "optionalKeyword", true);
-                    createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@d147da (cardinality: null) (value: 'optional')
+                    createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@7ee3d4 (cardinality: null) (value: 'optional')
                     grammar.eResource().getEObject("//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"optionalKeyword");
 
                     }
@@ -332,7 +332,7 @@ public class InternalTestLanguageParser extends Parser {
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoiceRule198); 
-             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@8ee032 (cardinality: null) (name: ID)
+             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@6e48b3 (cardinality: null) (name: ID)
             grammar.eResource().getEObject("//@parserRules.2/@alternatives/@abstractTokens.1/@terminal"), currentNode,"name"); 
                  if (current==null) {
                   current = factory.create("ChoiceElement");
@@ -363,7 +363,7 @@ public class InternalTestLanguageParser extends Parser {
 
     // $ANTLR start ruleReducibleRule
     // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:148:1: ruleReducibleRule returns [EObject current=null] : ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? ) ;
-    public EObject ruleReducibleRule() throws RecognitionException {
+    public final EObject ruleReducibleRule() throws RecognitionException {
         EObject current = null;
 
         EObject this_TerminalRule = null;
@@ -373,7 +373,7 @@ public class InternalTestLanguageParser extends Parser {
 
          EObject temp=null; CompositeNode entryNode = currentNode; 
         try {
-            // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:151:1: ( ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? ) )
+            // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:150:39: ( ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? ) )
             // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:151:1: ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? )
             {
             // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:151:1: ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? )
@@ -383,7 +383,7 @@ public class InternalTestLanguageParser extends Parser {
             // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:151:3: 'reducible' this_TerminalRule= ruleTerminalRule
             {
             match(input,14,FOLLOW_14_in_ruleReducibleRule238); 
-             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@8dd1d8 (cardinality: null) (value: "reducible")
+             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@47c8d (cardinality: null) (value: "reducible")
             grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0"), currentNode,null); 
             pushFollow(FOLLOW_ruleTerminalRule_in_ruleReducibleRule243);
             this_TerminalRule=ruleTerminalRule();
@@ -411,7 +411,7 @@ public class InternalTestLanguageParser extends Parser {
                       factory.add(temp, "actionFeature",current);
                       current = temp; 
                       temp = null;
-                      currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@e670e0 (cardinality: null) (operator: +=, feature: actionFeature)
+                      currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@b854c4 (cardinality: null) (operator: +=, feature: actionFeature)
                     grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.0"), currentNode); 
                       associateNodeWithAstElement(currentNode, current); 
 
@@ -420,7 +420,7 @@ public class InternalTestLanguageParser extends Parser {
                     // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:161:2: (lv_actionFeature= ruleTerminalRule )
                     // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:162:4: lv_actionFeature= ruleTerminalRule
                     {
-                     currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@fadff9 (cardinality: null) (name: TerminalRule)
+                     currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@5ed675 (cardinality: null) (name: TerminalRule)
                     grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"), currentNode); 
                     pushFollow(FOLLOW_ruleTerminalRule_in_ruleReducibleRule266);
                     lv_actionFeature=ruleTerminalRule();
@@ -462,14 +462,14 @@ public class InternalTestLanguageParser extends Parser {
 
     // $ANTLR start ruleTerminalRule
     // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:176:1: ruleTerminalRule returns [EObject current=null] : (lv_stringFeature= RULE_STRING ) ;
-    public EObject ruleTerminalRule() throws RecognitionException {
+    public final EObject ruleTerminalRule() throws RecognitionException {
         EObject current = null;
 
         Token lv_stringFeature=null;
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:179:1: ( (lv_stringFeature= RULE_STRING ) )
+            // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:178:4: ( (lv_stringFeature= RULE_STRING ) )
             // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:179:1: (lv_stringFeature= RULE_STRING )
             {
             // ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g:179:1: (lv_stringFeature= RULE_STRING )
@@ -477,7 +477,7 @@ public class InternalTestLanguageParser extends Parser {
             {
             lv_stringFeature=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleTerminalRule312); 
-             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@22f2b5 (cardinality: null) (name: STRING)
+             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@7e33b4 (cardinality: null) (name: STRING)
             grammar.eResource().getEObject("//@parserRules.4/@alternatives/@terminal"), currentNode,"stringFeature"); 
                  if (current==null) {
                   current = factory.create("TerminalElement");

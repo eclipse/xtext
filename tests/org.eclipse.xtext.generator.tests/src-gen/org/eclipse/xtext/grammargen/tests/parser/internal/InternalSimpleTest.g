@@ -82,7 +82,7 @@ private CompositeNode currentNode;
 private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.grammargen.tests.SimpleTestConstants.getSimpleTestGrammar();
 }
 
-parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@75cea3 (name: Foo)
+parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@516490 (name: Foo)
 grammar.eResource().getEObject("//@parserRules.0"), currentNode);}
 	ruleFoo {$current=$ruleFoo.current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
@@ -94,7 +94,7 @@ ruleFoo returns [EObject current=null]
    :
 (
    
-   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@2b6fc7 (cardinality: null) (name: ID)
+   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@4014a0 (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal"), currentNode,"name"); }
  
 {     if ($current==null) {
@@ -110,10 +110,6 @@ grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal"), curr
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
-
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
-
 RULE_INT : ('0'..'9')+;
 
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
@@ -121,6 +117,10 @@ RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 

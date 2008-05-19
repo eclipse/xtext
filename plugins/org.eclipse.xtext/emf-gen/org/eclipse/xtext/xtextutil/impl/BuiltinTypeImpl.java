@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuiltinTypeImpl.java,v 1.7 2008/05/19 12:11:20 jkohnlein Exp $
+ * $Id: BuiltinTypeImpl.java,v 1.8 2008/05/19 18:59:58 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextutil.impl;
 

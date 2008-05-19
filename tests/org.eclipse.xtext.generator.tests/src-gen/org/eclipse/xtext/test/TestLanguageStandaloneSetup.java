@@ -11,7 +11,7 @@ public abstract class TestLanguageStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@e2c0b5 (alias: null) (nsURI: "http://www.eclipse.org/2008/xtext/TestLang", name: TestLang)
+		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@176c5e (alias: null) (nsURI: "http://www.eclipse.org/2008/xtext/TestLang", name: TestLang)
 		
 	}
 

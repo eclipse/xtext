@@ -16,39 +16,27 @@ public class SimpleTestParseTreeConstructor extends AbstractParseTreeRewriter{
 	protected AbstractEcoreElementFactory getFactory() {
 		return factory;
 	}
+	
 
 
 public void proceedFoo(EObject obj) {
-	if (!proceedFoo(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedFoo(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedFooLock = new HashSet<ConsumationState>();
-
-protected boolean proceedFoo(InstanceDescription obj) {
-	obj.push("proceedFoo");
-	try {
-		if (! obj.isInstanceOf("Foo"))
-		   return false;
-		
+protected void proceedFoo(InstanceDescription obj) {
+	
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("name")) return false;
-    Object value = obj.consume("name");
+	Object value = obj.consume("name");
     
     	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
+    	executeAction(value);
     	
     
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 }

@@ -36,6 +36,7 @@ public class «languageName()»ParseTreeConstructor extends AbstractParseTreeRewri
 	protected AbstractEcoreElementFactory getFactory() {
 		return factory;
 	}
+	
 
 «EXPAND method FOREACH parserRules»
 }
@@ -44,22 +45,11 @@ public class «languageName()»ParseTreeConstructor extends AbstractParseTreeRewri
 
 «DEFINE method FOR ParserRule»
 public void «methodName()»(EObject obj) {
-	if (!«methodName()»(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	«methodName()»(getDescr(obj));
 }
 
-private final Set<ConsumationState> «methodName()»Lock = new HashSet<ConsumationState>();
-
-protected boolean «methodName()»(InstanceDescription obj) {
-	obj.push("«methodName()»");
-	try {
-		if (! obj.isInstanceOf("«resolveReturnType().qualifiedName()»"))
-		   return false;
-		«EXPAND statement FOR this.alternatives»
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
+protected void «methodName()»(InstanceDescription obj) {
+	«EXPAND statement FOR this.alternatives»
 }
 «ENDDEFINE»
 
@@ -67,72 +57,70 @@ protected boolean «methodName()»(InstanceDescription obj) {
 «DEFINE statement FOR AbstractElement»
 /* «metaType.name» */ 
 «IF isOptional() && checkPath()!=null»
-«cardinality=='?'?'if':'while'» («checkPath()»)«ENDIF»{
+«cardinality=='?'?'if':'while'» («FOREACH checkPath() AS p SEPARATOR '||'»
+new Predicate(obj) { 
+		public boolean check() {
+			return «p»; 
+		}
+}.check() «ENDFOREACH»)«ENDIF»{
 «EXPAND statement2 FOR this»
 }
 «ENDDEFINE»
 
 «DEFINE statement2 FOR AbstractElement»//Do nothing for '«metaType.name»'\n«ENDDEFINE»
 «DEFINE statement2 FOR Assignment»
-	if (!obj.isConsumable("«feature»")) return false;
-    Object value = obj.consume("«feature»");
+	Object value = obj.consume("«feature»");
     «IF this.featureIsReference()»
     	«EXPAND statement FOR terminal»
     «ELSE»
     	«IF isBoolean()»
     	«EXPAND statement FOR terminal»
     	«ELSE»
-    	if (!obj.isLookahead())
-    		System.out.print(value);
+    	executeAction(value);
     	«ENDIF»
     «ENDIF»
 «ENDDEFINE»
 
 «DEFINE statement2 FOR Keyword»
-	if (!obj.isLookahead())
-    	System.out.print("«value.trimFromStartAndEnd(1)»");
+	executeAction("«value.trimFromStartAndEnd(1)»");
 «ENDDEFINE»
 
 «DEFINE statement2 FOR Action»
-	if (!obj.isConsumable("«feature»")) return false;
 	EObject newObj = (EObject) obj.consume("«feature»");
-	«containingParserRule().methodName()»(getDescr(newObj,obj.isLookahead()));
+	obj = getDescr(newObj);
 «ENDDEFINE»
 
 «DEFINE statement2 FOR RuleCall»
 	«IF this.isAssigned()»
-	«calledRule().methodName()»(getDescr((EObject)value,obj.isLookahead()));
+		«calledRule().methodName()»(getDescr((EObject)value));
 	«ELSE»
-	«IF followingElementInGroup()!=null && 
-		!followingElementInGroup().eAllContents.typeSelect(Action).isEmpty»
-	{
-		InstanceDescription temp = obj;
-		obj = obj.newLookaheadDescription();
-		«EXPAND statement FOR followingElementInGroup()»
-		if (!obj.isConsumed() && !obj.isRecursion()) //«followingElementInGroup().checkPath()»
-			«calledRule().methodName()»(temp);
-		obj = temp;
-	}
-	«ELSE»
-	«calledRule().methodName()»(obj);
-	«ENDIF»
+		«calledRule().methodName()»(obj);
 	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE statement2 FOR Group»
-	«FOREACH abstractTokens AS t SEPARATOR 'if (!obj.isLookahead()) System.out.print(" ");\n\t'-»
+	«FOREACH (List[AbstractElement]) abstractTokens.inverse() AS t-»
 		«EXPAND statement FOR t»
 	«ENDFOREACH-»
 «ENDDEFINE»
 
 «DEFINE statement2 FOR Alternatives»
 	«FOREACH this.groups AS alt SEPARATOR "else"-»
-		if («alt.checkPath()») {
+		if («FOREACH alt.checkPath() AS p SEPARATOR '||'»
+new Predicate(obj) { 
+		public boolean check() {
+			return «p»; 
+		}
+}.check() «ENDFOREACH») {
 			«EXPAND statement FOR alt»
 		}
 	«ENDFOREACH-»
+	«IF !isOptional()»
+		else {
+		    throw new IllegalStateException("No alternative matched");
+		}
+	«ENDIF»
 «ENDDEFINE»
 
-«ENDDEFINE»
 
 

@@ -1,7 +1,9 @@
 package org.eclipse.xtext.core.parser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -27,21 +29,7 @@ public abstract class AbstractParseTreeRewriter {
 		return new InstanceDescription(obj, lookahead);
 	}
 
-	protected final class InstanceDescription {
-		
-		private Stack<String> methodStack = new Stack<String>();
-		
-		public void pop() {
-			methodStack.pop();
-		}
-
-		public void push(String methodName) {
-			methodStack.push(methodName);
-		}
-		
-		public boolean isRecursion() {
-			return new HashSet<String>(methodStack).size()<methodStack.size();
-		}
+	public final class InstanceDescription {
 
 		public boolean isInstanceOf(String string) {
 			EClass class1 = getFactory().getEClass(string);
@@ -106,17 +94,30 @@ public abstract class AbstractParseTreeRewriter {
 			Object get = described.eGet(f);
 			if (f.isMany()) {
 				List<?> list = (List<?>) get;
-				get = list.get(list.size() - counter);
+				get = list.get(counter-1);
 			}
 			featureConsumedCounter.put(feature, counter - 1);
 			return get;
+		}
+		
+		public boolean checkConsume(String feature) {
+			if (!isConsumable(feature))
+				return false;
+			Integer counter = lazyGet(feature);
+			EStructuralFeature f = getFeature(feature);
+			Object get = described.eGet(f);
+			if (f.isMany()) {
+				List<?> list = (List<?>) get;
+				get = list.get(counter-1);
+			}
+			featureConsumedCounter.put(feature, counter - 1);
+			return true;
 		}
 
 		private Integer lazyGet(String feature) {
 			Integer integer = featureConsumedCounter.get(feature);
 			if (integer == null) {
-				throw new IllegalArgumentException("Feature " + feature + " does not exist for type "
-						+ described.eClass().getName());
+				return 0;
 			}
 			return integer;
 		}
@@ -143,30 +144,16 @@ public abstract class AbstractParseTreeRewriter {
 		
 	}
 	
+	private StringBuffer buff = new StringBuffer();
 	
-	public class ConsumationState {
-		private String method;
-		private EObject object;
-		private Map<String, Integer> state;
-		private ConsumationState(String method, EObject object, Map<String, Integer> state) {
-			this.method = method;
-			this.object = object;
-			this.state = state;
-		}
-		
-		@Override
-		public boolean equals(Object obj) {
-			if (obj instanceof ConsumationState) {
-				ConsumationState sec = (ConsumationState) obj;
-				return sec.object == this.object && sec.method.equals(method) && state.equals(sec.state);
-			}
-			return super.equals(obj);
-		}
-		
-		@Override
-		public int hashCode() {
-			return object.hashCode() + method.hashCode() + state.hashCode();
-		}
+	protected void executeAction(Object element) {
+		if (buff.length()>0) 
+			buff.insert(0, " ");
+		buff.insert(0,element);
+	}
+	
+	public String getText() {
+		return buff.toString();
 	}
 
 }

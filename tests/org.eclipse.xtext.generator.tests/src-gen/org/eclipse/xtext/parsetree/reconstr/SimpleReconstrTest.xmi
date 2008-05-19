@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <parserRules name="Op">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:RuleCall" name="Term"/>
+      <abstractTokens xsi:type="xtext:Group" cardinality="*">
+        <abstractTokens xsi:type="xtext:Action" operator="+=" feature="values">
+          <typeName name="Op"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="values" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" name="Term"/>
+        </abstractTokens>
+      </abstractTokens>
+    </alternatives>
+    <type name="Expression"/>
+  </parserRules>
+  <parserRules name="Term">
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:RuleCall" name="Atom"/>
+      <groups xsi:type="xtext:RuleCall" name="Parens"/>
+    </alternatives>
+    <type name="Expression"/>
+  </parserRules>
+  <parserRules name="Atom">
+    <alternatives xsi:type="xtext:Assignment" feature="name" operator="=">
+      <terminal xsi:type="xtext:RuleCall" name="ID"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="Parens">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="'('"/>
+          <abstractTokens xsi:type="xtext:RuleCall" name="Op"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Keyword" value="')'"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="em" operator="=">
+        <terminal xsi:type="xtext:Keyword" value="'!'"/>
+      </abstractTokens>
+    </alternatives>
+    <type name="Expression"/>
+  </parserRules>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="&quot;http://simple/rewrite/test&quot;" name="simplerewritetest"/>
+</xtext:Grammar>
