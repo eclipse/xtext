@@ -25,6 +25,34 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 public abstract class AbstractEcoreElementFactory implements IElementFactory {
 
 	public EObject create(String fullTypeName) {
+		EClass clazz = getEClass(fullTypeName);
+		if (clazz != null && !(clazz.isAbstract() || clazz.isInterface()))
+			return clazz.getEPackage().getEFactoryInstance().create(clazz);
+		return null;
+	}
+
+	public void set(EObject _this, String feature, Object value) {
+		if (value instanceof Token) {
+			value = ((Token) value).getText();
+		}
+		EObject eo = (EObject) _this;
+		EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
+		eo.eSet(structuralFeature, value);
+	}
+
+	@SuppressWarnings("unchecked")
+	public void add(EObject _this, String feature, Object value) {
+	    if (value instanceof Token) {
+			value = ((Token) value).getText();
+		}
+		EObject eo = (EObject) _this;
+		EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
+		((Collection) eo.eGet(structuralFeature)).add(value);
+	}
+
+	protected abstract EPackage[] getEPackages(String alias);
+
+	public EClass getEClass(String fullTypeName) {
 		String[] split = fullTypeName.split("::");
 		String typeName = fullTypeName;
 		String alias = null;
@@ -34,47 +62,19 @@ public abstract class AbstractEcoreElementFactory implements IElementFactory {
 		}
 		EPackage[] packages = getEPackages(alias);
 		if (packages == null || packages.length == 0) {
-			throw new IllegalStateException(
-					"Couldn't find any epackages for alias '" + alias + "'");
+			throw new IllegalStateException("Couldn't find any epackages for alias '" + alias + "'");
 		}
 		for (EPackage package1 : packages) {
 			if (package1 == null)
-				throw new IllegalStateException(
-						"Problems loading EPackages for alias '" + alias
-								+ "' - one entry was null.");
+				throw new IllegalStateException("Problems loading EPackages for alias '" + alias
+						+ "' - one entry was null.");
 			EClassifier classifier = package1.getEClassifier(typeName);
 			if (classifier instanceof EClass) {
-				EClass clazz = (EClass) classifier;
-				EObject newObject = clazz.getEPackage().getEFactoryInstance()
-						.create(clazz);
-				return newObject;
+				return (EClass) classifier;
 			}
 		}
-
 		return null;
-	}
 
-	public void set(EObject _this, String feature, Object value) {
-		if (value instanceof Token) {
-			value = ((Token) value).getText();
-		}
-		EObject eo = (EObject) _this;
-		EStructuralFeature structuralFeature = eo.eClass()
-				.getEStructuralFeature(feature);
-		eo.eSet(structuralFeature, value);
 	}
-
-	@SuppressWarnings("unchecked")
-	public void add(EObject _this, String feature, Object value) {
-		if (value instanceof Token) {
-			value = ((Token) value).getText();
-		}
-		EObject eo = (EObject) _this;
-		EStructuralFeature structuralFeature = eo.eClass()
-				.getEStructuralFeature(feature);
-		((Collection) eo.eGet(structuralFeature)).add(value);
-	}
-
-	protected abstract EPackage[] getEPackages(String alias);
 
 }

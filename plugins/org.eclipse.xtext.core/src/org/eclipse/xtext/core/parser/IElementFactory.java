@@ -8,11 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.core.parser;
 
-import org.antlr.runtime.TokenStream;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * @author svenefftinge
+ * @author sven efftinge
  * 
  */
 public interface IElementFactory {

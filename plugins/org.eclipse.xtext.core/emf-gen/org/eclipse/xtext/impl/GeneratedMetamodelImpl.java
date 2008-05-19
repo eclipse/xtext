@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GeneratedMetamodelImpl.java,v 1.3 2008/05/16 17:30:49 jkohnlein Exp $
+ * $Id: GeneratedMetamodelImpl.java,v 1.4 2008/05/19 10:08:48 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
