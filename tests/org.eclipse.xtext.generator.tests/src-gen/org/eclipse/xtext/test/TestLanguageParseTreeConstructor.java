@@ -16,34 +16,32 @@ public class TestLanguageParseTreeConstructor extends AbstractParseTreeRewriter{
 	protected AbstractEcoreElementFactory getFactory() {
 		return factory;
 	}
+	
 
 
 public void proceedEntryRule(EObject obj) {
-	if (!proceedEntryRule(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedEntryRule(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedEntryRuleLock = new HashSet<ConsumationState>();
-
-protected boolean proceedEntryRule(InstanceDescription obj) {
-	obj.push("proceedEntryRule");
-	try {
-		if (! obj.isInstanceOf("Model"))
-		   return false;
-		
+protected void proceedEntryRule(InstanceDescription obj) {
+	
 /* xtext::Assignment */ 
 
-while (obj.isConsumable("multiFeature")){
+while (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("multiFeature"); 
+		}
+}.check() ){
 
-	if (!obj.isConsumable("multiFeature")) return false;
-    Object value = obj.consume("multiFeature");
+	Object value = obj.consume("multiFeature");
     
     	
 /* xtext::RuleCall */ 
 {
 
 	
-	proceedAbstractRule(getDescr((EObject)value,obj.isLookahead()));
+		proceedAbstractRule(getDescr((EObject)value));
 	
 
 }
@@ -52,110 +50,105 @@ while (obj.isConsumable("multiFeature")){
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 public void proceedAbstractRule(EObject obj) {
-	if (!proceedAbstractRule(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedAbstractRule(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedAbstractRuleLock = new HashSet<ConsumationState>();
-
-protected boolean proceedAbstractRule(InstanceDescription obj) {
-	obj.push("proceedAbstractRule");
-	try {
-		if (! obj.isInstanceOf("AbstractElement"))
-		   return false;
-		
+protected void proceedAbstractRule(InstanceDescription obj) {
+	
 /* xtext::Alternatives */ 
 {
 
-		if (proceedChoiceRule(obj.newLookaheadDescription())) {
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("ChoiceElement"); 
+		}
+}.check() ) {
 			
 /* xtext::RuleCall */ 
 {
 
 	
-	
-	proceedChoiceRule(obj);
-	
+		proceedChoiceRule(obj);
 	
 
 }
 
 		}
-	else		if (proceedReducibleRule(obj.newLookaheadDescription())) {
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("ReducibleElement"); 
+		}
+}.check() ) {
 			
 /* xtext::RuleCall */ 
 {
 
 	
-	
-	proceedReducibleRule(obj);
-	
+		proceedReducibleRule(obj);
 	
 
 }
 
 		}
+	
+		else {
+		    throw new IllegalStateException("No alternative matched");
+		}
+	
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 public void proceedChoiceRule(EObject obj) {
-	if (!proceedChoiceRule(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedChoiceRule(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedChoiceRuleLock = new HashSet<ConsumationState>();
+protected void proceedChoiceRule(InstanceDescription obj) {
+	
+/* xtext::Group */ 
+{
 
-protected boolean proceedChoiceRule(InstanceDescription obj) {
-	obj.push("proceedChoiceRule");
-	try {
-		if (! obj.isInstanceOf("ChoiceElement"))
-		   return false;
+		
+/* xtext::Assignment */ 
+{
+
+	Object value = obj.consume("name");
+    
+    	
+    	executeAction(value);
+    	
+    
+
+}
+
 		
 /* xtext::Group */ 
 {
 
 		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Keyword */ 
-{
-
-	if (!obj.isLookahead())
-    	System.out.print("choice");
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
 /* xtext::Assignment */ 
 
-if (obj.isConsumable("optionalKeyword")){
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("optionalKeyword"); 
+		}
+}.check() ){
 
-	if (!obj.isConsumable("optionalKeyword")) return false;
-    Object value = obj.consume("optionalKeyword");
+	Object value = obj.consume("optionalKeyword");
     
     	
     	
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("optional");
+	executeAction("optional");
 
 }
 
@@ -164,114 +157,93 @@ if (obj.isConsumable("optionalKeyword")){
 
 }
 
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
 		
-/* xtext::Assignment */ 
+/* xtext::Keyword */ 
 {
 
-	if (!obj.isConsumable("name")) return false;
-    Object value = obj.consume("name");
-    
-    	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
-    	
-    
+	executeAction("choice");
 
 }
 
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
+
+}
+
 }
 
 public void proceedReducibleRule(EObject obj) {
-	if (!proceedReducibleRule(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedReducibleRule(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedReducibleRuleLock = new HashSet<ConsumationState>();
-
-protected boolean proceedReducibleRule(InstanceDescription obj) {
-	obj.push("proceedReducibleRule");
-	try {
-		if (! obj.isInstanceOf("ReducibleElement"))
-		   return false;
-		
+protected void proceedReducibleRule(InstanceDescription obj) {
+	
 /* xtext::Group */ 
 {
 
 		
 /* xtext::Group */ 
-{
+
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("actionFeature")&&obj.isOfType("ReducibleComposite") && 
+	obj.checkConsume("actionFeature") && obj.isConsumed(); 
+		}
+}.check() ){
 
 		
-/* xtext::Keyword */ 
+/* xtext::Assignment */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("reducible");
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
+	Object value = obj.consume("actionFeature");
+    
+    	
 /* xtext::RuleCall */ 
 {
 
 	
-	
-	proceedTerminalRule(obj);
-	
+		proceedTerminalRule(getDescr((EObject)value));
 	
 
 }
 
+    
 
 }
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Group */ 
-
-if ((obj.isOfType("ReducibleComposite") && obj.isConsumable("actionFeature"))){
 
 		
 /* xtext::Action */ 
 {
 
-	if (!obj.isConsumable("actionFeature")) return false;
 	EObject newObj = (EObject) obj.consume("actionFeature");
-	proceedReducibleRule(getDescr(newObj,obj.isLookahead()));
+	obj = getDescr(newObj);
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
+
+}
+
 		
-/* xtext::Assignment */ 
+/* xtext::Group */ 
 {
 
-	if (!obj.isConsumable("actionFeature")) return false;
-    Object value = obj.consume("actionFeature");
-    
-    	
+		
 /* xtext::RuleCall */ 
 {
 
 	
-	proceedTerminalRule(getDescr((EObject)value,obj.isLookahead()));
+		proceedTerminalRule(obj);
 	
 
 }
 
-    
+		
+/* xtext::Keyword */ 
+{
+
+	executeAction("reducible");
 
 }
 
@@ -281,43 +253,26 @@ if ((obj.isOfType("ReducibleComposite") && obj.isConsumable("actionFeature"))){
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 public void proceedTerminalRule(EObject obj) {
-	if (!proceedTerminalRule(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedTerminalRule(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedTerminalRuleLock = new HashSet<ConsumationState>();
-
-protected boolean proceedTerminalRule(InstanceDescription obj) {
-	obj.push("proceedTerminalRule");
-	try {
-		if (! obj.isInstanceOf("TerminalElement"))
-		   return false;
-		
+protected void proceedTerminalRule(InstanceDescription obj) {
+	
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("stringFeature")) return false;
-    Object value = obj.consume("stringFeature");
+	Object value = obj.consume("stringFeature");
     
     	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
+    	executeAction(value);
     	
     
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 }

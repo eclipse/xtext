@@ -16,34 +16,32 @@ public class SimpleTest2ParseTreeConstructor extends AbstractParseTreeRewriter{
 	protected AbstractEcoreElementFactory getFactory() {
 		return factory;
 	}
+	
 
 
 public void proceedModel(EObject obj) {
-	if (!proceedModel(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedModel(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedModelLock = new HashSet<ConsumationState>();
-
-protected boolean proceedModel(InstanceDescription obj) {
-	obj.push("proceedModel");
-	try {
-		if (! obj.isInstanceOf("Model"))
-		   return false;
-		
+protected void proceedModel(InstanceDescription obj) {
+	
 /* xtext::Assignment */ 
 
-while (obj.isConsumable("contents")){
+while (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("contents"); 
+		}
+}.check() ){
 
-	if (!obj.isConsumable("contents")) return false;
-    Object value = obj.consume("contents");
+	Object value = obj.consume("contents");
     
     	
 /* xtext::RuleCall */ 
 {
 
 	
-	proceedChild(getDescr((EObject)value,obj.isLookahead()));
+		proceedChild(getDescr((EObject)value));
 	
 
 }
@@ -52,39 +50,36 @@ while (obj.isConsumable("contents")){
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 public void proceedChild(EObject obj) {
-	if (!proceedChild(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedChild(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedChildLock = new HashSet<ConsumationState>();
-
-protected boolean proceedChild(InstanceDescription obj) {
-	obj.push("proceedChild");
-	try {
-		if (! obj.isInstanceOf("Child"))
-		   return false;
-		
+protected void proceedChild(InstanceDescription obj) {
+	
 /* xtext::Group */ 
 {
 
 		
-/* xtext::Group */ 
+/* xtext::Keyword */ 
 {
+
+	executeAction("}");
+
+}
 
 		
 /* xtext::Group */ 
 {
 
 		
-/* xtext::Group */ 
+/* xtext::Keyword */ 
 {
+
+	executeAction("{");
+
+}
 
 		
 /* xtext::Group */ 
@@ -92,108 +87,87 @@ protected boolean proceedChild(InstanceDescription obj) {
 
 		
 /* xtext::Assignment */ 
-
-if (obj.isConsumable("optional")){
-
-	if (!obj.isConsumable("optional")) return false;
-    Object value = obj.consume("optional");
-    
-    	
-    	
-/* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("optional");
-
-}
-
+	Object value = obj.consume("number");
+    
+    	
+    	executeAction(value);
     	
     
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
 		
-/* xtext::Keyword */ 
+/* xtext::Group */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("keyword");
-
-}
-
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("name")) return false;
-    Object value = obj.consume("name");
+	Object value = obj.consume("name");
     
     	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
+    	executeAction(value);
     	
     
 
 }
 
+		
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Keyword */ 
+{
+
+	executeAction("keyword");
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Assignment */ 
-{
 
-	if (!obj.isConsumable("number")) return false;
-    Object value = obj.consume("number");
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("optional"); 
+		}
+}.check() ){
+
+	Object value = obj.consume("optional");
     
     	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
     	
-    
-
-}
-
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("{");
+	executeAction("optional");
+
+}
+
+    	
+    
 
 }
 
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Keyword */ 
-{
-
-	if (!obj.isLookahead())
-    	System.out.print("}");
 
 }
 
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
+
+}
+
+
+}
+
 }
 
 }

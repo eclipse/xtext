@@ -16,42 +16,40 @@ public class XtextGrammarTestParseTreeConstructor extends AbstractParseTreeRewri
 	protected AbstractEcoreElementFactory getFactory() {
 		return factory;
 	}
+	
 
 
 public void proceedGrammar(EObject obj) {
-	if (!proceedGrammar(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedGrammar(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedGrammarLock = new HashSet<ConsumationState>();
-
-protected boolean proceedGrammar(InstanceDescription obj) {
-	obj.push("proceedGrammar");
-	try {
-		if (! obj.isInstanceOf("Grammar"))
-		   return false;
-		
+protected void proceedGrammar(InstanceDescription obj) {
+	
 /* xtext::Group */ 
 {
 
 		
 /* xtext::Group */ 
-{
+
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("lexerRules")&&true&&true; 
+		}
+}.check() ){
 
 		
 /* xtext::Assignment */ 
+{
 
-while (obj.isConsumable("metamodelDeclarations")){
-
-	if (!obj.isConsumable("metamodelDeclarations")) return false;
-    Object value = obj.consume("metamodelDeclarations");
+	Object value = obj.consume("lexerRules");
     
     	
 /* xtext::RuleCall */ 
 {
 
 	
-	proceedAbstractMetamodelDeclaration(getDescr((EObject)value,obj.isLookahead()));
+		proceedLexerRule(getDescr((EObject)value));
 	
 
 }
@@ -59,38 +57,6 @@ while (obj.isConsumable("metamodelDeclarations")){
     
 
 }
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Assignment */ 
-
-while (obj.isConsumable("parserRules")){
-
-	if (!obj.isConsumable("parserRules")) return false;
-    Object value = obj.consume("parserRules");
-    
-    	
-/* xtext::RuleCall */ 
-{
-
-	
-	proceedParserRule(getDescr((EObject)value,obj.isLookahead()));
-	
-
-}
-
-    
-
-}
-
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Group */ 
-
-if ((obj.isConsumable("lexerRules"))){
 
 		
 /* xtext::Group */ 
@@ -100,38 +66,72 @@ if ((obj.isConsumable("lexerRules"))){
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("lexing");
+	executeAction(":");
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print(":");
+	executeAction("lexing");
 
 }
 
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
+
+}
+
 		
-/* xtext::Assignment */ 
+/* xtext::Group */ 
 {
 
-	if (!obj.isConsumable("lexerRules")) return false;
-    Object value = obj.consume("lexerRules");
+		
+/* xtext::Assignment */ 
+
+while (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("parserRules"); 
+		}
+}.check() ){
+
+	Object value = obj.consume("parserRules");
     
     	
 /* xtext::RuleCall */ 
 {
 
 	
-	proceedLexerRule(getDescr((EObject)value,obj.isLookahead()));
+		proceedParserRule(getDescr((EObject)value));
+	
+
+}
+
+    
+
+}
+
+		
+/* xtext::Assignment */ 
+
+while (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("metamodelDeclarations"); 
+		}
+}.check() ){
+
+	Object value = obj.consume("metamodelDeclarations");
+    
+    	
+/* xtext::RuleCall */ 
+{
+
+	
+		proceedAbstractMetamodelDeclaration(getDescr((EObject)value));
 	
 
 }
@@ -146,217 +146,196 @@ if ((obj.isConsumable("lexerRules"))){
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 public void proceedAbstractRule(EObject obj) {
-	if (!proceedAbstractRule(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedAbstractRule(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedAbstractRuleLock = new HashSet<ConsumationState>();
-
-protected boolean proceedAbstractRule(InstanceDescription obj) {
-	obj.push("proceedAbstractRule");
-	try {
-		if (! obj.isInstanceOf("AbstractRule"))
-		   return false;
-		
+protected void proceedAbstractRule(InstanceDescription obj) {
+	
 /* xtext::Alternatives */ 
 {
 
-		if (proceedLexerRule(obj.newLookaheadDescription())) {
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("LexerRule"); 
+		}
+}.check() ) {
 			
 /* xtext::RuleCall */ 
 {
 
 	
-	
-	proceedLexerRule(obj);
-	
+		proceedLexerRule(obj);
 	
 
 }
 
 		}
-	else		if (proceedParserRule(obj.newLookaheadDescription())) {
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("ParserRule"); 
+		}
+}.check() ) {
 			
 /* xtext::RuleCall */ 
 {
 
 	
-	
-	proceedParserRule(obj);
-	
+		proceedParserRule(obj);
 	
 
 }
 
 		}
+	
+		else {
+		    throw new IllegalStateException("No alternative matched");
+		}
+	
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 public void proceedAbstractMetamodelDeclaration(EObject obj) {
-	if (!proceedAbstractMetamodelDeclaration(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedAbstractMetamodelDeclaration(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedAbstractMetamodelDeclarationLock = new HashSet<ConsumationState>();
-
-protected boolean proceedAbstractMetamodelDeclaration(InstanceDescription obj) {
-	obj.push("proceedAbstractMetamodelDeclaration");
-	try {
-		if (! obj.isInstanceOf("AbstractMetamodelDeclaration"))
-		   return false;
-		
+protected void proceedAbstractMetamodelDeclaration(InstanceDescription obj) {
+	
 /* xtext::Alternatives */ 
 {
 
-		if (proceedGeneratedMetamodel(obj.newLookaheadDescription())) {
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("GeneratedMetamodel"); 
+		}
+}.check() ) {
 			
 /* xtext::RuleCall */ 
 {
 
 	
-	
-	proceedGeneratedMetamodel(obj);
-	
+		proceedGeneratedMetamodel(obj);
 	
 
 }
 
 		}
-	else		if (proceedReferencedMetamodel(obj.newLookaheadDescription())) {
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("ReferencedMetamodel"); 
+		}
+}.check() ) {
 			
 /* xtext::RuleCall */ 
 {
 
 	
-	
-	proceedReferencedMetamodel(obj);
-	
+		proceedReferencedMetamodel(obj);
 	
 
 }
 
 		}
+	
+		else {
+		    throw new IllegalStateException("No alternative matched");
+		}
+	
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 public void proceedGeneratedMetamodel(EObject obj) {
-	if (!proceedGeneratedMetamodel(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedGeneratedMetamodel(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedGeneratedMetamodelLock = new HashSet<ConsumationState>();
-
-protected boolean proceedGeneratedMetamodel(InstanceDescription obj) {
-	obj.push("proceedGeneratedMetamodel");
-	try {
-		if (! obj.isInstanceOf("GeneratedMetamodel"))
-		   return false;
-		
+protected void proceedGeneratedMetamodel(InstanceDescription obj) {
+	
 /* xtext::Group */ 
 {
 
 		
 /* xtext::Group */ 
-{
+
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("alias")&&true; 
+		}
+}.check() ){
 
 		
-/* xtext::Group */ 
+/* xtext::Assignment */ 
 {
+
+	Object value = obj.consume("alias");
+    
+    	
+    	executeAction(value);
+    	
+    
+
+}
 
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("generate");
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Assignment */ 
-{
-
-	if (!obj.isConsumable("name")) return false;
-    Object value = obj.consume("name");
-    
-    	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
-    	
-    
+	executeAction("as");
 
 }
 
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Assignment */ 
-{
-
-	if (!obj.isConsumable("nsURI")) return false;
-    Object value = obj.consume("nsURI");
-    
-    	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
-    	
-    
-
-}
-
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Group */ 
+{
 
-if ((obj.isConsumable("alias"))){
+		
+/* xtext::Assignment */ 
+{
+
+	Object value = obj.consume("nsURI");
+    
+    	
+    	executeAction(value);
+    	
+    
+
+}
+
+		
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Assignment */ 
+{
+
+	Object value = obj.consume("name");
+    
+    	
+    	executeAction(value);
+    	
+    
+
+}
 
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("as");
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Assignment */ 
-{
-
-	if (!obj.isConsumable("alias")) return false;
-    Object value = obj.consume("alias");
-    
-    	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
-    	
-    
+	executeAction("generate");
 
 }
 
@@ -366,88 +345,76 @@ if ((obj.isConsumable("alias"))){
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
+
+}
+
 }
 
 public void proceedReferencedMetamodel(EObject obj) {
-	if (!proceedReferencedMetamodel(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedReferencedMetamodel(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedReferencedMetamodelLock = new HashSet<ConsumationState>();
-
-protected boolean proceedReferencedMetamodel(InstanceDescription obj) {
-	obj.push("proceedReferencedMetamodel");
-	try {
-		if (! obj.isInstanceOf("ReferencedMetamodel"))
-		   return false;
-		
+protected void proceedReferencedMetamodel(InstanceDescription obj) {
+	
 /* xtext::Group */ 
 {
 
 		
 /* xtext::Group */ 
+
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("alias")&&true; 
+		}
+}.check() ){
+
+		
+/* xtext::Assignment */ 
 {
+
+	Object value = obj.consume("alias");
+    
+    	
+    	executeAction(value);
+    	
+    
+
+}
 
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("import");
+	executeAction("as");
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
+
+}
+
+		
+/* xtext::Group */ 
+{
+
 		
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("uri")) return false;
-    Object value = obj.consume("uri");
+	Object value = obj.consume("uri");
     
     	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
+    	executeAction(value);
     	
     
 
 }
-
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Group */ 
-
-if ((obj.isConsumable("alias"))){
 
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("as");
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Assignment */ 
-{
-
-	if (!obj.isConsumable("alias")) return false;
-    Object value = obj.consume("alias");
-    
-    	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
-    	
-    
+	executeAction("import");
 
 }
 
@@ -457,33 +424,14 @@ if ((obj.isConsumable("alias"))){
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 public void proceedLexerRule(EObject obj) {
-	if (!proceedLexerRule(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedLexerRule(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedLexerRuleLock = new HashSet<ConsumationState>();
-
-protected boolean proceedLexerRule(InstanceDescription obj) {
-	obj.push("proceedLexerRule");
-	try {
-		if (! obj.isInstanceOf("LexerRule"))
-		   return false;
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Group */ 
-{
-
-		
+protected void proceedLexerRule(InstanceDescription obj) {
+	
 /* xtext::Group */ 
 {
 
@@ -491,78 +439,73 @@ protected boolean proceedLexerRule(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("name")) return false;
-    Object value = obj.consume("name");
+	Object value = obj.consume("body");
     
     	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
+    	executeAction(value);
     	
     
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Group */ 
-
-if ((obj.isConsumable("tokenType"))){
+{
 
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("tokentype");
+	executeAction(":");
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
+		
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Group */ 
+
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("tokenType")&&true; 
+		}
+}.check() ){
+
 		
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("tokenType")) return false;
-    Object value = obj.consume("tokenType");
+	Object value = obj.consume("tokenType");
     
     	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
+    	executeAction(value);
     	
     
 
 }
 
-
-}
-
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print(":");
+	executeAction("tokentype");
 
 }
 
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("body")) return false;
-    Object value = obj.consume("body");
+	Object value = obj.consume("name");
     
     	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
+    	executeAction(value);
     	
     
 
@@ -571,84 +514,47 @@ if ((obj.isConsumable("tokenType"))){
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
+
+}
+
+
+}
+
 }
 
 public void proceedParserRule(EObject obj) {
-	if (!proceedParserRule(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedParserRule(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedParserRuleLock = new HashSet<ConsumationState>();
-
-protected boolean proceedParserRule(InstanceDescription obj) {
-	obj.push("proceedParserRule");
-	try {
-		if (! obj.isInstanceOf("ParserRule"))
-		   return false;
-		
+protected void proceedParserRule(InstanceDescription obj) {
+	
 /* xtext::Group */ 
 {
-
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Assignment */ 
-{
-
-	if (!obj.isConsumable("name")) return false;
-    Object value = obj.consume("name");
-    
-    	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
-    	
-    
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Group */ 
-
-if ((obj.isConsumable("type"))){
 
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("returns");
+	executeAction(";");
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
+		
+/* xtext::Group */ 
+{
+
 		
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("type")) return false;
-    Object value = obj.consume("type");
+	Object value = obj.consume("alternatives");
     
     	
 /* xtext::RuleCall */ 
 {
 
 	
-	proceedTypeRef(getDescr((EObject)value,obj.isLookahead()));
+		proceedAlternatives(getDescr((EObject)value));
 	
 
 }
@@ -657,39 +563,44 @@ if ((obj.isConsumable("type"))){
 
 }
 
+		
+/* xtext::Group */ 
+{
 
-}
-
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print(":");
+	executeAction(":");
 
 }
 
+		
+/* xtext::Group */ 
+{
 
-}
+		
+/* xtext::Group */ 
 
-	if (!obj.isLookahead()) System.out.print(" ");
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("type")&&true; 
+		}
+}.check() ){
+
 		
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("alternatives")) return false;
-    Object value = obj.consume("alternatives");
+	Object value = obj.consume("type");
     
     	
 /* xtext::RuleCall */ 
 {
 
 	
-	proceedAlternatives(getDescr((EObject)value,obj.isLookahead()));
+		proceedTypeRef(getDescr((EObject)value));
 	
 
 }
@@ -698,88 +609,92 @@ if ((obj.isConsumable("type"))){
 
 }
 
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print(";");
+	executeAction("returns");
 
 }
 
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
+		
+/* xtext::Assignment */ 
+{
+
+	Object value = obj.consume("name");
+    
+    	
+    	executeAction(value);
+    	
+    
+
+}
+
+
+}
+
+
+}
+
+
+}
+
+
+}
+
 }
 
 public void proceedTypeRef(EObject obj) {
-	if (!proceedTypeRef(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedTypeRef(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedTypeRefLock = new HashSet<ConsumationState>();
-
-protected boolean proceedTypeRef(InstanceDescription obj) {
-	obj.push("proceedTypeRef");
-	try {
-		if (! obj.isInstanceOf("TypeRef"))
-		   return false;
-		
+protected void proceedTypeRef(InstanceDescription obj) {
+	
 /* xtext::Group */ 
 {
-
-		
-/* xtext::Group */ 
-
-if ((obj.isConsumable("alias"))){
 
 		
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("alias")) return false;
-    Object value = obj.consume("alias");
+	Object value = obj.consume("name");
     
     	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
+    	executeAction(value);
     	
     
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
+		
+/* xtext::Group */ 
+
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&obj.checkConsume("alias"); 
+		}
+}.check() ){
+
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("::");
+	executeAction("::");
 
 }
 
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("name")) return false;
-    Object value = obj.consume("name");
+	Object value = obj.consume("alias");
     
     	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
+    	executeAction(value);
     	
     
 
@@ -788,83 +703,43 @@ if ((obj.isConsumable("alias"))){
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
+
+}
+
 }
 
 public void proceedAlternatives(EObject obj) {
-	if (!proceedAlternatives(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedAlternatives(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedAlternativesLock = new HashSet<ConsumationState>();
-
-protected boolean proceedAlternatives(InstanceDescription obj) {
-	obj.push("proceedAlternatives");
-	try {
-		if (! obj.isInstanceOf("AbstractElement"))
-		   return false;
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::RuleCall */ 
-{
-
+protected void proceedAlternatives(InstanceDescription obj) {
 	
-	
-	{
-		InstanceDescription temp = obj;
-		obj = obj.newLookaheadDescription();
-		
-/* xtext::Group */ 
-
-while (((obj.isOfType("Alternatives")) && obj.isConsumable("groups"))){
-
-		
 /* xtext::Group */ 
 {
 
 		
-/* xtext::Action */ 
-{
+/* xtext::Group */ 
 
-	if (!obj.isConsumable("groups")) return false;
-	EObject newObj = (EObject) obj.consume("groups");
-	proceedAlternatives(getDescr(newObj,obj.isLookahead()));
+while (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("groups")&&true&&obj.isOfType("Alternatives") && 
+	obj.checkConsume("groups") && obj.isConsumed(); 
+		}
+}.check() ){
 
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Keyword */ 
-{
-
-	if (!obj.isLookahead())
-    	System.out.print("|");
-
-}
-
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("groups")) return false;
-    Object value = obj.consume("groups");
+	Object value = obj.consume("groups");
     
     	
 /* xtext::RuleCall */ 
 {
 
 	
-	proceedGroup(getDescr((EObject)value,obj.isLookahead()));
+		proceedGroup(getDescr((EObject)value));
 	
 
 }
@@ -873,139 +748,80 @@ while (((obj.isOfType("Alternatives")) && obj.isConsumable("groups"))){
 
 }
 
-
-}
-
-		if (!obj.isConsumed() && !obj.isRecursion()) //((obj.isOfType("Alternatives")) && obj.isConsumable("groups"))
-			proceedGroup(temp);
-		obj = temp;
-	}
-	
-	
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Group */ 
-
-while (((obj.isOfType("Alternatives")) && obj.isConsumable("groups"))){
-
 		
 /* xtext::Group */ 
 {
+
+		
+/* xtext::Keyword */ 
+{
+
+	executeAction("|");
+
+}
 
 		
 /* xtext::Action */ 
 {
 
-	if (!obj.isConsumable("groups")) return false;
 	EObject newObj = (EObject) obj.consume("groups");
-	proceedAlternatives(getDescr(newObj,obj.isLookahead()));
+	obj = getDescr(newObj);
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
+
+}
+
+
+}
+
 		
-/* xtext::Keyword */ 
-{
-
-	if (!obj.isLookahead())
-    	System.out.print("|");
-
-}
-
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Assignment */ 
-{
-
-	if (!obj.isConsumable("groups")) return false;
-    Object value = obj.consume("groups");
-    
-    	
 /* xtext::RuleCall */ 
 {
 
 	
-	proceedGroup(getDescr((EObject)value,obj.isLookahead()));
+		proceedGroup(obj);
 	
 
 }
 
-    
 
 }
 
-
-}
-
-
-}
-
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 public void proceedGroup(EObject obj) {
-	if (!proceedGroup(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedGroup(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedGroupLock = new HashSet<ConsumationState>();
-
-protected boolean proceedGroup(InstanceDescription obj) {
-	obj.push("proceedGroup");
-	try {
-		if (! obj.isInstanceOf("AbstractElement"))
-		   return false;
-		
+protected void proceedGroup(InstanceDescription obj) {
+	
 /* xtext::Group */ 
 {
 
 		
-/* xtext::RuleCall */ 
-{
-
-	
-	
-	{
-		InstanceDescription temp = obj;
-		obj = obj.newLookaheadDescription();
-		
 /* xtext::Group */ 
 
-while ((obj.isOfType("Group") && obj.isConsumable("abstractTokens"))){
+while (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("abstractTokens")&&obj.isOfType("Group") && 
+	obj.checkConsume("abstractTokens") && obj.isConsumed(); 
+		}
+}.check() ){
 
-		
-/* xtext::Action */ 
-{
-
-	if (!obj.isConsumable("abstractTokens")) return false;
-	EObject newObj = (EObject) obj.consume("abstractTokens");
-	proceedGroup(getDescr(newObj,obj.isLookahead()));
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("abstractTokens")) return false;
-    Object value = obj.consume("abstractTokens");
+	Object value = obj.consume("abstractTokens");
     
     	
 /* xtext::RuleCall */ 
 {
 
 	
-	proceedAbstractToken(getDescr((EObject)value,obj.isLookahead()));
+		proceedAbstractToken(getDescr((EObject)value));
 	
 
 }
@@ -1013,186 +829,160 @@ while ((obj.isOfType("Group") && obj.isConsumable("abstractTokens"))){
     
 
 }
-
-
-}
-
-		if (!obj.isConsumed() && !obj.isRecursion()) //(obj.isOfType("Group") && obj.isConsumable("abstractTokens"))
-			proceedAbstractToken(temp);
-		obj = temp;
-	}
-	
-	
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Group */ 
-
-while ((obj.isOfType("Group") && obj.isConsumable("abstractTokens"))){
 
 		
 /* xtext::Action */ 
 {
 
-	if (!obj.isConsumable("abstractTokens")) return false;
 	EObject newObj = (EObject) obj.consume("abstractTokens");
-	proceedGroup(getDescr(newObj,obj.isLookahead()));
+	obj = getDescr(newObj);
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Assignment */ 
-{
 
-	if (!obj.isConsumable("abstractTokens")) return false;
-    Object value = obj.consume("abstractTokens");
-    
-    	
+}
+
+		
 /* xtext::RuleCall */ 
 {
 
 	
-	proceedAbstractToken(getDescr((EObject)value,obj.isLookahead()));
+		proceedAbstractToken(obj);
 	
 
 }
 
-    
 
 }
 
-
-}
-
-
-}
-
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 public void proceedAbstractToken(EObject obj) {
-	if (!proceedAbstractToken(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedAbstractToken(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedAbstractTokenLock = new HashSet<ConsumationState>();
-
-protected boolean proceedAbstractToken(InstanceDescription obj) {
-	obj.push("proceedAbstractToken");
-	try {
-		if (! obj.isInstanceOf("AbstractElement"))
-		   return false;
-		
+protected void proceedAbstractToken(InstanceDescription obj) {
+	
 /* xtext::Group */ 
 {
 
 		
-/* xtext::Alternatives */ 
-{
-
-		if ((proceedAssignment(obj.newLookaheadDescription()) || proceedAction(obj.newLookaheadDescription()))) {
-			
-/* xtext::Alternatives */ 
-{
-
-		if (proceedAssignment(obj.newLookaheadDescription())) {
-			
-/* xtext::RuleCall */ 
-{
-
-	
-	
-	proceedAssignment(obj);
-	
-	
-
-}
-
-		}
-	else		if (proceedAction(obj.newLookaheadDescription())) {
-			
-/* xtext::RuleCall */ 
-{
-
-	
-	
-	proceedAction(obj);
-	
-	
-
-}
-
-		}
-
-}
-
-		}
-	else		if (proceedAbstractTerminal(obj.newLookaheadDescription())) {
-			
-/* xtext::RuleCall */ 
-{
-
-	
-	
-	proceedAbstractTerminal(obj);
-	
-	
-
-}
-
-		}
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
 /* xtext::Assignment */ 
 
-if (obj.isConsumable("cardinality")){
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("cardinality"); 
+		}
+}.check() ){
 
-	if (!obj.isConsumable("cardinality")) return false;
-    Object value = obj.consume("cardinality");
+	Object value = obj.consume("cardinality");
     
     	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
+    	executeAction(value);
     	
     
+
+}
+
+		
+/* xtext::Alternatives */ 
+{
+
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("Assignment"); 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("Action"); 
+		}
+}.check() ) {
+			
+/* xtext::Alternatives */ 
+{
+
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("Assignment"); 
+		}
+}.check() ) {
+			
+/* xtext::RuleCall */ 
+{
+
+	
+		proceedAssignment(obj);
+	
+
+}
+
+		}
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("Action"); 
+		}
+}.check() ) {
+			
+/* xtext::RuleCall */ 
+{
+
+	
+		proceedAction(obj);
+	
+
+}
+
+		}
+	
+		else {
+		    throw new IllegalStateException("No alternative matched");
+		}
+	
+
+}
+
+		}
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("AbstractElement"); 
+		}
+}.check() ) {
+			
+/* xtext::RuleCall */ 
+{
+
+	
+		proceedAbstractTerminal(obj);
+	
+
+}
+
+		}
+	
+		else {
+		    throw new IllegalStateException("No alternative matched");
+		}
+	
 
 }
 
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 public void proceedAssignment(EObject obj) {
-	if (!proceedAssignment(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedAssignment(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedAssignmentLock = new HashSet<ConsumationState>();
-
-protected boolean proceedAssignment(InstanceDescription obj) {
-	obj.push("proceedAssignment");
-	try {
-		if (! obj.isInstanceOf("Assignment"))
-		   return false;
-		
-/* xtext::Group */ 
-{
-
-		
+protected void proceedAssignment(InstanceDescription obj) {
+	
 /* xtext::Group */ 
 {
 
@@ -1200,50 +990,14 @@ protected boolean proceedAssignment(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("feature")) return false;
-    Object value = obj.consume("feature");
-    
-    	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
-    	
-    
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Assignment */ 
-{
-
-	if (!obj.isConsumable("operator")) return false;
-    Object value = obj.consume("operator");
-    
-    	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
-    	
-    
-
-}
-
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Assignment */ 
-{
-
-	if (!obj.isConsumable("terminal")) return false;
-    Object value = obj.consume("terminal");
+	Object value = obj.consume("terminal");
     
     	
 /* xtext::RuleCall */ 
 {
 
 	
-	proceedAbstractTerminal(getDescr((EObject)value,obj.isLookahead()));
+		proceedAbstractTerminal(getDescr((EObject)value));
 	
 
 }
@@ -1252,40 +1006,50 @@ protected boolean proceedAssignment(InstanceDescription obj) {
 
 }
 
+		
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Assignment */ 
+{
+
+	Object value = obj.consume("operator");
+    
+    	
+    	executeAction(value);
+    	
+    
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
+		
+/* xtext::Assignment */ 
+{
+
+	Object value = obj.consume("feature");
+    
+    	
+    	executeAction(value);
+    	
+    
+
+}
+
+
+}
+
+
+}
+
 }
 
 public void proceedAction(EObject obj) {
-	if (!proceedAction(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedAction(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedActionLock = new HashSet<ConsumationState>();
-
-protected boolean proceedAction(InstanceDescription obj) {
-	obj.push("proceedAction");
-	try {
-		if (! obj.isInstanceOf("Action"))
-		   return false;
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Group */ 
-{
-
-		
+protected void proceedAction(InstanceDescription obj) {
+	
 /* xtext::Group */ 
 {
 
@@ -1293,55 +1057,99 @@ protected boolean proceedAction(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("{");
+	executeAction("}");
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Group */ 
 {
 
 		
-/* xtext::Keyword */ 
-{
+/* xtext::Group */ 
 
-	if (!obj.isLookahead())
-    	System.out.print("current");
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&obj.checkConsume("operator")&&obj.checkConsume("feature")&&true; 
+		}
+}.check() ){
 
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("=");
+	executeAction("current");
 
 }
 
+		
+/* xtext::Group */ 
+{
 
-}
-
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("typeName")) return false;
-    Object value = obj.consume("typeName");
+	Object value = obj.consume("operator");
+    
+    	
+    	executeAction(value);
+    	
+    
+
+}
+
+		
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Assignment */ 
+{
+
+	Object value = obj.consume("feature");
+    
+    	
+    	executeAction(value);
+    	
+    
+
+}
+
+		
+/* xtext::Keyword */ 
+{
+
+	executeAction(".");
+
+}
+
+
+}
+
+
+}
+
+
+}
+
+		
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Assignment */ 
+{
+
+	Object value = obj.consume("typeName");
     
     	
 /* xtext::RuleCall */ 
 {
 
 	
-	proceedTypeRef(getDescr((EObject)value,obj.isLookahead()));
+		proceedTypeRef(getDescr((EObject)value));
 	
 
 }
@@ -1350,198 +1158,161 @@ protected boolean proceedAction(InstanceDescription obj) {
 
 }
 
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Group */ 
-
-if ((((obj.isConsumable("feature")) && obj.isConsumable("operator")))){
-
 		
 /* xtext::Group */ 
 {
 
 		
 /* xtext::Group */ 
-{
+
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&true; 
+		}
+}.check() ){
 
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print(".");
+	executeAction("=");
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Assignment */ 
-{
-
-	if (!obj.isConsumable("feature")) return false;
-    Object value = obj.consume("feature");
-    
-    	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
-    	
-    
-
-}
-
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
-		
-/* xtext::Assignment */ 
-{
-
-	if (!obj.isConsumable("operator")) return false;
-    Object value = obj.consume("operator");
-    
-    	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
-    	
-    
-
-}
-
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("current");
+	executeAction("current");
 
 }
 
 
 }
 
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("}");
+	executeAction("{");
 
 }
 
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
+
+}
+
+
+}
+
+
+}
+
 }
 
 public void proceedAbstractTerminal(EObject obj) {
-	if (!proceedAbstractTerminal(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedAbstractTerminal(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedAbstractTerminalLock = new HashSet<ConsumationState>();
-
-protected boolean proceedAbstractTerminal(InstanceDescription obj) {
-	obj.push("proceedAbstractTerminal");
-	try {
-		if (! obj.isInstanceOf("AbstractElement"))
-		   return false;
-		
+protected void proceedAbstractTerminal(InstanceDescription obj) {
+	
 /* xtext::Alternatives */ 
 {
 
-		if ((proceedKeyword(obj.newLookaheadDescription()) || proceedRuleCall(obj.newLookaheadDescription()))) {
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("Keyword"); 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("RuleCall"); 
+		}
+}.check() ) {
 			
 /* xtext::Alternatives */ 
 {
 
-		if (proceedKeyword(obj.newLookaheadDescription())) {
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("Keyword"); 
+		}
+}.check() ) {
 			
 /* xtext::RuleCall */ 
 {
 
 	
-	
-	proceedKeyword(obj);
-	
+		proceedKeyword(obj);
 	
 
 }
 
 		}
-	else		if (proceedRuleCall(obj.newLookaheadDescription())) {
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("RuleCall"); 
+		}
+}.check() ) {
 			
 /* xtext::RuleCall */ 
 {
 
 	
-	
-	proceedRuleCall(obj);
-	
+		proceedRuleCall(obj);
 	
 
 }
 
 		}
+	
+		else {
+		    throw new IllegalStateException("No alternative matched");
+		}
+	
 
 }
 
 		}
-	else		if (proceedParenthesizedElement(obj.newLookaheadDescription())) {
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("AbstractElement"); 
+		}
+}.check() ) {
 			
 /* xtext::RuleCall */ 
 {
 
 	
-	
-	proceedParenthesizedElement(obj);
-	
+		proceedParenthesizedElement(obj);
 	
 
 }
 
 		}
+	
+		else {
+		    throw new IllegalStateException("No alternative matched");
+		}
+	
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 public void proceedParenthesizedElement(EObject obj) {
-	if (!proceedParenthesizedElement(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedParenthesizedElement(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedParenthesizedElementLock = new HashSet<ConsumationState>();
-
-protected boolean proceedParenthesizedElement(InstanceDescription obj) {
-	obj.push("proceedParenthesizedElement");
-	try {
-		if (! obj.isInstanceOf("AbstractElement"))
-		   return false;
-		
-/* xtext::Group */ 
-{
-
-		
+protected void proceedParenthesizedElement(InstanceDescription obj) {
+	
 /* xtext::Group */ 
 {
 
@@ -1549,110 +1320,78 @@ protected boolean proceedParenthesizedElement(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print("(");
+	executeAction(")");
 
 }
 
-	if (!obj.isLookahead()) System.out.print(" ");
+		
+/* xtext::Group */ 
+{
+
 		
 /* xtext::RuleCall */ 
 {
 
 	
-	
-	proceedAlternatives(obj);
-	
+		proceedAlternatives(obj);
 	
 
 }
 
-
-}
-
-	if (!obj.isLookahead()) System.out.print(" ");
 		
 /* xtext::Keyword */ 
 {
 
-	if (!obj.isLookahead())
-    	System.out.print(")");
+	executeAction("(");
 
 }
 
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
+
+}
+
 }
 
 public void proceedKeyword(EObject obj) {
-	if (!proceedKeyword(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedKeyword(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedKeywordLock = new HashSet<ConsumationState>();
-
-protected boolean proceedKeyword(InstanceDescription obj) {
-	obj.push("proceedKeyword");
-	try {
-		if (! obj.isInstanceOf("Keyword"))
-		   return false;
-		
+protected void proceedKeyword(InstanceDescription obj) {
+	
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("value")) return false;
-    Object value = obj.consume("value");
+	Object value = obj.consume("value");
     
     	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
+    	executeAction(value);
     	
     
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 public void proceedRuleCall(EObject obj) {
-	if (!proceedRuleCall(getDescr(obj)))
-		throw new IllegalArgumentException("Couldn't rewrite "+obj);
+	proceedRuleCall(getDescr(obj));
 }
 
-private final Set<ConsumationState> proceedRuleCallLock = new HashSet<ConsumationState>();
-
-protected boolean proceedRuleCall(InstanceDescription obj) {
-	obj.push("proceedRuleCall");
-	try {
-		if (! obj.isInstanceOf("RuleCall"))
-		   return false;
-		
+protected void proceedRuleCall(InstanceDescription obj) {
+	
 /* xtext::Assignment */ 
 {
 
-	if (!obj.isConsumable("name")) return false;
-    Object value = obj.consume("name");
+	Object value = obj.consume("name");
     
     	
-    	if (!obj.isLookahead())
-    		System.out.print(value);
+    	executeAction(value);
     	
     
 
 }
 
-		return obj.isConsumed();
-	} finally {
-		obj.pop();
-	}
 }
 
 }
