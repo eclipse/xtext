@@ -8,11 +8,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.reference;
 
-import org.apache.tools.ant.filters.StringInputStream;
-import org.eclipse.xtext.reference.parser.ReferenceGrammarASTFactory;
-import org.eclipse.xtext.reference.parser.ReferenceGrammarParser;
+import java.util.Iterator;
 
 import junit.framework.TestCase;
+
+import org.apache.tools.ant.filters.StringInputStream;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.core.parsetree.AbstractNode;
+import org.eclipse.xtext.core.parsetree.NodeAdapter;
+import org.eclipse.xtext.reference.parser.ReferenceGrammarASTFactory;
+import org.eclipse.xtext.reference.parser.ReferenceGrammarParser;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -35,8 +43,20 @@ public class ReferenceGrammarTest extends TestCase {
 			"}";
 		
 		ReferenceGrammarParser parser = new ReferenceGrammarParser();
-		Object object = parser.parse(new StringInputStream(grammar), new ReferenceGrammarASTFactory());
-		System.out.println(object);
+		EObject object = (EObject) parser.parse(new StringInputStream(grammar), new ReferenceGrammarASTFactory());
+		NodeAdapter adapter = (NodeAdapter) object.eAdapters().get(0);
+		AbstractNode node = adapter.getParserNode();
+		for (TreeIterator allContents = node.eAllContents(); allContents.hasNext();) {
+			AbstractNode subnode = (AbstractNode) allContents.next();
+			System.out.println(subnode);
+		}
+		
+		System.out.println("---");
+		EObject rootContainer = EcoreUtil.getRootContainer(object);
+		for (TreeIterator<EObject> allContents2 = object.eAllContents(); allContents2.hasNext();) {
+			EObject next = allContents2.next();
+			System.out.println(next);
+		}
 		
 	}
 
