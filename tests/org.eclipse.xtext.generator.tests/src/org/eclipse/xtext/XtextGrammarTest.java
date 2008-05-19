@@ -62,7 +62,9 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 		EObject grammar = (EObject) parse(bootGrammar , new XtextGrammarTestASTFactory(),null);
 		assertWithXtend("true","parserRules.select(e|e.name=='AbstractToken').first()!=null",grammar);
 		assertWithXtend("'AbstractElement'","parserRules.select(e|e.name=='AbstractToken').first().type.name",grammar);
-//		new XtextGrammarTestParseTreeConstructor().proceedGrammar(grammar);
+		XtextGrammarTestParseTreeConstructor foo = new XtextGrammarTestParseTreeConstructor();
+		foo.proceedGrammar(grammar);
+		System.out.println(foo.getText());
 //		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 //				"xmi", new XMIResourceFactoryImpl());
 //		Resource resource = new ResourceSetImpl().createResource(URI.createURI("foo.xmi"));
@@ -71,8 +73,11 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 	}
 	
 	public void testSerialization() throws Exception {
-		EObject grammar = (EObject) parse("generate foo 'bar' Foo : ( 'stuff' '{' '}' STRING) ? name=ID ;", new XtextGrammarTestASTFactory());
-//		new XtextGrammarTestParseTreeConstructor().proceedGrammar(grammar);
+		String model = "generate foo 'bar' Foo : ( 'stuff' '{' '}' STRING ) ? ;";
+		EObject grammar = (EObject) parse(model, new XtextGrammarTestASTFactory());
+		XtextGrammarTestParseTreeConstructor ptc = new XtextGrammarTestParseTreeConstructor();
+		ptc.proceedGrammar(grammar);
+		assertEquals(model, ptc.getText());
 	}
 
 	@Override

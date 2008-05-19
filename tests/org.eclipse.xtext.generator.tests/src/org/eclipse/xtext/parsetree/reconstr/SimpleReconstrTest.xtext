@@ -1,0 +1,17 @@
+generate simplerewritetest "http://simple/rewrite/test"
+
+Op returns Expression: 
+	Term ({Op.values+=current} values+=Term)*;
+	
+Term returns Expression:
+	Atom | Parens;
+	
+Atom: 
+	name=ID;
+
+Parens returns Expression: 
+	'(' Op ')' em='!'?;
+	
+
+
+
