@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.core.parser;
 
+import org.eclipse.xtext.core.parsetree.AbstractNode;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
@@ -25,6 +27,10 @@ public class ParseException extends RuntimeException {
 		this.offset = offset;
 		this.text = text;
 		this.message = message;
+	}
+	
+	public ParseException(AbstractNode node, String message) {
+		this(node.offset(), node.length(), node.serialize(), message);
 	}
 
 	public int getLength() {

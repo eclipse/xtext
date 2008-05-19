@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MetaModel.java,v 1.6 2008/05/19 10:08:41 sefftinge Exp $
+ * $Id: MetaModel.java,v 1.7 2008/05/19 12:11:21 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextutil;
 

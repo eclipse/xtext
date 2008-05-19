@@ -9,6 +9,7 @@ package org.eclipse.xtext.grammargen.tests.parser.internal;
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
 import org.eclipse.xtext.core.parser.IElementFactory;
+import org.eclipse.xtext.core.parser.ParseException;
 import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 
@@ -65,7 +66,9 @@ private void appendTrailingHiddenTokens(CompositeNode parentNode) {
 }
 	
 public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
-	assert node.getElement() == null || node.getElement() == astElement;
+	if(node.getElement() != null && node.getElement() != astElement) {
+		throw new ParseException(node, "Reassignment of astElement in parse tree node");
+	}
 	node.setElement(astElement);
 	if(astElement instanceof EObject) {
 		EObject eObject = (EObject) astElement;
@@ -79,70 +82,76 @@ private CompositeNode currentNode;
 private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.grammargen.tests.SimpleTest2Constants.getSimpleTest2Grammar();
 }
 
-parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@c76b4c (name: Model)
+parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@657fb2 (name: Model)
 grammar.eResource().getEObject("//@parserRules.0"), currentNode);}
 	ruleModel {$current=$ruleModel.current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
 
 
 // Rule Model
-ruleModel returns [EObject current=null] : { EObject temp=null; }
+ruleModel returns [EObject current=null] 
+   @init { EObject temp=null; }
+   :
 (
-	{ currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@e80f0d (cardinality: null) (name: Child)
-grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal"), currentNode);} 
-	lv_contents=ruleChild
+   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@9264e3 (cardinality: null) (name: Child)
+grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal"), currentNode); } 
+   lv_contents=ruleChild
  
-{ if ($current==null) {
-     $current = factory.create("Model");
-  }
-  factory.add($current, "contents", lv_contents);
-  currentNode = currentNode.getParent()!=null?currentNode.getParent():currentNode;
-  associateNodeWithAstElement(currentNode, $current); }
-)* ;
+{  currentNode = currentNode.getParent();   if ($current==null) {
+      $current = factory.create("Model");
+      associateNodeWithAstElement(currentNode, $current);
+   }
+   factory.add($current, "contents", lv_contents);
+}
+)*;
 
 
 // Rule Child
-ruleChild returns [EObject current=null] : { EObject temp=null; }
+ruleChild returns [EObject current=null] 
+   @init { EObject temp=null; }
+   :
 ((((((
-	
-	lv_optional='optional'  
-{ if ($current==null) {
-     $current = factory.create("Child");
-  }
-  factory.set($current, "optional", true);
-createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@1fcb35 (cardinality: null) (value: 'optional')
-grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"), currentNode,"optional");  
-  associateNodeWithAstElement(currentNode, $current); }
-)?'keyword' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@e7fe8e (cardinality: null) (value: "keyword")
+   
+   lv_optional='optional'  
+{     if ($current==null) {
+      $current = factory.create("Child");
+      associateNodeWithAstElement(currentNode, $current);
+   }
+   factory.set($current, "optional", true);
+createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@517a05 (cardinality: null) (value: 'optional')
+grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"), currentNode,"optional");}
+)?'keyword' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@221968 (cardinality: null) (value: "keyword")
 grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })(
-	
-	lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@cc678a (cardinality: null) (name: ID)
+   
+   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@c15ff6 (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"name"); }
  
-{ if ($current==null) {
-     $current = factory.create("Child");
-  }
-  factory.set($current, "name", lv_name);
-  
-  associateNodeWithAstElement(currentNode, $current); }
+{     if ($current==null) {
+      $current = factory.create("Child");
+      associateNodeWithAstElement(currentNode, $current);
+   }
+   factory.set($current, "name", lv_name);
+}
 ))(
-	
-	lv_number=RULE_INT{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@c61c91 (cardinality: null) (name: INT)
+   
+   lv_number=RULE_INT{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@fe9ce1 (cardinality: null) (name: INT)
 grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"number"); }
  
-{ if ($current==null) {
-     $current = factory.create("Child");
-  }
-  factory.set($current, "number", lv_number);
-  
-  associateNodeWithAstElement(currentNode, $current); }
-))'{' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@4e92a (cardinality: null) (value: '{')
-grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })'}' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@420a71 (cardinality: null) (value: '}')
-grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1"), currentNode,null); }) ;
+{     if ($current==null) {
+      $current = factory.create("Child");
+      associateNodeWithAstElement(currentNode, $current);
+   }
+   factory.set($current, "number", lv_number);
+}
+))'{' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@ed9585 (cardinality: null) (value: '{')
+grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })'}' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@f38dd0 (cardinality: null) (value: '}')
+grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1"), currentNode,null); });
 
 
 
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
@@ -152,8 +161,6 @@ RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
-
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
