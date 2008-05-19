@@ -60,7 +60,7 @@ public class LanguageDescriptorFactory {
 			for (IConfigurationElement element : elements) {
 				if (namespace.equals(element.getNamespaceIdentifier())) {
 					if (retVal != null) {
-						logMoreThenOneLanguageWarning(namespace, retVal);
+						logMoreThanOneLanguageWarning(namespace, retVal);
 						break;
 					}
 					retVal = new LanguageDescriptor(element);
@@ -70,10 +70,10 @@ public class LanguageDescriptorFactory {
 		return retVal;
 	}
 
-	private static void logMoreThenOneLanguageWarning(String namespace,
+	private static void logMoreThanOneLanguageWarning(String namespace,
 			LanguageDescriptor retVal) {
 		CoreLog
-				.logWarning("There are more then one language descriptor defined for plugin with namespace '"
+				.logWarning("There are more than one language descriptor defined for plugin with namespace '"
 						+ namespace
 						+ "'. Language descriptor named '"
 						+ retVal.getName()
