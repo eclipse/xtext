@@ -112,11 +112,18 @@ public class ParsetreeUtil {
 			return ITokenTypes.KEYWORD;
 		} else if(grammarElement instanceof RuleCall) {
 			AbstractRule calledRule = GrammarUtil.calledRule((RuleCall) grammarElement);
-			if(calledRule instanceof LexerRule) {
-				return ((LexerRule)calledRule).getTokenType();
-			}
+			return tokenTypeForLexerRule(calledRule);
 		} else if(grammarElement instanceof LexerRule) {
-			return ((LexerRule)grammarElement).getTokenType();
+			return tokenTypeForLexerRule(grammarElement);
+		}
+		return null;
+	}
+	
+	private static String tokenTypeForLexerRule(EObject candidate) {
+		if(candidate instanceof LexerRule) {
+			LexerRule lexerRule = (LexerRule)candidate;
+			String tokenType = lexerRule.getTokenType();
+			return tokenType != null ? tokenType : lexerRule.getName();
 		}
 		return null;
 	}

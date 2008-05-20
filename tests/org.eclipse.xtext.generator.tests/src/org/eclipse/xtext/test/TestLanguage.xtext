@@ -23,3 +23,4 @@ ReducibleRule returns ReducibleElement :
 
 TerminalRule returns TerminalElement :
 	stringFeature=STRING;
+

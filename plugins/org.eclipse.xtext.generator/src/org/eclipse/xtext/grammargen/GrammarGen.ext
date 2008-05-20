@@ -38,5 +38,10 @@ mustBeParenthesized(Alternatives this) : true;
 mustBeParenthesized(Keyword this) : false;
 mustBeParenthesized(RuleCall this) : false;
 
-	 
+String bodyWithoutQuotes(LexerRule this) :
+	if body.startsWith('<#') && body.endsWith('#>') then
+		body.subString(2, body.length -2)
+	else
+		body;
+		
 	

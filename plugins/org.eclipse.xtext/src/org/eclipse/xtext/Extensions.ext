@@ -146,7 +146,10 @@ cached allLexerRules(Grammar this) :
 	lexerRules.union(builtinRules().select(e|lexerRules.forAll(e1|e1.name != e.name))).union({anyOtherRule()}).toList().sortBy(e|e.name=='ANY_OTHER'?1:0);
 		
 cached allDefinedTokenTypes(Grammar this) :
-	allLexerRules().tokenType.removeAll(builtinRules().tokenType);
+	allLexerRules().tokenTypeOrDefault().removeAll(builtinRules().tokenType);
+
+String tokenTypeOrDefault(LexerRule this) :	
+	tokenType==null ? name : tokenType;
 
 boolean isBuiltinRule(LexerRule this) :
 	builtinRules().contains(this);

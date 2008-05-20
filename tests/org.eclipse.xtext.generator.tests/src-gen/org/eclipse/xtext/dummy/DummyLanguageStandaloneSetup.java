@@ -11,7 +11,7 @@ public abstract class DummyLanguageStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@48fbf8 (alias: null) (nsURI: "http://www.eclipse.org/2008/xtext/DummyLang", name: DummyLang)
+		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@3601d7 (alias: null) (nsURI: "http://www.eclipse.org/2008/xtext/DummyLang", name: DummyLang)
 		
 	}
 

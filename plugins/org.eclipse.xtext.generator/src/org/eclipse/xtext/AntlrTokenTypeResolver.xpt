@@ -29,7 +29,7 @@ import org.eclipse.xtext.core.parsetree.AbstractNode;
 
 public class «languageName()»TokenTypeResolver {
 
-	private org.eclipse.xtext.Grammar grammar = «packageName()».«constantsClassName()».get«languageName()»Grammar();
+	private static org.eclipse.xtext.Grammar grammar = «packageName()».«constantsClassName()».get«languageName()»Grammar();
 	
 	public static LexerRule getLexerRule(AbstractNode context, int antlrTokenType) {
 		switch(antlrTokenType) {		
@@ -39,7 +39,7 @@ public class «languageName()»TokenTypeResolver {
 		}	
 	}
 	
-	private EObject getGrammarElement(String id) {
+	private static EObject getGrammarElement(String id) {
 		return grammar.eResource().getEObject(id);
 	}
 	
