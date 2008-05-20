@@ -12,7 +12,7 @@ public abstract class TestLanguageStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/test/TestLanguage")==null)
-			LanguageFacadeFactory.register("org/eclipse/xtext/test/TestLanguage",new TestLanguageLanguageFacade());
+			LanguageFacadeFactory.register(new TestLanguageLanguageFacade());
 	}
 
 }

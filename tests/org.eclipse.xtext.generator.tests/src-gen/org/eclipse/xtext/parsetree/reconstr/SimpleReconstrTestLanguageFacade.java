@@ -11,6 +11,10 @@ import org.eclipse.xtext.parsetree.reconstr.parser.*;
 
 public class SimpleReconstrTestLanguageFacade extends org.eclipse.xtext.core.parser.BaseEPackageAccess implements ILanguageFacade {
     public static final String LANGUAGE_ID = "org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest";
+    public String getLanguageId() {
+    	return LANGUAGE_ID;
+    }
+    
 	public static final String SIMPLERECONSTRTEST_GRAMMAR_CP_URI = "org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi";
 	private static Grammar GRAMMAR = null;
 	

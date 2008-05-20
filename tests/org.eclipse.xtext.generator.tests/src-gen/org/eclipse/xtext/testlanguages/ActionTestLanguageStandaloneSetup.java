@@ -12,7 +12,7 @@ public abstract class ActionTestLanguageStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/ActionTestLanguage")==null)
-			LanguageFacadeFactory.register("org/eclipse/xtext/testlanguages/ActionTestLanguage",new ActionTestLanguageLanguageFacade());
+			LanguageFacadeFactory.register(new ActionTestLanguageLanguageFacade());
 	}
 
 }

@@ -11,6 +11,10 @@ import org.eclipse.xtext.testlanguages.parser.*;
 
 public class LexerLanguageLanguageFacade extends org.eclipse.xtext.core.parser.BaseEPackageAccess implements ILanguageFacade {
     public static final String LANGUAGE_ID = "org/eclipse/xtext/testlanguages/LexerLanguage";
+    public String getLanguageId() {
+    	return LANGUAGE_ID;
+    }
+    
 	public static final String LEXERLANGUAGE_GRAMMAR_CP_URI = "org/eclipse/xtext/testlanguages/LexerLanguage.xmi";
 	private static Grammar GRAMMAR = null;
 	

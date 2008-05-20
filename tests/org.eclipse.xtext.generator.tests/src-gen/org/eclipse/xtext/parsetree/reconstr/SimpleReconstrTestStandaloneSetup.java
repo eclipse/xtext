@@ -12,7 +12,7 @@ public abstract class SimpleReconstrTestStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest")==null)
-			LanguageFacadeFactory.register("org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest",new SimpleReconstrTestLanguageFacade());
+			LanguageFacadeFactory.register(new SimpleReconstrTestLanguageFacade());
 	}
 
 }
