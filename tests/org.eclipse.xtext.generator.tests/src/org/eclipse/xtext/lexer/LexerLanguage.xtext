@@ -7,20 +7,15 @@
  *
  *******************************************************************************/
  
-generate TestLang "http://www.eclipse.org/2008/xtext/TestLang"
+generate TestLang "http://www.eclipse.org/2008/xtext/LexerLang"
 
-EntryRule returns Model :
-	(multiFeature+=AbstractRule)*;
+Model :
+	(children+=Element)*;
 	
-AbstractRule returns AbstractElement :
-	ChoiceRule | ReducibleRule;
+Element:
+	name=ID f=EXPLICITTOKENTYPE g=IMPLICITTOKENTYPE h=STRING;
 	
-ChoiceRule returns ChoiceElement :
-	"choice" (optionalKeyword?='optional')? name=ID;
-	
-ReducibleRule returns ReducibleElement :
-	"reducible" TerminalRule ( {ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule )?;
-
-TerminalRule returns TerminalElement :
-	stringFeature=STRING;
-
+lexing:
+	EXPLICITTOKENTYPE tokentype X : <# ('A')+ #>
+	IMPLICITTOKENTYPE : <# ('C')+ #>
+	STRING : <# ('B')+ #> 

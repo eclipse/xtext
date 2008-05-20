@@ -63,7 +63,7 @@ public Object createLeafNode(String grammarElementID, CompositeNode parentNode, 
         }
     }
     LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-        leafNode.setText(token.getText());
+    leafNode.setText(token.getText());
     leafNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
     leafNode.setFeature(feature);
     parentNode.getChildren().add(leafNode);
@@ -136,7 +136,7 @@ parse returns [EObject current] :
 «ENDDEFINE»
 
 «DEFINE rule FOR LexerRule»
-«ruleName()» : «body»;
+«ruleName()» : «bodyWithoutQuotes()»;
 «ENDDEFINE»
 
 «DEFINE ebnf FOR AbstractElement-»
