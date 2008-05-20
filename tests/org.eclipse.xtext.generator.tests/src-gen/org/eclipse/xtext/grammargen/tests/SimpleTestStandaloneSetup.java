@@ -12,7 +12,7 @@ public abstract class SimpleTestStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/grammargen/tests/SimpleTest")==null)
-			LanguageFacadeFactory.register("org/eclipse/xtext/grammargen/tests/SimpleTest",new SimpleTestLanguageFacade());
+			LanguageFacadeFactory.register(new SimpleTestLanguageFacade());
 	}
 
 }

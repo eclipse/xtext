@@ -12,7 +12,7 @@ public abstract class SimpleExpressionsStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/SimpleExpressions")==null)
-			LanguageFacadeFactory.register("org/eclipse/xtext/testlanguages/SimpleExpressions",new SimpleExpressionsLanguageFacade());
+			LanguageFacadeFactory.register(new SimpleExpressionsLanguageFacade());
 	}
 
 }

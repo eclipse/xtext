@@ -12,7 +12,7 @@ public abstract class LexerLanguageStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/LexerLanguage")==null)
-			LanguageFacadeFactory.register("org/eclipse/xtext/testlanguages/LexerLanguage",new LexerLanguageLanguageFacade());
+			LanguageFacadeFactory.register(new LexerLanguageLanguageFacade());
 	}
 
 }

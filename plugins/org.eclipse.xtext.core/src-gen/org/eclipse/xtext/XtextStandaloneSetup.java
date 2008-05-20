@@ -12,7 +12,7 @@ public abstract class XtextStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/Xtext")==null)
-			LanguageFacadeFactory.register("org/eclipse/xtext/Xtext",new XtextLanguageFacade());
+			LanguageFacadeFactory.register(new XtextLanguageFacade());
 	}
 
 }

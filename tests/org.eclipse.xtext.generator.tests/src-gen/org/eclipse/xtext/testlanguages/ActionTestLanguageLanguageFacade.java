@@ -11,6 +11,10 @@ import org.eclipse.xtext.testlanguages.parser.*;
 
 public class ActionTestLanguageLanguageFacade extends org.eclipse.xtext.core.parser.BaseEPackageAccess implements ILanguageFacade {
     public static final String LANGUAGE_ID = "org/eclipse/xtext/testlanguages/ActionTestLanguage";
+    public String getLanguageId() {
+    	return LANGUAGE_ID;
+    }
+    
 	public static final String ACTIONTESTLANGUAGE_GRAMMAR_CP_URI = "org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi";
 	private static Grammar GRAMMAR = null;
 	

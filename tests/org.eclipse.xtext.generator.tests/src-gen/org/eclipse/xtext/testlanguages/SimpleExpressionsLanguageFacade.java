@@ -11,6 +11,10 @@ import org.eclipse.xtext.testlanguages.parser.*;
 
 public class SimpleExpressionsLanguageFacade extends org.eclipse.xtext.core.parser.BaseEPackageAccess implements ILanguageFacade {
     public static final String LANGUAGE_ID = "org/eclipse/xtext/testlanguages/SimpleExpressions";
+    public String getLanguageId() {
+    	return LANGUAGE_ID;
+    }
+    
 	public static final String SIMPLEEXPRESSIONS_GRAMMAR_CP_URI = "org/eclipse/xtext/testlanguages/SimpleExpressions.xmi";
 	private static Grammar GRAMMAR = null;
 	

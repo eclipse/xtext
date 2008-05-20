@@ -12,7 +12,7 @@ public abstract class MetamodelRefTestStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest")==null)
-			LanguageFacadeFactory.register("org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest",new MetamodelRefTestLanguageFacade());
+			LanguageFacadeFactory.register(new MetamodelRefTestLanguageFacade());
 	}
 
 }

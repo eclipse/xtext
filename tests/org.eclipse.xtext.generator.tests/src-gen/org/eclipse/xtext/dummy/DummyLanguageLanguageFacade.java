@@ -11,6 +11,10 @@ import org.eclipse.xtext.dummy.parser.*;
 
 public class DummyLanguageLanguageFacade extends org.eclipse.xtext.core.parser.BaseEPackageAccess implements ILanguageFacade {
     public static final String LANGUAGE_ID = "org/eclipse/xtext/dummy/DummyLanguage";
+    public String getLanguageId() {
+    	return LANGUAGE_ID;
+    }
+    
 	public static final String DUMMYLANGUAGE_GRAMMAR_CP_URI = "org/eclipse/xtext/dummy/DummyLanguage.xmi";
 	private static Grammar GRAMMAR = null;
 	

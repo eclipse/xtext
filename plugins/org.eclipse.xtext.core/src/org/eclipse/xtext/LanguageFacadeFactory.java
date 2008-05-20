@@ -24,7 +24,7 @@ public final class LanguageFacadeFactory {
 		return registry.get(languageID);
 	}
 	
-	public static void register(String languageID, ILanguageFacade facade) {
-		registry.put(languageID, facade);
+	public static void register(ILanguageFacade facade) {
+		registry.put(facade.getLanguageId(), facade);
 	}
 }

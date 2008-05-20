@@ -18,7 +18,7 @@ public class MetamodelRefTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		LanguageFacadeFactory.register(MetamodelRefTestLanguageFacade.LANGUAGE_ID, new MetamodelRefTestLanguageFacade() {
+		LanguageFacadeFactory.register(new MetamodelRefTestLanguageFacade() {
 			@Override
 			public EPackage[] getGeneratedEPackages() {
 				return new EPackage[] {

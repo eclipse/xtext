@@ -22,6 +22,11 @@ public interface ILanguageFacade {
 	/**
 	 * @return
 	 */
+	String getLanguageId();
+	
+	/**
+	 * @return
+	 */
 	IElementFactory getElementFactory();
 	
 	/**

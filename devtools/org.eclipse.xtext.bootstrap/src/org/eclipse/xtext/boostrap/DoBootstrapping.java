@@ -16,8 +16,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextConstants;
+import org.eclipse.xtext.XtextLanguageFacade;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.XtextASTFactory;
 import org.eclipse.xtext.parser.XtextParser;
 
@@ -28,7 +29,7 @@ import org.eclipse.xtext.parser.XtextParser;
 public class DoBootstrapping {
 
 	public static void main(String[] args) throws Exception {
-
+		XtextStandaloneSetup.doSetup();
 		String srcGenPath = "../org.eclipse.xtext.core/src-gen";
 		String filename = "../org.eclipse.xtext.core/src/org/eclipse/xtext/Xtext.xtext";
 		String languageName = "Xtext";
@@ -41,7 +42,7 @@ public class DoBootstrapping {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		//TODO make Xtext2Factory manual so one can overwrite 'getEPackages' in order to support generated epackages
-		EPackage.Registry.INSTANCE.put(XtextConstants.XTEXT_NS_URI, XtextPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(XtextLanguageFacade.XTEXT_NS_URI, XtextPackage.eINSTANCE);
 		XtextParser xtext2Parser= new XtextParser();
 		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory());
 		GeneratorFacade.cleanFolder(srcGenPath);

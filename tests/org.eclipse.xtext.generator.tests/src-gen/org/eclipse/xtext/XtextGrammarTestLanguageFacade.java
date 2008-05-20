@@ -11,6 +11,10 @@ import org.eclipse.xtext.parser.*;
 
 public class XtextGrammarTestLanguageFacade extends org.eclipse.xtext.core.parser.BaseEPackageAccess implements ILanguageFacade {
     public static final String LANGUAGE_ID = "org/eclipse/xtext/XtextGrammarTest";
+    public String getLanguageId() {
+    	return LANGUAGE_ID;
+    }
+    
 	public static final String XTEXTGRAMMARTEST_GRAMMAR_CP_URI = "org/eclipse/xtext/XtextGrammarTest.xmi";
 	private static Grammar GRAMMAR = null;
 	

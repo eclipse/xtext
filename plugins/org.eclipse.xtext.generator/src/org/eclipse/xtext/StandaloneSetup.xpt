@@ -29,7 +29,7 @@ public abstract class «languageName()»StandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		if (LanguageFacadeFactory.getFacade("«languageId()»")==null)
-			LanguageFacadeFactory.register("«languageId()»",new «languageName()»LanguageFacade());
+			LanguageFacadeFactory.register(new «languageName()»LanguageFacade());
 	}
 
 }

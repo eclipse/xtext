@@ -12,7 +12,7 @@ public abstract class XtextGrammarTestStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/XtextGrammarTest")==null)
-			LanguageFacadeFactory.register("org/eclipse/xtext/XtextGrammarTest",new XtextGrammarTestLanguageFacade());
+			LanguageFacadeFactory.register(new XtextGrammarTestLanguageFacade());
 	}
 
 }
