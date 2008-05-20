@@ -24,6 +24,7 @@ package «packageName()»;
 import java.util.*;
 
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.core.parser.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -32,11 +33,11 @@ import «packageName()».parser.«languageName()»ASTFactory;
 
 public class «languageName()»ParseTreeConstructor extends AbstractParseTreeRewriter{
 	private AbstractEcoreElementFactory factory = new «languageName()»ASTFactory();
+	private org.eclipse.xtext.Grammar grammar = «packageName()».«constantsClassName()».get«languageName()»Grammar();
 	
 	protected AbstractEcoreElementFactory getFactory() {
 		return factory;
 	}
-	
 
 «EXPAND method FOREACH parserRules»
 }
@@ -70,31 +71,37 @@ new Predicate(obj) {
 «DEFINE statement2 FOR AbstractElement»//Do nothing for '«metaType.name»'\n«ENDDEFINE»
 «DEFINE statement2 FOR Assignment»
 	Object value = obj.consume("«feature»");
-    «IF this.featureIsReference()»
-    	«EXPAND statement FOR terminal»
-    «ELSE»
-    	«IF isBoolean()»
-    	«EXPAND statement FOR terminal»
-    	«ELSE»
-    	executeAction(value);
-    	«ENDIF»
-    «ENDIF»
+    «EXPAND statement FOR terminal»
+    if (obj.isConsumed())
+    	objectCreation(obj);
 «ENDDEFINE»
 
 «DEFINE statement2 FOR Keyword»
-	executeAction("«value.trimFromStartAndEnd(1)»");
+	keyword((Keyword)grammar.eResource().getEObject("«getID()»"));
 «ENDDEFINE»
 
 «DEFINE statement2 FOR Action»
-	EObject newObj = (EObject) obj.consume("«feature»");
-	obj = getDescr(newObj);
+	InstanceDescription newObj = getDescr((EObject) obj.consume("«feature»"));
+	action(obj,newObj, (Action) grammar.eResource().getEObject("«getID()»"));
+	obj = newObj;
 «ENDDEFINE»
 
 «DEFINE statement2 FOR RuleCall»
-	«IF this.isAssigned()»
-		«calledRule().methodName()»(getDescr((EObject)value));
+	«IF calledParserRule()!=null»
+	InstanceDescription val = «isAssigned() ? '(getDescr((EObject)value))' : 'obj'»;
+	EObject ruleCall = grammar.eResource().getEObject("«getID()»");
+	try {
+		ruleCallStart(val, «isAssigned()», (RuleCall) ruleCall);
+		«calledRule().methodName()»(val);
+	} finally {
+		ruleCallEnd(val, «isAssigned()», (RuleCall) ruleCall);
+	}
 	«ELSE»
-		«calledRule().methodName()»(obj);
+	«IF isAssigned()»
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("«getID()»"));
+	«ELSE»
+	lexerRuleCall((RuleCall)grammar.eResource().getEObject("«getID()»"));
+	«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
 
