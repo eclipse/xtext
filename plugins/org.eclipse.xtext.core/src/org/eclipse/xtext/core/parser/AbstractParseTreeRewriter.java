@@ -8,6 +8,15 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.core.parsetree.AbstractNode;
+import org.eclipse.xtext.core.parsetree.CompositeNode;
+import org.eclipse.xtext.core.parsetree.LeafNode;
+import org.eclipse.xtext.core.parsetree.ParsetreeFactory;
+import org.eclipse.xtext.core.parsetree.ParsetreePackage;
 
 public abstract class AbstractParseTreeRewriter {
 
@@ -140,16 +149,67 @@ public abstract class AbstractParseTreeRewriter {
 		
 	}
 	
-	private StringBuffer buff = new StringBuffer();
-	
-	protected void executeAction(Object element) {
-		if (buff.length()>0) 
-			buff.insert(0, " ");
-		buff.insert(0,element);
+	public String getText() {
+		return current.serialize();
 	}
 	
-	public String getText() {
-		return buff.toString();
+	private CompositeNode current = ParsetreeFactory.eINSTANCE.createCompositeNode();
+
+	protected void ruleCallStart(InstanceDescription val, boolean isAssigned, RuleCall ruleCall) {
+		CompositeNode node = ParsetreeFactory.eINSTANCE.createCompositeNode();
+		node.setGrammarElement(ruleCall);
+		prependToCurrentsChildren(node);
+		current = node;
+	}
+
+	protected void ruleCallEnd(InstanceDescription val, boolean b, RuleCall ruleCall) {
+		current = current.getParent();
+	}
+	
+	private void prependToCurrentsChildren(AbstractNode node) {
+		current.getChildren().add(0, node);
+	}
+
+
+	protected void lexerRuleCall(RuleCall ruleCall) {
+		throw new UnsupportedOperationException("coudn't generate text for lexer rule "+ruleCall.getName());
+	}
+	
+	protected void lexerRuleCall(Object value, RuleCall ruleCall) {
+		checkWhitespace();
+		LeafNode ln = ParsetreeFactory.eINSTANCE.createLeafNode();
+		ln.setGrammarElement(ruleCall);
+		ln.setText(value.toString()); //TODO converters?
+		prependToCurrentsChildren(ln);
+	}
+
+	private void checkWhitespace() {
+		EList<LeafNode> leafNodes = ((CompositeNode)EcoreUtil.getRootContainer(current)).getLeafNodes();
+		if (!leafNodes.isEmpty()) {
+			LeafNode next = leafNodes.get(0);
+			if (!next.isHidden()) {
+				LeafNode ws = ParsetreeFactory.eINSTANCE.createLeafNode();
+				ws.setText(" ");
+				prependToCurrentsChildren(ws);
+			}
+		}
+	}
+
+	protected void action(InstanceDescription parent, InstanceDescription child, Action action) {
+		current.setElement(parent.getDelegate());
+	}
+
+	protected void keyword(Keyword kw) {
+		checkWhitespace();
+		String value = kw.getValue().substring(1, kw.getValue().length()-1);
+		LeafNode ln = ParsetreeFactory.eINSTANCE.createLeafNode();
+		ln.setGrammarElement(kw);
+		ln.setText(value);
+		prependToCurrentsChildren(ln);
+	}
+
+	protected void objectCreation(InstanceDescription obj) {
+		current.setElement(obj.getDelegate());
 	}
 
 }

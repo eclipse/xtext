@@ -82,7 +82,7 @@ private CompositeNode currentNode;
 private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.XtextGrammarTestConstants.getXtextGrammarTestGrammar();
 }
 
-parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@bba13d (name: Grammar)
+parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@c1e949 (name: Grammar)
 grammar.eResource().getEObject("//@parserRules.0"), currentNode);}
 	ruleGrammar {$current=$ruleGrammar.current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
@@ -93,7 +93,7 @@ ruleGrammar returns [EObject current=null]
    @init { EObject temp=null; }
    :
 (((
-   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@8628c8 (cardinality: null) (name: AbstractMetamodelDeclaration)
+   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@fd02ce (cardinality: null) (name: AbstractMetamodelDeclaration)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal"), currentNode); } 
    lv_metamodelDeclarations=ruleAbstractMetamodelDeclaration
  
@@ -104,7 +104,7 @@ grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0
    factory.add($current, "metamodelDeclarations", lv_metamodelDeclarations);
 }
 )*(
-   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@8e1916 (cardinality: null) (name: ParserRule)
+   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@d674a1 (cardinality: null) (name: ParserRule)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode); } 
    lv_parserRules=ruleParserRule
  
@@ -114,10 +114,10 @@ grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0
    }
    factory.add($current, "parserRules", lv_parserRules);
 }
-)*)(('lexing' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@4611ec (cardinality: null) (value: 'lexing')
-grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"), currentNode,null); }':' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@42b533 (cardinality: null) (value: ':')
+)*)(('lexing' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@5c5a83 (cardinality: null) (value: 'lexing')
+grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"), currentNode,null); }':' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@3a82f5 (cardinality: null) (value: ':')
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })(
-   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@dc2481 (cardinality: null) (name: LexerRule)
+   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@15e330 (cardinality: null) (name: LexerRule)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"), currentNode); } 
    lv_lexerRules=ruleLexerRule
  
@@ -152,10 +152,10 @@ ruleAbstractMetamodelDeclaration returns [EObject current=null]
 ruleGeneratedMetamodel returns [EObject current=null] 
    @init { EObject temp=null; }
    :
-((('generate' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@2da876 (cardinality: null) (value: 'generate')
+((('generate' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@c0064c (cardinality: null) (value: 'generate')
 grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"), currentNode,null); }(
    
-   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@f20105 (cardinality: null) (name: ID)
+   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@f5472d (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"name"); }
  
 {     if ($current==null) {
@@ -166,7 +166,7 @@ grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0
 }
 ))(
    
-   lv_nsURI=RULE_STRING{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@5b865e (cardinality: null) (name: STRING)
+   lv_nsURI=RULE_STRING{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@31943f (cardinality: null) (name: STRING)
 grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"nsURI"); }
  
 {     if ($current==null) {
@@ -175,10 +175,10 @@ grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0
    }
    factory.set($current, "nsURI", lv_nsURI);
 }
-))('as' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@262531 (cardinality: null) (value: 'as')
+))('as' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@2fcea5 (cardinality: null) (value: 'as')
 grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.0"), currentNode,null); }(
    
-   lv_alias=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@94140a (cardinality: null) (name: ID)
+   lv_alias=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@830f40 (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"), currentNode,"alias"); }
  
 {     if ($current==null) {
@@ -194,10 +194,10 @@ grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.1
 ruleReferencedMetamodel returns [EObject current=null] 
    @init { EObject temp=null; }
    :
-(('import' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@e1bafc (cardinality: null) (value: 'import')
+(('import' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@f75c3b (cardinality: null) (value: 'import')
 grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0"), currentNode,null); }(
    
-   lv_uri=RULE_STRING{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@a30367 (cardinality: null) (name: STRING)
+   lv_uri=RULE_STRING{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@930e5b (cardinality: null) (name: STRING)
 grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"uri"); }
  
 {     if ($current==null) {
@@ -206,10 +206,10 @@ grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.0
    }
    factory.set($current, "uri", lv_uri);
 }
-))('as' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@3b8493 (cardinality: null) (value: 'as')
+))('as' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@2d4e47 (cardinality: null) (value: 'as')
 grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.1/@abstractTokens.0"), currentNode,null); }(
    
-   lv_alias=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@522bc4 (cardinality: null) (name: ID)
+   lv_alias=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@f77e2f (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"), currentNode,"alias"); }
  
 {     if ($current==null) {
@@ -227,7 +227,7 @@ ruleLexerRule returns [EObject current=null]
    :
 ((((
    
-   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@73cf45 (cardinality: null) (name: ID)
+   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@7cb0b4 (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"), currentNode,"name"); }
  
 {     if ($current==null) {
@@ -236,10 +236,10 @@ grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0
    }
    factory.set($current, "name", lv_name);
 }
-)('tokentype' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@52c4ce (cardinality: null) (value: 'tokentype')
+)('tokentype' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@a26520 (cardinality: null) (value: 'tokentype')
 grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"), currentNode,null); }(
    
-   lv_tokenType=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@9e5b98 (cardinality: null) (name: ID)
+   lv_tokenType=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@1238a0 (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"), currentNode,"tokenType"); }
  
 {     if ($current==null) {
@@ -248,10 +248,10 @@ grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0
    }
    factory.set($current, "tokenType", lv_tokenType);
 }
-))?)':' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@8f6445 (cardinality: null) (value: ':')
+))?)':' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@43b5da (cardinality: null) (value: ':')
 grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })(
    
-   lv_body=RULE_LEXER_BODY{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@466cd5 (cardinality: null) (name: LEXER_BODY)
+   lv_body=RULE_LEXER_BODY{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@1404d1 (cardinality: null) (name: LEXER_BODY)
 grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.1/@terminal"), currentNode,"body"); }
  
 {     if ($current==null) {
@@ -269,7 +269,7 @@ ruleParserRule returns [EObject current=null]
    :
 (((((
    
-   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@755f8e (cardinality: null) (name: ID)
+   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@4e478a (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"), currentNode,"name"); }
  
 {     if ($current==null) {
@@ -278,9 +278,9 @@ grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0
    }
    factory.set($current, "name", lv_name);
 }
-)('returns' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@10bc1e (cardinality: null) (value: 'returns')
+)('returns' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@31547f (cardinality: null) (value: 'returns')
 grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"), currentNode,null); }(
-   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@5a1ce4 (cardinality: null) (name: TypeRef)
+   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@6cf97b (cardinality: null) (name: TypeRef)
 grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"), currentNode); } 
    lv_type=ruleTypeRef
  
@@ -290,9 +290,9 @@ grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0
    }
    factory.set($current, "type", lv_type);
 }
-))?)':' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@1ee2de (cardinality: null) (value: ':')
+))?)':' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@6efc82 (cardinality: null) (value: ':')
 grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })(
-   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@f5f42b (cardinality: null) (name: Alternatives)
+   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@433225 (cardinality: null) (name: Alternatives)
 grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode); } 
    lv_alternatives=ruleAlternatives
  
@@ -302,7 +302,7 @@ grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0
    }
    factory.set($current, "alternatives", lv_alternatives);
 }
-))';' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@716cfd (cardinality: null) (value: ';')
+))';' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@9155be (cardinality: null) (value: ';')
 grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.1"), currentNode,null); });
 
 
@@ -312,7 +312,7 @@ ruleTypeRef returns [EObject current=null]
    :
 (((
    
-   lv_alias=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@98c739 (cardinality: null) (name: ID)
+   lv_alias=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@7cfae6 (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal"), currentNode,"alias"); }
  
 {     if ($current==null) {
@@ -321,10 +321,10 @@ grammar.eResource().getEObject("//@parserRules.7/@alternatives/@abstractTokens.0
    }
    factory.set($current, "alias", lv_alias);
 }
-)'::' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@3fad8d (cardinality: null) (value: '::')
+)'::' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@3c3ee9 (cardinality: null) (value: '::')
 grammar.eResource().getEObject("//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })?(
    
-   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@fb3d5c (cardinality: null) (name: ID)
+   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@87bf5 (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.7/@alternatives/@abstractTokens.1/@terminal"), currentNode,"name"); }
  
 {     if ($current==null) {
@@ -346,12 +346,12 @@ ruleAlternatives returns [EObject current=null]
   factory.add(temp, "groups",$current);
   $current = temp; 
   temp = null;
-  currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@18233e (cardinality: null) (operator: +=, feature: groups)
+  currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@a7389f (cardinality: null) (operator: +=, feature: groups)
 grammar.eResource().getEObject("//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"), currentNode); 
   associateNodeWithAstElement(currentNode, $current); }
-)'|' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@f1050d (cardinality: null) (value: '|')
+)'|' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@e7e3ef (cardinality: null) (value: '|')
 grammar.eResource().getEObject("//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })(
-   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@4bc02d (cardinality: null) (name: Group)
+   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@f501f6 (cardinality: null) (name: Group)
 grammar.eResource().getEObject("//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"), currentNode); } 
    lv_groups=ruleGroup
  
@@ -374,11 +374,11 @@ ruleGroup returns [EObject current=null]
   factory.add(temp, "abstractTokens",$current);
   $current = temp; 
   temp = null;
-  currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@879541 (cardinality: null) (operator: +=, feature: abstractTokens)
+  currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@5bfd00 (cardinality: null) (operator: +=, feature: abstractTokens)
 grammar.eResource().getEObject("//@parserRules.9/@alternatives/@abstractTokens.1/@abstractTokens.0"), currentNode); 
   associateNodeWithAstElement(currentNode, $current); }
 )(
-   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@51c603 (cardinality: null) (name: AbstractToken)
+   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@adc2c8 (cardinality: null) (name: AbstractToken)
 grammar.eResource().getEObject("//@parserRules.9/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"), currentNode); } 
    lv_abstractTokens=ruleAbstractToken
  
@@ -406,7 +406,7 @@ ruleAbstractToken returns [EObject current=null]
       associateNodeWithAstElement(currentNode, $current);
    }
    factory.set($current, "cardinality", lv_cardinality);
-createLeafNode(// org.eclipse.xtext.impl.AlternativesImpl@15268b (cardinality: null)
+createLeafNode(// org.eclipse.xtext.impl.AlternativesImpl@f28508 (cardinality: null)
 grammar.eResource().getEObject("//@parserRules.10/@alternatives/@abstractTokens.1/@terminal"), currentNode,"cardinality");}
 )?);
 
@@ -417,7 +417,7 @@ ruleAssignment returns [EObject current=null]
    :
 (((
    
-   lv_feature=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@e0380 (cardinality: null) (name: ID)
+   lv_feature=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@41d260 (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal"), currentNode,"feature"); }
  
 {     if ($current==null) {
@@ -434,10 +434,10 @@ grammar.eResource().getEObject("//@parserRules.11/@alternatives/@abstractTokens.
       associateNodeWithAstElement(currentNode, $current);
    }
    factory.set($current, "operator", lv_operator);
-createLeafNode(// org.eclipse.xtext.impl.AlternativesImpl@763e0b (cardinality: null)
+createLeafNode(// org.eclipse.xtext.impl.AlternativesImpl@9784b9 (cardinality: null)
 grammar.eResource().getEObject("//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"operator");}
 ))(
-   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@3d5104 (cardinality: null) (name: AbstractTerminal)
+   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@5ae27e (cardinality: null) (name: AbstractTerminal)
 grammar.eResource().getEObject("//@parserRules.11/@alternatives/@abstractTokens.1/@terminal"), currentNode); } 
    lv_terminal=ruleAbstractTerminal
  
@@ -454,11 +454,11 @@ grammar.eResource().getEObject("//@parserRules.11/@alternatives/@abstractTokens.
 ruleAction returns [EObject current=null] 
    @init { EObject temp=null; }
    :
-(((('{' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@cf0b40 (cardinality: null) (value: '{')
-grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"), currentNode,null); }('current' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@17d1c5 (cardinality: null) (value: 'current')
-grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"), currentNode,null); }'=' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@ccfbd8 (cardinality: null) (value: '=')
+(((('{' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@95a679 (cardinality: null) (value: '{')
+grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"), currentNode,null); }('current' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@f4503 (cardinality: null) (value: 'current')
+grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"), currentNode,null); }'=' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@7be11e (cardinality: null) (value: '=')
 grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1"), currentNode,null); })?)(
-   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@1db3de (cardinality: null) (name: TypeRef)
+   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@865d61 (cardinality: null) (name: TypeRef)
 grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode); } 
    lv_typeName=ruleTypeRef
  
@@ -468,10 +468,10 @@ grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.
    }
    factory.set($current, "typeName", lv_typeName);
 }
-))((('.' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@2d0928 (cardinality: null) (value: '.')
+))((('.' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@87bd1c (cardinality: null) (value: '.')
 grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"), currentNode,null); }(
    
-   lv_feature=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@3e2446 (cardinality: null) (name: ID)
+   lv_feature=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@d71441 (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"feature"); }
  
 {     if ($current==null) {
@@ -488,10 +488,10 @@ grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.
       associateNodeWithAstElement(currentNode, $current);
    }
    factory.set($current, "operator", lv_operator);
-createLeafNode(// org.eclipse.xtext.impl.AlternativesImpl@d6c32 (cardinality: null)
+createLeafNode(// org.eclipse.xtext.impl.AlternativesImpl@1d434f (cardinality: null)
 grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"operator");}
-))'current' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@b36a83 (cardinality: null) (value: 'current')
-grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1"), currentNode,null); })?)'}' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@15f21b (cardinality: null) (value: '}')
+))'current' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@7ab0f7 (cardinality: null) (value: 'current')
+grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1"), currentNode,null); })?)'}' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@f82d80 (cardinality: null) (value: '}')
 grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.1"), currentNode,null); });
 
 
@@ -509,9 +509,9 @@ ruleAbstractTerminal returns [EObject current=null]
 ruleParenthesizedElement returns [EObject current=null] 
    @init { EObject temp=null; }
    :
-(('(' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@7de6a8 (cardinality: null) (value: '(')
+(('(' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@cf62dc (cardinality: null) (value: '(')
 grammar.eResource().getEObject("//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.0"), currentNode,null); }this_Alternatives=ruleAlternatives{$current = $this_Alternatives.current;}
-)')' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@f0bb81 (cardinality: null) (value: ')')
+)')' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@968f1 (cardinality: null) (value: ')')
 grammar.eResource().getEObject("//@parserRules.14/@alternatives/@abstractTokens.1"), currentNode,null); });
 
 
@@ -521,7 +521,7 @@ ruleKeyword returns [EObject current=null]
    :
 (
    
-   lv_value=RULE_STRING{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@d95b06 (cardinality: null) (name: STRING)
+   lv_value=RULE_STRING{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@a4e7e0 (cardinality: null) (name: STRING)
 grammar.eResource().getEObject("//@parserRules.15/@alternatives/@terminal"), currentNode,"value"); }
  
 {     if ($current==null) {
@@ -539,7 +539,7 @@ ruleRuleCall returns [EObject current=null]
    :
 (
    
-   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@52cfc2 (cardinality: null) (name: ID)
+   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@4d21f4 (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.16/@alternatives/@terminal"), currentNode,"name"); }
  
 {     if ($current==null) {
@@ -552,18 +552,18 @@ grammar.eResource().getEObject("//@parserRules.16/@alternatives/@terminal"), cur
 
 
 
-RULE_INT : ('0'..'9')+;
-
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+RULE_INT : ('0'..'9')+;
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+
+RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 

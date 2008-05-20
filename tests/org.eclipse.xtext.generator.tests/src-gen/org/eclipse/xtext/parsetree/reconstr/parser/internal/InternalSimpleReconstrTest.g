@@ -82,7 +82,7 @@ private CompositeNode currentNode;
 private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestConstants.getSimpleReconstrTestGrammar();
 }
 
-parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@ae508a (name: Op)
+parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@3692c8 (name: Op)
 grammar.eResource().getEObject("//@parserRules.0"), currentNode);}
 	ruleOp {$current=$ruleOp.current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
@@ -98,11 +98,11 @@ ruleOp returns [EObject current=null]
   factory.add(temp, "values",$current);
   $current = temp; 
   temp = null;
-  currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@674be7 (cardinality: null) (operator: +=, feature: values)
+  currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@b35a10 (cardinality: null) (operator: +=, feature: values)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0"), currentNode); 
   associateNodeWithAstElement(currentNode, $current); }
 )(
-   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@314093 (cardinality: null) (name: Term)
+   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@5fbed4 (cardinality: null) (name: Term)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"), currentNode); } 
    lv_values=ruleTerm
  
@@ -130,7 +130,7 @@ ruleAtom returns [EObject current=null]
    :
 (
    
-   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@18179d (cardinality: null) (name: ID)
+   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@fab5ad (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.2/@alternatives/@terminal"), currentNode,"name"); }
  
 {     if ($current==null) {
@@ -146,9 +146,9 @@ grammar.eResource().getEObject("//@parserRules.2/@alternatives/@terminal"), curr
 ruleParens returns [EObject current=null] 
    @init { EObject temp=null; }
    :
-((('(' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@31dfb (cardinality: null) (value: '(')
+((('(' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@395ead (cardinality: null) (value: '(')
 grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"), currentNode,null); }this_Op=ruleOp{$current = $this_Op.current;}
-)')' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@12cb99 (cardinality: null) (value: ')')
+)')' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@a12a0e (cardinality: null) (value: ')')
 grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })(
    
    lv_em='!'  
@@ -157,26 +157,26 @@ grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0
       associateNodeWithAstElement(currentNode, $current);
    }
    factory.set($current, "em", lv_em);
-createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@a6852a (cardinality: null) (value: '!')
+createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@885c6b (cardinality: null) (value: '!')
 grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.1/@terminal"), currentNode,"em");}
 )?);
 
 
 
+RULE_INT : ('0'..'9')+;
+
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
-
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
 	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+
+RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-RULE_INT : ('0'..'9')+;
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 

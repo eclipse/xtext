@@ -4,6 +4,7 @@ package org.eclipse.xtext;
 import java.util.*;
 
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.core.parser.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -12,11 +13,11 @@ import org.eclipse.xtext.parser.XtextGrammarTestASTFactory;
 
 public class XtextGrammarTestParseTreeConstructor extends AbstractParseTreeRewriter{
 	private AbstractEcoreElementFactory factory = new XtextGrammarTestASTFactory();
+	private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.XtextGrammarTestConstants.getXtextGrammarTestGrammar();
 	
 	protected AbstractEcoreElementFactory getFactory() {
 		return factory;
 	}
-	
 
 
 public void proceedGrammar(EObject obj) {
@@ -44,17 +45,24 @@ new Predicate(obj) {
 
 	Object value = obj.consume("lexerRules");
     
-    	
 /* xtext::RuleCall */ 
 {
 
 	
-		proceedLexerRule(getDescr((EObject)value));
+	InstanceDescription val = (getDescr((EObject)value));
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
+	try {
+		ruleCallStart(val, true, (RuleCall) ruleCall);
+		proceedLexerRule(val);
+	} finally {
+		ruleCallEnd(val, true, (RuleCall) ruleCall);
+	}
 	
 
 }
 
-    
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -66,7 +74,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction(":");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -74,7 +82,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("lexing");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -100,17 +108,24 @@ new Predicate(obj) {
 
 	Object value = obj.consume("parserRules");
     
-    	
 /* xtext::RuleCall */ 
 {
 
 	
-		proceedParserRule(getDescr((EObject)value));
+	InstanceDescription val = (getDescr((EObject)value));
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+	try {
+		ruleCallStart(val, true, (RuleCall) ruleCall);
+		proceedParserRule(val);
+	} finally {
+		ruleCallEnd(val, true, (RuleCall) ruleCall);
+	}
 	
 
 }
 
-    
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -126,17 +141,24 @@ new Predicate(obj) {
 
 	Object value = obj.consume("metamodelDeclarations");
     
-    	
 /* xtext::RuleCall */ 
 {
 
 	
-		proceedAbstractMetamodelDeclaration(getDescr((EObject)value));
+	InstanceDescription val = (getDescr((EObject)value));
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal");
+	try {
+		ruleCallStart(val, true, (RuleCall) ruleCall);
+		proceedAbstractMetamodelDeclaration(val);
+	} finally {
+		ruleCallEnd(val, true, (RuleCall) ruleCall);
+	}
 	
 
 }
 
-    
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -168,7 +190,14 @@ new Predicate(obj) {
 {
 
 	
-		proceedLexerRule(obj);
+	InstanceDescription val = obj;
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.1/@alternatives/@groups.0");
+	try {
+		ruleCallStart(val, false, (RuleCall) ruleCall);
+		proceedLexerRule(val);
+	} finally {
+		ruleCallEnd(val, false, (RuleCall) ruleCall);
+	}
 	
 
 }
@@ -185,7 +214,14 @@ new Predicate(obj) {
 {
 
 	
-		proceedParserRule(obj);
+	InstanceDescription val = obj;
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.1/@alternatives/@groups.1");
+	try {
+		ruleCallStart(val, false, (RuleCall) ruleCall);
+		proceedParserRule(val);
+	} finally {
+		ruleCallEnd(val, false, (RuleCall) ruleCall);
+	}
 	
 
 }
@@ -221,7 +257,14 @@ new Predicate(obj) {
 {
 
 	
-		proceedGeneratedMetamodel(obj);
+	InstanceDescription val = obj;
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.2/@alternatives/@groups.0");
+	try {
+		ruleCallStart(val, false, (RuleCall) ruleCall);
+		proceedGeneratedMetamodel(val);
+	} finally {
+		ruleCallEnd(val, false, (RuleCall) ruleCall);
+	}
 	
 
 }
@@ -238,7 +281,14 @@ new Predicate(obj) {
 {
 
 	
-		proceedReferencedMetamodel(obj);
+	InstanceDescription val = obj;
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.2/@alternatives/@groups.1");
+	try {
+		ruleCallStart(val, false, (RuleCall) ruleCall);
+		proceedReferencedMetamodel(val);
+	} finally {
+		ruleCallEnd(val, false, (RuleCall) ruleCall);
+	}
 	
 
 }
@@ -279,10 +329,19 @@ new Predicate(obj) {
 
 	Object value = obj.consume("alias");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -290,7 +349,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("as");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
@@ -307,10 +366,19 @@ new Predicate(obj) {
 
 	Object value = obj.consume("nsURI");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -324,10 +392,19 @@ new Predicate(obj) {
 
 	Object value = obj.consume("name");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -335,7 +412,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("generate");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -375,10 +452,19 @@ new Predicate(obj) {
 
 	Object value = obj.consume("alias");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -386,7 +472,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("as");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
@@ -403,10 +489,19 @@ new Predicate(obj) {
 
 	Object value = obj.consume("uri");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -414,7 +509,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("import");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -441,10 +536,19 @@ protected void proceedLexerRule(InstanceDescription obj) {
 
 	Object value = obj.consume("body");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.1/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -456,7 +560,7 @@ protected void proceedLexerRule(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction(":");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -480,10 +584,19 @@ new Predicate(obj) {
 
 	Object value = obj.consume("tokenType");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -491,7 +604,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("tokentype");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
@@ -504,10 +617,19 @@ new Predicate(obj) {
 
 	Object value = obj.consume("name");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -535,7 +657,7 @@ protected void proceedParserRule(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction(";");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -549,17 +671,24 @@ protected void proceedParserRule(InstanceDescription obj) {
 
 	Object value = obj.consume("alternatives");
     
-    	
 /* xtext::RuleCall */ 
 {
 
 	
-		proceedAlternatives(getDescr((EObject)value));
+	InstanceDescription val = (getDescr((EObject)value));
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+	try {
+		ruleCallStart(val, true, (RuleCall) ruleCall);
+		proceedAlternatives(val);
+	} finally {
+		ruleCallEnd(val, true, (RuleCall) ruleCall);
+	}
 	
 
 }
 
-    
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -571,7 +700,7 @@ protected void proceedParserRule(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction(":");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -595,17 +724,24 @@ new Predicate(obj) {
 
 	Object value = obj.consume("type");
     
-    	
 /* xtext::RuleCall */ 
 {
 
 	
-		proceedTypeRef(getDescr((EObject)value));
+	InstanceDescription val = (getDescr((EObject)value));
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
+	try {
+		ruleCallStart(val, true, (RuleCall) ruleCall);
+		proceedTypeRef(val);
+	} finally {
+		ruleCallEnd(val, true, (RuleCall) ruleCall);
+	}
 	
 
 }
 
-    
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -613,7 +749,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("returns");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
@@ -626,10 +762,19 @@ new Predicate(obj) {
 
 	Object value = obj.consume("name");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -662,10 +807,19 @@ protected void proceedTypeRef(InstanceDescription obj) {
 
 	Object value = obj.consume("name");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.7/@alternatives/@abstractTokens.1/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -683,7 +837,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("::");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -693,10 +847,19 @@ new Predicate(obj) {
 
 	Object value = obj.consume("alias");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -734,17 +897,24 @@ new Predicate(obj) {
 
 	Object value = obj.consume("groups");
     
-    	
 /* xtext::RuleCall */ 
 {
 
 	
-		proceedGroup(getDescr((EObject)value));
+	InstanceDescription val = (getDescr((EObject)value));
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
+	try {
+		ruleCallStart(val, true, (RuleCall) ruleCall);
+		proceedGroup(val);
+	} finally {
+		ruleCallEnd(val, true, (RuleCall) ruleCall);
+	}
 	
 
 }
 
-    
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -756,7 +926,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("|");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -764,8 +934,9 @@ new Predicate(obj) {
 /* xtext::Action */ 
 {
 
-	EObject newObj = (EObject) obj.consume("groups");
-	obj = getDescr(newObj);
+	InstanceDescription newObj = getDescr((EObject) obj.consume("groups"));
+	action(obj,newObj, (Action) grammar.eResource().getEObject("//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
+	obj = newObj;
 
 }
 
@@ -780,7 +951,14 @@ new Predicate(obj) {
 {
 
 	
-		proceedGroup(obj);
+	InstanceDescription val = obj;
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.8/@alternatives/@abstractTokens.0");
+	try {
+		ruleCallStart(val, false, (RuleCall) ruleCall);
+		proceedGroup(val);
+	} finally {
+		ruleCallEnd(val, false, (RuleCall) ruleCall);
+	}
 	
 
 }
@@ -816,17 +994,24 @@ new Predicate(obj) {
 
 	Object value = obj.consume("abstractTokens");
     
-    	
 /* xtext::RuleCall */ 
 {
 
 	
-		proceedAbstractToken(getDescr((EObject)value));
+	InstanceDescription val = (getDescr((EObject)value));
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.9/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
+	try {
+		ruleCallStart(val, true, (RuleCall) ruleCall);
+		proceedAbstractToken(val);
+	} finally {
+		ruleCallEnd(val, true, (RuleCall) ruleCall);
+	}
 	
 
 }
 
-    
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -834,8 +1019,9 @@ new Predicate(obj) {
 /* xtext::Action */ 
 {
 
-	EObject newObj = (EObject) obj.consume("abstractTokens");
-	obj = getDescr(newObj);
+	InstanceDescription newObj = getDescr((EObject) obj.consume("abstractTokens"));
+	action(obj,newObj, (Action) grammar.eResource().getEObject("//@parserRules.9/@alternatives/@abstractTokens.1/@abstractTokens.0"));
+	obj = newObj;
 
 }
 
@@ -847,7 +1033,14 @@ new Predicate(obj) {
 {
 
 	
-		proceedAbstractToken(obj);
+	InstanceDescription val = obj;
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.9/@alternatives/@abstractTokens.0");
+	try {
+		ruleCallStart(val, false, (RuleCall) ruleCall);
+		proceedAbstractToken(val);
+	} finally {
+		ruleCallEnd(val, false, (RuleCall) ruleCall);
+	}
 	
 
 }
@@ -878,10 +1071,88 @@ new Predicate(obj) {
 
 	Object value = obj.consume("cardinality");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::Alternatives */ 
+{
+
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ) {
+			
+/* xtext::Alternatives */ 
+{
+
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ) {
+			
+/* xtext::Keyword */ 
+{
+
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.10/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0"));
+
+}
+
+		}
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ) {
+			
+/* xtext::Keyword */ 
+{
+
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.10/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1"));
+
+}
+
+		}
+	
+		else {
+		    throw new IllegalStateException("No alternative matched");
+		}
+	
+
+}
+
+		}
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ) {
+			
+/* xtext::Keyword */ 
+{
+
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.10/@alternatives/@abstractTokens.1/@terminal/@groups.1"));
+
+}
+
+		}
+	
+		else {
+		    throw new IllegalStateException("No alternative matched");
+		}
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -915,7 +1186,14 @@ new Predicate(obj) {
 {
 
 	
-		proceedAssignment(obj);
+	InstanceDescription val = obj;
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.10/@alternatives/@abstractTokens.0/@groups.0/@groups.0");
+	try {
+		ruleCallStart(val, false, (RuleCall) ruleCall);
+		proceedAssignment(val);
+	} finally {
+		ruleCallEnd(val, false, (RuleCall) ruleCall);
+	}
 	
 
 }
@@ -932,7 +1210,14 @@ new Predicate(obj) {
 {
 
 	
-		proceedAction(obj);
+	InstanceDescription val = obj;
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.10/@alternatives/@abstractTokens.0/@groups.0/@groups.1");
+	try {
+		ruleCallStart(val, false, (RuleCall) ruleCall);
+		proceedAction(val);
+	} finally {
+		ruleCallEnd(val, false, (RuleCall) ruleCall);
+	}
 	
 
 }
@@ -958,7 +1243,14 @@ new Predicate(obj) {
 {
 
 	
-		proceedAbstractTerminal(obj);
+	InstanceDescription val = obj;
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.10/@alternatives/@abstractTokens.0/@groups.1");
+	try {
+		ruleCallStart(val, false, (RuleCall) ruleCall);
+		proceedAbstractTerminal(val);
+	} finally {
+		ruleCallEnd(val, false, (RuleCall) ruleCall);
+	}
 	
 
 }
@@ -992,17 +1284,24 @@ protected void proceedAssignment(InstanceDescription obj) {
 
 	Object value = obj.consume("terminal");
     
-    	
 /* xtext::RuleCall */ 
 {
 
 	
-		proceedAbstractTerminal(getDescr((EObject)value));
+	InstanceDescription val = (getDescr((EObject)value));
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.11/@alternatives/@abstractTokens.1/@terminal");
+	try {
+		ruleCallStart(val, true, (RuleCall) ruleCall);
+		proceedAbstractTerminal(val);
+	} finally {
+		ruleCallEnd(val, true, (RuleCall) ruleCall);
+	}
 	
 
 }
 
-    
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -1016,10 +1315,88 @@ protected void proceedAssignment(InstanceDescription obj) {
 
 	Object value = obj.consume("operator");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::Alternatives */ 
+{
+
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ) {
+			
+/* xtext::Alternatives */ 
+{
+
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ) {
+			
+/* xtext::Keyword */ 
+{
+
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.0"));
+
+}
+
+		}
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ) {
+			
+/* xtext::Keyword */ 
+{
+
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.1"));
+
+}
+
+		}
+	
+		else {
+		    throw new IllegalStateException("No alternative matched");
+		}
+	
+
+}
+
+		}
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ) {
+			
+/* xtext::Keyword */ 
+{
+
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
+
+}
+
+		}
+	
+		else {
+		    throw new IllegalStateException("No alternative matched");
+		}
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -1029,10 +1406,19 @@ protected void proceedAssignment(InstanceDescription obj) {
 
 	Object value = obj.consume("feature");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -1057,7 +1443,7 @@ protected void proceedAction(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("}");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -1079,7 +1465,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("current");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1"));
 
 }
 
@@ -1093,10 +1479,49 @@ new Predicate(obj) {
 
 	Object value = obj.consume("operator");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::Alternatives */ 
+{
+
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ) {
+			
+/* xtext::Keyword */ 
+{
+
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0"));
+
+}
+
+		}
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ) {
+			
+/* xtext::Keyword */ 
+{
+
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
+
+}
+
+		}
+	
+		else {
+		    throw new IllegalStateException("No alternative matched");
+		}
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -1110,10 +1535,19 @@ new Predicate(obj) {
 
 	Object value = obj.consume("feature");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -1121,7 +1555,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction(".");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -1144,17 +1578,24 @@ new Predicate(obj) {
 
 	Object value = obj.consume("typeName");
     
-    	
 /* xtext::RuleCall */ 
 {
 
 	
-		proceedTypeRef(getDescr((EObject)value));
+	InstanceDescription val = (getDescr((EObject)value));
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
+	try {
+		ruleCallStart(val, true, (RuleCall) ruleCall);
+		proceedTypeRef(val);
+	} finally {
+		ruleCallEnd(val, true, (RuleCall) ruleCall);
+	}
 	
 
 }
 
-    
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -1176,7 +1617,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("=");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1"));
 
 }
 
@@ -1184,7 +1625,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("current");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
@@ -1195,7 +1636,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("{");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -1248,7 +1689,14 @@ new Predicate(obj) {
 {
 
 	
-		proceedKeyword(obj);
+	InstanceDescription val = obj;
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.13/@alternatives/@groups.0/@groups.0");
+	try {
+		ruleCallStart(val, false, (RuleCall) ruleCall);
+		proceedKeyword(val);
+	} finally {
+		ruleCallEnd(val, false, (RuleCall) ruleCall);
+	}
 	
 
 }
@@ -1265,7 +1713,14 @@ new Predicate(obj) {
 {
 
 	
-		proceedRuleCall(obj);
+	InstanceDescription val = obj;
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.13/@alternatives/@groups.0/@groups.1");
+	try {
+		ruleCallStart(val, false, (RuleCall) ruleCall);
+		proceedRuleCall(val);
+	} finally {
+		ruleCallEnd(val, false, (RuleCall) ruleCall);
+	}
 	
 
 }
@@ -1291,7 +1746,14 @@ new Predicate(obj) {
 {
 
 	
-		proceedParenthesizedElement(obj);
+	InstanceDescription val = obj;
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.13/@alternatives/@groups.1");
+	try {
+		ruleCallStart(val, false, (RuleCall) ruleCall);
+		proceedParenthesizedElement(val);
+	} finally {
+		ruleCallEnd(val, false, (RuleCall) ruleCall);
+	}
 	
 
 }
@@ -1320,7 +1782,7 @@ protected void proceedParenthesizedElement(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction(")");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.14/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -1333,7 +1795,14 @@ protected void proceedParenthesizedElement(InstanceDescription obj) {
 {
 
 	
-		proceedAlternatives(obj);
+	InstanceDescription val = obj;
+	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.1");
+	try {
+		ruleCallStart(val, false, (RuleCall) ruleCall);
+		proceedAlternatives(val);
+	} finally {
+		ruleCallEnd(val, false, (RuleCall) ruleCall);
+	}
 	
 
 }
@@ -1342,7 +1811,7 @@ protected void proceedParenthesizedElement(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	executeAction("(");
+	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -1365,10 +1834,19 @@ protected void proceedKeyword(InstanceDescription obj) {
 
 	Object value = obj.consume("value");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.15/@alternatives/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
@@ -1385,10 +1863,19 @@ protected void proceedRuleCall(InstanceDescription obj) {
 
 	Object value = obj.consume("name");
     
-    	
-    	executeAction(value);
-    	
-    
+/* xtext::RuleCall */ 
+{
+
+	
+	
+	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.16/@alternatives/@terminal"));
+	
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 
