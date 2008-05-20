@@ -15,12 +15,21 @@ import xtextutil;
 
 extension org::openarchitectureware::util::stdlib::io; 
 
+String getID(emf::EObject object) :
+	JAVA org.eclipse.xtext.GrammarUtil.getID(org.eclipse.emf.ecore.EObject);
+
 // ***********************************************************************************
 // Containers
 
 Grammar grammar(emf::EObject e) :
-	(Grammar) e.eRootContainer
-;
+	if e.metaType==Grammar then
+		e
+	else 
+		if e.eContainer != null then
+			e.eContainer.grammar()
+		else
+			null
+; 
 
 Grammar grammar(ResolvedType t) :
 	t.metaModel.grammar()
@@ -136,29 +145,18 @@ qualifiedName(TypeRef this) :
 cached allLexerRules(Grammar this) :
 	lexerRules.union(builtinRules().select(e|lexerRules.forAll(e1|e1.name != e.name))).union({anyOtherRule()}).toList().sortBy(e|e.name=='ANY_OTHER'?1:0);
 		
+cached allDefinedTokenTypes(Grammar this) :
+	allLexerRules().tokenType.removeAll(builtinRules().tokenType);
 
-private create LexerRule lr(String name, String tokenType, String body) :
-	setName(name) ->
-	setTokenType(tokenType)->
-	setBody(body);
-	
-cached anyOtherRule() : lr('ANY_OTHER','anyother','.');
-	
-cached builtinRules() :
-	{
-	lr('ID','identifier', "('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*"),
-	lr('INT','integer',"('0'..'9')+"),
-	lr('LEXER_BODY','stringliteral',"'<#' ( options {greedy=false;} : . )* '#>'"),
- 	lr('STRING','stringliteral', "'"+dq()+"' ( '"+bs2()+"' ('b'|'t'|'n'|'f'|'r'|'"+bs()+""+dq()+"'|'"+bs()+"''|'"+bs2()+"') | ~('"+bs2()+"'|'"+dq()+"') )* '"+dq()+"' |
-	'"+bs()+"'' ( '"+bs2()+"' ('b'|'t'|'n'|'f'|'r'|'"+bs()+""+dq()+"'|'"+bs()+"''|'"+bs2()+"') | ~('"+bs2()+"'|'"+bs()+"'') )* '"+bs()+"''"),
-	lr('ML_COMMENT','comment',"'/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}"),
-	lr('SL_COMMENT','comment',"'//' ~('"+bs()+"n'|'"+bs()+"r')* '"+bs()+"r'? '"+bs()+"n' {$channel=HIDDEN;}"),
-	lr('WS','whitespace',"(' '|'"+bs()+"t'|'"+bs()+"r'|'"+bs()+"n')+ {$channel=HIDDEN;}")
-	};
+boolean isBuiltinRule(LexerRule this) :
+	builtinRules().contains(this);
 
-private dq() : '"';
-private bs() : '\\';
-private bs2() : bs()+bs();
+LexerRule anyOtherRule() : 
+	JAVA org.eclipse.xtext.BuiltinRules.BuiltinAnyOther();
+	
+List[LexerRule] builtinRules() :
+	JAVA org.eclipse.xtext.BuiltinRules.getBuiltinLexerRules();
+	
 
 // *************************
 // generic utilities
