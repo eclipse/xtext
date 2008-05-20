@@ -9,17 +9,10 @@ import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.metamodelreferencing.tests.parser.MetamodelRefTestASTFactory;
 
-public class MetamodelRefTestParseTreeConstructor extends AbstractParseTreeUpdater {
-	private AbstractEcoreElementFactory factory = new MetamodelRefTestASTFactory();
-	private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestConstants.getMetamodelRefTestGrammar();
-	
-	protected AbstractEcoreElementFactory getFactory() {
-		return factory;
-	}
-	
-	protected Grammar getGrammar() {
-		return grammar;
-	}
+public class MetamodelRefTestParseTreeConstructor extends AbstractParseTreeConstructor {
+    protected ILanguageFacade getFacade() {
+    	return LanguageFacadeFactory.getFacade("org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest");
+    }
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
 		if (ruleToCall.equals("Foo")) {
@@ -54,7 +47,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = (getDescr((EObject)value));
-	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@terminal");
+	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@terminal");
 	try {
 		ruleCallStart(val, true, (RuleCall) ruleCall);
 		proceedNameRef(val);
@@ -80,9 +73,9 @@ new Predicate(obj) {
 {
 
 	
-	
-	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@terminal"));
-	
+		
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@terminal"));
+		
 	
 
 }
@@ -108,9 +101,9 @@ protected void proceedNameRef(InstanceDescription obj) {
 {
 
 	
-	
-	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.1/@alternatives/@terminal"));
-	
+		
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@terminal"));
+		
 	
 
 }

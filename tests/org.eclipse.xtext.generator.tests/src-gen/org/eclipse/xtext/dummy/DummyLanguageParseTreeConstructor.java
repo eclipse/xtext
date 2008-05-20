@@ -9,17 +9,10 @@ import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.dummy.parser.DummyLanguageASTFactory;
 
-public class DummyLanguageParseTreeConstructor extends AbstractParseTreeUpdater {
-	private AbstractEcoreElementFactory factory = new DummyLanguageASTFactory();
-	private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.dummy.DummyLanguageConstants.getDummyLanguageGrammar();
-	
-	protected AbstractEcoreElementFactory getFactory() {
-		return factory;
-	}
-	
-	protected Grammar getGrammar() {
-		return grammar;
-	}
+public class DummyLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
+    protected ILanguageFacade getFacade() {
+    	return LanguageFacadeFactory.getFacade("org/eclipse/xtext/dummy/DummyLanguage");
+    }
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
 		if (ruleToCall.equals("Model")) {
@@ -50,7 +43,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = (getDescr((EObject)value));
-	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal");
+	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@terminal");
 	try {
 		ruleCallStart(val, true, (RuleCall) ruleCall);
 		proceedElement(val);
@@ -77,7 +70,7 @@ protected void proceedElement(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -101,9 +94,9 @@ new Predicate(obj) {
 {
 
 	
-	
-	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
-	
+		
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		
 	
 
 }
@@ -127,9 +120,9 @@ new Predicate(obj) {
 {
 
 	
-	
-	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
-	
+		
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		
 	
 
 }
@@ -147,7 +140,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -166,7 +159,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
 
 }
 

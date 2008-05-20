@@ -9,17 +9,10 @@ import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.grammargen.tests.parser.SimpleTestASTFactory;
 
-public class SimpleTestParseTreeConstructor extends AbstractParseTreeUpdater {
-	private AbstractEcoreElementFactory factory = new SimpleTestASTFactory();
-	private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.grammargen.tests.SimpleTestConstants.getSimpleTestGrammar();
-	
-	protected AbstractEcoreElementFactory getFactory() {
-		return factory;
-	}
-	
-	protected Grammar getGrammar() {
-		return grammar;
-	}
+public class SimpleTestParseTreeConstructor extends AbstractParseTreeConstructor {
+    protected ILanguageFacade getFacade() {
+    	return LanguageFacadeFactory.getFacade("org/eclipse/xtext/grammargen/tests/SimpleTest");
+    }
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
 		if (ruleToCall.equals("Foo")) {
@@ -41,9 +34,9 @@ protected void proceedFoo(InstanceDescription obj) {
 {
 
 	
-	
-	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal"));
-	
+		
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@terminal"));
+		
 	
 
 }

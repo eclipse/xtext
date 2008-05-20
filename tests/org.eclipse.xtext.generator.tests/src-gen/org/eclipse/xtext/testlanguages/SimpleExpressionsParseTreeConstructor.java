@@ -9,17 +9,10 @@ import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.testlanguages.parser.SimpleExpressionsASTFactory;
 
-public class SimpleExpressionsParseTreeConstructor extends AbstractParseTreeUpdater {
-	private AbstractEcoreElementFactory factory = new SimpleExpressionsASTFactory();
-	private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.testlanguages.SimpleExpressionsConstants.getSimpleExpressionsGrammar();
-	
-	protected AbstractEcoreElementFactory getFactory() {
-		return factory;
-	}
-	
-	protected Grammar getGrammar() {
-		return grammar;
-	}
+public class SimpleExpressionsParseTreeConstructor extends AbstractParseTreeConstructor {
+    protected ILanguageFacade getFacade() {
+    	return LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/SimpleExpressions");
+    }
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
 		if (ruleToCall.equals("Multiplication")) {
@@ -65,7 +58,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = (getDescr((EObject)value));
-	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
+	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
 	try {
 		ruleCallStart(val, true, (RuleCall) ruleCall);
 		proceedAddition(val);
@@ -104,7 +97,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0"));
 
 }
 
@@ -119,7 +112,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
 
 }
 
@@ -142,7 +135,7 @@ new Predicate(obj) {
 {
 
 	InstanceDescription newObj = getDescr((EObject) obj.consume("values"));
-	action(obj,newObj, (Action) grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
+	action(obj,newObj, (Action) getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
 	obj = newObj;
 
 }
@@ -159,7 +152,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = obj;
-	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0");
+	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0");
 	try {
 		ruleCallStart(val, false, (RuleCall) ruleCall);
 		proceedAddition(val);
@@ -202,7 +195,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = (getDescr((EObject)value));
-	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
+	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
 	try {
 		ruleCallStart(val, true, (RuleCall) ruleCall);
 		proceedTerm(val);
@@ -241,7 +234,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0"));
 
 }
 
@@ -256,7 +249,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
 
 }
 
@@ -279,7 +272,7 @@ new Predicate(obj) {
 {
 
 	InstanceDescription newObj = getDescr((EObject) obj.consume("values"));
-	action(obj,newObj, (Action) grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
+	action(obj,newObj, (Action) getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
 	obj = newObj;
 
 }
@@ -296,7 +289,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = obj;
-	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0");
+	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0");
 	try {
 		ruleCallStart(val, false, (RuleCall) ruleCall);
 		proceedTerm(val);
@@ -329,7 +322,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = obj;
-	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.2/@alternatives/@groups.0");
+	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.2/@alternatives/@groups.0");
 	try {
 		ruleCallStart(val, false, (RuleCall) ruleCall);
 		proceedAtom(val);
@@ -353,7 +346,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = obj;
-	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.2/@alternatives/@groups.1");
+	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.2/@alternatives/@groups.1");
 	try {
 		ruleCallStart(val, false, (RuleCall) ruleCall);
 		proceedParens(val);
@@ -386,9 +379,9 @@ protected void proceedAtom(InstanceDescription obj) {
 {
 
 	
-	
-	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("//@parserRules.3/@alternatives/@terminal"));
-	
+		
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.3/@alternatives/@terminal"));
+		
 	
 
 }
@@ -409,7 +402,7 @@ protected void proceedParens(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.1"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -423,7 +416,7 @@ protected void proceedParens(InstanceDescription obj) {
 
 	
 	InstanceDescription val = obj;
-	EObject ruleCall = grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.1");
+	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.1");
 	try {
 		ruleCallStart(val, false, (RuleCall) ruleCall);
 		proceedMultiplication(val);
@@ -438,7 +431,7 @@ protected void proceedParens(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)grammar.eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0"));
 
 }
 

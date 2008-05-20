@@ -2,6 +2,7 @@ package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.LanguageFacadeFactory;
 
 public abstract class SimpleReconstrTestStandaloneSetup {
 
@@ -10,9 +11,8 @@ public abstract class SimpleReconstrTestStandaloneSetup {
 				"ecore", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@db7247 (alias: null) (nsURI: "http://simple/rewrite/test", name: simplerewritetest)
-		
+		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest")==null)
+			LanguageFacadeFactory.register("org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest",new SimpleReconstrTestLanguageFacade());
 	}
 
 }

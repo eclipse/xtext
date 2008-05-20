@@ -2,6 +2,7 @@ package org.eclipse.xtext.dummy;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.LanguageFacadeFactory;
 
 public abstract class DummyLanguageStandaloneSetup {
 
@@ -10,9 +11,8 @@ public abstract class DummyLanguageStandaloneSetup {
 				"ecore", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@120157 (alias: null) (nsURI: "http://www.eclipse.org/2008/xtext/DummyLang", name: DummyLang)
-		
+		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/dummy/DummyLanguage")==null)
+			LanguageFacadeFactory.register("org/eclipse/xtext/dummy/DummyLanguage",new DummyLanguageLanguageFacade());
 	}
 
 }

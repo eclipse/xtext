@@ -12,7 +12,7 @@
 «IMPORT xtext»
 
 «EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
-«EXTENSION org::eclipse::xtext::grammargen::ParseTreeConstructor»
+«EXTENSION org::eclipse::xtext::parsetree::ParseTreeConstructor»
 «EXTENSION org::eclipse::xtext::TypeResolution»
 «EXTENSION org::openarchitectureware::util::stdlib::collections»
 «EXTENSION org::openarchitectureware::util::stdlib::io»
@@ -29,17 +29,10 @@ import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 import «packageName()».parser.«languageName()»ASTFactory;
 
-public class «languageName()»ParseTreeConstructor extends AbstractParseTreeUpdater {
-	private AbstractEcoreElementFactory factory = new «languageName()»ASTFactory();
-	private org.eclipse.xtext.Grammar grammar = «packageName()».«constantsClassName()».get«languageName()»Grammar();
-	
-	protected AbstractEcoreElementFactory getFactory() {
-		return factory;
-	}
-	
-	protected Grammar getGrammar() {
-		return grammar;
-	}
+public class «languageName()»ParseTreeConstructor extends AbstractParseTreeConstructor {
+    protected ILanguageFacade getFacade() {
+    	return LanguageFacadeFactory.getFacade("«languageId()»");
+    }
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
 		«FOREACH parserRules AS pr SEPARATOR ' else '-»
@@ -84,19 +77,19 @@ new Predicate(obj) {
 «ENDDEFINE»
 
 «DEFINE statement2 FOR Keyword»
-	keyword((Keyword)grammar.eResource().getEObject("«getID()»"));
+	keyword((Keyword)getGrammar().eResource().getEObject("«getID()»"));
 «ENDDEFINE»
 
 «DEFINE statement2 FOR Action»
 	InstanceDescription newObj = getDescr((EObject) obj.consume("«feature»"));
-	action(obj,newObj, (Action) grammar.eResource().getEObject("«getID()»"));
+	action(obj,newObj, (Action) getGrammar().eResource().getEObject("«getID()»"));
 	obj = newObj;
 «ENDDEFINE»
 
 «DEFINE statement2 FOR RuleCall»
 	«IF calledParserRule()!=null»
 	InstanceDescription val = «isAssigned() ? '(getDescr((EObject)value))' : 'obj'»;
-	EObject ruleCall = grammar.eResource().getEObject("«getID()»");
+	EObject ruleCall = getGrammar().eResource().getEObject("«getID()»");
 	try {
 		ruleCallStart(val, «isAssigned()», (RuleCall) ruleCall);
 		«calledRule().methodName()»(val);
@@ -104,11 +97,11 @@ new Predicate(obj) {
 		ruleCallEnd(val, «isAssigned()», (RuleCall) ruleCall);
 	}
 	«ELSE»
-	«IF isAssigned()»
-	lexerRuleCall(value,(RuleCall)grammar.eResource().getEObject("«getID()»"));
-	«ELSE»
-	lexerRuleCall((RuleCall)grammar.eResource().getEObject("«getID()»"));
-	«ENDIF»
+		«IF isAssigned()»
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("«getID()»"));
+		«ELSE»
+		lexerRuleCall((RuleCall)getGrammar().eResource().getEObject("«getID()»"));
+		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
 

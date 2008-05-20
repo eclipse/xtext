@@ -2,6 +2,7 @@ package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.LanguageFacadeFactory;
 
 public abstract class SimpleExpressionsStandaloneSetup {
 
@@ -10,9 +11,8 @@ public abstract class SimpleExpressionsStandaloneSetup {
 				"ecore", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@f460af (alias: null) (nsURI: "http://www.eclipse.org/xtext/test/simpleExpressions", name: simpleExpressions)
-		
+		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/SimpleExpressions")==null)
+			LanguageFacadeFactory.register("org/eclipse/xtext/testlanguages/SimpleExpressions",new SimpleExpressionsLanguageFacade());
 	}
 
 }

@@ -14,26 +14,53 @@
 «EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
 
 «DEFINE file FOR Grammar»
-«FILE pathName()+'/'+languageName()+'Constants.java'-»
+«FILE pathName()+'/'+languageName()+'LanguageFacade.java'-»
 package «packageName()»;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.core.parser.IElementFactory;
+import org.eclipse.xtext.core.parser.IParser;
+import org.eclipse.xtext.core.parsetree.IParseTreeConstructor;
+import «packageName()».parser.*;
 
-public class «constantsClassName()» extends org.eclipse.xtext.core.parser.BaseEPackageAccess {
+public class «languageName()»LanguageFacade extends org.eclipse.xtext.core.parser.BaseEPackageAccess implements ILanguageFacade {
+    public static final String LANGUAGE_ID = "«languageId()»";
 	public static final String «languageName().toUpperCase()»_GRAMMAR_CP_URI = "«pathName()»/«languageName()».xmi";
 	private static Grammar GRAMMAR = null;
 	
-	public static Grammar get«languageName()»Grammar() {	
+	public Grammar getGrammar() {	
 		if (GRAMMAR==null) {
 			// assert the XtextPackage implementation is loaded
 			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(«languageName()»Constants.class.getClassLoader(),«languageName().toUpperCase()»_GRAMMAR_CP_URI);
+			GRAMMAR = (Grammar) loadGrammarFile(«languageName()»LanguageFacade.class.getClassLoader(),«languageName().toUpperCase()»_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;
 	}
 	
+	private IElementFactory factory = new «languageName()»ASTFactory();
+	public IElementFactory getElementFactory() {
+		return factory;
+	}
+	private IParser parser = new «languageName()»Parser();
+	public IParser getParser() {
+		return parser;
+	}
+	
+	private IParseTreeConstructor constructor = new «languageName()»ParseTreeConstructor();
+	public IParseTreeConstructor getParsetreeConstructor() {
+		return constructor;
+	}
+
+	public EPackage[] getGeneratedEPackages() {
+		return new EPackage[] {
+		«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm SEPARATOR ","»
+		get«gmm.name»EPackage()
+		«ENDFOREACH»
+		};
+	}
 
 	«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm»
 	public static final String «gmm.name.toUpperCase()»_NS_URI = "«gmm.nsURI.trimFromStartAndEnd(1)»";
@@ -41,7 +68,7 @@ public class «constantsClassName()» extends org.eclipse.xtext.core.parser.BaseEP
 	
 	public static EPackage get«gmm.name»EPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(«gmm.name.toUpperCase()»_NS_URI)) {
-			EPackage p = loadEcoreFile(«languageName()»Constants.class.getClassLoader(),«gmm.name.toUpperCase()»_CP_URI);
+			EPackage p = loadEcoreFile(«languageName()»LanguageFacade.class.getClassLoader(),«gmm.name.toUpperCase()»_CP_URI);
 			if (p!=null) {
 				EPackage.Registry.INSTANCE.put(«gmm.name.toUpperCase()»_NS_URI,p);
 			}
