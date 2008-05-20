@@ -11,7 +11,7 @@ public abstract class SimpleReconstrTestStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@d743b8 (alias: null) (nsURI: "http://simple/rewrite/test", name: simplerewritetest)
+		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@a41c13 (alias: null) (nsURI: "http://simple/rewrite/test", name: simplerewritetest)
 		
 	}
 

@@ -18,7 +18,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model,new ComplexReconstrTestASTFactory());
 		ComplexReconstrTestParseTreeConstructor con = new ComplexReconstrTestParseTreeConstructor();
-		con.proceedOp(result);
+		con.update(result);
 		String resultString = con.getText();
 		return resultString;
 	}

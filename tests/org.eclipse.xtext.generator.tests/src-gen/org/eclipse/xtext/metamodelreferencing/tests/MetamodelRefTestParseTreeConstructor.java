@@ -3,27 +3,35 @@ package org.eclipse.xtext.metamodelreferencing.tests;
 
 import java.util.*;
 
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.core.parser.*;
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.metamodelreferencing.tests.parser.MetamodelRefTestASTFactory;
 
-public class MetamodelRefTestParseTreeConstructor extends AbstractParseTreeRewriter{
+public class MetamodelRefTestParseTreeConstructor extends AbstractParseTreeUpdater {
 	private AbstractEcoreElementFactory factory = new MetamodelRefTestASTFactory();
 	private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestConstants.getMetamodelRefTestGrammar();
 	
 	protected AbstractEcoreElementFactory getFactory() {
 		return factory;
 	}
+	
+	protected Grammar getGrammar() {
+		return grammar;
+	}
 
+	protected void internalDoUpdate(EObject obj, String ruleToCall) {
+		if (ruleToCall.equals("Foo")) {
+			proceedFoo(getDescr(obj));
+		} else 		if (ruleToCall.equals("NameRef")) {
+			proceedNameRef(getDescr(obj));
+		} else {
+			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+		}
+	}
 
-public void proceedFoo(EObject obj) {
-	proceedFoo(getDescr(obj));
-}
-
+	
 protected void proceedFoo(InstanceDescription obj) {
 	
 /* xtext::Group */ 
@@ -87,10 +95,6 @@ new Predicate(obj) {
 
 }
 
-}
-
-public void proceedNameRef(EObject obj) {
-	proceedNameRef(getDescr(obj));
 }
 
 protected void proceedNameRef(InstanceDescription obj) {

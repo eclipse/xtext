@@ -29,22 +29,22 @@ public class SimpleTest2TokenTypeResolver {
 			// RULE_STRING
 			return BuiltinRules.BUILTIN_STRING;
 
+		case 6:
+			// RULE_LEXER_BODY
+			return BuiltinRules.BUILTIN_LEXER_BODY;
+
 		case 11:
 			// RULE_ANY_OTHER
 			return BuiltinRules.BUILTIN_ANY_OTHER;
 
-		case 6:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
-
 
 		case 10:
-			// RULE_LEXER_BODY
-			return BuiltinRules.BUILTIN_LEXER_BODY;
-
-		case 7:
 			// RULE_WS
 			return BuiltinRules.BUILTIN_WS;
+
+		case 7:
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 
 		case 5:

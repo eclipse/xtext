@@ -3,27 +3,41 @@ package org.eclipse.xtext.test;
 
 import java.util.*;
 
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.core.parser.*;
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.test.parser.TestLanguageASTFactory;
 
-public class TestLanguageParseTreeConstructor extends AbstractParseTreeRewriter{
+public class TestLanguageParseTreeConstructor extends AbstractParseTreeUpdater {
 	private AbstractEcoreElementFactory factory = new TestLanguageASTFactory();
 	private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.test.TestLanguageConstants.getTestLanguageGrammar();
 	
 	protected AbstractEcoreElementFactory getFactory() {
 		return factory;
 	}
+	
+	protected Grammar getGrammar() {
+		return grammar;
+	}
 
+	protected void internalDoUpdate(EObject obj, String ruleToCall) {
+		if (ruleToCall.equals("EntryRule")) {
+			proceedEntryRule(getDescr(obj));
+		} else 		if (ruleToCall.equals("AbstractRule")) {
+			proceedAbstractRule(getDescr(obj));
+		} else 		if (ruleToCall.equals("ChoiceRule")) {
+			proceedChoiceRule(getDescr(obj));
+		} else 		if (ruleToCall.equals("ReducibleRule")) {
+			proceedReducibleRule(getDescr(obj));
+		} else 		if (ruleToCall.equals("TerminalRule")) {
+			proceedTerminalRule(getDescr(obj));
+		} else {
+			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+		}
+	}
 
-public void proceedEntryRule(EObject obj) {
-	proceedEntryRule(getDescr(obj));
-}
-
+	
 protected void proceedEntryRule(InstanceDescription obj) {
 	
 /* xtext::Assignment */ 
@@ -58,10 +72,6 @@ new Predicate(obj) {
 
 }
 
-}
-
-public void proceedAbstractRule(EObject obj) {
-	proceedAbstractRule(getDescr(obj));
 }
 
 protected void proceedAbstractRule(InstanceDescription obj) {
@@ -125,10 +135,6 @@ new Predicate(obj) {
 
 }
 
-}
-
-public void proceedChoiceRule(EObject obj) {
-	proceedChoiceRule(getDescr(obj));
 }
 
 protected void proceedChoiceRule(InstanceDescription obj) {
@@ -200,10 +206,6 @@ new Predicate(obj) {
 
 }
 
-}
-
-public void proceedReducibleRule(EObject obj) {
-	proceedReducibleRule(getDescr(obj));
 }
 
 protected void proceedReducibleRule(InstanceDescription obj) {
@@ -297,10 +299,6 @@ new Predicate(obj) {
 
 }
 
-}
-
-public void proceedTerminalRule(EObject obj) {
-	proceedTerminalRule(getDescr(obj));
 }
 
 protected void proceedTerminalRule(InstanceDescription obj) {

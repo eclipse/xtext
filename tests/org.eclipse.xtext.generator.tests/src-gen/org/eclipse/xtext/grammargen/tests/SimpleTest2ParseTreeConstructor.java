@@ -3,27 +3,35 @@ package org.eclipse.xtext.grammargen.tests;
 
 import java.util.*;
 
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.core.parser.*;
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.grammargen.tests.parser.SimpleTest2ASTFactory;
 
-public class SimpleTest2ParseTreeConstructor extends AbstractParseTreeRewriter{
+public class SimpleTest2ParseTreeConstructor extends AbstractParseTreeUpdater {
 	private AbstractEcoreElementFactory factory = new SimpleTest2ASTFactory();
 	private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.grammargen.tests.SimpleTest2Constants.getSimpleTest2Grammar();
 	
 	protected AbstractEcoreElementFactory getFactory() {
 		return factory;
 	}
+	
+	protected Grammar getGrammar() {
+		return grammar;
+	}
 
+	protected void internalDoUpdate(EObject obj, String ruleToCall) {
+		if (ruleToCall.equals("Model")) {
+			proceedModel(getDescr(obj));
+		} else 		if (ruleToCall.equals("Child")) {
+			proceedChild(getDescr(obj));
+		} else {
+			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+		}
+	}
 
-public void proceedModel(EObject obj) {
-	proceedModel(getDescr(obj));
-}
-
+	
 protected void proceedModel(InstanceDescription obj) {
 	
 /* xtext::Assignment */ 
@@ -58,10 +66,6 @@ new Predicate(obj) {
 
 }
 
-}
-
-public void proceedChild(EObject obj) {
-	proceedChild(getDescr(obj));
 }
 
 protected void proceedChild(InstanceDescription obj) {
