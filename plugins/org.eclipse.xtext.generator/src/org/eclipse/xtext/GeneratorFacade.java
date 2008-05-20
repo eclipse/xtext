@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.util.GenProperties;
 import org.eclipse.xtext.xtextutil.XtextutilPackage;
-import org.openarchitectureware.emf.EcoreUtil2;
 import org.openarchitectureware.expression.ExecutionContextImpl;
 import org.openarchitectureware.xpand2.XpandExecutionContextImpl;
 import org.openarchitectureware.xpand2.XpandFacade;
@@ -57,7 +56,7 @@ public class GeneratorFacade {
         // The directory is now empty so delete it
         return file.delete();
     }
-    
+	
 	@SuppressWarnings("unchecked")
 	public static void generate(Grammar grammarModel, String languageName, String languageNamespace, String srcGenPath)
 			throws IOException {
@@ -72,13 +71,13 @@ public class GeneratorFacade {
 			protected EPackage[] allPackages() {
 				return new EPackage[] { XtextPackage.eINSTANCE, XtextutilPackage.eINSTANCE, EcorePackage.eINSTANCE };
 			}
-
 		};
 		execCtx.registerMetaModel(metamodel);
 
 		Properties p = new Properties();
 		p.setProperty("language.name", languageName);
 		p.setProperty("language.namespace", languageNamespace);
+		p.setProperty("src.gen.path", srcGenPath);
 		GenProperties.setProperties(p);
 
 		ResourceSetImpl setImpl = new ResourceSetImpl();
@@ -90,6 +89,7 @@ public class GeneratorFacade {
 		facade.evaluate("org::eclipse::xtext::grammargen::AntlrGrammar::grammar", grammarModel);
 		facade.evaluate("org::eclipse::xtext::grammargen::ParseTreeConstructor::file", grammarModel);
 		facade.evaluate("org::eclipse::xtext::Constants::file", grammarModel);
+		facade.evaluate("org::eclipse::xtext::TokenTypes::file", grammarModel);
 		facade.evaluate("org::eclipse::xtext::StandaloneSetup::file", grammarModel);
 		facade.evaluate("org::eclipse::xtext::ParserFacade::parser", grammarModel);
 		facade.evaluate("org::eclipse::xtext::ASTFactory::factory", grammarModel);
@@ -99,9 +99,13 @@ public class GeneratorFacade {
 		Tool antlr = new Tool(new String[] { srcGenPath+"/" + grammar });
 		antlr.process();
 		
-		// generate Lexer constants
-		GenerateTokensEnum.doGenerate(srcGenPath, languageNamespace, languageName);
+		// generate Lexer constants (not needed any longer)
+		// TokenTypesExtensions.doGenerate(srcGenPath, languageNamespace, languageName);
 
+		// generate AntlrTokenResolver
+		TokenTypesExtensions.loadTokenTypeNames(srcGenPath, languageNamespace, languageName);
+		facade.evaluate("org::eclipse::xtext::AntlrTokenTypeResolver::file", grammarModel);
+		
 		// generate EPackage
 		ExecutionContextImpl executionContext = new ExecutionContextImpl();
 		executionContext.registerMetaModel(metamodel);

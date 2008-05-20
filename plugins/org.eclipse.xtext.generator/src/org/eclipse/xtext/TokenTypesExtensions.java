@@ -2,16 +2,21 @@ package org.eclipse.xtext;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.WrappedException;
 
-public class GenerateTokensEnum {
+public class TokenTypesExtensions {
+	
+	private static Map<Object,String> tokenTypeMap;
+
 	public static void main(String[] args) {
 		doGenerate("../org.eclipse.xtext.generator.tests/src-gen", "org/eclipse/xtext", "XtextGrammarTest");
 	}
@@ -42,7 +47,39 @@ public class GenerateTokensEnum {
 			throw new WrappedException(e);
 		}
 	}
-
+	
+	public static String getAntlrTokenName(Object antlrTokenId) {
+		return tokenTypeMap.get(antlrTokenId);
+	}
+	
+	public static Set<Object> getAntlrTokenTypes() {
+		return tokenTypeMap.keySet();
+	}
+	
+	public static Map<Object, String> loadTokenTypeNames(String srcGen, String languageNamespace, String languageName) {
+		try {
+			tokenTypeMap = new HashMap<Object, String>();
+			File file = new File(srcGen + "/" + languageNamespace + "/parser/internal/Internal" + languageName + ".tokens");
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			String line = br.readLine();
+			Pattern pattern = Pattern.compile("(.*)=(\\d+)");
+			while (line != null) {
+				Matcher m = pattern.matcher(line);
+				if (!m.matches()) {
+					throw new IllegalStateException("Couldn't match line : '" + line + "'");
+				}
+				
+				String tokenTypeId = m.group(2);
+				String token = m.group(1);
+				tokenTypeMap.put(Integer.parseInt(tokenTypeId), token);
+				line = br.readLine();
+			}
+			return tokenTypeMap;
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
+	}
+	
 	private static String toJavaIdentifier(String string) {
 		if (string.startsWith("'")) {
 			string = string.substring(1, string.length() - 1);
