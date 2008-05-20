@@ -23,7 +23,6 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.dummy.DummyLanguage;
 import org.eclipse.xtext.grammargen.tests.SimpleTest;
 import org.eclipse.xtext.grammargen.tests.SimpleTest2;
-import org.eclipse.xtext.lexer.LexerLanguage;
 import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest;
 import org.eclipse.xtext.parser.XtextASTFactory;
 import org.eclipse.xtext.parser.XtextParser;
@@ -31,6 +30,7 @@ import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest;
 import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest;
 import org.eclipse.xtext.test.TestLanguage;
 import org.eclipse.xtext.testlanguages.ActionTestLanguage;
+import org.eclipse.xtext.testlanguages.LexerLanguage;
 import org.eclipse.xtext.testlanguages.SimpleExpressions;
 
 /**

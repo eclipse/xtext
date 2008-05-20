@@ -65,10 +65,10 @@ Void createAndAddEStructuralFeature(Action a, EClass owningClass) :
 ;
 
 EStructuralFeature createEStructuralFeature(Assignment a) :
-	if a.featureIsReference() then
-		a.createEReference() 
-	else 
+	if BuiltinType.isInstance(a.resolveReturnType()) then
 		a.createEAttribute()
+	else 
+		a.createEReference() 
 ;
 
 create EAttribute createEAttribute(Assignment a) :
