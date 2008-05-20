@@ -25,8 +25,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextConstants;
+import org.eclipse.xtext.XtextLanguageFacade;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.XtextASTFactory;
 import org.eclipse.xtext.parser.XtextParser;
 import org.eclipse.xtext.xtextutil.XtextutilPackage;
@@ -41,12 +42,14 @@ public class TestBootstrapModel extends TestCase {
 
 	@SuppressWarnings("unchecked")
 	public void testParseXtextGrammarTransformXtend() throws IOException, RecognitionException, InterruptedException {
+		XtextStandaloneSetup.doSetup();
+		
 		InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(
 				"org/eclipse/xtext/XTextGrammarTest.xtext");
 
 		// TODO make Xtext2Factory manual so one can overwrite' getEPackages' in
 		// order to support generated epackages
-		EPackage.Registry.INSTANCE.put(XtextConstants.XTEXT_NS_URI, XtextPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put(XtextLanguageFacade.XTEXT_NS_URI, XtextPackage.eINSTANCE);
 		XtextParser xtext2Parser = new XtextParser();
 		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory());
 
