@@ -2,6 +2,7 @@ package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.LanguageFacadeFactory;
 
 public abstract class ComplexReconstrTestStandaloneSetup {
 
@@ -10,9 +11,8 @@ public abstract class ComplexReconstrTestStandaloneSetup {
 				"ecore", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@1cc162 (alias: null) (nsURI: "http://complex/rewrite/test", name: complexrewritetest)
-		
+		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest")==null)
+			LanguageFacadeFactory.register("org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest",new ComplexReconstrTestLanguageFacade());
 	}
 
 }

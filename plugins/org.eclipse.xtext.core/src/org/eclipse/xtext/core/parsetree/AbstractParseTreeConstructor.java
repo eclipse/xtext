@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
 package org.eclipse.xtext.core.parsetree;
 
 import java.util.HashMap;
@@ -11,12 +19,17 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.core.parser.AbstractEcoreElementFactory;
 
-public abstract class AbstractParseTreeUpdater {
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ *
+ */
+public abstract class AbstractParseTreeConstructor implements IParseTreeConstructor {
 
 	public void update(EObject object) {
 		NodeAdapter adapter = getAdapter(object);
@@ -37,7 +50,9 @@ public abstract class AbstractParseTreeUpdater {
 		internalDoUpdate(object, ruleToCall);
 	}
 
-	protected abstract Grammar getGrammar();
+	protected Grammar getGrammar() {
+		return getFacade().getGrammar();
+	}
 
 	protected abstract void internalDoUpdate(EObject obj, String ruleToCall);
 
@@ -50,7 +65,11 @@ public abstract class AbstractParseTreeUpdater {
 		return adapter;
 	}
 
-	protected abstract AbstractEcoreElementFactory getFactory();
+	protected abstract ILanguageFacade getFacade();
+	
+	protected AbstractEcoreElementFactory getFactory() {
+		return (AbstractEcoreElementFactory) getFacade().getElementFactory();
+	}
 
 	protected final InstanceDescription getDescr(InstanceDescription obj) {
 		return obj;

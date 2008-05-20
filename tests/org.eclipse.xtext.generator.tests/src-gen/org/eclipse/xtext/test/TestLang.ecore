@@ -5,11 +5,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="multiFeature" upperBound="-1" eType="//AbstractElement" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ChoiceElement" eSuperTypes="//AbstractElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optionalKeyword">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optionalKeyword">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReducibleElement" abstract="true" eSuperTypes="//AbstractElement"/>

@@ -2,6 +2,7 @@ package org.eclipse.xtext.metamodelreferencing.tests;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.LanguageFacadeFactory;
 
 public abstract class MetamodelRefTestStandaloneSetup {
 
@@ -10,11 +11,8 @@ public abstract class MetamodelRefTestStandaloneSetup {
 				"ecore", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-		
-		//TODO org.eclipse.xtext.impl.ReferencedMetamodelImpl@449c67 (alias: xtext) (uri: "http://www.eclipse.org/2008/Xtext")
-		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@784568 (alias: null) (nsURI: "http://eclipse.org/xtext/tests/SimpleTest", name: SimpleTest)
-		
+		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest")==null)
+			LanguageFacadeFactory.register("org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest",new MetamodelRefTestLanguageFacade());
 	}
 
 }

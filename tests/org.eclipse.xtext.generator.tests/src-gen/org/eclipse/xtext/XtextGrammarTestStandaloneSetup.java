@@ -2,6 +2,7 @@ package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.LanguageFacadeFactory;
 
 public abstract class XtextGrammarTestStandaloneSetup {
 
@@ -10,9 +11,8 @@ public abstract class XtextGrammarTestStandaloneSetup {
 				"ecore", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@d63b75 (alias: null) (nsURI: "http://www.eclipse.org/2008/Test/XtextTest", name: XtextTest)
-		
+		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/XtextGrammarTest")==null)
+			LanguageFacadeFactory.register("org/eclipse/xtext/XtextGrammarTest",new XtextGrammarTestLanguageFacade());
 	}
 
 }

@@ -8,7 +8,7 @@ package org.eclipse.xtext.testlanguages.parser.internal;
 @parser::header {
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
-import org.eclipse.xtext.LexerRule;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.ParseException;
 import org.eclipse.xtext.core.parsetree.*;
@@ -89,9 +89,7 @@ protected void setLexerRule(LeafNode node, Token t) {
 
 private CompositeNode currentNode;
 
-private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.testlanguages.LexerLanguageConstants.getLexerLanguageGrammar();
-
-
+private org.eclipse.xtext.Grammar grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/LexerLanguage").getGrammar();;
 
 }
 
@@ -195,21 +193,21 @@ ruleElement returns [EObject current=null]
 
 
 
-RULE_IMPLICITTOKENTYPE :  ('C')+ ;
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
-
-RULE_EXPLICITTOKENTYPE :  ('A')+ ;
-
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+RULE_STRING :  ('B')+ ;
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-RULE_STRING :  ('B')+ ;
+RULE_EXPLICITTOKENTYPE :  ('A')+ ;
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+
+RULE_IMPLICITTOKENTYPE :  ('C')+ ;
+
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 

@@ -2,6 +2,7 @@ package org.eclipse.xtext.grammargen.tests;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.LanguageFacadeFactory;
 
 public abstract class SimpleTest2StandaloneSetup {
 
@@ -10,9 +11,8 @@ public abstract class SimpleTest2StandaloneSetup {
 				"ecore", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@dbe4e5 (alias: null) (nsURI: "http://eclipse.org/xtext/tests/SimpleTest2", name: SimpleTest2)
-		
+		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/grammargen/tests/SimpleTest2")==null)
+			LanguageFacadeFactory.register("org/eclipse/xtext/grammargen/tests/SimpleTest2",new SimpleTest2LanguageFacade());
 	}
 
 }

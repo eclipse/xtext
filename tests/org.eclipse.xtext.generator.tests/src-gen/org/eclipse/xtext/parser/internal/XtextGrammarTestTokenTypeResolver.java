@@ -2,16 +2,13 @@ package org.eclipse.xtext.parser.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.XtextGrammarTestTokenTypes;
-import org.eclipse.xtext.LexerRule;
-import org.eclipse.xtext.BuiltinRules;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.core.parser.ITokenTypes;
 import org.eclipse.xtext.core.parser.ParseException;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
 
 public class XtextGrammarTestTokenTypeResolver {
 
-	private static org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.XtextGrammarTestConstants.getXtextGrammarTestGrammar();
-	
 	public static LexerRule getLexerRule(AbstractNode context, int antlrTokenType) {
 		switch(antlrTokenType) {		
 		
@@ -25,14 +22,14 @@ public class XtextGrammarTestTokenTypeResolver {
 
 
 		case 7:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 
 
 		case 9:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 
 
@@ -74,8 +71,9 @@ public class XtextGrammarTestTokenTypeResolver {
 		}	
 	}
 	
+	@SuppressWarnings("unused")
 	private static EObject getGrammarElement(String id) {
-		return grammar.eResource().getEObject(id);
+		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/XtextGrammarTest").getGrammar().eResource().getEObject(id);
 	}
 	
 }

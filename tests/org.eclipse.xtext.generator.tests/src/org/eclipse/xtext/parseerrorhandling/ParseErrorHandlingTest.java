@@ -1,18 +1,21 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
 package org.eclipse.xtext.parseerrorhandling;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.XtextGrammarTest;
-import org.eclipse.xtext.XtextGrammarTestConstants;
 import org.eclipse.xtext.core.parser.IParseErrorHandler;
 import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.parser.XtextGrammarTestASTFactory;
-import org.openarchitectureware.expression.ExecutionContextImpl;
-import org.openarchitectureware.xtend.XtendFacade;
 
 public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 
@@ -161,16 +164,5 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		return XtextGrammarTest.class;
 	}
 	
-	@Override
-	protected XtendFacade getXtendFacade() {
-		ExecutionContextImpl ctx = new ExecutionContextImpl();
-		ctx.registerMetaModel(new EmfRegistryMetaModel() {
-			@Override
-			protected EPackage[] allPackages() {
-				return new EPackage[]{XtextGrammarTestConstants.getXtextTestEPackage()};
-			}
-		});
-		return XtendFacade.create(ctx);
-	}
 
 }
