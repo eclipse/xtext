@@ -35,7 +35,7 @@ new Predicate(obj) {
 		}
 }.check() ){
 
-	Object value = obj.consume("multiFeature");
+	final Object value = obj.consume("multiFeature");
     
 /* xtext::RuleCall */ 
 {
@@ -140,7 +140,7 @@ protected void proceedChoiceRule(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("name");
+	final Object value = obj.consume("name");
     
 /* xtext::RuleCall */ 
 {
@@ -172,7 +172,7 @@ new Predicate(obj) {
 		}
 }.check() ){
 
-	Object value = obj.consume("optionalKeyword");
+	final Object value = obj.consume("optionalKeyword");
     
 /* xtext::Keyword */ 
 {
@@ -226,7 +226,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("actionFeature");
+	final Object value = obj.consume("actionFeature");
     
 /* xtext::RuleCall */ 
 {
@@ -308,7 +308,7 @@ protected void proceedTerminalRule(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("stringFeature");
+	final Object value = obj.consume("stringFeature");
     
 /* xtext::RuleCall */ 
 {

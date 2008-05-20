@@ -29,18 +29,18 @@ public class SimpleTest2TokenTypeResolver {
 			// RULE_STRING
 			return BuiltinRules.BUILTIN_STRING;
 
-		case 6:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
-
 		case 11:
 			// RULE_ANY_OTHER
 			return BuiltinRules.BUILTIN_ANY_OTHER;
 
-
-		case 10:
+		case 6:
 			// RULE_WS
 			return BuiltinRules.BUILTIN_WS;
+
+
+		case 10:
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 		case 7:
 			// RULE_ML_COMMENT

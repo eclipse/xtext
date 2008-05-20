@@ -39,7 +39,7 @@ new Predicate(obj) {
 		}
 }.check() ){
 
-	Object value = obj.consume("nameRefs");
+	final Object value = obj.consume("nameRefs");
     
 /* xtext::RuleCall */ 
 {
@@ -66,7 +66,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("name");
+	final Object value = obj.consume("name");
     
 /* xtext::RuleCall */ 
 {
@@ -98,7 +98,7 @@ protected void proceedNameRef(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("name");
+	final Object value = obj.consume("name");
     
 /* xtext::RuleCall */ 
 {

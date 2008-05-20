@@ -19,14 +19,13 @@ import org.eclipse.xtext.core.parsetree.LeafNode;
 import org.eclipse.xtext.core.parsetree.NodeAdapter;
 import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.test.TestLanguage;
-import org.eclipse.xtext.test.parser.TestLanguageASTFactory;
 
 public class NodeModelTest extends AbstractGeneratorTest {
 
 	private static final String MODEL = "reducible 'x' choice optional y choice z reducible 'x' 'y'";
 
 	public void testNavigabilityAst2Node() throws Exception {
-		EObject object = getRootAstElement(MODEL);
+		EObject object = getModel(MODEL);
 		checkNavigabilityAst2Node(object);
 		for (Iterator<EObject> i = object.eAllContents(); i.hasNext();) {
 			checkNavigabilityAst2Node(i.next());
@@ -34,7 +33,7 @@ public class NodeModelTest extends AbstractGeneratorTest {
 	}
 
 	public void testNavigabilityNode2Ast() throws Exception {
-		EObject object = getRootAstElement(MODEL);
+		EObject object = getModel(MODEL);
 		EList<Adapter> adapters = object.eAdapters();
 		assert (adapters.size() == 1);
 		NodeAdapter adapter = (NodeAdapter) adapters.get(0);
@@ -47,7 +46,7 @@ public class NodeModelTest extends AbstractGeneratorTest {
 	}
 
 	public void testGrammarElement() throws Exception {
-		AbstractNode rootNode = getRootNode(MODEL);
+		CompositeNode rootNode = getRootNode(MODEL);
 		EObject rootGrammarElement = rootNode.getGrammarElement();
 		assertTrue(rootGrammarElement instanceof ParserRule);
 		for (Iterator<EObject> i = rootNode.eAllContents(); i.hasNext();) {
@@ -70,7 +69,7 @@ public class NodeModelTest extends AbstractGeneratorTest {
 							.calledRule((RuleCall) grammarElement))
 							.getTokenType(), tokenType);
 				} else {
-					fail("LeafNodes must correspond to keywords, whitespaces or lexerRules");
+					fail("LeafNodes must correspond to keywords, whitespaces or lexerRules "+grammarElement);
 				}
 			}
 		}
@@ -115,17 +114,6 @@ public class NodeModelTest extends AbstractGeneratorTest {
 		}
 	}
 
-	private EObject getRootAstElement(String model) throws Exception {
-		EObject object = (EObject) parse(model, new TestLanguageASTFactory());
-		return object;
-	}
-
-	private AbstractNode getRootNode(String model) throws Exception {
-		EObject object = getRootAstElement(model);
-		NodeAdapter adapter = (NodeAdapter) object.eAdapters().get(0);
-		AbstractNode node = adapter.getParserNode();
-		return node;
-	}
 
 	@Override
 	protected Class<?> getTheClass() {

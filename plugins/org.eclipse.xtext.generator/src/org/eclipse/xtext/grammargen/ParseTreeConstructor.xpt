@@ -70,7 +70,7 @@ new Predicate(obj) {
 
 «DEFINE statement2 FOR AbstractElement»//Do nothing for '«metaType.name»'\n«ENDDEFINE»
 «DEFINE statement2 FOR Assignment»
-	Object value = obj.consume("«feature»");
+	final Object value = obj.consume("«feature»");
     «EXPAND statement FOR terminal»
     if (obj.isConsumed())
     	objectCreation(obj);

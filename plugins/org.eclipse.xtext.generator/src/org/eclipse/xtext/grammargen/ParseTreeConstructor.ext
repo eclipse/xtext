@@ -26,12 +26,17 @@ List[String] internalCheckPath(AbstractElement this) :
 		then {"true"}.union(checkPath())
 		else checkPath();
 		
-List[String] checkPath(AbstractElement this) : {"true"}; 
+List[String] checkPath(AbstractElement this) : {"true"};
+ 
+List[String] checkPath(Keyword this) : if isAssigned() then {'value.equals("'+this.value.trimFromStartAndEnd(1)+'")'} else {'true'}; 
+
 List[String] checkPath(Action this) : 
 	{'obj.isOfType("'+typeName.qualifiedName()+'") && 
 	obj.checkConsume("'+feature+'") && obj.isConsumed()'};
+	
 List[String] checkPath(Assignment this) : 
 	{'obj.checkConsume("'+feature+'")'};
+	
 List[String] checkPath(RuleCall this) : 
 	{if calledParserRule()!=null then 'obj.isInstanceOf("'+calledParserRule().getReturnTypeName()+'")' else "true"};
 

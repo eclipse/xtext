@@ -22,7 +22,7 @@ import org.eclipse.xtext.generator.tests.Invocation;
 public class SimpleTest2 extends AbstractGeneratorTest {
 	
 	public void testFoo() throws Exception {
-		List<Invocation> parse = parse("keyword bla 3 {}");
+		List<Invocation> parse = getInvocations("keyword bla 3 {}");
 		assertEquals("create", parse.get(0).method);
 		assertEquals("Child", parse.get(0).feature);
 
