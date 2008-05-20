@@ -11,7 +11,7 @@ public abstract class XtextGrammarTestStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@2f5aa3 (alias: null) (nsURI: "http://www.eclipse.org/2008/Test/XtextTest", name: XtextTest)
+		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@3307d5 (alias: null) (nsURI: "http://www.eclipse.org/2008/Test/XtextTest", name: XtextTest)
 		
 	}
 
