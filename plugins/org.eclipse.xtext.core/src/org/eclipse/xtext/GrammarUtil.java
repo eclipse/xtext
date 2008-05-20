@@ -73,5 +73,5 @@ public class GrammarUtil {
 		String fragment = resource.getURIFragment(eObject);
 		return fragment;
 	}
-
+	
 }

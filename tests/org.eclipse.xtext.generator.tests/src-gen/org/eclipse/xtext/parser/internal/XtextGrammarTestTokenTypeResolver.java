@@ -10,7 +10,7 @@ import org.eclipse.xtext.core.parsetree.AbstractNode;
 
 public class XtextGrammarTestTokenTypeResolver {
 
-	private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.XtextGrammarTestConstants.getXtextGrammarTestGrammar();
+	private static org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.XtextGrammarTestConstants.getXtextGrammarTestGrammar();
 	
 	public static LexerRule getLexerRule(AbstractNode context, int antlrTokenType) {
 		switch(antlrTokenType) {		
@@ -18,21 +18,21 @@ public class XtextGrammarTestTokenTypeResolver {
 
 
 		case 8:
-			// RULE_INT
-			return BuiltinRules.BUILTIN_INT;
-
-
-
-
-		case 7:
 			// RULE_WS
 			return BuiltinRules.BUILTIN_WS;
 
 
 
-		case 9:
+
+		case 7:
 			// RULE_ML_COMMENT
 			return BuiltinRules.BUILTIN_ML_COMMENT;
+
+
+
+		case 9:
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 
 
@@ -62,8 +62,8 @@ public class XtextGrammarTestTokenTypeResolver {
 
 
 		case 10:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
+			// RULE_INT
+			return BuiltinRules.BUILTIN_INT;
 
 		case 5:
 			// RULE_STRING
@@ -74,7 +74,7 @@ public class XtextGrammarTestTokenTypeResolver {
 		}	
 	}
 	
-	private EObject getGrammarElement(String id) {
+	private static EObject getGrammarElement(String id) {
 		return grammar.eResource().getEObject(id);
 	}
 	

@@ -10,7 +10,7 @@ import org.eclipse.xtext.core.parsetree.AbstractNode;
 
 public class SimpleTest2TokenTypeResolver {
 
-	private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.grammargen.tests.SimpleTest2Constants.getSimpleTest2Grammar();
+	private static org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.grammargen.tests.SimpleTest2Constants.getSimpleTest2Grammar();
 	
 	public static LexerRule getLexerRule(AbstractNode context, int antlrTokenType) {
 		switch(antlrTokenType) {		
@@ -21,11 +21,11 @@ public class SimpleTest2TokenTypeResolver {
 			// RULE_ID
 			return BuiltinRules.BUILTIN_ID;
 
-		case 8:
-			// RULE_LEXER_BODY
-			return BuiltinRules.BUILTIN_LEXER_BODY;
-
 		case 9:
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
+
+		case 8:
 			// RULE_STRING
 			return BuiltinRules.BUILTIN_STRING;
 
@@ -34,17 +34,17 @@ public class SimpleTest2TokenTypeResolver {
 			return BuiltinRules.BUILTIN_ANY_OTHER;
 
 		case 6:
-			// RULE_WS
-			return BuiltinRules.BUILTIN_WS;
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 
 		case 10:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
+			// RULE_LEXER_BODY
+			return BuiltinRules.BUILTIN_LEXER_BODY;
 
 		case 7:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
+			// RULE_WS
+			return BuiltinRules.BUILTIN_WS;
 
 
 		case 5:
@@ -56,7 +56,7 @@ public class SimpleTest2TokenTypeResolver {
 		}	
 	}
 	
-	private EObject getGrammarElement(String id) {
+	private static EObject getGrammarElement(String id) {
 		return grammar.eResource().getEObject(id);
 	}
 	
