@@ -2,6 +2,7 @@ package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.LanguageFacadeFactory;
 
 public abstract class XtextStandaloneSetup {
 
@@ -10,9 +11,8 @@ public abstract class XtextStandaloneSetup {
 				"ecore", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@158bbe (alias: null) (nsURI: "http://www.eclipse.org/2008/Xtext", name: xtext)
-		
+		if (LanguageFacadeFactory.getFacade("org/eclipse/xtext/Xtext")==null)
+			LanguageFacadeFactory.register("org/eclipse/xtext/Xtext",new XtextLanguageFacade());
 	}
 
 }

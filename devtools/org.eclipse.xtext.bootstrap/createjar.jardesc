@@ -30,8 +30,8 @@
 <javaElement handleIdentifier="=org.eclipse.xtext.core/src-gen"/>
 <folder path="/org.eclipse.xtext.generator/META-INF"/>
 <javaElement handleIdentifier="=org.eclipse.xtext/src"/>
-<javaElement handleIdentifier="=org.eclipse.xtext.generator/src"/>
 <javaElement handleIdentifier="=org.eclipse.xtext/model"/>
+<javaElement handleIdentifier="=org.eclipse.xtext.generator/src"/>
 <file path="/org.eclipse.xtext.core/.classpath"/>
 </selectedElements>
 <fatjar builder="org.eclipse.jdt.ui.plain_jar_builder" launchConfig=""/>
