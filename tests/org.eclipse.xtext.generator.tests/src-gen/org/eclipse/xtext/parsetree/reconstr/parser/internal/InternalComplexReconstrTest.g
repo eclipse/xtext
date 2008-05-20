@@ -82,7 +82,7 @@ private CompositeNode currentNode;
 private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestConstants.getComplexReconstrTestGrammar();
 }
 
-parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@e2dd88 (name: Op)
+parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@b0a165 (name: Op)
 grammar.eResource().getEObject("//@parserRules.0"), currentNode);}
 	ruleOp {$current=$ruleOp.current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
@@ -98,12 +98,12 @@ ruleOp returns [EObject current=null]
   factory.add(temp, "addOperands",$current);
   $current = temp; 
   temp = null;
-  currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@60adf5 (cardinality: null) (operator: +=, feature: addOperands)
+  currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@ca0a76 (cardinality: null) (operator: +=, feature: addOperands)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0"), currentNode); 
   associateNodeWithAstElement(currentNode, $current); }
-)'+' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@9ed1e4 (cardinality: null) (value: '+')
+)'+' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@5d58b9 (cardinality: null) (value: '+')
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })(
-   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@f9ca83 (cardinality: null) (name: Term)
+   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@627977 (cardinality: null) (name: Term)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal"), currentNode); } 
    lv_addOperands=ruleTerm
  
@@ -118,12 +118,12 @@ grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1
   factory.add(temp, "minusOperands",$current);
   $current = temp; 
   temp = null;
-  currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@354e4e (cardinality: null) (operator: +=, feature: minusOperands)
+  currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@5b14f9 (cardinality: null) (operator: +=, feature: minusOperands)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0"), currentNode); 
   associateNodeWithAstElement(currentNode, $current); }
-)'-' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@4912e5 (cardinality: null) (value: '-')
+)'-' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@376ed0 (cardinality: null) (value: '-')
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })(
-   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@1e5dc5 (cardinality: null) (name: Term)
+   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@674b2d (cardinality: null) (name: Term)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal"), currentNode); } 
    lv_minusOperands=ruleTerm
  
@@ -151,7 +151,7 @@ ruleAtom returns [EObject current=null]
    :
 (
    
-   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@513710 (cardinality: null) (name: ID)
+   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@594770 (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.2/@alternatives/@terminal"), currentNode,"name"); }
  
 {     if ($current==null) {
@@ -167,9 +167,9 @@ grammar.eResource().getEObject("//@parserRules.2/@alternatives/@terminal"), curr
 ruleParens returns [EObject current=null] 
    @init { EObject temp=null; }
    :
-((('(' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@354c20 (cardinality: null) (value: '(')
+((('(' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@561fa5 (cardinality: null) (value: '(')
 grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"), currentNode,null); }this_Op=ruleOp{$current = $this_Op.current;}
-)')' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@3f8386 (cardinality: null) (value: ')')
+)')' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@bf3245 (cardinality: null) (value: ')')
 grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })(
    
    lv_em='!'  
@@ -178,7 +178,7 @@ grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0
       associateNodeWithAstElement(currentNode, $current);
    }
    factory.set($current, "em", lv_em);
-createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@8f3f1d (cardinality: null) (value: '!')
+createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@43159b (cardinality: null) (value: '!')
 grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.1/@terminal"), currentNode,"em");}
 )?);
 
@@ -186,18 +186,18 @@ grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.1
 
 RULE_INT : ('0'..'9')+;
 
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
-	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
-
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
+	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
 RULE_ANY_OTHER : .;
 

@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g 2008-05-20 08:04:36
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g 2008-05-20 10:57:51
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
@@ -16,17 +16,17 @@ import java.util.ArrayList;
 
 public class InternalSimpleTest2Parser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_WS", "RULE_LEXER_BODY", "RULE_SL_COMMENT", "RULE_ML_COMMENT", "RULE_ANY_OTHER", "'optional'", "'keyword'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_WS", "RULE_STRING", "RULE_SL_COMMENT", "RULE_LEXER_BODY", "RULE_ML_COMMENT", "RULE_ANY_OTHER", "'optional'", "'keyword'", "'{'", "'}'"
     };
     public static final int RULE_ML_COMMENT=10;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=7;
+    public static final int RULE_WS=6;
     public static final int EOF=-1;
     public static final int RULE_INT=5;
-    public static final int RULE_STRING=6;
+    public static final int RULE_STRING=7;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=9;
-    public static final int RULE_LEXER_BODY=8;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_LEXER_BODY=9;
 
         public InternalSimpleTest2Parser(TokenStream input) {
             super(input);
@@ -116,7 +116,7 @@ public class InternalSimpleTest2Parser extends Parser {
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:85:33: ( ruleModel EOF )
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:85:35: ruleModel EOF
             {
-            currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@490852 (name: Model)
+            currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@8c6b76 (name: Model)
             grammar.eResource().getEObject("//@parserRules.0"), currentNode);
             pushFollow(FOLLOW_ruleModel_in_parse45);
             ruleModel1=ruleModel();
@@ -168,7 +168,7 @@ public class InternalSimpleTest2Parser extends Parser {
             	case 1 :
             	    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:96:4: lv_contents= ruleChild
             	    {
-            	     currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@1c436b (cardinality: null) (name: Child)
+            	     currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@6497de (cardinality: null) (name: Child)
             	    grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal"), currentNode); 
             	    pushFollow(FOLLOW_ruleChild_in_ruleModel91);
             	    lv_contents=ruleChild();
@@ -251,7 +251,7 @@ public class InternalSimpleTest2Parser extends Parser {
                           associateNodeWithAstElement(currentNode, current);
                        }
                        factory.set(current, "optional", true);
-                    createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@e840fd (cardinality: null) (value: 'optional')
+                    createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@e9ed1f (cardinality: null) (value: 'optional')
                     grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"), currentNode,"optional");
 
                     }
@@ -260,7 +260,7 @@ public class InternalSimpleTest2Parser extends Parser {
             }
 
             match(input,13,FOLLOW_13_in_ruleChild148); 
-             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@2beb7 (cardinality: null) (value: "keyword")
+             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@ceb62f (cardinality: null) (value: "keyword")
             grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"), currentNode,null); 
 
             }
@@ -270,7 +270,7 @@ public class InternalSimpleTest2Parser extends Parser {
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChild163); 
-             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@a27cbe (cardinality: null) (name: ID)
+             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@a312c6 (cardinality: null) (name: ID)
             grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"name"); 
                  if (current==null) {
                   current = factory.create("Child");
@@ -289,7 +289,7 @@ public class InternalSimpleTest2Parser extends Parser {
             {
             lv_number=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleChild183); 
-             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@9bf510 (cardinality: null) (name: INT)
+             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@bd1bf7 (cardinality: null) (name: INT)
             grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"number"); 
                  if (current==null) {
                   current = factory.create("Child");
@@ -304,13 +304,13 @@ public class InternalSimpleTest2Parser extends Parser {
             }
 
             match(input,14,FOLLOW_14_in_ruleChild192); 
-             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@f60451 (cardinality: null) (value: '{')
+             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@76fe3a (cardinality: null) (value: '{')
             grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1"), currentNode,null); 
 
             }
 
             match(input,15,FOLLOW_15_in_ruleChild196); 
-             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@957bfa (cardinality: null) (value: '}')
+             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@2c9d5b (cardinality: null) (value: '}')
             grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1"), currentNode,null); 
 
             }
