@@ -6,6 +6,7 @@ import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.IParseErrorHandler;
 import org.eclipse.xtext.core.parser.antlr.AntlrExceptionTool;
@@ -48,9 +49,8 @@ public class XtextParser extends org.eclipse.xtext.core.parser.AbstractParser {
 		}
 		return null;
 	}
-
-	@Override
+	
 	protected IElementFactory getDefaultASTFactory() {
-		return new XtextASTFactory();
+		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/Xtext").getElementFactory();
 	}
 }
