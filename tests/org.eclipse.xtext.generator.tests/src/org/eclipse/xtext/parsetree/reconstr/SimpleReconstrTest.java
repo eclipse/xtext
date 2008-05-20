@@ -21,7 +21,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
 		SimpleReconstrTestParseTreeConstructor con = new SimpleReconstrTestParseTreeConstructor();
-		con.proceedOp(result);
+		con.update(result);
 		String resultString = con.getText();
 		return resultString;
 	}
@@ -31,7 +31,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		String model = "a + b - c * d / e";
 		EObject result = (EObject) getModel(model);
 		SimpleExpressionsParseTreeConstructor con = new SimpleExpressionsParseTreeConstructor();
-		con.proceedMultiplication(result);
+		con.update(result);
 		String resultString = con.getText();
 		assertEquals(model,resultString);
 	}
