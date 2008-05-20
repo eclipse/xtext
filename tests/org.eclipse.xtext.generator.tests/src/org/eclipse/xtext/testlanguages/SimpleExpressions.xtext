@@ -1,0 +1,20 @@
+generate simpleExpressions "http://www.eclipse.org/xtext/test/simpleExpressions"
+
+Multiplication returns Expression: 
+	Addition ({Op.values+=current} operator=('+'|'-') values+=Addition)*;
+
+Addition returns Expression: 
+	Term ({Op.values+=current} operator=('*'|'/') values+=Term)*;
+	
+Term returns Expression:
+	Atom | Parens;
+	
+Atom: 
+	name=ID;
+
+Parens returns Expression: 
+	'(' Multiplication ')';
+	
+
+
+
