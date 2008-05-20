@@ -1,9 +1,9 @@
-package org.eclipse.xtext.grammargen.tests;
+package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-public abstract class SimpleTestStandaloneSetup {
+public abstract class ComplexReconstrTestStandaloneSetup {
 
 	public static void doSetup() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
@@ -11,7 +11,7 @@ public abstract class SimpleTestStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@75c2be (alias: null) (nsURI: "http://eclipse.org/xtext/tests/SimpleTest", name: SimpleTest)
+		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@843735 (alias: null) (nsURI: "http://complex/rewrite/test", name: complexrewritetest)
 		
 	}
 

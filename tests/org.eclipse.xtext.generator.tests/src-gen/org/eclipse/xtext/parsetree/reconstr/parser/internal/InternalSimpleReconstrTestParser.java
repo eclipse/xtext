@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g 2008-05-19 20:58:04
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g 2008-05-20 08:04:40
 
 package org.eclipse.xtext.parsetree.reconstr.parser.internal; 
 
@@ -16,17 +16,17 @@ import java.util.ArrayList;
 
 public class InternalSimpleReconstrTestParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_WS", "RULE_ML_COMMENT", "RULE_STRING", "RULE_SL_COMMENT", "RULE_LEXER_BODY", "RULE_ANY_OTHER", "'('", "')'", "'!'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_LEXER_BODY", "RULE_SL_COMMENT", "RULE_STRING", "RULE_WS", "RULE_ML_COMMENT", "RULE_INT", "RULE_ANY_OTHER", "'('", "')'", "'!'"
     };
-    public static final int RULE_ML_COMMENT=7;
+    public static final int RULE_ML_COMMENT=9;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=6;
+    public static final int RULE_WS=8;
+    public static final int RULE_INT=10;
     public static final int EOF=-1;
-    public static final int RULE_INT=5;
-    public static final int RULE_STRING=8;
+    public static final int RULE_STRING=7;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=9;
-    public static final int RULE_LEXER_BODY=10;
+    public static final int RULE_SL_COMMENT=6;
+    public static final int RULE_LEXER_BODY=5;
 
         public InternalSimpleReconstrTestParser(TokenStream input) {
             super(input);
@@ -116,7 +116,7 @@ public class InternalSimpleReconstrTestParser extends Parser {
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:85:33: ( ruleOp EOF )
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:85:35: ruleOp EOF
             {
-            currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@b903c1 (name: Op)
+            currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@ae508a (name: Op)
             grammar.eResource().getEObject("//@parserRules.0"), currentNode);
             pushFollow(FOLLOW_ruleOp_in_parse45);
             ruleOp1=ruleOp();
@@ -185,7 +185,7 @@ public class InternalSimpleReconstrTestParser extends Parser {
             	      factory.add(temp, "values",current);
             	      current = temp; 
             	      temp = null;
-            	      currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@1cea92 (cardinality: null) (operator: +=, feature: values)
+            	      currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@674be7 (cardinality: null) (operator: +=, feature: values)
             	    grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0"), currentNode); 
             	      associateNodeWithAstElement(currentNode, current); 
 
@@ -194,7 +194,7 @@ public class InternalSimpleReconstrTestParser extends Parser {
             	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:104:2: (lv_values= ruleTerm )
             	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:105:4: lv_values= ruleTerm
             	    {
-            	     currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@640180 (cardinality: null) (name: Term)
+            	     currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@314093 (cardinality: null) (name: Term)
             	    grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"), currentNode); 
             	    pushFollow(FOLLOW_ruleTerm_in_ruleOp107);
             	    lv_values=ruleTerm();
@@ -326,7 +326,7 @@ public class InternalSimpleReconstrTestParser extends Parser {
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAtom191); 
-             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@6da05c (cardinality: null) (name: ID)
+             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@18179d (cardinality: null) (name: ID)
             grammar.eResource().getEObject("//@parserRules.2/@alternatives/@terminal"), currentNode,"name"); 
                  if (current==null) {
                   current = factory.create("Atom");
@@ -376,7 +376,7 @@ public class InternalSimpleReconstrTestParser extends Parser {
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:149:4: '(' this_Op= ruleOp
             {
             match(input,12,FOLLOW_12_in_ruleParens227); 
-             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@78e0e7 (cardinality: null) (value: '(')
+             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@31dfb (cardinality: null) (value: '(')
             grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"), currentNode,null); 
             pushFollow(FOLLOW_ruleOp_in_ruleParens232);
             this_Op=ruleOp();
@@ -387,7 +387,7 @@ public class InternalSimpleReconstrTestParser extends Parser {
             }
 
             match(input,13,FOLLOW_13_in_ruleParens236); 
-             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@62dd8b (cardinality: null) (value: ')')
+             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@12cb99 (cardinality: null) (value: ')')
             grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1"), currentNode,null); 
 
             }
@@ -410,7 +410,7 @@ public class InternalSimpleReconstrTestParser extends Parser {
                           associateNodeWithAstElement(currentNode, current);
                        }
                        factory.set(current, "em", lv_em);
-                    createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@824203 (cardinality: null) (value: '!')
+                    createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@a6852a (cardinality: null) (value: '!')
                     grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.1/@terminal"), currentNode,"em");
 
                     }

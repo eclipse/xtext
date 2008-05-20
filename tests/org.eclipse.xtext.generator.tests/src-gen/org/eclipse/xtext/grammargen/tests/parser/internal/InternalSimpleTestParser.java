@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-19 20:58:00
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-20 08:04:36
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
@@ -16,17 +16,17 @@ import java.util.ArrayList;
 
 public class InternalSimpleTestParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_LEXER_BODY", "RULE_SL_COMMENT", "RULE_ML_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_SL_COMMENT", "RULE_ML_COMMENT", "RULE_LEXER_BODY", "RULE_WS", "RULE_INT", "RULE_ANY_OTHER"
     };
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=10;
+    public static final int RULE_WS=9;
+    public static final int RULE_INT=10;
     public static final int EOF=-1;
-    public static final int RULE_INT=6;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int RULE_LEXER_BODY=7;
+    public static final int RULE_SL_COMMENT=6;
+    public static final int RULE_LEXER_BODY=8;
 
         public InternalSimpleTestParser(TokenStream input) {
             super(input);
@@ -116,7 +116,7 @@ public class InternalSimpleTestParser extends Parser {
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:85:33: ( ruleFoo EOF )
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:85:35: ruleFoo EOF
             {
-            currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@516490 (name: Foo)
+            currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@e5f01b (name: Foo)
             grammar.eResource().getEObject("//@parserRules.0"), currentNode);
             pushFollow(FOLLOW_ruleFoo_in_parse45);
             ruleFoo1=ruleFoo();
@@ -157,7 +157,7 @@ public class InternalSimpleTestParser extends Parser {
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo89); 
-             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@4014a0 (cardinality: null) (name: ID)
+             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@7a1686 (cardinality: null) (name: ID)
             grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal"), currentNode,"name"); 
                  if (current==null) {
                   current = factory.create("Foo");

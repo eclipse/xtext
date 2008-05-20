@@ -82,7 +82,7 @@ private CompositeNode currentNode;
 private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.grammargen.tests.SimpleTest2Constants.getSimpleTest2Grammar();
 }
 
-parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@1116f9 (name: Model)
+parse returns [EObject current] : {currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@490852 (name: Model)
 grammar.eResource().getEObject("//@parserRules.0"), currentNode);}
 	ruleModel {$current=$ruleModel.current;} EOF {appendTrailingHiddenTokens(currentNode);};
 
@@ -93,7 +93,7 @@ ruleModel returns [EObject current=null]
    @init { EObject temp=null; }
    :
 (
-   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@2e8e93 (cardinality: null) (name: Child)
+   { currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@1c436b (cardinality: null) (name: Child)
 grammar.eResource().getEObject("//@parserRules.0/@alternatives/@terminal"), currentNode); } 
    lv_contents=ruleChild
  
@@ -118,12 +118,12 @@ ruleChild returns [EObject current=null]
       associateNodeWithAstElement(currentNode, $current);
    }
    factory.set($current, "optional", true);
-createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@7a84f5 (cardinality: null) (value: 'optional')
+createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@e840fd (cardinality: null) (value: 'optional')
 grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"), currentNode,"optional");}
-)?'keyword' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@af1eb7 (cardinality: null) (value: "keyword")
+)?'keyword' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@2beb7 (cardinality: null) (value: "keyword")
 grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })(
    
-   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@ee9963 (cardinality: null) (name: ID)
+   lv_name=RULE_ID{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@a27cbe (cardinality: null) (name: ID)
 grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"name"); }
  
 {     if ($current==null) {
@@ -134,7 +134,7 @@ grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0
 }
 ))(
    
-   lv_number=RULE_INT{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@d37f3b (cardinality: null) (name: INT)
+   lv_number=RULE_INT{ createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@9bf510 (cardinality: null) (name: INT)
 grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"), currentNode,"number"); }
  
 {     if ($current==null) {
@@ -143,26 +143,26 @@ grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0
    }
    factory.set($current, "number", lv_number);
 }
-))'{' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@46192c (cardinality: null) (value: '{')
-grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })'}' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@1eb597 (cardinality: null) (value: '}')
+))'{' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@f60451 (cardinality: null) (value: '{')
+grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1"), currentNode,null); })'}' { createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@957bfa (cardinality: null) (value: '}')
 grammar.eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1"), currentNode,null); });
 
 
+
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
+	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 RULE_INT : ('0'..'9')+;
 
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |
-	'\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
-
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
-
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 

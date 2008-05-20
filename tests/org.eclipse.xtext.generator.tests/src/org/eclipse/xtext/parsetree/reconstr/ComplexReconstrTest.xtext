@@ -1,0 +1,20 @@
+generate complexrewritetest "http://complex/rewrite/test"
+
+Op returns Expression: 
+	Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*;
+	
+Term returns Expression:
+	Atom | Parens ;
+	
+Atom: 
+	name=ID;
+
+Parens returns Expression: 
+	'(' Op ')' em='!'?;
+
+/* TODO not working yet
+StrangeStuff :
+	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
+*/
+
+
