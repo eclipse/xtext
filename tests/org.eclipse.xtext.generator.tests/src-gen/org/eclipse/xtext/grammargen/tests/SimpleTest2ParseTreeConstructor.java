@@ -35,7 +35,7 @@ new Predicate(obj) {
 		}
 }.check() ){
 
-	Object value = obj.consume("contents");
+	final Object value = obj.consume("contents");
     
 /* xtext::RuleCall */ 
 {
@@ -97,7 +97,7 @@ protected void proceedChild(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("number");
+	final Object value = obj.consume("number");
     
 /* xtext::RuleCall */ 
 {
@@ -123,7 +123,7 @@ protected void proceedChild(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("name");
+	final Object value = obj.consume("name");
     
 /* xtext::RuleCall */ 
 {
@@ -163,7 +163,7 @@ new Predicate(obj) {
 		}
 }.check() ){
 
-	Object value = obj.consume("optional");
+	final Object value = obj.consume("optional");
     
 /* xtext::Keyword */ 
 {

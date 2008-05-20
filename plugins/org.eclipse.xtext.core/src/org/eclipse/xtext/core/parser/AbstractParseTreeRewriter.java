@@ -11,12 +11,12 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.CompositeNode;
 import org.eclipse.xtext.core.parsetree.LeafNode;
 import org.eclipse.xtext.core.parsetree.ParsetreeFactory;
-import org.eclipse.xtext.core.parsetree.ParsetreePackage;
 
 public abstract class AbstractParseTreeRewriter {
 
@@ -154,6 +154,7 @@ public abstract class AbstractParseTreeRewriter {
 	}
 	
 	private CompositeNode current = ParsetreeFactory.eINSTANCE.createCompositeNode();
+	private LexerRule wsRule;
 
 	protected void ruleCallStart(InstanceDescription val, boolean isAssigned, RuleCall ruleCall) {
 		CompositeNode node = ParsetreeFactory.eINSTANCE.createCompositeNode();
@@ -190,9 +191,17 @@ public abstract class AbstractParseTreeRewriter {
 			if (!next.isHidden()) {
 				LeafNode ws = ParsetreeFactory.eINSTANCE.createLeafNode();
 				ws.setText(" ");
+				ws.setGrammarElement(getWhitespaceRule());
 				prependToCurrentsChildren(ws);
 			}
 		}
+	}
+
+	private LexerRule getWhitespaceRule() {
+		if (wsRule == null) {
+			//TODO 
+		}
+		return wsRule;
 	}
 
 	protected void action(InstanceDescription parent, InstanceDescription child, Action action) {

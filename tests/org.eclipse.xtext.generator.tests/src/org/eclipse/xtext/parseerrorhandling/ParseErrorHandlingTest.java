@@ -18,7 +18,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 
 	public void testLexError() throws Exception {
 		ErrorHandler errors = new ErrorHandler();
-		parse("import 'holla' % as foo", errors);
+		getInvocations("import 'holla' % as foo", errors);
 		assertEquals("%", errors.get(0).text);
 		assertEquals(1, errors.get(0).line);
 		assertEquals(15, errors.get(0).offset);
@@ -28,7 +28,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 
 	public void testParseError1() throws Exception {
 		ErrorHandler errors = new ErrorHandler();
-		parse("import 'holla' foo returns x::y::Z : name=ID;", errors);
+		getInvocations("import 'holla' foo returns x::y::Z : name=ID;", errors);
 		assertEquals("::", errors.get(0).text);
 		assertEquals(1, errors.get(0).line);
 		assertEquals(31, errors.get(0).offset);
@@ -38,19 +38,19 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	
 	public void testParseError2() throws Exception {
 		ErrorHandler errors = new ErrorHandler();
-		Object object = parse("import 'holla' foo returns y::Z : name=ID #;", new XtextGrammarTestASTFactory(), errors);
+		Object object = getModel("import 'holla' foo returns y::Z : name=ID #;", new XtextGrammarTestASTFactory(), errors);
 		assertWithXtend("'ID'", "parserRules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
 	}
 	
 	public void testParseError3() throws Exception {
 		ErrorHandler errors = new ErrorHandler();
-		Object object = parse("import 'holla' foo returns y::Z : name=ID #############", new XtextGrammarTestASTFactory(), errors);
+		Object object = getModel("import 'holla' foo returns y::Z : name=ID #############", new XtextGrammarTestASTFactory(), errors);
 		assertWithXtend("'ID'", "parserRules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
 	}
 	
 	public void testParseError4() throws Exception {
 		ErrorHandler errors = new ErrorHandler();
-		Object object = parse("import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'", new XtextGrammarTestASTFactory(), errors);
+		Object object = getModel("import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'", new XtextGrammarTestASTFactory(), errors);
 		System.out.println(errors);
 		assertWithXtend("'ID'", "parserRules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
 		assertWithXtend("null", "parserRules.first().eAllContents.typeSelect(XtextTest::Keyword).first().name", object);

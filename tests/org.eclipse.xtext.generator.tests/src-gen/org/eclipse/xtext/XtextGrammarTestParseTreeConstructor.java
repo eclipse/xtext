@@ -43,7 +43,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("lexerRules");
+	final Object value = obj.consume("lexerRules");
     
 /* xtext::RuleCall */ 
 {
@@ -106,7 +106,7 @@ new Predicate(obj) {
 		}
 }.check() ){
 
-	Object value = obj.consume("parserRules");
+	final Object value = obj.consume("parserRules");
     
 /* xtext::RuleCall */ 
 {
@@ -139,7 +139,7 @@ new Predicate(obj) {
 		}
 }.check() ){
 
-	Object value = obj.consume("metamodelDeclarations");
+	final Object value = obj.consume("metamodelDeclarations");
     
 /* xtext::RuleCall */ 
 {
@@ -327,7 +327,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("alias");
+	final Object value = obj.consume("alias");
     
 /* xtext::RuleCall */ 
 {
@@ -364,7 +364,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("nsURI");
+	final Object value = obj.consume("nsURI");
     
 /* xtext::RuleCall */ 
 {
@@ -390,7 +390,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("name");
+	final Object value = obj.consume("name");
     
 /* xtext::RuleCall */ 
 {
@@ -450,7 +450,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("alias");
+	final Object value = obj.consume("alias");
     
 /* xtext::RuleCall */ 
 {
@@ -487,7 +487,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("uri");
+	final Object value = obj.consume("uri");
     
 /* xtext::RuleCall */ 
 {
@@ -534,7 +534,7 @@ protected void proceedLexerRule(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("body");
+	final Object value = obj.consume("body");
     
 /* xtext::RuleCall */ 
 {
@@ -582,7 +582,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("tokenType");
+	final Object value = obj.consume("tokenType");
     
 /* xtext::RuleCall */ 
 {
@@ -615,7 +615,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("name");
+	final Object value = obj.consume("name");
     
 /* xtext::RuleCall */ 
 {
@@ -669,7 +669,7 @@ protected void proceedParserRule(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("alternatives");
+	final Object value = obj.consume("alternatives");
     
 /* xtext::RuleCall */ 
 {
@@ -722,7 +722,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("type");
+	final Object value = obj.consume("type");
     
 /* xtext::RuleCall */ 
 {
@@ -760,7 +760,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("name");
+	final Object value = obj.consume("name");
     
 /* xtext::RuleCall */ 
 {
@@ -805,7 +805,7 @@ protected void proceedTypeRef(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("name");
+	final Object value = obj.consume("name");
     
 /* xtext::RuleCall */ 
 {
@@ -845,7 +845,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("alias");
+	final Object value = obj.consume("alias");
     
 /* xtext::RuleCall */ 
 {
@@ -895,7 +895,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("groups");
+	final Object value = obj.consume("groups");
     
 /* xtext::RuleCall */ 
 {
@@ -992,7 +992,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("abstractTokens");
+	final Object value = obj.consume("abstractTokens");
     
 /* xtext::RuleCall */ 
 {
@@ -1069,7 +1069,7 @@ new Predicate(obj) {
 		}
 }.check() ){
 
-	Object value = obj.consume("cardinality");
+	final Object value = obj.consume("cardinality");
     
 /* xtext::Alternatives */ 
 {
@@ -1077,12 +1077,12 @@ new Predicate(obj) {
 		if (
 new Predicate(obj) { 
 		public boolean check() {
-			return true; 
+			return value.equals("?"); 
 		}
 }.check() ||
 new Predicate(obj) { 
 		public boolean check() {
-			return true; 
+			return value.equals("*"); 
 		}
 }.check() ) {
 			
@@ -1092,7 +1092,7 @@ new Predicate(obj) {
 		if (
 new Predicate(obj) { 
 		public boolean check() {
-			return true; 
+			return value.equals("?"); 
 		}
 }.check() ) {
 			
@@ -1107,7 +1107,7 @@ new Predicate(obj) {
 	else		if (
 new Predicate(obj) { 
 		public boolean check() {
-			return true; 
+			return value.equals("*"); 
 		}
 }.check() ) {
 			
@@ -1131,7 +1131,7 @@ new Predicate(obj) {
 	else		if (
 new Predicate(obj) { 
 		public boolean check() {
-			return true; 
+			return value.equals("+"); 
 		}
 }.check() ) {
 			
@@ -1282,7 +1282,7 @@ protected void proceedAssignment(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("terminal");
+	final Object value = obj.consume("terminal");
     
 /* xtext::RuleCall */ 
 {
@@ -1313,7 +1313,7 @@ protected void proceedAssignment(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("operator");
+	final Object value = obj.consume("operator");
     
 /* xtext::Alternatives */ 
 {
@@ -1321,12 +1321,12 @@ protected void proceedAssignment(InstanceDescription obj) {
 		if (
 new Predicate(obj) { 
 		public boolean check() {
-			return true; 
+			return value.equals("+="); 
 		}
 }.check() ||
 new Predicate(obj) { 
 		public boolean check() {
-			return true; 
+			return value.equals("="); 
 		}
 }.check() ) {
 			
@@ -1336,7 +1336,7 @@ new Predicate(obj) {
 		if (
 new Predicate(obj) { 
 		public boolean check() {
-			return true; 
+			return value.equals("+="); 
 		}
 }.check() ) {
 			
@@ -1351,7 +1351,7 @@ new Predicate(obj) {
 	else		if (
 new Predicate(obj) { 
 		public boolean check() {
-			return true; 
+			return value.equals("="); 
 		}
 }.check() ) {
 			
@@ -1375,7 +1375,7 @@ new Predicate(obj) {
 	else		if (
 new Predicate(obj) { 
 		public boolean check() {
-			return true; 
+			return value.equals("?="); 
 		}
 }.check() ) {
 			
@@ -1404,7 +1404,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("feature");
+	final Object value = obj.consume("feature");
     
 /* xtext::RuleCall */ 
 {
@@ -1477,7 +1477,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("operator");
+	final Object value = obj.consume("operator");
     
 /* xtext::Alternatives */ 
 {
@@ -1485,7 +1485,7 @@ new Predicate(obj) {
 		if (
 new Predicate(obj) { 
 		public boolean check() {
-			return true; 
+			return value.equals("="); 
 		}
 }.check() ) {
 			
@@ -1500,7 +1500,7 @@ new Predicate(obj) {
 	else		if (
 new Predicate(obj) { 
 		public boolean check() {
-			return true; 
+			return value.equals("+="); 
 		}
 }.check() ) {
 			
@@ -1533,7 +1533,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("feature");
+	final Object value = obj.consume("feature");
     
 /* xtext::RuleCall */ 
 {
@@ -1576,7 +1576,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("typeName");
+	final Object value = obj.consume("typeName");
     
 /* xtext::RuleCall */ 
 {
@@ -1832,7 +1832,7 @@ protected void proceedKeyword(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("value");
+	final Object value = obj.consume("value");
     
 /* xtext::RuleCall */ 
 {
@@ -1861,7 +1861,7 @@ protected void proceedRuleCall(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("name");
+	final Object value = obj.consume("name");
     
 /* xtext::RuleCall */ 
 {

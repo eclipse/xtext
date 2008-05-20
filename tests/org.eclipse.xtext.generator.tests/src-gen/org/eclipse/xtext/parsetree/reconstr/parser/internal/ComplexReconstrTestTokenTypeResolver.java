@@ -45,12 +45,12 @@ public class ComplexReconstrTestTokenTypeResolver {
 
 
 		case 10:
-			// RULE_WS
-			return BuiltinRules.BUILTIN_WS;
-
-		case 5:
 			// RULE_SL_COMMENT
 			return BuiltinRules.BUILTIN_SL_COMMENT;
+
+		case 5:
+			// RULE_WS
+			return BuiltinRules.BUILTIN_WS;
 
 		default:
 			throw new ParseException(context, "Unknown antlr token type " + antlrTokenType);

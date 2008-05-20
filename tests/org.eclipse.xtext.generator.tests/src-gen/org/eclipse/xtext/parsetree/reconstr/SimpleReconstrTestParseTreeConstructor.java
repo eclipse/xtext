@@ -44,7 +44,7 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("values");
+	final Object value = obj.consume("values");
     
 /* xtext::RuleCall */ 
 {
@@ -178,7 +178,7 @@ protected void proceedAtom(InstanceDescription obj) {
 /* xtext::Assignment */ 
 {
 
-	Object value = obj.consume("name");
+	final Object value = obj.consume("name");
     
 /* xtext::RuleCall */ 
 {
@@ -217,7 +217,7 @@ new Predicate(obj) {
 		}
 }.check() ){
 
-	Object value = obj.consume("em");
+	final Object value = obj.consume("em");
     
 /* xtext::Keyword */ 
 {
