@@ -11,9 +11,9 @@ public abstract class MetamodelRefTestStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		
-		//TODO org.eclipse.xtext.impl.ReferencedMetamodelImpl@38fec5 (alias: xtext) (uri: "http://www.eclipse.org/2008/Xtext")
+		//TODO org.eclipse.xtext.impl.ReferencedMetamodelImpl@b08ea (alias: xtext) (uri: "http://www.eclipse.org/2008/Xtext")
 		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@de4e31 (alias: null) (nsURI: "http://eclipse.org/xtext/tests/SimpleTest", name: SimpleTest)
+		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@766b65 (alias: null) (nsURI: "http://eclipse.org/xtext/tests/SimpleTest", name: SimpleTest)
 		
 	}
 

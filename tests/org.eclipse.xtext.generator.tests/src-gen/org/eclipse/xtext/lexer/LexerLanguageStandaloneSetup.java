@@ -11,7 +11,7 @@ public abstract class LexerLanguageStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@991da9 (alias: null) (nsURI: "http://www.eclipse.org/2008/xtext/LexerLang", name: TestLang)
+		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@377fc8 (alias: null) (nsURI: "http://www.eclipse.org/2008/xtext/LexerLang", name: TestLang)
 		
 	}
 
