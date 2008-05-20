@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackageImpl.java,v 1.8 2008/05/19 12:11:16 jkohnlein Exp $
+ * $Id: ParsetreePackageImpl.java,v 1.9 2008/05/20 09:09:46 jkohnlein Exp $
  */
 package org.eclipse.xtext.core.parsetree.impl;
 
@@ -321,6 +321,8 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
     initEAttribute(getLeafNode_Text(), ecorePackage.getEString(), "text", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getLeafNode_Feature(), ecorePackage.getEString(), "feature", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getLeafNode_Hidden(), ecorePackage.getEBoolean(), "hidden", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    addEOperation(leafNodeEClass, ecorePackage.getEString(), "tokenType", 0, 1, IS_UNIQUE, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

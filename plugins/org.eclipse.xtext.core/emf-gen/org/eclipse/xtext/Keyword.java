@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Keyword.java,v 1.5 2008/05/19 12:11:16 jkohnlein Exp $
+ * $Id: Keyword.java,v 1.6 2008/05/20 09:09:47 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
