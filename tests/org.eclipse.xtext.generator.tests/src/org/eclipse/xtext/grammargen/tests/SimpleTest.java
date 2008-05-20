@@ -21,7 +21,7 @@ import org.eclipse.xtext.generator.tests.Invocation;
 public class SimpleTest extends AbstractGeneratorTest {
 	
 	public void testFoo() throws Exception {
-		List<Invocation> parse = parse("HOLLA");
+		List<Invocation> parse = getInvocations("HOLLA");
 		assertEquals("create", parse.get(0).method);
 		assertEquals("Foo", parse.get(0).feature);
 
