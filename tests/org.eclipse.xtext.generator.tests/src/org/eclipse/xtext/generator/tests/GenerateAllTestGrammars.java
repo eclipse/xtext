@@ -26,6 +26,7 @@ import org.eclipse.xtext.grammargen.tests.SimpleTest2;
 import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest;
 import org.eclipse.xtext.parser.XtextASTFactory;
 import org.eclipse.xtext.parser.XtextParser;
+import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest;
 import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest;
 import org.eclipse.xtext.test.TestLanguage;
 
@@ -39,7 +40,7 @@ public class GenerateAllTestGrammars {
 
 	private final static Class<?>[] testclasses = new Class[] { 
 		SimpleTest.class, SimpleTest2.class, XtextGrammarTest.class,
-		MetamodelRefTest.class, DummyLanguage.class, TestLanguage.class, SimpleReconstrTest.class};
+		MetamodelRefTest.class, DummyLanguage.class, TestLanguage.class, SimpleReconstrTest.class, ComplexReconstrTest.class};
 
 	public static void main(String[] args) throws Exception {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
