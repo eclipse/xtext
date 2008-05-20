@@ -30,6 +30,7 @@ import org.eclipse.xtext.parser.XtextParser;
 import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest;
 import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest;
 import org.eclipse.xtext.test.TestLanguage;
+import org.eclipse.xtext.testlanguages.ActionTestLanguage;
 import org.eclipse.xtext.testlanguages.SimpleExpressions;
 
 /**
@@ -42,7 +43,7 @@ public class GenerateAllTestGrammars {
 
 	private final static Class<?>[] testclasses = new Class[] { 
 		SimpleTest.class, SimpleTest2.class, XtextGrammarTest.class,
-		MetamodelRefTest.class, DummyLanguage.class, TestLanguage.class, SimpleReconstrTest.class, ComplexReconstrTest.class, LexerLanguage.class , SimpleExpressions.class};
+		MetamodelRefTest.class, DummyLanguage.class, TestLanguage.class, SimpleReconstrTest.class, ComplexReconstrTest.class, LexerLanguage.class, SimpleExpressions.class, ActionTestLanguage.class };
 
 	public static void main(String[] args) throws Exception {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
