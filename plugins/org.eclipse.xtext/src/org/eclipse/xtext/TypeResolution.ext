@@ -31,22 +31,26 @@ Boolean isMultiple(Assignment a) :
 	a.operator == "+="
 ;
 
+/*
 Boolean featureIsReference(Assignment a) :
 	!a.isBoolean() 
 	&& a.isRuleAssignment() 
 	&& ParserRule.isInstance(((RuleCall) a.terminal).calledRule())
 ;
-
+*/
 AbstractType featureType(Assignment a) :
-	if a.featureIsReference() then
+/*	if a.featureIsReference() then
 		((RuleCall) a.terminal).calledParserRule().resolveReturnType()
 	else if a.isBoolean() then
 		BuiltinBoolean()
 	else if a.isKeywordAssignment() then
 		BuiltinString()
 	else 
-		((RuleCall) a.terminal).calledRule().resolveReturnType()
+		a.terminal.resolveReturnType()
+		*/
+	a.resolveReturnType()
 ;
+
 
 // ***********************************************************************************
 // Supertype inference
@@ -54,6 +58,10 @@ AbstractType featureType(Assignment a) :
 cached Set[ResolvedType] inferredSuperTypes(ResolvedType t) :
 	allActionsReturning(t).inferredSuperType().removeNulls().union(
 		allRuleCallsReturning(t).inferredSuperType().removeNulls()).toSet().remove(t)
+;
+
+cached Set[ResolvedType] inferredSuperTypes(AbstractType t) :
+	{}
 ;
 
 private ResolvedType inferredSuperType(Action a) :
@@ -70,6 +78,13 @@ private ResolvedType inferredSuperType(RuleCall r) :
 private List[ResolvedType] removeNulls(List[ResolvedType] l) :
 	l.reject(t|t==null)
 ;  
+
+cached ResolvedType commonSupertype(List[ResolvedType] types) :
+	let typeHierarchies = types.collect(r|r.inferredSuperTypes().add(r)) :
+		typeHierarchies.first().select(t|typeHierarchies.forAll(h|h.contains(t)))
+			.toList().first()
+;
+
 	
 // ***********************************************************************************
 // Lookup
@@ -123,9 +138,9 @@ cached ResolvedType resolveReturnType(ParserRule p) :
 ;
 
 cached ResolvedType resolveReturnType(LexerRule p) :
-	if p.name == "INT" then
+	if p.tokenType == "INTEGER" then
 		BuiltinInteger()
-	else if p.name == "REAL" then
+	else if p.tokenType == "REAL" then
 		BuiltinDouble()
 	else
 		BuiltinString()
@@ -133,6 +148,32 @@ cached ResolvedType resolveReturnType(LexerRule p) :
 
 cached ResolvedType resolveReturnType(AbstractRule p) :
 	error("AbstractRule must be either ParserRule or LexerRule") ->
+	null
+;
+
+cached ResolvedType resolveReturnType(RuleCall ruleCall) :
+	ruleCall.calledRule().resolveReturnType();
+
+cached ResolvedType resolveReturnType(Keyword keyword) :
+	BuiltinString()
+;
+	
+cached ResolvedType resolveReturnType(Assignment a) :
+	if a.isBoolean() then
+		BuiltinBoolean()
+	else
+		a.terminal.resolveReturnType()
+;	
+	
+cached ResolvedType resolveReturnType(Alternatives a) :
+	a.groups.resolveReturnType().commonSupertype()
+;
+
+cached ResolvedType resolveReturnType(Group g) :
+	g.abstractTokens.resolveReturnType().commonSupertype()
+;
+	
+cached ResolvedType resolveReturnType(AbstractElement e) :
 	null
 ;
 

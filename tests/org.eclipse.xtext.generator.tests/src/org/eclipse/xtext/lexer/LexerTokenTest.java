@@ -10,7 +10,9 @@ import org.eclipse.xtext.core.parser.ITokenTypes;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.LeafNode;
 import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.lexer.parser.LexerLanguageASTFactory;
+import org.eclipse.xtext.testlanguages.LexerLanguage;
+import org.eclipse.xtext.testlanguages.LexerLanguageTokenTypes;
+import org.eclipse.xtext.testlanguages.parser.LexerLanguageASTFactory;
 
 public class LexerTokenTest extends AbstractGeneratorTest {
 
