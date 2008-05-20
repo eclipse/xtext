@@ -13,25 +13,32 @@ import java.io.InputStream;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
 public abstract class AbstractParser implements IParser {
+	
+	public EObject parse(InputStream in) {
+		return parse(in, getDefaultASTFactory());
+	}
 
-	public Object parse(InputStream in, IElementFactory factory,
+	protected abstract IElementFactory getDefaultASTFactory();
+
+	public EObject parse(InputStream in, IElementFactory factory,
 			IParseErrorHandler handler) {
 		try {
-			return parse(new ANTLRInputStream(in),factory,handler);
+			return (EObject) parse(new ANTLRInputStream(in),factory,handler);
 		} catch (IOException e) {
 			throw new WrappedException(e);
 		}
 	}
 
-	public Object parse(InputStream in, IElementFactory factory) {
+	public EObject parse(InputStream in, IElementFactory factory) {
 		try {
-			return parse(new ANTLRInputStream(in),factory,getDefaultHandler());
+			return (EObject) parse(new ANTLRInputStream(in),factory,getDefaultHandler());
 		} catch (IOException e) {
 			throw new WrappedException(e);
 		}

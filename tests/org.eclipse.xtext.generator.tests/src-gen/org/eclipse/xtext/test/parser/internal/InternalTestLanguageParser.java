@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g 2008-05-20 16:06:55
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/test/parser/internal/InternalTestLanguage.g 2008-05-20 16:27:37
 
 package org.eclipse.xtext.test.parser.internal; 
 
@@ -17,17 +17,17 @@ import java.util.ArrayList;
 
 public class InternalTestLanguageParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_SL_COMMENT", "RULE_LEXER_BODY", "RULE_WS", "RULE_ML_COMMENT", "RULE_INT", "RULE_ANY_OTHER", "'choice'", "'optional'", "'reducible'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_LEXER_BODY", "RULE_INT", "RULE_ANY_OTHER", "'choice'", "'optional'", "'reducible'"
     };
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=8;
+    public static final int RULE_WS=6;
     public static final int RULE_INT=10;
     public static final int EOF=-1;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=6;
-    public static final int RULE_LEXER_BODY=7;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_LEXER_BODY=9;
 
         public InternalTestLanguageParser(TokenStream input) {
             super(input);

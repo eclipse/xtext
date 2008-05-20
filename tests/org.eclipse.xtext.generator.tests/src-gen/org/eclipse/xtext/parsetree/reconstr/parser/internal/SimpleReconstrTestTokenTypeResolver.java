@@ -17,35 +17,35 @@ public class SimpleReconstrTestTokenTypeResolver {
 			// RULE_ID
 			return BuiltinRules.BUILTIN_ID;
 
-		case 9:
-			// RULE_STRING
-			return BuiltinRules.BUILTIN_STRING;
-
 		case 8:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
-
-		case 6:
 			// RULE_LEXER_BODY
 			return BuiltinRules.BUILTIN_LEXER_BODY;
+
+		case 9:
+			// RULE_INT
+			return BuiltinRules.BUILTIN_INT;
 
 		case 11:
 			// RULE_ANY_OTHER
 			return BuiltinRules.BUILTIN_ANY_OTHER;
 
+		case 6:
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
-		case 10:
-			// RULE_INT
-			return BuiltinRules.BUILTIN_INT;
 
 		case 7:
-			// RULE_WS
-			return BuiltinRules.BUILTIN_WS;
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
+
+		case 10:
+			// RULE_STRING
+			return BuiltinRules.BUILTIN_STRING;
 
 
 		case 5:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
+			// RULE_WS
+			return BuiltinRules.BUILTIN_WS;
 
 		default:
 			throw new ParseException(context, "Unknown antlr token type " + antlrTokenType);

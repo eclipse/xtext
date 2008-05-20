@@ -48,4 +48,9 @@ public class XtextParser extends org.eclipse.xtext.core.parser.AbstractParser {
 		}
 		return null;
 	}
+
+	@Override
+	protected IElementFactory getDefaultASTFactory() {
+		return new XtextASTFactory();
+	}
 }
