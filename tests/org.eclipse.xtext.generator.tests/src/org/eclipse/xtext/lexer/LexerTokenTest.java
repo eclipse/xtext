@@ -1,15 +1,14 @@
 package org.eclipse.xtext.lexer;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.BuiltinRules;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.ITokenTypes;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.LeafNode;
-import org.eclipse.xtext.core.parsetree.NodeAdapter;
 import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.lexer.parser.LexerLanguageASTFactory;
 
@@ -43,20 +42,13 @@ public class LexerTokenTest extends AbstractGeneratorTest {
 		assertEquals(ITokenTypes.WHITESPACE, leafNode.tokenType());
 	}
 	
-	private EObject getRootAstElement(String model) throws Exception {
-		EObject object = (EObject) parse(model, new LexerLanguageASTFactory());
-		return object;
-	}
-	
-	private AbstractNode getRootNode(String model) throws Exception {
-		EObject object = getRootAstElement(model);
-		NodeAdapter adapter = (NodeAdapter) object.eAdapters().get(0);
-		AbstractNode node = adapter.getParserNode();
-		return node;
-	}
-
 	@Override
 	protected Class<?> getTheClass() {
 		return LexerLanguage.class;
+	}
+	
+	@Override
+	protected IElementFactory getASTFactory() throws Exception {
+		return new LexerLanguageASTFactory();
 	}
 }
