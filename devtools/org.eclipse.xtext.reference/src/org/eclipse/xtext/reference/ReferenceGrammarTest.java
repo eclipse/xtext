@@ -8,15 +8,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.reference;
 
-import java.util.Iterator;
-
 import junit.framework.TestCase;
 
 import org.apache.tools.ant.filters.StringInputStream;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.ILanguageFacade;
+import org.eclipse.xtext.LanguageFacadeFactory;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.NodeAdapter;
 import org.eclipse.xtext.reference.parser.ReferenceGrammarASTFactory;
@@ -30,6 +29,13 @@ public class ReferenceGrammarTest extends TestCase {
 	
 	{
 		ReferenceGrammarStandaloneSetup.doSetup();
+	}
+	
+	ILanguageFacade f = LanguageFacadeFactory.getFacade(ReferenceGrammarLanguageFacade.LANGUAGE_ID);
+	
+	public void testParseNothing() throws Exception {
+		EObject object = f.getParser().parse(new StringInputStream(""));
+		assertNull(object);
 	}
 	
 	public void testParseGrammar() {
