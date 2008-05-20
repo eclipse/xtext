@@ -31,10 +31,10 @@ public class Xtext2Extensions {
 
 	private static Log log = LogFactory.getLog(Xtext2Extensions.class);;
 
-	private static final BuiltinType BUILTIN_EBOOLEAN;
-	private static final BuiltinType BUILTIN_EINT;
-	private static final BuiltinType BUILTIN_EDOUBLE;
-	private static final BuiltinType BUILTIN_ESTRING;
+	public static final BuiltinType BUILTIN_EBOOLEAN;
+	public static final BuiltinType BUILTIN_EINT;
+	public static final BuiltinType BUILTIN_EDOUBLE;
+	public static final BuiltinType BUILTIN_ESTRING;
 
 	static {
 		BUILTIN_EBOOLEAN = XtextutilFactory.eINSTANCE.createBuiltinType();
@@ -49,7 +49,8 @@ public class Xtext2Extensions {
 		BUILTIN_ESTRING = XtextutilFactory.eINSTANCE.createBuiltinType();
 		BUILTIN_ESTRING.setName("EString");
 		BUILTIN_ESTRING.setEClassifier(EcorePackage.Literals.ESTRING);
-	};
+
+	}
 
 	public static BuiltinType BuiltinEBoolean() {
 		return BUILTIN_EBOOLEAN;
@@ -84,5 +85,6 @@ public class Xtext2Extensions {
 		log.error("Could not load EPackage with nsURI" + uriAsString);
 		return null;
 	}
+
 
 }

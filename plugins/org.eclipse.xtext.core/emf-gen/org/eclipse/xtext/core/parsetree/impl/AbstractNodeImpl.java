@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNodeImpl.java,v 1.7 2008/05/19 12:11:16 jkohnlein Exp $
+ * $Id: AbstractNodeImpl.java,v 1.8 2008/05/20 09:09:46 jkohnlein Exp $
  */
 package org.eclipse.xtext.core.parsetree.impl;
 

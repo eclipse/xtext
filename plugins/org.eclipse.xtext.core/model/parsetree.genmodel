@@ -27,6 +27,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//LeafNode/text"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//LeafNode/feature"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parsetree.ecore#//LeafNode/hidden"/>
+      <genOperations ecoreOperation="parsetree.ecore#//LeafNode/tokenType"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

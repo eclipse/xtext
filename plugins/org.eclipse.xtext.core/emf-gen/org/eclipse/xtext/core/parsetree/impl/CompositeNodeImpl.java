@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CompositeNodeImpl.java,v 1.6 2008/05/19 12:11:16 jkohnlein Exp $
+ * $Id: CompositeNodeImpl.java,v 1.7 2008/05/20 09:09:46 jkohnlein Exp $
  */
 package org.eclipse.xtext.core.parsetree.impl;
 

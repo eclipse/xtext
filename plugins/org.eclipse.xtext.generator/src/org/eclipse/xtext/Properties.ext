@@ -15,6 +15,9 @@ languageName() :
 namespace() : 
 	get('language.namespace');
 	
+srcGenPath() :
+	get('src.gen.path');
+	
 packageName() :
 	namespace().replaceAll('/','\\.');
 

@@ -25,82 +25,99 @@ package «packageName()».parser.internal;
 @parser::header {
 package «packageName()».parser.internal; 
 
+import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.ParseException;
 import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
-
+import «packageName()».parser.internal.«languageName()»TokenTypeResolver;
 }
 
 @parser::members {
 
 private IElementFactory factory;
 public Internal«languageName()»Parser(TokenStream input, IElementFactory factory) {
-	this(input);
-	this.factory = factory;
+    this(input);
+    this.factory = factory;
 }
 
-public CompositeNode createCompositeNode(EObject grammarElement, CompositeNode parentNode) {
-	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
-	if (parentNode!=null) parentNode.getChildren().add(compositeNode);
-	compositeNode.setGrammarElement(grammarElement);
-	return compositeNode;
+public CompositeNode createCompositeNode(String grammarElementID, CompositeNode parentNode) {
+    CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
+    if (parentNode!=null) parentNode.getChildren().add(compositeNode);
+    compositeNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
+    return compositeNode;
 }
 
-public Object createLeafNode(EObject currentGrammarElement, CompositeNode parentNode, String feature) {
-	Token token = input.LT(-1);
-	Token tokenBefore = input.LT(-2);
-	int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
-	if (indexOfTokenBefore+1<token.getTokenIndex()) {
-		for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
-			Token hidden = input.get(x);
-			LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-			leafNode.setText(hidden.getText());
-			leafNode.setHidden(true);
-			parentNode.getChildren().add(leafNode);
-		}
-	}
-	LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-		leafNode.setText(token.getText());
-	leafNode.setGrammarElement(currentGrammarElement);
-	leafNode.setFeature(feature);
-	parentNode.getChildren().add(leafNode);
-	return leafNode;
+public Object createLeafNode(String grammarElementID, CompositeNode parentNode, String feature) {
+    Token token = input.LT(-1);
+    Token tokenBefore = input.LT(-2);
+    int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
+    if (indexOfTokenBefore+1<token.getTokenIndex()) {
+        for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
+            Token hidden = input.get(x);
+            LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+            leafNode.setText(hidden.getText());
+            leafNode.setHidden(true);
+		    setLexerRule(leafNode, hidden);
+            parentNode.getChildren().add(leafNode);
+        }
+    }
+    LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+        leafNode.setText(token.getText());
+    leafNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
+    leafNode.setFeature(feature);
+    parentNode.getChildren().add(leafNode);
+    return leafNode;
 }
 
 private void appendTrailingHiddenTokens(CompositeNode parentNode) {
-	Token tokenBefore = input.LT(-1);
-	int size = input.size();
-	if (tokenBefore!=null && tokenBefore.getTokenIndex()<size) {
-		for (int x = tokenBefore.getTokenIndex()+1; x<size;x++) {
-			Token hidden = input.get(x);
-			LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-			leafNode.setText(hidden.getText());
-			leafNode.setHidden(true);
-			parentNode.getChildren().add(leafNode);
-		}
-	}
+    Token tokenBefore = input.LT(-1);
+    int size = input.size();
+    if (tokenBefore!=null && tokenBefore.getTokenIndex()<size) {
+        for (int x = tokenBefore.getTokenIndex()+1; x<size;x++) {
+            Token hidden = input.get(x);
+            LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+            leafNode.setText(hidden.getText());
+            leafNode.setHidden(true);
+            setLexerRule(leafNode, hidden);
+            parentNode.getChildren().add(leafNode);
+        }
+    }
 }
-	
+    
 public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
-	if(node.getElement() != null && node.getElement() != astElement) {
-		throw new ParseException(node, "Reassignment of astElement in parse tree node");
-	}
-	node.setElement(astElement);
-	if(astElement instanceof EObject) {
-		EObject eObject = (EObject) astElement;
-		NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
-		adapter.setParserNode(node); 
+    if(node.getElement() != null && node.getElement() != astElement) {
+        throw new ParseException(node, "Reassignment of astElement in parse tree node");
+    }
+    node.setElement(astElement);
+    if(astElement instanceof EObject) {
+        EObject eObject = (EObject) astElement;
+        NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
+        adapter.setParserNode(node); 
+    }
+}
+    
+protected void setLexerRule(LeafNode node, Token t) {
+	LexerRule lexerRule = «languageName()»TokenTypeResolver.getLexerRule(node, t.getType());
+	if(lexerRule != null) {
+		node.setGrammarElement(lexerRule);
 	}
 }
-	
+
 private CompositeNode currentNode;
 
 private org.eclipse.xtext.Grammar grammar = «packageName()».«constantsClassName()».get«languageName()»Grammar();
+
+
+
 }
 
-parse returns [EObject current] : {currentNode = «EXPAND createCompositeNode FOR parserRules.first()»}
-	«parserRules.first().ruleName()» {$current=$«parserRules.first().ruleName()».current;} EOF {appendTrailingHiddenTokens(currentNode);};
+parse returns [EObject current] : 
+    { currentNode = «EXPAND createCompositeNode FOR parserRules.first()» }
+    «parserRules.first().ruleName()» 
+    { $current=$«parserRules.first().ruleName()».current; } 
+    EOF 
+    { appendTrailingHiddenTokens(currentNode); };
 
 «EXPAND rule FOREACH parserRules»
 
@@ -113,9 +130,9 @@ parse returns [EObject current] : {currentNode = «EXPAND createCompositeNode FOR
 
 // Rule «name»
 «ruleName()» returns [EObject current=null] 
-   @init { EObject temp=null;«IF !allActions().isEmpty» CompositeNode entryNode = currentNode;«ENDIF» }
-   «IF !allActions().isEmpty»@after { currentNode = entryNode; }«ENDIF»:
-   «EXPAND ebnf FOR this.alternatives»;
+    @init { EObject temp=null;«IF !allActions().isEmpty» CompositeNode entryNode = currentNode;«ENDIF» }«REM»«ENDREM-»
+    «IF !allActions().isEmpty»@after { currentNode = entryNode; }«ENDIF»:
+    «EXPAND ebnf FOR this.alternatives»;
 «ENDDEFINE»
 
 «DEFINE rule FOR LexerRule»
@@ -128,48 +145,86 @@ parse returns [EObject current] : {currentNode = «EXPAND createCompositeNode FOR
 
 «DEFINE ebnf2 FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
 
-«DEFINE ebnf2 FOR Alternatives-»«EXPAND ebnf FOREACH groups SEPARATOR '|'»«ENDDEFINE»
+«DEFINE ebnf2 FOR Alternatives-»«EXPAND ebnf FOREACH groups SEPARATOR '\n    |'»«ENDDEFINE»
 
 «DEFINE ebnf2 FOR Group»«EXPAND ebnf FOREACH abstractTokens»«ENDDEFINE»
 
 «DEFINE ebnf2 FOR Assignment»
-   «IF isParserRuleAssignment()»{ currentNode=«EXPAND createCompositeNode FOR terminal» } «ENDIF»
-   «localVar()»=«EXPAND ebnf FOR terminal» 
-{  «IF isParserRuleAssignment()»currentNode = currentNode.getParent();«ENDIF-»
-   if ($current==null) {
-      $current = factory.create("«containingParserRule().getReturnTypeName()»");
-      associateNodeWithAstElement(currentNode, $current);
-   }
-   factory.«setOrAdd()»($current, "«feature»", «IF isBoolean()»true«ELSE»«localVar()»«ENDIF»);
-   «IF isKeywordAssignment()»«EXPAND createLeafNode FOR terminal»«ENDIF-»
-}
+    «IF isParserRuleAssignment()»
+    { 
+        currentNode=«EXPAND createCompositeNode FOR terminal» 
+    }
+    «ENDIF-»
+    «localVar()»=«EXPAND ebnf FOR terminal» 
+    {
+        «IF isParserRuleAssignment()»currentNode = currentNode.getParent();
+        «ENDIF-»
+        if ($current==null) {
+            $current = factory.create("«containingParserRule().getReturnTypeName()»");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        factory.«setOrAdd()»($current, "«feature»", «IF isBoolean()»true«ELSE»«localVar()»«ENDIF»);«
+        IF isKeywordAssignment()
+			»        «
+			EXPAND createLeafNode FOR terminal
+			»«
+		ENDIF
+	»    }
 «ENDDEFINE»
 
 «DEFINE ebnf2 FOR Action»
-{ temp=factory.create("«currentType().qualifiedName()»");
-  factory.«setOrAdd()»(temp, "«feature»",$current);
-  $current = temp; 
-  temp = null;
-  currentNode=«EXPAND createCompositeNode» 
-  associateNodeWithAstElement(currentNode, $current); }
+    { 
+        temp=factory.create("«currentType().qualifiedName()»");
+        factory.«setOrAdd()»(temp, "«feature»",$current);
+        $current = temp; 
+        temp = null;
+        currentNode=«EXPAND createCompositeNode» 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
 «ENDDEFINE»
 
-«DEFINE ebnf2 FOR Keyword»'«withoutQuotes()»' «IF !isAssigned()»{ «EXPAND createLeafNode» }«ENDIF»«ENDDEFINE»
+«DEFINE ebnf2 FOR Keyword»'«withoutQuotes()»' 
+«IF !isAssigned()»
+    {
+        «EXPAND createLeafNode» 
+    }
+«ENDIF»«ENDDEFINE»
 
 «DEFINE ebnf2 FOR RuleCall-»
 «IF ParserRule.isInstance(calledRule()) && !isAssigned()»«localVar()»=«ENDIF-»
 «calledRule().ruleName()-»
-«IF ParserRule.isInstance(calledRule()) && !isAssigned()»{$current = $«localVar()».current;}«ENDIF-»
-«IF LexerRule.isInstance(calledRule())»{ «EXPAND createLeafNode» }«ENDIF»
+«IF ParserRule.isInstance(calledRule()) && !isAssigned()»
+    { 
+        $current = $«localVar()».current; 
+    }
+«ENDIF-»
+«IF LexerRule.isInstance(calledRule())»
+    { 
+    «EXPAND createLeafNode» 
+    }
+«ENDIF-»
 «ENDDEFINE»
 
-«DEFINE createCompositeNode FOR emf::EObject-»
-createCompositeNode(// «this.toString()»
-«EXPAND getObjectByID», currentNode);«ENDDEFINE»
+«DEFINE createCompositeNode FOR emf::EObject
+	»createCompositeNode("«
+	getID()
+	»" /* «
+	this.metaType.name» */, currentNode);«
+ENDDEFINE»
 
-«DEFINE createLeafNode FOR emf::EObject-»
-createLeafNode(// «this.toString()»
-«EXPAND getObjectByID», currentNode,«REM»«ENDREM-»
-«IF isAssigned()»"«containingAssignment().feature»"«ELSE»null«ENDIF»);«ENDDEFINE»
+«DEFINE createLeafNode FOR emf::EObject
+	»createLeafNode("«
+	getID()
+	»" /* «
+	this.metaType.name
+	» */, currentNode,«
+	IF isAssigned()
+		»"«
+		containingAssignment().feature
+		»"«
+	ELSE
+		»null«
+	ENDIF
+	»);«
+ENDDEFINE»
 
-«DEFINE getObjectByID FOR emf::EObject-»grammar.eResource().getEObject("«getID()»")«ENDDEFINE»

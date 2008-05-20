@@ -5,6 +5,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.LexerRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.core.parser.ITokenTypes;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.LeafNode;
 import org.eclipse.xtext.core.parsetree.ParsetreePackage;
@@ -31,18 +37,20 @@ public class ParsetreeUtil {
 
 	public static int offset(AbstractNodeImpl abstractParserNode) {
 		checkArgument(abstractParserNode);
-		AbstractNode rootContainer = (AbstractNode) EcoreUtil.getRootContainer(abstractParserNode);
-		EList<LeafNode> leafNodes = rootContainer.getLeafNodes(abstractParserNode);
+		AbstractNode rootContainer = (AbstractNode) EcoreUtil
+				.getRootContainer(abstractParserNode);
+		EList<LeafNode> leafNodes = rootContainer
+				.getLeafNodes(abstractParserNode);
 		int offset = 0;
 		for (LeafNode leafNode : leafNodes) {
-			offset+=leafNode.length();
+			offset += leafNode.length();
 		}
 		return offset;
 	}
 
 	private static void checkArgument(AbstractNodeImpl abstractParserNode) {
 		int classifierID = abstractParserNode.eClass().getClassifierID();
-		if(classifierID != ParsetreePackage.COMPOSITE_NODE
+		if (classifierID != ParsetreePackage.COMPOSITE_NODE
 				&& classifierID != ParsetreePackage.LEAF_NODE) {
 			throw new IllegalArgumentException(
 					"Illegal subtype of AbstarctParserNode "
@@ -52,15 +60,16 @@ public class ParsetreeUtil {
 
 	public static int line(AbstractNodeImpl _this) {
 		checkArgument(_this);
-		AbstractNode rootContainer = (AbstractNode) EcoreUtil.getRootContainer(_this);
+		AbstractNode rootContainer = (AbstractNode) EcoreUtil
+				.getRootContainer(_this);
 		EList<LeafNode> leafNodes = rootContainer.getLeafNodes(_this);
 		int line = 0;
 		for (LeafNode leafNode : leafNodes) {
 			String text = leafNode.getText();
 			char[] charArray = text.toCharArray();
 			for (char c : charArray) {
-				//TODO handle os specific newlines
-				if (c=='\n' || c=='\r') 
+				// TODO handle os specific newlines
+				if (c == '\n' || c == '\r')
 					line++;
 			}
 		}
@@ -81,13 +90,14 @@ public class ParsetreeUtil {
 		return getLeafNodes(_this, null);
 	}
 
-	public static EList<LeafNode> getLeafNodes(AbstractNodeImpl _this, AbstractNode to) {
+	public static EList<LeafNode> getLeafNodes(AbstractNodeImpl _this,
+			AbstractNode to) {
 		checkArgument(_this);
 		BasicEList<LeafNode> result = new BasicEList<LeafNode>();
 		TreeIterator<EObject> allContents = _this.eAllContents();
 		while (allContents.hasNext()) {
 			EObject current = allContents.next();
-			if (current.equals(to)) 
+			if (current.equals(to))
 				return result;
 			if (current instanceof LeafNode) {
 				result.add((LeafNode) current);
@@ -96,4 +106,18 @@ public class ParsetreeUtil {
 		return result;
 	}
 
+	public static String tokenType(LeafNodeImpl leafNodeImpl) {
+		EObject grammarElement = leafNodeImpl.getGrammarElement();
+		if(grammarElement instanceof Keyword) {
+			return ITokenTypes.KEYWORD;
+		} else if(grammarElement instanceof RuleCall) {
+			AbstractRule calledRule = GrammarUtil.calledRule((RuleCall) grammarElement);
+			if(calledRule instanceof LexerRule) {
+				return ((LexerRule)calledRule).getTokenType();
+			}
+		} else if(grammarElement instanceof LexerRule) {
+			return ((LexerRule)grammarElement).getTokenType();
+		}
+		return null;
+	}
 }
