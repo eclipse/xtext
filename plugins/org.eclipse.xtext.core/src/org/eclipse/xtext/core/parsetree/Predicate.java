@@ -1,6 +1,6 @@
-package org.eclipse.xtext.core.parser;
+package org.eclipse.xtext.core.parsetree;
 
-import org.eclipse.xtext.core.parser.AbstractParseTreeRewriter.InstanceDescription;
+import org.eclipse.xtext.core.parsetree.AbstractParseTreeUpdater.InstanceDescription;
 
 
 public abstract class Predicate {
@@ -12,7 +12,5 @@ public abstract class Predicate {
 	}
 
 	public abstract boolean check();
-	
-	
 
 }

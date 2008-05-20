@@ -3,27 +3,65 @@ package org.eclipse.xtext;
 
 import java.util.*;
 
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.core.parser.*;
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.parser.XtextGrammarTestASTFactory;
 
-public class XtextGrammarTestParseTreeConstructor extends AbstractParseTreeRewriter{
+public class XtextGrammarTestParseTreeConstructor extends AbstractParseTreeUpdater {
 	private AbstractEcoreElementFactory factory = new XtextGrammarTestASTFactory();
 	private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.XtextGrammarTestConstants.getXtextGrammarTestGrammar();
 	
 	protected AbstractEcoreElementFactory getFactory() {
 		return factory;
 	}
+	
+	protected Grammar getGrammar() {
+		return grammar;
+	}
 
+	protected void internalDoUpdate(EObject obj, String ruleToCall) {
+		if (ruleToCall.equals("Grammar")) {
+			proceedGrammar(getDescr(obj));
+		} else 		if (ruleToCall.equals("AbstractRule")) {
+			proceedAbstractRule(getDescr(obj));
+		} else 		if (ruleToCall.equals("AbstractMetamodelDeclaration")) {
+			proceedAbstractMetamodelDeclaration(getDescr(obj));
+		} else 		if (ruleToCall.equals("GeneratedMetamodel")) {
+			proceedGeneratedMetamodel(getDescr(obj));
+		} else 		if (ruleToCall.equals("ReferencedMetamodel")) {
+			proceedReferencedMetamodel(getDescr(obj));
+		} else 		if (ruleToCall.equals("LexerRule")) {
+			proceedLexerRule(getDescr(obj));
+		} else 		if (ruleToCall.equals("ParserRule")) {
+			proceedParserRule(getDescr(obj));
+		} else 		if (ruleToCall.equals("TypeRef")) {
+			proceedTypeRef(getDescr(obj));
+		} else 		if (ruleToCall.equals("Alternatives")) {
+			proceedAlternatives(getDescr(obj));
+		} else 		if (ruleToCall.equals("Group")) {
+			proceedGroup(getDescr(obj));
+		} else 		if (ruleToCall.equals("AbstractToken")) {
+			proceedAbstractToken(getDescr(obj));
+		} else 		if (ruleToCall.equals("Assignment")) {
+			proceedAssignment(getDescr(obj));
+		} else 		if (ruleToCall.equals("Action")) {
+			proceedAction(getDescr(obj));
+		} else 		if (ruleToCall.equals("AbstractTerminal")) {
+			proceedAbstractTerminal(getDescr(obj));
+		} else 		if (ruleToCall.equals("ParenthesizedElement")) {
+			proceedParenthesizedElement(getDescr(obj));
+		} else 		if (ruleToCall.equals("Keyword")) {
+			proceedKeyword(getDescr(obj));
+		} else 		if (ruleToCall.equals("RuleCall")) {
+			proceedRuleCall(getDescr(obj));
+		} else {
+			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+		}
+	}
 
-public void proceedGrammar(EObject obj) {
-	proceedGrammar(getDescr(obj));
-}
-
+	
 protected void proceedGrammar(InstanceDescription obj) {
 	
 /* xtext::Group */ 
@@ -170,10 +208,6 @@ new Predicate(obj) {
 
 }
 
-public void proceedAbstractRule(EObject obj) {
-	proceedAbstractRule(getDescr(obj));
-}
-
 protected void proceedAbstractRule(InstanceDescription obj) {
 	
 /* xtext::Alternatives */ 
@@ -237,10 +271,6 @@ new Predicate(obj) {
 
 }
 
-public void proceedAbstractMetamodelDeclaration(EObject obj) {
-	proceedAbstractMetamodelDeclaration(getDescr(obj));
-}
-
 protected void proceedAbstractMetamodelDeclaration(InstanceDescription obj) {
 	
 /* xtext::Alternatives */ 
@@ -302,10 +332,6 @@ new Predicate(obj) {
 
 }
 
-}
-
-public void proceedGeneratedMetamodel(EObject obj) {
-	proceedGeneratedMetamodel(getDescr(obj));
 }
 
 protected void proceedGeneratedMetamodel(InstanceDescription obj) {
@@ -427,10 +453,6 @@ new Predicate(obj) {
 
 }
 
-public void proceedReferencedMetamodel(EObject obj) {
-	proceedReferencedMetamodel(getDescr(obj));
-}
-
 protected void proceedReferencedMetamodel(InstanceDescription obj) {
 	
 /* xtext::Group */ 
@@ -519,10 +541,6 @@ new Predicate(obj) {
 
 }
 
-}
-
-public void proceedLexerRule(EObject obj) {
-	proceedLexerRule(getDescr(obj));
 }
 
 protected void proceedLexerRule(InstanceDescription obj) {
@@ -642,10 +660,6 @@ new Predicate(obj) {
 
 }
 
-}
-
-public void proceedParserRule(EObject obj) {
-	proceedParserRule(getDescr(obj));
 }
 
 protected void proceedParserRule(InstanceDescription obj) {
@@ -792,10 +806,6 @@ new Predicate(obj) {
 
 }
 
-public void proceedTypeRef(EObject obj) {
-	proceedTypeRef(getDescr(obj));
-}
-
 protected void proceedTypeRef(InstanceDescription obj) {
 	
 /* xtext::Group */ 
@@ -869,10 +879,6 @@ new Predicate(obj) {
 
 }
 
-}
-
-public void proceedAlternatives(EObject obj) {
-	proceedAlternatives(getDescr(obj));
 }
 
 protected void proceedAlternatives(InstanceDescription obj) {
@@ -968,10 +974,6 @@ new Predicate(obj) {
 
 }
 
-public void proceedGroup(EObject obj) {
-	proceedGroup(getDescr(obj));
-}
-
 protected void proceedGroup(InstanceDescription obj) {
 	
 /* xtext::Group */ 
@@ -1048,10 +1050,6 @@ new Predicate(obj) {
 
 }
 
-}
-
-public void proceedAbstractToken(EObject obj) {
-	proceedAbstractToken(getDescr(obj));
 }
 
 protected void proceedAbstractToken(InstanceDescription obj) {
@@ -1269,10 +1267,6 @@ new Predicate(obj) {
 
 }
 
-public void proceedAssignment(EObject obj) {
-	proceedAssignment(getDescr(obj));
-}
-
 protected void proceedAssignment(InstanceDescription obj) {
 	
 /* xtext::Group */ 
@@ -1428,10 +1422,6 @@ new Predicate(obj) {
 
 }
 
-}
-
-public void proceedAction(EObject obj) {
-	proceedAction(getDescr(obj));
 }
 
 protected void proceedAction(InstanceDescription obj) {
@@ -1654,10 +1644,6 @@ new Predicate(obj) {
 
 }
 
-public void proceedAbstractTerminal(EObject obj) {
-	proceedAbstractTerminal(getDescr(obj));
-}
-
 protected void proceedAbstractTerminal(InstanceDescription obj) {
 	
 /* xtext::Alternatives */ 
@@ -1769,10 +1755,6 @@ new Predicate(obj) {
 
 }
 
-public void proceedParenthesizedElement(EObject obj) {
-	proceedParenthesizedElement(getDescr(obj));
-}
-
 protected void proceedParenthesizedElement(InstanceDescription obj) {
 	
 /* xtext::Group */ 
@@ -1823,10 +1805,6 @@ protected void proceedParenthesizedElement(InstanceDescription obj) {
 
 }
 
-public void proceedKeyword(EObject obj) {
-	proceedKeyword(getDescr(obj));
-}
-
 protected void proceedKeyword(InstanceDescription obj) {
 	
 /* xtext::Assignment */ 
@@ -1850,10 +1828,6 @@ protected void proceedKeyword(InstanceDescription obj) {
 
 }
 
-}
-
-public void proceedRuleCall(EObject obj) {
-	proceedRuleCall(getDescr(obj));
 }
 
 protected void proceedRuleCall(InstanceDescription obj) {

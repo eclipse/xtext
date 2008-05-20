@@ -3,27 +3,35 @@ package org.eclipse.xtext.lexer;
 
 import java.util.*;
 
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.core.parser.*;
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.lexer.parser.LexerLanguageASTFactory;
 
-public class LexerLanguageParseTreeConstructor extends AbstractParseTreeRewriter{
+public class LexerLanguageParseTreeConstructor extends AbstractParseTreeUpdater {
 	private AbstractEcoreElementFactory factory = new LexerLanguageASTFactory();
 	private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.lexer.LexerLanguageConstants.getLexerLanguageGrammar();
 	
 	protected AbstractEcoreElementFactory getFactory() {
 		return factory;
 	}
+	
+	protected Grammar getGrammar() {
+		return grammar;
+	}
 
+	protected void internalDoUpdate(EObject obj, String ruleToCall) {
+		if (ruleToCall.equals("Model")) {
+			proceedModel(getDescr(obj));
+		} else 		if (ruleToCall.equals("Element")) {
+			proceedElement(getDescr(obj));
+		} else {
+			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+		}
+	}
 
-public void proceedModel(EObject obj) {
-	proceedModel(getDescr(obj));
-}
-
+	
 protected void proceedModel(InstanceDescription obj) {
 	
 /* xtext::Assignment */ 
@@ -58,10 +66,6 @@ new Predicate(obj) {
 
 }
 
-}
-
-public void proceedElement(EObject obj) {
-	proceedElement(getDescr(obj));
 }
 
 protected void proceedElement(InstanceDescription obj) {

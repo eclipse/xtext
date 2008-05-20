@@ -3,27 +3,39 @@ package org.eclipse.xtext.parsetree.reconstr;
 
 import java.util.*;
 
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.core.parser.*;
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.parsetree.reconstr.parser.SimpleReconstrTestASTFactory;
 
-public class SimpleReconstrTestParseTreeConstructor extends AbstractParseTreeRewriter{
+public class SimpleReconstrTestParseTreeConstructor extends AbstractParseTreeUpdater {
 	private AbstractEcoreElementFactory factory = new SimpleReconstrTestASTFactory();
 	private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestConstants.getSimpleReconstrTestGrammar();
 	
 	protected AbstractEcoreElementFactory getFactory() {
 		return factory;
 	}
+	
+	protected Grammar getGrammar() {
+		return grammar;
+	}
 
+	protected void internalDoUpdate(EObject obj, String ruleToCall) {
+		if (ruleToCall.equals("Op")) {
+			proceedOp(getDescr(obj));
+		} else 		if (ruleToCall.equals("Term")) {
+			proceedTerm(getDescr(obj));
+		} else 		if (ruleToCall.equals("Atom")) {
+			proceedAtom(getDescr(obj));
+		} else 		if (ruleToCall.equals("Parens")) {
+			proceedParens(getDescr(obj));
+		} else {
+			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+		}
+	}
 
-public void proceedOp(EObject obj) {
-	proceedOp(getDescr(obj));
-}
-
+	
 protected void proceedOp(InstanceDescription obj) {
 	
 /* xtext::Group */ 
@@ -102,10 +114,6 @@ new Predicate(obj) {
 
 }
 
-public void proceedTerm(EObject obj) {
-	proceedTerm(getDescr(obj));
-}
-
 protected void proceedTerm(InstanceDescription obj) {
 	
 /* xtext::Alternatives */ 
@@ -169,10 +177,6 @@ new Predicate(obj) {
 
 }
 
-public void proceedAtom(EObject obj) {
-	proceedAtom(getDescr(obj));
-}
-
 protected void proceedAtom(InstanceDescription obj) {
 	
 /* xtext::Assignment */ 
@@ -196,10 +200,6 @@ protected void proceedAtom(InstanceDescription obj) {
 
 }
 
-}
-
-public void proceedParens(EObject obj) {
-	proceedParens(getDescr(obj));
 }
 
 protected void proceedParens(InstanceDescription obj) {

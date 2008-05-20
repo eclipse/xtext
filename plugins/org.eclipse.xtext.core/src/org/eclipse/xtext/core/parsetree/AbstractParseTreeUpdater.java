@@ -1,4 +1,4 @@
-package org.eclipse.xtext.core.parser;
+package org.eclipse.xtext.core.parsetree;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,15 +10,45 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.core.parsetree.AbstractNode;
-import org.eclipse.xtext.core.parsetree.CompositeNode;
-import org.eclipse.xtext.core.parsetree.LeafNode;
-import org.eclipse.xtext.core.parsetree.ParsetreeFactory;
+import org.eclipse.xtext.core.parser.AbstractEcoreElementFactory;
 
-public abstract class AbstractParseTreeRewriter {
+public abstract class AbstractParseTreeUpdater {
+
+	public void update(EObject object) {
+		NodeAdapter adapter = getAdapter(object);
+		CompositeNode rootNode = null;
+		String ruleToCall = getGrammar().getParserRules().get(0).getName();
+		if (adapter == null) {
+			rootNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
+			object = EcoreUtil.getRootContainer(object);
+			// TODO set synthetic rulecall
+		} else {
+			rootNode = adapter.getParserNode();
+			rootNode.getChildren().clear();
+			if (rootNode.getGrammarElement() instanceof RuleCall) {
+				ruleToCall = ((RuleCall) rootNode.getGrammarElement()).getName();
+			}
+			object = rootNode.getElement();
+		}
+		internalDoUpdate(object, ruleToCall);
+	}
+
+	protected abstract Grammar getGrammar();
+
+	protected abstract void internalDoUpdate(EObject obj, String ruleToCall);
+
+	private NodeAdapter getAdapter(EObject object) {
+		NodeAdapter adapter = (NodeAdapter) EcoreUtil.getAdapter(object.eAdapters(), AbstractNode.class);
+		if ((adapter == null || !(adapter.getParserNode().getGrammarElement() instanceof RuleCall))
+				&& object.eContainer() != null) {
+			return getAdapter(object.eContainer());
+		}
+		return adapter;
+	}
 
 	protected abstract AbstractEcoreElementFactory getFactory();
 
@@ -57,7 +87,7 @@ public abstract class AbstractParseTreeRewriter {
 
 		public InstanceDescription(EObject described, boolean lookahead) {
 			super();
-			if (described==null)
+			if (described == null)
 				throw new NullPointerException("described");
 			this.described = described;
 			this.isLookahead = lookahead;
@@ -99,12 +129,12 @@ public abstract class AbstractParseTreeRewriter {
 			Object get = described.eGet(f);
 			if (f.isMany()) {
 				List<?> list = (List<?>) get;
-				get = list.get(counter-1);
+				get = list.get(counter - 1);
 			}
 			featureConsumedCounter.put(feature, counter - 1);
 			return get;
 		}
-		
+
 		public boolean checkConsume(String feature) {
 			if (!isConsumable(feature))
 				return false;
@@ -113,7 +143,7 @@ public abstract class AbstractParseTreeRewriter {
 			Object get = described.eGet(f);
 			if (f.isMany()) {
 				List<?> list = (List<?>) get;
-				get = list.get(counter-1);
+				get = list.get(counter - 1);
 			}
 			featureConsumedCounter.put(feature, counter - 1);
 			return true;
@@ -146,13 +176,13 @@ public abstract class AbstractParseTreeRewriter {
 		public InstanceDescription newLookaheadDescription() {
 			return new InstanceDescription(described, new HashMap<String, Integer>(featureConsumedCounter));
 		}
-		
+
 	}
-	
+
 	public String getText() {
 		return current.serialize();
 	}
-	
+
 	private CompositeNode current = ParsetreeFactory.eINSTANCE.createCompositeNode();
 	private LexerRule wsRule;
 
@@ -166,26 +196,25 @@ public abstract class AbstractParseTreeRewriter {
 	protected void ruleCallEnd(InstanceDescription val, boolean b, RuleCall ruleCall) {
 		current = current.getParent();
 	}
-	
+
 	private void prependToCurrentsChildren(AbstractNode node) {
 		current.getChildren().add(0, node);
 	}
 
-
 	protected void lexerRuleCall(RuleCall ruleCall) {
-		throw new UnsupportedOperationException("coudn't generate text for lexer rule "+ruleCall.getName());
+		throw new UnsupportedOperationException("coudn't generate text for lexer rule " + ruleCall.getName());
 	}
-	
+
 	protected void lexerRuleCall(Object value, RuleCall ruleCall) {
 		checkWhitespace();
 		LeafNode ln = ParsetreeFactory.eINSTANCE.createLeafNode();
 		ln.setGrammarElement(ruleCall);
-		ln.setText(value.toString()); //TODO converters?
+		ln.setText(value.toString()); // TODO converters?
 		prependToCurrentsChildren(ln);
 	}
 
 	private void checkWhitespace() {
-		EList<LeafNode> leafNodes = ((CompositeNode)EcoreUtil.getRootContainer(current)).getLeafNodes();
+		EList<LeafNode> leafNodes = ((CompositeNode) EcoreUtil.getRootContainer(current)).getLeafNodes();
 		if (!leafNodes.isEmpty()) {
 			LeafNode next = leafNodes.get(0);
 			if (!next.isHidden()) {
@@ -199,18 +228,18 @@ public abstract class AbstractParseTreeRewriter {
 
 	private LexerRule getWhitespaceRule() {
 		if (wsRule == null) {
-			//TODO 
+			// TODO
 		}
 		return wsRule;
 	}
 
 	protected void action(InstanceDescription parent, InstanceDescription child, Action action) {
-		current.setElement(parent.getDelegate());
+		objectCreation(parent);
 	}
 
 	protected void keyword(Keyword kw) {
 		checkWhitespace();
-		String value = kw.getValue().substring(1, kw.getValue().length()-1);
+		String value = kw.getValue().substring(1, kw.getValue().length() - 1);
 		LeafNode ln = ParsetreeFactory.eINSTANCE.createLeafNode();
 		ln.setGrammarElement(kw);
 		ln.setText(value);
@@ -219,6 +248,8 @@ public abstract class AbstractParseTreeRewriter {
 
 	protected void objectCreation(InstanceDescription obj) {
 		current.setElement(obj.getDelegate());
+		NodeAdapter newOne = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(obj.getDelegate(), AbstractNode.class);
+		newOne.setParserNode(current);
 	}
 
 }

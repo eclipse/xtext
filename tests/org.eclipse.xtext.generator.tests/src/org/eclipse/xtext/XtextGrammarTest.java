@@ -60,7 +60,7 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 		assertWithXtend("true","parserRules.select(e|e.name=='AbstractToken').first()!=null",grammar);
 		assertWithXtend("'AbstractElement'","parserRules.select(e|e.name=='AbstractToken').first().type.name",grammar);
 		XtextGrammarTestParseTreeConstructor foo = new XtextGrammarTestParseTreeConstructor();
-		foo.proceedGrammar(grammar);
+		foo.update(grammar);
 		System.out.println(foo.getText());
 //		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 //				"xmi", new XMIResourceFactoryImpl());
@@ -73,7 +73,7 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 		String model = "generate foo 'bar' Foo : ( 'stuff' '{' '}' STRING ) ? ;";
 		EObject grammar = (EObject) getModel(model, new XtextGrammarTestASTFactory());
 		XtextGrammarTestParseTreeConstructor ptc = new XtextGrammarTestParseTreeConstructor();
-		ptc.proceedGrammar(grammar);
+		ptc.update(grammar);
 		assertEquals(model, ptc.getText());
 	}
 
