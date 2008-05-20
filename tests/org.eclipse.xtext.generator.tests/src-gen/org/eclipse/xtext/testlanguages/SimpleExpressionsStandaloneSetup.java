@@ -11,7 +11,7 @@ public abstract class SimpleExpressionsStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@459ca5 (alias: null) (nsURI: "http://www.eclipse.org/xtext/test/simpleExpressions", name: simpleExpressions)
+		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@f460af (alias: null) (nsURI: "http://www.eclipse.org/xtext/test/simpleExpressions", name: simpleExpressions)
 		
 	}
 

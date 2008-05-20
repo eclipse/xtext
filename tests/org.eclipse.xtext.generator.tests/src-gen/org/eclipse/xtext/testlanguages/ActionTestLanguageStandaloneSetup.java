@@ -11,7 +11,7 @@ public abstract class ActionTestLanguageStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		
-		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@dd98c4 (alias: null) (nsURI: "http://www.eclipse.org/2008/tmf/xtext/ActionLang", name: ActionLang)
+		//TODO org.eclipse.xtext.impl.GeneratedMetamodelImpl@e1daf9 (alias: null) (nsURI: "http://www.eclipse.org/2008/tmf/xtext/ActionLang", name: ActionLang)
 		
 	}
 

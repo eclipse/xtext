@@ -18,21 +18,21 @@ public class XtextGrammarTestTokenTypeResolver {
 
 
 		case 8:
-			// RULE_INT
-			return BuiltinRules.BUILTIN_INT;
+			// RULE_WS
+			return BuiltinRules.BUILTIN_WS;
 
 
 
 
 		case 7:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 
 
 		case 9:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 
 
@@ -62,8 +62,8 @@ public class XtextGrammarTestTokenTypeResolver {
 
 
 		case 10:
-			// RULE_WS
-			return BuiltinRules.BUILTIN_WS;
+			// RULE_INT
+			return BuiltinRules.BUILTIN_INT;
 
 		case 5:
 			// RULE_STRING
