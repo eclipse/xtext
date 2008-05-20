@@ -87,8 +87,8 @@ public class GeneratorFacade {
 
 		XpandFacade facade = XpandFacade.create(execCtx);
 		facade.evaluate("org::eclipse::xtext::grammargen::AntlrGrammar::grammar", grammarModel);
-		facade.evaluate("org::eclipse::xtext::grammargen::ParseTreeConstructor::file", grammarModel);
-		facade.evaluate("org::eclipse::xtext::Constants::file", grammarModel);
+		facade.evaluate("org::eclipse::xtext::parsetree::ParseTreeConstructor::file", grammarModel);
+		facade.evaluate("org::eclipse::xtext::LanguageFacade::file", grammarModel);
 		facade.evaluate("org::eclipse::xtext::TokenTypes::file", grammarModel);
 		facade.evaluate("org::eclipse::xtext::StandaloneSetup::file", grammarModel);
 		facade.evaluate("org::eclipse::xtext::ParserFacade::parser", grammarModel);

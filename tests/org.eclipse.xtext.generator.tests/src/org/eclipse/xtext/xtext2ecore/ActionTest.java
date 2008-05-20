@@ -8,7 +8,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.testlanguages.ActionTestLanguage;
-import org.eclipse.xtext.testlanguages.ActionTestLanguageConstants;
+import org.eclipse.xtext.testlanguages.ActionTestLanguageLanguageFacade;
 import org.eclipse.xtext.testlanguages.parser.ActionTestLanguageASTFactory;
 
 public class ActionTest extends AbstractGeneratorTest {
@@ -24,11 +24,11 @@ public class ActionTest extends AbstractGeneratorTest {
 		checkContainmentReferenceExists(thing, type, "content");
 		assertTrue(item.getESuperTypes().contains(type));
 		assertTrue(thing.getESuperTypes().contains(type));
-		assertNull(ActionTestLanguageConstants.getActionLangEPackage().getEClassifier("Element"));
+		assertNull(ActionTestLanguageLanguageFacade.getActionLangEPackage().getEClassifier("Element"));
 	}
 	
 	private EClass checkEClassExists(String name) {
-		EPackage actionLangEPackage = ActionTestLanguageConstants.getActionLangEPackage();
+		EPackage actionLangEPackage = ActionTestLanguageLanguageFacade.getActionLangEPackage();
 		EClassifier classifier = actionLangEPackage.getEClassifier(name);
 		assertNotNull(classifier);
 		assertTrue(classifier instanceof EClass);

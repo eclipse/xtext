@@ -25,7 +25,7 @@ package «packageName()».parser.internal;
 @parser::header {
 package «packageName()».parser.internal; 
 
-import org.eclipse.xtext.LexerRule;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.ParseException;
 import org.eclipse.xtext.core.parsetree.*;
@@ -106,9 +106,7 @@ protected void setLexerRule(LeafNode node, Token t) {
 
 private CompositeNode currentNode;
 
-private org.eclipse.xtext.Grammar grammar = «packageName()».«constantsClassName()».get«languageName()»Grammar();
-
-
+private org.eclipse.xtext.Grammar grammar = LanguageFacadeFactory.getFacade("«languageId()»").getGrammar();;
 
 }
 
