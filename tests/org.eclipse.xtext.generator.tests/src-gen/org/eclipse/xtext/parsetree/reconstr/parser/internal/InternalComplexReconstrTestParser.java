@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-05-20 16:06:56
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-05-20 16:27:38
 
 package org.eclipse.xtext.parsetree.reconstr.parser.internal; 
 
@@ -17,17 +17,17 @@ import java.util.ArrayList;
 
 public class InternalComplexReconstrTestParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_SL_COMMENT", "RULE_LEXER_BODY", "RULE_WS", "RULE_ML_COMMENT", "RULE_STRING", "RULE_INT", "RULE_ANY_OTHER", "'+'", "'-'", "'('", "')'", "'!'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_LEXER_BODY", "RULE_INT", "RULE_STRING", "RULE_ANY_OTHER", "'+'", "'-'", "'('", "')'", "'!'"
     };
-    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ML_COMMENT=6;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=7;
-    public static final int RULE_INT=10;
+    public static final int RULE_WS=5;
+    public static final int RULE_INT=9;
     public static final int EOF=-1;
-    public static final int RULE_STRING=9;
+    public static final int RULE_STRING=10;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=5;
-    public static final int RULE_LEXER_BODY=6;
+    public static final int RULE_SL_COMMENT=7;
+    public static final int RULE_LEXER_BODY=8;
 
         public InternalComplexReconstrTestParser(TokenStream input) {
             super(input);

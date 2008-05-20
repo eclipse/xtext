@@ -6,6 +6,7 @@ import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.IParseErrorHandler;
 import org.eclipse.xtext.core.parser.antlr.AntlrExceptionTool;
@@ -47,5 +48,9 @@ public class TestLanguageParser extends org.eclipse.xtext.core.parser.AbstractPa
 						.getType(), TokenTool.getText(t), re.getMessage(), re);
 		}
 		return null;
+	}
+	
+	protected IElementFactory getDefaultASTFactory() {
+		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/test/TestLanguage").getElementFactory();
 	}
 }

@@ -11,6 +11,8 @@ package org.eclipse.xtext.core.parser;
 
 import java.io.InputStream;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
@@ -23,12 +25,19 @@ public interface IParser {
 	 * @param handler
 	 * @return
 	 */
-	Object parse(InputStream in, IElementFactory factory, IParseErrorHandler handler);
+	EObject parse(InputStream in, IElementFactory factory, IParseErrorHandler handler);
 	
 	/**
 	 * @param in
 	 * @param factory
 	 * @return
 	 */
-	Object parse(InputStream in, IElementFactory factory);
+	EObject parse(InputStream in, IElementFactory factory);
+	
+	/**
+	 * @param in
+	 * @param factory
+	 * @return
+	 */
+	EObject parse(InputStream in);
 }
