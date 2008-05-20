@@ -9,9 +9,9 @@
 generate ReferenceGrammar "http://eclipse.org/xtext/reference/ReferenceGrammar"
 
 Spielplatz:
-	"spielplatz" groesse=STRING "{"
+	("spielplatz" groesse=STRING "{"
 		(kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug)*
-	"}";		
+	"}")?;		
 	
 Person:
 	Kind | Erwachsener;
