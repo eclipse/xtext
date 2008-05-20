@@ -29,11 +29,8 @@ import org.openarchitectureware.xtend.XtendFacade;
 public class XtextGrammarTest extends AbstractGeneratorTest {
 	
 	public void testBootstrapping() throws Exception {
-		List<Invocation> parse = parse("generate foo 'bar' Foo : name=ID;");
+		List<Invocation> parse = getInvocations("generate foo 'bar' Foo : name=ID;");
 		Iterator<Invocation> iter = parse.iterator();
-//		for (Invocation invocation : parse) {
-//			System.out.println(invocation);
-//		}
 		assertEquals("create(GeneratedMetamodel)", iter.next().toString());
 		assertEquals("set(name,foo)", iter.next().toString());
 		assertEquals("set(nsURI,'bar')", iter.next().toString());
@@ -52,14 +49,14 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 	}
 	
 	public void testInstantiate() throws Exception {
-		EObject grammar = (EObject) parse("generate foo 'bar' Foo : name=ID;", new XtextGrammarTestASTFactory());
+		EObject grammar = (EObject) getModel("generate foo 'bar' Foo : name=ID;", new XtextGrammarTestASTFactory());
 		assertWithXtend("'Foo'","parserRules.first().name",grammar);
 		assertWithXtend("'name'","parserRules.first().alternatives.feature",grammar);
 	}
 	
 	public void testInstantiateXtextGrammar() throws Exception {
 		InputStream bootGrammar = getClass().getClassLoader().getResourceAsStream(getClass().getName().replace('.','/')+".xtext");
-		EObject grammar = (EObject) parse(bootGrammar , new XtextGrammarTestASTFactory(),null);
+		EObject grammar = (EObject) getModel(bootGrammar , new XtextGrammarTestASTFactory(),null);
 		assertWithXtend("true","parserRules.select(e|e.name=='AbstractToken').first()!=null",grammar);
 		assertWithXtend("'AbstractElement'","parserRules.select(e|e.name=='AbstractToken').first().type.name",grammar);
 		XtextGrammarTestParseTreeConstructor foo = new XtextGrammarTestParseTreeConstructor();
@@ -74,7 +71,7 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 	
 	public void testSerialization() throws Exception {
 		String model = "generate foo 'bar' Foo : ( 'stuff' '{' '}' STRING ) ? ;";
-		EObject grammar = (EObject) parse(model, new XtextGrammarTestASTFactory());
+		EObject grammar = (EObject) getModel(model, new XtextGrammarTestASTFactory());
 		XtextGrammarTestParseTreeConstructor ptc = new XtextGrammarTestParseTreeConstructor();
 		ptc.proceedGrammar(grammar);
 		assertEquals(model, ptc.getText());
