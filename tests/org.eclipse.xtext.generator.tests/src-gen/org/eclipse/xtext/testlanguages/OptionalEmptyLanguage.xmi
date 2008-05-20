@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <parserRules name="Model">
+    <alternatives xsi:type="xtext:Assignment" cardinality="?" feature="child" operator="=">
+      <terminal xsi:type="xtext:RuleCall" name="Greeting"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="Greeting">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Keyword" value="'hallo'"/>
+      <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+        <terminal xsi:type="xtext:RuleCall" name="ID"/>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="&quot;http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty&quot;" name="OptionalEmpty"/>
+</xtext:Grammar>

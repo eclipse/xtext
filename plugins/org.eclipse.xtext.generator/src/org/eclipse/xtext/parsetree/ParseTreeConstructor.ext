@@ -56,7 +56,7 @@ private List[String] recCheckPath(List[AbstractElement] abstractTokens, Integer 
 				(if currentResult == null 
 					then newChecks 
 					else newChecks.collect(e1| currentResult.collect(e2|e2+'&&'+e1)).flatten()
-				))
+				).toList())
 			);
 				
 	

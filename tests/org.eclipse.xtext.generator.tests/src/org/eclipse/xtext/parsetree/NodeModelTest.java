@@ -26,7 +26,7 @@ import org.eclipse.xtext.core.parsetree.CompositeNode;
 import org.eclipse.xtext.core.parsetree.LeafNode;
 import org.eclipse.xtext.core.parsetree.NodeAdapter;
 import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.test.TestLanguage;
+import org.eclipse.xtext.testlanguages.TestLanguage;
 
 public class NodeModelTest extends AbstractGeneratorTest {
 
