@@ -1,12 +1,13 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-05-20 10:57:56
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-05-20 11:15:51
 
 package org.eclipse.xtext.parsetree.reconstr.parser.internal; 
 
+import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.ParseException;
 import org.eclipse.xtext.core.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
-
+import org.eclipse.xtext.parsetree.reconstr.parser.internal.ComplexReconstrTestTokenTypeResolver;
 
 
 import org.antlr.runtime.*;
@@ -16,16 +17,16 @@ import java.util.ArrayList;
 
 public class InternalComplexReconstrTestParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_WS", "RULE_ML_COMMENT", "RULE_LEXER_BODY", "RULE_SL_COMMENT", "RULE_STRING", "RULE_ANY_OTHER", "'+'", "'-'", "'('", "')'", "'!'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_SL_COMMENT", "RULE_INT", "RULE_ML_COMMENT", "RULE_LEXER_BODY", "RULE_STRING", "RULE_WS", "RULE_ANY_OTHER", "'+'", "'-'", "'('", "')'", "'!'"
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=6;
+    public static final int RULE_WS=10;
     public static final int EOF=-1;
-    public static final int RULE_INT=5;
-    public static final int RULE_STRING=10;
+    public static final int RULE_INT=6;
+    public static final int RULE_STRING=9;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_SL_COMMENT=5;
     public static final int RULE_LEXER_BODY=8;
 
         public InternalComplexReconstrTestParser(TokenStream input) {
@@ -40,72 +41,84 @@ public class InternalComplexReconstrTestParser extends Parser {
 
     private IElementFactory factory;
     public InternalComplexReconstrTestParser(TokenStream input, IElementFactory factory) {
-    	this(input);
-    	this.factory = factory;
+        this(input);
+        this.factory = factory;
     }
 
-    public CompositeNode createCompositeNode(EObject grammarElement, CompositeNode parentNode) {
-    	CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
-    	if (parentNode!=null) parentNode.getChildren().add(compositeNode);
-    	compositeNode.setGrammarElement(grammarElement);
-    	return compositeNode;
+    public CompositeNode createCompositeNode(String grammarElementID, CompositeNode parentNode) {
+        CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
+        if (parentNode!=null) parentNode.getChildren().add(compositeNode);
+        compositeNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
+        return compositeNode;
     }
 
-    public Object createLeafNode(EObject currentGrammarElement, CompositeNode parentNode, String feature) {
-    	Token token = input.LT(-1);
-    	Token tokenBefore = input.LT(-2);
-    	int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
-    	if (indexOfTokenBefore+1<token.getTokenIndex()) {
-    		for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
-    			Token hidden = input.get(x);
-    			LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-    			leafNode.setText(hidden.getText());
-    			leafNode.setHidden(true);
-    			parentNode.getChildren().add(leafNode);
-    		}
-    	}
-    	LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-    		leafNode.setText(token.getText());
-    	leafNode.setGrammarElement(currentGrammarElement);
-    	leafNode.setFeature(feature);
-    	parentNode.getChildren().add(leafNode);
-    	return leafNode;
+    public Object createLeafNode(String grammarElementID, CompositeNode parentNode, String feature) {
+        Token token = input.LT(-1);
+        Token tokenBefore = input.LT(-2);
+        int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
+        if (indexOfTokenBefore+1<token.getTokenIndex()) {
+            for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
+                Token hidden = input.get(x);
+                LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+                leafNode.setText(hidden.getText());
+                leafNode.setHidden(true);
+    		    setLexerRule(leafNode, hidden);
+                parentNode.getChildren().add(leafNode);
+            }
+        }
+        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+            leafNode.setText(token.getText());
+        leafNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
+        leafNode.setFeature(feature);
+        parentNode.getChildren().add(leafNode);
+        return leafNode;
     }
 
     private void appendTrailingHiddenTokens(CompositeNode parentNode) {
-    	Token tokenBefore = input.LT(-1);
-    	int size = input.size();
-    	if (tokenBefore!=null && tokenBefore.getTokenIndex()<size) {
-    		for (int x = tokenBefore.getTokenIndex()+1; x<size;x++) {
-    			Token hidden = input.get(x);
-    			LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-    			leafNode.setText(hidden.getText());
-    			leafNode.setHidden(true);
-    			parentNode.getChildren().add(leafNode);
-    		}
-    	}
+        Token tokenBefore = input.LT(-1);
+        int size = input.size();
+        if (tokenBefore!=null && tokenBefore.getTokenIndex()<size) {
+            for (int x = tokenBefore.getTokenIndex()+1; x<size;x++) {
+                Token hidden = input.get(x);
+                LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+                leafNode.setText(hidden.getText());
+                leafNode.setHidden(true);
+                setLexerRule(leafNode, hidden);
+                parentNode.getChildren().add(leafNode);
+            }
+        }
     }
-    	
+        
     public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
-    	if(node.getElement() != null && node.getElement() != astElement) {
-    		throw new ParseException(node, "Reassignment of astElement in parse tree node");
-    	}
-    	node.setElement(astElement);
-    	if(astElement instanceof EObject) {
-    		EObject eObject = (EObject) astElement;
-    		NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
-    		adapter.setParserNode(node); 
+        if(node.getElement() != null && node.getElement() != astElement) {
+            throw new ParseException(node, "Reassignment of astElement in parse tree node");
+        }
+        node.setElement(astElement);
+        if(astElement instanceof EObject) {
+            EObject eObject = (EObject) astElement;
+            NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
+            adapter.setParserNode(node); 
+        }
+    }
+        
+    protected void setLexerRule(LeafNode node, Token t) {
+    	LexerRule lexerRule = ComplexReconstrTestTokenTypeResolver.getLexerRule(node, t.getType());
+    	if(lexerRule != null) {
+    		node.setGrammarElement(lexerRule);
     	}
     }
-    	
+
     private CompositeNode currentNode;
 
     private org.eclipse.xtext.Grammar grammar = org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestConstants.getComplexReconstrTestGrammar();
 
 
 
+
+
+
     // $ANTLR start parse
-    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:85:1: parse returns [EObject current] : ruleOp EOF ;
+    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:98:1: parse returns [EObject current] : ruleOp EOF ;
     public final EObject parse() throws RecognitionException {
         EObject current = null;
 
@@ -113,18 +126,17 @@ public class InternalComplexReconstrTestParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:85:33: ( ruleOp EOF )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:85:35: ruleOp EOF
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:98:33: ( ruleOp EOF )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:99:5: ruleOp EOF
             {
-            currentNode = createCompositeNode(// org.eclipse.xtext.impl.ParserRuleImpl@b0a165 (name: Op)
-            grammar.eResource().getEObject("//@parserRules.0"), currentNode);
-            pushFollow(FOLLOW_ruleOp_in_parse45);
+             currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
+            pushFollow(FOLLOW_ruleOp_in_parse53);
             ruleOp1=ruleOp();
             _fsp--;
 
-            current =ruleOp1;
-            match(input,EOF,FOLLOW_EOF_in_parse49); 
-            appendTrailingHiddenTokens(currentNode);
+             current =ruleOp1; 
+            match(input,EOF,FOLLOW_EOF_in_parse67); 
+             appendTrailingHiddenTokens(currentNode); 
 
             }
 
@@ -141,7 +153,7 @@ public class InternalComplexReconstrTestParser extends Parser {
 
 
     // $ANTLR start ruleOp
-    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:92:1: ruleOp returns [EObject current=null] : (this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )* ) ;
+    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:108:1: ruleOp returns [EObject current=null] : (this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )* ) ;
     public final EObject ruleOp() throws RecognitionException {
         EObject current = null;
 
@@ -154,18 +166,20 @@ public class InternalComplexReconstrTestParser extends Parser {
 
          EObject temp=null; CompositeNode entryNode = currentNode; 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:94:39: ( (this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )* ) )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:95:1: (this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )* )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:109:111: ( (this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )* ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:110:1: (this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )* )
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:95:1: (this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )* )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:95:2: this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )*
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:110:1: (this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )* )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:110:2: this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )*
             {
-            pushFollow(FOLLOW_ruleTerm_in_ruleOp85);
+            pushFollow(FOLLOW_ruleTerm_in_ruleOp109);
             this_Term=ruleTerm();
             _fsp--;
 
-            current = this_Term;
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:96:1: ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )*
+             
+                    current = this_Term; 
+                
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:114:1: ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )*
             loop1:
             do {
                 int alt1=3;
@@ -181,48 +195,52 @@ public class InternalComplexReconstrTestParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:96:2: ( ( () '+' ) (lv_addOperands= ruleTerm ) )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:114:2: ( ( () '+' ) (lv_addOperands= ruleTerm ) )
             	    {
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:96:2: ( ( () '+' ) (lv_addOperands= ruleTerm ) )
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:96:3: ( () '+' ) (lv_addOperands= ruleTerm )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:114:2: ( ( () '+' ) (lv_addOperands= ruleTerm ) )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:114:3: ( () '+' ) (lv_addOperands= ruleTerm )
             	    {
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:96:3: ( () '+' )
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:96:4: () '+'
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:114:3: ( () '+' )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:114:4: () '+'
             	    {
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:96:4: ()
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:97:1: 
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:114:4: ()
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:115:5: 
             	    {
-            	     temp=factory.create("Add");
-            	      factory.add(temp, "addOperands",current);
-            	      current = temp; 
-            	      temp = null;
-            	      currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@ca0a76 (cardinality: null) (operator: +=, feature: addOperands)
-            	    grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0"), currentNode); 
-            	      associateNodeWithAstElement(currentNode, current); 
+            	     
+            	            temp=factory.create("Add");
+            	            factory.add(temp, "addOperands",current);
+            	            current = temp; 
+            	            temp = null;
+            	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode); 
+            	            associateNodeWithAstElement(currentNode, current); 
+            	        
 
             	    }
 
-            	    match(input,12,FOLLOW_12_in_ruleOp96); 
-            	     createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@5d58b9 (cardinality: null) (value: '+')
-            	    grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.1"), currentNode,null); 
+            	    match(input,12,FOLLOW_12_in_ruleOp129); 
+
+            	            createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+            	        
 
             	    }
 
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:105:152: (lv_addOperands= ruleTerm )
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:106:4: lv_addOperands= ruleTerm
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:128:2: (lv_addOperands= ruleTerm )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:130:5: lv_addOperands= ruleTerm
             	    {
-            	     currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@627977 (cardinality: null) (name: Term)
-            	    grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal"), currentNode); 
-            	    pushFollow(FOLLOW_ruleTerm_in_ruleOp113);
+            	     
+            	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        
+            	    pushFollow(FOLLOW_ruleTerm_in_ruleOp159);
             	    lv_addOperands=ruleTerm();
             	    _fsp--;
 
-            	      currentNode = currentNode.getParent();   if (current==null) {
-            	          current = factory.create("Expression");
-            	          associateNodeWithAstElement(currentNode, current);
-            	       }
-            	       factory.add(current, "addOperands", lv_addOperands);
 
+            	            currentNode = currentNode.getParent();
+            	            if (current==null) {
+            	                current = factory.create("Expression");
+            	                associateNodeWithAstElement(currentNode, current);
+            	            }
+            	            factory.add(current, "addOperands", lv_addOperands);    
 
             	    }
 
@@ -233,48 +251,52 @@ public class InternalComplexReconstrTestParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:116:4: ( ( () '-' ) (lv_minusOperands= ruleTerm ) )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:142:6: ( ( () '-' ) (lv_minusOperands= ruleTerm ) )
             	    {
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:116:4: ( ( () '-' ) (lv_minusOperands= ruleTerm ) )
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:116:5: ( () '-' ) (lv_minusOperands= ruleTerm )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:142:6: ( ( () '-' ) (lv_minusOperands= ruleTerm ) )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:142:7: ( () '-' ) (lv_minusOperands= ruleTerm )
             	    {
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:116:5: ( () '-' )
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:116:6: () '-'
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:142:7: ( () '-' )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:142:8: () '-'
             	    {
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:116:6: ()
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:117:1: 
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:142:8: ()
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:143:5: 
             	    {
-            	     temp=factory.create("Minus");
-            	      factory.add(temp, "minusOperands",current);
-            	      current = temp; 
-            	      temp = null;
-            	      currentNode=createCompositeNode(// org.eclipse.xtext.impl.ActionImpl@5b14f9 (cardinality: null) (operator: +=, feature: minusOperands)
-            	    grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0"), currentNode); 
-            	      associateNodeWithAstElement(currentNode, current); 
+            	     
+            	            temp=factory.create("Minus");
+            	            factory.add(temp, "minusOperands",current);
+            	            current = temp; 
+            	            temp = null;
+            	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode); 
+            	            associateNodeWithAstElement(currentNode, current); 
+            	        
 
             	    }
 
-            	    match(input,13,FOLLOW_13_in_ruleOp129); 
-            	     createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@376ed0 (cardinality: null) (value: '-')
-            	    grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1"), currentNode,null); 
+            	    match(input,13,FOLLOW_13_in_ruleOp187); 
+
+            	            createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+            	        
 
             	    }
 
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:125:152: (lv_minusOperands= ruleTerm )
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:126:4: lv_minusOperands= ruleTerm
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:156:2: (lv_minusOperands= ruleTerm )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:158:5: lv_minusOperands= ruleTerm
             	    {
-            	     currentNode=createCompositeNode(// org.eclipse.xtext.impl.RuleCallImpl@674b2d (cardinality: null) (name: Term)
-            	    grammar.eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal"), currentNode); 
-            	    pushFollow(FOLLOW_ruleTerm_in_ruleOp146);
+            	     
+            	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        
+            	    pushFollow(FOLLOW_ruleTerm_in_ruleOp217);
             	    lv_minusOperands=ruleTerm();
             	    _fsp--;
 
-            	      currentNode = currentNode.getParent();   if (current==null) {
-            	          current = factory.create("Expression");
-            	          associateNodeWithAstElement(currentNode, current);
-            	       }
-            	       factory.add(current, "minusOperands", lv_minusOperands);
 
+            	            currentNode = currentNode.getParent();
+            	            if (current==null) {
+            	                current = factory.create("Expression");
+            	                associateNodeWithAstElement(currentNode, current);
+            	            }
+            	            factory.add(current, "minusOperands", lv_minusOperands);    
 
             	    }
 
@@ -310,7 +332,7 @@ public class InternalComplexReconstrTestParser extends Parser {
 
 
     // $ANTLR start ruleTerm
-    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:140:1: ruleTerm returns [EObject current=null] : (this_Atom= ruleAtom | this_Parens= ruleParens ) ;
+    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:173:1: ruleTerm returns [EObject current=null] : (this_Atom= ruleAtom | this_Parens= ruleParens ) ;
     public final EObject ruleTerm() throws RecognitionException {
         EObject current = null;
 
@@ -321,10 +343,10 @@ public class InternalComplexReconstrTestParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:142:4: ( (this_Atom= ruleAtom | this_Parens= ruleParens ) )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:143:1: (this_Atom= ruleAtom | this_Parens= ruleParens )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:174:37: ( (this_Atom= ruleAtom | this_Parens= ruleParens ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:175:1: (this_Atom= ruleAtom | this_Parens= ruleParens )
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:143:1: (this_Atom= ruleAtom | this_Parens= ruleParens )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:175:1: (this_Atom= ruleAtom | this_Parens= ruleParens )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -336,30 +358,34 @@ public class InternalComplexReconstrTestParser extends Parser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("143:1: (this_Atom= ruleAtom | this_Parens= ruleParens )", 2, 0, input);
+                    new NoViableAltException("175:1: (this_Atom= ruleAtom | this_Parens= ruleParens )", 2, 0, input);
 
                 throw nvae;
             }
             switch (alt2) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:143:2: this_Atom= ruleAtom
+                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:175:2: this_Atom= ruleAtom
                     {
-                    pushFollow(FOLLOW_ruleAtom_in_ruleTerm185);
+                    pushFollow(FOLLOW_ruleAtom_in_ruleTerm260);
                     this_Atom=ruleAtom();
                     _fsp--;
 
-                    current = this_Atom;
+                     
+                            current = this_Atom; 
+                        
 
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:144:2: this_Parens= ruleParens
+                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:180:6: this_Parens= ruleParens
                     {
-                    pushFollow(FOLLOW_ruleParens_in_ruleTerm191);
+                    pushFollow(FOLLOW_ruleParens_in_ruleTerm276);
                     this_Parens=ruleParens();
                     _fsp--;
 
-                    current = this_Parens;
+                     
+                            current = this_Parens; 
+                        
 
                     }
                     break;
@@ -382,7 +408,7 @@ public class InternalComplexReconstrTestParser extends Parser {
 
 
     // $ANTLR start ruleAtom
-    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:149:1: ruleAtom returns [EObject current=null] : (lv_name= RULE_ID ) ;
+    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:188:1: ruleAtom returns [EObject current=null] : (lv_name= RULE_ID ) ;
     public final EObject ruleAtom() throws RecognitionException {
         EObject current = null;
 
@@ -390,22 +416,23 @@ public class InternalComplexReconstrTestParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:151:4: ( (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:152:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:189:37: ( (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:190:1: (lv_name= RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:152:1: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:154:4: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:190:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:191:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAtom231); 
-             createLeafNode(// org.eclipse.xtext.impl.RuleCallImpl@594770 (cardinality: null) (name: ID)
-            grammar.eResource().getEObject("//@parserRules.2/@alternatives/@terminal"), currentNode,"name"); 
-                 if (current==null) {
-                  current = factory.create("Atom");
-                  associateNodeWithAstElement(currentNode, current);
-               }
-               factory.set(current, "name", lv_name);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAtom319); 
+             
+                createLeafNode("//@parserRules.2/@alternatives/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
+                
 
+                    if (current==null) {
+                        current = factory.create("Atom");
+                        associateNodeWithAstElement(currentNode, current);
+                    }
+                    factory.set(current, "name", lv_name);    
 
             }
 
@@ -425,7 +452,7 @@ public class InternalComplexReconstrTestParser extends Parser {
 
 
     // $ANTLR start ruleParens
-    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:167:1: ruleParens returns [EObject current=null] : ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? ) ;
+    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:206:1: ruleParens returns [EObject current=null] : ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? ) ;
     public final EObject ruleParens() throws RecognitionException {
         EObject current = null;
 
@@ -435,36 +462,40 @@ public class InternalComplexReconstrTestParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:169:4: ( ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? ) )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:170:1: ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:207:37: ( ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:208:1: ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? )
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:170:1: ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:170:2: ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )?
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:208:1: ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:208:2: ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )?
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:170:2: ( ( '(' this_Op= ruleOp ) ')' )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:170:3: ( '(' this_Op= ruleOp ) ')'
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:208:2: ( ( '(' this_Op= ruleOp ) ')' )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:208:3: ( '(' this_Op= ruleOp ) ')'
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:170:3: ( '(' this_Op= ruleOp )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:170:4: '(' this_Op= ruleOp
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:208:3: ( '(' this_Op= ruleOp )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:208:4: '(' this_Op= ruleOp
             {
-            match(input,14,FOLLOW_14_in_ruleParens267); 
-             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@561fa5 (cardinality: null) (value: '(')
-            grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"), currentNode,null); 
-            pushFollow(FOLLOW_ruleOp_in_ruleParens272);
+            match(input,14,FOLLOW_14_in_ruleParens365); 
+
+                    createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+                
+            pushFollow(FOLLOW_ruleOp_in_ruleParens377);
             this_Op=ruleOp();
             _fsp--;
 
-            current = this_Op;
+             
+                    current = this_Op; 
+                
 
             }
 
-            match(input,15,FOLLOW_15_in_ruleParens276); 
-             createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@bf3245 (cardinality: null) (value: ')')
-            grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1"), currentNode,null); 
+            match(input,15,FOLLOW_15_in_ruleParens386); 
+
+                    createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+                
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:173:124: (lv_em= '!' )?
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:222:2: (lv_em= '!' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -473,17 +504,16 @@ public class InternalComplexReconstrTestParser extends Parser {
             }
             switch (alt3) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:175:4: lv_em= '!'
+                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:223:5: lv_em= '!'
                     {
                     lv_em=(Token)input.LT(1);
-                    match(input,16,FOLLOW_16_in_ruleParens291); 
-                         if (current==null) {
-                          current = factory.create("Expression");
-                          associateNodeWithAstElement(currentNode, current);
-                       }
-                       factory.set(current, "em", lv_em);
-                    createLeafNode(// org.eclipse.xtext.impl.KeywordImpl@43159b (cardinality: null) (value: '!')
-                    grammar.eResource().getEObject("//@parserRules.3/@alternatives/@abstractTokens.1/@terminal"), currentNode,"em");
+                    match(input,16,FOLLOW_16_in_ruleParens405); 
+
+                            if (current==null) {
+                                current = factory.create("Expression");
+                                associateNodeWithAstElement(currentNode, current);
+                            }
+                            factory.set(current, "em", lv_em);        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"em");    
 
                     }
                     break;
@@ -510,19 +540,19 @@ public class InternalComplexReconstrTestParser extends Parser {
 
  
 
-    public static final BitSet FOLLOW_ruleOp_in_parse45 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_parse49 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerm_in_ruleOp85 = new BitSet(new long[]{0x0000000000003002L});
-    public static final BitSet FOLLOW_12_in_ruleOp96 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_ruleTerm_in_ruleOp113 = new BitSet(new long[]{0x0000000000003002L});
-    public static final BitSet FOLLOW_13_in_ruleOp129 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_ruleTerm_in_ruleOp146 = new BitSet(new long[]{0x0000000000003002L});
-    public static final BitSet FOLLOW_ruleAtom_in_ruleTerm185 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParens_in_ruleTerm191 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAtom231 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleParens267 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_ruleOp_in_ruleParens272 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleParens276 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_16_in_ruleParens291 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOp_in_parse53 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_parse67 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTerm_in_ruleOp109 = new BitSet(new long[]{0x0000000000003002L});
+    public static final BitSet FOLLOW_12_in_ruleOp129 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_ruleTerm_in_ruleOp159 = new BitSet(new long[]{0x0000000000003002L});
+    public static final BitSet FOLLOW_13_in_ruleOp187 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_ruleTerm_in_ruleOp217 = new BitSet(new long[]{0x0000000000003002L});
+    public static final BitSet FOLLOW_ruleAtom_in_ruleTerm260 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParens_in_ruleTerm276 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAtom319 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleParens365 = new BitSet(new long[]{0x0000000000004010L});
+    public static final BitSet FOLLOW_ruleOp_in_ruleParens377 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleParens386 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_16_in_ruleParens405 = new BitSet(new long[]{0x0000000000000002L});
 
 }
