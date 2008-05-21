@@ -7,7 +7,7 @@
  *
  *******************************************************************************/
  
-generate TestLang "http://www.eclipse.org/2008/xtext/LexerLang"
+generate LexerLang "http://www.eclipse.org/2008/xtext/LexerLang"
 
 Model :
 	(children+=Element)*;
@@ -16,6 +16,6 @@ Element:
 	name=ID f=EXPLICITTOKENTYPE g=IMPLICITTOKENTYPE h=STRING i=(EXPLICITTOKENTYPE | IMPLICITTOKENTYPE);
 	
 lexing:
-	EXPLICITTOKENTYPE tokentype X : <# ('A')+ #>
-	IMPLICITTOKENTYPE : <# ('C')+ #>
-	STRING : <# ('B')+ #> 
+	EXPLICITTOKENTYPE tokentype X : <# '#' ('A')+ #>
+	IMPLICITTOKENTYPE : <# '#' ('C')+ #>
+	STRING : <# '#' ('B')+ #> 

@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
 package org.eclipse.xtext.xtext2ecore;
 
 import org.eclipse.emf.ecore.EClass;
@@ -11,8 +19,12 @@ import org.eclipse.xtext.testlanguages.ActionTestLanguage;
 import org.eclipse.xtext.testlanguages.ActionTestLanguageLanguageFacade;
 import org.eclipse.xtext.testlanguages.parser.ActionTestLanguageASTFactory;
 
+/**
+ * 
+ * @author Jan Köhnlein - Initial contribution and API
+ *
+ */
 public class ActionTest extends AbstractGeneratorTest {
-
 	
 	public void testMetamodelCreation() throws Exception {
 		EClass model = checkEClassExists("Model");

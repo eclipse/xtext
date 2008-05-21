@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
 package org.eclipse.xtext.lexer;
 
 import org.eclipse.emf.common.util.EList;
@@ -14,10 +22,14 @@ import org.eclipse.xtext.testlanguages.LexerLanguage;
 import org.eclipse.xtext.testlanguages.LexerLanguageTokenTypes;
 import org.eclipse.xtext.testlanguages.parser.LexerLanguageASTFactory;
 
+/**
+ * 
+ * @author Jan Köhnlein - Initial contribution and API
+ */
 public class LexerTokenTest extends AbstractGeneratorTest {
 
 	public void testLexerTokens() throws Exception {
-		AbstractNode rootNode = getRootNode("xyz A CCC BB");
+		AbstractNode rootNode = getRootNode("xyz #A #CCC #BB #CCCCC");
 		EList<LeafNode> leafNodes = rootNode.getLeafNodes();
 		assertTrue(GrammarUtil.isLexerRuleCall(leafNodes.get(0).getGrammarElement()));
 		assertEquals(BuiltinRules.BUILTIN_ID, GrammarUtil.calledRule((RuleCall) leafNodes.get(0).getGrammarElement()));
@@ -28,6 +40,8 @@ public class LexerTokenTest extends AbstractGeneratorTest {
 		checkIsDefinedRule(leafNodes.get(4), "IMPLICITTOKENTYPE", LexerLanguageTokenTypes.IMPLICITTOKENTYPE);
 		checkIsWhitespace(leafNodes.get(5));
 		checkIsDefinedRule(leafNodes.get(6), "STRING", LexerLanguageTokenTypes.STRING);
+		checkIsWhitespace(leafNodes.get(7));
+		checkIsDefinedRule(leafNodes.get(8), "IMPLICITTOKENTYPE", LexerLanguageTokenTypes.IMPLICITTOKENTYPE);
 		
 	}
 	
