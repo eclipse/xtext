@@ -18,6 +18,9 @@ namespace() :
 srcGenPath() :
 	get('src.gen.path');
 	
+modelFileExtension() :
+	get('model.file.extension');
+	
 packageName() :
 	namespace().replaceAll('/','\\.');
 

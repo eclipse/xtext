@@ -15,15 +15,15 @@ public class XtextGrammarTestTokenTypeResolver {
 
 
 		case 8:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
+			// RULE_INT
+			return BuiltinRules.BUILTIN_INT;
 
 
 
 
 		case 7:
-			// RULE_INT
-			return BuiltinRules.BUILTIN_INT;
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 
 

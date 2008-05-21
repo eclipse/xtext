@@ -9,6 +9,7 @@
 package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.IParser;
 import org.eclipse.xtext.core.parsetree.IParseTreeConstructor;
@@ -48,4 +49,14 @@ public interface ILanguageFacade {
 	 * @return
 	 */
 	EPackage[] getGeneratedEPackages();
+	
+	/**
+	 * @return
+	 */
+	Resource.Factory getResourceFactory();
+	
+	/**
+	 * @return
+	 */
+	String getModelFileExtension();
 }

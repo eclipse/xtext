@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LexerRule.java,v 1.7 2008/05/21 08:11:48 jkohnlein Exp $
+ * $Id: LexerRule.java,v 1.8 2008/05/21 12:02:34 jkohnlein Exp $
  */
 package org.eclipse.xtext;
 
@@ -27,55 +27,55 @@ package org.eclipse.xtext;
 public interface LexerRule extends AbstractRule
 {
   /**
-	 * Returns the value of the '<em><b>Token Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Token Type</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Token Type</em>' attribute.
-	 * @see #setTokenType(String)
-	 * @see org.eclipse.xtext.XtextPackage#getLexerRule_TokenType()
-	 * @model
-	 * @generated
-	 */
-  String getTokenType();
-
-  /**
-	 * Sets the value of the '{@link org.eclipse.xtext.LexerRule#getTokenType <em>Token Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Token Type</em>' attribute.
-	 * @see #getTokenType()
-	 * @generated
-	 */
-  void setTokenType(String value);
-
-  /**
-	 * Returns the value of the '<em><b>Body</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Body</b></em>' attribute.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Body</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Body</em>' attribute.
-	 * @see #setBody(String)
-	 * @see org.eclipse.xtext.XtextPackage#getLexerRule_Body()
-	 * @model
-	 * @generated
-	 */
+   * @return the value of the '<em>Body</em>' attribute.
+   * @see #setBody(String)
+   * @see org.eclipse.xtext.XtextPackage#getLexerRule_Body()
+   * @model
+   * @generated
+   */
   String getBody();
 
   /**
-	 * Sets the value of the '{@link org.eclipse.xtext.LexerRule#getBody <em>Body</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.eclipse.xtext.LexerRule#getBody <em>Body</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Body</em>' attribute.
-	 * @see #getBody()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Body</em>' attribute.
+   * @see #getBody()
+   * @generated
+   */
   void setBody(String value);
+
+  /**
+   * Returns the value of the '<em><b>Token Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Token Type</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Token Type</em>' attribute.
+   * @see #setTokenType(String)
+   * @see org.eclipse.xtext.XtextPackage#getLexerRule_TokenType()
+   * @model
+   * @generated
+   */
+  String getTokenType();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.LexerRule#getTokenType <em>Token Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Token Type</em>' attribute.
+   * @see #getTokenType()
+   * @generated
+   */
+  void setTokenType(String value);
 
 } // LexerRule

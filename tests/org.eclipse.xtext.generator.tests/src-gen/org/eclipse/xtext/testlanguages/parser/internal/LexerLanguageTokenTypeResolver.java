@@ -20,11 +20,11 @@ public class LexerLanguageTokenTypeResolver {
 			// RULE_ID
 			return BuiltinRules.BUILTIN_ID;
 
-		case 8:
+		case 9:
 			// RULE_INT
 			return BuiltinRules.BUILTIN_INT;
 
-		case 9:
+		case 8:
 			// RULE_ML_COMMENT
 			return BuiltinRules.BUILTIN_ML_COMMENT;
 

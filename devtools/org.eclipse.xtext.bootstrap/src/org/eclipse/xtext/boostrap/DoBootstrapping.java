@@ -34,6 +34,7 @@ public class DoBootstrapping {
 		String filename = "../org.eclipse.xtext.core/src/org/eclipse/xtext/Xtext.xtext";
 		String languageName = "Xtext";
 		String languageNamespace = "org/eclipse/xtext";
+		String modelFileExtension = "xtext";
 		
 		System.out.println("loading " + filename);
 		InputStream resourceAsStream = new FileInputStream(filename);

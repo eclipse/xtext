@@ -18,8 +18,8 @@ public class ComplexReconstrTestTokenTypeResolver {
 			return BuiltinRules.BUILTIN_ID;
 
 		case 8:
-			// RULE_LEXER_BODY
-			return BuiltinRules.BUILTIN_LEXER_BODY;
+			// RULE_WS
+			return BuiltinRules.BUILTIN_WS;
 
 		case 11:
 			// RULE_ANY_OTHER
@@ -27,14 +27,14 @@ public class ComplexReconstrTestTokenTypeResolver {
 
 
 		case 7:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
+			// RULE_LEXER_BODY
+			return BuiltinRules.BUILTIN_LEXER_BODY;
 
 
 
 		case 9:
-			// RULE_WS
-			return BuiltinRules.BUILTIN_WS;
+			// RULE_STRING
+			return BuiltinRules.BUILTIN_STRING;
 
 		case 6:
 			// RULE_INT
@@ -46,8 +46,8 @@ public class ComplexReconstrTestTokenTypeResolver {
 			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 		case 5:
-			// RULE_STRING
-			return BuiltinRules.BUILTIN_STRING;
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 		default:
 			throw new ParseException(context, "Unknown antlr token type " + antlrTokenType);

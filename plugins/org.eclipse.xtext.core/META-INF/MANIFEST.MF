@@ -13,6 +13,7 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.core.parsetree,
  org.eclipse.xtext.core.parsetree.util,
  org.eclipse.xtext.parser,
+ org.eclipse.xtext.resource,
  org.eclipse.xtext.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,

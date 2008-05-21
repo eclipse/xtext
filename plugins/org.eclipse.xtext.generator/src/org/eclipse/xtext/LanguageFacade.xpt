@@ -18,6 +18,7 @@
 package «packageName()»;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.XtextPackage;
@@ -81,6 +82,14 @@ public class «languageName()»LanguageFacade extends org.eclipse.xtext.core.parse
 	}
 	«ENDFOREACH»
 
+	private Resource.Factory resourceFactory = new «languageName()»ResourceFactory(this);
+	public Resource.Factory getResourceFactory() {
+		return resourceFactory;
+	}
+	
+	public String getModelFileExtension() {
+		return "«modelFileExtension()»";
+	}
 }
 «ENDFILE»
 «ENDDEFINE»

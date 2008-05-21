@@ -30,8 +30,8 @@ public class TestLanguageTokenTypeResolver {
 			return BuiltinRules.BUILTIN_ANY_OTHER;
 
 		case 6:
-			// RULE_INT
-			return BuiltinRules.BUILTIN_INT;
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 
 		case 10:
@@ -39,8 +39,8 @@ public class TestLanguageTokenTypeResolver {
 			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 		case 7:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
+			// RULE_INT
+			return BuiltinRules.BUILTIN_INT;
 
 
 		case 5:

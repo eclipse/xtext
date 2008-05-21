@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextFactoryImpl.java,v 1.7 2008/05/21 08:11:48 jkohnlein Exp $
+ * $Id: XtextFactoryImpl.java,v 1.8 2008/05/21 12:02:34 jkohnlein Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -25,226 +25,230 @@ import org.eclipse.xtext.*;
 public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
 {
   /**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+   * Creates the default factory implementation.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public static XtextFactory init()
   {
-		try {
-			XtextFactory theXtextFactory = (XtextFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/Xtext"); 
-			if (theXtextFactory != null) {
-				return theXtextFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new XtextFactoryImpl();
-	}
+    try
+    {
+      XtextFactory theXtextFactory = (XtextFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/Xtext"); 
+      if (theXtextFactory != null)
+      {
+        return theXtextFactory;
+      }
+    }
+    catch (Exception exception)
+    {
+      EcorePlugin.INSTANCE.log(exception);
+    }
+    return new XtextFactoryImpl();
+  }
 
   /**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the factory.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public XtextFactoryImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public EObject create(EClass eClass)
   {
-		switch (eClass.getClassifierID()) {
-			case XtextPackage.TYPE_REF: return createTypeRef();
-			case XtextPackage.ABSTRACT_ELEMENT: return createAbstractElement();
-			case XtextPackage.PARSER_RULE: return createParserRule();
-			case XtextPackage.LEXER_RULE: return createLexerRule();
-			case XtextPackage.GRAMMAR: return createGrammar();
-			case XtextPackage.GENERATED_METAMODEL: return createGeneratedMetamodel();
-			case XtextPackage.REFERENCED_METAMODEL: return createReferencedMetamodel();
-			case XtextPackage.ASSIGNMENT: return createAssignment();
-			case XtextPackage.ACTION: return createAction();
-			case XtextPackage.KEYWORD: return createKeyword();
-			case XtextPackage.RULE_CALL: return createRuleCall();
-			case XtextPackage.GROUP: return createGroup();
-			case XtextPackage.ALTERNATIVES: return createAlternatives();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+    switch (eClass.getClassifierID())
+    {
+      case XtextPackage.TYPE_REF: return createTypeRef();
+      case XtextPackage.ABSTRACT_ELEMENT: return createAbstractElement();
+      case XtextPackage.PARSER_RULE: return createParserRule();
+      case XtextPackage.LEXER_RULE: return createLexerRule();
+      case XtextPackage.GRAMMAR: return createGrammar();
+      case XtextPackage.GENERATED_METAMODEL: return createGeneratedMetamodel();
+      case XtextPackage.REFERENCED_METAMODEL: return createReferencedMetamodel();
+      case XtextPackage.ASSIGNMENT: return createAssignment();
+      case XtextPackage.ACTION: return createAction();
+      case XtextPackage.KEYWORD: return createKeyword();
+      case XtextPackage.RULE_CALL: return createRuleCall();
+      case XtextPackage.GROUP: return createGroup();
+      case XtextPackage.ALTERNATIVES: return createAlternatives();
+      default:
+        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public AbstractElement createAbstractElement()
-  {
-		AbstractElementImpl abstractElement = new AbstractElementImpl();
-		return abstractElement;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public TypeRef createTypeRef()
   {
-		TypeRefImpl typeRef = new TypeRefImpl();
-		return typeRef;
-	}
+    TypeRefImpl typeRef = new TypeRefImpl();
+    return typeRef;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
+  public AbstractElement createAbstractElement()
+  {
+    AbstractElementImpl abstractElement = new AbstractElementImpl();
+    return abstractElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public ParserRule createParserRule()
   {
-		ParserRuleImpl parserRule = new ParserRuleImpl();
-		return parserRule;
-	}
+    ParserRuleImpl parserRule = new ParserRuleImpl();
+    return parserRule;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public LexerRule createLexerRule()
   {
-		LexerRuleImpl lexerRule = new LexerRuleImpl();
-		return lexerRule;
-	}
+    LexerRuleImpl lexerRule = new LexerRuleImpl();
+    return lexerRule;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public Grammar createGrammar()
   {
-		GrammarImpl grammar = new GrammarImpl();
-		return grammar;
-	}
+    GrammarImpl grammar = new GrammarImpl();
+    return grammar;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public GeneratedMetamodel createGeneratedMetamodel()
   {
-		GeneratedMetamodelImpl generatedMetamodel = new GeneratedMetamodelImpl();
-		return generatedMetamodel;
-	}
+    GeneratedMetamodelImpl generatedMetamodel = new GeneratedMetamodelImpl();
+    return generatedMetamodel;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public ReferencedMetamodel createReferencedMetamodel()
   {
-		ReferencedMetamodelImpl referencedMetamodel = new ReferencedMetamodelImpl();
-		return referencedMetamodel;
-	}
+    ReferencedMetamodelImpl referencedMetamodel = new ReferencedMetamodelImpl();
+    return referencedMetamodel;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public Assignment createAssignment()
   {
-		AssignmentImpl assignment = new AssignmentImpl();
-		return assignment;
-	}
+    AssignmentImpl assignment = new AssignmentImpl();
+    return assignment;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public Action createAction()
   {
-		ActionImpl action = new ActionImpl();
-		return action;
-	}
+    ActionImpl action = new ActionImpl();
+    return action;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public Keyword createKeyword()
   {
-		KeywordImpl keyword = new KeywordImpl();
-		return keyword;
-	}
+    KeywordImpl keyword = new KeywordImpl();
+    return keyword;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public RuleCall createRuleCall()
   {
-		RuleCallImpl ruleCall = new RuleCallImpl();
-		return ruleCall;
-	}
+    RuleCallImpl ruleCall = new RuleCallImpl();
+    return ruleCall;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Alternatives createAlternatives()
-  {
-		AlternativesImpl alternatives = new AlternativesImpl();
-		return alternatives;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public Group createGroup()
   {
-		GroupImpl group = new GroupImpl();
-		return group;
-	}
+    GroupImpl group = new GroupImpl();
+    return group;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
+  public Alternatives createAlternatives()
+  {
+    AlternativesImpl alternatives = new AlternativesImpl();
+    return alternatives;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public XtextPackage getXtextPackage()
   {
-		return (XtextPackage)getEPackage();
-	}
+    return (XtextPackage)getEPackage();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+   * @deprecated
+   * @generated
+   */
   @Deprecated
   public static XtextPackage getPackage()
   {
-		return XtextPackage.eINSTANCE;
-	}
+    return XtextPackage.eINSTANCE;
+  }
 
 } //XtextFactoryImpl

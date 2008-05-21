@@ -1,6 +1,7 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.XtextPackage;
@@ -64,4 +65,12 @@ public class ComplexReconstrTestLanguageFacade extends org.eclipse.xtext.core.pa
 	}
 	
 
+	private Resource.Factory resourceFactory = new ComplexReconstrTestResourceFactory(this);
+	public Resource.Factory getResourceFactory() {
+		return resourceFactory;
+	}
+	
+	public String getModelFileExtension() {
+		return "complexreconstrtest";
+	}
 }

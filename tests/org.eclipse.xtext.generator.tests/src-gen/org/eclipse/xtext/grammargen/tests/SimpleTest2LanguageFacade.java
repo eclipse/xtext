@@ -1,6 +1,7 @@
 package org.eclipse.xtext.grammargen.tests;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.XtextPackage;
@@ -64,4 +65,12 @@ public class SimpleTest2LanguageFacade extends org.eclipse.xtext.core.parser.Bas
 	}
 	
 
+	private Resource.Factory resourceFactory = new SimpleTest2ResourceFactory(this);
+	public Resource.Factory getResourceFactory() {
+		return resourceFactory;
+	}
+	
+	public String getModelFileExtension() {
+		return "simpletest2";
+	}
 }

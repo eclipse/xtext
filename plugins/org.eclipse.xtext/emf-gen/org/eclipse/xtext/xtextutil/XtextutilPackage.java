@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextutilPackage.java,v 1.8 2008/05/19 18:59:58 sefftinge Exp $
+ * $Id: XtextutilPackage.java,v 1.9 2008/05/21 12:02:30 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextutil;
 
