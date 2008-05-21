@@ -30,7 +30,7 @@ public class ReferenceGrammar {
 		XtextParser xtext2Parser= new XtextParser();
 		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream);
 		
-		GeneratorFacade.generate(grammarModel, this.getClass().getSimpleName(),this.getClass().getPackage().getName().replace('.', '/'), PATH);
+		GeneratorFacade.generate(grammarModel, this.getClass().getSimpleName(),this.getClass().getPackage().getName().replace('.', '/'), PATH, "xtext");
 		System.out.println("Done.");
 	}
 
