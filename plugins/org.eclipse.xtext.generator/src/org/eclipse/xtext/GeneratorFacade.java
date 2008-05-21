@@ -133,8 +133,10 @@ public class GeneratorFacade {
 		final File[] contents = f.listFiles();
         for (int j = 0; j < contents.length; j++) {
             final File file = contents[j];
-            if (!delete(file)) {
-            	log.error("Couldn't delete " + file.getAbsolutePath());
+            if (!".cvsignore".equals(file.getName())) {
+            	if (!delete(file)) {
+            		log.error("Couldn't delete " + file.getAbsolutePath());
+            	}
             }
         }
 	}
