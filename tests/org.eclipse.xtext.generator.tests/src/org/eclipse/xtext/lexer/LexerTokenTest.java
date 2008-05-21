@@ -13,20 +13,26 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.BuiltinRules;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.ITokenTypes;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.LeafNode;
-import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.testlanguages.LexerLanguage;
+import org.eclipse.xtext.testlanguages.LexerLanguageLanguageFacade;
+import org.eclipse.xtext.testlanguages.LexerLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.LexerLanguageTokenTypes;
-import org.eclipse.xtext.testlanguages.parser.LexerLanguageASTFactory;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * 
  * @author Jan Köhnlein - Initial contribution and API
  */
 public class LexerTokenTest extends AbstractGeneratorTest {
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		LexerLanguageStandaloneSetup.doSetup();
+		with(LexerLanguageLanguageFacade.LANGUAGE_ID);
+	}
 
 	public void testLexerTokens() throws Exception {
 		AbstractNode rootNode = getRootNode("xyz #A #CCC #BB #CCCCC");
@@ -42,7 +48,6 @@ public class LexerTokenTest extends AbstractGeneratorTest {
 		checkIsDefinedRule(leafNodes.get(6), "STRING", LexerLanguageTokenTypes.STRING);
 		checkIsWhitespace(leafNodes.get(7));
 		checkIsDefinedRule(leafNodes.get(8), "IMPLICITTOKENTYPE", LexerLanguageTokenTypes.IMPLICITTOKENTYPE);
-		
 	}
 	
 	private void checkIsDefinedRule(LeafNode leafNode, String ruleName, String tokenType) {
@@ -58,13 +63,4 @@ public class LexerTokenTest extends AbstractGeneratorTest {
 		assertEquals(ITokenTypes.WHITESPACE, leafNode.tokenType());
 	}
 	
-	@Override
-	protected Class<?> getTheClass() {
-		return LexerLanguage.class;
-	}
-	
-	@Override
-	protected IElementFactory getASTFactory() throws Exception {
-		return new LexerLanguageASTFactory();
-	}
 }

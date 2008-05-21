@@ -13,11 +13,9 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.core.parser.IElementFactory;
-import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.testlanguages.ActionTestLanguage;
 import org.eclipse.xtext.testlanguages.ActionTestLanguageLanguageFacade;
-import org.eclipse.xtext.testlanguages.parser.ActionTestLanguageASTFactory;
+import org.eclipse.xtext.testlanguages.ActionTestLanguageStandaloneSetup;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * 
@@ -54,14 +52,11 @@ public class ActionTest extends AbstractGeneratorTest {
 		assertTrue(((EReference)structuralFeature).isContainment());
 		assertEquals(type, structuralFeature.getEType());
 	}
-	
+
 	@Override
-	protected IElementFactory getASTFactory() throws Exception {
-		return new ActionTestLanguageASTFactory();
-	}
-	
-	@Override
-	protected Class<?> getTheClass() {
-		return ActionTestLanguage.class;
+	protected void setUp() throws Exception {
+		super.setUp();
+		ActionTestLanguageStandaloneSetup.doSetup();
+		with(ActionTestLanguageLanguageFacade.LANGUAGE_ID);
 	}
 }

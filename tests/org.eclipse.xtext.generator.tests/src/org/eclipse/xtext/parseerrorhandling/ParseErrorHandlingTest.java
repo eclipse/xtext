@@ -12,12 +12,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.xtext.XtextGrammarTest;
+import org.eclipse.xtext.XtextGrammarTestLanguageFacade;
+import org.eclipse.xtext.XtextGrammarTestStandaloneSetup;
 import org.eclipse.xtext.core.parser.IParseErrorHandler;
-import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.parser.XtextGrammarTestASTFactory;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class ParseErrorHandlingTest extends AbstractGeneratorTest {
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		XtextGrammarTestStandaloneSetup.doSetup();
+		with(XtextGrammarTestLanguageFacade.LANGUAGE_ID);
+	}
 
 	public void testLexError() throws Exception {
 		ErrorHandler errors = new ErrorHandler();
@@ -158,11 +166,5 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 			return text + ",l:" + line + ",os:" + offset + ",token:" + token + ",message:" + message;
 		}
 	}
-
-	@Override
-	protected Class<?> getTheClass() {
-		return XtextGrammarTest.class;
-	}
-	
 
 }
