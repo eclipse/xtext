@@ -9,12 +9,19 @@
 package org.eclipse.xtext.parsetree;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.CompositeNode;
-import org.eclipse.xtext.dummy.DummyLanguage;
-import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.dummy.DummyLanguageLanguageFacade;
+import org.eclipse.xtext.dummy.DummyLanguageStandaloneSetup;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class ASTChangeTest extends AbstractGeneratorTest {
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		DummyLanguageStandaloneSetup.doSetup();
+		with(DummyLanguageLanguageFacade.LANGUAGE_ID);
+	}
 
 	public void testWhitespaceIsIncluded() throws Exception {
 		String model = "element foo;\nelement bar;";
@@ -27,9 +34,4 @@ public class ASTChangeTest extends AbstractGeneratorTest {
 //		assertEquals("element stuff;\nelement bar;", node.serialize());
 	}
 
-	@Override
-	protected Class<?> getTheClass() {
-		return DummyLanguage.class;
-	}
-	
 }

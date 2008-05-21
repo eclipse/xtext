@@ -25,8 +25,9 @@ import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.CompositeNode;
 import org.eclipse.xtext.core.parsetree.LeafNode;
 import org.eclipse.xtext.core.parsetree.NodeAdapter;
-import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.testlanguages.TestLanguage;
+import org.eclipse.xtext.testlanguages.TestLanguageLanguageFacade;
+import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class NodeModelTest extends AbstractGeneratorTest {
 
@@ -122,10 +123,11 @@ public class NodeModelTest extends AbstractGeneratorTest {
 		}
 	}
 
-
 	@Override
-	protected Class<?> getTheClass() {
-		return TestLanguage.class;
+	protected void setUp() throws Exception {
+		super.setUp();
+		TestLanguageStandaloneSetup.doSetup();
+		with(TestLanguageLanguageFacade.LANGUAGE_ID);
 	}
 
 }

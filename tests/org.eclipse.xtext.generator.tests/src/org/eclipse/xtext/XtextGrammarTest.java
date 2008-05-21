@@ -14,15 +14,22 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.generator.tests.Invocation;
 import org.eclipse.xtext.parser.XtextGrammarTestASTFactory;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.tests.Invocation;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
 public class XtextGrammarTest extends AbstractGeneratorTest {
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		XtextGrammarTestStandaloneSetup.doSetup();
+		with(XtextGrammarTestLanguageFacade.LANGUAGE_ID);
+	}
 	
 	public void testBootstrapping() throws Exception {
 		List<Invocation> parse = getInvocations("generate foo 'bar' Foo : name=ID;");
