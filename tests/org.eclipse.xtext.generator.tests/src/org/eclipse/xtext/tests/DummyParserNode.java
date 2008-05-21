@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.generator.tests;
+package org.eclipse.xtext.tests;
 
 public class DummyParserNode {
 

@@ -11,13 +11,15 @@ package org.eclipse.xtext.metamodelreferencing.tests;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.LanguageFacadeFactory;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class MetamodelRefTest extends AbstractGeneratorTest {
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		MetamodelRefTestStandaloneSetup.doSetup();
+		with(MetamodelRefTestLanguageFacade.LANGUAGE_ID);
 		LanguageFacadeFactory.register(new MetamodelRefTestLanguageFacade() {
 			@Override
 			public EPackage[] getGeneratedEPackages() {
