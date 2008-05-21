@@ -22,16 +22,16 @@ import org.eclipse.xtext.ui.core.language.LanguageDescriptorFactory;
 public class BaseTextEditor extends TextEditor {
 	public static final String ID = "org.eclipse.xtext.baseEditor";
 
-	public BaseTextEditor() {
-		// does nothing
-	}
+	
 
 	@Override
 	public void setInitializationData(IConfigurationElement cfig,
 			String propertyName, Object data) {
 		super.setInitializationData(cfig, propertyName, data);
+		XtextModelManager manager = new XtextModelManager(
+				initializeLanguageDescriptor());
 		setSourceViewerConfiguration(new XtextSourceViewerConfiguration(
-				initializeLanguageDescriptor(), getPreferenceStore()));
+				manager, getPreferenceStore()));
 		setDocumentProvider(new TextFileDocumentProvider());
 	}
 
