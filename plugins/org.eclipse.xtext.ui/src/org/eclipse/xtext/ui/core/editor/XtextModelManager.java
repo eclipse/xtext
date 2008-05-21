@@ -6,14 +6,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-
-package org.eclipse.xtext.ui.core.service;
+package org.eclipse.xtext.ui.core.editor;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
+ *
  */
-public interface IParser extends
-		org.eclipse.xtext.ui.core.language.ILanguageService {
-	Object parse(String lexer);
+public class XtextModelManager {
+
 }

@@ -5,6 +5,7 @@
          point="org.eclipse.xtext.ui.core.languageDescriptor">
       <languageDescriptor
             id="org.eclipse.xtext.ui.core.reference.referenceLanguageDescriptor"
+            languageFacade="org.eclipse.xtext.reference.ReferenceGrammarLanguageFacade"
             name="Reference Project">
       </languageDescriptor>
    </extension>
@@ -17,6 +18,13 @@
             id="org.eclipse.xtext.ui.core.reference.editor2"
             name="Test Editor">
       </editor>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.core.syntaxColorer">
+      <syntaxColorer
+            class="org.eclipse.xtext.reference.ui.services.SyntaxColorer"
+            languageId="org.eclipse.xtext.ui.core.reference.referenceLanguageDescriptor">
+      </syntaxColorer>
    </extension>
 
 </plugin>

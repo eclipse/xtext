@@ -5,6 +5,7 @@
          point="org.eclipse.xtext.ui.core.languageDescriptor">
       <languageDescriptor
             id="org.eclipse.xtext.ui.core.tests.dummylanguage"
+            languageFacade="org.eclipse.xtext.XtextLanguageFacade"
             name="Dummy Language">
       </languageDescriptor>
    </extension>

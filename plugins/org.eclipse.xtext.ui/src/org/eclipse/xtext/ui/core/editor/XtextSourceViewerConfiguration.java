@@ -9,7 +9,13 @@
 package org.eclipse.xtext.ui.core.editor;
 
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.presentation.IPresentationReconciler;
+import org.eclipse.jface.text.presentation.PresentationReconciler;
+import org.eclipse.jface.text.reconciler.IReconciler;
+import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
+import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
 
 /**
@@ -17,14 +23,17 @@ import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
  * 
  */
 public class XtextSourceViewerConfiguration extends
-		TextSourceViewerConfiguration {
+		SourceViewerConfiguration {
 	private LanguageDescriptor languageDescriptor;
 
 	/**
+	 * @param languageDescriptor
 	 * @param langDescr
 	 */
-	public XtextSourceViewerConfiguration(IPreferenceStore preferenceStore) {
-		super(preferenceStore);
+	public XtextSourceViewerConfiguration(
+			LanguageDescriptor languageDescriptor,
+			IPreferenceStore preferenceStore) {
+		this.languageDescriptor = languageDescriptor;
 	}
 
 	/**
@@ -34,7 +43,18 @@ public class XtextSourceViewerConfiguration extends
 		return languageDescriptor;
 	}
 
-	public void setLanguageDescriptor(LanguageDescriptor languageDescriptor) {
-		this.languageDescriptor = languageDescriptor;
+	@Override
+	public IReconciler getReconciler(ISourceViewer sourceViewer) {
+		return new XtextReconciler(new XtextReconcilerStrategy(sourceViewer));
+	}
+
+	public IPresentationReconciler getPresentationReconciler(
+			ISourceViewer sourceViewer) {
+		PresentationReconciler reconciler = new PresentationReconciler();
+		DefaultDamagerRepairer defDR = new DefaultDamagerRepairer(
+				new XtextTokenScanner(getLanguageDescriptor()));
+		reconciler.setRepairer(defDR, IDocument.DEFAULT_CONTENT_TYPE);
+		reconciler.setDamager(defDR, IDocument.DEFAULT_CONTENT_TYPE);
+		return reconciler;
 	}
 }

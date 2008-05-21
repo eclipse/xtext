@@ -3,14 +3,14 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Reference Plug-in
 Bundle-SymbolicName: org.eclipse.xtext.reference
 Bundle-Version: 1.0.0
-Require-Bundle: org.eclipse.xtext.core;bundle-version="1.0.0",
- org.eclipse.xtext;bundle-version="1.0.0",
+Require-Bundle: org.eclipse.xtext;bundle-version="1.0.0",
+ org.eclipse.xtext.core;bundle-version="1.0.0";visibility:=reexport,
  org.eclipse.xtext.generator;bundle-version="1.0.0",
- org.openarchitectureware.xtext.core;bundle-version="4.3.0",
- org.openarchitectureware.xtext.core.base;bundle-version="4.3.0",
- org.openarchitectureware.xtext.generator;bundle-version="4.3.0",
  org.junit,
  org.antlr;bundle-version="3.0.0",
  org.openarchitectureware.dependencies;bundle-version="4.3.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: itemis AG
+Export-Package: org.eclipse.xtext.reference,
+ org.eclipse.xtext.reference.parser,
+ org.eclipse.xtext.reference.parser.internal
