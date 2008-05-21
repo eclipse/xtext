@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.generator.tests;
+package org.eclipse.xtext;
 
 import java.io.InputStream;
 
@@ -15,7 +15,6 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextGrammarTest;
 import org.eclipse.xtext.XtextLanguageFacade;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;

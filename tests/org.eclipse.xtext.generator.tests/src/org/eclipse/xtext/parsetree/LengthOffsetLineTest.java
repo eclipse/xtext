@@ -14,8 +14,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.CompositeNode;
 import org.eclipse.xtext.core.parsetree.LeafNode;
-import org.eclipse.xtext.dummy.DummyLanguage;
-import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.dummy.DummyLanguageLanguageFacade;
+import org.eclipse.xtext.dummy.DummyLanguageStandaloneSetup;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class LengthOffsetLineTest extends AbstractGeneratorTest {
 
@@ -76,8 +77,9 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 	
 	
 	@Override
-	protected Class<?> getTheClass() {
-		return DummyLanguage.class;
+	protected void setUp() throws Exception {
+		super.setUp();
+		DummyLanguageStandaloneSetup.doSetup();
+		with(DummyLanguageLanguageFacade.LANGUAGE_ID);
 	}
-	
 }

@@ -193,9 +193,7 @@ ruleElement returns [EObject current=null]
 
 
 
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+RULE_STRING :  '#' ('B')+ ;
 
 RULE_EXPLICITTOKENTYPE :  '#' ('A')+ ;
 
@@ -205,11 +203,13 @@ RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
-RULE_IMPLICITTOKENTYPE :  '#' ('C')+ ;
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-RULE_STRING :  '#' ('B')+ ;
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+
+RULE_IMPLICITTOKENTYPE :  '#' ('C')+ ;
 
 RULE_ANY_OTHER : .;
 
