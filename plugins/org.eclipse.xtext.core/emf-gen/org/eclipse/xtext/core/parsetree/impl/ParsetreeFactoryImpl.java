@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeFactoryImpl.java,v 1.7 2008/05/21 08:11:47 jkohnlein Exp $
+ * $Id: ParsetreeFactoryImpl.java,v 1.8 2008/05/21 12:02:33 jkohnlein Exp $
  */
 package org.eclipse.xtext.core.parsetree.impl;
 
@@ -25,94 +25,98 @@ import org.eclipse.xtext.core.parsetree.*;
 public class ParsetreeFactoryImpl extends EFactoryImpl implements ParsetreeFactory
 {
   /**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
+   * Creates the default factory implementation.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public static ParsetreeFactory init()
   {
-		try {
-			ParsetreeFactory theParsetreeFactory = (ParsetreeFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/xtext/parsetree"); 
-			if (theParsetreeFactory != null) {
-				return theParsetreeFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new ParsetreeFactoryImpl();
-	}
+    try
+    {
+      ParsetreeFactory theParsetreeFactory = (ParsetreeFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/xtext/parsetree"); 
+      if (theParsetreeFactory != null)
+      {
+        return theParsetreeFactory;
+      }
+    }
+    catch (Exception exception)
+    {
+      EcorePlugin.INSTANCE.log(exception);
+    }
+    return new ParsetreeFactoryImpl();
+  }
 
   /**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
+   * Creates an instance of the factory.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public ParsetreeFactoryImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public EObject create(EClass eClass)
   {
-		switch (eClass.getClassifierID()) {
-			case ParsetreePackage.COMPOSITE_NODE: return createCompositeNode();
-			case ParsetreePackage.LEAF_NODE: return createLeafNode();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
+    switch (eClass.getClassifierID())
+    {
+      case ParsetreePackage.COMPOSITE_NODE: return createCompositeNode();
+      case ParsetreePackage.LEAF_NODE: return createLeafNode();
+      default:
+        throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public CompositeNode createCompositeNode()
   {
-		CompositeNodeImpl compositeNode = new CompositeNodeImpl();
-		return compositeNode;
-	}
+    CompositeNodeImpl compositeNode = new CompositeNodeImpl();
+    return compositeNode;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public LeafNode createLeafNode()
   {
-		LeafNodeImpl leafNode = new LeafNodeImpl();
-		return leafNode;
-	}
+    LeafNodeImpl leafNode = new LeafNodeImpl();
+    return leafNode;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public ParsetreePackage getParsetreePackage()
   {
-		return (ParsetreePackage)getEPackage();
-	}
+    return (ParsetreePackage)getEPackage();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
+   * @deprecated
+   * @generated
+   */
   @Deprecated
   public static ParsetreePackage getPackage()
   {
-		return ParsetreePackage.eINSTANCE;
-	}
+    return ParsetreePackage.eINSTANCE;
+  }
 
 } //ParsetreeFactoryImpl

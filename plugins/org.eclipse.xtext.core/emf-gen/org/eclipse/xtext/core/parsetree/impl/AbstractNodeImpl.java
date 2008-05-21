@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNodeImpl.java,v 1.9 2008/05/21 08:11:47 jkohnlein Exp $
+ * $Id: AbstractNodeImpl.java,v 1.10 2008/05/21 12:02:33 jkohnlein Exp $
  */
 package org.eclipse.xtext.core.parsetree.impl;
 
@@ -43,361 +43,373 @@ import org.eclipse.xtext.core.parsetree.ParsetreePackage;
 public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNode
 {
   /**
-	 * The cached value of the '{@link #getGrammarElement() <em>Grammar Element</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getGrammarElement() <em>Grammar Element</em>}' reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getGrammarElement()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getGrammarElement()
+   * @generated
+   * @ordered
+   */
   protected EObject grammarElement;
 
   /**
-	 * The cached value of the '{@link #getElement() <em>Element</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getElement() <em>Element</em>}' reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getElement()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getElement()
+   * @generated
+   * @ordered
+   */
   protected EObject element;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected AbstractNodeImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return ParsetreePackage.Literals.ABSTRACT_NODE;
-	}
+    return ParsetreePackage.Literals.ABSTRACT_NODE;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public CompositeNode getParent()
   {
-		if (eContainerFeatureID != ParsetreePackage.ABSTRACT_NODE__PARENT) return null;
-		return (CompositeNode)eContainer();
-	}
+    if (eContainerFeatureID != ParsetreePackage.ABSTRACT_NODE__PARENT) return null;
+    return (CompositeNode)eContainer();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetParent(CompositeNode newParent, NotificationChain msgs)
   {
-		msgs = eBasicSetContainer((InternalEObject)newParent, ParsetreePackage.ABSTRACT_NODE__PARENT, msgs);
-		return msgs;
-	}
+    msgs = eBasicSetContainer((InternalEObject)newParent, ParsetreePackage.ABSTRACT_NODE__PARENT, msgs);
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setParent(CompositeNode newParent)
   {
-		if (newParent != eInternalContainer() || (eContainerFeatureID != ParsetreePackage.ABSTRACT_NODE__PARENT && newParent != null)) {
-			if (EcoreUtil.isAncestor(this, newParent))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newParent != null)
-				msgs = ((InternalEObject)newParent).eInverseAdd(this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, CompositeNode.class, msgs);
-			msgs = basicSetParent(newParent, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__PARENT, newParent, newParent));
-	}
+    if (newParent != eInternalContainer() || (eContainerFeatureID != ParsetreePackage.ABSTRACT_NODE__PARENT && newParent != null))
+    {
+      if (EcoreUtil.isAncestor(this, newParent))
+        throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+      NotificationChain msgs = null;
+      if (eInternalContainer() != null)
+        msgs = eBasicRemoveFromContainer(msgs);
+      if (newParent != null)
+        msgs = ((InternalEObject)newParent).eInverseAdd(this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, CompositeNode.class, msgs);
+      msgs = basicSetParent(newParent, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__PARENT, newParent, newParent));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EObject getGrammarElement()
   {
-		if (grammarElement != null && grammarElement.eIsProxy()) {
-			InternalEObject oldGrammarElement = (InternalEObject)grammarElement;
-			grammarElement = eResolveProxy(oldGrammarElement);
-			if (grammarElement != oldGrammarElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT, oldGrammarElement, grammarElement));
-			}
-		}
-		return grammarElement;
-	}
+    if (grammarElement != null && grammarElement.eIsProxy())
+    {
+      InternalEObject oldGrammarElement = (InternalEObject)grammarElement;
+      grammarElement = eResolveProxy(oldGrammarElement);
+      if (grammarElement != oldGrammarElement)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT, oldGrammarElement, grammarElement));
+      }
+    }
+    return grammarElement;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EObject basicGetGrammarElement()
   {
-		return grammarElement;
-	}
+    return grammarElement;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setGrammarElement(EObject newGrammarElement)
   {
-		EObject oldGrammarElement = grammarElement;
-		grammarElement = newGrammarElement;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT, oldGrammarElement, grammarElement));
-	}
+    EObject oldGrammarElement = grammarElement;
+    grammarElement = newGrammarElement;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT, oldGrammarElement, grammarElement));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EObject getElement()
   {
-		if (element != null && element.eIsProxy()) {
-			InternalEObject oldElement = (InternalEObject)element;
-			element = eResolveProxy(oldElement);
-			if (element != oldElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ParsetreePackage.ABSTRACT_NODE__ELEMENT, oldElement, element));
-			}
-		}
-		return element;
-	}
+    if (element != null && element.eIsProxy())
+    {
+      InternalEObject oldElement = (InternalEObject)element;
+      element = eResolveProxy(oldElement);
+      if (element != oldElement)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ParsetreePackage.ABSTRACT_NODE__ELEMENT, oldElement, element));
+      }
+    }
+    return element;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EObject basicGetElement()
   {
-		return element;
-	}
+    return element;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setElement(EObject newElement)
   {
-		EObject oldElement = element;
-		element = newElement;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__ELEMENT, oldElement, element));
-	}
+    EObject oldElement = element;
+    element = newElement;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__ELEMENT, oldElement, element));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public int length()
   {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.length((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.length((LeafNodeImpl) this);} else {return ParsetreeUtil.length((AbstractNodeImpl) this);}
-	}
+    if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.length((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.length((LeafNodeImpl) this);} else {return ParsetreeUtil.length((AbstractNodeImpl) this);}
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public int offset()
   {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.offset((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.offset((LeafNodeImpl) this);} else {return ParsetreeUtil.offset((AbstractNodeImpl) this);}
-	}
+    if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.offset((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.offset((LeafNodeImpl) this);} else {return ParsetreeUtil.offset((AbstractNodeImpl) this);}
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public int line()
   {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.line((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.line((LeafNodeImpl) this);} else {return ParsetreeUtil.line((AbstractNodeImpl) this);}
-	}
+    if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.line((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.line((LeafNodeImpl) this);} else {return ParsetreeUtil.line((AbstractNodeImpl) this);}
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public String serialize()
   {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.serialize((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.serialize((LeafNodeImpl) this);} else {return ParsetreeUtil.serialize((AbstractNodeImpl) this);}
-	}
+    if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.serialize((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.serialize((LeafNodeImpl) this);} else {return ParsetreeUtil.serialize((AbstractNodeImpl) this);}
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EList<LeafNode> getLeafNodes()
   {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.getLeafNodes((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.getLeafNodes((LeafNodeImpl) this);} else {return ParsetreeUtil.getLeafNodes((AbstractNodeImpl) this);}
-	}
+    if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.getLeafNodes((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.getLeafNodes((LeafNodeImpl) this);} else {return ParsetreeUtil.getLeafNodes((AbstractNodeImpl) this);}
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EList<LeafNode> getLeafNodes(AbstractNode to)
   {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.getLeafNodes((CompositeNodeImpl) this, to);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.getLeafNodes((LeafNodeImpl) this, to);} else {return ParsetreeUtil.getLeafNodes((AbstractNodeImpl) this, to);}
-	}
+    if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.getLeafNodes((CompositeNodeImpl) this, to);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.getLeafNodes((LeafNodeImpl) this, to);} else {return ParsetreeUtil.getLeafNodes((AbstractNodeImpl) this, to);}
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case ParsetreePackage.ABSTRACT_NODE__PARENT:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetParent((CompositeNode)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case ParsetreePackage.ABSTRACT_NODE__PARENT:
+        if (eInternalContainer() != null)
+          msgs = eBasicRemoveFromContainer(msgs);
+        return basicSetParent((CompositeNode)otherEnd, msgs);
+    }
+    return super.eInverseAdd(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case ParsetreePackage.ABSTRACT_NODE__PARENT:
-				return basicSetParent(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case ParsetreePackage.ABSTRACT_NODE__PARENT:
+        return basicSetParent(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
   {
-		switch (eContainerFeatureID) {
-			case ParsetreePackage.ABSTRACT_NODE__PARENT:
-				return eInternalContainer().eInverseRemove(this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, CompositeNode.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
+    switch (eContainerFeatureID)
+    {
+      case ParsetreePackage.ABSTRACT_NODE__PARENT:
+        return eInternalContainer().eInverseRemove(this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, CompositeNode.class, msgs);
+    }
+    return super.eBasicRemoveFromContainerFeature(msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case ParsetreePackage.ABSTRACT_NODE__PARENT:
-				return getParent();
-			case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
-				if (resolve) return getGrammarElement();
-				return basicGetGrammarElement();
-			case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
-				if (resolve) return getElement();
-				return basicGetElement();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case ParsetreePackage.ABSTRACT_NODE__PARENT:
+        return getParent();
+      case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
+        if (resolve) return getGrammarElement();
+        return basicGetGrammarElement();
+      case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
+        if (resolve) return getElement();
+        return basicGetElement();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case ParsetreePackage.ABSTRACT_NODE__PARENT:
-				setParent((CompositeNode)newValue);
-				return;
-			case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
-				setGrammarElement((EObject)newValue);
-				return;
-			case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
-				setElement((EObject)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case ParsetreePackage.ABSTRACT_NODE__PARENT:
+        setParent((CompositeNode)newValue);
+        return;
+      case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
+        setGrammarElement((EObject)newValue);
+        return;
+      case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
+        setElement((EObject)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case ParsetreePackage.ABSTRACT_NODE__PARENT:
-				setParent((CompositeNode)null);
-				return;
-			case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
-				setGrammarElement((EObject)null);
-				return;
-			case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
-				setElement((EObject)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case ParsetreePackage.ABSTRACT_NODE__PARENT:
+        setParent((CompositeNode)null);
+        return;
+      case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
+        setGrammarElement((EObject)null);
+        return;
+      case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
+        setElement((EObject)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case ParsetreePackage.ABSTRACT_NODE__PARENT:
-				return getParent() != null;
-			case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
-				return grammarElement != null;
-			case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
-				return element != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case ParsetreePackage.ABSTRACT_NODE__PARENT:
+        return getParent() != null;
+      case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
+        return grammarElement != null;
+      case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
+        return element != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //AbstractNodeImpl

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeRefImpl.java,v 1.7 2008/05/21 08:11:48 jkohnlein Exp $
+ * $Id: TypeRefImpl.java,v 1.8 2008/05/21 12:02:34 jkohnlein Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -33,201 +33,205 @@ import org.eclipse.xtext.XtextPackage;
 public class TypeRefImpl extends EObjectImpl implements TypeRef
 {
   /**
-	 * The default value of the '{@link #getAlias() <em>Alias</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getAlias() <em>Alias</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getAlias()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getAlias()
+   * @generated
+   * @ordered
+   */
   protected static final String ALIAS_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getAlias() <em>Alias</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getAlias() <em>Alias</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getAlias()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getAlias()
+   * @generated
+   * @ordered
+   */
   protected String alias = ALIAS_EDEFAULT;
 
-		/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
   protected static final String NAME_EDEFAULT = null;
 
-		/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
   protected String name = NAME_EDEFAULT;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected TypeRefImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return XtextPackage.Literals.TYPE_REF;
-	}
+    return XtextPackage.Literals.TYPE_REF;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public String getName()
-  {
-		return name;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setName(String newName)
-  {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.TYPE_REF__NAME, oldName, name));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public String getAlias()
   {
-		return alias;
-	}
+    return alias;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setAlias(String newAlias)
   {
-		String oldAlias = alias;
-		alias = newAlias;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.TYPE_REF__ALIAS, oldAlias, alias));
-	}
+    String oldAlias = alias;
+    alias = newAlias;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.TYPE_REF__ALIAS, oldAlias, alias));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.TYPE_REF__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case XtextPackage.TYPE_REF__ALIAS:
-				return getAlias();
-			case XtextPackage.TYPE_REF__NAME:
-				return getName();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case XtextPackage.TYPE_REF__ALIAS:
+        return getAlias();
+      case XtextPackage.TYPE_REF__NAME:
+        return getName();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case XtextPackage.TYPE_REF__ALIAS:
-				setAlias((String)newValue);
-				return;
-			case XtextPackage.TYPE_REF__NAME:
-				setName((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case XtextPackage.TYPE_REF__ALIAS:
+        setAlias((String)newValue);
+        return;
+      case XtextPackage.TYPE_REF__NAME:
+        setName((String)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case XtextPackage.TYPE_REF__ALIAS:
-				setAlias(ALIAS_EDEFAULT);
-				return;
-			case XtextPackage.TYPE_REF__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case XtextPackage.TYPE_REF__ALIAS:
+        setAlias(ALIAS_EDEFAULT);
+        return;
+      case XtextPackage.TYPE_REF__NAME:
+        setName(NAME_EDEFAULT);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case XtextPackage.TYPE_REF__ALIAS:
-				return ALIAS_EDEFAULT == null ? alias != null : !ALIAS_EDEFAULT.equals(alias);
-			case XtextPackage.TYPE_REF__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case XtextPackage.TYPE_REF__ALIAS:
+        return ALIAS_EDEFAULT == null ? alias != null : !ALIAS_EDEFAULT.equals(alias);
+      case XtextPackage.TYPE_REF__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+    }
+    return super.eIsSet(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String toString()
   {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (alias: ");
-		result.append(alias);
-		result.append(", name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (alias: ");
+    result.append(alias);
+    result.append(", name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
+  }
 
 } //TypeRefImpl
