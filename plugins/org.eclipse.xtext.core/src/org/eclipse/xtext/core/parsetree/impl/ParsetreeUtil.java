@@ -23,6 +23,10 @@ import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.LeafNode;
 import org.eclipse.xtext.core.parsetree.ParsetreePackage;
 
+/**
+ * 
+ * @author koehnlein
+ */
 public class ParsetreeUtil {
 
 	public static int length(CompositeNodeImpl compositeNodeImpl) {

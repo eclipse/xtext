@@ -20,6 +20,10 @@ import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.WrappedException;
 
+/**
+ * 
+ * @author koehnlein
+ */
 public class TokenTypesExtensions {
 	
 	private static Map<Object,String> tokenTypeMap;
