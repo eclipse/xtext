@@ -12,14 +12,22 @@ import java.util.List;
 
 import org.antlr.runtime.CommonToken;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.generator.tests.Invocation;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.tests.Invocation;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
 public class SimpleTest2 extends AbstractGeneratorTest {
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		SimpleTest2StandaloneSetup.doSetup();
+		with(SimpleTest2LanguageFacade.LANGUAGE_ID);
+	}
+
 	
 	public void testFoo() throws Exception {
 		List<Invocation> parse = getInvocations("keyword bla 3 {}");

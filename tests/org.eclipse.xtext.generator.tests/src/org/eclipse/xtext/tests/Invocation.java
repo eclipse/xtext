@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.generator.tests;
+package org.eclipse.xtext.tests;
 
 import org.antlr.runtime.Token;
 import org.eclipse.emf.ecore.EClass;

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.generator.tests;
+package org.eclipse.xtext.tests;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -20,8 +20,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
+import org.eclipse.xtext.ILanguageFacade;
+import org.eclipse.xtext.LanguageFacadeFactory;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.IParseErrorHandler;
+import org.eclipse.xtext.core.parser.IParser;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.CompositeNode;
 import org.eclipse.xtext.core.parsetree.NodeAdapter;
@@ -34,38 +37,26 @@ import org.openarchitectureware.xtend.XtendFacade;
  */
 public abstract class AbstractGeneratorTest extends TestCase {
 
+	private String currentLanguage;
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		theCurrentClass = getTheClass();
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		theCurrentClass = null;
+		currentLanguage = null;
 	}
 
 	/**
 	 * call this to set the language class to be used in the current test.
 	 */
-	protected void with(Class<?> lang) throws Exception {
-		theCurrentClass = lang;
+	protected void with(String language) throws Exception {
+		currentLanguage = language;
 	}
 
-	private Class<?> theCurrentClass = null;
-
-	protected Class<?> getTheClass() {
-		return getClass();
-	}
-
-	private Class<?> _class() throws Exception {
-		Class<?> setupClass = theCurrentClass.getClassLoader().loadClass(theCurrentClass.getName() + "StandaloneSetup");
-		setupClass.getMethod("doSetup").invoke(null);
-		return theCurrentClass;
-	}
-	
-	
 	// parse methods
 
 	public EObject getModel(String model) throws Exception {
@@ -73,8 +64,11 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	}
 
 	protected IElementFactory getASTFactory() throws Exception {
-		String fqn = _class().getPackage().getName() + ".parser." + _class().getSimpleName() + "ASTFactory";
-		return (IElementFactory) _class().getClassLoader().loadClass(fqn).newInstance();
+		return getFacade().getElementFactory();
+	}
+
+	private ILanguageFacade getFacade() {
+		return LanguageFacadeFactory.getFacade(currentLanguage);
 	}
 
 	public EObject getModel(String model, IElementFactory factory) throws Exception {
@@ -87,17 +81,11 @@ public abstract class AbstractGeneratorTest extends TestCase {
 
 	public EObject getModel(InputStream model, IElementFactory factory, IParseErrorHandler errorHandler)
 			throws Exception {
-		String name = _class().getPackage().getName() + ".parser." + _class().getSimpleName();
-		String parser = name + "Parser";
-
-		Class<?> parserClass = _class().getClassLoader().loadClass(parser);
-		Object parserInstance = parserClass.newInstance();
+		IParser parserInstance = getFacade().getParser();
 		if (errorHandler != null) {
-			return (EObject) parserClass.getMethod("parse", InputStream.class, IElementFactory.class,
-					IParseErrorHandler.class).invoke(parserInstance, model, factory, errorHandler);
+			return parserInstance.parse(model, factory, errorHandler);
 		} else {
-			return (EObject) parserClass.getMethod("parse", InputStream.class, IElementFactory.class).invoke(
-					parserInstance, model, factory);
+			return parserInstance.parse(model, factory);
 		}
 	}
 

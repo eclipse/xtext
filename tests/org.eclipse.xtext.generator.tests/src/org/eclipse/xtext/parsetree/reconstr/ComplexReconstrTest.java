@@ -9,10 +9,18 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.generator.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.parsetree.reconstr.parser.ComplexReconstrTestASTFactory;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class ComplexReconstrTest extends AbstractGeneratorTest {
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		ComplexReconstrTestStandaloneSetup.doSetup();
+		with(ComplexReconstrTestLanguageFacade.LANGUAGE_ID);
+	}
+
 	public void testSimple() throws Exception {
 		String model = "( a + b - c ) !";
 		assertEquals(model,parseAndSerialize(model));
