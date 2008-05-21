@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GrammarImpl.java,v 1.6 2008/05/20 09:09:48 jkohnlein Exp $
+ * $Id: GrammarImpl.java,v 1.7 2008/05/21 08:11:48 jkohnlein Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -33,9 +33,9 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getParserRules <em>Parser Rules</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getLexerRules <em>Lexer Rules</em>}</li>
- *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,206 +44,198 @@ import org.eclipse.xtext.XtextPackage;
 public class GrammarImpl extends EObjectImpl implements Grammar
 {
   /**
-   * The cached value of the '{@link #getParserRules() <em>Parser Rules</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getMetamodelDeclarations() <em>Metamodel Declarations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getParserRules()
-   * @generated
-   * @ordered
-   */
+	 * @see #getMetamodelDeclarations()
+	 * @generated
+	 * @ordered
+	 */
+  protected EList<AbstractMetamodelDeclaration> metamodelDeclarations;
+
+		/**
+	 * The cached value of the '{@link #getParserRules() <em>Parser Rules</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getParserRules()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<ParserRule> parserRules;
 
-  /**
-   * The cached value of the '{@link #getLexerRules() <em>Lexer Rules</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+		/**
+	 * The cached value of the '{@link #getLexerRules() <em>Lexer Rules</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLexerRules()
-   * @generated
-   * @ordered
-   */
+	 * @see #getLexerRules()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<LexerRule> lexerRules;
 
   /**
-   * The cached value of the '{@link #getMetamodelDeclarations() <em>Metamodel Declarations</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getMetamodelDeclarations()
-   * @generated
-   * @ordered
-   */
-  protected EList<AbstractMetamodelDeclaration> metamodelDeclarations;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected GrammarImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return XtextPackage.Literals.GRAMMAR;
-  }
+		return XtextPackage.Literals.GRAMMAR;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<ParserRule> getParserRules()
   {
-    if (parserRules == null)
-    {
-      parserRules = new EObjectContainmentEList<ParserRule>(ParserRule.class, this, XtextPackage.GRAMMAR__PARSER_RULES);
-    }
-    return parserRules;
-  }
+		if (parserRules == null) {
+			parserRules = new EObjectContainmentEList<ParserRule>(ParserRule.class, this, XtextPackage.GRAMMAR__PARSER_RULES);
+		}
+		return parserRules;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<LexerRule> getLexerRules()
   {
-    if (lexerRules == null)
-    {
-      lexerRules = new EObjectContainmentEList<LexerRule>(LexerRule.class, this, XtextPackage.GRAMMAR__LEXER_RULES);
-    }
-    return lexerRules;
-  }
+		if (lexerRules == null) {
+			lexerRules = new EObjectContainmentEList<LexerRule>(LexerRule.class, this, XtextPackage.GRAMMAR__LEXER_RULES);
+		}
+		return lexerRules;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<AbstractMetamodelDeclaration> getMetamodelDeclarations()
   {
-    if (metamodelDeclarations == null)
-    {
-      metamodelDeclarations = new EObjectContainmentEList<AbstractMetamodelDeclaration>(AbstractMetamodelDeclaration.class, this, XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS);
-    }
-    return metamodelDeclarations;
-  }
+		if (metamodelDeclarations == null) {
+			metamodelDeclarations = new EObjectContainmentEList<AbstractMetamodelDeclaration>(AbstractMetamodelDeclaration.class, this, XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS);
+		}
+		return metamodelDeclarations;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case XtextPackage.GRAMMAR__PARSER_RULES:
-        return ((InternalEList<?>)getParserRules()).basicRemove(otherEnd, msgs);
-      case XtextPackage.GRAMMAR__LEXER_RULES:
-        return ((InternalEList<?>)getLexerRules()).basicRemove(otherEnd, msgs);
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        return ((InternalEList<?>)getMetamodelDeclarations()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+				return ((InternalEList<?>)getMetamodelDeclarations()).basicRemove(otherEnd, msgs);
+			case XtextPackage.GRAMMAR__PARSER_RULES:
+				return ((InternalEList<?>)getParserRules()).basicRemove(otherEnd, msgs);
+			case XtextPackage.GRAMMAR__LEXER_RULES:
+				return ((InternalEList<?>)getLexerRules()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case XtextPackage.GRAMMAR__PARSER_RULES:
-        return getParserRules();
-      case XtextPackage.GRAMMAR__LEXER_RULES:
-        return getLexerRules();
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        return getMetamodelDeclarations();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+				return getMetamodelDeclarations();
+			case XtextPackage.GRAMMAR__PARSER_RULES:
+				return getParserRules();
+			case XtextPackage.GRAMMAR__LEXER_RULES:
+				return getLexerRules();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case XtextPackage.GRAMMAR__PARSER_RULES:
-        getParserRules().clear();
-        getParserRules().addAll((Collection<? extends ParserRule>)newValue);
-        return;
-      case XtextPackage.GRAMMAR__LEXER_RULES:
-        getLexerRules().clear();
-        getLexerRules().addAll((Collection<? extends LexerRule>)newValue);
-        return;
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        getMetamodelDeclarations().clear();
-        getMetamodelDeclarations().addAll((Collection<? extends AbstractMetamodelDeclaration>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+				getMetamodelDeclarations().clear();
+				getMetamodelDeclarations().addAll((Collection<? extends AbstractMetamodelDeclaration>)newValue);
+				return;
+			case XtextPackage.GRAMMAR__PARSER_RULES:
+				getParserRules().clear();
+				getParserRules().addAll((Collection<? extends ParserRule>)newValue);
+				return;
+			case XtextPackage.GRAMMAR__LEXER_RULES:
+				getLexerRules().clear();
+				getLexerRules().addAll((Collection<? extends LexerRule>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case XtextPackage.GRAMMAR__PARSER_RULES:
-        getParserRules().clear();
-        return;
-      case XtextPackage.GRAMMAR__LEXER_RULES:
-        getLexerRules().clear();
-        return;
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        getMetamodelDeclarations().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+				getMetamodelDeclarations().clear();
+				return;
+			case XtextPackage.GRAMMAR__PARSER_RULES:
+				getParserRules().clear();
+				return;
+			case XtextPackage.GRAMMAR__LEXER_RULES:
+				getLexerRules().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case XtextPackage.GRAMMAR__PARSER_RULES:
-        return parserRules != null && !parserRules.isEmpty();
-      case XtextPackage.GRAMMAR__LEXER_RULES:
-        return lexerRules != null && !lexerRules.isEmpty();
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        return metamodelDeclarations != null && !metamodelDeclarations.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+				return metamodelDeclarations != null && !metamodelDeclarations.isEmpty();
+			case XtextPackage.GRAMMAR__PARSER_RULES:
+				return parserRules != null && !parserRules.isEmpty();
+			case XtextPackage.GRAMMAR__LEXER_RULES:
+				return lexerRules != null && !lexerRules.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //GrammarImpl

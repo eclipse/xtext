@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CompositeNode.java,v 1.7 2008/05/20 09:09:47 jkohnlein Exp $
+ * $Id: CompositeNode.java,v 1.8 2008/05/21 08:11:48 jkohnlein Exp $
  */
 package org.eclipse.xtext.core.parsetree;
 
@@ -27,21 +27,21 @@ import org.eclipse.emf.common.util.EList;
 public interface CompositeNode extends AbstractNode
 {
   /**
-   * Returns the value of the '<em><b>Children</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.core.parsetree.AbstractNode}.
-   * It is bidirectional and its opposite is '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getParent <em>Parent</em>}'.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.core.parsetree.AbstractNode}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.core.parsetree.AbstractNode#getParent <em>Parent</em>}'.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Children</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Children</em>' containment reference list.
-   * @see org.eclipse.xtext.core.parsetree.ParsetreePackage#getCompositeNode_Children()
-   * @see org.eclipse.xtext.core.parsetree.AbstractNode#getParent
-   * @model opposite="parent" containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Children</em>' containment reference list.
+	 * @see org.eclipse.xtext.core.parsetree.ParsetreePackage#getCompositeNode_Children()
+	 * @see org.eclipse.xtext.core.parsetree.AbstractNode#getParent
+	 * @model opposite="parent" containment="true"
+	 * @generated
+	 */
   EList<AbstractNode> getChildren();
 
 } // CompositeNode

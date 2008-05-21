@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractElementImpl.java,v 1.6 2008/05/20 09:09:48 jkohnlein Exp $
+ * $Id: AbstractElementImpl.java,v 1.7 2008/05/21 08:11:49 jkohnlein Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -32,150 +32,146 @@ import org.eclipse.xtext.XtextPackage;
 public class AbstractElementImpl extends EObjectImpl implements AbstractElement
 {
   /**
-   * The default value of the '{@link #getCardinality() <em>Cardinality</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getCardinality() <em>Cardinality</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCardinality()
-   * @generated
-   * @ordered
-   */
+	 * @see #getCardinality()
+	 * @generated
+	 * @ordered
+	 */
   protected static final String CARDINALITY_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getCardinality() <em>Cardinality</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getCardinality() <em>Cardinality</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCardinality()
-   * @generated
-   * @ordered
-   */
+	 * @see #getCardinality()
+	 * @generated
+	 * @ordered
+	 */
   protected String cardinality = CARDINALITY_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected AbstractElementImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return XtextPackage.Literals.ABSTRACT_ELEMENT;
-  }
+		return XtextPackage.Literals.ABSTRACT_ELEMENT;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String getCardinality()
   {
-    return cardinality;
-  }
+		return cardinality;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setCardinality(String newCardinality)
   {
-    String oldCardinality = cardinality;
-    cardinality = newCardinality;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ABSTRACT_ELEMENT__CARDINALITY, oldCardinality, cardinality));
-  }
+		String oldCardinality = cardinality;
+		cardinality = newCardinality;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ABSTRACT_ELEMENT__CARDINALITY, oldCardinality, cardinality));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
-        return getCardinality();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
+				return getCardinality();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
-        setCardinality((String)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
+				setCardinality((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
-        setCardinality(CARDINALITY_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
+				setCardinality(CARDINALITY_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
-        return CARDINALITY_EDEFAULT == null ? cardinality != null : !CARDINALITY_EDEFAULT.equals(cardinality);
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case XtextPackage.ABSTRACT_ELEMENT__CARDINALITY:
+				return CARDINALITY_EDEFAULT == null ? cardinality != null : !CARDINALITY_EDEFAULT.equals(cardinality);
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (cardinality: ");
-    result.append(cardinality);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (cardinality: ");
+		result.append(cardinality);
+		result.append(')');
+		return result.toString();
+	}
 
 } //AbstractElementImpl

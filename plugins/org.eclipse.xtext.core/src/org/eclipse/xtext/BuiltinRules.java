@@ -14,6 +14,11 @@ import java.util.List;
 
 import org.eclipse.xtext.core.parser.ITokenTypes;
 
+/**
+ * 
+ * @author koehnlein
+ *
+ */
 public class BuiltinRules {
 
 	public static final LexerRule BUILTIN_ID;

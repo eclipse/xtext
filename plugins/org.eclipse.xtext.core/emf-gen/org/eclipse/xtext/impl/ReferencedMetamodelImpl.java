@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReferencedMetamodelImpl.java,v 1.6 2008/05/20 09:09:48 jkohnlein Exp $
+ * $Id: ReferencedMetamodelImpl.java,v 1.7 2008/05/21 08:11:48 jkohnlein Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -31,150 +31,146 @@ import org.eclipse.xtext.XtextPackage;
 public class ReferencedMetamodelImpl extends AbstractMetamodelDeclarationImpl implements ReferencedMetamodel
 {
   /**
-   * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getUri()
-   * @generated
-   * @ordered
-   */
+	 * @see #getUri()
+	 * @generated
+	 * @ordered
+	 */
   protected static final String URI_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getUri() <em>Uri</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getUri() <em>Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getUri()
-   * @generated
-   * @ordered
-   */
+	 * @see #getUri()
+	 * @generated
+	 * @ordered
+	 */
   protected String uri = URI_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ReferencedMetamodelImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return XtextPackage.Literals.REFERENCED_METAMODEL;
-  }
+		return XtextPackage.Literals.REFERENCED_METAMODEL;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String getUri()
   {
-    return uri;
-  }
+		return uri;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setUri(String newUri)
   {
-    String oldUri = uri;
-    uri = newUri;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.REFERENCED_METAMODEL__URI, oldUri, uri));
-  }
+		String oldUri = uri;
+		uri = newUri;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.REFERENCED_METAMODEL__URI, oldUri, uri));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case XtextPackage.REFERENCED_METAMODEL__URI:
-        return getUri();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case XtextPackage.REFERENCED_METAMODEL__URI:
+				return getUri();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case XtextPackage.REFERENCED_METAMODEL__URI:
-        setUri((String)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case XtextPackage.REFERENCED_METAMODEL__URI:
+				setUri((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case XtextPackage.REFERENCED_METAMODEL__URI:
-        setUri(URI_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case XtextPackage.REFERENCED_METAMODEL__URI:
+				setUri(URI_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case XtextPackage.REFERENCED_METAMODEL__URI:
-        return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case XtextPackage.REFERENCED_METAMODEL__URI:
+				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (uri: ");
-    result.append(uri);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (uri: ");
+		result.append(uri);
+		result.append(')');
+		return result.toString();
+	}
 
 } //ReferencedMetamodelImpl

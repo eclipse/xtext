@@ -13,6 +13,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.core.parser.ITokenTypes;
 
+/**
+ * 
+ * @author koehnlein
+ */
 public class GrammarUtil {
 
 	public static boolean isLexerRuleCall(EObject grammarElement) {

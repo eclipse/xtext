@@ -21,29 +21,39 @@ import org.eclipse.emf.ecore.EObject;
  */
 public abstract class AbstractParser implements IParser {
 	
-	public EObject parse(InputStream in) {
-		return parse(in, getDefaultASTFactory());
+	public EObject parse(InputStream in, IElementFactory factory,
+			IParseErrorHandler handler, IParsePostProcessor postProcessor) {
+		try {
+			EObject parseResult = (EObject) parse(new ANTLRInputStream(in),factory,handler);
+			return postProcessor.postProcess(parseResult);
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
 	}
-
-	protected abstract IElementFactory getDefaultASTFactory();
 
 	public EObject parse(InputStream in, IElementFactory factory,
 			IParseErrorHandler handler) {
-		try {
-			return (EObject) parse(new ANTLRInputStream(in),factory,handler);
-		} catch (IOException e) {
-			throw new WrappedException(e);
-		}
+		return parse(in,factory,handler,getDefaultPostProcessor());
 	}
 
 	public EObject parse(InputStream in, IElementFactory factory) {
-		try {
-			return (EObject) parse(new ANTLRInputStream(in),factory,getDefaultHandler());
-		} catch (IOException e) {
-			throw new WrappedException(e);
-		}
+		return parse(in,factory,getDefaultHandler(),getDefaultPostProcessor());
 	}
 	
+	public EObject parse(InputStream in) {
+		return parse(in,getDefaultASTFactory(),getDefaultHandler(),getDefaultPostProcessor());
+	}
+	
+	protected abstract IElementFactory getDefaultASTFactory();
+	
+	protected IParsePostProcessor getDefaultPostProcessor() {
+		return new IParsePostProcessor() {
+			public EObject postProcess(EObject parseResult) {
+				// TODO: add code 
+				return parseResult;
+			}
+		};
+	}	
 	
 	protected IParseErrorHandler getDefaultHandler() {
 		return new IParseErrorHandler() {
