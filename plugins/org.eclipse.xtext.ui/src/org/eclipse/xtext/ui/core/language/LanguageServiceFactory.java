@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
-
 /**
  * @author Peter Friese - Initial contribution and API
  * 
@@ -42,19 +41,18 @@ public class LanguageServiceFactory {
 	public ISyntaxColorer getSyntaxColorer(LanguageDescriptor language) {
 		return (ISyntaxColorer) loadService(language, SYNTAXCOLORER);
 	}
-	
-	private ILanguageService loadService(
-			LanguageDescriptor languageDescriptor,
+
+	private ILanguageService loadService(LanguageDescriptor languageDescriptor,
 			String serviceName) {
 		if (languageDescriptor == null) {
-			throw new IllegalArgumentException("languageDescriptor must not be null");
+			throw new IllegalArgumentException(
+					"languageDescriptor must not be null");
 		}
 		return createServiceExtension(languageDescriptor, serviceName);
 	}
-	
+
 	private ILanguageService createServiceExtension(
-			LanguageDescriptor languageDescriptor,
-			String serviceName) {
+			LanguageDescriptor languageDescriptor, String serviceName) {
 		IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
 				.getExtensionPoint(Activator.PLUGIN_ID, serviceName);
 		if (extensionPoint == null) {
@@ -76,8 +74,5 @@ public class LanguageServiceFactory {
 		}
 		return null;
 	}
-
-
-	
 
 }

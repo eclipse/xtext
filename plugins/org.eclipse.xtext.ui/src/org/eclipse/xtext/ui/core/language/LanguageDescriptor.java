@@ -8,7 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.language;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.xtext.ILanguageFacade;
+import org.eclipse.xtext.LanguageFacadeFactory;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -17,9 +20,11 @@ import org.eclipse.core.runtime.IConfigurationElement;
 public class LanguageDescriptor {
 	public final static String ID_ATTRIBUTE = "id";
 	public final static String NAME_ATTRIBUTE = "name";
+	public final static String LANGUAGEFACADE_CLASS_ATTRIBUTE = "languageFacade";
 
 	private String id;
 	private String name;
+	private ILanguageFacade languageFacade;
 
 	public LanguageDescriptor(String id, String name) {
 		this.id = id;
@@ -30,7 +35,8 @@ public class LanguageDescriptor {
 		this.id = id;
 	}
 
-	public LanguageDescriptor(IConfigurationElement element) {
+	public LanguageDescriptor(IConfigurationElement element)
+			throws CoreException {
 		if (element == null)
 			throw new IllegalArgumentException(
 					"ConfigurationElement cannot be null.");
@@ -39,6 +45,9 @@ public class LanguageDescriptor {
 			throw new IllegalArgumentException(
 					"Id is requered and cannot be null.");
 		this.name = element.getAttribute(LanguageDescriptor.NAME_ATTRIBUTE);
+		this.languageFacade = (ILanguageFacade) element
+				.createExecutableExtension(LANGUAGEFACADE_CLASS_ATTRIBUTE);
+		LanguageFacadeFactory.register(languageFacade);
 	}
 
 	public String getId() {
@@ -49,4 +58,7 @@ public class LanguageDescriptor {
 		return name;
 	}
 
+	public ILanguageFacade getLanguageFacade() {
+		return languageFacade;
+	}
 }

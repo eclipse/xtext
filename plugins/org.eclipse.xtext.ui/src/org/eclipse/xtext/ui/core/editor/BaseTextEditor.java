@@ -10,8 +10,8 @@ package org.eclipse.xtext.ui.core.editor;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.editors.text.TextFileDocumentProvider;
 import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
 import org.eclipse.xtext.ui.core.language.LanguageDescriptorFactory;
 
@@ -23,17 +23,16 @@ public class BaseTextEditor extends TextEditor {
 	public static final String ID = "org.eclipse.xtext.baseEditor";
 
 	public BaseTextEditor() {
-		SourceViewerConfiguration configuration = new XtextSourceViewerConfiguration(
-				getPreferenceStore());
-		setSourceViewerConfiguration(configuration);
+		// does nothing
 	}
 
 	@Override
 	public void setInitializationData(IConfigurationElement cfig,
 			String propertyName, Object data) {
 		super.setInitializationData(cfig, propertyName, data);
-		((XtextSourceViewerConfiguration) getSourceViewerConfiguration())
-				.setLanguageDescriptor(initializeLanguageDescriptor());
+		setSourceViewerConfiguration(new XtextSourceViewerConfiguration(
+				initializeLanguageDescriptor(), getPreferenceStore()));
+		setDocumentProvider(new TextFileDocumentProvider());
 	}
 
 	private LanguageDescriptor initializeLanguageDescriptor() {

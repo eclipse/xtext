@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
@@ -63,7 +64,11 @@ public class LanguageDescriptorFactory {
 						logMoreThanOneLanguageWarning(namespace, retVal);
 						break;
 					}
-					retVal = new LanguageDescriptor(element);
+					try {
+						retVal = new LanguageDescriptor(element);
+					} catch (CoreException e) {
+						CoreLog.logError(e);
+					}
 				}
 			}
 		}

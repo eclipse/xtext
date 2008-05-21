@@ -10,6 +10,7 @@
 package org.eclipse.xtext.ui.core.service;
 
 import org.eclipse.jface.text.TextAttribute;
+import org.eclipse.xtext.core.parsetree.LeafNode;
 import org.eclipse.xtext.ui.core.language.ILanguageService;
 
 /**
@@ -21,5 +22,5 @@ public interface ISyntaxColorer extends ILanguageService {
 	 * @param token
 	 * @return TextAttribute for given token
 	 */
-	TextAttribute color(Object token);
+	TextAttribute color(LeafNode leafNode);
 }

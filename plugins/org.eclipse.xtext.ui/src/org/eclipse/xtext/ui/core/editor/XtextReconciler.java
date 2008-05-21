@@ -6,13 +6,23 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
+package org.eclipse.xtext.ui.core.editor;
 
-package org.eclipse.xtext.ui.core.service;
+import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
+import org.eclipse.jface.text.reconciler.MonoReconciler;
 
 /**
- * @author Dennis Hübner
+ * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public interface ILexer {
-	int getTokenType(Object token);
+public class XtextReconciler extends MonoReconciler {
+
+	public XtextReconciler(IReconcilingStrategy strategy, boolean isIncremental) {
+		super(strategy, isIncremental);
+	}
+
+	public XtextReconciler(IReconcilingStrategy strategy) {
+		this(strategy, false);
+	}
+
 }
