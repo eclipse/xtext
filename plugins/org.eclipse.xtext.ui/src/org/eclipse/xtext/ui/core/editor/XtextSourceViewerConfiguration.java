@@ -12,49 +12,37 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
-import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.jface.text.source.SourceViewerConfiguration;
-import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
+import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
 public class XtextSourceViewerConfiguration extends
-		SourceViewerConfiguration {
-	private LanguageDescriptor languageDescriptor;
+		TextSourceViewerConfiguration {
+	private final XtextModelManager modelManager;
 
 	/**
 	 * @param languageDescriptor
 	 * @param langDescr
 	 */
-	public XtextSourceViewerConfiguration(
-			LanguageDescriptor languageDescriptor,
+	public XtextSourceViewerConfiguration(XtextModelManager manager,
 			IPreferenceStore preferenceStore) {
-		this.languageDescriptor = languageDescriptor;
-	}
-
-	/**
-	 * @return
-	 */
-	public LanguageDescriptor getLanguageDescriptor() {
-		return languageDescriptor;
-	}
-
-	@Override
-	public IReconciler getReconciler(ISourceViewer sourceViewer) {
-		return new XtextReconciler(new XtextReconcilerStrategy(sourceViewer));
+		super(preferenceStore);
+		this.modelManager = manager;
 	}
 
 	public IPresentationReconciler getPresentationReconciler(
 			ISourceViewer sourceViewer) {
-		PresentationReconciler reconciler = new PresentationReconciler();
+		PresentationReconciler reconciler = (PresentationReconciler) super
+				.getPresentationReconciler(sourceViewer);
 		DefaultDamagerRepairer defDR = new DefaultDamagerRepairer(
-				new XtextTokenScanner(getLanguageDescriptor()));
+				new XtextTokenScanner(modelManager));
 		reconciler.setRepairer(defDR, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setDamager(defDR, IDocument.DEFAULT_CONTENT_TYPE);
 		return reconciler;
 	}
+
 }

@@ -10,22 +10,15 @@ package org.eclipse.xtext.ui.core.editor;
 
 import java.util.Iterator;
 
-import org.apache.tools.ant.filters.StringInputStream;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
-import org.eclipse.xtext.core.parser.IParser;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.LeafNode;
-import org.eclipse.xtext.core.parsetree.NodeAdapter;
-import org.eclipse.xtext.ui.core.internal.CoreLog;
-import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
 import org.eclipse.xtext.ui.core.language.LanguageServiceFactory;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
@@ -36,14 +29,15 @@ import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 public class XtextTokenScanner implements ITokenScanner {
 
 	private ISyntaxColorer syntaxColorer;
-	private IParser parser;
 	private LeafNode lastNode = null;
 	private Iterator<EObject> nodeIterator;
+	private final XtextModelManager modelmanager;
 
-	public XtextTokenScanner(LanguageDescriptor language) {
+	public XtextTokenScanner(XtextModelManager modelmanager) {
+		this.modelmanager = modelmanager;
+		Assert.isLegal(modelmanager != null);
 		this.syntaxColorer = LanguageServiceFactory.getInstance()
-				.getSyntaxColorer(language);
-		this.parser = language.getLanguageFacade().getParser();
+				.getSyntaxColorer(modelmanager.getLanguageDescriptor());
 	}
 
 	/*
@@ -90,7 +84,6 @@ public class XtextTokenScanner implements ITokenScanner {
 		} else {
 			retVal = Token.EOF;
 		}
-
 		return retVal;
 	}
 
@@ -103,20 +96,13 @@ public class XtextTokenScanner implements ITokenScanner {
 	 */
 	public void setRange(IDocument document, int offset, int length) {
 		Assert.isLegal(document != null);
-		String content;
-		try {
-			content = document.get(offset, length);
-
-			Notifier object = (Notifier) parser.parse(new StringInputStream(
-					content));
-			NodeAdapter adapter = (NodeAdapter) object.eAdapters().get(0);
-			AbstractNode node = adapter.getParserNode();
-			nodeIterator = node.eAllContents();
-		} catch (BadLocationException e) {
-			CoreLog.logError(e);
-		} catch (Exception pe) {
-			CoreLog.logError("Error during scanning", pe);
-		}
+		// TODO partial parse
+		modelmanager.parseTree(document);
+		AbstractNode currentAST = modelmanager.getCurrentAST();
+		if (currentAST != null)
+			nodeIterator = currentAST.eAllContents();
+		else
+			nodeIterator = null;
 	}
 
 }
