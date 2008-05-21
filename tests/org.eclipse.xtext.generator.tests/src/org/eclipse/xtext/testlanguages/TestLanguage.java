@@ -8,6 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.testlanguages;
 
+/**
+ * 
+ * @author Jan Köhnlein - Initial contribution and API
+ *
+ */
 public abstract class TestLanguage {
 
 }
