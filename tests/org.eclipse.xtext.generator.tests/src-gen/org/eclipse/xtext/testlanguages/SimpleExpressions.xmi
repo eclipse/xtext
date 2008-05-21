@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simpleExpressions" nsURI="&quot;http://www.eclipse.org/xtext/test/simpleExpressions&quot;"/>
   <parserRules name="Multiplication">
+    <type name="Expression"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall" name="Addition"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
@@ -20,9 +22,9 @@
         </abstractTokens>
       </abstractTokens>
     </alternatives>
-    <type name="Expression"/>
   </parserRules>
   <parserRules name="Addition">
+    <type name="Expression"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall" name="Term"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
@@ -42,14 +44,13 @@
         </abstractTokens>
       </abstractTokens>
     </alternatives>
-    <type name="Expression"/>
   </parserRules>
   <parserRules name="Term">
+    <type name="Expression"/>
     <alternatives xsi:type="xtext:Alternatives">
       <groups xsi:type="xtext:RuleCall" name="Atom"/>
       <groups xsi:type="xtext:RuleCall" name="Parens"/>
     </alternatives>
-    <type name="Expression"/>
   </parserRules>
   <parserRules name="Atom">
     <alternatives xsi:type="xtext:Assignment" feature="name" operator="=">
@@ -57,6 +58,7 @@
     </alternatives>
   </parserRules>
   <parserRules name="Parens">
+    <type name="Expression"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Keyword" value="'('"/>
@@ -64,7 +66,5 @@
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Keyword" value="')'"/>
     </alternatives>
-    <type name="Expression"/>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="&quot;http://www.eclipse.org/xtext/test/simpleExpressions&quot;" name="simpleExpressions"/>
 </xtext:Grammar>

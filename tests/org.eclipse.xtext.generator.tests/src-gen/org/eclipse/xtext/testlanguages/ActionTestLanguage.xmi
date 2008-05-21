@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ActionLang" nsURI="&quot;http://www.eclipse.org/2008/tmf/xtext/ActionLang&quot;"/>
   <parserRules name="Model">
     <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="children" operator="+=">
       <terminal xsi:type="xtext:RuleCall" name="Element"/>
     </alternatives>
   </parserRules>
   <parserRules name="Element">
+    <type name="Type"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall" name="Item"/>
       <abstractTokens xsi:type="xtext:Group">
@@ -17,9 +19,9 @@
         </abstractTokens>
       </abstractTokens>
     </alternatives>
-    <type name="Type"/>
   </parserRules>
   <parserRules name="Item">
+    <type name="Type"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Action" operator="=" feature="content">
         <typeName name="Thing"/>
@@ -28,7 +30,5 @@
         <terminal xsi:type="xtext:RuleCall" name="ID"/>
       </abstractTokens>
     </alternatives>
-    <type name="Type"/>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="&quot;http://www.eclipse.org/2008/tmf/xtext/ActionLang&quot;" name="ActionLang"/>
 </xtext:Grammar>

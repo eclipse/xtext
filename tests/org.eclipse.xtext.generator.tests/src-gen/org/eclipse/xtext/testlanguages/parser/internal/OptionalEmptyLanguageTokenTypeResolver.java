@@ -16,13 +16,13 @@ public class OptionalEmptyLanguageTokenTypeResolver {
 			// RULE_ID
 			return BuiltinRules.BUILTIN_ID;
 
-		case 8:
+		case 9:
 			// RULE_LEXER_BODY
 			return BuiltinRules.BUILTIN_LEXER_BODY;
 
-		case 9:
-			// RULE_INT
-			return BuiltinRules.BUILTIN_INT;
+		case 8:
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 		case 11:
 			// RULE_ANY_OTHER
@@ -32,13 +32,13 @@ public class OptionalEmptyLanguageTokenTypeResolver {
 			// RULE_STRING
 			return BuiltinRules.BUILTIN_STRING;
 
+		case 7:
+			// RULE_INT
+			return BuiltinRules.BUILTIN_INT;
+
 		case 10:
 			// RULE_WS
 			return BuiltinRules.BUILTIN_WS;
-
-		case 7:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 
 		case 5:

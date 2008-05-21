@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="TestLang" nsURI="&quot;http://www.eclipse.org/2008/xtext/TestLang&quot;"/>
   <parserRules name="EntryRule">
+    <type name="Model"/>
     <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="multiFeature" operator="+=">
       <terminal xsi:type="xtext:RuleCall" name="AbstractRule"/>
     </alternatives>
-    <type name="Model"/>
   </parserRules>
   <parserRules name="AbstractRule">
+    <type name="AbstractElement"/>
     <alternatives xsi:type="xtext:Alternatives">
       <groups xsi:type="xtext:RuleCall" name="ChoiceRule"/>
       <groups xsi:type="xtext:RuleCall" name="ReducibleRule"/>
     </alternatives>
-    <type name="AbstractElement"/>
   </parserRules>
   <parserRules name="ChoiceRule">
+    <type name="ChoiceElement"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Keyword" value="&quot;choice&quot;"/>
@@ -25,9 +27,9 @@
         <terminal xsi:type="xtext:RuleCall" name="ID"/>
       </abstractTokens>
     </alternatives>
-    <type name="ChoiceElement"/>
   </parserRules>
   <parserRules name="ReducibleRule">
+    <type name="ReducibleElement"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Keyword" value="&quot;reducible&quot;"/>
@@ -42,13 +44,11 @@
         </abstractTokens>
       </abstractTokens>
     </alternatives>
-    <type name="ReducibleElement"/>
   </parserRules>
   <parserRules name="TerminalRule">
+    <type name="TerminalElement"/>
     <alternatives xsi:type="xtext:Assignment" feature="stringFeature" operator="=">
       <terminal xsi:type="xtext:RuleCall" name="STRING"/>
     </alternatives>
-    <type name="TerminalElement"/>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="&quot;http://www.eclipse.org/2008/xtext/TestLang&quot;" name="TestLang"/>
 </xtext:Grammar>
