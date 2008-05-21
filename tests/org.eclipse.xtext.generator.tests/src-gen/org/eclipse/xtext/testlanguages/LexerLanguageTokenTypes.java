@@ -7,8 +7,8 @@ public interface LexerLanguageTokenTypes extends ITokenTypes {
 	
 	public static final String X = "X";
 
-	public static final String STRING = "STRING";
-
 	public static final String IMPLICITTOKENTYPE = "IMPLICITTOKENTYPE";
+
+	public static final String STRING = "STRING";
 
 }

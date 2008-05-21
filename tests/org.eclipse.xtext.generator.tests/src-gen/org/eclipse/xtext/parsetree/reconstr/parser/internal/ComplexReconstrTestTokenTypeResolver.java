@@ -18,8 +18,8 @@ public class ComplexReconstrTestTokenTypeResolver {
 			return BuiltinRules.BUILTIN_ID;
 
 		case 8:
-			// RULE_LEXER_BODY
-			return BuiltinRules.BUILTIN_LEXER_BODY;
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 		case 11:
 			// RULE_ANY_OTHER
@@ -27,14 +27,14 @@ public class ComplexReconstrTestTokenTypeResolver {
 
 
 		case 7:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
+			// RULE_INT
+			return BuiltinRules.BUILTIN_INT;
 
 
 
 		case 9:
-			// RULE_INT
-			return BuiltinRules.BUILTIN_INT;
+			// RULE_LEXER_BODY
+			return BuiltinRules.BUILTIN_LEXER_BODY;
 
 		case 6:
 			// RULE_STRING

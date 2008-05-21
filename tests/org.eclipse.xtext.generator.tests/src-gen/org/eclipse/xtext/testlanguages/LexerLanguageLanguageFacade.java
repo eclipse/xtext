@@ -44,23 +44,23 @@ public class LexerLanguageLanguageFacade extends org.eclipse.xtext.core.parser.B
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {
 		
-		getTestLangEPackage()
+		getLexerLangEPackage()
 		
 		};
 	}
 
 	
-	public static final String TESTLANG_NS_URI = "http://www.eclipse.org/2008/xtext/LexerLang";
-	public static final String TESTLANG_CP_URI = "org/eclipse/xtext/testlanguages/TestLang.ecore";
+	public static final String LEXERLANG_NS_URI = "http://www.eclipse.org/2008/xtext/LexerLang";
+	public static final String LEXERLANG_CP_URI = "org/eclipse/xtext/testlanguages/LexerLang.ecore";
 	
-	public static EPackage getTestLangEPackage() {	
-		if (!EPackage.Registry.INSTANCE.containsKey(TESTLANG_NS_URI)) {
-			EPackage p = loadEcoreFile(LexerLanguageLanguageFacade.class.getClassLoader(),TESTLANG_CP_URI);
+	public static EPackage getLexerLangEPackage() {	
+		if (!EPackage.Registry.INSTANCE.containsKey(LEXERLANG_NS_URI)) {
+			EPackage p = loadEcoreFile(LexerLanguageLanguageFacade.class.getClassLoader(),LEXERLANG_CP_URI);
 			if (p!=null) {
-				EPackage.Registry.INSTANCE.put(TESTLANG_NS_URI,p);
+				EPackage.Registry.INSTANCE.put(LEXERLANG_NS_URI,p);
 			}
 		}
-		return EPackage.Registry.INSTANCE.getEPackage(TESTLANG_NS_URI);
+		return EPackage.Registry.INSTANCE.getEPackage(LEXERLANG_NS_URI);
 	}
 	
 

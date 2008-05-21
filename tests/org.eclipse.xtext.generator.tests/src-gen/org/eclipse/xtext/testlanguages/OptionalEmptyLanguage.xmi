@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="OptionalEmpty" nsURI="&quot;http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty&quot;"/>
   <parserRules name="Model">
     <alternatives xsi:type="xtext:Assignment" cardinality="?" feature="child" operator="=">
       <terminal xsi:type="xtext:RuleCall" name="Greeting"/>
@@ -13,5 +14,4 @@
       </abstractTokens>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="&quot;http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty&quot;" name="OptionalEmpty"/>
 </xtext:Grammar>
