@@ -58,7 +58,7 @@ public class GeneratorFacade {
     }
 	
 	@SuppressWarnings("unchecked")
-	public static void generate(Grammar grammarModel, String languageName, String languageNamespace, String srcGenPath)
+	public static void generate(Grammar grammarModel, String languageName, String languageNamespace, String srcGenPath, String modelFileExtension)
 			throws IOException {
 		
 		OutputImpl output = new OutputImpl();
@@ -78,6 +78,7 @@ public class GeneratorFacade {
 		p.setProperty("language.name", languageName);
 		p.setProperty("language.namespace", languageNamespace);
 		p.setProperty("src.gen.path", srcGenPath);
+		p.setProperty("model.file.extension", modelFileExtension);
 		GenProperties.setProperties(p);
 
 		ResourceSetImpl setImpl = new ResourceSetImpl();
@@ -93,6 +94,7 @@ public class GeneratorFacade {
 		facade.evaluate("org::eclipse::xtext::StandaloneSetup::file", grammarModel);
 		facade.evaluate("org::eclipse::xtext::ParserFacade::parser", grammarModel);
 		facade.evaluate("org::eclipse::xtext::ASTFactory::factory", grammarModel);
+		facade.evaluate("org::eclipse::xtext::ResourceFactory::factory", grammarModel);
 
 		String grammar = languageNamespace + "/parser/internal/Internal" + languageName + ".g";
 
