@@ -9,7 +9,7 @@
 generate ReferenceGrammar "http://eclipse.org/xtext/reference/ReferenceGrammar"
 
 Spielplatz:
-	("spielplatz" groesse=STRING "{"
+	("spielplatz" groesse=INT "{"
 		(kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug)*
 	"}")?;		
 	
@@ -17,10 +17,10 @@ Person:
 	Kind | Erwachsener;
 	
 Kind:
-	"kind" "(" name=ID age=STRING ")";
+	"kind" "(" name=ID age=INT ")";
 	
 Erwachsener:
-	"erwachsener" "(" name=ID age=STRING ")";
+	"erwachsener" "(" name=ID age=INT ")";
 	
 Spielzeug:
 	"spielzeug" "(" name=ID farbe=Farbe ")";
