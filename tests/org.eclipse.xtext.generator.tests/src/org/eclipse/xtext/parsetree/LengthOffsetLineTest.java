@@ -50,15 +50,15 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 		CompositeNode node = (CompositeNode) getRootNode(model);
 		EList<LeafNode> leafNodes = node.getLeafNodes();
 		Iterator<LeafNode> iter = leafNodes.iterator();
-		assertEquals(0,iter.next().line());
-		assertEquals(0,iter.next().line());
-		assertEquals(0,iter.next().line());
-		assertEquals(0,iter.next().line());
-		assertEquals(0,iter.next().line());
 		assertEquals(1,iter.next().line());
 		assertEquals(1,iter.next().line());
 		assertEquals(1,iter.next().line());
 		assertEquals(1,iter.next().line());
+		assertEquals(1,iter.next().line());
+		assertEquals(2,iter.next().line());
+		assertEquals(2,iter.next().line());
+		assertEquals(2,iter.next().line());
+		assertEquals(2,iter.next().line());
 		assertFalse(iter.hasNext());
 	}
 	
@@ -66,12 +66,12 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 		String model = "element foo;\nelement bar;\nelement bar;\nelement bar;";
 		CompositeNode node = (CompositeNode) getRootNode(model);
 		Iterator<AbstractNode> iter = node.getChildren().iterator();
-		assertEquals(0,iter.next().line());
+		assertEquals(1,iter.next().line());
 		//Note: because preceding whitespace is added to the following node,
 		// the '\n' is always added to the following composite node
-		assertEquals(0,iter.next().line());
 		assertEquals(1,iter.next().line());
 		assertEquals(2,iter.next().line());
+		assertEquals(3,iter.next().line());
 		assertFalse(iter.hasNext());
 	}
 	
