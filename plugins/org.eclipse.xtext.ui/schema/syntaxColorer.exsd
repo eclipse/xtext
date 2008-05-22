@@ -65,7 +65,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.ui.core.services.ISyntaxColorer"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.ui.core.service.ISyntaxColorer"/>
                </appinfo>
             </annotation>
          </attribute>
