@@ -20,6 +20,7 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.core.parser.IParseErrorHandler;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
+import org.eclipse.xtext.core.parsetree.LeafNode;
 import org.eclipse.xtext.core.parsetree.NodeAdapter;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
@@ -31,30 +32,54 @@ import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
 public class XtextModelManager {
 
 	private final class ParseErrorHandlerImpl implements IParseErrorHandler {
-		public void handleParserError(int line, int offset, int length,
-				int token, String text, String message, Object context) {
+		public void handleParserError(LeafNode node, String message, Object context) {
 			getErrors().add(
-					new ParseError(line, offset, length, token, text, message,
+					new ParseError(node, message,
 							context));
 		}
 	}
 
 	public final class ParseError {
-		int line, offset, length, token;
-		String text, message;
-		Object context;
+		private LeafNode node;
+		private String message;
+		private Object context;
 
-		public ParseError(int line, int offset, int length, int token,
-				String text, String message, Object context) {
+		public ParseError(LeafNode node, String message, Object context) {
 			super();
-			this.line = line;
-			this.offset = offset;
-			this.length = length;
-			this.token = token;
-			this.text = text;
+			this.node = node;
 			this.message = message;
 			this.context = context;
 		}
+
+		public LeafNode getNode() {
+			return node;
+		}
+
+		public String getMessage() {
+			return message;
+		}
+
+		public Object getContext() {
+			return context;
+		}
+
+		public String getText() {
+			return node.getText();
+		}
+
+		public int length() {
+			return node.length();
+		}
+
+		public int line() {
+			return node.line();
+		}
+
+		public int offset() {
+			return node.offset();
+		}
+		
+		
 	}
 
 	private List<ParseError> errors = new ArrayList<ParseError>();

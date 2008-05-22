@@ -98,10 +98,10 @@ public class XtextReconcilingStrategy implements IReconcilingStrategy,
 	private Map<String, Object> collectMarkerAttributes(ParseError error) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IMarker.SEVERITY, new Integer(IMarker.SEVERITY_ERROR));
-		map.put(IMarker.LINE_NUMBER, new Integer(error.line));
-		map.put(IMarker.MESSAGE, error.message);
-		map.put(IMarker.CHAR_START, new Integer(error.offset));
-		map.put(IMarker.CHAR_END, new Integer(error.offset + error.length));
+		map.put(IMarker.LINE_NUMBER, new Integer(error.line()));
+		map.put(IMarker.MESSAGE, error.getMessage());
+		map.put(IMarker.CHAR_START, new Integer(error.offset()));
+		map.put(IMarker.CHAR_END, new Integer(error.offset() + error.length()));
 		map.put(IMarker.PRIORITY, new Integer(IMarker.PRIORITY_LOW));
 
 		return map;
