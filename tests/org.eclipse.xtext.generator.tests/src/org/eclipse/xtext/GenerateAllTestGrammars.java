@@ -13,11 +13,6 @@ import java.io.InputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.GeneratorFacade;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextLanguageFacade;
-import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.dummy.DummyLanguage;
 import org.eclipse.xtext.grammargen.tests.SimpleTest;
 import org.eclipse.xtext.grammargen.tests.SimpleTest2;
@@ -37,7 +32,7 @@ import org.eclipse.xtext.testlanguages.TestLanguage;
  *
  */
 public class GenerateAllTestGrammars {
-	private static final String PATH = "./src-gen";
+	private static String path = "./src-gen";
 	private static Log log = LogFactory.getLog(GenerateAllTestGrammars.class);
 
 	private final static Class<?>[] testclasses = new Class[] { 
@@ -47,8 +42,11 @@ public class GenerateAllTestGrammars {
 
 	public static void main(String[] args) throws Exception {
 		XtextStandaloneSetup.doSetup();
+		if(args.length >0) {
+			path=args[0]+"/"+path;
+		}
 		
-		GeneratorFacade.cleanFolder(PATH);
+		GeneratorFacade.cleanFolder(path);
 		for (Class<?> c : testclasses) {
 			String filename = c.getName().replace('.', '/') + ".xtext";
 			log.info("loading " + filename);
@@ -59,7 +57,7 @@ public class GenerateAllTestGrammars {
 			XtextParser xtext2Parser= new XtextParser();
 			Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory());
 			
-			GeneratorFacade.generate(grammarModel,c.getSimpleName(),c.getPackage().getName().replace('.', '/'),PATH, c.getSimpleName().toLowerCase());
+			GeneratorFacade.generate(grammarModel,c.getSimpleName(),c.getPackage().getName().replace('.', '/'),path, c.getSimpleName().toLowerCase());
 		}
 	}
 	
