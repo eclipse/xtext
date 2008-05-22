@@ -20,13 +20,13 @@ public class LexerLanguageTokenTypeResolver {
 			// RULE_ID
 			return BuiltinRules.BUILTIN_ID;
 
-		case 8:
+		case 9:
 			// RULE_LEXER_BODY
 			return BuiltinRules.BUILTIN_LEXER_BODY;
 
-		case 9:
-			// RULE_WS
-			return BuiltinRules.BUILTIN_WS;
+		case 8:
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 		case 6:
 			// RULE_IMPLICITTOKENTYPE
@@ -36,13 +36,13 @@ public class LexerLanguageTokenTypeResolver {
 			// RULE_INT
 			return BuiltinRules.BUILTIN_INT;
 
-		case 10:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
-
 		case 7:
 			// RULE_STRING
 			return (LexerRule) getGrammarElement("//@lexerRules.2");
+
+		case 10:
+			// RULE_WS
+			return BuiltinRules.BUILTIN_WS;
 
 		case 5:
 			// RULE_EXPLICITTOKENTYPE
@@ -53,7 +53,7 @@ public class LexerLanguageTokenTypeResolver {
 			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 		default:
-			throw new ParseException(context, "Unknown antlr token type " + antlrTokenType);
+			return null;
 		}	
 	}
 	

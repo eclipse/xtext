@@ -75,7 +75,7 @@ public class ParsetreeUtil {
 		AbstractNode rootContainer = (AbstractNode) EcoreUtil
 				.getRootContainer(_this);
 		EList<LeafNode> leafNodes = rootContainer.getLeafNodes(_this);
-		int line = 0;
+		int line = 1;
 		for (LeafNode leafNode : leafNodes) {
 			String text = leafNode.getText();
 			char[] charArray = text.toCharArray();
@@ -96,6 +96,9 @@ public class ParsetreeUtil {
 			buff.append(leafNode.getText());
 		}
 		return buff.toString();
+	}
+	public static String serialize(LeafNodeImpl _this) {
+		return _this.getText();
 	}
 
 	public static EList<LeafNode> getLeafNodes(AbstractNodeImpl _this) {

@@ -3,28 +3,28 @@ lexer grammar InternalActionTestLanguage;
 package org.eclipse.xtext.testlanguages.parser.internal;
 }
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 184
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
-
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 186
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
-
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 188
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 190
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
-
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 192
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 249
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 194
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 251
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 253
+RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
+
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 255
+RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 257
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 259
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 196
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 261
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 198
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 263
 RULE_ANY_OTHER : .;
 
 

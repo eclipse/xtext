@@ -5,14 +5,14 @@ Bundle-SymbolicName: org.eclipse.xtext.generator.tests
 Bundle-Version: 1.0.0
 Bundle-Vendor: eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext.core;bundle-version="1.0.0",
+Require-Bundle: org.antlr;bundle-version="3.0.0",
+ org.eclipse.xtext.core;bundle-version="1.0.0",
  org.eclipse.xtext;bundle-version="1.0.0",
  org.eclipse.xtext.generator;bundle-version="1.0.0",
  org.openarchitectureware.xtext.core;bundle-version="4.3.0",
  org.openarchitectureware.xtext.core.base;bundle-version="4.3.0",
  org.openarchitectureware.xtext.generator;bundle-version="4.3.0",
  org.junit,
- org.antlr;bundle-version="3.0.0",
  org.openarchitectureware.dependencies;bundle-version="4.3.0",
  org.eclipse.emf.compare,
  org.eclipse.emf.compare.diff,

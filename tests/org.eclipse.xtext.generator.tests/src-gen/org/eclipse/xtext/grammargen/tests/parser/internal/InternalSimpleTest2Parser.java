@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g 2008-05-22 17:07:47
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g 2008-05-22 17:17:13
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
@@ -6,6 +6,7 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.ParseException;
 import org.eclipse.xtext.core.parsetree.*;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.grammargen.tests.parser.internal.SimpleTest2TokenTypeResolver;
 
@@ -17,17 +18,17 @@ import java.util.ArrayList;
 
 public class InternalSimpleTest2Parser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_LEXER_BODY", "RULE_WS", "RULE_STRING", "RULE_SL_COMMENT", "RULE_ML_COMMENT", "RULE_ANY_OTHER", "'optional'", "'keyword'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_SL_COMMENT", "RULE_LEXER_BODY", "RULE_STRING", "RULE_WS", "RULE_ML_COMMENT", "RULE_ANY_OTHER", "'optional'", "'keyword'", "'{'", "'}'"
     };
     public static final int RULE_ML_COMMENT=10;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=7;
+    public static final int RULE_WS=9;
     public static final int EOF=-1;
     public static final int RULE_INT=5;
     public static final int RULE_STRING=8;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=9;
-    public static final int RULE_LEXER_BODY=6;
+    public static final int RULE_SL_COMMENT=6;
+    public static final int RULE_LEXER_BODY=7;
 
         public InternalSimpleTest2Parser(TokenStream input) {
             super(input);
@@ -39,111 +40,169 @@ public class InternalSimpleTest2Parser extends Parser {
 
 
 
-    private IElementFactory factory;
-    public InternalSimpleTest2Parser(TokenStream input, IElementFactory factory) {
-        this(input);
-        this.factory = factory;
-    }
-
-    public CompositeNode createCompositeNode(String grammarElementID, CompositeNode parentNode) {
-        CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
-        if (parentNode!=null) parentNode.getChildren().add(compositeNode);
-        compositeNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
-        return compositeNode;
-    }
-
-    public Object createLeafNode(String grammarElementID, CompositeNode parentNode, String feature) {
-        Token token = input.LT(-1);
-        Token tokenBefore = input.LT(-2);
-        int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
-        if (indexOfTokenBefore+1<token.getTokenIndex()) {
-            for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
-                Token hidden = input.get(x);
-                LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-                leafNode.setText(hidden.getText());
-                leafNode.setHidden(true);
-    		    setLexerRule(leafNode, hidden);
-                parentNode.getChildren().add(leafNode);
-            }
-        }
-        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-        leafNode.setText(token.getText());
-        leafNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
-        leafNode.setFeature(feature);
-        parentNode.getChildren().add(leafNode);
-        return leafNode;
-    }
-
-    private void appendTrailingHiddenTokens(CompositeNode parentNode) {
-        Token tokenBefore = input.LT(-1);
-        int size = input.size();
-        if (tokenBefore!=null && tokenBefore.getTokenIndex()<size) {
-            for (int x = tokenBefore.getTokenIndex()+1; x<size;x++) {
-                Token hidden = input.get(x);
-                LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-                leafNode.setText(hidden.getText());
-                leafNode.setHidden(true);
-                setLexerRule(leafNode, hidden);
-                parentNode.getChildren().add(leafNode);
-            }
-        }
-    }
-        
-    public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
-        if(node.getElement() != null && node.getElement() != astElement) {
-            throw new ParseException(node, "Reassignment of astElement in parse tree node");
-        }
-        node.setElement(astElement);
-        if(astElement instanceof EObject) {
-            EObject eObject = (EObject) astElement;
-            NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
-            adapter.setParserNode(node); 
-        }
-    }
-        
-    protected void setLexerRule(LeafNode node, Token t) {
-    	LexerRule lexerRule = SimpleTest2TokenTypeResolver.getLexerRule(node, t.getType());
-    	if(lexerRule != null) {
-    		node.setGrammarElement(lexerRule);
+    	private IElementFactory factory;
+    	public InternalSimpleTest2Parser(TokenStream input, IElementFactory factory) {
+    	    this(input);
+    	    this.factory = factory;
     	}
-    }
+    	
+    	protected void reportError(RecognitionException re, LeafNode ln) {
+            	reportError(re);
+        	}
+        		
+        		private int lastConsumedIndex = -1;
+        	
+        	 	private void appendAllTokens() {
+            		for (int x = lastConsumedIndex+1; input.size()>x;input.consume(),x++) {
+        		        Token hidden = input.get(x);
+        		        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+        		        leafNode.setText(hidden.getText());
+        		        leafNode.setHidden(true);
+        		        setLexerRule(leafNode, hidden);
+        		        currentNode.getChildren().add(leafNode);
+        		    }
+            	}
 
-    private CompositeNode currentNode;
+             	public List<LeafNode> appendSkippedTokens() {
+            		List<LeafNode> skipped = new ArrayList<LeafNode>();
+            		Token token = input.LT(-1);
+            		Token tokenBefore = input.get(lastConsumedIndex);
+            		int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
+            		if (indexOfTokenBefore+1<token.getTokenIndex()) {
+            		    for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
+            		        Token hidden = input.get(x);
+            		        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+            		        leafNode.setText(hidden.getText());
+            		        leafNode.setHidden(true);
+            		        setLexerRule(leafNode, hidden);
+            		        currentNode.getChildren().add(leafNode);
+            		        skipped.add(leafNode);
+            		    }
+            		}
+            		LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+    		        leafNode.setText(token.getText());
+    		        leafNode.setHidden(true);
+    		        setLexerRule(leafNode, token);
+    		        currentNode.getChildren().add(leafNode);
+    		        skipped.add(leafNode);
+            		lastConsumedIndex = token.getTokenIndex();
+            		return skipped;
+            	}
+            	
+                public CompositeNode createCompositeNode(String grammarElementID, CompositeNode parentNode) {
+                    CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
+                    if (parentNode!=null) parentNode.getChildren().add(compositeNode);
+                    compositeNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
+                    return compositeNode;
+                }
+                
 
-    private org.eclipse.xtext.Grammar grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/grammargen/tests/SimpleTest2").getGrammar();;
+                public Object createLeafNode(String grammarElementID, CompositeNode parentNode, String feature) {
+                    Token token = input.LT(-1);
+                    int indexOfTokenBefore = lastConsumedIndex;
+                    if (indexOfTokenBefore+1<token.getTokenIndex()) {
+                        for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
+                            Token hidden = input.get(x);
+                            LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+                            leafNode.setText(hidden.getText());
+                            leafNode.setHidden(true);
+                		    setLexerRule(leafNode, hidden);
+                            parentNode.getChildren().add(leafNode);
+                        }
+                    }
+                    LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+                    leafNode.setText(token.getText());
+                    leafNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
+                    leafNode.setFeature(feature);
+                    parentNode.getChildren().add(leafNode);
+                    lastConsumedIndex = token.getTokenIndex();
+                    return leafNode;
+                }
+
+                private void appendTrailingHiddenTokens(CompositeNode parentNode) {
+                    Token tokenBefore = input.LT(-1);
+                    int size = input.size();
+                    if (tokenBefore!=null && tokenBefore.getTokenIndex()<size) {
+                        for (int x = tokenBefore.getTokenIndex()+1; x<size;x++) {
+                            Token hidden = input.get(x);
+                            LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+                            leafNode.setText(hidden.getText());
+                            leafNode.setHidden(true);
+                            setLexerRule(leafNode, hidden);
+                            parentNode.getChildren().add(leafNode);
+                            lastConsumedIndex = hidden.getTokenIndex();
+                        }
+                    }
+                }
+                
+            	public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
+            	    if(node.getElement() != null && node.getElement() != astElement) {
+            	        throw new ParseException(node, "Reassignment of astElement in parse tree node");
+            	    }
+            	    node.setElement(astElement);
+            	    if(astElement instanceof EObject) {
+            	        EObject eObject = (EObject) astElement;
+            	        NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
+            	        adapter.setParserNode(node); 
+            	    }
+            	}
+        	    
+    	protected void setLexerRule(LeafNode node, Token t) {
+    		LexerRule lexerRule = SimpleTest2TokenTypeResolver.getLexerRule(node, t.getType());
+    		if(lexerRule != null) {
+    			node.setGrammarElement(lexerRule);
+    		}
+    	}
+    	
+    	private CompositeNode currentNode;
+    	public CompositeNode getCurrentNode() {
+    		return currentNode;
+    	}
+    	
+    	private org.eclipse.xtext.Grammar grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/grammargen/tests/SimpleTest2").getGrammar();;
 
 
 
 
     // $ANTLR start parse
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:96:1: parse returns [EObject current] : ruleModel EOF ;
-    public EObject parse() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:160:1: parse returns [EObject current] : ruleModel EOF ;
+    public final EObject parse() throws RecognitionException {
         EObject current = null;
 
         EObject ruleModel1 = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:97:5: ( ruleModel EOF )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:97:5: ruleModel EOF
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:160:33: ( ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:161:5: ruleModel EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
-            pushFollow(FOLLOW_ruleModel_in_parse53);
+            pushFollow(FOLLOW_ruleModel_in_parse59);
             ruleModel1=ruleModel();
             _fsp--;
 
              current =ruleModel1; 
-            match(input,EOF,FOLLOW_EOF_in_parse67); 
+            match(input,EOF,FOLLOW_EOF_in_parse73); 
              appendTrailingHiddenTokens(currentNode); 
 
             }
 
         }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
+         
+        	catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+                LeafNode ln = null;
+                if (currentNode!=null) {
+        	        CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
+        	        List<LeafNode> list = root.getLeafNodes();
+        	        if (list.size()>lastErrorIndex)
+        	        	ln = list.get(lastErrorIndex);
+                }
+        		reportError(re, ln);
+        	} 
         finally {
+             appendAllTokens(); 
         }
         return current;
     }
@@ -151,8 +210,8 @@ public class InternalSimpleTest2Parser extends Parser {
 
 
     // $ANTLR start ruleModel
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:106:1: ruleModel returns [EObject current=null] : (lv_contents= ruleChild )* ;
-    public EObject ruleModel() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:171:1: ruleModel returns [EObject current=null] : (lv_contents= ruleChild )* ;
+    public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_contents = null;
@@ -160,10 +219,10 @@ public class InternalSimpleTest2Parser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:108:1: ( (lv_contents= ruleChild )* )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:108:1: (lv_contents= ruleChild )*
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:172:37: ( (lv_contents= ruleChild )* )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:173:1: (lv_contents= ruleChild )*
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:108:1: (lv_contents= ruleChild )*
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:173:1: (lv_contents= ruleChild )*
             loop1:
             do {
                 int alt1=2;
@@ -176,12 +235,12 @@ public class InternalSimpleTest2Parser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:110:5: lv_contents= ruleChild
+            	    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:175:5: lv_contents= ruleChild
             	    {
             	     
             	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
             	        
-            	    pushFollow(FOLLOW_ruleChild_in_ruleModel121);
+            	    pushFollow(FOLLOW_ruleChild_in_ruleModel136);
             	    lv_contents=ruleChild();
             	    _fsp--;
 
@@ -205,10 +264,19 @@ public class InternalSimpleTest2Parser extends Parser {
             }
 
         }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
+         
+        	catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+                LeafNode ln = null;
+                if (currentNode!=null) {
+        	        CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
+        	        List<LeafNode> list = root.getLeafNodes();
+        	        if (list.size()>lastErrorIndex)
+        	        	ln = list.get(lastErrorIndex);
+                }
+        		reportError(re, ln);
+        	} 
         finally {
         }
         return current;
@@ -217,8 +285,8 @@ public class InternalSimpleTest2Parser extends Parser {
 
 
     // $ANTLR start ruleChild
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:125:1: ruleChild returns [EObject current=null] : ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) ;
-    public EObject ruleChild() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:190:1: ruleChild returns [EObject current=null] : ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) ;
+    public final EObject ruleChild() throws RecognitionException {
         EObject current = null;
 
         Token lv_optional=null;
@@ -227,25 +295,25 @@ public class InternalSimpleTest2Parser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:127:1: ( ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:127:1: ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:191:37: ( ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:192:1: ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' )
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:127:1: ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:127:2: ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}'
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:192:1: ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:192:2: ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}'
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:127:2: ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:127:3: ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{'
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:192:2: ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:192:3: ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{'
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:127:3: ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:127:4: ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:192:3: ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:192:4: ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT )
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:127:4: ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:127:5: ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:192:4: ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:192:5: ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:127:5: ( (lv_optional= 'optional' )? 'keyword' )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:127:6: (lv_optional= 'optional' )? 'keyword'
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:192:5: ( (lv_optional= 'optional' )? 'keyword' )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:192:6: (lv_optional= 'optional' )? 'keyword'
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:127:6: (lv_optional= 'optional' )?
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:192:6: (lv_optional= 'optional' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -254,10 +322,10 @@ public class InternalSimpleTest2Parser extends Parser {
             }
             switch (alt2) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:128:5: lv_optional= 'optional'
+                    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:193:5: lv_optional= 'optional'
                     {
                     lv_optional=(Token)input.LT(1);
-                    match(input,12,FOLLOW_12_in_ruleChild171); 
+                    match(input,12,FOLLOW_12_in_ruleChild186); 
 
                             if (current==null) {
                                 current = factory.create("Child");
@@ -270,18 +338,18 @@ public class InternalSimpleTest2Parser extends Parser {
 
             }
 
-            match(input,13,FOLLOW_13_in_ruleChild184); 
+            match(input,13,FOLLOW_13_in_ruleChild199); 
 
                     createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
                 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:141:2: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:142:5: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:206:2: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:207:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChild203); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChild218); 
              
                 createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
                 
@@ -297,11 +365,11 @@ public class InternalSimpleTest2Parser extends Parser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:153:3: (lv_number= RULE_INT )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:154:5: lv_number= RULE_INT
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:218:3: (lv_number= RULE_INT )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:219:5: lv_number= RULE_INT
             {
             lv_number=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleChild229); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleChild244); 
              
                 createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"number"); 
                 
@@ -317,14 +385,14 @@ public class InternalSimpleTest2Parser extends Parser {
 
             }
 
-            match(input,14,FOLLOW_14_in_ruleChild247); 
+            match(input,14,FOLLOW_14_in_ruleChild262); 
 
                     createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
                 
 
             }
 
-            match(input,15,FOLLOW_15_in_ruleChild258); 
+            match(input,15,FOLLOW_15_in_ruleChild273); 
 
                     createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
                 
@@ -335,10 +403,19 @@ public class InternalSimpleTest2Parser extends Parser {
             }
 
         }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
+         
+        	catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+                LeafNode ln = null;
+                if (currentNode!=null) {
+        	        CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
+        	        List<LeafNode> list = root.getLeafNodes();
+        	        if (list.size()>lastErrorIndex)
+        	        	ln = list.get(lastErrorIndex);
+                }
+        		reportError(re, ln);
+        	} 
         finally {
         }
         return current;
@@ -348,14 +425,14 @@ public class InternalSimpleTest2Parser extends Parser {
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_parse53 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_parse67 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChild_in_ruleModel121 = new BitSet(new long[]{0x0000000000003002L});
-    public static final BitSet FOLLOW_12_in_ruleChild171 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleChild184 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleChild203 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleChild229 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleChild247 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleChild258 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleModel_in_parse59 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_parse73 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChild_in_ruleModel136 = new BitSet(new long[]{0x0000000000003002L});
+    public static final BitSet FOLLOW_12_in_ruleChild186 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleChild199 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleChild218 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleChild244 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleChild262 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleChild273 = new BitSet(new long[]{0x0000000000000002L});
 
 }

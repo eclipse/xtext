@@ -15,15 +15,15 @@ public class XtextGrammarTestTokenTypeResolver {
 
 
 		case 8:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
+			// RULE_WS
+			return BuiltinRules.BUILTIN_WS;
 
 
 
 
 		case 7:
-			// RULE_WS
-			return BuiltinRules.BUILTIN_WS;
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 
 
@@ -67,7 +67,7 @@ public class XtextGrammarTestTokenTypeResolver {
 			return BuiltinRules.BUILTIN_STRING;
 
 		default:
-			throw new ParseException(context, "Unknown antlr token type " + antlrTokenType);
+			return null;
 		}	
 	}
 	

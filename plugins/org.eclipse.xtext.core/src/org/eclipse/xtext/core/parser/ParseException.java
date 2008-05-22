@@ -17,34 +17,30 @@ import org.eclipse.xtext.core.parsetree.AbstractNode;
 @SuppressWarnings("serial")
 public class ParseException extends RuntimeException {
 
-	private int length;
-	private int offset;
-	private String text;
+	private AbstractNode node;
 	private String message;
 
-	public ParseException(int offset, int length, String text, String message) {
-		this.length = length;
-		this.offset = offset;
-		this.text = text;
-		this.message = message;
-	}
-	
 	public ParseException(AbstractNode node, String message) {
-		this(node.offset(), node.length(), node.serialize(), message);
+		this.node = node;
+		this.message = message;
 	}
 
 	public int getLength() {
-		return length;
+		return node.length();
 	}
 
 	public int getOffset() {
-		return offset;
+		return node.offset();
 	}
 
 	public String getText() {
-		return text;
+		return node.serialize();
 	}
 
+	public AbstractNode getNode() {
+		return node;
+	}
+	
 	@Override
 	public String getMessage() {
 		return this.message;

@@ -18,17 +18,17 @@ public class SimpleTest2TokenTypeResolver {
 			// RULE_ID
 			return BuiltinRules.BUILTIN_ID;
 
-		case 9:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
-
 		case 8:
 			// RULE_STRING
 			return BuiltinRules.BUILTIN_STRING;
 
+		case 9:
+			// RULE_WS
+			return BuiltinRules.BUILTIN_WS;
+
 		case 6:
-			// RULE_LEXER_BODY
-			return BuiltinRules.BUILTIN_LEXER_BODY;
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 		case 11:
 			// RULE_ANY_OTHER
@@ -36,8 +36,8 @@ public class SimpleTest2TokenTypeResolver {
 
 
 		case 7:
-			// RULE_WS
-			return BuiltinRules.BUILTIN_WS;
+			// RULE_LEXER_BODY
+			return BuiltinRules.BUILTIN_LEXER_BODY;
 
 		case 10:
 			// RULE_ML_COMMENT
@@ -49,7 +49,7 @@ public class SimpleTest2TokenTypeResolver {
 			return BuiltinRules.BUILTIN_INT;
 
 		default:
-			throw new ParseException(context, "Unknown antlr token type " + antlrTokenType);
+			return null;
 		}	
 	}
 	

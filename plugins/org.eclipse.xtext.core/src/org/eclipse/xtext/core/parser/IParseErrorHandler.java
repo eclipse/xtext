@@ -8,10 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.core.parser;
 
+import org.eclipse.xtext.core.parsetree.LeafNode;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
 public interface IParseErrorHandler {
-	public void handleParserError(int line, int offset, int length, int token, String text, String message, Object context);
+	public void handleParserError(LeafNode skippedNodes, String message, Object context);
 }
