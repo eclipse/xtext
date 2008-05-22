@@ -32,7 +32,7 @@ public class «languageName()»TokenTypeResolver {
 		switch(antlrTokenType) {		
 		«EXPAND lexerRuleCase(this) FOREACH antlrTokenTypes()»
 		default:
-			throw new ParseException(context, "Unknown antlr token type " + antlrTokenType);
+			return null;
 		}	
 	}
 	
