@@ -8,18 +8,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.ILanguageFacade;
+/**
+ * @author Jan Köhnlein
+ */
+public class ClasspathUriResolutionException extends RuntimeException {
 
-public abstract class AbstractXtextResourceFactory implements Resource.Factory {
+	private static final long serialVersionUID = 1124765L;
 
-	public Resource createResource(URI uri) {
-		ILanguageFacade facade = getLanguageFacade();
-		XtextResource xtextResource = new XtextResource(facade, uri);
-		return xtextResource;
+	public ClasspathUriResolutionException(Exception exc) {
+		super(exc);
 	}
-
-	protected abstract ILanguageFacade getLanguageFacade();
 
 }
