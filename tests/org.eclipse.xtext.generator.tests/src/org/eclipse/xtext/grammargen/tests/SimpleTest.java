@@ -31,6 +31,7 @@ public class SimpleTest extends AbstractGeneratorTest {
 		List<Invocation> parse = getInvocations("HOLLA");
 		assertEquals("create", parse.get(0).method);
 		assertEquals("Foo", parse.get(0).feature);
+		
 
 		assertEquals("set", parse.get(1).method);
 		assertEquals("name", parse.get(1).feature);

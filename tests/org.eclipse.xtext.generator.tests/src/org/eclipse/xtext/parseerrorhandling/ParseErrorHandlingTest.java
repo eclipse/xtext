@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.xtext.XtextGrammarTestLanguageFacade;
 import org.eclipse.xtext.XtextGrammarTestStandaloneSetup;
 import org.eclipse.xtext.core.parser.IParseErrorHandler;
+import org.eclipse.xtext.core.parsetree.LeafNode;
 import org.eclipse.xtext.parser.XtextGrammarTestASTFactory;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -30,20 +31,25 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	public void testLexError() throws Exception {
 		ErrorHandler errors = new ErrorHandler();
 		getInvocations("import 'holla' % as foo", errors);
-		assertEquals("%", errors.get(0).text);
-		assertEquals(1, errors.get(0).line);
-		assertEquals(15, errors.get(0).offset);
-		assertEquals(1, errors.get(0).length);
+		assertEquals(1,errors.size());
+		assertEquals("%", errors.get(0).getText());
+		assertEquals(1, errors.get(0).getLine());
+		assertEquals(15, errors.get(0).getOffset());
+		assertEquals(1, errors.get(0).getLength());
 		assertEquals(1, errors.size());
+	}
+	
+	public void testStuff() throws Exception {
+		System.out.println(getRootNode("import 'holla' % as foo",new ErrorHandler()).serialize());
 	}
 
 	public void testParseError1() throws Exception {
 		ErrorHandler errors = new ErrorHandler();
 		getInvocations("import 'holla' foo returns x::y::Z : name=ID;", errors);
-		assertEquals("::", errors.get(0).text);
-		assertEquals(1, errors.get(0).line);
-		assertEquals(31, errors.get(0).offset);
-		assertEquals(2, errors.get(0).length);
+		assertEquals("::", errors.get(0).getText());
+		assertEquals(1, errors.get(0).getLine());
+		assertEquals(31, errors.get(0).getOffset());
+		assertEquals(2, errors.get(0).getLength());
 		assertEquals(1, errors.size());
 	}
 	
@@ -71,30 +77,25 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	private final class ErrorHandler implements IParseErrorHandler {
 		private final List<ErrorEntry> errors = new ArrayList<ErrorEntry>();
 
-
 		public void clear() {
 			errors.clear();
 		}
-
 
 		public ErrorEntry get(int arg0) {
 			return errors.get(arg0);
 		}
 
-
 		public Iterator<ErrorEntry> iterator() {
 			return errors.iterator();
 		}
-
 
 		public int size() {
 			return errors.size();
 		}
 
-
-		public void handleParserError(int line, int offset, int length, int token, String text, String message,
+		public void handleParserError(LeafNode node, String message,
 				Object context) {
-			errors.add(new ErrorEntry(line, offset, length, token, text, message, context));
+			errors.add(new ErrorEntry(node, message, context));
 		}
 		
 		@Override
@@ -108,47 +109,34 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	}
 
 	private final class ErrorEntry {
-		int line;
-		int offset;
-		int length;
-		int token;
-		String text;
 		String message;
 		Object context;
-		public ErrorEntry(int line, int offset, int length, int token, String text, String message, Object context) {
+		private LeafNode node;
+		public ErrorEntry(LeafNode node2, String message, Object context) {
 			super();
-			this.line = line;
-			this.offset = offset;
-			this.length = length;
-			this.token = token;
-			this.text = text;
+			this.node = node2;
 			this.message = message;
 			this.context = context;
 		}
 		
 		
 		public int getLine() {
-			return line;
+			return node.line();
 		}
 
 
 		public int getOffset() {
-			return offset;
+			return node.offset();
 		}
 
 
 		public int getLength() {
-			return length;
-		}
-
-
-		public int getToken() {
-			return token;
+			return node.length();
 		}
 
 
 		public String getText() {
-			return text;
+			return node.serialize();
 		}
 
 
@@ -163,7 +151,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 
 
 		public String toString() {
-			return text + ",l:" + line + ",os:" + offset + ",token:" + token + ",message:" + message;
+			return "token:" + node.serialize() + ",message:" + message;
 		}
 	}
 
