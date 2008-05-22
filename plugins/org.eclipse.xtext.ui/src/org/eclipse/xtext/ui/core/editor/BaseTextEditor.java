@@ -22,8 +22,6 @@ import org.eclipse.xtext.ui.core.language.LanguageDescriptorFactory;
 public class BaseTextEditor extends TextEditor {
 	public static final String ID = "org.eclipse.xtext.baseEditor";
 
-	
-
 	@Override
 	public void setInitializationData(IConfigurationElement cfig,
 			String propertyName, Object data) {
@@ -31,7 +29,7 @@ public class BaseTextEditor extends TextEditor {
 		XtextModelManager manager = new XtextModelManager(
 				initializeLanguageDescriptor());
 		setSourceViewerConfiguration(new XtextSourceViewerConfiguration(
-				manager, getPreferenceStore()));
+				manager, getPreferenceStore(), this));
 		setDocumentProvider(new TextFileDocumentProvider());
 	}
 

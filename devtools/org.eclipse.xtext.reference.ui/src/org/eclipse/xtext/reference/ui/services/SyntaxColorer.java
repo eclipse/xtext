@@ -26,7 +26,8 @@ public class SyntaxColorer implements ISyntaxColorer {
 
 	private static RGB KEYWORD_COLOR = new RGB(127, 0, 85);
 	private static RGB DEFAULT_COLOR = new RGB(0, 0, 0);
-	private static RGB COMMENT_COLOR = new RGB(20, 127, 20);
+	private static RGB COMMENT_COLOR = new RGB(63, 127, 95);
+	private static RGB STRING_COLOR = new RGB(42, 0, 255);
 
 	public TextAttribute color(LeafNode node) {
 		CustomResourceLibrary lib = new CustomResourceLibrary(Display
@@ -35,12 +36,17 @@ public class SyntaxColorer implements ISyntaxColorer {
 				SWT.NONE);
 		if (node instanceof LeafNode) {
 			String tokenType = ((LeafNode) node).tokenType();
-			if (ITokenTypes.KEYWORD.equals(tokenType)) {
+			if (ITokenTypes.KEYWORD.equals(tokenType)
+					&& (node.length() > 1 || Character.isLetter(node.getText()
+							.charAt(0)))) {
 				ta = new TextAttribute(lib.getColor(KEYWORD_COLOR), null,
 						SWT.BOLD);
 			} else if (ITokenTypes.COMMENT.equals(tokenType)) {
 				ta = new TextAttribute(lib.getColor(COMMENT_COLOR), null,
-						SWT.BOLD);
+						SWT.NONE);
+			} else if (ITokenTypes.STRINGLITERAL.equals(tokenType)) {
+				ta = new TextAttribute(lib.getColor(STRING_COLOR), null,
+						SWT.NONE);
 			}
 		}
 		return ta;

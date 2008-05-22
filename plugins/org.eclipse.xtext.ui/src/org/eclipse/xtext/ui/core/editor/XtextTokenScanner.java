@@ -68,7 +68,7 @@ public class XtextTokenScanner implements ITokenScanner {
 	 * @see org.eclipse.jface.text.rules.ITokenScanner#nextToken()
 	 */
 	public IToken nextToken() {
-		IToken retVal = null;
+		IToken retVal = Token.EOF;
 		if (nodeIterator != null && nodeIterator.hasNext()) {
 			Object o = nodeIterator.next();
 			if (o instanceof LeafNode) {
@@ -81,8 +81,6 @@ public class XtextTokenScanner implements ITokenScanner {
 						retVal = new Token(tAttr);
 				}
 			}
-		} else {
-			retVal = Token.EOF;
 		}
 		return retVal;
 	}

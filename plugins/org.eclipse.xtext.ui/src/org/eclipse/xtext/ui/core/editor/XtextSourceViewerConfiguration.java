@@ -8,12 +8,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
+import org.eclipse.jface.text.reconciler.IReconciler;
+import org.eclipse.jface.text.reconciler.MonoReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 
 /**
@@ -23,15 +27,25 @@ import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 public class XtextSourceViewerConfiguration extends
 		TextSourceViewerConfiguration {
 	private final XtextModelManager modelManager;
+	private IResource resource;
+	private final IEditorPart editor;
 
 	/**
+	 * @param file
 	 * @param languageDescriptor
 	 * @param langDescr
 	 */
 	public XtextSourceViewerConfiguration(XtextModelManager manager,
-			IPreferenceStore preferenceStore) {
+			IPreferenceStore preferenceStore, IEditorPart editor) {
 		super(preferenceStore);
+		this.editor = editor;
 		this.modelManager = manager;
+	}
+
+	@Override
+	public IReconciler getReconciler(ISourceViewer sourceViewer) {
+		return new MonoReconciler(new XtextReconcilingStrategy(modelManager,
+				editor), false);
 	}
 
 	public IPresentationReconciler getPresentationReconciler(
