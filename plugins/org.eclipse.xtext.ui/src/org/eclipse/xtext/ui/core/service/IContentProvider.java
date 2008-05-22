@@ -8,10 +8,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.service;
 
+import java.util.List;
+
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.core.parsetree.LeafNode;
+
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
 public interface IContentProvider extends
 		org.eclipse.xtext.ui.core.language.ILanguageService {
+	public String getLabel(LeafNode node);
+
+	public Image getIcon(LeafNode node);
+
+	public Object getParent(LeafNode node);
+
+	public List<?> getChildren(LeafNode node);
 }

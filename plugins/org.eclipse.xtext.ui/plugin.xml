@@ -3,4 +3,15 @@
 <plugin>
    <extension-point id="languageDescriptor" name="Xtext Language Descriptor" schema="schema/languageDescriptor.exsd"/>
    <extension-point id="syntaxColorer" name="Xtext Syntax Colorer Service" schema="schema/syntaxColorer.exsd"/>
+   <extension
+         id="org.eclipse.xtext.ui.core.problem"
+         name="Xtext Editor Problem Marker"
+         point="org.eclipse.core.resources.markers">
+      <persistent
+            value="true">
+      </persistent>
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+   </extension>
 </plugin>
