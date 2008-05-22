@@ -9,17 +9,21 @@
 package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.ILanguageFacade;
 
-public abstract class AbstractXtextResourceFactory implements Resource.Factory {
+/**
+ * Creates classpath URIs for files in the workspace.
+ * 
+ * See {@link ClasspathUriResolver} for details.
+ * 
+ * @author koehnlein
+ */
+public class ClasspathUriUtil {
 
-	public Resource createResource(URI uri) {
-		ILanguageFacade facade = getLanguageFacade();
-		XtextResource xtextResource = new XtextResource(facade, uri);
-		return xtextResource;
-	}
+    public static final String CLASSPATH_SCHEME = "classpath";
 
-	protected abstract ILanguageFacade getLanguageFacade();
+    public static boolean isClassapthUri(URI uri) {
+        String scheme = uri.scheme();
+        return CLASSPATH_SCHEME.equals(scheme);
+    }
 
 }
