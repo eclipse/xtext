@@ -10,58 +10,59 @@ package org.eclipse.xtext.core.parser;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.core.parsetree.LeafNode;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
 public abstract class AbstractParser implements IParser {
-	
-	public EObject parse(InputStream in, IElementFactory factory,
-			IParseErrorHandler handler, IParsePostProcessor postProcessor) {
+
+	public EObject parse(InputStream in, IElementFactory factory, IParseErrorHandler handler,
+			IParsePostProcessor postProcessor) {
 		try {
-			EObject parseResult = (EObject) parse(new ANTLRInputStream(in),factory,handler);
+			EObject parseResult = (EObject) parse(new ANTLRInputStream(in), factory, handler);
 			return postProcessor.postProcess(parseResult);
 		} catch (IOException e) {
 			throw new WrappedException(e);
 		}
 	}
 
-	public EObject parse(InputStream in, IElementFactory factory,
-			IParseErrorHandler handler) {
-		return parse(in,factory,handler,getDefaultPostProcessor());
+	public EObject parse(InputStream in, IElementFactory factory, IParseErrorHandler handler) {
+		return parse(in, factory, handler, getDefaultPostProcessor());
 	}
 
 	public EObject parse(InputStream in, IElementFactory factory) {
-		return parse(in,factory,getDefaultHandler(),getDefaultPostProcessor());
+		return parse(in, factory, getDefaultHandler(), getDefaultPostProcessor());
 	}
-	
+
 	public EObject parse(InputStream in) {
-		return parse(in,getDefaultASTFactory(),getDefaultHandler(),getDefaultPostProcessor());
+		return parse(in, getDefaultASTFactory(), getDefaultHandler(), getDefaultPostProcessor());
 	}
-	
+
 	protected abstract IElementFactory getDefaultASTFactory();
-	
+
 	protected IParsePostProcessor getDefaultPostProcessor() {
 		return new IParsePostProcessor() {
 			public EObject postProcess(EObject parseResult) {
-				// TODO: add code 
+				// TODO: add code
 				return parseResult;
 			}
 		};
-	}	
-	
+	}
+
 	protected IParseErrorHandler getDefaultHandler() {
 		return new IParseErrorHandler() {
 
-			public void handleParserError(int line, int offset, int length, int tokenType, String text,
-					String message, Object context) {
-				throw new ParseException(offset,length,text,message);
-			}};
+			public void handleParserError(LeafNode node, String message, Object context) {
+				throw new ParseException(node, message);
+			}
+		};
 	}
 
 	protected abstract Object parse(ANTLRInputStream in, IElementFactory factory, IParseErrorHandler handler);

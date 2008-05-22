@@ -45,12 +45,19 @@ public class InternalXtextParser extends Parser {
         this.factory = factory;
     }
 
+    private AbstractNode lastNodeCreated = null;
+    public AbstractNode getLastNodeCreated() {
+    	return lastNodeCreated;
+    }
+
     public CompositeNode createCompositeNode(String grammarElementID, CompositeNode parentNode) {
         CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
         if (parentNode!=null) parentNode.getChildren().add(compositeNode);
         compositeNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
+        lastNodeCreated = compositeNode;
         return compositeNode;
     }
+    
 
     public Object createLeafNode(String grammarElementID, CompositeNode parentNode, String feature) {
         Token token = input.LT(-1);
@@ -64,6 +71,7 @@ public class InternalXtextParser extends Parser {
                 leafNode.setHidden(true);
     		    setLexerRule(leafNode, hidden);
                 parentNode.getChildren().add(leafNode);
+                lastNodeCreated = leafNode;
             }
         }
         LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
@@ -71,6 +79,7 @@ public class InternalXtextParser extends Parser {
         leafNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
         leafNode.setFeature(feature);
         parentNode.getChildren().add(leafNode);
+        lastNodeCreated = leafNode;
         return leafNode;
     }
 
@@ -85,6 +94,7 @@ public class InternalXtextParser extends Parser {
                 leafNode.setHidden(true);
                 setLexerRule(leafNode, hidden);
                 parentNode.getChildren().add(leafNode);
+                lastNodeCreated = leafNode;
             }
         }
     }
@@ -109,6 +119,9 @@ public class InternalXtextParser extends Parser {
     }
 
     private CompositeNode currentNode;
+    public CompositeNode getCurrentNode() {
+    	return currentNode;
+    }
 
     private org.eclipse.xtext.Grammar grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/Xtext").getGrammar();;
 

@@ -38,13 +38,13 @@ public class HiddenTokensTest extends AbstractGeneratorTest {
 	public void testTrailingWhitespaceIsIncluded() throws Exception {
 		String model = "element foo;\nelement bar;  /* holla */ \n// stuff\n";
 		AbstractNode node = getRootNode(model);
-		assertEquals(node.serialize(),model);
+		assertEquals(model,node.serialize());
 	}
 	
 	public void testPrecedingWhitespaceIsIncluded() throws Exception {
 		String model = "//honolulu\n\t element foo;\nelement bar;";
 		AbstractNode node = getRootNode(model);
-		assertEquals(node.serialize(),model);
+		assertEquals(model,node.serialize());
 	}
 	
 }

@@ -74,6 +74,9 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	public EObject getModel(String model, IElementFactory factory) throws Exception {
 		return getModel(model, factory, null);
 	}
+	public EObject getModel(String model, IParseErrorHandler handler) throws Exception {
+		return getModel(model, getFacade().getElementFactory(), handler);
+	}
 
 	public EObject getModel(String model, IElementFactory factory, IParseErrorHandler errorHandler) throws Exception {
 		return getModel(new StringInputStream(model), factory, errorHandler);
@@ -150,6 +153,14 @@ public abstract class AbstractGeneratorTest extends TestCase {
 
 	protected CompositeNode getRootNode(String model2) throws Exception {
 		EObject model = getModel(model2);
+		NodeAdapter adapter = (NodeAdapter) EcoreUtil.getAdapter(model.eAdapters(), AbstractNode.class);
+		if (adapter==null)
+			return null;
+		return adapter.getParserNode();
+	}
+	
+	protected CompositeNode getRootNode(String model2, IParseErrorHandler handler) throws Exception {
+		EObject model = getModel(model2,handler);
 		NodeAdapter adapter = (NodeAdapter) EcoreUtil.getAdapter(model.eAdapters(), AbstractNode.class);
 		if (adapter==null)
 			return null;

@@ -5,14 +5,10 @@ package org.eclipse.xtext.parser;
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.Token;
-import org.eclipse.xtext.*;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.LanguageFacadeFactory;
 import org.eclipse.xtext.core.parser.IElementFactory;
 import org.eclipse.xtext.core.parser.IParseErrorHandler;
-import org.eclipse.xtext.core.parser.antlr.AntlrExceptionTool;
-import org.eclipse.xtext.core.parser.antlr.TokenTool;
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.xtext.parser.internal.InternalXtextLexer;
 import org.eclipse.xtext.parser.internal.InternalXtextParser;
 
@@ -21,31 +17,20 @@ public class XtextParser extends org.eclipse.xtext.core.parser.AbstractParser {
 	@Override
 	protected EObject parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
-		InternalXtextLexer lexer = new InternalXtextLexer(in) {
-			@Override
-			public void reportError(RecognitionException re) {
-				Token t = AntlrExceptionTool.getToken(re);
-				handler.handleParserError(TokenTool.getLine(t), TokenTool.getOffset(t), TokenTool.getLength(t), -1, TokenTool.getText(t), getErrorMessage(
-						re, getTokenNames()), re);
-			}
-		};
+		InternalXtextLexer lexer = new InternalXtextLexer(in);
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		InternalXtextParser parser = new InternalXtextParser(
 				stream, factory) {
 			@Override
 			public void reportError(RecognitionException re) {
-				Token t = AntlrExceptionTool.getToken(re);
-				handler.handleParserError(TokenTool.getLine(t), TokenTool.getOffset(t), TokenTool.getLength(t), t
-						.getType(), TokenTool.getText(t), getErrorMessage(
+				handler.handleParserError(null, getErrorMessage(
 						re, getTokenNames()), re);
 			}
 		};
 		try {
 			return parser.parse();
 		} catch (RecognitionException re) {
-			Token t = AntlrExceptionTool.getToken(re);
-			handler.handleParserError(TokenTool.getLine(t), TokenTool.getOffset(t), TokenTool.getLength(t), t
-						.getType(), TokenTool.getText(t), re.getMessage(), re);
+			handler.handleParserError(null, re.getMessage(), re);
 		}
 		return null;
 	}
