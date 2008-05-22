@@ -9,13 +9,31 @@
 
 package org.eclipse.xtext.reference.ui.services;
 
-import org.eclipse.xtext.ui.core.service.IContentProvider;
+import java.util.List;
 
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.core.parsetree.LeafNode;
+import org.eclipse.xtext.ui.core.service.IContentProvider;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- *
+ * 
  */
-public class ContentProvider
-		implements IContentProvider {
+public class ContentProvider implements IContentProvider {
+
+	public List<?> getChildren(LeafNode node) {
+		return node.eContents();
+	}
+
+	public Image getIcon(LeafNode node) {
+		return null;
+	}
+
+	public String getLabel(LeafNode node) {
+		return node.toString();
+	}
+
+	public Object getParent(LeafNode node) {
+		return node.eContainer();
+	}
 }
