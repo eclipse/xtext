@@ -11,6 +11,7 @@ package org.eclipse.xtext.parsetree;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.core.parser.IParseErrorHandler;
 import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.core.parsetree.CompositeNode;
 import org.eclipse.xtext.core.parsetree.LeafNode;
@@ -75,6 +76,22 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 		assertFalse(iter.hasNext());
 	}
 	
+	
+	public void testErrors1() throws Exception {
+		String model = "element # ;";
+		CompositeNode node = (CompositeNode) getRootNode(model, new IParseErrorHandler() {
+			public void handleParserError(LeafNode skippedNodes, String message, Object context) {
+				System.out.println(message);
+			}});
+		assertEquals(model, node.serialize());
+		EList<LeafNode> nodes = node.getLeafNodes();
+		assertEquals(5,nodes.size());
+		int offset = 0;
+		for (LeafNode leafNode : nodes) {
+			assertEquals(offset,leafNode.offset());
+			offset += leafNode.length();
+		}
+	}
 	
 	@Override
 	protected void setUp() throws Exception {
