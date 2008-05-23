@@ -22,12 +22,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.core.parser.IElementFactory;
-import org.eclipse.xtext.core.parser.IParseErrorHandler;
-import org.eclipse.xtext.core.parser.IParser;
-import org.eclipse.xtext.core.parsetree.AbstractNode;
-import org.eclipse.xtext.core.parsetree.CompositeNode;
-import org.eclipse.xtext.core.parsetree.NodeAdapter;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.openarchitectureware.expression.ExecutionContextImpl;
 import org.openarchitectureware.xtend.XtendFacade;
 

@@ -11,12 +11,12 @@ package org.eclipse.xtext.parsetree;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.core.parser.IParseErrorHandler;
-import org.eclipse.xtext.core.parsetree.AbstractNode;
-import org.eclipse.xtext.core.parsetree.CompositeNode;
-import org.eclipse.xtext.core.parsetree.LeafNode;
 import org.eclipse.xtext.dummy.DummyLanguageLanguageFacade;
 import org.eclipse.xtext.dummy.DummyLanguageStandaloneSetup;
+import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class LengthOffsetLineTest extends AbstractGeneratorTest {
