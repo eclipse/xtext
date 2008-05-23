@@ -60,7 +60,7 @@ public class TokenTypesExtensions {
 		}
 	}
 	
-	private static String char2Identifier(char x) {
+	public static String char2Identifier(char x) {
 		switch (x) {
 		case '+':
 			return "Plus";

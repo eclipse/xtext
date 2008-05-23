@@ -193,8 +193,7 @@ parse returns [EObject current] :
 
 // Rule «name»
 «ruleName()» returns [EObject current=null] 
-    @init { EObject temp=null;«IF !allActions().isEmpty» CompositeNode entryNode = currentNode;«ENDIF» }«REM»«ENDREM-»
-    «IF !allActions().isEmpty»@after { currentNode = entryNode; }«ENDIF»:
+    @init { EObject temp=null; }:
     «EXPAND ebnf FOR this.alternatives»;
 «ENDDEFINE»
 
@@ -241,7 +240,7 @@ parse returns [EObject current] :
         factory.«setOrAdd()»(temp, "«feature»",$current);
         $current = temp; 
         temp = null;
-        currentNode=«EXPAND createCompositeNode» 
+        «EXPAND insertCompositeNode» 
         associateNodeWithAstElement(currentNode, $current); 
     }
 «ENDDEFINE»
@@ -273,6 +272,15 @@ parse returns [EObject current] :
 	getID()
 	»" /* «
 	this.metaType.name» */, currentNode);«
+ENDDEFINE»
+
+«DEFINE insertCompositeNode FOR Action
+	»CompositeNode newNode = createCompositeNode("«
+	getID()
+	»" /* «
+	this.metaType.name» */, currentNode.getParent());
+	newNode.getChildren().add(currentNode);
+	currentNode = newNode;«
 ENDDEFINE»
 
 «DEFINE createLeafNode FOR emf::EObject
