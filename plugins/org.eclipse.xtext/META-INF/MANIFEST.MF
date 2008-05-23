@@ -21,4 +21,3 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.apache.commons.logging,
  org.openarchitectureware.util.stdlib,
  org.eclipse.emf.ecore.xmi;bundle-version="2.3.2"
-Eclipse-LazyStart: true

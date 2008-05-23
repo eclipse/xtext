@@ -28,7 +28,7 @@ public class XtextResourceSet extends ResourceSetImpl {
     }
 
     private URI resolveClasspathURI(URI uri) {
-        return resolver.resolve(classpathURIContext, uri);
+        return getClasspathUriResolver().resolve(getClasspathURIContext(), uri);
     }
 
     @Override
