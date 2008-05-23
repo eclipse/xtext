@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="xtext" nsURI="&quot;http://www.eclipse.org/2008/Xtext&quot;"/>
   <parserRules name="Grammar">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
@@ -129,6 +130,7 @@
     </alternatives>
   </parserRules>
   <parserRules name="Alternatives">
+    <type name="AbstractElement"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall" name="Group"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
@@ -143,9 +145,9 @@
         </abstractTokens>
       </abstractTokens>
     </alternatives>
-    <type name="AbstractElement"/>
   </parserRules>
   <parserRules name="Group">
+    <type name="AbstractElement"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall" name="AbstractToken"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
@@ -157,9 +159,9 @@
         </abstractTokens>
       </abstractTokens>
     </alternatives>
-    <type name="AbstractElement"/>
   </parserRules>
   <parserRules name="AbstractToken">
+    <type name="AbstractElement"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:Alternatives">
@@ -178,9 +180,9 @@
         </terminal>
       </abstractTokens>
     </alternatives>
-    <type name="AbstractElement"/>
   </parserRules>
   <parserRules name="Assignment">
+    <type name="Assignment"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Assignment" feature="feature" operator="=">
@@ -200,9 +202,9 @@
         <terminal xsi:type="xtext:RuleCall" name="AbstractTerminal"/>
       </abstractTokens>
     </alternatives>
-    <type name="Assignment"/>
   </parserRules>
   <parserRules name="Action">
+    <type name="Action"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
@@ -237,9 +239,9 @@
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Keyword" value="'}'"/>
     </alternatives>
-    <type name="Action"/>
   </parserRules>
   <parserRules name="AbstractTerminal">
+    <type name="AbstractElement"/>
     <alternatives xsi:type="xtext:Alternatives">
       <groups xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:RuleCall" name="Keyword"/>
@@ -247,9 +249,9 @@
       </groups>
       <groups xsi:type="xtext:RuleCall" name="ParenthesizedElement"/>
     </alternatives>
-    <type name="AbstractElement"/>
   </parserRules>
   <parserRules name="ParenthesizedElement">
+    <type name="AbstractElement"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Keyword" value="'('"/>
@@ -257,7 +259,6 @@
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Keyword" value="')'"/>
     </alternatives>
-    <type name="AbstractElement"/>
   </parserRules>
   <parserRules name="Keyword">
     <alternatives xsi:type="xtext:Assignment" feature="value" operator="=">
@@ -269,5 +270,4 @@
       <terminal xsi:type="xtext:RuleCall" name="ID"/>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="&quot;http://www.eclipse.org/2008/Xtext&quot;" name="xtext"/>
 </xtext:Grammar>

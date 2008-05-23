@@ -1,6 +1,7 @@
 package org.eclipse.xtext.parser.internal;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.XtextTokenTypes;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.ITokenTypes;
 import org.eclipse.xtext.parser.ParseException;
@@ -27,8 +28,8 @@ public class XtextTokenTypeResolver {
 
 
 		case 9:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 
 
@@ -58,15 +59,15 @@ public class XtextTokenTypeResolver {
 
 
 		case 10:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 		case 5:
 			// RULE_STRING
 			return BuiltinRules.BUILTIN_STRING;
 
 		default:
-			throw new ParseException(context, "Unknown antlr token type " + antlrTokenType);
+			return null;
 		}	
 	}
 	

@@ -4,9 +4,10 @@ package org.eclipse.xtext;
 import java.util.*;
 
 import org.eclipse.xtext.*;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parsetree.*;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.XtextASTFactory;
 
 public class XtextParseTreeConstructor extends AbstractParseTreeConstructor {
     protected ILanguageFacade getFacade() {

@@ -47,6 +47,6 @@ public class DoBootstrapping {
 		XtextParser xtext2Parser= new XtextParser();
 		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory());
 		GeneratorFacade.cleanFolder(srcGenPath);
-		GeneratorFacade.generate(grammarModel, languageName, languageNamespace, srcGenPath);
+		GeneratorFacade.generate(grammarModel, languageName, languageNamespace, srcGenPath, modelFileExtension);
 	}
 }

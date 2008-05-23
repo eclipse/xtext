@@ -1,6 +1,7 @@
 
 package org.eclipse.xtext.parser;
 
+import java.util.List;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -9,6 +10,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.LanguageFacadeFactory;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parsetree.LeafNode;
+
 import org.eclipse.xtext.parser.internal.InternalXtextLexer;
 import org.eclipse.xtext.parser.internal.InternalXtextParser;
 
@@ -22,8 +25,8 @@ public class XtextParser extends org.eclipse.xtext.parser.AbstractParser {
 		InternalXtextParser parser = new InternalXtextParser(
 				stream, factory) {
 			@Override
-			public void reportError(RecognitionException re) {
-				handler.handleParserError(null, getErrorMessage(
+			public void reportError(RecognitionException re, LeafNode ln) {
+				handler.handleParserError(ln, getErrorMessage(
 						re, getTokenNames()), re);
 			}
 		};
