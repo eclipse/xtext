@@ -1,6 +1,6 @@
 package org.eclipse.xtext.dummy;
 
-import org.eclipse.xtext.core.parser.ITokenTypes;
+import org.eclipse.xtext.parser.ITokenTypes;
 
 public interface DummyLanguageTokenTypes extends ITokenTypes {
 

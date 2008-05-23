@@ -16,8 +16,8 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.core.parsetree.AbstractNode;
-import org.eclipse.xtext.core.parsetree.NodeAdapter;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.reference.parser.ReferenceGrammarASTFactory;
 import org.eclipse.xtext.reference.parser.ReferenceGrammarParser;
 

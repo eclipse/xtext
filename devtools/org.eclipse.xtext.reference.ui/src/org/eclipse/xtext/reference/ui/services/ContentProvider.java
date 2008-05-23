@@ -12,7 +12,7 @@ package org.eclipse.xtext.reference.ui.services;
 import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.core.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.core.service.IContentProvider;
 
 /**

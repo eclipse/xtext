@@ -3,9 +3,9 @@ package org.eclipse.xtext.parser.internal;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.XtextGrammarTestTokenTypes;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.core.parser.ITokenTypes;
-import org.eclipse.xtext.core.parser.ParseException;
-import org.eclipse.xtext.core.parsetree.AbstractNode;
+import org.eclipse.xtext.parser.ITokenTypes;
+import org.eclipse.xtext.parser.ParseException;
+import org.eclipse.xtext.parsetree.AbstractNode;
 
 public class XtextGrammarTestTokenTypeResolver {
 
@@ -15,21 +15,21 @@ public class XtextGrammarTestTokenTypeResolver {
 
 
 		case 8:
-			// RULE_WS
-			return BuiltinRules.BUILTIN_WS;
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 
 
 
 		case 7:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
+			// RULE_INT
+			return BuiltinRules.BUILTIN_INT;
 
 
 
 		case 9:
-			// RULE_INT
-			return BuiltinRules.BUILTIN_INT;
+			// RULE_WS
+			return BuiltinRules.BUILTIN_WS;
 
 
 
@@ -59,8 +59,8 @@ public class XtextGrammarTestTokenTypeResolver {
 
 
 		case 10:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 		case 5:
 			// RULE_STRING

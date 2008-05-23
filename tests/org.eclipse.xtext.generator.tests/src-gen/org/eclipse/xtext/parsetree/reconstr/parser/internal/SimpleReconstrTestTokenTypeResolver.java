@@ -3,9 +3,9 @@ package org.eclipse.xtext.parsetree.reconstr.parser.internal;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestTokenTypes;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.core.parser.ITokenTypes;
-import org.eclipse.xtext.core.parser.ParseException;
-import org.eclipse.xtext.core.parsetree.AbstractNode;
+import org.eclipse.xtext.parser.ITokenTypes;
+import org.eclipse.xtext.parser.ParseException;
+import org.eclipse.xtext.parsetree.AbstractNode;
 
 public class SimpleReconstrTestTokenTypeResolver {
 
@@ -18,34 +18,34 @@ public class SimpleReconstrTestTokenTypeResolver {
 			return BuiltinRules.BUILTIN_ID;
 
 		case 9:
-			// RULE_INT
-			return BuiltinRules.BUILTIN_INT;
+			// RULE_STRING
+			return BuiltinRules.BUILTIN_STRING;
 
 		case 8:
 			// RULE_WS
 			return BuiltinRules.BUILTIN_WS;
 
-		case 6:
-			// RULE_LEXER_BODY
-			return BuiltinRules.BUILTIN_LEXER_BODY;
-
 		case 11:
 			// RULE_ANY_OTHER
 			return BuiltinRules.BUILTIN_ANY_OTHER;
 
+		case 6:
+			// RULE_INT
+			return BuiltinRules.BUILTIN_INT;
 
-		case 7:
-			// RULE_STRING
-			return BuiltinRules.BUILTIN_STRING;
 
 		case 10:
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
+
+		case 7:
 			// RULE_ML_COMMENT
 			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 
 		case 5:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
+			// RULE_LEXER_BODY
+			return BuiltinRules.BUILTIN_LEXER_BODY;
 
 		default:
 			return null;

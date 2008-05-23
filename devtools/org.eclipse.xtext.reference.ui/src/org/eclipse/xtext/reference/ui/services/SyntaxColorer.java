@@ -13,8 +13,8 @@ import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.xtext.core.parser.ITokenTypes;
-import org.eclipse.xtext.core.parsetree.LeafNode;
+import org.eclipse.xtext.parser.ITokenTypes;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.core.editor.utils.CustomResourceLibrary;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
