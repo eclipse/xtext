@@ -10,7 +10,6 @@ package org.eclipse.xtext.parser;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.eclipse.emf.common.util.WrappedException;

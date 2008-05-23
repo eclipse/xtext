@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g 2008-05-23 10:24:31
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g 2008-05-23 16:57:09
 
 package org.eclipse.xtext.dummy.parser.internal; 
 
@@ -18,16 +18,16 @@ import java.util.ArrayList;
 
 public class InternalDummyLanguageParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_WS", "RULE_SL_COMMENT", "RULE_LEXER_BODY", "RULE_INT", "RULE_ANY_OTHER", "'optional'", "'element'", "';'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_WS", "RULE_INT", "RULE_LEXER_BODY", "RULE_SL_COMMENT", "RULE_ANY_OTHER", "'optional'", "'element'", "';'"
     };
     public static final int RULE_ML_COMMENT=6;
     public static final int RULE_ID=4;
     public static final int RULE_WS=7;
-    public static final int RULE_INT=10;
+    public static final int RULE_INT=8;
     public static final int EOF=-1;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_SL_COMMENT=10;
     public static final int RULE_LEXER_BODY=9;
 
         public InternalDummyLanguageParser(TokenStream input) {
@@ -240,7 +240,7 @@ public class InternalDummyLanguageParser extends Parser {
             	     
             	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
             	        
-            	    pushFollow(FOLLOW_ruleElement_in_ruleModel136);
+            	    pushFollow(FOLLOW_ruleElement_in_ruleModel132);
             	    lv_elements=ruleElement();
             	    _fsp--;
 
@@ -322,7 +322,7 @@ public class InternalDummyLanguageParser extends Parser {
                     // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:193:5: lv_optional= 'optional'
                     {
                     lv_optional=(Token)input.LT(1);
-                    match(input,12,FOLLOW_12_in_ruleElement185); 
+                    match(input,12,FOLLOW_12_in_ruleElement177); 
 
                             if (current==null) {
                                 current = factory.create("Element");
@@ -335,7 +335,7 @@ public class InternalDummyLanguageParser extends Parser {
 
             }
 
-            match(input,13,FOLLOW_13_in_ruleElement198); 
+            match(input,13,FOLLOW_13_in_ruleElement190); 
 
                     createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
                 
@@ -346,7 +346,7 @@ public class InternalDummyLanguageParser extends Parser {
             // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:207:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleElement217); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleElement209); 
              
                 createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
                 
@@ -378,7 +378,7 @@ public class InternalDummyLanguageParser extends Parser {
             	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:219:5: lv_descriptions= RULE_STRING
             	    {
             	    lv_descriptions=(Token)input.LT(1);
-            	    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleElement243); 
+            	    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleElement235); 
             	     
             	        createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"descriptions"); 
             	        
@@ -400,7 +400,7 @@ public class InternalDummyLanguageParser extends Parser {
 
             }
 
-            match(input,14,FOLLOW_14_in_ruleElement262); 
+            match(input,14,FOLLOW_14_in_ruleElement254); 
 
                     createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
                 
@@ -435,11 +435,11 @@ public class InternalDummyLanguageParser extends Parser {
 
     public static final BitSet FOLLOW_ruleModel_in_parse59 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_parse73 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleElement_in_ruleModel136 = new BitSet(new long[]{0x0000000000003002L});
-    public static final BitSet FOLLOW_12_in_ruleElement185 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleElement198 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleElement217 = new BitSet(new long[]{0x0000000000004020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleElement243 = new BitSet(new long[]{0x0000000000004020L});
-    public static final BitSet FOLLOW_14_in_ruleElement262 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleElement_in_ruleModel132 = new BitSet(new long[]{0x0000000000003002L});
+    public static final BitSet FOLLOW_12_in_ruleElement177 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleElement190 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleElement209 = new BitSet(new long[]{0x0000000000004020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleElement235 = new BitSet(new long[]{0x0000000000004020L});
+    public static final BitSet FOLLOW_14_in_ruleElement254 = new BitSet(new long[]{0x0000000000000002L});
 
 }

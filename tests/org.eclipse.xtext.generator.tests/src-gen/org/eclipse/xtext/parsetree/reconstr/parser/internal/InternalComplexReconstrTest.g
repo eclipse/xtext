@@ -169,7 +169,7 @@ parse returns [EObject current] :
 
 // Rule Op
 ruleOp returns [EObject current=null] 
-    @init { EObject temp=null; CompositeNode entryNode = currentNode; }    @after { currentNode = entryNode; }:
+    @init { EObject temp=null; }:
 (this_Term=ruleTerm
     { 
         $current = $this_Term.current; 
@@ -180,7 +180,9 @@ ruleOp returns [EObject current=null]
         factory.add(temp, "addOperands",$current);
         $current = temp; 
         temp = null;
-        currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode); 
+        CompositeNode newNode = createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+	newNode.getChildren().add(currentNode);
+	currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
 )'+' 
@@ -208,7 +210,9 @@ ruleOp returns [EObject current=null]
         factory.add(temp, "minusOperands",$current);
         $current = temp; 
         temp = null;
-        currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode); 
+        CompositeNode newNode = createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+	newNode.getChildren().add(currentNode);
+	currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
 )'-' 
@@ -234,7 +238,7 @@ ruleOp returns [EObject current=null]
 
 // Rule Term
 ruleTerm returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 (this_Atom=ruleAtom
     { 
         $current = $this_Atom.current; 
@@ -249,7 +253,7 @@ ruleTerm returns [EObject current=null]
 
 // Rule Atom
 ruleAtom returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 (
     lv_name=RULE_ID
     { 
@@ -267,7 +271,7 @@ ruleAtom returns [EObject current=null]
 
 // Rule Parens
 ruleParens returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 ((('(' 
 
     {
@@ -295,19 +299,19 @@ this_Op=ruleOp
 
 
 
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
-
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+
+RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+RULE_INT : ('0'..'9')+;
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
-RULE_INT : ('0'..'9')+;
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 

@@ -1,13 +1,9 @@
 
 package org.eclipse.xtext.grammargen.tests;
 
-import java.util.*;
-
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.grammargen.tests.parser.SimpleTestASTFactory;
 
 public class SimpleTestParseTreeConstructor extends AbstractParseTreeConstructor {
     protected ILanguageFacade getFacade() {

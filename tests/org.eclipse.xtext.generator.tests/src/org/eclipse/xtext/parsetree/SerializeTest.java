@@ -1,8 +1,6 @@
 package org.eclipse.xtext.parsetree;
 
 import org.eclipse.xtext.parser.IParseErrorHandler;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsLanguageFacade;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -17,10 +15,10 @@ public class SerializeTest extends AbstractGeneratorTest {
 	}
 	
 	public void testSimple() throws Exception {
-		String model = "/* foo */ x + y * ( /* stuff */ a // end \n * b)";
-		int x = model.length();
+	    String model = "/* foo */ x + y * ( /* stuff */ a // end \n * b)";
+        int x = model.length();
 		while (x>0) {
-			checkSerialize(model.substring(0,x));
+			checkSerialize(model.substring(0,x--));
 		}
 	}
 	

@@ -21,13 +21,9 @@
 «FILE pathName()+'/'+languageName()+'ParseTreeConstructor.java'»
 package «packageName()»;
 
-import java.util.*;
-
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
-import «packageName()».parser.«languageName()»ASTFactory;
 
 public class «languageName()»ParseTreeConstructor extends AbstractParseTreeConstructor {
     protected ILanguageFacade getFacade() {

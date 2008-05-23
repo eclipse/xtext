@@ -8,9 +8,10 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.parser.BaseEPackageAccess;
 import org.eclipse.xtext.metamodelreferencing.tests.parser.*;
 
-public class MetamodelRefTestLanguageFacade extends org.eclipse.xtext.parser.BaseEPackageAccess implements ILanguageFacade {
+public class MetamodelRefTestLanguageFacade extends BaseEPackageAccess implements ILanguageFacade {
     public static final String LANGUAGE_ID = "org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest";
     public String getLanguageId() {
     	return LANGUAGE_ID;
@@ -19,6 +20,7 @@ public class MetamodelRefTestLanguageFacade extends org.eclipse.xtext.parser.Bas
 	public static final String METAMODELREFTEST_GRAMMAR_CP_URI = "org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi";
 	private static Grammar GRAMMAR = null;
 	
+	@SuppressWarnings("unused")
 	public Grammar getGrammar() {	
 		if (GRAMMAR==null) {
 			// assert the XtextPackage implementation is loaded
@@ -46,6 +48,14 @@ public class MetamodelRefTestLanguageFacade extends org.eclipse.xtext.parser.Bas
 		return new EPackage[] {
 		
 		getSimpleTestEPackage()
+		
+		};
+	}
+
+	public EPackage[] getReferencedEPackages() {
+		return new EPackage[] {
+		
+		BaseEPackageAccess.getEPackageFromRegistry("http://www.eclipse.org/2008/Xtext")
 		
 		};
 	}

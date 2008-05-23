@@ -8,9 +8,10 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.parser.BaseEPackageAccess;
 import org.eclipse.xtext.testlanguages.parser.*;
 
-public class ActionTestLanguageLanguageFacade extends org.eclipse.xtext.parser.BaseEPackageAccess implements ILanguageFacade {
+public class ActionTestLanguageLanguageFacade extends BaseEPackageAccess implements ILanguageFacade {
     public static final String LANGUAGE_ID = "org/eclipse/xtext/testlanguages/ActionTestLanguage";
     public String getLanguageId() {
     	return LANGUAGE_ID;
@@ -19,6 +20,7 @@ public class ActionTestLanguageLanguageFacade extends org.eclipse.xtext.parser.B
 	public static final String ACTIONTESTLANGUAGE_GRAMMAR_CP_URI = "org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi";
 	private static Grammar GRAMMAR = null;
 	
+	@SuppressWarnings("unused")
 	public Grammar getGrammar() {	
 		if (GRAMMAR==null) {
 			// assert the XtextPackage implementation is loaded
@@ -46,6 +48,12 @@ public class ActionTestLanguageLanguageFacade extends org.eclipse.xtext.parser.B
 		return new EPackage[] {
 		
 		getActionLangEPackage()
+		
+		};
+	}
+
+	public EPackage[] getReferencedEPackages() {
+		return new EPackage[] {
 		
 		};
 	}

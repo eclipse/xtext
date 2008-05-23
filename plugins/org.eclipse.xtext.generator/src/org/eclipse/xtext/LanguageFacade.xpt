@@ -25,9 +25,10 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.parser.BaseEPackageAccess;
 import «packageName()».parser.*;
 
-public class «languageName()»LanguageFacade extends org.eclipse.xtext.parser.BaseEPackageAccess implements ILanguageFacade {
+public class «languageName()»LanguageFacade extends BaseEPackageAccess implements ILanguageFacade {
     public static final String LANGUAGE_ID = "«languageId()»";
     public String getLanguageId() {
     	return LANGUAGE_ID;
@@ -36,6 +37,7 @@ public class «languageName()»LanguageFacade extends org.eclipse.xtext.parser.Bas
 	public static final String «languageName().toUpperCase()»_GRAMMAR_CP_URI = "«pathName()»/«languageName()».xmi";
 	private static Grammar GRAMMAR = null;
 	
+	@SuppressWarnings("unused")
 	public Grammar getGrammar() {	
 		if (GRAMMAR==null) {
 			// assert the XtextPackage implementation is loaded
@@ -62,7 +64,15 @@ public class «languageName()»LanguageFacade extends org.eclipse.xtext.parser.Bas
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {
 		«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm SEPARATOR ","»
-		get«gmm.name»EPackage()
+		get«gmm.name.toFirstUpper()»EPackage()
+		«ENDFOREACH»
+		};
+	}
+
+	public EPackage[] getReferencedEPackages() {
+		return new EPackage[] {
+		«FOREACH metamodelDeclarations.typeSelect(ReferencedMetamodel) AS rmm SEPARATOR ","»
+		BaseEPackageAccess.getEPackageFromRegistry(«rmm.uri»)
 		«ENDFOREACH»
 		};
 	}
@@ -71,7 +81,7 @@ public class «languageName()»LanguageFacade extends org.eclipse.xtext.parser.Bas
 	public static final String «gmm.name.toUpperCase()»_NS_URI = "«gmm.nsURI.trimFromStartAndEnd(1)»";
 	public static final String «gmm.name.toUpperCase()»_CP_URI = "«pathName()»/«gmm.name».ecore";
 	
-	public static EPackage get«gmm.name»EPackage() {	
+	public static EPackage get«gmm.name.toFirstUpper()»EPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(«gmm.name.toUpperCase()»_NS_URI)) {
 			EPackage p = loadEcoreFile(«languageName()»LanguageFacade.class.getClassLoader(),«gmm.name.toUpperCase()»_CP_URI);
 			if (p!=null) {

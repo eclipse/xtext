@@ -36,21 +36,21 @@ public class LexerLanguageTokenTypeResolver {
 			// RULE_IMPLICITTOKENTYPE
 			return (LexerRule) getGrammarElement("//@lexerRules.1");
 
-		case 10:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
-
 		case 7:
 			// RULE_STRING
 			return (LexerRule) getGrammarElement("//@lexerRules.2");
+
+		case 10:
+			// RULE_INT
+			return BuiltinRules.BUILTIN_INT;
 
 		case 5:
 			// RULE_EXPLICITTOKENTYPE
 			return (LexerRule) getGrammarElement("//@lexerRules.0");
 
 		case 12:
-			// RULE_INT
-			return BuiltinRules.BUILTIN_INT;
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 		default:
 			return null;
