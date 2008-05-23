@@ -10,7 +10,7 @@
 package org.eclipse.xtext.ui.core.service;
 
 import org.eclipse.jface.text.TextAttribute;
-import org.eclipse.xtext.core.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.core.language.ILanguageService;
 
 /**

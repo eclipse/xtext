@@ -11,9 +11,9 @@ package org.eclipse.xtext.ui.core;
 import java.io.InputStream;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.core.parser.IElementFactory;
-import org.eclipse.xtext.core.parser.IParseErrorHandler;
-import org.eclipse.xtext.core.parser.IParser;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parser.IParser;
 
 /**
  * @author Dennis Hübner - Initial contribution and API

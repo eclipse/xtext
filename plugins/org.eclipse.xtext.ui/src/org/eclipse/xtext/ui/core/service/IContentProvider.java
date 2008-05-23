@@ -11,7 +11,7 @@ package org.eclipse.xtext.ui.core.service;
 import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.core.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 
 /**
  * @author Dennis Hübner - Initial contribution and API

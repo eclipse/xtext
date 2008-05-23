@@ -9,7 +9,7 @@
 package org.eclipse.xtext.ui.core.language;
 
 import org.eclipse.jface.text.TextAttribute;
-import org.eclipse.xtext.core.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
 /**
