@@ -42,6 +42,8 @@ public abstract class AbstractEcoreElementFactory implements IElementFactory {
 
 	@SuppressWarnings("unchecked")
 	public void add(EObject _this, String feature, Object value) {
+		if (value==null)
+			return;
 	    if (value instanceof Token) {
 			value = ((Token) value).getText();
 		}
