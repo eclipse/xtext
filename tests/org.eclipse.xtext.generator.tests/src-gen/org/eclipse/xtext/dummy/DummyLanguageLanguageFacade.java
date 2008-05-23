@@ -8,9 +8,10 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.parser.BaseEPackageAccess;
 import org.eclipse.xtext.dummy.parser.*;
 
-public class DummyLanguageLanguageFacade extends org.eclipse.xtext.parser.BaseEPackageAccess implements ILanguageFacade {
+public class DummyLanguageLanguageFacade extends BaseEPackageAccess implements ILanguageFacade {
     public static final String LANGUAGE_ID = "org/eclipse/xtext/dummy/DummyLanguage";
     public String getLanguageId() {
     	return LANGUAGE_ID;
@@ -19,6 +20,7 @@ public class DummyLanguageLanguageFacade extends org.eclipse.xtext.parser.BaseEP
 	public static final String DUMMYLANGUAGE_GRAMMAR_CP_URI = "org/eclipse/xtext/dummy/DummyLanguage.xmi";
 	private static Grammar GRAMMAR = null;
 	
+	@SuppressWarnings("unused")
 	public Grammar getGrammar() {	
 		if (GRAMMAR==null) {
 			// assert the XtextPackage implementation is loaded
@@ -46,6 +48,12 @@ public class DummyLanguageLanguageFacade extends org.eclipse.xtext.parser.BaseEP
 		return new EPackage[] {
 		
 		getDummyLangEPackage()
+		
+		};
+	}
+
+	public EPackage[] getReferencedEPackages() {
+		return new EPackage[] {
 		
 		};
 	}

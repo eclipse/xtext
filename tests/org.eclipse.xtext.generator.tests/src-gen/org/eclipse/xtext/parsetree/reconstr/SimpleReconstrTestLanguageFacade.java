@@ -8,9 +8,10 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.parser.BaseEPackageAccess;
 import org.eclipse.xtext.parsetree.reconstr.parser.*;
 
-public class SimpleReconstrTestLanguageFacade extends org.eclipse.xtext.parser.BaseEPackageAccess implements ILanguageFacade {
+public class SimpleReconstrTestLanguageFacade extends BaseEPackageAccess implements ILanguageFacade {
     public static final String LANGUAGE_ID = "org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest";
     public String getLanguageId() {
     	return LANGUAGE_ID;
@@ -19,6 +20,7 @@ public class SimpleReconstrTestLanguageFacade extends org.eclipse.xtext.parser.B
 	public static final String SIMPLERECONSTRTEST_GRAMMAR_CP_URI = "org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi";
 	private static Grammar GRAMMAR = null;
 	
+	@SuppressWarnings("unused")
 	public Grammar getGrammar() {	
 		if (GRAMMAR==null) {
 			// assert the XtextPackage implementation is loaded
@@ -45,7 +47,13 @@ public class SimpleReconstrTestLanguageFacade extends org.eclipse.xtext.parser.B
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {
 		
-		getsimplerewritetestEPackage()
+		getSimplerewritetestEPackage()
+		
+		};
+	}
+
+	public EPackage[] getReferencedEPackages() {
+		return new EPackage[] {
 		
 		};
 	}
@@ -54,7 +62,7 @@ public class SimpleReconstrTestLanguageFacade extends org.eclipse.xtext.parser.B
 	public static final String SIMPLEREWRITETEST_NS_URI = "http://simple/rewrite/test";
 	public static final String SIMPLEREWRITETEST_CP_URI = "org/eclipse/xtext/parsetree/reconstr/simplerewritetest.ecore";
 	
-	public static EPackage getsimplerewritetestEPackage() {	
+	public static EPackage getSimplerewritetestEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(SIMPLEREWRITETEST_NS_URI)) {
 			EPackage p = loadEcoreFile(SimpleReconstrTestLanguageFacade.class.getClassLoader(),SIMPLEREWRITETEST_CP_URI);
 			if (p!=null) {

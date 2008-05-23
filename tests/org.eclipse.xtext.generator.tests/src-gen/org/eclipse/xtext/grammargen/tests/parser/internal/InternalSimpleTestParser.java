@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-23 10:24:27
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-23 16:57:04
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
@@ -18,16 +18,16 @@ import java.util.ArrayList;
 
 public class InternalSimpleTestParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_WS", "RULE_SL_COMMENT", "RULE_LEXER_BODY", "RULE_INT", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_ML_COMMENT", "RULE_STRING", "RULE_WS", "RULE_INT", "RULE_LEXER_BODY", "RULE_SL_COMMENT", "RULE_ANY_OTHER"
     };
-    public static final int RULE_ML_COMMENT=6;
+    public static final int RULE_ML_COMMENT=5;
     public static final int RULE_ID=4;
     public static final int RULE_WS=7;
-    public static final int RULE_INT=10;
+    public static final int RULE_INT=8;
     public static final int EOF=-1;
-    public static final int RULE_STRING=5;
+    public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_SL_COMMENT=10;
     public static final int RULE_LEXER_BODY=9;
 
         public InternalSimpleTestParser(TokenStream input) {
@@ -225,7 +225,7 @@ public class InternalSimpleTestParser extends Parser {
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:174:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo125); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo121); 
              
                 createLeafNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
                 
@@ -266,6 +266,6 @@ public class InternalSimpleTestParser extends Parser {
 
     public static final BitSet FOLLOW_ruleFoo_in_parse59 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_parse73 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFoo125 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFoo121 = new BitSet(new long[]{0x0000000000000002L});
 
 }

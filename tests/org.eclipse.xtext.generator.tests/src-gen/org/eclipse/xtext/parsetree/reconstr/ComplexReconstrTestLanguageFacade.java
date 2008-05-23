@@ -8,9 +8,10 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.parser.BaseEPackageAccess;
 import org.eclipse.xtext.parsetree.reconstr.parser.*;
 
-public class ComplexReconstrTestLanguageFacade extends org.eclipse.xtext.parser.BaseEPackageAccess implements ILanguageFacade {
+public class ComplexReconstrTestLanguageFacade extends BaseEPackageAccess implements ILanguageFacade {
     public static final String LANGUAGE_ID = "org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest";
     public String getLanguageId() {
     	return LANGUAGE_ID;
@@ -19,6 +20,7 @@ public class ComplexReconstrTestLanguageFacade extends org.eclipse.xtext.parser.
 	public static final String COMPLEXRECONSTRTEST_GRAMMAR_CP_URI = "org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi";
 	private static Grammar GRAMMAR = null;
 	
+	@SuppressWarnings("unused")
 	public Grammar getGrammar() {	
 		if (GRAMMAR==null) {
 			// assert the XtextPackage implementation is loaded
@@ -45,7 +47,13 @@ public class ComplexReconstrTestLanguageFacade extends org.eclipse.xtext.parser.
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {
 		
-		getcomplexrewritetestEPackage()
+		getComplexrewritetestEPackage()
+		
+		};
+	}
+
+	public EPackage[] getReferencedEPackages() {
+		return new EPackage[] {
 		
 		};
 	}
@@ -54,7 +62,7 @@ public class ComplexReconstrTestLanguageFacade extends org.eclipse.xtext.parser.
 	public static final String COMPLEXREWRITETEST_NS_URI = "http://complex/rewrite/test";
 	public static final String COMPLEXREWRITETEST_CP_URI = "org/eclipse/xtext/parsetree/reconstr/complexrewritetest.ecore";
 	
-	public static EPackage getcomplexrewritetestEPackage() {	
+	public static EPackage getComplexrewritetestEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(COMPLEXREWRITETEST_NS_URI)) {
 			EPackage p = loadEcoreFile(ComplexReconstrTestLanguageFacade.class.getClassLoader(),COMPLEXREWRITETEST_CP_URI);
 			if (p!=null) {

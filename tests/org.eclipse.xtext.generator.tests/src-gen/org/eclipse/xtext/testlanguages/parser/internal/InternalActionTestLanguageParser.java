@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g 2008-05-23 10:24:34
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g 2008-05-23 16:57:12
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -18,16 +18,16 @@ import java.util.ArrayList;
 
 public class InternalActionTestLanguageParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_WS", "RULE_SL_COMMENT", "RULE_LEXER_BODY", "RULE_INT", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_ML_COMMENT", "RULE_STRING", "RULE_WS", "RULE_INT", "RULE_LEXER_BODY", "RULE_SL_COMMENT", "RULE_ANY_OTHER"
     };
-    public static final int RULE_ML_COMMENT=6;
+    public static final int RULE_ML_COMMENT=5;
     public static final int RULE_ID=4;
     public static final int RULE_WS=7;
-    public static final int RULE_INT=10;
+    public static final int RULE_INT=8;
     public static final int EOF=-1;
-    public static final int RULE_STRING=5;
+    public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_SL_COMMENT=10;
     public static final int RULE_LEXER_BODY=9;
 
         public InternalActionTestLanguageParser(TokenStream input) {
@@ -240,7 +240,7 @@ public class InternalActionTestLanguageParser extends Parser {
             	     
             	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
             	        
-            	    pushFollow(FOLLOW_ruleElement_in_ruleModel136);
+            	    pushFollow(FOLLOW_ruleElement_in_ruleModel132);
             	    lv_children=ruleElement();
             	    _fsp--;
 
@@ -294,7 +294,7 @@ public class InternalActionTestLanguageParser extends Parser {
         EObject lv_items = null;
 
 
-         EObject temp=null; CompositeNode entryNode = currentNode; 
+         EObject temp=null; 
         try {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:192:1: ( (this_Item= ruleItem ( () (lv_items= ruleItem ) ) ) )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:192:1: (this_Item= ruleItem ( () (lv_items= ruleItem ) ) )
@@ -302,7 +302,7 @@ public class InternalActionTestLanguageParser extends Parser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:192:1: (this_Item= ruleItem ( () (lv_items= ruleItem ) ) )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:192:2: this_Item= ruleItem ( () (lv_items= ruleItem ) )
             {
-            pushFollow(FOLLOW_ruleItem_in_ruleElement180);
+            pushFollow(FOLLOW_ruleItem_in_ruleElement168);
             this_Item=ruleItem();
             _fsp--;
 
@@ -320,19 +320,21 @@ public class InternalActionTestLanguageParser extends Parser {
                     factory.add(temp, "items",current);
                     current = temp; 
                     temp = null;
-                    currentNode=createCompositeNode("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode); 
+                    CompositeNode newNode = createCompositeNode("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+            	newNode.getChildren().add(currentNode);
+            	currentNode = newNode; 
                     associateNodeWithAstElement(currentNode, current); 
                 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:205:2: (lv_items= ruleItem )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:207:5: lv_items= ruleItem
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:207:2: (lv_items= ruleItem )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:209:5: lv_items= ruleItem
             {
              
                     currentNode=createCompositeNode("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                 
-            pushFollow(FOLLOW_ruleItem_in_ruleElement217);
+            pushFollow(FOLLOW_ruleItem_in_ruleElement205);
             lv_items=ruleItem();
             _fsp--;
 
@@ -355,7 +357,6 @@ public class InternalActionTestLanguageParser extends Parser {
 
             }
 
-             currentNode = entryNode; 
         }
          
         	catch (RecognitionException re) { 
@@ -378,39 +379,41 @@ public class InternalActionTestLanguageParser extends Parser {
 
 
     // $ANTLR start ruleItem
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:222:1: ruleItem returns [EObject current=null] : ( () (lv_name= RULE_ID ) ) ;
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:224:1: ruleItem returns [EObject current=null] : ( () (lv_name= RULE_ID ) ) ;
     public EObject ruleItem() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
 
-         EObject temp=null; CompositeNode entryNode = currentNode; 
+         EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:224:1: ( ( () (lv_name= RULE_ID ) ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:224:1: ( () (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:226:1: ( ( () (lv_name= RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:226:1: ( () (lv_name= RULE_ID ) )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:224:1: ( () (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:224:2: () (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:226:1: ( () (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:226:2: () (lv_name= RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:224:2: ()
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:225:5: 
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:226:2: ()
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:227:5: 
             {
              
                     temp=factory.create("Thing");
                     factory.set(temp, "content",current);
                     current = temp; 
                     temp = null;
-                    currentNode=createCompositeNode("//@parserRules.2/@alternatives/@abstractTokens.0" /* xtext::Action */, currentNode); 
+                    CompositeNode newNode = createCompositeNode("//@parserRules.2/@alternatives/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+            	newNode.getChildren().add(currentNode);
+            	currentNode = newNode; 
                     associateNodeWithAstElement(currentNode, current); 
                 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:233:2: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:234:5: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:237:2: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:238:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleItem277); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleItem257); 
              
                 createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
                 
@@ -429,7 +432,6 @@ public class InternalActionTestLanguageParser extends Parser {
 
             }
 
-             currentNode = entryNode; 
         }
          
         	catch (RecognitionException re) { 
@@ -455,9 +457,9 @@ public class InternalActionTestLanguageParser extends Parser {
 
     public static final BitSet FOLLOW_ruleModel_in_parse59 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_parse73 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleElement_in_ruleModel136 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_ruleItem_in_ruleElement180 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleItem_in_ruleElement217 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleItem277 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleElement_in_ruleModel132 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_ruleItem_in_ruleElement168 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleItem_in_ruleElement205 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleItem257 = new BitSet(new long[]{0x0000000000000002L});
 
 }

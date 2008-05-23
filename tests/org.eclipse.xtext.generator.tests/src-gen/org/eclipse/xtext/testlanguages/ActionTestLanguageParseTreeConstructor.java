@@ -1,13 +1,9 @@
 
 package org.eclipse.xtext.testlanguages;
 
-import java.util.*;
-
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.testlanguages.parser.ActionTestLanguageASTFactory;
 
 public class ActionTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
     protected ILanguageFacade getFacade() {

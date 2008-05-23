@@ -19,8 +19,8 @@ public class SimpleTest2TokenTypeResolver {
 			return BuiltinRules.BUILTIN_ID;
 
 		case 9:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
+			// RULE_LEXER_BODY
+			return BuiltinRules.BUILTIN_LEXER_BODY;
 
 		case 8:
 			// RULE_WS
@@ -31,17 +31,17 @@ public class SimpleTest2TokenTypeResolver {
 			return BuiltinRules.BUILTIN_ANY_OTHER;
 
 		case 6:
-			// RULE_STRING
-			return BuiltinRules.BUILTIN_STRING;
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 
 		case 10:
-			// RULE_LEXER_BODY
-			return BuiltinRules.BUILTIN_LEXER_BODY;
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 		case 7:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
+			// RULE_STRING
+			return BuiltinRules.BUILTIN_STRING;
 
 
 		case 5:

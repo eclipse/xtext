@@ -10,28 +10,28 @@ T15 : '/' ;
 T16 : '(' ;
 T17 : ')' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 310
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
-
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 312
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 314
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 314
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
 // $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 316
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
 // $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 318
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 // $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 320
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 // $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 322
 RULE_INT : ('0'..'9')+;
 
 // $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 324
+RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
+
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 326
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 328
 RULE_ANY_OTHER : .;
 
 
