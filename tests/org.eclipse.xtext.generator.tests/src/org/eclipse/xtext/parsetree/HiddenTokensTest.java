@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
-import org.eclipse.xtext.core.parsetree.AbstractNode;
 import org.eclipse.xtext.dummy.DummyLanguageLanguageFacade;
 import org.eclipse.xtext.dummy.DummyLanguageStandaloneSetup;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class HiddenTokensTest extends AbstractGeneratorTest {
