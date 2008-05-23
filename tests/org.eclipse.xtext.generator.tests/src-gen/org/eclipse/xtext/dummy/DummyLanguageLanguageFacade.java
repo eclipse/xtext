@@ -5,12 +5,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.core.parser.IElementFactory;
-import org.eclipse.xtext.core.parser.IParser;
-import org.eclipse.xtext.core.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.dummy.parser.*;
 
-public class DummyLanguageLanguageFacade extends org.eclipse.xtext.core.parser.BaseEPackageAccess implements ILanguageFacade {
+public class DummyLanguageLanguageFacade extends org.eclipse.xtext.parser.BaseEPackageAccess implements ILanguageFacade {
     public static final String LANGUAGE_ID = "org/eclipse/xtext/dummy/DummyLanguage";
     public String getLanguageId() {
     	return LANGUAGE_ID;

@@ -8,15 +8,15 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.core.parser.IElementFactory;
-import org.eclipse.xtext.core.parser.IParseErrorHandler;
-import org.eclipse.xtext.core.parsetree.LeafNode;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parsetree.LeafNode;
 
 import org.eclipse.xtext.testlanguages.parser.internal.InternalLexerLanguageLexer;
 import org.eclipse.xtext.testlanguages.parser.internal.InternalLexerLanguageParser;
 
 
-public class LexerLanguageParser extends org.eclipse.xtext.core.parser.AbstractParser {
+public class LexerLanguageParser extends org.eclipse.xtext.parser.AbstractParser {
 	@Override
 	protected EObject parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {

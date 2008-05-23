@@ -18,10 +18,10 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.ILanguageFacade;
-import org.eclipse.xtext.core.parser.IParseErrorHandler;
-import org.eclipse.xtext.core.parsetree.AbstractNode;
-import org.eclipse.xtext.core.parsetree.LeafNode;
-import org.eclipse.xtext.core.parsetree.NodeAdapter;
+import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
 

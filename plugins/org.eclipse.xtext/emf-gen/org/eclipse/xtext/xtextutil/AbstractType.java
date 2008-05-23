@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractType.java,v 1.9 2008/05/21 12:02:29 jkohnlein Exp $
+ * $Id: AbstractType.java,v 1.10 2008/05/23 08:22:20 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextutil;
 

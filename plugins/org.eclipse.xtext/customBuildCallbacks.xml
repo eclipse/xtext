@@ -29,6 +29,33 @@
 					generateEditProject="false"
 					generateEditorProject="false">
 		</emf.Ecore2Java>
+		<emf.Ecore2Java model="${basedir}/model/parsetree.ecore" 
+					genModel="${basedir}/model/parsetree.genmodel" 
+					modelProject="${basedir}/org.eclipse.xtext" 
+					modelProjectFragmentPath="emf-gen" 
+					reconcileGenmodel="reload"
+					generateModelProject="false" 
+					generateJavaCode="true" 
+					generateEditProject="false" 
+					generateEditorProject="false"/>
+		<!-- EMF always moves the ecore file next to the genmodel and chages the genmodel accordingly. -->
+		<!-- Save the genmodel to restore it later --> 
+		<copy file="${basedir}/model/xtext.genmodel" tofile="${basedir}/model/xtext.genmodel.copy" overwrite="true"></copy>
+		<emf.Ecore2Java model="${basedir}/src-gen/org/eclipse/xtext/xtext.ecore" 
+					genModel="${basedir}/model/xtext.genmodel" 
+					modelProject="${basedir}/org.eclipse.xtext" 
+					modelProjectFragmentPath="emf-gen" 
+					reconcileGenmodel="reload" 
+					generateModelProject="false" 
+					generateJavaCode="true" 
+					generateEditProject="false" 
+					generateEditorProject="false"/>
+		<!-- Restore old genmodel -->
+		<copy file="${basedir}/model/xtext.genmodel.copy" tofile="${basedir}/model/xtext.genmodel" overwrite="true"></copy>
+		<delete>
+			<fileset file="${basedir}/model/xtext.genmodel.copy"></fileset>
+			<fileset file="${basedir}/model/xtext.ecore"></fileset>
+		</delete>
 		<eclipse.refreshLocal resource="/" depth="infinite"/>
 	</target>
 	

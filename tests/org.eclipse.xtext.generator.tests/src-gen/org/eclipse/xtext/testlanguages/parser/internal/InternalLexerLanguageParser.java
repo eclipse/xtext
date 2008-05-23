@@ -1,11 +1,11 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g 2008-05-22 17:17:18
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g 2008-05-23 10:19:00
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.core.parser.IElementFactory;
-import org.eclipse.xtext.core.parser.ParseException;
-import org.eclipse.xtext.core.parsetree.*;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.ParseException;
+import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.testlanguages.parser.internal.LexerLanguageTokenTypeResolver;
@@ -18,19 +18,19 @@ import java.util.ArrayList;
 
 public class InternalLexerLanguageParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_EXPLICITTOKENTYPE", "RULE_IMPLICITTOKENTYPE", "RULE_STRING", "RULE_SL_COMMENT", "RULE_LEXER_BODY", "RULE_WS", "RULE_INT", "RULE_ML_COMMENT", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_EXPLICITTOKENTYPE", "RULE_IMPLICITTOKENTYPE", "RULE_STRING", "RULE_LEXER_BODY", "RULE_INT", "RULE_ML_COMMENT", "RULE_WS", "RULE_SL_COMMENT", "RULE_ANY_OTHER"
     };
-    public static final int RULE_ML_COMMENT=12;
+    public static final int RULE_ML_COMMENT=10;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=10;
-    public static final int RULE_INT=11;
+    public static final int RULE_WS=11;
+    public static final int RULE_INT=9;
     public static final int EOF=-1;
     public static final int RULE_IMPLICITTOKENTYPE=6;
     public static final int RULE_STRING=7;
     public static final int RULE_ANY_OTHER=13;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_SL_COMMENT=12;
     public static final int RULE_EXPLICITTOKENTYPE=5;
-    public static final int RULE_LEXER_BODY=9;
+    public static final int RULE_LEXER_BODY=8;
 
         public InternalLexerLanguageParser(TokenStream input) {
             super(input);
@@ -168,14 +168,14 @@ public class InternalLexerLanguageParser extends Parser {
 
     // $ANTLR start parse
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:160:1: parse returns [EObject current] : ruleModel EOF ;
-    public final EObject parse() throws RecognitionException {
+    public EObject parse() throws RecognitionException {
         EObject current = null;
 
         EObject ruleModel1 = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:160:33: ( ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:161:5: ( ruleModel EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:161:5: ruleModel EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
@@ -213,7 +213,7 @@ public class InternalLexerLanguageParser extends Parser {
 
     // $ANTLR start ruleModel
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:171:1: ruleModel returns [EObject current=null] : (lv_children= ruleElement )* ;
-    public final EObject ruleModel() throws RecognitionException {
+    public EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_children = null;
@@ -221,7 +221,7 @@ public class InternalLexerLanguageParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:172:37: ( (lv_children= ruleElement )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:173:1: ( (lv_children= ruleElement )* )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:173:1: (lv_children= ruleElement )*
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:173:1: (lv_children= ruleElement )*
@@ -288,7 +288,7 @@ public class InternalLexerLanguageParser extends Parser {
 
     // $ANTLR start ruleElement
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:190:1: ruleElement returns [EObject current=null] : ( ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) ) ) ;
-    public final EObject ruleElement() throws RecognitionException {
+    public EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
@@ -299,7 +299,7 @@ public class InternalLexerLanguageParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:191:37: ( ( ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:1: ( ( ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) ) ) )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:1: ( ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) ) )
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:1: ( ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) ) )

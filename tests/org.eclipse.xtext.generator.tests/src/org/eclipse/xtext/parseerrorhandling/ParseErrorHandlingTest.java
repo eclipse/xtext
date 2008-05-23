@@ -14,9 +14,9 @@ import java.util.List;
 
 import org.eclipse.xtext.XtextGrammarTestLanguageFacade;
 import org.eclipse.xtext.XtextGrammarTestStandaloneSetup;
-import org.eclipse.xtext.core.parser.IParseErrorHandler;
-import org.eclipse.xtext.core.parsetree.LeafNode;
+import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.XtextGrammarTestASTFactory;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class ParseErrorHandlingTest extends AbstractGeneratorTest {

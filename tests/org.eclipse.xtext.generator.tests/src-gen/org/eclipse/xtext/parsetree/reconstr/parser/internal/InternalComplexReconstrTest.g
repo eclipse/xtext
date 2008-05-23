@@ -9,9 +9,9 @@ package org.eclipse.xtext.parsetree.reconstr.parser.internal;
 package org.eclipse.xtext.parsetree.reconstr.parser.internal; 
 
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.core.parser.IElementFactory;
-import org.eclipse.xtext.core.parser.ParseException;
-import org.eclipse.xtext.core.parsetree.*;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.ParseException;
+import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.reconstr.parser.internal.ComplexReconstrTestTokenTypeResolver;
@@ -295,19 +295,19 @@ this_Op=ruleOp
 
 
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
-
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
-
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
-
 RULE_INT : ('0'..'9')+;
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+
+RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 

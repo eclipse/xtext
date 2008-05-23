@@ -5,7 +5,7 @@
     modelPluginID="org.eclipse.xtext" modelName="Parsetree" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="5.0" copyrightFields="false">
   <foreignModel>parsetree.ecore</foreignModel>
-  <genPackages prefix="Parsetree" basePackage="org.eclipse.xtext.core" disposableProviderFactory="true"
+  <genPackages prefix="Parsetree" basePackage="org.eclipse.xtext" disposableProviderFactory="true"
       ecorePackage="parsetree.ecore#/">
     <genClasses ecoreClass="parsetree.ecore#//CompositeNode">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference parsetree.ecore#//CompositeNode/children"/>

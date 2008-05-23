@@ -4,8 +4,8 @@ package org.eclipse.xtext.testlanguages;
 import java.util.*;
 
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.core.parser.*;
-import org.eclipse.xtext.core.parsetree.*;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.testlanguages.parser.LexerLanguageASTFactory;
 
