@@ -8,12 +8,17 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext,
+ org.eclipse.xtext.parser,
+ org.eclipse.xtext.parser.antlr,
+ org.eclipse.xtext.parsetree,
+ org.eclipse.xtext.parsetree.util,
+ org.eclipse.xtext.resource,
+ org.eclipse.xtext.util,
  org.eclipse.xtext.xtextutil,
  org.eclipse.xtext.xtextutil.util
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.antlr,
  org.apache.commons.logging,
  org.openarchitectureware.util.stdlib,
- org.eclipse.xtext.core;bundle-version="1.0.0",
  org.eclipse.emf.ecore.xmi;bundle-version="2.3.2"
 Eclipse-LazyStart: true
