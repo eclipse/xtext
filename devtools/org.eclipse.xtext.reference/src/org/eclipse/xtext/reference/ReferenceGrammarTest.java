@@ -63,6 +63,7 @@ public class ReferenceGrammarTest extends TestCase {
 	}
 	
 	private void dumpEObject(EObject object) {
+		System.out.println(object);
 		for (TreeIterator<EObject> allContents = object.eAllContents(); allContents.hasNext();) {
 			EObject element = allContents.next();
 			System.out.println(element);
