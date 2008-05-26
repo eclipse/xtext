@@ -22,12 +22,54 @@ grammar Internal«languageName()»;
 package «packageName()».parser.internal;
 }
 
+@lexer::members {
+
+  public Token nextToken() {
+        while (true) {
+            this.token = null;
+            this.channel = Token.DEFAULT_CHANNEL;
+            this.tokenStartCharIndex = input.index();
+            this.tokenStartCharPositionInLine = input.getCharPositionInLine();
+            this.tokenStartLine = input.getLine();
+            this.text = null;
+            if ( input.LA(1)==CharStream.EOF ) {
+                return Token.EOF_TOKEN;
+            }
+            try {
+                mTokens();
+                if ( this.token==null ) {
+                    emit();
+                }
+                else if ( this.token==Token.SKIP_TOKEN ) {
+                    continue;
+                }
+                return this.token;
+            }
+            catch (RecognitionException re) {
+                reportError(re);
+                if ( re instanceof NoViableAltException ) { recover(re); }
+                                // create token that holds mismatched char
+                Token t = new CommonToken(input, Token.INVALID_TOKEN_TYPE,
+                                          Token.HIDDEN_CHANNEL,
+                                          this.tokenStartCharIndex,
+                                          getCharIndex()-1);
+                t.setLine(this.tokenStartLine);
+                t.setCharPositionInLine(this.tokenStartCharPositionInLine);
+                emit(t);
+                return this.token;
+            }
+        }
+    }
+}
+
 @parser::header {
 package «packageName()».parser.internal; 
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.ParseException;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
@@ -60,12 +102,13 @@ import «packageName()».parser.internal.«languageName()»TokenTypeResolver;
             }
 
              public List<LeafNode> appendSkippedTokens() {
-                List<LeafNode> skipped = new ArrayList<LeafNode>();
-                Token token = input.LT(-1);
-                Token tokenBefore = input.get(lastConsumedIndex);
+               	List<LeafNode> skipped = new ArrayList<LeafNode>();
+                Token currentToken = input.LT(-1);
+                int currentTokenIndex = (currentToken == null) ? -1 : currentToken.getTokenIndex();
+                Token tokenBefore = (lastConsumedIndex == -1) ? null :input.get(lastConsumedIndex);
                 int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
-                if (indexOfTokenBefore+1<token.getTokenIndex()) {
-                    for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
+                if (indexOfTokenBefore+1<currentTokenIndex) {
+                    for (int x = indexOfTokenBefore+1; x<currentTokenIndex;x++) {
                         Token hidden = input.get(x);
                         LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
                         leafNode.setText(hidden.getText());
@@ -75,14 +118,14 @@ import «packageName()».parser.internal.«languageName()»TokenTypeResolver;
                         skipped.add(leafNode);
                     }
                 }
-                if(lastConsumedIndex < token.getTokenIndex()) {
+                if(lastConsumedIndex < currentTokenIndex) {
                     LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-                    leafNode.setText(token.getText());
+                    leafNode.setText(currentToken.getText());
                     leafNode.setHidden(true);
-                    setLexerRule(leafNode, token);
+                    setLexerRule(leafNode, currentToken);
                     currentNode.getChildren().add(leafNode);
                     skipped.add(leafNode);
-                    lastConsumedIndex = token.getTokenIndex();
+                    lastConsumedIndex = currentToken.getTokenIndex();
                 }
                 return skipped;
             }
@@ -176,13 +219,14 @@ import «packageName()».parser.internal.«languageName()»TokenTypeResolver;
     } 
 }
 
-parse returns [EObject current] : 
+parse returns [IParseResult result] 
+	@init { EObject current = null; } : 
     { currentNode = «EXPAND createCompositeNode FOR parserRules.first()» }
     «parserRules.first().ruleName()» 
-    { $current=$«parserRules.first().ruleName()».current; } 
+    { current=$«parserRules.first().ruleName()».current; }
     EOF 
     { appendTrailingHiddenTokens(currentNode); };
-    finally { appendAllTokens(); } 
+    finally { appendAllTokens(); $result = new ParseResult(current, currentNode); }
 
 «EXPAND rule FOREACH parserRules»
 

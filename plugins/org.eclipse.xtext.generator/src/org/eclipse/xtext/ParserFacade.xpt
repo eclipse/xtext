@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.LanguageFacadeFactory;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.LeafNode;
 
 import «packageName()».parser.internal.Internal«languageName()»Lexer;
@@ -34,7 +35,7 @@ import «packageName()».parser.internal.Internal«languageName()»Parser;
 
 public class «languageName()»Parser extends org.eclipse.xtext.parser.AbstractParser {
 	@Override
-	protected EObject parse(ANTLRInputStream in, IElementFactory factory,
+	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
 		Internal«languageName()»Lexer lexer = new Internal«languageName()»Lexer(in);
 		CommonTokenStream stream = new CommonTokenStream(lexer);
