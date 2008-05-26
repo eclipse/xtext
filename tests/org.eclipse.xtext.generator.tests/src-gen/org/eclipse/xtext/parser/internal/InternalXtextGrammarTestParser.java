@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g 2008-05-26 17:25:12
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g 2008-05-26 17:42:50
 
 package org.eclipse.xtext.parser.internal; 
 
@@ -82,7 +82,7 @@ public class InternalXtextGrammarTestParser extends Parser {
                             skipped.add(leafNode);
                         }
                     }
-                    if(lastConsumedIndex < currentToken.getTokenIndex()) {
+                    if(lastConsumedIndex < currentTokenIndex) {
                         LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
                         leafNode.setText(currentToken.getText());
                         leafNode.setHidden(true);

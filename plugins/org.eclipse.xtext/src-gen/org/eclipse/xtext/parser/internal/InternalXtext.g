@@ -5,12 +5,54 @@ grammar InternalXtext;
 package org.eclipse.xtext.parser.internal;
 }
 
+@lexer::members {
+
+  public Token nextToken() {
+        while (true) {
+            this.token = null;
+            this.channel = Token.DEFAULT_CHANNEL;
+            this.tokenStartCharIndex = input.index();
+            this.tokenStartCharPositionInLine = input.getCharPositionInLine();
+            this.tokenStartLine = input.getLine();
+            this.text = null;
+            if ( input.LA(1)==CharStream.EOF ) {
+                return Token.EOF_TOKEN;
+            }
+            try {
+                mTokens();
+                if ( this.token==null ) {
+                    emit();
+                }
+                else if ( this.token==Token.SKIP_TOKEN ) {
+                    continue;
+                }
+                return this.token;
+            }
+            catch (RecognitionException re) {
+                reportError(re);
+                if ( re instanceof NoViableAltException ) { recover(re); }
+                                // create token that holds mismatched char
+                Token t = new CommonToken(input, Token.INVALID_TOKEN_TYPE,
+                                          Token.HIDDEN_CHANNEL,
+                                          this.tokenStartCharIndex,
+                                          getCharIndex()-1);
+                t.setLine(this.tokenStartLine);
+                t.setCharPositionInLine(this.tokenStartCharPositionInLine);
+                emit(t);
+                return this.token;
+            }
+        }
+    }
+}
+
 @parser::header {
 package org.eclipse.xtext.parser.internal; 
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.ParseException;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
@@ -19,55 +61,58 @@ import org.eclipse.xtext.parser.internal.XtextTokenTypeResolver;
 
 @parser::members {
 
-	private IElementFactory factory;
-	public InternalXtextParser(TokenStream input, IElementFactory factory) {
-	    this(input);
-	    this.factory = factory;
-	}
-	
-	protected void reportError(RecognitionException re, LeafNode ln) {
-        	reportError(re);
-    	}
-    		
-    		private int lastConsumedIndex = -1;
-    	
-    	 	private void appendAllTokens() {
-        		for (int x = lastConsumedIndex+1; input.size()>x;input.consume(),x++) {
-    		        Token hidden = input.get(x);
-    		        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-    		        leafNode.setText(hidden.getText());
-    		        leafNode.setHidden(true);
-    		        setLexerRule(leafNode, hidden);
-    		        currentNode.getChildren().add(leafNode);
-    		    }
-        	}
+    private IElementFactory factory;
+    public InternalXtextParser(TokenStream input, IElementFactory factory) {
+        this(input);
+        this.factory = factory;
+    }
+    
+    protected void reportError(RecognitionException re, LeafNode ln) {
+            reportError(re);
+        }
+            
+            private int lastConsumedIndex = -1;
+        
+             private void appendAllTokens() {
+                for (int x = lastConsumedIndex+1; input.size()>x;input.consume(),x++) {
+                    Token hidden = input.get(x);
+                    LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+                    leafNode.setText(hidden.getText());
+                    leafNode.setHidden(true);
+                    setLexerRule(leafNode, hidden);
+                    currentNode.getChildren().add(leafNode);
+                }
+            }
 
-         	public List<LeafNode> appendSkippedTokens() {
-        		List<LeafNode> skipped = new ArrayList<LeafNode>();
-        		Token token = input.LT(-1);
-        		Token tokenBefore = input.get(lastConsumedIndex);
-        		int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
-        		if (indexOfTokenBefore+1<token.getTokenIndex()) {
-        		    for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
-        		        Token hidden = input.get(x);
-        		        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-        		        leafNode.setText(hidden.getText());
-        		        leafNode.setHidden(true);
-        		        setLexerRule(leafNode, hidden);
-        		        currentNode.getChildren().add(leafNode);
-        		        skipped.add(leafNode);
-        		    }
-        		}
-        		LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-		        leafNode.setText(token.getText());
-		        leafNode.setHidden(true);
-		        setLexerRule(leafNode, token);
-		        currentNode.getChildren().add(leafNode);
-		        skipped.add(leafNode);
-        		lastConsumedIndex = token.getTokenIndex();
-        		return skipped;
-        	}
-        	
+             public List<LeafNode> appendSkippedTokens() {
+               	List<LeafNode> skipped = new ArrayList<LeafNode>();
+                Token currentToken = input.LT(-1);
+                int currentTokenIndex = (currentToken == null) ? -1 : currentToken.getTokenIndex();
+                Token tokenBefore = (lastConsumedIndex == -1) ? null :input.get(lastConsumedIndex);
+                int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
+                if (indexOfTokenBefore+1<currentTokenIndex) {
+                    for (int x = indexOfTokenBefore+1; x<currentTokenIndex;x++) {
+                        Token hidden = input.get(x);
+                        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+                        leafNode.setText(hidden.getText());
+                        leafNode.setHidden(true);
+                        setLexerRule(leafNode, hidden);
+                        currentNode.getChildren().add(leafNode);
+                        skipped.add(leafNode);
+                    }
+                }
+                if(lastConsumedIndex < currentTokenIndex) {
+                    LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+                    leafNode.setText(currentToken.getText());
+                    leafNode.setHidden(true);
+                    setLexerRule(leafNode, currentToken);
+                    currentNode.getChildren().add(leafNode);
+                    skipped.add(leafNode);
+                    lastConsumedIndex = currentToken.getTokenIndex();
+                }
+                return skipped;
+            }
+            
             public CompositeNode createCompositeNode(String grammarElementID, CompositeNode parentNode) {
                 CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
                 if (parentNode!=null) parentNode.getChildren().add(compositeNode);
@@ -85,7 +130,7 @@ import org.eclipse.xtext.parser.internal.XtextTokenTypeResolver;
                         LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
                         leafNode.setText(hidden.getText());
                         leafNode.setHidden(true);
-            		    setLexerRule(leafNode, hidden);
+                        setLexerRule(leafNode, hidden);
                         parentNode.getChildren().add(leafNode);
                     }
                 }
@@ -114,62 +159,63 @@ import org.eclipse.xtext.parser.internal.XtextTokenTypeResolver;
                 }
             }
             
-        	public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
-        	    if(node.getElement() != null && node.getElement() != astElement) {
-        	        throw new ParseException(node, "Reassignment of astElement in parse tree node");
-        	    }
-        	    node.setElement(astElement);
-        	    if(astElement instanceof EObject) {
-        	        EObject eObject = (EObject) astElement;
-        	        NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
-        	        adapter.setParserNode(node); 
-        	    }
-        	}
-    	    
-	protected void setLexerRule(LeafNode node, Token t) {
-		LexerRule lexerRule = XtextTokenTypeResolver.getLexerRule(node, t.getType());
-		if(lexerRule != null) {
-			node.setGrammarElement(lexerRule);
-		}
-	}
-	
-	private CompositeNode currentNode;
-	public CompositeNode getCurrentNode() {
-		return currentNode;
-	}
-	
-	private org.eclipse.xtext.Grammar grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/Xtext").getGrammar();;
+            public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
+                if(node.getElement() != null && node.getElement() != astElement) {
+                    throw new ParseException(node, "Reassignment of astElement in parse tree node");
+                }
+                node.setElement(astElement);
+                if(astElement instanceof EObject) {
+                    EObject eObject = (EObject) astElement;
+                    NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
+                    adapter.setParserNode(node); 
+                }
+            }
+            
+    protected void setLexerRule(LeafNode node, Token t) {
+        LexerRule lexerRule = XtextTokenTypeResolver.getLexerRule(node, t.getType());
+        if(lexerRule != null) {
+            node.setGrammarElement(lexerRule);
+        }
+    }
+    
+    private CompositeNode currentNode;
+    public CompositeNode getCurrentNode() {
+        return currentNode;
+    }
+    
+    private org.eclipse.xtext.Grammar grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/Xtext").getGrammar();;
 
 }
 
 @rulecatch { 
-	catch (RecognitionException re) { 
+    catch (RecognitionException re) { 
         recover(input,re); 
         appendSkippedTokens();
         LeafNode ln = null;
         if (currentNode!=null) {
-	        CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-	        List<LeafNode> list = root.getLeafNodes();
-	        if (list.size()>lastErrorIndex)
-	        	ln = list.get(lastErrorIndex);
+            CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
+            List<LeafNode> list = root.getLeafNodes();
+            if (list.size()>lastErrorIndex)
+                ln = list.get(lastErrorIndex);
         }
-		reportError(re, ln);
-	} 
+        reportError(re, ln);
+    } 
 }
 
-parse returns [EObject current] : 
+parse returns [IParseResult result] 
+	@init { EObject current = null; } : 
     { currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
     ruleGrammar 
-    { $current=$ruleGrammar.current; } 
+    { current=$ruleGrammar.current; }
     EOF 
     { appendTrailingHiddenTokens(currentNode); };
-    finally { appendAllTokens(); } 
+    finally { appendAllTokens(); $result = new ParseResult(current, currentNode); }
 
 
 
 // Rule Grammar
 ruleGrammar returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 (((
     
     { 
@@ -224,7 +270,7 @@ ruleGrammar returns [EObject current=null]
 
 // Rule AbstractRule
 ruleAbstractRule returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 (this_LexerRule=ruleLexerRule
     { 
         $current = $this_LexerRule.current; 
@@ -239,7 +285,7 @@ ruleAbstractRule returns [EObject current=null]
 
 // Rule AbstractMetamodelDeclaration
 ruleAbstractMetamodelDeclaration returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 (this_GeneratedMetamodel=ruleGeneratedMetamodel
     { 
         $current = $this_GeneratedMetamodel.current; 
@@ -254,7 +300,7 @@ ruleAbstractMetamodelDeclaration returns [EObject current=null]
 
 // Rule GeneratedMetamodel
 ruleGeneratedMetamodel returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 ((('generate' 
 
     {
@@ -306,7 +352,7 @@ ruleGeneratedMetamodel returns [EObject current=null]
 
 // Rule ReferencedMetamodel
 ruleReferencedMetamodel returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 (('import' 
 
     {
@@ -346,7 +392,7 @@ ruleReferencedMetamodel returns [EObject current=null]
 
 // Rule LexerRule
 ruleLexerRule returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 ((((
     lv_name=RULE_ID
     { 
@@ -398,7 +444,7 @@ ruleLexerRule returns [EObject current=null]
 
 // Rule ParserRule
 ruleParserRule returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 (((((
     lv_name=RULE_ID
     { 
@@ -457,7 +503,7 @@ ruleParserRule returns [EObject current=null]
 
 // Rule TypeRef
 ruleTypeRef returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 (((
     lv_alias=RULE_ID
     { 
@@ -492,7 +538,7 @@ ruleTypeRef returns [EObject current=null]
 
 // Rule Alternatives
 ruleAlternatives returns [EObject current=null] 
-    @init { EObject temp=null; CompositeNode entryNode = currentNode; }    @after { currentNode = entryNode; }:
+    @init { EObject temp=null; }:
 (this_Group=ruleGroup
     { 
         $current = $this_Group.current; 
@@ -503,7 +549,9 @@ ruleAlternatives returns [EObject current=null]
         factory.add(temp, "groups",$current);
         $current = temp; 
         temp = null;
-        currentNode=createCompositeNode("//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode); 
+        CompositeNode newNode = createCompositeNode("//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
 )'|' 
@@ -529,7 +577,7 @@ ruleAlternatives returns [EObject current=null]
 
 // Rule Group
 ruleGroup returns [EObject current=null] 
-    @init { EObject temp=null; CompositeNode entryNode = currentNode; }    @after { currentNode = entryNode; }:
+    @init { EObject temp=null; }:
 (this_AbstractToken=ruleAbstractToken
     { 
         $current = $this_AbstractToken.current; 
@@ -540,7 +588,9 @@ ruleGroup returns [EObject current=null]
         factory.add(temp, "abstractTokens",$current);
         $current = temp; 
         temp = null;
-        currentNode=createCompositeNode("//@parserRules.9/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode); 
+        CompositeNode newNode = createCompositeNode("//@parserRules.9/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
 )(
@@ -561,7 +611,7 @@ ruleGroup returns [EObject current=null]
 
 // Rule AbstractToken
 ruleAbstractToken returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 (((this_Assignment=ruleAssignment
     { 
         $current = $this_Assignment.current; 
@@ -594,7 +644,7 @@ ruleAbstractToken returns [EObject current=null]
 
 // Rule Assignment
 ruleAssignment returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 (((
     lv_feature=RULE_ID
     { 
@@ -638,7 +688,7 @@ ruleAssignment returns [EObject current=null]
 
 // Rule Action
 ruleAction returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 ((((((('{' 
 
     {
@@ -710,7 +760,7 @@ ruleAction returns [EObject current=null]
 
 // Rule AbstractTerminal
 ruleAbstractTerminal returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 ((this_Keyword=ruleKeyword
     { 
         $current = $this_Keyword.current; 
@@ -730,7 +780,7 @@ ruleAbstractTerminal returns [EObject current=null]
 
 // Rule ParenthesizedElement
 ruleParenthesizedElement returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 (('(' 
 
     {
@@ -750,7 +800,7 @@ this_Alternatives=ruleAlternatives
 
 // Rule Keyword
 ruleKeyword returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 (
     lv_value=RULE_STRING
     { 
@@ -768,7 +818,7 @@ ruleKeyword returns [EObject current=null]
 
 // Rule RuleCall
 ruleRuleCall returns [EObject current=null] 
-    @init { EObject temp=null; }    :
+    @init { EObject temp=null; }:
 (
     lv_name=RULE_ID
     { 
@@ -785,19 +835,19 @@ ruleRuleCall returns [EObject current=null]
 
 
 
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
-
-RULE_INT : ('0'..'9')+;
-
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+RULE_INT : ('0'..'9')+;
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 

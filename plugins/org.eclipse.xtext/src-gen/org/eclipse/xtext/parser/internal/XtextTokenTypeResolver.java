@@ -22,14 +22,14 @@ public class XtextTokenTypeResolver {
 
 
 		case 7:
-			// RULE_WS
-			return BuiltinRules.BUILTIN_WS;
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 
 
 		case 9:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 
 
@@ -59,8 +59,8 @@ public class XtextTokenTypeResolver {
 
 
 		case 10:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
+			// RULE_WS
+			return BuiltinRules.BUILTIN_WS;
 
 		case 5:
 			// RULE_STRING

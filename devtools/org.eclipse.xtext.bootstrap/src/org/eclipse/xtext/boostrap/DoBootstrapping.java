@@ -45,7 +45,7 @@ public class DoBootstrapping {
 		//TODO make Xtext2Factory manual so one can overwrite 'getEPackages' in order to support generated epackages
 		EPackage.Registry.INSTANCE.put(XtextLanguageFacade.XTEXT_NS_URI, XtextPackage.eINSTANCE);
 		XtextParser xtext2Parser= new XtextParser();
-		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory());
+		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory()).getRootASTElement();
 		GeneratorFacade.cleanFolder(srcGenPath);
 		GeneratorFacade.generate(grammarModel, languageName, languageNamespace, srcGenPath, modelFileExtension);
 	}
