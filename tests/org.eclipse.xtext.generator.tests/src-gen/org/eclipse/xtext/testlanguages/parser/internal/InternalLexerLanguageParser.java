@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g 2008-05-23 16:57:11
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g 2008-05-26 11:25:26
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -42,55 +42,57 @@ public class InternalLexerLanguageParser extends Parser {
 
 
 
-    	private IElementFactory factory;
-    	public InternalLexerLanguageParser(TokenStream input, IElementFactory factory) {
-    	    this(input);
-    	    this.factory = factory;
-    	}
-    	
-    	protected void reportError(RecognitionException re, LeafNode ln) {
-            	reportError(re);
-        	}
-        		
-        		private int lastConsumedIndex = -1;
-        	
-        	 	private void appendAllTokens() {
-            		for (int x = lastConsumedIndex+1; input.size()>x;input.consume(),x++) {
-        		        Token hidden = input.get(x);
-        		        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-        		        leafNode.setText(hidden.getText());
-        		        leafNode.setHidden(true);
-        		        setLexerRule(leafNode, hidden);
-        		        currentNode.getChildren().add(leafNode);
-        		    }
-            	}
+        private IElementFactory factory;
+        public InternalLexerLanguageParser(TokenStream input, IElementFactory factory) {
+            this(input);
+            this.factory = factory;
+        }
+        
+        protected void reportError(RecognitionException re, LeafNode ln) {
+                reportError(re);
+            }
+                
+                private int lastConsumedIndex = -1;
+            
+                 private void appendAllTokens() {
+                    for (int x = lastConsumedIndex+1; input.size()>x;input.consume(),x++) {
+                        Token hidden = input.get(x);
+                        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+                        leafNode.setText(hidden.getText());
+                        leafNode.setHidden(true);
+                        setLexerRule(leafNode, hidden);
+                        currentNode.getChildren().add(leafNode);
+                    }
+                }
 
-             	public List<LeafNode> appendSkippedTokens() {
-            		List<LeafNode> skipped = new ArrayList<LeafNode>();
-            		Token token = input.LT(-1);
-            		Token tokenBefore = input.get(lastConsumedIndex);
-            		int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
-            		if (indexOfTokenBefore+1<token.getTokenIndex()) {
-            		    for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
-            		        Token hidden = input.get(x);
-            		        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-            		        leafNode.setText(hidden.getText());
-            		        leafNode.setHidden(true);
-            		        setLexerRule(leafNode, hidden);
-            		        currentNode.getChildren().add(leafNode);
-            		        skipped.add(leafNode);
-            		    }
-            		}
-            		LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-    		        leafNode.setText(token.getText());
-    		        leafNode.setHidden(true);
-    		        setLexerRule(leafNode, token);
-    		        currentNode.getChildren().add(leafNode);
-    		        skipped.add(leafNode);
-            		lastConsumedIndex = token.getTokenIndex();
-            		return skipped;
-            	}
-            	
+                 public List<LeafNode> appendSkippedTokens() {
+                    List<LeafNode> skipped = new ArrayList<LeafNode>();
+                    Token token = input.LT(-1);
+                    Token tokenBefore = input.get(lastConsumedIndex);
+                    int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
+                    if (indexOfTokenBefore+1<token.getTokenIndex()) {
+                        for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
+                            Token hidden = input.get(x);
+                            LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+                            leafNode.setText(hidden.getText());
+                            leafNode.setHidden(true);
+                            setLexerRule(leafNode, hidden);
+                            currentNode.getChildren().add(leafNode);
+                            skipped.add(leafNode);
+                        }
+                    }
+                    if(lastConsumedIndex < token.getTokenIndex()) {
+                        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+                        leafNode.setText(token.getText());
+                        leafNode.setHidden(true);
+                        setLexerRule(leafNode, token);
+                        currentNode.getChildren().add(leafNode);
+                        skipped.add(leafNode);
+                        lastConsumedIndex = token.getTokenIndex();
+                    }
+                    return skipped;
+                }
+                
                 public CompositeNode createCompositeNode(String grammarElementID, CompositeNode parentNode) {
                     CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
                     if (parentNode!=null) parentNode.getChildren().add(compositeNode);
@@ -108,7 +110,7 @@ public class InternalLexerLanguageParser extends Parser {
                             LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
                             leafNode.setText(hidden.getText());
                             leafNode.setHidden(true);
-                		    setLexerRule(leafNode, hidden);
+                            setLexerRule(leafNode, hidden);
                             parentNode.getChildren().add(leafNode);
                         }
                     }
@@ -137,37 +139,37 @@ public class InternalLexerLanguageParser extends Parser {
                     }
                 }
                 
-            	public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
-            	    if(node.getElement() != null && node.getElement() != astElement) {
-            	        throw new ParseException(node, "Reassignment of astElement in parse tree node");
-            	    }
-            	    node.setElement(astElement);
-            	    if(astElement instanceof EObject) {
-            	        EObject eObject = (EObject) astElement;
-            	        NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
-            	        adapter.setParserNode(node); 
-            	    }
-            	}
-        	    
-    	protected void setLexerRule(LeafNode node, Token t) {
-    		LexerRule lexerRule = LexerLanguageTokenTypeResolver.getLexerRule(node, t.getType());
-    		if(lexerRule != null) {
-    			node.setGrammarElement(lexerRule);
-    		}
-    	}
-    	
-    	private CompositeNode currentNode;
-    	public CompositeNode getCurrentNode() {
-    		return currentNode;
-    	}
-    	
-    	private org.eclipse.xtext.Grammar grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/LexerLanguage").getGrammar();;
+                public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
+                    if(node.getElement() != null && node.getElement() != astElement) {
+                        throw new ParseException(node, "Reassignment of astElement in parse tree node");
+                    }
+                    node.setElement(astElement);
+                    if(astElement instanceof EObject) {
+                        EObject eObject = (EObject) astElement;
+                        NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
+                        adapter.setParserNode(node); 
+                    }
+                }
+                
+        protected void setLexerRule(LeafNode node, Token t) {
+            LexerRule lexerRule = LexerLanguageTokenTypeResolver.getLexerRule(node, t.getType());
+            if(lexerRule != null) {
+                node.setGrammarElement(lexerRule);
+            }
+        }
+        
+        private CompositeNode currentNode;
+        public CompositeNode getCurrentNode() {
+            return currentNode;
+        }
+        
+        private org.eclipse.xtext.Grammar grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/LexerLanguage").getGrammar();;
 
 
 
 
     // $ANTLR start parse
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:160:1: parse returns [EObject current] : ruleModel EOF ;
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:162:1: parse returns [EObject current] : ruleModel EOF ;
     public EObject parse() throws RecognitionException {
         EObject current = null;
 
@@ -175,8 +177,8 @@ public class InternalLexerLanguageParser extends Parser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:161:5: ( ruleModel EOF )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:161:5: ruleModel EOF
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:163:5: ( ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:163:5: ruleModel EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_parse59);
@@ -191,18 +193,18 @@ public class InternalLexerLanguageParser extends Parser {
 
         }
          
-        	catch (RecognitionException re) { 
+            catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
                 LeafNode ln = null;
                 if (currentNode!=null) {
-        	        CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-        	        List<LeafNode> list = root.getLeafNodes();
-        	        if (list.size()>lastErrorIndex)
-        	        	ln = list.get(lastErrorIndex);
+                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
+                    List<LeafNode> list = root.getLeafNodes();
+                    if (list.size()>lastErrorIndex)
+                        ln = list.get(lastErrorIndex);
                 }
-        		reportError(re, ln);
-        	} 
+                reportError(re, ln);
+            } 
         finally {
              appendAllTokens(); 
         }
@@ -212,7 +214,7 @@ public class InternalLexerLanguageParser extends Parser {
 
 
     // $ANTLR start ruleModel
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:171:1: ruleModel returns [EObject current=null] : (lv_children= ruleElement )* ;
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:173:1: ruleModel returns [EObject current=null] : (lv_children= ruleElement )* ;
     public EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -221,10 +223,10 @@ public class InternalLexerLanguageParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:173:1: ( (lv_children= ruleElement )* )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:173:1: (lv_children= ruleElement )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:175:1: ( (lv_children= ruleElement )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:175:1: (lv_children= ruleElement )*
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:173:1: (lv_children= ruleElement )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:175:1: (lv_children= ruleElement )*
             loop1:
             do {
                 int alt1=2;
@@ -237,7 +239,7 @@ public class InternalLexerLanguageParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:175:5: lv_children= ruleElement
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:177:5: lv_children= ruleElement
             	    {
             	     
             	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -267,18 +269,18 @@ public class InternalLexerLanguageParser extends Parser {
 
         }
          
-        	catch (RecognitionException re) { 
+            catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
                 LeafNode ln = null;
                 if (currentNode!=null) {
-        	        CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-        	        List<LeafNode> list = root.getLeafNodes();
-        	        if (list.size()>lastErrorIndex)
-        	        	ln = list.get(lastErrorIndex);
+                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
+                    List<LeafNode> list = root.getLeafNodes();
+                    if (list.size()>lastErrorIndex)
+                        ln = list.get(lastErrorIndex);
                 }
-        		reportError(re, ln);
-        	} 
+                reportError(re, ln);
+            } 
         finally {
         }
         return current;
@@ -287,7 +289,7 @@ public class InternalLexerLanguageParser extends Parser {
 
 
     // $ANTLR start ruleElement
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:190:1: ruleElement returns [EObject current=null] : ( ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) ) ) ;
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:1: ruleElement returns [EObject current=null] : ( ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) ) ) ;
     public EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -299,23 +301,23 @@ public class InternalLexerLanguageParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:1: ( ( ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) ) ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:1: ( ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:194:1: ( ( ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:194:1: ( ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) ) )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:1: ( ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:2: ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:194:1: ( ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:194:2: ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) ) (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:2: ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:3: ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:194:2: ( ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:194:3: ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) ) (lv_h= RULE_STRING )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:3: ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:4: ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:194:3: ( ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:194:4: ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) ) (lv_g= RULE_IMPLICITTOKENTYPE )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:4: ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:5: (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:194:4: ( (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:194:5: (lv_name= RULE_ID ) (lv_f= RULE_EXPLICITTOKENTYPE )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:192:5: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:193:5: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:194:5: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:195:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleElement177); 
@@ -331,8 +333,8 @@ public class InternalLexerLanguageParser extends Parser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:204:2: (lv_f= RULE_EXPLICITTOKENTYPE )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:205:5: lv_f= RULE_EXPLICITTOKENTYPE
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:206:2: (lv_f= RULE_EXPLICITTOKENTYPE )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:207:5: lv_f= RULE_EXPLICITTOKENTYPE
             {
             lv_f=(Token)input.LT(1);
             match(input,RULE_EXPLICITTOKENTYPE,FOLLOW_RULE_EXPLICITTOKENTYPE_in_ruleElement202); 
@@ -351,8 +353,8 @@ public class InternalLexerLanguageParser extends Parser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:216:3: (lv_g= RULE_IMPLICITTOKENTYPE )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:217:5: lv_g= RULE_IMPLICITTOKENTYPE
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:218:3: (lv_g= RULE_IMPLICITTOKENTYPE )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:219:5: lv_g= RULE_IMPLICITTOKENTYPE
             {
             lv_g=(Token)input.LT(1);
             match(input,RULE_IMPLICITTOKENTYPE,FOLLOW_RULE_IMPLICITTOKENTYPE_in_ruleElement228); 
@@ -371,8 +373,8 @@ public class InternalLexerLanguageParser extends Parser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:228:3: (lv_h= RULE_STRING )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:229:5: lv_h= RULE_STRING
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:230:3: (lv_h= RULE_STRING )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:231:5: lv_h= RULE_STRING
             {
             lv_h=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleElement254); 
@@ -391,10 +393,10 @@ public class InternalLexerLanguageParser extends Parser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:240:3: (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:241:5: lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:242:3: (lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:243:5: lv_i= ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:241:10: ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:243:10: ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -406,13 +408,13 @@ public class InternalLexerLanguageParser extends Parser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("241:10: ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE )", 2, 0, input);
+                    new NoViableAltException("243:10: ( RULE_EXPLICITTOKENTYPE | RULE_IMPLICITTOKENTYPE )", 2, 0, input);
 
                 throw nvae;
             }
             switch (alt2) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:241:11: RULE_EXPLICITTOKENTYPE
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:243:11: RULE_EXPLICITTOKENTYPE
                     {
                     match(input,RULE_EXPLICITTOKENTYPE,FOLLOW_RULE_EXPLICITTOKENTYPE_in_ruleElement281); 
                      
@@ -422,7 +424,7 @@ public class InternalLexerLanguageParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:246:6: RULE_IMPLICITTOKENTYPE
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:248:6: RULE_IMPLICITTOKENTYPE
                     {
                     match(input,RULE_IMPLICITTOKENTYPE,FOLLOW_RULE_IMPLICITTOKENTYPE_in_ruleElement295); 
                      
@@ -451,18 +453,18 @@ public class InternalLexerLanguageParser extends Parser {
 
         }
          
-        	catch (RecognitionException re) { 
+            catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
                 LeafNode ln = null;
                 if (currentNode!=null) {
-        	        CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-        	        List<LeafNode> list = root.getLeafNodes();
-        	        if (list.size()>lastErrorIndex)
-        	        	ln = list.get(lastErrorIndex);
+                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
+                    List<LeafNode> list = root.getLeafNodes();
+                    if (list.size()>lastErrorIndex)
+                        ln = list.get(lastErrorIndex);
                 }
-        		reportError(re, ln);
-        	} 
+                reportError(re, ln);
+            } 
         finally {
         }
         return current;

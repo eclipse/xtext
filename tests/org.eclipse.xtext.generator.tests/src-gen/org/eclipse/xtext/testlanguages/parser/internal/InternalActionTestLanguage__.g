@@ -3,28 +3,28 @@ lexer grammar InternalActionTestLanguage;
 package org.eclipse.xtext.testlanguages.parser.internal;
 }
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 253
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 255
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 255
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 257
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 257
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 259
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 259
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 261
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 261
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 263
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 263
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 265
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 265
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 267
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 267
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 269
 RULE_ANY_OTHER : .;
 
 

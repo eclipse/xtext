@@ -68,7 +68,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	public void testParseError4() throws Exception {
 		ErrorHandler errors = new ErrorHandler();
 		Object object = getModel("import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'", new XtextGrammarTestASTFactory(), errors);
-		System.out.println(errors);
+		//System.out.println(errors);
 		assertWithXtend("'ID'", "parserRules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
 		assertWithXtend("null", "parserRules.first().eAllContents.typeSelect(XtextTest::Keyword).first().name", object);
 		assertWithXtend("\"'stuff'\"", "parserRules.get(1).eAllContents.typeSelect(XtextTest::Keyword).first().value", object);
