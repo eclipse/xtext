@@ -34,7 +34,7 @@ public class ReferenceGrammarTest extends TestCase {
 	ILanguageFacade f = LanguageFacadeFactory.getFacade(ReferenceGrammarLanguageFacade.LANGUAGE_ID);
 	
 	public void testParseNothing() throws Exception {
-		EObject object = f.getParser().parse(new StringInputStream(""));
+		EObject object = f.getParser().parse(new StringInputStream("")).getRootASTElement();
 		assertNull(object);
 	}
 	
@@ -49,7 +49,7 @@ public class ReferenceGrammarTest extends TestCase {
 			"}";
 		
 		ReferenceGrammarParser parser = new ReferenceGrammarParser();
-		EObject object = (EObject) parser.parse(new StringInputStream(grammar), new ReferenceGrammarASTFactory());
+		EObject object = (EObject) parser.parse(new StringInputStream(grammar), new ReferenceGrammarASTFactory()).getRootASTElement();
 		NodeAdapter adapter = (NodeAdapter) object.eAdapters().get(0);
 		AbstractNode node = adapter.getParserNode();
 		for (TreeIterator allContents = node.eAllContents(); allContents.hasNext();) {
