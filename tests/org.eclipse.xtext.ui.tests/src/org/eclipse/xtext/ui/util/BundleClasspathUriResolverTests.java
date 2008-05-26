@@ -1,8 +1,9 @@
-package org.eclipse.xtext.ui.core.util;
+package org.eclipse.xtext.ui.util;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
+import org.eclipse.xtext.ui.core.util.BundleClasspathUriResolver;
 
 public class BundleClasspathUriResolverTests extends AbstractClasspathUriResolverTests {
 
@@ -21,9 +22,9 @@ public class BundleClasspathUriResolverTests extends AbstractClasspathUriResolve
     }
 
     public void testClasspathUriForFileInPlugin() {
-        URI classpathUri = URI.createURI("classpath:/org/eclipse/xtext/ui/core/util/mydsl.ecore");
-        String expectedUri = "platform:/plugin/org.eclipse.xtext.ui.core/bin/org/eclipse/xtext/ui/core/util/mydsl.ecore";
-        URI normalizedUri = _resolver.resolve(Platform.getBundle("org.eclipse.xtext.ui.core"), classpathUri);
+        URI classpathUri = URI.createURI("classpath:/org/eclipse/xtext/ui/util/mydsl.ecore");
+        String expectedUri = "platform:/plugin/org.eclipse.xtext.ui/bin/org/eclipse/xtext/ui/util/mydsl.ecore";
+        URI normalizedUri = _resolver.resolve(Platform.getBundle("org.eclipse.xtext.ui"), classpathUri);
         assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
     }
 

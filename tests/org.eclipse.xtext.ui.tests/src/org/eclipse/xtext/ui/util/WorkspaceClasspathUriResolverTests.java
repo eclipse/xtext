@@ -1,10 +1,11 @@
-package org.eclipse.xtext.ui.core.util;
+package org.eclipse.xtext.ui.util;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
-import org.eclipse.xtext.ui.core.tests.Activator;
+import org.eclipse.xtext.ui.core.util.WorkspaceClasspathUriResolver;
+import org.eclipse.xtext.ui.tests.Activator;
 
 public class WorkspaceClasspathUriResolverTests extends AbstractClasspathUriResolverTests {
 

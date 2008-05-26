@@ -2,18 +2,18 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
-         point="org.eclipse.xtext.ui.core.languageDescriptor">
+         point="org.eclipse.xtext.ui.languageDescriptor">
       <languageDescriptor
-            id="org.eclipse.xtext.ui.core.tests.dummylanguage"
+            id="org.eclipse.xtext.ui.tests.dummylanguage"
             languageFacade="org.eclipse.xtext.XtextLanguageFacade"
             name="Dummy Language">
       </languageDescriptor>
    </extension>
    <extension
-         point="org.eclipse.xtext.ui.core.syntaxColorer">
+         point="org.eclipse.xtext.ui.syntaxColorer">
       <syntaxColorer
-            class="org.eclipse.xtext.ui.core.language.SyntaxColorer1"
-            languageId="org.eclipse.xtext.ui.core.tests.dummylanguage">
+            class="org.eclipse.xtext.ui.language.SyntaxColorer1"
+            languageId="org.eclipse.xtext.ui.tests.dummylanguage">
       </syntaxColorer>
    </extension>
 </plugin>

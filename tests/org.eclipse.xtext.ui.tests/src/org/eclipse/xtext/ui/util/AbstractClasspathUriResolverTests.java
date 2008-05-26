@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.core.util;
+package org.eclipse.xtext.ui.util;
 
 import junit.framework.TestCase;
 

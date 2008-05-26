@@ -6,13 +6,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core;
+package org.eclipse.xtext.ui;
 
 import java.io.InputStream;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 
 /**
@@ -21,20 +22,29 @@ import org.eclipse.xtext.parser.IParser;
  */
 public class TestParser implements IParser {
 
-	public EObject parse(InputStream in) {
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.parser.IParser#parse(java.io.InputStream, org.eclipse.xtext.parser.IElementFactory, org.eclipse.xtext.parser.IParseErrorHandler)
+	 */
+	public IParseResult parse(InputStream in, IElementFactory factory, IParseErrorHandler handler) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public EObject parse(InputStream in, IElementFactory factory,
-			IParseErrorHandler handler) {
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.parser.IParser#parse(java.io.InputStream, org.eclipse.xtext.parser.IElementFactory)
+	 */
+	public IParseResult parse(InputStream in, IElementFactory factory) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public EObject parse(InputStream in, IElementFactory factory) {
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.parser.IParser#parse(java.io.InputStream)
+	 */
+	public IParseResult parse(InputStream in) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }
