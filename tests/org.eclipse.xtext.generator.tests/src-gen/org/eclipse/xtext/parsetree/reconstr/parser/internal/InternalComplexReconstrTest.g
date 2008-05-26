@@ -19,55 +19,57 @@ import org.eclipse.xtext.parsetree.reconstr.parser.internal.ComplexReconstrTestT
 
 @parser::members {
 
-	private IElementFactory factory;
-	public InternalComplexReconstrTestParser(TokenStream input, IElementFactory factory) {
-	    this(input);
-	    this.factory = factory;
-	}
-	
-	protected void reportError(RecognitionException re, LeafNode ln) {
-        	reportError(re);
-    	}
-    		
-    		private int lastConsumedIndex = -1;
-    	
-    	 	private void appendAllTokens() {
-        		for (int x = lastConsumedIndex+1; input.size()>x;input.consume(),x++) {
-    		        Token hidden = input.get(x);
-    		        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-    		        leafNode.setText(hidden.getText());
-    		        leafNode.setHidden(true);
-    		        setLexerRule(leafNode, hidden);
-    		        currentNode.getChildren().add(leafNode);
-    		    }
-        	}
+    private IElementFactory factory;
+    public InternalComplexReconstrTestParser(TokenStream input, IElementFactory factory) {
+        this(input);
+        this.factory = factory;
+    }
+    
+    protected void reportError(RecognitionException re, LeafNode ln) {
+            reportError(re);
+        }
+            
+            private int lastConsumedIndex = -1;
+        
+             private void appendAllTokens() {
+                for (int x = lastConsumedIndex+1; input.size()>x;input.consume(),x++) {
+                    Token hidden = input.get(x);
+                    LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+                    leafNode.setText(hidden.getText());
+                    leafNode.setHidden(true);
+                    setLexerRule(leafNode, hidden);
+                    currentNode.getChildren().add(leafNode);
+                }
+            }
 
-         	public List<LeafNode> appendSkippedTokens() {
-        		List<LeafNode> skipped = new ArrayList<LeafNode>();
-        		Token token = input.LT(-1);
-        		Token tokenBefore = input.get(lastConsumedIndex);
-        		int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
-        		if (indexOfTokenBefore+1<token.getTokenIndex()) {
-        		    for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
-        		        Token hidden = input.get(x);
-        		        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-        		        leafNode.setText(hidden.getText());
-        		        leafNode.setHidden(true);
-        		        setLexerRule(leafNode, hidden);
-        		        currentNode.getChildren().add(leafNode);
-        		        skipped.add(leafNode);
-        		    }
-        		}
-        		LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-		        leafNode.setText(token.getText());
-		        leafNode.setHidden(true);
-		        setLexerRule(leafNode, token);
-		        currentNode.getChildren().add(leafNode);
-		        skipped.add(leafNode);
-        		lastConsumedIndex = token.getTokenIndex();
-        		return skipped;
-        	}
-        	
+             public List<LeafNode> appendSkippedTokens() {
+                List<LeafNode> skipped = new ArrayList<LeafNode>();
+                Token token = input.LT(-1);
+                Token tokenBefore = input.get(lastConsumedIndex);
+                int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
+                if (indexOfTokenBefore+1<token.getTokenIndex()) {
+                    for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
+                        Token hidden = input.get(x);
+                        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+                        leafNode.setText(hidden.getText());
+                        leafNode.setHidden(true);
+                        setLexerRule(leafNode, hidden);
+                        currentNode.getChildren().add(leafNode);
+                        skipped.add(leafNode);
+                    }
+                }
+                if(lastConsumedIndex < token.getTokenIndex()) {
+                    LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+                    leafNode.setText(token.getText());
+                    leafNode.setHidden(true);
+                    setLexerRule(leafNode, token);
+                    currentNode.getChildren().add(leafNode);
+                    skipped.add(leafNode);
+                    lastConsumedIndex = token.getTokenIndex();
+                }
+                return skipped;
+            }
+            
             public CompositeNode createCompositeNode(String grammarElementID, CompositeNode parentNode) {
                 CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
                 if (parentNode!=null) parentNode.getChildren().add(compositeNode);
@@ -85,7 +87,7 @@ import org.eclipse.xtext.parsetree.reconstr.parser.internal.ComplexReconstrTestT
                         LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
                         leafNode.setText(hidden.getText());
                         leafNode.setHidden(true);
-            		    setLexerRule(leafNode, hidden);
+                        setLexerRule(leafNode, hidden);
                         parentNode.getChildren().add(leafNode);
                     }
                 }
@@ -114,47 +116,47 @@ import org.eclipse.xtext.parsetree.reconstr.parser.internal.ComplexReconstrTestT
                 }
             }
             
-        	public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
-        	    if(node.getElement() != null && node.getElement() != astElement) {
-        	        throw new ParseException(node, "Reassignment of astElement in parse tree node");
-        	    }
-        	    node.setElement(astElement);
-        	    if(astElement instanceof EObject) {
-        	        EObject eObject = (EObject) astElement;
-        	        NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
-        	        adapter.setParserNode(node); 
-        	    }
-        	}
-    	    
-	protected void setLexerRule(LeafNode node, Token t) {
-		LexerRule lexerRule = ComplexReconstrTestTokenTypeResolver.getLexerRule(node, t.getType());
-		if(lexerRule != null) {
-			node.setGrammarElement(lexerRule);
-		}
-	}
-	
-	private CompositeNode currentNode;
-	public CompositeNode getCurrentNode() {
-		return currentNode;
-	}
-	
-	private org.eclipse.xtext.Grammar grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest").getGrammar();;
+            public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
+                if(node.getElement() != null && node.getElement() != astElement) {
+                    throw new ParseException(node, "Reassignment of astElement in parse tree node");
+                }
+                node.setElement(astElement);
+                if(astElement instanceof EObject) {
+                    EObject eObject = (EObject) astElement;
+                    NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
+                    adapter.setParserNode(node); 
+                }
+            }
+            
+    protected void setLexerRule(LeafNode node, Token t) {
+        LexerRule lexerRule = ComplexReconstrTestTokenTypeResolver.getLexerRule(node, t.getType());
+        if(lexerRule != null) {
+            node.setGrammarElement(lexerRule);
+        }
+    }
+    
+    private CompositeNode currentNode;
+    public CompositeNode getCurrentNode() {
+        return currentNode;
+    }
+    
+    private org.eclipse.xtext.Grammar grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest").getGrammar();;
 
 }
 
 @rulecatch { 
-	catch (RecognitionException re) { 
+    catch (RecognitionException re) { 
         recover(input,re); 
         appendSkippedTokens();
         LeafNode ln = null;
         if (currentNode!=null) {
-	        CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-	        List<LeafNode> list = root.getLeafNodes();
-	        if (list.size()>lastErrorIndex)
-	        	ln = list.get(lastErrorIndex);
+            CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
+            List<LeafNode> list = root.getLeafNodes();
+            if (list.size()>lastErrorIndex)
+                ln = list.get(lastErrorIndex);
         }
-		reportError(re, ln);
-	} 
+        reportError(re, ln);
+    } 
 }
 
 parse returns [EObject current] : 
@@ -181,8 +183,8 @@ ruleOp returns [EObject current=null]
         $current = temp; 
         temp = null;
         CompositeNode newNode = createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
-	newNode.getChildren().add(currentNode);
-	currentNode = newNode; 
+    newNode.getChildren().add(currentNode);
+    currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
 )'+' 
@@ -211,8 +213,8 @@ ruleOp returns [EObject current=null]
         $current = temp; 
         temp = null;
         CompositeNode newNode = createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
-	newNode.getChildren().add(currentNode);
-	currentNode = newNode; 
+    newNode.getChildren().add(currentNode);
+    currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
 )'-' 
