@@ -28,7 +28,7 @@ public class ReferenceGrammar {
 		InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filename);
 		
 		XtextParser xtext2Parser= new XtextParser();
-		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream);
+		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream).getRootASTElement();
 		
 		GeneratorFacade.generate(grammarModel, this.getClass().getSimpleName(),this.getClass().getPackage().getName().replace('.', '/'), PATH, "xtext");
 		System.out.println("Done.");
