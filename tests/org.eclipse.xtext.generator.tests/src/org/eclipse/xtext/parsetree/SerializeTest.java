@@ -14,6 +14,11 @@ public class SerializeTest extends AbstractGeneratorTest {
 		with(SimpleExpressionsLanguageFacade.LANGUAGE_ID);
 	}
 	
+	public void testUncompleteComment() throws Exception {
+	    String model ="a /* comment *";
+	    checkSerialize(model);
+	}
+	
 	public void testSimple() throws Exception {
 	    String model = "/* foo */ x + y * ( /* stuff */ a /* end  */\n * b)";
         int x = model.length();

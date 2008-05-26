@@ -18,16 +18,14 @@ import org.apache.tools.ant.filters.StringInputStream;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.LanguageFacadeFactory;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.openarchitectureware.expression.ExecutionContextImpl;
 import org.openarchitectureware.xtend.XtendFacade;
 
@@ -84,14 +82,18 @@ public abstract class AbstractGeneratorTest extends TestCase {
 
 	public EObject getModel(InputStream model, IElementFactory factory, IParseErrorHandler errorHandler)
 			throws Exception {
-		IParser parserInstance = getFacade().getParser();
-		if (errorHandler != null) {
-			return parserInstance.parse(model, factory, errorHandler);
-		} else {
-			return parserInstance.parse(model, factory);
-		}
+		return parse(model, factory, errorHandler).getRootASTElement();
 	}
 
+	public IParseResult parse(InputStream model, IElementFactory factory, IParseErrorHandler errorHandler) {
+	    IParser parserInstance = getFacade().getParser();
+        if (errorHandler != null) {
+            return parserInstance.parse(model, factory, errorHandler);
+        } else {
+            return parserInstance.parse(model, factory);
+        }
+	}
+	
 	public List<Invocation> getInvocations(String model) throws Exception {
 		return getInvocations(model, (IParseErrorHandler) null);
 	}
@@ -152,19 +154,11 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	}
 
 	protected CompositeNode getRootNode(String model2) throws Exception {
-		EObject model = getModel(model2);
-		NodeAdapter adapter = (NodeAdapter) EcoreUtil.getAdapter(model.eAdapters(), AbstractNode.class);
-		if (adapter==null)
-			return null;
-		return adapter.getParserNode();
+	    return parse(new StringInputStream(model2), getASTFactory(), null).getRootNode();
 	}
 	
 	protected CompositeNode getRootNode(String model2, IParseErrorHandler handler) throws Exception {
-		EObject model = getModel(model2,handler);
-		NodeAdapter adapter = (NodeAdapter) EcoreUtil.getAdapter(model.eAdapters(), AbstractNode.class);
-		if (adapter==null)
-			return null;
-		return adapter.getParserNode();
+        return parse(new StringInputStream(model2), getASTFactory(), handler).getRootNode();
 	}
 
 }
