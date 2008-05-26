@@ -6,10 +6,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.language;
+package org.eclipse.xtext.ui.language;
 
 import junit.framework.TestCase;
 
+import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
+import org.eclipse.xtext.ui.core.language.LanguageServiceFactory;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
 /**
@@ -19,14 +21,14 @@ import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 public class ServiceFactoryTest extends TestCase {
 
 	public void testGetSyntaxColorerHappyCase() {
-		LanguageDescriptor language = new LanguageDescriptor("org.eclipse.xtext.ui.core.tests.dummylanguage", "Dummy Language");
+		LanguageDescriptor language = new LanguageDescriptor("org.eclipse.xtext.ui.tests.dummylanguage", "Dummy Language");
 		ISyntaxColorer syntaxColorer = LanguageServiceFactory.getInstance().getSyntaxColorer(language);
 		assertNotNull(syntaxColorer);
-		assertEquals("org.eclipse.xtext.ui.core.language.SyntaxColorer1", syntaxColorer.getClass().getName());
+		assertEquals("org.eclipse.xtext.ui.language.SyntaxColorer1", syntaxColorer.getClass().getName());
 	}
 	
 	public void testGetServiceWithoutClass() {
-		LanguageDescriptor language = new LanguageDescriptor("org.eclipse.xtexte.ui.core.tests.language.ServiceWithoutClass");
+		LanguageDescriptor language = new LanguageDescriptor("org.eclipse.xtexte.ui.tests.language.ServiceWithoutClass");
 		ISyntaxColorer syntaxColorer =LanguageServiceFactory.getInstance().getSyntaxColorer(language);
 		assertNull(syntaxColorer);	
 	}

@@ -6,7 +6,10 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.language;
+package org.eclipse.xtext.ui.language;
+
+import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
+import org.eclipse.xtext.ui.core.language.LanguageDescriptorFactory;
 
 import junit.framework.TestCase;
 
@@ -17,9 +20,9 @@ import junit.framework.TestCase;
 public class LanguageFactoryTest extends TestCase {
 	public void testgetLanguageDescriptor() throws Exception {
 		LanguageDescriptor descr = LanguageDescriptorFactory
-				.createLanguageDescriptor(org.eclipse.xtext.ui.core.tests.Activator.PLUGIN_ID);
+				.createLanguageDescriptor(org.eclipse.xtext.ui.tests.Activator.PLUGIN_ID);
 		assertNotNull("LanguageDescriptor Initializing failed", descr);
-		assertEquals("org.eclipse.xtext.ui.core.tests.dummylanguage", descr
+		assertEquals("org.eclipse.xtext.ui.tests.dummylanguage", descr
 				.getId());
 		assertEquals("Dummy Language", descr.getName());
 	}

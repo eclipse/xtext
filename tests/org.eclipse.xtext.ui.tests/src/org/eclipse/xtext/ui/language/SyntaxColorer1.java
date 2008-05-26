@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.language;
+package org.eclipse.xtext.ui.language;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.xtext.parsetree.LeafNode;
