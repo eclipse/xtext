@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.xtext.ui.core2" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.xtext.ui" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.xtext.ui.core2" id="languageDescriptor" name="languageDescriptor"/>
+         <meta.schema plugin="org.eclipse.xtext.ui" id="languageDescriptor" name="languageDescriptor"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]

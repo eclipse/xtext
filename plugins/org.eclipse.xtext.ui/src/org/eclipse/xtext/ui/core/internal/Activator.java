@@ -8,7 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.internal;
 
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.core.editor.utils.CustomResourceLibrary;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -17,10 +20,12 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.eclipse.xtext.ui.core";
+	public static final String PLUGIN_ID = "org.eclipse.xtext.ui";
 
 	// The shared instance
 	private static Activator plugin;
+
+	private CustomResourceLibrary resourceLibrary;
 
 	/**
 	 * The constructor
@@ -49,6 +54,9 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
+		if (resourceLibrary != null)
+			resourceLibrary.dispose();
+		resourceLibrary = null;
 		super.stop(context);
 	}
 
@@ -60,4 +68,19 @@ public class Activator extends AbstractUIPlugin {
 	public static Activator getDefault() {
 		return plugin;
 	}
+
+	public CustomResourceLibrary getResourceLibrary() {
+		if (resourceLibrary == null) {
+			Display displ = null;
+			if (Display.getCurrent() != null) {
+				displ = Display.getCurrent();
+			}
+			if (PlatformUI.isWorkbenchRunning()) {
+				displ = PlatformUI.getWorkbench().getDisplay();
+			}
+			resourceLibrary = new CustomResourceLibrary(displ);
+		}
+		return resourceLibrary;
+	}
+
 }

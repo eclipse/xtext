@@ -2,14 +2,6 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
-         point="org.eclipse.xtext.ui.core.languageDescriptor">
-      <languageDescriptor
-            id="org.eclipse.xtext.ui.core.reference.referenceLanguageDescriptor"
-            languageFacade="org.eclipse.xtext.reference.ReferenceGrammarLanguageFacade"
-            name="Reference Project">
-      </languageDescriptor>
-   </extension>
-   <extension
          point="org.eclipse.ui.editors">
       <editor
             class="org.eclipse.xtext.ui.core.editor.BaseTextEditor"
@@ -20,10 +12,18 @@
       </editor>
    </extension>
    <extension
-         point="org.eclipse.xtext.ui.core.syntaxColorer">
+         point="org.eclipse.xtext.ui.languageDescriptor">
+      <languageDescriptor
+            id="org.eclipse.xtext.ui.reference.referenceLanguageDescriptor"
+            languageFacade="org.eclipse.xtext.reference.ReferenceGrammarLanguageFacade"
+            name="Reference Project">
+      </languageDescriptor>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.syntaxColorer">
       <syntaxColorer
-            class="org.eclipse.xtext.reference.ui.services.SyntaxColorer"
-            languageId="org.eclipse.xtext.ui.core.reference.referenceLanguageDescriptor">
+            class="org.eclipse.xtext.reference.ui.services.ReferenceSyntaxColorer"
+            languageId="org.eclipse.xtext.ui.reference.referenceLanguageDescriptor">
       </syntaxColorer>
    </extension>
 
