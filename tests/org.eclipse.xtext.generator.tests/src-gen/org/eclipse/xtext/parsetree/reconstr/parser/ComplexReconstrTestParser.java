@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.LanguageFacadeFactory;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.LeafNode;
 
 import org.eclipse.xtext.parsetree.reconstr.parser.internal.InternalComplexReconstrTestLexer;
@@ -18,7 +19,7 @@ import org.eclipse.xtext.parsetree.reconstr.parser.internal.InternalComplexRecon
 
 public class ComplexReconstrTestParser extends org.eclipse.xtext.parser.AbstractParser {
 	@Override
-	protected EObject parse(ANTLRInputStream in, IElementFactory factory,
+	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
 		InternalComplexReconstrTestLexer lexer = new InternalComplexReconstrTestLexer(in);
 		CommonTokenStream stream = new CommonTokenStream(lexer);

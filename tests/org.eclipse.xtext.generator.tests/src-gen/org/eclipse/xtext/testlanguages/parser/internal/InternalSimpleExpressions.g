@@ -5,12 +5,54 @@ grammar InternalSimpleExpressions;
 package org.eclipse.xtext.testlanguages.parser.internal;
 }
 
+@lexer::members {
+
+  public Token nextToken() {
+        while (true) {
+            this.token = null;
+            this.channel = Token.DEFAULT_CHANNEL;
+            this.tokenStartCharIndex = input.index();
+            this.tokenStartCharPositionInLine = input.getCharPositionInLine();
+            this.tokenStartLine = input.getLine();
+            this.text = null;
+            if ( input.LA(1)==CharStream.EOF ) {
+                return Token.EOF_TOKEN;
+            }
+            try {
+                mTokens();
+                if ( this.token==null ) {
+                    emit();
+                }
+                else if ( this.token==Token.SKIP_TOKEN ) {
+                    continue;
+                }
+                return this.token;
+            }
+            catch (RecognitionException re) {
+                reportError(re);
+                if ( re instanceof NoViableAltException ) { recover(re); }
+                                // create token that holds mismatched char
+                Token t = new CommonToken(input, Token.INVALID_TOKEN_TYPE,
+                                          Token.HIDDEN_CHANNEL,
+                                          this.tokenStartCharIndex,
+                                          getCharIndex()-1);
+                t.setLine(this.tokenStartLine);
+                t.setCharPositionInLine(this.tokenStartCharPositionInLine);
+                emit(t);
+                return this.token;
+            }
+        }
+    }
+}
+
 @parser::header {
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.ParseException;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
@@ -43,12 +85,13 @@ import org.eclipse.xtext.testlanguages.parser.internal.SimpleExpressionsTokenTyp
             }
 
              public List<LeafNode> appendSkippedTokens() {
-                List<LeafNode> skipped = new ArrayList<LeafNode>();
-                Token token = input.LT(-1);
-                Token tokenBefore = input.get(lastConsumedIndex);
+               	List<LeafNode> skipped = new ArrayList<LeafNode>();
+                Token currentToken = input.LT(-1);
+                int currentTokenIndex = (currentToken == null) ? -1 : currentToken.getTokenIndex();
+                Token tokenBefore = (lastConsumedIndex == -1) ? null :input.get(lastConsumedIndex);
                 int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
-                if (indexOfTokenBefore+1<token.getTokenIndex()) {
-                    for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
+                if (indexOfTokenBefore+1<currentTokenIndex) {
+                    for (int x = indexOfTokenBefore+1; x<currentTokenIndex;x++) {
                         Token hidden = input.get(x);
                         LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
                         leafNode.setText(hidden.getText());
@@ -58,14 +101,14 @@ import org.eclipse.xtext.testlanguages.parser.internal.SimpleExpressionsTokenTyp
                         skipped.add(leafNode);
                     }
                 }
-                if(lastConsumedIndex < token.getTokenIndex()) {
+                if(lastConsumedIndex < currentToken.getTokenIndex()) {
                     LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-                    leafNode.setText(token.getText());
+                    leafNode.setText(currentToken.getText());
                     leafNode.setHidden(true);
-                    setLexerRule(leafNode, token);
+                    setLexerRule(leafNode, currentToken);
                     currentNode.getChildren().add(leafNode);
                     skipped.add(leafNode);
-                    lastConsumedIndex = token.getTokenIndex();
+                    lastConsumedIndex = currentToken.getTokenIndex();
                 }
                 return skipped;
             }
@@ -159,13 +202,14 @@ import org.eclipse.xtext.testlanguages.parser.internal.SimpleExpressionsTokenTyp
     } 
 }
 
-parse returns [EObject current] : 
+parse returns [IParseResult result] 
+	@init { EObject current = null; } : 
     { currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
     ruleMultiplication 
-    { $current=$ruleMultiplication.current; } 
+    { current=$ruleMultiplication.current; }
     EOF 
     { appendTrailingHiddenTokens(currentNode); };
-    finally { appendAllTokens(); } 
+    finally { appendAllTokens(); $result = new ParseResult(current, currentNode); }
 
 
 
@@ -313,19 +357,19 @@ this_Multiplication=ruleMultiplication
 
 
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 RULE_INT : ('0'..'9')+;
 
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 

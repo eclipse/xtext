@@ -13,7 +13,6 @@ import java.io.InputStream;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.LeafNode;
 
 /**
@@ -22,25 +21,25 @@ import org.eclipse.xtext.parsetree.LeafNode;
  */
 public abstract class AbstractParser implements IParser {
 
-	public EObject parse(InputStream in, IElementFactory factory, IParseErrorHandler handler,
+	public IParseResult parse(InputStream in, IElementFactory factory, IParseErrorHandler handler,
 			IParsePostProcessor postProcessor) {
 		try {
-			EObject parseResult = (EObject) parse(new ANTLRInputStream(in), factory, handler);
+			IParseResult parseResult = (IParseResult) parse(new ANTLRInputStream(in), factory, handler);
 			return postProcessor.postProcess(parseResult);
 		} catch (IOException e) {
 			throw new WrappedException(e);
 		}
 	}
 
-	public EObject parse(InputStream in, IElementFactory factory, IParseErrorHandler handler) {
+	public IParseResult parse(InputStream in, IElementFactory factory, IParseErrorHandler handler) {
 		return parse(in, factory, handler, getDefaultPostProcessor());
 	}
 
-	public EObject parse(InputStream in, IElementFactory factory) {
+	public IParseResult parse(InputStream in, IElementFactory factory) {
 		return parse(in, factory, getDefaultHandler(), getDefaultPostProcessor());
 	}
 
-	public EObject parse(InputStream in) {
+	public IParseResult parse(InputStream in) {
 		return parse(in, getDefaultASTFactory(), getDefaultHandler(), getDefaultPostProcessor());
 	}
 
@@ -48,7 +47,7 @@ public abstract class AbstractParser implements IParser {
 
 	protected IParsePostProcessor getDefaultPostProcessor() {
 		return new IParsePostProcessor() {
-			public EObject postProcess(EObject parseResult) {
+			public IParseResult postProcess(IParseResult parseResult) {
 				// TODO: add code
 				return parseResult;
 			}
@@ -64,5 +63,5 @@ public abstract class AbstractParser implements IParser {
 		};
 	}
 
-	protected abstract Object parse(ANTLRInputStream in, IElementFactory factory, IParseErrorHandler handler);
+	protected abstract IParseResult parse(ANTLRInputStream in, IElementFactory factory, IParseErrorHandler handler);
 }

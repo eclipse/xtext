@@ -1,24 +1,18 @@
 
 package org.eclipse.xtext.parser;
 
-import java.util.List;
-
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.parser.IElementFactory;
-import org.eclipse.xtext.parser.IParseErrorHandler;
-import org.eclipse.xtext.parsetree.LeafNode;
-
 import org.eclipse.xtext.parser.internal.InternalXtextLexer;
 import org.eclipse.xtext.parser.internal.InternalXtextParser;
+import org.eclipse.xtext.parsetree.LeafNode;
 
 
 public class XtextParser extends org.eclipse.xtext.parser.AbstractParser {
 	@Override
-	protected EObject parse(ANTLRInputStream in, IElementFactory factory,
+	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
 		InternalXtextLexer lexer = new InternalXtextLexer(in);
 		CommonTokenStream stream = new CommonTokenStream(lexer);

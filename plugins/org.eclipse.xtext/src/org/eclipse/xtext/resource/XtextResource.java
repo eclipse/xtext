@@ -44,7 +44,7 @@ public class XtextResource extends ResourceImpl {
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
 		IParser parser = languageFacade.getParser();
 		IElementFactory elementFactory = languageFacade.getElementFactory();
-		EObject rootElement = (EObject) parser.parse(inputStream, elementFactory);
+		EObject rootElement = parser.parse(inputStream, elementFactory).getRootASTElement();
 		if (rootElement != null) {
 			getContents().add(rootElement);
 		}

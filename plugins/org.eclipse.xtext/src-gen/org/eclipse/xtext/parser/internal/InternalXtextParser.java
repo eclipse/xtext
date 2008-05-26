@@ -2,19 +2,31 @@
 
 package org.eclipse.xtext.parser.internal; 
 
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.IElementFactory;
-import org.eclipse.xtext.parser.ParseException;
-import org.eclipse.xtext.parsetree.*;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parser.internal.XtextTokenTypeResolver;
-
-
-import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.antlr.runtime.BitSet;
+import org.antlr.runtime.EarlyExitException;
+import org.antlr.runtime.MismatchedSetException;
+import org.antlr.runtime.NoViableAltException;
+import org.antlr.runtime.Parser;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenStream;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.LanguageFacadeFactory;
+import org.eclipse.xtext.LexerRule;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.ParseException;
+import org.eclipse.xtext.parser.ParseResult;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeAdapter;
+import org.eclipse.xtext.parsetree.NodeAdapterFactory;
+import org.eclipse.xtext.parsetree.ParsetreeFactory;
 
 public class InternalXtextParser extends Parser {
     public static final String[] tokenNames = new String[] {
@@ -166,7 +178,7 @@ public class InternalXtextParser extends Parser {
 
     // $ANTLR start parse
     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:160:1: parse returns [EObject current] : ruleGrammar EOF ;
-    public EObject parse() throws RecognitionException {
+    public IParseResult parse() throws RecognitionException {
         EObject current = null;
 
         EObject ruleGrammar1 = null;
@@ -204,7 +216,7 @@ public class InternalXtextParser extends Parser {
         finally {
              appendAllTokens(); 
         }
-        return current;
+        return new ParseResult(current, currentNode);
     }
     // $ANTLR end parse
 
