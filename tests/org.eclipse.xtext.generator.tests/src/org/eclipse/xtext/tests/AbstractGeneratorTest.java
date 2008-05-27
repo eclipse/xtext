@@ -85,14 +85,26 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		return parse(model, factory, errorHandler).getRootASTElement();
 	}
 
-	public IParseResult parse(InputStream model, IElementFactory factory, IParseErrorHandler errorHandler) {
-	    IParser parserInstance = getFacade().getParser();
+    public IParseResult parse(InputStream model, IElementFactory factory, IParseErrorHandler errorHandler) {
+        IParser parserInstance = getFacade().getParser();
         if (errorHandler != null) {
             return parserInstance.parse(model, factory, errorHandler);
         } else {
             return parserInstance.parse(model, factory);
         }
-	}
+    }
+    
+    public IParseResult parse(String model, IElementFactory factory, IParseErrorHandler errorHandler) {
+        return parse(new StringInputStream(model), factory, errorHandler);
+    }   
+    
+    public IParseResult parse(String model, IParseErrorHandler errorHandler) throws Exception {
+        return parse(new StringInputStream(model), getASTFactory(), errorHandler);
+    }
+
+    public IParseResult parse(String model) throws Exception {
+        return parse(new StringInputStream(model), getASTFactory(), null);
+    }
 	
 	public List<Invocation> getInvocations(String model) throws Exception {
 		return getInvocations(model, (IParseErrorHandler) null);
@@ -132,7 +144,7 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		f = f.cloneWithExtensions(getImportDeclarations()+"invoke(Object this) : " + expression + ";");
 		return f.call("invoke", _this);
 	}
-	
+
 	protected String[] importedExtensions() {
 		return new String[0];
 	}
@@ -141,7 +153,7 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		XtendFacade f = getXtendFacade();
 		StringBuffer code = getImportDeclarations();
 		code.append("__compare(Object this) : __left(this) == __right(this);__left(Object this) : "
-			+ left + "; __right(Object this) :" + right + ";");
+				+ left + "; __right(Object this) :" + right + ";");
 		f = f.cloneWithExtensions(code.toString());
 		Boolean result = (Boolean) f.call("__compare", _this);
 		if (!result) {
