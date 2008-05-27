@@ -19,14 +19,14 @@ import org.eclipse.swt.graphics.RGB;
  */
 public class XtextPreferenceConstants {
 	/* Tokens */
-	public static RGB KEYWORD_COLOR = new RGB(127, 0, 85);
-	public static RGB DEFAULT_COLOR = new RGB(0, 0, 0);
-	public static RGB COMMENT_COLOR = new RGB(63, 127, 95);
-	public static RGB STRING_COLOR = new RGB(42, 0, 255);
-	public static int DEFAULT_STYLE = SWT.NONE;
-	public static int KEYWORD_STYLE = SWT.BOLD;
-	public static int COMMENT_STYLE = SWT.NONE;
-	public static int STRING_STYLE = SWT.NONE;
+	public final static RGB KEYWORD_COLOR = new RGB(127, 0, 85);
+	public final static RGB DEFAULT_COLOR = new RGB(0, 0, 0);
+	public final static RGB COMMENT_COLOR = new RGB(63, 127, 95);
+	public final static RGB STRING_COLOR = new RGB(42, 0, 255);
+	public final static int DEFAULT_STYLE = SWT.NONE;
+	public final static int KEYWORD_STYLE = SWT.BOLD;
+	public final static int COMMENT_STYLE = SWT.NONE;
+	public final static int STRING_STYLE = SWT.NONE;
 
 	public static final String COLOR_SUFIX = "color";
 	public static final String BACKGROUNDCOLOR_SUFIX = "backgroundcolor";
