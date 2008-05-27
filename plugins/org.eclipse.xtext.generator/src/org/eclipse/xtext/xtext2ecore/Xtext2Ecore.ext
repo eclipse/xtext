@@ -45,7 +45,7 @@ create EClass createAndAddEClass(ResolvedType type) :
 	eSuperTypes.addAll(type.inferredSuperTypes().createOrGetEClass()) ->
 	type.assignments().createAndAddEStructuralFeature(this) ->
 	type.allActionsReturning().createAndAddEStructuralFeature(this) ->
-	type.metaModel.ePackage.eClassifiers.add(this) ->
+	type.metaModel.createEPackage().eClassifiers.add(this) ->
 	if type.isAbstract() then
 		setAbstract(true)
 	//-> syserr(format(this)) 
