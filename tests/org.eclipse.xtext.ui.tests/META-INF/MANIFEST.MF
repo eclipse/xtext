@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext UI Core Tests Plug-in
-Bundle-SymbolicName: org.eclipse.xtext.ui.core.tests;singleton:=true
+Bundle-SymbolicName: org.eclipse.xtext.ui.tests;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Activator: org.eclipse.xtext.ui.tests.Activator
 Bundle-Vendor: itemis AG
