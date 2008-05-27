@@ -6,8 +6,6 @@ import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.dummy.parser.internal.InternalDummyLanguageLexer;
-import org.eclipse.xtext.dummy.parser.internal.InternalDummyLanguageParser;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.xtext.parsetree.LeafNode;
