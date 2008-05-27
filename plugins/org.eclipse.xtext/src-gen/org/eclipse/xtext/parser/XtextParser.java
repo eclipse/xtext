@@ -6,7 +6,10 @@ import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.parser.impl.ParseError;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
+import org.eclipse.xtext.parsetree.LeafNode;
+
 import org.eclipse.xtext.parser.internal.InternalXtextLexer;
 import org.eclipse.xtext.parser.internal.InternalXtextParser;
 
@@ -19,8 +22,8 @@ public class XtextParser extends org.eclipse.xtext.parser.AbstractParser {
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		InternalXtextParser parser = new InternalXtextParser(
 				stream, factory) {
-			@Override
-			public void reportError(IParseError error, RecognitionException re) {
+					@Override
+			protected void reportError(IParseError error, RecognitionException re) {
 				handler.handleParserError(error);
 			}
 		};

@@ -64,10 +64,10 @@ RULE_INT : ('0'..'9')+;
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
 // $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g" 337
-RULE_IMPLICITTOKENTYPE :  '#' ('C')+ ;
+RULE_STRING :  '#' ('B')+ ;
 
 // $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g" 339
-RULE_STRING :  '#' ('B')+ ;
+RULE_IMPLICITTOKENTYPE :  '#' ('C')+ ;
 
 // $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g" 341
 RULE_ANY_OTHER : .;

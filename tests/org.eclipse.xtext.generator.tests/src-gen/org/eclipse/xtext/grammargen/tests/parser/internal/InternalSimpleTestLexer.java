@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-27 15:10:44
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-05-27 15:19:50
 
 package org.eclipse.xtext.grammargen.tests.parser.internal;
 

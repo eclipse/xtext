@@ -334,9 +334,9 @@ RULE_INT : ('0'..'9')+;
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 
-RULE_IMPLICITTOKENTYPE :  '#' ('C')+ ;
-
 RULE_STRING :  '#' ('B')+ ;
+
+RULE_IMPLICITTOKENTYPE :  '#' ('C')+ ;
 
 RULE_ANY_OTHER : .;
 

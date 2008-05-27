@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="LexerLang" nsURI="http://www.eclipse.org/2008/xtext/LexerLang" nsPrefix="LexerLang">
   <eClassifiers xsi:type="ecore:EClass" name="Element">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="h">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="i">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="g">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="f">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="g">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="h">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
