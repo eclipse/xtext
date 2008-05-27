@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
-import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
@@ -24,10 +23,8 @@ import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class XtextSourceViewerConfiguration extends
-		TextSourceViewerConfiguration {
+public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguration {
 	private final XtextModelManager modelManager;
-	private IResource resource;
 	private final IEditorPart editor;
 
 	/**
@@ -35,8 +32,8 @@ public class XtextSourceViewerConfiguration extends
 	 * @param languageDescriptor
 	 * @param langDescr
 	 */
-	public XtextSourceViewerConfiguration(XtextModelManager manager,
-			IPreferenceStore preferenceStore, IEditorPart editor) {
+	public XtextSourceViewerConfiguration(XtextModelManager manager, IPreferenceStore preferenceStore,
+			IEditorPart editor) {
 		super(preferenceStore);
 		this.editor = editor;
 		this.modelManager = manager;
@@ -44,16 +41,12 @@ public class XtextSourceViewerConfiguration extends
 
 	@Override
 	public IReconciler getReconciler(ISourceViewer sourceViewer) {
-		return new MonoReconciler(new XtextReconcilingStrategy(modelManager,
-				editor), false);
+		return new MonoReconciler(new XtextReconcilingStrategy(modelManager, editor), false);
 	}
 
-	public IPresentationReconciler getPresentationReconciler(
-			ISourceViewer sourceViewer) {
-		PresentationReconciler reconciler = (PresentationReconciler) super
-				.getPresentationReconciler(sourceViewer);
-		DefaultDamagerRepairer defDR = new DefaultDamagerRepairer(
-				new XtextTokenScanner(modelManager));
+	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
+		PresentationReconciler reconciler = (PresentationReconciler) super.getPresentationReconciler(sourceViewer);
+		DefaultDamagerRepairer defDR = new DefaultDamagerRepairer(new XtextTokenScanner(modelManager, fPreferenceStore));
 		reconciler.setRepairer(defDR, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setDamager(defDR, IDocument.DEFAULT_CONTENT_TYPE);
 		return reconciler;

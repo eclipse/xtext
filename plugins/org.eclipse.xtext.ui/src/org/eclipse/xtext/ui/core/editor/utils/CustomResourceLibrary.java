@@ -18,18 +18,16 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.services.IDisposable;
 
 /**
  * Here different stylistic component are produced, kept and made available
  * 
  * @author Dennis Hübner
  */
-public class CustomResourceLibrary implements ISharedTextColors {
-	private static final String FOREGROUND_DEFAULT_VALUE = "defaultvalue_forground"; //$NON-NLS-1$
+public class CustomResourceLibrary implements ISharedTextColors, IDisposable {
 
 	private Display display;
-
-	private static final String FOREGROUND_DERIVED_VALUE = "deliveredvalue_forground"; //$NON-NLS-1$
 
 	public CustomResourceLibrary(Display display) {
 		this.display = display;
@@ -38,26 +36,6 @@ public class CustomResourceLibrary implements ISharedTextColors {
 	private Map<String, Color> colors = new HashMap<String, Color>();
 
 	private Map<Font, Font> fonts = new HashMap<Font, Font>();
-
-	public Color getDerivedValueForeground() {
-		Color retVal = colors
-				.get(CustomResourceLibrary.FOREGROUND_DERIVED_VALUE);
-		if (retVal == null) {
-			retVal = display.getSystemColor(SWT.COLOR_DARK_GRAY);
-			colors.put(CustomResourceLibrary.FOREGROUND_DERIVED_VALUE, retVal);
-		}
-		return retVal;
-	}
-
-	public Color getDefaultValueForeground() {
-		Color retVal = colors
-				.get(CustomResourceLibrary.FOREGROUND_DEFAULT_VALUE);
-		if (retVal == null) {
-			retVal = display.getSystemColor(SWT.COLOR_DARK_GREEN);
-			colors.put(CustomResourceLibrary.FOREGROUND_DERIVED_VALUE, retVal);
-		}
-		return retVal;
-	}
 
 	public void dispose() {
 		for (Color col : colors.values()) {
@@ -92,5 +70,9 @@ public class CustomResourceLibrary implements ISharedTextColors {
 			colors.put(rgb.toString(), retVal);
 		}
 		return retVal;
+	}
+
+	public Font getFont(String fontName) {
+		return null;
 	}
 }

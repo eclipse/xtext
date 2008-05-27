@@ -24,7 +24,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
  */
 public class XtextMarkerManager {
 	private static final String XTEXT_PARSEERROR_MARKER_TYPE = Activator.PLUGIN_ID
-			+ ".problem";
+			+ ".problemmarker";
 
 	public static final void clearXtextMarker(final IResource resource,
 			IProgressMonitor monitor) {

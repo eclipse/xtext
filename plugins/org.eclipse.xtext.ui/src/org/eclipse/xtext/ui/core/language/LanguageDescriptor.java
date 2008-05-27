@@ -25,6 +25,7 @@ public class LanguageDescriptor {
 	private String id;
 	private String name;
 	private ILanguageFacade languageFacade;
+	private String nameSpace;
 
 	public LanguageDescriptor(String id, String name) {
 		this.id = id;
@@ -35,18 +36,15 @@ public class LanguageDescriptor {
 		this.id = id;
 	}
 
-	public LanguageDescriptor(IConfigurationElement element)
-			throws CoreException {
+	public LanguageDescriptor(IConfigurationElement element) throws CoreException {
 		if (element == null)
-			throw new IllegalArgumentException(
-					"ConfigurationElement cannot be null.");
+			throw new IllegalArgumentException("ConfigurationElement cannot be null.");
 		this.id = element.getAttribute(LanguageDescriptor.ID_ATTRIBUTE);
 		if (getId() == null)
-			throw new IllegalArgumentException(
-					"Id is requered and cannot be null.");
+			throw new IllegalArgumentException("Id is requered and cannot be null.");
 		this.name = element.getAttribute(LanguageDescriptor.NAME_ATTRIBUTE);
-		this.languageFacade = (ILanguageFacade) element
-				.createExecutableExtension(LANGUAGEFACADE_CLASS_ATTRIBUTE);
+		this.languageFacade = (ILanguageFacade) element.createExecutableExtension(LANGUAGEFACADE_CLASS_ATTRIBUTE);
+		this.nameSpace = element.getNamespaceIdentifier();
 		LanguageFacadeFactory.register(languageFacade);
 	}
 
@@ -60,5 +58,9 @@ public class LanguageDescriptor {
 
 	public ILanguageFacade getLanguageFacade() {
 		return languageFacade;
+	}
+
+	public String getNameSpace() {
+		return nameSpace;
 	}
 }
