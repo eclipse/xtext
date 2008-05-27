@@ -12,11 +12,10 @@ import java.util.Vector;
 
 import org.apache.tools.ant.filters.StringInputStream;
 import org.eclipse.xtext.ILanguageFacade;
+import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
 
 /**
@@ -24,58 +23,15 @@ import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
  * 
  */
 public class XtextModelManager {
-
+	// TODO remove custom impl when default one works properly
 	private final class ParseErrorHandlerImpl implements IParseErrorHandler {
-		public void handleParserError(LeafNode node, String message, Object context) {
-			if (node == null)
-				CoreLog.logWarning("Parameter 'node' is null in handleParseError methode");
-			getErrors().add(new ParseError(node, message, context));
+
+		public void handleParserError(IParseError error) {
+			getErrors().add(error);
 		}
 	}
 
-	public final class ParseError {
-		private LeafNode node;
-		private String message;
-		private Object context;
-
-		public ParseError(LeafNode node, String message, Object context) {
-			super();
-			this.node = node;
-			this.message = message;
-			this.context = context;
-		}
-
-		public LeafNode getNode() {
-			return node;
-		}
-
-		public String getMessage() {
-			return message;
-		}
-
-		public Object getContext() {
-			return context;
-		}
-
-		public String getText() {
-			return node.getText();
-		}
-
-		public int length() {
-			return node.length();
-		}
-
-		public int line() {
-			return node.line();
-		}
-
-		public int offset() {
-			return node.offset();
-		}
-
-	}
-
-	private Vector<ParseError> errors = new Vector<ParseError>();
+	private Vector<IParseError> errors = new Vector<IParseError>();
 	private final LanguageDescriptor languageDescriptor;
 	private AbstractNode rootNode;
 
@@ -106,7 +62,7 @@ public class XtextModelManager {
 		return languageDescriptor;
 	}
 
-	public Vector<ParseError> getErrors() {
+	public Vector<IParseError> getErrors() {
 		return errors;
 	}
 

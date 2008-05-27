@@ -8,12 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.editors.text.TextFileDocumentProvider;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
+import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
 import org.eclipse.xtext.ui.core.language.LanguageDescriptorFactory;
 import org.eclipse.xtext.ui.core.language.LanguageServiceFactory;
@@ -25,26 +25,37 @@ import org.eclipse.xtext.ui.core.preferences.XtextDefaultsInitializer;
  */
 public class BaseTextEditor extends TextEditor {
 	public static final String ID = "org.eclipse.xtext.baseEditor";
+	private IPreferenceStore xtextPreferenceStore;
 
 	@Override
 	public void setInitializationData(IConfigurationElement cfig, String propertyName, Object data) {
 		super.setInitializationData(cfig, propertyName, data);
 		LanguageDescriptor languageDescriptor = initializeLanguageDescriptor();
-		XtextModelManager manager = new XtextModelManager(languageDescriptor);
+		// try plain text editor if problem occurs
+		if (languageDescriptor != null) {
+			XtextModelManager manager = new XtextModelManager(languageDescriptor);
 
-		IPreferenceStore preferenceStore = LanguageServiceFactory.getInstance().getPreferenceStore(languageDescriptor);
-		XtextDefaultsInitializer.initializeDefaults(preferenceStore);
-		ChainedPreferenceStore chainedPreferenceStore = new ChainedPreferenceStore(new IPreferenceStore[] {
-				getPreferenceStore(), preferenceStore });
+			xtextPreferenceStore = LanguageServiceFactory.getInstance().getPreferenceStore(languageDescriptor);
+			XtextDefaultsInitializer.initializeDefaults(xtextPreferenceStore);
+			ChainedPreferenceStore chainedPreferenceStore = new ChainedPreferenceStore(new IPreferenceStore[] {
+					getPreferenceStore(), xtextPreferenceStore });
 
-		setSourceViewerConfiguration(new XtextSourceViewerConfiguration(manager, chainedPreferenceStore, this));
+			setSourceViewerConfiguration(new XtextSourceViewerConfiguration(manager, chainedPreferenceStore, this));
+		}
+		else {
+			CoreLog
+					.logError(
+							"LanguageDescriptor is not provided for '"
+									+ this.getConfigurationElement().getNamespaceIdentifier()
+									+ "' plugin. Please declare org.eclipse.xtext.ui.languageDescriptor extension in the coresponding plugin.xml.",
+							new IllegalStateException());
+		}
 		setDocumentProvider(new TextFileDocumentProvider());
 	}
 
 	private LanguageDescriptor initializeLanguageDescriptor() {
 		String namespace = this.getConfigurationElement().getNamespaceIdentifier();
 		LanguageDescriptor langDescr = LanguageDescriptorFactory.createLanguageDescriptor(namespace);
-		Assert.isNotNull(langDescr, "LanguageDescriptor is not provided for '" + namespace + "' plugin");
 		return langDescr;
 	}
 }

@@ -23,7 +23,7 @@ import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.xtext.ui.core.editor.XtextModelManager.ParseError;
+import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.ui.core.internal.XtextMarkerManager;
 
 /**
@@ -53,7 +53,7 @@ public class XtextReconcilingStrategy implements IReconcilingStrategy, IReconcil
 		IResource resource = (IResource) editor.getEditorInput().getAdapter(IFile.class);
 		XtextMarkerManager.clearXtextMarker(resource, monitor);
 		if (manager.hasErrors()) {
-			for (ParseError error : manager.getErrors()) {
+			for (IParseError error : manager.getErrors()) {
 				XtextMarkerManager.createMarker(resource, collectMarkerAttributes(error), monitor);
 			}
 		}
@@ -91,19 +91,15 @@ public class XtextReconcilingStrategy implements IReconcilingStrategy, IReconcil
 		this.monitor = monitor;
 	}
 
-	private Map<String, Object> collectMarkerAttributes(ParseError error) {
+	private Map<String, Object> collectMarkerAttributes(IParseError error) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put(IMarker.SEVERITY, new Integer(IMarker.SEVERITY_ERROR));
-		if (error.getNode() != null) {
-			map.put(IMarker.LINE_NUMBER, new Integer(error.line()));
-			map.put(IMarker.CHAR_START, new Integer(error.offset()));
-			map.put(IMarker.CHAR_END, new Integer(error.offset() + error.length()));
-		}
+		map.put(IMarker.SEVERITY, Integer.valueOf(IMarker.SEVERITY_ERROR));
+		map.put(IMarker.LINE_NUMBER, Integer.valueOf(error.getLine()));
+		map.put(IMarker.CHAR_START, Integer.valueOf(error.getOffset()));
+		map.put(IMarker.CHAR_END, Integer.valueOf(error.getOffset() + error.getLength()));
 		map.put(IMarker.MESSAGE, error.getMessage());
-		map.put(IMarker.PRIORITY, new Integer(IMarker.PRIORITY_LOW));
-
+		map.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 		return map;
 
 	}
-
 }
