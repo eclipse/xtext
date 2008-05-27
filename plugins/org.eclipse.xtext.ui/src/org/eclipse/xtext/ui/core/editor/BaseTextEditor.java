@@ -44,7 +44,7 @@ public class BaseTextEditor extends TextEditor {
 	private LanguageDescriptor initializeLanguageDescriptor() {
 		String namespace = this.getConfigurationElement().getNamespaceIdentifier();
 		LanguageDescriptor langDescr = LanguageDescriptorFactory.createLanguageDescriptor(namespace);
-		Assert.isNotNull(langDescr, "LanguageDescriptor is not provided for " + namespace + " plugin");
+		Assert.isNotNull(langDescr, "LanguageDescriptor is not provided for '" + namespace + "' plugin");
 		return langDescr;
 	}
 }

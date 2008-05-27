@@ -98,7 +98,7 @@ public class XtextTokenScanner implements ITokenScanner {
 		Assert.isLegal(document != null);
 		nodeIterator = null;
 		// TODO partial parse
-		modelmanager.parseTree(document);
+		modelmanager.parseTree(document.get());
 		AbstractNode rootNode = modelmanager.getCurrentRootNode();
 		if (rootNode != null)
 			nodeIterator = rootNode.getLeafNodes().iterator();
