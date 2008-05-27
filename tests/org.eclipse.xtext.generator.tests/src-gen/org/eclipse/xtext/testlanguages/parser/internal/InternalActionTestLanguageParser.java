@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g 2008-05-27 15:19:57
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g 2008-05-27 16:32:45
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -8,6 +8,7 @@ import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.testlanguages.parser.internal.ActionTestLanguageTokenTypeResolver;
 
 
@@ -16,18 +17,18 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
-public class InternalActionTestLanguageParser extends Parser {
+public class InternalActionTestLanguageParser extends AbstractAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_ML_COMMENT", "RULE_WS", "RULE_SL_COMMENT", "RULE_STRING", "RULE_INT", "RULE_LEXER_BODY", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_SL_COMMENT", "RULE_WS", "RULE_INT", "RULE_ML_COMMENT", "RULE_LEXER_BODY", "RULE_ANY_OTHER"
     };
-    public static final int RULE_ML_COMMENT=5;
+    public static final int RULE_ML_COMMENT=9;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=6;
-    public static final int RULE_INT=9;
+    public static final int RULE_WS=7;
+    public static final int RULE_INT=8;
     public static final int EOF=-1;
-    public static final int RULE_STRING=8;
+    public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=7;
+    public static final int RULE_SL_COMMENT=6;
     public static final int RULE_LEXER_BODY=10;
 
         public InternalActionTestLanguageParser(TokenStream input) {
@@ -39,179 +40,42 @@ public class InternalActionTestLanguageParser extends Parser {
     public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g"; }
 
 
-        public TokenStream getInput() {
-        	return input;
-        }
-
-        private IElementFactory factory;
+     
         public InternalActionTestLanguageParser(TokenStream input, IElementFactory factory) {
             this(input);
             this.factory = factory;
+    		grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/ActionTestLanguage").getGrammar();
         }
         
-        private List<IParseError> parseErrors;
-        private IParseError createParseError(RecognitionException re) {
-    		LeafNode ln = null;
-    		if (currentNode!=null) {
-    		    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-    		    List<LeafNode> list = root.getLeafNodes();
-    		    if (list.size()>lastErrorIndex)
-    		        ln = list.get(lastErrorIndex);
-    		}
-    		IParseError error = null;
-    		if (ln == null) {
-    			CommonToken lt = (CommonToken) input.LT(input.index());
-    			error = new ParseError(lt.getLine(), lt.getStartIndex(), lt.getText() != null ? lt.getText()
-    					.length() : 0, lt.getText(), getErrorMessage(re, getTokenNames()), re);
-    		} else {
-    			error = new ParseError(ln, getErrorMessage(re, getTokenNames()), re);
-    		}
-    		parseErrors.add(error);
-    		return error;
-    	}
-        
-        protected void reportError(IParseError error, RecognitionException re) {
-                reportError(re);
-        }
-                
-                private int lastConsumedIndex = -1;
-            
-                 private void appendAllTokens() {
-                    for (int x = lastConsumedIndex+1; input.size()>x;input.consume(),x++) {
-                        Token hidden = input.get(x);
-                        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-                        leafNode.setText(hidden.getText());
-                        leafNode.setHidden(true);
-                        setLexerRule(leafNode, hidden);
-                        currentNode.getChildren().add(leafNode);
-                    }
-                }
-
-                 public List<LeafNode> appendSkippedTokens() {
-                   	List<LeafNode> skipped = new ArrayList<LeafNode>();
-                    Token currentToken = input.LT(-1);
-                    int currentTokenIndex = (currentToken == null) ? -1 : currentToken.getTokenIndex();
-                    Token tokenBefore = (lastConsumedIndex == -1) ? null :input.get(lastConsumedIndex);
-                    int indexOfTokenBefore = tokenBefore!=null?tokenBefore.getTokenIndex() : -1;
-                    if (indexOfTokenBefore+1<currentTokenIndex) {
-                        for (int x = indexOfTokenBefore+1; x<currentTokenIndex;x++) {
-                            Token hidden = input.get(x);
-                            LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-                            leafNode.setText(hidden.getText());
-                            leafNode.setHidden(true);
-                            setLexerRule(leafNode, hidden);
-                            currentNode.getChildren().add(leafNode);
-                            skipped.add(leafNode);
-                        }
-                    }
-                    if(lastConsumedIndex < currentTokenIndex) {
-                        LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-                        leafNode.setText(currentToken.getText());
-                        leafNode.setHidden(true);
-                        setLexerRule(leafNode, currentToken);
-                        currentNode.getChildren().add(leafNode);
-                        skipped.add(leafNode);
-                        lastConsumedIndex = currentToken.getTokenIndex();
-                    }
-                    return skipped;
-                }
-                
-                public CompositeNode createCompositeNode(String grammarElementID, CompositeNode parentNode) {
-                    CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
-                    if (parentNode!=null) parentNode.getChildren().add(compositeNode);
-                    compositeNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
-                    return compositeNode;
-                }
-                
-
-                public Object createLeafNode(String grammarElementID, CompositeNode parentNode, String feature) {
-                    Token token = input.LT(-1);
-                    int indexOfTokenBefore = lastConsumedIndex;
-                    if (indexOfTokenBefore+1<token.getTokenIndex()) {
-                        for (int x = indexOfTokenBefore+1; x<token.getTokenIndex();x++) {
-                            Token hidden = input.get(x);
-                            LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-                            leafNode.setText(hidden.getText());
-                            leafNode.setHidden(true);
-                            setLexerRule(leafNode, hidden);
-                            parentNode.getChildren().add(leafNode);
-                        }
-                    }
-                    LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-                    leafNode.setText(token.getText());
-                    leafNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
-                    leafNode.setFeature(feature);
-                    parentNode.getChildren().add(leafNode);
-                    lastConsumedIndex = token.getTokenIndex();
-                    return leafNode;
-                }
-
-                private void appendTrailingHiddenTokens(CompositeNode parentNode) {
-                    Token tokenBefore = input.LT(-1);
-                    int size = input.size();
-                    if (tokenBefore!=null && tokenBefore.getTokenIndex()<size) {
-                        for (int x = tokenBefore.getTokenIndex()+1; x<size;x++) {
-                            Token hidden = input.get(x);
-                            LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-                            leafNode.setText(hidden.getText());
-                            leafNode.setHidden(true);
-                            setLexerRule(leafNode, hidden);
-                            parentNode.getChildren().add(leafNode);
-                            lastConsumedIndex = hidden.getTokenIndex();
-                        }
-                    }
-                }
-                
-                public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
-                    if(node.getElement() != null && node.getElement() != astElement) {
-                        throw new ParseException(new ParseError(node, "Reassignment of astElement in parse tree node", null));
-                    }
-                    node.setElement(astElement);
-                    if(astElement instanceof EObject) {
-                        EObject eObject = (EObject) astElement;
-                        NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
-                        adapter.setParserNode(node); 
-                    }
-                }
-                
         protected void setLexerRule(LeafNode node, Token t) {
             LexerRule lexerRule = ActionTestLanguageTokenTypeResolver.getLexerRule(node, t.getType());
             if(lexerRule != null) {
                 node.setGrammarElement(lexerRule);
             }
         }
-        
-        private CompositeNode currentNode;
-        public CompositeNode getCurrentNode() {
-            return currentNode;
-        }
-        
-        private org.eclipse.xtext.Grammar grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/ActionTestLanguage").getGrammar();;
 
 
 
 
-    // $ANTLR start parse
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:221:1: parse returns [IParseResult result] : ruleModel EOF ;
-    public final IParseResult parse() throws RecognitionException {
-        IParseResult result = null;
+    // $ANTLR start internalParse
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:91:1: internalParse returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    public EObject internalParse() throws RecognitionException {
+        EObject current = null;
 
-        EObject ruleModel1 = null;
+        EObject iv_ruleModel = null;
 
 
-         EObject current = null; parseErrors = new ArrayList<IParseError>();
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:222:79: ( ruleModel EOF )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:223:5: ruleModel EOF
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:92:3: (iv_ruleModel= ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:92:3: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
-            pushFollow(FOLLOW_ruleModel_in_parse75);
-            ruleModel1=ruleModel();
+            pushFollow(FOLLOW_ruleModel_in_internalParse76);
+            iv_ruleModel=ruleModel();
             _fsp--;
 
-             current=ruleModel1; 
-            match(input,EOF,FOLLOW_EOF_in_parse88); 
-             appendTrailingHiddenTokens(currentNode); 
+             current =iv_ruleModel; 
+            match(input,EOF,FOLLOW_EOF_in_internalParse86); 
 
             }
 
@@ -224,16 +88,15 @@ public class InternalActionTestLanguageParser extends Parser {
                 reportError(error, re);
             } 
         finally {
-             appendAllTokens(); result = new ParseResult(current, currentNode,parseErrors); 
         }
-        return result;
+        return current;
     }
-    // $ANTLR end parse
+    // $ANTLR end internalParse
 
 
     // $ANTLR start ruleModel
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:233:1: ruleModel returns [EObject current=null] : (lv_children= ruleElement )* ;
-    public final EObject ruleModel() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:100:1: ruleModel returns [EObject current=null] : (lv_children= ruleElement )* ;
+    public EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_children = null;
@@ -241,10 +104,10 @@ public class InternalActionTestLanguageParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:234:33: ( (lv_children= ruleElement )* )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:235:1: (lv_children= ruleElement )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:102:1: ( (lv_children= ruleElement )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:102:1: (lv_children= ruleElement )*
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:235:1: (lv_children= ruleElement )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:102:1: (lv_children= ruleElement )*
             loop1:
             do {
                 int alt1=2;
@@ -257,12 +120,12 @@ public class InternalActionTestLanguageParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:237:5: lv_children= ruleElement
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:104:5: lv_children= ruleElement
             	    {
             	     
             	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
             	        
-            	    pushFollow(FOLLOW_ruleElement_in_ruleModel146);
+            	    pushFollow(FOLLOW_ruleElement_in_ruleModel130);
             	    lv_children=ruleElement();
             	    _fsp--;
 
@@ -301,8 +164,8 @@ public class InternalActionTestLanguageParser extends Parser {
 
 
     // $ANTLR start ruleElement
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:252:1: ruleElement returns [EObject current=null] : (this_Item= ruleItem ( () (lv_items= ruleItem ) ) ) ;
-    public final EObject ruleElement() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:119:1: ruleElement returns [EObject current=null] : (this_Item= ruleItem ( () (lv_items= ruleItem ) ) ) ;
+    public EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
         EObject this_Item = null;
@@ -312,24 +175,24 @@ public class InternalActionTestLanguageParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:253:33: ( (this_Item= ruleItem ( () (lv_items= ruleItem ) ) ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:254:1: (this_Item= ruleItem ( () (lv_items= ruleItem ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:121:1: ( (this_Item= ruleItem ( () (lv_items= ruleItem ) ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:121:1: (this_Item= ruleItem ( () (lv_items= ruleItem ) ) )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:254:1: (this_Item= ruleItem ( () (lv_items= ruleItem ) ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:254:2: this_Item= ruleItem ( () (lv_items= ruleItem ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:121:1: (this_Item= ruleItem ( () (lv_items= ruleItem ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:121:2: this_Item= ruleItem ( () (lv_items= ruleItem ) )
             {
-            pushFollow(FOLLOW_ruleItem_in_ruleElement182);
+            pushFollow(FOLLOW_ruleItem_in_ruleElement166);
             this_Item=ruleItem();
             _fsp--;
 
              
                     current = this_Item; 
                 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:258:1: ( () (lv_items= ruleItem ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:258:2: () (lv_items= ruleItem )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:125:1: ( () (lv_items= ruleItem ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:125:2: () (lv_items= ruleItem )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:258:2: ()
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:259:5: 
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:125:2: ()
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:126:5: 
             {
              
                     temp=factory.create("Item");
@@ -344,13 +207,13 @@ public class InternalActionTestLanguageParser extends Parser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:269:2: (lv_items= ruleItem )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:271:5: lv_items= ruleItem
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:136:2: (lv_items= ruleItem )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:138:5: lv_items= ruleItem
             {
              
                     currentNode=createCompositeNode("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                 
-            pushFollow(FOLLOW_ruleItem_in_ruleElement219);
+            pushFollow(FOLLOW_ruleItem_in_ruleElement203);
             lv_items=ruleItem();
             _fsp--;
 
@@ -389,22 +252,22 @@ public class InternalActionTestLanguageParser extends Parser {
 
 
     // $ANTLR start ruleItem
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:286:1: ruleItem returns [EObject current=null] : ( () (lv_name= RULE_ID ) ) ;
-    public final EObject ruleItem() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:153:1: ruleItem returns [EObject current=null] : ( () (lv_name= RULE_ID ) ) ;
+    public EObject ruleItem() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:287:33: ( ( () (lv_name= RULE_ID ) ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:288:1: ( () (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:155:1: ( ( () (lv_name= RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:155:1: ( () (lv_name= RULE_ID ) )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:288:1: ( () (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:288:2: () (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:155:1: ( () (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:155:2: () (lv_name= RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:288:2: ()
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:289:5: 
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:155:2: ()
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:156:5: 
             {
              
                     temp=factory.create("Thing");
@@ -419,11 +282,11 @@ public class InternalActionTestLanguageParser extends Parser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:299:2: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:300:5: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:166:2: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:167:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleItem271); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleItem255); 
              
                 createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
                 
@@ -459,11 +322,11 @@ public class InternalActionTestLanguageParser extends Parser {
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_parse75 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_parse88 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleElement_in_ruleModel146 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_ruleItem_in_ruleElement182 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleItem_in_ruleElement219 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleItem271 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleModel_in_internalParse76 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_internalParse86 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleElement_in_ruleModel130 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_ruleItem_in_ruleElement166 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleItem_in_ruleElement203 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleItem255 = new BitSet(new long[]{0x0000000000000002L});
 
 }

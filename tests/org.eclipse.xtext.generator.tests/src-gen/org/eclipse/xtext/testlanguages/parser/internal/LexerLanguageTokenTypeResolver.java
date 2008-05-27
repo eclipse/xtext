@@ -20,29 +20,29 @@ public class LexerLanguageTokenTypeResolver {
 			// RULE_ID
 			return BuiltinRules.BUILTIN_ID;
 
+		case 8:
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
+
 		case 9:
 			// RULE_WS
 			return BuiltinRules.BUILTIN_WS;
-
-		case 8:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 		case 6:
 			// RULE_IMPLICITTOKENTYPE
 			return (LexerRule) getGrammarElement("//@lexerRules.1");
 
 		case 11:
-			// RULE_INT
-			return BuiltinRules.BUILTIN_INT;
-
-		case 10:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 		case 7:
 			// RULE_STRING
 			return (LexerRule) getGrammarElement("//@lexerRules.2");
+
+		case 10:
+			// RULE_INT
+			return BuiltinRules.BUILTIN_INT;
 
 		case 12:
 			// RULE_LEXER_BODY

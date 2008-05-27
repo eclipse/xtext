@@ -15,8 +15,8 @@ public class XtextTokenTypeResolver {
 
 
 		case 8:
-			// RULE_WS
-			return BuiltinRules.BUILTIN_WS;
+			// RULE_INT
+			return BuiltinRules.BUILTIN_INT;
 
 
 
@@ -28,8 +28,8 @@ public class XtextTokenTypeResolver {
 
 
 		case 9:
-			// RULE_INT
-			return BuiltinRules.BUILTIN_INT;
+			// RULE_WS
+			return BuiltinRules.BUILTIN_WS;
 
 
 
