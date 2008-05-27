@@ -56,9 +56,8 @@ public abstract class AbstractParser implements IParser {
 
 	protected IParseErrorHandler getDefaultHandler() {
 		return new IParseErrorHandler() {
-
-			public void handleParserError(LeafNode node, String message, Object context) {
-				throw new ParseException(node, message);
+			public void handleParserError(IParseError error) {
+				throw new ParseException(error);
 			}
 		};
 	}

@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -17,32 +16,20 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 @SuppressWarnings("serial")
 public class ParseException extends RuntimeException {
 
-	private AbstractNode node;
-	private String message;
+	private IParseError error;
 
-	public ParseException(AbstractNode node, String message) {
-		this.node = node;
-		this.message = message;
+	public ParseException(IParseError error) {
+		if (error==null)
+			throw new NullPointerException();
+		this.error = error;
 	}
 
-	public int getLength() {
-		return node.length();
-	}
-
-	public int getOffset() {
-		return node.offset();
-	}
-
-	public String getText() {
-		return node.serialize();
-	}
-
-	public AbstractNode getNode() {
-		return node;
+	public IParseError getParseError() {
+		return error;
 	}
 	
 	@Override
 	public String getMessage() {
-		return this.message;
+		return this.error.getMessage();
 	}
 }

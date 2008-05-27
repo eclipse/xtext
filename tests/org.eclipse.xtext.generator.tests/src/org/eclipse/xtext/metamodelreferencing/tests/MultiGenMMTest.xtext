@@ -6,13 +6,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.parser;
+ 
+generate SimpleTest "http://eclipse.org/xtext/tests/SimpleTest"
+generate OtherTest "http://eclipse.org/xtext/tests/OtherTest" as other
 
+Foo : 
+	name=ID (nameRefs+=NameRef)*;
 
-/**
- * @author Sven Efftinge - Initial contribution and API
- *
- */
-public interface IParseErrorHandler {
-	public void handleParserError(IParseError error);
-}
+NameRef returns other::FooBar : 
+	name=STRING;
