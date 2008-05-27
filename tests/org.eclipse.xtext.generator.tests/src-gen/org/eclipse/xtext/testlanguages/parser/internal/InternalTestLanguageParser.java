@@ -1,12 +1,10 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g 2008-05-26 17:42:52
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g 2008-05-27 15:10:49
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.IElementFactory;
-import org.eclipse.xtext.parser.ParseException;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.ParseResult;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
@@ -20,13 +18,13 @@ import java.util.ArrayList;
 
 public class InternalTestLanguageParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_WS", "RULE_SL_COMMENT", "RULE_ML_COMMENT", "RULE_LEXER_BODY", "RULE_ANY_OTHER", "'choice'", "'optional'", "'reducible'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_WS", "RULE_SL_COMMENT", "RULE_INT", "RULE_LEXER_BODY", "RULE_ANY_OTHER", "'choice'", "'optional'", "'reducible'"
     };
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=6;
     public static final int RULE_ID=4;
     public static final int RULE_WS=7;
+    public static final int RULE_INT=9;
     public static final int EOF=-1;
-    public static final int RULE_INT=6;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=11;
     public static final int RULE_SL_COMMENT=8;
@@ -41,6 +39,9 @@ public class InternalTestLanguageParser extends Parser {
     public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g"; }
 
 
+        public TokenStream getInput() {
+        	return input;
+        }
 
         private IElementFactory factory;
         public InternalTestLanguageParser(TokenStream input, IElementFactory factory) {
@@ -48,9 +49,30 @@ public class InternalTestLanguageParser extends Parser {
             this.factory = factory;
         }
         
-        protected void reportError(RecognitionException re, LeafNode ln) {
+        private List<IParseError> parseErrors;
+        private IParseError createParseError(RecognitionException re) {
+    		LeafNode ln = null;
+    		if (currentNode!=null) {
+    		    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
+    		    List<LeafNode> list = root.getLeafNodes();
+    		    if (list.size()>lastErrorIndex)
+    		        ln = list.get(lastErrorIndex);
+    		}
+    		IParseError error = null;
+    		if (ln == null) {
+    			CommonToken lt = (CommonToken) input.LT(input.index());
+    			error = new ParseError(lt.getLine(), lt.getStartIndex(), lt.getText() != null ? lt.getText()
+    					.length() : 0, lt.getText(), getErrorMessage(re, getTokenNames()), re);
+    		} else {
+    			error = new ParseError(ln, getErrorMessage(re, getTokenNames()), re);
+    		}
+    		parseErrors.add(error);
+    		return error;
+    	}
+        
+        protected void reportError(IParseError error, RecognitionException re) {
                 reportError(re);
-            }
+        }
                 
                 private int lastConsumedIndex = -1;
             
@@ -142,7 +164,7 @@ public class InternalTestLanguageParser extends Parser {
                 
                 public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
                     if(node.getElement() != null && node.getElement() != astElement) {
-                        throw new ParseException(node, "Reassignment of astElement in parse tree node");
+                        throw new ParseException(new ParseError(node, "Reassignment of astElement in parse tree node", null));
                     }
                     node.setElement(astElement);
                     if(astElement instanceof EObject) {
@@ -170,17 +192,17 @@ public class InternalTestLanguageParser extends Parser {
 
 
     // $ANTLR start parse
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:205:1: parse returns [IParseResult result] : ruleEntryRule EOF ;
-    public IParseResult parse() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:221:1: parse returns [IParseResult result] : ruleEntryRule EOF ;
+    public final IParseResult parse() throws RecognitionException {
         IParseResult result = null;
 
         EObject ruleEntryRule1 = null;
 
 
-         EObject current = null; 
+         EObject current = null; parseErrors = new ArrayList<IParseError>();
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:207:5: ( ruleEntryRule EOF )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:207:5: ruleEntryRule EOF
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:222:79: ( ruleEntryRule EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:5: ruleEntryRule EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEntryRule_in_parse75);
@@ -198,17 +220,11 @@ public class InternalTestLanguageParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
-             appendAllTokens(); result = new ParseResult(current, currentNode); 
+             appendAllTokens(); result = new ParseResult(current, currentNode,parseErrors); 
         }
         return result;
     }
@@ -216,8 +232,8 @@ public class InternalTestLanguageParser extends Parser {
 
 
     // $ANTLR start ruleEntryRule
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:217:1: ruleEntryRule returns [EObject current=null] : (lv_multiFeature= ruleAbstractRule )* ;
-    public EObject ruleEntryRule() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:233:1: ruleEntryRule returns [EObject current=null] : (lv_multiFeature= ruleAbstractRule )* ;
+    public final EObject ruleEntryRule() throws RecognitionException {
         EObject current = null;
 
         EObject lv_multiFeature = null;
@@ -225,10 +241,10 @@ public class InternalTestLanguageParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:219:1: ( (lv_multiFeature= ruleAbstractRule )* )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:219:1: (lv_multiFeature= ruleAbstractRule )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:234:33: ( (lv_multiFeature= ruleAbstractRule )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:235:1: (lv_multiFeature= ruleAbstractRule )*
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:219:1: (lv_multiFeature= ruleAbstractRule )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:235:1: (lv_multiFeature= ruleAbstractRule )*
             loop1:
             do {
                 int alt1=2;
@@ -241,7 +257,7 @@ public class InternalTestLanguageParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:221:5: lv_multiFeature= ruleAbstractRule
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:237:5: lv_multiFeature= ruleAbstractRule
             	    {
             	     
             	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -274,14 +290,8 @@ public class InternalTestLanguageParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -291,8 +301,8 @@ public class InternalTestLanguageParser extends Parser {
 
 
     // $ANTLR start ruleAbstractRule
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:236:1: ruleAbstractRule returns [EObject current=null] : (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule ) ;
-    public EObject ruleAbstractRule() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:252:1: ruleAbstractRule returns [EObject current=null] : (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule ) ;
+    public final EObject ruleAbstractRule() throws RecognitionException {
         EObject current = null;
 
         EObject this_ChoiceRule = null;
@@ -302,10 +312,10 @@ public class InternalTestLanguageParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:238:1: ( (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:238:1: (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:253:33: ( (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:254:1: (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:238:1: (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:254:1: (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -317,13 +327,13 @@ public class InternalTestLanguageParser extends Parser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("238:1: (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule )", 2, 0, input);
+                    new NoViableAltException("254:1: (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule )", 2, 0, input);
 
                 throw nvae;
             }
             switch (alt2) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:238:2: this_ChoiceRule= ruleChoiceRule
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:254:2: this_ChoiceRule= ruleChoiceRule
                     {
                     pushFollow(FOLLOW_ruleChoiceRule_in_ruleAbstractRule182);
                     this_ChoiceRule=ruleChoiceRule();
@@ -336,7 +346,7 @@ public class InternalTestLanguageParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:243:6: this_ReducibleRule= ruleReducibleRule
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:259:6: this_ReducibleRule= ruleReducibleRule
                     {
                     pushFollow(FOLLOW_ruleReducibleRule_in_ruleAbstractRule198);
                     this_ReducibleRule=ruleReducibleRule();
@@ -359,14 +369,8 @@ public class InternalTestLanguageParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -376,8 +380,8 @@ public class InternalTestLanguageParser extends Parser {
 
 
     // $ANTLR start ruleChoiceRule
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:251:1: ruleChoiceRule returns [EObject current=null] : ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) ) ;
-    public EObject ruleChoiceRule() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:267:1: ruleChoiceRule returns [EObject current=null] : ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) ) ;
+    public final EObject ruleChoiceRule() throws RecognitionException {
         EObject current = null;
 
         Token lv_optionalKeyword=null;
@@ -385,20 +389,20 @@ public class InternalTestLanguageParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:253:1: ( ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:253:1: ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:268:33: ( ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:269:1: ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:253:1: ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:253:2: ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:269:1: ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:269:2: ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:253:2: ( 'choice' (lv_optionalKeyword= 'optional' )? )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:253:3: 'choice' (lv_optionalKeyword= 'optional' )?
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:269:2: ( 'choice' (lv_optionalKeyword= 'optional' )? )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:269:3: 'choice' (lv_optionalKeyword= 'optional' )?
             {
             match(input,12,FOLLOW_12_in_ruleChoiceRule231); 
 
                     createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
                 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:258:1: (lv_optionalKeyword= 'optional' )?
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:274:1: (lv_optionalKeyword= 'optional' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -407,7 +411,7 @@ public class InternalTestLanguageParser extends Parser {
             }
             switch (alt3) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:259:5: lv_optionalKeyword= 'optional'
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:275:5: lv_optionalKeyword= 'optional'
                     {
                     lv_optionalKeyword=(Token)input.LT(1);
                     match(input,13,FOLLOW_13_in_ruleChoiceRule249); 
@@ -426,8 +430,8 @@ public class InternalTestLanguageParser extends Parser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:267:4: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:268:5: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:283:4: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:284:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoiceRule271); 
@@ -454,14 +458,8 @@ public class InternalTestLanguageParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -471,8 +469,8 @@ public class InternalTestLanguageParser extends Parser {
 
 
     // $ANTLR start ruleReducibleRule
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:283:1: ruleReducibleRule returns [EObject current=null] : ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? ) ;
-    public EObject ruleReducibleRule() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:299:1: ruleReducibleRule returns [EObject current=null] : ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? ) ;
+    public final EObject ruleReducibleRule() throws RecognitionException {
         EObject current = null;
 
         EObject this_TerminalRule = null;
@@ -482,14 +480,14 @@ public class InternalTestLanguageParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:285:1: ( ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:285:1: ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:300:33: ( ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:301:1: ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:285:1: ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:285:2: ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )?
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:301:1: ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:301:2: ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )?
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:285:2: ( 'reducible' this_TerminalRule= ruleTerminalRule )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:285:3: 'reducible' this_TerminalRule= ruleTerminalRule
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:301:2: ( 'reducible' this_TerminalRule= ruleTerminalRule )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:301:3: 'reducible' this_TerminalRule= ruleTerminalRule
             {
             match(input,14,FOLLOW_14_in_ruleReducibleRule313); 
 
@@ -505,7 +503,7 @@ public class InternalTestLanguageParser extends Parser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:294:2: ( () (lv_actionFeature= ruleTerminalRule ) )?
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:310:2: ( () (lv_actionFeature= ruleTerminalRule ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -514,10 +512,10 @@ public class InternalTestLanguageParser extends Parser {
             }
             switch (alt4) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:294:3: () (lv_actionFeature= ruleTerminalRule )
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:310:3: () (lv_actionFeature= ruleTerminalRule )
                     {
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:294:3: ()
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:295:5: 
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:310:3: ()
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:311:5: 
                     {
                      
                             temp=factory.create("ReducibleComposite");
@@ -532,8 +530,8 @@ public class InternalTestLanguageParser extends Parser {
 
                     }
 
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:305:2: (lv_actionFeature= ruleTerminalRule )
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:307:5: lv_actionFeature= ruleTerminalRule
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:321:2: (lv_actionFeature= ruleTerminalRule )
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:323:5: lv_actionFeature= ruleTerminalRule
                     {
                      
                             currentNode=createCompositeNode("//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -569,14 +567,8 @@ public class InternalTestLanguageParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -586,19 +578,19 @@ public class InternalTestLanguageParser extends Parser {
 
 
     // $ANTLR start ruleTerminalRule
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:322:1: ruleTerminalRule returns [EObject current=null] : (lv_stringFeature= RULE_STRING ) ;
-    public EObject ruleTerminalRule() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:338:1: ruleTerminalRule returns [EObject current=null] : (lv_stringFeature= RULE_STRING ) ;
+    public final EObject ruleTerminalRule() throws RecognitionException {
         EObject current = null;
 
         Token lv_stringFeature=null;
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:324:1: ( (lv_stringFeature= RULE_STRING ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:324:1: (lv_stringFeature= RULE_STRING )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:339:33: ( (lv_stringFeature= RULE_STRING ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:340:1: (lv_stringFeature= RULE_STRING )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:324:1: (lv_stringFeature= RULE_STRING )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:325:5: lv_stringFeature= RULE_STRING
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:340:1: (lv_stringFeature= RULE_STRING )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:341:5: lv_stringFeature= RULE_STRING
             {
             lv_stringFeature=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleTerminalRule406); 
@@ -622,14 +614,8 @@ public class InternalTestLanguageParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }

@@ -4,16 +4,19 @@ package org.eclipse.xtext.parser.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.impl.ParseError;
 import org.eclipse.xtext.parser.internal.XtextTokenTypeResolver;
 
 
 import org.antlr.runtime.*;
+
 import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
@@ -36,6 +39,10 @@ public class InternalXtextParser extends Parser {
             super(input);
         }
         
+    public TokenStream getInput() {
+    	return input;
+    }
+        
 
     public String[] getTokenNames() { return tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g"; }
@@ -48,9 +55,9 @@ public class InternalXtextParser extends Parser {
             this.factory = factory;
         }
         
-        protected void reportError(RecognitionException re, LeafNode ln) {
-                reportError(re);
-            }
+        protected void reportError(IParseError parseError,RecognitionException re) {
+              reportError(re);
+        }
                 
                 private int lastConsumedIndex = -1;
             
@@ -142,7 +149,7 @@ public class InternalXtextParser extends Parser {
                 
                 public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
                     if(node.getElement() != null && node.getElement() != astElement) {
-                        throw new ParseException(node, "Reassignment of astElement in parse tree node");
+                        throw new ParseException(new ParseError(node, "Reassignment of astElement in parse tree node", null));
                     }
                     node.setElement(astElement);
                     if(astElement instanceof EObject) {
@@ -164,7 +171,8 @@ public class InternalXtextParser extends Parser {
             return currentNode;
         }
         
-        private org.eclipse.xtext.Grammar grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/Xtext").getGrammar();;
+        private org.eclipse.xtext.Grammar grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/Xtext").getGrammar();
+		private List<IParseError> parseErrors;
 
 
 
@@ -179,6 +187,7 @@ public class InternalXtextParser extends Parser {
 
          EObject current = null; 
         try {
+        	parseErrors = new ArrayList<IParseError>();
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:207:5: ( ruleGrammar EOF )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:207:5: ruleGrammar EOF
             {
@@ -198,17 +207,11 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
-             appendAllTokens(); result = new ParseResult(current, currentNode); 
+             appendAllTokens(); result = new ParseResult(current, currentNode, parseErrors); 
         }
         return result;
     }
@@ -402,20 +405,34 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
         return current;
     }
     // $ANTLR end ruleGrammar
+
+	private IParseError createParseError(RecognitionException re) {
+		LeafNode ln = null;
+		if (currentNode!=null) {
+		    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
+		    List<LeafNode> list = root.getLeafNodes();
+		    if (list.size()>lastErrorIndex)
+		        ln = list.get(lastErrorIndex);
+		}
+		IParseError error = null;
+		if (ln == null) {
+			CommonToken lt = (CommonToken) input.LT(input.index());
+			error = new ParseError(lt.getLine(), lt.getStartIndex(), lt.getText() != null ? lt.getText()
+					.length() : 0, lt.getText(), getErrorMessage(re, getTokenNames()), re);
+		} else {
+			error = new ParseError(ln, getErrorMessage(re, getTokenNames()), re);
+		}
+		parseErrors.add(error);
+		return error;
+	}
 
 
     // $ANTLR start ruleAbstractRule
@@ -519,14 +536,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -604,14 +615,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -736,14 +741,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -844,14 +843,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -976,14 +969,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -1126,14 +1113,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -1228,14 +1209,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -1350,14 +1325,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -1462,14 +1431,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -1652,14 +1615,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -1763,14 +1720,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -1945,14 +1896,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -2071,14 +2016,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -2135,14 +2074,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -2188,14 +2121,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -2241,14 +2168,8 @@ public class InternalXtextParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }

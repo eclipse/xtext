@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.CompositeNode;
 
@@ -20,10 +22,12 @@ public class ParseResult implements IParseResult {
 
     private EObject rootAstElement;
     private CompositeNode rootNode;
+	private List<IParseError> parseErrors;
     
-    public ParseResult(EObject rootAstElement, CompositeNode rootNode) {
+    public ParseResult(EObject rootAstElement, CompositeNode rootNode, List<IParseError> parseErrors) {
         this.rootAstElement = rootAstElement;
         this.rootNode = rootNode;
+        this.parseErrors = parseErrors;
     }
     
     public ParseResult() {
@@ -43,6 +47,10 @@ public class ParseResult implements IParseResult {
 
     public CompositeNode getRootNode() {
         return rootNode;
+    }
+    
+    public List<IParseError> getParseErrors() {
+    	return parseErrors;
     }
 
 }

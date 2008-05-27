@@ -183,8 +183,8 @@ cached ResolvedType resolveCreatedType(Action a) :
 
 cached ResolvedType resolveType(Grammar g, String name) :
 	if name.isQualified() then 
-		g.allMetamodels().select(mm | mm.alias == name.getAlias())
-			.resolveType(name.getClassName()).first()
+		(g.allMetamodels().select(mm | mm.alias == name.getAlias())
+			.resolveType(name.getClassName()).first())
 	else 
 		g.allMetamodels().select(mm | mm.alias == null || mm.alias == "")
 			.resolveType(name.getClassName()).first()
@@ -261,7 +261,7 @@ cached List[MetaModel] createdMetamodels(Grammar g) :
 	
 private create MetaModel createMetamodel(GeneratedMetamodel gmm) :
 	setReferenced(false) ->
-	setAlias(alias)->
+	setAlias(gmm.alias)->
 	setDeclaration(gmm)
 ;
 

@@ -1,12 +1,10 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g 2008-05-26 17:42:55
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g 2008-05-27 15:10:52
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.IElementFactory;
-import org.eclipse.xtext.parser.ParseException;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.ParseResult;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
@@ -20,16 +18,16 @@ import java.util.ArrayList;
 
 public class InternalOptionalEmptyLanguageParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_WS", "RULE_SL_COMMENT", "RULE_ML_COMMENT", "RULE_LEXER_BODY", "RULE_ANY_OTHER", "'hallo'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_ML_COMMENT", "RULE_WS", "RULE_SL_COMMENT", "RULE_STRING", "RULE_INT", "RULE_LEXER_BODY", "RULE_ANY_OTHER", "'hallo'"
     };
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=5;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=7;
+    public static final int RULE_WS=6;
+    public static final int RULE_INT=9;
     public static final int EOF=-1;
-    public static final int RULE_INT=5;
-    public static final int RULE_STRING=6;
+    public static final int RULE_STRING=8;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_SL_COMMENT=7;
     public static final int RULE_LEXER_BODY=10;
 
         public InternalOptionalEmptyLanguageParser(TokenStream input) {
@@ -41,6 +39,9 @@ public class InternalOptionalEmptyLanguageParser extends Parser {
     public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g"; }
 
 
+        public TokenStream getInput() {
+        	return input;
+        }
 
         private IElementFactory factory;
         public InternalOptionalEmptyLanguageParser(TokenStream input, IElementFactory factory) {
@@ -48,9 +49,30 @@ public class InternalOptionalEmptyLanguageParser extends Parser {
             this.factory = factory;
         }
         
-        protected void reportError(RecognitionException re, LeafNode ln) {
+        private List<IParseError> parseErrors;
+        private IParseError createParseError(RecognitionException re) {
+    		LeafNode ln = null;
+    		if (currentNode!=null) {
+    		    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
+    		    List<LeafNode> list = root.getLeafNodes();
+    		    if (list.size()>lastErrorIndex)
+    		        ln = list.get(lastErrorIndex);
+    		}
+    		IParseError error = null;
+    		if (ln == null) {
+    			CommonToken lt = (CommonToken) input.LT(input.index());
+    			error = new ParseError(lt.getLine(), lt.getStartIndex(), lt.getText() != null ? lt.getText()
+    					.length() : 0, lt.getText(), getErrorMessage(re, getTokenNames()), re);
+    		} else {
+    			error = new ParseError(ln, getErrorMessage(re, getTokenNames()), re);
+    		}
+    		parseErrors.add(error);
+    		return error;
+    	}
+        
+        protected void reportError(IParseError error, RecognitionException re) {
                 reportError(re);
-            }
+        }
                 
                 private int lastConsumedIndex = -1;
             
@@ -142,7 +164,7 @@ public class InternalOptionalEmptyLanguageParser extends Parser {
                 
                 public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
                     if(node.getElement() != null && node.getElement() != astElement) {
-                        throw new ParseException(node, "Reassignment of astElement in parse tree node");
+                        throw new ParseException(new ParseError(node, "Reassignment of astElement in parse tree node", null));
                     }
                     node.setElement(astElement);
                     if(astElement instanceof EObject) {
@@ -170,17 +192,17 @@ public class InternalOptionalEmptyLanguageParser extends Parser {
 
 
     // $ANTLR start parse
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:205:1: parse returns [IParseResult result] : ruleModel EOF ;
-    public IParseResult parse() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:221:1: parse returns [IParseResult result] : ruleModel EOF ;
+    public final IParseResult parse() throws RecognitionException {
         IParseResult result = null;
 
         EObject ruleModel1 = null;
 
 
-         EObject current = null; 
+         EObject current = null; parseErrors = new ArrayList<IParseError>();
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:207:5: ( ruleModel EOF )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:207:5: ruleModel EOF
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:222:79: ( ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:223:5: ruleModel EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_parse75);
@@ -198,17 +220,11 @@ public class InternalOptionalEmptyLanguageParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
-             appendAllTokens(); result = new ParseResult(current, currentNode); 
+             appendAllTokens(); result = new ParseResult(current, currentNode,parseErrors); 
         }
         return result;
     }
@@ -216,8 +232,8 @@ public class InternalOptionalEmptyLanguageParser extends Parser {
 
 
     // $ANTLR start ruleModel
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:217:1: ruleModel returns [EObject current=null] : (lv_child= ruleGreeting )? ;
-    public EObject ruleModel() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:233:1: ruleModel returns [EObject current=null] : (lv_child= ruleGreeting )? ;
+    public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_child = null;
@@ -225,10 +241,10 @@ public class InternalOptionalEmptyLanguageParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:219:1: ( (lv_child= ruleGreeting )? )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:219:1: (lv_child= ruleGreeting )?
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:234:33: ( (lv_child= ruleGreeting )? )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:235:1: (lv_child= ruleGreeting )?
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:219:1: (lv_child= ruleGreeting )?
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:235:1: (lv_child= ruleGreeting )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -237,7 +253,7 @@ public class InternalOptionalEmptyLanguageParser extends Parser {
             }
             switch (alt1) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:221:5: lv_child= ruleGreeting
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:237:5: lv_child= ruleGreeting
                     {
                      
                             currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -267,14 +283,8 @@ public class InternalOptionalEmptyLanguageParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -284,26 +294,26 @@ public class InternalOptionalEmptyLanguageParser extends Parser {
 
 
     // $ANTLR start ruleGreeting
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:236:1: ruleGreeting returns [EObject current=null] : ( 'hallo' (lv_name= RULE_ID ) ) ;
-    public EObject ruleGreeting() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:252:1: ruleGreeting returns [EObject current=null] : ( 'hallo' (lv_name= RULE_ID ) ) ;
+    public final EObject ruleGreeting() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:238:1: ( ( 'hallo' (lv_name= RULE_ID ) ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:238:1: ( 'hallo' (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:253:33: ( ( 'hallo' (lv_name= RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:254:1: ( 'hallo' (lv_name= RULE_ID ) )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:238:1: ( 'hallo' (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:238:2: 'hallo' (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:254:1: ( 'hallo' (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:254:2: 'hallo' (lv_name= RULE_ID )
             {
             match(input,12,FOLLOW_12_in_ruleGreeting180); 
 
                     createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
                 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:243:1: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:244:5: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:259:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:260:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGreeting198); 
@@ -330,14 +340,8 @@ public class InternalOptionalEmptyLanguageParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }

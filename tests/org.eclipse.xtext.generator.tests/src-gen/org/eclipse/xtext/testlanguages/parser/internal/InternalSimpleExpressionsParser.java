@@ -1,12 +1,10 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g 2008-05-26 17:42:54
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g 2008-05-27 15:10:51
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.IElementFactory;
-import org.eclipse.xtext.parser.ParseException;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.ParseResult;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
@@ -20,16 +18,16 @@ import java.util.ArrayList;
 
 public class InternalSimpleExpressionsParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_WS", "RULE_SL_COMMENT", "RULE_ML_COMMENT", "RULE_LEXER_BODY", "RULE_ANY_OTHER", "'+'", "'-'", "'*'", "'/'", "'('", "')'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_ML_COMMENT", "RULE_WS", "RULE_SL_COMMENT", "RULE_STRING", "RULE_INT", "RULE_LEXER_BODY", "RULE_ANY_OTHER", "'+'", "'-'", "'*'", "'/'", "'('", "')'"
     };
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=5;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=7;
+    public static final int RULE_WS=6;
+    public static final int RULE_INT=9;
     public static final int EOF=-1;
-    public static final int RULE_INT=5;
-    public static final int RULE_STRING=6;
+    public static final int RULE_STRING=8;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_SL_COMMENT=7;
     public static final int RULE_LEXER_BODY=10;
 
         public InternalSimpleExpressionsParser(TokenStream input) {
@@ -41,6 +39,9 @@ public class InternalSimpleExpressionsParser extends Parser {
     public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g"; }
 
 
+        public TokenStream getInput() {
+        	return input;
+        }
 
         private IElementFactory factory;
         public InternalSimpleExpressionsParser(TokenStream input, IElementFactory factory) {
@@ -48,9 +49,30 @@ public class InternalSimpleExpressionsParser extends Parser {
             this.factory = factory;
         }
         
-        protected void reportError(RecognitionException re, LeafNode ln) {
+        private List<IParseError> parseErrors;
+        private IParseError createParseError(RecognitionException re) {
+    		LeafNode ln = null;
+    		if (currentNode!=null) {
+    		    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
+    		    List<LeafNode> list = root.getLeafNodes();
+    		    if (list.size()>lastErrorIndex)
+    		        ln = list.get(lastErrorIndex);
+    		}
+    		IParseError error = null;
+    		if (ln == null) {
+    			CommonToken lt = (CommonToken) input.LT(input.index());
+    			error = new ParseError(lt.getLine(), lt.getStartIndex(), lt.getText() != null ? lt.getText()
+    					.length() : 0, lt.getText(), getErrorMessage(re, getTokenNames()), re);
+    		} else {
+    			error = new ParseError(ln, getErrorMessage(re, getTokenNames()), re);
+    		}
+    		parseErrors.add(error);
+    		return error;
+    	}
+        
+        protected void reportError(IParseError error, RecognitionException re) {
                 reportError(re);
-            }
+        }
                 
                 private int lastConsumedIndex = -1;
             
@@ -142,7 +164,7 @@ public class InternalSimpleExpressionsParser extends Parser {
                 
                 public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
                     if(node.getElement() != null && node.getElement() != astElement) {
-                        throw new ParseException(node, "Reassignment of astElement in parse tree node");
+                        throw new ParseException(new ParseError(node, "Reassignment of astElement in parse tree node", null));
                     }
                     node.setElement(astElement);
                     if(astElement instanceof EObject) {
@@ -170,17 +192,17 @@ public class InternalSimpleExpressionsParser extends Parser {
 
 
     // $ANTLR start parse
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:205:1: parse returns [IParseResult result] : ruleMultiplication EOF ;
-    public IParseResult parse() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:221:1: parse returns [IParseResult result] : ruleMultiplication EOF ;
+    public final IParseResult parse() throws RecognitionException {
         IParseResult result = null;
 
         EObject ruleMultiplication1 = null;
 
 
-         EObject current = null; 
+         EObject current = null; parseErrors = new ArrayList<IParseError>();
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:207:5: ( ruleMultiplication EOF )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:207:5: ruleMultiplication EOF
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:222:79: ( ruleMultiplication EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:223:5: ruleMultiplication EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleMultiplication_in_parse75);
@@ -198,17 +220,11 @@ public class InternalSimpleExpressionsParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
-             appendAllTokens(); result = new ParseResult(current, currentNode); 
+             appendAllTokens(); result = new ParseResult(current, currentNode,parseErrors); 
         }
         return result;
     }
@@ -216,8 +232,8 @@ public class InternalSimpleExpressionsParser extends Parser {
 
 
     // $ANTLR start ruleMultiplication
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:217:1: ruleMultiplication returns [EObject current=null] : (this_Addition= ruleAddition ( ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleAddition ) )* ) ;
-    public EObject ruleMultiplication() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:233:1: ruleMultiplication returns [EObject current=null] : (this_Addition= ruleAddition ( ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleAddition ) )* ) ;
+    public final EObject ruleMultiplication() throws RecognitionException {
         EObject current = null;
 
         Token lv_operator=null;
@@ -228,11 +244,11 @@ public class InternalSimpleExpressionsParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:219:1: ( (this_Addition= ruleAddition ( ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleAddition ) )* ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:219:1: (this_Addition= ruleAddition ( ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleAddition ) )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:234:33: ( (this_Addition= ruleAddition ( ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleAddition ) )* ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:235:1: (this_Addition= ruleAddition ( ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleAddition ) )* )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:219:1: (this_Addition= ruleAddition ( ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleAddition ) )* )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:219:2: this_Addition= ruleAddition ( ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleAddition ) )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:235:1: (this_Addition= ruleAddition ( ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleAddition ) )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:235:2: this_Addition= ruleAddition ( ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleAddition ) )*
             {
             pushFollow(FOLLOW_ruleAddition_in_ruleMultiplication130);
             this_Addition=ruleAddition();
@@ -241,7 +257,7 @@ public class InternalSimpleExpressionsParser extends Parser {
              
                     current = this_Addition; 
                 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:223:1: ( ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleAddition ) )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:239:1: ( ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleAddition ) )*
             loop1:
             do {
                 int alt1=2;
@@ -254,13 +270,13 @@ public class InternalSimpleExpressionsParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:223:2: ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleAddition )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:239:2: ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleAddition )
             	    {
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:223:2: ( () (lv_operator= ( '+' | '-' ) ) )
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:223:3: () (lv_operator= ( '+' | '-' ) )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:239:2: ( () (lv_operator= ( '+' | '-' ) ) )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:239:3: () (lv_operator= ( '+' | '-' ) )
             	    {
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:223:3: ()
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:224:5: 
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:239:3: ()
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:240:5: 
             	    {
             	     
             	            temp=factory.create("Op");
@@ -275,8 +291,8 @@ public class InternalSimpleExpressionsParser extends Parser {
 
             	    }
 
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:234:2: (lv_operator= ( '+' | '-' ) )
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:235:5: lv_operator= ( '+' | '-' )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:250:2: (lv_operator= ( '+' | '-' ) )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:251:5: lv_operator= ( '+' | '-' )
             	    {
             	    lv_operator=(Token)input.LT(1);
             	    if ( (input.LA(1)>=12 && input.LA(1)<=13) ) {
@@ -301,8 +317,8 @@ public class InternalSimpleExpressionsParser extends Parser {
 
             	    }
 
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:245:3: (lv_values= ruleAddition )
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:247:5: lv_values= ruleAddition
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:261:3: (lv_values= ruleAddition )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:263:5: lv_values= ruleAddition
             	    {
             	     
             	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -341,14 +357,8 @@ public class InternalSimpleExpressionsParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -358,8 +368,8 @@ public class InternalSimpleExpressionsParser extends Parser {
 
 
     // $ANTLR start ruleAddition
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:262:1: ruleAddition returns [EObject current=null] : (this_Term= ruleTerm ( ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm ) )* ) ;
-    public EObject ruleAddition() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:278:1: ruleAddition returns [EObject current=null] : (this_Term= ruleTerm ( ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm ) )* ) ;
+    public final EObject ruleAddition() throws RecognitionException {
         EObject current = null;
 
         Token lv_operator=null;
@@ -370,11 +380,11 @@ public class InternalSimpleExpressionsParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:264:1: ( (this_Term= ruleTerm ( ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm ) )* ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:264:1: (this_Term= ruleTerm ( ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm ) )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:279:33: ( (this_Term= ruleTerm ( ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm ) )* ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:280:1: (this_Term= ruleTerm ( ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm ) )* )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:264:1: (this_Term= ruleTerm ( ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm ) )* )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:264:2: this_Term= ruleTerm ( ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm ) )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:280:1: (this_Term= ruleTerm ( ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm ) )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:280:2: this_Term= ruleTerm ( ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm ) )*
             {
             pushFollow(FOLLOW_ruleTerm_in_ruleAddition238);
             this_Term=ruleTerm();
@@ -383,7 +393,7 @@ public class InternalSimpleExpressionsParser extends Parser {
              
                     current = this_Term; 
                 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:268:1: ( ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm ) )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:284:1: ( ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm ) )*
             loop2:
             do {
                 int alt2=2;
@@ -396,13 +406,13 @@ public class InternalSimpleExpressionsParser extends Parser {
 
                 switch (alt2) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:268:2: ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:284:2: ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm )
             	    {
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:268:2: ( () (lv_operator= ( '*' | '/' ) ) )
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:268:3: () (lv_operator= ( '*' | '/' ) )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:284:2: ( () (lv_operator= ( '*' | '/' ) ) )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:284:3: () (lv_operator= ( '*' | '/' ) )
             	    {
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:268:3: ()
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:269:5: 
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:284:3: ()
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:285:5: 
             	    {
             	     
             	            temp=factory.create("Op");
@@ -417,8 +427,8 @@ public class InternalSimpleExpressionsParser extends Parser {
 
             	    }
 
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:279:2: (lv_operator= ( '*' | '/' ) )
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:280:5: lv_operator= ( '*' | '/' )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:295:2: (lv_operator= ( '*' | '/' ) )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:296:5: lv_operator= ( '*' | '/' )
             	    {
             	    lv_operator=(Token)input.LT(1);
             	    if ( (input.LA(1)>=14 && input.LA(1)<=15) ) {
@@ -443,8 +453,8 @@ public class InternalSimpleExpressionsParser extends Parser {
 
             	    }
 
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:290:3: (lv_values= ruleTerm )
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:292:5: lv_values= ruleTerm
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:306:3: (lv_values= ruleTerm )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:308:5: lv_values= ruleTerm
             	    {
             	     
             	            currentNode=createCompositeNode("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -483,14 +493,8 @@ public class InternalSimpleExpressionsParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -500,8 +504,8 @@ public class InternalSimpleExpressionsParser extends Parser {
 
 
     // $ANTLR start ruleTerm
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:307:1: ruleTerm returns [EObject current=null] : (this_Atom= ruleAtom | this_Parens= ruleParens ) ;
-    public EObject ruleTerm() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:323:1: ruleTerm returns [EObject current=null] : (this_Atom= ruleAtom | this_Parens= ruleParens ) ;
+    public final EObject ruleTerm() throws RecognitionException {
         EObject current = null;
 
         EObject this_Atom = null;
@@ -511,10 +515,10 @@ public class InternalSimpleExpressionsParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:309:1: ( (this_Atom= ruleAtom | this_Parens= ruleParens ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:309:1: (this_Atom= ruleAtom | this_Parens= ruleParens )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:324:33: ( (this_Atom= ruleAtom | this_Parens= ruleParens ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:325:1: (this_Atom= ruleAtom | this_Parens= ruleParens )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:309:1: (this_Atom= ruleAtom | this_Parens= ruleParens )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:325:1: (this_Atom= ruleAtom | this_Parens= ruleParens )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -526,13 +530,13 @@ public class InternalSimpleExpressionsParser extends Parser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("309:1: (this_Atom= ruleAtom | this_Parens= ruleParens )", 3, 0, input);
+                    new NoViableAltException("325:1: (this_Atom= ruleAtom | this_Parens= ruleParens )", 3, 0, input);
 
                 throw nvae;
             }
             switch (alt3) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:309:2: this_Atom= ruleAtom
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:325:2: this_Atom= ruleAtom
                     {
                     pushFollow(FOLLOW_ruleAtom_in_ruleTerm346);
                     this_Atom=ruleAtom();
@@ -545,7 +549,7 @@ public class InternalSimpleExpressionsParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:314:6: this_Parens= ruleParens
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:330:6: this_Parens= ruleParens
                     {
                     pushFollow(FOLLOW_ruleParens_in_ruleTerm362);
                     this_Parens=ruleParens();
@@ -568,14 +572,8 @@ public class InternalSimpleExpressionsParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -585,19 +583,19 @@ public class InternalSimpleExpressionsParser extends Parser {
 
 
     // $ANTLR start ruleAtom
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:322:1: ruleAtom returns [EObject current=null] : (lv_name= RULE_ID ) ;
-    public EObject ruleAtom() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:338:1: ruleAtom returns [EObject current=null] : (lv_name= RULE_ID ) ;
+    public final EObject ruleAtom() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:324:1: ( (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:324:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:339:33: ( (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:340:1: (lv_name= RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:324:1: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:325:5: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:340:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:341:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAtom401); 
@@ -621,14 +619,8 @@ public class InternalSimpleExpressionsParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }
@@ -638,8 +630,8 @@ public class InternalSimpleExpressionsParser extends Parser {
 
 
     // $ANTLR start ruleParens
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:340:1: ruleParens returns [EObject current=null] : ( ( '(' this_Multiplication= ruleMultiplication ) ')' ) ;
-    public EObject ruleParens() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:356:1: ruleParens returns [EObject current=null] : ( ( '(' this_Multiplication= ruleMultiplication ) ')' ) ;
+    public final EObject ruleParens() throws RecognitionException {
         EObject current = null;
 
         EObject this_Multiplication = null;
@@ -647,14 +639,14 @@ public class InternalSimpleExpressionsParser extends Parser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:342:1: ( ( ( '(' this_Multiplication= ruleMultiplication ) ')' ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:342:1: ( ( '(' this_Multiplication= ruleMultiplication ) ')' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:357:33: ( ( ( '(' this_Multiplication= ruleMultiplication ) ')' ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:358:1: ( ( '(' this_Multiplication= ruleMultiplication ) ')' )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:342:1: ( ( '(' this_Multiplication= ruleMultiplication ) ')' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:342:2: ( '(' this_Multiplication= ruleMultiplication ) ')'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:358:1: ( ( '(' this_Multiplication= ruleMultiplication ) ')' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:358:2: ( '(' this_Multiplication= ruleMultiplication ) ')'
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:342:2: ( '(' this_Multiplication= ruleMultiplication )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:342:3: '(' this_Multiplication= ruleMultiplication
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:358:2: ( '(' this_Multiplication= ruleMultiplication )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:358:3: '(' this_Multiplication= ruleMultiplication
             {
             match(input,16,FOLLOW_16_in_ruleParens442); 
 
@@ -685,14 +677,8 @@ public class InternalSimpleExpressionsParser extends Parser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                LeafNode ln = null;
-                if (currentNode!=null) {
-                    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-                    List<LeafNode> list = root.getLeafNodes();
-                    if (list.size()>lastErrorIndex)
-                        ln = list.get(lastErrorIndex);
-                }
-                reportError(re, ln);
+                IParseError error = createParseError(re);
+                reportError(error, re);
             } 
         finally {
         }

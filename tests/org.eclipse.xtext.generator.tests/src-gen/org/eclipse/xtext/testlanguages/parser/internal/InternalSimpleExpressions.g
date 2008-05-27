@@ -49,10 +49,8 @@ package org.eclipse.xtext.testlanguages.parser.internal;
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.IElementFactory;
-import org.eclipse.xtext.parser.ParseException;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.ParseResult;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
@@ -60,6 +58,9 @@ import org.eclipse.xtext.testlanguages.parser.internal.SimpleExpressionsTokenTyp
 }
 
 @parser::members {
+    public TokenStream getInput() {
+    	return input;
+    }
 
     private IElementFactory factory;
     public InternalSimpleExpressionsParser(TokenStream input, IElementFactory factory) {
@@ -67,9 +68,30 @@ import org.eclipse.xtext.testlanguages.parser.internal.SimpleExpressionsTokenTyp
         this.factory = factory;
     }
     
-    protected void reportError(RecognitionException re, LeafNode ln) {
+    private List<IParseError> parseErrors;
+    private IParseError createParseError(RecognitionException re) {
+		LeafNode ln = null;
+		if (currentNode!=null) {
+		    CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
+		    List<LeafNode> list = root.getLeafNodes();
+		    if (list.size()>lastErrorIndex)
+		        ln = list.get(lastErrorIndex);
+		}
+		IParseError error = null;
+		if (ln == null) {
+			CommonToken lt = (CommonToken) input.LT(input.index());
+			error = new ParseError(lt.getLine(), lt.getStartIndex(), lt.getText() != null ? lt.getText()
+					.length() : 0, lt.getText(), getErrorMessage(re, getTokenNames()), re);
+		} else {
+			error = new ParseError(ln, getErrorMessage(re, getTokenNames()), re);
+		}
+		parseErrors.add(error);
+		return error;
+	}
+    
+    protected void reportError(IParseError error, RecognitionException re) {
             reportError(re);
-        }
+    }
             
             private int lastConsumedIndex = -1;
         
@@ -161,7 +183,7 @@ import org.eclipse.xtext.testlanguages.parser.internal.SimpleExpressionsTokenTyp
             
             public void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
                 if(node.getElement() != null && node.getElement() != astElement) {
-                    throw new ParseException(node, "Reassignment of astElement in parse tree node");
+                    throw new ParseException(new ParseError(node, "Reassignment of astElement in parse tree node", null));
                 }
                 node.setElement(astElement);
                 if(astElement instanceof EObject) {
@@ -191,25 +213,19 @@ import org.eclipse.xtext.testlanguages.parser.internal.SimpleExpressionsTokenTyp
     catch (RecognitionException re) { 
         recover(input,re); 
         appendSkippedTokens();
-        LeafNode ln = null;
-        if (currentNode!=null) {
-            CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-            List<LeafNode> list = root.getLeafNodes();
-            if (list.size()>lastErrorIndex)
-                ln = list.get(lastErrorIndex);
-        }
-        reportError(re, ln);
+        IParseError error = createParseError(re);
+        reportError(error, re);
     } 
 }
 
 parse returns [IParseResult result] 
-	@init { EObject current = null; } : 
+	@init { EObject current = null; parseErrors = new ArrayList<IParseError>();} : 
     { currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
     ruleMultiplication 
     { current=$ruleMultiplication.current; }
     EOF 
     { appendTrailingHiddenTokens(currentNode); };
-    finally { appendAllTokens(); $result = new ParseResult(current, currentNode); }
+    finally { appendAllTokens(); $result = new ParseResult(current, currentNode,parseErrors); }
 
 
 
@@ -357,17 +373,17 @@ this_Multiplication=ruleMultiplication
 
 
 
-RULE_INT : ('0'..'9')+;
+RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
+
+RULE_INT : ('0'..'9')+;
 
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
 

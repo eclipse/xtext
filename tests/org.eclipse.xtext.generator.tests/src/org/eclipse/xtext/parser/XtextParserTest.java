@@ -1,0 +1,20 @@
+package org.eclipse.xtext.parser;
+
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.XtextLanguageFacade;
+import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
+
+public class XtextParserTest extends AbstractGeneratorTest {
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		XtextStandaloneSetup.doSetup();
+		with(XtextLanguageFacade.LANGUAGE_ID);
+	}
+	
+	public void test_resolveReturnType() throws Exception {
+		Grammar model = (Grammar) getModel("generate foo 'bar' as x Model returns x::Foo : 'holla' name=ID;");
+		assertWithXtend("'x'", "metamodelDeclarations.first().alias", model);
+	}
+}
