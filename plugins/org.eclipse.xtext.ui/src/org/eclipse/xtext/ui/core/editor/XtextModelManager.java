@@ -11,10 +11,6 @@ package org.eclipse.xtext.ui.core.editor;
 import java.util.Vector;
 
 import org.apache.tools.ant.filters.StringInputStream;
-import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.IRegion;
-import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
@@ -95,16 +91,9 @@ public class XtextModelManager {
 		return !getErrors().isEmpty();
 	}
 
-	private void parseTree(IDocument document, IRegion region) {
+	public void parseTree(String content) {
 		rootNode = null;
 		getErrors().clear();
-		String content = document.get();
-		try {
-			content = document.get(region.getOffset(), region.getLength());
-		}
-		catch (BadLocationException e) {
-			CoreLog.logError(e);
-		}
 		ILanguageFacade languageFacade = languageDescriptor.getLanguageFacade();
 		IParseResult object = languageFacade.getParser().parse(new StringInputStream(content),
 				languageFacade.getElementFactory(), new ParseErrorHandlerImpl());
@@ -113,16 +102,11 @@ public class XtextModelManager {
 		}
 	}
 
-	public void parseTree(IDocument doc) {
-		parseTree(doc, new Region(0, doc.getLength()));
-	}
-
 	public LanguageDescriptor getLanguageDescriptor() {
 		return languageDescriptor;
 	}
 
 	public Vector<ParseError> getErrors() {
-		// TODO comodification exception
 		return errors;
 	}
 
