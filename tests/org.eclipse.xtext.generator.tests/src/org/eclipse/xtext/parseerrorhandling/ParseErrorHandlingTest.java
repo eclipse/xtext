@@ -14,9 +14,9 @@ import java.util.List;
 
 import org.eclipse.xtext.XtextGrammarTestLanguageFacade;
 import org.eclipse.xtext.XtextGrammarTestStandaloneSetup;
+import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.XtextGrammarTestASTFactory;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class ParseErrorHandlingTest extends AbstractGeneratorTest {
@@ -32,7 +32,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		ErrorHandler errors = new ErrorHandler();
 		getInvocations("import 'holla' % as foo", errors);
 		assertEquals(1,errors.size());
-		assertEquals("%", errors.get(0).getText());
+		assertEquals("%", errors.get(0).getProblematicText());
 		assertEquals(1, errors.get(0).getLine());
 		assertEquals(15, errors.get(0).getOffset());
 		assertEquals(1, errors.get(0).getLength());
@@ -46,7 +46,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	public void testParseError1() throws Exception {
 		ErrorHandler errors = new ErrorHandler();
 		getInvocations("import 'holla' foo returns x::y::Z : name=ID;", errors);
-		assertEquals("::", errors.get(0).getText());
+		assertEquals("::", errors.get(0).getProblematicText());
 		assertEquals(1, errors.get(0).getLine());
 		assertEquals(31, errors.get(0).getOffset());
 		assertEquals(2, errors.get(0).getLength());
@@ -73,19 +73,28 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		assertWithXtend("null", "parserRules.first().eAllContents.typeSelect(XtextTest::Keyword).first().name", object);
 		assertWithXtend("\"'stuff'\"", "parserRules.get(1).eAllContents.typeSelect(XtextTest::Keyword).first().value", object);
 	}
+	
+	
+	public void testname() throws Exception {
+		String model = "import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'";
+		for (int i=model.length();0<i;i--) {
+			ErrorHandler errors = new ErrorHandler();
+			getModel(model.substring(0, i), new XtextGrammarTestASTFactory(), errors);
+		}
+	}
 
 	private final class ErrorHandler implements IParseErrorHandler {
-		private final List<ErrorEntry> errors = new ArrayList<ErrorEntry>();
+		private final List<IParseError> errors = new ArrayList<IParseError>();
 
 		public void clear() {
 			errors.clear();
 		}
 
-		public ErrorEntry get(int arg0) {
+		public IParseError get(int arg0) {
 			return errors.get(arg0);
 		}
 
-		public Iterator<ErrorEntry> iterator() {
+		public Iterator<IParseError> iterator() {
 			return errors.iterator();
 		}
 
@@ -93,66 +102,19 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 			return errors.size();
 		}
 
-		public void handleParserError(LeafNode node, String message,
-				Object context) {
-			errors.add(new ErrorEntry(node, message, context));
+		public void handleParserError(IParseError err) {
+			errors.add(err);
 		}
 		
 		@Override
 		public String toString() {
 			StringBuffer buff = new StringBuffer();
-			for (ErrorEntry e : errors) {
+			for (IParseError e : errors) {
 				buff.append(e.toString()).append("\n");
 			}
 			return buff.toString();
 		}
-	}
 
-	private final class ErrorEntry {
-		String message;
-		Object context;
-		private LeafNode node;
-		public ErrorEntry(LeafNode node2, String message, Object context) {
-			super();
-			this.node = node2;
-			this.message = message;
-			this.context = context;
-		}
-		
-		
-		public int getLine() {
-			return node.line();
-		}
-
-
-		public int getOffset() {
-			return node.offset();
-		}
-
-
-		public int getLength() {
-			return node.length();
-		}
-
-
-		public String getText() {
-			return node.serialize();
-		}
-
-
-		public String getMessage() {
-			return message;
-		}
-
-
-		public Object getContext() {
-			return context;
-		}
-
-
-		public String toString() {
-			return "token:" + node.serialize() + ",message:" + message;
-		}
 	}
 
 }

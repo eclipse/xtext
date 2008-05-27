@@ -129,14 +129,20 @@ public abstract class AbstractGeneratorTest extends TestCase {
 
 	protected Object invokeWithXtend(String expression, Object _this) {
 		XtendFacade f = getXtendFacade();
-		f = f.cloneWithExtensions("invoke(Object this) : " + expression + ";");
+		f = f.cloneWithExtensions(getImportDeclarations()+"invoke(Object this) : " + expression + ";");
 		return f.call("invoke", _this);
+	}
+	
+	protected String[] importedExtensions() {
+		return new String[0];
 	}
 
 	protected void assertWithXtend(String message, String left, String right, Object _this) {
 		XtendFacade f = getXtendFacade();
-		f = f.cloneWithExtensions("__compare(Object this) : __left(this) == __right(this);__left(Object this) : "
-				+ left + "; __right(Object this) :" + right + ";");
+		StringBuffer code = getImportDeclarations();
+		code.append("__compare(Object this) : __left(this) == __right(this);__left(Object this) : "
+			+ left + "; __right(Object this) :" + right + ";");
+		f = f.cloneWithExtensions(code.toString());
 		Boolean result = (Boolean) f.call("__compare", _this);
 		if (!result) {
 			Object leftResult = f.call("__left", _this);
@@ -145,6 +151,14 @@ public abstract class AbstractGeneratorTest extends TestCase {
 					+ (leftResult != null ? leftResult.getClass().getSimpleName() : "") + ") != " + rightResult + "("
 					+ (leftResult != null ? leftResult.getClass().getSimpleName() : "") + ")");
 		}
+	}
+
+	private StringBuffer getImportDeclarations() {
+		StringBuffer code = new StringBuffer();
+		for (String _import : importedExtensions()) {
+			code.append("extension ").append(_import).append(";");
+		}
+		return code;
 	}
 
 	protected XtendFacade getXtendFacade() {
