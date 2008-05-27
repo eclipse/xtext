@@ -22,9 +22,9 @@ public class BundleClasspathUriResolverTests extends AbstractClasspathUriResolve
     }
 
     public void testClasspathUriForFileInPlugin() {
-        URI classpathUri = URI.createURI("classpath:/org/eclipse/xtext/ui/util/mydsl.ecore");
-        String expectedUri = "platform:/plugin/org.eclipse.xtext.ui/bin/org/eclipse/xtext/ui/util/mydsl.ecore";
-        URI normalizedUri = _resolver.resolve(Platform.getBundle("org.eclipse.xtext.ui"), classpathUri);
+        URI classpathUri = URI.createURI("classpath:/org/eclipse/xtext/ui/simple.ecore");
+        String expectedUri = "platform:/plugin/org.eclipse.xtext.ui.tests/bin/org/eclipse/xtext/ui/simple.ecore";
+        URI normalizedUri = _resolver.resolve(Platform.getBundle("org.eclipse.xtext.ui.tests"), classpathUri);
         assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
     }
 
