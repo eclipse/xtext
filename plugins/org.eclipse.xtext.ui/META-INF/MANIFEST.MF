@@ -17,6 +17,7 @@ Export-Package: org.eclipse.xtext.ui.core.editor,
  org.eclipse.xtext.ui.core.editor.utils,
  org.eclipse.xtext.ui.core.language,
  org.eclipse.xtext.ui.core.service,
+ org.eclipse.xtext.ui.core.service.impl,
  org.eclipse.xtext.ui.core.util
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

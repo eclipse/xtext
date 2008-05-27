@@ -6,14 +6,19 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.language;
+
+package org.eclipse.xtext.reference.ui.services;
+
+import org.eclipse.jface.text.TextAttribute;
+import org.eclipse.xtext.parsetree.LeafNode;
 
 /**
- * @author Peter Friese - Initial contribution and API
+ * @author Dennis Hübner
  * 
  */
-public interface ILanguageService {
-	LanguageDescriptor getLanguageDescriptor();
-
-	void setLanguageDescriptor(LanguageDescriptor languageDescriptor);
+public class ReferenceSyntaxColorer extends org.eclipse.xtext.ui.core.service.impl.SyntaxColorer {
+	@Override
+	public TextAttribute color(LeafNode leafNode) {
+		return super.color(leafNode);
+	}
 }

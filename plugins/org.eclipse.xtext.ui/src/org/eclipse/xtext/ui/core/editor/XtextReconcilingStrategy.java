@@ -30,16 +30,14 @@ import org.eclipse.xtext.ui.core.internal.XtextMarkerManager;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class XtextReconcilingStrategy implements IReconcilingStrategy,
-		IReconcilingStrategyExtension {
+public class XtextReconcilingStrategy implements IReconcilingStrategy, IReconcilingStrategyExtension {
 
 	private IDocument document;
 	private IProgressMonitor monitor;
 	private XtextModelManager manager;
 	private IEditorPart editor;
 
-	public XtextReconcilingStrategy(XtextModelManager manager,
-			IEditorPart resource) {
+	public XtextReconcilingStrategy(XtextModelManager manager, IEditorPart resource) {
 		this.manager = manager;
 		this.editor = resource;
 	}
@@ -52,13 +50,11 @@ public class XtextReconcilingStrategy implements IReconcilingStrategy,
 	 * eclipse.jface.text.IRegion)
 	 */
 	public void reconcile(IRegion partition) {
-		IResource resource = (IResource) editor.getEditorInput().getAdapter(
-				IFile.class);
+		IResource resource = (IResource) editor.getEditorInput().getAdapter(IFile.class);
 		XtextMarkerManager.clearXtextMarker(resource, monitor);
 		if (manager.hasErrors()) {
 			for (ParseError error : manager.getErrors()) {
-				XtextMarkerManager.createMarker(resource,
-						collectMarkerAttributes(error), monitor);
+				XtextMarkerManager.createMarker(resource, collectMarkerAttributes(error), monitor);
 			}
 		}
 	}
@@ -98,10 +94,12 @@ public class XtextReconcilingStrategy implements IReconcilingStrategy,
 	private Map<String, Object> collectMarkerAttributes(ParseError error) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IMarker.SEVERITY, new Integer(IMarker.SEVERITY_ERROR));
-		map.put(IMarker.LINE_NUMBER, new Integer(error.line()));
+		if (error.getNode() != null) {
+			map.put(IMarker.LINE_NUMBER, new Integer(error.line()));
+			map.put(IMarker.CHAR_START, new Integer(error.offset()));
+			map.put(IMarker.CHAR_END, new Integer(error.offset() + error.length()));
+		}
 		map.put(IMarker.MESSAGE, error.getMessage());
-		map.put(IMarker.CHAR_START, new Integer(error.offset()));
-		map.put(IMarker.CHAR_END, new Integer(error.offset() + error.length()));
 		map.put(IMarker.PRIORITY, new Integer(IMarker.PRIORITY_LOW));
 
 		return map;

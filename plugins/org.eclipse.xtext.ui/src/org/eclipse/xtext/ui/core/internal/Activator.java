@@ -54,9 +54,10 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
-		if (resourceLibrary != null)
+		if (resourceLibrary != null) {
 			resourceLibrary.dispose();
-		resourceLibrary = null;
+			resourceLibrary = null;
+		}
 		super.stop(context);
 	}
 

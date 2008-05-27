@@ -9,11 +9,17 @@
 package org.eclipse.xtext.ui.core.language;
 
 /**
- * @author Peter Friese - Initial contribution and API
+ * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public interface ILanguageService {
-	LanguageDescriptor getLanguageDescriptor();
+public class AbstractLanguageService implements ILanguageService {
+	private LanguageDescriptor languageDescriptor = null;
 
-	void setLanguageDescriptor(LanguageDescriptor languageDescriptor);
+	public void setLanguageDescriptor(LanguageDescriptor languageDescriptor) {
+		this.languageDescriptor = languageDescriptor;
+	}
+
+	public LanguageDescriptor getLanguageDescriptor() {
+		return languageDescriptor;
+	}
 }

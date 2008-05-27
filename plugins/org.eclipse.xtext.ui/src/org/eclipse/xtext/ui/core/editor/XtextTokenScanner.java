@@ -11,14 +11,16 @@ package org.eclipse.xtext.ui.core.editor;
 import java.util.Iterator;
 
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.xtext.parser.ITokenTypes;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.language.LanguageServiceFactory;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
@@ -29,11 +31,11 @@ import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 public class XtextTokenScanner implements ITokenScanner {
 
 	private ISyntaxColorer syntaxColorer;
-	private LeafNode lastNode = null;
-	private Iterator<EObject> nodeIterator;
+	private LeafNode currentNode = null;
+	private Iterator<LeafNode> nodeIterator;
 	private final XtextModelManager modelmanager;
 
-	public XtextTokenScanner(XtextModelManager modelmanager) {
+	public XtextTokenScanner(XtextModelManager modelmanager, IPreferenceStore preferenceStore) {
 		this.modelmanager = modelmanager;
 		Assert.isLegal(modelmanager != null);
 		this.syntaxColorer = LanguageServiceFactory.getInstance()
@@ -46,9 +48,7 @@ public class XtextTokenScanner implements ITokenScanner {
 	 * @see org.eclipse.jface.text.rules.ITokenScanner#getTokenLength()
 	 */
 	public int getTokenLength() {
-		if (lastNode != null)
-			return lastNode.length();
-		return -1;
+		return currentNode.length();
 	}
 
 	/*
@@ -57,9 +57,7 @@ public class XtextTokenScanner implements ITokenScanner {
 	 * @see org.eclipse.jface.text.rules.ITokenScanner#getTokenOffset()
 	 */
 	public int getTokenOffset() {
-		if (lastNode != null)
-			return lastNode.offset();
-		return -1;
+		return currentNode.offset();
 	}
 
 	/*
@@ -73,14 +71,18 @@ public class XtextTokenScanner implements ITokenScanner {
 			Object o = nodeIterator.next();
 			if (o instanceof LeafNode) {
 				retVal = Token.UNDEFINED;
-				lastNode = (LeafNode) o;
+				currentNode = (LeafNode) o;
+				if (ITokenTypes.WHITESPACE.equals(currentNode.tokenType()))
+					retVal = Token.WHITESPACE;
 				TextAttribute tAttr;
 				if (syntaxColorer != null) {
-					tAttr = syntaxColorer.color(lastNode);
+					tAttr = syntaxColorer.color(currentNode);
 					if (tAttr != null)
 						retVal = new Token(tAttr);
 				}
 			}
+			if (retVal.equals(Token.EOF))
+				CoreLog.logError("Wrong node type:" + o, new IllegalArgumentException());
 		}
 		return retVal;
 	}
@@ -94,13 +96,12 @@ public class XtextTokenScanner implements ITokenScanner {
 	 */
 	public void setRange(IDocument document, int offset, int length) {
 		Assert.isLegal(document != null);
+		nodeIterator = null;
 		// TODO partial parse
 		modelmanager.parseTree(document);
-		AbstractNode currentAST = modelmanager.getCurrentAST();
-		if (currentAST != null)
-			nodeIterator = currentAST.eAllContents();
-		else
-			nodeIterator = null;
+		AbstractNode rootNode = modelmanager.getCurrentRootNode();
+		if (rootNode != null)
+			nodeIterator = rootNode.getLeafNodes().iterator();
 	}
 
 }

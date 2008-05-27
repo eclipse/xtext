@@ -8,20 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Vector;
 
 import org.apache.tools.ant.filters.StringInputStream;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
 
@@ -33,9 +31,9 @@ public class XtextModelManager {
 
 	private final class ParseErrorHandlerImpl implements IParseErrorHandler {
 		public void handleParserError(LeafNode node, String message, Object context) {
-			getErrors().add(
-					new ParseError(node, message,
-							context));
+			if (node == null)
+				CoreLog.logWarning("Parameter 'node' is null in handleParseError methode");
+			getErrors().add(new ParseError(node, message, context));
 		}
 	}
 
@@ -78,11 +76,10 @@ public class XtextModelManager {
 		public int offset() {
 			return node.offset();
 		}
-		
-		
+
 	}
 
-	private List<ParseError> errors = new ArrayList<ParseError>();
+	private Vector<ParseError> errors = new Vector<ParseError>();
 	private final LanguageDescriptor languageDescriptor;
 	private AbstractNode rootNode;
 
@@ -90,7 +87,7 @@ public class XtextModelManager {
 		this.languageDescriptor = languageDescriptor;
 	}
 
-	public AbstractNode getCurrentAST() {
+	public AbstractNode getCurrentRootNode() {
 		return rootNode;
 	}
 
@@ -104,17 +101,15 @@ public class XtextModelManager {
 		String content = document.get();
 		try {
 			content = document.get(region.getOffset(), region.getLength());
-		} catch (BadLocationException e) {
+		}
+		catch (BadLocationException e) {
 			CoreLog.logError(e);
 		}
 		ILanguageFacade languageFacade = languageDescriptor.getLanguageFacade();
-		Notifier object = (Notifier) languageFacade.getParser()
-				.parse(new StringInputStream(content),
-						languageFacade.getElementFactory(),
-						new ParseErrorHandlerImpl());
+		IParseResult object = languageFacade.getParser().parse(new StringInputStream(content),
+				languageFacade.getElementFactory(), new ParseErrorHandlerImpl());
 		if (object != null) {
-			NodeAdapter adapter = (NodeAdapter) object.eAdapters().get(0);
-			rootNode = adapter.getParserNode();
+			rootNode = object.getRootNode();
 		}
 	}
 
@@ -126,7 +121,8 @@ public class XtextModelManager {
 		return languageDescriptor;
 	}
 
-	public List<ParseError> getErrors() {
+	public Vector<ParseError> getErrors() {
+		// TODO comodification exception
 		return errors;
 	}
 
