@@ -8,11 +8,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import java.util.ResourceBundle;
+
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.editors.text.TextFileDocumentProvider;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
+import org.eclipse.ui.texteditor.ContentAssistAction;
+import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
+import org.eclipse.xtext.ui.core.editor.infrastructure.XtextModelManager;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
 import org.eclipse.xtext.ui.core.language.LanguageDescriptorFactory;
@@ -33,9 +39,8 @@ public class BaseTextEditor extends TextEditor {
 		LanguageDescriptor languageDescriptor = initializeLanguageDescriptor();
 		// try plain text editor if problem occurs
 		if (languageDescriptor != null) {
-			XtextModelManager manager = new XtextModelManager(languageDescriptor);
-
 			xtextPreferenceStore = LanguageServiceFactory.getInstance().getPreferenceStore(languageDescriptor);
+			XtextModelManager manager = new XtextModelManager(languageDescriptor);
 			XtextDefaultsInitializer.initializeDefaults(xtextPreferenceStore);
 			ChainedPreferenceStore chainedPreferenceStore = new ChainedPreferenceStore(new IPreferenceStore[] {
 					getPreferenceStore(), xtextPreferenceStore });
@@ -57,5 +62,14 @@ public class BaseTextEditor extends TextEditor {
 		String namespace = this.getConfigurationElement().getNamespaceIdentifier();
 		LanguageDescriptor langDescr = LanguageDescriptorFactory.createLanguageDescriptor(namespace);
 		return langDescr;
+	}
+
+	@Override
+	protected void createActions() {
+		super.createActions();
+		Action action = new ContentAssistAction(ResourceBundle.getBundle("org.eclipse.xtext.ui.core.editor.messages"),
+				"ContentAssistProposal.", this);
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
+		setAction("ContentAssistProposal", action);
 	}
 }

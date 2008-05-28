@@ -20,6 +20,7 @@ import org.eclipse.jface.text.rules.Token;
 import org.eclipse.xtext.parser.ITokenTypes;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.ui.core.editor.infrastructure.XtextModelManager;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.language.LanguageServiceFactory;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;

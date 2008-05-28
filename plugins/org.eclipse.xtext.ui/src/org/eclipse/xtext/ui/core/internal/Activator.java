@@ -42,7 +42,11 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		plugin = this;
+		setDefault(this);
+	}
+
+	private static void setDefault(Activator activator) {
+		plugin = activator;
 	}
 
 	/*
@@ -53,7 +57,7 @@ public class Activator extends AbstractUIPlugin {
 	 * )
 	 */
 	public void stop(BundleContext context) throws Exception {
-		plugin = null;
+		setDefault(null);
 		if (resourceLibrary != null) {
 			resourceLibrary.dispose();
 			resourceLibrary = null;

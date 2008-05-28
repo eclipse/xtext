@@ -20,6 +20,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
+import org.eclipse.xtext.ui.core.service.IProposalsProvider;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
 /**
@@ -47,6 +48,10 @@ public class LanguageServiceFactory {
 
 	public ISyntaxColorer getSyntaxColorer(LanguageDescriptor language) {
 		return (ISyntaxColorer) loadService(language, SYNTAXCOLORER);
+	}
+
+	public IProposalsProvider getProposalsProvider(LanguageDescriptor language) {
+		return null;
 	}
 
 	private ILanguageService loadService(LanguageDescriptor languageDescriptor, String serviceName) {

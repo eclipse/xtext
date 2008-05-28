@@ -37,7 +37,6 @@ public class SyntaxColorer extends AbstractLanguageService implements ISyntaxCol
 
 	private TextAttribute colorInternal(LeafNode node) {
 		if (!(ITokenTypes.KEYWORD.equals(node.tokenType()) && node.length() == 1)) {
-
 			return new TextAttribute(getColorForTokenType(node), getBackgroundColorForTokenType(node),
 					getStyleForTokenType(node), getFontForTokenType(node));
 		}
