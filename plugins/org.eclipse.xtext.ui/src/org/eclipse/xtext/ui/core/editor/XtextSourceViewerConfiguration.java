@@ -82,13 +82,14 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 			processor = new HippieProposalProcessor();
 		}
 		ContentAssistant ca = new ContentAssistant();
+		ca.enableColoredLabels(true);
 		ca.setContentAssistProcessor(processor, IDocument.DEFAULT_CONTENT_TYPE);
 		ca.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE);
 		ca.setProposalPopupOrientation(IContentAssistant.PROPOSAL_STACKED);
 		ca.setInformationControlCreator(new AbstractReusableInformationControlCreator() {
 			@Override
 			protected IInformationControl doCreateInformationControl(Shell parent) {
-				return new DefaultInformationControl(parent);
+				return new DefaultInformationControl(parent, false);
 			}
 		});
 		return ca;

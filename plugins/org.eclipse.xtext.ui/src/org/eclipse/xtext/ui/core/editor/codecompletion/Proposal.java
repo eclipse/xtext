@@ -17,6 +17,7 @@ import org.eclipse.swt.graphics.Image;
  * 
  */
 public class Proposal {
+
 	private StyledString label;
 	private String text;
 	private String description;
