@@ -35,9 +35,9 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	private final IEditorPart editor;
 
 	/**
-	 * @param file
-	 * @param languageDescriptor
-	 * @param langDescr
+	 * @param manager
+	 * @param preferenceStore
+	 * @param editor
 	 */
 	public XtextSourceViewerConfiguration(XtextModelManager manager, IPreferenceStore preferenceStore,
 			IEditorPart editor) {
@@ -67,7 +67,6 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	 */
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
-		ContentAssistant ca = new ContentAssistant();
 		IProposalsProvider proposalsProvider = LanguageServiceFactory.getInstance().getProposalsProvider(
 				modelManager.getLanguageDescriptor());
 		IContentAssistProcessor processor;
@@ -77,6 +76,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		else {
 			processor = new HippieProposalProcessor();
 		}
+		ContentAssistant ca = new ContentAssistant();
 		ca.setContentAssistProcessor(processor, IDocument.DEFAULT_CONTENT_TYPE);
 		return ca;
 	}
