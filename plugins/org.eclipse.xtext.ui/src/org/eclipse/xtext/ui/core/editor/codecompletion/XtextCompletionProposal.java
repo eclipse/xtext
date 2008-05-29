@@ -20,6 +20,7 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 
 /**
@@ -60,7 +61,7 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * getAdditionalProposalInfo()
 	 */
 	public String getAdditionalProposalInfo() {
-		return proposal.getDescription() == null ? "" : proposal.getDescription() + " Additional";
+		return proposal.getDescription() == null ? null : proposal.getDescription() + " Additional";
 	}
 
 	/*
@@ -112,8 +113,8 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * (org.eclipse.jface.text.ITextViewer, boolean)
 	 */
 	public void selected(ITextViewer viewer, boolean smartToggle) {
-		// TODO Auto-generated method stub
-
+		if (Activator.DEBUG_PROPOSALS_PROVIDER)
+			System.out.println("XtextCompletionProposal.selected(): " + proposal.getLabel());
 	}
 
 	/*
@@ -124,8 +125,8 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * (org.eclipse.jface.text.ITextViewer)
 	 */
 	public void unselected(ITextViewer viewer) {
-		// TODO Auto-generated method stub
-
+		if (Activator.DEBUG_PROPOSALS_PROVIDER)
+			System.out.println("XtextCompletionProposal.unselected(): " + proposal.getLabel());
 	}
 
 	/*
@@ -159,6 +160,6 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * (org.eclipse.jface.text.IDocument)
 	 */
 	public Point getSelection(IDocument document) {
-		return null;
+		return new Point(offset + proposal.getText().length(), 0);
 	}
 }
