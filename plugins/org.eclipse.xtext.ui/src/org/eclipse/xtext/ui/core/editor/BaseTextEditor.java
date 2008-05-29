@@ -8,8 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
-import java.util.ResourceBundle;
-
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -30,7 +28,7 @@ import org.eclipse.xtext.ui.core.preferences.XtextDefaultsInitializer;
  * 
  */
 public class BaseTextEditor extends TextEditor {
-	public static final String ID = "org.eclipse.xtext.baseEditor";
+	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
 	private IPreferenceStore xtextPreferenceStore;
 
 	@Override
@@ -48,12 +46,8 @@ public class BaseTextEditor extends TextEditor {
 			setSourceViewerConfiguration(new XtextSourceViewerConfiguration(manager, chainedPreferenceStore, this));
 		}
 		else {
-			CoreLog
-					.logError(
-							"LanguageDescriptor is not provided for '"
-									+ this.getConfigurationElement().getNamespaceIdentifier()
-									+ "' plugin. Please declare org.eclipse.xtext.ui.languageDescriptor extension in the coresponding plugin.xml.",
-							new IllegalStateException());
+			CoreLog.logError(EditorMessages.getFormattedString("BaseTextEditor.NoLanguageDescriptor", //$NON-NLS-1$
+					this.getConfigurationElement().getNamespaceIdentifier()), new IllegalStateException());
 		}
 		setDocumentProvider(new TextFileDocumentProvider());
 	}
@@ -67,9 +61,9 @@ public class BaseTextEditor extends TextEditor {
 	@Override
 	protected void createActions() {
 		super.createActions();
-		Action action = new ContentAssistAction(ResourceBundle.getBundle("org.eclipse.xtext.ui.core.editor.messages"),
-				"ContentAssistProposal.", this);
+		Action action = new ContentAssistAction(EditorMessages.getResourceBundle(), "ContentAssistProposal.", this);//$NON-NLS-1$
 		action.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
-		setAction("ContentAssistProposal", action);
+		setAction("ContentAssistProposal", action);//$NON-NLS-1$
+		markAsStateDependentAction("ContentAssistProposal", true); //$NON-NLS-1$
 	}
 }

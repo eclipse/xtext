@@ -17,7 +17,6 @@ import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
-import org.eclipse.xtext.parser.ITokenTypes;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.core.editor.infrastructure.XtextModelManager;
@@ -71,19 +70,22 @@ public class XtextTokenScanner implements ITokenScanner {
 		if (nodeIterator != null && nodeIterator.hasNext()) {
 			Object o = nodeIterator.next();
 			if (o instanceof LeafNode) {
-				retVal = Token.UNDEFINED;
 				currentNode = (LeafNode) o;
-				if (ITokenTypes.WHITESPACE.equals(currentNode.tokenType()))
-					retVal = Token.WHITESPACE;
-				TextAttribute tAttr;
+				retVal = Token.UNDEFINED;
+				// if (ITokenTypes.WHITESPACE.equals(currentNode.tokenType())) {
+				// retVal = Token.WHITESPACE;
+				// }
 				if (syntaxColorer != null) {
-					tAttr = syntaxColorer.color(currentNode);
+					TextAttribute tAttr = syntaxColorer.color(currentNode);
 					if (tAttr != null)
 						retVal = new Token(tAttr);
 				}
 			}
-			if (retVal.equals(Token.EOF))
-				CoreLog.logError("Wrong node type:" + o, new IllegalArgumentException());
+			else {
+				CoreLog.logError(EditorMessages.getFormattedString(
+						"XtextTokenScanner.WrogNodeType", o, LeafNode.class.getName()), //$NON-NLS-1$ 
+						new IllegalArgumentException());
+			}
 		}
 		return retVal;
 	}
