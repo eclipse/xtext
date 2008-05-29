@@ -22,7 +22,6 @@ import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.language.AbstractLanguageService;
 import org.eclipse.xtext.ui.core.language.LanguageServiceFactory;
-import org.eclipse.xtext.ui.core.preferences.XtextPreferenceConstants;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
 /**
@@ -44,11 +43,12 @@ public class SyntaxColorer extends AbstractLanguageService implements ISyntaxCol
 	}
 
 	private IPreferenceStore getPreferenceStore() {
-		return LanguageServiceFactory.getInstance().getPreferenceStore(getLanguageDescriptor());
+		return LanguageServiceFactory.getInstance().getPreferenceStore(getLanguageDescriptor())
+				.getPersitablePreferenceStore();
 	}
 
 	private int getStyleForTokenType(LeafNode node) {
-		return getPreferenceStore().getInt(XtextPreferenceConstants.getTokenStylePreferenceKey(node.tokenType()));
+		return getPreferenceStore().getInt(PreferenceStore.getTokenStylePreferenceKey(node.tokenType()));
 	}
 
 	private Font getFontForTokenType(LeafNode node) {
@@ -57,7 +57,7 @@ public class SyntaxColorer extends AbstractLanguageService implements ISyntaxCol
 
 	private Color getBackgroundColorForTokenType(LeafNode node) {
 		String rgbString = getPreferenceStore().getString(
-				XtextPreferenceConstants.getTokenBackgroundColorPreferenceKey(node.tokenType()));
+				PreferenceStore.getTokenBackgroundColorPreferenceKey(node.tokenType()));
 		if (rgbString.trim().length() > 0) {
 			try {
 				RGB rgb = StringConverter.asRGB(rgbString);
@@ -71,8 +71,7 @@ public class SyntaxColorer extends AbstractLanguageService implements ISyntaxCol
 	}
 
 	private Color getColorForTokenType(LeafNode node) {
-		String rgbString = getPreferenceStore().getString(
-				XtextPreferenceConstants.getTokenColorPreferenceKey(node.tokenType()));
+		String rgbString = getPreferenceStore().getString(PreferenceStore.getTokenColorPreferenceKey(node.tokenType()));
 		if (rgbString.trim().length() > 0) {
 			try {
 				RGB rgb = StringConverter.asRGB(rgbString);

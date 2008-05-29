@@ -34,5 +34,12 @@
             languageId="org.eclipse.xtext.ui.reference.referenceLanguageDescriptor">
       </proposalsProvider>
    </extension>
+   <extension
+         point="org.eclipse.xtext.ui.preferenceStore">
+      <preferenceStore
+            class="org.eclipse.xtext.ui.core.service.impl.PreferenceStore"
+            languageId="org.eclipse.xtext.ui.reference.referenceLanguageDescriptor">
+      </preferenceStore>
+   </extension>
 
 </plugin>

@@ -21,7 +21,7 @@ import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
 import org.eclipse.xtext.ui.core.language.LanguageDescriptorFactory;
 import org.eclipse.xtext.ui.core.language.LanguageServiceFactory;
-import org.eclipse.xtext.ui.core.preferences.XtextDefaultsInitializer;
+import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -29,7 +29,6 @@ import org.eclipse.xtext.ui.core.preferences.XtextDefaultsInitializer;
  */
 public class BaseTextEditor extends TextEditor {
 	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
-	private IPreferenceStore xtextPreferenceStore;
 
 	@Override
 	public void setInitializationData(IConfigurationElement cfig, String propertyName, Object data) {
@@ -37,11 +36,11 @@ public class BaseTextEditor extends TextEditor {
 		LanguageDescriptor languageDescriptor = initializeLanguageDescriptor();
 		// try plain text editor if problem occurs
 		if (languageDescriptor != null) {
-			xtextPreferenceStore = LanguageServiceFactory.getInstance().getPreferenceStore(languageDescriptor);
 			XtextModelManager manager = new XtextModelManager(languageDescriptor);
-			XtextDefaultsInitializer.initializeDefaults(xtextPreferenceStore);
+			IPreferenceStoreService xtextPreferenceStore = LanguageServiceFactory.getInstance().getPreferenceStore(
+					languageDescriptor);
 			ChainedPreferenceStore chainedPreferenceStore = new ChainedPreferenceStore(new IPreferenceStore[] {
-					getPreferenceStore(), xtextPreferenceStore });
+					getPreferenceStore(), xtextPreferenceStore.getPersitablePreferenceStore() });
 
 			setSourceViewerConfiguration(new XtextSourceViewerConfiguration(manager, chainedPreferenceStore, this));
 		}

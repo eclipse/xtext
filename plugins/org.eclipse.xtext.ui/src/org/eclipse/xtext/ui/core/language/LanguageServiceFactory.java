@@ -15,11 +15,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
+import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
 import org.eclipse.xtext.ui.core.service.IProposalsProvider;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
@@ -34,8 +32,10 @@ public class LanguageServiceFactory {
 
 	private static final String SYNTAXCOLORER = "syntaxColorer";
 	private static final String PROPOSALS_PROVIDER = "proposalsProvider";
+	private static final String PREFERENCE_STORE = "preferenceStore";
+
 	private static LanguageServiceFactory instance;
-	private static Map<String, IPreferenceStore> preferenceStoreCache = new HashMap<String, IPreferenceStore>();
+	private static Map<String, IPreferenceStoreService> preferenceStoreCache = new HashMap<String, IPreferenceStoreService>();
 
 	private LanguageServiceFactory() {
 	}
@@ -86,13 +86,13 @@ public class LanguageServiceFactory {
 		return null;
 	}
 
-	public IPreferenceStore getPreferenceStore(LanguageDescriptor languageDescriptor) {
-		IPreferenceStore preferenceStore = preferenceStoreCache.get(languageDescriptor.getNameSpace());
+	public IPreferenceStoreService getPreferenceStore(LanguageDescriptor languageDescriptor) {
+		IPreferenceStoreService preferenceStore = preferenceStoreCache.get(languageDescriptor.getNameSpace());
 		if (preferenceStore == null) {
-			preferenceStore = new ScopedPreferenceStore(new InstanceScope(), languageDescriptor.getNameSpace());
+			preferenceStore = (IPreferenceStoreService) loadService(languageDescriptor, PREFERENCE_STORE);
+			preferenceStore.initializeDefaults();
 			preferenceStoreCache.put(languageDescriptor.getNameSpace(), preferenceStore);
 		}
 		return preferenceStore;
 	}
-
 }
