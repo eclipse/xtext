@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Reference
-Bundle-SymbolicName: org.eclipse.xtext.ui.core.reference;singleton:=true
+Bundle-SymbolicName: org.eclipse.xtext.reference.ui;singleton:=true
 Bundle-Version: 1.0.0
 Export-Package: org.eclipse.xtext.reference.ui.services
 Bundle-Activator: org.eclipse.xtext.reference.ui.Activator
