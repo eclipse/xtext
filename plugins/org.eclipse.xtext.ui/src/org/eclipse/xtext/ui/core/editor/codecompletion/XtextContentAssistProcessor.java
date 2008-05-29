@@ -6,17 +6,17 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.editor;
+package org.eclipse.xtext.ui.core.editor.codecompletion;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.text.ITextViewer;
+import org.eclipse.jface.text.contentassist.ContextInformationValidator;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
-import org.eclipse.xtext.ui.core.editor.infrastructure.Proposal;
 import org.eclipse.xtext.ui.core.service.IProposalsProvider;
 
 /**
@@ -39,14 +39,13 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		List<ICompletionProposal> retVal = new ArrayList<ICompletionProposal>();
 		for (Proposal proposal : proposalProvider.getProposals(viewer, offset)) {
-			retVal.add(createCompletionProposal(proposal));
+			retVal.add(createCompletionProposal(proposal, offset));
 		}
 		return retVal.toArray(new ICompletionProposal[0]);
 	}
 
-	private ICompletionProposal createCompletionProposal(Proposal proposal) {
-		// TODO Auto-generated method stub
-		return null;
+	private ICompletionProposal createCompletionProposal(Proposal proposal, int offset) {
+		return new XtextCompletionProposal(proposal, offset);
 	}
 
 	/*
@@ -56,8 +55,12 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	 * computeContextInformation(org.eclipse.jface.text.ITextViewer, int)
 	 */
 	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
-		// TODO Auto-generated method stub
-		return null;
+		List<IContextInformation> retVal = new ArrayList<IContextInformation>();
+		for (Proposal proposal : proposalProvider.getProposals(viewer, offset)) {
+			XtextCompletionProposal xtextCP = new XtextCompletionProposal(proposal, offset);
+			retVal.add(xtextCP.getContextInformation());
+		}
+		return retVal.toArray(new IContextInformation[0]);
 	}
 
 	/*
@@ -89,8 +92,7 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	 * getContextInformationValidator()
 	 */
 	public IContextInformationValidator getContextInformationValidator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ContextInformationValidator(this);
 	}
 
 	/*

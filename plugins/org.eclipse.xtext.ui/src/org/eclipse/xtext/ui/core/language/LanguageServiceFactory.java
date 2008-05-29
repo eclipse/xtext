@@ -33,6 +33,7 @@ public class LanguageServiceFactory {
 	private static final String CLASS = "class";
 
 	private static final String SYNTAXCOLORER = "syntaxColorer";
+	private static final String PROPOSALS_PROVIDER = "proposalsProvider";
 	private static LanguageServiceFactory instance;
 	private static Map<String, IPreferenceStore> preferenceStoreCache = new HashMap<String, IPreferenceStore>();
 
@@ -51,7 +52,7 @@ public class LanguageServiceFactory {
 	}
 
 	public IProposalsProvider getProposalsProvider(LanguageDescriptor language) {
-		return null;
+		return (IProposalsProvider) loadService(language, PROPOSALS_PROVIDER);
 	}
 
 	private ILanguageService loadService(LanguageDescriptor languageDescriptor, String serviceName) {

@@ -9,7 +9,10 @@
 package org.eclipse.xtext.ui.core.editor;
 
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.text.AbstractReusableInformationControlCreator;
+import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
@@ -19,9 +22,11 @@ import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.reconciler.MonoReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.ui.texteditor.HippieProposalProcessor;
+import org.eclipse.xtext.ui.core.editor.codecompletion.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.core.editor.infrastructure.XtextModelManager;
 import org.eclipse.xtext.ui.core.language.LanguageServiceFactory;
 import org.eclipse.xtext.ui.core.service.IProposalsProvider;
@@ -78,6 +83,14 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		}
 		ContentAssistant ca = new ContentAssistant();
 		ca.setContentAssistProcessor(processor, IDocument.DEFAULT_CONTENT_TYPE);
+		ca.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE);
+		ca.setProposalPopupOrientation(IContentAssistant.PROPOSAL_STACKED);
+		ca.setInformationControlCreator(new AbstractReusableInformationControlCreator() {
+			@Override
+			protected IInformationControl doCreateInformationControl(Shell parent) {
+				return new DefaultInformationControl(parent);
+			}
+		});
 		return ca;
 	}
 

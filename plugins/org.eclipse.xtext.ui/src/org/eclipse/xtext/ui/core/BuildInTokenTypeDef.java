@@ -14,12 +14,12 @@ public class BuildInTokenTypeDef {
 
 	@TokenType(name = "Singleline Comment")
 	public boolean slComment(LeafNode node) {
-		return ((RuleCall) node.getGrammarElement()).getName().equals(BuiltinRules.BUILTIN_SL_COMMENT);
+		return ((RuleCall) node.getGrammarElement()).getName().equals(BuiltinRules.BUILTIN_SL_COMMENT.getName());
 	}
 
 	@TokenType(name = "Multiline Comment")
 	public boolean mlComment(LeafNode node) {
-		return ((RuleCall) node.getGrammarElement()).getName().equals(BuiltinRules.BUILTIN_ML_COMMENT);
+		return ((RuleCall) node.getGrammarElement()).getName().equals(BuiltinRules.BUILTIN_ML_COMMENT.getName());
 	}
 
 	@TokenType(name = "Plus Sign")

@@ -11,12 +11,13 @@ package org.eclipse.xtext.ui.core.service;
 import java.util.List;
 
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.xtext.ui.core.editor.infrastructure.Proposal;
+import org.eclipse.xtext.ui.core.editor.codecompletion.Proposal;
+import org.eclipse.xtext.ui.core.language.ILanguageService;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public interface IProposalsProvider {
+public interface IProposalsProvider extends ILanguageService {
 	List<Proposal> getProposals(ITextViewer viewer, int offset);
 }
