@@ -6,32 +6,33 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.editor.infrastructure;
+package org.eclipse.xtext.ui.core.editor.codecompletion;
 
-import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.swt.graphics.Image;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
 public class Proposal {
-	private ImageDescriptor icon;
 	private StyledString label;
 	private String text;
 	private String description;
+	private Image image;
 
-	/**
-	 * @return the icon
-	 */
-	public ImageDescriptor getIcon() {
-		return icon;
+	public Proposal(String text) {
+		Assert.isLegal(text != null);
+		this.text = text;
 	}
 
 	/**
 	 * @return the label
 	 */
 	public StyledString getLabel() {
+		if (label == null)
+			return new StyledString(text);
 		return label;
 	}
 
@@ -40,14 +41,6 @@ public class Proposal {
 	 */
 	public String getText() {
 		return text;
-	}
-
-	/**
-	 * @param icon
-	 * 		the icon to set
-	 */
-	public void setIcon(ImageDescriptor icon) {
-		this.icon = icon;
 	}
 
 	/**
@@ -74,9 +67,25 @@ public class Proposal {
 	}
 
 	/**
-	 * @param description the description to set
+	 * @param description
+	 * 		the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @param image
+	 * 		the image to set
+	 */
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
+	/**
+	 * @return the image
+	 */
+	public Image getImage() {
+		return image;
 	}
 }

@@ -27,5 +27,12 @@
             languageId="org.eclipse.xtext.ui.reference.referenceLanguageDescriptor">
       </syntaxColorer>
    </extension>
+   <extension
+         point="org.eclipse.xtext.ui.proposalsProvider">
+      <proposalsProvider
+            class="org.eclipse.xtext.reference.ui.services.ReferenceProposalsProvider"
+            languageId="org.eclipse.xtext.ui.reference.referenceLanguageDescriptor">
+      </proposalsProvider>
+   </extension>
 
 </plugin>
