@@ -1,0 +1,67 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+
+«EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
+
+«DEFINE file FOR Grammar»
+«FILE pathName()+'/services/'+languageName()+'MetamodelAccess.java'-»
+package «packageName()».services;
+
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.service.*;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.parser.BaseEPackageAccess;
+
+public class «languageName()»MetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
+
+	public EPackage[] getGeneratedEPackages() {
+		return new EPackage[] {
+		«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm SEPARATOR ","»
+		get«gmm.name.toFirstUpper()»EPackage()
+		«ENDFOREACH»
+		};
+	}
+
+	public EPackage[] getReferencedEPackages() {
+		return new EPackage[] {
+		«FOREACH metamodelDeclarations.typeSelect(ReferencedMetamodel) AS rmm SEPARATOR ","»
+		BaseEPackageAccess.getEPackageFromRegistry(«rmm.uri»)
+		«ENDFOREACH»
+		};
+	}
+
+	«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm»
+	public static final String «gmm.name.toUpperCase()»_NS_URI = "«gmm.nsURI.trimFromStartAndEnd(1)»";
+	public static final String «gmm.name.toUpperCase()»_CP_URI = "«pathName()»/«gmm.name».ecore";
+	
+	public static EPackage get«gmm.name.toFirstUpper()»EPackage() {	
+		if (!EPackage.Registry.INSTANCE.containsKey(«gmm.name.toUpperCase()»_NS_URI)) {
+			EPackage p = loadEcoreFile(«languageName()»MetamodelAccess.class.getClassLoader(),«gmm.name.toUpperCase()»_CP_URI);
+			if (p!=null) {
+				EPackage.Registry.INSTANCE.put(«gmm.name.toUpperCase()»_NS_URI,p);
+			}
+		}
+		return EPackage.Registry.INSTANCE.getEPackage(«gmm.name.toUpperCase()»_NS_URI);
+	}
+	«ENDFOREACH»
+
+	
+	public String getModelFileExtension() {
+		return "«modelFileExtension()»";
+	}
+   
+}
+«ENDFILE»
+«ENDDEFINE»

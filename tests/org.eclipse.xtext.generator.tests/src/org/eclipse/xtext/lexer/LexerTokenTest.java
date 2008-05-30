@@ -16,7 +16,6 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parser.ITokenTypes;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.testlanguages.LexerLanguageLanguageFacade;
 import org.eclipse.xtext.testlanguages.LexerLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.LexerLanguageTokenTypes;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -31,7 +30,7 @@ public class LexerTokenTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		LexerLanguageStandaloneSetup.doSetup();
-		with(LexerLanguageLanguageFacade.LANGUAGE_ID);
+		with(LexerLanguageStandaloneSetup.class);
 	}
 
 	public void testLexerTokens() throws Exception {

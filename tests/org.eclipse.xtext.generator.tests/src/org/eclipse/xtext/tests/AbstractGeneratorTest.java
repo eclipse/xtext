@@ -9,6 +9,8 @@
 package org.eclipse.xtext.tests;
 
 import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,10 +53,13 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	/**
 	 * call this to set the language class to be used in the current test.
 	 */
-	protected void with(String language) throws Exception {
-		currentLanguage = language;
+	protected void with(Class<?> standaloneSetup) throws Exception {
+	    Method method = standaloneSetup.getMethod("doSetup");
+	    method.invoke(null);
+	    Field languageIdField = standaloneSetup.getField("LANGUAGE_ID");
+		currentLanguage = languageIdField.get(null).toString();
 	}
-
+	
 	// parse methods
 
 	public EObject getModel(String model) throws Exception {
