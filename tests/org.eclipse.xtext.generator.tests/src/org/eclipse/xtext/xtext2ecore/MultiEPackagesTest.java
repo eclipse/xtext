@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextLanguageFacade;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.xtextutil.XtextutilPackage;
@@ -14,8 +13,7 @@ public class MultiEPackagesTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		XtextutilPackage.eINSTANCE.getAbstractType();
-		XtextStandaloneSetup.doSetup();
-		with(XtextLanguageFacade.LANGUAGE_ID);
+		with(XtextStandaloneSetup.class);
 	}
 	
 	@SuppressWarnings("unchecked")

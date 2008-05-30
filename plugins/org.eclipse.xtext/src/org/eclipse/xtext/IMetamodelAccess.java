@@ -6,38 +6,30 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
+package org.eclipse.xtext;
 
-package org.eclipse.xtext.parser;
-
-import java.io.InputStream;
-
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.service.ILanguageService;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public interface IParser extends ILanguageService {
+public interface IMetamodelAccess extends ILanguageService {
 	
 	/**
-	 * @param in
-	 * @param factory
-	 * @param handler
 	 * @return
 	 */
-	IParseResult parse(InputStream in, IElementFactory factory, IParseErrorHandler handler);
+	EPackage[] getGeneratedEPackages();
 	
 	/**
-	 * @param in
-	 * @param factory
+	 * 
 	 * @return
 	 */
-	IParseResult parse(InputStream in, IElementFactory factory);
+	EPackage[] getReferencedEPackages();
 	
 	/**
-	 * @param in
-	 * @param factory
 	 * @return
 	 */
-	IParseResult parse(InputStream in);
+	String getModelFileExtension();
 }

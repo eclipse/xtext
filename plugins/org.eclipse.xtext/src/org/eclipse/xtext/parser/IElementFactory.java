@@ -9,12 +9,13 @@
 package org.eclipse.xtext.parser;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.service.ILanguageService;
 
 /**
  * @author sven efftinge
  * 
  */
-public interface IElementFactory {
+public interface IElementFactory extends ILanguageService {
 	
 	/**
 	 * creates an instance of the given typename

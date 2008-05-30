@@ -9,7 +9,6 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.testlanguages.SimpleExpressionsLanguageFacade;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsParseTreeConstructor;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -35,7 +34,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 	}
 	
 	public void testSimpleExpressions() throws Exception {
-		with(SimpleExpressionsLanguageFacade.LANGUAGE_ID);
+		with(SimpleExpressionsStandaloneSetup.class);
 		String model = "a + b - c * d / e";
 		EObject result = (EObject) getModel(model);
 		SimpleExpressionsParseTreeConstructor con = new SimpleExpressionsParseTreeConstructor();
@@ -49,6 +48,6 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		super.setUp();
 		SimpleReconstrTestStandaloneSetup.doSetup();
 		SimpleExpressionsStandaloneSetup.doSetup();
-		with(SimpleReconstrTestLanguageFacade.LANGUAGE_ID);
+		with(SimpleReconstrTestStandaloneSetup.class);
 	}
 }
