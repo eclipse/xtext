@@ -1,5 +1,6 @@
 package org.eclipse.xtext.service;
 
+
 import junit.framework.TestCase;
 
 public class ServiceTest extends TestCase {
