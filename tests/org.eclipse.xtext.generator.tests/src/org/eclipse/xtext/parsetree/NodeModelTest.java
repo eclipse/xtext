@@ -21,11 +21,6 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parser.ITokenTypes;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.testlanguages.TestLanguageLanguageFacade;
 import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -127,7 +122,7 @@ public class NodeModelTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		TestLanguageStandaloneSetup.doSetup();
-		with(TestLanguageLanguageFacade.LANGUAGE_ID);
+		with(TestLanguageStandaloneSetup.class);
 	}
 
 }

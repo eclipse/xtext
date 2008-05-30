@@ -24,7 +24,7 @@ public class SimpleTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		SimpleTestStandaloneSetup.doSetup();
-		with(SimpleTestLanguageFacade.LANGUAGE_ID);
+		with(SimpleTestStandaloneSetup.class);
 	}
 	
 	public void testFoo() throws Exception {

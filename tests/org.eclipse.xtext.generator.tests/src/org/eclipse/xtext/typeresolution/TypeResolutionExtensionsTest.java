@@ -1,7 +1,6 @@
 package org.eclipse.xtext.typeresolution;
 
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextLanguageFacade;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.xtextutil.ResolvedType;
@@ -12,8 +11,7 @@ public class TypeResolutionExtensionsTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		XtextutilPackage.eINSTANCE.getAbstractType();
-		XtextStandaloneSetup.doSetup();
-		with(XtextLanguageFacade.LANGUAGE_ID);
+		with(XtextStandaloneSetup.class);
 	}
 	
 	public void test_resolveReturnType() throws Exception {
