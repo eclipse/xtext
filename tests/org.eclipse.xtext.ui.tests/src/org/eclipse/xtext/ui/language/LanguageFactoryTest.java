@@ -8,22 +8,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.language;
 
-import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
-import org.eclipse.xtext.ui.core.language.LanguageDescriptorFactory;
-
 import junit.framework.TestCase;
+
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
 public class LanguageFactoryTest extends TestCase {
-	public void testgetLanguageDescriptor() throws Exception {
-		LanguageDescriptor descr = LanguageDescriptorFactory
-				.createLanguageDescriptor(org.eclipse.xtext.ui.tests.Activator.PLUGIN_ID);
-		assertNotNull("LanguageDescriptor Initializing failed", descr);
-		assertEquals("org.eclipse.xtext.ui.tests.dummylanguage", descr
-				.getId());
-		assertEquals("Dummy Language", descr.getName());
-	}
+    public void testgetLanguageDescriptor() throws Exception {
+        Class.forName("org.eclipse.xtext.ui.core.editor.BaseTextEditor");
+        try {
+            ILanguageDescriptor descr = LanguageDescriptorFactory.createLanguageDescriptor("org.eclipse.xtext.ui.tests.dummylanguage", "",
+                    "");
+            fail("Initialisation should have failed");
+        } catch (Exception exc) {
+            // happy case
+        }
+    }
 }

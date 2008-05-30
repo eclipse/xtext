@@ -5,6 +5,7 @@
    <extension-point id="syntaxColorer" name="Xtext Syntax Colorer Service" schema="schema/syntaxColorer.exsd"/>
    <extension-point id="proposalsProvider" name="Xtext Proposals Provider Service" schema="schema/proposalsProvider.exsd"/>
    <extension-point id="preferenceStore" name="Xtext Preference Store Service" schema="schema/preferenceStore.exsd"/>
+   <extension-point id="parser" name="parser" schema="schema/parser.exsd"/>
    <extension
          id="org.eclipse.xtext.ui.problemmarker"
          name="Xtext Editor Problem Marker"
@@ -15,5 +16,13 @@
       <super
             type="org.eclipse.core.resources.problemmarker">
       </super>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.languageDescriptor">
+      <languageDescriptor
+            id="org.eclipse.xtext.BaseLanguage"
+            languageFacade="org.eclipse.xtext.XtextLanguageFacade"
+            name="XtextBase">
+      </languageDescriptor>
    </extension>
 </plugin>

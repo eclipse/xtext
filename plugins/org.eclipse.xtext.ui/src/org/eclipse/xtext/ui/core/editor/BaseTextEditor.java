@@ -16,11 +16,11 @@ import org.eclipse.ui.editors.text.TextFileDocumentProvider;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.ContentAssistAction;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.infrastructure.XtextModelManager;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
-import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
-import org.eclipse.xtext.ui.core.language.LanguageDescriptorFactory;
-import org.eclipse.xtext.ui.core.language.LanguageServiceFactory;
 import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
 
 /**
@@ -33,12 +33,11 @@ public class BaseTextEditor extends TextEditor {
 	@Override
 	public void setInitializationData(IConfigurationElement cfig, String propertyName, Object data) {
 		super.setInitializationData(cfig, propertyName, data);
-		LanguageDescriptor languageDescriptor = initializeLanguageDescriptor();
+		ILanguageDescriptor languageDescriptor = initializeLanguageDescriptor();
 		// try plain text editor if problem occurs
 		if (languageDescriptor != null) {
 			XtextModelManager manager = new XtextModelManager(languageDescriptor);
-			IPreferenceStoreService xtextPreferenceStore = LanguageServiceFactory.getInstance().getPreferenceStore(
-					languageDescriptor);
+			IPreferenceStoreService xtextPreferenceStore = ServiceRegistry.getService(languageDescriptor,  IPreferenceStoreService.class);
 			ChainedPreferenceStore chainedPreferenceStore = new ChainedPreferenceStore(new IPreferenceStore[] {
 					getPreferenceStore(), xtextPreferenceStore.getPersitablePreferenceStore() });
 
@@ -51,9 +50,9 @@ public class BaseTextEditor extends TextEditor {
 		setDocumentProvider(new TextFileDocumentProvider());
 	}
 
-	private LanguageDescriptor initializeLanguageDescriptor() {
+	private ILanguageDescriptor initializeLanguageDescriptor() {
 		String namespace = this.getConfigurationElement().getNamespaceIdentifier();
-		LanguageDescriptor langDescr = LanguageDescriptorFactory.createLanguageDescriptor(namespace);
+		ILanguageDescriptor langDescr = LanguageDescriptorFactory.getByNamespace(namespace);
 		return langDescr;
 	}
 

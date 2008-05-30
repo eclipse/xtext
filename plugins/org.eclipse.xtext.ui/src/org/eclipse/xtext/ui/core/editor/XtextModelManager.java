@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.editor.infrastructure;
+package org.eclipse.xtext.ui.core.editor;
 
 import java.util.Vector;
 
@@ -53,7 +53,7 @@ public class XtextModelManager {
 		rootNode = null;
 		getErrors().clear();
 		IParser parser = ServiceRegistry.getService(languageDescriptor, IParser.class);
-		// TODO: dependency injection default element factory in parser
+		// TODO: dependency injection for default element factory in parser
 		IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
 		IParseResult object = parser.parse(new StringInputStream(content),
 				elementFactory, new ParseErrorHandlerImpl());

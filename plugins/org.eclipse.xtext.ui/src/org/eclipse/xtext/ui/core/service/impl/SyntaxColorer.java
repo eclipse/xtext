@@ -20,17 +20,18 @@ import org.eclipse.xtext.parser.ITokenTypes;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
-import org.eclipse.xtext.ui.core.language.AbstractLanguageService;
-import org.eclipse.xtext.ui.core.language.LanguageServiceFactory;
+import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
 /**
  * @author Dennis Hübner
  * 
  */
-public class SyntaxColorer extends AbstractLanguageService implements ISyntaxColorer {
+public class SyntaxColorer implements ISyntaxColorer {
 
-	public TextAttribute color(LeafNode leafNode) {
+	private IPreferenceStoreService preferenceStoreService;
+
+    public TextAttribute color(LeafNode leafNode) {
 		return colorInternal(leafNode);
 	}
 
@@ -41,10 +42,13 @@ public class SyntaxColorer extends AbstractLanguageService implements ISyntaxCol
 		}
 		return new TextAttribute(null);
 	}
+	
+	public void setPreferenceStoreService(IPreferenceStoreService preferenceStoreService) {
+	    this.preferenceStoreService = preferenceStoreService;
+	}
 
 	private IPreferenceStore getPreferenceStore() {
-		return LanguageServiceFactory.getInstance().getPreferenceStore(getLanguageDescriptor())
-				.getPersitablePreferenceStore();
+		return preferenceStoreService.getPersitablePreferenceStore();
 	}
 
 	private int getStyleForTokenType(LeafNode node) {

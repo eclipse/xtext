@@ -10,18 +10,21 @@ package org.eclipse.xtext.ui.language;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.core.language.AbstractLanguageService;
+import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
 /**
  * @author Peter Friese - Initial contribution and API
  * 
  */
-public class SyntaxColorer1 extends AbstractLanguageService implements ISyntaxColorer {
+public class SyntaxColorer1 implements ISyntaxColorer {
 
-	public TextAttribute color(LeafNode token) {
+    public TextAttribute color(LeafNode token) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+    public void setPreferenceStoreService(IPreferenceStoreService service) {
+    }
 
 }
