@@ -31,5 +31,7 @@ constantsClassName() :
 	languageName() + "Constants";
 
 languageId() :
-	get('language.id') == null ?
-		pathName()+'/'+languageName() : get('language.id');
+	(get('language.id') == null 
+		? pathName()+'/'+languageName()
+		: get('language.id')
+	).replaceAll('/','.') ;

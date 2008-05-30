@@ -1,84 +1,59 @@
 package org.eclipse.xtext;
 
+import org.eclipse.xtext.service.*;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ILanguageFacade;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.parser.*;
 
 public class XtextGrammarTestLanguageFacade extends BaseEPackageAccess implements ILanguageFacade {
-    public static final String LANGUAGE_ID = "org/eclipse/xtext/XtextGrammarTest";
+
+	public ILanguageDescriptor getLanguageDescriptor() {
+		return XtextGrammarTestStandaloneSetup.getLanguageDescriptor();
+	}
+	
     public String getLanguageId() {
-    	return LANGUAGE_ID;
+    	return XtextGrammarTestStandaloneSetup.LANGUAGE_ID;
     }
     
-	public static final String XTEXTGRAMMARTEST_GRAMMAR_CP_URI = "org/eclipse/xtext/XtextGrammarTest.xmi";
-	private static Grammar GRAMMAR = null;
-	
-	@SuppressWarnings("unused")
 	public Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(XtextGrammarTestLanguageFacade.class.getClassLoader(),XTEXTGRAMMARTEST_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+		return ServiceRegistry.getService(getLanguageDescriptor(), IGrammarAccess.class).getGrammar();
 	}
 	
-	private IElementFactory factory = new XtextGrammarTestASTFactory();
 	public IElementFactory getElementFactory() {
-		return factory;
-	}
-	private IParser parser = new XtextGrammarTestParser();
-	public IParser getParser() {
-		return parser;
+		return ServiceRegistry.getService(getLanguageDescriptor(), IElementFactory.class);
 	}
 	
-	private IParseTreeConstructor constructor = new XtextGrammarTestParseTreeConstructor();
+	public IParser getParser() {
+		return ServiceRegistry.getService(getLanguageDescriptor(), IParser.class);
+	}
+	
 	public IParseTreeConstructor getParsetreeConstructor() {
-		return constructor;
+		return ServiceRegistry.getService(getLanguageDescriptor(), IParseTreeConstructor.class);
+	}
+
+	public Resource.Factory getResourceFactory() {
+		return ServiceRegistry.getService(getLanguageDescriptor(), IResourceFactory.class);
 	}
 
 	public EPackage[] getGeneratedEPackages() {
-		return new EPackage[] {
-		
-		getXtextTestEPackage()
-		
-		};
+		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getGeneratedEPackages();
 	}
 
 	public EPackage[] getReferencedEPackages() {
-		return new EPackage[] {
-		
-		};
+		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getReferencedEPackages();
 	}
 
-	
-	public static final String XTEXTTEST_NS_URI = "http://www.eclipse.org/2008/Test/XtextTest";
-	public static final String XTEXTTEST_CP_URI = "org/eclipse/xtext/XtextTest.ecore";
-	
-	public static EPackage getXtextTestEPackage() {	
-		if (!EPackage.Registry.INSTANCE.containsKey(XTEXTTEST_NS_URI)) {
-			EPackage p = loadEcoreFile(XtextGrammarTestLanguageFacade.class.getClassLoader(),XTEXTTEST_CP_URI);
-			if (p!=null) {
-				EPackage.Registry.INSTANCE.put(XTEXTTEST_NS_URI,p);
-			}
-		}
-		return EPackage.Registry.INSTANCE.getEPackage(XTEXTTEST_NS_URI);
-	}
-	
-
-	private Resource.Factory resourceFactory = new XtextGrammarTestResourceFactory(this);
-	public Resource.Factory getResourceFactory() {
-		return resourceFactory;
-	}
-	
 	public String getModelFileExtension() {
-		return "xtextgrammartest";
+		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getModelFileExtension();
 	}
 }

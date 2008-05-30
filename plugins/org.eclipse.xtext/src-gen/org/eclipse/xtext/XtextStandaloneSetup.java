@@ -2,8 +2,6 @@ package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.ILanguageFacade;
 
 public abstract class XtextStandaloneSetup {
 
@@ -19,5 +17,6 @@ public abstract class XtextStandaloneSetup {
 				"xtext", facade.getResourceFactory());
 		}
 	}
-
+	
+	public static final String LANGUAGE_ID = "org/eclipse/xtext/Xtext";
 }

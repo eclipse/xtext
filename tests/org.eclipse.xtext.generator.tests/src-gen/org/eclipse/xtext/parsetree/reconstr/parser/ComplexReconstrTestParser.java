@@ -39,6 +39,6 @@ public class ComplexReconstrTestParser extends org.eclipse.xtext.parser.Abstract
 	}
 	
 	protected IElementFactory getDefaultASTFactory() {
-		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest").getElementFactory();
+		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest").getElementFactory();
 	}
 }

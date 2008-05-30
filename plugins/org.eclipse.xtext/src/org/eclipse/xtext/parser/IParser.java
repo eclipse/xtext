@@ -11,11 +11,13 @@ package org.eclipse.xtext.parser;
 
 import java.io.InputStream;
 
+import org.eclipse.xtext.service.ILanguageService;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public interface IParser {
+public interface IParser extends ILanguageService {
 	
 	/**
 	 * @param in

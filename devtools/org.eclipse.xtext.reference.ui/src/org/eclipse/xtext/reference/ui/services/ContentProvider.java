@@ -13,14 +13,13 @@ import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.core.language.AbstractLanguageService;
 import org.eclipse.xtext.ui.core.service.IContentProvider;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class ContentProvider extends AbstractLanguageService implements IContentProvider {
+public class ContentProvider implements IContentProvider {
 
 	public List<?> getChildren(LeafNode node) {
 		return node.eContents();

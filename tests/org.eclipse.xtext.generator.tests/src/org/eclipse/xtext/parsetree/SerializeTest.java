@@ -2,7 +2,6 @@ package org.eclipse.xtext.parsetree;
 
 import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.parser.IParseErrorHandler;
-import org.eclipse.xtext.testlanguages.SimpleExpressionsLanguageFacade;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -12,7 +11,7 @@ public class SerializeTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		SimpleExpressionsStandaloneSetup.doSetup();
-		with(SimpleExpressionsLanguageFacade.LANGUAGE_ID);
+		with(SimpleExpressionsStandaloneSetup.class);
 	}
 	
 	public void testUncompleteComment() throws Exception {

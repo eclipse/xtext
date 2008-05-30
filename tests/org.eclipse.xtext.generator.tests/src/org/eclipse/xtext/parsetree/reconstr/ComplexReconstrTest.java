@@ -18,7 +18,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		ComplexReconstrTestStandaloneSetup.doSetup();
-		with(ComplexReconstrTestLanguageFacade.LANGUAGE_ID);
+		with(ComplexReconstrTestStandaloneSetup.class);
 	}
 
 	public void testSimple() throws Exception {

@@ -39,6 +39,6 @@ public class DummyLanguageParser extends org.eclipse.xtext.parser.AbstractParser
 	}
 	
 	protected IElementFactory getDefaultASTFactory() {
-		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/dummy/DummyLanguage").getElementFactory();
+		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.dummy.DummyLanguage").getElementFactory();
 	}
 }

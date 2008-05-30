@@ -14,7 +14,4 @@ package org.eclipse.xtext.service;
  */
 public interface ILanguageService {
     
-	ILanguageDescriptor getLanguageDescriptor();
-
-	void setLanguageDescriptor(ILanguageDescriptor languageDescriptor);
 }

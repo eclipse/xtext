@@ -67,7 +67,7 @@ import org.eclipse.xtext.testlanguages.parser.internal.SimpleExpressionsTokenTyp
     public InternalSimpleExpressionsParser(TokenStream input, IElementFactory factory) {
         this(input);
         this.factory = factory;
-		grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/SimpleExpressions").getGrammar();
+		grammar = LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.SimpleExpressions").getGrammar();
     }
     
     protected void setLexerRule(LeafNode node, Token t) {
@@ -240,9 +240,9 @@ this_Multiplication=ruleMultiplication
 
 
 
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
-
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+
+RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
@@ -250,9 +250,9 @@ RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
-
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 

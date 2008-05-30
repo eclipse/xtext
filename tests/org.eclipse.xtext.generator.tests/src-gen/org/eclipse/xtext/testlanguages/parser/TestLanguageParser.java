@@ -39,6 +39,6 @@ public class TestLanguageParser extends org.eclipse.xtext.parser.AbstractParser 
 	}
 	
 	protected IElementFactory getDefaultASTFactory() {
-		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/TestLanguage").getElementFactory();
+		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.TestLanguage").getElementFactory();
 	}
 }

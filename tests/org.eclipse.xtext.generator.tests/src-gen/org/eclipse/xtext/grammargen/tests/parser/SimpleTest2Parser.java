@@ -39,6 +39,6 @@ public class SimpleTest2Parser extends org.eclipse.xtext.parser.AbstractParser {
 	}
 	
 	protected IElementFactory getDefaultASTFactory() {
-		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/grammargen/tests/SimpleTest2").getElementFactory();
+		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.grammargen.tests.SimpleTest2").getElementFactory();
 	}
 }

@@ -9,8 +9,14 @@
 package org.eclipse.xtext.metamodelreferencing.tests;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.LanguageFacadeFactory;
+import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestMetamodelAccess;
+import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestMetamodelAccessServiceFactory;
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.service.ILanguageServiceFactory;
+import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class MultiGenMMTest extends AbstractGeneratorTest {
@@ -19,16 +25,24 @@ public class MultiGenMMTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		MetamodelRefTestStandaloneSetup.doSetup();
-		with(MetamodelRefTestLanguageFacade.LANGUAGE_ID);
-		LanguageFacadeFactory.register(new MetamodelRefTestLanguageFacade() {
-			@Override
-			public EPackage[] getGeneratedEPackages() {
-				return new EPackage[] {
-						getSimpleTestEPackage(),XtextPackage.eINSTANCE
-				};
-			}
-			
-		});
+		with(MetamodelRefTestStandaloneSetup.class);
+        ILanguageServiceFactory factory = ServiceRegistry.getFactory(MetamodelRefTestStandaloneSetup.getLanguageDescriptor(), IMetamodelAccess.class);
+        ServiceRegistry.deregisterFactory(factory);
+        
+        ServiceRegistry.registerFactory(new MetamodelRefTestMetamodelAccessServiceFactory() {
+            @Override
+            public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor,
+                    Class<? extends ILanguageService> serviceClass) {
+                return new MetamodelRefTestMetamodelAccess() {
+                    @Override
+                    public EPackage[] getGeneratedEPackages() {
+                        return new EPackage[] {
+                                getSimpleTestEPackage(),XtextPackage.eINSTANCE
+                        };
+                    }
+                };
+            } 
+        });
 	}
 	
 	public void testStuff() throws Exception {

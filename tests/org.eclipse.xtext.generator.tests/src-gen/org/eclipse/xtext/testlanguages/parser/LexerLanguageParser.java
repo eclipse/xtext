@@ -39,6 +39,6 @@ public class LexerLanguageParser extends org.eclipse.xtext.parser.AbstractParser
 	}
 	
 	protected IElementFactory getDefaultASTFactory() {
-		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/LexerLanguage").getElementFactory();
+		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.LexerLanguage").getElementFactory();
 	}
 }

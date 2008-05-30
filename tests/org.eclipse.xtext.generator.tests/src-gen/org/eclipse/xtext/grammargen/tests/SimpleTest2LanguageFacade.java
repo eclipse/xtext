@@ -1,84 +1,59 @@
 package org.eclipse.xtext.grammargen.tests;
 
+import org.eclipse.xtext.service.*;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ILanguageFacade;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.grammargen.tests.parser.*;
 
 public class SimpleTest2LanguageFacade extends BaseEPackageAccess implements ILanguageFacade {
-    public static final String LANGUAGE_ID = "org/eclipse/xtext/grammargen/tests/SimpleTest2";
+
+	public ILanguageDescriptor getLanguageDescriptor() {
+		return SimpleTest2StandaloneSetup.getLanguageDescriptor();
+	}
+	
     public String getLanguageId() {
-    	return LANGUAGE_ID;
+    	return SimpleTest2StandaloneSetup.LANGUAGE_ID;
     }
     
-	public static final String SIMPLETEST2_GRAMMAR_CP_URI = "org/eclipse/xtext/grammargen/tests/SimpleTest2.xmi";
-	private static Grammar GRAMMAR = null;
-	
-	@SuppressWarnings("unused")
 	public Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(SimpleTest2LanguageFacade.class.getClassLoader(),SIMPLETEST2_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+		return ServiceRegistry.getService(getLanguageDescriptor(), IGrammarAccess.class).getGrammar();
 	}
 	
-	private IElementFactory factory = new SimpleTest2ASTFactory();
 	public IElementFactory getElementFactory() {
-		return factory;
-	}
-	private IParser parser = new SimpleTest2Parser();
-	public IParser getParser() {
-		return parser;
+		return ServiceRegistry.getService(getLanguageDescriptor(), IElementFactory.class);
 	}
 	
-	private IParseTreeConstructor constructor = new SimpleTest2ParseTreeConstructor();
+	public IParser getParser() {
+		return ServiceRegistry.getService(getLanguageDescriptor(), IParser.class);
+	}
+	
 	public IParseTreeConstructor getParsetreeConstructor() {
-		return constructor;
+		return ServiceRegistry.getService(getLanguageDescriptor(), IParseTreeConstructor.class);
+	}
+
+	public Resource.Factory getResourceFactory() {
+		return ServiceRegistry.getService(getLanguageDescriptor(), IResourceFactory.class);
 	}
 
 	public EPackage[] getGeneratedEPackages() {
-		return new EPackage[] {
-		
-		getSimpleTest2EPackage()
-		
-		};
+		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getGeneratedEPackages();
 	}
 
 	public EPackage[] getReferencedEPackages() {
-		return new EPackage[] {
-		
-		};
+		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getReferencedEPackages();
 	}
 
-	
-	public static final String SIMPLETEST2_NS_URI = "http://eclipse.org/xtext/tests/SimpleTest2";
-	public static final String SIMPLETEST2_CP_URI = "org/eclipse/xtext/grammargen/tests/SimpleTest2.ecore";
-	
-	public static EPackage getSimpleTest2EPackage() {	
-		if (!EPackage.Registry.INSTANCE.containsKey(SIMPLETEST2_NS_URI)) {
-			EPackage p = loadEcoreFile(SimpleTest2LanguageFacade.class.getClassLoader(),SIMPLETEST2_CP_URI);
-			if (p!=null) {
-				EPackage.Registry.INSTANCE.put(SIMPLETEST2_NS_URI,p);
-			}
-		}
-		return EPackage.Registry.INSTANCE.getEPackage(SIMPLETEST2_NS_URI);
-	}
-	
-
-	private Resource.Factory resourceFactory = new SimpleTest2ResourceFactory(this);
-	public Resource.Factory getResourceFactory() {
-		return resourceFactory;
-	}
-	
 	public String getModelFileExtension() {
-		return "simpletest2";
+		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getModelFileExtension();
 	}
 }

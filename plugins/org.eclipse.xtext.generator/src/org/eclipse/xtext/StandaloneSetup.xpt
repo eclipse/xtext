@@ -22,6 +22,11 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.LanguageFacadeFactory;
 import org.eclipse.xtext.ILanguageFacade;
 
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.ServiceRegistry;
+import «packageName()».services.*;
+
 public abstract class «languageName()»StandaloneSetup {
 
 	public static void doSetup() {
@@ -29,6 +34,8 @@ public abstract class «languageName()»StandaloneSetup {
 				"ecore", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
+		getLanguageDescriptor();
+		«EXPAND registerServiceFactory FOREACH services()-»
 		if (LanguageFacadeFactory.getFacade("«languageId()»")==null) {
 			ILanguageFacade facade = new «languageName()»LanguageFacade();
 			LanguageFacadeFactory.register(facade);
@@ -36,7 +43,27 @@ public abstract class «languageName()»StandaloneSetup {
 				"«modelFileExtension()»", facade.getResourceFactory());
 		}
 	}
-
+	
+	private static ILanguageDescriptor INSTANCE;
+	
+	public static final String LANGUAGE_ID = "«languageId()»";
+	public static final String LANGUAGE_NAME = "«languageName()»";
+	public static final String NAMESPACE = "«namespace()»";
+    
+    public static ILanguageDescriptor getLanguageDescriptor() {
+    	if (INSTANCE == null) {
+    		INSTANCE = LanguageDescriptorFactory.get(LANGUAGE_ID);
+    		if(INSTANCE == null) {
+    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE);
+    		}
+    	}
+    	return INSTANCE;
+    }
+    
 }
 «ENDFILE»
+«ENDDEFINE»
+
+«DEFINE registerServiceFactory FOR String-»
+		ServiceRegistry.registerFactory(new «languageName()»«this»ServiceFactory());
 «ENDDEFINE»

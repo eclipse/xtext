@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.core.editor.utils.CustomResourceLibrary;
+import org.eclipse.xtext.ui.services.LanguageServiceActivator;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -47,6 +48,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		setDefault(this);
+		LanguageServiceActivator.activateServices();
 	}
 
 	private static void setDefault(Activator activator) {

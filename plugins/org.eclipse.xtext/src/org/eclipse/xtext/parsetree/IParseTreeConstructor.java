@@ -9,11 +9,12 @@
 package org.eclipse.xtext.parsetree;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.service.ILanguageService;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public interface IParseTreeConstructor {
+public interface IParseTreeConstructor extends ILanguageService {
 	public void update(EObject object);
 }

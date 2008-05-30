@@ -1,0 +1,49 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+
+«EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
+
+«DEFINE factories FOR Grammar»
+	«FOREACH services() AS serviceName»
+		«EXPAND singletonObjectFactory(serviceName)»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+
+«DEFINE singletonObjectFactory(String serviceName) FOR Grammar»
+«FILE pathName()+'/services/'+languageName() + serviceName + 'ServiceFactory.java'-»
+package «packageName()».services;
+
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.service.ILanguageServiceFactory;
+import «packageName()».*;
+import «packageName()».parser.*;
+
+public class «languageName()»«serviceName»ServiceFactory implements ILanguageServiceFactory {
+	private «serviceInterface(serviceName)» serviceObject = null;
+
+    public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
+        if (serviceObject == null) {
+            serviceObject = new «serviceClass(serviceName)»();
+        }
+        return serviceObject;
+    }
+
+    public boolean isFactoryFor(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
+       return languageDescriptor == «languageName()»StandaloneSetup.getLanguageDescriptor()
+           && «serviceInterface(serviceName)».class.equals(serviceClass);
+    }
+}
+«ENDFILE»
+«ENDDEFINE»

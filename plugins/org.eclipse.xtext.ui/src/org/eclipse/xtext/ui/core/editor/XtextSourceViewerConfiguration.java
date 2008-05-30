@@ -26,9 +26,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.ui.texteditor.HippieProposalProcessor;
+import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.codecompletion.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.core.editor.infrastructure.XtextModelManager;
-import org.eclipse.xtext.ui.core.language.LanguageServiceFactory;
 import org.eclipse.xtext.ui.core.service.IProposalsProvider;
 
 /**
@@ -72,8 +72,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	 */
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
-		IProposalsProvider proposalsProvider = LanguageServiceFactory.getInstance().getProposalsProvider(
-				modelManager.getLanguageDescriptor());
+		IProposalsProvider proposalsProvider = ServiceRegistry.getService(modelManager.getLanguageDescriptor(), IProposalsProvider.class);
 		IContentAssistProcessor processor;
 		if (proposalsProvider != null) {
 			processor = new XtextContentAssistProcessor(proposalsProvider);

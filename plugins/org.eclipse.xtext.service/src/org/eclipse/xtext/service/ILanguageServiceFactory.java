@@ -1,8 +1,8 @@
 package org.eclipse.xtext.service;
 
-public interface ILanguageServiceFactory<T extends ILanguageService> {
+public interface ILanguageServiceFactory {
 
-    Class<? extends T> getServiceClass();
+    boolean isFactoryFor(ILanguageDescriptor descriptor, Class<? extends ILanguageService> serviceClass);
     
-    T createLanguageService(); 
+    ILanguageService createLanguageService(ILanguageDescriptor descriptor, Class<? extends ILanguageService> serviceClass); 
 }

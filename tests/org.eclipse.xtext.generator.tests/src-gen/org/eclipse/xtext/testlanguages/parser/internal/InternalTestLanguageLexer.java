@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g 2008-05-27 16:32:42
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g 2008-05-30 18:42:56
 
 package org.eclipse.xtext.testlanguages.parser.internal;
 
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalTestLanguageLexer extends Lexer {
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=10;
     public static final int T14=14;
     public static final int RULE_ID=4;
     public static final int RULE_WS=7;
@@ -21,7 +21,7 @@ public class InternalTestLanguageLexer extends Lexer {
     public static final int RULE_ANY_OTHER=11;
     public static final int RULE_SL_COMMENT=6;
     public static final int T13=13;
-    public static final int RULE_LEXER_BODY=10;
+    public static final int RULE_LEXER_BODY=9;
 
 
       public Token nextToken() {
@@ -124,183 +124,29 @@ public class InternalTestLanguageLexer extends Lexer {
     }
     // $ANTLR end T14
 
-    // $ANTLR start RULE_STRING
-    public void mRULE_STRING() throws RecognitionException {
-        try {
-            int _type = RULE_STRING;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
-            int alt3=2;
-            int LA3_0 = input.LA(1);
-
-            if ( (LA3_0=='\"') ) {
-                alt3=1;
-            }
-            else if ( (LA3_0=='\'') ) {
-                alt3=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("223:1: RULE_STRING : ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' );", 3, 0, input);
-
-                throw nvae;
-            }
-            switch (alt3) {
-                case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
-                    {
-                    match('\"'); 
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
-                    loop1:
-                    do {
-                        int alt1=3;
-                        int LA1_0 = input.LA(1);
-
-                        if ( (LA1_0=='\\') ) {
-                            alt1=1;
-                        }
-                        else if ( ((LA1_0>='\u0000' && LA1_0<='!')||(LA1_0>='#' && LA1_0<='[')||(LA1_0>=']' && LA1_0<='\uFFFE')) ) {
-                            alt1=2;
-                        }
-
-
-                        switch (alt1) {
-                    	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
-                    	    {
-                    	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse =
-                    	            new MismatchedSetException(null,input);
-                    	        recover(mse);    throw mse;
-                    	    }
-
-
-                    	    }
-                    	    break;
-                    	case 2 :
-                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:65: ~ ( '\\\\' | '\"' )
-                    	    {
-                    	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse =
-                    	            new MismatchedSetException(null,input);
-                    	        recover(mse);    throw mse;
-                    	    }
-
-
-                    	    }
-                    	    break;
-
-                    	default :
-                    	    break loop1;
-                        }
-                    } while (true);
-
-                    match('\"'); 
-
-                    }
-                    break;
-                case 2 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
-                    {
-                    match('\''); 
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
-                    loop2:
-                    do {
-                        int alt2=3;
-                        int LA2_0 = input.LA(1);
-
-                        if ( (LA2_0=='\\') ) {
-                            alt2=1;
-                        }
-                        else if ( ((LA2_0>='\u0000' && LA2_0<='&')||(LA2_0>='(' && LA2_0<='[')||(LA2_0>=']' && LA2_0<='\uFFFE')) ) {
-                            alt2=2;
-                        }
-
-
-                        switch (alt2) {
-                    	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:93: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
-                    	    {
-                    	    match('\\'); 
-                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse =
-                    	            new MismatchedSetException(null,input);
-                    	        recover(mse);    throw mse;
-                    	    }
-
-
-                    	    }
-                    	    break;
-                    	case 2 :
-                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:137: ~ ( '\\\\' | '\\'' )
-                    	    {
-                    	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
-                    	        input.consume();
-
-                    	    }
-                    	    else {
-                    	        MismatchedSetException mse =
-                    	            new MismatchedSetException(null,input);
-                    	        recover(mse);    throw mse;
-                    	    }
-
-
-                    	    }
-                    	    break;
-
-                    	default :
-                    	    break loop2;
-                        }
-                    } while (true);
-
-                    match('\''); 
-
-                    }
-                    break;
-
-            }
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end RULE_STRING
-
     // $ANTLR start RULE_SL_COMMENT
     public void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:19: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:19: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
             {
             match("//"); 
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:24: (~ ( '\\n' | '\\r' ) )*
-            loop4:
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:24: (~ ( '\\n' | '\\r' ) )*
+            loop1:
             do {
-                int alt4=2;
-                int LA4_0 = input.LA(1);
+                int alt1=2;
+                int LA1_0 = input.LA(1);
 
-                if ( ((LA4_0>='\u0000' && LA4_0<='\t')||(LA4_0>='\u000B' && LA4_0<='\f')||(LA4_0>='\u000E' && LA4_0<='\uFFFE')) ) {
-                    alt4=1;
+                if ( ((LA1_0>='\u0000' && LA1_0<='\t')||(LA1_0>='\u000B' && LA1_0<='\f')||(LA1_0>='\u000E' && LA1_0<='\uFFFE')) ) {
+                    alt1=1;
                 }
 
 
-                switch (alt4) {
+                switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:24: ~ ( '\\n' | '\\r' )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:24: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -317,20 +163,20 @@ public class InternalTestLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop4;
+            	    break loop1;
                 }
             } while (true);
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:38: ( '\\r' )?
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:38: ( '\\r' )?
+            int alt2=2;
+            int LA2_0 = input.LA(1);
 
-            if ( (LA5_0=='\r') ) {
-                alt5=1;
+            if ( (LA2_0=='\r') ) {
+                alt2=1;
             }
-            switch (alt5) {
+            switch (alt2) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:38: '\\r'
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:223:38: '\\r'
                     {
                     match('\r'); 
 
@@ -350,6 +196,160 @@ public class InternalTestLanguageLexer extends Lexer {
         }
     }
     // $ANTLR end RULE_SL_COMMENT
+
+    // $ANTLR start RULE_STRING
+    public void mRULE_STRING() throws RecognitionException {
+        try {
+            int _type = RULE_STRING;
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
+            int alt5=2;
+            int LA5_0 = input.LA(1);
+
+            if ( (LA5_0=='\"') ) {
+                alt5=1;
+            }
+            else if ( (LA5_0=='\'') ) {
+                alt5=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("225:1: RULE_STRING : ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' );", 5, 0, input);
+
+                throw nvae;
+            }
+            switch (alt5) {
+                case 1 :
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
+                    {
+                    match('\"'); 
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
+                    loop3:
+                    do {
+                        int alt3=3;
+                        int LA3_0 = input.LA(1);
+
+                        if ( (LA3_0=='\\') ) {
+                            alt3=1;
+                        }
+                        else if ( ((LA3_0>='\u0000' && LA3_0<='!')||(LA3_0>='#' && LA3_0<='[')||(LA3_0>=']' && LA3_0<='\uFFFE')) ) {
+                            alt3=2;
+                        }
+
+
+                        switch (alt3) {
+                    	case 1 :
+                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    {
+                    	    match('\\'); 
+                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
+                    	        input.consume();
+
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse =
+                    	            new MismatchedSetException(null,input);
+                    	        recover(mse);    throw mse;
+                    	    }
+
+
+                    	    }
+                    	    break;
+                    	case 2 :
+                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:65: ~ ( '\\\\' | '\"' )
+                    	    {
+                    	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
+                    	        input.consume();
+
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse =
+                    	            new MismatchedSetException(null,input);
+                    	        recover(mse);    throw mse;
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop3;
+                        }
+                    } while (true);
+
+                    match('\"'); 
+
+                    }
+                    break;
+                case 2 :
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
+                    {
+                    match('\''); 
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
+                    loop4:
+                    do {
+                        int alt4=3;
+                        int LA4_0 = input.LA(1);
+
+                        if ( (LA4_0=='\\') ) {
+                            alt4=1;
+                        }
+                        else if ( ((LA4_0>='\u0000' && LA4_0<='&')||(LA4_0>='(' && LA4_0<='[')||(LA4_0>=']' && LA4_0<='\uFFFE')) ) {
+                            alt4=2;
+                        }
+
+
+                        switch (alt4) {
+                    	case 1 :
+                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:93: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    {
+                    	    match('\\'); 
+                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
+                    	        input.consume();
+
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse =
+                    	            new MismatchedSetException(null,input);
+                    	        recover(mse);    throw mse;
+                    	    }
+
+
+                    	    }
+                    	    break;
+                    	case 2 :
+                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:225:137: ~ ( '\\\\' | '\\'' )
+                    	    {
+                    	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
+                    	        input.consume();
+
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse =
+                    	            new MismatchedSetException(null,input);
+                    	        recover(mse);    throw mse;
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop4;
+                        }
+                    } while (true);
+
+                    match('\''); 
+
+                    }
+                    break;
+
+            }
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end RULE_STRING
 
     // $ANTLR start RULE_WS
     public void mRULE_WS() throws RecognitionException {
@@ -534,14 +534,14 @@ public class InternalTestLanguageLexer extends Lexer {
     }
     // $ANTLR end RULE_INT
 
-    // $ANTLR start RULE_ML_COMMENT
-    public void mRULE_ML_COMMENT() throws RecognitionException {
+    // $ANTLR start RULE_LEXER_BODY
+    public void mRULE_LEXER_BODY() throws RecognitionException {
         try {
-            int _type = RULE_ML_COMMENT;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:233:19: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:233:19: '/*' ( options {greedy=false; } : . )* '*/'
+            int _type = RULE_LEXER_BODY;
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:233:19: ( '<#' ( options {greedy=false; } : . )* '#>' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:233:19: '<#' ( options {greedy=false; } : . )* '#>'
             {
-            match("/*"); 
+            match("<#"); 
 
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:233:24: ( options {greedy=false; } : . )*
             loop10:
@@ -549,19 +549,19 @@ public class InternalTestLanguageLexer extends Lexer {
                 int alt10=2;
                 int LA10_0 = input.LA(1);
 
-                if ( (LA10_0=='*') ) {
+                if ( (LA10_0=='#') ) {
                     int LA10_1 = input.LA(2);
 
-                    if ( (LA10_1=='/') ) {
+                    if ( (LA10_1=='>') ) {
                         alt10=2;
                     }
-                    else if ( ((LA10_1>='\u0000' && LA10_1<='.')||(LA10_1>='0' && LA10_1<='\uFFFE')) ) {
+                    else if ( ((LA10_1>='\u0000' && LA10_1<='=')||(LA10_1>='?' && LA10_1<='\uFFFE')) ) {
                         alt10=1;
                     }
 
 
                 }
-                else if ( ((LA10_0>='\u0000' && LA10_0<=')')||(LA10_0>='+' && LA10_0<='\uFFFE')) ) {
+                else if ( ((LA10_0>='\u0000' && LA10_0<='\"')||(LA10_0>='$' && LA10_0<='\uFFFE')) ) {
                     alt10=1;
                 }
 
@@ -580,9 +580,8 @@ public class InternalTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            match("*/"); 
+            match("#>"); 
 
-            channel=HIDDEN;
 
             }
 
@@ -591,16 +590,16 @@ public class InternalTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end RULE_ML_COMMENT
+    // $ANTLR end RULE_LEXER_BODY
 
-    // $ANTLR start RULE_LEXER_BODY
-    public void mRULE_LEXER_BODY() throws RecognitionException {
+    // $ANTLR start RULE_ML_COMMENT
+    public void mRULE_ML_COMMENT() throws RecognitionException {
         try {
-            int _type = RULE_LEXER_BODY;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:235:19: ( '<#' ( options {greedy=false; } : . )* '#>' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:235:19: '<#' ( options {greedy=false; } : . )* '#>'
+            int _type = RULE_ML_COMMENT;
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:235:19: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:235:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
-            match("<#"); 
+            match("/*"); 
 
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:235:24: ( options {greedy=false; } : . )*
             loop11:
@@ -608,19 +607,19 @@ public class InternalTestLanguageLexer extends Lexer {
                 int alt11=2;
                 int LA11_0 = input.LA(1);
 
-                if ( (LA11_0=='#') ) {
+                if ( (LA11_0=='*') ) {
                     int LA11_1 = input.LA(2);
 
-                    if ( (LA11_1=='>') ) {
+                    if ( (LA11_1=='/') ) {
                         alt11=2;
                     }
-                    else if ( ((LA11_1>='\u0000' && LA11_1<='=')||(LA11_1>='?' && LA11_1<='\uFFFE')) ) {
+                    else if ( ((LA11_1>='\u0000' && LA11_1<='.')||(LA11_1>='0' && LA11_1<='\uFFFE')) ) {
                         alt11=1;
                     }
 
 
                 }
-                else if ( ((LA11_0>='\u0000' && LA11_0<='\"')||(LA11_0>='$' && LA11_0<='\uFFFE')) ) {
+                else if ( ((LA11_0>='\u0000' && LA11_0<=')')||(LA11_0>='+' && LA11_0<='\uFFFE')) ) {
                     alt11=1;
                 }
 
@@ -639,8 +638,9 @@ public class InternalTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            match("#>"); 
+            match("*/"); 
 
+            channel=HIDDEN;
 
             }
 
@@ -649,7 +649,7 @@ public class InternalTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end RULE_LEXER_BODY
+    // $ANTLR end RULE_ML_COMMENT
 
     // $ANTLR start RULE_ANY_OTHER
     public void mRULE_ANY_OTHER() throws RecognitionException {
@@ -670,7 +670,7 @@ public class InternalTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:1:10: ( T12 | T13 | T14 | RULE_STRING | RULE_SL_COMMENT | RULE_WS | RULE_ID | RULE_INT | RULE_ML_COMMENT | RULE_LEXER_BODY | RULE_ANY_OTHER )
+        // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:1:10: ( T12 | T13 | T14 | RULE_SL_COMMENT | RULE_STRING | RULE_WS | RULE_ID | RULE_INT | RULE_LEXER_BODY | RULE_ML_COMMENT | RULE_ANY_OTHER )
         int alt12=11;
         int LA12_0 = input.LA(1);
 
@@ -821,39 +821,39 @@ public class InternalTestLanguageLexer extends Lexer {
             else {
                 alt12=7;}
         }
-        else if ( (LA12_0=='\"') ) {
-            int LA12_4 = input.LA(2);
-
-            if ( ((LA12_4>='\u0000' && LA12_4<='\uFFFE')) ) {
-                alt12=4;
-            }
-            else {
-                alt12=11;}
-        }
-        else if ( (LA12_0=='\'') ) {
-            int LA12_5 = input.LA(2);
-
-            if ( ((LA12_5>='\u0000' && LA12_5<='\uFFFE')) ) {
-                alt12=4;
-            }
-            else {
-                alt12=11;}
-        }
         else if ( (LA12_0=='/') ) {
             switch ( input.LA(2) ) {
             case '/':
                 {
-                alt12=5;
+                alt12=4;
                 }
                 break;
             case '*':
                 {
-                alt12=9;
+                alt12=10;
                 }
                 break;
             default:
                 alt12=11;}
 
+        }
+        else if ( (LA12_0=='\"') ) {
+            int LA12_5 = input.LA(2);
+
+            if ( ((LA12_5>='\u0000' && LA12_5<='\uFFFE')) ) {
+                alt12=5;
+            }
+            else {
+                alt12=11;}
+        }
+        else if ( (LA12_0=='\'') ) {
+            int LA12_6 = input.LA(2);
+
+            if ( ((LA12_6>='\u0000' && LA12_6<='\uFFFE')) ) {
+                alt12=5;
+            }
+            else {
+                alt12=11;}
         }
         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
             alt12=6;
@@ -877,7 +877,7 @@ public class InternalTestLanguageLexer extends Lexer {
             int LA12_11 = input.LA(2);
 
             if ( (LA12_11=='#') ) {
-                alt12=10;
+                alt12=9;
             }
             else {
                 alt12=11;}
@@ -887,7 +887,7 @@ public class InternalTestLanguageLexer extends Lexer {
         }
         else {
             NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( T12 | T13 | T14 | RULE_STRING | RULE_SL_COMMENT | RULE_WS | RULE_ID | RULE_INT | RULE_ML_COMMENT | RULE_LEXER_BODY | RULE_ANY_OTHER );", 12, 0, input);
+                new NoViableAltException("1:1: Tokens : ( T12 | T13 | T14 | RULE_SL_COMMENT | RULE_STRING | RULE_WS | RULE_ID | RULE_INT | RULE_LEXER_BODY | RULE_ML_COMMENT | RULE_ANY_OTHER );", 12, 0, input);
 
             throw nvae;
         }
@@ -914,16 +914,16 @@ public class InternalTestLanguageLexer extends Lexer {
                 }
                 break;
             case 4 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:1:22: RULE_STRING
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:1:22: RULE_SL_COMMENT
                 {
-                mRULE_STRING(); 
+                mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 5 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:1:34: RULE_SL_COMMENT
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:1:38: RULE_STRING
                 {
-                mRULE_SL_COMMENT(); 
+                mRULE_STRING(); 
 
                 }
                 break;
@@ -949,16 +949,16 @@ public class InternalTestLanguageLexer extends Lexer {
                 }
                 break;
             case 9 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:1:75: RULE_ML_COMMENT
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:1:75: RULE_LEXER_BODY
                 {
-                mRULE_ML_COMMENT(); 
+                mRULE_LEXER_BODY(); 
 
                 }
                 break;
             case 10 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:1:91: RULE_LEXER_BODY
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:1:91: RULE_ML_COMMENT
                 {
-                mRULE_LEXER_BODY(); 
+                mRULE_ML_COMMENT(); 
 
                 }
                 break;

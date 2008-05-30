@@ -11,12 +11,14 @@ package org.eclipse.xtext.ui.core.editor.infrastructure;
 import java.util.Vector;
 
 import org.apache.tools.ant.filters.StringInputStream;
-import org.eclipse.xtext.ILanguageFacade;
+import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.ServiceRegistry;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -32,10 +34,10 @@ public class XtextModelManager {
 	}
 
 	private Vector<IParseError> errors = new Vector<IParseError>();
-	private final LanguageDescriptor languageDescriptor;
+	private final ILanguageDescriptor languageDescriptor;
 	private AbstractNode rootNode;
 
-	public XtextModelManager(LanguageDescriptor languageDescriptor) {
+	public XtextModelManager(ILanguageDescriptor languageDescriptor) {
 		this.languageDescriptor = languageDescriptor;
 	}
 
@@ -50,15 +52,17 @@ public class XtextModelManager {
 	public void parseTree(String content) {
 		rootNode = null;
 		getErrors().clear();
-		ILanguageFacade languageFacade = languageDescriptor.getLanguageFacade();
-		IParseResult object = languageFacade.getParser().parse(new StringInputStream(content),
-				languageFacade.getElementFactory(), new ParseErrorHandlerImpl());
+		IParser parser = ServiceRegistry.getService(languageDescriptor, IParser.class);
+		// TODO: dependency injection default element factory in parser
+		IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
+		IParseResult object = parser.parse(new StringInputStream(content),
+				elementFactory, new ParseErrorHandlerImpl());
 		if (object != null) {
 			rootNode = object.getRootNode();
 		}
 	}
 
-	public LanguageDescriptor getLanguageDescriptor() {
+	public ILanguageDescriptor getLanguageDescriptor() {
 		return languageDescriptor;
 	}
 

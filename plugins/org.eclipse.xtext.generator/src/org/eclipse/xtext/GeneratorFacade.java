@@ -94,7 +94,11 @@ public class GeneratorFacade {
 		facade.evaluate("org::eclipse::xtext::StandaloneSetup::file", grammarModel);
 		facade.evaluate("org::eclipse::xtext::ParserFacade::parser", grammarModel);
 		facade.evaluate("org::eclipse::xtext::ASTFactory::factory", grammarModel);
-		facade.evaluate("org::eclipse::xtext::ResourceFactory::factory", grammarModel);
+        facade.evaluate("org::eclipse::xtext::ResourceFactory::factory", grammarModel);
+        facade.evaluate("org::eclipse::xtext::services::GrammarAccess::file", grammarModel);
+        facade.evaluate("org::eclipse::xtext::services::MetamodelAccess::file", grammarModel);
+        facade.evaluate("org::eclipse::xtext::services::ServiceFactories::factories", grammarModel);
+        facade.evaluate("org::eclipse::xtext::ui::Plugin::file", grammarModel);
 
 		String grammar = languageNamespace + "/parser/internal/Internal" + languageName + ".g";
 

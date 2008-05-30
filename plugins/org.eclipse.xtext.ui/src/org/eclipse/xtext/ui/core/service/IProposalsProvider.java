@@ -11,8 +11,10 @@ package org.eclipse.xtext.ui.core.service;
 import java.util.List;
 
 import org.eclipse.jface.text.ITextViewer;
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.service.InjectedService;
 import org.eclipse.xtext.ui.core.editor.codecompletion.Proposal;
-import org.eclipse.xtext.ui.core.language.ILanguageService;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -20,4 +22,7 @@ import org.eclipse.xtext.ui.core.language.ILanguageService;
  */
 public interface IProposalsProvider extends ILanguageService {
 	List<Proposal> getProposals(ITextViewer viewer, int offset);
+	
+	@InjectedService
+	void setLanguageDescriptor(ILanguageDescriptor languageDescriptor);
 }

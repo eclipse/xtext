@@ -15,14 +15,14 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.parser.ITokenTypes;
-import org.eclipse.xtext.ui.core.language.AbstractLanguageService;
+import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class PreferenceStore extends AbstractLanguageService implements IPreferenceStoreService {
+public class PreferenceStore implements IPreferenceStoreService {
 	/* Tokens */
 	public final static RGB KEYWORD_COLOR = new RGB(127, 0, 85);
 	public final static RGB DEFAULT_COLOR = new RGB(0, 0, 0);
@@ -38,6 +38,8 @@ public class PreferenceStore extends AbstractLanguageService implements IPrefere
 	public static final String STYLE_SUFIX = "style";
 	public static final String FONT_SUFIX = "font";
 
+	private ILanguageDescriptor languageDescriptor;
+	
 	public static String getTokenColorPreferenceKey(String tokenType) {
 		return tokenType + COLOR_SUFIX;
 	}
@@ -75,5 +77,13 @@ public class PreferenceStore extends AbstractLanguageService implements IPrefere
 		getPersitablePreferenceStore().setDefault(getTokenStylePreferenceKey(ITokenTypes.KEYWORD),
 				StringConverter.asString(KEYWORD_STYLE));
 	}
+
+    public ILanguageDescriptor getLanguageDescriptor() {
+        return languageDescriptor;
+    }
+
+    public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
+        this.languageDescriptor = languageDescriptor;
+    }
 
 }

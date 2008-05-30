@@ -21,4 +21,5 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.antlr,
  org.apache.commons.logging,
  org.openarchitectureware.util.stdlib,
- org.eclipse.emf.ecore.xmi;bundle-version="2.3.2"
+ org.eclipse.emf.ecore.xmi;bundle-version="2.3.2",
+ org.eclipse.xtext.service;bundle-version="1.0.0";visibility:=reexport

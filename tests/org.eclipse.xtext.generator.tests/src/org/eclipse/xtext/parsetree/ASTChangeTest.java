@@ -9,9 +9,7 @@
 package org.eclipse.xtext.parsetree;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.dummy.DummyLanguageLanguageFacade;
 import org.eclipse.xtext.dummy.DummyLanguageStandaloneSetup;
-import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class ASTChangeTest extends AbstractGeneratorTest {
@@ -20,7 +18,7 @@ public class ASTChangeTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		DummyLanguageStandaloneSetup.doSetup();
-		with(DummyLanguageLanguageFacade.LANGUAGE_ID);
+		with(DummyLanguageStandaloneSetup.class);
 	}
 
 	public void testWhitespaceIsIncluded() throws Exception {

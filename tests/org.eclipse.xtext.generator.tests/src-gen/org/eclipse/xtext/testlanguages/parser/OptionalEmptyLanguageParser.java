@@ -39,6 +39,6 @@ public class OptionalEmptyLanguageParser extends org.eclipse.xtext.parser.Abstra
 	}
 	
 	protected IElementFactory getDefaultASTFactory() {
-		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/OptionalEmptyLanguage").getElementFactory();
+		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.OptionalEmptyLanguage").getElementFactory();
 	}
 }

@@ -11,7 +11,8 @@ package org.eclipse.xtext.ui.core.service;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.core.language.ILanguageService;
+import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.service.InjectedService;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -24,4 +25,7 @@ public interface ISyntaxColorer extends ILanguageService {
 	 * @return
 	 */
 	TextAttribute color(LeafNode leafNode);
+	
+	@InjectedService
+	void setPreferenceStoreService(IPreferenceStoreService service);
 }

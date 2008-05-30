@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 
 public class LexerLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
     protected ILanguageFacade getFacade() {
-    	return LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/LexerLanguage");
+    	return LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.LexerLanguage");
     }
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {

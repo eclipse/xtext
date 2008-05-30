@@ -10,8 +10,9 @@ package org.eclipse.xtext.ui.language;
 
 import junit.framework.TestCase;
 
-import org.eclipse.xtext.ui.core.language.LanguageDescriptor;
-import org.eclipse.xtext.ui.core.language.LanguageServiceFactory;
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
 /**
@@ -20,16 +21,17 @@ import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
  */
 public class ServiceFactoryTest extends TestCase {
 
-	public void testGetSyntaxColorerHappyCase() {
-		LanguageDescriptor language = new LanguageDescriptor("org.eclipse.xtext.ui.tests.dummylanguage", "Dummy Language");
-		ISyntaxColorer syntaxColorer = LanguageServiceFactory.getInstance().getSyntaxColorer(language);
+	public void testGetSyntaxColorerHappyCase() throws ClassNotFoundException {
+	    Class.forName("org.eclipse.xtext.ui.core.editor.BaseTextEditor");
+		ILanguageDescriptor language = LanguageDescriptorFactory.get("org.eclipse.xtext.ui.tests.dummylanguage");
+		ISyntaxColorer syntaxColorer = ServiceRegistry.getService(language, ISyntaxColorer.class);
 		assertNotNull(syntaxColorer);
 		assertEquals("org.eclipse.xtext.ui.language.SyntaxColorer1", syntaxColorer.getClass().getName());
 	}
 	
 	public void testGetServiceWithoutClass() {
-		LanguageDescriptor language = new LanguageDescriptor("org.eclipse.xtexte.ui.tests.language.ServiceWithoutClass");
-		ISyntaxColorer syntaxColorer =LanguageServiceFactory.getInstance().getSyntaxColorer(language);
+		ILanguageDescriptor language = LanguageDescriptorFactory.createLanguageDescriptor("org.eclipse.xtexte.ui.tests.language.ServiceWithoutClass", "", "");
+		ISyntaxColorer syntaxColorer = ServiceRegistry.getService(language, ISyntaxColorer.class);
 		assertNull(syntaxColorer);	
 	}
 

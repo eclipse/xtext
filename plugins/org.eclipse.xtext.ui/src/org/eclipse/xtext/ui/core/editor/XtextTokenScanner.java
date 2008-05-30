@@ -19,9 +19,9 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.infrastructure.XtextModelManager;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
-import org.eclipse.xtext.ui.core.language.LanguageServiceFactory;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
 /**
@@ -38,8 +38,8 @@ public class XtextTokenScanner implements ITokenScanner {
 	public XtextTokenScanner(XtextModelManager modelmanager, IPreferenceStore preferenceStore) {
 		this.modelmanager = modelmanager;
 		Assert.isLegal(modelmanager != null);
-		this.syntaxColorer = LanguageServiceFactory.getInstance()
-				.getSyntaxColorer(modelmanager.getLanguageDescriptor());
+		this.syntaxColorer = ServiceRegistry.getService(modelmanager.getLanguageDescriptor(), ISyntaxColorer
+		        .class);
 	}
 
 	/*
