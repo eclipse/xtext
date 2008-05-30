@@ -1,84 +1,59 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
+import org.eclipse.xtext.service.*;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ILanguageFacade;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.parsetree.reconstr.parser.*;
 
 public class ComplexReconstrTestLanguageFacade extends BaseEPackageAccess implements ILanguageFacade {
-    public static final String LANGUAGE_ID = "org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest";
+
+	public ILanguageDescriptor getLanguageDescriptor() {
+		return ComplexReconstrTestStandaloneSetup.getLanguageDescriptor();
+	}
+	
     public String getLanguageId() {
-    	return LANGUAGE_ID;
+    	return ComplexReconstrTestStandaloneSetup.LANGUAGE_ID;
     }
     
-	public static final String COMPLEXRECONSTRTEST_GRAMMAR_CP_URI = "org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi";
-	private static Grammar GRAMMAR = null;
-	
-	@SuppressWarnings("unused")
 	public Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(ComplexReconstrTestLanguageFacade.class.getClassLoader(),COMPLEXRECONSTRTEST_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+		return ServiceRegistry.getService(getLanguageDescriptor(), IGrammarAccess.class).getGrammar();
 	}
 	
-	private IElementFactory factory = new ComplexReconstrTestASTFactory();
 	public IElementFactory getElementFactory() {
-		return factory;
-	}
-	private IParser parser = new ComplexReconstrTestParser();
-	public IParser getParser() {
-		return parser;
+		return ServiceRegistry.getService(getLanguageDescriptor(), IElementFactory.class);
 	}
 	
-	private IParseTreeConstructor constructor = new ComplexReconstrTestParseTreeConstructor();
+	public IParser getParser() {
+		return ServiceRegistry.getService(getLanguageDescriptor(), IParser.class);
+	}
+	
 	public IParseTreeConstructor getParsetreeConstructor() {
-		return constructor;
+		return ServiceRegistry.getService(getLanguageDescriptor(), IParseTreeConstructor.class);
+	}
+
+	public Resource.Factory getResourceFactory() {
+		return ServiceRegistry.getService(getLanguageDescriptor(), IResourceFactory.class);
 	}
 
 	public EPackage[] getGeneratedEPackages() {
-		return new EPackage[] {
-		
-		getComplexrewritetestEPackage()
-		
-		};
+		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getGeneratedEPackages();
 	}
 
 	public EPackage[] getReferencedEPackages() {
-		return new EPackage[] {
-		
-		};
+		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getReferencedEPackages();
 	}
 
-	
-	public static final String COMPLEXREWRITETEST_NS_URI = "http://complex/rewrite/test";
-	public static final String COMPLEXREWRITETEST_CP_URI = "org/eclipse/xtext/parsetree/reconstr/complexrewritetest.ecore";
-	
-	public static EPackage getComplexrewritetestEPackage() {	
-		if (!EPackage.Registry.INSTANCE.containsKey(COMPLEXREWRITETEST_NS_URI)) {
-			EPackage p = loadEcoreFile(ComplexReconstrTestLanguageFacade.class.getClassLoader(),COMPLEXREWRITETEST_CP_URI);
-			if (p!=null) {
-				EPackage.Registry.INSTANCE.put(COMPLEXREWRITETEST_NS_URI,p);
-			}
-		}
-		return EPackage.Registry.INSTANCE.getEPackage(COMPLEXREWRITETEST_NS_URI);
-	}
-	
-
-	private Resource.Factory resourceFactory = new ComplexReconstrTestResourceFactory(this);
-	public Resource.Factory getResourceFactory() {
-		return resourceFactory;
-	}
-	
 	public String getModelFileExtension() {
-		return "complexreconstrtest";
+		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getModelFileExtension();
 	}
 }

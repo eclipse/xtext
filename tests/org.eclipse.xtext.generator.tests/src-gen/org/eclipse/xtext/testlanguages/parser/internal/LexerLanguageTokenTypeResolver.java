@@ -28,13 +28,13 @@ public class LexerLanguageTokenTypeResolver {
 			// RULE_WS
 			return BuiltinRules.BUILTIN_WS;
 
+		case 11:
+			// RULE_LEXER_BODY
+			return BuiltinRules.BUILTIN_LEXER_BODY;
+
 		case 6:
 			// RULE_IMPLICITTOKENTYPE
 			return (LexerRule) getGrammarElement("//@lexerRules.1");
-
-		case 11:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 		case 7:
 			// RULE_STRING
@@ -44,13 +44,13 @@ public class LexerLanguageTokenTypeResolver {
 			// RULE_INT
 			return BuiltinRules.BUILTIN_INT;
 
-		case 12:
-			// RULE_LEXER_BODY
-			return BuiltinRules.BUILTIN_LEXER_BODY;
-
 		case 5:
 			// RULE_EXPLICITTOKENTYPE
 			return (LexerRule) getGrammarElement("//@lexerRules.0");
+
+		case 12:
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
 
 		default:
 			return null;
@@ -59,7 +59,7 @@ public class LexerLanguageTokenTypeResolver {
 	
 	@SuppressWarnings("unused")
 	private static EObject getGrammarElement(String id) {
-		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/LexerLanguage").getGrammar().eResource().getEObject(id);
+		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.LexerLanguage").getGrammar().eResource().getEObject(id);
 	}
 	
 }

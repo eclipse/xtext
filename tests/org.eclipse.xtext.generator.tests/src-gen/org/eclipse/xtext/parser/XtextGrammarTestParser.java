@@ -39,6 +39,6 @@ public class XtextGrammarTestParser extends org.eclipse.xtext.parser.AbstractPar
 	}
 	
 	protected IElementFactory getDefaultASTFactory() {
-		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/XtextGrammarTest").getElementFactory();
+		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.XtextGrammarTest").getElementFactory();
 	}
 }

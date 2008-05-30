@@ -6,7 +6,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.service;
+package org.eclipse.xtext.service.internal;
+
+import org.eclipse.xtext.service.ILanguageDescriptor;
 
 
 
@@ -19,16 +21,14 @@ public class LanguageDescriptor implements ILanguageDescriptor {
 	private String name;
 	private String nameSpace;
 
-	public LanguageDescriptor(String id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+    public LanguageDescriptor(String id, String name, String nameSpace) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.nameSpace = nameSpace;
+    }
 
-	public LanguageDescriptor(String id) {
-		this.id = id;
-	}
-
-	/* (non-Javadoc)
+    /* (non-Javadoc)
      * @see org.eclipse.xtext.service.ILanguageDescriptor#getId()
      */
 	public String getId() {

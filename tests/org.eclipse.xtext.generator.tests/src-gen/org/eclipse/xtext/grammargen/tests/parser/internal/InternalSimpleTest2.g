@@ -67,7 +67,7 @@ import org.eclipse.xtext.grammargen.tests.parser.internal.SimpleTest2TokenTypeRe
     public InternalSimpleTest2Parser(TokenStream input, IElementFactory factory) {
         this(input);
         this.factory = factory;
-		grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/grammargen/tests/SimpleTest2").getGrammar();
+		grammar = LanguageFacadeFactory.getFacade("org.eclipse.xtext.grammargen.tests.SimpleTest2").getGrammar();
     }
     
     protected void setLexerRule(LeafNode node, Token t) {
@@ -170,9 +170,9 @@ ruleChild returns [EObject current=null]
 
 
 
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
-
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+
+RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
@@ -180,9 +180,9 @@ RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
-
 RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
+
+RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 RULE_ANY_OTHER : .;
 

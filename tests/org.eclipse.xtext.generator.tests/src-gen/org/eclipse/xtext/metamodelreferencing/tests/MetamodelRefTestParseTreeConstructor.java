@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 
 public class MetamodelRefTestParseTreeConstructor extends AbstractParseTreeConstructor {
     protected ILanguageFacade getFacade() {
-    	return LanguageFacadeFactory.getFacade("org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest");
+    	return LanguageFacadeFactory.getFacade("org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest");
     }
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {

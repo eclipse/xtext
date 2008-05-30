@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 
 public class SimpleExpressionsParseTreeConstructor extends AbstractParseTreeConstructor {
     protected ILanguageFacade getFacade() {
-    	return LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/SimpleExpressions");
+    	return LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.SimpleExpressions");
     }
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {

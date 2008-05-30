@@ -5,30 +5,38 @@ import junit.framework.TestCase;
 
 public class ServiceTest extends TestCase {
 
-    private LanguageDescriptor myLanguageDescriptor;
+    private ILanguageDescriptor myLanguageDescriptor;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        myLanguageDescriptor = new LanguageDescriptor("xx", "yy");
+        ServiceRegistry.resetInternal();
+        LanguageDescriptorFactory.resetInternal();
+        myLanguageDescriptor = LanguageDescriptorFactory.createLanguageDescriptor("xx", "yy", "zz");
     }
 
     public void testServiceRegistry() throws Exception {
-        ServiceRegistry.reset();
-        ServiceRegistry.registerFactory(myLanguageDescriptor, new InjectedLanguageServiceFactory());
+        ServiceRegistry.registerFactory(new InjectedLanguageServiceFactory());
         InjectedLanguageService service = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
         assertNotNull(service);
     }
     
     public void testServiceInjection() throws Exception {
-        ServiceRegistry.reset();
-        ServiceRegistry.registerFactory(myLanguageDescriptor, new MyLanguageServiceFactory());
+        ServiceRegistry.registerFactory(new MyLanguageServiceFactory());
         
         MyLanguageService service = ServiceRegistry.getService(myLanguageDescriptor, MyLanguageService.class);
         assertNull(service);
 
-        ServiceRegistry.registerFactory(myLanguageDescriptor, new InjectedLanguageServiceFactory());
+        ServiceRegistry.registerFactory(new InjectedLanguageServiceFactory());
         service = ServiceRegistry.getService(myLanguageDescriptor, MyLanguageService.class);
+        assertNotNull(service);
+        assertNotNull(service.getInjectedService());
+        assertNotNull(service.getAttr());
+    }
+    
+    public void testCompoundFactory() throws Exception {
+        ServiceRegistry.registerFactory(new CompoundLanguageServiceFactory());
+        MyLanguageService service = ServiceRegistry.getService(myLanguageDescriptor, MyLanguageService.class);
         assertNotNull(service);
         assertNotNull(service.getInjectedService());
         assertNotNull(service.getAttr());

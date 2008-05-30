@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.xtext.XtextGrammarTestLanguageFacade;
 import org.eclipse.xtext.XtextGrammarTestStandaloneSetup;
 import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.parser.IParseErrorHandler;
@@ -25,7 +24,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		XtextGrammarTestStandaloneSetup.doSetup();
-		with(XtextGrammarTestLanguageFacade.LANGUAGE_ID);
+		with(XtextGrammarTestStandaloneSetup.class);
 	}
 
 	public void testLexError() throws Exception {

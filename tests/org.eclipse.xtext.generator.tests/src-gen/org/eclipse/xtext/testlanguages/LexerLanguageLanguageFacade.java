@@ -1,84 +1,59 @@
 package org.eclipse.xtext.testlanguages;
 
+import org.eclipse.xtext.service.*;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ILanguageFacade;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.testlanguages.parser.*;
 
 public class LexerLanguageLanguageFacade extends BaseEPackageAccess implements ILanguageFacade {
-    public static final String LANGUAGE_ID = "org/eclipse/xtext/testlanguages/LexerLanguage";
+
+	public ILanguageDescriptor getLanguageDescriptor() {
+		return LexerLanguageStandaloneSetup.getLanguageDescriptor();
+	}
+	
     public String getLanguageId() {
-    	return LANGUAGE_ID;
+    	return LexerLanguageStandaloneSetup.LANGUAGE_ID;
     }
     
-	public static final String LEXERLANGUAGE_GRAMMAR_CP_URI = "org/eclipse/xtext/testlanguages/LexerLanguage.xmi";
-	private static Grammar GRAMMAR = null;
-	
-	@SuppressWarnings("unused")
 	public Grammar getGrammar() {	
-		if (GRAMMAR==null) {
-			// assert the XtextPackage implementation is loaded
-			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(LexerLanguageLanguageFacade.class.getClassLoader(),LEXERLANGUAGE_GRAMMAR_CP_URI);
-		}
-		return GRAMMAR;
+		return ServiceRegistry.getService(getLanguageDescriptor(), IGrammarAccess.class).getGrammar();
 	}
 	
-	private IElementFactory factory = new LexerLanguageASTFactory();
 	public IElementFactory getElementFactory() {
-		return factory;
-	}
-	private IParser parser = new LexerLanguageParser();
-	public IParser getParser() {
-		return parser;
+		return ServiceRegistry.getService(getLanguageDescriptor(), IElementFactory.class);
 	}
 	
-	private IParseTreeConstructor constructor = new LexerLanguageParseTreeConstructor();
+	public IParser getParser() {
+		return ServiceRegistry.getService(getLanguageDescriptor(), IParser.class);
+	}
+	
 	public IParseTreeConstructor getParsetreeConstructor() {
-		return constructor;
+		return ServiceRegistry.getService(getLanguageDescriptor(), IParseTreeConstructor.class);
+	}
+
+	public Resource.Factory getResourceFactory() {
+		return ServiceRegistry.getService(getLanguageDescriptor(), IResourceFactory.class);
 	}
 
 	public EPackage[] getGeneratedEPackages() {
-		return new EPackage[] {
-		
-		getLexerLangEPackage()
-		
-		};
+		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getGeneratedEPackages();
 	}
 
 	public EPackage[] getReferencedEPackages() {
-		return new EPackage[] {
-		
-		};
+		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getReferencedEPackages();
 	}
 
-	
-	public static final String LEXERLANG_NS_URI = "http://www.eclipse.org/2008/xtext/LexerLang";
-	public static final String LEXERLANG_CP_URI = "org/eclipse/xtext/testlanguages/LexerLang.ecore";
-	
-	public static EPackage getLexerLangEPackage() {	
-		if (!EPackage.Registry.INSTANCE.containsKey(LEXERLANG_NS_URI)) {
-			EPackage p = loadEcoreFile(LexerLanguageLanguageFacade.class.getClassLoader(),LEXERLANG_CP_URI);
-			if (p!=null) {
-				EPackage.Registry.INSTANCE.put(LEXERLANG_NS_URI,p);
-			}
-		}
-		return EPackage.Registry.INSTANCE.getEPackage(LEXERLANG_NS_URI);
-	}
-	
-
-	private Resource.Factory resourceFactory = new LexerLanguageResourceFactory(this);
-	public Resource.Factory getResourceFactory() {
-		return resourceFactory;
-	}
-	
 	public String getModelFileExtension() {
-		return "lexerlanguage";
+		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getModelFileExtension();
 	}
 }

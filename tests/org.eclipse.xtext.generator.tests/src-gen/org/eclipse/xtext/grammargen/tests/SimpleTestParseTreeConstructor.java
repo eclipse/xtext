@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 
 public class SimpleTestParseTreeConstructor extends AbstractParseTreeConstructor {
     protected ILanguageFacade getFacade() {
-    	return LanguageFacadeFactory.getFacade("org/eclipse/xtext/grammargen/tests/SimpleTest");
+    	return LanguageFacadeFactory.getFacade("org.eclipse.xtext.grammargen.tests.SimpleTest");
     }
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {

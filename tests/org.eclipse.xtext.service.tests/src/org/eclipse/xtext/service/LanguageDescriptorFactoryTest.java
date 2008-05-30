@@ -8,18 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.service;
 
+import junit.framework.TestCase;
+
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class AbstractLanguageService implements ILanguageService {
-	private ILanguageDescriptor languageDescriptor = null;
-
-	public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
-		this.languageDescriptor = languageDescriptor;
-	}
-
-	public ILanguageDescriptor getLanguageDescriptor() {
-		return languageDescriptor;
+public class LanguageDescriptorFactoryTest extends TestCase {
+	public void testgetLanguageDescriptor() throws Exception {
+		ILanguageDescriptor descr = LanguageDescriptorFactory.createLanguageDescriptor("org.eclipse.xtext.ui.tests.dummylanguage", "Dummy Language", "org.eclipse");
+		assertNotNull("LanguageDescriptor Initializing failed", descr);
+		assertEquals("org.eclipse.xtext.ui.tests.dummylanguage", descr
+				.getId());
+		assertEquals("Dummy Language", descr.getName());
 	}
 }

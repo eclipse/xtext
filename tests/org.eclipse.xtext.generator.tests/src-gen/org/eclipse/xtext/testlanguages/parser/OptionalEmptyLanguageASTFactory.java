@@ -6,6 +6,6 @@ import org.eclipse.xtext.LanguageFacadeFactory;
 public class OptionalEmptyLanguageASTFactory extends org.eclipse.xtext.parser.AbstractEcoreElementFactory {
 	
 	protected EPackage[] getEPackages(String alias) {
-		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/OptionalEmptyLanguage").getGeneratedEPackages();
+		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.OptionalEmptyLanguage").getGeneratedEPackages();
 	}
 }

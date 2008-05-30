@@ -3,25 +3,22 @@ package org.eclipse.xtext.service;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.LogFactory;
 
 public class ServiceRegistry {
 
-    private static Map<ILanguageDescriptor, Map<Class<?>, ILanguageServiceFactory<?>>> descriptor2FactoryMap = new HashMap<ILanguageDescriptor, Map<Class<?>, ILanguageServiceFactory<?>>>();
+    private static List<ILanguageServiceFactory> factories = new ArrayList<ILanguageServiceFactory>();
 
     @SuppressWarnings("unchecked")
-    public static <T extends ILanguageService> T getService(ILanguageDescriptor languageDescriptor, Class<T> serviceClass) {
+    public static <T extends ILanguageService> T getService(ILanguageDescriptor languageDescriptor, Class<T> serviceInterface) {
         try {
-            if (languageDescriptor != null) {
-                Map<Class<?>, ILanguageServiceFactory<?>> factoryMap = descriptor2FactoryMap.get(languageDescriptor);
-                if (factoryMap != null) {
-                    ILanguageServiceFactory<T> languageServiceFactory = (ILanguageServiceFactory<T>) factoryMap.get(serviceClass);
-                    if (languageServiceFactory != null) {
-                        T languageService = languageServiceFactory.createLanguageService();
-                        languageService.setLanguageDescriptor(languageDescriptor);
+            if (languageDescriptor != null && serviceInterface != null) {
+                for (ILanguageServiceFactory factory : factories) {
+                    if (factory.isFactoryFor(languageDescriptor, serviceInterface)) {
+                        T languageService = (T) factory.createLanguageService(languageDescriptor, serviceInterface);
                         injectDependencies(languageDescriptor, languageService);
                         return languageService;
                     }
@@ -29,19 +26,29 @@ public class ServiceRegistry {
             }
         } catch (Exception exc) {
             LogFactory.getLog(ServiceRegistry.class).error(
-                    "Error getting service " + serviceClass.getSimpleName() + " for " + languageDescriptor, exc);
+                    "Error getting service " + serviceInterface.getSimpleName() + " for " + languageDescriptor, exc);
         }
         return null;
     }
 
-    public static <T extends ILanguageService> void registerFactory(ILanguageDescriptor languageDescriptor,
-            ILanguageServiceFactory<T> factory) {
-        Map<Class<?>, ILanguageServiceFactory<?>> factories = descriptor2FactoryMap.get(languageDescriptor);
-        if (factories == null) {
-            factories = new HashMap<Class<?>, ILanguageServiceFactory<?>>();
-            descriptor2FactoryMap.put(languageDescriptor, factories);
+    public static ILanguageServiceFactory getFactory(ILanguageDescriptor languageDescriptor,
+            Class<? extends ILanguageService> serviceInterface) {
+        if (languageDescriptor != null && serviceInterface != null) {
+            for (ILanguageServiceFactory factory : factories) {
+                if (factory.isFactoryFor(languageDescriptor, serviceInterface)) {
+                    return factory;
+                }
+            }
         }
-        factories.put(factory.getServiceClass(), factory);
+        return null;
+    }
+
+    public static <T extends ILanguageService> void registerFactory(ILanguageServiceFactory factory) {
+        factories.add(factory);
+    }
+
+    public static <T extends ILanguageService> void deregisterFactory(ILanguageServiceFactory factory) {
+        factories.remove(factory);
     }
 
     private static void injectDependencies(ILanguageDescriptor languageDescriptor, ILanguageService service)
@@ -70,6 +77,9 @@ public class ServiceRegistry {
     @SuppressWarnings("unchecked")
     private static void findAndInjectService(ILanguageDescriptor languageDescriptor, ILanguageService service, Class<?> type, Method setter)
             throws IllegalAccessException, InvocationTargetException {
+        if (ILanguageDescriptor.class.equals(type)) {
+            setter.invoke(service, languageDescriptor);
+        }
         if (!ILanguageService.class.isAssignableFrom(type)) {
             throw new IllegalArgumentException("Annotated member's type must extend ILanguageService");
         }
@@ -85,8 +95,8 @@ public class ServiceRegistry {
         return "set" + name.substring(0, 1).toUpperCase() + name.substring(1);
     }
 
-    protected static void reset() {
-        descriptor2FactoryMap.clear();
+    protected static void resetInternal() {
+        factories.clear();
     }
 
 }

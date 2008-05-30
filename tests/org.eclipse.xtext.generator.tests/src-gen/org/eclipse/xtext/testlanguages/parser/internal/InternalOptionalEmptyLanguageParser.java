@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g 2008-05-27 16:32:46
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g 2008-05-30 18:42:58
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -19,17 +19,17 @@ import java.util.ArrayList;
 
 public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_SL_COMMENT", "RULE_WS", "RULE_INT", "RULE_ML_COMMENT", "RULE_LEXER_BODY", "RULE_ANY_OTHER", "'hallo'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_SL_COMMENT", "RULE_STRING", "RULE_WS", "RULE_INT", "RULE_LEXER_BODY", "RULE_ML_COMMENT", "RULE_ANY_OTHER", "'hallo'"
     };
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=10;
     public static final int RULE_ID=4;
     public static final int RULE_WS=7;
     public static final int RULE_INT=8;
     public static final int EOF=-1;
-    public static final int RULE_STRING=5;
+    public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=6;
-    public static final int RULE_LEXER_BODY=10;
+    public static final int RULE_SL_COMMENT=5;
+    public static final int RULE_LEXER_BODY=9;
 
         public InternalOptionalEmptyLanguageParser(TokenStream input) {
             super(input);
@@ -44,7 +44,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
         public InternalOptionalEmptyLanguageParser(TokenStream input, IElementFactory factory) {
             this(input);
             this.factory = factory;
-    		grammar = LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/OptionalEmptyLanguage").getGrammar();
+    		grammar = LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.OptionalEmptyLanguage").getGrammar();
         }
         
         protected void setLexerRule(LeafNode node, Token t) {

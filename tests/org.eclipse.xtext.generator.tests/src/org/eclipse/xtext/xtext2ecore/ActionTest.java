@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.testlanguages.ActionTestLanguageLanguageFacade;
 import org.eclipse.xtext.testlanguages.ActionTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.services.ActionTestLanguageMetamodelAccess;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -34,11 +34,17 @@ public class ActionTest extends AbstractGeneratorTest {
 		checkContainmentReferenceExists(thing, type, "content");
 		assertTrue(item.getESuperTypes().contains(type));
 		assertTrue(thing.getESuperTypes().contains(type));
-		assertNull(ActionTestLanguageLanguageFacade.getActionLangEPackage().getEClassifier("Element"));
+		EPackage actionLangEPackage = getActionLangEPackage();
+		assertNull(actionLangEPackage.getEClassifier("Element"));
 	}
+
+    private EPackage getActionLangEPackage() {
+		EPackage actionLangEPackage = ActionTestLanguageMetamodelAccess.getActionLangEPackage();
+		return actionLangEPackage;
+    }
 	
 	private EClass checkEClassExists(String name) {
-		EPackage actionLangEPackage = ActionTestLanguageLanguageFacade.getActionLangEPackage();
+		EPackage actionLangEPackage = getActionLangEPackage();
 		EClassifier classifier = actionLangEPackage.getEClassifier(name);
 		assertNotNull(classifier);
 		assertTrue(classifier instanceof EClass);
@@ -57,6 +63,6 @@ public class ActionTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		ActionTestLanguageStandaloneSetup.doSetup();
-		with(ActionTestLanguageLanguageFacade.LANGUAGE_ID);
+		with(ActionTestLanguageStandaloneSetup.class);
 	}
 }

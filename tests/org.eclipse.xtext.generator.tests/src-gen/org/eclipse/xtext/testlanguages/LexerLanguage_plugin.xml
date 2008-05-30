@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!-- Generated with Xtext -->
+
+<plugin>
+	<extension
+         point="org.eclipse.xtext.ui.languageDescriptor">
+      <languageDescriptor
+            id="org.eclipse.xtext.testlanguages.LexerLanguage"
+            name="LexerLanguage">
+      </languageDescriptor>
+   	</extension>
+	<extension
+         point="org.eclipse.xtext.ui.parser">
+      <parser>
+            languageId="org.eclipse.xtext.testlanguages.LexerLanguage"
+            class="org.eclipse.xtext.testlanguages.service.ParserServiceFactory">
+      </parser>
+   	</extension>
+	<extension
+         point="org.eclipse.xtext.ui.aSTFactory">
+      <aSTFactory>
+            languageId="org.eclipse.xtext.testlanguages.LexerLanguage"
+            class="org.eclipse.xtext.testlanguages.service.ASTFactoryServiceFactory">
+      </aSTFactory>
+   	</extension>
+	<extension
+         point="org.eclipse.xtext.ui.parseTreeConstructor">
+      <parseTreeConstructor>
+            languageId="org.eclipse.xtext.testlanguages.LexerLanguage"
+            class="org.eclipse.xtext.testlanguages.service.ParseTreeConstructorServiceFactory">
+      </parseTreeConstructor>
+   	</extension>
+	<extension
+         point="org.eclipse.xtext.ui.resourceFactory">
+      <resourceFactory>
+            languageId="org.eclipse.xtext.testlanguages.LexerLanguage"
+            class="org.eclipse.xtext.testlanguages.service.ResourceFactoryServiceFactory">
+      </resourceFactory>
+   	</extension>
+	<extension
+         point="org.eclipse.xtext.ui.grammarAccess">
+      <grammarAccess>
+            languageId="org.eclipse.xtext.testlanguages.LexerLanguage"
+            class="org.eclipse.xtext.testlanguages.service.GrammarAccessServiceFactory">
+      </grammarAccess>
+   	</extension>
+	<extension
+         point="org.eclipse.xtext.ui.metamodelAccess">
+      <metamodelAccess>
+            languageId="org.eclipse.xtext.testlanguages.LexerLanguage"
+            class="org.eclipse.xtext.testlanguages.service.MetamodelAccessServiceFactory">
+      </metamodelAccess>
+   	</extension>
+</plugin>

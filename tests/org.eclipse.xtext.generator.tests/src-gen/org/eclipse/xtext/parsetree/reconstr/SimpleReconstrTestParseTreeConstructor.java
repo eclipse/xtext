@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 
 public class SimpleReconstrTestParseTreeConstructor extends AbstractParseTreeConstructor {
     protected ILanguageFacade getFacade() {
-    	return LanguageFacadeFactory.getFacade("org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest");
+    	return LanguageFacadeFactory.getFacade("org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest");
     }
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {

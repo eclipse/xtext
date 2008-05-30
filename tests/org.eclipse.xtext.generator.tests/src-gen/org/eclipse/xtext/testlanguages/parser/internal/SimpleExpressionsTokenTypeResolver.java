@@ -34,21 +34,21 @@ public class SimpleExpressionsTokenTypeResolver {
 
 
 		case 9:
-			// RULE_ML_COMMENT
-			return BuiltinRules.BUILTIN_ML_COMMENT;
-
-		case 6:
-			// RULE_SL_COMMENT
-			return BuiltinRules.BUILTIN_SL_COMMENT;
-
-
-		case 10:
 			// RULE_LEXER_BODY
 			return BuiltinRules.BUILTIN_LEXER_BODY;
 
-		case 5:
+		case 6:
 			// RULE_STRING
 			return BuiltinRules.BUILTIN_STRING;
+
+
+		case 10:
+			// RULE_ML_COMMENT
+			return BuiltinRules.BUILTIN_ML_COMMENT;
+
+		case 5:
+			// RULE_SL_COMMENT
+			return BuiltinRules.BUILTIN_SL_COMMENT;
 
 		default:
 			return null;
@@ -57,7 +57,7 @@ public class SimpleExpressionsTokenTypeResolver {
 	
 	@SuppressWarnings("unused")
 	private static EObject getGrammarElement(String id) {
-		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/SimpleExpressions").getGrammar().eResource().getEObject(id);
+		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.SimpleExpressions").getGrammar().eResource().getEObject(id);
 	}
 	
 }

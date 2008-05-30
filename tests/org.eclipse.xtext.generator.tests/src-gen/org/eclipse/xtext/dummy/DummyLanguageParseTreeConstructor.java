@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 
 public class DummyLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
     protected ILanguageFacade getFacade() {
-    	return LanguageFacadeFactory.getFacade("org/eclipse/xtext/dummy/DummyLanguage");
+    	return LanguageFacadeFactory.getFacade("org.eclipse.xtext.dummy.DummyLanguage");
     }
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {

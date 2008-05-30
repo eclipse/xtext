@@ -73,7 +73,7 @@ public class XtextGrammarTestTokenTypeResolver {
 	
 	@SuppressWarnings("unused")
 	private static EObject getGrammarElement(String id) {
-		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/XtextGrammarTest").getGrammar().eResource().getEObject(id);
+		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.XtextGrammarTest").getGrammar().eResource().getEObject(id);
 	}
 	
 }

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.testlanguages.TestLanguageLanguageFacade;
+import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
 import org.eclipse.xtext.xtext2ecore.EcoreModelComparator;
 
 public class ResourceTest extends TestCase {
@@ -21,7 +21,7 @@ public class ResourceTest extends TestCase {
 	public void testResource() throws Exception {
 		new Object(); // workaround for Java bug on MacOSX
 		org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup.doSetup();
-		ILanguageFacade facade = LanguageFacadeFactory.getFacade(TestLanguageLanguageFacade.LANGUAGE_ID);
+		ILanguageFacade facade = LanguageFacadeFactory.getFacade(TestLanguageStandaloneSetup.LANGUAGE_ID);
 
 		File modelFile = File.createTempFile("testfile", "." + facade.getModelFileExtension());
 		modelFile.deleteOnExit();

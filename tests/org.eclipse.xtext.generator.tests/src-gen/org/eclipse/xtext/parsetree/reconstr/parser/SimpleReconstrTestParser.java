@@ -39,6 +39,6 @@ public class SimpleReconstrTestParser extends org.eclipse.xtext.parser.AbstractP
 	}
 	
 	protected IElementFactory getDefaultASTFactory() {
-		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest").getElementFactory();
+		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest").getElementFactory();
 	}
 }

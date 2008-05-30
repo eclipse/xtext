@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!-- Generated with Xtext -->
+
+<plugin>
+	<extension
+         point="org.eclipse.xtext.ui.languageDescriptor">
+      <languageDescriptor
+            id="org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest"
+            name="MetamodelRefTest">
+      </languageDescriptor>
+   	</extension>
+	<extension
+         point="org.eclipse.xtext.ui.parser">
+      <parser>
+            languageId="org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest"
+            class="org.eclipse.xtext.metamodelreferencing.tests.service.ParserServiceFactory">
+      </parser>
+   	</extension>
+	<extension
+         point="org.eclipse.xtext.ui.aSTFactory">
+      <aSTFactory>
+            languageId="org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest"
+            class="org.eclipse.xtext.metamodelreferencing.tests.service.ASTFactoryServiceFactory">
+      </aSTFactory>
+   	</extension>
+	<extension
+         point="org.eclipse.xtext.ui.parseTreeConstructor">
+      <parseTreeConstructor>
+            languageId="org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest"
+            class="org.eclipse.xtext.metamodelreferencing.tests.service.ParseTreeConstructorServiceFactory">
+      </parseTreeConstructor>
+   	</extension>
+	<extension
+         point="org.eclipse.xtext.ui.resourceFactory">
+      <resourceFactory>
+            languageId="org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest"
+            class="org.eclipse.xtext.metamodelreferencing.tests.service.ResourceFactoryServiceFactory">
+      </resourceFactory>
+   	</extension>
+	<extension
+         point="org.eclipse.xtext.ui.grammarAccess">
+      <grammarAccess>
+            languageId="org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest"
+            class="org.eclipse.xtext.metamodelreferencing.tests.service.GrammarAccessServiceFactory">
+      </grammarAccess>
+   	</extension>
+	<extension
+         point="org.eclipse.xtext.ui.metamodelAccess">
+      <metamodelAccess>
+            languageId="org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest"
+            class="org.eclipse.xtext.metamodelreferencing.tests.service.MetamodelAccessServiceFactory">
+      </metamodelAccess>
+   	</extension>
+</plugin>

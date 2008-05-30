@@ -39,6 +39,6 @@ public class SimpleExpressionsParser extends org.eclipse.xtext.parser.AbstractPa
 	}
 	
 	protected IElementFactory getDefaultASTFactory() {
-		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/SimpleExpressions").getElementFactory();
+		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.SimpleExpressions").getElementFactory();
 	}
 }

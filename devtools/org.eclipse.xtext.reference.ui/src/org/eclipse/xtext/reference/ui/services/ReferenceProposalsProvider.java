@@ -13,19 +13,23 @@ import java.util.List;
 
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.reference.ui.Activator;
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.codecompletion.Proposal;
-import org.eclipse.xtext.ui.core.language.AbstractLanguageService;
 import org.eclipse.xtext.ui.core.service.IProposalsProvider;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class ReferenceProposalsProvider extends AbstractLanguageService implements IProposalsProvider {
+public class ReferenceProposalsProvider implements IProposalsProvider {
 
-	/*
+	private ILanguageDescriptor languageDescriptor;
+
+    /*
 	 * (non-Javadoc)
 	 * 
 	 * @see
@@ -46,7 +50,8 @@ public class ReferenceProposalsProvider extends AbstractLanguageService implemen
 		p2.setDescription("Test AutoWRAP: alkg pkap aposk poasdkg pokd"
 				+ "gokspeokrg speorkg aüperogk aüpeorgk üapoekg apüodlg laksd lgk üapwoegk ldkgaäösdlgkoawekg ok");
 		List<Proposal> retVal = new ArrayList<Proposal>();
-		for (ParserRule pr : getLanguageDescriptor().getLanguageFacade().getGrammar().getParserRules()) {
+		IGrammarAccess grammarAccess = ServiceRegistry.getService(languageDescriptor, IGrammarAccess.class);
+		for (ParserRule pr : grammarAccess.getGrammar().getParserRules()) {
 			Proposal pro = new Proposal(pr.getName());
 			pro.setLabel(new StyledString(pr.getName()).append(" - " + pr.toString(), StyledString.QUALIFIER_STYLER));
 			retVal.add(pro);
@@ -56,4 +61,12 @@ public class ReferenceProposalsProvider extends AbstractLanguageService implemen
 		retVal.add(p2);
 		return retVal;
 	}
+
+    public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
+       this.languageDescriptor = languageDescriptor;
+    }
+    
+    private ILanguageDescriptor getLanguageDescriptor() {
+        return languageDescriptor;
+    }
 }

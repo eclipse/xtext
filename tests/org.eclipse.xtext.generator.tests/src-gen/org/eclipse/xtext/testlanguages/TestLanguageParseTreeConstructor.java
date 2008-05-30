@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 
 public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
     protected ILanguageFacade getFacade() {
-    	return LanguageFacadeFactory.getFacade("org/eclipse/xtext/testlanguages/TestLanguage");
+    	return LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.TestLanguage");
     }
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {

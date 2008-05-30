@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 
 public class XtextGrammarTestParseTreeConstructor extends AbstractParseTreeConstructor {
     protected ILanguageFacade getFacade() {
-    	return LanguageFacadeFactory.getFacade("org/eclipse/xtext/XtextGrammarTest");
+    	return LanguageFacadeFactory.getFacade("org.eclipse.xtext.XtextGrammarTest");
     }
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {

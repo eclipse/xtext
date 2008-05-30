@@ -6,6 +6,6 @@ import org.eclipse.xtext.LanguageFacadeFactory;
 public class SimpleReconstrTestASTFactory extends org.eclipse.xtext.parser.AbstractEcoreElementFactory {
 	
 	protected EPackage[] getEPackages(String alias) {
-		return LanguageFacadeFactory.getFacade("org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest").getGeneratedEPackages();
+		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest").getGeneratedEPackages();
 	}
 }
