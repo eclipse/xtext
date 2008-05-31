@@ -31,7 +31,7 @@ public class ReferenceGrammarTest extends TestCase {
 		ReferenceGrammarStandaloneSetup.doSetup();
 	}
 	
-	ILanguageFacade f = LanguageFacadeFactory.getFacade(ReferenceGrammarLanguageFacade.LANGUAGE_ID);
+	ILanguageFacade f = LanguageFacadeFactory.getFacade(ReferenceGrammarStandaloneSetup.LANGUAGE_ID);
 	
 	public void testParseNothing() throws Exception {
 		EObject object = f.getParser().parse(new StringInputStream("")).getRootASTElement();
@@ -40,7 +40,7 @@ public class ReferenceGrammarTest extends TestCase {
 	
 	public void testParseGrammar() {
 		String grammar = 
-			"spielplatz '200' {" +
+			"spielplatz 200 {" +
 			"    kind (soeren '7')" +
 			"    kind (lennart '4')" +
 			"    kind (jonas '1')" +
