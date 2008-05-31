@@ -79,9 +79,12 @@ public class ServiceRegistry {
             throws IllegalAccessException, InvocationTargetException {
         if (ILanguageDescriptor.class.equals(type)) {
             setter.invoke(service, languageDescriptor);
+            return;
         }
         if (!ILanguageService.class.isAssignableFrom(type)) {
-            throw new IllegalArgumentException("Annotated member's type must extend ILanguageService");
+            throw new IllegalArgumentException(
+                    "Annotated member's type must extend ILanguageService. Member type class: " + type
+                            + ", but should be " + ILanguageService.class + ".");
         }
         ILanguageService injectedService = ServiceRegistry.getService(languageDescriptor, (Class<? extends ILanguageService>) type);
         if (injectedService == null) {
