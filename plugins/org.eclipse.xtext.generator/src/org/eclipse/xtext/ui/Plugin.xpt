@@ -21,24 +21,24 @@
 <!-- Generated with Xtext -->
 
 <plugin>
-	<extension
+   <extension
          point="org.eclipse.xtext.ui.languageDescriptor">
       <languageDescriptor
             id="«languageId()»"
             name="«languageName()»">
       </languageDescriptor>
-   	</extension>
-   	«FOREACH services() AS serviceName»«EXPAND registerServiceFactory(serviceName)-»«ENDFOREACH-»
+   </extension>
+   «FOREACH services() AS serviceName»«EXPAND registerServiceFactory(serviceName)-»«ENDFOREACH-»
 </plugin>
 «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE registerServiceFactory(String serviceName) FOR Grammar-»
-	<extension
+   <extension
          point="org.eclipse.xtext.ui.«serviceName.toFirstLower()»">
-      <«serviceName.toFirstLower()»>
+      <«serviceName.toFirstLower()»
             languageId="«languageId()»"
-            class="«packageName()».service.«serviceName»ServiceFactory">
+            class="«packageName()».services.«languageName()»«serviceName»ServiceFactory">
       </«serviceName.toFirstLower()»>
-   	</extension>
+   </extension>
 «ENDDEFINE»
