@@ -132,9 +132,9 @@ public class BaseTextEditor extends TextEditor {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(Class adapter) {
-//		if (adapter.equals(IContentOutlinePage.class)) {
-//			return getOutlinePage();
-//		}
+		if (adapter.equals(IContentOutlinePage.class)) {
+			return getOutlinePage();
+		}
 		return super.getAdapter(adapter);
 	}
 
