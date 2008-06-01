@@ -16,6 +16,7 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.parser.ITokenTypes;
 import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.InjectedService;
 import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
 
 /**
@@ -59,8 +60,10 @@ public class PreferenceStore implements IPreferenceStoreService {
 	IPersistentPreferenceStore preferenceStore = null;
 
 	public IPersistentPreferenceStore getPersitablePreferenceStore() {
-		if (preferenceStore == null)
+		if (preferenceStore == null) {
 			preferenceStore = new ScopedPreferenceStore(new InstanceScope(), getLanguageDescriptor().getNameSpace());
+			initializeDefaults();
+		}
 		return preferenceStore;
 	}
 
@@ -82,6 +85,7 @@ public class PreferenceStore implements IPreferenceStoreService {
         return languageDescriptor;
     }
 
+    @InjectedService
     public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
         this.languageDescriptor = languageDescriptor;
     }

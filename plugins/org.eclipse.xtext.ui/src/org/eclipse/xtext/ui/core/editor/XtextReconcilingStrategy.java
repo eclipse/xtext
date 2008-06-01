@@ -22,9 +22,7 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtext.parser.IParseError;
-import org.eclipse.xtext.ui.core.editor.infrastructure.XtextModelManager;
 import org.eclipse.xtext.ui.core.internal.XtextMarkerManager;
 
 /**
@@ -35,50 +33,26 @@ public class XtextReconcilingStrategy implements IReconcilingStrategy, IReconcil
 
 	private IDocument document;
 	private IProgressMonitor monitor;
-	private XtextModelManager manager;
-	private IEditorPart editor;
+	private BaseTextEditor editor;
 
-	public XtextReconcilingStrategy(XtextModelManager manager, IEditorPart resource) {
-		this.manager = manager;
-		this.editor = resource;
+	public XtextReconcilingStrategy(BaseTextEditor editor) {
+		this.editor = editor;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.text.reconciler.IReconcilingStrategy#reconcile(org.
-	 * eclipse.jface.text.IRegion)
-	 */
 	public void reconcile(IRegion partition) {
 		IResource resource = (IResource) editor.getEditorInput().getAdapter(IFile.class);
 		XtextMarkerManager.clearXtextMarker(resource, monitor);
-		if (manager.hasErrors()) {
-			for (IParseError error : manager.getErrors()) {
+		if (editor.getModel().hasErrors()) {
+			for (IParseError error : editor.getModel().getErrors()) {
 				XtextMarkerManager.createMarker(resource, collectMarkerAttributes(error), monitor);
 			}
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.text.reconciler.IReconcilingStrategy#reconcile(org.
-	 * eclipse.jface.text.reconciler.DirtyRegion,
-	 * org.eclipse.jface.text.IRegion)
-	 */
 	public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion) {
 		reconcile(dirtyRegion);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.text.reconciler.IReconcilingStrategy#setDocument(org
-	 * .eclipse.jface.text.IDocument)
-	 */
 	public void setDocument(IDocument document) {
 		Assert.isLegal(document != null);
 		this.document = document;

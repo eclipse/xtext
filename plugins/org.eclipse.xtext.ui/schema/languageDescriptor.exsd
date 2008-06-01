@@ -65,7 +65,7 @@
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="languageFacade" type="string" use="required">
+         <attribute name="languageFacade" type="string">
             <annotation>
                <documentation>
                   

@@ -11,7 +11,10 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.apache.ant;bundle-version="1.7.0",
  org.eclipse.ui.ide;bundle-version="3.4.0",
  org.eclipse.jdt.core;bundle-version="3.4.0";visibility:=reexport,
- org.eclipse.xtext;bundle-version="1.0.0";visibility:=reexport
+ org.eclipse.xtext;bundle-version="1.0.0";visibility:=reexport,
+ org.eclipse.ui.views;bundle-version="3.3.0",
+ org.eclipse.emf.ecore.edit;bundle-version="2.3.1",
+ org.eclipse.emf.edit.ui;bundle-version="2.3.1"
 Bundle-Activator: org.eclipse.xtext.ui.core.internal.Activator
 Export-Package: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.core.editor,
@@ -19,6 +22,9 @@ Export-Package: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.core.editor.utils,
  org.eclipse.xtext.ui.core.service,
  org.eclipse.xtext.ui.core.service.impl,
- org.eclipse.xtext.ui.core.util
+ org.eclipse.xtext.ui.core.util,
+ org.eclipse.xtext.ui.services
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
+Eclipse-BuddyPolicy: dependent
+
