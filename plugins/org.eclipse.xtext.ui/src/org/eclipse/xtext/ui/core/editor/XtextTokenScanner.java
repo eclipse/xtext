@@ -8,7 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import java.io.StringBufferInputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -17,10 +20,15 @@ import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IParseError;
+import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.ui.core.editor.infrastructure.XtextModelManager;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
@@ -33,78 +41,86 @@ public class XtextTokenScanner implements ITokenScanner {
 	private ISyntaxColorer syntaxColorer;
 	private LeafNode currentNode = null;
 	private Iterator<LeafNode> nodeIterator;
-	private final XtextModelManager modelmanager;
+	private IParser parser;
+	private final ILanguageDescriptor languageDescriptor;
 
-	public XtextTokenScanner(XtextModelManager modelmanager, IPreferenceStore preferenceStore) {
-		this.modelmanager = modelmanager;
-		Assert.isLegal(modelmanager != null);
-		this.syntaxColorer = ServiceRegistry.getService(modelmanager.getLanguageDescriptor(), ISyntaxColorer
-		        .class);
+	public XtextTokenScanner(ILanguageDescriptor languageDescriptor, IPreferenceStore preferenceStore) {
+		Assert.isLegal(languageDescriptor != null);
+		this.languageDescriptor = languageDescriptor;
+		this.syntaxColorer = ServiceRegistry.getService(languageDescriptor, ISyntaxColorer.class);
+		parser = ServiceRegistry.getService(languageDescriptor, IParser.class);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.text.rules.ITokenScanner#getTokenLength()
-	 */
 	public int getTokenLength() {
-		return currentNode.length();
+		if (currentNode != null) {
+			return currentNode.length();
+		}
+		else {
+			return -1;
+		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.text.rules.ITokenScanner#getTokenOffset()
-	 */
 	public int getTokenOffset() {
-		return currentNode.offset();
+		if (currentNode != null) {
+			return currentNode.offset();
+		}
+		else {
+			return -1;
+		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.jface.text.rules.ITokenScanner#nextToken()
-	 */
 	public IToken nextToken() {
-		IToken retVal = Token.EOF;
+		IToken token = Token.EOF;
 		if (nodeIterator != null && nodeIterator.hasNext()) {
-			Object o = nodeIterator.next();
-			if (o instanceof LeafNode) {
-				currentNode = (LeafNode) o;
-				retVal = Token.UNDEFINED;
+			Object node = nodeIterator.next();
+			if (node instanceof LeafNode) {
+				currentNode = (LeafNode) node;
+				token = Token.UNDEFINED;
 				// if (ITokenTypes.WHITESPACE.equals(currentNode.tokenType())) {
 				// retVal = Token.WHITESPACE;
 				// }
 				if (syntaxColorer != null) {
-					TextAttribute tAttr = syntaxColorer.color(currentNode);
-					if (tAttr != null)
-						retVal = new Token(tAttr);
+					TextAttribute textAttribute = syntaxColorer.color(currentNode);
+					if (textAttribute != null) {
+						token = new Token(textAttribute);
+					}
 				}
 			}
 			else {
 				CoreLog.logError(EditorMessages.getFormattedString(
-						"XtextTokenScanner.WrogNodeType", o, LeafNode.class.getName()), //$NON-NLS-1$ 
+						"XtextTokenScanner.WrongNodeType", node, LeafNode.class.getName()), //$NON-NLS-1$ 
 						new IllegalArgumentException());
 			}
 		}
-		return retVal;
+		return token;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.text.rules.ITokenScanner#setRange(org.eclipse.jface
-	 * .text.IDocument, int, int)
-	 */
+	// TODO remove custom implementation when default one works properly
+	private IParseErrorHandler parseErrorHandler = new IParseErrorHandler() {
+
+		public void handleParserError(IParseError error) {
+			parseErrors.add(error);
+		}
+	};
+	List<IParseError> parseErrors = new ArrayList<IParseError>();
+
 	public void setRange(IDocument document, int offset, int length) {
 		Assert.isLegal(document != null);
 		nodeIterator = null;
 		// TODO partial parse
-		modelmanager.parseTree(document.get());
-		AbstractNode rootNode = modelmanager.getCurrentRootNode();
-		if (rootNode != null)
+		System.out.print("Token Scanner: Parsing...");
+		long start = System.currentTimeMillis();
+
+		// TODO: dependency injection for default element factory in parser
+		IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
+		IParseResult parseResult = parser.parse(new StringBufferInputStream(document.get()), elementFactory,
+		        parseErrorHandler);
+        CompositeNode rootNode = parseResult.getRootNode();
+
+		System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
+		if (rootNode != null) {
 			nodeIterator = rootNode.getLeafNodes().iterator();
+		}
 	}
 
 }

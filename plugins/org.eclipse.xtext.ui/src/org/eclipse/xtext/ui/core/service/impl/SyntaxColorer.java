@@ -18,6 +18,7 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.xtext.parser.ITokenTypes;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.service.InjectedService;
 import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
@@ -43,6 +44,7 @@ public class SyntaxColorer implements ISyntaxColorer {
 		return new TextAttribute(null);
 	}
 	
+	@InjectedService
 	public void setPreferenceStoreService(IPreferenceStoreService preferenceStoreService) {
 	    this.preferenceStoreService = preferenceStoreService;
 	}

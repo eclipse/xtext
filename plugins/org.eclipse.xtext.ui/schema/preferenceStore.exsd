@@ -3,7 +3,7 @@
 <schema targetNamespace="org.eclipse.xtext.ui" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.xtext.ui" id="PreferenceStore" name="Xtext Preference Store Service"/>
+         <meta.schema plugin="org.eclipse.xtext.ui" id="preferenceStore" name="Xtext Preference Store Service"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]

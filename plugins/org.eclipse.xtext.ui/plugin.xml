@@ -6,6 +6,11 @@
    <extension-point id="proposalsProvider" name="Xtext Proposals Provider Service" schema="schema/proposalsProvider.exsd"/>
    <extension-point id="preferenceStore" name="Xtext Preference Store Service" schema="schema/preferenceStore.exsd"/>
    <extension-point id="parser" name="parser" schema="schema/parser.exsd"/>
+   <extension-point id="aSTFactory" name="Xtext AST Factory Service" schema="schema/aSTFactory.exsd"/>
+   <extension-point id="parseTreeConstructor" name="Xtext Parse Tree Constructor Service" schema="schema/parseTreeConstructor.exsd"/>
+   <extension-point id="resourceFactory" name="Xtext Resource Factory Service" schema="schema/resourceFactory.exsd"/>
+   <extension-point id="grammarAccess" name="Xtext Grammar Access Service" schema="schema/grammarAccess.exsd"/>
+   <extension-point id="metamodelAccess" name="Xtext Metamodel Access Service" schema="schema/metamodelAccess.exsd"/>
    <extension
          id="org.eclipse.xtext.ui.problemmarker"
          name="Xtext Editor Problem Marker"

@@ -23,12 +23,12 @@ import org.eclipse.jface.text.reconciler.MonoReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.ui.texteditor.HippieProposalProcessor;
+import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.codecompletion.XtextContentAssistProcessor;
-import org.eclipse.xtext.ui.core.editor.infrastructure.XtextModelManager;
+import org.eclipse.xtext.ui.core.editor.model.XtextEditorModelReconcileStrategy;
 import org.eclipse.xtext.ui.core.service.IProposalsProvider;
 
 /**
@@ -36,43 +36,27 @@ import org.eclipse.xtext.ui.core.service.IProposalsProvider;
  * 
  */
 public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguration {
-	private final XtextModelManager modelManager;
-	private final IEditorPart editor;
+	private final BaseTextEditor editor;
+	private final ILanguageDescriptor languageDescriptor;
 
-	/**
-	 * @param manager
-	 * @param preferenceStore
-	 * @param editor
-	 */
-	public XtextSourceViewerConfiguration(XtextModelManager manager, IPreferenceStore preferenceStore,
-			IEditorPart editor) {
+	public XtextSourceViewerConfiguration(ILanguageDescriptor languageDescriptor, IPreferenceStore preferenceStore,
+			BaseTextEditor editor) {
 		super(preferenceStore);
+		this.languageDescriptor = languageDescriptor;
 		this.editor = editor;
-		this.modelManager = manager;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.editors.text.TextSourceViewerConfiguration#getReconciler
-	 * (org.eclipse.jface.text.source.ISourceViewer)
-	 */
-	@Override
-	public IReconciler getReconciler(ISourceViewer sourceViewer) {
-		return new MonoReconciler(new XtextReconcilingStrategy(modelManager, editor), false);
-	}
+//	@Override
+//	public IReconciler getReconciler(ISourceViewer sourceViewer) {
+//		MonoReconciler reconciler = new MonoReconciler(new XtextEditorModelReconcileStrategy(editor), false);
+//		reconciler.setDelay(500);
+//		return reconciler;
+////		 return new MonoReconciler(new XtextReconcilingStrategy(editor), false);
+//	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.text.source.SourceViewerConfiguration#getContentAssistant
-	 * (org.eclipse.jface.text.source.ISourceViewer)
-	 */
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
-		IProposalsProvider proposalsProvider = ServiceRegistry.getService(modelManager.getLanguageDescriptor(), IProposalsProvider.class);
+		IProposalsProvider proposalsProvider = ServiceRegistry.getService(languageDescriptor, IProposalsProvider.class);
 		IContentAssistProcessor processor;
 		if (proposalsProvider != null) {
 			processor = new XtextContentAssistProcessor(proposalsProvider);
@@ -94,15 +78,10 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		return ca;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.jface.text.source.SourceViewerConfiguration#
-	 * getPresentationReconciler(org.eclipse.jface.text.source.ISourceViewer)
-	 */
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		PresentationReconciler reconciler = (PresentationReconciler) super.getPresentationReconciler(sourceViewer);
-		DefaultDamagerRepairer defDR = new DefaultDamagerRepairer(new XtextTokenScanner(modelManager, fPreferenceStore));
+		DefaultDamagerRepairer defDR = new DefaultDamagerRepairer(new XtextTokenScanner(languageDescriptor,
+				fPreferenceStore));
 		reconciler.setRepairer(defDR, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setDamager(defDR, IDocument.DEFAULT_CONTENT_TYPE);
 		return reconciler;

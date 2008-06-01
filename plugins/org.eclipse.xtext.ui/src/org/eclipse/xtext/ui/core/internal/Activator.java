@@ -10,6 +10,8 @@ package org.eclipse.xtext.ui.core.internal;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.core.editor.utils.CustomResourceLibrary;
@@ -23,6 +25,8 @@ public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.eclipse.xtext.ui";
+	
+	// TODO extract DEBUG handling to separate class?
 	public static final boolean DEBUGING = Platform.inDebugMode();
 	public static final boolean DEBUG_PROPOSALS_PROVIDER = DEBUGING
 			&& "true".equalsIgnoreCase(Platform.getDebugOption("org.eclipse.xtext.ui/debug/services/proposalProvider"));
@@ -38,13 +42,6 @@ public class Activator extends AbstractUIPlugin {
 	public Activator() {
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
-	 * )
-	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		setDefault(this);
@@ -55,13 +52,6 @@ public class Activator extends AbstractUIPlugin {
 		plugin = activator;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
-	 * )
-	 */
 	public void stop(BundleContext context) throws Exception {
 		setDefault(null);
 		if (resourceLibrary != null) {
@@ -78,6 +68,24 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static Activator getDefault() {
 		return plugin;
+	}
+	
+	/**
+	 * Returns the active workbench page or <code>null</code> if none.
+	 */
+	public static IWorkbenchPage getActivePage() {
+		IWorkbenchWindow window = getActiveWorkbenchWindow();
+		if (window != null) {
+			return window.getActivePage();
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the active workbench window or <code>null</code> if none
+	 */
+	public static IWorkbenchWindow getActiveWorkbenchWindow() {
+		return getDefault().getWorkbench().getActiveWorkbenchWindow();
 	}
 
 	public CustomResourceLibrary getResourceLibrary() {
