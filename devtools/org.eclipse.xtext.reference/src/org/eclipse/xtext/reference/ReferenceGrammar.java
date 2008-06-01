@@ -3,9 +3,13 @@ package org.eclipse.xtext.reference;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.XtextLanguageFacade;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.parser.XtextASTFactory;
 import org.eclipse.xtext.parser.XtextParser;
 
 /**
@@ -27,8 +31,9 @@ public class ReferenceGrammar {
 		System.out.println("loading " + filename);
 		InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filename);
 		
+		EPackage.Registry.INSTANCE.put(XtextLanguageFacade.XTEXT_NS_URI, XtextPackage.eINSTANCE);
 		XtextParser xtext2Parser= new XtextParser();
-		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream).getRootASTElement();
+		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory()).getRootASTElement();
 		
 		GeneratorFacade.generate(grammarModel, this.getClass().getSimpleName(),this.getClass().getPackage().getName().replace('.', '/'), PATH, "xtext");
 		System.out.println("Done.");

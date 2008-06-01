@@ -24,22 +24,22 @@
          point="org.eclipse.xtext.ui.syntaxColorer">
       <syntaxColorer
             class="org.eclipse.xtext.reference.ui.services.ReferenceSyntaxColorer"
-            languageId="org.eclipse.xtext.ui.reference.referenceLanguageDescriptor">
+            languageId="org.eclipse.xtext.reference.ReferenceGrammar">
       </syntaxColorer>
    </extension>
    <extension
          point="org.eclipse.xtext.ui.proposalsProvider">
       <proposalsProvider
             class="org.eclipse.xtext.reference.ui.services.ReferenceProposalsProvider"
-            languageId="org.eclipse.xtext.ui.reference.referenceLanguageDescriptor">
+            languageId="org.eclipse.xtext.reference.ReferenceGrammar">
       </proposalsProvider>
    </extension>
    <extension
          point="org.eclipse.xtext.ui.preferenceStore">
       <preferenceStore
             class="org.eclipse.xtext.ui.core.service.impl.PreferenceStore"
-            languageId="org.eclipse.xtext.ui.reference.referenceLanguageDescriptor">
+            languageId="org.eclipse.xtext.reference.ReferenceGrammar">
       </preferenceStore>
    </extension>
-
+   
 </plugin>
