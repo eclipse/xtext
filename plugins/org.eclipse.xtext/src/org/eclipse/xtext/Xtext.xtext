@@ -4,14 +4,12 @@
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
 * http://www.eclipse.org/legal/epl-v10.html
-*
-* Contributors:
-* committers of openArchitectureWare - initial API and implementation
 *******************************************************************************/
 
 generate xtext "http://www.eclipse.org/2008/Xtext"
 
 Grammar  :
+    ('language' name=ID ('extends' superGrammar=ID)?)?
 	metamodelDeclarations+=AbstractMetamodelDeclaration* 
     parserRules+=ParserRule*
     ('lexing' ':'
@@ -30,8 +28,8 @@ ReferencedMetamodel :
 	'import' uri=STRING ('as' alias=ID)?;
 
 LexerRule :
-	name=ID ('tokentype' tokenType=ID)?':' 
-	body=LEXER_BODY
+	name=ID ('returns' type=TypeRef)? ':' 
+		body=STRING ';'
 ;
 
 ParserRule :
@@ -77,9 +75,4 @@ Keyword :
 
 RuleCall :
    name=ID ;
-   
-// lexing:
 
-// Problem: LEXER_BODY kann nicht in xtxt beschrieben werden, da das erste '#>' bereits matcht
-// Lösung: built-in lexer token
-// LEXER_BODY : <# '<#' ( options {greedy=false;} : . )* '#>' #> 

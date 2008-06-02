@@ -13,18 +13,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.LexerRule;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parser.ITokenTypes;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParsetreePackage;
-import org.eclipse.xtext.parsetree.impl.AbstractNodeImpl;
-import org.eclipse.xtext.parsetree.impl.CompositeNodeImpl;
-import org.eclipse.xtext.parsetree.impl.LeafNodeImpl;
 
 /**
  * 
@@ -124,25 +115,5 @@ public class ParsetreeUtil {
 		return result;
 	}
 
-	public static String tokenType(LeafNodeImpl leafNodeImpl) {
-		EObject grammarElement = leafNodeImpl.getGrammarElement();
-		if(grammarElement instanceof Keyword) {
-			return ITokenTypes.KEYWORD;
-		} else if(grammarElement instanceof RuleCall) {
-			AbstractRule calledRule = GrammarUtil.calledRule((RuleCall) grammarElement);
-			return tokenTypeForLexerRule(calledRule);
-		} else if(grammarElement instanceof LexerRule) {
-			return tokenTypeForLexerRule(grammarElement);
-		}
-		return null;
-	}
 	
-	private static String tokenTypeForLexerRule(EObject candidate) {
-		if(candidate instanceof LexerRule) {
-			LexerRule lexerRule = (LexerRule)candidate;
-			String tokenType = lexerRule.getTokenType();
-			return tokenType != null ? tokenType : lexerRule.getName();
-		}
-		return null;
-	}
 }

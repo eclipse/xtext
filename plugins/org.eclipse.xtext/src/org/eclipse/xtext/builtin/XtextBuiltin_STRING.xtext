@@ -1,0 +1,19 @@
+// when LEXER_BODY has been removed use the following...
+abstract language XtextBuiltIns
+
+import "http://ecore" as ecore;
+
+lexing:
+
+ID  		: "('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*";
+INT 		: "('0'..'9')+";
+STRING		: "
+			  '\"' ( '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\') | ~('\\\\'|'\"') )* '\"' | 
+              '\\'' ( '\\\\' ('b'|'t'|'n'|'f'|'r'|'\\\"'|'\\''|'\\\\') | ~('\\\\'|'\\'') )* '\\''
+              ";
+ML_COMMENT	: "'/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}";
+SL_COMMENT 	: "'//' ~('\\n'|'\\r')* '\\r'? '\\n' {$channel=HIDDEN;}";
+
+WS			: "(' '|'\\t'|'\\r'|'\\n')+ {$channel=HIDDEN;}";
+
+ANY_OTHER 	: ".";

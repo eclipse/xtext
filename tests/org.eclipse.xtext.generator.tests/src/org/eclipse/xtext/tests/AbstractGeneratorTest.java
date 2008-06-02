@@ -18,6 +18,7 @@ import junit.framework.TestCase;
 import org.apache.tools.ant.filters.StringInputStream;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.XtextStandaloneSetup;
@@ -41,10 +42,11 @@ import org.openarchitectureware.xtend.XtendFacade;
 public abstract class AbstractGeneratorTest extends TestCase {
 
 	private ILanguageDescriptor currentLanguageDescriptor;
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
 	}
 
 	@Override
@@ -62,7 +64,7 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		Method getLangDescMethod = standaloneSetup.getMethod("getLanguageDescriptor");
 		currentLanguageDescriptor = (ILanguageDescriptor) getLangDescMethod.invoke(null);
 	}
-	
+
 	protected IParser getParser() {
 	    // TODO remove after bootstrap
 	    if(XtextStandaloneSetup.getLanguageDescriptor().equals(currentLanguageDescriptor)) {
@@ -78,7 +80,7 @@ public abstract class AbstractGeneratorTest extends TestCase {
         }
 	    return ServiceRegistry.getService(currentLanguageDescriptor, IElementFactory.class);
 	}
-	
+
 	protected IParseTreeConstructor getParseTreeConstructor() throws Exception {
 	    return ServiceRegistry.getService(currentLanguageDescriptor, IParseTreeConstructor.class);
 	}
@@ -89,10 +91,9 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		return getModel(model, getASTFactory(), null);
 	}
 
-    public EObject getModel(String model, IElementFactory factory) throws Exception {
-        return getModel(model, factory, null);
-    }
-    
+	public EObject getModel(String model, IElementFactory factory) throws Exception {
+		return getModel(model, factory, null);
+	}
 	public EObject getModel(String model, IParseErrorHandler handler) throws Exception {
 		return getModel(model, getASTFactory(), handler);
 	}
@@ -101,6 +102,10 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		return getModel(new StringInputStream(model), factory, errorHandler);
 	}
 
+	public EObject getModel(InputStream model) throws Exception {
+		return getModel(model, getASTFactory(), null);
+	}
+	
 	public EObject getModel(InputStream model, IElementFactory factory, IParseErrorHandler errorHandler)
 			throws Exception {
 		return parse(model, factory, errorHandler).getRootASTElement();

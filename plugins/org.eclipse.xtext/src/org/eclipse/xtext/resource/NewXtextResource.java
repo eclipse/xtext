@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -27,27 +28,31 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 
 /**
  * An EMF resource that reads and writes models of an Xtext DSL.
- *  
+ * 
  * @author Jan Köhnlein
  */
 public class NewXtextResource extends ResourceImpl {
 
-    private IParser parser;
-    private IElementFactory elementFactory;
-    private IParseTreeConstructor parsetreeConstructor;
+	private IParser parser;
+	private IElementFactory elementFactory;
+	private IParseTreeConstructor parsetreeConstructor;
 
-	public NewXtextResource(IElementFactory elementFactory, IParser parser, IParseTreeConstructor parsetreeConstructor, URI uri) {
-        super(uri);
-        this.elementFactory = elementFactory;
-        this.parser = parser;
-        this.parsetreeConstructor = parsetreeConstructor;
-    }
+	public NewXtextResource(IElementFactory elementFactory, IParser parser, IParseTreeConstructor parsetreeConstructor,
+			URI uri) {
+		super(uri);
+		this.elementFactory = elementFactory;
+		this.parser = parser;
+		this.parsetreeConstructor = parsetreeConstructor;
+	}
 
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		EObject rootElement = parser.parse(inputStream, elementFactory).getRootASTElement();
-		if (rootElement != null) {
-			getContents().add(rootElement);
+		IParseResult parse = parser.parse(inputStream, elementFactory);
+		if (parse != null) {
+			EObject rootElement = parse.getRootASTElement();
+			if (rootElement != null) {
+				getContents().add(rootElement);
+			}
 		}
 	}
 
@@ -78,15 +83,15 @@ public class NewXtextResource extends ResourceImpl {
 		return null;
 	}
 
-    public IParser getParser() {
-        return parser;
-    }
+	public IParser getParser() {
+		return parser;
+	}
 
-    public void setParser(IParser parser) {
-        this.parser = parser;
-    }
+	public void setParser(IParser parser) {
+		this.parser = parser;
+	}
 
-    public IElementFactory getElementFactory() {
-        return elementFactory;
-    }
+	public IElementFactory getElementFactory() {
+		return elementFactory;
+	}
 }

@@ -7,19 +7,28 @@
   <foreignModel>xtextutil.ecore</foreignModel>
   <genPackages prefix="Xtextutil" basePackage="org.eclipse.xtext" disposableProviderFactory="true"
       ecorePackage="xtextutil.ecore#/">
-    <genClasses ecoreClass="xtextutil.ecore#//ResolvedType">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xtextutil.ecore#//ResolvedType/metaModel"/>
+    <genClasses ecoreClass="xtextutil.ecore#//ComplexType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xtextutil.ecore#//ComplexType/superTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xtextutil.ecore#//ComplexType/features"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextutil.ecore#//ComplexType/abstract"/>
     </genClasses>
     <genClasses ecoreClass="xtextutil.ecore#//MetaModel">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xtextutil.ecore#//MetaModel/ePackage"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextutil.ecore#//MetaModel/alias"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextutil.ecore#//MetaModel/referenced"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xtextutil.ecore#//MetaModel/declaration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xtextutil.ecore#//MetaModel/types"/>
+      <genOperations ecoreOperation="xtextutil.ecore#//MetaModel/alias"/>
+      <genOperations ecoreOperation="xtextutil.ecore#//MetaModel/isGenerate"/>
     </genClasses>
     <genClasses image="false" ecoreClass="xtextutil.ecore#//AbstractType">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xtextutil.ecore#//AbstractType/eClassifier"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextutil.ecore#//AbstractType/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xtextutil.ecore#//AbstractType/metaModel"/>
+      <genOperations ecoreOperation="xtextutil.ecore#//AbstractType/getQualifiedName"/>
     </genClasses>
-    <genClasses ecoreClass="xtextutil.ecore#//BuiltinType"/>
+    <genClasses ecoreClass="xtextutil.ecore#//DataType"/>
+    <genClasses ecoreClass="xtextutil.ecore#//Feature">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextutil.ecore#//Feature/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextutil.ecore#//Feature/lowerBound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextutil.ecore#//Feature/upperBound"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xtextutil.ecore#//Feature/type"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
