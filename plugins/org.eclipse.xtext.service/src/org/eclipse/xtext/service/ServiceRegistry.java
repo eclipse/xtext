@@ -1,10 +1,11 @@
 package org.eclipse.xtext.service;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.LogFactory;
 
@@ -12,14 +13,20 @@ public class ServiceRegistry {
 
     private static List<ILanguageServiceFactory> factories = new ArrayList<ILanguageServiceFactory>();
 
-    @SuppressWarnings("unchecked")
     public static <T extends ILanguageService> T getService(ILanguageDescriptor languageDescriptor, Class<T> serviceInterface) {
+        Map<Class<?>, ILanguageService> cachedServices = new HashMap<Class<?>, ILanguageService>();
+        return internalGetService(languageDescriptor, serviceInterface, cachedServices);
+    }
+    
+    @SuppressWarnings("unchecked")
+    private static <T extends ILanguageService> T internalGetService(ILanguageDescriptor languageDescriptor, Class<T> serviceInterface, Map<Class<?>, ILanguageService> cachedServices) {
         try {
             if (languageDescriptor != null && serviceInterface != null) {
                 for (ILanguageServiceFactory factory : factories) {
                     if (factory.isFactoryFor(languageDescriptor, serviceInterface)) {
                         T languageService = (T) factory.createLanguageService(languageDescriptor, serviceInterface);
-                        injectDependencies(languageDescriptor, languageService);
+                        cachedServices.put(serviceInterface, languageService);
+                        injectDependencies(languageDescriptor, languageService, cachedServices);
                         return languageService;
                     }
                 }
@@ -30,7 +37,7 @@ public class ServiceRegistry {
         }
         return null;
     }
-
+        
     public static ILanguageServiceFactory getFactory(ILanguageDescriptor languageDescriptor,
             Class<? extends ILanguageService> serviceInterface) {
         if (languageDescriptor != null && serviceInterface != null) {
@@ -51,9 +58,22 @@ public class ServiceRegistry {
         factories.remove(factory);
     }
 
-    private static void injectDependencies(ILanguageDescriptor languageDescriptor, ILanguageService service)
-            throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, SecurityException, NoSuchMethodException {
-        Class<? extends ILanguageService> serviceClass = service.getClass();
+    private static void injectDependencies(ILanguageDescriptor languageDescriptor, ILanguageService service,
+            Map<Class<?>, ILanguageService> cachedServices) throws IllegalArgumentException, IllegalAccessException,
+            InvocationTargetException, SecurityException, NoSuchMethodException {
+        Class<?> serviceClass = service.getClass();
+        do {
+            injectServicesForClass(languageDescriptor, service, serviceClass, cachedServices);
+            serviceClass = serviceClass.getSuperclass();
+        } while (serviceClass != null);
+        Class<?>[] interfaces = service.getClass().getInterfaces();
+        for (Class<?> implementedInterface : interfaces) {
+            injectServicesForClass(languageDescriptor, service, implementedInterface, cachedServices);
+        }
+    }
+
+    private static void injectServicesForClass(ILanguageDescriptor languageDescriptor, ILanguageService service, Class<?> serviceClass,
+            Map<Class<?>, ILanguageService> cachedServices) throws IllegalAccessException, InvocationTargetException {
         Method[] methods = serviceClass.getMethods();
         for (Method method : methods) {
             if (method.isAnnotationPresent(InjectedService.class)) {
@@ -61,26 +81,28 @@ public class ServiceRegistry {
                 if (parameterTypes.length != 1) {
                     throw new IllegalArgumentException("Annotated method must have exctly one parameter");
                 }
-                findAndInjectService(languageDescriptor, service, parameterTypes[0], method);
+                findAndInjectService(languageDescriptor, service, parameterTypes[0], method, cachedServices);
             }
         }
     }
 
     @SuppressWarnings("unchecked")
-    private static void findAndInjectService(ILanguageDescriptor languageDescriptor, ILanguageService service, Class<?> type, Method setter)
-            throws IllegalAccessException, InvocationTargetException {
+    private static void findAndInjectService(ILanguageDescriptor languageDescriptor, ILanguageService service, Class<?> type,
+            Method setter, Map<Class<?>, ILanguageService> cachedServices) throws IllegalAccessException, InvocationTargetException {
         if (ILanguageDescriptor.class.equals(type)) {
             setter.invoke(service, languageDescriptor);
             return;
         }
         if (!ILanguageService.class.isAssignableFrom(type)) {
-            throw new IllegalArgumentException(
-                    "Annotated member's type must extend ILanguageService. Member type class: " + type
-                            + ", but should be " + ILanguageService.class + ".");
+            throw new IllegalArgumentException("Annotated member's type must extend ILanguageService. Member type class: " + type
+                    + ", but should be " + ILanguageService.class + ".");
         }
-        ILanguageService injectedService = ServiceRegistry.getService(languageDescriptor, (Class<? extends ILanguageService>) type);
+        ILanguageService injectedService = cachedServices.get(type);
         if (injectedService == null) {
-            throw new IllegalStateException("Could not inject service " + type.getSimpleName());
+            injectedService = ServiceRegistry.internalGetService(languageDescriptor, (Class<? extends ILanguageService>) type, cachedServices);
+            if (injectedService == null) {
+                throw new IllegalStateException("Could not inject service " + type.getSimpleName());
+            }
         }
         setter.invoke(service, injectedService);
     }
