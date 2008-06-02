@@ -19,29 +19,32 @@ import org.eclipse.xtext.parser.XtextParser;
  * @author Peter Friese
  */
 public class ReferenceGrammar {
-	private static final String PATH = "./src-gen";
-	
-	public void generate() throws IOException {
-		XtextStandaloneSetup.doSetup();
-		
-		GeneratorFacade.cleanFolder(PATH);
+    private static final String PATH = "./src-gen";
+    private static final String UI_PATH = "../org.eclipse.xtext.reference.ui/src-gen";
 
-		String filename = this.getClass().getName().replace('.', '/') + ".xtext";
+    public void generate() throws IOException {
+        XtextStandaloneSetup.doSetup();
 
-		System.out.println("loading " + filename);
-		InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filename);
-		
-		EPackage.Registry.INSTANCE.put(XtextLanguageFacade.XTEXT_NS_URI, XtextPackage.eINSTANCE);
-		XtextParser xtext2Parser= new XtextParser();
-		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory()).getRootASTElement();
-		
-		GeneratorFacade.generate(grammarModel, this.getClass().getSimpleName(),this.getClass().getPackage().getName().replace('.', '/'), PATH, "xtext");
-		System.out.println("Done.");
-	}
+        GeneratorFacade.cleanFolder(PATH);
 
-	public static void main(String[] args) throws IOException {
-		ReferenceGrammar generator = new ReferenceGrammar();
-		generator.generate();
-	}
+        String filename = this.getClass().getName().replace('.', '/') + ".xtext";
+
+        System.out.println("loading " + filename);
+        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filename);
+
+        EPackage.Registry.INSTANCE.put(XtextLanguageFacade.XTEXT_NS_URI, XtextPackage.eINSTANCE);
+        XtextParser xtext2Parser = new XtextParser();
+        Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory())
+                .getRootASTElement();
+
+        GeneratorFacade.generate(grammarModel, this.getClass().getSimpleName(), this.getClass().getPackage().getName()
+                .replace('.', '/'), PATH, UI_PATH, "xtext");
+        System.out.println("Done.");
+    }
+
+    public static void main(String[] args) throws IOException {
+        ReferenceGrammar generator = new ReferenceGrammar();
+        generator.generate();
+    }
 
 }
