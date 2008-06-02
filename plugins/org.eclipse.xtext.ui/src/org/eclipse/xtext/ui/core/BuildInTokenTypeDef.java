@@ -1,6 +1,5 @@
 package org.eclipse.xtext.ui.core;
 
-import org.eclipse.xtext.BuiltinRules;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -14,12 +13,12 @@ public class BuildInTokenTypeDef {
 
 	@TokenType(name = "Singleline Comment")
 	public static boolean slComment(LeafNode node) {
-		return ((RuleCall) node.getGrammarElement()).getName().equals(BuiltinRules.BUILTIN_SL_COMMENT.getName());
+		return ((RuleCall) node.getGrammarElement()).getName().equals("SL_COMMENT");
 	}
 
 	@TokenType(name = "Multiline Comment")
 	public static boolean mlComment(LeafNode node) {
-		return ((RuleCall) node.getGrammarElement()).getName().equals(BuiltinRules.BUILTIN_ML_COMMENT.getName());
+		return ((RuleCall) node.getGrammarElement()).getName().equals("ML_COMMENT");
 	}
 
 	@TokenType(name = "Plus Sign")
