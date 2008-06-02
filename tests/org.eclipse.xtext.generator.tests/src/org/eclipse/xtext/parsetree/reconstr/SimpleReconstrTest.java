@@ -16,18 +16,20 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 public class SimpleReconstrTest extends AbstractGeneratorTest {
 	
 	public void testSimple() throws Exception {
-		String model = "( a b ) !";
+	    with(SimpleReconstrTestStandaloneSetup.class);
+	    String model = "( a b ) !";
 		assertEquals(model,parseAndSerialize(model));
 	}
 	
 	public void testComplex() throws Exception {
-		String model = "( ( a b ) ! c d e f ( x s ) ( ( a b ) ! c ) ! ) !";
+	    with(SimpleReconstrTestStandaloneSetup.class);
+	    String model = "( ( a b ) ! c d e f ( x s ) ( ( a b ) ! c ) ! ) !";
 		assertEquals(model,parseAndSerialize(model));
 	}
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
-		SimpleReconstrTestParseTreeConstructor con = new SimpleReconstrTestParseTreeConstructor();
+		SimpleReconstrTestParseTreeConstructor con = (SimpleReconstrTestParseTreeConstructor) getParseTreeConstructor();
 		con.update(result);
 		String resultString = con.getText();
 		return resultString;
@@ -37,7 +39,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		with(SimpleExpressionsStandaloneSetup.class);
 		String model = "a + b - c * d / e";
 		EObject result = (EObject) getModel(model);
-		SimpleExpressionsParseTreeConstructor con = new SimpleExpressionsParseTreeConstructor();
+        SimpleExpressionsParseTreeConstructor con = (SimpleExpressionsParseTreeConstructor) getParseTreeConstructor();
 		con.update(result);
 		String resultString = con.getText();
 		assertEquals(model,resultString);
@@ -48,6 +50,6 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		super.setUp();
 		SimpleReconstrTestStandaloneSetup.doSetup();
 		SimpleExpressionsStandaloneSetup.doSetup();
-		with(SimpleReconstrTestStandaloneSetup.class);
+		
 	}
 }
