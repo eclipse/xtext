@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="org.eclipse.xtext.ui.core.editor.BaseTextEditor"
+            class="org.eclipse.xtext.reference.ui.editor.ReferenceGrammarXtextEditor"
             default="true"
             extensions="test, tst"
             icon="icons/editor/titleImage.gif"
