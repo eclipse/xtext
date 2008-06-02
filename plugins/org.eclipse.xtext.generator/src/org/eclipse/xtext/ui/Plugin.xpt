@@ -38,7 +38,7 @@
          point="org.eclipse.xtext.ui.«serviceName.toFirstLower()»">
       <«serviceName.toFirstLower()»
             languageId="«languageId()»"
-            class="«packageName()».services.«languageName()»«serviceName»ServiceFactory">
+            class="«serviceClassFQN(serviceName)»">
       </«serviceName.toFirstLower()»>
    </extension>
 «ENDDEFINE»

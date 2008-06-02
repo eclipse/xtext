@@ -12,10 +12,11 @@
 «IMPORT xtext»
 
 «EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
+«EXTENSION org::eclipse::xtext::services::ServiceGen»
 
 «DEFINE file FOR Grammar»
-«FILE pathName()+'/services/'+languageName()+'MetamodelAccess.java'-»
-package «packageName()».services;
+«FILE serviceClassFileName('MetamodelAccess') -»
+package «servicePackageName('MetamodelAccess')»;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.service.*;
@@ -24,7 +25,7 @@ import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class «languageName()»MetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
+public class «serviceClass('MetamodelAccess')»  extends BaseEPackageAccess implements IMetamodelAccess {
 
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {
@@ -48,7 +49,7 @@ public class «languageName()»MetamodelAccess extends BaseEPackageAccess implemen
 	
 	public static EPackage get«gmm.name.toFirstUpper()»EPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(«gmm.name.toUpperCase()»_NS_URI)) {
-			EPackage p = loadEcoreFile(«languageName()»MetamodelAccess.class.getClassLoader(),«gmm.name.toUpperCase()»_CP_URI);
+			EPackage p = loadEcoreFile(«serviceClass('MetamodelAccess')».class.getClassLoader(),«gmm.name.toUpperCase()»_CP_URI);
 			if (p!=null) {
 				EPackage.Registry.INSTANCE.put(«gmm.name.toUpperCase()»_NS_URI,p);
 			}
@@ -56,7 +57,6 @@ public class «languageName()»MetamodelAccess extends BaseEPackageAccess implemen
 		return EPackage.Registry.INSTANCE.getEPackage(«gmm.name.toUpperCase()»_NS_URI);
 	}
 	«ENDFOREACH»
-
 	
 	public String getModelFileExtension() {
 		return "«modelFileExtension()»";
