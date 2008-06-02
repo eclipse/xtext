@@ -29,7 +29,7 @@ public class ReferenceProposalsProvider implements IProposalsProvider {
 
 	private ILanguageDescriptor languageDescriptor;
 
-    /*
+	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
@@ -41,7 +41,7 @@ public class ReferenceProposalsProvider implements IProposalsProvider {
 		Proposal p = new Proposal("Hier ein proposal");
 		p.setLabel(new StyledString("Proposal Label", StyledString.COUNTER_STYLER));
 		p.setDescription("Proposal Beschreibung");
-		p.setImage(Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/test.gif").createImage());
+		p.setImage("icons/test.gif");
 		Proposal p1 = new Proposal("Hier noch ein proposal");
 		p1.setDescription("Noch ein Proposal Beschreibung");
 		Proposal p2 = new Proposal("Proposal in bund");
@@ -62,11 +62,8 @@ public class ReferenceProposalsProvider implements IProposalsProvider {
 		return retVal;
 	}
 
-    public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
-       this.languageDescriptor = languageDescriptor;
-    }
-    
-    private ILanguageDescriptor getLanguageDescriptor() {
-        return languageDescriptor;
-    }
+	public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
+		this.languageDescriptor = languageDescriptor;
+	}
+
 }
