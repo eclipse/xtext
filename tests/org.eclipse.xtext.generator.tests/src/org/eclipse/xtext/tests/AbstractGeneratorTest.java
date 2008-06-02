@@ -9,7 +9,6 @@
 package org.eclipse.xtext.tests;
 
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +20,17 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
-import org.eclipse.xtext.ILanguageFacade;
-import org.eclipse.xtext.LanguageFacadeFactory;
+import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.XtextASTFactory;
+import org.eclipse.xtext.parser.XtextParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.ServiceRegistry;
 import org.openarchitectureware.expression.ExecutionContextImpl;
 import org.openarchitectureware.xtend.XtendFacade;
 
@@ -37,8 +40,8 @@ import org.openarchitectureware.xtend.XtendFacade;
  */
 public abstract class AbstractGeneratorTest extends TestCase {
 
-	private String currentLanguage;
-
+	private ILanguageDescriptor currentLanguageDescriptor;
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -47,38 +50,51 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		currentLanguage = null;
+		currentLanguageDescriptor = null;
 	}
 
 	/**
 	 * call this to set the language class to be used in the current test.
 	 */
 	protected void with(Class<?> standaloneSetup) throws Exception {
-	    Method method = standaloneSetup.getMethod("doSetup");
-	    method.invoke(null);
-	    Field languageIdField = standaloneSetup.getField("LANGUAGE_ID");
-		currentLanguage = languageIdField.get(null).toString();
+	    Method doSetupMethod = standaloneSetup.getMethod("doSetup");
+	    doSetupMethod.invoke(null);
+		Method getLangDescMethod = standaloneSetup.getMethod("getLanguageDescriptor");
+		currentLanguageDescriptor = (ILanguageDescriptor) getLangDescMethod.invoke(null);
 	}
 	
+	protected IParser getParser() {
+	    // TODO remove after bootstrap
+	    if(XtextStandaloneSetup.getLanguageDescriptor().equals(currentLanguageDescriptor)) {
+	        return new XtextParser();
+	    }
+	    return ServiceRegistry.getService(currentLanguageDescriptor, IParser.class);
+	}
+
+	protected IElementFactory getASTFactory() throws Exception {
+        // TODO remove after bootstrap
+        if(XtextStandaloneSetup.getLanguageDescriptor().equals(currentLanguageDescriptor)) {
+            return new XtextASTFactory();
+        }
+	    return ServiceRegistry.getService(currentLanguageDescriptor, IElementFactory.class);
+	}
+	
+	protected IParseTreeConstructor getParseTreeConstructor() throws Exception {
+	    return ServiceRegistry.getService(currentLanguageDescriptor, IParseTreeConstructor.class);
+	}
+
 	// parse methods
 
 	public EObject getModel(String model) throws Exception {
 		return getModel(model, getASTFactory(), null);
 	}
 
-	protected IElementFactory getASTFactory() throws Exception {
-		return getFacade().getElementFactory();
-	}
-
-	private ILanguageFacade getFacade() {
-		return LanguageFacadeFactory.getFacade(currentLanguage);
-	}
-
-	public EObject getModel(String model, IElementFactory factory) throws Exception {
-		return getModel(model, factory, null);
-	}
+    public EObject getModel(String model, IElementFactory factory) throws Exception {
+        return getModel(model, factory, null);
+    }
+    
 	public EObject getModel(String model, IParseErrorHandler handler) throws Exception {
-		return getModel(model, getFacade().getElementFactory(), handler);
+		return getModel(model, getASTFactory(), handler);
 	}
 
 	public EObject getModel(String model, IElementFactory factory, IParseErrorHandler errorHandler) throws Exception {
@@ -91,11 +107,11 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	}
 
     public IParseResult parse(InputStream model, IElementFactory factory, IParseErrorHandler errorHandler) {
-        IParser parserInstance = getFacade().getParser();
+        IParser parser = getParser();
         if (errorHandler != null) {
-            return parserInstance.parse(model, factory, errorHandler);
+            return parser.parse(model, factory, errorHandler);
         } else {
-            return parserInstance.parse(model, factory);
+            return parser.parse(model, factory);
         }
     }
     

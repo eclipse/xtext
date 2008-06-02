@@ -11,7 +11,7 @@
 
 «IMPORT xtext»
 
-«EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
+«EXTENSION org::eclipse::xtext::services::ServiceGen»
 
 «DEFINE file FOR Grammar»
 «FILE pathName()+'/'+languageName()+'_plugin.xml'-»

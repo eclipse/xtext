@@ -11,16 +11,16 @@
 
 «IMPORT xtext»
 
-«EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
+«EXTENSION org::eclipse::xtext::services::ServiceGen»
 
 «DEFINE factories FOR Grammar»
 	«FOREACH services() AS serviceName»
-		«EXPAND singletonObjectFactory(serviceName)»
+		«EXPAND serviceFactory(serviceName)»
 	«ENDFOREACH»
 «ENDDEFINE»
 
 
-«DEFINE singletonObjectFactory(String serviceName) FOR Grammar»
+«DEFINE serviceFactory(String serviceName) FOR Grammar»
 «FILE pathName()+'/services/'+languageName() + serviceName + 'ServiceFactory.java'-»
 package «packageName()».services;
 
@@ -31,12 +31,9 @@ import «packageName()».*;
 import «packageName()».parser.*;
 
 public class «languageName()»«serviceName»ServiceFactory implements ILanguageServiceFactory {
-	private «serviceInterface(serviceName)» serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new «serviceClass(serviceName)»();
-        }
+        «serviceInterface(serviceName)» serviceObject = new «serviceClass(serviceName)»();
         return serviceObject;
     }
 
