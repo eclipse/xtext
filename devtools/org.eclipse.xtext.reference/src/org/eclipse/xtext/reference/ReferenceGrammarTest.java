@@ -42,11 +42,11 @@ public class ReferenceGrammarTest extends TestCase {
 	public void testParseGrammar() {
 		String grammar = 
 			"spielplatz 200 {" +
-			"    kind (soeren '7')" +
-			"    kind (lennart '4')" +
-			"    kind (jonas '1')" +
-			"    erwachsener (peter '33')" + 
-			"    erwachsener (anne '33')" + 
+			"    kind (soeren 7)" +
+			"    kind (lennart 4)" +
+			"    kind (jonas 1)" +
+			"    erwachsener (peter 33)" + 
+			"    erwachsener (anne 33)" + 
 			"}";
 		IParser parser = ServiceRegistry.getService(languageDescriptor, IParser.class);
 		IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
