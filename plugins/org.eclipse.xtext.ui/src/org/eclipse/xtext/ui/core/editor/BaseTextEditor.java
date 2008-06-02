@@ -24,7 +24,6 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProviderFactory;
@@ -38,7 +37,7 @@ import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class BaseTextEditor extends TextEditor {
+public abstract class BaseTextEditor extends TextEditor {
 	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
 	private XtextEditorModel model;
 	private XtextContentOutlinePage outlinePage;
@@ -68,12 +67,7 @@ public class BaseTextEditor extends TextEditor {
 		}
 	}
 
-	private ILanguageDescriptor initializeLanguageDescriptor() {
-		String namespace = this.getConfigurationElement().getNamespaceIdentifier();
-		ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.get("org.eclipse.xtext.reference.ReferenceGrammar");
-//		ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.getByNamespace(namespace);
-		return languageDescriptor;
-	}
+	protected abstract ILanguageDescriptor initializeLanguageDescriptor();
 
 	public XtextEditorModel getModel() {
 		if (model == null) {
