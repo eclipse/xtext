@@ -5,9 +5,6 @@ public class MyLanguageService implements ILanguageService {
 
     InjectedLanguageService injectedService = null;
     
-    @InjectedService
-    InjectedLanguageService attr = null;
-    
     public ILanguageDescriptor getLanguageDescriptor() {
         // TODO Auto-generated method stub
         return null;
@@ -27,13 +24,4 @@ public class MyLanguageService implements ILanguageService {
         this.injectedService = injectedService;
     }
 
-    public InjectedLanguageService getAttr() {
-        return attr;
-    }
-
-    public void setAttr(InjectedLanguageService attr) {
-        this.attr = attr;
-    }
-
-    
 }

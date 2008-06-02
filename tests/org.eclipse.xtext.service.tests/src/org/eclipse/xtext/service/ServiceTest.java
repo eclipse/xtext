@@ -31,14 +31,39 @@ public class ServiceTest extends TestCase {
         service = ServiceRegistry.getService(myLanguageDescriptor, MyLanguageService.class);
         assertNotNull(service);
         assertNotNull(service.getInjectedService());
-        assertNotNull(service.getAttr());
     }
     
     public void testCompoundFactory() throws Exception {
         ServiceRegistry.registerFactory(new CompoundLanguageServiceFactory());
+        
         MyLanguageService service = ServiceRegistry.getService(myLanguageDescriptor, MyLanguageService.class);
         assertNotNull(service);
         assertNotNull(service.getInjectedService());
-        assertNotNull(service.getAttr());
+    }
+    
+    public void testAnnotationInheritance() {
+        ServiceRegistry.registerFactory(new InheritingServiceFactory());
+        ServiceRegistry.registerFactory(new InjectedLanguageServiceFactory());
+        InheritingService service = ServiceRegistry.getService(myLanguageDescriptor, InheritingService.class);
+        assertNotNull(service);
+        assertNotNull(service.getInjectedService());
+    }
+    
+    public void testCircularDependency() throws InterruptedException {
+        ServiceRegistry.registerFactory(new CircularDependencyFactory0());
+        ServiceRegistry.registerFactory(new CircularDependencyFactory1());
+        ResolverThread thread = new ResolverThread();
+        thread.start();
+        thread.join(1000);
+        assertNotNull(thread.service);
+    }
+    
+    class ResolverThread extends Thread {
+        volatile ILanguageService service;
+        
+        @Override
+        public void run() {
+            service = ServiceRegistry.getService(myLanguageDescriptor, CircularDependencyService0.class);
+        }
     }
 }
