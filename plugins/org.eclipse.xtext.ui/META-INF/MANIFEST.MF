@@ -19,7 +19,6 @@ Bundle-Activator: org.eclipse.xtext.ui.core.internal.Activator
 Export-Package: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.core.editor,
  org.eclipse.xtext.ui.core.editor.codecompletion,
- org.eclipse.xtext.ui.core.editor.utils,
  org.eclipse.xtext.ui.core.service,
  org.eclipse.xtext.ui.core.service.impl,
  org.eclipse.xtext.ui.core.util,

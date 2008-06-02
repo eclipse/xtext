@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.core.editor.codecompletion;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.swt.graphics.Image;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -21,7 +20,7 @@ public class Proposal {
 	private StyledString label;
 	private String text;
 	private String description;
-	private Image image;
+	private String image;
 
 	public Proposal(String text) {
 		Assert.isLegal(text != null);
@@ -32,8 +31,6 @@ public class Proposal {
 	 * @return the label
 	 */
 	public StyledString getLabel() {
-		if (label == null)
-			return new StyledString(text);
 		return label;
 	}
 
@@ -79,14 +76,14 @@ public class Proposal {
 	 * @param image
 	 * 		the image to set
 	 */
-	public void setImage(Image image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
 	/**
 	 * @return the image
 	 */
-	public Image getImage() {
+	public String getImage() {
 		return image;
 	}
 }

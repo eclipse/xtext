@@ -6,27 +6,27 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core;
+package org.eclipse.xtext.ui.core.editor.utils;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
-
-import org.eclipse.swt.SWT;
+import java.io.ByteArrayInputStream;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-@Target( { ElementType.METHOD })
-public @interface TokenType {
-	String name();
+public class StringInputStream extends ByteArrayInputStream {
 
-	int priority() default 5;
+	private StringInputStream(byte[] buf) {
+		super(buf);
+	}
 
-	String color() default "0,0,0";// TODO try to delegate to a static field
-									// that
+	public StringInputStream(String string, String encoding) throws UnsupportedEncodingException {
+		this(string.getBytes());
+	}
 
-	// useStringConverter
+	public StringInputStream(String string) throws UnsupportedEncodingException {
+		this(string, System.getProperty("file.encoding"));
+	}
 
-	int style() default SWT.NONE;
 }

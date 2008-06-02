@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
-import java.io.StringBufferInputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,6 +29,7 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.ui.core.editor.utils.StringInputStream;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
@@ -113,13 +114,19 @@ public class XtextTokenScanner implements ITokenScanner {
 
 		// TODO: dependency injection for default element factory in parser
 		IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
-		IParseResult parseResult = parser.parse(new StringBufferInputStream(document.get()), elementFactory,
-		        parseErrorHandler);
-        CompositeNode rootNode = parseResult.getRootNode();
+		IParseResult parseResult;
+		try {
+			//TODO delegate encoding to an antlrparser
+			parseResult = parser.parse(new StringInputStream(document.get()), elementFactory, parseErrorHandler);
+			CompositeNode rootNode = parseResult.getRootNode();
 
-		System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
-		if (rootNode != null) {
-			nodeIterator = rootNode.getLeafNodes().iterator();
+			System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
+			if (rootNode != null) {
+				nodeIterator = rootNode.getLeafNodes().iterator();
+			}
+		}
+		catch (UnsupportedEncodingException e) {
+			CoreLog.logError(e);
 		}
 	}
 

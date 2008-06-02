@@ -11,6 +11,7 @@ package org.eclipse.xtext.ui.core.service.impl;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.DataFormatException;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.StringConverter;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.swt.graphics.Color;
@@ -19,7 +20,7 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.xtext.parser.ITokenTypes;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.InjectedService;
-import org.eclipse.xtext.ui.core.internal.Activator;
+import org.eclipse.xtext.ui.core.TokenTypeResolver;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
@@ -32,62 +33,63 @@ public class SyntaxColorer implements ISyntaxColorer {
 
 	private IPreferenceStoreService preferenceStoreService;
 
-    public TextAttribute color(LeafNode leafNode) {
+	public TextAttribute color(LeafNode leafNode) {
 		return colorInternal(leafNode);
 	}
 
 	private TextAttribute colorInternal(LeafNode node) {
-		if (!(ITokenTypes.KEYWORD.equals(node.tokenType()) && node.length() == 1)) {
-			return new TextAttribute(getColorForTokenType(node), getBackgroundColorForTokenType(node),
-					getStyleForTokenType(node), getFontForTokenType(node));
+		String tokenType = TokenTypeResolver.getTokenType(node);
+		if (!(ITokenTypes.KEYWORD.equals(tokenType) && node.length() == 1)) {
+			return new TextAttribute(getColorForTokenType(tokenType), getBackgroundColorForTokenType(tokenType),
+					getStyleForTokenType(tokenType), getFontForTokenType(tokenType));
 		}
 		return new TextAttribute(null);
 	}
-	
+
 	@InjectedService
 	public void setPreferenceStoreService(IPreferenceStoreService preferenceStoreService) {
-	    this.preferenceStoreService = preferenceStoreService;
+		this.preferenceStoreService = preferenceStoreService;
 	}
 
 	private IPreferenceStore getPreferenceStore() {
 		return preferenceStoreService.getPersitablePreferenceStore();
 	}
 
-	private int getStyleForTokenType(LeafNode node) {
-		return getPreferenceStore().getInt(PreferenceStore.getTokenStylePreferenceKey(node.tokenType()));
+	private int getStyleForTokenType(String tokenType) {
+		return getPreferenceStore().getInt(PreferenceStore.getTokenStylePreferenceKey(tokenType));
 	}
 
-	private Font getFontForTokenType(LeafNode node) {
+	private Font getFontForTokenType(String tokenType) {
 		return null;
 	}
 
-	private Color getBackgroundColorForTokenType(LeafNode node) {
-		String rgbString = getPreferenceStore().getString(
-				PreferenceStore.getTokenBackgroundColorPreferenceKey(node.tokenType()));
+	private Color getBackgroundColorForTokenType(String tokenType) {
+		String tokenBackgroundColorPreferenceKey = PreferenceStore.getTokenBackgroundColorPreferenceKey(tokenType);
+		String rgbString = getPreferenceStore().getString(tokenBackgroundColorPreferenceKey);
+		return colorFromString(rgbString, tokenBackgroundColorPreferenceKey);
+	}
+
+	private Color colorFromString(String rgbString, String preferenceKey) {
 		if (rgbString.trim().length() > 0) {
+			Color col = JFaceResources.getColorRegistry().get(rgbString);
 			try {
-				RGB rgb = StringConverter.asRGB(rgbString);
-				return Activator.getDefault().getResourceLibrary().getColor(rgb);
+				if (col == null) {
+					RGB rgb = StringConverter.asRGB(rgbString);
+					JFaceResources.getColorRegistry().put(rgbString, rgb);
+					col = JFaceResources.getColorRegistry().get(rgbString);
+				}
 			}
 			catch (DataFormatException e) {
-				CoreLog.logError("Corrupt preference value for background color. TokenType:" + node.tokenType(), e);
+				CoreLog.logError("Corrupt preference value for '" + preferenceKey + "' color.", e);
 			}
+			return col;
 		}
 		return null;
 	}
 
-	private Color getColorForTokenType(LeafNode node) {
-		String rgbString = getPreferenceStore().getString(PreferenceStore.getTokenColorPreferenceKey(node.tokenType()));
-		if (rgbString.trim().length() > 0) {
-			try {
-				RGB rgb = StringConverter.asRGB(rgbString);
-				return Activator.getDefault().getResourceLibrary().getColor(rgb);
-			}
-			catch (DataFormatException e) {
-				CoreLog.logError("Corrupt preference value for color. TokenType:" + node.tokenType(), e);
-			}
-		}
-		return null;
+	private Color getColorForTokenType(String tokenType) {
+		String preferenceKey = PreferenceStore.getTokenColorPreferenceKey(tokenType);
+		return colorFromString(getPreferenceStore().getString(preferenceKey), preferenceKey);
 	}
 
 }

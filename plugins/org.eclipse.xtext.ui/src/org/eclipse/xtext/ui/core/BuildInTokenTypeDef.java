@@ -1,12 +1,13 @@
 package org.eclipse.xtext.ui.core;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.LeafNode;
 
 public class BuildInTokenTypeDef {
 
-	@TokenType(name = "Keyword")
+	@TokenType(name = "Keyword", color = "", style = SWT.BOLD)
 	public static boolean keyword(LeafNode node) {
 		return node.getGrammarElement() instanceof Keyword && node.getText().length() > 1;
 	}

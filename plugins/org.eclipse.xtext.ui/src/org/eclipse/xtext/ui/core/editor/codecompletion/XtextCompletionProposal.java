@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.codecompletion;
 
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
@@ -32,10 +34,33 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 
 	private final Proposal proposal;
 	private final int offset;
+	private final StyledString styledString;
+	private Image image;
 
 	public XtextCompletionProposal(Proposal proposal, int offset) {
 		this.proposal = proposal;
 		this.offset = offset;
+		if (proposal.getLabel() != null) {
+			this.styledString = proposal.getLabel();
+		}
+		else {
+			this.styledString = new StyledString(proposal.getText());
+		}
+		if (proposal.getImage() != null)
+			initializeImage();
+	}
+
+	private void initializeImage() {
+		Image im = JFaceResources.getImage(proposal.getImage());
+		if (im == null) {
+			ImageDescriptor imageDescriptorFromPlugin = Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID,
+					proposal.getImage());
+			if (imageDescriptorFromPlugin != null) {
+				JFaceResources.getImageRegistry().put(proposal.getImage(), imageDescriptorFromPlugin);
+				im = JFaceResources.getImage(proposal.getImage());
+			}
+		}
+		this.image = im;
 	}
 
 	/*
@@ -71,7 +96,7 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * getContextInformation()
 	 */
 	public IContextInformation getContextInformation() {
-		return new ContextInformation(proposal.getImage(), proposal.getText(), proposal.getDescription());
+		return new ContextInformation(getImage(), proposal.getText(), proposal.getDescription());
 	}
 
 	/*
@@ -91,7 +116,7 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * @see org.eclipse.jface.text.contentassist.ICompletionProposal#getImage()
 	 */
 	public Image getImage() {
-		return proposal.getImage();
+		return this.image;
 	}
 
 	/*
@@ -149,7 +174,7 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * getStyledDisplayString()
 	 */
 	public StyledString getStyledDisplayString() {
-		return proposal.getLabel();
+		return this.styledString;
 	}
 
 	/*
