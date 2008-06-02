@@ -21,6 +21,11 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parser.ITokenTypes;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeAdapter;
+import org.eclipse.xtext.testlanguages.TestLanguageLanguageFacade;
 import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -63,18 +68,18 @@ public class NodeModelTest extends AbstractGeneratorTest {
 			} else if (next instanceof LeafNode) {
 				LeafNode leafNode = (LeafNode) next;
 				EObject grammarElement = leafNode.getGrammarElement();
-				String tokenType = leafNode.tokenType();
-				if (grammarElement instanceof Keyword) {
-					assertEquals(ITokenTypes.KEYWORD, tokenType);
-				} else if (GrammarUtil.isWhitespaceLexerRule(grammarElement)) {
-					assertEquals(ITokenTypes.WHITESPACE, tokenType);
-				} else if (GrammarUtil.isLexerRuleCall(grammarElement)) {
-					assertEquals(((LexerRule) GrammarUtil
-							.calledRule((RuleCall) grammarElement))
-							.getTokenType(), tokenType);
-				} else {
-					fail("LeafNodes must correspond to keywords, whitespaces or lexerRules "+grammarElement);
-				}
+//TODO is this test obsolete since we've removed the tokenType feature?
+				//				if (grammarElement instanceof Keyword) {
+//					assertEquals(ITokenTypes.KEYWORD, tokenType);
+//				} else if (GrammarUtil.isWhitespaceLexerRule(grammarElement)) {
+//					assertEquals(ITokenTypes.WHITESPACE, tokenType);
+//				} else if (GrammarUtil.isLexerRuleCall(grammarElement)) {
+//					assertEquals(((LexerRule) GrammarUtil
+//							.calledRule((RuleCall) grammarElement))
+//							.getTokenType(), tokenType);
+//				} else {
+//					fail("LeafNodes must correspond to keywords, whitespaces or lexerRules "+grammarElement);
+//				}
 			}
 		}
 	}
