@@ -7,12 +7,9 @@ import org.eclipse.xtext.testlanguages.*;
 import org.eclipse.xtext.testlanguages.parser.*;
 
 public class LexerLanguageResourceFactoryServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.resource.IResourceFactory serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new org.eclipse.xtext.resource.XtextResourceFactory();
-        }
+        org.eclipse.xtext.resource.IResourceFactory serviceObject = new org.eclipse.xtext.resource.XtextResourceFactory();
         return serviceObject;
     }
 

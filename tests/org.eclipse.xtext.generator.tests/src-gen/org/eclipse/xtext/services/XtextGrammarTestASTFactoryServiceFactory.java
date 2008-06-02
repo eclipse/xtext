@@ -7,12 +7,9 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 
 public class XtextGrammarTestASTFactoryServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.parser.IElementFactory serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new XtextGrammarTestASTFactory();
-        }
+        org.eclipse.xtext.parser.IElementFactory serviceObject = new org.eclipse.xtext.parser.GenericEcoreElementFactory();
         return serviceObject;
     }
 

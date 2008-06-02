@@ -4,53 +4,53 @@
 <!-- Generated with Xtext -->
 
 <plugin>
-	<extension
+   <extension
          point="org.eclipse.xtext.ui.languageDescriptor">
       <languageDescriptor
             id="org.eclipse.xtext.testlanguages.TestLanguage"
             name="TestLanguage">
       </languageDescriptor>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.parser">
-      <parser>
+      <parser
             languageId="org.eclipse.xtext.testlanguages.TestLanguage"
-            class="org.eclipse.xtext.testlanguages.service.ParserServiceFactory">
+            class="org.eclipse.xtext.testlanguages.services.TestLanguageParserServiceFactory">
       </parser>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.aSTFactory">
-      <aSTFactory>
+      <aSTFactory
             languageId="org.eclipse.xtext.testlanguages.TestLanguage"
-            class="org.eclipse.xtext.testlanguages.service.ASTFactoryServiceFactory">
+            class="org.eclipse.xtext.testlanguages.services.TestLanguageASTFactoryServiceFactory">
       </aSTFactory>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.parseTreeConstructor">
-      <parseTreeConstructor>
+      <parseTreeConstructor
             languageId="org.eclipse.xtext.testlanguages.TestLanguage"
-            class="org.eclipse.xtext.testlanguages.service.ParseTreeConstructorServiceFactory">
+            class="org.eclipse.xtext.testlanguages.services.TestLanguageParseTreeConstructorServiceFactory">
       </parseTreeConstructor>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.resourceFactory">
-      <resourceFactory>
+      <resourceFactory
             languageId="org.eclipse.xtext.testlanguages.TestLanguage"
-            class="org.eclipse.xtext.testlanguages.service.ResourceFactoryServiceFactory">
+            class="org.eclipse.xtext.testlanguages.services.TestLanguageResourceFactoryServiceFactory">
       </resourceFactory>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.grammarAccess">
-      <grammarAccess>
+      <grammarAccess
             languageId="org.eclipse.xtext.testlanguages.TestLanguage"
-            class="org.eclipse.xtext.testlanguages.service.GrammarAccessServiceFactory">
+            class="org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccessServiceFactory">
       </grammarAccess>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.metamodelAccess">
-      <metamodelAccess>
+      <metamodelAccess
             languageId="org.eclipse.xtext.testlanguages.TestLanguage"
-            class="org.eclipse.xtext.testlanguages.service.MetamodelAccessServiceFactory">
+            class="org.eclipse.xtext.testlanguages.services.TestLanguageMetamodelAccessServiceFactory">
       </metamodelAccess>
-   	</extension>
+   </extension>
 </plugin>

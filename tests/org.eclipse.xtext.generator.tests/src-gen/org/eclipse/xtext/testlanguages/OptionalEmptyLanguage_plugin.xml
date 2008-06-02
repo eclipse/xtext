@@ -4,53 +4,53 @@
 <!-- Generated with Xtext -->
 
 <plugin>
-	<extension
+   <extension
          point="org.eclipse.xtext.ui.languageDescriptor">
       <languageDescriptor
             id="org.eclipse.xtext.testlanguages.OptionalEmptyLanguage"
             name="OptionalEmptyLanguage">
       </languageDescriptor>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.parser">
-      <parser>
+      <parser
             languageId="org.eclipse.xtext.testlanguages.OptionalEmptyLanguage"
-            class="org.eclipse.xtext.testlanguages.service.ParserServiceFactory">
+            class="org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageParserServiceFactory">
       </parser>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.aSTFactory">
-      <aSTFactory>
+      <aSTFactory
             languageId="org.eclipse.xtext.testlanguages.OptionalEmptyLanguage"
-            class="org.eclipse.xtext.testlanguages.service.ASTFactoryServiceFactory">
+            class="org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageASTFactoryServiceFactory">
       </aSTFactory>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.parseTreeConstructor">
-      <parseTreeConstructor>
+      <parseTreeConstructor
             languageId="org.eclipse.xtext.testlanguages.OptionalEmptyLanguage"
-            class="org.eclipse.xtext.testlanguages.service.ParseTreeConstructorServiceFactory">
+            class="org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageParseTreeConstructorServiceFactory">
       </parseTreeConstructor>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.resourceFactory">
-      <resourceFactory>
+      <resourceFactory
             languageId="org.eclipse.xtext.testlanguages.OptionalEmptyLanguage"
-            class="org.eclipse.xtext.testlanguages.service.ResourceFactoryServiceFactory">
+            class="org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageResourceFactoryServiceFactory">
       </resourceFactory>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.grammarAccess">
-      <grammarAccess>
+      <grammarAccess
             languageId="org.eclipse.xtext.testlanguages.OptionalEmptyLanguage"
-            class="org.eclipse.xtext.testlanguages.service.GrammarAccessServiceFactory">
+            class="org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageGrammarAccessServiceFactory">
       </grammarAccess>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.metamodelAccess">
-      <metamodelAccess>
+      <metamodelAccess
             languageId="org.eclipse.xtext.testlanguages.OptionalEmptyLanguage"
-            class="org.eclipse.xtext.testlanguages.service.MetamodelAccessServiceFactory">
+            class="org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageMetamodelAccessServiceFactory">
       </metamodelAccess>
-   	</extension>
+   </extension>
 </plugin>

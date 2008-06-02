@@ -4,53 +4,53 @@
 <!-- Generated with Xtext -->
 
 <plugin>
-	<extension
+   <extension
          point="org.eclipse.xtext.ui.languageDescriptor">
       <languageDescriptor
             id="org.eclipse.xtext.grammargen.tests.SimpleTest2"
             name="SimpleTest2">
       </languageDescriptor>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.parser">
-      <parser>
+      <parser
             languageId="org.eclipse.xtext.grammargen.tests.SimpleTest2"
-            class="org.eclipse.xtext.grammargen.tests.service.ParserServiceFactory">
+            class="org.eclipse.xtext.grammargen.tests.services.SimpleTest2ParserServiceFactory">
       </parser>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.aSTFactory">
-      <aSTFactory>
+      <aSTFactory
             languageId="org.eclipse.xtext.grammargen.tests.SimpleTest2"
-            class="org.eclipse.xtext.grammargen.tests.service.ASTFactoryServiceFactory">
+            class="org.eclipse.xtext.grammargen.tests.services.SimpleTest2ASTFactoryServiceFactory">
       </aSTFactory>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.parseTreeConstructor">
-      <parseTreeConstructor>
+      <parseTreeConstructor
             languageId="org.eclipse.xtext.grammargen.tests.SimpleTest2"
-            class="org.eclipse.xtext.grammargen.tests.service.ParseTreeConstructorServiceFactory">
+            class="org.eclipse.xtext.grammargen.tests.services.SimpleTest2ParseTreeConstructorServiceFactory">
       </parseTreeConstructor>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.resourceFactory">
-      <resourceFactory>
+      <resourceFactory
             languageId="org.eclipse.xtext.grammargen.tests.SimpleTest2"
-            class="org.eclipse.xtext.grammargen.tests.service.ResourceFactoryServiceFactory">
+            class="org.eclipse.xtext.grammargen.tests.services.SimpleTest2ResourceFactoryServiceFactory">
       </resourceFactory>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.grammarAccess">
-      <grammarAccess>
+      <grammarAccess
             languageId="org.eclipse.xtext.grammargen.tests.SimpleTest2"
-            class="org.eclipse.xtext.grammargen.tests.service.GrammarAccessServiceFactory">
+            class="org.eclipse.xtext.grammargen.tests.services.SimpleTest2GrammarAccessServiceFactory">
       </grammarAccess>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.metamodelAccess">
-      <metamodelAccess>
+      <metamodelAccess
             languageId="org.eclipse.xtext.grammargen.tests.SimpleTest2"
-            class="org.eclipse.xtext.grammargen.tests.service.MetamodelAccessServiceFactory">
+            class="org.eclipse.xtext.grammargen.tests.services.SimpleTest2MetamodelAccessServiceFactory">
       </metamodelAccess>
-   	</extension>
+   </extension>
 </plugin>

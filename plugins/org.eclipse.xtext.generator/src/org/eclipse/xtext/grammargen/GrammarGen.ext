@@ -44,28 +44,3 @@ String bodyWithoutQuotes(LexerRule this) :
 	else
 		body;
 		
-List[String] services() :
-		{'Parser', 'ASTFactory', 'ParseTreeConstructor', 'ResourceFactory', 'GrammarAccess', 'MetamodelAccess'};
-		
-String serviceInterface(String serviceName) :
-	switch(serviceName) {
-		case 'Parser': 'org.eclipse.xtext.parser.IParser'
-		case 'ASTFactory': 'org.eclipse.xtext.parser.IElementFactory'
-		case 'ParseTreeConstructor': 'org.eclipse.xtext.parsetree.IParseTreeConstructor'
-		case 'ResourceFactory': 'org.eclipse.xtext.resource.IResourceFactory'
-		case 'GrammarAccess': 'org.eclipse.xtext.IGrammarAccess'
-		case 'MetamodelAccess': 'org.eclipse.xtext.IMetamodelAccess'
-		default: ''
-	};
-		
-String serviceClass(String serviceName) :
-	switch(serviceName) { 
-		case 'Parser': languageName() + 'Parser'
-		case 'ASTFactory': languageName() + 'ASTFactory'
-		case 'ParseTreeConstructor': languageName() + 'ParseTreeConstructor'
-		case 'ResourceFactory': 'org.eclipse.xtext.resource.XtextResourceFactory'
-		case 'GrammarAccess': languageName() + 'GrammarAccess'
-		case 'MetamodelAccess': languageName() + 'MetamodelAccess'
-		default: ''
-	};
-	

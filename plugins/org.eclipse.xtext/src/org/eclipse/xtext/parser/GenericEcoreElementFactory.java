@@ -17,13 +17,22 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.service.InjectedService;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public abstract class AbstractEcoreElementFactory implements IElementFactory {
+public class GenericEcoreElementFactory implements IElementFactory {
 
+    protected IMetamodelAccess metamodelAccess;
+
+    @InjectedService
+    public void setMetamodelAccess(IMetamodelAccess metamodelAccess) {
+        this.metamodelAccess = metamodelAccess;
+    }
+    
 	public EObject create(String fullTypeName) {
 		EClass clazz = getEClass(fullTypeName);
 		if (clazz != null && !(clazz.isAbstract() || clazz.isInterface()))
@@ -52,7 +61,9 @@ public abstract class AbstractEcoreElementFactory implements IElementFactory {
 		((Collection) eo.eGet(structuralFeature)).add(value);
 	}
 
-	protected abstract EPackage[] getEPackages(String alias);
+	protected EPackage[] getEPackages(String alias) {
+	    return metamodelAccess.getGeneratedEPackages();
+	}
 
 	public EClass getEClass(String fullTypeName) {
 		String[] split = fullTypeName.split("::");

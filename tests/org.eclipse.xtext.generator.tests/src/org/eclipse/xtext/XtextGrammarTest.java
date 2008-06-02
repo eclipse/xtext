@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parser.XtextGrammarTestASTFactory;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.tests.Invocation;
 
@@ -27,7 +26,6 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		XtextGrammarTestStandaloneSetup.doSetup();
 		with(XtextGrammarTestStandaloneSetup.class);
 	}
 	
@@ -52,17 +50,17 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 	}
 	
 	public void testInstantiate() throws Exception {
-		EObject grammar = (EObject) getModel("generate foo 'bar' Foo : name=ID;", new XtextGrammarTestASTFactory());
+		EObject grammar = (EObject) getModel("generate foo 'bar' Foo : name=ID;");
 		assertWithXtend("'Foo'","parserRules.first().name",grammar);
 		assertWithXtend("'name'","parserRules.first().alternatives.feature",grammar);
 	}
 	
 	public void testInstantiateXtextGrammar() throws Exception {
 		InputStream bootGrammar = getClass().getClassLoader().getResourceAsStream(getClass().getName().replace('.','/')+".xtext");
-		EObject grammar = (EObject) getModel(bootGrammar , new XtextGrammarTestASTFactory(),null);
+		EObject grammar = (EObject) getModel(bootGrammar, getASTFactory(), null);
 		assertWithXtend("true","parserRules.select(e|e.name=='AbstractToken').first()!=null",grammar);
 		assertWithXtend("'AbstractElement'","parserRules.select(e|e.name=='AbstractToken').first().type.name",grammar);
-		XtextGrammarTestParseTreeConstructor foo = new XtextGrammarTestParseTreeConstructor();
+		XtextGrammarTestParseTreeConstructor foo = (XtextGrammarTestParseTreeConstructor) getParseTreeConstructor();
 		foo.update(grammar);
 		System.out.println(foo.getText());
 //		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
@@ -74,8 +72,8 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 	
 	public void testSerialization() throws Exception {
 		String model = "generate foo 'bar' Foo : ( 'stuff' '{' '}' STRING ) ? ;";
-		EObject grammar = (EObject) getModel(model, new XtextGrammarTestASTFactory());
-		XtextGrammarTestParseTreeConstructor ptc = new XtextGrammarTestParseTreeConstructor();
+		EObject grammar = (EObject) getModel(model);
+		XtextGrammarTestParseTreeConstructor ptc = (XtextGrammarTestParseTreeConstructor) getParseTreeConstructor();
 		ptc.update(grammar);
 		assertEquals(model, ptc.getText());
 	}

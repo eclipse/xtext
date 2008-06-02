@@ -7,12 +7,9 @@ import org.eclipse.xtext.dummy.*;
 import org.eclipse.xtext.dummy.parser.*;
 
 public class DummyLanguageParseTreeConstructorServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.parsetree.IParseTreeConstructor serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new DummyLanguageParseTreeConstructor();
-        }
+        org.eclipse.xtext.parsetree.IParseTreeConstructor serviceObject = new DummyLanguageParseTreeConstructor();
         return serviceObject;
     }
 

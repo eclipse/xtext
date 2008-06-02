@@ -7,12 +7,9 @@ import org.eclipse.xtext.dummy.*;
 import org.eclipse.xtext.dummy.parser.*;
 
 public class DummyLanguageParserServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.parser.IParser serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new DummyLanguageParser();
-        }
+        org.eclipse.xtext.parser.IParser serviceObject = new DummyLanguageParser();
         return serviceObject;
     }
 

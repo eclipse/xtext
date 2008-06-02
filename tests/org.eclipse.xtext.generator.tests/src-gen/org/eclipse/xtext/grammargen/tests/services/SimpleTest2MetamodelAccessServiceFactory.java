@@ -7,12 +7,9 @@ import org.eclipse.xtext.grammargen.tests.*;
 import org.eclipse.xtext.grammargen.tests.parser.*;
 
 public class SimpleTest2MetamodelAccessServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.IMetamodelAccess serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new SimpleTest2MetamodelAccess();
-        }
+        org.eclipse.xtext.IMetamodelAccess serviceObject = new SimpleTest2MetamodelAccess();
         return serviceObject;
     }
 

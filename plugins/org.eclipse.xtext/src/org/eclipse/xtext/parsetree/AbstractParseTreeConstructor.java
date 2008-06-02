@@ -19,15 +19,13 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.ILanguageFacade;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parser.AbstractEcoreElementFactory;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.ParsetreeFactory;
+import org.eclipse.xtext.parser.GenericEcoreElementFactory;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.service.InjectedService;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -35,7 +33,28 @@ import org.eclipse.xtext.parsetree.ParsetreeFactory;
  */
 public abstract class AbstractParseTreeConstructor implements IParseTreeConstructor {
 
-	public void update(EObject object) {
+	private GenericEcoreElementFactory astElementFactory;
+	private Grammar grammar;
+	
+	@InjectedService
+	public void setElementFactory(IElementFactory factory) {
+	    this.astElementFactory = (GenericEcoreElementFactory) factory;
+	}
+	
+	protected GenericEcoreElementFactory getFactory() {
+	    return astElementFactory;
+	}
+	
+	@InjectedService
+	public void setGrammarAccess(IGrammarAccess grammarAccess) {
+	    this.grammar = grammarAccess.getGrammar();
+	}
+
+    protected Grammar getGrammar() {
+        return grammar;
+    }
+
+    public void update(EObject object) {
 		NodeAdapter adapter = getAdapter(object);
 		CompositeNode rootNode = null;
 		String ruleToCall = getGrammar().getParserRules().get(0).getName();
@@ -54,10 +73,6 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		internalDoUpdate(object, ruleToCall);
 	}
 
-	protected Grammar getGrammar() {
-		return getFacade().getGrammar();
-	}
-
 	protected abstract void internalDoUpdate(EObject obj, String ruleToCall);
 
 	private NodeAdapter getAdapter(EObject object) {
@@ -67,12 +82,6 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return getAdapter(object.eContainer());
 		}
 		return adapter;
-	}
-
-	protected abstract ILanguageFacade getFacade();
-	
-	protected AbstractEcoreElementFactory getFactory() {
-		return (AbstractEcoreElementFactory) getFacade().getElementFactory();
 	}
 
 	protected final InstanceDescription getDescr(InstanceDescription obj) {

@@ -7,12 +7,9 @@ import org.eclipse.xtext.testlanguages.*;
 import org.eclipse.xtext.testlanguages.parser.*;
 
 public class TestLanguageParserServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.parser.IParser serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new TestLanguageParser();
-        }
+        org.eclipse.xtext.parser.IParser serviceObject = new TestLanguageParser();
         return serviceObject;
     }
 

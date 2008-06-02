@@ -7,12 +7,9 @@ import org.eclipse.xtext.metamodelreferencing.tests.*;
 import org.eclipse.xtext.metamodelreferencing.tests.parser.*;
 
 public class MetamodelRefTestGrammarAccessServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.IGrammarAccess serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new MetamodelRefTestGrammarAccess();
-        }
+        org.eclipse.xtext.IGrammarAccess serviceObject = new MetamodelRefTestGrammarAccess();
         return serviceObject;
     }
 

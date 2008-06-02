@@ -7,12 +7,9 @@ import org.eclipse.xtext.testlanguages.*;
 import org.eclipse.xtext.testlanguages.parser.*;
 
 public class SimpleExpressionsMetamodelAccessServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.IMetamodelAccess serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new SimpleExpressionsMetamodelAccess();
-        }
+        org.eclipse.xtext.IMetamodelAccess serviceObject = new SimpleExpressionsMetamodelAccess();
         return serviceObject;
     }
 

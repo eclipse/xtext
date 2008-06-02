@@ -7,12 +7,9 @@ import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.parser.*;
 
 public class ComplexReconstrTestASTFactoryServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.parser.IElementFactory serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new ComplexReconstrTestASTFactory();
-        }
+        org.eclipse.xtext.parser.IElementFactory serviceObject = new org.eclipse.xtext.parser.GenericEcoreElementFactory();
         return serviceObject;
     }
 

@@ -17,7 +17,6 @@ import org.eclipse.xtext.dummy.DummyLanguage;
 import org.eclipse.xtext.grammargen.tests.SimpleTest;
 import org.eclipse.xtext.grammargen.tests.SimpleTest2;
 import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest;
-import org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTest;
 import org.eclipse.xtext.parser.XtextASTFactory;
 import org.eclipse.xtext.parser.XtextParser;
 import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest;
@@ -61,7 +60,7 @@ public class GenerateAllTestGrammars {
 			Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory()).getRootASTElement();
 			
 			GeneratorFacade.generate(grammarModel, c.getSimpleName(), c.getPackage().getName().replace('.', '/'), path,
-                    path, c.getSimpleName().toLowerCase());
+                    null, c.getSimpleName().toLowerCase());
 		}
 	}
 	

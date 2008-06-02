@@ -4,53 +4,53 @@
 <!-- Generated with Xtext -->
 
 <plugin>
-	<extension
+   <extension
          point="org.eclipse.xtext.ui.languageDescriptor">
       <languageDescriptor
             id="org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest"
             name="SimpleReconstrTest">
       </languageDescriptor>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.parser">
-      <parser>
+      <parser
             languageId="org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest"
-            class="org.eclipse.xtext.parsetree.reconstr.service.ParserServiceFactory">
+            class="org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestParserServiceFactory">
       </parser>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.aSTFactory">
-      <aSTFactory>
+      <aSTFactory
             languageId="org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest"
-            class="org.eclipse.xtext.parsetree.reconstr.service.ASTFactoryServiceFactory">
+            class="org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestASTFactoryServiceFactory">
       </aSTFactory>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.parseTreeConstructor">
-      <parseTreeConstructor>
+      <parseTreeConstructor
             languageId="org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest"
-            class="org.eclipse.xtext.parsetree.reconstr.service.ParseTreeConstructorServiceFactory">
+            class="org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestParseTreeConstructorServiceFactory">
       </parseTreeConstructor>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.resourceFactory">
-      <resourceFactory>
+      <resourceFactory
             languageId="org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest"
-            class="org.eclipse.xtext.parsetree.reconstr.service.ResourceFactoryServiceFactory">
+            class="org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestResourceFactoryServiceFactory">
       </resourceFactory>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.grammarAccess">
-      <grammarAccess>
+      <grammarAccess
             languageId="org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest"
-            class="org.eclipse.xtext.parsetree.reconstr.service.GrammarAccessServiceFactory">
+            class="org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestGrammarAccessServiceFactory">
       </grammarAccess>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.metamodelAccess">
-      <metamodelAccess>
+      <metamodelAccess
             languageId="org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest"
-            class="org.eclipse.xtext.parsetree.reconstr.service.MetamodelAccessServiceFactory">
+            class="org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestMetamodelAccessServiceFactory">
       </metamodelAccess>
-   	</extension>
+   </extension>
 </plugin>
