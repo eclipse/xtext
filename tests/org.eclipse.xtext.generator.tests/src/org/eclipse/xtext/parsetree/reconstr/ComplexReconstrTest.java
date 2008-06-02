@@ -9,7 +9,6 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parsetree.reconstr.parser.ComplexReconstrTestASTFactory;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class ComplexReconstrTest extends AbstractGeneratorTest {
@@ -32,8 +31,8 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 	}
 
 	private String parseAndSerialize(String model) throws Exception {
-		EObject result = (EObject) getModel(model,new ComplexReconstrTestASTFactory());
-		ComplexReconstrTestParseTreeConstructor con = new ComplexReconstrTestParseTreeConstructor();
+		EObject result = (EObject) getModel(model);
+		ComplexReconstrTestParseTreeConstructor con = (ComplexReconstrTestParseTreeConstructor) getParseTreeConstructor();
 		con.update(result);
 		String resultString = con.getText();
 		return resultString;
