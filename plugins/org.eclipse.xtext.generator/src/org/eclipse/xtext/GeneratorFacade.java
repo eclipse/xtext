@@ -58,13 +58,20 @@ public class GeneratorFacade {
     }
 	
 	@SuppressWarnings("unchecked")
-	public static void generate(Grammar grammarModel, String languageName, String languageNamespace, String srcGenPath, String modelFileExtension)
+	public static void generate(Grammar grammarModel, String languageName, String languageNamespace, String srcGenPath, String uiSrcGenPath, String modelFileExtension)
 			throws IOException {
 		
 		OutputImpl output = new OutputImpl();
-		Outlet outlet = new Outlet();
-		outlet.setPath(srcGenPath);
-		output.addOutlet(outlet);
+		Outlet defaultOutlet = new Outlet();
+		defaultOutlet.setPath(srcGenPath);
+		
+		Outlet uiOutlet = new Outlet();
+		uiOutlet.setName("UI_SRC_GEN");
+		uiOutlet.setPath(uiSrcGenPath);
+		
+		output.addOutlet(defaultOutlet);
+		output.addOutlet(uiOutlet);
+		
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
 		EmfRegistryMetaModel metamodel = new EmfRegistryMetaModel() {
 			@Override
@@ -99,6 +106,7 @@ public class GeneratorFacade {
         facade.evaluate("org::eclipse::xtext::services::MetamodelAccess::file", grammarModel);
         facade.evaluate("org::eclipse::xtext::services::ServiceFactories::factories", grammarModel);
         facade.evaluate("org::eclipse::xtext::ui::Plugin::file", grammarModel);
+        facade.evaluate("org::eclipse::xtext::ui::Editor::file", grammarModel);
 
 		String grammar = languageNamespace + "/parser/internal/Internal" + languageName + ".g";
 
