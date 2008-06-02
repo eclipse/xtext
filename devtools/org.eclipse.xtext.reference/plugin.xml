@@ -8,7 +8,6 @@
          point="org.eclipse.xtext.ui.languageDescriptor">
       <languageDescriptor
             id="org.eclipse.xtext.reference.ReferenceGrammar"
-            languageFacade="org.eclipse.xtext.reference.ReferenceGrammarLanguageFacade"
             name="ReferenceGrammar">
       </languageDescriptor>
    </extension>
@@ -17,13 +16,15 @@
       <parser
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
             class="org.eclipse.xtext.reference.parser.ReferenceGrammarParser">
+            
       </parser>
    </extension>
    <extension
          point="org.eclipse.xtext.ui.aSTFactory">
       <aSTFactory
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
-            class="org.eclipse.xtext.reference.parser.ReferenceGrammarASTFactory">
+            class="org.eclipse.xtext.parser.GenericEcoreElementFactory">
+            
       </aSTFactory>
    </extension>
    <extension
@@ -31,13 +32,15 @@
       <parseTreeConstructor
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
             class="org.eclipse.xtext.reference.ReferenceGrammarParseTreeConstructor">
+            
       </parseTreeConstructor>
    </extension>
    <extension
          point="org.eclipse.xtext.ui.resourceFactory">
       <resourceFactory
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
-            class="org.eclipse.xtext.reference.services.ReferenceGrammarResourceFactoryServiceFactory">
+            class="org.eclipse.xtext.resource.XtextResourceFactory">
+            
       </resourceFactory>
    </extension>
    <extension
@@ -45,6 +48,7 @@
       <grammarAccess
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
             class="org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess">
+            
       </grammarAccess>
    </extension>
    <extension
@@ -52,6 +56,7 @@
       <metamodelAccess
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
             class="org.eclipse.xtext.reference.services.ReferenceGrammarMetamodelAccess">
+            
       </metamodelAccess>
    </extension>
 </plugin>

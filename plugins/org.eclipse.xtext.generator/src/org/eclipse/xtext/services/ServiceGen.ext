@@ -34,4 +34,27 @@ String serviceClass(String serviceName) :
 		case 'MetamodelAccess': languageName() + 'MetamodelAccess'
 		default: ''
 	};
-	
+
+String serviceClassFQN(String serviceName) :
+    switch(serviceName) { 
+        case 'ASTFactory': serviceClass(serviceName)
+        case 'ResourceFactory': serviceClass(serviceName)        
+        default: packageName() + subpackage(serviceName) + '.' + serviceClass(serviceName)
+    };
+    
+String servicePackageName(String serviceName) :
+    packageName() + subpackage(serviceName);
+    
+String serviceClassFileName(String serviceName) :
+    serviceClassFQN(serviceName).replaceAll('\\.','/') + '.java';
+    
+private String subpackage(String serviceName) :
+    switch(serviceName) {
+        case 'Parser': '.parser'
+        case 'ASTFactory': '.services'
+        case 'ParseTreeConstructor': ''
+        case 'ResourceFactory': ''
+        case 'GrammarAccess': '.services'
+        case 'MetamodelAccess': '.services'
+        default: ''
+    };

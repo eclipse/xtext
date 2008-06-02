@@ -12,10 +12,11 @@
 «IMPORT xtext»
 
 «EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
+«EXTENSION org::eclipse::xtext::services::ServiceGen»
 
 «DEFINE file FOR Grammar»
-«FILE pathName()+'/services/'+languageName()+'GrammarAccess.java'-»
-package «packageName()».services;
+«FILE serviceClassFileName('GrammarAccess') -»
+package «servicePackageName('GrammarAccess')»;
 
 import org.eclipse.xtext.service.*;
 import org.eclipse.xtext.Grammar;
@@ -23,7 +24,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class «languageName()»GrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+public class «serviceClass('GrammarAccess')» extends BaseEPackageAccess implements IGrammarAccess {
 
 	private static final String «languageName().toUpperCase()»_GRAMMAR_CP_URI = "«pathName()»/«languageName()».xmi";
 	private static Grammar GRAMMAR = null;
@@ -33,7 +34,7 @@ public class «languageName()»GrammarAccess extends BaseEPackageAccess implements
 		if (GRAMMAR==null) {
 			// assert the XtextPackage implementation is loaded
 			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(«languageName()»GrammarAccess.class.getClassLoader(),«languageName().toUpperCase()»_GRAMMAR_CP_URI);
+			GRAMMAR = (Grammar) loadGrammarFile(«serviceClass('GrammarAccess')».class.getClassLoader(),«languageName().toUpperCase()»_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;
 	}
