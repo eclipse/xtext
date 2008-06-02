@@ -7,12 +7,9 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 
 public class XtextGrammarTestGrammarAccessServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.IGrammarAccess serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new XtextGrammarTestGrammarAccess();
-        }
+        org.eclipse.xtext.IGrammarAccess serviceObject = new XtextGrammarTestGrammarAccess();
         return serviceObject;
     }
 

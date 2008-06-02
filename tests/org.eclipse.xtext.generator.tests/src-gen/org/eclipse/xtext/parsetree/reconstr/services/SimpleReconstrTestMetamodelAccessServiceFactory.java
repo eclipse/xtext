@@ -7,12 +7,9 @@ import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.parser.*;
 
 public class SimpleReconstrTestMetamodelAccessServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.IMetamodelAccess serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new SimpleReconstrTestMetamodelAccess();
-        }
+        org.eclipse.xtext.IMetamodelAccess serviceObject = new SimpleReconstrTestMetamodelAccess();
         return serviceObject;
     }
 

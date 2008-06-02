@@ -14,12 +14,12 @@ import org.apache.tools.ant.filters.StringInputStream;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.ILanguageFacade;
-import org.eclipse.xtext.LanguageFacadeFactory;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.reference.parser.ReferenceGrammarASTFactory;
-import org.eclipse.xtext.reference.parser.ReferenceGrammarParser;
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.ServiceRegistry;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -31,10 +31,11 @@ public class ReferenceGrammarTest extends TestCase {
 		ReferenceGrammarStandaloneSetup.doSetup();
 	}
 	
-	ILanguageFacade f = LanguageFacadeFactory.getFacade(ReferenceGrammarStandaloneSetup.LANGUAGE_ID);
+	ILanguageDescriptor languageDescriptor = ReferenceGrammarStandaloneSetup.getLanguageDescriptor();
 	
 	public void testParseNothing() throws Exception {
-		EObject object = f.getParser().parse(new StringInputStream("")).getRootASTElement();
+	    IParser parser = ServiceRegistry.getService(languageDescriptor, IParser.class);
+		EObject object = parser.parse(new StringInputStream("")).getRootASTElement();
 		assertNull(object);
 	}
 	
@@ -47,12 +48,12 @@ public class ReferenceGrammarTest extends TestCase {
 			"    erwachsener (peter '33')" + 
 			"    erwachsener (anne '33')" + 
 			"}";
-		
-		ReferenceGrammarParser parser = new ReferenceGrammarParser();
-		EObject object = (EObject) parser.parse(new StringInputStream(grammar), new ReferenceGrammarASTFactory()).getRootASTElement();
+		IParser parser = ServiceRegistry.getService(languageDescriptor, IParser.class);
+		IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
+		EObject object = (EObject) parser.parse(new StringInputStream(grammar), elementFactory).getRootASTElement();
 		NodeAdapter adapter = (NodeAdapter) object.eAdapters().get(0);
 		AbstractNode node = adapter.getParserNode();
-		for (TreeIterator allContents = node.eAllContents(); allContents.hasNext();) {
+		for (TreeIterator<EObject> allContents = node.eAllContents(); allContents.hasNext();) {
 			AbstractNode subnode = (AbstractNode) allContents.next();
 			System.out.println(subnode);
 		}

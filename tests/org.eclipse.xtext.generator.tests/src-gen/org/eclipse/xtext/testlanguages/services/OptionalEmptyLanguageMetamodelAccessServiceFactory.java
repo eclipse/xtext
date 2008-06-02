@@ -7,12 +7,9 @@ import org.eclipse.xtext.testlanguages.*;
 import org.eclipse.xtext.testlanguages.parser.*;
 
 public class OptionalEmptyLanguageMetamodelAccessServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.IMetamodelAccess serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new OptionalEmptyLanguageMetamodelAccess();
-        }
+        org.eclipse.xtext.IMetamodelAccess serviceObject = new OptionalEmptyLanguageMetamodelAccess();
         return serviceObject;
     }
 

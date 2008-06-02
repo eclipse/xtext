@@ -7,12 +7,9 @@ import org.eclipse.xtext.grammargen.tests.*;
 import org.eclipse.xtext.grammargen.tests.parser.*;
 
 public class SimpleTestParseTreeConstructorServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.parsetree.IParseTreeConstructor serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new SimpleTestParseTreeConstructor();
-        }
+        org.eclipse.xtext.parsetree.IParseTreeConstructor serviceObject = new SimpleTestParseTreeConstructor();
         return serviceObject;
     }
 

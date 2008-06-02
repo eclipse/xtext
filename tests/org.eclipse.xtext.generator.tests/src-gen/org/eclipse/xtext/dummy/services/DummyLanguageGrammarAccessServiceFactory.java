@@ -7,12 +7,9 @@ import org.eclipse.xtext.dummy.*;
 import org.eclipse.xtext.dummy.parser.*;
 
 public class DummyLanguageGrammarAccessServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.IGrammarAccess serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new DummyLanguageGrammarAccess();
-        }
+        org.eclipse.xtext.IGrammarAccess serviceObject = new DummyLanguageGrammarAccess();
         return serviceObject;
     }
 

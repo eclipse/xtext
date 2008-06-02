@@ -7,12 +7,9 @@ import org.eclipse.xtext.metamodelreferencing.tests.*;
 import org.eclipse.xtext.metamodelreferencing.tests.parser.*;
 
 public class MetamodelRefTestASTFactoryServiceFactory implements ILanguageServiceFactory {
-	private org.eclipse.xtext.parser.IElementFactory serviceObject = null;
 
     public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        if (serviceObject == null) {
-            serviceObject = new MetamodelRefTestASTFactory();
-        }
+        org.eclipse.xtext.parser.IElementFactory serviceObject = new org.eclipse.xtext.parser.GenericEcoreElementFactory();
         return serviceObject;
     }
 

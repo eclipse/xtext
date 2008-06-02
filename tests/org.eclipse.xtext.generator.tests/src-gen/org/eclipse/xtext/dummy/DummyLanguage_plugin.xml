@@ -4,53 +4,53 @@
 <!-- Generated with Xtext -->
 
 <plugin>
-	<extension
+   <extension
          point="org.eclipse.xtext.ui.languageDescriptor">
       <languageDescriptor
             id="org.eclipse.xtext.dummy.DummyLanguage"
             name="DummyLanguage">
       </languageDescriptor>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.parser">
-      <parser>
+      <parser
             languageId="org.eclipse.xtext.dummy.DummyLanguage"
-            class="org.eclipse.xtext.dummy.service.ParserServiceFactory">
+            class="org.eclipse.xtext.dummy.services.DummyLanguageParserServiceFactory">
       </parser>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.aSTFactory">
-      <aSTFactory>
+      <aSTFactory
             languageId="org.eclipse.xtext.dummy.DummyLanguage"
-            class="org.eclipse.xtext.dummy.service.ASTFactoryServiceFactory">
+            class="org.eclipse.xtext.dummy.services.DummyLanguageASTFactoryServiceFactory">
       </aSTFactory>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.parseTreeConstructor">
-      <parseTreeConstructor>
+      <parseTreeConstructor
             languageId="org.eclipse.xtext.dummy.DummyLanguage"
-            class="org.eclipse.xtext.dummy.service.ParseTreeConstructorServiceFactory">
+            class="org.eclipse.xtext.dummy.services.DummyLanguageParseTreeConstructorServiceFactory">
       </parseTreeConstructor>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.resourceFactory">
-      <resourceFactory>
+      <resourceFactory
             languageId="org.eclipse.xtext.dummy.DummyLanguage"
-            class="org.eclipse.xtext.dummy.service.ResourceFactoryServiceFactory">
+            class="org.eclipse.xtext.dummy.services.DummyLanguageResourceFactoryServiceFactory">
       </resourceFactory>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.grammarAccess">
-      <grammarAccess>
+      <grammarAccess
             languageId="org.eclipse.xtext.dummy.DummyLanguage"
-            class="org.eclipse.xtext.dummy.service.GrammarAccessServiceFactory">
+            class="org.eclipse.xtext.dummy.services.DummyLanguageGrammarAccessServiceFactory">
       </grammarAccess>
-   	</extension>
-	<extension
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.metamodelAccess">
-      <metamodelAccess>
+      <metamodelAccess
             languageId="org.eclipse.xtext.dummy.DummyLanguage"
-            class="org.eclipse.xtext.dummy.service.MetamodelAccessServiceFactory">
+            class="org.eclipse.xtext.dummy.services.DummyLanguageMetamodelAccessServiceFactory">
       </metamodelAccess>
-   	</extension>
+   </extension>
 </plugin>
