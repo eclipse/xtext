@@ -60,7 +60,8 @@ public class GenerateAllTestGrammars {
 			XtextParser xtext2Parser= new XtextParser();
 			Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory()).getRootASTElement();
 			
-			GeneratorFacade.generate(grammarModel,c.getSimpleName(),c.getPackage().getName().replace('.', '/'),path, c.getSimpleName().toLowerCase());
+			GeneratorFacade.generate(grammarModel, c.getSimpleName(), c.getPackage().getName().replace('.', '/'), path,
+                    path, c.getSimpleName().toLowerCase());
 		}
 	}
 	
