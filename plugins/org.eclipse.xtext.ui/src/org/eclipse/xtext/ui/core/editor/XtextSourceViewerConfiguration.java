@@ -48,10 +48,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	@Override
 	public IReconciler getReconciler(ISourceViewer sourceViewer) {
-		MonoReconciler reconciler = new MonoReconciler(new XtextEditorModelReconcileStrategy(editor), false);
-		reconciler.setDelay(500);
-		return reconciler;
-//		 return new MonoReconciler(new XtextReconcilingStrategy(editor), false);
+		return new MonoReconciler(new XtextEditorModelReconcileStrategy(editor), false);
 	}
 
 	@Override

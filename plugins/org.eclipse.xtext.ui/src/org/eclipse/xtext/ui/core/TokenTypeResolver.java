@@ -8,25 +8,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
-
-import org.eclipse.swt.SWT;
+import org.eclipse.xtext.parser.ITokenTypes;
+import org.eclipse.xtext.parsetree.LeafNode;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-@Target( { ElementType.METHOD })
-public @interface TokenType {
-	String name();
-
-	int priority() default 5;
-
-	String color() default "0,0,0";// TODO try to delegate to a static field
-									// that
-
-	// useStringConverter
-
-	int style() default SWT.NONE;
+public class TokenTypeResolver {
+	// TODO implementation
+	public static String getTokenType(LeafNode node) {
+		return ITokenTypes.ANYOTHER;
+	}
 }

@@ -9,12 +9,9 @@
 package org.eclipse.xtext.ui.core.internal;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.core.editor.utils.CustomResourceLibrary;
 import org.eclipse.xtext.ui.services.LanguageServiceActivator;
 import org.osgi.framework.BundleContext;
 
@@ -25,16 +22,14 @@ public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.eclipse.xtext.ui";
-	
-	// TODO extract DEBUG handling to separate class?
+
+	// TODO extract DEBUG handling to separate class!
 	public static final boolean DEBUGING = Platform.inDebugMode();
 	public static final boolean DEBUG_PROPOSALS_PROVIDER = DEBUGING
 			&& "true".equalsIgnoreCase(Platform.getDebugOption("org.eclipse.xtext.ui/debug/services/proposalProvider"));
 
 	// The shared instance
 	private static Activator plugin;
-
-	private CustomResourceLibrary resourceLibrary;
 
 	/**
 	 * The constructor
@@ -54,10 +49,6 @@ public class Activator extends AbstractUIPlugin {
 
 	public void stop(BundleContext context) throws Exception {
 		setDefault(null);
-		if (resourceLibrary != null) {
-			resourceLibrary.dispose();
-			resourceLibrary = null;
-		}
 		super.stop(context);
 	}
 
@@ -69,7 +60,7 @@ public class Activator extends AbstractUIPlugin {
 	public static Activator getDefault() {
 		return plugin;
 	}
-	
+
 	/**
 	 * Returns the active workbench page or <code>null</code> if none.
 	 */
@@ -86,20 +77,6 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static IWorkbenchWindow getActiveWorkbenchWindow() {
 		return getDefault().getWorkbench().getActiveWorkbenchWindow();
-	}
-
-	public CustomResourceLibrary getResourceLibrary() {
-		if (resourceLibrary == null) {
-			Display displ = null;
-			if (Display.getCurrent() != null) {
-				displ = Display.getCurrent();
-			}
-			if (PlatformUI.isWorkbenchRunning()) {
-				displ = PlatformUI.getWorkbench().getDisplay();
-			}
-			resourceLibrary = new CustomResourceLibrary(displ);
-		}
-		return resourceLibrary;
 	}
 
 }
