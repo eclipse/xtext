@@ -64,14 +64,6 @@ public class ServiceRegistry {
                 findAndInjectService(languageDescriptor, service, parameterTypes[0], method);
             }
         }
-        Field[] fields = serviceClass.getDeclaredFields();
-        for (Field field : fields) {
-            if (field.isAnnotationPresent(InjectedService.class)) {
-                Class<?> type = field.getType();
-                Method setter = serviceClass.getMethod(getSetterName(field), type);
-                findAndInjectService(languageDescriptor, service, type, setter);
-            }
-        }
     }
 
     @SuppressWarnings("unchecked")
@@ -91,11 +83,6 @@ public class ServiceRegistry {
             throw new IllegalStateException("Could not inject service " + type.getSimpleName());
         }
         setter.invoke(service, injectedService);
-    }
-
-    private static String getSetterName(Field field) {
-        String name = field.getName();
-        return "set" + name.substring(0, 1).toUpperCase() + name.substring(1);
     }
 
     protected static void resetInternal() {

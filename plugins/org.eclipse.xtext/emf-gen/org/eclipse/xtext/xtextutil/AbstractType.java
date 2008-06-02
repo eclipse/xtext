@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractType.java,v 1.10 2008/05/23 08:22:20 jkohnlein Exp $
+ * $Id: AbstractType.java,v 1.11 2008/06/02 13:20:56 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextutil;
 
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -17,8 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xtextutil.AbstractType#getEClassifier <em>EClassifier</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextutil.AbstractType#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextutil.AbstractType#getMetaModel <em>Meta Model</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,58 +25,68 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractType extends EObject
-{
-  /**
-   * Returns the value of the '<em><b>EClassifier</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>EClassifier</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>EClassifier</em>' reference.
-   * @see #setEClassifier(EClassifier)
-   * @see org.eclipse.xtext.xtextutil.XtextutilPackage#getAbstractType_EClassifier()
-   * @model
-   * @generated
-   */
-  EClassifier getEClassifier();
+public interface AbstractType extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.eclipse.xtext.xtextutil.XtextutilPackage#getAbstractType_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
 
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.xtextutil.AbstractType#getEClassifier <em>EClassifier</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>EClassifier</em>' reference.
-   * @see #getEClassifier()
-   * @generated
-   */
-  void setEClassifier(EClassifier value);
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtextutil.AbstractType#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.eclipse.xtext.xtextutil.XtextutilPackage#getAbstractType_Name()
-   * @model
-   * @generated
-   */
-  String getName();
+	/**
+	 * Returns the value of the '<em><b>Meta Model</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.xtextutil.MetaModel#getTypes <em>Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Meta Model</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Meta Model</em>' container reference.
+	 * @see #setMetaModel(MetaModel)
+	 * @see org.eclipse.xtext.xtextutil.XtextutilPackage#getAbstractType_MetaModel()
+	 * @see org.eclipse.xtext.xtextutil.MetaModel#getTypes
+	 * @model opposite="types" transient="false"
+	 * @generated
+	 */
+	MetaModel getMetaModel();
 
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.xtextutil.AbstractType#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtextutil.AbstractType#getMetaModel <em>Meta Model</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Meta Model</em>' container reference.
+	 * @see #getMetaModel()
+	 * @generated
+	 */
+	void setMetaModel(MetaModel value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof ComplexTypeImpl) { return XtextutilUtil.getQualifiedName((ComplexTypeImpl) this);} else if (this instanceof DataTypeImpl) { return XtextutilUtil.getQualifiedName((DataTypeImpl) this);} else {return XtextutilUtil.getQualifiedName((AbstractTypeImpl) this);}'"
+	 * @generated
+	 */
+	String getQualifiedName();
 
 } // AbstractType

@@ -14,93 +14,64 @@ import xtextutil;
 extension org::openarchitectureware::util::stdlib::io; 
 
 extension org::eclipse::xtext::Extensions;
-extension org::eclipse::xtext::TypeResolution;
+extension org::eclipse::xtext::XtextUtil;
 extension org::eclipse::xtext::xtext2ecore::FeatureNormalization;
 
-List[EPackage] transform (Grammar g) :
-	g.createdMetamodels().createEPackage().normalizeFeatures()
+List[EPackage] getGeneratedEPackages(Grammar g) :
+	getAllEPackages(g) -> g.getAllMetaModels().select(e|e.isGenerate()).getEPackage();
+
+List[EPackage] getAllEPackages(Grammar g) :
+	let x = g.getAllMetaModels().collect(mm|mm.getEPackage()) :
+		normalize(g) ->
+		x
 ;
 
-create EPackage createEPackage(MetaModel mm) :
-	mm.setEPackage(this)->
-	setName(((GeneratedMetamodel) mm.declaration).name) ->
-	setNsURI(((GeneratedMetamodel) mm.declaration).nsURI.trimFromStartAndEnd(1)) ->
-	setNsPrefix(((GeneratedMetamodel) mm.declaration).name) ->
-	mm.grammar().parserRules.resolveReturnType().createOrGetEClass() ->
-	mm.grammar().allActions().resolveCreatedType().createOrGetEClass() 
-	//->this.eClassifiers.typeSelect(EClass).format().toString("\n").syserr()
-;
-
-EClassifier createOrGetEClass(AbstractType t) :
-	if t.eClassifier == null then
-		((ResolvedType) t).createAndAddEClass()
+cached EPackage getEPackage(MetaModel this) :
+	if this.isGenerate() then
+		createEPackage((GeneratedMetamodel)declaration, this)
 	else 
-		t.eClassifier
+		loadEPackage(((ReferencedMetamodel)declaration).uri.trimFromStartAndEnd(1));
+
+create EPackage createEPackage(GeneratedMetamodel mm, MetaModel metaModel) :
+	setName(mm.name) ->
+	setNsURI(mm.nsURI.trimFromStartAndEnd(1)) ->
+	setNsPrefix(mm.name) ->
+	eClassifiers.addAll(metaModel.types.getEClassifier()) 
 ;
 
-create EClass createAndAddEClass(ResolvedType type) :
-	// info("createAndAddEClass " + type.name) ->
-	setName(type.name) ->
-	type.setEClassifier(this) ->
-	eSuperTypes.addAll(type.inferredSuperTypes().createOrGetEClass()) ->
-	type.assignments().createAndAddEStructuralFeature(this) ->
-	type.allActionsReturning().createAndAddEStructuralFeature(this) ->
-	type.metaModel.createEPackage().eClassifiers.add(this) ->
-	if type.isAbstract() then
-		setAbstract(true)
-	//-> syserr(format(this)) 
-;
-
-Void createAndAddEStructuralFeature(Assignment a, EClass owningClass) :
-	if owningClass.eStructuralFeatures.select(f|f.name == a.feature).isEmpty then (
-		let f = a.createEStructuralFeature() :
-			f.setName(a.feature) ->
-			(if a.operator == "+=" then
-				f.setUpperBound(-1)) -> 
-			owningClass.eStructuralFeatures.add(f)
-			//-> syserr("Adding " + f.name + " to " + owningClass)
+getEClassifier(AbstractType t) :
+	if (t.metaModel.isGenerate()) then (
+		createEClassifier(t)
+	) else (
+		t.metaModel.getEPackage().eClassifiers.select(e|e.name==t.name).first()
 	)
 ;
 
-Void createAndAddEStructuralFeature(Action a, EClass owningClass) :
-	if owningClass.eStructuralFeatures.select(f|f.name == a.feature).isEmpty then (
-		let f = a.createEReference() :
-			f.setName(a.feature) ->
-			(if a.operator == "+=" then
-				f.setUpperBound(-1)) -> 
-			owningClass.eStructuralFeatures.add(f)
-			//-> syserr("Adding " + f.name + " to " + owningClass)
+EClassifier createEClassifier(AbstractType t) : null;
+
+create EClass createEClassifier(ComplexType t) : 
+	setName(t.name) ->
+	setAbstract(t.abstract) ->
+	eSuperTypes.addAll(t.superTypes.createEClassifier()) ->
+	eStructuralFeatures.addAll(t.features.createEStructuralFeature())
+;
+
+EStructuralFeature createEStructuralFeature(Feature this) :
+	let f = (EStructuralFeature) (if (ComplexType.isInstance(type)) then 
+				createEReference(this)
+			else
+				createEAttribute(this)) : (
+		f.setName(name)->
+		f.setEType(type.getEClassifier()) ->
+		f.setUpperBound(upperBound) ->
+		f.setLowerBound(lowerBound) ->
+		f
 	)
 ;
 
-EStructuralFeature createEStructuralFeature(Assignment a) :
-	if BuiltinType.isInstance(a.resolveReturnType()) then
-		a.createEAttribute()
-	else 
-		a.createEReference() 
+private create EReference createEReference(Feature f) : setContainment(true) -> setResolveProxies(false);
+private create EAttribute createEAttribute(Feature f) : null /* no initialization */;
+
+private cached EPackage loadEPackage(String uri) :
+	JAVA org.eclipse.xtext.EcoreUtil2.loadEPackage(java.lang.String)
 ;
-
-create EAttribute createEAttribute(Assignment a) :
-	setEType(a.featureType().createOrGetEClass())
-;
-
-create EReference createEReference(Assignment a) :
-	setEType(a.featureType().createOrGetEClass()) ->
-	setContainment(true) ->
-	setResolveProxies(false)
-;
-
-create EReference createEReference(Action a) :
-	setEType(a.containingParserRule().resolveReturnType().createOrGetEClass()) ->
-	setContainment(true) ->
-	setResolveProxies(false)
-;
-
-String format(EClass eClass) :
-	"Type: " + eClass.name + ": EPackage: "+ eClass.ePackage
-	+ "\n\t" 
-	+ eClass.eStructuralFeatures.toString("\n\t")
-;
-
-
-	

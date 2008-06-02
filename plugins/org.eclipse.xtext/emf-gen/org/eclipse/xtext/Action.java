@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Action.java,v 1.7 2008/05/23 08:22:18 jkohnlein Exp $
+ * $Id: Action.java,v 1.8 2008/06/02 13:20:56 sefftinge Exp $
  */
 package org.eclipse.xtext;
 
@@ -15,8 +15,8 @@ package org.eclipse.xtext;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.Action#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipse.xtext.Action#getFeature <em>Feature</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Action#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipse.xtext.Action#getTypeName <em>Type Name</em>}</li>
  * </ul>
  * </p>
@@ -27,32 +27,6 @@ package org.eclipse.xtext;
  */
 public interface Action extends AbstractElement
 {
-  /**
-   * Returns the value of the '<em><b>Operator</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Operator</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Operator</em>' attribute.
-   * @see #setOperator(String)
-   * @see org.eclipse.xtext.XtextPackage#getAction_Operator()
-   * @model
-   * @generated
-   */
-  String getOperator();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.Action#getOperator <em>Operator</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Operator</em>' attribute.
-   * @see #getOperator()
-   * @generated
-   */
-  void setOperator(String value);
-
   /**
    * Returns the value of the '<em><b>Feature</b></em>' attribute.
    * <!-- begin-user-doc -->
@@ -78,6 +52,32 @@ public interface Action extends AbstractElement
    * @generated
    */
   void setFeature(String value);
+
+  /**
+   * Returns the value of the '<em><b>Operator</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Operator</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Operator</em>' attribute.
+   * @see #setOperator(String)
+   * @see org.eclipse.xtext.XtextPackage#getAction_Operator()
+   * @model
+   * @generated
+   */
+  String getOperator();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.Action#getOperator <em>Operator</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Operator</em>' attribute.
+   * @see #getOperator()
+   * @generated
+   */
+  void setOperator(String value);
 
   /**
    * Returns the value of the '<em><b>Type Name</b></em>' containment reference.

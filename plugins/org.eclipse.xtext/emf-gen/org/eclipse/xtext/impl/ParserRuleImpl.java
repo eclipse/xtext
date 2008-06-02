@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParserRuleImpl.java,v 1.7 2008/05/23 08:22:10 jkohnlein Exp $
+ * $Id: ParserRuleImpl.java,v 1.8 2008/06/02 13:20:55 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 
 /**
@@ -26,7 +25,6 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.ParserRuleImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.ParserRuleImpl#getAlternatives <em>Alternatives</em>}</li>
  * </ul>
  * </p>
@@ -35,16 +33,6 @@ import org.eclipse.xtext.XtextPackage;
  */
 public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 {
-  /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getType()
-   * @generated
-   * @ordered
-   */
-  protected TypeRef type;
-
   /**
    * The cached value of the '{@link #getAlternatives() <em>Alternatives</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -74,54 +62,6 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
   protected EClass eStaticClass()
   {
     return XtextPackage.Literals.PARSER_RULE;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeRef getType()
-  {
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetType(TypeRef newType, NotificationChain msgs)
-  {
-    TypeRef oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtextPackage.PARSER_RULE__TYPE, oldType, newType);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setType(TypeRef newType)
-  {
-    if (newType != type)
-    {
-      NotificationChain msgs = null;
-      if (type != null)
-        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtextPackage.PARSER_RULE__TYPE, null, msgs);
-      if (newType != null)
-        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtextPackage.PARSER_RULE__TYPE, null, msgs);
-      msgs = basicSetType(newType, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.PARSER_RULE__TYPE, newType, newType));
   }
 
   /**
@@ -182,8 +122,6 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
   {
     switch (featureID)
     {
-      case XtextPackage.PARSER_RULE__TYPE:
-        return basicSetType(null, msgs);
       case XtextPackage.PARSER_RULE__ALTERNATIVES:
         return basicSetAlternatives(null, msgs);
     }
@@ -200,8 +138,6 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
   {
     switch (featureID)
     {
-      case XtextPackage.PARSER_RULE__TYPE:
-        return getType();
       case XtextPackage.PARSER_RULE__ALTERNATIVES:
         return getAlternatives();
     }
@@ -218,9 +154,6 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
   {
     switch (featureID)
     {
-      case XtextPackage.PARSER_RULE__TYPE:
-        setType((TypeRef)newValue);
-        return;
       case XtextPackage.PARSER_RULE__ALTERNATIVES:
         setAlternatives((AbstractElement)newValue);
         return;
@@ -238,9 +171,6 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
   {
     switch (featureID)
     {
-      case XtextPackage.PARSER_RULE__TYPE:
-        setType((TypeRef)null);
-        return;
       case XtextPackage.PARSER_RULE__ALTERNATIVES:
         setAlternatives((AbstractElement)null);
         return;
@@ -258,8 +188,6 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
   {
     switch (featureID)
     {
-      case XtextPackage.PARSER_RULE__TYPE:
-        return type != null;
       case XtextPackage.PARSER_RULE__ALTERNATIVES:
         return alternatives != null;
     }

@@ -11,7 +11,7 @@ import predicate;
 
 extension org::eclipse::xtext::Properties reexport;
 extension org::eclipse::xtext::Extensions reexport;
-extension org::eclipse::xtext::TypeResolution;
+extension org::eclipse::xtext::XtextUtil;
 extension org::openarchitectureware::util::stdlib::io;
 
 methodName(AbstractRule this) :
@@ -31,7 +31,7 @@ List[String] checkPath(AbstractElement this) : {"true"};
 List[String] checkPath(Keyword this) : if isAssigned() then {'value.equals("'+this.value.trimFromStartAndEnd(1)+'")'} else {'true'}; 
 
 List[String] checkPath(Action this) : 
-	{'obj.isOfType("'+typeName.qualifiedName()+'") && 
+	{'obj.isOfType("'+typeName.getQualifiedName()+'") && 
 	obj.checkConsume("'+feature+'") && obj.isConsumed()'};
 	
 List[String] checkPath(Assignment this) : 

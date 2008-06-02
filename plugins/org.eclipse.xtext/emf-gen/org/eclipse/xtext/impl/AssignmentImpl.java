@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssignmentImpl.java,v 1.7 2008/05/23 08:22:10 jkohnlein Exp $
+ * $Id: AssignmentImpl.java,v 1.8 2008/06/02 13:20:55 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -25,9 +25,9 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.AssignmentImpl#getFeature <em>Feature</em>}</li>
- *   <li>{@link org.eclipse.xtext.impl.AssignmentImpl#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.AssignmentImpl#getTerminal <em>Terminal</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.AssignmentImpl#getOperator <em>Operator</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.AssignmentImpl#getFeature <em>Feature</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,24 +36,14 @@ import org.eclipse.xtext.XtextPackage;
 public class AssignmentImpl extends AbstractElementImpl implements Assignment
 {
   /**
-   * The default value of the '{@link #getFeature() <em>Feature</em>}' attribute.
+   * The cached value of the '{@link #getTerminal() <em>Terminal</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFeature()
+   * @see #getTerminal()
    * @generated
    * @ordered
    */
-  protected static final String FEATURE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getFeature() <em>Feature</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFeature()
-   * @generated
-   * @ordered
-   */
-  protected String feature = FEATURE_EDEFAULT;
+  protected AbstractElement terminal;
 
   /**
    * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
@@ -76,14 +66,24 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
   protected String operator = OPERATOR_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getTerminal() <em>Terminal</em>}' containment reference.
+   * The default value of the '{@link #getFeature() <em>Feature</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTerminal()
+   * @see #getFeature()
    * @generated
    * @ordered
    */
-  protected AbstractElement terminal;
+  protected static final String FEATURE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getFeature() <em>Feature</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getFeature()
+   * @generated
+   * @ordered
+   */
+  protected String feature = FEATURE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -104,52 +104,6 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
   protected EClass eStaticClass()
   {
     return XtextPackage.Literals.ASSIGNMENT;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getFeature()
-  {
-    return feature;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setFeature(String newFeature)
-  {
-    String oldFeature = feature;
-    feature = newFeature;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ASSIGNMENT__FEATURE, oldFeature, feature));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getOperator()
-  {
-    return operator;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setOperator(String newOperator)
-  {
-    String oldOperator = operator;
-    operator = newOperator;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ASSIGNMENT__OPERATOR, oldOperator, operator));
   }
 
   /**
@@ -205,6 +159,52 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getOperator()
+  {
+    return operator;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setOperator(String newOperator)
+  {
+    String oldOperator = operator;
+    operator = newOperator;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ASSIGNMENT__OPERATOR, oldOperator, operator));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getFeature()
+  {
+    return feature;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setFeature(String newFeature)
+  {
+    String oldFeature = feature;
+    feature = newFeature;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ASSIGNMENT__FEATURE, oldFeature, feature));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -226,12 +226,12 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
   {
     switch (featureID)
     {
-      case XtextPackage.ASSIGNMENT__FEATURE:
-        return getFeature();
-      case XtextPackage.ASSIGNMENT__OPERATOR:
-        return getOperator();
       case XtextPackage.ASSIGNMENT__TERMINAL:
         return getTerminal();
+      case XtextPackage.ASSIGNMENT__OPERATOR:
+        return getOperator();
+      case XtextPackage.ASSIGNMENT__FEATURE:
+        return getFeature();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -246,14 +246,14 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
   {
     switch (featureID)
     {
-      case XtextPackage.ASSIGNMENT__FEATURE:
-        setFeature((String)newValue);
+      case XtextPackage.ASSIGNMENT__TERMINAL:
+        setTerminal((AbstractElement)newValue);
         return;
       case XtextPackage.ASSIGNMENT__OPERATOR:
         setOperator((String)newValue);
         return;
-      case XtextPackage.ASSIGNMENT__TERMINAL:
-        setTerminal((AbstractElement)newValue);
+      case XtextPackage.ASSIGNMENT__FEATURE:
+        setFeature((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -269,14 +269,14 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
   {
     switch (featureID)
     {
-      case XtextPackage.ASSIGNMENT__FEATURE:
-        setFeature(FEATURE_EDEFAULT);
+      case XtextPackage.ASSIGNMENT__TERMINAL:
+        setTerminal((AbstractElement)null);
         return;
       case XtextPackage.ASSIGNMENT__OPERATOR:
         setOperator(OPERATOR_EDEFAULT);
         return;
-      case XtextPackage.ASSIGNMENT__TERMINAL:
-        setTerminal((AbstractElement)null);
+      case XtextPackage.ASSIGNMENT__FEATURE:
+        setFeature(FEATURE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -292,12 +292,12 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
   {
     switch (featureID)
     {
-      case XtextPackage.ASSIGNMENT__FEATURE:
-        return FEATURE_EDEFAULT == null ? feature != null : !FEATURE_EDEFAULT.equals(feature);
-      case XtextPackage.ASSIGNMENT__OPERATOR:
-        return OPERATOR_EDEFAULT == null ? operator != null : !OPERATOR_EDEFAULT.equals(operator);
       case XtextPackage.ASSIGNMENT__TERMINAL:
         return terminal != null;
+      case XtextPackage.ASSIGNMENT__OPERATOR:
+        return OPERATOR_EDEFAULT == null ? operator != null : !OPERATOR_EDEFAULT.equals(operator);
+      case XtextPackage.ASSIGNMENT__FEATURE:
+        return FEATURE_EDEFAULT == null ? feature != null : !FEATURE_EDEFAULT.equals(feature);
     }
     return super.eIsSet(featureID);
   }
@@ -313,10 +313,10 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (feature: ");
-    result.append(feature);
-    result.append(", operator: ");
+    result.append(" (operator: ");
     result.append(operator);
+    result.append(", feature: ");
+    result.append(feature);
     result.append(')');
     return result.toString();
   }

@@ -13,7 +13,7 @@
 
 «EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
 «EXTENSION org::eclipse::xtext::parsetree::ParseTreeConstructor»
-«EXTENSION org::eclipse::xtext::TypeResolution»
+«EXTENSION org::eclipse::xtext::XtextUtil»
 «EXTENSION org::openarchitectureware::util::stdlib::collections»
 «EXTENSION org::openarchitectureware::util::stdlib::io»
 

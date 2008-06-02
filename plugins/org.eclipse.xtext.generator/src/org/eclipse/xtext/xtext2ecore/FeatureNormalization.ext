@@ -8,18 +8,28 @@
  *******************************************************************************/
 
 import ecore;
+import xtext;
+import xtextutil;
 
-extension org::openarchitectureware::util::stdlib::io; 
+extension org::openarchitectureware::util::stdlib::io;
+extension org::eclipse::xtext::xtext2ecore::Xtext2Ecore;
+extension org::eclipse::xtext::XtextUtil;
 
-List[EPackage] normalizeFeatures(List[EPackage] ePackages) :
-	let allClassifiers = ePackages.eClassifiers.flatten().typeSelect(EClass)	 :
+normalize(Grammar g) :
+	g.getAllMetaModels().select(e|e.isGenerate()).collect(e|normalizeFeatures(e.getEPackage(),e));
+	
+	
+// TODO make sure that only generated EClasses get modified
+
+EPackage normalizeFeatures(EPackage ePackage,MetaModel mm) :
+	let allClassifiers = ePackage.eClassifiers.typeSelect(EClass)	 :
 		allClassifiers.collect(
 			superType | 
 			normalizeFeatures(
 				superType, superType.findSubTypes(allClassifiers)
 			)
 		) ->
-		ePackages	
+		ePackage
 ;
 
 List[EClass] findSubTypes(EClass superType, List[EClass] candidates) :

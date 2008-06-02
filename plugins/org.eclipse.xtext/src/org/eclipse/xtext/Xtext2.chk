@@ -14,14 +14,15 @@ import xtext;
 import xtextutil; 
 
 extension org::eclipse::xtext::Extensions;
-extension org::eclipse::xtext::TypeResolution;
 
+/*
 context Action ERROR "Created class " + typeName.name + " cannot be resolved" :
 	resolveCreatedType() != null;
 	
 context Action if resolveCreatedType() != null ERROR "Created class does not inherit from the rule's return type" :
 	!resolveCreatedType().referenced() 
 	|| ((EClass) containingParserRule().resolveReturnType().eClassifier).isSuperTypeOf((EClass) resolveCreatedType().eClassifier);
+*/
 
 context Assignment ERROR "Assigned token must be a keyword or a rule call" :
 	Keyword.isInstance(terminal) || RuleCall.isInstance(terminal);
@@ -40,6 +41,7 @@ context Group ERROR "Group cannot contain more than one action" :
 context ParserRule ERROR "Name mut be unique" :
 	grammar().parserRules.select(p | p.name == name).size==1;
 
+/*
 context ParserRule ERROR "Returned class " + getReturnTypeName() + " cannot be resolved" :
 	resolveReturnType() != null;
 	
@@ -48,3 +50,4 @@ context ParserRule ERROR "Returned class " + getReturnTypeName() + " cannot be r
 context ReferencedMetamodel ERROR "Metamodels with same alias must not have a classifier in common" :
 	loadMetaModel().ePackage.eClassifiers.name.intersect(
 		grammar().referencedMetamodels().select(mm|mm.alias==alias && mm.declaration != this).ePackage.eClassifiers.name.flatten()).isEmpty;
+*/

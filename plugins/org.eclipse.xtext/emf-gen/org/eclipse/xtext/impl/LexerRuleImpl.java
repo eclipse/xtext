@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LexerRuleImpl.java,v 1.7 2008/05/23 08:22:10 jkohnlein Exp $
+ * $Id: LexerRuleImpl.java,v 1.8 2008/06/02 13:20:55 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -23,7 +23,6 @@ import org.eclipse.xtext.XtextPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.LexerRuleImpl#getBody <em>Body</em>}</li>
- *   <li>{@link org.eclipse.xtext.impl.LexerRuleImpl#getTokenType <em>Token Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,26 +49,6 @@ public class LexerRuleImpl extends AbstractRuleImpl implements LexerRule
    * @ordered
    */
   protected String body = BODY_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getTokenType() <em>Token Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTokenType()
-   * @generated
-   * @ordered
-   */
-  protected static final String TOKEN_TYPE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getTokenType() <em>Token Type</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTokenType()
-   * @generated
-   * @ordered
-   */
-  protected String tokenType = TOKEN_TYPE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -120,29 +99,6 @@ public class LexerRuleImpl extends AbstractRuleImpl implements LexerRule
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getTokenType()
-  {
-    return tokenType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setTokenType(String newTokenType)
-  {
-    String oldTokenType = tokenType;
-    tokenType = newTokenType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.LEXER_RULE__TOKEN_TYPE, oldTokenType, tokenType));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -150,8 +106,6 @@ public class LexerRuleImpl extends AbstractRuleImpl implements LexerRule
     {
       case XtextPackage.LEXER_RULE__BODY:
         return getBody();
-      case XtextPackage.LEXER_RULE__TOKEN_TYPE:
-        return getTokenType();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -168,9 +122,6 @@ public class LexerRuleImpl extends AbstractRuleImpl implements LexerRule
     {
       case XtextPackage.LEXER_RULE__BODY:
         setBody((String)newValue);
-        return;
-      case XtextPackage.LEXER_RULE__TOKEN_TYPE:
-        setTokenType((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -189,9 +140,6 @@ public class LexerRuleImpl extends AbstractRuleImpl implements LexerRule
       case XtextPackage.LEXER_RULE__BODY:
         setBody(BODY_EDEFAULT);
         return;
-      case XtextPackage.LEXER_RULE__TOKEN_TYPE:
-        setTokenType(TOKEN_TYPE_EDEFAULT);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -208,8 +156,6 @@ public class LexerRuleImpl extends AbstractRuleImpl implements LexerRule
     {
       case XtextPackage.LEXER_RULE__BODY:
         return BODY_EDEFAULT == null ? body != null : !BODY_EDEFAULT.equals(body);
-      case XtextPackage.LEXER_RULE__TOKEN_TYPE:
-        return TOKEN_TYPE_EDEFAULT == null ? tokenType != null : !TOKEN_TYPE_EDEFAULT.equals(tokenType);
     }
     return super.eIsSet(featureID);
   }
@@ -227,8 +173,6 @@ public class LexerRuleImpl extends AbstractRuleImpl implements LexerRule
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (body: ");
     result.append(body);
-    result.append(", tokenType: ");
-    result.append(tokenType);
     result.append(')');
     return result.toString();
   }

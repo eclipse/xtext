@@ -59,7 +59,6 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
-import org.eclipse.xtext.parser.internal.XtextGrammarTestTokenTypeResolver;
 }
 
 @parser::members {
@@ -71,10 +70,10 @@ import org.eclipse.xtext.parser.internal.XtextGrammarTestTokenTypeResolver;
     }
     
     protected void setLexerRule(LeafNode node, Token t) {
-        LexerRule lexerRule = XtextGrammarTestTokenTypeResolver.getLexerRule(node, t.getType());
+    /*    LexerRule lexerRule = XtextGrammarTestTokenTypeResolver.getLexerRule(node, t.getType());
         if(lexerRule != null) {
             node.setGrammarElement(lexerRule);
-        }
+        }*/
     }
 
 }
@@ -99,10 +98,44 @@ internalParse returns [EObject current=null] :
 // Rule Grammar
 ruleGrammar returns [EObject current=null] 
     @init { EObject temp=null; }:
-(((
+((((('language' 
+
+    {
+        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+    }
+(
+    lv_name=RULE_ID
+    { 
+    createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
+    }
+ 
+    {
+        if ($current==null) {
+            $current = factory.create("Grammar");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        factory.set($current, "name", lv_name);    }
+))('extends' 
+
+    {
+        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+    }
+(
+    lv_superGrammar=RULE_ID
+    { 
+    createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"superGrammar"); 
+    }
+ 
+    {
+        if ($current==null) {
+            $current = factory.create("Grammar");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        factory.set($current, "superGrammar", lv_superGrammar);    }
+))?)?(
     
     { 
-        currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
     lv_metamodelDeclarations=ruleAbstractMetamodelDeclaration 
     {
@@ -112,7 +145,7 @@ ruleGrammar returns [EObject current=null]
             associateNodeWithAstElement(currentNode, $current);
         }
         factory.add($current, "metamodelDeclarations", lv_metamodelDeclarations);    }
-)*(
+)*)(
     
     { 
         currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -288,23 +321,24 @@ ruleLexerRule returns [EObject current=null]
             associateNodeWithAstElement(currentNode, $current);
         }
         factory.set($current, "name", lv_name);    }
-)('tokentype' 
+)('returns' 
 
     {
         createLeafNode("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 (
-    lv_tokenType=RULE_ID
+    
     { 
-    createLeafNode("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"tokenType"); 
+        currentNode=createCompositeNode("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
- 
+    lv_type=ruleTypeRef 
     {
+        currentNode = currentNode.getParent();
         if ($current==null) {
             $current = factory.create("LexerRule");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "tokenType", lv_tokenType);    }
+        factory.set($current, "type", lv_type);    }
 ))?)':' 
 
     {
@@ -718,19 +752,19 @@ ruleRuleCall returns [EObject current=null]
 
 
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
-
-RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
-
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
-
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
+RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+
+RULE_LEXER_BODY : '<#' '.'* '#>';
 
 RULE_ANY_OTHER : .;
 

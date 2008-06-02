@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextSwitch.java,v 1.7 2008/05/23 08:22:20 jkohnlein Exp $
+ * $Id: XtextSwitch.java,v 1.8 2008/06/02 13:20:56 sefftinge Exp $
  */
 package org.eclipse.xtext.util;
 
@@ -96,13 +96,6 @@ public class XtextSwitch<T>
   {
     switch (classifierID)
     {
-      case XtextPackage.ABSTRACT_METAMODEL_DECLARATION:
-      {
-        AbstractMetamodelDeclaration abstractMetamodelDeclaration = (AbstractMetamodelDeclaration)theEObject;
-        T result = caseAbstractMetamodelDeclaration(abstractMetamodelDeclaration);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case XtextPackage.ABSTRACT_RULE:
       {
         AbstractRule abstractRule = (AbstractRule)theEObject;
@@ -114,6 +107,14 @@ public class XtextSwitch<T>
       {
         TypeRef typeRef = (TypeRef)theEObject;
         T result = caseTypeRef(typeRef);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XtextPackage.LEXER_RULE:
+      {
+        LexerRule lexerRule = (LexerRule)theEObject;
+        T result = caseLexerRule(lexerRule);
+        if (result == null) result = caseAbstractRule(lexerRule);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -132,11 +133,10 @@ public class XtextSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XtextPackage.LEXER_RULE:
+      case XtextPackage.ABSTRACT_METAMODEL_DECLARATION:
       {
-        LexerRule lexerRule = (LexerRule)theEObject;
-        T result = caseLexerRule(lexerRule);
-        if (result == null) result = caseAbstractRule(lexerRule);
+        AbstractMetamodelDeclaration abstractMetamodelDeclaration = (AbstractMetamodelDeclaration)theEObject;
+        T result = caseAbstractMetamodelDeclaration(abstractMetamodelDeclaration);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -216,22 +216,6 @@ public class XtextSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Abstract Metamodel Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Abstract Metamodel Declaration</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAbstractMetamodelDeclaration(AbstractMetamodelDeclaration object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Abstract Rule</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -259,6 +243,22 @@ public class XtextSwitch<T>
    * @generated
    */
   public T caseTypeRef(TypeRef object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Lexer Rule</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Lexer Rule</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLexerRule(LexerRule object)
   {
     return null;
   }
@@ -296,17 +296,17 @@ public class XtextSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Lexer Rule</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Abstract Metamodel Declaration</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Lexer Rule</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Abstract Metamodel Declaration</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseLexerRule(LexerRule object)
+  public T caseAbstractMetamodelDeclaration(AbstractMetamodelDeclaration object)
   {
     return null;
   }

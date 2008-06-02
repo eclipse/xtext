@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractRule.java,v 1.6 2008/05/23 08:22:19 jkohnlein Exp $
+ * $Id: AbstractRule.java,v 1.7 2008/06/02 13:20:56 sefftinge Exp $
  */
 package org.eclipse.xtext;
 
@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.AbstractRule#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.AbstractRule#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,5 +52,31 @@ public interface AbstractRule extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Type</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Type</em>' containment reference.
+   * @see #setType(TypeRef)
+   * @see org.eclipse.xtext.XtextPackage#getAbstractRule_Type()
+   * @model containment="true"
+   * @generated
+   */
+  TypeRef getType();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.AbstractRule#getType <em>Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Type</em>' containment reference.
+   * @see #getType()
+   * @generated
+   */
+  void setType(TypeRef value);
 
 } // AbstractRule

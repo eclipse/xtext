@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextAdapterFactory.java,v 1.7 2008/05/23 08:22:21 jkohnlein Exp $
+ * $Id: XtextAdapterFactory.java,v 1.8 2008/06/02 13:20:56 sefftinge Exp $
  */
 package org.eclipse.xtext.util;
 
@@ -79,11 +79,6 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
     new XtextSwitch<Adapter>()
     {
       @Override
-      public Adapter caseAbstractMetamodelDeclaration(AbstractMetamodelDeclaration object)
-      {
-        return createAbstractMetamodelDeclarationAdapter();
-      }
-      @Override
       public Adapter caseAbstractRule(AbstractRule object)
       {
         return createAbstractRuleAdapter();
@@ -92,6 +87,11 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
       public Adapter caseTypeRef(TypeRef object)
       {
         return createTypeRefAdapter();
+      }
+      @Override
+      public Adapter caseLexerRule(LexerRule object)
+      {
+        return createLexerRuleAdapter();
       }
       @Override
       public Adapter caseAbstractElement(AbstractElement object)
@@ -104,9 +104,9 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
         return createParserRuleAdapter();
       }
       @Override
-      public Adapter caseLexerRule(LexerRule object)
+      public Adapter caseAbstractMetamodelDeclaration(AbstractMetamodelDeclaration object)
       {
-        return createLexerRuleAdapter();
+        return createAbstractMetamodelDeclarationAdapter();
       }
       @Override
       public Adapter caseGrammar(Grammar object)
@@ -176,21 +176,6 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.AbstractMetamodelDeclaration <em>Abstract Metamodel Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.AbstractMetamodelDeclaration
-   * @generated
-   */
-  public Adapter createAbstractMetamodelDeclarationAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.AbstractRule <em>Abstract Rule</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -216,6 +201,21 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTypeRefAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.LexerRule <em>Lexer Rule</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.LexerRule
+   * @generated
+   */
+  public Adapter createLexerRuleAdapter()
   {
     return null;
   }
@@ -251,16 +251,16 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.LexerRule <em>Lexer Rule</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.AbstractMetamodelDeclaration <em>Abstract Metamodel Declaration</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.LexerRule
+   * @see org.eclipse.xtext.AbstractMetamodelDeclaration
    * @generated
    */
-  public Adapter createLexerRuleAdapter()
+  public Adapter createAbstractMetamodelDeclarationAdapter()
   {
     return null;
   }

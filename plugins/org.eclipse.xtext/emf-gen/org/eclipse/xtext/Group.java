@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Group.java,v 1.6 2008/05/23 08:22:19 jkohnlein Exp $
+ * $Id: Group.java,v 1.7 2008/06/02 13:20:56 sefftinge Exp $
  */
 package org.eclipse.xtext;
 

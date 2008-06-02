@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LeafNode.java,v 1.1 2008/05/23 08:22:20 jkohnlein Exp $
+ * $Id: LeafNode.java,v 1.2 2008/06/02 13:20:56 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -104,13 +104,5 @@ public interface LeafNode extends AbstractNode
    * @generated
    */
   void setHidden(boolean value);
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='{return ParsetreeUtil.tokenType((LeafNodeImpl) this);}'"
-   * @generated
-   */
-  String tokenType();
 
 } // LeafNode

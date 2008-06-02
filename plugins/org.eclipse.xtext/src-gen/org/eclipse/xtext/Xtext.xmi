@@ -4,8 +4,24 @@
   <parserRules name="Grammar">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="metamodelDeclarations" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" name="AbstractMetamodelDeclaration"/>
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group" cardinality="?">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Keyword" value="'language'"/>
+              <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+                <terminal xsi:type="xtext:RuleCall" name="ID"/>
+              </abstractTokens>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Group" cardinality="?">
+              <abstractTokens xsi:type="xtext:Keyword" value="'extends'"/>
+              <abstractTokens xsi:type="xtext:Assignment" feature="superGrammar" operator="=">
+                <terminal xsi:type="xtext:RuleCall" name="ID"/>
+              </abstractTokens>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="metamodelDeclarations" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" name="AbstractMetamodelDeclaration"/>
+          </abstractTokens>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="parserRules" operator="+=">
           <terminal xsi:type="xtext:RuleCall" name="ParserRule"/>
@@ -75,21 +91,24 @@
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
-          <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-            <terminal xsi:type="xtext:RuleCall" name="ID"/>
-          </abstractTokens>
-          <abstractTokens xsi:type="xtext:Group" cardinality="?">
-            <abstractTokens xsi:type="xtext:Keyword" value="'tokentype'"/>
-            <abstractTokens xsi:type="xtext:Assignment" feature="tokenType" operator="=">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
               <terminal xsi:type="xtext:RuleCall" name="ID"/>
             </abstractTokens>
+            <abstractTokens xsi:type="xtext:Group" cardinality="?">
+              <abstractTokens xsi:type="xtext:Keyword" value="'returns'"/>
+              <abstractTokens xsi:type="xtext:Assignment" feature="type" operator="=">
+                <terminal xsi:type="xtext:RuleCall" name="TypeRef"/>
+              </abstractTokens>
+            </abstractTokens>
           </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value="':'"/>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Keyword" value="':'"/>
+        <abstractTokens xsi:type="xtext:Assignment" feature="body" operator="=">
+          <terminal xsi:type="xtext:RuleCall" name="STRING"/>
+        </abstractTokens>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" feature="body" operator="=">
-        <terminal xsi:type="xtext:RuleCall" name="LEXER_BODY"/>
-      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="';'"/>
     </alternatives>
   </parserRules>
   <parserRules name="ParserRule">

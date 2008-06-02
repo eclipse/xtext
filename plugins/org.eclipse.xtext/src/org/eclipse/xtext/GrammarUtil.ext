@@ -1,0 +1,78 @@
+/*******************************************************************************
+* Copyright (c) 2008 itemis AG and others.
+* All rights reserved. This program and the accompanying materials
+* are made available under the terms of the Eclipse Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+* Contributors:
+* committers of openArchitectureWare - initial API and implementation
+*******************************************************************************/
+
+import ecore;
+import xtext;
+
+isAbstract(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.isAbstract(org.eclipse.xtext.Grammar);
+
+String getID(emf::EObject object) :
+	JAVA org.eclipse.xtext.GrammarUtil.getID(org.eclipse.emf.ecore.EObject);
+
+// ***********************************************************************************
+// Containers
+
+Grammar grammar(emf::EObject e) :
+	JAVA org.eclipse.xtext.GrammarUtil.getGrammar(org.eclipse.emf.ecore.EObject); 
+
+ParserRule containingParserRule(emf::EObject e) :
+	JAVA org.eclipse.xtext.GrammarUtil.containingParserRule(org.eclipse.emf.ecore.EObject);
+	 
+Assignment containingAssignment(emf::EObject e) :
+	JAVA org.eclipse.xtext.GrammarUtil.containingAssignment(org.eclipse.emf.ecore.EObject);
+
+Group containingGroup(emf::EObject e) :
+	JAVA org.eclipse.xtext.GrammarUtil.containingGroup(org.eclipse.emf.ecore.EObject);
+	
+List[AbstractElement] elementsBeforeThisInContainingGroup(AbstractElement e) :
+	JAVA org.eclipse.xtext.GrammarUtil.elementsBeforeThisInContainingGroup(org.eclipse.xtext.AbstractElement);
+
+// ***********************************************************************************
+// Containment
+
+List[Action] containedActions(emf::EObject o) :
+	JAVA org.eclipse.xtext.GrammarUtil.containedActions(org.eclipse.emf.ecore.EObject);
+
+List[RuleCall] containedRuleCalls(emf::EObject o) :
+	JAVA org.eclipse.xtext.GrammarUtil.containedRuleCalls(org.eclipse.emf.ecore.EObject);
+
+List[Assignment] containedAssignments(emf::EObject o) :
+	JAVA org.eclipse.xtext.GrammarUtil.containedAssignments(org.eclipse.emf.ecore.EObject);
+
+
+// ***********************************************************************************
+// Shortcuts
+	 
+AbstractRule calledRule(RuleCall this) :
+	JAVA org.eclipse.xtext.GrammarUtil.calledRule(org.eclipse.xtext.RuleCall);
+
+String getReturnTypeName(AbstractRule p) :
+	JAVA org.eclipse.xtext.GrammarUtil.getReturnTypeName(org.eclipse.xtext.AbstractRule);
+	
+Boolean isAssigned(emf::EObject this) : 
+	JAVA org.eclipse.xtext.GrammarUtil.isAssigned(org.eclipse.emf.ecore.EObject);	
+	
+List[LexerRule] allLexerRules(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.allLexerRules(org.eclipse.xtext.Grammar);
+
+List[ParserRule] allParserRules(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.allParserRules(org.eclipse.xtext.Grammar);
+	
+List[AbstractMetamodelDeclaration] allMetamodelDeclarations(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.allMetamodelDeclarations(org.eclipse.xtext.Grammar);
+
+List[AbstractRule] allRules(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.allRules(org.eclipse.xtext.Grammar);
+
+String getQualifiedName(TypeRef this) :
+	JAVA org.eclipse.xtext.GrammarUtil.getQualifiedName(org.eclipse.xtext.TypeRef);
+

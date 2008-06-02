@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextFactory.java,v 1.6 2008/05/23 08:22:18 jkohnlein Exp $
+ * $Id: XtextFactory.java,v 1.7 2008/06/02 13:20:56 sefftinge Exp $
  */
 package org.eclipse.xtext;
 
@@ -36,6 +36,15 @@ public interface XtextFactory extends EFactory
   TypeRef createTypeRef();
 
   /**
+   * Returns a new object of class '<em>Lexer Rule</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Lexer Rule</em>'.
+   * @generated
+   */
+  LexerRule createLexerRule();
+
+  /**
    * Returns a new object of class '<em>Abstract Element</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -52,15 +61,6 @@ public interface XtextFactory extends EFactory
    * @generated
    */
   ParserRule createParserRule();
-
-  /**
-   * Returns a new object of class '<em>Lexer Rule</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Lexer Rule</em>'.
-   * @generated
-   */
-  LexerRule createLexerRule();
 
   /**
    * Returns a new object of class '<em>Grammar</em>'.

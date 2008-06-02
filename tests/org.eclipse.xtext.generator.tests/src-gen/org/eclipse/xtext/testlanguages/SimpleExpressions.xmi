@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simpleExpressions" nsURI="&quot;http://www.eclipse.org/xtext/test/simpleExpressions&quot;"/>
   <parserRules name="Multiplication">
     <type name="Expression"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall" name="Addition"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
         <abstractTokens xsi:type="xtext:Group">
-          <abstractTokens xsi:type="xtext:Action" operator="+=" feature="values">
+          <abstractTokens xsi:type="xtext:Action" feature="values" operator="+=">
             <typeName name="Op"/>
           </abstractTokens>
-          <abstractTokens xsi:type="xtext:Assignment" feature="operator" operator="=">
+          <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="operator">
             <terminal xsi:type="xtext:Alternatives">
               <groups xsi:type="xtext:Keyword" value="'+'"/>
               <groups xsi:type="xtext:Keyword" value="'-'"/>
             </terminal>
           </abstractTokens>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" feature="values" operator="+=">
+        <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="values">
           <terminal xsi:type="xtext:RuleCall" name="Addition"/>
         </abstractTokens>
       </abstractTokens>
@@ -29,17 +28,17 @@
       <abstractTokens xsi:type="xtext:RuleCall" name="Term"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
         <abstractTokens xsi:type="xtext:Group">
-          <abstractTokens xsi:type="xtext:Action" operator="+=" feature="values">
+          <abstractTokens xsi:type="xtext:Action" feature="values" operator="+=">
             <typeName name="Op"/>
           </abstractTokens>
-          <abstractTokens xsi:type="xtext:Assignment" feature="operator" operator="=">
+          <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="operator">
             <terminal xsi:type="xtext:Alternatives">
               <groups xsi:type="xtext:Keyword" value="'*'"/>
               <groups xsi:type="xtext:Keyword" value="'/'"/>
             </terminal>
           </abstractTokens>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" feature="values" operator="+=">
+        <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="values">
           <terminal xsi:type="xtext:RuleCall" name="Term"/>
         </abstractTokens>
       </abstractTokens>
@@ -53,7 +52,7 @@
     </alternatives>
   </parserRules>
   <parserRules name="Atom">
-    <alternatives xsi:type="xtext:Assignment" feature="name" operator="=">
+    <alternatives xsi:type="xtext:Assignment" operator="=" feature="name">
       <terminal xsi:type="xtext:RuleCall" name="ID"/>
     </alternatives>
   </parserRules>
@@ -67,4 +66,5 @@
       <abstractTokens xsi:type="xtext:Keyword" value="')'"/>
     </alternatives>
   </parserRules>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simpleExpressions" nsURI="&quot;http://www.eclipse.org/xtext/test/simpleExpressions&quot;"/>
 </xtext:Grammar>

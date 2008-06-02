@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActionImpl.java,v 1.7 2008/05/23 08:22:10 jkohnlein Exp $
+ * $Id: ActionImpl.java,v 1.8 2008/06/02 13:20:55 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -25,8 +25,8 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.ActionImpl#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.ActionImpl#getFeature <em>Feature</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.ActionImpl#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.ActionImpl#getTypeName <em>Type Name</em>}</li>
  * </ul>
  * </p>
@@ -35,26 +35,6 @@ import org.eclipse.xtext.XtextPackage;
  */
 public class ActionImpl extends AbstractElementImpl implements Action
 {
-  /**
-   * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOperator()
-   * @generated
-   * @ordered
-   */
-  protected static final String OPERATOR_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getOperator()
-   * @generated
-   * @ordered
-   */
-  protected String operator = OPERATOR_EDEFAULT;
-
   /**
    * The default value of the '{@link #getFeature() <em>Feature</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -74,6 +54,26 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * @ordered
    */
   protected String feature = FEATURE_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperator()
+   * @generated
+   * @ordered
+   */
+  protected static final String OPERATOR_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperator()
+   * @generated
+   * @ordered
+   */
+  protected String operator = OPERATOR_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getTypeName() <em>Type Name</em>}' containment reference.
@@ -111,29 +111,6 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getOperator()
-  {
-    return operator;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setOperator(String newOperator)
-  {
-    String oldOperator = operator;
-    operator = newOperator;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ACTION__OPERATOR, oldOperator, operator));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public String getFeature()
   {
     return feature;
@@ -150,6 +127,29 @@ public class ActionImpl extends AbstractElementImpl implements Action
     feature = newFeature;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ACTION__FEATURE, oldFeature, feature));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getOperator()
+  {
+    return operator;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setOperator(String newOperator)
+  {
+    String oldOperator = operator;
+    operator = newOperator;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ACTION__OPERATOR, oldOperator, operator));
   }
 
   /**
@@ -226,10 +226,10 @@ public class ActionImpl extends AbstractElementImpl implements Action
   {
     switch (featureID)
     {
-      case XtextPackage.ACTION__OPERATOR:
-        return getOperator();
       case XtextPackage.ACTION__FEATURE:
         return getFeature();
+      case XtextPackage.ACTION__OPERATOR:
+        return getOperator();
       case XtextPackage.ACTION__TYPE_NAME:
         return getTypeName();
     }
@@ -246,11 +246,11 @@ public class ActionImpl extends AbstractElementImpl implements Action
   {
     switch (featureID)
     {
-      case XtextPackage.ACTION__OPERATOR:
-        setOperator((String)newValue);
-        return;
       case XtextPackage.ACTION__FEATURE:
         setFeature((String)newValue);
+        return;
+      case XtextPackage.ACTION__OPERATOR:
+        setOperator((String)newValue);
         return;
       case XtextPackage.ACTION__TYPE_NAME:
         setTypeName((TypeRef)newValue);
@@ -269,11 +269,11 @@ public class ActionImpl extends AbstractElementImpl implements Action
   {
     switch (featureID)
     {
-      case XtextPackage.ACTION__OPERATOR:
-        setOperator(OPERATOR_EDEFAULT);
-        return;
       case XtextPackage.ACTION__FEATURE:
         setFeature(FEATURE_EDEFAULT);
+        return;
+      case XtextPackage.ACTION__OPERATOR:
+        setOperator(OPERATOR_EDEFAULT);
         return;
       case XtextPackage.ACTION__TYPE_NAME:
         setTypeName((TypeRef)null);
@@ -292,10 +292,10 @@ public class ActionImpl extends AbstractElementImpl implements Action
   {
     switch (featureID)
     {
-      case XtextPackage.ACTION__OPERATOR:
-        return OPERATOR_EDEFAULT == null ? operator != null : !OPERATOR_EDEFAULT.equals(operator);
       case XtextPackage.ACTION__FEATURE:
         return FEATURE_EDEFAULT == null ? feature != null : !FEATURE_EDEFAULT.equals(feature);
+      case XtextPackage.ACTION__OPERATOR:
+        return OPERATOR_EDEFAULT == null ? operator != null : !OPERATOR_EDEFAULT.equals(operator);
       case XtextPackage.ACTION__TYPE_NAME:
         return typeName != null;
     }
@@ -313,10 +313,10 @@ public class ActionImpl extends AbstractElementImpl implements Action
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (operator: ");
-    result.append(operator);
-    result.append(", feature: ");
+    result.append(" (feature: ");
     result.append(feature);
+    result.append(", operator: ");
+    result.append(operator);
     result.append(')');
     return result.toString();
   }

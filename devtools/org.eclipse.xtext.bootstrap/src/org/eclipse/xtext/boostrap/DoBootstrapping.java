@@ -9,6 +9,8 @@
 package org.eclipse.xtext.boostrap;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -34,16 +36,26 @@ public class DoBootstrapping {
 		String filename = "../org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext";
 		String languageName = "Xtext";
 		String languageNamespace = "org/eclipse/xtext";
-		String modelFileExtension = "xtext";
+		String builtinFilename = "../org.eclipse.xtext/src/org/eclipse/xtext/builtin/XtextBuiltIn.xtext";
+		String builtinlanguageName = "XtextBuiltIn";
+		String builtinlanguageNamespace = "org/eclipse/xtext/builtin";
 		
 		System.out.println("loading " + filename);
-		InputStream resourceAsStream = new FileInputStream(filename);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"ecore", new XMIResourceFactoryImpl());
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-		//TODO make Xtext2Factory manual so one can overwrite 'getEPackages' in order to support generated epackages
 		EPackage.Registry.INSTANCE.put(XtextLanguageFacade.XTEXT_NS_URI, XtextPackage.eINSTANCE);
+		
+		generate(srcGenPath, filename, languageName, languageNamespace);
+
+//		generate(srcGenPath, builtinFilename, builtinlanguageName, builtinlanguageNamespace);
+	}
+
+	private static void generate(String srcGenPath, String filename, String languageName, String languageNamespace)
+			throws FileNotFoundException, IOException {
+		String modelFileExtension = "xtext";
+		InputStream resourceAsStream = new FileInputStream(filename);
 		XtextParser xtext2Parser= new XtextParser();
 		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory()).getRootASTElement();
 		GeneratorFacade.cleanFolder(srcGenPath);

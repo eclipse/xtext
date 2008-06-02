@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LeafNodeImpl.java,v 1.1 2008/05/23 08:22:18 jkohnlein Exp $
+ * $Id: LeafNodeImpl.java,v 1.2 2008/06/02 13:20:56 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParsetreePackage;
-import org.eclipse.xtext.parsetree.impl.ParsetreeUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -181,16 +180,6 @@ public class LeafNodeImpl extends AbstractNodeImpl implements LeafNode
     hidden = newHidden;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.LEAF_NODE__HIDDEN, oldHidden, hidden));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String tokenType()
-  {
-    {return ParsetreeUtil.tokenType((LeafNodeImpl) this);}
   }
 
   /**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextFactoryImpl.java,v 1.7 2008/05/23 08:22:10 jkohnlein Exp $
+ * $Id: XtextFactoryImpl.java,v 1.8 2008/06/02 13:20:55 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -69,9 +69,9 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
     switch (eClass.getClassifierID())
     {
       case XtextPackage.TYPE_REF: return createTypeRef();
+      case XtextPackage.LEXER_RULE: return createLexerRule();
       case XtextPackage.ABSTRACT_ELEMENT: return createAbstractElement();
       case XtextPackage.PARSER_RULE: return createParserRule();
-      case XtextPackage.LEXER_RULE: return createLexerRule();
       case XtextPackage.GRAMMAR: return createGrammar();
       case XtextPackage.GENERATED_METAMODEL: return createGeneratedMetamodel();
       case XtextPackage.REFERENCED_METAMODEL: return createReferencedMetamodel();
@@ -102,6 +102,17 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public LexerRule createLexerRule()
+  {
+    LexerRuleImpl lexerRule = new LexerRuleImpl();
+    return lexerRule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public AbstractElement createAbstractElement()
   {
     AbstractElementImpl abstractElement = new AbstractElementImpl();
@@ -117,17 +128,6 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
   {
     ParserRuleImpl parserRule = new ParserRuleImpl();
     return parserRule;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public LexerRule createLexerRule()
-  {
-    LexerRuleImpl lexerRule = new LexerRuleImpl();
-    return lexerRule;
   }
 
   /**

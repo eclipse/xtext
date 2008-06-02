@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GrammarImpl.java,v 1.7 2008/05/23 08:22:10 jkohnlein Exp $
+ * $Id: GrammarImpl.java,v 1.8 2008/06/02 13:20:55 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -33,9 +35,11 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
- *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getParserRules <em>Parser Rules</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getLexerRules <em>Lexer Rules</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getParserRules <em>Parser Rules</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getSuperGrammar <em>Super Grammar</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,14 +48,14 @@ import org.eclipse.xtext.XtextPackage;
 public class GrammarImpl extends EObjectImpl implements Grammar
 {
   /**
-   * The cached value of the '{@link #getMetamodelDeclarations() <em>Metamodel Declarations</em>}' containment reference list.
+   * The cached value of the '{@link #getLexerRules() <em>Lexer Rules</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getMetamodelDeclarations()
+   * @see #getLexerRules()
    * @generated
    * @ordered
    */
-  protected EList<AbstractMetamodelDeclaration> metamodelDeclarations;
+  protected EList<LexerRule> lexerRules;
 
   /**
    * The cached value of the '{@link #getParserRules() <em>Parser Rules</em>}' containment reference list.
@@ -64,14 +68,54 @@ public class GrammarImpl extends EObjectImpl implements Grammar
   protected EList<ParserRule> parserRules;
 
   /**
-   * The cached value of the '{@link #getLexerRules() <em>Lexer Rules</em>}' containment reference list.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLexerRules()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected EList<LexerRule> lexerRules;
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getSuperGrammar() <em>Super Grammar</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSuperGrammar()
+   * @generated
+   * @ordered
+   */
+  protected static final String SUPER_GRAMMAR_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getSuperGrammar() <em>Super Grammar</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSuperGrammar()
+   * @generated
+   * @ordered
+   */
+  protected String superGrammar = SUPER_GRAMMAR_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getMetamodelDeclarations() <em>Metamodel Declarations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMetamodelDeclarations()
+   * @generated
+   * @ordered
+   */
+  protected EList<AbstractMetamodelDeclaration> metamodelDeclarations;
 
   /**
    * <!-- begin-user-doc -->
@@ -99,13 +143,13 @@ public class GrammarImpl extends EObjectImpl implements Grammar
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AbstractMetamodelDeclaration> getMetamodelDeclarations()
+  public EList<LexerRule> getLexerRules()
   {
-    if (metamodelDeclarations == null)
+    if (lexerRules == null)
     {
-      metamodelDeclarations = new EObjectContainmentEList<AbstractMetamodelDeclaration>(AbstractMetamodelDeclaration.class, this, XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS);
+      lexerRules = new EObjectContainmentEList<LexerRule>(LexerRule.class, this, XtextPackage.GRAMMAR__LEXER_RULES);
     }
-    return metamodelDeclarations;
+    return lexerRules;
   }
 
   /**
@@ -127,13 +171,59 @@ public class GrammarImpl extends EObjectImpl implements Grammar
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<LexerRule> getLexerRules()
+  public String getName()
   {
-    if (lexerRules == null)
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.GRAMMAR__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getSuperGrammar()
+  {
+    return superGrammar;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setSuperGrammar(String newSuperGrammar)
+  {
+    String oldSuperGrammar = superGrammar;
+    superGrammar = newSuperGrammar;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.GRAMMAR__SUPER_GRAMMAR, oldSuperGrammar, superGrammar));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<AbstractMetamodelDeclaration> getMetamodelDeclarations()
+  {
+    if (metamodelDeclarations == null)
     {
-      lexerRules = new EObjectContainmentEList<LexerRule>(LexerRule.class, this, XtextPackage.GRAMMAR__LEXER_RULES);
+      metamodelDeclarations = new EObjectContainmentEList<AbstractMetamodelDeclaration>(AbstractMetamodelDeclaration.class, this, XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS);
     }
-    return lexerRules;
+    return metamodelDeclarations;
   }
 
   /**
@@ -146,12 +236,12 @@ public class GrammarImpl extends EObjectImpl implements Grammar
   {
     switch (featureID)
     {
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        return ((InternalEList<?>)getMetamodelDeclarations()).basicRemove(otherEnd, msgs);
-      case XtextPackage.GRAMMAR__PARSER_RULES:
-        return ((InternalEList<?>)getParserRules()).basicRemove(otherEnd, msgs);
       case XtextPackage.GRAMMAR__LEXER_RULES:
         return ((InternalEList<?>)getLexerRules()).basicRemove(otherEnd, msgs);
+      case XtextPackage.GRAMMAR__PARSER_RULES:
+        return ((InternalEList<?>)getParserRules()).basicRemove(otherEnd, msgs);
+      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+        return ((InternalEList<?>)getMetamodelDeclarations()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -166,12 +256,16 @@ public class GrammarImpl extends EObjectImpl implements Grammar
   {
     switch (featureID)
     {
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        return getMetamodelDeclarations();
-      case XtextPackage.GRAMMAR__PARSER_RULES:
-        return getParserRules();
       case XtextPackage.GRAMMAR__LEXER_RULES:
         return getLexerRules();
+      case XtextPackage.GRAMMAR__PARSER_RULES:
+        return getParserRules();
+      case XtextPackage.GRAMMAR__NAME:
+        return getName();
+      case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
+        return getSuperGrammar();
+      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+        return getMetamodelDeclarations();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -187,17 +281,23 @@ public class GrammarImpl extends EObjectImpl implements Grammar
   {
     switch (featureID)
     {
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        getMetamodelDeclarations().clear();
-        getMetamodelDeclarations().addAll((Collection<? extends AbstractMetamodelDeclaration>)newValue);
+      case XtextPackage.GRAMMAR__LEXER_RULES:
+        getLexerRules().clear();
+        getLexerRules().addAll((Collection<? extends LexerRule>)newValue);
         return;
       case XtextPackage.GRAMMAR__PARSER_RULES:
         getParserRules().clear();
         getParserRules().addAll((Collection<? extends ParserRule>)newValue);
         return;
-      case XtextPackage.GRAMMAR__LEXER_RULES:
-        getLexerRules().clear();
-        getLexerRules().addAll((Collection<? extends LexerRule>)newValue);
+      case XtextPackage.GRAMMAR__NAME:
+        setName((String)newValue);
+        return;
+      case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
+        setSuperGrammar((String)newValue);
+        return;
+      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+        getMetamodelDeclarations().clear();
+        getMetamodelDeclarations().addAll((Collection<? extends AbstractMetamodelDeclaration>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -213,14 +313,20 @@ public class GrammarImpl extends EObjectImpl implements Grammar
   {
     switch (featureID)
     {
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        getMetamodelDeclarations().clear();
+      case XtextPackage.GRAMMAR__LEXER_RULES:
+        getLexerRules().clear();
         return;
       case XtextPackage.GRAMMAR__PARSER_RULES:
         getParserRules().clear();
         return;
-      case XtextPackage.GRAMMAR__LEXER_RULES:
-        getLexerRules().clear();
+      case XtextPackage.GRAMMAR__NAME:
+        setName(NAME_EDEFAULT);
+        return;
+      case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
+        setSuperGrammar(SUPER_GRAMMAR_EDEFAULT);
+        return;
+      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+        getMetamodelDeclarations().clear();
         return;
     }
     super.eUnset(featureID);
@@ -236,14 +342,37 @@ public class GrammarImpl extends EObjectImpl implements Grammar
   {
     switch (featureID)
     {
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        return metamodelDeclarations != null && !metamodelDeclarations.isEmpty();
-      case XtextPackage.GRAMMAR__PARSER_RULES:
-        return parserRules != null && !parserRules.isEmpty();
       case XtextPackage.GRAMMAR__LEXER_RULES:
         return lexerRules != null && !lexerRules.isEmpty();
+      case XtextPackage.GRAMMAR__PARSER_RULES:
+        return parserRules != null && !parserRules.isEmpty();
+      case XtextPackage.GRAMMAR__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
+        return SUPER_GRAMMAR_EDEFAULT == null ? superGrammar != null : !SUPER_GRAMMAR_EDEFAULT.equals(superGrammar);
+      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+        return metamodelDeclarations != null && !metamodelDeclarations.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(", superGrammar: ");
+    result.append(superGrammar);
+    result.append(')');
+    return result.toString();
   }
 
 } //GrammarImpl

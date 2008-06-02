@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNodeImpl.java,v 1.1 2008/05/23 08:22:17 jkohnlein Exp $
+ * $Id: AbstractNodeImpl.java,v 1.2 2008/06/02 13:20:56 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -24,7 +24,6 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParsetreePackage;
-import org.eclipse.xtext.parsetree.impl.ParsetreeUtil;
 
 /**
  * <!-- begin-user-doc -->

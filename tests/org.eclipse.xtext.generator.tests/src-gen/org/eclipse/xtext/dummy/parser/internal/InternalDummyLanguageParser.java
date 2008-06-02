@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g 2008-06-02 14:29:33
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g 2008-06-02 15:08:53
 
 package org.eclipse.xtext.dummy.parser.internal; 
 
@@ -9,7 +9,6 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
-import org.eclipse.xtext.dummy.parser.internal.DummyLanguageTokenTypeResolver;
 
 
 import org.antlr.runtime.*;
@@ -19,17 +18,17 @@ import java.util.ArrayList;
 
 public class InternalDummyLanguageParser extends AbstractAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_SL_COMMENT", "RULE_WS", "RULE_INT", "RULE_LEXER_BODY", "RULE_ML_COMMENT", "RULE_ANY_OTHER", "'optional'", "'element'", "';'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_LEXER_BODY", "RULE_ANY_OTHER", "'optional'", "'element'", "';'"
     };
-    public static final int RULE_ML_COMMENT=10;
+    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=7;
-    public static final int RULE_INT=8;
+    public static final int RULE_WS=9;
     public static final int EOF=-1;
+    public static final int RULE_INT=6;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=6;
-    public static final int RULE_LEXER_BODY=9;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_LEXER_BODY=10;
 
         public InternalDummyLanguageParser(TokenStream input) {
             super(input);
@@ -48,26 +47,26 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
         }
         
         protected void setLexerRule(LeafNode node, Token t) {
-            LexerRule lexerRule = DummyLanguageTokenTypeResolver.getLexerRule(node, t.getType());
+        /*    LexerRule lexerRule = DummyLanguageTokenTypeResolver.getLexerRule(node, t.getType());
             if(lexerRule != null) {
                 node.setGrammarElement(lexerRule);
-            }
+            }*/
         }
 
 
 
 
     // $ANTLR start internalParse
-    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:91:1: internalParse returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
-    public EObject internalParse() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:90:1: internalParse returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    public final EObject internalParse() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleModel = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:92:3: (iv_ruleModel= ruleModel EOF )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:92:3: iv_ruleModel= ruleModel EOF
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:90:46: (iv_ruleModel= ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:91:3: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_internalParse76);
@@ -95,8 +94,8 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleModel
-    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:100:1: ruleModel returns [EObject current=null] : (lv_elements= ruleElement )* ;
-    public EObject ruleModel() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:99:1: ruleModel returns [EObject current=null] : (lv_elements= ruleElement )* ;
+    public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_elements = null;
@@ -104,10 +103,10 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:102:1: ( (lv_elements= ruleElement )* )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:102:1: (lv_elements= ruleElement )*
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:100:33: ( (lv_elements= ruleElement )* )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:101:1: (lv_elements= ruleElement )*
             {
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:102:1: (lv_elements= ruleElement )*
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:101:1: (lv_elements= ruleElement )*
             loop1:
             do {
                 int alt1=2;
@@ -120,7 +119,7 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:104:5: lv_elements= ruleElement
+            	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:103:5: lv_elements= ruleElement
             	    {
             	     
             	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -164,8 +163,8 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleElement
-    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:119:1: ruleElement returns [EObject current=null] : ( ( ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) ) (lv_descriptions= RULE_STRING )* ) ';' ) ;
-    public EObject ruleElement() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:118:1: ruleElement returns [EObject current=null] : ( ( ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) ) (lv_descriptions= RULE_STRING )* ) ';' ) ;
+    public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
         Token lv_optional=null;
@@ -174,22 +173,22 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:121:1: ( ( ( ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) ) (lv_descriptions= RULE_STRING )* ) ';' ) )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:121:1: ( ( ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) ) (lv_descriptions= RULE_STRING )* ) ';' )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:119:33: ( ( ( ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) ) (lv_descriptions= RULE_STRING )* ) ';' ) )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:120:1: ( ( ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) ) (lv_descriptions= RULE_STRING )* ) ';' )
             {
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:121:1: ( ( ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) ) (lv_descriptions= RULE_STRING )* ) ';' )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:121:2: ( ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) ) (lv_descriptions= RULE_STRING )* ) ';'
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:120:1: ( ( ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) ) (lv_descriptions= RULE_STRING )* ) ';' )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:120:2: ( ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) ) (lv_descriptions= RULE_STRING )* ) ';'
             {
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:121:2: ( ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) ) (lv_descriptions= RULE_STRING )* )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:121:3: ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) ) (lv_descriptions= RULE_STRING )*
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:120:2: ( ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) ) (lv_descriptions= RULE_STRING )* )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:120:3: ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) ) (lv_descriptions= RULE_STRING )*
             {
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:121:3: ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:121:4: ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:120:3: ( ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:120:4: ( (lv_optional= 'optional' )? 'element' ) (lv_name= RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:121:4: ( (lv_optional= 'optional' )? 'element' )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:121:5: (lv_optional= 'optional' )? 'element'
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:120:4: ( (lv_optional= 'optional' )? 'element' )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:120:5: (lv_optional= 'optional' )? 'element'
             {
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:121:5: (lv_optional= 'optional' )?
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:120:5: (lv_optional= 'optional' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -198,7 +197,7 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
             }
             switch (alt2) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:122:5: lv_optional= 'optional'
+                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:121:5: lv_optional= 'optional'
                     {
                     lv_optional=(Token)input.LT(1);
                     match(input,12,FOLLOW_12_in_ruleElement175); 
@@ -221,8 +220,8 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:135:2: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:136:5: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:134:2: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:135:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleElement207); 
@@ -241,7 +240,7 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:147:3: (lv_descriptions= RULE_STRING )*
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:146:3: (lv_descriptions= RULE_STRING )*
             loop3:
             do {
                 int alt3=2;
@@ -254,7 +253,7 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
 
                 switch (alt3) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:148:5: lv_descriptions= RULE_STRING
+            	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:147:5: lv_descriptions= RULE_STRING
             	    {
             	    lv_descriptions=(Token)input.LT(1);
             	    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleElement233); 

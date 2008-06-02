@@ -1,40 +1,20 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LexerLang" nsURI="&quot;http://www.eclipse.org/2008/xtext/LexerLang&quot;"/>
+  <lexerRules name="STRING" body="&quot; '#' ('B')+ &quot;"/>
   <parserRules name="Model">
-    <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="children" operator="+=">
+    <alternatives xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="children">
       <terminal xsi:type="xtext:RuleCall" name="Element"/>
     </alternatives>
   </parserRules>
   <parserRules name="Element">
     <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Group">
-          <abstractTokens xsi:type="xtext:Group">
-            <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
-              <terminal xsi:type="xtext:RuleCall" name="ID"/>
-            </abstractTokens>
-            <abstractTokens xsi:type="xtext:Assignment" feature="f" operator="=">
-              <terminal xsi:type="xtext:RuleCall" name="EXPLICITTOKENTYPE"/>
-            </abstractTokens>
-          </abstractTokens>
-          <abstractTokens xsi:type="xtext:Assignment" feature="g" operator="=">
-            <terminal xsi:type="xtext:RuleCall" name="IMPLICITTOKENTYPE"/>
-          </abstractTokens>
-        </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" feature="h" operator="=">
-          <terminal xsi:type="xtext:RuleCall" name="STRING"/>
-        </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+        <terminal xsi:type="xtext:RuleCall" name="ID"/>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" feature="i" operator="=">
-        <terminal xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:RuleCall" name="EXPLICITTOKENTYPE"/>
-          <groups xsi:type="xtext:RuleCall" name="IMPLICITTOKENTYPE"/>
-        </terminal>
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="h">
+        <terminal xsi:type="xtext:RuleCall" name="STRING"/>
       </abstractTokens>
     </alternatives>
   </parserRules>
-  <lexerRules name="EXPLICITTOKENTYPE" body="&lt;# '#' ('A')+ #>" tokenType="X"/>
-  <lexerRules name="IMPLICITTOKENTYPE" body="&lt;# '#' ('C')+ #>"/>
-  <lexerRules name="STRING" body="&lt;# '#' ('B')+ #>"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LexerLang" nsURI="&quot;http://www.eclipse.org/2008/xtext/LexerLang&quot;"/>
 </xtext:Grammar>

@@ -19,8 +19,8 @@ public class MultiEPackagesTest extends AbstractGeneratorTest {
 	@SuppressWarnings("unchecked")
 	public void testSimple() throws Exception {
 		Grammar model = (Grammar) getModel("generate foo 'foo' generate bar 'bar' as bar Foo : 'foo' bar=Bar; Bar returns bar::Bar : flag?='bar';");
-		List<EPackage> result = (List<EPackage>) invokeWithXtend("transform()", model);
-		assertEquals(2,result.size());
+		List<EPackage> result = (List<EPackage>) invokeWithXtend("getAllEPackages()", model);
+		assertEquals(3,result.size());
 		assertWithXtend("1", "get(0).eClassifiers.size", result);
 		assertWithXtend("'Foo'", "get(0).eClassifiers.first().name", result);
 		
@@ -31,12 +31,12 @@ public class MultiEPackagesTest extends AbstractGeneratorTest {
 	@SuppressWarnings("unchecked")
 	public void testInheritance() throws Exception {
 		Grammar model = (Grammar) getModel("generate foo 'foo' generate bar 'bar' as bar Main : Foo | Bar; Foo : 'foo' bar=Bar; Bar returns bar::Bar : flag?='bar';");
-		List<EPackage> result = (List<EPackage>) invokeWithXtend("transform()", model);
-		assertEquals(2,result.size());
+		List<EPackage> result = (List<EPackage>) invokeWithXtend("getAllEPackages()", model);
+		assertEquals(3,result.size());
 		assertWithXtend("2", "get(0).eClassifiers.size", result);
-		assertWithXtend("'Main'", "get(0).eClassifiers.get(0).name", result);
-		assertWithXtend("'Foo'", "get(0).eClassifiers.get(1).name", result);
-		assertWithXtend("'Main'", "get(0).eClassifiers.get(1).eSuperTypes.first().name", result);
+		assertWithXtend("1", "get(0).eClassifiers.select(e|e.name=='Main').size", result);
+		assertWithXtend("1", "get(0).eClassifiers.select(e|e.name=='Foo').size", result);
+		assertWithXtend("'Main'", "get(0).eClassifiers.select(e|e.name=='Foo').first().eSuperTypes.first().name", result);
 		
 		assertWithXtend("1", "get(1).eClassifiers.size", result);
 		assertWithXtend("'Bar'", "get(1).eClassifiers.first().name", result);
