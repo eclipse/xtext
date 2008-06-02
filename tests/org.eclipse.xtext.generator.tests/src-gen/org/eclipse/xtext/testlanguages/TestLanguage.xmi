@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="TestLang" nsURI="&quot;http://www.eclipse.org/2008/xtext/TestLang&quot;"/>
   <parserRules name="EntryRule">
     <type name="Model"/>
-    <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="multiFeature" operator="+=">
+    <alternatives xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="multiFeature">
       <terminal xsi:type="xtext:RuleCall" name="AbstractRule"/>
     </alternatives>
   </parserRules>
@@ -19,11 +18,11 @@
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Keyword" value="&quot;choice&quot;"/>
-        <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="optionalKeyword" operator="?=">
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="?" operator="?=" feature="optionalKeyword">
           <terminal xsi:type="xtext:Keyword" value="'optional'"/>
         </abstractTokens>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
         <terminal xsi:type="xtext:RuleCall" name="ID"/>
       </abstractTokens>
     </alternatives>
@@ -36,10 +35,10 @@
         <abstractTokens xsi:type="xtext:RuleCall" name="TerminalRule"/>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Group" cardinality="?">
-        <abstractTokens xsi:type="xtext:Action" operator="+=" feature="actionFeature">
+        <abstractTokens xsi:type="xtext:Action" feature="actionFeature" operator="+=">
           <typeName name="ReducibleComposite"/>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" feature="actionFeature" operator="+=">
+        <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="actionFeature">
           <terminal xsi:type="xtext:RuleCall" name="TerminalRule"/>
         </abstractTokens>
       </abstractTokens>
@@ -47,8 +46,9 @@
   </parserRules>
   <parserRules name="TerminalRule">
     <type name="TerminalElement"/>
-    <alternatives xsi:type="xtext:Assignment" feature="stringFeature" operator="=">
+    <alternatives xsi:type="xtext:Assignment" operator="=" feature="stringFeature">
       <terminal xsi:type="xtext:RuleCall" name="STRING"/>
     </alternatives>
   </parserRules>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="TestLang" nsURI="&quot;http://www.eclipse.org/2008/xtext/TestLang&quot;"/>
 </xtext:Grammar>

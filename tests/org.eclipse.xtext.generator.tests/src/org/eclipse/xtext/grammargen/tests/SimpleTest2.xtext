@@ -6,12 +6,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
+language SimpleTest2
 generate SimpleTest2 "http://eclipse.org/xtext/tests/SimpleTest2"
 
-Model : 
-	(contents+=Child)*;
+Model : (contents+=Child)*;
 	
-Child :
-	(optional?='optional')? "keyword" name=ID number=INT '{' 
-		
-	'}';
+Child : (optional?='optional')? "keyword" name=ID number=INT '{' '}';

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simplerewritetest" nsURI="&quot;http://simple/rewrite/test&quot;"/>
   <parserRules name="Op">
     <type name="Expression"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall" name="Term"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
-        <abstractTokens xsi:type="xtext:Action" operator="+=" feature="values">
+        <abstractTokens xsi:type="xtext:Action" feature="values" operator="+=">
           <typeName name="Op"/>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" feature="values" operator="+=">
+        <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="values">
           <terminal xsi:type="xtext:RuleCall" name="Term"/>
         </abstractTokens>
       </abstractTokens>
@@ -23,7 +22,7 @@
     </alternatives>
   </parserRules>
   <parserRules name="Atom">
-    <alternatives xsi:type="xtext:Assignment" feature="name" operator="=">
+    <alternatives xsi:type="xtext:Assignment" operator="=" feature="name">
       <terminal xsi:type="xtext:RuleCall" name="ID"/>
     </alternatives>
   </parserRules>
@@ -37,9 +36,10 @@
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value="')'"/>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="em" operator="=">
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="?" operator="=" feature="em">
         <terminal xsi:type="xtext:Keyword" value="'!'"/>
       </abstractTokens>
     </alternatives>
   </parserRules>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simplerewritetest" nsURI="&quot;http://simple/rewrite/test&quot;"/>
 </xtext:Grammar>

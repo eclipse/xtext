@@ -59,7 +59,6 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
-import org.eclipse.xtext.testlanguages.parser.internal.LexerLanguageTokenTypeResolver;
 }
 
 @parser::members {
@@ -71,10 +70,10 @@ import org.eclipse.xtext.testlanguages.parser.internal.LexerLanguageTokenTypeRes
     }
     
     protected void setLexerRule(LeafNode node, Token t) {
-        LexerRule lexerRule = LexerLanguageTokenTypeResolver.getLexerRule(node, t.getType());
+    /*    LexerRule lexerRule = LexerLanguageTokenTypeResolver.getLexerRule(node, t.getType());
         if(lexerRule != null) {
             node.setGrammarElement(lexerRule);
-        }
+        }*/
     }
 
 }
@@ -118,10 +117,10 @@ ruleModel returns [EObject current=null]
 // Rule Element
 ruleElement returns [EObject current=null] 
     @init { EObject temp=null; }:
-(((((
+((
     lv_name=RULE_ID
     { 
-    createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
+    createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
     }
  
     {
@@ -131,33 +130,9 @@ ruleElement returns [EObject current=null]
         }
         factory.set($current, "name", lv_name);    }
 )(
-    lv_f=RULE_EXPLICITTOKENTYPE
-    { 
-    createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"f"); 
-    }
- 
-    {
-        if ($current==null) {
-            $current = factory.create("Element");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        factory.set($current, "f", lv_f);    }
-))(
-    lv_g=RULE_IMPLICITTOKENTYPE
-    { 
-    createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"g"); 
-    }
- 
-    {
-        if ($current==null) {
-            $current = factory.create("Element");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        factory.set($current, "g", lv_g);    }
-))(
     lv_h=RULE_STRING
     { 
-    createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"h"); 
+    createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"h"); 
     }
  
     {
@@ -166,44 +141,23 @@ ruleElement returns [EObject current=null]
             associateNodeWithAstElement(currentNode, $current);
         }
         factory.set($current, "h", lv_h);    }
-))(
-    lv_i=(RULE_EXPLICITTOKENTYPE
-    { 
-    createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.1/@terminal/@groups.0" /* xtext::RuleCall */, currentNode,"i"); 
-    }
-
-    |RULE_IMPLICITTOKENTYPE
-    { 
-    createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.1/@terminal/@groups.1" /* xtext::RuleCall */, currentNode,"i"); 
-    }
-) 
-    {
-        if ($current==null) {
-            $current = factory.create("Element");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        factory.set($current, "i", lv_i);    }
 ));
 
 
 
-RULE_EXPLICITTOKENTYPE :  '#' ('A')+ ;
-
-RULE_IMPLICITTOKENTYPE :  '#' ('C')+ ;
-
-RULE_STRING :  '#' ('B')+ ;
-
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
-
-RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+RULE_STRING : " '#' ('B')+ ";
 
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 
-RULE_LEXER_BODY : '<#' ( options {greedy=false;} : . )* '#>';
-
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
+
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+
+RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
+
+RULE_LEXER_BODY : '<#' '.'* '#>';
 
 RULE_ANY_OTHER : .;
 
