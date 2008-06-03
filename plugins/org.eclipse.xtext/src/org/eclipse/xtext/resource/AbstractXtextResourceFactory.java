@@ -19,7 +19,7 @@ public abstract class AbstractXtextResourceFactory implements IResourceFactory {
     private IParseTreeConstructor parsetreeConstructor;
 
     public Resource createResource(URI uri) {
-        return new NewXtextResource(elementFactory, parser, parsetreeConstructor, uri);
+        return new XtextResource(elementFactory, parser, parsetreeConstructor, uri);
     }
 
     public ILanguageDescriptor getLanguageDescriptor() {
