@@ -13,7 +13,7 @@ extension org::eclipse::xtext::Properties reexport;
 List[String] services() :
 		{'Parser', 'ASTFactory', 'ParseTreeConstructor', 'ResourceFactory', 'GrammarAccess', 'MetamodelAccess'};
 		
-String serviceInterface(String serviceName) :
+String serviceInterface(Grammar this, String serviceName) :
 	switch(serviceName) {
 		case 'Parser': 'org.eclipse.xtext.parser.IParser'
 		case 'ASTFactory': 'org.eclipse.xtext.parser.IElementFactory'
@@ -24,7 +24,7 @@ String serviceInterface(String serviceName) :
 		default: ''
 	};
 		
-String serviceClass(String serviceName) :
+String serviceClass(Grammar this, String serviceName) :
 	switch(serviceName) { 
 		case 'Parser': languageName() + 'Parser'
 		case 'ASTFactory': 'org.eclipse.xtext.parser.GenericEcoreElementFactory'
@@ -35,17 +35,17 @@ String serviceClass(String serviceName) :
 		default: ''
 	};
 
-String serviceClassFQN(String serviceName) :
+String serviceClassFQN(Grammar this, String serviceName) :
     switch(serviceName) { 
         case 'ASTFactory': serviceClass(serviceName)
         case 'ResourceFactory': serviceClass(serviceName)        
         default: packageName() + subpackage(serviceName) + '.' + serviceClass(serviceName)
     };
     
-String servicePackageName(String serviceName) :
+String servicePackageName(Grammar this, String serviceName) :
     packageName() + subpackage(serviceName);
     
-String serviceClassFileName(String serviceName) :
+String serviceClassFileName(Grammar this, String serviceName) :
     serviceClassFQN(serviceName).replaceAll('\\.','/') + '.java';
     
 private String subpackage(String serviceName) :

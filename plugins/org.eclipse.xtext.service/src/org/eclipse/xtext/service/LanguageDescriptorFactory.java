@@ -23,12 +23,12 @@ public class LanguageDescriptorFactory {
         return null;
     }
     
-    public static ILanguageDescriptor createLanguageDescriptor(String languageId, String languageName, String namespace) {
+    public static ILanguageDescriptor createLanguageDescriptor(String languageId, String languageName, String namespace, ILanguageDescriptor superLanguage) {
         ILanguageDescriptor existingLanguageDescriptor = id2descriptorMap.get(languageId);
         if(existingLanguageDescriptor != null) {
             throw new IllegalArgumentException("LanguageDescriptor " + languageId + "already registered.");
         }
-        LanguageDescriptor languageDescriptor = new LanguageDescriptor(languageId, languageName, namespace);
+		LanguageDescriptor languageDescriptor = new LanguageDescriptor(languageId, languageName, namespace, superLanguage);
         id2descriptorMap.put(languageId, languageDescriptor);
         return languageDescriptor;
     }

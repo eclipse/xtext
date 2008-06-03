@@ -26,17 +26,20 @@ import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import «packageName()».services.*;
 
 public abstract class «languageName()»StandaloneSetup {
 
 	public static void doSetup() {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new XMIResourceFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xmi", new XMIResourceFactoryImpl());
+		«IF getSuperGrammar()!=null»
+		// setup super language first
+		XtextBuiltinStandaloneSetup.doSetup();
+		«ENDIF»
 		getLanguageDescriptor();
-		«EXPAND registerServiceFactory FOREACH services()-»
+		«FOREACH services() AS s»
+		ServiceRegistry.registerFactory(new «languageName()»«s»ServiceFactory());
+		«ENDFOREACH»
 		if (LanguageFacadeFactory.getFacade("«languageId()»")==null) {
 			ILanguageFacade facade = new «languageName()»LanguageFacade();
 			LanguageFacadeFactory.register(facade);
@@ -47,15 +50,15 @@ public abstract class «languageName()»StandaloneSetup {
 	
 	private static ILanguageDescriptor INSTANCE;
 	
-	public static final String LANGUAGE_ID = "«languageId()»";
-	public static final String LANGUAGE_NAME = "«languageName()»";
-	public static final String NAMESPACE = "«namespace()»";
+	public static final String LANGUAGE_ID = "«getId()»";
+	public static final String LANGUAGE_NAME = "«getName()»";
+	public static final String NAMESPACE = "«getNamespace()»";
     
     public static ILanguageDescriptor getLanguageDescriptor() {
     	if (INSTANCE == null) {
     		INSTANCE = LanguageDescriptorFactory.get(LANGUAGE_ID);
     		if(INSTANCE == null) {
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE);
+    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
     		}
     	}
     	return INSTANCE;
@@ -65,6 +68,3 @@ public abstract class «languageName()»StandaloneSetup {
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE registerServiceFactory FOR String-»
-		ServiceRegistry.registerFactory(new «languageName()»«this»ServiceFactory());
-«ENDDEFINE»

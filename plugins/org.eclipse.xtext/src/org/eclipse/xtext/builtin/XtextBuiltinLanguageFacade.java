@@ -27,7 +27,7 @@ public class XtextBuiltinLanguageFacade implements ILanguageFacade {
 	{
 		XtextFactory f = XtextFactory.eINSTANCE;
 		g = f.createGrammar();
-		g.setName(ID);
+		g.getIdElements().add(ID);
 		ReferencedMetamodel ecoremm = f.createReferencedMetamodel();
 		ecoremm.setAlias("ecore");
 		ecoremm.setUri("'"+EcorePackage.eNS_URI+"'");//TODO remove the single quotes 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GrammarImpl.java,v 1.8 2008/06/02 13:20:55 sefftinge Exp $
+ * $Id: GrammarImpl.java,v 1.9 2008/06/03 06:22:30 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -35,11 +36,11 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getLexerRules <em>Lexer Rules</em>}</li>
- *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getParserRules <em>Parser Rules</em>}</li>
- *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getSuperGrammar <em>Super Grammar</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getIdElements <em>Id Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getLexerRules <em>Lexer Rules</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getParserRules <em>Parser Rules</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,331 +49,303 @@ import org.eclipse.xtext.XtextPackage;
 public class GrammarImpl extends EObjectImpl implements Grammar
 {
   /**
-   * The cached value of the '{@link #getLexerRules() <em>Lexer Rules</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getSuperGrammar() <em>Super Grammar</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLexerRules()
-   * @generated
-   * @ordered
-   */
-  protected EList<LexerRule> lexerRules;
-
-  /**
-   * The cached value of the '{@link #getParserRules() <em>Parser Rules</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getParserRules()
-   * @generated
-   * @ordered
-   */
-  protected EList<ParserRule> parserRules;
-
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getSuperGrammar() <em>Super Grammar</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSuperGrammar()
-   * @generated
-   * @ordered
-   */
+	 * @see #getSuperGrammar()
+	 * @generated
+	 * @ordered
+	 */
   protected static final String SUPER_GRAMMAR_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getSuperGrammar() <em>Super Grammar</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getSuperGrammar() <em>Super Grammar</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSuperGrammar()
-   * @generated
-   * @ordered
-   */
+	 * @see #getSuperGrammar()
+	 * @generated
+	 * @ordered
+	 */
   protected String superGrammar = SUPER_GRAMMAR_EDEFAULT;
 
-  /**
-   * The cached value of the '{@link #getMetamodelDeclarations() <em>Metamodel Declarations</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+		/**
+	 * The cached value of the '{@link #getIdElements() <em>Id Elements</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIdElements()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> idElements;
+
+		/**
+	 * The cached value of the '{@link #getLexerRules() <em>Lexer Rules</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getMetamodelDeclarations()
-   * @generated
-   * @ordered
-   */
+	 * @see #getLexerRules()
+	 * @generated
+	 * @ordered
+	 */
+  protected EList<LexerRule> lexerRules;
+
+  /**
+	 * The cached value of the '{@link #getMetamodelDeclarations() <em>Metamodel Declarations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getMetamodelDeclarations()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<AbstractMetamodelDeclaration> metamodelDeclarations;
 
-  /**
-   * <!-- begin-user-doc -->
+		/**
+	 * The cached value of the '{@link #getParserRules() <em>Parser Rules</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @see #getParserRules()
+	 * @generated
+	 * @ordered
+	 */
+  protected EList<ParserRule> parserRules;
+
+		/**
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   protected GrammarImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return XtextPackage.Literals.GRAMMAR;
-  }
+		return XtextPackage.Literals.GRAMMAR;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<LexerRule> getLexerRules()
   {
-    if (lexerRules == null)
-    {
-      lexerRules = new EObjectContainmentEList<LexerRule>(LexerRule.class, this, XtextPackage.GRAMMAR__LEXER_RULES);
-    }
-    return lexerRules;
-  }
+		if (lexerRules == null) {
+			lexerRules = new EObjectContainmentEList<LexerRule>(LexerRule.class, this, XtextPackage.GRAMMAR__LEXER_RULES);
+		}
+		return lexerRules;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getIdElements() {
+		if (idElements == null) {
+			idElements = new EDataTypeUniqueEList<String>(String.class, this, XtextPackage.GRAMMAR__ID_ELEMENTS);
+		}
+		return idElements;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<ParserRule> getParserRules()
   {
-    if (parserRules == null)
-    {
-      parserRules = new EObjectContainmentEList<ParserRule>(ParserRule.class, this, XtextPackage.GRAMMAR__PARSER_RULES);
-    }
-    return parserRules;
-  }
+		if (parserRules == null) {
+			parserRules = new EObjectContainmentEList<ParserRule>(ParserRule.class, this, XtextPackage.GRAMMAR__PARSER_RULES);
+		}
+		return parserRules;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.GRAMMAR__NAME, oldName, name));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String getSuperGrammar()
   {
-    return superGrammar;
-  }
+		return superGrammar;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setSuperGrammar(String newSuperGrammar)
   {
-    String oldSuperGrammar = superGrammar;
-    superGrammar = newSuperGrammar;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.GRAMMAR__SUPER_GRAMMAR, oldSuperGrammar, superGrammar));
-  }
+		String oldSuperGrammar = superGrammar;
+		superGrammar = newSuperGrammar;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.GRAMMAR__SUPER_GRAMMAR, oldSuperGrammar, superGrammar));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<AbstractMetamodelDeclaration> getMetamodelDeclarations()
   {
-    if (metamodelDeclarations == null)
-    {
-      metamodelDeclarations = new EObjectContainmentEList<AbstractMetamodelDeclaration>(AbstractMetamodelDeclaration.class, this, XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS);
-    }
-    return metamodelDeclarations;
-  }
+		if (metamodelDeclarations == null) {
+			metamodelDeclarations = new EObjectContainmentEList<AbstractMetamodelDeclaration>(AbstractMetamodelDeclaration.class, this, XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS);
+		}
+		return metamodelDeclarations;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case XtextPackage.GRAMMAR__LEXER_RULES:
-        return ((InternalEList<?>)getLexerRules()).basicRemove(otherEnd, msgs);
-      case XtextPackage.GRAMMAR__PARSER_RULES:
-        return ((InternalEList<?>)getParserRules()).basicRemove(otherEnd, msgs);
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        return ((InternalEList<?>)getMetamodelDeclarations()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case XtextPackage.GRAMMAR__LEXER_RULES:
+				return ((InternalEList<?>)getLexerRules()).basicRemove(otherEnd, msgs);
+			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+				return ((InternalEList<?>)getMetamodelDeclarations()).basicRemove(otherEnd, msgs);
+			case XtextPackage.GRAMMAR__PARSER_RULES:
+				return ((InternalEList<?>)getParserRules()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case XtextPackage.GRAMMAR__LEXER_RULES:
-        return getLexerRules();
-      case XtextPackage.GRAMMAR__PARSER_RULES:
-        return getParserRules();
-      case XtextPackage.GRAMMAR__NAME:
-        return getName();
-      case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
-        return getSuperGrammar();
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        return getMetamodelDeclarations();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
+				return getSuperGrammar();
+			case XtextPackage.GRAMMAR__ID_ELEMENTS:
+				return getIdElements();
+			case XtextPackage.GRAMMAR__LEXER_RULES:
+				return getLexerRules();
+			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+				return getMetamodelDeclarations();
+			case XtextPackage.GRAMMAR__PARSER_RULES:
+				return getParserRules();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case XtextPackage.GRAMMAR__LEXER_RULES:
-        getLexerRules().clear();
-        getLexerRules().addAll((Collection<? extends LexerRule>)newValue);
-        return;
-      case XtextPackage.GRAMMAR__PARSER_RULES:
-        getParserRules().clear();
-        getParserRules().addAll((Collection<? extends ParserRule>)newValue);
-        return;
-      case XtextPackage.GRAMMAR__NAME:
-        setName((String)newValue);
-        return;
-      case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
-        setSuperGrammar((String)newValue);
-        return;
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        getMetamodelDeclarations().clear();
-        getMetamodelDeclarations().addAll((Collection<? extends AbstractMetamodelDeclaration>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
+				setSuperGrammar((String)newValue);
+				return;
+			case XtextPackage.GRAMMAR__ID_ELEMENTS:
+				getIdElements().clear();
+				getIdElements().addAll((Collection<? extends String>)newValue);
+				return;
+			case XtextPackage.GRAMMAR__LEXER_RULES:
+				getLexerRules().clear();
+				getLexerRules().addAll((Collection<? extends LexerRule>)newValue);
+				return;
+			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+				getMetamodelDeclarations().clear();
+				getMetamodelDeclarations().addAll((Collection<? extends AbstractMetamodelDeclaration>)newValue);
+				return;
+			case XtextPackage.GRAMMAR__PARSER_RULES:
+				getParserRules().clear();
+				getParserRules().addAll((Collection<? extends ParserRule>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case XtextPackage.GRAMMAR__LEXER_RULES:
-        getLexerRules().clear();
-        return;
-      case XtextPackage.GRAMMAR__PARSER_RULES:
-        getParserRules().clear();
-        return;
-      case XtextPackage.GRAMMAR__NAME:
-        setName(NAME_EDEFAULT);
-        return;
-      case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
-        setSuperGrammar(SUPER_GRAMMAR_EDEFAULT);
-        return;
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        getMetamodelDeclarations().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
+				setSuperGrammar(SUPER_GRAMMAR_EDEFAULT);
+				return;
+			case XtextPackage.GRAMMAR__ID_ELEMENTS:
+				getIdElements().clear();
+				return;
+			case XtextPackage.GRAMMAR__LEXER_RULES:
+				getLexerRules().clear();
+				return;
+			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+				getMetamodelDeclarations().clear();
+				return;
+			case XtextPackage.GRAMMAR__PARSER_RULES:
+				getParserRules().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case XtextPackage.GRAMMAR__LEXER_RULES:
-        return lexerRules != null && !lexerRules.isEmpty();
-      case XtextPackage.GRAMMAR__PARSER_RULES:
-        return parserRules != null && !parserRules.isEmpty();
-      case XtextPackage.GRAMMAR__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
-        return SUPER_GRAMMAR_EDEFAULT == null ? superGrammar != null : !SUPER_GRAMMAR_EDEFAULT.equals(superGrammar);
-      case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
-        return metamodelDeclarations != null && !metamodelDeclarations.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case XtextPackage.GRAMMAR__SUPER_GRAMMAR:
+				return SUPER_GRAMMAR_EDEFAULT == null ? superGrammar != null : !SUPER_GRAMMAR_EDEFAULT.equals(superGrammar);
+			case XtextPackage.GRAMMAR__ID_ELEMENTS:
+				return idElements != null && !idElements.isEmpty();
+			case XtextPackage.GRAMMAR__LEXER_RULES:
+				return lexerRules != null && !lexerRules.isEmpty();
+			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
+				return metamodelDeclarations != null && !metamodelDeclarations.isEmpty();
+			case XtextPackage.GRAMMAR__PARSER_RULES:
+				return parserRules != null && !parserRules.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(", superGrammar: ");
-    result.append(superGrammar);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (superGrammar: ");
+		result.append(superGrammar);
+		result.append(", idElements: ");
+		result.append(idElements);
+		result.append(')');
+		return result.toString();
+	}
 
 } //GrammarImpl

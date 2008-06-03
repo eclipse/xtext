@@ -22,7 +22,7 @@ public class LanguageFactoryTest extends TestCase {
         Class.forName("org.eclipse.xtext.ui.core.editor.BaseTextEditor");
         try {
             ILanguageDescriptor descr = LanguageDescriptorFactory.createLanguageDescriptor("org.eclipse.xtext.ui.tests.dummylanguage", "",
-                    "");
+                    "",null);
             fail("Initialisation should have failed");
         } catch (Exception exc) {
             // happy case

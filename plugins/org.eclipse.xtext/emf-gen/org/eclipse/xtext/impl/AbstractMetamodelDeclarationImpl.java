@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractMetamodelDeclarationImpl.java,v 1.7 2008/06/02 13:20:55 sefftinge Exp $
+ * $Id: AbstractMetamodelDeclarationImpl.java,v 1.8 2008/06/03 06:22:31 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -32,150 +32,146 @@ import org.eclipse.xtext.XtextPackage;
 public abstract class AbstractMetamodelDeclarationImpl extends EObjectImpl implements AbstractMetamodelDeclaration
 {
   /**
-   * The default value of the '{@link #getAlias() <em>Alias</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getAlias() <em>Alias</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAlias()
-   * @generated
-   * @ordered
-   */
+	 * @see #getAlias()
+	 * @generated
+	 * @ordered
+	 */
   protected static final String ALIAS_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getAlias() <em>Alias</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getAlias() <em>Alias</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAlias()
-   * @generated
-   * @ordered
-   */
+	 * @see #getAlias()
+	 * @generated
+	 * @ordered
+	 */
   protected String alias = ALIAS_EDEFAULT;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected AbstractMetamodelDeclarationImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION;
-  }
+		return XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public String getAlias()
   {
-    return alias;
-  }
+		return alias;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setAlias(String newAlias)
   {
-    String oldAlias = alias;
-    alias = newAlias;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS, oldAlias, alias));
-  }
+		String oldAlias = alias;
+		alias = newAlias;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS, oldAlias, alias));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS:
-        return getAlias();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS:
+				return getAlias();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS:
-        setAlias((String)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS:
+				setAlias((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS:
-        setAlias(ALIAS_EDEFAULT);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS:
+				setAlias(ALIAS_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS:
-        return ALIAS_EDEFAULT == null ? alias != null : !ALIAS_EDEFAULT.equals(alias);
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS:
+				return ALIAS_EDEFAULT == null ? alias != null : !ALIAS_EDEFAULT.equals(alias);
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String toString()
   {
-    if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (alias: ");
-    result.append(alias);
-    result.append(')');
-    return result.toString();
-  }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (alias: ");
+		result.append(alias);
+		result.append(')');
+		return result.toString();
+	}
 
 } //AbstractMetamodelDeclarationImpl

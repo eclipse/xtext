@@ -5,11 +5,12 @@
 * which accompanies this distribution, and is available at
 * http://www.eclipse.org/legal/epl-v10.html
 *******************************************************************************/
+language org.eclipse.xtext.Xtext
 
 generate xtext "http://www.eclipse.org/2008/Xtext"
 
 Grammar  :
-    ('language' name=ID ('extends' superGrammar=ID)?)?
+    'language' idElements+=ID ('.' idElements+=ID)* ('extends' superGrammar=ID)?
 	metamodelDeclarations+=AbstractMetamodelDeclaration* 
     parserRules+=ParserRule*
     ('lexing' ':'

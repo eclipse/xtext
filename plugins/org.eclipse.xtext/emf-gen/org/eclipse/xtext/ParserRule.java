@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParserRule.java,v 1.8 2008/06/02 13:20:56 sefftinge Exp $
+ * $Id: ParserRule.java,v 1.9 2008/06/03 06:22:28 sefftinge Exp $
  */
 package org.eclipse.xtext;
 
@@ -26,29 +26,29 @@ package org.eclipse.xtext;
 public interface ParserRule extends AbstractRule
 {
   /**
-   * Returns the value of the '<em><b>Alternatives</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Alternatives</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Alternatives</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Alternatives</em>' containment reference.
-   * @see #setAlternatives(AbstractElement)
-   * @see org.eclipse.xtext.XtextPackage#getParserRule_Alternatives()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Alternatives</em>' containment reference.
+	 * @see #setAlternatives(AbstractElement)
+	 * @see org.eclipse.xtext.XtextPackage#getParserRule_Alternatives()
+	 * @model containment="true"
+	 * @generated
+	 */
   AbstractElement getAlternatives();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.ParserRule#getAlternatives <em>Alternatives</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.xtext.ParserRule#getAlternatives <em>Alternatives</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Alternatives</em>' containment reference.
-   * @see #getAlternatives()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Alternatives</em>' containment reference.
+	 * @see #getAlternatives()
+	 * @generated
+	 */
   void setAlternatives(AbstractElement value);
 
 } // ParserRule

@@ -33,8 +33,7 @@ public class ReferenceGrammar {
         resource.load(null);
         Grammar grammarModel = (Grammar) resource.getContents().get(0);
 
-        GeneratorFacade.generate(grammarModel, this.getClass().getSimpleName(), this.getClass().getPackage().getName()
-                .replace('.', '/'), PATH, UI_PATH, "xtext");
+        GeneratorFacade.generate(grammarModel, PATH, UI_PATH, "xtext");
         System.out.println("Done.");
     }
 

@@ -30,12 +30,13 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 	}
 	
 	public void testBootstrapping() throws Exception {
-		List<Invocation> parse = getInvocations("generate foo 'bar' Foo : name=ID;");
+		List<Invocation> parse = getInvocations("language foo generate foo 'bar' Foo : name=ID;");
 		Iterator<Invocation> iter = parse.iterator();
+		assertEquals("create(Grammar)", iter.next().toString());
+		assertEquals("add(idElements,foo)", iter.next().toString());
 		assertEquals("create(GeneratedMetamodel)", iter.next().toString());
 		assertEquals("set(name,foo)", iter.next().toString());
 		assertEquals("set(nsURI,'bar')", iter.next().toString());
-		assertEquals("create(Grammar)", iter.next().toString());
 		assertEquals("add(metamodelDeclarations,GeneratedMetamodel)", iter.next().toString());
 		assertEquals("create(ParserRule)", iter.next().toString());
 		assertEquals("set(name,Foo)", iter.next().toString());
@@ -50,24 +51,9 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 	}
 	
 	public void testInstantiate() throws Exception {
-		EObject grammar = (EObject) getModel("generate foo 'bar' Foo : name=ID;");
+		EObject grammar = (EObject) getModel("language foo generate foo 'bar' Foo : name=ID;");
 		assertWithXtend("'Foo'","parserRules.first().name",grammar);
 		assertWithXtend("'name'","parserRules.first().alternatives.feature",grammar);
-	}
-	
-	public void testInstantiateXtextGrammar() throws Exception {
-		InputStream bootGrammar = getClass().getClassLoader().getResourceAsStream(getClass().getName().replace('.','/')+".xtext");
-		EObject grammar = (EObject) getModel(bootGrammar, getASTFactory(), null);
-		assertWithXtend("true","parserRules.select(e|e.name=='AbstractToken').first()!=null",grammar);
-		assertWithXtend("'AbstractElement'","parserRules.select(e|e.name=='AbstractToken').first().type.name",grammar);
-		XtextGrammarTestParseTreeConstructor foo = (XtextGrammarTestParseTreeConstructor) getParseTreeConstructor();
-		foo.update(grammar);
-		System.out.println(foo.getText());
-//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-//				"xmi", new XMIResourceFactoryImpl());
-//		Resource resource = new ResourceSetImpl().createResource(URI.createURI("foo.xmi"));
-//		resource.getContents().add(grammar);
-//		resource.save(null);
 	}
 	
 	public void testSerialization() throws Exception {

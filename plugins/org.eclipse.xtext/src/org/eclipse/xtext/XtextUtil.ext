@@ -157,11 +157,13 @@ private cached AbstractType currentType(emf::EObject this, Grammar g) :
 ;
 				
 private cached emf::EObject getLastChild(emf::EObject this) :
-	if eContents.isEmpty then (
-		this
-	) else (
-		getLastChild(eContents.last())
-	) 
+	if this!=null then (
+		if eContents.isEmpty then (
+			this
+		) else (
+			getLastChild(eContents.last())
+		) 
+	)
 ;
 	
 private cached ComplexType currentType(AbstractRule this, Grammar g) : error("");	

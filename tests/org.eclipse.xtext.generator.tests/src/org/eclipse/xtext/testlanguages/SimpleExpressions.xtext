@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
- 
+language org.eclipse.xtext.testlanguages.SimpleExpressions
 generate simpleExpressions "http://www.eclipse.org/xtext/test/simpleExpressions"
 
 Multiplication returns Expression: 

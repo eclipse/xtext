@@ -15,8 +15,17 @@ import xtext;
 isAbstract(Grammar this) :
 	JAVA org.eclipse.xtext.GrammarUtil.isAbstract(org.eclipse.xtext.Grammar);
 
-String getID(emf::EObject object) :
-	JAVA org.eclipse.xtext.GrammarUtil.getID(org.eclipse.emf.ecore.EObject);
+String getFragment(emf::EObject object) :
+	JAVA org.eclipse.xtext.EcoreUtil2.getURIFragment(org.eclipse.emf.ecore.EObject);
+	
+String getId(Grammar g) :
+	JAVA org.eclipse.xtext.GrammarUtil.getId(org.eclipse.xtext.Grammar);
+	
+String getName(Grammar g) :
+	JAVA org.eclipse.xtext.GrammarUtil.getName(org.eclipse.xtext.Grammar);
+	
+String getNamespace(Grammar g) :
+	JAVA org.eclipse.xtext.GrammarUtil.getNamespace(org.eclipse.xtext.Grammar);
 
 // ***********************************************************************************
 // Containers
@@ -75,4 +84,7 @@ List[AbstractRule] allRules(Grammar this) :
 
 String getQualifiedName(TypeRef this) :
 	JAVA org.eclipse.xtext.GrammarUtil.getQualifiedName(org.eclipse.xtext.TypeRef);
+
+Grammar getSuperGrammar(Grammar this) :
+	JAVA org.eclipse.xtext.GrammarUtil.getSuperGrammar(org.eclipse.xtext.Grammar);
 
