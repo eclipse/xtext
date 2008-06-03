@@ -6,10 +6,7 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 
 public class OptionalEmptyLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
-    protected ILanguageFacade getFacade() {
-    	return LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.OptionalEmptyLanguage");
-    }
-
+   
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
 		if (ruleToCall.equals("Model")) {
 			proceedModel(getDescr(obj));

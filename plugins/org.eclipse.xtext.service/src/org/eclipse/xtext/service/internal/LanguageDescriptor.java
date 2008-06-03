@@ -10,8 +10,6 @@ package org.eclipse.xtext.service.internal;
 
 import org.eclipse.xtext.service.ILanguageDescriptor;
 
-
-
 /**
  * @author Peter Friese - Initial contribution and API
  *

@@ -6,10 +6,7 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 
 public class ActionTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
-    protected ILanguageFacade getFacade() {
-    	return LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.ActionTestLanguage");
-    }
-
+   
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
 		if (ruleToCall.equals("Model")) {
 			proceedModel(getDescr(obj));

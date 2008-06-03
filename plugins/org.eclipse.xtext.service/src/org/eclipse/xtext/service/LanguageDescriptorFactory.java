@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+
 package org.eclipse.xtext.service;
 
 import java.util.HashMap;
@@ -5,6 +14,11 @@ import java.util.Map;
 
 import org.eclipse.xtext.service.internal.LanguageDescriptor;
 
+/**
+ * 
+ * @author Jan Köhnlein - Initial contribution and API
+ *
+ */
 public class LanguageDescriptorFactory {
     
     private static Map<String, ILanguageDescriptor> id2descriptorMap = new HashMap<String, ILanguageDescriptor>();
