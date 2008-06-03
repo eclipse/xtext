@@ -9,8 +9,10 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.testlanguages.SimpleExpressionsParseTreeConstructor;
+import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.reconstr.parsetree.SimpleReconstrTestParseTreeConstructor;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
+import org.eclipse.xtext.testlanguages.parsetree.SimpleExpressionsParseTreeConstructor;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class SimpleReconstrTest extends AbstractGeneratorTest {
@@ -31,7 +33,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		EObject result = (EObject) getModel(model);
 		SimpleReconstrTestParseTreeConstructor con = (SimpleReconstrTestParseTreeConstructor) getParseTreeConstructor();
 		con.update(result);
-		String resultString = con.getText();
+		String resultString = NodeUtil.getRootNode(result).serialize();
 		return resultString;
 	}
 	
@@ -41,7 +43,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		EObject result = (EObject) getModel(model);
         SimpleExpressionsParseTreeConstructor con = (SimpleExpressionsParseTreeConstructor) getParseTreeConstructor();
 		con.update(result);
-		String resultString = con.getText();
+		String resultString = NodeUtil.getRootNode(result).serialize();
 		assertEquals(model,resultString);
 	}
 	
