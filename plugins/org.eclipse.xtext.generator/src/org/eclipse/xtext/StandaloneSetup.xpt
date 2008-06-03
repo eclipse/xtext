@@ -20,11 +20,10 @@ package «packageName()»;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.ILanguageFacade;
 
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
@@ -44,31 +43,23 @@ public abstract class «languageName()»StandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			«FOREACH services() AS s»
+			«FOREACH services() AS s-»
 			ServiceRegistry.registerFactory(languageDescriptor, new «languageName()»«s»ServiceFactory());
 			«ENDFOREACH»
-			if (LanguageFacadeFactory.getFacade("«languageId()»")==null) {
-				ILanguageFacade facade = new «languageName()»LanguageFacade();
-				LanguageFacadeFactory.register(facade);
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"«modelFileExtension()»", facade.getResourceFactory());
-			}
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					"«modelFileExtension()»", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;
 		}
 	}
 	
 	private static ILanguageDescriptor INSTANCE;
-	
-	public static final String LANGUAGE_ID = "«getId()»";
-	public static final String LANGUAGE_NAME = "«getName()»";
-	public static final String NAMESPACE = "«getNamespace()»";
     
     public static ILanguageDescriptor getLanguageDescriptor() {
     	if (INSTANCE == null) {
-    		INSTANCE = LanguageDescriptorFactory.get(LANGUAGE_ID);
+    		INSTANCE = LanguageDescriptorFactory.get(I«languageName()».ID);
     		if(INSTANCE == null) {
     			// TODO put super grammar
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, null);
+    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(I«languageName()».ID, I«languageName()».NAME, I«languageName()».NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
     		}
     	}
     	return INSTANCE;

@@ -21,18 +21,17 @@ import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
-import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.service.InjectedService;
-import org.eclipse.xtext.parser.*;
-import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IParseError;
+import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.impl.ParseError;
 
 import «packageName()».parser.internal.Internal«languageName()»Lexer;
 import «packageName()».parser.internal.Internal«languageName()»Parser;
 
 
 public class «languageName()»Parser extends org.eclipse.xtext.parser.AbstractParser {
-	private IElementFactory astElementFactory;
 	
 	@Override
 	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
@@ -40,7 +39,7 @@ public class «languageName()»Parser extends org.eclipse.xtext.parser.AbstractPar
 		Internal«languageName()»Lexer lexer = new Internal«languageName()»Lexer(in);
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		Internal«languageName()»Parser parser = new Internal«languageName()»Parser(
-				stream, factory) {
+				stream, factory, grammarAccess.getGrammar()) {
 					@Override
 			protected void reportError(IParseError error, RecognitionException re) {
 				handler.handleParserError(error);
@@ -57,14 +56,6 @@ public class «languageName()»Parser extends org.eclipse.xtext.parser.AbstractPar
 		return null;
 	}
 	
-	@InjectedService
-	public void setDefaultASTElementFactory(IElementFactory astElementFactory) {
-		this.astElementFactory = astElementFactory;
-	}
-	
-	protected IElementFactory getDefaultASTFactory() {
-		return LanguageFacadeFactory.getFacade("«languageId()»").getElementFactory();
-	}
 }
 «ENDFILE»
 «ENDDEFINE»
