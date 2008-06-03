@@ -1,15 +1,13 @@
 package org.eclipse.xtext.service;
 
 public class InjectedLanguageService implements ILanguageService {
-
+    private ILanguageDescriptor languageDescriptor;
+    
     public ILanguageDescriptor getLanguageDescriptor() {
-        // TODO Auto-generated method stub
-        return null;
+        return languageDescriptor;
     }
 
     public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
-        // TODO Auto-generated method stub
-
+        this.languageDescriptor = languageDescriptor;
     }
-
 }

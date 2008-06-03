@@ -25,7 +25,7 @@ public class GenericRegisteredServiceFactory implements ILanguageServiceFactory 
         this.serviceName = serviceName;
     }
     
-    public ILanguageService createLanguageService(ILanguageDescriptor descriptor, Class<? extends ILanguageService> serviceClass) {
+    public ILanguageService createLanguageService() {
         return createServiceExtension();
     }
 
@@ -52,8 +52,8 @@ public class GenericRegisteredServiceFactory implements ILanguageServiceFactory 
         return null;
     }
     
-    public boolean isFactoryFor(ILanguageDescriptor descriptor, Class<? extends ILanguageService> serviceClass) {
-        return languageDescriptor.equals(descriptor) && this.serviceClass.equals(serviceClass);
+    public Class<? extends ILanguageService> getServiceClass() {
+        return serviceClass;
     }
 
 }
