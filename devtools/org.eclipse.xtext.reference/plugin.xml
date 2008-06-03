@@ -16,7 +16,6 @@
       <parser
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
             class="org.eclipse.xtext.reference.parser.ReferenceGrammarParser">
-            
       </parser>
    </extension>
    <extension
@@ -24,7 +23,6 @@
       <aSTFactory
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
             class="org.eclipse.xtext.parser.GenericEcoreElementFactory">
-            
       </aSTFactory>
    </extension>
    <extension
@@ -32,7 +30,6 @@
       <parseTreeConstructor
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
             class="org.eclipse.xtext.reference.ReferenceGrammarParseTreeConstructor">
-            
       </parseTreeConstructor>
    </extension>
    <extension
@@ -40,7 +37,6 @@
       <resourceFactory
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
             class="org.eclipse.xtext.resource.XtextResourceFactory">
-            
       </resourceFactory>
    </extension>
    <extension
@@ -48,7 +44,6 @@
       <grammarAccess
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
             class="org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess">
-            
       </grammarAccess>
    </extension>
    <extension
@@ -56,7 +51,6 @@
       <metamodelAccess
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
             class="org.eclipse.xtext.reference.services.ReferenceGrammarMetamodelAccess">
-            
       </metamodelAccess>
    </extension>
 </plugin>
