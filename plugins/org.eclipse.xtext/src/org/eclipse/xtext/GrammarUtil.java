@@ -28,6 +28,35 @@ import org.eclipse.xtext.builtin.XtextBuiltinLanguageFacade;
  * @author svenefftinge
  */
 public class GrammarUtil {
+	public static String getId(Grammar g) {
+		StringBuffer buff = new StringBuffer();
+		EList<String> list = g.getIdElements();
+		for (int i = 0, x = list.size(); i<x;i++) {
+			buff.append(list.get(i));
+			if (i+1<x)
+				buff.append(".");
+		}
+		return buff.toString(); 
+	}
+	
+	public static String getName(Grammar g) {
+		return g.getIdElements().get(g.getIdElements().size()-1);
+	}
+
+	public static String getNamespace(Grammar g) {
+		StringBuffer buff = new StringBuffer();
+		EList<String> list = g.getIdElements();
+		for (int i = 0, x = list.size()-1; i<x;i++) {
+			buff.append(list.get(i));
+			if (i+1<x)
+				buff.append("/");
+		}
+		String string = buff.toString();
+		return string.trim().length()==0?null:string; 
+	}
+	
+	
+	
 	public static Grammar getGrammar(EObject grammarElement) {
 		EObject root = getRootContainer(grammarElement);
 		if (root instanceof Grammar) {
@@ -107,12 +136,6 @@ public class GrammarUtil {
 			return superGrammar == _this ? null : superGrammar;
 		}
 		return LanguageFacadeFactory.getFacade(_this.getSuperGrammar()).getGrammar();
-	}
-
-	public static String getID(EObject eObject) {
-		Resource resource = eObject.eResource();
-		String fragment = resource.getURIFragment(eObject);
-		return fragment;
 	}
 
 	public static AbstractRule findRuleForName(Grammar _this, String ruleName) {

@@ -24,7 +24,6 @@ public class EcoreUtil2 extends EcoreUtil{
 			return getContainerOfType(ele.eContainer(),type);
 		return null;
 	}
-	
 	@SuppressWarnings("unchecked")
 	public static <T extends EObject> List<T> getAllContentsOfType(EObject ele, Class<T> type) {
 		List<T> result = new ArrayList<T>();
@@ -75,5 +74,11 @@ public class EcoreUtil2 extends EcoreUtil{
 		}
 		log.error("Could not load EPackage with nsURI" + uriAsString);
 		return null;
+	}
+
+	public static String getURIFragment(EObject eObject) {
+		Resource resource = eObject.eResource();
+		String fragment = resource.getURIFragment(eObject);
+		return fragment;
 	}
 }

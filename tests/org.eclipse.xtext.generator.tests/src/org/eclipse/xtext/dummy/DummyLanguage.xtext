@@ -6,7 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
- 
+language org.eclipse.xtext.dummy.DummyLanguage
+
 generate DummyLang "http://www.eclipse.org/2008/xtext/DummyLang"
 
 Model :
