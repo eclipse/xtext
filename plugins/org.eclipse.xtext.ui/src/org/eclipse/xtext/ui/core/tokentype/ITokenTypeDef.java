@@ -6,25 +6,21 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.language;
+package org.eclipse.xtext.ui.core.tokentype;
 
-import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
-import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
+import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 
 /**
- * @author Peter Friese - Initial contribution and API
+ * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class SyntaxColorer1 implements ISyntaxColorer {
+public interface ITokenTypeDef {
+	String getId();
 
-    public TextAttribute color(LeafNode token) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	String getName();
 
-    public void setPreferenceStoreService(IPreferenceStoreService service) {
-    }
+	TextStyle getTextStyle();
 
+	boolean match(LeafNode node);
 }

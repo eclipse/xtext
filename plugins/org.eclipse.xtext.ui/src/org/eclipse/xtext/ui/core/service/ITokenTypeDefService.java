@@ -6,18 +6,19 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core;
+package org.eclipse.xtext.ui.core.service;
 
-import org.eclipse.xtext.parser.ITokenTypes;
-import org.eclipse.xtext.parsetree.LeafNode;
+import java.util.Set;
+
+import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.ui.core.tokentype.ITokenTypeDef;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class TokenTypeResolver {
-	// TODO implementation
-	public static String getTokenType(LeafNode node) {
-		return ITokenTypes.ANYOTHER;
-	}
+public interface ITokenTypeDefService extends ILanguageService {
+	// TODO discuss whether we bind this service with syntaxcolorer
+	Set<ITokenTypeDef> allTokenTypes();
+
 }

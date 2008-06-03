@@ -18,6 +18,7 @@ import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
 import org.eclipse.xtext.ui.core.service.IProposalsProvider;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
+import org.eclipse.xtext.ui.core.service.ITokenTypeDefService;
 
 public class LanguageServiceActivator {
 
@@ -41,7 +42,8 @@ public class LanguageServiceActivator {
         ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, ISyntaxColorer.class, "syntaxColorer"));
         ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IGrammarAccess.class, "grammarAccess"));
         ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IMetamodelAccess.class, "metamodelAccess"));
-    }
+        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, ITokenTypeDefService.class, "tokenTypeDef"));
+        }
 
     private static void registerLanguageDescriptors() {
         IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(Activator.PLUGIN_ID, LANGUAGE_DESCRIPTOR);

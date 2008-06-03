@@ -10,20 +10,14 @@
 package org.eclipse.xtext.ui.core.service.impl;
 
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.resource.DataFormatException;
-import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jface.resource.StringConverter;
-import org.eclipse.jface.text.TextAttribute;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.RGB;
-import org.eclipse.xtext.parser.ITokenTypes;
+import org.eclipse.swt.SWT;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.InjectedService;
-import org.eclipse.xtext.ui.core.TokenTypeResolver;
-import org.eclipse.xtext.ui.core.internal.CoreLog;
+import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
+import org.eclipse.xtext.ui.core.service.ITokenTypeDefService;
+import org.eclipse.xtext.ui.core.tokentype.ITokenTypeDef;
 
 /**
  * @author Dennis Hübner
@@ -31,19 +25,39 @@ import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
  */
 public class SyntaxColorer implements ISyntaxColorer {
 
+	private ITokenTypeDefService tokenTypeDef;
 	private IPreferenceStoreService preferenceStoreService;
 
-	public TextAttribute color(LeafNode leafNode) {
-		return colorInternal(leafNode);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.xtext.ui.core.service.ISyntaxColorer#color(org.eclipse.xtext
+	 * .parsetree.LeafNode)
+	 */
+	public TextStyle color(LeafNode leafNode) {
+		TextStyle defaultTs = new TextStyle(null, null, SWT.NONE, null);
+		if (tokenTypeDef != null) {
+			for (ITokenTypeDef ttd : tokenTypeDef.allTokenTypes()) {
+				if (ttd.match(leafNode)) {
+					String tokenTypeId = ttd.getId();
+					if (ttd.getTextStyle() != null) {
+						defaultTs = ttd.getTextStyle();
+					}
+					TextStyle ts = new TextStyle(getColorForTokenType(tokenTypeId, defaultTs.getColor()),
+							getBackgroundColorForTokenType(tokenTypeId, defaultTs.getBackgroundColor()),
+							getStyleForTokenType(tokenTypeId, defaultTs.getStyle()), getFontForTokenType(tokenTypeId,
+									defaultTs.getFontName()));
+					return ts;
+				}
+			}
+		}
+		return defaultTs;
 	}
 
-	private TextAttribute colorInternal(LeafNode node) {
-		String tokenType = TokenTypeResolver.getTokenType(node);
-		if (!(ITokenTypes.KEYWORD.equals(tokenType) && node.length() == 1)) {
-			return new TextAttribute(getColorForTokenType(tokenType), getBackgroundColorForTokenType(tokenType),
-					getStyleForTokenType(tokenType), getFontForTokenType(tokenType));
-		}
-		return new TextAttribute(null);
+	@InjectedService
+	public void setTokenTypeDefService(ITokenTypeDefService service) {
+		this.tokenTypeDef = service;
 	}
 
 	@InjectedService
@@ -55,41 +69,36 @@ public class SyntaxColorer implements ISyntaxColorer {
 		return preferenceStoreService.getPersitablePreferenceStore();
 	}
 
-	private int getStyleForTokenType(String tokenType) {
-		return getPreferenceStore().getInt(PreferenceStore.getTokenStylePreferenceKey(tokenType));
+	// TODO set defaults somewhere else if possible, or check if a default
+	// already set
+	private int getStyleForTokenType(String tokenType, int defaultStyle) {
+		String tokenStylePreferenceKey = PreferenceStore.getTokenStylePreferenceKey(tokenType);
+		getPreferenceStore().setDefault(tokenStylePreferenceKey, defaultStyle);
+		return getPreferenceStore().getInt(tokenStylePreferenceKey);
 	}
 
-	private Font getFontForTokenType(String tokenType) {
-		return null;
+	private String getFontForTokenType(String tokenType, String defaultFont) {
+		String tokenFontPreferenceKey = PreferenceStore.getTokenFontPreferenceKey(tokenType);
+		if (defaultFont != null)
+			getPreferenceStore().setDefault(tokenFontPreferenceKey, defaultFont);
+		return getPreferenceStore().getString(tokenFontPreferenceKey);
 	}
 
-	private Color getBackgroundColorForTokenType(String tokenType) {
+	private String getBackgroundColorForTokenType(String tokenType, String defaultBackgroundColor) {
 		String tokenBackgroundColorPreferenceKey = PreferenceStore.getTokenBackgroundColorPreferenceKey(tokenType);
+		if (defaultBackgroundColor != null)
+			getPreferenceStore().setDefault(PreferenceStore.getTokenBackgroundColorPreferenceKey(tokenType),
+					defaultBackgroundColor);
 		String rgbString = getPreferenceStore().getString(tokenBackgroundColorPreferenceKey);
-		return colorFromString(rgbString, tokenBackgroundColorPreferenceKey);
+		return rgbString;
 	}
 
-	private Color colorFromString(String rgbString, String preferenceKey) {
-		if (rgbString.trim().length() > 0) {
-			Color col = JFaceResources.getColorRegistry().get(rgbString);
-			try {
-				if (col == null) {
-					RGB rgb = StringConverter.asRGB(rgbString);
-					JFaceResources.getColorRegistry().put(rgbString, rgb);
-					col = JFaceResources.getColorRegistry().get(rgbString);
-				}
-			}
-			catch (DataFormatException e) {
-				CoreLog.logError("Corrupt preference value for '" + preferenceKey + "' color.", e);
-			}
-			return col;
-		}
-		return null;
-	}
-
-	private Color getColorForTokenType(String tokenType) {
+	private String getColorForTokenType(String tokenType, String defaultColor) {
 		String preferenceKey = PreferenceStore.getTokenColorPreferenceKey(tokenType);
-		return colorFromString(getPreferenceStore().getString(preferenceKey), preferenceKey);
+		if (defaultColor != null)
+			getPreferenceStore().setDefault(PreferenceStore.getTokenColorPreferenceKey(tokenType), defaultColor);
+		String rgbString = getPreferenceStore().getString(preferenceKey);
+		return rgbString;
 	}
 
 }

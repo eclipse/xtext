@@ -12,7 +12,7 @@
    <extension
          point="org.eclipse.xtext.ui.syntaxColorer">
       <syntaxColorer
-            class="org.eclipse.xtext.ui.language.SyntaxColorer1"
+            class="org.eclipse.xtext.ui.SyntaxColorer1"
             languageId="org.eclipse.xtext.ui.tests.dummylanguage">
       </syntaxColorer>
    </extension>
