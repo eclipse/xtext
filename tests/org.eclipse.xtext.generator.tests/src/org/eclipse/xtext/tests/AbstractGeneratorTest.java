@@ -21,13 +21,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
-import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.parser.XtextASTFactory;
-import org.eclipse.xtext.parser.XtextParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.service.ILanguageDescriptor;
@@ -66,18 +63,10 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	}
 
 	protected IParser getParser() {
-	    // TODO remove after bootstrap
-	    if(XtextStandaloneSetup.getLanguageDescriptor().equals(currentLanguageDescriptor)) {
-	        return new XtextParser();
-	    }
 	    return ServiceRegistry.getService(currentLanguageDescriptor, IParser.class);
 	}
 
 	protected IElementFactory getASTFactory() throws Exception {
-        // TODO remove after bootstrap
-        if(XtextStandaloneSetup.getLanguageDescriptor().equals(currentLanguageDescriptor)) {
-            return new XtextASTFactory();
-        }
 	    return ServiceRegistry.getService(currentLanguageDescriptor, IElementFactory.class);
 	}
 
