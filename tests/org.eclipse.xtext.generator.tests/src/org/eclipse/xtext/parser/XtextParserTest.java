@@ -12,7 +12,7 @@ public class XtextParserTest extends AbstractGeneratorTest {
 	}
 	
 	public void test_resolveReturnType() throws Exception {
-		Grammar model = (Grammar) getModel("generate foo 'bar' as x Model returns x::Foo : 'holla' name=ID;");
+		Grammar model = (Grammar) getModel("language foo generate foo 'bar' as x Model returns x::Foo : 'holla' name=ID;");
 		assertWithXtend("'x'", "metamodelDeclarations.first().alias", model);
 	}
 }

@@ -6,32 +6,25 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
+import xtext;
 
 extension org::eclipse::xtext::util::GenProperties;
+extension org::eclipse::xtext::Extensions;
 
-languageName() : 
-	get('language.name');
-
-namespace() : 
-	get('language.namespace');
-	
 srcGenPath() :
 	get('src.gen.path');
 	
 modelFileExtension() :
 	get('model.file.extension');
 	
-packageName() :
-	namespace().replaceAll('/','\\.');
+packageName(Grammar this) :
+	getNamespace().replaceAll('/','\\.');
 
-pathName() :
-	namespace();
+languageName(Grammar this) :
+	getName().replaceAll("\\s","_");
 	
-constantsClassName() :
-	languageName() + "Constants";
-
-languageId() :
-	(get('language.id') == null 
-		? pathName()+'/'+languageName()
-		: get('language.id')
-	).replaceAll('/','.') ;
+pathName(Grammar this) :
+	getNamespace();
+	
+languageId(Grammar this) :
+	getId();

@@ -59,7 +59,7 @@ public class GeneratorFacade {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void generate(Grammar grammarModel, String languageName, String languageNamespace, String srcGenPath,
+	public static void generate(Grammar grammarModel, String srcGenPath,
 			String uiSrcGenPath, String modelFileExtension) throws IOException {
 		EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(XtextPackage.eNS_URI, XtextPackage.eINSTANCE);
@@ -82,7 +82,9 @@ public class GeneratorFacade {
 			}
 		};
 		execCtx.registerMetaModel(metamodel);
-
+		
+		String languageName = GrammarUtil.getName(grammarModel);
+		String languageNamespace = GrammarUtil.getNamespace(grammarModel);
 		Properties p = new Properties();
 		p.setProperty("language.name", languageName);
 		p.setProperty("language.namespace", languageNamespace);

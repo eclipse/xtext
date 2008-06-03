@@ -93,7 +93,6 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
             node.setGrammarElement(lexerRule);
         }*/
     }
-
 }
 
 @rulecatch { 
@@ -198,14 +197,14 @@ internalParse returns [EObject current=null] :
 
 «DEFINE createCompositeNode FOR emf::EObject
     »createCompositeNode("«
-    getID()
+    getFragment()
     »" /* «
     this.metaType.name» */, currentNode);«
 ENDDEFINE»
 
 «DEFINE insertCompositeNode FOR Action
     »CompositeNode newNode = createCompositeNode("«
-    getID()
+    getFragment()
     »" /* «
     this.metaType.name» */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
@@ -214,7 +213,7 @@ ENDDEFINE»
 
 «DEFINE createLeafNode FOR emf::EObject
     »createLeafNode("«
-    getID()
+    getFragment()
     »" /* «
     this.metaType.name
     » */, currentNode,«
