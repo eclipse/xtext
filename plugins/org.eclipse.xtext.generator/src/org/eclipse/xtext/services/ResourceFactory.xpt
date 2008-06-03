@@ -11,26 +11,18 @@
 
 «IMPORT xtext»
 
-«EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
+«EXTENSION org::eclipse::xtext::services::ServiceGen»
 
-«DEFINE factory FOR Grammar»
-«FILE pathName()+'/'+languageName()+'ResourceFactory.java'-»
-package «packageName()»;
+«DEFINE file FOR Grammar»
+«FILE pathName()+'/services/'+languageName()+'ResourceFactory.java'-»
+package «packageName()».services;
 
-import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
 
-public class «languageName()»ResourceFactory extends AbstractXtextResourceFactory {
+public class «serviceClass("ResourceFactory")» extends AbstractXtextResourceFactory {
 
-	private ILanguageFacade facade;
-
-	protected «languageName()»ResourceFactory(ILanguageFacade facade) {
-		this.facade = facade;
-	}	
-
-	@Override
-	protected ILanguageFacade getLanguageFacade() {
-		return facade;
+	public String getModelFileExtension() {
+		return "«modelFileExtension()»";
 	}
 	
 } 

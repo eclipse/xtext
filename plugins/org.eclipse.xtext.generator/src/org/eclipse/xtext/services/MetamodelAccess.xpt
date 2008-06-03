@@ -57,11 +57,6 @@ public class «serviceClass('MetamodelAccess')»  extends BaseEPackageAccess imple
 		return EPackage.Registry.INSTANCE.getEPackage(«gmm.name.toUpperCase()»_NS_URI);
 	}
 	«ENDFOREACH»
-	
-	public String getModelFileExtension() {
-		return "«modelFileExtension()»";
-	}
-   
 }
 «ENDFILE»
 «ENDDEFINE»

@@ -29,16 +29,15 @@ String serviceClass(Grammar this, String serviceName) :
 		case 'Parser': languageName() + 'Parser'
 		case 'ASTFactory': 'org.eclipse.xtext.parser.GenericEcoreElementFactory'
 		case 'ParseTreeConstructor': languageName() + 'ParseTreeConstructor'
-		case 'ResourceFactory': 'org.eclipse.xtext.resource.XtextResourceFactory'
+		case 'ResourceFactory': languageName() + 'ResourceFactory'
 		case 'GrammarAccess': languageName() + 'GrammarAccess'
 		case 'MetamodelAccess': languageName() + 'MetamodelAccess'
 		default: ''
 	};
-
+	
 String serviceClassFQN(Grammar this, String serviceName) :
     switch(serviceName) { 
         case 'ASTFactory': serviceClass(serviceName)
-        case 'ResourceFactory': serviceClass(serviceName)        
         default: packageName() + subpackage(serviceName) + '.' + serviceClass(serviceName)
     };
     
@@ -53,8 +52,11 @@ private String subpackage(String serviceName) :
         case 'Parser': '.parser'
         case 'ASTFactory': '.services'
         case 'ParseTreeConstructor': ''
-        case 'ResourceFactory': ''
+        case 'ResourceFactory': '.services'
         case 'GrammarAccess': '.services'
         case 'MetamodelAccess': '.services'
         default: ''
     };
+
+simpleClassName(String className) :
+	className.split('\\.').last();
