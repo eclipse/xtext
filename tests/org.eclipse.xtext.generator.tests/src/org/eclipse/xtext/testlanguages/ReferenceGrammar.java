@@ -6,26 +6,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-import xtext;
+package org.eclipse.xtext.testlanguages;
 
-extension org::eclipse::xtext::util::GenProperties;
-extension org::eclipse::xtext::Extensions;
+/**
+ * @author Jan Köhnlein - Initial contribution and API
+ *
+ */
+public class ReferenceGrammar {
 
-srcGenPath() :
-	get('src.gen.path');
-	
-modelFileExtension() :
-	get('model.file.extension');
-
-packageName(Grammar this) :
-	getNamespace().replaceAll('/','\\.');
-
-languageName(Grammar this) :
-	getName().replaceAll("\\s","_");
-	
-pathName(Grammar this) :
-	getNamespace();
-	
-languageId(Grammar this) :
-	getId();
-	
+}
