@@ -2,11 +2,10 @@ package org.eclipse.xtext.grammargen.tests;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.ILanguageFacade;
 
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
@@ -26,41 +25,27 @@ public abstract class SimpleTestStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new SimpleTestParserServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new SimpleTestASTFactoryServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new SimpleTestParseTreeConstructorServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new SimpleTestResourceFactoryServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new SimpleTestGrammarAccessServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new SimpleTestMetamodelAccessServiceFactory());
 			
-			if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.grammargen.tests.SimpleTest")==null) {
-				ILanguageFacade facade = new SimpleTestLanguageFacade();
-				LanguageFacadeFactory.register(facade);
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"simpletest", facade.getResourceFactory());
-			}
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					"simpletest", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;
 		}
 	}
 	
 	private static ILanguageDescriptor INSTANCE;
-	
-	public static final String LANGUAGE_ID = "org.eclipse.xtext.grammargen.tests.SimpleTest";
-	public static final String LANGUAGE_NAME = "SimpleTest";
-	public static final String NAMESPACE = "org/eclipse/xtext/grammargen/tests";
     
     public static ILanguageDescriptor getLanguageDescriptor() {
     	if (INSTANCE == null) {
-    		INSTANCE = LanguageDescriptorFactory.get(LANGUAGE_ID);
+    		INSTANCE = LanguageDescriptorFactory.get(ISimpleTest.ID);
     		if(INSTANCE == null) {
     			// TODO put super grammar
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, null);
+    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(ISimpleTest.ID, ISimpleTest.NAME, ISimpleTest.NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
     		}
     	}
     	return INSTANCE;

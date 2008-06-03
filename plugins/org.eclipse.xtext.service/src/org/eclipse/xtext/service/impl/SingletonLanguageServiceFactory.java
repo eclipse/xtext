@@ -18,10 +18,12 @@ import org.eclipse.xtext.service.ILanguageServiceFactory;
 public class SingletonLanguageServiceFactory implements ILanguageServiceFactory{
 	
 	private ILanguageService service;
+	private Class<? extends ILanguageService> clazz;
 	
-	public SingletonLanguageServiceFactory(ILanguageService service) {
+	public SingletonLanguageServiceFactory(ILanguageService service, Class<? extends ILanguageService> clazz) {
 		super();
 		this.service = service;
+		this.clazz= clazz;
 	}
 
 	public ILanguageService createLanguageService() {
@@ -29,7 +31,7 @@ public class SingletonLanguageServiceFactory implements ILanguageServiceFactory{
 	}
 
     public Class<? extends ILanguageService> getServiceClass() {
-        return service.getClass();
+        return clazz;
     }
 
 }

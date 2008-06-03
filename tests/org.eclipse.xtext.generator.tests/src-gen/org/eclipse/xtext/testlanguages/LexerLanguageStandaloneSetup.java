@@ -2,11 +2,10 @@ package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.ILanguageFacade;
 
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
@@ -26,41 +25,27 @@ public abstract class LexerLanguageStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageParserServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageASTFactoryServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageParseTreeConstructorServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageResourceFactoryServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageGrammarAccessServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageMetamodelAccessServiceFactory());
 			
-			if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.LexerLanguage")==null) {
-				ILanguageFacade facade = new LexerLanguageLanguageFacade();
-				LanguageFacadeFactory.register(facade);
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"lexerlanguage", facade.getResourceFactory());
-			}
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					"lexerlanguage", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;
 		}
 	}
 	
 	private static ILanguageDescriptor INSTANCE;
-	
-	public static final String LANGUAGE_ID = "org.eclipse.xtext.testlanguages.LexerLanguage";
-	public static final String LANGUAGE_NAME = "LexerLanguage";
-	public static final String NAMESPACE = "org/eclipse/xtext/testlanguages";
     
     public static ILanguageDescriptor getLanguageDescriptor() {
     	if (INSTANCE == null) {
-    		INSTANCE = LanguageDescriptorFactory.get(LANGUAGE_ID);
+    		INSTANCE = LanguageDescriptorFactory.get(ILexerLanguage.ID);
     		if(INSTANCE == null) {
     			// TODO put super grammar
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, null);
+    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(ILexerLanguage.ID, ILexerLanguage.NAME, ILexerLanguage.NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
     		}
     	}
     	return INSTANCE;
