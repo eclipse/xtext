@@ -51,7 +51,7 @@ public class LanguageServiceActivator {
                 String languageName = element.getAttribute(NAME);
                 String namespace = element.getNamespaceIdentifier();
                 try {
-                    ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.createLanguageDescriptor(languageId, languageName, namespace);
+                    ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.createLanguageDescriptor(languageId, languageName, namespace, null);
                     registerDefaultServices(languageDescriptor);
                 } catch (Exception e) {
                     CoreLog.logError(e);

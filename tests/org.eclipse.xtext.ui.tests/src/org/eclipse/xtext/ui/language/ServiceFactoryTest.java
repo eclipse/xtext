@@ -30,7 +30,7 @@ public class ServiceFactoryTest extends TestCase {
 	}
 	
 	public void testGetServiceWithoutClass() {
-		ILanguageDescriptor language = LanguageDescriptorFactory.createLanguageDescriptor("org.eclipse.xtexte.ui.tests.language.ServiceWithoutClass", "", "");
+		ILanguageDescriptor language = LanguageDescriptorFactory.createLanguageDescriptor("org.eclipse.xtexte.ui.tests.language.ServiceWithoutClass", "", "",null);
 		ISyntaxColorer syntaxColorer = ServiceRegistry.getService(language, ISyntaxColorer.class);
 		assertNull(syntaxColorer);	
 	}
