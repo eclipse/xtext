@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g 2008-06-02 15:08:54
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g 2008-06-03 10:36:02
 
 package org.eclipse.xtext.parsetree.reconstr.parser.internal; 
 
@@ -55,9 +55,8 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
 
 
 
-
     // $ANTLR start internalParse
-    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:90:1: internalParse returns [EObject current=null] : iv_ruleOp= ruleOp EOF ;
+    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:89:1: internalParse returns [EObject current=null] : iv_ruleOp= ruleOp EOF ;
     public final EObject internalParse() throws RecognitionException {
         EObject current = null;
 
@@ -65,8 +64,8 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:90:46: (iv_ruleOp= ruleOp EOF )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:91:3: iv_ruleOp= ruleOp EOF
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:89:46: (iv_ruleOp= ruleOp EOF )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:90:3: iv_ruleOp= ruleOp EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleOp_in_internalParse76);
@@ -94,7 +93,7 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleOp
-    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:99:1: ruleOp returns [EObject current=null] : (this_Term= ruleTerm ( () (lv_values= ruleTerm ) )* ) ;
+    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:98:1: ruleOp returns [EObject current=null] : (this_Term= ruleTerm ( () (lv_values= ruleTerm ) )* ) ;
     public final EObject ruleOp() throws RecognitionException {
         EObject current = null;
 
@@ -105,11 +104,11 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:100:33: ( (this_Term= ruleTerm ( () (lv_values= ruleTerm ) )* ) )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:101:1: (this_Term= ruleTerm ( () (lv_values= ruleTerm ) )* )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:99:33: ( (this_Term= ruleTerm ( () (lv_values= ruleTerm ) )* ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:100:1: (this_Term= ruleTerm ( () (lv_values= ruleTerm ) )* )
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:101:1: (this_Term= ruleTerm ( () (lv_values= ruleTerm ) )* )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:101:2: this_Term= ruleTerm ( () (lv_values= ruleTerm ) )*
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:100:1: (this_Term= ruleTerm ( () (lv_values= ruleTerm ) )* )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:100:2: this_Term= ruleTerm ( () (lv_values= ruleTerm ) )*
             {
             pushFollow(FOLLOW_ruleTerm_in_ruleOp114);
             this_Term=ruleTerm();
@@ -118,7 +117,7 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
              
                     current = this_Term; 
                 
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:105:1: ( () (lv_values= ruleTerm ) )*
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:104:1: ( () (lv_values= ruleTerm ) )*
             loop1:
             do {
                 int alt1=2;
@@ -131,10 +130,10 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:105:2: () (lv_values= ruleTerm )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:104:2: () (lv_values= ruleTerm )
             	    {
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:105:2: ()
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:106:5: 
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:104:2: ()
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:105:5: 
             	    {
             	     
             	            temp=factory.create("Op");
@@ -149,8 +148,8 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
 
             	    }
 
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:116:2: (lv_values= ruleTerm )
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:118:5: lv_values= ruleTerm
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:115:2: (lv_values= ruleTerm )
+            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:117:5: lv_values= ruleTerm
             	    {
             	     
             	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -200,7 +199,7 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleTerm
-    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:133:1: ruleTerm returns [EObject current=null] : (this_Atom= ruleAtom | this_Parens= ruleParens ) ;
+    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:132:1: ruleTerm returns [EObject current=null] : (this_Atom= ruleAtom | this_Parens= ruleParens ) ;
     public final EObject ruleTerm() throws RecognitionException {
         EObject current = null;
 
@@ -211,10 +210,10 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:134:33: ( (this_Atom= ruleAtom | this_Parens= ruleParens ) )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:135:1: (this_Atom= ruleAtom | this_Parens= ruleParens )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:133:33: ( (this_Atom= ruleAtom | this_Parens= ruleParens ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:134:1: (this_Atom= ruleAtom | this_Parens= ruleParens )
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:135:1: (this_Atom= ruleAtom | this_Parens= ruleParens )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:134:1: (this_Atom= ruleAtom | this_Parens= ruleParens )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -226,13 +225,13 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("135:1: (this_Atom= ruleAtom | this_Parens= ruleParens )", 2, 0, input);
+                    new NoViableAltException("134:1: (this_Atom= ruleAtom | this_Parens= ruleParens )", 2, 0, input);
 
                 throw nvae;
             }
             switch (alt2) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:135:2: this_Atom= ruleAtom
+                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:134:2: this_Atom= ruleAtom
                     {
                     pushFollow(FOLLOW_ruleAtom_in_ruleTerm189);
                     this_Atom=ruleAtom();
@@ -245,7 +244,7 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:140:6: this_Parens= ruleParens
+                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:139:6: this_Parens= ruleParens
                     {
                     pushFollow(FOLLOW_ruleParens_in_ruleTerm205);
                     this_Parens=ruleParens();
@@ -279,7 +278,7 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleAtom
-    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:148:1: ruleAtom returns [EObject current=null] : (lv_name= RULE_ID ) ;
+    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:147:1: ruleAtom returns [EObject current=null] : (lv_name= RULE_ID ) ;
     public final EObject ruleAtom() throws RecognitionException {
         EObject current = null;
 
@@ -287,11 +286,11 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:149:33: ( (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:150:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:148:33: ( (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:149:1: (lv_name= RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:150:1: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:151:5: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:149:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:150:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAtom244); 
@@ -326,7 +325,7 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleParens
-    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:166:1: ruleParens returns [EObject current=null] : ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? ) ;
+    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:165:1: ruleParens returns [EObject current=null] : ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? ) ;
     public final EObject ruleParens() throws RecognitionException {
         EObject current = null;
 
@@ -336,17 +335,17 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:167:33: ( ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? ) )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:168:1: ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:166:33: ( ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:167:1: ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? )
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:168:1: ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:168:2: ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )?
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:167:1: ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:167:2: ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )?
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:168:2: ( ( '(' this_Op= ruleOp ) ')' )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:168:3: ( '(' this_Op= ruleOp ) ')'
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:167:2: ( ( '(' this_Op= ruleOp ) ')' )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:167:3: ( '(' this_Op= ruleOp ) ')'
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:168:3: ( '(' this_Op= ruleOp )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:168:4: '(' this_Op= ruleOp
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:167:3: ( '(' this_Op= ruleOp )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:167:4: '(' this_Op= ruleOp
             {
             match(input,12,FOLLOW_12_in_ruleParens286); 
 
@@ -369,7 +368,7 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:182:2: (lv_em= '!' )?
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:181:2: (lv_em= '!' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -378,7 +377,7 @@ public class InternalSimpleReconstrTestParser extends AbstractAntlrParser {
             }
             switch (alt3) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:183:5: lv_em= '!'
+                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g:182:5: lv_em= '!'
                     {
                     lv_em=(Token)input.LT(1);
                     match(input,14,FOLLOW_14_in_ruleParens326); 
