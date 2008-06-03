@@ -1,4 +1,11 @@
-package org.eclipse.xtext.generator.resource;
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/package org.eclipse.xtext.generator.resource;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -16,6 +23,11 @@ import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
 import org.eclipse.xtext.xtext2ecore.EcoreModelComparator;
 
+/**
+ * 
+ * @author Jan Köhnlein - Initial contribution and API
+ *
+ */
 public class ResourceTest extends TestCase {
 
 	public void testResource() throws Exception {
