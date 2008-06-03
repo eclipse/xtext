@@ -6,4 +6,5 @@ Bundle-Version: 1.0.0
 Bundle-Vendor: itemis AG
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.apache.commons.logging;bundle-version="1.0.4"
-Export-Package: org.eclipse.xtext.service
+Export-Package: org.eclipse.xtext.service,
+ org.eclipse.xtext.service.impl
