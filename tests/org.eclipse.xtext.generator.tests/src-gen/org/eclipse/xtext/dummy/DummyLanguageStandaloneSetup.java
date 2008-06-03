@@ -15,7 +15,7 @@ public abstract class DummyLanguageStandaloneSetup {
 
 	private static boolean isInitialized = false;
 
-	public static void doSetup() {
+	public synchronized static void doSetup() {
 		if(!isInitialized) {
 			
 			// setup super language first
@@ -39,13 +39,16 @@ public abstract class DummyLanguageStandaloneSetup {
 	}
 	
 	private static ILanguageDescriptor INSTANCE;
+	private final static Object LOCK = new Object();
     
     public static ILanguageDescriptor getLanguageDescriptor() {
     	if (INSTANCE == null) {
-    		INSTANCE = LanguageDescriptorFactory.get(IDummyLanguage.ID);
-    		if(INSTANCE == null) {
-    			// TODO put super grammar
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IDummyLanguage.ID, IDummyLanguage.NAME, IDummyLanguage.NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
+    		synchronized(LOCK) {
+	    		INSTANCE = LanguageDescriptorFactory.get(IDummyLanguage.ID);
+	    		if(INSTANCE == null) {
+	    			// TODO put super grammar
+	    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IDummyLanguage.ID, IDummyLanguage.NAME, IDummyLanguage.NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
+	    		}
     		}
     	}
     	return INSTANCE;

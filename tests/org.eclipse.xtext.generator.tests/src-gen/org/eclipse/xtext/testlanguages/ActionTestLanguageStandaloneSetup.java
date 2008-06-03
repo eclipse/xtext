@@ -15,7 +15,7 @@ public abstract class ActionTestLanguageStandaloneSetup {
 
 	private static boolean isInitialized = false;
 
-	public static void doSetup() {
+	public synchronized static void doSetup() {
 		if(!isInitialized) {
 			
 			// setup super language first
@@ -39,13 +39,16 @@ public abstract class ActionTestLanguageStandaloneSetup {
 	}
 	
 	private static ILanguageDescriptor INSTANCE;
+	private final static Object LOCK = new Object();
     
     public static ILanguageDescriptor getLanguageDescriptor() {
     	if (INSTANCE == null) {
-    		INSTANCE = LanguageDescriptorFactory.get(IActionTestLanguage.ID);
-    		if(INSTANCE == null) {
-    			// TODO put super grammar
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IActionTestLanguage.ID, IActionTestLanguage.NAME, IActionTestLanguage.NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
+    		synchronized(LOCK) {
+	    		INSTANCE = LanguageDescriptorFactory.get(IActionTestLanguage.ID);
+	    		if(INSTANCE == null) {
+	    			// TODO put super grammar
+	    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IActionTestLanguage.ID, IActionTestLanguage.NAME, IActionTestLanguage.NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
+	    		}
     		}
     	}
     	return INSTANCE;
