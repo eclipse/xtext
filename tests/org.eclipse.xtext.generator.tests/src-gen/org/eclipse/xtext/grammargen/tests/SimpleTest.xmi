@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext" name="SimpleTest">
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>grammargen</idElements>
+  <idElements>tests</idElements>
+  <idElements>SimpleTest</idElements>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="SimpleTest" nsURI="&quot;http://eclipse.org/xtext/tests/SimpleTest&quot;"/>
   <parserRules name="Foo">
-    <alternatives xsi:type="xtext:Assignment" operator="=" feature="name">
+    <alternatives xsi:type="xtext:Assignment" feature="name" operator="=">
       <terminal xsi:type="xtext:RuleCall" name="ID"/>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="SimpleTest" nsURI="&quot;http://eclipse.org/xtext/tests/SimpleTest&quot;"/>
 </xtext:Grammar>

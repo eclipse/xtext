@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>testlanguages</idElements>
+  <idElements>ActionTestLanguage</idElements>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ActionLang" nsURI="&quot;http://www.eclipse.org/2008/tmf/xtext/ActionLang&quot;"/>
   <parserRules name="Model">
-    <alternatives xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="children">
+    <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="children" operator="+=">
       <terminal xsi:type="xtext:RuleCall" name="Element"/>
     </alternatives>
   </parserRules>
@@ -13,7 +19,7 @@
         <abstractTokens xsi:type="xtext:Action" feature="items" operator="+=">
           <typeName name="Item"/>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="items">
+        <abstractTokens xsi:type="xtext:Assignment" feature="items" operator="+=">
           <terminal xsi:type="xtext:RuleCall" name="Item"/>
         </abstractTokens>
       </abstractTokens>
@@ -25,10 +31,9 @@
       <abstractTokens xsi:type="xtext:Action" feature="content" operator="=">
         <typeName name="Thing"/>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+      <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
         <terminal xsi:type="xtext:RuleCall" name="ID"/>
       </abstractTokens>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ActionLang" nsURI="&quot;http://www.eclipse.org/2008/tmf/xtext/ActionLang&quot;"/>
 </xtext:Grammar>

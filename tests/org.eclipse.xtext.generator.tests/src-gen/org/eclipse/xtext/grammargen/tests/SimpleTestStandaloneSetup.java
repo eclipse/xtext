@@ -8,22 +8,30 @@ import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.grammargen.tests.services.*;
 
 public abstract class SimpleTestStandaloneSetup {
 
 	public static void doSetup() {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new XMIResourceFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xmi", new XMIResourceFactoryImpl());
+		
+		// setup super language first
+		XtextBuiltinStandaloneSetup.doSetup();
+		
 		getLanguageDescriptor();
+		
 		ServiceRegistry.registerFactory(new SimpleTestParserServiceFactory());
+		
 		ServiceRegistry.registerFactory(new SimpleTestASTFactoryServiceFactory());
+		
 		ServiceRegistry.registerFactory(new SimpleTestParseTreeConstructorServiceFactory());
+		
 		ServiceRegistry.registerFactory(new SimpleTestResourceFactoryServiceFactory());
+		
 		ServiceRegistry.registerFactory(new SimpleTestGrammarAccessServiceFactory());
+		
 		ServiceRegistry.registerFactory(new SimpleTestMetamodelAccessServiceFactory());
+		
 		if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.grammargen.tests.SimpleTest")==null) {
 			ILanguageFacade facade = new SimpleTestLanguageFacade();
 			LanguageFacadeFactory.register(facade);
@@ -42,7 +50,7 @@ public abstract class SimpleTestStandaloneSetup {
     	if (INSTANCE == null) {
     		INSTANCE = LanguageDescriptorFactory.get(LANGUAGE_ID);
     		if(INSTANCE == null) {
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE);
+    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
     		}
     	}
     	return INSTANCE;

@@ -8,22 +8,30 @@ import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.dummy.services.*;
 
 public abstract class DummyLanguageStandaloneSetup {
 
 	public static void doSetup() {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new XMIResourceFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xmi", new XMIResourceFactoryImpl());
+		
+		// setup super language first
+		XtextBuiltinStandaloneSetup.doSetup();
+		
 		getLanguageDescriptor();
+		
 		ServiceRegistry.registerFactory(new DummyLanguageParserServiceFactory());
+		
 		ServiceRegistry.registerFactory(new DummyLanguageASTFactoryServiceFactory());
+		
 		ServiceRegistry.registerFactory(new DummyLanguageParseTreeConstructorServiceFactory());
+		
 		ServiceRegistry.registerFactory(new DummyLanguageResourceFactoryServiceFactory());
+		
 		ServiceRegistry.registerFactory(new DummyLanguageGrammarAccessServiceFactory());
+		
 		ServiceRegistry.registerFactory(new DummyLanguageMetamodelAccessServiceFactory());
+		
 		if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.dummy.DummyLanguage")==null) {
 			ILanguageFacade facade = new DummyLanguageLanguageFacade();
 			LanguageFacadeFactory.register(facade);
@@ -42,7 +50,7 @@ public abstract class DummyLanguageStandaloneSetup {
     	if (INSTANCE == null) {
     		INSTANCE = LanguageDescriptorFactory.get(LANGUAGE_ID);
     		if(INSTANCE == null) {
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE);
+    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
     		}
     	}
     	return INSTANCE;

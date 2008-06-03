@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>parsetree</idElements>
+  <idElements>reconstr</idElements>
+  <idElements>ComplexReconstrTest</idElements>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="complexrewritetest" nsURI="&quot;http://complex/rewrite/test&quot;"/>
   <parserRules name="Op">
     <type name="Expression"/>
     <alternatives xsi:type="xtext:Group">
@@ -12,7 +19,7 @@
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Keyword" value="'+'"/>
           </abstractTokens>
-          <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="addOperands">
+          <abstractTokens xsi:type="xtext:Assignment" feature="addOperands" operator="+=">
             <terminal xsi:type="xtext:RuleCall" name="Term"/>
           </abstractTokens>
         </groups>
@@ -23,7 +30,7 @@
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Keyword" value="'-'"/>
           </abstractTokens>
-          <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="minusOperands">
+          <abstractTokens xsi:type="xtext:Assignment" feature="minusOperands" operator="+=">
             <terminal xsi:type="xtext:RuleCall" name="Term"/>
           </abstractTokens>
         </groups>
@@ -38,7 +45,7 @@
     </alternatives>
   </parserRules>
   <parserRules name="Atom">
-    <alternatives xsi:type="xtext:Assignment" operator="=" feature="name">
+    <alternatives xsi:type="xtext:Assignment" feature="name" operator="=">
       <terminal xsi:type="xtext:RuleCall" name="ID"/>
     </alternatives>
   </parserRules>
@@ -52,10 +59,9 @@
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value="')'"/>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" cardinality="?" operator="=" feature="em">
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="em" operator="=">
         <terminal xsi:type="xtext:Keyword" value="'!'"/>
       </abstractTokens>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="complexrewritetest" nsURI="&quot;http://complex/rewrite/test&quot;"/>
 </xtext:Grammar>

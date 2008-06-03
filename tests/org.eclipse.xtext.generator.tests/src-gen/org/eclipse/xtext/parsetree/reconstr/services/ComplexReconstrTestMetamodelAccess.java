@@ -7,7 +7,7 @@ import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class ComplexReconstrTestMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
+public class ComplexReconstrTestMetamodelAccess  extends BaseEPackageAccess implements IMetamodelAccess {
 
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {
@@ -37,7 +37,6 @@ public class ComplexReconstrTestMetamodelAccess extends BaseEPackageAccess imple
 		return EPackage.Registry.INSTANCE.getEPackage(COMPLEXREWRITETEST_NS_URI);
 	}
 	
-
 	
 	public String getModelFileExtension() {
 		return "complexreconstrtest";

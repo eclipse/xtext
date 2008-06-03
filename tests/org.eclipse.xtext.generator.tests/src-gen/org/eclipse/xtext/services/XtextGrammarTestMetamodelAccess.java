@@ -7,7 +7,7 @@ import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class XtextGrammarTestMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
+public class XtextGrammarTestMetamodelAccess  extends BaseEPackageAccess implements IMetamodelAccess {
 
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {
@@ -37,7 +37,6 @@ public class XtextGrammarTestMetamodelAccess extends BaseEPackageAccess implemen
 		return EPackage.Registry.INSTANCE.getEPackage(XTEXTTEST_NS_URI);
 	}
 	
-
 	
 	public String getModelFileExtension() {
 		return "xtextgrammartest";
