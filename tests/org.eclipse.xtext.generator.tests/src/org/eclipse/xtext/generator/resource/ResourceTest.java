@@ -11,8 +11,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.ILanguageFacade;
-import org.eclipse.xtext.LanguageFacadeFactory;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
 import org.eclipse.xtext.xtext2ecore.EcoreModelComparator;
 
@@ -21,9 +21,9 @@ public class ResourceTest extends TestCase {
 	public void testResource() throws Exception {
 		new Object(); // workaround for Java bug on MacOSX
 		org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup.doSetup();
-		ILanguageFacade facade = LanguageFacadeFactory.getFacade(TestLanguageStandaloneSetup.LANGUAGE_ID);
+		IResourceFactory resourceFactory = ServiceRegistry.getService(TestLanguageStandaloneSetup.getLanguageDescriptor(), IResourceFactory.class);
 
-		File modelFile = File.createTempFile("testfile", "." + facade.getModelFileExtension());
+		File modelFile = File.createTempFile("testfile", "." + resourceFactory.getModelFileExtension());
 		modelFile.deleteOnExit();
 		FileWriter fileWriter = new FileWriter(modelFile);
 		String model = "reducible 'x' choice optional y choice z reducible 'x' 'y'";
@@ -32,7 +32,7 @@ public class ResourceTest extends TestCase {
 		
 		ResourceSet rs0 = new ResourceSetImpl();
 		Resource resource = loadAsResource(modelFile, rs0);
-		File savedFile = File.createTempFile("testfile_save", "." + facade.getModelFileExtension());
+		File savedFile = File.createTempFile("testfile_save", "." + resourceFactory.getModelFileExtension());
 		resource.setURI(URI.createURI(savedFile.toURL().toString()));
 		resource.setModified(true);
 		resource.save(null);

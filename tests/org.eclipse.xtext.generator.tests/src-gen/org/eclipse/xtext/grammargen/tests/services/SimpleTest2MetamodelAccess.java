@@ -37,9 +37,4 @@ public class SimpleTest2MetamodelAccess  extends BaseEPackageAccess implements I
 		return EPackage.Registry.INSTANCE.getEPackage(SIMPLETEST2_NS_URI);
 	}
 	
-	
-	public String getModelFileExtension() {
-		return "simpletest2";
-	}
-   
 }

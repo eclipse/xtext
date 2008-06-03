@@ -1,20 +1,18 @@
 package org.eclipse.xtext.parsetree.reconstr.services;
 
-import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.ILanguageServiceFactory;
-import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.parsetree.reconstr.parser.*;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestResourceFactory;
 
 public class SimpleReconstrTestResourceFactoryServiceFactory implements ILanguageServiceFactory {
 
-    public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        org.eclipse.xtext.resource.IResourceFactory serviceObject = new org.eclipse.xtext.resource.XtextResourceFactory();
+    public ILanguageService createLanguageService() {
+        IResourceFactory serviceObject = new SimpleReconstrTestResourceFactory();
         return serviceObject;
     }
 
-    public boolean isFactoryFor(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-       return languageDescriptor == SimpleReconstrTestStandaloneSetup.getLanguageDescriptor()
-           && org.eclipse.xtext.resource.IResourceFactory.class.equals(serviceClass);
-    }
+	public Class<? extends ILanguageService> getServiceClass() {
+		return IResourceFactory.class;
+	}
 }

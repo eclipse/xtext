@@ -16,7 +16,7 @@ import junit.framework.TestCase;
  */
 public class LanguageDescriptorFactoryTest extends TestCase {
 	public void testgetLanguageDescriptor() throws Exception {
-		ILanguageDescriptor descr = LanguageDescriptorFactory.createLanguageDescriptor("org.eclipse.xtext.ui.tests.dummylanguage", "Dummy Language", "org.eclipse");
+		ILanguageDescriptor descr = LanguageDescriptorFactory.createLanguageDescriptor("org.eclipse.xtext.ui.tests.dummylanguage", "Dummy Language", "org.eclipse", null);
 		assertNotNull("LanguageDescriptor Initializing failed", descr);
 		assertEquals("org.eclipse.xtext.ui.tests.dummylanguage", descr
 				.getId());

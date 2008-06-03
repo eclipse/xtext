@@ -1,20 +1,18 @@
 package org.eclipse.xtext.dummy.services;
 
-import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.ILanguageServiceFactory;
-import org.eclipse.xtext.dummy.*;
-import org.eclipse.xtext.dummy.parser.*;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.dummy.services.DummyLanguageGrammarAccess;
 
 public class DummyLanguageGrammarAccessServiceFactory implements ILanguageServiceFactory {
 
-    public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        org.eclipse.xtext.IGrammarAccess serviceObject = new DummyLanguageGrammarAccess();
+    public ILanguageService createLanguageService() {
+        IGrammarAccess serviceObject = new DummyLanguageGrammarAccess();
         return serviceObject;
     }
 
-    public boolean isFactoryFor(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-       return languageDescriptor == DummyLanguageStandaloneSetup.getLanguageDescriptor()
-           && org.eclipse.xtext.IGrammarAccess.class.equals(serviceClass);
-    }
+	public Class<? extends ILanguageService> getServiceClass() {
+		return IGrammarAccess.class;
+	}
 }

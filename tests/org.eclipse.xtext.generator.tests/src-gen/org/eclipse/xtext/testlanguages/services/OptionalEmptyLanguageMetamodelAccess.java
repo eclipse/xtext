@@ -37,9 +37,4 @@ public class OptionalEmptyLanguageMetamodelAccess  extends BaseEPackageAccess im
 		return EPackage.Registry.INSTANCE.getEPackage(OPTIONALEMPTY_NS_URI);
 	}
 	
-	
-	public String getModelFileExtension() {
-		return "optionalemptylanguage";
-	}
-   
 }

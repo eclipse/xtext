@@ -1,20 +1,18 @@
 package org.eclipse.xtext.testlanguages.services;
 
-import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.ILanguageServiceFactory;
-import org.eclipse.xtext.testlanguages.*;
-import org.eclipse.xtext.testlanguages.parser.*;
+import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.testlanguages.OptionalEmptyLanguageParseTreeConstructor;
 
 public class OptionalEmptyLanguageParseTreeConstructorServiceFactory implements ILanguageServiceFactory {
 
-    public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        org.eclipse.xtext.parsetree.IParseTreeConstructor serviceObject = new OptionalEmptyLanguageParseTreeConstructor();
+    public ILanguageService createLanguageService() {
+        IParseTreeConstructor serviceObject = new OptionalEmptyLanguageParseTreeConstructor();
         return serviceObject;
     }
 
-    public boolean isFactoryFor(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-       return languageDescriptor == OptionalEmptyLanguageStandaloneSetup.getLanguageDescriptor()
-           && org.eclipse.xtext.parsetree.IParseTreeConstructor.class.equals(serviceClass);
-    }
+	public Class<? extends ILanguageService> getServiceClass() {
+		return IParseTreeConstructor.class;
+	}
 }

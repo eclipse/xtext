@@ -37,9 +37,4 @@ public class DummyLanguageMetamodelAccess  extends BaseEPackageAccess implements
 		return EPackage.Registry.INSTANCE.getEPackage(DUMMYLANG_NS_URI);
 	}
 	
-	
-	public String getModelFileExtension() {
-		return "dummylanguage";
-	}
-   
 }

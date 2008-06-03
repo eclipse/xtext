@@ -9,13 +9,10 @@
 package org.eclipse.xtext.metamodelreferencing.tests;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestMetamodelAccess;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestMetamodelAccessServiceFactory;
-import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.service.ILanguageServiceFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -26,13 +23,10 @@ public class MultiGenMMTest extends AbstractGeneratorTest {
 		super.setUp();
 		MetamodelRefTestStandaloneSetup.doSetup();
 		with(MetamodelRefTestStandaloneSetup.class);
-        ILanguageServiceFactory factory = ServiceRegistry.getFactory(MetamodelRefTestStandaloneSetup.getLanguageDescriptor(), IMetamodelAccess.class);
-        ServiceRegistry.deregisterFactory(factory);
-        
-        ServiceRegistry.registerFactory(new MetamodelRefTestMetamodelAccessServiceFactory() {
+		ServiceRegistry.registerFactory(MetamodelRefTestStandaloneSetup.getLanguageDescriptor(), 
+                new MetamodelRefTestMetamodelAccessServiceFactory() {
             @Override
-            public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor,
-                    Class<? extends ILanguageService> serviceClass) {
+            public ILanguageService createLanguageService() {
                 return new MetamodelRefTestMetamodelAccess() {
                     @Override
                     public EPackage[] getGeneratedEPackages() {
@@ -42,7 +36,7 @@ public class MultiGenMMTest extends AbstractGeneratorTest {
                     }
                 };
             } 
-        });
+        }, ServiceRegistry.PRIORITY_MAX);
 	}
 	
 	public void testStuff() throws Exception {

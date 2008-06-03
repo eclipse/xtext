@@ -5,38 +5,47 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.LanguageFacadeFactory;
 import org.eclipse.xtext.ILanguageFacade;
 
+import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
+
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.parsetree.reconstr.services.*;
 
 public abstract class SimpleReconstrTestStandaloneSetup {
 
+	private static boolean isInitialized = false;
+
 	public static void doSetup() {
-		
-		// setup super language first
-		XtextBuiltinStandaloneSetup.doSetup();
-		
-		getLanguageDescriptor();
-		
-		ServiceRegistry.registerFactory(new SimpleReconstrTestParserServiceFactory());
-		
-		ServiceRegistry.registerFactory(new SimpleReconstrTestASTFactoryServiceFactory());
-		
-		ServiceRegistry.registerFactory(new SimpleReconstrTestParseTreeConstructorServiceFactory());
-		
-		ServiceRegistry.registerFactory(new SimpleReconstrTestResourceFactoryServiceFactory());
-		
-		ServiceRegistry.registerFactory(new SimpleReconstrTestGrammarAccessServiceFactory());
-		
-		ServiceRegistry.registerFactory(new SimpleReconstrTestMetamodelAccessServiceFactory());
-		
-		if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest")==null) {
-			ILanguageFacade facade = new SimpleReconstrTestLanguageFacade();
-			LanguageFacadeFactory.register(facade);
+		if(!isInitialized) {
+			
+			// setup super language first
+			XtextBuiltinStandaloneSetup.doSetup();
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"simplereconstrtest", facade.getResourceFactory());
+				"ecore", new XMIResourceFactoryImpl());
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"xmi", new XMIResourceFactoryImpl());
+			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new SimpleReconstrTestParserServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new SimpleReconstrTestASTFactoryServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new SimpleReconstrTestParseTreeConstructorServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new SimpleReconstrTestResourceFactoryServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new SimpleReconstrTestGrammarAccessServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new SimpleReconstrTestMetamodelAccessServiceFactory());
+			
+			if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest")==null) {
+				ILanguageFacade facade = new SimpleReconstrTestLanguageFacade();
+				LanguageFacadeFactory.register(facade);
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					"simplereconstrtest", facade.getResourceFactory());
+			}
+			isInitialized = true;
 		}
 	}
 	
@@ -50,7 +59,8 @@ public abstract class SimpleReconstrTestStandaloneSetup {
     	if (INSTANCE == null) {
     		INSTANCE = LanguageDescriptorFactory.get(LANGUAGE_ID);
     		if(INSTANCE == null) {
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
+    			// TODO put super grammar
+    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, null);
     		}
     	}
     	return INSTANCE;

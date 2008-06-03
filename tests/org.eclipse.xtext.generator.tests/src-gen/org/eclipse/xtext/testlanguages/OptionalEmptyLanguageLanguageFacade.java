@@ -54,6 +54,6 @@ public class OptionalEmptyLanguageLanguageFacade extends BaseEPackageAccess impl
 	}
 
 	public String getModelFileExtension() {
-		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getModelFileExtension();
+		return ServiceRegistry.getService(getLanguageDescriptor(), IResourceFactory.class).getModelFileExtension();
 	}
 }

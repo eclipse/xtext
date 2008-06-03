@@ -54,6 +54,6 @@ public class SimpleTestLanguageFacade extends BaseEPackageAccess implements ILan
 	}
 
 	public String getModelFileExtension() {
-		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getModelFileExtension();
+		return ServiceRegistry.getService(getLanguageDescriptor(), IResourceFactory.class).getModelFileExtension();
 	}
 }

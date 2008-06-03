@@ -1,25 +1,49 @@
-/*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- *******************************************************************************/
 package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.ILanguageFacade;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.InjectedService;
 
-public abstract class AbstractXtextResourceFactory implements Resource.Factory {
+public abstract class AbstractXtextResourceFactory implements IResourceFactory {
 
-	public Resource createResource(URI uri) {
-		ILanguageFacade facade = getLanguageFacade();
-		XtextResource xtextResource = new XtextResource(facade, uri);
-		return xtextResource;
-	}
+    private ILanguageDescriptor languageDescriptor;
 
-	protected abstract ILanguageFacade getLanguageFacade();
+    private IParser parser;
+
+    private IElementFactory elementFactory;
+
+    private IParseTreeConstructor parsetreeConstructor;
+
+    public Resource createResource(URI uri) {
+        return new NewXtextResource(elementFactory, parser, parsetreeConstructor, uri);
+    }
+
+    public ILanguageDescriptor getLanguageDescriptor() {
+        return languageDescriptor;
+    }
+
+    @InjectedService
+    public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
+        this.languageDescriptor = languageDescriptor;
+    }
+
+    @InjectedService
+    public void setParser(IParser parser) {
+        this.parser = parser;
+    }
+
+    @InjectedService
+    public void setElementFactory(IElementFactory elementFactory) {
+        this.elementFactory = elementFactory;
+    }
+    
+    @InjectedService
+    public void setParsetreeConstructor(IParseTreeConstructor parsetreeConstructor) {
+        this.parsetreeConstructor = parsetreeConstructor;
+    }
 
 }

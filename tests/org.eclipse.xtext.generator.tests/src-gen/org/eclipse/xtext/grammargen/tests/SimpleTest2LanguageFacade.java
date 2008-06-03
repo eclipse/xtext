@@ -54,6 +54,6 @@ public class SimpleTest2LanguageFacade extends BaseEPackageAccess implements ILa
 	}
 
 	public String getModelFileExtension() {
-		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getModelFileExtension();
+		return ServiceRegistry.getService(getLanguageDescriptor(), IResourceFactory.class).getModelFileExtension();
 	}
 }

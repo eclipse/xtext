@@ -37,9 +37,4 @@ public class SimpleExpressionsMetamodelAccess  extends BaseEPackageAccess implem
 		return EPackage.Registry.INSTANCE.getEPackage(SIMPLEEXPRESSIONS_NS_URI);
 	}
 	
-	
-	public String getModelFileExtension() {
-		return "simpleexpressions";
-	}
-   
 }

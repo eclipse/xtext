@@ -5,38 +5,47 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.LanguageFacadeFactory;
 import org.eclipse.xtext.ILanguageFacade;
 
+import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
+
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.testlanguages.services.*;
 
 public abstract class SimpleExpressionsStandaloneSetup {
 
+	private static boolean isInitialized = false;
+
 	public static void doSetup() {
-		
-		// setup super language first
-		XtextBuiltinStandaloneSetup.doSetup();
-		
-		getLanguageDescriptor();
-		
-		ServiceRegistry.registerFactory(new SimpleExpressionsParserServiceFactory());
-		
-		ServiceRegistry.registerFactory(new SimpleExpressionsASTFactoryServiceFactory());
-		
-		ServiceRegistry.registerFactory(new SimpleExpressionsParseTreeConstructorServiceFactory());
-		
-		ServiceRegistry.registerFactory(new SimpleExpressionsResourceFactoryServiceFactory());
-		
-		ServiceRegistry.registerFactory(new SimpleExpressionsGrammarAccessServiceFactory());
-		
-		ServiceRegistry.registerFactory(new SimpleExpressionsMetamodelAccessServiceFactory());
-		
-		if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.SimpleExpressions")==null) {
-			ILanguageFacade facade = new SimpleExpressionsLanguageFacade();
-			LanguageFacadeFactory.register(facade);
+		if(!isInitialized) {
+			
+			// setup super language first
+			XtextBuiltinStandaloneSetup.doSetup();
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"simpleexpressions", facade.getResourceFactory());
+				"ecore", new XMIResourceFactoryImpl());
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"xmi", new XMIResourceFactoryImpl());
+			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new SimpleExpressionsParserServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new SimpleExpressionsASTFactoryServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new SimpleExpressionsParseTreeConstructorServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new SimpleExpressionsResourceFactoryServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new SimpleExpressionsGrammarAccessServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new SimpleExpressionsMetamodelAccessServiceFactory());
+			
+			if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.SimpleExpressions")==null) {
+				ILanguageFacade facade = new SimpleExpressionsLanguageFacade();
+				LanguageFacadeFactory.register(facade);
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					"simpleexpressions", facade.getResourceFactory());
+			}
+			isInitialized = true;
 		}
 	}
 	
@@ -50,7 +59,8 @@ public abstract class SimpleExpressionsStandaloneSetup {
     	if (INSTANCE == null) {
     		INSTANCE = LanguageDescriptorFactory.get(LANGUAGE_ID);
     		if(INSTANCE == null) {
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
+    			// TODO put super grammar
+    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, null);
     		}
     	}
     	return INSTANCE;

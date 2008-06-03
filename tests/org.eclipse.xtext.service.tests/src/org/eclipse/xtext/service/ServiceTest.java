@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+
 package org.eclipse.xtext.service;
 
 
@@ -12,46 +21,38 @@ public class ServiceTest extends TestCase {
         super.setUp();
         ServiceRegistry.resetInternal();
         LanguageDescriptorFactory.resetInternal();
-        myLanguageDescriptor = LanguageDescriptorFactory.createLanguageDescriptor("xx", "yy", "zz");
+        myLanguageDescriptor = LanguageDescriptorFactory.createLanguageDescriptor("xx", "yy", "zz", null);
     }
 
     public void testServiceRegistry() throws Exception {
-        ServiceRegistry.registerFactory(new InjectedLanguageServiceFactory());
+        ServiceRegistry.registerFactory(myLanguageDescriptor, new InjectedLanguageServiceFactory());
         InjectedLanguageService service = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
         assertNotNull(service);
     }
     
     public void testServiceInjection() throws Exception {
-        ServiceRegistry.registerFactory(new MyLanguageServiceFactory());
+        ServiceRegistry.registerFactory(myLanguageDescriptor, new MyLanguageServiceFactory());
         
         MyLanguageService service = ServiceRegistry.getService(myLanguageDescriptor, MyLanguageService.class);
         assertNull(service);
 
-        ServiceRegistry.registerFactory(new InjectedLanguageServiceFactory());
+        ServiceRegistry.registerFactory(myLanguageDescriptor, new InjectedLanguageServiceFactory());
         service = ServiceRegistry.getService(myLanguageDescriptor, MyLanguageService.class);
         assertNotNull(service);
         assertNotNull(service.getInjectedService());
     }
     
-    public void testCompoundFactory() throws Exception {
-        ServiceRegistry.registerFactory(new CompoundLanguageServiceFactory());
-        
-        MyLanguageService service = ServiceRegistry.getService(myLanguageDescriptor, MyLanguageService.class);
-        assertNotNull(service);
-        assertNotNull(service.getInjectedService());
-    }
-    
     public void testAnnotationInheritance() {
-        ServiceRegistry.registerFactory(new InheritingServiceFactory());
-        ServiceRegistry.registerFactory(new InjectedLanguageServiceFactory());
+        ServiceRegistry.registerFactory(myLanguageDescriptor, new InheritingServiceFactory());
+        ServiceRegistry.registerFactory(myLanguageDescriptor, new InjectedLanguageServiceFactory());
         InheritingService service = ServiceRegistry.getService(myLanguageDescriptor, InheritingService.class);
         assertNotNull(service);
         assertNotNull(service.getInjectedService());
     }
     
     public void testCircularDependency() throws InterruptedException {
-        ServiceRegistry.registerFactory(new CircularDependencyFactory0());
-        ServiceRegistry.registerFactory(new CircularDependencyFactory1());
+        ServiceRegistry.registerFactory(myLanguageDescriptor, new CircularDependencyFactory0());
+        ServiceRegistry.registerFactory(myLanguageDescriptor, new CircularDependencyFactory1());
         ResolverThread thread = new ResolverThread();
         thread.start();
         thread.join(1000);

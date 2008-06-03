@@ -1,20 +1,18 @@
 package org.eclipse.xtext.services;
 
-import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.ILanguageServiceFactory;
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.services.XtextGrammarTestMetamodelAccess;
 
 public class XtextGrammarTestMetamodelAccessServiceFactory implements ILanguageServiceFactory {
 
-    public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        org.eclipse.xtext.IMetamodelAccess serviceObject = new XtextGrammarTestMetamodelAccess();
+    public ILanguageService createLanguageService() {
+        IMetamodelAccess serviceObject = new XtextGrammarTestMetamodelAccess();
         return serviceObject;
     }
 
-    public boolean isFactoryFor(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-       return languageDescriptor == XtextGrammarTestStandaloneSetup.getLanguageDescriptor()
-           && org.eclipse.xtext.IMetamodelAccess.class.equals(serviceClass);
-    }
+	public Class<? extends ILanguageService> getServiceClass() {
+		return IMetamodelAccess.class;
+	}
 }

@@ -37,9 +37,4 @@ public class ComplexReconstrTestMetamodelAccess  extends BaseEPackageAccess impl
 		return EPackage.Registry.INSTANCE.getEPackage(COMPLEXREWRITETEST_NS_URI);
 	}
 	
-	
-	public String getModelFileExtension() {
-		return "complexreconstrtest";
-	}
-   
 }

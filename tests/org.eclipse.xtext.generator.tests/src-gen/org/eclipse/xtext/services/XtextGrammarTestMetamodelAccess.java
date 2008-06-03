@@ -37,9 +37,4 @@ public class XtextGrammarTestMetamodelAccess  extends BaseEPackageAccess impleme
 		return EPackage.Registry.INSTANCE.getEPackage(XTEXTTEST_NS_URI);
 	}
 	
-	
-	public String getModelFileExtension() {
-		return "xtextgrammartest";
-	}
-   
 }

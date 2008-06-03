@@ -14,12 +14,12 @@ package org.eclipse.xtext.service;
  */
 public class CircularDependencyFactory1 implements ILanguageServiceFactory {
 
-    public ILanguageService createLanguageService(ILanguageDescriptor descriptor, Class<? extends ILanguageService> serviceClass) {
+    public ILanguageService createLanguageService() {
         return new CircularDependencyService1();
     }
 
-    public boolean isFactoryFor(ILanguageDescriptor descriptor, Class<? extends ILanguageService> serviceClass) {
-        return CircularDependencyService1.class.equals(serviceClass);
+    public Class<? extends ILanguageService> getServiceClass() {
+        return CircularDependencyService1.class;
     }
 
 }

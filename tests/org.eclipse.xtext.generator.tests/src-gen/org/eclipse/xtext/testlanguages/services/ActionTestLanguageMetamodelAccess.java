@@ -37,9 +37,4 @@ public class ActionTestLanguageMetamodelAccess  extends BaseEPackageAccess imple
 		return EPackage.Registry.INSTANCE.getEPackage(ACTIONLANG_NS_URI);
 	}
 	
-	
-	public String getModelFileExtension() {
-		return "actiontestlanguage";
-	}
-   
 }

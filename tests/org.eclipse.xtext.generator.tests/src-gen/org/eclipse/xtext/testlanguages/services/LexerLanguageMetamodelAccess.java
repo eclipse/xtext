@@ -37,9 +37,4 @@ public class LexerLanguageMetamodelAccess  extends BaseEPackageAccess implements
 		return EPackage.Registry.INSTANCE.getEPackage(LEXERLANG_NS_URI);
 	}
 	
-	
-	public String getModelFileExtension() {
-		return "lexerlanguage";
-	}
-   
 }

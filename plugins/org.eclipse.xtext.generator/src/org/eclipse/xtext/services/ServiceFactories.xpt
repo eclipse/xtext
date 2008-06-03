@@ -24,23 +24,21 @@
 «FILE pathName()+'/services/'+languageName() + serviceName + 'ServiceFactory.java'-»
 package «packageName()».services;
 
-import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.ILanguageServiceFactory;
-import «packageName()».*;
-import «packageName()».parser.*;
+import «serviceInterface(serviceName)»;
+import «serviceClassFQN(serviceName)»;
 
 public class «languageName()»«serviceName»ServiceFactory implements ILanguageServiceFactory {
 
-    public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        «serviceInterface(serviceName)» serviceObject = new «serviceClass(serviceName)»();
+    public ILanguageService createLanguageService() {
+        «simpleClassName(serviceInterface(serviceName))» serviceObject = new «simpleClassName(serviceClass(serviceName))»();
         return serviceObject;
     }
 
-    public boolean isFactoryFor(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-       return languageDescriptor == «languageName()»StandaloneSetup.getLanguageDescriptor()
-           && «serviceInterface(serviceName)».class.equals(serviceClass);
-    }
+	public Class<? extends ILanguageService> getServiceClass() {
+		return «simpleClassName(serviceInterface(serviceName))».class;
+	}
 }
 «ENDFILE»
 «ENDDEFINE»

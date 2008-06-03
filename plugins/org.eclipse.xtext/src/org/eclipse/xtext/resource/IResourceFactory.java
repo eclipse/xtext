@@ -5,5 +5,9 @@ import org.eclipse.xtext.service.ILanguageService;
 
 public interface IResourceFactory extends Resource.Factory, ILanguageService {
 
+    /**
+     * @return
+     */
+    String getModelFileExtension();
     
 }

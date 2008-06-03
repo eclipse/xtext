@@ -106,10 +106,9 @@ public class GeneratorFacade {
 			facade.evaluate("org::eclipse::xtext::parsetree::ParseTreeConstructor::file", grammarModel);
 			facade.evaluate("org::eclipse::xtext::LanguageFacade::file", grammarModel);
 			facade.evaluate("org::eclipse::xtext::ParserFacade::parser", grammarModel);
-//			facade.evaluate("org::eclipse::xtext::ASTFactory::factory", grammarModel);
-			facade.evaluate("org::eclipse::xtext::ResourceFactory::factory", grammarModel);
 			facade.evaluate("org::eclipse::xtext::services::GrammarAccess::file", grammarModel);
-			facade.evaluate("org::eclipse::xtext::services::MetamodelAccess::file", grammarModel);
+            facade.evaluate("org::eclipse::xtext::services::MetamodelAccess::file", grammarModel);
+            facade.evaluate("org::eclipse::xtext::services::ResourceFactory::file", grammarModel);
 			facade.evaluate("org::eclipse::xtext::services::ServiceFactories::factories", grammarModel);
 			if (uiSrcGenPath != null) {
 				facade.evaluate("org::eclipse::xtext::ui::Plugin::file", grammarModel);

@@ -1,20 +1,18 @@
 package org.eclipse.xtext.metamodelreferencing.tests.services;
 
-import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.ILanguageServiceFactory;
-import org.eclipse.xtext.metamodelreferencing.tests.*;
-import org.eclipse.xtext.metamodelreferencing.tests.parser.*;
+import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestParseTreeConstructor;
 
 public class MetamodelRefTestParseTreeConstructorServiceFactory implements ILanguageServiceFactory {
 
-    public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        org.eclipse.xtext.parsetree.IParseTreeConstructor serviceObject = new MetamodelRefTestParseTreeConstructor();
+    public ILanguageService createLanguageService() {
+        IParseTreeConstructor serviceObject = new MetamodelRefTestParseTreeConstructor();
         return serviceObject;
     }
 
-    public boolean isFactoryFor(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-       return languageDescriptor == MetamodelRefTestStandaloneSetup.getLanguageDescriptor()
-           && org.eclipse.xtext.parsetree.IParseTreeConstructor.class.equals(serviceClass);
-    }
+	public Class<? extends ILanguageService> getServiceClass() {
+		return IParseTreeConstructor.class;
+	}
 }
