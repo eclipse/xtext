@@ -46,13 +46,13 @@ public class GenerateAllTestGrammars {
 		if(args.length >0) {
 			path=args[0]+"/"+path;
 		}
-		XtextStandaloneSetup.doSetup();
 		GeneratorFacade.cleanFolder(path);
 		for (Class<?> c : testclasses) {
 			String filename = "classpath:/"+c.getName().replace('.', '/') + ".xtext";
 			log.info("loading " + filename);
 			ResourceSetImpl rs = new ResourceSetImpl();
-			Resource resource = rs.createResource(new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(filename)));
+			URI uri = new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(filename));
+            Resource resource = rs.createResource(uri);
 			resource.load(null);
 			Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
 			GeneratorFacade.generate(grammarModel, path,
