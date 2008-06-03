@@ -31,16 +31,16 @@ public class LanguageServiceActivator {
         registerDefaultServices(baseLanguageDescriptor);
     }
 
-    private static void registerDefaultServices(ILanguageDescriptor languageService) {
-        ServiceRegistry.registerFactory(new GenericRegisteredServiceFactory(languageService, IParser.class, "parser"));
-        ServiceRegistry.registerFactory(new GenericRegisteredServiceFactory(languageService, IElementFactory.class, "aSTFactory"));
-        ServiceRegistry.registerFactory(new GenericRegisteredServiceFactory(languageService, IParseTreeConstructor.class, "parseTreeConstructor"));
-        ServiceRegistry.registerFactory(new GenericRegisteredServiceFactory(languageService, IResourceFactory.class, "resourceFactory"));
-        ServiceRegistry.registerFactory(new GenericRegisteredServiceFactory(languageService, IPreferenceStoreService.class, "preferenceStore"));
-        ServiceRegistry.registerFactory(new GenericRegisteredServiceFactory(languageService, IProposalsProvider.class, "proposalsProvider"));
-        ServiceRegistry.registerFactory(new GenericRegisteredServiceFactory(languageService, ISyntaxColorer.class, "syntaxColorer"));
-        ServiceRegistry.registerFactory(new GenericRegisteredServiceFactory(languageService, IGrammarAccess.class, "grammarAccess"));
-        ServiceRegistry.registerFactory(new GenericRegisteredServiceFactory(languageService, IMetamodelAccess.class, "metamodelAccess"));
+    private static void registerDefaultServices(ILanguageDescriptor languageDescriptor) {
+        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IParser.class, "parser"));
+        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IElementFactory.class, "aSTFactory"));
+        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IParseTreeConstructor.class, "parseTreeConstructor"));
+        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IResourceFactory.class, "resourceFactory"));
+        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IPreferenceStoreService.class, "preferenceStore"));
+        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IProposalsProvider.class, "proposalsProvider"));
+        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, ISyntaxColorer.class, "syntaxColorer"));
+        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IGrammarAccess.class, "grammarAccess"));
+        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IMetamodelAccess.class, "metamodelAccess"));
     }
 
     private static void registerLanguageDescriptors() {

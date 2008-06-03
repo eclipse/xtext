@@ -11,7 +11,6 @@ package org.eclipse.xtext.ui.core.service;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.service.InjectedService;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -22,7 +21,6 @@ public interface IPreferenceStoreService extends ILanguageService {
 
 	void initializeDefaults();
 	
-	@InjectedService
 	void setLanguageDescriptor(ILanguageDescriptor languageDescriptor);
 
 }
