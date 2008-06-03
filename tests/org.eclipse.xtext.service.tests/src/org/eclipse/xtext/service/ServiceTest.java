@@ -12,6 +12,8 @@ package org.eclipse.xtext.service;
 
 import junit.framework.TestCase;
 
+import org.eclipse.xtext.service.impl.SingletonLanguageServiceFactory;
+
 public class ServiceTest extends TestCase {
 
     private ILanguageDescriptor myLanguageDescriptor;
@@ -72,5 +74,24 @@ public class ServiceTest extends TestCase {
         public void run() {
             service = ServiceRegistry.getService(myLanguageDescriptor, CircularDependencyService0.class);
         }
+    }
+    
+    public void testPriority() throws Exception {
+        InjectedLanguageService injectedLanguageService0 = new InjectedLanguageService();
+        InjectedLanguageService injectedLanguageService1 = new InjectedLanguageService();
+        SingletonLanguageServiceFactory factory0 = new SingletonLanguageServiceFactory(injectedLanguageService0);
+        ILanguageServiceFactory factory = ServiceRegistry.registerFactory(myLanguageDescriptor, factory0);
+        assertNull(factory);
+        InjectedLanguageService service = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
+        assertEquals(injectedLanguageService0, service);
+        SingletonLanguageServiceFactory factory1 = new SingletonLanguageServiceFactory(injectedLanguageService1);
+        factory = ServiceRegistry.registerFactory(myLanguageDescriptor, factory1);
+        assertEquals(factory0, factory);
+        service = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
+        assertEquals(injectedLanguageService1, service);
+        factory = ServiceRegistry.registerFactory(myLanguageDescriptor, factory0, ServiceRegistry.PRIORITY_MAX);
+        assertEquals(null, factory);
+        service = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
+        assertEquals(injectedLanguageService0, service);
     }
 }

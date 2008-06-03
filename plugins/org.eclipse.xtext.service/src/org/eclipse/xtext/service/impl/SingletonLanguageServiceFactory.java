@@ -7,7 +7,7 @@ public class SingletonLanguageServiceFactory implements ILanguageServiceFactory{
 	
 	private ILanguageService service;
 	
-	private SingletonLanguageServiceFactory(ILanguageService service) {
+	public SingletonLanguageServiceFactory(ILanguageService service) {
 		super();
 		this.service = service;
 	}
