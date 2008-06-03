@@ -8,20 +8,21 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
-import java.io.InputStream;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.eclipse.emf.ecore.EPackage;
+import org.apache.tools.ant.types.ResourceFactory;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.dummy.DummyLanguage;
 import org.eclipse.xtext.grammargen.tests.SimpleTest;
 import org.eclipse.xtext.grammargen.tests.SimpleTest2;
 import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest;
-import org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTest;
-import org.eclipse.xtext.parser.XtextASTFactory;
-import org.eclipse.xtext.parser.XtextParser;
 import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest;
 import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest;
+import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.testlanguages.ActionTestLanguage;
 import org.eclipse.xtext.testlanguages.LexerLanguage;
 import org.eclipse.xtext.testlanguages.OptionalEmptyLanguage;
@@ -48,18 +49,16 @@ public class GenerateAllTestGrammars {
 		if(args.length >0) {
 			path=args[0]+"/"+path;
 		}
-		
+		XtextStandaloneSetup.doSetup();
+		IResourceFactory resourceFactory = ServiceRegistry.getService(XtextStandaloneSetup.getLanguageDescriptor(), IResourceFactory.class);
 		GeneratorFacade.cleanFolder(path);
 		for (Class<?> c : testclasses) {
-			String filename = c.getName().replace('.', '/') + ".xtext";
+			String filename = "classpath:/"+c.getName().replace('.', '/') + ".xtext";
 			log.info("loading " + filename);
-			InputStream resourceAsStream = c.getClassLoader().getResourceAsStream(filename);
-			
-			//TODO make Xtext2Factory manual so one can overwrite 'getEPackages' in order to support generated epackages
-			EPackage.Registry.INSTANCE.put(XtextLanguageFacade.XTEXT_NS_URI, XtextPackage.eINSTANCE);
-			XtextParser xtext2Parser= new XtextParser();
-			Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory()).getRootASTElement();
-			
+			ResourceSetImpl rs = new ResourceSetImpl();
+			Resource resource = rs.createResource(new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(filename)));
+			resource.load(null);
+			Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
 			GeneratorFacade.generate(grammarModel, c.getSimpleName(), c.getPackage().getName().replace('.', '/'), path,
                     null, c.getSimpleName().toLowerCase());
 		}
