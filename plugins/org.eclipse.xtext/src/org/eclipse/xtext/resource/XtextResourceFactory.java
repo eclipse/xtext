@@ -12,13 +12,10 @@ public class XtextResourceFactory implements IResourceFactory {
 
     private ILanguageDescriptor languageDescriptor;
 
-    @InjectedService
     private IParser parser;
 
-    @InjectedService
     private IElementFactory elementFactory;
 
-    @InjectedService
     private IParseTreeConstructor parsetreeConstructor;
 
     public Resource createResource(URI uri) {
@@ -29,18 +26,22 @@ public class XtextResourceFactory implements IResourceFactory {
         return languageDescriptor;
     }
 
+    @InjectedService
     public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
         this.languageDescriptor = languageDescriptor;
     }
 
+    @InjectedService
     public void setParser(IParser parser) {
         this.parser = parser;
     }
 
+    @InjectedService
     public void setElementFactory(IElementFactory elementFactory) {
         this.elementFactory = elementFactory;
     }
-
+    
+    @InjectedService
     public void setParsetreeConstructor(IParseTreeConstructor parsetreeConstructor) {
         this.parsetreeConstructor = parsetreeConstructor;
     }
