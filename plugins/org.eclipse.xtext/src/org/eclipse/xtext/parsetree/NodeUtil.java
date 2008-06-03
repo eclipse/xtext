@@ -32,4 +32,13 @@ public class NodeUtil {
 		return true;
 	}
 
+	public static CompositeNode getRootNode(EObject obj) {
+		NodeAdapter adapter = getNodeAdapter(obj);
+		if (adapter==null)
+			return null;
+		CompositeNode parserNode = adapter.getParserNode();
+		if (parserNode==null)
+			return null;
+		return (CompositeNode) EcoreUtil.getRootContainer(parserNode);
+	}
 }

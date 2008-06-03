@@ -1,12 +1,18 @@
 
-package org.eclipse.xtext;
+package org.eclipse.xtext.parsetree.internal;
 
 
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parser.GenericEcoreElementFactory;
+import org.eclipse.xtext.parsetree.Predicate;
+import org.eclipse.xtext.parsetree.internal.AbstractInternalParseTreeConstructor;
 
-public class XtextParseTreeConstructor extends AbstractParseTreeConstructor {
+public class InternalXtextGrammarTestParseTreeConstructor extends AbstractInternalParseTreeConstructor {
+
+	public InternalXtextGrammarTestParseTreeConstructor(GenericEcoreElementFactory factory, Grammar grammar) {
+		super(factory,grammar);
+	}
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
 		if (ruleToCall.equals("Grammar")) {
@@ -193,7 +199,28 @@ new Predicate(obj) {
 
 		
 /* xtext::Group */ 
-{
+
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("superGrammar")&&true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&true; 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&true; 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("superGrammar")&&true&&true&&obj.checkConsume("idElements")&&true; 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&true&&obj.checkConsume("idElements")&&true; 
+		}
+}.check() ){
 
 		
 /* xtext::Group */ 
@@ -680,18 +707,6 @@ protected void proceedLexerRule(InstanceDescription obj) {
 {
 
 		
-/* xtext::Keyword */ 
-{
-
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.1"));
-
-}
-
-		
-/* xtext::Group */ 
-{
-
-		
 /* xtext::Assignment */ 
 {
 
@@ -702,7 +717,7 @@ protected void proceedLexerRule(InstanceDescription obj) {
 
 	
 		
-		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.1/@terminal"));
 		
 	
 
@@ -721,7 +736,7 @@ protected void proceedLexerRule(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -750,7 +765,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = (getDescr((EObject)value));
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
+	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
 	try {
 		ruleCallStart(val, true, (RuleCall) ruleCall);
 		proceedTypeRef(val);
@@ -770,7 +785,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
@@ -788,7 +803,7 @@ new Predicate(obj) {
 
 	
 		
-		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
 		
 	
 
@@ -796,9 +811,6 @@ new Predicate(obj) {
 
     if (obj.isConsumed())
     	objectCreation(obj);
-
-}
-
 
 }
 
@@ -1593,10 +1605,20 @@ protected void proceedAction(InstanceDescription obj) {
 {
 
 		
+/* xtext::Group */ 
+
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&obj.checkConsume("operator")&&obj.checkConsume("feature")&&true; 
+		}
+}.check() ){
+
+		
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1"));
 
 }
 
@@ -1623,7 +1645,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0"));
 
 }
 
@@ -1638,7 +1660,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
 
 }
 
@@ -1671,7 +1693,7 @@ new Predicate(obj) {
 
 	
 		
-		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
 		
 	
 
@@ -1683,14 +1705,19 @@ new Predicate(obj) {
 }
 
 		
-/* xtext::Group */ 
-{
-
-		
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
+
+}
+
+
+}
+
+
+}
+
 
 }
 
@@ -1709,7 +1736,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = (getDescr((EObject)value));
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
+	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 	try {
 		ruleCallStart(val, true, (RuleCall) ruleCall);
 		proceedTypeRef(val);
@@ -1743,7 +1770,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1"));
 
 }
 
@@ -1751,7 +1778,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
@@ -1762,16 +1789,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
-
-}
-
-
-}
-
-
-}
-
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
 
 }
 

@@ -3,7 +3,7 @@ package org.eclipse.xtext.services;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.ILanguageServiceFactory;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
-import org.eclipse.xtext.XtextParseTreeConstructor;
+import org.eclipse.xtext.parsetree.XtextParseTreeConstructor;
 
 public class XtextParseTreeConstructorServiceFactory implements ILanguageServiceFactory {
 

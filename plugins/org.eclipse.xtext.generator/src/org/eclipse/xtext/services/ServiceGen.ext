@@ -51,7 +51,7 @@ private String subpackage(String serviceName) :
     switch(serviceName) {
         case 'Parser': '.parser'
         case 'ASTFactory': '.services'
-        case 'ParseTreeConstructor': ''
+        case 'ParseTreeConstructor': '.parsetree'
         case 'ResourceFactory': '.services'
         case 'GrammarAccess': '.services'
         case 'MetamodelAccess': '.services'

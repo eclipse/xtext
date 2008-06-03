@@ -1,0 +1,13 @@
+
+package org.eclipse.xtext.testlanguages.parsetree;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.testlanguages.parsetree.internal.InternalTestLanguageParseTreeConstructor;
+import org.eclipse.xtext.parsetree.AbstractParseTreeConstructor;
+
+public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
+
+	public void update(EObject object) {
+		new InternalTestLanguageParseTreeConstructor(getFactory(),getGrammar()).update(object);
+	}
+}

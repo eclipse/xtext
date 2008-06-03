@@ -1,0 +1,51 @@
+
+package org.eclipse.xtext.grammargen.tests.parsetree.internal;
+
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parser.GenericEcoreElementFactory;
+import org.eclipse.xtext.parsetree.Predicate;
+import org.eclipse.xtext.parsetree.internal.AbstractInternalParseTreeConstructor;
+
+public class InternalSimpleTestParseTreeConstructor extends AbstractInternalParseTreeConstructor {
+
+	public InternalSimpleTestParseTreeConstructor(GenericEcoreElementFactory factory, Grammar grammar) {
+		super(factory,grammar);
+	}
+
+	protected void internalDoUpdate(EObject obj, String ruleToCall) {
+		if (ruleToCall.equals("Foo")) {
+			proceedFoo(getDescr(obj));
+		} else {
+			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+		}
+	}
+
+	
+protected void proceedFoo(InstanceDescription obj) {
+	
+/* xtext::Assignment */ 
+{
+
+	final Object value = obj.consume("name");
+    
+/* xtext::RuleCall */ 
+{
+
+	
+		
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@terminal"));
+		
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
+
+}
+
+}
+
+}

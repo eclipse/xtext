@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
-import org.eclipse.xtext.parsetree.AbstractParseTreeConstructor.InstanceDescription;
+import org.eclipse.xtext.parsetree.internal.AbstractInternalParseTreeConstructor.InstanceDescription;
 
 
 /**

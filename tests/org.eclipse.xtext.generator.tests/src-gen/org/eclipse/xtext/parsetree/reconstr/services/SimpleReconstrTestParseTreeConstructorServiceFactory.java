@@ -3,7 +3,7 @@ package org.eclipse.xtext.parsetree.reconstr.services;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.ILanguageServiceFactory;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.parsetree.SimpleReconstrTestParseTreeConstructor;
 
 public class SimpleReconstrTestParseTreeConstructorServiceFactory implements ILanguageServiceFactory {
 

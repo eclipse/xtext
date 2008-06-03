@@ -1,0 +1,13 @@
+
+package org.eclipse.xtext.testlanguages.parsetree;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.testlanguages.parsetree.internal.InternalSimpleExpressionsParseTreeConstructor;
+import org.eclipse.xtext.parsetree.AbstractParseTreeConstructor;
+
+public class SimpleExpressionsParseTreeConstructor extends AbstractParseTreeConstructor {
+
+	public void update(EObject object) {
+		new InternalSimpleExpressionsParseTreeConstructor(getFactory(),getGrammar()).update(object);
+	}
+}
