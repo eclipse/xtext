@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Util Plug-in
+Bundle-SymbolicName: org.eclipse.xtext.util
+Bundle-Version: 1.0.0
+Bundle-Vendor: itemis AG
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.xtext.util
