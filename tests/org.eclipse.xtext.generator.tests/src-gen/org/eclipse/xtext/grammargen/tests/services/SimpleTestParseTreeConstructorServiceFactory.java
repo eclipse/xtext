@@ -3,7 +3,7 @@ package org.eclipse.xtext.grammargen.tests.services;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.ILanguageServiceFactory;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
-import org.eclipse.xtext.grammargen.tests.SimpleTestParseTreeConstructor;
+import org.eclipse.xtext.grammargen.tests.parsetree.SimpleTestParseTreeConstructor;
 
 public class SimpleTestParseTreeConstructorServiceFactory implements ILanguageServiceFactory {
 
