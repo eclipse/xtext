@@ -51,6 +51,6 @@ public class DoBootstrapping {
 		resource.load(null);
 		Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
 		GeneratorFacade.cleanFolder(srcGenPath);
-		GeneratorFacade.generate(grammarModel, languageName, languageNamespace, srcGenPath, null, modelFileExtension);
+		GeneratorFacade.generate(grammarModel, srcGenPath, null, modelFileExtension);
 	}
 }

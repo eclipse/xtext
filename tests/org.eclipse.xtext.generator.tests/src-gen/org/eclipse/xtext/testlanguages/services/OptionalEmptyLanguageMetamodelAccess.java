@@ -7,7 +7,7 @@ import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class OptionalEmptyLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
+public class OptionalEmptyLanguageMetamodelAccess  extends BaseEPackageAccess implements IMetamodelAccess {
 
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {
@@ -37,7 +37,6 @@ public class OptionalEmptyLanguageMetamodelAccess extends BaseEPackageAccess imp
 		return EPackage.Registry.INSTANCE.getEPackage(OPTIONALEMPTY_NS_URI);
 	}
 	
-
 	
 	public String getModelFileExtension() {
 		return "optionalemptylanguage";

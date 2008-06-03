@@ -7,7 +7,7 @@ import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class LexerLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
+public class LexerLanguageMetamodelAccess  extends BaseEPackageAccess implements IMetamodelAccess {
 
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {
@@ -37,7 +37,6 @@ public class LexerLanguageMetamodelAccess extends BaseEPackageAccess implements 
 		return EPackage.Registry.INSTANCE.getEPackage(LEXERLANG_NS_URI);
 	}
 	
-
 	
 	public String getModelFileExtension() {
 		return "lexerlanguage";

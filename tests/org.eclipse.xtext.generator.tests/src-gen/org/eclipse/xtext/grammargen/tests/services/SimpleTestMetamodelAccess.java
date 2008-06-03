@@ -7,7 +7,7 @@ import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class SimpleTestMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
+public class SimpleTestMetamodelAccess  extends BaseEPackageAccess implements IMetamodelAccess {
 
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {
@@ -37,7 +37,6 @@ public class SimpleTestMetamodelAccess extends BaseEPackageAccess implements IMe
 		return EPackage.Registry.INSTANCE.getEPackage(SIMPLETEST_NS_URI);
 	}
 	
-
 	
 	public String getModelFileExtension() {
 		return "simpletest";

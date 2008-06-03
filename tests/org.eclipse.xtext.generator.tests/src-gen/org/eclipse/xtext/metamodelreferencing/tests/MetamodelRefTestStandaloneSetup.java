@@ -8,22 +8,30 @@ import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.metamodelreferencing.tests.services.*;
 
 public abstract class MetamodelRefTestStandaloneSetup {
 
 	public static void doSetup() {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new XMIResourceFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xmi", new XMIResourceFactoryImpl());
+		
+		// setup super language first
+		XtextBuiltinStandaloneSetup.doSetup();
+		
 		getLanguageDescriptor();
+		
 		ServiceRegistry.registerFactory(new MetamodelRefTestParserServiceFactory());
+		
 		ServiceRegistry.registerFactory(new MetamodelRefTestASTFactoryServiceFactory());
+		
 		ServiceRegistry.registerFactory(new MetamodelRefTestParseTreeConstructorServiceFactory());
+		
 		ServiceRegistry.registerFactory(new MetamodelRefTestResourceFactoryServiceFactory());
+		
 		ServiceRegistry.registerFactory(new MetamodelRefTestGrammarAccessServiceFactory());
+		
 		ServiceRegistry.registerFactory(new MetamodelRefTestMetamodelAccessServiceFactory());
+		
 		if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest")==null) {
 			ILanguageFacade facade = new MetamodelRefTestLanguageFacade();
 			LanguageFacadeFactory.register(facade);
@@ -42,7 +50,7 @@ public abstract class MetamodelRefTestStandaloneSetup {
     	if (INSTANCE == null) {
     		INSTANCE = LanguageDescriptorFactory.get(LANGUAGE_ID);
     		if(INSTANCE == null) {
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE);
+    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
     		}
     	}
     	return INSTANCE;

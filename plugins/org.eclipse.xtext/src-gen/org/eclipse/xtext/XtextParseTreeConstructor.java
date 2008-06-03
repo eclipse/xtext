@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 
 public class XtextParseTreeConstructor extends AbstractParseTreeConstructor {
     protected ILanguageFacade getFacade() {
-    	return LanguageFacadeFactory.getFacade("org/eclipse/xtext/Xtext");
+    	return LanguageFacadeFactory.getFacade("org.eclipse.xtext.Xtext");
     }
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
@@ -195,18 +195,7 @@ new Predicate(obj) {
 
 		
 /* xtext::Group */ 
-
-if (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("superGrammar")&&true&&obj.checkConsume("name")&&true; 
-		}
-}.check() ||
-new Predicate(obj) { 
-		public boolean check() {
-			return true&&obj.checkConsume("name")&&true; 
-		}
-}.check() ){
+{
 
 		
 /* xtext::Group */ 
@@ -256,17 +245,27 @@ new Predicate(obj) {
 {
 
 		
+/* xtext::Group */ 
+
+while (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("idElements")&&true; 
+		}
+}.check() ){
+
+		
 /* xtext::Assignment */ 
 {
 
-	final Object value = obj.consume("name");
+	final Object value = obj.consume("idElements");
     
 /* xtext::RuleCall */ 
 {
 
 	
 		
-		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"));
 		
 	
 
@@ -281,7 +280,47 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
+
+}
+
+
+}
+
+		
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Assignment */ 
+{
+
+	final Object value = obj.consume("idElements");
+    
+/* xtext::RuleCall */ 
+{
+
+	
+		
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
+
+}
+
+		
+/* xtext::Keyword */ 
+{
+
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
+
+}
+
 
 }
 

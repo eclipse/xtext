@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>testlanguages</idElements>
+  <idElements>LexerLanguage</idElements>
   <lexerRules name="STRING" body="&quot; '#' ('B')+ &quot;"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LexerLang" nsURI="&quot;http://www.eclipse.org/2008/xtext/LexerLang&quot;"/>
   <parserRules name="Model">
-    <alternatives xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="children">
+    <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="children" operator="+=">
       <terminal xsi:type="xtext:RuleCall" name="Element"/>
     </alternatives>
   </parserRules>
   <parserRules name="Element">
     <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+      <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
         <terminal xsi:type="xtext:RuleCall" name="ID"/>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="h">
+      <abstractTokens xsi:type="xtext:Assignment" feature="h" operator="=">
         <terminal xsi:type="xtext:RuleCall" name="STRING"/>
       </abstractTokens>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LexerLang" nsURI="&quot;http://www.eclipse.org/2008/xtext/LexerLang&quot;"/>
 </xtext:Grammar>

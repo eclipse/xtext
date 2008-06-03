@@ -75,7 +75,6 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
             node.setGrammarElement(lexerRule);
         }*/
     }
-
 }
 
 @rulecatch { 

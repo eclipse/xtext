@@ -5,27 +5,33 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.LanguageFacadeFactory;
 import org.eclipse.xtext.ILanguageFacade;
 
-import org.eclipse.xtext.builtin.XtextBuiltinLanguageFacade;
-import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.services.*;
 
 public abstract class XtextStandaloneSetup {
 
 	public static void doSetup() {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new XMIResourceFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xmi", new XMIResourceFactoryImpl());
+		
+		// setup super language first
+		XtextBuiltinStandaloneSetup.doSetup();
+		
 		getLanguageDescriptor();
+		
 		ServiceRegistry.registerFactory(new XtextParserServiceFactory());
+		
 		ServiceRegistry.registerFactory(new XtextASTFactoryServiceFactory());
+		
 		ServiceRegistry.registerFactory(new XtextParseTreeConstructorServiceFactory());
+		
 		ServiceRegistry.registerFactory(new XtextResourceFactoryServiceFactory());
+		
 		ServiceRegistry.registerFactory(new XtextGrammarAccessServiceFactory());
+		
 		ServiceRegistry.registerFactory(new XtextMetamodelAccessServiceFactory());
+		
 		if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.Xtext")==null) {
 			ILanguageFacade facade = new XtextLanguageFacade();
 			LanguageFacadeFactory.register(facade);

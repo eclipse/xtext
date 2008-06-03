@@ -75,7 +75,6 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
             node.setGrammarElement(lexerRule);
         }*/
     }
-
 }
 
 @rulecatch { 
@@ -98,15 +97,15 @@ internalParse returns [EObject current=null] :
 // Rule Grammar
 ruleGrammar returns [EObject current=null] 
     @init { EObject temp=null; }:
-((((('language' 
+(((((('language' 
 
     {
-        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 (
-    lv_name=RULE_ID
+    lv_idElements=RULE_ID
     { 
-    createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
+    createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"idElements"); 
     }
  
     {
@@ -114,8 +113,25 @@ ruleGrammar returns [EObject current=null]
             $current = factory.create("Grammar");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
-))('extends' 
+        factory.add($current, "idElements", lv_idElements);    }
+))('.' 
+
+    {
+        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+    }
+(
+    lv_idElements=RULE_ID
+    { 
+    createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"idElements"); 
+    }
+ 
+    {
+        if ($current==null) {
+            $current = factory.create("Grammar");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        factory.add($current, "idElements", lv_idElements);    }
+))*)('extends' 
 
     {
         createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
