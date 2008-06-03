@@ -9,10 +9,9 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.reconstr.parsetree.SimpleReconstrTestParseTreeConstructor;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
-import org.eclipse.xtext.testlanguages.parsetree.SimpleExpressionsParseTreeConstructor;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class SimpleReconstrTest extends AbstractGeneratorTest {
@@ -31,7 +30,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
-		SimpleReconstrTestParseTreeConstructor con = (SimpleReconstrTestParseTreeConstructor) getParseTreeConstructor();
+		IParseTreeConstructor con = getParseTreeConstructor();
 		con.update(result);
 		String resultString = NodeUtil.getRootNode(result).serialize();
 		return resultString;
@@ -41,7 +40,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		with(SimpleExpressionsStandaloneSetup.class);
 		String model = "a + b - c * d / e";
 		EObject result = (EObject) getModel(model);
-        SimpleExpressionsParseTreeConstructor con = (SimpleExpressionsParseTreeConstructor) getParseTreeConstructor();
+        IParseTreeConstructor con = getParseTreeConstructor();
 		con.update(result);
 		String resultString = NodeUtil.getRootNode(result).serialize();
 		assertEquals(model,resultString);
@@ -50,8 +49,5 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		SimpleReconstrTestStandaloneSetup.doSetup();
-		SimpleExpressionsStandaloneSetup.doSetup();
-		
 	}
 }

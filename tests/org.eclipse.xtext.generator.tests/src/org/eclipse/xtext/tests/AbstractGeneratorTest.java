@@ -194,10 +194,13 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		return XtendFacade.create(ctx);
 	}
 
-	protected CompositeNode getRootNode(String model2) throws Exception {
-	    return parse(new StringInputStream(model2), getASTFactory(), null).getRootNode();
-	}
-	
+    protected CompositeNode getRootNode(InputStream stream) throws Exception {
+        return parse(stream, getASTFactory(), null).getRootNode();
+    }
+    protected CompositeNode getRootNode(String model2) throws Exception {
+        return parse(new StringInputStream(model2), getASTFactory(), null).getRootNode();
+    }
+    
 	protected CompositeNode getRootNode(String model2, IParseErrorHandler handler) throws Exception {
         return parse(new StringInputStream(model2), getASTFactory(), handler).getRootNode();
 	}
