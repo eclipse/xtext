@@ -74,7 +74,7 @@ public class ServiceRegistry {
 
     private static void injectServicesForClass(ILanguageDescriptor languageDescriptor, ILanguageService service, Class<?> serviceClass,
             Map<Class<?>, ILanguageService> cachedServices) throws IllegalAccessException, InvocationTargetException {
-        Method[] methods = serviceClass.getMethods();
+        Method[] methods = serviceClass.getDeclaredMethods();
         for (Method method : methods) {
             if (method.isAnnotationPresent(InjectedService.class)) {
                 Class<?>[] parameterTypes = method.getParameterTypes();
