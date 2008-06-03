@@ -5,7 +5,12 @@ import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IParseError;
+import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.impl.ParseError;
+
 import org.eclipse.xtext.parser.internal.InternalXtextLexer;
 import org.eclipse.xtext.parser.internal.InternalXtextParser;
 
