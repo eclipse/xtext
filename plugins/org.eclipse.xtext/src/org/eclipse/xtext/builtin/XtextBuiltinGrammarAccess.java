@@ -1,33 +1,18 @@
 package org.eclipse.xtext.builtin;
 
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.ILanguageFacade;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.XtextFactory;
-import org.eclipse.xtext.parser.IElementFactory;
-import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 
-public class XtextBuiltinLanguageFacade implements ILanguageFacade {
-	public static final String ID = "XtextBuiltIn";
+public class XtextBuiltinGrammarAccess implements IGrammarAccess {
 	private Grammar g;
-
-	public IElementFactory getElementFactory() {
-		return null;
-	}
-
-	public EPackage[] getGeneratedEPackages() {
-		return new EPackage[] { EcorePackage.eINSTANCE };
-	}
-	
 	{
 		XtextFactory f = XtextFactory.eINSTANCE;
 		g = f.createGrammar();
-		g.getIdElements().add(ID);
+		g.getIdElements().add(IXtextBuiltin.ID);
 		ReferencedMetamodel ecoremm = f.createReferencedMetamodel();
 		ecoremm.setAlias("ecore");
 		ecoremm.setUri("'"+EcorePackage.eNS_URI+"'");//TODO remove the single quotes 
@@ -69,29 +54,8 @@ public class XtextBuiltinLanguageFacade implements ILanguageFacade {
 		l.setBody(".");
 		g.getLexerRules().add(l);
 	}
-
 	public Grammar getGrammar() {
 		return g;
-	}
-
-	public String getLanguageId() {
-		return ID;
-	}
-
-	public String getModelFileExtension() {
-		return null;
-	}
-
-	public IParser getParser() {
-		return null;
-	}
-
-	public IParseTreeConstructor getParsetreeConstructor() {
-		return null;
-	}
-
-	public Factory getResourceFactory() {
-		return null;
 	}
 
 }

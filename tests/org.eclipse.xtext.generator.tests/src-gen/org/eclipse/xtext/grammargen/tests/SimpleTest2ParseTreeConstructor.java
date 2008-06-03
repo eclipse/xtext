@@ -1,12 +1,13 @@
 
 package org.eclipse.xtext.grammargen.tests;
 
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 
 public class SimpleTest2ParseTreeConstructor extends AbstractParseTreeConstructor {
-   
+
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
 		if (ruleToCall.equals("Model")) {
 			proceedModel(getDescr(obj));

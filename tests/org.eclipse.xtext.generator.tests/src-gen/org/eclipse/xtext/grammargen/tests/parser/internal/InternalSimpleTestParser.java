@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-06-03 12:57:46
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-06-03 15:24:37
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
@@ -40,10 +40,10 @@ public class InternalSimpleTestParser extends AbstractAntlrParser {
 
 
      
-        public InternalSimpleTestParser(TokenStream input, IElementFactory factory) {
+        public InternalSimpleTestParser(TokenStream input, IElementFactory factory, Grammar g) {
             this(input);
             this.factory = factory;
-    		grammar = LanguageFacadeFactory.getFacade("org.eclipse.xtext.grammargen.tests.SimpleTest").getGrammar();
+    		grammar = g;
         }
         
         protected void setLexerRule(LeafNode node, Token t) {
@@ -57,14 +57,14 @@ public class InternalSimpleTestParser extends AbstractAntlrParser {
 
     // $ANTLR start internalParse
     // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:89:1: internalParse returns [EObject current=null] : iv_ruleFoo= ruleFoo EOF ;
-    public EObject internalParse() throws RecognitionException {
+    public final EObject internalParse() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleFoo = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:90:3: (iv_ruleFoo= ruleFoo EOF )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:89:46: (iv_ruleFoo= ruleFoo EOF )
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:90:3: iv_ruleFoo= ruleFoo EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
@@ -94,14 +94,14 @@ public class InternalSimpleTestParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleFoo
     // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:98:1: ruleFoo returns [EObject current=null] : (lv_name= RULE_ID ) ;
-    public EObject ruleFoo() throws RecognitionException {
+    public final EObject ruleFoo() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:100:1: ( (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:99:33: ( (lv_name= RULE_ID ) )
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:100:1: (lv_name= RULE_ID )
             {
             // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g:100:1: (lv_name= RULE_ID )

@@ -1,12 +1,13 @@
 
 package org.eclipse.xtext.testlanguages;
 
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 
 public class OptionalEmptyLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
-   
+
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
 		if (ruleToCall.equals("Model")) {
 			proceedModel(getDescr(obj));

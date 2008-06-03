@@ -1,12 +1,13 @@
 
 package org.eclipse.xtext.parsetree.reconstr;
 
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 
 public class ComplexReconstrTestParseTreeConstructor extends AbstractParseTreeConstructor {
-   
+
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
 		if (ruleToCall.equals("Op")) {
 			proceedOp(getDescr(obj));

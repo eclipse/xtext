@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g 2008-06-03 12:57:51
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g 2008-06-03 15:24:43
 
 package org.eclipse.xtext.testlanguages.parser.internal;
 
@@ -65,10 +65,10 @@ public class InternalLexerLanguageLexer extends Lexer {
     public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g"; }
 
     // $ANTLR start RULE_STRING
-    public void mRULE_STRING() throws RecognitionException {
+    public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:149:11: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:149:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:149:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:149:11: ( '^' )?
@@ -144,10 +144,10 @@ public class InternalLexerLanguageLexer extends Lexer {
     // $ANTLR end RULE_STRING
 
     // $ANTLR start RULE_INT
-    public void mRULE_INT() throws RecognitionException {
+    public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:151:12: ( ( '0' .. '9' )+ )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:151:10: ( ( '0' .. '9' )+ )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:151:12: ( '0' .. '9' )+
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:151:12: ( '0' .. '9' )+
@@ -191,10 +191,10 @@ public class InternalLexerLanguageLexer extends Lexer {
     // $ANTLR end RULE_INT
 
     // $ANTLR start RULE_ML_COMMENT
-    public void mRULE_ML_COMMENT() throws RecognitionException {
+    public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:153:19: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:153:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:153:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
@@ -250,10 +250,10 @@ public class InternalLexerLanguageLexer extends Lexer {
     // $ANTLR end RULE_ML_COMMENT
 
     // $ANTLR start RULE_SL_COMMENT
-    public void mRULE_SL_COMMENT() throws RecognitionException {
+    public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:155:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:155:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:155:19: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
             {
             match("//"); 
@@ -323,10 +323,10 @@ public class InternalLexerLanguageLexer extends Lexer {
     // $ANTLR end RULE_SL_COMMENT
 
     // $ANTLR start RULE_WS
-    public void mRULE_WS() throws RecognitionException {
+    public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:157:11: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:157:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:157:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:157:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
@@ -380,10 +380,10 @@ public class InternalLexerLanguageLexer extends Lexer {
     // $ANTLR end RULE_WS
 
     // $ANTLR start RULE_LEXER_BODY
-    public void mRULE_LEXER_BODY() throws RecognitionException {
+    public final void mRULE_LEXER_BODY() throws RecognitionException {
         try {
             int _type = RULE_LEXER_BODY;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:159:19: ( '<#' ( '.' )* '#>' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:159:17: ( '<#' ( '.' )* '#>' )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:159:19: '<#' ( '.' )* '#>'
             {
             match("<#"); 
@@ -426,10 +426,10 @@ public class InternalLexerLanguageLexer extends Lexer {
     // $ANTLR end RULE_LEXER_BODY
 
     // $ANTLR start RULE_ANY_OTHER
-    public void mRULE_ANY_OTHER() throws RecognitionException {
+    public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:161:18: ( . )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:161:16: ( . )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:161:18: .
             {
             matchAny(); 
@@ -444,7 +444,7 @@ public class InternalLexerLanguageLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:1:10: ( RULE_STRING | RULE_INT | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER )
+        // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:1:8: ( RULE_STRING | RULE_INT | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER )
         int alt9=7;
         int LA9_0 = input.LA(1);
 

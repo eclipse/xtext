@@ -2,11 +2,10 @@ package org.eclipse.xtext.dummy;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.ILanguageFacade;
 
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
@@ -26,41 +25,27 @@ public abstract class DummyLanguageStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new DummyLanguageParserServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new DummyLanguageASTFactoryServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new DummyLanguageParseTreeConstructorServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new DummyLanguageResourceFactoryServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new DummyLanguageGrammarAccessServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new DummyLanguageMetamodelAccessServiceFactory());
 			
-			if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.dummy.DummyLanguage")==null) {
-				ILanguageFacade facade = new DummyLanguageLanguageFacade();
-				LanguageFacadeFactory.register(facade);
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"dummylanguage", facade.getResourceFactory());
-			}
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					"dummylanguage", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;
 		}
 	}
 	
 	private static ILanguageDescriptor INSTANCE;
-	
-	public static final String LANGUAGE_ID = "org.eclipse.xtext.dummy.DummyLanguage";
-	public static final String LANGUAGE_NAME = "DummyLanguage";
-	public static final String NAMESPACE = "org/eclipse/xtext/dummy";
     
     public static ILanguageDescriptor getLanguageDescriptor() {
     	if (INSTANCE == null) {
-    		INSTANCE = LanguageDescriptorFactory.get(LANGUAGE_ID);
+    		INSTANCE = LanguageDescriptorFactory.get(IDummyLanguage.ID);
     		if(INSTANCE == null) {
     			// TODO put super grammar
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, null);
+    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IDummyLanguage.ID, IDummyLanguage.NAME, IDummyLanguage.NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
     		}
     	}
     	return INSTANCE;

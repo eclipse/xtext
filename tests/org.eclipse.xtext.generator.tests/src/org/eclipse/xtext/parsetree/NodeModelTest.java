@@ -17,15 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parser.ITokenTypes;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.testlanguages.TestLanguageLanguageFacade;
 import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 

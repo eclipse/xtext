@@ -63,10 +63,10 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 
 @parser::members {
  
-    public InternalSimpleReconstrTestParser(TokenStream input, IElementFactory factory) {
+    public InternalSimpleReconstrTestParser(TokenStream input, IElementFactory factory, Grammar g) {
         this(input);
         this.factory = factory;
-		grammar = LanguageFacadeFactory.getFacade("org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest").getGrammar();
+		grammar = g;
     }
     
     protected void setLexerRule(LeafNode node, Token t) {

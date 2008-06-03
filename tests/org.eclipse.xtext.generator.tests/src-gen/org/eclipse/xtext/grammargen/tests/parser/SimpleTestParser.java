@@ -5,18 +5,17 @@ import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
-import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.service.InjectedService;
-import org.eclipse.xtext.parser.*;
-import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IParseError;
+import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.impl.ParseError;
 
 import org.eclipse.xtext.grammargen.tests.parser.internal.InternalSimpleTestLexer;
 import org.eclipse.xtext.grammargen.tests.parser.internal.InternalSimpleTestParser;
 
 
 public class SimpleTestParser extends org.eclipse.xtext.parser.AbstractParser {
-	private IElementFactory astElementFactory;
 	
 	@Override
 	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
@@ -24,7 +23,7 @@ public class SimpleTestParser extends org.eclipse.xtext.parser.AbstractParser {
 		InternalSimpleTestLexer lexer = new InternalSimpleTestLexer(in);
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		InternalSimpleTestParser parser = new InternalSimpleTestParser(
-				stream, factory) {
+				stream, factory, grammarAccess.getGrammar()) {
 					@Override
 			protected void reportError(IParseError error, RecognitionException re) {
 				handler.handleParserError(error);
@@ -41,12 +40,4 @@ public class SimpleTestParser extends org.eclipse.xtext.parser.AbstractParser {
 		return null;
 	}
 	
-	@InjectedService
-	public void setDefaultASTElementFactory(IElementFactory astElementFactory) {
-		this.astElementFactory = astElementFactory;
-	}
-	
-	protected IElementFactory getDefaultASTFactory() {
-		return LanguageFacadeFactory.getFacade("org.eclipse.xtext.grammargen.tests.SimpleTest").getElementFactory();
-	}
 }

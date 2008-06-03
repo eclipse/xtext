@@ -1,16 +1,18 @@
 package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.ILanguageFacade;
-
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.services.*;
+import org.eclipse.xtext.services.XtextASTFactoryServiceFactory;
+import org.eclipse.xtext.services.XtextGrammarAccessServiceFactory;
+import org.eclipse.xtext.services.XtextMetamodelAccessServiceFactory;
+import org.eclipse.xtext.services.XtextParseTreeConstructorServiceFactory;
+import org.eclipse.xtext.services.XtextParserServiceFactory;
+import org.eclipse.xtext.services.XtextResourceFactory;
+import org.eclipse.xtext.services.XtextResourceFactoryServiceFactory;
 
 public abstract class XtextStandaloneSetup {
 
@@ -21,10 +23,7 @@ public abstract class XtextStandaloneSetup {
 			
 			// setup super language first
 			XtextBuiltinStandaloneSetup.doSetup();
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new XMIResourceFactoryImpl());
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xmi", new XMIResourceFactoryImpl());
+			
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
 			
 			ServiceRegistry.registerFactory(languageDescriptor, new XtextParserServiceFactory());
@@ -39,12 +38,9 @@ public abstract class XtextStandaloneSetup {
 			
 			ServiceRegistry.registerFactory(languageDescriptor, new XtextMetamodelAccessServiceFactory());
 			
-			if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.Xtext")==null) {
-				ILanguageFacade facade = new XtextLanguageFacade();
-				LanguageFacadeFactory.register(facade);
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"xtext", facade.getResourceFactory());
-			}
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					"xtext", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
+			
 			isInitialized = true;
 		}
 	}
@@ -60,7 +56,7 @@ public abstract class XtextStandaloneSetup {
     		INSTANCE = LanguageDescriptorFactory.get(LANGUAGE_ID);
     		if(INSTANCE == null) {
     			// TODO put super grammar
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, null);
+    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
     		}
     	}
     	return INSTANCE;

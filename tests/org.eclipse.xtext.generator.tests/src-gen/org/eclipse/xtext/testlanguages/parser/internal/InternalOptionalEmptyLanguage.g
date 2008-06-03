@@ -63,10 +63,10 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 
 @parser::members {
  
-    public InternalOptionalEmptyLanguageParser(TokenStream input, IElementFactory factory) {
+    public InternalOptionalEmptyLanguageParser(TokenStream input, IElementFactory factory, Grammar g) {
         this(input);
         this.factory = factory;
-		grammar = LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.OptionalEmptyLanguage").getGrammar();
+		grammar = g;
     }
     
     protected void setLexerRule(LeafNode node, Token t) {

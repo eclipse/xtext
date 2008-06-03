@@ -19,8 +19,10 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.builtin.XtextBuiltinLanguageFacade;
+import org.eclipse.xtext.builtin.IXtextBuiltin;
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.ServiceRegistry;
 
 /**
  * 
@@ -31,32 +33,30 @@ public class GrammarUtil {
 	public static String getId(Grammar g) {
 		StringBuffer buff = new StringBuffer();
 		EList<String> list = g.getIdElements();
-		for (int i = 0, x = list.size(); i<x;i++) {
+		for (int i = 0, x = list.size(); i < x; i++) {
 			buff.append(list.get(i));
-			if (i+1<x)
+			if (i + 1 < x)
 				buff.append(".");
 		}
-		return buff.toString(); 
+		return buff.toString();
 	}
-	
+
 	public static String getName(Grammar g) {
-		return g.getIdElements().get(g.getIdElements().size()-1);
+		return g.getIdElements().get(g.getIdElements().size() - 1);
 	}
 
 	public static String getNamespace(Grammar g) {
 		StringBuffer buff = new StringBuffer();
 		EList<String> list = g.getIdElements();
-		for (int i = 0, x = list.size()-1; i<x;i++) {
+		for (int i = 0, x = list.size() - 1; i < x; i++) {
 			buff.append(list.get(i));
-			if (i+1<x)
+			if (i + 1 < x)
 				buff.append("/");
 		}
 		String string = buff.toString();
-		return string.trim().length()==0?null:string; 
+		return string.trim().length() == 0 ? null : string;
 	}
-	
-	
-	
+
 	public static Grammar getGrammar(EObject grammarElement) {
 		EObject root = getRootContainer(grammarElement);
 		if (root instanceof Grammar) {
@@ -131,11 +131,18 @@ public class GrammarUtil {
 	}
 
 	public static Grammar getSuperGrammar(Grammar _this) {
-		if (_this.getSuperGrammar() == null) {
-			Grammar superGrammar = LanguageFacadeFactory.getFacade(XtextBuiltinLanguageFacade.ID).getGrammar();
-			return superGrammar == _this ? null : superGrammar;
+		String id = IXtextBuiltin.ID;
+		if (_this.getSuperGrammar() != null) {
+			id = _this.getSuperGrammar();
 		}
-		return LanguageFacadeFactory.getFacade(_this.getSuperGrammar()).getGrammar();
+		ILanguageDescriptor descriptor = LanguageDescriptorFactory.get(id);
+		if (descriptor == null)
+			throw new IllegalStateException("Language '"+id+"' has not been set up properly");
+		IGrammarAccess service = ServiceRegistry.getService(descriptor, IGrammarAccess.class);
+		if (service == null)
+			throw new IllegalStateException("Language '"+id+"' has not been set up properly");
+		Grammar superGrammar = service.getGrammar();
+		return superGrammar == _this ? null : superGrammar;
 	}
 
 	public static AbstractRule findRuleForName(Grammar _this, String ruleName) {

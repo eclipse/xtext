@@ -6,5 +6,4 @@ public interface IGrammarAccess extends ILanguageService {
 
     Grammar getGrammar();
 
-    String getGrammarClasspathURI();
 }

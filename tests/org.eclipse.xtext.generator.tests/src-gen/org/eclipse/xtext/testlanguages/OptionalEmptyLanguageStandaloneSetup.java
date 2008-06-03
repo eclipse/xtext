@@ -2,11 +2,10 @@ package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.LanguageFacadeFactory;
-import org.eclipse.xtext.ILanguageFacade;
 
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
@@ -26,41 +25,27 @@ public abstract class OptionalEmptyLanguageStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new OptionalEmptyLanguageParserServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new OptionalEmptyLanguageASTFactoryServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new OptionalEmptyLanguageParseTreeConstructorServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new OptionalEmptyLanguageResourceFactoryServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new OptionalEmptyLanguageGrammarAccessServiceFactory());
-			
 			ServiceRegistry.registerFactory(languageDescriptor, new OptionalEmptyLanguageMetamodelAccessServiceFactory());
 			
-			if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.OptionalEmptyLanguage")==null) {
-				ILanguageFacade facade = new OptionalEmptyLanguageLanguageFacade();
-				LanguageFacadeFactory.register(facade);
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"optionalemptylanguage", facade.getResourceFactory());
-			}
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					"optionalemptylanguage", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;
 		}
 	}
 	
 	private static ILanguageDescriptor INSTANCE;
-	
-	public static final String LANGUAGE_ID = "org.eclipse.xtext.testlanguages.OptionalEmptyLanguage";
-	public static final String LANGUAGE_NAME = "OptionalEmptyLanguage";
-	public static final String NAMESPACE = "org/eclipse/xtext/testlanguages";
     
     public static ILanguageDescriptor getLanguageDescriptor() {
     	if (INSTANCE == null) {
-    		INSTANCE = LanguageDescriptorFactory.get(LANGUAGE_ID);
+    		INSTANCE = LanguageDescriptorFactory.get(IOptionalEmptyLanguage.ID);
     		if(INSTANCE == null) {
     			// TODO put super grammar
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, null);
+    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IOptionalEmptyLanguage.ID, IOptionalEmptyLanguage.NAME, IOptionalEmptyLanguage.NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
     		}
     	}
     	return INSTANCE;

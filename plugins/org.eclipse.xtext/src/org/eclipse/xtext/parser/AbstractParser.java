@@ -13,13 +13,27 @@ import java.io.InputStream;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.service.InjectedService;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
 public abstract class AbstractParser implements IParser {
+	
+	private IElementFactory astElementFactory;
+	protected IGrammarAccess grammarAccess;
+	
+	@InjectedService
+	public void setDefaultASTElementFactory(IElementFactory astElementFactory) {
+		this.astElementFactory = astElementFactory;
+	}
+	
+	@InjectedService
+	public void setGrammarAccess(IGrammarAccess ga) {
+		this.grammarAccess = ga;
+	}
 
 	public IParseResult parse(InputStream in, IElementFactory factory, IParseErrorHandler handler,
 			IParsePostProcessor postProcessor) {
@@ -43,12 +57,13 @@ public abstract class AbstractParser implements IParser {
 		return parse(in, getDefaultASTFactory(), getDefaultHandler(), getDefaultPostProcessor());
 	}
 
-	protected abstract IElementFactory getDefaultASTFactory();
+	protected IElementFactory getDefaultASTFactory() {
+		return astElementFactory;
+	}
 
 	protected IParsePostProcessor getDefaultPostProcessor() {
 		return new IParsePostProcessor() {
 			public IParseResult postProcess(IParseResult parseResult) {
-				// TODO: add code
 				return parseResult;
 			}
 		};
