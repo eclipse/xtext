@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextLanguageFacade;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -43,12 +42,7 @@ public class TestBootstrapModel extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		XtextStandaloneSetup.doSetup();
-		EPackage.Registry.INSTANCE.put(XtextLanguageFacade.XTEXT_NS_URI, XtextPackage.eINSTANCE);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
-		XtextPackage.eINSTANCE.getAbstractElement();
 		XtextutilPackage.eINSTANCE.getComplexType();
-		EcorePackage.eINSTANCE.getEAnnotation();
 		with(XtextStandaloneSetup.class);
 	}
 
