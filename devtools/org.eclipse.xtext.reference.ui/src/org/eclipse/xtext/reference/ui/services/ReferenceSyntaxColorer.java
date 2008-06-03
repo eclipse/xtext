@@ -9,8 +9,8 @@
 
 package org.eclipse.xtext.reference.ui.services;
 
-import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 
 /**
  * @author Dennis Hübner
@@ -18,7 +18,7 @@ import org.eclipse.xtext.parsetree.LeafNode;
  */
 public class ReferenceSyntaxColorer extends org.eclipse.xtext.ui.core.service.impl.SyntaxColorer {
 	@Override
-	public TextAttribute color(LeafNode leafNode) {
+	public TextStyle color(LeafNode leafNode) {
 		return super.color(leafNode);
 	}
 }

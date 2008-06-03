@@ -13,14 +13,6 @@
       </editor>
    </extension>
    <extension
-         point="org.eclipse.xtext.ui.languageDescriptor">
-      <languageDescriptor
-            id="org.eclipse.xtext.ui.reference.referenceLanguageDescriptor"
-            languageFacade="org.eclipse.xtext.reference.ReferenceGrammarLanguageFacade"
-            name="Reference Project">
-      </languageDescriptor>
-   </extension>
-   <extension
          point="org.eclipse.xtext.ui.syntaxColorer">
       <syntaxColorer
             class="org.eclipse.xtext.reference.ui.services.ReferenceSyntaxColorer"
@@ -40,6 +32,13 @@
             class="org.eclipse.xtext.ui.core.service.impl.PreferenceStore"
             languageId="org.eclipse.xtext.reference.ReferenceGrammar">
       </preferenceStore>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.tokenTypeDef">
+      <tokenTypeDef
+            class="org.eclipse.xtext.reference.ui.services.ReferenceTokenTypeDef"
+            languageId="org.eclipse.xtext.reference.ReferenceGrammar">
+      </tokenTypeDef>
    </extension>
    
 </plugin>
