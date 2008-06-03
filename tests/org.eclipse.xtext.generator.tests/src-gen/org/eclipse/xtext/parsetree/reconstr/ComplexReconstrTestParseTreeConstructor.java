@@ -6,10 +6,7 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 
 public class ComplexReconstrTestParseTreeConstructor extends AbstractParseTreeConstructor {
-    protected ILanguageFacade getFacade() {
-    	return LanguageFacadeFactory.getFacade("org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest");
-    }
-
+   
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
 		if (ruleToCall.equals("Op")) {
 			proceedOp(getDescr(obj));

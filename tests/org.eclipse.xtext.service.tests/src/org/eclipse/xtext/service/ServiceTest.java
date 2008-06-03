@@ -14,6 +14,11 @@ import junit.framework.TestCase;
 
 import org.eclipse.xtext.service.impl.SingletonLanguageServiceFactory;
 
+/**
+ * 
+ * @author Jan Köhnlein - Initial contribution and API
+ *
+ */
 public class ServiceTest extends TestCase {
 
     private ILanguageDescriptor myLanguageDescriptor;
