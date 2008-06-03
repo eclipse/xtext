@@ -6,27 +6,20 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core;
+package org.eclipse.xtext.ui;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
-
-import org.eclipse.swt.SWT;
+import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
+import org.eclipse.xtext.ui.core.service.impl.SyntaxColorer;
 
 /**
- * @author Dennis Hübner - Initial contribution and API
+ * @author Peter Friese - Initial contribution and API
  * 
  */
-@Target( { ElementType.METHOD })
-public @interface TokenType {
-	String name();
+public class SyntaxColorer1 extends SyntaxColorer {
 
-	int priority() default 5;
+	public TextStyle color(LeafNode token) {
+		return super.color(token);
+	}
 
-	String color() default "0,0,0";// TODO try to delegate to a static field
-									// that
-
-	// useStringConverter
-
-	int style() default SWT.NONE;
 }

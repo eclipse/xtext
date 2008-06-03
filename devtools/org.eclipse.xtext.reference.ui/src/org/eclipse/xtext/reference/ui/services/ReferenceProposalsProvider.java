@@ -15,7 +15,6 @@ import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.reference.ui.Activator;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.codecompletion.Proposal;

@@ -15,11 +15,17 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.resource.DataFormatException;
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jface.resource.StringConverter;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.parser.IParseErrorHandler;
@@ -30,6 +36,7 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.utils.StringInputStream;
+import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
@@ -49,7 +56,7 @@ public class XtextTokenScanner implements ITokenScanner {
 		Assert.isLegal(languageDescriptor != null);
 		this.languageDescriptor = languageDescriptor;
 		this.syntaxColorer = ServiceRegistry.getService(languageDescriptor, ISyntaxColorer.class);
-		parser = ServiceRegistry.getService(languageDescriptor, IParser.class);
+		this.parser = ServiceRegistry.getService(languageDescriptor, IParser.class);
 	}
 
 	public int getTokenLength() {
@@ -77,11 +84,8 @@ public class XtextTokenScanner implements ITokenScanner {
 			if (node instanceof LeafNode) {
 				currentNode = (LeafNode) node;
 				token = Token.UNDEFINED;
-				// if (ITokenTypes.WHITESPACE.equals(currentNode.tokenType())) {
-				// retVal = Token.WHITESPACE;
-				// }
 				if (syntaxColorer != null) {
-					TextAttribute textAttribute = syntaxColorer.color(currentNode);
+					TextAttribute textAttribute = createTextAttribute();
 					if (textAttribute != null) {
 						token = new Token(textAttribute);
 					}
@@ -94,6 +98,13 @@ public class XtextTokenScanner implements ITokenScanner {
 			}
 		}
 		return token;
+	}
+
+	private TextAttribute createTextAttribute() {
+		TextStyle textStyle = syntaxColorer.color(currentNode);
+		return new TextAttribute(colorFromString(textStyle.getColor()),
+				colorFromString(textStyle.getBackgroundColor()), textStyle.getStyle(), fontFromString(textStyle
+						.getFontName()));
 	}
 
 	// TODO remove custom implementation when default one works properly
@@ -116,7 +127,7 @@ public class XtextTokenScanner implements ITokenScanner {
 		IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
 		IParseResult parseResult;
 		try {
-			//TODO delegate encoding to an antlrparser
+			// TODO delegate encoding to an antlrparser
 			parseResult = parser.parse(new StringInputStream(document.get()), elementFactory, parseErrorHandler);
 			CompositeNode rootNode = parseResult.getRootNode();
 
@@ -130,4 +141,31 @@ public class XtextTokenScanner implements ITokenScanner {
 		}
 	}
 
+	// TODO move following methods to a separate utilclass
+
+	private Font fontFromString(String fontName) {
+		if (fontName != null && fontName.trim().length() > 0) {
+			Font font = JFaceResources.getFont(fontName);
+			return font;
+		}
+		return null;
+	}
+
+	private Color colorFromString(String rgbString) {
+		if (rgbString != null && rgbString.trim().length() > 0) {
+			Color col = JFaceResources.getColorRegistry().get(rgbString);
+			try {
+				if (col == null) {
+					RGB rgb = StringConverter.asRGB(rgbString);
+					JFaceResources.getColorRegistry().put(rgbString, rgb);
+					col = JFaceResources.getColorRegistry().get(rgbString);
+				}
+			}
+			catch (DataFormatException e) {
+				CoreLog.logError("Corrupt color value: " + rgbString, e);
+			}
+			return col;
+		}
+		return null;
+	}
 }
