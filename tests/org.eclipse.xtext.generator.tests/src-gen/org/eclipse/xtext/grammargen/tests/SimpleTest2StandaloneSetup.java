@@ -25,13 +25,13 @@ public abstract class SimpleTest2StandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleTest2ParserServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleTest2ASTFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleTest2ParseTreeConstructorServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleTest2ResourceFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleTest2GrammarAccessServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleTest2MetamodelAccessServiceFactory());
-			
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.grammargen.tests.parser.SimpleTest2Parser(), org.eclipse.xtext.parser.IParser.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.GenericEcoreElementFactory(), org.eclipse.xtext.parser.IElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.grammargen.tests.services.SimpleTest2ResourceFactory(), org.eclipse.xtext.resource.IResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.grammargen.tests.services.SimpleTest2GrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.grammargen.tests.services.SimpleTest2MetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.grammargen.tests.parsetree.SimpleTest2ParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"simpletest2", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;

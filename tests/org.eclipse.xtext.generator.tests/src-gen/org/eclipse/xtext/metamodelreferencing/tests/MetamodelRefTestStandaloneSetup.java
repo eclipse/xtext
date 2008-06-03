@@ -25,13 +25,13 @@ public abstract class MetamodelRefTestStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerFactory(languageDescriptor, new MetamodelRefTestParserServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new MetamodelRefTestASTFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new MetamodelRefTestParseTreeConstructorServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new MetamodelRefTestResourceFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new MetamodelRefTestGrammarAccessServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new MetamodelRefTestMetamodelAccessServiceFactory());
-			
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.metamodelreferencing.tests.parser.MetamodelRefTestParser(), org.eclipse.xtext.parser.IParser.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.GenericEcoreElementFactory(), org.eclipse.xtext.parser.IElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestResourceFactory(), org.eclipse.xtext.resource.IResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.metamodelreferencing.tests.parsetree.MetamodelRefTestParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"metamodelreftest", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;

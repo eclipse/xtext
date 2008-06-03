@@ -25,13 +25,13 @@ public abstract class LexerLanguageStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageParserServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageASTFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageParseTreeConstructorServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageResourceFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageGrammarAccessServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageMetamodelAccessServiceFactory());
-			
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.parser.LexerLanguageParser(), org.eclipse.xtext.parser.IParser.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.GenericEcoreElementFactory(), org.eclipse.xtext.parser.IElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.LexerLanguageResourceFactory(), org.eclipse.xtext.resource.IResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.LexerLanguageGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.LexerLanguageMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.parsetree.LexerLanguageParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"lexerlanguage", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;

@@ -25,13 +25,13 @@ public abstract class OptionalEmptyLanguageStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerFactory(languageDescriptor, new OptionalEmptyLanguageParserServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new OptionalEmptyLanguageASTFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new OptionalEmptyLanguageParseTreeConstructorServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new OptionalEmptyLanguageResourceFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new OptionalEmptyLanguageGrammarAccessServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new OptionalEmptyLanguageMetamodelAccessServiceFactory());
-			
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.parser.OptionalEmptyLanguageParser(), org.eclipse.xtext.parser.IParser.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.GenericEcoreElementFactory(), org.eclipse.xtext.parser.IElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageResourceFactory(), org.eclipse.xtext.resource.IResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.parsetree.OptionalEmptyLanguageParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"optionalemptylanguage", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;

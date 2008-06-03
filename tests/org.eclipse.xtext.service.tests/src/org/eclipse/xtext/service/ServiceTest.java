@@ -12,7 +12,7 @@ package org.eclipse.xtext.service;
 
 import junit.framework.TestCase;
 
-import org.eclipse.xtext.service.impl.SingletonLanguageServiceFactory;
+import org.eclipse.xtext.service.internal.GenericSingletonLanguageServiceFactory;
 
 /**
  * 
@@ -81,15 +81,23 @@ public class ServiceTest extends TestCase {
         }
     }
     
+    public void testSingletonServiceFactory() {
+        class SomeLanguageService extends InjectedLanguageService {};
+        ILanguageService languageService = new SomeLanguageService();
+        ServiceRegistry.registerService(myLanguageDescriptor, languageService, InjectedLanguageService.class);
+        InjectedLanguageService service = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
+        assertEquals(languageService, service);
+    }
+
     public void testPriority() throws Exception {
         InjectedLanguageService injectedLanguageService0 = new InjectedLanguageService();
         InjectedLanguageService injectedLanguageService1 = new InjectedLanguageService();
-        SingletonLanguageServiceFactory factory0 = new SingletonLanguageServiceFactory(injectedLanguageService0);
+        GenericSingletonLanguageServiceFactory factory0 = new GenericSingletonLanguageServiceFactory(injectedLanguageService0, InjectedLanguageService.class);
         ILanguageServiceFactory factory = ServiceRegistry.registerFactory(myLanguageDescriptor, factory0);
         assertNull(factory);
         InjectedLanguageService service = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
         assertEquals(injectedLanguageService0, service);
-        SingletonLanguageServiceFactory factory1 = new SingletonLanguageServiceFactory(injectedLanguageService1);
+        GenericSingletonLanguageServiceFactory factory1 = new GenericSingletonLanguageServiceFactory(injectedLanguageService1, InjectedLanguageService.class);
         factory = ServiceRegistry.registerFactory(myLanguageDescriptor, factory1);
         assertEquals(factory0, factory);
         service = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
@@ -99,4 +107,5 @@ public class ServiceTest extends TestCase {
         service = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
         assertEquals(injectedLanguageService0, service);
     }
+    
 }

@@ -9,8 +9,8 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.reconstr.parsetree.ComplexReconstrTestParseTreeConstructor;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class ComplexReconstrTest extends AbstractGeneratorTest {
@@ -18,7 +18,6 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		ComplexReconstrTestStandaloneSetup.doSetup();
 		with(ComplexReconstrTestStandaloneSetup.class);
 	}
 
@@ -34,7 +33,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
-		ComplexReconstrTestParseTreeConstructor con = (ComplexReconstrTestParseTreeConstructor) getParseTreeConstructor();
+		IParseTreeConstructor con = getParseTreeConstructor();
 		con.update(result);
 		String resultString = NodeUtil.getRootNode(result).serialize();
 		return resultString;

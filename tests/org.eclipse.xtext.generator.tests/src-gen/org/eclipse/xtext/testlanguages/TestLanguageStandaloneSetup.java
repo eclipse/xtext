@@ -25,13 +25,13 @@ public abstract class TestLanguageStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerFactory(languageDescriptor, new TestLanguageParserServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new TestLanguageASTFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new TestLanguageParseTreeConstructorServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new TestLanguageResourceFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new TestLanguageGrammarAccessServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new TestLanguageMetamodelAccessServiceFactory());
-			
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.parser.TestLanguageParser(), org.eclipse.xtext.parser.IParser.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.GenericEcoreElementFactory(), org.eclipse.xtext.parser.IElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.TestLanguageResourceFactory(), org.eclipse.xtext.resource.IResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.TestLanguageMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.parsetree.TestLanguageParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"testlanguage", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;
