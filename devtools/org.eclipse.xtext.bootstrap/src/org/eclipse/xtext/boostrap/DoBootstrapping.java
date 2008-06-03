@@ -8,21 +8,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.boostrap;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
-import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextLanguageFacade;
-import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.parser.XtextASTFactory;
-import org.eclipse.xtext.parser.XtextParser;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -41,11 +36,7 @@ public class DoBootstrapping {
 		String builtinlanguageNamespace = "org/eclipse/xtext/builtin";
 		
 		System.out.println("loading " + filename);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new XMIResourceFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xmi", new XMIResourceFactoryImpl());
-		EPackage.Registry.INSTANCE.put(XtextLanguageFacade.XTEXT_NS_URI, XtextPackage.eINSTANCE);
+		XtextStandaloneSetup.doSetup();
 		
 		generate(srcGenPath, filename, languageName, languageNamespace);
 
@@ -55,9 +46,10 @@ public class DoBootstrapping {
 	private static void generate(String srcGenPath, String filename, String languageName, String languageNamespace)
 			throws FileNotFoundException, IOException {
 		String modelFileExtension = "xtext";
-		InputStream resourceAsStream = new FileInputStream(filename);
-		XtextParser xtext2Parser= new XtextParser();
-		Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory()).getRootASTElement();
+		ResourceSet rs = new ResourceSetImpl();
+		Resource resource = rs.createResource(URI.createURI(filename));
+		resource.load(null);
+		Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
 		GeneratorFacade.cleanFolder(srcGenPath);
 		GeneratorFacade.generate(grammarModel, languageName, languageNamespace, srcGenPath, null, modelFileExtension);
 	}
