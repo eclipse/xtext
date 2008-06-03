@@ -1,16 +1,15 @@
 package org.eclipse.xtext.reference;
 
 import java.io.IOException;
-import java.io.InputStream;
 
-import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextLanguageFacade;
-import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.parser.XtextASTFactory;
-import org.eclipse.xtext.parser.XtextParser;
+import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 
 /**
  * Run this class in order to generate the Reference grammar.
@@ -27,15 +26,12 @@ public class ReferenceGrammar {
 
         GeneratorFacade.cleanFolder(PATH);
 
-        String filename = this.getClass().getName().replace('.', '/') + ".xtext";
-
-        System.out.println("loading " + filename);
-        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filename);
-
-        EPackage.Registry.INSTANCE.put(XtextLanguageFacade.XTEXT_NS_URI, XtextPackage.eINSTANCE);
-        XtextParser xtext2Parser = new XtextParser();
-        Grammar grammarModel = (Grammar) xtext2Parser.parse(resourceAsStream, new XtextASTFactory())
-                .getRootASTElement();
+        String classpathUri = "classpath:/"+getClass().getName().replace('.', '/') + ".xtext";
+        System.out.println("loading " + classpathUri);
+        ResourceSet rs = new ResourceSetImpl();
+        Resource resource = rs.createResource(new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(classpathUri)));
+        resource.load(null);
+        Grammar grammarModel = (Grammar) resource.getContents().get(0);
 
         GeneratorFacade.generate(grammarModel, this.getClass().getSimpleName(), this.getClass().getPackage().getName()
                 .replace('.', '/'), PATH, UI_PATH, "xtext");
