@@ -17,7 +17,7 @@ public class BuildInTokenTypeDef implements ITokenTypeDefService {
 		return retVal;
 	}
 
-	private ITokenTypeDef keyWordTokenType() {
+	protected TokenTypeDef keyWordTokenType() {
 		TokenTypeDef ttd = new TokenTypeDef("keyword") {
 			@Override
 			public boolean match(LeafNode node) {
