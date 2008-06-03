@@ -26,10 +26,7 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
 
 public class «languageName()»ParseTreeConstructor extends AbstractParseTreeConstructor {
-    protected ILanguageFacade getFacade() {
-    	return LanguageFacadeFactory.getFacade("«languageId()»");
-    }
-
+   
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
 		«FOREACH parserRules AS pr SEPARATOR ' else '-»
 		if (ruleToCall.equals("«pr.name»")) {
