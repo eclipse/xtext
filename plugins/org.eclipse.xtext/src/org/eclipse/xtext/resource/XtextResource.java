@@ -18,8 +18,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.eclipse.xtext.ILanguageFacade;
 import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -28,25 +28,31 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 
 /**
  * An EMF resource that reads and writes models of an Xtext DSL.
- *  
+ * 
  * @author Jan Köhnlein
  */
 public class XtextResource extends ResourceImpl {
 
-	private ILanguageFacade languageFacade;
+	private IParser parser;
+	private IElementFactory elementFactory;
+	private IParseTreeConstructor parsetreeConstructor;
 
-	public XtextResource(ILanguageFacade languageFacade, URI uri) {
+	public XtextResource(IElementFactory elementFactory, IParser parser, IParseTreeConstructor parsetreeConstructor,
+			URI uri) {
 		super(uri);
-		this.languageFacade = languageFacade;
+		this.elementFactory = elementFactory;
+		this.parser = parser;
+		this.parsetreeConstructor = parsetreeConstructor;
 	}
 
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		IParser parser = languageFacade.getParser();
-		IElementFactory elementFactory = languageFacade.getElementFactory();
-		EObject rootElement = parser.parse(inputStream, elementFactory).getRootASTElement();
-		if (rootElement != null) {
-			getContents().add(rootElement);
+		IParseResult parse = parser.parse(inputStream, elementFactory);
+		if (parse != null) {
+			EObject rootElement = parse.getRootASTElement();
+			if (rootElement != null) {
+				getContents().add(rootElement);
+			}
 		}
 	}
 
@@ -57,7 +63,6 @@ public class XtextResource extends ResourceImpl {
 		}
 		if (!contents.isEmpty()) {
 			EObject rootElement = contents.get(0);
-			IParseTreeConstructor parsetreeConstructor = languageFacade.getParsetreeConstructor();
 			parsetreeConstructor.update(rootElement);
 			NodeAdapter rootNodeAdapter = getNodeAdapter(rootElement);
 			if (rootNodeAdapter != null) {
@@ -76,5 +81,17 @@ public class XtextResource extends ResourceImpl {
 			}
 		}
 		return null;
+	}
+
+	public IParser getParser() {
+		return parser;
+	}
+
+	public void setParser(IParser parser) {
+		this.parser = parser;
+	}
+
+	public IElementFactory getElementFactory() {
+		return elementFactory;
 	}
 }
