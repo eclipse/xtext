@@ -5,6 +5,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
@@ -39,6 +40,7 @@ public class LanguageServiceActivator {
         ServiceRegistry.registerFactory(new GenericRegisteredServiceFactory(languageService, IProposalsProvider.class, "proposalsProvider"));
         ServiceRegistry.registerFactory(new GenericRegisteredServiceFactory(languageService, ISyntaxColorer.class, "syntaxColorer"));
         ServiceRegistry.registerFactory(new GenericRegisteredServiceFactory(languageService, IGrammarAccess.class, "grammarAccess"));
+        ServiceRegistry.registerFactory(new GenericRegisteredServiceFactory(languageService, IMetamodelAccess.class, "metamodelAccess"));
     }
 
     private static void registerLanguageDescriptors() {
