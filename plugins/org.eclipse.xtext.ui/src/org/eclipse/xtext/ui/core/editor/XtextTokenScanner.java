@@ -37,6 +37,7 @@ import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.utils.StringInputStream;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
+import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
@@ -61,7 +62,6 @@ public class XtextTokenScanner implements ITokenScanner {
 
 	public int getTokenLength() {
 		if (currentNode != null) {
-            checkLength();
 			return currentNode.length();
 		}
 		else {
@@ -71,8 +71,6 @@ public class XtextTokenScanner implements ITokenScanner {
 
 	public int getTokenOffset() {
 		if (currentNode != null) {
-            checkLength();
-
 			return currentNode.offset();
 		}
 		else {
@@ -82,12 +80,17 @@ public class XtextTokenScanner implements ITokenScanner {
 
 	public IToken nextToken() {
 		IToken token = Token.EOF;
+		currentNode = null;
 		if (nodeIterator != null && nodeIterator.hasNext()) {
 			Object node = nodeIterator.next();
 			if (node instanceof LeafNode) {
 				currentNode = (LeafNode) node;
-				checkLength();
 				token = Token.UNDEFINED;
+				if (Activator.DEBUG_PARSING)
+					System.out.println("XtextTokenScanner.nextToken(): '"
+							+ currentNode.getText().replaceAll("\n", "<br>") + "' start:" + currentNode.offset()
+							+ " length:" + currentNode.length() + " line:" + currentNode.line());
+
 				if (syntaxColorer != null) {
 					TextAttribute textAttribute = createTextAttribute();
 					if (textAttribute != null) {
@@ -101,14 +104,11 @@ public class XtextTokenScanner implements ITokenScanner {
 						new IllegalArgumentException());
 			}
 		}
+		if (Activator.DEBUG_PARSING)
+			System.out.println("XtextTokenScanner.nextToken(): ************* scanning done **************");
+
 		return token;
 	}
-
-    private void checkLength() {
-        if(currentNode.length() + currentNode.offset() > document.getLength()) {
-            throw new IllegalStateException();
-        }
-    }
 
 	private TextAttribute createTextAttribute() {
 		TextStyle textStyle = syntaxColorer.color(currentNode);
@@ -125,14 +125,13 @@ public class XtextTokenScanner implements ITokenScanner {
 		}
 	};
 	List<IParseError> parseErrors = new ArrayList<IParseError>();
-    private IDocument document;
 
 	public void setRange(IDocument document, int offset, int length) {
 		Assert.isLegal(document != null);
-		this.document = document;
 		nodeIterator = null;
 		// TODO partial parse
-		System.out.print("Token Scanner: Parsing...");
+		if (Activator.DEBUG_PARSING)
+			System.out.print("Token Scanner: Parsing...");
 		long start = System.currentTimeMillis();
 
 		// TODO: dependency injection for default element factory in parser
@@ -142,8 +141,8 @@ public class XtextTokenScanner implements ITokenScanner {
 			// TODO delegate encoding to an antlrparser
 			parseResult = parser.parse(new StringInputStream(document.get()), elementFactory, parseErrorHandler);
 			CompositeNode rootNode = parseResult.getRootNode();
-
-			System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
+			if (Activator.DEBUG_PARSING)
+				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
 			if (rootNode != null) {
 				nodeIterator = rootNode.getLeafNodes().iterator();
 			}

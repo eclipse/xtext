@@ -2,3 +2,4 @@ org.eclipse.xtext.ui/debug=true
 
 # Reports service
 org.eclipse.xtext.ui/debug/services/proposalProvider=true
+org.eclipse.xtext.ui/debug/services/parser=true

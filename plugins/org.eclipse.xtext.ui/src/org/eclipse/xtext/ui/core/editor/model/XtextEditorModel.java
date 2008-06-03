@@ -27,6 +27,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.ui.core.internal.Activator;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -46,7 +47,7 @@ public class XtextEditorModel {
 	public List<IParseError> getErrors() {
 		return parseErrors;
 	}
-	
+
 	public boolean hasErrors() {
 		return parseErrors.size() > 0;
 	}
@@ -62,7 +63,7 @@ public class XtextEditorModel {
 	public XtextEditorModel(IDocument document, ILanguageDescriptor languageDescriptor) {
 		this.document = document;
 		this.languageDescriptor = languageDescriptor;
-		parser = ServiceRegistry.getService(languageDescriptor, IParser.class);
+		this.parser = ServiceRegistry.getService(languageDescriptor, IParser.class);
 	}
 
 	public ILanguageDescriptor getLanguageDescriptor() {
@@ -102,19 +103,20 @@ public class XtextEditorModel {
 		String content;
 		try {
 			content = document.get(0, document.getLength());
-			System.out.print("Parsing...");
+			if (Activator.DEBUG_PARSING)
+				System.out.print("Parsing...");
 			long start = System.currentTimeMillis();
-			
+
 			// TODO: dependency injection for default element factory in parser
 			IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
-			astRoot = parser.parse(new StringInputStream(content),
-					elementFactory, parseErrorHandler).getRootASTElement();
-			
-			System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.") ;
+			astRoot = parser.parse(new StringInputStream(content), elementFactory, parseErrorHandler)
+					.getRootASTElement();
+			if (Activator.DEBUG_PARSING)
+				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
 			if (astRoot != null) {
-    			NodeAdapter nodeAdapter = (NodeAdapter) astRoot.eAdapters().get(0);
-    			parseTreeRootNode = nodeAdapter.getParserNode();
-    			notifyModelListeners(new XtextEditorModelChangeEvent(this));
+				NodeAdapter nodeAdapter = (NodeAdapter) astRoot.eAdapters().get(0);
+				parseTreeRootNode = nodeAdapter.getParserNode();
+				notifyModelListeners(new XtextEditorModelChangeEvent(this));
 			}
 		}
 		catch (BadLocationException e) {

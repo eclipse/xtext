@@ -11,8 +11,12 @@ package org.eclipse.xtext.ui.core.editor;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.AbstractReusableInformationControlCreator;
 import org.eclipse.jface.text.DefaultInformationControl;
+import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IInformationControl;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.ITypedRegion;
+import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
@@ -78,7 +82,13 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		PresentationReconciler reconciler = (PresentationReconciler) super.getPresentationReconciler(sourceViewer);
 		DefaultDamagerRepairer defDR = new DefaultDamagerRepairer(new XtextTokenScanner(languageDescriptor,
-				fPreferenceStore));
+				fPreferenceStore)) {
+			// TODO remove when incremental parsing is available
+			@Override
+			public IRegion getDamageRegion(ITypedRegion partition, DocumentEvent e, boolean documentPartitioningChanged) {
+				return new Region(partition.getOffset(), partition.getLength());
+			}
+		};
 		reconciler.setRepairer(defDR, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setDamager(defDR, IDocument.DEFAULT_CONTENT_TYPE);
 		return reconciler;

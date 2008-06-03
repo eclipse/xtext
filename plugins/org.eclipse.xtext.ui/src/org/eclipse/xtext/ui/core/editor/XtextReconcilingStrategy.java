@@ -42,7 +42,7 @@ public class XtextReconcilingStrategy implements IReconcilingStrategy, IReconcil
 	public void reconcile(IRegion partition) {
 		IResource resource = (IResource) editor.getEditorInput().getAdapter(IFile.class);
 		XtextMarkerManager.clearXtextMarker(resource, monitor);
-		if (editor.getModel().hasErrors()) {
+		if (editor.getModel() != null && editor.getModel().hasErrors()) {
 			for (IParseError error : editor.getModel().getErrors()) {
 				XtextMarkerManager.createMarker(resource, collectMarkerAttributes(error), monitor);
 			}
