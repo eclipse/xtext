@@ -42,6 +42,12 @@ public class ServiceTest extends TestCase {
         assertNotNull(service.getInjectedService());
     }
     
+    public void testLanguageDescriptorInjection() throws Exception {
+        ServiceRegistry.registerFactory(myLanguageDescriptor, new InjectedLanguageServiceFactory());
+        InjectedLanguageService service = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
+        assertNotNull(service.getLanguageDescriptor());
+    }
+    
     public void testAnnotationInheritance() {
         ServiceRegistry.registerFactory(myLanguageDescriptor, new InheritingServiceFactory());
         ServiceRegistry.registerFactory(myLanguageDescriptor, new InjectedLanguageServiceFactory());

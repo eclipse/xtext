@@ -61,15 +61,7 @@ public class ServiceRegistry {
         return null;
     }
 
-    /**
-     * @param <
-     *      T>
-     * @param languageDescriptor
-     * @param factory
-     * @param priority
-     * @return true if the factory has top priority.
-     */
-    public static <T extends ILanguageService> boolean registerFactory(ILanguageDescriptor languageDescriptor,
+    public static <T extends ILanguageService> ILanguageServiceFactory registerFactory(ILanguageDescriptor languageDescriptor,
             ILanguageServiceFactory factory, int priority) {
         if (languageDescriptor == null || factory == null) {
             throw new IllegalArgumentException("Neither languageDescriptor nor factory can be null");
@@ -84,14 +76,11 @@ public class ServiceRegistry {
             factoryMap.put(key, priorityMap);
         }
         ILanguageServiceFactory currentFactory = priorityMap.get(priority);
-        if (currentFactory != null) {
-            throw new IllegalStateException("ServiceRegistry already contains a factory with same priority");
-        }
         priorityMap.put(priority, factory);
-        return priority == Collections.max(priorityMap.keySet());
+        return currentFactory;
     }
 
-    public static <T extends ILanguageService> boolean registerFactory(ILanguageDescriptor languageDescriptor,
+    public static <T extends ILanguageService> ILanguageServiceFactory registerFactory(ILanguageDescriptor languageDescriptor,
             ILanguageServiceFactory factory) {
         return registerFactory(languageDescriptor, factory, PRIORITY_NORMAL);
     }
@@ -121,11 +110,12 @@ public class ServiceRegistry {
             Map<Class<?>, ILanguageService> cachedServices) throws IllegalAccessException, InvocationTargetException {
         Method[] methods = serviceClass.getMethods();
         for (Method method : methods) {
-            if (method.isAnnotationPresent(InjectedService.class)) {
-                Class<?>[] parameterTypes = method.getParameterTypes();
-                if (parameterTypes.length != 1) {
-                    throw new IllegalArgumentException("Annotated method must have exctly one parameter");
-                }
+            Class<?>[] parameterTypes = method.getParameterTypes();
+            if (parameterTypes.length != 1 && method.isAnnotationPresent(InjectedService.class)) {
+                throw new IllegalArgumentException("Annotated method must have excatly one parameter");
+            }
+            if (parameterTypes.length == 1
+                    && (method.isAnnotationPresent(InjectedService.class) || ILanguageDescriptor.class.equals(parameterTypes[0]))) {
                 findAndInjectService(languageDescriptor, service, parameterTypes[0], method, cachedServices);
             }
         }
