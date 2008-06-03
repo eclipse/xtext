@@ -22,7 +22,6 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		XtextGrammarTestStandaloneSetup.doSetup();
 		with(XtextGrammarTestStandaloneSetup.class);
 	}
 

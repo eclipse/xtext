@@ -24,7 +24,7 @@ public class XtextUtilConstructionTest extends AbstractGeneratorTest {
 	@SuppressWarnings("unchecked")
 	public void testConstruction() throws Exception {
 		StringBuffer b = new StringBuffer();
-		b.append("generate SimpleTest2 'http://eclipse.org/xtext/tests/SimpleTest2'");
+		b.append("language foo generate SimpleTest2 'http://eclipse.org/xtext/tests/SimpleTest2'");
 		b.append("Model : (contents+=Child)*;");
 		b.append("Child : (optional?='optional')? 'keyword' name=ID number=INT '{' '}';");
 
@@ -43,7 +43,7 @@ public class XtextUtilConstructionTest extends AbstractGeneratorTest {
 	@SuppressWarnings("unchecked")
 	public void testConstruction2() throws Exception {
 		StringBuffer b = new StringBuffer();
-		b.append("generate TestLang 'http://www.eclipse.org/2008/xtext/TestLang'");
+		b.append("language foo generate TestLang 'http://www.eclipse.org/2008/xtext/TestLang'");
 		b.append("EntryRule returns Model : (multiFeature+=AbstractRule)*;");
 		b.append("AbstractRule returns AbstractElement : ChoiceRule | ReducibleRule;");
 		b.append("ChoiceRule returns ChoiceElement : 'choice' (optionalKeyword?='optional')? name=ID;");

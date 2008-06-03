@@ -6,7 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-language SimpleTest
+language org.eclipse.xtext.grammargen.tests.SimpleTest
+
 generate SimpleTest "http://eclipse.org/xtext/tests/SimpleTest"
 
 Foo : name=ID;

@@ -6,6 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
+language org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest
 generate simplerewritetest "http://simple/rewrite/test"
 
 Op returns Expression: 
