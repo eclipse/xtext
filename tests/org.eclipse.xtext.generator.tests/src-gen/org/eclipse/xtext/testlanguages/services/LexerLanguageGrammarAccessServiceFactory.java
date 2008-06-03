@@ -1,20 +1,18 @@
 package org.eclipse.xtext.testlanguages.services;
 
-import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.ILanguageServiceFactory;
-import org.eclipse.xtext.testlanguages.*;
-import org.eclipse.xtext.testlanguages.parser.*;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.testlanguages.services.LexerLanguageGrammarAccess;
 
 public class LexerLanguageGrammarAccessServiceFactory implements ILanguageServiceFactory {
 
-    public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        org.eclipse.xtext.IGrammarAccess serviceObject = new LexerLanguageGrammarAccess();
+    public ILanguageService createLanguageService() {
+        IGrammarAccess serviceObject = new LexerLanguageGrammarAccess();
         return serviceObject;
     }
 
-    public boolean isFactoryFor(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-       return languageDescriptor == LexerLanguageStandaloneSetup.getLanguageDescriptor()
-           && org.eclipse.xtext.IGrammarAccess.class.equals(serviceClass);
-    }
+	public Class<? extends ILanguageService> getServiceClass() {
+		return IGrammarAccess.class;
+	}
 }

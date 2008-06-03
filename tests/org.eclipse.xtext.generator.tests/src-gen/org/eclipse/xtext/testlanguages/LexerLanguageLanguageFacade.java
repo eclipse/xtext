@@ -54,6 +54,6 @@ public class LexerLanguageLanguageFacade extends BaseEPackageAccess implements I
 	}
 
 	public String getModelFileExtension() {
-		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getModelFileExtension();
+		return ServiceRegistry.getService(getLanguageDescriptor(), IResourceFactory.class).getModelFileExtension();
 	}
 }

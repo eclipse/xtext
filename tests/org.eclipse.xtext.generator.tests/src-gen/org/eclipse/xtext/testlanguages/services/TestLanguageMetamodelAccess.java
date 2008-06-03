@@ -37,9 +37,4 @@ public class TestLanguageMetamodelAccess  extends BaseEPackageAccess implements 
 		return EPackage.Registry.INSTANCE.getEPackage(TESTLANG_NS_URI);
 	}
 	
-	
-	public String getModelFileExtension() {
-		return "testlanguage";
-	}
-   
 }

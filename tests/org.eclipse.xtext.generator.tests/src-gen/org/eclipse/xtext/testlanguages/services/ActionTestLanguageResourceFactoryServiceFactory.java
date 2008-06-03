@@ -1,20 +1,18 @@
 package org.eclipse.xtext.testlanguages.services;
 
-import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.ILanguageServiceFactory;
-import org.eclipse.xtext.testlanguages.*;
-import org.eclipse.xtext.testlanguages.parser.*;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.testlanguages.services.ActionTestLanguageResourceFactory;
 
 public class ActionTestLanguageResourceFactoryServiceFactory implements ILanguageServiceFactory {
 
-    public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-        org.eclipse.xtext.resource.IResourceFactory serviceObject = new org.eclipse.xtext.resource.XtextResourceFactory();
+    public ILanguageService createLanguageService() {
+        IResourceFactory serviceObject = new ActionTestLanguageResourceFactory();
         return serviceObject;
     }
 
-    public boolean isFactoryFor(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
-       return languageDescriptor == ActionTestLanguageStandaloneSetup.getLanguageDescriptor()
-           && org.eclipse.xtext.resource.IResourceFactory.class.equals(serviceClass);
-    }
+	public Class<? extends ILanguageService> getServiceClass() {
+		return IResourceFactory.class;
+	}
 }

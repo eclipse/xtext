@@ -5,38 +5,47 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.LanguageFacadeFactory;
 import org.eclipse.xtext.ILanguageFacade;
 
+import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
+
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.testlanguages.services.*;
 
 public abstract class LexerLanguageStandaloneSetup {
 
+	private static boolean isInitialized = false;
+
 	public static void doSetup() {
-		
-		// setup super language first
-		XtextBuiltinStandaloneSetup.doSetup();
-		
-		getLanguageDescriptor();
-		
-		ServiceRegistry.registerFactory(new LexerLanguageParserServiceFactory());
-		
-		ServiceRegistry.registerFactory(new LexerLanguageASTFactoryServiceFactory());
-		
-		ServiceRegistry.registerFactory(new LexerLanguageParseTreeConstructorServiceFactory());
-		
-		ServiceRegistry.registerFactory(new LexerLanguageResourceFactoryServiceFactory());
-		
-		ServiceRegistry.registerFactory(new LexerLanguageGrammarAccessServiceFactory());
-		
-		ServiceRegistry.registerFactory(new LexerLanguageMetamodelAccessServiceFactory());
-		
-		if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.LexerLanguage")==null) {
-			ILanguageFacade facade = new LexerLanguageLanguageFacade();
-			LanguageFacadeFactory.register(facade);
+		if(!isInitialized) {
+			
+			// setup super language first
+			XtextBuiltinStandaloneSetup.doSetup();
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"lexerlanguage", facade.getResourceFactory());
+				"ecore", new XMIResourceFactoryImpl());
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"xmi", new XMIResourceFactoryImpl());
+			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageParserServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageASTFactoryServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageParseTreeConstructorServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageResourceFactoryServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageGrammarAccessServiceFactory());
+			
+			ServiceRegistry.registerFactory(languageDescriptor, new LexerLanguageMetamodelAccessServiceFactory());
+			
+			if (LanguageFacadeFactory.getFacade("org.eclipse.xtext.testlanguages.LexerLanguage")==null) {
+				ILanguageFacade facade = new LexerLanguageLanguageFacade();
+				LanguageFacadeFactory.register(facade);
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					"lexerlanguage", facade.getResourceFactory());
+			}
+			isInitialized = true;
 		}
 	}
 	
@@ -50,7 +59,8 @@ public abstract class LexerLanguageStandaloneSetup {
     	if (INSTANCE == null) {
     		INSTANCE = LanguageDescriptorFactory.get(LANGUAGE_ID);
     		if(INSTANCE == null) {
-    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
+    			// TODO put super grammar
+    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(LANGUAGE_ID, LANGUAGE_NAME, NAMESPACE, null);
     		}
     	}
     	return INSTANCE;

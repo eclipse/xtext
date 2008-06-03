@@ -2,12 +2,13 @@ package org.eclipse.xtext.service;
 
 public class InheritingServiceFactory implements ILanguageServiceFactory {
 
-    public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
+    public ILanguageService createLanguageService() {
         return new InheritingService();
     }
-   
-    public boolean isFactoryFor(ILanguageDescriptor descriptor, Class<? extends ILanguageService> serviceClass) {
-        return InheritingService.class.equals(serviceClass);
+
+    public Class<? extends ILanguageService> getServiceClass() {
+        return InheritingService.class;
     }
+   
    
 }

@@ -37,9 +37,4 @@ public class SimpleReconstrTestMetamodelAccess  extends BaseEPackageAccess imple
 		return EPackage.Registry.INSTANCE.getEPackage(SIMPLEREWRITETEST_NS_URI);
 	}
 	
-	
-	public String getModelFileExtension() {
-		return "simplereconstrtest";
-	}
-   
 }

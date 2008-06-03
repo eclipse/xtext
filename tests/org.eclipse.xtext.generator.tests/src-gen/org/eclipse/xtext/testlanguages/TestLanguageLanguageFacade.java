@@ -54,6 +54,6 @@ public class TestLanguageLanguageFacade extends BaseEPackageAccess implements IL
 	}
 
 	public String getModelFileExtension() {
-		return ServiceRegistry.getService(getLanguageDescriptor(), IMetamodelAccess.class).getModelFileExtension();
+		return ServiceRegistry.getService(getLanguageDescriptor(), IResourceFactory.class).getModelFileExtension();
 	}
 }

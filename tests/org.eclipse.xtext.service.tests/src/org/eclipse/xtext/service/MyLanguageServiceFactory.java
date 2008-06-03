@@ -2,12 +2,12 @@ package org.eclipse.xtext.service;
 
 public class MyLanguageServiceFactory implements ILanguageServiceFactory {
 
-    public ILanguageService createLanguageService(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass) {
+    public ILanguageService createLanguageService() {
         return new MyLanguageService();
     }
    
-    public boolean isFactoryFor(ILanguageDescriptor descriptor, Class<? extends ILanguageService> serviceClass) {
-        return MyLanguageService.class.equals(serviceClass);
+    public Class<? extends ILanguageService> getServiceClass() {
+        return MyLanguageService.class;
     }
    
 }

@@ -37,9 +37,4 @@ public class SimpleTestMetamodelAccess  extends BaseEPackageAccess implements IM
 		return EPackage.Registry.INSTANCE.getEPackage(SIMPLETEST_NS_URI);
 	}
 	
-	
-	public String getModelFileExtension() {
-		return "simpletest";
-	}
-   
 }
