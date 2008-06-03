@@ -28,7 +28,22 @@ public class ReferenceTokenTypeDef extends BuildInTokenTypeDef {
 	public Set<ITokenTypeDef> allTokenTypes() {
 		Set<ITokenTypeDef> allTokenTypes = super.allTokenTypes();
 		allTokenTypes.add(commentTokenType());
+		allTokenTypes.add(fieldTokenType());
+		allTokenTypes.add(rot());
 		return allTokenTypes;
+	}
+
+	TokenTypeDef rot() {
+		TokenTypeDef ttd = new TokenTypeDef("rot") {
+			@Override
+			public boolean match(LeafNode node) {
+				return keyWordTokenType().match(node) && node.getText().equals("ROT");
+			}
+		};
+		TextStyle ts = keyWordTokenType().getTextStyle();
+		ts.setColor("250,50,50");
+		ttd.setTextStyle(ts);
+		return ttd;
 	}
 
 	private ITokenTypeDef commentTokenType() {
@@ -46,6 +61,19 @@ public class ReferenceTokenTypeDef extends BuildInTokenTypeDef {
 		ttd.setTextStyle(new TextStyle(TextStyleConstants.COMMENT_COLOR, null, SWT.NONE, null));
 		return ttd;
 	}
+
+	private ITokenTypeDef fieldTokenType() {
+		TokenTypeDef ttd = new TokenTypeDef("field") {
+			@Override
+			public boolean match(LeafNode node) {
+				return node.getFeature() != null;
+			}
+		};
+		ttd.setName("Attribute");
+		ttd.setTextStyle(new TextStyle(TextStyleConstants.STRING_COLOR, null, SWT.NONE, null));
+		return ttd;
+	}
+
 	// @TokenType(name = "Singleline Comment")
 	// public boolean slComment(LeafNode node) {
 	// return ((RuleCall) node.getGrammarElement()).getName().equals(
