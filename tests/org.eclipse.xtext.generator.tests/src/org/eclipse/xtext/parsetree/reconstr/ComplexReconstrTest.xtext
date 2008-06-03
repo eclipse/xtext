@@ -6,6 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
+ 
+language org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest
 generate complexrewritetest "http://complex/rewrite/test"
 
 Op returns Expression: 

@@ -2,10 +2,12 @@ package org.eclipse.xtext.service;
 
 public interface ILanguageDescriptor {
 
-    public abstract String getId();
+    String getId();
 
-    public abstract String getName();
+    String getName();
 
-    public abstract String getNameSpace();
+    String getNameSpace();
+    
+    ILanguageDescriptor getSuperLanguage();
 
 }

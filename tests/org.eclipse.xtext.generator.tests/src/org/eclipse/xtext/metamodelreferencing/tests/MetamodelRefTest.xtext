@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
- 
+language org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest
 import 				"http://www.eclipse.org/2008/Xtext" 		as xtext
 generate SimpleTest "http://eclipse.org/xtext/tests/SimpleTest"
 

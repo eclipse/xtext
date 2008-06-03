@@ -14,18 +14,20 @@ import org.eclipse.xtext.service.ILanguageDescriptor;
 
 /**
  * @author Peter Friese - Initial contribution and API
- * 
+ *
  */
 public class LanguageDescriptor implements ILanguageDescriptor {
 	private String id;
 	private String name;
 	private String nameSpace;
+	private ILanguageDescriptor superLanguage;
 
-    public LanguageDescriptor(String id, String name, String nameSpace) {
+    public LanguageDescriptor(String id, String name, String nameSpace, ILanguageDescriptor superLanguage) {
         super();
         this.id = id;
         this.name = name;
         this.nameSpace = nameSpace;
+        this.superLanguage = superLanguage;
     }
 
     /* (non-Javadoc)
@@ -47,5 +49,13 @@ public class LanguageDescriptor implements ILanguageDescriptor {
      */
 	public String getNameSpace() {
 		return nameSpace;
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.service.ILanguageDescriptor#getSuperLanguage()
+	 */
+	public ILanguageDescriptor getSuperLanguage() {
+		return this.superLanguage;
 	}
 }

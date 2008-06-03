@@ -12,7 +12,7 @@ import org.apache.commons.logging.LogFactory;
 public class ServiceRegistry {
 
     private static List<ILanguageServiceFactory> factories = new ArrayList<ILanguageServiceFactory>();
-
+    
     public static <T extends ILanguageService> T getService(ILanguageDescriptor languageDescriptor, Class<T> serviceInterface) {
         Map<Class<?>, ILanguageService> cachedServices = new HashMap<Class<?>, ILanguageService>();
         return internalGetService(languageDescriptor, serviceInterface, cachedServices);
