@@ -9,11 +9,12 @@
 
 package org.eclipse.xtext;
 
-import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.XtextGrammarTestParseTreeConstructor;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.tests.Invocation;
 
@@ -61,7 +62,7 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 		EObject grammar = (EObject) getModel(model);
 		XtextGrammarTestParseTreeConstructor ptc = (XtextGrammarTestParseTreeConstructor) getParseTreeConstructor();
 		ptc.update(grammar);
-		assertEquals(model, ptc.getText());
+		assertEquals(model, NodeUtil.getNodeAdapter(grammar).getParserNode().serialize());
 	}
 
 }

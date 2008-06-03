@@ -18,15 +18,35 @@
 «EXTENSION org::openarchitectureware::util::stdlib::io»
 
 «DEFINE file FOR Grammar»
-«FILE pathName()+'/'+languageName()+'ParseTreeConstructor.java'»
-package «packageName()»;
+«FILE pathName()+'/parsetree/'+languageName()+'ParseTreeConstructor.java'»
+package «packageName()».parsetree;
 
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.EObject;
+import «packageName()».parsetree.internal.Internal«languageName()»ParseTreeConstructor;
+import org.eclipse.xtext.parsetree.AbstractParseTreeConstructor;
 
 public class «languageName()»ParseTreeConstructor extends AbstractParseTreeConstructor {
+
+	public void update(EObject object) {
+		new Internal«languageName()»ParseTreeConstructor(getFactory(),getGrammar()).update(object);
+	}
+}
+«ENDFILE»
+«FILE pathName()+'/parsetree/internal/Internal'+languageName()+'ParseTreeConstructor.java'»
+package «packageName()».parsetree.internal;
+
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parser.GenericEcoreElementFactory;
+import org.eclipse.xtext.parsetree.Predicate;
+import org.eclipse.xtext.parsetree.internal.AbstractInternalParseTreeConstructor;
+
+public class Internal«languageName()»ParseTreeConstructor extends AbstractInternalParseTreeConstructor {
+
+	public Internal«languageName()»ParseTreeConstructor(GenericEcoreElementFactory factory, Grammar grammar) {
+		super(factory,grammar);
+	}
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
 		«FOREACH parserRules AS pr SEPARATOR ' else '-»
