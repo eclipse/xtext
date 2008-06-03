@@ -26,7 +26,6 @@ public abstract class AbstractXtextResourceFactory implements IResourceFactory {
         return languageDescriptor;
     }
 
-    @InjectedService
     public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
         this.languageDescriptor = languageDescriptor;
     }
