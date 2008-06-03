@@ -11,11 +11,13 @@
 </sealing>
 </manifest>
 <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+<folder path="/org.eclipse.xtext.util/META-INF"/>
 <file path="/org.eclipse.xtext/.classpath"/>
 <file path="/org.eclipse.xtext.generator/.classpath"/>
 <javaElement handleIdentifier="=org.eclipse.xtext/emf-gen"/>
 <folder path="/org.eclipse.xtext/META-INF"/>
 <file path="/org.eclipse.xtext/plugin.properties"/>
+<javaElement handleIdentifier="=org.eclipse.xtext.util/src"/>
 <file path="/org.eclipse.xtext.generator/build.properties"/>
 <file path="/org.eclipse.xtext/build.properties"/>
 <file path="/org.eclipse.xtext.generator/.project"/>
@@ -24,8 +26,8 @@
 <file path="/org.eclipse.xtext/.project"/>
 <folder path="/org.eclipse.xtext.generator/META-INF"/>
 <javaElement handleIdentifier="=org.eclipse.xtext/src"/>
-<javaElement handleIdentifier="=org.eclipse.xtext/model"/>
 <javaElement handleIdentifier="=org.eclipse.xtext.generator/src"/>
+<javaElement handleIdentifier="=org.eclipse.xtext/model"/>
 <javaElement handleIdentifier="=org.eclipse.xtext.service/src"/>
 </selectedElements>
 <fatjar builder="org.eclipse.jdt.ui.plain_jar_builder" launchConfig=""/>

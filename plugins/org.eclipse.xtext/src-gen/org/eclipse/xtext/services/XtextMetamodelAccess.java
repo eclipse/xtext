@@ -37,9 +37,4 @@ public class XtextMetamodelAccess  extends BaseEPackageAccess implements IMetamo
 		return EPackage.Registry.INSTANCE.getEPackage(XTEXT_NS_URI);
 	}
 	
-	
-	public String getModelFileExtension() {
-		return "xtext";
-	}
-   
 }

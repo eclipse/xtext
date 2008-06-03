@@ -1,14 +1,19 @@
 package org.eclipse.xtext;
 
+import org.eclipse.xtext.service.*;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.parser.BaseEPackageAccess;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.ILanguageFacade;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.parser.BaseEPackageAccess;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.parser.*;
 
 public class XtextLanguageFacade extends BaseEPackageAccess implements ILanguageFacade {
 

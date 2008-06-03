@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g 2008-06-03 10:38:42
+// $ANTLR 3.0 ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g 2008-06-03 12:01:51
 
 package org.eclipse.xtext.parser.internal;
 
@@ -88,10 +88,10 @@ public class InternalXtextLexer extends Lexer {
     public String getGrammarFileName() { return "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g"; }
 
     // $ANTLR start T12
-    public final void mT12() throws RecognitionException {
+    public void mT12() throws RecognitionException {
         try {
             int _type = T12;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:45:5: ( 'language' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:45:7: ( 'language' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:45:7: 'language'
             {
             match("language"); 
@@ -107,10 +107,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T12
 
     // $ANTLR start T13
-    public final void mT13() throws RecognitionException {
+    public void mT13() throws RecognitionException {
         try {
             int _type = T13;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:46:5: ( '.' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:46:7: ( '.' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:46:7: '.'
             {
             match('.'); 
@@ -125,10 +125,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T13
 
     // $ANTLR start T14
-    public final void mT14() throws RecognitionException {
+    public void mT14() throws RecognitionException {
         try {
             int _type = T14;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:47:5: ( 'extends' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:47:7: ( 'extends' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:47:7: 'extends'
             {
             match("extends"); 
@@ -144,10 +144,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T14
 
     // $ANTLR start T15
-    public final void mT15() throws RecognitionException {
+    public void mT15() throws RecognitionException {
         try {
             int _type = T15;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:48:5: ( 'lexing' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:48:7: ( 'lexing' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:48:7: 'lexing'
             {
             match("lexing"); 
@@ -163,10 +163,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T15
 
     // $ANTLR start T16
-    public final void mT16() throws RecognitionException {
+    public void mT16() throws RecognitionException {
         try {
             int _type = T16;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:49:5: ( ':' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:49:7: ( ':' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:49:7: ':'
             {
             match(':'); 
@@ -181,10 +181,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T16
 
     // $ANTLR start T17
-    public final void mT17() throws RecognitionException {
+    public void mT17() throws RecognitionException {
         try {
             int _type = T17;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:50:5: ( 'generate' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:50:7: ( 'generate' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:50:7: 'generate'
             {
             match("generate"); 
@@ -200,10 +200,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T17
 
     // $ANTLR start T18
-    public final void mT18() throws RecognitionException {
+    public void mT18() throws RecognitionException {
         try {
             int _type = T18;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:51:5: ( 'as' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:51:7: ( 'as' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:51:7: 'as'
             {
             match("as"); 
@@ -219,10 +219,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T18
 
     // $ANTLR start T19
-    public final void mT19() throws RecognitionException {
+    public void mT19() throws RecognitionException {
         try {
             int _type = T19;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:52:5: ( 'import' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:52:7: ( 'import' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:52:7: 'import'
             {
             match("import"); 
@@ -238,10 +238,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T19
 
     // $ANTLR start T20
-    public final void mT20() throws RecognitionException {
+    public void mT20() throws RecognitionException {
         try {
             int _type = T20;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:53:5: ( 'returns' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:53:7: ( 'returns' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:53:7: 'returns'
             {
             match("returns"); 
@@ -257,10 +257,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T20
 
     // $ANTLR start T21
-    public final void mT21() throws RecognitionException {
+    public void mT21() throws RecognitionException {
         try {
             int _type = T21;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:54:5: ( ';' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:54:7: ( ';' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:54:7: ';'
             {
             match(';'); 
@@ -275,10 +275,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T21
 
     // $ANTLR start T22
-    public final void mT22() throws RecognitionException {
+    public void mT22() throws RecognitionException {
         try {
             int _type = T22;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:55:5: ( '::' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:55:7: ( '::' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:55:7: '::'
             {
             match("::"); 
@@ -294,10 +294,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T22
 
     // $ANTLR start T23
-    public final void mT23() throws RecognitionException {
+    public void mT23() throws RecognitionException {
         try {
             int _type = T23;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:56:5: ( '|' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:56:7: ( '|' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:56:7: '|'
             {
             match('|'); 
@@ -312,10 +312,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T23
 
     // $ANTLR start T24
-    public final void mT24() throws RecognitionException {
+    public void mT24() throws RecognitionException {
         try {
             int _type = T24;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:57:5: ( '?' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:57:7: ( '?' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:57:7: '?'
             {
             match('?'); 
@@ -330,10 +330,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T24
 
     // $ANTLR start T25
-    public final void mT25() throws RecognitionException {
+    public void mT25() throws RecognitionException {
         try {
             int _type = T25;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:58:5: ( '*' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:58:7: ( '*' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:58:7: '*'
             {
             match('*'); 
@@ -348,10 +348,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T25
 
     // $ANTLR start T26
-    public final void mT26() throws RecognitionException {
+    public void mT26() throws RecognitionException {
         try {
             int _type = T26;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:59:5: ( '+' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:59:7: ( '+' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:59:7: '+'
             {
             match('+'); 
@@ -366,10 +366,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T26
 
     // $ANTLR start T27
-    public final void mT27() throws RecognitionException {
+    public void mT27() throws RecognitionException {
         try {
             int _type = T27;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:60:5: ( '+=' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:60:7: ( '+=' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:60:7: '+='
             {
             match("+="); 
@@ -385,10 +385,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T27
 
     // $ANTLR start T28
-    public final void mT28() throws RecognitionException {
+    public void mT28() throws RecognitionException {
         try {
             int _type = T28;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:61:5: ( '=' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:61:7: ( '=' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:61:7: '='
             {
             match('='); 
@@ -403,10 +403,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T28
 
     // $ANTLR start T29
-    public final void mT29() throws RecognitionException {
+    public void mT29() throws RecognitionException {
         try {
             int _type = T29;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:62:5: ( '?=' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:62:7: ( '?=' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:62:7: '?='
             {
             match("?="); 
@@ -422,10 +422,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T29
 
     // $ANTLR start T30
-    public final void mT30() throws RecognitionException {
+    public void mT30() throws RecognitionException {
         try {
             int _type = T30;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:63:5: ( '{' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:63:7: ( '{' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:63:7: '{'
             {
             match('{'); 
@@ -440,10 +440,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T30
 
     // $ANTLR start T31
-    public final void mT31() throws RecognitionException {
+    public void mT31() throws RecognitionException {
         try {
             int _type = T31;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:64:5: ( 'current' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:64:7: ( 'current' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:64:7: 'current'
             {
             match("current"); 
@@ -459,10 +459,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T31
 
     // $ANTLR start T32
-    public final void mT32() throws RecognitionException {
+    public void mT32() throws RecognitionException {
         try {
             int _type = T32;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:65:5: ( '}' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:65:7: ( '}' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:65:7: '}'
             {
             match('}'); 
@@ -477,10 +477,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T32
 
     // $ANTLR start T33
-    public final void mT33() throws RecognitionException {
+    public void mT33() throws RecognitionException {
         try {
             int _type = T33;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:66:5: ( '(' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:66:7: ( '(' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:66:7: '('
             {
             match('('); 
@@ -495,10 +495,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T33
 
     // $ANTLR start T34
-    public final void mT34() throws RecognitionException {
+    public void mT34() throws RecognitionException {
         try {
             int _type = T34;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:67:5: ( ')' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:67:7: ( ')' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:67:7: ')'
             {
             match(')'); 
@@ -513,10 +513,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end T34
 
     // $ANTLR start RULE_ID
-    public final void mRULE_ID() throws RecognitionException {
+    public void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:776:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:776:11: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:776:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:776:11: ( '^' )?
@@ -592,10 +592,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end RULE_ID
 
     // $ANTLR start RULE_INT
-    public final void mRULE_INT() throws RecognitionException {
+    public void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:778:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:778:12: ( ( '0' .. '9' )+ )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:778:12: ( '0' .. '9' )+
             {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:778:12: ( '0' .. '9' )+
@@ -639,10 +639,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end RULE_INT
 
     // $ANTLR start RULE_STRING
-    public final void mRULE_STRING() throws RecognitionException {
+    public void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:780:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:780:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -793,10 +793,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end RULE_STRING
 
     // $ANTLR start RULE_ML_COMMENT
-    public final void mRULE_ML_COMMENT() throws RecognitionException {
+    public void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:782:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:782:19: ( '/*' ( options {greedy=false; } : . )* '*/' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:782:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
@@ -852,10 +852,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end RULE_ML_COMMENT
 
     // $ANTLR start RULE_SL_COMMENT
-    public final void mRULE_SL_COMMENT() throws RecognitionException {
+    public void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:784:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:784:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:784:19: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
             {
             match("//"); 
@@ -925,10 +925,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end RULE_SL_COMMENT
 
     // $ANTLR start RULE_WS
-    public final void mRULE_WS() throws RecognitionException {
+    public void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:786:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:786:11: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:786:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:786:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
@@ -982,10 +982,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end RULE_WS
 
     // $ANTLR start RULE_LEXER_BODY
-    public final void mRULE_LEXER_BODY() throws RecognitionException {
+    public void mRULE_LEXER_BODY() throws RecognitionException {
         try {
             int _type = RULE_LEXER_BODY;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:788:17: ( '<#' ( '.' )* '#>' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:788:19: ( '<#' ( '.' )* '#>' )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:788:19: '<#' ( '.' )* '#>'
             {
             match("<#"); 
@@ -1028,10 +1028,10 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end RULE_LEXER_BODY
 
     // $ANTLR start RULE_ANY_OTHER
-    public final void mRULE_ANY_OTHER() throws RecognitionException {
+    public void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:790:16: ( . )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:790:18: ( . )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:790:18: .
             {
             matchAny(); 
@@ -1046,7 +1046,7 @@ public class InternalXtextLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1:8: ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER )
+        // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1:10: ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER )
         int alt12=31;
         int LA12_0 = input.LA(1);
 
