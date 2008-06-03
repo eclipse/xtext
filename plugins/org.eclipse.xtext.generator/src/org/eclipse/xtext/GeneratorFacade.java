@@ -89,7 +89,8 @@ public class GeneratorFacade {
 		p.setProperty("language.name", languageName);
 		p.setProperty("language.namespace", languageNamespace);
 		p.setProperty("src.gen.path", srcGenPath);
-		p.setProperty("model.file.extension", modelFileExtension);
+        p.setProperty("model.file.extension", modelFileExtension);
+        p.setProperty("file.header", "");
 		GenProperties.setProperties(p);
 
 		ResourceSetImpl setImpl = new ResourceSetImpl();
@@ -109,7 +110,6 @@ public class GeneratorFacade {
 			facade.evaluate("org::eclipse::xtext::services::GrammarAccess::file", grammarModel);
             facade.evaluate("org::eclipse::xtext::services::MetamodelAccess::file", grammarModel);
             facade.evaluate("org::eclipse::xtext::services::ResourceFactory::file", grammarModel);
-			facade.evaluate("org::eclipse::xtext::services::ServiceFactories::factories", grammarModel);
 			if (uiSrcGenPath != null) {
 				facade.evaluate("org::eclipse::xtext::ui::Plugin::file", grammarModel);
 				facade.evaluate("org::eclipse::xtext::ui::Editor::file", grammarModel);

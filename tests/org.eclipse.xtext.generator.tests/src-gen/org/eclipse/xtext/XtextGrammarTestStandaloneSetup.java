@@ -25,13 +25,13 @@ public abstract class XtextGrammarTestStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerFactory(languageDescriptor, new XtextGrammarTestParserServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new XtextGrammarTestASTFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new XtextGrammarTestParseTreeConstructorServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new XtextGrammarTestResourceFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new XtextGrammarTestGrammarAccessServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new XtextGrammarTestMetamodelAccessServiceFactory());
-			
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.XtextGrammarTestParser(), org.eclipse.xtext.parser.IParser.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.GenericEcoreElementFactory(), org.eclipse.xtext.parser.IElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.services.XtextGrammarTestResourceFactory(), org.eclipse.xtext.resource.IResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.services.XtextGrammarTestGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.services.XtextGrammarTestMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parsetree.XtextGrammarTestParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"xtextgrammartest", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;

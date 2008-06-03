@@ -61,6 +61,7 @@ public class XtextTokenScanner implements ITokenScanner {
 
 	public int getTokenLength() {
 		if (currentNode != null) {
+            checkLength();
 			return currentNode.length();
 		}
 		else {
@@ -70,6 +71,8 @@ public class XtextTokenScanner implements ITokenScanner {
 
 	public int getTokenOffset() {
 		if (currentNode != null) {
+            checkLength();
+
 			return currentNode.offset();
 		}
 		else {
@@ -83,6 +86,7 @@ public class XtextTokenScanner implements ITokenScanner {
 			Object node = nodeIterator.next();
 			if (node instanceof LeafNode) {
 				currentNode = (LeafNode) node;
+				checkLength();
 				token = Token.UNDEFINED;
 				if (syntaxColorer != null) {
 					TextAttribute textAttribute = createTextAttribute();
@@ -100,6 +104,12 @@ public class XtextTokenScanner implements ITokenScanner {
 		return token;
 	}
 
+    private void checkLength() {
+        if(currentNode.length() + currentNode.offset() > document.getLength()) {
+            throw new IllegalStateException();
+        }
+    }
+
 	private TextAttribute createTextAttribute() {
 		TextStyle textStyle = syntaxColorer.color(currentNode);
 		return new TextAttribute(colorFromString(textStyle.getColor()),
@@ -115,9 +125,11 @@ public class XtextTokenScanner implements ITokenScanner {
 		}
 	};
 	List<IParseError> parseErrors = new ArrayList<IParseError>();
+    private IDocument document;
 
 	public void setRange(IDocument document, int offset, int length) {
 		Assert.isLegal(document != null);
+		this.document = document;
 		nodeIterator = null;
 		// TODO partial parse
 		System.out.print("Token Scanner: Parsing...");

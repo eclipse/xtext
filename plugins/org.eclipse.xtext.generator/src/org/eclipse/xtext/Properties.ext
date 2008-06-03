@@ -16,7 +16,7 @@ srcGenPath() :
 	
 modelFileExtension() :
 	get('model.file.extension');
-	
+
 packageName(Grammar this) :
 	getNamespace().replaceAll('/','\\.');
 
@@ -28,3 +28,4 @@ pathName(Grammar this) :
 	
 languageId(Grammar this) :
 	getId();
+	

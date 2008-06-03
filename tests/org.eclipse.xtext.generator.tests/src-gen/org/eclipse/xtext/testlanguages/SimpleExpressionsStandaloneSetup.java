@@ -25,13 +25,13 @@ public abstract class SimpleExpressionsStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleExpressionsParserServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleExpressionsASTFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleExpressionsParseTreeConstructorServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleExpressionsResourceFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleExpressionsGrammarAccessServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleExpressionsMetamodelAccessServiceFactory());
-			
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.parser.SimpleExpressionsParser(), org.eclipse.xtext.parser.IParser.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.GenericEcoreElementFactory(), org.eclipse.xtext.parser.IElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.SimpleExpressionsResourceFactory(), org.eclipse.xtext.resource.IResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.SimpleExpressionsGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.SimpleExpressionsMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.parsetree.SimpleExpressionsParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"simpleexpressions", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;

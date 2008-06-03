@@ -25,13 +25,13 @@ public abstract class ActionTestLanguageStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerFactory(languageDescriptor, new ActionTestLanguageParserServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new ActionTestLanguageASTFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new ActionTestLanguageParseTreeConstructorServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new ActionTestLanguageResourceFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new ActionTestLanguageGrammarAccessServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new ActionTestLanguageMetamodelAccessServiceFactory());
-			
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.parser.ActionTestLanguageParser(), org.eclipse.xtext.parser.IParser.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.GenericEcoreElementFactory(), org.eclipse.xtext.parser.IElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.ActionTestLanguageResourceFactory(), org.eclipse.xtext.resource.IResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.ActionTestLanguageMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.parsetree.ActionTestLanguageParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"actiontestlanguage", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;

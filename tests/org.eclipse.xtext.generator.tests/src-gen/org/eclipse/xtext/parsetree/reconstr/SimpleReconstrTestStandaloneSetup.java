@@ -25,13 +25,13 @@ public abstract class SimpleReconstrTestStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleReconstrTestParserServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleReconstrTestASTFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleReconstrTestParseTreeConstructorServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleReconstrTestResourceFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleReconstrTestGrammarAccessServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new SimpleReconstrTestMetamodelAccessServiceFactory());
-			
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parsetree.reconstr.parser.SimpleReconstrTestParser(), org.eclipse.xtext.parser.IParser.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.GenericEcoreElementFactory(), org.eclipse.xtext.parser.IElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestResourceFactory(), org.eclipse.xtext.resource.IResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parsetree.reconstr.parsetree.SimpleReconstrTestParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"simplereconstrtest", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;

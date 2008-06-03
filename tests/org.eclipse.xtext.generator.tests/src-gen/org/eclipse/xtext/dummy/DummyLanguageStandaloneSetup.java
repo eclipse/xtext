@@ -25,13 +25,13 @@ public abstract class DummyLanguageStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerFactory(languageDescriptor, new DummyLanguageParserServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new DummyLanguageASTFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new DummyLanguageParseTreeConstructorServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new DummyLanguageResourceFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new DummyLanguageGrammarAccessServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new DummyLanguageMetamodelAccessServiceFactory());
-			
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.dummy.parser.DummyLanguageParser(), org.eclipse.xtext.parser.IParser.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.GenericEcoreElementFactory(), org.eclipse.xtext.parser.IElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.dummy.services.DummyLanguageResourceFactory(), org.eclipse.xtext.resource.IResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.dummy.services.DummyLanguageGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.dummy.services.DummyLanguageMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.dummy.parsetree.DummyLanguageParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"dummylanguage", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;
