@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-06-04 10:16:03
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-06-04 10:22:47
 
 package org.eclipse.xtext.parsetree.reconstr.parser.internal; 
 
@@ -57,14 +57,14 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
     // $ANTLR start internalParse
     // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:89:1: internalParse returns [EObject current=null] : iv_ruleOp= ruleOp EOF ;
-    public final EObject internalParse() throws RecognitionException {
+    public EObject internalParse() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleOp = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:89:46: (iv_ruleOp= ruleOp EOF )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:90:3: (iv_ruleOp= ruleOp EOF )
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:90:3: iv_ruleOp= ruleOp EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
@@ -94,7 +94,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleOp
     // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:98:1: ruleOp returns [EObject current=null] : (this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )* ) ;
-    public final EObject ruleOp() throws RecognitionException {
+    public EObject ruleOp() throws RecognitionException {
         EObject current = null;
 
         EObject this_Term = null;
@@ -106,7 +106,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:99:33: ( (this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )* ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:100:1: ( (this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )* ) )
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:100:1: (this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )* )
             {
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:100:1: (this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )* )
@@ -279,7 +279,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleTerm
     // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:168:1: ruleTerm returns [EObject current=null] : (this_Atom= ruleAtom | this_Parens= ruleParens ) ;
-    public final EObject ruleTerm() throws RecognitionException {
+    public EObject ruleTerm() throws RecognitionException {
         EObject current = null;
 
         EObject this_Atom = null;
@@ -289,7 +289,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:169:33: ( (this_Atom= ruleAtom | this_Parens= ruleParens ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:170:1: ( (this_Atom= ruleAtom | this_Parens= ruleParens ) )
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:170:1: (this_Atom= ruleAtom | this_Parens= ruleParens )
             {
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:170:1: (this_Atom= ruleAtom | this_Parens= ruleParens )
@@ -358,14 +358,14 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleAtom
     // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:184:1: ruleAtom returns [EObject current=null] : (lv_name= RULE_ID ) ;
-    public final EObject ruleAtom() throws RecognitionException {
+    public EObject ruleAtom() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:185:33: ( (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:186:1: ( (lv_name= RULE_ID ) )
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:186:1: (lv_name= RULE_ID )
             {
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:186:1: (lv_name= RULE_ID )
@@ -405,7 +405,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleParens
     // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:203:1: ruleParens returns [EObject current=null] : ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? ) ;
-    public final EObject ruleParens() throws RecognitionException {
+    public EObject ruleParens() throws RecognitionException {
         EObject current = null;
 
         Token lv_em=null;
@@ -414,7 +414,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:204:33: ( ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:205:1: ( ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? ) )
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:205:1: ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? )
             {
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:205:1: ( ( ( '(' this_Op= ruleOp ) ')' ) (lv_em= '!' )? )

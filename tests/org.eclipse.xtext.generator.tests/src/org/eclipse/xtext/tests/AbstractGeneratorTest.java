@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.tests;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -56,22 +57,22 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	 * call this to set the language class to be used in the current test.
 	 */
 	protected void with(Class<?> standaloneSetup) throws Exception {
-		Method doSetupMethod = standaloneSetup.getMethod("doSetup");
-		doSetupMethod.invoke(null);
+	    Method doSetupMethod = standaloneSetup.getMethod("doSetup");
+	    doSetupMethod.invoke(null);
 		Method getLangDescMethod = standaloneSetup.getMethod("getLanguageDescriptor");
 		currentLanguageDescriptor = (ILanguageDescriptor) getLangDescMethod.invoke(null);
 	}
 
 	protected IParser getParser() {
-		return ServiceRegistry.getService(currentLanguageDescriptor, IParser.class);
+	    return ServiceRegistry.getService(currentLanguageDescriptor, IParser.class);
 	}
 
 	protected IElementFactory getASTFactory() throws Exception {
-		return ServiceRegistry.getService(currentLanguageDescriptor, IElementFactory.class);
+	    return ServiceRegistry.getService(currentLanguageDescriptor, IElementFactory.class);
 	}
 
 	protected IParseTreeConstructor getParseTreeConstructor() throws Exception {
-		return ServiceRegistry.getService(currentLanguageDescriptor, IParseTreeConstructor.class);
+	    return ServiceRegistry.getService(currentLanguageDescriptor, IParseTreeConstructor.class);
 	}
 
 	// parse methods
@@ -83,7 +84,6 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	public EObject getModel(String model, IElementFactory factory) throws Exception {
 		return getModel(model, factory, null);
 	}
-
 	public EObject getModel(String model, IParseErrorHandler handler) throws Exception {
 		return getModel(model, getASTFactory(), handler);
 	}
@@ -95,33 +95,33 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	public EObject getModel(InputStream model) throws Exception {
 		return getModel(model, getASTFactory(), null);
 	}
-
+	
 	public EObject getModel(InputStream model, IElementFactory factory, IParseErrorHandler errorHandler)
 			throws Exception {
 		return parse(model, factory, errorHandler).getRootASTElement();
 	}
 
-	public IParseResult parse(InputStream model, IElementFactory factory, IParseErrorHandler errorHandler) {
-		IParser parser = getParser();
-		if (errorHandler != null) {
-			return parser.parse(model, factory, errorHandler);
-		} else {
-			return parser.parse(model, factory);
-		}
-	}
+    public IParseResult parse(InputStream model, IElementFactory factory, IParseErrorHandler errorHandler) {
+        IParser parser = getParser();
+        if (errorHandler != null) {
+            return parser.parse(model, factory, errorHandler);
+        } else {
+            return parser.parse(model, factory);
+        }
+    }
+    
+    public IParseResult parse(String model, IElementFactory factory, IParseErrorHandler errorHandler) {
+        return parse(new StringInputStream(model), factory, errorHandler);
+    }   
+    
+    public IParseResult parse(String model, IParseErrorHandler errorHandler) throws Exception {
+        return parse(new StringInputStream(model), getASTFactory(), errorHandler);
+    }
 
-	public IParseResult parse(String model, IElementFactory factory, IParseErrorHandler errorHandler) {
-		return parse(new StringInputStream(model), factory, errorHandler);
-	}
-
-	public IParseResult parse(String model, IParseErrorHandler errorHandler) throws Exception {
-		return parse(new StringInputStream(model), getASTFactory(), errorHandler);
-	}
-
-	public IParseResult parse(String model) throws Exception {
-		return parse(new StringInputStream(model), getASTFactory(), null);
-	}
-
+    public IParseResult parse(String model) throws Exception {
+        return parse(new StringInputStream(model), getASTFactory(), null);
+    }
+	
 	public List<Invocation> getInvocations(String model) throws Exception {
 		return getInvocations(model, (IParseErrorHandler) null);
 	}
@@ -156,7 +156,7 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		}, errorHandler);
 		return calls;
 	}
-
+	
 	// Xtend helper methods
 
 	protected void assertWithXtend(String left, String right, Object _this) {
@@ -165,7 +165,7 @@ public abstract class AbstractGeneratorTest extends TestCase {
 
 	protected Object invokeWithXtend(String expression, Object _this) {
 		XtendFacade f = getXtendFacade();
-		f = f.cloneWithExtensions(getImportDeclarations() + "invoke(Object this) : " + expression + ";");
+		f = f.cloneWithExtensions(getImportDeclarations()+"invoke(Object this) : " + expression + ";");
 		return f.call("invoke", _this);
 	}
 
@@ -203,16 +203,30 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		return XtendFacade.create(ctx);
 	}
 
-	protected CompositeNode getRootNode(InputStream stream) throws Exception {
-		return parse(stream, getASTFactory(), null).getRootNode();
-	}
-
-	protected CompositeNode getRootNode(String model2) throws Exception {
-		return parse(new StringInputStream(model2), getASTFactory(), null).getRootNode();
-	}
-
+    protected CompositeNode getRootNode(InputStream stream) throws Exception {
+        return parse(stream, getASTFactory(), null).getRootNode();
+    }
+    protected CompositeNode getRootNode(String model2) throws Exception {
+        return parse(new StringInputStream(model2), getASTFactory(), null).getRootNode();
+    }
+    
 	protected CompositeNode getRootNode(String model2, IParseErrorHandler handler) throws Exception {
-		return parse(new StringInputStream(model2), getASTFactory(), handler).getRootNode();
+        return parse(new StringInputStream(model2), getASTFactory(), handler).getRootNode();
 	}
+
+    protected String readFileIntoString(String filePath) throws IOException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream resourceAsStream = classLoader.getResourceAsStream(filePath);
+        byte[] buffer = new byte[2048];
+        int bytesRead = 0;
+        StringBuffer b = new StringBuffer();
+        do {
+            bytesRead = resourceAsStream.read(buffer);
+            if(bytesRead != -1)
+                b.append(new String(buffer, 0, bytesRead));
+        } while(bytesRead != -1);
+        String model = b.toString();
+        return model;
+    }
 
 }

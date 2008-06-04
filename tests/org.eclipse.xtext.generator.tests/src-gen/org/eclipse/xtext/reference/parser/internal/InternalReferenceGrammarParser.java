@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g 2008-06-04 10:16:05
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g 2008-06-04 10:22:49
 
 package org.eclipse.xtext.reference.parser.internal; 
 
@@ -57,14 +57,14 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start internalParse
     // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:89:1: internalParse returns [EObject current=null] : iv_ruleSpielplatz= ruleSpielplatz EOF ;
-    public final EObject internalParse() throws RecognitionException {
+    public EObject internalParse() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleSpielplatz = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:89:46: (iv_ruleSpielplatz= ruleSpielplatz EOF )
+            // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:90:3: (iv_ruleSpielplatz= ruleSpielplatz EOF )
             // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:90:3: iv_ruleSpielplatz= ruleSpielplatz EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
@@ -94,7 +94,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleSpielplatz
     // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:98:1: ruleSpielplatz returns [EObject current=null] : ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) '{' ) ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) )* ) '}' )? ;
-    public final EObject ruleSpielplatz() throws RecognitionException {
+    public EObject ruleSpielplatz() throws RecognitionException {
         EObject current = null;
 
         Token lv_groesse=null;
@@ -107,7 +107,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:99:33: ( ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) '{' ) ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) )* ) '}' )? )
+            // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:100:1: ( ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) '{' ) ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) )* ) '}' )? )
             // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:100:1: ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) '{' ) ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) )* ) '}' )?
             {
             // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:100:1: ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) '{' ) ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) )* ) '}' )?
@@ -319,7 +319,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleKind
     // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:175:1: ruleKind returns [EObject current=null] : ( ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' ) ;
-    public final EObject ruleKind() throws RecognitionException {
+    public EObject ruleKind() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
@@ -327,7 +327,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:176:33: ( ( ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' ) )
+            // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:177:1: ( ( ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' ) )
             // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:177:1: ( ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' )
             {
             // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:177:1: ( ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' )
@@ -420,7 +420,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleErwachsener
     // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:221:1: ruleErwachsener returns [EObject current=null] : ( ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' ) ;
-    public final EObject ruleErwachsener() throws RecognitionException {
+    public EObject ruleErwachsener() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
@@ -428,7 +428,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:222:33: ( ( ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' ) )
+            // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:223:1: ( ( ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' ) )
             // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:223:1: ( ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' )
             {
             // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:223:1: ( ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' )
@@ -521,7 +521,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleSpielzeug
     // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:267:1: ruleSpielzeug returns [EObject current=null] : ( ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')' ) ;
-    public final EObject ruleSpielzeug() throws RecognitionException {
+    public EObject ruleSpielzeug() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
@@ -530,7 +530,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:268:33: ( ( ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')' ) )
+            // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:269:1: ( ( ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')' ) )
             // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:269:1: ( ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')' )
             {
             // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:269:1: ( ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')' )
@@ -626,12 +626,12 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleFarbe
     // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:314:1: ruleFarbe returns [EObject current=null] : ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' ) ;
-    public final EObject ruleFarbe() throws RecognitionException {
+    public EObject ruleFarbe() throws RecognitionException {
         EObject current = null;
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:315:33: ( ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' ) )
+            // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:316:1: ( ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' ) )
             // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:316:1: ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' )
             {
             // ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g:316:1: ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' )
