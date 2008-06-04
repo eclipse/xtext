@@ -31,6 +31,7 @@ public abstract class SimpleReconstrTestStandaloneSetup {
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parsetree.reconstr.parsetree.SimpleReconstrTestParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters(), org.eclipse.xtext.conversion.IValueConverterService.class);
 				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"simplereconstrtest", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));

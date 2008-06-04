@@ -31,6 +31,7 @@ public abstract class LexerLanguageStandaloneSetup {
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.LexerLanguageGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.LexerLanguageMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.parsetree.LexerLanguageParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters(), org.eclipse.xtext.conversion.IValueConverterService.class);
 				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"lexerlanguage", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));

@@ -31,6 +31,7 @@ public abstract class SimpleTestStandaloneSetup {
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.grammargen.tests.services.SimpleTestGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.grammargen.tests.services.SimpleTestMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.grammargen.tests.parsetree.SimpleTestParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters(), org.eclipse.xtext.conversion.IValueConverterService.class);
 				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"simpletest", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));

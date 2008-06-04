@@ -70,6 +70,7 @@ package «packageName()».parser.internal;
 @parser::header {
 package «packageName()».parser.internal; 
 
+import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -87,11 +88,9 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 		grammar = g;
     }
     
-    protected void setLexerRule(LeafNode node, Token t) {
-    /*    LexerRule lexerRule = «languageName()»TokenTypeResolver.getLexerRule(node, t.getType());
-        if(lexerRule != null) {
-            node.setGrammarElement(lexerRule);
-        }*/
+    protected InputStream getTokenFile() {
+    	ClassLoader classLoader = Internal«languageName()»Parser.class.getClassLoader();
+    	return classLoader.getResourceAsStream("«pathName()»/parser/internal/Internal«languageName()».tokens");
     }
 }
 

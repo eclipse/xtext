@@ -52,6 +52,7 @@ package org.eclipse.xtext.parsetree.reconstr.parser.internal;
 @parser::header {
 package org.eclipse.xtext.parsetree.reconstr.parser.internal; 
 
+import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -69,11 +70,9 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 		grammar = g;
     }
     
-    protected void setLexerRule(LeafNode node, Token t) {
-    /*    LexerRule lexerRule = SimpleReconstrTestTokenTypeResolver.getLexerRule(node, t.getType());
-        if(lexerRule != null) {
-            node.setGrammarElement(lexerRule);
-        }*/
+    protected InputStream getTokenFile() {
+    	ClassLoader classLoader = InternalSimpleReconstrTestParser.class.getClassLoader();
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.tokens");
     }
 }
 
@@ -203,7 +202,7 @@ RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n'{$channel=HIDDEN;};
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 

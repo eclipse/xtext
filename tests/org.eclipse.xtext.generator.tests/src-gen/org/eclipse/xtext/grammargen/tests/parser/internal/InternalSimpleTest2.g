@@ -52,6 +52,7 @@ package org.eclipse.xtext.grammargen.tests.parser.internal;
 @parser::header {
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
+import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -69,11 +70,9 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 		grammar = g;
     }
     
-    protected void setLexerRule(LeafNode node, Token t) {
-    /*    LexerRule lexerRule = SimpleTest2TokenTypeResolver.getLexerRule(node, t.getType());
-        if(lexerRule != null) {
-            node.setGrammarElement(lexerRule);
-        }*/
+    protected InputStream getTokenFile() {
+    	ClassLoader classLoader = InternalSimpleTest2Parser.class.getClassLoader();
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.tokens");
     }
 }
 
@@ -178,7 +177,7 @@ RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n'{$channel=HIDDEN;};
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 

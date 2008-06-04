@@ -31,6 +31,7 @@ public abstract class ComplexReconstrTestStandaloneSetup {
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parsetree.reconstr.parsetree.ComplexReconstrTestParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters(), org.eclipse.xtext.conversion.IValueConverterService.class);
 				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"complexreconstrtest", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));

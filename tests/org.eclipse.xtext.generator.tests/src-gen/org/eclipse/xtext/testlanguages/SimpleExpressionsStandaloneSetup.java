@@ -31,6 +31,7 @@ public abstract class SimpleExpressionsStandaloneSetup {
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.SimpleExpressionsGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.SimpleExpressionsMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.parsetree.SimpleExpressionsParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters(), org.eclipse.xtext.conversion.IValueConverterService.class);
 				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"simpleexpressions", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
