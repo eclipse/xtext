@@ -50,28 +50,11 @@ public class ReferenceTokenTypeDef extends BuildInTokenTypeDef {
 		TokenTypeDef ttd = new TokenTypeDef("field") {
 			@Override
 			public boolean match(LeafNode node) {
-				return node.getFeature() != null;
+				return false;//DISABLED node.getFeature() != null;
 			}
 		};
 		ttd.setName("Attribute");
 		ttd.setTextStyle(new TextStyle(TextStyleConstants.STRING_COLOR, null, SWT.NONE, null));
 		return ttd;
 	}
-
-	// @TokenType(name = "Singleline Comment")
-	// public boolean slComment(LeafNode node) {
-	// return ((RuleCall) node.getGrammarElement()).getName().equals(
-	// "SL_COMMENT");
-	// }
-	//
-	// @TokenType(name = "Multiline Comment")
-	// public boolean mlComment(LeafNode node) {
-	// return ((RuleCall) node.getGrammarElement()).getName().equals(
-	// "ML_COMMENT");
-	// }
-	//
-	// @TokenType(name = "Plus Sign")
-	// public boolean plus_sign(LeafNode node) {
-	// return node.getText().length() == 1 && node.getText().startsWith("+");
-	// }
 }
