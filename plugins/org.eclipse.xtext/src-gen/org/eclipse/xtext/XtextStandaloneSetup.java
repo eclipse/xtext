@@ -25,13 +25,13 @@ public abstract class XtextStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerFactory(languageDescriptor, new XtextParserServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new XtextASTFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new XtextParseTreeConstructorServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new XtextResourceFactoryServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new XtextGrammarAccessServiceFactory());
-			ServiceRegistry.registerFactory(languageDescriptor, new XtextMetamodelAccessServiceFactory());
-			
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.XtextParser(), org.eclipse.xtext.parser.IParser.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.GenericEcoreElementFactory(), org.eclipse.xtext.parser.IElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.services.XtextResourceFactory(), org.eclipse.xtext.resource.IResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.services.XtextGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.services.XtextMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parsetree.XtextParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
+				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"xtext", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
 			isInitialized = true;
