@@ -19,7 +19,7 @@ import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
  */
 public class ReferenceGrammar {
     private static final String PATH = "./src-gen";
-    private static final String UI_PATH = "../org.eclipse.xtext.reference.ui/src-gen";
+    private static final String UI_PATH = "../org.eclipse.xtext.reference.ui_gen";
 
     public void generate() throws IOException {
         XtextStandaloneSetup.doSetup();
