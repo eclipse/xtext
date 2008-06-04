@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g 2008-06-04 09:54:01
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g 2008-06-04 10:12:55
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -281,7 +281,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
                                 current = factory.create("ChoiceElement");
                                 associateNodeWithAstElement(currentNode, current);
                             }
-                            factory.set(current, "optionalKeyword", true,"'optional'");        createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"optionalKeyword");    
+                            factory.set(current, "optionalKeyword", true,"optional");        createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"optionalKeyword");    
 
                     }
                     break;

@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g 2008-06-04 09:53:57
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g 2008-06-04 10:12:51
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
@@ -208,7 +208,7 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
                                 current = factory.create("Child");
                                 associateNodeWithAstElement(currentNode, current);
                             }
-                            factory.set(current, "optional", true,"'optional'");        createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, currentNode,"optional");    
+                            factory.set(current, "optional", true,"optional");        createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, currentNode,"optional");    
 
                     }
                     break;
