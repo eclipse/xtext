@@ -24,6 +24,9 @@ import org.eclipse.xtext.ui.core.service.ITokenTypeDefService;
  * 
  */
 public class BuildInTokenTypeDef implements ITokenTypeDefService {
+	public static final String KEYWORD_ID = "keyword";
+	public static final String SL_COMMENT_ID = "slComment";
+	public static final String ML_COMMENT_ID = "mlComment";
 
 	public List<ITokenTypeDef> allTokenTypes() {
 		List<ITokenTypeDef> retVal = new ArrayList<ITokenTypeDef>();
@@ -33,7 +36,7 @@ public class BuildInTokenTypeDef implements ITokenTypeDefService {
 	}
 
 	protected ITokenTypeDef commentTokenType() {
-		TokenTypeDef ttd = new TokenTypeDef("slComment") {
+		TokenTypeDef ttd = new TokenTypeDef(SL_COMMENT_ID) {
 			@Override
 			public boolean match(LeafNode node) {
 				if (node.getGrammarElement() instanceof RuleCall) {
@@ -48,14 +51,27 @@ public class BuildInTokenTypeDef implements ITokenTypeDefService {
 		return ttd;
 	}
 
-	protected TokenTypeDef keyWordTokenType() {
-		TokenTypeDef ttd = new TokenTypeDef("keyword") {
+	protected ITokenTypeDef mlCommentTokenType() {
+		TokenTypeDef ttd = new TokenTypeDef(ML_COMMENT_ID) {
 			@Override
 			public boolean match(LeafNode node) {
-				return node.getGrammarElement() instanceof Keyword;// && node.
-																	// getText().
-																	// length() >
-																	// 1;
+				if (node.getGrammarElement() instanceof RuleCall) {
+					RuleCall ruleCall = (RuleCall) node.getGrammarElement();
+					return ruleCall != null && ruleCall.getName().equals("ML_COMMENT");
+				}
+				return false;
+			}
+		};
+		ttd.setName("Multi Line Comment");
+		ttd.setTextStyle(new TextStyle(TextStyleConstants.COMMENT_COLOR, null, SWT.NONE, null));
+		return ttd;
+	}
+
+	protected TokenTypeDef keyWordTokenType() {
+		TokenTypeDef ttd = new TokenTypeDef(KEYWORD_ID) {
+			@Override
+			public boolean match(LeafNode node) {
+				return node.getGrammarElement() instanceof Keyword;
 			}
 		};
 		ttd.setName("Keyword");
