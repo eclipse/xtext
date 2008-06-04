@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.service;
 
-import java.util.Set;
+import java.util.List;
 
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.ui.core.tokentype.ITokenTypeDef;
@@ -19,6 +19,6 @@ import org.eclipse.xtext.ui.core.tokentype.ITokenTypeDef;
  */
 public interface ITokenTypeDefService extends ILanguageService {
 	// TODO discuss whether we bind this service with syntaxcolorer
-	Set<ITokenTypeDef> allTokenTypes();
+	List<ITokenTypeDef> allTokenTypes();
 
 }

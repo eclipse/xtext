@@ -96,7 +96,9 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * getContextInformation()
 	 */
 	public IContextInformation getContextInformation() {
-		return new ContextInformation(getImage(), proposal.getText(), proposal.getDescription());
+		if (proposal.getDescription() != null)
+			return new ContextInformation(getImage(), proposal.getText(), proposal.getDescription());
+		return null;
 	}
 
 	/*
