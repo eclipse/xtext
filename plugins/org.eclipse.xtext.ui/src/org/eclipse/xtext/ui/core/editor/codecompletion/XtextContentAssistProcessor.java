@@ -25,6 +25,7 @@ import org.eclipse.xtext.ui.core.service.IProposalsProvider;
  */
 public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	private final IProposalsProvider proposalProvider;
+	private String errorMessage = null;
 
 	public XtextContentAssistProcessor(IProposalsProvider proposalProvider) {
 		this.proposalProvider = proposalProvider;
@@ -38,8 +39,11 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	 */
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		List<ICompletionProposal> retVal = new ArrayList<ICompletionProposal>();
-		for (Proposal proposal : proposalProvider.getProposals(viewer, offset)) {
-			retVal.add(createCompletionProposal(proposal, offset));
+		List<Proposal> proposals = proposalProvider.getProposals(viewer, offset);
+		if (proposals != null) {
+			for (Proposal proposal : proposals) {
+				retVal.add(createCompletionProposal(proposal, offset));
+			}
 		}
 		return retVal.toArray(new ICompletionProposal[0]);
 	}
@@ -70,7 +74,7 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	 * getCompletionProposalAutoActivationCharacters()
 	 */
 	public char[] getCompletionProposalAutoActivationCharacters() {
-		// TODO Auto-generated method stub
+		// TODO ask preference store
 		return null;
 	}
 
@@ -81,7 +85,7 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	 * getContextInformationAutoActivationCharacters()
 	 */
 	public char[] getContextInformationAutoActivationCharacters() {
-		// TODO Auto-generated method stub
+		// TODO ask preference store
 		return null;
 	}
 
@@ -103,8 +107,8 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	 * ()
 	 */
 	public String getErrorMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		// TODO create error handler
+		return errorMessage;
 	}
 
 }

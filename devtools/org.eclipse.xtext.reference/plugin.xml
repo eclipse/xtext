@@ -29,14 +29,14 @@
          point="org.eclipse.xtext.ui.parseTreeConstructor">
       <parseTreeConstructor
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
-            class="org.eclipse.xtext.reference.ReferenceGrammarParseTreeConstructor">
+            class="org.eclipse.xtext.reference.parsetree.ReferenceGrammarParseTreeConstructor">
       </parseTreeConstructor>
    </extension>
    <extension
          point="org.eclipse.xtext.ui.resourceFactory">
       <resourceFactory
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
-            class="org.eclipse.xtext.resource.XtextResourceFactory">
+            class="org.eclipse.xtext.reference.services.ReferenceGrammarResourceFactory">
       </resourceFactory>
    </extension>
    <extension

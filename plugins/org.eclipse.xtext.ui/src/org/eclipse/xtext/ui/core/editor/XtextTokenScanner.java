@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -37,6 +36,7 @@ import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.utils.StringInputStream;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
+import org.eclipse.xtext.ui.core.editor.utils.TextStyleConstants;
 import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
@@ -80,17 +80,11 @@ public class XtextTokenScanner implements ITokenScanner {
 
 	public IToken nextToken() {
 		IToken token = Token.EOF;
-		currentNode = null;
 		if (nodeIterator != null && nodeIterator.hasNext()) {
 			Object node = nodeIterator.next();
 			if (node instanceof LeafNode) {
 				currentNode = (LeafNode) node;
 				token = Token.UNDEFINED;
-				if (Activator.DEBUG_PARSING)
-					System.out.println("XtextTokenScanner.nextToken(): '"
-							+ currentNode.getText().replaceAll("\n", "<br>") + "' start:" + currentNode.offset()
-							+ " length:" + currentNode.length() + " line:" + currentNode.line());
-
 				if (syntaxColorer != null) {
 					TextAttribute textAttribute = createTextAttribute();
 					if (textAttribute != null) {
@@ -104,14 +98,16 @@ public class XtextTokenScanner implements ITokenScanner {
 						new IllegalArgumentException());
 			}
 		}
-		if (Activator.DEBUG_PARSING)
-			System.out.println("XtextTokenScanner.nextToken(): ************* scanning done **************");
-
 		return token;
 	}
 
 	private TextAttribute createTextAttribute() {
 		TextStyle textStyle = syntaxColorer.color(currentNode);
+		// we need difference to an default TextAttribute(null,null,0,null) in
+		// DefaultDamagerRepair
+		if (textStyle.getColor() == null) {
+			textStyle.setColor(TextStyleConstants.DEFAULT_COLOR);
+		}
 		return new TextAttribute(colorFromString(textStyle.getColor()),
 				colorFromString(textStyle.getBackgroundColor()), textStyle.getStyle(), fontFromString(textStyle
 						.getFontName()));
@@ -147,7 +143,7 @@ public class XtextTokenScanner implements ITokenScanner {
 				nodeIterator = rootNode.getLeafNodes().iterator();
 			}
 		}
-		catch (UnsupportedEncodingException e) {
+		catch (Exception e) {
 			CoreLog.logError(e);
 		}
 	}

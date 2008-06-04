@@ -12,6 +12,7 @@
    <extension-point id="grammarAccess" name="Xtext Grammar Access Service" schema="schema/grammarAccess.exsd"/>
    <extension-point id="metamodelAccess" name="Xtext Metamodel Access Service" schema="schema/metamodelAccess.exsd"/>
    <extension-point id="tokenTypeDef" name="Xtext Token Type Definition Service" schema="schema/tokenTypeDef.exsd"/>
+   <extension-point id="valueConverter" name="Xtext Value Converter Service" schema="schema/valueConverter.exsd"/>
    <extension
          id="org.eclipse.xtext.ui.problemmarker"
          name="Xtext Editor Problem Marker"

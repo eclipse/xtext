@@ -8,10 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.reference.ui.services;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyleConstants;
@@ -25,11 +25,11 @@ import org.eclipse.xtext.ui.core.tokentype.TokenTypeDef;
  */
 public class ReferenceTokenTypeDef extends BuildInTokenTypeDef {
 	@Override
-	public Set<ITokenTypeDef> allTokenTypes() {
-		Set<ITokenTypeDef> allTokenTypes = super.allTokenTypes();
-		allTokenTypes.add(commentTokenType());
+	public List<ITokenTypeDef> allTokenTypes() {
+		List<ITokenTypeDef> allTokenTypes = new ArrayList<ITokenTypeDef>();
 		allTokenTypes.add(fieldTokenType());
 		allTokenTypes.add(rot());
+		allTokenTypes.addAll(super.allTokenTypes());
 		return allTokenTypes;
 	}
 
@@ -43,22 +43,6 @@ public class ReferenceTokenTypeDef extends BuildInTokenTypeDef {
 		TextStyle ts = keyWordTokenType().getTextStyle();
 		ts.setColor("250,50,50");
 		ttd.setTextStyle(ts);
-		return ttd;
-	}
-
-	private ITokenTypeDef commentTokenType() {
-		TokenTypeDef ttd = new TokenTypeDef("slComment") {
-			@Override
-			public boolean match(LeafNode node) {
-				if (node.getGrammarElement() instanceof RuleCall) {
-					RuleCall ruleCall = (RuleCall) node.getGrammarElement();
-					return ruleCall != null && ruleCall.getName().equals("SL_COMMENT");
-				}
-				return false;
-			}
-		};
-		ttd.setName("Single Line Comment");
-		ttd.setTextStyle(new TextStyle(TextStyleConstants.COMMENT_COLOR, null, SWT.NONE, null));
 		return ttd;
 	}
 
