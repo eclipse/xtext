@@ -14,7 +14,7 @@
 «EXTENSION org::eclipse::xtext::services::ServiceGen»
 
 «DEFINE file FOR Grammar»
-«FILE pathName()+'/'+languageName()+'_plugin.xml'-»
+«FILE "plugin.xml" UI-»
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 

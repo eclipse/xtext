@@ -60,19 +60,32 @@ public class GeneratorFacade {
 
 	@SuppressWarnings("unchecked")
 	public static void generate(Grammar grammarModel, String srcGenPath,
-			String uiSrcGenPath, String modelFileExtension) throws IOException {
+			String uiProjectPath, String modelFileExtension) throws IOException {
 		EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(XtextPackage.eNS_URI, XtextPackage.eINSTANCE);
 		OutputImpl output = new OutputImpl();
+
+		// default outlet
 		Outlet defaultOutlet = new Outlet();
 		defaultOutlet.setPath(srcGenPath);
-
-		Outlet uiOutlet = new Outlet();
-		uiOutlet.setName("UI_SRC_GEN");
-		uiOutlet.setPath(uiSrcGenPath);
-
 		output.addOutlet(defaultOutlet);
+		
+		// UI project, root path
+		Outlet uiOutlet = new Outlet(uiProjectPath);
+		uiOutlet.setName("UI");
 		output.addOutlet(uiOutlet);
+
+		// UI project, src-gen path 
+		String uiProjectSrcGenPath = uiProjectPath + "/src-gen";
+		Outlet uiSrcGenOutlet = new Outlet(uiProjectSrcGenPath);
+		uiSrcGenOutlet.setName("UI_SRC_GEN");
+		output.addOutlet(uiSrcGenOutlet);
+		
+		// UI project, META-INF path
+		String uiProjectManifestPath = uiProjectPath + "/META-INF";
+		Outlet uiManifestOutlet = new Outlet(uiProjectManifestPath);
+		uiManifestOutlet.setName("UI_MANIFEST");
+		output.addOutlet(uiManifestOutlet);
 
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
 		EmfRegistryMetaModel metamodel = new EmfRegistryMetaModel() {
@@ -128,8 +141,10 @@ public class GeneratorFacade {
 				metaModelResource.getContents().add(pack);
 				metaModelResource.save(null);
 			}
-			if (uiSrcGenPath != null) {
+			if (uiProjectPath != null) {
+				facade.evaluate("org::eclipse::xtext::ui::Project::root", grammarModel);
 				facade.evaluate("org::eclipse::xtext::ui::Plugin::file", grammarModel);
+				facade.evaluate("org::eclipse::xtext::ui::Manifest::file", grammarModel);
 				facade.evaluate("org::eclipse::xtext::ui::Editor::file", grammarModel);
 			}
 		}
@@ -144,11 +159,16 @@ public class GeneratorFacade {
 		final File[] contents = f.listFiles();
 		for (int j = 0; j < contents.length; j++) {
 			final File file = contents[j];
-			if (!isCVSFile(file)) {
-			    System.out.println("Deleting file " + file.getName());
-				if (!delete(file)) {
-					log.error("Couldn't delete " + file.getAbsolutePath());
-				}
+			if (file.isDirectory()) {
+			    cleanFolder(file.getAbsolutePath());
+			}
+			else {
+    			if (!isCVSFile(file)) {
+    			    System.out.println("Deleting file " + file.getName());
+    				if (!delete(file)) {
+    					log.error("Couldn't delete " + file.getAbsolutePath());
+    				}
+    			}
 			}
 		}
 	}
@@ -156,6 +176,9 @@ public class GeneratorFacade {
 	private static boolean isCVSFile(File file) {
         if (".cvsignore".equals(file.getName())) return true;
         if ("CVS".equals(file.getName())) return true;
+        if ("Entries".equals(file.getName())) return true;
+        if ("Repository".equals(file.getName())) return true;
+        if ("Root".equals(file.getName())) return true;
 	    return false;
 	}
 }
