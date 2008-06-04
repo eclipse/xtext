@@ -102,8 +102,7 @@ public abstract class AbstractAntlrParser extends Parser {
         if (antlrTypeToLexerName == null) {
             try {
                 antlrTypeToLexerName = new HashMap<Integer, String>();
-                InputStream stream = getClass().getClassLoader().getResourceAsStream(getClass().getName().replace('.', '/') + ".tokens");
-                BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+                BufferedReader br = new BufferedReader(new InputStreamReader(getTokenFile()));
                 String line = br.readLine();
                 Pattern pattern = Pattern.compile("(.*)=(\\d+)");
                 while (line != null) {
@@ -119,7 +118,6 @@ public abstract class AbstractAntlrParser extends Parser {
                         antlrTypeToLexerName.put(Integer.parseInt(tokenTypeId), token.substring(prefix.length()));
                     line = br.readLine();
                 }
-                stream.close();
             } catch (IOException e) {
                 throw new WrappedException(e);
             }
@@ -130,9 +128,9 @@ public abstract class AbstractAntlrParser extends Parser {
     protected void setLexerRule(LeafNode leafNode, Token hidden) {
         String ruleName = getTokenTypeMap().get(hidden.getType());
         AbstractRule rule = GrammarUtil.findRuleForName(grammar, ruleName);
-        if (!(rule instanceof LexerRule))
-            throw new IllegalStateException();
-        leafNode.setGrammarElement(rule);
+        if (rule instanceof LexerRule) {
+            leafNode.setGrammarElement(rule);
+        }
     }
 
     protected CompositeNode createCompositeNode(String grammarElementID, CompositeNode parentNode) {
@@ -235,6 +233,10 @@ public abstract class AbstractAntlrParser extends Parser {
             result = new ParseResult(current, currentNode, parseErrors);
         }
         return result;
+    }
+    
+    protected InputStream getTokenFile() {
+        return null;
     }
 
     public abstract EObject internalParse() throws RecognitionException;
