@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g 2008-06-04 17:09:02
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalSimpleReconstrTest.g 2008-06-04 17:12:20
 
 package org.eclipse.xtext.parsetree.reconstr.parser.internal; 
 

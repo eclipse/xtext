@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g 2008-06-04 17:09:05
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g 2008-06-04 17:12:23
 
 package org.eclipse.xtext.reference.parser.internal;
 
