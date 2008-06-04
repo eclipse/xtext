@@ -22,6 +22,11 @@ import org.eclipse.xtext.ui.core.tokentype.ITokenTypeDef;
  * 
  */
 public class TokenTypeDefTest extends AbstractServiceTest {
+	private static final String MULTILINE_COMMENT = "/*\n*multiline comment\n*/";
+	private static final String SINGLELINE_COMMENT = "//singleline comment";
+	private static final String KEYWORD_SPIELPLATZ = "spielplatz";
+	private static final String MODEL = MULTILINE_COMMENT + "\n" + KEYWORD_SPIELPLATZ + " 2 {\n" + SINGLELINE_COMMENT
+			+ "\nkind (jurgen 5)\nspielzeug (ente ROT)}";
 	private EList<LeafNode> leafNodes;
 	private ITokenTypeDefService ttds;
 
@@ -29,21 +34,30 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		IParser parser = getServiceForDefaultLanguage(IParser.class);
-		IParseResult pr = parser.parse(new StringInputStream(
-				"//comment\nspielplatz 2 {\nkind (jurgen 5)\nspielzeug (ente ROT)}"));
+		IParseResult pr = parser.parse(new StringInputStream(MODEL));
 		ttds = getServiceForDefaultLanguage(ITokenTypeDefService.class);
 		leafNodes = pr.getRootNode().getLeafNodes();
 	}
 
 	public void testBuildInSlCommentDef() throws Exception {
-		LeafNode comment = leafNodes.get(0);
+		LeafNode comment = findLeafNodeByText(SINGLELINE_COMMENT);
+		assertNotNull(comment);
 		ITokenTypeDef ttd = findTokenTypeDef(ttds, comment);
 		assertNotNull(ttd);
 		assertEquals(BuildInTokenTypeDef.SL_COMMENT_ID, ttd.getId());
 	}
 
+	public void testBuildInMlCommentDef() throws Exception {
+		LeafNode comment = findLeafNodeByText(MULTILINE_COMMENT);
+		assertNotNull(comment);
+		ITokenTypeDef ttd = findTokenTypeDef(ttds, comment);
+		assertNotNull(ttd);
+		assertEquals(BuildInTokenTypeDef.ML_COMMENT_ID, ttd.getId());
+	}
+
 	public void testBuildInKeywordDef() throws Exception {
-		LeafNode keyword = leafNodes.get(1);
+		LeafNode keyword = findLeafNodeByText(KEYWORD_SPIELPLATZ);
+		assertNotNull(keyword);
 		ITokenTypeDef ttd = findTokenTypeDef(ttds, keyword);
 		assertNotNull(ttd);
 		assertEquals(BuildInTokenTypeDef.KEYWORD_ID, ttd.getId());
@@ -53,6 +67,15 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 		for (ITokenTypeDef ttd : ttds.allTokenTypes()) {
 			if (ttd.match(leafNode)) {
 				return ttd;
+			}
+		}
+		return null;
+	}
+
+	private LeafNode findLeafNodeByText(String string) {
+		for (LeafNode current : leafNodes) {
+			if (string.equals(current.getText())) {
+				return current;
 			}
 		}
 		return null;
