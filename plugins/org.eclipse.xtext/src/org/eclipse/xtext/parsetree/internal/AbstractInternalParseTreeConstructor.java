@@ -270,10 +270,9 @@ public abstract class AbstractInternalParseTreeConstructor {
 
 	protected void keyword(Keyword kw) {
 		checkWhitespace();
-		String value = kw.getValue().substring(1, kw.getValue().length() - 1);
 		LeafNode ln = ParsetreeFactory.eINSTANCE.createLeafNode();
 		ln.setGrammarElement(kw);
-		ln.setText(converterService.toString(value, kw.getValue()));
+		ln.setText(converterService.toString(kw.getValue(), kw.getValue()));
 		prependToCurrentsChildren(ln);
 	}
 

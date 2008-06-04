@@ -5,7 +5,7 @@
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>SimpleExpressions</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simpleExpressions" nsURI="&quot;http://www.eclipse.org/xtext/test/simpleExpressions&quot;"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simpleExpressions" nsURI="http://www.eclipse.org/xtext/test/simpleExpressions"/>
   <parserRules name="Multiplication">
     <type name="Expression"/>
     <alternatives xsi:type="xtext:Group">
@@ -17,8 +17,8 @@
           </abstractTokens>
           <abstractTokens xsi:type="xtext:Assignment" feature="operator" operator="=">
             <terminal xsi:type="xtext:Alternatives">
-              <groups xsi:type="xtext:Keyword" value="'+'"/>
-              <groups xsi:type="xtext:Keyword" value="'-'"/>
+              <groups xsi:type="xtext:Keyword" value="+"/>
+              <groups xsi:type="xtext:Keyword" value="-"/>
             </terminal>
           </abstractTokens>
         </abstractTokens>
@@ -39,8 +39,8 @@
           </abstractTokens>
           <abstractTokens xsi:type="xtext:Assignment" feature="operator" operator="=">
             <terminal xsi:type="xtext:Alternatives">
-              <groups xsi:type="xtext:Keyword" value="'*'"/>
-              <groups xsi:type="xtext:Keyword" value="'/'"/>
+              <groups xsi:type="xtext:Keyword" value="*"/>
+              <groups xsi:type="xtext:Keyword" value="/"/>
             </terminal>
           </abstractTokens>
         </abstractTokens>
@@ -66,10 +66,10 @@
     <type name="Expression"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" value="'('"/>
+        <abstractTokens xsi:type="xtext:Keyword" value="("/>
         <abstractTokens xsi:type="xtext:RuleCall" name="Multiplication"/>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Keyword" value="')'"/>
+      <abstractTokens xsi:type="xtext:Keyword" value=")"/>
     </alternatives>
   </parserRules>
 </xtext:Grammar>

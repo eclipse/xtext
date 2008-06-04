@@ -6,7 +6,7 @@
   <idElements>grammargen</idElements>
   <idElements>tests</idElements>
   <idElements>SimpleTest2</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="SimpleTest2" nsURI="&quot;http://eclipse.org/xtext/tests/SimpleTest2&quot;"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="SimpleTest2" nsURI="http://eclipse.org/xtext/tests/SimpleTest2"/>
   <parserRules name="Model">
     <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="contents" operator="+=">
       <terminal xsi:type="xtext:RuleCall" name="Child"/>
@@ -19,9 +19,9 @@
           <abstractTokens xsi:type="xtext:Group">
             <abstractTokens xsi:type="xtext:Group">
               <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="optional" operator="?=">
-                <terminal xsi:type="xtext:Keyword" value="'optional'"/>
+                <terminal xsi:type="xtext:Keyword" value="optional"/>
               </abstractTokens>
-              <abstractTokens xsi:type="xtext:Keyword" value="&quot;keyword&quot;"/>
+              <abstractTokens xsi:type="xtext:Keyword" value="keyword"/>
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
               <terminal xsi:type="xtext:RuleCall" name="ID"/>
@@ -31,9 +31,9 @@
             <terminal xsi:type="xtext:RuleCall" name="INT"/>
           </abstractTokens>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Keyword" value="'{'"/>
+        <abstractTokens xsi:type="xtext:Keyword" value="{"/>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Keyword" value="'}'"/>
+      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
     </alternatives>
   </parserRules>
 </xtext:Grammar>

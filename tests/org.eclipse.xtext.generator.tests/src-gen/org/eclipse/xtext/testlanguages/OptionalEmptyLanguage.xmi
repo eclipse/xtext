@@ -5,7 +5,7 @@
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>OptionalEmptyLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="OptionalEmpty" nsURI="&quot;http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty&quot;"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="OptionalEmpty" nsURI="http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty"/>
   <parserRules name="Model">
     <alternatives xsi:type="xtext:Assignment" cardinality="?" feature="child" operator="=">
       <terminal xsi:type="xtext:RuleCall" name="Greeting"/>
@@ -13,7 +13,7 @@
   </parserRules>
   <parserRules name="Greeting">
     <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Keyword" value="'hallo'"/>
+      <abstractTokens xsi:type="xtext:Keyword" value="hallo"/>
       <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
         <terminal xsi:type="xtext:RuleCall" name="ID"/>
       </abstractTokens>

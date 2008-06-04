@@ -16,7 +16,7 @@ public class XtextBuiltinGrammarAccess implements IGrammarAccess {
 		g.getIdElements().add(IXtextBuiltin.ID);
 		ReferencedMetamodel ecoremm = f.createReferencedMetamodel();
 		ecoremm.setAlias("ecore");
-		ecoremm.setUri("'"+EcorePackage.eNS_URI+"'");//TODO remove the single quotes 
+		ecoremm.setUri(EcorePackage.eNS_URI);
 		g.getMetamodelDeclarations().add(ecoremm);
 		
 		LexerRule l = null;

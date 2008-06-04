@@ -5,7 +5,7 @@
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>ActionTestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ActionLang" nsURI="&quot;http://www.eclipse.org/2008/tmf/xtext/ActionLang&quot;"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ActionLang" nsURI="http://www.eclipse.org/2008/tmf/xtext/ActionLang"/>
   <parserRules name="Model">
     <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="children" operator="+=">
       <terminal xsi:type="xtext:RuleCall" name="Element"/>

@@ -125,7 +125,7 @@ ruleChild returns [EObject current=null]
             $current = factory.create("Child");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "optional", true,"'optional'");        createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, currentNode,"optional");    }
+        factory.set($current, "optional", true,"optional");        createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, currentNode,"optional");    }
 )?'keyword' 
 
     {

@@ -5,7 +5,7 @@
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>TestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="TestLang" nsURI="&quot;http://www.eclipse.org/2008/xtext/TestLang&quot;"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="TestLang" nsURI="http://www.eclipse.org/2008/xtext/TestLang"/>
   <parserRules name="EntryRule">
     <type name="Model"/>
     <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="multiFeature" operator="+=">
@@ -23,9 +23,9 @@
     <type name="ChoiceElement"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" value="&quot;choice&quot;"/>
+        <abstractTokens xsi:type="xtext:Keyword" value="choice"/>
         <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="optionalKeyword" operator="?=">
-          <terminal xsi:type="xtext:Keyword" value="'optional'"/>
+          <terminal xsi:type="xtext:Keyword" value="optional"/>
         </abstractTokens>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
@@ -37,7 +37,7 @@
     <type name="ReducibleElement"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" value="&quot;reducible&quot;"/>
+        <abstractTokens xsi:type="xtext:Keyword" value="reducible"/>
         <abstractTokens xsi:type="xtext:RuleCall" name="TerminalRule"/>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Group" cardinality="?">
