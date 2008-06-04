@@ -104,21 +104,16 @@ public class GeneratorFacade {
 		XpandFacade facade = XpandFacade.create(execCtx);
 		facade.evaluate("org::eclipse::xtext::StandaloneSetup::file", grammarModel);
 		if (isConcrete) {
-			facade.evaluate("org::eclipse::xtext::parsetree::ParseTreeConstructor::file", grammarModel);
 			facade.evaluate("org::eclipse::xtext::ILanguage::file", grammarModel);
-			facade.evaluate("org::eclipse::xtext::ParserFacade::parser", grammarModel);
 			facade.evaluate("org::eclipse::xtext::services::GrammarAccess::file", grammarModel);
             facade.evaluate("org::eclipse::xtext::services::MetamodelAccess::file", grammarModel);
             facade.evaluate("org::eclipse::xtext::services::ResourceFactory::file", grammarModel);
-			if (uiSrcGenPath != null) {
-				facade.evaluate("org::eclipse::xtext::ui::Plugin::file", grammarModel);
-				facade.evaluate("org::eclipse::xtext::ui::Editor::file", grammarModel);
-			}
-			facade.evaluate("org::eclipse::xtext::grammargen::AntlrGrammar::grammar", grammarModel);
+			facade.evaluate("org::eclipse::xtext::parser::IParser::parser", grammarModel);
+			facade.evaluate("org::eclipse::xtext::parser::AntlrGrammar::grammar", grammarModel);
 			String grammar = languageNamespace + "/parser/internal/Internal" + languageName + ".g";
-
 			Tool antlr = new Tool(new String[] { srcGenPath + "/" + grammar });
 			antlr.process();
+			facade.evaluate("org::eclipse::xtext::parsetree::ParseTreeConstructor::file", grammarModel);
 			// generate EPackage
 			ExecutionContextImpl executionContext = new ExecutionContextImpl();
 			executionContext.registerMetaModel(metamodel);
@@ -132,6 +127,10 @@ public class GeneratorFacade {
 				Resource metaModelResource = new ResourceSetImpl().createResource(uri);
 				metaModelResource.getContents().add(pack);
 				metaModelResource.save(null);
+			}
+			if (uiSrcGenPath != null) {
+				facade.evaluate("org::eclipse::xtext::ui::Plugin::file", grammarModel);
+				facade.evaluate("org::eclipse::xtext::ui::Editor::file", grammarModel);
 			}
 		}
 	}

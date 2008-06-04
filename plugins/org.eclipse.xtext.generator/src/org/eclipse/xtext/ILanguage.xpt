@@ -11,7 +11,8 @@
 
 «IMPORT xtext»
 
-«EXTENSION org::eclipse::xtext::grammargen::GrammarGen»
+«EXTENSION org::eclipse::xtext::Extensions»
+«EXTENSION org::eclipse::xtext::Properties»
 
 «DEFINE file FOR Grammar»
 «FILE pathName()+'/I'+languageName()+'.java'-»
