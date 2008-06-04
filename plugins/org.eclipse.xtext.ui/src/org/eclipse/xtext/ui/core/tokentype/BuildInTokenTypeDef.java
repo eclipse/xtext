@@ -27,11 +27,16 @@ public class BuildInTokenTypeDef implements ITokenTypeDefService {
 	public static final String KEYWORD_ID = "keyword";
 	public static final String SL_COMMENT_ID = "slComment";
 	public static final String ML_COMMENT_ID = "mlComment";
+	public static final String STRING_ID = "string";
+	public static final String NUMBER_ID = "number";
 
 	public List<ITokenTypeDef> allTokenTypes() {
 		List<ITokenTypeDef> retVal = new ArrayList<ITokenTypeDef>();
-		retVal.add(keyWordTokenType());
 		retVal.add(commentTokenType());
+		retVal.add(mlCommentTokenType());
+		retVal.add(keyWordTokenType());
+		retVal.add(stringTokenType());
+		retVal.add(numberTokenType());
 		return retVal;
 	}
 
@@ -40,8 +45,7 @@ public class BuildInTokenTypeDef implements ITokenTypeDefService {
 			@Override
 			public boolean match(LeafNode node) {
 				if (node.getGrammarElement() instanceof RuleCall) {
-					RuleCall ruleCall = (RuleCall) node.getGrammarElement();
-					return ruleCall != null && ruleCall.getName().equals("SL_COMMENT");
+					return "SL_COMMENT".equals(((RuleCall) node.getGrammarElement()).getName());
 				}
 				return false;
 			}
@@ -56,14 +60,13 @@ public class BuildInTokenTypeDef implements ITokenTypeDefService {
 			@Override
 			public boolean match(LeafNode node) {
 				if (node.getGrammarElement() instanceof RuleCall) {
-					RuleCall ruleCall = (RuleCall) node.getGrammarElement();
-					return ruleCall != null && ruleCall.getName().equals("ML_COMMENT");
+					return "ML_COMMENT".equals(((RuleCall) node.getGrammarElement()).getName());
 				}
 				return false;
 			}
 		};
 		ttd.setName("Multi Line Comment");
-		ttd.setTextStyle(new TextStyle(TextStyleConstants.COMMENT_COLOR, null, SWT.NONE, null));
+		ttd.setTextStyle(new TextStyle("33, 97, 65", null, SWT.NONE, null));
 		return ttd;
 	}
 
@@ -76,6 +79,36 @@ public class BuildInTokenTypeDef implements ITokenTypeDefService {
 		};
 		ttd.setName("Keyword");
 		ttd.setTextStyle(new TextStyle(TextStyleConstants.KEYWORD_COLOR, null, TextStyleConstants.KEYWORD_STYLE, null));
+		return ttd;
+	}
+
+	protected ITokenTypeDef stringTokenType() {
+		TokenTypeDef ttd = new TokenTypeDef(STRING_ID) {
+			@Override
+			public boolean match(LeafNode node) {
+				if (node.getGrammarElement() instanceof RuleCall) {
+					return "STRING".equals(((RuleCall) node.getGrammarElement()).getName());
+				}
+				return false;
+			}
+		};
+		ttd.setName("String");
+		ttd.setTextStyle(new TextStyle(TextStyleConstants.STRING_COLOR, null, TextStyleConstants.DEFAULT_STYLE, null));
+		return ttd;
+	}
+
+	protected ITokenTypeDef numberTokenType() {
+		TokenTypeDef ttd = new TokenTypeDef(NUMBER_ID) {
+			@Override
+			public boolean match(LeafNode node) {
+				if (node.getGrammarElement() instanceof RuleCall) {
+					return "INT".equals(((RuleCall) node.getGrammarElement()).getName());
+				}
+				return false;
+			}
+		};
+		ttd.setName("Number");
+		ttd.setTextStyle(new TextStyle(TextStyleConstants.NUMBER_COLOR, null, TextStyleConstants.DEFAULT_STYLE, null));
 		return ttd;
 	}
 }

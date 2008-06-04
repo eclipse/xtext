@@ -28,5 +28,7 @@ public class TextStyleConstants {
 	public final static String COMMENT_COLOR = "63, 127, 95";
 
 	public final static String STRING_COLOR = "42, 0, 255";
+	
+	public final static String NUMBER_COLOR = "125,125,125";
 
 }
