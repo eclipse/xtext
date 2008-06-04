@@ -12,6 +12,7 @@
 «IMPORT xtext»
 
 «EXTENSION org::eclipse::xtext::services::ServiceGen»
+«EXTENSION org::eclipse::xtext::ui::UIProperties»
 
 «DEFINE file FOR Grammar»
 «FILE "plugin.xml" UI-»
@@ -21,6 +22,17 @@
 <!-- Generated with Xtext -->
 
 <plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="«editorClassFQN()»"
+            default="true"
+            extensions="test, tst"
+            icon="icons/editor/titleImage.gif"
+            id="«editorExtensionId()»"
+            name="«languageName()» Editor">
+      </editor>
+   </extension>
    <extension
          point="org.eclipse.xtext.ui.languageDescriptor">
       <languageDescriptor
