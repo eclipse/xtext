@@ -146,7 +146,7 @@ ruleChoiceRule returns [EObject current=null]
             $current = factory.create("ChoiceElement");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "optionalKeyword", true,"'optional'");        createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"optionalKeyword");    }
+        factory.set($current, "optionalKeyword", true,"optional");        createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"optionalKeyword");    }
 )?)(
     lv_name=RULE_ID
     { 

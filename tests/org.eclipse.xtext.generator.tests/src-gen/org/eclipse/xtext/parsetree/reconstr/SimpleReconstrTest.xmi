@@ -6,7 +6,7 @@
   <idElements>parsetree</idElements>
   <idElements>reconstr</idElements>
   <idElements>SimpleReconstrTest</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simplerewritetest" nsURI="&quot;http://simple/rewrite/test&quot;"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simplerewritetest" nsURI="http://simple/rewrite/test"/>
   <parserRules name="Op">
     <type name="Expression"/>
     <alternatives xsi:type="xtext:Group">
@@ -38,13 +38,13 @@
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
-          <abstractTokens xsi:type="xtext:Keyword" value="'('"/>
+          <abstractTokens xsi:type="xtext:Keyword" value="("/>
           <abstractTokens xsi:type="xtext:RuleCall" name="Op"/>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Keyword" value="')'"/>
+        <abstractTokens xsi:type="xtext:Keyword" value=")"/>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="em" operator="=">
-        <terminal xsi:type="xtext:Keyword" value="'!'"/>
+        <terminal xsi:type="xtext:Keyword" value="!"/>
       </abstractTokens>
     </alternatives>
   </parserRules>

@@ -224,7 +224,7 @@ this_Op=ruleOp
             $current = factory.create("Expression");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "em", lv_em,"'!'");        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"em");    }
+        factory.set($current, "em", lv_em,"!");        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"em");    }
 )?);
 
 
