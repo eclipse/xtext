@@ -32,4 +32,11 @@
             name="XtextBase">
       </languageDescriptor>
    </extension>
+   <extension
+         point="org.eclipse.xtext.ui.valueConverter">
+      <valueConverter
+            class="org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters"
+            languageId="org.eclipse.xtext.BaseLanguage">
+      </valueConverter>
+   </extension>
 </plugin>

@@ -6,6 +6,7 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
@@ -43,6 +44,7 @@ public class LanguageServiceActivator {
         ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IGrammarAccess.class, "grammarAccess"));
         ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IMetamodelAccess.class, "metamodelAccess"));
         ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, ITokenTypeDefService.class, "tokenTypeDef"));
+        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IValueConverterService.class, "valueConverter"));
         }
 
     private static void registerLanguageDescriptors() {
