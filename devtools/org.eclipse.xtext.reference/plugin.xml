@@ -54,4 +54,11 @@
             class="org.eclipse.xtext.reference.services.ReferenceGrammarMetamodelAccess">
       </metamodelAccess>
    </extension>
+   <extension
+         point="org.eclipse.xtext.ui.valueConverter">
+      <valueConverter
+            class="org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters"
+            languageId="org.eclipse.xtext.reference.ReferenceGrammar">
+      </valueConverter>
+   </extension>
 </plugin>

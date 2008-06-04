@@ -33,19 +33,13 @@
             languageId="org.eclipse.xtext.reference.ReferenceGrammar">
       </preferenceStore>
    </extension>
+   
    <extension
          point="org.eclipse.xtext.ui.tokenTypeDef">
       <tokenTypeDef
             class="org.eclipse.xtext.reference.ui.services.ReferenceTokenTypeDef"
             languageId="org.eclipse.xtext.reference.ReferenceGrammar">
       </tokenTypeDef>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.ui.valueConverter">
-      <valueConverter
-            class="org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters"
-            languageId="org.eclipse.xtext.reference.ReferenceGrammar">
-      </valueConverter>
    </extension>
    
 </plugin>
