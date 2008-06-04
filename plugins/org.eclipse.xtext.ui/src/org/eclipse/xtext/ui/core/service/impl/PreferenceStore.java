@@ -12,7 +12,6 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.InjectedService;
 import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
 
 /**
@@ -21,10 +20,10 @@ import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
  */
 public class PreferenceStore implements IPreferenceStoreService {
 	/* Tokens */
-	public static final String COLOR_SUFIX = "color";
-	public static final String BACKGROUNDCOLOR_SUFIX = "backgroundcolor";
-	public static final String STYLE_SUFIX = "style";
-	public static final String FONT_SUFIX = "font";
+	private static final String COLOR_SUFIX = "color";
+	private static final String BACKGROUNDCOLOR_SUFIX = "backgroundcolor";
+	private static final String STYLE_SUFIX = "style";
+	private static final String FONT_SUFIX = "font";
 
 	private ILanguageDescriptor languageDescriptor;
 
@@ -44,7 +43,7 @@ public class PreferenceStore implements IPreferenceStoreService {
 		return tokenType + STYLE_SUFIX;
 	}
 
-	IPersistentPreferenceStore preferenceStore = null;
+	private IPersistentPreferenceStore preferenceStore = null;
 
 	public IPersistentPreferenceStore getPersitablePreferenceStore() {
 		if (preferenceStore == null) {

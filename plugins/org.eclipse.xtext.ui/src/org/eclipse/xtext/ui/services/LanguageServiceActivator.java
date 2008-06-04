@@ -45,7 +45,7 @@ public class LanguageServiceActivator {
         ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IMetamodelAccess.class, "metamodelAccess"));
         ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, ITokenTypeDefService.class, "tokenTypeDef"));
         ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IValueConverterService.class, "valueConverter"));
-        }
+          }
 
     private static void registerLanguageDescriptors() {
         IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(Activator.PLUGIN_ID, LANGUAGE_DESCRIPTOR);
