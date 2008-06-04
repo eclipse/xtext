@@ -39,7 +39,7 @@ public class «serviceClass('MetamodelAccess')»  extends BaseEPackageAccess imple
 	public EPackage[] getReferencedEPackages() {
 		return new EPackage[] {
 		«FOREACH metamodelDeclarations.typeSelect(ReferencedMetamodel) AS rmm SEPARATOR ","»
-		BaseEPackageAccess.getEPackageFromRegistry(«rmm.uri»)
+		BaseEPackageAccess.getEPackageFromRegistry("«rmm.uri»")
 		«ENDFOREACH»
 		};
 	}
