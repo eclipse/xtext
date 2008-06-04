@@ -77,6 +77,8 @@
 source.. = src-gen/
 output.. = bin/
 bin.includes = META-INF/,\
+               plugin.xml,\
+               .
 
 «ENDFILE-»
 «ENDDEFINE»
