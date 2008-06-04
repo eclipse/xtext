@@ -10,7 +10,7 @@ language org.eclipse.xtext.reference.ReferenceGrammar
 generate ReferenceGrammar "http://eclipse.org/xtext/reference/ReferenceGrammar"
 
 Spielplatz:
-	("spielplatz" groesse=INT "{"
+	("spielplatz" groesse=INT (beschreibung=STRING)?"{"
 		(kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug)*
 	"}")?;		
 	
@@ -28,3 +28,6 @@ Spielzeug:
 	
 Farbe:
 	("ROT" | "BLAU" | "GELB" | "GRÜN");
+
+Doener:
+	("döner");
