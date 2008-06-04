@@ -11,6 +11,7 @@ package org.eclipse.xtext.parser;
 
 import java.util.Collection;
 
+import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -33,85 +34,92 @@ public class GenericEcoreElementFactory implements IElementFactory {
     public void setMetamodelAccess(IMetamodelAccess metamodelAccess) {
         this.metamodelAccess = metamodelAccess;
     }
-    
+
     protected IValueConverterService converterService;
-    
+
     @InjectedService
     public void setValueConverterService(IValueConverterService converterService) {
-    	this.converterService = converterService;
+        this.converterService = converterService;
     }
-    
-	public EObject create(String fullTypeName) {
-		EClass clazz = getEClass(fullTypeName);
-		if (clazz != null && !(clazz.isAbstract() || clazz.isInterface()))
-			return clazz.getEPackage().getEFactoryInstance().create(clazz);
-		return null;
-	}
 
-	@Deprecated
-	public void set(EObject _this, String feature, Object value) {
-		set(_this,feature,value,null);
-	}
-	
-	public void set(EObject _this, String feature, Object value, String ruleName) {
-		if (value instanceof Token) {
-			value = ((Token) value).getText();
-			if (ruleName!=null) {
-				value = converterService.toValue((String)value, ruleName);
-			}
-		}
-		EObject eo = (EObject) _this;
-		EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
-		eo.eSet(structuralFeature, value);
-	}
-	
-	@Deprecated
-	public void add(EObject _this, String feature, Object value) {
-		add(_this,feature,value,null);
-	}
+    public EObject create(String fullTypeName) {
+        EClass clazz = getEClass(fullTypeName);
+        if (clazz != null && !(clazz.isAbstract() || clazz.isInterface()))
+            return clazz.getEPackage().getEFactoryInstance().create(clazz);
+        return null;
+    }
 
-	@SuppressWarnings("unchecked")
-	public void add(EObject _this, String feature, Object value, String ruleName) {
-		if (value==null)
-			return;
-	    if (value instanceof Token) {
-			value = ((Token) value).getText();
-			if (ruleName!=null) {
-				value = converterService.toValue((String)value, ruleName);
-			}
-		}
-		EObject eo = (EObject) _this;
-		EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
-		((Collection) eo.eGet(structuralFeature)).add(value);
-	}
+    @Deprecated
+    public void set(EObject _this, String feature, Object value) throws RecognitionException {
+        set(_this, feature, value, null);
+    }
 
-	protected EPackage[] getEPackages(String alias) {
-	    return metamodelAccess.getGeneratedEPackages();
-	}
+    public void set(EObject _this, String feature, Object value, String ruleName) throws RecognitionException {
+        try {
+            if (value instanceof Token) {
+                value = ((Token) value).getText();
+                if (ruleName != null) {
+                    value = converterService.toValue((String) value, ruleName);
+                }
+            }
+            EObject eo = (EObject) _this;
+            EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
+            eo.eSet(structuralFeature, value);
+        } catch (Exception exc) {
+            throw new RecognitionException();
+        }
+    }
 
-	public EClass getEClass(String fullTypeName) {
-		String[] split = fullTypeName.split("::");
-		String typeName = fullTypeName;
-		String alias = null;
-		if (split.length > 1) {
-			alias = split[0];
-			typeName = split[1];
-		}
-		EPackage[] packages = getEPackages(alias);
-		if (packages == null || packages.length == 0) {
-			throw new IllegalStateException("Couldn't find any epackages for alias '" + alias + "'");
-		}
-		for (EPackage package1 : packages) {
-			if (package1 == null)
-				throw new IllegalStateException("Problems loading EPackages for alias '" + alias
-						+ "' - one entry was null.");
-			EClassifier classifier = package1.getEClassifier(typeName);
-			if (classifier instanceof EClass) {
-				return (EClass) classifier;
-			}
-		}
-		return null;
+    @Deprecated
+    public void add(EObject _this, String feature, Object value) throws RecognitionException {
+        add(_this, feature, value, null);
+    }
 
-	}
+    @SuppressWarnings("unchecked")
+    public void add(EObject _this, String feature, Object value, String ruleName) throws RecognitionException {
+        try {
+            if (value == null)
+                return;
+            if (value instanceof Token) {
+                value = ((Token) value).getText();
+                if (ruleName != null) {
+                    value = converterService.toValue((String) value, ruleName);
+                }
+            }
+            EObject eo = (EObject) _this;
+            EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
+            ((Collection) eo.eGet(structuralFeature)).add(value);
+        } catch (Exception exc) {
+            throw new RecognitionException();
+        }
+    }
+
+    protected EPackage[] getEPackages(String alias) {
+        return metamodelAccess.getGeneratedEPackages();
+    }
+
+    public EClass getEClass(String fullTypeName) {
+        String[] split = fullTypeName.split("::");
+        String typeName = fullTypeName;
+        String alias = null;
+        if (split.length > 1) {
+            alias = split[0];
+            typeName = split[1];
+        }
+        EPackage[] packages = getEPackages(alias);
+        if (packages == null || packages.length == 0) {
+            throw new IllegalStateException("Couldn't find any epackages for alias '" + alias + "'");
+        }
+        for (EPackage package1 : packages) {
+            if (package1 == null)
+                throw new IllegalStateException("Problems loading EPackages for alias '" + alias + "' - one entry was null.");
+            EClassifier classifier = package1.getEClassifier(typeName);
+            if (classifier instanceof EClass) {
+                return (EClass) classifier;
+            }
+        }
+        return null;
+
+    }
 
 }
