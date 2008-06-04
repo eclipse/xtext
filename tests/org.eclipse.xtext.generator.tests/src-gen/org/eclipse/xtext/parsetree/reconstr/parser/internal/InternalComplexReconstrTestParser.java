@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-06-04 09:54:02
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-06-04 10:12:56
 
 package org.eclipse.xtext.parsetree.reconstr.parser.internal; 
 
@@ -465,7 +465,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
                                 current = factory.create("Expression");
                                 associateNodeWithAstElement(currentNode, current);
                             }
-                            factory.set(current, "em", lv_em,"'!'");        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"em");    
+                            factory.set(current, "em", lv_em,"!");        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"em");    
 
                     }
                     break;

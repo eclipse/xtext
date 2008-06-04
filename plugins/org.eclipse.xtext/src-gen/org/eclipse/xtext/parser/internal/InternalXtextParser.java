@@ -419,214 +419,6 @@ public class InternalXtextParser extends AbstractAntlrParser {
     // $ANTLR end ruleGrammar
 
 
-    // $ANTLR start ruleAbstractRule
-    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:204:1: ruleAbstractRule returns [EObject current=null] : (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) ;
-    public final EObject ruleAbstractRule() throws RecognitionException {
-        EObject current = null;
-
-        EObject this_LexerRule = null;
-
-        EObject this_ParserRule = null;
-
-
-         EObject temp=null; 
-        try {
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:205:33: ( (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule ) )
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:206:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )
-            {
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:206:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )
-            int alt7=2;
-            int LA7_0 = input.LA(1);
-
-            if ( (LA7_0==RULE_ID) ) {
-                int LA7_1 = input.LA(2);
-
-                if ( (LA7_1==20) ) {
-                    int LA7_2 = input.LA(3);
-
-                    if ( (LA7_2==RULE_ID) ) {
-                        int LA7_4 = input.LA(4);
-
-                        if ( (LA7_4==22) ) {
-                            int LA7_7 = input.LA(5);
-
-                            if ( (LA7_7==RULE_ID) ) {
-                                int LA7_9 = input.LA(6);
-
-                                if ( (LA7_9==16) ) {
-                                    int LA7_3 = input.LA(7);
-
-                                    if ( (LA7_3==RULE_STRING) ) {
-                                        int LA7_5 = input.LA(8);
-
-                                        if ( (LA7_5==21) ) {
-                                            alt7=1;
-                                        }
-                                        else if ( ((LA7_5>=RULE_ID && LA7_5<=RULE_STRING)||(LA7_5>=23 && LA7_5<=26)||LA7_5==30||LA7_5==33) ) {
-                                            alt7=2;
-                                        }
-                                        else {
-                                            NoViableAltException nvae =
-                                                new NoViableAltException("206:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 7, 5, input);
-
-                                            throw nvae;
-                                        }
-                                    }
-                                    else if ( (LA7_3==RULE_ID||LA7_3==30||LA7_3==33) ) {
-                                        alt7=2;
-                                    }
-                                    else {
-                                        NoViableAltException nvae =
-                                            new NoViableAltException("206:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 7, 3, input);
-
-                                        throw nvae;
-                                    }
-                                }
-                                else {
-                                    NoViableAltException nvae =
-                                        new NoViableAltException("206:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 7, 9, input);
-
-                                    throw nvae;
-                                }
-                            }
-                            else {
-                                NoViableAltException nvae =
-                                    new NoViableAltException("206:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 7, 7, input);
-
-                                throw nvae;
-                            }
-                        }
-                        else if ( (LA7_4==16) ) {
-                            int LA7_3 = input.LA(5);
-
-                            if ( (LA7_3==RULE_STRING) ) {
-                                int LA7_5 = input.LA(6);
-
-                                if ( (LA7_5==21) ) {
-                                    alt7=1;
-                                }
-                                else if ( ((LA7_5>=RULE_ID && LA7_5<=RULE_STRING)||(LA7_5>=23 && LA7_5<=26)||LA7_5==30||LA7_5==33) ) {
-                                    alt7=2;
-                                }
-                                else {
-                                    NoViableAltException nvae =
-                                        new NoViableAltException("206:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 7, 5, input);
-
-                                    throw nvae;
-                                }
-                            }
-                            else if ( (LA7_3==RULE_ID||LA7_3==30||LA7_3==33) ) {
-                                alt7=2;
-                            }
-                            else {
-                                NoViableAltException nvae =
-                                    new NoViableAltException("206:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 7, 3, input);
-
-                                throw nvae;
-                            }
-                        }
-                        else {
-                            NoViableAltException nvae =
-                                new NoViableAltException("206:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 7, 4, input);
-
-                            throw nvae;
-                        }
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("206:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 7, 2, input);
-
-                        throw nvae;
-                    }
-                }
-                else if ( (LA7_1==16) ) {
-                    int LA7_3 = input.LA(3);
-
-                    if ( (LA7_3==RULE_STRING) ) {
-                        int LA7_5 = input.LA(4);
-
-                        if ( (LA7_5==21) ) {
-                            alt7=1;
-                        }
-                        else if ( ((LA7_5>=RULE_ID && LA7_5<=RULE_STRING)||(LA7_5>=23 && LA7_5<=26)||LA7_5==30||LA7_5==33) ) {
-                            alt7=2;
-                        }
-                        else {
-                            NoViableAltException nvae =
-                                new NoViableAltException("206:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 7, 5, input);
-
-                            throw nvae;
-                        }
-                    }
-                    else if ( (LA7_3==RULE_ID||LA7_3==30||LA7_3==33) ) {
-                        alt7=2;
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("206:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 7, 3, input);
-
-                        throw nvae;
-                    }
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("206:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 7, 1, input);
-
-                    throw nvae;
-                }
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("206:1: (this_LexerRule= ruleLexerRule | this_ParserRule= ruleParserRule )", 7, 0, input);
-
-                throw nvae;
-            }
-            switch (alt7) {
-                case 1 :
-                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:206:2: this_LexerRule= ruleLexerRule
-                    {
-                    pushFollow(FOLLOW_ruleLexerRule_in_ruleAbstractRule374);
-                    this_LexerRule=ruleLexerRule();
-                    _fsp--;
-
-                     
-                            current = this_LexerRule; 
-                        
-
-                    }
-                    break;
-                case 2 :
-                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:211:6: this_ParserRule= ruleParserRule
-                    {
-                    pushFollow(FOLLOW_ruleParserRule_in_ruleAbstractRule390);
-                    this_ParserRule=ruleParserRule();
-                    _fsp--;
-
-                     
-                            current = this_ParserRule; 
-                        
-
-                    }
-                    break;
-
-            }
-
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end ruleAbstractRule
 
 
     // $ANTLR start ruleAbstractMetamodelDeclaration
@@ -768,7 +560,7 @@ public class InternalXtextParser extends AbstractAntlrParser {
                         current = factory.create("GeneratedMetamodel");
                         associateNodeWithAstElement(currentNode, current);
                     }
-                    factory.set(current, "nsURI", lv_nsURI);    
+                    factory.set(current, "nsURI", lv_nsURI, "STRING");    
 
             }
 
@@ -870,7 +662,7 @@ public class InternalXtextParser extends AbstractAntlrParser {
                         current = factory.create("ReferencedMetamodel");
                         associateNodeWithAstElement(currentNode, current);
                     }
-                    factory.set(current, "uri", lv_uri);    
+                    factory.set(current, "uri", lv_uri, "STRING");    
 
             }
 
@@ -1044,7 +836,7 @@ public class InternalXtextParser extends AbstractAntlrParser {
                         current = factory.create("LexerRule");
                         associateNodeWithAstElement(currentNode, current);
                     }
-                    factory.set(current, "body", lv_body);    
+                    factory.set(current, "body", lv_body, "STRING");    
 
             }
 
@@ -2206,7 +1998,7 @@ public class InternalXtextParser extends AbstractAntlrParser {
                         current = factory.create("Keyword");
                         associateNodeWithAstElement(currentNode, current);
                     }
-                    factory.set(current, "value", lv_value);    
+                    factory.set(current, "value", lv_value, "STRING");    
 
             }
 

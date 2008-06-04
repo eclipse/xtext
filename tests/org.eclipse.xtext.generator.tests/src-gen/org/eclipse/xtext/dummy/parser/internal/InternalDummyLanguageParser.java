@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g 2008-06-04 09:54:01
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g 2008-06-04 10:12:55
 
 package org.eclipse.xtext.dummy.parser.internal; 
 
@@ -205,7 +205,7 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
                                 current = factory.create("Element");
                                 associateNodeWithAstElement(currentNode, current);
                             }
-                            factory.set(current, "optional", true,"'optional'");        createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, currentNode,"optional");    
+                            factory.set(current, "optional", true,"optional");        createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, currentNode,"optional");    
 
                     }
                     break;
