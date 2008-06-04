@@ -27,5 +27,8 @@ editorPackage(Grammar this):
 editorClassFQN(Grammar this):    
     editorPackage() + "." + languageName() + "XtextEditor";
     
+editorExtensionId(Grammar this):
+    editorClassFQN();
+    
 toJavaFilePath(String name):
     name.replaceAll('\\.','/') + ".java";
