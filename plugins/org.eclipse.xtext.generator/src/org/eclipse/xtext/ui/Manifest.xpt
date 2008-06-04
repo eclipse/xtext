@@ -16,23 +16,18 @@
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
 «DEFINE file FOR Grammar»
-«FILE editorClassFQN().toJavaFilePath() UI_SRC_GEN -»
-package «editorPackage()»;
-
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
-import org.eclipse.xtext.ui.core.editor.BaseTextEditor;
-
-/**
- * @author Generated with Xtext
- * @generated
- */
-public class «languageName()»XtextEditor extends BaseTextEditor {
-    
-    protected ILanguageDescriptor initializeLanguageDescriptor() {
-        return LanguageDescriptorFactory.get("«languageId()»");
-    }
-
-}
-«ENDFILE»
+«FILE "MANIFEST.MF" UI_MANIFEST -»
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: «languageName()» UI Plug-in
+Bundle-SymbolicName: «bundleId()»;singleton:=true
+Bundle-Version: 1.0.0
+Require-Bundle: «packageName()»;bundle-version="1.0.0",
+ org.eclipse.xtext.ui;bundle-version="1.0.0",
+ org.eclipse.ui.editors;bundle-version="3.4.0",
+ org.eclipse.ui
+Bundle-Vendor: itemis AG
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+«ENDFILE-»
 «ENDDEFINE»

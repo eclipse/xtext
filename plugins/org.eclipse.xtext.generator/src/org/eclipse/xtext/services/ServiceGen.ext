@@ -11,7 +11,7 @@ import xtext;
 extension org::eclipse::xtext::Properties reexport;
 
 List[String] services() :
-		{'Parser', 'ASTFactory', 'ResourceFactory', 'GrammarAccess', 'MetamodelAccess', 'ParseTreeConstructor' };
+	{'Parser', 'ASTFactory', 'ResourceFactory', 'GrammarAccess', 'MetamodelAccess', 'ParseTreeConstructor', 'ValueConverter' };
 		
 String serviceInterface(Grammar this, String serviceName) :
 	switch(serviceName) {
@@ -21,6 +21,7 @@ String serviceInterface(Grammar this, String serviceName) :
 		case 'ResourceFactory': 'org.eclipse.xtext.resource.IResourceFactory'
 		case 'GrammarAccess': 'org.eclipse.xtext.IGrammarAccess'
 		case 'MetamodelAccess': 'org.eclipse.xtext.IMetamodelAccess'
+		case 'ValueConverter': 'org.eclipse.xtext.conversion.IValueConverterService'
 		default: ''
 	};
 		
@@ -32,12 +33,14 @@ String serviceClass(Grammar this, String serviceName) :
 		case 'ResourceFactory': languageName() + 'ResourceFactory'
 		case 'GrammarAccess': languageName() + 'GrammarAccess'
 		case 'MetamodelAccess': languageName() + 'MetamodelAccess'
+		case 'ValueConverter': 'org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters'
 		default: ''
 	};
 	
 String serviceClassFQN(Grammar this, String serviceName) :
     switch(serviceName) { 
         case 'ASTFactory': serviceClass(serviceName)
+        case 'ValueConverter': serviceClass(serviceName)
         default: packageName() + subpackage(serviceName) + '.' + serviceClass(serviceName)
     };
     
@@ -55,6 +58,7 @@ private String subpackage(String serviceName) :
         case 'ResourceFactory': '.services'
         case 'GrammarAccess': '.services'
         case 'MetamodelAccess': '.services'
+        case 'ValueConverter': '.services'
         default: ''
     };
 

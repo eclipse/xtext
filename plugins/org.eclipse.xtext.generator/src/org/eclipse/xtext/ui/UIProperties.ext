@@ -1,0 +1,31 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+import xtext;
+
+extension org::eclipse::xtext::util::GenProperties;
+extension org::eclipse::xtext::Extensions;
+extension org::eclipse::xtext::Properties;
+
+bundleId(Grammar this):
+    packageName() + ".ui_gen";
+    
+projectName(Grammar this):
+    bundleId();
+    
+activatorClassFQN(Grammar this):
+    packageName() + ".internal." + "Activator";
+    
+editorPackage(Grammar this):
+    packageName() + ".ui.editor";
+    
+editorClassFQN(Grammar this):    
+    editorPackage() + "." + languageName() + "XtextEditor";
+    
+toJavaFilePath(String name):
+    name.replaceAll('\\.','/') + ".java";
