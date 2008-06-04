@@ -8,6 +8,6 @@ import org.eclipse.xtext.parsetree.AbstractParseTreeConstructor;
 public class ActionTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public void update(EObject object) {
-		new InternalActionTestLanguageParseTreeConstructor(getFactory(),getGrammar()).update(object);
+		new InternalActionTestLanguageParseTreeConstructor(getFactory(),getGrammar(),getValueConverterService()).update(object);
 	}
 }

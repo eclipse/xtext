@@ -109,8 +109,9 @@ ruleModel returns [EObject current=null]
             $current = factory.create("Model");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "children", lv_children);    }
+        factory.add($current, "children", lv_children,null);    }
 )*;
+
 
 
 // Rule Element
@@ -127,7 +128,7 @@ ruleElement returns [EObject current=null]
             $current = factory.create("Element");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 )(
     lv_h=RULE_STRING
     { 
@@ -139,12 +140,13 @@ ruleElement returns [EObject current=null]
             $current = factory.create("Element");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "h", lv_h);    }
+        factory.set($current, "h", lv_h,"STRING");    }
 ));
 
 
 
-RULE_STRING : " '#' ('B')+ ";
+
+RULE_STRING :  '#' ('B')+ ;
 
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

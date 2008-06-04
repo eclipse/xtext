@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="complexrewritetest" nsURI="http://complex/rewrite/test" nsPrefix="complexrewritetest">
-  <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="addOperands" upperBound="-1" eType="//Expression" containment="true" resolveProxies="false"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Atom" eSuperTypes="//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="addOperands" upperBound="-1" eType="//Expression" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="em">

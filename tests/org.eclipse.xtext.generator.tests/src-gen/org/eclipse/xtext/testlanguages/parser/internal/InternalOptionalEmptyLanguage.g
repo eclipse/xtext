@@ -109,8 +109,9 @@ ruleModel returns [EObject current=null]
             $current = factory.create("Model");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "child", lv_child);    }
+        factory.set($current, "child", lv_child,null);    }
 )?;
+
 
 
 // Rule Greeting
@@ -132,8 +133,9 @@ ruleGreeting returns [EObject current=null]
             $current = factory.create("Greeting");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 ));
+
 
 
 

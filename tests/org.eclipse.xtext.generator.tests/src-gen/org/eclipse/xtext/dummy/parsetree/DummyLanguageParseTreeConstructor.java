@@ -8,6 +8,6 @@ import org.eclipse.xtext.parsetree.AbstractParseTreeConstructor;
 public class DummyLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public void update(EObject object) {
-		new InternalDummyLanguageParseTreeConstructor(getFactory(),getGrammar()).update(object);
+		new InternalDummyLanguageParseTreeConstructor(getFactory(),getGrammar(),getValueConverterService()).update(object);
 	}
 }

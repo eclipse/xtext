@@ -8,6 +8,6 @@ import org.eclipse.xtext.parsetree.AbstractParseTreeConstructor;
 public class LexerLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public void update(EObject object) {
-		new InternalLexerLanguageParseTreeConstructor(getFactory(),getGrammar()).update(object);
+		new InternalLexerLanguageParseTreeConstructor(getFactory(),getGrammar(),getValueConverterService()).update(object);
 	}
 }

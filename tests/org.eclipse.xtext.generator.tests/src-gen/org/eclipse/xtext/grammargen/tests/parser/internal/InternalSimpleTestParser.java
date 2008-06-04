@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-06-04 08:53:33
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.g 2008-06-04 09:53:56
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
@@ -117,7 +117,7 @@ public class InternalSimpleTestParser extends AbstractAntlrParser {
                         current = factory.create("Foo");
                         associateNodeWithAstElement(currentNode, current);
                     }
-                    factory.set(current, "name", lv_name);    
+                    factory.set(current, "name", lv_name,"ID");    
 
             }
 
