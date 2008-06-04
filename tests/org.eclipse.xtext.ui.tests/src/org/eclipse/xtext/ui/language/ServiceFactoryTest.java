@@ -26,7 +26,7 @@ public class ServiceFactoryTest extends TestCase {
 		ILanguageDescriptor language = LanguageDescriptorFactory.get("org.eclipse.xtext.ui.tests.dummylanguage");
 		ISyntaxColorer syntaxColorer = ServiceRegistry.getService(language, ISyntaxColorer.class);
 		assertNotNull(syntaxColorer);
-		assertEquals("org.eclipse.xtext.ui.language.SyntaxColorer1", syntaxColorer.getClass().getName());
+		assertEquals("org.eclipse.xtext.ui.SyntaxColorer1", syntaxColorer.getClass().getName());
 	}
 	
 	public void testGetServiceWithoutClass() {
