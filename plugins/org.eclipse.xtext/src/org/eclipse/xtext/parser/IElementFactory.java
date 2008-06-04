@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import org.antlr.runtime.RecognitionException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.service.ILanguageService;
 
@@ -32,9 +33,10 @@ public interface IElementFactory extends ILanguageService {
 	 * @param _this
 	 * @param feature
 	 * @param value
+	 * @throws RecognitionException 
 	 */
-	public void set(EObject _this, String feature, Object value);
-	public void set(EObject _this, String feature, Object value, String lexerRule);
+	public void set(EObject _this, String feature, Object value) throws RecognitionException;
+	public void set(EObject _this, String feature, Object value, String lexerRule) throws RecognitionException;
 
 	/**
 	 * adds the value to the feature of _this element
@@ -43,7 +45,7 @@ public interface IElementFactory extends ILanguageService {
 	 * @param feature
 	 * @param value
 	 */
-	public void add(EObject _this, String feature, Object value);
-	public void add(EObject _this, String feature, Object value, String lexerRule);
+	public void add(EObject _this, String feature, Object value) throws RecognitionException;
+	public void add(EObject _this, String feature, Object value, String lexerRule) throws RecognitionException;
 
 }
