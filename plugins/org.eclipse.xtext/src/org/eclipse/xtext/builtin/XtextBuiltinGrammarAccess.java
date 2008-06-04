@@ -5,6 +5,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ReferencedMetamodel;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
 
 public class XtextBuiltinGrammarAccess implements IGrammarAccess {
@@ -27,6 +28,10 @@ public class XtextBuiltinGrammarAccess implements IGrammarAccess {
 		l = f.createLexerRule();
 		l.setName("INT");
 		l.setBody("('0'..'9')+");
+		TypeRef intType = f.createTypeRef();
+		intType.setAlias("ecore");
+		intType.setName("EInt");
+		l.setType(intType);
 		g.getLexerRules().add(l);
 		l = f.createLexerRule();
 		l.setName("STRING");

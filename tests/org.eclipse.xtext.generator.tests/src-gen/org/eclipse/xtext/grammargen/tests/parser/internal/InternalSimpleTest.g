@@ -108,8 +108,9 @@ ruleFoo returns [EObject current=null]
             $current = factory.create("Foo");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 );
+
 
 
 

@@ -122,7 +122,7 @@ ruleMultiplication returns [EObject current=null]
             $current = factory.create("Expression");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "operator", lv_operator);        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"operator");    }
+        factory.set($current, "operator", lv_operator,null);        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"operator");    }
 ))(
     
     { 
@@ -135,8 +135,9 @@ ruleMultiplication returns [EObject current=null]
             $current = factory.create("Expression");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "values", lv_values);    }
+        factory.add($current, "values", lv_values,null);    }
 ))*);
+
 
 
 // Rule Addition
@@ -167,7 +168,7 @@ ruleAddition returns [EObject current=null]
             $current = factory.create("Expression");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "operator", lv_operator);        createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"operator");    }
+        factory.set($current, "operator", lv_operator,null);        createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"operator");    }
 ))(
     
     { 
@@ -180,8 +181,9 @@ ruleAddition returns [EObject current=null]
             $current = factory.create("Expression");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "values", lv_values);    }
+        factory.add($current, "values", lv_values,null);    }
 ))*);
+
 
 
 // Rule Term
@@ -199,6 +201,7 @@ ruleTerm returns [EObject current=null]
 );
 
 
+
 // Rule Atom
 ruleAtom returns [EObject current=null] 
     @init { EObject temp=null; }:
@@ -213,8 +216,9 @@ ruleAtom returns [EObject current=null]
             $current = factory.create("Atom");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 );
+
 
 
 // Rule Parens
@@ -235,6 +239,7 @@ this_Multiplication=ruleMultiplication
         createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
+
 
 
 

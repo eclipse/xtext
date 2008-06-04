@@ -109,8 +109,9 @@ ruleModel returns [EObject current=null]
             $current = factory.create("Model");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "contents", lv_contents);    }
+        factory.add($current, "contents", lv_contents,null);    }
 )*;
+
 
 
 // Rule Child
@@ -124,7 +125,7 @@ ruleChild returns [EObject current=null]
             $current = factory.create("Child");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "optional", true);        createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, currentNode,"optional");    }
+        factory.set($current, "optional", true,"'optional'");        createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, currentNode,"optional");    }
 )?'keyword' 
 
     {
@@ -141,7 +142,7 @@ ruleChild returns [EObject current=null]
             $current = factory.create("Child");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 ))(
     lv_number=RULE_INT
     { 
@@ -153,7 +154,7 @@ ruleChild returns [EObject current=null]
             $current = factory.create("Child");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "number", lv_number);    }
+        factory.set($current, "number", lv_number,"INT");    }
 ))'{' 
 
     {
@@ -165,6 +166,7 @@ ruleChild returns [EObject current=null]
         createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
+
 
 
 

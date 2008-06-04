@@ -109,8 +109,9 @@ ruleEntryRule returns [EObject current=null]
             $current = factory.create("Model");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "multiFeature", lv_multiFeature);    }
+        factory.add($current, "multiFeature", lv_multiFeature,null);    }
 )*;
+
 
 
 // Rule AbstractRule
@@ -126,6 +127,7 @@ ruleAbstractRule returns [EObject current=null]
         $current = $this_ReducibleRule.current; 
     }
 );
+
 
 
 // Rule ChoiceRule
@@ -144,7 +146,7 @@ ruleChoiceRule returns [EObject current=null]
             $current = factory.create("ChoiceElement");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "optionalKeyword", true);        createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"optionalKeyword");    }
+        factory.set($current, "optionalKeyword", true,"'optional'");        createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"optionalKeyword");    }
 )?)(
     lv_name=RULE_ID
     { 
@@ -156,8 +158,9 @@ ruleChoiceRule returns [EObject current=null]
             $current = factory.create("ChoiceElement");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 ));
+
 
 
 // Rule ReducibleRule
@@ -195,8 +198,9 @@ this_TerminalRule=ruleTerminalRule
             $current = factory.create("ReducibleElement");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "actionFeature", lv_actionFeature);    }
+        factory.add($current, "actionFeature", lv_actionFeature,null);    }
 ))?);
+
 
 
 // Rule TerminalRule
@@ -213,8 +217,9 @@ ruleTerminalRule returns [EObject current=null]
             $current = factory.create("TerminalElement");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "stringFeature", lv_stringFeature);    }
+        factory.set($current, "stringFeature", lv_stringFeature,"STRING");    }
 );
+
 
 
 

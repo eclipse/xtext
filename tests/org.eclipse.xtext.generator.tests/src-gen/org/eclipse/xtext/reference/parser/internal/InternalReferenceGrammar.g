@@ -113,7 +113,7 @@ ruleSpielplatz returns [EObject current=null]
             $current = factory.create("Spielplatz");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "groesse", lv_groesse);    }
+        factory.set($current, "groesse", lv_groesse,"INT");    }
 ))'{' 
 
     {
@@ -131,7 +131,7 @@ ruleSpielplatz returns [EObject current=null]
             $current = factory.create("Spielplatz");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "kinder", lv_kinder);    }
+        factory.add($current, "kinder", lv_kinder,null);    }
 )
     |(
     
@@ -145,7 +145,7 @@ ruleSpielplatz returns [EObject current=null]
             $current = factory.create("Spielplatz");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "erzieher", lv_erzieher);    }
+        factory.add($current, "erzieher", lv_erzieher,null);    }
 ))
     |(
     
@@ -159,7 +159,7 @@ ruleSpielplatz returns [EObject current=null]
             $current = factory.create("Spielplatz");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "spielzeuge", lv_spielzeuge);    }
+        factory.add($current, "spielzeuge", lv_spielzeuge,null);    }
 ))*)'}' 
 
     {
@@ -168,19 +168,7 @@ ruleSpielplatz returns [EObject current=null]
 )?;
 
 
-// Rule Person
-rulePerson returns [EObject current=null] 
-    @init { EObject temp=null; }:
-(this_Kind=ruleKind
-    { 
-        $current = $this_Kind.current; 
-    }
 
-    |this_Erwachsener=ruleErwachsener
-    { 
-        $current = $this_Erwachsener.current; 
-    }
-);
 
 
 // Rule Kind
@@ -207,7 +195,7 @@ ruleKind returns [EObject current=null]
             $current = factory.create("Kind");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 ))(
     lv_age=RULE_INT
     { 
@@ -219,13 +207,14 @@ ruleKind returns [EObject current=null]
             $current = factory.create("Kind");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "age", lv_age);    }
+        factory.set($current, "age", lv_age,"INT");    }
 ))')' 
 
     {
         createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
+
 
 
 // Rule Erwachsener
@@ -252,7 +241,7 @@ ruleErwachsener returns [EObject current=null]
             $current = factory.create("Erwachsener");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 ))(
     lv_age=RULE_INT
     { 
@@ -264,13 +253,14 @@ ruleErwachsener returns [EObject current=null]
             $current = factory.create("Erwachsener");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "age", lv_age);    }
+        factory.set($current, "age", lv_age,"INT");    }
 ))')' 
 
     {
         createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
+
 
 
 // Rule Spielzeug
@@ -297,7 +287,7 @@ ruleSpielzeug returns [EObject current=null]
             $current = factory.create("Spielzeug");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 ))(
     
     { 
@@ -310,13 +300,14 @@ ruleSpielzeug returns [EObject current=null]
             $current = factory.create("Spielzeug");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "farbe", lv_farbe);    }
+        factory.set($current, "farbe", lv_farbe,null);    }
 ))')' 
 
     {
         createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
+
 
 
 // Rule Farbe
@@ -346,6 +337,7 @@ ruleFarbe returns [EObject current=null]
         createLeafNode("//@parserRules.5/@alternatives/@groups.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
+
 
 
 

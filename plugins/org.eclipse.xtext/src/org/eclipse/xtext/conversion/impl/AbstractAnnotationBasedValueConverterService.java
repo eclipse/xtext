@@ -44,11 +44,11 @@ public class AbstractAnnotationBasedValueConverterService implements IValueConve
 			if(isConfigurationMethod(method)) {
 				try {
 					String lexerRule = method.getAnnotation(ValueConverter.class).rule();
-					if (!converters.containsKey(lexerRule)) {
+					if (converters.containsKey(lexerRule)) {
 						log.info("value converter for lexer rule "+lexerRule+ " in class "+class1.getSimpleName()+" has been overwritten.");
-					} else {
-						converters.put(lexerRule, (IValueConverter) method.invoke(this));
 					}
+					converters.put(lexerRule, (IValueConverter) method.invoke(this));
+					
 				} catch (Exception e) {
 					log.error(e.getMessage(), e);
 				}

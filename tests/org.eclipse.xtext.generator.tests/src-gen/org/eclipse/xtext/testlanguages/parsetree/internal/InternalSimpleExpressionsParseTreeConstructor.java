@@ -4,14 +4,15 @@ package org.eclipse.xtext.testlanguages.parsetree.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parsetree.Predicate;
 import org.eclipse.xtext.parsetree.internal.AbstractInternalParseTreeConstructor;
 
 public class InternalSimpleExpressionsParseTreeConstructor extends AbstractInternalParseTreeConstructor {
 
-	public InternalSimpleExpressionsParseTreeConstructor(GenericEcoreElementFactory factory, Grammar grammar) {
-		super(factory,grammar);
+	public InternalSimpleExpressionsParseTreeConstructor(GenericEcoreElementFactory factory, Grammar grammar, IValueConverterService converterService) {
+		super(factory,grammar,converterService);
 	}
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {

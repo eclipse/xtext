@@ -10,6 +10,8 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.builtin,
  org.eclipse.xtext.builtin.conversion,
+ org.eclipse.xtext.conversion,
+ org.eclipse.xtext.conversion.impl,
  org.eclipse.xtext.parser,
  org.eclipse.xtext.parser.antlr,
  org.eclipse.xtext.parser.impl,

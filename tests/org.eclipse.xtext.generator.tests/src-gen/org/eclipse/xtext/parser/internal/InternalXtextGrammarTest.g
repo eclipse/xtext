@@ -113,7 +113,7 @@ ruleGrammar returns [EObject current=null]
             $current = factory.create("Grammar");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "idElements", lv_idElements);    }
+        factory.add($current, "idElements", lv_idElements,"ID");    }
 ))('.' 
 
     {
@@ -130,7 +130,7 @@ ruleGrammar returns [EObject current=null]
             $current = factory.create("Grammar");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "idElements", lv_idElements);    }
+        factory.add($current, "idElements", lv_idElements,"ID");    }
 ))*)('extends' 
 
     {
@@ -147,7 +147,7 @@ ruleGrammar returns [EObject current=null]
             $current = factory.create("Grammar");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "superGrammar", lv_superGrammar);    }
+        factory.set($current, "superGrammar", lv_superGrammar,"ID");    }
 ))?)?(
     
     { 
@@ -160,7 +160,7 @@ ruleGrammar returns [EObject current=null]
             $current = factory.create("Grammar");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "metamodelDeclarations", lv_metamodelDeclarations);    }
+        factory.add($current, "metamodelDeclarations", lv_metamodelDeclarations,null);    }
 )*)(
     
     { 
@@ -173,7 +173,7 @@ ruleGrammar returns [EObject current=null]
             $current = factory.create("Grammar");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "parserRules", lv_parserRules);    }
+        factory.add($current, "parserRules", lv_parserRules,null);    }
 )*)(('lexing' 
 
     {
@@ -196,23 +196,11 @@ ruleGrammar returns [EObject current=null]
             $current = factory.create("Grammar");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "lexerRules", lv_lexerRules);    }
+        factory.add($current, "lexerRules", lv_lexerRules,null);    }
 )+)?);
 
 
-// Rule AbstractRule
-ruleAbstractRule returns [EObject current=null] 
-    @init { EObject temp=null; }:
-(this_LexerRule=ruleLexerRule
-    { 
-        $current = $this_LexerRule.current; 
-    }
 
-    |this_ParserRule=ruleParserRule
-    { 
-        $current = $this_ParserRule.current; 
-    }
-);
 
 
 // Rule AbstractMetamodelDeclaration
@@ -228,6 +216,7 @@ ruleAbstractMetamodelDeclaration returns [EObject current=null]
         $current = $this_ReferencedMetamodel.current; 
     }
 );
+
 
 
 // Rule GeneratedMetamodel
@@ -249,7 +238,7 @@ ruleGeneratedMetamodel returns [EObject current=null]
             $current = factory.create("GeneratedMetamodel");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 ))(
     lv_nsURI=RULE_STRING
     { 
@@ -261,7 +250,7 @@ ruleGeneratedMetamodel returns [EObject current=null]
             $current = factory.create("GeneratedMetamodel");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "nsURI", lv_nsURI);    }
+        factory.set($current, "nsURI", lv_nsURI,"STRING");    }
 ))('as' 
 
     {
@@ -278,8 +267,9 @@ ruleGeneratedMetamodel returns [EObject current=null]
             $current = factory.create("GeneratedMetamodel");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "alias", lv_alias);    }
+        factory.set($current, "alias", lv_alias,"ID");    }
 ))?);
+
 
 
 // Rule ReferencedMetamodel
@@ -301,7 +291,7 @@ ruleReferencedMetamodel returns [EObject current=null]
             $current = factory.create("ReferencedMetamodel");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "uri", lv_uri);    }
+        factory.set($current, "uri", lv_uri,"STRING");    }
 ))('as' 
 
     {
@@ -318,8 +308,9 @@ ruleReferencedMetamodel returns [EObject current=null]
             $current = factory.create("ReferencedMetamodel");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "alias", lv_alias);    }
+        factory.set($current, "alias", lv_alias,"ID");    }
 ))?);
+
 
 
 // Rule LexerRule
@@ -336,7 +327,7 @@ ruleLexerRule returns [EObject current=null]
             $current = factory.create("LexerRule");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 )('returns' 
 
     {
@@ -354,7 +345,7 @@ ruleLexerRule returns [EObject current=null]
             $current = factory.create("LexerRule");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "type", lv_type);    }
+        factory.set($current, "type", lv_type,null);    }
 ))?)':' 
 
     {
@@ -371,8 +362,9 @@ ruleLexerRule returns [EObject current=null]
             $current = factory.create("LexerRule");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "body", lv_body);    }
+        factory.set($current, "body", lv_body,"LEXER_BODY");    }
 ));
+
 
 
 // Rule ParserRule
@@ -389,7 +381,7 @@ ruleParserRule returns [EObject current=null]
             $current = factory.create("ParserRule");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 )('returns' 
 
     {
@@ -407,7 +399,7 @@ ruleParserRule returns [EObject current=null]
             $current = factory.create("ParserRule");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "type", lv_type);    }
+        factory.set($current, "type", lv_type,null);    }
 ))?)':' 
 
     {
@@ -425,13 +417,14 @@ ruleParserRule returns [EObject current=null]
             $current = factory.create("ParserRule");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "alternatives", lv_alternatives);    }
+        factory.set($current, "alternatives", lv_alternatives,null);    }
 ))';' 
 
     {
         createLeafNode("//@parserRules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
+
 
 
 // Rule TypeRef
@@ -448,7 +441,7 @@ ruleTypeRef returns [EObject current=null]
             $current = factory.create("TypeRef");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "alias", lv_alias);    }
+        factory.set($current, "alias", lv_alias,"ID");    }
 )'::' 
 
     {
@@ -465,8 +458,9 @@ ruleTypeRef returns [EObject current=null]
             $current = factory.create("TypeRef");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 ));
+
 
 
 // Rule Alternatives
@@ -504,8 +498,9 @@ ruleAlternatives returns [EObject current=null]
             $current = factory.create("AbstractElement");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "groups", lv_groups);    }
+        factory.add($current, "groups", lv_groups,null);    }
 ))*);
+
 
 
 // Rule Group
@@ -538,8 +533,9 @@ ruleGroup returns [EObject current=null]
             $current = factory.create("AbstractElement");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "abstractTokens", lv_abstractTokens);    }
+        factory.add($current, "abstractTokens", lv_abstractTokens,null);    }
 ))*);
+
 
 
 // Rule AbstractToken
@@ -571,8 +567,9 @@ ruleAbstractToken returns [EObject current=null]
             $current = factory.create("AbstractElement");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "cardinality", lv_cardinality);        createLeafNode("//@parserRules.10/@alternatives/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"cardinality");    }
+        factory.set($current, "cardinality", lv_cardinality,null);        createLeafNode("//@parserRules.10/@alternatives/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"cardinality");    }
 )?);
+
 
 
 // Rule Assignment
@@ -589,7 +586,7 @@ ruleAssignment returns [EObject current=null]
             $current = factory.create("Assignment");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "feature", lv_feature);    }
+        factory.set($current, "feature", lv_feature,"ID");    }
 )(
     lv_operator=(('+=' 
 
@@ -602,7 +599,7 @@ ruleAssignment returns [EObject current=null]
             $current = factory.create("Assignment");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "operator", lv_operator);        createLeafNode("//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"operator");    }
+        factory.set($current, "operator", lv_operator,null);        createLeafNode("//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"operator");    }
 ))(
     
     { 
@@ -615,8 +612,9 @@ ruleAssignment returns [EObject current=null]
             $current = factory.create("Assignment");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "terminal", lv_terminal);    }
+        factory.set($current, "terminal", lv_terminal,null);    }
 ));
+
 
 
 // Rule Action
@@ -649,7 +647,7 @@ ruleAction returns [EObject current=null]
             $current = factory.create("Action");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "typeName", lv_typeName);    }
+        factory.set($current, "typeName", lv_typeName,null);    }
 ))((('.' 
 
     {
@@ -666,7 +664,7 @@ ruleAction returns [EObject current=null]
             $current = factory.create("Action");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "feature", lv_feature);    }
+        factory.set($current, "feature", lv_feature,"ID");    }
 ))(
     lv_operator=('=' 
 
@@ -677,7 +675,7 @@ ruleAction returns [EObject current=null]
             $current = factory.create("Action");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "operator", lv_operator);        createLeafNode("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"operator");    }
+        factory.set($current, "operator", lv_operator,null);        createLeafNode("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"operator");    }
 ))'current' 
 
     {
@@ -689,6 +687,7 @@ ruleAction returns [EObject current=null]
         createLeafNode("//@parserRules.12/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
+
 
 
 // Rule AbstractTerminal
@@ -711,6 +710,7 @@ ruleAbstractTerminal returns [EObject current=null]
 );
 
 
+
 // Rule ParenthesizedElement
 ruleParenthesizedElement returns [EObject current=null] 
     @init { EObject temp=null; }:
@@ -731,6 +731,7 @@ this_Alternatives=ruleAlternatives
 );
 
 
+
 // Rule Keyword
 ruleKeyword returns [EObject current=null] 
     @init { EObject temp=null; }:
@@ -745,8 +746,9 @@ ruleKeyword returns [EObject current=null]
             $current = factory.create("Keyword");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "value", lv_value);    }
+        factory.set($current, "value", lv_value,"STRING");    }
 );
+
 
 
 // Rule RuleCall
@@ -763,8 +765,9 @@ ruleRuleCall returns [EObject current=null]
             $current = factory.create("RuleCall");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 );
+
 
 
 

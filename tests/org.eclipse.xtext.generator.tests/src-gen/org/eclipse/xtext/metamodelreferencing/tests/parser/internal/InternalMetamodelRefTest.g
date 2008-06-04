@@ -108,7 +108,7 @@ ruleFoo returns [EObject current=null]
             $current = factory.create("Foo");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 )(
     
     { 
@@ -121,8 +121,9 @@ ruleFoo returns [EObject current=null]
             $current = factory.create("Foo");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "nameRefs", lv_nameRefs);    }
+        factory.add($current, "nameRefs", lv_nameRefs,null);    }
 )*);
+
 
 
 // Rule NameRef
@@ -139,8 +140,9 @@ ruleNameRef returns [EObject current=null]
             $current = factory.create("xtext::RuleCall");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"STRING");    }
 );
+
 
 
 

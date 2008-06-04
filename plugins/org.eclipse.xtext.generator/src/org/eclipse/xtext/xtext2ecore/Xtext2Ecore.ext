@@ -30,11 +30,11 @@ cached EPackage getEPackage(MetaModel this) :
 	if this.isGenerate() then
 		createEPackage((GeneratedMetamodel)declaration, this)
 	else 
-		loadEPackage(((ReferencedMetamodel)declaration).uri.trimFromStartAndEnd(1));
+		loadEPackage(((ReferencedMetamodel)declaration).uri);
 
 create EPackage createEPackage(GeneratedMetamodel mm, MetaModel metaModel) :
 	setName(mm.name) ->
-	setNsURI(mm.nsURI.trimFromStartAndEnd(1)) ->
+	setNsURI(mm.nsURI) ->
 	setNsPrefix(mm.name) ->
 	eClassifiers.addAll(metaModel.types.getEClassifier()) 
 ;

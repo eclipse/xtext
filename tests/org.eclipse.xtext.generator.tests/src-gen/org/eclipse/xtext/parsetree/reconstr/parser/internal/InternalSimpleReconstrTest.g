@@ -124,8 +124,9 @@ ruleOp returns [EObject current=null]
             $current = factory.create("Expression");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "values", lv_values);    }
+        factory.add($current, "values", lv_values,null);    }
 ))*);
+
 
 
 // Rule Term
@@ -143,6 +144,7 @@ ruleTerm returns [EObject current=null]
 );
 
 
+
 // Rule Atom
 ruleAtom returns [EObject current=null] 
     @init { EObject temp=null; }:
@@ -157,8 +159,9 @@ ruleAtom returns [EObject current=null]
             $current = factory.create("Atom");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name);    }
+        factory.set($current, "name", lv_name,"ID");    }
 );
+
 
 
 // Rule Parens
@@ -186,8 +189,9 @@ this_Op=ruleOp
             $current = factory.create("Expression");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "em", lv_em);        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"em");    }
+        factory.set($current, "em", lv_em,"'!'");        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"em");    }
 )?);
+
 
 
 

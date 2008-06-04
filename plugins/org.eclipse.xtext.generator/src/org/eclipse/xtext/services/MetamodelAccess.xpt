@@ -45,7 +45,7 @@ public class «serviceClass('MetamodelAccess')»  extends BaseEPackageAccess imple
 	}
 
 	«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm»
-	public static final String «gmm.name.toUpperCase()»_NS_URI = "«gmm.nsURI.trimFromStartAndEnd(1)»";
+	public static final String «gmm.name.toUpperCase()»_NS_URI = "«gmm.nsURI»";
 	public static final String «gmm.name.toUpperCase()»_CP_URI = "«pathName()»/«gmm.name».ecore";
 	
 	public static EPackage get«gmm.name.toFirstUpper()»EPackage() {	

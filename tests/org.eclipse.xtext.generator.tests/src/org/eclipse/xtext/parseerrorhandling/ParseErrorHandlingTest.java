@@ -68,7 +68,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		//System.out.println(errors);
 		assertWithXtend("'ID'", "parserRules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
 		assertWithXtend("null", "parserRules.first().eAllContents.typeSelect(XtextTest::Keyword).first().name", object);
-		assertWithXtend("\"'stuff'\"", "parserRules.get(1).eAllContents.typeSelect(XtextTest::Keyword).first().value", object);
+		assertWithXtend("'stuff'", "parserRules.get(1).eAllContents.typeSelect(XtextTest::Keyword).first().value", object);
 	}
 	
 	

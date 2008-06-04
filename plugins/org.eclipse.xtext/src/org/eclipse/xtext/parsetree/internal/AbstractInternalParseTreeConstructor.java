@@ -22,6 +22,8 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -39,10 +41,12 @@ public abstract class AbstractInternalParseTreeConstructor {
 
     private GenericEcoreElementFactory factory;
 	private Grammar grammar;
+	private IValueConverterService converterService;
 
-	public AbstractInternalParseTreeConstructor(GenericEcoreElementFactory factory, Grammar grammar) {
+	public AbstractInternalParseTreeConstructor(GenericEcoreElementFactory factory, Grammar grammar, IValueConverterService converterService) {
 		this.factory =factory;
 		this.grammar = grammar;
+		this.converterService = converterService;
 	}
 	
 	protected Grammar getGrammar() {
@@ -236,7 +240,7 @@ public abstract class AbstractInternalParseTreeConstructor {
 		checkWhitespace();
 		LeafNode ln = ParsetreeFactory.eINSTANCE.createLeafNode();
 		ln.setGrammarElement(ruleCall);
-		ln.setText(value.toString()); // TODO converters?
+		ln.setText(converterService.toString(value, ruleCall.getName()));
 		prependToCurrentsChildren(ln);
 	}
 
@@ -269,7 +273,7 @@ public abstract class AbstractInternalParseTreeConstructor {
 		String value = kw.getValue().substring(1, kw.getValue().length() - 1);
 		LeafNode ln = ParsetreeFactory.eINSTANCE.createLeafNode();
 		ln.setGrammarElement(kw);
-		ln.setText(value);
+		ln.setText(converterService.toString(value, kw.getValue()));
 		prependToCurrentsChildren(ln);
 	}
 

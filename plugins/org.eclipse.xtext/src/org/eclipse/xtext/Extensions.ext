@@ -31,12 +31,6 @@ boolean isRuleAssignment(Assignment a) :
 boolean isParserRuleAssignment(Assignment a) :
 	a.isRuleAssignment() && ((RuleCall) a.terminal).calledParserRule() != null ;
 	
-withoutQuotes(Keyword this) :
-	value.trimFromStartAndEnd(1);
-
-trimFromStartAndEnd(String this, Integer i) :
-	this.subString(i,this.length-i);
-	
 isMultipleCardinality(AbstractElement this) :
 	{'*','+'}.contains(this.cardinality);
 

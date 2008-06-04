@@ -146,12 +146,16 @@ public class ServiceRegistry {
                     + ", but should be " + ILanguageService.class + ".");
         }
         ILanguageService injectedService = cachedServices.get(type);
-        if (injectedService == null) {
-            injectedService = ServiceRegistry.internalGetService(languageDescriptor, (Class<? extends ILanguageService>) type,
+        ILanguageDescriptor tempDesc = languageDescriptor;
+        while (injectedService == null && tempDesc!=null) {
+            injectedService = ServiceRegistry.internalGetService(tempDesc, (Class<? extends ILanguageService>) type,
                     cachedServices);
             if (injectedService == null) {
-                throw new IllegalStateException("Could not inject service " + type.getSimpleName());
+            	tempDesc = tempDesc.getSuperLanguage();
             }
+        }
+        if (injectedService == null) {
+        	throw new IllegalStateException("Could not inject service " + type.getSimpleName());
         }
         setter.invoke(service, injectedService);
     }

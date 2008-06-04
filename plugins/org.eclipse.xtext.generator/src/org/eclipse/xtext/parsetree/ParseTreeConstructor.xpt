@@ -29,7 +29,7 @@ import org.eclipse.xtext.parsetree.AbstractParseTreeConstructor;
 public class «languageName()»ParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public void update(EObject object) {
-		new Internal«languageName()»ParseTreeConstructor(getFactory(),getGrammar()).update(object);
+		new Internal«languageName()»ParseTreeConstructor(getFactory(),getGrammar(),getValueConverterService()).update(object);
 	}
 }
 «ENDFILE»
@@ -39,14 +39,15 @@ package «packageName()».parsetree.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parsetree.Predicate;
 import org.eclipse.xtext.parsetree.internal.AbstractInternalParseTreeConstructor;
 
 public class Internal«languageName()»ParseTreeConstructor extends AbstractInternalParseTreeConstructor {
 
-	public Internal«languageName()»ParseTreeConstructor(GenericEcoreElementFactory factory, Grammar grammar) {
-		super(factory,grammar);
+	public Internal«languageName()»ParseTreeConstructor(GenericEcoreElementFactory factory, Grammar grammar, IValueConverterService converterService) {
+		super(factory,grammar,converterService);
 	}
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {

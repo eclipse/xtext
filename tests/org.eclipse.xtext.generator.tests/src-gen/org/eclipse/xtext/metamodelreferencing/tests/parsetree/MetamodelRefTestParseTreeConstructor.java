@@ -8,6 +8,6 @@ import org.eclipse.xtext.parsetree.AbstractParseTreeConstructor;
 public class MetamodelRefTestParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public void update(EObject object) {
-		new InternalMetamodelRefTestParseTreeConstructor(getFactory(),getGrammar()).update(object);
+		new InternalMetamodelRefTestParseTreeConstructor(getFactory(),getGrammar(),getValueConverterService()).update(object);
 	}
 }
