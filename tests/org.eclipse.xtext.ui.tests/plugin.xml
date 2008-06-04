@@ -5,7 +5,6 @@
          point="org.eclipse.xtext.ui.languageDescriptor">
       <languageDescriptor
             id="org.eclipse.xtext.ui.tests.dummylanguage"
-            languageFacade="org.eclipse.xtext.XtextLanguageFacade"
             name="Dummy Language">
       </languageDescriptor>
    </extension>
@@ -15,5 +14,19 @@
             class="org.eclipse.xtext.ui.SyntaxColorer1"
             languageId="org.eclipse.xtext.ui.tests.dummylanguage">
       </syntaxColorer>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.tokenTypeDef">
+      <tokenTypeDef
+            class="org.eclipse.xtext.ui.core.tokentype.BuildInTokenTypeDef"
+            languageId="org.eclipse.xtext.ui.tests.dummylanguage">
+      </tokenTypeDef>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.preferenceStore">
+      <preferenceStore
+            class="org.eclipse.xtext.ui.core.service.impl.PreferenceStore"
+            languageId="org.eclipse.xtext.ui.tests.dummylanguage">
+      </preferenceStore>
    </extension>
 </plugin>
