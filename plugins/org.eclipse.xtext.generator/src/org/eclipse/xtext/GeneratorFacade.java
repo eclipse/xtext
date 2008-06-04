@@ -144,11 +144,18 @@ public class GeneratorFacade {
 		final File[] contents = f.listFiles();
 		for (int j = 0; j < contents.length; j++) {
 			final File file = contents[j];
-			if (!".cvsignore".equals(file.getName())) {
+			if (!isCVSFile(file)) {
+			    System.out.println("Deleting file " + file.getName());
 				if (!delete(file)) {
 					log.error("Couldn't delete " + file.getAbsolutePath());
 				}
 			}
 		}
+	}
+	
+	private static boolean isCVSFile(File file) {
+        if (".cvsignore".equals(file.getName())) return true;
+        if ("CVS".equals(file.getName())) return true;
+	    return false;
 	}
 }
