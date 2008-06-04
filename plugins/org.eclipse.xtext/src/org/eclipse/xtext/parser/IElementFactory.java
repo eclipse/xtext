@@ -34,6 +34,7 @@ public interface IElementFactory extends ILanguageService {
 	 * @param value
 	 */
 	public void set(EObject _this, String feature, Object value);
+	public void set(EObject _this, String feature, Object value, String lexerRule);
 
 	/**
 	 * adds the value to the feature of _this element
@@ -43,5 +44,6 @@ public interface IElementFactory extends ILanguageService {
 	 * @param value
 	 */
 	public void add(EObject _this, String feature, Object value);
+	public void add(EObject _this, String feature, Object value, String lexerRule);
 
 }

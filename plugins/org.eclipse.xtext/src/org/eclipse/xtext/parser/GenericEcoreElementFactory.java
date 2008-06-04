@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.service.InjectedService;
 
 /**
@@ -33,6 +34,13 @@ public class GenericEcoreElementFactory implements IElementFactory {
         this.metamodelAccess = metamodelAccess;
     }
     
+    protected IValueConverterService converterService;
+    
+    @InjectedService
+    public void setValueConverterService(IValueConverterService converterService) {
+    	this.converterService = converterService;
+    }
+    
 	public EObject create(String fullTypeName) {
 		EClass clazz = getEClass(fullTypeName);
 		if (clazz != null && !(clazz.isAbstract() || clazz.isInterface()))
@@ -40,21 +48,37 @@ public class GenericEcoreElementFactory implements IElementFactory {
 		return null;
 	}
 
+	@Deprecated
 	public void set(EObject _this, String feature, Object value) {
+		set(_this,feature,value,null);
+	}
+	
+	public void set(EObject _this, String feature, Object value, String ruleName) {
 		if (value instanceof Token) {
 			value = ((Token) value).getText();
+			if (ruleName!=null) {
+				value = converterService.toValue((String)value, ruleName);
+			}
 		}
 		EObject eo = (EObject) _this;
 		EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
 		eo.eSet(structuralFeature, value);
 	}
+	
+	@Deprecated
+	public void add(EObject _this, String feature, Object value) {
+		add(_this,feature,value,null);
+	}
 
 	@SuppressWarnings("unchecked")
-	public void add(EObject _this, String feature, Object value) {
+	public void add(EObject _this, String feature, Object value, String ruleName) {
 		if (value==null)
 			return;
 	    if (value instanceof Token) {
 			value = ((Token) value).getText();
+			if (ruleName!=null) {
+				value = converterService.toValue((String)value, ruleName);
+			}
 		}
 		EObject eo = (EObject) _this;
 		EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
