@@ -12,39 +12,44 @@
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext.releng,org.eclipse.xtext.releng"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.runtime.feature,org.eclipse.xtext.runtime.feature"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.sdk.feature,org.eclipse.xtext.sdk.feature"/>
+<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.service,org.eclipse.xtext.service"/>
+<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.service.tests,org.eclipse.xtext.service.tests"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.tests,org.eclipse.xtext.tests"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.tests.feature,org.eclipse.xtext.tests.feature"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui,org.eclipse.xtext.ui"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.ui.tests,org.eclipse.xtext.ui.tests"/>
+<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.util,org.eclipse.xtext.util"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/develop/psf,psf"/>
 </provider>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext UI" name="Xtext UI">
-<item elementID="=org.eclipse.xtext.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.ui.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.ui.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext Core" name="Xtext Core">
+<item elementID="=org.eclipse.xtext.generator" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.service.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.generator.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.service" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.bootstrap" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.util" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext Reference" name="Xtext Reference">
-<item elementID="=org.eclipse.xtext.reference.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.reference" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-</workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext PM" name="Xtext PM">
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/develop" type="4"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/psf" type="4"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.releng" type="4"/>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext Documentation" name="Xtext Documentation">
+<item elementID="=org.eclipse.xtext.doc" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext Features" name="Xtext Features">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.tests.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.runtime.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.sdk.feature" type="4"/>
 </workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext Documentation" name="Xtext Documentation">
-<item elementID="=org.eclipse.xtext.doc" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext PM" name="Xtext PM">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/develop" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/psf" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.releng" type="4"/>
 </workingSets>
-<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext Core" name="Xtext Core">
-<item elementID="=org.eclipse.xtext.generator" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.generator.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.bootstrap" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext Reference" name="Xtext Reference">
+<item elementID="=org.eclipse.xtext.reference.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.reference" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext UI" name="Xtext UI">
+<item elementID="=org.eclipse.xtext.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.ui.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 </psf>
