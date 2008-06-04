@@ -8,18 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui;
 
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
-import org.eclipse.xtext.ui.core.service.impl.SyntaxColorer;
+import org.eclipse.xtext.ui.core.tokentype.BuildInTokenTypeDef;
 
 /**
- * @author Peter Friese - Initial contribution and API
+ * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class SyntaxColorer1 extends SyntaxColorer {
-
-	public TextStyle color(LeafNode token) {
-		return super.color(token);
-	}
+public class TestTokenTypeDef extends BuildInTokenTypeDef {
 
 }
