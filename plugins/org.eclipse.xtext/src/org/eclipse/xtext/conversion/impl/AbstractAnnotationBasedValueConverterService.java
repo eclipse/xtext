@@ -39,7 +39,7 @@ public class AbstractAnnotationBasedValueConverterService implements IValueConve
 	}
 	
 	private void internalRegisterForClass(HashMap<String, IValueConverter> converters, Class<?> class1) {
-		Method[] methods = getClass().getDeclaredMethods();
+		Method[] methods = class1.getDeclaredMethods();
 		for (Method method : methods) {
 			if(isConfigurationMethod(method)) {
 				try {
