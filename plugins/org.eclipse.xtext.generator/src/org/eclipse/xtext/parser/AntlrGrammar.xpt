@@ -110,7 +110,7 @@ internalParse returns [EObject current=null] :
 	 { $current=$iv_«parserRules.first().ruleName()».current; } 
 	 EOF 
 ;
-«EXPAND rule(this) FOREACH parserRules»
+«EXPAND rule(this) FOREACH allParserRules()»
 
 «EXPAND rule(this) FOREACH allLexerRules()»
 
@@ -118,15 +118,16 @@ internalParse returns [EObject current=null] :
 «ENDDEFINE»
 
 «DEFINE rule(Grammar g) FOR ParserRule»
-
+«IF isCalled(g)»
 // Rule «name»
 «ruleName()» returns [EObject current=null] 
     @init { EObject temp=null; }:
     «EXPAND ebnf(g) FOR this.alternatives»;
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE rule(Grammar g) FOR LexerRule»
-«ruleName()» : «bodyWithoutQuotes()»;
+«ruleName()» : «body»;
 «ENDDEFINE»
 
 «DEFINE ebnf(Grammar g) FOR AbstractElement-»
@@ -153,7 +154,7 @@ internalParse returns [EObject current=null] :
             $current = factory.create("«containingParserRule().getReturnTypeName()»");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.«setOrAdd()»($current, "«feature»", «IF isBoolean()»true«ELSE»«localVar()»«ENDIF»);«
+        factory.«setOrAdd()»($current, "«feature»", «IF isBoolean()»true«ELSE»«localVar()»«ENDIF»,«terminal.toStringLiteral()»);«
         IF isKeywordAssignment()
             »        «
             EXPAND createLeafNode FOR terminal
@@ -173,7 +174,7 @@ internalParse returns [EObject current=null] :
     }
 «ENDDEFINE»
 
-«DEFINE ebnf2(Grammar g) FOR Keyword»'«withoutQuotes()»' 
+«DEFINE ebnf2(Grammar g) FOR Keyword»'«value»' 
 «IF !isAssigned()»
     {
         «EXPAND createLeafNode» 

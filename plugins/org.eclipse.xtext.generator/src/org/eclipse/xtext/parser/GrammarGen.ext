@@ -25,9 +25,23 @@ setOrAdd(Action this) : if operator=='+=' then 'add' else 'set';
 
 setOrAdd(Assignment this) : if operator=='+=' then 'add' else 'set';
 
+isCalled(ParserRule this, Grammar g) :
+	let x = g.allParserRules() :
+		x.indexOf(this)==0 || 
+		x.eAllContents.flatten().typeSelect(RuleCall).exists(e|e.calledParserRule()==this);
+
 //TODO make localVars unique
 localVar(Assignment this) : 'lv_'+feature;
 localVar(RuleCall this) : 'this_'+name;
+
+toStringLiteral(xtext::AbstractElement this) :
+	"null";
+
+toStringLiteral(RuleCall this) :
+	this.calledParserRule()!=null ? "null" : '"'+this.calledRule().name+'"';
+
+toStringLiteral(Keyword this) :
+	'"'+this.value+'"';
 
 
 mustBeParenthesized(AbstractElement this) : true;
@@ -36,9 +50,3 @@ mustBeParenthesized(Alternatives this) : true;
 mustBeParenthesized(Keyword this) : false;
 mustBeParenthesized(RuleCall this) : false;
 
-String bodyWithoutQuotes(LexerRule this) :
-	if body.startsWith('<#') && body.endsWith('#>') then
-		body.subString(2, body.length -2)
-	else
-		body;
-		

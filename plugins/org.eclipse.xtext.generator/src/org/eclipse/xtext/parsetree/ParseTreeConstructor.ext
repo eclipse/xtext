@@ -28,7 +28,7 @@ List[String] internalCheckPath(AbstractElement this) :
 		
 List[String] checkPath(AbstractElement this) : {"true"};
  
-List[String] checkPath(Keyword this) : if isAssigned() then {'value.equals("'+this.value.trimFromStartAndEnd(1)+'")'} else {'true'}; 
+List[String] checkPath(Keyword this) : if isAssigned() then {'value.equals("'+value+'")'} else {'true'}; 
 
 List[String] checkPath(Action this) : 
 	{'obj.isOfType("'+typeName.getQualifiedName()+'") && 
