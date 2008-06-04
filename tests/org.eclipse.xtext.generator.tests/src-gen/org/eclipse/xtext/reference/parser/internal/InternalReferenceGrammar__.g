@@ -55,28 +55,28 @@ T21 : 'BLAU' ;
 T22 : 'GELB' ;
 T23 : 'GRÜN' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 344
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 343
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 346
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 345
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 348
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 347
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 350
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 349
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 352
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 351
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n'{$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 354
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 353
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 356
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 355
 RULE_LEXER_BODY : '<#' '.'* '#>';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 358
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 357
 RULE_ANY_OTHER : .;
 
 
