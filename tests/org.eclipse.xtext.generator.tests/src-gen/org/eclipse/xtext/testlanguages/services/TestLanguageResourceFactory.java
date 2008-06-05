@@ -6,11 +6,13 @@ import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
 public class TestLanguageResourceFactory extends AbstractXtextResourceFactory {
 
 	public TestLanguageResourceFactory() {
+		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("testlanguage", this);
+		
 	}
 	
-	public String getModelFileExtension() {
-		return "testlanguage";
+	public String[] getModelFileExtensions() {
+		return new String[] { "testlanguage" };
 	}
 	
 } 

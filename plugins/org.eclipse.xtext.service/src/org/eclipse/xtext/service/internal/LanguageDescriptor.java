@@ -56,4 +56,9 @@ public class LanguageDescriptor implements ILanguageDescriptor {
 	public ILanguageDescriptor getSuperLanguage() {
 		return this.superLanguage;
 	}
+	
+	@Override
+	public String toString() {
+	    return "Language " + name + " id=" + id + ((superLanguage != null) ? " extends " + superLanguage.getId() : ""); 
+	}
 }

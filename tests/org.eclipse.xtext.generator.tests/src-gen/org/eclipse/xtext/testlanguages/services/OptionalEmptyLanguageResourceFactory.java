@@ -6,11 +6,13 @@ import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
 public class OptionalEmptyLanguageResourceFactory extends AbstractXtextResourceFactory {
 
 	public OptionalEmptyLanguageResourceFactory() {
+		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("optionalemptylanguage", this);
+		
 	}
 	
-	public String getModelFileExtension() {
-		return "optionalemptylanguage";
+	public String[] getModelFileExtensions() {
+		return new String[] { "optionalemptylanguage" };
 	}
 	
 } 

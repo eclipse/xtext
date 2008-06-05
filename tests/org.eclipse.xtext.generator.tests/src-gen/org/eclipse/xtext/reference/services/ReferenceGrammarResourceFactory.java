@@ -6,11 +6,13 @@ import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
 public class ReferenceGrammarResourceFactory extends AbstractXtextResourceFactory {
 
 	public ReferenceGrammarResourceFactory() {
+		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("referencegrammar", this);
+		
 	}
 	
-	public String getModelFileExtension() {
-		return "referencegrammar";
+	public String[] getModelFileExtensions() {
+		return new String[] { "referencegrammar" };
 	}
 	
 } 

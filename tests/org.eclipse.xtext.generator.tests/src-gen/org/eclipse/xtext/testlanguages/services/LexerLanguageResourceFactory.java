@@ -6,11 +6,13 @@ import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
 public class LexerLanguageResourceFactory extends AbstractXtextResourceFactory {
 
 	public LexerLanguageResourceFactory() {
+		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("lexerlanguage", this);
+		
 	}
 	
-	public String getModelFileExtension() {
-		return "lexerlanguage";
+	public String[] getModelFileExtensions() {
+		return new String[] { "lexerlanguage" };
 	}
 	
 } 
