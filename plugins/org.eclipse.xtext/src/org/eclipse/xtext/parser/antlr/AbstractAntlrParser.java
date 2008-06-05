@@ -16,6 +16,8 @@ import org.antlr.runtime.Parser;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -36,6 +38,8 @@ import org.eclipse.xtext.parsetree.NodeAdapterFactory;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
 
 public abstract class AbstractAntlrParser extends Parser {
+
+    private static Log log = LogFactory.getLog(AbstractAntlrParser.class);
 
     protected CompositeNode currentNode;
 
@@ -119,6 +123,7 @@ public abstract class AbstractAntlrParser extends Parser {
                     line = br.readLine();
                 }
             } catch (IOException e) {
+                log.error(e);
                 throw new WrappedException(e);
             }
         }
@@ -229,8 +234,11 @@ public abstract class AbstractAntlrParser extends Parser {
             current = internalParse();
             appendTrailingHiddenTokens(currentNode);
         } finally {
-            appendAllTokens();
-            result = new ParseResult(current, currentNode, parseErrors);
+            try {
+                appendAllTokens();
+            } finally {
+                result = new ParseResult(current, currentNode, parseErrors);
+            }
         }
         return result;
     }
