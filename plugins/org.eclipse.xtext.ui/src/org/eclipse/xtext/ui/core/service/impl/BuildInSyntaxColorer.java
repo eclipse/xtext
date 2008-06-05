@@ -23,7 +23,7 @@ import org.eclipse.xtext.ui.core.tokentype.ITokenTypeDef;
  * @author Dennis Hübner
  * 
  */
-public class SyntaxColorer implements ISyntaxColorer {
+public class BuildInSyntaxColorer implements ISyntaxColorer {
 
 	private ITokenTypeDefService tokenTypeDef;
 	private IPreferenceStoreService preferenceStoreService;
@@ -72,31 +72,31 @@ public class SyntaxColorer implements ISyntaxColorer {
 	// TODO set defaults somewhere else if possible, or check if a default
 	// already set
 	private int getStyleForTokenType(String tokenType, int defaultStyle) {
-		String tokenStylePreferenceKey = PreferenceStore.getTokenStylePreferenceKey(tokenType);
+		String tokenStylePreferenceKey = BuildInPreferenceStore.getTokenStylePreferenceKey(tokenType);
 		getPreferenceStore().setDefault(tokenStylePreferenceKey, defaultStyle);
 		return getPreferenceStore().getInt(tokenStylePreferenceKey);
 	}
 
 	private String getFontForTokenType(String tokenType, String defaultFont) {
-		String tokenFontPreferenceKey = PreferenceStore.getTokenFontPreferenceKey(tokenType);
+		String tokenFontPreferenceKey = BuildInPreferenceStore.getTokenFontPreferenceKey(tokenType);
 		if (defaultFont != null)
 			getPreferenceStore().setDefault(tokenFontPreferenceKey, defaultFont);
 		return getPreferenceStore().getString(tokenFontPreferenceKey);
 	}
 
 	private String getBackgroundColorForTokenType(String tokenType, String defaultBackgroundColor) {
-		String tokenBackgroundColorPreferenceKey = PreferenceStore.getTokenBackgroundColorPreferenceKey(tokenType);
+		String tokenBackgroundColorPreferenceKey = BuildInPreferenceStore.getTokenBackgroundColorPreferenceKey(tokenType);
 		if (defaultBackgroundColor != null)
-			getPreferenceStore().setDefault(PreferenceStore.getTokenBackgroundColorPreferenceKey(tokenType),
+			getPreferenceStore().setDefault(BuildInPreferenceStore.getTokenBackgroundColorPreferenceKey(tokenType),
 					defaultBackgroundColor);
 		String rgbString = getPreferenceStore().getString(tokenBackgroundColorPreferenceKey);
 		return rgbString;
 	}
 
 	private String getColorForTokenType(String tokenType, String defaultColor) {
-		String preferenceKey = PreferenceStore.getTokenColorPreferenceKey(tokenType);
+		String preferenceKey = BuildInPreferenceStore.getTokenColorPreferenceKey(tokenType);
 		if (defaultColor != null)
-			getPreferenceStore().setDefault(PreferenceStore.getTokenColorPreferenceKey(tokenType), defaultColor);
+			getPreferenceStore().setDefault(BuildInPreferenceStore.getTokenColorPreferenceKey(tokenType), defaultColor);
 		String rgbString = getPreferenceStore().getString(preferenceKey);
 		return rgbString;
 	}
