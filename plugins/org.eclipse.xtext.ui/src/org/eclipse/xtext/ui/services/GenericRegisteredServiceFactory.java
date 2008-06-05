@@ -15,43 +15,40 @@ public class GenericRegisteredServiceFactory implements ILanguageServiceFactory 
     private static final String LANGUAGE_ID = "languageId";
     private static final String CLASS = "class";
 
-    private ILanguageDescriptor languageDescriptor;
-    private String serviceName;
+    private IConfigurationElement configurationElement;
     private Class<? extends ILanguageService> serviceClass;
 
-    public GenericRegisteredServiceFactory(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass, String serviceName) {
-        this.languageDescriptor = languageDescriptor;
+    public GenericRegisteredServiceFactory(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass,
+            IConfigurationElement configurationElement) {
         this.serviceClass = serviceClass;
-        this.serviceName = serviceName;
-    }
-    
-    public ILanguageService createLanguageService() {
-        return createServiceExtension();
+        this.configurationElement = configurationElement;
     }
 
-    private ILanguageService createServiceExtension() {
-        IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(Activator.PLUGIN_ID,
-                serviceName);
+    public ILanguageService createLanguageService() {
+        try {
+            ILanguageService service = (ILanguageService) configurationElement.createExecutableExtension(CLASS);
+            return service;
+        } catch (CoreException e) {
+            CoreLog.log(e.getStatus());
+        }
+        return null;
+    }
+
+    public static IConfigurationElement getConfigurationElement(String serviceName, ILanguageDescriptor languageDescriptor) {
+        IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(Activator.PLUGIN_ID, serviceName);
         if (extensionPoint == null) {
             return null;
         }
         IConfigurationElement[] configurationElements = extensionPoint.getConfigurationElements();
         for (IConfigurationElement configurationElement : configurationElements) {
-            try {
-                String languageId = configurationElement.getAttribute(LANGUAGE_ID);
-                if (languageDescriptor.getId().equals(languageId)) {
-                    ILanguageService service = (ILanguageService) configurationElement
-                            .createExecutableExtension(CLASS);
-                    return service;
-                }
-            }
-            catch (CoreException e) {
-                CoreLog.log(e.getStatus());
+            String languageId = configurationElement.getAttribute(LANGUAGE_ID);
+            if (languageDescriptor.getId().equals(languageId)) {
+                return configurationElement;
             }
         }
         return null;
     }
-    
+
     public Class<? extends ILanguageService> getServiceClass() {
         return serviceClass;
     }
