@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Feature.java,v 1.1 2008/06/02 13:20:56 sefftinge Exp $
+ * $Id: Feature.java,v 1.2 2008/06/05 08:58:46 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextutil;
 

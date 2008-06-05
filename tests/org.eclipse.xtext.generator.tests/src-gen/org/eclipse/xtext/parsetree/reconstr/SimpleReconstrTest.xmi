@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <idElements>org</idElements>
-  <idElements>eclipse</idElements>
-  <idElements>xtext</idElements>
-  <idElements>parsetree</idElements>
-  <idElements>reconstr</idElements>
-  <idElements>SimpleReconstrTest</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simplerewritetest" nsURI="http://simple/rewrite/test"/>
   <parserRules name="Op">
     <type name="Expression"/>
     <alternatives xsi:type="xtext:Group">
@@ -48,4 +41,11 @@
       </abstractTokens>
     </alternatives>
   </parserRules>
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>parsetree</idElements>
+  <idElements>reconstr</idElements>
+  <idElements>SimpleReconstrTest</idElements>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simplerewritetest" nsURI="http://simple/rewrite/test"/>
 </xtext:Grammar>

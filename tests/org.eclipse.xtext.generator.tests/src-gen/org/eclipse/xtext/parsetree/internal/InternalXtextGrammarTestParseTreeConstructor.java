@@ -204,6 +204,26 @@ new Predicate(obj) {
 if (
 new Predicate(obj) { 
 		public boolean check() {
+			return obj.checkConsume("superGrammar")&&true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("superGrammar")&&true&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
 			return obj.checkConsume("superGrammar")&&true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&true; 
 		}
 }.check() ||
@@ -340,10 +360,54 @@ new Predicate(obj) {
 }
 
 		
+/* xtext::Alternatives */ 
+{
+
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("abstract"); 
+		}
+}.check() ) {
+			
+/* xtext::Assignment */ 
+{
+
+	final Object value = obj.consume("abstract");
+    
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.0/@terminal"));
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
+
+}
+
+		}
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ) {
+			
+/* xtext::Keyword */ 
+{
+
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.1"));
+
+}
+
+		}
+	
+		else {
+		    throw new IllegalStateException("No alternative matched");
+		}
+	
 
 }
 

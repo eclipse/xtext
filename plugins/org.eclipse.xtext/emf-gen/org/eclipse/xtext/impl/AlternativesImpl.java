@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AlternativesImpl.java,v 1.8 2008/06/03 06:22:31 sefftinge Exp $
+ * $Id: AlternativesImpl.java,v 1.9 2008/06/05 08:58:46 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -38,126 +38,132 @@ import org.eclipse.xtext.XtextPackage;
 public class AlternativesImpl extends AbstractElementImpl implements Alternatives
 {
   /**
-	 * The cached value of the '{@link #getGroups() <em>Groups</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getGroups() <em>Groups</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getGroups()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getGroups()
+   * @generated
+   * @ordered
+   */
   protected EList<AbstractElement> groups;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected AlternativesImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return XtextPackage.Literals.ALTERNATIVES;
-	}
+    return XtextPackage.Literals.ALTERNATIVES;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EList<AbstractElement> getGroups()
   {
-		if (groups == null) {
-			groups = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, XtextPackage.ALTERNATIVES__GROUPS);
-		}
-		return groups;
-	}
+    if (groups == null)
+    {
+      groups = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, XtextPackage.ALTERNATIVES__GROUPS);
+    }
+    return groups;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case XtextPackage.ALTERNATIVES__GROUPS:
-				return ((InternalEList<?>)getGroups()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case XtextPackage.ALTERNATIVES__GROUPS:
+        return ((InternalEList<?>)getGroups()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case XtextPackage.ALTERNATIVES__GROUPS:
-				return getGroups();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case XtextPackage.ALTERNATIVES__GROUPS:
+        return getGroups();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case XtextPackage.ALTERNATIVES__GROUPS:
-				getGroups().clear();
-				getGroups().addAll((Collection<? extends AbstractElement>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case XtextPackage.ALTERNATIVES__GROUPS:
+        getGroups().clear();
+        getGroups().addAll((Collection<? extends AbstractElement>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case XtextPackage.ALTERNATIVES__GROUPS:
-				getGroups().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case XtextPackage.ALTERNATIVES__GROUPS:
+        getGroups().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case XtextPackage.ALTERNATIVES__GROUPS:
-				return groups != null && !groups.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case XtextPackage.ALTERNATIVES__GROUPS:
+        return groups != null && !groups.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //AlternativesImpl

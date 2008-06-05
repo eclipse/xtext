@@ -52,7 +52,6 @@ package org.eclipse.xtext.parser.internal;
 @parser::header {
 package org.eclipse.xtext.parser.internal; 
 
-import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -70,9 +69,11 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 		grammar = g;
     }
     
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = InternalXtextParser.class.getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/internal/InternalXtext.tokens");
+    protected void setLexerRule(LeafNode node, Token t) {
+    /*    LexerRule lexerRule = XtextTokenTypeResolver.getLexerRule(node, t.getType());
+        if(lexerRule != null) {
+            node.setGrammarElement(lexerRule);
+        }*/
     }
 }
 
@@ -96,12 +97,22 @@ internalParse returns [EObject current=null] :
 // Rule Grammar
 ruleGrammar returns [EObject current=null] 
     @init { EObject temp=null; }:
-(((((('language' 
+((((((((
+    lv_abstract='abstract language' 
+ 
+    {
+        if ($current==null) {
+            $current = factory.create("Grammar");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        factory.set($current, "abstract", true,"abstract language");        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.0/@terminal" /* xtext::Keyword */, currentNode,"abstract");    }
+)
+    |'language' 
 
     {
-        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.1" /* xtext::Keyword */, currentNode,null); 
     }
-(
+)(
     lv_idElements=RULE_ID
     { 
     createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"idElements"); 
@@ -783,7 +794,7 @@ RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n'{$channel=HIDDEN;};
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractTypeImpl.java,v 1.11 2008/06/02 13:20:55 sefftinge Exp $
+ * $Id: AbstractTypeImpl.java,v 1.12 2008/06/05 08:58:45 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextutil.impl;
 

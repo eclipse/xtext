@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackageImpl.java,v 1.2 2008/06/02 13:20:56 sefftinge Exp $
+ * $Id: ParsetreePackageImpl.java,v 1.3 2008/06/05 08:58:46 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 

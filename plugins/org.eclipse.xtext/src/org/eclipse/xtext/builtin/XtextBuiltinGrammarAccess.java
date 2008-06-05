@@ -1,6 +1,10 @@
 package org.eclipse.xtext.builtin;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.LexerRule;
@@ -58,6 +62,11 @@ public class XtextBuiltinGrammarAccess implements IGrammarAccess {
 		l.setName("ANY_OTHER");
 		l.setBody(".");
 		g.getLexerRules().add(l);
+		
+		ResourceSet rs = new ResourceSetImpl();
+		Resource resource = rs.createResource(URI.createURI("classpath:/org/eclipse.xtext/builtin/XtextBuiltin.xmi"));
+		resource.getContents().add(g);
+		
 	}
 	public Grammar getGrammar() {
 		return g;

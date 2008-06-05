@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GroupImpl.java,v 1.8 2008/06/03 06:22:30 sefftinge Exp $
+ * $Id: GroupImpl.java,v 1.9 2008/06/05 08:58:46 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -38,126 +38,132 @@ import org.eclipse.xtext.XtextPackage;
 public class GroupImpl extends AbstractElementImpl implements Group
 {
   /**
-	 * The cached value of the '{@link #getAbstractTokens() <em>Abstract Tokens</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getAbstractTokens() <em>Abstract Tokens</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getAbstractTokens()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getAbstractTokens()
+   * @generated
+   * @ordered
+   */
   protected EList<AbstractElement> abstractTokens;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected GroupImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return XtextPackage.Literals.GROUP;
-	}
+    return XtextPackage.Literals.GROUP;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EList<AbstractElement> getAbstractTokens()
   {
-		if (abstractTokens == null) {
-			abstractTokens = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, XtextPackage.GROUP__ABSTRACT_TOKENS);
-		}
-		return abstractTokens;
-	}
+    if (abstractTokens == null)
+    {
+      abstractTokens = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, XtextPackage.GROUP__ABSTRACT_TOKENS);
+    }
+    return abstractTokens;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case XtextPackage.GROUP__ABSTRACT_TOKENS:
-				return ((InternalEList<?>)getAbstractTokens()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case XtextPackage.GROUP__ABSTRACT_TOKENS:
+        return ((InternalEList<?>)getAbstractTokens()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case XtextPackage.GROUP__ABSTRACT_TOKENS:
-				return getAbstractTokens();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case XtextPackage.GROUP__ABSTRACT_TOKENS:
+        return getAbstractTokens();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case XtextPackage.GROUP__ABSTRACT_TOKENS:
-				getAbstractTokens().clear();
-				getAbstractTokens().addAll((Collection<? extends AbstractElement>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case XtextPackage.GROUP__ABSTRACT_TOKENS:
+        getAbstractTokens().clear();
+        getAbstractTokens().addAll((Collection<? extends AbstractElement>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case XtextPackage.GROUP__ABSTRACT_TOKENS:
-				getAbstractTokens().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case XtextPackage.GROUP__ABSTRACT_TOKENS:
+        getAbstractTokens().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case XtextPackage.GROUP__ABSTRACT_TOKENS:
-				return abstractTokens != null && !abstractTokens.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case XtextPackage.GROUP__ABSTRACT_TOKENS:
+        return abstractTokens != null && !abstractTokens.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //GroupImpl

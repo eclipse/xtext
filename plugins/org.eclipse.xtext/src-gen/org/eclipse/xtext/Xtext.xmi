@@ -12,7 +12,12 @@
           <abstractTokens xsi:type="xtext:Group">
             <abstractTokens xsi:type="xtext:Group">
               <abstractTokens xsi:type="xtext:Group">
-                <abstractTokens xsi:type="xtext:Keyword" value="language"/>
+                <abstractTokens xsi:type="xtext:Alternatives">
+                  <groups xsi:type="xtext:Assignment" feature="abstract" operator="?=">
+                    <terminal xsi:type="xtext:Keyword" value="abstract language"/>
+                  </groups>
+                  <groups xsi:type="xtext:Keyword" value="language"/>
+                </abstractTokens>
                 <abstractTokens xsi:type="xtext:Assignment" feature="idElements" operator="+=">
                   <terminal xsi:type="xtext:RuleCall" name="ID"/>
                 </abstractTokens>

@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <idElements>org</idElements>
-  <idElements>eclipse</idElements>
-  <idElements>xtext</idElements>
-  <idElements>dummy</idElements>
-  <idElements>DummyLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="DummyLang" nsURI="http://www.eclipse.org/2008/xtext/DummyLang"/>
   <parserRules name="Model">
     <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="elements" operator="+=">
       <terminal xsi:type="xtext:RuleCall" name="Element"/>
@@ -32,4 +26,10 @@
       <abstractTokens xsi:type="xtext:Keyword" value=";"/>
     </alternatives>
   </parserRules>
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>dummy</idElements>
+  <idElements>DummyLanguage</idElements>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="DummyLang" nsURI="http://www.eclipse.org/2008/xtext/DummyLang"/>
 </xtext:Grammar>

@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <idElements>org</idElements>
-  <idElements>eclipse</idElements>
-  <idElements>xtext</idElements>
-  <idElements>grammargen</idElements>
-  <idElements>tests</idElements>
-  <idElements>SimpleTest2</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="SimpleTest2" nsURI="http://eclipse.org/xtext/tests/SimpleTest2"/>
   <parserRules name="Model">
     <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="contents" operator="+=">
       <terminal xsi:type="xtext:RuleCall" name="Child"/>
@@ -36,4 +29,11 @@
       <abstractTokens xsi:type="xtext:Keyword" value="}"/>
     </alternatives>
   </parserRules>
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>grammargen</idElements>
+  <idElements>tests</idElements>
+  <idElements>SimpleTest2</idElements>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="SimpleTest2" nsURI="http://eclipse.org/xtext/tests/SimpleTest2"/>
 </xtext:Grammar>

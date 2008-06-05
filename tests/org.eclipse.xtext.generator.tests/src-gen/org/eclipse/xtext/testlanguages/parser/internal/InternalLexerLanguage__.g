@@ -55,7 +55,7 @@ RULE_INT : ('0'..'9')+;
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
 // $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g" 156
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n'{$channel=HIDDEN;};
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
 
 // $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g" 158
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
