@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-language org.eclipse.xtext.inheritance.AbstractBaseLanguage
+abstract language org.eclipse.xtext.inheritance.AbstractBaseLanguage
 
 lexing :
 

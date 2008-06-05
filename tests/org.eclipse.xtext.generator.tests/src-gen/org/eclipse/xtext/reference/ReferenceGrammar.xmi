@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>reference</idElements>
+  <idElements>ReferenceGrammar</idElements>
   <parserRules name="Spielplatz">
     <alternatives xsi:type="xtext:Group" cardinality="?">
       <abstractTokens xsi:type="xtext:Group">
@@ -104,10 +109,5 @@
       <groups xsi:type="xtext:Keyword" value="GR&#xdc;N"/>
     </alternatives>
   </parserRules>
-  <idElements>org</idElements>
-  <idElements>eclipse</idElements>
-  <idElements>xtext</idElements>
-  <idElements>reference</idElements>
-  <idElements>ReferenceGrammar</idElements>
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ReferenceGrammar" nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar"/>
 </xtext:Grammar>
