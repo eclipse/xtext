@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension
-         point="org.eclipse.ui.editors">
-      <editor
-            class="org.eclipse.xtext.reference.ui.editor.ReferenceGrammarXtextEditor"
-            default="true"
-            extensions="test, tst"
-            icon="icons/editor/titleImage.gif"
-            id="org.eclipse.xtext.ui.core.reference.editor2"
-            name="Test Editor">
-      </editor>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.ui.syntaxColorer">
-      <syntaxColorer
-            class="org.eclipse.xtext.reference.ui.services.ReferenceSyntaxColorer"
-            languageId="org.eclipse.xtext.reference.ReferenceGrammar">
-      </syntaxColorer>
-   </extension>
+  
    <extension
          point="org.eclipse.xtext.ui.proposalsProvider">
       <proposalsProvider
@@ -26,14 +9,6 @@
             languageId="org.eclipse.xtext.reference.ReferenceGrammar">
       </proposalsProvider>
    </extension>
-   <extension
-         point="org.eclipse.xtext.ui.preferenceStore">
-      <preferenceStore
-            class="org.eclipse.xtext.ui.core.service.impl.PreferenceStore"
-            languageId="org.eclipse.xtext.reference.ReferenceGrammar">
-      </preferenceStore>
-   </extension>
-   
    <extension
          point="org.eclipse.xtext.ui.tokenTypeDef">
       <tokenTypeDef
