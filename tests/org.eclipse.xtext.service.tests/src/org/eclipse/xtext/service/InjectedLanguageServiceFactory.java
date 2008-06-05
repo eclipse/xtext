@@ -20,7 +20,7 @@ public class InjectedLanguageServiceFactory implements ILanguageServiceFactory {
         return new InjectedLanguageService();
     }
 
-    public Class<? extends ILanguageService> getServiceClass() {
+    public Class<? extends ILanguageService> getServiceInterface() {
         return InjectedLanguageService.class;
     }
 

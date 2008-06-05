@@ -69,15 +69,15 @@ public class ServiceRegistry {
 
 	public static <T extends ILanguageService> ILanguageServiceFactory registerService(
 			ILanguageDescriptor languageDescriptor, ILanguageService service,
-			Class<? extends ILanguageService> serviceClass) {
-		return registerFactory(languageDescriptor, new GenericSingletonLanguageServiceFactory(service, serviceClass),
+			Class<? extends ILanguageService> serviceInterface) {
+		return registerFactory(languageDescriptor, new GenericSingletonLanguageServiceFactory(service, serviceInterface),
 				PRIORITY_NORMAL);
 	}
 
 	public static <T extends ILanguageService> ILanguageServiceFactory registerService(
 			ILanguageDescriptor languageDescriptor, ILanguageService service,
-			Class<? extends ILanguageService> serviceClass, int priority) {
-		return registerFactory(languageDescriptor, new GenericSingletonLanguageServiceFactory(service, serviceClass),
+			Class<? extends ILanguageService> serviceInterface, int priority) {
+		return registerFactory(languageDescriptor, new GenericSingletonLanguageServiceFactory(service, serviceInterface),
 				priority);
 	}
 
@@ -86,12 +86,12 @@ public class ServiceRegistry {
 		if (languageDescriptor == null || factory == null) {
 			throw new IllegalArgumentException("Neither languageDescriptor nor factory can be null");
 		}
-		if (factory.getServiceClass() == null) {
+		if (factory.getServiceInterface() == null) {
 			throw new IllegalArgumentException("getServiceClass() must not be null");
 		}
 		synchronized (factoryMap) {
 			Pair<ILanguageDescriptor, Class<? extends ILanguageService>> key = createKey(languageDescriptor, factory
-					.getServiceClass());
+					.getServiceInterface());
 			Map<Integer, ILanguageServiceFactory> priorityMap = factoryMap.get(key);
 			if (priorityMap == null) {
 				priorityMap = new HashMap<Integer, ILanguageServiceFactory>();
@@ -153,36 +153,36 @@ public class ServiceRegistry {
 	}
 
 	@SuppressWarnings("unchecked")
-	private static ILanguageService findAndInitializeService(ILanguageDescriptor languageDescriptor, Class<?> type,
+	private static ILanguageService findAndInitializeService(ILanguageDescriptor languageDescriptor, Class<?> serviceInterface,
 			Map<Class<?>, ILanguageService> cachedServices) {
 
-		if (!ILanguageService.class.isAssignableFrom(type)) {
+		if (!ILanguageService.class.isAssignableFrom(serviceInterface)) {
 			throw new IllegalArgumentException(
-					"Annotated member's type must extend ILanguageService. Member type class: " + type
+					"Annotated member's type must extend ILanguageService. Member type class: " + serviceInterface
 							+ ", but should be " + ILanguageService.class + ".");
 		}
-		ILanguageService injectedService = cachedServices.get(type);
+		ILanguageService service = cachedServices.get(serviceInterface);
 		ILanguageDescriptor tempDesc = languageDescriptor;
-		while (injectedService == null && tempDesc != null) {
-			injectedService = ServiceRegistry.internalGetService(tempDesc, (Class<? extends ILanguageService>) type,
+		while (service == null && tempDesc != null) {
+			service = ServiceRegistry.internalGetService(tempDesc, (Class<? extends ILanguageService>) serviceInterface,
 					cachedServices);
-			if (injectedService == null) {
+			if (service == null) {
 				tempDesc = tempDesc.getSuperLanguage();
 			} else {
 				try {
-					injectDependencies(languageDescriptor, injectedService, cachedServices);
+					injectDependencies(languageDescriptor, service, cachedServices);
 				} catch (Exception exc) {
 					throw new WrappedException("Error injecting dependencies into "
-							+ (injectedService != null ? injectedService.getClass().getSimpleName() : "null") + " for "
+							+ (service != null ? service.getClass().getSimpleName() : "null") + " for "
 							+ languageDescriptor, exc);
 				}
 			}
 		}
-		if (injectedService == null) {
-			throw new IllegalStateException("Could not find service " + type.getSimpleName() + " for language "
+		if (service == null) {
+			throw new IllegalStateException("Could not find service " + serviceInterface.getSimpleName() + " for language "
 					+ languageDescriptor.getId());
 		}
-		return injectedService;
+		return service;
 	}
 
 	public static void resetInternal() {

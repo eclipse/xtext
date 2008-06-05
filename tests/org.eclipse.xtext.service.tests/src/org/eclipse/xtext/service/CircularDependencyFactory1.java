@@ -18,7 +18,7 @@ public class CircularDependencyFactory1 implements ILanguageServiceFactory {
         return new CircularDependencyService1();
     }
 
-    public Class<? extends ILanguageService> getServiceClass() {
+    public Class<? extends ILanguageService> getServiceInterface() {
         return CircularDependencyService1.class;
     }
 
