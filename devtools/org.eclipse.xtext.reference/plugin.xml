@@ -5,14 +5,6 @@
 
 <plugin>
    <extension
-         point="org.eclipse.xtext.ui.languageDescriptor">
-      <languageDescriptor
-            id="org.eclipse.xtext.reference.ReferenceGrammar"
-            name="ReferenceGrammar"
-            superLanguage="org.eclipse.xtext.BaseLanguage">
-      </languageDescriptor>
-   </extension>
-   <extension
          point="org.eclipse.xtext.ui.parser">
       <parser
             languageId="org.eclipse.xtext.reference.ReferenceGrammar"
