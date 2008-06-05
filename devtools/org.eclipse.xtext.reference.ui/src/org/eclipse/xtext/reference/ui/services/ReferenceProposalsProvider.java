@@ -48,16 +48,16 @@ public class ReferenceProposalsProvider implements IProposalsProvider {
 				StyledString.DECORATIONS_STYLER).append("bund", StyledString.COUNTER_STYLER));
 		p2.setDescription("Test AutoWRAP: alkg pkap aposk poasdkg pokd"
 				+ "gokspeokrg speorkg aüperogk aüpeorgk üapoekg apüodlg laksd lgk üapwoegk ldkgaäösdlgkoawekg ok");
-		List<Proposal> retVal = null;new ArrayList<Proposal>();
+		List<Proposal> retVal = new ArrayList<Proposal>();
 		IGrammarAccess grammarAccess = ServiceRegistry.getService(languageDescriptor, IGrammarAccess.class);
-//		for (ParserRule pr : grammarAccess.getGrammar().getParserRules()) {
-//			Proposal pro = new Proposal(pr.getName());
-//			pro.setLabel(new StyledString(pr.getName()).append(" - " + pr.toString(), StyledString.QUALIFIER_STYLER));
-//			retVal.add(pro);
-//		}
-//		retVal.add(p);
-//		retVal.add(p1);
-//		retVal.add(p2);
+		for (ParserRule pr : grammarAccess.getGrammar().getParserRules()) {
+			Proposal pro = new Proposal(pr.getName());
+			pro.setLabel(new StyledString(pr.getName()).append(" - " + pr.toString(), StyledString.QUALIFIER_STYLER));
+			retVal.add(pro);
+		}
+		retVal.add(p);
+		retVal.add(p1);
+		retVal.add(p2);
 		return retVal;
 	}
 
