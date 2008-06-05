@@ -16,12 +16,12 @@ public class GenericRegisteredServiceFactory implements ILanguageServiceFactory 
     private static final String CLASS = "class";
 
     private IConfigurationElement configurationElement;
-    private Class<? extends ILanguageService> serviceClass;
+    private Class<? extends ILanguageService> serviceInterface;
     private ILanguageService service;
 
-    public GenericRegisteredServiceFactory(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceClass,
+    public GenericRegisteredServiceFactory(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceInterface,
             IConfigurationElement configurationElement) {
-        this.serviceClass = serviceClass;
+        this.serviceInterface = serviceInterface;
         this.configurationElement = configurationElement;
     }
 
@@ -52,8 +52,8 @@ public class GenericRegisteredServiceFactory implements ILanguageServiceFactory 
         return null;
     }
 
-    public Class<? extends ILanguageService> getServiceClass() {
-        return serviceClass;
+    public Class<? extends ILanguageService> getServiceInterface() {
+        return serviceInterface;
     }
 
 }
