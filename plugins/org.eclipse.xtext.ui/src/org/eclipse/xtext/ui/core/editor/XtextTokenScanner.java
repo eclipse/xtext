@@ -61,21 +61,11 @@ public class XtextTokenScanner implements ITokenScanner {
 	}
 
 	public int getTokenLength() {
-		if (currentNode != null) {
-			return currentNode.length();
-		}
-		else {
-			return -1;
-		}
+		return currentNode.length();
 	}
 
 	public int getTokenOffset() {
-		if (currentNode != null) {
-			return currentNode.offset();
-		}
-		else {
-			return -1;
-		}
+		return currentNode.offset();
 	}
 
 	public IToken nextToken() {
@@ -117,6 +107,8 @@ public class XtextTokenScanner implements ITokenScanner {
 	private IParseErrorHandler parseErrorHandler = new IParseErrorHandler() {
 
 		public void handleParserError(IParseError error) {
+			if (Activator.DEBUG_PARSING)
+				System.out.println("XtextTokenScanner.enclosing_method(): " + error.getMessage());
 			parseErrors.add(error);
 		}
 	};
@@ -134,7 +126,6 @@ public class XtextTokenScanner implements ITokenScanner {
 		IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
 		IParseResult parseResult;
 		try {
-			// TODO delegate encoding to an antlrparser
 			parseResult = parser.parse(new StringInputStream(document.get()), elementFactory, parseErrorHandler);
 			CompositeNode rootNode = parseResult.getRootNode();
 			if (Activator.DEBUG_PARSING)
@@ -144,7 +135,7 @@ public class XtextTokenScanner implements ITokenScanner {
 			}
 		}
 		catch (Exception e) {
-			CoreLog.logError(e);
+			CoreLog.logError("Error during parse process", e);
 		}
 	}
 
