@@ -16,7 +16,7 @@ package org.eclipse.xtext.service;
  */
 public interface ILanguageServiceFactory {
 
-    Class<? extends ILanguageService> getServiceClass();
+    Class<? extends ILanguageService> getServiceInterface();
     
     ILanguageService createLanguageService(); 
 }

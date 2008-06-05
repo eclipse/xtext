@@ -20,7 +20,7 @@ public class InheritingServiceFactory implements ILanguageServiceFactory {
         return new InheritingService();
     }
 
-    public Class<? extends ILanguageService> getServiceClass() {
+    public Class<? extends ILanguageService> getServiceInterface() {
         return InheritingService.class;
     }
    

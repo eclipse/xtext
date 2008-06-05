@@ -19,7 +19,7 @@ public class MyLanguageServiceFactory implements ILanguageServiceFactory {
         return new MyLanguageService();
     }
    
-    public Class<? extends ILanguageService> getServiceClass() {
+    public Class<? extends ILanguageService> getServiceInterface() {
         return MyLanguageService.class;
     }
    

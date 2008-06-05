@@ -18,20 +18,20 @@ import org.eclipse.xtext.service.ILanguageServiceFactory;
 public class GenericSingletonLanguageServiceFactory implements ILanguageServiceFactory{
 	
 	private ILanguageService service;
-	private Class<? extends ILanguageService> serviceClass;
+	private Class<? extends ILanguageService> serviceInterface;
 	
-	public GenericSingletonLanguageServiceFactory(ILanguageService service, Class<? extends ILanguageService> serviceClass) {
+	public GenericSingletonLanguageServiceFactory(ILanguageService service, Class<? extends ILanguageService> serviceInterface) {
 		super();
 		this.service = service;
-		this.serviceClass = serviceClass;
+		this.serviceInterface = serviceInterface;
 	}
 
 	public ILanguageService createLanguageService() {
 		return service;
 	}
 
-    public Class<? extends ILanguageService> getServiceClass() {
-        return serviceClass;
+    public Class<? extends ILanguageService> getServiceInterface() {
+        return serviceInterface;
     }
 
 }
