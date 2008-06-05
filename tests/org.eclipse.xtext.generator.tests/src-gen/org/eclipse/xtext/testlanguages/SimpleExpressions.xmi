@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <idElements>org</idElements>
-  <idElements>eclipse</idElements>
-  <idElements>xtext</idElements>
-  <idElements>testlanguages</idElements>
-  <idElements>SimpleExpressions</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simpleExpressions" nsURI="http://www.eclipse.org/xtext/test/simpleExpressions"/>
   <parserRules name="Multiplication">
     <type name="Expression"/>
     <alternatives xsi:type="xtext:Group">
@@ -72,4 +66,10 @@
       <abstractTokens xsi:type="xtext:Keyword" value=")"/>
     </alternatives>
   </parserRules>
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>testlanguages</idElements>
+  <idElements>SimpleExpressions</idElements>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simpleExpressions" nsURI="http://www.eclipse.org/xtext/test/simpleExpressions"/>
 </xtext:Grammar>

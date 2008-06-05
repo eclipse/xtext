@@ -11,7 +11,7 @@ language org.eclipse.xtext.XtextGrammarTest
 generate XtextTest "http://www.eclipse.org/2008/Test/XtextTest"
 
 Grammar  :
-	('language' idElements+=ID ('.' idElements+=ID)* ('extends' superGrammar=ID)?)?
+	((abstract?='abstract language' | 'language') idElements+=ID ('.' idElements+=ID)* ('extends' superGrammar=ID)?)?
 	metamodelDeclarations+=AbstractMetamodelDeclaration* 
     parserRules+=ParserRule*
     ('lexing' ':'

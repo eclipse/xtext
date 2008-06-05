@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <idElements>org</idElements>
-  <idElements>eclipse</idElements>
-  <idElements>xtext</idElements>
-  <idElements>XtextGrammarTest</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="XtextTest" nsURI="http://www.eclipse.org/2008/Test/XtextTest"/>
   <parserRules name="Grammar">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
@@ -12,7 +7,12 @@
           <abstractTokens xsi:type="xtext:Group" cardinality="?">
             <abstractTokens xsi:type="xtext:Group">
               <abstractTokens xsi:type="xtext:Group">
-                <abstractTokens xsi:type="xtext:Keyword" value="language"/>
+                <abstractTokens xsi:type="xtext:Alternatives">
+                  <groups xsi:type="xtext:Assignment" feature="abstract" operator="?=">
+                    <terminal xsi:type="xtext:Keyword" value="abstract language"/>
+                  </groups>
+                  <groups xsi:type="xtext:Keyword" value="language"/>
+                </abstractTokens>
                 <abstractTokens xsi:type="xtext:Assignment" feature="idElements" operator="+=">
                   <terminal xsi:type="xtext:RuleCall" name="ID"/>
                 </abstractTokens>
@@ -298,4 +298,9 @@
       <terminal xsi:type="xtext:RuleCall" name="ID"/>
     </alternatives>
   </parserRules>
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>XtextGrammarTest</idElements>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="XtextTest" nsURI="http://www.eclipse.org/2008/Test/XtextTest"/>
 </xtext:Grammar>

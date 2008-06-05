@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <idElements>org</idElements>
-  <idElements>eclipse</idElements>
-  <idElements>xtext</idElements>
-  <idElements>testlanguages</idElements>
-  <idElements>TestLanguage</idElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="TestLang" nsURI="http://www.eclipse.org/2008/xtext/TestLang"/>
   <parserRules name="EntryRule">
     <type name="Model"/>
     <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="multiFeature" operator="+=">
@@ -56,4 +50,10 @@
       <terminal xsi:type="xtext:RuleCall" name="STRING"/>
     </alternatives>
   </parserRules>
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>testlanguages</idElements>
+  <idElements>TestLanguage</idElements>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="TestLang" nsURI="http://www.eclipse.org/2008/xtext/TestLang"/>
 </xtext:Grammar>

@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g 2008-06-04 17:12:18
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g 2008-06-05 10:56:07
 
 package org.eclipse.xtext.metamodelreferencing.tests.parser.internal; 
 
@@ -56,14 +56,14 @@ public class InternalMetamodelRefTestParser extends AbstractAntlrParser {
 
     // $ANTLR start internalParse
     // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:88:1: internalParse returns [EObject current=null] : iv_ruleFoo= ruleFoo EOF ;
-    public EObject internalParse() throws RecognitionException {
+    public final EObject internalParse() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleFoo = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:89:3: (iv_ruleFoo= ruleFoo EOF )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:88:46: (iv_ruleFoo= ruleFoo EOF )
             // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:89:3: iv_ruleFoo= ruleFoo EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
@@ -93,7 +93,7 @@ public class InternalMetamodelRefTestParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleFoo
     // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:97:1: ruleFoo returns [EObject current=null] : ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) ;
-    public EObject ruleFoo() throws RecognitionException {
+    public final EObject ruleFoo() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
@@ -102,7 +102,7 @@ public class InternalMetamodelRefTestParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:99:1: ( ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:98:33: ( ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* ) )
             // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:99:1: ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* )
             {
             // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:99:1: ( (lv_name= RULE_ID ) (lv_nameRefs= ruleNameRef )* )
@@ -186,14 +186,14 @@ public class InternalMetamodelRefTestParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleNameRef
     // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:129:1: ruleNameRef returns [EObject current=null] : (lv_name= RULE_STRING ) ;
-    public EObject ruleNameRef() throws RecognitionException {
+    public final EObject ruleNameRef() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:131:1: ( (lv_name= RULE_STRING ) )
+            // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:130:33: ( (lv_name= RULE_STRING ) )
             // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:131:1: (lv_name= RULE_STRING )
             {
             // ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g:131:1: (lv_name= RULE_STRING )
