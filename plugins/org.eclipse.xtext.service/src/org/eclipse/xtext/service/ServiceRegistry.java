@@ -14,6 +14,7 @@ import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.WrappedException;
@@ -188,6 +189,13 @@ public class ServiceRegistry {
 		synchronized (factoryMap) {
 			factoryMap.clear();
 		}
+	}
+	
+	public static void dump() {
+	    Set<Pair<ILanguageDescriptor, Class<? extends ILanguageService>>> keySet = factoryMap.keySet();
+	    for (Pair<ILanguageDescriptor, Class<? extends ILanguageService>> pair : keySet) {
+            System.out.println(pair.getFirstElement() + " " + pair.getSecondElement().getSimpleName());
+        }
 	}
 
 }

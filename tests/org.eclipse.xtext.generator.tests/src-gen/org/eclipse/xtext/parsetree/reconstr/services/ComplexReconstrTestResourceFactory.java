@@ -6,11 +6,13 @@ import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
 public class ComplexReconstrTestResourceFactory extends AbstractXtextResourceFactory {
 
 	public ComplexReconstrTestResourceFactory() {
+		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("complexreconstrtest", this);
+		
 	}
 	
-	public String getModelFileExtension() {
-		return "complexreconstrtest";
+	public String[] getModelFileExtensions() {
+		return new String[] { "complexreconstrtest" };
 	}
 	
 } 

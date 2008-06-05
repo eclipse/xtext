@@ -6,11 +6,13 @@ import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
 public class SimpleExpressionsResourceFactory extends AbstractXtextResourceFactory {
 
 	public SimpleExpressionsResourceFactory() {
+		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("simpleexpressions", this);
+		
 	}
 	
-	public String getModelFileExtension() {
-		return "simpleexpressions";
+	public String[] getModelFileExtensions() {
+		return new String[] { "simpleexpressions" };
 	}
 	
 } 

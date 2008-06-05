@@ -8,6 +8,6 @@ public interface IResourceFactory extends Resource.Factory, ILanguageService {
     /**
      * @return
      */
-    String getModelFileExtension();
+    String[] getModelFileExtensions();
     
 }

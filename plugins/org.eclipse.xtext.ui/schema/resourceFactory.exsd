@@ -65,7 +65,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.service.ILanguageServiceFactory"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.resource.IResourceFactory"/>
                </appinfo>
             </annotation>
          </attribute>

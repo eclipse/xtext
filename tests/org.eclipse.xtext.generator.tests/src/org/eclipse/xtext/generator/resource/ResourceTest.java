@@ -23,7 +23,7 @@ public class ResourceTest extends TestCase {
 		org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup.doSetup();
 		IResourceFactory resourceFactory = ServiceRegistry.getService(TestLanguageStandaloneSetup.getLanguageDescriptor(), IResourceFactory.class);
 
-		File modelFile = File.createTempFile("testfile", "." + resourceFactory.getModelFileExtension());
+		File modelFile = File.createTempFile("testfile", "." + resourceFactory.getModelFileExtensions()[0]);
 		modelFile.deleteOnExit();
 		FileWriter fileWriter = new FileWriter(modelFile);
 		String model = "reducible 'x' choice optional y choice z reducible 'x' 'y'";
@@ -32,7 +32,7 @@ public class ResourceTest extends TestCase {
 		
 		ResourceSet rs0 = new ResourceSetImpl();
 		Resource resource = loadAsResource(modelFile, rs0);
-		File savedFile = File.createTempFile("testfile_save", "." + resourceFactory.getModelFileExtension());
+		File savedFile = File.createTempFile("testfile_save", "." + resourceFactory.getModelFileExtensions()[0]);
 		resource.setURI(URI.createURI(savedFile.toURL().toString()));
 		resource.setModified(true);
 		resource.save(null);

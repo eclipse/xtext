@@ -4,8 +4,8 @@ import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
 
 public class XtextResourceFactory extends AbstractXtextResourceFactory {
 
-	public String getModelFileExtension() {
-		return "xtext";
+	public String[] getModelFileExtensions() {
+		return new String[] {"xtext"};
 	}
 	
 } 

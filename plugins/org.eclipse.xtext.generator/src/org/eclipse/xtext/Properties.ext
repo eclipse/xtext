@@ -14,8 +14,8 @@ extension org::eclipse::xtext::Extensions;
 srcGenPath() :
 	get('src.gen.path');
 	
-modelFileExtension() :
-	get('model.file.extension');
+modelFileExtensions() :
+	get('model.file.extensions').split(',');
 
 packageName(Grammar this) :
 	getNamespace().replaceAll('/','\\.');

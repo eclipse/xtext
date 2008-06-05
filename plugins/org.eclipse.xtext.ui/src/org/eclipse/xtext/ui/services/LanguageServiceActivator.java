@@ -48,7 +48,7 @@ public class LanguageServiceActivator {
         serviceMap.put("proposalsProvider", IProposalsProvider.class);
         serviceMap.put("syntaxColorer", ISyntaxColorer.class);
         serviceMap.put("grammarAccess", IGrammarAccess.class);
-        serviceMap.put("metamodelAccess", IMetamodelAccess.class);
+        serviceMap.put("resourceFactory", IResourceFactory.class);
         serviceMap.put("metamodelAccess", IMetamodelAccess.class);
         serviceMap.put("tokenTypeDef", ITokenTypeDefService.class);
         serviceMap.put("valueConverter", IValueConverterService.class);
@@ -70,6 +70,7 @@ public class LanguageServiceActivator {
         try {
             ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
         } catch (Exception exc) {
+            int foo=32;
             // TODO: FIXME
         }
     }

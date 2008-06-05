@@ -21,7 +21,7 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public class ResourceFactoryTest extends AbstractServiceTest {
     
-    public static final String REFERENCE_GRAMMAR_FILE_EXTENSION = "tst";
+    public static final String REFERENCE_GRAMMAR_FILE_EXTENSION = "xtext";
     public void testResourceFactoryRegistration() throws Exception {
         ResourceSet rs = new ResourceSetImpl();
         Resource resource = rs.createResource(URI.createFileURI("test." + REFERENCE_GRAMMAR_FILE_EXTENSION));
