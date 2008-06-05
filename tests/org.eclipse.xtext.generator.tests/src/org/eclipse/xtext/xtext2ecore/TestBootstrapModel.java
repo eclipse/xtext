@@ -61,7 +61,7 @@ public class TestBootstrapModel extends AbstractGeneratorTest {
 		MetaModel xtext = (MetaModel) invokeWithXtend("select(e|e.alias()==null).first()", result);
 		MetaModel ecore = (MetaModel) invokeWithXtend("select(e|e.alias()=='ecore').first()", result);
 		assertEquals(15,xtext.getTypes().size());
-		assertEquals(2,ecore.getTypes().size());
+		assertEquals(3,ecore.getTypes().size());
 		
 		for(AbstractType t : xtext.getTypes()) {
 			System.out.println(t.getName()+" {");

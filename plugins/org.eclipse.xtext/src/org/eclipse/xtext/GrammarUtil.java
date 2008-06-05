@@ -9,11 +9,8 @@
 
 package org.eclipse.xtext;
 
-import static org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer;
-import static org.eclipse.xtext.EcoreUtil2.eAllContentsAsList;
-import static org.eclipse.xtext.EcoreUtil2.getAllContentsOfType;
-import static org.eclipse.xtext.EcoreUtil2.getContainerOfType;
-import static org.eclipse.xtext.EcoreUtil2.typeSelect;
+import static org.eclipse.emf.ecore.util.EcoreUtil.*;
+import static org.eclipse.xtext.EcoreUtil2.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -135,9 +132,6 @@ public class GrammarUtil {
 
 	public static Grammar getSuperGrammar(Grammar _this) {
 		String id = IXtextBuiltin.ID;
-		if(id.equals(getId(_this))) {
-		    return null;
-		}
 		if (_this.getSuperGrammar() != null) {
 			id = _this.getSuperGrammar();
 		}
@@ -249,6 +243,18 @@ public class GrammarUtil {
 
 	public static boolean isAssigned(EObject e) {
 		return containingAssignment(e) != null;
+	}
+
+	public static Set<String> getAllKeywords(Grammar g) {
+		Set<String> kws = new HashSet<String>();
+		List<ParserRule> rules = allParserRules(g);
+		for (ParserRule parserRule : rules) {
+			List<Keyword> list = typeSelect(eAllContentsAsList(parserRule),Keyword.class);
+			for (Keyword keyword : list) {
+				kws.add(keyword.getValue());
+			}
+		}
+		return kws;
 	}
 
 }

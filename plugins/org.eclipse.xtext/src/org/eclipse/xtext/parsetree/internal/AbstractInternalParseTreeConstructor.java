@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.RuleCall;
@@ -60,7 +61,7 @@ public abstract class AbstractInternalParseTreeConstructor {
 	public void update(EObject object) {
 		NodeAdapter adapter = getAdapter(object);
 		CompositeNode rootNode = null;
-		String ruleToCall = getGrammar().getParserRules().get(0).getName();
+		String ruleToCall = GrammarUtil.allParserRules(getGrammar()).get(0).getName();
 		if (adapter == null) {
 			rootNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
 			object = EcoreUtil.getRootContainer(object);
