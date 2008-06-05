@@ -55,7 +55,7 @@ public class CopyImages extends AbstractWorkflowComponent2 {
         for (String file : files) {
             File copy = new File(target.getAbsolutePath() + File.separatorChar + file);
             if (!copy.exists()) {
-                String uri = "org/eclipse/xtext/ui/icons/" + file;
+                String uri = "org/eclipse/xtext/ui/" + file;
                 InputStream is = ResourceLoaderFactory.createResourceLoader().getResourceAsStream(uri);
                 try {
                     copy.createNewFile();

@@ -28,7 +28,7 @@
             class="«editorClassFQN()»"
             default="true"
             extensions="test, tst"
-            icon="icons/editor/titleImage.gif"
+            icon="icons/editor.gif"
             id="«editorExtensionId()»"
             name="«languageName()» Editor">
       </editor>
