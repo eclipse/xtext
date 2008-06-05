@@ -19,7 +19,7 @@ String getFragment(emf::EObject object) :
 	JAVA org.eclipse.xtext.EcoreUtil2.getURIFragment(org.eclipse.emf.ecore.EObject);
 	
 String getId(Grammar g) :
-	JAVA org.eclipse.xtext.GrammarUtil.getId(org.eclipse.xtext.Grammar);
+	JAVA org.eclipse.xtext.GrammarUtil.getLanguageId(org.eclipse.xtext.Grammar);
 	
 String getName(Grammar g) :
 	JAVA org.eclipse.xtext.GrammarUtil.getName(org.eclipse.xtext.Grammar);
