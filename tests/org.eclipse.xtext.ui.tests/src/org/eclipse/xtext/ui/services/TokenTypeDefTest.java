@@ -27,8 +27,10 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 	private static final String KEYWORD_SPIELPLATZ = "spielplatz";
 	private static final String NUMBER_2 = "2";
 	private static final String STRING = "\"Unser Spielplatz\"";
+	private static final String EOF_COMMENT = "//EOF comment";
+
 	private static final String MODEL = MULTILINE_COMMENT + "\n" + KEYWORD_SPIELPLATZ + " " + NUMBER_2 + " " + STRING
-			+ " {\n" + SINGLELINE_COMMENT + "kind (jurgen 5)\nspielzeug (ente ROT)}";
+			+ " {\n" + SINGLELINE_COMMENT + "kind (jurgen 5)\nspielzeug (ente ROT)}\n" + EOF_COMMENT;
 	private EList<LeafNode> leafNodes;
 	private ITokenTypeDefService ttds;
 
@@ -79,6 +81,14 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 		ITokenTypeDef ttd = findTokenTypeDef(ttds, node);
 		assertNotNull(ttd);
 		assertEquals(BuildInTokenTypeDef.STRING_ID, ttd.getId());
+	}
+
+	public void testBuildInEOFCommentDef() throws Exception {
+		LeafNode node = findLeafNodeByText(EOF_COMMENT);
+		assertNotNull(node);
+		ITokenTypeDef ttd = findTokenTypeDef(ttds, node);
+		assertNotNull(ttd);
+		assertEquals(BuildInTokenTypeDef.SL_COMMENT_ID, ttd.getId());
 	}
 
 	private ITokenTypeDef findTokenTypeDef(ITokenTypeDefService ttds, LeafNode leafNode) {
