@@ -17,22 +17,28 @@ import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 
 /**
  * @author Peter Friese - Initial contribution and API
- *
+ * 
  */
 public class ServiceFactoryTest extends TestCase {
 
 	public void testGetSyntaxColorerHappyCase() throws ClassNotFoundException {
-	    Class.forName("org.eclipse.xtext.ui.core.editor.BaseTextEditor");
+		Class.forName("org.eclipse.xtext.ui.core.editor.BaseTextEditor");
 		ILanguageDescriptor language = LanguageDescriptorFactory.get("org.eclipse.xtext.ui.tests.dummylanguage");
 		ISyntaxColorer syntaxColorer = ServiceRegistry.getService(language, ISyntaxColorer.class);
 		assertNotNull(syntaxColorer);
 		assertEquals("org.eclipse.xtext.ui.TestSyntaxColorer", syntaxColorer.getClass().getName());
 	}
-	
+
 	public void testGetServiceWithoutClass() {
-		ILanguageDescriptor language = LanguageDescriptorFactory.createLanguageDescriptor("org.eclipse.xtexte.ui.tests.language.ServiceWithoutClass", "", "",null);
-		ISyntaxColorer syntaxColorer = ServiceRegistry.getService(language, ISyntaxColorer.class);
-		assertNull(syntaxColorer);	
+		ILanguageDescriptor language = LanguageDescriptorFactory.createLanguageDescriptor(
+				"org.eclipse.xtexte.ui.tests.language.ServiceWithoutClass", "", "", null);
+		ISyntaxColorer syntaxColorer = null;
+		try {
+			syntaxColorer = ServiceRegistry.getService(language, ISyntaxColorer.class);
+		}
+		catch (IllegalStateException ise) {
+		}
+		assertNull(syntaxColorer);
 	}
 
 }

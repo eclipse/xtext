@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
@@ -44,8 +45,8 @@ public class BuildInTokenTypeDef implements ITokenTypeDefService {
 		TokenTypeDef ttd = new TokenTypeDef(SL_COMMENT_ID) {
 			@Override
 			public boolean match(LeafNode node) {
-				if (node.getGrammarElement() instanceof RuleCall) {
-					return "SL_COMMENT".equals(((RuleCall) node.getGrammarElement()).getName());
+				if (node.getGrammarElement() instanceof LexerRule) {
+					return "SL_COMMENT".equals(((LexerRule) node.getGrammarElement()).getName());
 				}
 				return false;
 			}
@@ -59,8 +60,8 @@ public class BuildInTokenTypeDef implements ITokenTypeDefService {
 		TokenTypeDef ttd = new TokenTypeDef(ML_COMMENT_ID) {
 			@Override
 			public boolean match(LeafNode node) {
-				if (node.getGrammarElement() instanceof RuleCall) {
-					return "ML_COMMENT".equals(((RuleCall) node.getGrammarElement()).getName());
+				if (node.getGrammarElement() instanceof LexerRule) {
+					return "ML_COMMENT".equals(((LexerRule) node.getGrammarElement()).getName());
 				}
 				return false;
 			}

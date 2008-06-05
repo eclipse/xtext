@@ -25,7 +25,7 @@ import org.eclipse.xtext.ui.core.service.IProposalsProvider;
  */
 public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	private final IProposalsProvider proposalProvider;
-	private String errorMessage = null;
+	private String errorMessage;
 
 	public XtextContentAssistProcessor(IProposalsProvider proposalProvider) {
 		this.proposalProvider = proposalProvider;

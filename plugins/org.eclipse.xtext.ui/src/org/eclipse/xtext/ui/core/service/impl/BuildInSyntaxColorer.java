@@ -85,7 +85,8 @@ public class BuildInSyntaxColorer implements ISyntaxColorer {
 	}
 
 	private String getBackgroundColorForTokenType(String tokenType, String defaultBackgroundColor) {
-		String tokenBackgroundColorPreferenceKey = BuildInPreferenceStore.getTokenBackgroundColorPreferenceKey(tokenType);
+		String tokenBackgroundColorPreferenceKey = BuildInPreferenceStore
+				.getTokenBackgroundColorPreferenceKey(tokenType);
 		if (defaultBackgroundColor != null)
 			getPreferenceStore().setDefault(BuildInPreferenceStore.getTokenBackgroundColorPreferenceKey(tokenType),
 					defaultBackgroundColor);
