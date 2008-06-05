@@ -24,9 +24,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
+import org.eclipse.xtext.ui.CopyImages;
 import org.eclipse.xtext.util.GenProperties;
 import org.eclipse.xtext.xtextutil.XtextutilPackage;
 import org.openarchitectureware.expression.ExecutionContextImpl;
+import org.openarchitectureware.workflow.issues.IssuesImpl;
 import org.openarchitectureware.xpand2.XpandExecutionContextImpl;
 import org.openarchitectureware.xpand2.XpandFacade;
 import org.openarchitectureware.xpand2.output.Outlet;
@@ -146,6 +148,10 @@ public class GeneratorFacade {
 				facade.evaluate("org::eclipse::xtext::ui::Plugin::file", grammarModel);
 				facade.evaluate("org::eclipse::xtext::ui::Manifest::file", grammarModel);
 				facade.evaluate("org::eclipse::xtext::ui::Editor::file", grammarModel);
+				
+				CopyImages copier = new CopyImages();
+				copier.setTargetDir(uiProjectPath + "/icons/");
+				copier.invoke(null, null, new IssuesImpl());
 			}
 		}
 	}
