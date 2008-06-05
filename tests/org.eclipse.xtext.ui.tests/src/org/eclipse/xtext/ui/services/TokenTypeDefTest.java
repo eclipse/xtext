@@ -23,12 +23,12 @@ import org.eclipse.xtext.ui.core.tokentype.ITokenTypeDef;
  */
 public class TokenTypeDefTest extends AbstractServiceTest {
 	private static final String MULTILINE_COMMENT = "/*\n*multiline comment\n*/";
-	private static final String SINGLELINE_COMMENT = "//singleline comment";
+	private static final String SINGLELINE_COMMENT = "//singleline comment\n";
 	private static final String KEYWORD_SPIELPLATZ = "spielplatz";
 	private static final String NUMBER_2 = "2";
 	private static final String STRING = "\"Unser Spielplatz\"";
 	private static final String MODEL = MULTILINE_COMMENT + "\n" + KEYWORD_SPIELPLATZ + " " + NUMBER_2 + " " + STRING
-			+ " {\n" + SINGLELINE_COMMENT + "\nkind (jurgen 5)\nspielzeug (ente ROT)}";
+			+ " {\n" + SINGLELINE_COMMENT + "kind (jurgen 5)\nspielzeug (ente ROT)}";
 	private EList<LeafNode> leafNodes;
 	private ITokenTypeDefService ttds;
 

@@ -10,10 +10,13 @@ package org.eclipse.xtext.ui.services;
 
 import junit.framework.TestCase;
 
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.ui.core.editor.utils.StringInputStream;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -33,10 +36,15 @@ public class AbstractServiceTest extends TestCase {
 		return ServiceRegistry.getService(getDefaultTestLanguage(), clazz);
 	}
 
+	protected IParseResult getModelForDefaultLanguage(String model) {
+		IParser parser = getServiceForDefaultLanguage(IParser.class);
+		return parser.parse(new StringInputStream(model));
+	}
+
 	@Override
 	protected void setUp() throws Exception {
-	    super.setUp();
-	    // Activate UI plugin
-	    Class.forName("org.eclipse.xtext.ui.core.editor.BaseTextEditor");
+		super.setUp();
+		// Activate UI plugin
+		Class.forName("org.eclipse.xtext.ui.core.editor.BaseTextEditor");
 	}
 }

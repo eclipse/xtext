@@ -6,7 +6,7 @@
       <languageDescriptor
             id="org.eclipse.xtext.ui.tests.dummylanguage"
             name="Dummy Language"
-            superLanguage="org.eclipse.xtext.reference.ReferenceGrammar">
+            superLanguage="org.eclipse.xtext.builtin.XtextBuiltin">
       </languageDescriptor>
    </extension>
    <extension
@@ -19,15 +19,8 @@
    <extension
          point="org.eclipse.xtext.ui.tokenTypeDef">
       <tokenTypeDef
-            class="org.eclipse.xtext.ui.core.tokentype.BuildInTokenTypeDef"
+            class="org.eclipse.xtext.ui.TestTokenTypeDef"
             languageId="org.eclipse.xtext.ui.tests.dummylanguage">
       </tokenTypeDef>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.ui.preferenceStore">
-      <preferenceStore
-            class="org.eclipse.xtext.ui.core.service.impl.BuildInPreferenceStore"
-            languageId="org.eclipse.xtext.ui.tests.dummylanguage">
-      </preferenceStore>
    </extension>
 </plugin>

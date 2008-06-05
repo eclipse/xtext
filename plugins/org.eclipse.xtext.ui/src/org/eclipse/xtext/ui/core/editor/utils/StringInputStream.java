@@ -9,7 +9,6 @@
 package org.eclipse.xtext.ui.core.editor.utils;
 
 import java.io.ByteArrayInputStream;
-import java.io.UnsupportedEncodingException;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -17,16 +16,8 @@ import java.io.UnsupportedEncodingException;
  */
 public class StringInputStream extends ByteArrayInputStream {
 
-	private StringInputStream(byte[] buf) {
-		super(buf);
-	}
-
-	public StringInputStream(String string, String encoding) throws UnsupportedEncodingException {
-		this(string.getBytes());
-	}
-
-	public StringInputStream(String string) throws UnsupportedEncodingException {
-		this(string, System.getProperty("file.encoding"));
+	public StringInputStream(String string) {
+		super(string.getBytes());
 	}
 
 }
