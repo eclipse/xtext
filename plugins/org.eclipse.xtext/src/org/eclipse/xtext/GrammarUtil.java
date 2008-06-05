@@ -9,8 +9,11 @@
 
 package org.eclipse.xtext;
 
-import static org.eclipse.emf.ecore.util.EcoreUtil.*;
-import static org.eclipse.xtext.EcoreUtil2.*;
+import static org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer;
+import static org.eclipse.xtext.EcoreUtil2.eAllContentsAsList;
+import static org.eclipse.xtext.EcoreUtil2.getAllContentsOfType;
+import static org.eclipse.xtext.EcoreUtil2.getContainerOfType;
+import static org.eclipse.xtext.EcoreUtil2.typeSelect;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,7 +33,7 @@ import org.eclipse.xtext.service.ServiceRegistry;
  * @author svenefftinge
  */
 public class GrammarUtil {
-	public static String getId(Grammar g) {
+	public static String getLanguageId(Grammar g) {
 		StringBuffer buff = new StringBuffer();
 		EList<String> list = g.getIdElements();
 		for (int i = 0, x = list.size(); i < x; i++) {
@@ -131,6 +134,9 @@ public class GrammarUtil {
 	}
 
 	public static Grammar getSuperGrammar(Grammar _this) {
+	    if(IXtextBuiltin.ID.equals(getLanguageId(_this))) {
+	        return null;
+	    }
 		String id = IXtextBuiltin.ID;
 		if (_this.getSuperGrammar() != null) {
 			id = _this.getSuperGrammar();

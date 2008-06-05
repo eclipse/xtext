@@ -1,18 +1,25 @@
 package org.eclipse.xtext.ui.services;
 
+import static org.eclipse.xtext.ui.services.GenericRegisteredServiceFactory.getConfigurationElement;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
-import org.eclipse.xtext.builtin.IXtextBuiltin;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.internal.Activator;
@@ -21,31 +28,50 @@ import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
 import org.eclipse.xtext.ui.core.service.IProposalsProvider;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 import org.eclipse.xtext.ui.core.service.ITokenTypeDefService;
+import org.eclipse.xtext.ui.services.LanguageDescriptorHierarchyUtil.LanguageDescriptorDescriptor;
 
 public class LanguageServiceActivator {
 
     private static final String LANGUAGE_DESCRIPTOR = "languageDescriptor";
     private static final String ID = "id";
     private static final String NAME = "name";
+    private static final String SUPER_LANGUAGE = "superLanguage";
+
+    private static final Map<String, Class<? extends ILanguageService>> serviceMap;
+
+    static {
+        serviceMap = new HashMap<String, Class<? extends ILanguageService>>();
+        serviceMap.put("parser", IParser.class);
+        serviceMap.put("aSTFactory", IElementFactory.class);
+        serviceMap.put("parseTreeConstructor", IParseTreeConstructor.class);
+        serviceMap.put("preferenceStore", IPreferenceStoreService.class);
+        serviceMap.put("proposalsProvider", IProposalsProvider.class);
+        serviceMap.put("syntaxColorer", ISyntaxColorer.class);
+        serviceMap.put("grammarAccess", IGrammarAccess.class);
+        serviceMap.put("metamodelAccess", IMetamodelAccess.class);
+        serviceMap.put("metamodelAccess", IMetamodelAccess.class);
+        serviceMap.put("tokenTypeDef", ITokenTypeDefService.class);
+        serviceMap.put("valueConverter", IValueConverterService.class);
+    }
 
     public static void activateServices() {
         registerLanguageDescriptors();
-        ILanguageDescriptor baseLanguageDescriptor = LanguageDescriptorFactory.get(IXtextBuiltin.ID);
-        registerDefaultServices(baseLanguageDescriptor);
     }
 
     private static void registerDefaultServices(ILanguageDescriptor languageDescriptor) {
-        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IParser.class, "parser"));
-        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IElementFactory.class, "aSTFactory"));
-        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IParseTreeConstructor.class, "parseTreeConstructor"));
-        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IResourceFactory.class, "resourceFactory"));
-        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IPreferenceStoreService.class, "preferenceStore"));
-        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IProposalsProvider.class, "proposalsProvider"));
-        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, ISyntaxColorer.class, "syntaxColorer"));
-        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IGrammarAccess.class, "grammarAccess"));
-        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IMetamodelAccess.class, "metamodelAccess"));
-        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, ITokenTypeDefService.class, "tokenTypeDef"));
-        ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IValueConverterService.class, "valueConverter"));
+        for (String serviceName : serviceMap.keySet()) {
+            IConfigurationElement configurationElement = getConfigurationElement(serviceName, languageDescriptor);
+            if (configurationElement != null) {
+                ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, serviceMap
+                        .get(serviceName), configurationElement));
+            }
+        }
+        // register resource factory to EMF
+        try {
+            ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
+        } catch (Exception exc) {
+            // TODO: FIXME
+        }
     }
 
     private static void registerLanguageDescriptors() {
@@ -53,12 +79,20 @@ public class LanguageServiceActivator {
         Assert.isNotNull(extensionPoint, "Extension point " + LANGUAGE_DESCRIPTOR + " not defined!");
         IConfigurationElement[] elements = extensionPoint.getConfigurationElements();
         if (elements != null) {
+            List<LanguageDescriptorDescriptor> languageDDs = new ArrayList<LanguageDescriptorDescriptor>();
             for (IConfigurationElement element : elements) {
-                String languageId = element.getAttribute(ID);
-                String languageName = element.getAttribute(NAME);
-                String namespace = element.getNamespaceIdentifier();
+                LanguageDescriptorDescriptor languageDD = new LanguageDescriptorDescriptor();
+                languageDD.languageId = element.getAttribute(ID);
+                languageDD.languageName = element.getAttribute(NAME);
+                languageDD.namespace = element.getNamespaceIdentifier();
+                languageDD.superLanguageID = element.getAttribute(SUPER_LANGUAGE);
+                languageDDs.add(languageDD);
+            }
+            languageDDs = LanguageDescriptorHierarchyUtil.sortLanguageDescriptors(languageDDs);
+            for (LanguageDescriptorDescriptor languageDD : languageDDs) {
                 try {
-                    ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.createLanguageDescriptor(languageId, languageName, namespace, null);
+                    ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.createLanguageDescriptor(languageDD.languageId,
+                            languageDD.languageName, languageDD.namespace, LanguageDescriptorFactory.get(languageDD.superLanguageID));
                     registerDefaultServices(languageDescriptor);
                 } catch (Exception e) {
                     CoreLog.logError(e);

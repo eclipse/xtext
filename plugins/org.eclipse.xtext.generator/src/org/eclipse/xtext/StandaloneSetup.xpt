@@ -46,9 +46,9 @@ public abstract class «languageName()»StandaloneSetup {
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
 			«FOREACH services() AS s-»
 			ServiceRegistry.registerService(languageDescriptor, new «serviceClassFQN(s)»(), «serviceInterface(s)».class);
-			«ENDFOREACH»	
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"«modelFileExtension()»", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
+			«ENDFOREACH»
+			// register resource factory to EMF
+			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
 			isInitialized = true;
 		}
 	}

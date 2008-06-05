@@ -32,9 +32,9 @@ public abstract class ReferenceGrammarStandaloneSetup {
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.reference.services.ReferenceGrammarMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.reference.parsetree.ReferenceGrammarParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters(), org.eclipse.xtext.conversion.IValueConverterService.class);
-				
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"referencegrammar", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
+			
+			// register resource factory to EMF
+			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
 			isInitialized = true;
 		}
 	}

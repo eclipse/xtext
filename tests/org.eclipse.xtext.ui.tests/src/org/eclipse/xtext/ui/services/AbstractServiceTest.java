@@ -32,4 +32,11 @@ public class AbstractServiceTest extends TestCase {
 	protected <T extends ILanguageService> T getServiceForDefaultLanguage(Class<T> clazz) {
 		return ServiceRegistry.getService(getDefaultTestLanguage(), clazz);
 	}
+
+	@Override
+	protected void setUp() throws Exception {
+	    super.setUp();
+	    // Activate UI plugin
+	    Class.forName("org.eclipse.xtext.ui.core.editor.BaseTextEditor");
+	}
 }
