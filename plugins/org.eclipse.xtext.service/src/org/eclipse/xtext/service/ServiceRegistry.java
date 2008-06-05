@@ -15,8 +15,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.text.WrappedPlainView;
-
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.service.internal.GenericSingletonLanguageServiceFactory;
@@ -39,7 +37,8 @@ public class ServiceRegistry {
 	public static <T extends ILanguageService> T getService(ILanguageDescriptor languageDescriptor,
 			Class<T> serviceInterface) {
 		Map<Class<?>, ILanguageService> cachedServices = new HashMap<Class<?>, ILanguageService>();
-		return (T) findAndInitializeService(languageDescriptor, serviceInterface, cachedServices);
+		ILanguageService service = findAndInitializeService(languageDescriptor, serviceInterface, cachedServices);
+        return (T) service;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -32,9 +32,9 @@ public abstract class OptionalEmptyLanguageStandaloneSetup {
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.parsetree.OptionalEmptyLanguageParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters(), org.eclipse.xtext.conversion.IValueConverterService.class);
-				
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"optionalemptylanguage", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
+			
+			// register resource factory to EMF
+			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
 			isInitialized = true;
 		}
 	}

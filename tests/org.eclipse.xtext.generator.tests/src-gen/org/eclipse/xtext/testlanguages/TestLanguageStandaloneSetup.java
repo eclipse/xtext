@@ -32,9 +32,9 @@ public abstract class TestLanguageStandaloneSetup {
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.services.TestLanguageMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.testlanguages.parsetree.TestLanguageParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
 			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters(), org.eclipse.xtext.conversion.IValueConverterService.class);
-				
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"testlanguage", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
+			
+			// register resource factory to EMF
+			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
 			isInitialized = true;
 		}
 	}
