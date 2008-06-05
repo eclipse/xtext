@@ -37,7 +37,8 @@
          point="org.eclipse.xtext.ui.languageDescriptor">
       <languageDescriptor
             id="«languageId()»"
-            name="«languageName()»">
+            name="«languageName()»"
+            superLanguage="org.eclipse.xtext.builtin.XtextBuiltin">
       </languageDescriptor>
    </extension>
    «FOREACH services() AS serviceName»«EXPAND registerServiceFactory(serviceName)-»«ENDFOREACH-»
