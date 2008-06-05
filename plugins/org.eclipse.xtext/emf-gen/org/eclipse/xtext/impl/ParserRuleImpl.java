@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParserRuleImpl.java,v 1.10 2008/06/05 08:58:46 sefftinge Exp $
+ * $Id: ParserRuleImpl.java,v 1.11 2008/06/05 15:03:51 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -34,164 +34,157 @@ import org.eclipse.xtext.XtextPackage;
 public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 {
   /**
-   * The cached value of the '{@link #getAlternatives() <em>Alternatives</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getAlternatives() <em>Alternatives</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAlternatives()
-   * @generated
-   * @ordered
-   */
+	 * @see #getAlternatives()
+	 * @generated
+	 * @ordered
+	 */
   protected AbstractElement alternatives;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ParserRuleImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return XtextPackage.Literals.PARSER_RULE;
-  }
+		return XtextPackage.Literals.PARSER_RULE;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public AbstractElement getAlternatives()
   {
-    return alternatives;
-  }
+		return alternatives;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NotificationChain basicSetAlternatives(AbstractElement newAlternatives, NotificationChain msgs)
   {
-    AbstractElement oldAlternatives = alternatives;
-    alternatives = newAlternatives;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtextPackage.PARSER_RULE__ALTERNATIVES, oldAlternatives, newAlternatives);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
+		AbstractElement oldAlternatives = alternatives;
+		alternatives = newAlternatives;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtextPackage.PARSER_RULE__ALTERNATIVES, oldAlternatives, newAlternatives);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setAlternatives(AbstractElement newAlternatives)
   {
-    if (newAlternatives != alternatives)
-    {
-      NotificationChain msgs = null;
-      if (alternatives != null)
-        msgs = ((InternalEObject)alternatives).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtextPackage.PARSER_RULE__ALTERNATIVES, null, msgs);
-      if (newAlternatives != null)
-        msgs = ((InternalEObject)newAlternatives).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtextPackage.PARSER_RULE__ALTERNATIVES, null, msgs);
-      msgs = basicSetAlternatives(newAlternatives, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.PARSER_RULE__ALTERNATIVES, newAlternatives, newAlternatives));
-  }
+		if (newAlternatives != alternatives) {
+			NotificationChain msgs = null;
+			if (alternatives != null)
+				msgs = ((InternalEObject)alternatives).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtextPackage.PARSER_RULE__ALTERNATIVES, null, msgs);
+			if (newAlternatives != null)
+				msgs = ((InternalEObject)newAlternatives).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtextPackage.PARSER_RULE__ALTERNATIVES, null, msgs);
+			msgs = basicSetAlternatives(newAlternatives, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.PARSER_RULE__ALTERNATIVES, newAlternatives, newAlternatives));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case XtextPackage.PARSER_RULE__ALTERNATIVES:
-        return basicSetAlternatives(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case XtextPackage.PARSER_RULE__ALTERNATIVES:
+				return basicSetAlternatives(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case XtextPackage.PARSER_RULE__ALTERNATIVES:
-        return getAlternatives();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case XtextPackage.PARSER_RULE__ALTERNATIVES:
+				return getAlternatives();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case XtextPackage.PARSER_RULE__ALTERNATIVES:
-        setAlternatives((AbstractElement)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case XtextPackage.PARSER_RULE__ALTERNATIVES:
+				setAlternatives((AbstractElement)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case XtextPackage.PARSER_RULE__ALTERNATIVES:
-        setAlternatives((AbstractElement)null);
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case XtextPackage.PARSER_RULE__ALTERNATIVES:
+				setAlternatives((AbstractElement)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case XtextPackage.PARSER_RULE__ALTERNATIVES:
-        return alternatives != null;
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case XtextPackage.PARSER_RULE__ALTERNATIVES:
+				return alternatives != null;
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //ParserRuleImpl

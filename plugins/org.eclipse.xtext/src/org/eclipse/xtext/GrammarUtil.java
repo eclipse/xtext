@@ -137,9 +137,9 @@ public class GrammarUtil {
 	    if(IXtextBuiltin.ID.equals(getLanguageId(_this))) {
 	        return null;
 	    }
-		String id = IXtextBuiltin.ID;
-		if (_this.getSuperGrammar() != null) {
-			id = _this.getSuperGrammar();
+		String id = getSuperGrammarId(_this);
+		if (id == null) {
+			id = IXtextBuiltin.ID;
 		}
 		ILanguageDescriptor descriptor = LanguageDescriptorFactory.get(id);
 		if (descriptor == null)
@@ -149,6 +149,18 @@ public class GrammarUtil {
 			throw new IllegalStateException("Language '"+id+"' has not been set up properly");
 		Grammar superGrammar = service.getGrammar();
 		return superGrammar == _this ? null : superGrammar;
+	}
+	
+	public static String getSuperGrammarId(Grammar _this) {
+		if (_this.getSuperGrammarIdElements().isEmpty())
+			return null;
+		StringBuffer buff = new StringBuffer();
+		for (int i = 0, x = _this.getSuperGrammarIdElements().size(); i<x; i++) {
+			buff.append(_this.getSuperGrammarIdElements().get(i));
+			if ((i+1)<x)
+				buff.append(".");
+		}
+		return buff.toString();
 	}
 
 	public static AbstractRule findRuleForName(Grammar _this, String ruleName) {
@@ -230,7 +242,7 @@ public class GrammarUtil {
 	}
 
 	public static boolean isAbstract(Grammar grammarModel) {
-		return typeSelect(grammarModel.getMetamodelDeclarations(), GeneratedMetamodel.class).isEmpty();
+		return grammarModel.isAbstract();
 	}
 
 	public static String getReturnTypeName(AbstractRule rule) {

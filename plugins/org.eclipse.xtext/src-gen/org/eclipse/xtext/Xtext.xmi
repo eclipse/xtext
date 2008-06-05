@@ -30,9 +30,17 @@
               </abstractTokens>
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Group" cardinality="?">
-              <abstractTokens xsi:type="xtext:Keyword" value="extends"/>
-              <abstractTokens xsi:type="xtext:Assignment" feature="superGrammar" operator="=">
-                <terminal xsi:type="xtext:RuleCall" name="ID"/>
+              <abstractTokens xsi:type="xtext:Group">
+                <abstractTokens xsi:type="xtext:Keyword" value="extends"/>
+                <abstractTokens xsi:type="xtext:Assignment" feature="superGrammarIdElements" operator="+=">
+                  <terminal xsi:type="xtext:RuleCall" name="ID"/>
+                </abstractTokens>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Group" cardinality="*">
+                <abstractTokens xsi:type="xtext:Keyword" value="."/>
+                <abstractTokens xsi:type="xtext:Assignment" feature="superGrammarIdElements" operator="+=">
+                  <terminal xsi:type="xtext:RuleCall" name="ID"/>
+                </abstractTokens>
               </abstractTokens>
             </abstractTokens>
           </abstractTokens>

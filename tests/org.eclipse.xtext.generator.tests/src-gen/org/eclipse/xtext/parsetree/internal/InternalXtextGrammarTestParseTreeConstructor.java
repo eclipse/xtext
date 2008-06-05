@@ -204,7 +204,12 @@ new Predicate(obj) {
 if (
 new Predicate(obj) { 
 		public boolean check() {
-			return obj.checkConsume("superGrammar")&&true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
+			return obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
 		}
 }.check() ||
 new Predicate(obj) { 
@@ -214,7 +219,12 @@ new Predicate(obj) {
 }.check() ||
 new Predicate(obj) { 
 		public boolean check() {
-			return obj.checkConsume("superGrammar")&&true&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
+			return obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("superGrammarIdElements")&&true&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&obj.checkConsume("superGrammarIdElements")&&true&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
 		}
 }.check() ||
 new Predicate(obj) { 
@@ -224,7 +234,12 @@ new Predicate(obj) {
 }.check() ||
 new Predicate(obj) { 
 		public boolean check() {
-			return obj.checkConsume("superGrammar")&&true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&true; 
+			return obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&true; 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&true; 
 		}
 }.check() ||
 new Predicate(obj) { 
@@ -234,7 +249,12 @@ new Predicate(obj) {
 }.check() ||
 new Predicate(obj) { 
 		public boolean check() {
-			return obj.checkConsume("superGrammar")&&true&&true&&obj.checkConsume("idElements")&&true; 
+			return obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("superGrammarIdElements")&&true&&true&&obj.checkConsume("idElements")&&true; 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&obj.checkConsume("superGrammarIdElements")&&true&&true&&obj.checkConsume("idElements")&&true; 
 		}
 }.check() ||
 new Predicate(obj) { 
@@ -249,7 +269,22 @@ new Predicate(obj) {
 if (
 new Predicate(obj) { 
 		public boolean check() {
-			return obj.checkConsume("superGrammar")&&true; 
+			return true&&obj.checkConsume("superGrammarIdElements")&&true; 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("superGrammarIdElements")&&true; 
+		}
+}.check() ){
+
+		
+/* xtext::Group */ 
+
+while (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("superGrammarIdElements")&&true; 
 		}
 }.check() ){
 
@@ -257,14 +292,14 @@ new Predicate(obj) {
 /* xtext::Assignment */ 
 {
 
-	final Object value = obj.consume("superGrammar");
+	final Object value = obj.consume("superGrammarIdElements");
     
 /* xtext::RuleCall */ 
 {
 
 	
 		
-		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"));
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal"));
 		
 	
 
@@ -279,7 +314,47 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0"));
+
+}
+
+
+}
+
+		
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Assignment */ 
+{
+
+	final Object value = obj.consume("superGrammarIdElements");
+    
+/* xtext::RuleCall */ 
+{
+
+	
+		
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
+
+}
+
+		
+/* xtext::Keyword */ 
+{
+
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
+
+}
+
 
 }
 

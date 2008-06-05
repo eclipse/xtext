@@ -52,6 +52,7 @@ package org.eclipse.xtext.parser.internal;
 @parser::header {
 package org.eclipse.xtext.parser.internal; 
 
+import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
@@ -69,11 +70,9 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 		grammar = g;
     }
     
-    protected void setLexerRule(LeafNode node, Token t) {
-    /*    LexerRule lexerRule = XtextTokenTypeResolver.getLexerRule(node, t.getType());
-        if(lexerRule != null) {
-            node.setGrammarElement(lexerRule);
-        }*/
+    protected InputStream getTokenFile() {
+    	ClassLoader classLoader = InternalXtextParser.class.getClassLoader();
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/internal/InternalXtext.tokens");
     }
 }
 
@@ -141,15 +140,15 @@ ruleGrammar returns [EObject current=null]
             associateNodeWithAstElement(currentNode, $current);
         }
         factory.add($current, "idElements", lv_idElements,"ID");    }
-))*)('extends' 
+))*)(('extends' 
 
     {
-        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 (
-    lv_superGrammar=RULE_ID
+    lv_superGrammarIdElements=RULE_ID
     { 
-    createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"superGrammar"); 
+    createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"superGrammarIdElements"); 
     }
  
     {
@@ -157,8 +156,25 @@ ruleGrammar returns [EObject current=null]
             $current = factory.create("Grammar");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "superGrammar", lv_superGrammar,"ID");    }
-))?)(
+        factory.add($current, "superGrammarIdElements", lv_superGrammarIdElements,"ID");    }
+))('.' 
+
+    {
+        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+    }
+(
+    lv_superGrammarIdElements=RULE_ID
+    { 
+    createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"superGrammarIdElements"); 
+    }
+ 
+    {
+        if ($current==null) {
+            $current = factory.create("Grammar");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        factory.add($current, "superGrammarIdElements", lv_superGrammarIdElements,"ID");    }
+))*)?)(
     
     { 
         currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -794,7 +810,7 @@ RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '
 
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;};
+RULE_SL_COMMENT : '//' ~('\n'|'\r')* '\r'? '\n'{$channel=HIDDEN;};
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 

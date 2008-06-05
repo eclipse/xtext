@@ -119,14 +119,12 @@ public class GeneratorFacade {
 		resource.getContents().add(grammarModel);
 		resource.save(null);
 
-		boolean isConcrete = !GrammarUtil.isAbstract(grammarModel);
-
 		XpandFacade facade = XpandFacade.create(execCtx);
 		facade.evaluate("org::eclipse::xtext::StandaloneSetup::file", grammarModel);
-		if (isConcrete) {
+		facade.evaluate("org::eclipse::xtext::services::GrammarAccess::file", grammarModel);
+		facade.evaluate("org::eclipse::xtext::services::MetamodelAccess::file", grammarModel);
+		if (!GrammarUtil.isAbstract(grammarModel)) {
 			facade.evaluate("org::eclipse::xtext::ILanguage::file", grammarModel);
-			facade.evaluate("org::eclipse::xtext::services::GrammarAccess::file", grammarModel);
-            facade.evaluate("org::eclipse::xtext::services::MetamodelAccess::file", grammarModel);
             facade.evaluate("org::eclipse::xtext::services::ResourceFactory::file", grammarModel);
 			facade.evaluate("org::eclipse::xtext::parser::IParser::parser", grammarModel);
 			facade.evaluate("org::eclipse::xtext::parser::AntlrGrammar::grammar", grammarModel);
@@ -175,7 +173,6 @@ public class GeneratorFacade {
 			}
 			else {
     			if (!isCVSFile(file)) {
-    			    System.out.println("Deleting file " + file.getName());
     				if (!delete(file)) {
     					log.error("Couldn't delete " + file.getAbsolutePath());
     				}

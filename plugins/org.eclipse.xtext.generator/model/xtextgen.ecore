@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xtextgen"
+    nsURI="htpp://www.eclipse.org/xtext/2008/xtextgen" nsPrefix="xtextgen">
+  <eClassifiers xsi:type="ecore:EClass" name="Service" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interfaceName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generateFor" eType="#//LanguageKind"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LanguageKind">
+    <eLiterals name="BOTH" value="1"/>
+    <eLiterals name="CONCRETE" value="2"/>
+    <eLiterals name="ABSTRACT" value="3"/>
+  </eClassifiers>
+</ecore:EPackage>
