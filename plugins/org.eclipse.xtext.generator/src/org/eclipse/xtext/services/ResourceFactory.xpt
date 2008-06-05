@@ -23,11 +23,13 @@ import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
 public class «serviceClass("ResourceFactory")» extends AbstractXtextResourceFactory {
 
 	public «serviceClass("ResourceFactory")»() {
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension()»", this);
+		«FOREACH modelFileExtensions() AS modelFileExtension»
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", this);
+		«ENDFOREACH»
 	}
 	
-	public String getModelFileExtension() {
-		return "«modelFileExtension()»";
+	public String[] getModelFileExtensions() {
+		return new String[] { «FOREACH modelFileExtensions() AS modelFileExtension SEPARATOR ', '»"«modelFileExtension»"«ENDFOREACH» };
 	}
 	
 } 

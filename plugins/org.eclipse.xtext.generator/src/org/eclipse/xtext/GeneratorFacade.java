@@ -62,7 +62,7 @@ public class GeneratorFacade {
 
 	@SuppressWarnings("unchecked")
 	public static void generate(Grammar grammarModel, String srcGenPath,
-			String uiProjectPath, String modelFileExtension) throws IOException {
+			String uiProjectPath, String... modelFileExtensions) throws IOException {
 		EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(XtextPackage.eNS_URI, XtextPackage.eINSTANCE);
 		OutputImpl output = new OutputImpl();
@@ -104,7 +104,12 @@ public class GeneratorFacade {
 		p.setProperty("language.name", languageName);
 		p.setProperty("language.namespace", languageNamespace);
 		p.setProperty("src.gen.path", srcGenPath);
-        p.setProperty("model.file.extension", modelFileExtension);
+		StringBuffer stringBuffer = new StringBuffer(modelFileExtensions[0]);
+		for (int i=1; i<  modelFileExtensions.length; ++i) {
+            stringBuffer.append(",");
+            stringBuffer.append(modelFileExtensions[i]);
+        }
+        p.setProperty("model.file.extensions", stringBuffer.toString());
         p.setProperty("file.header", "");
 		GenProperties.setProperties(p);
 
