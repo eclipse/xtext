@@ -6,6 +6,7 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.builtin.IXtextBuiltin;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParser;
@@ -29,7 +30,7 @@ public class LanguageServiceActivator {
 
     public static void activateServices() {
         registerLanguageDescriptors();
-        ILanguageDescriptor baseLanguageDescriptor = getBaseLanguageDescriptor();
+        ILanguageDescriptor baseLanguageDescriptor = LanguageDescriptorFactory.get(IXtextBuiltin.ID);
         registerDefaultServices(baseLanguageDescriptor);
     }
 
@@ -45,7 +46,7 @@ public class LanguageServiceActivator {
         ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IMetamodelAccess.class, "metamodelAccess"));
         ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, ITokenTypeDefService.class, "tokenTypeDef"));
         ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, IValueConverterService.class, "valueConverter"));
-          }
+    }
 
     private static void registerLanguageDescriptors() {
         IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(Activator.PLUGIN_ID, LANGUAGE_DESCRIPTOR);
@@ -66,8 +67,4 @@ public class LanguageServiceActivator {
         }
     }
 
-    private static ILanguageDescriptor getBaseLanguageDescriptor() {
-        // TODO: replace after bootstrap
-        return LanguageDescriptorFactory.get("org.eclipse.xtext.BaseLanguage");
-    }
 }

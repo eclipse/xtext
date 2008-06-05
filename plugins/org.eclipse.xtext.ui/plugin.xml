@@ -27,8 +27,29 @@
    <extension
          point="org.eclipse.xtext.ui.languageDescriptor">
       <languageDescriptor
-            id="org.eclipse.xtext.BaseLanguage"
+            id="org.eclipse.xtext.builtin.XtextBuiltin"
             name="XtextBase">
       </languageDescriptor>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.grammarAccess">
+      <grammarAccess
+            class="org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess"
+            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
+      </grammarAccess>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.metamodelAccess">
+      <metamodelAccess
+            class="org.eclipse.xtext.builtin.XtextBuiltinMetamodelAccess"
+            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
+      </metamodelAccess>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.valueConverter">
+      <valueConverter
+            class="org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters"
+            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
+      </valueConverter>
    </extension>
 </plugin>
