@@ -10,21 +10,26 @@
 «ENDREM»
 
 «IMPORT xtext»
+«IMPORT xtextgen»
 
 «EXTENSION org::eclipse::xtext::parser::AntlrGrammar»
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::XtextUtil»
+«EXTENSION org::eclipse::xtext::parser::Parser»
 
-«DEFINE grammar FOR Grammar»
-«FILE pathName()+'/parser/internal/Internal'+languageName()+'.g'»
-grammar Internal«languageName()»;
+«DEFINE grammar FOR GenService»
+«FILE internalAntlrGrammarFullPath()»
+/*
+«fileHeader()»
+*/
+grammar «internalAntlrGrammarName()»;
 
 options {
 	superClass=AbstractAntlrParser;
 }
 
 @lexer::header {
-package «packageName()».parser.internal;
+package «internalPackage()»;
 }
 
 @lexer::members {
@@ -68,7 +73,7 @@ package «packageName()».parser.internal;
 }
 
 @parser::header {
-package «packageName()».parser.internal; 
+package «internalPackage()»; 
 
 import java.io.InputStream;
 import org.eclipse.xtext.*;
@@ -82,15 +87,15 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 
 @parser::members {
  
-    public Internal«languageName()»Parser(TokenStream input, IElementFactory factory, Grammar g) {
+    public «internalParserClassName()»(TokenStream input, IElementFactory factory, Grammar g) {
         this(input);
         this.factory = factory;
 		grammar = g;
     }
     
     protected InputStream getTokenFile() {
-    	ClassLoader classLoader = Internal«languageName()»Parser.class.getClassLoader();
-    	return classLoader.getResourceAsStream("«pathName()»/parser/internal/Internal«languageName()».tokens");
+    	ClassLoader classLoader = «internalParserClassName()».class.getClassLoader();
+    	return classLoader.getResourceAsStream("«internalPackageFullPath()»/«internalAntlrGrammarName()».tokens");
     }
 }
 
@@ -102,7 +107,11 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
         reportError(error, re);
     } 
 }
+«EXPAND antlrRules FOR grammar()»
+«ENDFILE»
+«ENDDEFINE»
 
+«DEFINE antlrRules FOR Grammar»
 internalParse returns [EObject current=null] :
 	 { currentNode = «EXPAND createCompositeNode FOR parserRules.first()» }
 	 iv_«parserRules.first().ruleName()»=«parserRules.first().ruleName()» 
@@ -112,9 +121,8 @@ internalParse returns [EObject current=null] :
 «EXPAND rule(this) FOREACH allParserRules()»
 
 «EXPAND rule(this) FOREACH allLexerRules()»
-
-«ENDFILE»
 «ENDDEFINE»
+
 
 «DEFINE rule(Grammar g) FOR ParserRule»
 «IF isCalled(g)»

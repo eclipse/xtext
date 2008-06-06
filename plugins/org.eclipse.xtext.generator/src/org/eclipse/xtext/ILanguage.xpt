@@ -10,15 +10,19 @@
 «ENDREM»
 
 «IMPORT xtext»
+«IMPORT xtextgen»
 
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
 
-«DEFINE file FOR Grammar»
-«FILE pathName()+'/I'+languageName()+'.java'-»
-package «packageName()»;
+«DEFINE root FOR GenClass»
+«FILE genClassFQName.toJavaFilePath()-»
+/*
+«fileHeader()»
+*/
+package «genClassPackageFQName()»;
 
-public interface I«languageName()» {
+public interface «genClassName()» {
 
 	/**
 	 * the unique identifier of this language. 
@@ -26,9 +30,9 @@ public interface I«languageName()» {
 	 * Within ILanguageServices it is encouraged to use dependency injection instead
 	 * of directly accessing the ServiceRegistry 
 	 */
-	public static final String ID = "«getId()»";
-	public static final String NAME = "«getName()»";
-	public static final String NAMESPACE = "«getNamespace()»";
+	public static final String ID = "«grammar().getId()»";
+	public static final String NAME = "«grammar().getName()»";
+	public static final String NAMESPACE = "«grammar().getNamespace()»";
 }
 «ENDFILE»
 «ENDDEFINE»

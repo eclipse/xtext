@@ -7,12 +7,22 @@
  *
  *******************************************************************************/
 import xtext;
+import xtextgen;
 import predicate;
 
 extension org::eclipse::xtext::Properties reexport;
 extension org::eclipse::xtext::Extensions reexport;
 extension org::eclipse::xtext::XtextUtil;
 extension org::openarchitectureware::util::stdlib::io;
+
+internalParsetreePackageName(GenService service) :
+	service.genClassPackageFQName() + ".internal";
+	
+internalParsetreeConstructorFQName(GenService service) :
+	 internalParsetreePackageName(service) + "." + internalParsetreeConstructorName(service);
+
+internalParsetreeConstructorName(GenService service) :
+	"Internal" + service.genClassName();
 
 methodName(AbstractRule this) :
 	'proceed'+name.toFirstUpper();

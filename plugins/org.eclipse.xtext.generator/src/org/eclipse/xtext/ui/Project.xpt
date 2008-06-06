@@ -10,18 +10,19 @@
 «ENDREM»
 
 «IMPORT xtext»
+«IMPORT xtextgen»
 
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
-«DEFINE root FOR Grammar»
+«DEFINE root FOR GenPlugin»
     «EXPAND projectFile FOR this»
     «EXPAND classpathFile FOR this»
     «EXPAND buildpropertiesFile FOR this»
 «ENDDEFINE»
 
-«DEFINE projectFile FOR Grammar»
+«DEFINE projectFile FOR GenPlugin»
 «FILE ".project" UI -»
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
@@ -31,7 +32,7 @@
     </projects>
     <buildSpec>
         <buildCommand>
-            <name>org.eclipse.jdt.core.javabuilder</name>
+            <name>org.eclipse.jdts.core.javabuilder</name>
             <arguments>
             </arguments>
         </buildCommand>
@@ -60,7 +61,7 @@
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE classpathFile FOR Grammar»
+«DEFINE classpathFile FOR GenPlugin»
 «FILE ".classpath" UI -»
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
@@ -72,7 +73,7 @@
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE buildpropertiesFile FOR Grammar»
+«DEFINE buildpropertiesFile FOR GenPlugin»
 «FILE "build.properties" UI-»
 source.. = src-gen/
 output.. = bin/

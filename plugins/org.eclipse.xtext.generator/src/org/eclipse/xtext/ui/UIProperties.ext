@@ -7,28 +7,28 @@
  *
  *******************************************************************************/
 import xtext;
+import xtextgen;
 
-extension org::eclipse::xtext::util::GenProperties;
 extension org::eclipse::xtext::Extensions;
-extension org::eclipse::xtext::Properties;
+extension org::eclipse::xtext::Properties reexport;
 
-bundleId(Grammar this):
-    packageName() + ".ui_gen";
+// Candidates for generation parameters
+
+projectName(GenPlugin this):
+    bundleID;
+
+packageName(GenPlugin this):
+    bundleID;
     
-projectName(Grammar this):
-    bundleId();
-    
-activatorClassFQN(Grammar this):
+activatorClassFQN(GenPlugin this):
     packageName() + ".internal." + "Activator";
     
-editorPackage(Grammar this):
+editorPackage(GenPlugin this):
     packageName() + ".ui.editor";
     
-editorClassFQN(Grammar this):    
+editorClassFQN(GenPlugin this):    
     editorPackage() + "." + languageName() + "XtextEditor";
     
-editorExtensionId(Grammar this):
+editorExtensionId(GenPlugin this):
     editorClassFQN();
     
-toJavaFilePath(String name):
-    name.replaceAll('\\.','/') + ".java";

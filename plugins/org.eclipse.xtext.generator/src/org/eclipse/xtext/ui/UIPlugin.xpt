@@ -9,25 +9,17 @@
  *******************************************************************************/
 «ENDREM»
 
+«IMPORT xtext»
 «IMPORT xtextgen»
 
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
-«DEFINE manifest_mf FOR GenPlugin»
-«FILE "MANIFEST.MF" UI_MANIFEST -»
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: «languageName()» UI Plug-in
-Bundle-SymbolicName: «bundleID»;singleton:=true
-Bundle-Version: 1.0.0
-Require-Bundle: «packageName()»;bundle-version="1.0.0",
- org.eclipse.xtext.ui;bundle-version="1.0.0",
- org.eclipse.ui.editors;bundle-version="3.4.0",
- org.eclipse.ui
-Bundle-Vendor: itemis AG
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-ActivationPolicy: lazy
-«ENDFILE-»
+«DEFINE root FOR GenPlugin»
+    «EXPAND Project::root FOR this»
+    «EXPAND Plugin::plugin_xml FOR this»
+    «EXPAND Manifest::manifest_mf FOR this»
+    «EXPAND Editor::editorClass FOR this»
 «ENDDEFINE»
+
