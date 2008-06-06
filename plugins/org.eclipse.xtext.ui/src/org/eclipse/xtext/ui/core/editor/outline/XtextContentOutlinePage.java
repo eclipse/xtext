@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.core.editor.outline;
 
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -24,6 +25,7 @@ import org.eclipse.xtext.ui.core.editor.model.IXtextEditorModelListener;
 import org.eclipse.xtext.ui.core.editor.model.XtextEditorModel;
 import org.eclipse.xtext.ui.core.editor.model.XtextEditorModelChangeEvent;
 import org.eclipse.xtext.ui.core.editor.outline.provider.XtextModelContentProvider;
+import org.eclipse.xtext.ui.core.editor.outline.provider.XtextModelLabelProvider;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -45,8 +47,9 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 		TreeViewer viewer = getTreeViewer();
         
 		viewer.setContentProvider(new XtextModelContentProvider());
-		
-		viewer.setLabelProvider(new AdapterFactoryLabelProvider(new ReflectiveItemProviderAdapterFactory()));
+		viewer.setLabelProvider(new XtextModelLabelProvider());
+//		viewer.setLabelProvider(new AdapterFactoryLabelProvider(new ReflectiveItemProviderAdapterFactory()));
+
 		if (model != null) {
 			setViewerInput(model);
 		}
