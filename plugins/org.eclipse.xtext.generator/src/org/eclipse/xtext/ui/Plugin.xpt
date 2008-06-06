@@ -9,12 +9,11 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtext»
+«IMPORT xtextgen»
 
-«EXTENSION org::eclipse::xtext::services::ServiceGen»
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
-«DEFINE file FOR Grammar»
+«DEFINE plugin_xml FOR GenPlugin»
 «FILE "plugin.xml" UI-»
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
@@ -41,18 +40,18 @@
             superLanguage="org.eclipse.xtext.builtin.XtextBuiltin">
       </languageDescriptor>
    </extension>
-   «FOREACH services() AS serviceName»«EXPAND registerServiceFactory(serviceName)-»«ENDFOREACH-»
-   «FOREACH uiServices() AS serviceName»«EXPAND registerServiceFactory(serviceName)-»«ENDFOREACH-»
+   «EXPAND registerServiceFactory FOREACH genModel().rootTemplates.typeSelect(GenService)-»
+   
 </plugin>
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE registerServiceFactory(String serviceName) FOR Grammar-»
+«DEFINE registerServiceFactory FOR GenService-»
    <extension
-         point="org.eclipse.xtext.ui.«serviceName.toFirstLower()»">
-      <«serviceName.toFirstLower()»
+         point="«extensionPointID»">
+      <«extensionPointName()»
             languageId="«languageId()»"
-            class="«serviceClassFQN(serviceName)»">
-      </«serviceName.toFirstLower()»>
+            class="«genClassFQName»">
+      </«extensionPointName()»>
    </extension>
 «ENDDEFINE»

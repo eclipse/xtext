@@ -7,15 +7,45 @@
  *
  *******************************************************************************/
 import xtext;
+import xtextgen;
 
-extension org::eclipse::xtext::util::GenProperties;
 extension org::eclipse::xtext::Extensions;
 
-srcGenPath() :
-	get('src.gen.path');
-	
+GenModel genModel() :
+	GLOBALVAR genModel;
+
 modelFileExtensions() :
-	get('model.file.extensions').split(',');
+	genModel().modelFileExtensions;
+
+fileHeader() :
+	genModel().fileHeader;
+	
+grammar() :
+	genModel().grammar;
+
+grammarResourceURI() :
+	genModel().grammarResourceURI;
+
+String languageName() :
+	grammar().getName().replaceAll("\\s","_");
+	
+languageId() :
+	grammar().getId();
+	
+languageNamespce() :
+	grammar().getNamespace();
+
+toPath(String fqName) :
+	fqName.replaceAll("\\.", "/");
+	
+toJavaFilePath(String fqClassName) :
+	toPath(fqClassName) + ".java";
+
+///////////////////////////////////////////////////////////////////////////////
+// deprecated
+
+srcGenPath() :
+	genModel().outletMap.get(0).value;
 
 packageName(Grammar this) :
 	getNamespace().replaceAll('/','\\.');

@@ -10,33 +10,39 @@
 «ENDREM»
 
 «IMPORT xtext»
+«IMPORT xtextgen»
 
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
-«EXTENSION org::eclipse::xtext::services::ServiceGen»
 
-«DEFINE file FOR Grammar»
-«FILE pathName()+'/'+languageName()+'StandaloneSetup.java'-»
-package «packageName()»;
+«DEFINE root FOR GenClass»
+«FILE genClassFQName.toJavaFilePath()-»
+/*
+«fileHeader()»
+*/
+package «genClassPackageFQName()»;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 
-import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-import «packageName()».services.*;
 
-public abstract class «languageName()»StandaloneSetup {
+«FOREACH genModel().rootTemplates.typeSelect(GenService) AS s-»
+import «s.serviceInterfaceFQName»;
+import «s.genClassFQName»;
+«ENDFOREACH»
+
+public abstract class «genClassName()» {
 
 	private static boolean isInitialized = false;
 
 	public synchronized static void doSetup() {
 		if(!isInitialized) {
-			«IF getSuperGrammar()!=null»
+			«IF grammar().getSuperGrammar()!=null»
 			// setup super language first
 			XtextBuiltinStandaloneSetup.doSetup();
 			«ENDIF»Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
@@ -44,8 +50,8 @@ public abstract class «languageName()»StandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			«FOREACH services() AS s-»
-			ServiceRegistry.registerService(languageDescriptor, new «serviceClassFQN(s)»(), «serviceInterface(s)».class);
+			«FOREACH genModel().rootTemplates.typeSelect(GenService) AS s-»
+			ServiceRegistry.registerService(languageDescriptor, new «s.genClassName()»(), «s.serviceInterfaceName()».class);
 			«ENDFOREACH»
 			// register resource factory to EMF
 			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);

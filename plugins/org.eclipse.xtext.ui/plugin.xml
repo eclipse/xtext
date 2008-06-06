@@ -33,6 +33,13 @@
       </languageDescriptor>
    </extension>
    <extension
+         point="org.eclipse.xtext.ui.aSTFactory">
+      <aSTFactory
+            class="org.eclipse.xtext.parser.GenericEcoreElementFactory"
+            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
+      </aSTFactory>
+   </extension>
+   <extension
          point="org.eclipse.xtext.ui.grammarAccess">
       <grammarAccess
             class="org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess"

@@ -1,0 +1,25 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+«IMPORT xtextgen»
+
+«EXTENSION org::eclipse::xtext::Extensions»
+«EXTENSION org::eclipse::xtext::Properties»
+«EXTENSION org::eclipse::xtext::ui::UIProperties»
+
+«DEFINE root FOR GenPlugin»
+    «EXPAND Project::root FOR this»
+    «EXPAND Plugin::plugin_xml FOR this»
+    «EXPAND Manifest::manifest_mf FOR this»
+    «EXPAND Editor::editorClass FOR this»
+«ENDDEFINE»
+

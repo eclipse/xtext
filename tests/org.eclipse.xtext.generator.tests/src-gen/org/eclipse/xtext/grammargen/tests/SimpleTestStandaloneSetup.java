@@ -1,3 +1,6 @@
+/*
+Generated using Xtext at Fri Jun 06 17:58:53 CEST 2008
+*/
 package org.eclipse.xtext.grammargen.tests;
 
 import org.eclipse.emf.ecore.resource.Resource;
@@ -5,11 +8,21 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 
-import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.grammargen.tests.services.*;
+
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.grammargen.tests.services.SimpleTestGrammarAccess;
+import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.grammargen.tests.services.SimpleTestMetamodelAccess;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.grammargen.tests.parser.SimpleTestParser;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.grammargen.tests.services.SimpleTestResourceFactory;
+import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.grammargen.tests.parsetree.SimpleTestParseTreeConstructor;
+
 
 public abstract class SimpleTestStandaloneSetup {
 
@@ -25,13 +38,11 @@ public abstract class SimpleTestStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.grammargen.tests.parser.SimpleTestParser(), org.eclipse.xtext.parser.IParser.class);
-			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.GenericEcoreElementFactory(), org.eclipse.xtext.parser.IElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.grammargen.tests.services.SimpleTestResourceFactory(), org.eclipse.xtext.resource.IResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.grammargen.tests.services.SimpleTestGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.grammargen.tests.services.SimpleTestMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.grammargen.tests.parsetree.SimpleTestParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
-			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters(), org.eclipse.xtext.conversion.IValueConverterService.class);
+			ServiceRegistry.registerService(languageDescriptor, new SimpleTestGrammarAccess(), IGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new SimpleTestMetamodelAccess(), IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new SimpleTestParser(), IParser.class);
+			ServiceRegistry.registerService(languageDescriptor, new SimpleTestResourceFactory(), IResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, new SimpleTestParseTreeConstructor(), IParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);

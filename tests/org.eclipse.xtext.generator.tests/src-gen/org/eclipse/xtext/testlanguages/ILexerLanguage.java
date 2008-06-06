@@ -1,3 +1,6 @@
+/*
+Generated using Xtext at Fri Jun 06 17:58:59 CEST 2008
+*/
 package org.eclipse.xtext.testlanguages;
 
 public interface ILexerLanguage {
@@ -10,5 +13,5 @@ public interface ILexerLanguage {
 	 */
 	public static final String ID = "org.eclipse.xtext.testlanguages.LexerLanguage";
 	public static final String NAME = "LexerLanguage";
-	public static final String NAMESPACE = "org/eclipse/xtext/testlanguages";
+	public static final String NAMESPACE = "org.eclipse.xtext.testlanguages";
 }

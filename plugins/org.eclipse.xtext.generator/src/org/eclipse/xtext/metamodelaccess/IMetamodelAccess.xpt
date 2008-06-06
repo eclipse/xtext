@@ -10,27 +10,27 @@
 «ENDREM»
 
 «IMPORT xtext»
+«IMPORT xtextgen»
 
-«EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
-«EXTENSION org::eclipse::xtext::services::ServiceGen»
+«EXTENSION org::eclipse::xtext::metamodelaccess::MetamodelAccess»
 
-«DEFINE file FOR Grammar»
-«FILE serviceClassFileName('MetamodelAccess') -»
-package «servicePackageName('MetamodelAccess')»;
+«DEFINE metamodelAccess FOR GenService»
+«FILE genClassFQName.toJavaFilePath()-»
+/*
+«fileHeader()»
+*/
+package «genClassPackageFQName()»;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.service.*;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IMetamodelAccess;
-import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class «serviceClass('MetamodelAccess')»  extends BaseEPackageAccess implements IMetamodelAccess {
+public class «genClassName()» extends BaseEPackageAccess implements IMetamodelAccess {
 
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {
-		«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm SEPARATOR ","»
+		«FOREACH grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm SEPARATOR ","»
 		get«gmm.name.toFirstUpper()»EPackage()
 		«ENDFOREACH»
 		};
@@ -38,19 +38,19 @@ public class «serviceClass('MetamodelAccess')»  extends BaseEPackageAccess imple
 
 	public EPackage[] getReferencedEPackages() {
 		return new EPackage[] {
-		«FOREACH metamodelDeclarations.typeSelect(ReferencedMetamodel) AS rmm SEPARATOR ","»
+		«FOREACH grammar().metamodelDeclarations.typeSelect(ReferencedMetamodel) AS rmm SEPARATOR ","»
 		BaseEPackageAccess.getEPackageFromRegistry("«rmm.uri»")
 		«ENDFOREACH»
 		};
 	}
 
-	«FOREACH metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm»
+	«FOREACH grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm»
 	public static final String «gmm.name.toUpperCase()»_NS_URI = "«gmm.nsURI»";
-	public static final String «gmm.name.toUpperCase()»_CP_URI = "«pathName()»/«gmm.name».ecore";
+	public static final String «gmm.name.toUpperCase()»_CP_URI = "«generatedMetaModelBasePath()»/«gmm.name».ecore";
 	
 	public static EPackage get«gmm.name.toFirstUpper()»EPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(«gmm.name.toUpperCase()»_NS_URI)) {
-			EPackage p = loadEcoreFile(«serviceClass('MetamodelAccess')».class.getClassLoader(),«gmm.name.toUpperCase()»_CP_URI);
+			EPackage p = loadEcoreFile(«genClassName()».class.getClassLoader(),«gmm.name.toUpperCase()»_CP_URI);
 			if (p!=null) {
 				EPackage.Registry.INSTANCE.put(«gmm.name.toUpperCase()»_NS_URI,p);
 			}

@@ -1,6 +1,9 @@
+/*
+Generated using Xtext at Fri Jun 06 17:58:58 CEST 2008
+*/
 package org.eclipse.xtext.testlanguages.services;
-import org.eclipse.emf.ecore.resource.Resource;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
 
 public class TestLanguageResourceFactory extends AbstractXtextResourceFactory {

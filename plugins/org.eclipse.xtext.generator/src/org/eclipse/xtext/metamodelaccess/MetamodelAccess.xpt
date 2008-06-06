@@ -1,3 +1,4 @@
+«REM»
 /*******************************************************************************
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
@@ -6,22 +7,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.util;
+«ENDREM»
 
-import java.util.Properties;
+«IMPORT xtext»
+«IMPORT xtextgen»
 
-/**
- * @author Sven Efftinge - Initial contribution and API
- *
- */
-public class GenProperties {
-	
-	private static Properties PROPS;
-	public static void setProperties(Properties p) {
-		PROPS = p;
-	}
-	
-	public static String get(String prop) {
-		return PROPS.getProperty(prop);
-	}
-}
+«EXTENSION org::eclipse::xtext::Properties»
+«EXTENSION org::eclipse::xtext::metamodelaccess::MetamodelAccess»
+
+«DEFINE root FOR GenService»
+	«EXPAND IMetamodelAccess::metamodelAccess»
+«ENDDEFINE»

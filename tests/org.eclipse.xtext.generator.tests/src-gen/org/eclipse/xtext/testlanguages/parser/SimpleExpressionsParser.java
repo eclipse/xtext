@@ -1,4 +1,6 @@
-
+/*
+Generated using Xtext at Fri Jun 06 17:58:59 CEST 2008
+*/
 package org.eclipse.xtext.testlanguages.parser;
 
 import org.antlr.runtime.ANTLRInputStream;
@@ -20,7 +22,7 @@ public class SimpleExpressionsParser extends org.eclipse.xtext.parser.AbstractPa
 	@Override
 	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
-		InternalSimpleExpressionsLexer lexer = new InternalSimpleExpressionsLexer(in);
+		InternalSimpleExpressionsLexer lexer = new InternalSimpleExpressionsLexer();
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		InternalSimpleExpressionsParser parser = new InternalSimpleExpressionsParser(
 				stream, factory, grammarAccess.getGrammar()) {

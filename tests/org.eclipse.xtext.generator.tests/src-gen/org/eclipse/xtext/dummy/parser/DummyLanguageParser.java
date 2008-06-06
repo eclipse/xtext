@@ -1,4 +1,6 @@
-
+/*
+Generated using Xtext at Fri Jun 06 17:58:57 CEST 2008
+*/
 package org.eclipse.xtext.dummy.parser;
 
 import org.antlr.runtime.ANTLRInputStream;
@@ -20,7 +22,7 @@ public class DummyLanguageParser extends org.eclipse.xtext.parser.AbstractParser
 	@Override
 	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
-		InternalDummyLanguageLexer lexer = new InternalDummyLanguageLexer(in);
+		InternalDummyLanguageLexer lexer = new InternalDummyLanguageLexer();
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		InternalDummyLanguageParser parser = new InternalDummyLanguageParser(
 				stream, factory, grammarAccess.getGrammar()) {

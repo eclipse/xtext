@@ -10,12 +10,13 @@
 «ENDREM»
 
 «IMPORT xtext»
+«IMPORT xtextgen»
 
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
-«DEFINE file FOR Grammar»
+«DEFINE editorClass FOR GenPlugin»
 «FILE editorClassFQN().toJavaFilePath() UI_SRC_GEN -»
 package «editorPackage()»;
 

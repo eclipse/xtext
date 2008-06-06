@@ -1,6 +1,9 @@
+/*
+Generated using Xtext at Fri Jun 06 17:58:59 CEST 2008
+*/
 package org.eclipse.xtext.parsetree.reconstr.services;
-import org.eclipse.emf.ecore.resource.Resource;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
 
 public class ComplexReconstrTestResourceFactory extends AbstractXtextResourceFactory {

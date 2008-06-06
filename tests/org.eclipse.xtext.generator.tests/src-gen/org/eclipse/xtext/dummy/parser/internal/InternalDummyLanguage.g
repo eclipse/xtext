@@ -1,4 +1,7 @@
 
+/*
+Generated using Xtext at Fri Jun 06 17:58:57 CEST 2008
+*/
 grammar InternalDummyLanguage;
 
 options {

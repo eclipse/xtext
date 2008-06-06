@@ -9,6 +9,7 @@ Export-Package: org.eclipse.xtext.reference,
  org.eclipse.xtext.reference.parser,
  org.eclipse.xtext.reference.parser.internal,
  org.eclipse.xtext.reference.parsetree,
+ org.eclipse.xtext.reference.parsetree.internal,
  org.eclipse.xtext.reference.services
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.antlr;bundle-version="3.0.0",

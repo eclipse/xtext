@@ -1,4 +1,6 @@
-
+/*
+Generated using Xtext at Fri Jun 06 17:58:58 CEST 2008
+*/
 package org.eclipse.xtext.parsetree.reconstr.parser;
 
 import org.antlr.runtime.ANTLRInputStream;
@@ -20,7 +22,7 @@ public class SimpleReconstrTestParser extends org.eclipse.xtext.parser.AbstractP
 	@Override
 	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
-		InternalSimpleReconstrTestLexer lexer = new InternalSimpleReconstrTestLexer(in);
+		InternalSimpleReconstrTestLexer lexer = new InternalSimpleReconstrTestLexer();
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		InternalSimpleReconstrTestParser parser = new InternalSimpleReconstrTestParser(
 				stream, factory, grammarAccess.getGrammar()) {

@@ -1,3 +1,6 @@
+/*
+Generated using Xtext at Fri Jun 06 17:58:57 CEST 2008
+*/
 package org.eclipse.xtext.metamodelreferencing.tests;
 
 public interface IMetamodelRefTest {
@@ -10,5 +13,5 @@ public interface IMetamodelRefTest {
 	 */
 	public static final String ID = "org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest";
 	public static final String NAME = "MetamodelRefTest";
-	public static final String NAMESPACE = "org/eclipse/xtext/metamodelreferencing/tests";
+	public static final String NAMESPACE = "org.eclipse.xtext.metamodelreferencing.tests";
 }

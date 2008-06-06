@@ -6,4 +6,15 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-String get(String s) : JAVA org.eclipse.xtext.util.GenProperties.get(java.lang.String);
+import xtextgen;
+import ecore;
+
+extension org::eclipse::xtext::Properties;
+
+// These are candidates for genParameters of the metamodelAccess's GenService 
+
+generatedMetaModelBasePath() :
+	languageNamespce().toPath();
+	
+	
+	

@@ -10,19 +10,23 @@
 «ENDREM»
 
 «IMPORT xtext»
+«IMPORT xtextgen»
 
-«EXTENSION org::eclipse::xtext::services::ServiceGen»
+«EXTENSION org::eclipse::xtext::Properties»
 
-«DEFINE file FOR Grammar»
-«FILE pathName()+'/services/'+languageName()+'ResourceFactory.java'-»
-package «packageName()».services;
+«DEFINE root FOR GenService»
+«FILE genClassFQName.toJavaFilePath()-»
+/*
+«fileHeader()»
+*/
+package «genClassPackageFQName()»;
+
 import org.eclipse.emf.ecore.resource.Resource;
-
 import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
 
-public class «serviceClass("ResourceFactory")» extends AbstractXtextResourceFactory {
+public class «genClassName()» extends AbstractXtextResourceFactory {
 
-	public «serviceClass("ResourceFactory")»() {
+	public «genClassName()»() {
 		«FOREACH modelFileExtensions() AS modelFileExtension»
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", this);
 		«ENDFOREACH»

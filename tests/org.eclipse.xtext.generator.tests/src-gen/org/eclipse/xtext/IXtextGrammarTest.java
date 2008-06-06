@@ -1,3 +1,6 @@
+/*
+Generated using Xtext at Fri Jun 06 17:58:55 CEST 2008
+*/
 package org.eclipse.xtext;
 
 public interface IXtextGrammarTest {
@@ -10,5 +13,5 @@ public interface IXtextGrammarTest {
 	 */
 	public static final String ID = "org.eclipse.xtext.XtextGrammarTest";
 	public static final String NAME = "XtextGrammarTest";
-	public static final String NAMESPACE = "org/eclipse/xtext";
+	public static final String NAMESPACE = "org.eclipse.xtext";
 }
