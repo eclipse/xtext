@@ -1,3 +1,6 @@
+/*
+Generated using Xtext at Fri Jun 06 17:58:58 CEST 2008
+*/
 package org.eclipse.xtext.parsetree.reconstr;
 
 public interface ISimpleReconstrTest {
@@ -10,5 +13,5 @@ public interface ISimpleReconstrTest {
 	 */
 	public static final String ID = "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest";
 	public static final String NAME = "SimpleReconstrTest";
-	public static final String NAMESPACE = "org/eclipse/xtext/parsetree/reconstr";
+	public static final String NAMESPACE = "org.eclipse.xtext.parsetree.reconstr";
 }

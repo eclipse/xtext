@@ -1,13 +1,13 @@
+/*
+Generated using Xtext at Fri Jun 06 17:58:58 CEST 2008
+*/
 package org.eclipse.xtext.parsetree.reconstr.services;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.service.*;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IMetamodelAccess;
-import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class SimpleReconstrTestMetamodelAccess  extends BaseEPackageAccess implements IMetamodelAccess {
+public class SimpleReconstrTestMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {

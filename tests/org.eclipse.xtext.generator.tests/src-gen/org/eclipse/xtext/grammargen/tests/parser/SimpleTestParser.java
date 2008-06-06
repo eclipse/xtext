@@ -1,4 +1,6 @@
-
+/*
+Generated using Xtext at Fri Jun 06 17:58:53 CEST 2008
+*/
 package org.eclipse.xtext.grammargen.tests.parser;
 
 import org.antlr.runtime.ANTLRInputStream;
@@ -20,7 +22,7 @@ public class SimpleTestParser extends org.eclipse.xtext.parser.AbstractParser {
 	@Override
 	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
-		InternalSimpleTestLexer lexer = new InternalSimpleTestLexer(in);
+		InternalSimpleTestLexer lexer = new InternalSimpleTestLexer();
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		InternalSimpleTestParser parser = new InternalSimpleTestParser(
 				stream, factory, grammarAccess.getGrammar()) {

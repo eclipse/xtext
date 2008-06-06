@@ -1,4 +1,7 @@
 
+/*
+Generated using Xtext at Fri Jun 06 17:59:00 CEST 2008
+*/
 grammar InternalActionTestLanguage;
 
 options {

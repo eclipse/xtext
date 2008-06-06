@@ -1,3 +1,6 @@
+/*
+Generated using Xtext at Fri Jun 06 17:59:00 CEST 2008
+*/
 package org.eclipse.xtext.testlanguages;
 
 public interface IActionTestLanguage {
@@ -10,5 +13,5 @@ public interface IActionTestLanguage {
 	 */
 	public static final String ID = "org.eclipse.xtext.testlanguages.ActionTestLanguage";
 	public static final String NAME = "ActionTestLanguage";
-	public static final String NAMESPACE = "org/eclipse/xtext/testlanguages";
+	public static final String NAMESPACE = "org.eclipse.xtext.testlanguages";
 }

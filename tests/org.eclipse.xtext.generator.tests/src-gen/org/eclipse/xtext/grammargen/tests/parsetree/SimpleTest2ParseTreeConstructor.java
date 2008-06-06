@@ -1,5 +1,8 @@
-
+/*
+Generated using Xtext at Fri Jun 06 17:58:54 CEST 2008
+*/
 package org.eclipse.xtext.grammargen.tests.parsetree;
+
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.grammargen.tests.parsetree.internal.InternalSimpleTest2ParseTreeConstructor;

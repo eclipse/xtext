@@ -1,3 +1,6 @@
+/*
+Generated using Xtext at Fri Jun 06 17:58:57 CEST 2008
+*/
 package org.eclipse.xtext.dummy;
 
 public interface IDummyLanguage {
@@ -10,5 +13,5 @@ public interface IDummyLanguage {
 	 */
 	public static final String ID = "org.eclipse.xtext.dummy.DummyLanguage";
 	public static final String NAME = "DummyLanguage";
-	public static final String NAMESPACE = "org/eclipse/xtext/dummy";
+	public static final String NAMESPACE = "org.eclipse.xtext.dummy";
 }

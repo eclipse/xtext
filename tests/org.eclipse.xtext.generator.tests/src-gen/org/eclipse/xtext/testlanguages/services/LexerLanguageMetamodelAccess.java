@@ -1,13 +1,13 @@
+/*
+Generated using Xtext at Fri Jun 06 17:58:59 CEST 2008
+*/
 package org.eclipse.xtext.testlanguages.services;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.service.*;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IMetamodelAccess;
-import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class LexerLanguageMetamodelAccess  extends BaseEPackageAccess implements IMetamodelAccess {
+public class LexerLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {
