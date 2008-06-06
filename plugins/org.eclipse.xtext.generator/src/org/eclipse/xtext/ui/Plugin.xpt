@@ -42,6 +42,7 @@
       </languageDescriptor>
    </extension>
    «FOREACH services() AS serviceName»«EXPAND registerServiceFactory(serviceName)-»«ENDFOREACH-»
+   «FOREACH uiServices() AS serviceName»«EXPAND registerServiceFactory(serviceName)-»«ENDFOREACH-»
 </plugin>
 «ENDFILE»
 «ENDDEFINE»
