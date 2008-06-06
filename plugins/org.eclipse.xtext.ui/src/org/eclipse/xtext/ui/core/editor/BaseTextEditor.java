@@ -42,6 +42,7 @@ public abstract class BaseTextEditor extends TextEditor {
 	private XtextEditorModel model;
 	private XtextContentOutlinePage outlinePage;
 	protected boolean selectionSetFromOutline;
+    private ILanguageDescriptor languageDescriptor;
 
 	@Override
 	public void setInitializationData(IConfigurationElement cfig, String propertyName, Object data) {
@@ -68,6 +69,13 @@ public abstract class BaseTextEditor extends TextEditor {
 	}
 
 	protected abstract ILanguageDescriptor initializeLanguageDescriptor();
+	
+	public ILanguageDescriptor getLanguageDescriptor() {
+	    if (languageDescriptor == null) {
+            languageDescriptor = initializeLanguageDescriptor();
+        }
+        return languageDescriptor;
+	}
 
 	public XtextEditorModel getModel() {
 		if (model == null) {
@@ -82,7 +90,7 @@ public abstract class BaseTextEditor extends TextEditor {
 
 	private void setOutlinePageInput() {
 		if (outlinePage != null) {
-			outlinePage.setPageInput(getModel());
+			outlinePage.setInput(getModel());
 		}
 	}
 

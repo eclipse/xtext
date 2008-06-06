@@ -24,6 +24,7 @@ import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
+import org.eclipse.xtext.ui.core.service.IOutlineProvider;
 import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
 import org.eclipse.xtext.ui.core.service.IProposalsProvider;
 import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
@@ -52,6 +53,7 @@ public class LanguageServiceActivator {
         serviceMap.put("metamodelAccess", IMetamodelAccess.class);
         serviceMap.put("tokenTypeDef", ITokenTypeDefService.class);
         serviceMap.put("valueConverter", IValueConverterService.class);
+        serviceMap.put("outlineProvider", IOutlineProvider.class);
     }
 
     public static void activateServices() {

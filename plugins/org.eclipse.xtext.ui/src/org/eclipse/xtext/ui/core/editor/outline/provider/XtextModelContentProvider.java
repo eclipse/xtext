@@ -8,25 +8,35 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.outline.provider;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.ui.core.editor.BaseTextEditor;
 import org.eclipse.xtext.ui.core.editor.model.XtextEditorModel;
+import org.eclipse.xtext.ui.core.service.IOutlineProvider;
 
 /**
  * @author Peter Friese - Initial contribution and API
  * 
  */
-public class XtextModelContentProvider extends StaticTreeContentProvider implements ITreeContentProvider {
+public class XtextModelContentProvider implements ITreeContentProvider {
 
 	protected static final Object[] EMPTY_ARRAY = new Object[0];
+	
+	private IOutlineProvider delegate;
+    private ILanguageDescriptor languageDescriptor;
 
+    public XtextModelContentProvider(BaseTextEditor editor) {
+	    languageDescriptor = editor.getLanguageDescriptor();
+	    delegate = ServiceRegistry.getService(languageDescriptor, IOutlineProvider.class);
+	}
+	
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof EObject) {
 			EObject parentNode = (EObject) parentElement;
-			EList<EObject> contents = parentNode.eContents();
-			return contents.toArray();
+			return delegate.getChildren(parentNode);
 		}
 		else {
 			return EMPTY_ARRAY;
@@ -40,7 +50,7 @@ public class XtextModelContentProvider extends StaticTreeContentProvider impleme
 	public boolean hasChildren(Object element) {
 		if (element instanceof EObject) {
 			EObject eobject = (EObject) element;
-			return (eobject.eContents().size() > 0);
+			return delegate.hasChildren(eobject);
 		}
 		return false;
 	}
@@ -48,8 +58,7 @@ public class XtextModelContentProvider extends StaticTreeContentProvider impleme
 	public Object[] getElements(Object inputElement) {
 		if (inputElement instanceof XtextEditorModel) {
 			XtextEditorModel xtextEditorModel = (XtextEditorModel) inputElement;
-			Object astRoot = xtextEditorModel.getAstRoot();
-			return new Object[] { astRoot };
+			return delegate.getRootObjects(xtextEditorModel);
 		}
 		return EMPTY_ARRAY;
 	}

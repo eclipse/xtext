@@ -6,22 +6,22 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.editor.outline.provider;
+package org.eclipse.xtext.ui.core.service;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.ui.core.editor.model.XtextEditorModel;
 
 /**
  * @author Peter Friese - Initial contribution and API
  *
  */
-public class BaseContentProvider {
-	
-	private String name;
-	
-	public String getName() {
-		return name;
-	}
+public interface IOutlineProvider extends ILanguageService {
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    Object[] getRootObjects(XtextEditorModel model);
+
+    boolean hasChildren(EObject element);
+
+    Object[] getChildren(EObject node);
 
 }

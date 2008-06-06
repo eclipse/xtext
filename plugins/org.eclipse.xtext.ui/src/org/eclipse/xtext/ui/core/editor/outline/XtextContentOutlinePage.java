@@ -36,8 +36,10 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 	private ListenerList postSelectionChangedListeners = new ListenerList();
 	private XtextEditorModel model;
 	private IXtextEditorModelListener xtextEditorModelListener;
+    private final BaseTextEditor xtextBaseEditor;
 
 	public XtextContentOutlinePage(BaseTextEditor xtextBaseEditor) {
+        this.xtextBaseEditor = xtextBaseEditor;
 	}
 	
 	@Override
@@ -46,7 +48,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 	    
 		TreeViewer viewer = getTreeViewer();
         
-		viewer.setContentProvider(new XtextModelContentProvider());
+		viewer.setContentProvider(new XtextModelContentProvider(xtextBaseEditor));
 		viewer.setLabelProvider(new XtextModelLabelProvider());
 //		viewer.setLabelProvider(new AdapterFactoryLabelProvider(new ReflectiveItemProviderAdapterFactory()));
 
@@ -99,7 +101,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 		tree.setExpandedElements(expandedElements);
 	}
 	
-	public void setPageInput(XtextEditorModel model) {
+	public void setInput(XtextEditorModel model) {
 		this.model = model;
 		if (getTreeViewer() != null) {
 			setViewerInput(model);
