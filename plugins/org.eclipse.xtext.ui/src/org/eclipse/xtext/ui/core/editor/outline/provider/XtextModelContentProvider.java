@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.outline.provider;
 
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ITreeContentProvider;
@@ -49,7 +48,7 @@ public class XtextModelContentProvider extends StaticTreeContentProvider impleme
 	public Object[] getElements(Object inputElement) {
 		if (inputElement instanceof XtextEditorModel) {
 			XtextEditorModel xtextEditorModel = (XtextEditorModel) inputElement;
-			Notifier astRoot = xtextEditorModel.getAstRoot();
+			Object astRoot = xtextEditorModel.getAstRoot();
 			return new Object[] { astRoot };
 		}
 		return EMPTY_ARRAY;
