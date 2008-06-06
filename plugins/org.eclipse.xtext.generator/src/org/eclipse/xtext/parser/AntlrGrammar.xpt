@@ -11,7 +11,7 @@
 
 «IMPORT xtext»
 
-«EXTENSION org::eclipse::xtext::parser::GrammarGen»
+«EXTENSION org::eclipse::xtext::parser::AntlrGrammar»
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::XtextUtil»
 
