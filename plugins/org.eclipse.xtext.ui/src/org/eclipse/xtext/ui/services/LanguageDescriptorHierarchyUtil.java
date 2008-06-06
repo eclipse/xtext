@@ -20,13 +20,13 @@ import org.eclipse.xtext.ui.core.internal.CoreLog;
 public class LanguageDescriptorHierarchyUtil {
 
     public static class LanguageDescriptorDescriptor {
-        String languageId;
-        String languageName;
-        String namespace;
-        String superLanguageID;
+        public String languageId;
+        public String languageName;
+        public String namespace;
+        public String superLanguageID;
     }
 
-    public  static List<LanguageDescriptorDescriptor> sortLanguageDescriptors(List<LanguageDescriptorDescriptor> descriptors) {
+    public static List<LanguageDescriptorDescriptor> sortLanguageDescriptors(List<LanguageDescriptorDescriptor> descriptors) {
         List<LanguageDescriptorDescriptor> result = new ArrayList<LanguageDescriptorDescriptor>();
         List<LanguageDescriptorDescriptor> currentParents = null;
         do {
