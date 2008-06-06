@@ -22,7 +22,7 @@ import org.eclipse.xtext.ui.core.editor.utils.StringInputStream;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class AbstractServiceTest extends TestCase {
+public abstract class AbstractServiceTest extends TestCase {
 	private static final String DEFAULT_LANGUAGE = "org.eclipse.xtext.reference.ReferenceGrammar";
 	private ILanguageDescriptor languageDescriptor;
 
