@@ -26,6 +26,7 @@ import org.eclipse.xtext.builtin.IXtextBuiltin;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * 
@@ -34,14 +35,7 @@ import org.eclipse.xtext.service.ServiceRegistry;
  */
 public class GrammarUtil {
 	public static String getLanguageId(Grammar g) {
-		StringBuffer buff = new StringBuffer();
-		EList<String> list = g.getIdElements();
-		for (int i = 0, x = list.size(); i < x; i++) {
-			buff.append(list.get(i));
-			if (i + 1 < x)
-				buff.append(".");
-		}
-		return buff.toString();
+		return Strings.concat(".", g.getIdElements());
 	}
 
 	public static String getName(Grammar g) {
@@ -49,17 +43,9 @@ public class GrammarUtil {
 	}
 
 	public static String getNamespace(Grammar g) {
-		StringBuffer buff = new StringBuffer();
-		EList<String> list = g.getIdElements();
-		for (int i = 0, x = list.size() - 1; i < x; i++) {
-			buff.append(list.get(i));
-			if (i + 1 < x)
-				buff.append("/");
-		}
-		String string = buff.toString();
-		return string.trim().length() == 0 ? null : string;
+	    return Strings.concat(".", g.getIdElements(), 1);
 	}
-
+	
 	public static Grammar getGrammar(EObject grammarElement) {
 		EObject root = getRootContainer(grammarElement);
 		if (root instanceof Grammar) {
