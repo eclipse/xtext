@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Fri Jun 06 17:58:53 CEST 2008
+Generated using Xtext at Sun Jun 08 11:15:20 CEST 2008
 */
 package org.eclipse.xtext.grammargen.tests;
 
@@ -16,6 +16,8 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.grammargen.tests.services.SimpleTestGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.grammargen.tests.services.SimpleTestMetamodelAccess;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.grammargen.tests.parser.SimpleTestParser;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -40,6 +42,7 @@ public abstract class SimpleTestStandaloneSetup {
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
 			ServiceRegistry.registerService(languageDescriptor, new SimpleTestGrammarAccess(), IGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new SimpleTestMetamodelAccess(), IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new GenericEcoreElementFactory(), IElementFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, new SimpleTestParser(), IParser.class);
 			ServiceRegistry.registerService(languageDescriptor, new SimpleTestResourceFactory(), IResourceFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, new SimpleTestParseTreeConstructor(), IParseTreeConstructor.class);

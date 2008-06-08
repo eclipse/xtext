@@ -99,7 +99,9 @@ public class GeneratorFacade {
 		EList<RootTemplate> templates = genModel.getRootTemplates();
 		for (RootTemplate templateCall : templates) {
             String templatePath = templateCall.getTemplatePath();
-            facade.evaluate(templatePath, templateCall);
+            if(templatePath != null) {
+                facade.evaluate(templatePath, templateCall);
+            }
         }
 		
 		
@@ -184,38 +186,46 @@ public class GeneratorFacade {
 	    
 
 	    if (!GrammarUtil.isAbstract(grammarModel)) {
-	        
-	        RootTemplate xtext2ecore = XtextgenFactory.eINSTANCE.createRootTemplate();
-	        xtext2ecore.setTemplatePath("org::eclipse::xtext::xtext2ecore::EcoreMetamodels::root");
-	        genModel.getRootTemplates().add(xtext2ecore);
-	        
-	    GenService parserService = XtextgenFactory.eINSTANCE.createGenService();
-        parserService.setServiceInterfaceFQName("org.eclipse.xtext.parser.IParser");
-        parserService.setGenClassFQName(namespace + ".parser." + languageName + "Parser");
-        parserService.setTemplatePath("org::eclipse::xtext::parser::Parser::root");
-        parserService.setExtensionPointID("org.eclipse.xtext.ui.parser");
-        genModel.getRootTemplates().add(parserService);
 
-        GenService resourceFactoryService = XtextgenFactory.eINSTANCE.createGenService();
-        resourceFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.resource.IResourceFactory");
-        resourceFactoryService.setGenClassFQName(namespace + ".services." + languageName + "ResourceFactory");
-        resourceFactoryService.setTemplatePath("org::eclipse::xtext::resourceFactory::ResourceFactory::root");
-        resourceFactoryService.setExtensionPointID("org.eclipse.xtext.ui.resourceFactory");
-        genModel.getRootTemplates().add(resourceFactoryService);
-        
-        GenService parsetreeConstructorService = XtextgenFactory.eINSTANCE.createGenService();
-        parsetreeConstructorService.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.IParseTreeConstructor");
-        parsetreeConstructorService.setGenClassFQName(namespace + ".parsetree." + languageName + "ParseTreeConstructor");
-        parsetreeConstructorService.setTemplatePath("org::eclipse::xtext::parsetree::ParsetreeConstructor::root");
-        parsetreeConstructorService.setExtensionPointID("org.eclipse.xtext.ui.parseTreeConstructor");
-        genModel.getRootTemplates().add(parsetreeConstructorService);
-        
-        if (uiProjectPath != null) {
-        GenPlugin plugin = XtextgenFactory.eINSTANCE.createGenPlugin();
-        plugin.setTemplatePath("org::eclipse::xtext::ui::UIPlugin::root");
-        plugin.setBundleID(namespace + ".ui_gen");
-        genModel.getRootTemplates().add(plugin);
-	    }        }
+            RootTemplate xtext2ecore = XtextgenFactory.eINSTANCE.createRootTemplate();
+            xtext2ecore.setTemplatePath("org::eclipse::xtext::xtext2ecore::EcoreMetamodels::root");
+            genModel.getRootTemplates().add(xtext2ecore);
+
+            GenService elementFactoryService = XtextgenFactory.eINSTANCE.createGenService();
+            elementFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.parser.IElementFactory");
+            elementFactoryService.setGenClassFQName("org.eclipse.xtext.parser.GenericEcoreElementFactory");
+            // no template, as service is generic. Nevertheless, we need the individual registration to avoid conflicts
+            elementFactoryService.setExtensionPointID("org.eclipse.xtext.ui.aSTFactory");
+            genModel.getRootTemplates().add(elementFactoryService);
+            
+            GenService parserService = XtextgenFactory.eINSTANCE.createGenService();
+            parserService.setServiceInterfaceFQName("org.eclipse.xtext.parser.IParser");
+            parserService.setGenClassFQName(namespace + ".parser." + languageName + "Parser");
+            parserService.setTemplatePath("org::eclipse::xtext::parser::Parser::root");
+            parserService.setExtensionPointID("org.eclipse.xtext.ui.parser");
+            genModel.getRootTemplates().add(parserService);
+
+            GenService resourceFactoryService = XtextgenFactory.eINSTANCE.createGenService();
+            resourceFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.resource.IResourceFactory");
+            resourceFactoryService.setGenClassFQName(namespace + ".services." + languageName + "ResourceFactory");
+            resourceFactoryService.setTemplatePath("org::eclipse::xtext::resourceFactory::ResourceFactory::root");
+            resourceFactoryService.setExtensionPointID("org.eclipse.xtext.ui.resourceFactory");
+            genModel.getRootTemplates().add(resourceFactoryService);
+
+            GenService parsetreeConstructorService = XtextgenFactory.eINSTANCE.createGenService();
+            parsetreeConstructorService.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.IParseTreeConstructor");
+            parsetreeConstructorService.setGenClassFQName(namespace + ".parsetree." + languageName + "ParseTreeConstructor");
+            parsetreeConstructorService.setTemplatePath("org::eclipse::xtext::parsetree::ParsetreeConstructor::root");
+            parsetreeConstructorService.setExtensionPointID("org.eclipse.xtext.ui.parseTreeConstructor");
+            genModel.getRootTemplates().add(parsetreeConstructorService);
+
+            if (uiProjectPath != null) {
+                GenPlugin plugin = XtextgenFactory.eINSTANCE.createGenPlugin();
+                plugin.setTemplatePath("org::eclipse::xtext::ui::UIPlugin::root");
+                plugin.setBundleID(namespace + ".ui_gen");
+                genModel.getRootTemplates().add(plugin);
+            }
+        }
         return genModel;
     }
 	

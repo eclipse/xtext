@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Fri Jun 06 17:58:59 CEST 2008
+Generated using Xtext at Sun Jun 08 11:15:26 CEST 2008
 */
 package org.eclipse.xtext.parsetree.reconstr;
 
@@ -16,6 +16,8 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestMetamodelAccess;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.reconstr.parser.ComplexReconstrTestParser;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -40,6 +42,7 @@ public abstract class ComplexReconstrTestStandaloneSetup {
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
 			ServiceRegistry.registerService(languageDescriptor, new ComplexReconstrTestGrammarAccess(), IGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new ComplexReconstrTestMetamodelAccess(), IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new GenericEcoreElementFactory(), IElementFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, new ComplexReconstrTestParser(), IParser.class);
 			ServiceRegistry.registerService(languageDescriptor, new ComplexReconstrTestResourceFactory(), IResourceFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, new ComplexReconstrTestParseTreeConstructor(), IParseTreeConstructor.class);

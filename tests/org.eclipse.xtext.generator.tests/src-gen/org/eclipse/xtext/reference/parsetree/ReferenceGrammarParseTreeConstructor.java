@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Fri Jun 06 17:59:01 CEST 2008
+Generated using Xtext at Sun Jun 08 11:15:28 CEST 2008
 */
 package org.eclipse.xtext.reference.parsetree;
 
