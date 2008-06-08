@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Fri Jun 06 17:59:01 CEST 2008
+Generated using Xtext at Sun Jun 08 11:15:28 CEST 2008
 */
 package org.eclipse.xtext.reference;
 
@@ -16,6 +16,8 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.reference.services.ReferenceGrammarMetamodelAccess;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.reference.parser.ReferenceGrammarParser;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -40,6 +42,7 @@ public abstract class ReferenceGrammarStandaloneSetup {
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
 			ServiceRegistry.registerService(languageDescriptor, new ReferenceGrammarGrammarAccess(), IGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new ReferenceGrammarMetamodelAccess(), IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new GenericEcoreElementFactory(), IElementFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, new ReferenceGrammarParser(), IParser.class);
 			ServiceRegistry.registerService(languageDescriptor, new ReferenceGrammarResourceFactory(), IResourceFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, new ReferenceGrammarParseTreeConstructor(), IParseTreeConstructor.class);

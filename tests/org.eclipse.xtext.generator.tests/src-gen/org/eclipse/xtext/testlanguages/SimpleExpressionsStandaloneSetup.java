@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Fri Jun 06 17:58:59 CEST 2008
+Generated using Xtext at Sun Jun 08 11:15:27 CEST 2008
 */
 package org.eclipse.xtext.testlanguages;
 
@@ -16,6 +16,8 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsMetamodelAccess;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.testlanguages.parser.SimpleExpressionsParser;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -40,6 +42,7 @@ public abstract class SimpleExpressionsStandaloneSetup {
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
 			ServiceRegistry.registerService(languageDescriptor, new SimpleExpressionsGrammarAccess(), IGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new SimpleExpressionsMetamodelAccess(), IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new GenericEcoreElementFactory(), IElementFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, new SimpleExpressionsParser(), IParser.class);
 			ServiceRegistry.registerService(languageDescriptor, new SimpleExpressionsResourceFactory(), IResourceFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, new SimpleExpressionsParseTreeConstructor(), IParseTreeConstructor.class);

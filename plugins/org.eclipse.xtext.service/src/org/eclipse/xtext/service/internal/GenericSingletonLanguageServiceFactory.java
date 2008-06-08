@@ -33,5 +33,5 @@ public class GenericSingletonLanguageServiceFactory implements ILanguageServiceF
     public Class<? extends ILanguageService> getServiceInterface() {
         return serviceInterface;
     }
-
+    
 }

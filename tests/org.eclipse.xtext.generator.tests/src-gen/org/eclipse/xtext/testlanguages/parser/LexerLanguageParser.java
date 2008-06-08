@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Fri Jun 06 17:58:59 CEST 2008
+Generated using Xtext at Sun Jun 08 11:15:27 CEST 2008
 */
 package org.eclipse.xtext.testlanguages.parser;
 
@@ -22,7 +22,7 @@ public class LexerLanguageParser extends org.eclipse.xtext.parser.AbstractParser
 	@Override
 	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
-		InternalLexerLanguageLexer lexer = new InternalLexerLanguageLexer();
+		InternalLexerLanguageLexer lexer = new InternalLexerLanguageLexer(in);
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		InternalLexerLanguageParser parser = new InternalLexerLanguageParser(
 				stream, factory, grammarAccess.getGrammar()) {

@@ -1,6 +1,6 @@
 
 /*
-Generated using Xtext at Fri Jun 06 17:58:59 CEST 2008
+Generated using Xtext at Sun Jun 08 11:15:27 CEST 2008
 */
 grammar InternalSimpleExpressions;
 

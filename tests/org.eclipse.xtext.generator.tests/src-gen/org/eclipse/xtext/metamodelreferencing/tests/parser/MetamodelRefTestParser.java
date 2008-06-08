@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Fri Jun 06 17:58:57 CEST 2008
+Generated using Xtext at Sun Jun 08 11:15:24 CEST 2008
 */
 package org.eclipse.xtext.metamodelreferencing.tests.parser;
 
@@ -22,7 +22,7 @@ public class MetamodelRefTestParser extends org.eclipse.xtext.parser.AbstractPar
 	@Override
 	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
-		InternalMetamodelRefTestLexer lexer = new InternalMetamodelRefTestLexer();
+		InternalMetamodelRefTestLexer lexer = new InternalMetamodelRefTestLexer(in);
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		InternalMetamodelRefTestParser parser = new InternalMetamodelRefTestParser(
 				stream, factory, grammarAccess.getGrammar()) {

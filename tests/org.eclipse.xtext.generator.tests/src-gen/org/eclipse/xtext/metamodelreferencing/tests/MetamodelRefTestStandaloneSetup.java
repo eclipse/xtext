@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Fri Jun 06 17:58:57 CEST 2008
+Generated using Xtext at Sun Jun 08 11:15:24 CEST 2008
 */
 package org.eclipse.xtext.metamodelreferencing.tests;
 
@@ -16,6 +16,8 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestMetamodelAccess;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.metamodelreferencing.tests.parser.MetamodelRefTestParser;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -40,6 +42,7 @@ public abstract class MetamodelRefTestStandaloneSetup {
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
 			ServiceRegistry.registerService(languageDescriptor, new MetamodelRefTestGrammarAccess(), IGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new MetamodelRefTestMetamodelAccess(), IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new GenericEcoreElementFactory(), IElementFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, new MetamodelRefTestParser(), IParser.class);
 			ServiceRegistry.registerService(languageDescriptor, new MetamodelRefTestResourceFactory(), IResourceFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, new MetamodelRefTestParseTreeConstructor(), IParseTreeConstructor.class);

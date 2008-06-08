@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Fri Jun 06 17:59:00 CEST 2008
+Generated using Xtext at Sun Jun 08 11:15:28 CEST 2008
 */
 package org.eclipse.xtext.testlanguages.parser;
 
@@ -22,7 +22,7 @@ public class OptionalEmptyLanguageParser extends org.eclipse.xtext.parser.Abstra
 	@Override
 	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
-		InternalOptionalEmptyLanguageLexer lexer = new InternalOptionalEmptyLanguageLexer();
+		InternalOptionalEmptyLanguageLexer lexer = new InternalOptionalEmptyLanguageLexer(in);
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		InternalOptionalEmptyLanguageParser parser = new InternalOptionalEmptyLanguageParser(
 				stream, factory, grammarAccess.getGrammar()) {

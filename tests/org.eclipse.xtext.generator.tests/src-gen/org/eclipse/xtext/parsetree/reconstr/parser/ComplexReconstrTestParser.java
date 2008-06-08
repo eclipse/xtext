@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Fri Jun 06 17:58:59 CEST 2008
+Generated using Xtext at Sun Jun 08 11:15:26 CEST 2008
 */
 package org.eclipse.xtext.parsetree.reconstr.parser;
 
@@ -22,7 +22,7 @@ public class ComplexReconstrTestParser extends org.eclipse.xtext.parser.Abstract
 	@Override
 	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
-		InternalComplexReconstrTestLexer lexer = new InternalComplexReconstrTestLexer();
+		InternalComplexReconstrTestLexer lexer = new InternalComplexReconstrTestLexer(in);
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		InternalComplexReconstrTestParser parser = new InternalComplexReconstrTestParser(
 				stream, factory, grammarAccess.getGrammar()) {

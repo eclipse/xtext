@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Fri Jun 06 17:58:57 CEST 2008
+Generated using Xtext at Sun Jun 08 11:15:25 CEST 2008
 */
 package org.eclipse.xtext.dummy;
 
@@ -16,6 +16,8 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.dummy.services.DummyLanguageGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.dummy.services.DummyLanguageMetamodelAccess;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.dummy.parser.DummyLanguageParser;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -40,6 +42,7 @@ public abstract class DummyLanguageStandaloneSetup {
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
 			ServiceRegistry.registerService(languageDescriptor, new DummyLanguageGrammarAccess(), IGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new DummyLanguageMetamodelAccess(), IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new GenericEcoreElementFactory(), IElementFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, new DummyLanguageParser(), IParser.class);
 			ServiceRegistry.registerService(languageDescriptor, new DummyLanguageResourceFactory(), IResourceFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, new DummyLanguageParseTreeConstructor(), IParseTreeConstructor.class);

@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Fri Jun 06 17:59:00 CEST 2008
+Generated using Xtext at Sun Jun 08 11:15:28 CEST 2008
 */
 package org.eclipse.xtext.testlanguages;
 
@@ -16,6 +16,8 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageMetamodelAccess;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.testlanguages.parser.OptionalEmptyLanguageParser;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -40,6 +42,7 @@ public abstract class OptionalEmptyLanguageStandaloneSetup {
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
 			ServiceRegistry.registerService(languageDescriptor, new OptionalEmptyLanguageGrammarAccess(), IGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, new OptionalEmptyLanguageMetamodelAccess(), IMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, new GenericEcoreElementFactory(), IElementFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, new OptionalEmptyLanguageParser(), IParser.class);
 			ServiceRegistry.registerService(languageDescriptor, new OptionalEmptyLanguageResourceFactory(), IResourceFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, new OptionalEmptyLanguageParseTreeConstructor(), IParseTreeConstructor.class);
