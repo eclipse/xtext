@@ -42,7 +42,7 @@ public class «genClassName()» extends org.eclipse.xtext.parser.AbstractParser {
 	@Override
 	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
-		«internalLexerClassName()» lexer = new «internalLexerClassName()»();
+		«internalLexerClassName()» lexer = new «internalLexerClassName()»(in);
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		«internalParserClassName()» parser = new «internalParserClassName()»(
 				stream, factory, grammarAccess.getGrammar()) {
