@@ -1,6 +1,6 @@
 
 /*
-Generated using Xtext at Sun Jun 08 11:15:25 CEST 2008
+Generated with Xtext
 */
 grammar InternalTestLanguage;
 

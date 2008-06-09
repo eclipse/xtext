@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Sun Jun 08 11:15:22 CEST 2008
+Generated with Xtext
 */
 package org.eclipse.xtext.grammargen.tests.services;
 
