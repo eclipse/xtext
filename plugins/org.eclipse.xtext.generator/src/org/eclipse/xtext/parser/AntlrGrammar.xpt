@@ -118,42 +118,42 @@ internalParse returns [EObject current=null] :
 	 { $current=$iv_«parserRules.first().ruleName()».current; } 
 	 EOF 
 ;
-«EXPAND rule(this) FOREACH allParserRules()»
+«EXPAND rule FOREACH allParserRules()»
 
-«EXPAND rule(this) FOREACH allLexerRules()»
+«EXPAND rule FOREACH allLexerRules()»
 «ENDDEFINE»
 
 
-«DEFINE rule(Grammar g) FOR ParserRule»
-«IF isCalled(g)»
+«DEFINE rule FOR ParserRule»
+«IF isCalled()»
 // Rule «name»
 «ruleName()» returns [EObject current=null] 
     @init { EObject temp=null; }:
-    «EXPAND ebnf(g) FOR this.alternatives»;
+    «EXPAND ebnf FOR this.alternatives»;
 «ENDIF»
 «ENDDEFINE»
 
-«DEFINE rule(Grammar g) FOR LexerRule»
+«DEFINE rule FOR LexerRule»
 «ruleName()» : «body»;
 «ENDDEFINE»
 
-«DEFINE ebnf(Grammar g) FOR AbstractElement-»
-«IF mustBeParenthesized()»(«EXPAND ebnf2(g)»)«ELSE»«EXPAND ebnf2(g)»«ENDIF»«cardinality-»
+«DEFINE ebnf FOR AbstractElement-»
+«IF mustBeParenthesized()»(«EXPAND ebnf2»)«ELSE»«EXPAND ebnf2»«ENDIF»«cardinality-»
 «ENDDEFINE»
 
-«DEFINE ebnf2(Grammar g) FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
+«DEFINE ebnf2 FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
 
-«DEFINE ebnf2(Grammar g) FOR Alternatives-»«EXPAND ebnf(g) FOREACH groups SEPARATOR '\n    |'»«ENDDEFINE»
+«DEFINE ebnf2 FOR Alternatives-»«EXPAND ebnf FOREACH groups SEPARATOR '\n    |'»«ENDDEFINE»
 
-«DEFINE ebnf2(Grammar g) FOR Group»«EXPAND ebnf(g) FOREACH abstractTokens»«ENDDEFINE»
+«DEFINE ebnf2 FOR Group»«EXPAND ebnf FOREACH abstractTokens»«ENDDEFINE»
 
-«DEFINE ebnf2(Grammar g) FOR Assignment»
+«DEFINE ebnf2 FOR Assignment»
     «IF isParserRuleAssignment()»
     { 
         currentNode=«EXPAND createCompositeNode FOR terminal» 
     }
     «ENDIF-»
-    «localVar()»=«EXPAND ebnf(g) FOR terminal» 
+    «localVar()»=«EXPAND ebnf FOR terminal» 
     {
         «IF isParserRuleAssignment()»currentNode = currentNode.getParent();
         «ENDIF-»
@@ -170,9 +170,9 @@ internalParse returns [EObject current=null] :
     »    }
 «ENDDEFINE»
 
-«DEFINE ebnf2(Grammar g) FOR Action»
+«DEFINE ebnf2 FOR Action»
     { 
-        temp=factory.create("«theCurrentType(this,g).getQualifiedName()»");
+        temp=factory.create("«theCurrentType(this).getQualifiedName()»");
         factory.«setOrAdd()»(temp, "«feature»",$current);
         $current = temp; 
         temp = null;
@@ -181,14 +181,14 @@ internalParse returns [EObject current=null] :
     }
 «ENDDEFINE»
 
-«DEFINE ebnf2(Grammar g) FOR Keyword»'«value»' 
+«DEFINE ebnf2 FOR Keyword»'«value»' 
 «IF !isAssigned()»
     {
         «EXPAND createLeafNode» 
     }
 «ENDIF»«ENDDEFINE»
 
-«DEFINE ebnf2(Grammar g) FOR RuleCall-»
+«DEFINE ebnf2 FOR RuleCall-»
 «IF ParserRule.isInstance(calledRule()) && !isAssigned()»«localVar()»=«ENDIF-»
 «calledRule().ruleName()-»
 «IF ParserRule.isInstance(calledRule()) && !isAssigned()»

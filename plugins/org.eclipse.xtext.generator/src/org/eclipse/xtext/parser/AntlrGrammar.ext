@@ -25,8 +25,8 @@ setOrAdd(Action this) : if operator=='+=' then 'add' else 'set';
 
 setOrAdd(Assignment this) : if operator=='+=' then 'add' else 'set';
 
-isCalled(ParserRule this, Grammar g) :
-	let x = g.allParserRules() :
+isCalled(ParserRule this) :
+	let x = grammar().allParserRules() :
 		x.indexOf(this)==0 || 
 		x.eAllContents.flatten().typeSelect(RuleCall).exists(e|e.calledParserRule()==this);
 
