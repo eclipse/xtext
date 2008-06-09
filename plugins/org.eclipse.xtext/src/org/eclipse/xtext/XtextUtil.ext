@@ -18,9 +18,9 @@ cached List[MetaModel] getAllMetaModels(Grammar this) :
 		x.remove(null) ->
 		setAbstractFeature(this,x) -> x;
 		
-theCurrentType(Action this, Grammar g) :
-	getAllMetaModels(g)->
-	currentType(this,g);
+theCurrentType(Action this) :
+	getAllMetaModels(grammar())->
+	currentType(this,grammar());
 	
 private AbstractType typeForName(Grammar this, String name) :
 	getAllMetaModels().select(mm|mm.alias()==name.getAlias()).first().types.select(e|e.name == name.getTypeName()).first();
