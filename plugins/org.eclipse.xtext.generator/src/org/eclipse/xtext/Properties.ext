@@ -47,28 +47,19 @@ toJavaPackage(String fqName) :
 toSimpleName(String fqName) :
 	lastToken(fqName, '.');
 
-String skipLastToken(String s, String separator) :
+private String skipLastToken(String s, String separator) :
 	JAVA org.eclipse.xtext.util.Strings.skipLastToken(java.lang.String, java.lang.String);
 	
-String lastToken(String s, String separator) :
+private String lastToken(String s, String separator) :
 	JAVA org.eclipse.xtext.util.Strings.lastToken(java.lang.String, java.lang.String);
 	
+outletPath(String name) :
+	outletPath(genModel(), name);
 
-///////////////////////////////////////////////////////////////////////////////
-// deprecated
+private String outletPath(GenModel model, String name) :
+	JAVA org.eclipse.xtext.GenExtensions.outletPath(org.eclipse.xtext.xtextgen.GenModel, java.lang.String);
 
-srcGenPath() :
-	genModel().outletMap.get(0).value;
+Void copyFiles(String srcDir, String targetDir, List[String] fileNames) :
+	JAVA org.eclipse.xtext.util.Files.copyFiles(java.lang.String, java.lang.String, java.util.List);
 
-packageName(Grammar this) :
-	getNamespace().replaceAll('/','\\.');
-
-languageName(Grammar this) :
-	getName().replaceAll("\\s","_");
-	
-pathName(Grammar this) :
-	getNamespace();
-	
-languageId(Grammar this) :
-	getId();
 	

@@ -1,4 +1,3 @@
-«REM»
 /*******************************************************************************
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
@@ -7,15 +6,21 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-«ENDREM»
+package org.eclipse.xtext;
 
-«IMPORT xtext»
-«IMPORT xtextgen»
-«EXTENSION org::eclipse::xtext::parser::Parser»
-«EXTENSION org::eclipse::xtext::Properties»
+import org.eclipse.xtext.xtextgen.GenModel;
 
-«DEFINE root FOR GenService»
-	«EXPAND IParser::parser»
-	«EXPAND AntlrGrammar::grammar»
-	«runAntlrTool(outletPath("") + "/" +internalAntlrGrammarFullPath())»
-«ENDDEFINE»
+/**
+ * @author Jan Köhnlein - Initial contribution and API
+ *
+ */
+public class GenExtensions {
+
+    public static String outletPath(GenModel genModel, String outletName) {
+        String result = genModel.getOutletMap().get(outletName);
+        if(result == null) {
+            throw new NullPointerException("No such outlet : " + outletName);
+        }
+        return result;
+    }
+}

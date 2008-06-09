@@ -76,7 +76,7 @@
 «DEFINE buildpropertiesFile FOR GenModel»
 «FILE "build.properties" UI-»
 source.. = src-gen/
-output.. = bin/s
+output.. = bin/
 bin.includes = META-INF/,\
                plugin.xml,\
                .
