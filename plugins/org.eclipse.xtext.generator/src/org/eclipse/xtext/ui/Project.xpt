@@ -32,7 +32,7 @@
     </projects>
     <buildSpec>
         <buildCommand>
-            <name>org.eclipse.jdts.core.javabuilder</name>
+            <name>org.eclipse.jdt.core.javabuilder</name>
             <arguments>
             </arguments>
         </buildCommand>
