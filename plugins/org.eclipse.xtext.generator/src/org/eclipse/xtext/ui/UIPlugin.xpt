@@ -21,5 +21,6 @@
     «EXPAND Plugin::plugin_xml FOR this»
     «EXPAND Manifest::manifest_mf FOR this»
     «EXPAND Editor::editorClass FOR this»
+    «copyFiles("org/eclipse/xtext/ui", outletPath("UI") + "/icons/", { "editor.gif" })»  
 «ENDDEFINE»
 

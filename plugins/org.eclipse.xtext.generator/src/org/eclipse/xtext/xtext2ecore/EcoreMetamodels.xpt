@@ -18,6 +18,6 @@
 «EXTENSION org::eclipse::xtext::xtext2ecore::Xtext2Ecore»
 
 «DEFINE root FOR Grammar»
-	«getGeneratedEPackages().collect(m|saveMetamodel(m, srcGenPath() + "/" + generatedMetaModelBasePath()))»
+	«getGeneratedEPackages().collect(m|saveMetamodel(m, outletPath("") + "/" + generatedMetaModelBasePath()))»
 «ENDDEFINE»
 
