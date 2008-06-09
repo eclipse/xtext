@@ -27,7 +27,6 @@ public class LeafNodeBug_234132 extends AbstractGeneratorTest {
         String model = readFileIntoString("org/eclipse/xtext/reference/leafNodeBug_234132.tst");
         CompositeNode rootNode = getRootNode(model,new IParseErrorHandler() {
             public void handleParserError(IParseError error) {
-                int foo =42;
                 // ignore
             }
         });

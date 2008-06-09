@@ -16,13 +16,13 @@
 «EXTENSION org::eclipse::xtext::Properties»
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
-«DEFINE root FOR GenPlugin»
+«DEFINE root FOR GenModel»
     «EXPAND projectFile FOR this»
     «EXPAND classpathFile FOR this»
     «EXPAND buildpropertiesFile FOR this»
 «ENDDEFINE»
 
-«DEFINE projectFile FOR GenPlugin»
+«DEFINE projectFile FOR GenModel»
 «FILE ".project" UI -»
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
@@ -61,7 +61,7 @@
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE classpathFile FOR GenPlugin»
+«DEFINE classpathFile FOR GenModel»
 «FILE ".classpath" UI -»
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
@@ -73,10 +73,10 @@
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE buildpropertiesFile FOR GenPlugin»
+«DEFINE buildpropertiesFile FOR GenModel»
 «FILE "build.properties" UI-»
 source.. = src-gen/
-output.. = bin/
+output.. = bin/s
 bin.includes = META-INF/,\
                plugin.xml,\
                .

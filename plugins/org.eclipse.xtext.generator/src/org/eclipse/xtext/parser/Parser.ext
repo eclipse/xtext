@@ -19,7 +19,7 @@ internalLexerClassName() :
 	'Internal' + languageName() + 'Lexer';
 
 internalPackage(GenService service) :
-	service.genClassPackageFQName() + ".internal";
+	service.genClassFQName.toJavaPackage() + ".internal";
 
 internalPackageFullPath(GenService service) :
 	internalPackage(service).toPath();

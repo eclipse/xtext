@@ -20,13 +20,13 @@
 /*
 «fileHeader()»
 */
-package «genClassPackageFQName()»;
+package «genClassFQName.toJavaPackage()»;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class «genClassName()» extends BaseEPackageAccess implements IMetamodelAccess {
+public class «genClassFQName.toSimpleName()» extends BaseEPackageAccess implements IMetamodelAccess {
 
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {
@@ -50,7 +50,7 @@ public class «genClassName()» extends BaseEPackageAccess implements IMetamodelAc
 	
 	public static EPackage get«gmm.name.toFirstUpper()»EPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(«gmm.name.toUpperCase()»_NS_URI)) {
-			EPackage p = loadEcoreFile(«genClassName()».class.getClassLoader(),«gmm.name.toUpperCase()»_CP_URI);
+			EPackage p = loadEcoreFile(«genClassFQName.toSimpleName()».class.getClassLoader(),«gmm.name.toUpperCase()»_CP_URI);
 			if (p!=null) {
 				EPackage.Registry.INSTANCE.put(«gmm.name.toUpperCase()»_NS_URI,p);
 			}

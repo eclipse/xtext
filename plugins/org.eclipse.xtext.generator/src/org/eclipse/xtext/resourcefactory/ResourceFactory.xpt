@@ -19,14 +19,14 @@
 /*
 «fileHeader()»
 */
-package «genClassPackageFQName()»;
+package «genClassFQName.toJavaPackage()»;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
 
-public class «genClassName()» extends AbstractXtextResourceFactory {
+public class «genClassFQName.toSimpleName()» extends AbstractXtextResourceFactory {
 
-	public «genClassName()»() {
+	public «genClassFQName.toSimpleName()»() {
 		«FOREACH modelFileExtensions() AS modelFileExtension»
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", this);
 		«ENDFOREACH»

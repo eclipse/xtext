@@ -32,7 +32,7 @@ String languageName() :
 languageId() :
 	grammar().getId();
 	
-languageNamespce() :
+languageNamespace() :
 	grammar().getNamespace();
 
 toPath(String fqName) :
@@ -40,6 +40,19 @@ toPath(String fqName) :
 	
 toJavaFilePath(String fqClassName) :
 	toPath(fqClassName) + ".java";
+	
+toJavaPackage(String fqName) :
+	skipLastToken(fqName, '.');
+	
+toSimpleName(String fqName) :
+	lastToken(fqName, '.');
+
+String skipLastToken(String s, String separator) :
+	JAVA org.eclipse.xtext.util.Strings.skipLastToken(java.lang.String, java.lang.String);
+	
+String lastToken(String s, String separator) :
+	JAVA org.eclipse.xtext.util.Strings.lastToken(java.lang.String, java.lang.String);
+	
 
 ///////////////////////////////////////////////////////////////////////////////
 // deprecated

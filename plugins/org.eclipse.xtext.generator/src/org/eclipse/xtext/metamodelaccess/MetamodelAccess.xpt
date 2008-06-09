@@ -17,4 +17,5 @@
 
 «DEFINE root FOR GenService»
 	«EXPAND IMetamodelAccess::metamodelAccess»
+	«EXPAND org::eclipse::xtext::xtext2ecore::EcoreMetamodels::root FOR grammar()»
 «ENDDEFINE»

@@ -38,13 +38,13 @@ List[EClass] findSubTypes(EClass superType, List[EClass] candidates) :
 
 normalizeFeatures(EClass superType, List[EClass] subTypes) :
 	subTypes.commonFeatures().collect(cf | 
-		info("Lifting common feature " + cf.name + " to superclass " + superType.name) ->
+		//info("Lifting common feature " + cf.name + " to superclass " + superType.name) ->
 		superType.eStructuralFeatures.add(cf) ->
 		subTypes.eStructuralFeatures.select(f|cf.isSameAs(f))
 			.collect(f1| f1.eContainingClass.eStructuralFeatures.remove(f1))
 	) ->
 	subTypes.commonFeatures(superType).collect(cf | 
-		info("Removing superclass feature " + cf.name + " from subclass " + cf.eContainingClass.name) ->
+		//info("Removing superclass feature " + cf.name + " from subclass " + cf.eContainingClass.name) ->
 		cf.eContainingClass.eStructuralFeatures.remove(cf))
 ;
 

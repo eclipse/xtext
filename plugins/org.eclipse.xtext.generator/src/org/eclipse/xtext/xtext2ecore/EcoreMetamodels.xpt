@@ -17,7 +17,7 @@
 «EXTENSION org::eclipse::xtext::metamodelaccess::MetamodelAccess»
 «EXTENSION org::eclipse::xtext::xtext2ecore::Xtext2Ecore»
 
-«DEFINE root FOR RootTemplate»
-	«grammar().getGeneratedEPackages().collect(m|saveMetamodel(m, srcGenPath() + "/" + generatedMetaModelBasePath()))»
+«DEFINE root FOR Grammar»
+	«getGeneratedEPackages().collect(m|saveMetamodel(m, srcGenPath() + "/" + generatedMetaModelBasePath()))»
 «ENDDEFINE»
 

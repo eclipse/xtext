@@ -11,11 +11,8 @@ package org.eclipse.xtext;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -28,12 +25,8 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
-import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xtextgen.GenClass;
 import org.eclipse.xtext.xtextgen.GenModel;
-import org.eclipse.xtext.xtextgen.GenPlugin;
 import org.eclipse.xtext.xtextgen.GenService;
-import org.eclipse.xtext.xtextgen.RootTemplate;
 import org.eclipse.xtext.xtextgen.XtextgenFactory;
 import org.eclipse.xtext.xtextgen.XtextgenPackage;
 import org.eclipse.xtext.xtextutil.XtextutilPackage;
@@ -57,7 +50,6 @@ public class GeneratorFacade {
 	}
 	
 	
-	@SuppressWarnings("unchecked")
 	private static void generate(GenModel genModel) throws IOException {
 	    
 	    EPackage.Registry.INSTANCE.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
@@ -90,71 +82,45 @@ public class GeneratorFacade {
 
 		// save grammar model
 		ResourceSetImpl setImpl = new ResourceSetImpl();
-		Resource resource = setImpl.createResource(URI.createURI(genModel.getGrammarResourceURI()));
+		Resource resource = setImpl.createResource(URI.createURI(outletMap.get("") + "/"+ genModel.getGrammarResourceURI()));
 		resource.getContents().add(genModel.getGrammar());
 		resource.save(null);
 
 		// generate services
 		XpandFacade facade = XpandFacade.create(execCtx);
-		EList<RootTemplate> templates = genModel.getRootTemplates();
-		for (RootTemplate templateCall : templates) {
-            String templatePath = templateCall.getTemplatePath();
+		EList<GenService> services = genModel.getServices();
+		for (GenService service : services) {
+            String templatePath = service.getTemplatePath();
             if(templatePath != null) {
-                facade.evaluate(templatePath, templateCall);
+                facade.evaluate(templatePath, service);
             }
         }
 		
-		
-		
-//		facade.evaluate("org::eclipse::xtext::StandaloneSetup::file", grammarModel);
-//		facade.evaluate("org::eclipse::xtext::services::GrammarAccess::file", grammarModel);
-//		facade.evaluate("org::eclipse::xtext::services::MetamodelAccess::file", grammarModel);
-//		if (!GrammarUtil.isAbstract(grammarModel)) {
-//			facade.evaluate("org::eclipse::xtext::ILanguage::file", grammarModel);
-//            facade.evaluate("org::eclipse::xtext::services::ResourceFactory::file", grammarModel);
-//			facade.evaluate("org::eclipse::xtext::parser::IParser::parser", grammarModel);
-//			facade.evaluate("org::eclipse::xtext::parser::AntlrGrammar::grammar", grammarModel);
-//			String grammar = languageNamespace + "/parser/internal/Internal" + languageName + ".g";
-//			Tool antlr = new Tool(new String[] { srcGenPath + "/" + grammar });
-//			antlr.process();
-//			facade.evaluate("org::eclipse::xtext::parsetree::ParseTreeConstructor::file", grammarModel);
-//			// generate EPackage
-//			ExecutionContextImpl executionContext = new ExecutionContextImpl();
-//			executionContext.registerMetaModel(metamodel);
-//			XtendFacade xtendfacade = XtendFacade.create(executionContext,
-//					"org::eclipse::xtext::xtext2ecore::Xtext2Ecore");
-//			List<EPackage> result = (List<EPackage>) xtendfacade.call("getGeneratedEPackages", grammarModel);
-//
-//			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
-//			for (EPackage pack : result) {
-//				URI uri = URI.createFileURI(srcGenPath + "/" + languageNamespace + "/" + pack.getName() + ".ecore");
-//				Resource metaModelResource = new ResourceSetImpl().createResource(uri);
-//				metaModelResource.getContents().add(pack);
-//				metaModelResource.save(null);
-//			}
-//			if (uiProjectPath != null) {
-//				facade.evaluate("org::eclipse::xtext::ui::Project::root", grammarModel);
-//				facade.evaluate("org::eclipse::xtext::ui::Plugin::file", grammarModel);
-//				facade.evaluate("org::eclipse::xtext::ui::Manifest::file", grammarModel);
-//				facade.evaluate("org::eclipse::xtext::ui::Editor::file", grammarModel);
-//				
-//				CopyImages copier = new CopyImages();
-//				copier.setTargetDir(uiProjectPath + "/icons/");
-//				copier.invoke(null, null, new IssuesImpl());
-//			}
-//		}
+		facade.evaluate("org::eclipse::xtext::ILanguage::root", genModel);
+		facade.evaluate("org::eclipse::xtext::StandaloneSetup::root", genModel);
+        
+        if (genModel.getUiPluginBundleID() != null) {
+            facade.evaluate("org::eclipse::xtext::ui::UIPlugin::root", genModel);
+            // TODO outline service, copy images
+        }
 	}
-
-    private static GenModel assembleGeneratorModel(Grammar grammarModel, String srcGenPath, String uiProjectPath, String... modelFileExtensions) {
+	
+	private static GenModel assembleGeneratorModel(Grammar grammarModel, String srcGenPath, String uiProjectPath, String... modelFileExtensions) {
         String languageName = GrammarUtil.getName(grammarModel);
         String namespace = GrammarUtil.getNamespace(grammarModel);
 
         GenModel genModel = XtextgenFactory.eINSTANCE.createGenModel();
 	    genModel.setGrammar(grammarModel);
-	    genModel.setGrammarResourceURI(srcGenPath + "/" + Strings.concat("/", grammarModel.getIdElements(),1) + "/" + languageName + ".xmi");
+	    genModel.setGrammarResourceURI(namespace.replaceAll("\\.", "/") + "/" + languageName + ".xmi");
 	    genModel.getModelFileExtensions().addAll(Arrays.asList(modelFileExtensions));
-	    genModel.setFileHeader("Generated using Xtext at " + new Date());
-	    
+	    genModel.setFileHeader("Generated with Xtext");
+	    genModel.setLanguageInterfaceFQName(namespace + ".I" + languageName);
+	    genModel.setStandaloneSetupClassFQName(namespace + "." + languageName + "StandaloneSetup");
+	    if(uiProjectPath != null) {
+	        genModel.setNonUIPluginBundleID(namespace);
+	        genModel.setUiPluginBundleID(namespace + ".ui_gen");
+	    }
+        
 	    genModel.getOutletMap().put("", srcGenPath);
 	    genModel.getOutletMap().put("UI", uiProjectPath);
 	    genModel.getOutletMap().put("UI_SRC_GEN", uiProjectPath + "/src-gen");
@@ -165,76 +131,50 @@ public class GeneratorFacade {
 	    grammarAccessService.setGenClassFQName(namespace + ".services." + languageName + "GrammarAccess");
 	    grammarAccessService.setTemplatePath("org::eclipse::xtext::grammaraccess::GrammarAccess::root");
 	    grammarAccessService.setExtensionPointID("org.eclipse.xtext.ui.grammarAccess");
-	    genModel.getRootTemplates().add(grammarAccessService);
+	    genModel.getServices().add(grammarAccessService);
 	    
 	    GenService metamodelAccessService = XtextgenFactory.eINSTANCE.createGenService();
 	    metamodelAccessService.setServiceInterfaceFQName("org.eclipse.xtext.IMetamodelAccess");
 	    metamodelAccessService.setGenClassFQName(namespace + ".services." + languageName + "MetamodelAccess");
 	    metamodelAccessService.setTemplatePath("org::eclipse::xtext::MetamodelAccess::MetamodelAccess::root");
 	    metamodelAccessService.setExtensionPointID("org.eclipse.xtext.ui.metamodelAccess");
-	    genModel.getRootTemplates().add(metamodelAccessService);
-	    
-	    GenClass languageInterface = XtextgenFactory.eINSTANCE.createGenClass();
-	    languageInterface.setGenClassFQName(namespace + ".I" + languageName);
-	    languageInterface.setTemplatePath("org::eclipse::xtext::ILanguage::root");
-	    genModel.getRootTemplates().add(languageInterface);
-	    
-	    GenClass standaloneSetup = XtextgenFactory.eINSTANCE.createGenClass();
-	    standaloneSetup.setGenClassFQName(namespace + "." + languageName + "StandaloneSetup");
-	    standaloneSetup.setTemplatePath("org::eclipse::xtext::StandaloneSetup::root");
-	    genModel.getRootTemplates().add(standaloneSetup);
+	    genModel.getServices().add(metamodelAccessService);
 	    
 
 	    if (!GrammarUtil.isAbstract(grammarModel)) {
-
-            RootTemplate xtext2ecore = XtextgenFactory.eINSTANCE.createRootTemplate();
-            xtext2ecore.setTemplatePath("org::eclipse::xtext::xtext2ecore::EcoreMetamodels::root");
-            genModel.getRootTemplates().add(xtext2ecore);
 
             GenService elementFactoryService = XtextgenFactory.eINSTANCE.createGenService();
             elementFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.parser.IElementFactory");
             elementFactoryService.setGenClassFQName("org.eclipse.xtext.parser.GenericEcoreElementFactory");
             // no template, as service is generic. Nevertheless, we need the individual registration to avoid conflicts
             elementFactoryService.setExtensionPointID("org.eclipse.xtext.ui.aSTFactory");
-            genModel.getRootTemplates().add(elementFactoryService);
+            genModel.getServices().add(elementFactoryService);
             
             GenService parserService = XtextgenFactory.eINSTANCE.createGenService();
             parserService.setServiceInterfaceFQName("org.eclipse.xtext.parser.IParser");
             parserService.setGenClassFQName(namespace + ".parser." + languageName + "Parser");
             parserService.setTemplatePath("org::eclipse::xtext::parser::Parser::root");
             parserService.setExtensionPointID("org.eclipse.xtext.ui.parser");
-            genModel.getRootTemplates().add(parserService);
+            genModel.getServices().add(parserService);
 
             GenService resourceFactoryService = XtextgenFactory.eINSTANCE.createGenService();
             resourceFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.resource.IResourceFactory");
             resourceFactoryService.setGenClassFQName(namespace + ".services." + languageName + "ResourceFactory");
             resourceFactoryService.setTemplatePath("org::eclipse::xtext::resourceFactory::ResourceFactory::root");
             resourceFactoryService.setExtensionPointID("org.eclipse.xtext.ui.resourceFactory");
-            genModel.getRootTemplates().add(resourceFactoryService);
+            genModel.getServices().add(resourceFactoryService);
 
             GenService parsetreeConstructorService = XtextgenFactory.eINSTANCE.createGenService();
             parsetreeConstructorService.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.IParseTreeConstructor");
             parsetreeConstructorService.setGenClassFQName(namespace + ".parsetree." + languageName + "ParseTreeConstructor");
             parsetreeConstructorService.setTemplatePath("org::eclipse::xtext::parsetree::ParsetreeConstructor::root");
             parsetreeConstructorService.setExtensionPointID("org.eclipse.xtext.ui.parseTreeConstructor");
-            genModel.getRootTemplates().add(parsetreeConstructorService);
+            genModel.getServices().add(parsetreeConstructorService);
 
-            if (uiProjectPath != null) {
-                GenPlugin plugin = XtextgenFactory.eINSTANCE.createGenPlugin();
-                plugin.setTemplatePath("org::eclipse::xtext::ui::UIPlugin::root");
-                plugin.setBundleID(namespace + ".ui_gen");
-                genModel.getRootTemplates().add(plugin);
-            }
         }
+	    
         return genModel;
     }
-	
-	private static List<String> packages(Grammar g, String... subpackages) {
-	    List<String> result = new ArrayList<String>(g.getIdElements());
-	    result.remove(result.size()-1);
-        result.addAll(Arrays.asList(subpackages));
-        return result;
-	}
 	
 	public static void cleanFolder(String srcGenPath) throws FileNotFoundException {
 		File f = new File(srcGenPath);

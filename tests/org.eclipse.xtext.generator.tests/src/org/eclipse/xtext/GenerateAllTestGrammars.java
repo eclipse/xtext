@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.dummy.DummyLanguage;
 import org.eclipse.xtext.grammargen.tests.SimpleTest;
 import org.eclipse.xtext.grammargen.tests.SimpleTest2;
-import org.eclipse.xtext.inheritance.AbstractBaseLanguage;
 import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest;
 import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest;
 import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest;
