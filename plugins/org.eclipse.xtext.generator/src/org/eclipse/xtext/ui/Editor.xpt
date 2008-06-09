@@ -16,7 +16,7 @@
 «EXTENSION org::eclipse::xtext::Properties»
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
-«DEFINE editorClass FOR GenPlugin»
+«DEFINE editorClass FOR GenModel»
 «FILE editorClassFQN().toJavaFilePath() UI_SRC_GEN -»
 package «editorPackage()»;
 

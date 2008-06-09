@@ -81,4 +81,11 @@
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </preferenceStore>
    </extension>
+   <extension
+         point="org.eclipse.xtext.ui.outlineProvider">
+      <outlineProvider
+            class="org.eclipse.xtext.ui.core.service.impl.BuiltInOutlineProvider"
+            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
+      </outlineProvider>
+   </extension>
 </plugin>

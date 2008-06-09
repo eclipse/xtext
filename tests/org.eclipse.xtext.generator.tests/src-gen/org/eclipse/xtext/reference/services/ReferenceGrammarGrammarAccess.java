@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Sun Jun 08 11:15:28 CEST 2008
+Generated with Xtext
 */
 
 package org.eclipse.xtext.reference.services;
@@ -11,7 +11,7 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 
-	private static final String REFERENCEGRAMMAR_GRAMMAR_CP_URI = "./src-gen/org/eclipse/xtext/reference/ReferenceGrammar.xmi";
+	private static final String REFERENCEGRAMMAR_GRAMMAR_CP_URI = "org/eclipse/xtext/reference/ReferenceGrammar.xmi";
 	private static Grammar GRAMMAR = null;
 	
 	@SuppressWarnings("unused")

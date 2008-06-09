@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenFactoryImpl.java,v 1.1 2008/06/06 16:15:42 jkohnlein Exp $
+ * $Id: XtextgenFactoryImpl.java,v 1.2 2008/06/09 12:52:54 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
@@ -62,9 +62,6 @@ public class XtextgenFactoryImpl extends EFactoryImpl implements XtextgenFactory
         switch (eClass.getClassifierID()) {
             case XtextgenPackage.GEN_SERVICE: return createGenService();
             case XtextgenPackage.GEN_MODEL: return createGenModel();
-            case XtextgenPackage.ROOT_TEMPLATE: return createRootTemplate();
-            case XtextgenPackage.GEN_CLASS: return createGenClass();
-            case XtextgenPackage.GEN_PLUGIN: return createGenPlugin();
             default:
                 throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
         }
@@ -88,36 +85,6 @@ public class XtextgenFactoryImpl extends EFactoryImpl implements XtextgenFactory
     public GenModel createGenModel() {
         GenModelImpl genModel = new GenModelImpl();
         return genModel;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public RootTemplate createRootTemplate() {
-        RootTemplateImpl rootTemplate = new RootTemplateImpl();
-        return rootTemplate;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public GenClass createGenClass() {
-        GenClassImpl genClass = new GenClassImpl();
-        return genClass;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public GenPlugin createGenPlugin() {
-        GenPluginImpl genPlugin = new GenPluginImpl();
-        return genPlugin;
     }
 
     /**

@@ -2,23 +2,24 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenServiceImpl.java,v 1.1 2008/06/06 16:15:42 jkohnlein Exp $
+ * $Id: GenServiceImpl.java,v 1.2 2008/06/09 12:52:54 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.common.util.EMap;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+
 import org.eclipse.emf.ecore.util.EcoreEMap;
+
 import org.eclipse.xtext.xtextgen.GenService;
 import org.eclipse.xtext.xtextgen.XtextgenPackage;
 
@@ -30,13 +31,16 @@ import org.eclipse.xtext.xtextgen.XtextgenPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenServiceImpl#getServiceInterfaceFQName <em>Service Interface FQ Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenServiceImpl#getGenClassFQName <em>Gen Class FQ Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenServiceImpl#getExtensionPointID <em>Extension Point ID</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenServiceImpl#getTemplatePath <em>Template Path</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenServiceImpl#getGenParameters <em>Gen Parameters</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class GenServiceImpl extends GenClassImpl implements GenService {
+public class GenServiceImpl extends EObjectImpl implements GenService {
     /**
      * The default value of the '{@link #getServiceInterfaceFQName() <em>Service Interface FQ Name</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -58,6 +62,26 @@ public class GenServiceImpl extends GenClassImpl implements GenService {
     protected String serviceInterfaceFQName = SERVICE_INTERFACE_FQ_NAME_EDEFAULT;
 
     /**
+     * The default value of the '{@link #getGenClassFQName() <em>Gen Class FQ Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getGenClassFQName()
+     * @generated
+     * @ordered
+     */
+    protected static final String GEN_CLASS_FQ_NAME_EDEFAULT = null;
+
+    /**
+     * The cached value of the '{@link #getGenClassFQName() <em>Gen Class FQ Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getGenClassFQName()
+     * @generated
+     * @ordered
+     */
+    protected String genClassFQName = GEN_CLASS_FQ_NAME_EDEFAULT;
+
+    /**
      * The default value of the '{@link #getExtensionPointID() <em>Extension Point ID</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -76,6 +100,45 @@ public class GenServiceImpl extends GenClassImpl implements GenService {
      * @ordered
      */
     protected String extensionPointID = EXTENSION_POINT_ID_EDEFAULT;
+
+    /**
+     * The default value of the '{@link #getTemplatePath() <em>Template Path</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getTemplatePath()
+     * @generated
+     * @ordered
+     */
+    protected static final String TEMPLATE_PATH_EDEFAULT = null;
+
+    /**
+     * The cached value of the '{@link #getTemplatePath() <em>Template Path</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getTemplatePath()
+     * @generated
+     * @ordered
+     */
+    protected String templatePath = TEMPLATE_PATH_EDEFAULT;
+
+    /**
+     * This is true if the Template Path attribute has been set.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    protected boolean templatePathESet;
+
+    /**
+     * The cached value of the '{@link #getGenParameters() <em>Gen Parameters</em>}' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getGenParameters()
+     * @generated
+     * @ordered
+     */
+    protected EMap<String, String> genParameters;
 
     /**
      * <!-- begin-user-doc -->
@@ -122,6 +185,27 @@ public class GenServiceImpl extends GenClassImpl implements GenService {
      * <!-- end-user-doc -->
      * @generated
      */
+    public String getGenClassFQName() {
+        return genClassFQName;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setGenClassFQName(String newGenClassFQName) {
+        String oldGenClassFQName = genClassFQName;
+        genClassFQName = newGenClassFQName;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME, oldGenClassFQName, genClassFQName));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public String getExtensionPointID() {
         return extensionPointID;
     }
@@ -143,8 +227,8 @@ public class GenServiceImpl extends GenClassImpl implements GenService {
      * <!-- end-user-doc -->
      * @generated
      */
-    public String serviceInterfaceName() {
-        {return XtextgenUtil.serviceInterfaceName((GenServiceImpl) this);}
+    public String getTemplatePath() {
+        return templatePath;
     }
 
     /**
@@ -152,8 +236,48 @@ public class GenServiceImpl extends GenClassImpl implements GenService {
      * <!-- end-user-doc -->
      * @generated
      */
-    public String extensionPointName() {
-        {return XtextgenUtil.extensionPointName((GenServiceImpl) this);}
+    public void setTemplatePath(String newTemplatePath) {
+        String oldTemplatePath = templatePath;
+        templatePath = newTemplatePath;
+        boolean oldTemplatePathESet = templatePathESet;
+        templatePathESet = true;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH, oldTemplatePath, templatePath, !oldTemplatePathESet));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void unsetTemplatePath() {
+        String oldTemplatePath = templatePath;
+        boolean oldTemplatePathESet = templatePathESet;
+        templatePath = TEMPLATE_PATH_EDEFAULT;
+        templatePathESet = false;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.UNSET, XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH, oldTemplatePath, TEMPLATE_PATH_EDEFAULT, oldTemplatePathESet));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public boolean isSetTemplatePath() {
+        return templatePathESet;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EMap<String, String> getGenParameters() {
+        if (genParameters == null) {
+            genParameters = new EcoreEMap<String,String>(EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY, EStringToStringMapEntryImpl.class, this, XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS);
+        }
+        return genParameters;
     }
 
     /**
@@ -166,8 +290,15 @@ public class GenServiceImpl extends GenClassImpl implements GenService {
         switch (featureID) {
             case XtextgenPackage.GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME:
                 return getServiceInterfaceFQName();
+            case XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME:
+                return getGenClassFQName();
             case XtextgenPackage.GEN_SERVICE__EXTENSION_POINT_ID:
                 return getExtensionPointID();
+            case XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH:
+                return getTemplatePath();
+            case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
+                if (coreType) return getGenParameters();
+                else return getGenParameters().map();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -177,15 +308,23 @@ public class GenServiceImpl extends GenClassImpl implements GenService {
      * <!-- end-user-doc -->
      * @generated
      */
-    @SuppressWarnings("unchecked")
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
             case XtextgenPackage.GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME:
                 setServiceInterfaceFQName((String)newValue);
                 return;
+            case XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME:
+                setGenClassFQName((String)newValue);
+                return;
             case XtextgenPackage.GEN_SERVICE__EXTENSION_POINT_ID:
                 setExtensionPointID((String)newValue);
+                return;
+            case XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH:
+                setTemplatePath((String)newValue);
+                return;
+            case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
+                ((EStructuralFeature.Setting)getGenParameters()).set(newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -202,8 +341,17 @@ public class GenServiceImpl extends GenClassImpl implements GenService {
             case XtextgenPackage.GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME:
                 setServiceInterfaceFQName(SERVICE_INTERFACE_FQ_NAME_EDEFAULT);
                 return;
+            case XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME:
+                setGenClassFQName(GEN_CLASS_FQ_NAME_EDEFAULT);
+                return;
             case XtextgenPackage.GEN_SERVICE__EXTENSION_POINT_ID:
                 setExtensionPointID(EXTENSION_POINT_ID_EDEFAULT);
+                return;
+            case XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH:
+                unsetTemplatePath();
+                return;
+            case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
+                getGenParameters().clear();
                 return;
         }
         super.eUnset(featureID);
@@ -219,8 +367,14 @@ public class GenServiceImpl extends GenClassImpl implements GenService {
         switch (featureID) {
             case XtextgenPackage.GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME:
                 return SERVICE_INTERFACE_FQ_NAME_EDEFAULT == null ? serviceInterfaceFQName != null : !SERVICE_INTERFACE_FQ_NAME_EDEFAULT.equals(serviceInterfaceFQName);
+            case XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME:
+                return GEN_CLASS_FQ_NAME_EDEFAULT == null ? genClassFQName != null : !GEN_CLASS_FQ_NAME_EDEFAULT.equals(genClassFQName);
             case XtextgenPackage.GEN_SERVICE__EXTENSION_POINT_ID:
                 return EXTENSION_POINT_ID_EDEFAULT == null ? extensionPointID != null : !EXTENSION_POINT_ID_EDEFAULT.equals(extensionPointID);
+            case XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH:
+                return isSetTemplatePath();
+            case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
+                return genParameters != null && !genParameters.isEmpty();
         }
         return super.eIsSet(featureID);
     }
@@ -237,8 +391,12 @@ public class GenServiceImpl extends GenClassImpl implements GenService {
         StringBuffer result = new StringBuffer(super.toString());
         result.append(" (serviceInterfaceFQName: ");
         result.append(serviceInterfaceFQName);
+        result.append(", genClassFQName: ");
+        result.append(genClassFQName);
         result.append(", extensionPointID: ");
         result.append(extensionPointID);
+        result.append(", templatePath: ");
+        if (templatePathESet) result.append(templatePath); else result.append("<unset>");
         result.append(')');
         return result.toString();
     }

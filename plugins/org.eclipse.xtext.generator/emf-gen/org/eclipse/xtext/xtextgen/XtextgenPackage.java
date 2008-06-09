@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenPackage.java,v 1.1 2008/06/06 16:15:41 jkohnlein Exp $
+ * $Id: XtextgenPackage.java,v 1.2 2008/06/09 12:52:54 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen;
 
@@ -60,89 +60,6 @@ public interface XtextgenPackage extends EPackage {
     XtextgenPackage eINSTANCE = org.eclipse.xtext.xtextgen.impl.XtextgenPackageImpl.init();
 
     /**
-     * The meta object id for the '{@link org.eclipse.xtext.xtextgen.impl.RootTemplateImpl <em>Root Template</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.xtextgen.impl.RootTemplateImpl
-     * @see org.eclipse.xtext.xtextgen.impl.XtextgenPackageImpl#getRootTemplate()
-     * @generated
-     */
-    int ROOT_TEMPLATE = 2;
-
-    /**
-     * The feature id for the '<em><b>Template Path</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int ROOT_TEMPLATE__TEMPLATE_PATH = 0;
-
-    /**
-     * The feature id for the '<em><b>Gen Parameters</b></em>' reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int ROOT_TEMPLATE__GEN_PARAMETERS = 1;
-
-    /**
-     * The number of structural features of the '<em>Root Template</em>' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int ROOT_TEMPLATE_FEATURE_COUNT = 2;
-
-    /**
-     * The meta object id for the '{@link org.eclipse.xtext.xtextgen.impl.GenClassImpl <em>Gen Class</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.xtextgen.impl.GenClassImpl
-     * @see org.eclipse.xtext.xtextgen.impl.XtextgenPackageImpl#getGenClass()
-     * @generated
-     */
-    int GEN_CLASS = 3;
-
-    /**
-     * The feature id for the '<em><b>Template Path</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int GEN_CLASS__TEMPLATE_PATH = ROOT_TEMPLATE__TEMPLATE_PATH;
-
-    /**
-     * The feature id for the '<em><b>Gen Parameters</b></em>' reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int GEN_CLASS__GEN_PARAMETERS = ROOT_TEMPLATE__GEN_PARAMETERS;
-
-    /**
-     * The feature id for the '<em><b>Gen Class FQ Name</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int GEN_CLASS__GEN_CLASS_FQ_NAME = ROOT_TEMPLATE_FEATURE_COUNT + 0;
-
-    /**
-     * The number of structural features of the '<em>Gen Class</em>' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int GEN_CLASS_FEATURE_COUNT = ROOT_TEMPLATE_FEATURE_COUNT + 1;
-
-    /**
      * The meta object id for the '{@link org.eclipse.xtext.xtextgen.impl.GenServiceImpl <em>Gen Service</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -153,22 +70,13 @@ public interface XtextgenPackage extends EPackage {
     int GEN_SERVICE = 0;
 
     /**
-     * The feature id for the '<em><b>Template Path</b></em>' attribute.
+     * The feature id for the '<em><b>Service Interface FQ Name</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int GEN_SERVICE__TEMPLATE_PATH = GEN_CLASS__TEMPLATE_PATH;
-
-    /**
-     * The feature id for the '<em><b>Gen Parameters</b></em>' reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int GEN_SERVICE__GEN_PARAMETERS = GEN_CLASS__GEN_PARAMETERS;
+    int GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME = 0;
 
     /**
      * The feature id for the '<em><b>Gen Class FQ Name</b></em>' attribute.
@@ -177,16 +85,7 @@ public interface XtextgenPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int GEN_SERVICE__GEN_CLASS_FQ_NAME = GEN_CLASS__GEN_CLASS_FQ_NAME;
-
-    /**
-     * The feature id for the '<em><b>Service Interface FQ Name</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME = GEN_CLASS_FEATURE_COUNT + 0;
+    int GEN_SERVICE__GEN_CLASS_FQ_NAME = 1;
 
     /**
      * The feature id for the '<em><b>Extension Point ID</b></em>' attribute.
@@ -195,7 +94,25 @@ public interface XtextgenPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int GEN_SERVICE__EXTENSION_POINT_ID = GEN_CLASS_FEATURE_COUNT + 1;
+    int GEN_SERVICE__EXTENSION_POINT_ID = 2;
+
+    /**
+     * The feature id for the '<em><b>Template Path</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GEN_SERVICE__TEMPLATE_PATH = 3;
+
+    /**
+     * The feature id for the '<em><b>Gen Parameters</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GEN_SERVICE__GEN_PARAMETERS = 4;
 
     /**
      * The number of structural features of the '<em>Gen Service</em>' class.
@@ -204,7 +121,7 @@ public interface XtextgenPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int GEN_SERVICE_FEATURE_COUNT = GEN_CLASS_FEATURE_COUNT + 2;
+    int GEN_SERVICE_FEATURE_COUNT = 5;
 
     /**
      * The meta object id for the '{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl <em>Gen Model</em>}' class.
@@ -253,13 +170,13 @@ public interface XtextgenPackage extends EPackage {
     int GEN_MODEL__GRAMMAR_RESOURCE_URI = 3;
 
     /**
-     * The feature id for the '<em><b>Root Templates</b></em>' reference list.
+     * The feature id for the '<em><b>Services</b></em>' reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int GEN_MODEL__ROOT_TEMPLATES = 4;
+    int GEN_MODEL__SERVICES = 4;
 
     /**
      * The feature id for the '<em><b>Outlet Map</b></em>' reference list.
@@ -271,60 +188,49 @@ public interface XtextgenPackage extends EPackage {
     int GEN_MODEL__OUTLET_MAP = 5;
 
     /**
+     * The feature id for the '<em><b>Language Interface FQ Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GEN_MODEL__LANGUAGE_INTERFACE_FQ_NAME = 6;
+
+    /**
+     * The feature id for the '<em><b>Standalone Setup Class FQ Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GEN_MODEL__STANDALONE_SETUP_CLASS_FQ_NAME = 7;
+
+    /**
+     * The feature id for the '<em><b>Non UI Plugin Bundle ID</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GEN_MODEL__NON_UI_PLUGIN_BUNDLE_ID = 8;
+
+    /**
+     * The feature id for the '<em><b>Ui Plugin Bundle ID</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GEN_MODEL__UI_PLUGIN_BUNDLE_ID = 9;
+
+    /**
      * The number of structural features of the '<em>Gen Model</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int GEN_MODEL_FEATURE_COUNT = 6;
-
-
-    /**
-     * The meta object id for the '{@link org.eclipse.xtext.xtextgen.impl.GenPluginImpl <em>Gen Plugin</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.xtextgen.impl.GenPluginImpl
-     * @see org.eclipse.xtext.xtextgen.impl.XtextgenPackageImpl#getGenPlugin()
-     * @generated
-     */
-    int GEN_PLUGIN = 4;
-
-    /**
-     * The feature id for the '<em><b>Template Path</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int GEN_PLUGIN__TEMPLATE_PATH = ROOT_TEMPLATE__TEMPLATE_PATH;
-
-    /**
-     * The feature id for the '<em><b>Gen Parameters</b></em>' reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int GEN_PLUGIN__GEN_PARAMETERS = ROOT_TEMPLATE__GEN_PARAMETERS;
-
-    /**
-     * The feature id for the '<em><b>Bundle ID</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int GEN_PLUGIN__BUNDLE_ID = ROOT_TEMPLATE_FEATURE_COUNT + 0;
-
-    /**
-     * The number of structural features of the '<em>Gen Plugin</em>' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int GEN_PLUGIN_FEATURE_COUNT = ROOT_TEMPLATE_FEATURE_COUNT + 1;
+    int GEN_MODEL_FEATURE_COUNT = 10;
 
 
     /**
@@ -349,6 +255,17 @@ public interface XtextgenPackage extends EPackage {
     EAttribute getGenService_ServiceInterfaceFQName();
 
     /**
+     * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.GenService#getGenClassFQName <em>Gen Class FQ Name</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Gen Class FQ Name</em>'.
+     * @see org.eclipse.xtext.xtextgen.GenService#getGenClassFQName()
+     * @see #getGenService()
+     * @generated
+     */
+    EAttribute getGenService_GenClassFQName();
+
+    /**
      * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.GenService#getExtensionPointID <em>Extension Point ID</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -358,6 +275,28 @@ public interface XtextgenPackage extends EPackage {
      * @generated
      */
     EAttribute getGenService_ExtensionPointID();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.GenService#getTemplatePath <em>Template Path</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Template Path</em>'.
+     * @see org.eclipse.xtext.xtextgen.GenService#getTemplatePath()
+     * @see #getGenService()
+     * @generated
+     */
+    EAttribute getGenService_TemplatePath();
+
+    /**
+     * Returns the meta object for the reference list '{@link org.eclipse.xtext.xtextgen.GenService#getGenParameters <em>Gen Parameters</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference list '<em>Gen Parameters</em>'.
+     * @see org.eclipse.xtext.xtextgen.GenService#getGenParameters()
+     * @see #getGenService()
+     * @generated
+     */
+    EReference getGenService_GenParameters();
 
     /**
      * Returns the meta object for class '{@link org.eclipse.xtext.xtextgen.GenModel <em>Gen Model</em>}'.
@@ -414,15 +353,15 @@ public interface XtextgenPackage extends EPackage {
     EAttribute getGenModel_GrammarResourceURI();
 
     /**
-     * Returns the meta object for the reference list '{@link org.eclipse.xtext.xtextgen.GenModel#getRootTemplates <em>Root Templates</em>}'.
+     * Returns the meta object for the reference list '{@link org.eclipse.xtext.xtextgen.GenModel#getServices <em>Services</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for the reference list '<em>Root Templates</em>'.
-     * @see org.eclipse.xtext.xtextgen.GenModel#getRootTemplates()
+     * @return the meta object for the reference list '<em>Services</em>'.
+     * @see org.eclipse.xtext.xtextgen.GenModel#getServices()
      * @see #getGenModel()
      * @generated
      */
-    EReference getGenModel_RootTemplates();
+    EReference getGenModel_Services();
 
     /**
      * Returns the meta object for the reference list '{@link org.eclipse.xtext.xtextgen.GenModel#getOutletMap <em>Outlet Map</em>}'.
@@ -436,78 +375,48 @@ public interface XtextgenPackage extends EPackage {
     EReference getGenModel_OutletMap();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.xtext.xtextgen.RootTemplate <em>Root Template</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.GenModel#getUiPluginBundleID <em>Ui Plugin Bundle ID</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for class '<em>Root Template</em>'.
-     * @see org.eclipse.xtext.xtextgen.RootTemplate
+     * @return the meta object for the attribute '<em>Ui Plugin Bundle ID</em>'.
+     * @see org.eclipse.xtext.xtextgen.GenModel#getUiPluginBundleID()
+     * @see #getGenModel()
      * @generated
      */
-    EClass getRootTemplate();
+    EAttribute getGenModel_UiPluginBundleID();
 
     /**
-     * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.RootTemplate#getTemplatePath <em>Template Path</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.GenModel#getLanguageInterfaceFQName <em>Language Interface FQ Name</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for the attribute '<em>Template Path</em>'.
-     * @see org.eclipse.xtext.xtextgen.RootTemplate#getTemplatePath()
-     * @see #getRootTemplate()
+     * @return the meta object for the attribute '<em>Language Interface FQ Name</em>'.
+     * @see org.eclipse.xtext.xtextgen.GenModel#getLanguageInterfaceFQName()
+     * @see #getGenModel()
      * @generated
      */
-    EAttribute getRootTemplate_TemplatePath();
+    EAttribute getGenModel_LanguageInterfaceFQName();
 
     /**
-     * Returns the meta object for the reference list '{@link org.eclipse.xtext.xtextgen.RootTemplate#getGenParameters <em>Gen Parameters</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.GenModel#getStandaloneSetupClassFQName <em>Standalone Setup Class FQ Name</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for the reference list '<em>Gen Parameters</em>'.
-     * @see org.eclipse.xtext.xtextgen.RootTemplate#getGenParameters()
-     * @see #getRootTemplate()
+     * @return the meta object for the attribute '<em>Standalone Setup Class FQ Name</em>'.
+     * @see org.eclipse.xtext.xtextgen.GenModel#getStandaloneSetupClassFQName()
+     * @see #getGenModel()
      * @generated
      */
-    EReference getRootTemplate_GenParameters();
+    EAttribute getGenModel_StandaloneSetupClassFQName();
 
     /**
-     * Returns the meta object for class '{@link org.eclipse.xtext.xtextgen.GenClass <em>Gen Class</em>}'.
+     * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.GenModel#getNonUIPluginBundleID <em>Non UI Plugin Bundle ID</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for class '<em>Gen Class</em>'.
-     * @see org.eclipse.xtext.xtextgen.GenClass
+     * @return the meta object for the attribute '<em>Non UI Plugin Bundle ID</em>'.
+     * @see org.eclipse.xtext.xtextgen.GenModel#getNonUIPluginBundleID()
+     * @see #getGenModel()
      * @generated
      */
-    EClass getGenClass();
-
-    /**
-     * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.GenClass#getGenClassFQName <em>Gen Class FQ Name</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute '<em>Gen Class FQ Name</em>'.
-     * @see org.eclipse.xtext.xtextgen.GenClass#getGenClassFQName()
-     * @see #getGenClass()
-     * @generated
-     */
-    EAttribute getGenClass_GenClassFQName();
-
-    /**
-     * Returns the meta object for class '{@link org.eclipse.xtext.xtextgen.GenPlugin <em>Gen Plugin</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for class '<em>Gen Plugin</em>'.
-     * @see org.eclipse.xtext.xtextgen.GenPlugin
-     * @generated
-     */
-    EClass getGenPlugin();
-
-    /**
-     * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.GenPlugin#getBundleID <em>Bundle ID</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute '<em>Bundle ID</em>'.
-     * @see org.eclipse.xtext.xtextgen.GenPlugin#getBundleID()
-     * @see #getGenPlugin()
-     * @generated
-     */
-    EAttribute getGenPlugin_BundleID();
+    EAttribute getGenModel_NonUIPluginBundleID();
 
     /**
      * Returns the factory that creates the instances of the model.
@@ -550,12 +459,36 @@ public interface XtextgenPackage extends EPackage {
         EAttribute GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME = eINSTANCE.getGenService_ServiceInterfaceFQName();
 
         /**
+         * The meta object literal for the '<em><b>Gen Class FQ Name</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute GEN_SERVICE__GEN_CLASS_FQ_NAME = eINSTANCE.getGenService_GenClassFQName();
+
+        /**
          * The meta object literal for the '<em><b>Extension Point ID</b></em>' attribute feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
         EAttribute GEN_SERVICE__EXTENSION_POINT_ID = eINSTANCE.getGenService_ExtensionPointID();
+
+        /**
+         * The meta object literal for the '<em><b>Template Path</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute GEN_SERVICE__TEMPLATE_PATH = eINSTANCE.getGenService_TemplatePath();
+
+        /**
+         * The meta object literal for the '<em><b>Gen Parameters</b></em>' reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference GEN_SERVICE__GEN_PARAMETERS = eINSTANCE.getGenService_GenParameters();
 
         /**
          * The meta object literal for the '{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl <em>Gen Model</em>}' class.
@@ -600,12 +533,12 @@ public interface XtextgenPackage extends EPackage {
         EAttribute GEN_MODEL__GRAMMAR_RESOURCE_URI = eINSTANCE.getGenModel_GrammarResourceURI();
 
         /**
-         * The meta object literal for the '<em><b>Root Templates</b></em>' reference list feature.
+         * The meta object literal for the '<em><b>Services</b></em>' reference list feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference GEN_MODEL__ROOT_TEMPLATES = eINSTANCE.getGenModel_RootTemplates();
+        EReference GEN_MODEL__SERVICES = eINSTANCE.getGenModel_Services();
 
         /**
          * The meta object literal for the '<em><b>Outlet Map</b></em>' reference list feature.
@@ -616,66 +549,36 @@ public interface XtextgenPackage extends EPackage {
         EReference GEN_MODEL__OUTLET_MAP = eINSTANCE.getGenModel_OutletMap();
 
         /**
-         * The meta object literal for the '{@link org.eclipse.xtext.xtextgen.impl.RootTemplateImpl <em>Root Template</em>}' class.
+         * The meta object literal for the '<em><b>Ui Plugin Bundle ID</b></em>' attribute feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see org.eclipse.xtext.xtextgen.impl.RootTemplateImpl
-         * @see org.eclipse.xtext.xtextgen.impl.XtextgenPackageImpl#getRootTemplate()
          * @generated
          */
-        EClass ROOT_TEMPLATE = eINSTANCE.getRootTemplate();
+        EAttribute GEN_MODEL__UI_PLUGIN_BUNDLE_ID = eINSTANCE.getGenModel_UiPluginBundleID();
 
         /**
-         * The meta object literal for the '<em><b>Template Path</b></em>' attribute feature.
+         * The meta object literal for the '<em><b>Language Interface FQ Name</b></em>' attribute feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        EAttribute ROOT_TEMPLATE__TEMPLATE_PATH = eINSTANCE.getRootTemplate_TemplatePath();
+        EAttribute GEN_MODEL__LANGUAGE_INTERFACE_FQ_NAME = eINSTANCE.getGenModel_LanguageInterfaceFQName();
 
         /**
-         * The meta object literal for the '<em><b>Gen Parameters</b></em>' reference list feature.
+         * The meta object literal for the '<em><b>Standalone Setup Class FQ Name</b></em>' attribute feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        EReference ROOT_TEMPLATE__GEN_PARAMETERS = eINSTANCE.getRootTemplate_GenParameters();
+        EAttribute GEN_MODEL__STANDALONE_SETUP_CLASS_FQ_NAME = eINSTANCE.getGenModel_StandaloneSetupClassFQName();
 
         /**
-         * The meta object literal for the '{@link org.eclipse.xtext.xtextgen.impl.GenClassImpl <em>Gen Class</em>}' class.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @see org.eclipse.xtext.xtextgen.impl.GenClassImpl
-         * @see org.eclipse.xtext.xtextgen.impl.XtextgenPackageImpl#getGenClass()
-         * @generated
-         */
-        EClass GEN_CLASS = eINSTANCE.getGenClass();
-
-        /**
-         * The meta object literal for the '<em><b>Gen Class FQ Name</b></em>' attribute feature.
+         * The meta object literal for the '<em><b>Non UI Plugin Bundle ID</b></em>' attribute feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated
          */
-        EAttribute GEN_CLASS__GEN_CLASS_FQ_NAME = eINSTANCE.getGenClass_GenClassFQName();
-
-        /**
-         * The meta object literal for the '{@link org.eclipse.xtext.xtextgen.impl.GenPluginImpl <em>Gen Plugin</em>}' class.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @see org.eclipse.xtext.xtextgen.impl.GenPluginImpl
-         * @see org.eclipse.xtext.xtextgen.impl.XtextgenPackageImpl#getGenPlugin()
-         * @generated
-         */
-        EClass GEN_PLUGIN = eINSTANCE.getGenPlugin();
-
-        /**
-         * The meta object literal for the '<em><b>Bundle ID</b></em>' attribute feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute GEN_PLUGIN__BUNDLE_ID = eINSTANCE.getGenPlugin_BundleID();
+        EAttribute GEN_MODEL__NON_UI_PLUGIN_BUNDLE_ID = eINSTANCE.getGenModel_NonUIPluginBundleID();
 
     }
 

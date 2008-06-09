@@ -3,20 +3,15 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xtextgen"
     nsURI="htpp://www.eclipse.org/xtext/2008/xtextgen" nsPrefix="xtextgen">
-  <eClassifiers xsi:type="ecore:EClass" name="GenService" eSuperTypes="#//GenClass">
-    <eOperations name="serviceInterfaceName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="{return XtextgenUtil.serviceInterfaceName((GenServiceImpl) this);}"/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="extensionPointName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="{return XtextgenUtil.extensionPointName((GenServiceImpl) this);}"/>
-      </eAnnotations>
-    </eOperations>
+  <eClassifiers xsi:type="ecore:EClass" name="GenService">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceInterfaceFQName"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="genClassFQName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="extensionPointID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="templatePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="genParameters" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStringToStringMapEntry"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GenModel">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelFileExtensions" upperBound="-1"
@@ -25,31 +20,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="grammar" eType="ecore:EClass ../../org.eclipse.xtext/src-gen/org/eclipse/xtext/xtext.ecore#//Grammar"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="grammarResourceURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         transient="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rootTemplates" upperBound="-1"
-        eType="#//RootTemplate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="services" upperBound="-1"
+        eType="#//GenService"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outletMap" upperBound="-1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStringToStringMapEntry"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RootTemplate">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="templatePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        unsettable="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="genParameters" upperBound="-1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStringToStringMapEntry"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GenClass" eSuperTypes="#//RootTemplate">
-    <eOperations name="genClassPackageFQName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (this instanceof GenServiceImpl) { return XtextgenUtil.genClassPackageFQName((GenServiceImpl) this);} else {return XtextgenUtil.genClassPackageFQName((GenClassImpl) this);}"/>
-      </eAnnotations>
-    </eOperations>
-    <eOperations name="genClassName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="if (this instanceof GenServiceImpl) { return XtextgenUtil.genClassName((GenServiceImpl) this);} else {return XtextgenUtil.genClassName((GenClassImpl) this);}"/>
-      </eAnnotations>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="genClassFQName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GenPlugin" eSuperTypes="#//RootTemplate">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundleID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="languageInterfaceFQName"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="standaloneSetupClassFQName"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nonUIPluginBundleID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uiPluginBundleID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

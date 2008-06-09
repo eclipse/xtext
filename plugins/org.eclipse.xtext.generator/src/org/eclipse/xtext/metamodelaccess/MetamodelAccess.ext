@@ -14,7 +14,7 @@ extension org::eclipse::xtext::Properties;
 // These are candidates for genParameters of the metamodelAccess's GenService 
 
 generatedMetaModelBasePath() :
-	languageNamespce().toPath();
+	languageNamespace().toPath();
 	
 	
 	

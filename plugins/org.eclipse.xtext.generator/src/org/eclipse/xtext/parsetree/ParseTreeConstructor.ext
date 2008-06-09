@@ -16,13 +16,13 @@ extension org::eclipse::xtext::XtextUtil;
 extension org::openarchitectureware::util::stdlib::io;
 
 internalParsetreePackageName(GenService service) :
-	service.genClassPackageFQName() + ".internal";
+	service.genClassFQName.toJavaPackage() + ".internal";
 	
 internalParsetreeConstructorFQName(GenService service) :
 	 internalParsetreePackageName(service) + "." + internalParsetreeConstructorName(service);
 
 internalParsetreeConstructorName(GenService service) :
-	"Internal" + service.genClassName();
+	"Internal" + service.genClassFQName.toSimpleName();
 
 methodName(AbstractRule this) :
 	'proceed'+name.toFirstUpper();

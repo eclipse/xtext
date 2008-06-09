@@ -14,21 +14,21 @@ extension org::eclipse::xtext::Properties reexport;
 
 // Candidates for generation parameters
 
-projectName(GenPlugin this):
-    bundleID;
+projectName(GenModel this):
+    uiPluginBundleID;
 
-packageName(GenPlugin this):
-    bundleID;
+packageName(GenModel this):
+    uiPluginBundleID;
     
-activatorClassFQN(GenPlugin this):
+activatorClassFQN(GenModel this):
     packageName() + ".internal." + "Activator";
     
-editorPackage(GenPlugin this):
+editorPackage(GenModel this):
     packageName() + ".ui.editor";
     
-editorClassFQN(GenPlugin this):    
+editorClassFQN(GenModel this):    
     editorPackage() + "." + languageName() + "XtextEditor";
     
-editorExtensionId(GenPlugin this):
+editorExtensionId(GenModel this):
     editorClassFQN();
     

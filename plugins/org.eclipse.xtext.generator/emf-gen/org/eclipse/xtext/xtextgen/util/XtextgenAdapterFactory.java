@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenAdapterFactory.java,v 1.1 2008/06/06 16:15:42 jkohnlein Exp $
+ * $Id: XtextgenAdapterFactory.java,v 1.2 2008/06/09 12:52:55 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen.util;
 
@@ -80,18 +80,6 @@ public class XtextgenAdapterFactory extends AdapterFactoryImpl {
                 return createGenModelAdapter();
             }
             @Override
-            public Adapter caseRootTemplate(RootTemplate object) {
-                return createRootTemplateAdapter();
-            }
-            @Override
-            public Adapter caseGenClass(GenClass object) {
-                return createGenClassAdapter();
-            }
-            @Override
-            public Adapter caseGenPlugin(GenPlugin object) {
-                return createGenPluginAdapter();
-            }
-            @Override
             public Adapter defaultCase(EObject object) {
                 return createEObjectAdapter();
             }
@@ -136,48 +124,6 @@ public class XtextgenAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createGenModelAdapter() {
-        return null;
-    }
-
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtextgen.RootTemplate <em>Root Template</em>}'.
-     * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
-     * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.xtext.xtextgen.RootTemplate
-     * @generated
-     */
-    public Adapter createRootTemplateAdapter() {
-        return null;
-    }
-
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtextgen.GenClass <em>Gen Class</em>}'.
-     * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
-     * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.xtext.xtextgen.GenClass
-     * @generated
-     */
-    public Adapter createGenClassAdapter() {
-        return null;
-    }
-
-    /**
-     * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtextgen.GenPlugin <em>Gen Plugin</em>}'.
-     * <!-- begin-user-doc -->
-     * This default implementation returns null so that we can easily ignore cases;
-     * it's useful to ignore a case when inheritance will catch all the cases anyway.
-     * <!-- end-user-doc -->
-     * @return the new adapter.
-     * @see org.eclipse.xtext.xtextgen.GenPlugin
-     * @generated
-     */
-    public Adapter createGenPluginAdapter() {
         return null;
     }
 

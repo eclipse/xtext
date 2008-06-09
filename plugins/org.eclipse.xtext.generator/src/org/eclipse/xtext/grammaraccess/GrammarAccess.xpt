@@ -21,14 +21,14 @@
 «fileHeader()»
 */
 
-package «genClassPackageFQName()»;
+package «genClassFQName.toJavaPackage()»;
 
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class «genClassName()» extends BaseEPackageAccess implements IGrammarAccess {
+public class «genClassFQName.toSimpleName()» extends BaseEPackageAccess implements IGrammarAccess {
 
 	private static final String «languageName().toUpperCase()»_GRAMMAR_CP_URI = "«grammarResourceURI()»";
 	private static Grammar GRAMMAR = null;
@@ -38,7 +38,7 @@ public class «genClassName()» extends BaseEPackageAccess implements IGrammarAcce
 		if (GRAMMAR==null) {
 			// assert the XtextPackage implementation is loaded
 			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(«genClassName()».class.getClassLoader(),«languageName().toUpperCase()»_GRAMMAR_CP_URI);
+			GRAMMAR = (Grammar) loadGrammarFile(«genClassFQName.toSimpleName()».class.getClassLoader(),«languageName().toUpperCase()»_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;
 	}

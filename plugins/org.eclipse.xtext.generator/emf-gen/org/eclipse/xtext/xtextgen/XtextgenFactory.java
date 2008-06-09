@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenFactory.java,v 1.1 2008/06/06 16:15:41 jkohnlein Exp $
+ * $Id: XtextgenFactory.java,v 1.2 2008/06/09 12:52:55 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen;
 
@@ -42,33 +42,6 @@ public interface XtextgenFactory extends EFactory {
      * @generated
      */
     GenModel createGenModel();
-
-    /**
-     * Returns a new object of class '<em>Root Template</em>'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return a new object of class '<em>Root Template</em>'.
-     * @generated
-     */
-    RootTemplate createRootTemplate();
-
-    /**
-     * Returns a new object of class '<em>Gen Class</em>'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return a new object of class '<em>Gen Class</em>'.
-     * @generated
-     */
-    GenClass createGenClass();
-
-    /**
-     * Returns a new object of class '<em>Gen Plugin</em>'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return a new object of class '<em>Gen Plugin</em>'.
-     * @generated
-     */
-    GenPlugin createGenPlugin();
 
     /**
      * Returns the package supported by this factory.

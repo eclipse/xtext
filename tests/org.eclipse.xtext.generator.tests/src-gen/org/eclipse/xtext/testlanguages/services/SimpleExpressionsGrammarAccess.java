@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Sun Jun 08 11:15:27 CEST 2008
+Generated with Xtext
 */
 
 package org.eclipse.xtext.testlanguages.services;
@@ -11,7 +11,7 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class SimpleExpressionsGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 
-	private static final String SIMPLEEXPRESSIONS_GRAMMAR_CP_URI = "./src-gen/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi";
+	private static final String SIMPLEEXPRESSIONS_GRAMMAR_CP_URI = "org/eclipse/xtext/testlanguages/SimpleExpressions.xmi";
 	private static Grammar GRAMMAR = null;
 	
 	@SuppressWarnings("unused")

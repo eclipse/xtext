@@ -15,12 +15,12 @@
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
 
-«DEFINE root FOR GenClass»
-«FILE genClassFQName.toJavaFilePath()-»
+«DEFINE root FOR GenModel»
+«FILE standaloneSetupClassFQName.toJavaFilePath()-»
 /*
 «fileHeader()»
 */
-package «genClassPackageFQName()»;
+package «standaloneSetupClassFQName.toJavaPackage()»;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -31,12 +31,12 @@ import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 
-«FOREACH genModel().rootTemplates.typeSelect(GenService) AS s-»
+«FOREACH genModel().services AS s-»
 import «s.serviceInterfaceFQName»;
 import «s.genClassFQName»;
 «ENDFOREACH»
 
-public abstract class «genClassName()» {
+public abstract class «standaloneSetupClassFQName.toSimpleName()» {
 
 	private static boolean isInitialized = false;
 
@@ -50,8 +50,8 @@ public abstract class «genClassName()» {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			«FOREACH genModel().rootTemplates.typeSelect(GenService) AS s-»
-			ServiceRegistry.registerService(languageDescriptor, new «s.genClassName()»(), «s.serviceInterfaceName()».class);
+			«FOREACH genModel().services AS s-»
+			ServiceRegistry.registerService(languageDescriptor, new «s.genClassFQName.toSimpleName()»(), «s.serviceInterfaceFQName.toSimpleName()».class);
 			«ENDFOREACH»
 			// register resource factory to EMF
 			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);

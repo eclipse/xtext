@@ -2,28 +2,34 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenModelImpl.java,v 1.1 2008/06/06 16:15:42 jkohnlein Exp $
+ * $Id: GenModelImpl.java,v 1.2 2008/06/09 12:52:54 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
+
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
+
 import org.eclipse.xtext.Grammar;
+
 import org.eclipse.xtext.xtextgen.GenModel;
-import org.eclipse.xtext.xtextgen.RootTemplate;
+import org.eclipse.xtext.xtextgen.GenService;
 import org.eclipse.xtext.xtextgen.XtextgenPackage;
 
 /**
@@ -37,8 +43,12 @@ import org.eclipse.xtext.xtextgen.XtextgenPackage;
  *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl#getFileHeader <em>File Header</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl#getGrammar <em>Grammar</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl#getGrammarResourceURI <em>Grammar Resource URI</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl#getRootTemplates <em>Root Templates</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl#getServices <em>Services</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl#getOutletMap <em>Outlet Map</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl#getLanguageInterfaceFQName <em>Language Interface FQ Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl#getStandaloneSetupClassFQName <em>Standalone Setup Class FQ Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl#getNonUIPluginBundleID <em>Non UI Plugin Bundle ID</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl#getUiPluginBundleID <em>Ui Plugin Bundle ID</em>}</li>
  * </ul>
  * </p>
  *
@@ -106,14 +116,14 @@ public class GenModelImpl extends EObjectImpl implements GenModel {
     protected String grammarResourceURI = GRAMMAR_RESOURCE_URI_EDEFAULT;
 
     /**
-     * The cached value of the '{@link #getRootTemplates() <em>Root Templates</em>}' reference list.
+     * The cached value of the '{@link #getServices() <em>Services</em>}' reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getRootTemplates()
+     * @see #getServices()
      * @generated
      * @ordered
      */
-    protected EList<RootTemplate> rootTemplates;
+    protected EList<GenService> services;
 
     /**
      * The cached value of the '{@link #getOutletMap() <em>Outlet Map</em>}' reference list.
@@ -124,6 +134,86 @@ public class GenModelImpl extends EObjectImpl implements GenModel {
      * @ordered
      */
     protected EMap<String, String> outletMap;
+
+    /**
+     * The default value of the '{@link #getLanguageInterfaceFQName() <em>Language Interface FQ Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getLanguageInterfaceFQName()
+     * @generated
+     * @ordered
+     */
+    protected static final String LANGUAGE_INTERFACE_FQ_NAME_EDEFAULT = null;
+
+    /**
+     * The cached value of the '{@link #getLanguageInterfaceFQName() <em>Language Interface FQ Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getLanguageInterfaceFQName()
+     * @generated
+     * @ordered
+     */
+    protected String languageInterfaceFQName = LANGUAGE_INTERFACE_FQ_NAME_EDEFAULT;
+
+    /**
+     * The default value of the '{@link #getStandaloneSetupClassFQName() <em>Standalone Setup Class FQ Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getStandaloneSetupClassFQName()
+     * @generated
+     * @ordered
+     */
+    protected static final String STANDALONE_SETUP_CLASS_FQ_NAME_EDEFAULT = null;
+
+    /**
+     * The cached value of the '{@link #getStandaloneSetupClassFQName() <em>Standalone Setup Class FQ Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getStandaloneSetupClassFQName()
+     * @generated
+     * @ordered
+     */
+    protected String standaloneSetupClassFQName = STANDALONE_SETUP_CLASS_FQ_NAME_EDEFAULT;
+
+    /**
+     * The default value of the '{@link #getNonUIPluginBundleID() <em>Non UI Plugin Bundle ID</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getNonUIPluginBundleID()
+     * @generated
+     * @ordered
+     */
+    protected static final String NON_UI_PLUGIN_BUNDLE_ID_EDEFAULT = null;
+
+    /**
+     * The cached value of the '{@link #getNonUIPluginBundleID() <em>Non UI Plugin Bundle ID</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getNonUIPluginBundleID()
+     * @generated
+     * @ordered
+     */
+    protected String nonUIPluginBundleID = NON_UI_PLUGIN_BUNDLE_ID_EDEFAULT;
+
+    /**
+     * The default value of the '{@link #getUiPluginBundleID() <em>Ui Plugin Bundle ID</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getUiPluginBundleID()
+     * @generated
+     * @ordered
+     */
+    protected static final String UI_PLUGIN_BUNDLE_ID_EDEFAULT = null;
+
+    /**
+     * The cached value of the '{@link #getUiPluginBundleID() <em>Ui Plugin Bundle ID</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getUiPluginBundleID()
+     * @generated
+     * @ordered
+     */
+    protected String uiPluginBundleID = UI_PLUGIN_BUNDLE_ID_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
@@ -241,11 +331,11 @@ public class GenModelImpl extends EObjectImpl implements GenModel {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<RootTemplate> getRootTemplates() {
-        if (rootTemplates == null) {
-            rootTemplates = new EObjectResolvingEList<RootTemplate>(RootTemplate.class, this, XtextgenPackage.GEN_MODEL__ROOT_TEMPLATES);
+    public EList<GenService> getServices() {
+        if (services == null) {
+            services = new EObjectResolvingEList<GenService>(GenService.class, this, XtextgenPackage.GEN_MODEL__SERVICES);
         }
-        return rootTemplates;
+        return services;
     }
 
     /**
@@ -265,6 +355,90 @@ public class GenModelImpl extends EObjectImpl implements GenModel {
      * <!-- end-user-doc -->
      * @generated
      */
+    public String getUiPluginBundleID() {
+        return uiPluginBundleID;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setUiPluginBundleID(String newUiPluginBundleID) {
+        String oldUiPluginBundleID = uiPluginBundleID;
+        uiPluginBundleID = newUiPluginBundleID;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_MODEL__UI_PLUGIN_BUNDLE_ID, oldUiPluginBundleID, uiPluginBundleID));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public String getLanguageInterfaceFQName() {
+        return languageInterfaceFQName;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setLanguageInterfaceFQName(String newLanguageInterfaceFQName) {
+        String oldLanguageInterfaceFQName = languageInterfaceFQName;
+        languageInterfaceFQName = newLanguageInterfaceFQName;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_MODEL__LANGUAGE_INTERFACE_FQ_NAME, oldLanguageInterfaceFQName, languageInterfaceFQName));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public String getStandaloneSetupClassFQName() {
+        return standaloneSetupClassFQName;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setStandaloneSetupClassFQName(String newStandaloneSetupClassFQName) {
+        String oldStandaloneSetupClassFQName = standaloneSetupClassFQName;
+        standaloneSetupClassFQName = newStandaloneSetupClassFQName;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_MODEL__STANDALONE_SETUP_CLASS_FQ_NAME, oldStandaloneSetupClassFQName, standaloneSetupClassFQName));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public String getNonUIPluginBundleID() {
+        return nonUIPluginBundleID;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setNonUIPluginBundleID(String newNonUIPluginBundleID) {
+        String oldNonUIPluginBundleID = nonUIPluginBundleID;
+        nonUIPluginBundleID = newNonUIPluginBundleID;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_MODEL__NON_UI_PLUGIN_BUNDLE_ID, oldNonUIPluginBundleID, nonUIPluginBundleID));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
@@ -277,11 +451,19 @@ public class GenModelImpl extends EObjectImpl implements GenModel {
                 return basicGetGrammar();
             case XtextgenPackage.GEN_MODEL__GRAMMAR_RESOURCE_URI:
                 return getGrammarResourceURI();
-            case XtextgenPackage.GEN_MODEL__ROOT_TEMPLATES:
-                return getRootTemplates();
+            case XtextgenPackage.GEN_MODEL__SERVICES:
+                return getServices();
             case XtextgenPackage.GEN_MODEL__OUTLET_MAP:
                 if (coreType) return getOutletMap();
                 else return getOutletMap().map();
+            case XtextgenPackage.GEN_MODEL__LANGUAGE_INTERFACE_FQ_NAME:
+                return getLanguageInterfaceFQName();
+            case XtextgenPackage.GEN_MODEL__STANDALONE_SETUP_CLASS_FQ_NAME:
+                return getStandaloneSetupClassFQName();
+            case XtextgenPackage.GEN_MODEL__NON_UI_PLUGIN_BUNDLE_ID:
+                return getNonUIPluginBundleID();
+            case XtextgenPackage.GEN_MODEL__UI_PLUGIN_BUNDLE_ID:
+                return getUiPluginBundleID();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -308,12 +490,24 @@ public class GenModelImpl extends EObjectImpl implements GenModel {
             case XtextgenPackage.GEN_MODEL__GRAMMAR_RESOURCE_URI:
                 setGrammarResourceURI((String)newValue);
                 return;
-            case XtextgenPackage.GEN_MODEL__ROOT_TEMPLATES:
-                getRootTemplates().clear();
-                getRootTemplates().addAll((Collection<? extends RootTemplate>)newValue);
+            case XtextgenPackage.GEN_MODEL__SERVICES:
+                getServices().clear();
+                getServices().addAll((Collection<? extends GenService>)newValue);
                 return;
             case XtextgenPackage.GEN_MODEL__OUTLET_MAP:
                 ((EStructuralFeature.Setting)getOutletMap()).set(newValue);
+                return;
+            case XtextgenPackage.GEN_MODEL__LANGUAGE_INTERFACE_FQ_NAME:
+                setLanguageInterfaceFQName((String)newValue);
+                return;
+            case XtextgenPackage.GEN_MODEL__STANDALONE_SETUP_CLASS_FQ_NAME:
+                setStandaloneSetupClassFQName((String)newValue);
+                return;
+            case XtextgenPackage.GEN_MODEL__NON_UI_PLUGIN_BUNDLE_ID:
+                setNonUIPluginBundleID((String)newValue);
+                return;
+            case XtextgenPackage.GEN_MODEL__UI_PLUGIN_BUNDLE_ID:
+                setUiPluginBundleID((String)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -339,11 +533,23 @@ public class GenModelImpl extends EObjectImpl implements GenModel {
             case XtextgenPackage.GEN_MODEL__GRAMMAR_RESOURCE_URI:
                 setGrammarResourceURI(GRAMMAR_RESOURCE_URI_EDEFAULT);
                 return;
-            case XtextgenPackage.GEN_MODEL__ROOT_TEMPLATES:
-                getRootTemplates().clear();
+            case XtextgenPackage.GEN_MODEL__SERVICES:
+                getServices().clear();
                 return;
             case XtextgenPackage.GEN_MODEL__OUTLET_MAP:
                 getOutletMap().clear();
+                return;
+            case XtextgenPackage.GEN_MODEL__LANGUAGE_INTERFACE_FQ_NAME:
+                setLanguageInterfaceFQName(LANGUAGE_INTERFACE_FQ_NAME_EDEFAULT);
+                return;
+            case XtextgenPackage.GEN_MODEL__STANDALONE_SETUP_CLASS_FQ_NAME:
+                setStandaloneSetupClassFQName(STANDALONE_SETUP_CLASS_FQ_NAME_EDEFAULT);
+                return;
+            case XtextgenPackage.GEN_MODEL__NON_UI_PLUGIN_BUNDLE_ID:
+                setNonUIPluginBundleID(NON_UI_PLUGIN_BUNDLE_ID_EDEFAULT);
+                return;
+            case XtextgenPackage.GEN_MODEL__UI_PLUGIN_BUNDLE_ID:
+                setUiPluginBundleID(UI_PLUGIN_BUNDLE_ID_EDEFAULT);
                 return;
         }
         super.eUnset(featureID);
@@ -365,10 +571,18 @@ public class GenModelImpl extends EObjectImpl implements GenModel {
                 return grammar != null;
             case XtextgenPackage.GEN_MODEL__GRAMMAR_RESOURCE_URI:
                 return GRAMMAR_RESOURCE_URI_EDEFAULT == null ? grammarResourceURI != null : !GRAMMAR_RESOURCE_URI_EDEFAULT.equals(grammarResourceURI);
-            case XtextgenPackage.GEN_MODEL__ROOT_TEMPLATES:
-                return rootTemplates != null && !rootTemplates.isEmpty();
+            case XtextgenPackage.GEN_MODEL__SERVICES:
+                return services != null && !services.isEmpty();
             case XtextgenPackage.GEN_MODEL__OUTLET_MAP:
                 return outletMap != null && !outletMap.isEmpty();
+            case XtextgenPackage.GEN_MODEL__LANGUAGE_INTERFACE_FQ_NAME:
+                return LANGUAGE_INTERFACE_FQ_NAME_EDEFAULT == null ? languageInterfaceFQName != null : !LANGUAGE_INTERFACE_FQ_NAME_EDEFAULT.equals(languageInterfaceFQName);
+            case XtextgenPackage.GEN_MODEL__STANDALONE_SETUP_CLASS_FQ_NAME:
+                return STANDALONE_SETUP_CLASS_FQ_NAME_EDEFAULT == null ? standaloneSetupClassFQName != null : !STANDALONE_SETUP_CLASS_FQ_NAME_EDEFAULT.equals(standaloneSetupClassFQName);
+            case XtextgenPackage.GEN_MODEL__NON_UI_PLUGIN_BUNDLE_ID:
+                return NON_UI_PLUGIN_BUNDLE_ID_EDEFAULT == null ? nonUIPluginBundleID != null : !NON_UI_PLUGIN_BUNDLE_ID_EDEFAULT.equals(nonUIPluginBundleID);
+            case XtextgenPackage.GEN_MODEL__UI_PLUGIN_BUNDLE_ID:
+                return UI_PLUGIN_BUNDLE_ID_EDEFAULT == null ? uiPluginBundleID != null : !UI_PLUGIN_BUNDLE_ID_EDEFAULT.equals(uiPluginBundleID);
         }
         return super.eIsSet(featureID);
     }
@@ -389,6 +603,14 @@ public class GenModelImpl extends EObjectImpl implements GenModel {
         result.append(fileHeader);
         result.append(", grammarResourceURI: ");
         result.append(grammarResourceURI);
+        result.append(", languageInterfaceFQName: ");
+        result.append(languageInterfaceFQName);
+        result.append(", standaloneSetupClassFQName: ");
+        result.append(standaloneSetupClassFQName);
+        result.append(", nonUIPluginBundleID: ");
+        result.append(nonUIPluginBundleID);
+        result.append(", uiPluginBundleID: ");
+        result.append(uiPluginBundleID);
         result.append(')');
         return result.toString();
     }

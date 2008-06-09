@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenService.java,v 1.1 2008/06/06 16:15:41 jkohnlein Exp $
+ * $Id: GenService.java,v 1.2 2008/06/09 12:52:54 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 
 import org.eclipse.emf.ecore.EObject;
@@ -20,7 +19,10 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextgen.GenService#getServiceInterfaceFQName <em>Service Interface FQ Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.GenService#getGenClassFQName <em>Gen Class FQ Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.GenService#getExtensionPointID <em>Extension Point ID</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.GenService#getTemplatePath <em>Template Path</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.GenService#getGenParameters <em>Gen Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,7 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface GenService extends GenClass {
+public interface GenService extends EObject {
     /**
      * Returns the value of the '<em><b>Service Interface FQ Name</b></em>' attribute.
      * <!-- begin-user-doc -->
@@ -54,6 +56,32 @@ public interface GenService extends GenClass {
      * @generated
      */
     void setServiceInterfaceFQName(String value);
+
+    /**
+     * Returns the value of the '<em><b>Gen Class FQ Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Gen Class FQ Name</em>' attribute isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Gen Class FQ Name</em>' attribute.
+     * @see #setGenClassFQName(String)
+     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_GenClassFQName()
+     * @model
+     * @generated
+     */
+    String getGenClassFQName();
+
+    /**
+     * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getGenClassFQName <em>Gen Class FQ Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Gen Class FQ Name</em>' attribute.
+     * @see #getGenClassFQName()
+     * @generated
+     */
+    void setGenClassFQName(String value);
 
     /**
      * Returns the value of the '<em><b>Extension Point ID</b></em>' attribute.
@@ -82,19 +110,73 @@ public interface GenService extends GenClass {
     void setExtensionPointID(String value);
 
     /**
+     * Returns the value of the '<em><b>Template Path</b></em>' attribute.
      * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Template Path</em>' attribute isn't clear,
+     * there really should be more of a description here...
+     * </p>
      * <!-- end-user-doc -->
-     * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='{return XtextgenUtil.serviceInterfaceName((GenServiceImpl) this);}'"
+     * @return the value of the '<em>Template Path</em>' attribute.
+     * @see #isSetTemplatePath()
+     * @see #unsetTemplatePath()
+     * @see #setTemplatePath(String)
+     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_TemplatePath()
+     * @model unsettable="true"
      * @generated
      */
-    String serviceInterfaceName();
+    String getTemplatePath();
 
     /**
+     * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getTemplatePath <em>Template Path</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='{return XtextgenUtil.extensionPointName((GenServiceImpl) this);}'"
+     * @param value the new value of the '<em>Template Path</em>' attribute.
+     * @see #isSetTemplatePath()
+     * @see #unsetTemplatePath()
+     * @see #getTemplatePath()
      * @generated
      */
-    String extensionPointName();
+    void setTemplatePath(String value);
+
+    /**
+     * Unsets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getTemplatePath <em>Template Path</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isSetTemplatePath()
+     * @see #getTemplatePath()
+     * @see #setTemplatePath(String)
+     * @generated
+     */
+    void unsetTemplatePath();
+
+    /**
+     * Returns whether the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getTemplatePath <em>Template Path</em>}' attribute is set.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return whether the value of the '<em>Template Path</em>' attribute is set.
+     * @see #unsetTemplatePath()
+     * @see #getTemplatePath()
+     * @see #setTemplatePath(String)
+     * @generated
+     */
+    boolean isSetTemplatePath();
+
+    /**
+     * Returns the value of the '<em><b>Gen Parameters</b></em>' reference list.
+     * The key is of type {@link java.lang.String},
+     * and the value is of type {@link java.lang.String},
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Gen Parameters</em>' reference list isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Gen Parameters</em>' reference list.
+     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_GenParameters()
+     * @model mapType="org.eclipse.emf.ecore.EStringToStringMapEntry<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
+     * @generated
+     */
+    EMap<String, String> getGenParameters();
 
 } // GenService

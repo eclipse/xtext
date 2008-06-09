@@ -2,14 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenModel.java,v 1.1 2008/06/06 16:15:41 jkohnlein Exp $
+ * $Id: GenModel.java,v 1.2 2008/06/09 12:52:54 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen;
 
-import java.util.Map.Entry;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.common.util.EMap;
+
 import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtext.Grammar;
@@ -26,8 +25,12 @@ import org.eclipse.xtext.Grammar;
  *   <li>{@link org.eclipse.xtext.xtextgen.GenModel#getFileHeader <em>File Header</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.GenModel#getGrammar <em>Grammar</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.GenModel#getGrammarResourceURI <em>Grammar Resource URI</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtextgen.GenModel#getRootTemplates <em>Root Templates</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.GenModel#getServices <em>Services</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.GenModel#getOutletMap <em>Outlet Map</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.GenModel#getLanguageInterfaceFQName <em>Language Interface FQ Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.GenModel#getStandaloneSetupClassFQName <em>Standalone Setup Class FQ Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.GenModel#getNonUIPluginBundleID <em>Non UI Plugin Bundle ID</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.GenModel#getUiPluginBundleID <em>Ui Plugin Bundle ID</em>}</li>
  * </ul>
  * </p>
  *
@@ -131,20 +134,20 @@ public interface GenModel extends EObject {
     void setGrammarResourceURI(String value);
 
     /**
-     * Returns the value of the '<em><b>Root Templates</b></em>' reference list.
-     * The list contents are of type {@link org.eclipse.xtext.xtextgen.RootTemplate}.
+     * Returns the value of the '<em><b>Services</b></em>' reference list.
+     * The list contents are of type {@link org.eclipse.xtext.xtextgen.GenService}.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Root Templates</em>' reference list isn't clear,
+     * If the meaning of the '<em>Services</em>' reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Root Templates</em>' reference list.
-     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenModel_RootTemplates()
+     * @return the value of the '<em>Services</em>' reference list.
+     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenModel_Services()
      * @model
      * @generated
      */
-    EList<RootTemplate> getRootTemplates();
+    EList<GenService> getServices();
 
     /**
      * Returns the value of the '<em><b>Outlet Map</b></em>' reference list.
@@ -152,7 +155,7 @@ public interface GenModel extends EObject {
      * and the value is of type {@link java.lang.String},
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Outlet Map</em>' reference isn't clear,
+     * If the meaning of the '<em>Outlet Map</em>' reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
@@ -162,5 +165,109 @@ public interface GenModel extends EObject {
      * @generated
      */
     EMap<String, String> getOutletMap();
+
+    /**
+     * Returns the value of the '<em><b>Ui Plugin Bundle ID</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Ui Plugin Bundle ID</em>' attribute isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Ui Plugin Bundle ID</em>' attribute.
+     * @see #setUiPluginBundleID(String)
+     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenModel_UiPluginBundleID()
+     * @model
+     * @generated
+     */
+    String getUiPluginBundleID();
+
+    /**
+     * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenModel#getUiPluginBundleID <em>Ui Plugin Bundle ID</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Ui Plugin Bundle ID</em>' attribute.
+     * @see #getUiPluginBundleID()
+     * @generated
+     */
+    void setUiPluginBundleID(String value);
+
+    /**
+     * Returns the value of the '<em><b>Language Interface FQ Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Language Interface FQ Name</em>' attribute isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Language Interface FQ Name</em>' attribute.
+     * @see #setLanguageInterfaceFQName(String)
+     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenModel_LanguageInterfaceFQName()
+     * @model
+     * @generated
+     */
+    String getLanguageInterfaceFQName();
+
+    /**
+     * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenModel#getLanguageInterfaceFQName <em>Language Interface FQ Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Language Interface FQ Name</em>' attribute.
+     * @see #getLanguageInterfaceFQName()
+     * @generated
+     */
+    void setLanguageInterfaceFQName(String value);
+
+    /**
+     * Returns the value of the '<em><b>Standalone Setup Class FQ Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Standalone Setup Class FQ Name</em>' attribute isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Standalone Setup Class FQ Name</em>' attribute.
+     * @see #setStandaloneSetupClassFQName(String)
+     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenModel_StandaloneSetupClassFQName()
+     * @model
+     * @generated
+     */
+    String getStandaloneSetupClassFQName();
+
+    /**
+     * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenModel#getStandaloneSetupClassFQName <em>Standalone Setup Class FQ Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Standalone Setup Class FQ Name</em>' attribute.
+     * @see #getStandaloneSetupClassFQName()
+     * @generated
+     */
+    void setStandaloneSetupClassFQName(String value);
+
+    /**
+     * Returns the value of the '<em><b>Non UI Plugin Bundle ID</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Non UI Plugin Bundle ID</em>' attribute isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Non UI Plugin Bundle ID</em>' attribute.
+     * @see #setNonUIPluginBundleID(String)
+     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenModel_NonUIPluginBundleID()
+     * @model
+     * @generated
+     */
+    String getNonUIPluginBundleID();
+
+    /**
+     * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenModel#getNonUIPluginBundleID <em>Non UI Plugin Bundle ID</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Non UI Plugin Bundle ID</em>' attribute.
+     * @see #getNonUIPluginBundleID()
+     * @generated
+     */
+    void setNonUIPluginBundleID(String value);
 
 } // GenModel

@@ -1,5 +1,5 @@
 /*
-Generated using Xtext at Sun Jun 08 11:15:25 CEST 2008
+Generated with Xtext
 */
 
 package org.eclipse.xtext.dummy.services;
@@ -11,7 +11,7 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class DummyLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 
-	private static final String DUMMYLANGUAGE_GRAMMAR_CP_URI = "./src-gen/org/eclipse/xtext/dummy/DummyLanguage.xmi";
+	private static final String DUMMYLANGUAGE_GRAMMAR_CP_URI = "org/eclipse/xtext/dummy/DummyLanguage.xmi";
 	private static Grammar GRAMMAR = null;
 	
 	@SuppressWarnings("unused")

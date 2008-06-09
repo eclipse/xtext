@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenPackageImpl.java,v 1.1 2008/06/06 16:15:42 jkohnlein Exp $
+ * $Id: XtextgenPackageImpl.java,v 1.2 2008/06/09 12:52:54 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
@@ -10,13 +10,13 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.xtextgen.GenClass;
+
 import org.eclipse.xtext.xtextgen.GenModel;
-import org.eclipse.xtext.xtextgen.GenPlugin;
 import org.eclipse.xtext.xtextgen.GenService;
-import org.eclipse.xtext.xtextgen.RootTemplate;
 import org.eclipse.xtext.xtextgen.XtextgenFactory;
 import org.eclipse.xtext.xtextgen.XtextgenPackage;
 
@@ -40,27 +40,6 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
      * @generated
      */
     private EClass genModelEClass = null;
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    private EClass rootTemplateEClass = null;
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    private EClass genClassEClass = null;
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    private EClass genPluginEClass = null;
 
     /**
      * Creates an instance of the model <b>Package</b>, registered with
@@ -156,8 +135,35 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    public EAttribute getGenService_ExtensionPointID() {
+    public EAttribute getGenService_GenClassFQName() {
         return (EAttribute)genServiceEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getGenService_ExtensionPointID() {
+        return (EAttribute)genServiceEClass.getEStructuralFeatures().get(2);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getGenService_TemplatePath() {
+        return (EAttribute)genServiceEClass.getEStructuralFeatures().get(3);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getGenService_GenParameters() {
+        return (EReference)genServiceEClass.getEStructuralFeatures().get(4);
     }
 
     /**
@@ -210,7 +216,7 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    public EReference getGenModel_RootTemplates() {
+    public EReference getGenModel_Services() {
         return (EReference)genModelEClass.getEStructuralFeatures().get(4);
     }
 
@@ -228,8 +234,8 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    public EClass getRootTemplate() {
-        return rootTemplateEClass;
+    public EAttribute getGenModel_UiPluginBundleID() {
+        return (EAttribute)genModelEClass.getEStructuralFeatures().get(9);
     }
 
     /**
@@ -237,8 +243,8 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    public EAttribute getRootTemplate_TemplatePath() {
-        return (EAttribute)rootTemplateEClass.getEStructuralFeatures().get(0);
+    public EAttribute getGenModel_LanguageInterfaceFQName() {
+        return (EAttribute)genModelEClass.getEStructuralFeatures().get(6);
     }
 
     /**
@@ -246,8 +252,8 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    public EReference getRootTemplate_GenParameters() {
-        return (EReference)rootTemplateEClass.getEStructuralFeatures().get(1);
+    public EAttribute getGenModel_StandaloneSetupClassFQName() {
+        return (EAttribute)genModelEClass.getEStructuralFeatures().get(7);
     }
 
     /**
@@ -255,35 +261,8 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    public EClass getGenClass() {
-        return genClassEClass;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EAttribute getGenClass_GenClassFQName() {
-        return (EAttribute)genClassEClass.getEStructuralFeatures().get(0);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EClass getGenPlugin() {
-        return genPluginEClass;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EAttribute getGenPlugin_BundleID() {
-        return (EAttribute)genPluginEClass.getEStructuralFeatures().get(0);
+    public EAttribute getGenModel_NonUIPluginBundleID() {
+        return (EAttribute)genModelEClass.getEStructuralFeatures().get(8);
     }
 
     /**
@@ -316,25 +295,22 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
         // Create classes and their features
         genServiceEClass = createEClass(GEN_SERVICE);
         createEAttribute(genServiceEClass, GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME);
+        createEAttribute(genServiceEClass, GEN_SERVICE__GEN_CLASS_FQ_NAME);
         createEAttribute(genServiceEClass, GEN_SERVICE__EXTENSION_POINT_ID);
+        createEAttribute(genServiceEClass, GEN_SERVICE__TEMPLATE_PATH);
+        createEReference(genServiceEClass, GEN_SERVICE__GEN_PARAMETERS);
 
         genModelEClass = createEClass(GEN_MODEL);
         createEAttribute(genModelEClass, GEN_MODEL__MODEL_FILE_EXTENSIONS);
         createEAttribute(genModelEClass, GEN_MODEL__FILE_HEADER);
         createEReference(genModelEClass, GEN_MODEL__GRAMMAR);
         createEAttribute(genModelEClass, GEN_MODEL__GRAMMAR_RESOURCE_URI);
-        createEReference(genModelEClass, GEN_MODEL__ROOT_TEMPLATES);
+        createEReference(genModelEClass, GEN_MODEL__SERVICES);
         createEReference(genModelEClass, GEN_MODEL__OUTLET_MAP);
-
-        rootTemplateEClass = createEClass(ROOT_TEMPLATE);
-        createEAttribute(rootTemplateEClass, ROOT_TEMPLATE__TEMPLATE_PATH);
-        createEReference(rootTemplateEClass, ROOT_TEMPLATE__GEN_PARAMETERS);
-
-        genClassEClass = createEClass(GEN_CLASS);
-        createEAttribute(genClassEClass, GEN_CLASS__GEN_CLASS_FQ_NAME);
-
-        genPluginEClass = createEClass(GEN_PLUGIN);
-        createEAttribute(genPluginEClass, GEN_PLUGIN__BUNDLE_ID);
+        createEAttribute(genModelEClass, GEN_MODEL__LANGUAGE_INTERFACE_FQ_NAME);
+        createEAttribute(genModelEClass, GEN_MODEL__STANDALONE_SETUP_CLASS_FQ_NAME);
+        createEAttribute(genModelEClass, GEN_MODEL__NON_UI_PLUGIN_BUNDLE_ID);
+        createEAttribute(genModelEClass, GEN_MODEL__UI_PLUGIN_BUNDLE_ID);
     }
 
     /**
@@ -368,40 +344,26 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
         // Set bounds for type parameters
 
         // Add supertypes to classes
-        genServiceEClass.getESuperTypes().add(this.getGenClass());
-        genClassEClass.getESuperTypes().add(this.getRootTemplate());
-        genPluginEClass.getESuperTypes().add(this.getRootTemplate());
 
         // Initialize classes and features; add operations and parameters
         initEClass(genServiceEClass, GenService.class, "GenService", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getGenService_ServiceInterfaceFQName(), ecorePackage.getEString(), "serviceInterfaceFQName", null, 0, 1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getGenService_GenClassFQName(), ecorePackage.getEString(), "genClassFQName", null, 0, 1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getGenService_ExtensionPointID(), ecorePackage.getEString(), "extensionPointID", null, 0, 1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        addEOperation(genServiceEClass, ecorePackage.getEString(), "serviceInterfaceName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-        addEOperation(genServiceEClass, ecorePackage.getEString(), "extensionPointName", 0, 1, IS_UNIQUE, IS_ORDERED);
+        initEAttribute(getGenService_TemplatePath(), ecorePackage.getEString(), "templatePath", null, 0, 1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getGenService_GenParameters(), ecorePackage.getEStringToStringMapEntry(), null, "genParameters", null, 0, -1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(genModelEClass, GenModel.class, "GenModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getGenModel_ModelFileExtensions(), ecorePackage.getEString(), "modelFileExtensions", null, 0, -1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getGenModel_FileHeader(), ecorePackage.getEString(), "fileHeader", null, 0, 1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getGenModel_Grammar(), theXtextPackage.getGrammar(), null, "grammar", null, 0, 1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getGenModel_GrammarResourceURI(), ecorePackage.getEString(), "grammarResourceURI", null, 0, 1, GenModel.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getGenModel_RootTemplates(), this.getRootTemplate(), null, "rootTemplates", null, 0, -1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getGenModel_Services(), this.getGenService(), null, "services", null, 0, -1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getGenModel_OutletMap(), ecorePackage.getEStringToStringMapEntry(), null, "outletMap", null, 0, -1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(rootTemplateEClass, RootTemplate.class, "RootTemplate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getRootTemplate_TemplatePath(), ecorePackage.getEString(), "templatePath", null, 0, 1, RootTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getRootTemplate_GenParameters(), ecorePackage.getEStringToStringMapEntry(), null, "genParameters", null, 0, -1, RootTemplate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        initEClass(genClassEClass, GenClass.class, "GenClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getGenClass_GenClassFQName(), ecorePackage.getEString(), "genClassFQName", null, 0, 1, GenClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-        addEOperation(genClassEClass, ecorePackage.getEString(), "genClassPackageFQName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-        addEOperation(genClassEClass, ecorePackage.getEString(), "genClassName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-        initEClass(genPluginEClass, GenPlugin.class, "GenPlugin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEAttribute(getGenPlugin_BundleID(), ecorePackage.getEString(), "bundleID", null, 0, 1, GenPlugin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getGenModel_LanguageInterfaceFQName(), ecorePackage.getEString(), "languageInterfaceFQName", null, 0, 1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getGenModel_StandaloneSetupClassFQName(), ecorePackage.getEString(), "standaloneSetupClassFQName", null, 0, 1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getGenModel_NonUIPluginBundleID(), ecorePackage.getEString(), "nonUIPluginBundleID", null, 0, 1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getGenModel_UiPluginBundleID(), ecorePackage.getEString(), "uiPluginBundleID", null, 0, 1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         // Create resource
         createResource(eNS_URI);

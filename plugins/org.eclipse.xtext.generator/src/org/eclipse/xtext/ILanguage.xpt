@@ -15,14 +15,14 @@
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
 
-«DEFINE root FOR GenClass»
-«FILE genClassFQName.toJavaFilePath()-»
+«DEFINE root FOR GenModel»
+«FILE languageInterfaceFQName.toJavaFilePath()-»
 /*
 «fileHeader()»
 */
-package «genClassPackageFQName()»;
+package «languageInterfaceFQName.toJavaPackage()»;
 
-public interface «genClassName()» {
+public interface «languageInterfaceFQName.toSimpleName()» {
 
 	/**
 	 * the unique identifier of this language. 

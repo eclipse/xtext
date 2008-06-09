@@ -24,14 +24,14 @@
 /*
 «fileHeader()»
 */
-package «genClassPackageFQName()»;
+package «genClassFQName.toJavaPackage()»;
 
 
 import org.eclipse.emf.ecore.EObject;
 import «internalParsetreeConstructorFQName()»;
 import org.eclipse.xtext.parsetree.AbstractParseTreeConstructor;
 
-public class «genClassName()» extends AbstractParseTreeConstructor {
+public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructor {
 
 	public void update(EObject object) {
 		new «internalParsetreeConstructorName()»(getFactory(),getGrammar(),getValueConverterService()).update(object);

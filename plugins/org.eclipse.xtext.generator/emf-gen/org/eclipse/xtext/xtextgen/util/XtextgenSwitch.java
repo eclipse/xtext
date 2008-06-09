@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenSwitch.java,v 1.1 2008/06/06 16:15:42 jkohnlein Exp $
+ * $Id: XtextgenSwitch.java,v 1.2 2008/06/09 12:52:55 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen.util;
 
@@ -90,34 +90,12 @@ public class XtextgenSwitch<T> {
             case XtextgenPackage.GEN_SERVICE: {
                 GenService genService = (GenService)theEObject;
                 T result = caseGenService(genService);
-                if (result == null) result = caseGenClass(genService);
-                if (result == null) result = caseRootTemplate(genService);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
             case XtextgenPackage.GEN_MODEL: {
                 GenModel genModel = (GenModel)theEObject;
                 T result = caseGenModel(genModel);
-                if (result == null) result = defaultCase(theEObject);
-                return result;
-            }
-            case XtextgenPackage.ROOT_TEMPLATE: {
-                RootTemplate rootTemplate = (RootTemplate)theEObject;
-                T result = caseRootTemplate(rootTemplate);
-                if (result == null) result = defaultCase(theEObject);
-                return result;
-            }
-            case XtextgenPackage.GEN_CLASS: {
-                GenClass genClass = (GenClass)theEObject;
-                T result = caseGenClass(genClass);
-                if (result == null) result = caseRootTemplate(genClass);
-                if (result == null) result = defaultCase(theEObject);
-                return result;
-            }
-            case XtextgenPackage.GEN_PLUGIN: {
-                GenPlugin genPlugin = (GenPlugin)theEObject;
-                T result = caseGenPlugin(genPlugin);
-                if (result == null) result = caseRootTemplate(genPlugin);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
@@ -152,51 +130,6 @@ public class XtextgenSwitch<T> {
      * @generated
      */
     public T caseGenModel(GenModel object) {
-        return null;
-    }
-
-    /**
-     * Returns the result of interpreting the object as an instance of '<em>Root Template</em>'.
-     * <!-- begin-user-doc -->
-     * This implementation returns null;
-     * returning a non-null result will terminate the switch.
-     * <!-- end-user-doc -->
-     * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Root Template</em>'.
-     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-     * @generated
-     */
-    public T caseRootTemplate(RootTemplate object) {
-        return null;
-    }
-
-    /**
-     * Returns the result of interpreting the object as an instance of '<em>Gen Class</em>'.
-     * <!-- begin-user-doc -->
-     * This implementation returns null;
-     * returning a non-null result will terminate the switch.
-     * <!-- end-user-doc -->
-     * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Gen Class</em>'.
-     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-     * @generated
-     */
-    public T caseGenClass(GenClass object) {
-        return null;
-    }
-
-    /**
-     * Returns the result of interpreting the object as an instance of '<em>Gen Plugin</em>'.
-     * <!-- begin-user-doc -->
-     * This implementation returns null;
-     * returning a non-null result will terminate the switch.
-     * <!-- end-user-doc -->
-     * @param object the target of the switch.
-     * @return the result of interpreting the object as an instance of '<em>Gen Plugin</em>'.
-     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-     * @generated
-     */
-    public T caseGenPlugin(GenPlugin object) {
         return null;
     }
 

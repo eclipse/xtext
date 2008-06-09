@@ -21,7 +21,7 @@
 /*
 «fileHeader()»
 */
-package «genClassPackageFQName()»;
+package «genClassFQName.toJavaPackage()»;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonToken;
@@ -37,7 +37,7 @@ import «internalPackage()».«internalLexerClassName()»;
 import «internalPackage()».«internalParserClassName()»;
 
 
-public class «genClassName()» extends org.eclipse.xtext.parser.AbstractParser {
+public class «genClassFQName.toSimpleName()» extends org.eclipse.xtext.parser.AbstractParser {
 	
 	@Override
 	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,

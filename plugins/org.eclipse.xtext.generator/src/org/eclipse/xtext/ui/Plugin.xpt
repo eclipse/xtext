@@ -13,7 +13,7 @@
 
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
-«DEFINE plugin_xml FOR GenPlugin»
+«DEFINE plugin_xml FOR GenModel»
 «FILE "plugin.xml" UI-»
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
@@ -40,7 +40,7 @@
             superLanguage="org.eclipse.xtext.builtin.XtextBuiltin">
       </languageDescriptor>
    </extension>
-   «EXPAND registerServiceFactory FOREACH genModel().rootTemplates.typeSelect(GenService)-»
+   «EXPAND registerServiceFactory FOREACH genModel().services-»
    
 </plugin>
 «ENDFILE»
@@ -49,9 +49,9 @@
 «DEFINE registerServiceFactory FOR GenService-»
    <extension
          point="«extensionPointID»">
-      <«extensionPointName()»
+      <«extensionPointID.toSimpleName()»
             languageId="«languageId()»"
             class="«genClassFQName»">
-      </«extensionPointName()»>
+      </«extensionPointID.toSimpleName()»>
    </extension>
 «ENDDEFINE»
