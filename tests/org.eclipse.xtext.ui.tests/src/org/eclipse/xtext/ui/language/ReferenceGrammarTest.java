@@ -6,11 +6,10 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.reference;
+package org.eclipse.xtext.ui.language;
 
 import junit.framework.TestCase;
 
-import org.apache.tools.ant.filters.StringInputStream;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -21,8 +20,10 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
+import org.eclipse.xtext.reference.ReferenceGrammarStandaloneSetup;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.ui.core.editor.utils.StringInputStream;
 
 /**
  * @author Peter Friese - Initial contribution and API

@@ -12,14 +12,5 @@ Export-Package: org.eclipse.xtext.reference,
  org.eclipse.xtext.reference.parsetree.internal,
  org.eclipse.xtext.reference.services
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.antlr;bundle-version="3.0.0",
- org.eclipse.xtext;bundle-version="1.0.0",
- org.eclipse.xtext.generator;bundle-version="1.0.0",
- org.openarchitectureware.xtext.core;bundle-version="4.3.0",
- org.openarchitectureware.xtext.core.base;bundle-version="4.3.0",
- org.openarchitectureware.xtext.generator;bundle-version="4.3.0",
- org.junit,
- org.openarchitectureware.dependencies;bundle-version="4.3.0",
- org.eclipse.emf.compare,
- org.eclipse.emf.compare.diff,
- org.eclipse.emf.compare.match
+Require-Bundle: org.eclipse.xtext;bundle-version="1.0.0",
+ org.eclipse.xtext.generator;bundle-version="1.0.0"
