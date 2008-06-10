@@ -28,6 +28,7 @@ import org.eclipse.ui.texteditor.HippieProposalProcessor;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.codecompletion.XtextContentAssistProcessor;
+import org.eclipse.xtext.ui.core.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextEditorModelReconcileStrategy;
 import org.eclipse.xtext.ui.core.service.IProposalsProvider;
 
@@ -36,19 +37,19 @@ import org.eclipse.xtext.ui.core.service.IProposalsProvider;
  * 
  */
 public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguration {
-	private final BaseTextEditor editor;
+	private final IEditorModelProvider editorModelProvider;
 	private final ILanguageDescriptor languageDescriptor;
 
 	public XtextSourceViewerConfiguration(ILanguageDescriptor languageDescriptor, IPreferenceStore preferenceStore,
-			BaseTextEditor editor) {
+			IEditorModelProvider editor) {
 		super(preferenceStore);
 		this.languageDescriptor = languageDescriptor;
-		this.editor = editor;
+		this.editorModelProvider = editor;
 	}
 
 	@Override
 	public IReconciler getReconciler(ISourceViewer sourceViewer) {
-		return new MonoReconciler(new XtextEditorModelReconcileStrategy(editor), false);
+		return new MonoReconciler(new XtextEditorModelReconcileStrategy(editorModelProvider), false);
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		IProposalsProvider proposalsProvider = ServiceRegistry.getService(languageDescriptor, IProposalsProvider.class);
 		IContentAssistProcessor processor;
 		if (proposalsProvider != null) {
-			processor = new XtextContentAssistProcessor(proposalsProvider);
+			processor = new XtextContentAssistProcessor(editorModelProvider, proposalsProvider);
 		}
 		else {
 			processor = new HippieProposalProcessor();

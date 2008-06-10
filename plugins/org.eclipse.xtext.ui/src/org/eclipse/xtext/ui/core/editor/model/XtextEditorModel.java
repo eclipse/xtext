@@ -33,7 +33,7 @@ import org.eclipse.xtext.ui.core.internal.Activator;
  * @author Peter Friese - Initial contribution and API
  * 
  */
-public class XtextEditorModel {
+public class XtextEditorModel implements IEditorModel {
 
 	// TODO remove custom implementation when default one works properly
 	private IParseErrorHandler parseErrorHandler = new IParseErrorHandler() {
@@ -44,10 +44,16 @@ public class XtextEditorModel {
 	};
 	List<IParseError> parseErrors = new ArrayList<IParseError>();
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.core.editor.model.IEditorModel#getErrors()
+	 */
 	public List<IParseError> getErrors() {
 		return parseErrors;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.core.editor.model.IEditorModel#hasErrors()
+	 */
 	public boolean hasErrors() {
 		return parseErrors.size() > 0;
 	}
@@ -66,6 +72,9 @@ public class XtextEditorModel {
 		this.parser = ServiceRegistry.getService(languageDescriptor, IParser.class);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.core.editor.model.IEditorModel#getLanguageDescriptor()
+	 */
 	public ILanguageDescriptor getLanguageDescriptor() {
 		return languageDescriptor;
 	}
@@ -80,6 +89,9 @@ public class XtextEditorModel {
 		return this;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.core.editor.model.IEditorModel#reconcile()
+	 */
 	public void reconcile() {
 		synchronized (dirtyLock) {
 			if (!shouldReconcile || !dirty) {
@@ -127,10 +139,16 @@ public class XtextEditorModel {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.core.editor.model.IEditorModel#getParseTreeRootNode()
+	 */
 	public AbstractNode getParseTreeRootNode() {
 		return getParseTreeRootNode(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.core.editor.model.IEditorModel#getParseTreeRootNode(boolean)
+	 */
 	public AbstractNode getParseTreeRootNode(boolean doReconcile) {
 		if (doReconcile) {
 			synchronized (getLockObject()) {
@@ -140,10 +158,16 @@ public class XtextEditorModel {
 		return parseTreeRootNode;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.core.editor.model.IEditorModel#getAstRoot()
+	 */
 	public EObject getAstRoot() {
 		return getAstRoot(true);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.core.editor.model.IEditorModel#getAstRoot(boolean)
+	 */
 	public EObject getAstRoot(boolean doReconcile) {
 		if (doReconcile) {
 			synchronized (getLockObject()) {
@@ -156,6 +180,9 @@ public class XtextEditorModel {
 	protected boolean dirty = true;
 	protected Object dirtyLock = new Object();
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.core.editor.model.IEditorModel#install()
+	 */
 	public void install() {
 		dirtyListener = new IDocumentListener() {
 
@@ -173,18 +200,27 @@ public class XtextEditorModel {
 
 	private List<IXtextEditorModelListener> xtextModelListeners = new ArrayList<IXtextEditorModelListener>();
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.core.editor.model.IEditorModel#addModelListener(org.eclipse.xtext.ui.core.editor.model.IXtextEditorModelListener)
+	 */
 	public void addModelListener(IXtextEditorModelListener listener) {
 		synchronized (xtextModelListeners) {
 			xtextModelListeners.add(listener);
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.core.editor.model.IEditorModel#removeModelListener(org.eclipse.xtext.ui.core.editor.model.IXtextEditorModelListener)
+	 */
 	public void removeModelListener(IXtextEditorModelListener listener) {
 		synchronized (xtextModelListeners) {
 			xtextModelListeners.remove(listener);
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.core.editor.model.IEditorModel#notifyModelListeners(org.eclipse.xtext.ui.core.editor.model.XtextEditorModelChangeEvent)
+	 */
 	public void notifyModelListeners(XtextEditorModelChangeEvent event) {
 		Iterator<IXtextEditorModelListener> iterator;
 		synchronized (xtextModelListeners) {

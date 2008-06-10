@@ -26,9 +26,10 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.InjectedService;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.ui.core.editor.model.IEditorModel;
+import org.eclipse.xtext.ui.core.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProviderFactory;
-import org.eclipse.xtext.ui.core.editor.model.XtextEditorModel;
 import org.eclipse.xtext.ui.core.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
@@ -38,12 +39,12 @@ import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class BaseTextEditor extends TextEditor {
+public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
-	private XtextEditorModel model;
+	private IEditorModel model;
 	private XtextContentOutlinePage outlinePage;
 	protected boolean selectionSetFromOutline;
-    private ILanguageDescriptor languageDescriptor;
+	private ILanguageDescriptor languageDescriptor;
 
 	@Override
 	public void setInitializationData(IConfigurationElement cfig, String propertyName, Object data) {
@@ -69,15 +70,15 @@ public class BaseTextEditor extends TextEditor {
 	}
 
 	public ILanguageDescriptor getLanguageDescriptor() {
-        return languageDescriptor;
+		return languageDescriptor;
 	}
 
 	@InjectedService
 	public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
-        this.languageDescriptor = languageDescriptor;
+		this.languageDescriptor = languageDescriptor;
 	}
 
-	public XtextEditorModel getModel() {
+	public IEditorModel getModel() {
 		if (model == null) {
 			IDocumentProvider provider = getDocumentProvider();
 			if (provider instanceof XtextDocumentProvider) {

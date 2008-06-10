@@ -14,14 +14,14 @@ package org.eclipse.xtext.ui.core.editor.model;
  */
 public class XtextEditorModelChangeEvent {
 	
-	private XtextEditorModel editorModel; 
+	private IEditorModel editorModel; 
 	
-	public XtextEditorModelChangeEvent(XtextEditorModel editorModel) {
+	public XtextEditorModelChangeEvent(IEditorModel editorModel) {
 		super();
 		this.editorModel = editorModel;
 	}
 
-	public XtextEditorModel getModel() {
+	public IEditorModel getModel() {
 		return editorModel;
 	}
 
