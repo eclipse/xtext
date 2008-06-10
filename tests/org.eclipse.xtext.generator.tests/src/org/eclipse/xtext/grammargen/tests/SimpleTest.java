@@ -23,7 +23,6 @@ public class SimpleTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		SimpleTestStandaloneSetup.doSetup();
 		with(SimpleTestStandaloneSetup.class);
 	}
 	

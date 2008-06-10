@@ -20,7 +20,6 @@ public class MultiGenMMTest extends AbstractGeneratorTest {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        MetamodelRefTestStandaloneSetup.doSetup();
         with(MetamodelRefTestStandaloneSetup.class);
         MetamodelRefTestMetamodelAccess serviceOverride = new MetamodelRefTestMetamodelAccess() {
             @Override

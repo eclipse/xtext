@@ -60,6 +60,7 @@ public class NodeModelTest extends AbstractGeneratorTest {
 			} else if (next instanceof LeafNode) {
 				LeafNode leafNode = (LeafNode) next;
 				EObject grammarElement = leafNode.getGrammarElement();
+				assertNotNull(grammarElement);
 //TODO is this test obsolete since we've removed the tokenType feature?
 				//				if (grammarElement instanceof Keyword) {
 //					assertEquals(ITokenTypes.KEYWORD, tokenType);
@@ -118,7 +119,6 @@ public class NodeModelTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		TestLanguageStandaloneSetup.doSetup();
 		with(TestLanguageStandaloneSetup.class);
 	}
 
