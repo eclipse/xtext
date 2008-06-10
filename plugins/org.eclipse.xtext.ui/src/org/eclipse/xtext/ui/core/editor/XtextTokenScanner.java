@@ -13,7 +13,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.DataFormatException;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.StringConverter;
@@ -53,7 +52,7 @@ public class XtextTokenScanner implements ITokenScanner {
 	private IParser parser;
 	private final ILanguageDescriptor languageDescriptor;
 
-	public XtextTokenScanner(ILanguageDescriptor languageDescriptor, IPreferenceStore preferenceStore) {
+	public XtextTokenScanner(ILanguageDescriptor languageDescriptor) {
 		Assert.isLegal(languageDescriptor != null);
 		this.languageDescriptor = languageDescriptor;
 		this.syntaxColorer = ServiceRegistry.getService(languageDescriptor, ISyntaxColorer.class);
