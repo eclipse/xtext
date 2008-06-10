@@ -16,7 +16,6 @@ public class HiddenTokensTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		DummyLanguageStandaloneSetup.doSetup();
 		with(DummyLanguageStandaloneSetup.class);
 	}
 

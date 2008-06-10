@@ -62,7 +62,6 @@ public class ActionTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		ActionTestLanguageStandaloneSetup.doSetup();
 		with(ActionTestLanguageStandaloneSetup.class);
 	}
 }
