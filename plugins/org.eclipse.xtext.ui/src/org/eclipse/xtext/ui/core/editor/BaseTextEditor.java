@@ -8,15 +8,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IPartService;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.ContentAssistAction;
@@ -67,6 +71,20 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 			CoreLog.logError(EditorMessages.getFormattedString("BaseTextEditor.NoLanguageDescriptor", //$NON-NLS-1$
 					this.getConfigurationElement().getNamespaceIdentifier()), new IllegalStateException());
 		}
+	}
+
+	@Override
+	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
+		super.init(site, input);
+		// Error marker
+		getModel().addModelListener(new XtextProblemMarkerCreator(getResource()));
+	}
+
+	private IResource getResource() {
+		Object adapter = getEditorInput().getAdapter(IResource.class);
+		if (adapter != null)
+			return (IResource) adapter;
+		return null;
 	}
 
 	public ILanguageDescriptor getLanguageDescriptor() {

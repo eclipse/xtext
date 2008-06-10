@@ -78,8 +78,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		PresentationReconciler reconciler = (PresentationReconciler) super.getPresentationReconciler(sourceViewer);
-		DefaultDamagerRepairer defDR = new DefaultDamagerRepairer(new XtextTokenScanner(languageDescriptor,
-				fPreferenceStore));
+		DefaultDamagerRepairer defDR = new DefaultDamagerRepairer(new XtextTokenScanner(languageDescriptor));
 		reconciler.setRepairer(defDR, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setDamager(defDR, IDocument.DEFAULT_CONTENT_TYPE);
 		return reconciler;
