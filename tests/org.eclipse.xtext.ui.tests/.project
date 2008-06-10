@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.eclipse.xtext.ui.core.tests</name>
+	<name>org.eclipse.xtext.ui.tests</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -22,6 +22,11 @@
 		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.pde.api.tools.apiAnalysisBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.hyades.test.tools.core.java.junit.builder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>

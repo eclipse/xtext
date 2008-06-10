@@ -8,10 +8,12 @@ Bundle-Vendor: itemis AG
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.junit,
- org.eclipse.jface.text;bundle-version="3.4.0",
- org.antlr;bundle-version="3.0.0",
- org.eclipse.jdt.launching;bundle-version="3.4.0",
- org.eclipse.xtext.reference.ui;bundle-version="1.0.0",
- org.eclipse.xtext.reference.ui_gen;bundle-version="1.0.0"
+ org.eclipse.jface.text,
+ org.antlr,
+ org.eclipse.jdt.launching,
+ org.eclipse.xtext.reference.ui,
+ org.eclipse.xtext.reference.ui_gen,
+ org.eclipse.ui.ide;bundle-version="3.4.0",
+ org.eclipse.core.filesystem;bundle-version="1.2.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
