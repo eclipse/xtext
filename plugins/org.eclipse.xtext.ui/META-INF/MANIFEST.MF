@@ -28,5 +28,4 @@ Export-Package: org.eclipse.xtext.ui.core.editor,
  org.eclipse.xtext.ui.services
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Eclipse-BuddyPolicy: dependent
 

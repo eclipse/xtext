@@ -129,7 +129,7 @@ public class ServiceRegistry {
 		}
 	}
 
-	private static void injectServicesForClass(ILanguageDescriptor languageDescriptor, ILanguageService service,
+	private static void injectServicesForClass(ILanguageDescriptor languageDescriptor, Object service,
 			Class<?> serviceClass, Map<Class<?>, ILanguageService> cachedServices) throws IllegalAccessException,
 			InvocationTargetException {
 		Method[] methods = serviceClass.getMethods();
@@ -197,5 +197,18 @@ public class ServiceRegistry {
             System.out.println(pair.getFirstElement() + " " + pair.getSecondElement().getSimpleName());
         }
 	}
+	
+    public static void initializeInstance(ILanguageDescriptor languageDescriptor, Object instance) {
+        Map<Class<?>, ILanguageService> cachedServices = new HashMap<Class<?>, ILanguageService>();
+        try {
+            injectServicesForClass(languageDescriptor, instance, instance.getClass(), cachedServices);
+        }
+        catch (Exception e) {
+            throw new WrappedException("Error injecting dependencies into "
+                    + (instance != null ? instance.getClass().getSimpleName() : "null") + " for " + languageDescriptor,
+                    e);
+
+        }
+    }
 
 }
