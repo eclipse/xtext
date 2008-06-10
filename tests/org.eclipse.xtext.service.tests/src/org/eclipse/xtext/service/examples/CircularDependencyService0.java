@@ -6,19 +6,26 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.service;
+package org.eclipse.xtext.service.examples;
+
+import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.service.InjectedService;
 
 /**
  * @author Jan Köhnlein
  * 
  */
-public class InheritingService extends MyLanguageService {
+public class CircularDependencyService0 implements ILanguageService {
 
-    /**
-     * Method does not redefine @InjectedService
-     */
-    @Override
-    public void setInjectedService(InjectedLanguageService injectedService) {
-        super.setInjectedService(injectedService);
+    private CircularDependencyService1 service;
+
+    @InjectedService
+    public void setDependency(CircularDependencyService1 service) {
+        this.service = service;
     }
+    
+    public CircularDependencyService1 getService() {
+        return service;
+    }
+    
 }

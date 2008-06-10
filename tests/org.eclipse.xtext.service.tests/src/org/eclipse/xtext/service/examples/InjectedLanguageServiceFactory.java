@@ -6,20 +6,25 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.service;
+
+package org.eclipse.xtext.service.examples;
+
+import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.service.ILanguageServiceFactory;
 
 /**
- * @author Jan Köhnlein
+ * 
+ * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class CircularDependencyFactory0 implements ILanguageServiceFactory {
+public class InjectedLanguageServiceFactory implements ILanguageServiceFactory {
 
     public ILanguageService createLanguageService() {
-        return new CircularDependencyService0();
+        return new InjectedLanguageService();
     }
 
     public Class<? extends ILanguageService> getServiceInterface() {
-        return CircularDependencyService0.class;
+        return InjectedLanguageService.class;
     }
 
 }
