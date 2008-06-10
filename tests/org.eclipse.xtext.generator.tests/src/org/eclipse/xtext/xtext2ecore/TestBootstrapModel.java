@@ -41,7 +41,6 @@ public class TestBootstrapModel extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		XtextStandaloneSetup.doSetup();
 		XtextutilPackage.eINSTANCE.getComplexType();
 		with(XtextStandaloneSetup.class);
 	}

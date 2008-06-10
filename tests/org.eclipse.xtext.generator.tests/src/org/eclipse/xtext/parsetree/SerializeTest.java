@@ -10,7 +10,6 @@ public class SerializeTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		SimpleExpressionsStandaloneSetup.doSetup();
 		with(SimpleExpressionsStandaloneSetup.class);
 	}
 	

@@ -24,7 +24,6 @@ public class SimpleTest2 extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		SimpleTest2StandaloneSetup.doSetup();
 		with(SimpleTest2StandaloneSetup.class);
 	}
 
