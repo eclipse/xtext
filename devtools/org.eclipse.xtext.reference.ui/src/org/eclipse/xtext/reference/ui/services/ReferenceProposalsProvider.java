@@ -12,12 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.text.ITextViewer;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.reference.ui.services.contentassist.Proposal;
+import org.eclipse.xtext.reference.ui.services.contentassist.XtextCompletionProposal;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.ui.core.editor.codecompletion.Proposal;
+import org.eclipse.xtext.ui.core.editor.model.IEditorModel;
 import org.eclipse.xtext.ui.core.service.IProposalsProvider;
 
 /**
@@ -35,7 +38,7 @@ public class ReferenceProposalsProvider implements IProposalsProvider {
 	 * org.eclipse.xtext.ui.core.service.IProposalsProvider#getProposals(org
 	 * .eclipse.jface.text.ITextViewer, int)
 	 */
-	public List<Proposal> getProposals(ITextViewer viewer, int offset) {
+	public List<ICompletionProposal> getProposals(IEditorModel model, ITextViewer viewer, int offset) {
 
 		Proposal p = new Proposal("Hier ein proposal");
 		p.setLabel(new StyledString("Proposal Label", StyledString.COUNTER_STYLER));
@@ -58,7 +61,11 @@ public class ReferenceProposalsProvider implements IProposalsProvider {
 		retVal.add(p);
 		retVal.add(p1);
 		retVal.add(p2);
-		return retVal;
+		List<ICompletionProposal> list = new ArrayList<ICompletionProposal>();
+		for (Proposal proposal : retVal) {
+			list.add(new XtextCompletionProposal(proposal, offset));
+		}
+		return list;
 	}
 
 	public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
