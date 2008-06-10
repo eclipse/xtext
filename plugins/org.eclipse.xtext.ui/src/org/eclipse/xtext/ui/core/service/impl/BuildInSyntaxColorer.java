@@ -36,23 +36,23 @@ public class BuildInSyntaxColorer implements ISyntaxColorer {
 	 * .parsetree.LeafNode)
 	 */
 	public TextStyle color(LeafNode leafNode) {
-		TextStyle defaultTs = new TextStyle(null, null, SWT.NONE, null);
+		TextStyle tsToSet = new TextStyle(null, null, SWT.NONE, null);
 		if (tokenTypeDef != null) {
 			for (ITokenTypeDef ttd : tokenTypeDef.allTokenTypes()) {
 				if (ttd.match(leafNode)) {
 					String tokenTypeId = ttd.getId();
 					if (ttd.getTextStyle() != null) {
-						defaultTs = ttd.getTextStyle();
+						tsToSet = ttd.getTextStyle();
 					}
-					TextStyle ts = new TextStyle(getColorForTokenType(tokenTypeId, defaultTs.getColor()),
-							getBackgroundColorForTokenType(tokenTypeId, defaultTs.getBackgroundColor()),
-							getStyleForTokenType(tokenTypeId, defaultTs.getStyle()), getFontForTokenType(tokenTypeId,
-									defaultTs.getFontName()));
+					TextStyle ts = new TextStyle(getColorForTokenType(tokenTypeId, tsToSet.getColor()),
+							getBackgroundColorForTokenType(tokenTypeId, tsToSet.getBackgroundColor()),
+							getStyleForTokenType(tokenTypeId, tsToSet.getStyle()), getFontForTokenType(tokenTypeId,
+									tsToSet.getFontName()));
 					return ts;
 				}
 			}
 		}
-		return defaultTs;
+		return tsToSet;
 	}
 
 	@InjectedService

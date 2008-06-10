@@ -11,10 +11,8 @@ package org.eclipse.xtext.reference.ui.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
-import org.eclipse.xtext.ui.core.editor.utils.TextStyleConstants;
 import org.eclipse.xtext.ui.core.tokentype.BuildInTokenTypeDef;
 import org.eclipse.xtext.ui.core.tokentype.ITokenTypeDef;
 import org.eclipse.xtext.ui.core.tokentype.TokenTypeDef;
@@ -37,7 +35,7 @@ public class ReferenceTokenTypeDef extends BuildInTokenTypeDef {
 		TokenTypeDef ttd = new TokenTypeDef("rot") {
 			@Override
 			public boolean match(LeafNode node) {
-				return keyWordTokenType().match(node) && node.getText().equals("ROT");
+				return keyWordTokenType().match(node) && "ROT".equals(node.getText());
 			}
 		};
 		TextStyle ts = keyWordTokenType().getTextStyle();
@@ -47,14 +45,13 @@ public class ReferenceTokenTypeDef extends BuildInTokenTypeDef {
 	}
 
 	private ITokenTypeDef fieldTokenType() {
+		// TODO want print all "featured" nodes italic, but can't
 		TokenTypeDef ttd = new TokenTypeDef("field") {
 			@Override
 			public boolean match(LeafNode node) {
-				return false;//DISABLED node.getFeature() != null;
+				return false;// DISABLED node.getFeature() != null;
 			}
 		};
-		ttd.setName("Attribute");
-		ttd.setTextStyle(new TextStyle(TextStyleConstants.STRING_COLOR, null, SWT.NONE, null));
 		return ttd;
 	}
 }
