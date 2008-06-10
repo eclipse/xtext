@@ -24,7 +24,7 @@
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="org.eclipse.xtext.ui.core.service.XtextServiceExtensionFactory:org.eclipse.xtext.ui.core.editor.BaseTextEditor/" + «languageId()»"
+            class="org.eclipse.xtext.ui.core.service.XtextServiceExtensionFactory:org.eclipse.xtext.ui.core.editor.BaseTextEditor/«languageId()»"
             default="true"
             extensions="test, tst"
             icon="icons/editor.gif"
