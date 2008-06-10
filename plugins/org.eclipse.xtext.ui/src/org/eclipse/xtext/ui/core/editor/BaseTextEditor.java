@@ -24,6 +24,7 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.InjectedService;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProviderFactory;
@@ -37,7 +38,7 @@ import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public abstract class BaseTextEditor extends TextEditor {
+public class BaseTextEditor extends TextEditor {
 	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
 	private XtextEditorModel model;
 	private XtextContentOutlinePage outlinePage;
@@ -47,7 +48,6 @@ public abstract class BaseTextEditor extends TextEditor {
 	@Override
 	public void setInitializationData(IConfigurationElement cfig, String propertyName, Object data) {
 		super.setInitializationData(cfig, propertyName, data);
-		ILanguageDescriptor languageDescriptor = initializeLanguageDescriptor();
 		// try plain text editor if problem occurs
 		if (languageDescriptor != null) {
 			IPreferenceStoreService xtextPreferenceStore = ServiceRegistry.getService(languageDescriptor,
@@ -68,13 +68,13 @@ public abstract class BaseTextEditor extends TextEditor {
 		}
 	}
 
-	protected abstract ILanguageDescriptor initializeLanguageDescriptor();
-	
 	public ILanguageDescriptor getLanguageDescriptor() {
-	    if (languageDescriptor == null) {
-            languageDescriptor = initializeLanguageDescriptor();
-        }
         return languageDescriptor;
+	}
+
+	@InjectedService
+	public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
+        this.languageDescriptor = languageDescriptor;
 	}
 
 	public XtextEditorModel getModel() {
