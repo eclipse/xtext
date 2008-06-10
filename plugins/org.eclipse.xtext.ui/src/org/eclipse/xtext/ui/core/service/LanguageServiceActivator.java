@@ -103,6 +103,7 @@ public class LanguageServiceActivator {
                     // TODO: FIXME
                 }
             }
+            ServiceRegistry.freeze();
         }
     }
 

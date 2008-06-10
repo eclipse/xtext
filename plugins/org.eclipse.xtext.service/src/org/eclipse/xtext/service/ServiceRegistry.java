@@ -48,7 +48,6 @@ public class ServiceRegistry {
 
     @SuppressWarnings("unchecked")
     public static <T extends ILanguageService> T getService(ILanguageDescriptor languageDescriptor, Class<T> serviceInterface) {
-        isFrozen = true;
         Map<Class<?>, ILanguageService> initializedServices = new HashMap<Class<?>, ILanguageService>();
         ILanguageService service = findAndInitializeService(languageDescriptor, serviceInterface, initializedServices);
         return (T) service;
@@ -198,6 +197,10 @@ public class ServiceRegistry {
         }
     }
 
+    public static void freeze() {
+        isFrozen = true;
+    }
+    
     public static void resetInternal() {
         synchronized (factoryMap) {
             factoryMap.clear();
