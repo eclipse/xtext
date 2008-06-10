@@ -47,5 +47,15 @@ public class Pair<T,U> {
     public int hashCode() {
         return firstElement.hashCode() + 17*secondElement.hashCode();
     }
+
+
+    public void setFirstElement(T firstElement) {
+        this.firstElement = firstElement;
+    }
+
+
+    public void setSecondElement(U secondElement) {
+        this.secondElement = secondElement;
+    }
     
 }

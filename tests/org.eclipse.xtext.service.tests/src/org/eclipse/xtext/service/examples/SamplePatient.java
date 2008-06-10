@@ -6,19 +6,24 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.service;
+package org.eclipse.xtext.service.examples;
+
+import org.eclipse.xtext.service.InjectedService;
 
 /**
- * @author Jan Köhnlein
- * 
+ * @author Jan Köhnlein - Initial contribution and API
+ *
  */
-public class InheritingService extends MyLanguageService {
+public class SamplePatient {
 
-    /**
-     * Method does not redefine @InjectedService
-     */
-    @Override
-    public void setInjectedService(InjectedLanguageService injectedService) {
-        super.setInjectedService(injectedService);
+    private InjectedLanguageService service;
+
+    @InjectedService 
+    public void setService(InjectedLanguageService s) {
+        this.service = s;
+    }
+    
+    public InjectedLanguageService getService() {
+        return service;
     }
 }

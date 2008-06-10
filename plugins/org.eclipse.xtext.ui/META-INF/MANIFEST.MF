@@ -25,8 +25,10 @@ Export-Package: org.eclipse.xtext.ui.core.editor,
  org.eclipse.xtext.ui.core.service,
  org.eclipse.xtext.ui.core.service.impl,
  org.eclipse.xtext.ui.core.tokentype,
- org.eclipse.xtext.ui.core.util,
- org.eclipse.xtext.ui.services
+ org.eclipse.xtext.ui.core.util
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
+Eclipse-BuddyPolicy: registered
+
+
 

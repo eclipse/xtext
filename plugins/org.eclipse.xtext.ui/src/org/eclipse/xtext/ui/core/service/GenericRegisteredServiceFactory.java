@@ -1,9 +1,11 @@
-package org.eclipse.xtext.ui.services;
+package org.eclipse.xtext.ui.core.service;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.ILanguageServiceFactory;
@@ -20,9 +22,14 @@ public class GenericRegisteredServiceFactory implements ILanguageServiceFactory 
     private ILanguageService service;
 
     public GenericRegisteredServiceFactory(ILanguageDescriptor languageDescriptor, Class<? extends ILanguageService> serviceInterface,
-            IConfigurationElement configurationElement) {
+            IConfigurationElement configurationElement) throws CoreException {
         this.serviceInterface = serviceInterface;
         this.configurationElement = configurationElement;
+        try {
+            Class.forName(configurationElement.getAttribute(CLASS));
+        } catch (Exception e) {
+            throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Error finding class", e));
+        }
     }
 
     public ILanguageService createLanguageService() {

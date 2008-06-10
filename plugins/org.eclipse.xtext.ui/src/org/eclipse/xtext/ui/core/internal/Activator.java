@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.services.LanguageServiceActivator;
+import org.eclipse.xtext.ui.core.service.LanguageServiceActivator;
 import org.osgi.framework.BundleContext;
 
 /**

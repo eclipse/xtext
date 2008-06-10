@@ -5,29 +5,34 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- *******************************************************************************/package org.eclipse.xtext.service.internal;
+ *******************************************************************************/package org.eclipse.xtext.service;
 
-import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.service.ILanguageServiceFactory;
 
 /**
  * 
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class GenericSingletonLanguageServiceFactory implements ILanguageServiceFactory{
+public class GenericLanguageServiceFactory implements ILanguageServiceFactory{
 	
-	private ILanguageService service;
 	private Class<? extends ILanguageService> serviceInterface;
+    private Class<? extends ILanguageService> serviceClass;
 	
-	public GenericSingletonLanguageServiceFactory(ILanguageService service, Class<? extends ILanguageService> serviceInterface) {
+	public GenericLanguageServiceFactory(Class<? extends ILanguageService> serviceInterface, Class<? extends ILanguageService> serviceClass) {
 		super();
-		this.service = service;
 		this.serviceInterface = serviceInterface;
+		this.serviceClass = serviceClass;
+		if(!serviceInterface.isAssignableFrom(serviceClass)) {
+		    throw new IllegalArgumentException("Service class must implement service interface.");
+		}
 	}
 
 	public ILanguageService createLanguageService() {
-		return service;
+	    try {
+	        return serviceClass.newInstance();
+	    } catch(Exception exc) {
+	        throw new RuntimeException(exc);
+	    }
 	}
 
     public Class<? extends ILanguageService> getServiceInterface() {

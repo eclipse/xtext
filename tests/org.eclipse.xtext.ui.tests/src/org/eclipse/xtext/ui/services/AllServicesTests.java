@@ -12,7 +12,8 @@ public class AllServicesTests {
 		suite.addTestSuite(ResourceFactoryTest.class);
 		suite.addTestSuite(PreferenceServiceTest.class);
 		suite.addTestSuite(TokenTypeDefTest.class);
-		suite.addTestSuite(LanguageDescriptorRegistrationTest.class);
+        suite.addTestSuite(LanguageDescriptorRegistrationTest.class);
+        suite.addTestSuite(ServiceInjectionTest.class);
 		//$JUnit-END$
 		return suite;
 	}

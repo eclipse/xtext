@@ -13,7 +13,8 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.eclipse.xtext.ui.services.LanguageDescriptorHierarchyUtil.LanguageDescriptorDescriptor;
+import org.eclipse.xtext.ui.core.service.LanguageDescriptorHierarchyUtil;
+import org.eclipse.xtext.ui.core.service.LanguageDescriptorHierarchyUtil.LanguageDescriptorDescriptor;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  *

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.services;
+package org.eclipse.xtext.ui.core.service;
 
 import java.util.ArrayList;
 import java.util.List;

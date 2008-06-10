@@ -6,24 +6,28 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+package org.eclipse.xtext.service.examples;
+
+import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.service.InjectedService;
 
 /**
+ * 
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class AllTests {
+public class MyLanguageService implements ILanguageService {
 
-    public static Test suite() {
-        TestSuite suite = new TestSuite("Test for org.eclipse.xtext.ui");
-        //$JUnit-BEGIN$
-        suite.addTest(AllHeadlessTests.suite());
-        suite.addTest(AllWorkbenchTests.suite());
-        //$JUnit-END$
-        return suite;
+    InjectedLanguageService injectedService = null;
+
+    public InjectedLanguageService getInjectedService() {
+        return injectedService;
+    }
+
+    @InjectedService
+    public void setInjectedService(InjectedLanguageService injectedService) {
+        this.injectedService = injectedService;
     }
 
 }

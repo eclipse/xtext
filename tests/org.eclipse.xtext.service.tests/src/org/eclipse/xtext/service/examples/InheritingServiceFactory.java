@@ -7,7 +7,10 @@
  *
  *******************************************************************************/
 
-package org.eclipse.xtext.service;
+package org.eclipse.xtext.service.examples;
+
+import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.service.ILanguageServiceFactory;
 
 /**
  * 

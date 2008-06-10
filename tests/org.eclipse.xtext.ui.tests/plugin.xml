@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
+   <extension-point id="testExtensionPoint" name="Test Extension Point" schema="schema/testExtensionPoint.exsd"/>
    <extension
          point="org.eclipse.xtext.ui.languageDescriptor">
       <languageDescriptor
@@ -22,5 +23,11 @@
             class="org.eclipse.xtext.ui.TestTokenTypeDef"
             languageId="org.eclipse.xtext.ui.tests.dummylanguage">
       </tokenTypeDef>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.tests.testExtensionPoint" id="myid">
+      <test
+            class="org.eclipse.xtext.ui.core.service.XtextServiceExtensionFactory:org.eclipse.xtext.ui.services.SampleServiceDependentClass/org.eclipse.xtext.reference.ReferenceGrammar">
+      </test>
    </extension>
 </plugin>

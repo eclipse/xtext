@@ -6,21 +6,25 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.service;
+package org.eclipse.xtext.ui;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
+import org.eclipse.xtext.ui.editor.EditorTest;
 
 /**
- * 
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class MyLanguageServiceFactory implements ILanguageServiceFactory {
+public class AllWorkbenchTests {
 
-    public ILanguageService createLanguageService() {
-        return new MyLanguageService();
+    public static Test suite() {
+        TestSuite suite = new TestSuite("Test for org.eclipse.xtext.ui");
+        //$JUnit-BEGIN$
+        suite.addTestSuite(EditorTest.class);
+        //$JUnit-END$
+        return suite;
     }
-   
-    public Class<? extends ILanguageService> getServiceInterface() {
-        return MyLanguageService.class;
-    }
-   
+
 }

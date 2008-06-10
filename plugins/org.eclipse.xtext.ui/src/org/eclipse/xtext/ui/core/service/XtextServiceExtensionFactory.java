@@ -60,7 +60,7 @@ public class XtextServiceExtensionFactory implements IExecutableExtensionFactory
 
     private Object configure(Object extensionInstance) throws CoreException {
         ILanguageDescriptor languageDescriptor = getLanguageDescriptor(languageId);
-        ServiceRegistry.initializeInstance(languageDescriptor, extensionInstance);
+        ServiceRegistry.injectServices(languageDescriptor, extensionInstance);
         
         if (extensionInstance instanceof IExecutableExtension) {
             ((IExecutableExtension) extensionInstance).setInitializationData(config, propertyName, null);

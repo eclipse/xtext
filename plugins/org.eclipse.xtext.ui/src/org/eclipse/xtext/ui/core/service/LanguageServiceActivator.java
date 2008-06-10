@@ -1,6 +1,6 @@
-package org.eclipse.xtext.ui.services;
+package org.eclipse.xtext.ui.core.service;
 
-import static org.eclipse.xtext.ui.services.GenericRegisteredServiceFactory.getConfigurationElement;
+import static org.eclipse.xtext.ui.core.service.GenericRegisteredServiceFactory.getConfigurationElement;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,12 +24,7 @@ import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.internal.Activator;
 import org.eclipse.xtext.ui.core.internal.CoreLog;
-import org.eclipse.xtext.ui.core.service.IOutlineProvider;
-import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
-import org.eclipse.xtext.ui.core.service.IProposalsProvider;
-import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
-import org.eclipse.xtext.ui.core.service.ITokenTypeDefService;
-import org.eclipse.xtext.ui.services.LanguageDescriptorHierarchyUtil.LanguageDescriptorDescriptor;
+import org.eclipse.xtext.ui.core.service.LanguageDescriptorHierarchyUtil.LanguageDescriptorDescriptor;
 
 public class LanguageServiceActivator {
 
@@ -62,19 +57,17 @@ public class LanguageServiceActivator {
 
     private static void registerDefaultServices(ILanguageDescriptor languageDescriptor) {
         for (String serviceName : serviceMap.keySet()) {
-            IConfigurationElement configurationElement = getConfigurationElement(serviceName, languageDescriptor);
-            if (configurationElement != null) {
-                ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, serviceMap
-                        .get(serviceName), configurationElement));
+            try {
+                IConfigurationElement configurationElement = getConfigurationElement(serviceName, languageDescriptor);
+                if (configurationElement != null) {
+                    ServiceRegistry.registerFactory(languageDescriptor, new GenericRegisteredServiceFactory(languageDescriptor, serviceMap
+                            .get(serviceName), configurationElement));
+                }
+            } catch (Exception e) {
+                CoreLog.logError(e);
             }
         }
-        // register resource factory to EMF
-        try {
-            ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
-        } catch (Exception exc) {
-            int foo=32;
-            // TODO: FIXME
-        }
+        
     }
 
     private static void registerLanguageDescriptors() {
@@ -99,6 +92,15 @@ public class LanguageServiceActivator {
                     registerDefaultServices(languageDescriptor);
                 } catch (Exception e) {
                     CoreLog.logError(e);
+                }
+            }
+            for (LanguageDescriptorDescriptor languageDD : languageDDs) {
+                // register resource factories to EMF
+                try {
+                   ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.get(languageDD.languageId);
+                   ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
+                } catch (Exception exc) {
+                    // TODO: FIXME
                 }
             }
         }

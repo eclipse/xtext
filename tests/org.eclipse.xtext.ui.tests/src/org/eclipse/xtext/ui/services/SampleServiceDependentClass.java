@@ -6,25 +6,25 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
+package org.eclipse.xtext.ui.services;
 
-package org.eclipse.xtext.service;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.service.InjectedService;
 
 /**
- * 
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class MyLanguageService implements ILanguageService {
+public class SampleServiceDependentClass {
 
-    InjectedLanguageService injectedService = null;
-
-    public InjectedLanguageService getInjectedService() {
-        return injectedService;
-    }
+    private IParser parser;
 
     @InjectedService
-    public void setInjectedService(InjectedLanguageService injectedService) {
-        this.injectedService = injectedService;
+    public void setParser(IParser parser) {
+        this.parser = parser;
     }
-
+    
+    public IParser getParser() {
+        return parser;
+    }
 }
