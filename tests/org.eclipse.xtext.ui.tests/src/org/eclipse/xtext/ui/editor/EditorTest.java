@@ -12,6 +12,8 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.runtime.ILogListener;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.swt.widgets.Display;
@@ -20,6 +22,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.texteditor.ContentAssistAction;
 import org.eclipse.xtext.ui.core.editor.BaseTextEditor;
+import org.eclipse.xtext.ui.core.internal.Activator;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -31,14 +34,19 @@ public class EditorTest extends TestCase {
 	private static final String EDITOR_ID = "org.eclipse.xtext.reference.ui_gen.ui.editor.ReferenceGrammarXtextEditor";
 	private BaseTextEditor openedEditor;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see junit.framework.TestCase#setUp()
-	 */
 	protected void setUp() throws Exception {
 		super.setUp();
-
+		if (PlatformUI.getWorkbench().getIntroManager().getIntro() != null)
+			PlatformUI.getWorkbench().getIntroManager().closeIntro(
+					PlatformUI.getWorkbench().getIntroManager().getIntro());
+		// listen to CoreLog use RuntimeLog to hear more
+		Activator.getDefault().getLog().addLogListener(new ILogListener() {
+			public void logging(IStatus status, String plugin) {
+				if (IStatus.ERROR == status.getSeverity()) {
+					fail(status.getMessage());
+				}
+			}
+		});
 	}
 
 	public void testOpenBlankFile() throws Exception {
