@@ -6,22 +6,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.service;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.ui.core.editor.model.IEditorModel;
+package org.eclipse.xtext.ui.core.editor.model;
 
 /**
- * @author Peter Friese - Initial contribution and API
- *
+ * @author Dennis Hübner - Initial contribution and API
+ * 
  */
-public interface IOutlineProvider extends ILanguageService {
-
-    Object[] getRootObjects(IEditorModel model);
-
-    boolean hasChildren(EObject element);
-
-    Object[] getChildren(EObject node);
-
+public interface IEditorModelProvider {
+	IEditorModel getModel();
 }

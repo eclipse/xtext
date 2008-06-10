@@ -14,6 +14,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.BaseTextEditor;
+import org.eclipse.xtext.ui.core.editor.model.IEditorModel;
 import org.eclipse.xtext.ui.core.editor.model.XtextEditorModel;
 import org.eclipse.xtext.ui.core.service.IOutlineProvider;
 
@@ -57,7 +58,7 @@ public class XtextModelContentProvider implements ITreeContentProvider {
 
 	public Object[] getElements(Object inputElement) {
 		if (inputElement instanceof XtextEditorModel) {
-			XtextEditorModel xtextEditorModel = (XtextEditorModel) inputElement;
+			IEditorModel xtextEditorModel = (IEditorModel) inputElement;
 			return delegate.getRootObjects(xtextEditorModel);
 		}
 		return EMPTY_ARRAY;

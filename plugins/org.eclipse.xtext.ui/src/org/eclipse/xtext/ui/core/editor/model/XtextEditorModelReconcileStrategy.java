@@ -12,7 +12,6 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
-import org.eclipse.xtext.ui.core.editor.BaseTextEditor;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -20,14 +19,14 @@ import org.eclipse.xtext.ui.core.editor.BaseTextEditor;
  */
 public class XtextEditorModelReconcileStrategy implements IReconcilingStrategy {
 
-	private final BaseTextEditor editor;
+	private final IEditorModelProvider editorModelProvider;
 
-	public XtextEditorModelReconcileStrategy(BaseTextEditor editor) {
-		this.editor = editor;
+	public XtextEditorModelReconcileStrategy(IEditorModelProvider editorModelProvider) {
+		this.editorModelProvider = editorModelProvider;
 	}
 
 	private void internalReconcile() {
-		XtextEditorModel model = editor.getModel();
+		IEditorModel model = editorModelProvider.getModel();
 		if (model != null) {
 			model.reconcile();
 		}

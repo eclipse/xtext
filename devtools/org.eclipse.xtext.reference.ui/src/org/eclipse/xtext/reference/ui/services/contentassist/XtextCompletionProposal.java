@@ -6,8 +6,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.editor.codecompletion;
 
+package org.eclipse.xtext.reference.ui.services.contentassist;
+
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.BadLocationException;
@@ -22,8 +25,7 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.xtext.ui.core.internal.Activator;
-import org.eclipse.xtext.ui.core.internal.CoreLog;
+import org.eclipse.xtext.reference.ui.Activator;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -75,7 +77,7 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 			document.replace(offset, 0, proposal.getText());
 		}
 		catch (BadLocationException e) {
-			CoreLog.logError(e);
+			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e));
 		}
 	}
 
@@ -140,8 +142,7 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * (org.eclipse.jface.text.ITextViewer, boolean)
 	 */
 	public void selected(ITextViewer viewer, boolean smartToggle) {
-		if (Activator.DEBUG_PROPOSALS_PROVIDER)
-			System.out.println("XtextCompletionProposal.selected(): " + proposal.getLabel());
+		System.out.println("XtextCompletionProposal.selected(): " + proposal.getLabel());
 	}
 
 	/*
@@ -152,8 +153,7 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * (org.eclipse.jface.text.ITextViewer)
 	 */
 	public void unselected(ITextViewer viewer) {
-		if (Activator.DEBUG_PROPOSALS_PROVIDER)
-			System.out.println("XtextCompletionProposal.unselected(): " + proposal.getLabel());
+		System.out.println("XtextCompletionProposal.unselected(): " + proposal.getLabel());
 	}
 
 	/*

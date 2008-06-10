@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.ui.core.editor.BaseTextEditor;
+import org.eclipse.xtext.ui.core.editor.model.IEditorModel;
 import org.eclipse.xtext.ui.core.editor.model.IXtextEditorModelListener;
 import org.eclipse.xtext.ui.core.editor.model.XtextEditorModel;
 import org.eclipse.xtext.ui.core.editor.model.XtextEditorModelChangeEvent;
@@ -34,7 +35,7 @@ import org.eclipse.xtext.ui.core.editor.outline.provider.XtextModelLabelProvider
 public class XtextContentOutlinePage extends ContentOutlinePage implements IContentOutlinePage {
 
 	private ListenerList postSelectionChangedListeners = new ListenerList();
-	private XtextEditorModel model;
+	private IEditorModel model;
 	private IXtextEditorModelListener xtextEditorModelListener;
     private final BaseTextEditor xtextBaseEditor;
 
@@ -88,10 +89,10 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 			if (xtextEditorModelListener == null) {
 				xtextEditorModelListener= createXtextEditorModelChangeListener();
 			}
-			XtextEditorModel xtextEditorModel = (XtextEditorModel) newInput;
+			IEditorModel xtextEditorModel = (IEditorModel) newInput;
 			xtextEditorModel.addModelListener(xtextEditorModelListener);
 		} else if (!isXtextEditorModel && wasXtextEditorModel && xtextEditorModelListener != null) {
-			XtextEditorModel xtextEditorModel = (XtextEditorModel) oldInput;
+			IEditorModel xtextEditorModel = (IEditorModel) oldInput;
 			xtextEditorModel.removeModelListener(xtextEditorModelListener);
 			xtextEditorModelListener= null;
 		}
@@ -101,7 +102,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 		tree.setExpandedElements(expandedElements);
 	}
 	
-	public void setInput(XtextEditorModel model) {
+	public void setInput(IEditorModel model) {
 		this.model = model;
 		if (getTreeViewer() != null) {
 			setViewerInput(model);

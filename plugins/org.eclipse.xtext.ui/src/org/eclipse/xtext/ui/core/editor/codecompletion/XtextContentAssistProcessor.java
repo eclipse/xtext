@@ -17,6 +17,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
+import org.eclipse.xtext.ui.core.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.core.service.IProposalsProvider;
 
 /**
@@ -26,8 +27,10 @@ import org.eclipse.xtext.ui.core.service.IProposalsProvider;
 public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	private final IProposalsProvider proposalProvider;
 	private String errorMessage;
+	private final IEditorModelProvider modelProvider;
 
-	public XtextContentAssistProcessor(IProposalsProvider proposalProvider) {
+	public XtextContentAssistProcessor(IEditorModelProvider modelProvider, IProposalsProvider proposalProvider) {
+		this.modelProvider = modelProvider;
 		this.proposalProvider = proposalProvider;
 	}
 
@@ -38,18 +41,8 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	 * computeCompletionProposals(org.eclipse.jface.text.ITextViewer, int)
 	 */
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
-		List<ICompletionProposal> retVal = new ArrayList<ICompletionProposal>();
-		List<Proposal> proposals = proposalProvider.getProposals(viewer, offset);
-		if (proposals != null) {
-			for (Proposal proposal : proposals) {
-				retVal.add(createCompletionProposal(proposal, offset));
-			}
-		}
-		return retVal.toArray(new ICompletionProposal[0]);
-	}
-
-	private ICompletionProposal createCompletionProposal(Proposal proposal, int offset) {
-		return new XtextCompletionProposal(proposal, offset);
+		List<ICompletionProposal> proposals = proposalProvider.getProposals(modelProvider.getModel(), viewer, offset);
+		return proposals.toArray(new ICompletionProposal[0]);
 	}
 
 	/*
@@ -60,9 +53,8 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	 */
 	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
 		List<IContextInformation> retVal = new ArrayList<IContextInformation>();
-		for (Proposal proposal : proposalProvider.getProposals(viewer, offset)) {
-			XtextCompletionProposal xtextCP = new XtextCompletionProposal(proposal, offset);
-			retVal.add(xtextCP.getContextInformation());
+		for (ICompletionProposal proposal : proposalProvider.getProposals(modelProvider.getModel(), viewer, offset)) {
+			retVal.add(proposal.getContextInformation());
 		}
 		return retVal.toArray(new IContextInformation[0]);
 	}

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.editor.codecompletion;
+package org.eclipse.xtext.reference.ui.services.contentassist;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.viewers.StyledString;

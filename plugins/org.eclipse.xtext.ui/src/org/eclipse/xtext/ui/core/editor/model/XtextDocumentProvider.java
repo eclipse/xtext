@@ -25,7 +25,7 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 	private final ILanguageDescriptor languageDescriptor;
 
 	protected class XtextFileInfo extends FileInfo {
-		public XtextEditorModel xtextEditorModel;
+		public IEditorModel xtextEditorModel;
 
 		public XtextFileInfo() {
 		}
@@ -35,7 +35,7 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 		this.languageDescriptor = languageDescriptor;
 	}
 
-	public XtextEditorModel getModel(Object element) {
+	public IEditorModel getModel(Object element) {
 		FileInfo info = getFileInfo(element);
 		if (info instanceof XtextFileInfo) {
 			XtextFileInfo xtextFileInfo = (XtextFileInfo) info;
@@ -45,7 +45,7 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 
 	}
 
-	protected XtextEditorModel createXtextEditorModel(Object element, IDocument document, IAnnotationModel annotationModel) {
+	protected IEditorModel createXtextEditorModel(Object element, IDocument document, IAnnotationModel annotationModel) {
 		return new XtextEditorModel(document, languageDescriptor);
 	}
 
@@ -60,7 +60,7 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 
 		IDocument document = info.fTextFileBuffer.getDocument();
 
-		XtextEditorModel xtextEditorModel = createXtextEditorModel(element, document, annotationModel);
+		IEditorModel xtextEditorModel = createXtextEditorModel(element, document, annotationModel);
 		xtextEditorModel.install();
 		xtextFileInfo.xtextEditorModel = xtextEditorModel;
 
