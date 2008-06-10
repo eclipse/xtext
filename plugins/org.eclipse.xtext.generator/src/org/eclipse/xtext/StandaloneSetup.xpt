@@ -59,22 +59,27 @@ public abstract class «standaloneSetupClassFQName.toSimpleName()» {
 		}
 	}
 	
-	private static ILanguageDescriptor INSTANCE;
-	private final static Object LOCK = new Object();
-    
-    public static ILanguageDescriptor getLanguageDescriptor() {
-    	if (INSTANCE == null) {
-    		synchronized(LOCK) {
-	    		INSTANCE = LanguageDescriptorFactory.get(I«languageName()».ID);
-	    		if(INSTANCE == null) {
-	    			// TODO put super grammar
-	    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(I«languageName()».ID, I«languageName()».NAME, I«languageName()».NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
-	    		}
-    		}
-    	}
-    	return INSTANCE;
-    }
-    
+//TODO private constructor?
+//	private «standaloneSetupClassFQName.toSimpleName()»() {
+//	}
+
+	private static class InstanceHolder {
+		private static ILanguageDescriptor INSTANCE;
+
+		static {
+			INSTANCE = LanguageDescriptorFactory.get(I«languageName()».ID);
+			if (INSTANCE == null) {
+				// TODO put super grammar
+				INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(I«languageName()».ID,
+						I«languageName()».NAME, I«languageName()».NAMESPACE, XtextBuiltinStandaloneSetup
+								.getLanguageDescriptor());
+			}
+		}
+	}
+
+	public static ILanguageDescriptor getLanguageDescriptor() {
+		return InstanceHolder.INSTANCE;
+	}
 }
 «ENDFILE»
 «ENDDEFINE»
