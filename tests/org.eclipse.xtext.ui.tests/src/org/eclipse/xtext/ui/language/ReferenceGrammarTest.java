@@ -32,7 +32,7 @@ import org.eclipse.xtext.ui.core.editor.utils.StringInputStream;
 public class ReferenceGrammarTest extends TestCase {
 
 	{
-		ReferenceGrammarStandaloneSetup.doSetup();
+	//	ReferenceGrammarStandaloneSetup.doSetup();
 	}
 
 	ILanguageDescriptor languageDescriptor = ReferenceGrammarStandaloneSetup.getLanguageDescriptor();

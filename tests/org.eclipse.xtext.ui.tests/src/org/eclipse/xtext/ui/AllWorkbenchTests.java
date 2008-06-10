@@ -11,17 +11,18 @@ package org.eclipse.xtext.ui;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.eclipse.xtext.ui.editor.EditorTest;
+
 /**
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class AllTests {
+public class AllWorkbenchTests {
 
     public static Test suite() {
         TestSuite suite = new TestSuite("Test for org.eclipse.xtext.ui");
         //$JUnit-BEGIN$
-        suite.addTest(AllHeadlessTests.suite());
-        suite.addTest(AllWorkbenchTests.suite());
+        suite.addTestSuite(EditorTest.class);
         //$JUnit-END$
         return suite;
     }

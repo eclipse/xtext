@@ -6,24 +6,25 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui;
+package org.eclipse.xtext.ui.services;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.service.InjectedService;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class AllTests {
+public class SampleServiceDependentClass {
 
-    public static Test suite() {
-        TestSuite suite = new TestSuite("Test for org.eclipse.xtext.ui");
-        //$JUnit-BEGIN$
-        suite.addTest(AllHeadlessTests.suite());
-        suite.addTest(AllWorkbenchTests.suite());
-        //$JUnit-END$
-        return suite;
+    private IParser parser;
+
+    @InjectedService
+    public void setParser(IParser parser) {
+        this.parser = parser;
     }
-
+    
+    public IParser getParser() {
+        return parser;
+    }
 }
