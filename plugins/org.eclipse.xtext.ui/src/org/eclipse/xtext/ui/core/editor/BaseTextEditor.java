@@ -77,7 +77,10 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
 		// Error marker
-		getModel().addModelListener(new XtextProblemMarkerCreator(getResource()));
+		IResource resource = getResource();
+		if (resource != null && isEditable() && getModel() != null) {
+			getModel().addModelListener(new XtextProblemMarkerCreator(resource));
+		}
 	}
 
 	private IResource getResource() {
