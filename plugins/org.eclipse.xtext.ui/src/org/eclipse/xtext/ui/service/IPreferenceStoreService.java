@@ -9,7 +9,6 @@
 package org.eclipse.xtext.ui.service;
 
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
-import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
 
 /**
@@ -18,7 +17,4 @@ import org.eclipse.xtext.service.ILanguageService;
  */
 public interface IPreferenceStoreService extends ILanguageService {
 	IPersistentPreferenceStore getPersitablePreferenceStore();
-
-	void setLanguageDescriptor(ILanguageDescriptor languageDescriptor);
-
 }

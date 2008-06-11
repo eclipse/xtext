@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.service.IPreferenceStoreService;
 
 /**
@@ -21,43 +22,42 @@ import org.eclipse.xtext.ui.service.IPreferenceStoreService;
 public class BuildInPreferenceStore implements IPreferenceStoreService {
 	/* Tokens */
 	private static final String COLOR_SUFIX = "color";
-	private static final String BACKGROUNDCOLOR_SUFIX = "backgroundcolor";
+	private static final String BACKGROUNDCOLOR_SUFIX = "bgColor";
 	private static final String STYLE_SUFIX = "style";
 	private static final String FONT_SUFIX = "font";
 
-	private ILanguageDescriptor languageDescriptor;
-
-	public static String getTokenColorPreferenceKey(String tokenType) {
-		return tokenType + COLOR_SUFIX;
+	public static String getTokenColorPreferenceKey(ILanguageDescriptor languageDescriptor, String tokenType) {
+		return languageDescriptor.getId() + tokenType + COLOR_SUFIX;
 	}
 
-	public static String getTokenBackgroundColorPreferenceKey(String tokenType) {
-		return tokenType + BACKGROUNDCOLOR_SUFIX;
+	public static String getTokenBackgroundColorPreferenceKey(ILanguageDescriptor languageDescriptor, String tokenType) {
+		return languageDescriptor.getId() + tokenType + BACKGROUNDCOLOR_SUFIX;
 	}
 
-	public static String getTokenFontPreferenceKey(String tokenType) {
-		return tokenType + FONT_SUFIX;
+	public static String getTokenFontPreferenceKey(ILanguageDescriptor languageDescriptor, String tokenType) {
+		return languageDescriptor.getId() + tokenType + FONT_SUFIX;
 	}
 
-	public static String getTokenStylePreferenceKey(String tokenType) {
-		return tokenType + STYLE_SUFIX;
+	public static String getTokenStylePreferenceKey(ILanguageDescriptor languageDescriptor, String tokenType) {
+		return languageDescriptor.getId() + tokenType + STYLE_SUFIX;
 	}
 
 	private IPersistentPreferenceStore preferenceStore = null;
 
 	public IPersistentPreferenceStore getPersitablePreferenceStore() {
 		if (preferenceStore == null) {
-			preferenceStore = new ScopedPreferenceStore(new InstanceScope(), getLanguageDescriptor().getNameSpace());
+			preferenceStore = new ScopedPreferenceStore(new InstanceScope(), qualifier());
 		}
 		return preferenceStore;
 	}
 
-	public ILanguageDescriptor getLanguageDescriptor() {
-		return languageDescriptor;
-	}
-
-	public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
-		this.languageDescriptor = languageDescriptor;
+	/**
+	 * Subclasses can overwrite
+	 * 
+	 * @return qualifier for internal scoped preference store
+	 */
+	protected String qualifier() {
+		return Activator.PLUGIN_ID;
 	}
 
 }
