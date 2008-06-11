@@ -40,12 +40,12 @@ public abstract class SimpleTest2StandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerService(languageDescriptor, new SimpleTest2GrammarAccess(), IGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, new SimpleTest2MetamodelAccess(), IMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, new GenericEcoreElementFactory(), IElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, new SimpleTest2Parser(), IParser.class);
-			ServiceRegistry.registerService(languageDescriptor, new SimpleTest2ResourceFactory(), IResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, new SimpleTest2ParseTreeConstructor(), IParseTreeConstructor.class);
+			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, SimpleTest2GrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, SimpleTest2MetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IParser.class, SimpleTest2Parser.class);
+			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, SimpleTest2ResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, SimpleTest2ParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
@@ -53,20 +53,25 @@ public abstract class SimpleTest2StandaloneSetup {
 		}
 	}
 	
-	private static ILanguageDescriptor INSTANCE;
-	private final static Object LOCK = new Object();
-    
-    public static ILanguageDescriptor getLanguageDescriptor() {
-    	if (INSTANCE == null) {
-    		synchronized(LOCK) {
-	    		INSTANCE = LanguageDescriptorFactory.get(ISimpleTest2.ID);
-	    		if(INSTANCE == null) {
-	    			// TODO put super grammar
-	    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(ISimpleTest2.ID, ISimpleTest2.NAME, ISimpleTest2.NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
-	    		}
-    		}
-    	}
-    	return INSTANCE;
-    }
-    
+//TODO private constructor?
+//	private SimpleTest2StandaloneSetup() {
+//	}
+
+	private static class InstanceHolder {
+		private static ILanguageDescriptor INSTANCE;
+
+		static {
+			INSTANCE = LanguageDescriptorFactory.get(ISimpleTest2.ID);
+			if (INSTANCE == null) {
+				// TODO put super grammar
+				INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(ISimpleTest2.ID,
+						ISimpleTest2.NAME, ISimpleTest2.NAMESPACE, XtextBuiltinStandaloneSetup
+								.getLanguageDescriptor());
+			}
+		}
+	}
+
+	public static ILanguageDescriptor getLanguageDescriptor() {
+		return InstanceHolder.INSTANCE;
+	}
 }

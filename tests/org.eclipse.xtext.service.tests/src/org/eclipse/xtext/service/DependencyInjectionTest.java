@@ -81,7 +81,7 @@ public class DependencyInjectionTest extends AbstractServiceTest {
     }
 
    public void testNonServiceInjection() throws Exception {
-       ServiceRegistry.registerService(myLanguageDescriptor, new InjectedLanguageService(), InjectedLanguageService.class);
+       ServiceRegistry.registerService(myLanguageDescriptor, InjectedLanguageService.class, InjectedLanguageService.class);
        SamplePatient samplePatient = new SamplePatient();
        ServiceRegistry.injectServices(myLanguageDescriptor, samplePatient);
    }

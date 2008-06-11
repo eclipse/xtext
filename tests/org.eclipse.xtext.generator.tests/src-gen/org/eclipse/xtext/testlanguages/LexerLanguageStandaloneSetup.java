@@ -40,12 +40,12 @@ public abstract class LexerLanguageStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerService(languageDescriptor, new LexerLanguageGrammarAccess(), IGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, new LexerLanguageMetamodelAccess(), IMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, new GenericEcoreElementFactory(), IElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, new LexerLanguageParser(), IParser.class);
-			ServiceRegistry.registerService(languageDescriptor, new LexerLanguageResourceFactory(), IResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, new LexerLanguageParseTreeConstructor(), IParseTreeConstructor.class);
+			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, LexerLanguageGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, LexerLanguageMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IParser.class, LexerLanguageParser.class);
+			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, LexerLanguageResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, LexerLanguageParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
@@ -53,20 +53,25 @@ public abstract class LexerLanguageStandaloneSetup {
 		}
 	}
 	
-	private static ILanguageDescriptor INSTANCE;
-	private final static Object LOCK = new Object();
-    
-    public static ILanguageDescriptor getLanguageDescriptor() {
-    	if (INSTANCE == null) {
-    		synchronized(LOCK) {
-	    		INSTANCE = LanguageDescriptorFactory.get(ILexerLanguage.ID);
-	    		if(INSTANCE == null) {
-	    			// TODO put super grammar
-	    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(ILexerLanguage.ID, ILexerLanguage.NAME, ILexerLanguage.NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
-	    		}
-    		}
-    	}
-    	return INSTANCE;
-    }
-    
+//TODO private constructor?
+//	private LexerLanguageStandaloneSetup() {
+//	}
+
+	private static class InstanceHolder {
+		private static ILanguageDescriptor INSTANCE;
+
+		static {
+			INSTANCE = LanguageDescriptorFactory.get(ILexerLanguage.ID);
+			if (INSTANCE == null) {
+				// TODO put super grammar
+				INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(ILexerLanguage.ID,
+						ILexerLanguage.NAME, ILexerLanguage.NAMESPACE, XtextBuiltinStandaloneSetup
+								.getLanguageDescriptor());
+			}
+		}
+	}
+
+	public static ILanguageDescriptor getLanguageDescriptor() {
+		return InstanceHolder.INSTANCE;
+	}
 }

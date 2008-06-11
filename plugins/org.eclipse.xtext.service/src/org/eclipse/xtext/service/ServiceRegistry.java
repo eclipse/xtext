@@ -17,6 +17,7 @@ import java.util.Set;
 
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.xtext.service.internal.GenericLanguageServiceFactory;
 import org.eclipse.xtext.util.Pair;
 
 /**
@@ -26,25 +27,25 @@ import org.eclipse.xtext.util.Pair;
  */
 public class ServiceRegistry {
 
+    public static final int PRIORITY_MIN = Integer.MIN_VALUE;
+    public static final int PRIORITY_NORMAL = 0;
+    public static final int PRIORITY_MAX = Integer.MAX_VALUE;
+
     private static volatile boolean isFrozen = false;
 
     private static class ServiceKey extends Pair<ILanguageDescriptor, Class<? extends ILanguageService>> {
         public ServiceKey(ILanguageDescriptor firstElement, Class<? extends ILanguageService> secondElement) {
             super(firstElement, secondElement);
         }
-    };
-
-    private static class RegistryElement extends Pair<Integer, Object> {
-        public RegistryElement(Integer firstElement, Object secondElement) {
-            super(firstElement, secondElement);
-        }
     }
 
-    private static Map<ServiceKey, RegistryElement> factoryMap = new HashMap<ServiceKey, RegistryElement>();
+    private static class Entry {
+        int priority;
+        ILanguageServiceFactory factory;
+        ILanguageService cachedService;
+    }
 
-    public static final int PRIORITY_MIN = Integer.MIN_VALUE;
-    public static final int PRIORITY_NORMAL = 0;
-    public static final int PRIORITY_MAX = Integer.MAX_VALUE;
+    private static Map<ServiceKey, Entry> entryMap = new HashMap<ServiceKey, Entry>();
 
     @SuppressWarnings("unchecked")
     public static <T extends ILanguageService> T getService(ILanguageDescriptor languageDescriptor, Class<T> serviceInterface) {
@@ -53,28 +54,55 @@ public class ServiceRegistry {
         return (T) service;
     }
 
-    public static <T extends ILanguageService> Object registerFactory(ILanguageDescriptor languageDescriptor,
+    public static <T extends ILanguageService> ILanguageServiceFactory registerFactory(ILanguageDescriptor languageDescriptor,
             ILanguageServiceFactory factory, int priority) {
         Class<? extends ILanguageService> serviceInterface = factory.getServiceInterface();
         if (serviceInterface == null) {
             throw new IllegalArgumentException("getServiceClass() must not be null");
         }
-        return registerServiceOrFactory(languageDescriptor, serviceInterface, factory, priority);
+        return registerFactory(languageDescriptor, serviceInterface, factory, priority);
+    }
+
+    /**
+     * Registers a factory for the given <code>serviceClass</code> to the
+     * <code>languageDescriptor</code> <code>serviceInterface</code>. The given
+     * class must be public. If it is a nested class, it also has to be static.
+     * Anonymous classes won't work.
+     * 
+     * @param <
+     *      T> the serviceInterface
+     * @param languageDescriptor
+     * @param serviceInterface
+     * @param serviceClass
+     * @return
+     */
+    public static <T extends ILanguageService> Object registerService(ILanguageDescriptor languageDescriptor, Class<T> serviceInterface,
+            Class<? extends ILanguageService> serviceClass) {
+        return registerFactory(languageDescriptor, new GenericLanguageServiceFactory(serviceInterface, serviceClass));
+    }
+
+    /**
+     * Registers a factory for the given <code>serviceClass</code> to the
+     * <code>languageDescriptor</code> <code>serviceInterface</code>. The given
+     * class must be public. If it is a nested class, it also has to be static.
+     * Anonymous classes won't work.
+     * 
+     * @param <
+     *      T> the serviceInterface
+     * @param languageDescriptor
+     * @param serviceInterface
+     * @param serviceClass
+     * @param priority
+     * @return
+     */
+    public static <T extends ILanguageService> Object registerService(ILanguageDescriptor languageDescriptor, Class<T> serviceInterface,
+            Class<? extends ILanguageService> serviceClass, int priority) {
+        return registerFactory(languageDescriptor, new GenericLanguageServiceFactory(serviceInterface, serviceClass), priority);
     }
 
     public static <T extends ILanguageService> Object registerFactory(ILanguageDescriptor languageDescriptor,
             ILanguageServiceFactory factory) {
         return registerFactory(languageDescriptor, factory, PRIORITY_NORMAL);
-    }
-
-    public static <T extends ILanguageService> Object registerService(ILanguageDescriptor languageDescriptor, ILanguageService service,
-            Class<? extends ILanguageService> serviceInterface) {
-        return registerService(languageDescriptor, service, serviceInterface, PRIORITY_NORMAL);
-    }
-
-    public static <T extends ILanguageService> Object registerService(ILanguageDescriptor languageDescriptor, ILanguageService service,
-            Class<? extends ILanguageService> serviceInterface, int priority) {
-        return registerServiceOrFactory(languageDescriptor, serviceInterface, service, priority);
     }
 
     @SuppressWarnings("unchecked")
@@ -88,7 +116,8 @@ public class ServiceRegistry {
         ILanguageService service = initializedServices.get(serviceInterface);
         ILanguageDescriptor tempDesc = languageDescriptor;
         while (service == null && tempDesc != null) {
-            service = ServiceRegistry.internalGetService(tempDesc, (Class<? extends ILanguageService>) serviceInterface, initializedServices);
+            service = ServiceRegistry.internalGetService(tempDesc, languageDescriptor, (Class<? extends ILanguageService>) serviceInterface,
+                    initializedServices);
             if (service == null) {
                 tempDesc = tempDesc.getSuperLanguage();
             } else {
@@ -108,51 +137,60 @@ public class ServiceRegistry {
     }
 
     @SuppressWarnings("unchecked")
-    private static <T extends ILanguageService> T internalGetService(ILanguageDescriptor languageDescriptor, Class<T> serviceInterface,
-            Map<Class<?>, ILanguageService> initializedServices) {
-        if (languageDescriptor == null || serviceInterface == null) {
+    private static <T extends ILanguageService> T internalGetService(ILanguageDescriptor currentLanguageDescriptor,
+            ILanguageDescriptor realLangugeDescriptor, Class<T> serviceInterface, Map<Class<?>, ILanguageService> initializedServices) {
+        if (currentLanguageDescriptor == null || serviceInterface == null) {
             throw new IllegalArgumentException("Neither languageDescriptor nor serviceInterface can be null");
         }
         try {
-            ServiceKey key = createKey(languageDescriptor, serviceInterface);
-            RegistryElement registeredElement = factoryMap.get(key);
-            if (registeredElement == null) {
+            ServiceKey key = createKey(currentLanguageDescriptor, serviceInterface);
+            Entry entry = entryMap.get(key);
+            if (entry == null) {
                 return null;
             }
-            Object registered = registeredElement.getSecondElement();
             T languageService;
-            if (registered instanceof ILanguageServiceFactory) {
-                ILanguageServiceFactory languageServiceFactory = (ILanguageServiceFactory) registered;
-                languageService = (T) languageServiceFactory.createLanguageService();
-                registeredElement.setSecondElement(languageService);
+            if (entry.cachedService != null) {
+                languageService = (T) entry.cachedService;
             } else {
-                languageService = (T) registered;
+                languageService = (T) entry.factory.createLanguageService();
+                if(currentLanguageDescriptor != realLangugeDescriptor) {
+                    Entry newEntry = new Entry();
+                    newEntry.cachedService = languageService;
+                    newEntry.factory = entry.factory;
+                    newEntry.priority = entry.priority;
+                    ServiceKey newServiceKey = new ServiceKey(realLangugeDescriptor, serviceInterface);
+                    entryMap.put(newServiceKey, newEntry);
+                } else {
+                    entry.cachedService = languageService;
+                }
             }
             initializedServices.put(serviceInterface, languageService);
             return languageService;
         } catch (Exception exc) {
             LogFactory.getLog(ServiceRegistry.class).error(
-                    "Error getting service " + serviceInterface.getSimpleName() + " for " + languageDescriptor, exc);
+                    "Error getting service " + serviceInterface.getSimpleName() + " for " + currentLanguageDescriptor, exc);
         }
         return null;
     }
 
-    private static Object registerServiceOrFactory(ILanguageDescriptor languageDescriptor,
-            Class<? extends ILanguageService> serviceInterface, Object serviceOrFactory, int priority) {
+    private static ILanguageServiceFactory registerFactory(ILanguageDescriptor languageDescriptor,
+            Class<? extends ILanguageService> serviceInterface, ILanguageServiceFactory serviceFactory, int priority) {
         if (isFrozen) {
             throw new IllegalStateException("No more service registrations allowed after first service has been looked up");
         }
-        if (languageDescriptor == null || serviceOrFactory == null) {
+        if (languageDescriptor == null || serviceFactory == null) {
             throw new IllegalArgumentException("Neither languageDescriptor nor service can be null");
         }
-        synchronized (factoryMap) {
+        synchronized (entryMap) {
             ServiceKey serviceKey = new ServiceKey(languageDescriptor, serviceInterface);
-            RegistryElement registryElement = factoryMap.get(serviceKey);
-            if (registryElement == null || registryElement.getFirstElement() <= priority) {
-                Object returnValue = (registryElement != null) ? registryElement.getSecondElement() : null;
-                RegistryElement newRegistryElement = new RegistryElement(priority, serviceOrFactory);
-                factoryMap.put(serviceKey, newRegistryElement);
-                return returnValue;
+            Entry entry = entryMap.get(serviceKey);
+            if (entry == null || entry.priority <= priority) {
+                ILanguageServiceFactory oldFactory = (entry != null) ? entry.factory : null;
+                Entry newEntry = new Entry();
+                newEntry.priority = priority;
+                newEntry.factory = serviceFactory;
+                entryMap.put(serviceKey, newEntry);
+                return oldFactory;
             }
         }
         return null;
@@ -200,16 +238,16 @@ public class ServiceRegistry {
     public static void freeze() {
         isFrozen = true;
     }
-    
+
     public static void resetInternal() {
-        synchronized (factoryMap) {
-            factoryMap.clear();
+        synchronized (entryMap) {
+            entryMap.clear();
             isFrozen = false;
         }
     }
 
     public static void dump() {
-        Set<ServiceKey> keySet = factoryMap.keySet();
+        Set<ServiceKey> keySet = entryMap.keySet();
         for (ServiceKey pair : keySet) {
             System.out.println(pair.getFirstElement() + " " + pair.getSecondElement().getSimpleName());
         }
@@ -219,11 +257,9 @@ public class ServiceRegistry {
         Map<Class<?>, ILanguageService> initializedServices = new HashMap<Class<?>, ILanguageService>();
         try {
             injectDependencies(languageDescriptor, patient, initializedServices);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new WrappedException("Error injecting dependencies into "
-                    + (patient != null ? patient.getClass().getSimpleName() : "null") + " for " + languageDescriptor,
-                    e);
+                    + (patient != null ? patient.getClass().getSimpleName() : "null") + " for " + languageDescriptor, e);
 
         }
     }

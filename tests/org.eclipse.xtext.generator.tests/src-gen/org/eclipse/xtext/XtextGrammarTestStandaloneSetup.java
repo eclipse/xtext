@@ -40,12 +40,12 @@ public abstract class XtextGrammarTestStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerService(languageDescriptor, new XtextGrammarTestGrammarAccess(), IGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, new XtextGrammarTestMetamodelAccess(), IMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, new GenericEcoreElementFactory(), IElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, new XtextGrammarTestParser(), IParser.class);
-			ServiceRegistry.registerService(languageDescriptor, new XtextGrammarTestResourceFactory(), IResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, new XtextGrammarTestParseTreeConstructor(), IParseTreeConstructor.class);
+			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, XtextGrammarTestGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, XtextGrammarTestMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IParser.class, XtextGrammarTestParser.class);
+			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, XtextGrammarTestResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, XtextGrammarTestParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
@@ -53,20 +53,25 @@ public abstract class XtextGrammarTestStandaloneSetup {
 		}
 	}
 	
-	private static ILanguageDescriptor INSTANCE;
-	private final static Object LOCK = new Object();
-    
-    public static ILanguageDescriptor getLanguageDescriptor() {
-    	if (INSTANCE == null) {
-    		synchronized(LOCK) {
-	    		INSTANCE = LanguageDescriptorFactory.get(IXtextGrammarTest.ID);
-	    		if(INSTANCE == null) {
-	    			// TODO put super grammar
-	    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IXtextGrammarTest.ID, IXtextGrammarTest.NAME, IXtextGrammarTest.NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
-	    		}
-    		}
-    	}
-    	return INSTANCE;
-    }
-    
+//TODO private constructor?
+//	private XtextGrammarTestStandaloneSetup() {
+//	}
+
+	private static class InstanceHolder {
+		private static ILanguageDescriptor INSTANCE;
+
+		static {
+			INSTANCE = LanguageDescriptorFactory.get(IXtextGrammarTest.ID);
+			if (INSTANCE == null) {
+				// TODO put super grammar
+				INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IXtextGrammarTest.ID,
+						IXtextGrammarTest.NAME, IXtextGrammarTest.NAMESPACE, XtextBuiltinStandaloneSetup
+								.getLanguageDescriptor());
+			}
+		}
+	}
+
+	public static ILanguageDescriptor getLanguageDescriptor() {
+		return InstanceHolder.INSTANCE;
+	}
 }

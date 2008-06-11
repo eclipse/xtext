@@ -40,12 +40,12 @@ public abstract class SimpleExpressionsStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerService(languageDescriptor, new SimpleExpressionsGrammarAccess(), IGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, new SimpleExpressionsMetamodelAccess(), IMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, new GenericEcoreElementFactory(), IElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, new SimpleExpressionsParser(), IParser.class);
-			ServiceRegistry.registerService(languageDescriptor, new SimpleExpressionsResourceFactory(), IResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, new SimpleExpressionsParseTreeConstructor(), IParseTreeConstructor.class);
+			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, SimpleExpressionsGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, SimpleExpressionsMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IParser.class, SimpleExpressionsParser.class);
+			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, SimpleExpressionsResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, SimpleExpressionsParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
@@ -53,20 +53,25 @@ public abstract class SimpleExpressionsStandaloneSetup {
 		}
 	}
 	
-	private static ILanguageDescriptor INSTANCE;
-	private final static Object LOCK = new Object();
-    
-    public static ILanguageDescriptor getLanguageDescriptor() {
-    	if (INSTANCE == null) {
-    		synchronized(LOCK) {
-	    		INSTANCE = LanguageDescriptorFactory.get(ISimpleExpressions.ID);
-	    		if(INSTANCE == null) {
-	    			// TODO put super grammar
-	    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(ISimpleExpressions.ID, ISimpleExpressions.NAME, ISimpleExpressions.NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
-	    		}
-    		}
-    	}
-    	return INSTANCE;
-    }
-    
+//TODO private constructor?
+//	private SimpleExpressionsStandaloneSetup() {
+//	}
+
+	private static class InstanceHolder {
+		private static ILanguageDescriptor INSTANCE;
+
+		static {
+			INSTANCE = LanguageDescriptorFactory.get(ISimpleExpressions.ID);
+			if (INSTANCE == null) {
+				// TODO put super grammar
+				INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(ISimpleExpressions.ID,
+						ISimpleExpressions.NAME, ISimpleExpressions.NAMESPACE, XtextBuiltinStandaloneSetup
+								.getLanguageDescriptor());
+			}
+		}
+	}
+
+	public static ILanguageDescriptor getLanguageDescriptor() {
+		return InstanceHolder.INSTANCE;
+	}
 }
