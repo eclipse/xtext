@@ -21,8 +21,8 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.texteditor.ContentAssistAction;
-import org.eclipse.xtext.ui.core.editor.BaseTextEditor;
-import org.eclipse.xtext.ui.core.internal.Activator;
+import org.eclipse.xtext.ui.editor.BaseTextEditor;
+import org.eclipse.xtext.ui.internal.Activator;
 
 /**
  * @author Dennis Hübner - Initial contribution and API

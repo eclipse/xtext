@@ -63,28 +63,28 @@
    <extension
          point="org.eclipse.xtext.ui.syntaxColorer">
       <syntaxColorer
-            class="org.eclipse.xtext.ui.core.service.impl.BuildInSyntaxColorer"
+            class="org.eclipse.xtext.ui.service.impl.BuildInSyntaxColorer"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </syntaxColorer>
    </extension>
    <extension
          point="org.eclipse.xtext.ui.tokenTypeDef">
       <tokenTypeDef
-            class="org.eclipse.xtext.ui.core.tokentype.BuildInTokenTypeDef"
+            class="org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </tokenTypeDef>
    </extension>
    <extension
          point="org.eclipse.xtext.ui.preferenceStore">
       <preferenceStore
-            class="org.eclipse.xtext.ui.core.service.impl.BuildInPreferenceStore"
+            class="org.eclipse.xtext.ui.service.impl.BuildInPreferenceStore"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </preferenceStore>
    </extension>
    <extension
          point="org.eclipse.xtext.ui.outlineProvider">
       <outlineProvider
-            class="org.eclipse.xtext.ui.core.service.impl.BuiltInOutlineProvider"
+            class="org.eclipse.xtext.ui.service.impl.BuiltInOutlineProvider"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </outlineProvider>
    </extension>

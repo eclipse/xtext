@@ -20,8 +20,8 @@ import org.eclipse.xtext.reference.ui.services.contentassist.Proposal;
 import org.eclipse.xtext.reference.ui.services.contentassist.XtextCompletionProposal;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.ui.core.editor.model.IEditorModel;
-import org.eclipse.xtext.ui.core.service.IProposalsProvider;
+import org.eclipse.xtext.ui.editor.model.IEditorModel;
+import org.eclipse.xtext.ui.service.IProposalsProvider;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -35,7 +35,7 @@ public class ReferenceProposalsProvider implements IProposalsProvider {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.eclipse.xtext.ui.core.service.IProposalsProvider#getProposals(org
+	 * org.eclipse.xtext.ui.service.IProposalsProvider#getProposals(org
 	 * .eclipse.jface.text.ITextViewer, int)
 	 */
 	public List<ICompletionProposal> getProposals(IEditorModel model, ITextViewer viewer, int offset) {

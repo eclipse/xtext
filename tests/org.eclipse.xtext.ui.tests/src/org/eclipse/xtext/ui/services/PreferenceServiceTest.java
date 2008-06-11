@@ -9,7 +9,7 @@
 package org.eclipse.xtext.ui.services;
 
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
-import org.eclipse.xtext.ui.core.service.IPreferenceStoreService;
+import org.eclipse.xtext.ui.service.IPreferenceStoreService;
 
 /**
  * @author Dennis Hübner - Initial contribution and API

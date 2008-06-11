@@ -16,7 +16,7 @@ import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.ui.core.editor.utils.StringInputStream;
+import org.eclipse.xtext.ui.editor.utils.StringInputStream;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -45,6 +45,6 @@ public abstract class AbstractServiceTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		// Activate UI plugin
-		Class.forName("org.eclipse.xtext.ui.core.editor.BaseTextEditor");
+		Class.forName("org.eclipse.xtext.ui.editor.BaseTextEditor");
 	}
 }

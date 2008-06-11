@@ -13,7 +13,7 @@ import junit.framework.TestCase;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
+import org.eclipse.xtext.ui.service.ISyntaxColorer;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -22,7 +22,7 @@ import org.eclipse.xtext.ui.core.service.ISyntaxColorer;
 public class ServiceFactoryTest extends TestCase {
 
 	public void testGetSyntaxColorerHappyCase() throws ClassNotFoundException {
-		Class.forName("org.eclipse.xtext.ui.core.editor.BaseTextEditor");
+		Class.forName("org.eclipse.xtext.ui.editor.BaseTextEditor");
 		ILanguageDescriptor language = LanguageDescriptorFactory.get("org.eclipse.xtext.ui.tests.dummylanguage");
 		ISyntaxColorer syntaxColorer = ServiceRegistry.getService(language, ISyntaxColorer.class);
 		assertNotNull(syntaxColorer);

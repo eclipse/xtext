@@ -9,8 +9,8 @@
 package org.eclipse.xtext.ui;
 
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
-import org.eclipse.xtext.ui.core.service.impl.BuildInSyntaxColorer;
+import org.eclipse.xtext.ui.editor.utils.TextStyle;
+import org.eclipse.xtext.ui.service.impl.BuildInSyntaxColorer;
 
 /**
  * @author Peter Friese - Initial contribution and API
