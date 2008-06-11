@@ -41,6 +41,8 @@ public class XtextEditorModel implements IEditorModel {
 
 		public void handleParserError(IParseError error) {
 			// does nothing
+			if (Activator.DEBUGING)
+				System.out.println("XtextEditorModel#0.handleParserError(): " + error.getMessage());
 		}
 	};
 

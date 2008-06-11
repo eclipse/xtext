@@ -23,19 +23,15 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
  * 
  */
 public class XtextMarkerManager {
-	private static final String XTEXT_PARSEERROR_MARKER_TYPE = Activator.PLUGIN_ID
-			+ ".problemmarker";
+	private static final String XTEXT_PARSEERROR_MARKER_TYPE = Activator.PLUGIN_ID + ".problemmarker";
 
-	public static final void clearXtextMarker(final IResource resource,
-			IProgressMonitor monitor) {
+	public static final void clearXtextMarker(final IResource resource, IProgressMonitor monitor) {
 		checkResource(resource);
 		run(new WorkspaceModifyOperation() {
 			@Override
-			protected void execute(final IProgressMonitor monitor)
-					throws CoreException, InvocationTargetException,
+			protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
 					InterruptedException {
-				resource.deleteMarkers(XTEXT_PARSEERROR_MARKER_TYPE, true,
-						IResource.DEPTH_INFINITE);
+				resource.deleteMarkers(XTEXT_PARSEERROR_MARKER_TYPE, true, IResource.DEPTH_INFINITE);
 			}
 
 		}, monitor);
@@ -44,33 +40,31 @@ public class XtextMarkerManager {
 
 	private static void checkResource(final IResource resource) {
 		Assert.isLegal(resource != null);
-		Assert.isLegal(resource.exists(),
-				"Couldn't handle Marker for a non existing resource '"
-						+ resource.getFullPath() + "'");
+		Assert.isLegal(resource.exists(), "Can't handle Marker for a non existing resource '" + resource.getFullPath()
+				+ "'");
+		Assert.isLegal(!resource.getResourceAttributes().isReadOnly(), "Can't handle Marker for read only resource'"
+				+ resource.getFullPath() + "'");
 	}
 
-	private static void run(WorkspaceModifyOperation workspaceModifyOperation,
-			IProgressMonitor monitor) {
+	private static void run(WorkspaceModifyOperation workspaceModifyOperation, IProgressMonitor monitor) {
 		try {
 			workspaceModifyOperation.run(monitor);
 
-		} catch (Exception ce) {
+		}
+		catch (Exception ce) {
 			CoreLog.logError(ce);
 		}
 	}
 
-	public static void createMarker(final IResource resource,
-			final Map<String, Object> markerAttributes, IProgressMonitor monitor) {
+	public static void createMarker(final IResource resource, final Map<String, Object> markerAttributes,
+			IProgressMonitor monitor) {
 		checkResource(resource);
 		run(new WorkspaceModifyOperation() {
 			@Override
-			protected void execute(final IProgressMonitor monitor)
-					throws CoreException, InvocationTargetException,
+			protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
 					InterruptedException {
-				IMarker marker = resource
-						.createMarker(XTEXT_PARSEERROR_MARKER_TYPE);
-				markerAttributes.put(IMarker.LOCATION, resource.getFullPath()
-						.toString());
+				IMarker marker = resource.createMarker(XTEXT_PARSEERROR_MARKER_TYPE);
+				markerAttributes.put(IMarker.LOCATION, resource.getFullPath().toString());
 				marker.setAttributes(markerAttributes);
 			}
 		}, monitor);
