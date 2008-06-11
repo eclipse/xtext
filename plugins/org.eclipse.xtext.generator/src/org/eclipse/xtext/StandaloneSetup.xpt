@@ -51,7 +51,7 @@ public abstract class «standaloneSetupClassFQName.toSimpleName()» {
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
 			«FOREACH genModel().services AS s-»
-			ServiceRegistry.registerService(languageDescriptor, new «s.genClassFQName.toSimpleName()»(), «s.serviceInterfaceFQName.toSimpleName()».class);
+			ServiceRegistry.registerService(languageDescriptor, «s.serviceInterfaceFQName.toSimpleName()».class, «s.genClassFQName.toSimpleName()».class);
 			«ENDFOREACH»
 			// register resource factory to EMF
 			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
