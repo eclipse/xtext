@@ -14,18 +14,18 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.eclipse.ui.views;bundle-version="3.3.0",
  org.eclipse.emf.ecore.edit;bundle-version="2.3.1",
  org.eclipse.emf.edit.ui;bundle-version="2.3.1"
-Bundle-Activator: org.eclipse.xtext.ui.core.internal.Activator
-Export-Package: org.eclipse.xtext.ui.core.editor,
- org.eclipse.xtext.ui.core.editor.codecompletion,
- org.eclipse.xtext.ui.core.editor.model,
- org.eclipse.xtext.ui.core.editor.outline,
- org.eclipse.xtext.ui.core.editor.outline.provider,
- org.eclipse.xtext.ui.core.editor.utils,
- org.eclipse.xtext.ui.core.internal;x-friends:="org.eclipse.xtext.ui.tests",
- org.eclipse.xtext.ui.core.service,
- org.eclipse.xtext.ui.core.service.impl,
- org.eclipse.xtext.ui.core.tokentype,
- org.eclipse.xtext.ui.core.util
+Bundle-Activator: org.eclipse.xtext.ui.internal.Activator
+Export-Package: org.eclipse.xtext.ui.editor,
+ org.eclipse.xtext.ui.editor.codecompletion,
+ org.eclipse.xtext.ui.editor.model,
+ org.eclipse.xtext.ui.editor.outline,
+ org.eclipse.xtext.ui.editor.outline.provider,
+ org.eclipse.xtext.ui.editor.utils,
+ org.eclipse.xtext.ui.internal;x-friends:="org.eclipse.xtext.ui.tests",
+ org.eclipse.xtext.ui.service,
+ org.eclipse.xtext.ui.service.impl,
+ org.eclipse.xtext.ui.tokentype,
+ org.eclipse.xtext.ui.util
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Eclipse-BuddyPolicy: registered

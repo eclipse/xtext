@@ -12,10 +12,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.core.editor.utils.StringInputStream;
-import org.eclipse.xtext.ui.core.service.ITokenTypeDefService;
-import org.eclipse.xtext.ui.core.tokentype.BuildInTokenTypeDef;
-import org.eclipse.xtext.ui.core.tokentype.ITokenTypeDef;
+import org.eclipse.xtext.ui.editor.utils.StringInputStream;
+import org.eclipse.xtext.ui.service.ITokenTypeDefService;
+import org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef;
+import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 
 /**
  * @author Dennis Hübner - Initial contribution and API

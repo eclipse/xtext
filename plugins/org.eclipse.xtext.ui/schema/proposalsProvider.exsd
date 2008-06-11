@@ -65,7 +65,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.ui.core.service.IProposalsProvider"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.ui.service.IProposalsProvider"/>
                </appinfo>
             </annotation>
          </attribute>

@@ -18,7 +18,7 @@ import org.eclipse.xtext.service.LanguageDescriptorFactory;
  */
 public class LanguageFactoryTest extends TestCase {
 	public void testgetLanguageDescriptor() throws Exception {
-		Class.forName("org.eclipse.xtext.ui.core.editor.BaseTextEditor");
+		Class.forName("org.eclipse.xtext.ui.editor.BaseTextEditor");
 		try {
 			LanguageDescriptorFactory
 					.createLanguageDescriptor("org.eclipse.xtext.ui.tests.dummylanguage", "", "", null);
