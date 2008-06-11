@@ -1,4 +1,7 @@
 
+/*
+Generated with Xtext
+*/
 package org.eclipse.xtext.parsetree.internal;
 
 

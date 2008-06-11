@@ -1,13 +1,13 @@
+/*
+Generated with Xtext
+*/
 package org.eclipse.xtext.services;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.service.*;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IMetamodelAccess;
-import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class XtextMetamodelAccess  extends BaseEPackageAccess implements IMetamodelAccess {
+public class XtextMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {

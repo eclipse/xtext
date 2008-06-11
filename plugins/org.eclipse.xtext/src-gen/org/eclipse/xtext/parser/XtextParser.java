@@ -1,4 +1,6 @@
-
+/*
+Generated with Xtext
+*/
 package org.eclipse.xtext.parser;
 
 import org.antlr.runtime.ANTLRInputStream;

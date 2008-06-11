@@ -136,7 +136,7 @@ public class GeneratorFacade {
 	    GenService metamodelAccessService = XtextgenFactory.eINSTANCE.createGenService();
 	    metamodelAccessService.setServiceInterfaceFQName("org.eclipse.xtext.IMetamodelAccess");
 	    metamodelAccessService.setGenClassFQName(namespace + ".services." + languageName + "MetamodelAccess");
-	    metamodelAccessService.setTemplatePath("org::eclipse::xtext::MetamodelAccess::MetamodelAccess::root");
+	    metamodelAccessService.setTemplatePath("org::eclipse::xtext::metamodelaccess::MetamodelAccess::root");
 	    metamodelAccessService.setExtensionPointID("org.eclipse.xtext.ui.metamodelAccess");
 	    genModel.getServices().add(metamodelAccessService);
 	    
@@ -160,14 +160,14 @@ public class GeneratorFacade {
             GenService resourceFactoryService = XtextgenFactory.eINSTANCE.createGenService();
             resourceFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.resource.IResourceFactory");
             resourceFactoryService.setGenClassFQName(namespace + ".services." + languageName + "ResourceFactory");
-            resourceFactoryService.setTemplatePath("org::eclipse::xtext::resourceFactory::ResourceFactory::root");
+            resourceFactoryService.setTemplatePath("org::eclipse::xtext::resourcefactory::ResourceFactory::root");
             resourceFactoryService.setExtensionPointID("org.eclipse.xtext.ui.resourceFactory");
             genModel.getServices().add(resourceFactoryService);
 
             GenService parsetreeConstructorService = XtextgenFactory.eINSTANCE.createGenService();
             parsetreeConstructorService.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.IParseTreeConstructor");
             parsetreeConstructorService.setGenClassFQName(namespace + ".parsetree." + languageName + "ParseTreeConstructor");
-            parsetreeConstructorService.setTemplatePath("org::eclipse::xtext::parsetree::ParsetreeConstructor::root");
+            parsetreeConstructorService.setTemplatePath("org::eclipse::xtext::parsetree::ParseTreeConstructor::root");
             parsetreeConstructorService.setExtensionPointID("org.eclipse.xtext.ui.parseTreeConstructor");
             genModel.getServices().add(parsetreeConstructorService);
 

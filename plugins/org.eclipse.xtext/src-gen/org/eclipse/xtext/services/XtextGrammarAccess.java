@@ -1,6 +1,9 @@
+/*
+Generated with Xtext
+*/
+
 package org.eclipse.xtext.services;
 
-import org.eclipse.xtext.service.*;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.XtextPackage;

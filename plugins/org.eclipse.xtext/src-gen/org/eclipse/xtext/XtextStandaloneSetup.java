@@ -1,12 +1,30 @@
+/*
+Generated with Xtext
+*/
 package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-import org.eclipse.xtext.resource.IResourceFactory;
+
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
+
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.services.XtextGrammarAccess;
+import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.services.XtextMetamodelAccess;
+import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.GenericEcoreElementFactory;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.XtextParser;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.services.XtextResourceFactory;
+import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.parsetree.XtextParseTreeConstructor;
+
 
 public abstract class XtextStandaloneSetup {
 
@@ -22,34 +40,38 @@ public abstract class XtextStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerService(languageDescriptor, org.eclipse.xtext.parser.IParser.class, org.eclipse.xtext.parser.XtextParser.class);
-			ServiceRegistry.registerService(languageDescriptor, org.eclipse.xtext.parser.IElementFactory.class, org.eclipse.xtext.parser.GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, org.eclipse.xtext.resource.IResourceFactory.class, org.eclipse.xtext.services.XtextResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, org.eclipse.xtext.IGrammarAccess.class, org.eclipse.xtext.services.XtextGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, org.eclipse.xtext.IMetamodelAccess.class, org.eclipse.xtext.services.XtextMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, org.eclipse.xtext.parsetree.IParseTreeConstructor.class, org.eclipse.xtext.parsetree.XtextParseTreeConstructor.class);
-			ServiceRegistry.registerService(languageDescriptor, org.eclipse.xtext.conversion.IValueConverterService.class, org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters.class);
-				
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"xtext", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));
+			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, XtextGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, XtextMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IParser.class, XtextParser.class);
+			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, XtextResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, XtextParseTreeConstructor.class);
+			
+			// register resource factory to EMF
+			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
 			isInitialized = true;
 		}
 	}
 	
-	private static ILanguageDescriptor INSTANCE;
-	private final static Object LOCK = new Object();
-    
-    public static ILanguageDescriptor getLanguageDescriptor() {
-    	if (INSTANCE == null) {
-    		synchronized(LOCK) {
-	    		INSTANCE = LanguageDescriptorFactory.get(IXtext.ID);
-	    		if(INSTANCE == null) {
-	    			// TODO put super grammar
-	    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IXtext.ID, IXtext.NAME, IXtext.NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
-	    		}
-    		}
-    	}
-    	return INSTANCE;
-    }
-    
+//TODO private constructor?
+//	private XtextStandaloneSetup() {
+//	}
+
+	private static class InstanceHolder {
+		private static ILanguageDescriptor INSTANCE;
+
+		static {
+			INSTANCE = LanguageDescriptorFactory.get(IXtext.ID);
+			if (INSTANCE == null) {
+				// TODO put super grammar
+				INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IXtext.ID,
+						IXtext.NAME, IXtext.NAMESPACE, XtextBuiltinStandaloneSetup
+								.getLanguageDescriptor());
+			}
+		}
+	}
+
+	public static ILanguageDescriptor getLanguageDescriptor() {
+		return InstanceHolder.INSTANCE;
+	}
 }
