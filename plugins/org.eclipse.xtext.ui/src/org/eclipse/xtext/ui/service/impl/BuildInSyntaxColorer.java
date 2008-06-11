@@ -12,6 +12,7 @@ package org.eclipse.xtext.ui.service.impl;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.InjectedService;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.service.IPreferenceStoreService;
@@ -27,29 +28,27 @@ public class BuildInSyntaxColorer implements ISyntaxColorer {
 
 	private ITokenTypeDefService tokenTypeDef;
 	private IPreferenceStoreService preferenceStoreService;
+	private ILanguageDescriptor languageDescriptor;
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.eclipse.xtext.ui.service.ISyntaxColorer#color(org.eclipse.xtext
+	 * @see org.eclipse.xtext.ui.service.ISyntaxColorer#color(org.eclipse.xtext
 	 * .parsetree.LeafNode)
 	 */
 	public TextStyle color(LeafNode leafNode) {
 		TextStyle tsToSet = new TextStyle(null, null, SWT.NONE, null);
-		if (tokenTypeDef != null) {
-			for (ITokenTypeDef ttd : tokenTypeDef.allTokenTypes()) {
-				if (ttd.match(leafNode)) {
-					String tokenTypeId = ttd.getId();
-					if (ttd.getTextStyle() != null) {
-						tsToSet = ttd.getTextStyle();
-					}
-					TextStyle ts = new TextStyle(getColorForTokenType(tokenTypeId, tsToSet.getColor()),
-							getBackgroundColorForTokenType(tokenTypeId, tsToSet.getBackgroundColor()),
-							getStyleForTokenType(tokenTypeId, tsToSet.getStyle()), getFontForTokenType(tokenTypeId,
-									tsToSet.getFontName()));
-					return ts;
+		for (ITokenTypeDef ttd : tokenTypeDef.allTokenTypes()) {
+			if (ttd.match(leafNode)) {
+				String tokenTypeId = ttd.getId();
+				if (ttd.getTextStyle() != null) {
+					tsToSet = ttd.getTextStyle();
 				}
+				TextStyle ts = new TextStyle(getColorForTokenType(tokenTypeId, tsToSet.getColor()),
+						getBackgroundColorForTokenType(tokenTypeId, tsToSet.getBackgroundColor()),
+						getStyleForTokenType(tokenTypeId, tsToSet.getStyle()), getFontForTokenType(tokenTypeId, tsToSet
+								.getFontName()));
+				return ts;
 			}
 		}
 		return tsToSet;
@@ -65,6 +64,11 @@ public class BuildInSyntaxColorer implements ISyntaxColorer {
 		this.preferenceStoreService = preferenceStoreService;
 	}
 
+	@InjectedService
+	public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
+		this.languageDescriptor = languageDescriptor;
+	}
+
 	private IPreferenceStore getPreferenceStore() {
 		return preferenceStoreService.getPersitablePreferenceStore();
 	}
@@ -72,32 +76,35 @@ public class BuildInSyntaxColorer implements ISyntaxColorer {
 	// TODO set defaults somewhere else if possible, or check if a default
 	// already set
 	private int getStyleForTokenType(String tokenType, int defaultStyle) {
-		String tokenStylePreferenceKey = BuildInPreferenceStore.getTokenStylePreferenceKey(tokenType);
+		String tokenStylePreferenceKey = BuildInPreferenceStore.getTokenStylePreferenceKey(languageDescriptor,
+				tokenType);
 		getPreferenceStore().setDefault(tokenStylePreferenceKey, defaultStyle);
 		return getPreferenceStore().getInt(tokenStylePreferenceKey);
 	}
 
 	private String getFontForTokenType(String tokenType, String defaultFont) {
-		String tokenFontPreferenceKey = BuildInPreferenceStore.getTokenFontPreferenceKey(tokenType);
+		String tokenFontPreferenceKey = BuildInPreferenceStore.getTokenFontPreferenceKey(languageDescriptor, tokenType);
 		if (defaultFont != null)
 			getPreferenceStore().setDefault(tokenFontPreferenceKey, defaultFont);
 		return getPreferenceStore().getString(tokenFontPreferenceKey);
 	}
 
 	private String getBackgroundColorForTokenType(String tokenType, String defaultBackgroundColor) {
-		String tokenBackgroundColorPreferenceKey = BuildInPreferenceStore
-				.getTokenBackgroundColorPreferenceKey(tokenType);
+		String tokenBackgroundColorPreferenceKey = BuildInPreferenceStore.getTokenBackgroundColorPreferenceKey(
+				languageDescriptor, tokenType);
 		if (defaultBackgroundColor != null)
-			getPreferenceStore().setDefault(BuildInPreferenceStore.getTokenBackgroundColorPreferenceKey(tokenType),
+			getPreferenceStore().setDefault(
+					BuildInPreferenceStore.getTokenBackgroundColorPreferenceKey(languageDescriptor, tokenType),
 					defaultBackgroundColor);
 		String rgbString = getPreferenceStore().getString(tokenBackgroundColorPreferenceKey);
 		return rgbString;
 	}
 
 	private String getColorForTokenType(String tokenType, String defaultColor) {
-		String preferenceKey = BuildInPreferenceStore.getTokenColorPreferenceKey(tokenType);
+		String preferenceKey = BuildInPreferenceStore.getTokenColorPreferenceKey(languageDescriptor, tokenType);
 		if (defaultColor != null)
-			getPreferenceStore().setDefault(BuildInPreferenceStore.getTokenColorPreferenceKey(tokenType), defaultColor);
+			getPreferenceStore().setDefault(
+					BuildInPreferenceStore.getTokenColorPreferenceKey(languageDescriptor, tokenType), defaultColor);
 		String rgbString = getPreferenceStore().getString(preferenceKey);
 		return rgbString;
 	}

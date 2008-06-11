@@ -39,7 +39,7 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 		super.setUp();
 		IParser parser = getServiceForDefaultLanguage(IParser.class);
 		IParseResult pr = parser.parse(new StringInputStream(MODEL));
-		ttds = getServiceForDefaultLanguage(ITokenTypeDefService.class);
+		ttds = new BuildInTokenTypeDef();
 		leafNodes = pr.getRootNode().getLeafNodes();
 	}
 

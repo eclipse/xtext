@@ -10,7 +10,6 @@ public class AllServicesTests {
 		//$JUnit-BEGIN$
 		suite.addTestSuite(BISyntaxColorerTest.class);
 		suite.addTestSuite(ResourceFactoryTest.class);
-		suite.addTestSuite(PreferenceServiceTest.class);
 		suite.addTestSuite(TokenTypeDefTest.class);
         suite.addTestSuite(LanguageDescriptorRegistrationTest.class);
         suite.addTestSuite(ServiceInjectionTest.class);
