@@ -40,12 +40,12 @@ public abstract class ComplexReconstrTestStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerService(languageDescriptor, new ComplexReconstrTestGrammarAccess(), IGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, new ComplexReconstrTestMetamodelAccess(), IMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, new GenericEcoreElementFactory(), IElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, new ComplexReconstrTestParser(), IParser.class);
-			ServiceRegistry.registerService(languageDescriptor, new ComplexReconstrTestResourceFactory(), IResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, new ComplexReconstrTestParseTreeConstructor(), IParseTreeConstructor.class);
+			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, ComplexReconstrTestGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, ComplexReconstrTestMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IParser.class, ComplexReconstrTestParser.class);
+			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, ComplexReconstrTestResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, ComplexReconstrTestParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
@@ -53,20 +53,25 @@ public abstract class ComplexReconstrTestStandaloneSetup {
 		}
 	}
 	
-	private static ILanguageDescriptor INSTANCE;
-	private final static Object LOCK = new Object();
-    
-    public static ILanguageDescriptor getLanguageDescriptor() {
-    	if (INSTANCE == null) {
-    		synchronized(LOCK) {
-	    		INSTANCE = LanguageDescriptorFactory.get(IComplexReconstrTest.ID);
-	    		if(INSTANCE == null) {
-	    			// TODO put super grammar
-	    			INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IComplexReconstrTest.ID, IComplexReconstrTest.NAME, IComplexReconstrTest.NAMESPACE, XtextBuiltinStandaloneSetup.getLanguageDescriptor());
-	    		}
-    		}
-    	}
-    	return INSTANCE;
-    }
-    
+//TODO private constructor?
+//	private ComplexReconstrTestStandaloneSetup() {
+//	}
+
+	private static class InstanceHolder {
+		private static ILanguageDescriptor INSTANCE;
+
+		static {
+			INSTANCE = LanguageDescriptorFactory.get(IComplexReconstrTest.ID);
+			if (INSTANCE == null) {
+				// TODO put super grammar
+				INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IComplexReconstrTest.ID,
+						IComplexReconstrTest.NAME, IComplexReconstrTest.NAMESPACE, XtextBuiltinStandaloneSetup
+								.getLanguageDescriptor());
+			}
+		}
+	}
+
+	public static ILanguageDescriptor getLanguageDescriptor() {
+		return InstanceHolder.INSTANCE;
+	}
 }

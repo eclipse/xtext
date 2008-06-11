@@ -17,9 +17,9 @@ public class XtextBuiltinStandaloneSetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 		
-		ServiceRegistry.registerService(getLanguageDescriptor(), new XtextBuiltinGrammarAccess(), IGrammarAccess.class);
-		ServiceRegistry.registerService(getLanguageDescriptor(), new XtextBuiltinMetamodelAccess(), IMetamodelAccess.class);
-		ServiceRegistry.registerService(getLanguageDescriptor(), new XtextBuiltInConverters(), IValueConverterService.class);
+		ServiceRegistry.registerService(getLanguageDescriptor(), IGrammarAccess.class, XtextBuiltinGrammarAccess.class);
+		ServiceRegistry.registerService(getLanguageDescriptor(), IMetamodelAccess.class, XtextBuiltinMetamodelAccess.class);
+		ServiceRegistry.registerService(getLanguageDescriptor(), IValueConverterService.class, XtextBuiltInConverters.class);
 	}
 	
 	private static ILanguageDescriptor INSTANCE;

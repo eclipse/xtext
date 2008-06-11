@@ -24,14 +24,13 @@ public class RegistrationTest extends AbstractServiceTest {
     }
 
     public void testSingletonServiceFactory() {
-        class SomeLanguageService extends InjectedLanguageService {
-        }
-        ;
-        ILanguageService languageService = new SomeLanguageService();
-        ServiceRegistry.registerService(myLanguageDescriptor, languageService, InjectedLanguageService.class);
+        ServiceRegistry.registerService(myLanguageDescriptor, InjectedLanguageService.class, SomeLanguageService.class);
         InjectedLanguageService service = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
-        assertEquals(languageService, service);
-        service = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
-        assertEquals(languageService, service);
+        assertNotNull(service);
+        InjectedLanguageService service1 = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
+        assertEquals(service, service1);
+    }
+
+    public static class SomeLanguageService extends InjectedLanguageService {
     }
 }

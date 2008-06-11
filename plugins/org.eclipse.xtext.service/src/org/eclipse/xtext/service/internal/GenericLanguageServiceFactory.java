@@ -5,7 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- *******************************************************************************/package org.eclipse.xtext.service;
+ *******************************************************************************/package org.eclipse.xtext.service.internal;
+
+import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.service.ILanguageServiceFactory;
 
 
 /**

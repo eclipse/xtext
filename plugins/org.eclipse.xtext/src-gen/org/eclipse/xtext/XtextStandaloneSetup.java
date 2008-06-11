@@ -2,14 +2,11 @@ package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.services.*;
 
 public abstract class XtextStandaloneSetup {
 
@@ -25,13 +22,13 @@ public abstract class XtextStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
-			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.XtextParser(), org.eclipse.xtext.parser.IParser.class);
-			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parser.GenericEcoreElementFactory(), org.eclipse.xtext.parser.IElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.services.XtextResourceFactory(), org.eclipse.xtext.resource.IResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.services.XtextGrammarAccess(), org.eclipse.xtext.IGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.services.XtextMetamodelAccess(), org.eclipse.xtext.IMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.parsetree.XtextParseTreeConstructor(), org.eclipse.xtext.parsetree.IParseTreeConstructor.class);
-			ServiceRegistry.registerService(languageDescriptor, new org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters(), org.eclipse.xtext.conversion.IValueConverterService.class);
+			ServiceRegistry.registerService(languageDescriptor, org.eclipse.xtext.parser.IParser.class, org.eclipse.xtext.parser.XtextParser.class);
+			ServiceRegistry.registerService(languageDescriptor, org.eclipse.xtext.parser.IElementFactory.class, org.eclipse.xtext.parser.GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, org.eclipse.xtext.resource.IResourceFactory.class, org.eclipse.xtext.services.XtextResourceFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, org.eclipse.xtext.IGrammarAccess.class, org.eclipse.xtext.services.XtextGrammarAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, org.eclipse.xtext.IMetamodelAccess.class, org.eclipse.xtext.services.XtextMetamodelAccess.class);
+			ServiceRegistry.registerService(languageDescriptor, org.eclipse.xtext.parsetree.IParseTreeConstructor.class, org.eclipse.xtext.parsetree.XtextParseTreeConstructor.class);
+			ServiceRegistry.registerService(languageDescriptor, org.eclipse.xtext.conversion.IValueConverterService.class, org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters.class);
 				
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 					"xtext", ServiceRegistry.getService(languageDescriptor, IResourceFactory.class));

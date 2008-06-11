@@ -17,17 +17,18 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class MultiGenMMTest extends AbstractGeneratorTest {
 
+    public static class MetamodelAccessOverride extends MetamodelRefTestMetamodelAccess {
+        @Override
+        public EPackage[] getGeneratedEPackages() {
+            return new EPackage[] { getSimpleTestEPackage(), XtextPackage.eINSTANCE };
+        }
+    }
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();
         with(MetamodelRefTestStandaloneSetup.class);
-        MetamodelRefTestMetamodelAccess serviceOverride = new MetamodelRefTestMetamodelAccess() {
-            @Override
-            public EPackage[] getGeneratedEPackages() {
-                return new EPackage[] { getSimpleTestEPackage(), XtextPackage.eINSTANCE };
-            }
-        };
-        ServiceRegistry.registerService(MetamodelRefTestStandaloneSetup.getLanguageDescriptor(), serviceOverride, IMetamodelAccess.class,
+        ServiceRegistry.registerService(MetamodelRefTestStandaloneSetup.getLanguageDescriptor(), IMetamodelAccess.class, MetamodelAccessOverride.class, 
                 ServiceRegistry.PRIORITY_MAX);
     }
 
