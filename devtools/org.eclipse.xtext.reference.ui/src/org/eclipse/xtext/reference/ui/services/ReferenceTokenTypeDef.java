@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
-import org.eclipse.xtext.ui.core.tokentype.BuildInTokenTypeDef;
-import org.eclipse.xtext.ui.core.tokentype.ITokenTypeDef;
-import org.eclipse.xtext.ui.core.tokentype.TokenTypeDef;
+import org.eclipse.xtext.ui.editor.utils.TextStyle;
+import org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef;
+import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
+import org.eclipse.xtext.ui.tokentype.TokenTypeDef;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
