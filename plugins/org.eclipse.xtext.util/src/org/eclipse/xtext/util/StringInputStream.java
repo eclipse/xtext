@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.utils;
+package org.eclipse.xtext.util;
 
 import java.io.ByteArrayInputStream;
 

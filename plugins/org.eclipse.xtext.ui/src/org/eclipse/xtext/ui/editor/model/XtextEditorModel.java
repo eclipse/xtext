@@ -27,8 +27,8 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.ui.editor.utils.StringInputStream;
 import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Peter Friese - Initial contribution and API

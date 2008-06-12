@@ -33,12 +33,12 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.ui.editor.utils.StringInputStream;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.editor.utils.TextStyleConstants;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.service.ISyntaxColorer;
+import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
