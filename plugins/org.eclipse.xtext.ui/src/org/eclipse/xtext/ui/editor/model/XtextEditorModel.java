@@ -13,14 +13,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.ISynchronizable;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParseError;
-import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -28,6 +26,7 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.ui.util.QuietErrorHandler;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -35,16 +34,6 @@ import org.eclipse.xtext.util.StringInputStream;
  * 
  */
 public class XtextEditorModel implements IEditorModel {
-
-	// TODO remove custom implementation when default one works properly
-	private IParseErrorHandler parseErrorHandler = new IParseErrorHandler() {
-
-		public void handleParserError(IParseError error) {
-			// does nothing
-			if (Activator.DEBUGING)
-				System.out.println("XtextEditorModel#0.handleParserError(): " + error.getMessage());
-		}
-	};
 
 	private final IDocument document;
 	private IParser parser;
@@ -63,8 +52,7 @@ public class XtextEditorModel implements IEditorModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.eclipse.xtext.ui.editor.model.IEditorModel#getLanguageDescriptor
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getLanguageDescriptor
 	 * ()
 	 */
 	public ILanguageDescriptor getLanguageDescriptor() {
@@ -110,12 +98,12 @@ public class XtextEditorModel implements IEditorModel {
 		try {
 			content = document.get(0, document.getLength());
 			if (Activator.DEBUG_PARSING)
-				System.out.print("Parsing...");
+				System.out.print("EditorModel Parsing...");
 			long start = System.currentTimeMillis();
 
 			// TODO: dependency injection for default element factory in parser
 			IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
-			this.parseResult = parser.parse(new StringInputStream(content), elementFactory, parseErrorHandler);
+			this.parseResult = parser.parse(new StringInputStream(content), elementFactory, new QuietErrorHandler());
 			if (Activator.DEBUG_PARSING)
 				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
 			if (parseResult.getRootASTElement() != null) {
@@ -124,10 +112,9 @@ public class XtextEditorModel implements IEditorModel {
 				notifyModelListeners(new XtextEditorModelChangeEvent(this));
 			}
 		}
-		catch (BadLocationException e) {
-			e.printStackTrace();
-		}
 		catch (Exception e) {
+			if (Activator.DEBUG_PARSING)
+				System.out.println("fail!");
 			e.printStackTrace();
 		}
 	}
@@ -135,8 +122,7 @@ public class XtextEditorModel implements IEditorModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.eclipse.xtext.ui.editor.model.IEditorModel#getParseTreeRootNode
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getParseTreeRootNode
 	 * ()
 	 */
 	public AbstractNode getParseTreeRootNode() {
@@ -146,8 +132,7 @@ public class XtextEditorModel implements IEditorModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.eclipse.xtext.ui.editor.model.IEditorModel#getParseTreeRootNode
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getParseTreeRootNode
 	 * (boolean)
 	 */
 	public AbstractNode getParseTreeRootNode(boolean doReconcile) {
@@ -171,8 +156,7 @@ public class XtextEditorModel implements IEditorModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.eclipse.xtext.ui.editor.model.IEditorModel#getAstRoot(boolean)
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getAstRoot(boolean)
 	 */
 	public EObject getAstRoot(boolean doReconcile) {
 		if (doReconcile) {
@@ -211,8 +195,7 @@ public class XtextEditorModel implements IEditorModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.eclipse.xtext.ui.editor.model.IEditorModel#addModelListener(
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#addModelListener(
 	 * org.eclipse.xtext.ui.editor.model.IXtextEditorModelListener)
 	 */
 	public void addModelListener(IXtextEditorModelListener listener) {
@@ -224,8 +207,7 @@ public class XtextEditorModel implements IEditorModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.eclipse.xtext.ui.editor.model.IEditorModel#removeModelListener
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#removeModelListener
 	 * (org.eclipse.xtext.ui.editor.model.IXtextEditorModelListener)
 	 */
 	public void removeModelListener(IXtextEditorModelListener listener) {
@@ -237,8 +219,7 @@ public class XtextEditorModel implements IEditorModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.eclipse.xtext.ui.editor.model.IEditorModel#notifyModelListeners
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#notifyModelListeners
 	 * (org.eclipse.xtext.ui.editor.model.XtextEditorModelChangeEvent)
 	 */
 	public void notifyModelListeners(XtextEditorModelChangeEvent event) {
@@ -258,7 +239,7 @@ public class XtextEditorModel implements IEditorModel {
 	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getErrors()
 	 */
 	public List<IParseError> getErrors() {
-		return parseResult.getParseErrors();
+		return parseResult != null ? parseResult.getParseErrors() : null;
 	}
 
 	/*

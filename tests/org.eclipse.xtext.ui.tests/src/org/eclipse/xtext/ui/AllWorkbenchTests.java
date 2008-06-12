@@ -15,16 +15,16 @@ import org.eclipse.xtext.ui.editor.EditorTest;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
- *
+ * 
  */
 public class AllWorkbenchTests {
 
-    public static Test suite() {
-        TestSuite suite = new TestSuite("Test for org.eclipse.xtext.ui");
-        //$JUnit-BEGIN$
-        suite.addTestSuite(EditorTest.class);
-        //$JUnit-END$
-        return suite;
-    }
+	public static Test suite() {
+		TestSuite suite = new TestSuite("Test for org.eclipse.xtext.ui Workbench");
+		// $JUnit-BEGIN$
+		suite.addTestSuite(EditorTest.class);
+		// $JUnit-END$
+		return suite;
+	}
 
 }

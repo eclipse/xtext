@@ -48,7 +48,7 @@ public class BISyntaxColorerTest extends AbstractServiceTest {
 		Grammar grammar = new XtextBuiltinGrammarAccess().getGrammar();
 		LexerRule lr = (LexerRule) GrammarUtil.findRuleForName(grammar, "SL_COMMENT");
 		leafNode.setGrammarElement(lr);
-		leafNode.setText("//single line comment");
+		leafNode.setText("//single line comment\n");
 		TextStyle textStyle = colorer.color(leafNode);
 		assertNotNull(textStyle);
 	}

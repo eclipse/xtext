@@ -14,7 +14,6 @@ import java.lang.reflect.Proxy;
 
 import junit.framework.TestCase;
 
-import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -23,7 +22,7 @@ import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.ui.editor.utils.StringInputStream;
+import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
