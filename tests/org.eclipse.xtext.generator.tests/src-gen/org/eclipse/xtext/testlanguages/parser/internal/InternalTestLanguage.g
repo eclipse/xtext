@@ -119,14 +119,24 @@ ruleEntryRule returns [EObject current=null]
 // Rule AbstractRule
 ruleAbstractRule returns [EObject current=null] 
     @init { EObject temp=null; }:
-(this_ChoiceRule=ruleChoiceRule
+(
+    { 
+        currentNode=createCompositeNode("//@parserRules.1/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+    }
+    this_ChoiceRule=ruleChoiceRule
     { 
         $current = $this_ChoiceRule.current; 
+        currentNode = currentNode.getParent();
     }
 
-    |this_ReducibleRule=ruleReducibleRule
+    |
+    { 
+        currentNode=createCompositeNode("//@parserRules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_ReducibleRule=ruleReducibleRule
     { 
         $current = $this_ReducibleRule.current; 
+        currentNode = currentNode.getParent();
     }
 );
 
@@ -173,9 +183,14 @@ ruleReducibleRule returns [EObject current=null]
     {
         createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
-this_TerminalRule=ruleTerminalRule
+
+    { 
+        currentNode=createCompositeNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_TerminalRule=ruleTerminalRule
     { 
         $current = $this_TerminalRule.current; 
+        currentNode = currentNode.getParent();
     }
 )((
     { 

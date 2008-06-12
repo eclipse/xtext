@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>testlanguages</idElements>
+  <idElements>LookaheadLang</idElements>
+  <parserRules name="A">
+    <alternatives xsi:type="xtext:Assignment" feature="x" operator="=">
+      <terminal xsi:type="xtext:RuleCall" name="B"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="B">
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:RuleCall" name="D"/>
+        <groups xsi:type="xtext:RuleCall" name="E"/>
+      </groups>
+      <groups xsi:type="xtext:RuleCall" name="C"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="C">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Assignment" feature="y" operator="=">
+          <terminal xsi:type="xtext:RuleCall" name="D"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Keyword" value="bar"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" feature="x" operator="=">
+        <terminal xsi:type="xtext:Keyword" value="c"/>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
+  <parserRules name="D">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="foo"/>
+        <abstractTokens xsi:type="xtext:Keyword" value="bar"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" feature="x" operator="=">
+        <terminal xsi:type="xtext:Keyword" value="d"/>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
+  <parserRules name="E">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="foo"/>
+        <abstractTokens xsi:type="xtext:Keyword" value="bar"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" feature="x" operator="=">
+        <terminal xsi:type="xtext:Keyword" value="e"/>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LookaheadLang" nsURI="http://www.eclipse.org/2008/xtext/LookaheadLang"/>
+</xtext:Grammar>
