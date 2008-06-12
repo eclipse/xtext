@@ -9,6 +9,7 @@
 
 package org.eclipse.xtext.service;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -217,11 +218,24 @@ public class ServiceRegistry {
 
     private static void injectServicesForClass(ILanguageDescriptor languageDescriptor, Object patient, Class<?> inspectedClass,
             Map<Class<?>, ILanguageService> cachedServices) throws IllegalAccessException, InvocationTargetException {
-        Method[] methods = inspectedClass.getMethods();
+    	Field[] fields = inspectedClass.getDeclaredFields();
+    	for (Field field : fields) {
+			if (field.isAnnotationPresent(InjectedService.class)) {
+				if (ILanguageDescriptor.class.equals(field.getType())) {
+                    field.set(patient, languageDescriptor);
+                } else {
+                    ILanguageService injectedService = findAndInitializeService(languageDescriptor, field.getType(), cachedServices);
+                    field.setAccessible(true);
+                    field.set(patient, injectedService);
+                }
+			}
+		}
+    	
+        Method[] methods = inspectedClass.getDeclaredMethods();
         for (Method method : methods) {
             Class<?>[] parameterTypes = method.getParameterTypes();
             if (parameterTypes.length != 1 && method.isAnnotationPresent(InjectedService.class)) {
-                throw new IllegalArgumentException("Annotated method must have excatly one parameter");
+                throw new IllegalArgumentException("Annotated method must have exactly one parameter");
             }
             if (parameterTypes.length == 1
                     && (method.isAnnotationPresent(InjectedService.class) || ILanguageDescriptor.class.equals(parameterTypes[0]))) {
