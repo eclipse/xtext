@@ -14,6 +14,7 @@
    <extension-point id="tokenTypeDef" name="Xtext Token Type Definition Service" schema="schema/tokenTypeDef.exsd"/>
    <extension-point id="valueConverter" name="Xtext Value Converter Service" schema="schema/valueConverter.exsd"/>
    <extension-point id="outlineProvider" name="Xtext Outline Content Provider" schema="schema/outlineProvider.exsd"/>
+   <extension-point id="labelProvider" name="Xtext Label Provider" schema="schema/labelProvider.exsd"/>
    <extension
          id="org.eclipse.xtext.ui.problemmarker"
          name="Xtext Editor Problem Marker"
@@ -103,5 +104,12 @@
             class="org.eclipse.xtext.ui.service.impl.BuiltInOutlineProvider"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </outlineProvider>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.labelProvider">
+      <labelProvider
+            class="org.eclipse.xtext.ui.service.impl.BuildInLabelProvider"
+            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
+      </labelProvider>
    </extension>
 </plugin>
