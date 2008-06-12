@@ -118,7 +118,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		formatter.setFormattingStrategy(new ContextBasedFormattingStrategy() {
 			@Override
 			public String format(String content, boolean start, String indentation, int[] positions) {
-				tabs = 1;
+				tabs = 0;
 				StringBuffer buffy = new StringBuffer();
 				IEditorModel model = editorModelProvider.getModel();
 				if (model != null && !model.hasErrors()) {
@@ -165,14 +165,28 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 					}
 				}
 				else if (node instanceof CompositeNode) {
-					tabs--;
 					CompositeNode cNode = (CompositeNode) node;
-					boolean first = true;
-					for (EObject child : cNode.eContents()) {
+					boolean idented = false;
+					boolean identNow = false;
+					for (Iterator<EObject> iter = cNode.eContents().iterator(); iter.hasNext();) {
+						EObject child = iter.next();
+						if (identNow) {
+							if (shouldIdent(cNode)) {
+								tabs++;
+								identNow = false;
+								idented = true;
+							}
+						}
+						if (idented && !iter.hasNext())
+							tabs--;
 						appendNode(buffy, child);
-						if (first && shouldIdent(cNode))
-							tabs++;
-						first = false;
+						if (!idented && child instanceof LeafNode) {
+							LeafNode ln = (LeafNode) child;
+							if (!ln.isHidden()) {
+								identNow = true;
+							}
+						}
+
 					}
 				}
 			}
@@ -210,7 +224,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 			}
 
 			private boolean preventIdent(LeafNode node) {
-				return "}".equals(node.getText());
+				return false;// "}".equals(node.getText());
 			}
 
 			private boolean isWhiteSpace(LeafNode ln) {
@@ -219,14 +233,14 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 			}
 
 			private boolean shouldWrapAfter(LeafNode leafNode) {
-				if (leafNode != null && (leafNode.isHidden() || "{".equals(leafNode.getText())))
-					return true;
-				return false;
+				return false;// (leafNode != null && (leafNode.isHidden()));
 			}
 
 			private boolean shouldWrapBefor(LeafNode leafNode) {
 				return "}".equals(leafNode.getText()) || "spielzeug".equals(leafNode.getText())
-						|| "kind".equals(leafNode.getText());
+						|| "kind".equals(leafNode.getText()) || "erwachsener".equals(leafNode.getText())
+						|| "spielplatz".equals(leafNode.getText());
+
 			}
 
 			@Override

@@ -8,22 +8,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.service;
 
-import java.util.List;
-
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.ILanguageService;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public interface IContentProvider extends ILanguageService {
-    public String getLabel(LeafNode node);
+public interface ILabelProvider extends ILanguageService {
+	// TODO probably it needs a dispose method
+	public StyledString getLabel(EObject eObject);
 
-    public Image getIcon(LeafNode node);
+	public Image getIcon(EObject eObject);
 
-    public Object getParent(LeafNode node);
-
-    public List<?> getChildren(LeafNode node);
 }
