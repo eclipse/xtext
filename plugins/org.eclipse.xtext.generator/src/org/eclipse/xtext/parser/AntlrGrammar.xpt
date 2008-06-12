@@ -189,11 +189,16 @@ internalParse returns [EObject current=null] :
 «ENDIF»«ENDDEFINE»
 
 «DEFINE ebnf2 FOR RuleCall-»
-«IF ParserRule.isInstance(calledRule()) && !isAssigned()»«localVar()»=«ENDIF-»
+«IF ParserRule.isInstance(calledRule()) && !isAssigned()»
+    { 
+        currentNode=«EXPAND createCompositeNode» 
+    }
+    «localVar()»=«ENDIF-»
 «calledRule().ruleName()-»
 «IF ParserRule.isInstance(calledRule()) && !isAssigned()»
     { 
         $current = $«localVar()».current; 
+        currentNode = currentNode.getParent();
     }
 «ENDIF-»
 «IF LexerRule.isInstance(calledRule())»
