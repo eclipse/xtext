@@ -47,6 +47,6 @@ toStringLiteral(Keyword this) :
 mustBeParenthesized(AbstractElement this) : true;
 mustBeParenthesized(Group this) : true;
 mustBeParenthesized(Alternatives this) : true;
-mustBeParenthesized(Keyword this) : false;
-mustBeParenthesized(RuleCall this) : false;
+mustBeParenthesized(Keyword this) : cardinality!=null;
+mustBeParenthesized(RuleCall this) : cardinality!=null;
 
