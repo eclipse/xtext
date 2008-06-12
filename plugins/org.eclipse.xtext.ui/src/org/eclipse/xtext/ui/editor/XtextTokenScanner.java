@@ -8,36 +8,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.jface.resource.DataFormatException;
-import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jface.resource.StringConverter;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.xtext.parser.IElementFactory;
-import org.eclipse.xtext.parser.IParseError;
-import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.editor.utils.TextStyleConstants;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.service.ISyntaxColorer;
+import org.eclipse.xtext.ui.util.QuietErrorHandler;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -97,21 +89,10 @@ public class XtextTokenScanner implements ITokenScanner {
 		if (textStyle.getColor() == null) {
 			textStyle.setColor(TextStyleConstants.DEFAULT_COLOR);
 		}
-		return new TextAttribute(colorFromString(textStyle.getColor()),
-				colorFromString(textStyle.getBackgroundColor()), textStyle.getStyle(), fontFromString(textStyle
-						.getFontName()));
+		return new TextAttribute(EditorUtils.colorFromString(textStyle.getColor()), EditorUtils
+				.colorFromString(textStyle.getBackgroundColor()), textStyle.getStyle(), EditorUtils
+				.fontFromString(textStyle.getFontName()));
 	}
-
-	// TODO remove custom implementation when default one works properly
-	private IParseErrorHandler parseErrorHandler = new IParseErrorHandler() {
-
-		public void handleParserError(IParseError error) {
-			if (Activator.DEBUG_PARSING)
-				System.out.println("XtextTokenScanner.enclosing_method(): " + error.getMessage());
-			parseErrors.add(error);
-		}
-	};
-	List<IParseError> parseErrors = new ArrayList<IParseError>();
 
 	public void setRange(IDocument document, int offset, int length) {
 		Assert.isLegal(document != null);
@@ -125,44 +106,18 @@ public class XtextTokenScanner implements ITokenScanner {
 		IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
 		IParseResult parseResult;
 		try {
-			parseResult = parser.parse(new StringInputStream(document.get()), elementFactory, parseErrorHandler);
+			parseResult = parser.parse(new StringInputStream(document.get()), elementFactory, new QuietErrorHandler());
 			CompositeNode rootNode = parseResult.getRootNode();
-			if (Activator.DEBUG_PARSING)
-				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
 			if (rootNode != null) {
 				nodeIterator = rootNode.getLeafNodes().iterator();
 			}
+			if (Activator.DEBUG_PARSING)
+				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
 		}
 		catch (Exception e) {
 			CoreLog.logError("Error during parse process", e);
+			if (Activator.DEBUG_PARSING)
+				System.out.println("fail!");
 		}
-	}
-
-	// TODO move following methods to a separate utilclass
-
-	private Font fontFromString(String fontName) {
-		if (fontName != null && fontName.trim().length() > 0) {
-			Font font = JFaceResources.getFont(fontName);
-			return font;
-		}
-		return null;
-	}
-
-	private Color colorFromString(String rgbString) {
-		if (rgbString != null && rgbString.trim().length() > 0) {
-			Color col = JFaceResources.getColorRegistry().get(rgbString);
-			try {
-				if (col == null) {
-					RGB rgb = StringConverter.asRGB(rgbString);
-					JFaceResources.getColorRegistry().put(rgbString, rgb);
-					col = JFaceResources.getColorRegistry().get(rgbString);
-				}
-			}
-			catch (DataFormatException e) {
-				CoreLog.logError("Corrupt color value: " + rgbString, e);
-			}
-			return col;
-		}
-		return null;
 	}
 }

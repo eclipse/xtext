@@ -6,25 +6,18 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui;
+package org.eclipse.xtext.ui.util;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.eclipse.xtext.parser.IParseError;
+import org.eclipse.xtext.parser.IParseErrorHandler;
 
 /**
- * @author Jan Köhnlein - Initial contribution and API
+ * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class AllTests {
-
-	public static Test suite() {
-		TestSuite suite = new TestSuite("Test for org.eclipse.xtext.ui All");
-		// $JUnit-BEGIN$
-		suite.addTest(AllStandaloneTests.suite());
-		suite.addTest(AllHeadlessTests.suite());
-		suite.addTest(AllWorkbenchTests.suite());
-		// $JUnit-END$
-		return suite;
+public class QuietErrorHandler implements IParseErrorHandler {
+	public void handleParserError(IParseError error) {
+		// we must overwrite this because the default Handler throws
+		// exceptions
 	}
-
 }

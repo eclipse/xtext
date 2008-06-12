@@ -10,7 +10,7 @@ import org.eclipse.xtext.ui.util.AllUtilTests;
 public class AllHeadlessTests {
 
 	public static Test suite() {
-		TestSuite suite = new TestSuite("Test for org.eclipse.xtext.ui");
+		TestSuite suite = new TestSuite("Test for org.eclipse.xtext.ui Headless");
 		// $JUnit-BEGIN$
 		suite.addTest(AllServicesTests.suite());
 		suite.addTest(AllUtilTests.suite());

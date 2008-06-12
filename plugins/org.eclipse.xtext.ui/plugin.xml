@@ -26,6 +26,22 @@
       </super>
    </extension>
    <extension
+         point="org.eclipse.ui.bindings">
+		<key sequence="M1+M2+F"
+            contextId="org.eclipse.ui.textEditorScope"
+            commandId="org.eclipse.xtext.ui.FormatAction"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+             </extension>
+     <extension
+         point="org.eclipse.ui.commands">  
+             <command
+            name="Format"
+            description="Format text"
+            categoryId="org.eclipse.ui.category.textEditor"
+            id="org.eclipse.xtext.ui.FormatAction">
+      </command>
+    </extension>
+   <extension
          point="org.eclipse.xtext.ui.languageDescriptor">
       <languageDescriptor
             id="org.eclipse.xtext.builtin.XtextBuiltin"

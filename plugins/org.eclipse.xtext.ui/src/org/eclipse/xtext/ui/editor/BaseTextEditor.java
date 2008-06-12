@@ -12,8 +12,8 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -26,6 +26,7 @@ import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.ContentAssistAction;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
+import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.InjectedService;
@@ -129,7 +130,8 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	};
 
 	private void doSelectionChanged(SelectionChangedEvent selectionChangedEvent) {
-		IStructuredSelection selection = (IStructuredSelection) selectionChangedEvent.getSelection();
+		// IStructuredSelection selection = (IStructuredSelection)
+		// selectionChangedEvent.getSelection();
 
 		if (!isActivePart() && Activator.getActivePage() != null) {
 			Activator.getActivePage().bringToTop(this);
@@ -178,5 +180,12 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		action.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
 		setAction("ContentAssistProposal", action);//$NON-NLS-1$
 		markAsStateDependentAction("ContentAssistProposal", true); //$NON-NLS-1$
+
+		action = new TextOperationAction(EditorMessages.getResourceBundle(), "Format.", this, ISourceViewer.FORMAT); //$NON-NLS-1$
+		action.setActionDefinitionId(Activator.PLUGIN_ID + ".FormatAction");
+		setAction("Format", action); //$NON-NLS-1$
+		markAsStateDependentAction("Format", true); //$NON-NLS-1$
+		markAsSelectionDependentAction("Format", true); //$NON-NLS-1$
+
 	}
 }

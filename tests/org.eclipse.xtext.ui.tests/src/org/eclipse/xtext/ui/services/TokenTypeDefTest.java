@@ -12,15 +12,16 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.editor.utils.StringInputStream;
 import org.eclipse.xtext.ui.service.ITokenTypeDefService;
 import org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
+import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
+// TODO refactor when BUG 236832 is fixed
 public class TokenTypeDefTest extends AbstractServiceTest {
 	private static final String MULTILINE_COMMENT = "/*\n*multiline comment\n*/";
 	private static final String SINGLELINE_COMMENT = "//singleline comment\n";
