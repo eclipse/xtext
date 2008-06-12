@@ -22,6 +22,7 @@ import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.testlanguages.ActionTestLanguage;
 import org.eclipse.xtext.testlanguages.LexerLanguage;
+import org.eclipse.xtext.testlanguages.LookaheadLanguage;
 import org.eclipse.xtext.testlanguages.OptionalEmptyLanguage;
 import org.eclipse.xtext.testlanguages.ReferenceGrammar;
 import org.eclipse.xtext.testlanguages.SimpleExpressions;
@@ -40,7 +41,7 @@ public class GenerateAllTestGrammars {
 		MetamodelRefTest.class,   DummyLanguage.class, TestLanguage.class, 
 		SimpleReconstrTest.class, ComplexReconstrTest.class, LexerLanguage.class, 
 		SimpleExpressions.class,  ActionTestLanguage.class, OptionalEmptyLanguage.class, 
-		ReferenceGrammar.class
+		ReferenceGrammar.class, LookaheadLanguage.class
 		};//MultiGenMMTest.class
 
 	public static void main(String[] args) throws Exception {

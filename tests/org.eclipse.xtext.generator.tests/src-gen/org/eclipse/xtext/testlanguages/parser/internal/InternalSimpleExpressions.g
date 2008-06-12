@@ -99,9 +99,14 @@ internalParse returns [EObject current=null] :
 // Rule Multiplication
 ruleMultiplication returns [EObject current=null] 
     @init { EObject temp=null; }:
-(this_Addition=ruleAddition
+(
+    { 
+        currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+    }
+    this_Addition=ruleAddition
     { 
         $current = $this_Addition.current; 
+        currentNode = currentNode.getParent();
     }
 (((
     { 
@@ -145,9 +150,14 @@ ruleMultiplication returns [EObject current=null]
 // Rule Addition
 ruleAddition returns [EObject current=null] 
     @init { EObject temp=null; }:
-(this_Term=ruleTerm
+(
+    { 
+        currentNode=createCompositeNode("//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+    }
+    this_Term=ruleTerm
     { 
         $current = $this_Term.current; 
+        currentNode = currentNode.getParent();
     }
 (((
     { 
@@ -191,14 +201,24 @@ ruleAddition returns [EObject current=null]
 // Rule Term
 ruleTerm returns [EObject current=null] 
     @init { EObject temp=null; }:
-(this_Atom=ruleAtom
+(
+    { 
+        currentNode=createCompositeNode("//@parserRules.2/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+    }
+    this_Atom=ruleAtom
     { 
         $current = $this_Atom.current; 
+        currentNode = currentNode.getParent();
     }
 
-    |this_Parens=ruleParens
+    |
+    { 
+        currentNode=createCompositeNode("//@parserRules.2/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_Parens=ruleParens
     { 
         $current = $this_Parens.current; 
+        currentNode = currentNode.getParent();
     }
 );
 
@@ -231,9 +251,14 @@ ruleParens returns [EObject current=null]
     {
         createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
-this_Multiplication=ruleMultiplication
+
+    { 
+        currentNode=createCompositeNode("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_Multiplication=ruleMultiplication
     { 
         $current = $this_Multiplication.current; 
+        currentNode = currentNode.getParent();
     }
 )')' 
 

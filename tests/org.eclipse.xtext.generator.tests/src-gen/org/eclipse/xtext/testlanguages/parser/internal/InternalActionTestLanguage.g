@@ -119,9 +119,14 @@ ruleModel returns [EObject current=null]
 // Rule Element
 ruleElement returns [EObject current=null] 
     @init { EObject temp=null; }:
-(this_Item=ruleItem
+(
+    { 
+        currentNode=createCompositeNode("//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+    }
+    this_Item=ruleItem
     { 
         $current = $this_Item.current; 
+        currentNode = currentNode.getParent();
     }
 ((
     { 
