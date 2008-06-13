@@ -3,9 +3,6 @@ Generated with Xtext
 */
 package org.eclipse.xtext.dummy;
 
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
-
 public interface IDummyLanguage {
 
 	/**

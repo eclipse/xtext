@@ -3,9 +3,6 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages;
 
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
-
 public interface ITestLanguage {
 
 	/**

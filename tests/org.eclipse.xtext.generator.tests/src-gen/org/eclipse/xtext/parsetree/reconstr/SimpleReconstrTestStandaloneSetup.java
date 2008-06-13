@@ -55,10 +55,14 @@ public abstract class SimpleReconstrTestStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("simplereconstrtest", resourceFactory);
 			
 			
+			isInitialized = true;
 		}
 	}
 	
 	public static ILanguageDescriptor getLanguageDescriptor() {
+		if(!isInitialized) {
+			doSetup();
+		}
 		return LanguageDescriptorFactory.get(ISimpleReconstrTest.ID);
 	}
 			

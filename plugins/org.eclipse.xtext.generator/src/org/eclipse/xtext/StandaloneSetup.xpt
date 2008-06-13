@@ -64,10 +64,14 @@ public abstract class «standaloneSetupClassFQName.toSimpleName()» {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", resourceFactory);
 			«ENDFOREACH»
 			«ENDIF»
+			isInitialized = true;
 		}
 	}
 	
 	public static ILanguageDescriptor getLanguageDescriptor() {
+		if(!isInitialized) {
+			doSetup();
+		}
 		return LanguageDescriptorFactory.get(«languageInterfaceFQName.toSimpleName()».ID);
 	}
 			

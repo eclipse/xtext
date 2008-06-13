@@ -235,14 +235,24 @@ ruleGrammar returns [EObject current=null]
 // Rule AbstractMetamodelDeclaration
 ruleAbstractMetamodelDeclaration returns [EObject current=null] 
     @init { EObject temp=null; }:
-(this_GeneratedMetamodel=ruleGeneratedMetamodel
+(
+    { 
+        currentNode=createCompositeNode("//@parserRules.2/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+    }
+    this_GeneratedMetamodel=ruleGeneratedMetamodel
     { 
         $current = $this_GeneratedMetamodel.current; 
+        currentNode = currentNode.getParent();
     }
 
-    |this_ReferencedMetamodel=ruleReferencedMetamodel
+    |
+    { 
+        currentNode=createCompositeNode("//@parserRules.2/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_ReferencedMetamodel=ruleReferencedMetamodel
     { 
         $current = $this_ReferencedMetamodel.current; 
+        currentNode = currentNode.getParent();
     }
 );
 
@@ -500,9 +510,14 @@ ruleTypeRef returns [EObject current=null]
 // Rule Alternatives
 ruleAlternatives returns [EObject current=null] 
     @init { EObject temp=null; }:
-(this_Group=ruleGroup
+(
+    { 
+        currentNode=createCompositeNode("//@parserRules.8/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+    }
+    this_Group=ruleGroup
     { 
         $current = $this_Group.current; 
+        currentNode = currentNode.getParent();
     }
 (((
     { 
@@ -540,9 +555,14 @@ ruleAlternatives returns [EObject current=null]
 // Rule Group
 ruleGroup returns [EObject current=null] 
     @init { EObject temp=null; }:
-(this_AbstractToken=ruleAbstractToken
+(
+    { 
+        currentNode=createCompositeNode("//@parserRules.9/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+    }
+    this_AbstractToken=ruleAbstractToken
     { 
         $current = $this_AbstractToken.current; 
+        currentNode = currentNode.getParent();
     }
 ((
     { 
@@ -575,19 +595,34 @@ ruleGroup returns [EObject current=null]
 // Rule AbstractToken
 ruleAbstractToken returns [EObject current=null] 
     @init { EObject temp=null; }:
-(((this_Assignment=ruleAssignment
+(((
+    { 
+        currentNode=createCompositeNode("//@parserRules.10/@alternatives/@abstractTokens.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+    }
+    this_Assignment=ruleAssignment
     { 
         $current = $this_Assignment.current; 
+        currentNode = currentNode.getParent();
     }
 
-    |this_Action=ruleAction
+    |
+    { 
+        currentNode=createCompositeNode("//@parserRules.10/@alternatives/@abstractTokens.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_Action=ruleAction
     { 
         $current = $this_Action.current; 
+        currentNode = currentNode.getParent();
     }
 )
-    |this_AbstractTerminal=ruleAbstractTerminal
+    |
+    { 
+        currentNode=createCompositeNode("//@parserRules.10/@alternatives/@abstractTokens.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_AbstractTerminal=ruleAbstractTerminal
     { 
         $current = $this_AbstractTerminal.current; 
+        currentNode = currentNode.getParent();
     }
 )(
     lv_cardinality=(('?' 
@@ -727,19 +762,34 @@ ruleAction returns [EObject current=null]
 // Rule AbstractTerminal
 ruleAbstractTerminal returns [EObject current=null] 
     @init { EObject temp=null; }:
-((this_Keyword=ruleKeyword
+((
+    { 
+        currentNode=createCompositeNode("//@parserRules.13/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+    }
+    this_Keyword=ruleKeyword
     { 
         $current = $this_Keyword.current; 
+        currentNode = currentNode.getParent();
     }
 
-    |this_RuleCall=ruleRuleCall
+    |
+    { 
+        currentNode=createCompositeNode("//@parserRules.13/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_RuleCall=ruleRuleCall
     { 
         $current = $this_RuleCall.current; 
+        currentNode = currentNode.getParent();
     }
 )
-    |this_ParenthesizedElement=ruleParenthesizedElement
+    |
+    { 
+        currentNode=createCompositeNode("//@parserRules.13/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_ParenthesizedElement=ruleParenthesizedElement
     { 
         $current = $this_ParenthesizedElement.current; 
+        currentNode = currentNode.getParent();
     }
 );
 
@@ -753,9 +803,14 @@ ruleParenthesizedElement returns [EObject current=null]
     {
         createLeafNode("//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
-this_Alternatives=ruleAlternatives
+
+    { 
+        currentNode=createCompositeNode("//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_Alternatives=ruleAlternatives
     { 
         $current = $this_Alternatives.current; 
+        currentNode = currentNode.getParent();
     }
 )')' 
 

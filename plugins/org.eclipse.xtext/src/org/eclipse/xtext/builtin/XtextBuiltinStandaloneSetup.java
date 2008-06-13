@@ -18,32 +18,20 @@ public class XtextBuiltinStandaloneSetup {
         if (!isInitialized) {
             Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
             Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+            ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.createLanguageDescriptor(IXtextBuiltin.ID,
+                    IXtextBuiltin.NAME, IXtextBuiltin.NAMESPACE, null);
 
-            ServiceRegistry.registerService(getLanguageDescriptor(), IGrammarAccess.class, XtextBuiltinGrammarAccess.class);
-            ServiceRegistry.registerService(getLanguageDescriptor(), IMetamodelAccess.class, XtextBuiltinMetamodelAccess.class);
-            ServiceRegistry.registerService(getLanguageDescriptor(), IValueConverterService.class, XtextBuiltInConverters.class);
+            ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, XtextBuiltinGrammarAccess.class);
+            ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, XtextBuiltinMetamodelAccess.class);
+            ServiceRegistry.registerService(languageDescriptor, IValueConverterService.class, XtextBuiltInConverters.class);
             isInitialized = true;
         }
     }
 
-  //TODO private constructor?
-//  private XtextStandaloneSetup() {
-//  }
-
-    private static class InstanceHolder {
-        private static ILanguageDescriptor INSTANCE;
-
-        static {
-            INSTANCE = LanguageDescriptorFactory.get(IXtextBuiltin.ID);
-            if (INSTANCE == null) {
-                // TODO put super grammar
-                INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IXtextBuiltin.ID,
-                        IXtextBuiltin.NAME, IXtextBuiltin.NAMESPACE, null);
-            }
-        }
-    }
-
     public static ILanguageDescriptor getLanguageDescriptor() {
-        return InstanceHolder.INSTANCE;
+        if (!isInitialized) {
+            doSetup();
+        }
+        return LanguageDescriptorFactory.get(IXtextBuiltin.ID);
     }
 }

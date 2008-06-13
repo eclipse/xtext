@@ -55,10 +55,14 @@ public abstract class ReferenceGrammarStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("referencegrammar", resourceFactory);
 			
 			
+			isInitialized = true;
 		}
 	}
 	
 	public static ILanguageDescriptor getLanguageDescriptor() {
+		if(!isInitialized) {
+			doSetup();
+		}
 		return LanguageDescriptorFactory.get(IReferenceGrammar.ID);
 	}
 			
