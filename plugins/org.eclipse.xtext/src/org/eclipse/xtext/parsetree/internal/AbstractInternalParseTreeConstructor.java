@@ -24,7 +24,6 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;

@@ -25,7 +25,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.service.InjectedService;
+import org.eclipse.xtext.service.Inject;
 
 /**
  * An EMF resource that reads and writes models of an Xtext DSL.
@@ -33,66 +33,55 @@ import org.eclipse.xtext.service.InjectedService;
  * @author Jan Köhnlein
  */
 public class XtextResource extends ResourceImpl {
+    @Inject
+    private IParser parser;
 
-	private IParser parser;
-	private IElementFactory elementFactory;
-	private IParseTreeConstructor parsetreeConstructor;
+    @Inject
+    private IElementFactory elementFactory;
+    
+    @Inject
+    private IParseTreeConstructor parsetreeConstructor;
 
-	public XtextResource(URI uri) {
-		super(uri);
-	}
-
-	@Override
-	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		IParseResult parse = parser.parse(inputStream, elementFactory);
-		if (parse != null) {
-			EObject rootElement = parse.getRootASTElement();
-			if (rootElement != null) {
-				getContents().add(rootElement);
-			}
-		}
-	}
-
-	@Override
-	public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
-		if (contents.size() > 1) {
-			throw new IllegalStateException("Xtext resource cannot contain multiple root elements");
-		}
-		if (!contents.isEmpty()) {
-			EObject rootElement = contents.get(0);
-			parsetreeConstructor.update(rootElement);
-			NodeAdapter rootNodeAdapter = getNodeAdapter(rootElement);
-			if (rootNodeAdapter != null) {
-				CompositeNode rootNode = rootNodeAdapter.getParserNode();
-				String serialize = rootNode.serialize();
-				outputStream.write(serialize.getBytes());
-			}
-		}
-	}
-
-	private NodeAdapter getNodeAdapter(EObject object) {
-		EList<Adapter> adapters = object.eAdapters();
-		for (Adapter adapter : adapters) {
-			if (adapter.isAdapterForType(AbstractNode.class)) {
-				return (NodeAdapter) adapter;
-			}
-		}
-		return null;
-	}
-
-	@InjectedService
-	public void setParser(IParser parser) {
-		this.parser = parser;
-	}
-
-	@InjectedService
-    public void setElementFactory(IElementFactory elementFactory) {
-        this.elementFactory = elementFactory;
+    public XtextResource(URI uri) {
+        super(uri);
     }
 
-    @InjectedService
-    public void setParsetreeConstructor(IParseTreeConstructor parsetreeConstructor) {
-        this.parsetreeConstructor = parsetreeConstructor;
+    @Override
+    protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
+        IParseResult parse = parser.parse(inputStream, elementFactory);
+        if (parse != null) {
+            EObject rootElement = parse.getRootASTElement();
+            if (rootElement != null) {
+                getContents().add(rootElement);
+            }
+        }
     }
-	
+
+    @Override
+    public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
+        if (contents.size() > 1) {
+            throw new IllegalStateException("Xtext resource cannot contain multiple root elements");
+        }
+        if (!contents.isEmpty()) {
+            EObject rootElement = contents.get(0);
+            parsetreeConstructor.update(rootElement);
+            NodeAdapter rootNodeAdapter = getNodeAdapter(rootElement);
+            if (rootNodeAdapter != null) {
+                CompositeNode rootNode = rootNodeAdapter.getParserNode();
+                String serialize = rootNode.serialize();
+                outputStream.write(serialize.getBytes());
+            }
+        }
+    }
+
+    private NodeAdapter getNodeAdapter(EObject object) {
+        EList<Adapter> adapters = object.eAdapters();
+        for (Adapter adapter : adapters) {
+            if (adapter.isAdapterForType(AbstractNode.class)) {
+                return (NodeAdapter) adapter;
+            }
+        }
+        return null;
+    }
+
 }

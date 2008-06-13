@@ -14,7 +14,7 @@ import java.io.InputStream;
 import org.antlr.runtime.ANTLRInputStream;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.service.InjectedService;
+import org.eclipse.xtext.service.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -22,19 +22,12 @@ import org.eclipse.xtext.service.InjectedService;
  */
 public abstract class AbstractParser implements IParser {
 	
+    @Inject
 	private IElementFactory astElementFactory;
+
+    @Inject
 	protected IGrammarAccess grammarAccess;
 	
-	@InjectedService
-	public void setDefaultASTElementFactory(IElementFactory astElementFactory) {
-		this.astElementFactory = astElementFactory;
-	}
-	
-	@InjectedService
-	public void setGrammarAccess(IGrammarAccess ga) {
-		this.grammarAccess = ga;
-	}
-
 	public IParseResult parse(InputStream in, IElementFactory factory, IParseErrorHandler handler,
 			IParsePostProcessor postProcessor) {
 		try {
