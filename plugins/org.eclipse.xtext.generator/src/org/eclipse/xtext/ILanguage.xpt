@@ -22,9 +22,6 @@
 */
 package «languageInterfaceFQName.toJavaPackage()»;
 
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
-
 public interface «languageInterfaceFQName.toSimpleName()» {
 
 	/**
