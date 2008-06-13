@@ -14,4 +14,5 @@ public interface IXtext {
 	public static final String ID = "org.eclipse.xtext.Xtext";
 	public static final String NAME = "Xtext";
 	public static final String NAMESPACE = "org.eclipse.xtext";
+	
 }
