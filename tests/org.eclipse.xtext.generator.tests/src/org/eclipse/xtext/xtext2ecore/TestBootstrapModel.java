@@ -74,8 +74,6 @@ public class TestBootstrapModel extends AbstractGeneratorTest {
 
 	@SuppressWarnings("unchecked")
 	public void testParseXtextGrammarTransformXtend() throws Exception {
-		XtextStandaloneSetup.doSetup();
-
 		InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(
 				"org/eclipse/xtext/XTextGrammarTest.xtext");
 

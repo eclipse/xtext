@@ -36,7 +36,7 @@ public class GenerateAllTestGrammars {
 	private static String path = "./src-gen";
 	private static Log log = LogFactory.getLog(GenerateAllTestGrammars.class);
 
-	private final static Class<?>[] testclasses = new Class[] { 
+	public final static Class<?>[] testclasses = new Class[] { 
 		SimpleTest.class, 		  SimpleTest2.class, XtextGrammarTest.class,
 		MetamodelRefTest.class,   DummyLanguage.class, TestLanguage.class, 
 		SimpleReconstrTest.class, ComplexReconstrTest.class, LexerLanguage.class, 
