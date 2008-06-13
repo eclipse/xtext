@@ -60,7 +60,7 @@ Assignment returns Assignment:
    feature=ID operator=('+='|'='|'?=') terminal=AbstractTerminal;
 
 Action returns Action:
-	'{' ('current' '=')? typeName=TypeRef '.' feature=ID operator=('='|'+=') 'current' '}';
+	'{' ('current' '=')? typeName=TypeRef '.' feature=ID operator=('='|'+=') 'current' '}';//TODO make assignment optional
 
 AbstractTerminal returns AbstractElement: 
    Keyword | RuleCall | ParenthesizedElement
