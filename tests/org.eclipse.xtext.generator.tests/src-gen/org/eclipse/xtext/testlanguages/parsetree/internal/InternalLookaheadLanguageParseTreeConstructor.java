@@ -12,9 +12,9 @@ import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parsetree.Predicate;
 import org.eclipse.xtext.parsetree.internal.AbstractInternalParseTreeConstructor;
 
-public class InternalLookaheadLangParseTreeConstructor extends AbstractInternalParseTreeConstructor {
+public class InternalLookaheadLanguageParseTreeConstructor extends AbstractInternalParseTreeConstructor {
 
-	public InternalLookaheadLangParseTreeConstructor(GenericEcoreElementFactory factory, Grammar grammar, IValueConverterService converterService) {
+	public InternalLookaheadLanguageParseTreeConstructor(GenericEcoreElementFactory factory, Grammar grammar, IValueConverterService converterService) {
 		super(factory,grammar,converterService);
 	}
 

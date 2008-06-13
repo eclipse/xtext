@@ -1,7 +1,7 @@
 /*
 Generated with Xtext
 */
-package org.eclipse.xtext.reference.services;
+package org.eclipse.xtext.testlanguages.services;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.IMetamodelAccess;
@@ -25,7 +25,7 @@ public class ReferenceGrammarMetamodelAccess extends BaseEPackageAccess implemen
 
 	
 	public static final String REFERENCEGRAMMAR_NS_URI = "http://eclipse.org/xtext/reference/ReferenceGrammar";
-	public static final String REFERENCEGRAMMAR_CP_URI = "org/eclipse/xtext/reference/ReferenceGrammar.ecore";
+	public static final String REFERENCEGRAMMAR_CP_URI = "org/eclipse/xtext/testlanguages/ReferenceGrammar.ecore";
 	
 	public static EPackage getReferenceGrammarEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(REFERENCEGRAMMAR_NS_URI)) {

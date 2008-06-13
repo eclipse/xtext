@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-language org.eclipse.xtext.testlanguages.LookaheadLang
+language org.eclipse.xtext.testlanguages.LookaheadLanguage
 generate LookaheadLang "http://www.eclipse.org/2008/xtext/LookaheadLang"
 
 A: x=(B);

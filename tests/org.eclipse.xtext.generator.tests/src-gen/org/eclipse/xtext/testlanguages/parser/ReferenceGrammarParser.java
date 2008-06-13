@@ -13,18 +13,18 @@ import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.impl.ParseError;
 
-import org.eclipse.xtext.testlanguages.parser.internal.InternalLookaheadLangLexer;
-import org.eclipse.xtext.testlanguages.parser.internal.InternalLookaheadLangParser;
+import org.eclipse.xtext.testlanguages.parser.internal.InternalReferenceGrammarLexer;
+import org.eclipse.xtext.testlanguages.parser.internal.InternalReferenceGrammarParser;
 
 
-public class LookaheadLangParser extends org.eclipse.xtext.parser.AbstractParser {
+public class ReferenceGrammarParser extends org.eclipse.xtext.parser.AbstractParser {
 	
 	@Override
 	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
-		InternalLookaheadLangLexer lexer = new InternalLookaheadLangLexer(in);
+		InternalReferenceGrammarLexer lexer = new InternalReferenceGrammarLexer(in);
 		CommonTokenStream stream = new CommonTokenStream(lexer);
-		InternalLookaheadLangParser parser = new InternalLookaheadLangParser(
+		InternalReferenceGrammarParser parser = new InternalReferenceGrammarParser(
 				stream, factory, grammarAccess.getGrammar()) {
 					@Override
 			protected void reportError(IParseError error, RecognitionException re) {

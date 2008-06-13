@@ -3,6 +3,9 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages;
 
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
+
 public interface IActionTestLanguage {
 
 	/**
@@ -14,4 +17,5 @@ public interface IActionTestLanguage {
 	public static final String ID = "org.eclipse.xtext.testlanguages.ActionTestLanguage";
 	public static final String NAME = "ActionTestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.testlanguages";
+	
 }

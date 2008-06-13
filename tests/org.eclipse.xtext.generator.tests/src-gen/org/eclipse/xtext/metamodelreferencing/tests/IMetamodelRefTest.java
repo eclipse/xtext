@@ -3,6 +3,9 @@ Generated with Xtext
 */
 package org.eclipse.xtext.metamodelreferencing.tests;
 
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
+
 public interface IMetamodelRefTest {
 
 	/**
@@ -14,4 +17,5 @@ public interface IMetamodelRefTest {
 	public static final String ID = "org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest";
 	public static final String NAME = "MetamodelRefTest";
 	public static final String NAMESPACE = "org.eclipse.xtext.metamodelreferencing.tests";
+	
 }

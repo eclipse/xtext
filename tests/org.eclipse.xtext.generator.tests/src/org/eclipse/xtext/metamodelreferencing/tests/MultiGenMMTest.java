@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestMetamodelAccess;
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -28,7 +30,8 @@ public class MultiGenMMTest extends AbstractGeneratorTest {
     protected void setUp() throws Exception {
         super.setUp();
         with(MetamodelRefTestStandaloneSetup.class);
-        ServiceRegistry.registerService(MetamodelRefTestStandaloneSetup.getLanguageDescriptor(), IMetamodelAccess.class, MetamodelAccessOverride.class, 
+        ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.get(IMetamodelRefTest.ID);
+        ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, MetamodelAccessOverride.class, 
                 ServiceRegistry.PRIORITY_MAX);
     }
 

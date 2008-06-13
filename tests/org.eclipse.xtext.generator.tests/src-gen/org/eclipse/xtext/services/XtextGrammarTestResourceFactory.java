@@ -3,19 +3,26 @@ Generated with Xtext
 */
 package org.eclipse.xtext.services;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
 
-public class XtextGrammarTestResourceFactory extends AbstractXtextResourceFactory {
+public class XtextGrammarTestResourceFactory implements IResourceFactory {
 
-	public XtextGrammarTestResourceFactory() {
-		
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xtextgrammartest", this);
-		
-	}
-	
 	public String[] getModelFileExtensions() {
 		return new String[] { "xtextgrammartest" };
 	}
 	
+	 /* (non-Javadoc)
+     * @see org.eclipse.emf.ecore.resource.Resource.Factory#createResource(org.eclipse.emf.common.util.URI)
+     */
+    public Resource createResource(URI uri) {
+        XtextResource resource = new XtextResource(uri);
+        ServiceRegistry.injectServices(LanguageDescriptorFactory.get("org.eclipse.xtext.XtextGrammarTest"), resource);
+        return resource;
+    }
+    
 } 

@@ -5,13 +5,10 @@ package org.eclipse.xtext.metamodelreferencing.tests;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
@@ -25,6 +22,7 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestRes
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.metamodelreferencing.tests.parsetree.MetamodelRefTestParseTreeConstructor;
 
+import org.eclipse.xtext.metamodelreferencing.tests.IMetamodelRefTest;
 
 public abstract class MetamodelRefTestStandaloneSetup {
 
@@ -39,7 +37,12 @@ public abstract class MetamodelRefTestStandaloneSetup {
 				"ecore", new XMIResourceFactoryImpl());
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
+			ILanguageDescriptor languageDescriptor = 
+				LanguageDescriptorFactory.createLanguageDescriptor(
+					IMetamodelRefTest.ID, 
+					IMetamodelRefTest.NAME, 
+					IMetamodelRefTest.NAMESPACE, 
+					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
 			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, MetamodelRefTestGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, MetamodelRefTestMetamodelAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
@@ -48,30 +51,15 @@ public abstract class MetamodelRefTestStandaloneSetup {
 			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, MetamodelRefTestParseTreeConstructor.class);
 			
 			// register resource factory to EMF
-			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
-			isInitialized = true;
+			IResourceFactory resourceFactory = new MetamodelRefTestResourceFactory();
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("metamodelreftest", resourceFactory);
+			
+			
 		}
 	}
 	
-//TODO private constructor?
-//	private MetamodelRefTestStandaloneSetup() {
-//	}
-
-	private static class InstanceHolder {
-		private static ILanguageDescriptor INSTANCE;
-
-		static {
-			INSTANCE = LanguageDescriptorFactory.get(IMetamodelRefTest.ID);
-			if (INSTANCE == null) {
-				// TODO put super grammar
-				INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IMetamodelRefTest.ID,
-						IMetamodelRefTest.NAME, IMetamodelRefTest.NAMESPACE, XtextBuiltinStandaloneSetup
-								.getLanguageDescriptor());
-			}
-		}
-	}
-
 	public static ILanguageDescriptor getLanguageDescriptor() {
-		return InstanceHolder.INSTANCE;
+		return LanguageDescriptorFactory.get(IMetamodelRefTest.ID);
 	}
+			
 }

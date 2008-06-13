@@ -3,6 +3,9 @@ Generated with Xtext
 */
 package org.eclipse.xtext.grammargen.tests;
 
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
+
 public interface ISimpleTest {
 
 	/**
@@ -14,4 +17,5 @@ public interface ISimpleTest {
 	public static final String ID = "org.eclipse.xtext.grammargen.tests.SimpleTest";
 	public static final String NAME = "SimpleTest";
 	public static final String NAMESPACE = "org.eclipse.xtext.grammargen.tests";
+	
 }

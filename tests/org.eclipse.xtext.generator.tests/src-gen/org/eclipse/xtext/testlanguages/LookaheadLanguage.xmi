@@ -4,7 +4,7 @@
   <idElements>eclipse</idElements>
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
-  <idElements>LookaheadLang</idElements>
+  <idElements>LookaheadLanguage</idElements>
   <parserRules name="A">
     <alternatives xsi:type="xtext:Assignment" feature="x" operator="=">
       <terminal xsi:type="xtext:RuleCall" name="B"/>

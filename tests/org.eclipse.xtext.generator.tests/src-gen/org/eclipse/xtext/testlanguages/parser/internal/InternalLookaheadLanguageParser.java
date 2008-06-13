@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g 2008-06-12 14:31:11
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g 2008-06-13 13:45:45
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -17,7 +17,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
-public class InternalLookaheadLangParser extends AbstractAntlrParser {
+public class InternalLookaheadLanguageParser extends AbstractAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_LEXER_BODY", "RULE_ANY_OTHER", "'bar'", "'c'", "'foo'", "'d'", "'e'"
     };
@@ -31,31 +31,31 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
     public static final int RULE_SL_COMMENT=8;
     public static final int RULE_LEXER_BODY=10;
 
-        public InternalLookaheadLangParser(TokenStream input) {
+        public InternalLookaheadLanguageParser(TokenStream input) {
             super(input);
         }
         
 
     public String[] getTokenNames() { return tokenNames; }
-    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g"; }
+    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g"; }
 
 
      
-        public InternalLookaheadLangParser(TokenStream input, IElementFactory factory, Grammar g) {
+        public InternalLookaheadLanguageParser(TokenStream input, IElementFactory factory, Grammar g) {
             this(input);
             this.factory = factory;
     		grammar = g;
         }
         
         protected InputStream getTokenFile() {
-        	ClassLoader classLoader = InternalLookaheadLangParser.class.getClassLoader();
-        	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.tokens");
+        	ClassLoader classLoader = InternalLookaheadLanguageParser.class.getClassLoader();
+        	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.tokens");
         }
 
 
 
     // $ANTLR start internalParse
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:91:1: internalParse returns [EObject current=null] : iv_ruleA= ruleA EOF ;
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:91:1: internalParse returns [EObject current=null] : iv_ruleA= ruleA EOF ;
     public final EObject internalParse() throws RecognitionException {
         EObject current = null;
 
@@ -63,8 +63,8 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:91:46: (iv_ruleA= ruleA EOF )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:92:3: iv_ruleA= ruleA EOF
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:91:46: (iv_ruleA= ruleA EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:92:3: iv_ruleA= ruleA EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleA_in_internalParse78);
@@ -92,7 +92,7 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleA
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:100:1: ruleA returns [EObject current=null] : (lv_x= ruleB ) ;
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:100:1: ruleA returns [EObject current=null] : (lv_x= ruleB ) ;
     public final EObject ruleA() throws RecognitionException {
         EObject current = null;
 
@@ -101,11 +101,11 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:101:33: ( (lv_x= ruleB ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:102:1: (lv_x= ruleB )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:101:33: ( (lv_x= ruleB ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:102:1: (lv_x= ruleB )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:102:1: (lv_x= ruleB )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:104:5: lv_x= ruleB
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:102:1: (lv_x= ruleB )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:104:5: lv_x= ruleB
             {
              
                     currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -143,7 +143,7 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleB
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:120:1: ruleB returns [EObject current=null] : ( (this_D= ruleD | this_E= ruleE ) | this_C= ruleC ) ;
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:120:1: ruleB returns [EObject current=null] : ( (this_D= ruleD | this_E= ruleE ) | this_C= ruleC ) ;
     public final EObject ruleB() throws RecognitionException {
         EObject current = null;
 
@@ -156,10 +156,10 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:121:33: ( ( (this_D= ruleD | this_E= ruleE ) | this_C= ruleC ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:122:1: ( (this_D= ruleD | this_E= ruleE ) | this_C= ruleC )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:121:33: ( ( (this_D= ruleD | this_E= ruleE ) | this_C= ruleC ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:122:1: ( (this_D= ruleD | this_E= ruleE ) | this_C= ruleC )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:122:1: ( (this_D= ruleD | this_E= ruleE ) | this_C= ruleC )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:122:1: ( (this_D= ruleD | this_E= ruleE ) | this_C= ruleC )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -210,9 +210,9 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
             }
             switch (alt2) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:122:2: (this_D= ruleD | this_E= ruleE )
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:122:2: (this_D= ruleD | this_E= ruleE )
                     {
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:122:2: (this_D= ruleD | this_E= ruleE )
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:122:2: (this_D= ruleD | this_E= ruleE )
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -250,7 +250,7 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
                     }
                     switch (alt1) {
                         case 1 :
-                            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:123:5: this_D= ruleD
+                            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:123:5: this_D= ruleD
                             {
                              
                                     currentNode=createCompositeNode("//@parserRules.1/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
@@ -267,7 +267,7 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
                             }
                             break;
                         case 2 :
-                            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:133:5: this_E= ruleE
+                            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:133:5: this_E= ruleE
                             {
                              
                                     currentNode=createCompositeNode("//@parserRules.1/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
@@ -290,7 +290,7 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:143:5: this_C= ruleC
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:143:5: this_C= ruleC
                     {
                      
                             currentNode=createCompositeNode("//@parserRules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
@@ -328,7 +328,7 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleC
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:156:1: ruleC returns [EObject current=null] : ( ( (lv_y= ruleD ) 'bar' ) (lv_x= 'c' ) ) ;
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:156:1: ruleC returns [EObject current=null] : ( ( (lv_y= ruleD ) 'bar' ) (lv_x= 'c' ) ) ;
     public final EObject ruleC() throws RecognitionException {
         EObject current = null;
 
@@ -338,17 +338,17 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:157:33: ( ( ( (lv_y= ruleD ) 'bar' ) (lv_x= 'c' ) ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:158:1: ( ( (lv_y= ruleD ) 'bar' ) (lv_x= 'c' ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:157:33: ( ( ( (lv_y= ruleD ) 'bar' ) (lv_x= 'c' ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:158:1: ( ( (lv_y= ruleD ) 'bar' ) (lv_x= 'c' ) )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:158:1: ( ( (lv_y= ruleD ) 'bar' ) (lv_x= 'c' ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:158:2: ( (lv_y= ruleD ) 'bar' ) (lv_x= 'c' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:158:1: ( ( (lv_y= ruleD ) 'bar' ) (lv_x= 'c' ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:158:2: ( (lv_y= ruleD ) 'bar' ) (lv_x= 'c' )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:158:2: ( (lv_y= ruleD ) 'bar' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:158:3: (lv_y= ruleD ) 'bar'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:158:2: ( (lv_y= ruleD ) 'bar' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:158:3: (lv_y= ruleD ) 'bar'
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:158:3: (lv_y= ruleD )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:160:5: lv_y= ruleD
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:158:3: (lv_y= ruleD )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:160:5: lv_y= ruleD
             {
              
                     currentNode=createCompositeNode("//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -374,8 +374,8 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:176:2: (lv_x= 'c' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:177:5: lv_x= 'c'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:176:2: (lv_x= 'c' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:177:5: lv_x= 'c'
             {
             lv_x=(Token)input.LT(1);
             match(input,13,FOLLOW_13_in_ruleC317); 
@@ -410,7 +410,7 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleD
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:190:1: ruleD returns [EObject current=null] : ( ( 'foo' 'bar' ) (lv_x= 'd' ) ) ;
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:190:1: ruleD returns [EObject current=null] : ( ( 'foo' 'bar' ) (lv_x= 'd' ) ) ;
     public final EObject ruleD() throws RecognitionException {
         EObject current = null;
 
@@ -418,14 +418,14 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:191:33: ( ( ( 'foo' 'bar' ) (lv_x= 'd' ) ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:192:1: ( ( 'foo' 'bar' ) (lv_x= 'd' ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:191:33: ( ( ( 'foo' 'bar' ) (lv_x= 'd' ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:192:1: ( ( 'foo' 'bar' ) (lv_x= 'd' ) )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:192:1: ( ( 'foo' 'bar' ) (lv_x= 'd' ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:192:2: ( 'foo' 'bar' ) (lv_x= 'd' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:192:1: ( ( 'foo' 'bar' ) (lv_x= 'd' ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:192:2: ( 'foo' 'bar' ) (lv_x= 'd' )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:192:2: ( 'foo' 'bar' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:192:3: 'foo' 'bar'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:192:2: ( 'foo' 'bar' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:192:3: 'foo' 'bar'
             {
             match(input,14,FOLLOW_14_in_ruleD355); 
 
@@ -438,8 +438,8 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:202:2: (lv_x= 'd' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:203:5: lv_x= 'd'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:202:2: (lv_x= 'd' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:203:5: lv_x= 'd'
             {
             lv_x=(Token)input.LT(1);
             match(input,15,FOLLOW_15_in_ruleD384); 
@@ -474,7 +474,7 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleE
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:216:1: ruleE returns [EObject current=null] : ( ( 'foo' 'bar' ) (lv_x= 'e' ) ) ;
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:216:1: ruleE returns [EObject current=null] : ( ( 'foo' 'bar' ) (lv_x= 'e' ) ) ;
     public final EObject ruleE() throws RecognitionException {
         EObject current = null;
 
@@ -482,14 +482,14 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:217:33: ( ( ( 'foo' 'bar' ) (lv_x= 'e' ) ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:218:1: ( ( 'foo' 'bar' ) (lv_x= 'e' ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:217:33: ( ( ( 'foo' 'bar' ) (lv_x= 'e' ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:218:1: ( ( 'foo' 'bar' ) (lv_x= 'e' ) )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:218:1: ( ( 'foo' 'bar' ) (lv_x= 'e' ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:218:2: ( 'foo' 'bar' ) (lv_x= 'e' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:218:1: ( ( 'foo' 'bar' ) (lv_x= 'e' ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:218:2: ( 'foo' 'bar' ) (lv_x= 'e' )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:218:2: ( 'foo' 'bar' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:218:3: 'foo' 'bar'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:218:2: ( 'foo' 'bar' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:218:3: 'foo' 'bar'
             {
             match(input,14,FOLLOW_14_in_ruleE422); 
 
@@ -502,8 +502,8 @@ public class InternalLookaheadLangParser extends AbstractAntlrParser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:228:2: (lv_x= 'e' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:229:5: lv_x= 'e'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:228:2: (lv_x= 'e' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:229:5: lv_x= 'e'
             {
             lv_x=(Token)input.LT(1);
             match(input,16,FOLLOW_16_in_ruleE451); 

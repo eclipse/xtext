@@ -1,11 +1,11 @@
 /*
 Generated with Xtext
 */
-package org.eclipse.xtext.reference.parsetree;
+package org.eclipse.xtext.testlanguages.parsetree;
 
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.reference.parsetree.internal.InternalReferenceGrammarParseTreeConstructor;
+import org.eclipse.xtext.testlanguages.parsetree.internal.InternalReferenceGrammarParseTreeConstructor;
 import org.eclipse.xtext.parsetree.AbstractParseTreeConstructor;
 
 public class ReferenceGrammarParseTreeConstructor extends AbstractParseTreeConstructor {

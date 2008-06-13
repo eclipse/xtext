@@ -9,9 +9,9 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class LookaheadLangGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 
-	private static final String LOOKAHEADLANG_GRAMMAR_CP_URI = "org/eclipse/xtext/testlanguages/LookaheadLang.xmi";
+	private static final String REFERENCEGRAMMAR_GRAMMAR_CP_URI = "org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi";
 	private static Grammar GRAMMAR = null;
 	
 	@SuppressWarnings("unused")
@@ -19,13 +19,13 @@ public class LookaheadLangGrammarAccess extends BaseEPackageAccess implements IG
 		if (GRAMMAR==null) {
 			// assert the XtextPackage implementation is loaded
 			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(LookaheadLangGrammarAccess.class.getClassLoader(),LOOKAHEADLANG_GRAMMAR_CP_URI);
+			GRAMMAR = (Grammar) loadGrammarFile(ReferenceGrammarGrammarAccess.class.getClassLoader(),REFERENCEGRAMMAR_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;
 	}
 	
 	public String getGrammarClasspathURI() {
-		return LOOKAHEADLANG_GRAMMAR_CP_URI;
+		return REFERENCEGRAMMAR_GRAMMAR_CP_URI;
 	}
    
 }

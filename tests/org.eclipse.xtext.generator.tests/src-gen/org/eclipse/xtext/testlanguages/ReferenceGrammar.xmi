@@ -3,7 +3,7 @@
   <idElements>org</idElements>
   <idElements>eclipse</idElements>
   <idElements>xtext</idElements>
-  <idElements>reference</idElements>
+  <idElements>testlanguages</idElements>
   <idElements>ReferenceGrammar</idElements>
   <parserRules name="Spielplatz">
     <alternatives xsi:type="xtext:Group" cardinality="?">
