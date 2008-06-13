@@ -62,4 +62,10 @@ private String outletPath(GenModel model, String name) :
 Void copyFiles(String srcDir, String targetDir, List[String] fileNames) :
 	JAVA org.eclipse.xtext.util.Files.copyFiles(java.lang.String, java.lang.String, java.util.List);
 
-	
+GenService findService(String serviceInterfaceFQName) :
+	genModel().services.select(s|s.serviceInterfaceFQName==serviceInterfaceFQName).first();
+
+GenService resourceFactoryService() :
+	findService("org.eclipse.xtext.resource.IResourceFactory") != null 
+		? findService("org.eclipse.xtext.resource.IResourceFactory")
+		: null;

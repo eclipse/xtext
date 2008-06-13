@@ -25,6 +25,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.NodeAdapter;
+import org.eclipse.xtext.service.InjectedService;
 
 /**
  * An EMF resource that reads and writes models of an Xtext DSL.
@@ -37,12 +38,8 @@ public class XtextResource extends ResourceImpl {
 	private IElementFactory elementFactory;
 	private IParseTreeConstructor parsetreeConstructor;
 
-	public XtextResource(IElementFactory elementFactory, IParser parser, IParseTreeConstructor parsetreeConstructor,
-			URI uri) {
+	public XtextResource(URI uri) {
 		super(uri);
-		this.elementFactory = elementFactory;
-		this.parser = parser;
-		this.parsetreeConstructor = parsetreeConstructor;
 	}
 
 	@Override
@@ -83,15 +80,19 @@ public class XtextResource extends ResourceImpl {
 		return null;
 	}
 
-	public IParser getParser() {
-		return parser;
-	}
-
+	@InjectedService
 	public void setParser(IParser parser) {
 		this.parser = parser;
 	}
 
-	public IElementFactory getElementFactory() {
-		return elementFactory;
-	}
+	@InjectedService
+    public void setElementFactory(IElementFactory elementFactory) {
+        this.elementFactory = elementFactory;
+    }
+
+    @InjectedService
+    public void setParsetreeConstructor(IParseTreeConstructor parsetreeConstructor) {
+        this.parsetreeConstructor = parsetreeConstructor;
+    }
+	
 }

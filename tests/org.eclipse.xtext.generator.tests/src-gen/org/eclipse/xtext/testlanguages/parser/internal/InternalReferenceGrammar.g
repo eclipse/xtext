@@ -9,7 +9,7 @@ options {
 }
 
 @lexer::header {
-package org.eclipse.xtext.reference.parser.internal;
+package org.eclipse.xtext.testlanguages.parser.internal;
 }
 
 @lexer::members {
@@ -53,7 +53,7 @@ package org.eclipse.xtext.reference.parser.internal;
 }
 
 @parser::header {
-package org.eclipse.xtext.reference.parser.internal; 
+package org.eclipse.xtext.testlanguages.parser.internal; 
 
 import java.io.InputStream;
 import org.eclipse.xtext.*;
@@ -75,7 +75,7 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
     
     protected InputStream getTokenFile() {
     	ClassLoader classLoader = InternalReferenceGrammarParser.class.getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.tokens");
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.tokens");
     }
 }
 

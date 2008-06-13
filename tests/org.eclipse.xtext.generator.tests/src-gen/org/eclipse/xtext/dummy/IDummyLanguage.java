@@ -3,6 +3,9 @@ Generated with Xtext
 */
 package org.eclipse.xtext.dummy;
 
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
+
 public interface IDummyLanguage {
 
 	/**
@@ -14,4 +17,5 @@ public interface IDummyLanguage {
 	public static final String ID = "org.eclipse.xtext.dummy.DummyLanguage";
 	public static final String NAME = "DummyLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.dummy";
+	
 }

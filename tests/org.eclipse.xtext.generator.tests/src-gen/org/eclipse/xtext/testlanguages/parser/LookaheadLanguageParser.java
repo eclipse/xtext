@@ -1,7 +1,7 @@
 /*
 Generated with Xtext
 */
-package org.eclipse.xtext.reference.parser;
+package org.eclipse.xtext.testlanguages.parser;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonToken;
@@ -13,18 +13,18 @@ import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.impl.ParseError;
 
-import org.eclipse.xtext.reference.parser.internal.InternalReferenceGrammarLexer;
-import org.eclipse.xtext.reference.parser.internal.InternalReferenceGrammarParser;
+import org.eclipse.xtext.testlanguages.parser.internal.InternalLookaheadLanguageLexer;
+import org.eclipse.xtext.testlanguages.parser.internal.InternalLookaheadLanguageParser;
 
 
-public class ReferenceGrammarParser extends org.eclipse.xtext.parser.AbstractParser {
+public class LookaheadLanguageParser extends org.eclipse.xtext.parser.AbstractParser {
 	
 	@Override
 	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
-		InternalReferenceGrammarLexer lexer = new InternalReferenceGrammarLexer(in);
+		InternalLookaheadLanguageLexer lexer = new InternalLookaheadLanguageLexer(in);
 		CommonTokenStream stream = new CommonTokenStream(lexer);
-		InternalReferenceGrammarParser parser = new InternalReferenceGrammarParser(
+		InternalLookaheadLanguageParser parser = new InternalLookaheadLanguageParser(
 				stream, factory, grammarAccess.getGrammar()) {
 					@Override
 			protected void reportError(IParseError error, RecognitionException re) {

@@ -10,7 +10,6 @@ public class EmptyModelTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		OptionalEmptyLanguageStandaloneSetup.doSetup();
 		with(OptionalEmptyLanguageStandaloneSetup.class);
 	}
 	

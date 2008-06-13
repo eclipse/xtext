@@ -5,13 +5,10 @@ package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
@@ -25,6 +22,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestResourceF
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.parsetree.SimpleReconstrTestParseTreeConstructor;
 
+import org.eclipse.xtext.parsetree.reconstr.ISimpleReconstrTest;
 
 public abstract class SimpleReconstrTestStandaloneSetup {
 
@@ -39,7 +37,12 @@ public abstract class SimpleReconstrTestStandaloneSetup {
 				"ecore", new XMIResourceFactoryImpl());
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
+			ILanguageDescriptor languageDescriptor = 
+				LanguageDescriptorFactory.createLanguageDescriptor(
+					ISimpleReconstrTest.ID, 
+					ISimpleReconstrTest.NAME, 
+					ISimpleReconstrTest.NAMESPACE, 
+					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
 			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, SimpleReconstrTestGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, SimpleReconstrTestMetamodelAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
@@ -48,30 +51,15 @@ public abstract class SimpleReconstrTestStandaloneSetup {
 			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, SimpleReconstrTestParseTreeConstructor.class);
 			
 			// register resource factory to EMF
-			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
-			isInitialized = true;
+			IResourceFactory resourceFactory = new SimpleReconstrTestResourceFactory();
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("simplereconstrtest", resourceFactory);
+			
+			
 		}
 	}
 	
-//TODO private constructor?
-//	private SimpleReconstrTestStandaloneSetup() {
-//	}
-
-	private static class InstanceHolder {
-		private static ILanguageDescriptor INSTANCE;
-
-		static {
-			INSTANCE = LanguageDescriptorFactory.get(ISimpleReconstrTest.ID);
-			if (INSTANCE == null) {
-				// TODO put super grammar
-				INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(ISimpleReconstrTest.ID,
-						ISimpleReconstrTest.NAME, ISimpleReconstrTest.NAMESPACE, XtextBuiltinStandaloneSetup
-								.getLanguageDescriptor());
-			}
-		}
-	}
-
 	public static ILanguageDescriptor getLanguageDescriptor() {
-		return InstanceHolder.INSTANCE;
+		return LanguageDescriptorFactory.get(ISimpleReconstrTest.ID);
 	}
+			
 }

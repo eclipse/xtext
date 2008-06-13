@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g 2008-06-12 14:31:11
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g 2008-06-13 13:45:45
 
 package org.eclipse.xtext.testlanguages.parser.internal;
 
@@ -8,7 +8,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
-public class InternalLookaheadLangLexer extends Lexer {
+public class InternalLookaheadLanguageLexer extends Lexer {
     public static final int RULE_ML_COMMENT=7;
     public static final int T14=14;
     public static final int RULE_ID=4;
@@ -63,18 +63,18 @@ public class InternalLookaheadLangLexer extends Lexer {
             }
         }
 
-    public InternalLookaheadLangLexer() {;} 
-    public InternalLookaheadLangLexer(CharStream input) {
+    public InternalLookaheadLanguageLexer() {;} 
+    public InternalLookaheadLanguageLexer(CharStream input) {
         super(input);
     }
-    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g"; }
+    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g"; }
 
     // $ANTLR start T12
     public final void mT12() throws RecognitionException {
         try {
             int _type = T12;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:45:5: ( 'bar' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:45:7: 'bar'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:45:5: ( 'bar' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:45:7: 'bar'
             {
             match("bar"); 
 
@@ -92,8 +92,8 @@ public class InternalLookaheadLangLexer extends Lexer {
     public final void mT13() throws RecognitionException {
         try {
             int _type = T13;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:46:5: ( 'c' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:46:7: 'c'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:46:5: ( 'c' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:46:7: 'c'
             {
             match('c'); 
 
@@ -110,8 +110,8 @@ public class InternalLookaheadLangLexer extends Lexer {
     public final void mT14() throws RecognitionException {
         try {
             int _type = T14;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:47:5: ( 'foo' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:47:7: 'foo'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:47:5: ( 'foo' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:47:7: 'foo'
             {
             match("foo"); 
 
@@ -129,8 +129,8 @@ public class InternalLookaheadLangLexer extends Lexer {
     public final void mT15() throws RecognitionException {
         try {
             int _type = T15;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:48:5: ( 'd' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:48:7: 'd'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:48:5: ( 'd' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:48:7: 'd'
             {
             match('d'); 
 
@@ -147,8 +147,8 @@ public class InternalLookaheadLangLexer extends Lexer {
     public final void mT16() throws RecognitionException {
         try {
             int _type = T16;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:49:5: ( 'e' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:49:7: 'e'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:49:5: ( 'e' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:49:7: 'e'
             {
             match('e'); 
 
@@ -165,10 +165,10 @@ public class InternalLookaheadLangLexer extends Lexer {
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:242:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:242:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:242:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:242:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:242:11: ( '^' )?
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:242:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -177,7 +177,7 @@ public class InternalLookaheadLangLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:242:12: '^'
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:242:12: '^'
                     {
                     match('^'); 
 
@@ -196,7 +196,7 @@ public class InternalLookaheadLangLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:242:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:242:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -209,7 +209,7 @@ public class InternalLookaheadLangLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -244,10 +244,10 @@ public class InternalLookaheadLangLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:244:10: ( ( '0' .. '9' )+ )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:244:12: ( '0' .. '9' )+
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:244:10: ( ( '0' .. '9' )+ )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:244:12: ( '0' .. '9' )+
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:244:12: ( '0' .. '9' )+
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:244:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -261,7 +261,7 @@ public class InternalLookaheadLangLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:244:13: '0' .. '9'
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:244:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -291,7 +291,7 @@ public class InternalLookaheadLangLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:246:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:246:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -309,10 +309,10 @@ public class InternalLookaheadLangLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:246:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:246:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
                     {
                     match('\"'); 
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:246:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:246:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -328,7 +328,7 @@ public class InternalLookaheadLangLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:246:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:246:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -345,7 +345,7 @@ public class InternalLookaheadLangLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:246:65: ~ ( '\\\\' | '\"' )
+                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:246:65: ~ ( '\\\\' | '\"' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -371,10 +371,10 @@ public class InternalLookaheadLangLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:246:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:246:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
                     {
                     match('\''); 
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:246:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:246:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -390,7 +390,7 @@ public class InternalLookaheadLangLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:246:93: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:246:93: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -407,7 +407,7 @@ public class InternalLookaheadLangLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:246:137: ~ ( '\\\\' | '\\'' )
+                    	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:246:137: ~ ( '\\\\' | '\\'' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -445,12 +445,12 @@ public class InternalLookaheadLangLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:248:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:248:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:248:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:248:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:248:24: ( options {greedy=false; } : . )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:248:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -475,7 +475,7 @@ public class InternalLookaheadLangLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:248:52: .
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:248:52: .
             	    {
             	    matchAny(); 
 
@@ -504,12 +504,12 @@ public class InternalLookaheadLangLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:250:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:250:19: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:250:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:250:19: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
             {
             match("//"); 
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:250:24: (~ ( '\\n' | '\\r' ) )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:250:24: (~ ( '\\n' | '\\r' ) )*
             loop8:
             do {
                 int alt8=2;
@@ -522,7 +522,7 @@ public class InternalLookaheadLangLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:250:24: ~ ( '\\n' | '\\r' )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:250:24: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -543,7 +543,7 @@ public class InternalLookaheadLangLexer extends Lexer {
                 }
             } while (true);
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:250:38: ( '\\r' )?
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:250:38: ( '\\r' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -552,7 +552,7 @@ public class InternalLookaheadLangLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:250:38: '\\r'
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:250:38: '\\r'
                     {
                     match('\r'); 
 
@@ -577,10 +577,10 @@ public class InternalLookaheadLangLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:252:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:252:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:252:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:252:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:252:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:252:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt10=0;
             loop10:
             do {
@@ -594,7 +594,7 @@ public class InternalLookaheadLangLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -634,12 +634,12 @@ public class InternalLookaheadLangLexer extends Lexer {
     public final void mRULE_LEXER_BODY() throws RecognitionException {
         try {
             int _type = RULE_LEXER_BODY;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:254:17: ( '<#' ( '.' )* '#>' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:254:19: '<#' ( '.' )* '#>'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:254:17: ( '<#' ( '.' )* '#>' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:254:19: '<#' ( '.' )* '#>'
             {
             match("<#"); 
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:254:24: ( '.' )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:254:24: ( '.' )*
             loop11:
             do {
                 int alt11=2;
@@ -652,7 +652,7 @@ public class InternalLookaheadLangLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:254:24: '.'
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:254:24: '.'
             	    {
             	    match('.'); 
 
@@ -680,8 +680,8 @@ public class InternalLookaheadLangLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:256:16: ( . )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:256:18: .
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:256:16: ( . )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:256:18: .
             {
             matchAny(); 
 
@@ -695,7 +695,7 @@ public class InternalLookaheadLangLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:1:8: ( T12 | T13 | T14 | T15 | T16 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER )
+        // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:1:8: ( T12 | T13 | T14 | T15 | T16 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER )
         int alt12=13;
         int LA12_0 = input.LA(1);
 
@@ -840,91 +840,91 @@ public class InternalLookaheadLangLexer extends Lexer {
         }
         switch (alt12) {
             case 1 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:1:10: T12
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:1:10: T12
                 {
                 mT12(); 
 
                 }
                 break;
             case 2 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:1:14: T13
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:1:14: T13
                 {
                 mT13(); 
 
                 }
                 break;
             case 3 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:1:18: T14
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:1:18: T14
                 {
                 mT14(); 
 
                 }
                 break;
             case 4 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:1:22: T15
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:1:22: T15
                 {
                 mT15(); 
 
                 }
                 break;
             case 5 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:1:26: T16
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:1:26: T16
                 {
                 mT16(); 
 
                 }
                 break;
             case 6 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:1:30: RULE_ID
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:1:30: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 7 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:1:38: RULE_INT
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:1:38: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 8 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:1:47: RULE_STRING
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:1:47: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 9 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:1:59: RULE_ML_COMMENT
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:1:59: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 10 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:1:75: RULE_SL_COMMENT
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:1:75: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 11 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:1:91: RULE_WS
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:1:91: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 12 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:1:99: RULE_LEXER_BODY
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:1:99: RULE_LEXER_BODY
                 {
                 mRULE_LEXER_BODY(); 
 
                 }
                 break;
             case 13 :
-                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.g:1:115: RULE_ANY_OTHER
+                // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g:1:115: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

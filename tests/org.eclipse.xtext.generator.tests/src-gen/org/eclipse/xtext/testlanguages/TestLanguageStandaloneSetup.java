@@ -5,13 +5,10 @@ package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
@@ -25,6 +22,7 @@ import org.eclipse.xtext.testlanguages.services.TestLanguageResourceFactory;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.testlanguages.parsetree.TestLanguageParseTreeConstructor;
 
+import org.eclipse.xtext.testlanguages.ITestLanguage;
 
 public abstract class TestLanguageStandaloneSetup {
 
@@ -39,7 +37,12 @@ public abstract class TestLanguageStandaloneSetup {
 				"ecore", new XMIResourceFactoryImpl());
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
+			ILanguageDescriptor languageDescriptor = 
+				LanguageDescriptorFactory.createLanguageDescriptor(
+					ITestLanguage.ID, 
+					ITestLanguage.NAME, 
+					ITestLanguage.NAMESPACE, 
+					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
 			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, TestLanguageGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, TestLanguageMetamodelAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
@@ -48,30 +51,15 @@ public abstract class TestLanguageStandaloneSetup {
 			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, TestLanguageParseTreeConstructor.class);
 			
 			// register resource factory to EMF
-			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
-			isInitialized = true;
+			IResourceFactory resourceFactory = new TestLanguageResourceFactory();
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("testlanguage", resourceFactory);
+			
+			
 		}
 	}
 	
-//TODO private constructor?
-//	private TestLanguageStandaloneSetup() {
-//	}
-
-	private static class InstanceHolder {
-		private static ILanguageDescriptor INSTANCE;
-
-		static {
-			INSTANCE = LanguageDescriptorFactory.get(ITestLanguage.ID);
-			if (INSTANCE == null) {
-				// TODO put super grammar
-				INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(ITestLanguage.ID,
-						ITestLanguage.NAME, ITestLanguage.NAMESPACE, XtextBuiltinStandaloneSetup
-								.getLanguageDescriptor());
-			}
-		}
-	}
-
 	public static ILanguageDescriptor getLanguageDescriptor() {
-		return InstanceHolder.INSTANCE;
+		return LanguageDescriptorFactory.get(ITestLanguage.ID);
 	}
+			
 }

@@ -5,13 +5,10 @@ package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.LexerLanguageGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
@@ -25,6 +22,7 @@ import org.eclipse.xtext.testlanguages.services.LexerLanguageResourceFactory;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.testlanguages.parsetree.LexerLanguageParseTreeConstructor;
 
+import org.eclipse.xtext.testlanguages.ILexerLanguage;
 
 public abstract class LexerLanguageStandaloneSetup {
 
@@ -39,7 +37,12 @@ public abstract class LexerLanguageStandaloneSetup {
 				"ecore", new XMIResourceFactoryImpl());
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
+			ILanguageDescriptor languageDescriptor = 
+				LanguageDescriptorFactory.createLanguageDescriptor(
+					ILexerLanguage.ID, 
+					ILexerLanguage.NAME, 
+					ILexerLanguage.NAMESPACE, 
+					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
 			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, LexerLanguageGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, LexerLanguageMetamodelAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
@@ -48,30 +51,15 @@ public abstract class LexerLanguageStandaloneSetup {
 			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, LexerLanguageParseTreeConstructor.class);
 			
 			// register resource factory to EMF
-			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
-			isInitialized = true;
+			IResourceFactory resourceFactory = new LexerLanguageResourceFactory();
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("lexerlanguage", resourceFactory);
+			
+			
 		}
 	}
 	
-//TODO private constructor?
-//	private LexerLanguageStandaloneSetup() {
-//	}
-
-	private static class InstanceHolder {
-		private static ILanguageDescriptor INSTANCE;
-
-		static {
-			INSTANCE = LanguageDescriptorFactory.get(ILexerLanguage.ID);
-			if (INSTANCE == null) {
-				// TODO put super grammar
-				INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(ILexerLanguage.ID,
-						ILexerLanguage.NAME, ILexerLanguage.NAMESPACE, XtextBuiltinStandaloneSetup
-								.getLanguageDescriptor());
-			}
-		}
-	}
-
 	public static ILanguageDescriptor getLanguageDescriptor() {
-		return InstanceHolder.INSTANCE;
+		return LanguageDescriptorFactory.get(ILexerLanguage.ID);
 	}
+			
 }

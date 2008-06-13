@@ -5,13 +5,10 @@ package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
@@ -25,6 +22,7 @@ import org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageResourceFac
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.testlanguages.parsetree.OptionalEmptyLanguageParseTreeConstructor;
 
+import org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage;
 
 public abstract class OptionalEmptyLanguageStandaloneSetup {
 
@@ -39,7 +37,12 @@ public abstract class OptionalEmptyLanguageStandaloneSetup {
 				"ecore", new XMIResourceFactoryImpl());
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
+			ILanguageDescriptor languageDescriptor = 
+				LanguageDescriptorFactory.createLanguageDescriptor(
+					IOptionalEmptyLanguage.ID, 
+					IOptionalEmptyLanguage.NAME, 
+					IOptionalEmptyLanguage.NAMESPACE, 
+					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
 			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, OptionalEmptyLanguageGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, OptionalEmptyLanguageMetamodelAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
@@ -48,30 +51,15 @@ public abstract class OptionalEmptyLanguageStandaloneSetup {
 			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, OptionalEmptyLanguageParseTreeConstructor.class);
 			
 			// register resource factory to EMF
-			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
-			isInitialized = true;
+			IResourceFactory resourceFactory = new OptionalEmptyLanguageResourceFactory();
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("optionalemptylanguage", resourceFactory);
+			
+			
 		}
 	}
 	
-//TODO private constructor?
-//	private OptionalEmptyLanguageStandaloneSetup() {
-//	}
-
-	private static class InstanceHolder {
-		private static ILanguageDescriptor INSTANCE;
-
-		static {
-			INSTANCE = LanguageDescriptorFactory.get(IOptionalEmptyLanguage.ID);
-			if (INSTANCE == null) {
-				// TODO put super grammar
-				INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(IOptionalEmptyLanguage.ID,
-						IOptionalEmptyLanguage.NAME, IOptionalEmptyLanguage.NAMESPACE, XtextBuiltinStandaloneSetup
-								.getLanguageDescriptor());
-			}
-		}
-	}
-
 	public static ILanguageDescriptor getLanguageDescriptor() {
-		return InstanceHolder.INSTANCE;
+		return LanguageDescriptorFactory.get(IOptionalEmptyLanguage.ID);
 	}
+			
 }

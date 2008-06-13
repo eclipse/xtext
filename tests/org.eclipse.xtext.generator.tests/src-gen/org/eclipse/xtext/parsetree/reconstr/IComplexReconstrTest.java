@@ -3,6 +3,9 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parsetree.reconstr;
 
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
+
 public interface IComplexReconstrTest {
 
 	/**
@@ -14,4 +17,5 @@ public interface IComplexReconstrTest {
 	public static final String ID = "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest";
 	public static final String NAME = "ComplexReconstrTest";
 	public static final String NAMESPACE = "org.eclipse.xtext.parsetree.reconstr";
+	
 }

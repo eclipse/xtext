@@ -2,7 +2,7 @@
 /*
 Generated with Xtext
 */
-grammar InternalLookaheadLang;
+grammar InternalLookaheadLanguage;
 
 options {
 	superClass=AbstractAntlrParser;
@@ -67,15 +67,15 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 
 @parser::members {
  
-    public InternalLookaheadLangParser(TokenStream input, IElementFactory factory, Grammar g) {
+    public InternalLookaheadLanguageParser(TokenStream input, IElementFactory factory, Grammar g) {
         this(input);
         this.factory = factory;
 		grammar = g;
     }
     
     protected InputStream getTokenFile() {
-    	ClassLoader classLoader = InternalLookaheadLangParser.class.getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLang.tokens");
+    	ClassLoader classLoader = InternalLookaheadLanguageParser.class.getClassLoader();
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.tokens");
     }
 }
 

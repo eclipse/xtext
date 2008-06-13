@@ -2,7 +2,7 @@
 /*
 Generated with Xtext
 */
-package org.eclipse.xtext.reference.parsetree.internal;
+package org.eclipse.xtext.testlanguages.parsetree.internal;
 
 
 import org.eclipse.emf.ecore.EObject;

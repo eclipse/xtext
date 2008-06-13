@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class LookaheadLangMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
+public class LookaheadLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
 	public EPackage[] getGeneratedEPackages() {
 		return new EPackage[] {
@@ -29,7 +29,7 @@ public class LookaheadLangMetamodelAccess extends BaseEPackageAccess implements 
 	
 	public static EPackage getLookaheadLangEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(LOOKAHEADLANG_NS_URI)) {
-			EPackage p = loadEcoreFile(LookaheadLangMetamodelAccess.class.getClassLoader(),LOOKAHEADLANG_CP_URI);
+			EPackage p = loadEcoreFile(LookaheadLanguageMetamodelAccess.class.getClassLoader(),LOOKAHEADLANG_CP_URI);
 			if (p!=null) {
 				EPackage.Registry.INSTANCE.put(LOOKAHEADLANG_NS_URI,p);
 			}
