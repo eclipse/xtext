@@ -45,10 +45,10 @@ public class «genClassFQName.toSimpleName()» extends BaseEPackageAccess implemen
 	}
 
 	«FOREACH grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm»
-	public static final String «gmm.name.toUpperCase()»_NS_URI = "«gmm.nsURI»";
-	public static final String «gmm.name.toUpperCase()»_CP_URI = "«generatedMetaModelBasePath()»/«gmm.name».ecore";
+	protected static final String «gmm.name.toUpperCase()»_NS_URI = "«gmm.nsURI»";
+	protected static final String «gmm.name.toUpperCase()»_CP_URI = "«generatedMetaModelBasePath()»/«gmm.name».ecore";
 	
-	public static EPackage get«gmm.name.toFirstUpper()»EPackage() {	
+	protected EPackage get«gmm.name.toFirstUpper()»EPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(«gmm.name.toUpperCase()»_NS_URI)) {
 			EPackage p = loadEcoreFile(«genClassFQName.toSimpleName()».class.getClassLoader(),«gmm.name.toUpperCase()»_CP_URI);
 			if (p!=null) {
