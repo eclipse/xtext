@@ -22,6 +22,9 @@
 */
 package «languageInterfaceFQName.toJavaPackage()»;
 
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
+
 public interface «languageInterfaceFQName.toSimpleName()» {
 
 	/**
@@ -33,6 +36,7 @@ public interface «languageInterfaceFQName.toSimpleName()» {
 	public static final String ID = "«grammar().getId()»";
 	public static final String NAME = "«grammar().getName()»";
 	public static final String NAMESPACE = "«grammar().getNamespace()»";
+	
 }
 «ENDFILE»
 «ENDDEFINE»

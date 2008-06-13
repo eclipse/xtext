@@ -22,6 +22,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
+import org.eclipse.xtext.GenerateAllTestGrammars;
+import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
@@ -39,6 +41,22 @@ import org.openarchitectureware.xtend.XtendFacade;
  */
 public abstract class AbstractGeneratorTest extends TestCase {
 
+    static {
+        XtextStandaloneSetup.doSetup();
+        for(Class<?> testClass :GenerateAllTestGrammars.testclasses) {
+            try {
+                String standaloneSetupClassName = testClass.getName() + "StandaloneSetup";
+                Class<?> standaloneSetupClass = Class.forName(standaloneSetupClassName);
+                Method doSetupMethod = standaloneSetupClass.getMethod("doSetup");
+                doSetupMethod.invoke(null);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            } 
+        }
+    }
+    
 	private ILanguageDescriptor currentLanguageDescriptor;
 
 	@Override
@@ -57,10 +75,9 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	 * call this to set the language class to be used in the current test.
 	 */
 	protected void with(Class<?> standaloneSetup) throws Exception {
-	    Method doSetupMethod = standaloneSetup.getMethod("doSetup");
-	    doSetupMethod.invoke(null);
 		Method getLangDescMethod = standaloneSetup.getMethod("getLanguageDescriptor");
 		currentLanguageDescriptor = (ILanguageDescriptor) getLangDescMethod.invoke(null);
+		assert currentLanguageDescriptor != null;
 	}
 
 	protected IParser getParser() {

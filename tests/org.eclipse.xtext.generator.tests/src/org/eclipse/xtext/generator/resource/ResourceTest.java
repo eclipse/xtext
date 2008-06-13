@@ -4,24 +4,25 @@ import java.io.File;
 import java.io.FileWriter;
 import java.net.MalformedURLException;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ITestLanguage;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.xtext2ecore.EcoreModelComparator;
 
-public class ResourceTest extends TestCase {
+public class ResourceTest extends AbstractGeneratorTest {
 
 	public void testResource() throws Exception {
 		new Object(); // workaround for Java bug on MacOSX
-		org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup.doSetup();
-		IResourceFactory resourceFactory = ServiceRegistry.getService(TestLanguageStandaloneSetup.getLanguageDescriptor(), IResourceFactory.class);
+		ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.get(ITestLanguage.ID);
+		IResourceFactory resourceFactory = ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
 
 		File modelFile = File.createTempFile("testfile", "." + resourceFactory.getModelFileExtensions()[0]);
 		modelFile.deleteOnExit();

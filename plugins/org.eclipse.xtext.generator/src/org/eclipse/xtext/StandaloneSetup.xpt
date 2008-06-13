@@ -24,17 +24,16 @@ package «standaloneSetupClassFQName.toJavaPackage()»;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-
 «FOREACH genModel().services AS s-»
 import «s.serviceInterfaceFQName»;
 import «s.genClassFQName»;
-«ENDFOREACH»
+«ENDFOREACH-»
+
+import «languageInterfaceFQName»;
 
 public abstract class «standaloneSetupClassFQName.toSimpleName()» {
 
@@ -49,37 +48,29 @@ public abstract class «standaloneSetupClassFQName.toSimpleName()» {
 				"ecore", new XMIResourceFactoryImpl());
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
-			ILanguageDescriptor languageDescriptor = getLanguageDescriptor();
+			ILanguageDescriptor languageDescriptor = 
+				LanguageDescriptorFactory.createLanguageDescriptor(
+					«languageInterfaceFQName.toSimpleName()».ID, 
+					«languageInterfaceFQName.toSimpleName()».NAME, 
+					«languageInterfaceFQName.toSimpleName()».NAMESPACE, 
+					LanguageDescriptorFactory.get("«grammar().getSuperGrammar().getId()»"));
 			«FOREACH genModel().services AS s-»
 			ServiceRegistry.registerService(languageDescriptor, «s.serviceInterfaceFQName.toSimpleName()».class, «s.genClassFQName.toSimpleName()».class);
 			«ENDFOREACH»
+			«IF resourceFactoryService() != null-»
 			// register resource factory to EMF
-			ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
-			isInitialized = true;
+			IResourceFactory resourceFactory = new «resourceFactoryService().genClassFQName.toSimpleName()»();
+			«FOREACH modelFileExtensions() AS modelFileExtension-»
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", resourceFactory);
+			«ENDFOREACH»
+			«ENDIF»
 		}
 	}
 	
-//TODO private constructor?
-//	private «standaloneSetupClassFQName.toSimpleName()»() {
-//	}
-
-	private static class InstanceHolder {
-		private static ILanguageDescriptor INSTANCE;
-
-		static {
-			INSTANCE = LanguageDescriptorFactory.get(I«languageName()».ID);
-			if (INSTANCE == null) {
-				// TODO put super grammar
-				INSTANCE = LanguageDescriptorFactory.createLanguageDescriptor(I«languageName()».ID,
-						I«languageName()».NAME, I«languageName()».NAMESPACE, XtextBuiltinStandaloneSetup
-								.getLanguageDescriptor());
-			}
-		}
-	}
-
 	public static ILanguageDescriptor getLanguageDescriptor() {
-		return InstanceHolder.INSTANCE;
+		return LanguageDescriptorFactory.get(«languageInterfaceFQName.toSimpleName()».ID);
 	}
+			
 }
 «ENDFILE»
 «ENDDEFINE»

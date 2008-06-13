@@ -21,21 +21,28 @@
 */
 package «genClassFQName.toJavaPackage()»;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.resource.AbstractXtextResourceFactory;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.service.LanguageDescriptorFactory;
 
-public class «genClassFQName.toSimpleName()» extends AbstractXtextResourceFactory {
+public class «genClassFQName.toSimpleName()» implements IResourceFactory {
 
-	public «genClassFQName.toSimpleName()»() {
-		«FOREACH modelFileExtensions() AS modelFileExtension»
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", this);
-		«ENDFOREACH»
-	}
-	
 	public String[] getModelFileExtensions() {
 		return new String[] { «FOREACH modelFileExtensions() AS modelFileExtension SEPARATOR ', '»"«modelFileExtension»"«ENDFOREACH» };
 	}
 	
+	 /* (non-Javadoc)
+     * @see org.eclipse.emf.ecore.resource.Resource.Factory#createResource(org.eclipse.emf.common.util.URI)
+     */
+    public Resource createResource(URI uri) {
+        XtextResource resource = new XtextResource(uri);
+        ServiceRegistry.injectServices(LanguageDescriptorFactory.get("«languageId()»"), resource);
+        return resource;
+    }
+    
 } 
 «ENDFILE»
 «ENDDEFINE»

@@ -11,6 +11,7 @@
 
 «IMPORT xtextgen»
 
+«EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
 «DEFINE plugin_xml FOR GenModel»
@@ -37,13 +38,28 @@
       <languageDescriptor
             id="«languageId()»"
             name="«languageName()»"
-            superLanguage="org.eclipse.xtext.builtin.XtextBuiltin">
+            superLanguage="«grammar().getSuperGrammar().getId()»">
       </languageDescriptor>
    </extension>
+   «IF resourceFactoryService() != null-»
+   «EXPAND registerResourceFactoryDescriptor FOR resourceFactoryService()-»
+   «ENDIF»
    «EXPAND registerServiceFactory FOREACH genModel().services-»
    
 </plugin>
 «ENDFILE»
+«ENDDEFINE»
+
+«DEFINE registerResourceFactoryDescriptor FOR GenService-»
+   «FOREACH modelFileExtensions() AS modelFileExtension-»
+   <extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="«genClassFQName»"
+            type="«modelFileExtension»">
+      </parser>
+   </extension>
+   «ENDFOREACH-»
 «ENDDEFINE»
 
 «DEFINE registerServiceFactory FOR GenService-»
