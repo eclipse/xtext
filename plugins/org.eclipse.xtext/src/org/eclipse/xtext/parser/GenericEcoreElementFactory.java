@@ -34,6 +34,10 @@ public class GenericEcoreElementFactory implements IElementFactory {
     @Inject
     protected IValueConverterService converterService;
 
+    public void setMetamodelAccess(IMetamodelAccess metamodelAccess) {
+        this.metamodelAccess = metamodelAccess;
+    }
+    
     public EObject create(String fullTypeName) {
         EClass clazz = getEClass(fullTypeName);
         if (clazz != null && !(clazz.isAbstract() || clazz.isInterface()))
