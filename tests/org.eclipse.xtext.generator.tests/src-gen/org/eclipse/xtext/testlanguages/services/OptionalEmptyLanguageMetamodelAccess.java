@@ -24,10 +24,10 @@ public class OptionalEmptyLanguageMetamodelAccess extends BaseEPackageAccess imp
 	}
 
 	
-	public static final String OPTIONALEMPTY_NS_URI = "http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty";
-	public static final String OPTIONALEMPTY_CP_URI = "org/eclipse/xtext/testlanguages/OptionalEmpty.ecore";
+	protected static final String OPTIONALEMPTY_NS_URI = "http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty";
+	protected static final String OPTIONALEMPTY_CP_URI = "org/eclipse/xtext/testlanguages/OptionalEmpty.ecore";
 	
-	public static EPackage getOptionalEmptyEPackage() {	
+	protected EPackage getOptionalEmptyEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(OPTIONALEMPTY_NS_URI)) {
 			EPackage p = loadEcoreFile(OptionalEmptyLanguageMetamodelAccess.class.getClassLoader(),OPTIONALEMPTY_CP_URI);
 			if (p!=null) {

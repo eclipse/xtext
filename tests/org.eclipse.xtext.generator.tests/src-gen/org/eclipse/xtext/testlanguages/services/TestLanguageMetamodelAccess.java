@@ -24,10 +24,10 @@ public class TestLanguageMetamodelAccess extends BaseEPackageAccess implements I
 	}
 
 	
-	public static final String TESTLANG_NS_URI = "http://www.eclipse.org/2008/xtext/TestLang";
-	public static final String TESTLANG_CP_URI = "org/eclipse/xtext/testlanguages/TestLang.ecore";
+	protected static final String TESTLANG_NS_URI = "http://www.eclipse.org/2008/xtext/TestLang";
+	protected static final String TESTLANG_CP_URI = "org/eclipse/xtext/testlanguages/TestLang.ecore";
 	
-	public static EPackage getTestLangEPackage() {	
+	protected EPackage getTestLangEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(TESTLANG_NS_URI)) {
 			EPackage p = loadEcoreFile(TestLanguageMetamodelAccess.class.getClassLoader(),TESTLANG_CP_URI);
 			if (p!=null) {

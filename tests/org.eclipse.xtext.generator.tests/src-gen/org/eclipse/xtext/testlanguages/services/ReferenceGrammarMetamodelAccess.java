@@ -24,10 +24,10 @@ public class ReferenceGrammarMetamodelAccess extends BaseEPackageAccess implemen
 	}
 
 	
-	public static final String REFERENCEGRAMMAR_NS_URI = "http://eclipse.org/xtext/reference/ReferenceGrammar";
-	public static final String REFERENCEGRAMMAR_CP_URI = "org/eclipse/xtext/testlanguages/ReferenceGrammar.ecore";
+	protected static final String REFERENCEGRAMMAR_NS_URI = "http://eclipse.org/xtext/reference/ReferenceGrammar";
+	protected static final String REFERENCEGRAMMAR_CP_URI = "org/eclipse/xtext/testlanguages/ReferenceGrammar.ecore";
 	
-	public static EPackage getReferenceGrammarEPackage() {	
+	protected EPackage getReferenceGrammarEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(REFERENCEGRAMMAR_NS_URI)) {
 			EPackage p = loadEcoreFile(ReferenceGrammarMetamodelAccess.class.getClassLoader(),REFERENCEGRAMMAR_CP_URI);
 			if (p!=null) {

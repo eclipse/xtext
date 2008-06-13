@@ -24,10 +24,10 @@ public class SimpleExpressionsMetamodelAccess extends BaseEPackageAccess impleme
 	}
 
 	
-	public static final String SIMPLEEXPRESSIONS_NS_URI = "http://www.eclipse.org/xtext/test/simpleExpressions";
-	public static final String SIMPLEEXPRESSIONS_CP_URI = "org/eclipse/xtext/testlanguages/simpleExpressions.ecore";
+	protected static final String SIMPLEEXPRESSIONS_NS_URI = "http://www.eclipse.org/xtext/test/simpleExpressions";
+	protected static final String SIMPLEEXPRESSIONS_CP_URI = "org/eclipse/xtext/testlanguages/simpleExpressions.ecore";
 	
-	public static EPackage getSimpleExpressionsEPackage() {	
+	protected EPackage getSimpleExpressionsEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(SIMPLEEXPRESSIONS_NS_URI)) {
 			EPackage p = loadEcoreFile(SimpleExpressionsMetamodelAccess.class.getClassLoader(),SIMPLEEXPRESSIONS_CP_URI);
 			if (p!=null) {

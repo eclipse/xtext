@@ -24,10 +24,10 @@ public class ComplexReconstrTestMetamodelAccess extends BaseEPackageAccess imple
 	}
 
 	
-	public static final String COMPLEXREWRITETEST_NS_URI = "http://complex/rewrite/test";
-	public static final String COMPLEXREWRITETEST_CP_URI = "org/eclipse/xtext/parsetree/reconstr/complexrewritetest.ecore";
+	protected static final String COMPLEXREWRITETEST_NS_URI = "http://complex/rewrite/test";
+	protected static final String COMPLEXREWRITETEST_CP_URI = "org/eclipse/xtext/parsetree/reconstr/complexrewritetest.ecore";
 	
-	public static EPackage getComplexrewritetestEPackage() {	
+	protected EPackage getComplexrewritetestEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(COMPLEXREWRITETEST_NS_URI)) {
 			EPackage p = loadEcoreFile(ComplexReconstrTestMetamodelAccess.class.getClassLoader(),COMPLEXREWRITETEST_CP_URI);
 			if (p!=null) {

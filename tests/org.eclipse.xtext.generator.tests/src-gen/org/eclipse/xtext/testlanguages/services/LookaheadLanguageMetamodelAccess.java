@@ -24,10 +24,10 @@ public class LookaheadLanguageMetamodelAccess extends BaseEPackageAccess impleme
 	}
 
 	
-	public static final String LOOKAHEADLANG_NS_URI = "http://www.eclipse.org/2008/xtext/LookaheadLang";
-	public static final String LOOKAHEADLANG_CP_URI = "org/eclipse/xtext/testlanguages/LookaheadLang.ecore";
+	protected static final String LOOKAHEADLANG_NS_URI = "http://www.eclipse.org/2008/xtext/LookaheadLang";
+	protected static final String LOOKAHEADLANG_CP_URI = "org/eclipse/xtext/testlanguages/LookaheadLang.ecore";
 	
-	public static EPackage getLookaheadLangEPackage() {	
+	protected EPackage getLookaheadLangEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(LOOKAHEADLANG_NS_URI)) {
 			EPackage p = loadEcoreFile(LookaheadLanguageMetamodelAccess.class.getClassLoader(),LOOKAHEADLANG_CP_URI);
 			if (p!=null) {
