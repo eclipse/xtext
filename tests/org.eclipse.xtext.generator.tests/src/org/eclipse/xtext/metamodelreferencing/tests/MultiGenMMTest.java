@@ -9,9 +9,10 @@
 package org.eclipse.xtext.metamodelreferencing.tests;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestMetamodelAccess;
+import org.eclipse.xtext.parser.GenericEcoreElementFactory;
+import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
@@ -31,8 +32,14 @@ public class MultiGenMMTest extends AbstractGeneratorTest {
         super.setUp();
         with(MetamodelRefTestStandaloneSetup.class);
         ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.get(IMetamodelRefTest.ID);
-        ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, MetamodelAccessOverride.class, 
-                ServiceRegistry.PRIORITY_MAX);
+        GenericEcoreElementFactory astFactory = (GenericEcoreElementFactory) ServiceRegistry.getService(languageDescriptor,
+                IElementFactory.class);
+        astFactory.setMetamodelAccess(new MetamodelRefTestMetamodelAccess() {
+            @Override
+            public EPackage[] getGeneratedEPackages() {
+                return new EPackage[] { getSimpleTestEPackage(), XtextPackage.eINSTANCE };
+            }
+        });
     }
 
     public void testStuff() throws Exception {
