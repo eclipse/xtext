@@ -24,10 +24,10 @@ public class XtextGrammarTestMetamodelAccess extends BaseEPackageAccess implemen
 	}
 
 	
-	public static final String XTEXTTEST_NS_URI = "http://www.eclipse.org/2008/Test/XtextTest";
-	public static final String XTEXTTEST_CP_URI = "org/eclipse/xtext/XtextTest.ecore";
+	protected static final String XTEXTTEST_NS_URI = "http://www.eclipse.org/2008/Test/XtextTest";
+	protected static final String XTEXTTEST_CP_URI = "org/eclipse/xtext/XtextTest.ecore";
 	
-	public static EPackage getXtextTestEPackage() {	
+	protected EPackage getXtextTestEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(XTEXTTEST_NS_URI)) {
 			EPackage p = loadEcoreFile(XtextGrammarTestMetamodelAccess.class.getClassLoader(),XTEXTTEST_CP_URI);
 			if (p!=null) {

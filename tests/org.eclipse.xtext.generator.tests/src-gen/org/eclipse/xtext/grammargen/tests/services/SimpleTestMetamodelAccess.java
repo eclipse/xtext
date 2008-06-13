@@ -24,10 +24,10 @@ public class SimpleTestMetamodelAccess extends BaseEPackageAccess implements IMe
 	}
 
 	
-	public static final String SIMPLETEST_NS_URI = "http://eclipse.org/xtext/tests/SimpleTest";
-	public static final String SIMPLETEST_CP_URI = "org/eclipse/xtext/grammargen/tests/SimpleTest.ecore";
+	protected static final String SIMPLETEST_NS_URI = "http://eclipse.org/xtext/tests/SimpleTest";
+	protected static final String SIMPLETEST_CP_URI = "org/eclipse/xtext/grammargen/tests/SimpleTest.ecore";
 	
-	public static EPackage getSimpleTestEPackage() {	
+	protected EPackage getSimpleTestEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(SIMPLETEST_NS_URI)) {
 			EPackage p = loadEcoreFile(SimpleTestMetamodelAccess.class.getClassLoader(),SIMPLETEST_CP_URI);
 			if (p!=null) {

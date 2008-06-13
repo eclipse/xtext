@@ -24,10 +24,10 @@ public class SimpleReconstrTestMetamodelAccess extends BaseEPackageAccess implem
 	}
 
 	
-	public static final String SIMPLEREWRITETEST_NS_URI = "http://simple/rewrite/test";
-	public static final String SIMPLEREWRITETEST_CP_URI = "org/eclipse/xtext/parsetree/reconstr/simplerewritetest.ecore";
+	protected static final String SIMPLEREWRITETEST_NS_URI = "http://simple/rewrite/test";
+	protected static final String SIMPLEREWRITETEST_CP_URI = "org/eclipse/xtext/parsetree/reconstr/simplerewritetest.ecore";
 	
-	public static EPackage getSimplerewritetestEPackage() {	
+	protected EPackage getSimplerewritetestEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(SIMPLEREWRITETEST_NS_URI)) {
 			EPackage p = loadEcoreFile(SimpleReconstrTestMetamodelAccess.class.getClassLoader(),SIMPLEREWRITETEST_CP_URI);
 			if (p!=null) {

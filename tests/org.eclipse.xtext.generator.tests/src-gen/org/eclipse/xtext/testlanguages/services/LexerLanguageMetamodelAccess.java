@@ -24,10 +24,10 @@ public class LexerLanguageMetamodelAccess extends BaseEPackageAccess implements 
 	}
 
 	
-	public static final String LEXERLANG_NS_URI = "http://www.eclipse.org/2008/xtext/LexerLang";
-	public static final String LEXERLANG_CP_URI = "org/eclipse/xtext/testlanguages/LexerLang.ecore";
+	protected static final String LEXERLANG_NS_URI = "http://www.eclipse.org/2008/xtext/LexerLang";
+	protected static final String LEXERLANG_CP_URI = "org/eclipse/xtext/testlanguages/LexerLang.ecore";
 	
-	public static EPackage getLexerLangEPackage() {	
+	protected EPackage getLexerLangEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(LEXERLANG_NS_URI)) {
 			EPackage p = loadEcoreFile(LexerLanguageMetamodelAccess.class.getClassLoader(),LEXERLANG_CP_URI);
 			if (p!=null) {

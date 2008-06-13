@@ -24,10 +24,10 @@ public class ActionTestLanguageMetamodelAccess extends BaseEPackageAccess implem
 	}
 
 	
-	public static final String ACTIONLANG_NS_URI = "http://www.eclipse.org/2008/tmf/xtext/ActionLang";
-	public static final String ACTIONLANG_CP_URI = "org/eclipse/xtext/testlanguages/ActionLang.ecore";
+	protected static final String ACTIONLANG_NS_URI = "http://www.eclipse.org/2008/tmf/xtext/ActionLang";
+	protected static final String ACTIONLANG_CP_URI = "org/eclipse/xtext/testlanguages/ActionLang.ecore";
 	
-	public static EPackage getActionLangEPackage() {	
+	protected EPackage getActionLangEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(ACTIONLANG_NS_URI)) {
 			EPackage p = loadEcoreFile(ActionTestLanguageMetamodelAccess.class.getClassLoader(),ACTIONLANG_CP_URI);
 			if (p!=null) {

@@ -24,10 +24,10 @@ public class DummyLanguageMetamodelAccess extends BaseEPackageAccess implements 
 	}
 
 	
-	public static final String DUMMYLANG_NS_URI = "http://www.eclipse.org/2008/xtext/DummyLang";
-	public static final String DUMMYLANG_CP_URI = "org/eclipse/xtext/dummy/DummyLang.ecore";
+	protected static final String DUMMYLANG_NS_URI = "http://www.eclipse.org/2008/xtext/DummyLang";
+	protected static final String DUMMYLANG_CP_URI = "org/eclipse/xtext/dummy/DummyLang.ecore";
 	
-	public static EPackage getDummyLangEPackage() {	
+	protected EPackage getDummyLangEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(DUMMYLANG_NS_URI)) {
 			EPackage p = loadEcoreFile(DummyLanguageMetamodelAccess.class.getClassLoader(),DUMMYLANG_CP_URI);
 			if (p!=null) {
