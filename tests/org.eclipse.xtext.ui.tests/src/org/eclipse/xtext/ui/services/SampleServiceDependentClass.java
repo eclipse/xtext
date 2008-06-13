@@ -9,7 +9,7 @@
 package org.eclipse.xtext.ui.services;
 
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.service.InjectedService;
+import org.eclipse.xtext.service.Inject;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -19,7 +19,7 @@ public class SampleServiceDependentClass {
 
     private IParser parser;
 
-    @InjectedService
+    @Inject
     public void setParser(IParser parser) {
         this.parser = parser;
     }

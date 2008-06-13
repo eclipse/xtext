@@ -13,7 +13,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.InjectedService;
+import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.service.IPreferenceStoreService;
 import org.eclipse.xtext.ui.service.ISyntaxColorer;
@@ -54,17 +54,17 @@ public class BuildInSyntaxColorer implements ISyntaxColorer {
 		return tsToSet;
 	}
 
-	@InjectedService
+	@Inject
 	public void setTokenTypeDefService(ITokenTypeDefService service) {
 		this.tokenTypeDef = service;
 	}
 
-	@InjectedService
+	@Inject
 	public void setPreferenceStoreService(IPreferenceStoreService preferenceStoreService) {
 		this.preferenceStoreService = preferenceStoreService;
 	}
 
-	@InjectedService
+	@Inject
 	public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
 		this.languageDescriptor = languageDescriptor;
 	}
