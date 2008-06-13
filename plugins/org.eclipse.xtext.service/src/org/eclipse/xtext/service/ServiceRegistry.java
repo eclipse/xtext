@@ -238,7 +238,8 @@ public class ServiceRegistry {
                 throw new IllegalArgumentException("Annotated method must have exactly one parameter");
             }
             if (parameterTypes.length == 1
-                    && (method.isAnnotationPresent(InjectedService.class) || ILanguageDescriptor.class.equals(parameterTypes[0]))) {
+                    && method.isAnnotationPresent(InjectedService.class)) {
+            	method.setAccessible(true);
                 if (ILanguageDescriptor.class.equals(parameterTypes[0])) {
                     method.invoke(patient, languageDescriptor);
                 } else {
