@@ -12,6 +12,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
@@ -30,6 +31,7 @@ public class BISyntaxColorerTest extends AbstractServiceTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		XtextBuiltinStandaloneSetup.doSetup();
 		colorer = new BuildInSyntaxColorer();
 		colorer.setLanguageDescriptor(createMock(ILanguageDescriptor.class, new InvocationHandlerImpl()));
 		colorer.setTokenTypeDefService(new BuildInTokenTypeDef());
