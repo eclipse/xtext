@@ -33,7 +33,7 @@ public class LanguageDescriptorFactory {
 		synchronized (id2descriptorMap) {
 			ILanguageDescriptor existingLanguageDescriptor = id2descriptorMap.get(languageId);
 			if (existingLanguageDescriptor != null) {
-				throw new IllegalArgumentException("LanguageDescriptor " + languageId + "already registered.");
+				throw new IllegalArgumentException("LanguageDescriptor " + languageId + " already registered.");
 			}
 			LanguageDescriptor languageDescriptor = new LanguageDescriptor(languageId, languageName, namespace,
 					superLanguage);

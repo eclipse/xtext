@@ -55,10 +55,14 @@ public abstract class DummyLanguageStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("dummylanguage", resourceFactory);
 			
 			
+			isInitialized = true;
 		}
 	}
 	
 	public static ILanguageDescriptor getLanguageDescriptor() {
+		if(!isInitialized) {
+			doSetup();
+		}
 		return LanguageDescriptorFactory.get(IDummyLanguage.ID);
 	}
 			

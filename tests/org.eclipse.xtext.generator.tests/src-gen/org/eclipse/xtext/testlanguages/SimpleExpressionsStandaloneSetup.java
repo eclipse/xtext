@@ -55,10 +55,14 @@ public abstract class SimpleExpressionsStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("simpleexpressions", resourceFactory);
 			
 			
+			isInitialized = true;
 		}
 	}
 	
 	public static ILanguageDescriptor getLanguageDescriptor() {
+		if(!isInitialized) {
+			doSetup();
+		}
 		return LanguageDescriptorFactory.get(ISimpleExpressions.ID);
 	}
 			
