@@ -99,17 +99,6 @@ public class LanguageServiceActivator {
 					CoreLog.logError(e);
 				}
 			}
-			for (LanguageDescriptorDescriptor languageDD : languageDDs) {
-				// register resource factories to EMF
-				try {
-					ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.get(languageDD.languageId);
-					ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
-				}
-				catch (Exception exc) {
-					// TODO: FIXME
-				}
-			}
-			ServiceRegistry.freeze();
 		}
 	}
 

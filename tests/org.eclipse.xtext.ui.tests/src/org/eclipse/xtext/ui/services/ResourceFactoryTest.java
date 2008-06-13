@@ -11,8 +11,10 @@ package org.eclipse.xtext.ui.services;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.Resource.Factory;
+import org.eclipse.emf.ecore.resource.Resource.Factory.Descriptor;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.reference.services.ReferenceGrammarResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
@@ -23,13 +25,15 @@ public class ResourceFactoryTest extends AbstractServiceTest {
     
     public static final String REFERENCE_GRAMMAR_FILE_EXTENSION = "xtext";
     public void testResourceFactoryRegistration() throws Exception {
+        // activate UI plugin
+        Class.forName("org.eclipse.xtext.ui.editor.BaseTextEditor");
         ResourceSet rs = new ResourceSetImpl();
         Resource resource = rs.createResource(URI.createFileURI("test." + REFERENCE_GRAMMAR_FILE_EXTENSION));
         assertNotNull(resource);
         assertTrue(resource instanceof XtextResource);
         
-        Object factoryFromEmfRegistry = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(REFERENCE_GRAMMAR_FILE_EXTENSION);
-        IResourceFactory resourceFactory = getServiceForDefaultLanguage(IResourceFactory.class);
-        assertEquals(resourceFactory, factoryFromEmfRegistry);
+        Resource.Factory.Descriptor factoryFromEmfRegistry = (Descriptor) Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(REFERENCE_GRAMMAR_FILE_EXTENSION);
+        Factory factory = factoryFromEmfRegistry.createFactory();
+        assertTrue(factory instanceof ReferenceGrammarResourceFactory);
     }
 }
