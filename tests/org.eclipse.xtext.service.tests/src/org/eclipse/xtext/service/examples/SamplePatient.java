@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.service.examples;
 
-import org.eclipse.xtext.service.InjectedService;
+import org.eclipse.xtext.service.Inject;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -18,7 +18,7 @@ public class SamplePatient {
 
     private InjectedLanguageService service;
 
-    @InjectedService 
+    @Inject 
     public void setService(InjectedLanguageService s) {
         this.service = s;
     }

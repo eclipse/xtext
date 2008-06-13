@@ -220,12 +220,12 @@ public class ServiceRegistry {
             Map<Class<?>, ILanguageService> cachedServices) throws IllegalAccessException, InvocationTargetException {
     	Field[] fields = inspectedClass.getDeclaredFields();
     	for (Field field : fields) {
-			if (field.isAnnotationPresent(InjectedService.class)) {
+			if (field.isAnnotationPresent(Inject.class)) {
+			    field.setAccessible(true);
 				if (ILanguageDescriptor.class.equals(field.getType())) {
                     field.set(patient, languageDescriptor);
                 } else {
                     ILanguageService injectedService = findAndInitializeService(languageDescriptor, field.getType(), cachedServices);
-                    field.setAccessible(true);
                     field.set(patient, injectedService);
                 }
 			}
@@ -234,11 +234,11 @@ public class ServiceRegistry {
         Method[] methods = inspectedClass.getDeclaredMethods();
         for (Method method : methods) {
             Class<?>[] parameterTypes = method.getParameterTypes();
-            if (parameterTypes.length != 1 && method.isAnnotationPresent(InjectedService.class)) {
+            if (parameterTypes.length != 1 && method.isAnnotationPresent(Inject.class)) {
                 throw new IllegalArgumentException("Annotated method must have exactly one parameter");
             }
             if (parameterTypes.length == 1
-                    && method.isAnnotationPresent(InjectedService.class)) {
+                    && method.isAnnotationPresent(Inject.class)) {
             	method.setAccessible(true);
                 if (ILanguageDescriptor.class.equals(parameterTypes[0])) {
                     method.invoke(patient, languageDescriptor);

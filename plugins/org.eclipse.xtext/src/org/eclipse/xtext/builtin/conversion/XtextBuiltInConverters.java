@@ -8,13 +8,13 @@ import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractAnnotationBasedValueConverterService;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.conversion.impl.AbstractToStringConverter;
-import org.eclipse.xtext.service.InjectedService;
+import org.eclipse.xtext.service.Inject;
 
 public class XtextBuiltInConverters extends AbstractAnnotationBasedValueConverterService {
 
 	private Grammar g;
 	
-	@InjectedService
+	@Inject
 	public void setGrammar(IGrammarAccess ga) {
 		this.g = ga.getGrammar();
 	}

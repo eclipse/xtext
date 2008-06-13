@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.service.InjectedService;
+import org.eclipse.xtext.service.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -28,19 +28,11 @@ import org.eclipse.xtext.service.InjectedService;
  */
 public class GenericEcoreElementFactory implements IElementFactory {
 
+    @Inject
     protected IMetamodelAccess metamodelAccess;
 
-    @InjectedService
-    public void setMetamodelAccess(IMetamodelAccess metamodelAccess) {
-        this.metamodelAccess = metamodelAccess;
-    }
-
+    @Inject
     protected IValueConverterService converterService;
-
-    @InjectedService
-    public void setValueConverterService(IValueConverterService converterService) {
-        this.converterService = converterService;
-    }
 
     public EObject create(String fullTypeName) {
         EClass clazz = getEClass(fullTypeName);

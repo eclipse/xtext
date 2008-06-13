@@ -29,7 +29,7 @@ import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.InjectedService;
+import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.editor.model.IEditorModel;
 import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
@@ -49,6 +49,8 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	private IEditorModel model;
 	private XtextContentOutlinePage outlinePage;
 	protected boolean selectionSetFromOutline;
+	
+	@Inject
 	private ILanguageDescriptor languageDescriptor;
 
 	@Override
@@ -93,11 +95,6 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 
 	public ILanguageDescriptor getLanguageDescriptor() {
 		return languageDescriptor;
-	}
-
-	@InjectedService
-	public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
-		this.languageDescriptor = languageDescriptor;
 	}
 
 	public IEditorModel getModel() {

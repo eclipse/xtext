@@ -10,7 +10,7 @@
 package org.eclipse.xtext.service.examples;
 
 import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.service.InjectedService;
+import org.eclipse.xtext.service.Inject;
 
 /**
  * 
@@ -25,7 +25,7 @@ public class MyLanguageService implements ILanguageService {
         return injectedService;
     }
 
-    @InjectedService
+    @Inject
     public void setInjectedService(InjectedLanguageService injectedService) {
         this.injectedService = injectedService;
     }

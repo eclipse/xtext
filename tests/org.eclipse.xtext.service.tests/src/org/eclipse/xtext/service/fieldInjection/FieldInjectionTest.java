@@ -1,7 +1,7 @@
 package org.eclipse.xtext.service.fieldInjection;
 
 import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.InjectedService;
+import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
 
 import junit.framework.TestCase;
@@ -34,11 +34,11 @@ public class FieldInjectionTest extends TestCase {
 		serviceRegistry.registerFactory(languageDescriptor, new ServiceFactory());
 	}
 	
-	@InjectedService
+	@Inject
 	private IService privateService;
-	@InjectedService
+	@Inject
 	protected IService protectedService;
-	@InjectedService
+	@Inject
 	public IService publicService;
 	
 	public void testSimple() throws Exception {

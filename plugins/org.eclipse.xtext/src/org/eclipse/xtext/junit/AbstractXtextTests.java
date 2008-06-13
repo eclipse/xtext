@@ -8,7 +8,7 @@ import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.InjectedService;
+import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.util.StringInputStream;
 import org.openarchitectureware.expression.ExecutionContextImpl;
@@ -24,7 +24,7 @@ public abstract class AbstractXtextTests extends TestCase {
 		super(name);
 	}
 	
-	@InjectedService
+	@Inject
 	private IParser parser;
 	public IParser getParser() {
 		return parser;

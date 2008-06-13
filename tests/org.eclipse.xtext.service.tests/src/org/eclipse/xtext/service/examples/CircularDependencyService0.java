@@ -9,7 +9,7 @@
 package org.eclipse.xtext.service.examples;
 
 import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.service.InjectedService;
+import org.eclipse.xtext.service.Inject;
 
 /**
  * @author Jan Köhnlein
@@ -19,7 +19,7 @@ public class CircularDependencyService0 implements ILanguageService {
 
     private CircularDependencyService1 service;
 
-    @InjectedService
+    @Inject
     public void setDependency(CircularDependencyService1 service) {
         this.service = service;
     }
