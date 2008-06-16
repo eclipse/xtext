@@ -76,10 +76,10 @@ public abstract class AbstractServiceTest extends TestCase {
 			else if (service.isPrimitive()) {
 				String name = service.getName();
 				if (name.equals(Integer.TYPE.getName())) {
-					return (T) new Integer(0);
+					return (T) Integer.valueOf(0);
 				}
 				else if (name.equals(Boolean.TYPE.getName())) {
-					return (T) new Boolean(false);
+					return (T) Boolean.valueOf(false);
 				}
 				return (T) Class.forName(service.getName()).newInstance();
 			}
