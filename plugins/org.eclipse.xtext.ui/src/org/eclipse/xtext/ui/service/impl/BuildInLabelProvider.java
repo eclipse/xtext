@@ -28,7 +28,7 @@ public class BuildInLabelProvider extends ReflectiveItemProvider implements ILab
 			new ReflectiveItemProviderAdapterFactory());
 
 	/**
-	 * Extends ReflectiveItemProvider to use it useful stuff ;)
+	 * Extends ReflectiveItemProvider to use its useful stuff ;)
 	 * 
 	 * @param adapterFactory
 	 */
