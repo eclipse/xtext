@@ -19,6 +19,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.reference.ui.services.contentassist.Proposal;
 import org.eclipse.xtext.reference.ui.services.contentassist.XtextCompletionProposal;
 import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.editor.model.IEditorModel;
 import org.eclipse.xtext.ui.service.IProposalsProvider;
@@ -28,14 +29,13 @@ import org.eclipse.xtext.ui.service.IProposalsProvider;
  * 
  */
 public class ReferenceProposalsProvider implements IProposalsProvider {
-
+	@Inject
 	private ILanguageDescriptor languageDescriptor;
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.eclipse.xtext.ui.service.IProposalsProvider#getProposals(org
+	 * @see org.eclipse.xtext.ui.service.IProposalsProvider#getProposals(org
 	 * .eclipse.jface.text.ITextViewer, int)
 	 */
 	public List<ICompletionProposal> getProposals(IEditorModel model, ITextViewer viewer, int offset) {
@@ -66,10 +66,6 @@ public class ReferenceProposalsProvider implements IProposalsProvider {
 			list.add(new XtextCompletionProposal(proposal, offset));
 		}
 		return list;
-	}
-
-	public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
-		this.languageDescriptor = languageDescriptor;
 	}
 
 }
