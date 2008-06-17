@@ -164,7 +164,11 @@ public class XtextEditorModel implements IEditorModel {
 				reconcile();
 			}
 		}
-		return parseResult.getRootASTElement();
+		// FIXME emptyfile => parseresult was null, getAstRoot called! => NPE
+		if (parseResult != null)
+			return parseResult.getRootASTElement();
+		else
+			return null;
 	}
 
 	protected boolean dirty = true;
