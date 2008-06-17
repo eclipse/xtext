@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-  
+  <!--
    <extension
          point="org.eclipse.xtext.ui.proposalsProvider">
       <proposalsProvider
@@ -9,6 +9,7 @@
             languageId="org.eclipse.xtext.reference.ReferenceGrammar">
       </proposalsProvider>
    </extension>
+   -->
    <extension
          point="org.eclipse.xtext.ui.tokenTypeDef">
       <tokenTypeDef
