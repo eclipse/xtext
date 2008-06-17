@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenPackage.java,v 1.2 2008/06/09 12:52:54 jkohnlein Exp $
+ * $Id: XtextgenPackage.java,v 1.3 2008/06/17 14:45:51 pfriese Exp $
  */
 package org.eclipse.xtext.xtextgen;
 
@@ -115,13 +115,22 @@ public interface XtextgenPackage extends EPackage {
     int GEN_SERVICE__GEN_PARAMETERS = 4;
 
     /**
+     * The feature id for the '<em><b>Ui Service</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int GEN_SERVICE__UI_SERVICE = 5;
+
+    /**
      * The number of structural features of the '<em>Gen Service</em>' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int GEN_SERVICE_FEATURE_COUNT = 5;
+    int GEN_SERVICE_FEATURE_COUNT = 6;
 
     /**
      * The meta object id for the '{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl <em>Gen Model</em>}' class.
@@ -297,6 +306,17 @@ public interface XtextgenPackage extends EPackage {
      * @generated
      */
     EReference getGenService_GenParameters();
+
+    /**
+     * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.GenService#isUiService <em>Ui Service</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Ui Service</em>'.
+     * @see org.eclipse.xtext.xtextgen.GenService#isUiService()
+     * @see #getGenService()
+     * @generated
+     */
+    EAttribute getGenService_UiService();
 
     /**
      * Returns the meta object for class '{@link org.eclipse.xtext.xtextgen.GenModel <em>Gen Model</em>}'.
@@ -489,6 +509,14 @@ public interface XtextgenPackage extends EPackage {
          * @generated
          */
         EReference GEN_SERVICE__GEN_PARAMETERS = eINSTANCE.getGenService_GenParameters();
+
+        /**
+         * The meta object literal for the '<em><b>Ui Service</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute GEN_SERVICE__UI_SERVICE = eINSTANCE.getGenService_UiService();
 
         /**
          * The meta object literal for the '{@link org.eclipse.xtext.xtextgen.impl.GenModelImpl <em>Gen Model</em>}' class.

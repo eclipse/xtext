@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenService.java,v 1.2 2008/06/09 12:52:54 jkohnlein Exp $
+ * $Id: GenService.java,v 1.3 2008/06/17 14:45:51 pfriese Exp $
  */
 package org.eclipse.xtext.xtextgen;
 
@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.xtextgen.GenService#getExtensionPointID <em>Extension Point ID</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.GenService#getTemplatePath <em>Template Path</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.GenService#getGenParameters <em>Gen Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.GenService#isUiService <em>Ui Service</em>}</li>
  * </ul>
  * </p>
  *
@@ -178,5 +179,31 @@ public interface GenService extends EObject {
      * @generated
      */
     EMap<String, String> getGenParameters();
+
+    /**
+     * Returns the value of the '<em><b>Ui Service</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Ui Service</em>' attribute isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Ui Service</em>' attribute.
+     * @see #setUiService(boolean)
+     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_UiService()
+     * @model
+     * @generated
+     */
+    boolean isUiService();
+
+    /**
+     * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#isUiService <em>Ui Service</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Ui Service</em>' attribute.
+     * @see #isUiService()
+     * @generated
+     */
+    void setUiService(boolean value);
 
 } // GenService

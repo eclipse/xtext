@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenPackageImpl.java,v 1.2 2008/06/09 12:52:54 jkohnlein Exp $
+ * $Id: XtextgenPackageImpl.java,v 1.3 2008/06/17 14:45:51 pfriese Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
@@ -171,6 +171,15 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
      * <!-- end-user-doc -->
      * @generated
      */
+    public EAttribute getGenService_UiService() {
+        return (EAttribute)genServiceEClass.getEStructuralFeatures().get(5);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public EClass getGenModel() {
         return genModelEClass;
     }
@@ -299,6 +308,7 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
         createEAttribute(genServiceEClass, GEN_SERVICE__EXTENSION_POINT_ID);
         createEAttribute(genServiceEClass, GEN_SERVICE__TEMPLATE_PATH);
         createEReference(genServiceEClass, GEN_SERVICE__GEN_PARAMETERS);
+        createEAttribute(genServiceEClass, GEN_SERVICE__UI_SERVICE);
 
         genModelEClass = createEClass(GEN_MODEL);
         createEAttribute(genModelEClass, GEN_MODEL__MODEL_FILE_EXTENSIONS);
@@ -352,6 +362,7 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
         initEAttribute(getGenService_ExtensionPointID(), ecorePackage.getEString(), "extensionPointID", null, 0, 1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getGenService_TemplatePath(), ecorePackage.getEString(), "templatePath", null, 0, 1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEReference(getGenService_GenParameters(), ecorePackage.getEStringToStringMapEntry(), null, "genParameters", null, 0, -1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getGenService_UiService(), ecorePackage.getEBoolean(), "uiService", null, 0, 1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(genModelEClass, GenModel.class, "GenModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getGenModel_ModelFileExtensions(), ecorePackage.getEString(), "modelFileExtensions", null, 0, -1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -28,7 +28,7 @@ import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-«FOREACH genModel().services AS s-»
+«FOREACH genModel().nonUiServices() AS s-»
 import «s.serviceInterfaceFQName»;
 import «s.genClassFQName»;
 «ENDFOREACH-»
@@ -54,7 +54,7 @@ public abstract class «standaloneSetupClassFQName.toSimpleName()» {
 					«languageInterfaceFQName.toSimpleName()».NAME, 
 					«languageInterfaceFQName.toSimpleName()».NAMESPACE, 
 					LanguageDescriptorFactory.get("«grammar().getSuperGrammar().getId()»"));
-			«FOREACH genModel().services AS s-»
+			«FOREACH genModel().nonUiServices() AS s-»
 			ServiceRegistry.registerService(languageDescriptor, «s.serviceInterfaceFQName.toSimpleName()».class, «s.genClassFQName.toSimpleName()».class);
 			«ENDFOREACH»
 			«IF resourceFactoryService() != null-»

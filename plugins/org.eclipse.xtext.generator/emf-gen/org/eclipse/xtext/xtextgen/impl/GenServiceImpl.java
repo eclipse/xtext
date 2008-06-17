@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenServiceImpl.java,v 1.2 2008/06/09 12:52:54 jkohnlein Exp $
+ * $Id: GenServiceImpl.java,v 1.3 2008/06/17 14:45:51 pfriese Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
@@ -35,6 +35,7 @@ import org.eclipse.xtext.xtextgen.XtextgenPackage;
  *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenServiceImpl#getExtensionPointID <em>Extension Point ID</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenServiceImpl#getTemplatePath <em>Template Path</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenServiceImpl#getGenParameters <em>Gen Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.impl.GenServiceImpl#isUiService <em>Ui Service</em>}</li>
  * </ul>
  * </p>
  *
@@ -139,6 +140,26 @@ public class GenServiceImpl extends EObjectImpl implements GenService {
      * @ordered
      */
     protected EMap<String, String> genParameters;
+
+    /**
+     * The default value of the '{@link #isUiService() <em>Ui Service</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isUiService()
+     * @generated
+     * @ordered
+     */
+    protected static final boolean UI_SERVICE_EDEFAULT = false;
+
+    /**
+     * The cached value of the '{@link #isUiService() <em>Ui Service</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #isUiService()
+     * @generated
+     * @ordered
+     */
+    protected boolean uiService = UI_SERVICE_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
@@ -285,6 +306,27 @@ public class GenServiceImpl extends EObjectImpl implements GenService {
      * <!-- end-user-doc -->
      * @generated
      */
+    public boolean isUiService() {
+        return uiService;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setUiService(boolean newUiService) {
+        boolean oldUiService = uiService;
+        uiService = newUiService;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_SERVICE__UI_SERVICE, oldUiService, uiService));
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
@@ -299,6 +341,8 @@ public class GenServiceImpl extends EObjectImpl implements GenService {
             case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
                 if (coreType) return getGenParameters();
                 else return getGenParameters().map();
+            case XtextgenPackage.GEN_SERVICE__UI_SERVICE:
+                return isUiService() ? Boolean.TRUE : Boolean.FALSE;
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -325,6 +369,9 @@ public class GenServiceImpl extends EObjectImpl implements GenService {
                 return;
             case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
                 ((EStructuralFeature.Setting)getGenParameters()).set(newValue);
+                return;
+            case XtextgenPackage.GEN_SERVICE__UI_SERVICE:
+                setUiService(((Boolean)newValue).booleanValue());
                 return;
         }
         super.eSet(featureID, newValue);
@@ -353,6 +400,9 @@ public class GenServiceImpl extends EObjectImpl implements GenService {
             case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
                 getGenParameters().clear();
                 return;
+            case XtextgenPackage.GEN_SERVICE__UI_SERVICE:
+                setUiService(UI_SERVICE_EDEFAULT);
+                return;
         }
         super.eUnset(featureID);
     }
@@ -375,6 +425,8 @@ public class GenServiceImpl extends EObjectImpl implements GenService {
                 return isSetTemplatePath();
             case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
                 return genParameters != null && !genParameters.isEmpty();
+            case XtextgenPackage.GEN_SERVICE__UI_SERVICE:
+                return uiService != UI_SERVICE_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }
@@ -397,6 +449,8 @@ public class GenServiceImpl extends EObjectImpl implements GenService {
         result.append(extensionPointID);
         result.append(", templatePath: ");
         if (templatePathESet) result.append(templatePath); else result.append("<unset>");
+        result.append(", uiService: ");
+        result.append(uiService);
         result.append(')');
         return result.toString();
     }

@@ -13,6 +13,9 @@ extension org::eclipse::xtext::Extensions;
 
 GenModel genModel() :
 	GLOBALVAR genModel;
+	
+nonUiServices(GenModel this):
+    this.services.select(e|e.uiService==false);
 
 modelFileExtensions() :
 	genModel().modelFileExtensions;
