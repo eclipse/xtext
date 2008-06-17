@@ -42,7 +42,9 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	 */
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		List<ICompletionProposal> proposals = proposalProvider.getProposals(modelProvider.getModel(), viewer, offset);
-		return proposals.toArray(new ICompletionProposal[0]);
+		if (proposals != null && !proposals.isEmpty())
+			return proposals.toArray(new ICompletionProposal[0]);
+		return null;
 	}
 
 	/*
