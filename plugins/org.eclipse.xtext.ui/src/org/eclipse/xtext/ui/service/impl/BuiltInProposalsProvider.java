@@ -8,21 +8,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.text.ITextViewer;
+import org.eclipse.jface.text.contentassist.CompletionProposal;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.ui.editor.model.IEditorModel;
 import org.eclipse.xtext.ui.service.IProposalsProvider;
 
 /**
  * @author Peter Friese - Initial contribution and API
- *
+ * 
  */
 public class BuiltInProposalsProvider implements IProposalsProvider {
-    
-    public List<ICompletionProposal> getProposals(IEditorModel model, ITextViewer viewer, int offset) {
-        return null;
-    }
 
+    public List<ICompletionProposal> getProposals(IEditorModel model, ITextViewer viewer, int offset) {
+        List<ICompletionProposal> result = new ArrayList<ICompletionProposal>();
+
+        String replacementString = "dummy";
+        ICompletionProposal proposal = new CompletionProposal(replacementString, offset, 0, replacementString.length());
+        result.add(proposal);
+        return result;
+    }
 }
