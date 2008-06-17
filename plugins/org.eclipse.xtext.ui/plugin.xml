@@ -112,4 +112,11 @@
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </labelProvider>
    </extension>
+   <extension
+         point="org.eclipse.xtext.ui.proposalsProvider">
+      <proposalsProvider
+            class="org.eclipse.xtext.ui.service.impl.BuiltInProposalsProvider"
+            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
+      </proposalsProvider>
+   </extension>
 </plugin>
