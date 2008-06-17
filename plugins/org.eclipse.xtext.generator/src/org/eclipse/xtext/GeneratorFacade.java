@@ -170,14 +170,6 @@ public class GeneratorFacade {
             parsetreeConstructorService.setTemplatePath("org::eclipse::xtext::parsetree::ParseTreeConstructor::root");
             parsetreeConstructorService.setExtensionPointID("org.eclipse.xtext.ui.parseTreeConstructor");
             genModel.getServices().add(parsetreeConstructorService);
-            
-            GenService proposalsProviderService = XtextgenFactory.eINSTANCE.createGenService();
-            proposalsProviderService.setServiceInterfaceFQName("org.eclipse.xtext.ui.service.IProposalsProvider");
-            proposalsProviderService.setGenClassFQName("org.eclipse.xtext.ui.service.impl.BuiltInProposalsProvider");
-            // no template, as service is generic. Nevertheless, we need the individual registration to avoid conflicts
-            proposalsProviderService.setExtensionPointID("org.eclipse.xtext.ui.proposalsProvider");
-            proposalsProviderService.setUiService(true);
-            genModel.getServices().add(proposalsProviderService);
         }
 	    
         return genModel;
