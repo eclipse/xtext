@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.services;
+package org.eclipse.xtext.ui.services.bearing;
 
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.service.Inject;
