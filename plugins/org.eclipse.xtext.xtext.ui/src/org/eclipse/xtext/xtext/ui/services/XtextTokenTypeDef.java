@@ -11,6 +11,8 @@ package org.eclipse.xtext.xtext.ui.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef;
@@ -32,6 +34,7 @@ public class XtextTokenTypeDef extends BuildInTokenTypeDef {
 	public List<ITokenTypeDef> allTokenTypes() {
 		List<ITokenTypeDef> allTokenTypes = new ArrayList<ITokenTypeDef>();
 		allTokenTypes.add(special());
+
 		allTokenTypes.addAll(super.allTokenTypes());
 		return allTokenTypes;
 	}
@@ -40,12 +43,14 @@ public class XtextTokenTypeDef extends BuildInTokenTypeDef {
 		TokenTypeDef ttd = new TokenTypeDef("special") {
 			@Override
 			public boolean match(LeafNode node) {
-				return "ID".equals(node.getText()) || "STRING".equals(node.getText());
+				return RuleCall.class.isInstance(node.getGrammarElement())
+						&& ("ID".equals(node.getText()) || "STRING".equals(node.getText()) || "INT".equals(node
+								.getText()));
 			}
 		};
 		TextStyle ts = keyWordTokenType().getTextStyle();
+		ts.setStyle(ts.getStyle() | SWT.ITALIC);
 		ttd.setTextStyle(ts);
 		return ttd;
 	}
-
 }
