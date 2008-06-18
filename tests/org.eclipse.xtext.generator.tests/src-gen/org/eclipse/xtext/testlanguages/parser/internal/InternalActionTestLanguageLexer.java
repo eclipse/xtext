@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g 2008-06-13 17:38:25
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g 2008-06-18 12:01:25
 
 package org.eclipse.xtext.testlanguages.parser.internal;
 
@@ -65,10 +65,10 @@ public class InternalActionTestLanguageLexer extends Lexer {
     public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g"; }
 
     // $ANTLR start RULE_ID
-    public final void mRULE_ID() throws RecognitionException {
+    public void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:190:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:190:11: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:190:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:190:11: ( '^' )?
@@ -144,10 +144,10 @@ public class InternalActionTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_ID
 
     // $ANTLR start RULE_INT
-    public final void mRULE_INT() throws RecognitionException {
+    public void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:192:10: ( ( '0' .. '9' )+ )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:192:12: ( ( '0' .. '9' )+ )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:192:12: ( '0' .. '9' )+
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:192:12: ( '0' .. '9' )+
@@ -191,10 +191,10 @@ public class InternalActionTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_INT
 
     // $ANTLR start RULE_STRING
-    public final void mRULE_STRING() throws RecognitionException {
+    public void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:194:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:194:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -345,10 +345,10 @@ public class InternalActionTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_STRING
 
     // $ANTLR start RULE_ML_COMMENT
-    public final void mRULE_ML_COMMENT() throws RecognitionException {
+    public void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:196:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:196:19: ( '/*' ( options {greedy=false; } : . )* '*/' )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:196:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
@@ -404,11 +404,11 @@ public class InternalActionTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_ML_COMMENT
 
     // $ANTLR start RULE_SL_COMMENT
-    public final void mRULE_SL_COMMENT() throws RecognitionException {
+    public void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:198:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:198:19: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:198:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )? )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:198:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )?
             {
             match("//"); 
 
@@ -425,7 +425,7 @@ public class InternalActionTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:198:24: ~ ( '\\n' | '\\r' )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:198:26: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -446,25 +446,71 @@ public class InternalActionTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:198:38: ( '\\r' )?
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:198:41: ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )?
+            int alt10=2;
+            int LA10_0 = input.LA(1);
 
-            if ( (LA9_0=='\r') ) {
-                alt9=1;
+            if ( (LA10_0=='\n'||LA10_0=='\r') ) {
+                alt10=1;
             }
-            switch (alt9) {
+            switch (alt10) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:198:38: '\\r'
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:198:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )
                     {
-                    match('\r'); 
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:198:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )
+                    int alt9=3;
+                    int LA9_0 = input.LA(1);
+
+                    if ( (LA9_0=='\r') ) {
+                        int LA9_1 = input.LA(2);
+
+                        if ( (LA9_1=='\n') ) {
+                            alt9=1;
+                        }
+                        else {
+                            alt9=2;}
+                    }
+                    else if ( (LA9_0=='\n') ) {
+                        alt9=3;
+                    }
+                    else {
+                        NoViableAltException nvae =
+                            new NoViableAltException("198:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )", 9, 0, input);
+
+                        throw nvae;
+                    }
+                    switch (alt9) {
+                        case 1 :
+                            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:198:65: '\\r\\n'
+                            {
+                            match("\r\n"); 
+
+
+                            }
+                            break;
+                        case 2 :
+                            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:198:74: '\\r'
+                            {
+                            match('\r'); 
+
+                            }
+                            break;
+                        case 3 :
+                            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:198:81: '\\n'
+                            {
+                            match('\n'); 
+
+                            }
+                            break;
+
+                    }
+
 
                     }
                     break;
 
             }
 
-            match('\n'); 
             channel=HIDDEN;
 
             }
@@ -477,25 +523,25 @@ public class InternalActionTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_SL_COMMENT
 
     // $ANTLR start RULE_WS
-    public final void mRULE_WS() throws RecognitionException {
+    public void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:200:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:200:11: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:200:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:200:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
-            int cnt10=0;
-            loop10:
+            int cnt11=0;
+            loop11:
             do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
+                int alt11=2;
+                int LA11_0 = input.LA(1);
 
-                if ( ((LA10_0>='\t' && LA10_0<='\n')||LA10_0=='\r'||LA10_0==' ') ) {
-                    alt10=1;
+                if ( ((LA11_0>='\t' && LA11_0<='\n')||LA11_0=='\r'||LA11_0==' ') ) {
+                    alt11=1;
                 }
 
 
-                switch (alt10) {
+                switch (alt11) {
             	case 1 :
             	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:
             	    {
@@ -514,12 +560,12 @@ public class InternalActionTestLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt10 >= 1 ) break loop10;
+            	    if ( cnt11 >= 1 ) break loop11;
                         EarlyExitException eee =
-                            new EarlyExitException(10, input);
+                            new EarlyExitException(11, input);
                         throw eee;
                 }
-                cnt10++;
+                cnt11++;
             } while (true);
 
             channel=HIDDEN;
@@ -534,26 +580,26 @@ public class InternalActionTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_WS
 
     // $ANTLR start RULE_LEXER_BODY
-    public final void mRULE_LEXER_BODY() throws RecognitionException {
+    public void mRULE_LEXER_BODY() throws RecognitionException {
         try {
             int _type = RULE_LEXER_BODY;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:202:17: ( '<#' ( '.' )* '#>' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:202:19: ( '<#' ( '.' )* '#>' )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:202:19: '<#' ( '.' )* '#>'
             {
             match("<#"); 
 
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:202:24: ( '.' )*
-            loop11:
+            loop12:
             do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
+                int alt12=2;
+                int LA12_0 = input.LA(1);
 
-                if ( (LA11_0=='.') ) {
-                    alt11=1;
+                if ( (LA12_0=='.') ) {
+                    alt12=1;
                 }
 
 
-                switch (alt11) {
+                switch (alt12) {
             	case 1 :
             	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:202:24: '.'
             	    {
@@ -563,7 +609,7 @@ public class InternalActionTestLanguageLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop11;
+            	    break loop12;
                 }
             } while (true);
 
@@ -580,10 +626,10 @@ public class InternalActionTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_LEXER_BODY
 
     // $ANTLR start RULE_ANY_OTHER
-    public final void mRULE_ANY_OTHER() throws RecognitionException {
+    public void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:204:16: ( . )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:204:18: ( . )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:204:18: .
             {
             matchAny(); 
@@ -598,81 +644,81 @@ public class InternalActionTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:1:8: ( RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER )
-        int alt12=8;
-        int LA12_0 = input.LA(1);
+        // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:1:10: ( RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER )
+        int alt13=8;
+        int LA13_0 = input.LA(1);
 
-        if ( (LA12_0=='^') ) {
-            int LA12_1 = input.LA(2);
+        if ( (LA13_0=='^') ) {
+            int LA13_1 = input.LA(2);
 
-            if ( ((LA12_1>='A' && LA12_1<='Z')||LA12_1=='_'||(LA12_1>='a' && LA12_1<='z')) ) {
-                alt12=1;
+            if ( ((LA13_1>='A' && LA13_1<='Z')||LA13_1=='_'||(LA13_1>='a' && LA13_1<='z')) ) {
+                alt13=1;
             }
             else {
-                alt12=8;}
+                alt13=8;}
         }
-        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='z')) ) {
-            alt12=1;
+        else if ( ((LA13_0>='A' && LA13_0<='Z')||LA13_0=='_'||(LA13_0>='a' && LA13_0<='z')) ) {
+            alt13=1;
         }
-        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
-            alt12=2;
+        else if ( ((LA13_0>='0' && LA13_0<='9')) ) {
+            alt13=2;
         }
-        else if ( (LA12_0=='\"') ) {
-            int LA12_4 = input.LA(2);
+        else if ( (LA13_0=='\"') ) {
+            int LA13_4 = input.LA(2);
 
-            if ( ((LA12_4>='\u0000' && LA12_4<='\uFFFE')) ) {
-                alt12=3;
+            if ( ((LA13_4>='\u0000' && LA13_4<='\uFFFE')) ) {
+                alt13=3;
             }
             else {
-                alt12=8;}
+                alt13=8;}
         }
-        else if ( (LA12_0=='\'') ) {
-            int LA12_5 = input.LA(2);
+        else if ( (LA13_0=='\'') ) {
+            int LA13_5 = input.LA(2);
 
-            if ( ((LA12_5>='\u0000' && LA12_5<='\uFFFE')) ) {
-                alt12=3;
+            if ( ((LA13_5>='\u0000' && LA13_5<='\uFFFE')) ) {
+                alt13=3;
             }
             else {
-                alt12=8;}
+                alt13=8;}
         }
-        else if ( (LA12_0=='/') ) {
+        else if ( (LA13_0=='/') ) {
             switch ( input.LA(2) ) {
             case '/':
                 {
-                alt12=5;
+                alt13=5;
                 }
                 break;
             case '*':
                 {
-                alt12=4;
+                alt13=4;
                 }
                 break;
             default:
-                alt12=8;}
+                alt13=8;}
 
         }
-        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
-            alt12=6;
+        else if ( ((LA13_0>='\t' && LA13_0<='\n')||LA13_0=='\r'||LA13_0==' ') ) {
+            alt13=6;
         }
-        else if ( (LA12_0=='<') ) {
-            int LA12_8 = input.LA(2);
+        else if ( (LA13_0=='<') ) {
+            int LA13_8 = input.LA(2);
 
-            if ( (LA12_8=='#') ) {
-                alt12=7;
+            if ( (LA13_8=='#') ) {
+                alt13=7;
             }
             else {
-                alt12=8;}
+                alt13=8;}
         }
-        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<=';')||(LA12_0>='=' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFE')) ) {
-            alt12=8;
+        else if ( ((LA13_0>='\u0000' && LA13_0<='\b')||(LA13_0>='\u000B' && LA13_0<='\f')||(LA13_0>='\u000E' && LA13_0<='\u001F')||LA13_0=='!'||(LA13_0>='#' && LA13_0<='&')||(LA13_0>='(' && LA13_0<='.')||(LA13_0>=':' && LA13_0<=';')||(LA13_0>='=' && LA13_0<='@')||(LA13_0>='[' && LA13_0<=']')||LA13_0=='`'||(LA13_0>='{' && LA13_0<='\uFFFE')) ) {
+            alt13=8;
         }
         else {
             NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER );", 12, 0, input);
+                new NoViableAltException("1:1: Tokens : ( RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER );", 13, 0, input);
 
             throw nvae;
         }
-        switch (alt12) {
+        switch (alt13) {
             case 1 :
                 // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:1:10: RULE_ID
                 {

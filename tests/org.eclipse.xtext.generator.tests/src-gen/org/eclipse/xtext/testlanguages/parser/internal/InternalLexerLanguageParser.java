@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g 2008-06-13 17:38:24
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g 2008-06-18 12:01:24
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -56,14 +56,14 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start internalParse
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:91:1: internalParse returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
-    public final EObject internalParse() throws RecognitionException {
+    public EObject internalParse() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleModel = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:91:46: (iv_ruleModel= ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:92:3: (iv_ruleModel= ruleModel EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:92:3: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
@@ -93,7 +93,7 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleModel
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:100:1: ruleModel returns [EObject current=null] : (lv_children= ruleElement )* ;
-    public final EObject ruleModel() throws RecognitionException {
+    public EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_children = null;
@@ -101,7 +101,7 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:101:33: ( (lv_children= ruleElement )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:102:1: ( (lv_children= ruleElement )* )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:102:1: (lv_children= ruleElement )*
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:102:1: (lv_children= ruleElement )*
@@ -162,7 +162,7 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleElement
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:120:1: ruleElement returns [EObject current=null] : ( (lv_name= RULE_ID ) (lv_h= RULE_STRING ) ) ;
-    public final EObject ruleElement() throws RecognitionException {
+    public EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
@@ -170,7 +170,7 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:121:33: ( ( (lv_name= RULE_ID ) (lv_h= RULE_STRING ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:122:1: ( ( (lv_name= RULE_ID ) (lv_h= RULE_STRING ) ) )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:122:1: ( (lv_name= RULE_ID ) (lv_h= RULE_STRING ) )
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:122:1: ( (lv_name= RULE_ID ) (lv_h= RULE_STRING ) )

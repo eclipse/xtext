@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g 2008-06-13 17:38:25
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g 2008-06-18 12:01:25
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -56,14 +56,14 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start internalParse
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:91:1: internalParse returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
-    public final EObject internalParse() throws RecognitionException {
+    public EObject internalParse() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleModel = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:91:46: (iv_ruleModel= ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:92:3: (iv_ruleModel= ruleModel EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:92:3: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
@@ -93,7 +93,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleModel
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:100:1: ruleModel returns [EObject current=null] : (lv_child= ruleGreeting )? ;
-    public final EObject ruleModel() throws RecognitionException {
+    public EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_child = null;
@@ -101,7 +101,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:101:33: ( (lv_child= ruleGreeting )? )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:102:1: ( (lv_child= ruleGreeting )? )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:102:1: (lv_child= ruleGreeting )?
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:102:1: (lv_child= ruleGreeting )?
@@ -155,14 +155,14 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleGreeting
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:120:1: ruleGreeting returns [EObject current=null] : ( 'hallo' (lv_name= RULE_ID ) ) ;
-    public final EObject ruleGreeting() throws RecognitionException {
+    public EObject ruleGreeting() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
 
          EObject temp=null; 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:121:33: ( ( 'hallo' (lv_name= RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:122:1: ( ( 'hallo' (lv_name= RULE_ID ) ) )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:122:1: ( 'hallo' (lv_name= RULE_ID ) )
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:122:1: ( 'hallo' (lv_name= RULE_ID ) )

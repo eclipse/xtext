@@ -48,7 +48,7 @@ public class XtextBuiltinGrammarAccess implements IGrammarAccess {
 		g.getLexerRules().add(l);
 		l = f.createLexerRule();
 		l.setName("SL_COMMENT");
-		l.setBody("'//' ~('\\n'|'\\r')* '\\r'? '\\n' {$channel=HIDDEN;}");
+		l.setBody("'//' ( ~('\\n'|'\\r'))* ((options{greedy=true;}:'\\r\\n' | '\\r' | '\\n' ))? {$channel=HIDDEN;}");
 		g.getLexerRules().add(l);
 		l = f.createLexerRule();
 		l.setName("WS");
