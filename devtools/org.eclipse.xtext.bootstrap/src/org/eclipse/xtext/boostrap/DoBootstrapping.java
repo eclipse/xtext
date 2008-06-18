@@ -21,9 +21,10 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
 public class DoBootstrapping {
+	private static final String uiPath = "../org.eclipse.xtext.xtext.ui_gen";
 
 	public static void main(String[] args) throws Exception {
 		XtextStandaloneSetup.doSetup();
@@ -34,23 +35,22 @@ public class DoBootstrapping {
 		String builtinFilename = "../org.eclipse.xtext/src/org/eclipse/xtext/builtin/XtextBuiltIn.xtext";
 		String builtinlanguageName = "XtextBuiltIn";
 		String builtinlanguageNamespace = "org/eclipse/xtext/builtin";
-		
 		System.out.println("loading " + filename);
 		XtextStandaloneSetup.doSetup();
-		
+
 		generate(srcGenPath, filename, languageName, languageNamespace);
 
-//		generate(srcGenPath, builtinFilename, builtinlanguageName, builtinlanguageNamespace);
+		// generate(srcGenPath, builtinFilename, builtinlanguageName,
+		// builtinlanguageNamespace);
 	}
 
 	private static void generate(String srcGenPath, String filename, String languageName, String languageNamespace)
 			throws FileNotFoundException, IOException {
-		String modelFileExtension = "xtext";
 		ResourceSet rs = new ResourceSetImpl();
 		Resource resource = rs.createResource(URI.createURI(filename));
 		resource.load(null);
 		Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
 		GeneratorFacade.cleanFolder(srcGenPath);
-		GeneratorFacade.generate(grammarModel, srcGenPath, null, modelFileExtension);
+		GeneratorFacade.generate(grammarModel, srcGenPath, uiPath, "xtext", "xtext2");
 	}
 }
