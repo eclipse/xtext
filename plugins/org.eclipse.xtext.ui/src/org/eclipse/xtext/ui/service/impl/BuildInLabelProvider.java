@@ -56,8 +56,9 @@ public class BuildInLabelProvider extends ReflectiveItemProvider implements ILab
 
 			}
 		}
-		StyledString retVal = new StyledString(objectName);
-		retVal.append(" (" + clazzName + ")", StyledString.DECORATIONS_STYLER);
+		StyledString retVal = new StyledString(clazzName);
+		if (objectName.trim().length() > 0)
+			retVal.append(" - " + objectName, StyledString.DECORATIONS_STYLER);
 		return retVal;
 	}
 }
