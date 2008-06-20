@@ -10,31 +10,21 @@ package org.eclipse.xtext.parser;
 
 import static org.eclipse.xtext.parsetree.NodeUtil.dumpCompositeNodes;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.parser.impl.PartialParsingPointers;
+import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.PartialParsingPointers;
-import org.eclipse.xtext.parsetree.PartialParsingUtil;
 import org.eclipse.xtext.testlanguages.LookaheadLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  * 
  */
-public class PartialParsingPointerTest extends AbstractGeneratorTest {
-
-	public static final boolean DEBUG = false;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.tests.AbstractGeneratorTest#setUp()
-	 */
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
+public class PartialParsingPointerTest extends AbstractPartialParserTest {
 
 	public void testExpression() throws Exception {
 		with(SimpleExpressionsStandaloneSetup.class);
@@ -69,7 +59,7 @@ public class PartialParsingPointerTest extends AbstractGeneratorTest {
 			}
 			else {
 				checkParseRegionPointers(parsingPointers, " c", "LookAhead4", "LookAhead4", "LookAhead4", "LookAhead3",
-						"contents");
+						"z");
 			}
 		}
 	}
@@ -94,6 +84,7 @@ public class PartialParsingPointerTest extends AbstractGeneratorTest {
 		return partialParsingPointers;
 	}
 
+	@SuppressWarnings("unchecked")
 	private void checkParseRegionPointers(PartialParsingPointers parsingPointers, String expectedRegion,
 			String expectedGrammarElementClassName, String expectedEntryRuleName,
 			String expectedAstReplaceElementClassName, String expectedAstParentElementClassName,
@@ -117,7 +108,16 @@ public class PartialParsingPointerTest extends AbstractGeneratorTest {
 		EObject astParentElement = parsingPointers.findASTParentElement();
 		String astParentElementClassName = astParentElement != null ? astParentElement.eClass().getName() : null;
 		assertEquals(expectedAstParentElementClassName, astParentElementClassName);
-		assertEquals(expectedAstParentFeatureName, parsingPointers.findASTContainmentFeatureName());
+		String containmentFeatureName = parsingPointers.findASTContainmentFeatureName();
+		assertEquals(expectedAstParentFeatureName, containmentFeatureName);
+		if(astParentElement != null) {
+			EStructuralFeature containmentFeature = astParentElement.eClass().getEStructuralFeature(containmentFeatureName);
+			if(containmentFeature.isMany()) {
+				assertTrue(((List<EObject>) astParentElement.eGet(containmentFeature)).contains(parsingPointers.findASTReplaceElement()));
+			} else {
+				assertTrue(astParentElement.eGet(containmentFeature).equals(parsingPointers.findASTReplaceElement()));
+			}
+		}
 	}
 
 }
