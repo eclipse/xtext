@@ -9,12 +9,19 @@
 language org.eclipse.xtext.testlanguages.LookaheadLanguage
 generate LookaheadLang "http://www.eclipse.org/2008/xtext/LookaheadLang"
 
-A: x=(B);
+Entry: (contents+=Alts)*;
 
-B: D | E |C;
+Alts: LookAhead0 | LookAhead1 | LookAhead3;
 
-C: y=D 'bar' x='c';
+LookAhead0: 'bar' x='a';
 
-D: 'foo' 'bar' x='d';
+LookAhead1: 'foo' y=LookAhead2 x='b' x='d';
 
-E: 'foo' 'bar' x='e';
+LookAhead2: 
+	(z='foo' | z='bar') 'c';
+
+LookAhead3: 'foo' 'bar' x='b' LookAhead4;
+
+LookAhead4: 
+	x='c' | x='d';
+
