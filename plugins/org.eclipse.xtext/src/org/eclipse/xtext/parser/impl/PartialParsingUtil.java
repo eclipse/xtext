@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.parsetree;
+package org.eclipse.xtext.parser.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +18,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.ParseResult;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -27,19 +32,38 @@ import org.eclipse.xtext.util.StringInputStream;
 public class PartialParsingUtil {
 
 	@SuppressWarnings("unchecked")
-	public static IParseResult partiallyParse(IParser parser, CompositeNode rootNode, int offset, int length,
-			String reparseRegion) {
-		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(rootNode, offset, length);
-		CompositeNode replaceNode = parsingPointers.getDefaultReplaceRootNode();
+	public static IParseResult partiallyReparse(IParser parser, CompositeNode rootNode, int originalOffset,
+			int originalLength, String changedRegion) {
+		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(rootNode, originalOffset,
+				originalLength);
+		List<CompositeNode> validReplaceRootNodes = parsingPointers.getValidReplaceRootNodes();
+		CompositeNode replaceNode = null;
+		String reparseRegion ="";
+		for(int i=validReplaceRootNodes.size()-1; i>=0; --i) {
+			replaceNode = validReplaceRootNodes.get(i);
+			reparseRegion = insertChangeIntoReplaceRegion(replaceNode, originalOffset, originalLength, changedRegion);
+			if(!"".equals(reparseRegion)) {
+				break;
+			}
+		}
+		if(replaceNode == null || reparseRegion.equals("")) {
+			// no replaceNode -> no rule to call
+			// If region is empty, any entryRule is likely to fail.
+			// Let parser decide whether empty model is valid
+			return parser.parse(new StringInputStream(""));
+		}
 		String entryRuleName = parsingPointers.findEntryRuleName(replaceNode);
-		IParseResult parseResult = parser.parse(entryRuleName, new StringInputStream(reparseRegion));
+		ParseResult parseResult = (ParseResult) parser.parse(entryRuleName, new StringInputStream(reparseRegion));
 		if (replaceNode != rootNode) {
 			CompositeNode replaceNodeParent = replaceNode.getParent();
 			EList<AbstractNode> replaceNodeSiblings = replaceNodeParent.getChildren();
 			int nodeChildIndex = replaceNodeSiblings.indexOf(replaceNode);
 			replaceNodeSiblings.set(nodeChildIndex, parseResult.getRootNode());
-			EObject replaceAstElement = parsingPointers.findASTReplaceElement(replaceNode);
-			EObject astParentElement = parsingPointers.findASTParentElement(replaceNode);
+			parseResult.setRootNode(rootNode);
+		}
+		EObject replaceAstElement = parsingPointers.findASTReplaceElement(replaceNode);
+		EObject astParentElement = parsingPointers.findASTParentElement(replaceNode);
+		if (astParentElement != null) {
 			String featureName = parsingPointers.findASTContainmentFeatureName(replaceNode);
 			EClass astParentEClass = astParentElement.eClass();
 			EStructuralFeature feature = astParentEClass.getEStructuralFeature(featureName);
@@ -51,8 +75,25 @@ public class PartialParsingUtil {
 			else {
 				astParentElement.eSet(feature, parseResult.getRootASTElement());
 			}
+			parseResult.setRootASTElement(NodeUtil.getASTElementForRootNode(parseResult.getRootNode()));
 		}
 		return parseResult;
+	}
+
+	/**
+	 * @param replaceRootNode
+	 * @param originalOffset
+	 * @param originalLength
+	 */
+	public static String insertChangeIntoReplaceRegion(CompositeNode replaceRootNode, int originalOffset,
+			int originalLength, String changedRegion) {
+		String originalRegion = replaceRootNode.serialize();
+		int changeOffset = originalOffset - replaceRootNode.offset();
+		StringBuffer reparseRegion = new StringBuffer();
+		reparseRegion.append(originalRegion.substring(0, changeOffset));
+		reparseRegion.append(changedRegion);
+		reparseRegion.append(originalRegion.substring(changeOffset + originalLength));
+		return reparseRegion.toString();
 	}
 
 	public static PartialParsingPointers calculatePartialParsingPointers(CompositeNode rootNode, int offset, int length) {
@@ -62,7 +103,7 @@ public class PartialParsingUtil {
 		List<CompositeNode> validReplaceRootNodes = internalFindValidReplaceRootNodeForChangeRegion(
 				nodesEnclosingRegion, offset, length);
 		if (validReplaceRootNodes.isEmpty()) {
-			validReplaceRootNodes = Collections.<CompositeNode>singletonList(rootNode);
+			validReplaceRootNodes = Collections.<CompositeNode> singletonList(rootNode);
 		}
 		return new PartialParsingPointers(rootNode, offset, length, validReplaceRootNodes, nodesEnclosingRegion);
 	}
@@ -120,7 +161,8 @@ public class PartialParsingUtil {
 					LeafNode leafNode = lookaheadNodes.get(numConsumedLookaheadTokens - 1);
 					if (nodeIsBeforeRegion(leafNode, offset)) {
 						// last lookahead token is before changed region
-						//NodeUtil.dumpCompositeNodeInfo("Possible entry node: ", node);
+						//NodeUtil.dumpCompositeNodeInfo("Possible entry node: "
+						// , node);
 						validReplaceRootNodes.add(node);
 					}
 				}

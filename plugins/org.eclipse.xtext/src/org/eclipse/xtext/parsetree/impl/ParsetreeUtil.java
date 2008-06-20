@@ -45,6 +45,9 @@ public class ParsetreeUtil {
 		checkArgument(abstractParserNode);
 		AbstractNode rootContainer = (AbstractNode) EcoreUtil
 				.getRootContainer(abstractParserNode);
+		if(rootContainer==abstractParserNode) {
+			return 0;
+		}
 		EList<LeafNode> leafNodes = rootContainer
 				.getLeafNodes(abstractParserNode);
 		int offset = 0;

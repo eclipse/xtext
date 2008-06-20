@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.parsetree;
+package org.eclipse.xtext.parser.impl;
 
 import static org.eclipse.xtext.parsetree.NodeUtil.dumpCompositeNodeInfo;
 
@@ -19,6 +19,9 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -96,28 +99,7 @@ public class PartialParsingPointers {
 		// AST element is attached to a child not enclosing the region.
 		// In this case, there must not be any composite nodes with
 		// multiple composite children on the way down.
-		CompositeNode tempNode = nodesEnclosingChangeRegion.get(nodesEnclosingChangeRegion.size() - 1);
-		while (!tempNode.getChildren().isEmpty()) {
-			boolean foundCompositeChild = false;
-			for (AbstractNode child : tempNode.getChildren()) {
-				if (child instanceof CompositeNode) {
-					if (foundCompositeChild) {
-						throw new IllegalStateException(
-								"Corrupt node model: Composite node without element has multiple composite children");
-					}
-					foundCompositeChild = true;
-					CompositeNode childComposite = (CompositeNode) child;
-					if (childComposite.getElement() != null) {
-						return childComposite.getElement();
-					}
-					else {
-						tempNode = childComposite;
-						break;
-					}
-				}
-			}
-		}
-		return null;
+		return NodeUtil.getASTElementForRootNode(nodesEnclosingChangeRegion.get(nodesEnclosingChangeRegion.size() - 1));
 	}
 
 	public String findASTContainmentFeatureName() {
