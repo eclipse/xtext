@@ -49,28 +49,28 @@ T15 : '/' ;
 T16 : '(' ;
 T17 : ')' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 273
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 321
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 275
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 323
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 277
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 325
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 279
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 327
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 281
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 329
 RULE_SL_COMMENT : '//' ( ~('\n'|'\r'))* ((options{greedy=true;}:'\r\n' | '\r' | '\n' ))? {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 283
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 331
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 285
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 333
 RULE_LEXER_BODY : '<#' '.'* '#>';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 287
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g" 335
 RULE_ANY_OTHER : .;
 
 

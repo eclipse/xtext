@@ -63,6 +63,7 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 }
 
 @parser::members {
@@ -73,10 +74,16 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 		grammar = g;
     }
     
+    @Override
     protected InputStream getTokenFile() {
     	ClassLoader classLoader = InternalSimpleTest2Parser.class.getClassLoader();
     	return classLoader.getResourceAsStream("org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.tokens");
     }
+    
+    @Override
+    protected String getFirstRuleName() {
+    	return "Model";	
+   	} 
 }
 
 @rulecatch { 
@@ -88,17 +95,20 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
     } 
 }
 
-internalParse returns [EObject current=null] :
-	 { currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
+
+
+// Entry rule entryRuleModel
+entryRuleModel returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
 ;
 
-
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (
     
     { 
@@ -113,12 +123,21 @@ ruleModel returns [EObject current=null]
         }
         factory.add($current, "contents", lv_contents,null);    }
 )*;
+    
 
 
+// Entry rule entryRuleChild
+entryRuleChild returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.1" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleChild=ruleChild 
+	 { $current=$iv_ruleChild.current; } 
+	 EOF 
+;
 
 // Rule Child
 ruleChild returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 ((((((
     lv_optional='optional' 
  
@@ -168,7 +187,7 @@ ruleChild returns [EObject current=null]
         createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
-
+    
 
 
 

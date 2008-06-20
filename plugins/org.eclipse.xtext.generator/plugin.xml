@@ -5,23 +5,14 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.2 2008/06/13 12:04:27 jkohnlein Exp $
+ $Id: plugin.xml,v 1.3 2008/06/20 12:47:15 jkohnlein Exp $
 -->
 
 <plugin>
-
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "htpp://www.eclipse.org/xtext/2008/xtextgen" 
        class = "org.eclipse.xtext.xtextgen.XtextgenPackage"
        genModel = "model/xtextgen.genmodel" /> 
   </extension>
-  <extension
-        point="org.eclipse.emf.ecore.extension_parser">
-     <parser
-           class="org.eclipse.xtext.generator.Factory1"
-           type="org.eclipse.xtext.generator.parser1">
-     </parser>
-  </extension>
-
 </plugin>

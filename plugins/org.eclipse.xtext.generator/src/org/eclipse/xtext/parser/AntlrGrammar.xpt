@@ -83,6 +83,7 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 }
 
 @parser::members {
@@ -93,10 +94,16 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 		grammar = g;
     }
     
+    @Override
     protected InputStream getTokenFile() {
     	ClassLoader classLoader = «internalParserClassName()».class.getClassLoader();
     	return classLoader.getResourceAsStream("«internalPackageFullPath()»/«internalAntlrGrammarName()».tokens");
     }
+    
+    @Override
+    protected String getFirstRuleName() {
+    	return "«grammar().parserRules.first().name»";	
+   	} 
 }
 
 @rulecatch { 
@@ -112,12 +119,6 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 «ENDDEFINE»
 
 «DEFINE antlrRules FOR Grammar»
-internalParse returns [EObject current=null] :
-	 { currentNode = «EXPAND createCompositeNode FOR parserRules.first()» }
-	 iv_«parserRules.first().ruleName()»=«parserRules.first().ruleName()» 
-	 { $current=$iv_«parserRules.first().ruleName()».current; } 
-	 EOF 
-;
 «EXPAND rule FOREACH allParserRules()»
 
 «EXPAND rule FOREACH allLexerRules()»
@@ -126,11 +127,20 @@ internalParse returns [EObject current=null] :
 
 «DEFINE rule FOR ParserRule»
 «IF isCalled()»
+// Entry rule «entryRuleName()»
+«entryRuleName()» returns [EObject current=null] :
+	{ currentNode = «EXPAND createCompositeNode» }
+	 iv_«ruleName()»=«ruleName()» 
+	 { $current=$iv_«ruleName()».current; } 
+	 EOF 
+;
+
 // Rule «name»
 «ruleName()» returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
     «EXPAND ebnf FOR this.alternatives»;
-«ENDIF»
+    «ENDIF»
 «ENDDEFINE»
 
 «DEFINE rule FOR LexerRule»
@@ -221,6 +231,7 @@ ENDDEFINE»
     »" /* «
     this.metaType.name» */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode;«
 ENDDEFINE»
 

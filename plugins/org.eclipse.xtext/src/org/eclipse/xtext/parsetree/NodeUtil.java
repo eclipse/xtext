@@ -8,37 +8,72 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
 public class NodeUtil {
-	public static NodeAdapter getNodeAdapter(EObject obj) {
-		return (NodeAdapter) EcoreUtil.getAdapter(obj.eAdapters(), AbstractNode.class);
-	}
-	
-	protected static boolean removeNodeAdapter(EObject obj) {
-		NodeAdapter adapter = getNodeAdapter(obj);
-		if (adapter == null)
-			return false;
-		while (adapter!=null) {
-			adapter.getParserNode().setParent(null);
-			adapter = getNodeAdapter(obj);
-		}
-		return true;
-	}
+    public static NodeAdapter getNodeAdapter(EObject obj) {
+        return (NodeAdapter) EcoreUtil.getAdapter(obj.eAdapters(), AbstractNode.class);
+    }
 
-	public static CompositeNode getRootNode(EObject obj) {
-		NodeAdapter adapter = getNodeAdapter(obj);
-		if (adapter==null)
-			return null;
-		CompositeNode parserNode = adapter.getParserNode();
-		if (parserNode==null)
-			return null;
-		return (CompositeNode) EcoreUtil.getRootContainer(parserNode);
-	}
+    protected static boolean removeNodeAdapter(EObject obj) {
+        NodeAdapter adapter = getNodeAdapter(obj);
+        if (adapter == null)
+            return false;
+        while (adapter != null) {
+            adapter.getParserNode().setParent(null);
+            adapter = getNodeAdapter(obj);
+        }
+        return true;
+    }
+
+    public static CompositeNode getRootNode(EObject obj) {
+        NodeAdapter adapter = getNodeAdapter(obj);
+        if (adapter == null)
+            return null;
+        CompositeNode parserNode = adapter.getParserNode();
+        if (parserNode == null)
+            return null;
+        return (CompositeNode) EcoreUtil.getRootContainer(parserNode);
+    }
+
+    public static List<CompositeNode> getCompositeChildren(CompositeNode parent) {
+        List<CompositeNode> compositeChildren = new ArrayList<CompositeNode>();
+        for (AbstractNode node : parent.getChildren()) {
+            if (node instanceof CompositeNode) {
+                compositeChildren.add((CompositeNode) node);
+            }
+        }
+        return compositeChildren;
+    }
+
+    public static void dumpCompositeNodes(String indent, CompositeNode node) {
+        dumpCompositeNodeInfo(indent, node);
+        for (AbstractNode childNode : node.getChildren()) {
+            if (childNode instanceof CompositeNode) {
+                CompositeNode compositeNode = (CompositeNode) childNode;
+                dumpCompositeNodes(indent + "  ", compositeNode);
+            }
+        }
+    }
+
+    public static void dumpCompositeNodeInfo(String indent, CompositeNode node) {
+        EObject grammarElement = node.getGrammarElement();
+        String name;
+        try {
+            name = grammarElement.getClass().getMethod("getName").invoke(grammarElement).toString();
+        } catch (Exception exc) {
+            name = grammarElement.getClass().getSimpleName();
+        }
+        String astElementAsString = (node.getElement() == null) ? "null" : node.getElement().eClass().getName();
+        System.out.println(indent + node.getLookahead() + " " + node.getLookaheadConsumed() + " " + name + " : " + node.serialize()
+                + " -> " + astElementAsString);
+    }
 }

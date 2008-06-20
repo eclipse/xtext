@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g 2008-06-18 12:01:22
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g 2008-06-20 14:44:12
 
 package org.eclipse.xtext.dummy.parser.internal;
 
@@ -68,10 +68,10 @@ public class InternalDummyLanguageLexer extends Lexer {
     public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g"; }
 
     // $ANTLR start T12
-    public void mT12() throws RecognitionException {
+    public final void mT12() throws RecognitionException {
         try {
             int _type = T12;
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:45:7: ( 'optional' )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:45:5: ( 'optional' )
             // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:45:7: 'optional'
             {
             match("optional"); 
@@ -87,10 +87,10 @@ public class InternalDummyLanguageLexer extends Lexer {
     // $ANTLR end T12
 
     // $ANTLR start T13
-    public void mT13() throws RecognitionException {
+    public final void mT13() throws RecognitionException {
         try {
             int _type = T13;
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:46:7: ( 'element' )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:46:5: ( 'element' )
             // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:46:7: 'element'
             {
             match("element"); 
@@ -106,10 +106,10 @@ public class InternalDummyLanguageLexer extends Lexer {
     // $ANTLR end T13
 
     // $ANTLR start T14
-    public void mT14() throws RecognitionException {
+    public final void mT14() throws RecognitionException {
         try {
             int _type = T14;
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:47:7: ( ';' )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:47:5: ( ';' )
             // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:47:7: ';'
             {
             match(';'); 
@@ -124,13 +124,13 @@ public class InternalDummyLanguageLexer extends Lexer {
     // $ANTLR end T14
 
     // $ANTLR start RULE_ID
-    public void mRULE_ID() throws RecognitionException {
+    public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:170:11: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:170:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:189:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:189:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:170:11: ( '^' )?
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:189:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -139,7 +139,7 @@ public class InternalDummyLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:170:12: '^'
+                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:189:12: '^'
                     {
                     match('^'); 
 
@@ -158,7 +158,7 @@ public class InternalDummyLanguageLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:170:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:189:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -203,13 +203,13 @@ public class InternalDummyLanguageLexer extends Lexer {
     // $ANTLR end RULE_ID
 
     // $ANTLR start RULE_INT
-    public void mRULE_INT() throws RecognitionException {
+    public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:172:12: ( ( '0' .. '9' )+ )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:172:12: ( '0' .. '9' )+
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:191:10: ( ( '0' .. '9' )+ )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:191:12: ( '0' .. '9' )+
             {
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:172:12: ( '0' .. '9' )+
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:191:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -223,7 +223,7 @@ public class InternalDummyLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:172:13: '0' .. '9'
+            	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:191:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -250,10 +250,10 @@ public class InternalDummyLanguageLexer extends Lexer {
     // $ANTLR end RULE_INT
 
     // $ANTLR start RULE_STRING
-    public void mRULE_STRING() throws RecognitionException {
+    public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:174:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:193:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -265,16 +265,16 @@ public class InternalDummyLanguageLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("174:1: RULE_STRING : ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' );", 6, 0, input);
+                    new NoViableAltException("193:1: RULE_STRING : ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' );", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:174:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
+                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:193:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
                     {
                     match('\"'); 
-                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:174:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
+                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:193:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -290,7 +290,7 @@ public class InternalDummyLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:174:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:193:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -307,7 +307,7 @@ public class InternalDummyLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:174:65: ~ ( '\\\\' | '\"' )
+                    	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:193:65: ~ ( '\\\\' | '\"' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -333,10 +333,10 @@ public class InternalDummyLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:174:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
+                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:193:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
                     {
                     match('\''); 
-                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:174:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
+                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:193:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -352,7 +352,7 @@ public class InternalDummyLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:174:93: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:193:93: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -369,7 +369,7 @@ public class InternalDummyLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:174:137: ~ ( '\\\\' | '\\'' )
+                    	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:193:137: ~ ( '\\\\' | '\\'' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -404,15 +404,15 @@ public class InternalDummyLanguageLexer extends Lexer {
     // $ANTLR end RULE_STRING
 
     // $ANTLR start RULE_ML_COMMENT
-    public void mRULE_ML_COMMENT() throws RecognitionException {
+    public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:176:19: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:176:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:195:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:195:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:176:24: ( options {greedy=false; } : . )*
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:195:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -437,7 +437,7 @@ public class InternalDummyLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:176:52: .
+            	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:195:52: .
             	    {
             	    matchAny(); 
 
@@ -463,15 +463,15 @@ public class InternalDummyLanguageLexer extends Lexer {
     // $ANTLR end RULE_ML_COMMENT
 
     // $ANTLR start RULE_SL_COMMENT
-    public void mRULE_SL_COMMENT() throws RecognitionException {
+    public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:178:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )? )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:178:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )?
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:197:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )? )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:197:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )?
             {
             match("//"); 
 
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:178:24: (~ ( '\\n' | '\\r' ) )*
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:197:24: (~ ( '\\n' | '\\r' ) )*
             loop8:
             do {
                 int alt8=2;
@@ -484,7 +484,7 @@ public class InternalDummyLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:178:26: ~ ( '\\n' | '\\r' )
+            	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:197:26: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -505,7 +505,7 @@ public class InternalDummyLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:178:41: ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )?
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:197:41: ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -514,9 +514,9 @@ public class InternalDummyLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:178:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )
+                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:197:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )
                     {
-                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:178:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )
+                    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:197:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )
                     int alt9=3;
                     int LA9_0 = input.LA(1);
 
@@ -534,13 +534,13 @@ public class InternalDummyLanguageLexer extends Lexer {
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("178:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )", 9, 0, input);
+                            new NoViableAltException("197:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )", 9, 0, input);
 
                         throw nvae;
                     }
                     switch (alt9) {
                         case 1 :
-                            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:178:65: '\\r\\n'
+                            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:197:65: '\\r\\n'
                             {
                             match("\r\n"); 
 
@@ -548,14 +548,14 @@ public class InternalDummyLanguageLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:178:74: '\\r'
+                            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:197:74: '\\r'
                             {
                             match('\r'); 
 
                             }
                             break;
                         case 3 :
-                            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:178:81: '\\n'
+                            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:197:81: '\\n'
                             {
                             match('\n'); 
 
@@ -582,13 +582,13 @@ public class InternalDummyLanguageLexer extends Lexer {
     // $ANTLR end RULE_SL_COMMENT
 
     // $ANTLR start RULE_WS
-    public void mRULE_WS() throws RecognitionException {
+    public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:180:11: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:180:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:199:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:199:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:180:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:199:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -639,15 +639,15 @@ public class InternalDummyLanguageLexer extends Lexer {
     // $ANTLR end RULE_WS
 
     // $ANTLR start RULE_LEXER_BODY
-    public void mRULE_LEXER_BODY() throws RecognitionException {
+    public final void mRULE_LEXER_BODY() throws RecognitionException {
         try {
             int _type = RULE_LEXER_BODY;
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:182:19: ( '<#' ( '.' )* '#>' )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:182:19: '<#' ( '.' )* '#>'
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:201:17: ( '<#' ( '.' )* '#>' )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:201:19: '<#' ( '.' )* '#>'
             {
             match("<#"); 
 
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:182:24: ( '.' )*
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:201:24: ( '.' )*
             loop12:
             do {
                 int alt12=2;
@@ -660,7 +660,7 @@ public class InternalDummyLanguageLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:182:24: '.'
+            	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:201:24: '.'
             	    {
             	    match('.'); 
 
@@ -685,11 +685,11 @@ public class InternalDummyLanguageLexer extends Lexer {
     // $ANTLR end RULE_LEXER_BODY
 
     // $ANTLR start RULE_ANY_OTHER
-    public void mRULE_ANY_OTHER() throws RecognitionException {
+    public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:184:18: ( . )
-            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:184:18: .
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:203:16: ( . )
+            // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:203:18: .
             {
             matchAny(); 
 
@@ -703,7 +703,7 @@ public class InternalDummyLanguageLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:1:10: ( T12 | T13 | T14 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER )
+        // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:1:8: ( T12 | T13 | T14 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER )
         int alt13=11;
         int LA13_0 = input.LA(1);
 

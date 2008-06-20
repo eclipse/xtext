@@ -63,6 +63,7 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 }
 
 @parser::members {
@@ -73,10 +74,16 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 		grammar = g;
     }
     
+    @Override
     protected InputStream getTokenFile() {
     	ClassLoader classLoader = InternalLookaheadLanguageParser.class.getClassLoader();
     	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.tokens");
     }
+    
+    @Override
+    protected String getFirstRuleName() {
+    	return "Entry";	
+   	} 
 }
 
 @rulecatch { 
@@ -88,44 +95,56 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
     } 
 }
 
-internalParse returns [EObject current=null] :
-	 { currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
-	 iv_ruleA=ruleA 
-	 { $current=$iv_ruleA.current; } 
+
+
+// Entry rule entryRuleEntry
+entryRuleEntry returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleEntry=ruleEntry 
+	 { $current=$iv_ruleEntry.current; } 
 	 EOF 
 ;
 
-
-// Rule A
-ruleA returns [EObject current=null] 
-    @init { EObject temp=null; }:
+// Rule Entry
+ruleEntry returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (
     
     { 
         currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
     }
-    lv_x=ruleB 
+    lv_contents=ruleAlts 
     {
         currentNode = currentNode.getParent();
         if ($current==null) {
-            $current = factory.create("A");
+            $current = factory.create("Entry");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "x", lv_x,null);    }
-);
+        factory.add($current, "contents", lv_contents,null);    }
+)*;
+    
 
 
+// Entry rule entryRuleAlts
+entryRuleAlts returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.1" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleAlts=ruleAlts 
+	 { $current=$iv_ruleAlts.current; } 
+	 EOF 
+;
 
-// Rule B
-ruleB returns [EObject current=null] 
-    @init { EObject temp=null; }:
+// Rule Alts
+ruleAlts returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 ((
     { 
         currentNode=createCompositeNode("//@parserRules.1/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
     }
-    this_D=ruleD
+    this_LookAhead0=ruleLookAhead0
     { 
-        $current = $this_D.current; 
+        $current = $this_LookAhead0.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -133,9 +152,9 @@ ruleB returns [EObject current=null]
     { 
         currentNode=createCompositeNode("//@parserRules.1/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
-    this_E=ruleE
+    this_LookAhead1=ruleLookAhead1
     { 
-        $current = $this_E.current; 
+        $current = $this_LookAhead1.current; 
         currentNode = currentNode.getParent();
     }
 )
@@ -143,99 +162,214 @@ ruleB returns [EObject current=null]
     { 
         currentNode=createCompositeNode("//@parserRules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
-    this_C=ruleC
+    this_LookAhead3=ruleLookAhead3
     { 
-        $current = $this_C.current; 
+        $current = $this_LookAhead3.current; 
         currentNode = currentNode.getParent();
     }
 );
-
-
-
-// Rule C
-ruleC returns [EObject current=null] 
-    @init { EObject temp=null; }:
-(((
     
-    { 
-        currentNode=createCompositeNode("//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
-    }
-    lv_y=ruleD 
-    {
-        currentNode = currentNode.getParent();
-        if ($current==null) {
-            $current = factory.create("C");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        factory.set($current, "y", lv_y,null);    }
-)'bar' 
+
+
+// Entry rule entryRuleLookAhead0
+entryRuleLookAhead0 returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.2" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleLookAhead0=ruleLookAhead0 
+	 { $current=$iv_ruleLookAhead0.current; } 
+	 EOF 
+;
+
+// Rule LookAhead0
+ruleLookAhead0 returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
+('bar' 
 
     {
-        createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
-)(
-    lv_x='c' 
+(
+    lv_x='a' 
  
     {
         if ($current==null) {
-            $current = factory.create("C");
+            $current = factory.create("LookAhead0");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "x", lv_x,"c");        createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"x");    }
+        factory.set($current, "x", lv_x,"a");        createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"x");    }
 ));
+    
 
 
+// Entry rule entryRuleLookAhead1
+entryRuleLookAhead1 returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.3" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleLookAhead1=ruleLookAhead1 
+	 { $current=$iv_ruleLookAhead1.current; } 
+	 EOF 
+;
 
-// Rule D
-ruleD returns [EObject current=null] 
-    @init { EObject temp=null; }:
-(('foo' 
+// Rule LookAhead1
+ruleLookAhead1 returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
+((('foo' 
 
     {
-        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
-'bar' 
-
+(
+    
+    { 
+        currentNode=createCompositeNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+    }
+    lv_y=ruleLookAhead2 
     {
-        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
-    }
-)(
+        currentNode = currentNode.getParent();
+        if ($current==null) {
+            $current = factory.create("LookAhead1");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        factory.set($current, "y", lv_y,null);    }
+))(
+    lv_x='b' 
+ 
+    {
+        if ($current==null) {
+            $current = factory.create("LookAhead1");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        factory.set($current, "x", lv_x,"b");        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"x");    }
+))(
     lv_x='d' 
  
     {
         if ($current==null) {
-            $current = factory.create("D");
+            $current = factory.create("LookAhead1");
             associateNodeWithAstElement(currentNode, $current);
         }
         factory.set($current, "x", lv_x,"d");        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"x");    }
 ));
+    
 
 
+// Entry rule entryRuleLookAhead2
+entryRuleLookAhead2 returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.4" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleLookAhead2=ruleLookAhead2 
+	 { $current=$iv_ruleLookAhead2.current; } 
+	 EOF 
+;
 
-// Rule E
-ruleE returns [EObject current=null] 
-    @init { EObject temp=null; }:
-(('foo' 
+// Rule LookAhead2
+ruleLookAhead2 returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
+(((
+    lv_z='foo' 
+ 
+    {
+        if ($current==null) {
+            $current = factory.create("LookAhead2");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        factory.set($current, "z", lv_z,"foo");        createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.0/@groups.0/@terminal" /* xtext::Keyword */, currentNode,"z");    }
+)
+    |(
+    lv_z='bar' 
+ 
+    {
+        if ($current==null) {
+            $current = factory.create("LookAhead2");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        factory.set($current, "z", lv_z,"bar");        createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.0/@groups.1/@terminal" /* xtext::Keyword */, currentNode,"z");    }
+))'c' 
 
     {
-        createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+    }
+);
+    
+
+
+// Entry rule entryRuleLookAhead3
+entryRuleLookAhead3 returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.5" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleLookAhead3=ruleLookAhead3 
+	 { $current=$iv_ruleLookAhead3.current; } 
+	 EOF 
+;
+
+// Rule LookAhead3
+ruleLookAhead3 returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
+((('foo' 
+
+    {
+        createLeafNode("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 'bar' 
 
     {
-        createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 )(
-    lv_x='e' 
+    lv_x='b' 
  
     {
         if ($current==null) {
-            $current = factory.create("E");
+            $current = factory.create("LookAhead3");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "x", lv_x,"e");        createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"x");    }
-));
+        factory.set($current, "x", lv_x,"b");        createLeafNode("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"x");    }
+))
+    { 
+        currentNode=createCompositeNode("//@parserRules.5/@alternatives/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_LookAhead4=ruleLookAhead4
+    { 
+        $current = $this_LookAhead4.current; 
+        currentNode = currentNode.getParent();
+    }
+);
+    
 
+
+// Entry rule entryRuleLookAhead4
+entryRuleLookAhead4 returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.6" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleLookAhead4=ruleLookAhead4 
+	 { $current=$iv_ruleLookAhead4.current; } 
+	 EOF 
+;
+
+// Rule LookAhead4
+ruleLookAhead4 returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
+((
+    lv_x='c' 
+ 
+    {
+        if ($current==null) {
+            $current = factory.create("LookAhead4");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        factory.set($current, "x", lv_x,"c");        createLeafNode("//@parserRules.6/@alternatives/@groups.0/@terminal" /* xtext::Keyword */, currentNode,"x");    }
+)
+    |(
+    lv_x='d' 
+ 
+    {
+        if ($current==null) {
+            $current = factory.create("LookAhead4");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        factory.set($current, "x", lv_x,"d");        createLeafNode("//@parserRules.6/@alternatives/@groups.1/@terminal" /* xtext::Keyword */, currentNode,"x");    }
+));
+    
 
 
 

@@ -16,6 +16,8 @@ ruleName(ParserRule this) : 'rule'+name;
 ruleName(LexerRule this) : 'RULE_'+name.toUpperCase();
 ruleName(AbstractRule this) : error("Unsupported");
 
+entryRuleName(ParserRule this) : 'entryRule'+name;
+
 
 typeName(Action this) : typeName.name;
 typeName(ParserRule this) : getReturnTypeName();

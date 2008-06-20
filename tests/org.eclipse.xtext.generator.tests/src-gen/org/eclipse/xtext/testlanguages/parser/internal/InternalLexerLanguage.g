@@ -63,6 +63,7 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 }
 
 @parser::members {
@@ -73,10 +74,16 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 		grammar = g;
     }
     
+    @Override
     protected InputStream getTokenFile() {
     	ClassLoader classLoader = InternalLexerLanguageParser.class.getClassLoader();
     	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.tokens");
     }
+    
+    @Override
+    protected String getFirstRuleName() {
+    	return "Model";	
+   	} 
 }
 
 @rulecatch { 
@@ -88,17 +95,20 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
     } 
 }
 
-internalParse returns [EObject current=null] :
-	 { currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
+
+
+// Entry rule entryRuleModel
+entryRuleModel returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
 ;
 
-
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (
     
     { 
@@ -113,12 +123,21 @@ ruleModel returns [EObject current=null]
         }
         factory.add($current, "children", lv_children,null);    }
 )*;
+    
 
 
+// Entry rule entryRuleElement
+entryRuleElement returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.1" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleElement=ruleElement 
+	 { $current=$iv_ruleElement.current; } 
+	 EOF 
+;
 
 // Rule Element
 ruleElement returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 ((
     lv_name=RULE_ID
     { 
@@ -144,7 +163,7 @@ ruleElement returns [EObject current=null]
         }
         factory.set($current, "h", lv_h,"STRING");    }
 ));
-
+    
 
 
 

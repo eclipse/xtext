@@ -63,6 +63,7 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 }
 
 @parser::members {
@@ -73,10 +74,16 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 		grammar = g;
     }
     
+    @Override
     protected InputStream getTokenFile() {
     	ClassLoader classLoader = InternalSimpleExpressionsParser.class.getClassLoader();
     	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.tokens");
     }
+    
+    @Override
+    protected String getFirstRuleName() {
+    	return "Addition";	
+   	} 
 }
 
 @rulecatch { 
@@ -88,24 +95,27 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
     } 
 }
 
-internalParse returns [EObject current=null] :
-	 { currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
-	 iv_ruleMultiplication=ruleMultiplication 
-	 { $current=$iv_ruleMultiplication.current; } 
+
+
+// Entry rule entryRuleAddition
+entryRuleAddition returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleAddition=ruleAddition 
+	 { $current=$iv_ruleAddition.current; } 
 	 EOF 
 ;
 
-
-// Rule Multiplication
-ruleMultiplication returns [EObject current=null] 
-    @init { EObject temp=null; }:
+// Rule Addition
+ruleAddition returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (
     { 
         currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
     }
-    this_Addition=ruleAddition
+    this_Multiplication=ruleMultiplication
     { 
-        $current = $this_Addition.current; 
+        $current = $this_Multiplication.current; 
         currentNode = currentNode.getParent();
     }
 (((
@@ -116,6 +126,7 @@ ruleMultiplication returns [EObject current=null]
         temp = null;
         CompositeNode newNode = createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
@@ -135,7 +146,7 @@ ruleMultiplication returns [EObject current=null]
     { 
         currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
-    lv_values=ruleAddition 
+    lv_values=ruleMultiplication 
     {
         currentNode = currentNode.getParent();
         if ($current==null) {
@@ -144,12 +155,21 @@ ruleMultiplication returns [EObject current=null]
         }
         factory.add($current, "values", lv_values,null);    }
 ))*);
+    
 
 
+// Entry rule entryRuleMultiplication
+entryRuleMultiplication returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.1" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleMultiplication=ruleMultiplication 
+	 { $current=$iv_ruleMultiplication.current; } 
+	 EOF 
+;
 
-// Rule Addition
-ruleAddition returns [EObject current=null] 
-    @init { EObject temp=null; }:
+// Rule Multiplication
+ruleMultiplication returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (
     { 
         currentNode=createCompositeNode("//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
@@ -167,6 +187,7 @@ ruleAddition returns [EObject current=null]
         temp = null;
         CompositeNode newNode = createCompositeNode("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
@@ -195,12 +216,21 @@ ruleAddition returns [EObject current=null]
         }
         factory.add($current, "values", lv_values,null);    }
 ))*);
+    
 
 
+// Entry rule entryRuleTerm
+entryRuleTerm returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.2" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleTerm=ruleTerm 
+	 { $current=$iv_ruleTerm.current; } 
+	 EOF 
+;
 
 // Rule Term
 ruleTerm returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (
     { 
         currentNode=createCompositeNode("//@parserRules.2/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
@@ -221,12 +251,21 @@ ruleTerm returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
+    
 
 
+// Entry rule entryRuleAtom
+entryRuleAtom returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.3" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleAtom=ruleAtom 
+	 { $current=$iv_ruleAtom.current; } 
+	 EOF 
+;
 
 // Rule Atom
 ruleAtom returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (
     lv_name=RULE_ID
     { 
@@ -240,12 +279,21 @@ ruleAtom returns [EObject current=null]
         }
         factory.set($current, "name", lv_name,"ID");    }
 );
+    
 
 
+// Entry rule entryRuleParens
+entryRuleParens returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.4" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleParens=ruleParens 
+	 { $current=$iv_ruleParens.current; } 
+	 EOF 
+;
 
 // Rule Parens
 ruleParens returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (('(' 
 
     {
@@ -255,9 +303,9 @@ ruleParens returns [EObject current=null]
     { 
         currentNode=createCompositeNode("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
     }
-    this_Multiplication=ruleMultiplication
+    this_Addition=ruleAddition
     { 
-        $current = $this_Multiplication.current; 
+        $current = $this_Addition.current; 
         currentNode = currentNode.getParent();
     }
 )')' 
@@ -266,7 +314,7 @@ ruleParens returns [EObject current=null]
         createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
-
+    
 
 
 

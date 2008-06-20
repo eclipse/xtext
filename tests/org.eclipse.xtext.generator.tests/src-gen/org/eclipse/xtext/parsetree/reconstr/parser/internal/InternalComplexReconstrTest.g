@@ -63,6 +63,7 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 }
 
 @parser::members {
@@ -73,10 +74,16 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 		grammar = g;
     }
     
+    @Override
     protected InputStream getTokenFile() {
     	ClassLoader classLoader = InternalComplexReconstrTestParser.class.getClassLoader();
     	return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.tokens");
     }
+    
+    @Override
+    protected String getFirstRuleName() {
+    	return "Op";	
+   	} 
 }
 
 @rulecatch { 
@@ -88,17 +95,20 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
     } 
 }
 
-internalParse returns [EObject current=null] :
-	 { currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
+
+
+// Entry rule entryRuleOp
+entryRuleOp returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleOp=ruleOp 
 	 { $current=$iv_ruleOp.current; } 
 	 EOF 
 ;
 
-
 // Rule Op
 ruleOp returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (
     { 
         currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
@@ -116,6 +126,7 @@ ruleOp returns [EObject current=null]
         temp = null;
         CompositeNode newNode = createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
@@ -146,6 +157,7 @@ ruleOp returns [EObject current=null]
         temp = null;
         CompositeNode newNode = createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
@@ -168,12 +180,21 @@ ruleOp returns [EObject current=null]
         }
         factory.add($current, "minusOperands", lv_minusOperands,null);    }
 )))*);
+    
 
 
+// Entry rule entryRuleTerm
+entryRuleTerm returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.1" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleTerm=ruleTerm 
+	 { $current=$iv_ruleTerm.current; } 
+	 EOF 
+;
 
 // Rule Term
 ruleTerm returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (
     { 
         currentNode=createCompositeNode("//@parserRules.1/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
@@ -194,12 +215,21 @@ ruleTerm returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
+    
 
 
+// Entry rule entryRuleAtom
+entryRuleAtom returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.2" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleAtom=ruleAtom 
+	 { $current=$iv_ruleAtom.current; } 
+	 EOF 
+;
 
 // Rule Atom
 ruleAtom returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (
     lv_name=RULE_ID
     { 
@@ -213,12 +243,21 @@ ruleAtom returns [EObject current=null]
         }
         factory.set($current, "name", lv_name,"ID");    }
 );
+    
 
 
+// Entry rule entryRuleParens
+entryRuleParens returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.3" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleParens=ruleParens 
+	 { $current=$iv_ruleParens.current; } 
+	 EOF 
+;
 
 // Rule Parens
 ruleParens returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 ((('(' 
 
     {
@@ -248,7 +287,7 @@ ruleParens returns [EObject current=null]
         }
         factory.set($current, "em", lv_em,"!");        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"em");    }
 )?);
-
+    
 
 
 

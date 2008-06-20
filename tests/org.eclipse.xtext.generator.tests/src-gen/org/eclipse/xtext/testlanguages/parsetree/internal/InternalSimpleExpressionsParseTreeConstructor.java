@@ -19,10 +19,10 @@ public class InternalSimpleExpressionsParseTreeConstructor extends AbstractInter
 	}
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall) {
-		if (ruleToCall.equals("Multiplication")) {
-			proceedMultiplication(getDescr(obj));
-		} else 		if (ruleToCall.equals("Addition")) {
+		if (ruleToCall.equals("Addition")) {
 			proceedAddition(getDescr(obj));
+		} else 		if (ruleToCall.equals("Multiplication")) {
+			proceedMultiplication(getDescr(obj));
 		} else 		if (ruleToCall.equals("Term")) {
 			proceedTerm(getDescr(obj));
 		} else 		if (ruleToCall.equals("Atom")) {
@@ -35,7 +35,7 @@ public class InternalSimpleExpressionsParseTreeConstructor extends AbstractInter
 	}
 
 	
-protected void proceedMultiplication(InstanceDescription obj) {
+protected void proceedAddition(InstanceDescription obj) {
 	
 /* xtext::Group */ 
 {
@@ -65,7 +65,7 @@ new Predicate(obj) {
 	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
 	try {
 		ruleCallStart(val, true, (RuleCall) ruleCall);
-		proceedAddition(val);
+		proceedMultiplication(val);
 	} finally {
 		ruleCallEnd(val, true, (RuleCall) ruleCall);
 	}
@@ -159,7 +159,7 @@ new Predicate(obj) {
 	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0");
 	try {
 		ruleCallStart(val, false, (RuleCall) ruleCall);
-		proceedAddition(val);
+		proceedMultiplication(val);
 	} finally {
 		ruleCallEnd(val, false, (RuleCall) ruleCall);
 	}
@@ -172,7 +172,7 @@ new Predicate(obj) {
 
 }
 
-protected void proceedAddition(InstanceDescription obj) {
+protected void proceedMultiplication(InstanceDescription obj) {
 	
 /* xtext::Group */ 
 {
@@ -423,7 +423,7 @@ protected void proceedParens(InstanceDescription obj) {
 	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.1");
 	try {
 		ruleCallStart(val, false, (RuleCall) ruleCall);
-		proceedMultiplication(val);
+		proceedAddition(val);
 	} finally {
 		ruleCallEnd(val, false, (RuleCall) ruleCall);
 	}

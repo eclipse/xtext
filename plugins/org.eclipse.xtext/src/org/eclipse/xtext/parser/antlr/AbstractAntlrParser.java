@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +13,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.antlr.runtime.BitSet;
 import org.antlr.runtime.CommonToken;
+import org.antlr.runtime.IntStream;
 import org.antlr.runtime.Parser;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
@@ -36,6 +40,7 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeAdapterFactory;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
+import org.eclipse.xtext.util.Strings;
 
 public abstract class AbstractAntlrParser extends Parser {
 
@@ -95,6 +100,8 @@ public abstract class AbstractAntlrParser extends Parser {
             leafNode.setFeature(feature);
             parentNode.getChildren().add(leafNode);
             lastConsumedIndex = token.getTokenIndex();
+            ((XtextTokenStream) input).consumeLookahead();
+           // ((XtextTokenStream) input).decrementLookahead();
             return leafNode;
         }
         return null;
@@ -227,11 +234,30 @@ public abstract class AbstractAntlrParser extends Parser {
     }
 
     public final IParseResult parse() throws RecognitionException {
+        return parse(getFirstRuleName());
+    }
+
+    public final IParseResult parse(String entryRuleName) throws RecognitionException {
         IParseResult result = null;
         parseErrors = new ArrayList<IParseError>();
         EObject current = null;
         try {
-            current = internalParse();
+            String antlrEntryRuleName = normalizeEntryRuleName(entryRuleName);
+            try {
+                Method method = this.getClass().getMethod(antlrEntryRuleName);
+                current = (EObject) method.invoke(this);
+            } catch (InvocationTargetException ite) {
+                Throwable targetException = ite.getTargetException();
+                if (targetException instanceof RecognitionException) {
+                    throw (RecognitionException) targetException;
+                }
+                if (targetException instanceof Exception) {
+                    throw new WrappedException((Exception) targetException);
+                }
+                throw new RuntimeException(targetException);
+            } catch (Exception e) {
+                throw new WrappedException(e);
+            }
             appendTrailingHiddenTokens(currentNode);
         } finally {
             try {
@@ -242,11 +268,70 @@ public abstract class AbstractAntlrParser extends Parser {
         }
         return result;
     }
+
+    private String normalizeEntryRuleName(String entryRuleName) {
+        String antlrEntryRuleName;
+        if (!entryRuleName.startsWith("entryRule")) {
+            if (!entryRuleName.startsWith("rule")) {
+                antlrEntryRuleName = "entryRule" + entryRuleName;
+            } else {
+                antlrEntryRuleName = "entry" + Strings.toFirstUpper(entryRuleName);
+            }
+        } else {
+            antlrEntryRuleName = entryRuleName;
+        }
+        return antlrEntryRuleName;
+    }
+
+    /**
+     * The current lookahead is the number of tokens that have been matched by
+     * the parent rule to decide that the current rule has to be called.
+     * 
+     * @return the currentLookahead
+     */
+    protected void setCurrentLookahead() {
+        XtextTokenStream xtextTokenStream = (XtextTokenStream) input;
+        currentNode.setLookahead(xtextTokenStream.getCurrentLookahead());
+        currentNode.setLookaheadConsumed(xtextTokenStream.getLookaheadConsumedByParent());
+    }
+
+    /**
+     * Sets the current lookahead to zero. See {@link
+     * AbstractAntlrParser#setCurrentLookahead()}
+     */
+    protected void resetLookahead() {
+        XtextTokenStream xtextTokenStream = (XtextTokenStream) input;
+        xtextTokenStream.resetLookahead();
+    }
+
+    protected void moveLookaheadInfo(CompositeNode source, CompositeNode target) {
+        target.setLookahead(source.getLookahead());
+        target.setLookaheadConsumed(source.getLookaheadConsumed());
+        source.setLookahead(0);
+        source.setLookaheadConsumed(0);
+    }
     
+    /**
+     * Match is called to consume unambigous tokens. It calls input.LA() and
+     * therefore increases the currentLookahead. We need to compensate. See
+     * {@link AbstractAntlrParser#setCurrentLookahead()}
+     * 
+     * @see org.antlr.runtime.BaseRecognizer#match(org.antlr.runtime.IntStream,
+     *  int, org.antlr.runtime.BitSet)
+     */
+    @Override
+    public void match(IntStream input, int ttype, BitSet follow) throws RecognitionException {
+        super.match(input, ttype, follow);
+        ((XtextTokenStream) input).decrementLookahead();
+    }
+
     protected InputStream getTokenFile() {
         return null;
     }
 
-    public abstract EObject internalParse() throws RecognitionException;
-
+    /**
+     * @return
+     */
+    protected abstract String getFirstRuleName();
+    
 }

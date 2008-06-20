@@ -46,28 +46,28 @@ T12 : 'choice' ;
 T13 : 'optional' ;
 T14 : 'reducible' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 243
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 290
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 245
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 292
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 247
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 294
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 249
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 296
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 251
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 298
 RULE_SL_COMMENT : '//' ( ~('\n'|'\r'))* ((options{greedy=true;}:'\r\n' | '\r' | '\n' ))? {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 253
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 300
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 255
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 302
 RULE_LEXER_BODY : '<#' '.'* '#>';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 257
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 304
 RULE_ANY_OTHER : .;
 
 

@@ -21,54 +21,51 @@ import org.eclipse.xtext.service.Inject;
  * 
  */
 public abstract class AbstractParser implements IParser {
-	
-    @Inject
-	private IElementFactory astElementFactory;
 
     @Inject
-	protected IGrammarAccess grammarAccess;
-	
-	public IParseResult parse(InputStream in, IElementFactory factory, IParseErrorHandler handler,
-			IParsePostProcessor postProcessor) {
-		try {
-			IParseResult parseResult = (IParseResult) parse(new ANTLRInputStream(in), factory, handler);
-			return postProcessor.postProcess(parseResult);
-		} catch (IOException e) {
-			throw new WrappedException(e);
-		}
-	}
+    private IElementFactory astElementFactory;
 
-	public IParseResult parse(InputStream in, IElementFactory factory, IParseErrorHandler handler) {
-		return parse(in, factory, handler, getDefaultPostProcessor());
-	}
+    @Inject
+    protected IGrammarAccess grammarAccess;
 
-	public IParseResult parse(InputStream in, IElementFactory factory) {
-		return parse(in, factory, getDefaultHandler(), getDefaultPostProcessor());
-	}
+    public IParseResult parse(String ruleName, InputStream in, IElementFactory factory, IParseErrorHandler handler) {
+        try {
+            IParseResult parseResult = (IParseResult) parse(ruleName, new ANTLRInputStream(in), factory, handler);
+            return parseResult;
+        } catch (IOException e) {
+            throw new WrappedException(e);
+        }
+    }
 
-	public IParseResult parse(InputStream in) {
-		return parse(in, getDefaultASTFactory(), getDefaultHandler(), getDefaultPostProcessor());
-	}
+    public IParseResult parse(InputStream in, IElementFactory factory, IParseErrorHandler handler) {
+        return parse(getDefaultRuleName(), in, factory, handler);
+    }
 
-	protected IElementFactory getDefaultASTFactory() {
-		return astElementFactory;
-	}
+    public IParseResult parse(InputStream in, IElementFactory factory) {
+        return parse(getDefaultRuleName(), in, factory, getDefaultHandler());
+    }
 
-	protected IParsePostProcessor getDefaultPostProcessor() {
-		return new IParsePostProcessor() {
-			public IParseResult postProcess(IParseResult parseResult) {
-				return parseResult;
-			}
-		};
-	}
+    public IParseResult parse(InputStream in) {
+        return parse(getDefaultRuleName(), in, getDefaultASTFactory(), getDefaultHandler());
+    }
 
-	protected IParseErrorHandler getDefaultHandler() {
-		return new IParseErrorHandler() {
-			public void handleParserError(IParseError error) {
-				throw new ParseException(error);
-			}
-		};
-	}
+    public IParseResult parse(String ruleName, InputStream in) {
+        return parse(ruleName, in, getDefaultASTFactory(), getDefaultHandler());
+    }
 
-	protected abstract IParseResult parse(ANTLRInputStream in, IElementFactory factory, IParseErrorHandler handler);
+    protected IElementFactory getDefaultASTFactory() {
+        return astElementFactory;
+    }
+
+    protected abstract String getDefaultRuleName();
+
+    protected IParseErrorHandler getDefaultHandler() {
+        return new IParseErrorHandler() {
+            public void handleParserError(IParseError error) {
+                throw new ParseException(error);
+            }
+        };
+    }
+
+    protected abstract IParseResult parse(String ruleName, ANTLRInputStream in, IElementFactory factory, IParseErrorHandler handler);
 }

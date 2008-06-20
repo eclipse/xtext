@@ -63,6 +63,7 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 }
 
 @parser::members {
@@ -73,10 +74,16 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 		grammar = g;
     }
     
+    @Override
     protected InputStream getTokenFile() {
     	ClassLoader classLoader = InternalSimpleTestParser.class.getClassLoader();
     	return classLoader.getResourceAsStream("org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest.tokens");
     }
+    
+    @Override
+    protected String getFirstRuleName() {
+    	return "Foo";	
+   	} 
 }
 
 @rulecatch { 
@@ -88,17 +95,20 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
     } 
 }
 
-internalParse returns [EObject current=null] :
-	 { currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
+
+
+// Entry rule entryRuleFoo
+entryRuleFoo returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleFoo=ruleFoo 
 	 { $current=$iv_ruleFoo.current; } 
 	 EOF 
 ;
 
-
 // Rule Foo
 ruleFoo returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (
     lv_name=RULE_ID
     { 
@@ -112,7 +122,7 @@ ruleFoo returns [EObject current=null]
         }
         factory.set($current, "name", lv_name,"ID");    }
 );
-
+    
 
 
 

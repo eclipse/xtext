@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g 2008-06-18 12:01:24
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g 2008-06-20 14:44:17
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -10,6 +10,7 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 
 import org.antlr.runtime.*;
@@ -47,32 +48,38 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
     		grammar = g;
         }
         
+        @Override
         protected InputStream getTokenFile() {
         	ClassLoader classLoader = InternalLexerLanguageParser.class.getClassLoader();
         	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.tokens");
         }
+        
+        @Override
+        protected String getFirstRuleName() {
+        	return "Model";	
+       	} 
 
 
 
-    // $ANTLR start internalParse
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:91:1: internalParse returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
-    public EObject internalParse() throws RecognitionException {
+    // $ANTLR start entryRuleModel
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:101:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleModel = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:92:3: (iv_ruleModel= ruleModel EOF )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:92:3: iv_ruleModel= ruleModel EOF
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:101:47: (iv_ruleModel= ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:102:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
-            pushFollow(FOLLOW_ruleModel_in_internalParse78);
+            pushFollow(FOLLOW_ruleModel_in_entryRuleModel80);
             iv_ruleModel=ruleModel();
             _fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FOLLOW_EOF_in_internalParse88); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleModel90); 
 
             }
 
@@ -88,23 +95,23 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
         }
         return current;
     }
-    // $ANTLR end internalParse
+    // $ANTLR end entryRuleModel
 
 
     // $ANTLR start ruleModel
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:100:1: ruleModel returns [EObject current=null] : (lv_children= ruleElement )* ;
-    public EObject ruleModel() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:109:1: ruleModel returns [EObject current=null] : (lv_children= ruleElement )* ;
+    public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_children = null;
 
 
-         EObject temp=null; 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:102:1: ( (lv_children= ruleElement )* )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:102:1: (lv_children= ruleElement )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:111:33: ( (lv_children= ruleElement )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:112:1: (lv_children= ruleElement )*
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:102:1: (lv_children= ruleElement )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:112:1: (lv_children= ruleElement )*
             loop1:
             do {
                 int alt1=2;
@@ -117,12 +124,12 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:104:5: lv_children= ruleElement
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:114:5: lv_children= ruleElement
             	    {
             	     
             	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
             	        
-            	    pushFollow(FOLLOW_ruleElement_in_ruleModel132);
+            	    pushFollow(FOLLOW_ruleElement_in_ruleModel142);
             	    lv_children=ruleElement();
             	    _fsp--;
 
@@ -145,6 +152,7 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
 
             }
 
+             resetLookahead(); 
         }
          
             catch (RecognitionException re) { 
@@ -160,27 +168,64 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
     // $ANTLR end ruleModel
 
 
+    // $ANTLR start entryRuleElement
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:130:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    public final EObject entryRuleElement() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleElement = null;
+
+
+        try {
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:130:49: (iv_ruleElement= ruleElement EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:131:2: iv_ruleElement= ruleElement EOF
+            {
+             currentNode = createCompositeNode("//@parserRules.1" /* xtext::ParserRule */, currentNode); 
+            pushFollow(FOLLOW_ruleElement_in_entryRuleElement178);
+            iv_ruleElement=ruleElement();
+            _fsp--;
+
+             current =iv_ruleElement; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleElement188); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+                IParseError error = createParseError(re);
+                reportError(error, re);
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end entryRuleElement
+
+
     // $ANTLR start ruleElement
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:120:1: ruleElement returns [EObject current=null] : ( (lv_name= RULE_ID ) (lv_h= RULE_STRING ) ) ;
-    public EObject ruleElement() throws RecognitionException {
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:138:1: ruleElement returns [EObject current=null] : ( (lv_name= RULE_ID ) (lv_h= RULE_STRING ) ) ;
+    public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
         Token lv_h=null;
 
-         EObject temp=null; 
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:122:1: ( ( (lv_name= RULE_ID ) (lv_h= RULE_STRING ) ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:122:1: ( (lv_name= RULE_ID ) (lv_h= RULE_STRING ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:140:33: ( ( (lv_name= RULE_ID ) (lv_h= RULE_STRING ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:141:1: ( (lv_name= RULE_ID ) (lv_h= RULE_STRING ) )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:122:1: ( (lv_name= RULE_ID ) (lv_h= RULE_STRING ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:122:2: (lv_name= RULE_ID ) (lv_h= RULE_STRING )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:141:1: ( (lv_name= RULE_ID ) (lv_h= RULE_STRING ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:141:2: (lv_name= RULE_ID ) (lv_h= RULE_STRING )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:122:2: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:123:5: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:141:2: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:142:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleElement175); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleElement230); 
              
                 createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
                 
@@ -193,11 +238,11 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:134:2: (lv_h= RULE_STRING )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:135:5: lv_h= RULE_STRING
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:153:2: (lv_h= RULE_STRING )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:154:5: lv_h= RULE_STRING
             {
             lv_h=(Token)input.LT(1);
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleElement200); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleElement255); 
              
                 createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"h"); 
                 
@@ -216,6 +261,7 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
 
             }
 
+             resetLookahead(); 
         }
          
             catch (RecognitionException re) { 
@@ -233,10 +279,12 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_internalParse78 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_internalParse88 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleElement_in_ruleModel132 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleElement175 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleElement200 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel80 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleModel90 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleElement_in_ruleModel142 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_ruleElement_in_entryRuleElement178 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleElement188 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleElement230 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleElement255 = new BitSet(new long[]{0x0000000000000002L});
 
 }
