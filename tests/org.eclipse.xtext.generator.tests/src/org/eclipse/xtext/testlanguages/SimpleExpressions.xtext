@@ -9,15 +9,9 @@
 language org.eclipse.xtext.testlanguages.SimpleExpressions
 generate simpleExpressions "http://www.eclipse.org/xtext/test/simpleExpressions"
 
-//Addition returns Op: 
-//	values+=Multiplication (operator=('+'|'-') values+=Multiplication)*;
-
 Addition returns Expression: 
 	Multiplication ( {Op.values+=current} operator=('+'|'-') values+=Multiplication)*;
 
-//Multiplication returns Op: 
-//	values+=Term (operator=('*'|'/') values+=Term)*;
-	
 Multiplication returns Expression: 
 	Term ( {Op.values+=current} operator=('*'|'/') values+=Term)*;
 	
