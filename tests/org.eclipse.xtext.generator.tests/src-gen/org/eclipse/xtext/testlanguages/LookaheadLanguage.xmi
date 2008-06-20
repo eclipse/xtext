@@ -5,53 +5,81 @@
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>LookaheadLanguage</idElements>
-  <parserRules name="A">
-    <alternatives xsi:type="xtext:Assignment" feature="x" operator="=">
-      <terminal xsi:type="xtext:RuleCall" name="B"/>
+  <parserRules name="Entry">
+    <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="contents" operator="+=">
+      <terminal xsi:type="xtext:RuleCall" name="Alts"/>
     </alternatives>
   </parserRules>
-  <parserRules name="B">
+  <parserRules name="Alts">
     <alternatives xsi:type="xtext:Alternatives">
       <groups xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:RuleCall" name="D"/>
-        <groups xsi:type="xtext:RuleCall" name="E"/>
+        <groups xsi:type="xtext:RuleCall" name="LookAhead0"/>
+        <groups xsi:type="xtext:RuleCall" name="LookAhead1"/>
       </groups>
-      <groups xsi:type="xtext:RuleCall" name="C"/>
+      <groups xsi:type="xtext:RuleCall" name="LookAhead3"/>
     </alternatives>
   </parserRules>
-  <parserRules name="C">
+  <parserRules name="LookAhead0">
     <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Assignment" feature="y" operator="=">
-          <terminal xsi:type="xtext:RuleCall" name="D"/>
-        </abstractTokens>
-        <abstractTokens xsi:type="xtext:Keyword" value="bar"/>
-      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="bar"/>
       <abstractTokens xsi:type="xtext:Assignment" feature="x" operator="=">
-        <terminal xsi:type="xtext:Keyword" value="c"/>
+        <terminal xsi:type="xtext:Keyword" value="a"/>
       </abstractTokens>
     </alternatives>
   </parserRules>
-  <parserRules name="D">
+  <parserRules name="LookAhead1">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" value="foo"/>
-        <abstractTokens xsi:type="xtext:Keyword" value="bar"/>
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="foo"/>
+          <abstractTokens xsi:type="xtext:Assignment" feature="y" operator="=">
+            <terminal xsi:type="xtext:RuleCall" name="LookAhead2"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="x" operator="=">
+          <terminal xsi:type="xtext:Keyword" value="b"/>
+        </abstractTokens>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" feature="x" operator="=">
         <terminal xsi:type="xtext:Keyword" value="d"/>
       </abstractTokens>
     </alternatives>
   </parserRules>
-  <parserRules name="E">
+  <parserRules name="LookAhead2">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:Assignment" feature="z" operator="=">
+          <terminal xsi:type="xtext:Keyword" value="foo"/>
+        </groups>
+        <groups xsi:type="xtext:Assignment" feature="z" operator="=">
+          <terminal xsi:type="xtext:Keyword" value="bar"/>
+        </groups>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="c"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="LookAhead3">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Keyword" value="foo"/>
-        <abstractTokens xsi:type="xtext:Keyword" value="bar"/>
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="foo"/>
+          <abstractTokens xsi:type="xtext:Keyword" value="bar"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="x" operator="=">
+          <terminal xsi:type="xtext:Keyword" value="b"/>
+        </abstractTokens>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" feature="x" operator="=">
-        <terminal xsi:type="xtext:Keyword" value="e"/>
-      </abstractTokens>
+      <abstractTokens xsi:type="xtext:RuleCall" name="LookAhead4"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="LookAhead4">
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:Assignment" feature="x" operator="=">
+        <terminal xsi:type="xtext:Keyword" value="c"/>
+      </groups>
+      <groups xsi:type="xtext:Assignment" feature="x" operator="=">
+        <terminal xsi:type="xtext:Keyword" value="d"/>
+      </groups>
     </alternatives>
   </parserRules>
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LookaheadLang" nsURI="http://www.eclipse.org/2008/xtext/LookaheadLang"/>

@@ -5,12 +5,12 @@ package org.eclipse.xtext.grammargen.tests.parser;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonToken;
-import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.impl.ParseError;
 
 import org.eclipse.xtext.grammargen.tests.parser.internal.InternalSimpleTest2Lexer;
@@ -20,10 +20,10 @@ import org.eclipse.xtext.grammargen.tests.parser.internal.InternalSimpleTest2Par
 public class SimpleTest2Parser extends org.eclipse.xtext.parser.AbstractParser {
 	
 	@Override
-	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
+	protected IParseResult parse(String ruleName, ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
 		InternalSimpleTest2Lexer lexer = new InternalSimpleTest2Lexer(in);
-		CommonTokenStream stream = new CommonTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer);
 		InternalSimpleTest2Parser parser = new InternalSimpleTest2Parser(
 				stream, factory, grammarAccess.getGrammar()) {
 					@Override
@@ -32,7 +32,11 @@ public class SimpleTest2Parser extends org.eclipse.xtext.parser.AbstractParser {
 			}
 		};
 		try {
-			return parser.parse();
+			if(ruleName != null) {
+				return parser.parse(ruleName);
+			} else {
+				return parser.parse();
+			}
 		} catch (Exception re) {
 			CommonToken lt = (CommonToken) parser.getInput().LT(parser.getInput().index());
 			ParseError error = new ParseError(lt.getLine(), lt.getStartIndex(), lt.getText() != null ? lt.getText().length()
@@ -42,4 +46,8 @@ public class SimpleTest2Parser extends org.eclipse.xtext.parser.AbstractParser {
 		return null;
 	}
 	
+	@Override 
+	protected String getDefaultRuleName() {
+		return "Model";
+	}
 }

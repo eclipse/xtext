@@ -63,6 +63,7 @@ import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 }
 
 @parser::members {
@@ -73,10 +74,16 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 		grammar = g;
     }
     
+    @Override
     protected InputStream getTokenFile() {
     	ClassLoader classLoader = InternalReferenceGrammarParser.class.getClassLoader();
     	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.tokens");
     }
+    
+    @Override
+    protected String getFirstRuleName() {
+    	return "Spielplatz";	
+   	} 
 }
 
 @rulecatch { 
@@ -88,17 +95,20 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
     } 
 }
 
-internalParse returns [EObject current=null] :
-	 { currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
+
+
+// Entry rule entryRuleSpielplatz
+entryRuleSpielplatz returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleSpielplatz=ruleSpielplatz 
 	 { $current=$iv_ruleSpielplatz.current; } 
 	 EOF 
 ;
 
-
 // Rule Spielplatz
 ruleSpielplatz returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (((('spielplatz' 
 
     {
@@ -168,14 +178,23 @@ ruleSpielplatz returns [EObject current=null]
         createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 )?;
+    
 
 
 
 
+// Entry rule entryRuleKind
+entryRuleKind returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.2" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleKind=ruleKind 
+	 { $current=$iv_ruleKind.current; } 
+	 EOF 
+;
 
 // Rule Kind
 ruleKind returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (((('kind' 
 
     {
@@ -216,12 +235,21 @@ ruleKind returns [EObject current=null]
         createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
+    
 
 
+// Entry rule entryRuleErwachsener
+entryRuleErwachsener returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.3" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleErwachsener=ruleErwachsener 
+	 { $current=$iv_ruleErwachsener.current; } 
+	 EOF 
+;
 
 // Rule Erwachsener
 ruleErwachsener returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (((('erwachsener' 
 
     {
@@ -262,12 +290,21 @@ ruleErwachsener returns [EObject current=null]
         createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
+    
 
 
+// Entry rule entryRuleSpielzeug
+entryRuleSpielzeug returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.4" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleSpielzeug=ruleSpielzeug 
+	 { $current=$iv_ruleSpielzeug.current; } 
+	 EOF 
+;
 
 // Rule Spielzeug
 ruleSpielzeug returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (((('spielzeug' 
 
     {
@@ -309,12 +346,21 @@ ruleSpielzeug returns [EObject current=null]
         createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
+    
 
 
+// Entry rule entryRuleFarbe
+entryRuleFarbe returns [EObject current=null] :
+	{ currentNode = createCompositeNode("//@parserRules.5" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleFarbe=ruleFarbe 
+	 { $current=$iv_ruleFarbe.current; } 
+	 EOF 
+;
 
 // Rule Farbe
 ruleFarbe returns [EObject current=null] 
-    @init { EObject temp=null; }:
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 ((('ROT' 
 
     {
@@ -339,7 +385,7 @@ ruleFarbe returns [EObject current=null]
         createLeafNode("//@parserRules.5/@alternatives/@groups.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
-
+    
 
 
 

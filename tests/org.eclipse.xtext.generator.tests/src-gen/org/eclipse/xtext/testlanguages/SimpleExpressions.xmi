@@ -5,10 +5,10 @@
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>SimpleExpressions</idElements>
-  <parserRules name="Multiplication">
+  <parserRules name="Addition">
     <type name="Expression"/>
     <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:RuleCall" name="Addition"/>
+      <abstractTokens xsi:type="xtext:RuleCall" name="Multiplication"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Action" feature="values" operator="+=">
@@ -22,12 +22,12 @@
           </abstractTokens>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Assignment" feature="values" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" name="Addition"/>
+          <terminal xsi:type="xtext:RuleCall" name="Multiplication"/>
         </abstractTokens>
       </abstractTokens>
     </alternatives>
   </parserRules>
-  <parserRules name="Addition">
+  <parserRules name="Multiplication">
     <type name="Expression"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall" name="Term"/>
@@ -66,7 +66,7 @@
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Keyword" value="("/>
-        <abstractTokens xsi:type="xtext:RuleCall" name="Multiplication"/>
+        <abstractTokens xsi:type="xtext:RuleCall" name="Addition"/>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Keyword" value=")"/>
     </alternatives>
