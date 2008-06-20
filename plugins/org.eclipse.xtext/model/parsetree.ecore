@@ -6,6 +6,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="CompositeNode" eSuperTypes="#//AbstractNode">
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//AbstractNode" containment="true" eOpposite="#//AbstractNode/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lookahead" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lookaheadConsumed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractNode" abstract="true">
     <eOperations name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
