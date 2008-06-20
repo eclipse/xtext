@@ -25,12 +25,12 @@ package «genClassFQName.toJavaPackage()»;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonToken;
-import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.parser.IElementFactory;
 import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.impl.ParseError;
 
 import «internalPackage()».«internalLexerClassName()»;
@@ -40,10 +40,10 @@ import «internalPackage()».«internalParserClassName()»;
 public class «genClassFQName.toSimpleName()» extends org.eclipse.xtext.parser.AbstractParser {
 	
 	@Override
-	protected IParseResult parse(ANTLRInputStream in, IElementFactory factory,
+	protected IParseResult parse(String ruleName, ANTLRInputStream in, IElementFactory factory,
 			final IParseErrorHandler handler) {
 		«internalLexerClassName()» lexer = new «internalLexerClassName()»(in);
-		CommonTokenStream stream = new CommonTokenStream(lexer);
+		XtextTokenStream stream = new XtextTokenStream(lexer);
 		«internalParserClassName()» parser = new «internalParserClassName()»(
 				stream, factory, grammarAccess.getGrammar()) {
 					@Override
@@ -52,7 +52,11 @@ public class «genClassFQName.toSimpleName()» extends org.eclipse.xtext.parser.Ab
 			}
 		};
 		try {
-			return parser.parse();
+			if(ruleName != null) {
+				return parser.parse(ruleName);
+			} else {
+				return parser.parse();
+			}
 		} catch (Exception re) {
 			CommonToken lt = (CommonToken) parser.getInput().LT(parser.getInput().index());
 			ParseError error = new ParseError(lt.getLine(), lt.getStartIndex(), lt.getText() != null ? lt.getText().length()
@@ -62,6 +66,10 @@ public class «genClassFQName.toSimpleName()» extends org.eclipse.xtext.parser.Ab
 		return null;
 	}
 	
+	@Override 
+	protected String getDefaultRuleName() {
+		return "«grammar().parserRules.first().name»";
+	}
 }
 «ENDFILE»
 «ENDDEFINE»
