@@ -20,7 +20,7 @@ LookAhead1: 'foo' y=LookAhead2 x='b' x='d';
 LookAhead2: 
 	(z='foo' | z='bar') 'c';
 
-LookAhead3: 'foo' 'bar' x='b' LookAhead4;
+LookAhead3: 'foo' 'bar' x='b' z=LookAhead4;
 
 LookAhead4: 
 	x='c' | x='d';

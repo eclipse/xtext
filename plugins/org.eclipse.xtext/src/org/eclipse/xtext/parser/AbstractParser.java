@@ -52,7 +52,7 @@ public abstract class AbstractParser implements IParser {
     public IParseResult parse(String ruleName, InputStream in) {
         return parse(ruleName, in, getDefaultASTFactory(), getDefaultHandler());
     }
-
+    
     protected IElementFactory getDefaultASTFactory() {
         return astElementFactory;
     }

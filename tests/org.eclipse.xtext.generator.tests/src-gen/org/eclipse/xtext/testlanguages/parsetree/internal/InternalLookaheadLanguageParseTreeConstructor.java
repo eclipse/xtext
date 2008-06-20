@@ -403,19 +403,29 @@ protected void proceedLookAhead3(InstanceDescription obj) {
 {
 
 		
+/* xtext::Assignment */ 
+{
+
+	final Object value = obj.consume("z");
+    
 /* xtext::RuleCall */ 
 {
 
 	
-	InstanceDescription val = obj;
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.1");
+	InstanceDescription val = (getDescr((EObject)value));
+	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.1/@terminal");
 	try {
-		ruleCallStart(val, false, (RuleCall) ruleCall);
+		ruleCallStart(val, true, (RuleCall) ruleCall);
 		proceedLookAhead4(val);
 	} finally {
-		ruleCallEnd(val, false, (RuleCall) ruleCall);
+		ruleCallEnd(val, true, (RuleCall) ruleCall);
 	}
 	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
 
 }
 

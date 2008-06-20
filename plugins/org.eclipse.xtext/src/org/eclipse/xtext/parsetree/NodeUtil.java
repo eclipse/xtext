@@ -53,6 +53,33 @@ public class NodeUtil {
         }
         return compositeChildren;
     }
+    
+    public static EObject getASTElementForRootNode(CompositeNode compositeNode) {
+    	if(compositeNode.getElement() != null) {
+    		return compositeNode.getElement();
+    	}
+    	while (!compositeNode.getChildren().isEmpty()) {
+			boolean foundCompositeChild = false;
+			for (AbstractNode child : compositeNode.getChildren()) {
+				if (child instanceof CompositeNode) {
+					if (foundCompositeChild) {
+						throw new IllegalStateException(
+								"Corrupt node model: Composite node without element has multiple composite children");
+					}
+					foundCompositeChild = true;
+					CompositeNode childComposite = (CompositeNode) child;
+					if (childComposite.getElement() != null) {
+						return childComposite.getElement();
+					}
+					else {
+						compositeNode = childComposite;
+						break;
+					}
+				}
+			}
+		}
+    	return null;
+    }
 
     public static void dumpCompositeNodes(String indent, CompositeNode node) {
         dumpCompositeNodeInfo(indent, node);
