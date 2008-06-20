@@ -69,7 +69,9 @@
           <terminal xsi:type="xtext:Keyword" value="b"/>
         </abstractTokens>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:RuleCall" name="LookAhead4"/>
+      <abstractTokens xsi:type="xtext:Assignment" feature="z" operator="=">
+        <terminal xsi:type="xtext:RuleCall" name="LookAhead4"/>
+      </abstractTokens>
     </alternatives>
   </parserRules>
   <parserRules name="LookAhead4">

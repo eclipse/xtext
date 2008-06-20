@@ -324,16 +324,20 @@ ruleLookAhead3 returns [EObject current=null]
             associateNodeWithAstElement(currentNode, $current);
         }
         factory.set($current, "x", lv_x,"b");        createLeafNode("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"x");    }
-))
+))(
+    
     { 
-        currentNode=createCompositeNode("//@parserRules.5/@alternatives/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("//@parserRules.5/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
-    this_LookAhead4=ruleLookAhead4
-    { 
-        $current = $this_LookAhead4.current; 
+    lv_z=ruleLookAhead4 
+    {
         currentNode = currentNode.getParent();
-    }
-);
+        if ($current==null) {
+            $current = factory.create("LookAhead3");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        factory.set($current, "z", lv_z,null);    }
+));
     
 
 
