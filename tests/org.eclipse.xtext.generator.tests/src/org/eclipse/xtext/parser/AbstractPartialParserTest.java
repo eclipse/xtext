@@ -15,7 +15,7 @@ import org.eclipse.xtext.util.EmfStructureComparator;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
- *
+ * 
  */
 public class AbstractPartialParserTest extends AbstractGeneratorTest {
 
@@ -26,9 +26,8 @@ public class AbstractPartialParserTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		comparator = new EmfStructureComparator() {
-			@Override
 			protected boolean isRelevantChild(EObject container, EObject child) {
-				return !(child instanceof LeafNode) || !((LeafNode)child).isHidden(); 
+				return !(child instanceof LeafNode) || !((LeafNode) child).isHidden();
 			}
 		};
 	}
