@@ -18,12 +18,12 @@ import org.eclipse.xtext.ui.service.impl.BuildInFormatterService;
  */
 public class ReferenceFormatter extends BuildInFormatterService implements IFormatterService {
 	@Override
-	public String bevor(LeafNode leafNode) {
+	public String befor(LeafNode leafNode) {
 		ReferenceTokenTypeDef rttd = new ReferenceTokenTypeDef();
 		if (rttd.gelb().match(leafNode) || rttd.grün().match(leafNode) || rttd.rot().match(leafNode))
 			return " ";
 		if ("}".equals(leafNode.getText()))
 			return "\n";
-		return super.bevor(leafNode);
+		return super.befor(leafNode);
 	}
 }
