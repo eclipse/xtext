@@ -4,6 +4,11 @@ import java.io.InputStream;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -32,6 +37,15 @@ public abstract class AbstractXtextTests extends TestCase {
 	
 	protected void setCurrentLanguage(ILanguageDescriptor desc) {
 		ServiceRegistry.injectServices(desc, this);
+	}
+	
+	public EObject loadModel(URI uri, String model) throws Exception {
+		ResourceSet rs = new ResourceSetImpl();
+		Resource resource = rs.createResource(uri);
+		resource.load(new StringInputStream(model), null);
+		if (resource.getContents().isEmpty())
+			return null;
+		return resource.getContents().iterator().next();
 	}
 	
 	public IParseResult parse(InputStream model) throws Exception {
