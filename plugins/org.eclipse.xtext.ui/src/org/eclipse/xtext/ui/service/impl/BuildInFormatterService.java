@@ -48,7 +48,7 @@ public class BuildInFormatterService implements IFormatterService {
 	 * org.eclipse.xtext.ui.service.IFormatterService#after(org.eclipse.xtext
 	 * .parsetree.LeafNode)
 	 */
-	public String bevor(LeafNode leafNode) {
+	public String befor(LeafNode leafNode) {
 		BuildInTokenTypeDef bittd = new BuildInTokenTypeDef();
 		if (bittd.mlCommentTokenType().match(leafNode)
 				|| (bittd.keyWordTokenType().match(leafNode) && leafNode.getText().length() > 1)) {

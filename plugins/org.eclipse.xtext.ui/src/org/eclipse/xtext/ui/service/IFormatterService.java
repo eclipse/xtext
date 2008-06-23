@@ -20,6 +20,6 @@ public interface IFormatterService extends ILanguageService {
 
 	public abstract boolean shouldIndent(AbstractNode node);
 
-	public abstract String bevor(LeafNode leafNode);
+	public abstract String befor(LeafNode leafNode);
 
 }
