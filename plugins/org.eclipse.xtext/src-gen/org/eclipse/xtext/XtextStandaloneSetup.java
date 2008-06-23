@@ -53,6 +53,7 @@ public abstract class XtextStandaloneSetup {
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new XtextResourceFactory();
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xtext", resourceFactory);
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xtext2", resourceFactory);
 			
 			
 			isInitialized = true;

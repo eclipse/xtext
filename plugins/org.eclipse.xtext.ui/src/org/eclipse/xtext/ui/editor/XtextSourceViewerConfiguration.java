@@ -16,8 +16,8 @@ import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
-import org.eclipse.jface.text.formatter.ContentFormatter;
 import org.eclipse.jface.text.formatter.IContentFormatter;
+import org.eclipse.jface.text.formatter.MultiPassContentFormatter;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.reconciler.IReconciler;
@@ -30,8 +30,10 @@ import org.eclipse.ui.texteditor.HippieProposalProcessor;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.editor.codecompletion.XtextContentAssistProcessor;
+import org.eclipse.xtext.ui.editor.formatting.XtextFormattingStrategy;
 import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.editor.model.XtextEditorModelReconcileStrategy;
+import org.eclipse.xtext.ui.service.IFormatterService;
 import org.eclipse.xtext.ui.service.IProposalsProvider;
 
 /**
@@ -85,6 +87,13 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		return ca;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeorg.eclipse.jface.text.source.SourceViewerConfiguration#
+	 * getPresentationReconciler(org.eclipse.jface.text.source.ISourceViewer)
+	 */
+	@Override
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		PresentationReconciler reconciler = (PresentationReconciler) super.getPresentationReconciler(sourceViewer);
 		DefaultDamagerRepairer defDR = new DefaultDamagerRepairer(new XtextTokenScanner(languageDescriptor));
@@ -102,10 +111,14 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	 */
 	@Override
 	public IContentFormatter getContentFormatter(ISourceViewer sourceViewer) {
-		ContentFormatter formatter = new ContentFormatter();
-		formatter.enablePartitionAwareFormatting(false);
-		formatter.setFormattingStrategy(new PrototypeFormattingStrategy(this.editorModelProvider),
-				IDocument.DEFAULT_CONTENT_TYPE);
-		return formatter;
+		IFormatterService service = ServiceRegistry.getService(languageDescriptor, IFormatterService.class);
+		if (service != null) {
+			MultiPassContentFormatter formatter = new MultiPassContentFormatter(
+					getConfiguredDocumentPartitioning(sourceViewer), IDocument.DEFAULT_CONTENT_TYPE);
+			formatter.setMasterStrategy(new XtextFormattingStrategy(this.editorModelProvider, service));
+			return formatter;
+		}
+		else
+			return null;
 	}
 }

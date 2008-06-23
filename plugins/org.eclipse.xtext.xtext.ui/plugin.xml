@@ -8,5 +8,12 @@
             languageId="org.eclipse.xtext.Xtext">
       </tokenTypeDef>
    </extension>
+   <extension
+         point="org.eclipse.xtext.ui.formatter">
+      <formatter
+            class="org.eclipse.xtext.xtext.ui.services.XtextFormatter"
+            languageId="org.eclipse.xtext.Xtext">
+      </formatter>
+   </extension>
 
 </plugin>

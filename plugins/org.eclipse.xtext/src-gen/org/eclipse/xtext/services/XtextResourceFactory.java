@@ -13,7 +13,7 @@ import org.eclipse.xtext.service.LanguageDescriptorFactory;
 public class XtextResourceFactory implements IResourceFactory {
 
 	public String[] getModelFileExtensions() {
-		return new String[] { "xtext" };
+		return new String[] { "xtext", "xtext2" };
 	}
 	
 	 /* (non-Javadoc)

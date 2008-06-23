@@ -41,7 +41,7 @@ public class BuildInTokenTypeDef implements ITokenTypeDefService {
 		return retVal;
 	}
 
-	protected ITokenTypeDef commentTokenType() {
+	public ITokenTypeDef commentTokenType() {
 		TokenTypeDef ttd = new TokenTypeDef(SL_COMMENT_ID) {
 			@Override
 			public boolean match(LeafNode node) {
@@ -56,7 +56,7 @@ public class BuildInTokenTypeDef implements ITokenTypeDefService {
 		return ttd;
 	}
 
-	protected ITokenTypeDef mlCommentTokenType() {
+	public ITokenTypeDef mlCommentTokenType() {
 		TokenTypeDef ttd = new TokenTypeDef(ML_COMMENT_ID) {
 			@Override
 			public boolean match(LeafNode node) {
@@ -71,7 +71,7 @@ public class BuildInTokenTypeDef implements ITokenTypeDefService {
 		return ttd;
 	}
 
-	protected TokenTypeDef keyWordTokenType() {
+	public TokenTypeDef keyWordTokenType() {
 		TokenTypeDef ttd = new TokenTypeDef(KEYWORD_ID) {
 			@Override
 			public boolean match(LeafNode node) {
@@ -83,7 +83,7 @@ public class BuildInTokenTypeDef implements ITokenTypeDefService {
 		return ttd;
 	}
 
-	protected ITokenTypeDef stringTokenType() {
+	public ITokenTypeDef stringTokenType() {
 		TokenTypeDef ttd = new TokenTypeDef(STRING_ID) {
 			@Override
 			public boolean match(LeafNode node) {
@@ -98,7 +98,7 @@ public class BuildInTokenTypeDef implements ITokenTypeDefService {
 		return ttd;
 	}
 
-	protected ITokenTypeDef numberTokenType() {
+	public ITokenTypeDef numberTokenType() {
 		TokenTypeDef ttd = new TokenTypeDef(NUMBER_ID) {
 			@Override
 			public boolean match(LeafNode node) {
