@@ -17,5 +17,12 @@
             languageId="org.eclipse.xtext.reference.ReferenceGrammar">
       </tokenTypeDef>
    </extension>
+   <extension
+         point="org.eclipse.xtext.ui.formatter">
+      <formatter
+            class="org.eclipse.xtext.reference.ui.services.ReferenceFormatter"
+            languageId="org.eclipse.xtext.reference.ReferenceGrammar">
+      </formatter>
+   </extension>
    
 </plugin>
