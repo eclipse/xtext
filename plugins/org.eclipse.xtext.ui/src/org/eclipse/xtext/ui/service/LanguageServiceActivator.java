@@ -50,6 +50,7 @@ public class LanguageServiceActivator {
 		serviceMap.put("valueConverter", IValueConverterService.class);
 		serviceMap.put("labelProvider", ILabelProvider.class);
 		serviceMap.put("outlineProvider", IOutlineProvider.class);
+		serviceMap.put("formatter", IFormatterService.class);
 	}
 
 	public static void activateServices() {

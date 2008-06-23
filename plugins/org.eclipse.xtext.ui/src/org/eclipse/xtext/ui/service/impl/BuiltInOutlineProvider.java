@@ -16,25 +16,25 @@ import org.eclipse.xtext.ui.service.IOutlineProvider;
 
 /**
  * @author Peter Friese - Initial contribution and API
- *
+ * 
  */
 public class BuiltInOutlineProvider implements IOutlineProvider {
-    
-    public Object[] getRootObjects(IEditorModel model) {
-        Assert.isNotNull(model);
-        Object astRoot = model.getAstRoot();
-        return new Object[] { astRoot };
-    }
-    
-    public boolean hasChildren(EObject element) {
-        Assert.isNotNull(element);
-        return (element.eContents().size() > 0);
-    }
-    
-    public Object[] getChildren(EObject node) {
-        Assert.isNotNull(node);
-        EList<EObject> contents = node.eContents();
-        return contents.toArray();
-    }
+
+	public Object[] getRootObjects(IEditorModel model) {
+		Assert.isNotNull(model);
+		Object astRoot = model.getAstRoot();
+		return new Object[] { astRoot };
+	}
+
+	public boolean hasChildren(EObject element) {
+		Assert.isNotNull(element);
+		return (getChildren(element).length > 0);
+	}
+
+	public Object[] getChildren(EObject node) {
+		Assert.isNotNull(node);
+		EList<EObject> contents = node.eContents();
+		return contents.toArray();
+	}
 
 }

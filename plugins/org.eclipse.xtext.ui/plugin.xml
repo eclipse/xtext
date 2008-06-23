@@ -15,6 +15,7 @@
    <extension-point id="valueConverter" name="Xtext Value Converter Service" schema="schema/valueConverter.exsd"/>
    <extension-point id="outlineProvider" name="Xtext Outline Content Provider" schema="schema/outlineProvider.exsd"/>
    <extension-point id="labelProvider" name="Xtext Label Provider" schema="schema/labelProvider.exsd"/>
+   <extension-point id="formatter" name="Xtext Formatter" schema="schema/formatter.exsd"/>
    <extension
          id="org.eclipse.xtext.ui.problemmarker"
          name="Xtext Editor Problem Marker"
@@ -118,5 +119,12 @@
             class="org.eclipse.xtext.ui.service.impl.BuiltInProposalsProvider"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </proposalsProvider>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.formatter">
+      <formatter
+            class="org.eclipse.xtext.ui.service.impl.BuildInFormatterService"
+            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
+      </formatter>
    </extension>
 </plugin>
