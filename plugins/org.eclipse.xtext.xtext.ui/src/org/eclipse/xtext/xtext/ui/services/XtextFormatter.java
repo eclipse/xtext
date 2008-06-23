@@ -30,7 +30,7 @@ public class XtextFormatter extends BuildInFormatterService implements IFormatte
 	}
 
 	@Override
-	public String befor(LeafNode leafNode) {
+	public String before(LeafNode leafNode) {
 		if ("?=".equals(leafNode.getText()) || ".".equals(leafNode.getText()))
 			return new String();
 		if ("language".equals(leafNode.getText()) || "generate".equals(leafNode.getText())

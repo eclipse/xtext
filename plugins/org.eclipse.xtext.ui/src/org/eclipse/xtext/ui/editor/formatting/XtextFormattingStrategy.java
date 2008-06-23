@@ -90,7 +90,7 @@ public class XtextFormattingStrategy extends AbstractXtextFormattingStrategy {
 	private void appendLeafNode(StringBuilder stringBuilder, LeafNode ln) {
 		if (!isWhiteSpace(ln)) {
 			StringBuilder toAppend = new StringBuilder();
-			toAppend.append(getFormatterService().befor(ln));
+			toAppend.append(getFormatterService().before(ln));
 			toAppend.append(ln.getText().trim());
 			stringBuilder.append(toAppend.toString().replaceAll("\\n", NEW_LINE + indentString()));
 		}
