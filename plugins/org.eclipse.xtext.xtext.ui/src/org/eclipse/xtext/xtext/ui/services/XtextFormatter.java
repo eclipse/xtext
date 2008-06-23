@@ -30,8 +30,7 @@ public class XtextFormatter extends BuildInFormatterService implements IFormatte
 	}
 
 	@Override
-	public String bevor(LeafNode leafNode) {
-		XtextTokenTypeDef xtextTTD = new XtextTokenTypeDef();
+	public String befor(LeafNode leafNode) {
 		if ("?=".equals(leafNode.getText()) || ".".equals(leafNode.getText()))
 			return new String();
 		if ("language".equals(leafNode.getText()) || "generate".equals(leafNode.getText())
