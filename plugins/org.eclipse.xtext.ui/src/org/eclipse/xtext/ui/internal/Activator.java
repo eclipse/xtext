@@ -29,6 +29,8 @@ public class Activator extends AbstractUIPlugin {
 			&& "true".equalsIgnoreCase(Platform.getDebugOption("org.eclipse.xtext.ui/debug/services/proposalProvider"));
 	public static final boolean DEBUG_PARSING = DEBUGING
 			&& "true".equalsIgnoreCase(Platform.getDebugOption("org.eclipse.xtext.ui/debug/services/parser"));
+	public static final boolean DEBUG_FORMATTER = DEBUGING
+			&& "true".equalsIgnoreCase(Platform.getDebugOption("org.eclipse.xtext.ui/debug/services/formatter"));
 
 	// The shared instance
 	private static Activator plugin;

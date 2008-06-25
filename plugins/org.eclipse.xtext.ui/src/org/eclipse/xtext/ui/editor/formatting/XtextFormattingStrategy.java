@@ -8,118 +8,69 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.formatting;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.BadLocationException;
+import java.util.LinkedList;
+
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
-import org.eclipse.xtext.LexerRule;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.jface.text.Region;
+import org.eclipse.jface.text.formatter.ContextBasedFormattingStrategy;
+import org.eclipse.jface.text.formatter.FormattingContextProperties;
+import org.eclipse.jface.text.formatter.IFormattingContext;
 import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
+import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.service.IFormatterService;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class XtextFormattingStrategy extends AbstractXtextFormattingStrategy {
+public class XtextFormattingStrategy extends ContextBasedFormattingStrategy {
 
-	public static final String NEW_LINE = "\n";
-	public static final String TAB = "\t";
-	public static final String SPACE = " ";
+	private final IFormatterService formatter;
+	private static long time = 0;
+	private IEditorModelProvider editorModelProvider;
+	private LinkedList<IDocument> documents = new LinkedList<IDocument>();
 
-	private short indent = 0;
+	private LinkedList<IRegion> regions = new LinkedList<IRegion>();
 
 	public XtextFormattingStrategy(IEditorModelProvider editorModelProvider, IFormatterService formatter) {
-		super(editorModelProvider, formatter);
+		this.editorModelProvider = editorModelProvider;
+		this.formatter = formatter;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.xtext.ui.editor.formatting.AbstractXtextFormattingStrategy
-	 * #format(org.eclipse.jface.text.IDocument, org.eclipse.jface.text.IRegion)
-	 */
+	protected IEditorModelProvider getEditorModelProvider() {
+		return editorModelProvider;
+	}
+
 	@Override
-	protected void format(IDocument document, IRegion region) {
-		indent = 0;
-		EObject astRoot = getEditorModelProvider().getModel().getAstRoot();
-		if (astRoot != null) {
-			StringBuilder stringBuilder = new StringBuilder();
-			append(astRoot, stringBuilder);
-			try {
-				String string = stringBuilder.toString().trim();
-				if (!document.get().equals(string))
-					document.replace(0, document.getLength(), string);
-			}
-			catch (BadLocationException e) {
-				e.printStackTrace();
-			}
+	public void formatterStarts(IFormattingContext context) {
+		if (Activator.DEBUG_FORMATTER)
+			time = System.currentTimeMillis();
+		super.formatterStarts(context);
+		documents.addLast((IDocument) context.getProperty(FormattingContextProperties.CONTEXT_MEDIUM));
+		regions.addLast((IRegion) context.getProperty(FormattingContextProperties.CONTEXT_REGION));
+	}
+
+	@Override
+	public void format() {
+		super.format();
+		final IDocument document = (IDocument) documents.removeFirst();
+		IRegion region = regions.removeFirst();
+		if (document != null) {
+			if (region == null)
+				region = new Region(0, document.getLength());
+			formatter.format(editorModelProvider.getModel(), document, region);
 		}
 	}
 
-	private void append(EObject eObject, StringBuilder stringBuilder) {
-		NodeAdapter adapter = NodeUtil.getNodeAdapter(eObject);
-		CompositeNode parserNode = adapter.getParserNode();
-		boolean shouldIndent = getFormatterService().shouldIndent(parserNode);
-		if (shouldIndent)
-			indent++;
-		for (EObject an : parserNode.eContents()) {
-			if (an instanceof LeafNode) {
-				LeafNode ln = (LeafNode) an;
-				appendLeafNode(stringBuilder, ln);
-			}
-			else if (an instanceof CompositeNode) {
-				CompositeNode cn = (CompositeNode) an;
-				if (cn.getElement() != null) {
-					append(cn.getElement(), stringBuilder);
-				}
-				else {
-					for (LeafNode ln : cn.getLeafNodes())
-						appendLeafNode(stringBuilder, ln);
-				}
-			}
-		}
-		if (shouldIndent)
-			indent--;
-	}
-
-	private void appendLeafNode(StringBuilder stringBuilder, LeafNode ln) {
-		if (!isWhiteSpace(ln)) {
-			StringBuilder toAppend = new StringBuilder();
-			toAppend.append(getFormatterService().before(ln));
-			toAppend.append(ln.getText().trim());
-			stringBuilder.append(toAppend.toString().replaceAll("\\n", NEW_LINE + indentString()));
+	@Override
+	public void formatterStops() {
+		super.formatterStops();
+		regions.clear();
+		documents.clear();
+		if (Activator.DEBUG_FORMATTER) {
+			System.out.println("XtextFormattingStrategy.formatterStops(): Formatting took "
+					+ (System.currentTimeMillis() - time) + " ms");
 		}
 	}
-
-	// private void lineToLongHandling(StringBuilder toAppend) {
-	// int counter = 1;
-	// int index = 120 * counter;
-	// while (toAppend.length() > index) {
-	// toAppend.insert(index, NEW_LINE);
-	// counter++;
-	// index = 120 * counter;
-	// }
-	// }
-
-	/**
-	 * 
-	 */
-	private String indentString() {
-		StringBuilder indentSB = new StringBuilder();
-		for (short s = indent; s > 0; s--) {
-			indentSB.append(TAB);
-		}
-		return indentSB.toString();
-	}
-
-	private boolean isWhiteSpace(LeafNode ln) {
-		return ln.isHidden() && ln.getGrammarElement() instanceof LexerRule
-				&& "WS".equals(((LexerRule) ln.getGrammarElement()).getName());
-	}
-
 }
