@@ -14,41 +14,42 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.service.IFormatterService;
 import org.eclipse.xtext.ui.service.impl.BuildInFormatterService;
+import org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
 public class XtextFormatter extends BuildInFormatterService implements IFormatterService {
-
-	private static final String TAB = "\t";
-	private static final String WRAPPER = System.getProperty("line.separator");
-
 	@Override
-	public boolean shouldIndent(AbstractNode node) {
+	protected boolean shouldIndent(AbstractNode node) {
 		return super.shouldIndent(node);
 	}
 
 	@Override
-	public String before(LeafNode leafNode) {
-		if ("?=".equals(leafNode.getText()) || ".".equals(leafNode.getText()))
-			return new String();
-		if ("language".equals(leafNode.getText()) || "generate".equals(leafNode.getText())
-				|| "ParserRule".equals(getGrammarRuleName(leafNode.getParent()))
-				&& "ID".equals(getGrammarRuleName(leafNode))) {
-			return WRAPPER;
-		}
-		LeafNode previous = previousNode(leafNode, false);
-		if (previous != null) {
-			if (":".equals(previous.getText())) {
-				return WRAPPER + TAB;
-			}
-			else if (".".equals(previous.getText())) {
-				return new String();
+	protected String before(LeafNode leafNode) {
+		if (")".equals(leafNode.getText()) || "?=".equals(leafNode.getText()) || ".".equals(leafNode.getText()))
+			return EMPTY_STRING;
+		else if ("ParserRule".equals(getGrammarRuleName(leafNode.getParent()))
+				&& "ID".equals(getGrammarRuleName(leafNode)))
+			return NEW_LINE + NEW_LINE;
+		else if (new BuildInTokenTypeDef().mlCommentTokenType().match(leafNode)
+				|| "language".equals(leafNode.getText()) || "generate".equals(leafNode.getText()))
+			return NEW_LINE;
+		LeafNode pLeafNode = previousNode(leafNode, false);
+		if (pLeafNode != null) {
+			if ("(".equals(pLeafNode.getText()) || ".".equals(pLeafNode.getText())) {
+				return EMPTY_STRING;
 			}
 		}
+		return SPACE;
+	}
 
-		return " ";
+	@Override
+	protected String after(LeafNode leafNode) {
+		if (":".equals(leafNode.getText()))
+			return NEW_LINE + TAB;
+		return super.after(leafNode);
 	}
 
 	private String getGrammarRuleName(AbstractNode leafNode) {
@@ -56,6 +57,6 @@ public class XtextFormatter extends BuildInFormatterService implements IFormatte
 		if (grammarElement instanceof RuleCall) {
 			return ((RuleCall) grammarElement).getName();
 		}
-		return "";
+		return EMPTY_STRING;
 	}
 }

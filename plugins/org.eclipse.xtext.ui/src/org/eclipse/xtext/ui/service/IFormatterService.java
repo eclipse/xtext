@@ -8,9 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.service;
 
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.ui.editor.model.IEditorModel;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -18,8 +19,5 @@ import org.eclipse.xtext.service.ILanguageService;
  */
 public interface IFormatterService extends ILanguageService {
 
-	public abstract boolean shouldIndent(AbstractNode node);
-
-	public abstract String before(LeafNode leafNode);
-
+	void format(IEditorModel editorModel, IDocument document, IRegion region);
 }
