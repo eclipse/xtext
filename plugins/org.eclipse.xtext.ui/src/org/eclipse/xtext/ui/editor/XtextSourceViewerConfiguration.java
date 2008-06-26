@@ -8,18 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.AbstractReusableInformationControlCreator;
 import org.eclipse.jface.text.DefaultInformationControl;
-import org.eclipse.jface.text.DefaultTextHover;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IInformationControl;
-import org.eclipse.jface.text.IInformationControlCreator;
-import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextHover;
-import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
@@ -30,24 +24,17 @@ import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.reconciler.MonoReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
-import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.ui.texteditor.HippieProposalProcessor;
-import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.editor.codecompletion.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.formatting.XtextFormattingStrategy;
+import org.eclipse.xtext.ui.editor.hover.XtextTextHover;
 import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.editor.model.XtextEditorModelReconcileStrategy;
-import org.eclipse.xtext.ui.editor.utils.EditorModelUtil;
 import org.eclipse.xtext.ui.service.IFormatterService;
 import org.eclipse.xtext.ui.service.ILabelProvider;
 import org.eclipse.xtext.ui.service.IProposalsProvider;
@@ -140,89 +127,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	@Override
 	public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
-		ITextHover textHover = new XtextTextHover(sourceViewer);
-		return textHover;
-	}
-
-	class XtextTextHover extends DefaultTextHover {
-		public XtextTextHover(ISourceViewer sourceViewer) {
-			super(sourceViewer);
-		}
-
-		protected boolean isIncluded(Annotation annotation) {
-			return isShownInText(annotation);
-		}
-
-		/*
-		 * @see
-		 * org.eclipse.jface.text.ITextHoverExtension#getHoverControlCreator()
-		 */
-		public IInformationControlCreator getHoverControlCreator() {
-			return new IInformationControlCreator() {
-				public IInformationControl createInformationControl(Shell parent) {
-					return new DefaultInformationControl(parent, EditorsUI.getTooltipAffordanceString());
-				}
-			};
-		}
-
-		@Override
-		public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
-			return new Region(offset, 0);
-		}
-
-		@Override
-		public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
-			ILabelProvider lp = ServiceRegistry.getService(languageDescriptor, ILabelProvider.class);
-			String textHover = super.getHoverInfo(textViewer, hoverRegion);
-			if (textHover == null) {
-				textHover = "";
-			}
-			else {
-				textHover += "\n";
-			}
-			StringBuilder sb = new StringBuilder(textHover);
-			AbstractNode an = EditorModelUtil.findLeafNodeAtOffset(editorModelProvider.getModel()
-					.getParseTreeRootNode(), hoverRegion.getOffset());
-			if (an instanceof LeafNode) {
-				LeafNode leaf = (LeafNode) an;
-				if (!leaf.isHidden()) {
-					handleFeatured(leaf, sb);
-					sb.append(leaf.getText());
-					handleCoordinaten(leaf, sb);
-					handleParent(leaf.getParent(), sb);
-				}
-			}
-			return sb.toString();
-		}
-
-		private void handleCoordinaten(AbstractNode abstractNode, StringBuilder sb) {
-			sb.append(" [" + abstractNode.offset() + "," + abstractNode.length() + "]");
-		}
-
-		private void handleParent(CompositeNode parent, StringBuilder sb) {
-			sb.append("\n\t" + "Parent: ");
-			grammarEleToString(parent.getGrammarElement(), sb);
-			handleCoordinaten(parent, sb);
-		}
-
-		private void grammarEleToString(EObject grammarElement, StringBuilder sb) {
-			if (grammarElement instanceof RuleCall)
-				sb.append(((RuleCall) grammarElement).getName());
-			if (grammarElement instanceof ParserRule)
-				sb.append(((ParserRule) grammarElement).getName());
-
-		}
-
-		private void handleFeatured(LeafNode leaf, StringBuilder sb) {
-			if (leaf.getFeature() != null) {
-				sb.append(((RuleCall) leaf.getGrammarElement()).getName());
-				sb.append(" - ");
-				grammarEleToString(leaf.getParent().getGrammarElement(), sb);
-				sb.append(".");
-				sb.append(leaf.getFeature());
-
-				sb.append("\n");
-			}
-		}
+		return new XtextTextHover(sourceViewer, editorModelProvider, ServiceRegistry.getService(languageDescriptor,
+				ILabelProvider.class));
 	}
 }
