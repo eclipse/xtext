@@ -1,6 +1,5 @@
 package org.eclipse.xtext.ui.service.impl;
 
-import java.util.Collections;
 import java.util.ListIterator;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -10,11 +9,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.editor.model.IEditorModel;
+import org.eclipse.xtext.ui.editor.utils.EditorModelUtil;
+import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.service.IFormatterService;
 import org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef;
 
@@ -30,26 +33,52 @@ public class BuildInFormatterService implements IFormatterService {
 	public static final String EMPTY_STRING = new String();
 
 	private AbstractNode rootNode;
+	/*
+	 * lastLeafNode indicates when first text was written, so indentation can
+	 * starts and helps calculate (performance)
+	 */
+	private LeafNode lastLeafNode;
 	private StringBuilder indentSB;
-	/* indicates when first text was written, so indentation can starts */
-	private boolean firstLeafNodeFormatted;
+	private IRegion formattingRegion;
 
 	public void format(IEditorModel editorModel, IDocument document, IRegion region) {
 		indentSB = new StringBuilder();
-		firstLeafNodeFormatted = false;
-		this.rootNode = editorModel.getParseTreeRootNode();
+		lastLeafNode = null;
+		rootNode = editorModel.getParseTreeRootNode();
+		formattingRegion = region;
 		if (rootNode != null) {
 			StringBuilder stringBuilder = new StringBuilder();
+			formattingRegion = calculateFormattingRegion(region);
 			append(rootNode, stringBuilder);
 			try {
 				String string = stringBuilder.toString();
 				if (!document.get().equals(string))
-					document.replace(0, document.getLength(), string);
+					document.replace(formattingRegion.getOffset(), formattingRegion.getLength(), string);
 			}
 			catch (BadLocationException e) {
-				e.printStackTrace();
+				CoreLog.logError(e);
 			}
 		}
+	}
+
+	private IRegion calculateFormattingRegion(IRegion region) {
+		AbstractNode an = EditorModelUtil.findLeafNodeAtOffset(rootNode, region.getOffset());
+		if (an != null) {
+			while (!overFormattingRegion(an)) {
+				an = an.getParent();
+			}
+			Region retVal = new Region(an.offset(), an.length());
+			if (Activator.DEBUG_FORMATTER)
+				System.out.println("BuildInFormatterService.calculateFormattingRegion(): From: " + region + " to "
+						+ retVal + ". Node:" + an);
+			return retVal;
+		}
+		return region;
+	}
+
+	private boolean overFormattingRegion(AbstractNode an) {
+		return an.offset() <= formattingRegion.getOffset()
+				&& (an.offset() + an.length()) >= formattingRegion.getLength() + formattingRegion.getOffset();
 	}
 
 	/**
@@ -87,15 +116,17 @@ public class BuildInFormatterService implements IFormatterService {
 	}
 
 	private void append(AbstractNode parserNode, StringBuilder stringBuilder) {
-		boolean shouldIndent = firstLeafNodeFormatted && shouldIndent(parserNode);
+		boolean shouldIndent = (lastLeafNode != null) && shouldIndent(parserNode);
 		if (shouldIndent)
 			addIndent();
 		for (EObject an : parserNode.eContents()) {
 			if (an instanceof LeafNode) {
 				LeafNode ln = (LeafNode) an;
 				if (!isWhiteSpace(ln)) {
-					appendLeafNode(stringBuilder, ln);
-					firstLeafNodeFormatted = true;
+					if (inFormattingRegion(ln)) {
+						appendLeafNode(stringBuilder, ln);
+					}
+					lastLeafNode = ln;
 				}
 			}
 			else if (an instanceof CompositeNode) {
@@ -106,10 +137,16 @@ public class BuildInFormatterService implements IFormatterService {
 			removeIndent();
 	}
 
+	private boolean inFormattingRegion(AbstractNode an) {
+		return an.offset() >= formattingRegion.getOffset()
+				&& (an.offset() + an.length()) <= formattingRegion.getLength() + formattingRegion.getOffset();
+	}
+
 	private void appendLeafNode(StringBuilder stringBuilder, LeafNode ln) {
-		// IDEE COLLECT INFORMATION about bevore and after
+		// IDEE COLLECT INFORMATION about before and after and concat leafnodes
+		// later
 		StringBuilder toAppend = new StringBuilder();
-		if (previousNode(ln, true) == null) {
+		if (lastLeafNode == null) {
 			toAppend.append(getIndentString());
 		}
 		else {
@@ -122,19 +159,20 @@ public class BuildInFormatterService implements IFormatterService {
 	}
 
 	/**
+	 * @return previous formatted node
+	 */
+	protected final LeafNode previousNode() {
+		return lastLeafNode;
+	}
+
+	/**
 	 * @param leafNode
 	 * @param includeComments
 	 * @return
 	 */
-	protected final LeafNode nextNode(LeafNode leafNode, boolean includeComments) {
+	protected final LeafNode nextNode(LeafNode leafNode) {
 		EList<EObject> nodes = asList(getRootNode(leafNode).eAllContents());
-		return next(nodes, leafNode, includeComments);
-	}
-
-	protected final LeafNode previousNode(LeafNode leafNode, boolean includeComments) {
-		EList<EObject> nodes = new BasicEList<EObject>(asList(getRootNode(leafNode).eAllContents()));
-		Collections.reverse(nodes);
-		return next(nodes, leafNode, includeComments);
+		return next(nodes, leafNode, true);
 	}
 
 	private EList<EObject> asList(TreeIterator<EObject> allContents) {
@@ -202,15 +240,4 @@ public class BuildInFormatterService implements IFormatterService {
 				&& "WS".equals(((LexerRule) ln.getGrammarElement()).getName());
 	}
 
-	private boolean isFirstLeafNode(LeafNode ln) {
-		for (EObject an : ln.getParent().eContents()) {
-			if (an instanceof LeafNode && !((LeafNode) an).isHidden()) {
-				if (an.equals(ln))
-					return true;
-				else
-					return false;
-			}
-		}
-		return false;
-	}
 }

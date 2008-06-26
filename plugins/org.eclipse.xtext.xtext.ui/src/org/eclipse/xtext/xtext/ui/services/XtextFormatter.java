@@ -36,7 +36,8 @@ public class XtextFormatter extends BuildInFormatterService implements IFormatte
 		else if (new BuildInTokenTypeDef().mlCommentTokenType().match(leafNode)
 				|| "language".equals(leafNode.getText()) || "generate".equals(leafNode.getText()))
 			return NEW_LINE;
-		LeafNode pLeafNode = previousNode(leafNode, false);
+
+		LeafNode pLeafNode = previousNode();
 		if (pLeafNode != null) {
 			if ("(".equals(pLeafNode.getText()) || ".".equals(pLeafNode.getText())) {
 				return EMPTY_STRING;
