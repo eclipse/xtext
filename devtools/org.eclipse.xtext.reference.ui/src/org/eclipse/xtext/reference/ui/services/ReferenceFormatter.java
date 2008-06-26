@@ -21,7 +21,7 @@ public class ReferenceFormatter extends BuildInFormatterService implements IForm
 	protected String before(LeafNode leafNode) {
 		ReferenceTokenTypeDef rttd = new ReferenceTokenTypeDef();
 		if (rttd.gelb().match(leafNode) || rttd.grün().match(leafNode) || rttd.rot().match(leafNode))
-			return SPACE;
+			return SPACE;// do not wrap color keywords
 		if ("}".equals(leafNode.getText()))
 			return NEW_LINE;
 		return super.before(leafNode);
