@@ -1,71 +1,1 @@
-/*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- *******************************************************************************/
-package org.eclipse.xtext.reference.ui.services;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.reference.ui.services.contentassist.Proposal;
-import org.eclipse.xtext.reference.ui.services.contentassist.XtextCompletionProposal;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.ui.editor.model.IEditorModel;
-import org.eclipse.xtext.ui.service.IProposalsProvider;
-
-/**
- * @author Dennis Hübner - Initial contribution and API
- * 
- */
-public class ReferenceProposalsProvider implements IProposalsProvider {
-	@Inject
-	private ILanguageDescriptor languageDescriptor;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.service.IProposalsProvider#getProposals(org
-	 * .eclipse.jface.text.ITextViewer, int)
-	 */
-	public List<ICompletionProposal> getProposals(IEditorModel model, ITextViewer viewer, int offset) {
-
-		Proposal p = new Proposal("Hier ein proposal");
-		p.setLabel(new StyledString("Proposal Label", StyledString.COUNTER_STYLER));
-		p.setDescription("Proposal Beschreibung");
-		p.setImage("icons/test.gif");
-		Proposal p1 = new Proposal("Hier noch ein proposal");
-		p1.setDescription("Noch ein Proposal Beschreibung");
-		Proposal p2 = new Proposal("Proposal in bund");
-		p2.setLabel(new StyledString("Proposal ", StyledString.QUALIFIER_STYLER).append("in ",
-				StyledString.DECORATIONS_STYLER).append("bund", StyledString.COUNTER_STYLER));
-		p2.setDescription("Test AutoWRAP: alkg pkap aposk poasdkg pokd"
-				+ "gokspeokrg speorkg aüperogk aüpeorgk üapoekg apüodlg laksd lgk üapwoegk ldkgaäösdlgkoawekg ok");
-		List<Proposal> retVal = new ArrayList<Proposal>();
-		IGrammarAccess grammarAccess = ServiceRegistry.getService(languageDescriptor, IGrammarAccess.class);
-		for (ParserRule pr : grammarAccess.getGrammar().getParserRules()) {
-			Proposal pro = new Proposal(pr.getName());
-			pro.setLabel(new StyledString(pr.getName()).append(" - " + pr.toString(), StyledString.QUALIFIER_STYLER));
-			retVal.add(pro);
-		}
-		retVal.add(p);
-		retVal.add(p1);
-		retVal.add(p2);
-		List<ICompletionProposal> list = new ArrayList<ICompletionProposal>();
-		for (Proposal proposal : retVal) {
-			list.add(new XtextCompletionProposal(proposal, offset));
-		}
-		return list;
-	}
-
-}
+/******************************************************************************* * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others. * All rights reserved. This program and the accompanying materials * are made available under the terms of the Eclipse Public License v1.0 * which accompanies this distribution, and is available at * http://www.eclipse.org/legal/epl-v10.html * *******************************************************************************/package org.eclipse.xtext.reference.ui.services;import static org.eclipse.xtext.reference.ui.services.ParseTreeUtil.getCardinalityType;import static org.eclipse.xtext.reference.ui.services.ParseTreeUtil.getLastElementByOffset;import static org.eclipse.xtext.reference.ui.services.ParseTreeUtil.getParserRule;import static org.eclipse.xtext.reference.ui.services.ParseTreeUtil.getParserRuleAssignments;import static org.eclipse.xtext.reference.ui.services.ParseTreeUtil.isOptional;import java.util.ArrayList;import java.util.Arrays;import java.util.Iterator;import java.util.List;import org.eclipse.emf.common.util.EList;import org.eclipse.jface.text.ITextViewer;import org.eclipse.jface.text.contentassist.ICompletionProposal;import org.eclipse.xtext.AbstractElement;import org.eclipse.xtext.Alternatives;import org.eclipse.xtext.Assignment;import org.eclipse.xtext.Group;import org.eclipse.xtext.Keyword;import org.eclipse.xtext.ParserRule;import org.eclipse.xtext.RuleCall;import org.eclipse.xtext.reference.ui.services.ParseTreeUtil.CardinalityType;import org.eclipse.xtext.reference.ui.services.contentassist.Proposal;import org.eclipse.xtext.reference.ui.services.contentassist.XtextCompletionProposal;import org.eclipse.xtext.service.ILanguageDescriptor;import org.eclipse.xtext.service.Inject;import org.eclipse.xtext.ui.editor.model.IEditorModel;import org.eclipse.xtext.ui.service.IProposalsProvider;/** * @author Dennis Hübner - Initial contribution and API *  */public class ReferenceProposalsProvider implements IProposalsProvider {    @Inject    private ILanguageDescriptor languageDescriptor;    public List<ICompletionProposal> getProposals(IEditorModel model, ITextViewer viewer, int offset) {        List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();        if (model.getParseTreeRootNode() != null) {            List<Proposal> proposalList = new ArrayList<Proposal>();            // dumpNode(model.getParseTreeRootNode());            // get last grammar element            AbstractElement lastElementByOffset = getLastElementByOffset(model.getParseTreeRootNode(), offset);            // add proposal starting at the given grammar element            addProposal(proposalList, lastElementByOffset);            for (Proposal proposal : proposalList) {                completionProposalList.add(new XtextCompletionProposal(proposal, offset));            }        }        return completionProposalList;    }    private final void addProposal(List<Proposal> proposalList, AbstractElement grammarElement) {        if (grammarElement.eContainer() instanceof ParserRule) {            /**             * in the case of a parserRule we must lookup existing assignments             * to this rule in order to add additional proposal             */            List<AbstractElement> grammarElementReference = getParserRuleAssignments((ParserRule) grammarElement                    .eContainer());            addProposal(proposalList, (AbstractElement) grammarElementReference.iterator().next());        }        else if (grammarElement.eContainer() instanceof Alternatives) {            /**             * one out of the alternatives here must already be fullfilled so we             * can simply skip and proceed to the parent             */            addProposal(proposalList, (AbstractElement) grammarElement.eContainer());        }        else if (grammarElement.eContainer() instanceof Group) {            EList<AbstractElement> contents = ((Group) grammarElement.eContainer()).getAbstractTokens();            int indexOf = contents.indexOf(grammarElement) + 1;            int size = contents.size();            CardinalityType cardinalityType = getCardinalityType(grammarElement);            // add the current one if has an oneOrMore cardinality            if (CardinalityType.ONEORMORE_LITERAL.equals(cardinalityType)) {                proposalList.addAll(addProposal(grammarElement));            }            /**             * start at the current (maybe the last) or at the following one             * with optional cardinality and add all following with optional             * cardinality             */            AbstractElement last = CardinalityType.ANY_LITERAL.equals(cardinalityType) || indexOf == size ? grammarElement                    : contents.get(indexOf++);            while (isOptional(last) && indexOf < size) {                proposalList.addAll(addProposal(last));                last = indexOf < size ? contents.get(indexOf++) : last;            }            // always add the following if available or the last one if has an            // any cardinality            if (last != grammarElement || CardinalityType.ANY_LITERAL.equals(getCardinalityType(last))) {                proposalList.addAll(addProposal(last));            }            // ask parent groups only if we've completed the whole group            if ((indexOf == size && (last == grammarElement || isOptional(last)))) {                addProposal(proposalList, (AbstractElement) grammarElement.eContainer());            }        }        else {            // todo:            addProposal(proposalList, (AbstractElement) grammarElement.eContainer());        }    }    private final List<Proposal> addProposal(AbstractElement abstractElement) {        List<Proposal> proposals = new ArrayList<Proposal>();        if (abstractElement instanceof Keyword) {            proposals.addAll(addProposal(((Keyword) abstractElement)));        }        else if (abstractElement instanceof Alternatives) {            proposals.addAll(addProposal(((Alternatives) abstractElement)));        }        else if (abstractElement instanceof Assignment) {            proposals.addAll(addProposal(((Assignment) abstractElement)));        }        else if (abstractElement instanceof RuleCall) {            proposals.addAll(addProposal(((RuleCall) abstractElement)));        }        else if (abstractElement instanceof Group) {            proposals.addAll(addProposal(((Group) abstractElement)));        }        else {            proposals.add(new Proposal(abstractElement.toString()));        }        return proposals;    }    private final List<Proposal> addProposal(Keyword keyword) {        // simply add the value of the keyword        return Arrays.asList(new Proposal(keyword.getValue()));    }    private final List<Proposal> addProposal(Alternatives alternatives) {        // add all possible alternatives        List<Proposal> proposals = new ArrayList<Proposal>();        for (AbstractElement alternativeElement : alternatives.getGroups()) {            proposals.addAll(addProposal(alternativeElement));        }        return proposals;    }    private final List<Proposal> addProposal(Assignment assignment) {        // adds the terminal symbol of the assignment        return addProposal(assignment.getTerminal());    }    private final List<Proposal> addProposal(RuleCall ruleCall) {        // lookup the matching rule and add its alternatives        ParserRule parserRule = getParserRule(ruleCall);        if (null == parserRule) {            return Arrays.asList(new Proposal(ruleCall.getName()));        }        return addProposal(parserRule.getAlternatives());    }    private final List<Proposal> addProposal(Group group) {        // add all optional items in this group        List<Proposal> proposals = new ArrayList<Proposal>();        Iterator<AbstractElement> iterator = group.getAbstractTokens().iterator();        boolean includeNext = true;        while (iterator.hasNext() && includeNext) {            AbstractElement abstractElement = iterator.next();            proposals.addAll(addProposal(abstractElement));            includeNext = isOptional(abstractElement);        }        return proposals;    }}
