@@ -39,10 +39,9 @@ public interface IEditorModel {
 
 	public abstract void install();
 
+	public abstract void uninstall();
+
 	public abstract void addModelListener(IXtextEditorModelListener listener);
 
 	public abstract void removeModelListener(IXtextEditorModelListener listener);
-
-	public abstract void notifyModelListeners(XtextEditorModelChangeEvent event);
-
 }
