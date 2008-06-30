@@ -79,6 +79,7 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 				else {
 					lock = xtextFileInfo.xtextEditorModel;
 				}
+				xtextFileInfo.xtextEditorModel.uninstall();
 				if (lock == null) {
 					xtextFileInfo.xtextEditorModel = null;
 				}

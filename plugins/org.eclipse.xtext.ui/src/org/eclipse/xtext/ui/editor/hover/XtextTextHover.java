@@ -37,7 +37,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
@@ -87,8 +86,8 @@ public class XtextTextHover extends DefaultTextHover implements ITextHoverExtens
 		Action action2 = new Action("Das ist ein Drucker") {
 		};
 		action2.setEnabled(true);
-		action2.setImageDescriptor(ImageDescriptor.createFromImage(PlatformUI.getWorkbench().getSharedImages().getImage(
-				ISharedImages.IMG_ETOOL_PRINT_EDIT)));
+		action2.setImageDescriptor(ImageDescriptor.createFromImage(PlatformUI.getWorkbench().getSharedImages()
+				.getImage(ISharedImages.IMG_ETOOL_PRINT_EDIT)));
 		toolBarManager.add(action);
 		toolBarManager.add(action2);
 	}
@@ -97,19 +96,19 @@ public class XtextTextHover extends DefaultTextHover implements ITextHoverExtens
 	 * @author Dennis Hübner - Initial contribution and API
 	 * 
 	 */
-	private final class XtextInformationControlExtension extends AbstractInformationControl implements
+	private final class XtextInformationControl extends AbstractInformationControl implements
 			IInformationControlExtension2 {
 		private StyledText st = null;
 		private boolean enableScrollbars;
 		private Image icon;// TODO icon disposition
 
-		private XtextInformationControlExtension(Shell parentShell, String statusFieldText) {
+		private XtextInformationControl(Shell parentShell, String statusFieldText) {
 			super(parentShell, statusFieldText);
 			enableScrollbars = false;
 			create();
 		}
 
-		public XtextInformationControlExtension(Shell parent, ToolBarManager toolBarManager) {
+		public XtextInformationControl(Shell parent, ToolBarManager toolBarManager) {
 			super(parent, toolBarManager);
 			enableScrollbars = true;
 			create();
@@ -184,17 +183,17 @@ public class XtextTextHover extends DefaultTextHover implements ITextHoverExtens
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @seeorg.eclipse.jface.text.AbstractInformationControl#
+		 * @see org.eclipse.jface.text.AbstractInformationControl#
 		 * getInformationPresenterControlCreator()
 		 */
 		public IInformationControlCreator getInformationPresenterControlCreator() {
 			return new IInformationControlCreator() {
 				/*
-				 * @seeorg.eclipse.jface.text.IInformationControlCreator#
+				 * @see org.eclipse.jface.text.IInformationControlCreator#
 				 * createInformationControl(org.eclipse.swt.widgets.Shell)
 				 */
 				public IInformationControl createInformationControl(Shell parent) {
-					return new XtextInformationControlExtension(parent, (ToolBarManager) toolBarManager);
+					return new XtextInformationControl(parent, toolBarManager);
 				}
 			};
 		}
@@ -206,7 +205,7 @@ public class XtextTextHover extends DefaultTextHover implements ITextHoverExtens
 	public IInformationControlCreator getHoverControlCreator() {
 		return new IInformationControlCreator() {
 			public IInformationControl createInformationControl(Shell parent) {
-				return new XtextInformationControlExtension(parent, EditorsUI.getTooltipAffordanceString());
+				return new XtextInformationControl(parent, EditorsUI.getTooltipAffordanceString());
 			}
 		};
 	}

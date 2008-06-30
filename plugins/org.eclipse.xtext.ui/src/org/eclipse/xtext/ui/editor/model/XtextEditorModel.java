@@ -96,7 +96,7 @@ public class XtextEditorModel implements IEditorModel {
 	private void parseDocument(IDocument document) {
 		String content;
 		try {
-			content = document.get(0, document.getLength());
+			content = document.get();
 			if (Activator.DEBUG_PARSING)
 				System.out.print("EditorModel Parsing...");
 			long start = System.currentTimeMillis();
@@ -194,6 +194,15 @@ public class XtextEditorModel implements IEditorModel {
 		document.addDocumentListener(dirtyListener);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#uninstall()
+	 */
+	public void uninstall() {
+		document.removeDocumentListener(dirtyListener);
+	}
+
 	private List<IXtextEditorModelListener> xtextModelListeners = new ArrayList<IXtextEditorModelListener>();
 
 	/*
@@ -220,13 +229,7 @@ public class XtextEditorModel implements IEditorModel {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#notifyModelListeners
-	 * (org.eclipse.xtext.ui.editor.model.XtextEditorModelChangeEvent)
-	 */
-	public void notifyModelListeners(XtextEditorModelChangeEvent event) {
+	private void notifyModelListeners(XtextEditorModelChangeEvent event) {
 		Iterator<IXtextEditorModelListener> iterator;
 		synchronized (xtextModelListeners) {
 			iterator = xtextModelListeners.iterator();
