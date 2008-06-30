@@ -17,7 +17,7 @@ import org.eclipse.xtext.util.EmfStructureComparator;
  * @author Jan Köhnlein - Initial contribution and API
  * 
  */
-public class AbstractPartialParserTest extends AbstractGeneratorTest {
+public abstract class AbstractPartialParserTest extends AbstractGeneratorTest {
 
 	protected static final boolean DEBUG = false;
 	protected EmfStructureComparator comparator;
