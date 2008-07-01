@@ -46,7 +46,7 @@ import org.eclipse.xtext.ui.service.IProposalsProvider;
  * 
  */
 public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguration {
-	final IEditorModelProvider editorModelProvider;
+	private final IEditorModelProvider editorModelProvider;
 	private final ILanguageDescriptor languageDescriptor;
 
 	/**
