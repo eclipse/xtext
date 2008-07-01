@@ -36,10 +36,10 @@ public class PartialParsingPointerTest extends AbstractPartialParserTest {
 		checkParseRegionPointers(parsingPointers, "b", "Multiplication", "Multiplication", "Atom", "Op", "values");
 
 		parsingPointers = calculatePartialParsingPointers(model, 5, 2);
-		checkParseRegionPointers(parsingPointers, model, "Addition", "Addition", "Op", null, null);
+		checkParseRegionPointers(parsingPointers, model, "Sequence", "Sequence", "Op", null, null);
 
 		parsingPointers = calculatePartialParsingPointers(model, 6, 1);
-		checkParseRegionPointers(parsingPointers, model, "Addition", "Addition", "Op", null, null);
+		checkParseRegionPointers(parsingPointers, model, "Sequence", "Sequence", "Op", null, null);
 
 		parsingPointers = calculatePartialParsingPointers(model, 8, 2);
 		checkParseRegionPointers(parsingPointers, "(c/d)", "Term", "Term", "Op", "Op", "values");
@@ -47,6 +47,9 @@ public class PartialParsingPointerTest extends AbstractPartialParserTest {
 		parsingPointers = calculatePartialParsingPointers(model, 9, 2);
 		checkParseRegionPointers(parsingPointers, "c/d", "Addition", "Addition", "Op", "Op", "values");
 
+		model="a b";
+		parsingPointers = calculatePartialParsingPointers(model, 1, 1);
+		checkParseRegionPointers(parsingPointers, "a b", "ActionImpl", "Sequence", "Sequence", null, null);
 	}
 
 	public void testLookahead() throws Exception {
