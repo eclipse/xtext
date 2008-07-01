@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ISynchronizable;
 import org.eclipse.jface.text.source.IAnnotationModel;
-import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IURIEditorInput;
 import org.eclipse.ui.editors.text.TextFileDocumentProvider;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -64,7 +64,7 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 		XtextFileInfo xtextFileInfo = (XtextFileInfo) info;
 		IAnnotationModel annotationModel = xtextFileInfo.fTextFileBuffer.getAnnotationModel();
 		IResourceFactory resourceFactory = ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
-		String pathName = ((IFileEditorInput) element).getFile().getLocationURI().toString();
+		String pathName = ((IURIEditorInput) element).getURI().toString();
 		Resource resource = resourceFactory.createResource(URI.createPlatformResourceURI(pathName, true));
 		Assert.isNotNull(resource);
 		IDocument document = info.fTextFileBuffer.getDocument();
