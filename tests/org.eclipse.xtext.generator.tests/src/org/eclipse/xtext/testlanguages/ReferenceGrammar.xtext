@@ -1,30 +1,28 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- *******************************************************************************/
+* Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+* All rights reserved. This program and the accompanying materials
+* are made available under the terms of the Eclipse Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+*******************************************************************************/
 language org.eclipse.xtext.testlanguages.ReferenceGrammar
 generate ReferenceGrammar "http://eclipse.org/xtext/reference/ReferenceGrammar"
-
-Spielplatz:
-	("spielplatz" groesse=INT "{"
-		(kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug)*
-	"}")?;		
 	
-Person:
-	Kind | Erwachsener;
+	Spielplatz :
+		 ( "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug ) * "}" ) ? ;
 	
-Kind:
-	"kind" "(" name=ID age=INT ")";
+	Person :
+		 Kind | Erwachsener ;
 	
-Erwachsener:
-	"erwachsener" "(" name=ID age=INT ")";
+	Kind :
+		 "kind" "(" name = ID age = INT ")" ;
 	
-Spielzeug:
-	"spielzeug" "(" name=ID farbe=Farbe ")";
+	Erwachsener :
+		 "erwachsener" "(" name = ID age = INT ")" ;
 	
-Farbe:
-	("ROT" | "BLAU" | "GELB" | "GRÜN");
+	Spielzeug :
+		 "spielzeug" "(" name = ID farbe = Farbe ")" ;
+	
+	Farbe :
+		 "ROT" | "BLAU" | "GELB" | "GRÜN" ;
