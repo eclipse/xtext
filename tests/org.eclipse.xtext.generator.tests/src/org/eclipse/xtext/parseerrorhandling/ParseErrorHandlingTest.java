@@ -69,7 +69,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	public void testname() throws Exception {
 		String model = "import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'";
 		for (int i=model.length();0<i;i--) {
-			EObject model2 = getModel(model.substring(0, i));
+			getModel(model.substring(0, i));
 		}
 	}
 	
