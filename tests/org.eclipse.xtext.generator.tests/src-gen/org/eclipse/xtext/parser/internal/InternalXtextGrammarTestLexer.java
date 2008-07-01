@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g 2008-07-01 15:55:31
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g 2008-07-01 17:32:49
 
 package org.eclipse.xtext.parser.internal;
 
@@ -89,10 +89,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g"; }
 
     // $ANTLR start T12
-    public void mT12() throws RecognitionException {
+    public final void mT12() throws RecognitionException {
         try {
             int _type = T12;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:45:7: ( 'abstract language' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:45:5: ( 'abstract language' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:45:7: 'abstract language'
             {
             match("abstract language"); 
@@ -108,10 +108,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T12
 
     // $ANTLR start T13
-    public void mT13() throws RecognitionException {
+    public final void mT13() throws RecognitionException {
         try {
             int _type = T13;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:46:7: ( 'language' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:46:5: ( 'language' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:46:7: 'language'
             {
             match("language"); 
@@ -127,10 +127,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T13
 
     // $ANTLR start T14
-    public void mT14() throws RecognitionException {
+    public final void mT14() throws RecognitionException {
         try {
             int _type = T14;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:47:7: ( '.' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:47:5: ( '.' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:47:7: '.'
             {
             match('.'); 
@@ -145,10 +145,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T14
 
     // $ANTLR start T15
-    public void mT15() throws RecognitionException {
+    public final void mT15() throws RecognitionException {
         try {
             int _type = T15;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:48:7: ( 'extends' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:48:5: ( 'extends' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:48:7: 'extends'
             {
             match("extends"); 
@@ -164,10 +164,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T15
 
     // $ANTLR start T16
-    public void mT16() throws RecognitionException {
+    public final void mT16() throws RecognitionException {
         try {
             int _type = T16;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:49:7: ( 'lexing' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:49:5: ( 'lexing' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:49:7: 'lexing'
             {
             match("lexing"); 
@@ -183,10 +183,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T16
 
     // $ANTLR start T17
-    public void mT17() throws RecognitionException {
+    public final void mT17() throws RecognitionException {
         try {
             int _type = T17;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:50:7: ( ':' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:50:5: ( ':' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:50:7: ':'
             {
             match(':'); 
@@ -201,10 +201,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T17
 
     // $ANTLR start T18
-    public void mT18() throws RecognitionException {
+    public final void mT18() throws RecognitionException {
         try {
             int _type = T18;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:51:7: ( 'generate' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:51:5: ( 'generate' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:51:7: 'generate'
             {
             match("generate"); 
@@ -220,10 +220,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T18
 
     // $ANTLR start T19
-    public void mT19() throws RecognitionException {
+    public final void mT19() throws RecognitionException {
         try {
             int _type = T19;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:52:7: ( 'as' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:52:5: ( 'as' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:52:7: 'as'
             {
             match("as"); 
@@ -239,10 +239,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T19
 
     // $ANTLR start T20
-    public void mT20() throws RecognitionException {
+    public final void mT20() throws RecognitionException {
         try {
             int _type = T20;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:53:7: ( 'import' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:53:5: ( 'import' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:53:7: 'import'
             {
             match("import"); 
@@ -258,10 +258,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T20
 
     // $ANTLR start T21
-    public void mT21() throws RecognitionException {
+    public final void mT21() throws RecognitionException {
         try {
             int _type = T21;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:54:7: ( 'returns' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:54:5: ( 'returns' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:54:7: 'returns'
             {
             match("returns"); 
@@ -277,10 +277,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T21
 
     // $ANTLR start T22
-    public void mT22() throws RecognitionException {
+    public final void mT22() throws RecognitionException {
         try {
             int _type = T22;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:55:7: ( ';' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:55:5: ( ';' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:55:7: ';'
             {
             match(';'); 
@@ -295,10 +295,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T22
 
     // $ANTLR start T23
-    public void mT23() throws RecognitionException {
+    public final void mT23() throws RecognitionException {
         try {
             int _type = T23;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:56:7: ( '::' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:56:5: ( '::' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:56:7: '::'
             {
             match("::"); 
@@ -314,10 +314,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T23
 
     // $ANTLR start T24
-    public void mT24() throws RecognitionException {
+    public final void mT24() throws RecognitionException {
         try {
             int _type = T24;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:57:7: ( '|' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:57:5: ( '|' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:57:7: '|'
             {
             match('|'); 
@@ -332,10 +332,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T24
 
     // $ANTLR start T25
-    public void mT25() throws RecognitionException {
+    public final void mT25() throws RecognitionException {
         try {
             int _type = T25;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:58:7: ( '?' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:58:5: ( '?' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:58:7: '?'
             {
             match('?'); 
@@ -350,10 +350,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T25
 
     // $ANTLR start T26
-    public void mT26() throws RecognitionException {
+    public final void mT26() throws RecognitionException {
         try {
             int _type = T26;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:59:7: ( '*' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:59:5: ( '*' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:59:7: '*'
             {
             match('*'); 
@@ -368,10 +368,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T26
 
     // $ANTLR start T27
-    public void mT27() throws RecognitionException {
+    public final void mT27() throws RecognitionException {
         try {
             int _type = T27;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:60:7: ( '+' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:60:5: ( '+' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:60:7: '+'
             {
             match('+'); 
@@ -386,10 +386,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T27
 
     // $ANTLR start T28
-    public void mT28() throws RecognitionException {
+    public final void mT28() throws RecognitionException {
         try {
             int _type = T28;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:61:7: ( '+=' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:61:5: ( '+=' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:61:7: '+='
             {
             match("+="); 
@@ -405,10 +405,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T28
 
     // $ANTLR start T29
-    public void mT29() throws RecognitionException {
+    public final void mT29() throws RecognitionException {
         try {
             int _type = T29;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:62:7: ( '=' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:62:5: ( '=' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:62:7: '='
             {
             match('='); 
@@ -423,10 +423,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T29
 
     // $ANTLR start T30
-    public void mT30() throws RecognitionException {
+    public final void mT30() throws RecognitionException {
         try {
             int _type = T30;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:63:7: ( '?=' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:63:5: ( '?=' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:63:7: '?='
             {
             match("?="); 
@@ -442,10 +442,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T30
 
     // $ANTLR start T31
-    public void mT31() throws RecognitionException {
+    public final void mT31() throws RecognitionException {
         try {
             int _type = T31;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:64:7: ( '{' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:64:5: ( '{' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:64:7: '{'
             {
             match('{'); 
@@ -460,10 +460,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T31
 
     // $ANTLR start T32
-    public void mT32() throws RecognitionException {
+    public final void mT32() throws RecognitionException {
         try {
             int _type = T32;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:65:7: ( 'current' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:65:5: ( 'current' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:65:7: 'current'
             {
             match("current"); 
@@ -479,10 +479,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T32
 
     // $ANTLR start T33
-    public void mT33() throws RecognitionException {
+    public final void mT33() throws RecognitionException {
         try {
             int _type = T33;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:66:7: ( '}' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:66:5: ( '}' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:66:7: '}'
             {
             match('}'); 
@@ -497,10 +497,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T33
 
     // $ANTLR start T34
-    public void mT34() throws RecognitionException {
+    public final void mT34() throws RecognitionException {
         try {
             int _type = T34;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:67:7: ( '(' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:67:5: ( '(' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:67:7: '('
             {
             match('('); 
@@ -515,10 +515,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T34
 
     // $ANTLR start T35
-    public void mT35() throws RecognitionException {
+    public final void mT35() throws RecognitionException {
         try {
             int _type = T35;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:68:7: ( ')' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:68:5: ( ')' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:68:7: ')'
             {
             match(')'); 
@@ -533,10 +533,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end T35
 
     // $ANTLR start RULE_ID
-    public void mRULE_ID() throws RecognitionException {
+    public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1003:11: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1003:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1003:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1003:11: ( '^' )?
@@ -612,10 +612,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end RULE_ID
 
     // $ANTLR start RULE_INT
-    public void mRULE_INT() throws RecognitionException {
+    public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1005:12: ( ( '0' .. '9' )+ )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1005:10: ( ( '0' .. '9' )+ )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1005:12: ( '0' .. '9' )+
             {
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1005:12: ( '0' .. '9' )+
@@ -659,10 +659,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end RULE_INT
 
     // $ANTLR start RULE_STRING
-    public void mRULE_STRING() throws RecognitionException {
+    public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1007:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1007:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -813,10 +813,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end RULE_STRING
 
     // $ANTLR start RULE_ML_COMMENT
-    public void mRULE_ML_COMMENT() throws RecognitionException {
+    public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1009:19: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1009:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1009:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
@@ -872,10 +872,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end RULE_ML_COMMENT
 
     // $ANTLR start RULE_SL_COMMENT
-    public void mRULE_SL_COMMENT() throws RecognitionException {
+    public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1011:19: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )? )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1011:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )? )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1011:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )?
             {
             match("//"); 
@@ -991,10 +991,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end RULE_SL_COMMENT
 
     // $ANTLR start RULE_WS
-    public void mRULE_WS() throws RecognitionException {
+    public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1013:11: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1013:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1013:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1013:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
@@ -1048,10 +1048,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end RULE_WS
 
     // $ANTLR start RULE_LEXER_BODY
-    public void mRULE_LEXER_BODY() throws RecognitionException {
+    public final void mRULE_LEXER_BODY() throws RecognitionException {
         try {
             int _type = RULE_LEXER_BODY;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1015:19: ( '<#' ( '.' )* '#>' )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1015:17: ( '<#' ( '.' )* '#>' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1015:19: '<#' ( '.' )* '#>'
             {
             match("<#"); 
@@ -1094,10 +1094,10 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end RULE_LEXER_BODY
 
     // $ANTLR start RULE_ANY_OTHER
-    public void mRULE_ANY_OTHER() throws RecognitionException {
+    public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1017:18: ( . )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1017:16: ( . )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1017:18: .
             {
             matchAny(); 
@@ -1112,7 +1112,7 @@ public class InternalXtextGrammarTestLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:10: ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER )
+        // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:1:8: ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER )
         int alt13=32;
         int LA13_0 = input.LA(1);
 
