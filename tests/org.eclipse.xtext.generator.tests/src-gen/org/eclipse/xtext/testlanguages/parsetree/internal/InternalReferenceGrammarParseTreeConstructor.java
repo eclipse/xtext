@@ -44,22 +44,42 @@ protected void proceedSpielplatz(InstanceDescription obj) {
 if (
 new Predicate(obj) { 
 		public boolean check() {
-			return true&&obj.checkConsume("spielzeuge")&&true&&obj.checkConsume("groesse")&&true; 
+			return true&&obj.checkConsume("spielzeuge")&&true&&obj.checkConsume("beschreibung")&&obj.checkConsume("groesse")&&true; 
 		}
 }.check() ||
 new Predicate(obj) { 
 		public boolean check() {
-			return true&&obj.checkConsume("kinder")&&true&&obj.checkConsume("groesse")&&true; 
+			return true&&obj.checkConsume("kinder")&&true&&obj.checkConsume("beschreibung")&&obj.checkConsume("groesse")&&true; 
 		}
 }.check() ||
 new Predicate(obj) { 
 		public boolean check() {
-			return true&&true&&true&&obj.checkConsume("groesse")&&true; 
+			return true&&true&&true&&obj.checkConsume("beschreibung")&&obj.checkConsume("groesse")&&true; 
 		}
 }.check() ||
 new Predicate(obj) { 
 		public boolean check() {
-			return true&&obj.checkConsume("erzieher")&&true&&obj.checkConsume("groesse")&&true; 
+			return true&&obj.checkConsume("erzieher")&&true&&obj.checkConsume("beschreibung")&&obj.checkConsume("groesse")&&true; 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&obj.checkConsume("spielzeuge")&&true&&true&&obj.checkConsume("groesse")&&true; 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&obj.checkConsume("kinder")&&true&&true&&obj.checkConsume("groesse")&&true; 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&true&&true&&true&&obj.checkConsume("groesse")&&true; 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return true&&obj.checkConsume("erzieher")&&true&&true&&obj.checkConsume("groesse")&&true; 
 		}
 }.check() ){
 
@@ -243,9 +263,15 @@ new Predicate(obj) {
 
 		
 /* xtext::Assignment */ 
-{
 
-	final Object value = obj.consume("groesse");
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("beschreibung"); 
+		}
+}.check() ){
+
+	final Object value = obj.consume("beschreibung");
     
 /* xtext::RuleCall */ 
 {
@@ -264,10 +290,39 @@ new Predicate(obj) {
 }
 
 		
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Assignment */ 
+{
+
+	final Object value = obj.consume("groesse");
+    
+/* xtext::RuleCall */ 
+{
+
+	
+		
+		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		
+	
+
+}
+
+    if (obj.isConsumed())
+    	objectCreation(obj);
+
+}
+
+		
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
+	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
+
+}
+
 
 }
 

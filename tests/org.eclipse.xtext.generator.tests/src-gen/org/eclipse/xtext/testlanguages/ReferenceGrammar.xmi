@@ -10,9 +10,14 @@
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Group">
-            <abstractTokens xsi:type="xtext:Keyword" value="spielplatz"/>
-            <abstractTokens xsi:type="xtext:Assignment" feature="groesse" operator="=">
-              <terminal xsi:type="xtext:RuleCall" name="INT"/>
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Keyword" value="spielplatz"/>
+              <abstractTokens xsi:type="xtext:Assignment" feature="groesse" operator="=">
+                <terminal xsi:type="xtext:RuleCall" name="INT"/>
+              </abstractTokens>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="beschreibung" operator="=">
+              <terminal xsi:type="xtext:RuleCall" name="STRING"/>
             </abstractTokens>
           </abstractTokens>
           <abstractTokens xsi:type="xtext:Keyword" value="{"/>
