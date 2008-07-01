@@ -17,7 +17,6 @@ public class GenericRegisteredServiceFactory implements ILanguageServiceFactory 
 
 	private IConfigurationElement configurationElement;
 	private Class<? extends ILanguageService> serviceInterface;
-	private ILanguageService service;
 
 	public GenericRegisteredServiceFactory(ILanguageDescriptor languageDescriptor,
 			Class<? extends ILanguageService> serviceInterface, IConfigurationElement configurationElement)
@@ -29,10 +28,7 @@ public class GenericRegisteredServiceFactory implements ILanguageServiceFactory 
 
 	public ILanguageService createLanguageService() {
 		try {
-			if (service == null) {
-				service = (ILanguageService) configurationElement.createExecutableExtension(CLASS);
-			}
-			return service;
+				return (ILanguageService) configurationElement.createExecutableExtension(CLASS);
 		}
 		catch (CoreException e) {
 			CoreLog.logError(e);
