@@ -9,6 +9,8 @@
 language org.eclipse.xtext.testlanguages.SimpleExpressions
 generate simpleExpressions "http://www.eclipse.org/xtext/test/simpleExpressions"
 
+Sequence: Addition ( {Sequence.expressions+=current} expressions+=Addition)*;
+
 Addition returns Expression: 
 	Multiplication ( {Op.values+=current} operator=('+'|'-') values+=Multiplication)*;
 
