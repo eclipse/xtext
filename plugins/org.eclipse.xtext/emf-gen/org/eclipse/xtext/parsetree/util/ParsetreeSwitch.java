@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeSwitch.java,v 1.5 2008/07/01 09:06:49 jkohnlein Exp $
+ * $Id: ParsetreeSwitch.java,v 1.6 2008/07/01 10:18:08 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.util;
 
@@ -112,6 +112,12 @@ public class ParsetreeSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ParsetreePackage.SYNTAX_ERROR: {
+				SyntaxError syntaxError = (SyntaxError)theEObject;
+				T result = caseSyntaxError(syntaxError);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -165,6 +171,21 @@ public class ParsetreeSwitch<T>
 	}
 
   /**
+	 * Returns the result of interpreting the object as an instance of '<em>Syntax Error</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Syntax Error</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSyntaxError(SyntaxError object) {
+		return null;
+	}
+
+		/**
 	 * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
 	 * <!-- begin-user-doc -->
    * This implementation returns null;

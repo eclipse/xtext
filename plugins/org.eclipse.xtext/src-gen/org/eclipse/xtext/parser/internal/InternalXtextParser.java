@@ -14,7 +14,6 @@ import org.antlr.runtime.TokenStream;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.parser.IElementFactory;
-import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 
@@ -82,8 +81,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -507,8 +506,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+               
+                
             } 
         finally {
         }
@@ -594,8 +593,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -720,8 +719,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -822,8 +821,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -962,8 +961,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -1106,8 +1105,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -1202,8 +1201,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -1322,8 +1321,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -1432,8 +1431,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -1628,8 +1627,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -1733,8 +1732,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -1909,8 +1908,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -2041,8 +2040,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -2103,8 +2102,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -2150,8 +2149,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }
@@ -2197,8 +2196,8 @@ public class InternalXtextParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
+                
+                
             } 
         finally {
         }

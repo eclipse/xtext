@@ -30,41 +30,29 @@ public abstract class AbstractParser implements IParser {
     @Inject
     protected IGrammarAccess grammarAccess;
 
-    public IParseResult parse(String ruleName, InputStream in, IElementFactory factory, IParseErrorHandler handler) {
+    public IParseResult parse(String ruleName, InputStream in, IElementFactory factory) {
         try {
-            IParseResult parseResult = (IParseResult) parse(ruleName, new ANTLRInputStream(in), factory, handler);
+            IParseResult parseResult = (IParseResult) parse(ruleName, new ANTLRInputStream(in), factory);
             return parseResult;
         } catch (IOException e) {
             throw new WrappedException(e);
         }
     }
 
-    public IParseResult parse(InputStream in, IParseErrorHandler handler) {
-        return parse(getDefaultRuleName(), in, getDefaultASTFactory(), handler);
-    }
-
-    public IParseResult parse(InputStream in, IElementFactory factory, IParseErrorHandler handler) {
-        return parse(getDefaultRuleName(), in, factory, handler);
-    }
-
     public IParseResult parse(InputStream in, IElementFactory factory) {
-        return parse(getDefaultRuleName(), in, factory, getDefaultHandler());
+        return parse(getDefaultRuleName(), in, factory);
     }
 
     public IParseResult parse(InputStream in) {
-        return parse(getDefaultRuleName(), in, getDefaultASTFactory(), getDefaultHandler());
-    }
-    
-    public IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change,
-    		IParseErrorHandler handler) {
-    	return PartialParsingUtil.reparse(this, originalRootNode, offset, length, change, handler);
+        return parse(getDefaultRuleName(), in, getDefaultASTFactory());
     }
 
-    public IParseResult parse(String ruleName, InputStream in, IParseErrorHandler handler) {
-    	if(handler == null) {
-    		handler=getDefaultHandler();
-    	}
-        return parse(ruleName, in, getDefaultASTFactory(), handler);
+    public IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change) {
+    	return PartialParsingUtil.reparse(this, originalRootNode, offset, length, change);
+    }
+
+    public IParseResult parse(String ruleName, InputStream in) {
+        return parse(ruleName, in, getDefaultASTFactory());
     }
     
     protected IElementFactory getDefaultASTFactory() {
@@ -73,13 +61,5 @@ public abstract class AbstractParser implements IParser {
 
     protected abstract String getDefaultRuleName();
 
-    protected IParseErrorHandler getDefaultHandler() {
-        return new IParseErrorHandler() {
-            public void handleParserError(IParseError error) {
-                throw new ParseException(error);
-            }
-        };
-    }
-
-    protected abstract IParseResult parse(String ruleName, ANTLRInputStream in, IElementFactory factory, IParseErrorHandler handler);
+    protected abstract IParseResult parse(String ruleName, ANTLRInputStream in, IElementFactory factory);
 }

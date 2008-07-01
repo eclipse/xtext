@@ -8,14 +8,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.parseerrorhandling;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.XtextGrammarTestStandaloneSetup;
-import org.eclipse.xtext.parser.IParseError;
-import org.eclipse.xtext.parser.IParseErrorHandler;
-import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -28,45 +27,38 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	}
 
 	public void testLexError() throws Exception {
-		ErrorHandler errors = new ErrorHandler();
-		getInvocations("import 'holla' % as foo", errors);
+		EObject root = getModel("import 'holla' % as foo");
+		EList<SyntaxError> errors = NodeUtil.getRootNode(root).allSyntaxErrors();
 		assertEquals(1,errors.size());
-		assertEquals("%", errors.get(0).getProblematicText());
-		assertEquals(1, errors.get(0).getLine());
-		assertEquals(15, errors.get(0).getOffset());
-		assertEquals(1, errors.get(0).getLength());
+		assertEquals("%", ((LeafNode)errors.get(0).getNode()).getText());
+		assertEquals(1, errors.get(0).getNode().line());
+		assertEquals(15, errors.get(0).getNode().offset());
+		assertEquals(1, errors.get(0).getNode().length());
 		assertEquals(1, errors.size());
 	}
 	
-	public void testStuff() throws Exception {
-		System.out.println(getRootNode("import 'holla' % as foo",new ErrorHandler()).serialize());
-	}
-
 	public void testParseError1() throws Exception {
-		ErrorHandler errors = new ErrorHandler();
-		getInvocations("import 'holla' foo returns x::y::Z : name=ID;", errors);
-		assertEquals("::", errors.get(0).getProblematicText());
-		assertEquals(1, errors.get(0).getLine());
-		assertEquals(31, errors.get(0).getOffset());
-		assertEquals(2, errors.get(0).getLength());
+		EObject root = getModel("import 'holla' foo returns x::y::Z : name=ID;");
+		EList<SyntaxError> errors = NodeUtil.getRootNode(root).allSyntaxErrors();
+		assertEquals("::",  ((LeafNode)errors.get(0).getNode()).getText());
+		assertEquals(1, errors.get(0).getNode().line());
+		assertEquals(31, errors.get(0).getNode().offset());
+		assertEquals(2, errors.get(0).getNode().length());
 		assertEquals(1, errors.size());
 	}
 	
 	public void testParseError2() throws Exception {
-		ErrorHandler errors = new ErrorHandler();
-		Object object = getModel("import 'holla' foo returns y::Z : name=ID #;", errors);
+		Object object = getModel("import 'holla' foo returns y::Z : name=ID #;");
 		assertWithXtend("'ID'", "parserRules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
 	}
 	
 	public void testParseError3() throws Exception {
-		ErrorHandler errors = new ErrorHandler();
-		Object object = getModel("import 'holla' foo returns y::Z : name=ID #############", errors);
+		Object object = getModel("import 'holla' foo returns y::Z : name=ID #############");
 		assertWithXtend("'ID'", "parserRules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
 	}
 	
 	public void testParseError4() throws Exception {
-		ErrorHandler errors = new ErrorHandler();
-		Object object = getModel("import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'", errors);
+		Object object = getModel("import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'");
 		//System.out.println(errors);
 		assertWithXtend("'ID'", "parserRules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
 		assertWithXtend("null", "parserRules.first().eAllContents.typeSelect(XtextTest::Keyword).first().name", object);
@@ -77,8 +69,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	public void testname() throws Exception {
 		String model = "import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'";
 		for (int i=model.length();0<i;i--) {
-			ErrorHandler errors = new ErrorHandler();
-			getModel(model.substring(0, i), errors);
+			EObject model2 = getModel(model.substring(0, i));
 		}
 	}
 	
@@ -89,45 +80,19 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	public void testBug236425() throws Exception {
 		with(ReferenceGrammarStandaloneSetup.class);
 		String model = "spielplatz 100 }";
-		IParseResult object = parse(model,new ErrorHandler());
-		for (IParseError err : object.getParseErrors()) {
-			System.out.println(err.getMessage()+"-"+err.getOffset()+","+err.getLength());
-		}
-		assertFalse(object.getParseErrors().isEmpty());
+		EObject object = getModel(model);
+		CompositeNode node = NodeUtil.getRootNode(object);
+		assertEquals(1,node.allSyntaxErrors().size());
 	}
-
-	private final class ErrorHandler implements IParseErrorHandler {
-		private final List<IParseError> errors = new ArrayList<IParseError>();
-
-		public void clear() {
-			errors.clear();
-		}
-
-		public IParseError get(int arg0) {
-			return errors.get(arg0);
-		}
-
-		public Iterator<IParseError> iterator() {
-			return errors.iterator();
-		}
-
-		public int size() {
-			return errors.size();
-		}
-
-		public void handleParserError(IParseError err) {
-			errors.add(err);
-		}
-		
-		@Override
-		public String toString() {
-			StringBuffer buff = new StringBuffer();
-			for (IParseError e : errors) {
-				buff.append(e.toString()).append("\n");
-			}
-			return buff.toString();
-		}
-
+	
+	
+	public void testLexerError() throws Exception {
+		with(ReferenceGrammarStandaloneSetup.class);
+		String model = "spielplatz 100 '}";
+		EObject object = getModel(model);
+		CompositeNode node = NodeUtil.getRootNode(object);
+		assertEquals(1,node.allSyntaxErrors().size());
+		System.out.println(node.allSyntaxErrors().get(0).getMessage());
 	}
 
 }

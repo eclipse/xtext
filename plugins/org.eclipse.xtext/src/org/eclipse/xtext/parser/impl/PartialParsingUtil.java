@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.parser.AbstractParser;
-import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParseException;
@@ -36,7 +35,7 @@ public class PartialParsingUtil {
 
 	@SuppressWarnings("unchecked")
 	public static IParseResult reparse(IParser parser, CompositeNode rootNode, int originalOffset, int originalLength,
-			String changedRegion, IParseErrorHandler handler) {
+			String changedRegion) {
 		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(rootNode, originalOffset,
 				originalLength);
 		List<CompositeNode> validReplaceRootNodes = parsingPointers.getValidReplaceRootNodes();
@@ -53,20 +52,20 @@ public class PartialParsingUtil {
 			// no replaceNode -> no rule to call
 			// If region is empty, any entryRule is likely to fail.
 			// Let parser decide whether empty model is valid
-			return parser.parse(new StringInputStream(""), handler);
+			return parser.parse(new StringInputStream(""));
 		}
 		String entryRuleName = parsingPointers.findEntryRuleName(replaceNode);
 		ParseResult parseResult = null;
 		try {
 			parseResult = (ParseResult) ((AbstractParser) parser).parse(entryRuleName, new StringInputStream(
-					reparseRegion), handler);
+					reparseRegion));
 		}
 		catch (ParseException exc) {
 		}
 		if (parseResult == null || parseResult.getParseErrors() != null && !parseResult.getParseErrors().isEmpty()) {
 			// on error fully reparse
 			reparseRegion = insertChangeIntoReplaceRegion(rootNode, originalOffset, originalLength, changedRegion);
-			return parser.parse(new StringInputStream(reparseRegion), handler);
+			return parser.parse(new StringInputStream(reparseRegion));
 		}
 		if (replaceNode != rootNode) {
 			CompositeNode replaceNodeParent = replaceNode.getParent();

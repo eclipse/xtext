@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeFactory.java,v 1.5 2008/07/01 09:06:48 jkohnlein Exp $
+ * $Id: ParsetreeFactory.java,v 1.6 2008/07/01 10:18:03 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -45,6 +45,15 @@ public interface ParsetreeFactory extends EFactory
   LeafNode createLeafNode();
 
   /**
+	 * Returns a new object of class '<em>Syntax Error</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Syntax Error</em>'.
+	 * @generated
+	 */
+	SyntaxError createSyntaxError();
+
+		/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

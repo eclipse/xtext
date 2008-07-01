@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackage.java,v 1.5 2008/07/01 09:06:48 jkohnlein Exp $
+ * $Id: ParsetreePackage.java,v 1.6 2008/07/01 10:18:03 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -98,13 +98,22 @@ public interface ParsetreePackage extends EPackage
   int ABSTRACT_NODE__ELEMENT = 2;
 
   /**
+	 * The feature id for the '<em><b>Syntax Error</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__SYNTAX_ERROR = 3;
+
+		/**
 	 * The number of structural features of the '<em>Abstract Node</em>' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int ABSTRACT_NODE_FEATURE_COUNT = 3;
+  int ABSTRACT_NODE_FEATURE_COUNT = 4;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.parsetree.impl.CompositeNodeImpl <em>Composite Node</em>}' class.
@@ -144,6 +153,15 @@ public interface ParsetreePackage extends EPackage
   int COMPOSITE_NODE__ELEMENT = ABSTRACT_NODE__ELEMENT;
 
   /**
+	 * The feature id for the '<em><b>Syntax Error</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__SYNTAX_ERROR = ABSTRACT_NODE__SYNTAX_ERROR;
+
+		/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -217,6 +235,15 @@ public interface ParsetreePackage extends EPackage
   int LEAF_NODE__ELEMENT = ABSTRACT_NODE__ELEMENT;
 
   /**
+	 * The feature id for the '<em><b>Syntax Error</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LEAF_NODE__SYNTAX_ERROR = ABSTRACT_NODE__SYNTAX_ERROR;
+
+		/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -254,6 +281,44 @@ public interface ParsetreePackage extends EPackage
 
 
   /**
+	 * The meta object id for the '{@link org.eclipse.xtext.parsetree.impl.SyntaxErrorImpl <em>Syntax Error</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.parsetree.impl.SyntaxErrorImpl
+	 * @see org.eclipse.xtext.parsetree.impl.ParsetreePackageImpl#getSyntaxError()
+	 * @generated
+	 */
+	int SYNTAX_ERROR = 3;
+
+		/**
+	 * The feature id for the '<em><b>Message</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNTAX_ERROR__MESSAGE = 0;
+
+		/**
+	 * The feature id for the '<em><b>Node</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNTAX_ERROR__NODE = 1;
+
+		/**
+	 * The number of structural features of the '<em>Syntax Error</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNTAX_ERROR_FEATURE_COUNT = 2;
+
+
+		/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.CompositeNode <em>Composite Node</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -340,6 +405,17 @@ public interface ParsetreePackage extends EPackage
   EReference getAbstractNode_Element();
 
   /**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.AbstractNode#getSyntaxError <em>Syntax Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Syntax Error</em>'.
+	 * @see org.eclipse.xtext.parsetree.AbstractNode#getSyntaxError()
+	 * @see #getAbstractNode()
+	 * @generated
+	 */
+	EReference getAbstractNode_SyntaxError();
+
+		/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.LeafNode <em>Leaf Node</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -383,6 +459,38 @@ public interface ParsetreePackage extends EPackage
   EAttribute getLeafNode_Hidden();
 
   /**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.SyntaxError <em>Syntax Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Syntax Error</em>'.
+	 * @see org.eclipse.xtext.parsetree.SyntaxError
+	 * @generated
+	 */
+	EClass getSyntaxError();
+
+		/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.SyntaxError#getMessage <em>Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Message</em>'.
+	 * @see org.eclipse.xtext.parsetree.SyntaxError#getMessage()
+	 * @see #getSyntaxError()
+	 * @generated
+	 */
+	EAttribute getSyntaxError_Message();
+
+		/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.parsetree.SyntaxError#getNode <em>Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Node</em>'.
+	 * @see org.eclipse.xtext.parsetree.SyntaxError#getNode()
+	 * @see #getSyntaxError()
+	 * @generated
+	 */
+	EReference getSyntaxError_Node();
+
+		/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -474,6 +582,14 @@ public interface ParsetreePackage extends EPackage
     EReference ABSTRACT_NODE__ELEMENT = eINSTANCE.getAbstractNode_Element();
 
     /**
+		 * The meta object literal for the '<em><b>Syntax Error</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_NODE__SYNTAX_ERROR = eINSTANCE.getAbstractNode_SyntaxError();
+
+				/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.parsetree.impl.LeafNodeImpl <em>Leaf Node</em>}' class.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -506,6 +622,32 @@ public interface ParsetreePackage extends EPackage
 		 * @generated
 		 */
     EAttribute LEAF_NODE__HIDDEN = eINSTANCE.getLeafNode_Hidden();
+
+				/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.parsetree.impl.SyntaxErrorImpl <em>Syntax Error</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.parsetree.impl.SyntaxErrorImpl
+		 * @see org.eclipse.xtext.parsetree.impl.ParsetreePackageImpl#getSyntaxError()
+		 * @generated
+		 */
+		EClass SYNTAX_ERROR = eINSTANCE.getSyntaxError();
+
+				/**
+		 * The meta object literal for the '<em><b>Message</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SYNTAX_ERROR__MESSAGE = eINSTANCE.getSyntaxError_Message();
+
+				/**
+		 * The meta object literal for the '<em><b>Node</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SYNTAX_ERROR__NODE = eINSTANCE.getSyntaxError_Node();
 
   }
 

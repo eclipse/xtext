@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackageImpl.java,v 1.5 2008/07/01 09:06:52 jkohnlein Exp $
+ * $Id: ParsetreePackageImpl.java,v 1.6 2008/07/01 10:18:05 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -19,6 +19,7 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
 import org.eclipse.xtext.parsetree.ParsetreePackage;
+import org.eclipse.xtext.parsetree.SyntaxError;
 
 /**
  * <!-- begin-user-doc -->
@@ -50,6 +51,13 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
   private EClass leafNodeEClass = null;
 
   /**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass syntaxErrorEClass = null;
+
+		/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -199,6 +207,15 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 
   /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractNode_SyntaxError() {
+		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(3);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -239,6 +256,33 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 
   /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSyntaxError() {
+		return syntaxErrorEClass;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSyntaxError_Message() {
+		return (EAttribute)syntaxErrorEClass.getEStructuralFeatures().get(0);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSyntaxError_Node() {
+		return (EReference)syntaxErrorEClass.getEStructuralFeatures().get(1);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -276,11 +320,16 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 		createEReference(abstractNodeEClass, ABSTRACT_NODE__PARENT);
 		createEReference(abstractNodeEClass, ABSTRACT_NODE__GRAMMAR_ELEMENT);
 		createEReference(abstractNodeEClass, ABSTRACT_NODE__ELEMENT);
+		createEReference(abstractNodeEClass, ABSTRACT_NODE__SYNTAX_ERROR);
 
 		leafNodeEClass = createEClass(LEAF_NODE);
 		createEAttribute(leafNodeEClass, LEAF_NODE__TEXT);
 		createEAttribute(leafNodeEClass, LEAF_NODE__FEATURE);
 		createEAttribute(leafNodeEClass, LEAF_NODE__HIDDEN);
+
+		syntaxErrorEClass = createEClass(SYNTAX_ERROR);
+		createEAttribute(syntaxErrorEClass, SYNTAX_ERROR__MESSAGE);
+		createEReference(syntaxErrorEClass, SYNTAX_ERROR__NODE);
 	}
 
   /**
@@ -317,14 +366,15 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(compositeNodeEClass, CompositeNode.class, "CompositeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCompositeNode_Children(), this.getAbstractNode(), this.getAbstractNode_Parent(), "children", null, 0, -1, CompositeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCompositeNode_Children(), this.getAbstractNode(), this.getAbstractNode_Parent(), "children", null, 0, -1, CompositeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCompositeNode_Lookahead(), ecorePackage.getEInt(), "lookahead", null, 0, 1, CompositeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCompositeNode_LookaheadConsumed(), ecorePackage.getEInt(), "lookaheadConsumed", null, 0, 1, CompositeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractNodeEClass, AbstractNode.class, "AbstractNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractNode_Parent(), this.getCompositeNode(), this.getCompositeNode_Children(), "parent", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractNode_Parent(), this.getCompositeNode(), this.getCompositeNode_Children(), "parent", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractNode_GrammarElement(), ecorePackage.getEObject(), null, "grammarElement", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractNode_Element(), ecorePackage.getEObject(), null, "element", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractNode_SyntaxError(), this.getSyntaxError(), this.getSyntaxError_Node(), "syntaxError", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "length", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -339,10 +389,16 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 		EOperation op = addEOperation(abstractNodeEClass, this.getLeafNode(), "getLeafNodes", 0, -1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getAbstractNode(), "to", 1, 1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(abstractNodeEClass, this.getSyntaxError(), "allSyntaxErrors", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(leafNodeEClass, LeafNode.class, "LeafNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLeafNode_Text(), ecorePackage.getEString(), "text", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLeafNode_Feature(), ecorePackage.getEString(), "feature", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getLeafNode_Hidden(), ecorePackage.getEBoolean(), "hidden", null, 0, 1, LeafNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(syntaxErrorEClass, SyntaxError.class, "SyntaxError", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSyntaxError_Message(), ecorePackage.getEString(), "message", null, 0, 1, SyntaxError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSyntaxError_Node(), this.getAbstractNode(), this.getAbstractNode_SyntaxError(), "node", null, 0, 1, SyntaxError.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

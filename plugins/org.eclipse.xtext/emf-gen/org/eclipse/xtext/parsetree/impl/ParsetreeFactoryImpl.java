@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeFactoryImpl.java,v 1.5 2008/07/01 09:06:51 jkohnlein Exp $
+ * $Id: ParsetreeFactoryImpl.java,v 1.6 2008/07/01 10:18:05 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -66,6 +66,7 @@ public class ParsetreeFactoryImpl extends EFactoryImpl implements ParsetreeFacto
 		switch (eClass.getClassifierID()) {
 			case ParsetreePackage.COMPOSITE_NODE: return createCompositeNode();
 			case ParsetreePackage.LEAF_NODE: return createLeafNode();
+			case ParsetreePackage.SYNTAX_ERROR: return createSyntaxError();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -94,6 +95,16 @@ public class ParsetreeFactoryImpl extends EFactoryImpl implements ParsetreeFacto
 	}
 
   /**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SyntaxError createSyntaxError() {
+		SyntaxErrorImpl syntaxError = new SyntaxErrorImpl();
+		return syntaxError;
+	}
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated

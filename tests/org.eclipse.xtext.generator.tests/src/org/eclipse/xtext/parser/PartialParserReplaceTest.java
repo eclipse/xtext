@@ -8,9 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
 import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.testlanguages.LookaheadLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 
@@ -52,8 +54,12 @@ public class PartialParserReplaceTest extends AbstractPartialParserTest {
 				.getDefaultReplaceRootNode(), offset, length, change);
 		assertEquals(expectedReparseRegion, reparseRegion);
 		IParseResult partiallyReparse = PartialParsingUtil.reparse(getParser(), rootNode, offset, length,
-				change, null);
-		assertTrue(partiallyReparse.getParseErrors().isEmpty());
+				change);
+		EList<SyntaxError> errors = partiallyReparse.getRootNode().allSyntaxErrors();
+		for (SyntaxError syntaxError : errors) {
+			System.out.println(model+offset+length+change+":"+syntaxError.getMessage());
+		}
+		assertTrue(partiallyReparse.getRootNode().allSyntaxErrors().isEmpty());
 		String expectedReparseModel = model.substring(0, offset) + change + model.substring(offset + length);
 		assertEquals(expectedReparseModel, partiallyReparse.getRootNode().serialize());
 	}

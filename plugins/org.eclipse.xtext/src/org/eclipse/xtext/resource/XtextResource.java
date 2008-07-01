@@ -42,13 +42,19 @@ public class XtextResource extends ResourceImpl {
     @Inject
     private IParseTreeConstructor parsetreeConstructor;
 
+	private IParseResult parse;
+
     public XtextResource(URI uri) {
         super(uri);
+    }
+    
+    public IParseResult getParseResult() {
+    	return parse;
     }
 
     @Override
     protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-        IParseResult parse = parser.parse(inputStream, elementFactory);
+        parse = parser.parse(inputStream, elementFactory);
         if (parse != null) {
             EObject rootElement = parse.getRootASTElement();
             if (rootElement != null) {

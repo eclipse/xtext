@@ -3,10 +3,14 @@
 package org.eclipse.xtext.parser.internal;
 
 
-import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.CommonToken;
+import org.antlr.runtime.EarlyExitException;
+import org.antlr.runtime.Lexer;
+import org.antlr.runtime.MismatchedSetException;
+import org.antlr.runtime.NoViableAltException;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.Token;
 
 public class InternalXtextLexer extends Lexer {
     public static final int T21=21;
@@ -44,7 +48,6 @@ public class InternalXtextLexer extends Lexer {
     public static final int T19=19;
     public static final int RULE_LEXER_BODY=10;
 
-
       public Token nextToken() {
             while (true) {
                 this.token = null;
@@ -67,6 +70,7 @@ public class InternalXtextLexer extends Lexer {
                     return this.token;
                 }
                 catch (RecognitionException re) {
+                	
                     reportError(re);
                     if ( re instanceof NoViableAltException ) { recover(re); }
                                     // create token that holds mismatched char

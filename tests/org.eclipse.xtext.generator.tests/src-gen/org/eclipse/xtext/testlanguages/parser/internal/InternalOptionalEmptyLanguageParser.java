@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g 2008-07-01 10:51:56
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g 2008-07-01 12:05:29
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -62,7 +62,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
 
 
     // $ANTLR start entryRuleModel
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:101:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:99:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -70,8 +70,8 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:101:47: (iv_ruleModel= ruleModel EOF )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:102:2: iv_ruleModel= ruleModel EOF
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:99:47: (iv_ruleModel= ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:100:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel80);
@@ -88,8 +88,6 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
             } 
         finally {
         }
@@ -99,7 +97,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleModel
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:109:1: ruleModel returns [EObject current=null] : (lv_child= ruleGreeting )? ;
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:107:1: ruleModel returns [EObject current=null] : (lv_child= ruleGreeting )? ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -108,10 +106,10 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:111:33: ( (lv_child= ruleGreeting )? )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:112:1: (lv_child= ruleGreeting )?
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:109:33: ( (lv_child= ruleGreeting )? )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:110:1: (lv_child= ruleGreeting )?
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:112:1: (lv_child= ruleGreeting )?
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:110:1: (lv_child= ruleGreeting )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -120,7 +118,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
             }
             switch (alt1) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:114:5: lv_child= ruleGreeting
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:112:5: lv_child= ruleGreeting
                     {
                      
                             currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -151,8 +149,6 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
             } 
         finally {
         }
@@ -162,7 +158,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
 
 
     // $ANTLR start entryRuleGreeting
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:130:1: entryRuleGreeting returns [EObject current=null] : iv_ruleGreeting= ruleGreeting EOF ;
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:128:1: entryRuleGreeting returns [EObject current=null] : iv_ruleGreeting= ruleGreeting EOF ;
     public final EObject entryRuleGreeting() throws RecognitionException {
         EObject current = null;
 
@@ -170,8 +166,8 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:130:50: (iv_ruleGreeting= ruleGreeting EOF )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:131:2: iv_ruleGreeting= ruleGreeting EOF
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:128:50: (iv_ruleGreeting= ruleGreeting EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:129:2: iv_ruleGreeting= ruleGreeting EOF
             {
              currentNode = createCompositeNode("//@parserRules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleGreeting_in_entryRuleGreeting178);
@@ -188,8 +184,6 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
             } 
         finally {
         }
@@ -199,7 +193,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleGreeting
-    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:138:1: ruleGreeting returns [EObject current=null] : ( 'hallo' (lv_name= RULE_ID ) ) ;
+    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:136:1: ruleGreeting returns [EObject current=null] : ( 'hallo' (lv_name= RULE_ID ) ) ;
     public final EObject ruleGreeting() throws RecognitionException {
         EObject current = null;
 
@@ -207,18 +201,18 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:140:33: ( ( 'hallo' (lv_name= RULE_ID ) ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:141:1: ( 'hallo' (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:138:33: ( ( 'hallo' (lv_name= RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:139:1: ( 'hallo' (lv_name= RULE_ID ) )
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:141:1: ( 'hallo' (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:141:2: 'hallo' (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:139:1: ( 'hallo' (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:139:2: 'hallo' (lv_name= RULE_ID )
             {
             match(input,12,FOLLOW_12_in_ruleGreeting222); 
 
                     createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
                 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:146:1: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:147:5: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:144:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:145:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGreeting240); 
@@ -246,8 +240,6 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
             } 
         finally {
         }

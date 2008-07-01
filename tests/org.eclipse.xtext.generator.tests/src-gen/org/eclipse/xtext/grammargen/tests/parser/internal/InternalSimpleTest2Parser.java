@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g 2008-07-01 10:51:44
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g 2008-07-01 12:05:23
 
 package org.eclipse.xtext.grammargen.tests.parser.internal; 
 
@@ -62,7 +62,7 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
 
 
     // $ANTLR start entryRuleModel
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:101:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:99:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -70,8 +70,8 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:101:47: (iv_ruleModel= ruleModel EOF )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:102:2: iv_ruleModel= ruleModel EOF
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:99:47: (iv_ruleModel= ruleModel EOF )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:100:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel80);
@@ -88,8 +88,6 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
             } 
         finally {
         }
@@ -99,7 +97,7 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleModel
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:109:1: ruleModel returns [EObject current=null] : (lv_contents= ruleChild )* ;
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:107:1: ruleModel returns [EObject current=null] : (lv_contents= ruleChild )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -108,10 +106,10 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:111:33: ( (lv_contents= ruleChild )* )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:112:1: (lv_contents= ruleChild )*
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:109:33: ( (lv_contents= ruleChild )* )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:110:1: (lv_contents= ruleChild )*
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:112:1: (lv_contents= ruleChild )*
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:110:1: (lv_contents= ruleChild )*
             loop1:
             do {
                 int alt1=2;
@@ -124,7 +122,7 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:114:5: lv_contents= ruleChild
+            	    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:112:5: lv_contents= ruleChild
             	    {
             	     
             	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
@@ -158,8 +156,6 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
             } 
         finally {
         }
@@ -169,7 +165,7 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
 
 
     // $ANTLR start entryRuleChild
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:130:1: entryRuleChild returns [EObject current=null] : iv_ruleChild= ruleChild EOF ;
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:128:1: entryRuleChild returns [EObject current=null] : iv_ruleChild= ruleChild EOF ;
     public final EObject entryRuleChild() throws RecognitionException {
         EObject current = null;
 
@@ -177,8 +173,8 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:130:47: (iv_ruleChild= ruleChild EOF )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:131:2: iv_ruleChild= ruleChild EOF
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:128:47: (iv_ruleChild= ruleChild EOF )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:129:2: iv_ruleChild= ruleChild EOF
             {
              currentNode = createCompositeNode("//@parserRules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleChild_in_entryRuleChild178);
@@ -195,8 +191,6 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
             } 
         finally {
         }
@@ -206,7 +200,7 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleChild
-    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:138:1: ruleChild returns [EObject current=null] : ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) ;
+    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:136:1: ruleChild returns [EObject current=null] : ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) ;
     public final EObject ruleChild() throws RecognitionException {
         EObject current = null;
 
@@ -216,25 +210,25 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:140:33: ( ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:141:1: ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:138:33: ( ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:139:1: ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' )
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:141:1: ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:141:2: ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}'
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:139:1: ( ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}' )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:139:2: ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' ) '}'
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:141:2: ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:141:3: ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{'
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:139:2: ( ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{' )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:139:3: ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) ) '{'
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:141:3: ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:141:4: ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:139:3: ( ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:139:4: ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) ) (lv_number= RULE_INT )
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:141:4: ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:141:5: ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:139:4: ( ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:139:5: ( (lv_optional= 'optional' )? 'keyword' ) (lv_name= RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:141:5: ( (lv_optional= 'optional' )? 'keyword' )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:141:6: (lv_optional= 'optional' )? 'keyword'
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:139:5: ( (lv_optional= 'optional' )? 'keyword' )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:139:6: (lv_optional= 'optional' )? 'keyword'
             {
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:141:6: (lv_optional= 'optional' )?
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:139:6: (lv_optional= 'optional' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -243,7 +237,7 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
             }
             switch (alt2) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:142:5: lv_optional= 'optional'
+                    // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:140:5: lv_optional= 'optional'
                     {
                     lv_optional=(Token)input.LT(1);
                     match(input,12,FOLLOW_12_in_ruleChild234); 
@@ -266,8 +260,8 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:155:2: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:156:5: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:153:2: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:154:5: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChild266); 
@@ -286,8 +280,8 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
 
             }
 
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:167:3: (lv_number= RULE_INT )
-            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:168:5: lv_number= RULE_INT
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:165:3: (lv_number= RULE_INT )
+            // ./src-gen/org/eclipse/xtext/grammargen/tests/parser/internal/InternalSimpleTest2.g:166:5: lv_number= RULE_INT
             {
             lv_number=(Token)input.LT(1);
             match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleChild292); 
@@ -329,8 +323,6 @@ public class InternalSimpleTest2Parser extends AbstractAntlrParser {
             catch (RecognitionException re) { 
                 recover(input,re); 
                 appendSkippedTokens();
-                IParseError error = createParseError(re);
-                reportError(error, re);
             } 
         finally {
         }

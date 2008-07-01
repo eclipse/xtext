@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeAdapterFactory.java,v 1.5 2008/07/01 09:06:49 jkohnlein Exp $
+ * $Id: ParsetreeAdapterFactory.java,v 1.6 2008/07/01 10:18:08 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.util;
 
@@ -67,7 +67,7 @@ public class ParsetreeAdapterFactory extends AdapterFactoryImpl
 	}
 
   /**
-	 * The switch that delegates to the <code>createXXX</code> methods.
+	 * The switch the delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -85,6 +85,10 @@ public class ParsetreeAdapterFactory extends AdapterFactoryImpl
 			@Override
 			public Adapter caseLeafNode(LeafNode object) {
 				return createLeafNodeAdapter();
+			}
+			@Override
+			public Adapter caseSyntaxError(SyntaxError object) {
+				return createSyntaxErrorAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -153,6 +157,20 @@ public class ParsetreeAdapterFactory extends AdapterFactoryImpl
 	}
 
   /**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.SyntaxError <em>Syntax Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.parsetree.SyntaxError
+	 * @generated
+	 */
+	public Adapter createSyntaxErrorAdapter() {
+		return null;
+	}
+
+		/**
 	 * Creates a new adapter for the default case.
 	 * <!-- begin-user-doc -->
    * This default implementation returns null.

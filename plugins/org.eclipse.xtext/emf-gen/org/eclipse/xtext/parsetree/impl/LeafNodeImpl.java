@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LeafNodeImpl.java,v 1.5 2008/07/01 09:06:52 jkohnlein Exp $
+ * $Id: LeafNodeImpl.java,v 1.6 2008/07/01 10:18:06 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 

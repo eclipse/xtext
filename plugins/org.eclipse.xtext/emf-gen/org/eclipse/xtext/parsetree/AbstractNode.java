@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNode.java,v 1.5 2008/07/01 09:06:48 jkohnlein Exp $
+ * $Id: AbstractNode.java,v 1.6 2008/07/01 10:18:03 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getParent <em>Parent</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getGrammarElement <em>Grammar Element</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getElement <em>Element</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getSyntaxError <em>Syntax Error</em>}</li>
  * </ul>
  * </p>
  *
@@ -111,6 +112,34 @@ public interface AbstractNode extends EObject
   void setElement(EObject value);
 
   /**
+	 * Returns the value of the '<em><b>Syntax Error</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.parsetree.SyntaxError#getNode <em>Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Syntax Error</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Syntax Error</em>' containment reference.
+	 * @see #setSyntaxError(SyntaxError)
+	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getAbstractNode_SyntaxError()
+	 * @see org.eclipse.xtext.parsetree.SyntaxError#getNode
+	 * @model opposite="node" containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	SyntaxError getSyntaxError();
+
+		/**
+	 * Sets the value of the '{@link org.eclipse.xtext.parsetree.AbstractNode#getSyntaxError <em>Syntax Error</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Syntax Error</em>' containment reference.
+	 * @see #getSyntaxError()
+	 * @generated
+	 */
+	void setSyntaxError(SyntaxError value);
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.length((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.length((LeafNodeImpl) this);} else {return ParsetreeUtil.length((AbstractNodeImpl) this);}'"
@@ -159,5 +188,13 @@ public interface AbstractNode extends EObject
 	 * @generated
 	 */
   EList<LeafNode> getLeafNodes(AbstractNode to);
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.allSyntaxErrors((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.allSyntaxErrors((LeafNodeImpl) this);} else {return ParsetreeUtil.allSyntaxErrors((AbstractNodeImpl) this);}'"
+	 * @generated
+	 */
+	EList<SyntaxError> allSyntaxErrors();
 
 } // AbstractNode

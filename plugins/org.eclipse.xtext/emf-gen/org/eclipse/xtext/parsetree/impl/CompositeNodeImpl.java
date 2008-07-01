@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CompositeNodeImpl.java,v 1.5 2008/07/01 09:06:52 jkohnlein Exp $
+ * $Id: CompositeNodeImpl.java,v 1.6 2008/07/01 10:18:06 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -119,7 +119,7 @@ public class CompositeNodeImpl extends AbstractNodeImpl implements CompositeNode
   public EList<AbstractNode> getChildren()
   {
 		if (children == null) {
-			children = new EObjectContainmentWithInverseEList<AbstractNode>(AbstractNode.class, this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, ParsetreePackage.ABSTRACT_NODE__PARENT);
+			children = new EObjectContainmentWithInverseEList.Resolving<AbstractNode>(AbstractNode.class, this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, ParsetreePackage.ABSTRACT_NODE__PARENT);
 		}
 		return children;
 	}

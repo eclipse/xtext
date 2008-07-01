@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CompositeNode.java,v 1.5 2008/07/01 09:06:48 jkohnlein Exp $
+ * $Id: CompositeNode.java,v 1.6 2008/07/01 10:18:03 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -41,7 +41,7 @@ public interface CompositeNode extends AbstractNode
 	 * @return the value of the '<em>Children</em>' containment reference list.
 	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getCompositeNode_Children()
 	 * @see org.eclipse.xtext.parsetree.AbstractNode#getParent
-	 * @model opposite="parent" containment="true"
+	 * @model opposite="parent" containment="true" resolveProxies="true"
 	 * @generated
 	 */
   EList<AbstractNode> getChildren();
