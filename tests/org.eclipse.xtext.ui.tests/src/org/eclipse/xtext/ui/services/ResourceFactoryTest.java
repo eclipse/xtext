@@ -19,21 +19,23 @@ import org.eclipse.xtext.resource.XtextResource;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
- *
+ * 
  */
 public class ResourceFactoryTest extends AbstractServiceTest {
-    
-    public static final String REFERENCE_GRAMMAR_FILE_EXTENSION = "xtext";
-    public void testResourceFactoryRegistration() throws Exception {
-        // activate UI plugin
-        Class.forName("org.eclipse.xtext.ui.editor.BaseTextEditor");
-        ResourceSet rs = new ResourceSetImpl();
-        Resource resource = rs.createResource(URI.createFileURI("test." + REFERENCE_GRAMMAR_FILE_EXTENSION));
-        assertNotNull(resource);
-        assertTrue(resource instanceof XtextResource);
-        
-        Resource.Factory.Descriptor factoryFromEmfRegistry = (Descriptor) Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(REFERENCE_GRAMMAR_FILE_EXTENSION);
-        Factory factory = factoryFromEmfRegistry.createFactory();
-        assertTrue(factory instanceof ReferenceGrammarResourceFactory);
-    }
+
+	public static final String REFERENCE_GRAMMAR_FILE_EXTENSION = "tst";
+
+	public void testResourceFactoryRegistration() throws Exception {
+		// activate UI plugin
+		Class.forName("org.eclipse.xtext.ui.editor.BaseTextEditor");
+		ResourceSet rs = new ResourceSetImpl();
+		Resource resource = rs.createResource(URI.createFileURI("test." + REFERENCE_GRAMMAR_FILE_EXTENSION));
+		assertNotNull(resource);
+		assertTrue(resource instanceof XtextResource);
+
+		Resource.Factory.Descriptor factoryFromEmfRegistry = (Descriptor) Resource.Factory.Registry.INSTANCE
+				.getExtensionToFactoryMap().get(REFERENCE_GRAMMAR_FILE_EXTENSION);
+		Factory factory = factoryFromEmfRegistry.createFactory();
+		assertTrue(factory instanceof ReferenceGrammarResourceFactory);
+	}
 }

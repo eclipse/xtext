@@ -29,7 +29,6 @@ import org.eclipse.xtext.ui.editor.utils.TextStyleConstants;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.service.ISyntaxColorer;
-import org.eclipse.xtext.ui.util.QuietErrorHandler;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -109,15 +108,14 @@ public class XtextTokenScanner implements ITokenScanner {
 		IParseResult parseResult;
 		try {
 			if (lastParseResult == null) {
-				parseResult = parser.parse(new StringInputStream(document.get()), elementFactory,
-						new QuietErrorHandler());
+				parseResult = parser.parse(new StringInputStream(document.get()), elementFactory);
 			}
 			else {
 				CompositeNode lastRootNode = lastParseResult.getRootNode();
 				int documentGrowth = document.get().length() - lastRootNode.length();
 				int originalLength = length - documentGrowth;
 				String change = document.get().substring(offset, offset + length);
-				parseResult = parser.reparse(lastRootNode, offset, originalLength, change, new QuietErrorHandler());
+				parseResult = parser.reparse(lastRootNode, offset, originalLength, change);
 			}
 			lastParseResult = parseResult;
 			CompositeNode rootNode = parseResult.getRootNode();

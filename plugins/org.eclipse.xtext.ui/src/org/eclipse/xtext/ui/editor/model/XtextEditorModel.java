@@ -18,15 +18,14 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.ISynchronizable;
 import org.eclipse.xtext.parser.IElementFactory;
-import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
+import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.internal.Activator;
-import org.eclipse.xtext.ui.util.QuietErrorHandler;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -104,7 +103,7 @@ public class XtextEditorModel implements IEditorModel {
 
 			// TODO: dependency injection for default element factory in parser
 			IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
-			this.parseResult = parser.parse(new StringInputStream(content), elementFactory, new QuietErrorHandler());
+			this.parseResult = parser.parse(new StringInputStream(content), elementFactory);
 			if (Activator.DEBUG_PARSING)
 				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
 			if (parseResult.getRootASTElement() != null) {
@@ -246,7 +245,7 @@ public class XtextEditorModel implements IEditorModel {
 	 * 
 	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getErrors()
 	 */
-	public List<IParseError> getErrors() {
+	public List<SyntaxError> getSyntaxErrors() {
 		return parseResult != null ? parseResult.getParseErrors() : null;
 	}
 
@@ -256,7 +255,7 @@ public class XtextEditorModel implements IEditorModel {
 	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#hasErrors()
 	 */
 	public boolean hasErrors() {
-		return getErrors() != null && !getErrors().isEmpty();
+		return getSyntaxErrors() != null && !getSyntaxErrors().isEmpty();
 	}
 
 }

@@ -11,8 +11,8 @@ package org.eclipse.xtext.ui.editor.model;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 
 /**
@@ -21,7 +21,7 @@ import org.eclipse.xtext.service.ILanguageDescriptor;
  */
 public interface IEditorModel {
 
-	public abstract List<IParseError> getErrors();
+	public abstract List<SyntaxError> getSyntaxErrors();
 
 	public abstract boolean hasErrors();
 
