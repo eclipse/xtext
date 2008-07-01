@@ -22,6 +22,7 @@ import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -232,6 +233,22 @@ public abstract class AbstractAntlrParser extends Parser {
     protected void reportError(IParseError error, RecognitionException re) {
         reportError(re);
     }
+    
+    @Override
+    public void recoverFromMismatchedToken(IntStream in, RecognitionException re, int ttype, BitSet follow)
+    		throws RecognitionException {
+    	IParseError error = null;
+        if (currentNode == null) {
+            CommonToken lt = (CommonToken) input.LT(input.index());
+            error = new ParseError(lt.getLine(), lt.getStartIndex(), lt.getText() != null ? lt.getText().length() : 0, lt.getText(),
+                    getErrorMessage(re, getTokenNames()), re);
+        } else {
+            EList<LeafNode> leafNodes = currentNode.getLeafNodes();
+			error = new ParseError(leafNodes.isEmpty()?currentNode:leafNodes.get(leafNodes.size()-1), getErrorMessage(re, getTokenNames()), re);
+        }
+        parseErrors.add(error);
+    	super.recoverFromMismatchedToken(in, re, ttype, follow);
+    }
 
     public final IParseResult parse() throws RecognitionException {
         return parse(getFirstRuleName());
@@ -312,7 +329,7 @@ public abstract class AbstractAntlrParser extends Parser {
     }
     
     /**
-     * Match is called to consume unambigous tokens. It calls input.LA() and
+     * Match is called to consume unambiguous tokens. It calls input.LA() and
      * therefore increases the currentLookahead. We need to compensate. See
      * {@link AbstractAntlrParser#setCurrentLookahead()}
      * 
