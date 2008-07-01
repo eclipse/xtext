@@ -1,16 +1,12 @@
-// $ANTLR 3.0.1 ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g 2008-06-13 14:11:01
+// $ANTLR 3.0.1 ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g 2008-07-01 17:32:23
 
 package org.eclipse.xtext.parser.internal;
 
 
-import org.antlr.runtime.CharStream;
-import org.antlr.runtime.CommonToken;
-import org.antlr.runtime.EarlyExitException;
-import org.antlr.runtime.Lexer;
-import org.antlr.runtime.MismatchedSetException;
-import org.antlr.runtime.NoViableAltException;
-import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.Token;
+import org.antlr.runtime.*;
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
 
 public class InternalXtextLexer extends Lexer {
     public static final int T21=21;
@@ -48,6 +44,7 @@ public class InternalXtextLexer extends Lexer {
     public static final int T19=19;
     public static final int RULE_LEXER_BODY=10;
 
+
       public Token nextToken() {
             while (true) {
                 this.token = null;
@@ -70,7 +67,6 @@ public class InternalXtextLexer extends Lexer {
                     return this.token;
                 }
                 catch (RecognitionException re) {
-                	
                     reportError(re);
                     if ( re instanceof NoViableAltException ) { recover(re); }
                                     // create token that holds mismatched char
@@ -540,10 +536,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:863:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:863:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1008:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1008:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:863:11: ( '^' )?
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1008:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -552,7 +548,7 @@ public class InternalXtextLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:863:12: '^'
+                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1008:12: '^'
                     {
                     match('^'); 
 
@@ -571,7 +567,7 @@ public class InternalXtextLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:863:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1008:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -619,10 +615,10 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:865:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:865:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1010:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1010:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:865:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1010:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -636,7 +632,7 @@ public class InternalXtextLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:865:13: '0' .. '9'
+            	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1010:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -666,7 +662,7 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:867:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1012:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -678,16 +674,16 @@ public class InternalXtextLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("867:1: RULE_STRING : ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' );", 6, 0, input);
+                    new NoViableAltException("1012:1: RULE_STRING : ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' );", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:867:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
+                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1012:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:867:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
+                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1012:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -703,7 +699,7 @@ public class InternalXtextLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:867:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1012:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -720,7 +716,7 @@ public class InternalXtextLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:867:65: ~ ( '\\\\' | '\"' )
+                    	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1012:65: ~ ( '\\\\' | '\"' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -746,10 +742,10 @@ public class InternalXtextLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:867:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
+                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1012:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:867:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
+                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1012:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -765,7 +761,7 @@ public class InternalXtextLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:867:93: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1012:93: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -782,7 +778,7 @@ public class InternalXtextLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:867:137: ~ ( '\\\\' | '\\'' )
+                    	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1012:137: ~ ( '\\\\' | '\\'' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -820,12 +816,12 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:869:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:869:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1014:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1014:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:869:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1014:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -850,7 +846,7 @@ public class InternalXtextLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:869:52: .
+            	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1014:52: .
             	    {
             	    matchAny(); 
 
@@ -879,12 +875,12 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:871:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' )
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:871:19: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1016:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )? )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1016:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:871:24: (~ ( '\\n' | '\\r' ) )*
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1016:24: (~ ( '\\n' | '\\r' ) )*
             loop8:
             do {
                 int alt8=2;
@@ -897,7 +893,7 @@ public class InternalXtextLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:871:24: ~ ( '\\n' | '\\r' )
+            	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1016:26: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -918,25 +914,71 @@ public class InternalXtextLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:871:38: ( '\\r' )?
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1016:41: ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )?
+            int alt10=2;
+            int LA10_0 = input.LA(1);
 
-            if ( (LA9_0=='\r') ) {
-                alt9=1;
+            if ( (LA10_0=='\n'||LA10_0=='\r') ) {
+                alt10=1;
             }
-            switch (alt9) {
+            switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:871:38: '\\r'
+                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1016:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )
                     {
-                    match('\r'); 
+                    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1016:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )
+                    int alt9=3;
+                    int LA9_0 = input.LA(1);
+
+                    if ( (LA9_0=='\r') ) {
+                        int LA9_1 = input.LA(2);
+
+                        if ( (LA9_1=='\n') ) {
+                            alt9=1;
+                        }
+                        else {
+                            alt9=2;}
+                    }
+                    else if ( (LA9_0=='\n') ) {
+                        alt9=3;
+                    }
+                    else {
+                        NoViableAltException nvae =
+                            new NoViableAltException("1016:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )", 9, 0, input);
+
+                        throw nvae;
+                    }
+                    switch (alt9) {
+                        case 1 :
+                            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1016:65: '\\r\\n'
+                            {
+                            match("\r\n"); 
+
+
+                            }
+                            break;
+                        case 2 :
+                            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1016:74: '\\r'
+                            {
+                            match('\r'); 
+
+                            }
+                            break;
+                        case 3 :
+                            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1016:81: '\\n'
+                            {
+                            match('\n'); 
+
+                            }
+                            break;
+
+                    }
+
 
                     }
                     break;
 
             }
 
-            match('\n'); 
             channel=HIDDEN;
 
             }
@@ -952,22 +994,22 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:873:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:873:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1018:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1018:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:873:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
-            int cnt10=0;
-            loop10:
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1018:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            int cnt11=0;
+            loop11:
             do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
+                int alt11=2;
+                int LA11_0 = input.LA(1);
 
-                if ( ((LA10_0>='\t' && LA10_0<='\n')||LA10_0=='\r'||LA10_0==' ') ) {
-                    alt10=1;
+                if ( ((LA11_0>='\t' && LA11_0<='\n')||LA11_0=='\r'||LA11_0==' ') ) {
+                    alt11=1;
                 }
 
 
-                switch (alt10) {
+                switch (alt11) {
             	case 1 :
             	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:
             	    {
@@ -986,12 +1028,12 @@ public class InternalXtextLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt10 >= 1 ) break loop10;
+            	    if ( cnt11 >= 1 ) break loop11;
                         EarlyExitException eee =
-                            new EarlyExitException(10, input);
+                            new EarlyExitException(11, input);
                         throw eee;
                 }
-                cnt10++;
+                cnt11++;
             } while (true);
 
             channel=HIDDEN;
@@ -1009,25 +1051,25 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_LEXER_BODY() throws RecognitionException {
         try {
             int _type = RULE_LEXER_BODY;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:875:17: ( '<#' ( '.' )* '#>' )
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:875:19: '<#' ( '.' )* '#>'
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1020:17: ( '<#' ( '.' )* '#>' )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1020:19: '<#' ( '.' )* '#>'
             {
             match("<#"); 
 
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:875:24: ( '.' )*
-            loop11:
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1020:24: ( '.' )*
+            loop12:
             do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
+                int alt12=2;
+                int LA12_0 = input.LA(1);
 
-                if ( (LA11_0=='.') ) {
-                    alt11=1;
+                if ( (LA12_0=='.') ) {
+                    alt12=1;
                 }
 
 
-                switch (alt11) {
+                switch (alt12) {
             	case 1 :
-            	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:875:24: '.'
+            	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1020:24: '.'
             	    {
             	    match('.'); 
 
@@ -1035,7 +1077,7 @@ public class InternalXtextLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop11;
+            	    break loop12;
                 }
             } while (true);
 
@@ -1055,8 +1097,8 @@ public class InternalXtextLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:877:16: ( . )
-            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:877:18: .
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1022:16: ( . )
+            // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1022:18: .
             {
             matchAny(); 
 
@@ -1071,511 +1113,511 @@ public class InternalXtextLexer extends Lexer {
 
     public void mTokens() throws RecognitionException {
         // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1:8: ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER )
-        int alt12=32;
-        int LA12_0 = input.LA(1);
+        int alt13=32;
+        int LA13_0 = input.LA(1);
 
-        if ( (LA12_0=='a') ) {
+        if ( (LA13_0=='a') ) {
             switch ( input.LA(2) ) {
-            case 'b':
-                {
-                int LA12_29 = input.LA(3);
-
-                if ( (LA12_29=='s') ) {
-                    int LA12_60 = input.LA(4);
-
-                    if ( (LA12_60=='t') ) {
-                        int LA12_69 = input.LA(5);
-
-                        if ( (LA12_69=='r') ) {
-                            int LA12_77 = input.LA(6);
-
-                            if ( (LA12_77=='a') ) {
-                                int LA12_85 = input.LA(7);
-
-                                if ( (LA12_85=='c') ) {
-                                    int LA12_93 = input.LA(8);
-
-                                    if ( (LA12_93=='t') ) {
-                                        int LA12_101 = input.LA(9);
-
-                                        if ( (LA12_101==' ') ) {
-                                            alt12=1;
-                                        }
-                                        else {
-                                            alt12=25;}
-                                    }
-                                    else {
-                                        alt12=25;}
-                                }
-                                else {
-                                    alt12=25;}
-                            }
-                            else {
-                                alt12=25;}
-                        }
-                        else {
-                            alt12=25;}
-                    }
-                    else {
-                        alt12=25;}
-                }
-                else {
-                    alt12=25;}
-                }
-                break;
             case 's':
                 {
-                int LA12_30 = input.LA(3);
+                int LA13_29 = input.LA(3);
 
-                if ( ((LA12_30>='0' && LA12_30<='9')||(LA12_30>='A' && LA12_30<='Z')||LA12_30=='_'||(LA12_30>='a' && LA12_30<='z')) ) {
-                    alt12=25;
+                if ( ((LA13_29>='0' && LA13_29<='9')||(LA13_29>='A' && LA13_29<='Z')||LA13_29=='_'||(LA13_29>='a' && LA13_29<='z')) ) {
+                    alt13=25;
                 }
                 else {
-                    alt12=8;}
+                    alt13=8;}
+                }
+                break;
+            case 'b':
+                {
+                int LA13_30 = input.LA(3);
+
+                if ( (LA13_30=='s') ) {
+                    int LA13_61 = input.LA(4);
+
+                    if ( (LA13_61=='t') ) {
+                        int LA13_69 = input.LA(5);
+
+                        if ( (LA13_69=='r') ) {
+                            int LA13_77 = input.LA(6);
+
+                            if ( (LA13_77=='a') ) {
+                                int LA13_85 = input.LA(7);
+
+                                if ( (LA13_85=='c') ) {
+                                    int LA13_93 = input.LA(8);
+
+                                    if ( (LA13_93=='t') ) {
+                                        int LA13_101 = input.LA(9);
+
+                                        if ( (LA13_101==' ') ) {
+                                            alt13=1;
+                                        }
+                                        else {
+                                            alt13=25;}
+                                    }
+                                    else {
+                                        alt13=25;}
+                                }
+                                else {
+                                    alt13=25;}
+                            }
+                            else {
+                                alt13=25;}
+                        }
+                        else {
+                            alt13=25;}
+                    }
+                    else {
+                        alt13=25;}
+                }
+                else {
+                    alt13=25;}
                 }
                 break;
             default:
-                alt12=25;}
+                alt13=25;}
 
         }
-        else if ( (LA12_0=='l') ) {
+        else if ( (LA13_0=='l') ) {
             switch ( input.LA(2) ) {
             case 'a':
                 {
-                int LA12_32 = input.LA(3);
+                int LA13_32 = input.LA(3);
 
-                if ( (LA12_32=='n') ) {
-                    int LA12_62 = input.LA(4);
+                if ( (LA13_32=='n') ) {
+                    int LA13_62 = input.LA(4);
 
-                    if ( (LA12_62=='g') ) {
-                        int LA12_70 = input.LA(5);
+                    if ( (LA13_62=='g') ) {
+                        int LA13_70 = input.LA(5);
 
-                        if ( (LA12_70=='u') ) {
-                            int LA12_78 = input.LA(6);
+                        if ( (LA13_70=='u') ) {
+                            int LA13_78 = input.LA(6);
 
-                            if ( (LA12_78=='a') ) {
-                                int LA12_86 = input.LA(7);
+                            if ( (LA13_78=='a') ) {
+                                int LA13_86 = input.LA(7);
 
-                                if ( (LA12_86=='g') ) {
-                                    int LA12_94 = input.LA(8);
+                                if ( (LA13_86=='g') ) {
+                                    int LA13_94 = input.LA(8);
 
-                                    if ( (LA12_94=='e') ) {
-                                        int LA12_102 = input.LA(9);
+                                    if ( (LA13_94=='e') ) {
+                                        int LA13_102 = input.LA(9);
 
-                                        if ( ((LA12_102>='0' && LA12_102<='9')||(LA12_102>='A' && LA12_102<='Z')||LA12_102=='_'||(LA12_102>='a' && LA12_102<='z')) ) {
-                                            alt12=25;
+                                        if ( ((LA13_102>='0' && LA13_102<='9')||(LA13_102>='A' && LA13_102<='Z')||LA13_102=='_'||(LA13_102>='a' && LA13_102<='z')) ) {
+                                            alt13=25;
                                         }
                                         else {
-                                            alt12=2;}
+                                            alt13=2;}
                                     }
                                     else {
-                                        alt12=25;}
+                                        alt13=25;}
                                 }
                                 else {
-                                    alt12=25;}
+                                    alt13=25;}
                             }
                             else {
-                                alt12=25;}
+                                alt13=25;}
                         }
                         else {
-                            alt12=25;}
+                            alt13=25;}
                     }
                     else {
-                        alt12=25;}
+                        alt13=25;}
                 }
                 else {
-                    alt12=25;}
+                    alt13=25;}
                 }
                 break;
             case 'e':
                 {
-                int LA12_33 = input.LA(3);
+                int LA13_33 = input.LA(3);
 
-                if ( (LA12_33=='x') ) {
-                    int LA12_63 = input.LA(4);
+                if ( (LA13_33=='x') ) {
+                    int LA13_63 = input.LA(4);
 
-                    if ( (LA12_63=='i') ) {
-                        int LA12_71 = input.LA(5);
+                    if ( (LA13_63=='i') ) {
+                        int LA13_71 = input.LA(5);
 
-                        if ( (LA12_71=='n') ) {
-                            int LA12_79 = input.LA(6);
+                        if ( (LA13_71=='n') ) {
+                            int LA13_79 = input.LA(6);
 
-                            if ( (LA12_79=='g') ) {
-                                int LA12_87 = input.LA(7);
+                            if ( (LA13_79=='g') ) {
+                                int LA13_87 = input.LA(7);
 
-                                if ( ((LA12_87>='0' && LA12_87<='9')||(LA12_87>='A' && LA12_87<='Z')||LA12_87=='_'||(LA12_87>='a' && LA12_87<='z')) ) {
-                                    alt12=25;
+                                if ( ((LA13_87>='0' && LA13_87<='9')||(LA13_87>='A' && LA13_87<='Z')||LA13_87=='_'||(LA13_87>='a' && LA13_87<='z')) ) {
+                                    alt13=25;
                                 }
                                 else {
-                                    alt12=5;}
+                                    alt13=5;}
                             }
                             else {
-                                alt12=25;}
+                                alt13=25;}
                         }
                         else {
-                            alt12=25;}
+                            alt13=25;}
                     }
                     else {
-                        alt12=25;}
+                        alt13=25;}
                 }
                 else {
-                    alt12=25;}
+                    alt13=25;}
                 }
                 break;
             default:
-                alt12=25;}
+                alt13=25;}
 
         }
-        else if ( (LA12_0=='.') ) {
-            alt12=3;
+        else if ( (LA13_0=='.') ) {
+            alt13=3;
         }
-        else if ( (LA12_0=='e') ) {
-            int LA12_4 = input.LA(2);
+        else if ( (LA13_0=='e') ) {
+            int LA13_4 = input.LA(2);
 
-            if ( (LA12_4=='x') ) {
-                int LA12_35 = input.LA(3);
+            if ( (LA13_4=='x') ) {
+                int LA13_35 = input.LA(3);
 
-                if ( (LA12_35=='t') ) {
-                    int LA12_64 = input.LA(4);
+                if ( (LA13_35=='t') ) {
+                    int LA13_64 = input.LA(4);
 
-                    if ( (LA12_64=='e') ) {
-                        int LA12_72 = input.LA(5);
+                    if ( (LA13_64=='e') ) {
+                        int LA13_72 = input.LA(5);
 
-                        if ( (LA12_72=='n') ) {
-                            int LA12_80 = input.LA(6);
+                        if ( (LA13_72=='n') ) {
+                            int LA13_80 = input.LA(6);
 
-                            if ( (LA12_80=='d') ) {
-                                int LA12_88 = input.LA(7);
+                            if ( (LA13_80=='d') ) {
+                                int LA13_88 = input.LA(7);
 
-                                if ( (LA12_88=='s') ) {
-                                    int LA12_96 = input.LA(8);
+                                if ( (LA13_88=='s') ) {
+                                    int LA13_96 = input.LA(8);
 
-                                    if ( ((LA12_96>='0' && LA12_96<='9')||(LA12_96>='A' && LA12_96<='Z')||LA12_96=='_'||(LA12_96>='a' && LA12_96<='z')) ) {
-                                        alt12=25;
+                                    if ( ((LA13_96>='0' && LA13_96<='9')||(LA13_96>='A' && LA13_96<='Z')||LA13_96=='_'||(LA13_96>='a' && LA13_96<='z')) ) {
+                                        alt13=25;
                                     }
                                     else {
-                                        alt12=4;}
+                                        alt13=4;}
                                 }
                                 else {
-                                    alt12=25;}
+                                    alt13=25;}
                             }
                             else {
-                                alt12=25;}
+                                alt13=25;}
                         }
                         else {
-                            alt12=25;}
+                            alt13=25;}
                     }
                     else {
-                        alt12=25;}
+                        alt13=25;}
                 }
                 else {
-                    alt12=25;}
+                    alt13=25;}
             }
             else {
-                alt12=25;}
+                alt13=25;}
         }
-        else if ( (LA12_0==':') ) {
-            int LA12_5 = input.LA(2);
+        else if ( (LA13_0==':') ) {
+            int LA13_5 = input.LA(2);
 
-            if ( (LA12_5==':') ) {
-                alt12=12;
+            if ( (LA13_5==':') ) {
+                alt13=12;
             }
             else {
-                alt12=6;}
+                alt13=6;}
         }
-        else if ( (LA12_0=='g') ) {
-            int LA12_6 = input.LA(2);
+        else if ( (LA13_0=='g') ) {
+            int LA13_6 = input.LA(2);
 
-            if ( (LA12_6=='e') ) {
-                int LA12_38 = input.LA(3);
+            if ( (LA13_6=='e') ) {
+                int LA13_38 = input.LA(3);
 
-                if ( (LA12_38=='n') ) {
-                    int LA12_65 = input.LA(4);
+                if ( (LA13_38=='n') ) {
+                    int LA13_65 = input.LA(4);
 
-                    if ( (LA12_65=='e') ) {
-                        int LA12_73 = input.LA(5);
+                    if ( (LA13_65=='e') ) {
+                        int LA13_73 = input.LA(5);
 
-                        if ( (LA12_73=='r') ) {
-                            int LA12_81 = input.LA(6);
+                        if ( (LA13_73=='r') ) {
+                            int LA13_81 = input.LA(6);
 
-                            if ( (LA12_81=='a') ) {
-                                int LA12_89 = input.LA(7);
+                            if ( (LA13_81=='a') ) {
+                                int LA13_89 = input.LA(7);
 
-                                if ( (LA12_89=='t') ) {
-                                    int LA12_97 = input.LA(8);
+                                if ( (LA13_89=='t') ) {
+                                    int LA13_97 = input.LA(8);
 
-                                    if ( (LA12_97=='e') ) {
-                                        int LA12_104 = input.LA(9);
+                                    if ( (LA13_97=='e') ) {
+                                        int LA13_104 = input.LA(9);
 
-                                        if ( ((LA12_104>='0' && LA12_104<='9')||(LA12_104>='A' && LA12_104<='Z')||LA12_104=='_'||(LA12_104>='a' && LA12_104<='z')) ) {
-                                            alt12=25;
+                                        if ( ((LA13_104>='0' && LA13_104<='9')||(LA13_104>='A' && LA13_104<='Z')||LA13_104=='_'||(LA13_104>='a' && LA13_104<='z')) ) {
+                                            alt13=25;
                                         }
                                         else {
-                                            alt12=7;}
+                                            alt13=7;}
                                     }
                                     else {
-                                        alt12=25;}
+                                        alt13=25;}
                                 }
                                 else {
-                                    alt12=25;}
+                                    alt13=25;}
                             }
                             else {
-                                alt12=25;}
+                                alt13=25;}
                         }
                         else {
-                            alt12=25;}
+                            alt13=25;}
                     }
                     else {
-                        alt12=25;}
+                        alt13=25;}
                 }
                 else {
-                    alt12=25;}
+                    alt13=25;}
             }
             else {
-                alt12=25;}
+                alt13=25;}
         }
-        else if ( (LA12_0=='i') ) {
-            int LA12_7 = input.LA(2);
+        else if ( (LA13_0=='i') ) {
+            int LA13_7 = input.LA(2);
 
-            if ( (LA12_7=='m') ) {
-                int LA12_39 = input.LA(3);
+            if ( (LA13_7=='m') ) {
+                int LA13_39 = input.LA(3);
 
-                if ( (LA12_39=='p') ) {
-                    int LA12_66 = input.LA(4);
+                if ( (LA13_39=='p') ) {
+                    int LA13_66 = input.LA(4);
 
-                    if ( (LA12_66=='o') ) {
-                        int LA12_74 = input.LA(5);
+                    if ( (LA13_66=='o') ) {
+                        int LA13_74 = input.LA(5);
 
-                        if ( (LA12_74=='r') ) {
-                            int LA12_82 = input.LA(6);
+                        if ( (LA13_74=='r') ) {
+                            int LA13_82 = input.LA(6);
 
-                            if ( (LA12_82=='t') ) {
-                                int LA12_90 = input.LA(7);
+                            if ( (LA13_82=='t') ) {
+                                int LA13_90 = input.LA(7);
 
-                                if ( ((LA12_90>='0' && LA12_90<='9')||(LA12_90>='A' && LA12_90<='Z')||LA12_90=='_'||(LA12_90>='a' && LA12_90<='z')) ) {
-                                    alt12=25;
+                                if ( ((LA13_90>='0' && LA13_90<='9')||(LA13_90>='A' && LA13_90<='Z')||LA13_90=='_'||(LA13_90>='a' && LA13_90<='z')) ) {
+                                    alt13=25;
                                 }
                                 else {
-                                    alt12=9;}
+                                    alt13=9;}
                             }
                             else {
-                                alt12=25;}
+                                alt13=25;}
                         }
                         else {
-                            alt12=25;}
+                            alt13=25;}
                     }
                     else {
-                        alt12=25;}
+                        alt13=25;}
                 }
                 else {
-                    alt12=25;}
+                    alt13=25;}
             }
             else {
-                alt12=25;}
+                alt13=25;}
         }
-        else if ( (LA12_0=='r') ) {
-            int LA12_8 = input.LA(2);
+        else if ( (LA13_0=='r') ) {
+            int LA13_8 = input.LA(2);
 
-            if ( (LA12_8=='e') ) {
-                int LA12_40 = input.LA(3);
+            if ( (LA13_8=='e') ) {
+                int LA13_40 = input.LA(3);
 
-                if ( (LA12_40=='t') ) {
-                    int LA12_67 = input.LA(4);
+                if ( (LA13_40=='t') ) {
+                    int LA13_67 = input.LA(4);
 
-                    if ( (LA12_67=='u') ) {
-                        int LA12_75 = input.LA(5);
+                    if ( (LA13_67=='u') ) {
+                        int LA13_75 = input.LA(5);
 
-                        if ( (LA12_75=='r') ) {
-                            int LA12_83 = input.LA(6);
+                        if ( (LA13_75=='r') ) {
+                            int LA13_83 = input.LA(6);
 
-                            if ( (LA12_83=='n') ) {
-                                int LA12_91 = input.LA(7);
+                            if ( (LA13_83=='n') ) {
+                                int LA13_91 = input.LA(7);
 
-                                if ( (LA12_91=='s') ) {
-                                    int LA12_99 = input.LA(8);
+                                if ( (LA13_91=='s') ) {
+                                    int LA13_99 = input.LA(8);
 
-                                    if ( ((LA12_99>='0' && LA12_99<='9')||(LA12_99>='A' && LA12_99<='Z')||LA12_99=='_'||(LA12_99>='a' && LA12_99<='z')) ) {
-                                        alt12=25;
+                                    if ( ((LA13_99>='0' && LA13_99<='9')||(LA13_99>='A' && LA13_99<='Z')||LA13_99=='_'||(LA13_99>='a' && LA13_99<='z')) ) {
+                                        alt13=25;
                                     }
                                     else {
-                                        alt12=10;}
+                                        alt13=10;}
                                 }
                                 else {
-                                    alt12=25;}
+                                    alt13=25;}
                             }
                             else {
-                                alt12=25;}
+                                alt13=25;}
                         }
                         else {
-                            alt12=25;}
+                            alt13=25;}
                     }
                     else {
-                        alt12=25;}
+                        alt13=25;}
                 }
                 else {
-                    alt12=25;}
+                    alt13=25;}
             }
             else {
-                alt12=25;}
+                alt13=25;}
         }
-        else if ( (LA12_0==';') ) {
-            alt12=11;
+        else if ( (LA13_0==';') ) {
+            alt13=11;
         }
-        else if ( (LA12_0=='|') ) {
-            alt12=13;
+        else if ( (LA13_0=='|') ) {
+            alt13=13;
         }
-        else if ( (LA12_0=='?') ) {
-            int LA12_11 = input.LA(2);
+        else if ( (LA13_0=='?') ) {
+            int LA13_11 = input.LA(2);
 
-            if ( (LA12_11=='=') ) {
-                alt12=19;
+            if ( (LA13_11=='=') ) {
+                alt13=19;
             }
             else {
-                alt12=14;}
+                alt13=14;}
         }
-        else if ( (LA12_0=='*') ) {
-            alt12=15;
+        else if ( (LA13_0=='*') ) {
+            alt13=15;
         }
-        else if ( (LA12_0=='+') ) {
-            int LA12_13 = input.LA(2);
+        else if ( (LA13_0=='+') ) {
+            int LA13_13 = input.LA(2);
 
-            if ( (LA12_13=='=') ) {
-                alt12=17;
+            if ( (LA13_13=='=') ) {
+                alt13=17;
             }
             else {
-                alt12=16;}
+                alt13=16;}
         }
-        else if ( (LA12_0=='=') ) {
-            alt12=18;
+        else if ( (LA13_0=='=') ) {
+            alt13=18;
         }
-        else if ( (LA12_0=='{') ) {
-            alt12=20;
+        else if ( (LA13_0=='{') ) {
+            alt13=20;
         }
-        else if ( (LA12_0=='c') ) {
-            int LA12_16 = input.LA(2);
+        else if ( (LA13_0=='c') ) {
+            int LA13_16 = input.LA(2);
 
-            if ( (LA12_16=='u') ) {
-                int LA12_50 = input.LA(3);
+            if ( (LA13_16=='u') ) {
+                int LA13_50 = input.LA(3);
 
-                if ( (LA12_50=='r') ) {
-                    int LA12_68 = input.LA(4);
+                if ( (LA13_50=='r') ) {
+                    int LA13_68 = input.LA(4);
 
-                    if ( (LA12_68=='r') ) {
-                        int LA12_76 = input.LA(5);
+                    if ( (LA13_68=='r') ) {
+                        int LA13_76 = input.LA(5);
 
-                        if ( (LA12_76=='e') ) {
-                            int LA12_84 = input.LA(6);
+                        if ( (LA13_76=='e') ) {
+                            int LA13_84 = input.LA(6);
 
-                            if ( (LA12_84=='n') ) {
-                                int LA12_92 = input.LA(7);
+                            if ( (LA13_84=='n') ) {
+                                int LA13_92 = input.LA(7);
 
-                                if ( (LA12_92=='t') ) {
-                                    int LA12_100 = input.LA(8);
+                                if ( (LA13_92=='t') ) {
+                                    int LA13_100 = input.LA(8);
 
-                                    if ( ((LA12_100>='0' && LA12_100<='9')||(LA12_100>='A' && LA12_100<='Z')||LA12_100=='_'||(LA12_100>='a' && LA12_100<='z')) ) {
-                                        alt12=25;
+                                    if ( ((LA13_100>='0' && LA13_100<='9')||(LA13_100>='A' && LA13_100<='Z')||LA13_100=='_'||(LA13_100>='a' && LA13_100<='z')) ) {
+                                        alt13=25;
                                     }
                                     else {
-                                        alt12=21;}
+                                        alt13=21;}
                                 }
                                 else {
-                                    alt12=25;}
+                                    alt13=25;}
                             }
                             else {
-                                alt12=25;}
+                                alt13=25;}
                         }
                         else {
-                            alt12=25;}
+                            alt13=25;}
                     }
                     else {
-                        alt12=25;}
+                        alt13=25;}
                 }
                 else {
-                    alt12=25;}
+                    alt13=25;}
             }
             else {
-                alt12=25;}
+                alt13=25;}
         }
-        else if ( (LA12_0=='}') ) {
-            alt12=22;
+        else if ( (LA13_0=='}') ) {
+            alt13=22;
         }
-        else if ( (LA12_0=='(') ) {
-            alt12=23;
+        else if ( (LA13_0=='(') ) {
+            alt13=23;
         }
-        else if ( (LA12_0==')') ) {
-            alt12=24;
+        else if ( (LA13_0==')') ) {
+            alt13=24;
         }
-        else if ( (LA12_0=='^') ) {
-            int LA12_20 = input.LA(2);
+        else if ( (LA13_0=='^') ) {
+            int LA13_20 = input.LA(2);
 
-            if ( ((LA12_20>='A' && LA12_20<='Z')||LA12_20=='_'||(LA12_20>='a' && LA12_20<='z')) ) {
-                alt12=25;
+            if ( ((LA13_20>='A' && LA13_20<='Z')||LA13_20=='_'||(LA13_20>='a' && LA13_20<='z')) ) {
+                alt13=25;
             }
             else {
-                alt12=32;}
+                alt13=32;}
         }
-        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='b'||LA12_0=='d'||LA12_0=='f'||LA12_0=='h'||(LA12_0>='j' && LA12_0<='k')||(LA12_0>='m' && LA12_0<='q')||(LA12_0>='s' && LA12_0<='z')) ) {
-            alt12=25;
+        else if ( ((LA13_0>='A' && LA13_0<='Z')||LA13_0=='_'||LA13_0=='b'||LA13_0=='d'||LA13_0=='f'||LA13_0=='h'||(LA13_0>='j' && LA13_0<='k')||(LA13_0>='m' && LA13_0<='q')||(LA13_0>='s' && LA13_0<='z')) ) {
+            alt13=25;
         }
-        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
-            alt12=26;
+        else if ( ((LA13_0>='0' && LA13_0<='9')) ) {
+            alt13=26;
         }
-        else if ( (LA12_0=='\"') ) {
-            int LA12_23 = input.LA(2);
+        else if ( (LA13_0=='\"') ) {
+            int LA13_23 = input.LA(2);
 
-            if ( ((LA12_23>='\u0000' && LA12_23<='\uFFFE')) ) {
-                alt12=27;
+            if ( ((LA13_23>='\u0000' && LA13_23<='\uFFFE')) ) {
+                alt13=27;
             }
             else {
-                alt12=32;}
+                alt13=32;}
         }
-        else if ( (LA12_0=='\'') ) {
-            int LA12_24 = input.LA(2);
+        else if ( (LA13_0=='\'') ) {
+            int LA13_24 = input.LA(2);
 
-            if ( ((LA12_24>='\u0000' && LA12_24<='\uFFFE')) ) {
-                alt12=27;
+            if ( ((LA13_24>='\u0000' && LA13_24<='\uFFFE')) ) {
+                alt13=27;
             }
             else {
-                alt12=32;}
+                alt13=32;}
         }
-        else if ( (LA12_0=='/') ) {
+        else if ( (LA13_0=='/') ) {
             switch ( input.LA(2) ) {
-            case '/':
-                {
-                alt12=29;
-                }
-                break;
             case '*':
                 {
-                alt12=28;
+                alt13=28;
+                }
+                break;
+            case '/':
+                {
+                alt13=29;
                 }
                 break;
             default:
-                alt12=32;}
+                alt13=32;}
 
         }
-        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
-            alt12=30;
+        else if ( ((LA13_0>='\t' && LA13_0<='\n')||LA13_0=='\r'||LA13_0==' ') ) {
+            alt13=30;
         }
-        else if ( (LA12_0=='<') ) {
-            int LA12_27 = input.LA(2);
+        else if ( (LA13_0=='<') ) {
+            int LA13_27 = input.LA(2);
 
-            if ( (LA12_27=='#') ) {
-                alt12=31;
+            if ( (LA13_27=='#') ) {
+                alt13=31;
             }
             else {
-                alt12=32;}
+                alt13=32;}
         }
-        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>=',' && LA12_0<='-')||LA12_0=='>'||LA12_0=='@'||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='~' && LA12_0<='\uFFFE')) ) {
-            alt12=32;
+        else if ( ((LA13_0>='\u0000' && LA13_0<='\b')||(LA13_0>='\u000B' && LA13_0<='\f')||(LA13_0>='\u000E' && LA13_0<='\u001F')||LA13_0=='!'||(LA13_0>='#' && LA13_0<='&')||(LA13_0>=',' && LA13_0<='-')||LA13_0=='>'||LA13_0=='@'||(LA13_0>='[' && LA13_0<=']')||LA13_0=='`'||(LA13_0>='~' && LA13_0<='\uFFFE')) ) {
+            alt13=32;
         }
         else {
             NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER );", 12, 0, input);
+                new NoViableAltException("1:1: Tokens : ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER );", 13, 0, input);
 
             throw nvae;
         }
-        switch (alt12) {
+        switch (alt13) {
             case 1 :
                 // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g:1:10: T12
                 {

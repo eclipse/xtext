@@ -24,10 +24,10 @@ public class XtextMetamodelAccess extends BaseEPackageAccess implements IMetamod
 	}
 
 	
-	public static final String XTEXT_NS_URI = "http://www.eclipse.org/2008/Xtext";
-	public static final String XTEXT_CP_URI = "org/eclipse/xtext/xtext.ecore";
+	protected static final String XTEXT_NS_URI = "http://www.eclipse.org/2008/Xtext";
+	protected static final String XTEXT_CP_URI = "org/eclipse/xtext/xtext.ecore";
 	
-	public EPackage getXtextEPackage() {	
+	protected EPackage getXtextEPackage() {	
 		if (!EPackage.Registry.INSTANCE.containsKey(XTEXT_NS_URI)) {
 			EPackage p = loadEcoreFile(XtextMetamodelAccess.class.getClassLoader(),XTEXT_CP_URI);
 			if (p!=null) {

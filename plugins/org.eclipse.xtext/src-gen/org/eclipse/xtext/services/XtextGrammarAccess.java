@@ -4,9 +4,7 @@ Generated with Xtext
 
 package org.eclipse.xtext.services;
 
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
@@ -27,5 +25,7 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 	public String getGrammarClasspathURI() {
 		return XTEXT_GRAMMAR_CP_URI;
 	}
+	
+	
    
 }

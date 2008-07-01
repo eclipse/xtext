@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g 2008-07-01 15:55:32
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g 2008-07-01 17:32:50
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -63,14 +63,14 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleEntryRule
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:99:1: entryRuleEntryRule returns [EObject current=null] : iv_ruleEntryRule= ruleEntryRule EOF ;
-    public EObject entryRuleEntryRule() throws RecognitionException {
+    public final EObject entryRuleEntryRule() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleEntryRule = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:100:2: (iv_ruleEntryRule= ruleEntryRule EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:99:51: (iv_ruleEntryRule= ruleEntryRule EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:100:2: iv_ruleEntryRule= ruleEntryRule EOF
             {
              currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
@@ -98,7 +98,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleEntryRule
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:107:1: ruleEntryRule returns [EObject current=null] : (lv_multiFeature= ruleAbstractRule )* ;
-    public EObject ruleEntryRule() throws RecognitionException {
+    public final EObject ruleEntryRule() throws RecognitionException {
         EObject current = null;
 
         EObject lv_multiFeature = null;
@@ -106,7 +106,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:110:1: ( (lv_multiFeature= ruleAbstractRule )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:109:33: ( (lv_multiFeature= ruleAbstractRule )* )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:110:1: (lv_multiFeature= ruleAbstractRule )*
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:110:1: (lv_multiFeature= ruleAbstractRule )*
@@ -166,14 +166,14 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleAbstractRule
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:128:1: entryRuleAbstractRule returns [EObject current=null] : iv_ruleAbstractRule= ruleAbstractRule EOF ;
-    public EObject entryRuleAbstractRule() throws RecognitionException {
+    public final EObject entryRuleAbstractRule() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleAbstractRule = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:129:2: (iv_ruleAbstractRule= ruleAbstractRule EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:128:54: (iv_ruleAbstractRule= ruleAbstractRule EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:129:2: iv_ruleAbstractRule= ruleAbstractRule EOF
             {
              currentNode = createCompositeNode("//@parserRules.1" /* xtext::ParserRule */, currentNode); 
@@ -201,7 +201,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleAbstractRule
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:136:1: ruleAbstractRule returns [EObject current=null] : (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule ) ;
-    public EObject ruleAbstractRule() throws RecognitionException {
+    public final EObject ruleAbstractRule() throws RecognitionException {
         EObject current = null;
 
         EObject this_ChoiceRule = null;
@@ -211,7 +211,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:139:1: ( (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:138:33: ( (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule ) )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:139:1: (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule )
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:139:1: (this_ChoiceRule= ruleChoiceRule | this_ReducibleRule= ruleReducibleRule )
@@ -287,14 +287,14 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleChoiceRule
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:163:1: entryRuleChoiceRule returns [EObject current=null] : iv_ruleChoiceRule= ruleChoiceRule EOF ;
-    public EObject entryRuleChoiceRule() throws RecognitionException {
+    public final EObject entryRuleChoiceRule() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleChoiceRule = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:164:2: (iv_ruleChoiceRule= ruleChoiceRule EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:163:52: (iv_ruleChoiceRule= ruleChoiceRule EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:164:2: iv_ruleChoiceRule= ruleChoiceRule EOF
             {
              currentNode = createCompositeNode("//@parserRules.2" /* xtext::ParserRule */, currentNode); 
@@ -322,7 +322,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleChoiceRule
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:171:1: ruleChoiceRule returns [EObject current=null] : ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) ) ;
-    public EObject ruleChoiceRule() throws RecognitionException {
+    public final EObject ruleChoiceRule() throws RecognitionException {
         EObject current = null;
 
         Token lv_optionalKeyword=null;
@@ -330,7 +330,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:174:1: ( ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:173:33: ( ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) ) )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:174:1: ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) )
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:174:1: ( ( 'choice' (lv_optionalKeyword= 'optional' )? ) (lv_name= RULE_ID ) )
@@ -410,14 +410,14 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleReducibleRule
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:205:1: entryRuleReducibleRule returns [EObject current=null] : iv_ruleReducibleRule= ruleReducibleRule EOF ;
-    public EObject entryRuleReducibleRule() throws RecognitionException {
+    public final EObject entryRuleReducibleRule() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleReducibleRule = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:206:2: (iv_ruleReducibleRule= ruleReducibleRule EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:205:55: (iv_ruleReducibleRule= ruleReducibleRule EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:206:2: iv_ruleReducibleRule= ruleReducibleRule EOF
             {
              currentNode = createCompositeNode("//@parserRules.3" /* xtext::ParserRule */, currentNode); 
@@ -445,7 +445,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleReducibleRule
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:213:1: ruleReducibleRule returns [EObject current=null] : ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? ) ;
-    public EObject ruleReducibleRule() throws RecognitionException {
+    public final EObject ruleReducibleRule() throws RecognitionException {
         EObject current = null;
 
         EObject this_TerminalRule = null;
@@ -455,7 +455,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:216:1: ( ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:215:33: ( ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? ) )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:216:1: ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? )
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:216:1: ( ( 'reducible' this_TerminalRule= ruleTerminalRule ) ( () (lv_actionFeature= ruleTerminalRule ) )? )
@@ -558,14 +558,14 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleTerminalRule
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:260:1: entryRuleTerminalRule returns [EObject current=null] : iv_ruleTerminalRule= ruleTerminalRule EOF ;
-    public EObject entryRuleTerminalRule() throws RecognitionException {
+    public final EObject entryRuleTerminalRule() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleTerminalRule = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:261:2: (iv_ruleTerminalRule= ruleTerminalRule EOF )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:260:54: (iv_ruleTerminalRule= ruleTerminalRule EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:261:2: iv_ruleTerminalRule= ruleTerminalRule EOF
             {
              currentNode = createCompositeNode("//@parserRules.4" /* xtext::ParserRule */, currentNode); 
@@ -593,14 +593,14 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleTerminalRule
     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:268:1: ruleTerminalRule returns [EObject current=null] : (lv_stringFeature= RULE_STRING ) ;
-    public EObject ruleTerminalRule() throws RecognitionException {
+    public final EObject ruleTerminalRule() throws RecognitionException {
         EObject current = null;
 
         Token lv_stringFeature=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:271:1: ( (lv_stringFeature= RULE_STRING ) )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:270:33: ( (lv_stringFeature= RULE_STRING ) )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:271:1: (lv_stringFeature= RULE_STRING )
             {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:271:1: (lv_stringFeature= RULE_STRING )
