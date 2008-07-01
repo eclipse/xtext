@@ -15,7 +15,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
-import org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef;
+import org.eclipse.xtext.ui.service.impl.BuildInTokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.TokenTypeDef;
 
@@ -28,7 +28,7 @@ public class XtextTokenTypeDef extends BuildInTokenTypeDef {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.xtext.ui.service.ITokenTypeDefService#allTokenTypes()
+	 * @see org.eclipse.xtext.ui.service.ITokenTypeDefProvider#allTokenTypes()
 	 */
 	@Override
 	public List<ITokenTypeDef> allTokenTypes() {

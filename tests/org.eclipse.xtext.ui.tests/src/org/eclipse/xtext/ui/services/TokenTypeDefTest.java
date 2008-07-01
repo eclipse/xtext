@@ -12,8 +12,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.service.ITokenTypeDefService;
-import org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef;
+import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
+import org.eclipse.xtext.ui.service.impl.BuildInTokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -33,7 +33,7 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 	private static final String MODEL = MULTILINE_COMMENT + "\n" + KEYWORD_SPIELPLATZ + " " + NUMBER_2 + " " + STRING
 			+ " {\n" + SINGLELINE_COMMENT + "kind (jurgen 5)\nspielzeug (ente ROT)}\n" + EOF_COMMENT;
 	private EList<LeafNode> leafNodes;
-	private ITokenTypeDefService ttds;
+	private ITokenTypeDefProvider ttds;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -92,7 +92,7 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 		assertEquals(BuildInTokenTypeDef.SL_COMMENT_ID, ttd.getId());
 	}
 
-	private ITokenTypeDef findTokenTypeDef(ITokenTypeDefService ttds, LeafNode leafNode) {
+	private ITokenTypeDef findTokenTypeDef(ITokenTypeDefProvider ttds, LeafNode leafNode) {
 		for (ITokenTypeDef ttd : ttds.allTokenTypes()) {
 			if (ttd.match(leafNode)) {
 				return ttd;

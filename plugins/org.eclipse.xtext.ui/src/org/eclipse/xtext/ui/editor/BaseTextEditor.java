@@ -11,7 +11,6 @@ package org.eclipse.xtext.ui.editor;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -38,7 +37,7 @@ import org.eclipse.xtext.ui.editor.model.XtextDocumentProviderFactory;
 import org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.CoreLog;
-import org.eclipse.xtext.ui.service.IPreferenceStoreService;
+import org.eclipse.xtext.ui.service.IPreferenceStore;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -49,7 +48,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	private IEditorModel model;
 	private XtextContentOutlinePage outlinePage;
 	protected boolean selectionSetFromOutline;
-	
+
 	@Inject
 	private ILanguageDescriptor languageDescriptor;
 
@@ -58,10 +57,11 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		super.setInitializationData(cfig, propertyName, data);
 		// try plain text editor if problem occurs
 		if (languageDescriptor != null) {
-			IPreferenceStoreService xtextPreferenceStore = ServiceRegistry.getService(languageDescriptor,
-					IPreferenceStoreService.class);
-			ChainedPreferenceStore chainedPreferenceStore = new ChainedPreferenceStore(new IPreferenceStore[] {
-					getPreferenceStore(), xtextPreferenceStore.getPersitablePreferenceStore() });
+			IPreferenceStore xtextPreferenceStore = ServiceRegistry.getService(languageDescriptor,
+					IPreferenceStore.class);
+			ChainedPreferenceStore chainedPreferenceStore = new ChainedPreferenceStore(
+					new org.eclipse.jface.preference.IPreferenceStore[] { getPreferenceStore(),
+							xtextPreferenceStore.getPersitablePreferenceStore() });
 
 			// source viewer setup
 			setSourceViewerConfiguration(new XtextSourceViewerConfiguration(languageDescriptor, chainedPreferenceStore,

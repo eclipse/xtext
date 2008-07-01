@@ -18,7 +18,7 @@ import org.eclipse.jface.text.formatter.FormattingContextProperties;
 import org.eclipse.jface.text.formatter.IFormattingContext;
 import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.internal.Activator;
-import org.eclipse.xtext.ui.service.IFormatterService;
+import org.eclipse.xtext.ui.service.IFormatter;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -26,14 +26,14 @@ import org.eclipse.xtext.ui.service.IFormatterService;
  */
 public class XtextFormattingStrategy extends ContextBasedFormattingStrategy {
 
-	private final IFormatterService formatter;
+	private final IFormatter formatter;
 	private static long time = 0;
 	private IEditorModelProvider editorModelProvider;
 	private LinkedList<IDocument> documents = new LinkedList<IDocument>();
 
 	private LinkedList<IRegion> regions = new LinkedList<IRegion>();
 
-	public XtextFormattingStrategy(IEditorModelProvider editorModelProvider, IFormatterService formatter) {
+	public XtextFormattingStrategy(IEditorModelProvider editorModelProvider, IFormatter formatter) {
 		this.editorModelProvider = editorModelProvider;
 		this.formatter = formatter;
 	}

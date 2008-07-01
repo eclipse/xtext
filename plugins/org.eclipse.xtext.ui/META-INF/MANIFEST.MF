@@ -20,9 +20,10 @@ Export-Package: org.eclipse.xtext.ui.editor,
  org.eclipse.xtext.ui.editor.model,
  org.eclipse.xtext.ui.editor.outline,
  org.eclipse.xtext.ui.editor.utils,
- org.eclipse.xtext.ui.internal;x-friends:="org.eclipse.xtext.ui.tests",
+ org.eclipse.xtext.ui.internal,
  org.eclipse.xtext.ui.service,
  org.eclipse.xtext.ui.service.impl,
+ org.eclipse.xtext.ui.service.utils,
  org.eclipse.xtext.ui.tokentype,
  org.eclipse.xtext.ui.util
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

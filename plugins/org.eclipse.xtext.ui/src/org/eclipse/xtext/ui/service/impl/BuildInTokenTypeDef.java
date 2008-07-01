@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * @author Dennis Hübner - Initial contribution and API
  *******************************************************************************/
-package org.eclipse.xtext.ui.tokentype;
+package org.eclipse.xtext.ui.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +18,15 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.editor.utils.TextStyleConstants;
-import org.eclipse.xtext.ui.service.ITokenTypeDefService;
+import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
+import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
+import org.eclipse.xtext.ui.tokentype.TokenTypeDef;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class BuildInTokenTypeDef implements ITokenTypeDefService {
+public class BuildInTokenTypeDef implements ITokenTypeDefProvider {
 	public static final String KEYWORD_ID = "keyword";
 	public static final String SL_COMMENT_ID = "slComment";
 	public static final String ML_COMMENT_ID = "mlComment";

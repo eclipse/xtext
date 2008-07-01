@@ -25,8 +25,8 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.ui.internal.CoreLog;
-import org.eclipse.xtext.ui.service.IHoverService;
-import org.eclipse.xtext.ui.service.IHoverService.IContentContainer;
+import org.eclipse.xtext.ui.service.IHoverInfo;
+import org.eclipse.xtext.ui.service.IHoverInfo.IContentContainer;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -39,7 +39,7 @@ final class XtextInformationControl extends AbstractInformationControl implement
 	private static final int MIN_HEIGHT = 50;
 	private StyledText st = null;
 	private boolean enableScrollbars;
-	private IHoverService hoverService;
+	private IHoverInfo hoverInfo;
 	private String placeholder = "\uFFFC";
 
 	// Image disposition handled by LabelProvider
@@ -48,11 +48,11 @@ final class XtextInformationControl extends AbstractInformationControl implement
 	/**
 	 * @param parentShell
 	 * @param statusFieldText
-	 * @param hoverService
+	 * @param hoverInfo
 	 */
-	public XtextInformationControl(Shell parentShell, String statusFieldText, IHoverService hoverService) {
+	public XtextInformationControl(Shell parentShell, String statusFieldText, IHoverInfo hoverInfo) {
 		super(parentShell, statusFieldText);
-		this.hoverService = hoverService;
+		this.hoverInfo = hoverInfo;
 		enableScrollbars = false;
 		create();
 	}
@@ -60,11 +60,11 @@ final class XtextInformationControl extends AbstractInformationControl implement
 	/**
 	 * @param parent
 	 * @param toolBarManager
-	 * @param hoverService
+	 * @param hoverInfo
 	 */
-	public XtextInformationControl(Shell parent, ToolBarManager toolBarManager, IHoverService hoverService) {
+	public XtextInformationControl(Shell parent, ToolBarManager toolBarManager, IHoverInfo hoverInfo) {
 		super(parent, toolBarManager);
-		this.hoverService = hoverService;
+		this.hoverInfo = hoverInfo;
 		enableScrollbars = true;
 		create();
 	}
@@ -136,10 +136,10 @@ final class XtextInformationControl extends AbstractInformationControl implement
 	public void setInput(Object input) {
 		if (input instanceof EObject) {
 			EObject eObject = (EObject) input;
-			this.hoverService.createContents(eObject, this);
+			this.hoverInfo.createContents(eObject, this);
 			// add some actions
 			if (getToolBarManager() != null) {
-				for (IAction action : this.hoverService.getHoverActions(eObject)) {
+				for (IAction action : this.hoverInfo.getHoverActions(eObject)) {
 					getToolBarManager().add(action);
 				}
 				getToolBarManager().update(true);
@@ -164,7 +164,7 @@ final class XtextInformationControl extends AbstractInformationControl implement
 			 * createInformationControl(org.eclipse.swt.widgets.Shell)
 			 */
 			public IInformationControl createInformationControl(Shell parent) {
-				return new XtextInformationControl(parent, new ToolBarManager(), hoverService);
+				return new XtextInformationControl(parent, new ToolBarManager(), hoverInfo);
 			}
 		};
 	}
@@ -190,7 +190,7 @@ final class XtextInformationControl extends AbstractInformationControl implement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.eclipse.xtext.ui.service.IHoverService.IContentContainer#appendImage
+	 * org.eclipse.xtext.ui.service.IHoverInfo.IContentContainer#appendImage
 	 * (org.eclipse.swt.graphics.Image)
 	 */
 	public void appendImage(Image image) {
@@ -201,7 +201,7 @@ final class XtextInformationControl extends AbstractInformationControl implement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.eclipse.xtext.ui.service.IHoverService.IContentContainer#appendText
+	 * org.eclipse.xtext.ui.service.IHoverInfo.IContentContainer#appendText
 	 * (org.eclipse.jface.viewers.StyledString)
 	 */
 	public void appendText(StyledString text) {

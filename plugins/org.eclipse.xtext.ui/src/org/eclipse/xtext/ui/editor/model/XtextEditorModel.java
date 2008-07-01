@@ -40,6 +40,7 @@ public class XtextEditorModel implements IEditorModel {
 	private AbstractNode parseTreeRootNode;
 	private IDocumentListener dirtyListener;
 	private boolean shouldReconcile = true;
+	// FIXME DO not use IParser directly
 	private IParseResult parseResult;
 	private final ILanguageDescriptor languageDescriptor;
 

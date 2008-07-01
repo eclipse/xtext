@@ -65,7 +65,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.ui.service.IPreferenceStoreService"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.ui.service.IPreferenceStore"/>
                </appinfo>
             </annotation>
          </attribute>

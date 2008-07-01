@@ -13,13 +13,13 @@ import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.ui.internal.Activator;
-import org.eclipse.xtext.ui.service.IPreferenceStoreService;
+import org.eclipse.xtext.ui.service.IPreferenceStore;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class BuildInPreferenceStore implements IPreferenceStoreService {
+public class BuildInPreferenceStore implements IPreferenceStore {
 	/* Tokens */
 	private static final String COLOR_SUFIX = "color";
 	private static final String BACKGROUNDCOLOR_SUFIX = "bgColor";

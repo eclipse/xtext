@@ -9,15 +9,15 @@
 
 package org.eclipse.xtext.ui.service.impl;
 
-import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
-import org.eclipse.xtext.ui.service.IPreferenceStoreService;
+import org.eclipse.xtext.ui.service.IPreferenceStore;
 import org.eclipse.xtext.ui.service.ISyntaxColorer;
-import org.eclipse.xtext.ui.service.ITokenTypeDefService;
+import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 
 /**
@@ -26,8 +26,8 @@ import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
  */
 public class BuildInSyntaxColorer implements ISyntaxColorer {
 
-	private ITokenTypeDefService tokenTypeDef;
-	private IPreferenceStoreService preferenceStoreService;
+	private ITokenTypeDefProvider tokenTypeDef;
+	private IPreferenceStore preferenceStore;
 	private ILanguageDescriptor languageDescriptor;
 
 	/*
@@ -55,13 +55,13 @@ public class BuildInSyntaxColorer implements ISyntaxColorer {
 	}
 
 	@Inject
-	public void setTokenTypeDefService(ITokenTypeDefService service) {
+	public void setTokenTypeDefProvider(ITokenTypeDefProvider service) {
 		this.tokenTypeDef = service;
 	}
 
 	@Inject
-	public void setPreferenceStoreService(IPreferenceStoreService preferenceStoreService) {
-		this.preferenceStoreService = preferenceStoreService;
+	public void setPreferenceStore(IPreferenceStore preferenceStore) {
+		this.preferenceStore = preferenceStore;
 	}
 
 	@Inject
@@ -69,8 +69,8 @@ public class BuildInSyntaxColorer implements ISyntaxColorer {
 		this.languageDescriptor = languageDescriptor;
 	}
 
-	private IPreferenceStore getPreferenceStore() {
-		return preferenceStoreService.getPersitablePreferenceStore();
+	private IPersistentPreferenceStore getPreferenceStore() {
+		return preferenceStore.getPersitablePreferenceStore();
 	}
 
 	// TODO set defaults somewhere else if possible, or check if a default

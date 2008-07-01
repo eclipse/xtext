@@ -8,16 +8,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.service;
 
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.ui.editor.model.IEditorModel;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public interface IFormatterService extends ILanguageService {
-
-	void format(IEditorModel editorModel, IDocument document, IRegion region);
+public interface IPreferenceStore extends ILanguageService {
+	IPersistentPreferenceStore getPersitablePreferenceStore();
 }
