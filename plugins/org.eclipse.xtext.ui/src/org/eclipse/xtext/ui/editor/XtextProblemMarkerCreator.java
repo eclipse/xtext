@@ -14,7 +14,7 @@ import java.util.Map;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.xtext.parser.IParseError;
+import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.ui.editor.model.IXtextEditorModelListener;
 import org.eclipse.xtext.ui.editor.model.XtextEditorModelChangeEvent;
 import org.eclipse.xtext.ui.internal.XtextMarkerManager;
@@ -36,12 +36,12 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 		this.monitor = monitor;
 	}
 
-	private Map<String, Object> collectMarkerAttributes(IParseError error) {
+	private Map<String, Object> collectMarkerAttributes(SyntaxError error) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IMarker.SEVERITY, Integer.valueOf(IMarker.SEVERITY_ERROR));
-		map.put(IMarker.LINE_NUMBER, Integer.valueOf(error.getLine()));
-		map.put(IMarker.CHAR_START, Integer.valueOf(error.getOffset()));
-		map.put(IMarker.CHAR_END, Integer.valueOf(error.getOffset() + error.getLength()));
+		map.put(IMarker.LINE_NUMBER, Integer.valueOf(error.getNode().line()));
+		map.put(IMarker.CHAR_START, Integer.valueOf(error.getNode().offset()));
+		map.put(IMarker.CHAR_END, Integer.valueOf(error.getNode().offset() + error.getNode().length()));
 		map.put(IMarker.MESSAGE, error.getMessage());
 		map.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 		return map;
@@ -51,7 +51,7 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 	public void modelChanged(XtextEditorModelChangeEvent event) {
 		XtextMarkerManager.clearXtextMarker(resource, monitor);
 		if (event.getModel() != null && event.getModel().hasErrors()) {
-			for (IParseError error : event.getModel().getErrors()) {
+			for (SyntaxError error : event.getModel().getSyntaxErrors()) {
 				XtextMarkerManager.createMarker(resource, collectMarkerAttributes(error), monitor);
 			}
 		}

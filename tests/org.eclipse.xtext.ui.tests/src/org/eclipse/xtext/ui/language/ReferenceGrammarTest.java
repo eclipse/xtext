@@ -12,8 +12,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.IElementFactory;
-import org.eclipse.xtext.parser.IParseError;
-import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -57,12 +55,7 @@ public class ReferenceGrammarTest extends AbstractServiceTest {
 		IParser parser = ServiceRegistry.getService(getDefaultTestLanguage(), IParser.class);
 		IElementFactory elementFactory = ServiceRegistry.getService(getDefaultTestLanguage(), IElementFactory.class);
 		String badGrammar = "spielplatz ";
-		IParseResult badParseResult = parser.parse(new StringInputStream(badGrammar), elementFactory,
-				new IParseErrorHandler() {
-					public void handleParserError(IParseError error) {
-						System.out.println("ReferenceGrammarTest#.handleParserError(): " + error.getMessage());
-					}
-				});
+		IParseResult badParseResult = parser.parse(new StringInputStream(badGrammar), elementFactory);
 		assertNotNull(badParseResult);
 		assertNotNull(badParseResult.getRootNode());
 		assertNull(badParseResult.getRootASTElement());

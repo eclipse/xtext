@@ -76,6 +76,7 @@ public class EditorTest extends TestCase {
 		openedEditor.selectAndReveal(5, 0);
 		sleep(STEP_DELAY);
 		waitForJobCompletion();
+		fail("Currently broken. Please try again later.");
 		caAction.run();
 		sleep(STEP_DELAY);
 		// TODO test implementation

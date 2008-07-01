@@ -12,9 +12,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ISynchronizable;
 import org.eclipse.jface.text.source.IAnnotationModel;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.TextFileDocumentProvider;
 import org.eclipse.ui.texteditor.IDocumentProvider;
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.ServiceRegistry;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -57,7 +60,8 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 
 		XtextFileInfo xtextFileInfo = (XtextFileInfo) info;
 		IAnnotationModel annotationModel = xtextFileInfo.fTextFileBuffer.getAnnotationModel();
-
+		IResourceFactory resourceFactory = ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
+		//resourceFactory.createResource((((IFileEditorInput)element).getFile()).getLocationURI());
 		IDocument document = info.fTextFileBuffer.getDocument();
 
 		IEditorModel xtextEditorModel = createXtextEditorModel(element, document, annotationModel);

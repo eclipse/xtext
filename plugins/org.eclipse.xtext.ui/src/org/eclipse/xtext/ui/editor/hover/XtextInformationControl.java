@@ -40,7 +40,7 @@ final class XtextInformationControl extends AbstractInformationControl implement
 	private StyledText st = null;
 	private boolean enableScrollbars;
 	private IHoverInfo hoverInfo;
-	private String placeholder = "\uFFFC";
+	private static final String OBJECT_PLACEHOLDER = "\uFFFC";
 
 	// Image disposition handled by LabelProvider
 	private Map<Integer, Image> images = new HashMap<Integer, Image>();
@@ -172,10 +172,10 @@ final class XtextInformationControl extends AbstractInformationControl implement
 	public void addImage(Image image, int offset) {
 		if (offset >= 0) {
 			images.put(offset, image);
-			st.replaceTextRange(offset, 0, placeholder);
+			st.replaceTextRange(offset, 0, OBJECT_PLACEHOLDER);
 			StyleRange style = new StyleRange();
 			style.start = offset;
-			style.length = placeholder.length();
+			style.length = OBJECT_PLACEHOLDER.length();
 			Rectangle rect = image.getBounds();
 			style.metrics = new GlyphMetrics(rect.height + 4, 0, rect.width + 4);
 			st.setStyleRange(style);
@@ -200,8 +200,7 @@ final class XtextInformationControl extends AbstractInformationControl implement
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.eclipse.xtext.ui.service.IHoverInfo.IContentContainer#appendText
+	 * @see org.eclipse.xtext.ui.service.IHoverInfo.IContentContainer#appendText
 	 * (org.eclipse.jface.viewers.StyledString)
 	 */
 	public void appendText(StyledString text) {
