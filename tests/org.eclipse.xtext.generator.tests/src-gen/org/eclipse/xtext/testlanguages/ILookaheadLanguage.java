@@ -14,5 +14,6 @@ public interface ILookaheadLanguage {
 	public static final String ID = "org.eclipse.xtext.testlanguages.LookaheadLanguage";
 	public static final String NAME = "LookaheadLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.testlanguages";
+	public static final String[] FILE_EXTENSIONS = new String[]{"lookaheadlanguage"};
 	
 }

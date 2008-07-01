@@ -14,5 +14,6 @@ public interface IDummyLanguage {
 	public static final String ID = "org.eclipse.xtext.dummy.DummyLanguage";
 	public static final String NAME = "DummyLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.dummy";
+	public static final String[] FILE_EXTENSIONS = new String[]{"dummylanguage"};
 	
 }

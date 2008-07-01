@@ -14,5 +14,6 @@ public interface IComplexReconstrTest {
 	public static final String ID = "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest";
 	public static final String NAME = "ComplexReconstrTest";
 	public static final String NAMESPACE = "org.eclipse.xtext.parsetree.reconstr";
+	public static final String[] FILE_EXTENSIONS = new String[]{"complexreconstrtest"};
 	
 }

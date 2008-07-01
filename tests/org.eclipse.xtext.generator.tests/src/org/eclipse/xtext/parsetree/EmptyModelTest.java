@@ -4,6 +4,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.testlanguages.OptionalEmptyLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.util.StringInputStream;
 
 public class EmptyModelTest extends AbstractGeneratorTest {
 	
@@ -26,7 +27,7 @@ public class EmptyModelTest extends AbstractGeneratorTest {
 	}
 
     private void assertEmptyModel(String model) throws Exception {
-        IParseResult parseResult = parse(model);
+        IParseResult parseResult = getResource(new StringInputStream(model)).getParseResult();
 	    assertNull(parseResult.getRootASTElement());
 	    CompositeNode rootNode = parseResult.getRootNode();
         assertNotNull(rootNode);

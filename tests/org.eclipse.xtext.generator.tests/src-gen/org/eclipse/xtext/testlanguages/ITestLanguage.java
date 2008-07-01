@@ -14,5 +14,6 @@ public interface ITestLanguage {
 	public static final String ID = "org.eclipse.xtext.testlanguages.TestLanguage";
 	public static final String NAME = "TestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.testlanguages";
+	public static final String[] FILE_EXTENSIONS = new String[]{"testlanguage"};
 	
 }

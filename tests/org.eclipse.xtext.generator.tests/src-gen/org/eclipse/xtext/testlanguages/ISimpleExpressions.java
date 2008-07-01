@@ -14,5 +14,6 @@ public interface ISimpleExpressions {
 	public static final String ID = "org.eclipse.xtext.testlanguages.SimpleExpressions";
 	public static final String NAME = "SimpleExpressions";
 	public static final String NAMESPACE = "org.eclipse.xtext.testlanguages";
+	public static final String[] FILE_EXTENSIONS = new String[]{"simpleexpressions"};
 	
 }
