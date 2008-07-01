@@ -45,7 +45,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 	private void partiallyParseAndCompare(CompositeNode rootNode, int offset, int length) throws Exception {
 		PartialParsingPointers parsingPointers = PartialParsingUtil.calculatePartialParsingPointers(rootNode, offset, length);
 		String entryRuleName = parsingPointers.findEntryRuleName();
-		IParseResult parseResult = getParser().parse(entryRuleName, new StringInputStream(parsingPointers.findReparseRegion()));
+		IParseResult parseResult = ((AbstractParser) getParser()).parse(entryRuleName, new StringInputStream(parsingPointers.findReparseRegion()), null);
 		comparator.assertSameStructure(parsingPointers.getDefaultReplaceRootNode(), parseResult.getRootNode());
 		comparator.assertSameStructure(parsingPointers.findASTReplaceElement(), parseResult.getRootASTElement());
 		assertEquals(parsingPointers.getDefaultReplaceRootNode().serialize(), parseResult.getRootNode().serialize());

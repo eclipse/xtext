@@ -48,6 +48,6 @@ public class SimpleExpressionsParser extends org.eclipse.xtext.parser.AbstractPa
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Addition";
+		return "Sequence";
 	}
 }
