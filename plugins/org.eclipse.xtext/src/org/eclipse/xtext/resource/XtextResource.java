@@ -51,9 +51,14 @@ public class XtextResource extends ResourceImpl {
     public IParseResult getParseResult() {
     	return parse;
     }
+    
+    public void update(int offset, int length, String change) {
+    	parser.reparse(parse.getRootNode(), offset, length, change);
+    }
 
     @Override
     protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
+    	getContents().clear();
         parse = parser.parse(inputStream, elementFactory);
         if (parse != null) {
             EObject rootElement = parse.getRootASTElement();

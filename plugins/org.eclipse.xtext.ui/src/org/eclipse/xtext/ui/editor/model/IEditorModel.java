@@ -11,6 +11,7 @@ package org.eclipse.xtext.ui.editor.model;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.service.ILanguageDescriptor;
@@ -27,21 +28,13 @@ public interface IEditorModel {
 
 	public abstract ILanguageDescriptor getLanguageDescriptor();
 
-	public abstract void reconcile();
-
 	public abstract AbstractNode getParseTreeRootNode();
 
-	public abstract AbstractNode getParseTreeRootNode(boolean doReconcile);
-
 	public abstract EObject getAstRoot();
-
-	public abstract EObject getAstRoot(boolean doReconcile);
-
-	public abstract void install();
-
-	public abstract void uninstall();
 
 	public abstract void addModelListener(IXtextEditorModelListener listener);
 
 	public abstract void removeModelListener(IXtextEditorModelListener listener);
+
+	public abstract void reconcile(IRegion partition);
 }

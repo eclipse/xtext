@@ -8,10 +8,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ISynchronizable;
 import org.eclipse.jface.text.source.IAnnotationModel;
@@ -19,8 +23,11 @@ import org.eclipse.ui.IURIEditorInput;
 import org.eclipse.ui.editors.text.TextFileDocumentProvider;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.ui.util.JdtClasspathUriResolver;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -31,10 +38,7 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 	private final ILanguageDescriptor languageDescriptor;
 
 	protected class XtextFileInfo extends FileInfo {
-		public IEditorModel xtextEditorModel;
-
-		public XtextFileInfo() {
-		}
+		public XtextEditorModel xtextEditorModel;
 	}
 
 	public XtextDocumentProvider(ILanguageDescriptor languageDescriptor) {
@@ -51,8 +55,9 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 
 	}
 
-	protected IEditorModel createXtextEditorModel(Object element, IDocument document, IAnnotationModel annotationModel) {
-		return new XtextEditorModel(document, languageDescriptor);
+	protected XtextEditorModel createXtextEditorModel(XtextResource resource, Object element2, IDocument document,
+			IAnnotationModel annotationModel) {
+		return new XtextEditorModel(resource, document, languageDescriptor);
 	}
 
 	protected FileInfo createFileInfo(Object element) throws CoreException {
@@ -63,17 +68,39 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 
 		XtextFileInfo xtextFileInfo = (XtextFileInfo) info;
 		IAnnotationModel annotationModel = xtextFileInfo.fTextFileBuffer.getAnnotationModel();
-		IResourceFactory resourceFactory = ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
 		String pathName = ((IURIEditorInput) element).getURI().toString();
-		Resource resource = resourceFactory.createResource(URI.createPlatformResourceURI(pathName, true));
+
+		//
+		XtextResourceSet rs = new XtextResourceSet();
+		IJavaProject javaProject = getIJavaProject(element);
+		if (javaProject != null) {
+			rs.setClasspathUriResolver(new JdtClasspathUriResolver());
+			rs.setClasspathURIContext(javaProject);
+		}
+		IResourceFactory service = ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
+		XtextResource resource = (XtextResource) service.createResource(URI.createPlatformResourceURI(pathName, true));
+		rs.getResources().add(resource);
+//		TODO : generate EMF resource factory extension
+//		XtextResource resource = (XtextResource) rs.createResource(URI.createPlatformResourceURI(pathName, true));
 		Assert.isNotNull(resource);
 		IDocument document = info.fTextFileBuffer.getDocument();
 
-		IEditorModel xtextEditorModel = createXtextEditorModel(element, document, annotationModel);
+		XtextEditorModel xtextEditorModel = createXtextEditorModel(resource, element, document, annotationModel);
 		xtextEditorModel.install();
 		xtextFileInfo.xtextEditorModel = xtextEditorModel;
 
 		return xtextFileInfo;
+	}
+
+	private IJavaProject getIJavaProject(Object element) {
+		if (!(element instanceof IAdaptable))
+			return null;
+		IAdaptable adaptable = (IAdaptable) element;
+		IFile f = (IFile) adaptable.getAdapter(IFile.class);
+		if (f != null) {
+			return JavaCore.create(f).getJavaProject();
+		}
+		return null;
 	}
 
 	protected void disposeFileInfo(Object element, FileInfo info) {
@@ -84,15 +111,13 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 				Object lock = null;
 				if (doc instanceof ISynchronizable) {
 					lock = ((ISynchronizable) doc).getLockObject();
-				}
-				else {
+				} else {
 					lock = xtextFileInfo.xtextEditorModel;
 				}
 				xtextFileInfo.xtextEditorModel.uninstall();
 				if (lock == null) {
 					xtextFileInfo.xtextEditorModel = null;
-				}
-				else {
+				} else {
 					synchronized (lock) {
 						xtextFileInfo.xtextEditorModel = null;
 					}

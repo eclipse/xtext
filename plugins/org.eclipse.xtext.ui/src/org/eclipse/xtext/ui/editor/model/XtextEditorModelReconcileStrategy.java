@@ -25,19 +25,15 @@ public class XtextEditorModelReconcileStrategy implements IReconcilingStrategy {
 		this.editorModelProvider = editorModelProvider;
 	}
 
-	private void internalReconcile() {
+	public void reconcile(IRegion partition) {
 		IEditorModel model = editorModelProvider.getModel();
 		if (model != null) {
-			model.reconcile();
+			model.reconcile(partition);
 		}
 	}
 
-	public void reconcile(IRegion partition) {
-		internalReconcile();
-	}
-
 	public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion) {
-		internalReconcile();
+		reconcile(subRegion);
 	}
 
 	public void setDocument(IDocument document) {
