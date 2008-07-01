@@ -35,8 +35,8 @@ import org.eclipse.xtext.ui.editor.formatting.XtextFormattingStrategy;
 import org.eclipse.xtext.ui.editor.hover.XtextTextHover;
 import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.editor.model.XtextEditorModelReconcileStrategy;
-import org.eclipse.xtext.ui.service.IFormatterService;
-import org.eclipse.xtext.ui.service.ILabelProvider;
+import org.eclipse.xtext.ui.service.IFormatter;
+import org.eclipse.xtext.ui.service.IHoverInfo;
 import org.eclipse.xtext.ui.service.IProposalsProvider;
 
 /**
@@ -114,20 +114,22 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	 */
 	@Override
 	public IContentFormatter getContentFormatter(ISourceViewer sourceViewer) {
-		IFormatterService service = ServiceRegistry.getService(languageDescriptor, IFormatterService.class);
+		IFormatter service = ServiceRegistry.getService(languageDescriptor, IFormatter.class);
 		if (service != null) {
 			MultiPassContentFormatter formatter = new MultiPassContentFormatter(
 					getConfiguredDocumentPartitioning(sourceViewer), IDocument.DEFAULT_CONTENT_TYPE);
 			formatter.setMasterStrategy(new XtextFormattingStrategy(this.editorModelProvider, service));
 			return formatter;
 		}
-		else
-			return null;
+		return null;
 	}
 
 	@Override
 	public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
-		return new XtextTextHover(sourceViewer, editorModelProvider, ServiceRegistry.getService(languageDescriptor,
-				ILabelProvider.class));
+		IHoverInfo service = ServiceRegistry.getService(languageDescriptor, IHoverInfo.class);
+		if (service != null) {
+			return new XtextTextHover(sourceViewer, editorModelProvider, service);
+		}
+		return super.getTextHover(sourceViewer, contentType);
 	}
 }

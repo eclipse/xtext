@@ -16,6 +16,7 @@
    <extension-point id="outlineProvider" name="Xtext Outline Content Provider" schema="schema/outlineProvider.exsd"/>
    <extension-point id="labelProvider" name="Xtext Label Provider" schema="schema/labelProvider.exsd"/>
    <extension-point id="formatter" name="Xtext Formatter" schema="schema/formatter.exsd"/>
+   <extension-point id="hoverInfo" name="Xtext Hover Info" schema="schema/hoverInfo.exsd"/>
    <extension
          id="org.eclipse.xtext.ui.problemmarker"
          name="Xtext Editor Problem Marker"
@@ -88,7 +89,7 @@
    <extension
          point="org.eclipse.xtext.ui.tokenTypeDef">
       <tokenTypeDef
-            class="org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef"
+            class="org.eclipse.xtext.ui.service.impl.BuildInTokenTypeDef"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </tokenTypeDef>
    </extension>
@@ -123,8 +124,15 @@
    <extension
          point="org.eclipse.xtext.ui.formatter">
       <formatter
-            class="org.eclipse.xtext.ui.service.impl.BuildInFormatterService"
+            class="org.eclipse.xtext.ui.service.impl.BuildInFormatter"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </formatter>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.hoverInfo">
+      <hoverInfo
+            class="org.eclipse.xtext.ui.service.impl.BuildInHoverInfo"
+            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
+      </hoverInfo>
    </extension>
 </plugin>

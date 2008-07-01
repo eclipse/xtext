@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui;
 
-import org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef;
+import org.eclipse.xtext.ui.service.impl.BuildInTokenTypeDef;
 
 /**
  * @author Dennis Hübner - Initial contribution and API

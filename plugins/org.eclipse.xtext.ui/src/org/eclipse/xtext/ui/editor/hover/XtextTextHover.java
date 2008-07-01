@@ -20,8 +20,7 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
-import org.eclipse.xtext.ui.service.IHoverService;
-import org.eclipse.xtext.ui.service.ILabelProvider;
+import org.eclipse.xtext.ui.service.IHoverInfo;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -33,19 +32,16 @@ public class XtextTextHover extends DefaultTextHover implements ITextHoverExtens
 	 */
 	private IEditorModelProvider editorModelProvider;
 
-	private IHoverService hoverService;
+	private IHoverInfo hoverInfo;
 
 	/**
 	 * @param sourceViewer
 	 * @param editorModelProvider
 	 */
-	public XtextTextHover(ISourceViewer sourceViewer, IEditorModelProvider editorModelProvider,
-			final ILabelProvider labelProvider) {
+	public XtextTextHover(ISourceViewer sourceViewer, IEditorModelProvider editorModelProvider, IHoverInfo hoverInfo) {
 		super(sourceViewer);
 		this.editorModelProvider = editorModelProvider;
-		this.hoverService = new BuildInHoverService();
-		((BuildInHoverService) this.hoverService).setLabelProvider(labelProvider);
-
+		this.hoverInfo = hoverInfo;
 	}
 
 	/*
@@ -54,7 +50,7 @@ public class XtextTextHover extends DefaultTextHover implements ITextHoverExtens
 	public IInformationControlCreator getHoverControlCreator() {
 		return new IInformationControlCreator() {
 			public IInformationControl createInformationControl(Shell parent) {
-				return new XtextInformationControl(parent, EditorsUI.getTooltipAffordanceString(), hoverService);
+				return new XtextInformationControl(parent, EditorsUI.getTooltipAffordanceString(), hoverInfo);
 			}
 		};
 	}
@@ -72,7 +68,7 @@ public class XtextTextHover extends DefaultTextHover implements ITextHoverExtens
 	 * .jface.text.ITextViewer, org.eclipse.jface.text.IRegion)
 	 */
 	public Object getHoverInfo2(ITextViewer textViewer, IRegion hoverRegion) {
-		return hoverService.getHoverInfo(textViewer, hoverRegion.getOffset(), editorModelProvider);
+		return hoverInfo.getHoverInfo(textViewer, hoverRegion.getOffset(), editorModelProvider);
 	}
 
 }

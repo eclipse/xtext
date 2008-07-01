@@ -1,6 +1,6 @@
-package org.eclipse.xtext.ui.service;
+package org.eclipse.xtext.ui.service.utils;
 
-import static org.eclipse.xtext.ui.service.GenericRegisteredServiceFactory.getConfigurationElement;
+import static org.eclipse.xtext.ui.service.utils.GenericRegisteredServiceFactory.getConfigurationElement;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +24,15 @@ import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.CoreLog;
-import org.eclipse.xtext.ui.service.LanguageDescriptorHierarchyUtil.LanguageDescriptorDescriptor;
+import org.eclipse.xtext.ui.service.IFormatter;
+import org.eclipse.xtext.ui.service.IHoverInfo;
+import org.eclipse.xtext.ui.service.ILabelProvider;
+import org.eclipse.xtext.ui.service.IOutlineProvider;
+import org.eclipse.xtext.ui.service.IPreferenceStore;
+import org.eclipse.xtext.ui.service.IProposalsProvider;
+import org.eclipse.xtext.ui.service.ISyntaxColorer;
+import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
+import org.eclipse.xtext.ui.service.utils.LanguageDescriptorHierarchyUtil.LanguageDescriptorDescriptor;
 
 public class LanguageServiceActivator {
 
@@ -40,17 +48,18 @@ public class LanguageServiceActivator {
 		serviceMap.put("parser", IParser.class);
 		serviceMap.put("aSTFactory", IElementFactory.class);
 		serviceMap.put("parseTreeConstructor", IParseTreeConstructor.class);
-		serviceMap.put("preferenceStore", IPreferenceStoreService.class);
+		serviceMap.put("preferenceStore", IPreferenceStore.class);
 		serviceMap.put("proposalsProvider", IProposalsProvider.class);
 		serviceMap.put("syntaxColorer", ISyntaxColorer.class);
 		serviceMap.put("grammarAccess", IGrammarAccess.class);
 		serviceMap.put("resourceFactory", IResourceFactory.class);
 		serviceMap.put("metamodelAccess", IMetamodelAccess.class);
-		serviceMap.put("tokenTypeDef", ITokenTypeDefService.class);
+		serviceMap.put("tokenTypeDef", ITokenTypeDefProvider.class);
 		serviceMap.put("valueConverter", IValueConverterService.class);
 		serviceMap.put("labelProvider", ILabelProvider.class);
 		serviceMap.put("outlineProvider", IOutlineProvider.class);
-		serviceMap.put("formatter", IFormatterService.class);
+		serviceMap.put("formatter", IFormatter.class);
+		serviceMap.put("hoverInfo", IHoverInfo.class);
 	}
 
 	public static void activateServices() {

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.hover;
+package org.eclipse.xtext.ui.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +29,14 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.editor.utils.EditorModelUtil;
-import org.eclipse.xtext.ui.service.IHoverService;
+import org.eclipse.xtext.ui.service.IHoverInfo;
 import org.eclipse.xtext.ui.service.ILabelProvider;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class BuildInHoverService implements IHoverService {
+public class BuildInHoverInfo implements IHoverInfo {
 	private ILabelProvider labelProvider;
 
 	public void createContents(EObject input, IContentContainer contentContainer) {
@@ -45,7 +45,7 @@ public class BuildInHoverService implements IHoverService {
 
 		StyledString ss = labelProvider.getLabel(input);
 		String additionalInfo = getAdditionalInfo(input);
-		System.out.println("BuildInHoverService.createContents()" + additionalInfo);
+		System.out.println("BuildInHoverInfo.createContents()" + additionalInfo);
 		ss.append("\n" + "\t\t\t" + additionalInfo);
 		contentContainer.appendText(ss);
 

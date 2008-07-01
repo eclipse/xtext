@@ -12,15 +12,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.service.IFormatterService;
-import org.eclipse.xtext.ui.service.impl.BuildInFormatterService;
-import org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef;
+import org.eclipse.xtext.ui.service.IFormatter;
+import org.eclipse.xtext.ui.service.impl.BuildInFormatter;
+import org.eclipse.xtext.ui.service.impl.BuildInTokenTypeDef;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class XtextFormatter extends BuildInFormatterService implements IFormatterService {
+public class XtextFormatter extends BuildInFormatter implements IFormatter {
 	@Override
 	protected boolean shouldIndent(AbstractNode node) {
 		return super.shouldIndent(node);

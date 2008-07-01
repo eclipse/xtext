@@ -9,14 +9,14 @@
 package org.eclipse.xtext.reference.ui.services;
 
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.service.IFormatterService;
-import org.eclipse.xtext.ui.service.impl.BuildInFormatterService;
+import org.eclipse.xtext.ui.service.IFormatter;
+import org.eclipse.xtext.ui.service.impl.BuildInFormatter;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class ReferenceFormatter extends BuildInFormatterService implements IFormatterService {
+public class ReferenceFormatter extends BuildInFormatter implements IFormatter {
 	@Override
 	protected String before(LeafNode leafNode) {
 		ReferenceTokenTypeDef rttd = new ReferenceTokenTypeDef();

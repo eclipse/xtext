@@ -8,13 +8,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.service;
 
-import org.eclipse.jface.preference.IPersistentPreferenceStore;
+import java.util.List;
+
 import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public interface IPreferenceStoreService extends ILanguageService {
-	IPersistentPreferenceStore getPersitablePreferenceStore();
+public interface ITokenTypeDefProvider extends ILanguageService {
+	// TODO discuss whether we bind this service with syntaxcolorer
+	List<ITokenTypeDef> allTokenTypes();
 }

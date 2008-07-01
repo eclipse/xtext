@@ -27,7 +27,7 @@
    <extension
          point="org.eclipse.xtext.ui.tests.testExtensionPoint" id="myid">
       <test
-            class="org.eclipse.xtext.ui.service.XtextServiceExtensionFactory:org.eclipse.xtext.ui.services.bearing.SampleServiceDependentClass/org.eclipse.xtext.reference.ReferenceGrammar">
+            class="org.eclipse.xtext.ui.service.utils.XtextServiceExtensionFactory:org.eclipse.xtext.ui.services.bearing.SampleServiceDependentClass/org.eclipse.xtext.reference.ReferenceGrammar">
       </test>
    </extension>
 </plugin>

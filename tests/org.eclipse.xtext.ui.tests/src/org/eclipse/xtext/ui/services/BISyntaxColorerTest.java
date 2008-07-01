@@ -18,7 +18,7 @@ import org.eclipse.xtext.ui.AbstractEasyMockTest;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.service.impl.BuildInPreferenceStore;
 import org.eclipse.xtext.ui.service.impl.BuildInSyntaxColorer;
-import org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef;
+import org.eclipse.xtext.ui.service.impl.BuildInTokenTypeDef;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -40,8 +40,8 @@ public class BISyntaxColorerTest extends AbstractEasyMockTest {
 		final IPersistentPreferenceStore persistablePrefStore = createMock(IPersistentPreferenceStore.class);
 
 		colorer.setLanguageDescriptor(languageDescriptorMock);
-		colorer.setTokenTypeDefService(new BuildInTokenTypeDef());
-		colorer.setPreferenceStoreService(new BuildInPreferenceStore() {
+		colorer.setTokenTypeDefProvider(new BuildInTokenTypeDef());
+		colorer.setPreferenceStore(new BuildInPreferenceStore() {
 			@Override
 			public IPersistentPreferenceStore getPersitablePreferenceStore() {
 				return persistablePrefStore;

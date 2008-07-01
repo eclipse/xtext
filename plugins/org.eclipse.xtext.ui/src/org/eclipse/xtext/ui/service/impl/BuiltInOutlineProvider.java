@@ -23,7 +23,7 @@ public class BuiltInOutlineProvider implements IOutlineProvider {
 	public Object[] getRootObjects(IEditorModel model) {
 		Assert.isNotNull(model);
 		Object astRoot = model.getAstRoot();
-		return new Object[] { astRoot };
+		return astRoot != null ? new Object[] { astRoot } : new Object[] {};
 	}
 
 	public boolean hasChildren(EObject element) {

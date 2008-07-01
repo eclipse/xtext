@@ -22,7 +22,7 @@ import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public interface IHoverService extends ILanguageService {
+public interface IHoverInfo extends ILanguageService {
 	EObject getHoverInfo(ITextViewer textViewer, int offset, IEditorModelProvider editorModelProvider);
 
 	void createContents(EObject input, IContentContainer contentContainer);

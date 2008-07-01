@@ -8,17 +8,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.service;
 
-import java.util.List;
-
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
+import org.eclipse.xtext.ui.editor.model.IEditorModel;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public interface ITokenTypeDefService extends ILanguageService {
-	// TODO discuss whether we bind this service with syntaxcolorer
-	List<ITokenTypeDef> allTokenTypes();
+public interface IFormatter extends ILanguageService {
 
+	void format(IEditorModel editorModel, IDocument document, IRegion region);
 }

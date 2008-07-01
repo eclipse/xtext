@@ -18,14 +18,13 @@ import org.eclipse.xtext.ui.editor.model.IEditorModel;
 import org.eclipse.xtext.ui.editor.utils.EditorModelUtil;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.CoreLog;
-import org.eclipse.xtext.ui.service.IFormatterService;
-import org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef;
+import org.eclipse.xtext.ui.service.IFormatter;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class BuildInFormatterService implements IFormatterService {
+public class BuildInFormatter implements IFormatter {
 
 	public static final String NEW_LINE = System.getProperty("line.separator");
 	public static final String TAB = "\t";
@@ -69,7 +68,7 @@ public class BuildInFormatterService implements IFormatterService {
 			}
 			Region retVal = new Region(an.offset(), an.length());
 			if (Activator.DEBUG_FORMATTER)
-				System.out.println("BuildInFormatterService.calculateFormattingRegion(): From: " + region + " to "
+				System.out.println("BuildInFormatter.calculateFormattingRegion(): From: " + region + " to "
 						+ retVal + ". Node:" + an);
 			return retVal;
 		}
