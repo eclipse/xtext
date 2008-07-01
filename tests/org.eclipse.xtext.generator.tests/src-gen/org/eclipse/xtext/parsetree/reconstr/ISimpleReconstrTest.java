@@ -14,5 +14,6 @@ public interface ISimpleReconstrTest {
 	public static final String ID = "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest";
 	public static final String NAME = "SimpleReconstrTest";
 	public static final String NAMESPACE = "org.eclipse.xtext.parsetree.reconstr";
+	public static final String[] FILE_EXTENSIONS = new String[]{"simplereconstrtest"};
 	
 }

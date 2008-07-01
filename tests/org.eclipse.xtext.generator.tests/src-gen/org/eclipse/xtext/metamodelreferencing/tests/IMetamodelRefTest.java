@@ -14,5 +14,6 @@ public interface IMetamodelRefTest {
 	public static final String ID = "org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest";
 	public static final String NAME = "MetamodelRefTest";
 	public static final String NAMESPACE = "org.eclipse.xtext.metamodelreferencing.tests";
+	public static final String[] FILE_EXTENSIONS = new String[]{"metamodelreftest"};
 	
 }

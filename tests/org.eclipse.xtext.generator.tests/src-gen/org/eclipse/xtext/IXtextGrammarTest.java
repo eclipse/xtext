@@ -14,5 +14,6 @@ public interface IXtextGrammarTest {
 	public static final String ID = "org.eclipse.xtext.XtextGrammarTest";
 	public static final String NAME = "XtextGrammarTest";
 	public static final String NAMESPACE = "org.eclipse.xtext";
+	public static final String[] FILE_EXTENSIONS = new String[]{"xtextgrammartest"};
 	
 }

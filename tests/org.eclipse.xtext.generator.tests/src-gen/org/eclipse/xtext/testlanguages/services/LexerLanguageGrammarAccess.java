@@ -4,9 +4,7 @@ Generated with Xtext
 
 package org.eclipse.xtext.testlanguages.services;
 
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class LexerLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
@@ -27,5 +25,11 @@ public class LexerLanguageGrammarAccess extends BaseEPackageAccess implements IG
 	public String getGrammarClasspathURI() {
 		return LEXERLANGUAGE_GRAMMAR_CP_URI;
 	}
+	
+	
+	public LexerRule getSTRING() {
+		return (LexerRule) getGrammar().eResource().getEObject("//@lexerRules.0"); 
+	}
+
    
 }

@@ -33,6 +33,7 @@ public interface «languageInterfaceFQName.toSimpleName()» {
 	public static final String ID = "«grammar().getId()»";
 	public static final String NAME = "«grammar().getName()»";
 	public static final String NAMESPACE = "«grammar().getNamespace()»";
+	public static final String[] FILE_EXTENSIONS = new String[]{«modelFileExtensions().collect(e|'"'+e+'"').toString(",")»};
 	
 }
 «ENDFILE»

@@ -4,9 +4,7 @@ Generated with Xtext
 
 package org.eclipse.xtext.parsetree.reconstr.services;
 
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class SimpleReconstrTestGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
@@ -27,5 +25,7 @@ public class SimpleReconstrTestGrammarAccess extends BaseEPackageAccess implemen
 	public String getGrammarClasspathURI() {
 		return SIMPLERECONSTRTEST_GRAMMAR_CP_URI;
 	}
+	
+	
    
 }

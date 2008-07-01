@@ -23,9 +23,7 @@
 
 package «genClassFQName.toJavaPackage()»;
 
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class «genClassFQName.toSimpleName()» extends BaseEPackageAccess implements IGrammarAccess {
@@ -46,7 +44,15 @@ public class «genClassFQName.toSimpleName()» extends BaseEPackageAccess implemen
 	public String getGrammarClasspathURI() {
 		return «languageName().toUpperCase()»_GRAMMAR_CP_URI;
 	}
+	
+	«EXPAND getter FOREACH grammar().lexerRules»
    
 }
 «ENDFILE»
+«ENDDEFINE»
+
+«DEFINE getter FOR LexerRule»
+	public LexerRule get«name»() {
+		return (LexerRule) getGrammar().eResource().getEObject("«getFragment()»"); 
+	}
 «ENDDEFINE»

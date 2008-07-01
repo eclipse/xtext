@@ -4,9 +4,7 @@ Generated with Xtext
 
 package org.eclipse.xtext.testlanguages.services;
 
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
@@ -27,5 +25,7 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 	public String getGrammarClasspathURI() {
 		return TESTLANGUAGE_GRAMMAR_CP_URI;
 	}
+	
+	
    
 }
