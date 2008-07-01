@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.SyntaxError;
 
 /**
  * The result of a parsing operation.
@@ -22,12 +23,10 @@ public class ParseResult implements IParseResult {
 
     private EObject rootAstElement;
     private CompositeNode rootNode;
-	private List<IParseError> parseErrors;
     
-    public ParseResult(EObject rootAstElement, CompositeNode rootNode, List<IParseError> parseErrors) {
+    public ParseResult(EObject rootAstElement, CompositeNode rootNode) {
         this.rootAstElement = rootAstElement;
         this.rootNode = rootNode;
-        this.parseErrors = parseErrors;
     }
     
     public ParseResult() {
@@ -48,9 +47,10 @@ public class ParseResult implements IParseResult {
     public CompositeNode getRootNode() {
         return rootNode;
     }
-    
-    public List<IParseError> getParseErrors() {
-    	return parseErrors;
-    }
 
+	public List<SyntaxError> getParseErrors() {
+		//TODO performance?
+		return rootNode.allSyntaxErrors();
+	}
+    
 }

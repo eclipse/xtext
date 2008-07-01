@@ -16,20 +16,12 @@ package org.eclipse.xtext.parser;
 @SuppressWarnings("serial")
 public class ParseException extends RuntimeException {
 
-	private IParseError error;
-
-	public ParseException(IParseError error) {
-		if (error==null)
-			throw new NullPointerException();
-		this.error = error;
+	public ParseException(String message) {
+		super(message);
 	}
 
-	public IParseError getParseError() {
-		return error;
+	public ParseException(String message, Exception re) {
+		super(message,re);
 	}
-	
-	@Override
-	public String getMessage() {
-		return this.error.getMessage();
-	}
+
 }

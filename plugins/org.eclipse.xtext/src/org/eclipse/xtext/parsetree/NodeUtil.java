@@ -104,4 +104,5 @@ public class NodeUtil {
         System.out.println(indent + node.getLookahead() + " " + node.getLookaheadConsumed() + " " + name + " : " + node.serialize()
                 + " -> " + astElementAsString);
     }
+    
 }

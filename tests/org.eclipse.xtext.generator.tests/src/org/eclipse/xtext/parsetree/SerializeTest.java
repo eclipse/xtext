@@ -1,7 +1,5 @@
 package org.eclipse.xtext.parsetree;
 
-import org.eclipse.xtext.parser.IParseError;
-import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -27,10 +25,7 @@ public class SerializeTest extends AbstractGeneratorTest {
 	}
 	
 	private void checkSerialize(String model) throws Exception {
-		CompositeNode node = getRootNode(model, new IParseErrorHandler(){
-			public void handleParserError(IParseError err) {
-				System.out.println(err.getMessage());
-			}});
+		CompositeNode node = getRootNode(model);
 		String serialize = node.serialize();
 		assertEquals(model, serialize);
 	}

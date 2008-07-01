@@ -14,7 +14,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.antlr.runtime.BitSet;
-import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.IntStream;
 import org.antlr.runtime.Parser;
 import org.antlr.runtime.RecognitionException;
@@ -25,330 +24,330 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parser.IElementFactory;
-import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.ParseResult;
-import org.eclipse.xtext.parser.impl.ParseError;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeAdapterFactory;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
+import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.util.Strings;
 
 public abstract class AbstractAntlrParser extends Parser {
 
-    private static Log log = LogFactory.getLog(AbstractAntlrParser.class);
+	private static Log log = LogFactory.getLog(AbstractAntlrParser.class);
 
-    protected CompositeNode currentNode;
+	protected CompositeNode currentNode;
 
-    protected org.eclipse.xtext.Grammar grammar;
+	protected org.eclipse.xtext.Grammar grammar;
 
-    protected IElementFactory factory;
+	protected IElementFactory factory;
 
-    protected List<IParseError> parseErrors;
+	protected int lastConsumedIndex = -1;
 
-    protected int lastConsumedIndex = -1;
+	protected AbstractAntlrParser(TokenStream input) {
+		super(input);
+	}
 
-    protected AbstractAntlrParser(TokenStream input) {
-        super(input);
-    }
+	public TokenStream getInput() {
+		return input;
+	}
 
-    public TokenStream getInput() {
-        return input;
-    }
+	protected CompositeNode getCurrentNode() {
+		return currentNode;
+	}
 
-    protected CompositeNode getCurrentNode() {
-        return currentNode;
-    }
+	protected void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
+		if (node.getElement() != null && node.getElement() != astElement) {
+			throw new ParseException("Reassignment of astElement in parse tree node");
+		}
+		node.setElement(astElement);
+		if (astElement instanceof EObject) {
+			EObject eObject = (EObject) astElement;
+			NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
+			adapter.setParserNode(node);
+		}
+	}
 
-    protected void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
-        if (node.getElement() != null && node.getElement() != astElement) {
-            throw new ParseException(new ParseError(node, "Reassignment of astElement in parse tree node", null));
-        }
-        node.setElement(astElement);
-        if (astElement instanceof EObject) {
-            EObject eObject = (EObject) astElement;
-            NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
-            adapter.setParserNode(node);
-        }
-    }
+	protected Object createLeafNode(String grammarElementID, CompositeNode parentNode, String feature) {
+		Token token = input.LT(-1);
+		if (token.getTokenIndex() > lastConsumedIndex) {
+			int indexOfTokenBefore = lastConsumedIndex;
+			if (indexOfTokenBefore + 1 < token.getTokenIndex()) {
+				for (int x = indexOfTokenBefore + 1; x < token.getTokenIndex(); x++) {
+					Token hidden = input.get(x);
+					LeafNode leafNode = createLeafNode(isSemanticChannel(hidden));
+					leafNode.setText(hidden.getText());
+					leafNode.setHidden(true);
+					setLexerRule(leafNode, hidden);
+					parentNode.getChildren().add(leafNode);
+				}
+			}
+			LeafNode leafNode = createLeafNode(isSemanticChannel(token));
+			leafNode.setText(token.getText());
+			leafNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
+			leafNode.setFeature(feature);
+			parentNode.getChildren().add(leafNode);
+			lastConsumedIndex = token.getTokenIndex();
+			((XtextTokenStream) input).consumeLookahead();
+			// ((XtextTokenStream) input).decrementLookahead();
+			return leafNode;
+		}
+		return null;
+	}
 
-    protected Object createLeafNode(String grammarElementID, CompositeNode parentNode, String feature) {
-        Token token = input.LT(-1);
-        if (token.getTokenIndex() > lastConsumedIndex) {
-            int indexOfTokenBefore = lastConsumedIndex;
-            if (indexOfTokenBefore + 1 < token.getTokenIndex()) {
-                for (int x = indexOfTokenBefore + 1; x < token.getTokenIndex(); x++) {
-                    Token hidden = input.get(x);
-                    LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-                    leafNode.setText(hidden.getText());
-                    leafNode.setHidden(true);
-                    setLexerRule(leafNode, hidden);
-                    parentNode.getChildren().add(leafNode);
-                }
-            }
-            LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-            leafNode.setText(token.getText());
-            leafNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
-            leafNode.setFeature(feature);
-            parentNode.getChildren().add(leafNode);
-            lastConsumedIndex = token.getTokenIndex();
-            ((XtextTokenStream) input).consumeLookahead();
-           // ((XtextTokenStream) input).decrementLookahead();
-            return leafNode;
-        }
-        return null;
-    }
+	private Map<Integer, String> antlrTypeToLexerName = null;
 
-    private Map<Integer, String> antlrTypeToLexerName = null;
+	public Map<Integer, String> getTokenTypeMap() {
+		if (antlrTypeToLexerName == null) {
+			try {
+				antlrTypeToLexerName = new HashMap<Integer, String>();
+				BufferedReader br = new BufferedReader(new InputStreamReader(getTokenFile()));
+				String line = br.readLine();
+				Pattern pattern = Pattern.compile("(.*)=(\\d+)");
+				while (line != null) {
+					Matcher m = pattern.matcher(line);
+					if (!m.matches()) {
+						throw new IllegalStateException("Couldn't match line : '" + line + "'");
+					}
 
-    public Map<Integer, String> getTokenTypeMap() {
-        if (antlrTypeToLexerName == null) {
-            try {
-                antlrTypeToLexerName = new HashMap<Integer, String>();
-                BufferedReader br = new BufferedReader(new InputStreamReader(getTokenFile()));
-                String line = br.readLine();
-                Pattern pattern = Pattern.compile("(.*)=(\\d+)");
-                while (line != null) {
-                    Matcher m = pattern.matcher(line);
-                    if (!m.matches()) {
-                        throw new IllegalStateException("Couldn't match line : '" + line + "'");
-                    }
+					String tokenTypeId = m.group(2);
+					String token = m.group(1);
+					String prefix = "RULE_";
+					if (token.startsWith(prefix))
+						antlrTypeToLexerName.put(Integer.parseInt(tokenTypeId), token.substring(prefix.length()));
+					line = br.readLine();
+				}
+			} catch (IOException e) {
+				log.error(e);
+				throw new WrappedException(e);
+			}
+		}
+		return antlrTypeToLexerName;
+	}
 
-                    String tokenTypeId = m.group(2);
-                    String token = m.group(1);
-                    String prefix = "RULE_";
-                    if (token.startsWith(prefix))
-                        antlrTypeToLexerName.put(Integer.parseInt(tokenTypeId), token.substring(prefix.length()));
-                    line = br.readLine();
-                }
-            } catch (IOException e) {
-                log.error(e);
-                throw new WrappedException(e);
-            }
-        }
-        return antlrTypeToLexerName;
-    }
+	protected void setLexerRule(LeafNode leafNode, Token hidden) {
+		String ruleName = getTokenTypeMap().get(hidden.getType());
+		AbstractRule rule = GrammarUtil.findRuleForName(grammar, ruleName);
+		if (rule instanceof LexerRule) {
+			leafNode.setGrammarElement(rule);
+		}
+	}
 
-    protected void setLexerRule(LeafNode leafNode, Token hidden) {
-        String ruleName = getTokenTypeMap().get(hidden.getType());
-        AbstractRule rule = GrammarUtil.findRuleForName(grammar, ruleName);
-        if (rule instanceof LexerRule) {
-            leafNode.setGrammarElement(rule);
-        }
-    }
+	protected CompositeNode createCompositeNode(String grammarElementID, CompositeNode parentNode) {
+		CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
+		if (parentNode != null)
+			parentNode.getChildren().add(compositeNode);
+		compositeNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
+		return compositeNode;
+	}
 
-    protected CompositeNode createCompositeNode(String grammarElementID, CompositeNode parentNode) {
-        CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
-        if (parentNode != null)
-            parentNode.getChildren().add(compositeNode);
-        compositeNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
-        return compositeNode;
-    }
+	private void appendError(AbstractNode node) {
+		if (currentError != null) {
+			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
+			error.setMessage(currentError);
+			node.setSyntaxError(error);
+			currentError = null;
+		}
+	}
 
-    protected void appendAllTokens() {
-        for (int x = lastConsumedIndex + 1; input.size() > x; input.consume(), x++) {
-            Token hidden = input.get(x);
-            LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-            leafNode.setText(hidden.getText());
-            leafNode.setHidden(true);
-            setLexerRule(leafNode, hidden);
-            currentNode.getChildren().add(leafNode);
-        }
-    }
+	private LeafNode createLeafNode(boolean appendError) {
+		LeafNode ln = ParsetreeFactory.eINSTANCE.createLeafNode();
+		if (appendError)
+			appendError(ln);
+		return ln;
+	}
 
-    protected List<LeafNode> appendSkippedTokens() {
-        List<LeafNode> skipped = new ArrayList<LeafNode>();
-        Token currentToken = input.LT(-1);
-        int currentTokenIndex = (currentToken == null) ? -1 : currentToken.getTokenIndex();
-        Token tokenBefore = (lastConsumedIndex == -1) ? null : input.get(lastConsumedIndex);
-        int indexOfTokenBefore = tokenBefore != null ? tokenBefore.getTokenIndex() : -1;
-        if (indexOfTokenBefore + 1 < currentTokenIndex) {
-            for (int x = indexOfTokenBefore + 1; x < currentTokenIndex; x++) {
-                Token hidden = input.get(x);
-                LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-                leafNode.setText(hidden.getText());
-                leafNode.setHidden(true);
-                setLexerRule(leafNode, hidden);
-                currentNode.getChildren().add(leafNode);
-                skipped.add(leafNode);
-            }
-        }
-        if (lastConsumedIndex < currentTokenIndex) {
-            LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-            leafNode.setText(currentToken.getText());
-            leafNode.setHidden(true);
-            setLexerRule(leafNode, currentToken);
-            currentNode.getChildren().add(leafNode);
-            skipped.add(leafNode);
-            lastConsumedIndex = currentToken.getTokenIndex();
-        }
-        return skipped;
-    }
+	protected void appendAllTokens() {
+		for (int x = lastConsumedIndex + 1; input.size() > x; input.consume(), x++) {
+			Token hidden = input.get(x);
+			LeafNode leafNode = createLeafNode(isSemanticChannel(hidden));
+			leafNode.setText(hidden.getText());
+			leafNode.setHidden(true);
+			setLexerRule(leafNode, hidden);
+			currentNode.getChildren().add(leafNode);
+		}
+		if (currentError != null) {
+			EList<LeafNode> leafNodes = currentNode.getLeafNodes();
+			if (leafNodes.isEmpty()) {
+				appendError(currentNode);
+			} else {
+				appendError(leafNodes.get(leafNodes.size() - 1));
+			}
+		}
+	}
 
-    protected void appendTrailingHiddenTokens(CompositeNode parentNode) {
-        Token tokenBefore = input.LT(-1);
-        int size = input.size();
-        if (tokenBefore != null && tokenBefore.getTokenIndex() < size) {
-            for (int x = tokenBefore.getTokenIndex() + 1; x < size; x++) {
-                Token hidden = input.get(x);
-                LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
-                leafNode.setText(hidden.getText());
-                leafNode.setHidden(true);
-                setLexerRule(leafNode, hidden);
-                parentNode.getChildren().add(leafNode);
-                lastConsumedIndex = hidden.getTokenIndex();
-            }
-        }
-    }
+	private boolean isSemanticChannel(Token hidden) {
+		return hidden.getChannel() != HIDDEN;
+	}
 
-    protected IParseError createParseError(RecognitionException re) {
-        LeafNode ln = null;
-        if (currentNode != null) {
-            CompositeNode root = (CompositeNode) EcoreUtil.getRootContainer(currentNode);
-            List<LeafNode> list = root.getLeafNodes();
-            if (list.size() > lastErrorIndex)
-                ln = list.get(lastErrorIndex);
-        }
-        IParseError error = null;
-        if (ln == null) {
-            CommonToken lt = (CommonToken) input.LT(input.index());
-            error = new ParseError(lt.getLine(), lt.getStartIndex(), lt.getText() != null ? lt.getText().length() : 0, lt.getText(),
-                    getErrorMessage(re, getTokenNames()), re);
-        } else {
-            error = new ParseError(ln, getErrorMessage(re, getTokenNames()), re);
-        }
-        parseErrors.add(error);
-        return error;
-    }
+	protected List<LeafNode> appendSkippedTokens() {
+		List<LeafNode> skipped = new ArrayList<LeafNode>();
+		Token currentToken = input.LT(-1);
+		int currentTokenIndex = (currentToken == null) ? -1 : currentToken.getTokenIndex();
+		Token tokenBefore = (lastConsumedIndex == -1) ? null : input.get(lastConsumedIndex);
+		int indexOfTokenBefore = tokenBefore != null ? tokenBefore.getTokenIndex() : -1;
+		if (indexOfTokenBefore + 1 < currentTokenIndex) {
+			for (int x = indexOfTokenBefore + 1; x < currentTokenIndex; x++) {
+				Token hidden = input.get(x);
+				LeafNode leafNode = createLeafNode(isSemanticChannel(hidden));
+				leafNode.setText(hidden.getText());
+				leafNode.setHidden(true);
+				setLexerRule(leafNode, hidden);
+				currentNode.getChildren().add(leafNode);
+				skipped.add(leafNode);
+			}
+		}
+		if (lastConsumedIndex < currentTokenIndex) {
+			LeafNode leafNode = createLeafNode(isSemanticChannel(currentToken));
+			leafNode.setText(currentToken.getText());
+			leafNode.setHidden(true);
+			setLexerRule(leafNode, currentToken);
+			currentNode.getChildren().add(leafNode);
+			skipped.add(leafNode);
+			lastConsumedIndex = currentToken.getTokenIndex();
+		}
+		return skipped;
+	}
 
-    protected void reportError(IParseError error, RecognitionException re) {
-        reportError(re);
-    }
-    
-    @Override
-    public void recoverFromMismatchedToken(IntStream in, RecognitionException re, int ttype, BitSet follow)
-    		throws RecognitionException {
-    	IParseError error = null;
-        if (currentNode == null) {
-            CommonToken lt = (CommonToken) input.LT(input.index());
-            error = new ParseError(lt.getLine(), lt.getStartIndex(), lt.getText() != null ? lt.getText().length() : 0, lt.getText(),
-                    getErrorMessage(re, getTokenNames()), re);
-        } else {
-            EList<LeafNode> leafNodes = currentNode.getLeafNodes();
-			error = new ParseError(leafNodes.isEmpty()?currentNode:leafNodes.get(leafNodes.size()-1), getErrorMessage(re, getTokenNames()), re);
-        }
-        parseErrors.add(error);
-    	super.recoverFromMismatchedToken(in, re, ttype, follow);
-    }
+	protected void appendTrailingHiddenTokens(CompositeNode parentNode) {
+		Token tokenBefore = input.LT(-1);
+		int size = input.size();
+		if (tokenBefore != null && tokenBefore.getTokenIndex() < size) {
+			for (int x = tokenBefore.getTokenIndex() + 1; x < size; x++) {
+				Token hidden = input.get(x);
+				LeafNode leafNode = createLeafNode(isSemanticChannel(hidden));
+				leafNode.setText(hidden.getText());
+				leafNode.setHidden(true);
+				setLexerRule(leafNode, hidden);
+				parentNode.getChildren().add(leafNode);
+				lastConsumedIndex = hidden.getTokenIndex();
+			}
+		}
+	}
 
-    public final IParseResult parse() throws RecognitionException {
-        return parse(getFirstRuleName());
-    }
+	private String currentError = null;
 
-    public final IParseResult parse(String entryRuleName) throws RecognitionException {
-        IParseResult result = null;
-        parseErrors = new ArrayList<IParseError>();
-        EObject current = null;
-        try {
-            String antlrEntryRuleName = normalizeEntryRuleName(entryRuleName);
-            try {
-                Method method = this.getClass().getMethod(antlrEntryRuleName);
-                current = (EObject) method.invoke(this);
-            } catch (InvocationTargetException ite) {
-                Throwable targetException = ite.getTargetException();
-                if (targetException instanceof RecognitionException) {
-                    throw (RecognitionException) targetException;
-                }
-                if (targetException instanceof Exception) {
-                    throw new WrappedException((Exception) targetException);
-                }
-                throw new RuntimeException(targetException);
-            } catch (Exception e) {
-                throw new WrappedException(e);
-            }
-            appendTrailingHiddenTokens(currentNode);
-        } finally {
-            try {
-                appendAllTokens();
-            } finally {
-                result = new ParseResult(current, currentNode, parseErrors);
-            }
-        }
-        return result;
-    }
+	@Override
+	public void recover(IntStream input, RecognitionException re) {
+		if (currentError == null)
+			currentError = getErrorMessage(re, getTokenNames());
+		super.recover(input, re);
+	}
 
-    private String normalizeEntryRuleName(String entryRuleName) {
-        String antlrEntryRuleName;
-        if (!entryRuleName.startsWith("entryRule")) {
-            if (!entryRuleName.startsWith("rule")) {
-                antlrEntryRuleName = "entryRule" + entryRuleName;
-            } else {
-                antlrEntryRuleName = "entry" + Strings.toFirstUpper(entryRuleName);
-            }
-        } else {
-            antlrEntryRuleName = entryRuleName;
-        }
-        return antlrEntryRuleName;
-    }
+	@Override
+	public void recoverFromMismatchedToken(IntStream in, RecognitionException re, int ttype, BitSet follow)
+			throws RecognitionException {
+		if (currentError == null)
+			currentError = getErrorMessage(re, getTokenNames());
+		super.recoverFromMismatchedToken(in, re, ttype, follow);
+	}
 
-    /**
-     * The current lookahead is the number of tokens that have been matched by
-     * the parent rule to decide that the current rule has to be called.
-     * 
-     * @return the currentLookahead
-     */
-    protected void setCurrentLookahead() {
-        XtextTokenStream xtextTokenStream = (XtextTokenStream) input;
-        currentNode.setLookahead(xtextTokenStream.getCurrentLookahead());
-        currentNode.setLookaheadConsumed(xtextTokenStream.getLookaheadConsumedByParent());
-    }
+	public final IParseResult parse() throws RecognitionException {
+		return parse(getFirstRuleName());
+	}
 
-    /**
-     * Sets the current lookahead to zero. See {@link
-     * AbstractAntlrParser#setCurrentLookahead()}
-     */
-    protected void resetLookahead() {
-        XtextTokenStream xtextTokenStream = (XtextTokenStream) input;
-        xtextTokenStream.resetLookahead();
-    }
+	public final IParseResult parse(String entryRuleName) throws RecognitionException {
+		IParseResult result = null;
+		EObject current = null;
+		try {
+			String antlrEntryRuleName = normalizeEntryRuleName(entryRuleName);
+			try {
+				Method method = this.getClass().getMethod(antlrEntryRuleName);
+				current = (EObject) method.invoke(this);
+			} catch (InvocationTargetException ite) {
+				Throwable targetException = ite.getTargetException();
+				if (targetException instanceof RecognitionException) {
+					throw (RecognitionException) targetException;
+				}
+				if (targetException instanceof Exception) {
+					throw new WrappedException((Exception) targetException);
+				}
+				throw new RuntimeException(targetException);
+			} catch (Exception e) {
+				throw new WrappedException(e);
+			}
+			appendTrailingHiddenTokens(currentNode);
+		} finally {
+			try {
+				appendAllTokens();
+			} finally {
+				result = new ParseResult(current, currentNode);
+			}
+		}
+		return result;
+	}
 
-    protected void moveLookaheadInfo(CompositeNode source, CompositeNode target) {
-        target.setLookahead(source.getLookahead());
-        target.setLookaheadConsumed(source.getLookaheadConsumed());
-        source.setLookahead(0);
-        source.setLookaheadConsumed(0);
-    }
-    
-    /**
-     * Match is called to consume unambiguous tokens. It calls input.LA() and
-     * therefore increases the currentLookahead. We need to compensate. See
-     * {@link AbstractAntlrParser#setCurrentLookahead()}
-     * 
-     * @see org.antlr.runtime.BaseRecognizer#match(org.antlr.runtime.IntStream,
-     *  int, org.antlr.runtime.BitSet)
-     */
-    @Override
-    public void match(IntStream input, int ttype, BitSet follow) throws RecognitionException {
-        super.match(input, ttype, follow);
-        ((XtextTokenStream) input).decrementLookahead();
-    }
+	private String normalizeEntryRuleName(String entryRuleName) {
+		String antlrEntryRuleName;
+		if (!entryRuleName.startsWith("entryRule")) {
+			if (!entryRuleName.startsWith("rule")) {
+				antlrEntryRuleName = "entryRule" + entryRuleName;
+			} else {
+				antlrEntryRuleName = "entry" + Strings.toFirstUpper(entryRuleName);
+			}
+		} else {
+			antlrEntryRuleName = entryRuleName;
+		}
+		return antlrEntryRuleName;
+	}
 
-    protected InputStream getTokenFile() {
-        return null;
-    }
+	/**
+	 * The current lookahead is the number of tokens that have been matched by
+	 * the parent rule to decide that the current rule has to be called.
+	 * 
+	 * @return the currentLookahead
+	 */
+	protected void setCurrentLookahead() {
+		XtextTokenStream xtextTokenStream = (XtextTokenStream) input;
+		currentNode.setLookahead(xtextTokenStream.getCurrentLookahead());
+		currentNode.setLookaheadConsumed(xtextTokenStream.getLookaheadConsumedByParent());
+	}
 
-    /**
-     * @return
-     */
-    protected abstract String getFirstRuleName();
-    
+	/**
+	 * Sets the current lookahead to zero. See {@link
+	 * AbstractAntlrParser#setCurrentLookahead()}
+	 */
+	protected void resetLookahead() {
+		XtextTokenStream xtextTokenStream = (XtextTokenStream) input;
+		xtextTokenStream.resetLookahead();
+	}
+
+	protected void moveLookaheadInfo(CompositeNode source, CompositeNode target) {
+		target.setLookahead(source.getLookahead());
+		target.setLookaheadConsumed(source.getLookaheadConsumed());
+		source.setLookahead(0);
+		source.setLookaheadConsumed(0);
+	}
+
+	/**
+	 * Match is called to consume unambiguous tokens. It calls input.LA() and
+	 * therefore increases the currentLookahead. We need to compensate. See
+	 * {@link AbstractAntlrParser#setCurrentLookahead()}
+	 * 
+	 * @see org.antlr.runtime.BaseRecognizer#match(org.antlr.runtime.IntStream,
+	 * 	int, org.antlr.runtime.BitSet)
+	 */
+	@Override
+	public void match(IntStream input, int ttype, BitSet follow) throws RecognitionException {
+		super.match(input, ttype, follow);
+		((XtextTokenStream) input).decrementLookahead();
+	}
+
+	protected InputStream getTokenFile() {
+		return null;
+	}
+
+	/**
+	 * @return
+	 */
+	protected abstract String getFirstRuleName();
+
 }

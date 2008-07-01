@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParsetreePackage;
+import org.eclipse.xtext.parsetree.SyntaxError;
 
 /**
  * 
@@ -36,20 +37,17 @@ public class ParsetreeUtil {
 	}
 
 	public static int length(AbstractNodeImpl abstractParserNode) {
-		throw new IllegalArgumentException(
-				"Illegal subtype of AbstarctParserNode "
-						+ abstractParserNode.eClass().getName());
+		throw new IllegalArgumentException("Illegal subtype of AbstarctParserNode "
+				+ abstractParserNode.eClass().getName());
 	}
 
 	public static int offset(AbstractNodeImpl abstractParserNode) {
 		checkArgument(abstractParserNode);
-		AbstractNode rootContainer = (AbstractNode) EcoreUtil
-				.getRootContainer(abstractParserNode);
-		if(rootContainer==abstractParserNode) {
+		AbstractNode rootContainer = (AbstractNode) EcoreUtil.getRootContainer(abstractParserNode);
+		if (rootContainer == abstractParserNode) {
 			return 0;
 		}
-		EList<LeafNode> leafNodes = rootContainer
-				.getLeafNodes(abstractParserNode);
+		EList<LeafNode> leafNodes = rootContainer.getLeafNodes(abstractParserNode);
 		int offset = 0;
 		for (LeafNode leafNode : leafNodes) {
 			offset += leafNode.length();
@@ -59,18 +57,15 @@ public class ParsetreeUtil {
 
 	private static void checkArgument(AbstractNodeImpl abstractParserNode) {
 		int classifierID = abstractParserNode.eClass().getClassifierID();
-		if (classifierID != ParsetreePackage.COMPOSITE_NODE
-				&& classifierID != ParsetreePackage.LEAF_NODE) {
-			throw new IllegalArgumentException(
-					"Illegal subtype of AbstarctParserNode "
-							+ abstractParserNode.eClass().getName());
+		if (classifierID != ParsetreePackage.COMPOSITE_NODE && classifierID != ParsetreePackage.LEAF_NODE) {
+			throw new IllegalArgumentException("Illegal subtype of AbstarctParserNode "
+					+ abstractParserNode.eClass().getName());
 		}
 	}
 
 	public static int line(AbstractNodeImpl _this) {
 		checkArgument(_this);
-		AbstractNode rootContainer = (AbstractNode) EcoreUtil
-				.getRootContainer(_this);
+		AbstractNode rootContainer = (AbstractNode) EcoreUtil.getRootContainer(_this);
 		EList<LeafNode> leafNodes = rootContainer.getLeafNodes(_this);
 		int line = 1;
 		for (LeafNode leafNode : leafNodes) {
@@ -94,6 +89,7 @@ public class ParsetreeUtil {
 		}
 		return buff.toString();
 	}
+
 	public static String serialize(LeafNodeImpl _this) {
 		return _this.getText();
 	}
@@ -102,8 +98,7 @@ public class ParsetreeUtil {
 		return getLeafNodes(_this, null);
 	}
 
-	public static EList<LeafNode> getLeafNodes(AbstractNodeImpl _this,
-			AbstractNode to) {
+	public static EList<LeafNode> getLeafNodes(AbstractNodeImpl _this, AbstractNode to) {
 		checkArgument(_this);
 		BasicEList<LeafNode> result = new BasicEList<LeafNode>();
 		TreeIterator<EObject> allContents = _this.eAllContents();
@@ -116,6 +111,28 @@ public class ParsetreeUtil {
 			}
 		}
 		return result;
+	}
+
+	public static EList<SyntaxError> allSyntaxErrors(CompositeNodeImpl compositeNodeImpl) {
+		BasicEList<SyntaxError> basicEList = new BasicEList<SyntaxError>();
+		TreeIterator<Object> iterator = EcoreUtil.getAllContents(compositeNodeImpl, false);
+		while(iterator.hasNext()) {
+			Object next = iterator.next();
+			if (next instanceof SyntaxError)
+				basicEList.add((SyntaxError) next);
+		}
+		return basicEList;
+	}
+
+	public static EList<SyntaxError> allSyntaxErrors(LeafNodeImpl leafNodeImpl) {
+		BasicEList<SyntaxError> basicEList = new BasicEList<SyntaxError>();
+		if (leafNodeImpl.getSyntaxError() != null)
+			basicEList.add(leafNodeImpl.getSyntaxError());
+		return basicEList;
+	}
+
+	public static EList<SyntaxError> allSyntaxErrors(AbstractNodeImpl abstractNodeImpl) {
+		return null;
 	}
 
 }
