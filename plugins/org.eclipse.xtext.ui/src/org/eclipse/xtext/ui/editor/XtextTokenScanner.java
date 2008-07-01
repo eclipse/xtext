@@ -43,6 +43,7 @@ public class XtextTokenScanner implements ITokenScanner {
 	private Iterator<LeafNode> nodeIterator;
 	private IParser parser;
 	private final ILanguageDescriptor languageDescriptor;
+	private IParseResult lastParseResult;
 
 	public XtextTokenScanner(ILanguageDescriptor languageDescriptor) {
 		Assert.isLegal(languageDescriptor != null);
@@ -95,6 +96,7 @@ public class XtextTokenScanner implements ITokenScanner {
 	}
 
 	public void setRange(IDocument document, int offset, int length) {
+
 		Assert.isLegal(document != null);
 		nodeIterator = null;
 		// TODO partial parse
@@ -106,7 +108,18 @@ public class XtextTokenScanner implements ITokenScanner {
 		IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
 		IParseResult parseResult;
 		try {
-			parseResult = parser.parse(new StringInputStream(document.get()), elementFactory, new QuietErrorHandler());
+			if (lastParseResult == null) {
+				parseResult = parser.parse(new StringInputStream(document.get()), elementFactory,
+						new QuietErrorHandler());
+			}
+			else {
+				CompositeNode lastRootNode = lastParseResult.getRootNode();
+				int documentGrowth = document.get().length() - lastRootNode.length();
+				int originalLength = length - documentGrowth;
+				String change = document.get().substring(offset, offset + length);
+				parseResult = parser.reparse(lastRootNode, offset, originalLength, change, new QuietErrorHandler());
+			}
+			lastParseResult = parseResult;
 			CompositeNode rootNode = parseResult.getRootNode();
 			if (rootNode != null) {
 				nodeIterator = rootNode.getLeafNodes().iterator();
