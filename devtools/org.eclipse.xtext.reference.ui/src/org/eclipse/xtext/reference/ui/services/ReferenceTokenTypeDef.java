@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
-import org.eclipse.xtext.ui.tokentype.BuildInTokenTypeDef;
+import org.eclipse.xtext.ui.service.impl.BuildInTokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.TokenTypeDef;
 
