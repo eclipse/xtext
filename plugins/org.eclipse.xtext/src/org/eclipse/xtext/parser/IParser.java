@@ -11,6 +11,7 @@ package org.eclipse.xtext.parser;
 
 import java.io.InputStream;
 
+import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.service.ILanguageService;
 
 /**
@@ -29,10 +30,18 @@ public interface IParser extends ILanguageService {
 	
 	/**
 	 * @param in
+	 * @param handler
+	 * @return
+	 */
+	IParseResult parse(InputStream in, IParseErrorHandler handler);
+	
+	/**
+	 * @param in
 	 * @param factory
 	 * @return
 	 */
 	IParseResult parse(InputStream in, IElementFactory factory);
+	
 	
 	/**
      * @param in
@@ -41,9 +50,9 @@ public interface IParser extends ILanguageService {
     IParseResult parse(InputStream in);
     
     /**
-     * @param ruleName
      * @param in
+     * @param handler
      * @return
      */
-    IParseResult parse(String ruleName, InputStream in);
+    IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change, IParseErrorHandler handler);
 }

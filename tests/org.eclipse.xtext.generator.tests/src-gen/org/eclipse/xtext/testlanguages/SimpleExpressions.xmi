@@ -5,6 +5,19 @@
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>SimpleExpressions</idElements>
+  <parserRules name="Sequence">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:RuleCall" name="Addition"/>
+      <abstractTokens xsi:type="xtext:Group" cardinality="*">
+        <abstractTokens xsi:type="xtext:Action" feature="expressions" operator="+=">
+          <typeName name="Sequence"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="expressions" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" name="Addition"/>
+        </abstractTokens>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
   <parserRules name="Addition">
     <type name="Expression"/>
     <alternatives xsi:type="xtext:Group">

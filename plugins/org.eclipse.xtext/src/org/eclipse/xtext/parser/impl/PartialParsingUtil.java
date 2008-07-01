@@ -16,8 +16,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.parser.AbstractParser;
+import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -32,28 +35,39 @@ import org.eclipse.xtext.util.StringInputStream;
 public class PartialParsingUtil {
 
 	@SuppressWarnings("unchecked")
-	public static IParseResult partiallyReparse(IParser parser, CompositeNode rootNode, int originalOffset,
-			int originalLength, String changedRegion) {
+	public static IParseResult reparse(IParser parser, CompositeNode rootNode, int originalOffset, int originalLength,
+			String changedRegion, IParseErrorHandler handler) {
 		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(rootNode, originalOffset,
 				originalLength);
 		List<CompositeNode> validReplaceRootNodes = parsingPointers.getValidReplaceRootNodes();
 		CompositeNode replaceNode = null;
-		String reparseRegion ="";
-		for(int i=validReplaceRootNodes.size()-1; i>=0; --i) {
+		String reparseRegion = "";
+		for (int i = validReplaceRootNodes.size() - 1; i >= 0; --i) {
 			replaceNode = validReplaceRootNodes.get(i);
 			reparseRegion = insertChangeIntoReplaceRegion(replaceNode, originalOffset, originalLength, changedRegion);
-			if(!"".equals(reparseRegion)) {
+			if (!"".equals(reparseRegion)) {
 				break;
 			}
 		}
-		if(replaceNode == null || reparseRegion.equals("")) {
+		if (replaceNode == null || reparseRegion.equals("")) {
 			// no replaceNode -> no rule to call
 			// If region is empty, any entryRule is likely to fail.
 			// Let parser decide whether empty model is valid
-			return parser.parse(new StringInputStream(""));
+			return parser.parse(new StringInputStream(""), handler);
 		}
 		String entryRuleName = parsingPointers.findEntryRuleName(replaceNode);
-		ParseResult parseResult = (ParseResult) parser.parse(entryRuleName, new StringInputStream(reparseRegion));
+		ParseResult parseResult = null;
+		try {
+			parseResult = (ParseResult) ((AbstractParser) parser).parse(entryRuleName, new StringInputStream(
+					reparseRegion), handler);
+		}
+		catch (ParseException exc) {
+		}
+		if (parseResult == null || parseResult.getParseErrors() != null && !parseResult.getParseErrors().isEmpty()) {
+			// on error fully reparse
+			reparseRegion = insertChangeIntoReplaceRegion(rootNode, originalOffset, originalLength, changedRegion);
+			return parser.parse(new StringInputStream(reparseRegion), handler);
+		}
 		if (replaceNode != rootNode) {
 			CompositeNode replaceNodeParent = replaceNode.getParent();
 			EList<AbstractNode> replaceNodeSiblings = replaceNodeParent.getChildren();
@@ -97,9 +111,7 @@ public class PartialParsingUtil {
 	}
 
 	public static PartialParsingPointers calculatePartialParsingPointers(CompositeNode rootNode, int offset, int length) {
-		List<CompositeNode> nodesEnclosingRegion = new ArrayList<CompositeNode>();
-		collectNodesEnclosingChangeRegion(rootNode, offset, length, nodesEnclosingRegion);
-
+		List<NodeWithCachedOffset> nodesEnclosingRegion = collectNodesEnclosingChangeRegion(rootNode, offset, length);
 		List<CompositeNode> validReplaceRootNodes = internalFindValidReplaceRootNodeForChangeRegion(
 				nodesEnclosingRegion, offset, length);
 		if (validReplaceRootNodes.isEmpty()) {
@@ -111,17 +123,11 @@ public class PartialParsingUtil {
 	/**
 	 * Collects a list of all nodes containing the change region
 	 */
-	private static void collectNodesEnclosingChangeRegion(CompositeNode parent, int offset, int length,
-			List<CompositeNode> nodesEnclosingRegion) {
-		nodesEnclosingRegion.add(parent);
-		for (AbstractNode child : parent.getChildren()) {
-			if (child instanceof CompositeNode) {
-				CompositeNode childCompositeNode = (CompositeNode) child;
-				if (nodeEnclosesRegion(childCompositeNode, offset, length)) {
-					collectNodesEnclosingChangeRegion(childCompositeNode, offset, length, nodesEnclosingRegion);
-				}
-			}
-		}
+	private static List<NodeWithCachedOffset> collectNodesEnclosingChangeRegion(CompositeNode parent, int offset,
+			int length) {
+		EnclosingCompositeNodeFinder enclosingCompositeNodeFinder = new EnclosingCompositeNodeFinder(parent, offset,
+				length);
+		return enclosingCompositeNodeFinder.getNodesEnclosingRegion();
 	}
 
 	/**
@@ -136,34 +142,27 @@ public class PartialParsingUtil {
 	 * @return
 	 */
 	private static List<CompositeNode> internalFindValidReplaceRootNodeForChangeRegion(
-			List<CompositeNode> nodesEnclosingRegion, int offset, int length) {
-		List<LeafNode> lookaheadNodes = new ArrayList<LeafNode>();
+			List<NodeWithCachedOffset> nodesEnclosingRegion, int offset, int length) {
+		List<NodeWithCachedOffset> lookaheadNodes = new ArrayList<NodeWithCachedOffset>();
 		int numConsumedLookaheadTokens = 0;
 		List<CompositeNode> validReplaceRootNodes = new ArrayList<CompositeNode>();
 
-		for (CompositeNode node : nodesEnclosingRegion) {
-			List<LeafNode> parentsLookaheadNodes = getParentsLookaheadNodes(node);
+		for (NodeWithCachedOffset node : nodesEnclosingRegion) {
+			List<NodeWithCachedOffset> parentsLookaheadNodes = getParentsLookaheadNodes(node);
 			if (!parentsLookaheadNodes.isEmpty()) {
-				int index = lookaheadNodes.indexOf(parentsLookaheadNodes.get(0));
-				if (index >= 0) {
-					// remove lookahead nodes common with grandpa
-					while (lookaheadNodes.size() > index) {
-						lookaheadNodes.remove(index);
-					}
-				}
-				lookaheadNodes.addAll(parentsLookaheadNodes);
+				mergeLookaheadNodes(lookaheadNodes, parentsLookaheadNodes);
 			}
-			if (node.getLookaheadConsumed() > 0) {
+			if (((CompositeNode) node.getNode()).getLookaheadConsumed() > 0) {
 				// parent has consumed lookahead tokens.
-				numConsumedLookaheadTokens += node.getLookaheadConsumed();
+				numConsumedLookaheadTokens += ((CompositeNode) node.getNode()).getLookaheadConsumed();
 				if (numConsumedLookaheadTokens == lookaheadNodes.size()) {
 					// parent has consumed all current lookahead tokens
-					LeafNode leafNode = lookaheadNodes.get(numConsumedLookaheadTokens - 1);
+					NodeWithCachedOffset leafNode = lookaheadNodes.get(numConsumedLookaheadTokens - 1);
 					if (nodeIsBeforeRegion(leafNode, offset)) {
 						// last lookahead token is before changed region
 						//NodeUtil.dumpCompositeNodeInfo("Possible entry node: "
 						// , node);
-						validReplaceRootNodes.add(node);
+						validReplaceRootNodes.add((CompositeNode) node.getNode());
 					}
 				}
 			}
@@ -171,53 +170,139 @@ public class PartialParsingUtil {
 		return validReplaceRootNodes;
 	}
 
-	private static boolean nodeIsBeforeRegion(LeafNode leafNode, int offset) {
-		return leafNode.offset() + leafNode.length() <= offset;
+	private static void mergeLookaheadNodes(List<NodeWithCachedOffset> lookaheadNodes,
+			List<NodeWithCachedOffset> parentsLookaheadNodes) {
+		NodeWithCachedOffset firstParentLookaheadNode = parentsLookaheadNodes.get(0);
+		int index;
+		for(index=0; index < lookaheadNodes.size(); ++index) {
+			if(lookaheadNodes.get(index).getNode().equals(firstParentLookaheadNode.getNode())) {
+				break;
+			}
+		}
+		if (index < lookaheadNodes.size()) {
+			// remove lookahead nodes common with grandpa
+			while (lookaheadNodes.size() > index) {
+				lookaheadNodes.remove(index);
+			}
+		}
+		lookaheadNodes.addAll(parentsLookaheadNodes);
 	}
 
-	private static boolean nodeEnclosesRegion(CompositeNode node, int offset, int length) {
-		return node.offset() <= offset && node.offset() + node.length() >= offset + length;
+	private static boolean nodeIsBeforeRegion(NodeWithCachedOffset leafNode, int offset) {
+		return leafNode.getChachedOffset() + leafNode.getNode().length() <= offset;
 	}
 
-	private static List<LeafNode> getParentsLookaheadNodes(CompositeNode child) {
-		int lookaheadFromParent = child.getLookahead();
+	private static List<NodeWithCachedOffset> getParentsLookaheadNodes(NodeWithCachedOffset child) {
+		int lookaheadFromParent = ((CompositeNode) child.getNode()).getLookahead();
 		if (lookaheadFromParent != 0) {
-			List<LeafNode> lookaheadNodes = new ArrayList<LeafNode>();
-			int consumedByParent = child.getLookaheadConsumed();
+			List<NodeWithCachedOffset> lookaheadNodes = new ArrayList<NodeWithCachedOffset>();
+			int consumedByParent = ((CompositeNode) child.getNode()).getLookaheadConsumed();
 			if (consumedByParent > 0) {
 				// some lookahead nodes are consumed by parent
-				CompositeNode parent = child.getParent();
-				EList<AbstractNode> children = parent.getChildren();
-				int index = children.indexOf(child);
-				int count = consumedByParent;
-				for (int i = index - 1; i >= 0 && count > 0; --i) {
-					AbstractNode tempChild = children.get(i);
-					if (tempChild instanceof LeafNode && !((LeafNode) tempChild).isHidden()) {
-						lookaheadNodes.add((LeafNode) tempChild);
-						--count;
-					}
+				NodeWithCachedOffset tempLeaf = child;
+				for (int i = 0; i < consumedByParent; ++i) {
+					tempLeaf = previousUnhiddenLeaf(tempLeaf.getNode(), tempLeaf.getChachedOffset());
+					lookaheadNodes.add(tempLeaf);
 				}
 			}
 			if (lookaheadFromParent - consumedByParent > 0) {
 				// remaining lookahead nodes consumed by child
-				EList<LeafNode> leafNodes = child.getLeafNodes();
-				int leafIndex = 0;
-				LeafNode tempChild;
+				NodeWithCachedOffset tempLeaf = child;
 				for (int i = 0; i < lookaheadFromParent - consumedByParent; ++i) {
-					do {
-						if (leafIndex >= leafNodes.size()) {
-							return null;
-						}
-						tempChild = leafNodes.get(leafIndex++);
-					} while (tempChild.isHidden());
-					lookaheadNodes.add(tempChild);
+					tempLeaf = nextUnhiddenLeaf(tempLeaf.getNode(), tempLeaf.getChachedOffset());
+					lookaheadNodes.add(tempLeaf);
 				}
 			}
 			return lookaheadNodes;
 		}
 		else {
-			return Collections.<LeafNode> emptyList();
+			return Collections.<NodeWithCachedOffset> emptyList();
 		}
 	}
 
+	private static NodeWithCachedOffset nextUnhiddenLeaf(AbstractNode node, int currentOffset) {
+		if (node instanceof CompositeNode) {
+			NodeWithCachedOffset firstLeaf = firstLeaf((CompositeNode) node, currentOffset);
+			if (firstLeaf != null) {
+				return firstLeaf;
+			}
+		}
+		CompositeNode parent = node.getParent();
+		EList<AbstractNode> siblings = parent.getChildren();
+		int childIndex = siblings.indexOf(node);
+		while (++childIndex < siblings.size()) {
+			AbstractNode sibling = siblings.get(childIndex);
+			if (sibling instanceof LeafNode) {
+				if (!((LeafNode) sibling).isHidden()) {
+					return new NodeWithCachedOffset(currentOffset, sibling);
+				}
+				currentOffset += sibling.length();
+			}
+			else if (sibling instanceof CompositeNode) {
+				return nextUnhiddenLeaf(sibling, currentOffset);
+			}
+		}
+		return nextUnhiddenLeaf(parent, currentOffset);
+	}
+
+	private static NodeWithCachedOffset firstLeaf(CompositeNode node, int currentOffset) {
+		EList<AbstractNode> children = node.getChildren();
+		for (AbstractNode child : children) {
+			if (child instanceof LeafNode) {
+				if (!((LeafNode) child).isHidden()) {
+					return new NodeWithCachedOffset(currentOffset, child);
+				}
+				currentOffset += child.length();
+			}
+			else if (child instanceof CompositeNode) {
+				NodeWithCachedOffset leafFromChild = firstLeaf((CompositeNode) child, currentOffset);
+				if (leafFromChild != null) {
+					return leafFromChild;
+				}
+			}
+		}
+		return null;
+	}
+
+	private static NodeWithCachedOffset previousUnhiddenLeaf(AbstractNode node, int currentOffset) {
+		CompositeNode parent = node.getParent();
+		EList<AbstractNode> siblings = parent.getChildren();
+		int childIndex = siblings.indexOf(node);
+		while (--childIndex >= 0) {
+			AbstractNode sibling = siblings.get(childIndex);
+			if (sibling instanceof LeafNode) {
+				currentOffset -= sibling.length();
+				if(!((LeafNode) sibling).isHidden()) {
+					return new NodeWithCachedOffset(currentOffset, sibling);
+				}
+			}
+			else {
+				NodeWithCachedOffset leafFromComposite = lastUnhiddenLeaf((CompositeNode) sibling, currentOffset);
+				if (leafFromComposite != null) {
+					return leafFromComposite;
+				}
+			}
+		}
+		return previousUnhiddenLeaf(parent, currentOffset);
+	}
+
+	private static NodeWithCachedOffset lastUnhiddenLeaf(CompositeNode node, int currentOffset) {
+		EList<AbstractNode> children = node.getChildren();
+		for (int i = children.size() - 1; i >= 0; --i) {
+			AbstractNode child = children.get(i);
+			if (child instanceof LeafNode) {
+				currentOffset -= child.length();
+				if(!((LeafNode) child).isHidden()) {
+					return new NodeWithCachedOffset(currentOffset, child);
+				}
+			}
+			else if (child instanceof CompositeNode) {
+				NodeWithCachedOffset leafFromChild = lastUnhiddenLeaf((CompositeNode) child, currentOffset);
+				if (leafFromChild != null) {
+					return leafFromChild;
+				}
+			}
+		}
+		return null;
+	}
 }

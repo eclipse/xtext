@@ -28,8 +28,10 @@ public class PartialParserReplaceTest extends AbstractPartialParserTest {
 		replaceAndReparse(model, 1, 2, "", "b+c");
 		replaceAndReparse(model, 6, 3, "*", "(a+b+c*c/d)");
 		replaceAndReparse(model, 3, 1, "(x+y+z)", "(x+y+z)");
+		
+		replaceAndReparse("a b", 1,1,"+","a+b");
 		// TODO: breaking case
-		// replaceAndReparse(model, 3, 1, "x)+(b", "x)+(b");
+		replaceAndReparse(model, 3, 1, "x)+(b", "x)+(b");
 		
 	}
 
@@ -49,8 +51,8 @@ public class PartialParserReplaceTest extends AbstractPartialParserTest {
 		String reparseRegion = PartialParsingUtil.insertChangeIntoReplaceRegion(parsingPointers
 				.getDefaultReplaceRootNode(), offset, length, change);
 		assertEquals(expectedReparseRegion, reparseRegion);
-		IParseResult partiallyReparse = PartialParsingUtil.partiallyReparse(getParser(), rootNode, offset, length,
-				change);
+		IParseResult partiallyReparse = PartialParsingUtil.reparse(getParser(), rootNode, offset, length,
+				change, null);
 		assertTrue(partiallyReparse.getParseErrors().isEmpty());
 		String expectedReparseModel = model.substring(0, offset) + change + model.substring(offset + length);
 		assertEquals(expectedReparseModel, partiallyReparse.getRootNode().serialize());

@@ -14,6 +14,8 @@ import java.io.InputStream;
 import org.antlr.runtime.ANTLRInputStream;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.parser.impl.PartialParsingUtil;
+import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.service.Inject;
 
 /**
@@ -37,6 +39,10 @@ public abstract class AbstractParser implements IParser {
         }
     }
 
+    public IParseResult parse(InputStream in, IParseErrorHandler handler) {
+        return parse(getDefaultRuleName(), in, getDefaultASTFactory(), handler);
+    }
+
     public IParseResult parse(InputStream in, IElementFactory factory, IParseErrorHandler handler) {
         return parse(getDefaultRuleName(), in, factory, handler);
     }
@@ -48,9 +54,17 @@ public abstract class AbstractParser implements IParser {
     public IParseResult parse(InputStream in) {
         return parse(getDefaultRuleName(), in, getDefaultASTFactory(), getDefaultHandler());
     }
+    
+    public IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change,
+    		IParseErrorHandler handler) {
+    	return PartialParsingUtil.reparse(this, originalRootNode, offset, length, change, handler);
+    }
 
-    public IParseResult parse(String ruleName, InputStream in) {
-        return parse(ruleName, in, getDefaultASTFactory(), getDefaultHandler());
+    public IParseResult parse(String ruleName, InputStream in, IParseErrorHandler handler) {
+    	if(handler == null) {
+    		handler=getDefaultHandler();
+    	}
+        return parse(ruleName, in, getDefaultASTFactory(), handler);
     }
     
     protected IElementFactory getDefaultASTFactory() {
