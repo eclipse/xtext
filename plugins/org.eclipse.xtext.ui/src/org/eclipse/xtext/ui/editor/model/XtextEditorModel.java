@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,16 +17,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ISynchronizable;
-import org.eclipse.xtext.parser.IElementFactory;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.SyntaxError;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -35,18 +34,22 @@ import org.eclipse.xtext.util.StringInputStream;
 public class XtextEditorModel implements IEditorModel {
 
 	private final IDocument document;
-	private IParser parser;
-	private AbstractNode parseTreeRootNode;
 	private IDocumentListener dirtyListener;
 	private boolean shouldReconcile = true;
-	// FIXME DO not use IParser directly
-	private IParseResult parseResult;
 	private final ILanguageDescriptor languageDescriptor;
+	private XtextResource resource;
 
-	public XtextEditorModel(IDocument document, ILanguageDescriptor languageDescriptor) {
+	public XtextEditorModel(XtextResource resource, IDocument document, ILanguageDescriptor languageDescriptor) {
 		this.document = document;
+		this.resource = resource;
+		if (resource.getParseResult() == null) {
+			try {
+				resource.load(new StringInputStream(document.get()), null);
+			} catch (IOException e) {
+				CoreLog.logError(e);
+			}
+		}
 		this.languageDescriptor = languageDescriptor;
-		this.parser = ServiceRegistry.getService(languageDescriptor, IParser.class);
 	}
 
 	/*
@@ -74,45 +77,32 @@ public class XtextEditorModel implements IEditorModel {
 	 * 
 	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#reconcile()
 	 */
-	public void reconcile() {
+	public void reconcile(IRegion region) {
 		synchronized (dirtyLock) {
 			if (!shouldReconcile || !dirty) {
 				return;
-			}
-			else {
+			} else {
 				dirty = false;
 			}
 		}
 		synchronized (getLockObject()) {
-			if (document == null) {
-				parseTreeRootNode = null;
-			}
-			else {
-				parseDocument(document);
-			}
+			internalReconcile(region);
 		}
 	}
 
-	private void parseDocument(IDocument document) {
-		String content;
+	private void internalReconcile(IRegion region) {
 		try {
-			content = document.get();
 			if (Activator.DEBUG_PARSING)
 				System.out.print("EditorModel Parsing...");
 			long start = System.currentTimeMillis();
+			resource.update(region.getOffset(), region.getLength(), document
+					.get(region.getOffset(), region.getLength()));
 
-			// TODO: dependency injection for default element factory in parser
-			IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
-			this.parseResult = parser.parse(new StringInputStream(content), elementFactory);
 			if (Activator.DEBUG_PARSING)
 				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
-			if (parseResult.getRootASTElement() != null) {
-				NodeAdapter nodeAdapter = (NodeAdapter) parseResult.getRootASTElement().eAdapters().get(0);
-				parseTreeRootNode = nodeAdapter.getParserNode();
-			}
+
 			notifyModelListeners(new XtextEditorModelChangeEvent(this));
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			if (Activator.DEBUG_PARSING)
 				System.out.println("fail!");
 			e.printStackTrace();
@@ -126,22 +116,7 @@ public class XtextEditorModel implements IEditorModel {
 	 * ()
 	 */
 	public AbstractNode getParseTreeRootNode() {
-		return getParseTreeRootNode(true);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getParseTreeRootNode
-	 * (boolean)
-	 */
-	public AbstractNode getParseTreeRootNode(boolean doReconcile) {
-		if (doReconcile) {
-			synchronized (getLockObject()) {
-				reconcile();
-			}
-		}
-		return parseTreeRootNode;
+		return resource.getParseResult().getRootNode();
 	}
 
 	/*
@@ -150,25 +125,7 @@ public class XtextEditorModel implements IEditorModel {
 	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getAstRoot()
 	 */
 	public EObject getAstRoot() {
-		return getAstRoot(true);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getAstRoot(boolean)
-	 */
-	public EObject getAstRoot(boolean doReconcile) {
-		if (doReconcile) {
-			synchronized (getLockObject()) {
-				reconcile();
-			}
-		}
-		// FIXME emptyfile => parseresult was null, getAstRoot called! => NPE
-		if (parseResult != null)
-			return parseResult.getRootASTElement();
-		else
-			return null;
+		return resource.getParseResult().getRootASTElement();
 	}
 
 	protected boolean dirty = true;
@@ -246,7 +203,7 @@ public class XtextEditorModel implements IEditorModel {
 	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getErrors()
 	 */
 	public List<SyntaxError> getSyntaxErrors() {
-		return parseResult != null ? parseResult.getParseErrors() : null;
+		return resource.getParseResult().getParseErrors();
 	}
 
 	/*

@@ -98,7 +98,6 @@ public class XtextTokenScanner implements ITokenScanner {
 
 		Assert.isLegal(document != null);
 		nodeIterator = null;
-		// TODO partial parse
 		if (Activator.DEBUG_PARSING)
 			System.out.print("Token Scanner: Parsing...");
 		long start = System.currentTimeMillis();
