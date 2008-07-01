@@ -15,6 +15,8 @@ import java.util.List;
 import org.eclipse.xtext.XtextGrammarTestStandaloneSetup;
 import org.eclipse.xtext.parser.IParseError;
 import org.eclipse.xtext.parser.IParseErrorHandler;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class ParseErrorHandlingTest extends AbstractGeneratorTest {
@@ -78,6 +80,20 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 			ErrorHandler errors = new ErrorHandler();
 			getModel(model.substring(0, i), errors);
 		}
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=236425
+	 * @throws Exception
+	 */
+	public void testBug236425() throws Exception {
+		with(ReferenceGrammarStandaloneSetup.class);
+		String model = "spielplatz 100 }";
+		IParseResult object = parse(model,new ErrorHandler());
+		for (IParseError err : object.getParseErrors()) {
+			System.out.println(err.getMessage()+"-"+err.getOffset()+","+err.getLength());
+		}
+		assertFalse(object.getParseErrors().isEmpty());
 	}
 
 	private final class ErrorHandler implements IParseErrorHandler {
