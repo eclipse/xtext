@@ -58,7 +58,7 @@ public class NodeUtil {
     	if(compositeNode.getElement() != null) {
     		return compositeNode.getElement();
     	}
-    	while (!compositeNode.getChildren().isEmpty()) {
+    	WHILE: while (!compositeNode.getChildren().isEmpty()) {
 			boolean foundCompositeChild = false;
 			for (AbstractNode child : compositeNode.getChildren()) {
 				if (child instanceof CompositeNode) {
@@ -73,10 +73,11 @@ public class NodeUtil {
 					}
 					else {
 						compositeNode = childComposite;
-						break;
+						continue WHILE;
 					}
 				}
 			}
+			return null;
 		}
     	return null;
     }

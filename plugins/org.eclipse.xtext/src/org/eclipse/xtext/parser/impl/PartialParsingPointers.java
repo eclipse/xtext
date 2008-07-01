@@ -34,10 +34,10 @@ public class PartialParsingPointers {
 	private int length;
 	private int offset;
 	private List<CompositeNode> validReplaceRootNodes;
-	private List<CompositeNode> nodesEnclosingChangeRegion;
+	private List<NodeWithCachedOffset> nodesEnclosingChangeRegion;
 
 	public PartialParsingPointers(CompositeNode rootNode, int offset, int length,
-			List<CompositeNode> validReplaceRootNodes, List<CompositeNode> nodesEnclosingChangeRegion) {
+			List<CompositeNode> validReplaceRootNodes, List<NodeWithCachedOffset> nodesEnclosingChangeRegion) {
 		if (validReplaceRootNodes == null || validReplaceRootNodes.isEmpty()) {
 			throw new IllegalArgumentException("validReplaceRootNodes cannot be empty");
 		}
@@ -90,16 +90,24 @@ public class PartialParsingPointers {
 	}
 
 	public EObject findASTReplaceElement(CompositeNode replaceRootNode) {
-		for (int i = nodesEnclosingChangeRegion.indexOf(replaceRootNode); i < nodesEnclosingChangeRegion.size(); ++i) {
-			EObject currentASTElement = nodesEnclosingChangeRegion.get(i).getElement();
-			if (currentASTElement != null) {
-				return currentASTElement;
+		boolean foundReplaceNode = false;
+		for (int i = 0; i < nodesEnclosingChangeRegion.size(); ++i) {
+			CompositeNode nodeEnclosingRegion = (CompositeNode) nodesEnclosingChangeRegion.get(i).getNode();
+			if (nodeEnclosingRegion == replaceRootNode) {
+				foundReplaceNode = true;
+			}
+			if (foundReplaceNode) {
+				EObject currentASTElement = nodesEnclosingChangeRegion.get(i).getNode().getElement();
+				if (currentASTElement != null) {
+					return currentASTElement;
+				}
 			}
 		}
 		// AST element is attached to a child not enclosing the region.
 		// In this case, there must not be any composite nodes with
 		// multiple composite children on the way down.
-		return NodeUtil.getASTElementForRootNode(nodesEnclosingChangeRegion.get(nodesEnclosingChangeRegion.size() - 1));
+		return NodeUtil.getASTElementForRootNode((CompositeNode) nodesEnclosingChangeRegion.get(
+				nodesEnclosingChangeRegion.size() - 1).getNode());
 	}
 
 	public String findASTContainmentFeatureName() {
