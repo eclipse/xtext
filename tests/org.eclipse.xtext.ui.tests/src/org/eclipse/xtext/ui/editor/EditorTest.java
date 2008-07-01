@@ -18,8 +18,10 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.FileStoreEditorInput;
+import org.eclipse.ui.internal.ErrorEditorPart;
 import org.eclipse.ui.texteditor.ContentAssistAction;
 import org.eclipse.xtext.ui.internal.Activator;
 
@@ -54,11 +56,22 @@ public class EditorTest extends TestCase {
 		assertNotNull(openedEditor.getLanguageDescriptor());
 	}
 
+	@SuppressWarnings("restriction")
 	private void openEditor(IEditorInput editorInput) throws Exception {
-		openedEditor = (BaseTextEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-				.openEditor(editorInput, EDITOR_ID);
-		waitForJobCompletion();
-		sleep(STEP_DELAY);
+
+		IEditorPart openEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(
+				editorInput, EDITOR_ID);
+		if (openEditor instanceof BaseTextEditor) {
+			openedEditor = (BaseTextEditor) openEditor;
+			waitForJobCompletion();
+			sleep(STEP_DELAY);
+		}
+		else if (openEditor instanceof ErrorEditorPart) {
+			fail("Could not open BaseTextEditor. Editor produced errors during initialization.");
+		}
+		else {
+			fail("Opened Editor with id:" + EDITOR_ID + ", is not a BaseXtextEditor");
+		}
 	}
 
 	public void testOpenFile() throws Exception {
