@@ -109,8 +109,8 @@ public class XtextEditorModel implements IEditorModel {
 			if (parseResult.getRootASTElement() != null) {
 				NodeAdapter nodeAdapter = (NodeAdapter) parseResult.getRootASTElement().eAdapters().get(0);
 				parseTreeRootNode = nodeAdapter.getParserNode();
-				notifyModelListeners(new XtextEditorModelChangeEvent(this));
 			}
+			notifyModelListeners(new XtextEditorModelChangeEvent(this));
 		}
 		catch (Exception e) {
 			if (Activator.DEBUG_PARSING)
