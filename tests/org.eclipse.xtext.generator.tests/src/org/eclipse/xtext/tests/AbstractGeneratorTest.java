@@ -11,23 +11,24 @@ package org.eclipse.xtext.tests;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.GenerateAllTestGrammars;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.IElementFactory;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.util.StringInputStream;
@@ -55,8 +56,13 @@ public abstract class AbstractGeneratorTest extends TestCase {
 			}
 		}
 	}
+	
 
 	private ILanguageDescriptor currentLanguageDescriptor;
+	
+	public ILanguageDescriptor getCurrentLanguageDescriptor() {
+		return currentLanguageDescriptor;
+	}
 
 	@Override
 	protected void setUp() throws Exception {
@@ -90,67 +96,36 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	protected IParseTreeConstructor getParseTreeConstructor() throws Exception {
 		return ServiceRegistry.getService(currentLanguageDescriptor, IParseTreeConstructor.class);
 	}
+	
+	protected IResourceFactory getResourceFactory() throws Exception {
+		return ServiceRegistry.getService(currentLanguageDescriptor, IResourceFactory.class);
+	}
 
 	// parse methods
 
 	public EObject getModel(String model) throws Exception {
-		return getModel(new org.eclipse.xtext.util.StringInputStream(model), getASTFactory());
+		return getModel(new org.eclipse.xtext.util.StringInputStream(model));
 	}
 
 	public EObject getModel(InputStream model) throws Exception {
-		return getModel(model, getASTFactory());
+		XtextResource resource = getResource(model);
+		return resource.getParseResult().getRootASTElement();
 	}
 
-	public EObject getModel(InputStream model, IElementFactory factory) throws Exception {
-		return parse(model, factory).getRootASTElement();
+	protected XtextResource getResource(InputStream in) throws Exception {
+		ResourceSet rs = new XtextResourceSet();
+		XtextResource resource = (XtextResource) rs.createResource(URI.createURI("mytestmodel."+getResourceFactory().getModelFileExtensions()[0]));
+		resource.load(in, null);
+		return resource;
 	}
-	
-	protected CompositeNode getRootNode(InputStream stream) throws Exception {
-		return parse(stream, getASTFactory()).getRootNode();
+
+	protected CompositeNode getRootNode(InputStream model) throws Exception {
+		XtextResource resource = getResource(model);
+		return resource.getParseResult().getRootNode();
 	}
 
 	protected CompositeNode getRootNode(String model2) throws Exception {
-		return parse(new StringInputStream(model2), getASTFactory()).getRootNode();
-	}
-
-	public IParseResult parse(InputStream model, IElementFactory factory) {
-		IParser parser = getParser();
-		return parser.parse(model, factory);
-	}
-
-	public IParseResult parse(String model) throws Exception {
-		return parse(new StringInputStream(model), getASTFactory());
-	}
-
-	public List<Invocation> getInvocations(String model) throws Exception {
-		final List<Invocation> calls = new ArrayList<Invocation>();
-		getModel(new StringInputStream(model), new IElementFactory() {
-
-			public void add(EObject _this, String feature, Object value) {
-				add(_this, feature, value, null);
-			}
-
-			public void add(EObject _this, String feature, Object value, String lexRule) {
-				calls.add(new Invocation("add", feature, value));
-			}
-
-			public EObject create(String typeName) {
-				calls.add(new Invocation("create", typeName, null));
-				EClass class1 = EcorePackage.eINSTANCE.getEcoreFactory().createEClass();
-				class1.setName(typeName);
-				return class1;
-			}
-
-			public void set(EObject _this, String feature, Object value) {
-				add(_this, feature, value, null);
-			}
-
-			public void set(EObject _this, String feature, Object value, String lexRule) {
-				calls.add(new Invocation("set", feature, value));
-			}
-
-		});
-		return calls;
+		return getRootNode(new StringInputStream(model2));
 	}
 
 	// Xtend helper methods
