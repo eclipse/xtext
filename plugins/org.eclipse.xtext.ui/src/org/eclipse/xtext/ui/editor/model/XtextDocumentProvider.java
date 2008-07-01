@@ -8,7 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ISynchronizable;
 import org.eclipse.jface.text.source.IAnnotationModel;
@@ -61,7 +64,9 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 		XtextFileInfo xtextFileInfo = (XtextFileInfo) info;
 		IAnnotationModel annotationModel = xtextFileInfo.fTextFileBuffer.getAnnotationModel();
 		IResourceFactory resourceFactory = ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
-		//resourceFactory.createResource((((IFileEditorInput)element).getFile()).getLocationURI());
+		String pathName = ((IFileEditorInput) element).getFile().getLocationURI().toString();
+		Resource resource = resourceFactory.createResource(URI.createPlatformResourceURI(pathName, true));
+		Assert.isNotNull(resource);
 		IDocument document = info.fTextFileBuffer.getDocument();
 
 		IEditorModel xtextEditorModel = createXtextEditorModel(element, document, annotationModel);
