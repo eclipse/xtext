@@ -90,8 +90,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
     catch (RecognitionException re) { 
         recover(input,re); 
         appendSkippedTokens();
-        IParseError error = createParseError(re);
-        reportError(error, re);
     } 
 }
 
