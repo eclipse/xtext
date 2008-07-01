@@ -9,14 +9,10 @@
 
 package org.eclipse.xtext;
 
-import java.util.Iterator;
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.XtextGrammarTestParseTreeConstructor;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.tests.Invocation;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -28,27 +24,6 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(XtextGrammarTestStandaloneSetup.class);
-	}
-	
-	public void testBootstrapping() throws Exception {
-		List<Invocation> parse = getInvocations("language foo generate foo 'bar' Foo : name=ID;");
-		Iterator<Invocation> iter = parse.iterator();
-		assertEquals("create(Grammar)", iter.next().toString());
-		assertEquals("add(idElements,foo)", iter.next().toString());
-		assertEquals("create(GeneratedMetamodel)", iter.next().toString());
-		assertEquals("set(name,foo)", iter.next().toString());
-		assertEquals("set(nsURI,'bar')", iter.next().toString());
-		assertEquals("add(metamodelDeclarations,GeneratedMetamodel)", iter.next().toString());
-		assertEquals("create(ParserRule)", iter.next().toString());
-		assertEquals("set(name,Foo)", iter.next().toString());
-		assertEquals("create(Assignment)", iter.next().toString());
-		assertEquals("set(feature,name)", iter.next().toString());
-		assertEquals("set(operator,=)", iter.next().toString());
-		assertEquals("create(RuleCall)", iter.next().toString());
-		assertEquals("set(name,ID)", iter.next().toString());
-		assertEquals("set(terminal,RuleCall)", iter.next().toString());
-		assertEquals("set(alternatives,Assignment)", iter.next().toString());
-		assertEquals("add(parserRules,ParserRule)", iter.next().toString());
 	}
 	
 	public void testInstantiate() throws Exception {
