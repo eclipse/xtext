@@ -12,8 +12,6 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.dummy.DummyLanguageStandaloneSetup;
-import org.eclipse.xtext.parser.IParseError;
-import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class LengthOffsetLineTest extends AbstractGeneratorTest {
@@ -76,10 +74,7 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 	
 	public void testErrors1() throws Exception {
 		String model = "element # ;";
-		CompositeNode node = (CompositeNode) getRootNode(model, new IParseErrorHandler() {
-			public void handleParserError(IParseError err) {
-				System.out.println(err.getMessage());
-			}});
+		CompositeNode node = (CompositeNode) getRootNode(model);
 		assertEquals(model, node.serialize());
 		EList<LeafNode> nodes = node.getLeafNodes();
 		assertEquals(5,nodes.size());
