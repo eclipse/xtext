@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.4 2008/07/01 09:07:04 jkohnlein Exp $
+ $Id: plugin.xml,v 1.5 2008/07/01 10:18:09 sefftinge Exp $
 -->
 
 <plugin>
@@ -14,11 +14,5 @@
        uri = "htpp://www.eclipse.org/xtext/2008/xtextgen" 
        class = "org.eclipse.xtext.xtextgen.XtextgenPackage"
        genModel = "model/xtextgen.genmodel" /> 
-  </extension>
-  <extension
-        point="org.eclipse.emf.ecore.dynamic_package">
-     <resource
-           uri="org.eclipse.xtext.generator.resource1">
-     </resource>
   </extension>
 </plugin>

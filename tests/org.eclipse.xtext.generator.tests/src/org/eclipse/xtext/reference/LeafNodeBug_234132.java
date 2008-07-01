@@ -10,8 +10,6 @@ package org.eclipse.xtext.reference;
 
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.parser.IParseError;
-import org.eclipse.xtext.parser.IParseErrorHandler;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
@@ -26,11 +24,7 @@ public class LeafNodeBug_234132 extends AbstractGeneratorTest {
     public void testLeafNodeBug() throws Exception {
         with(ReferenceGrammarStandaloneSetup.class);
         String model = readFileIntoString("org/eclipse/xtext/reference/leafNodeBug_234132.tst");
-        CompositeNode rootNode = getRootNode(model,new IParseErrorHandler() {
-            public void handleParserError(IParseError error) {
-                // ignore
-            }
-        });
+        CompositeNode rootNode = getRootNode(model);
         
         EList<LeafNode> leafNodes = rootNode.getLeafNodes();
         System.out.println("Model length=" + model.length());

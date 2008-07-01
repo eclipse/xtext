@@ -30,7 +30,7 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		}
 		String model = modelBuffer.toString();
 		CompositeNode rootNode = getRootNode(model);
-		IParseResult reparse = PartialParsingUtil.reparse(getParser(), rootNode, model.indexOf('c'), 1, "Hugo", null);
+		IParseResult reparse = PartialParsingUtil.reparse(getParser(), rootNode, model.indexOf('c'), 1, "Hugo");
 		assertTrue(reparse.getParseErrors() == null || reparse.getParseErrors().isEmpty());
 	}
 	
