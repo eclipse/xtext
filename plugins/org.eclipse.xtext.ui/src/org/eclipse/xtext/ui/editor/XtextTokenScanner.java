@@ -111,7 +111,7 @@ public class XtextTokenScanner implements ITokenScanner {
 			}
 			else {
 				CompositeNode lastRootNode = lastParseResult.getRootNode();
-				int documentGrowth = document.get().length() - lastRootNode.length();
+				int documentGrowth = document.getLength() - lastRootNode.length();
 				int originalLength = length - documentGrowth;
 				String change = document.get().substring(offset, offset + length);
 				parseResult = parser.reparse(lastRootNode, offset, originalLength, change);
@@ -125,9 +125,10 @@ public class XtextTokenScanner implements ITokenScanner {
 				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
 		}
 		catch (Exception e) {
-			CoreLog.logError("Error during parse process", e);
+			CoreLog.logError("Error during parse process in token scanner. "
+					+ (e.getLocalizedMessage() != null ? e.getLocalizedMessage() : ""), e);
 			if (Activator.DEBUG_PARSING)
-				System.out.println("fail!");
+				System.err.println("fail!");
 		}
 	}
 }

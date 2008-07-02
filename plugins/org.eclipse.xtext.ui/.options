@@ -4,3 +4,4 @@ org.eclipse.xtext.ui/debug=true
 org.eclipse.xtext.ui/debug/services/proposalProvider=true
 org.eclipse.xtext.ui/debug/services/parser=true
 org.eclipse.xtext.ui/debug/services/formatter=true
+org.eclipse.xtext.ui/debug/services/marker_creator=true

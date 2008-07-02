@@ -65,7 +65,11 @@ public class BuildInFormatter implements IFormatter {
 		AbstractNode an = EditorModelUtil.findLeafNodeAtOffset(rootNode, region.getOffset());
 		if (an != null) {
 			while (!overFormattingRegion(an)) {
-				an = an.getParent();
+				CompositeNode parent = an.getParent();
+				if (parent == null)
+					throw new IllegalStateException("Could not allocate Node to region " + region + ". Last Node was "
+							+ an + " (offset:" + an.offset() + " length:" + an.length() + ")");
+				an = parent;
 			}
 			Region retVal = new Region(an.offset(), an.length());
 			if (Activator.DEBUG_FORMATTER)

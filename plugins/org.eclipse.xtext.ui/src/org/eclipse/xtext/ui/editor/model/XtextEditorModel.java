@@ -216,4 +216,11 @@ public class XtextEditorModel implements IEditorModel {
 		return getSyntaxErrors() != null && !getSyntaxErrors().isEmpty();
 	}
 
+	/**
+	 * @return the resource
+	 */
+	public XtextResource getResource() {
+		return resource;
+	}
+
 }

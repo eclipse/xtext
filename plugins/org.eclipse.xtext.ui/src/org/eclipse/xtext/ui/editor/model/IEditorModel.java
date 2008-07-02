@@ -11,6 +11,7 @@ package org.eclipse.xtext.ui.editor.model;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.SyntaxError;
@@ -37,4 +38,6 @@ public interface IEditorModel {
 	public abstract void removeModelListener(IXtextEditorModelListener listener);
 
 	public abstract void reconcile(IRegion partition);
+
+	public abstract Resource getResource();
 }
