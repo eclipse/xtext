@@ -260,5 +260,15 @@ public class GrammarUtil {
 		}
 		return kws;
 	}
+	
+	public static boolean isOptionalCardinality(AbstractElement e) {
+		return e.getCardinality()!=null && (e.getCardinality().equals("?") || e.getCardinality().equals("*"));
+	}
+	
+	public static boolean isMultipleCardinality(AbstractElement e) {
+		return e.getCardinality()!=null && (e.getCardinality().equals("+") || e.getCardinality().equals("*"));
+	}
+	
+	
 
 }
