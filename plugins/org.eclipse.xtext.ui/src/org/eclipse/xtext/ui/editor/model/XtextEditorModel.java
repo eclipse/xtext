@@ -45,7 +45,8 @@ public class XtextEditorModel implements IEditorModel {
 		if (resource.getParseResult() == null) {
 			try {
 				resource.load(new StringInputStream(document.get()), null);
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				CoreLog.logError(e);
 			}
 		}
@@ -81,7 +82,8 @@ public class XtextEditorModel implements IEditorModel {
 		synchronized (dirtyLock) {
 			if (!shouldReconcile || !dirty) {
 				return;
-			} else {
+			}
+			else {
 				dirty = false;
 			}
 		}
@@ -95,17 +97,21 @@ public class XtextEditorModel implements IEditorModel {
 			if (Activator.DEBUG_PARSING)
 				System.out.print("EditorModel Parsing...");
 			long start = System.currentTimeMillis();
+			
 			resource.update(region.getOffset(), region.getLength(), document
 					.get(region.getOffset(), region.getLength()));
 
 			if (Activator.DEBUG_PARSING)
 				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
 
-			notifyModelListeners(new XtextEditorModelChangeEvent(this));
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			if (Activator.DEBUG_PARSING)
 				System.out.println("fail!");
 			e.printStackTrace();
+		}
+		finally {
+			notifyModelListeners(new XtextEditorModelChangeEvent(this));
 		}
 	}
 
