@@ -26,6 +26,3 @@ generate ReferenceGrammar "http://eclipse.org/xtext/reference/ReferenceGrammar"
 	
 	Farbe :
 		 "ROT" | "BLAU" | "GELB" | "GRÜN" ;
-	
-	Doener :
-		 ( "döner" ) ;
