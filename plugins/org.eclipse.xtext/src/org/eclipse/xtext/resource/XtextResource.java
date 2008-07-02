@@ -33,67 +33,70 @@ import org.eclipse.xtext.service.Inject;
  * @author Jan Köhnlein
  */
 public class XtextResource extends ResourceImpl {
-    @Inject
-    private IParser parser;
+	@Inject
+	private IParser parser;
 
-    @Inject
-    private IElementFactory elementFactory;
-    
-    @Inject
-    private IParseTreeConstructor parsetreeConstructor;
+	@Inject
+	private IElementFactory elementFactory;
+
+	@Inject
+	private IParseTreeConstructor parsetreeConstructor;
 
 	private IParseResult parse;
 
-    public XtextResource(URI uri) {
-        super(uri);
-    }
-    
-    public IParseResult getParseResult() {
-    	return parse;
-    }
-    
-    public void update(int offset, int length, String change) {
-    	
-    	parser.reparse(parse.getRootNode(), offset, length, change);
-    }
+	public XtextResource(URI uri) {
+		super(uri);
+	}
 
-    @Override
-    protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-    	getContents().clear();
-        parse = parser.parse(inputStream, elementFactory);
-        if (parse != null) {
-            EObject rootElement = parse.getRootASTElement();
-            if (rootElement != null) {
-                getContents().add(rootElement);
-            }
-        }
-    }
+	public IParseResult getParseResult() {
+		return parse;
+	}
 
-    @Override
-    public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
-        if (contents.size() > 1) {
-            throw new IllegalStateException("Xtext resource cannot contain multiple root elements");
-        }
-        if (!contents.isEmpty()) {
-            EObject rootElement = contents.get(0);
-            parsetreeConstructor.update(rootElement);
-            NodeAdapter rootNodeAdapter = getNodeAdapter(rootElement);
-            if (rootNodeAdapter != null) {
-                CompositeNode rootNode = rootNodeAdapter.getParserNode();
-                String serialize = rootNode.serialize();
-                outputStream.write(serialize.getBytes());
-            }
-        }
-    }
+	public void update(int offset, String change) {
+		CompositeNode rootNode = parse.getRootNode();
+		int length = change.length();
+		int documentGrowth = length - rootNode.length();
+		int originalLength = length - documentGrowth;
+		parse = parser.reparse(rootNode, offset, originalLength, change);
+	}
 
-    private NodeAdapter getNodeAdapter(EObject object) {
-        EList<Adapter> adapters = object.eAdapters();
-        for (Adapter adapter : adapters) {
-            if (adapter.isAdapterForType(AbstractNode.class)) {
-                return (NodeAdapter) adapter;
-            }
-        }
-        return null;
-    }
+	@Override
+	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
+		getContents().clear();
+		parse = parser.parse(inputStream, elementFactory);
+		if (parse != null) {
+			EObject rootElement = parse.getRootASTElement();
+			if (rootElement != null) {
+				getContents().add(rootElement);
+			}
+		}
+	}
+
+	@Override
+	public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
+		if (contents.size() > 1) {
+			throw new IllegalStateException("Xtext resource cannot contain multiple root elements");
+		}
+		if (!contents.isEmpty()) {
+			EObject rootElement = contents.get(0);
+			parsetreeConstructor.update(rootElement);
+			NodeAdapter rootNodeAdapter = getNodeAdapter(rootElement);
+			if (rootNodeAdapter != null) {
+				CompositeNode rootNode = rootNodeAdapter.getParserNode();
+				String serialize = rootNode.serialize();
+				outputStream.write(serialize.getBytes());
+			}
+		}
+	}
+
+	private NodeAdapter getNodeAdapter(EObject object) {
+		EList<Adapter> adapters = object.eAdapters();
+		for (Adapter adapter : adapters) {
+			if (adapter.isAdapterForType(AbstractNode.class)) {
+				return (NodeAdapter) adapter;
+			}
+		}
+		return null;
+	}
 
 }
