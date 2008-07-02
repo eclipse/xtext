@@ -26,6 +26,7 @@ import org.eclipse.xtext.ui.service.IFormatter;
  */
 public class BuildInFormatter implements IFormatter {
 
+	// TODO make stuff configurable
 	public static final String NEW_LINE = System.getProperty("line.separator");
 	public static final String TAB = "\t";
 	public static final String SPACE = " ";
@@ -33,8 +34,8 @@ public class BuildInFormatter implements IFormatter {
 
 	private AbstractNode rootNode;
 	/*
-	 * lastLeafNode indicates when first text was written, so indentation can
-	 * starts and helps calculate (performance)
+	 * Field lastLeafNode indicates when first text was written, so indentation
+	 * can starts and helps calculate (performance)
 	 */
 	private LeafNode lastLeafNode;
 	private StringBuilder indentSB;
@@ -68,8 +69,8 @@ public class BuildInFormatter implements IFormatter {
 			}
 			Region retVal = new Region(an.offset(), an.length());
 			if (Activator.DEBUG_FORMATTER)
-				System.out.println("BuildInFormatter.calculateFormattingRegion(): From: " + region + " to "
-						+ retVal + ". Node:" + an);
+				System.out.println("BuildInFormatter.calculateFormattingRegion(): From: " + region + " to " + retVal
+						+ ". Node:" + an);
 			return retVal;
 		}
 		return region;
@@ -144,7 +145,7 @@ public class BuildInFormatter implements IFormatter {
 	private void appendLeafNode(StringBuilder stringBuilder, LeafNode ln) {
 		// IDEE COLLECT INFORMATION about before and after and concat leafnodes
 		// later
-		StringBuilder toAppend = new StringBuilder();
+		StringBuilder toAppend = new StringBuilder(4);
 		if (lastLeafNode == null) {
 			toAppend.append(getIndentString());
 		}

@@ -35,7 +35,6 @@ public class XtextEditorModel implements IEditorModel {
 
 	private final IDocument document;
 	private IDocumentListener dirtyListener;
-	private boolean shouldReconcile = true;
 	private final ILanguageDescriptor languageDescriptor;
 	private XtextResource resource;
 
@@ -80,7 +79,7 @@ public class XtextEditorModel implements IEditorModel {
 	 */
 	public void reconcile(IRegion region) {
 		synchronized (dirtyLock) {
-			if (!shouldReconcile || !dirty) {
+			if (!dirty) {
 				return;
 			}
 			else {
@@ -97,13 +96,9 @@ public class XtextEditorModel implements IEditorModel {
 			if (Activator.DEBUG_PARSING)
 				System.out.print("EditorModel Parsing...");
 			long start = System.currentTimeMillis();
-			
-			resource.update(region.getOffset(), region.getLength(), document
-					.get(region.getOffset(), region.getLength()));
-
+			resource.update(region.getOffset(), document.get(region.getOffset(), region.getLength()));
 			if (Activator.DEBUG_PARSING)
 				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
-
 		}
 		catch (Exception e) {
 			if (Activator.DEBUG_PARSING)
