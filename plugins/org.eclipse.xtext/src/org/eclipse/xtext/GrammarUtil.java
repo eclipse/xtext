@@ -43,9 +43,9 @@ public class GrammarUtil {
 	}
 
 	public static String getNamespace(Grammar g) {
-	    return Strings.concat(".", g.getIdElements(), 1);
+		return Strings.concat(".", g.getIdElements(), 1);
 	}
-	
+
 	public static Grammar getGrammar(EObject grammarElement) {
 		EObject root = getRootContainer(grammarElement);
 		if (root instanceof Grammar) {
@@ -85,7 +85,8 @@ public class GrammarUtil {
 		for (AbstractElement ae : g.getAbstractTokens()) {
 			if (ae == _this || eAllContentsAsList(ae).contains(_this)) {
 				return result;
-			} else {
+			}
+			else {
 				result.add(ae);
 			}
 		}
@@ -120,30 +121,30 @@ public class GrammarUtil {
 	}
 
 	public static Grammar getSuperGrammar(Grammar _this) {
-	    if(IXtextBuiltin.ID.equals(getLanguageId(_this))) {
-	        return null;
-	    }
+		if (IXtextBuiltin.ID.equals(getLanguageId(_this))) {
+			return null;
+		}
 		String id = getSuperGrammarId(_this);
 		if (id == null) {
 			id = IXtextBuiltin.ID;
 		}
 		ILanguageDescriptor descriptor = LanguageDescriptorFactory.get(id);
 		if (descriptor == null)
-			throw new IllegalStateException("Language '"+id+"' has not been set up properly");
+			throw new IllegalStateException("Language '" + id + "' has not been set up properly");
 		IGrammarAccess service = ServiceRegistry.getService(descriptor, IGrammarAccess.class);
 		if (service == null)
-			throw new IllegalStateException("Language '"+id+"' has not been set up properly");
+			throw new IllegalStateException("Language '" + id + "' has not been set up properly");
 		Grammar superGrammar = service.getGrammar();
 		return superGrammar == _this ? null : superGrammar;
 	}
-	
+
 	public static String getSuperGrammarId(Grammar _this) {
 		if (_this.getSuperGrammarIdElements().isEmpty())
 			return null;
 		StringBuffer buff = new StringBuffer();
-		for (int i = 0, x = _this.getSuperGrammarIdElements().size(); i<x; i++) {
+		for (int i = 0, x = _this.getSuperGrammarIdElements().size(); i < x; i++) {
 			buff.append(_this.getSuperGrammarIdElements().get(i));
-			if ((i+1)<x)
+			if ((i + 1) < x)
 				buff.append(".");
 		}
 		return buff.toString();
@@ -253,22 +254,28 @@ public class GrammarUtil {
 		Set<String> kws = new HashSet<String>();
 		List<ParserRule> rules = allParserRules(g);
 		for (ParserRule parserRule : rules) {
-			List<Keyword> list = typeSelect(eAllContentsAsList(parserRule),Keyword.class);
+			List<Keyword> list = typeSelect(eAllContentsAsList(parserRule), Keyword.class);
 			for (Keyword keyword : list) {
 				kws.add(keyword.getValue());
 			}
 		}
 		return kws;
 	}
-	
+
 	public static boolean isOptionalCardinality(AbstractElement e) {
-		return e.getCardinality()!=null && (e.getCardinality().equals("?") || e.getCardinality().equals("*"));
+		return e.getCardinality() != null && (e.getCardinality().equals("?") || e.getCardinality().equals("*"));
 	}
-	
+
 	public static boolean isMultipleCardinality(AbstractElement e) {
-		return e.getCardinality()!=null && (e.getCardinality().equals("+") || e.getCardinality().equals("*"));
+		return isOneOrMoreCardinality(e) || isAnyCardinality(e);
 	}
-	
-	
+
+	public static boolean isOneOrMoreCardinality(AbstractElement e) {
+		return e.getCardinality() != null && (e.getCardinality().equals("+"));
+	}
+
+	public static boolean isAnyCardinality(AbstractElement e) {
+		return e.getCardinality() != null && (e.getCardinality().equals("*"));
+	}
 
 }

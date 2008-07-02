@@ -53,6 +53,7 @@ public class XtextResource extends ResourceImpl {
     }
     
     public void update(int offset, int length, String change) {
+    	
     	parser.reparse(parse.getRootNode(), offset, length, change);
     }
 
