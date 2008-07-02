@@ -8,15 +8,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.NodeAdapter;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.ui.editor.model.IXtextEditorModelListener;
 import org.eclipse.xtext.ui.editor.model.XtextEditorModelChangeEvent;
+import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.XtextMarkerManager;
 
 /**
@@ -39,7 +50,8 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 	private Map<String, Object> collectMarkerAttributes(SyntaxError error) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IMarker.SEVERITY, Integer.valueOf(IMarker.SEVERITY_ERROR));
-		map.put(IMarker.LINE_NUMBER, Integer.valueOf(error.getNode().line()));
+		// TODO map.put(IMarker.LINE_NUMBER,
+		// Integer.valueOf(error.getNode().line()));
 		map.put(IMarker.CHAR_START, Integer.valueOf(error.getNode().offset()));
 		map.put(IMarker.CHAR_END, Integer.valueOf(error.getNode().offset() + error.getNode().length()));
 		map.put(IMarker.MESSAGE, error.getMessage());
@@ -50,10 +62,68 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 
 	public void modelChanged(XtextEditorModelChangeEvent event) {
 		XtextMarkerManager.clearXtextMarker(resource, monitor);
-		if (event.getModel() != null && event.getModel().hasErrors()) {
+		XtextMarkerManager.clearEMFMarker(resource, monitor);
+		List<Diagnostic> dignostics = validateResourceSet(event.getModel().getResource().getResourceSet());
+		for (Diagnostic diagnostic : dignostics) {
+			XtextMarkerManager.createMarker(resource, collectMarkerAttributesForDiagnostic(diagnostic), monitor);
+		}
+		if (event.getModel().hasErrors()) {
 			for (SyntaxError error : event.getModel().getSyntaxErrors()) {
 				XtextMarkerManager.createMarker(resource, collectMarkerAttributes(error), monitor);
 			}
 		}
+	}
+
+	private Map<String, Object> collectMarkerAttributesForDiagnostic(Diagnostic diagnostic) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int sever = IMarker.SEVERITY_ERROR;
+		switch (diagnostic.getSeverity()) {
+			case Diagnostic.WARNING:
+				sever = IMarker.SEVERITY_WARNING;
+				break;
+			case Diagnostic.OK:
+			case Diagnostic.INFO:
+				sever = IMarker.SEVERITY_INFO;
+				break;
+		}
+		map.put(IMarker.SEVERITY, sever);
+		List<?> data = diagnostic.getData();
+		Object causer = data.get(0);
+		if (causer instanceof EObject) {
+			EObject ele = (EObject) causer;
+			NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(ele);
+			if (nodeAdapter != null) {
+				CompositeNode parserNode = nodeAdapter.getParserNode();
+				// TODO map.put(IMarker.LINE_NUMBER,
+				// Integer.valueOf(parserNode.line()));
+				int offset = parserNode.offset();
+				map.put(IMarker.CHAR_START, Integer.valueOf(offset));
+				map.put(IMarker.CHAR_END, Integer.valueOf(parserNode.offset() + parserNode.length()));
+			}
+		}
+		map.put(IMarker.MESSAGE, diagnostic.getMessage());
+		map.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
+		return map;
+	}
+
+	private List<Diagnostic> validateResourceSet(ResourceSet resourceSet) {
+		List<Diagnostic> retVal = new ArrayList<Diagnostic>();
+		for (Resource resource : resourceSet.getResources()) {
+			Diagnostic diagnostic = validateResource(resource);
+			if (diagnostic.getSeverity() != Diagnostic.OK)
+				retVal.add(diagnostic);
+			if (Activator.DEBUG_MARKERCREATOR)
+				System.out.println("XtextProblemMarkerCreator.validateResourceSet()" + diagnostic.toString());
+		}
+		return retVal;
+	}
+
+	private Diagnostic validateResource(Resource resource) {
+		if (resource.getAllContents().hasNext()) {
+			EObject rootObject = resource.getAllContents().next();
+			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(rootObject);
+			return diagnostic;
+		}
+		return null;
 	}
 }
