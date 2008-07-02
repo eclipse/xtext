@@ -21,7 +21,6 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.FileStoreEditorInput;
-import org.eclipse.ui.internal.ErrorEditorPart;
 import org.eclipse.ui.texteditor.ContentAssistAction;
 import org.eclipse.xtext.ui.internal.Activator;
 
@@ -66,7 +65,7 @@ public class EditorTest extends TestCase {
 			waitForJobCompletion();
 			sleep(STEP_DELAY);
 		}
-		else if (openEditor instanceof ErrorEditorPart) {
+		else if (openEditor instanceof org.eclipse.ui.internal.ErrorEditorPart) {
 			fail("Could not open BaseTextEditor. Editor produced errors during initialization.");
 		}
 		else {
@@ -89,7 +88,6 @@ public class EditorTest extends TestCase {
 		openedEditor.selectAndReveal(5, 0);
 		sleep(STEP_DELAY);
 		waitForJobCompletion();
-		fail("Currently broken. Please try again later.");
 		caAction.run();
 		sleep(STEP_DELAY);
 		// TODO test implementation

@@ -21,6 +21,7 @@ import org.eclipse.xtext.ui.editor.utils.TextStyleConstants;
 import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.TokenTypeDef;
+import org.eclipse.xtext.ui.util.GrammarConstants;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -90,7 +91,7 @@ public class BuildInTokenTypeDef implements ITokenTypeDefProvider {
 			@Override
 			public boolean match(LeafNode node) {
 				if (node.getGrammarElement() instanceof RuleCall) {
-					return "STRING".equals(((RuleCall) node.getGrammarElement()).getName());
+					return  GrammarConstants.LEXER_RULE_STRING.equals(((RuleCall) node.getGrammarElement()).getName());
 				}
 				return false;
 			}
@@ -105,7 +106,7 @@ public class BuildInTokenTypeDef implements ITokenTypeDefProvider {
 			@Override
 			public boolean match(LeafNode node) {
 				if (node.getGrammarElement() instanceof RuleCall) {
-					return "INT".equals(((RuleCall) node.getGrammarElement()).getName());
+					return GrammarConstants.LEXER_RULE_INT.equals(((RuleCall) node.getGrammarElement()).getName());
 				}
 				return false;
 			}

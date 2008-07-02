@@ -18,6 +18,7 @@ import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.service.impl.BuildInTokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.TokenTypeDef;
+import org.eclipse.xtext.ui.util.GrammarConstants;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -44,8 +45,9 @@ public class XtextTokenTypeDef extends BuildInTokenTypeDef {
 			@Override
 			public boolean match(LeafNode node) {
 				return RuleCall.class.isInstance(node.getGrammarElement())
-						&& ("ID".equals(node.getText()) || "STRING".equals(node.getText()) || "INT".equals(node
-								.getText()));
+						&& (GrammarConstants.LEXER_RULE_ID.equals(node.getText())
+								|| GrammarConstants.LEXER_RULE_STRING.equals(node.getText()) || GrammarConstants.LEXER_RULE_INT
+								.equals(node.getText()));
 			}
 		};
 		TextStyle ts = keyWordTokenType().getTextStyle();

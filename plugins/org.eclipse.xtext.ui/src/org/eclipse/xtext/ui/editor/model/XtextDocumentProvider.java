@@ -13,7 +13,6 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.IDocument;
@@ -80,8 +79,9 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 		IResourceFactory service = ServiceRegistry.getService(languageDescriptor, IResourceFactory.class);
 		XtextResource resource = (XtextResource) service.createResource(URI.createPlatformResourceURI(pathName, true));
 		rs.getResources().add(resource);
-//		TODO : generate EMF resource factory extension
-//		XtextResource resource = (XtextResource) rs.createResource(URI.createPlatformResourceURI(pathName, true));
+		// TODO : generate EMF resource factory extension
+		// XtextResource resource = (XtextResource)
+		// rs.createResource(URI.createPlatformResourceURI(pathName, true));
 		Assert.isNotNull(resource);
 		IDocument document = info.fTextFileBuffer.getDocument();
 
@@ -97,8 +97,10 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 			return null;
 		IAdaptable adaptable = (IAdaptable) element;
 		IFile f = (IFile) adaptable.getAdapter(IFile.class);
-		if (f != null) {
-			return JavaCore.create(f).getJavaProject();
+		if (f != null && f.exists()) {
+			IJavaProject javaProject = JavaCore.create(f.getProject());
+			if (javaProject != null)
+				return javaProject.getJavaProject();
 		}
 		return null;
 	}
@@ -111,13 +113,15 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 				Object lock = null;
 				if (doc instanceof ISynchronizable) {
 					lock = ((ISynchronizable) doc).getLockObject();
-				} else {
+				}
+				else {
 					lock = xtextFileInfo.xtextEditorModel;
 				}
 				xtextFileInfo.xtextEditorModel.uninstall();
 				if (lock == null) {
 					xtextFileInfo.xtextEditorModel = null;
-				} else {
+				}
+				else {
 					synchronized (lock) {
 						xtextFileInfo.xtextEditorModel = null;
 					}

@@ -12,8 +12,13 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.text.source.IVerticalRuler;
+import org.eclipse.jface.text.source.projection.ProjectionAnnotationModel;
+import org.eclipse.jface.text.source.projection.ProjectionSupport;
+import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IPartService;
@@ -48,6 +53,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	private IEditorModel model;
 	private XtextContentOutlinePage outlinePage;
 	protected boolean selectionSetFromOutline;
+	private ProjectionSupport projectionSupport;
 
 	@Inject
 	private ILanguageDescriptor languageDescriptor;
@@ -125,6 +131,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 			selectionSetFromOutline = true;
 		}
 	};
+	private ProjectionAnnotationModel annotationModel;
 
 	private void doSelectionChanged(SelectionChangedEvent selectionChangedEvent) {
 		// IStructuredSelection selection = (IStructuredSelection)
@@ -152,6 +159,11 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		return service.getActivePart();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.ui.editors.text.TextEditor#getAdapter(java.lang.Class)
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object getAdapter(Class adapter) {
@@ -170,6 +182,11 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		return outlinePage;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.ui.editors.text.TextEditor#createActions()
+	 */
 	@Override
 	protected void createActions() {
 		super.createActions();
@@ -183,6 +200,43 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		setAction("Format", action); //$NON-NLS-1$
 		markAsStateDependentAction("Format", true); //$NON-NLS-1$
 		markAsSelectionDependentAction("Format", true); //$NON-NLS-1$
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#createSourceViewer
+	 * (org.eclipse.swt.widgets.Composite,
+	 * org.eclipse.jface.text.source.IVerticalRuler, int)
+	 */
+	@Override
+	protected ISourceViewer createSourceViewer(Composite parent, IVerticalRuler ruler, int styles) {
+		// overwrite superclass implementation to allow folding
+		ISourceViewer projectionViewer = new ProjectionViewer(parent, ruler, getOverviewRuler(),
+				isOverviewRulerVisible(), styles);
+		getSourceViewerDecorationSupport(projectionViewer);
+		return projectionViewer;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#createPartControl
+	 * (org.eclipse.swt.widgets.Composite)
+	 */
+	@Override
+	public void createPartControl(Composite parent) {
+		super.createPartControl(parent);
+		ProjectionViewer projectionViewer = (ProjectionViewer) getSourceViewer();
+		projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(), getSharedColors());
+		projectionSupport.addSummarizableAnnotationType("org.eclipse.ui.workbench.texteditor.warning"); //$NON-NLS-1$
+
+		projectionSupport.install();
+		projectionViewer.doOperation(ProjectionViewer.TOGGLE);
+		annotationModel = projectionViewer.getProjectionAnnotationModel();
 
 	}
 }
