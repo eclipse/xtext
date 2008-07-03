@@ -35,7 +35,6 @@ import org.openarchitectureware.xpand2.XpandExecutionContextImpl;
 import org.openarchitectureware.xpand2.XpandFacade;
 import org.openarchitectureware.xpand2.output.Outlet;
 import org.openarchitectureware.xpand2.output.OutputImpl;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
@@ -143,7 +142,7 @@ public class GeneratorFacade {
 	    if (!GrammarUtil.isAbstract(grammarModel)) {
 
             GenService elementFactoryService = XtextgenFactory.eINSTANCE.createGenService();
-            elementFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.parser.IElementFactory");
+            elementFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.parser.IAstFactory");
             elementFactoryService.setGenClassFQName("org.eclipse.xtext.parser.GenericEcoreElementFactory");
             // no template, as service is generic. Nevertheless, we need the individual registration to avoid conflicts
             elementFactoryService.setExtensionPointID("org.eclipse.xtext.ui.aSTFactory");
