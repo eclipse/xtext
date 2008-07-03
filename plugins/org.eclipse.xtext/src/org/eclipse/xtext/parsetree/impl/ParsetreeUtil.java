@@ -41,20 +41,6 @@ public class ParsetreeUtil {
 				+ abstractParserNode.eClass().getName());
 	}
 
-	public static int offset(AbstractNodeImpl abstractParserNode) {
-		checkArgument(abstractParserNode);
-		AbstractNode rootContainer = (AbstractNode) EcoreUtil.getRootContainer(abstractParserNode);
-		if (rootContainer == abstractParserNode) {
-			return 0;
-		}
-		EList<LeafNode> leafNodes = rootContainer.getLeafNodes(abstractParserNode);
-		int offset = 0;
-		for (LeafNode leafNode : leafNodes) {
-			offset += leafNode.length();
-		}
-		return offset;
-	}
-
 	private static void checkArgument(AbstractNodeImpl abstractParserNode) {
 		int classifierID = abstractParserNode.eClass().getClassifierID();
 		if (classifierID != ParsetreePackage.COMPOSITE_NODE && classifierID != ParsetreePackage.LEAF_NODE) {
@@ -76,6 +62,18 @@ public class ParsetreeUtil {
 				if (c == '\n' || c == '\r')
 					line++;
 			}
+		}
+		return line;
+	}
+	
+	public static int endLine(AbstractNodeImpl _this) {
+		int line = _this.getLine();
+		String text = _this.serialize();
+		char[] charArray = text.toCharArray();
+		for (char c : charArray) {
+			// TODO handle os specific newlines
+			if (c == '\n' || c == '\r')
+				line++;
 		}
 		return line;
 	}

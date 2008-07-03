@@ -9,8 +9,6 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;

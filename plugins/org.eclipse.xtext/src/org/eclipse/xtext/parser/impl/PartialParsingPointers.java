@@ -34,21 +34,21 @@ public class PartialParsingPointers {
 	private int length;
 	private int offset;
 	private List<CompositeNode> validReplaceRootNodes;
-	private List<NodeWithCachedOffset> nodesEnclosingChangeRegion;
+	private List<CompositeNode> nodesEnclosingChangeRegion;
 
 	public PartialParsingPointers(CompositeNode rootNode, int offset, int length,
-			List<CompositeNode> validReplaceRootNodes, List<NodeWithCachedOffset> nodesEnclosingChangeRegion) {
+			List<CompositeNode> validReplaceRootNodes, List<CompositeNode> nodesEnclosingRegion) {
 		if (validReplaceRootNodes == null || validReplaceRootNodes.isEmpty()) {
 			throw new IllegalArgumentException("validReplaceRootNodes cannot be empty");
 		}
-		if (nodesEnclosingChangeRegion == null || nodesEnclosingChangeRegion.isEmpty()) {
+		if (nodesEnclosingRegion == null || nodesEnclosingRegion.isEmpty()) {
 			throw new IllegalArgumentException("nodesEnclosingChangeRegion cannot be empty");
 		}
 		this.rootNode = rootNode;
 		this.offset = offset;
 		this.length = length;
 		this.validReplaceRootNodes = validReplaceRootNodes;
-		this.nodesEnclosingChangeRegion = nodesEnclosingChangeRegion;
+		this.nodesEnclosingChangeRegion = nodesEnclosingRegion;
 	}
 
 	public String findReparseRegion() {
@@ -92,12 +92,12 @@ public class PartialParsingPointers {
 	public EObject findASTReplaceElement(CompositeNode replaceRootNode) {
 		boolean foundReplaceNode = false;
 		for (int i = 0; i < nodesEnclosingChangeRegion.size(); ++i) {
-			CompositeNode nodeEnclosingRegion = (CompositeNode) nodesEnclosingChangeRegion.get(i).getNode();
+			CompositeNode nodeEnclosingRegion = nodesEnclosingChangeRegion.get(i);
 			if (nodeEnclosingRegion == replaceRootNode) {
 				foundReplaceNode = true;
 			}
 			if (foundReplaceNode) {
-				EObject currentASTElement = nodesEnclosingChangeRegion.get(i).getNode().getElement();
+				EObject currentASTElement = nodesEnclosingChangeRegion.get(i).getElement();
 				if (currentASTElement != null) {
 					return currentASTElement;
 				}
@@ -107,7 +107,7 @@ public class PartialParsingPointers {
 		// In this case, there must not be any composite nodes with
 		// multiple composite children on the way down.
 		return NodeUtil.getASTElementForRootNode((CompositeNode) nodesEnclosingChangeRegion.get(
-				nodesEnclosingChangeRegion.size() - 1).getNode());
+				nodesEnclosingChangeRegion.size() - 1));
 	}
 
 	public String findASTContainmentFeatureName() {

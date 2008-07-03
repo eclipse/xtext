@@ -8,7 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.antlr;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 
 /**
@@ -21,6 +25,8 @@ public class XtextTokenStream extends CommonTokenStream {
     private int currentLookahead;
     private int lookaheadConsumedByParent;
 
+    private List<Token> lookaheadTokens = new ArrayList<Token>(); 
+    
     public XtextTokenStream() {
         super();
     }
@@ -41,6 +47,10 @@ public class XtextTokenStream extends CommonTokenStream {
     @Override
     public int LA(int i) {
         currentLookahead = Math.max(currentLookahead, i);
+        Token lookaheadToken = LT(i);
+        if(!lookaheadTokens.contains(lookaheadToken)) {
+        	lookaheadTokens.add(lookaheadToken);
+        }
         return super.LA(i);
     }
 
@@ -52,6 +62,17 @@ public class XtextTokenStream extends CommonTokenStream {
     }
 
     /**
+	 * @return the lookaheadTokens
+	 */
+	public List<Token> getLookaheadTokens() {
+		return lookaheadTokens;
+	}
+
+	public void removeLastLookaheadToken() {
+		lookaheadTokens.remove(lookaheadTokens.size()-1);
+	}
+	
+    /**
      * @return the lookaheadConsumedByParent
      */
     public int getLookaheadConsumedByParent() {
@@ -61,6 +82,7 @@ public class XtextTokenStream extends CommonTokenStream {
     public void resetLookahead() {
         currentLookahead = 0;
         lookaheadConsumedByParent = 0;
+        lookaheadTokens.clear();
     }
 
     public void decrementLookahead() {
@@ -70,4 +92,5 @@ public class XtextTokenStream extends CommonTokenStream {
     public void consumeLookahead() {
         ++lookaheadConsumedByParent;
     }
+
 }

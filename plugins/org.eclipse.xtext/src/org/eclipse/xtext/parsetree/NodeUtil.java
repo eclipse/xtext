@@ -101,8 +101,13 @@ public class NodeUtil {
             name = grammarElement.getClass().getSimpleName();
         }
         String astElementAsString = (node.getElement() == null) ? "null" : node.getElement().eClass().getName();
-        System.out.println(indent + node.getLookahead() + " " + node.getLookaheadConsumed() + " " + name + " : " + node.serialize()
-                + " -> " + astElementAsString);
+        System.out.print(indent + name + " : " + node.serialize()
+                + " -> " + astElementAsString + "  la={ ");
+        for (LeafNode lookaheadNode : node.getLookaheadLeafNodes()) {
+        	System.out.print("\""+ lookaheadNode.getText() +"\" ");
+		}
+        System.out.print(" (" + node.getOffset() + ", " + node.length() + ")");
+        System.out.println("}");
     }
     
 }

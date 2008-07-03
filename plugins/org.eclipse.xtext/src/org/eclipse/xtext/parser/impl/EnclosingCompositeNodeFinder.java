@@ -24,12 +24,12 @@ public class EnclosingCompositeNodeFinder {
 
 	private int currentOffset = 0;
 	private int startTokenParentIndex = -1;
-	private List<NodeWithCachedOffset> nodesEnclosingRegion;
+	private List<CompositeNode> nodesEnclosingRegion;
 	private int offset;
 	private int length;
 
 	public EnclosingCompositeNodeFinder(CompositeNode parentNode, int offset, int length) {
-		nodesEnclosingRegion = new ArrayList<NodeWithCachedOffset>();
+		nodesEnclosingRegion = new ArrayList<CompositeNode>();
 		this.offset = offset;
 		this.length = length;
 		findRegion(parentNode);
@@ -38,13 +38,13 @@ public class EnclosingCompositeNodeFinder {
 	/**
 	 * @return the nodesEnclosingRegion
 	 */
-	public List<NodeWithCachedOffset> getNodesEnclosingRegion() {
+	public List<CompositeNode> getNodesEnclosingRegion() {
 		return nodesEnclosingRegion;
 	}
 	
 	private boolean findRegion(CompositeNode parentNode) {
 		boolean isLookingForStartToken = startTokenParentIndex == -1;
-		nodesEnclosingRegion.add(new NodeWithCachedOffset(currentOffset, parentNode));
+		nodesEnclosingRegion.add(parentNode);
 		int currentParentIndex = nodesEnclosingRegion.size() - 1;
 		EList<AbstractNode> children = parentNode.getChildren();
 		for (AbstractNode child : children) {
