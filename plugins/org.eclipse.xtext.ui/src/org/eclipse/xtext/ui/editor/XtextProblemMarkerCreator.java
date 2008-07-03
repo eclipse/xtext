@@ -39,6 +39,7 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 
 	private final IResource resource;
 	private IProgressMonitor monitor;
+	private Resource emfResource;
 
 	public XtextProblemMarkerCreator(IResource resource) {
 		this.resource = resource;
@@ -71,21 +72,23 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 	public void modelChanged(XtextEditorModelChangeEvent event) {
 		XtextMarkerManager.clearXtextMarker(resource, monitor);
 		XtextMarkerManager.clearEMFMarker(resource, monitor);
-		List<Diagnostic> diagnostics = validateResourceSet(event.getModel().getResource().getResourceSet());
+		emfResource = event.getModel().getResource();
+		// get resource set for grammar validation
+		List<Diagnostic> diagnostics = validateResourceSet(emfResource.getResourceSet());
 		for (Diagnostic diagnostic : diagnostics) {
-			if (diagnostic.getChildren() != null) {
+			if (!diagnostic.getChildren().isEmpty()) {
 				for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
-					XtextMarkerManager.createMarker(resource, collectMarkerAttributesForDiagnostic(childDiagnostic),
+					XtextMarkerManager.createEMFMarker(resource, collectMarkerAttributesForDiagnostic(childDiagnostic),
 							monitor);
 				}
 			}
 			else {
-				XtextMarkerManager.createMarker(resource, collectMarkerAttributesForDiagnostic(diagnostic), monitor);
+				XtextMarkerManager.createEMFMarker(resource, collectMarkerAttributesForDiagnostic(diagnostic), monitor);
 			}
 		}
 		if (event.getModel().hasErrors()) {
 			for (SyntaxError error : event.getModel().getSyntaxErrors()) {
-				XtextMarkerManager.createMarker(resource, collectMarkerAttributes(error), monitor);
+				XtextMarkerManager.createXtextMarker(resource, collectMarkerAttributes(error), monitor);
 			}
 		}
 	}
@@ -107,17 +110,24 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 		Object causer = data.get(0);
 		if (causer instanceof EObject) {
 			EObject ele = (EObject) causer;
-			NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(ele);
-			if (nodeAdapter != null) {
-				CompositeNode parserNode = nodeAdapter.getParserNode();
-				// TODO map.put(IMarker.LINE_NUMBER,
-				// Integer.valueOf(parserNode.line()));
-				int offset = parserNode.offset();
-				map.put(IMarker.CHAR_START, Integer.valueOf(offset));
-				map.put(IMarker.CHAR_END, Integer.valueOf(offset + parserNode.length()));
+			// Persist only own marker
+			if (!emfResource.equals(ele.eResource())) {
+				map.put(IMarker.TRANSIENT, Boolean.TRUE);
+				map.put(IMarker.MESSAGE, "Referenced resource contains problems. " + diagnostic.getMessage());
+			}
+			else {
+				NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(ele);
+				if (nodeAdapter != null) {
+					CompositeNode parserNode = nodeAdapter.getParserNode();
+					// TODO map.put(IMarker.LINE_NUMBER,
+					// Integer.valueOf(parserNode.line()));
+					int offset = parserNode.offset();
+					map.put(IMarker.CHAR_START, Integer.valueOf(offset));
+					map.put(IMarker.CHAR_END, Integer.valueOf(offset + parserNode.length()));
+				}
+				map.put(IMarker.MESSAGE, diagnostic.getMessage());
 			}
 		}
-		map.put(IMarker.MESSAGE, diagnostic.getMessage());
 		map.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 		return map;
 	}
