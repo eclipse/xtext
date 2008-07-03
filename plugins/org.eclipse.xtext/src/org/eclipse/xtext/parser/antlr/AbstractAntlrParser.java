@@ -39,6 +39,7 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeAdapterFactory;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
 import org.eclipse.xtext.parsetree.SyntaxError;
+import org.eclipse.xtext.util.MultiMap;
 import org.eclipse.xtext.util.Strings;
 
 public abstract class AbstractAntlrParser extends Parser {
@@ -52,6 +53,9 @@ public abstract class AbstractAntlrParser extends Parser {
 	protected IElementFactory factory;
 
 	protected int lastConsumedIndex = -1;
+
+	private MultiMap<Token, CompositeNode> deferredLookaheadMap = new MultiMap<Token, CompositeNode>();
+	private Map<Token, LeafNode> token2NodeMap = new HashMap<Token, LeafNode>();
 
 	protected AbstractAntlrParser(TokenStream input) {
 		super(input);
@@ -97,8 +101,7 @@ public abstract class AbstractAntlrParser extends Parser {
 			leafNode.setFeature(feature);
 			parentNode.getChildren().add(leafNode);
 			lastConsumedIndex = token.getTokenIndex();
-			((XtextTokenStream) input).consumeLookahead();
-			// ((XtextTokenStream) input).decrementLookahead();
+			tokenConsumed(token, leafNode);
 			return leafNode;
 		}
 		return null;
@@ -130,7 +133,8 @@ public abstract class AbstractAntlrParser extends Parser {
 						antlrTypeToLexerName.put(Integer.parseInt(tokenTypeId), token.substring(prefix.length()));
 					line = br.readLine();
 				}
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				log.error(e);
 				throw new WrappedException(e);
 			}
@@ -184,7 +188,8 @@ public abstract class AbstractAntlrParser extends Parser {
 			EList<LeafNode> leafNodes = currentNode.getLeafNodes();
 			if (leafNodes.isEmpty()) {
 				appendError(currentNode);
-			} else {
+			}
+			else {
 				appendError(leafNodes.get(leafNodes.size() - 1));
 			}
 		}
@@ -268,7 +273,8 @@ public abstract class AbstractAntlrParser extends Parser {
 			try {
 				Method method = this.getClass().getMethod(antlrEntryRuleName);
 				current = (EObject) method.invoke(this);
-			} catch (InvocationTargetException ite) {
+			}
+			catch (InvocationTargetException ite) {
 				Throwable targetException = ite.getTargetException();
 				if (targetException instanceof RecognitionException) {
 					throw (RecognitionException) targetException;
@@ -277,14 +283,17 @@ public abstract class AbstractAntlrParser extends Parser {
 					throw new WrappedException((Exception) targetException);
 				}
 				throw new RuntimeException(targetException);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				throw new WrappedException(e);
 			}
 			appendTrailingHiddenTokens(currentNode);
-		} finally {
+		}
+		finally {
 			try {
 				appendAllTokens();
-			} finally {
+			}
+			finally {
 				result = new ParseResult(current, currentNode);
 			}
 		}
@@ -296,13 +305,26 @@ public abstract class AbstractAntlrParser extends Parser {
 		if (!entryRuleName.startsWith("entryRule")) {
 			if (!entryRuleName.startsWith("rule")) {
 				antlrEntryRuleName = "entryRule" + entryRuleName;
-			} else {
+			}
+			else {
 				antlrEntryRuleName = "entry" + Strings.toFirstUpper(entryRuleName);
 			}
-		} else {
+		}
+		else {
 			antlrEntryRuleName = entryRuleName;
 		}
 		return antlrEntryRuleName;
+	}
+
+	private void tokenConsumed(Token token, LeafNode leafNode) {
+		List<CompositeNode> nodesDecidingOnToken = deferredLookaheadMap.get(token);
+		for (CompositeNode nodeDecidingOnToken : nodesDecidingOnToken) {
+			nodeDecidingOnToken.getLookaheadLeafNodes().add(leafNode);
+		}
+		deferredLookaheadMap.remove(token);
+		token2NodeMap.put(token, leafNode);
+		((XtextTokenStream) input).consumeLookahead();
+		// ((XtextTokenStream) input).decrementLookahead();
 	}
 
 	/**
@@ -313,24 +335,39 @@ public abstract class AbstractAntlrParser extends Parser {
 	 */
 	protected void setCurrentLookahead() {
 		XtextTokenStream xtextTokenStream = (XtextTokenStream) input;
-		currentNode.setLookahead(xtextTokenStream.getCurrentLookahead());
-		currentNode.setLookaheadConsumed(xtextTokenStream.getLookaheadConsumedByParent());
+		List<Token> lookaheadTokens = xtextTokenStream.getLookaheadTokens();
+		for (Token lookaheadToken : lookaheadTokens) {
+			LeafNode leafNode = token2NodeMap.get(lookaheadToken);
+			if (leafNode == null) {
+				deferredLookaheadMap.put(lookaheadToken, currentNode);
+			}
+			else {
+				currentNode.getLookaheadLeafNodes().add(leafNode);
+			}
+		}
 	}
 
 	/**
-	 * Sets the current lookahead to zero. See {@link
-	 * AbstractAntlrParser#setCurrentLookahead()}
+	 * Sets the current lookahead to zero. See
+	 * {@link AbstractAntlrParser#setCurrentLookahead()}
 	 */
 	protected void resetLookahead() {
 		XtextTokenStream xtextTokenStream = (XtextTokenStream) input;
 		xtextTokenStream.resetLookahead();
+		token2NodeMap.clear();
 	}
 
 	protected void moveLookaheadInfo(CompositeNode source, CompositeNode target) {
-		target.setLookahead(source.getLookahead());
-		target.setLookaheadConsumed(source.getLookaheadConsumed());
-		source.setLookahead(0);
-		source.setLookaheadConsumed(0);
+		EList<LeafNode> sourceLookaheadLeafNodes = source.getLookaheadLeafNodes();
+		target.getLookaheadLeafNodes().addAll(sourceLookaheadLeafNodes);
+		sourceLookaheadLeafNodes.clear();
+
+		for (Token deferredLookaheadToken : deferredLookaheadMap.keySet()) {
+			List<CompositeNode> nodesDecidingOnToken = deferredLookaheadMap.get(deferredLookaheadToken);
+			while(nodesDecidingOnToken.indexOf(source) != -1) {
+				nodesDecidingOnToken.set(nodesDecidingOnToken.indexOf(source), target);
+			}
+		}
 	}
 
 	/**
@@ -339,11 +376,12 @@ public abstract class AbstractAntlrParser extends Parser {
 	 * {@link AbstractAntlrParser#setCurrentLookahead()}
 	 * 
 	 * @see org.antlr.runtime.BaseRecognizer#match(org.antlr.runtime.IntStream,
-	 * 	int, org.antlr.runtime.BitSet)
+	 *      int, org.antlr.runtime.BitSet)
 	 */
 	@Override
 	public void match(IntStream input, int ttype, BitSet follow) throws RecognitionException {
 		super.match(input, ttype, follow);
+		((XtextTokenStream) input).removeLastLookaheadToken();
 		((XtextTokenStream) input).decrementLookahead();
 	}
 

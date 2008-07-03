@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SyntaxErrorImpl.java,v 1.1 2008/07/01 10:18:06 sefftinge Exp $
+ * $Id: SyntaxErrorImpl.java,v 1.2 2008/07/03 12:17:29 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -110,16 +110,6 @@ public class SyntaxErrorImpl extends EObjectImpl implements SyntaxError {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractNode basicGetNode() {
-		if (eContainerFeatureID != ParsetreePackage.SYNTAX_ERROR__NODE) return null;
-		return (AbstractNode)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public NotificationChain basicSetNode(AbstractNode newNode, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newNode, ParsetreePackage.SYNTAX_ERROR__NODE, msgs);
 		return msgs;
@@ -201,8 +191,7 @@ public class SyntaxErrorImpl extends EObjectImpl implements SyntaxError {
 			case ParsetreePackage.SYNTAX_ERROR__MESSAGE:
 				return getMessage();
 			case ParsetreePackage.SYNTAX_ERROR__NODE:
-				if (resolve) return getNode();
-				return basicGetNode();
+				return getNode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -254,7 +243,7 @@ public class SyntaxErrorImpl extends EObjectImpl implements SyntaxError {
 			case ParsetreePackage.SYNTAX_ERROR__MESSAGE:
 				return MESSAGE_EDEFAULT == null ? message != null : !MESSAGE_EDEFAULT.equals(message);
 			case ParsetreePackage.SYNTAX_ERROR__NODE:
-				return basicGetNode() != null;
+				return getNode() != null;
 		}
 		return super.eIsSet(featureID);
 	}

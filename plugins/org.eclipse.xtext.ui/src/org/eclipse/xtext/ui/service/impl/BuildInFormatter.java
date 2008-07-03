@@ -68,10 +68,10 @@ public class BuildInFormatter implements IFormatter {
 				CompositeNode parent = an.getParent();
 				if (parent == null)
 					throw new IllegalStateException("Could not allocate Node to region " + region + ". Last Node was "
-							+ an + " (offset:" + an.offset() + " length:" + an.length() + ")");
+							+ an + " (offset:" + an.getOffset() + " length:" + an.length() + ")");
 				an = parent;
 			}
-			Region retVal = new Region(an.offset(), an.length());
+			Region retVal = new Region(an.getOffset(), an.length());
 			if (Activator.DEBUG_FORMATTER)
 				System.out.println("BuildInFormatter.calculateFormattingRegion(): From: " + region + " to " + retVal
 						+ ". Node:" + an);
@@ -81,8 +81,8 @@ public class BuildInFormatter implements IFormatter {
 	}
 
 	private boolean overFormattingRegion(AbstractNode an) {
-		return an.offset() <= formattingRegion.getOffset()
-				&& (an.offset() + an.length()) >= formattingRegion.getLength() + formattingRegion.getOffset();
+		return an.getOffset() <= formattingRegion.getOffset()
+				&& (an.getOffset() + an.length()) >= formattingRegion.getLength() + formattingRegion.getOffset();
 	}
 
 	/**
@@ -142,8 +142,8 @@ public class BuildInFormatter implements IFormatter {
 	}
 
 	private boolean inFormattingRegion(AbstractNode an) {
-		return an.offset() >= formattingRegion.getOffset()
-				&& (an.offset() + an.length()) <= formattingRegion.getLength() + formattingRegion.getOffset();
+		return an.getOffset() >= formattingRegion.getOffset()
+				&& (an.getOffset() + an.length()) <= formattingRegion.getLength() + formattingRegion.getOffset();
 	}
 
 	private void appendLeafNode(StringBuilder stringBuilder, LeafNode ln) {

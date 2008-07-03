@@ -2,12 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNode.java,v 1.6 2008/07/01 10:18:03 sefftinge Exp $
+ * $Id: AbstractNode.java,v 1.7 2008/07/03 12:17:28 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -22,6 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getGrammarElement <em>Grammar Element</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getElement <em>Element</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getSyntaxError <em>Syntax Error</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getOffset <em>Offset</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getLine <em>Line</em>}</li>
  * </ul>
  * </p>
  *
@@ -124,7 +125,7 @@ public interface AbstractNode extends EObject
 	 * @see #setSyntaxError(SyntaxError)
 	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getAbstractNode_SyntaxError()
 	 * @see org.eclipse.xtext.parsetree.SyntaxError#getNode
-	 * @model opposite="node" containment="true" resolveProxies="true"
+	 * @model opposite="node" containment="true"
 	 * @generated
 	 */
 	SyntaxError getSyntaxError();
@@ -140,28 +141,64 @@ public interface AbstractNode extends EObject
 	void setSyntaxError(SyntaxError value);
 
 		/**
+	 * Returns the value of the '<em><b>Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Offset</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Offset</em>' attribute.
+	 * @see #setOffset(int)
+	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getAbstractNode_Offset()
+	 * @model
+	 * @generated
+	 */
+	int getOffset();
+
+		/**
+	 * Sets the value of the '{@link org.eclipse.xtext.parsetree.AbstractNode#getOffset <em>Offset</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Offset</em>' attribute.
+	 * @see #getOffset()
+	 * @generated
+	 */
+	void setOffset(int value);
+
+		/**
+	 * Returns the value of the '<em><b>Line</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Line</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Line</em>' attribute.
+	 * @see #setLine(int)
+	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getAbstractNode_Line()
+	 * @model
+	 * @generated
+	 */
+	int getLine();
+
+		/**
+	 * Sets the value of the '{@link org.eclipse.xtext.parsetree.AbstractNode#getLine <em>Line</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Line</em>' attribute.
+	 * @see #getLine()
+	 * @generated
+	 */
+	void setLine(int value);
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.length((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.length((LeafNodeImpl) this);} else {return ParsetreeUtil.length((AbstractNodeImpl) this);}'"
 	 * @generated
 	 */
   int length();
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.offset((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.offset((LeafNodeImpl) this);} else {return ParsetreeUtil.offset((AbstractNodeImpl) this);}'"
-	 * @generated
-	 */
-  int offset();
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.line((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.line((LeafNodeImpl) this);} else {return ParsetreeUtil.line((AbstractNodeImpl) this);}'"
-	 * @generated
-	 */
-  int line();
 
   /**
 	 * <!-- begin-user-doc -->
@@ -196,5 +233,13 @@ public interface AbstractNode extends EObject
 	 * @generated
 	 */
 	EList<SyntaxError> allSyntaxErrors();
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.endLine((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.endLine((LeafNodeImpl) this);} else {return ParsetreeUtil.endLine((AbstractNodeImpl) this);}'"
+	 * @generated
+	 */
+	int endLine();
 
 } // AbstractNode

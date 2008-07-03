@@ -6,36 +6,20 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.parser.impl;
+package org.eclipse.xtext.parsetree;
 
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class NodeWithCachedOffset {
+public class NodeContentAdapterTest extends AbstractGeneratorTest{
 
-	private AbstractNode theNode;
-	
-	private int offset;
-
-	public NodeWithCachedOffset(int offset, AbstractNode theNode) {
-		this.offset = offset;
-		this.theNode = theNode;
-	}
-
-	/**
-	 * @return the offset
-	 */
-	public int getCachedOffset() {
-		return offset;
-	}
-	
-	/**
-	 * @return the node
-	 */
-	public AbstractNode getNode() {
-		return theNode;
+	public void testNodeContentAdapter() throws Exception {
+		with(ReferenceGrammarStandaloneSetup.class);
+		CompositeNode rootNode = getRootNode("spielplatz 112 'Jajaja' { kind ( Dennis 7) }");
+		NodeUtil.dumpCompositeNodes("", rootNode);
 	}
 }

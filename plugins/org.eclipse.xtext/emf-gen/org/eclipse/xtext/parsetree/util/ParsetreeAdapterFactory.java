@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreeAdapterFactory.java,v 1.6 2008/07/01 10:18:08 sefftinge Exp $
+ * $Id: ParsetreeAdapterFactory.java,v 1.7 2008/07/03 12:17:32 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.util;
 
@@ -67,7 +67,7 @@ public class ParsetreeAdapterFactory extends AdapterFactoryImpl
 	}
 
   /**
-	 * The switch the delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CompositeNodeImpl.java,v 1.6 2008/07/01 10:18:06 sefftinge Exp $
+ * $Id: CompositeNodeImpl.java,v 1.7 2008/07/03 12:17:29 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -18,10 +18,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParsetreePackage;
 
 /**
@@ -32,8 +34,7 @@ import org.eclipse.xtext.parsetree.ParsetreePackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.CompositeNodeImpl#getChildren <em>Children</em>}</li>
- *   <li>{@link org.eclipse.xtext.parsetree.impl.CompositeNodeImpl#getLookahead <em>Lookahead</em>}</li>
- *   <li>{@link org.eclipse.xtext.parsetree.impl.CompositeNodeImpl#getLookaheadConsumed <em>Lookahead Consumed</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.impl.CompositeNodeImpl#getLookaheadLeafNodes <em>Lookahead Leaf Nodes</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,43 +53,14 @@ public class CompositeNodeImpl extends AbstractNodeImpl implements CompositeNode
   protected EList<AbstractNode> children;
 
   /**
-	 * The default value of the '{@link #getLookahead() <em>Lookahead</em>}' attribute.
+	 * The cached value of the '{@link #getLookaheadLeafNodes() <em>Lookahead Leaf Nodes</em>}' reference list.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @see #getLookahead()
+	 * <!-- end-user-doc -->
+	 * @see #getLookaheadLeafNodes()
 	 * @generated
 	 * @ordered
 	 */
-    protected static final int LOOKAHEAD_EDEFAULT = 0;
-/**
-	 * The cached value of the '{@link #getLookahead() <em>Lookahead</em>}' attribute.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @see #getLookahead()
-	 * @generated
-	 * @ordered
-	 */
-    protected int lookahead = LOOKAHEAD_EDEFAULT;
-
-/**
-	 * The default value of the '{@link #getLookaheadConsumed() <em>Lookahead Consumed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @see #getLookaheadConsumed()
-	 * @generated
-	 * @ordered
-	 */
-    protected static final int LOOKAHEAD_CONSUMED_EDEFAULT = 0;
-
-/**
-	 * The cached value of the '{@link #getLookaheadConsumed() <em>Lookahead Consumed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @see #getLookaheadConsumed()
-	 * @generated
-	 * @ordered
-	 */
-    protected int lookaheadConsumed = LOOKAHEAD_CONSUMED_EDEFAULT;
+	protected EList<LeafNode> lookaheadLeafNodes;
 
 /**
 	 * <!-- begin-user-doc -->
@@ -119,51 +91,21 @@ public class CompositeNodeImpl extends AbstractNodeImpl implements CompositeNode
   public EList<AbstractNode> getChildren()
   {
 		if (children == null) {
-			children = new EObjectContainmentWithInverseEList.Resolving<AbstractNode>(AbstractNode.class, this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, ParsetreePackage.ABSTRACT_NODE__PARENT);
+			children = new EObjectContainmentWithInverseEList<AbstractNode>(AbstractNode.class, this, ParsetreePackage.COMPOSITE_NODE__CHILDREN, ParsetreePackage.ABSTRACT_NODE__PARENT);
 		}
 		return children;
 	}
 
   /**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public int getLookahead() {
-		return lookahead;
-	}
-
-/**
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @generated
-	 */
-    public void setLookahead(int newLookahead) {
-		int oldLookahead = lookahead;
-		lookahead = newLookahead;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD, oldLookahead, lookahead));
-	}
-
-/**
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @generated
-	 */
-    public int getLookaheadConsumed() {
-		return lookaheadConsumed;
-	}
-
-/**
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @generated
-	 */
-    public void setLookaheadConsumed(int newLookaheadConsumed) {
-		int oldLookaheadConsumed = lookaheadConsumed;
-		lookaheadConsumed = newLookaheadConsumed;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD_CONSUMED, oldLookaheadConsumed, lookaheadConsumed));
+	public EList<LeafNode> getLookaheadLeafNodes() {
+		if (lookaheadLeafNodes == null) {
+			lookaheadLeafNodes = new EObjectResolvingEList<LeafNode>(LeafNode.class, this, ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES);
+		}
+		return lookaheadLeafNodes;
 	}
 
 /**
@@ -208,10 +150,8 @@ public class CompositeNodeImpl extends AbstractNodeImpl implements CompositeNode
 		switch (featureID) {
 			case ParsetreePackage.COMPOSITE_NODE__CHILDREN:
 				return getChildren();
-			case ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD:
-				return new Integer(getLookahead());
-			case ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD_CONSUMED:
-				return new Integer(getLookaheadConsumed());
+			case ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES:
+				return getLookaheadLeafNodes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -230,11 +170,9 @@ public class CompositeNodeImpl extends AbstractNodeImpl implements CompositeNode
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends AbstractNode>)newValue);
 				return;
-			case ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD:
-				setLookahead(((Integer)newValue).intValue());
-				return;
-			case ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD_CONSUMED:
-				setLookaheadConsumed(((Integer)newValue).intValue());
+			case ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES:
+				getLookaheadLeafNodes().clear();
+				getLookaheadLeafNodes().addAll((Collection<? extends LeafNode>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -252,11 +190,8 @@ public class CompositeNodeImpl extends AbstractNodeImpl implements CompositeNode
 			case ParsetreePackage.COMPOSITE_NODE__CHILDREN:
 				getChildren().clear();
 				return;
-			case ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD:
-				setLookahead(LOOKAHEAD_EDEFAULT);
-				return;
-			case ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD_CONSUMED:
-				setLookaheadConsumed(LOOKAHEAD_CONSUMED_EDEFAULT);
+			case ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES:
+				getLookaheadLeafNodes().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -273,30 +208,10 @@ public class CompositeNodeImpl extends AbstractNodeImpl implements CompositeNode
 		switch (featureID) {
 			case ParsetreePackage.COMPOSITE_NODE__CHILDREN:
 				return children != null && !children.isEmpty();
-			case ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD:
-				return lookahead != LOOKAHEAD_EDEFAULT;
-			case ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD_CONSUMED:
-				return lookaheadConsumed != LOOKAHEAD_CONSUMED_EDEFAULT;
+			case ParsetreePackage.COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES:
+				return lookaheadLeafNodes != null && !lookaheadLeafNodes.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-/**
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @generated
-	 */
-    @Override
-    public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (lookahead: ");
-		result.append(lookahead);
-		result.append(", lookaheadConsumed: ");
-		result.append(lookaheadConsumed);
-		result.append(')');
-		return result.toString();
 	}
 
 } //CompositeNodeImpl

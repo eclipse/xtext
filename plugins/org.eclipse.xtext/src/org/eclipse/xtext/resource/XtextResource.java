@@ -25,6 +25,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.NodeAdapter;
+import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.service.Inject;
 
 /**
@@ -58,6 +59,13 @@ public class XtextResource extends ResourceImpl {
 		int documentGrowth = length - rootNode.length();
 		int originalLength = length - documentGrowth;
 		parseResult = parser.reparse(rootNode, offset, originalLength, change);
+		if (parseResult != null && parseResult.getRootNode() != rootNode) {
+			addNodeContentAdapter();
+		}
+	}
+
+	private void addNodeContentAdapter() {
+		parseResult.getRootNode().eAdapters().add(new NodeContentAdapter());
 	}
 
 	@Override
@@ -69,6 +77,7 @@ public class XtextResource extends ResourceImpl {
 			if (rootElement != null) {
 				getContents().add(rootElement);
 			}
+			addNodeContentAdapter();
 		}
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNodeImpl.java,v 1.6 2008/07/01 10:18:05 sefftinge Exp $
+ * $Id: AbstractNodeImpl.java,v 1.7 2008/07/03 12:17:29 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -37,6 +37,8 @@ import org.eclipse.xtext.parsetree.SyntaxError;
  *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getGrammarElement <em>Grammar Element</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getElement <em>Element</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getSyntaxError <em>Syntax Error</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getOffset <em>Offset</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getLine <em>Line</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,6 +77,46 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	protected SyntaxError syntaxError;
 
 		/**
+	 * The default value of the '{@link #getOffset() <em>Offset</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOffset()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int OFFSET_EDEFAULT = 0;
+
+		/**
+	 * The cached value of the '{@link #getOffset() <em>Offset</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOffset()
+	 * @generated
+	 * @ordered
+	 */
+	protected int offset = OFFSET_EDEFAULT;
+
+		/**
+	 * The default value of the '{@link #getLine() <em>Line</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLine()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int LINE_EDEFAULT = 0;
+
+		/**
+	 * The cached value of the '{@link #getLine() <em>Line</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLine()
+	 * @generated
+	 * @ordered
+	 */
+	protected int line = LINE_EDEFAULT;
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -107,16 +149,6 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	}
 
   /**
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @generated
-	 */
-    public CompositeNode basicGetParent() {
-		if (eContainerFeatureID != ParsetreePackage.ABSTRACT_NODE__PARENT) return null;
-		return (CompositeNode)eInternalContainer();
-	}
-
-/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -237,29 +269,6 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * @generated
 	 */
 	public SyntaxError getSyntaxError() {
-		if (syntaxError != null && syntaxError.eIsProxy()) {
-			InternalEObject oldSyntaxError = (InternalEObject)syntaxError;
-			syntaxError = (SyntaxError)eResolveProxy(oldSyntaxError);
-			if (syntaxError != oldSyntaxError) {
-				InternalEObject newSyntaxError = (InternalEObject)syntaxError;
-				NotificationChain msgs =  oldSyntaxError.eInverseRemove(this, ParsetreePackage.SYNTAX_ERROR__NODE, SyntaxError.class, null);
-				if (newSyntaxError.eInternalContainer() == null) {
-					msgs =  newSyntaxError.eInverseAdd(this, ParsetreePackage.SYNTAX_ERROR__NODE, SyntaxError.class, msgs);
-				}
-				if (msgs != null) msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ParsetreePackage.ABSTRACT_NODE__SYNTAX_ERROR, oldSyntaxError, syntaxError));
-			}
-		}
-		return syntaxError;
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SyntaxError basicGetSyntaxError() {
 		return syntaxError;
 	}
 
@@ -299,32 +308,54 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 
 		/**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getOffset() {
+		return offset;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOffset(int newOffset) {
+		int oldOffset = offset;
+		offset = newOffset;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__OFFSET, oldOffset, offset));
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getLine() {
+		return line;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLine(int newLine) {
+		int oldLine = line;
+		line = newLine;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__LINE, oldLine, line));
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
   public int length()
   {
 		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.length((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.length((LeafNodeImpl) this);} else {return ParsetreeUtil.length((AbstractNodeImpl) this);}
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public int offset()
-  {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.offset((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.offset((LeafNodeImpl) this);} else {return ParsetreeUtil.offset((AbstractNodeImpl) this);}
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public int line()
-  {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.line((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.line((LeafNodeImpl) this);} else {return ParsetreeUtil.line((AbstractNodeImpl) this);}
 	}
 
   /**
@@ -364,6 +395,15 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 */
 	public EList<SyntaxError> allSyntaxErrors() {
 		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.allSyntaxErrors((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.allSyntaxErrors((LeafNodeImpl) this);} else {return ParsetreeUtil.allSyntaxErrors((AbstractNodeImpl) this);}
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int endLine() {
+		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.endLine((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.endLine((LeafNodeImpl) this);} else {return ParsetreeUtil.endLine((AbstractNodeImpl) this);}
 	}
 
 		/**
@@ -429,8 +469,7 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
   {
 		switch (featureID) {
 			case ParsetreePackage.ABSTRACT_NODE__PARENT:
-				if (resolve) return getParent();
-				return basicGetParent();
+				return getParent();
 			case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
 				if (resolve) return getGrammarElement();
 				return basicGetGrammarElement();
@@ -438,8 +477,11 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 				if (resolve) return getElement();
 				return basicGetElement();
 			case ParsetreePackage.ABSTRACT_NODE__SYNTAX_ERROR:
-				if (resolve) return getSyntaxError();
-				return basicGetSyntaxError();
+				return getSyntaxError();
+			case ParsetreePackage.ABSTRACT_NODE__OFFSET:
+				return new Integer(getOffset());
+			case ParsetreePackage.ABSTRACT_NODE__LINE:
+				return new Integer(getLine());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -464,6 +506,12 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 				return;
 			case ParsetreePackage.ABSTRACT_NODE__SYNTAX_ERROR:
 				setSyntaxError((SyntaxError)newValue);
+				return;
+			case ParsetreePackage.ABSTRACT_NODE__OFFSET:
+				setOffset(((Integer)newValue).intValue());
+				return;
+			case ParsetreePackage.ABSTRACT_NODE__LINE:
+				setLine(((Integer)newValue).intValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -490,6 +538,12 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 			case ParsetreePackage.ABSTRACT_NODE__SYNTAX_ERROR:
 				setSyntaxError((SyntaxError)null);
 				return;
+			case ParsetreePackage.ABSTRACT_NODE__OFFSET:
+				setOffset(OFFSET_EDEFAULT);
+				return;
+			case ParsetreePackage.ABSTRACT_NODE__LINE:
+				setLine(LINE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -504,15 +558,37 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
   {
 		switch (featureID) {
 			case ParsetreePackage.ABSTRACT_NODE__PARENT:
-				return basicGetParent() != null;
+				return getParent() != null;
 			case ParsetreePackage.ABSTRACT_NODE__GRAMMAR_ELEMENT:
 				return grammarElement != null;
 			case ParsetreePackage.ABSTRACT_NODE__ELEMENT:
 				return element != null;
 			case ParsetreePackage.ABSTRACT_NODE__SYNTAX_ERROR:
 				return syntaxError != null;
+			case ParsetreePackage.ABSTRACT_NODE__OFFSET:
+				return offset != OFFSET_EDEFAULT;
+			case ParsetreePackage.ABSTRACT_NODE__LINE:
+				return line != LINE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (offset: ");
+		result.append(offset);
+		result.append(", line: ");
+		result.append(line);
+		result.append(')');
+		return result.toString();
 	}
 
 } //AbstractNodeImpl

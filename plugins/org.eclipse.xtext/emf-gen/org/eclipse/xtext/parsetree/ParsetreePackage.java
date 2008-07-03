@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackage.java,v 1.6 2008/07/01 10:18:03 sefftinge Exp $
+ * $Id: ParsetreePackage.java,v 1.7 2008/07/03 12:17:28 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -107,13 +107,31 @@ public interface ParsetreePackage extends EPackage
 	int ABSTRACT_NODE__SYNTAX_ERROR = 3;
 
 		/**
+	 * The feature id for the '<em><b>Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__OFFSET = 4;
+
+		/**
+	 * The feature id for the '<em><b>Line</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__LINE = 5;
+
+		/**
 	 * The number of structural features of the '<em>Abstract Node</em>' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int ABSTRACT_NODE_FEATURE_COUNT = 4;
+  int ABSTRACT_NODE_FEATURE_COUNT = 6;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.parsetree.impl.CompositeNodeImpl <em>Composite Node</em>}' class.
@@ -162,6 +180,24 @@ public interface ParsetreePackage extends EPackage
 	int COMPOSITE_NODE__SYNTAX_ERROR = ABSTRACT_NODE__SYNTAX_ERROR;
 
 		/**
+	 * The feature id for the '<em><b>Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__OFFSET = ABSTRACT_NODE__OFFSET;
+
+		/**
+	 * The feature id for the '<em><b>Line</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_NODE__LINE = ABSTRACT_NODE__LINE;
+
+		/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -171,22 +207,13 @@ public interface ParsetreePackage extends EPackage
   int COMPOSITE_NODE__CHILDREN = ABSTRACT_NODE_FEATURE_COUNT + 0;
 
   /**
-	 * The feature id for the '<em><b>Lookahead</b></em>' attribute.
+	 * The feature id for the '<em><b>Lookahead Leaf Nodes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-    int COMPOSITE_NODE__LOOKAHEAD = ABSTRACT_NODE_FEATURE_COUNT + 1;
-
-/**
-	 * The feature id for the '<em><b>Lookahead Consumed</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-    int COMPOSITE_NODE__LOOKAHEAD_CONSUMED = ABSTRACT_NODE_FEATURE_COUNT + 2;
+	int COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES = ABSTRACT_NODE_FEATURE_COUNT + 1;
 
 /**
 	 * The number of structural features of the '<em>Composite Node</em>' class.
@@ -195,7 +222,7 @@ public interface ParsetreePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-  int COMPOSITE_NODE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 3;
+  int COMPOSITE_NODE_FEATURE_COUNT = ABSTRACT_NODE_FEATURE_COUNT + 2;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.parsetree.impl.LeafNodeImpl <em>Leaf Node</em>}' class.
@@ -242,6 +269,24 @@ public interface ParsetreePackage extends EPackage
 	 * @ordered
 	 */
 	int LEAF_NODE__SYNTAX_ERROR = ABSTRACT_NODE__SYNTAX_ERROR;
+
+		/**
+	 * The feature id for the '<em><b>Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LEAF_NODE__OFFSET = ABSTRACT_NODE__OFFSET;
+
+		/**
+	 * The feature id for the '<em><b>Line</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LEAF_NODE__LINE = ABSTRACT_NODE__LINE;
 
 		/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -340,26 +385,15 @@ public interface ParsetreePackage extends EPackage
   EReference getCompositeNode_Children();
 
   /**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.CompositeNode#getLookahead <em>Lookahead</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.parsetree.CompositeNode#getLookaheadLeafNodes <em>Lookahead Leaf Nodes</em>}'.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Lookahead</em>'.
-	 * @see org.eclipse.xtext.parsetree.CompositeNode#getLookahead()
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Lookahead Leaf Nodes</em>'.
+	 * @see org.eclipse.xtext.parsetree.CompositeNode#getLookaheadLeafNodes()
 	 * @see #getCompositeNode()
 	 * @generated
 	 */
-    EAttribute getCompositeNode_Lookahead();
-
-/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.CompositeNode#getLookaheadConsumed <em>Lookahead Consumed</em>}'.
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Lookahead Consumed</em>'.
-	 * @see org.eclipse.xtext.parsetree.CompositeNode#getLookaheadConsumed()
-	 * @see #getCompositeNode()
-	 * @generated
-	 */
-    EAttribute getCompositeNode_LookaheadConsumed();
+	EReference getCompositeNode_LookaheadLeafNodes();
 
 /**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.AbstractNode <em>Abstract Node</em>}'.
@@ -414,6 +448,28 @@ public interface ParsetreePackage extends EPackage
 	 * @generated
 	 */
 	EReference getAbstractNode_SyntaxError();
+
+		/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.AbstractNode#getOffset <em>Offset</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Offset</em>'.
+	 * @see org.eclipse.xtext.parsetree.AbstractNode#getOffset()
+	 * @see #getAbstractNode()
+	 * @generated
+	 */
+	EAttribute getAbstractNode_Offset();
+
+		/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.AbstractNode#getLine <em>Line</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Line</em>'.
+	 * @see org.eclipse.xtext.parsetree.AbstractNode#getLine()
+	 * @see #getAbstractNode()
+	 * @generated
+	 */
+	EAttribute getAbstractNode_Line();
 
 		/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.LeafNode <em>Leaf Node</em>}'.
@@ -532,22 +588,14 @@ public interface ParsetreePackage extends EPackage
     EReference COMPOSITE_NODE__CHILDREN = eINSTANCE.getCompositeNode_Children();
 
     /**
-		 * The meta object literal for the '<em><b>Lookahead</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Lookahead Leaf Nodes</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-        EAttribute COMPOSITE_NODE__LOOKAHEAD = eINSTANCE.getCompositeNode_Lookahead();
+		EReference COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES = eINSTANCE.getCompositeNode_LookaheadLeafNodes();
 
-    /**
-		 * The meta object literal for the '<em><b>Lookahead Consumed</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-		 * @generated
-		 */
-        EAttribute COMPOSITE_NODE__LOOKAHEAD_CONSUMED = eINSTANCE.getCompositeNode_LookaheadConsumed();
-
-    /**
+				/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl <em>Abstract Node</em>}' class.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -588,6 +636,22 @@ public interface ParsetreePackage extends EPackage
 		 * @generated
 		 */
 		EReference ABSTRACT_NODE__SYNTAX_ERROR = eINSTANCE.getAbstractNode_SyntaxError();
+
+				/**
+		 * The meta object literal for the '<em><b>Offset</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_NODE__OFFSET = eINSTANCE.getAbstractNode_Offset();
+
+				/**
+		 * The meta object literal for the '<em><b>Line</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_NODE__LINE = eINSTANCE.getAbstractNode_Line();
 
 				/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.parsetree.impl.LeafNodeImpl <em>Leaf Node</em>}' class.
