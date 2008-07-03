@@ -16,7 +16,7 @@ import org.eclipse.xtext.service.ILanguageService;
  * @author sven efftinge
  * 
  */
-public interface IElementFactory extends ILanguageService {
+public interface IAstFactory extends ILanguageService {
 	
 	/**
 	 * creates an instance of the given typename

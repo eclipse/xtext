@@ -26,7 +26,7 @@ public interface IParser extends ILanguageService {
 	 * @param handler
 	 * @return
 	 */
-	IParseResult parse(InputStream in, IElementFactory factory);
+	IParseResult parse(InputStream in, IAstFactory factory);
 	
 	/**
 	 * @param in

@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.LexerRule;
-import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.ParseResult;
@@ -50,7 +50,7 @@ public abstract class AbstractAntlrParser extends Parser {
 
 	protected org.eclipse.xtext.Grammar grammar;
 
-	protected IElementFactory factory;
+	protected IAstFactory factory;
 
 	protected int lastConsumedIndex = -1;
 

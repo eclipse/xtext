@@ -25,12 +25,12 @@ import org.eclipse.xtext.service.Inject;
 public abstract class AbstractParser implements IParser {
 
     @Inject
-    private IElementFactory astElementFactory;
+    private IAstFactory astElementFactory;
 
     @Inject
     protected IGrammarAccess grammarAccess;
 
-    public IParseResult parse(String ruleName, InputStream in, IElementFactory factory) {
+    public IParseResult parse(String ruleName, InputStream in, IAstFactory factory) {
         try {
             IParseResult parseResult = (IParseResult) parse(ruleName, new ANTLRInputStream(in), factory);
             return parseResult;
@@ -39,7 +39,7 @@ public abstract class AbstractParser implements IParser {
         }
     }
 
-    public IParseResult parse(InputStream in, IElementFactory factory) {
+    public IParseResult parse(InputStream in, IAstFactory factory) {
         return parse(getDefaultRuleName(), in, factory);
     }
 
@@ -55,11 +55,11 @@ public abstract class AbstractParser implements IParser {
         return parse(ruleName, in, getDefaultASTFactory());
     }
     
-    protected IElementFactory getDefaultASTFactory() {
+    protected IAstFactory getDefaultASTFactory() {
         return astElementFactory;
     }
 
     protected abstract String getDefaultRuleName();
 
-    protected abstract IParseResult parse(String ruleName, ANTLRInputStream in, IElementFactory factory);
+    protected abstract IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory);
 }
