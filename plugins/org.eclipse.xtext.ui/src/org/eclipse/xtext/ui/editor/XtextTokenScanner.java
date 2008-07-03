@@ -53,7 +53,7 @@ public class XtextTokenScanner implements ITokenScanner {
 	}
 
 	public int getTokenLength() {
-		return currentNode.length();
+		return currentNode.getLength();
 	}
 
 	public int getTokenOffset() {
@@ -113,7 +113,7 @@ public class XtextTokenScanner implements ITokenScanner {
 			}
 			else {
 				lastRootNode = lastParseResult.getRootNode();
-				int documentGrowth = document.getLength() - lastRootNode.length();
+				int documentGrowth = document.getLength() - lastRootNode.getLength();
 				int originalLength = length - documentGrowth;
 				String change = document.get().substring(offset, offset + length);
 				parseResult = parser.reparse(lastRootNode, offset, originalLength, change);

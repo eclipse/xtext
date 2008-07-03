@@ -37,7 +37,7 @@ public class NodeContentAdapter extends EContentAdapter {
 						}
 						else {
 							AbstractNode predecessor = parent.getChildren().get(position - 1);
-							updateOffsetAndLine(child, new NodeInfo((predecessor.getOffset() + predecessor.length()), predecessor.endLine()));
+							updateOffsetAndLine(child, new NodeInfo((predecessor.getOffset() + predecessor.getLength()), predecessor.endLine()));
 						}
 						break;
 					case Notification.REMOVE:
@@ -74,7 +74,7 @@ public class NodeContentAdapter extends EContentAdapter {
 				}
 				else {
 					AbstractNode predecessor = siblings.get(index - 1);
-					updateOffsetAndLine(targetNode, new NodeInfo((predecessor.getOffset() + predecessor.length()), predecessor.endLine()));
+					updateOffsetAndLine(targetNode, new NodeInfo((predecessor.getOffset() + predecessor.getLength()), predecessor.endLine()));
 				}
 			}
 			else {
@@ -97,13 +97,16 @@ public class NodeContentAdapter extends EContentAdapter {
 		node.setOffset(info.offset);
 		node.setLine(info.line);
 		if (node instanceof LeafNode) {
-			info.offset += node.length();
+			node.setLength(((LeafNode)node).getText().length());
+			info.offset += node.getLength();
 			info.line = node.endLine();
-		}
-		if (node instanceof CompositeNode) {
+		} else if (node instanceof CompositeNode) {
+			int length = 0;
 			for (AbstractNode child : ((CompositeNode) node).getChildren()) {
 				info = updateOffsetAndLineInContents(child, info);
+				length += child.getLength();
 			}
+			node.setLength(length);
 		}
 		return info;
 	}

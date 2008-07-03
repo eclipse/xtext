@@ -106,7 +106,7 @@ public class NodeUtil {
         for (LeafNode lookaheadNode : node.getLookaheadLeafNodes()) {
         	System.out.print("\""+ lookaheadNode.getText() +"\" ");
 		}
-        System.out.print(" (" + node.getOffset() + ", " + node.length() + ")");
+        System.out.print(" (" + node.getOffset() + ", " + node.getLength() + ")");
         System.out.println("}");
     }
     

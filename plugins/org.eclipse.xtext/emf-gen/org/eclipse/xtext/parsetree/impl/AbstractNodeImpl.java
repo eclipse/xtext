@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNodeImpl.java,v 1.7 2008/07/03 12:17:29 jkohnlein Exp $
+ * $Id: AbstractNodeImpl.java,v 1.8 2008/07/03 15:26:01 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -39,6 +39,7 @@ import org.eclipse.xtext.parsetree.SyntaxError;
  *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getSyntaxError <em>Syntax Error</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getOffset <em>Offset</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getLine <em>Line</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getLength <em>Length</em>}</li>
  * </ul>
  * </p>
  *
@@ -115,6 +116,26 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * @ordered
 	 */
 	protected int line = LINE_EDEFAULT;
+
+		/**
+	 * The default value of the '{@link #getLength() <em>Length</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLength()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int LENGTH_EDEFAULT = -1;
+
+		/**
+	 * The cached value of the '{@link #getLength() <em>Length</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLength()
+	 * @generated
+	 * @ordered
+	 */
+	protected int length = LENGTH_EDEFAULT;
 
 		/**
 	 * <!-- begin-user-doc -->
@@ -350,15 +371,26 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 
 		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public int length()
-  {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.length((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.length((LeafNodeImpl) this);} else {return ParsetreeUtil.length((AbstractNodeImpl) this);}
+	public int getLength() {
+		return length;
 	}
 
-  /**
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLength(int newLength) {
+		int oldLength = length;
+		length = newLength;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__LENGTH, oldLength, length));
+	}
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -482,6 +514,8 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 				return new Integer(getOffset());
 			case ParsetreePackage.ABSTRACT_NODE__LINE:
 				return new Integer(getLine());
+			case ParsetreePackage.ABSTRACT_NODE__LENGTH:
+				return new Integer(getLength());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -512,6 +546,9 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 				return;
 			case ParsetreePackage.ABSTRACT_NODE__LINE:
 				setLine(((Integer)newValue).intValue());
+				return;
+			case ParsetreePackage.ABSTRACT_NODE__LENGTH:
+				setLength(((Integer)newValue).intValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -544,6 +581,9 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 			case ParsetreePackage.ABSTRACT_NODE__LINE:
 				setLine(LINE_EDEFAULT);
 				return;
+			case ParsetreePackage.ABSTRACT_NODE__LENGTH:
+				setLength(LENGTH_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -569,6 +609,8 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 				return offset != OFFSET_EDEFAULT;
 			case ParsetreePackage.ABSTRACT_NODE__LINE:
 				return line != LINE_EDEFAULT;
+			case ParsetreePackage.ABSTRACT_NODE__LENGTH:
+				return length != LENGTH_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -587,6 +629,8 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 		result.append(offset);
 		result.append(", line: ");
 		result.append(line);
+		result.append(", length: ");
+		result.append(length);
 		result.append(')');
 		return result.toString();
 	}

@@ -101,7 +101,7 @@ public class BuildInHoverInfo implements IHoverInfo {
 	}
 
 	private void handleCoordinaten(AbstractNode abstractNode, StringBuilder sb) {
-		sb.append(" [" + abstractNode.getOffset() + "," + abstractNode.length() + "]");
+		sb.append(" [" + abstractNode.getOffset() + "," + abstractNode.getLength() + "]");
 	}
 
 	private void handleParent(CompositeNode parent, StringBuilder sb) {

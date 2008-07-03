@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackageImpl.java,v 1.7 2008/07/03 12:17:29 jkohnlein Exp $
+ * $Id: ParsetreePackageImpl.java,v 1.8 2008/07/03 15:26:01 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -225,6 +225,15 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 
 		/**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAbstractNode_Length() {
+		return (EAttribute)abstractNodeEClass.getEStructuralFeatures().get(6);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -331,6 +340,7 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 		createEReference(abstractNodeEClass, ABSTRACT_NODE__SYNTAX_ERROR);
 		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__OFFSET);
 		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__LINE);
+		createEAttribute(abstractNodeEClass, ABSTRACT_NODE__LENGTH);
 
 		leafNodeEClass = createEClass(LEAF_NODE);
 		createEAttribute(leafNodeEClass, LEAF_NODE__TEXT);
@@ -386,8 +396,7 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 		initEReference(getAbstractNode_SyntaxError(), this.getSyntaxError(), this.getSyntaxError_Node(), "syntaxError", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractNode_Offset(), ecorePackage.getEInt(), "offset", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractNode_Line(), ecorePackage.getEInt(), "line", null, 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(abstractNodeEClass, ecorePackage.getEInt(), "length", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEAttribute(getAbstractNode_Length(), ecorePackage.getEInt(), "length", "-1", 0, 1, AbstractNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		addEOperation(abstractNodeEClass, ecorePackage.getEString(), "serialize", 0, 1, IS_UNIQUE, IS_ORDERED);
 

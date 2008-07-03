@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackage.java,v 1.7 2008/07/03 12:17:28 jkohnlein Exp $
+ * $Id: ParsetreePackage.java,v 1.8 2008/07/03 15:26:01 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -125,13 +125,22 @@ public interface ParsetreePackage extends EPackage
 	int ABSTRACT_NODE__LINE = 5;
 
 		/**
+	 * The feature id for the '<em><b>Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_NODE__LENGTH = 6;
+
+		/**
 	 * The number of structural features of the '<em>Abstract Node</em>' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int ABSTRACT_NODE_FEATURE_COUNT = 6;
+  int ABSTRACT_NODE_FEATURE_COUNT = 7;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.parsetree.impl.CompositeNodeImpl <em>Composite Node</em>}' class.
@@ -198,22 +207,31 @@ public interface ParsetreePackage extends EPackage
 	int COMPOSITE_NODE__LINE = ABSTRACT_NODE__LINE;
 
 		/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int COMPOSITE_NODE__CHILDREN = ABSTRACT_NODE_FEATURE_COUNT + 0;
-
-  /**
-	 * The feature id for the '<em><b>Lookahead Leaf Nodes</b></em>' reference list.
+	 * The feature id for the '<em><b>Length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES = ABSTRACT_NODE_FEATURE_COUNT + 1;
+	int COMPOSITE_NODE__LENGTH = ABSTRACT_NODE__LENGTH;
+
+/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+ * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+int COMPOSITE_NODE__CHILDREN = ABSTRACT_NODE_FEATURE_COUNT + 0;
+
+/**
+	 * The feature id for the '<em><b>Lookahead Leaf Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+* <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+int COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES = ABSTRACT_NODE_FEATURE_COUNT + 1;
 
 /**
 	 * The number of structural features of the '<em>Composite Node</em>' class.
@@ -287,6 +305,15 @@ public interface ParsetreePackage extends EPackage
 	 * @ordered
 	 */
 	int LEAF_NODE__LINE = ABSTRACT_NODE__LINE;
+
+		/**
+	 * The feature id for the '<em><b>Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LEAF_NODE__LENGTH = ABSTRACT_NODE__LENGTH;
 
 		/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -472,6 +499,17 @@ public interface ParsetreePackage extends EPackage
 	EAttribute getAbstractNode_Line();
 
 		/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.AbstractNode#getLength <em>Length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Length</em>'.
+	 * @see org.eclipse.xtext.parsetree.AbstractNode#getLength()
+	 * @see #getAbstractNode()
+	 * @generated
+	 */
+	EAttribute getAbstractNode_Length();
+
+		/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.LeafNode <em>Leaf Node</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -652,6 +690,14 @@ public interface ParsetreePackage extends EPackage
 		 * @generated
 		 */
 		EAttribute ABSTRACT_NODE__LINE = eINSTANCE.getAbstractNode_Line();
+
+				/**
+		 * The meta object literal for the '<em><b>Length</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_NODE__LENGTH = eINSTANCE.getAbstractNode_Length();
 
 				/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.parsetree.impl.LeafNodeImpl <em>Leaf Node</em>}' class.

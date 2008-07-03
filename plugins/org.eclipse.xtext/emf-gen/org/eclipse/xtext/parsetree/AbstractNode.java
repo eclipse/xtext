@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNode.java,v 1.7 2008/07/03 12:17:28 jkohnlein Exp $
+ * $Id: AbstractNode.java,v 1.8 2008/07/03 15:26:01 jkohnlein Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getSyntaxError <em>Syntax Error</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getOffset <em>Offset</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getLine <em>Line</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getLength <em>Length</em>}</li>
  * </ul>
  * </p>
  *
@@ -193,14 +194,33 @@ public interface AbstractNode extends EObject
 	void setLine(int value);
 
 		/**
+	 * Returns the value of the '<em><b>Length</b></em>' attribute.
+	 * The default value is <code>"-1"</code>.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.length((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.length((LeafNodeImpl) this);} else {return ParsetreeUtil.length((AbstractNodeImpl) this);}'"
+	 * <p>
+	 * If the meaning of the '<em>Length</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Length</em>' attribute.
+	 * @see #setLength(int)
+	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getAbstractNode_Length()
+	 * @model default="-1" ordered="false"
 	 * @generated
 	 */
-  int length();
+	int getLength();
 
-  /**
+		/**
+	 * Sets the value of the '{@link org.eclipse.xtext.parsetree.AbstractNode#getLength <em>Length</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Length</em>' attribute.
+	 * @see #getLength()
+	 * @generated
+	 */
+	void setLength(int value);
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.serialize((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.serialize((LeafNodeImpl) this);} else {return ParsetreeUtil.serialize((AbstractNodeImpl) this);}'"
