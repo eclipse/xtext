@@ -110,10 +110,12 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 		List<Diagnostic> retVal = new ArrayList<Diagnostic>();
 		for (Resource resource : resourceSet.getResources()) {
 			Diagnostic diagnostic = validateResource(resource);
-			if (diagnostic.getSeverity() != Diagnostic.OK)
-				retVal.add(diagnostic);
-			if (Activator.DEBUG_MARKERCREATOR)
-				System.out.println("XtextProblemMarkerCreator.validateResourceSet()" + diagnostic.toString());
+			if (diagnostic != null) {
+				if (diagnostic.getSeverity() != Diagnostic.OK)
+					retVal.add(diagnostic);
+				if (Activator.DEBUG_MARKERCREATOR)
+					System.out.println("XtextProblemMarkerCreator.validateResourceSet()" + diagnostic.toString());
+			}
 		}
 		return retVal;
 	}
