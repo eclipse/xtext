@@ -23,10 +23,13 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class XtextMarkerManager {
+public final class XtextMarkerManager {
 	private static final String XTEXT_PARSEERROR_MARKER_TYPE = Activator.PLUGIN_ID + ".problemmarker";
 
-	private static void checkResource(final IResource resource) {
+	private XtextMarkerManager() {
+	}
+
+	private static final void checkResource(final IResource resource) {
 		Assert.isLegal(resource != null);
 		Assert.isLegal(resource.exists(), "Can't handle Marker for a non existing resource '" + resource.getFullPath()
 				+ "'");
@@ -34,7 +37,7 @@ public class XtextMarkerManager {
 				+ resource.getFullPath() + "'");
 	}
 
-	private static void run(WorkspaceModifyOperation workspaceModifyOperation, IProgressMonitor monitor) {
+	private static final void run(WorkspaceModifyOperation workspaceModifyOperation, IProgressMonitor monitor) {
 		try {
 			workspaceModifyOperation.run(monitor);
 		}
@@ -46,10 +49,9 @@ public class XtextMarkerManager {
 		}
 	}
 
-	public static void createMarker(final IResource resource, final Map<String, Object> markerAttributes,
+	public static final void createXtextMarker(final IResource resource, final Map<String, Object> markerAttributes,
 			IProgressMonitor monitor) {
-		final String markerType = XTEXT_PARSEERROR_MARKER_TYPE;
-		clearMarkerForType(resource, markerAttributes, monitor, markerType);
+		createMarkerForType(resource, markerAttributes, monitor, XTEXT_PARSEERROR_MARKER_TYPE);
 	}
 
 	/**
@@ -58,7 +60,7 @@ public class XtextMarkerManager {
 	 * @param monitor
 	 * @param markerType
 	 */
-	private static void clearMarkerForType(final IResource resource, final Map<String, Object> markerAttributes,
+	private final static void createMarkerForType(final IResource resource, final Map<String, Object> markerAttributes,
 			IProgressMonitor monitor, final String markerType) {
 		checkResource(resource);
 		run(new WorkspaceModifyOperation() {
@@ -77,17 +79,15 @@ public class XtextMarkerManager {
 	 * @param monitor
 	 */
 	public static final void clearXtextMarker(final IResource resource, IProgressMonitor monitor) {
-		String markerType = XTEXT_PARSEERROR_MARKER_TYPE;
-		clearMarkerForType(resource, monitor, markerType);
+		clearMarkerForType(resource, monitor, XTEXT_PARSEERROR_MARKER_TYPE);
 	}
 
 	/**
 	 * @param resource
 	 * @param monitor
 	 */
-	public static void clearEMFMarker(IResource resource, IProgressMonitor monitor) {
-		String markerType = Diagnostician.MARKER;
-		clearMarkerForType(resource, monitor, markerType);
+	public static final void clearEMFMarker(IResource resource, IProgressMonitor monitor) {
+		clearMarkerForType(resource, monitor, Diagnostician.MARKER);
 	}
 
 	/**
@@ -95,7 +95,8 @@ public class XtextMarkerManager {
 	 * @param monitor
 	 * @param markerType
 	 */
-	private static void clearMarkerForType(final IResource resource, IProgressMonitor monitor, final String markerType) {
+	private static final void clearMarkerForType(final IResource resource, IProgressMonitor monitor,
+			final String markerType) {
 		checkResource(resource);
 		run(new WorkspaceModifyOperation() {
 			@Override
@@ -104,6 +105,16 @@ public class XtextMarkerManager {
 				resource.deleteMarkers(markerType, true, IResource.DEPTH_INFINITE);
 			}
 		}, monitor);
+	}
+
+	/**
+	 * @param resource
+	 * @param markerAttributes
+	 * @param monitor
+	 */
+	public static final void createEMFMarker(IResource resource, Map<String, Object> markerAttributes,
+			IProgressMonitor monitor) {
+		createMarkerForType(resource, markerAttributes, monitor, Diagnostician.MARKER);
 	}
 
 }
