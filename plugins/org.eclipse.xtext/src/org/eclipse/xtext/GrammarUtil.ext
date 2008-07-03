@@ -27,6 +27,9 @@ String getName(Grammar g) :
 String getNamespace(Grammar g) :
 	JAVA org.eclipse.xtext.GrammarUtil.getNamespace(org.eclipse.xtext.Grammar);
 
+String getClasspathRelativePathToXmi(Grammar g) :
+	JAVA org.eclipse.xtext.GrammarUtil.getClasspathRelativePathToXmi(org.eclipse.xtext.Grammar);
+
 // ***********************************************************************************
 // Containers
 
