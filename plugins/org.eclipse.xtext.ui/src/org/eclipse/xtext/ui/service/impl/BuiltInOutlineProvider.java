@@ -46,11 +46,11 @@ public class BuiltInOutlineProvider implements IOutlineProvider {
             public int compare(EObject o1, EObject o2) {
                 NodeAdapter nodeAdapter = (NodeAdapter) o1.eAdapters().get(0);
                 CompositeNode parserNode1 = nodeAdapter.getParserNode();
-                Integer offset = parserNode1.offset();
+                Integer offset = parserNode1.getOffset();
 
                 NodeAdapter nodeAdapter2 = (NodeAdapter) o2.eAdapters().get(0);
                 CompositeNode parserNode2 = nodeAdapter2.getParserNode();
-                Integer offset2 = parserNode2.offset();
+                Integer offset2 = parserNode2.getOffset();
                 return offset.compareTo(offset2);
             }
         });

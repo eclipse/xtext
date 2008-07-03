@@ -56,7 +56,7 @@ public class XtextTokenScanner implements ITokenScanner {
 	}
 
 	public int getTokenOffset() {
-		return currentNode.offset();
+		return currentNode.getOffset();
 	}
 
 	public IToken nextToken() {
