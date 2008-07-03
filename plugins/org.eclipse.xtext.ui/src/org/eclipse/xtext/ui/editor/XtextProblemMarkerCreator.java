@@ -28,6 +28,7 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.ui.editor.model.IXtextEditorModelListener;
 import org.eclipse.xtext.ui.editor.model.XtextEditorModelChangeEvent;
 import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.internal.XtextMarkerManager;
 
 /**
@@ -60,12 +61,27 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.xtext.ui.editor.model.IXtextEditorModelListener#modelChanged
+	 * (org.eclipse.xtext.ui.editor.model.XtextEditorModelChangeEvent)
+	 */
 	public void modelChanged(XtextEditorModelChangeEvent event) {
 		XtextMarkerManager.clearXtextMarker(resource, monitor);
 		XtextMarkerManager.clearEMFMarker(resource, monitor);
-		List<Diagnostic> dignostics = validateResourceSet(event.getModel().getResource().getResourceSet());
-		for (Diagnostic diagnostic : dignostics) {
-			XtextMarkerManager.createMarker(resource, collectMarkerAttributesForDiagnostic(diagnostic), monitor);
+		List<Diagnostic> diagnostics = validateResourceSet(event.getModel().getResource().getResourceSet());
+		for (Diagnostic diagnostic : diagnostics) {
+			if (diagnostic.getChildren() != null) {
+				for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
+					XtextMarkerManager.createMarker(resource, collectMarkerAttributesForDiagnostic(childDiagnostic),
+							monitor);
+				}
+			}
+			else {
+				XtextMarkerManager.createMarker(resource, collectMarkerAttributesForDiagnostic(diagnostic), monitor);
+			}
 		}
 		if (event.getModel().hasErrors()) {
 			for (SyntaxError error : event.getModel().getSyntaxErrors()) {
@@ -98,7 +114,7 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 				// Integer.valueOf(parserNode.line()));
 				int offset = parserNode.offset();
 				map.put(IMarker.CHAR_START, Integer.valueOf(offset));
-				map.put(IMarker.CHAR_END, Integer.valueOf(parserNode.offset() + parserNode.length()));
+				map.put(IMarker.CHAR_END, Integer.valueOf(offset + parserNode.length()));
 			}
 		}
 		map.put(IMarker.MESSAGE, diagnostic.getMessage());
@@ -110,6 +126,8 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 		List<Diagnostic> retVal = new ArrayList<Diagnostic>();
 		for (Resource resource : resourceSet.getResources()) {
 			Diagnostic diagnostic = validateResource(resource);
+			// diagnostic != null should not happen, but in exception state NPE
+			// can occur and and reconciler thread will die, so prevent this
 			if (diagnostic != null) {
 				if (diagnostic.getSeverity() != Diagnostic.OK)
 					retVal.add(diagnostic);
@@ -126,6 +144,7 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(rootObject);
 			return diagnostic;
 		}
+		CoreLog.logWarning("No content found in Resource: " + resource.getURI());
 		return null;
 	}
 }
