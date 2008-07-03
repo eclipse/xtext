@@ -58,12 +58,19 @@ public class XtextResource extends ResourceImpl {
 		int length = change.length();
 		int documentGrowth = length - rootNode.length();
 		int originalLength = length - documentGrowth;
+		
+		// unloading is required to ensure that any EObjects hanging around (e.g. in the outline) get a proxied URI
+		// and thus still can be compared by their URI
+		unload();
+		
 		parseResult = parser.reparse(rootNode, offset, originalLength, change);
+		getContents().clear();
+		getContents().add(parseResult.getRootASTElement());
 		if (parseResult != null && parseResult.getRootNode() != rootNode) {
 			addNodeContentAdapter();
 		}
 	}
-
+	
 	private void addNodeContentAdapter() {
 		parseResult.getRootNode().eAdapters().add(new NodeContentAdapter());
 	}

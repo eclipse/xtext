@@ -9,7 +9,11 @@
 package org.eclipse.xtext.ui.editor.outline;
 
 import org.eclipse.core.runtime.ListenerList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
+import org.eclipse.jface.viewers.IElementComparer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -27,8 +31,9 @@ import org.eclipse.xtext.ui.editor.model.XtextEditorModelChangeEvent;
 import org.eclipse.xtext.ui.service.ILabelProvider;
 
 /**
- * @author Peter Friese - Initial contribution and API
+ * An outline page for Xtext based editors.
  * 
+ * @author Peter Friese - Initial contribution and API
  */
 public class XtextContentOutlinePage extends ContentOutlinePage implements IContentOutlinePage {
 
@@ -40,6 +45,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 	public XtextContentOutlinePage(BaseTextEditor xtextBaseEditor) {
 		this.xtextBaseEditor = xtextBaseEditor;
 	}
+	
 
 	@Override
 	public void createControl(Composite parent) {
@@ -49,7 +55,37 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 		viewer.setContentProvider(modelContentProvider);
 		viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(new XtextLabelProviderDelegator(ServiceRegistry
 				.getService(xtextBaseEditor.getLanguageDescriptor(), ILabelProvider.class))));
+		viewer.setComparer(new IElementComparer() {
 
+            public boolean equals(Object a, Object b) {
+                if (a instanceof EObject) {
+                    EObject ea = (EObject)a;
+                    if (b instanceof EObject) {
+                        EObject eb = (EObject)b;
+                        URI uriA = EcoreUtil.getURI(ea);
+                        URI uriB = EcoreUtil.getURI(eb);
+                        return uriA.equals(uriB);
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                else {
+                    return a.equals(b);
+                }
+            }
+
+            public int hashCode(Object element) {
+                if (element instanceof EObject) {
+                    return EcoreUtil.getURI((EObject) element).hashCode();
+                }
+                else {
+                    return element.hashCode();
+                }
+            }
+		    
+		});
+		
 		if (model != null) {
 			setViewerInput(model);
 		}
