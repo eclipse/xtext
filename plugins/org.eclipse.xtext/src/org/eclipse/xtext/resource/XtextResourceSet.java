@@ -10,8 +10,8 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 /**
  * A resource set that is capable of resolving classpath URIs.
@@ -34,7 +34,7 @@ public class XtextResourceSet extends ResourceSetImpl {
     @Override
     public URIConverter getURIConverter() {
         if (uriConverter == null) {
-            uriConverter = new URIConverterImpl() {
+            uriConverter = new ExtensibleURIConverterImpl() {
                 @Override
                 public URI normalize(URI uri) {
                     if (ClasspathUriUtil.isClassapthUri(uri)) {

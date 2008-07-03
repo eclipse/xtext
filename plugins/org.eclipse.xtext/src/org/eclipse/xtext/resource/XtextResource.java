@@ -42,30 +42,30 @@ public class XtextResource extends ResourceImpl {
 	@Inject
 	private IParseTreeConstructor parsetreeConstructor;
 
-	private IParseResult parse;
+	private IParseResult parseResult;
 
 	public XtextResource(URI uri) {
 		super(uri);
 	}
 
 	public IParseResult getParseResult() {
-		return parse;
+		return parseResult;
 	}
 
 	public void update(int offset, String change) {
-		CompositeNode rootNode = parse.getRootNode();
+		CompositeNode rootNode = parseResult.getRootNode();
 		int length = change.length();
 		int documentGrowth = length - rootNode.length();
 		int originalLength = length - documentGrowth;
-		parse = parser.reparse(rootNode, offset, originalLength, change);
+		parseResult = parser.reparse(rootNode, offset, originalLength, change);
 	}
 
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
 		getContents().clear();
-		parse = parser.parse(inputStream, elementFactory);
-		if (parse != null) {
-			EObject rootElement = parse.getRootASTElement();
+		parseResult = parser.parse(inputStream, elementFactory);
+		if (parseResult != null) {
+			EObject rootElement = parseResult.getRootASTElement();
 			if (rootElement != null) {
 				getContents().add(rootElement);
 			}
