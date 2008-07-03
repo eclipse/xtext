@@ -33,26 +33,26 @@ public class NodeContentAdapter extends EContentAdapter {
 				switch (eventType) {
 					case Notification.ADD:
 						if (position == 0) {
-							updateOffsetAndLine(child, new NodeInfo(parent.getOffset(), parent.getLine()));
+							updateNodeInfo(child, new NodeInfo(parent.getOffset(), parent.getLine()));
 						}
 						else {
 							AbstractNode predecessor = parent.getChildren().get(position - 1);
-							updateOffsetAndLine(child, new NodeInfo((predecessor.getOffset() + predecessor.getLength()), predecessor.endLine()));
+							updateNodeInfo(child, new NodeInfo((predecessor.getOffset() + predecessor.getLength()), predecessor.endLine()));
 						}
 						break;
 					case Notification.REMOVE:
 						if (position == 0) {
-							updateOffsetAndLine(parent, new NodeInfo(parent.getOffset(), parent.getLine()));
+							updateNodeInfo(parent, new NodeInfo(parent.getOffset(), parent.getLine()));
 						}
 						else {
 							AbstractNode successor = parent.getChildren().get(position);
-							updateOffsetAndLine(successor, new NodeInfo(child.getOffset(), child.getLine()));
+							updateNodeInfo(successor, new NodeInfo(child.getOffset(), child.getLine()));
 						}
 						break;
 					case Notification.ADD_MANY:
 					case Notification.MOVE:
 					case Notification.REMOVE_MANY:
-						updateOffsetAndLine(parent, new NodeInfo(parent.getOffset(), parent.getLine()));
+						updateNodeInfo(parent, new NodeInfo(parent.getOffset(), parent.getLine()));
 						break;
 					default:
 						break;
@@ -70,15 +70,15 @@ public class NodeContentAdapter extends EContentAdapter {
 				EList<AbstractNode> siblings = parent.getChildren();
 				int index = siblings.indexOf(target);
 				if (index == 0) {
-					updateOffsetAndLine(targetNode, new NodeInfo(parent.getOffset(), parent.getLine()));
+					updateNodeInfo(targetNode, new NodeInfo(parent.getOffset(), parent.getLine()));
 				}
 				else {
 					AbstractNode predecessor = siblings.get(index - 1);
-					updateOffsetAndLine(targetNode, new NodeInfo((predecessor.getOffset() + predecessor.getLength()), predecessor.endLine()));
+					updateNodeInfo(targetNode, new NodeInfo((predecessor.getOffset() + predecessor.getLength()), predecessor.endLine()));
 				}
 			}
 			else {
-				updateOffsetAndLine(targetNode, new NodeInfo(0, 1));
+				updateNodeInfo(targetNode, new NodeInfo(0, 1));
 			}
 		}
 	}
@@ -93,7 +93,7 @@ public class NodeContentAdapter extends EContentAdapter {
 		}
 	}
 	
-	protected NodeInfo updateOffsetAndLineInContents(AbstractNode node, NodeInfo info) {
+	protected NodeInfo updateNodeInfoInContents(AbstractNode node, NodeInfo info) {
 		node.setOffset(info.offset);
 		node.setLine(info.line);
 		if (node instanceof LeafNode) {
@@ -103,7 +103,7 @@ public class NodeContentAdapter extends EContentAdapter {
 		} else if (node instanceof CompositeNode) {
 			int length = 0;
 			for (AbstractNode child : ((CompositeNode) node).getChildren()) {
-				info = updateOffsetAndLineInContents(child, info);
+				info = updateNodeInfoInContents(child, info);
 				length += child.getLength();
 			}
 			node.setLength(length);
@@ -111,14 +111,14 @@ public class NodeContentAdapter extends EContentAdapter {
 		return info;
 	}
 
-	protected AbstractNode updateOffsetAndLine(AbstractNode node, NodeInfo info) {
-		updateOffsetAndLineInContents(node, info);
+	protected AbstractNode updateNodeInfo(AbstractNode node, NodeInfo info) {
+		updateNodeInfoInContents(node, info);
 		CompositeNode parent = node.getParent();
 		if (parent != null) {
 			EList<AbstractNode> siblings = parent.getChildren();
 			int index = siblings.indexOf(node);
 			for (int i = index + 1; i < siblings.size(); ++i) {
-				info = updateOffsetAndLineInContents(siblings.get(i), info);
+				info = updateNodeInfoInContents(siblings.get(i), info);
 			}
 		}
 		return node;
