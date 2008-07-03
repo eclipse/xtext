@@ -21,6 +21,7 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
@@ -106,11 +107,12 @@ public class XtextTokenScanner implements ITokenScanner {
 		IAstFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IAstFactory.class);
 		IParseResult parseResult;
 		try {
+			CompositeNode lastRootNode = null;
 			if (lastParseResult == null) {
 				parseResult = parser.parse(new StringInputStream(document.get()), elementFactory);
 			}
 			else {
-				CompositeNode lastRootNode = lastParseResult.getRootNode();
+				lastRootNode = lastParseResult.getRootNode();
 				int documentGrowth = document.getLength() - lastRootNode.length();
 				int originalLength = length - documentGrowth;
 				String change = document.get().substring(offset, offset + length);
@@ -120,6 +122,9 @@ public class XtextTokenScanner implements ITokenScanner {
 			CompositeNode rootNode = parseResult.getRootNode();
 			if (rootNode != null) {
 				nodeIterator = rootNode.getLeafNodes().iterator();
+				if(lastRootNode != rootNode) {
+					rootNode.eAdapters().add(new NodeContentAdapter());
+				}
 			}
 			if (Activator.DEBUG_PARSING)
 				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
