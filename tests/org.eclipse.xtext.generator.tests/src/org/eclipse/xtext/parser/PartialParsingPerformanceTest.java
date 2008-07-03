@@ -18,7 +18,7 @@ import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
  */
 public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 
-	private static final int NUM_ELEMENTS = 10;
+	private static final int NUM_ELEMENTS = 200;
 	public void testExpression() throws Exception {
 		with(SimpleExpressionsStandaloneSetup.class);
 		StringBuffer modelBuffer = new StringBuffer();

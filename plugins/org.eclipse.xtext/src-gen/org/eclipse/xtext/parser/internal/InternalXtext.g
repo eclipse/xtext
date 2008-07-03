@@ -68,7 +68,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 @parser::members {
  
-    public InternalXtextParser(TokenStream input, IElementFactory factory, Grammar g) {
+    public InternalXtextParser(TokenStream input, IAstFactory factory, Grammar g) {
         this(input);
         this.factory = factory;
 		grammar = g;

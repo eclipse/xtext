@@ -4,7 +4,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parser.GenericEcoreElementFactory;
-import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.service.Inject;
 
 public abstract class AbstractParseTreeConstructor implements IParseTreeConstructor {
@@ -20,7 +20,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 	private Grammar grammar;
 
 	@Inject
-	protected void setElementFactory(IElementFactory astElementFactory) {
+	protected void setElementFactory(IAstFactory astElementFactory) {
 	    this.astElementFactory = (GenericEcoreElementFactory) astElementFactory;
 	}
 	

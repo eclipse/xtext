@@ -13,7 +13,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageMetamodelAccess;
-import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.testlanguages.parser.OptionalEmptyLanguageParser;
@@ -45,7 +45,7 @@ public abstract class OptionalEmptyLanguageStandaloneSetup {
 					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
 			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, OptionalEmptyLanguageGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, OptionalEmptyLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IAstFactory.class, GenericEcoreElementFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, IParser.class, OptionalEmptyLanguageParser.class);
 			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, OptionalEmptyLanguageResourceFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, OptionalEmptyLanguageParseTreeConstructor.class);

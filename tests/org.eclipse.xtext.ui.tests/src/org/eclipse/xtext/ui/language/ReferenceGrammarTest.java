@@ -11,7 +11,7 @@ package org.eclipse.xtext.ui.language;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -36,7 +36,7 @@ public class ReferenceGrammarTest extends AbstractServiceTest {
 		String grammar = "spielplatz 200 \"Peters Spielplatz\" {" + "    kind (soeren 7)" + "    kind (lennart 4)"
 				+ "    kind (jonas 1)" + "    erwachsener (peter 33)" + "    erwachsener (anne 33)" + "}";
 		IParser parser = ServiceRegistry.getService(getDefaultTestLanguage(), IParser.class);
-		IElementFactory elementFactory = ServiceRegistry.getService(getDefaultTestLanguage(), IElementFactory.class);
+		IAstFactory elementFactory = ServiceRegistry.getService(getDefaultTestLanguage(), IAstFactory.class);
 		EObject object = (EObject) parser.parse(new StringInputStream(grammar), elementFactory).getRootASTElement();
 		assertNotNull(object);
 		NodeAdapter adapter = (NodeAdapter) object.eAdapters().get(0);
@@ -53,7 +53,7 @@ public class ReferenceGrammarTest extends AbstractServiceTest {
 
 	public void testParseBadGrammar() {
 		IParser parser = ServiceRegistry.getService(getDefaultTestLanguage(), IParser.class);
-		IElementFactory elementFactory = ServiceRegistry.getService(getDefaultTestLanguage(), IElementFactory.class);
+		IAstFactory elementFactory = ServiceRegistry.getService(getDefaultTestLanguage(), IAstFactory.class);
 		String badGrammar = "spielplatz ";
 		IParseResult badParseResult = parser.parse(new StringInputStream(badGrammar), elementFactory);
 		assertNotNull(badParseResult);

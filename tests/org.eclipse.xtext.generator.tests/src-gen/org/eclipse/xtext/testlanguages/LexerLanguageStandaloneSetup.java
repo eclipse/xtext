@@ -13,7 +13,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.LexerLanguageGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.testlanguages.services.LexerLanguageMetamodelAccess;
-import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.testlanguages.parser.LexerLanguageParser;
@@ -45,7 +45,7 @@ public abstract class LexerLanguageStandaloneSetup {
 					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
 			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, LexerLanguageGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, LexerLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IAstFactory.class, GenericEcoreElementFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, IParser.class, LexerLanguageParser.class);
 			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, LexerLanguageResourceFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, LexerLanguageParseTreeConstructor.class);

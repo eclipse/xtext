@@ -13,7 +13,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.services.XtextMetamodelAccess;
-import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.XtextParser;
@@ -45,7 +45,7 @@ public abstract class XtextStandaloneSetup {
 					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
 			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, XtextGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, XtextMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IAstFactory.class, GenericEcoreElementFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, IParser.class, XtextParser.class);
 			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, XtextResourceFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, XtextParseTreeConstructor.class);

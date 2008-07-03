@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g 2008-07-03 10:53:19
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g 2008-07-03 14:31:11
 
 package org.eclipse.xtext.parser.internal; 
 
@@ -42,7 +42,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
 
 
      
-        public InternalXtextGrammarTestParser(TokenStream input, IElementFactory factory, Grammar g) {
+        public InternalXtextGrammarTestParser(TokenStream input, IAstFactory factory, Grammar g) {
             this(input);
             this.factory = factory;
     		grammar = g;

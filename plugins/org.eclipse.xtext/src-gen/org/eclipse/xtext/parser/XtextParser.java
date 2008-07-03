@@ -4,7 +4,7 @@ Generated with Xtext
 package org.eclipse.xtext.parser;
 
 import org.antlr.runtime.ANTLRInputStream;
-import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
@@ -16,7 +16,7 @@ import org.eclipse.xtext.parser.internal.InternalXtextParser;
 public class XtextParser extends org.eclipse.xtext.parser.AbstractParser {
 	
 	@Override
-	protected IParseResult parse(String ruleName, ANTLRInputStream in, IElementFactory factory) {
+	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
 		InternalXtextLexer lexer = new InternalXtextLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer);
 		InternalXtextParser parser = new InternalXtextParser(

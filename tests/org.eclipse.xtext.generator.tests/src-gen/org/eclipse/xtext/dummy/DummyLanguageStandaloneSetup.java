@@ -13,7 +13,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.dummy.services.DummyLanguageGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.dummy.services.DummyLanguageMetamodelAccess;
-import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.dummy.parser.DummyLanguageParser;
@@ -45,7 +45,7 @@ public abstract class DummyLanguageStandaloneSetup {
 					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
 			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, DummyLanguageGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, DummyLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IAstFactory.class, GenericEcoreElementFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, IParser.class, DummyLanguageParser.class);
 			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, DummyLanguageResourceFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, DummyLanguageParseTreeConstructor.class);

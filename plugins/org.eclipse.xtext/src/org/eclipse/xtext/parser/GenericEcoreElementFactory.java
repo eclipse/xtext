@@ -26,7 +26,7 @@ import org.eclipse.xtext.service.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class GenericEcoreElementFactory implements IElementFactory {
+public class GenericEcoreElementFactory implements IAstFactory {
 
     @Inject
     protected IMetamodelAccess metamodelAccess;

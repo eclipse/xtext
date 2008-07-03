@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g 2008-07-03 10:53:21
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g 2008-07-03 14:31:14
 
 package org.eclipse.xtext.dummy.parser.internal; 
 
@@ -42,7 +42,7 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
 
 
      
-        public InternalDummyLanguageParser(TokenStream input, IElementFactory factory, Grammar g) {
+        public InternalDummyLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
             this(input);
             this.factory = factory;
     		grammar = g;

@@ -13,7 +13,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.testlanguages.services.SimpleExpressionsMetamodelAccess;
-import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.GenericEcoreElementFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.testlanguages.parser.SimpleExpressionsParser;
@@ -45,7 +45,7 @@ public abstract class SimpleExpressionsStandaloneSetup {
 					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
 			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, SimpleExpressionsGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, SimpleExpressionsMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IElementFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(languageDescriptor, IAstFactory.class, GenericEcoreElementFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, IParser.class, SimpleExpressionsParser.class);
 			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, SimpleExpressionsResourceFactory.class);
 			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, SimpleExpressionsParseTreeConstructor.class);

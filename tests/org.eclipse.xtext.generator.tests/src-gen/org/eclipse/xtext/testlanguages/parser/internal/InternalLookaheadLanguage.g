@@ -68,7 +68,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 @parser::members {
  
-    public InternalLookaheadLanguageParser(TokenStream input, IElementFactory factory, Grammar g) {
+    public InternalLookaheadLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
         this(input);
         this.factory = factory;
 		grammar = g;

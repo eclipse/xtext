@@ -16,7 +16,7 @@ import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
-import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -103,7 +103,7 @@ public class XtextTokenScanner implements ITokenScanner {
 		long start = System.currentTimeMillis();
 
 		// TODO: dependency injection for default element factory in parser
-		IElementFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IElementFactory.class);
+		IAstFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IAstFactory.class);
 		IParseResult parseResult;
 		try {
 			if (lastParseResult == null) {
