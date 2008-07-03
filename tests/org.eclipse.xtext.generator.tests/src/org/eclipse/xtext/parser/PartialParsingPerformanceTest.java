@@ -19,13 +19,14 @@ import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 
 	public void testPerformance() throws Exception {
+		int magicnumber = 10;
 		with(SimpleExpressionsStandaloneSetup.class);
 		StringBuffer modelBuffer = new StringBuffer();
-		for(int i=0; i<200; ++i) {
+		for(int i=0; i<magicnumber; ++i) {
 			modelBuffer.append("(a+(b*");
 		}
 		modelBuffer.append("c");
-		for(int i=0; i<200; ++i) {
+		for(int i=0; i<magicnumber; ++i) {
 			modelBuffer.append(")+d)");
 		}
 		String model = modelBuffer.toString();
