@@ -133,7 +133,10 @@ public class PartialParsingUtil {
 	private static void collectNodesEnclosingChangeRegion(CompositeNode parent, int offset, int length,
 			List<CompositeNode> nodesEnclosingRegion) {
 		nodesEnclosingRegion.add(parent);
-		for (AbstractNode child : parent.getChildren()) {
+		EList<AbstractNode> children = parent.getChildren();
+		// Hack: iterate children backward, so we evaluate the node.length() function less often  
+		for (int i=children.size()-1; i>=0; --i) {
+			AbstractNode child = children.get(i);
 			if (child instanceof CompositeNode) {
 				CompositeNode childCompositeNode = (CompositeNode) child;
 				if (nodeEnclosesRegion(childCompositeNode, offset, length)) {
@@ -145,7 +148,10 @@ public class PartialParsingUtil {
 	}
 
 	private static boolean nodeEnclosesRegion(CompositeNode node, int offset, int length) {
-		return node.getOffset() <= offset && node.getOffset() + node.length() >= offset + length;
+		if(node.getOffset() <= offset) {
+			return node.getOffset() + node.getLength() >= offset + length;
+		}
+		return false;
 	}
 
 	/**
@@ -225,7 +231,7 @@ public class PartialParsingUtil {
 	}
 
 	private static boolean nodeIsBeforeRegion(LeafNode node, int offset) {
-		return node.getOffset() + node.length() <= offset;
+		return node.getOffset() + node.getLength() <= offset;
 	}
 
 }

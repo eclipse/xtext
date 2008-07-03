@@ -10,6 +10,7 @@ package org.eclipse.xtext.parser;
 
 import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 
 /**
@@ -18,7 +19,8 @@ import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
  */
 public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 
-	private static final int NUM_ELEMENTS = 200;
+	private static final int NUM_ELEMENTS = 1;
+	
 	public void testExpression() throws Exception {
 		with(SimpleExpressionsStandaloneSetup.class);
 		StringBuffer modelBuffer = new StringBuffer();
@@ -35,29 +37,29 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		assertTrue(reparse.getParseErrors() == null || reparse.getParseErrors().isEmpty());
 	}
 	
-//	public void testReference() throws Exception {
-//		with(ReferenceGrammarStandaloneSetup.class);
-//		StringBuffer modelBuffer = new StringBuffer();
-//		modelBuffer.append("spielplatz 17 {\n");
-//		for(int i=0; i<NUM_ELEMENTS; ++i) {
-//			modelBuffer.append("  kind ( Herbert");
-//			modelBuffer.append(i);
-//			modelBuffer.append(" 11 )\n");
-//		}
-//		for(int i=0; i<NUM_ELEMENTS; ++i) {
-//			modelBuffer.append("  erwachsener ( Hugo");
-//			modelBuffer.append(i);
-//			modelBuffer.append(" 111 )\n");
-//		}
-//		modelBuffer.append("  erwachsener ( Sven 112 )\n");
-//		for(int i=0; i<NUM_ELEMENTS; ++i) {
-//			modelBuffer.append("  spielzeug ( Schaufel GRÜN )\n");
-//		}
-//		modelBuffer.append("}\n");
-//		String model = modelBuffer.toString();
-//		CompositeNode rootNode = getRootNode(model);
-//		IParseResult reparse = PartialParsingUtil.reparse(getParser(), rootNode, model.indexOf("Sven"), 4, "Peter");
-//		assertTrue(reparse.getParseErrors() == null || reparse.getParseErrors().isEmpty());
-//	}
+	public void testReference() throws Exception {
+		with(ReferenceGrammarStandaloneSetup.class);
+		StringBuffer modelBuffer = new StringBuffer();
+		modelBuffer.append("spielplatz 17 {\n");
+		for(int i=0; i<NUM_ELEMENTS; ++i) {
+			modelBuffer.append("  kind ( Herbert");
+			modelBuffer.append(i);
+			modelBuffer.append(" 11 )\n");
+		}
+		for(int i=0; i<NUM_ELEMENTS; ++i) {
+			modelBuffer.append("  erwachsener ( Hugo");
+			modelBuffer.append(i);
+			modelBuffer.append(" 111 )\n");
+		}
+		modelBuffer.append("  erwachsener ( Sven 112 )\n");
+		for(int i=0; i<NUM_ELEMENTS; ++i) {
+			modelBuffer.append("  spielzeug ( Schaufel GRÜN )\n");
+		}
+		modelBuffer.append("}\n");
+		String model = modelBuffer.toString();
+		CompositeNode rootNode = getRootNode(model);
+		IParseResult reparse = PartialParsingUtil.reparse(getParser(), rootNode, model.indexOf("Sven"), 4, "Peter");
+		assertTrue(reparse.getParseErrors() == null || reparse.getParseErrors().isEmpty());
+	}
 	
 }

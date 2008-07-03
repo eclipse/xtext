@@ -24,23 +24,6 @@ import org.eclipse.xtext.parsetree.SyntaxError;
  */
 public class ParsetreeUtil {
 
-	public static int length(CompositeNodeImpl compositeNodeImpl) {
-		int length = 0;
-		for (AbstractNode node : compositeNodeImpl.getChildren()) {
-			length += node.length();
-		}
-		return length;
-	}
-
-	public static int length(LeafNodeImpl leafNodeImpl) {
-		return leafNodeImpl.getText().length();
-	}
-
-	public static int length(AbstractNodeImpl abstractParserNode) {
-		throw new IllegalArgumentException("Illegal subtype of AbstarctParserNode "
-				+ abstractParserNode.eClass().getName());
-	}
-
 	private static void checkArgument(AbstractNodeImpl abstractParserNode) {
 		int classifierID = abstractParserNode.eClass().getClassifierID();
 		if (classifierID != ParsetreePackage.COMPOSITE_NODE && classifierID != ParsetreePackage.LEAF_NODE) {

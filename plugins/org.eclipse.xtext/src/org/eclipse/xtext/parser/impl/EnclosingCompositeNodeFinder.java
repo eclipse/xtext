@@ -49,7 +49,7 @@ public class EnclosingCompositeNodeFinder {
 		EList<AbstractNode> children = parentNode.getChildren();
 		for (AbstractNode child : children) {
 			if (child instanceof LeafNode) {
-				currentOffset += child.length();
+				currentOffset += child.getLength();
 				if (isLookingForStartToken && currentOffset > offset) {
 					isLookingForStartToken = false;
 					startTokenParentIndex = currentParentIndex;
