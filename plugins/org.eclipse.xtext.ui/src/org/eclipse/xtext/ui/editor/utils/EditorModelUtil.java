@@ -23,7 +23,7 @@ public class EditorModelUtil {
 			EObject eO = treeIter.next();
 			if (eO instanceof AbstractNode) {
 				AbstractNode ln = (AbstractNode) eO;
-				if (ln.getOffset() + ln.length() >= offset) {
+				if (ln.getOffset() + ln.getLength() >= offset) {
 					if (ln.getOffset() <= offset) {
 						if (ln instanceof LeafNode)
 							return ln;

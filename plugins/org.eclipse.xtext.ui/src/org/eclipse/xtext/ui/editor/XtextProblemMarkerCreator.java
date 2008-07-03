@@ -55,7 +55,7 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 		// TODO map.put(IMarker.LINE_NUMBER,
 		// Integer.valueOf(error.getNode().line()));
 		map.put(IMarker.CHAR_START, Integer.valueOf(error.getNode().getOffset()));
-		map.put(IMarker.CHAR_END, Integer.valueOf(error.getNode().getOffset() + error.getNode().length()));
+		map.put(IMarker.CHAR_END, Integer.valueOf(error.getNode().getOffset() + error.getNode().getLength()));
 		map.put(IMarker.MESSAGE, error.getMessage());
 		map.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 		return map;
@@ -123,7 +123,7 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 					// Integer.valueOf(parserNode.line()));
 					int offset = parserNode.getOffset();
 					map.put(IMarker.CHAR_START, Integer.valueOf(offset));
-					map.put(IMarker.CHAR_END, Integer.valueOf(offset + parserNode.length()));
+					map.put(IMarker.CHAR_END, Integer.valueOf(offset + parserNode.getLength()));
 				}
 				map.put(IMarker.MESSAGE, diagnostic.getMessage());
 			}
