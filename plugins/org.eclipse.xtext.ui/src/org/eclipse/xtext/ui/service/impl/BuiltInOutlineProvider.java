@@ -54,7 +54,7 @@ public class BuiltInOutlineProvider implements IOutlineProvider {
                 return offset.compareTo(offset2);
             }
         });
-
+        
         return array;
     }
 
