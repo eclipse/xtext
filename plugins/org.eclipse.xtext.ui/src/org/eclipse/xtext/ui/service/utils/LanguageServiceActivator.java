@@ -14,7 +14,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.resource.IResourceFactory;
@@ -46,7 +46,7 @@ public class LanguageServiceActivator {
 	static {
 		serviceMap = new HashMap<String, Class<? extends ILanguageService>>();
 		serviceMap.put("parser", IParser.class);
-		serviceMap.put("aSTFactory", IElementFactory.class);
+		serviceMap.put("aSTFactory", IAstFactory.class);
 		serviceMap.put("parseTreeConstructor", IParseTreeConstructor.class);
 		serviceMap.put("preferenceStore", IPreferenceStore.class);
 		serviceMap.put("proposalsProvider", IProposalsProvider.class);
