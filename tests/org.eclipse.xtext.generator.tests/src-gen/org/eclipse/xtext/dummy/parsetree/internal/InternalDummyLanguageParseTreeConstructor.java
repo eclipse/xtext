@@ -47,7 +47,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = (getDescr((EObject)value));
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@terminal");
+	EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.0/@alternatives/@terminal");
 	try {
 		ruleCallStart(val, true, (RuleCall) ruleCall);
 		proceedElement(val);
@@ -74,7 +74,7 @@ protected void proceedElement(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1"));
+	keyword((Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -99,7 +99,7 @@ new Predicate(obj) {
 
 	
 		
-		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		lexerRuleCall(value,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
 		
 	
 
@@ -125,7 +125,7 @@ new Predicate(obj) {
 
 	
 		
-		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		lexerRuleCall(value,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
 		
 	
 
@@ -144,7 +144,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
+	keyword((Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -163,7 +163,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
+	keyword((Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
 
 }
 

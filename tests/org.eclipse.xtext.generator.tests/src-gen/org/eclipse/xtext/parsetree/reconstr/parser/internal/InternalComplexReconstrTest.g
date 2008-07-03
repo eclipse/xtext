@@ -97,7 +97,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 // Entry rule entryRuleOp
 entryRuleOp returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleOp=ruleOp 
 	 { $current=$iv_ruleOp.current; } 
 	 EOF 
@@ -109,7 +109,7 @@ ruleOp returns [EObject current=null]
     @after { resetLookahead(); }:
 (
     { 
-        currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
     }
     this_Term=ruleTerm
     { 
@@ -122,7 +122,7 @@ ruleOp returns [EObject current=null]
         factory.add(temp, "addOperands",$current);
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+        CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -131,12 +131,12 @@ ruleOp returns [EObject current=null]
 )'+' 
 
     {
-        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 )(
     
     { 
-        currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
     lv_addOperands=ruleTerm 
     {
@@ -153,7 +153,7 @@ ruleOp returns [EObject current=null]
         factory.add(temp, "minusOperands",$current);
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+        CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -162,12 +162,12 @@ ruleOp returns [EObject current=null]
 )'-' 
 
     {
-        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 )(
     
     { 
-        currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
     lv_minusOperands=ruleTerm 
     {
@@ -183,7 +183,7 @@ ruleOp returns [EObject current=null]
 
 // Entry rule entryRuleTerm
 entryRuleTerm returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleTerm=ruleTerm 
 	 { $current=$iv_ruleTerm.current; } 
 	 EOF 
@@ -195,7 +195,7 @@ ruleTerm returns [EObject current=null]
     @after { resetLookahead(); }:
 (
     { 
-        currentNode=createCompositeNode("//@parserRules.1/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.1/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
     }
     this_Atom=ruleAtom
     { 
@@ -205,7 +205,7 @@ ruleTerm returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("//@parserRules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_Parens=ruleParens
     { 
@@ -218,7 +218,7 @@ ruleTerm returns [EObject current=null]
 
 // Entry rule entryRuleAtom
 entryRuleAtom returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.2" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.2" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleAtom=ruleAtom 
 	 { $current=$iv_ruleAtom.current; } 
 	 EOF 
@@ -231,7 +231,7 @@ ruleAtom returns [EObject current=null]
 (
     lv_name=RULE_ID
     { 
-    createLeafNode("//@parserRules.2/@alternatives/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.2/@alternatives/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
     }
  
     {
@@ -246,7 +246,7 @@ ruleAtom returns [EObject current=null]
 
 // Entry rule entryRuleParens
 entryRuleParens returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.3" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleParens=ruleParens 
 	 { $current=$iv_ruleParens.current; } 
 	 EOF 
@@ -259,11 +259,11 @@ ruleParens returns [EObject current=null]
 ((('(' 
 
     {
-        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 
     { 
-        currentNode=createCompositeNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
     }
     this_Op=ruleOp
     { 
@@ -273,7 +273,7 @@ ruleParens returns [EObject current=null]
 )')' 
 
     {
-        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 )(
     lv_em='!' 
@@ -283,7 +283,7 @@ ruleParens returns [EObject current=null]
             $current = factory.create("Expression");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "em", lv_em,"!");        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"em");    }
+        factory.set($current, "em", lv_em,"!");        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"em");    }
 )?);
     
 

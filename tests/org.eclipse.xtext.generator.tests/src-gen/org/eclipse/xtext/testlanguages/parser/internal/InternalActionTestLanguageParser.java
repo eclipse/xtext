@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g 2008-07-01 17:32:52
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g 2008-07-03 10:53:24
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -73,7 +73,7 @@ public class InternalActionTestLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:99:47: (iv_ruleModel= ruleModel EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:100:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel80);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -125,7 +125,7 @@ public class InternalActionTestLanguageParser extends AbstractAntlrParser {
             	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:112:5: lv_children= ruleElement
             	    {
             	     
-            	            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+            	            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
             	        
             	    pushFollow(FOLLOW_ruleElement_in_ruleModel142);
             	    lv_children=ruleElement();
@@ -176,7 +176,7 @@ public class InternalActionTestLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:128:49: (iv_ruleElement= ruleElement EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:129:2: iv_ruleElement= ruleElement EOF
             {
-             currentNode = createCompositeNode("//@parserRules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleElement_in_entryRuleElement178);
             iv_ruleElement=ruleElement();
             _fsp--;
@@ -218,7 +218,7 @@ public class InternalActionTestLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:140:5: this_Item= ruleItem ( () (lv_items= ruleItem ) )
             {
              
-                    currentNode=createCompositeNode("//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleItem_in_ruleElement235);
             this_Item=ruleItem();
@@ -239,7 +239,7 @@ public class InternalActionTestLanguageParser extends AbstractAntlrParser {
                     factory.add(temp, "items",current);
                     current = temp; 
                     temp = null;
-                    CompositeNode newNode = createCompositeNode("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+                    CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
                 newNode.getChildren().add(currentNode);
                 moveLookaheadInfo(currentNode, newNode);
                 currentNode = newNode; 
@@ -252,7 +252,7 @@ public class InternalActionTestLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:162:5: lv_items= ruleItem
             {
              
-                    currentNode=createCompositeNode("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleItem_in_ruleElement272);
             lv_items=ruleItem();
@@ -303,7 +303,7 @@ public class InternalActionTestLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:178:46: (iv_ruleItem= ruleItem EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g:179:2: iv_ruleItem= ruleItem EOF
             {
-             currentNode = createCompositeNode("//@parserRules.2" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.2" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleItem_in_entryRuleItem309);
             iv_ruleItem=ruleItem();
             _fsp--;
@@ -349,7 +349,7 @@ public class InternalActionTestLanguageParser extends AbstractAntlrParser {
                     factory.set(temp, "content",current);
                     current = temp; 
                     temp = null;
-                    CompositeNode newNode = createCompositeNode("//@parserRules.2/@alternatives/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+                    CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
                 newNode.getChildren().add(currentNode);
                 moveLookaheadInfo(currentNode, newNode);
                 currentNode = newNode; 
@@ -364,7 +364,7 @@ public class InternalActionTestLanguageParser extends AbstractAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleItem370); 
              
-                createLeafNode("//@parserRules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
                 
 
                     if (current==null) {

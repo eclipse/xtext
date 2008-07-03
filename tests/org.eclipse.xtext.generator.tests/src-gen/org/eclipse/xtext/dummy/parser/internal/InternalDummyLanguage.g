@@ -97,7 +97,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -110,7 +110,7 @@ ruleModel returns [EObject current=null]
 (
     
     { 
-        currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
     }
     lv_elements=ruleElement 
     {
@@ -126,7 +126,7 @@ ruleModel returns [EObject current=null]
 
 // Entry rule entryRuleElement
 entryRuleElement returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleElement=ruleElement 
 	 { $current=$iv_ruleElement.current; } 
 	 EOF 
@@ -144,16 +144,16 @@ ruleElement returns [EObject current=null]
             $current = factory.create("Element");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "optional", true,"optional");        createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, currentNode,"optional");    }
+        factory.set($current, "optional", true,"optional");        createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, currentNode,"optional");    }
 )?'element' 
 
     {
-        createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 )(
     lv_name=RULE_ID
     { 
-    createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
     }
  
     {
@@ -165,7 +165,7 @@ ruleElement returns [EObject current=null]
 ))(
     lv_descriptions=RULE_STRING
     { 
-    createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"descriptions"); 
+    createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"descriptions"); 
     }
  
     {
@@ -177,7 +177,7 @@ ruleElement returns [EObject current=null]
 )*)';' 
 
     {
-        createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
     

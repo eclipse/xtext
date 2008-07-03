@@ -97,7 +97,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 // Entry rule entryRuleGrammar
 entryRuleGrammar returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleGrammar=ruleGrammar 
 	 { $current=$iv_ruleGrammar.current; } 
 	 EOF 
@@ -115,17 +115,17 @@ ruleGrammar returns [EObject current=null]
             $current = factory.create("Grammar");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "abstract", true,"abstract language");        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.0/@terminal" /* xtext::Keyword */, currentNode,"abstract");    }
+        factory.set($current, "abstract", true,"abstract language");        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.0/@terminal" /* xtext::Keyword */, currentNode,"abstract");    }
 )
     |'language' 
 
     {
-        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.1" /* xtext::Keyword */, currentNode,null); 
     }
 )(
     lv_idElements=RULE_ID
     { 
-    createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"idElements"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"idElements"); 
     }
  
     {
@@ -137,12 +137,12 @@ ruleGrammar returns [EObject current=null]
 ))('.' 
 
     {
-        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 (
     lv_idElements=RULE_ID
     { 
-    createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"idElements"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"idElements"); 
     }
  
     {
@@ -154,12 +154,12 @@ ruleGrammar returns [EObject current=null]
 ))*)(('extends' 
 
     {
-        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 (
     lv_superGrammarIdElements=RULE_ID
     { 
-    createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"superGrammarIdElements"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"superGrammarIdElements"); 
     }
  
     {
@@ -171,12 +171,12 @@ ruleGrammar returns [EObject current=null]
 ))('.' 
 
     {
-        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 (
     lv_superGrammarIdElements=RULE_ID
     { 
-    createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"superGrammarIdElements"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"superGrammarIdElements"); 
     }
  
     {
@@ -188,7 +188,7 @@ ruleGrammar returns [EObject current=null]
 ))*)?)?(
     
     { 
-        currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
     lv_metamodelDeclarations=ruleAbstractMetamodelDeclaration 
     {
@@ -201,7 +201,7 @@ ruleGrammar returns [EObject current=null]
 )*)(
     
     { 
-        currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
     lv_parserRules=ruleParserRule 
     {
@@ -214,17 +214,17 @@ ruleGrammar returns [EObject current=null]
 )*)(('lexing' 
 
     {
-        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 ':' 
 
     {
-        createLeafNode("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 )(
     
     { 
-        currentNode=createCompositeNode("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
     lv_lexerRules=ruleLexerRule 
     {
@@ -242,7 +242,7 @@ ruleGrammar returns [EObject current=null]
 
 // Entry rule entryRuleAbstractMetamodelDeclaration
 entryRuleAbstractMetamodelDeclaration returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.2" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.2" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleAbstractMetamodelDeclaration=ruleAbstractMetamodelDeclaration 
 	 { $current=$iv_ruleAbstractMetamodelDeclaration.current; } 
 	 EOF 
@@ -254,7 +254,7 @@ ruleAbstractMetamodelDeclaration returns [EObject current=null]
     @after { resetLookahead(); }:
 (
     { 
-        currentNode=createCompositeNode("//@parserRules.2/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.2/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
     }
     this_GeneratedMetamodel=ruleGeneratedMetamodel
     { 
@@ -264,7 +264,7 @@ ruleAbstractMetamodelDeclaration returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("//@parserRules.2/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.2/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_ReferencedMetamodel=ruleReferencedMetamodel
     { 
@@ -277,7 +277,7 @@ ruleAbstractMetamodelDeclaration returns [EObject current=null]
 
 // Entry rule entryRuleGeneratedMetamodel
 entryRuleGeneratedMetamodel returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.3" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.3" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleGeneratedMetamodel=ruleGeneratedMetamodel 
 	 { $current=$iv_ruleGeneratedMetamodel.current; } 
 	 EOF 
@@ -290,12 +290,12 @@ ruleGeneratedMetamodel returns [EObject current=null]
 ((('generate' 
 
     {
-        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 (
     lv_name=RULE_ID
     { 
-    createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
     }
  
     {
@@ -307,7 +307,7 @@ ruleGeneratedMetamodel returns [EObject current=null]
 ))(
     lv_nsURI=RULE_STRING
     { 
-    createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"nsURI"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"nsURI"); 
     }
  
     {
@@ -319,12 +319,12 @@ ruleGeneratedMetamodel returns [EObject current=null]
 ))('as' 
 
     {
-        createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 (
     lv_alias=RULE_ID
     { 
-    createLeafNode("//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"alias"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"alias"); 
     }
  
     {
@@ -339,7 +339,7 @@ ruleGeneratedMetamodel returns [EObject current=null]
 
 // Entry rule entryRuleReferencedMetamodel
 entryRuleReferencedMetamodel returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.4" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.4" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleReferencedMetamodel=ruleReferencedMetamodel 
 	 { $current=$iv_ruleReferencedMetamodel.current; } 
 	 EOF 
@@ -352,12 +352,12 @@ ruleReferencedMetamodel returns [EObject current=null]
 (('import' 
 
     {
-        createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 (
     lv_uri=RULE_STRING
     { 
-    createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"uri"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"uri"); 
     }
  
     {
@@ -369,12 +369,12 @@ ruleReferencedMetamodel returns [EObject current=null]
 ))('as' 
 
     {
-        createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.4/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 (
     lv_alias=RULE_ID
     { 
-    createLeafNode("//@parserRules.4/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"alias"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.4/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"alias"); 
     }
  
     {
@@ -389,7 +389,7 @@ ruleReferencedMetamodel returns [EObject current=null]
 
 // Entry rule entryRuleLexerRule
 entryRuleLexerRule returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.5" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.5" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleLexerRule=ruleLexerRule 
 	 { $current=$iv_ruleLexerRule.current; } 
 	 EOF 
@@ -402,7 +402,7 @@ ruleLexerRule returns [EObject current=null]
 ((((
     lv_name=RULE_ID
     { 
-    createLeafNode("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
     }
  
     {
@@ -414,12 +414,12 @@ ruleLexerRule returns [EObject current=null]
 )('returns' 
 
     {
-        createLeafNode("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 (
     
     { 
-        currentNode=createCompositeNode("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
     lv_type=ruleTypeRef 
     {
@@ -432,12 +432,12 @@ ruleLexerRule returns [EObject current=null]
 ))?)':' 
 
     {
-        createLeafNode("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 )(
     lv_body=RULE_LEXER_BODY
     { 
-    createLeafNode("//@parserRules.5/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"body"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.5/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"body"); 
     }
  
     {
@@ -452,7 +452,7 @@ ruleLexerRule returns [EObject current=null]
 
 // Entry rule entryRuleParserRule
 entryRuleParserRule returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.6" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleParserRule=ruleParserRule 
 	 { $current=$iv_ruleParserRule.current; } 
 	 EOF 
@@ -465,7 +465,7 @@ ruleParserRule returns [EObject current=null]
 (((((
     lv_name=RULE_ID
     { 
-    createLeafNode("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
     }
  
     {
@@ -477,12 +477,12 @@ ruleParserRule returns [EObject current=null]
 )('returns' 
 
     {
-        createLeafNode("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 (
     
     { 
-        currentNode=createCompositeNode("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
     lv_type=ruleTypeRef 
     {
@@ -495,12 +495,12 @@ ruleParserRule returns [EObject current=null]
 ))?)':' 
 
     {
-        createLeafNode("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 )(
     
     { 
-        currentNode=createCompositeNode("//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
     lv_alternatives=ruleAlternatives 
     {
@@ -513,7 +513,7 @@ ruleParserRule returns [EObject current=null]
 ))';' 
 
     {
-        createLeafNode("//@parserRules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
     
@@ -521,7 +521,7 @@ ruleParserRule returns [EObject current=null]
 
 // Entry rule entryRuleTypeRef
 entryRuleTypeRef returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.7" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.7" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleTypeRef=ruleTypeRef 
 	 { $current=$iv_ruleTypeRef.current; } 
 	 EOF 
@@ -534,7 +534,7 @@ ruleTypeRef returns [EObject current=null]
 (((
     lv_alias=RULE_ID
     { 
-    createLeafNode("//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode,"alias"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode,"alias"); 
     }
  
     {
@@ -546,12 +546,12 @@ ruleTypeRef returns [EObject current=null]
 )'::' 
 
     {
-        createLeafNode("//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 )?(
     lv_name=RULE_ID
     { 
-    createLeafNode("//@parserRules.7/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.7/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
     }
  
     {
@@ -566,7 +566,7 @@ ruleTypeRef returns [EObject current=null]
 
 // Entry rule entryRuleAlternatives
 entryRuleAlternatives returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.8" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.8" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleAlternatives=ruleAlternatives 
 	 { $current=$iv_ruleAlternatives.current; } 
 	 EOF 
@@ -578,7 +578,7 @@ ruleAlternatives returns [EObject current=null]
     @after { resetLookahead(); }:
 (
     { 
-        currentNode=createCompositeNode("//@parserRules.8/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.8/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
     }
     this_Group=ruleGroup
     { 
@@ -591,7 +591,7 @@ ruleAlternatives returns [EObject current=null]
         factory.add(temp, "groups",$current);
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode("//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+        CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -600,12 +600,12 @@ ruleAlternatives returns [EObject current=null]
 )'|' 
 
     {
-        createLeafNode("//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 )(
     
     { 
-        currentNode=createCompositeNode("//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
     lv_groups=ruleGroup 
     {
@@ -621,7 +621,7 @@ ruleAlternatives returns [EObject current=null]
 
 // Entry rule entryRuleGroup
 entryRuleGroup returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.9" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.9" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleGroup=ruleGroup 
 	 { $current=$iv_ruleGroup.current; } 
 	 EOF 
@@ -633,7 +633,7 @@ ruleGroup returns [EObject current=null]
     @after { resetLookahead(); }:
 (
     { 
-        currentNode=createCompositeNode("//@parserRules.9/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.9/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
     }
     this_AbstractToken=ruleAbstractToken
     { 
@@ -646,7 +646,7 @@ ruleGroup returns [EObject current=null]
         factory.add(temp, "abstractTokens",$current);
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode("//@parserRules.9/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+        CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.9/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -655,7 +655,7 @@ ruleGroup returns [EObject current=null]
 )(
     
     { 
-        currentNode=createCompositeNode("//@parserRules.9/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.9/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
     lv_abstractTokens=ruleAbstractToken 
     {
@@ -671,7 +671,7 @@ ruleGroup returns [EObject current=null]
 
 // Entry rule entryRuleAbstractToken
 entryRuleAbstractToken returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.10" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.10" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleAbstractToken=ruleAbstractToken 
 	 { $current=$iv_ruleAbstractToken.current; } 
 	 EOF 
@@ -683,7 +683,7 @@ ruleAbstractToken returns [EObject current=null]
     @after { resetLookahead(); }:
 (((
     { 
-        currentNode=createCompositeNode("//@parserRules.10/@alternatives/@abstractTokens.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.10/@alternatives/@abstractTokens.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
     }
     this_Assignment=ruleAssignment
     { 
@@ -693,7 +693,7 @@ ruleAbstractToken returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("//@parserRules.10/@alternatives/@abstractTokens.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.10/@alternatives/@abstractTokens.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_Action=ruleAction
     { 
@@ -703,7 +703,7 @@ ruleAbstractToken returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("//@parserRules.10/@alternatives/@abstractTokens.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.10/@alternatives/@abstractTokens.0/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_AbstractTerminal=ruleAbstractTerminal
     { 
@@ -722,14 +722,14 @@ ruleAbstractToken returns [EObject current=null]
             $current = factory.create("AbstractElement");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "cardinality", lv_cardinality,null);        createLeafNode("//@parserRules.10/@alternatives/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"cardinality");    }
+        factory.set($current, "cardinality", lv_cardinality,null);        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.10/@alternatives/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"cardinality");    }
 )?);
     
 
 
 // Entry rule entryRuleAssignment
 entryRuleAssignment returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.11" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.11" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleAssignment=ruleAssignment 
 	 { $current=$iv_ruleAssignment.current; } 
 	 EOF 
@@ -742,7 +742,7 @@ ruleAssignment returns [EObject current=null]
 (((
     lv_feature=RULE_ID
     { 
-    createLeafNode("//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode,"feature"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode,"feature"); 
     }
  
     {
@@ -763,11 +763,11 @@ ruleAssignment returns [EObject current=null]
             $current = factory.create("Assignment");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "operator", lv_operator,null);        createLeafNode("//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"operator");    }
+        factory.set($current, "operator", lv_operator,null);        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"operator");    }
 ))(
     
     { 
-        currentNode=createCompositeNode("//@parserRules.11/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.11/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
     lv_terminal=ruleAbstractTerminal 
     {
@@ -783,7 +783,7 @@ ruleAssignment returns [EObject current=null]
 
 // Entry rule entryRuleAction
 entryRuleAction returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.12" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleAction=ruleAction 
 	 { $current=$iv_ruleAction.current; } 
 	 EOF 
@@ -796,22 +796,22 @@ ruleAction returns [EObject current=null]
 (((('{' 
 
     {
-        createLeafNode("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 ('current' 
 
     {
-        createLeafNode("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 '=' 
 
     {
-        createLeafNode("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 )?)(
     
     { 
-        currentNode=createCompositeNode("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
     }
     lv_typeName=ruleTypeRef 
     {
@@ -824,12 +824,12 @@ ruleAction returns [EObject current=null]
 ))((('.' 
 
     {
-        createLeafNode("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 (
     lv_feature=RULE_ID
     { 
-    createLeafNode("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"feature"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"feature"); 
     }
  
     {
@@ -848,16 +848,16 @@ ruleAction returns [EObject current=null]
             $current = factory.create("Action");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "operator", lv_operator,null);        createLeafNode("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"operator");    }
+        factory.set($current, "operator", lv_operator,null);        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Alternatives */, currentNode,"operator");    }
 ))'current' 
 
     {
-        createLeafNode("//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 )?)'}' 
 
     {
-        createLeafNode("//@parserRules.12/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
     
@@ -865,7 +865,7 @@ ruleAction returns [EObject current=null]
 
 // Entry rule entryRuleAbstractTerminal
 entryRuleAbstractTerminal returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.13" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.13" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleAbstractTerminal=ruleAbstractTerminal 
 	 { $current=$iv_ruleAbstractTerminal.current; } 
 	 EOF 
@@ -877,7 +877,7 @@ ruleAbstractTerminal returns [EObject current=null]
     @after { resetLookahead(); }:
 ((
     { 
-        currentNode=createCompositeNode("//@parserRules.13/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.13/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
     }
     this_Keyword=ruleKeyword
     { 
@@ -887,7 +887,7 @@ ruleAbstractTerminal returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("//@parserRules.13/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.13/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_RuleCall=ruleRuleCall
     { 
@@ -897,7 +897,7 @@ ruleAbstractTerminal returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("//@parserRules.13/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.13/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_ParenthesizedElement=ruleParenthesizedElement
     { 
@@ -910,7 +910,7 @@ ruleAbstractTerminal returns [EObject current=null]
 
 // Entry rule entryRuleParenthesizedElement
 entryRuleParenthesizedElement returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.14" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.14" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleParenthesizedElement=ruleParenthesizedElement 
 	 { $current=$iv_ruleParenthesizedElement.current; } 
 	 EOF 
@@ -923,11 +923,11 @@ ruleParenthesizedElement returns [EObject current=null]
 (('(' 
 
     {
-        createLeafNode("//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
     }
 
     { 
-        currentNode=createCompositeNode("//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
     }
     this_Alternatives=ruleAlternatives
     { 
@@ -937,7 +937,7 @@ ruleParenthesizedElement returns [EObject current=null]
 )')' 
 
     {
-        createLeafNode("//@parserRules.14/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.14/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
     }
 );
     
@@ -945,7 +945,7 @@ ruleParenthesizedElement returns [EObject current=null]
 
 // Entry rule entryRuleKeyword
 entryRuleKeyword returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.15" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.15" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleKeyword=ruleKeyword 
 	 { $current=$iv_ruleKeyword.current; } 
 	 EOF 
@@ -958,7 +958,7 @@ ruleKeyword returns [EObject current=null]
 (
     lv_value=RULE_STRING
     { 
-    createLeafNode("//@parserRules.15/@alternatives/@terminal" /* xtext::RuleCall */, currentNode,"value"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.15/@alternatives/@terminal" /* xtext::RuleCall */, currentNode,"value"); 
     }
  
     {
@@ -973,7 +973,7 @@ ruleKeyword returns [EObject current=null]
 
 // Entry rule entryRuleRuleCall
 entryRuleRuleCall returns [EObject current=null] :
-	{ currentNode = createCompositeNode("//@parserRules.16" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.16" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleRuleCall=ruleRuleCall 
 	 { $current=$iv_ruleRuleCall.current; } 
 	 EOF 
@@ -986,7 +986,7 @@ ruleRuleCall returns [EObject current=null]
 (
     lv_name=RULE_ID
     { 
-    createLeafNode("//@parserRules.16/@alternatives/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.16/@alternatives/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
     }
  
     {

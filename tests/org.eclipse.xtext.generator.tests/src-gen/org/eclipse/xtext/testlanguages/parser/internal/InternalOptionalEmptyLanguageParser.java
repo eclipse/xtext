@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g 2008-07-01 17:32:53
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g 2008-07-03 10:53:25
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -73,7 +73,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:99:47: (iv_ruleModel= ruleModel EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:100:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode("//@parserRules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel80);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -121,7 +121,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
                     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:112:5: lv_child= ruleGreeting
                     {
                      
-                            currentNode=createCompositeNode("//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleGreeting_in_ruleModel142);
                     lv_child=ruleGreeting();
@@ -169,7 +169,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:128:50: (iv_ruleGreeting= ruleGreeting EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:129:2: iv_ruleGreeting= ruleGreeting EOF
             {
-             currentNode = createCompositeNode("//@parserRules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleGreeting_in_entryRuleGreeting178);
             iv_ruleGreeting=ruleGreeting();
             _fsp--;
@@ -209,7 +209,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
             {
             match(input,12,FOLLOW_12_in_ruleGreeting222); 
 
-                    createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
                 
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:144:1: (lv_name= RULE_ID )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:145:5: lv_name= RULE_ID
@@ -217,7 +217,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGreeting240); 
              
-                createLeafNode("//@parserRules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode,"name"); 
                 
 
                     if (current==null) {
