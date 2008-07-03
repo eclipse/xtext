@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.GenerateAllTestGrammars;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.parser.IElementFactory;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.IParseTreeConstructor;
@@ -89,8 +89,8 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		return ServiceRegistry.getService(currentLanguageDescriptor, IParser.class);
 	}
 
-	protected IElementFactory getASTFactory() throws Exception {
-		return ServiceRegistry.getService(currentLanguageDescriptor, IElementFactory.class);
+	protected IAstFactory getASTFactory() throws Exception {
+		return ServiceRegistry.getService(currentLanguageDescriptor, IAstFactory.class);
 	}
 
 	protected IParseTreeConstructor getParseTreeConstructor() throws Exception {

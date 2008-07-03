@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g 2008-07-03 10:53:26
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g 2008-07-03 14:31:22
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -42,7 +42,7 @@ public class InternalLookaheadLanguageParser extends AbstractAntlrParser {
 
 
      
-        public InternalLookaheadLanguageParser(TokenStream input, IElementFactory factory, Grammar g) {
+        public InternalLookaheadLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
             this(input);
             this.factory = factory;
     		grammar = g;

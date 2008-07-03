@@ -68,7 +68,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 @parser::members {
  
-    public InternalMetamodelRefTestParser(TokenStream input, IElementFactory factory, Grammar g) {
+    public InternalMetamodelRefTestParser(TokenStream input, IAstFactory factory, Grammar g) {
         this(input);
         this.factory = factory;
 		grammar = g;

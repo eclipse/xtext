@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g 2008-07-03 10:53:21
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTest.g 2008-07-03 14:31:13
 
 package org.eclipse.xtext.metamodelreferencing.tests.parser.internal; 
 
@@ -42,7 +42,7 @@ public class InternalMetamodelRefTestParser extends AbstractAntlrParser {
 
 
      
-        public InternalMetamodelRefTestParser(TokenStream input, IElementFactory factory, Grammar g) {
+        public InternalMetamodelRefTestParser(TokenStream input, IAstFactory factory, Grammar g) {
             this(input);
             this.factory = factory;
     		grammar = g;
