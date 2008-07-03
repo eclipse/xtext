@@ -23,12 +23,13 @@
 
 package «genClassFQName.toJavaPackage()»;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class «genClassFQName.toSimpleName()» extends BaseEPackageAccess implements IGrammarAccess {
 
-	private static final String «languageName().toUpperCase()»_GRAMMAR_CP_URI = "«grammarResourceURI()»";
+	private static final String «languageName().toUpperCase()»_GRAMMAR_CP_URI = "«grammarResourceURI(grammar())»";
 	private static Grammar GRAMMAR = null;
 	
 	@SuppressWarnings("unused")
@@ -45,14 +46,21 @@ public class «genClassFQName.toSimpleName()» extends BaseEPackageAccess implemen
 		return «languageName().toUpperCase()»_GRAMMAR_CP_URI;
 	}
 	
-	«EXPAND getter FOREACH grammar().lexerRules»
+	«EXPAND getter FOREACH grammar().allParserRules()»
+	«EXPAND getter FOREACH grammar().allLexerRules()»
    
 }
 «ENDFILE»
 «ENDDEFINE»
 
+«DEFINE getter FOR ParserRule»
+	public ParserRule pr_«name»() {
+		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("«objectURI(this)»"),true); 
+	}
+«ENDDEFINE»
+
 «DEFINE getter FOR LexerRule»
-	public LexerRule get«name»() {
-		return (LexerRule) getGrammar().eResource().getEObject("«getFragment()»"); 
+	public LexerRule lr_«name»() {
+		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("«objectURI(this)»"),true); 
 	}
 «ENDDEFINE»

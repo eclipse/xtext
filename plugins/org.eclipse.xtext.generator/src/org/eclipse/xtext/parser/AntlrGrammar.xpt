@@ -218,14 +218,14 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 «DEFINE createCompositeNode FOR emf::EObject
     »createCompositeNode("«
-    getFragment()
+    objectURI()
     »" /* «
     this.metaType.name» */, currentNode);«
 ENDDEFINE»
 
 «DEFINE insertCompositeNode FOR Action
     »CompositeNode newNode = createCompositeNode("«
-    getFragment()
+    objectURI()
     »" /* «
     this.metaType.name» */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
@@ -235,7 +235,7 @@ ENDDEFINE»
 
 «DEFINE createLeafNode FOR emf::EObject
     »createLeafNode("«
-    getFragment()
+    objectURI()
     »" /* «
     this.metaType.name
     » */, currentNode,«

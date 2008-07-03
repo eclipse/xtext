@@ -101,19 +101,19 @@ new Predicate(obj) {
 «ENDDEFINE»
 
 «DEFINE statement2 FOR Keyword»
-	keyword((Keyword)getGrammar().eResource().getEObject("«getFragment()»"));
+	keyword((Keyword)getGrammarElement("«objectURI()»"));
 «ENDDEFINE»
 
 «DEFINE statement2 FOR Action»
 	InstanceDescription newObj = getDescr((EObject) obj.consume("«feature»"));
-	action(obj,newObj, (Action) getGrammar().eResource().getEObject("«getFragment()»"));
+	action(obj,newObj, (Action) getGrammarElement("«objectURI()»"));
 	obj = newObj;
 «ENDDEFINE»
 
 «DEFINE statement2 FOR RuleCall»
 	«IF calledParserRule()!=null»
 	InstanceDescription val = «isAssigned() ? '(getDescr((EObject)value))' : 'obj'»;
-	EObject ruleCall = getGrammar().eResource().getEObject("«getFragment()»");
+	EObject ruleCall = getGrammarElement("«objectURI()»");
 	try {
 		ruleCallStart(val, «isAssigned()», (RuleCall) ruleCall);
 		«calledRule().methodName()»(val);
@@ -122,9 +122,9 @@ new Predicate(obj) {
 	}
 	«ELSE»
 		«IF isAssigned()»
-		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("«getFragment()»"));
+		lexerRuleCall(value,(RuleCall)getGrammarElement("«objectURI()»"));
 		«ELSE»
-		lexerRuleCall((RuleCall)getGrammar().eResource().getEObject("«getFragment()»"));
+		lexerRuleCall((RuleCall)getGrammarElement("«objectURI()»"));
 		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
