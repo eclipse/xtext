@@ -25,9 +25,9 @@ public class PartialParserReplaceTest extends AbstractPartialParserTest {
 	public void testExpression() throws Exception {
 		with(SimpleExpressionsStandaloneSetup.class);
 		String model = "(a+b+c)*(c/d)";
-		replaceAndReparse(model, 2, 2, "+hugo+egon", "a+hugo+egon+c");
+		replaceAndReparse(model, 2, 2, "+hugo+egon", "(a+hugo+egon+c)");
 		replaceAndReparse(model, 8, 5, "egon", "egon");
-		replaceAndReparse(model, 1, 2, "", "b+c");
+		replaceAndReparse(model, 1, 2, "", "(b+c)");
 		replaceAndReparse(model, 6, 3, "*", "(a+b+c*c/d)");
 		replaceAndReparse(model, 3, 1, "(x+y+z)", "(x+y+z)");
 		
@@ -40,7 +40,7 @@ public class PartialParserReplaceTest extends AbstractPartialParserTest {
 	public void testLookahead() throws Exception {
 		with(LookaheadLanguageStandaloneSetup.class);
 		String model = "foo bar b c";
-		replaceAndReparse(model, 10, 1, "d", " d");
+		replaceAndReparse(model, 10, 1, "d", "foo bar b d");
 		replaceAndReparse(model, 8, 1, "b", "foo bar b c");
 		replaceAndReparse(model, 0, model.length(), "", "");
 	}
