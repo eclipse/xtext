@@ -33,7 +33,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		assertEquals("%", ((LeafNode)errors.get(0).getNode()).getText());
 		assertEquals(1, errors.get(0).getNode().getLine());
 		assertEquals(15, errors.get(0).getNode().getOffset());
-		assertEquals(1, errors.get(0).getNode().length());
+		assertEquals(1, errors.get(0).getNode().getLength());
 		assertEquals(1, errors.size());
 	}
 	
@@ -43,7 +43,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		assertEquals("::",  ((LeafNode)errors.get(0).getNode()).getText());
 		assertEquals(1, errors.get(0).getNode().getLine());
 		assertEquals(31, errors.get(0).getNode().getOffset());
-		assertEquals(2, errors.get(0).getNode().length());
+		assertEquals(2, errors.get(0).getNode().getLength());
 		assertEquals(1, errors.size());
 	}
 	
