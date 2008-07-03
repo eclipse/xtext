@@ -19,7 +19,7 @@ import org.eclipse.xtext.util.EmfStructureComparator;
  */
 public abstract class AbstractPartialParserTest extends AbstractGeneratorTest {
 
-	protected static final boolean DEBUG = false;
+	protected static final boolean DEBUG = true;
 	protected EmfStructureComparator comparator;
 
 	@Override
