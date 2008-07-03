@@ -64,7 +64,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = (getDescr((EObject)value));
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
+	EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
 	try {
 		ruleCallStart(val, true, (RuleCall) ruleCall);
 		proceedAddition(val);
@@ -85,7 +85,7 @@ new Predicate(obj) {
 {
 
 	InstanceDescription newObj = getDescr((EObject) obj.consume("expressions"));
-	action(obj,newObj, (Action) getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0"));
+	action(obj,newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0"));
 	obj = newObj;
 
 }
@@ -99,7 +99,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = obj;
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@abstractTokens.0");
+	EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.0/@alternatives/@abstractTokens.0");
 	try {
 		ruleCallStart(val, false, (RuleCall) ruleCall);
 		proceedAddition(val);
@@ -142,7 +142,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = (getDescr((EObject)value));
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
+	EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
 	try {
 		ruleCallStart(val, true, (RuleCall) ruleCall);
 		proceedMultiplication(val);
@@ -181,7 +181,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0"));
+	keyword((Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0"));
 
 }
 
@@ -196,7 +196,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
+	keyword((Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
 
 }
 
@@ -219,7 +219,7 @@ new Predicate(obj) {
 {
 
 	InstanceDescription newObj = getDescr((EObject) obj.consume("values"));
-	action(obj,newObj, (Action) getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
+	action(obj,newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
 	obj = newObj;
 
 }
@@ -236,7 +236,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = obj;
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0");
+	EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.0");
 	try {
 		ruleCallStart(val, false, (RuleCall) ruleCall);
 		proceedMultiplication(val);
@@ -279,7 +279,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = (getDescr((EObject)value));
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
+	EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
 	try {
 		ruleCallStart(val, true, (RuleCall) ruleCall);
 		proceedTerm(val);
@@ -318,7 +318,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0"));
+	keyword((Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0"));
 
 }
 
@@ -333,7 +333,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
+	keyword((Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
 
 }
 
@@ -356,7 +356,7 @@ new Predicate(obj) {
 {
 
 	InstanceDescription newObj = getDescr((EObject) obj.consume("values"));
-	action(obj,newObj, (Action) getGrammar().eResource().getEObject("//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
+	action(obj,newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
 	obj = newObj;
 
 }
@@ -373,7 +373,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = obj;
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.2/@alternatives/@abstractTokens.0");
+	EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.0");
 	try {
 		ruleCallStart(val, false, (RuleCall) ruleCall);
 		proceedTerm(val);
@@ -406,7 +406,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = obj;
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.3/@alternatives/@groups.0");
+	EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.3/@alternatives/@groups.0");
 	try {
 		ruleCallStart(val, false, (RuleCall) ruleCall);
 		proceedAtom(val);
@@ -430,7 +430,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = obj;
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.3/@alternatives/@groups.1");
+	EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.3/@alternatives/@groups.1");
 	try {
 		ruleCallStart(val, false, (RuleCall) ruleCall);
 		proceedParens(val);
@@ -464,7 +464,7 @@ protected void proceedAtom(InstanceDescription obj) {
 
 	
 		
-		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.4/@alternatives/@terminal"));
+		lexerRuleCall(value,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.4/@alternatives/@terminal"));
 		
 	
 
@@ -486,7 +486,7 @@ protected void proceedParens(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.1"));
+	keyword((Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.5/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -500,7 +500,7 @@ protected void proceedParens(InstanceDescription obj) {
 
 	
 	InstanceDescription val = obj;
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1");
+	EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1");
 	try {
 		ruleCallStart(val, false, (RuleCall) ruleCall);
 		proceedAddition(val);
@@ -515,7 +515,7 @@ protected void proceedParens(InstanceDescription obj) {
 /* xtext::Keyword */ 
 {
 
-	keyword((Keyword)getGrammar().eResource().getEObject("//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0"));
+	keyword((Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0"));
 
 }
 

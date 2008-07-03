@@ -61,18 +61,6 @@ public class NodeModelTest extends AbstractGeneratorTest {
 				LeafNode leafNode = (LeafNode) next;
 				EObject grammarElement = leafNode.getGrammarElement();
 				assertNotNull(grammarElement);
-//TODO is this test obsolete since we've removed the tokenType feature?
-				//				if (grammarElement instanceof Keyword) {
-//					assertEquals(ITokenTypes.KEYWORD, tokenType);
-//				} else if (GrammarUtil.isWhitespaceLexerRule(grammarElement)) {
-//					assertEquals(ITokenTypes.WHITESPACE, tokenType);
-//				} else if (GrammarUtil.isLexerRuleCall(grammarElement)) {
-//					assertEquals(((LexerRule) GrammarUtil
-//							.calledRule((RuleCall) grammarElement))
-//							.getTokenType(), tokenType);
-//				} else {
-//					fail("LeafNodes must correspond to keywords, whitespaces or lexerRules "+grammarElement);
-//				}
 			}
 		}
 	}

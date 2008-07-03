@@ -19,8 +19,6 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileHeader" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="grammar" eType="ecore:EClass ../../org.eclipse.xtext/src-gen/org/eclipse/xtext/xtext.ecore#//Grammar"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="grammarResourceURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="services" upperBound="-1"
         eType="#//GenService"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outletMap" upperBound="-1"

@@ -23,8 +23,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xtextgen.GenModel;
 import org.eclipse.xtext.xtextgen.GenService;
 import org.eclipse.xtext.xtextgen.XtextgenFactory;
@@ -79,10 +79,10 @@ public class GeneratorFacade {
 		};
 		execCtx.registerMetaModel(metamodel);
 		
-
 		// save grammar model
-		ResourceSetImpl setImpl = new ResourceSetImpl();
-		Resource resource = setImpl.createResource(URI.createURI(outletMap.get("") + "/"+ genModel.getGrammarResourceURI()));
+		XtextResourceSet setImpl = new XtextResourceSet();
+		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(genModel.getGrammar());
+		Resource resource = setImpl.createResource(URI.createURI(outletMap.get("") + "/"+ xmiPath));
 		resource.getContents().add(genModel.getGrammar());
 		resource.save(null);
 
@@ -111,7 +111,6 @@ public class GeneratorFacade {
 
         GenModel genModel = XtextgenFactory.eINSTANCE.createGenModel();
 	    genModel.setGrammar(grammarModel);
-	    genModel.setGrammarResourceURI(namespace.replaceAll("\\.", "/") + "/" + languageName + ".xmi");
 	    genModel.getModelFileExtensions().addAll(Arrays.asList(modelFileExtensions));
 	    genModel.setFileHeader("Generated with Xtext");
 	    genModel.setLanguageInterfaceFQName(namespace + ".I" + languageName);

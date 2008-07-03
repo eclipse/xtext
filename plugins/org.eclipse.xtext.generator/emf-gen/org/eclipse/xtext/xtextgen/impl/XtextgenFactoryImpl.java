@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenFactoryImpl.java,v 1.2 2008/06/09 12:52:54 jkohnlein Exp $
+ * $Id: XtextgenFactoryImpl.java,v 1.3 2008/07/03 09:43:25 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
@@ -24,87 +24,87 @@ import org.eclipse.xtext.xtextgen.*;
  */
 public class XtextgenFactoryImpl extends EFactoryImpl implements XtextgenFactory {
     /**
-     * Creates the default factory implementation.
-     * <!-- begin-user-doc -->
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public static XtextgenFactory init() {
-        try {
-            XtextgenFactory theXtextgenFactory = (XtextgenFactory)EPackage.Registry.INSTANCE.getEFactory("htpp://www.eclipse.org/xtext/2008/xtextgen"); 
-            if (theXtextgenFactory != null) {
-                return theXtextgenFactory;
-            }
-        }
-        catch (Exception exception) {
-            EcorePlugin.INSTANCE.log(exception);
-        }
-        return new XtextgenFactoryImpl();
-    }
+		try {
+			XtextgenFactory theXtextgenFactory = (XtextgenFactory)EPackage.Registry.INSTANCE.getEFactory("htpp://www.eclipse.org/xtext/2008/xtextgen"); 
+			if (theXtextgenFactory != null) {
+				return theXtextgenFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new XtextgenFactoryImpl();
+	}
 
     /**
-     * Creates an instance of the factory.
-     * <!-- begin-user-doc -->
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public XtextgenFactoryImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public EObject create(EClass eClass) {
-        switch (eClass.getClassifierID()) {
-            case XtextgenPackage.GEN_SERVICE: return createGenService();
-            case XtextgenPackage.GEN_MODEL: return createGenModel();
-            default:
-                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-        }
-    }
+		switch (eClass.getClassifierID()) {
+			case XtextgenPackage.GEN_SERVICE: return createGenService();
+			case XtextgenPackage.GEN_MODEL: return createGenModel();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public GenService createGenService() {
-        GenServiceImpl genService = new GenServiceImpl();
-        return genService;
-    }
+		GenServiceImpl genService = new GenServiceImpl();
+		return genService;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public GenModel createGenModel() {
-        GenModelImpl genModel = new GenModelImpl();
-        return genModel;
-    }
+		GenModelImpl genModel = new GenModelImpl();
+		return genModel;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public XtextgenPackage getXtextgenPackage() {
-        return (XtextgenPackage)getEPackage();
-    }
+		return (XtextgenPackage)getEPackage();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @deprecated
-     * @generated
-     */
+	 * @deprecated
+	 * @generated
+	 */
     @Deprecated
     public static XtextgenPackage getPackage() {
-        return XtextgenPackage.eINSTANCE;
-    }
+		return XtextgenPackage.eINSTANCE;
+	}
 
 } //XtextgenFactoryImpl

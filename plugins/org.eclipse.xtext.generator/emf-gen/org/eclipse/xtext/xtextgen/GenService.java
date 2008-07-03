@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenService.java,v 1.3 2008/06/17 14:45:51 pfriese Exp $
+ * $Id: GenService.java,v 1.4 2008/07/03 09:43:25 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextgen;
 
@@ -33,177 +33,177 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface GenService extends EObject {
     /**
-     * Returns the value of the '<em><b>Service Interface FQ Name</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Service Interface FQ Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Service Interface FQ Name</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Service Interface FQ Name</em>' attribute.
-     * @see #setServiceInterfaceFQName(String)
-     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_ServiceInterfaceFQName()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Service Interface FQ Name</em>' attribute.
+	 * @see #setServiceInterfaceFQName(String)
+	 * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_ServiceInterfaceFQName()
+	 * @model
+	 * @generated
+	 */
     String getServiceInterfaceFQName();
 
     /**
-     * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getServiceInterfaceFQName <em>Service Interface FQ Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getServiceInterfaceFQName <em>Service Interface FQ Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Service Interface FQ Name</em>' attribute.
-     * @see #getServiceInterfaceFQName()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Service Interface FQ Name</em>' attribute.
+	 * @see #getServiceInterfaceFQName()
+	 * @generated
+	 */
     void setServiceInterfaceFQName(String value);
 
     /**
-     * Returns the value of the '<em><b>Gen Class FQ Name</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Gen Class FQ Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Gen Class FQ Name</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Gen Class FQ Name</em>' attribute.
-     * @see #setGenClassFQName(String)
-     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_GenClassFQName()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Gen Class FQ Name</em>' attribute.
+	 * @see #setGenClassFQName(String)
+	 * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_GenClassFQName()
+	 * @model
+	 * @generated
+	 */
     String getGenClassFQName();
 
     /**
-     * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getGenClassFQName <em>Gen Class FQ Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getGenClassFQName <em>Gen Class FQ Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Gen Class FQ Name</em>' attribute.
-     * @see #getGenClassFQName()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Gen Class FQ Name</em>' attribute.
+	 * @see #getGenClassFQName()
+	 * @generated
+	 */
     void setGenClassFQName(String value);
 
     /**
-     * Returns the value of the '<em><b>Extension Point ID</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Extension Point ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Extension Point ID</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Extension Point ID</em>' attribute.
-     * @see #setExtensionPointID(String)
-     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_ExtensionPointID()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Extension Point ID</em>' attribute.
+	 * @see #setExtensionPointID(String)
+	 * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_ExtensionPointID()
+	 * @model
+	 * @generated
+	 */
     String getExtensionPointID();
 
     /**
-     * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getExtensionPointID <em>Extension Point ID</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getExtensionPointID <em>Extension Point ID</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Extension Point ID</em>' attribute.
-     * @see #getExtensionPointID()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Extension Point ID</em>' attribute.
+	 * @see #getExtensionPointID()
+	 * @generated
+	 */
     void setExtensionPointID(String value);
 
     /**
-     * Returns the value of the '<em><b>Template Path</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Template Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Template Path</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Template Path</em>' attribute.
-     * @see #isSetTemplatePath()
-     * @see #unsetTemplatePath()
-     * @see #setTemplatePath(String)
-     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_TemplatePath()
-     * @model unsettable="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Template Path</em>' attribute.
+	 * @see #isSetTemplatePath()
+	 * @see #unsetTemplatePath()
+	 * @see #setTemplatePath(String)
+	 * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_TemplatePath()
+	 * @model unsettable="true"
+	 * @generated
+	 */
     String getTemplatePath();
 
     /**
-     * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getTemplatePath <em>Template Path</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getTemplatePath <em>Template Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Template Path</em>' attribute.
-     * @see #isSetTemplatePath()
-     * @see #unsetTemplatePath()
-     * @see #getTemplatePath()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Template Path</em>' attribute.
+	 * @see #isSetTemplatePath()
+	 * @see #unsetTemplatePath()
+	 * @see #getTemplatePath()
+	 * @generated
+	 */
     void setTemplatePath(String value);
 
     /**
-     * Unsets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getTemplatePath <em>Template Path</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Unsets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getTemplatePath <em>Template Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #isSetTemplatePath()
-     * @see #getTemplatePath()
-     * @see #setTemplatePath(String)
-     * @generated
-     */
+	 * @see #isSetTemplatePath()
+	 * @see #getTemplatePath()
+	 * @see #setTemplatePath(String)
+	 * @generated
+	 */
     void unsetTemplatePath();
 
     /**
-     * Returns whether the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getTemplatePath <em>Template Path</em>}' attribute is set.
-     * <!-- begin-user-doc -->
+	 * Returns whether the value of the '{@link org.eclipse.xtext.xtextgen.GenService#getTemplatePath <em>Template Path</em>}' attribute is set.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return whether the value of the '<em>Template Path</em>' attribute is set.
-     * @see #unsetTemplatePath()
-     * @see #getTemplatePath()
-     * @see #setTemplatePath(String)
-     * @generated
-     */
+	 * @return whether the value of the '<em>Template Path</em>' attribute is set.
+	 * @see #unsetTemplatePath()
+	 * @see #getTemplatePath()
+	 * @see #setTemplatePath(String)
+	 * @generated
+	 */
     boolean isSetTemplatePath();
 
     /**
-     * Returns the value of the '<em><b>Gen Parameters</b></em>' reference list.
-     * The key is of type {@link java.lang.String},
-     * and the value is of type {@link java.lang.String},
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Gen Parameters</b></em>' reference list.
+	 * The key is of type {@link java.lang.String},
+	 * and the value is of type {@link java.lang.String},
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Gen Parameters</em>' reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Gen Parameters</em>' reference list.
-     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_GenParameters()
-     * @model mapType="org.eclipse.emf.ecore.EStringToStringMapEntry<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
-     * @generated
-     */
+	 * @return the value of the '<em>Gen Parameters</em>' reference list.
+	 * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_GenParameters()
+	 * @model mapType="org.eclipse.emf.ecore.EStringToStringMapEntry<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
+	 * @generated
+	 */
     EMap<String, String> getGenParameters();
 
     /**
-     * Returns the value of the '<em><b>Ui Service</b></em>' attribute.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Ui Service</b></em>' attribute.
+	 * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Ui Service</em>' attribute isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Ui Service</em>' attribute.
-     * @see #setUiService(boolean)
-     * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_UiService()
-     * @model
-     * @generated
-     */
+	 * @return the value of the '<em>Ui Service</em>' attribute.
+	 * @see #setUiService(boolean)
+	 * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getGenService_UiService()
+	 * @model
+	 * @generated
+	 */
     boolean isUiService();
 
     /**
-     * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#isUiService <em>Ui Service</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.eclipse.xtext.xtextgen.GenService#isUiService <em>Ui Service</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Ui Service</em>' attribute.
-     * @see #isUiService()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Ui Service</em>' attribute.
+	 * @see #isUiService()
+	 * @generated
+	 */
     void setUiService(boolean value);
 
 } // GenService

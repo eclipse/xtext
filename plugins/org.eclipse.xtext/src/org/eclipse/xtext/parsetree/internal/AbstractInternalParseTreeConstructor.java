@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -280,6 +281,10 @@ public abstract class AbstractInternalParseTreeConstructor {
 		current.setElement(obj.getDelegate());
 		NodeAdapter newOne = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(obj.getDelegate(), AbstractNode.class);
 		newOne.setParserNode(current);
+	}
+
+	protected EObject getGrammarElement(String string) {
+		return getGrammar().eResource().getResourceSet().getEObject(URI.createURI(string), true);
 	}
 
 }

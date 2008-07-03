@@ -49,7 +49,7 @@ new Predicate(obj) {
 
 	
 	InstanceDescription val = (getDescr((EObject)value));
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.0/@alternatives/@terminal");
+	EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.0/@alternatives/@terminal");
 	try {
 		ruleCallStart(val, true, (RuleCall) ruleCall);
 		proceedElement(val);
@@ -87,7 +87,7 @@ protected void proceedElement(InstanceDescription obj) {
 
 	
 	InstanceDescription val = (getDescr((EObject)value));
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
+	EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
 	try {
 		ruleCallStart(val, true, (RuleCall) ruleCall);
 		proceedItem(val);
@@ -108,7 +108,7 @@ protected void proceedElement(InstanceDescription obj) {
 {
 
 	InstanceDescription newObj = getDescr((EObject) obj.consume("items"));
-	action(obj,newObj, (Action) getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0"));
+	action(obj,newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0"));
 	obj = newObj;
 
 }
@@ -122,7 +122,7 @@ protected void proceedElement(InstanceDescription obj) {
 
 	
 	InstanceDescription val = obj;
-	EObject ruleCall = getGrammar().eResource().getEObject("//@parserRules.1/@alternatives/@abstractTokens.0");
+	EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0");
 	try {
 		ruleCallStart(val, false, (RuleCall) ruleCall);
 		proceedItem(val);
@@ -154,7 +154,7 @@ protected void proceedItem(InstanceDescription obj) {
 
 	
 		
-		lexerRuleCall(value,(RuleCall)getGrammar().eResource().getEObject("//@parserRules.2/@alternatives/@abstractTokens.1/@terminal"));
+		lexerRuleCall(value,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@terminal"));
 		
 	
 
@@ -170,7 +170,7 @@ protected void proceedItem(InstanceDescription obj) {
 {
 
 	InstanceDescription newObj = getDescr((EObject) obj.consume("content"));
-	action(obj,newObj, (Action) getGrammar().eResource().getEObject("//@parserRules.2/@alternatives/@abstractTokens.0"));
+	action(obj,newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.0"));
 	obj = newObj;
 
 }

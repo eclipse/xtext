@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenServiceImpl.java,v 1.3 2008/06/17 14:45:51 pfriese Exp $
+ * $Id: GenServiceImpl.java,v 1.4 2008/07/03 09:43:25 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
@@ -43,416 +43,416 @@ import org.eclipse.xtext.xtextgen.XtextgenPackage;
  */
 public class GenServiceImpl extends EObjectImpl implements GenService {
     /**
-     * The default value of the '{@link #getServiceInterfaceFQName() <em>Service Interface FQ Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getServiceInterfaceFQName() <em>Service Interface FQ Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getServiceInterfaceFQName()
-     * @generated
-     * @ordered
-     */
+	 * @see #getServiceInterfaceFQName()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String SERVICE_INTERFACE_FQ_NAME_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getServiceInterfaceFQName() <em>Service Interface FQ Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getServiceInterfaceFQName() <em>Service Interface FQ Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getServiceInterfaceFQName()
-     * @generated
-     * @ordered
-     */
+	 * @see #getServiceInterfaceFQName()
+	 * @generated
+	 * @ordered
+	 */
     protected String serviceInterfaceFQName = SERVICE_INTERFACE_FQ_NAME_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getGenClassFQName() <em>Gen Class FQ Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getGenClassFQName() <em>Gen Class FQ Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getGenClassFQName()
-     * @generated
-     * @ordered
-     */
+	 * @see #getGenClassFQName()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String GEN_CLASS_FQ_NAME_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getGenClassFQName() <em>Gen Class FQ Name</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getGenClassFQName() <em>Gen Class FQ Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getGenClassFQName()
-     * @generated
-     * @ordered
-     */
+	 * @see #getGenClassFQName()
+	 * @generated
+	 * @ordered
+	 */
     protected String genClassFQName = GEN_CLASS_FQ_NAME_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getExtensionPointID() <em>Extension Point ID</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getExtensionPointID() <em>Extension Point ID</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getExtensionPointID()
-     * @generated
-     * @ordered
-     */
+	 * @see #getExtensionPointID()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String EXTENSION_POINT_ID_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getExtensionPointID() <em>Extension Point ID</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getExtensionPointID() <em>Extension Point ID</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getExtensionPointID()
-     * @generated
-     * @ordered
-     */
+	 * @see #getExtensionPointID()
+	 * @generated
+	 * @ordered
+	 */
     protected String extensionPointID = EXTENSION_POINT_ID_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getTemplatePath() <em>Template Path</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getTemplatePath() <em>Template Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getTemplatePath()
-     * @generated
-     * @ordered
-     */
+	 * @see #getTemplatePath()
+	 * @generated
+	 * @ordered
+	 */
     protected static final String TEMPLATE_PATH_EDEFAULT = null;
 
     /**
-     * The cached value of the '{@link #getTemplatePath() <em>Template Path</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getTemplatePath() <em>Template Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getTemplatePath()
-     * @generated
-     * @ordered
-     */
+	 * @see #getTemplatePath()
+	 * @generated
+	 * @ordered
+	 */
     protected String templatePath = TEMPLATE_PATH_EDEFAULT;
 
     /**
-     * This is true if the Template Path attribute has been set.
-     * <!-- begin-user-doc -->
+	 * This is true if the Template Path attribute has been set.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
+	 * @generated
+	 * @ordered
+	 */
     protected boolean templatePathESet;
 
     /**
-     * The cached value of the '{@link #getGenParameters() <em>Gen Parameters</em>}' reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getGenParameters() <em>Gen Parameters</em>}' reference list.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getGenParameters()
-     * @generated
-     * @ordered
-     */
+	 * @see #getGenParameters()
+	 * @generated
+	 * @ordered
+	 */
     protected EMap<String, String> genParameters;
 
     /**
-     * The default value of the '{@link #isUiService() <em>Ui Service</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The default value of the '{@link #isUiService() <em>Ui Service</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #isUiService()
-     * @generated
-     * @ordered
-     */
+	 * @see #isUiService()
+	 * @generated
+	 * @ordered
+	 */
     protected static final boolean UI_SERVICE_EDEFAULT = false;
 
     /**
-     * The cached value of the '{@link #isUiService() <em>Ui Service</em>}' attribute.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #isUiService() <em>Ui Service</em>}' attribute.
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #isUiService()
-     * @generated
-     * @ordered
-     */
+	 * @see #isUiService()
+	 * @generated
+	 * @ordered
+	 */
     protected boolean uiService = UI_SERVICE_EDEFAULT;
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     protected GenServiceImpl() {
-        super();
-    }
+		super();
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     protected EClass eStaticClass() {
-        return XtextgenPackage.Literals.GEN_SERVICE;
-    }
+		return XtextgenPackage.Literals.GEN_SERVICE;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getServiceInterfaceFQName() {
-        return serviceInterfaceFQName;
-    }
+		return serviceInterfaceFQName;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setServiceInterfaceFQName(String newServiceInterfaceFQName) {
-        String oldServiceInterfaceFQName = serviceInterfaceFQName;
-        serviceInterfaceFQName = newServiceInterfaceFQName;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME, oldServiceInterfaceFQName, serviceInterfaceFQName));
-    }
+		String oldServiceInterfaceFQName = serviceInterfaceFQName;
+		serviceInterfaceFQName = newServiceInterfaceFQName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME, oldServiceInterfaceFQName, serviceInterfaceFQName));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getGenClassFQName() {
-        return genClassFQName;
-    }
+		return genClassFQName;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setGenClassFQName(String newGenClassFQName) {
-        String oldGenClassFQName = genClassFQName;
-        genClassFQName = newGenClassFQName;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME, oldGenClassFQName, genClassFQName));
-    }
+		String oldGenClassFQName = genClassFQName;
+		genClassFQName = newGenClassFQName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME, oldGenClassFQName, genClassFQName));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getExtensionPointID() {
-        return extensionPointID;
-    }
+		return extensionPointID;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setExtensionPointID(String newExtensionPointID) {
-        String oldExtensionPointID = extensionPointID;
-        extensionPointID = newExtensionPointID;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_SERVICE__EXTENSION_POINT_ID, oldExtensionPointID, extensionPointID));
-    }
+		String oldExtensionPointID = extensionPointID;
+		extensionPointID = newExtensionPointID;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_SERVICE__EXTENSION_POINT_ID, oldExtensionPointID, extensionPointID));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public String getTemplatePath() {
-        return templatePath;
-    }
+		return templatePath;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setTemplatePath(String newTemplatePath) {
-        String oldTemplatePath = templatePath;
-        templatePath = newTemplatePath;
-        boolean oldTemplatePathESet = templatePathESet;
-        templatePathESet = true;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH, oldTemplatePath, templatePath, !oldTemplatePathESet));
-    }
+		String oldTemplatePath = templatePath;
+		templatePath = newTemplatePath;
+		boolean oldTemplatePathESet = templatePathESet;
+		templatePathESet = true;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH, oldTemplatePath, templatePath, !oldTemplatePathESet));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void unsetTemplatePath() {
-        String oldTemplatePath = templatePath;
-        boolean oldTemplatePathESet = templatePathESet;
-        templatePath = TEMPLATE_PATH_EDEFAULT;
-        templatePathESet = false;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.UNSET, XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH, oldTemplatePath, TEMPLATE_PATH_EDEFAULT, oldTemplatePathESet));
-    }
+		String oldTemplatePath = templatePath;
+		boolean oldTemplatePathESet = templatePathESet;
+		templatePath = TEMPLATE_PATH_EDEFAULT;
+		templatePathESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH, oldTemplatePath, TEMPLATE_PATH_EDEFAULT, oldTemplatePathESet));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public boolean isSetTemplatePath() {
-        return templatePathESet;
-    }
+		return templatePathESet;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public EMap<String, String> getGenParameters() {
-        if (genParameters == null) {
-            genParameters = new EcoreEMap<String,String>(EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY, EStringToStringMapEntryImpl.class, this, XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS);
-        }
-        return genParameters;
-    }
+		if (genParameters == null) {
+			genParameters = new EcoreEMap<String,String>(EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY, EStringToStringMapEntryImpl.class, this, XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS);
+		}
+		return genParameters;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public boolean isUiService() {
-        return uiService;
-    }
+		return uiService;
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     public void setUiService(boolean newUiService) {
-        boolean oldUiService = uiService;
-        uiService = newUiService;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_SERVICE__UI_SERVICE, oldUiService, uiService));
-    }
+		boolean oldUiService = uiService;
+		uiService = newUiService;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.GEN_SERVICE__UI_SERVICE, oldUiService, uiService));
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case XtextgenPackage.GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME:
-                return getServiceInterfaceFQName();
-            case XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME:
-                return getGenClassFQName();
-            case XtextgenPackage.GEN_SERVICE__EXTENSION_POINT_ID:
-                return getExtensionPointID();
-            case XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH:
-                return getTemplatePath();
-            case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
-                if (coreType) return getGenParameters();
-                else return getGenParameters().map();
-            case XtextgenPackage.GEN_SERVICE__UI_SERVICE:
-                return isUiService() ? Boolean.TRUE : Boolean.FALSE;
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case XtextgenPackage.GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME:
+				return getServiceInterfaceFQName();
+			case XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME:
+				return getGenClassFQName();
+			case XtextgenPackage.GEN_SERVICE__EXTENSION_POINT_ID:
+				return getExtensionPointID();
+			case XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH:
+				return getTemplatePath();
+			case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
+				if (coreType) return getGenParameters();
+				else return getGenParameters().map();
+			case XtextgenPackage.GEN_SERVICE__UI_SERVICE:
+				return isUiService() ? Boolean.TRUE : Boolean.FALSE;
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case XtextgenPackage.GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME:
-                setServiceInterfaceFQName((String)newValue);
-                return;
-            case XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME:
-                setGenClassFQName((String)newValue);
-                return;
-            case XtextgenPackage.GEN_SERVICE__EXTENSION_POINT_ID:
-                setExtensionPointID((String)newValue);
-                return;
-            case XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH:
-                setTemplatePath((String)newValue);
-                return;
-            case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
-                ((EStructuralFeature.Setting)getGenParameters()).set(newValue);
-                return;
-            case XtextgenPackage.GEN_SERVICE__UI_SERVICE:
-                setUiService(((Boolean)newValue).booleanValue());
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case XtextgenPackage.GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME:
+				setServiceInterfaceFQName((String)newValue);
+				return;
+			case XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME:
+				setGenClassFQName((String)newValue);
+				return;
+			case XtextgenPackage.GEN_SERVICE__EXTENSION_POINT_ID:
+				setExtensionPointID((String)newValue);
+				return;
+			case XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH:
+				setTemplatePath((String)newValue);
+				return;
+			case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
+				((EStructuralFeature.Setting)getGenParameters()).set(newValue);
+				return;
+			case XtextgenPackage.GEN_SERVICE__UI_SERVICE:
+				setUiService(((Boolean)newValue).booleanValue());
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public void eUnset(int featureID) {
-        switch (featureID) {
-            case XtextgenPackage.GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME:
-                setServiceInterfaceFQName(SERVICE_INTERFACE_FQ_NAME_EDEFAULT);
-                return;
-            case XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME:
-                setGenClassFQName(GEN_CLASS_FQ_NAME_EDEFAULT);
-                return;
-            case XtextgenPackage.GEN_SERVICE__EXTENSION_POINT_ID:
-                setExtensionPointID(EXTENSION_POINT_ID_EDEFAULT);
-                return;
-            case XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH:
-                unsetTemplatePath();
-                return;
-            case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
-                getGenParameters().clear();
-                return;
-            case XtextgenPackage.GEN_SERVICE__UI_SERVICE:
-                setUiService(UI_SERVICE_EDEFAULT);
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case XtextgenPackage.GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME:
+				setServiceInterfaceFQName(SERVICE_INTERFACE_FQ_NAME_EDEFAULT);
+				return;
+			case XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME:
+				setGenClassFQName(GEN_CLASS_FQ_NAME_EDEFAULT);
+				return;
+			case XtextgenPackage.GEN_SERVICE__EXTENSION_POINT_ID:
+				setExtensionPointID(EXTENSION_POINT_ID_EDEFAULT);
+				return;
+			case XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH:
+				unsetTemplatePath();
+				return;
+			case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
+				getGenParameters().clear();
+				return;
+			case XtextgenPackage.GEN_SERVICE__UI_SERVICE:
+				setUiService(UI_SERVICE_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case XtextgenPackage.GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME:
-                return SERVICE_INTERFACE_FQ_NAME_EDEFAULT == null ? serviceInterfaceFQName != null : !SERVICE_INTERFACE_FQ_NAME_EDEFAULT.equals(serviceInterfaceFQName);
-            case XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME:
-                return GEN_CLASS_FQ_NAME_EDEFAULT == null ? genClassFQName != null : !GEN_CLASS_FQ_NAME_EDEFAULT.equals(genClassFQName);
-            case XtextgenPackage.GEN_SERVICE__EXTENSION_POINT_ID:
-                return EXTENSION_POINT_ID_EDEFAULT == null ? extensionPointID != null : !EXTENSION_POINT_ID_EDEFAULT.equals(extensionPointID);
-            case XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH:
-                return isSetTemplatePath();
-            case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
-                return genParameters != null && !genParameters.isEmpty();
-            case XtextgenPackage.GEN_SERVICE__UI_SERVICE:
-                return uiService != UI_SERVICE_EDEFAULT;
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case XtextgenPackage.GEN_SERVICE__SERVICE_INTERFACE_FQ_NAME:
+				return SERVICE_INTERFACE_FQ_NAME_EDEFAULT == null ? serviceInterfaceFQName != null : !SERVICE_INTERFACE_FQ_NAME_EDEFAULT.equals(serviceInterfaceFQName);
+			case XtextgenPackage.GEN_SERVICE__GEN_CLASS_FQ_NAME:
+				return GEN_CLASS_FQ_NAME_EDEFAULT == null ? genClassFQName != null : !GEN_CLASS_FQ_NAME_EDEFAULT.equals(genClassFQName);
+			case XtextgenPackage.GEN_SERVICE__EXTENSION_POINT_ID:
+				return EXTENSION_POINT_ID_EDEFAULT == null ? extensionPointID != null : !EXTENSION_POINT_ID_EDEFAULT.equals(extensionPointID);
+			case XtextgenPackage.GEN_SERVICE__TEMPLATE_PATH:
+				return isSetTemplatePath();
+			case XtextgenPackage.GEN_SERVICE__GEN_PARAMETERS:
+				return genParameters != null && !genParameters.isEmpty();
+			case XtextgenPackage.GEN_SERVICE__UI_SERVICE:
+				return uiService != UI_SERVICE_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
 
     /**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
     @Override
     public String toString() {
-        if (eIsProxy()) return super.toString();
+		if (eIsProxy()) return super.toString();
 
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (serviceInterfaceFQName: ");
-        result.append(serviceInterfaceFQName);
-        result.append(", genClassFQName: ");
-        result.append(genClassFQName);
-        result.append(", extensionPointID: ");
-        result.append(extensionPointID);
-        result.append(", templatePath: ");
-        if (templatePathESet) result.append(templatePath); else result.append("<unset>");
-        result.append(", uiService: ");
-        result.append(uiService);
-        result.append(')');
-        return result.toString();
-    }
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (serviceInterfaceFQName: ");
+		result.append(serviceInterfaceFQName);
+		result.append(", genClassFQName: ");
+		result.append(genClassFQName);
+		result.append(", extensionPointID: ");
+		result.append(extensionPointID);
+		result.append(", templatePath: ");
+		if (templatePathESet) result.append(templatePath); else result.append("<unset>");
+		result.append(", uiService: ");
+		result.append(uiService);
+		result.append(')');
+		return result.toString();
+	}
 
 } //GenServiceImpl

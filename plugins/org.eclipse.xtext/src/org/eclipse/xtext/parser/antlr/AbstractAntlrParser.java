@@ -22,6 +22,7 @@ import org.antlr.runtime.TokenStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
@@ -92,7 +93,7 @@ public abstract class AbstractAntlrParser extends Parser {
 			}
 			LeafNode leafNode = createLeafNode(isSemanticChannel(token));
 			leafNode.setText(token.getText());
-			leafNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
+			leafNode.setGrammarElement(getGrammarElement(grammarElementID));
 			leafNode.setFeature(feature);
 			parentNode.getChildren().add(leafNode);
 			lastConsumedIndex = token.getTokenIndex();
@@ -101,6 +102,10 @@ public abstract class AbstractAntlrParser extends Parser {
 			return leafNode;
 		}
 		return null;
+	}
+
+	private EObject getGrammarElement(String grammarElementID) {
+		return grammar.eResource().getResourceSet().getEObject(URI.createURI(grammarElementID),true);
 	}
 
 	private Map<Integer, String> antlrTypeToLexerName = null;
@@ -145,7 +150,8 @@ public abstract class AbstractAntlrParser extends Parser {
 		CompositeNode compositeNode = ParsetreeFactory.eINSTANCE.createCompositeNode();
 		if (parentNode != null)
 			parentNode.getChildren().add(compositeNode);
-		compositeNode.setGrammarElement(grammar.eResource().getEObject(grammarElementID));
+		EObject grammarEle = getGrammarElement(grammarElementID);
+		compositeNode.setGrammarElement(grammarEle);
 		return compositeNode;
 	}
 
