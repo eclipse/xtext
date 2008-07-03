@@ -81,7 +81,7 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 		int offset = 0;
 		for (LeafNode leafNode : nodes) {
 			assertEquals(offset,leafNode.getOffset());
-			offset += leafNode.length();
+			offset += leafNode.getLength();
 		}
 	}
 	
