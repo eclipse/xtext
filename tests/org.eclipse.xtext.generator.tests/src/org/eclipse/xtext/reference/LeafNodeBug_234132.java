@@ -30,9 +30,9 @@ public class LeafNodeBug_234132 extends AbstractGeneratorTest {
         System.out.println("Model length=" + model.length());
         for (LeafNode leafNode : leafNodes) {
             String text = leafNode.getText();
-            System.out.println("Leaf node" + leafNode.toString() + " offset=" + leafNode.getOffset() + " length=" + leafNode.length() + " text=" + ((text != null)? text : ""));
-            assertTrue(leafNode.length() + leafNode.getOffset() <= model.length());
-            assertEquals(model.substring(leafNode.getOffset(), leafNode.getOffset() + leafNode.length()), leafNode.getText());
+            System.out.println("Leaf node" + leafNode.toString() + " offset=" + leafNode.getOffset() + " length=" + leafNode.getLength() + " text=" + ((text != null)? text : ""));
+            assertTrue(leafNode.getLength() + leafNode.getOffset() <= model.length());
+            assertEquals(model.substring(leafNode.getOffset(), leafNode.getOffset() + leafNode.getLength()), leafNode.getText());
         }
     }
 }
