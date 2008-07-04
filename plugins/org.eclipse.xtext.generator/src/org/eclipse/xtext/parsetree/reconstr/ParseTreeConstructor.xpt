@@ -14,7 +14,7 @@
 
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
-«EXTENSION org::eclipse::xtext::parsetree::ParseTreeConstructor»
+«EXTENSION org::eclipse::xtext::parsetree::reconstr::ParseTreeConstructor»
 «EXTENSION org::eclipse::xtext::XtextUtil»
 «EXTENSION org::openarchitectureware::util::stdlib::collections»
 «EXTENSION org::openarchitectureware::util::stdlib::io»
@@ -28,40 +28,19 @@ package «genClassFQName.toJavaPackage()»;
 
 
 import org.eclipse.emf.ecore.EObject;
-import «internalParsetreeConstructorFQName()»;
-import org.eclipse.xtext.parsetree.AbstractParseTreeConstructor;
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parsetree.reconstr.*;
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.parser.GenericEcoreElementFactory;
+import org.eclipse.xtext.parsetree.reconstr.*;
+import org.eclipse.xtext.parsetree.reconstr.impl.*;
 
 public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructor {
 
-	public void update(EObject object) {
-		new «internalParsetreeConstructorName()»(getFactory(),getGrammar(),getValueConverterService()).update(object);
-	}
-}
-«ENDFILE»
-«FILE internalParsetreeConstructorFQName().toJavaFilePath()»
-/*
-«fileHeader()»
-*/
-package «internalParsetreePackageName()»;
-
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.parser.GenericEcoreElementFactory;
-import org.eclipse.xtext.parsetree.Predicate;
-import org.eclipse.xtext.parsetree.internal.AbstractInternalParseTreeConstructor;
-
-public class «internalParsetreeConstructorName()» extends AbstractInternalParseTreeConstructor {
-
-	public «internalParsetreeConstructorName()»(GenericEcoreElementFactory factory, Grammar grammar, IValueConverterService converterService) {
-		super(factory,grammar,converterService);
-	}
-
-	protected void internalDoUpdate(EObject obj, String ruleToCall) {
+	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
 		«FOREACH grammar().parserRules AS pr SEPARATOR ' else '-»
 		if (ruleToCall.equals("«pr.name»")) {
-			«pr.methodName()»(getDescr(obj));
+			«pr.methodName()»(getDescr(obj),callback);
 		}«ENDFOREACH» else {
 			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
 		}
@@ -73,7 +52,7 @@ public class «internalParsetreeConstructorName()» extends AbstractInternalParseT
 «ENDDEFINE»
 
 «DEFINE method FOR ParserRule»
-protected void «methodName()»(InstanceDescription obj) {
+protected void «methodName()»(InstanceDescription obj,IParseTreeConstructorCallback callback) {
 	«EXPAND statement FOR this.alternatives»
 }
 «ENDDEFINE»
@@ -97,35 +76,31 @@ new Predicate(obj) {
 	final Object value = obj.consume("«feature»");
     «EXPAND statement FOR terminal»
     if (obj.isConsumed())
-    	objectCreation(obj);
+    	callback.objectCreation(obj);
 «ENDDEFINE»
 
 «DEFINE statement2 FOR Keyword»
-	keyword((Keyword)getGrammarElement("«objectURI()»"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("«objectURI()»"));
 «ENDDEFINE»
 
 «DEFINE statement2 FOR Action»
 	InstanceDescription newObj = getDescr((EObject) obj.consume("«feature»"));
-	action(obj,newObj, (Action) getGrammarElement("«objectURI()»"));
+	callback.actionCall(obj, newObj, (Action) getGrammarElement("«objectURI()»"));
 	obj = newObj;
 «ENDDEFINE»
 
 «DEFINE statement2 FOR RuleCall»
 	«IF calledParserRule()!=null»
-	InstanceDescription val = «isAssigned() ? '(getDescr((EObject)value))' : 'obj'»;
-	EObject ruleCall = getGrammarElement("«objectURI()»");
-	try {
-		ruleCallStart(val, «isAssigned()», (RuleCall) ruleCall);
-		«calledRule().methodName()»(val);
-	} finally {
-		ruleCallEnd(val, «isAssigned()», (RuleCall) ruleCall);
-	}
+		InstanceDescription val = «isAssigned() ? '(getDescr((EObject)value))' : 'obj'»;
+		EObject ruleCall = getGrammarElement("«objectURI()»");
+		try {
+			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
+			«calledRule().methodName()»(val,callback);
+		} finally {
+			callback.parserRuleCallEnd();
+		}
 	«ELSE»
-		«IF isAssigned()»
-		lexerRuleCall(value,(RuleCall)getGrammarElement("«objectURI()»"));
-		«ELSE»
-		lexerRuleCall((RuleCall)getGrammarElement("«objectURI()»"));
-		«ENDIF»
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("«objectURI()»"));
 	«ENDIF»
 «ENDDEFINE»
 

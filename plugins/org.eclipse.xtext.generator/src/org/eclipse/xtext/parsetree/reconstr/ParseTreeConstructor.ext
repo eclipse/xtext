@@ -15,15 +15,6 @@ extension org::eclipse::xtext::Extensions reexport;
 extension org::eclipse::xtext::XtextUtil;
 extension org::openarchitectureware::util::stdlib::io;
 
-internalParsetreePackageName(GenService service) :
-	service.genClassFQName.toJavaPackage() + ".internal";
-	
-internalParsetreeConstructorFQName(GenService service) :
-	 internalParsetreePackageName(service) + "." + internalParsetreeConstructorName(service);
-
-internalParsetreeConstructorName(GenService service) :
-	"Internal" + service.genClassFQName.toSimpleName();
-
 methodName(AbstractRule this) :
 	'proceed'+name.toFirstUpper();
 		
