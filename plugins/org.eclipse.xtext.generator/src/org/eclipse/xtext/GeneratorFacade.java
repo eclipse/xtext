@@ -107,6 +107,7 @@ public class GeneratorFacade {
 	private static GenModel assembleGeneratorModel(Grammar grammarModel, String srcGenPath, String uiProjectPath, String... modelFileExtensions) {
         String languageName = GrammarUtil.getName(grammarModel);
         String namespace = GrammarUtil.getNamespace(grammarModel);
+        String uiPluginID = uiProjectPath.substring(uiProjectPath.lastIndexOf('/')+1);
 
         GenModel genModel = XtextgenFactory.eINSTANCE.createGenModel();
 	    genModel.setGrammar(grammarModel);
@@ -116,7 +117,7 @@ public class GeneratorFacade {
 	    genModel.setStandaloneSetupClassFQName(namespace + "." + languageName + "StandaloneSetup");
 	    if(uiProjectPath != null) {
 	        genModel.setNonUIPluginBundleID(namespace);
-	        genModel.setUiPluginBundleID(namespace + ".ui_gen");
+	        genModel.setUiPluginBundleID(uiPluginID);
 	    }
         
 	    genModel.getOutletMap().put("", srcGenPath);
