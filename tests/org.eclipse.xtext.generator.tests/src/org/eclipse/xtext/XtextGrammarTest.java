@@ -10,8 +10,6 @@
 package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.XtextGrammarTestParseTreeConstructor;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -32,12 +30,4 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 		assertWithXtend("'name'","parserRules.first().alternatives.feature",grammar);
 	}
 	
-	public void testSerialization() throws Exception {
-		String model = "generate foo 'bar' Foo : ( 'stuff' '{' '}' STRING ) ? ;";
-		EObject grammar = (EObject) getModel(model);
-		XtextGrammarTestParseTreeConstructor ptc = (XtextGrammarTestParseTreeConstructor) getParseTreeConstructor();
-		ptc.update(grammar);
-		assertEquals(model, NodeUtil.getNodeAdapter(grammar).getParserNode().serialize());
-	}
-
 }

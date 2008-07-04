@@ -22,10 +22,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.GenerateAllTestGrammars;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.IParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -89,16 +90,20 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		return ServiceRegistry.getService(currentLanguageDescriptor, IParser.class);
 	}
 
-	protected IAstFactory getASTFactory() throws Exception {
+	protected IAstFactory getASTFactory() {
 		return ServiceRegistry.getService(currentLanguageDescriptor, IAstFactory.class);
 	}
 
-	protected IParseTreeConstructor getParseTreeConstructor() throws Exception {
+	protected IParseTreeConstructor getParseTreeConstructor() {
 		return ServiceRegistry.getService(currentLanguageDescriptor, IParseTreeConstructor.class);
 	}
 	
-	protected IResourceFactory getResourceFactory() throws Exception {
+	protected IResourceFactory getResourceFactory()  {
 		return ServiceRegistry.getService(currentLanguageDescriptor, IResourceFactory.class);
+	}
+	
+	protected IValueConverterService getValueConverterService() {
+		return ServiceRegistry.getService(currentLanguageDescriptor, IValueConverterService.class);
 	}
 
 	// parse methods

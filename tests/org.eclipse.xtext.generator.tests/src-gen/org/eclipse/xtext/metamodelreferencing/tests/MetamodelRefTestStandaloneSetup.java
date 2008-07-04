@@ -19,8 +19,8 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.metamodelreferencing.tests.parser.MetamodelRefTestParser;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestResourceFactory;
-import org.eclipse.xtext.parsetree.IParseTreeConstructor;
-import org.eclipse.xtext.metamodelreferencing.tests.parsetree.MetamodelRefTestParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.metamodelreferencing.tests.parsetree.reconstr.MetamodelRefTestParseTreeConstructor;
 
 import org.eclipse.xtext.metamodelreferencing.tests.IMetamodelRefTest;
 

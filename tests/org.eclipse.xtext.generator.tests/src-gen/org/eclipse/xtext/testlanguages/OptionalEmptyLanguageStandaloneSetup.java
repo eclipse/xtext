@@ -19,8 +19,8 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.testlanguages.parser.OptionalEmptyLanguageParser;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageResourceFactory;
-import org.eclipse.xtext.parsetree.IParseTreeConstructor;
-import org.eclipse.xtext.testlanguages.parsetree.OptionalEmptyLanguageParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.testlanguages.parsetree.reconstr.OptionalEmptyLanguageParseTreeConstructor;
 
 import org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage;
 

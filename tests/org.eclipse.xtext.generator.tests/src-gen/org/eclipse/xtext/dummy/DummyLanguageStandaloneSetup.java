@@ -19,8 +19,8 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.dummy.parser.DummyLanguageParser;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.dummy.services.DummyLanguageResourceFactory;
-import org.eclipse.xtext.parsetree.IParseTreeConstructor;
-import org.eclipse.xtext.dummy.parsetree.DummyLanguageParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.dummy.parsetree.reconstr.DummyLanguageParseTreeConstructor;
 
 import org.eclipse.xtext.dummy.IDummyLanguage;
 

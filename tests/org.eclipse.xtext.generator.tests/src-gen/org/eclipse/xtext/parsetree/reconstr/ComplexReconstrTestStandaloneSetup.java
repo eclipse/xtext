@@ -19,8 +19,8 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.reconstr.parser.ComplexReconstrTestParser;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestResourceFactory;
-import org.eclipse.xtext.parsetree.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.parsetree.ComplexReconstrTestParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.parsetree.reconstr.ComplexReconstrTestParseTreeConstructor;
 
 import org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTest;
 

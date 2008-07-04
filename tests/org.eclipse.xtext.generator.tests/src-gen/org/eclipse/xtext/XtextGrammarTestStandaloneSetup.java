@@ -19,8 +19,8 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.XtextGrammarTestParser;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.services.XtextGrammarTestResourceFactory;
-import org.eclipse.xtext.parsetree.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.XtextGrammarTestParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.XtextGrammarTestParseTreeConstructor;
 
 import org.eclipse.xtext.IXtextGrammarTest;
 
