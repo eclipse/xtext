@@ -10,46 +10,10 @@ options {
 
 @lexer::header {
 package org.eclipse.xtext.testlanguages.parser.internal;
-}
 
-@lexer::members {
-
-  public Token nextToken() {
-        while (true) {
-            this.token = null;
-            this.channel = Token.DEFAULT_CHANNEL;
-            this.tokenStartCharIndex = input.index();
-            this.tokenStartCharPositionInLine = input.getCharPositionInLine();
-            this.tokenStartLine = input.getLine();
-            this.text = null;
-            if ( input.LA(1)==CharStream.EOF ) {
-                return Token.EOF_TOKEN;
-            }
-            try {
-                mTokens();
-                if ( this.token==null ) {
-                    emit();
-                }
-                else if ( this.token==Token.SKIP_TOKEN ) {
-                    continue;
-                }
-                return this.token;
-            }
-            catch (RecognitionException re) {
-                reportError(re);
-                if ( re instanceof NoViableAltException ) { recover(re); }
-                                // create token that holds mismatched char
-                Token t = new CommonToken(input, Token.INVALID_TOKEN_TYPE,
-                                          Token.HIDDEN_CHANNEL,
-                                          this.tokenStartCharIndex,
-                                          getCharIndex()-1);
-                t.setLine(this.tokenStartLine);
-                t.setCharPositionInLine(this.tokenStartCharPositionInLine);
-                emit(t);
-                return this.token;
-            }
-        }
-    }
+// Hack: Use our own Lexer superclass by means of import. 
+// Currently there is no other way to specify the superclass for the lexer.
+import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
@@ -184,7 +148,7 @@ ruleLookAhead0 returns [EObject current=null]
 ('bar' 
 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (
     lv_x='a' 
@@ -194,7 +158,7 @@ ruleLookAhead0 returns [EObject current=null]
             $current = factory.create("LookAhead0");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "x", lv_x,"a");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"x");    }
+        factory.set($current, "x", lv_x,"a");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x");    }
 ));
     
 
@@ -214,7 +178,7 @@ ruleLookAhead1 returns [EObject current=null]
 ((('foo' 
 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (
     
@@ -237,7 +201,7 @@ ruleLookAhead1 returns [EObject current=null]
             $current = factory.create("LookAhead1");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "x", lv_x,"b");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"x");    }
+        factory.set($current, "x", lv_x,"b");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x");    }
 ))(
     lv_x='d' 
  
@@ -246,7 +210,7 @@ ruleLookAhead1 returns [EObject current=null]
             $current = factory.create("LookAhead1");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "x", lv_x,"d");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"x");    }
+        factory.set($current, "x", lv_x,"d");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x");    }
 ));
     
 
@@ -271,7 +235,7 @@ ruleLookAhead2 returns [EObject current=null]
             $current = factory.create("LookAhead2");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "z", lv_z,"foo");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@groups.0/@terminal" /* xtext::Keyword */, currentNode,"z");    }
+        factory.set($current, "z", lv_z,"foo");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@groups.0/@terminal" /* xtext::Keyword */, "z");    }
 )
     |(
     lv_z='bar' 
@@ -281,11 +245,11 @@ ruleLookAhead2 returns [EObject current=null]
             $current = factory.create("LookAhead2");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "z", lv_z,"bar");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@groups.1/@terminal" /* xtext::Keyword */, currentNode,"z");    }
+        factory.set($current, "z", lv_z,"bar");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@groups.1/@terminal" /* xtext::Keyword */, "z");    }
 ))'c' 
 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
     
@@ -306,12 +270,12 @@ ruleLookAhead3 returns [EObject current=null]
 ((('foo' 
 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 'bar' 
 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, currentNode,null); 
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(
     lv_x='b' 
@@ -321,7 +285,7 @@ ruleLookAhead3 returns [EObject current=null]
             $current = factory.create("LookAhead3");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "x", lv_x,"b");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, currentNode,"x");    }
+        factory.set($current, "x", lv_x,"b");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "x");    }
 ))(
     
     { 
@@ -359,7 +323,7 @@ ruleLookAhead4 returns [EObject current=null]
             $current = factory.create("LookAhead4");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "x", lv_x,"c");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.6/@alternatives/@groups.0/@terminal" /* xtext::Keyword */, currentNode,"x");    }
+        factory.set($current, "x", lv_x,"c");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.6/@alternatives/@groups.0/@terminal" /* xtext::Keyword */, "x");    }
 )
     |(
     lv_x='d' 
@@ -369,7 +333,7 @@ ruleLookAhead4 returns [EObject current=null]
             $current = factory.create("LookAhead4");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "x", lv_x,"d");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.6/@alternatives/@groups.1/@terminal" /* xtext::Keyword */, currentNode,"x");    }
+        factory.set($current, "x", lv_x,"d");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@parserRules.6/@alternatives/@groups.1/@terminal" /* xtext::Keyword */, "x");    }
 ));
     
 
