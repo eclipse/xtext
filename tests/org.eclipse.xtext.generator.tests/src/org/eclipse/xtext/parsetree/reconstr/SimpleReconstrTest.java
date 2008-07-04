@@ -9,8 +9,7 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parsetree.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.reconstr.callbacks.SimpleSerializingCallback;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -31,19 +30,15 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
 		IParseTreeConstructor con = getParseTreeConstructor();
-		con.update(result);
-		String resultString = NodeUtil.getRootNode(result).serialize();
-		return resultString;
+		SimpleSerializingCallback callback = new SimpleSerializingCallback(getValueConverterService());
+		con.update(result, callback);
+		return callback.toString();
 	}
 	
 	public void testSimpleExpressions() throws Exception {
 		with(SimpleExpressionsStandaloneSetup.class);
 		String model = "a + b - c * d / e";
-		EObject result = (EObject) getModel(model);
-        IParseTreeConstructor con = getParseTreeConstructor();
-		con.update(result);
-		String resultString = NodeUtil.getRootNode(result).serialize();
-		assertEquals(model,resultString);
+		assertEquals(model,parseAndSerialize(model));
 	}
 	
 	@Override

@@ -9,9 +9,9 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parsetree.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.reconstr.callbacks.SimpleSerializingCallback;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.xtext2ecore.EcoreModelComparator;
 
 public class ComplexReconstrTest extends AbstractGeneratorTest {
 	
@@ -34,16 +34,21 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
 		IParseTreeConstructor con = getParseTreeConstructor();
-		con.update(result);
-		String resultString = NodeUtil.getRootNode(result).serialize();
-		return resultString;
+		SimpleSerializingCallback callback = new SimpleSerializingCallback(getValueConverterService());
+		con.update(result,callback);
+		return callback.toString();
 	}
 	
-//	public void testNormalizableCompositeNodesIncluded() throws Exception {
-//		EObject model = getModel("a");
-//		IParseTreeConstructor con = getParseTreeConstructor();
-//		con.update(model);
-//		CompositeNode node = NodeUtil.getRootNode(model);
-//		assertEquals("Op",((RuleCall)node.getGrammarElement()).getName());
-//	}
+	public void testNormalizableCompositeNodesIncluded() throws Exception {
+		reconstructAndCompare("a");
+		reconstructAndCompare("a + b");
+	}
+
+	private void reconstructAndCompare(String mymodel) throws Exception, InterruptedException {
+		EObject model = getModel(mymodel);
+		EObject model2 = getModel(parseAndSerialize(mymodel));
+		EcoreModelComparator ecoreModelComparator = new EcoreModelComparator();
+		assertFalse(ecoreModelComparator.modelsDiffer(model, model2));
+	}
+	
 }
