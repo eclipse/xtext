@@ -9,6 +9,7 @@
 package org.eclipse.xtext.parser;
 
 import org.antlr.runtime.RecognitionException;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.service.ILanguageService;
 
@@ -47,5 +48,7 @@ public interface IAstFactory extends ILanguageService {
 	 */
 	public void add(EObject _this, String feature, Object value) throws RecognitionException;
 	public void add(EObject _this, String feature, Object value, String lexerRule) throws RecognitionException;
+
+	public EClass getEClass(String fullTypeName);
 
 }

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.parsetree;
+package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.service.ILanguageService;
@@ -16,5 +16,5 @@ import org.eclipse.xtext.service.ILanguageService;
  *
  */
 public interface IParseTreeConstructor extends ILanguageService {
-	public void update(EObject object);
+	public void update(EObject object, IParseTreeConstructorCallback callback);
 }

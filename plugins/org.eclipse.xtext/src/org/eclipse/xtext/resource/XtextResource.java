@@ -23,7 +23,6 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.service.Inject;
@@ -39,9 +38,6 @@ public class XtextResource extends ResourceImpl {
 
 	@Inject
 	private IAstFactory elementFactory;
-
-	@Inject
-	private IParseTreeConstructor parsetreeConstructor;
 
 	private IParseResult parseResult;
 
@@ -95,7 +91,6 @@ public class XtextResource extends ResourceImpl {
 		}
 		if (!contents.isEmpty()) {
 			EObject rootElement = contents.get(0);
-			parsetreeConstructor.update(rootElement);
 			NodeAdapter rootNodeAdapter = getNodeAdapter(rootElement);
 			if (rootNodeAdapter != null) {
 				CompositeNode rootNode = rootNodeAdapter.getParserNode();

@@ -6,9 +6,8 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.parsetree;
+package org.eclipse.xtext.parsetree.reconstr.impl;
 
-import org.eclipse.xtext.parsetree.internal.AbstractInternalParseTreeConstructor.InstanceDescription;
 
 
 /**
@@ -20,7 +19,7 @@ public abstract class Predicate {
 	protected InstanceDescription obj;
 
 	public Predicate(InstanceDescription obj) {
-		this.obj = obj.newLookaheadDescription();
+		this.obj = obj.clone();
 	}
 
 	public abstract boolean check();
