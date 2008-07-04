@@ -81,25 +81,20 @@ public abstract class AbstractAntlrParser extends Parser {
 		}
 	}
 
-	protected Object createLeafNode(String grammarElementID, CompositeNode parentNode, String feature) {
+	protected Object createLeafNode(String grammarElementID, String feature) {
 		Token token = input.LT(-1);
 		if (token.getTokenIndex() > lastConsumedIndex) {
 			int indexOfTokenBefore = lastConsumedIndex;
 			if (indexOfTokenBefore + 1 < token.getTokenIndex()) {
 				for (int x = indexOfTokenBefore + 1; x < token.getTokenIndex(); x++) {
 					Token hidden = input.get(x);
-					LeafNode leafNode = createLeafNode(isSemanticChannel(hidden));
-					leafNode.setText(hidden.getText());
-					leafNode.setHidden(true);
+					LeafNode leafNode = createLeafNode(hidden, true);
 					setLexerRule(leafNode, hidden);
-					parentNode.getChildren().add(leafNode);
 				}
 			}
-			LeafNode leafNode = createLeafNode(isSemanticChannel(token));
-			leafNode.setText(token.getText());
+			LeafNode leafNode = createLeafNode(token, false);
 			leafNode.setGrammarElement(getGrammarElement(grammarElementID));
 			leafNode.setFeature(feature);
-			parentNode.getChildren().add(leafNode);
 			lastConsumedIndex = token.getTokenIndex();
 			tokenConsumed(token, leafNode);
 			return leafNode;
@@ -168,21 +163,27 @@ public abstract class AbstractAntlrParser extends Parser {
 		}
 	}
 
-	private LeafNode createLeafNode(boolean appendError) {
-		LeafNode ln = ParsetreeFactory.eINSTANCE.createLeafNode();
-		if (appendError)
-			appendError(ln);
-		return ln;
+	private LeafNode createLeafNode(Token token, boolean isHidden) {
+		LeafNode leafNode = ParsetreeFactory.eINSTANCE.createLeafNode();
+		leafNode.setText(token.getText());
+		leafNode.setHidden(isHidden);
+		if (isSemanticChannel(token))
+			appendError(leafNode);
+		if(token.getType() == Token.INVALID_TOKEN_TYPE) {
+			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
+			String lexerErrorMessage = ((XtextTokenStream)input).getLexerErrorMessage(token);
+			error.setMessage(lexerErrorMessage);
+			leafNode.setSyntaxError(error);
+		}
+		currentNode.getChildren().add(leafNode);
+		return leafNode;
 	}
 
 	protected void appendAllTokens() {
 		for (int x = lastConsumedIndex + 1; input.size() > x; input.consume(), x++) {
 			Token hidden = input.get(x);
-			LeafNode leafNode = createLeafNode(isSemanticChannel(hidden));
-			leafNode.setText(hidden.getText());
-			leafNode.setHidden(true);
+			LeafNode leafNode = createLeafNode(hidden, true);
 			setLexerRule(leafNode, hidden);
-			currentNode.getChildren().add(leafNode);
 		}
 		if (currentError != null) {
 			EList<LeafNode> leafNodes = currentNode.getLeafNodes();
@@ -208,37 +209,28 @@ public abstract class AbstractAntlrParser extends Parser {
 		if (indexOfTokenBefore + 1 < currentTokenIndex) {
 			for (int x = indexOfTokenBefore + 1; x < currentTokenIndex; x++) {
 				Token hidden = input.get(x);
-				LeafNode leafNode = createLeafNode(isSemanticChannel(hidden));
-				leafNode.setText(hidden.getText());
-				leafNode.setHidden(true);
+				LeafNode leafNode = createLeafNode(hidden, true);
 				setLexerRule(leafNode, hidden);
-				currentNode.getChildren().add(leafNode);
 				skipped.add(leafNode);
 			}
 		}
 		if (lastConsumedIndex < currentTokenIndex) {
-			LeafNode leafNode = createLeafNode(isSemanticChannel(currentToken));
-			leafNode.setText(currentToken.getText());
-			leafNode.setHidden(true);
+			LeafNode leafNode = createLeafNode(currentToken, true);
 			setLexerRule(leafNode, currentToken);
-			currentNode.getChildren().add(leafNode);
 			skipped.add(leafNode);
 			lastConsumedIndex = currentToken.getTokenIndex();
 		}
 		return skipped;
 	}
 
-	protected void appendTrailingHiddenTokens(CompositeNode parentNode) {
+	protected void appendTrailingHiddenTokens() {
 		Token tokenBefore = input.LT(-1);
 		int size = input.size();
 		if (tokenBefore != null && tokenBefore.getTokenIndex() < size) {
 			for (int x = tokenBefore.getTokenIndex() + 1; x < size; x++) {
 				Token hidden = input.get(x);
-				LeafNode leafNode = createLeafNode(isSemanticChannel(hidden));
-				leafNode.setText(hidden.getText());
-				leafNode.setHidden(true);
+				LeafNode leafNode = createLeafNode(hidden, true);
 				setLexerRule(leafNode, hidden);
-				parentNode.getChildren().add(leafNode);
 				lastConsumedIndex = hidden.getTokenIndex();
 			}
 		}
@@ -287,7 +279,7 @@ public abstract class AbstractAntlrParser extends Parser {
 			catch (Exception e) {
 				throw new WrappedException(e);
 			}
-			appendTrailingHiddenTokens(currentNode);
+			appendTrailingHiddenTokens();
 		}
 		finally {
 			try {
@@ -323,8 +315,6 @@ public abstract class AbstractAntlrParser extends Parser {
 		}
 		deferredLookaheadMap.remove(token);
 		token2NodeMap.put(token, leafNode);
-		((XtextTokenStream) input).consumeLookahead();
-		// ((XtextTokenStream) input).decrementLookahead();
 	}
 
 	/**
@@ -382,7 +372,6 @@ public abstract class AbstractAntlrParser extends Parser {
 	public void match(IntStream input, int ttype, BitSet follow) throws RecognitionException {
 		super.match(input, ttype, follow);
 		((XtextTokenStream) input).removeLastLookaheadToken();
-		((XtextTokenStream) input).decrementLookahead();
 	}
 
 	protected InputStream getTokenFile() {

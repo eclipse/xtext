@@ -9,7 +9,9 @@
 package org.eclipse.xtext.parser.antlr;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.Token;
@@ -22,46 +24,37 @@ import org.antlr.runtime.TokenSource;
  */
 public class XtextTokenStream extends CommonTokenStream {
 
-    private int currentLookahead;
-    private int lookaheadConsumedByParent;
+	private List<Token> lookaheadTokens = new ArrayList<Token>();
 
-    private List<Token> lookaheadTokens = new ArrayList<Token>(); 
-    
-    public XtextTokenStream() {
-        super();
-    }
+	private Map<Token, String> tokenErrorMap = new HashMap<Token, String>();
 
-    public XtextTokenStream(TokenSource tokenSource, int channel) {
-        super(tokenSource, channel);
-    }
+	public XtextTokenStream() {
+		super();
+	}
 
-    public XtextTokenStream(TokenSource tokenSource) {
-        super(tokenSource);
-    }
+	public XtextTokenStream(TokenSource tokenSource, int channel) {
+		super(tokenSource, channel);
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.antlr.runtime.CommonTokenStream#LA(int)
-     */
-    @Override
-    public int LA(int i) {
-        currentLookahead = Math.max(currentLookahead, i);
-        Token lookaheadToken = LT(i);
-        if(!lookaheadTokens.contains(lookaheadToken)) {
-        	lookaheadTokens.add(lookaheadToken);
-        }
-        return super.LA(i);
-    }
+	public XtextTokenStream(TokenSource tokenSource) {
+		super(tokenSource);
+	}
 
-    /**
-     * @return the currentLookahead
-     */
-    public int getCurrentLookahead() {
-        return currentLookahead;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.antlr.runtime.CommonTokenStream#LA(int)
+	 */
+	@Override
+	public int LA(int i) {
+		Token lookaheadToken = LT(i);
+		if (!lookaheadTokens.contains(lookaheadToken)) {
+			lookaheadTokens.add(lookaheadToken);
+		}
+		return super.LA(i);
+	}
 
-    /**
+	/**
 	 * @return the lookaheadTokens
 	 */
 	public List<Token> getLookaheadTokens() {
@@ -69,28 +62,18 @@ public class XtextTokenStream extends CommonTokenStream {
 	}
 
 	public void removeLastLookaheadToken() {
-		lookaheadTokens.remove(lookaheadTokens.size()-1);
+		lookaheadTokens.remove(lookaheadTokens.size() - 1);
 	}
-	
-    /**
-     * @return the lookaheadConsumedByParent
-     */
-    public int getLookaheadConsumedByParent() {
-        return lookaheadConsumedByParent;
-    }
 
-    public void resetLookahead() {
-        currentLookahead = 0;
-        lookaheadConsumedByParent = 0;
-        lookaheadTokens.clear();
-    }
+	public void resetLookahead() {
+		lookaheadTokens.clear();
+	}
 
-    public void decrementLookahead() {
-        --currentLookahead;
-    }
-
-    public void consumeLookahead() {
-        ++lookaheadConsumedByParent;
-    }
+	public String getLexerErrorMessage(Token invalidToken) {
+		if (tokenSource instanceof org.eclipse.xtext.parser.antlr.Lexer) {
+			return ((org.eclipse.xtext.parser.antlr.Lexer) tokenSource).getErrorMessage(invalidToken);
+		}
+		return (invalidToken.getType() == Token.INVALID_TOKEN_TYPE) ? "Invalid token " + invalidToken.getText() : null;
+	}
 
 }

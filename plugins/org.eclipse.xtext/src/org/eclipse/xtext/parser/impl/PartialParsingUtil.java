@@ -134,8 +134,9 @@ public class PartialParsingUtil {
 			List<CompositeNode> nodesEnclosingRegion) {
 		nodesEnclosingRegion.add(parent);
 		EList<AbstractNode> children = parent.getChildren();
-		// Hack: iterate children backward, so we evaluate the node.length() function less often  
-		for (int i=children.size()-1; i>=0; --i) {
+		// Hack: iterate children backward, so we evaluate the node.length()
+		// function less often
+		for (int i = children.size() - 1; i >= 0; --i) {
 			AbstractNode child = children.get(i);
 			if (child instanceof CompositeNode) {
 				CompositeNode childCompositeNode = (CompositeNode) child;
@@ -148,10 +149,7 @@ public class PartialParsingUtil {
 	}
 
 	private static boolean nodeEnclosesRegion(CompositeNode node, int offset, int length) {
-		if(node.getOffset() <= offset) {
-			return node.getOffset() + node.getLength() >= offset + length;
-		}
-		return false;
+		return node.getOffset() <= offset && node.getOffset() + node.getLength() >= offset + length;
 	}
 
 	/**
