@@ -1,73 +1,38 @@
 lexer grammar InternalTestLanguage;
-@members {
-
-  public Token nextToken() {
-        while (true) {
-            this.token = null;
-            this.channel = Token.DEFAULT_CHANNEL;
-            this.tokenStartCharIndex = input.index();
-            this.tokenStartCharPositionInLine = input.getCharPositionInLine();
-            this.tokenStartLine = input.getLine();
-            this.text = null;
-            if ( input.LA(1)==CharStream.EOF ) {
-                return Token.EOF_TOKEN;
-            }
-            try {
-                mTokens();
-                if ( this.token==null ) {
-                    emit();
-                }
-                else if ( this.token==Token.SKIP_TOKEN ) {
-                    continue;
-                }
-                return this.token;
-            }
-            catch (RecognitionException re) {
-                reportError(re);
-                if ( re instanceof NoViableAltException ) { recover(re); }
-                                // create token that holds mismatched char
-                Token t = new CommonToken(input, Token.INVALID_TOKEN_TYPE,
-                                          Token.HIDDEN_CHANNEL,
-                                          this.tokenStartCharIndex,
-                                          getCharIndex()-1);
-                t.setLine(this.tokenStartLine);
-                t.setCharPositionInLine(this.tokenStartCharPositionInLine);
-                emit(t);
-                return this.token;
-            }
-        }
-    }
-}
 @header {
 package org.eclipse.xtext.testlanguages.parser.internal;
+
+// Hack: Use our own Lexer superclass by means of import. 
+// Currently there is no other way to specify the superclass for the lexer.
+import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 T12 : 'choice' ;
 T13 : 'optional' ;
 T14 : 'reducible' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 288
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 252
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 290
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 254
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 292
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 256
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 294
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 258
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 296
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 260
 RULE_SL_COMMENT : '//' ( ~('\n'|'\r'))* ((options{greedy=true;}:'\r\n' | '\r' | '\n' ))? {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 298
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 262
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 300
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 264
 RULE_LEXER_BODY : '<#' '.'* '#>';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 302
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g" 266
 RULE_ANY_OTHER : .;
 
 

@@ -3,20 +3,19 @@
 package org.eclipse.xtext.parser.internal; 
 
 import java.io.InputStream;
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.*;
-import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+
+import org.antlr.runtime.BitSet;
+import org.antlr.runtime.EarlyExitException;
+import org.antlr.runtime.MismatchedSetException;
+import org.antlr.runtime.NoViableAltException;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenStream;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
-
-
-import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
+import org.eclipse.xtext.parsetree.CompositeNode;
 
 public class InternalXtextParser extends AbstractAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -517,7 +516,17 @@ public class InternalXtextParser extends AbstractAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleGrammar
+    /**
+	 * @param string
+	 * @param currentNode
+	 * @param string2
+	 */
+	private void createLeafNode(String string, CompositeNode currentNode, String string2) {
+		createLeafNode(string, string2);
+	}
+
+
+	// $ANTLR end ruleGrammar
 
 
     // $ANTLR start entryRuleAbstractMetamodelDeclaration
