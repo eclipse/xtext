@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.ui.editor.model.IEditorModel;
 import org.eclipse.xtext.ui.service.IOutlineProvider;
 
@@ -44,17 +45,17 @@ public class BuiltInOutlineProvider implements IOutlineProvider {
 
         Arrays.sort(array, new Comparator<EObject>() {
             public int compare(EObject o1, EObject o2) {
-                NodeAdapter nodeAdapter = (NodeAdapter) o1.eAdapters().get(0);
+                NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(o1);
                 CompositeNode parserNode1 = nodeAdapter.getParserNode();
                 Integer offset = parserNode1.getOffset();
 
-                NodeAdapter nodeAdapter2 = (NodeAdapter) o2.eAdapters().get(0);
+                NodeAdapter nodeAdapter2 = NodeUtil.getNodeAdapter(o2);
                 CompositeNode parserNode2 = nodeAdapter2.getParserNode();
                 Integer offset2 = parserNode2.getOffset();
                 return offset.compareTo(offset2);
             }
         });
-        
+
         return array;
     }
 
