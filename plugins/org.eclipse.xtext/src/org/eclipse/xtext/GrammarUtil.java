@@ -34,6 +34,13 @@ import org.eclipse.xtext.util.Strings;
  * @author svenefftinge
  */
 public class GrammarUtil {
+	
+	public static ParserRule getDefaultEntryRule(Grammar g) {
+		if (g.isAbstract())
+			return null;
+		return GrammarUtil.allParserRules(g).get(0);
+	}
+	
 	public static String getLanguageId(Grammar g) {
 		return Strings.concat(".", g.getIdElements());
 	}

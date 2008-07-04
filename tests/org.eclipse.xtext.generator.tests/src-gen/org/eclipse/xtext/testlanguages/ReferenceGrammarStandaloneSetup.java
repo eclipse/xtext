@@ -19,8 +19,8 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.testlanguages.parser.ReferenceGrammarParser;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarResourceFactory;
-import org.eclipse.xtext.parsetree.IParseTreeConstructor;
-import org.eclipse.xtext.testlanguages.parsetree.ReferenceGrammarParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.testlanguages.parsetree.reconstr.ReferenceGrammarParseTreeConstructor;
 
 import org.eclipse.xtext.testlanguages.IReferenceGrammar;
 

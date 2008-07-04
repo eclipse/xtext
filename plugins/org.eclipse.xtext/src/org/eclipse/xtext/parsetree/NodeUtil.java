@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * 
  */
 public class NodeUtil {
+	
     public static NodeAdapter getNodeAdapter(EObject obj) {
         return (NodeAdapter) EcoreUtil.getAdapter(obj.eAdapters(), AbstractNode.class);
     }
@@ -81,6 +82,17 @@ public class NodeUtil {
 		}
     	return null;
     }
+    
+    public static EObject findASTParentElement(CompositeNode replaceRootNode) {
+		CompositeNode parent = replaceRootNode.getParent();
+		if (parent == null) {
+			return null;
+		}
+		if (parent.getElement() != null) {
+			return parent.getElement();
+		}
+		return findASTParentElement(parent);
+	}
 
     public static void dumpCompositeNodes(String indent, CompositeNode node) {
         dumpCompositeNodeInfo(indent, node);

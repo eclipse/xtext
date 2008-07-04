@@ -70,6 +70,9 @@ AbstractRule calledRule(RuleCall this) :
 String getReturnTypeName(AbstractRule p) :
 	JAVA org.eclipse.xtext.GrammarUtil.getReturnTypeName(org.eclipse.xtext.AbstractRule);
 	
+Assignment containingAssignment(emf::EObject this) :
+	JAVA org.eclipse.xtext.GrammarUtil.containingAssignment(org.eclipse.emf.ecore.EObject);
+	
 Boolean isAssigned(emf::EObject this) : 
 	JAVA org.eclipse.xtext.GrammarUtil.isAssigned(org.eclipse.emf.ecore.EObject);	
 	

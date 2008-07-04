@@ -19,8 +19,8 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.testlanguages.parser.LookaheadLanguageParser;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.testlanguages.services.LookaheadLanguageResourceFactory;
-import org.eclipse.xtext.parsetree.IParseTreeConstructor;
-import org.eclipse.xtext.testlanguages.parsetree.LookaheadLanguageParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.testlanguages.parsetree.reconstr.LookaheadLanguageParseTreeConstructor;
 
 import org.eclipse.xtext.testlanguages.ILookaheadLanguage;
 

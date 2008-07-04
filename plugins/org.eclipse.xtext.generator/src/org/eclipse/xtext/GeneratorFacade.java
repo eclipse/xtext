@@ -107,7 +107,6 @@ public class GeneratorFacade {
 	private static GenModel assembleGeneratorModel(Grammar grammarModel, String srcGenPath, String uiProjectPath, String... modelFileExtensions) {
         String languageName = GrammarUtil.getName(grammarModel);
         String namespace = GrammarUtil.getNamespace(grammarModel);
-        String uiPluginID = uiProjectPath.substring(uiProjectPath.lastIndexOf('/')+1);
 
         GenModel genModel = XtextgenFactory.eINSTANCE.createGenModel();
 	    genModel.setGrammar(grammarModel);
@@ -116,6 +115,7 @@ public class GeneratorFacade {
 	    genModel.setLanguageInterfaceFQName(namespace + ".I" + languageName);
 	    genModel.setStandaloneSetupClassFQName(namespace + "." + languageName + "StandaloneSetup");
 	    if(uiProjectPath != null) {
+	    	String uiPluginID = uiProjectPath.substring(uiProjectPath.lastIndexOf('/')+1);
 	        genModel.setNonUIPluginBundleID(namespace);
 	        genModel.setUiPluginBundleID(uiPluginID);
 	    }
@@ -163,12 +163,13 @@ public class GeneratorFacade {
             resourceFactoryService.setExtensionPointID("org.eclipse.xtext.ui.resourceFactory");
             genModel.getServices().add(resourceFactoryService);
 
-            GenService parsetreeConstructorService = XtextgenFactory.eINSTANCE.createGenService();
-            parsetreeConstructorService.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.IParseTreeConstructor");
-            parsetreeConstructorService.setGenClassFQName(namespace + ".parsetree." + languageName + "ParseTreeConstructor");
-            parsetreeConstructorService.setTemplatePath("org::eclipse::xtext::parsetree::ParseTreeConstructor::root");
-            parsetreeConstructorService.setExtensionPointID("org.eclipse.xtext.ui.parseTreeConstructor");
-            genModel.getServices().add(parsetreeConstructorService);
+            GenService parsetreeReconstructorService = XtextgenFactory.eINSTANCE.createGenService();
+            parsetreeReconstructorService.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor");
+            parsetreeReconstructorService.setGenClassFQName(namespace + ".parsetree.reconstr." + languageName + "ParseTreeConstructor");
+            parsetreeReconstructorService.setTemplatePath("org::eclipse::xtext::parsetree::reconstr::ParseTreeConstructor::root");
+            parsetreeReconstructorService.setExtensionPointID("org.eclipse.xtext.ui.parseTreeConstructor");
+            genModel.getServices().add(parsetreeReconstructorService);
+
         }
 	    
         return genModel;
