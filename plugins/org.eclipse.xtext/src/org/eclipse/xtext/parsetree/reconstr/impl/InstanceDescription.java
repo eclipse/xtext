@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -158,6 +159,14 @@ public class InstanceDescription implements IInstanceDescription {
 
 	public InstanceDescription clone() {
 		return new InstanceDescription(this.parseTreeConstr, described, new HashMap<String, Integer>(featureConsumedCounter));
+	}
+
+	public int getConsumed(String feature) {
+		EStructuralFeature feature2 = described.eClass().getEStructuralFeature(feature);
+		if (feature2.isMany()) {
+			return ((Collection<?>)described.eGet(feature2)).size()-featureConsumedCounter.get(feature);
+		}
+		return 1-featureConsumedCounter.get(feature); 
 	}
 
 }

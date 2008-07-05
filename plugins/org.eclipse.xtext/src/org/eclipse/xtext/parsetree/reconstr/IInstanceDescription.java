@@ -16,4 +16,6 @@ public interface IInstanceDescription {
 
 	public abstract boolean isConsumed();
 
+	public abstract int getConsumed(String feature);
+
 }

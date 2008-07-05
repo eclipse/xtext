@@ -93,7 +93,6 @@ ruleOp returns [EObject current=null]
         associateNodeWithAstElement(currentNode, $current); 
     }
 )'+' 
-
     {
         createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
@@ -109,7 +108,10 @@ ruleOp returns [EObject current=null]
             $current = factory.create("Expression");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "addOperands", lv_addOperands,null);    }
+        
+        factory.add($current, "addOperands", lv_addOperands,null);
+        
+         }
 ))
     |(((
     { 
@@ -124,7 +126,6 @@ ruleOp returns [EObject current=null]
         associateNodeWithAstElement(currentNode, $current); 
     }
 )'-' 
-
     {
         createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
@@ -140,7 +141,10 @@ ruleOp returns [EObject current=null]
             $current = factory.create("Expression");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "minusOperands", lv_minusOperands,null);    }
+        
+        factory.add($current, "minusOperands", lv_minusOperands,null);
+        
+         }
 )))*);
     
 
@@ -203,7 +207,10 @@ ruleAtom returns [EObject current=null]
             $current = factory.create("Atom");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name,"ID");    }
+        
+        factory.set($current, "name", lv_name,"ID");
+        
+         }
 );
     
 
@@ -221,7 +228,6 @@ ruleParens returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
 ((('(' 
-
     {
         createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
@@ -235,19 +241,24 @@ ruleParens returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 )')' 
-
     {
         createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(
     lv_em='!' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "em"); 
+    }
  
     {
         if ($current==null) {
             $current = factory.create("Expression");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "em", lv_em,"!");        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "em");    }
+        
+        factory.set($current, "em", input.LT(-1),"!");
+        
+         }
 )?);
     
 

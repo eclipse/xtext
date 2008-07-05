@@ -83,7 +83,10 @@ ruleModel returns [EObject current=null]
             $current = factory.create("Model");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "child", lv_child,null);    }
+        
+        factory.set($current, "child", lv_child,null);
+        
+         }
 )?;
     
 
@@ -101,7 +104,6 @@ ruleGreeting returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
 ('hallo' 
-
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
@@ -116,7 +118,10 @@ ruleGreeting returns [EObject current=null]
             $current = factory.create("Greeting");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name,"ID");    }
+        
+        factory.set($current, "name", lv_name,"ID");
+        
+         }
 ));
     
 

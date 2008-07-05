@@ -1,5 +1,6 @@
 package org.eclipse.xtext.parsetree.reconstr.callbacks;
 
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
@@ -15,14 +16,23 @@ public class SimpleSerializingCallback extends DefaultParsetreeReconstructorCall
 		this.converterService = converterService;
 	}
 	
-	@Override
-	public void keywordCall(IInstanceDescription current, Keyword call) {
-		if (buff.length()>0)
-			prepend(" ");
-		prepend(call.getValue());
+	public StringBuffer getBuff() {
+		return buff;
 	}
 	
-	private void prepend(String s) {
+	@Override
+	public void keywordCall(IInstanceDescription current, Keyword call) {
+		prepend(call.getValue());
+		before(current, call);
+	}
+	
+	
+	protected void before(IInstanceDescription current,AbstractElement element) {
+		if (buff.length()>0)
+			prepend(" ");
+	}
+	
+	protected void prepend(String s) {
 		buff.insert(0, s);
 	}
 	
@@ -33,9 +43,8 @@ public class SimpleSerializingCallback extends DefaultParsetreeReconstructorCall
 		if (assignment!=null) {
 			value = current.get(assignment.getFeature());
 		}
-		if (buff.length()>0)
-			prepend(" ");
 		prepend(converterService.toString(value, call.getName()));
+		before(current, call);
 	}
 	
 	@Override
