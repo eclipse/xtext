@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
-import org.eclipse.xtext.ui.service.impl.BuildInTokenTypeDef;
+import org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.TokenTypeDef;
 
@@ -21,7 +21,7 @@ import org.eclipse.xtext.ui.tokentype.TokenTypeDef;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class ReferenceTokenTypeDef extends BuildInTokenTypeDef {
+public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 	@Override
 	public List<ITokenTypeDef> allTokenTypes() {
 		List<ITokenTypeDef> allTokenTypes = new ArrayList<ITokenTypeDef>();
