@@ -14,28 +14,28 @@ T15 : 'b' ;
 T16 : 'd' ;
 T17 : 'c' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 342
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 394
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 344
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 396
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 346
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 398
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' | '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 348
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 400
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 350
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 402
 RULE_SL_COMMENT : '//' ( ~('\n'|'\r'))* ((options{greedy=true;}:'\r\n' | '\r' | '\n' ))? {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 352
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 404
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 354
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 406
 RULE_LEXER_BODY : '<#' '.'* '#>';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 356
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLookaheadLanguage.g" 408
 RULE_ANY_OTHER : .;
 
 

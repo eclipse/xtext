@@ -104,7 +104,10 @@ ruleOp returns [EObject current=null]
             $current = factory.create("Expression");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "values", lv_values,null);    }
+        
+        factory.add($current, "values", lv_values,null);
+        
+         }
 ))*);
     
 
@@ -167,7 +170,10 @@ ruleAtom returns [EObject current=null]
             $current = factory.create("Atom");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name,"ID");    }
+        
+        factory.set($current, "name", lv_name,"ID");
+        
+         }
 );
     
 
@@ -185,7 +191,6 @@ ruleParens returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
 ((('(' 
-
     {
         createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
@@ -199,19 +204,24 @@ ruleParens returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 )')' 
-
     {
         createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(
     lv_em='!' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "em"); 
+    }
  
     {
         if ($current==null) {
             $current = factory.create("Expression");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "em", lv_em,"!");        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "em");    }
+        
+        factory.set($current, "em", input.LT(-1),"!");
+        
+         }
 )?);
     
 

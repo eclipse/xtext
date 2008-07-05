@@ -83,7 +83,10 @@ ruleModel returns [EObject current=null]
             $current = factory.create("Model");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "children", lv_children,null);    }
+        
+        factory.add($current, "children", lv_children,null);
+        
+         }
 )*;
     
 
@@ -111,7 +114,10 @@ ruleElement returns [EObject current=null]
             $current = factory.create("Element");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name,"ID");    }
+        
+        factory.set($current, "name", lv_name,"ID");
+        
+         }
 )(
     lv_h=RULE_STRING
     { 
@@ -123,7 +129,10 @@ ruleElement returns [EObject current=null]
             $current = factory.create("Element");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "h", lv_h,"STRING");    }
+        
+        factory.set($current, "h", lv_h,"STRING");
+        
+         }
 ));
     
 

@@ -83,7 +83,10 @@ ruleEntryRule returns [EObject current=null]
             $current = factory.create("Model");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "multiFeature", lv_multiFeature,null);    }
+        
+        factory.add($current, "multiFeature", lv_multiFeature,null);
+        
+         }
 )*;
     
 
@@ -136,19 +139,24 @@ ruleChoiceRule returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
 (('choice' 
-
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (
     lv_optionalKeyword='optional' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "optionalKeyword"); 
+    }
  
     {
         if ($current==null) {
             $current = factory.create("ChoiceElement");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "optionalKeyword", true,"optional");        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "optionalKeyword");    }
+        
+        factory.set($current, "optionalKeyword", true,"optional");
+        
+         }
 )?)(
     lv_name=RULE_ID
     { 
@@ -160,7 +168,10 @@ ruleChoiceRule returns [EObject current=null]
             $current = factory.create("ChoiceElement");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "name", lv_name,"ID");    }
+        
+        factory.set($current, "name", lv_name,"ID");
+        
+         }
 ));
     
 
@@ -178,7 +189,6 @@ ruleReducibleRule returns [EObject current=null]
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
 (('reducible' 
-
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
@@ -215,7 +225,10 @@ ruleReducibleRule returns [EObject current=null]
             $current = factory.create("ReducibleElement");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.add($current, "actionFeature", lv_actionFeature,null);    }
+        
+        factory.add($current, "actionFeature", lv_actionFeature,null);
+        
+         }
 ))?);
     
 
@@ -243,7 +256,10 @@ ruleTerminalRule returns [EObject current=null]
             $current = factory.create("TerminalElement");
             associateNodeWithAstElement(currentNode, $current);
         }
-        factory.set($current, "stringFeature", lv_stringFeature,"STRING");    }
+        
+        factory.set($current, "stringFeature", lv_stringFeature,"STRING");
+        
+         }
 );
     
 
