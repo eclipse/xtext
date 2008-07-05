@@ -9,28 +9,32 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parsetree.reconstr.callbacks.SimpleSerializingCallback;
+import org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class SimpleReconstrTest extends AbstractGeneratorTest {
 	
+	
 	public void testSimple() throws Exception {
-	    with(SimpleReconstrTestStandaloneSetup.class);
 	    String model = "( a b ) !";
 		assertEquals(model,parseAndSerialize(model));
 	}
 	
+	public void testFollowingHiddenTokens() throws Exception {
+		String model = "a ";
+		assertEquals(model,parseAndSerialize(model));
+	}
+	
 	public void testComplex() throws Exception {
-	    with(SimpleReconstrTestStandaloneSetup.class);
-	    String model = "( ( a b ) ! c d e f ( x s ) ( ( a b ) ! c ) ! ) !";
+	    String model = "( ( a b ) ! c  d e  f (  x s ) ( \t ( a \n\rb/*ffo \n bar */ ) ! c ) ! ) //holla\n!";
 		assertEquals(model,parseAndSerialize(model));
 	}
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
 		IParseTreeConstructor con = getParseTreeConstructor();
-		SimpleSerializingCallback callback = new SimpleSerializingCallback(getValueConverterService());
+		WhitespacePreservingCallback callback = new WhitespacePreservingCallback(getValueConverterService());
 		con.update(result, callback);
 		return callback.toString();
 	}
@@ -43,6 +47,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 	
 	@Override
 	protected void setUp() throws Exception {
+		with(SimpleReconstrTestStandaloneSetup.class);
 		super.setUp();
 	}
 }
