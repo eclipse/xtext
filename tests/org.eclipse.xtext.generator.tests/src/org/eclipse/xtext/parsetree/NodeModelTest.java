@@ -18,6 +18,7 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -102,6 +103,14 @@ public class NodeModelTest extends AbstractGeneratorTest {
 				}
 			}
 		}
+	}
+	
+	public void testKeywordInAlternative() throws Exception {
+		with(SimpleExpressionsStandaloneSetup.class);
+		EObject object = getModel("d / e");
+		CompositeNode root = NodeUtil.getRootNode(object);
+		EList<LeafNode> nodes = root.getLeafNodes();
+		assertTrue(nodes.get(2).getGrammarElement() instanceof Keyword);
 	}
 
 	@Override

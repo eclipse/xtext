@@ -9,7 +9,7 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parsetree.reconstr.callbacks.SimpleSerializingCallback;
+import org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.xtext2ecore.EcoreModelComparator;
 
@@ -34,7 +34,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
 		IParseTreeConstructor con = getParseTreeConstructor();
-		SimpleSerializingCallback callback = new SimpleSerializingCallback(getValueConverterService());
+		WhitespacePreservingCallback callback = new WhitespacePreservingCallback(getValueConverterService());
 		con.update(result,callback);
 		return callback.toString();
 	}
