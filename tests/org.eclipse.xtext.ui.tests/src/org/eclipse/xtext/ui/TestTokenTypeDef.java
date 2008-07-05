@@ -8,12 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui;
 
-import org.eclipse.xtext.ui.service.impl.BuildInTokenTypeDef;
+import org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class TestTokenTypeDef extends BuildInTokenTypeDef {
+public class TestTokenTypeDef extends BuiltInTokenTypeDef {
 
 }

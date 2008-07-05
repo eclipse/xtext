@@ -10,13 +10,13 @@ package org.eclipse.xtext.ui;
 
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
-import org.eclipse.xtext.ui.service.impl.BuildInSyntaxColorer;
+import org.eclipse.xtext.ui.service.impl.BuiltInSyntaxColorer;
 
 /**
  * @author Peter Friese - Initial contribution and API
  * 
  */
-public class TestSyntaxColorer extends BuildInSyntaxColorer {
+public class TestSyntaxColorer extends BuiltInSyntaxColorer {
 
 	public TextStyle color(LeafNode token) {
 		return super.color(token);

@@ -13,14 +13,14 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.service.IFormatter;
-import org.eclipse.xtext.ui.service.impl.BuildInFormatter;
-import org.eclipse.xtext.ui.service.impl.BuildInTokenTypeDef;
+import org.eclipse.xtext.ui.service.impl.BuiltInFormatter;
+import org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class XtextFormatter extends BuildInFormatter implements IFormatter {
+public class XtextFormatter extends BuiltInFormatter implements IFormatter {
 	@Override
 	protected boolean shouldIndent(AbstractNode node) {
 		return super.shouldIndent(node);
@@ -33,7 +33,7 @@ public class XtextFormatter extends BuildInFormatter implements IFormatter {
 		else if ("ParserRule".equals(getGrammarRuleName(leafNode.getParent()))
 				&& "ID".equals(getGrammarRuleName(leafNode)))
 			return NEW_LINE + NEW_LINE;
-		else if (new BuildInTokenTypeDef().mlCommentTokenType().match(leafNode)
+		else if (new BuiltInTokenTypeDef().mlCommentTokenType().match(leafNode)
 				|| "language".equals(leafNode.getText()) || "generate".equals(leafNode.getText()))
 			return NEW_LINE;
 
