@@ -15,7 +15,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
-import org.eclipse.xtext.ui.service.impl.BuildInTokenTypeDef;
+import org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.TokenTypeDef;
 import org.eclipse.xtext.ui.util.GrammarConstants;
@@ -24,7 +24,7 @@ import org.eclipse.xtext.ui.util.GrammarConstants;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class XtextTokenTypeDef extends BuildInTokenTypeDef {
+public class XtextTokenTypeDef extends BuiltInTokenTypeDef {
 
 	/*
 	 * (non-Javadoc)

@@ -13,7 +13,7 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
-import org.eclipse.xtext.ui.service.impl.BuildInTokenTypeDef;
+import org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -40,7 +40,7 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 		super.setUp();
 		IParser parser = getServiceForDefaultLanguage(IParser.class);
 		IParseResult pr = parser.parse(new StringInputStream(MODEL));
-		ttds = new BuildInTokenTypeDef();
+		ttds = new BuiltInTokenTypeDef();
 		leafNodes = pr.getRootNode().getLeafNodes();
 	}
 
@@ -49,7 +49,7 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 		assertNotNull(comment);
 		ITokenTypeDef ttd = findTokenTypeDef(ttds, comment);
 		assertNotNull(ttd);
-		assertEquals(BuildInTokenTypeDef.SL_COMMENT_ID, ttd.getId());
+		assertEquals(BuiltInTokenTypeDef.SL_COMMENT_ID, ttd.getId());
 	}
 
 	public void testBuildInMlCommentDef() throws Exception {
@@ -57,7 +57,7 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 		assertNotNull(comment);
 		ITokenTypeDef ttd = findTokenTypeDef(ttds, comment);
 		assertNotNull(ttd);
-		assertEquals(BuildInTokenTypeDef.ML_COMMENT_ID, ttd.getId());
+		assertEquals(BuiltInTokenTypeDef.ML_COMMENT_ID, ttd.getId());
 	}
 
 	public void testBuildInKeywordDef() throws Exception {
@@ -65,7 +65,7 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 		assertNotNull(keyword);
 		ITokenTypeDef ttd = findTokenTypeDef(ttds, keyword);
 		assertNotNull(ttd);
-		assertEquals(BuildInTokenTypeDef.KEYWORD_ID, ttd.getId());
+		assertEquals(BuiltInTokenTypeDef.KEYWORD_ID, ttd.getId());
 	}
 
 	public void testBuildInNumberDef() throws Exception {
@@ -73,7 +73,7 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 		assertNotNull(node);
 		ITokenTypeDef ttd = findTokenTypeDef(ttds, node);
 		assertNotNull(ttd);
-		assertEquals(BuildInTokenTypeDef.NUMBER_ID, ttd.getId());
+		assertEquals(BuiltInTokenTypeDef.NUMBER_ID, ttd.getId());
 	}
 
 	public void testBuildInStringDef() throws Exception {
@@ -81,7 +81,7 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 		assertNotNull(node);
 		ITokenTypeDef ttd = findTokenTypeDef(ttds, node);
 		assertNotNull(ttd);
-		assertEquals(BuildInTokenTypeDef.STRING_ID, ttd.getId());
+		assertEquals(BuiltInTokenTypeDef.STRING_ID, ttd.getId());
 	}
 
 	public void testBuildInEOFCommentDef() throws Exception {
@@ -89,7 +89,7 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 		assertNotNull(node);
 		ITokenTypeDef ttd = findTokenTypeDef(ttds, node);
 		assertNotNull(ttd);
-		assertEquals(BuildInTokenTypeDef.SL_COMMENT_ID, ttd.getId());
+		assertEquals(BuiltInTokenTypeDef.SL_COMMENT_ID, ttd.getId());
 	}
 
 	private ITokenTypeDef findTokenTypeDef(ITokenTypeDefProvider ttds, LeafNode leafNode) {
