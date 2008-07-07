@@ -24,7 +24,7 @@ import org.eclipse.xtext.ui.service.IFormatter;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class BuildInFormatter implements IFormatter {
+public class BuiltInFormatter implements IFormatter {
 
 	// TODO make stuff configurable
 	public static final String NEW_LINE = System.getProperty("line.separator");
@@ -103,7 +103,7 @@ public class BuildInFormatter implements IFormatter {
 	 * @return
 	 */
 	protected String before(LeafNode leafNode) {
-		BuildInTokenTypeDef bittd = new BuildInTokenTypeDef();
+		BuiltInTokenTypeDef bittd = new BuiltInTokenTypeDef();
 		if (bittd.mlCommentTokenType().match(leafNode)
 				|| (bittd.keyWordTokenType().match(leafNode) && leafNode.getText().length() > 1)) {
 			return NEW_LINE;

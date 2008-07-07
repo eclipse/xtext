@@ -82,21 +82,21 @@
    <extension
          point="org.eclipse.xtext.ui.syntaxColorer">
       <syntaxColorer
-            class="org.eclipse.xtext.ui.service.impl.BuildInSyntaxColorer"
+            class="org.eclipse.xtext.ui.service.impl.BuiltInSyntaxColorer"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </syntaxColorer>
    </extension>
    <extension
          point="org.eclipse.xtext.ui.tokenTypeDef">
       <tokenTypeDef
-            class="org.eclipse.xtext.ui.service.impl.BuildInTokenTypeDef"
+            class="org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </tokenTypeDef>
    </extension>
    <extension
          point="org.eclipse.xtext.ui.preferenceStore">
       <preferenceStore
-            class="org.eclipse.xtext.ui.service.impl.BuildInPreferenceStore"
+            class="org.eclipse.xtext.ui.service.impl.BuiltInPreferenceStore"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </preferenceStore>
    </extension>
@@ -110,7 +110,7 @@
    <extension
          point="org.eclipse.xtext.ui.labelProvider">
       <labelProvider
-            class="org.eclipse.xtext.ui.service.impl.BuildInLabelProvider"
+            class="org.eclipse.xtext.ui.service.impl.BuiltInLabelProvider"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </labelProvider>
    </extension>
@@ -124,14 +124,14 @@
    <extension
          point="org.eclipse.xtext.ui.formatter">
       <formatter
-            class="org.eclipse.xtext.ui.service.impl.BuildInFormatter"
+            class="org.eclipse.xtext.ui.service.impl.BuiltInFormatter"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </formatter>
    </extension>
    <extension
          point="org.eclipse.xtext.ui.hoverInfo">
       <hoverInfo
-            class="org.eclipse.xtext.ui.service.impl.BuildInHoverInfo"
+            class="org.eclipse.xtext.ui.service.impl.BuiltInHoverInfo"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </hoverInfo>
    </extension>

@@ -23,7 +23,7 @@ import org.eclipse.xtext.ui.service.ILabelProvider;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class BuildInLabelProvider extends ReflectiveItemProvider implements ILabelProvider {
+public class BuiltInLabelProvider extends ReflectiveItemProvider implements ILabelProvider {
 	private AdapterFactoryLabelProvider slave = new AdapterFactoryLabelProvider(
 			new ReflectiveItemProviderAdapterFactory());
 
@@ -32,11 +32,11 @@ public class BuildInLabelProvider extends ReflectiveItemProvider implements ILab
 	 * 
 	 * @param adapterFactory
 	 */
-	private BuildInLabelProvider(AdapterFactory adapterFactory) {
+	private BuiltInLabelProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
-	public BuildInLabelProvider() {
+	public BuiltInLabelProvider() {
 		this(new ReflectiveItemProviderAdapterFactory());
 	}
 

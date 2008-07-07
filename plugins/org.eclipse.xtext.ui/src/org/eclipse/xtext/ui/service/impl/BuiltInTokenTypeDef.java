@@ -27,7 +27,7 @@ import org.eclipse.xtext.ui.util.GrammarConstants;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class BuildInTokenTypeDef implements ITokenTypeDefProvider {
+public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 	public static final String KEYWORD_ID = "keyword";
 	public static final String SL_COMMENT_ID = "slComment";
 	public static final String ML_COMMENT_ID = "mlComment";
