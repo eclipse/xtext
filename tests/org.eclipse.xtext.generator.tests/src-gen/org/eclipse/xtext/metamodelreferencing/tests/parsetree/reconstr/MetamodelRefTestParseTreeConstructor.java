@@ -20,12 +20,18 @@ public class MetamodelRefTestParseTreeConstructor extends AbstractParseTreeConst
 		} else 		if (ruleToCall.equals("NameRef")) {
 			proceedNameRef(getDescr(obj),callback);
 		} else {
-			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+			throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
 		}
 	}
 
 	
+private String FooRecursionCheck = null;
 protected void proceedFoo(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(FooRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		FooRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -51,6 +57,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedNameRef(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -86,9 +96,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		FooRecursionCheck = null;
+	}
 }
 
+private String NameRefRecursionCheck = null;
 protected void proceedNameRef(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(NameRefRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		NameRefRecursionCheck = s;
 	
 /* xtext::Assignment */ 
 {
@@ -109,6 +128,9 @@ protected void proceedNameRef(InstanceDescription obj,IParseTreeConstructorCallb
 
 }
 
+	} finally {
+		NameRefRecursionCheck = null;
+	}
 }
 
 }

@@ -20,12 +20,18 @@ public class DummyLanguageParseTreeConstructor extends AbstractParseTreeConstruc
 		} else 		if (ruleToCall.equals("Element")) {
 			proceedElement(getDescr(obj),callback);
 		} else {
-			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+			throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
 		}
 	}
 
 	
+private String ModelRecursionCheck = null;
 protected void proceedModel(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(ModelRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		ModelRecursionCheck = s;
 	
 /* xtext::Assignment */ 
 
@@ -47,6 +53,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedElement(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -59,9 +69,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		ModelRecursionCheck = null;
+	}
 }
 
+private String ElementRecursionCheck = null;
 protected void proceedElement(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(ElementRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		ElementRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -176,6 +195,9 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		ElementRecursionCheck = null;
+	}
 }
 
 }

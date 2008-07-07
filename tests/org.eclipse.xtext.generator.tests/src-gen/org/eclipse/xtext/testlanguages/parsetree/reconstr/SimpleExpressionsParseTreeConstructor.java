@@ -28,12 +28,18 @@ public class SimpleExpressionsParseTreeConstructor extends AbstractParseTreeCons
 		} else 		if (ruleToCall.equals("Parens")) {
 			proceedParens(getDescr(obj),callback);
 		} else {
-			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+			throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
 		}
 	}
 
 	
+private String SequenceRecursionCheck = null;
 protected void proceedSequence(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(SequenceRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		SequenceRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -64,6 +70,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAddition(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -99,6 +109,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAddition(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -109,9 +120,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		SequenceRecursionCheck = null;
+	}
 }
 
+private String AdditionRecursionCheck = null;
 protected void proceedAddition(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(AdditionRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		AdditionRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -142,6 +162,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedMultiplication(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -199,7 +223,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -236,6 +260,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedMultiplication(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -246,9 +271,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		AdditionRecursionCheck = null;
+	}
 }
 
+private String MultiplicationRecursionCheck = null;
 protected void proceedMultiplication(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(MultiplicationRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		MultiplicationRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -279,6 +313,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedTerm(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -336,7 +374,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -373,6 +411,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedTerm(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -383,9 +422,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		MultiplicationRecursionCheck = null;
+	}
 }
 
+private String TermRecursionCheck = null;
 protected void proceedTerm(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(TermRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		TermRecursionCheck = s;
 	
 /* xtext::Alternatives */ 
 {
@@ -406,6 +454,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAtom(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -430,6 +479,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedParens(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -440,15 +490,24 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
 }
 
+	} finally {
+		TermRecursionCheck = null;
+	}
 }
 
+private String AtomRecursionCheck = null;
 protected void proceedAtom(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(AtomRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		AtomRecursionCheck = s;
 	
 /* xtext::Assignment */ 
 {
@@ -469,9 +528,18 @@ protected void proceedAtom(InstanceDescription obj,IParseTreeConstructorCallback
 
 }
 
+	} finally {
+		AtomRecursionCheck = null;
+	}
 }
 
+private String ParensRecursionCheck = null;
 protected void proceedParens(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(ParensRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		ParensRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -498,6 +566,7 @@ protected void proceedParens(InstanceDescription obj,IParseTreeConstructorCallba
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAddition(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -519,6 +588,9 @@ protected void proceedParens(InstanceDescription obj,IParseTreeConstructorCallba
 
 }
 
+	} finally {
+		ParensRecursionCheck = null;
+	}
 }
 
 }

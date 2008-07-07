@@ -28,12 +28,18 @@ public class ReferenceGrammarParseTreeConstructor extends AbstractParseTreeConst
 		} else 		if (ruleToCall.equals("Farbe")) {
 			proceedFarbe(getDescr(obj),callback);
 		} else {
-			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+			throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
 		}
 	}
 
 	
+private String SpielplatzRecursionCheck = null;
 protected void proceedSpielplatz(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(SpielplatzRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		SpielplatzRecursionCheck = s;
 	
 /* xtext::Group */ 
 
@@ -147,6 +153,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedKind(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -181,6 +191,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedErwachsener(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -196,7 +210,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -224,6 +238,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedSpielzeug(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -330,9 +348,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		SpielplatzRecursionCheck = null;
+	}
 }
 
+private String PersonRecursionCheck = null;
 protected void proceedPerson(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(PersonRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		PersonRecursionCheck = s;
 	
 /* xtext::Alternatives */ 
 {
@@ -353,6 +380,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedKind(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -377,6 +405,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedErwachsener(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -387,15 +416,24 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
 }
 
+	} finally {
+		PersonRecursionCheck = null;
+	}
 }
 
+private String KindRecursionCheck = null;
 protected void proceedKind(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(KindRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		KindRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -488,9 +526,18 @@ protected void proceedKind(InstanceDescription obj,IParseTreeConstructorCallback
 
 }
 
+	} finally {
+		KindRecursionCheck = null;
+	}
 }
 
+private String ErwachsenerRecursionCheck = null;
 protected void proceedErwachsener(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(ErwachsenerRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		ErwachsenerRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -583,9 +630,18 @@ protected void proceedErwachsener(InstanceDescription obj,IParseTreeConstructorC
 
 }
 
+	} finally {
+		ErwachsenerRecursionCheck = null;
+	}
 }
 
+private String SpielzeugRecursionCheck = null;
 protected void proceedSpielzeug(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(SpielzeugRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		SpielzeugRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -617,6 +673,10 @@ protected void proceedSpielzeug(InstanceDescription obj,IParseTreeConstructorCal
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedFarbe(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -685,9 +745,18 @@ protected void proceedSpielzeug(InstanceDescription obj,IParseTreeConstructorCal
 
 }
 
+	} finally {
+		SpielzeugRecursionCheck = null;
+	}
 }
 
+private String FarbeRecursionCheck = null;
 protected void proceedFarbe(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(FarbeRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		FarbeRecursionCheck = s;
 	
 /* xtext::Alternatives */ 
 {
@@ -759,7 +828,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -783,7 +852,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -807,12 +876,15 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
 }
 
+	} finally {
+		FarbeRecursionCheck = null;
+	}
 }
 
 }
