@@ -10,6 +10,8 @@ package org.eclipse.xtext.ui.editor;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.ITextSelection;
@@ -134,7 +136,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		IResource resource = getResource();
 		if (resource != null && isEditable() && getModel() != null) {
 			XtextProblemMarkerCreator markerCreator = new XtextProblemMarkerCreator(resource);
-			markerCreator.setProgressMonitor(getProgressMonitor());
+			markerCreator.setProgressMonitor(new NullProgressMonitor());
 			getModel().addModelListener(markerCreator);
 		}
 	}

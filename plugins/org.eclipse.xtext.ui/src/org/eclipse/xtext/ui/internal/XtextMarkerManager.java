@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -63,7 +64,7 @@ public final class XtextMarkerManager {
 	private final static void createMarkerForType(final IResource resource, final Map<String, Object> markerAttributes,
 			IProgressMonitor monitor, final String markerType) {
 		checkResource(resource);
-		run(new WorkspaceModifyOperation() {
+		run(new WorkspaceModifyOperation(ResourcesPlugin.getWorkspace().getRuleFactory().markerRule(resource)) {
 			@Override
 			protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
 					InterruptedException {
@@ -98,7 +99,7 @@ public final class XtextMarkerManager {
 	private static final void clearMarkerForType(final IResource resource, IProgressMonitor monitor,
 			final String markerType) {
 		checkResource(resource);
-		run(new WorkspaceModifyOperation() {
+		run(new WorkspaceModifyOperation(ResourcesPlugin.getWorkspace().getRuleFactory().markerRule(resource)) {
 			@Override
 			protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
 					InterruptedException {

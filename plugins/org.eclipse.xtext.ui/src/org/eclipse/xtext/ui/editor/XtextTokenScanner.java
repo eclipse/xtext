@@ -11,11 +11,14 @@ package org.eclipse.xtext.ui.editor;
 import java.util.Iterator;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -99,8 +102,10 @@ public class XtextTokenScanner implements ITokenScanner {
 
 		Assert.isLegal(document != null);
 		nodeIterator = null;
-		if (Activator.DEBUG_PARSING)
-			System.out.print("Token Scanner: Parsing...");
+		if (Activator.DEBUG_PARSING) {
+			System.out.print("Token Scanner: Parsing Range [" + offset + "," + length + "]...");
+
+		}
 		long start = System.currentTimeMillis();
 
 		// TODO: dependency injection for default element factory in parser
@@ -116,15 +121,22 @@ public class XtextTokenScanner implements ITokenScanner {
 				int documentGrowth = document.getLength() - lastRootNode.getLength();
 				int originalLength = length - documentGrowth;
 				String change = document.get().substring(offset, offset + length);
+				if (Activator.DEBUG_PARSING)
+					System.out.print(" Reparse segment '" + change + "'" + " documentGrowth:" + documentGrowth + " ");
 				parseResult = parser.reparse(lastRootNode, offset, originalLength, change);
+
 			}
 			lastParseResult = parseResult;
 			CompositeNode rootNode = parseResult.getRootNode();
 			if (rootNode != null) {
 				nodeIterator = rootNode.getLeafNodes().iterator();
-				if(lastRootNode != rootNode) {
+				if (lastRootNode != rootNode) {
 					rootNode.eAdapters().add(new NodeContentAdapter());
 				}
+				int length2 = rootNode.getLength();
+				if (length2 != document.getLength())
+					throw new IllegalStateException("Document.length=" + document.getLength() + " rootNode.length="
+							+ length2);
 			}
 			if (Activator.DEBUG_PARSING)
 				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
@@ -132,6 +144,7 @@ public class XtextTokenScanner implements ITokenScanner {
 		catch (Exception e) {
 			CoreLog.logError("Error during parse process in token scanner. "
 					+ (e.getLocalizedMessage() != null ? e.getLocalizedMessage() : ""), e);
+			e.printStackTrace();
 			if (Activator.DEBUG_PARSING)
 				System.err.println("fail!");
 		}
