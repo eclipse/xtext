@@ -133,7 +133,9 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		// Error marker
 		IResource resource = getResource();
 		if (resource != null && isEditable() && getModel() != null) {
-			getModel().addModelListener(new XtextProblemMarkerCreator(resource));
+			XtextProblemMarkerCreator markerCreator = new XtextProblemMarkerCreator(resource);
+			markerCreator.setProgressMonitor(getProgressMonitor());
+			getModel().addModelListener(markerCreator);
 		}
 	}
 
