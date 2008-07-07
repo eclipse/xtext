@@ -93,8 +93,9 @@ public class FoldingUpdater {
 
 	@SuppressWarnings("unchecked")
 	private void startAnnotationCreation() {
+		newAnnotations.clear();
 		for (AbstractNode node : ((CompositeNode) model.getParseTreeRootNode()).getChildren()) {
-			//TODO createProjectionAnnotations(node);
+			createProjectionAnnotations(node);
 		}
 		Set<Annotation> oldAnnotations = new HashSet<Annotation>();
 		for (Iterator<Annotation> iter = annotationModel.getAnnotationIterator(); iter.hasNext();) {
@@ -102,7 +103,7 @@ public class FoldingUpdater {
 		}
 		annotationModel.removeAllAnnotations();
 		Annotation[] oldAnnotationsArray = oldAnnotations.toArray(new Annotation[] {});
-		annotationModel.replaceAnnotations(null, newAnnotations);
+		annotationModel.replaceAnnotations(oldAnnotationsArray, newAnnotations);
 	}
 
 	/**
@@ -122,10 +123,12 @@ public class FoldingUpdater {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if (node instanceof CompositeNode) {
-				for (AbstractNode child : ((CompositeNode) node).getChildren()) {
-					createProjectionAnnotations(child);
-				}
+		}
+		// Single line composite nodes for example kind (Test 2), can own
+		// multiline LeafNodes e.g. Multiline Comments
+		if (node instanceof CompositeNode) {
+			for (AbstractNode child : ((CompositeNode) node).getChildren()) {
+				createProjectionAnnotations(child);
 			}
 		}
 	}
@@ -135,6 +138,8 @@ public class FoldingUpdater {
 			int start = document.getLineInformation(firstLeafNode.getLine() - 1).getOffset();
 			IRegion lastLine = document.getLineInformation(node.endLine() - 1);
 			int end = lastLine.getLength() + lastLine.getOffset();
+			if (end < document.getLength())
+				end++;
 			int length = end - start;
 			return new Position(start, length);
 		}
@@ -145,12 +150,12 @@ public class FoldingUpdater {
 	}
 
 	private AbstractNode firstLeafNode(AbstractNode node) {
-		if (node instanceof LeafNode) {
+		if (node instanceof LeafNode && !isWhiteSpace((LeafNode) node)) {
 			return node;
 		}
 		for (EObject child : node.eContents()) {
 			if (child instanceof LeafNode) {
-				if (!isWhiteSpace((LeafNode) child)) {
+				if (!((LeafNode) child).isHidden()) {
 					return (AbstractNode) child;
 				}
 			}
@@ -164,7 +169,15 @@ public class FoldingUpdater {
 
 	private boolean isMultiLine(AbstractNode node, AbstractNode firstLeafNode) {
 		if (firstLeafNode != null) {
-			int lines = node.endLine() - firstLeafNode.getLine();
+			int endLine = node.endLine();
+			// SL_Comment case
+			if (node instanceof LeafNode) {
+				LeafNode leafNode = (LeafNode) node;
+				if (leafNode.getText().endsWith("\n") || leafNode.getText().endsWith("\r")) {
+					endLine--;
+				}
+			}
+			int lines = endLine - firstLeafNode.getLine();
 			return (lines > 0) && (node.getLength() > lines + 1);
 		}
 		return false;
