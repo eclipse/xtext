@@ -26,12 +26,18 @@ public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstruct
 		} else 		if (ruleToCall.equals("TerminalRule")) {
 			proceedTerminalRule(getDescr(obj),callback);
 		} else {
-			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+			throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
 		}
 	}
 
 	
+private String EntryRuleRecursionCheck = null;
 protected void proceedEntryRule(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(EntryRuleRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		EntryRuleRecursionCheck = s;
 	
 /* xtext::Assignment */ 
 
@@ -53,6 +59,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAbstractRule(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -65,9 +75,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		EntryRuleRecursionCheck = null;
+	}
 }
 
+private String AbstractRuleRecursionCheck = null;
 protected void proceedAbstractRule(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(AbstractRuleRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		AbstractRuleRecursionCheck = s;
 	
 /* xtext::Alternatives */ 
 {
@@ -88,6 +107,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedChoiceRule(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -112,6 +132,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedReducibleRule(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -122,15 +143,24 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
 }
 
+	} finally {
+		AbstractRuleRecursionCheck = null;
+	}
 }
 
+private String ChoiceRuleRecursionCheck = null;
 protected void proceedChoiceRule(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(ChoiceRuleRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		ChoiceRuleRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -197,9 +227,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		ChoiceRuleRecursionCheck = null;
+	}
 }
 
+private String ReducibleRuleRecursionCheck = null;
 protected void proceedReducibleRule(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(ReducibleRuleRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		ReducibleRuleRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -230,6 +269,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedTerminalRule(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -269,6 +312,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedTerminalRule(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -290,9 +334,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		ReducibleRuleRecursionCheck = null;
+	}
 }
 
+private String TerminalRuleRecursionCheck = null;
 protected void proceedTerminalRule(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(TerminalRuleRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		TerminalRuleRecursionCheck = s;
 	
 /* xtext::Assignment */ 
 {
@@ -313,6 +366,9 @@ protected void proceedTerminalRule(InstanceDescription obj,IParseTreeConstructor
 
 }
 
+	} finally {
+		TerminalRuleRecursionCheck = null;
+	}
 }
 
 }
