@@ -19,7 +19,7 @@ import org.eclipse.xtext.ui.service.IPreferenceStore;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class BuildInPreferenceStore implements IPreferenceStore {
+public class BuiltInPreferenceStore implements IPreferenceStore {
 	/* Tokens */
 	private static final String COLOR_SUFIX = "color";
 	private static final String BACKGROUNDCOLOR_SUFIX = "bgColor";

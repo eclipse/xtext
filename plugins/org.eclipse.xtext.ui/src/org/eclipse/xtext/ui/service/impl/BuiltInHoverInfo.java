@@ -36,7 +36,7 @@ import org.eclipse.xtext.ui.service.ILabelProvider;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class BuildInHoverInfo implements IHoverInfo {
+public class BuiltInHoverInfo implements IHoverInfo {
 	private ILabelProvider labelProvider;
 
 	public void createContents(EObject input, IContentContainer contentContainer) {
