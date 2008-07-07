@@ -8,7 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -167,6 +169,17 @@ public class InstanceDescription implements IInstanceDescription {
 			return ((Collection<?>)described.eGet(feature2)).size()-featureConsumedCounter.get(feature);
 		}
 		return 1-featureConsumedCounter.get(feature); 
+	}
+	
+	public String uniqueStateString() {
+		StringBuffer buff = new StringBuffer();
+		buff.append(getDelegate());
+		List<String> features = new ArrayList<String>(featureConsumedCounter.keySet());
+		Collections.sort(features);
+		for (String f : features) {
+			buff.append(f).append(featureConsumedCounter.get(f));
+		}
+		return buff.toString();
 	}
 
 }

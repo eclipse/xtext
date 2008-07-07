@@ -10,6 +10,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 
@@ -26,8 +27,8 @@ public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 		Map<AbstractElement, Integer> map = null;
 		if (numberOfOccurences.containsKey(node)) {
 			map = numberOfOccurences.get(node);
-		} 
-		if (map==null)
+		}
+		if (map == null)
 			map = new HashMap<AbstractElement, Integer>();
 		Integer n = 0;
 		if (map.containsKey(ele)) {
@@ -37,7 +38,7 @@ public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 		n++;
 		map.put(ele, n);
 		numberOfOccurences.put(node, map);
-		return n-1;
+		return n - 1;
 	}
 
 	@Override
@@ -60,17 +61,17 @@ public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 	@Override
 	protected void before(IInstanceDescription desc, AbstractElement element) {
 		CompositeNode rootNode = getEntryNode(desc);
-		
-		iterateChldren(element, rootNode);
+		if (rootNode != null)
+			iterateChldren(element, rootNode);
 	}
-	// private String debugInfo(EObject grammarElement) {
-	// return grammarElement.toString();
-	// }
 
 	private CompositeNode getEntryNode(IInstanceDescription desc) {
-		CompositeNode rootNode = NodeUtil.getNodeAdapter(desc.getDelegate()).getParserNode();
+		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(desc.getDelegate());
+		if (nodeAdapter == null)
+			return null;
+		CompositeNode rootNode = nodeAdapter.getParserNode();
 		// go up normalizable rulecalls
-		while (rootNode.getParent()!=null && rootNode.getParent().getElement()==null)
+		while (rootNode.getParent() != null && rootNode.getParent().getElement() == null)
 			rootNode = rootNode.getParent();
 		return rootNode;
 	}
@@ -79,7 +80,7 @@ public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 		EList<AbstractNode> leafNodes = rootNode.getChildren();
 		boolean consumingMode = false;
 		int skip = getOccurencesAndIncrease(rootNode, element);
-		for (int x = leafNodes.size()-1; x>=0;x--) {
+		for (int x = leafNodes.size() - 1; x >= 0; x--) {
 			AbstractNode an = leafNodes.get(x);
 			if (an instanceof LeafNode) {
 				LeafNode n = (LeafNode) an;
@@ -89,7 +90,7 @@ public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 					prepend(n.getText());
 				}
 				if (n.getGrammarElement() == element) {
-					if (skip==0) {
+					if (skip == 0) {
 						consumingMode = true;
 					} else {
 						skip--;
@@ -97,12 +98,12 @@ public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 				}
 			} else if (an instanceof CompositeNode) {
 				CompositeNode cn = (CompositeNode) an;
-				if (rootNode.getElement()==null) {
+				if (rootNode.getElement() == null) {
 					iterateChldren(element, cn);
 				}
 			}
-//			if (n.getGrammarElement() == element)
-//				log.info(debugInfo(n.getGrammarElement()));
+			// if (n.getGrammarElement() == element)
+			// log.info(debugInfo(n.getGrammarElement()));
 		}
 	}
 
