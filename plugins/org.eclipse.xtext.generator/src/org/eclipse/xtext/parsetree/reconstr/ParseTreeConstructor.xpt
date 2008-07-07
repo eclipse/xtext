@@ -42,7 +42,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 		if (ruleToCall.equals("«pr.name»")) {
 			«pr.methodName()»(getDescr(obj),callback);
 		}«ENDFOREACH» else {
-			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+			throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
 		}
 	}
 
@@ -52,8 +52,17 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 «ENDDEFINE»
 
 «DEFINE method FOR ParserRule»
+private String «name»RecursionCheck = null;
 protected void «methodName()»(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(«name»RecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		«name»RecursionCheck = s;
 	«EXPAND statement FOR this.alternatives»
+	} finally {
+		«name»RecursionCheck = null;
+	}
 }
 «ENDDEFINE»
 
@@ -96,6 +105,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			«calledRule().methodName()»(val,callback);
+			«IF isAssigned()»
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			«ENDIF»
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -123,7 +136,7 @@ new Predicate(obj) {
 	«ENDFOREACH-»
 	«IF !isOptional()»
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	«ENDIF»
 «ENDDEFINE»
