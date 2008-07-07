@@ -65,7 +65,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn="org.eclipse.xtext.ui.service.impl.BuildInHoverInfo:org.eclipse.xtext.ui.service.IHoverInfo"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.xtext.ui.service.impl.BuiltInHoverInfo:org.eclipse.xtext.ui.service.IHoverInfo"/>
                </appinfo>
             </annotation>
          </attribute>

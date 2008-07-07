@@ -12,6 +12,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
+import org.eclipse.xtext.ui.internal.CoreLog;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -26,9 +27,14 @@ public class XtextEditorModelReconcileStrategy implements IReconcilingStrategy {
 	}
 
 	public void reconcile(IRegion partition) {
-		IEditorModel model = editorModelProvider.getModel();
-		if (model != null) {
-			model.reconcile(partition);
+		try {
+			IEditorModel model = editorModelProvider.getModel();
+			if (model != null) {
+				model.reconcile(partition);
+			}
+		}
+		catch (Throwable t) {
+			CoreLog.logError(t);
 		}
 	}
 
