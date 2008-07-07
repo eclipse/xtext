@@ -15,7 +15,6 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
 import org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
-import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -38,8 +37,7 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		IParser parser = getServiceForDefaultLanguage(IParser.class);
-		IParseResult pr = parser.parse(new StringInputStream(MODEL));
+		IParseResult pr = getModelForDefaultLanguage(MODEL);
 		ttds = new BuiltInTokenTypeDef();
 		leafNodes = pr.getRootNode().getLeafNodes();
 	}
