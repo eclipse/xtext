@@ -9,9 +9,10 @@
 package org.eclipse.xtext.ui.editor.model;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.DocumentEvent;
@@ -52,6 +53,12 @@ public class XtextEditorModel implements IEditorModel {
 		this.languageDescriptor = languageDescriptor;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getLanguageDescriptor
+	 * ()
+	 */
 	public ILanguageDescriptor getLanguageDescriptor() {
 		return languageDescriptor;
 	}
@@ -66,6 +73,11 @@ public class XtextEditorModel implements IEditorModel {
 		return this;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#reconcile()
+	 */
 	public void reconcile(IRegion region) {
 		synchronized (dirtyLock) {
 			if (!dirty) {
@@ -82,19 +94,16 @@ public class XtextEditorModel implements IEditorModel {
 
 	private void internalReconcile(IRegion region) {
 		try {
-			if (Activator.DEBUG_PARSING) {
+			if (Activator.DEBUG_PARSING)
 				System.out.print("EditorModel Parsing...");
-			}
 			long start = System.currentTimeMillis();
 			resource.update(region.getOffset(), document.get(region.getOffset(), region.getLength()));
-			if (Activator.DEBUG_PARSING) {
+			if (Activator.DEBUG_PARSING)
 				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
-			}
 		}
 		catch (Exception e) {
-			if (Activator.DEBUG_PARSING) {
+			if (Activator.DEBUG_PARSING)
 				System.out.println("fail!");
-			}
 			e.printStackTrace();
 		}
 		finally {
@@ -112,6 +121,11 @@ public class XtextEditorModel implements IEditorModel {
 		return resource.getParseResult().getRootNode();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getAstRoot()
+	 */
 	public EObject getAstRoot() {
 		return resource.getParseResult().getRootASTElement();
 	}
@@ -119,6 +133,11 @@ public class XtextEditorModel implements IEditorModel {
 	protected boolean dirty = true;
 	protected Object dirtyLock = new Object();
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#install()
+	 */
 	public void install() {
 		dirtyListener = new IDocumentListener() {
 
@@ -134,21 +153,42 @@ public class XtextEditorModel implements IEditorModel {
 		document.addDocumentListener(dirtyListener);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#uninstall()
+	 */
 	public void uninstall() {
 		document.removeDocumentListener(dirtyListener);
 	}
 
-	private List<IXtextEditorModelListener> xtextModelListeners = new ArrayList<IXtextEditorModelListener>();
+	private Set<IXtextEditorModelListener> xtextModelListeners = new HashSet<IXtextEditorModelListener>();
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#addModelListener(
+	 * org.eclipse.xtext.ui.editor.model.IXtextEditorModelListener)
+	 */
 	public void addModelListener(IXtextEditorModelListener listener) {
 		synchronized (xtextModelListeners) {
-			xtextModelListeners.add(listener);
+			if (!xtextModelListeners.add(listener)) {
+				throw new IllegalStateException("Can't add editor model listener because it already exists.");
+			}
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#removeModelListener
+	 * (org.eclipse.xtext.ui.editor.model.IXtextEditorModelListener)
+	 */
 	public void removeModelListener(IXtextEditorModelListener listener) {
 		synchronized (xtextModelListeners) {
-			xtextModelListeners.remove(listener);
+			if (!xtextModelListeners.remove(listener)) {
+				throw new IllegalStateException("Can't remove editor model listener because it does not exist.");
+			}
 		}
 	}
 
@@ -157,16 +197,26 @@ public class XtextEditorModel implements IEditorModel {
 		synchronized (xtextModelListeners) {
 			iterator = xtextModelListeners.iterator();
 		}
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			IXtextEditorModelListener listener = iterator.next();
 			listener.modelChanged(event);
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getErrors()
+	 */
 	public List<SyntaxError> getSyntaxErrors() {
 		return resource.getParseResult().getParseErrors();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#hasErrors()
+	 */
 	public boolean hasErrors() {
 		return getSyntaxErrors() != null && !getSyntaxErrors().isEmpty();
 	}
