@@ -9,28 +9,23 @@
 
 package org.eclipse.xtext;
 
-import static org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer;
-import static org.eclipse.xtext.EcoreUtil2.eAllContentsAsList;
-import static org.eclipse.xtext.EcoreUtil2.getAllContentsOfType;
-import static org.eclipse.xtext.EcoreUtil2.getContainerOfType;
-import static org.eclipse.xtext.EcoreUtil2.typeSelect;
+import static org.eclipse.emf.ecore.util.EcoreUtil.*;
+import static org.eclipse.xtext.EcoreUtil2.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.builtin.IXtextBuiltin;
-import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.callbacks.SimpleSerializingCallback;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
-import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.util.XtextSwitch;
 
 /**
  * 
@@ -136,15 +131,22 @@ public class GrammarUtil {
 	    }
 		String id = getSuperGrammarId(_this);
 		if (id == null) {
-			id = IXtextBuiltin.ID;
+			return new XtextBuiltinGrammarAccess().getGrammar(); 
 		}
-		ILanguageDescriptor descriptor = LanguageDescriptorFactory.get(id);
-		if (descriptor == null)
-			throw new IllegalStateException("Language '"+id+"' has not been set up properly");
-		IGrammarAccess service = ServiceRegistry.getService(descriptor, IGrammarAccess.class);
-		if (service == null)
-			throw new IllegalStateException("Language '"+id+"' has not been set up properly");
-		Grammar superGrammar = service.getGrammar();
+		String classpathURI = "classpath:/"+id.replace('.', '/')+".xtext";
+//		ILanguageDescriptor descriptor = LanguageDescriptorFactory.get(id);
+//		if (descriptor == null)
+//			throw new IllegalStateException("Language '"+id+"' has not been set up properly");
+//		IGrammarAccess service = ServiceRegistry.getService(descriptor, IGrammarAccess.class);
+//		if (service == null)
+//			throw new IllegalStateException("Language '"+id+"' has not been set up properly");
+		Resource resource = _this.eResource().getResourceSet().getResource(URI.createURI(classpathURI),true);
+		try {
+			resource.load(null);
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
+		Grammar superGrammar = (Grammar) resource.getContents().get(0);
 		return superGrammar == _this ? null : superGrammar;
 	}
 	
