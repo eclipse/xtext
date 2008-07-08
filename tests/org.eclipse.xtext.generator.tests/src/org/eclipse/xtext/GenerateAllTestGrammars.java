@@ -14,6 +14,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.dummy.DummyLanguage;
+import org.eclipse.xtext.grammarinheritance.AbstractTestLanguage;
+import org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage;
 import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest;
 import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest;
 import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest;
@@ -34,10 +36,11 @@ public class GenerateAllTestGrammars {
 	private static String path = "./src-gen";
 	private static Log log = LogFactory.getLog(GenerateAllTestGrammars.class);
 
-	public final static Class<?>[] testclasses = new Class[] { XtextGrammarTest.class, MetamodelRefTest.class,
+	public final static Class<?>[] testclasses = new Class[] { AbstractTestLanguage.class,ConcreteTestLanguage.class,XtextGrammarTest.class, MetamodelRefTest.class,
 			DummyLanguage.class, TestLanguage.class, SimpleReconstrTest.class, ComplexReconstrTest.class,
 			LexerLanguage.class, SimpleExpressions.class, ActionTestLanguage.class, OptionalEmptyLanguage.class,
-			ReferenceGrammar.class, LookaheadLanguage.class };// MultiGenMMTest.
+			ReferenceGrammar.class, LookaheadLanguage.class 
+	};// MultiGenMMTest.
 																// class
 
 	public static void main(String[] args) throws Exception {
