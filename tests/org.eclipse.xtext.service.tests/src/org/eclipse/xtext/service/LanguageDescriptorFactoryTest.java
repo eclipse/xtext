@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.service.examples;
+package org.eclipse.xtext.service;
 
 import junit.framework.TestCase;
 
