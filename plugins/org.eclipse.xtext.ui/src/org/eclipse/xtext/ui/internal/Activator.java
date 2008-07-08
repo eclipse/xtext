@@ -25,6 +25,8 @@ public class Activator extends AbstractUIPlugin {
 
 	// TODO extract DEBUG handling to separate class!
 	public static final boolean DEBUGING = Platform.inDebugMode();
+	public static final boolean DEBUG_FOLDING = DEBUGING
+			&& "true".equalsIgnoreCase(Platform.getDebugOption("org.eclipse.xtext.ui/debug/services/folding"));
 	public static final boolean DEBUG_PROPOSALS_PROVIDER = DEBUGING
 			&& "true".equalsIgnoreCase(Platform.getDebugOption("org.eclipse.xtext.ui/debug/services/proposalProvider"));
 	public static final boolean DEBUG_PARSING = DEBUGING

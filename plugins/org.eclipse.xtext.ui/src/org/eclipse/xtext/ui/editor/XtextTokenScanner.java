@@ -11,14 +11,11 @@ package org.eclipse.xtext.ui.editor;
 import java.util.Iterator;
 
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -122,7 +119,8 @@ public class XtextTokenScanner implements ITokenScanner {
 				int originalLength = length - documentGrowth;
 				String change = document.get().substring(offset, offset + length);
 				if (Activator.DEBUG_PARSING)
-					System.out.print(" Reparse segment '" + change + "'" + " documentGrowth:" + documentGrowth + " ");
+					System.out.print(" Reparse segment '" + change.replaceAll("\n", "\\\\n") + "'" + " documentGrowth:"
+							+ documentGrowth + " ");
 				parseResult = parser.reparse(lastRootNode, offset, originalLength, change);
 
 			}
@@ -133,6 +131,8 @@ public class XtextTokenScanner implements ITokenScanner {
 				if (lastRootNode != rootNode) {
 					rootNode.eAdapters().add(new NodeContentAdapter());
 				}
+				// TODO remove this check if BUG # is fixed and a test is
+				// created
 				int length2 = rootNode.getLength();
 				if (length2 != document.getLength())
 					throw new IllegalStateException("Document.length=" + document.getLength() + " rootNode.length="

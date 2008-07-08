@@ -24,6 +24,7 @@ import org.eclipse.xtext.service.LanguageDescriptorFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.CoreLog;
+import org.eclipse.xtext.ui.service.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.service.IFormatter;
 import org.eclipse.xtext.ui.service.IHoverInfo;
 import org.eclipse.xtext.ui.service.ILabelProvider;
@@ -60,6 +61,7 @@ public class LanguageServiceActivator {
 		serviceMap.put("outlineProvider", IOutlineProvider.class);
 		serviceMap.put("formatter", IFormatter.class);
 		serviceMap.put("hoverInfo", IHoverInfo.class);
+		serviceMap.put("foldingStructureProvider", IFoldingStructureProvider.class);
 	}
 
 	public static void activateServices() {

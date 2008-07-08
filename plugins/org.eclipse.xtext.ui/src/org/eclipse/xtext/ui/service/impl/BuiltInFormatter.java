@@ -19,8 +19,13 @@ import org.eclipse.xtext.ui.editor.utils.EditorModelUtil;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.service.IFormatter;
+import org.eclipse.xtext.ui.util.GrammarConstants;
 
 /**
+ * To be subclassed. Use should overwrite after(LeafNode), before(LeafNode) and
+ * shouldIndent(AbstractNode). The user also can use nextNode(LeafNode) and
+ * previousNode() to navigate.
+ * 
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
@@ -41,7 +46,7 @@ public class BuiltInFormatter implements IFormatter {
 	private StringBuilder indentSB;
 	private IRegion formattingRegion;
 
-	public void format(IEditorModel editorModel, IDocument document, IRegion region) {
+	public final void format(IEditorModel editorModel, IDocument document, IRegion region) {
 		indentSB = new StringBuilder();
 		lastLeafNode = null;
 		rootNode = editorModel.getParseTreeRootNode();
@@ -241,7 +246,7 @@ public class BuiltInFormatter implements IFormatter {
 
 	private boolean isWhiteSpace(LeafNode ln) {
 		return ln.isHidden() && ln.getGrammarElement() instanceof LexerRule
-				&& "WS".equals(((LexerRule) ln.getGrammarElement()).getName());
+				&& GrammarConstants.LEXER_RULE_WHITESPACE.equals(((LexerRule) ln.getGrammarElement()).getName());
 	}
 
 }

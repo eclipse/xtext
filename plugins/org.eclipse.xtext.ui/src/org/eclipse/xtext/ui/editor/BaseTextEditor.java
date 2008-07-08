@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.editor;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.Action;
@@ -52,6 +51,7 @@ import org.eclipse.xtext.ui.editor.model.XtextDocumentProviderFactory;
 import org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.CoreLog;
+import org.eclipse.xtext.ui.service.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.service.IPreferenceStore;
 
 /**
@@ -263,7 +263,6 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		setAction("Format", action); //$NON-NLS-1$
 		markAsStateDependentAction("Format", true); //$NON-NLS-1$
 		markAsSelectionDependentAction("Format", true); //$NON-NLS-1$
-
 	}
 
 	/*
@@ -298,17 +297,27 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(), getSharedColors());
 		projectionSupport.addSummarizableAnnotationType("org.eclipse.ui.workbench.texteditor.warning"); //$NON-NLS-1$
 		projectionSupport.install();
-		projectionViewer.doOperation(ProjectionViewer.TOGGLE);
 
 		// folding stuff
-		foldingSupport = new FoldingUpdater();
-		foldingSupport.bind(getModel(), projectionViewer);
+		IFoldingStructureProvider foldingProvider = ServiceRegistry.getService(languageDescriptor,
+				IFoldingStructureProvider.class);
+		if (foldingProvider != null) {
+			projectionViewer.doOperation(ProjectionViewer.TOGGLE);
+			foldingSupport = new FoldingUpdater(foldingProvider);
+			foldingSupport.bind(getModel(), projectionViewer);
+		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.ui.editors.text.TextEditor#dispose()
+	 */
 	@Override
 	public void dispose() {
 		super.dispose();
 		projectionSupport.dispose();
-		foldingSupport.unbind();
+		if (foldingSupport != null)
+			foldingSupport.unbind();
 	}
 }

@@ -6,16 +6,16 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.util;
+package org.eclipse.xtext.ui.service;
+
+import org.eclipse.jface.text.source.projection.ProjectionViewer;
+import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.xtext.ui.editor.model.IEditorModel;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class GrammarConstants {
-	public static final String LEXER_RULE_ID = "ID";
-	public static final String LEXER_RULE_INT = "INT";
-	public static final String LEXER_RULE_STRING = "STRING";
-	public static final String LEXER_RULE_WHITESPACE = "WS";
-	public static final String LEXER_RULE_MLCOMMENT = "ML_COMMENT";
+public interface IFoldingStructureProvider extends ILanguageService {
+	void updateFoldingStructure(IEditorModel model, ProjectionViewer projectionViewer);
 }

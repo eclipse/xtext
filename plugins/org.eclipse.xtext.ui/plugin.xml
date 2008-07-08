@@ -17,6 +17,7 @@
    <extension-point id="labelProvider" name="Xtext Label Provider" schema="schema/labelProvider.exsd"/>
    <extension-point id="formatter" name="Xtext Formatter" schema="schema/formatter.exsd"/>
    <extension-point id="hoverInfo" name="Xtext Hover Info" schema="schema/hoverInfo.exsd"/>
+   <extension-point id="foldingStructureProvider" name="Xtext Folding Structure Provider" schema="schema/foldingStructureProvider.exsd"/>
    <extension
          id="org.eclipse.xtext.ui.problemmarker"
          name="Xtext Editor Problem Marker"
@@ -134,5 +135,12 @@
             class="org.eclipse.xtext.ui.service.impl.BuiltInHoverInfo"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </hoverInfo>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.foldingStructureProvider">
+      <foldingStructureProvider
+            class="org.eclipse.xtext.ui.service.impl.BuiltInFoldingStructureProvider"
+            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
+      </foldingStructureProvider>
    </extension>
 </plugin>

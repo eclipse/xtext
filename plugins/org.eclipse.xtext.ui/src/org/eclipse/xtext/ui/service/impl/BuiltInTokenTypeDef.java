@@ -64,7 +64,8 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 			@Override
 			public boolean match(LeafNode node) {
 				if (node.getGrammarElement() instanceof LexerRule) {
-					return "ML_COMMENT".equals(((LexerRule) node.getGrammarElement()).getName());
+					return GrammarConstants.LEXER_RULE_MLCOMMENT.equals(((LexerRule) node.getGrammarElement())
+							.getName());
 				}
 				return false;
 			}
@@ -91,7 +92,7 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 			@Override
 			public boolean match(LeafNode node) {
 				if (node.getGrammarElement() instanceof RuleCall) {
-					return  GrammarConstants.LEXER_RULE_STRING.equals(((RuleCall) node.getGrammarElement()).getName());
+					return GrammarConstants.LEXER_RULE_STRING.equals(((RuleCall) node.getGrammarElement()).getName());
 				}
 				return false;
 			}
