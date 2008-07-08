@@ -12,6 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -23,10 +25,12 @@ import org.eclipse.xtext.XtextStandaloneSetup;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class DoBootstrapping {
+public class GenerateXtextGrammars {
 	private static final String uiPath = "../org.eclipse.xtext.xtext.ui_gen";
 
 	public static void main(String[] args) throws Exception {
+		EcorePackage.eINSTANCE.eClass();
+		EcorePackage.eINSTANCE.getNsURI();
 		XtextStandaloneSetup.doSetup();
 		String srcGenPath = "../org.eclipse.xtext/src-gen";
 		String filename = "../org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext";
@@ -38,10 +42,9 @@ public class DoBootstrapping {
 		System.out.println("loading " + filename);
 		XtextStandaloneSetup.doSetup();
 
+		GeneratorFacade.cleanFolder(srcGenPath);
 		generate(srcGenPath, filename, languageName, languageNamespace);
-
-		// generate(srcGenPath, builtinFilename, builtinlanguageName,
-		// builtinlanguageNamespace);
+		generate(srcGenPath, builtinFilename, builtinlanguageName, builtinlanguageNamespace);
 	}
 
 	private static void generate(String srcGenPath, String filename, String languageName, String languageNamespace)
@@ -50,7 +53,6 @@ public class DoBootstrapping {
 		Resource resource = rs.createResource(URI.createURI(filename));
 		resource.load(null);
 		Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
-		GeneratorFacade.cleanFolder(srcGenPath);
 		GeneratorFacade.generate(grammarModel, srcGenPath, uiPath, "xtext", "xtext2");
 	}
 }

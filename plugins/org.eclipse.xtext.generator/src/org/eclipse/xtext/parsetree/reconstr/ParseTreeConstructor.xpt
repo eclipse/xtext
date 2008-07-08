@@ -30,15 +30,12 @@ package «genClassFQName.toJavaPackage()»;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.parser.GenericEcoreElementFactory;
-import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 
 public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructor {
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
-		«FOREACH grammar().parserRules AS pr SEPARATOR ' else '-»
+		«FOREACH grammar().allParserRules() AS pr SEPARATOR ' else '-»
 		if (ruleToCall.equals("«pr.name»")) {
 			«pr.methodName()»(getDescr(obj),callback);
 		}«ENDFOREACH» else {
@@ -46,7 +43,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 		}
 	}
 
-	«EXPAND method FOREACH grammar().parserRules»
+	«EXPAND method FOREACH grammar().allParserRules()»
 }
 «ENDFILE»
 «ENDDEFINE»
