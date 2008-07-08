@@ -7,9 +7,6 @@ package org.eclipse.xtext.dummy.parsetree.reconstr;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.parser.GenericEcoreElementFactory;
-import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 
 public class DummyLanguageParseTreeConstructor extends AbstractParseTreeConstructor {

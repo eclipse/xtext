@@ -1,0 +1,325 @@
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g 2008-07-08 10:01:30
+
+package org.eclipse.xtext.grammarinheritance.parser.internal; 
+
+import java.io.InputStream;
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
+import org.eclipse.xtext.parsetree.*;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+
+
+import org.antlr.runtime.*;
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
+
+public class InternalConcreteTestLanguageParser extends AbstractAntlrParser {
+    public static final String[] tokenNames = new String[] {
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_REAL", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_LEXER_BODY", "RULE_ANY_OTHER", "'model'", "':'", "'element'"
+    };
+    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ID=5;
+    public static final int RULE_WS=10;
+    public static final int EOF=-1;
+    public static final int RULE_INT=6;
+    public static final int RULE_STRING=7;
+    public static final int RULE_REAL=4;
+    public static final int RULE_ANY_OTHER=12;
+    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_LEXER_BODY=11;
+
+        public InternalConcreteTestLanguageParser(TokenStream input) {
+            super(input);
+        }
+        
+
+    public String[] getTokenNames() { return tokenNames; }
+    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g"; }
+
+
+     
+        public InternalConcreteTestLanguageParser(TokenStream input, IAstFactory factory, Grammar g) {
+            this(input);
+            this.factory = factory;
+    		grammar = g;
+        }
+        
+        @Override
+        protected InputStream getTokenFile() {
+        	ClassLoader classLoader = InternalConcreteTestLanguageParser.class.getClassLoader();
+        	return classLoader.getResourceAsStream("org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.tokens");
+        }
+        
+        @Override
+        protected String getFirstRuleName() {
+        	return "ConcreteParserRule";	
+       	} 
+
+
+
+    // $ANTLR start entryRuleConcreteParserRule
+    // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:63:1: entryRuleConcreteParserRule returns [EObject current=null] : iv_ruleConcreteParserRule= ruleConcreteParserRule EOF ;
+    public final EObject entryRuleConcreteParserRule() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleConcreteParserRule = null;
+
+
+        try {
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:63:60: (iv_ruleConcreteParserRule= ruleConcreteParserRule EOF )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:64:2: iv_ruleConcreteParserRule= ruleConcreteParserRule EOF
+            {
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); 
+            pushFollow(FOLLOW_ruleConcreteParserRule_in_entryRuleConcreteParserRule71);
+            iv_ruleConcreteParserRule=ruleConcreteParserRule();
+            _fsp--;
+
+             current =iv_ruleConcreteParserRule; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleConcreteParserRule81); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end entryRuleConcreteParserRule
+
+
+    // $ANTLR start ruleConcreteParserRule
+    // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:71:1: ruleConcreteParserRule returns [EObject current=null] : ( ( ( 'model' (lv_magicNumber= RULE_REAL ) ) ':' ) (lv_elements= ruleInheritedParserRule )* ) ;
+    public final EObject ruleConcreteParserRule() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_magicNumber=null;
+        EObject lv_elements = null;
+
+
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+        try {
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:73:33: ( ( ( ( 'model' (lv_magicNumber= RULE_REAL ) ) ':' ) (lv_elements= ruleInheritedParserRule )* ) )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:74:1: ( ( ( 'model' (lv_magicNumber= RULE_REAL ) ) ':' ) (lv_elements= ruleInheritedParserRule )* )
+            {
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:74:1: ( ( ( 'model' (lv_magicNumber= RULE_REAL ) ) ':' ) (lv_elements= ruleInheritedParserRule )* )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:74:2: ( ( 'model' (lv_magicNumber= RULE_REAL ) ) ':' ) (lv_elements= ruleInheritedParserRule )*
+            {
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:74:2: ( ( 'model' (lv_magicNumber= RULE_REAL ) ) ':' )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:74:3: ( 'model' (lv_magicNumber= RULE_REAL ) ) ':'
+            {
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:74:3: ( 'model' (lv_magicNumber= RULE_REAL ) )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:74:4: 'model' (lv_magicNumber= RULE_REAL )
+            {
+            match(input,13,FOLLOW_13_in_ruleConcreteParserRule117); 
+
+                    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:78:1: (lv_magicNumber= RULE_REAL )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:79:5: lv_magicNumber= RULE_REAL
+            {
+            lv_magicNumber=(Token)input.LT(1);
+            match(input,RULE_REAL,FOLLOW_RULE_REAL_in_ruleConcreteParserRule134); 
+             
+                createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "magicNumber"); 
+                
+
+                    if (current==null) {
+                        current = factory.create("ConcreteParserRule");
+                        associateNodeWithAstElement(currentNode, current);
+                    }
+                    
+                    factory.set(current, "magicNumber", lv_magicNumber,"REAL");
+                    
+                     
+
+            }
+
+
+            }
+
+            match(input,14,FOLLOW_14_in_ruleConcreteParserRule152); 
+
+                    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                
+
+            }
+
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:97:2: (lv_elements= ruleInheritedParserRule )*
+            loop1:
+            do {
+                int alt1=2;
+                int LA1_0 = input.LA(1);
+
+                if ( (LA1_0==15) ) {
+                    alt1=1;
+                }
+
+
+                switch (alt1) {
+            	case 1 :
+            	    // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:99:5: lv_elements= ruleInheritedParserRule
+            	    {
+            	     
+            	            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	        
+            	    pushFollow(FOLLOW_ruleInheritedParserRule_in_ruleConcreteParserRule181);
+            	    lv_elements=ruleInheritedParserRule();
+            	    _fsp--;
+
+
+            	            currentNode = currentNode.getParent();
+            	            if (current==null) {
+            	                current = factory.create("ConcreteParserRule");
+            	                associateNodeWithAstElement(currentNode, current);
+            	            }
+            	            
+            	            factory.add(current, "elements", lv_elements,null);
+            	            
+            	             
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop1;
+                }
+            } while (true);
+
+
+            }
+
+
+            }
+
+             resetLookahead(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end ruleConcreteParserRule
+
+
+    // $ANTLR start entryRuleInheritedParserRule
+    // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:118:1: entryRuleInheritedParserRule returns [EObject current=null] : iv_ruleInheritedParserRule= ruleInheritedParserRule EOF ;
+    public final EObject entryRuleInheritedParserRule() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleInheritedParserRule = null;
+
+
+        try {
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:118:61: (iv_ruleInheritedParserRule= ruleInheritedParserRule EOF )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:119:2: iv_ruleInheritedParserRule= ruleInheritedParserRule EOF
+            {
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); 
+            pushFollow(FOLLOW_ruleInheritedParserRule_in_entryRuleInheritedParserRule218);
+            iv_ruleInheritedParserRule=ruleInheritedParserRule();
+            _fsp--;
+
+             current =iv_ruleInheritedParserRule; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInheritedParserRule228); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end entryRuleInheritedParserRule
+
+
+    // $ANTLR start ruleInheritedParserRule
+    // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:126:1: ruleInheritedParserRule returns [EObject current=null] : ( 'element' (lv_name= RULE_ID ) ) ;
+    public final EObject ruleInheritedParserRule() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_name=null;
+
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+        try {
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:128:33: ( ( 'element' (lv_name= RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:129:1: ( 'element' (lv_name= RULE_ID ) )
+            {
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:129:1: ( 'element' (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:129:2: 'element' (lv_name= RULE_ID )
+            {
+            match(input,15,FOLLOW_15_in_ruleInheritedParserRule262); 
+
+                    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@parserRules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+                
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:133:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:134:5: lv_name= RULE_ID
+            {
+            lv_name=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInheritedParserRule279); 
+             
+                createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                
+
+                    if (current==null) {
+                        current = factory.create("mm::Element");
+                        associateNodeWithAstElement(currentNode, current);
+                    }
+                    
+                    factory.set(current, "name", lv_name,"ID");
+                    
+                     
+
+            }
+
+
+            }
+
+
+            }
+
+             resetLookahead(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end ruleInheritedParserRule
+
+
+ 
+
+    public static final BitSet FOLLOW_ruleConcreteParserRule_in_entryRuleConcreteParserRule71 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleConcreteParserRule81 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleConcreteParserRule117 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_REAL_in_ruleConcreteParserRule134 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleConcreteParserRule152 = new BitSet(new long[]{0x0000000000008002L});
+    public static final BitSet FOLLOW_ruleInheritedParserRule_in_ruleConcreteParserRule181 = new BitSet(new long[]{0x0000000000008002L});
+    public static final BitSet FOLLOW_ruleInheritedParserRule_in_entryRuleInheritedParserRule218 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInheritedParserRule228 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleInheritedParserRule262 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleInheritedParserRule279 = new BitSet(new long[]{0x0000000000000002L});
+
+}

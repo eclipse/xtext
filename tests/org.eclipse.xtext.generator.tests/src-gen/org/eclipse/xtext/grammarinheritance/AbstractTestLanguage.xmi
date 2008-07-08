@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext" abstract="true">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>grammarinheritance</idElements>
+  <idElements>AbstractTestLanguage</idElements>
+  <parserRules name="InheritedParserRule">
+    <type name="Element" alias="mm"/>
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Keyword" value="element"/>
+      <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+        <terminal xsi:type="xtext:RuleCall" name="ID"/>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
+  <lexerRules name="REAL" body="RULE_INT '.' RULE_INT">
+    <type name="EDouble" alias="ecore"/>
+  </lexerRules>
+  <lexerRules name="ID" body="('^')?('a'..'z'|'A'..'Z'|'&#xf6;'|'&#xe4;'|'&#xfc;'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*"/>
+  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="mm" uri="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore"/>
+</xtext:Grammar>
