@@ -103,7 +103,7 @@ public abstract class AbstractAntlrParser extends Parser {
 	}
 
 	private EObject getGrammarElement(String grammarElementID) {
-		return grammar.eResource().getResourceSet().getEObject(URI.createURI(grammarElementID),true);
+		return grammar.eResource().getResourceSet().getEObject(URI.createURI(grammarElementID), true);
 	}
 
 	private Map<Integer, String> antlrTypeToLexerName = null;
@@ -169,9 +169,9 @@ public abstract class AbstractAntlrParser extends Parser {
 		leafNode.setHidden(isHidden);
 		if (isSemanticChannel(token))
 			appendError(leafNode);
-		if(token.getType() == Token.INVALID_TOKEN_TYPE) {
+		if (token.getType() == Token.INVALID_TOKEN_TYPE) {
 			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
-			String lexerErrorMessage = ((XtextTokenStream)input).getLexerErrorMessage(token);
+			String lexerErrorMessage = ((XtextTokenStream) input).getLexerErrorMessage(token);
 			error.setMessage(lexerErrorMessage);
 			leafNode.setSyntaxError(error);
 		}
@@ -354,7 +354,7 @@ public abstract class AbstractAntlrParser extends Parser {
 
 		for (Token deferredLookaheadToken : deferredLookaheadMap.keySet()) {
 			List<CompositeNode> nodesDecidingOnToken = deferredLookaheadMap.get(deferredLookaheadToken);
-			while(nodesDecidingOnToken.indexOf(source) != -1) {
+			while (nodesDecidingOnToken.indexOf(source) != -1) {
 				nodesDecidingOnToken.set(nodesDecidingOnToken.indexOf(source), target);
 			}
 		}
@@ -370,8 +370,12 @@ public abstract class AbstractAntlrParser extends Parser {
 	 */
 	@Override
 	public void match(IntStream input, int ttype, BitSet follow) throws RecognitionException {
+		XtextTokenStream xtextTokenStream = (XtextTokenStream) input;
+		int numLookaheadBeforeMatch = xtextTokenStream.getLookaheadTokens().size();
 		super.match(input, ttype, follow);
-		((XtextTokenStream) input).removeLastLookaheadToken();
+		if (xtextTokenStream.getLookaheadTokens().size() > numLookaheadBeforeMatch) {
+			xtextTokenStream.removeLastLookaheadToken();
+		}
 	}
 
 	protected InputStream getTokenFile() {

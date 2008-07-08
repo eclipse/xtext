@@ -170,8 +170,6 @@ public class PartialParsingUtil {
 
 		boolean lookaheadChanged = false;
 		for (CompositeNode node : nodesEnclosingRegion) {
-			// EList<LeafNode> parentsLookaheadNodes = ((CompositeNode)
-			// node.getNode()).getLookaheadLeafNodes();
 			EList<LeafNode> parentsLookaheadNodes = node.getLookaheadLeafNodes();
 			if (!parentsLookaheadNodes.isEmpty()) {
 				int index = lookaheadNodes.indexOf(parentsLookaheadNodes.get(0));
@@ -189,41 +187,12 @@ public class PartialParsingUtil {
 				if (nodeIsBeforeRegion(lastLookaheadLeafNode, offset)) {
 					// last lookahead token is before changed region
 					// and parent has consumed all current lookahead tokens
-					// NodeUtil.dumpCompositeNodeInfo("Possible entry node: "
-					// , node);
+					 NodeUtil.dumpCompositeNodeInfo("Possible entry node: "
+					 , node);
 					validReplaceRootNodes.add(node);
 					lookaheadChanged = false;
 				}
 			}
-			// List<NodeWithCachedOffset> lookaheadNodes = new
-			// ArrayList<NodeWithCachedOffset>();
-			// int numConsumedLookaheadTokens = 0;
-			// List<CompositeNode> validReplaceRootNodes = new
-			// ArrayList<CompositeNode>();
-			//
-			// for (NodeWithCachedOffset node : nodesEnclosingRegion) {
-			// List<NodeWithCachedOffset> parentsLookaheadNodes =
-			// getParentsLookaheadNodes(node);
-			// if (!parentsLookaheadNodes.isEmpty()) {
-			// mergeLookaheadNodes(lookaheadNodes, parentsLookaheadNodes);
-			// }
-			// if (((CompositeNode) node.getNode()).getLookaheadConsumed() > 0)
-			// {
-			// // parent has consumed lookahead tokens.
-			// numConsumedLookaheadTokens += ((CompositeNode)
-			// node.getNode()).getLookaheadConsumed();
-			// if (numConsumedLookaheadTokens == lookaheadNodes.size()) {
-			// // parent has consumed all current lookahead tokens
-			// NodeWithCachedOffset leafNode =
-			// lookaheadNodes.get(numConsumedLookaheadTokens - 1);
-			// if (nodeIsBeforeRegion(leafNode, offset)) {
-			// // last lookahead token is before changed region
-			// //NodeUtil.dumpCompositeNodeInfo("Possible entry node: "
-			// // , node);
-			// validReplaceRootNodes.add((CompositeNode) node.getNode());
-			// }
-			// }
-			// }
 		}
 		return validReplaceRootNodes;
 	}
