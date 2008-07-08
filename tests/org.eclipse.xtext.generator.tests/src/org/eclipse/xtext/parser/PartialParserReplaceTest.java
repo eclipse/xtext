@@ -12,6 +12,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
 import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.testlanguages.LookaheadLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
@@ -26,16 +27,13 @@ public class PartialParserReplaceTest extends AbstractPartialParserTest {
 		with(SimpleExpressionsStandaloneSetup.class);
 		String model = "(a+b+c)*(c/d)";
 		replaceAndReparse(model, 2, 2, "+hugo+egon", "(a+hugo+egon+c)");
-//TODO repair
-//		replaceAndReparse(model, 8, 5, "egon", "egon");
+		replaceAndReparse(model, 8, 5, "egon", "egon");
 		replaceAndReparse(model, 1, 2, "", "(b+c)");
 		replaceAndReparse(model, 6, 3, "*", "(a+b+c*c/d)");
-//		replaceAndReparse(model, 3, 1, "(x+y+z)", "(x+y+z)");
-		
-		replaceAndReparse("a b", 1,1,"+","a+b");
-		// TODO: breaking case
-//		replaceAndReparse(model, 3, 1, "x)+(b", "x)+(b");
-		
+		replaceAndReparse(model, 3, 1, "(x+y+z)", "(x+y+z)");
+		replaceAndReparse("a b", 1, 1, "+", "a+b");
+		replaceAndReparse(model, 3, 1, "x)+(b", "x)+(b");
+
 	}
 
 	public void testLookahead() throws Exception {
@@ -49,16 +47,18 @@ public class PartialParserReplaceTest extends AbstractPartialParserTest {
 	private void replaceAndReparse(String model, int offset, int length, String change, String expectedReparseRegion)
 			throws Exception {
 		CompositeNode rootNode = getRootNode(model);
+		if (DEBUG) {
+			NodeUtil.dumpCompositeNodes("", rootNode);
+		}
 		PartialParsingPointers parsingPointers = PartialParsingUtil.calculatePartialParsingPointers(rootNode, offset,
 				length);
 		String reparseRegion = PartialParsingUtil.insertChangeIntoReplaceRegion(parsingPointers
 				.getDefaultReplaceRootNode(), offset, length, change);
 		assertEquals(expectedReparseRegion, reparseRegion);
-		IParseResult partiallyReparse = PartialParsingUtil.reparse(getParser(), rootNode, offset, length,
-				change);
+		IParseResult partiallyReparse = PartialParsingUtil.reparse(getParser(), rootNode, offset, length, change);
 		EList<SyntaxError> errors = partiallyReparse.getRootNode().allSyntaxErrors();
 		for (SyntaxError syntaxError : errors) {
-			System.out.println(model+offset+length+change+":"+syntaxError.getMessage());
+			System.out.println(model + offset + length + change + ":" + syntaxError.getMessage());
 		}
 		assertTrue(partiallyReparse.getRootNode().allSyntaxErrors().isEmpty());
 		String expectedReparseModel = model.substring(0, offset) + change + model.substring(offset + length);
