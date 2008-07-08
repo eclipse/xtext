@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 
 public class EcoreUtil2 extends EcoreUtil {
     private static Log log = LogFactory.getLog(EcoreUtil2.class);
@@ -59,18 +60,22 @@ public class EcoreUtil2 extends EcoreUtil {
         return result;
     }
 
+    /**
+     * Uses CurrentThread Classloader! runtime only!
+     */
     public static final EPackage loadEPackage(String uriAsString) {
         if (EPackage.Registry.INSTANCE.containsKey(uriAsString))
             return EPackage.Registry.INSTANCE.getEPackage(uriAsString);
         URI uri = URI.createURI(uriAsString);
+        uri = new ClassloaderClasspathUriResolver().resolve(null, uri);
         Resource resource = new ResourceSetImpl().getResource(uri, true);
         for (TreeIterator<EObject> allContents = resource.getAllContents(); allContents.hasNext();) {
             EObject next = allContents.next();
             if (next instanceof EPackage) {
                 EPackage ePackage = (EPackage) next;
-                if (ePackage.getNsURI() != null && ePackage.getNsURI().equals(uriAsString)) {
+//                if (ePackage.getNsURI() != null && ePackage.getNsURI().equals(uriAsString)) {
                     return ePackage;
-                }
+//                }
             }
         }
         log.error("Could not load EPackage with nsURI" + uriAsString);

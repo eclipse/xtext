@@ -52,6 +52,8 @@ public class ClassloaderClasspathUriResolver implements IClasspathUriResolver {
             pathAsString = pathAsString.substring(1);
         }
         URL resource = classLoader.getResource(pathAsString);
+        if (resource==null)
+        	throw new IllegalStateException("Couldn't find resource on classpath. URI was '"+classpathUri+"'");
         URI fileUri = URI.createURI(resource.toURI().toString());
         return fileUri;
     }
