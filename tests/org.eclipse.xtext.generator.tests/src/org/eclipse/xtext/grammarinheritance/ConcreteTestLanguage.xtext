@@ -1,0 +1,7 @@
+language org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage extends org.eclipse.xtext.grammarinheritance.AbstractTestLanguage
+
+generate foo "http://holla"
+
+ConcreteParserRule :
+	'model' magicNumber=REAL ':' (elements+=InheritedParserRule)*;
+	

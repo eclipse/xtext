@@ -1,0 +1,12 @@
+abstract language org.eclipse.xtext.grammarinheritance.AbstractTestLanguage
+
+import "classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore" as mm
+
+InheritedParserRule returns mm::Element :
+	'element' name=ID;
+
+lexing:
+
+REAL returns ecore::EDouble : "RULE_INT '.' RULE_INT";
+
+ID  		: "('^')?('a'..'z'|'A'..'Z'|'ö'|'ä'|'ü'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*";
