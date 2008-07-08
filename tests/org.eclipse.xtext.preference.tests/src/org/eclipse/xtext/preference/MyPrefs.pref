@@ -1,0 +1,19 @@
+commonprefix org.eclipse.my.Language
+
+page Language {
+	#?flagOne	#'Switch this one off!'
+	##?extraStuffActivated {
+	  #['a','b','c'] options
+	}
+}
+
+page Language.Editor {
+    # "Syntax Coloring" {
+    #masterdetail [
+	    master1 "The first master" {
+	    	#?aFlag #'Foo bar'
+	    	#Color:backgroundColor
+	    }
+    ]
+    }
+}
