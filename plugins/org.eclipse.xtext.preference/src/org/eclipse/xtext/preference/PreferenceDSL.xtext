@@ -1,0 +1,62 @@
+language org.eclipse.xtext.Preference
+
+generate pref "http://www.eclipse.org/xtext/preference"
+
+Description :
+  'commonprefix' idPrefix=QName
+  pages+=Page
+;
+
+Page :
+  'page' name=QName 
+  panel=Panel
+;
+
+Panel :
+  '{'
+	rows+=Row*      
+  '}'
+;
+
+Row :
+	entries+=Entry* ';';
+	
+Entry :
+	colspan+='#'+ widget=Widget;
+
+Widget :
+  Label|Text|Check|Combo|Panel|NamedPanel|CheckedPanel;
+  
+NamedPanel :
+	name=STRING '{'
+	   rows+=Row*      
+    '}'
+;
+
+CheckedPanel :
+	?name=ID '{'
+	   rows+=Row*
+	'}'
+;
+
+MasterDetail :
+    [=Panel
+    
+    
+    ]
+;
+  
+Label :
+  value=STRING;
+  
+Text :
+  name=ID;
+  
+Check :
+  '?'name=ID;
+  
+Combo :
+  '['alts+=STRING(','alts+=STRING)']' name=ID;  
+
+QName :
+   element+=ID (element+='.' element+=ID)*;

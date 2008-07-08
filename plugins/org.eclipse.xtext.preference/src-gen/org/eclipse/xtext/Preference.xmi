@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>Preference</idElements>
+  <parserRules name="Description">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="commonprefix"/>
+        <abstractTokens xsi:type="xtext:Assignment" feature="idPrefix" operator="=">
+          <terminal xsi:type="xtext:RuleCall" name="QName"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" feature="pages" operator="+=">
+        <terminal xsi:type="xtext:RuleCall" name="Page"/>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
+  <parserRules name="Page">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="page"/>
+        <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" name="QName"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" feature="panel" operator="=">
+        <terminal xsi:type="xtext:RuleCall" name="Panel"/>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
+  <parserRules name="Panel">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="rows" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" name="Row"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="Row">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="entries" operator="+=">
+        <terminal xsi:type="xtext:RuleCall" name="Entry"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value=";"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="Entry">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="+" feature="colspan" operator="+=">
+        <terminal xsi:type="xtext:Keyword" value="#"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" feature="widget" operator="=">
+        <terminal xsi:type="xtext:RuleCall" name="Widget"/>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
+  <parserRules name="Widget">
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Alternatives">
+              <groups xsi:type="xtext:Alternatives">
+                <groups xsi:type="xtext:RuleCall" name="Label"/>
+                <groups xsi:type="xtext:RuleCall" name="Text"/>
+              </groups>
+              <groups xsi:type="xtext:RuleCall" name="Check"/>
+            </groups>
+            <groups xsi:type="xtext:RuleCall" name="Combo"/>
+          </groups>
+          <groups xsi:type="xtext:RuleCall" name="Panel"/>
+        </groups>
+        <groups xsi:type="xtext:RuleCall" name="NamedPanel"/>
+      </groups>
+      <groups xsi:type="xtext:RuleCall" name="CheckedPanel"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="NamedPanel">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+            <terminal xsi:type="xtext:RuleCall" name="STRING"/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="rows" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" name="Row"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="CheckedPanel">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+              <terminal xsi:type="xtext:RuleCall" name="ID"/>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="rows" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" name="Row"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="Label">
+    <alternatives xsi:type="xtext:Assignment" feature="value" operator="=">
+      <terminal xsi:type="xtext:RuleCall" name="STRING"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="Text">
+    <alternatives xsi:type="xtext:Assignment" feature="name" operator="=">
+      <terminal xsi:type="xtext:RuleCall" name="ID"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="Check">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Keyword" value="?"/>
+      <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+        <terminal xsi:type="xtext:RuleCall" name="ID"/>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
+  <parserRules name="Combo">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="["/>
+            <abstractTokens xsi:type="xtext:Assignment" feature="alts" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" name="STRING"/>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value=","/>
+            <abstractTokens xsi:type="xtext:Assignment" feature="alts" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" name="STRING"/>
+            </abstractTokens>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Keyword" value="]"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+        <terminal xsi:type="xtext:RuleCall" name="ID"/>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
+  <parserRules name="QName">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Assignment" feature="element" operator="+=">
+        <terminal xsi:type="xtext:RuleCall" name="ID"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Group" cardinality="*">
+        <abstractTokens xsi:type="xtext:Assignment" feature="element" operator="+=">
+          <terminal xsi:type="xtext:Keyword" value="."/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="element" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" name="ID"/>
+        </abstractTokens>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="pref" nsURI="http://www.eclipse.org/xtext/preference"/>
+</xtext:Grammar>
