@@ -6,16 +6,25 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.util;
+package org.eclipse.xtext.ui.editor;
+
+import org.eclipse.jface.text.source.projection.ProjectionAnnotation;
+import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class GrammarConstants {
-	public static final String LEXER_RULE_ID = "ID";
-	public static final String LEXER_RULE_INT = "INT";
-	public static final String LEXER_RULE_STRING = "STRING";
-	public static final String LEXER_RULE_WHITESPACE = "WS";
-	public static final String LEXER_RULE_MLCOMMENT = "ML_COMMENT";
+public class XtextProjectionAnnotation extends ProjectionAnnotation {
+
+	private AbstractNode node;
+
+	public XtextProjectionAnnotation(AbstractNode node) {
+		this.node = node;
+
+	}
+
+	public AbstractNode getNode() {
+		return node;
+	}
 }
