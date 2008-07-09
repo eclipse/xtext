@@ -20,6 +20,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ISynchronizable;
+import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.resource.XtextResource;
@@ -30,202 +31,162 @@ import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Peter Friese - Initial contribution and API
- * 
  */
 public class XtextEditorModel implements IEditorModel {
 
-	private final IDocument document;
-	private IDocumentListener dirtyListener;
-	private final ILanguageDescriptor languageDescriptor;
-	private XtextResource resource;
+    private final IDocument document;
+    private IDocumentListener dirtyListener;
+    private final ILanguageDescriptor languageDescriptor;
+    private XtextResource resource;
 
-	public XtextEditorModel(XtextResource resource, IDocument document, ILanguageDescriptor languageDescriptor) {
-		this.document = document;
-		this.resource = resource;
-		if (resource.getParseResult() == null) {
-			try {
-				resource.load(new StringInputStream(document.get()), null);
-			}
-			catch (IOException e) {
-				CoreLog.logError(e);
-			}
-		}
-		this.languageDescriptor = languageDescriptor;
-	}
+    public XtextEditorModel(XtextResource resource, IDocument document, ILanguageDescriptor languageDescriptor) {
+        this.document = document;
+        this.resource = resource;
+        if (resource.getParseResult() == null) {
+            try {
+                resource.load(new StringInputStream(document.get()), null);
+            }
+            catch (IOException e) {
+                CoreLog.logError(e);
+            }
+        }
+        this.languageDescriptor = languageDescriptor;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getLanguageDescriptor
-	 * ()
-	 */
-	public ILanguageDescriptor getLanguageDescriptor() {
-		return languageDescriptor;
-	}
+    public ILanguageDescriptor getLanguageDescriptor() {
+        return languageDescriptor;
+    }
 
-	private Object getLockObject() {
-		if (document instanceof ISynchronizable) {
-			Object lock = ((ISynchronizable) document).getLockObject();
-			if (lock != null) {
-				return lock;
-			}
-		}
-		return this;
-	}
+    private Object getLockObject() {
+        if (document instanceof ISynchronizable) {
+            Object lock = ((ISynchronizable) document).getLockObject();
+            if (lock != null) {
+                return lock;
+            }
+        }
+        return this;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#reconcile()
-	 */
-	public void reconcile(IRegion region) {
-		synchronized (dirtyLock) {
-			if (!dirty) {
-				return;
-			}
-			else {
-				dirty = false;
-			}
-		}
-		synchronized (getLockObject()) {
-			internalReconcile(region);
-		}
-	}
+    public void reconcile(IRegion region) {
+        synchronized (dirtyLock) {
+            if (!dirty) {
+                return;
+            }
+            else {
+                dirty = false;
+            }
+        }
+        synchronized (getLockObject()) {
+            internalReconcile(region);
+        }
+    }
 
-	private void internalReconcile(IRegion region) {
-		try {
-			if (Activator.DEBUG_PARSING)
-				System.out.print("EditorModel Parsing...");
-			long start = System.currentTimeMillis();
-			resource.update(region.getOffset(), document.get(region.getOffset(), region.getLength()));
-			if (Activator.DEBUG_PARSING)
-				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
-		}
-		catch (Exception e) {
-			if (Activator.DEBUG_PARSING)
-				System.out.println("fail!");
-			e.printStackTrace();
-		}
-		finally {
-			notifyModelListeners(new XtextEditorModelChangeEvent(this));
-		}
-	}
+    private void internalReconcile(IRegion region) {
+        try {
+            if (Activator.DEBUG_PARSING)
+                System.out.print("EditorModel Parsing...");
+            long start = System.currentTimeMillis();
+            resource.update(region.getOffset(), document.get(region.getOffset(), region.getLength()));
+            if (Activator.DEBUG_PARSING)
+                System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
+        }
+        catch (Exception e) {
+            if (Activator.DEBUG_PARSING)
+                System.out.println("fail!");
+            e.printStackTrace();
+        }
+        finally {
+            notifyModelListeners(new XtextEditorModelChangeEvent(this));
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getParseTreeRootNode
-	 * ()
-	 */
-	public AbstractNode getParseTreeRootNode() {
-		return resource.getParseResult().getRootNode();
-	}
+    public AbstractNode getParseTreeRootNode() {
+        return resource.getParseResult().getRootNode();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getAstRoot()
-	 */
-	public EObject getAstRoot() {
-		return resource.getParseResult().getRootASTElement();
-	}
+    public AbstractNode getParseTreeRootNode(boolean reconcile) {
+        if (reconcile) {
+            if (document != null) {
+                reconcile(new Region(0, document.getLength()));
+            }
+        }
+        return getParseTreeRootNode();
+    }
 
-	protected boolean dirty = true;
-	protected Object dirtyLock = new Object();
+    public EObject getAstRoot() {
+        return resource.getParseResult().getRootASTElement();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#install()
-	 */
-	public void install() {
-		dirtyListener = new IDocumentListener() {
+    public EObject getAstRoot(boolean reconcile) {
+        if (reconcile) {
+            if (document != null) {
+                reconcile(new Region(0, document.getLength()));
+            }
+        }
+        return getAstRoot();
+    }
 
-			public void documentAboutToBeChanged(DocumentEvent event) {
-				synchronized (dirtyLock) {
-					dirty = true;
-				}
-			}
+    protected boolean dirty = true;
+    protected Object dirtyLock = new Object();
 
-			public void documentChanged(DocumentEvent event) {
-			}
-		};
-		document.addDocumentListener(dirtyListener);
-	}
+    public void install() {
+        dirtyListener = new IDocumentListener() {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#uninstall()
-	 */
-	public void uninstall() {
-		document.removeDocumentListener(dirtyListener);
-	}
+            public void documentAboutToBeChanged(DocumentEvent event) {
+                synchronized (dirtyLock) {
+                    dirty = true;
+                }
+            }
 
-	private Set<IXtextEditorModelListener> xtextModelListeners = new HashSet<IXtextEditorModelListener>();
+            public void documentChanged(DocumentEvent event) {
+            }
+        };
+        document.addDocumentListener(dirtyListener);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#addModelListener(
-	 * org.eclipse.xtext.ui.editor.model.IXtextEditorModelListener)
-	 */
-	public void addModelListener(IXtextEditorModelListener listener) {
-		synchronized (xtextModelListeners) {
-			if (!xtextModelListeners.add(listener)) {
-				throw new IllegalStateException("Can't add editor model listener because it already exists.");
-			}
-		}
-	}
+    public void uninstall() {
+        document.removeDocumentListener(dirtyListener);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#removeModelListener
-	 * (org.eclipse.xtext.ui.editor.model.IXtextEditorModelListener)
-	 */
-	public void removeModelListener(IXtextEditorModelListener listener) {
-		synchronized (xtextModelListeners) {
-			if (!xtextModelListeners.remove(listener)) {
-				throw new IllegalStateException("Can't remove editor model listener because it does not exist.");
-			}
-		}
-	}
+    private Set<IXtextEditorModelListener> xtextModelListeners = new HashSet<IXtextEditorModelListener>();
 
-	private void notifyModelListeners(XtextEditorModelChangeEvent event) {
-		Iterator<IXtextEditorModelListener> iterator;
-		synchronized (xtextModelListeners) {
-			iterator = xtextModelListeners.iterator();
-		}
-		while (iterator.hasNext()) {
-			IXtextEditorModelListener listener = iterator.next();
-			listener.modelChanged(event);
-		}
-	}
+    public void addModelListener(IXtextEditorModelListener listener) {
+        synchronized (xtextModelListeners) {
+            if (!xtextModelListeners.add(listener)) {
+                throw new IllegalStateException("Can't add editor model listener because it already exists.");
+            }
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#getErrors()
-	 */
-	public List<SyntaxError> getSyntaxErrors() {
-		return resource.getParseResult().getParseErrors();
-	}
+    public void removeModelListener(IXtextEditorModelListener listener) {
+        synchronized (xtextModelListeners) {
+            if (!xtextModelListeners.remove(listener)) {
+                throw new IllegalStateException("Can't remove editor model listener because it does not exist.");
+            }
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.editor.model.IEditorModel#hasErrors()
-	 */
-	public boolean hasErrors() {
-		return getSyntaxErrors() != null && !getSyntaxErrors().isEmpty();
-	}
+    private void notifyModelListeners(XtextEditorModelChangeEvent event) {
+        Iterator<IXtextEditorModelListener> iterator;
+        synchronized (xtextModelListeners) {
+            iterator = xtextModelListeners.iterator();
+        }
+        while (iterator.hasNext()) {
+            IXtextEditorModelListener listener = iterator.next();
+            listener.modelChanged(event);
+        }
+    }
 
-	/**
-	 * @return the resource
-	 */
-	public XtextResource getResource() {
-		return resource;
-	}
+    public List<SyntaxError> getSyntaxErrors() {
+        return resource.getParseResult().getParseErrors();
+    }
+
+    public boolean hasErrors() {
+        return getSyntaxErrors() != null && !getSyntaxErrors().isEmpty();
+    }
+
+    public XtextResource getResource() {
+        return resource;
+    }
 
 }
