@@ -2,8 +2,8 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Service Tests Plug-in
 Bundle-SymbolicName: org.eclipse.xtext.service.tests
+Fragment-Host: org.eclipse.xtext.service;bundle-version="1.0.0"
 Bundle-Version: 1.0.0
 Bundle-Vendor: itemis AG
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.junit;bundle-version="3.8.2",
- org.eclipse.xtext.service;bundle-version="1.0.0"
+Require-Bundle: org.junit;bundle-version="3.8.2"
