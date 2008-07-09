@@ -1,4 +1,4 @@
-language org.eclipse.xtext.Preference
+language org.eclipse.xtext.preference.PreferenceGrammar
 
 generate pref "http://www.eclipse.org/xtext/preference"
 
