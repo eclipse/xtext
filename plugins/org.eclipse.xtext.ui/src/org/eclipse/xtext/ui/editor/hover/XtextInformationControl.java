@@ -3,7 +3,6 @@ package org.eclipse.xtext.ui.editor.hover;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.resource.JFaceResources;
@@ -111,7 +110,7 @@ final class XtextInformationControl extends AbstractInformationControl implement
 			if (length > widthInChar)
 				widthInChar = length;
 		}
-		Point computedSizeConstraints = super.computeSizeConstraints(widthInChar, st.getLineCount() + 1);
+		Point computedSizeConstraints = super.computeSizeConstraints(widthInChar+1, st.getLineCount() + 1);
 		computedSizeConstraints.x = Math.max(computedSizeConstraints.x, MIN_WIDTH);
 		computedSizeConstraints.y = Math.max(computedSizeConstraints.y, MIN_HEIGHT);
 		return computedSizeConstraints;
@@ -134,21 +133,14 @@ final class XtextInformationControl extends AbstractInformationControl implement
 	 * .Object)
 	 */
 	public void setInput(Object input) {
-		if (input instanceof EObject) {
-			EObject eObject = (EObject) input;
-			this.hoverInfo.createContents(eObject, this);
-			// add some actions
-			if (getToolBarManager() != null) {
-				for (IAction action : this.hoverInfo.getHoverActions(eObject)) {
-					getToolBarManager().add(action);
-				}
-				getToolBarManager().update(true);
+		this.hoverInfo.createContents(input, this);
+		// add some actions
+		if (getToolBarManager() != null) {
+			for (IAction action : this.hoverInfo.getHoverActions(input)) {
+				getToolBarManager().add(action);
 			}
+			getToolBarManager().update(true);
 		}
-		else {
-			super.setInformation(input.toString());
-		}
-
 	}
 
 	/*

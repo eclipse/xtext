@@ -75,22 +75,32 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 		emfResource = event.getModel().getResource();
 		// get resource set for grammar validation
 		List<Diagnostic> diagnostics = validateResourceSet(emfResource.getResourceSet());
+		Map<String, List<Map<String, Object>>> markerByType = new HashMap<String, List<Map<String, Object>>>();
+		List<Map<String, Object>> emfMarkers = new ArrayList<Map<String, Object>>();
 		for (Diagnostic diagnostic : diagnostics) {
 			if (!diagnostic.getChildren().isEmpty()) {
 				for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
-					XtextMarkerManager.createEMFMarker(resource, collectMarkerAttributesForDiagnostic(childDiagnostic),
-							monitor);
+					emfMarkers.add(collectMarkerAttributesForDiagnostic(childDiagnostic));
 				}
 			}
 			else {
-				XtextMarkerManager.createEMFMarker(resource, collectMarkerAttributesForDiagnostic(diagnostic), monitor);
+				emfMarkers.add(collectMarkerAttributesForDiagnostic(diagnostic));
 			}
 		}
+		if (!emfMarkers.isEmpty())
+			markerByType.put(Diagnostician.MARKER, emfMarkers);
 		if (event.getModel().hasErrors()) {
+			List<Map<String, Object>> xtextMarkers = new ArrayList<Map<String, Object>>();
+
 			for (SyntaxError error : event.getModel().getSyntaxErrors()) {
-				XtextMarkerManager.createXtextMarker(resource, collectMarkerAttributes(error), monitor);
+				xtextMarkers.add(collectMarkerAttributes(error));
 			}
+			if (!xtextMarkers.isEmpty())
+				markerByType.put(XtextMarkerManager.XTEXT_PARSEERROR_MARKER_TYPE, xtextMarkers);
+
 		}
+		if (!markerByType.isEmpty())
+			XtextMarkerManager.createMarker(resource, markerByType, monitor);
 	}
 
 	private Map<String, Object> collectMarkerAttributesForDiagnostic(Diagnostic diagnostic) {

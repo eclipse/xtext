@@ -61,108 +61,109 @@ import org.eclipse.xtext.ui.service.IPreferenceStore;
  * 
  */
 public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
-    
-    private abstract class AbstractSelectionChangedListener implements ISelectionChangedListener {
 
-        public void install(ISelectionProvider selectionProvider) {
-        	if (selectionProvider != null) {
-        		if (selectionProvider instanceof IPostSelectionProvider) {
-        			IPostSelectionProvider provider = (IPostSelectionProvider) selectionProvider;
-        			provider.addPostSelectionChangedListener(this);
-        		}
-        		else {
-        			selectionProvider.addSelectionChangedListener(this);
-        		}
-        	}
-        }
+	// TODO try to extract member types to top level
+	private abstract class AbstractSelectionChangedListener implements ISelectionChangedListener {
 
-        public void uninstall(ISelectionProvider selectionProvider) {
-            if (selectionProvider != null) {
-                if (selectionProvider instanceof IPostSelectionProvider) {
-                    IPostSelectionProvider provider = (IPostSelectionProvider) selectionProvider;
-                    provider.removePostSelectionChangedListener(this);
-                }
-                else {
-                    selectionProvider.removeSelectionChangedListener(this);
-                }
-            }
-        }
+		public void install(ISelectionProvider selectionProvider) {
+			if (selectionProvider != null) {
+				if (selectionProvider instanceof IPostSelectionProvider) {
+					IPostSelectionProvider provider = (IPostSelectionProvider) selectionProvider;
+					provider.addPostSelectionChangedListener(this);
+				}
+				else {
+					selectionProvider.addSelectionChangedListener(this);
+				}
+			}
+		}
 
-    }
+		public void uninstall(ISelectionProvider selectionProvider) {
+			if (selectionProvider != null) {
+				if (selectionProvider instanceof IPostSelectionProvider) {
+					IPostSelectionProvider provider = (IPostSelectionProvider) selectionProvider;
+					provider.removePostSelectionChangedListener(this);
+				}
+				else {
+					selectionProvider.removeSelectionChangedListener(this);
+				}
+			}
+		}
 
-    private final class OutlineSelectionChangedListener extends AbstractSelectionChangedListener {
-        
-        public void selectionChanged(SelectionChangedEvent event) {
-        	updateSelection(event);
-        }
+	}
 
-        public void updateSelection(SelectionChangedEvent event) {
-            ISelection sel = event.getSelection();
-            if (sel instanceof IStructuredSelection) {
-                IStructuredSelection structuredSelection = (IStructuredSelection) sel;
-                Object firstElement = structuredSelection.getFirstElement();
-                if (firstElement instanceof EObject) {
-                    EObject astNode = (EObject) firstElement;
-                    NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(astNode);
-                    CompositeNode parserNode = nodeAdapter.getParserNode();
-                    int offset = parserNode.getOffset();
-                    getSourceViewer().getTextWidget().setSelection(offset);
-                }
-            }
-        }
-    }
+	private final class OutlineSelectionChangedListener extends AbstractSelectionChangedListener {
 
-    private final class EditorSelectionChangedListener extends AbstractSelectionChangedListener {
+		public void selectionChanged(SelectionChangedEvent event) {
+			updateSelection(event);
+		}
+
+		public void updateSelection(SelectionChangedEvent event) {
+			ISelection sel = event.getSelection();
+			if (sel instanceof IStructuredSelection) {
+				IStructuredSelection structuredSelection = (IStructuredSelection) sel;
+				Object firstElement = structuredSelection.getFirstElement();
+				if (firstElement instanceof EObject) {
+					EObject astNode = (EObject) firstElement;
+					NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(astNode);
+					CompositeNode parserNode = nodeAdapter.getParserNode();
+					int offset = parserNode.getOffset();
+					getSourceViewer().getTextWidget().setSelection(offset);
+				}
+			}
+		}
+	}
+
+	private final class EditorSelectionChangedListener extends AbstractSelectionChangedListener {
 		public void selectionChanged(SelectionChangedEvent event) {
 			handleSelectionChangedSourcePage(event);
 		}
 
-	    protected void handleSelectionChangedSourcePage(SelectionChangedEvent event) {
-	        ISelection selection = event.getSelection();
-	        if (!selection.isEmpty() && selection instanceof ITextSelection) {
+		protected void handleSelectionChangedSourcePage(SelectionChangedEvent event) {
+			ISelection selection = event.getSelection();
+			if (!selection.isEmpty() && selection instanceof ITextSelection) {
 
-	            ITextSelection textSel = (ITextSelection) selection;
+				ITextSelection textSel = (ITextSelection) selection;
 
-	            // Get the current element from the offset
-	            int offset = textSel.getOffset();
+				// Get the current element from the offset
+				int offset = textSel.getOffset();
 
-	            AbstractNode node = ParseTreeUtil.getCurrentNodeByOffset(model.getParseTreeRootNode(), offset);
+				AbstractNode node = ParseTreeUtil.getCurrentNodeByOffset(model.getParseTreeRootNode(), offset);
 
-	            // Synchronize the outline page
-	            synchronizeOutlinePage(node);
-	        }
-	    }
+				// Synchronize the outline page
+				synchronizeOutlinePage(node);
+			}
+		}
 	}
-    
-    public void synchronizeOutlinePage() {
-        int caretOffset = getSourceViewer().getTextWidget().getCaretOffset();
-        AbstractNode currentNode = ParseTreeUtil.getCurrentNodeByOffset(model.getParseTreeRootNode(), caretOffset);
-        synchronizeOutlinePage(currentNode);
-    }
-    
-    private boolean shouldSynchronizeOutlinePage() {
-        return Activator.getDefault().getPreferenceStore().getBoolean("ToggleLinkWithEditorAction.isChecked");
-    }
-    
-    public void synchronizeOutlinePage(AbstractNode node) {
-        ISelection selection = StructuredSelection.EMPTY;
-        
-        if (shouldSynchronizeOutlinePage()) {
-            outlineSelectionChangedListener.uninstall(outlinePage);
-            if (node != null && node instanceof LeafNode) {
-                CompositeNode compositeNode = node.getParent();
-                EObject astElement = NodeUtil.getASTElementForRootNode(compositeNode);
-                if (astElement != null) {
-                    selection = new StructuredSelection(astElement);
-                }
-            }
-            outlinePage.setSelection(selection);
-            outlineSelectionChangedListener.install(outlinePage);
-        }
-    }
-    
+
+	public void synchronizeOutlinePage() {
+		int caretOffset = getSourceViewer().getTextWidget().getCaretOffset();
+		AbstractNode currentNode = ParseTreeUtil.getCurrentNodeByOffset(model.getParseTreeRootNode(), caretOffset);
+		synchronizeOutlinePage(currentNode);
+	}
+
+	private boolean shouldSynchronizeOutlinePage() {
+		return Activator.getDefault().getPreferenceStore().getBoolean("ToggleLinkWithEditorAction.isChecked");
+	}
+
+	public void synchronizeOutlinePage(AbstractNode node) {
+		ISelection selection = StructuredSelection.EMPTY;
+
+		if (shouldSynchronizeOutlinePage()) {
+			outlineSelectionChangedListener.uninstall(outlinePage);
+			if (node != null && node instanceof LeafNode) {
+				CompositeNode compositeNode = node.getParent();
+				EObject astElement = NodeUtil.getASTElementForRootNode(compositeNode);
+				if (astElement != null) {
+					selection = new StructuredSelection(astElement);
+				}
+			}
+			outlinePage.setSelection(selection);
+			outlineSelectionChangedListener.install(outlinePage);
+		}
+	}
+
 	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
-	
+
 	protected boolean selectionSetFromOutline;
 
 	private IEditorModel model;
@@ -176,7 +177,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 
 	private AbstractSelectionChangedListener editorSelectionChangedListener;
 
-    private OutlineSelectionChangedListener outlineSelectionChangedListener;
+	private OutlineSelectionChangedListener outlineSelectionChangedListener;
 
 	@Override
 	public void setInitializationData(IConfigurationElement cfig, String propertyName, Object data) {
@@ -206,13 +207,13 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
-//		
-//		Log log = LogFactory.getLog(Activator.PLUGIN_ID);
-//		
-//		log.info("Initializing editor...");
-//		log.error("Sample error");
-//		log.trace("Sample trace");
-//		
+		//		
+		// Log log = LogFactory.getLog(Activator.PLUGIN_ID);
+		//		
+		// log.info("Initializing editor...");
+		// log.error("Sample error");
+		// log.trace("Sample trace");
+		//		
 		// Error marker
 		IResource resource = getResource();
 		if (resource != null && isEditable() && getModel() != null) {
@@ -262,12 +263,12 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	private IContentOutlinePage getOutlinePage() {
 		if (outlinePage == null) {
 			outlinePage = new XtextContentOutlinePage(this);
-			
+
 			outlineSelectionChangedListener = new OutlineSelectionChangedListener();
 			outlineSelectionChangedListener.install(outlinePage);
 			editorSelectionChangedListener = new EditorSelectionChangedListener();
 			editorSelectionChangedListener.install(getSelectionProvider());
-			
+
 			setOutlinePageInput();
 		}
 		return outlinePage;
@@ -344,7 +345,8 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	@Override
 	public void dispose() {
 		super.dispose();
-		projectionSupport.dispose();
+		if (projectionSupport != null)
+			projectionSupport.dispose();
 		if (foldingSupport != null)
 			foldingSupport.unbind();
 	}

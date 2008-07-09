@@ -68,7 +68,7 @@ public class XtextTextHover extends DefaultTextHover implements ITextHoverExtens
 	 * .jface.text.ITextViewer, org.eclipse.jface.text.IRegion)
 	 */
 	public Object getHoverInfo2(ITextViewer textViewer, IRegion hoverRegion) {
-		return hoverInfo.getHoverInfo(textViewer, hoverRegion.getOffset(), editorModelProvider);
+		return hoverInfo.getHoverInfo(textViewer, hoverRegion, editorModelProvider);
 	}
 
 }
