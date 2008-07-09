@@ -6,6 +6,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.Activator;
+import org.eclipse.xtext.AllTests;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.LexerRule;
@@ -15,6 +17,7 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.ui.util.BundleClasspathUriResolver;
 import org.eclipse.xtext.xtextutil.AbstractType;
 import org.eclipse.xtext.xtextutil.ComplexType;
 import org.eclipse.xtext.xtextutil.Feature;
@@ -99,6 +102,10 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 
 	private XtextResource getResource(String uri) {
 		XtextResourceSet set = new XtextResourceSet();
+		if(AllTests.isPluginContext) {
+			set.setClasspathUriResolver(new BundleClasspathUriResolver());
+			set.setClasspathURIContext(Activator.getDefault());
+		}
 		XtextResource r = (XtextResource) set.getResource(URI.createURI(uri),true);
 		return r;
 	}
