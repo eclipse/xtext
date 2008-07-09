@@ -25,7 +25,9 @@ public abstract class AbstractClasspathUriResolverTests extends TestCase {
 
 	protected void assertResourceLoadable(URI classpathUri, URI normalizedUri,
 			String expectedUri) {
-		assertEquals(expectedUri, normalizedUri.toString());
+		if(expectedUri != null) {
+			assertEquals(expectedUri, normalizedUri.toString());
+		}
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.getResource(normalizedUri, true);
 		assertNotNull("Classpath URI ot registered", resource);
