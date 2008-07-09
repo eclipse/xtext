@@ -144,7 +144,7 @@ public class BundleTestCollector {
 						}
 					}
 				}
-				catch (Exception e) {
+				catch (Throwable e) {
 					System.err.println(e.getMessage());
 				}
 			}
