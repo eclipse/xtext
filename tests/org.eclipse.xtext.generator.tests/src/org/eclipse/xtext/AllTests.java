@@ -20,9 +20,12 @@ import com.rcpquickstart.bundletestcollector.BundleTestCollector;
  */
 public class AllTests {
 
+	public static boolean isPluginContext = false;
+	
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for org.eclipse.xtext");
 		new BundleTestCollector().collectTests(suite, "org.eclipse.xtext.generator.tests", "", "*");
+		isPluginContext = true;
 		return suite;
 	}
 
