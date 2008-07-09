@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ui.internal;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IMarker;
@@ -25,7 +26,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
  * 
  */
 public final class XtextMarkerManager {
-	private static final String XTEXT_PARSEERROR_MARKER_TYPE = Activator.PLUGIN_ID + ".problemmarker";
+	public static final String XTEXT_PARSEERROR_MARKER_TYPE = Activator.PLUGIN_ID + ".problemmarker";
 
 	private XtextMarkerManager() {
 	}
@@ -50,29 +51,14 @@ public final class XtextMarkerManager {
 		}
 	}
 
-	public static final void createXtextMarker(final IResource resource, final Map<String, Object> markerAttributes,
-			IProgressMonitor monitor) {
-		createMarkerForType(resource, markerAttributes, monitor, XTEXT_PARSEERROR_MARKER_TYPE);
-	}
+	private final static void createMarkerForType(final IResource resource,
+			final List<Map<String, Object>> markerAttributes, final String markerType) throws CoreException {
+		for (Map<String, Object> map : markerAttributes) {
+			IMarker marker = resource.createMarker(markerType);
+			map.put(IMarker.LOCATION, resource.getFullPath().toString());
+			marker.setAttributes(map);
+		}
 
-	/**
-	 * @param resource
-	 * @param markerAttributes
-	 * @param monitor
-	 * @param markerType
-	 */
-	private final static void createMarkerForType(final IResource resource, final Map<String, Object> markerAttributes,
-			IProgressMonitor monitor, final String markerType) {
-		checkResource(resource);
-		run(new WorkspaceModifyOperation(ResourcesPlugin.getWorkspace().getRuleFactory().markerRule(resource)) {
-			@Override
-			protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
-					InterruptedException {
-				IMarker marker = resource.createMarker(markerType);
-				markerAttributes.put(IMarker.LOCATION, resource.getFullPath().toString());
-				marker.setAttributes(markerAttributes);
-			}
-		}, monitor);
 	}
 
 	/**
@@ -109,13 +95,24 @@ public final class XtextMarkerManager {
 	}
 
 	/**
+	 * Creates marker by type in one operation
+	 * 
 	 * @param resource
-	 * @param markerAttributes
+	 * @param markerAttributesByType
+	 *            a map contains a List of marker attributes by type
 	 * @param monitor
 	 */
-	public static final void createEMFMarker(IResource resource, Map<String, Object> markerAttributes,
-			IProgressMonitor monitor) {
-		createMarkerForType(resource, markerAttributes, monitor, Diagnostician.MARKER);
+	public static final void createMarker(final IResource resource,
+			final Map<String, List<Map<String, Object>>> markerAttributesByType, IProgressMonitor monitor) {
+		checkResource(resource);
+		run(new WorkspaceModifyOperation(ResourcesPlugin.getWorkspace().getRuleFactory().markerRule(resource)) {
+			@Override
+			protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
+					InterruptedException {
+				for (String markerType : markerAttributesByType.keySet()) {
+					createMarkerForType(resource, markerAttributesByType.get(markerType), markerType);
+				}
+			}
+		}, monitor);
 	}
-
 }

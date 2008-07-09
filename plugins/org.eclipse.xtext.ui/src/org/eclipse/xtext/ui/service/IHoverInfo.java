@@ -10,8 +10,8 @@ package org.eclipse.xtext.ui.service;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
@@ -23,11 +23,11 @@ import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
  * 
  */
 public interface IHoverInfo extends ILanguageService {
-	EObject getHoverInfo(ITextViewer textViewer, int offset, IEditorModelProvider editorModelProvider);
+	Object getHoverInfo(ITextViewer textViewer, IRegion hoverRegion, IEditorModelProvider editorModelProvider);
 
-	void createContents(EObject input, IContentContainer contentContainer);
+	void createContents(Object input, IContentContainer contentContainer);
 
-	List<IAction> getHoverActions(EObject input);
+	List<IAction> getHoverActions(Object input);
 
 	public interface IContentContainer {
 		void appendText(StyledString text);
