@@ -16,7 +16,7 @@ import java.util.List;
 
 import junit.framework.TestSuite;
 
-import org.eclipe.xtext.automated.tests.Activator;
+import org.eclipse.xtext.automated.tests.Activator;
 import org.osgi.framework.Bundle;
 
 
