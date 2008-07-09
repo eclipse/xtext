@@ -137,6 +137,7 @@ public class BundleTestCollector {
 						Method[] declaredMethods = testClass.getDeclaredMethods();
 						for (Method method : declaredMethods) {
 							if (method.getName().startsWith("test") && !Modifier.isStatic(method.getModifiers())) {
+								System.out.println("Adding " + testClass.getSimpleName());
 								testClassesInBundle.add(testClass);
 								break;
 							}

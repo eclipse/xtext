@@ -20,7 +20,8 @@ import com.rcpquickstart.bundletestcollector.BundleTestCollector;
 public class AllCoreTests {
 
 	private static final String[] TEST_BUNDLES = new String[] {
-		"org.eclipse.xtext.generator.tests", "org.eclipse.xtext.service.tests", "org.eclipse.xtext.tests"
+		//"org.eclipse.xtext.generator.tests", "org.eclipse.xtext.service.tests", 
+		"org.eclipse.xtext.tests"
 	};
 	
 	public static Test suite() {
