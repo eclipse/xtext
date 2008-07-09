@@ -40,8 +40,7 @@ import com.rcpquickstart.internal.bundletestcollector.Activator;
  * 	TestSuite suite = new TestSuite(&quot;All Tests&quot;);
  * 
  * 	PluginTestCollector testCollector = new PluginTestCollector();
- * 	testCollector.collectTests(suite, &quot;com.rcpquickstart.&quot;,
- * 			&quot;com.rcpquickstart.mypackage.&quot;, &quot;*Test&quot;);
+ * 	testCollector.collectTests(suite, &quot;com.rcpquickstart.&quot;, &quot;com.rcpquickstart.mypackage.&quot;, &quot;*Test&quot;);
  * 
  * 	return suite;
  * 
@@ -64,28 +63,26 @@ public class BundleTestCollector {
 	 * it searches for classes that subclass the TestCase class.
 	 * 
 	 * @param suite
-	 * 		to which tests should be added
+	 *            to which tests should be added
 	 * @param bundleRoot
-	 * 		root string that a bundle id needs to start with in order for the
-	 * 		bundle to be included in the search
+	 *            root string that a bundle id needs to start with in order for
+	 *            the bundle to be included in the search
 	 * @param packageRoot
-	 * 		root string that a package needs to start with in order for the
-	 * 		package to be included in the search
+	 *            root string that a package needs to start with in order for
+	 *            the package to be included in the search
 	 * @param testClassFilter
-	 * 		filter string that will be used to search for test cases. The filter
-	 * 		applies to the unqualified class name only (not including the
-	 * 		package name). Wildcards are allowed, as defined by the {@link
-	 * 		Activator Bundle#findEntries(String, String, boolean)} method.
+	 *            filter string that will be used to search for test cases. The
+	 *            filter applies to the unqualified class name only (not
+	 *            including the package name). Wildcards are allowed, as defined
+	 *            by the {@link Activator Bundle#findEntries(String, String,
+	 *            boolean)} method.
 	 * @return list of test classes that match the roots and filter passed in
 	 */
-	public void collectTests(TestSuite suite, String bundleRoot,
-			String packageRoot, String testClassFilter) {
+	public void collectTests(TestSuite suite, String bundleRoot, String packageRoot, String testClassFilter) {
 
 		for (Bundle bundle : Activator.getDefault().getBundles()) {
-			if (!isFragment(bundle)
-					&& bundle.getSymbolicName().startsWith(bundleRoot)) {
-				List<Class> testClasses = getTestClasesInBundle(bundle,
-						packageRoot, testClassFilter);
+			if (!isFragment(bundle) && bundle.getSymbolicName().startsWith(bundleRoot)) {
+				List<Class> testClasses = getTestClasesInBundle(bundle, packageRoot, testClassFilter);
 
 				for (Class clazz : testClasses) {
 					suite.addTestSuite(clazz);
@@ -94,61 +91,60 @@ public class BundleTestCollector {
 		}
 	}
 
-	private List<Class> getTestClasesInBundle(Bundle bundle,
-			String packageRoot, String testClassFilter) {
+	private List<Class> getTestClasesInBundle(Bundle bundle, String packageRoot, String testClassFilter) {
 		List<Class> testClassesInBundle = new ArrayList<Class>();
 
-		Enumeration testClassNames = bundle.findEntries(
-				"/", testClassFilter + ".class", true); //$NON-NLS-1$
+		Enumeration testClassNames = bundle.findEntries("/", testClassFilter + ".class", true); //$NON-NLS-1$
 		if (testClassNames != null) {
 			while (testClassNames.hasMoreElements()) {
-
-				/*
-				 * Take relative path produced by findEntries method and convert
-				 * it into a properly formatted class name. The package root is
-				 * used to determine the start of the qualified class name in
-				 * the path.
-				 */
-				String testClassPath = ((URL) testClassNames.nextElement())
-						.getPath();
-				if(testClassPath.startsWith("/bin/")) testClassPath = testClassPath.substring(5);
-				testClassPath = testClassPath.replace('/', '.');
-
-				int packageRootStart = testClassPath.indexOf(packageRoot);
-
-				/* if class does not begin with package root, just ignore it */
-				if (packageRootStart == -1) {
-					continue;
-				}
-
-				String testClassName = testClassPath
-						.substring(packageRootStart);
-				testClassName = testClassName.substring(0, testClassName
-						.length()
-						- ".class".length()); //$NON-NLS-1$
-
-				/* Attempt to load the class using the bundle classloader. */
-				Class testClass = null;
 				try {
-					testClass = bundle.loadClass(testClassName);
-				} catch (ClassNotFoundException e) {
-					throw new RuntimeException("Could not load class: " //$NON-NLS-1$
-							+ testClassName, e);
-				}
+					/*
+					 * Take relative path produced by findEntries method and
+					 * convert it into a properly formatted class name. The
+					 * package root is used to determine the start of the
+					 * qualified class name in the path.
+					 */
+					String testClassPath = ((URL) testClassNames.nextElement()).getPath();
+					if (testClassPath.startsWith("/bin/"))
+						testClassPath = testClassPath.substring(5);
+					testClassPath = testClassPath.replace('/', '.');
 
-				/*
-				 * If the class is not abstract, add it to list
-				 */
-				if (!Modifier.isAbstract(testClass.getModifiers())) {
-					Method[] declaredMethods = testClass.getDeclaredMethods();
-					for (Method method : declaredMethods) {
-						if(method.getName().startsWith("test") && ! Modifier.isStatic(method.getModifiers())) {
-							testClassesInBundle.add(testClass);
-							break;
+					int packageRootStart = testClassPath.indexOf(packageRoot);
+
+					/* if class does not begin with package root, just ignore it */
+					if (packageRootStart == -1) {
+						continue;
+					}
+
+					String testClassName = testClassPath.substring(packageRootStart);
+					testClassName = testClassName.substring(0, testClassName.length() - ".class".length()); //$NON-NLS-1$
+
+					/* Attempt to load the class using the bundle classloader. */
+					Class testClass = null;
+					try {
+						testClass = bundle.loadClass(testClassName);
+					}
+					catch (ClassNotFoundException e) {
+						throw new RuntimeException("Could not load class: " //$NON-NLS-1$
+								+ testClassName, e);
+					}
+
+					/*
+					 * If the class is not abstract, add it to list
+					 */
+					if (!Modifier.isAbstract(testClass.getModifiers())) {
+						Method[] declaredMethods = testClass.getDeclaredMethods();
+						for (Method method : declaredMethods) {
+							if (method.getName().startsWith("test") && !Modifier.isStatic(method.getModifiers())) {
+								testClassesInBundle.add(testClass);
+								break;
+							}
 						}
 					}
 				}
-				
+				catch (Exception e) {
+					System.err.println(e.getMessage());
+				}
 			}
 		}
 		return testClassesInBundle;
