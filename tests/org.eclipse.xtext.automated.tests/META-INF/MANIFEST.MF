@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Tests Plug-in
 Bundle-SymbolicName: org.eclipse.xtext.automated.tests
 Bundle-Version: 1.0.0
-Bundle-Activator: org.eclipe.xtext.automated.tests.Activator
+Bundle-Activator: org.eclipse.xtext.automated.tests.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.junit;bundle-version="3.8.2"

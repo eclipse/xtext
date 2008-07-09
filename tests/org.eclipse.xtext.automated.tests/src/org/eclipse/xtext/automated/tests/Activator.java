@@ -1,4 +1,4 @@
-package org.eclipe.xtext.automated.tests;
+package org.eclipse.xtext.automated.tests;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.Bundle;
