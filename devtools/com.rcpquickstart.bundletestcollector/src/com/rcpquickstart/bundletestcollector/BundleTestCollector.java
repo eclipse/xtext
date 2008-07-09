@@ -20,6 +20,7 @@ import org.osgi.framework.Bundle;
 
 import com.rcpquickstart.internal.bundletestcollector.Activator;
 
+
 /**
  * This class allows you harvest unit tests from resolved bundles based on
  * filters you supply. It can harvest tests from both bundles and fragments, and
