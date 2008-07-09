@@ -19,25 +19,28 @@ import org.eclipse.xtext.service.ILanguageDescriptor;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
+ * @author Peter Friese - Initial contribution and API
  */
 public interface IEditorModel {
+    public abstract List<SyntaxError> getSyntaxErrors();
 
-	public abstract List<SyntaxError> getSyntaxErrors();
+    public abstract boolean hasErrors();
 
-	public abstract boolean hasErrors();
+    public abstract ILanguageDescriptor getLanguageDescriptor();
 
-	public abstract ILanguageDescriptor getLanguageDescriptor();
+    public abstract AbstractNode getParseTreeRootNode();
 
-	public abstract AbstractNode getParseTreeRootNode();
+    public abstract AbstractNode getParseTreeRootNode(boolean reconcile);
 
-	public abstract EObject getAstRoot();
+    public abstract EObject getAstRoot();
 
-	public abstract void addModelListener(IXtextEditorModelListener listener);
+    public abstract EObject getAstRoot(boolean reconcile);
 
-	public abstract void removeModelListener(IXtextEditorModelListener listener);
+    public abstract void addModelListener(IXtextEditorModelListener listener);
 
-	public abstract void reconcile(IRegion partition);
+    public abstract void removeModelListener(IXtextEditorModelListener listener);
 
-	public abstract Resource getResource();
+    public abstract void reconcile(IRegion partition);
+
+    public abstract Resource getResource();
 }
