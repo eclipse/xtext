@@ -29,7 +29,7 @@ public class ToggleLinkWithEditorAction extends Action {
         this.editor = editor;
         setToolTipText("Link with Editor");
         setDescription("Link with active editor");
-         setImageDescriptor(XtextPluginImages.DESC_LINK_WITH_EDITOR);
+        setImageDescriptor(XtextPluginImages.DESC_LINK_WITH_EDITOR);
         setDisabledImageDescriptor(XtextPluginImages.DESC_LINK_WITH_EDITOR_DISABLED);
     }
 
