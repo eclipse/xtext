@@ -53,6 +53,15 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
     public void createControl(Composite parent) {
         super.createControl(parent);
         TreeViewer viewer = getTreeViewer();
+        viewer.setAutoExpandLevel(TreeViewer.ALL_LEVELS);
+        viewer.setUseHashlookup(true);
+        
+        viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+            public void selectionChanged(SelectionChangedEvent event) {
+                firePostSelectionChanged(event.getSelection());
+            }
+        });
+
         XtextModelContentProvider modelContentProvider = new XtextModelContentProvider(xtextBaseEditor);
         viewer.setContentProvider(modelContentProvider);
         viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(new XtextLabelProviderDelegator(ServiceRegistry
