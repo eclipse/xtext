@@ -42,7 +42,10 @@ public class LanguageDescriptorFactory {
 		}
 	}
 
-	protected static void resetInternal() {
+	/** 
+	 * For test purposes only.
+	 */
+	public static void resetInternal() {
 		synchronized (id2descriptorMap) {
 			id2descriptorMap.clear();
 		}

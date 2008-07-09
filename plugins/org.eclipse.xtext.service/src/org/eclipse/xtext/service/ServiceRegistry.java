@@ -262,7 +262,10 @@ public class ServiceRegistry {
         }
     }
 
-	protected static void resetInternal() {
+	/** 
+	 * For test purposes only.
+	 */
+	public static void resetInternal() {
         synchronized (entryMap) {
             entryMap.clear();
             isFrozen = false;
