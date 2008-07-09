@@ -7,6 +7,7 @@
  ******************************************************************************/
 package com.rcpquickstart.bundletestcollector;
 
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.util.ArrayList;
@@ -110,6 +111,7 @@ public class BundleTestCollector {
 				 */
 				String testClassPath = ((URL) testClassNames.nextElement())
 						.getPath();
+				if(testClassPath.startsWith("/bin/")) testClassPath = testClassPath.substring(5);
 				testClassPath = testClassPath.replace('/', '.');
 
 				int packageRootStart = testClassPath.indexOf(packageRoot);
@@ -138,8 +140,15 @@ public class BundleTestCollector {
 				 * If the class is not abstract, add it to list
 				 */
 				if (!Modifier.isAbstract(testClass.getModifiers())) {
-					testClassesInBundle.add(testClass);
+					Method[] declaredMethods = testClass.getDeclaredMethods();
+					for (Method method : declaredMethods) {
+						if(method.getName().startsWith("test") && ! Modifier.isStatic(method.getModifiers())) {
+							testClassesInBundle.add(testClass);
+							break;
+						}
+					}
 				}
+				
 			}
 		}
 		return testClassesInBundle;
