@@ -38,7 +38,6 @@ public class BundleClasspathUriResolver implements IClasspathUriResolver {
             throws MalformedURLException, IOException {
         Path fullPath = new Path(classpathUri.path());
         if (bundle != null) {
-            // TODO try to use FileLocator instead
             String projectRelativePath = "/" + fullPath;
             URL resourceUrl = bundle.getResource(projectRelativePath);
             if (resourceUrl != null) {
