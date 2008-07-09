@@ -11,6 +11,9 @@ package org.eclipse.xtext;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import com.rcpquickstart.bundletestcollector.BundleTestCollector;
+
+
 /**
  * @author Jan Köhnlein - Initial contribution and API
  *
@@ -19,9 +22,7 @@ public class AllTests {
 
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for org.eclipse.xtext");
-		//$JUnit-BEGIN$
-		suite.addTestSuite(XtextGrammarTest.class);
-		//$JUnit-END$
+		new BundleTestCollector().collectTests(suite, "org.eclipse.xtext.generator.tests", "", "*");
 		return suite;
 	}
 
