@@ -132,37 +132,35 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	            synchronizeOutlinePage(node);
 	        }
 	    }
-
-
-	    public void synchronizeOutlinePage() {
-	        int caretOffset = getSourceViewer().getTextWidget().getCaretOffset();
-	        AbstractNode currentNode = ParseTreeUtil.getCurrentNodeByOffset(model.getParseTreeRootNode(), caretOffset);
-	        synchronizeOutlinePage(currentNode);
-	    }
-	    
-	    private boolean shouldSynchronizeOutlinePage() {
-	        return Activator.getDefault().getPreferenceStore().getBoolean("ToggleLinkWithEditorAction.isChecked");
-	    }
-
-	    public void synchronizeOutlinePage(AbstractNode node) {
-	        ISelection selection = StructuredSelection.EMPTY;
-
-	        if (shouldSynchronizeOutlinePage()) {
-	            outlineSelectionChangedListener.uninstall(outlinePage);
-	            if (node != null && node instanceof LeafNode) {
-	                CompositeNode compositeNode = node.getParent();
-	                EObject astElement = NodeUtil.getASTElementForRootNode(compositeNode);
-	                if (astElement != null) {
-	                    selection = new StructuredSelection(astElement);
-	                }
-	            }
-	            outlinePage.setSelection(selection);
-	            outlineSelectionChangedListener.install(outlinePage);
-	        }
-	    }
-
 	}
-
+    
+    public void synchronizeOutlinePage() {
+        int caretOffset = getSourceViewer().getTextWidget().getCaretOffset();
+        AbstractNode currentNode = ParseTreeUtil.getCurrentNodeByOffset(model.getParseTreeRootNode(), caretOffset);
+        synchronizeOutlinePage(currentNode);
+    }
+    
+    private boolean shouldSynchronizeOutlinePage() {
+        return Activator.getDefault().getPreferenceStore().getBoolean("ToggleLinkWithEditorAction.isChecked");
+    }
+    
+    public void synchronizeOutlinePage(AbstractNode node) {
+        ISelection selection = StructuredSelection.EMPTY;
+        
+        if (shouldSynchronizeOutlinePage()) {
+            outlineSelectionChangedListener.uninstall(outlinePage);
+            if (node != null && node instanceof LeafNode) {
+                CompositeNode compositeNode = node.getParent();
+                EObject astElement = NodeUtil.getASTElementForRootNode(compositeNode);
+                if (astElement != null) {
+                    selection = new StructuredSelection(astElement);
+                }
+            }
+            outlinePage.setSelection(selection);
+            outlineSelectionChangedListener.install(outlinePage);
+        }
+    }
+    
 	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
 	
 	protected boolean selectionSetFromOutline;
