@@ -9,3 +9,5 @@ Export-Package: org.eclipse.xtext.resource
 Require-Bundle: org.junit;bundle-version="3.8.2",
  org.eclipse.emf.ecore.xmi;bundle-version="2.3.2",
  org.eclipse.xtext;bundle-version="1.0.0"
+Bundle-ClassPath: lib/simple.jar,
+ .
