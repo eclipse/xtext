@@ -19,7 +19,7 @@ public class SerializeTest extends AbstractGeneratorTest {
 	public void testSimple() throws Exception {
 	    String model = "/* foo */ x + y * ( /* stuff */ a /* end  */\n * b)";
         int x = model.length();
-		while (x>1) { //TODO check x>0
+		while (x>0) {
 			checkSerialize(model.substring(0,x--));
 		}
 	}
