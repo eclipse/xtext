@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ui.editor.outline;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.xtext.ui.Messages;
 import org.eclipse.xtext.ui.editor.BaseTextEditor;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.XtextPluginImages;
@@ -22,13 +23,13 @@ public class ToggleLinkWithEditorAction extends Action {
     BaseTextEditor editor;
 
     public ToggleLinkWithEditorAction(BaseTextEditor editor) {
-        super("Lin&k with Editor");
+        super(Messages.ToggleLinkWithEditorAction_title);
         boolean isLinkingEnabled = Activator.getDefault().getPreferenceStore().getBoolean(
                 "ToggleLinkWithEditorAction.isChecked"); //$NON-NLS-1$
         setChecked(isLinkingEnabled);
         this.editor = editor;
-        setToolTipText("Link with Editor");
-        setDescription("Link with active editor");
+        setToolTipText(Messages.ToggleLinkWithEditorAction_toolTipText);
+        setDescription(Messages.ToggleLinkWithEditorAction_description);
         setImageDescriptor(XtextPluginImages.DESC_LINK_WITH_EDITOR);
         setDisabledImageDescriptor(XtextPluginImages.DESC_LINK_WITH_EDITOR_DISABLED);
     }
