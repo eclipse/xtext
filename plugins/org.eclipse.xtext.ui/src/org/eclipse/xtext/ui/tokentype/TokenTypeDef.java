@@ -35,7 +35,7 @@ public abstract class TokenTypeDef implements ITokenTypeDef {
 	 * @param id
 	 */
 	public TokenTypeDef(String id) {
-		this.id = id;
+		this(id, null);
 	}
 
 	/**
@@ -43,8 +43,7 @@ public abstract class TokenTypeDef implements ITokenTypeDef {
 	 * @param name
 	 */
 	public TokenTypeDef(String id, String name) {
-		this.id = id;
-		this.name = name;
+		this(id, name, new TextStyle());
 	}
 
 	/**

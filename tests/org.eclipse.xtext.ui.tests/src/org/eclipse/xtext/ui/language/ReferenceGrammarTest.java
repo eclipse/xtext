@@ -11,33 +11,26 @@ package org.eclipse.xtext.ui.language;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.services.AbstractServiceTest;
-import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Peter Friese - Initial contribution and API
- * 
+ * @author Dennis Hübner
  */
 public class ReferenceGrammarTest extends AbstractServiceTest {
 
 	public void testParseNothing() throws Exception {
-		IParser parser = ServiceRegistry.getService(getDefaultTestLanguage(), IParser.class);
-		EObject object = parser.parse(new StringInputStream("")).getRootASTElement();
+		EObject object = getModelForDefaultLanguage(new String()).getRootASTElement();
 		assertNull(object);
 	}
 
-	public void testParseGrammar() {
-		String grammar = "spielplatz 200 \"Peters Spielplatz\" {" + "    kind (soeren 7)" + "    kind (lennart 4)"
+	public void testParseGrammar() throws Exception {
+		String model = "spielplatz 200 \"Peters Spielplatz\" {" + "    kind (soeren 7)" + "    kind (lennart 4)"
 				+ "    kind (jonas 1)" + "    erwachsener (peter 33)" + "    erwachsener (anne 33)" + "}";
-		IParser parser = ServiceRegistry.getService(getDefaultTestLanguage(), IParser.class);
-		IAstFactory elementFactory = ServiceRegistry.getService(getDefaultTestLanguage(), IAstFactory.class);
-		EObject object = (EObject) parser.parse(new StringInputStream(grammar), elementFactory).getRootASTElement();
+		EObject object = getModelForDefaultLanguage(model).getRootASTElement();
 		assertNotNull(object);
 		NodeAdapter adapter = (NodeAdapter) object.eAdapters().get(0);
 		AbstractNode node = adapter.getParserNode();
@@ -45,17 +38,14 @@ public class ReferenceGrammarTest extends AbstractServiceTest {
 			AbstractNode subnode = (AbstractNode) allContents.next();
 			System.out.println(subnode);
 		}
-
 		System.out.println("---");
 		dumpEObject(object);
 
 	}
 
-	public void testParseBadGrammar() {
-		IParser parser = ServiceRegistry.getService(getDefaultTestLanguage(), IParser.class);
-		IAstFactory elementFactory = ServiceRegistry.getService(getDefaultTestLanguage(), IAstFactory.class);
+	public void testParseBadGrammar() throws Exception {
 		String badGrammar = "spielplatz ";
-		IParseResult badParseResult = parser.parse(new StringInputStream(badGrammar), elementFactory);
+		IParseResult badParseResult = getModelForDefaultLanguage(badGrammar);
 		assertNotNull(badParseResult);
 		assertNotNull(badParseResult.getRootNode());
 		assertNull(badParseResult.getRootASTElement());

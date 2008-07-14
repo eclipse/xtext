@@ -8,10 +8,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.services;
 
+import java.io.InputStream;
+
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.LanguageDescriptorFactory;
@@ -40,9 +45,17 @@ public abstract class AbstractServiceTest extends TestCase {
 		return ServiceRegistry.getService(getDefaultTestLanguage(), clazz);
 	}
 
-	protected IParseResult getModelForDefaultLanguage(String model) {
-		IParser parser = getServiceForDefaultLanguage(IParser.class);
-		return parser.parse(new StringInputStream(model));
+	protected IParseResult getModelForDefaultLanguage(String model) throws Exception {
+		IResourceFactory resfac = getServiceForDefaultLanguage(IResourceFactory.class);
+		return getResource(resfac, new StringInputStream(model)).getParseResult();
+	}
+
+	protected XtextResource getResource(IResourceFactory resfac, InputStream in) throws Exception {
+		XtextResourceSet rs = new XtextResourceSet();
+		XtextResource resource = (XtextResource) rs.createResource(URI.createURI("mytestmodel."
+				+ resfac.getModelFileExtensions()[0]));
+		resource.load(in, null);
+		return resource;
 	}
 
 }
