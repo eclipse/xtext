@@ -18,6 +18,8 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.projection.ProjectionSupport;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -305,8 +307,18 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	@Override
 	protected ISourceViewer createSourceViewer(Composite parent, IVerticalRuler ruler, int styles) {
 		// overwrite superclass implementation to allow folding
+		fAnnotationAccess = createAnnotationAccess();
+		fOverviewRuler = createOverviewRuler(getSharedColors());
 		ISourceViewer projectionViewer = new ProjectionViewer(parent, ruler, getOverviewRuler(),
 				isOverviewRulerVisible(), styles);
+		ServiceRegistry.getService(languageDescriptor, IPreferenceStore.class).getPersitablePreferenceStore()
+				.addPropertyChangeListener(new IPropertyChangeListener() {
+
+					public void propertyChange(PropertyChangeEvent event) {
+						// TODO refresh sourceviewer presentation
+						getSourceViewer().getDocument().set(getSourceViewer().getDocument().get());
+					}
+				});
 		getSourceViewerDecorationSupport(projectionViewer);
 		return projectionViewer;
 	}
@@ -325,9 +337,10 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		ProjectionViewer projectionViewer = (ProjectionViewer) getSourceViewer();
 		projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(), getSharedColors());
 		projectionSupport.addSummarizableAnnotationType("org.eclipse.ui.workbench.texteditor.warning"); //$NON-NLS-1$
+		projectionSupport.addSummarizableAnnotationType("org.eclipse.ui.workbench.texteditor.error"); //$NON-NLS-1$
 		projectionSupport.install();
 
-		// folding stuff
+		// Folding stuff
 		IFoldingStructureProvider foldingProvider = ServiceRegistry.getService(languageDescriptor,
 				IFoldingStructureProvider.class);
 		if (foldingProvider != null) {
@@ -335,6 +348,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 			foldingSupport = new FoldingUpdater(foldingProvider);
 			foldingSupport.bind(getModel(), projectionViewer);
 		}
+
 	}
 
 	/*
