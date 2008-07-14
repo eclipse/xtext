@@ -7,21 +7,27 @@
   <foreignModel>xtextgen.ecore</foreignModel>
   <genPackages prefix="Xtextgen" basePackage="org.eclipse.xtext" disposableProviderFactory="true"
       ecorePackage="xtextgen.ecore#/">
-    <genClasses image="false" ecoreClass="xtextgen.ecore#//GenService">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenService/serviceInterfaceFQN"/>
+    <genClasses ecoreClass="xtextgen.ecore#//GenService">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenService/serviceInterfaceFQName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenService/genClassFQName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenService/extensionPointID"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenService/genClassName"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenService/genPackageNames"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenService/templatePath"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xtextgen.ecore#//GenService/genParameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenService/uiService"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenService/genParameters"/>
     </genClasses>
     <genClasses ecoreClass="xtextgen.ecore#//GenModel">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenModel/srcGenPath"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenModel/uiGenPath"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenModel/modelFileExtensions"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenModel/fileHeader"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xtextgen.ecore#//GenModel/grammar"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xtextgen.ecore#//GenModel/services"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenModel/languageInterfaceFQName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenModel/nonUIPluginBundleID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//GenModel/uiPluginBundleID"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xtextgen.ecore#//GenModel/outlets"/>
+    </genClasses>
+    <genClasses ecoreClass="xtextgen.ecore#//Outlet">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//Outlet/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xtextgen.ecore#//Outlet/targetFolder"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

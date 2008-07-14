@@ -7,6 +7,7 @@
  *
  *******************************************************************************/
 language org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest
+
 import 				"http://www.eclipse.org/2008/Xtext" 		as xtext
 generate SimpleTest "http://eclipse.org/xtext/tests/SimpleTest"
 
