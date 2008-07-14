@@ -30,7 +30,7 @@ cached EPackage getEPackage(MetaModel this) :
 	if this.isGenerate() then
 		createEPackage((GeneratedMetamodel)declaration, this)
 	else 
-		loadEPackage(((ReferencedMetamodel)declaration).uri);
+		loadEPackage((ReferencedMetamodel)declaration);
 
 create EPackage createEPackage(GeneratedMetamodel mm, MetaModel metaModel) :
 	setName(mm.name) ->
@@ -72,8 +72,8 @@ EStructuralFeature createEStructuralFeature(Feature this) :
 private create EReference createEReference(Feature f) : setContainment(true) -> setResolveProxies(false);
 private create EAttribute createEAttribute(Feature f) : null /* no initialization */;
 
-private cached EPackage loadEPackage(String uri) :
-	JAVA org.eclipse.xtext.EcoreUtil2.loadEPackage(java.lang.String);
+private cached EPackage loadEPackage(ReferencedMetamodel this) :
+	JAVA org.eclipse.xtext.GrammarUtil.loadEPackage(org.eclipse.xtext.ReferencedMetamodel);
 
 Void saveMetamodel(EPackage ePackage, String path) :
 	JAVA org.eclipse.xtext.EcoreUtil2.saveEPackage(org.eclipse.emf.ecore.EPackage, java.lang.String);

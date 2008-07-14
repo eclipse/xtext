@@ -32,6 +32,9 @@ objectURI(emf::EObject object) :
 grammarResourceURI(Grammar this) :
 	'classpath:/'+getClasspathRelativePathToXmi(this);
 	
+classPathURI(GeneratedMetamodel this) :
+	'classpath:/'+((Grammar)eContainer).getNamespace().replaceAll("\\.","/")+'/'+name+'.ecore';
+	
 String languageName() :
 	grammar().getName().replaceAll("\\s","_");
 	
@@ -52,6 +55,9 @@ toJavaPackage(String fqName) :
 	
 toSimpleName(String fqName) :
 	lastToken(fqName, '.');
+	
+standaloneSetupClass(Grammar this) :
+	getId() + "StandaloneSetup";
 
 private String skipLastToken(String s, String separator) :
 	JAVA org.eclipse.xtext.util.Strings.skipLastToken(java.lang.String, java.lang.String);

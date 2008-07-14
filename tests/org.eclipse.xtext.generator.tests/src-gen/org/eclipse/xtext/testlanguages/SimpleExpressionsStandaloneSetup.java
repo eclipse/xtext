@@ -3,7 +3,9 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.service.ILanguageDescriptor;
@@ -32,11 +34,8 @@ public abstract class SimpleExpressionsStandaloneSetup {
 		if(!isInitialized) {
 			
 			// setup super language first
-			XtextBuiltinStandaloneSetup.doSetup();
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new XMIResourceFactoryImpl());
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xmi", new XMIResourceFactoryImpl());
+			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+			
 			ILanguageDescriptor languageDescriptor = 
 				LanguageDescriptorFactory.createLanguageDescriptor(
 					ISimpleExpressions.ID, 
@@ -55,11 +54,23 @@ public abstract class SimpleExpressionsStandaloneSetup {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("simpleexpressions", resourceFactory);
 			
 			
+			// initialize EPackages
+			
+				if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/xtext/test/simpleExpressions")) {
+					EPackage simpleExpressions = EcoreUtil2.loadEPackage(
+							"classpath:/org/eclipse/xtext/testlanguages/simpleExpressions.ecore",
+							SimpleExpressionsStandaloneSetup.class.getClassLoader());
+					if (simpleExpressions == null)
+						throw new IllegalStateException(
+								"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/testlanguages/simpleExpressions.ecore'");
+					EPackage.Registry.INSTANCE.put("http://www.eclipse.org/xtext/test/simpleExpressions", simpleExpressions);
+				}
+			
 			isInitialized = true;
 		}
 	}
 	
-	public static ILanguageDescriptor getLanguageDescriptor() {
+	public static synchronized ILanguageDescriptor getLanguageDescriptor() {
 		if(!isInitialized) {
 			doSetup();
 		}

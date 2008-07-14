@@ -12,7 +12,6 @@ package org.eclipse.xtext;
 import static org.eclipse.emf.ecore.util.EcoreUtil.*;
 import static org.eclipse.xtext.EcoreUtil2.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -20,11 +19,12 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builtin.IXtextBuiltin;
-import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -33,13 +33,31 @@ import org.eclipse.xtext.util.Strings;
  * @author svenefftinge
  */
 public class GrammarUtil {
-	
+
+	private static URI getClasspathURIForLanguageId(String id) {
+		return URI.createURI("classpath:/" + id.replace('.', '/') + (IXtextBuiltin.ID.equals(id)?".xmi":".xtext"));
+	}
+
+	public static EPackage loadEPackage(ReferencedMetamodel ref) {
+		if (ref==null)
+			throw new NullPointerException("ReferencedMetamodel was null");
+		if (EPackage.Registry.INSTANCE.containsKey(ref.getUri()))
+			return EPackage.Registry.INSTANCE.getEPackage(ref.getUri());
+		URI uri = URI.createURI(ref.getUri());
+		if (uri.fragment() == null) {
+			Resource resource = ref.eResource().getResourceSet().getResource(uri, true);
+			return (EPackage) resource.getContents().get(0);
+		} else {
+			return (EPackage) ref.eResource().getResourceSet().getEObject(uri, true);
+		}
+	}
+
 	public static ParserRule getDefaultEntryRule(Grammar g) {
 		if (g.isAbstract())
 			return null;
 		return GrammarUtil.allParserRules(g).get(0);
 	}
-	
+
 	public static String getLanguageId(Grammar g) {
 		return Strings.concat(".", g.getIdElements());
 	}
@@ -49,9 +67,9 @@ public class GrammarUtil {
 	}
 
 	public static String getNamespace(Grammar g) {
-	    return Strings.concat(".", g.getIdElements(), 1);
+		return Strings.concat(".", g.getIdElements(), 1);
 	}
-	
+
 	public static Grammar getGrammar(EObject grammarElement) {
 		EObject root = getRootContainer(grammarElement);
 		if (root instanceof Grammar) {
@@ -126,37 +144,33 @@ public class GrammarUtil {
 	}
 
 	public static Grammar getSuperGrammar(Grammar _this) {
-	    if(IXtextBuiltin.ID.equals(getLanguageId(_this))) {
-	        return null;
-	    }
+		if (_this == null)
+			throw new NullPointerException("Grammar was null");
 		String id = getSuperGrammarId(_this);
-		if (id == null) {
-			return new XtextBuiltinGrammarAccess().getGrammar(); 
-		}
-		String classpathURI = "classpath:/"+id.replace('.', '/')+".xtext";
-//		ILanguageDescriptor descriptor = LanguageDescriptorFactory.get(id);
-//		if (descriptor == null)
-//			throw new IllegalStateException("Language '"+id+"' has not been set up properly");
-//		IGrammarAccess service = ServiceRegistry.getService(descriptor, IGrammarAccess.class);
-//		if (service == null)
-//			throw new IllegalStateException("Language '"+id+"' has not been set up properly");
-		Resource resource = _this.eResource().getResourceSet().getResource(URI.createURI(classpathURI),true);
-		try {
-			resource.load(null);
-		} catch (IOException e) {
-			throw new WrappedException(e);
-		}
-		Grammar superGrammar = (Grammar) resource.getContents().get(0);
-		return superGrammar == _this ? null : superGrammar;
-	}
-	
-	public static String getSuperGrammarId(Grammar _this) {
-		if (_this.getSuperGrammarIdElements().isEmpty())
+		if (id==null)
 			return null;
+		if (!(_this.eResource() != null && _this.eResource().getResourceSet() instanceof XtextResourceSet)) 
+			throw new IllegalArgumentException("The passed grammar is not contained in a Resourceset");
+		ResourceSet resourceSet = _this.eResource().getResourceSet();
+		URI uri = getClasspathURIForLanguageId(id);
+		uri = uri.appendFragment(""); 
+		Resource resource = resourceSet.getResource(uri, true);
+		if (resource==null)
+			throw new IllegalArgumentException("Couldn't find grammar for super language "+id);
+		Grammar grammar = (Grammar) resource.getContents().get(0);
+		return grammar;
+	}
+
+	public static String getSuperGrammarId(Grammar _this) {
+		if (IXtextBuiltin.ID.equals(getLanguageId(_this))) {
+			return null;
+		}
+		if (_this.getSuperGrammarIdElements().isEmpty())
+			return IXtextBuiltin.ID;
 		StringBuffer buff = new StringBuffer();
-		for (int i = 0, x = _this.getSuperGrammarIdElements().size(); i<x; i++) {
+		for (int i = 0, x = _this.getSuperGrammarIdElements().size(); i < x; i++) {
 			buff.append(_this.getSuperGrammarIdElements().get(i));
-			if ((i+1)<x)
+			if ((i + 1) < x)
 				buff.append(".");
 		}
 		return buff.toString();
@@ -266,29 +280,29 @@ public class GrammarUtil {
 		Set<String> kws = new HashSet<String>();
 		List<ParserRule> rules = allParserRules(g);
 		for (ParserRule parserRule : rules) {
-			List<Keyword> list = typeSelect(eAllContentsAsList(parserRule),Keyword.class);
+			List<Keyword> list = typeSelect(eAllContentsAsList(parserRule), Keyword.class);
 			for (Keyword keyword : list) {
 				kws.add(keyword.getValue());
 			}
 		}
 		return kws;
 	}
-	
+
 	public static boolean isOptionalCardinality(AbstractElement e) {
-		return e.getCardinality()!=null && (e.getCardinality().equals("?") || e.getCardinality().equals("*"));
+		return e.getCardinality() != null && (e.getCardinality().equals("?") || e.getCardinality().equals("*"));
 	}
-	
+
 	public static boolean isMultipleCardinality(AbstractElement e) {
 		return isOneOrMoreCardinality(e) || isAnyCardinality(e);
 	}
 
 	public static String getClasspathRelativePathToXmi(Grammar grammar) {
-		return getLanguageId(grammar).replace('.', '/')+".xmi";
+		return getLanguageId(grammar).replace('.', '/') + ".xmi";
 	}
+
 	public static boolean isOneOrMoreCardinality(AbstractElement e) {
 		return e.getCardinality() != null && (e.getCardinality().equals("+"));
 	}
-
 
 	public static boolean isAnyCardinality(AbstractElement e) {
 		return e.getCardinality() != null && (e.getCardinality().equals("*"));

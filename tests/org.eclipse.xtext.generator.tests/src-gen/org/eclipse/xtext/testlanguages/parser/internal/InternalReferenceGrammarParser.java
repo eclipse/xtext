@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.g 2008-07-08 10:01:37
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.g 2008-07-14 10:05:22
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class InternalReferenceGrammarParser extends AbstractAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_STRING", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_LEXER_BODY", "RULE_ANY_OTHER", "'spielplatz'", "'{'", "'}'", "'kind'", "'('", "')'", "'erwachsener'", "'spielzeug'", "'ROT'", "'BLAU'", "'GELB'", "'GRÜN'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_STRING", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'spielplatz'", "'{'", "'}'", "'kind'", "'('", "')'", "'erwachsener'", "'spielzeug'", "'ROT'", "'BLAU'", "'GELB'", "'GRÜN'"
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=6;
@@ -28,9 +28,8 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
     public static final int EOF=-1;
     public static final int RULE_INT=4;
     public static final int RULE_STRING=5;
-    public static final int RULE_ANY_OTHER=11;
+    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int RULE_LEXER_BODY=10;
 
         public InternalReferenceGrammarParser(TokenStream input) {
             super(input);
@@ -119,7 +118,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
             int alt4=2;
             int LA4_0 = input.LA(1);
 
-            if ( (LA4_0==12) ) {
+            if ( (LA4_0==11) ) {
                 alt4=1;
             }
             switch (alt4) {
@@ -138,7 +137,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.g:74:5: ( 'spielplatz' (lv_groesse= RULE_INT ) )
                     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.g:74:6: 'spielplatz' (lv_groesse= RULE_INT )
                     {
-                    match(input,12,FOLLOW_12_in_ruleSpielplatz119); 
+                    match(input,11,FOLLOW_11_in_ruleSpielplatz119); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
@@ -199,7 +198,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
                     }
 
-                    match(input,13,FOLLOW_13_in_ruleSpielplatz181); 
+                    match(input,12,FOLLOW_12_in_ruleSpielplatz181); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
@@ -212,10 +211,10 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                         int alt3=3;
                         int LA3_0 = input.LA(1);
 
-                        if ( (LA3_0==15||LA3_0==18) ) {
+                        if ( (LA3_0==14||LA3_0==17) ) {
                             alt3=1;
                         }
-                        else if ( (LA3_0==19) ) {
+                        else if ( (LA3_0==18) ) {
                             alt3=2;
                         }
 
@@ -228,10 +227,10 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                     	    int alt2=2;
                     	    int LA2_0 = input.LA(1);
 
-                    	    if ( (LA2_0==15) ) {
+                    	    if ( (LA2_0==14) ) {
                     	        alt2=1;
                     	    }
-                    	    else if ( (LA2_0==18) ) {
+                    	    else if ( (LA2_0==17) ) {
                     	        alt2=2;
                     	    }
                     	    else {
@@ -343,7 +342,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
                     }
 
-                    match(input,14,FOLLOW_14_in_ruleSpielplatz296); 
+                    match(input,13,FOLLOW_13_in_ruleSpielplatz296); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
@@ -430,11 +429,11 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.g:184:4: ( 'kind' '(' )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.g:184:5: 'kind' '('
             {
-            match(input,15,FOLLOW_15_in_ruleKind381); 
+            match(input,14,FOLLOW_14_in_ruleKind381); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            match(input,16,FOLLOW_16_in_ruleKind390); 
+            match(input,15,FOLLOW_15_in_ruleKind390); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -487,7 +486,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
             }
 
-            match(input,17,FOLLOW_17_in_ruleKind452); 
+            match(input,16,FOLLOW_16_in_ruleKind452); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.2/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -571,11 +570,11 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.g:242:4: ( 'erwachsener' '(' )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.g:242:5: 'erwachsener' '('
             {
-            match(input,18,FOLLOW_18_in_ruleErwachsener534); 
+            match(input,17,FOLLOW_17_in_ruleErwachsener534); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            match(input,16,FOLLOW_16_in_ruleErwachsener543); 
+            match(input,15,FOLLOW_15_in_ruleErwachsener543); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -628,7 +627,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
             }
 
-            match(input,17,FOLLOW_17_in_ruleErwachsener605); 
+            match(input,16,FOLLOW_16_in_ruleErwachsener605); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -713,11 +712,11 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.g:300:4: ( 'spielzeug' '(' )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.g:300:5: 'spielzeug' '('
             {
-            match(input,19,FOLLOW_19_in_ruleSpielzeug687); 
+            match(input,18,FOLLOW_18_in_ruleSpielzeug687); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            match(input,16,FOLLOW_16_in_ruleSpielzeug696); 
+            match(input,15,FOLLOW_15_in_ruleSpielzeug696); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -773,7 +772,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
             }
 
-            match(input,17,FOLLOW_17_in_ruleSpielzeug762); 
+            match(input,16,FOLLOW_16_in_ruleSpielzeug762); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -846,10 +845,10 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
             int alt7=2;
             int LA7_0 = input.LA(1);
 
-            if ( ((LA7_0>=20 && LA7_0<=22)) ) {
+            if ( ((LA7_0>=19 && LA7_0<=21)) ) {
                 alt7=1;
             }
-            else if ( (LA7_0==23) ) {
+            else if ( (LA7_0==22) ) {
                 alt7=2;
             }
             else {
@@ -866,10 +865,10 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
-                    if ( ((LA6_0>=20 && LA6_0<=21)) ) {
+                    if ( ((LA6_0>=19 && LA6_0<=20)) ) {
                         alt6=1;
                     }
-                    else if ( (LA6_0==22) ) {
+                    else if ( (LA6_0==21) ) {
                         alt6=2;
                     }
                     else {
@@ -886,10 +885,10 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                             int alt5=2;
                             int LA5_0 = input.LA(1);
 
-                            if ( (LA5_0==20) ) {
+                            if ( (LA5_0==19) ) {
                                 alt5=1;
                             }
-                            else if ( (LA5_0==21) ) {
+                            else if ( (LA5_0==20) ) {
                                 alt5=2;
                             }
                             else {
@@ -902,7 +901,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                                 case 1 :
                                     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.g:359:4: 'ROT'
                                     {
-                                    match(input,20,FOLLOW_20_in_ruleFarbe843); 
+                                    match(input,19,FOLLOW_19_in_ruleFarbe843); 
 
                                             createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.0/@groups.0" /* xtext::Keyword */, null); 
                                         
@@ -912,7 +911,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                                 case 2 :
                                     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.g:364:6: 'BLAU'
                                     {
-                                    match(input,21,FOLLOW_21_in_ruleFarbe858); 
+                                    match(input,20,FOLLOW_20_in_ruleFarbe858); 
 
                                             createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.0/@groups.1" /* xtext::Keyword */, null); 
                                         
@@ -928,7 +927,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                         case 2 :
                             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.g:369:6: 'GELB'
                             {
-                            match(input,22,FOLLOW_22_in_ruleFarbe874); 
+                            match(input,21,FOLLOW_21_in_ruleFarbe874); 
 
                                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.1" /* xtext::Keyword */, null); 
                                 
@@ -944,7 +943,7 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
                 case 2 :
                     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammar.g:374:6: 'GRÜN'
                     {
-                    match(input,23,FOLLOW_23_in_ruleFarbe890); 
+                    match(input,22,FOLLOW_22_in_ruleFarbe890); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.5/@alternatives/@groups.1" /* xtext::Keyword */, null); 
                         
@@ -975,40 +974,40 @@ public class InternalReferenceGrammarParser extends AbstractAntlrParser {
 
     public static final BitSet FOLLOW_ruleSpielplatz_in_entryRuleSpielplatz71 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleSpielplatz81 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleSpielplatz119 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleSpielplatz136 = new BitSet(new long[]{0x0000000000002020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleSpielplatz162 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleSpielplatz181 = new BitSet(new long[]{0x00000000000CC000L});
-    public static final BitSet FOLLOW_ruleKind_in_ruleSpielplatz212 = new BitSet(new long[]{0x00000000000CC000L});
-    public static final BitSet FOLLOW_ruleErwachsener_in_ruleSpielplatz247 = new BitSet(new long[]{0x00000000000CC000L});
-    public static final BitSet FOLLOW_ruleSpielzeug_in_ruleSpielplatz283 = new BitSet(new long[]{0x00000000000CC000L});
-    public static final BitSet FOLLOW_14_in_ruleSpielplatz296 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleSpielplatz119 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleSpielplatz136 = new BitSet(new long[]{0x0000000000001020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleSpielplatz162 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleSpielplatz181 = new BitSet(new long[]{0x0000000000066000L});
+    public static final BitSet FOLLOW_ruleKind_in_ruleSpielplatz212 = new BitSet(new long[]{0x0000000000066000L});
+    public static final BitSet FOLLOW_ruleErwachsener_in_ruleSpielplatz247 = new BitSet(new long[]{0x0000000000066000L});
+    public static final BitSet FOLLOW_ruleSpielzeug_in_ruleSpielplatz283 = new BitSet(new long[]{0x0000000000066000L});
+    public static final BitSet FOLLOW_13_in_ruleSpielplatz296 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleKind_in_entryRuleKind334 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleKind344 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleKind381 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleKind390 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_14_in_ruleKind381 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleKind390 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleKind408 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleKind434 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleKind452 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleKind434 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleKind452 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleErwachsener_in_entryRuleErwachsener487 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleErwachsener497 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_ruleErwachsener534 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleErwachsener543 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_17_in_ruleErwachsener534 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleErwachsener543 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleErwachsener561 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleErwachsener587 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleErwachsener605 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleErwachsener587 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleErwachsener605 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleSpielzeug_in_entryRuleSpielzeug640 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleSpielzeug650 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_ruleSpielzeug687 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleSpielzeug696 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSpielzeug714 = new BitSet(new long[]{0x0000000000F00000L});
-    public static final BitSet FOLLOW_ruleFarbe_in_ruleSpielzeug751 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleSpielzeug762 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_ruleSpielzeug687 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleSpielzeug696 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSpielzeug714 = new BitSet(new long[]{0x0000000000780000L});
+    public static final BitSet FOLLOW_ruleFarbe_in_ruleSpielzeug751 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleSpielzeug762 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFarbe_in_entryRuleFarbe797 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleFarbe807 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleFarbe843 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_ruleFarbe858 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_ruleFarbe874 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_ruleFarbe890 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_ruleFarbe843 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_ruleFarbe858 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_ruleFarbe874 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_ruleFarbe890 = new BitSet(new long[]{0x0000000000000002L});
 
 }

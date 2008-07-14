@@ -28,5 +28,10 @@ public interface IMetamodelAccess extends ILanguageService {
 	 */
 	EPackage[] getReferencedEPackages();
 	
+	/**
+	 * @return
+	 */
+	EPackage[] getAllEPackages();
+	
 	
 }

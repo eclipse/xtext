@@ -9,31 +9,35 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class DummyLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
-	public EPackage[] getGeneratedEPackages() {
-		return new EPackage[] {
+	private EPackage[] generated = new EPackage[] {
 		
 		getDummyLangEPackage()
 		
 		};
+
+	public EPackage[] getGeneratedEPackages() {
+		return generated;
 	}
 
-	public EPackage[] getReferencedEPackages() {
-		return new EPackage[] {
+	private EPackage[] referenced = new EPackage[] {
 		
 		};
+	public EPackage[] getReferencedEPackages() {
+		return referenced;
+	}
+	
+	private EPackage[] all = new EPackage[] {
+	    getDummyLangEPackage()
+		};
+	
+	public EPackage[] getAllEPackages() {
+		return all;
 	}
 
 	
 	protected static final String DUMMYLANG_NS_URI = "http://www.eclipse.org/2008/xtext/DummyLang";
-	protected static final String DUMMYLANG_CP_URI = "org/eclipse/xtext/dummy/DummyLang.ecore";
 	
 	protected EPackage getDummyLangEPackage() {	
-		if (!EPackage.Registry.INSTANCE.containsKey(DUMMYLANG_NS_URI)) {
-			EPackage p = loadEcoreFile(DummyLanguageMetamodelAccess.class.getClassLoader(),DUMMYLANG_CP_URI);
-			if (p!=null) {
-				EPackage.Registry.INSTANCE.put(DUMMYLANG_NS_URI,p);
-			}
-		}
 		return EPackage.Registry.INSTANCE.getEPackage(DUMMYLANG_NS_URI);
 	}
 	

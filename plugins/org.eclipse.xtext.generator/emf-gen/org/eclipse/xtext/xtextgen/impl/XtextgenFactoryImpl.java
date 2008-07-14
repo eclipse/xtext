@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenFactoryImpl.java,v 1.3 2008/07/03 09:43:25 sefftinge Exp $
+ * $Id: XtextgenFactoryImpl.java,v 1.4 2008/07/14 08:15:32 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
@@ -23,13 +23,13 @@ import org.eclipse.xtext.xtextgen.*;
  * @generated
  */
 public class XtextgenFactoryImpl extends EFactoryImpl implements XtextgenFactory {
-    /**
+	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public static XtextgenFactory init() {
+	public static XtextgenFactory init() {
 		try {
 			XtextgenFactory theXtextgenFactory = (XtextgenFactory)EPackage.Registry.INSTANCE.getEFactory("htpp://www.eclipse.org/xtext/2008/xtextgen"); 
 			if (theXtextgenFactory != null) {
@@ -42,68 +42,79 @@ public class XtextgenFactoryImpl extends EFactoryImpl implements XtextgenFactory
 		return new XtextgenFactoryImpl();
 	}
 
-    /**
+	/**
 	 * Creates an instance of the factory.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public XtextgenFactoryImpl() {
+	public XtextgenFactoryImpl() {
 		super();
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    @Override
-    public EObject create(EClass eClass) {
+	@Override
+	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case XtextgenPackage.GEN_SERVICE: return createGenService();
 			case XtextgenPackage.GEN_MODEL: return createGenModel();
+			case XtextgenPackage.OUTLET: return createOutlet();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public GenService createGenService() {
+	public GenService createGenService() {
 		GenServiceImpl genService = new GenServiceImpl();
 		return genService;
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public GenModel createGenModel() {
+	public GenModel createGenModel() {
 		GenModelImpl genModel = new GenModelImpl();
 		return genModel;
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public XtextgenPackage getXtextgenPackage() {
+	public Outlet createOutlet() {
+		OutletImpl outlet = new OutletImpl();
+		return outlet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XtextgenPackage getXtextgenPackage() {
 		return (XtextgenPackage)getEPackage();
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @deprecated
 	 * @generated
 	 */
-    @Deprecated
-    public static XtextgenPackage getPackage() {
+	@Deprecated
+	public static XtextgenPackage getPackage() {
 		return XtextgenPackage.eINSTANCE;
 	}
 

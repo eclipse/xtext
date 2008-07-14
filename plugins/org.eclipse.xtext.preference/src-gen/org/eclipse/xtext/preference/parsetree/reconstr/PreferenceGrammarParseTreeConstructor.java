@@ -1,18 +1,15 @@
 /*
 Generated with Xtext
 */
-package org.eclipse.xtext.parsetree.reconstr;
+package org.eclipse.xtext.preference.parsetree.reconstr;
 
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.parser.GenericEcoreElementFactory;
-import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 
-public class PreferenceParseTreeConstructor extends AbstractParseTreeConstructor {
+public class PreferenceGrammarParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
 		if (ruleToCall.equals("Description")) {
@@ -31,6 +28,8 @@ public class PreferenceParseTreeConstructor extends AbstractParseTreeConstructor
 			proceedNamedPanel(getDescr(obj),callback);
 		} else 		if (ruleToCall.equals("CheckedPanel")) {
 			proceedCheckedPanel(getDescr(obj),callback);
+		} else 		if (ruleToCall.equals("MasterDetail")) {
+			proceedMasterDetail(getDescr(obj),callback);
 		} else 		if (ruleToCall.equals("Label")) {
 			proceedLabel(getDescr(obj),callback);
 		} else 		if (ruleToCall.equals("Text")) {
@@ -42,12 +41,18 @@ public class PreferenceParseTreeConstructor extends AbstractParseTreeConstructor
 		} else 		if (ruleToCall.equals("QName")) {
 			proceedQName(getDescr(obj),callback);
 		} else {
-			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+			throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
 		}
 	}
 
 	
+private String DescriptionRecursionCheck = null;
 protected void proceedDescription(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(DescriptionRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		DescriptionRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -63,10 +68,14 @@ protected void proceedDescription(InstanceDescription obj,IParseTreeConstructorC
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedPage(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -94,10 +103,14 @@ protected void proceedDescription(InstanceDescription obj,IParseTreeConstructorC
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedQName(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -114,7 +127,7 @@ protected void proceedDescription(InstanceDescription obj,IParseTreeConstructorC
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -124,9 +137,18 @@ protected void proceedDescription(InstanceDescription obj,IParseTreeConstructorC
 
 }
 
+	} finally {
+		DescriptionRecursionCheck = null;
+	}
 }
 
+private String PageRecursionCheck = null;
 protected void proceedPage(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(PageRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		PageRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -142,10 +164,14 @@ protected void proceedPage(InstanceDescription obj,IParseTreeConstructorCallback
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedPanel(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -173,10 +199,14 @@ protected void proceedPage(InstanceDescription obj,IParseTreeConstructorCallback
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedQName(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -193,7 +223,7 @@ protected void proceedPage(InstanceDescription obj,IParseTreeConstructorCallback
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -203,9 +233,18 @@ protected void proceedPage(InstanceDescription obj,IParseTreeConstructorCallback
 
 }
 
+	} finally {
+		PageRecursionCheck = null;
+	}
 }
 
+private String PanelRecursionCheck = null;
 protected void proceedPanel(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(PanelRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		PanelRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -214,7 +253,7 @@ protected void proceedPanel(InstanceDescription obj,IParseTreeConstructorCallbac
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.2/@alternatives/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.2/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -239,10 +278,14 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedRow(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -259,7 +302,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -269,9 +312,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		PanelRecursionCheck = null;
+	}
 }
 
+private String RowRecursionCheck = null;
 protected void proceedRow(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(RowRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		RowRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -280,7 +332,7 @@ protected void proceedRow(InstanceDescription obj,IParseTreeConstructorCallback 
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.3/@alternatives/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.3/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -301,10 +353,14 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedEntry(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -320,9 +376,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		RowRecursionCheck = null;
+	}
 }
 
+private String EntryRecursionCheck = null;
 protected void proceedEntry(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(EntryRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		EntryRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -338,10 +403,14 @@ protected void proceedEntry(InstanceDescription obj,IParseTreeConstructorCallbac
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.4/@alternatives/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.4/@alternatives/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedWidget(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -363,7 +432,7 @@ protected void proceedEntry(InstanceDescription obj,IParseTreeConstructorCallbac
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@terminal"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@terminal"));
 
 }
 
@@ -375,9 +444,18 @@ protected void proceedEntry(InstanceDescription obj,IParseTreeConstructorCallbac
 
 }
 
+	} finally {
+		EntryRecursionCheck = null;
+	}
 }
 
+private String WidgetRecursionCheck = null;
 protected void proceedWidget(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(WidgetRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		WidgetRecursionCheck = s;
 	
 /* xtext::Alternatives */ 
 {
@@ -519,10 +597,11 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedLabel(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -543,10 +622,11 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedText(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -557,7 +637,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -576,10 +656,11 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.0/@groups.0/@groups.0/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedCheck(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -590,7 +671,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -609,10 +690,11 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.0/@groups.0/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.0/@groups.0/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedCombo(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -623,7 +705,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -642,10 +724,11 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.0/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.0/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedPanel(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -656,7 +739,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -675,10 +758,11 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.5/@alternatives/@groups.0/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedNamedPanel(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -689,7 +773,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -708,10 +792,11 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.5/@alternatives/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.5/@alternatives/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedCheckedPanel(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -722,15 +807,24 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
 }
 
+	} finally {
+		WidgetRecursionCheck = null;
+	}
 }
 
+private String NamedPanelRecursionCheck = null;
 protected void proceedNamedPanel(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(NamedPanelRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		NamedPanelRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -739,7 +833,7 @@ protected void proceedNamedPanel(InstanceDescription obj,IParseTreeConstructorCa
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.6/@alternatives/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.6/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -764,10 +858,14 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedRow(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -788,7 +886,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -802,7 +900,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
 	
 
 }
@@ -821,9 +919,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		NamedPanelRecursionCheck = null;
+	}
 }
 
+private String CheckedPanelRecursionCheck = null;
 protected void proceedCheckedPanel(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(CheckedPanelRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		CheckedPanelRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -832,7 +939,7 @@ protected void proceedCheckedPanel(InstanceDescription obj,IParseTreeConstructor
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.7/@alternatives/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.7/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -857,10 +964,14 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedRow(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -881,7 +992,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -899,7 +1010,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
 	
 
 }
@@ -921,9 +1032,44 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		CheckedPanelRecursionCheck = null;
+	}
 }
 
+private String MasterDetailRecursionCheck = null;
+protected void proceedMasterDetail(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(MasterDetailRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		MasterDetailRecursionCheck = s;
+	
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Group */ 
+{
+
+
+}
+
+
+}
+
+	} finally {
+		MasterDetailRecursionCheck = null;
+	}
+}
+
+private String LabelRecursionCheck = null;
 protected void proceedLabel(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(LabelRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		LabelRecursionCheck = s;
 	
 /* xtext::Assignment */ 
 {
@@ -934,7 +1080,7 @@ protected void proceedLabel(InstanceDescription obj,IParseTreeConstructorCallbac
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.8/@alternatives/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.9/@alternatives/@terminal"));
 	
 
 }
@@ -944,9 +1090,18 @@ protected void proceedLabel(InstanceDescription obj,IParseTreeConstructorCallbac
 
 }
 
+	} finally {
+		LabelRecursionCheck = null;
+	}
 }
 
+private String TextRecursionCheck = null;
 protected void proceedText(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(TextRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		TextRecursionCheck = s;
 	
 /* xtext::Assignment */ 
 {
@@ -957,7 +1112,7 @@ protected void proceedText(InstanceDescription obj,IParseTreeConstructorCallback
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.9/@alternatives/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.10/@alternatives/@terminal"));
 	
 
 }
@@ -967,9 +1122,18 @@ protected void proceedText(InstanceDescription obj,IParseTreeConstructorCallback
 
 }
 
+	} finally {
+		TextRecursionCheck = null;
+	}
 }
 
+private String CheckRecursionCheck = null;
 protected void proceedCheck(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(CheckRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		CheckRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -984,7 +1148,7 @@ protected void proceedCheck(InstanceDescription obj,IParseTreeConstructorCallbac
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.10/@alternatives/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.11/@alternatives/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -998,16 +1162,25 @@ protected void proceedCheck(InstanceDescription obj,IParseTreeConstructorCallbac
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.10/@alternatives/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.11/@alternatives/@abstractTokens.0"));
 
 }
 
 
 }
 
+	} finally {
+		CheckRecursionCheck = null;
+	}
 }
 
+private String ComboRecursionCheck = null;
 protected void proceedCombo(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(ComboRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		ComboRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -1022,7 +1195,7 @@ protected void proceedCombo(InstanceDescription obj,IParseTreeConstructorCallbac
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.11/@alternatives/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.12/@alternatives/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -1040,7 +1213,7 @@ protected void proceedCombo(InstanceDescription obj,IParseTreeConstructorCallbac
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -1062,7 +1235,7 @@ protected void proceedCombo(InstanceDescription obj,IParseTreeConstructorCallbac
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -1076,7 +1249,7 @@ protected void proceedCombo(InstanceDescription obj,IParseTreeConstructorCallbac
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
@@ -1097,7 +1270,7 @@ protected void proceedCombo(InstanceDescription obj,IParseTreeConstructorCallbac
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -1111,7 +1284,7 @@ protected void proceedCombo(InstanceDescription obj,IParseTreeConstructorCallbac
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -1127,9 +1300,18 @@ protected void proceedCombo(InstanceDescription obj,IParseTreeConstructorCallbac
 
 }
 
+	} finally {
+		ComboRecursionCheck = null;
+	}
 }
 
+private String QNameRecursionCheck = null;
 protected void proceedQName(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(QNameRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		QNameRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -1154,7 +1336,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.12/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.13/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -1173,7 +1355,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.12/@alternatives/@abstractTokens.1/@abstractTokens.0/@terminal"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.13/@alternatives/@abstractTokens.1/@abstractTokens.0/@terminal"));
 
 }
 
@@ -1195,7 +1377,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/Preference.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.13/@alternatives/@abstractTokens.0/@terminal"));
 	
 
 }
@@ -1208,6 +1390,9 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		QNameRecursionCheck = null;
+	}
 }
 
 }

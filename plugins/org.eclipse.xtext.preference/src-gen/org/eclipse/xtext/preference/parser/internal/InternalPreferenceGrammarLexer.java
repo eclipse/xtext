@@ -1,6 +1,6 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g 2008-07-06 21:13:42
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g 2008-07-14 10:06:31
 
-package org.eclipse.xtext.parser.internal;
+package org.eclipse.xtext.preference.parser.internal;
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
@@ -12,12 +12,12 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
-public class InternalPreferenceLexer extends Lexer {
+public class InternalPreferenceGrammarLexer extends Lexer {
     public static final int T21=21;
     public static final int RULE_ML_COMMENT=7;
     public static final int T14=14;
     public static final int RULE_ID=5;
-    public static final int T22=22;
+    public static final int T11=11;
     public static final int RULE_STRING=4;
     public static final int T12=12;
     public static final int T13=13;
@@ -28,26 +28,44 @@ public class InternalPreferenceLexer extends Lexer {
     public static final int RULE_INT=6;
     public static final int EOF=-1;
     public static final int T17=17;
-    public static final int Tokens=23;
-    public static final int RULE_ANY_OTHER=11;
+    public static final int Tokens=22;
+    public static final int RULE_ANY_OTHER=10;
     public static final int T16=16;
     public static final int RULE_SL_COMMENT=8;
     public static final int T19=19;
-    public static final int RULE_LEXER_BODY=10;
-    public InternalPreferenceLexer() {;} 
-    public InternalPreferenceLexer(CharStream input) {
+    public InternalPreferenceGrammarLexer() {;} 
+    public InternalPreferenceGrammarLexer(CharStream input) {
         super(input);
     }
-    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g"; }
+    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g"; }
+
+    // $ANTLR start T11
+    public final void mT11() throws RecognitionException {
+        try {
+            int _type = T11;
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:10:5: ( 'commonprefix' )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:10:7: 'commonprefix'
+            {
+            match("commonprefix"); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T11
 
     // $ANTLR start T12
     public final void mT12() throws RecognitionException {
         try {
             int _type = T12;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:10:5: ( 'commonprefix' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:10:7: 'commonprefix'
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:11:5: ( 'page' )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:11:7: 'page'
             {
-            match("commonprefix"); 
+            match("page"); 
 
 
             }
@@ -63,11 +81,10 @@ public class InternalPreferenceLexer extends Lexer {
     public final void mT13() throws RecognitionException {
         try {
             int _type = T13;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:11:5: ( 'page' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:11:7: 'page'
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:12:5: ( '{' )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:12:7: '{'
             {
-            match("page"); 
-
+            match('{'); 
 
             }
 
@@ -82,10 +99,10 @@ public class InternalPreferenceLexer extends Lexer {
     public final void mT14() throws RecognitionException {
         try {
             int _type = T14;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:12:5: ( '{' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:12:7: '{'
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:13:5: ( '}' )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:13:7: '}'
             {
-            match('{'); 
+            match('}'); 
 
             }
 
@@ -100,10 +117,10 @@ public class InternalPreferenceLexer extends Lexer {
     public final void mT15() throws RecognitionException {
         try {
             int _type = T15;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:13:5: ( '}' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:13:7: '}'
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:14:5: ( ';' )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:14:7: ';'
             {
-            match('}'); 
+            match(';'); 
 
             }
 
@@ -118,10 +135,10 @@ public class InternalPreferenceLexer extends Lexer {
     public final void mT16() throws RecognitionException {
         try {
             int _type = T16;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:14:5: ( ';' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:14:7: ';'
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:15:5: ( '#' )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:15:7: '#'
             {
-            match(';'); 
+            match('#'); 
 
             }
 
@@ -136,10 +153,10 @@ public class InternalPreferenceLexer extends Lexer {
     public final void mT17() throws RecognitionException {
         try {
             int _type = T17;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:15:5: ( '#' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:15:7: '#'
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:16:5: ( '?' )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:16:7: '?'
             {
-            match('#'); 
+            match('?'); 
 
             }
 
@@ -154,10 +171,10 @@ public class InternalPreferenceLexer extends Lexer {
     public final void mT18() throws RecognitionException {
         try {
             int _type = T18;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:16:5: ( '?' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:16:7: '?'
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:17:5: ( '[' )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:17:7: '['
             {
-            match('?'); 
+            match('['); 
 
             }
 
@@ -172,10 +189,10 @@ public class InternalPreferenceLexer extends Lexer {
     public final void mT19() throws RecognitionException {
         try {
             int _type = T19;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:17:5: ( '[' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:17:7: '['
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:18:5: ( ',' )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:18:7: ','
             {
-            match('['); 
+            match(','); 
 
             }
 
@@ -190,10 +207,10 @@ public class InternalPreferenceLexer extends Lexer {
     public final void mT20() throws RecognitionException {
         try {
             int _type = T20;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:18:5: ( ',' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:18:7: ','
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:19:5: ( ']' )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:19:7: ']'
             {
-            match(','); 
+            match(']'); 
 
             }
 
@@ -208,26 +225,8 @@ public class InternalPreferenceLexer extends Lexer {
     public final void mT21() throws RecognitionException {
         try {
             int _type = T21;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:19:5: ( ']' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:19:7: ']'
-            {
-            match(']'); 
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T21
-
-    // $ANTLR start T22
-    public final void mT22() throws RecognitionException {
-        try {
-            int _type = T22;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:20:5: ( '.' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:20:7: '.'
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:20:5: ( '.' )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:20:7: '.'
             {
             match('.'); 
 
@@ -238,16 +237,16 @@ public class InternalPreferenceLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end T22
+    // $ANTLR end T21
 
     // $ANTLR start RULE_ID
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:716:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:716:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:718:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:718:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:716:11: ( '^' )?
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:718:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -256,7 +255,7 @@ public class InternalPreferenceLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:716:12: '^'
+                    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:718:12: '^'
                     {
                     match('^'); 
 
@@ -275,7 +274,7 @@ public class InternalPreferenceLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:716:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:718:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -288,7 +287,7 @@ public class InternalPreferenceLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:
+            	    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -323,10 +322,10 @@ public class InternalPreferenceLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:718:10: ( ( '0' .. '9' )+ )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:718:12: ( '0' .. '9' )+
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:720:10: ( ( '0' .. '9' )+ )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:720:12: ( '0' .. '9' )+
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:718:12: ( '0' .. '9' )+
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:720:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -340,7 +339,7 @@ public class InternalPreferenceLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:718:13: '0' .. '9'
+            	    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:720:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -370,7 +369,7 @@ public class InternalPreferenceLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:720:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:722:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -382,16 +381,16 @@ public class InternalPreferenceLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("720:1: RULE_STRING : ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' );", 6, 0, input);
+                    new NoViableAltException("722:1: RULE_STRING : ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' );", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:720:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
+                    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:722:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
                     {
                     match('\"'); 
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:720:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
+                    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:722:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -407,7 +406,7 @@ public class InternalPreferenceLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:720:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:722:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -424,7 +423,7 @@ public class InternalPreferenceLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:720:65: ~ ( '\\\\' | '\"' )
+                    	    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:722:65: ~ ( '\\\\' | '\"' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -450,10 +449,10 @@ public class InternalPreferenceLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:720:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
+                    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:722:101: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
                     {
                     match('\''); 
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:720:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
+                    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:722:106: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -469,7 +468,7 @@ public class InternalPreferenceLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:720:93: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:722:108: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -486,7 +485,7 @@ public class InternalPreferenceLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:720:137: ~ ( '\\\\' | '\\'' )
+                    	    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:722:152: ~ ( '\\\\' | '\\'' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -524,12 +523,12 @@ public class InternalPreferenceLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:722:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:722:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:724:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:724:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:722:24: ( options {greedy=false; } : . )*
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:724:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -554,7 +553,7 @@ public class InternalPreferenceLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:722:52: .
+            	    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:724:52: .
             	    {
             	    matchAny(); 
 
@@ -583,12 +582,12 @@ public class InternalPreferenceLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:724:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )? )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:724:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )?
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:726:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )? )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:726:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:724:24: (~ ( '\\n' | '\\r' ) )*
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:726:24: (~ ( '\\n' | '\\r' ) )*
             loop8:
             do {
                 int alt8=2;
@@ -601,7 +600,7 @@ public class InternalPreferenceLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:724:26: ~ ( '\\n' | '\\r' )
+            	    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:726:24: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -622,7 +621,7 @@ public class InternalPreferenceLexer extends Lexer {
                 }
             } while (true);
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:724:41: ( ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' ) )?
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:726:38: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -631,56 +630,27 @@ public class InternalPreferenceLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:724:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )
+                    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:726:39: ( '\\r' )? '\\n'
                     {
-                    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:724:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )
-                    int alt9=3;
+                    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:726:39: ( '\\r' )?
+                    int alt9=2;
                     int LA9_0 = input.LA(1);
 
                     if ( (LA9_0=='\r') ) {
-                        int LA9_1 = input.LA(2);
-
-                        if ( (LA9_1=='\n') ) {
-                            alt9=1;
-                        }
-                        else {
-                            alt9=2;}
-                    }
-                    else if ( (LA9_0=='\n') ) {
-                        alt9=3;
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("724:42: ( options {greedy=true; } : '\\r\\n' | '\\r' | '\\n' )", 9, 0, input);
-
-                        throw nvae;
+                        alt9=1;
                     }
                     switch (alt9) {
                         case 1 :
-                            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:724:65: '\\r\\n'
-                            {
-                            match("\r\n"); 
-
-
-                            }
-                            break;
-                        case 2 :
-                            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:724:74: '\\r'
+                            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:726:39: '\\r'
                             {
                             match('\r'); 
 
                             }
                             break;
-                        case 3 :
-                            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:724:81: '\\n'
-                            {
-                            match('\n'); 
-
-                            }
-                            break;
 
                     }
 
+                    match('\n'); 
 
                     }
                     break;
@@ -702,10 +672,10 @@ public class InternalPreferenceLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:726:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:726:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:728:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:728:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:726:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:728:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -719,7 +689,7 @@ public class InternalPreferenceLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:
+            	    // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -755,58 +725,12 @@ public class InternalPreferenceLexer extends Lexer {
     }
     // $ANTLR end RULE_WS
 
-    // $ANTLR start RULE_LEXER_BODY
-    public final void mRULE_LEXER_BODY() throws RecognitionException {
-        try {
-            int _type = RULE_LEXER_BODY;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:728:17: ( '<#' ( '.' )* '#>' )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:728:19: '<#' ( '.' )* '#>'
-            {
-            match("<#"); 
-
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:728:24: ( '.' )*
-            loop12:
-            do {
-                int alt12=2;
-                int LA12_0 = input.LA(1);
-
-                if ( (LA12_0=='.') ) {
-                    alt12=1;
-                }
-
-
-                switch (alt12) {
-            	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:728:24: '.'
-            	    {
-            	    match('.'); 
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop12;
-                }
-            } while (true);
-
-            match("#>"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end RULE_LEXER_BODY
-
     // $ANTLR start RULE_ANY_OTHER
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:730:16: ( . )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:730:18: .
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:730:16: ( . )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:730:18: .
             {
             matchAny(); 
 
@@ -820,338 +744,322 @@ public class InternalPreferenceLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:8: ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER )
-        int alt13=19;
-        int LA13_0 = input.LA(1);
+        // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=18;
+        int LA12_0 = input.LA(1);
 
-        if ( (LA13_0=='c') ) {
-            int LA13_1 = input.LA(2);
+        if ( (LA12_0=='c') ) {
+            int LA12_1 = input.LA(2);
 
-            if ( (LA13_1=='o') ) {
-                int LA13_21 = input.LA(3);
+            if ( (LA12_1=='o') ) {
+                int LA12_20 = input.LA(3);
 
-                if ( (LA13_21=='m') ) {
-                    int LA13_39 = input.LA(4);
+                if ( (LA12_20=='m') ) {
+                    int LA12_37 = input.LA(4);
 
-                    if ( (LA13_39=='m') ) {
-                        int LA13_41 = input.LA(5);
+                    if ( (LA12_37=='m') ) {
+                        int LA12_39 = input.LA(5);
 
-                        if ( (LA13_41=='o') ) {
-                            int LA13_43 = input.LA(6);
+                        if ( (LA12_39=='o') ) {
+                            int LA12_41 = input.LA(6);
 
-                            if ( (LA13_43=='n') ) {
-                                int LA13_45 = input.LA(7);
+                            if ( (LA12_41=='n') ) {
+                                int LA12_43 = input.LA(7);
 
-                                if ( (LA13_45=='p') ) {
-                                    int LA13_46 = input.LA(8);
+                                if ( (LA12_43=='p') ) {
+                                    int LA12_44 = input.LA(8);
 
-                                    if ( (LA13_46=='r') ) {
-                                        int LA13_47 = input.LA(9);
+                                    if ( (LA12_44=='r') ) {
+                                        int LA12_45 = input.LA(9);
 
-                                        if ( (LA13_47=='e') ) {
-                                            int LA13_48 = input.LA(10);
+                                        if ( (LA12_45=='e') ) {
+                                            int LA12_46 = input.LA(10);
 
-                                            if ( (LA13_48=='f') ) {
-                                                int LA13_49 = input.LA(11);
+                                            if ( (LA12_46=='f') ) {
+                                                int LA12_47 = input.LA(11);
 
-                                                if ( (LA13_49=='i') ) {
-                                                    int LA13_50 = input.LA(12);
+                                                if ( (LA12_47=='i') ) {
+                                                    int LA12_48 = input.LA(12);
 
-                                                    if ( (LA13_50=='x') ) {
-                                                        int LA13_51 = input.LA(13);
+                                                    if ( (LA12_48=='x') ) {
+                                                        int LA12_49 = input.LA(13);
 
-                                                        if ( ((LA13_51>='0' && LA13_51<='9')||(LA13_51>='A' && LA13_51<='Z')||LA13_51=='_'||(LA13_51>='a' && LA13_51<='z')) ) {
-                                                            alt13=12;
+                                                        if ( ((LA12_49>='0' && LA12_49<='9')||(LA12_49>='A' && LA12_49<='Z')||LA12_49=='_'||(LA12_49>='a' && LA12_49<='z')) ) {
+                                                            alt12=12;
                                                         }
                                                         else {
-                                                            alt13=1;}
+                                                            alt12=1;}
                                                     }
                                                     else {
-                                                        alt13=12;}
+                                                        alt12=12;}
                                                 }
                                                 else {
-                                                    alt13=12;}
+                                                    alt12=12;}
                                             }
                                             else {
-                                                alt13=12;}
+                                                alt12=12;}
                                         }
                                         else {
-                                            alt13=12;}
+                                            alt12=12;}
                                     }
                                     else {
-                                        alt13=12;}
+                                        alt12=12;}
                                 }
                                 else {
-                                    alt13=12;}
+                                    alt12=12;}
                             }
                             else {
-                                alt13=12;}
+                                alt12=12;}
                         }
                         else {
-                            alt13=12;}
+                            alt12=12;}
                     }
                     else {
-                        alt13=12;}
+                        alt12=12;}
                 }
                 else {
-                    alt13=12;}
+                    alt12=12;}
             }
             else {
-                alt13=12;}
+                alt12=12;}
         }
-        else if ( (LA13_0=='p') ) {
-            int LA13_2 = input.LA(2);
+        else if ( (LA12_0=='p') ) {
+            int LA12_2 = input.LA(2);
 
-            if ( (LA13_2=='a') ) {
-                int LA13_23 = input.LA(3);
+            if ( (LA12_2=='a') ) {
+                int LA12_22 = input.LA(3);
 
-                if ( (LA13_23=='g') ) {
-                    int LA13_40 = input.LA(4);
+                if ( (LA12_22=='g') ) {
+                    int LA12_38 = input.LA(4);
 
-                    if ( (LA13_40=='e') ) {
-                        int LA13_42 = input.LA(5);
+                    if ( (LA12_38=='e') ) {
+                        int LA12_40 = input.LA(5);
 
-                        if ( ((LA13_42>='0' && LA13_42<='9')||(LA13_42>='A' && LA13_42<='Z')||LA13_42=='_'||(LA13_42>='a' && LA13_42<='z')) ) {
-                            alt13=12;
+                        if ( ((LA12_40>='0' && LA12_40<='9')||(LA12_40>='A' && LA12_40<='Z')||LA12_40=='_'||(LA12_40>='a' && LA12_40<='z')) ) {
+                            alt12=12;
                         }
                         else {
-                            alt13=2;}
+                            alt12=2;}
                     }
                     else {
-                        alt13=12;}
+                        alt12=12;}
                 }
                 else {
-                    alt13=12;}
+                    alt12=12;}
             }
             else {
-                alt13=12;}
+                alt12=12;}
         }
-        else if ( (LA13_0=='{') ) {
-            alt13=3;
+        else if ( (LA12_0=='{') ) {
+            alt12=3;
         }
-        else if ( (LA13_0=='}') ) {
-            alt13=4;
+        else if ( (LA12_0=='}') ) {
+            alt12=4;
         }
-        else if ( (LA13_0==';') ) {
-            alt13=5;
+        else if ( (LA12_0==';') ) {
+            alt12=5;
         }
-        else if ( (LA13_0=='#') ) {
-            alt13=6;
+        else if ( (LA12_0=='#') ) {
+            alt12=6;
         }
-        else if ( (LA13_0=='?') ) {
-            alt13=7;
+        else if ( (LA12_0=='?') ) {
+            alt12=7;
         }
-        else if ( (LA13_0=='[') ) {
-            alt13=8;
+        else if ( (LA12_0=='[') ) {
+            alt12=8;
         }
-        else if ( (LA13_0==',') ) {
-            alt13=9;
+        else if ( (LA12_0==',') ) {
+            alt12=9;
         }
-        else if ( (LA13_0==']') ) {
-            alt13=10;
+        else if ( (LA12_0==']') ) {
+            alt12=10;
         }
-        else if ( (LA13_0=='.') ) {
-            alt13=11;
+        else if ( (LA12_0=='.') ) {
+            alt12=11;
         }
-        else if ( (LA13_0=='^') ) {
-            int LA13_12 = input.LA(2);
+        else if ( (LA12_0=='^') ) {
+            int LA12_12 = input.LA(2);
 
-            if ( ((LA13_12>='A' && LA13_12<='Z')||LA13_12=='_'||(LA13_12>='a' && LA13_12<='z')) ) {
-                alt13=12;
+            if ( ((LA12_12>='A' && LA12_12<='Z')||LA12_12=='_'||(LA12_12>='a' && LA12_12<='z')) ) {
+                alt12=12;
             }
             else {
-                alt13=19;}
+                alt12=18;}
         }
-        else if ( ((LA13_0>='A' && LA13_0<='Z')||LA13_0=='_'||(LA13_0>='a' && LA13_0<='b')||(LA13_0>='d' && LA13_0<='o')||(LA13_0>='q' && LA13_0<='z')) ) {
-            alt13=12;
+        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='b')||(LA12_0>='d' && LA12_0<='o')||(LA12_0>='q' && LA12_0<='z')) ) {
+            alt12=12;
         }
-        else if ( ((LA13_0>='0' && LA13_0<='9')) ) {
-            alt13=13;
+        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
+            alt12=13;
         }
-        else if ( (LA13_0=='\"') ) {
-            int LA13_15 = input.LA(2);
+        else if ( (LA12_0=='\"') ) {
+            int LA12_15 = input.LA(2);
 
-            if ( ((LA13_15>='\u0000' && LA13_15<='\uFFFE')) ) {
-                alt13=14;
+            if ( ((LA12_15>='\u0000' && LA12_15<='\uFFFE')) ) {
+                alt12=14;
             }
             else {
-                alt13=19;}
+                alt12=18;}
         }
-        else if ( (LA13_0=='\'') ) {
-            int LA13_16 = input.LA(2);
+        else if ( (LA12_0=='\'') ) {
+            int LA12_16 = input.LA(2);
 
-            if ( ((LA13_16>='\u0000' && LA13_16<='\uFFFE')) ) {
-                alt13=14;
+            if ( ((LA12_16>='\u0000' && LA12_16<='\uFFFE')) ) {
+                alt12=14;
             }
             else {
-                alt13=19;}
+                alt12=18;}
         }
-        else if ( (LA13_0=='/') ) {
+        else if ( (LA12_0=='/') ) {
             switch ( input.LA(2) ) {
             case '*':
                 {
-                alt13=15;
+                alt12=15;
                 }
                 break;
             case '/':
                 {
-                alt13=16;
+                alt12=16;
                 }
                 break;
             default:
-                alt13=19;}
+                alt12=18;}
 
         }
-        else if ( ((LA13_0>='\t' && LA13_0<='\n')||LA13_0=='\r'||LA13_0==' ') ) {
-            alt13=17;
+        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
+            alt12=17;
         }
-        else if ( (LA13_0=='<') ) {
-            int LA13_19 = input.LA(2);
-
-            if ( (LA13_19=='#') ) {
-                alt13=18;
-            }
-            else {
-                alt13=19;}
-        }
-        else if ( ((LA13_0>='\u0000' && LA13_0<='\b')||(LA13_0>='\u000B' && LA13_0<='\f')||(LA13_0>='\u000E' && LA13_0<='\u001F')||LA13_0=='!'||(LA13_0>='$' && LA13_0<='&')||(LA13_0>='(' && LA13_0<='+')||LA13_0=='-'||LA13_0==':'||(LA13_0>='=' && LA13_0<='>')||LA13_0=='@'||LA13_0=='\\'||LA13_0=='`'||LA13_0=='|'||(LA13_0>='~' && LA13_0<='\uFFFE')) ) {
-            alt13=19;
+        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='$' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='+')||LA12_0=='-'||LA12_0==':'||(LA12_0>='<' && LA12_0<='>')||LA12_0=='@'||LA12_0=='\\'||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFE')) ) {
+            alt12=18;
         }
         else {
             NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_LEXER_BODY | RULE_ANY_OTHER );", 13, 0, input);
+                new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
 
             throw nvae;
         }
-        switch (alt13) {
+        switch (alt12) {
             case 1 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:10: T12
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:10: T11
+                {
+                mT11(); 
+
+                }
+                break;
+            case 2 :
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:14: T12
                 {
                 mT12(); 
 
                 }
                 break;
-            case 2 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:14: T13
+            case 3 :
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:18: T13
                 {
                 mT13(); 
 
                 }
                 break;
-            case 3 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:18: T14
+            case 4 :
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:22: T14
                 {
                 mT14(); 
 
                 }
                 break;
-            case 4 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:22: T15
+            case 5 :
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:26: T15
                 {
                 mT15(); 
 
                 }
                 break;
-            case 5 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:26: T16
+            case 6 :
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:30: T16
                 {
                 mT16(); 
 
                 }
                 break;
-            case 6 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:30: T17
+            case 7 :
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:34: T17
                 {
                 mT17(); 
 
                 }
                 break;
-            case 7 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:34: T18
+            case 8 :
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:38: T18
                 {
                 mT18(); 
 
                 }
                 break;
-            case 8 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:38: T19
+            case 9 :
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:42: T19
                 {
                 mT19(); 
 
                 }
                 break;
-            case 9 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:42: T20
+            case 10 :
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:46: T20
                 {
                 mT20(); 
 
                 }
                 break;
-            case 10 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:46: T21
+            case 11 :
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:50: T21
                 {
                 mT21(); 
 
                 }
                 break;
-            case 11 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:50: T22
-                {
-                mT22(); 
-
-                }
-                break;
             case 12 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:54: RULE_ID
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:54: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 13 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:62: RULE_INT
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:62: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 14 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:71: RULE_STRING
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:71: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 15 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:83: RULE_ML_COMMENT
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:83: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 16 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:99: RULE_SL_COMMENT
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:99: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 17 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:115: RULE_WS
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:115: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 18 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:123: RULE_LEXER_BODY
-                {
-                mRULE_LEXER_BODY(); 
-
-                }
-                break;
-            case 19 :
-                // ./src-gen/org/eclipse/xtext/parser/internal/InternalPreference.g:1:139: RULE_ANY_OTHER
+                // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:1:123: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

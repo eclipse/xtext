@@ -2,21 +2,20 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenPackageImpl.java,v 1.4 2008/07/03 09:43:25 sefftinge Exp $
+ * $Id: XtextgenPackageImpl.java,v 1.5 2008/07/14 08:15:32 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.xtext.XtextPackage;
-
 import org.eclipse.xtext.xtextgen.GenModel;
 import org.eclipse.xtext.xtextgen.GenService;
+import org.eclipse.xtext.xtextgen.Outlet;
 import org.eclipse.xtext.xtextgen.XtextgenFactory;
 import org.eclipse.xtext.xtextgen.XtextgenPackage;
 
@@ -27,21 +26,28 @@ import org.eclipse.xtext.xtextgen.XtextgenPackage;
  * @generated
  */
 public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage {
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass genServiceEClass = null;
+	private EClass genServiceEClass = null;
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private EClass genModelEClass = null;
+	private EClass genModelEClass = null;
 
-    /**
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass outletEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -50,24 +56,24 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 	 * initialization of the package, or returns the registered package,
 	 * if one already exists.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see org.eclipse.xtext.xtextgen.XtextgenPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-    private XtextgenPackageImpl() {
+	private XtextgenPackageImpl() {
 		super(eNS_URI, XtextgenFactory.eINSTANCE);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private static boolean isInited = false;
+	private static boolean isInited = false;
 
-    /**
+	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this
 	 * model, and for any others upon which it depends.  Simple
 	 * dependencies are satisfied by calling this method on all
@@ -83,13 +89,13 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 	 * <p>Invocation of this method will not affect any packages that have
 	 * already been initialized.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-    public static XtextgenPackage init() {
+	public static XtextgenPackage init() {
 		if (isInited) return (XtextgenPackage)EPackage.Registry.INSTANCE.getEPackage(XtextgenPackage.eNS_URI);
 
 		// Obtain or create and register package
@@ -112,183 +118,201 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 		return theXtextgenPackage;
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getGenService() {
+	public EClass getGenService() {
 		return genServiceEClass;
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getGenService_ServiceInterfaceFQName() {
+	public EAttribute getGenService_ServiceInterfaceFQName() {
 		return (EAttribute)genServiceEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getGenService_GenClassFQName() {
+	public EAttribute getGenService_GenClassFQName() {
 		return (EAttribute)genServiceEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getGenService_ExtensionPointID() {
+	public EAttribute getGenService_ExtensionPointID() {
 		return (EAttribute)genServiceEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getGenService_TemplatePath() {
+	public EAttribute getGenService_TemplatePath() {
 		return (EAttribute)genServiceEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getGenService_GenParameters() {
-		return (EReference)genServiceEClass.getEStructuralFeatures().get(4);
-	}
-
-    /**
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @generated
-	 */
-    public EAttribute getGenService_UiService() {
+	public EAttribute getGenService_GenParameters() {
 		return (EAttribute)genServiceEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EClass getGenModel() {
+	public EAttribute getGenService_UiService() {
+		return (EAttribute)genServiceEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getGenModel() {
 		return genModelEClass;
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getGenModel_ModelFileExtensions() {
+	public EAttribute getGenModel_ModelFileExtensions() {
 		return (EAttribute)genModelEClass.getEStructuralFeatures().get(0);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getGenModel_FileHeader() {
+	public EAttribute getGenModel_FileHeader() {
 		return (EAttribute)genModelEClass.getEStructuralFeatures().get(1);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getGenModel_Grammar() {
+	public EReference getGenModel_Grammar() {
 		return (EReference)genModelEClass.getEStructuralFeatures().get(2);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getGenModel_Services() {
+	public EReference getGenModel_Services() {
 		return (EReference)genModelEClass.getEStructuralFeatures().get(3);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EReference getGenModel_OutletMap() {
-		return (EReference)genModelEClass.getEStructuralFeatures().get(4);
+	public EAttribute getGenModel_LanguageInterfaceFQName() {
+		return (EAttribute)genModelEClass.getEStructuralFeatures().get(4);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getGenModel_UiPluginBundleID() {
-		return (EAttribute)genModelEClass.getEStructuralFeatures().get(8);
-	}
-
-    /**
-	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-	 * @generated
-	 */
-    public EAttribute getGenModel_LanguageInterfaceFQName() {
+	public EAttribute getGenModel_NonUIPluginBundleID() {
 		return (EAttribute)genModelEClass.getEStructuralFeatures().get(5);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getGenModel_StandaloneSetupClassFQName() {
+	public EAttribute getGenModel_UiPluginBundleID() {
 		return (EAttribute)genModelEClass.getEStructuralFeatures().get(6);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public EAttribute getGenModel_NonUIPluginBundleID() {
-		return (EAttribute)genModelEClass.getEStructuralFeatures().get(7);
+	public EReference getGenModel_Outlets() {
+		return (EReference)genModelEClass.getEStructuralFeatures().get(7);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public XtextgenFactory getXtextgenFactory() {
+	public EClass getOutlet() {
+		return outletEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOutlet_Name() {
+		return (EAttribute)outletEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOutlet_TargetFolder() {
+		return (EAttribute)outletEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XtextgenFactory getXtextgenFactory() {
 		return (XtextgenFactory)getEFactoryInstance();
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private boolean isCreated = false;
+	private boolean isCreated = false;
 
-    /**
+	/**
 	 * Creates the meta-model objects for the package.  This method is
 	 * guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void createPackageContents() {
+	public void createPackageContents() {
 		if (isCreated) return;
 		isCreated = true;
 
@@ -298,36 +322,39 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 		createEAttribute(genServiceEClass, GEN_SERVICE__GEN_CLASS_FQ_NAME);
 		createEAttribute(genServiceEClass, GEN_SERVICE__EXTENSION_POINT_ID);
 		createEAttribute(genServiceEClass, GEN_SERVICE__TEMPLATE_PATH);
-		createEReference(genServiceEClass, GEN_SERVICE__GEN_PARAMETERS);
 		createEAttribute(genServiceEClass, GEN_SERVICE__UI_SERVICE);
+		createEAttribute(genServiceEClass, GEN_SERVICE__GEN_PARAMETERS);
 
 		genModelEClass = createEClass(GEN_MODEL);
 		createEAttribute(genModelEClass, GEN_MODEL__MODEL_FILE_EXTENSIONS);
 		createEAttribute(genModelEClass, GEN_MODEL__FILE_HEADER);
 		createEReference(genModelEClass, GEN_MODEL__GRAMMAR);
 		createEReference(genModelEClass, GEN_MODEL__SERVICES);
-		createEReference(genModelEClass, GEN_MODEL__OUTLET_MAP);
 		createEAttribute(genModelEClass, GEN_MODEL__LANGUAGE_INTERFACE_FQ_NAME);
-		createEAttribute(genModelEClass, GEN_MODEL__STANDALONE_SETUP_CLASS_FQ_NAME);
 		createEAttribute(genModelEClass, GEN_MODEL__NON_UI_PLUGIN_BUNDLE_ID);
 		createEAttribute(genModelEClass, GEN_MODEL__UI_PLUGIN_BUNDLE_ID);
+		createEReference(genModelEClass, GEN_MODEL__OUTLETS);
+
+		outletEClass = createEClass(OUTLET);
+		createEAttribute(outletEClass, OUTLET__NAME);
+		createEAttribute(outletEClass, OUTLET__TARGET_FOLDER);
 	}
 
-    /**
+	/**
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    private boolean isInitialized = false;
+	private boolean isInitialized = false;
 
-    /**
+	/**
 	 * Complete the initialization of the package and its meta-model.  This
 	 * method is guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-    public void initializePackageContents() {
+	public void initializePackageContents() {
 		if (isInitialized) return;
 		isInitialized = true;
 
@@ -351,19 +378,27 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 		initEAttribute(getGenService_GenClassFQName(), ecorePackage.getEString(), "genClassFQName", null, 0, 1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGenService_ExtensionPointID(), ecorePackage.getEString(), "extensionPointID", null, 0, 1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGenService_TemplatePath(), ecorePackage.getEString(), "templatePath", null, 0, 1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getGenService_GenParameters(), ecorePackage.getEStringToStringMapEntry(), null, "genParameters", null, 0, -1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGenService_UiService(), ecorePackage.getEBoolean(), "uiService", null, 0, 1, GenService.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
+		EGenericType g2 = createEGenericType(ecorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getGenService_GenParameters(), g1, "genParameters", null, 0, 1, GenService.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(genModelEClass, GenModel.class, "GenModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGenModel_ModelFileExtensions(), ecorePackage.getEString(), "modelFileExtensions", null, 0, -1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGenModel_FileHeader(), ecorePackage.getEString(), "fileHeader", null, 0, 1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGenModel_Grammar(), theXtextPackage.getGrammar(), null, "grammar", null, 0, 1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGenModel_Services(), this.getGenService(), null, "services", null, 0, -1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getGenModel_OutletMap(), ecorePackage.getEStringToStringMapEntry(), null, "outletMap", null, 0, -1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGenModel_LanguageInterfaceFQName(), ecorePackage.getEString(), "languageInterfaceFQName", null, 0, 1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getGenModel_StandaloneSetupClassFQName(), ecorePackage.getEString(), "standaloneSetupClassFQName", null, 0, 1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGenModel_NonUIPluginBundleID(), ecorePackage.getEString(), "nonUIPluginBundleID", null, 0, 1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGenModel_UiPluginBundleID(), ecorePackage.getEString(), "uiPluginBundleID", null, 0, 1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getGenModel_Outlets(), this.getOutlet(), null, "outlets", null, 0, -1, GenModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(outletEClass, Outlet.class, "Outlet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOutlet_Name(), ecorePackage.getEString(), "name", null, 0, 1, Outlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOutlet_TargetFolder(), ecorePackage.getEString(), "targetFolder", null, 0, 1, Outlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

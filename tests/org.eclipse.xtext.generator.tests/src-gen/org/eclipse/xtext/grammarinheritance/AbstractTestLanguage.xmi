@@ -6,7 +6,7 @@
   <idElements>grammarinheritance</idElements>
   <idElements>AbstractTestLanguage</idElements>
   <parserRules name="InheritedParserRule">
-    <type name="Element" alias="mm"/>
+    <type name="AType" alias="mm"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Keyword" value="element"/>
       <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">

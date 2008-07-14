@@ -8,7 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xtextgen.GenModel;
+import org.eclipse.xtext.xtextgen.Outlet;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -17,10 +19,19 @@ import org.eclipse.xtext.xtextgen.GenModel;
 public class GenExtensions {
 
     public static String outletPath(GenModel genModel, String outletName) {
-        String result = genModel.getOutletMap().get(outletName);
-        if(result == null) {
+        Outlet outlet = getOuletForName(genModel,outletName);
+        if(outlet == null) {
             throw new NullPointerException("No such outlet : " + outletName);
         }
-        return result;
+        return outlet.getTargetFolder();
     }
+
+	public static Outlet getOuletForName(GenModel genModel, String outletName) {
+		EList<Outlet> outlets = genModel.getOutlets();
+		for (Outlet outlet : outlets) {
+			if (outlet.getName() == outletName || outlet.getName()!=null && outlet.getName().equals(outletName))
+				return outlet;
+		}
+		return null;
+	}
 }

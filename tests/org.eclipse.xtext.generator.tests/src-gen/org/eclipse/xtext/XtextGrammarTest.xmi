@@ -128,7 +128,7 @@
         <abstractTokens xsi:type="xtext:Keyword" value=":"/>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" feature="body" operator="=">
-        <terminal xsi:type="xtext:RuleCall" name="LEXER_BODY"/>
+        <terminal xsi:type="xtext:RuleCall" name="STRING"/>
       </abstractTokens>
     </alternatives>
   </parserRules>

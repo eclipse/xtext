@@ -67,13 +67,6 @@
       </grammarAccess>
    </extension>
    <extension
-         point="org.eclipse.xtext.ui.metamodelAccess">
-      <metamodelAccess
-            class="org.eclipse.xtext.builtin.XtextBuiltinMetamodelAccess"
-            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
-      </metamodelAccess>
-   </extension>
-   <extension
          point="org.eclipse.xtext.ui.valueConverter">
       <valueConverter
             class="org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters"

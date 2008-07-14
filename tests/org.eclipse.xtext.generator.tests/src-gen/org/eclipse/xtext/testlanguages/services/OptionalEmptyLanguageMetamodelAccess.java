@@ -9,31 +9,35 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class OptionalEmptyLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
-	public EPackage[] getGeneratedEPackages() {
-		return new EPackage[] {
+	private EPackage[] generated = new EPackage[] {
 		
 		getOptionalEmptyEPackage()
 		
 		};
+
+	public EPackage[] getGeneratedEPackages() {
+		return generated;
 	}
 
-	public EPackage[] getReferencedEPackages() {
-		return new EPackage[] {
+	private EPackage[] referenced = new EPackage[] {
 		
 		};
+	public EPackage[] getReferencedEPackages() {
+		return referenced;
+	}
+	
+	private EPackage[] all = new EPackage[] {
+	    getOptionalEmptyEPackage()
+		};
+	
+	public EPackage[] getAllEPackages() {
+		return all;
 	}
 
 	
 	protected static final String OPTIONALEMPTY_NS_URI = "http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty";
-	protected static final String OPTIONALEMPTY_CP_URI = "org/eclipse/xtext/testlanguages/OptionalEmpty.ecore";
 	
 	protected EPackage getOptionalEmptyEPackage() {	
-		if (!EPackage.Registry.INSTANCE.containsKey(OPTIONALEMPTY_NS_URI)) {
-			EPackage p = loadEcoreFile(OptionalEmptyLanguageMetamodelAccess.class.getClassLoader(),OPTIONALEMPTY_CP_URI);
-			if (p!=null) {
-				EPackage.Registry.INSTANCE.put(OPTIONALEMPTY_NS_URI,p);
-			}
-		}
 		return EPackage.Registry.INSTANCE.getEPackage(OPTIONALEMPTY_NS_URI);
 	}
 	

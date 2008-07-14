@@ -14,15 +14,18 @@
 
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
+«EXTENSION org::openarchitectureware::util::IO»
 
 «DEFINE root FOR GenModel»
-«FILE standaloneSetupClassFQName.toJavaFilePath()-»
+«FILE standaloneSetupClass(grammar()).toJavaFilePath()-»
 /*
 «fileHeader()»
 */
-package «standaloneSetupClassFQName.toJavaPackage()»;
+package «standaloneSetupClass(grammar()).toJavaPackage()»;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.service.ILanguageDescriptor;
@@ -35,7 +38,7 @@ import «s.genClassFQName»;
 
 import «languageInterfaceFQName»;
 
-public abstract class «standaloneSetupClassFQName.toSimpleName()» {
+public abstract class «standaloneSetupClass(grammar()).toSimpleName()» {
 
 	private static boolean isInitialized = false;
 
@@ -43,11 +46,14 @@ public abstract class «standaloneSetupClassFQName.toSimpleName()» {
 		if(!isInitialized) {
 			«IF grammar().getSuperGrammar()!=null»
 			// setup super language first
-			XtextBuiltinStandaloneSetup.doSetup();
-			«ENDIF»Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+			«standaloneSetupClass(grammar().getSuperGrammar())».doSetup();
+			«ELSE»
+			// General setup
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"ecore", new XMIResourceFactoryImpl());
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
+			«ENDIF»
 			ILanguageDescriptor languageDescriptor = 
 				LanguageDescriptorFactory.createLanguageDescriptor(
 					«languageInterfaceFQName.toSimpleName()».ID, 
@@ -64,11 +70,23 @@ public abstract class «standaloneSetupClassFQName.toSimpleName()» {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", resourceFactory);
 			«ENDFOREACH»
 			«ENDIF»
+			// initialize EPackages
+			«FOREACH grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel) AS mmd»
+				if (!EPackage.Registry.INSTANCE.containsKey("«mmd.nsURI»")) {
+					EPackage «mmd.name» = EcoreUtil2.loadEPackage(
+							"«classPathURI(mmd)»",
+							«standaloneSetupClass(grammar()).toSimpleName()».class.getClassLoader());
+					if («mmd.name» == null)
+						throw new IllegalStateException(
+								"Couldn't load EPackage from '«classPathURI(mmd)»'");
+					EPackage.Registry.INSTANCE.put("«mmd.nsURI»", «mmd.name»);
+				}
+			«ENDFOREACH»
 			isInitialized = true;
 		}
 	}
 	
-	public static ILanguageDescriptor getLanguageDescriptor() {
+	public static synchronized ILanguageDescriptor getLanguageDescriptor() {
 		if(!isInitialized) {
 			doSetup();
 		}

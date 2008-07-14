@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g 2008-07-08 10:01:36
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g 2008-07-14 10:05:20
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_LEXER_BODY", "RULE_ANY_OTHER", "'+'", "'-'", "'*'", "'/'", "'('", "')'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'+'", "'-'", "'*'", "'/'", "'('", "')'"
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
@@ -28,9 +28,8 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
     public static final int EOF=-1;
     public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
-    public static final int RULE_ANY_OTHER=11;
+    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int RULE_LEXER_BODY=10;
 
         public InternalSimpleExpressionsParser(TokenStream input) {
             super(input);
@@ -131,7 +130,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==RULE_ID||LA1_0==16) ) {
+                if ( (LA1_0==RULE_ID||LA1_0==15) ) {
                     alt1=1;
                 }
 
@@ -280,7 +279,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
                 int alt3=2;
                 int LA3_0 = input.LA(1);
 
-                if ( ((LA3_0>=12 && LA3_0<=13)) ) {
+                if ( ((LA3_0>=11 && LA3_0<=12)) ) {
                     alt3=1;
                 }
 
@@ -316,10 +315,10 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	    int alt2=2;
             	    int LA2_0 = input.LA(1);
 
-            	    if ( (LA2_0==12) ) {
+            	    if ( (LA2_0==11) ) {
             	        alt2=1;
             	    }
-            	    else if ( (LA2_0==13) ) {
+            	    else if ( (LA2_0==12) ) {
             	        alt2=2;
             	    }
             	    else {
@@ -332,7 +331,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	        case 1 :
             	            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:149:18: '+'
             	            {
-            	            match(input,12,FOLLOW_12_in_ruleAddition288); 
+            	            match(input,11,FOLLOW_11_in_ruleAddition288); 
 
             	                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
             	                
@@ -342,7 +341,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	        case 2 :
             	            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:154:6: '-'
             	            {
-            	            match(input,13,FOLLOW_13_in_ruleAddition303); 
+            	            match(input,12,FOLLOW_12_in_ruleAddition303); 
 
             	                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
             	                
@@ -490,7 +489,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
                 int alt5=2;
                 int LA5_0 = input.LA(1);
 
-                if ( ((LA5_0>=14 && LA5_0<=15)) ) {
+                if ( ((LA5_0>=13 && LA5_0<=14)) ) {
                     alt5=1;
                 }
 
@@ -526,10 +525,10 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	    int alt4=2;
             	    int LA4_0 = input.LA(1);
 
-            	    if ( (LA4_0==14) ) {
+            	    if ( (LA4_0==13) ) {
             	        alt4=1;
             	    }
-            	    else if ( (LA4_0==15) ) {
+            	    else if ( (LA4_0==14) ) {
             	        alt4=2;
             	    }
             	    else {
@@ -542,7 +541,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	        case 1 :
             	            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:222:18: '*'
             	            {
-            	            match(input,14,FOLLOW_14_in_ruleMultiplication465); 
+            	            match(input,13,FOLLOW_13_in_ruleMultiplication465); 
 
             	                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
             	                
@@ -552,7 +551,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	        case 2 :
             	            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:227:6: '/'
             	            {
-            	            match(input,15,FOLLOW_15_in_ruleMultiplication480); 
+            	            match(input,14,FOLLOW_14_in_ruleMultiplication480); 
 
             	                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
             	                
@@ -686,7 +685,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             if ( (LA6_0==RULE_ID) ) {
                 alt6=1;
             }
-            else if ( (LA6_0==16) ) {
+            else if ( (LA6_0==15) ) {
                 alt6=2;
             }
             else {
@@ -888,7 +887,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:339:2: ( '(' this_Addition= ruleAddition )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:339:3: '(' this_Addition= ruleAddition
             {
-            match(input,16,FOLLOW_16_in_ruleParens813); 
+            match(input,15,FOLLOW_15_in_ruleParens813); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
@@ -906,7 +905,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
 
             }
 
-            match(input,17,FOLLOW_17_in_ruleParens844); 
+            match(input,16,FOLLOW_16_in_ruleParens844); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.5/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -934,20 +933,20 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
 
     public static final BitSet FOLLOW_ruleSequence_in_entryRuleSequence71 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleSequence81 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAddition_in_ruleSequence128 = new BitSet(new long[]{0x0000000000010012L});
-    public static final BitSet FOLLOW_ruleAddition_in_ruleSequence165 = new BitSet(new long[]{0x0000000000010012L});
+    public static final BitSet FOLLOW_ruleAddition_in_ruleSequence128 = new BitSet(new long[]{0x0000000000008012L});
+    public static final BitSet FOLLOW_ruleAddition_in_ruleSequence165 = new BitSet(new long[]{0x0000000000008012L});
     public static final BitSet FOLLOW_ruleAddition_in_entryRuleAddition203 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleAddition213 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMultiplication_in_ruleAddition260 = new BitSet(new long[]{0x0000000000003002L});
-    public static final BitSet FOLLOW_12_in_ruleAddition288 = new BitSet(new long[]{0x0000000000010010L});
-    public static final BitSet FOLLOW_13_in_ruleAddition303 = new BitSet(new long[]{0x0000000000010010L});
-    public static final BitSet FOLLOW_ruleMultiplication_in_ruleAddition342 = new BitSet(new long[]{0x0000000000003002L});
+    public static final BitSet FOLLOW_ruleMultiplication_in_ruleAddition260 = new BitSet(new long[]{0x0000000000001802L});
+    public static final BitSet FOLLOW_11_in_ruleAddition288 = new BitSet(new long[]{0x0000000000008010L});
+    public static final BitSet FOLLOW_12_in_ruleAddition303 = new BitSet(new long[]{0x0000000000008010L});
+    public static final BitSet FOLLOW_ruleMultiplication_in_ruleAddition342 = new BitSet(new long[]{0x0000000000001802L});
     public static final BitSet FOLLOW_ruleMultiplication_in_entryRuleMultiplication380 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleMultiplication390 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerm_in_ruleMultiplication437 = new BitSet(new long[]{0x000000000000C002L});
-    public static final BitSet FOLLOW_14_in_ruleMultiplication465 = new BitSet(new long[]{0x0000000000010010L});
-    public static final BitSet FOLLOW_15_in_ruleMultiplication480 = new BitSet(new long[]{0x0000000000010010L});
-    public static final BitSet FOLLOW_ruleTerm_in_ruleMultiplication519 = new BitSet(new long[]{0x000000000000C002L});
+    public static final BitSet FOLLOW_ruleTerm_in_ruleMultiplication437 = new BitSet(new long[]{0x0000000000006002L});
+    public static final BitSet FOLLOW_13_in_ruleMultiplication465 = new BitSet(new long[]{0x0000000000008010L});
+    public static final BitSet FOLLOW_14_in_ruleMultiplication480 = new BitSet(new long[]{0x0000000000008010L});
+    public static final BitSet FOLLOW_ruleTerm_in_ruleMultiplication519 = new BitSet(new long[]{0x0000000000006002L});
     public static final BitSet FOLLOW_ruleTerm_in_entryRuleTerm557 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleTerm567 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAtom_in_ruleTerm614 = new BitSet(new long[]{0x0000000000000002L});
@@ -957,8 +956,8 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
     public static final BitSet FOLLOW_RULE_ID_in_ruleAtom726 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleParens_in_entryRuleParens768 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleParens778 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleParens813 = new BitSet(new long[]{0x0000000000010010L});
-    public static final BitSet FOLLOW_ruleAddition_in_ruleParens835 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleParens844 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleParens813 = new BitSet(new long[]{0x0000000000008010L});
+    public static final BitSet FOLLOW_ruleAddition_in_ruleParens835 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleParens844 = new BitSet(new long[]{0x0000000000000002L});
 
 }

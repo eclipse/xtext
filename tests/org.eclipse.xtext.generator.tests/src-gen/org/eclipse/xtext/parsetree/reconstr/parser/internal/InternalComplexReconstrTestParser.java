@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-07-08 10:01:35
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-07-14 10:05:19
 
 package org.eclipse.xtext.parsetree.reconstr.parser.internal; 
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_LEXER_BODY", "RULE_ANY_OTHER", "'+'", "'-'", "'('", "')'", "'!'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'+'", "'-'", "'('", "')'", "'!'"
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
@@ -28,9 +28,8 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
     public static final int EOF=-1;
     public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
-    public static final int RULE_ANY_OTHER=11;
+    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int RULE_LEXER_BODY=10;
 
         public InternalComplexReconstrTestParser(TokenStream input) {
             super(input);
@@ -133,10 +132,10 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
                 int alt1=3;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==12) ) {
+                if ( (LA1_0==11) ) {
                     alt1=1;
                 }
-                else if ( (LA1_0==13) ) {
+                else if ( (LA1_0==12) ) {
                     alt1=2;
                 }
 
@@ -168,7 +167,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
             	    }
 
-            	    match(input,12,FOLLOW_12_in_ruleOp148); 
+            	    match(input,11,FOLLOW_11_in_ruleOp148); 
 
             	            createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
             	        
@@ -230,7 +229,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
             	    }
 
-            	    match(input,13,FOLLOW_13_in_ruleOp205); 
+            	    match(input,12,FOLLOW_12_in_ruleOp205); 
 
             	            createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
             	        
@@ -349,7 +348,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
             if ( (LA2_0==RULE_ID) ) {
                 alt2=1;
             }
-            else if ( (LA2_0==14) ) {
+            else if ( (LA2_0==13) ) {
                 alt2=2;
             }
             else {
@@ -555,7 +554,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:230:3: ( '(' this_Op= ruleOp )
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:230:4: '(' this_Op= ruleOp
             {
-            match(input,14,FOLLOW_14_in_ruleParens530); 
+            match(input,13,FOLLOW_13_in_ruleParens530); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
@@ -573,7 +572,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
             }
 
-            match(input,15,FOLLOW_15_in_ruleParens561); 
+            match(input,14,FOLLOW_14_in_ruleParens561); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -584,7 +583,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==16) ) {
+            if ( (LA3_0==15) ) {
                 alt3=1;
             }
             switch (alt3) {
@@ -592,7 +591,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
                     // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:248:5: lv_em= '!'
                     {
                     lv_em=(Token)input.LT(1);
-                    match(input,16,FOLLOW_16_in_ruleParens579); 
+                    match(input,15,FOLLOW_15_in_ruleParens579); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "em"); 
                         
@@ -635,11 +634,11 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
     public static final BitSet FOLLOW_ruleOp_in_entryRuleOp71 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleOp81 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerm_in_ruleOp128 = new BitSet(new long[]{0x0000000000003002L});
-    public static final BitSet FOLLOW_12_in_ruleOp148 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_ruleTerm_in_ruleOp177 = new BitSet(new long[]{0x0000000000003002L});
-    public static final BitSet FOLLOW_13_in_ruleOp205 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_ruleTerm_in_ruleOp234 = new BitSet(new long[]{0x0000000000003002L});
+    public static final BitSet FOLLOW_ruleTerm_in_ruleOp128 = new BitSet(new long[]{0x0000000000001802L});
+    public static final BitSet FOLLOW_11_in_ruleOp148 = new BitSet(new long[]{0x0000000000002010L});
+    public static final BitSet FOLLOW_ruleTerm_in_ruleOp177 = new BitSet(new long[]{0x0000000000001802L});
+    public static final BitSet FOLLOW_12_in_ruleOp205 = new BitSet(new long[]{0x0000000000002010L});
+    public static final BitSet FOLLOW_ruleTerm_in_ruleOp234 = new BitSet(new long[]{0x0000000000001802L});
     public static final BitSet FOLLOW_ruleTerm_in_entryRuleTerm273 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleTerm283 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAtom_in_ruleTerm330 = new BitSet(new long[]{0x0000000000000002L});
@@ -649,9 +648,9 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
     public static final BitSet FOLLOW_RULE_ID_in_ruleAtom442 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleParens_in_entryRuleParens484 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleParens494 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleParens530 = new BitSet(new long[]{0x0000000000004010L});
-    public static final BitSet FOLLOW_ruleOp_in_ruleParens552 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleParens561 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_16_in_ruleParens579 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleParens530 = new BitSet(new long[]{0x0000000000002010L});
+    public static final BitSet FOLLOW_ruleOp_in_ruleParens552 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleParens561 = new BitSet(new long[]{0x0000000000008002L});
+    public static final BitSet FOLLOW_15_in_ruleParens579 = new BitSet(new long[]{0x0000000000000002L});
 
 }

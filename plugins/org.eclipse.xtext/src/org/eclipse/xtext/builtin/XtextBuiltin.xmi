@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext"
+   abstract="true">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>builtin</idElements>
+  <idElements>XtextBuiltin</idElements>
+  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore" uri="http://www.eclipse.org/emf/2002/Ecore"/>
+  <lexerRules name="ID" body="('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*"/>
+  <lexerRules name="INT" body="('0'..'9')+"> 
+  	<type alias="ecore" name="EInt"/>
+  </lexerRules>
+  <lexerRules name="STRING" body="'&quot;' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'&quot;') )* '&quot;' | 
+              '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'\'') )* '\''"/>
+  <lexerRules name="ML_COMMENT" body="'/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}"/>
+  <lexerRules name="SL_COMMENT" body="'//' ~('\n'|'\r')* ('\r'? '\n')? {$channel=HIDDEN;}"/>
+  <lexerRules name="WS" body="(' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;}"/>
+  <lexerRules name="ANY_OTHER" body="."/>
+</xtext:Grammar>
