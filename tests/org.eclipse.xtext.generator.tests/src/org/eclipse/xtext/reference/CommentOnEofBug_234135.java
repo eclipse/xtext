@@ -23,8 +23,7 @@ public class CommentOnEofBug_234135 extends AbstractGeneratorTest {
 
     public void testCommentOnEof() throws Exception {
         with(ReferenceGrammarStandaloneSetup.class);
-        // TODO: remove \n and make test succeed
-        String model = "//comment\n";
+        String model = "//comment";
         EList<LeafNode> leafNodes = getRootNode(model).getLeafNodes();
         assertEquals(1, leafNodes.size());
         EObject grammarElement = leafNodes.get(0).getGrammarElement();
