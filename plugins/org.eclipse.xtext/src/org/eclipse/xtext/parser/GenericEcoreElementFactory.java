@@ -10,6 +10,7 @@
 package org.eclipse.xtext.parser;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
@@ -18,7 +19,13 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.GeneratedMetamodel;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.service.Inject;
 
@@ -28,94 +35,103 @@ import org.eclipse.xtext.service.Inject;
  */
 public class GenericEcoreElementFactory implements IAstFactory {
 
-    @Inject
-    protected IMetamodelAccess metamodelAccess;
+	@Inject
+	protected IMetamodelAccess metamodelAccess;
 
-    @Inject
-    protected IValueConverterService converterService;
+	@Inject
+	protected IValueConverterService converterService;
 
-    public void setMetamodelAccess(IMetamodelAccess metamodelAccess) {
-        this.metamodelAccess = metamodelAccess;
-    }
-    
-    public EObject create(String fullTypeName) {
-        EClass clazz = getEClass(fullTypeName);
-        if (clazz != null && !(clazz.isAbstract() || clazz.isInterface()))
-            return clazz.getEPackage().getEFactoryInstance().create(clazz);
-        return null;
-    }
+	@Inject
+	protected IGrammarAccess grammarAccess;
 
-    @Deprecated
-    public void set(EObject _this, String feature, Object value) throws RecognitionException {
-        set(_this, feature, value, null);
-    }
+	public EObject create(String fullTypeName) {
+		EClass clazz = getEClass(fullTypeName);
+		if (clazz != null && !(clazz.isAbstract() || clazz.isInterface()))
+			return clazz.getEPackage().getEFactoryInstance().create(clazz);
+		return null;
+	}
 
-    public void set(EObject _this, String feature, Object value, String ruleName) throws RecognitionException {
-        try {
-            if (value instanceof Token) {
-                value = ((Token) value).getText();
-                if (ruleName != null) {
-                    value = converterService.toValue((String) value, ruleName);
-                }
-            }
-            EObject eo = (EObject) _this;
-            EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
-            eo.eSet(structuralFeature, value);
-        } catch (Exception exc) {
-            throw new RecognitionException();
-        }
-    }
+	@Deprecated
+	public void set(EObject _this, String feature, Object value) throws RecognitionException {
+		set(_this, feature, value, null);
+	}
 
-    @Deprecated
-    public void add(EObject _this, String feature, Object value) throws RecognitionException {
-        add(_this, feature, value, null);
-    }
+	public void set(EObject _this, String feature, Object value, String ruleName) throws RecognitionException {
+		try {
+			if (value instanceof Token) {
+				value = ((Token) value).getText();
+				if (ruleName != null) {
+					value = converterService.toValue((String) value, ruleName);
+				}
+			}
+			EObject eo = (EObject) _this;
+			EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
+			eo.eSet(structuralFeature, value);
+		} catch (Exception exc) {
+			throw new RecognitionException();
+		}
+	}
 
-    @SuppressWarnings("unchecked")
-    public void add(EObject _this, String feature, Object value, String ruleName) throws RecognitionException {
-        try {
-            if (value == null)
-                return;
-            if (value instanceof Token) {
-                value = ((Token) value).getText();
-                if (ruleName != null) {
-                    value = converterService.toValue((String) value, ruleName);
-                }
-            }
-            EObject eo = (EObject) _this;
-            EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
-            ((Collection) eo.eGet(structuralFeature)).add(value);
-        } catch (Exception exc) {
-            throw new RecognitionException();
-        }
-    }
+	@Deprecated
+	public void add(EObject _this, String feature, Object value) throws RecognitionException {
+		add(_this, feature, value, null);
+	}
 
-    protected EPackage[] getEPackages(String alias) {
-        return metamodelAccess.getGeneratedEPackages();
-    }
+	@SuppressWarnings("unchecked")
+	public void add(EObject _this, String feature, Object value, String ruleName) throws RecognitionException {
+		try {
+			if (value == null)
+				return;
+			if (value instanceof Token) {
+				value = ((Token) value).getText();
+				if (ruleName != null) {
+					value = converterService.toValue((String) value, ruleName);
+				}
+			}
+			EObject eo = (EObject) _this;
+			EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
+			((Collection) eo.eGet(structuralFeature)).add(value);
+		} catch (Exception exc) {
+			throw new RecognitionException();
+		}
+	}
 
-    public EClass getEClass(String fullTypeName) {
-        String[] split = fullTypeName.split("::");
-        String typeName = fullTypeName;
-        String alias = null;
-        if (split.length > 1) {
-            alias = split[0];
-            typeName = split[1];
-        }
-        EPackage[] packages = getEPackages(alias);
-        if (packages == null || packages.length == 0) {
-            throw new IllegalStateException("Couldn't find any epackages for alias '" + alias + "'");
-        }
-        for (EPackage package1 : packages) {
-            if (package1 == null)
-                throw new IllegalStateException("Problems loading EPackages for alias '" + alias + "' - one entry was null.");
-            EClassifier classifier = package1.getEClassifier(typeName);
-            if (classifier instanceof EClass) {
-                return (EClass) classifier;
-            }
-        }
-        return null;
+	protected EPackage getEPackage(String alias) {
+		List<AbstractMetamodelDeclaration> declarations = GrammarUtil.allMetamodelDeclarations(grammarAccess
+				.getGrammar());
+		for (AbstractMetamodelDeclaration decl : declarations) {
+			if (decl.getAlias() == null && alias == null || decl.getAlias() != null && decl.getAlias().equals(alias)) {
+				if (decl instanceof GeneratedMetamodel) {
+					GeneratedMetamodel mm = (GeneratedMetamodel) decl;
+					return EcoreUtil2.loadEPackage(mm.getNsURI(),grammarAccess.getClass().getClassLoader());
+				} else {
+					ReferencedMetamodel mm = (ReferencedMetamodel) decl;
+					return EcoreUtil2.loadEPackage(mm.getUri(),grammarAccess.getClass().getClassLoader());
+				}
+			}
+		}
+		String languageId = GrammarUtil.getLanguageId(grammarAccess.getGrammar());
+		throw new IllegalArgumentException("No EPackage with alias '" + alias + "' could be found for language "
+				+ languageId);
+	}
 
-    }
+	public EClass getEClass(String fullTypeName) {
+		String[] split = fullTypeName.split("::");
+		String typeName = fullTypeName;
+		String alias = null;
+		if (split.length > 1) {
+			alias = split[0];
+			typeName = split[1];
+		}
+		EPackage pack = getEPackage(alias);
+		if (pack == null) {
+			throw new IllegalStateException("Couldn't find any epackages for alias '" + alias + "'");
+		}
+		EClassifier classifier = pack.getEClassifier(typeName);
+		if (classifier instanceof EClass) {
+			return (EClass) classifier;
+		}
+		return null;
+	}
 
 }

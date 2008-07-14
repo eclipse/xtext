@@ -41,7 +41,7 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 			fail();
 		}
 		List<LexerRule> lexerRules = GrammarUtil.allLexerRules(element);
-		assertEquals(9, lexerRules.size());
+		assertEquals(8, lexerRules.size());
 		for (LexerRule lexerRule : lexerRules) {
 			System.out.println(lexerRule.getName());
 		}
@@ -59,7 +59,7 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 		XtextResource r = getResource("classpath:/"+ConcreteTestLanguage.class.getName().replace('.', '/')+".xtext");
 		Grammar element = (Grammar) r.getParseResult().getRootASTElement();
 		List<LexerRule> lexerRules = GrammarUtil.allLexerRules(element);
-		assertEquals(9, lexerRules.size());
+		assertEquals(8, lexerRules.size());
 		for (LexerRule lexerRule : lexerRules) {
 			System.out.println(lexerRule.getName());
 		}
@@ -99,6 +99,7 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 
 	private XtextResource getResource(String uri) {
 		XtextResourceSet set = new XtextResourceSet();
+		set.setClasspathURIContext(getClass().getClassLoader());
 //		if(AllTests.isPluginContext) {
 //			set.setClasspathUriResolver(new BundleClasspathUriResolver());
 //			set.setClasspathURIContext(Activator.getDefault());

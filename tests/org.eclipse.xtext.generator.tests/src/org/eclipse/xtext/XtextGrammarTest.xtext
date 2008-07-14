@@ -31,7 +31,7 @@ ReferencedMetamodel :
 
 LexerRule  :
 	name=ID ('returns' type=TypeRef)? ':' 
-	body=LEXER_BODY
+	body=STRING
 ;
 
 ParserRule :

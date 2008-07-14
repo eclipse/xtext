@@ -39,6 +39,7 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeAdapterFactory;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
 import org.eclipse.xtext.parsetree.SyntaxError;
+import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.util.MultiMap;
 import org.eclipse.xtext.util.Strings;
 
@@ -103,7 +104,8 @@ public abstract class AbstractAntlrParser extends Parser {
 	}
 
 	private EObject getGrammarElement(String grammarElementID) {
-		return grammar.eResource().getResourceSet().getEObject(URI.createURI(grammarElementID), true);
+		URI resolved = new ClassloaderClasspathUriResolver().resolve(getClass().getClassLoader(),URI.createURI(grammarElementID));
+		return grammar.eResource().getResourceSet().getEObject(resolved, true);
 	}
 
 	private Map<Integer, String> antlrTypeToLexerName = null;

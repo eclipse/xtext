@@ -41,6 +41,8 @@ public class LexerSLComment extends TestCase {
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		Object eofLineComment = stream.getTokens().get(2);
 		assertTrue(eofLineComment instanceof CommonToken);
-		assertEquals(InternalSimpleExpressionsLexer.RULE_SL_COMMENT, ((CommonToken) eofLineComment).getType());
+		CommonToken commonToken = (CommonToken) eofLineComment;
+		int type = commonToken.getType();
+		assertEquals(InternalSimpleExpressionsLexer.RULE_SL_COMMENT, type);
 	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -15,6 +16,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
+import org.eclipse.xtext.resource.XtextResourceSet;
 
 public class EcoreUtil2 extends EcoreUtil {
     private static Log log = LogFactory.getLog(EcoreUtil2.class);
@@ -61,13 +63,12 @@ public class EcoreUtil2 extends EcoreUtil {
     }
 
     /**
-     * Uses CurrentThread Classloader! runtime only!
      */
-    public static final EPackage loadEPackage(String uriAsString) {
+    public static final EPackage loadEPackage(String uriAsString, ClassLoader classLoader) {
         if (EPackage.Registry.INSTANCE.containsKey(uriAsString))
             return EPackage.Registry.INSTANCE.getEPackage(uriAsString);
         URI uri = URI.createURI(uriAsString);
-        uri = new ClassloaderClasspathUriResolver().resolve(null, uri);
+        uri = new ClassloaderClasspathUriResolver().resolve(classLoader, uri);
         Resource resource = new ResourceSetImpl().getResource(uri, true);
         for (TreeIterator<EObject> allContents = resource.getAllContents(); allContents.hasNext();) {
             EObject next = allContents.next();
@@ -95,4 +96,12 @@ public class EcoreUtil2 extends EcoreUtil {
         String fragment = resource.getURIFragment(eObject);
         return fragment;
     }
+
+	public static EList<EObject> loadModel(String string, ClassLoader classLoader) {
+		URI uri = URI.createURI(string);
+        XtextResourceSet xtextResourceSet = new XtextResourceSet();
+        xtextResourceSet.setClasspathURIContext(classLoader);
+		Resource resource = xtextResourceSet.getResource(uri, true);
+		return resource.getContents();
+	}
 }
