@@ -23,7 +23,7 @@ public class ToggleLinkWithEditorAction extends Action {
     BaseTextEditor editor;
 
     public ToggleLinkWithEditorAction(BaseTextEditor editor) {
-        super(Messages.ToggleLinkWithEditorAction_title);
+        super(Messages.ToggleLinkWithEditorAction_label);
         boolean isLinkingEnabled = Activator.getDefault().getPreferenceStore().getBoolean(
                 "ToggleLinkWithEditorAction.isChecked"); //$NON-NLS-1$
         setChecked(isLinkingEnabled);
