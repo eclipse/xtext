@@ -9,31 +9,35 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class TestLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
-	public EPackage[] getGeneratedEPackages() {
-		return new EPackage[] {
+	private EPackage[] generated = new EPackage[] {
 		
 		getTestLangEPackage()
 		
 		};
+
+	public EPackage[] getGeneratedEPackages() {
+		return generated;
 	}
 
-	public EPackage[] getReferencedEPackages() {
-		return new EPackage[] {
+	private EPackage[] referenced = new EPackage[] {
 		
 		};
+	public EPackage[] getReferencedEPackages() {
+		return referenced;
+	}
+	
+	private EPackage[] all = new EPackage[] {
+	    getTestLangEPackage()
+		};
+	
+	public EPackage[] getAllEPackages() {
+		return all;
 	}
 
 	
 	protected static final String TESTLANG_NS_URI = "http://www.eclipse.org/2008/xtext/TestLang";
-	protected static final String TESTLANG_CP_URI = "org/eclipse/xtext/testlanguages/TestLang.ecore";
 	
 	protected EPackage getTestLangEPackage() {	
-		if (!EPackage.Registry.INSTANCE.containsKey(TESTLANG_NS_URI)) {
-			EPackage p = loadEcoreFile(TestLanguageMetamodelAccess.class.getClassLoader(),TESTLANG_CP_URI);
-			if (p!=null) {
-				EPackage.Registry.INSTANCE.put(TESTLANG_NS_URI,p);
-			}
-		}
 		return EPackage.Registry.INSTANCE.getEPackage(TESTLANG_NS_URI);
 	}
 	

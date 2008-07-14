@@ -9,31 +9,35 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class LookaheadLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
-	public EPackage[] getGeneratedEPackages() {
-		return new EPackage[] {
+	private EPackage[] generated = new EPackage[] {
 		
 		getLookaheadLangEPackage()
 		
 		};
+
+	public EPackage[] getGeneratedEPackages() {
+		return generated;
 	}
 
-	public EPackage[] getReferencedEPackages() {
-		return new EPackage[] {
+	private EPackage[] referenced = new EPackage[] {
 		
 		};
+	public EPackage[] getReferencedEPackages() {
+		return referenced;
+	}
+	
+	private EPackage[] all = new EPackage[] {
+	    getLookaheadLangEPackage()
+		};
+	
+	public EPackage[] getAllEPackages() {
+		return all;
 	}
 
 	
 	protected static final String LOOKAHEADLANG_NS_URI = "http://www.eclipse.org/2008/xtext/LookaheadLang";
-	protected static final String LOOKAHEADLANG_CP_URI = "org/eclipse/xtext/testlanguages/LookaheadLang.ecore";
 	
 	protected EPackage getLookaheadLangEPackage() {	
-		if (!EPackage.Registry.INSTANCE.containsKey(LOOKAHEADLANG_NS_URI)) {
-			EPackage p = loadEcoreFile(LookaheadLanguageMetamodelAccess.class.getClassLoader(),LOOKAHEADLANG_CP_URI);
-			if (p!=null) {
-				EPackage.Registry.INSTANCE.put(LOOKAHEADLANG_NS_URI,p);
-			}
-		}
 		return EPackage.Registry.INSTANCE.getEPackage(LOOKAHEADLANG_NS_URI);
 	}
 	

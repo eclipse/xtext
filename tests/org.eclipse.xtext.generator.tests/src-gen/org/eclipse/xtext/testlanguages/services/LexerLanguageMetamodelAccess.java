@@ -9,31 +9,35 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class LexerLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
-	public EPackage[] getGeneratedEPackages() {
-		return new EPackage[] {
+	private EPackage[] generated = new EPackage[] {
 		
 		getLexerLangEPackage()
 		
 		};
+
+	public EPackage[] getGeneratedEPackages() {
+		return generated;
 	}
 
-	public EPackage[] getReferencedEPackages() {
-		return new EPackage[] {
+	private EPackage[] referenced = new EPackage[] {
 		
 		};
+	public EPackage[] getReferencedEPackages() {
+		return referenced;
+	}
+	
+	private EPackage[] all = new EPackage[] {
+	    getLexerLangEPackage()
+		};
+	
+	public EPackage[] getAllEPackages() {
+		return all;
 	}
 
 	
 	protected static final String LEXERLANG_NS_URI = "http://www.eclipse.org/2008/xtext/LexerLang";
-	protected static final String LEXERLANG_CP_URI = "org/eclipse/xtext/testlanguages/LexerLang.ecore";
 	
 	protected EPackage getLexerLangEPackage() {	
-		if (!EPackage.Registry.INSTANCE.containsKey(LEXERLANG_NS_URI)) {
-			EPackage p = loadEcoreFile(LexerLanguageMetamodelAccess.class.getClassLoader(),LEXERLANG_CP_URI);
-			if (p!=null) {
-				EPackage.Registry.INSTANCE.put(LEXERLANG_NS_URI,p);
-			}
-		}
 		return EPackage.Registry.INSTANCE.getEPackage(LEXERLANG_NS_URI);
 	}
 	

@@ -3,7 +3,8 @@
   <idElements>org</idElements>
   <idElements>eclipse</idElements>
   <idElements>xtext</idElements>
-  <idElements>Preference</idElements>
+  <idElements>preference</idElements>
+  <idElements>PreferenceGrammar</idElements>
   <parserRules name="Description">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
@@ -112,6 +113,11 @@
         </abstractTokens>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="MasterDetail">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group"/>
     </alternatives>
   </parserRules>
   <parserRules name="Label">

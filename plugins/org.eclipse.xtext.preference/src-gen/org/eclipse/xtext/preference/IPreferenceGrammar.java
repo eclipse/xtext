@@ -1,9 +1,9 @@
 /*
 Generated with Xtext
 */
-package org.eclipse.xtext;
+package org.eclipse.xtext.preference;
 
-public interface IPreference {
+public interface IPreferenceGrammar {
 
 	/**
 	 * the unique identifier of this language. 
@@ -11,9 +11,9 @@ public interface IPreference {
 	 * Within ILanguageServices it is encouraged to use dependency injection instead
 	 * of directly accessing the ServiceRegistry 
 	 */
-	public static final String ID = "org.eclipse.xtext.Preference";
-	public static final String NAME = "Preference";
-	public static final String NAMESPACE = "org.eclipse.xtext";
+	public static final String ID = "org.eclipse.xtext.preference.PreferenceGrammar";
+	public static final String NAME = "PreferenceGrammar";
+	public static final String NAMESPACE = "org.eclipse.xtext.preference";
 	public static final String[] FILE_EXTENSIONS = new String[]{"pref"};
 	
 }

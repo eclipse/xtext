@@ -9,31 +9,35 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class ConcreteTestLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
-	public EPackage[] getGeneratedEPackages() {
-		return new EPackage[] {
+	private EPackage[] generated = new EPackage[] {
 		
 		getFooEPackage()
 		
 		};
+
+	public EPackage[] getGeneratedEPackages() {
+		return generated;
 	}
 
-	public EPackage[] getReferencedEPackages() {
-		return new EPackage[] {
+	private EPackage[] referenced = new EPackage[] {
 		
 		};
+	public EPackage[] getReferencedEPackages() {
+		return referenced;
+	}
+	
+	private EPackage[] all = new EPackage[] {
+	    getFooEPackage()
+		};
+	
+	public EPackage[] getAllEPackages() {
+		return all;
 	}
 
 	
 	protected static final String FOO_NS_URI = "http://holla";
-	protected static final String FOO_CP_URI = "org/eclipse/xtext/grammarinheritance/foo.ecore";
 	
 	protected EPackage getFooEPackage() {	
-		if (!EPackage.Registry.INSTANCE.containsKey(FOO_NS_URI)) {
-			EPackage p = loadEcoreFile(ConcreteTestLanguageMetamodelAccess.class.getClassLoader(),FOO_CP_URI);
-			if (p!=null) {
-				EPackage.Registry.INSTANCE.put(FOO_NS_URI,p);
-			}
-		}
 		return EPackage.Registry.INSTANCE.getEPackage(FOO_NS_URI);
 	}
 	

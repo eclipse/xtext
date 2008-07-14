@@ -9,31 +9,35 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class SimpleReconstrTestMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
-	public EPackage[] getGeneratedEPackages() {
-		return new EPackage[] {
+	private EPackage[] generated = new EPackage[] {
 		
 		getSimplerewritetestEPackage()
 		
 		};
+
+	public EPackage[] getGeneratedEPackages() {
+		return generated;
 	}
 
-	public EPackage[] getReferencedEPackages() {
-		return new EPackage[] {
+	private EPackage[] referenced = new EPackage[] {
 		
 		};
+	public EPackage[] getReferencedEPackages() {
+		return referenced;
+	}
+	
+	private EPackage[] all = new EPackage[] {
+	    getSimplerewritetestEPackage()
+		};
+	
+	public EPackage[] getAllEPackages() {
+		return all;
 	}
 
 	
 	protected static final String SIMPLEREWRITETEST_NS_URI = "http://simple/rewrite/test";
-	protected static final String SIMPLEREWRITETEST_CP_URI = "org/eclipse/xtext/parsetree/reconstr/simplerewritetest.ecore";
 	
 	protected EPackage getSimplerewritetestEPackage() {	
-		if (!EPackage.Registry.INSTANCE.containsKey(SIMPLEREWRITETEST_NS_URI)) {
-			EPackage p = loadEcoreFile(SimpleReconstrTestMetamodelAccess.class.getClassLoader(),SIMPLEREWRITETEST_CP_URI);
-			if (p!=null) {
-				EPackage.Registry.INSTANCE.put(SIMPLEREWRITETEST_NS_URI,p);
-			}
-		}
 		return EPackage.Registry.INSTANCE.getEPackage(SIMPLEREWRITETEST_NS_URI);
 	}
 	

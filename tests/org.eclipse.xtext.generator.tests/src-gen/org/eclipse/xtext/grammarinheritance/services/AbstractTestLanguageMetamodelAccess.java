@@ -9,18 +9,29 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class AbstractTestLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
-	public EPackage[] getGeneratedEPackages() {
-		return new EPackage[] {
+	private EPackage[] generated = new EPackage[] {
 		
 		};
+
+	public EPackage[] getGeneratedEPackages() {
+		return generated;
 	}
 
-	public EPackage[] getReferencedEPackages() {
-		return new EPackage[] {
+	private EPackage[] referenced = new EPackage[] {
 		
 		BaseEPackageAccess.getEPackageFromRegistry("classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore")
 		
 		};
+	public EPackage[] getReferencedEPackages() {
+		return referenced;
+	}
+	
+	private EPackage[] all = new EPackage[] {
+	    BaseEPackageAccess.getEPackageFromRegistry("classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore")
+		};
+	
+	public EPackage[] getAllEPackages() {
+		return all;
 	}
 
 	

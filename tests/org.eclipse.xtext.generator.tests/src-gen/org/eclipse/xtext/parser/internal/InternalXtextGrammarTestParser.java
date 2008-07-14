@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g 2008-07-08 10:01:32
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g 2008-07-14 10:05:16
 
 package org.eclipse.xtext.parser.internal; 
 
@@ -20,17 +20,16 @@ import java.util.ArrayList;
 
 public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_LEXER_BODY", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'abstract language'", "'language'", "'.'", "'extends'", "'lexing'", "':'", "'generate'", "'as'", "'import'", "'returns'", "';'", "'::'", "'|'", "'?'", "'*'", "'+'", "'+='", "'='", "'?='", "'{'", "'current'", "'}'", "'('", "')'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'abstract language'", "'language'", "'.'", "'extends'", "'lexing'", "':'", "'generate'", "'as'", "'import'", "'returns'", "';'", "'::'", "'|'", "'?'", "'*'", "'+'", "'+='", "'='", "'?='", "'{'", "'current'", "'}'", "'('", "')'"
     };
-    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=10;
+    public static final int RULE_WS=9;
     public static final int EOF=-1;
-    public static final int RULE_INT=7;
+    public static final int RULE_INT=6;
     public static final int RULE_STRING=5;
-    public static final int RULE_ANY_OTHER=11;
-    public static final int RULE_SL_COMMENT=9;
-    public static final int RULE_LEXER_BODY=6;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_SL_COMMENT=8;
 
         public InternalXtextGrammarTestParser(TokenStream input) {
             super(input);
@@ -129,7 +128,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( ((LA5_0>=12 && LA5_0<=13)) ) {
+            if ( ((LA5_0>=11 && LA5_0<=12)) ) {
                 alt5=1;
             }
             switch (alt5) {
@@ -146,10 +145,10 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
-                    if ( (LA1_0==12) ) {
+                    if ( (LA1_0==11) ) {
                         alt1=1;
                     }
-                    else if ( (LA1_0==13) ) {
+                    else if ( (LA1_0==12) ) {
                         alt1=2;
                     }
                     else {
@@ -166,7 +165,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:75:5: lv_abstract= 'abstract language'
                             {
                             lv_abstract=(Token)input.LT(1);
-                            match(input,12,FOLLOW_12_in_ruleGrammar129); 
+                            match(input,11,FOLLOW_11_in_ruleGrammar129); 
 
                                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.0/@terminal" /* xtext::Keyword */, "abstract"); 
                                 
@@ -188,7 +187,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                         case 2 :
                             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:90:6: 'language'
                             {
-                            match(input,13,FOLLOW_13_in_ruleGrammar153); 
+                            match(input,12,FOLLOW_12_in_ruleGrammar153); 
 
                                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.1" /* xtext::Keyword */, null); 
                                 
@@ -227,7 +226,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                         int alt2=2;
                         int LA2_0 = input.LA(1);
 
-                        if ( (LA2_0==14) ) {
+                        if ( (LA2_0==13) ) {
                             alt2=1;
                         }
 
@@ -236,7 +235,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                     	case 1 :
                     	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:109:4: '.' (lv_idElements= RULE_ID )
                     	    {
-                    	    match(input,14,FOLLOW_14_in_ruleGrammar190); 
+                    	    match(input,13,FOLLOW_13_in_ruleGrammar190); 
 
                     	            createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                     	        
@@ -276,7 +275,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
-                    if ( (LA4_0==15) ) {
+                    if ( (LA4_0==14) ) {
                         alt4=1;
                     }
                     switch (alt4) {
@@ -286,7 +285,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:128:6: ( 'extends' (lv_superGrammarIdElements= RULE_ID ) )
                             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:128:7: 'extends' (lv_superGrammarIdElements= RULE_ID )
                             {
-                            match(input,15,FOLLOW_15_in_ruleGrammar229); 
+                            match(input,14,FOLLOW_14_in_ruleGrammar229); 
 
                                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                                 
@@ -319,7 +318,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                                 int alt3=2;
                                 int LA3_0 = input.LA(1);
 
-                                if ( (LA3_0==14) ) {
+                                if ( (LA3_0==13) ) {
                                     alt3=1;
                                 }
 
@@ -328,7 +327,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                             	case 1 :
                             	    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:147:4: '.' (lv_superGrammarIdElements= RULE_ID )
                             	    {
-                            	    match(input,14,FOLLOW_14_in_ruleGrammar265); 
+                            	    match(input,13,FOLLOW_13_in_ruleGrammar265); 
 
                             	            createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                             	        
@@ -379,7 +378,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                 int alt6=2;
                 int LA6_0 = input.LA(1);
 
-                if ( (LA6_0==18||LA6_0==20) ) {
+                if ( (LA6_0==17||LA6_0==19) ) {
                     alt6=1;
                 }
 
@@ -465,7 +464,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             int alt9=2;
             int LA9_0 = input.LA(1);
 
-            if ( (LA9_0==16) ) {
+            if ( (LA9_0==15) ) {
                 alt9=1;
             }
             switch (alt9) {
@@ -475,11 +474,11 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:198:5: ( 'lexing' ':' )
                     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:198:6: 'lexing' ':'
                     {
-                    match(input,16,FOLLOW_16_in_ruleGrammar369); 
+                    match(input,15,FOLLOW_15_in_ruleGrammar369); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
-                    match(input,17,FOLLOW_17_in_ruleGrammar378); 
+                    match(input,16,FOLLOW_16_in_ruleGrammar378); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
@@ -612,10 +611,10 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( (LA10_0==18) ) {
+            if ( (LA10_0==17) ) {
                 alt10=1;
             }
-            else if ( (LA10_0==20) ) {
+            else if ( (LA10_0==19) ) {
                 alt10=2;
             }
             else {
@@ -737,7 +736,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:275:3: ( 'generate' (lv_name= RULE_ID ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:275:4: 'generate' (lv_name= RULE_ID )
             {
-            match(input,18,FOLLOW_18_in_ruleGeneratedMetamodel612); 
+            match(input,17,FOLLOW_17_in_ruleGeneratedMetamodel612); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
@@ -791,14 +790,14 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             int alt11=2;
             int LA11_0 = input.LA(1);
 
-            if ( (LA11_0==19) ) {
+            if ( (LA11_0==18) ) {
                 alt11=1;
             }
             switch (alt11) {
                 case 1 :
                     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:309:4: 'as' (lv_alias= RULE_ID )
                     {
-                    match(input,19,FOLLOW_19_in_ruleGeneratedMetamodel674); 
+                    match(input,18,FOLLOW_18_in_ruleGeneratedMetamodel674); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
@@ -902,7 +901,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:344:2: ( 'import' (lv_uri= RULE_STRING ) )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:344:3: 'import' (lv_uri= RULE_STRING )
             {
-            match(input,20,FOLLOW_20_in_ruleReferencedMetamodel781); 
+            match(input,19,FOLLOW_19_in_ruleReferencedMetamodel781); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
@@ -933,14 +932,14 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             int alt12=2;
             int LA12_0 = input.LA(1);
 
-            if ( (LA12_0==19) ) {
+            if ( (LA12_0==18) ) {
                 alt12=1;
             }
             switch (alt12) {
                 case 1 :
                     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:363:4: 'as' (lv_alias= RULE_ID )
                     {
-                    match(input,19,FOLLOW_19_in_ruleReferencedMetamodel817); 
+                    match(input,18,FOLLOW_18_in_ruleReferencedMetamodel817); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.4/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
@@ -1026,7 +1025,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleLexerRule
-    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:395:1: ruleLexerRule returns [EObject current=null] : ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_LEXER_BODY ) ) ;
+    // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:395:1: ruleLexerRule returns [EObject current=null] : ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) ) ;
     public final EObject ruleLexerRule() throws RecognitionException {
         EObject current = null;
 
@@ -1037,11 +1036,11 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:397:33: ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_LEXER_BODY ) ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:398:1: ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_LEXER_BODY ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:397:33: ( ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:398:1: ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) )
             {
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:398:1: ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_LEXER_BODY ) )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:398:2: ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_LEXER_BODY )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:398:1: ( ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING ) )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:398:2: ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' ) (lv_body= RULE_STRING )
             {
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:398:2: ( ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':' )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:398:3: ( (lv_name= RULE_ID ) ( 'returns' (lv_type= ruleTypeRef ) )? ) ':'
@@ -1073,14 +1072,14 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             int alt13=2;
             int LA13_0 = input.LA(1);
 
-            if ( (LA13_0==21) ) {
+            if ( (LA13_0==20) ) {
                 alt13=1;
             }
             switch (alt13) {
                 case 1 :
                     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:413:3: 'returns' (lv_type= ruleTypeRef )
                     {
-                    match(input,21,FOLLOW_21_in_ruleLexerRule951); 
+                    match(input,20,FOLLOW_20_in_ruleLexerRule951); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
@@ -1116,18 +1115,18 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
 
             }
 
-            match(input,17,FOLLOW_17_in_ruleLexerRule992); 
+            match(input,16,FOLLOW_16_in_ruleLexerRule992); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:437:2: (lv_body= RULE_LEXER_BODY )
-            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:438:5: lv_body= RULE_LEXER_BODY
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:437:2: (lv_body= RULE_STRING )
+            // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:438:5: lv_body= RULE_STRING
             {
             lv_body=(Token)input.LT(1);
-            match(input,RULE_LEXER_BODY,FOLLOW_RULE_LEXER_BODY_in_ruleLexerRule1010); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleLexerRule1010); 
              
                 createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.5/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "body"); 
                 
@@ -1137,7 +1136,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                         associateNodeWithAstElement(currentNode, current);
                     }
                     
-                    factory.set(current, "body", lv_body,"LEXER_BODY");
+                    factory.set(current, "body", lv_body,"STRING");
                     
                      
 
@@ -1250,14 +1249,14 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             int alt14=2;
             int LA14_0 = input.LA(1);
 
-            if ( (LA14_0==21) ) {
+            if ( (LA14_0==20) ) {
                 alt14=1;
             }
             switch (alt14) {
                 case 1 :
                     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:483:3: 'returns' (lv_type= ruleTypeRef )
                     {
-                    match(input,21,FOLLOW_21_in_ruleParserRule1126); 
+                    match(input,20,FOLLOW_20_in_ruleParserRule1126); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
@@ -1293,7 +1292,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
 
             }
 
-            match(input,17,FOLLOW_17_in_ruleParserRule1167); 
+            match(input,16,FOLLOW_16_in_ruleParserRule1167); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -1326,7 +1325,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
 
             }
 
-            match(input,22,FOLLOW_22_in_ruleParserRule1207); 
+            match(input,21,FOLLOW_21_in_ruleParserRule1207); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -1408,7 +1407,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             if ( (LA15_0==RULE_ID) ) {
                 int LA15_1 = input.LA(2);
 
-                if ( (LA15_1==23) ) {
+                if ( (LA15_1==22) ) {
                     alt15=1;
                 }
             }
@@ -1436,7 +1435,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
 
                     }
 
-                    match(input,23,FOLLOW_23_in_ruleTypeRef1312); 
+                    match(input,22,FOLLOW_22_in_ruleTypeRef1312); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
@@ -1556,7 +1555,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                 int alt16=2;
                 int LA16_0 = input.LA(1);
 
-                if ( (LA16_0==24) ) {
+                if ( (LA16_0==23) ) {
                     alt16=1;
                 }
 
@@ -1585,7 +1584,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
 
             	    }
 
-            	    match(input,24,FOLLOW_24_in_ruleAlternatives1450); 
+            	    match(input,23,FOLLOW_23_in_ruleAlternatives1450); 
 
             	            createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
             	        
@@ -1714,7 +1713,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                 int alt17=2;
                 int LA17_0 = input.LA(1);
 
-                if ( ((LA17_0>=RULE_ID && LA17_0<=RULE_STRING)||LA17_0==31||LA17_0==34) ) {
+                if ( ((LA17_0>=RULE_ID && LA17_0<=RULE_STRING)||LA17_0==30||LA17_0==33) ) {
                     alt17=1;
                 }
 
@@ -1855,10 +1854,10 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                 {
                 int LA19_1 = input.LA(2);
 
-                if ( ((LA19_1>=28 && LA19_1<=30)) ) {
+                if ( ((LA19_1>=27 && LA19_1<=29)) ) {
                     alt19=1;
                 }
-                else if ( (LA19_1==EOF||(LA19_1>=RULE_ID && LA19_1<=RULE_STRING)||LA19_1==22||(LA19_1>=24 && LA19_1<=27)||LA19_1==31||(LA19_1>=34 && LA19_1<=35)) ) {
+                else if ( (LA19_1==EOF||(LA19_1>=RULE_ID && LA19_1<=RULE_STRING)||LA19_1==21||(LA19_1>=23 && LA19_1<=26)||LA19_1==30||(LA19_1>=33 && LA19_1<=34)) ) {
                     alt19=2;
                 }
                 else {
@@ -1869,13 +1868,13 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                 }
                 }
                 break;
-            case 31:
+            case 30:
                 {
                 alt19=1;
                 }
                 break;
             case RULE_STRING:
-            case 34:
+            case 33:
                 {
                 alt19=2;
                 }
@@ -1898,7 +1897,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                     if ( (LA18_0==RULE_ID) ) {
                         alt18=1;
                     }
-                    else if ( (LA18_0==31) ) {
+                    else if ( (LA18_0==30) ) {
                         alt18=2;
                     }
                     else {
@@ -1972,7 +1971,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             int alt22=2;
             int LA22_0 = input.LA(1);
 
-            if ( ((LA22_0>=25 && LA22_0<=27)) ) {
+            if ( ((LA22_0>=24 && LA22_0<=26)) ) {
                 alt22=1;
             }
             switch (alt22) {
@@ -1983,10 +1982,10 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                     int alt21=2;
                     int LA21_0 = input.LA(1);
 
-                    if ( ((LA21_0>=25 && LA21_0<=26)) ) {
+                    if ( ((LA21_0>=24 && LA21_0<=25)) ) {
                         alt21=1;
                     }
-                    else if ( (LA21_0==27) ) {
+                    else if ( (LA21_0==26) ) {
                         alt21=2;
                     }
                     else {
@@ -2003,10 +2002,10 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                             int alt20=2;
                             int LA20_0 = input.LA(1);
 
-                            if ( (LA20_0==25) ) {
+                            if ( (LA20_0==24) ) {
                                 alt20=1;
                             }
-                            else if ( (LA20_0==26) ) {
+                            else if ( (LA20_0==25) ) {
                                 alt20=2;
                             }
                             else {
@@ -2019,7 +2018,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                                 case 1 :
                                     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:733:22: '?'
                                     {
-                                    match(input,25,FOLLOW_25_in_ruleAbstractToken1782); 
+                                    match(input,24,FOLLOW_24_in_ruleAbstractToken1782); 
 
                                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.10/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "cardinality"); 
                                         
@@ -2029,7 +2028,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                                 case 2 :
                                     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:738:6: '*'
                                     {
-                                    match(input,26,FOLLOW_26_in_ruleAbstractToken1797); 
+                                    match(input,25,FOLLOW_25_in_ruleAbstractToken1797); 
 
                                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.10/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::Keyword */, "cardinality"); 
                                         
@@ -2045,7 +2044,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                         case 2 :
                             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:743:6: '+'
                             {
-                            match(input,27,FOLLOW_27_in_ruleAbstractToken1813); 
+                            match(input,26,FOLLOW_26_in_ruleAbstractToken1813); 
 
                                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.10/@alternatives/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "cardinality"); 
                                 
@@ -2173,10 +2172,10 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             int alt24=2;
             int LA24_0 = input.LA(1);
 
-            if ( ((LA24_0>=28 && LA24_0<=29)) ) {
+            if ( ((LA24_0>=27 && LA24_0<=28)) ) {
                 alt24=1;
             }
-            else if ( (LA24_0==30) ) {
+            else if ( (LA24_0==29) ) {
                 alt24=2;
             }
             else {
@@ -2193,10 +2192,10 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                     int alt23=2;
                     int LA23_0 = input.LA(1);
 
-                    if ( (LA23_0==28) ) {
+                    if ( (LA23_0==27) ) {
                         alt23=1;
                     }
-                    else if ( (LA23_0==29) ) {
+                    else if ( (LA23_0==28) ) {
                         alt23=2;
                     }
                     else {
@@ -2209,7 +2208,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                         case 1 :
                             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:789:19: '+='
                             {
-                            match(input,28,FOLLOW_28_in_ruleAssignment1939); 
+                            match(input,27,FOLLOW_27_in_ruleAssignment1939); 
 
                                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "operator"); 
                                 
@@ -2219,7 +2218,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                         case 2 :
                             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:794:6: '='
                             {
-                            match(input,29,FOLLOW_29_in_ruleAssignment1954); 
+                            match(input,28,FOLLOW_28_in_ruleAssignment1954); 
 
                                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::Keyword */, "operator"); 
                                 
@@ -2235,7 +2234,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                 case 2 :
                     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:799:6: '?='
                     {
-                    match(input,30,FOLLOW_30_in_ruleAssignment1970); 
+                    match(input,29,FOLLOW_29_in_ruleAssignment1970); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
                         
@@ -2365,7 +2364,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:845:4: ( '{' ( 'current' '=' )? )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:845:5: '{' ( 'current' '=' )?
             {
-            match(input,31,FOLLOW_31_in_ruleAction2092); 
+            match(input,30,FOLLOW_30_in_ruleAction2092); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
@@ -2373,18 +2372,18 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             int alt25=2;
             int LA25_0 = input.LA(1);
 
-            if ( (LA25_0==32) ) {
+            if ( (LA25_0==31) ) {
                 alt25=1;
             }
             switch (alt25) {
                 case 1 :
                     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:849:2: 'current' '='
                     {
-                    match(input,32,FOLLOW_32_in_ruleAction2102); 
+                    match(input,31,FOLLOW_31_in_ruleAction2102); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
-                    match(input,29,FOLLOW_29_in_ruleAction2111); 
+                    match(input,28,FOLLOW_28_in_ruleAction2111); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
@@ -2427,7 +2426,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             int alt27=2;
             int LA27_0 = input.LA(1);
 
-            if ( (LA27_0==14) ) {
+            if ( (LA27_0==13) ) {
                 alt27=1;
             }
             switch (alt27) {
@@ -2440,7 +2439,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:873:5: ( '.' (lv_feature= RULE_ID ) )
                     // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:873:6: '.' (lv_feature= RULE_ID )
                     {
-                    match(input,14,FOLLOW_14_in_ruleAction2156); 
+                    match(input,13,FOLLOW_13_in_ruleAction2156); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
@@ -2474,10 +2473,10 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                     int alt26=2;
                     int LA26_0 = input.LA(1);
 
-                    if ( (LA26_0==29) ) {
+                    if ( (LA26_0==28) ) {
                         alt26=1;
                     }
-                    else if ( (LA26_0==28) ) {
+                    else if ( (LA26_0==27) ) {
                         alt26=2;
                     }
                     else {
@@ -2490,7 +2489,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                         case 1 :
                             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:893:18: '='
                             {
-                            match(input,29,FOLLOW_29_in_ruleAction2200); 
+                            match(input,28,FOLLOW_28_in_ruleAction2200); 
 
                                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
                                 
@@ -2500,7 +2499,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
                         case 2 :
                             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:898:6: '+='
                             {
-                            match(input,28,FOLLOW_28_in_ruleAction2215); 
+                            match(input,27,FOLLOW_27_in_ruleAction2215); 
 
                                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
                                 
@@ -2525,7 +2524,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
 
                     }
 
-                    match(input,32,FOLLOW_32_in_ruleAction2235); 
+                    match(input,31,FOLLOW_31_in_ruleAction2235); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
@@ -2538,7 +2537,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
 
             }
 
-            match(input,33,FOLLOW_33_in_ruleAction2247); 
+            match(input,32,FOLLOW_32_in_ruleAction2247); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -2621,7 +2620,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             if ( ((LA29_0>=RULE_ID && LA29_0<=RULE_STRING)) ) {
                 alt29=1;
             }
-            else if ( (LA29_0==34) ) {
+            else if ( (LA29_0==33) ) {
                 alt29=2;
             }
             else {
@@ -2782,7 +2781,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:981:2: ( '(' this_Alternatives= ruleAlternatives )
             // ./src-gen/org/eclipse/xtext/parser/internal/InternalXtextGrammarTest.g:981:3: '(' this_Alternatives= ruleAlternatives
             {
-            match(input,34,FOLLOW_34_in_ruleParenthesizedElement2474); 
+            match(input,33,FOLLOW_33_in_ruleParenthesizedElement2474); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
@@ -2800,7 +2799,7 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
 
             }
 
-            match(input,35,FOLLOW_35_in_ruleParenthesizedElement2505); 
+            match(input,34,FOLLOW_34_in_ruleParenthesizedElement2505); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.14/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -2996,19 +2995,19 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
 
     public static final BitSet FOLLOW_ruleGrammar_in_entryRuleGrammar71 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleGrammar81 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleGrammar129 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_13_in_ruleGrammar153 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleGrammar171 = new BitSet(new long[]{0x000000000015C012L});
-    public static final BitSet FOLLOW_14_in_ruleGrammar190 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleGrammar207 = new BitSet(new long[]{0x000000000015C012L});
-    public static final BitSet FOLLOW_15_in_ruleGrammar229 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleGrammar246 = new BitSet(new long[]{0x0000000000154012L});
-    public static final BitSet FOLLOW_14_in_ruleGrammar265 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleGrammar282 = new BitSet(new long[]{0x0000000000154012L});
-    public static final BitSet FOLLOW_ruleAbstractMetamodelDeclaration_in_ruleGrammar324 = new BitSet(new long[]{0x0000000000150012L});
-    public static final BitSet FOLLOW_ruleParserRule_in_ruleGrammar355 = new BitSet(new long[]{0x0000000000010012L});
-    public static final BitSet FOLLOW_16_in_ruleGrammar369 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleGrammar378 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_11_in_ruleGrammar129 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_12_in_ruleGrammar153 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleGrammar171 = new BitSet(new long[]{0x00000000000AE012L});
+    public static final BitSet FOLLOW_13_in_ruleGrammar190 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleGrammar207 = new BitSet(new long[]{0x00000000000AE012L});
+    public static final BitSet FOLLOW_14_in_ruleGrammar229 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleGrammar246 = new BitSet(new long[]{0x00000000000AA012L});
+    public static final BitSet FOLLOW_13_in_ruleGrammar265 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleGrammar282 = new BitSet(new long[]{0x00000000000AA012L});
+    public static final BitSet FOLLOW_ruleAbstractMetamodelDeclaration_in_ruleGrammar324 = new BitSet(new long[]{0x00000000000A8012L});
+    public static final BitSet FOLLOW_ruleParserRule_in_ruleGrammar355 = new BitSet(new long[]{0x0000000000008012L});
+    public static final BitSet FOLLOW_15_in_ruleGrammar369 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleGrammar378 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_ruleLexerRule_in_ruleGrammar407 = new BitSet(new long[]{0x0000000000000012L});
     public static final BitSet FOLLOW_ruleAbstractMetamodelDeclaration_in_entryRuleAbstractMetamodelDeclaration448 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleAbstractMetamodelDeclaration458 = new BitSet(new long[]{0x0000000000000002L});
@@ -3016,73 +3015,73 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
     public static final BitSet FOLLOW_ruleReferencedMetamodel_in_ruleAbstractMetamodelDeclaration532 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleGeneratedMetamodel_in_entryRuleGeneratedMetamodel566 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleGeneratedMetamodel576 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_ruleGeneratedMetamodel612 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_17_in_ruleGeneratedMetamodel612 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleGeneratedMetamodel629 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleGeneratedMetamodel655 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleGeneratedMetamodel674 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleGeneratedMetamodel655 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_18_in_ruleGeneratedMetamodel674 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleGeneratedMetamodel691 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel736 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleReferencedMetamodel746 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleReferencedMetamodel781 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleReferencedMetamodel798 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleReferencedMetamodel817 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_19_in_ruleReferencedMetamodel781 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleReferencedMetamodel798 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_18_in_ruleReferencedMetamodel817 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleReferencedMetamodel834 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleLexerRule_in_entryRuleLexerRule879 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleLexerRule889 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleLexerRule933 = new BitSet(new long[]{0x0000000000220000L});
-    public static final BitSet FOLLOW_21_in_ruleLexerRule951 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleTypeRef_in_ruleLexerRule979 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleLexerRule992 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_LEXER_BODY_in_ruleLexerRule1010 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleLexerRule933 = new BitSet(new long[]{0x0000000000110000L});
+    public static final BitSet FOLLOW_20_in_ruleLexerRule951 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleTypeRef_in_ruleLexerRule979 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleLexerRule992 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleLexerRule1010 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleParserRule_in_entryRuleParserRule1053 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleParserRule1063 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleParserRule1108 = new BitSet(new long[]{0x0000000000220000L});
-    public static final BitSet FOLLOW_21_in_ruleParserRule1126 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleTypeRef_in_ruleParserRule1154 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_ruleParserRule1167 = new BitSet(new long[]{0x0000000480000030L});
-    public static final BitSet FOLLOW_ruleAlternatives_in_ruleParserRule1196 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_22_in_ruleParserRule1207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleParserRule1108 = new BitSet(new long[]{0x0000000000110000L});
+    public static final BitSet FOLLOW_20_in_ruleParserRule1126 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleTypeRef_in_ruleParserRule1154 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleParserRule1167 = new BitSet(new long[]{0x0000000240000030L});
+    public static final BitSet FOLLOW_ruleAlternatives_in_ruleParserRule1196 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_21_in_ruleParserRule1207 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleTypeRef_in_entryRuleTypeRef1242 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleTypeRef1252 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTypeRef1295 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_23_in_ruleTypeRef1312 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTypeRef1295 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_22_in_ruleTypeRef1312 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleTypeRef1331 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAlternatives_in_entryRuleAlternatives1374 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleAlternatives1384 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGroup_in_ruleAlternatives1431 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_24_in_ruleAlternatives1450 = new BitSet(new long[]{0x0000000480000030L});
-    public static final BitSet FOLLOW_ruleGroup_in_ruleAlternatives1479 = new BitSet(new long[]{0x0000000001000002L});
+    public static final BitSet FOLLOW_ruleGroup_in_ruleAlternatives1431 = new BitSet(new long[]{0x0000000000800002L});
+    public static final BitSet FOLLOW_23_in_ruleAlternatives1450 = new BitSet(new long[]{0x0000000240000030L});
+    public static final BitSet FOLLOW_ruleGroup_in_ruleAlternatives1479 = new BitSet(new long[]{0x0000000000800002L});
     public static final BitSet FOLLOW_ruleGroup_in_entryRuleGroup1517 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleGroup1527 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractToken_in_ruleGroup1574 = new BitSet(new long[]{0x0000000480000032L});
-    public static final BitSet FOLLOW_ruleAbstractToken_in_ruleGroup1611 = new BitSet(new long[]{0x0000000480000032L});
+    public static final BitSet FOLLOW_ruleAbstractToken_in_ruleGroup1574 = new BitSet(new long[]{0x0000000240000032L});
+    public static final BitSet FOLLOW_ruleAbstractToken_in_ruleGroup1611 = new BitSet(new long[]{0x0000000240000032L});
     public static final BitSet FOLLOW_ruleAbstractToken_in_entryRuleAbstractToken1649 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleAbstractToken1659 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssignment_in_ruleAbstractToken1708 = new BitSet(new long[]{0x000000000E000002L});
-    public static final BitSet FOLLOW_ruleAction_in_ruleAbstractToken1735 = new BitSet(new long[]{0x000000000E000002L});
-    public static final BitSet FOLLOW_ruleAbstractTerminal_in_ruleAbstractToken1763 = new BitSet(new long[]{0x000000000E000002L});
-    public static final BitSet FOLLOW_25_in_ruleAbstractToken1782 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_ruleAbstractToken1797 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_ruleAbstractToken1813 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAssignment_in_ruleAbstractToken1708 = new BitSet(new long[]{0x0000000007000002L});
+    public static final BitSet FOLLOW_ruleAction_in_ruleAbstractToken1735 = new BitSet(new long[]{0x0000000007000002L});
+    public static final BitSet FOLLOW_ruleAbstractTerminal_in_ruleAbstractToken1763 = new BitSet(new long[]{0x0000000007000002L});
+    public static final BitSet FOLLOW_24_in_ruleAbstractToken1782 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_25_in_ruleAbstractToken1797 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_ruleAbstractToken1813 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAssignment_in_entryRuleAssignment1859 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleAssignment1869 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAssignment1912 = new BitSet(new long[]{0x0000000070000000L});
-    public static final BitSet FOLLOW_28_in_ruleAssignment1939 = new BitSet(new long[]{0x0000000400000030L});
-    public static final BitSet FOLLOW_29_in_ruleAssignment1954 = new BitSet(new long[]{0x0000000400000030L});
-    public static final BitSet FOLLOW_30_in_ruleAssignment1970 = new BitSet(new long[]{0x0000000400000030L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAssignment1912 = new BitSet(new long[]{0x0000000038000000L});
+    public static final BitSet FOLLOW_27_in_ruleAssignment1939 = new BitSet(new long[]{0x0000000200000030L});
+    public static final BitSet FOLLOW_28_in_ruleAssignment1954 = new BitSet(new long[]{0x0000000200000030L});
+    public static final BitSet FOLLOW_29_in_ruleAssignment1970 = new BitSet(new long[]{0x0000000200000030L});
     public static final BitSet FOLLOW_ruleAbstractTerminal_in_ruleAssignment2009 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAction_in_entryRuleAction2045 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleAction2055 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_ruleAction2092 = new BitSet(new long[]{0x0000000100000010L});
-    public static final BitSet FOLLOW_32_in_ruleAction2102 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_29_in_ruleAction2111 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleTypeRef_in_ruleAction2142 = new BitSet(new long[]{0x0000000200004000L});
-    public static final BitSet FOLLOW_14_in_ruleAction2156 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAction2173 = new BitSet(new long[]{0x0000000030000000L});
-    public static final BitSet FOLLOW_29_in_ruleAction2200 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_28_in_ruleAction2215 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_32_in_ruleAction2235 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_33_in_ruleAction2247 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_ruleAction2092 = new BitSet(new long[]{0x0000000080000010L});
+    public static final BitSet FOLLOW_31_in_ruleAction2102 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_28_in_ruleAction2111 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleTypeRef_in_ruleAction2142 = new BitSet(new long[]{0x0000000100002000L});
+    public static final BitSet FOLLOW_13_in_ruleAction2156 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAction2173 = new BitSet(new long[]{0x0000000018000000L});
+    public static final BitSet FOLLOW_28_in_ruleAction2200 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_27_in_ruleAction2215 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_31_in_ruleAction2235 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_32_in_ruleAction2247 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAbstractTerminal_in_entryRuleAbstractTerminal2282 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleAbstractTerminal2292 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleKeyword_in_ruleAbstractTerminal2340 = new BitSet(new long[]{0x0000000000000002L});
@@ -3090,9 +3089,9 @@ public class InternalXtextGrammarTestParser extends AbstractAntlrParser {
     public static final BitSet FOLLOW_ruleParenthesizedElement_in_ruleAbstractTerminal2395 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleParenthesizedElement_in_entryRuleParenthesizedElement2429 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleParenthesizedElement2439 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_ruleParenthesizedElement2474 = new BitSet(new long[]{0x0000000480000030L});
-    public static final BitSet FOLLOW_ruleAlternatives_in_ruleParenthesizedElement2496 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_35_in_ruleParenthesizedElement2505 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_ruleParenthesizedElement2474 = new BitSet(new long[]{0x0000000240000030L});
+    public static final BitSet FOLLOW_ruleAlternatives_in_ruleParenthesizedElement2496 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_34_in_ruleParenthesizedElement2505 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleKeyword_in_entryRuleKeyword2540 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleKeyword2550 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_STRING_in_ruleKeyword2591 = new BitSet(new long[]{0x0000000000000002L});

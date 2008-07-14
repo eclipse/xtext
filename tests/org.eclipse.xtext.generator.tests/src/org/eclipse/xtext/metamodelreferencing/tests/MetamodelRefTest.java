@@ -8,38 +8,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.metamodelreferencing.tests;
 
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestMetamodelAccess;
-import org.eclipse.xtext.parser.GenericEcoreElementFactory;
-import org.eclipse.xtext.parser.IAstFactory;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
-import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class MetamodelRefTest extends AbstractGeneratorTest {
 
-    public static class MetamodelAccessOverride extends MetamodelRefTestMetamodelAccess {
-        @Override
-        public EPackage[] getGeneratedEPackages() {
-            return new EPackage[] { getSimpleTestEPackage(), XtextPackage.eINSTANCE };
-        }
-    }
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        XtextPackage.eINSTANCE.getAbstractElement(); // initialize EPackage
         with(MetamodelRefTestStandaloneSetup.class);
-        ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.get(IMetamodelRefTest.ID);
-        GenericEcoreElementFactory astFactory = (GenericEcoreElementFactory) ServiceRegistry.getService(languageDescriptor,
-                IAstFactory.class);
-        astFactory.setMetamodelAccess(new MetamodelRefTestMetamodelAccess() {
-            @Override
-            public EPackage[] getGeneratedEPackages() {
-                return new EPackage[] { getSimpleTestEPackage(), XtextPackage.eINSTANCE };
-            }
-        });
     }
 
     public void testStuff() throws Exception {
