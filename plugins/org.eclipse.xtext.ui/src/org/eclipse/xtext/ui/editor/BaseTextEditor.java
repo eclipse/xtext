@@ -47,6 +47,7 @@ import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.model.IEditorModel;
 import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
@@ -201,7 +202,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 
 		}
 		else {
-			CoreLog.logError(EditorMessages.getFormattedString("BaseTextEditor.NoLanguageDescriptor", //$NON-NLS-1$
+			CoreLog.logError(XtextUIMessages.getFormattedString("BaseTextEditor.NoLanguageDescriptor", //$NON-NLS-1$
 					this.getConfigurationElement().getNamespaceIdentifier()), new IllegalStateException());
 		}
 	}
@@ -284,12 +285,12 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	@Override
 	protected void createActions() {
 		super.createActions();
-		Action action = new ContentAssistAction(EditorMessages.getResourceBundle(), "ContentAssistProposal.", this);//$NON-NLS-1$
+		Action action = new ContentAssistAction(XtextUIMessages.getResourceBundle(), "ContentAssistProposal.", this);//$NON-NLS-1$
 		action.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
 		setAction("ContentAssistProposal", action);//$NON-NLS-1$
 		markAsStateDependentAction("ContentAssistProposal", true); //$NON-NLS-1$
 
-		action = new TextOperationAction(EditorMessages.getResourceBundle(), "Format.", this, ISourceViewer.FORMAT); //$NON-NLS-1$
+		action = new TextOperationAction(XtextUIMessages.getResourceBundle(), "Format.", this, ISourceViewer.FORMAT); //$NON-NLS-1$
 		action.setActionDefinitionId(Activator.PLUGIN_ID + ".FormatAction");
 		setAction("Format", action); //$NON-NLS-1$
 		markAsStateDependentAction("Format", true); //$NON-NLS-1$

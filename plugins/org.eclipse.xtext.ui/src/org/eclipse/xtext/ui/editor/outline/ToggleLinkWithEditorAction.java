@@ -9,7 +9,7 @@
 package org.eclipse.xtext.ui.editor.outline;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.xtext.ui.Messages;
+import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.BaseTextEditor;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.XtextPluginImages;
@@ -23,13 +23,13 @@ public class ToggleLinkWithEditorAction extends Action {
     BaseTextEditor editor;
 
     public ToggleLinkWithEditorAction(BaseTextEditor editor) {
-        super(Messages.ToggleLinkWithEditorAction_label);
+        super(XtextUIMessages.getString("ToggleLinkWithEditorAction.label")); //$NON-NLS-1$
         boolean isLinkingEnabled = Activator.getDefault().getPreferenceStore().getBoolean(
                 "ToggleLinkWithEditorAction.isChecked"); //$NON-NLS-1$
         setChecked(isLinkingEnabled);
         this.editor = editor;
-        setToolTipText(Messages.ToggleLinkWithEditorAction_toolTipText);
-        setDescription(Messages.ToggleLinkWithEditorAction_description);
+        setToolTipText(XtextUIMessages.getString("ToggleLinkWithEditorAction.toolTip")); //$NON-NLS-1$
+        setDescription(XtextUIMessages.getString("ToggleLinkWithEditorAction.description")); //$NON-NLS-1$
         setImageDescriptor(XtextPluginImages.DESC_LINK_WITH_EDITOR);
         setDisabledImageDescriptor(XtextPluginImages.DESC_LINK_WITH_EDITOR_DISABLED);
     }
