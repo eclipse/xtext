@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.services;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
 import org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef;
@@ -25,12 +24,13 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 	private static final String MULTILINE_COMMENT = "/*\n*multiline comment\n*/";
 	private static final String SINGLELINE_COMMENT = "//singleline comment\n";
 	private static final String KEYWORD_SPIELPLATZ = "spielplatz";
+	private static final String KEYWORD_ROT = "ROT";
 	private static final String NUMBER_2 = "2";
 	private static final String STRING = "\"Unser Spielplatz\"";
 	private static final String EOF_COMMENT = "//EOF comment";
 
 	private static final String MODEL = MULTILINE_COMMENT + "\n" + KEYWORD_SPIELPLATZ + " " + NUMBER_2 + " " + STRING
-			+ " {\n" + SINGLELINE_COMMENT + "kind (jurgen 5)\nspielzeug (ente ROT)}\n" + EOF_COMMENT;
+			+ " {\n" + SINGLELINE_COMMENT + "kind (jurgen 5)\nspielzeug (ente " + KEYWORD_ROT + ")}\n" + EOF_COMMENT;
 	private EList<LeafNode> leafNodes;
 	private ITokenTypeDefProvider ttds;
 
@@ -64,6 +64,12 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 		ITokenTypeDef ttd = findTokenTypeDef(ttds, keyword);
 		assertNotNull(ttd);
 		assertEquals(BuiltInTokenTypeDef.KEYWORD_ID, ttd.getId());
+		
+		LeafNode keyword1 = findLeafNodeByText(KEYWORD_ROT);
+		assertNotNull(keyword1);
+		ITokenTypeDef ttd1 = findTokenTypeDef(ttds, keyword);
+		assertNotNull(ttd1);
+		assertEquals(BuiltInTokenTypeDef.KEYWORD_ID, ttd1.getId());
 	}
 
 	public void testBuildInNumberDef() throws Exception {
