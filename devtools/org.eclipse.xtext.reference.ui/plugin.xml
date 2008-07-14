@@ -22,5 +22,25 @@
             languageId="org.eclipse.xtext.reference.ReferenceGrammar">
       </formatter>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.eclipse.xtext.reference.ui.preferences.ReferenceGrammarRootPreferencePage"
+            id="org.eclipse.xtext.reference.ReferenceGrammar"
+            name="ReferenceGrammar">
+      </page>
+      <page
+            category="org.eclipse.xtext.reference.ReferenceGrammar"
+            class="org.eclipse.xtext.reference.ui.preferences.ReferenceGrammarRootPreferencePage"
+            id="org.eclipse.xtext.reference.ReferenceGrammar.editor"
+            name="Editor">
+      </page>
+      <page
+            category="org.eclipse.xtext.reference.ReferenceGrammar.editor"
+            class="org.eclipse.xtext.reference.ui.preferences.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.reference.ReferenceGrammar.editor.syntaxcoloring"
+            name="Syntax Coloring">
+      </page>
+   </extension>
    
 </plugin>
