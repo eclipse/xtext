@@ -2,7 +2,7 @@ abstract language org.eclipse.xtext.grammarinheritance.AbstractTestLanguage
 
 import "classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore" as mm
 
-InheritedParserRule returns mm::Element :
+InheritedParserRule returns mm::AType :
 	'element' name=ID;
 
 lexing:
