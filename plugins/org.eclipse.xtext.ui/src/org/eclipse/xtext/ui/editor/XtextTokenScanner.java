@@ -24,6 +24,7 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.editor.utils.TextStyleConstants;
@@ -75,7 +76,7 @@ public class XtextTokenScanner implements ITokenScanner {
 				}
 			}
 			else {
-				CoreLog.logError(EditorMessages.getFormattedString(
+				CoreLog.logError(XtextUIMessages.getFormattedString(
 						"XtextTokenScanner.WrongNodeType", node, LeafNode.class.getName()), //$NON-NLS-1$ 
 						new IllegalArgumentException());
 			}
