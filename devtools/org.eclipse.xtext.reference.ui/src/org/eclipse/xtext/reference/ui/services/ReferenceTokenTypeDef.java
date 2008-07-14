@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.ui.editor.preferences.AbstractRootPreferencePage;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
@@ -22,10 +25,18 @@ import org.eclipse.xtext.ui.tokentype.TokenTypeDef;
  * 
  */
 public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
+	@Inject
+	public void setLanguageDescriptor(ILanguageDescriptor language) {
+		if (AbstractRootPreferencePage.language == null)
+			AbstractRootPreferencePage.language = language;
+
+	}
+
 	@Override
 	public List<ITokenTypeDef> allTokenTypes() {
+
 		List<ITokenTypeDef> allTokenTypes = new ArrayList<ITokenTypeDef>();
-		allTokenTypes.add(fieldTokenType());
+		// allTokenTypes.add(fieldTokenType());
 		allTokenTypes.add(rot());
 		allTokenTypes.add(gelb());
 		allTokenTypes.add(grün());
@@ -72,14 +83,4 @@ public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 		return ttd;
 	}
 
-	private ITokenTypeDef fieldTokenType() {
-		// TODO want print all "featured" nodes italic, but can't
-		TokenTypeDef ttd = new TokenTypeDef("field") {
-			@Override
-			public boolean match(LeafNode node) {
-				return false;// DISABLED node.getFeature() != null;
-			}
-		};
-		return ttd;
-	}
 }

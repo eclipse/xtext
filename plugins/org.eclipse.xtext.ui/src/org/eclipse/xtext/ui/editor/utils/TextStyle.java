@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.utils;
 
-
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
@@ -27,15 +26,21 @@ public class TextStyle {
 	 */
 	public TextStyle(String color, String backgroundColor, int style, String fontName) {
 		super();
-		this.color = color;
-		this.backgroundColor = backgroundColor;
+		if (color == null)
+			this.color = TextStyleConstants.DEFAULT_COLOR;
+		else
+			this.color = color;
+		if (backgroundColor == null)
+			this.backgroundColor = TextStyleConstants.DEFAULT_BACKGROUNDCOLOR;
+		else
+			this.backgroundColor = backgroundColor;
 		this.style = style;
 		this.fontName = fontName;
 	}
 
 	public TextStyle() {
-		this(TextStyleConstants.KEYWORD_COLOR, TextStyleConstants.DEFAULT_BACKGROUNDCOLOR, TextStyleConstants.KEYWORD_STYLE,
-				TextStyleConstants.DEFAULT_FONT);
+		this(TextStyleConstants.KEYWORD_COLOR, TextStyleConstants.DEFAULT_BACKGROUNDCOLOR,
+				TextStyleConstants.KEYWORD_STYLE, TextStyleConstants.DEFAULT_FONT);
 	}
 
 	/**
@@ -47,7 +52,7 @@ public class TextStyle {
 
 	/**
 	 * @param color
-	 * 		the color to set
+	 *            the color to set
 	 */
 	public void setColor(String rgb) {
 		this.color = rgb;
@@ -62,7 +67,7 @@ public class TextStyle {
 
 	/**
 	 * @param style
-	 * 		the style to set
+	 *            the style to set
 	 */
 	public void setStyle(int style) {
 		this.style = style;
@@ -77,7 +82,7 @@ public class TextStyle {
 
 	/**
 	 * @param fontName
-	 * 		the fontName to set
+	 *            the fontName to set
 	 */
 	public void setFontName(String fontName) {
 		this.fontName = fontName;
@@ -85,7 +90,7 @@ public class TextStyle {
 
 	/**
 	 * @param backgroundColor
-	 * 		the backgroundColor to set
+	 *            the backgroundColor to set
 	 */
 	public void setBackgroundColor(String backgroundColor) {
 		this.backgroundColor = backgroundColor;

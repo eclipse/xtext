@@ -71,7 +71,7 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 			}
 		};
 		ttd.setName("Multi Line Comment");
-		ttd.setTextStyle(new TextStyle("33, 97, 65", null, SWT.NONE, null));
+		ttd.setTextStyle(new TextStyle(TextStyleConstants.MULTILINE_COMMENT_COLOR, null, SWT.NONE, null));
 		return ttd;
 	}
 

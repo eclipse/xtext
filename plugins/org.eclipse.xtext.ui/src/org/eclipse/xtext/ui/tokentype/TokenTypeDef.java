@@ -33,10 +33,18 @@ public abstract class TokenTypeDef implements ITokenTypeDef {
 
 	/**
 	 * @param id
-	 * @param tokenType
 	 */
 	public TokenTypeDef(String id) {
 		this.id = id;
+	}
+
+	/**
+	 * @param id
+	 * @param name
+	 */
+	public TokenTypeDef(String id, String name) {
+		this.id = id;
+		this.name = name;
 	}
 
 	/**
@@ -57,7 +65,7 @@ public abstract class TokenTypeDef implements ITokenTypeDef {
 
 	/**
 	 * @param name
-	 * 		the name to set
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -72,7 +80,7 @@ public abstract class TokenTypeDef implements ITokenTypeDef {
 
 	/**
 	 * @param textStyle
-	 * 		the textStyle to set
+	 *            the textStyle to set
 	 */
 	public void setTextStyle(TextStyle textStyle) {
 		this.textStyle = textStyle;
