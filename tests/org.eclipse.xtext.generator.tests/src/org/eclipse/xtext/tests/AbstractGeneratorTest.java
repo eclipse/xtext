@@ -51,7 +51,6 @@ public abstract class AbstractGeneratorTest extends TestCase {
 				Method doSetupMethod = standaloneSetupClass.getMethod("doSetup");
 				doSetupMethod.invoke(null);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}
