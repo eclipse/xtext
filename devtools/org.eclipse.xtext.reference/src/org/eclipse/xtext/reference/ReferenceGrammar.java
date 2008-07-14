@@ -33,7 +33,7 @@ public class ReferenceGrammar {
         resource.load(null);
         Grammar grammarModel = (Grammar) resource.getContents().get(0);
 
-        GeneratorFacade.generate(grammarModel, PATH, UI_PATH, "xtext", "tst");
+        GeneratorFacade.generate(grammarModel, PATH, UI_PATH, "xtest", "tst");
         System.out.println("Done.");
     }
 
