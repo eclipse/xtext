@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.services;
 
+import static org.easymock.EasyMock.expect;
+
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.xtext.builtin.IXtextBuiltin;
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
@@ -37,6 +39,7 @@ public class BISyntaxColorerTest extends AbstractEasyMockTest {
 		super.setUp();
 		colorer = new BuiltInSyntaxColorer();
 		final ILanguageDescriptor languageDescriptorMock = createMock(ILanguageDescriptor.class);
+		expect(languageDescriptorMock.getId()).andStubReturn("org.test.language");
 		final IPersistentPreferenceStore persistablePrefStore = createMock(IPersistentPreferenceStore.class);
 
 		colorer.setLanguageDescriptor(languageDescriptorMock);
