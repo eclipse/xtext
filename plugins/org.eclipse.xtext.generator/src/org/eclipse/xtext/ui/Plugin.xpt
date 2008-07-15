@@ -41,10 +41,33 @@
             parentScope="«grammar().getSuperGrammar().getId()»">
       </serviceScope>
    </extension>
+	<extension
+         point="org.eclipse.ui.preferencePages">
+		<page
+			class="org.eclipse.xtext.ui.service.utils.XtextServiceExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage/«languageId()»"
+			id="«languageId()»"
+			name="«languageName()»">
+		</page>
+		<page
+		    category="«languageId()»"
+		    class="org.eclipse.xtext.ui.service.utils.XtextServiceExtensionFactory:org.eclipse.xtext.ui.editor.preferences.EditorPreferencePage/«languageId()»"
+		    id="«languageId()».editor"
+		    name="Editor">
+		</page>
+		<page
+		    category="«languageId()».editor"
+		    class="org.eclipse.xtext.ui.service.utils.XtextServiceExtensionFactory:org.eclipse.xtext.ui.editor.preferences.SyntaxColoringPreferencePage/«languageId()»"
+		    id="«languageId()».editor.syntaxcoloring"
+		    name="Syntax Coloring">
+		</page>
+      </extension>
+      
+   
    «IF resourceFactoryService() != null-»
    «EXPAND registerResourceFactoryDescriptor FOR resourceFactoryService()-»
    «ENDIF»
    «EXPAND registerServiceFactory FOREACH genModel().services-»
+   
 </plugin>
 «ENDFILE»
 «ENDDEFINE»

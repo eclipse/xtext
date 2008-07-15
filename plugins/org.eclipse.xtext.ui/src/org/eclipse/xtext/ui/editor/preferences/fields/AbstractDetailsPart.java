@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.editor.preferences;
+package org.eclipse.xtext.ui.editor.preferences.fields;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,12 @@ import org.eclipse.jface.preference.PreferenceStore;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
+import org.eclipse.xtext.ui.editor.preferences.PreferencesQualifiedName;
 
+/**
+ * @author Dennis Hübner - Initial contribution and API
+ *
+ */
 public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 	/**
 	 * 
