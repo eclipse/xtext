@@ -11,7 +11,7 @@ package org.eclipse.xtext.ui.service.impl;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
-import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.ui.editor.preferences.PreferencesQualifiedName;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.service.IPreferenceStore;
@@ -27,22 +27,22 @@ public class BuiltInPreferenceStore implements IPreferenceStore {
 	public static final String STYLE_SUFIX = "style";
 	public static final String FONT_SUFIX = "font";
 
-	public static String getTokenColorPreferenceKey(ILanguageDescriptor languageDescriptor, String tokenType) {
+	public static String getTokenColorPreferenceKey(IServiceScope languageDescriptor, String tokenType) {
 		return PreferencesQualifiedName.parse(languageDescriptor.getId()).append(tokenType).append(COLOR_SUFIX)
 				.toString();
 	}
 
-	public static String getTokenBackgroundColorPreferenceKey(ILanguageDescriptor languageDescriptor, String tokenType) {
+	public static String getTokenBackgroundColorPreferenceKey(IServiceScope languageDescriptor, String tokenType) {
 		return PreferencesQualifiedName.parse(languageDescriptor.getId()).append(tokenType).append(
 				BACKGROUNDCOLOR_SUFIX).toString();
 	}
 
-	public static String getTokenFontPreferenceKey(ILanguageDescriptor languageDescriptor, String tokenType) {
+	public static String getTokenFontPreferenceKey(IServiceScope languageDescriptor, String tokenType) {
 		return PreferencesQualifiedName.parse(languageDescriptor.getId()).append(tokenType).append(FONT_SUFIX)
 				.toString();
 	}
 
-	public static String getTokenStylePreferenceKey(ILanguageDescriptor languageDescriptor, String tokenType) {
+	public static String getTokenStylePreferenceKey(IServiceScope languageDescriptor, String tokenType) {
 		return PreferencesQualifiedName.parse(languageDescriptor.getId()).append(tokenType).append(STYLE_SUFIX)
 				.toString();
 	}

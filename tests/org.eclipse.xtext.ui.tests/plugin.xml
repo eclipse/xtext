@@ -3,12 +3,11 @@
 <plugin>
    <extension-point id="testExtensionPoint" name="Test Extension Point" schema="schema/testExtensionPoint.exsd"/>
    <extension
-         point="org.eclipse.xtext.ui.languageDescriptor">
-      <languageDescriptor
+         point="org.eclipse.xtext.service.scope">
+      <serviceScope
             id="org.eclipse.xtext.ui.tests.dummylanguage"
-            name="Dummy Language"
-            superLanguage="org.eclipse.xtext.builtin.XtextBuiltin">
-      </languageDescriptor>
+            parentScope="org.eclipse.xtext.builtin.XtextBuiltin">
+      </serviceScope>
    </extension>
    <extension
          point="org.eclipse.xtext.ui.syntaxColorer">

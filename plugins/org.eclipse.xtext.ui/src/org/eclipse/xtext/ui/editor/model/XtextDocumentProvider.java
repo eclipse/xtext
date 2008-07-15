@@ -24,7 +24,7 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.util.JdtClasspathUriResolver;
 
@@ -34,13 +34,13 @@ import org.eclipse.xtext.ui.util.JdtClasspathUriResolver;
  */
 public class XtextDocumentProvider extends TextFileDocumentProvider implements IDocumentProvider {
 
-	private final ILanguageDescriptor languageDescriptor;
+	private final IServiceScope languageDescriptor;
 
 	protected class XtextFileInfo extends FileInfo {
 		public XtextEditorModel xtextEditorModel;
 	}
 
-	public XtextDocumentProvider(ILanguageDescriptor languageDescriptor) {
+	public XtextDocumentProvider(IServiceScope languageDescriptor) {
 		this.languageDescriptor = languageDescriptor;
 	}
 

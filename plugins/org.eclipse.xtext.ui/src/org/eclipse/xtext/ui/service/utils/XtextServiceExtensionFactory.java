@@ -15,8 +15,8 @@ import org.eclipse.core.runtime.IExecutableExtensionFactory;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.internal.CoreLog;
 
@@ -32,8 +32,8 @@ public class XtextServiceExtensionFactory implements IExecutableExtensionFactory
     private String extensionClassName;
     private String languageId;
 
-    private ILanguageDescriptor getLanguageDescriptor(String languageId) {
-        return LanguageDescriptorFactory.get(languageId);
+    private IServiceScope getLanguageDescriptor(String languageId) {
+        return ServiceScopeFactory.get(languageId);
     }
 
     public Object create() throws CoreException {
@@ -59,7 +59,7 @@ public class XtextServiceExtensionFactory implements IExecutableExtensionFactory
     }
 
     private Object configure(Object extensionInstance) throws CoreException {
-        ILanguageDescriptor languageDescriptor = getLanguageDescriptor(languageId);
+        IServiceScope languageDescriptor = getLanguageDescriptor(languageId);
         ServiceRegistry.injectServices(languageDescriptor, extensionInstance);
         
         if (extensionInstance instanceof IExecutableExtension) {

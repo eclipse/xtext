@@ -12,7 +12,7 @@ package org.eclipse.xtext.ui.service.impl;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.service.IPreferenceStore;
@@ -28,7 +28,7 @@ public class BuiltInSyntaxColorer implements ISyntaxColorer {
 
 	private ITokenTypeDefProvider tokenTypeDef;
 	private IPreferenceStore preferenceStore;
-	private ILanguageDescriptor languageDescriptor;
+	private IServiceScope languageDescriptor;
 
 	/*
 	 * (non-Javadoc)
@@ -65,7 +65,7 @@ public class BuiltInSyntaxColorer implements ISyntaxColorer {
 	}
 
 	@Inject
-	public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
+	public void setLanguageDescriptor(IServiceScope languageDescriptor) {
 		this.languageDescriptor = languageDescriptor;
 	}
 

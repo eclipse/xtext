@@ -44,7 +44,7 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
-import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.XtextUIMessages;
@@ -176,7 +176,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	private FoldingUpdater foldingSupport;
 
 	@Inject
-	private ILanguageDescriptor languageDescriptor;
+	private IServiceScope languageDescriptor;
 
 	private AbstractSelectionChangedListener editorSelectionChangedListener;
 
@@ -233,7 +233,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		return null;
 	}
 
-	public ILanguageDescriptor getLanguageDescriptor() {
+	public IServiceScope getLanguageDescriptor() {
 		return languageDescriptor;
 	}
 

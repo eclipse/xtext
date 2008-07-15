@@ -8,14 +8,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.services;
 
-import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.*;
 
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.xtext.builtin.IXtextBuiltin;
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.ui.AbstractEasyMockTest;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.service.impl.BuiltInPreferenceStore;
@@ -29,7 +29,7 @@ import org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef;
 public class BISyntaxColorerTest extends AbstractEasyMockTest {
 	static {
 		Thread.currentThread().setContextClassLoader(AbstractServiceTest.class.getClassLoader());
-		if (LanguageDescriptorFactory.get(IXtextBuiltin.ID) == null)
+		if (ServiceScopeFactory.get(IXtextBuiltin.ID) == null)
 			XtextBuiltinStandaloneSetup.doSetup();
 	}
 	private BuiltInSyntaxColorer colorer;
@@ -38,7 +38,7 @@ public class BISyntaxColorerTest extends AbstractEasyMockTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		colorer = new BuiltInSyntaxColorer();
-		final ILanguageDescriptor languageDescriptorMock = createMock(ILanguageDescriptor.class);
+		final IServiceScope languageDescriptorMock = createMock(IServiceScope.class);
 		expect(languageDescriptorMock.getId()).andStubReturn("org.test.language");
 		final IPersistentPreferenceStore persistablePrefStore = createMock(IPersistentPreferenceStore.class);
 

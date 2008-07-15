@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="identifier" basedOn="org.eclipse.xtext.ui.languageDescriptor/languageDescriptor/@id"/>
+                  <meta.attribute kind="identifier" basedOn="org.eclipse.xtext.service.scope/serviceScope/@id"/>
                </appinfo>
             </annotation>
          </attribute>

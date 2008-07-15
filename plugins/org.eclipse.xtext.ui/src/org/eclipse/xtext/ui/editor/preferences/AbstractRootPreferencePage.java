@@ -17,7 +17,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbenchPropertyPage;
-import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
 
 /**
@@ -26,7 +26,7 @@ import org.eclipse.xtext.service.ServiceRegistry;
  */
 public abstract class AbstractRootPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage,
 		IWorkbenchPropertyPage {
-	public static ILanguageDescriptor language = null;
+	public static IServiceScope language = null;
 	private IWorkbench workbench;
 	private IAdaptable element;
 

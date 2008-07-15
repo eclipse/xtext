@@ -28,7 +28,7 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import org.eclipse.ui.texteditor.HippieProposalProcessor;
-import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.editor.codecompletion.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.formatting.XtextFormattingStrategy;
@@ -47,14 +47,14 @@ import org.eclipse.xtext.ui.service.IProposalsProvider;
  */
 public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguration {
 	private final IEditorModelProvider editorModelProvider;
-	private final ILanguageDescriptor languageDescriptor;
+	private final IServiceScope languageDescriptor;
 
 	/**
 	 * @param languageDescriptor
 	 * @param preferenceStore
 	 * @param editor
 	 */
-	public XtextSourceViewerConfiguration(ILanguageDescriptor languageDescriptor, IPreferenceStore preferenceStore,
+	public XtextSourceViewerConfiguration(IServiceScope languageDescriptor, IPreferenceStore preferenceStore,
 			IEditorModelProvider editor) {
 		super(preferenceStore);
 		this.languageDescriptor = languageDescriptor;

@@ -11,7 +11,7 @@ package org.eclipse.xtext.ui.editor.outline;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.editor.BaseTextEditor;
 import org.eclipse.xtext.ui.editor.model.IEditorModel;
@@ -27,7 +27,7 @@ public class XtextModelContentProvider implements ITreeContentProvider {
 	protected static final Object[] EMPTY_ARRAY = new Object[0];
 	
 	private IOutlineProvider delegate;
-    private ILanguageDescriptor languageDescriptor;
+    private IServiceScope languageDescriptor;
 
     public XtextModelContentProvider(BaseTextEditor editor) {
 	    languageDescriptor = editor.getLanguageDescriptor();
