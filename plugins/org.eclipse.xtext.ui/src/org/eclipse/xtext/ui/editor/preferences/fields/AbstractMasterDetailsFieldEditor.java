@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.preferences;
+package org.eclipse.xtext.ui.editor.preferences.fields;
 
 import java.util.ArrayList;
 
@@ -21,6 +21,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.List;
+import org.eclipse.xtext.ui.editor.preferences.PreferencesQualifiedName;
 
 /**
  * @author Dennis Hübner - Initial contribution and API

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.preferences;
+package org.eclipse.xtext.ui.editor.preferences.fields;
 
 import java.util.List;
 

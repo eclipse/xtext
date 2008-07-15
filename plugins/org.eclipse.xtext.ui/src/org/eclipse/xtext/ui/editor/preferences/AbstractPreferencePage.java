@@ -11,24 +11,34 @@ package org.eclipse.xtext.ui.editor.preferences;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbenchPropertyPage;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public abstract class AbstractRootPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage,
+public abstract class AbstractPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage,
 		IWorkbenchPropertyPage {
-	public static IServiceScope language = null;
+
+	@Inject
+	private IServiceScope languageDescriptor;
+
 	private IWorkbench workbench;
 	private IAdaptable element;
+
+	private String languageName;
 
 	public void init(IWorkbench workbench) {
 		this.workbench = workbench;
@@ -51,13 +61,16 @@ public abstract class AbstractRootPreferencePage extends FieldEditorPreferencePa
 	}
 
 	public String qualifiedName() {
-		return language.getId();
+		return languageDescriptor.getId();
 	}
 
 	@Override
 	protected IPreferenceStore doGetPreferenceStore() {
-		return ServiceRegistry.getService(language, org.eclipse.xtext.ui.service.IPreferenceStore.class)
-				.getPersitablePreferenceStore();
+		org.eclipse.xtext.ui.service.IPreferenceStore service = ServiceRegistry.getService(getLanguageDescriptor(),
+				org.eclipse.xtext.ui.service.IPreferenceStore.class);
+		if (service != null)
+			return service.getPersitablePreferenceStore();
+		return new ScopedPreferenceStore(new InstanceScope(), "org.eclipse.xtext.ui");
 	}
 
 	@Override
@@ -72,4 +85,20 @@ public abstract class AbstractRootPreferencePage extends FieldEditorPreferencePa
 			}
 		return retVal;
 	}
+
+	/**
+	 * @return
+	 */
+	protected IServiceScope getLanguageDescriptor() {
+		return languageDescriptor;
+	}
+
+	protected String getLanguageName() {
+		if (this.languageName == null) {
+			this.languageName = GrammarUtil.getName(ServiceRegistry.getService(getLanguageDescriptor(),
+					IGrammarAccess.class).getGrammar());
+		}
+		return this.languageName;
+	}
+
 }
