@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.services;
 
-import static org.easymock.EasyMock.*;
+import static org.easymock.EasyMock.expect;
 
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.xtext.builtin.IXtextBuiltin;
@@ -42,14 +42,15 @@ public class BISyntaxColorerTest extends AbstractEasyMockTest {
 		expect(languageDescriptorMock.getId()).andStubReturn("org.test.language");
 		final IPersistentPreferenceStore persistablePrefStore = createMock(IPersistentPreferenceStore.class);
 
-		colorer.setLanguageDescriptor(languageDescriptorMock);
-		colorer.setTokenTypeDefProvider(new BuiltInTokenTypeDef());
-		colorer.setPreferenceStore(new BuiltInPreferenceStore() {
+		BuiltInTokenTypeDef service = new BuiltInTokenTypeDef();
+		service.setServiceScope(languageDescriptorMock);
+		service.setPreferenceStore(new BuiltInPreferenceStore() {
 			@Override
 			public IPersistentPreferenceStore getPersitablePreferenceStore() {
 				return persistablePrefStore;
 			}
 		});
+		colorer.setTokenTypeDefProvider(service);
 		replay();
 	}
 

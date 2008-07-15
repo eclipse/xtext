@@ -36,7 +36,7 @@ public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 	}
 
 	TokenTypeDef rot() {
-		TokenTypeDef ttd = new TokenTypeDef("rot") {
+		TokenTypeDef ttd = new TokenTypeDef("rot", "ROT") {
 			@Override
 			public boolean match(LeafNode node) {
 				return keyWordTokenType().match(node) && "ROT".equals(node.getText());
@@ -44,12 +44,12 @@ public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 		};
 		TextStyle ts = keyWordTokenType().getTextStyle();
 		ts.setColor("200,10,50");
-		ttd.setTextStyle(ts);
+		calculateTextStyle(ttd, ts);
 		return ttd;
 	}
 
 	TokenTypeDef gelb() {
-		TokenTypeDef ttd = new TokenTypeDef("gelb") {
+		TokenTypeDef ttd = new TokenTypeDef("gelb", "GELB") {
 			@Override
 			public boolean match(LeafNode node) {
 				return keyWordTokenType().match(node) && "GELB".equals(node.getText());
@@ -57,12 +57,12 @@ public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 		};
 		TextStyle ts = keyWordTokenType().getTextStyle();
 		ts.setColor("221,212,88");
-		ttd.setTextStyle(ts);
+		calculateTextStyle(ttd, ts);
 		return ttd;
 	}
 
 	TokenTypeDef grün() {
-		TokenTypeDef ttd = new TokenTypeDef("grün") {
+		TokenTypeDef ttd = new TokenTypeDef("grün", "GRÜN") {
 			@Override
 			public boolean match(LeafNode node) {
 				return keyWordTokenType().match(node) && "GRÜN".equals(node.getText());
@@ -70,7 +70,7 @@ public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 		};
 		TextStyle ts = keyWordTokenType().getTextStyle();
 		ts.setColor("10,200,10");
-		ttd.setTextStyle(ts);
+		calculateTextStyle(ttd, ts);
 		return ttd;
 	}
 
