@@ -40,7 +40,7 @@ public class ActionTest extends AbstractGeneratorTest {
 	}
 
     private EPackage getActionLangEPackage() {
-        IMetamodelAccess metaModelAccess = ServiceRegistry.getService(ActionTestLanguageStandaloneSetup.getLanguageDescriptor(), IMetamodelAccess.class);
+        IMetamodelAccess metaModelAccess = ServiceRegistry.getService(ActionTestLanguageStandaloneSetup.getServiceScope(), IMetamodelAccess.class);
 		EPackage actionLangEPackage = metaModelAccess.getGeneratedEPackages()[0];
 		return actionLangEPackage;
     }

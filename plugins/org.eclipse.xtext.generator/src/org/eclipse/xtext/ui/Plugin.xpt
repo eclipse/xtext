@@ -35,20 +35,28 @@
       </editor>
    </extension>
    <extension
-         point="org.eclipse.xtext.ui.languageDescriptor">
-      <languageDescriptor
+         point="org.eclipse.xtext.service.scope">
+      <serviceScope
             id="«languageId()»"
-            name="«languageName()»"
-            superLanguage="«grammar().getSuperGrammar().getId()»">
-      </languageDescriptor>
+            parentScope="«grammar().getSuperGrammar().getId()»">
+      </serviceScope>
    </extension>
    «IF resourceFactoryService() != null-»
    «EXPAND registerResourceFactoryDescriptor FOR resourceFactoryService()-»
    «ENDIF»
    «EXPAND registerServiceFactory FOREACH genModel().services-»
-   
 </plugin>
 «ENDFILE»
+«ENDDEFINE»
+
+«DEFINE dynamicPackage FOR xtext::GeneratedMetamodel»
+	<extension
+         point="org.eclipse.emf.ecore.dynamic_package">
+      <resource
+            uri="«nsURI»"
+            location="«((xtext::Grammar)eContainer).getNamespace().replaceAll("\\.","/")+'/'+name+'.ecore'»">
+      </resource>
+   </extension>
 «ENDDEFINE»
 
 «DEFINE registerResourceFactoryDescriptor FOR GenService-»

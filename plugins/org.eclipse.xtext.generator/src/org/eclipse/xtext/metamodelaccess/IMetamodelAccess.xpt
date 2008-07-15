@@ -29,6 +29,13 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class «genClassFQName.toSimpleName()» extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+«FOREACH grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm»
+		if (!EPackage.Registry.INSTANCE.containsKey(«gmm.name.toUpperCase()»_NS_URI))
+			EPackage.Registry.INSTANCE.put(«gmm.name.toUpperCase()»_NS_URI, loadEcoreFile(getClass().getClassLoader(), "«gmm.classPathURI()»"));
+«ENDFOREACH»
+}
+
 	private EPackage[] generated = new EPackage[] {
 		«FOREACH grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel) AS gmm SEPARATOR ","»
 		get«gmm.name.toFirstUpper()»EPackage()
