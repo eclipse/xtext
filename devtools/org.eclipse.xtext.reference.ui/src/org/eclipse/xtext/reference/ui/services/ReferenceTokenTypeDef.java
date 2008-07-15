@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.preferences.AbstractRootPreferencePage;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
@@ -26,7 +26,7 @@ import org.eclipse.xtext.ui.tokentype.TokenTypeDef;
  */
 public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 	@Inject
-	public void setLanguageDescriptor(ILanguageDescriptor language) {
+	public void setLanguageDescriptor(IServiceScope language) {
 		if (AbstractRootPreferencePage.language == null)
 			AbstractRootPreferencePage.language = language;
 

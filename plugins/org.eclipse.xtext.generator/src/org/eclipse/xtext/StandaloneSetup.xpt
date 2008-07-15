@@ -28,8 +28,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 «FOREACH genModel().nonUiServices() AS s-»
 import «s.serviceInterfaceFQName»;
@@ -54,14 +54,11 @@ public abstract class «standaloneSetupClass(grammar()).toSimpleName()» {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"xmi", new XMIResourceFactoryImpl());
 			«ENDIF»
-			ILanguageDescriptor languageDescriptor = 
-				LanguageDescriptorFactory.createLanguageDescriptor(
+			IServiceScope scope = ServiceScopeFactory.createScope(
 					«languageInterfaceFQName.toSimpleName()».ID, 
-					«languageInterfaceFQName.toSimpleName()».NAME, 
-					«languageInterfaceFQName.toSimpleName()».NAMESPACE, 
-					LanguageDescriptorFactory.get("«grammar().getSuperGrammar().getId()»"));
+					ServiceScopeFactory.get("«grammar().getSuperGrammar().getId()»"));
 			«FOREACH genModel().nonUiServices() AS s-»
-			ServiceRegistry.registerService(languageDescriptor, «s.serviceInterfaceFQName.toSimpleName()».class, «s.genClassFQName.toSimpleName()».class);
+			ServiceRegistry.registerService(scope, «s.serviceInterfaceFQName.toSimpleName()».class, «s.genClassFQName.toSimpleName()».class);
 			«ENDFOREACH»
 			«IF resourceFactoryService() != null-»
 			// register resource factory to EMF
@@ -86,11 +83,11 @@ public abstract class «standaloneSetupClass(grammar()).toSimpleName()» {
 		}
 	}
 	
-	public static synchronized ILanguageDescriptor getLanguageDescriptor() {
+	public static synchronized IServiceScope getServiceScope() {
 		if(!isInitialized) {
 			doSetup();
 		}
-		return LanguageDescriptorFactory.get(«languageInterfaceFQName.toSimpleName()».ID);
+		return ServiceScopeFactory.get(«languageInterfaceFQName.toSimpleName()».ID);
 	}
 			
 }

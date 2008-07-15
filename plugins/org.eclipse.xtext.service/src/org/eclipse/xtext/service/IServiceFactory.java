@@ -6,24 +6,17 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.service.examples;
 
-import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.service.ILanguageServiceFactory;
+package org.eclipse.xtext.service;
 
 /**
  * 
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class MyLanguageServiceFactory implements ILanguageServiceFactory {
+public interface IServiceFactory {
 
-    public ILanguageService createLanguageService() {
-        return new MyLanguageService();
-    }
-   
-    public Class<? extends ILanguageService> getServiceInterface() {
-        return MyLanguageService.class;
-    }
-   
+    Class<?> getServiceInterface();
+    
+    Object createService(); 
 }

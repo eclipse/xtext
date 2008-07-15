@@ -9,6 +9,13 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class XtextGrammarTestMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+
+		if (!EPackage.Registry.INSTANCE.containsKey(XTEXTTEST_NS_URI))
+			EPackage.Registry.INSTANCE.put(XTEXTTEST_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/XtextTest.ecore"));
+
+}
+
 	private EPackage[] generated = new EPackage[] {
 		
 		getXtextTestEPackage()

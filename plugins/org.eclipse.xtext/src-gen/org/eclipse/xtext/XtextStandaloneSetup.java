@@ -13,9 +13,9 @@ import org.eclipse.xtext.parser.XtextParser;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.XtextParseTreeConstructor;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.services.XtextMetamodelAccess;
 import org.eclipse.xtext.services.XtextResourceFactory;
@@ -30,9 +30,7 @@ public abstract class XtextStandaloneSetup {
 			// setup super language first
 			XtextBuiltinStandaloneSetup.doSetup();
 
-			ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.createLanguageDescriptor(IXtext.ID,
-					IXtext.NAME, IXtext.NAMESPACE, LanguageDescriptorFactory
-							.get("org.eclipse.xtext.builtin.XtextBuiltin"));
+			IServiceScope languageDescriptor = ServiceScopeFactory.createScope(IXtext.ID, ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
 			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, XtextGrammarAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, XtextMetamodelAccess.class);
 			ServiceRegistry.registerService(languageDescriptor, IAstFactory.class, GenericEcoreElementFactory.class);
@@ -54,11 +52,11 @@ public abstract class XtextStandaloneSetup {
 		}
 	}
 
-	public static ILanguageDescriptor getLanguageDescriptor() {
+	public static IServiceScope getServiceScope() {
 		if (!isInitialized) {
 			doSetup();
 		}
-		return LanguageDescriptorFactory.get(IXtext.ID);
+		return ServiceScopeFactory.get(IXtext.ID);
 	}
 
 }

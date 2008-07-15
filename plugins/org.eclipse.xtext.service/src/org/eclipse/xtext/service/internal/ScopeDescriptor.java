@@ -6,25 +6,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.services.bearing;
+package org.eclipse.xtext.service.internal;
 
-import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.service.Inject;
-
-/**
- * @author Jan Köhnlein - Initial contribution and API
- *
- */
-public class SampleServiceDependentClass {
-
-    private IParser parser;
-
-    @Inject
-    public void setParser(IParser parser) {
-        this.parser = parser;
-    }
-    
-    public IParser getParser() {
-        return parser;
-    }
+public class ScopeDescriptor {
+    public String id;
+    public String parentScope;
 }

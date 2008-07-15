@@ -7,19 +7,12 @@
  *
  *******************************************************************************/
 
-package org.eclipse.xtext.service;
+package org.eclipse.xtext.service.examples;
 
 /**
+ * 
  * @author Jan Köhnlein - Initial contribution and API
+ *
  */
-public interface ILanguageDescriptor {
-
-    String getId();
-
-    String getName();
-
-    String getNameSpace();
-    
-    ILanguageDescriptor getSuperLanguage();
-
+public class InjectedService2 extends InjectedService {
 }

@@ -9,25 +9,21 @@
 
 package org.eclipse.xtext.service.examples;
 
-import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.service.IServiceFactory;
 
 /**
  * 
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class MyLanguageService implements ILanguageService {
+public class InjectedServiceFactory implements IServiceFactory {
 
-    InjectedLanguageService injectedService = null;
-
-    public InjectedLanguageService getInjectedService() {
-        return injectedService;
+    public Object createService() {
+        return new InjectedService();
     }
 
-    @Inject
-    public void setInjectedService(InjectedLanguageService injectedService) {
-        this.injectedService = injectedService;
+    public Class<?> getServiceInterface() {
+        return InjectedService.class;
     }
 
 }

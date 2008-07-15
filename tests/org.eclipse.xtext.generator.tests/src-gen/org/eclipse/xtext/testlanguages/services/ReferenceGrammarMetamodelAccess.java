@@ -9,6 +9,13 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class ReferenceGrammarMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+
+		if (!EPackage.Registry.INSTANCE.containsKey(REFERENCEGRAMMAR_NS_URI))
+			EPackage.Registry.INSTANCE.put(REFERENCEGRAMMAR_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.ecore"));
+
+}
+
 	private EPackage[] generated = new EPackage[] {
 		
 		getReferenceGrammarEPackage()

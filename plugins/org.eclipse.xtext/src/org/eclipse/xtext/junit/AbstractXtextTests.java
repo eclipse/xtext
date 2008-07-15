@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.util.StringInputStream;
@@ -35,7 +35,7 @@ public abstract class AbstractXtextTests extends TestCase {
 		return parser;
 	}
 	
-	protected void setCurrentLanguage(ILanguageDescriptor desc) {
+	protected void setCurrentLanguage(IServiceScope desc) {
 		ServiceRegistry.injectServices(desc, this);
 	}
 	

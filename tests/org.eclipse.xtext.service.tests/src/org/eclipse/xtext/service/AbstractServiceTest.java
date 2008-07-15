@@ -16,7 +16,7 @@ import junit.framework.TestCase;
  */
 public abstract class AbstractServiceTest extends TestCase {
 
-    protected ILanguageDescriptor myLanguageDescriptor;
+    protected IServiceScope myScope;
 
     /**
      * 
@@ -36,8 +36,8 @@ public abstract class AbstractServiceTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         ServiceRegistry.resetInternal();
-        LanguageDescriptorFactory.resetInternal();
-        myLanguageDescriptor = LanguageDescriptorFactory.createLanguageDescriptor("xx", "yy", "zz", null);
+        ServiceScopeFactory.resetInternal();
+        myScope = ServiceScopeFactory.createScope("xx", null);
     }
 
 }

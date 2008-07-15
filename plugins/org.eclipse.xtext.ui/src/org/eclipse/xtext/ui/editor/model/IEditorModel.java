@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.SyntaxError;
-import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.IServiceScope;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -26,7 +26,7 @@ public interface IEditorModel {
 
     public abstract boolean hasErrors();
 
-    public abstract ILanguageDescriptor getLanguageDescriptor();
+    public abstract IServiceScope getLanguageDescriptor();
 
     public abstract AbstractNode getParseTreeRootNode();
 

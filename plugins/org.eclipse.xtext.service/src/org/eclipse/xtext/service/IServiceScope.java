@@ -10,13 +10,12 @@
 package org.eclipse.xtext.service;
 
 /**
- * 
  * @author Jan Köhnlein - Initial contribution and API
- *
  */
-public interface ILanguageServiceFactory {
+public interface IServiceScope {
 
-    Class<? extends ILanguageService> getServiceInterface();
-    
-    ILanguageService createLanguageService(); 
+    String getId();
+
+    IServiceScope getParentScope();
+
 }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -78,9 +79,7 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 		TokenTypeDef ttd = new TokenTypeDef(KEYWORD_ID) {
 			@Override
 			public boolean match(LeafNode node) {
-				if (node.getGrammarElement() instanceof RuleCall)
-					return GrammarConstants.LEXER_RULE_ID.equals(((RuleCall) node.getGrammarElement()).getName());
-				return false;
+				return node.getGrammarElement() instanceof Keyword;
 			}
 		};
 		ttd.setName("Keyword");
@@ -92,8 +91,8 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 		TokenTypeDef ttd = new TokenTypeDef(STRING_ID) {
 			@Override
 			public boolean match(LeafNode node) {
-				if (node.getGrammarElement() instanceof LexerRule) {
-					return GrammarConstants.LEXER_RULE_STRING.equals(((LexerRule) node.getGrammarElement()).getName());
+				if (node.getGrammarElement() instanceof RuleCall) {
+					return GrammarConstants.LEXER_RULE_STRING.equals(((RuleCall) node.getGrammarElement()).getName());
 				}
 				return false;
 			}
@@ -107,8 +106,8 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 		TokenTypeDef ttd = new TokenTypeDef(NUMBER_ID) {
 			@Override
 			public boolean match(LeafNode node) {
-				if (node.getGrammarElement() instanceof LexerRule) {
-					return GrammarConstants.LEXER_RULE_INT.equals(((LexerRule) node.getGrammarElement()).getName());
+				if (node.getGrammarElement() instanceof RuleCall) {
+					return GrammarConstants.LEXER_RULE_INT.equals(((RuleCall) node.getGrammarElement()).getName());
 				}
 				return false;
 			}

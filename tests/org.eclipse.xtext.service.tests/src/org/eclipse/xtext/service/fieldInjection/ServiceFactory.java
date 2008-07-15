@@ -1,15 +1,14 @@
 package org.eclipse.xtext.service.fieldInjection;
 
-import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.service.ILanguageServiceFactory;
+import org.eclipse.xtext.service.IServiceFactory;
 
-public class ServiceFactory implements ILanguageServiceFactory {
+public class ServiceFactory implements IServiceFactory {
 
-	public ILanguageService createLanguageService() {
+	public Object createService() {
 		return new IService(){};
 	}
 
-	public Class<? extends ILanguageService> getServiceInterface() {
+	public Class<? extends Object> getServiceInterface() {
 		return IService.class;
 	}
 

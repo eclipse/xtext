@@ -7,9 +7,9 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.service.ServiceScopeFactory;
 
 public class XtextBuiltinStandaloneSetup {
 
@@ -21,19 +21,18 @@ public class XtextBuiltinStandaloneSetup {
             Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
             EPackage.Registry.INSTANCE.put(XtextPackage.eNS_URI,XtextPackage.eINSTANCE);
             
-            ILanguageDescriptor languageDescriptor = LanguageDescriptorFactory.createLanguageDescriptor(IXtextBuiltin.ID,
-                    IXtextBuiltin.NAME, IXtextBuiltin.NAMESPACE, null);
+            IServiceScope serviceScope = ServiceScopeFactory.createScope(IXtextBuiltin.ID, null);
 
-            ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, XtextBuiltinGrammarAccess.class);
-            ServiceRegistry.registerService(languageDescriptor, IValueConverterService.class, XtextBuiltInConverters.class);
+            ServiceRegistry.registerService(serviceScope, IGrammarAccess.class, XtextBuiltinGrammarAccess.class);
+            ServiceRegistry.registerService(serviceScope, IValueConverterService.class, XtextBuiltInConverters.class);
             isInitialized = true;
         }
     }
 
-    public synchronized static ILanguageDescriptor getLanguageDescriptor() {
+    public synchronized static IServiceScope getServiceScope() {
         if (!isInitialized) {
             doSetup();
         }
-        return LanguageDescriptorFactory.get(IXtextBuiltin.ID);
+        return ServiceScopeFactory.get(IXtextBuiltin.ID);
     }
 }

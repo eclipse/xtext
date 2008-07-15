@@ -11,7 +11,7 @@ package org.eclipse.xtext.ui.editor.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.IServiceScope;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -21,7 +21,7 @@ public class XtextDocumentProviderFactory {
 	
 	private static XtextDocumentProviderFactory instance;
 	
-	private Map<ILanguageDescriptor, XtextDocumentProvider> documentProviders = new HashMap<ILanguageDescriptor, XtextDocumentProvider>();
+	private Map<IServiceScope, XtextDocumentProvider> documentProviders = new HashMap<IServiceScope, XtextDocumentProvider>();
 
 	private XtextDocumentProviderFactory() {
 	}
@@ -33,7 +33,7 @@ public class XtextDocumentProviderFactory {
 		return instance;
 	}
 	
-	public XtextDocumentProvider getDocumentProvider(ILanguageDescriptor languageDescriptor) {
+	public XtextDocumentProvider getDocumentProvider(IServiceScope languageDescriptor) {
 		XtextDocumentProvider documentProvider = documentProviders.get(languageDescriptor);
 		if (documentProvider == null) {
 			documentProvider = new XtextDocumentProvider(languageDescriptor);

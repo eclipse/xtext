@@ -17,10 +17,10 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.service.ILanguageDescriptor;
 import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -33,11 +33,11 @@ public abstract class AbstractServiceTest extends TestCase {
 	}
 
 	private static final String DEFAULT_LANGUAGE = "org.eclipse.xtext.reference.ReferenceGrammar";
-	private ILanguageDescriptor languageDescriptor;
+	private IServiceScope languageDescriptor;
 
-	protected ILanguageDescriptor getDefaultTestLanguage() {
+	protected IServiceScope getDefaultTestLanguage() {
 		if (languageDescriptor == null)
-			languageDescriptor = LanguageDescriptorFactory.get(DEFAULT_LANGUAGE);
+			languageDescriptor = ServiceScopeFactory.get(DEFAULT_LANGUAGE);
 		return languageDescriptor;
 	}
 

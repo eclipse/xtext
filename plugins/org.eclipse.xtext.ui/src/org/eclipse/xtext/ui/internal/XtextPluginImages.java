@@ -24,7 +24,7 @@ import org.eclipse.swt.graphics.Image;
  */
 public class XtextPluginImages {
 
-    private static final String NAME_PREFIX = Activator.PLUGIN_ID + "."; //$NON-NLS-1$
+//    private static final String NAME_PREFIX = Activator.PLUGIN_ID + "."; //$NON-NLS-1$
 
     private static ImageRegistry PLUGIN_REGISTRY;
 
@@ -34,13 +34,13 @@ public class XtextPluginImages {
      * Set of predefined Image Descriptors.
      */
 
-    private static final String PATH_OBJ = ICONS_PATH + "obj16/"; //$NON-NLS-1$
-    private static final String PATH_VIEW = ICONS_PATH + "view16/"; //$NON-NLS-1$
+//    private static final String PATH_OBJ = ICONS_PATH + "obj16/"; //$NON-NLS-1$
+//    private static final String PATH_VIEW = ICONS_PATH + "view16/"; //$NON-NLS-1$
     private static final String PATH_LCL = ICONS_PATH + "elcl16/"; //$NON-NLS-1$
     private static final String PATH_LCL_DISABLED = ICONS_PATH + "dlcl16/"; //$NON-NLS-1$
-    private static final String PATH_TOOL = ICONS_PATH + "etool16/"; //$NON-NLS-1$
-    private static final String PATH_OVR = ICONS_PATH + "ovr16/"; //$NON-NLS-1$
-    private static final String PATH_WIZBAN = ICONS_PATH + "wizban/"; //$NON-NLS-1$
+//    private static final String PATH_TOOL = ICONS_PATH + "etool16/"; //$NON-NLS-1$
+//    private static final String PATH_OVR = ICONS_PATH + "ovr16/"; //$NON-NLS-1$
+//    private static final String PATH_WIZBAN = ICONS_PATH + "wizban/"; //$NON-NLS-1$
 
     /**
      * Frequently used images

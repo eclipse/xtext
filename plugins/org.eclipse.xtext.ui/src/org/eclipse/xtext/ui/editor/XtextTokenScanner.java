@@ -22,7 +22,7 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
-import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
@@ -43,10 +43,10 @@ public class XtextTokenScanner implements ITokenScanner {
 	private LeafNode currentNode = null;
 	private Iterator<LeafNode> nodeIterator;
 	private IParser parser;
-	private final ILanguageDescriptor languageDescriptor;
+	private final IServiceScope languageDescriptor;
 	private IParseResult lastParseResult;
 
-	public XtextTokenScanner(ILanguageDescriptor languageDescriptor) {
+	public XtextTokenScanner(IServiceScope languageDescriptor) {
 		Assert.isLegal(languageDescriptor != null);
 		this.languageDescriptor = languageDescriptor;
 		this.syntaxColorer = ServiceRegistry.getService(languageDescriptor, ISyntaxColorer.class);

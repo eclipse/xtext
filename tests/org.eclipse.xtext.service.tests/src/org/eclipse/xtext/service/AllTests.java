@@ -20,10 +20,10 @@ public class AllTests {
 	public static Test suite() {
 		TestSuite suite = new TestSuite("Test for org.eclipse.xtext.service");
 		//$JUnit-BEGIN$
-		suite.addTestSuite(LanguageDescriptorFactoryTest.class);
+		suite.addTestSuite(ServiceScopeFactoryTest.class);
 		suite.addTestSuite(PriorityTest.class);
 		suite.addTestSuite(RegistrationTest.class);
-		suite.addTestSuite(LanguageInheritanceTest.class);
+		suite.addTestSuite(NestedServiceScopesTest.class);
 		suite.addTestSuite(DependencyInjectionTest.class);
 		//$JUnit-END$
 		return suite;

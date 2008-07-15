@@ -9,6 +9,13 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class DummyLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+
+		if (!EPackage.Registry.INSTANCE.containsKey(DUMMYLANG_NS_URI))
+			EPackage.Registry.INSTANCE.put(DUMMYLANG_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/dummy/DummyLang.ecore"));
+
+}
+
 	private EPackage[] generated = new EPackage[] {
 		
 		getDummyLangEPackage()

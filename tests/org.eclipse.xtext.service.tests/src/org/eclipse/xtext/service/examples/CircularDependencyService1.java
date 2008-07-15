@@ -8,14 +8,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.service.examples;
 
-import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.Inject;
 
 /**
  * @author Jan Köhnlein
  *
  */
-public class CircularDependencyService1 implements ILanguageService {
+public class CircularDependencyService1 {
 
     private CircularDependencyService0 service;
 

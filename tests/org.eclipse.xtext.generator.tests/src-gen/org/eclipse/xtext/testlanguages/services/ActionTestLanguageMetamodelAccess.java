@@ -9,6 +9,13 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class ActionTestLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+
+		if (!EPackage.Registry.INSTANCE.containsKey(ACTIONLANG_NS_URI))
+			EPackage.Registry.INSTANCE.put(ACTIONLANG_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/testlanguages/ActionLang.ecore"));
+
+}
+
 	private EPackage[] generated = new EPackage[] {
 		
 		getActionLangEPackage()

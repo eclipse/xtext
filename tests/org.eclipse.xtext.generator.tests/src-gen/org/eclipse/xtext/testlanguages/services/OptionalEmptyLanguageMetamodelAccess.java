@@ -9,6 +9,13 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class OptionalEmptyLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+
+		if (!EPackage.Registry.INSTANCE.containsKey(OPTIONALEMPTY_NS_URI))
+			EPackage.Registry.INSTANCE.put(OPTIONALEMPTY_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/testlanguages/OptionalEmpty.ecore"));
+
+}
+
 	private EPackage[] generated = new EPackage[] {
 		
 		getOptionalEmptyEPackage()

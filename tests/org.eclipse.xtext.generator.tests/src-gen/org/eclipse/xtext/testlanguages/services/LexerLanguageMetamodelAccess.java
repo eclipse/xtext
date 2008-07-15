@@ -9,6 +9,13 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class LexerLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+
+		if (!EPackage.Registry.INSTANCE.containsKey(LEXERLANG_NS_URI))
+			EPackage.Registry.INSTANCE.put(LEXERLANG_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/testlanguages/LexerLang.ecore"));
+
+}
+
 	private EPackage[] generated = new EPackage[] {
 		
 		getLexerLangEPackage()

@@ -5,10 +5,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- *******************************************************************************/package org.eclipse.xtext.service.internal;
+ *******************************************************************************/package org.eclipse.xtext.service;
 
-import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.service.ILanguageServiceFactory;
 
 
 /**
@@ -16,12 +14,12 @@ import org.eclipse.xtext.service.ILanguageServiceFactory;
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class GenericLanguageServiceFactory implements ILanguageServiceFactory{
+public class GenericServiceFactory implements IServiceFactory {
 	
-	private Class<? extends ILanguageService> serviceInterface;
-    private Class<? extends ILanguageService> serviceClass;
+	private Class<? extends Object> serviceInterface;
+    private Class<? extends Object> serviceClass;
 	
-	public GenericLanguageServiceFactory(Class<? extends ILanguageService> serviceInterface, Class<? extends ILanguageService> serviceClass) {
+	public GenericServiceFactory(Class<? extends Object> serviceInterface, Class<? extends Object> serviceClass) {
 		super();
 		this.serviceInterface = serviceInterface;
 		this.serviceClass = serviceClass;
@@ -30,7 +28,7 @@ public class GenericLanguageServiceFactory implements ILanguageServiceFactory{
 		}
 	}
 
-	public ILanguageService createLanguageService() {
+	public Object createService() {
 	    try {
 	        return serviceClass.newInstance();
 	    } catch(Exception exc) {
@@ -38,7 +36,7 @@ public class GenericLanguageServiceFactory implements ILanguageServiceFactory{
 	    }
 	}
 
-    public Class<? extends ILanguageService> getServiceInterface() {
+    public Class<? extends Object> getServiceInterface() {
         return serviceInterface;
     }
     

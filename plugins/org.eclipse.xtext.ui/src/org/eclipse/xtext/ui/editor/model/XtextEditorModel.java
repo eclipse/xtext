@@ -24,7 +24,7 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.util.StringInputStream;
@@ -36,10 +36,10 @@ public class XtextEditorModel implements IEditorModel {
 
     private final IDocument document;
     private IDocumentListener dirtyListener;
-    private final ILanguageDescriptor languageDescriptor;
+    private final IServiceScope languageDescriptor;
     private XtextResource resource;
 
-    public XtextEditorModel(XtextResource resource, IDocument document, ILanguageDescriptor languageDescriptor) {
+    public XtextEditorModel(XtextResource resource, IDocument document, IServiceScope languageDescriptor) {
         this.document = document;
         this.resource = resource;
         if (resource.getParseResult() == null) {
@@ -53,7 +53,7 @@ public class XtextEditorModel implements IEditorModel {
         this.languageDescriptor = languageDescriptor;
     }
 
-    public ILanguageDescriptor getLanguageDescriptor() {
+    public IServiceScope getLanguageDescriptor() {
         return languageDescriptor;
     }
 

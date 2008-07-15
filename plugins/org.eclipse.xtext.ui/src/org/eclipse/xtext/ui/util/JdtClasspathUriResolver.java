@@ -19,6 +19,7 @@ import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
 
+@SuppressWarnings("restriction")
 public class JdtClasspathUriResolver implements IClasspathUriResolver {
 
     private IJavaElement javaElement;
@@ -39,7 +40,6 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
         return classpathUri;
     }
 
-    @SuppressWarnings("restriction")
     protected static URI findResourceInWorkspace(IJavaProject javaProject, URI classpathUri) throws JavaModelException, CoreException {
         Path fullPath = new Path(classpathUri.path());
         String projectRelativePath = fullPath.toString();

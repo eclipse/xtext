@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
@@ -36,18 +36,15 @@ public abstract class ConcreteTestLanguageStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.grammarinheritance.AbstractTestLanguageStandaloneSetup.doSetup();
 			
-			ILanguageDescriptor languageDescriptor = 
-				LanguageDescriptorFactory.createLanguageDescriptor(
+			IServiceScope scope = ServiceScopeFactory.createScope(
 					IConcreteTestLanguage.ID, 
-					IConcreteTestLanguage.NAME, 
-					IConcreteTestLanguage.NAMESPACE, 
-					LanguageDescriptorFactory.get("org.eclipse.xtext.grammarinheritance.AbstractTestLanguage"));
-			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, ConcreteTestLanguageGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, ConcreteTestLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, IParser.class, ConcreteTestLanguageParser.class);
-			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, ConcreteTestLanguageResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, ConcreteTestLanguageParseTreeConstructor.class);
+					ServiceScopeFactory.get("org.eclipse.xtext.grammarinheritance.AbstractTestLanguage"));
+			ServiceRegistry.registerService(scope, IGrammarAccess.class, ConcreteTestLanguageGrammarAccess.class);
+			ServiceRegistry.registerService(scope, IMetamodelAccess.class, ConcreteTestLanguageMetamodelAccess.class);
+			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(scope, IParser.class, ConcreteTestLanguageParser.class);
+			ServiceRegistry.registerService(scope, IResourceFactory.class, ConcreteTestLanguageResourceFactory.class);
+			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, ConcreteTestLanguageParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new ConcreteTestLanguageResourceFactory();
@@ -70,11 +67,11 @@ public abstract class ConcreteTestLanguageStandaloneSetup {
 		}
 	}
 	
-	public static synchronized ILanguageDescriptor getLanguageDescriptor() {
+	public static synchronized IServiceScope getServiceScope() {
 		if(!isInitialized) {
 			doSetup();
 		}
-		return LanguageDescriptorFactory.get(IConcreteTestLanguage.ID);
+		return ServiceScopeFactory.get(IConcreteTestLanguage.ID);
 	}
 			
 }

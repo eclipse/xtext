@@ -9,10 +9,16 @@
 
 package org.eclipse.xtext.service.examples;
 
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.Inject;
+
 /**
  * 
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class InjectedLanguageService2 extends InjectedLanguageService {
+public class InjectedService {
+	@Inject
+    public IServiceScope scope;
+    
 }

@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.xtext.ui" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.xtext.service" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.xtext.ui" id="languageDescriptor" name="languageDescriptor"/>
+         <meta.schema plugin="org.eclipse.xtext.service" id="scope" name="Service Scope"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]
@@ -17,8 +17,8 @@
          </appinfo>
       </annotation>
       <complexType>
-         <sequence>
-            <element ref="languageDescriptor"/>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="serviceScope"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,31 +47,22 @@
       </complexType>
    </element>
 
-   <element name="languageDescriptor">
+   <element name="serviceScope">
       <complexType>
-         <sequence>
-         </sequence>
          <attribute name="id" type="string" use="required">
             <annotation>
                <documentation>
-                  The symbolic id of the language.
+                  
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="name" type="string">
-            <annotation>
-               <documentation>
-                  The human-readable name of the language.
-               </documentation>
-            </annotation>
-         </attribute>
-         <attribute name="superLanguage" type="string">
+         <attribute name="parentScope" type="string">
             <annotation>
                <documentation>
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="identifier" basedOn="org.eclipse.xtext.ui.languageDescriptor/languageDescriptor/@id"/>
+                  <meta.attribute kind="identifier" basedOn="org.eclipse.xtext.service.scope/serviceScope/@id"/>
                </appinfo>
             </annotation>
          </attribute>
@@ -83,7 +74,7 @@
          <meta.section type="since"/>
       </appinfo>
       <documentation>
-         1.0.0
+         [Enter the first release in which this extension point appears.]
       </documentation>
    </annotation>
 
@@ -114,13 +105,5 @@
       </documentation>
    </annotation>
 
-   <annotation>
-      <appinfo>
-         <meta.section type="copyright"/>
-      </appinfo>
-      <documentation>
-         (c) 2008 itemis AG and others
-      </documentation>
-   </annotation>
 
 </schema>

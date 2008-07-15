@@ -8,8 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.service;
 
-import org.eclipse.xtext.service.examples.InjectedLanguageService;
-import org.eclipse.xtext.service.examples.InjectedLanguageServiceFactory;
+import org.eclipse.xtext.service.examples.InjectedService;
+import org.eclipse.xtext.service.examples.InjectedServiceFactory;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -18,19 +18,19 @@ import org.eclipse.xtext.service.examples.InjectedLanguageServiceFactory;
 public class RegistrationTest extends AbstractServiceTest {
     
     public void testServiceRegistry() throws Exception {
-        ServiceRegistry.registerFactory(myLanguageDescriptor, new InjectedLanguageServiceFactory());
-        InjectedLanguageService service = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
+        ServiceRegistry.registerFactory(myScope, new InjectedServiceFactory());
+        InjectedService service = ServiceRegistry.getService(myScope, InjectedService.class);
         assertNotNull(service);
     }
 
     public void testSingletonServiceFactory() {
-        ServiceRegistry.registerService(myLanguageDescriptor, InjectedLanguageService.class, SomeLanguageService.class);
-        InjectedLanguageService service = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
+        ServiceRegistry.registerService(myScope, InjectedService.class, SomeLanguageService.class);
+        InjectedService service = ServiceRegistry.getService(myScope, InjectedService.class);
         assertNotNull(service);
-        InjectedLanguageService service1 = ServiceRegistry.getService(myLanguageDescriptor, InjectedLanguageService.class);
+        InjectedService service1 = ServiceRegistry.getService(myScope, InjectedService.class);
         assertEquals(service, service1);
     }
 
-    public static class SomeLanguageService extends InjectedLanguageService {
+    public static class SomeLanguageService extends InjectedService {
     }
 }

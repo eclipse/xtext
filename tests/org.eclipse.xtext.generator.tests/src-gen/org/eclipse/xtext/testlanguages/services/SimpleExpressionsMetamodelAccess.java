@@ -9,6 +9,13 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class SimpleExpressionsMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+
+		if (!EPackage.Registry.INSTANCE.containsKey(SIMPLEEXPRESSIONS_NS_URI))
+			EPackage.Registry.INSTANCE.put(SIMPLEEXPRESSIONS_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/testlanguages/simpleExpressions.ecore"));
+
+}
+
 	private EPackage[] generated = new EPackage[] {
 		
 		getSimpleExpressionsEPackage()
