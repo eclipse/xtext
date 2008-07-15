@@ -6,12 +6,13 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.service;
+
+package org.eclipse.xtext.service.examples;
 
 /**
- * @author Peter Friese - Initial contribution and API
  * 
+ * @author Jan Köhnlein - Initial contribution and API
+ *
  */
-public interface ILanguageService {
-    
+public class InjectedService2 extends InjectedService {
 }

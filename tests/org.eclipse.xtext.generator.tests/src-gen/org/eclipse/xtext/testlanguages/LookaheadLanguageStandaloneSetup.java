@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.LookaheadLanguageGrammarAccess;
@@ -36,18 +36,15 @@ public abstract class LookaheadLanguageStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			ILanguageDescriptor languageDescriptor = 
-				LanguageDescriptorFactory.createLanguageDescriptor(
+			IServiceScope scope = ServiceScopeFactory.createScope(
 					ILookaheadLanguage.ID, 
-					ILookaheadLanguage.NAME, 
-					ILookaheadLanguage.NAMESPACE, 
-					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, LookaheadLanguageGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, LookaheadLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, IParser.class, LookaheadLanguageParser.class);
-			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, LookaheadLanguageResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, LookaheadLanguageParseTreeConstructor.class);
+					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
+			ServiceRegistry.registerService(scope, IGrammarAccess.class, LookaheadLanguageGrammarAccess.class);
+			ServiceRegistry.registerService(scope, IMetamodelAccess.class, LookaheadLanguageMetamodelAccess.class);
+			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(scope, IParser.class, LookaheadLanguageParser.class);
+			ServiceRegistry.registerService(scope, IResourceFactory.class, LookaheadLanguageResourceFactory.class);
+			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, LookaheadLanguageParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new LookaheadLanguageResourceFactory();
@@ -70,11 +67,11 @@ public abstract class LookaheadLanguageStandaloneSetup {
 		}
 	}
 	
-	public static synchronized ILanguageDescriptor getLanguageDescriptor() {
+	public static synchronized IServiceScope getServiceScope() {
 		if(!isInitialized) {
 			doSetup();
 		}
-		return LanguageDescriptorFactory.get(ILookaheadLanguage.ID);
+		return ServiceScopeFactory.get(ILookaheadLanguage.ID);
 	}
 			
 }

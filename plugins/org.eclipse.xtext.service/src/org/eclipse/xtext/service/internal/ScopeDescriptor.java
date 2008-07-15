@@ -6,17 +6,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
+package org.eclipse.xtext.service.internal;
 
-package org.eclipse.xtext.service;
-
-/**
- * 
- * @author Jan Köhnlein - Initial contribution and API
- *
- */
-public interface ILanguageServiceFactory {
-
-    Class<? extends ILanguageService> getServiceInterface();
-    
-    ILanguageService createLanguageService(); 
+public class ScopeDescriptor {
+    public String id;
+    public String parentScope;
 }

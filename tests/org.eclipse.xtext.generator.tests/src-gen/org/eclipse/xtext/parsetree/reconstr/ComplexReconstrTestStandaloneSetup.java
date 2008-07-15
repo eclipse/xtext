@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestGrammarAccess;
@@ -36,18 +36,15 @@ public abstract class ComplexReconstrTestStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			ILanguageDescriptor languageDescriptor = 
-				LanguageDescriptorFactory.createLanguageDescriptor(
+			IServiceScope scope = ServiceScopeFactory.createScope(
 					IComplexReconstrTest.ID, 
-					IComplexReconstrTest.NAME, 
-					IComplexReconstrTest.NAMESPACE, 
-					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, ComplexReconstrTestGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, ComplexReconstrTestMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, IParser.class, ComplexReconstrTestParser.class);
-			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, ComplexReconstrTestResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, ComplexReconstrTestParseTreeConstructor.class);
+					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
+			ServiceRegistry.registerService(scope, IGrammarAccess.class, ComplexReconstrTestGrammarAccess.class);
+			ServiceRegistry.registerService(scope, IMetamodelAccess.class, ComplexReconstrTestMetamodelAccess.class);
+			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(scope, IParser.class, ComplexReconstrTestParser.class);
+			ServiceRegistry.registerService(scope, IResourceFactory.class, ComplexReconstrTestResourceFactory.class);
+			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, ComplexReconstrTestParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new ComplexReconstrTestResourceFactory();
@@ -70,11 +67,11 @@ public abstract class ComplexReconstrTestStandaloneSetup {
 		}
 	}
 	
-	public static synchronized ILanguageDescriptor getLanguageDescriptor() {
+	public static synchronized IServiceScope getServiceScope() {
 		if(!isInitialized) {
 			doSetup();
 		}
-		return LanguageDescriptorFactory.get(IComplexReconstrTest.ID);
+		return ServiceScopeFactory.get(IComplexReconstrTest.ID);
 	}
 			
 }

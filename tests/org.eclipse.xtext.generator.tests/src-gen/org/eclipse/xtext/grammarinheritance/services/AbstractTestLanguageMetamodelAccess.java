@@ -9,6 +9,10 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class AbstractTestLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+
+}
+
 	private EPackage[] generated = new EPackage[] {
 		
 		};

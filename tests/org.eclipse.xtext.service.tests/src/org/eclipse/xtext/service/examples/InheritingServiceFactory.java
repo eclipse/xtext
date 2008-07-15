@@ -9,21 +9,20 @@
 
 package org.eclipse.xtext.service.examples;
 
-import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.service.ILanguageServiceFactory;
+import org.eclipse.xtext.service.IServiceFactory;
 
 /**
  * 
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class InheritingServiceFactory implements ILanguageServiceFactory {
+public class InheritingServiceFactory implements IServiceFactory {
 
-    public ILanguageService createLanguageService() {
+    public Object createService() {
         return new InheritingService();
     }
 
-    public Class<? extends ILanguageService> getServiceInterface() {
+    public Class<?> getServiceInterface() {
         return InheritingService.class;
     }
    

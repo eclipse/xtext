@@ -30,7 +30,7 @@ import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.service.ILanguageDescriptor;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.util.StringInputStream;
 import org.openarchitectureware.expression.ExecutionContextImpl;
@@ -58,10 +58,10 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	}
 	
 
-	private ILanguageDescriptor currentLanguageDescriptor;
+	private IServiceScope currentScope;
 	
-	public ILanguageDescriptor getCurrentLanguageDescriptor() {
-		return currentLanguageDescriptor;
+	public IServiceScope getCurrentServiceScope() {
+		return currentScope;
 	}
 
 	@Override
@@ -73,36 +73,36 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		currentLanguageDescriptor = null;
+		currentScope = null;
 	}
 
 	/**
 	 * call this to set the language class to be used in the current test.
 	 */
 	protected void with(Class<?> standaloneSetup) throws Exception {
-		Method getLangDescMethod = standaloneSetup.getMethod("getLanguageDescriptor");
-		currentLanguageDescriptor = (ILanguageDescriptor) getLangDescMethod.invoke(null);
-		assert currentLanguageDescriptor != null;
+		Method getLangDescMethod = standaloneSetup.getMethod("getServiceScope");
+		currentScope = (IServiceScope) getLangDescMethod.invoke(null);
+		assert currentScope != null;
 	}
 
 	protected IParser getParser() {
-		return ServiceRegistry.getService(currentLanguageDescriptor, IParser.class);
+		return ServiceRegistry.getService(currentScope, IParser.class);
 	}
 
 	protected IAstFactory getASTFactory() {
-		return ServiceRegistry.getService(currentLanguageDescriptor, IAstFactory.class);
+		return ServiceRegistry.getService(currentScope, IAstFactory.class);
 	}
 
 	protected IParseTreeConstructor getParseTreeConstructor() {
-		return ServiceRegistry.getService(currentLanguageDescriptor, IParseTreeConstructor.class);
+		return ServiceRegistry.getService(currentScope, IParseTreeConstructor.class);
 	}
 	
 	protected IResourceFactory getResourceFactory()  {
-		return ServiceRegistry.getService(currentLanguageDescriptor, IResourceFactory.class);
+		return ServiceRegistry.getService(currentScope, IResourceFactory.class);
 	}
 	
 	protected IValueConverterService getValueConverterService() {
-		return ServiceRegistry.getService(currentLanguageDescriptor, IValueConverterService.class);
+		return ServiceRegistry.getService(currentScope, IValueConverterService.class);
 	}
 
 	// parse methods

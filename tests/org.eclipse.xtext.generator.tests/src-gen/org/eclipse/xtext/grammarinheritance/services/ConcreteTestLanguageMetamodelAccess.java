@@ -9,6 +9,13 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class ConcreteTestLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+
+		if (!EPackage.Registry.INSTANCE.containsKey(FOO_NS_URI))
+			EPackage.Registry.INSTANCE.put(FOO_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/grammarinheritance/foo.ecore"));
+
+}
+
 	private EPackage[] generated = new EPackage[] {
 		
 		getFooEPackage()

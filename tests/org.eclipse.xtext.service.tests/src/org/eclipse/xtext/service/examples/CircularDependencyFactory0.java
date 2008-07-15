@@ -8,20 +8,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.service.examples;
 
-import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.service.ILanguageServiceFactory;
+import org.eclipse.xtext.service.IServiceFactory;
 
 /**
  * @author Jan Köhnlein
  *
  */
-public class CircularDependencyFactory0 implements ILanguageServiceFactory {
+public class CircularDependencyFactory0 implements IServiceFactory {
 
-    public ILanguageService createLanguageService() {
+    public Object createService() {
         return new CircularDependencyService0();
     }
 
-    public Class<? extends ILanguageService> getServiceInterface() {
+    public Class<? > getServiceInterface() {
         return CircularDependencyService0.class;
     }
 

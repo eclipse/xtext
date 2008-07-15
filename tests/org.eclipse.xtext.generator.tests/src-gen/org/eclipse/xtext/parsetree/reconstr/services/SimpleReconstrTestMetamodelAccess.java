@@ -9,6 +9,13 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class SimpleReconstrTestMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+
+		if (!EPackage.Registry.INSTANCE.containsKey(SIMPLEREWRITETEST_NS_URI))
+			EPackage.Registry.INSTANCE.put(SIMPLEREWRITETEST_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/parsetree/reconstr/simplerewritetest.ecore"));
+
+}
+
 	private EPackage[] generated = new EPackage[] {
 		
 		getSimplerewritetestEPackage()

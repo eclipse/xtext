@@ -9,8 +9,6 @@
 
 package org.eclipse.xtext.service.examples;
 
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.Inject;
 
 /**
@@ -18,15 +16,17 @@ import org.eclipse.xtext.service.Inject;
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class InjectedLanguageService implements ILanguageService {
-    private ILanguageDescriptor languageDescriptor;
-    
-    public ILanguageDescriptor getLanguageDescriptor() {
-        return languageDescriptor;
+public class MyService  {
+
+    InjectedService injectedService = null;
+
+    public InjectedService getInjectedService() {
+        return injectedService;
     }
 
     @Inject
-    public void setLanguageDescriptor(ILanguageDescriptor languageDescriptor) {
-        this.languageDescriptor = languageDescriptor;
+    public void setInjectedService(InjectedService injectedService) {
+        this.injectedService = injectedService;
     }
+
 }

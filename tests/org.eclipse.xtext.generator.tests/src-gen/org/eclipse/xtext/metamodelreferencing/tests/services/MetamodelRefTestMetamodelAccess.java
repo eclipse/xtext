@@ -9,6 +9,13 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class MetamodelRefTestMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+
+		if (!EPackage.Registry.INSTANCE.containsKey(SIMPLETEST_NS_URI))
+			EPackage.Registry.INSTANCE.put(SIMPLETEST_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/metamodelreferencing/tests/SimpleTest.ecore"));
+
+}
+
 	private EPackage[] generated = new EPackage[] {
 		
 		getSimpleTestEPackage()

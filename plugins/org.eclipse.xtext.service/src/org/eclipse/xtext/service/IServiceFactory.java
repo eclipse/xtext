@@ -10,16 +10,13 @@
 package org.eclipse.xtext.service;
 
 /**
+ * 
  * @author Jan Köhnlein - Initial contribution and API
+ *
  */
-public interface ILanguageDescriptor {
+public interface IServiceFactory {
 
-    String getId();
-
-    String getName();
-
-    String getNameSpace();
+    Class<?> getServiceInterface();
     
-    ILanguageDescriptor getSuperLanguage();
-
+    Object createService(); 
 }

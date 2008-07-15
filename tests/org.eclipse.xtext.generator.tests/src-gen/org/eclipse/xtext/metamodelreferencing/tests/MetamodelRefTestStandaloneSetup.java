@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestGrammarAccess;
@@ -36,18 +36,15 @@ public abstract class MetamodelRefTestStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			ILanguageDescriptor languageDescriptor = 
-				LanguageDescriptorFactory.createLanguageDescriptor(
+			IServiceScope scope = ServiceScopeFactory.createScope(
 					IMetamodelRefTest.ID, 
-					IMetamodelRefTest.NAME, 
-					IMetamodelRefTest.NAMESPACE, 
-					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, MetamodelRefTestGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, MetamodelRefTestMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, IParser.class, MetamodelRefTestParser.class);
-			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, MetamodelRefTestResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, MetamodelRefTestParseTreeConstructor.class);
+					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
+			ServiceRegistry.registerService(scope, IGrammarAccess.class, MetamodelRefTestGrammarAccess.class);
+			ServiceRegistry.registerService(scope, IMetamodelAccess.class, MetamodelRefTestMetamodelAccess.class);
+			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(scope, IParser.class, MetamodelRefTestParser.class);
+			ServiceRegistry.registerService(scope, IResourceFactory.class, MetamodelRefTestResourceFactory.class);
+			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, MetamodelRefTestParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new MetamodelRefTestResourceFactory();
@@ -70,11 +67,11 @@ public abstract class MetamodelRefTestStandaloneSetup {
 		}
 	}
 	
-	public static synchronized ILanguageDescriptor getLanguageDescriptor() {
+	public static synchronized IServiceScope getServiceScope() {
 		if(!isInitialized) {
 			doSetup();
 		}
-		return LanguageDescriptorFactory.get(IMetamodelRefTest.ID);
+		return ServiceScopeFactory.get(IMetamodelRefTest.ID);
 	}
 			
 }

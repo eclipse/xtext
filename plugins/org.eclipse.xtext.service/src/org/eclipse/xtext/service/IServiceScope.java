@@ -7,12 +7,15 @@
  *
  *******************************************************************************/
 
-package org.eclipse.xtext.service.examples;
+package org.eclipse.xtext.service;
 
 /**
- * 
  * @author Jan Köhnlein - Initial contribution and API
- *
  */
-public class InjectedLanguageService2 extends InjectedLanguageService {
+public interface IServiceScope {
+
+    String getId();
+
+    IServiceScope getParentScope();
+
 }

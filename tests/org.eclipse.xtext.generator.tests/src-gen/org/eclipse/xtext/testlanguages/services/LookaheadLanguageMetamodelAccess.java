@@ -9,6 +9,13 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class LookaheadLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+
+		if (!EPackage.Registry.INSTANCE.containsKey(LOOKAHEADLANG_NS_URI))
+			EPackage.Registry.INSTANCE.put(LOOKAHEADLANG_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/testlanguages/LookaheadLang.ecore"));
+
+}
+
 	private EPackage[] generated = new EPackage[] {
 		
 		getLookaheadLangEPackage()

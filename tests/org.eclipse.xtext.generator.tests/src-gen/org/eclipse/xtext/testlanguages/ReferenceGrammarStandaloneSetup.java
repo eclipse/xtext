@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.ReferenceGrammarGrammarAccess;
@@ -36,18 +36,15 @@ public abstract class ReferenceGrammarStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			ILanguageDescriptor languageDescriptor = 
-				LanguageDescriptorFactory.createLanguageDescriptor(
+			IServiceScope scope = ServiceScopeFactory.createScope(
 					IReferenceGrammar.ID, 
-					IReferenceGrammar.NAME, 
-					IReferenceGrammar.NAMESPACE, 
-					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, ReferenceGrammarGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, ReferenceGrammarMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, IParser.class, ReferenceGrammarParser.class);
-			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, ReferenceGrammarResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, ReferenceGrammarParseTreeConstructor.class);
+					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
+			ServiceRegistry.registerService(scope, IGrammarAccess.class, ReferenceGrammarGrammarAccess.class);
+			ServiceRegistry.registerService(scope, IMetamodelAccess.class, ReferenceGrammarMetamodelAccess.class);
+			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(scope, IParser.class, ReferenceGrammarParser.class);
+			ServiceRegistry.registerService(scope, IResourceFactory.class, ReferenceGrammarResourceFactory.class);
+			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, ReferenceGrammarParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new ReferenceGrammarResourceFactory();
@@ -70,11 +67,11 @@ public abstract class ReferenceGrammarStandaloneSetup {
 		}
 	}
 	
-	public static synchronized ILanguageDescriptor getLanguageDescriptor() {
+	public static synchronized IServiceScope getServiceScope() {
 		if(!isInitialized) {
 			doSetup();
 		}
-		return LanguageDescriptorFactory.get(IReferenceGrammar.ID);
+		return ServiceScopeFactory.get(IReferenceGrammar.ID);
 	}
 			
 }

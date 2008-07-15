@@ -9,6 +9,13 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class ComplexReconstrTestMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+
+		if (!EPackage.Registry.INSTANCE.containsKey(COMPLEXREWRITETEST_NS_URI))
+			EPackage.Registry.INSTANCE.put(COMPLEXREWRITETEST_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/parsetree/reconstr/complexrewritetest.ecore"));
+
+}
+
 	private EPackage[] generated = new EPackage[] {
 		
 		getComplexrewritetestEPackage()

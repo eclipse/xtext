@@ -12,13 +12,13 @@ package org.eclipse.xtext.service.examples;
  * @author Jan Köhnlein
  * 
  */
-public class InheritingService extends MyLanguageService {
+public class InheritingService extends MyService {
 
     /**
      * Method does not redefine @InjectedService
      */
     @Override
-    public void setInjectedService(InjectedLanguageService injectedService) {
+    public void setInjectedService(InjectedService injectedService) {
         super.setInjectedService(injectedService);
     }
 }

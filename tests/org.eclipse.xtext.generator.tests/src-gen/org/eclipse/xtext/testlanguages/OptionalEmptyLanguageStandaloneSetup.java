@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageGrammarAccess;
@@ -36,18 +36,15 @@ public abstract class OptionalEmptyLanguageStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			ILanguageDescriptor languageDescriptor = 
-				LanguageDescriptorFactory.createLanguageDescriptor(
+			IServiceScope scope = ServiceScopeFactory.createScope(
 					IOptionalEmptyLanguage.ID, 
-					IOptionalEmptyLanguage.NAME, 
-					IOptionalEmptyLanguage.NAMESPACE, 
-					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, OptionalEmptyLanguageGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, OptionalEmptyLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, IParser.class, OptionalEmptyLanguageParser.class);
-			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, OptionalEmptyLanguageResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, OptionalEmptyLanguageParseTreeConstructor.class);
+					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
+			ServiceRegistry.registerService(scope, IGrammarAccess.class, OptionalEmptyLanguageGrammarAccess.class);
+			ServiceRegistry.registerService(scope, IMetamodelAccess.class, OptionalEmptyLanguageMetamodelAccess.class);
+			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(scope, IParser.class, OptionalEmptyLanguageParser.class);
+			ServiceRegistry.registerService(scope, IResourceFactory.class, OptionalEmptyLanguageResourceFactory.class);
+			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, OptionalEmptyLanguageParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new OptionalEmptyLanguageResourceFactory();
@@ -70,11 +67,11 @@ public abstract class OptionalEmptyLanguageStandaloneSetup {
 		}
 	}
 	
-	public static synchronized ILanguageDescriptor getLanguageDescriptor() {
+	public static synchronized IServiceScope getServiceScope() {
 		if(!isInitialized) {
 			doSetup();
 		}
-		return LanguageDescriptorFactory.get(IOptionalEmptyLanguage.ID);
+		return ServiceScopeFactory.get(IOptionalEmptyLanguage.ID);
 	}
 			
 }

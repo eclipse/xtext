@@ -16,14 +16,14 @@ import org.eclipse.xtext.service.Inject;
  */
 public class SamplePatient {
 
-    private InjectedLanguageService service;
+    private InjectedService service;
 
     @Inject 
-    public void setService(InjectedLanguageService s) {
+    public void setService(InjectedService s) {
         this.service = s;
     }
     
-    public InjectedLanguageService getService() {
+    public InjectedService getService() {
         return service;
     }
 }
