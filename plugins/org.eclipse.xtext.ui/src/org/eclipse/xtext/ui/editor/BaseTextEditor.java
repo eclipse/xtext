@@ -11,6 +11,7 @@ package org.eclipse.xtext.ui.editor;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.ITextSelection;
@@ -38,6 +39,7 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -109,10 +111,32 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 					EObject astNode = (EObject) firstElement;
 					NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(astNode);
 					CompositeNode parserNode = nodeAdapter.getParserNode();
-					int offset = parserNode.getOffset();
-					getSourceViewer().getTextWidget().setSelection(offset);
+					
+					AbstractNode selectionNode = findSelectionNode(parserNode);
+					int offset = selectionNode.getOffset();
+					int length = selectionNode.getLength();
+					
+					getSourceViewer().revealRange(offset, length);
+					getSourceViewer().setSelectedRange(offset, length);
 				}
 			}
+		}
+		
+		private AbstractNode findSelectionNode(AbstractNode startNode) {
+		    AbstractNode result = startNode;
+		    EList<LeafNode> leafNodes = startNode.getLeafNodes();
+            for (LeafNode leafNode : leafNodes) {
+                EObject grammarElement = leafNode.getGrammarElement();
+                if (grammarElement instanceof RuleCall) {
+                    RuleCall ruleCall = (RuleCall) grammarElement;
+                    String ruleName = ruleCall.getName();
+                    if (ruleName.equals("ID")) {
+                        result = leafNode;
+                        break;
+                    }
+                }
+            }
+            return result;
 		}
 	}
 
