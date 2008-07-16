@@ -25,4 +25,4 @@ generate ReferenceGrammar "http://eclipse.org/xtext/reference/ReferenceGrammar"
 		 "spielzeug" "(" name = ID farbe = Farbe ")" ;
 	
 	Farbe :
-		 "ROT" | "BLAU" | "GELB" | "GRÜN" ;
+		 wert=("ROT" | "BLAU" | "GELB" | "GRÜN");
