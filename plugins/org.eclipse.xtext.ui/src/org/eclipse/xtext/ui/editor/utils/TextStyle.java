@@ -12,7 +12,7 @@ package org.eclipse.xtext.ui.editor.utils;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class TextStyle implements Cloneable {
+public class TextStyle {
 	private String color;
 	private String backgroundColor;
 	private String fontData;
@@ -88,18 +88,7 @@ public class TextStyle implements Cloneable {
 		return backgroundColor;
 	}
 
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		return new TextStyle(this);
-	}
-
 	public TextStyle copy() {
-		try {
-			return (TextStyle) clone();
-		}
-		catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return new TextStyle(this);
 	}
 }
