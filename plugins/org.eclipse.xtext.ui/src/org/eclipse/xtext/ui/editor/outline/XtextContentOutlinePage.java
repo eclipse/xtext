@@ -19,6 +19,8 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IActionBars;
@@ -39,6 +41,8 @@ import org.eclipse.xtext.ui.service.ILabelProvider;
  * @author Peter Friese - Initial contribution and API
  */
 public class XtextContentOutlinePage extends ContentOutlinePage implements IContentOutlinePage {
+    
+    public static final String XTEXT_CONTENT_OUTLINE_PAGE_SORTING_ACTION_IS_CHECKED = "XtextContentOutlinePage.SortingAction.isChecked";
 
     private ListenerList postSelectionChangedListeners = new ListenerList();
     private IEditorModel model;
@@ -106,6 +110,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
         IToolBarManager toolBarManager = actionBars.getToolBarManager();
         if (toolBarManager != null) {
             toolBarManager.add(new ToggleLinkWithEditorAction(xtextBaseEditor));
+            toolBarManager.add(new XtextOutlineSortingAction(this));
         }
     }
     
@@ -191,4 +196,24 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
         };
     }
 
+    private ViewerComparator alphaComparator = new ViewerComparator() {
+        @Override
+        public int compare(Viewer viewer, Object e1, Object e2) {
+            XtextLabelProviderDelegator labelProvider = new XtextLabelProviderDelegator(ServiceRegistry
+                    .getService(xtextBaseEditor.getLanguageDescriptor(), ILabelProvider.class));
+            String text1 = labelProvider.getText(e1);
+            String text2 = labelProvider.getText(e2);
+            return getComparator().compare(text1, text2);
+        }
+    };
+    
+    public void sort(boolean on) {
+        if (on) {
+            getTreeViewer().setComparator(alphaComparator);
+        }
+        else {
+            getTreeViewer().setComparator(null);
+        }
+    }
 }
+
