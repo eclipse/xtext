@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-import org.eclipse.xtext.service.ILanguageDescriptor;
-import org.eclipse.xtext.service.LanguageDescriptorFactory;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.preference.services.PreferenceGrammarGrammarAccess;
@@ -36,18 +36,15 @@ public abstract class PreferenceGrammarStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			ILanguageDescriptor languageDescriptor = 
-				LanguageDescriptorFactory.createLanguageDescriptor(
+			IServiceScope scope = ServiceScopeFactory.createScope(
 					IPreferenceGrammar.ID, 
-					IPreferenceGrammar.NAME, 
-					IPreferenceGrammar.NAMESPACE, 
-					LanguageDescriptorFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(languageDescriptor, IGrammarAccess.class, PreferenceGrammarGrammarAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IMetamodelAccess.class, PreferenceGrammarMetamodelAccess.class);
-			ServiceRegistry.registerService(languageDescriptor, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, IParser.class, PreferenceGrammarParser.class);
-			ServiceRegistry.registerService(languageDescriptor, IResourceFactory.class, PreferenceGrammarResourceFactory.class);
-			ServiceRegistry.registerService(languageDescriptor, IParseTreeConstructor.class, PreferenceGrammarParseTreeConstructor.class);
+					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
+			ServiceRegistry.registerService(scope, IGrammarAccess.class, PreferenceGrammarGrammarAccess.class);
+			ServiceRegistry.registerService(scope, IMetamodelAccess.class, PreferenceGrammarMetamodelAccess.class);
+			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(scope, IParser.class, PreferenceGrammarParser.class);
+			ServiceRegistry.registerService(scope, IResourceFactory.class, PreferenceGrammarResourceFactory.class);
+			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, PreferenceGrammarParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new PreferenceGrammarResourceFactory();
@@ -70,11 +67,11 @@ public abstract class PreferenceGrammarStandaloneSetup {
 		}
 	}
 	
-	public static synchronized ILanguageDescriptor getLanguageDescriptor() {
+	public static synchronized IServiceScope getServiceScope() {
 		if(!isInitialized) {
 			doSetup();
 		}
-		return LanguageDescriptorFactory.get(IPreferenceGrammar.ID);
+		return ServiceScopeFactory.get(IPreferenceGrammar.ID);
 	}
 			
 }

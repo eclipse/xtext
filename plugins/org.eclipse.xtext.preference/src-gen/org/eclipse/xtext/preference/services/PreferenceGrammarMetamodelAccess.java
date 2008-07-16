@@ -9,6 +9,13 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class PreferenceGrammarMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
+{
+
+		if (!EPackage.Registry.INSTANCE.containsKey(PREF_NS_URI))
+			EPackage.Registry.INSTANCE.put(PREF_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/preference/pref.ecore"));
+
+}
+
 	private EPackage[] generated = new EPackage[] {
 		
 		getPrefEPackage()
