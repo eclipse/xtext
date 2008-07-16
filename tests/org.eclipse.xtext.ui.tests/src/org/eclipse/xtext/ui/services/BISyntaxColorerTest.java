@@ -57,7 +57,7 @@ public class BISyntaxColorerTest extends AbstractEasyMockTest {
 		LeafNode leafNode = createLeafNode();
 		leafNode.setText("nothing");
 		TextStyle textStyle = colorer.color(leafNode);
-		assertNotNull(textStyle);
+		assertNull(textStyle);
 	}
 
 	public void testKnownTokenTypeStyle() throws Exception {
