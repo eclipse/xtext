@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ReferenceGrammar" nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar" nsPrefix="ReferenceGrammar">
   <eClassifiers xsi:type="ecore:EClass" name="Spielplatz">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="spielzeuge" upperBound="-1" eType="//Spielzeug" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="beschreibung">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
@@ -10,22 +9,23 @@
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="kinder" upperBound="-1" eType="//Kind" containment="true" resolveProxies="false"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Erwachsener" eSuperTypes="//Person"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Person" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="age">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spielzeuge" upperBound="-1" eType="//Spielzeug" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Farbe" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Spielzeug">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="farbe" eType="//Farbe" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="age">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Erwachsener" eSuperTypes="//Person"/>
   <eClassifiers xsi:type="ecore:EClass" name="Kind" eSuperTypes="//Person"/>
 </ecore:EPackage>
