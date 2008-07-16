@@ -15,7 +15,6 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.editor.utils.TextStyleConstants;
@@ -32,8 +31,6 @@ import org.eclipse.xtext.ui.util.GrammarConstants;
 public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 	@Inject
 	private IPreferenceStore preferenceStore;
-	@Inject
-	private IServiceScope serviceScope;
 
 	public static final String KEYWORD_ID = "keyword";
 	public static final String SL_COMMENT_ID = "slComment";
@@ -52,7 +49,7 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 	}
 
 	public ITokenTypeDef commentTokenType() {
-		TokenTypeDef ttd = new TokenTypeDef(SL_COMMENT_ID, "Single Line Comment") {
+		TokenTypeDef slComment = new TokenTypeDef(SL_COMMENT_ID, "Single Line Comment") {
 			@Override
 			public boolean match(LeafNode node) {
 				if (node.getGrammarElement() instanceof LexerRule) {
@@ -61,9 +58,8 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 				return false;
 			}
 		};
-		calculateTextStyle(ttd, new TextStyle(TextStyleConstants.COMMENT_COLOR, null, TextStyleConstants.DEFAULT_STYLE,
-				null));
-		return ttd;
+		calculateTextStyle(slComment, new TextStyle(TextStyleConstants.COMMENT_COLOR, null, null));
+		return slComment;
 	}
 
 	public ITokenTypeDef mlCommentTokenType() {
@@ -78,8 +74,7 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 			}
 		};
 		ttd.setName("Multi Line Comment");
-		calculateTextStyle(ttd, new TextStyle(TextStyleConstants.MULTILINE_COMMENT_COLOR, null,
-				TextStyleConstants.DEFAULT_STYLE, null));
+		calculateTextStyle(ttd, new TextStyle(TextStyleConstants.MULTILINE_COMMENT_COLOR, null, null));
 		return ttd;
 	}
 
@@ -91,8 +86,7 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 			}
 		};
 		ttd.setName("Keyword");
-		calculateTextStyle(ttd, new TextStyle(TextStyleConstants.KEYWORD_COLOR, null, TextStyleConstants.KEYWORD_STYLE,
-				null));
+		calculateTextStyle(ttd, new TextStyle(TextStyleConstants.KEYWORD_COLOR, null, null));
 		return ttd;
 	}
 
@@ -107,8 +101,7 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 			}
 		};
 		ttd.setName("String");
-		calculateTextStyle(ttd, new TextStyle(TextStyleConstants.STRING_COLOR, null, TextStyleConstants.DEFAULT_STYLE,
-				null));
+		calculateTextStyle(ttd, new TextStyle(TextStyleConstants.STRING_COLOR, null, null));
 		return ttd;
 	}
 
@@ -123,59 +116,51 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 			}
 		};
 		ttd.setName("Number");
-		calculateTextStyle(ttd, new TextStyle(TextStyleConstants.NUMBER_COLOR, null, TextStyleConstants.DEFAULT_STYLE,
-				null));
+		calculateTextStyle(ttd, new TextStyle(TextStyleConstants.NUMBER_COLOR, null, null));
 		return ttd;
 	}
 
 	protected void calculateTextStyle(TokenTypeDef tokenType, TextStyle textStyle) {
 		tokenType.setTextStyle(new TextStyle(getColorForTokenType(tokenType.getId(), textStyle.getColor()),
-				getBackgroundColorForTokenType(tokenType.getId(), textStyle.getBackgroundColor()),
-				getStyleForTokenType(tokenType.getId(), textStyle.getStyle()), getFontForTokenType(tokenType.getId(),
-						textStyle.getFontName())));
+				getBackgroundColorForTokenType(tokenType.getId(), textStyle.getBackgroundColor()), getFontForTokenType(
+						tokenType.getId(), textStyle.getFontData())));
 	}
 
 	// TODO set defaults somewhere else if possible, or check if a default
-	// already set
-	private int getStyleForTokenType(String tokenType, int defaultStyle) {
-		String tokenStylePreferenceKey = BuiltInPreferenceStore.getTokenStylePreferenceKey(serviceScope, tokenType);
-		getPreferenceStore().setDefault(tokenStylePreferenceKey, defaultStyle);
-		return getPreferenceStore().getInt(tokenStylePreferenceKey);
-	}
 
 	private org.eclipse.jface.preference.IPreferenceStore getPreferenceStore() {
 		return preferenceStore.getPersitablePreferenceStore();
 	}
 
 	private String getFontForTokenType(String tokenType, String defaultFont) {
-		String tokenFontPreferenceKey = BuiltInPreferenceStore.getTokenFontPreferenceKey(serviceScope, tokenType);
+		String tokenFontPreferenceKey = getBuiltInPreferenceStore().getTokenFontPreferenceKey(tokenType);
 		if (defaultFont != null)
 			getPreferenceStore().setDefault(tokenFontPreferenceKey, defaultFont);
 		return getPreferenceStore().getString(tokenFontPreferenceKey);
 	}
 
 	private String getBackgroundColorForTokenType(String tokenType, String defaultBackgroundColor) {
-		String tokenBackgroundColorPreferenceKey = BuiltInPreferenceStore.getTokenBackgroundColorPreferenceKey(
-				serviceScope, tokenType);
+		String tokenBackgroundColorPreferenceKey = getBuiltInPreferenceStore().getTokenBackgroundColorPreferenceKey(
+				tokenType);
 		if (defaultBackgroundColor != null)
-			getPreferenceStore().setDefault(
-					BuiltInPreferenceStore.getTokenBackgroundColorPreferenceKey(serviceScope, tokenType),
-					defaultBackgroundColor);
+			getPreferenceStore()
+					.setDefault(getBuiltInPreferenceStore().getTokenBackgroundColorPreferenceKey(tokenType),
+							defaultBackgroundColor);
 		String rgbString = getPreferenceStore().getString(tokenBackgroundColorPreferenceKey);
 		return rgbString;
 	}
 
 	private String getColorForTokenType(String tokenType, String defaultColor) {
-		String preferenceKey = BuiltInPreferenceStore.getTokenColorPreferenceKey(serviceScope, tokenType);
+		String preferenceKey = getBuiltInPreferenceStore().getTokenColorPreferenceKey(tokenType);
 		if (defaultColor != null)
-			getPreferenceStore().setDefault(BuiltInPreferenceStore.getTokenColorPreferenceKey(serviceScope, tokenType),
+			getPreferenceStore().setDefault(getBuiltInPreferenceStore().getTokenColorPreferenceKey(tokenType),
 					defaultColor);
 		String rgbString = getPreferenceStore().getString(preferenceKey);
 		return rgbString;
 	}
 
-	public void setServiceScope(IServiceScope iServiceScope) {
-		this.serviceScope = iServiceScope;
+	protected BuiltInPreferenceStore getBuiltInPreferenceStore() {
+		return (BuiltInPreferenceStore) preferenceStore;
 	}
 
 	public void setPreferenceStore(IPreferenceStore iPreferenceStore) {

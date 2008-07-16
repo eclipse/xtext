@@ -14,7 +14,7 @@ import org.eclipse.xtext.ui.editor.preferences.PreferencesQualifiedName;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- *
+ * 
  */
 public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 	/**
@@ -48,32 +48,39 @@ public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 		return new ChainedPreferenceStore(new IPreferenceStore[] { internalStore, masterPreferenceStore });
 	}
 
-	protected final void loadDefaults(PreferencesQualifiedName preferencePrefix) {
-		setPreferencePrefix(preferencePrefix);
-		performDefaults();
-	}
-
-	private void setPreferencePrefix(PreferencesQualifiedName preferencePrefix) {
-		this.preferencePrefix = preferencePrefix;
-		for (FieldEditor fe : internalEditorsList) {
-			PreferencesQualifiedName oldPreferenceName = PreferencesQualifiedName.parse(fe.getPreferenceName());
-			fe.setPreferenceName(getPreferencePrefix().append(oldPreferenceName.lastQualifier()).toString());
-		}
-	}
-
 	protected final void load(PreferencesQualifiedName preferencePrefix) {
 		setPreferencePrefix(preferencePrefix);
 		initialize();
 	}
 
+	protected final void loadDefaults(PreferencesQualifiedName preferencePrefix) {
+		setPreferencePrefix(preferencePrefix);
+		performDefaults();
+		for (FieldEditor fe : internalEditorsList) {
+			if (fe.presentsDefaultValue()) {
+				internalStore.setDefault(fe.getPreferenceName(), masterPreferenceStore.getDefaultString(fe
+						.getPreferenceName()));
+			}
+		}
+	}
+
 	@Override
 	public final boolean performOk() {
-		boolean performOk = super.performOk();
 		for (String prefKey : internalStore.preferenceNames()) {
 			masterPreferenceStore.putValue(prefKey, internalStore.getString(prefKey));
 		}
-		masterPreferenceStore.firePropertyChangeEvent(getPreferencePrefix().toString(), null, null);
-		return performOk;
+		if (internalStore.preferenceNames().length > 0)
+			masterPreferenceStore.firePropertyChangeEvent(getPreferencePrefix().toString(), null, null);
+		resetPreferenceStore();
+		return true;
+	}
+
+	/**
+	 * 
+	 */
+	private void resetPreferenceStore() {
+		internalStore = new PreferenceStore();
+		setPreferenceStore(null);
 	}
 
 	@Override
@@ -99,4 +106,11 @@ public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 		return preferencePrefix;
 	}
 
+	private void setPreferencePrefix(PreferencesQualifiedName preferencePrefix) {
+		this.preferencePrefix = preferencePrefix;
+		for (FieldEditor fe : internalEditorsList) {
+			PreferencesQualifiedName oldPreferenceName = PreferencesQualifiedName.parse(fe.getPreferenceName());
+			fe.setPreferenceName(getPreferencePrefix().append(oldPreferenceName.lastQualifier()).toString());
+		}
+	}
 }

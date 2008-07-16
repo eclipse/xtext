@@ -22,6 +22,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.xtext.ui.editor.preferences.PreferencesQualifiedName;
+import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -33,12 +34,12 @@ public abstract class AbstractMasterDetailsFieldEditor extends FieldEditor {
 	protected final java.util.List<?> items;
 	private AbstractDetailsPart fieldEditorPreferencePage;
 
-	public AbstractMasterDetailsFieldEditor(IPreferenceStore preferenceStore, String name, String label,
-			java.util.List<?> items, Composite parent) {
-		this.items = items;
-		init(name, label);
+	public AbstractMasterDetailsFieldEditor(String name, String labelText, Composite composite,
+			IPreferenceStore preferenceStore, java.util.List<ITokenTypeDef> list) {
+		this.items = list;
+		init(name, labelText);
 		setPreferenceStore(preferenceStore);
-		createControl(parent);
+		createControl(composite);
 	}
 
 	@Override
@@ -70,6 +71,9 @@ public abstract class AbstractMasterDetailsFieldEditor extends FieldEditor {
 		fieldEditorPreferencePage.getControl().setLayoutData(gd);
 	}
 
+	/**
+	 * @return Detail part of Master-Detail EditorField
+	 */
 	abstract protected AbstractDetailsPart createDetailsPart();
 
 	private List getMasterList(Composite parent) {
@@ -100,26 +104,21 @@ public abstract class AbstractMasterDetailsFieldEditor extends FieldEditor {
 		return masterList;
 	}
 
-	protected abstract String identifier(Object ttd);
+	/**
+	 * @param object
+	 * @return Identifier for given Object
+	 */
+	protected abstract String identifier(Object object);
 
-	protected abstract String label(Object ttd);
+	/**
+	 * @param object
+	 * @return Label for given Object
+	 */
+	protected abstract String label(Object object);
 
 	@Override
 	protected void doLoad() {
 		fieldEditorPreferencePage.load(calculateClientPreferencePrefix());
-	}
-
-	private PreferencesQualifiedName calculateClientPreferencePrefix() {
-		return PreferencesQualifiedName.parse(getPreferenceName()).append(identifier(selectedObject()));
-	}
-
-	/**
-	 * @return
-	 */
-	private Object selectedObject() {
-		int selectionIndex = masterList.getSelectionIndex();
-		Object tokenTypeDef = items.get(selectionIndex);
-		return tokenTypeDef;
 	}
 
 	@Override
@@ -133,6 +132,11 @@ public abstract class AbstractMasterDetailsFieldEditor extends FieldEditor {
 	}
 
 	@Override
+	public void store() {
+		doStore();
+	}
+
+	@Override
 	public int getNumberOfControls() {
 		return 2;
 	}
@@ -141,6 +145,19 @@ public abstract class AbstractMasterDetailsFieldEditor extends FieldEditor {
 	public void setEnabled(boolean enabled, Composite parent) {
 		super.setEnabled(enabled, parent);
 		getMasterList(parent).setEnabled(enabled);
+	}
+
+	private PreferencesQualifiedName calculateClientPreferencePrefix() {
+		return PreferencesQualifiedName.parse(getPreferenceName()).append(identifier(selectedObject()));
+	}
+
+	/**
+	 * @return
+	 */
+	private Object selectedObject() {
+		int selectionIndex = masterList.getSelectionIndex();
+		Object tokenTypeDef = items.get(selectionIndex);
+		return tokenTypeDef;
 	}
 
 }

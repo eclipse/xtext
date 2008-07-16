@@ -43,7 +43,6 @@ public class BISyntaxColorerTest extends AbstractEasyMockTest {
 		final IPersistentPreferenceStore persistablePrefStore = createMock(IPersistentPreferenceStore.class);
 
 		BuiltInTokenTypeDef service = new BuiltInTokenTypeDef();
-		service.setServiceScope(languageDescriptorMock);
 		service.setPreferenceStore(new BuiltInPreferenceStore() {
 			@Override
 			public IPersistentPreferenceStore getPersitablePreferenceStore() {

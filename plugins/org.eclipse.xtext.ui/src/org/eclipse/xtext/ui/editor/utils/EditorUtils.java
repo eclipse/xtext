@@ -8,23 +8,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.utils;
 
+import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jface.resource.DataFormatException;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.StringConverter;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.xtext.ui.internal.CoreLog;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- *
+ * 
  */
 public class EditorUtils {
 
-	public static Font fontFromString(String fontName) {
-		if (fontName != null && fontName.trim().length() > 0) {
-			Font font = JFaceResources.getFont(fontName);
+	public static Font fontFromFontData(String fontData) {
+		if (fontData != null && fontData.trim().length() > 0) {
+			if (!JFaceResources.getFontRegistry().hasValueFor(fontData)) {
+				FontData[] fData = PreferenceConverter.basicGetFontData(fontData);
+				JFaceResources.getFontRegistry().put(fontData, fData);
+			}
+			Font font = JFaceResources.getFontRegistry().get(fontData);
 			return font;
 		}
 		return null;

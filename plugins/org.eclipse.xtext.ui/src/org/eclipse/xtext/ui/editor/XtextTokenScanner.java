@@ -16,6 +16,7 @@ import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.swt.SWT;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -88,12 +89,12 @@ public class XtextTokenScanner implements ITokenScanner {
 		TextStyle textStyle = syntaxColorer.color(currentNode);
 		// we need difference to an default TextAttribute(null,null,0,null) in
 		// DefaultDamagerRepair
-		if (textStyle.getColor() == null) {
-			textStyle.setColor(TextStyleConstants.DEFAULT_COLOR);
+		if (textStyle == null) {
+			return new TextAttribute(EditorUtils.colorFromString(TextStyleConstants.DEFAULT_COLOR));
 		}
 		return new TextAttribute(EditorUtils.colorFromString(textStyle.getColor()), EditorUtils
-				.colorFromString(textStyle.getBackgroundColor()), textStyle.getStyle(), EditorUtils
-				.fontFromString(textStyle.getFontName()));
+				.colorFromString(textStyle.getBackgroundColor()), SWT.NONE, EditorUtils.fontFromFontData(textStyle
+				.getFontData()));
 	}
 
 	public void setRange(IDocument document, int offset, int length) {

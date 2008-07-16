@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.preferences.PreferencesQualifiedName;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.service.IPreferenceStore;
@@ -26,43 +27,43 @@ public class BuiltInPreferenceStore implements IPreferenceStore {
 	public static final String BACKGROUNDCOLOR_SUFIX = "bgColor";
 	public static final String STYLE_SUFIX = "style";
 	public static final String FONT_SUFIX = "font";
+	public static final String SYNTAX_COLORER_PREFERENCE_TAG = "syntaxColorer";
+	public static final String TOKEN_STYLES_PREFERENCE_TAG = "tokenStyles";
 
-	public static String getTokenColorPreferenceKey(IServiceScope languageDescriptor, String tokenType) {
-		return PreferencesQualifiedName.parse(languageDescriptor.getId()).append(tokenType).append(COLOR_SUFIX)
-				.toString();
+	private String syntacColorerPrefix = new String();
+
+	public String getTokenColorPreferenceKey(String tokenType) {
+		return syntacColorerPrefix + PreferencesQualifiedName.SEPARATOR + tokenType
+				+ PreferencesQualifiedName.SEPARATOR + COLOR_SUFIX;
 	}
 
-	public static String getTokenBackgroundColorPreferenceKey(IServiceScope languageDescriptor, String tokenType) {
-		return PreferencesQualifiedName.parse(languageDescriptor.getId()).append(tokenType).append(
-				BACKGROUNDCOLOR_SUFIX).toString();
+	public String getTokenBackgroundColorPreferenceKey(String tokenType) {
+		return syntacColorerPrefix + PreferencesQualifiedName.SEPARATOR + tokenType
+				+ PreferencesQualifiedName.SEPARATOR + BACKGROUNDCOLOR_SUFIX;
 	}
 
-	public static String getTokenFontPreferenceKey(IServiceScope languageDescriptor, String tokenType) {
-		return PreferencesQualifiedName.parse(languageDescriptor.getId()).append(tokenType).append(FONT_SUFIX)
-				.toString();
-	}
-
-	public static String getTokenStylePreferenceKey(IServiceScope languageDescriptor, String tokenType) {
-		return PreferencesQualifiedName.parse(languageDescriptor.getId()).append(tokenType).append(STYLE_SUFIX)
-				.toString();
+	public String getTokenFontPreferenceKey(String tokenType) {
+		return syntacColorerPrefix + PreferencesQualifiedName.SEPARATOR + tokenType
+				+ PreferencesQualifiedName.SEPARATOR + FONT_SUFIX;
 	}
 
 	private IPersistentPreferenceStore preferenceStore = null;
 
 	public IPersistentPreferenceStore getPersitablePreferenceStore() {
 		if (preferenceStore == null) {
-			preferenceStore = new ScopedPreferenceStore(new InstanceScope(), qualifier());
+			preferenceStore = new ScopedPreferenceStore(new InstanceScope(), Activator.PLUGIN_ID);
 		}
 		return preferenceStore;
 	}
 
-	/**
-	 * Subclasses can overwrite
-	 * 
-	 * @return qualifier for internal scoped preference store
-	 */
-	protected String qualifier() {
-		return Activator.PLUGIN_ID;
+	@Inject
+	public void setScope(IServiceScope scope) {
+		this.syntacColorerPrefix = PreferencesQualifiedName.parse(scope.getId()).append(
+				calculateSyntaxColorerPrefix(scope)).toString();
 	}
 
+	private static String calculateSyntaxColorerPrefix(IServiceScope scope) {
+		return PreferencesQualifiedName.parse(SYNTAX_COLORER_PREFERENCE_TAG).append(TOKEN_STYLES_PREFERENCE_TAG)
+				.toString();
+	}
 }

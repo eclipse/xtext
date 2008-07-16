@@ -12,35 +12,35 @@ package org.eclipse.xtext.ui.editor.utils;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class TextStyle {
+public class TextStyle implements Cloneable {
 	private String color;
 	private String backgroundColor;
-	private int style;
-	private String fontName;
+	private String fontData;
 
 	/**
 	 * @param color
 	 * @param backgroundColor
 	 * @param style
-	 * @param fontName
+	 * @param fontData
 	 */
-	public TextStyle(String color, String backgroundColor, int style, String fontName) {
+	public TextStyle(String color, String backgroundColor, String fontData) {
 		super();
+		this.color = color;
+		this.backgroundColor = backgroundColor;
+		this.fontData = fontData;
 		if (color == null)
 			this.color = TextStyleConstants.DEFAULT_COLOR;
-		else
-			this.color = color;
 		if (backgroundColor == null)
 			this.backgroundColor = TextStyleConstants.DEFAULT_BACKGROUNDCOLOR;
-		else
-			this.backgroundColor = backgroundColor;
-		this.style = style;
-		this.fontName = fontName;
+		if (this.fontData == null) {
+			this.fontData = TextStyleConstants.DEFAULT_FONT;
+		}
 	}
 
-	public TextStyle() {
-		this(TextStyleConstants.KEYWORD_COLOR, TextStyleConstants.DEFAULT_BACKGROUNDCOLOR,
-				TextStyleConstants.KEYWORD_STYLE, TextStyleConstants.DEFAULT_FONT);
+	public TextStyle(TextStyle textStyle) {
+		this.backgroundColor = textStyle.backgroundColor;
+		this.color = textStyle.color;
+		this.fontData = textStyle.fontData;
 	}
 
 	/**
@@ -59,33 +59,18 @@ public class TextStyle {
 	}
 
 	/**
-	 * @return the style
+	 * @return the fontData
 	 */
-	public int getStyle() {
-		return style;
+	public String getFontData() {
+		return fontData;
 	}
 
 	/**
-	 * @param style
-	 *            the style to set
+	 * @param fontData
+	 *            the fontData to set
 	 */
-	public void setStyle(int style) {
-		this.style = style;
-	}
-
-	/**
-	 * @return the fontName
-	 */
-	public String getFontName() {
-		return fontName;
-	}
-
-	/**
-	 * @param fontName
-	 *            the fontName to set
-	 */
-	public void setFontName(String fontName) {
-		this.fontName = fontName;
+	public void setFontData(String fontName) {
+		this.fontData = fontName;
 	}
 
 	/**
@@ -101,5 +86,20 @@ public class TextStyle {
 	 */
 	public String getBackgroundColor() {
 		return backgroundColor;
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return new TextStyle(this);
+	}
+
+	public TextStyle copy() {
+		try {
+			return (TextStyle) clone();
+		}
+		catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

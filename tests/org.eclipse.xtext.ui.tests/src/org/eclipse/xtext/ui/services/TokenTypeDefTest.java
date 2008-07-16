@@ -9,9 +9,12 @@
 package org.eclipse.xtext.ui.services;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jface.preference.IPersistentPreferenceStore;
+import org.eclipse.jface.preference.PreferenceStore;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
+import org.eclipse.xtext.ui.service.impl.BuiltInPreferenceStore;
 import org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 
@@ -32,13 +35,19 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 	private static final String MODEL = MULTILINE_COMMENT + "\n" + KEYWORD_SPIELPLATZ + " " + NUMBER_2 + " " + STRING
 			+ " {\n" + SINGLELINE_COMMENT + "kind (jurgen 5)\nspielzeug (ente " + KEYWORD_ROT + ")}\n" + EOF_COMMENT;
 	private EList<LeafNode> leafNodes;
-	private ITokenTypeDefProvider ttds;
+	private BuiltInTokenTypeDef ttds;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		IParseResult pr = getModelForDefaultLanguage(MODEL);
 		ttds = new BuiltInTokenTypeDef();
+		ttds.setPreferenceStore(new BuiltInPreferenceStore() {
+			@Override
+			public IPersistentPreferenceStore getPersitablePreferenceStore() {
+				return new PreferenceStore();
+			}
+		});
 		leafNodes = pr.getRootNode().getLeafNodes();
 	}
 
@@ -64,7 +73,7 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 		ITokenTypeDef ttd = findTokenTypeDef(ttds, keyword);
 		assertNotNull(ttd);
 		assertEquals(BuiltInTokenTypeDef.KEYWORD_ID, ttd.getId());
-		
+
 		LeafNode keyword1 = findLeafNodeByText(KEYWORD_ROT);
 		assertNotNull(keyword1);
 		ITokenTypeDef ttd1 = findTokenTypeDef(ttds, keyword);

@@ -14,11 +14,13 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.model.IEditorModel;
 import org.eclipse.xtext.ui.editor.utils.EditorModelUtil;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.service.IFormatter;
+import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
 import org.eclipse.xtext.ui.util.GrammarConstants;
 
 /**
@@ -30,6 +32,8 @@ import org.eclipse.xtext.ui.util.GrammarConstants;
  * 
  */
 public class BuiltInFormatter implements IFormatter {
+	@Inject
+	private ITokenTypeDefProvider tokenTypeDefProvider;
 
 	// TODO make stuff configurable
 	public static final String NEW_LINE = System.getProperty("line.separator");
@@ -108,9 +112,10 @@ public class BuiltInFormatter implements IFormatter {
 	 * @return
 	 */
 	protected String before(LeafNode leafNode) {
-		BuiltInTokenTypeDef bittd = new BuiltInTokenTypeDef();
-		if (bittd.mlCommentTokenType().match(leafNode)
-				|| (bittd.keyWordTokenType().match(leafNode) && leafNode.getText().length() > 1)) {
+		BuiltInTokenTypeDef bittd = getBuiltInTokenTypeDefProvider();
+		if (bittd != null
+				&& (bittd.mlCommentTokenType().match(leafNode) || (bittd.keyWordTokenType().match(leafNode) && leafNode
+						.getText().length() > 1))) {
 			return NEW_LINE;
 		}
 		return SPACE;
@@ -249,4 +254,13 @@ public class BuiltInFormatter implements IFormatter {
 				&& GrammarConstants.LEXER_RULE_WHITESPACE.equals(((LexerRule) ln.getGrammarElement()).getName());
 	}
 
+	public ITokenTypeDefProvider getTokenTypeDefProvider() {
+		return tokenTypeDefProvider;
+	}
+
+	protected BuiltInTokenTypeDef getBuiltInTokenTypeDefProvider() {
+		if (tokenTypeDefProvider instanceof BuiltInTokenTypeDef)
+			return (BuiltInTokenTypeDef) tokenTypeDefProvider;
+		return null;
+	}
 }

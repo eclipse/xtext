@@ -17,13 +17,16 @@ import org.eclipse.xtext.ui.service.impl.BuiltInFormatter;
  * 
  */
 public class ReferenceFormatter extends BuiltInFormatter implements IFormatter {
+
 	@Override
 	protected String before(LeafNode leafNode) {
-		ReferenceTokenTypeDef rttd = new ReferenceTokenTypeDef();
-		if (rttd.gelb().match(leafNode) || rttd.grün().match(leafNode) || rttd.rot().match(leafNode))
-			return SPACE;// do not wrap color keywords
-		if ("}".equals(leafNode.getText()))
-			return NEW_LINE;
+		if (getTokenTypeDefProvider() instanceof ReferenceTokenTypeDef) {
+			ReferenceTokenTypeDef rttd = (ReferenceTokenTypeDef) getTokenTypeDefProvider();
+			if (rttd.gelb().match(leafNode) || rttd.grün().match(leafNode) || rttd.rot().match(leafNode))
+				return SPACE;// do not wrap color keywords
+			if ("}".equals(leafNode.getText()))
+				return NEW_LINE;
+		}
 		return super.before(leafNode);
 	}
 }
