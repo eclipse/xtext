@@ -9,7 +9,6 @@
 
 package org.eclipse.xtext.ui.service.impl;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
@@ -32,13 +31,12 @@ public class BuiltInSyntaxColorer implements ISyntaxColorer {
 	 * .parsetree.LeafNode)
 	 */
 	public TextStyle color(LeafNode leafNode) {
-		TextStyle tsToSet = new TextStyle(null, null, SWT.NONE, null);
 		for (ITokenTypeDef ttd : tokenTypeDef.allTokenTypes()) {
 			if (ttd.match(leafNode)) {
-				return ttd.getTextStyle();
+				return ttd.textStyleCopy();
 			}
 		}
-		return tsToSet;
+		return null;
 	}
 
 	@Inject

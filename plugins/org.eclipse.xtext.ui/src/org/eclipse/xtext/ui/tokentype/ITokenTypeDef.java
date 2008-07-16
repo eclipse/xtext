@@ -16,11 +16,21 @@ import org.eclipse.xtext.ui.editor.utils.TextStyle;
  * 
  */
 public interface ITokenTypeDef {
+	/**
+	 * @return identifier
+	 */
 	String getId();
 
+	/**
+	 * @return Human readable name, can be used for labels.
+	 */
 	String getName();
 
-	TextStyle getTextStyle();
+	/**
+	 * @return a clone of textStyle used for this TokenTypeDef
+	 */
+	TextStyle textStyleCopy();
 
 	boolean match(LeafNode node);
+
 }

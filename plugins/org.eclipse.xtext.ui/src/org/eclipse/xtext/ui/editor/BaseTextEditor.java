@@ -345,13 +345,11 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
                 .addPropertyChangeListener(new IPropertyChangeListener() {
 
                     public void propertyChange(PropertyChangeEvent event) {
-                        log.debug("Property changed: " + event.getProperty());
-                        if (event.getProperty().equals("SOME_PROPERTY")) {
-                            // do something meaningful
-                        }
-                        // bogus:
-                        //getSourceViewer().getDocument().set(getSourceViewer().
-                        // getDocument().get());
+                    	// TODO refresh sourceviewer presentation
+						if (getSourceViewer() != null)
+							getSourceViewer().getDocument().set(getSourceViewer().getDocument().get());
+						else
+							System.out.println(this);
                     }
                 });
         getSourceViewerDecorationSupport(projectionViewer);

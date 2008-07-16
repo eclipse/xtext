@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
 import org.eclipse.core.runtime.Assert;
 
 public final class PreferencesQualifiedName {
-	private static final char SEPARATOR = '.';
+	public static final char SEPARATOR = '.';
 	private List<String> parts = new ArrayList<String>();
 
 	static final public PreferencesQualifiedName parse(String qualifiedNameAsString) {

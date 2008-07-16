@@ -8,9 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.utils;
 
-import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.swt.SWT;
-
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
@@ -19,11 +16,9 @@ public class TextStyleConstants {
 
 	public final static String DEFAULT_COLOR = "0,0,0";
 	public final static String DEFAULT_BACKGROUNDCOLOR = "255,255,255";
-	public final static int DEFAULT_STYLE = SWT.NONE;
-	public static final String DEFAULT_FONT = JFaceResources.TEXT_FONT;
+	public static final String DEFAULT_FONT = null;
 
 	public final static String KEYWORD_COLOR = "127, 0, 85";
-	public final static int KEYWORD_STYLE = SWT.BOLD;
 
 	public final static String COMMENT_COLOR = "63, 127, 95";
 

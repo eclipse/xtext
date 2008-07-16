@@ -14,7 +14,6 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.service.IFormatter;
 import org.eclipse.xtext.ui.service.impl.BuiltInFormatter;
-import org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef;
 import org.eclipse.xtext.ui.util.GrammarConstants;
 
 /**
@@ -35,7 +34,7 @@ public class XtextFormatter extends BuiltInFormatter implements IFormatter {
 		else if ("ParserRule".equals(getGrammarRuleName(leafNode.getParent()))
 				&& GrammarConstants.LEXER_RULE_ID.equals(getGrammarRuleName(leafNode)))
 			return NEW_LINE + NEW_LINE;
-		else if (new BuiltInTokenTypeDef().mlCommentTokenType().match(leafNode)
+		else if (getBuiltInTokenTypeDefProvider().mlCommentTokenType().match(leafNode)
 				|| "language".equals(leafNode.getText()) || "generate".equals(leafNode.getText()))
 			return NEW_LINE;
 

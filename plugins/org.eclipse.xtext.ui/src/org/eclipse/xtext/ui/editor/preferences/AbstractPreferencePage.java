@@ -8,12 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.preferences;
 
-import java.io.IOException;
-
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
-import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
@@ -60,43 +58,39 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		return element != null;
 	}
 
-	public String qualifiedName() {
-		return languageDescriptor.getId();
+	@Override
+	protected void addField(FieldEditor editor) {
+		editor.setPreferenceName(qualifiedName().append(editor.getPreferenceName()).toString());
+		super.addField(editor);
+	}
+
+	/**
+	 * @return prefix for preference keys
+	 */
+	protected PreferencesQualifiedName qualifiedName() {
+		return PreferencesQualifiedName.parse(languageDescriptor.getId());
 	}
 
 	@Override
 	protected IPreferenceStore doGetPreferenceStore() {
-		org.eclipse.xtext.ui.service.IPreferenceStore service = ServiceRegistry.getService(getLanguageDescriptor(),
+		org.eclipse.xtext.ui.service.IPreferenceStore service = ServiceRegistry.getService(getServiceScope(),
 				org.eclipse.xtext.ui.service.IPreferenceStore.class);
 		if (service != null)
 			return service.getPersitablePreferenceStore();
 		return new ScopedPreferenceStore(new InstanceScope(), "org.eclipse.xtext.ui");
 	}
 
-	@Override
-	public boolean performOk() {
-		boolean retVal = super.performOk();
-		if (getPreferenceStore() instanceof IPersistentPreferenceStore)
-			try {
-				((IPersistentPreferenceStore) getPreferenceStore()).save();
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-		return retVal;
-	}
-
 	/**
 	 * @return
 	 */
-	protected IServiceScope getLanguageDescriptor() {
+	protected IServiceScope getServiceScope() {
 		return languageDescriptor;
 	}
 
 	protected String getLanguageName() {
 		if (this.languageName == null) {
-			this.languageName = GrammarUtil.getName(ServiceRegistry.getService(getLanguageDescriptor(),
-					IGrammarAccess.class).getGrammar());
+			this.languageName = GrammarUtil.getName(ServiceRegistry.getService(getServiceScope(), IGrammarAccess.class)
+					.getGrammar());
 		}
 		return this.languageName;
 	}

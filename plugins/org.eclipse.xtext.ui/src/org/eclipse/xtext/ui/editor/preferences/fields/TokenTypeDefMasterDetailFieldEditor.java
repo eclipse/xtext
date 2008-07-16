@@ -20,9 +20,9 @@ import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
  */
 public class TokenTypeDefMasterDetailFieldEditor extends AbstractMasterDetailsFieldEditor {
 
-	public TokenTypeDefMasterDetailFieldEditor(IPreferenceStore preferenceStore, String name, String label,
-			List<?> items, Composite parent) {
-		super(preferenceStore, name, label, items, parent);
+	public TokenTypeDefMasterDetailFieldEditor(String name, String labelText, Composite composite,
+			IPreferenceStore preferenceStore, List<ITokenTypeDef> list) {
+		super(name, labelText, composite, preferenceStore, list);
 	}
 
 	protected String label(Object object) {
