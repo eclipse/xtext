@@ -44,7 +44,7 @@ public class GenerateXtextGrammars {
 
 		GeneratorFacade.cleanFolder(srcGenPath);
 		generate(srcGenPath, filename, languageName, languageNamespace);
-		generate(srcGenPath, builtinFilename, builtinlanguageName, builtinlanguageNamespace);
+//		generate(srcGenPath, builtinFilename, builtinlanguageName, builtinlanguageNamespace);
 	}
 
 	private static void generate(String srcGenPath, String filename, String languageName, String languageNamespace)
