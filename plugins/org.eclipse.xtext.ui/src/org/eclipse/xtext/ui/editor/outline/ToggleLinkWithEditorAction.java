@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.internal.XtextPluginImages;
 
 /**
  * @author Peter Friese - Initial contribution and API
- *
  */
 public class ToggleLinkWithEditorAction extends Action {
 
@@ -24,9 +23,7 @@ public class ToggleLinkWithEditorAction extends Action {
 
     public ToggleLinkWithEditorAction(BaseTextEditor editor) {
         super(XtextUIMessages.getString("ToggleLinkWithEditorAction.label")); //$NON-NLS-1$
-        boolean isLinkingEnabled = Activator.getDefault().getPreferenceStore().getBoolean(
-                "ToggleLinkWithEditorAction.isChecked"); //$NON-NLS-1$
-        setChecked(isLinkingEnabled);
+        setChecked(getLinking());
         this.editor = editor;
         setToolTipText(XtextUIMessages.getString("ToggleLinkWithEditorAction.toolTip")); //$NON-NLS-1$
         setDescription(XtextUIMessages.getString("ToggleLinkWithEditorAction.description")); //$NON-NLS-1$
@@ -35,9 +32,19 @@ public class ToggleLinkWithEditorAction extends Action {
     }
 
     public void run() {
-		Activator.getDefault().getPreferenceStore().setValue("ToggleLinkWithEditorAction.isChecked", isChecked()); //$NON-NLS-1$
+		setLinking();
 		if (isChecked()) {
 			editor.synchronizeOutlinePage();
 		}
 	}
+
+    private boolean getLinking() {
+        boolean isLinkingEnabled = Activator.getDefault().getPreferenceStore().getBoolean(
+        "ToggleLinkWithEditorAction.isChecked"); //$NON-NLS-1$
+        return isLinkingEnabled;
+    }
+    
+    private void setLinking() {
+        Activator.getDefault().getPreferenceStore().setValue("ToggleLinkWithEditorAction.isChecked", isChecked()); //$NON-NLS-1$
+    }
 }
