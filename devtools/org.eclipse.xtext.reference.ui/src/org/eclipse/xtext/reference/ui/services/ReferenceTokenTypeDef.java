@@ -42,7 +42,7 @@ public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 				return keyWordTokenType().match(node) && "ROT".equals(node.getText());
 			}
 		};
-		TextStyle ts = keyWordTokenType().getTextStyle();
+		TextStyle ts = keyWordTokenType().textStyleCopy();
 		ts.setColor("200,10,50");
 		calculateTextStyle(ttd, ts);
 		return ttd;
@@ -55,7 +55,7 @@ public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 				return keyWordTokenType().match(node) && "GELB".equals(node.getText());
 			}
 		};
-		TextStyle ts = keyWordTokenType().getTextStyle();
+		TextStyle ts = keyWordTokenType().textStyleCopy();
 		ts.setColor("221,212,88");
 		calculateTextStyle(ttd, ts);
 		return ttd;
@@ -68,7 +68,7 @@ public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 				return keyWordTokenType().match(node) && "GRÜN".equals(node.getText());
 			}
 		};
-		TextStyle ts = keyWordTokenType().getTextStyle();
+		TextStyle ts = keyWordTokenType().textStyleCopy();
 		ts.setColor("10,200,10");
 		calculateTextStyle(ttd, ts);
 		return ttd;
