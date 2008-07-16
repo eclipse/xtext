@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g 2008-07-14 10:06:30
+// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g 2008-07-16 16:25:38
 
 package org.eclipse.xtext.preference.parser.internal; 
 
@@ -62,14 +62,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleDescription
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:63:1: entryRuleDescription returns [EObject current=null] : iv_ruleDescription= ruleDescription EOF ;
-    public final EObject entryRuleDescription() throws RecognitionException {
+    public EObject entryRuleDescription() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleDescription = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:63:53: (iv_ruleDescription= ruleDescription EOF )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:64:2: (iv_ruleDescription= ruleDescription EOF )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:64:2: iv_ruleDescription= ruleDescription EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); 
@@ -97,7 +97,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleDescription
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:71:1: ruleDescription returns [EObject current=null] : ( ( 'commonprefix' (lv_idPrefix= ruleQName ) ) (lv_pages= rulePage ) ) ;
-    public final EObject ruleDescription() throws RecognitionException {
+    public EObject ruleDescription() throws RecognitionException {
         EObject current = null;
 
         EObject lv_idPrefix = null;
@@ -107,7 +107,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:73:33: ( ( ( 'commonprefix' (lv_idPrefix= ruleQName ) ) (lv_pages= rulePage ) ) )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:74:1: ( ( ( 'commonprefix' (lv_idPrefix= ruleQName ) ) (lv_pages= rulePage ) ) )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:74:1: ( ( 'commonprefix' (lv_idPrefix= ruleQName ) ) (lv_pages= rulePage ) )
             {
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:74:1: ( ( 'commonprefix' (lv_idPrefix= ruleQName ) ) (lv_pages= rulePage ) )
@@ -191,14 +191,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRulePage
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:115:1: entryRulePage returns [EObject current=null] : iv_rulePage= rulePage EOF ;
-    public final EObject entryRulePage() throws RecognitionException {
+    public EObject entryRulePage() throws RecognitionException {
         EObject current = null;
 
         EObject iv_rulePage = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:115:46: (iv_rulePage= rulePage EOF )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:116:2: (iv_rulePage= rulePage EOF )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:116:2: iv_rulePage= rulePage EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); 
@@ -226,7 +226,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start rulePage
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:123:1: rulePage returns [EObject current=null] : ( ( 'page' (lv_name= ruleQName ) ) (lv_panel= rulePanel ) ) ;
-    public final EObject rulePage() throws RecognitionException {
+    public EObject rulePage() throws RecognitionException {
         EObject current = null;
 
         EObject lv_name = null;
@@ -236,7 +236,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:125:33: ( ( ( 'page' (lv_name= ruleQName ) ) (lv_panel= rulePanel ) ) )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:126:1: ( ( ( 'page' (lv_name= ruleQName ) ) (lv_panel= rulePanel ) ) )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:126:1: ( ( 'page' (lv_name= ruleQName ) ) (lv_panel= rulePanel ) )
             {
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:126:1: ( ( 'page' (lv_name= ruleQName ) ) (lv_panel= rulePanel ) )
@@ -320,14 +320,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRulePanel
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:167:1: entryRulePanel returns [EObject current=null] : iv_rulePanel= rulePanel EOF ;
-    public final EObject entryRulePanel() throws RecognitionException {
+    public EObject entryRulePanel() throws RecognitionException {
         EObject current = null;
 
         EObject iv_rulePanel = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:167:47: (iv_rulePanel= rulePanel EOF )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:168:2: (iv_rulePanel= rulePanel EOF )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:168:2: iv_rulePanel= rulePanel EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.2" /* xtext::ParserRule */, currentNode); 
@@ -355,7 +355,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start rulePanel
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:175:1: rulePanel returns [EObject current=null] : ( ( '{' (lv_rows= ruleRow )* ) '}' ) ;
-    public final EObject rulePanel() throws RecognitionException {
+    public EObject rulePanel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_rows = null;
@@ -363,7 +363,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:177:33: ( ( ( '{' (lv_rows= ruleRow )* ) '}' ) )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:178:1: ( ( ( '{' (lv_rows= ruleRow )* ) '}' ) )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:178:1: ( ( '{' (lv_rows= ruleRow )* ) '}' )
             {
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:178:1: ( ( '{' (lv_rows= ruleRow )* ) '}' )
@@ -446,14 +446,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleRow
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:207:1: entryRuleRow returns [EObject current=null] : iv_ruleRow= ruleRow EOF ;
-    public final EObject entryRuleRow() throws RecognitionException {
+    public EObject entryRuleRow() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleRow = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:207:45: (iv_ruleRow= ruleRow EOF )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:208:2: (iv_ruleRow= ruleRow EOF )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:208:2: iv_ruleRow= ruleRow EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.3" /* xtext::ParserRule */, currentNode); 
@@ -481,7 +481,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleRow
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:215:1: ruleRow returns [EObject current=null] : ( (lv_entries= ruleEntry )* ';' ) ;
-    public final EObject ruleRow() throws RecognitionException {
+    public EObject ruleRow() throws RecognitionException {
         EObject current = null;
 
         EObject lv_entries = null;
@@ -489,7 +489,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:217:33: ( ( (lv_entries= ruleEntry )* ';' ) )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:218:1: ( ( (lv_entries= ruleEntry )* ';' ) )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:218:1: ( (lv_entries= ruleEntry )* ';' )
             {
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:218:1: ( (lv_entries= ruleEntry )* ';' )
@@ -562,14 +562,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleEntry
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:243:1: entryRuleEntry returns [EObject current=null] : iv_ruleEntry= ruleEntry EOF ;
-    public final EObject entryRuleEntry() throws RecognitionException {
+    public EObject entryRuleEntry() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleEntry = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:243:47: (iv_ruleEntry= ruleEntry EOF )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:244:2: (iv_ruleEntry= ruleEntry EOF )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:244:2: iv_ruleEntry= ruleEntry EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.4" /* xtext::ParserRule */, currentNode); 
@@ -597,7 +597,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleEntry
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:251:1: ruleEntry returns [EObject current=null] : ( (lv_colspan= '#' )+ (lv_widget= ruleWidget ) ) ;
-    public final EObject ruleEntry() throws RecognitionException {
+    public EObject ruleEntry() throws RecognitionException {
         EObject current = null;
 
         Token lv_colspan=null;
@@ -606,7 +606,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:253:33: ( ( (lv_colspan= '#' )+ (lv_widget= ruleWidget ) ) )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:254:1: ( ( (lv_colspan= '#' )+ (lv_widget= ruleWidget ) ) )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:254:1: ( (lv_colspan= '#' )+ (lv_widget= ruleWidget ) )
             {
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:254:1: ( (lv_colspan= '#' )+ (lv_widget= ruleWidget ) )
@@ -700,14 +700,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleWidget
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:290:1: entryRuleWidget returns [EObject current=null] : iv_ruleWidget= ruleWidget EOF ;
-    public final EObject entryRuleWidget() throws RecognitionException {
+    public EObject entryRuleWidget() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleWidget = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:290:48: (iv_ruleWidget= ruleWidget EOF )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:291:2: (iv_ruleWidget= ruleWidget EOF )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:291:2: iv_ruleWidget= ruleWidget EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.5" /* xtext::ParserRule */, currentNode); 
@@ -735,7 +735,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleWidget
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:298:1: ruleWidget returns [EObject current=null] : ( ( ( ( ( (this_Label= ruleLabel | this_Text= ruleText ) | this_Check= ruleCheck ) | this_Combo= ruleCombo ) | this_Panel= rulePanel ) | this_NamedPanel= ruleNamedPanel ) | this_CheckedPanel= ruleCheckedPanel ) ;
-    public final EObject ruleWidget() throws RecognitionException {
+    public EObject ruleWidget() throws RecognitionException {
         EObject current = null;
 
         EObject this_Label = null;
@@ -755,7 +755,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:300:33: ( ( ( ( ( ( (this_Label= ruleLabel | this_Text= ruleText ) | this_Check= ruleCheck ) | this_Combo= ruleCombo ) | this_Panel= rulePanel ) | this_NamedPanel= ruleNamedPanel ) | this_CheckedPanel= ruleCheckedPanel ) )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:301:1: ( ( ( ( ( ( (this_Label= ruleLabel | this_Text= ruleText ) | this_Check= ruleCheck ) | this_Combo= ruleCombo ) | this_Panel= rulePanel ) | this_NamedPanel= ruleNamedPanel ) | this_CheckedPanel= ruleCheckedPanel ) )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:301:1: ( ( ( ( ( (this_Label= ruleLabel | this_Text= ruleText ) | this_Check= ruleCheck ) | this_Combo= ruleCombo ) | this_Panel= rulePanel ) | this_NamedPanel= ruleNamedPanel ) | this_CheckedPanel= ruleCheckedPanel )
             {
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:301:1: ( ( ( ( ( (this_Label= ruleLabel | this_Text= ruleText ) | this_Check= ruleCheck ) | this_Combo= ruleCombo ) | this_Panel= rulePanel ) | this_NamedPanel= ruleNamedPanel ) | this_CheckedPanel= ruleCheckedPanel )
@@ -1072,14 +1072,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleNamedPanel
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:375:1: entryRuleNamedPanel returns [EObject current=null] : iv_ruleNamedPanel= ruleNamedPanel EOF ;
-    public final EObject entryRuleNamedPanel() throws RecognitionException {
+    public EObject entryRuleNamedPanel() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleNamedPanel = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:375:52: (iv_ruleNamedPanel= ruleNamedPanel EOF )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:376:2: (iv_ruleNamedPanel= ruleNamedPanel EOF )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:376:2: iv_ruleNamedPanel= ruleNamedPanel EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.6" /* xtext::ParserRule */, currentNode); 
@@ -1107,7 +1107,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleNamedPanel
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:383:1: ruleNamedPanel returns [EObject current=null] : ( ( ( (lv_name= RULE_STRING ) '{' ) (lv_rows= ruleRow )* ) '}' ) ;
-    public final EObject ruleNamedPanel() throws RecognitionException {
+    public EObject ruleNamedPanel() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
@@ -1116,7 +1116,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:385:33: ( ( ( ( (lv_name= RULE_STRING ) '{' ) (lv_rows= ruleRow )* ) '}' ) )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:386:1: ( ( ( ( (lv_name= RULE_STRING ) '{' ) (lv_rows= ruleRow )* ) '}' ) )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:386:1: ( ( ( (lv_name= RULE_STRING ) '{' ) (lv_rows= ruleRow )* ) '}' )
             {
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:386:1: ( ( ( (lv_name= RULE_STRING ) '{' ) (lv_rows= ruleRow )* ) '}' )
@@ -1225,14 +1225,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleCheckedPanel
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:430:1: entryRuleCheckedPanel returns [EObject current=null] : iv_ruleCheckedPanel= ruleCheckedPanel EOF ;
-    public final EObject entryRuleCheckedPanel() throws RecognitionException {
+    public EObject entryRuleCheckedPanel() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleCheckedPanel = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:430:54: (iv_ruleCheckedPanel= ruleCheckedPanel EOF )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:431:2: (iv_ruleCheckedPanel= ruleCheckedPanel EOF )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:431:2: iv_ruleCheckedPanel= ruleCheckedPanel EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.7" /* xtext::ParserRule */, currentNode); 
@@ -1260,7 +1260,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleCheckedPanel
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:438:1: ruleCheckedPanel returns [EObject current=null] : ( ( ( ( (lv_name= RULE_ID ) ) '{' ) (lv_rows= ruleRow )* ) '}' ) ;
-    public final EObject ruleCheckedPanel() throws RecognitionException {
+    public EObject ruleCheckedPanel() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
@@ -1269,7 +1269,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:440:33: ( ( ( ( ( (lv_name= RULE_ID ) ) '{' ) (lv_rows= ruleRow )* ) '}' ) )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:441:1: ( ( ( ( ( (lv_name= RULE_ID ) ) '{' ) (lv_rows= ruleRow )* ) '}' ) )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:441:1: ( ( ( ( (lv_name= RULE_ID ) ) '{' ) (lv_rows= ruleRow )* ) '}' )
             {
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:441:1: ( ( ( ( (lv_name= RULE_ID ) ) '{' ) (lv_rows= ruleRow )* ) '}' )
@@ -1384,14 +1384,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleLabel
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:487:1: entryRuleLabel returns [EObject current=null] : iv_ruleLabel= ruleLabel EOF ;
-    public final EObject entryRuleLabel() throws RecognitionException {
+    public EObject entryRuleLabel() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleLabel = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:487:47: (iv_ruleLabel= ruleLabel EOF )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:488:2: (iv_ruleLabel= ruleLabel EOF )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:488:2: iv_ruleLabel= ruleLabel EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.9" /* xtext::ParserRule */, currentNode); 
@@ -1419,14 +1419,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleLabel
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:495:1: ruleLabel returns [EObject current=null] : (lv_value= RULE_STRING ) ;
-    public final EObject ruleLabel() throws RecognitionException {
+    public EObject ruleLabel() throws RecognitionException {
         EObject current = null;
 
         Token lv_value=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:497:33: ( (lv_value= RULE_STRING ) )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:498:1: ( (lv_value= RULE_STRING ) )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:498:1: (lv_value= RULE_STRING )
             {
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:498:1: (lv_value= RULE_STRING )
@@ -1468,14 +1468,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleText
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:518:1: entryRuleText returns [EObject current=null] : iv_ruleText= ruleText EOF ;
-    public final EObject entryRuleText() throws RecognitionException {
+    public EObject entryRuleText() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleText = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:518:46: (iv_ruleText= ruleText EOF )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:519:2: (iv_ruleText= ruleText EOF )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:519:2: iv_ruleText= ruleText EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.10" /* xtext::ParserRule */, currentNode); 
@@ -1503,14 +1503,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleText
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:526:1: ruleText returns [EObject current=null] : (lv_name= RULE_ID ) ;
-    public final EObject ruleText() throws RecognitionException {
+    public EObject ruleText() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:528:33: ( (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:529:1: ( (lv_name= RULE_ID ) )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:529:1: (lv_name= RULE_ID )
             {
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:529:1: (lv_name= RULE_ID )
@@ -1552,14 +1552,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleCheck
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:549:1: entryRuleCheck returns [EObject current=null] : iv_ruleCheck= ruleCheck EOF ;
-    public final EObject entryRuleCheck() throws RecognitionException {
+    public EObject entryRuleCheck() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleCheck = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:549:47: (iv_ruleCheck= ruleCheck EOF )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:550:2: (iv_ruleCheck= ruleCheck EOF )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:550:2: iv_ruleCheck= ruleCheck EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.11" /* xtext::ParserRule */, currentNode); 
@@ -1587,14 +1587,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleCheck
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:557:1: ruleCheck returns [EObject current=null] : ( '?' (lv_name= RULE_ID ) ) ;
-    public final EObject ruleCheck() throws RecognitionException {
+    public EObject ruleCheck() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:559:33: ( ( '?' (lv_name= RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:560:1: ( ( '?' (lv_name= RULE_ID ) ) )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:560:1: ( '?' (lv_name= RULE_ID ) )
             {
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:560:1: ( '?' (lv_name= RULE_ID ) )
@@ -1646,14 +1646,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleCombo
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:584:1: entryRuleCombo returns [EObject current=null] : iv_ruleCombo= ruleCombo EOF ;
-    public final EObject entryRuleCombo() throws RecognitionException {
+    public EObject entryRuleCombo() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleCombo = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:584:47: (iv_ruleCombo= ruleCombo EOF )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:585:2: (iv_ruleCombo= ruleCombo EOF )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:585:2: iv_ruleCombo= ruleCombo EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.12" /* xtext::ParserRule */, currentNode); 
@@ -1681,7 +1681,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleCombo
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:592:1: ruleCombo returns [EObject current=null] : ( ( ( ( '[' (lv_alts= RULE_STRING ) ) ( ',' (lv_alts= RULE_STRING ) ) ) ']' ) (lv_name= RULE_ID ) ) ;
-    public final EObject ruleCombo() throws RecognitionException {
+    public EObject ruleCombo() throws RecognitionException {
         EObject current = null;
 
         Token lv_alts=null;
@@ -1689,7 +1689,7 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:594:33: ( ( ( ( ( '[' (lv_alts= RULE_STRING ) ) ( ',' (lv_alts= RULE_STRING ) ) ) ']' ) (lv_name= RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:595:1: ( ( ( ( ( '[' (lv_alts= RULE_STRING ) ) ( ',' (lv_alts= RULE_STRING ) ) ) ']' ) (lv_name= RULE_ID ) ) )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:595:1: ( ( ( ( '[' (lv_alts= RULE_STRING ) ) ( ',' (lv_alts= RULE_STRING ) ) ) ']' ) (lv_name= RULE_ID ) )
             {
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:595:1: ( ( ( ( '[' (lv_alts= RULE_STRING ) ) ( ',' (lv_alts= RULE_STRING ) ) ) ']' ) (lv_name= RULE_ID ) )
@@ -1813,14 +1813,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleQName
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:657:1: entryRuleQName returns [EObject current=null] : iv_ruleQName= ruleQName EOF ;
-    public final EObject entryRuleQName() throws RecognitionException {
+    public EObject entryRuleQName() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleQName = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:657:47: (iv_ruleQName= ruleQName EOF )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:658:2: (iv_ruleQName= ruleQName EOF )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:658:2: iv_ruleQName= ruleQName EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/preference/PreferenceGrammar.xmi#//@parserRules.13" /* xtext::ParserRule */, currentNode); 
@@ -1848,14 +1848,14 @@ public class InternalPreferenceGrammarParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleQName
     // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:665:1: ruleQName returns [EObject current=null] : ( (lv_element= RULE_ID ) ( (lv_element= '.' ) (lv_element= RULE_ID ) )* ) ;
-    public final EObject ruleQName() throws RecognitionException {
+    public EObject ruleQName() throws RecognitionException {
         EObject current = null;
 
         Token lv_element=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:667:33: ( ( (lv_element= RULE_ID ) ( (lv_element= '.' ) (lv_element= RULE_ID ) )* ) )
+            // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:668:1: ( ( (lv_element= RULE_ID ) ( (lv_element= '.' ) (lv_element= RULE_ID ) )* ) )
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:668:1: ( (lv_element= RULE_ID ) ( (lv_element= '.' ) (lv_element= RULE_ID ) )* )
             {
             // ./src-gen/org/eclipse/xtext/preference/parser/internal/InternalPreferenceGrammar.g:668:1: ( (lv_element= RULE_ID ) ( (lv_element= '.' ) (lv_element= RULE_ID ) )* )
