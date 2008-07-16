@@ -7,9 +7,6 @@ package org.eclipse.xtext.parsetree.reconstr;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
-import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.parser.GenericEcoreElementFactory;
-import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 
 public class XtextParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -50,12 +47,18 @@ public class XtextParseTreeConstructor extends AbstractParseTreeConstructor {
 		} else 		if (ruleToCall.equals("RuleCall")) {
 			proceedRuleCall(getDescr(obj),callback);
 		} else {
-			throw new IllegalArgumentException("Couldn't find rule '"+ruleToCall+"'");
+			throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
 		}
 	}
 
 	
+private String GrammarRecursionCheck = null;
 protected void proceedGrammar(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(GrammarRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		GrammarRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -85,6 +88,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedLexerRule(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -148,6 +155,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedParserRule(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -185,6 +196,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAbstractMetamodelDeclaration(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -410,7 +425,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -434,9 +449,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		GrammarRecursionCheck = null;
+	}
 }
 
+private String AbstractRuleRecursionCheck = null;
 protected void proceedAbstractRule(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(AbstractRuleRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		AbstractRuleRecursionCheck = s;
 	
 /* xtext::Alternatives */ 
 {
@@ -457,6 +481,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedLexerRule(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -481,6 +506,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedParserRule(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -491,15 +517,24 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
 }
 
+	} finally {
+		AbstractRuleRecursionCheck = null;
+	}
 }
 
+private String AbstractMetamodelDeclarationRecursionCheck = null;
 protected void proceedAbstractMetamodelDeclaration(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(AbstractMetamodelDeclarationRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		AbstractMetamodelDeclarationRecursionCheck = s;
 	
 /* xtext::Alternatives */ 
 {
@@ -520,6 +555,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedGeneratedMetamodel(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -544,6 +580,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedReferencedMetamodel(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -554,15 +591,24 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
 }
 
+	} finally {
+		AbstractMetamodelDeclarationRecursionCheck = null;
+	}
 }
 
+private String GeneratedMetamodelRecursionCheck = null;
 protected void proceedGeneratedMetamodel(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(GeneratedMetamodelRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		GeneratedMetamodelRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -673,9 +719,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		GeneratedMetamodelRecursionCheck = null;
+	}
 }
 
+private String ReferencedMetamodelRecursionCheck = null;
 protected void proceedReferencedMetamodel(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(ReferencedMetamodelRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		ReferencedMetamodelRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -759,9 +814,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		ReferencedMetamodelRecursionCheck = null;
+	}
 }
 
+private String LexerRuleRecursionCheck = null;
 protected void proceedLexerRule(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(LexerRuleRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		LexerRuleRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -839,6 +903,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedTypeRef(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -894,9 +962,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		LexerRuleRecursionCheck = null;
+	}
 }
 
+private String ParserRuleRecursionCheck = null;
 protected void proceedParserRule(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(ParserRuleRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		ParserRuleRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -928,6 +1005,10 @@ protected void proceedParserRule(InstanceDescription obj,IParseTreeConstructorCa
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAlternatives(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -981,6 +1062,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedTypeRef(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -1036,9 +1121,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		ParserRuleRecursionCheck = null;
+	}
 }
 
+private String TypeRefRecursionCheck = null;
 protected void proceedTypeRef(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(TypeRefRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		TypeRefRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -1107,9 +1201,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		TypeRefRecursionCheck = null;
+	}
 }
 
+private String AlternativesRecursionCheck = null;
 protected void proceedAlternatives(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(AlternativesRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		AlternativesRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -1140,6 +1243,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedGroup(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -1190,6 +1297,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedGroup(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -1200,9 +1308,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		AlternativesRecursionCheck = null;
+	}
 }
 
+private String GroupRecursionCheck = null;
 protected void proceedGroup(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(GroupRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		GroupRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -1233,6 +1350,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAbstractToken(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -1268,6 +1389,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAbstractToken(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -1278,9 +1400,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		GroupRecursionCheck = null;
+	}
 }
 
+private String AbstractTokenRecursionCheck = null;
 protected void proceedAbstractToken(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(AbstractTokenRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		AbstractTokenRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -1347,7 +1478,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -1371,7 +1502,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -1417,6 +1548,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAssignment(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -1441,6 +1573,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAction(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -1451,7 +1584,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -1474,6 +1607,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAbstractTerminal(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -1484,7 +1618,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -1493,9 +1627,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		AbstractTokenRecursionCheck = null;
+	}
 }
 
+private String AssignmentRecursionCheck = null;
 protected void proceedAssignment(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(AssignmentRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		AssignmentRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -1515,6 +1658,10 @@ protected void proceedAssignment(InstanceDescription obj,IParseTreeConstructorCa
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAbstractTerminal(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -1587,7 +1734,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -1611,7 +1758,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -1648,9 +1795,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		AssignmentRecursionCheck = null;
+	}
 }
 
+private String ActionRecursionCheck = null;
 protected void proceedAction(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(ActionRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		ActionRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -1720,7 +1876,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -1786,6 +1942,10 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedTypeRef(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -1860,9 +2020,18 @@ new Predicate(obj) {
 
 }
 
+	} finally {
+		ActionRecursionCheck = null;
+	}
 }
 
+private String AbstractTerminalRecursionCheck = null;
 protected void proceedAbstractTerminal(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(AbstractTerminalRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		AbstractTerminalRecursionCheck = s;
 	
 /* xtext::Alternatives */ 
 {
@@ -1898,6 +2067,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedKeyword(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -1922,6 +2092,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedRuleCall(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -1932,7 +2103,7 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
@@ -1955,6 +2126,7 @@ new Predicate(obj) {
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedParenthesizedElement(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -1965,15 +2137,24 @@ new Predicate(obj) {
 		}
 	
 		else {
-		    throw new IllegalStateException("No alternative matched");
+		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
 
 }
 
+	} finally {
+		AbstractTerminalRecursionCheck = null;
+	}
 }
 
+private String ParenthesizedElementRecursionCheck = null;
 protected void proceedParenthesizedElement(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(ParenthesizedElementRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		ParenthesizedElementRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -2000,6 +2181,7 @@ protected void proceedParenthesizedElement(InstanceDescription obj,IParseTreeCon
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAlternatives(val,callback);
+			
 		} finally {
 			callback.parserRuleCallEnd();
 		}
@@ -2021,9 +2203,18 @@ protected void proceedParenthesizedElement(InstanceDescription obj,IParseTreeCon
 
 }
 
+	} finally {
+		ParenthesizedElementRecursionCheck = null;
+	}
 }
 
+private String KeywordRecursionCheck = null;
 protected void proceedKeyword(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(KeywordRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		KeywordRecursionCheck = s;
 	
 /* xtext::Assignment */ 
 {
@@ -2044,9 +2235,18 @@ protected void proceedKeyword(InstanceDescription obj,IParseTreeConstructorCallb
 
 }
 
+	} finally {
+		KeywordRecursionCheck = null;
+	}
 }
 
+private String RuleCallRecursionCheck = null;
 protected void proceedRuleCall(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(RuleCallRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		RuleCallRecursionCheck = s;
 	
 /* xtext::Assignment */ 
 {
@@ -2067,6 +2267,9 @@ protected void proceedRuleCall(InstanceDescription obj,IParseTreeConstructorCall
 
 }
 
+	} finally {
+		RuleCallRecursionCheck = null;
+	}
 }
 
 }

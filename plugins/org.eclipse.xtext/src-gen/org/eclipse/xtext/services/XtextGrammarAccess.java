@@ -14,17 +14,13 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 	private static Grammar GRAMMAR = null;
 	
 	@SuppressWarnings("unused")
-	public Grammar getGrammar() {	
+	public synchronized Grammar getGrammar() {	
 		if (GRAMMAR==null) {
 			// assert the XtextPackage implementation is loaded
 			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
 			GRAMMAR = (Grammar) loadGrammarFile(XtextGrammarAccess.class.getClassLoader(),XTEXT_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;
-	}
-	
-	public String getGrammarClasspathURI() {
-		return XTEXT_GRAMMAR_CP_URI;
 	}
 	
 	
@@ -121,12 +117,8 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@lexerRules.5"),true); 
 	}
 
-	public LexerRule lr_LEXER_BODY() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@lexerRules.6"),true); 
-	}
-
 	public LexerRule lr_ANY_OTHER() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@lexerRules.7"),true); 
+		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@lexerRules.6"),true); 
 	}
 
    

@@ -1,0 +1,51 @@
+/*
+Generated with Xtext
+*/
+package org.eclipse.xtext.builtin;
+
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
+import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.builtin.services.XtextBuiltIn_TempGrammarAccess;
+import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.builtin.services.XtextBuiltIn_TempMetamodelAccess;
+
+import org.eclipse.xtext.builtin.IXtextBuiltIn_Temp;
+
+public abstract class XtextBuiltIn_TempStandaloneSetup {
+
+	private static boolean isInitialized = false;
+
+	public synchronized static void doSetup() {
+		if(!isInitialized) {
+			
+			// setup super language first
+			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
+			
+			IServiceScope scope = ServiceScopeFactory.createScope(
+					IXtextBuiltIn_Temp.ID, 
+					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
+			ServiceRegistry.registerService(scope, IGrammarAccess.class, XtextBuiltIn_TempGrammarAccess.class);
+			ServiceRegistry.registerService(scope, IMetamodelAccess.class, XtextBuiltIn_TempMetamodelAccess.class);
+			
+			
+			// initialize EPackages
+			
+			isInitialized = true;
+		}
+	}
+	
+	public static synchronized IServiceScope getServiceScope() {
+		if(!isInitialized) {
+			doSetup();
+		}
+		return ServiceScopeFactory.get(IXtextBuiltIn_Temp.ID);
+	}
+			
+}

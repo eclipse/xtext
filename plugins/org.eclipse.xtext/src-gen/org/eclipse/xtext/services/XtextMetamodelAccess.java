@@ -9,18 +9,36 @@ import org.eclipse.xtext.parser.BaseEPackageAccess;
 
 public class XtextMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
-	public EPackage[] getGeneratedEPackages() {
-		return new EPackage[] {
+{
+
+		if (!EPackage.Registry.INSTANCE.containsKey(XTEXT_NS_URI))
+			EPackage.Registry.INSTANCE.put(XTEXT_NS_URI, loadEcoreFile(getClass().getClassLoader(), "classpath:/org/eclipse/xtext/xtext.ecore"));
+
+}
+
+	private EPackage[] generated = new EPackage[] {
 		
 		getXtextEPackage()
 		
 		};
+
+	public EPackage[] getGeneratedEPackages() {
+		return generated;
 	}
 
-	public EPackage[] getReferencedEPackages() {
-		return new EPackage[] {
+	private EPackage[] referenced = new EPackage[] {
 		
 		};
+	public EPackage[] getReferencedEPackages() {
+		return referenced;
+	}
+	
+	private EPackage[] all = new EPackage[] {
+	    getXtextEPackage()
+		};
+	
+	public EPackage[] getAllEPackages() {
+		return all;
 	}
 
 	
@@ -28,10 +46,6 @@ public class XtextMetamodelAccess extends BaseEPackageAccess implements IMetamod
 	
 	protected EPackage getXtextEPackage() {	
 		return EPackage.Registry.INSTANCE.getEPackage(XTEXT_NS_URI);
-	}
-
-	public EPackage[] getAllEPackages() {
-		return getGeneratedEPackages();
 	}
 	
 }
