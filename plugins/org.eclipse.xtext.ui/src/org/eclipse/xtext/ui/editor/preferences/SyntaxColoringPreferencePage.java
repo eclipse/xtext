@@ -11,8 +11,8 @@ package org.eclipse.xtext.ui.editor.preferences;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.preferences.fields.TokenTypeDefMasterDetailFieldEditor;
+import org.eclipse.xtext.ui.service.IPreferenceStore;
 import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
-import org.eclipse.xtext.ui.service.impl.BuiltInPreferenceStore;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -25,13 +25,13 @@ public class SyntaxColoringPreferencePage extends AbstractPreferencePage {
 	
 	@Override
 	protected void createFieldEditors() {
-		addField(new TokenTypeDefMasterDetailFieldEditor(BuiltInPreferenceStore.TOKEN_STYLES_PREFERENCE_TAG,
+		addField(new TokenTypeDefMasterDetailFieldEditor(IPreferenceStore.TOKEN_STYLES_PREFERENCE_TAG,
 				"Token Styles", getFieldEditorParent(), getPreferenceStore(), ttd.allTokenTypes()));
 		addField(new StringFieldEditor("testFeld", "Test Field", getFieldEditorParent()));
 	}
 
 	@Override
 	protected PreferencesQualifiedName qualifiedName() {
-		return super.qualifiedName().append(BuiltInPreferenceStore.SYNTAX_COLORER_PREFERENCE_TAG);
+		return super.qualifiedName().append(IPreferenceStore.SYNTAX_COLORER_PREFERENCE_TAG);
 	}
 }

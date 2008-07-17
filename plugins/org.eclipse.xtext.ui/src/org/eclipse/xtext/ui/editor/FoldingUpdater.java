@@ -28,7 +28,8 @@ public class FoldingUpdater {
 	private class InternalListener implements IXtextEditorModelListener {
 
 		public void modelChanged(XtextEditorModelChangeEvent event) {
-			foldingStructureProvider.updateFoldingStructure(model, viewer);
+			if (foldingStructureProvider != null)
+				foldingStructureProvider.updateFoldingStructure(model, viewer);
 		}
 
 	}
