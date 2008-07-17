@@ -29,7 +29,6 @@ import org.eclipse.xtext.ui.util.GrammarConstants;
  * 
  */
 public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
-	@Inject
 	private IPreferenceStore preferenceStore;
 
 	public static final String KEYWORD_ID = "keyword";
@@ -38,8 +37,10 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 	public static final String STRING_ID = "string";
 	public static final String NUMBER_ID = "number";
 
+	private List<ITokenTypeDef> retVal;
+
 	public List<ITokenTypeDef> allTokenTypes() {
-		List<ITokenTypeDef> retVal = new ArrayList<ITokenTypeDef>();
+		retVal = new ArrayList<ITokenTypeDef>();
 		retVal.add(commentTokenType());
 		retVal.add(mlCommentTokenType());
 		retVal.add(keyWordTokenType());
@@ -163,6 +164,7 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 		return (BuiltInPreferenceStore) preferenceStore;
 	}
 
+	@Inject
 	public void setPreferenceStore(IPreferenceStore iPreferenceStore) {
 		this.preferenceStore = iPreferenceStore;
 	}

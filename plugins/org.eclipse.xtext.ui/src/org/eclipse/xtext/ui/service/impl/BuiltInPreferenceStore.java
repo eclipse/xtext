@@ -27,9 +27,6 @@ public class BuiltInPreferenceStore implements IPreferenceStore {
 	public static final String BACKGROUNDCOLOR_SUFIX = "bgColor";
 	public static final String STYLE_SUFIX = "style";
 	public static final String FONT_SUFIX = "font";
-	public static final String SYNTAX_COLORER_PREFERENCE_TAG = "syntaxColorer";
-	public static final String TOKEN_STYLES_PREFERENCE_TAG = "tokenStyles";
-
 	private String syntacColorerPrefix = new String();
 
 	public String getTokenColorPreferenceKey(String tokenType) {
@@ -59,11 +56,11 @@ public class BuiltInPreferenceStore implements IPreferenceStore {
 	@Inject
 	public void setScope(IServiceScope scope) {
 		this.syntacColorerPrefix = PreferencesQualifiedName.parse(scope.getId()).append(
-				calculateSyntaxColorerPrefix(scope)).toString();
+				calculateSyntaxColorerPrefix()).toString();
 	}
 
-	private static String calculateSyntaxColorerPrefix(IServiceScope scope) {
-		return PreferencesQualifiedName.parse(SYNTAX_COLORER_PREFERENCE_TAG).append(TOKEN_STYLES_PREFERENCE_TAG)
+	public static String calculateSyntaxColorerPrefix() {
+		return PreferencesQualifiedName.parse(IPreferenceStore.SYNTAX_COLORER_PREFERENCE_TAG).append(IPreferenceStore.TOKEN_STYLES_PREFERENCE_TAG)
 				.toString();
 	}
 }

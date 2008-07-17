@@ -33,8 +33,9 @@ public class Activator extends AbstractUIPlugin {
 	public static final boolean DEBUG_FORMATTER = DEBUGING
 			&& "true".equalsIgnoreCase(Platform.getDebugOption("org.eclipse.xtext.ui/debug/services/formatter"));
 	public static final boolean DEBUG_MARKERCREATOR = DEBUGING
-			&& "true".equalsIgnoreCase(Platform.getDebugOption("org.eclipse.xtext.ui/debug/services/marker_creator"));;
-
+			&& "true".equalsIgnoreCase(Platform.getDebugOption("org.eclipse.xtext.ui/debug/services/marker_creator"));
+	public static final boolean DEBUG_SYNTAX_COLORING = DEBUGING
+			&& "true".equalsIgnoreCase(Platform.getDebugOption("org.eclipse.xtext.ui/debug/services/syntaxColoring"));
 	// The shared instance
 	private static Activator plugin;
 

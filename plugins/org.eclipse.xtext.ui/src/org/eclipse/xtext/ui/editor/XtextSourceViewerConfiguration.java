@@ -14,6 +14,8 @@ import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.ITextHover;
+import org.eclipse.jface.text.ITypedRegion;
+import org.eclipse.jface.text.TextPresentation;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
@@ -35,6 +37,7 @@ import org.eclipse.xtext.ui.editor.formatting.XtextFormattingStrategy;
 import org.eclipse.xtext.ui.editor.hover.XtextTextHover;
 import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.editor.model.XtextEditorModelReconcileStrategy;
+import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.service.IFormatter;
 import org.eclipse.xtext.ui.service.IHoverInfo;
 import org.eclipse.xtext.ui.service.IProposalsProvider;
@@ -99,7 +102,18 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	@Override
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		PresentationReconciler reconciler = (PresentationReconciler) super.getPresentationReconciler(sourceViewer);
-		DefaultDamagerRepairer defDR = new DefaultDamagerRepairer(new XtextTokenScanner(languageDescriptor));
+		DefaultDamagerRepairer defDR = new DefaultDamagerRepairer(new XtextTokenScanner(languageDescriptor)) {
+			@Override
+			public void createPresentation(TextPresentation presentation, ITypedRegion region) {
+				final long time = System.currentTimeMillis();
+				super.createPresentation(presentation, region);
+				if (Activator.DEBUG_SYNTAX_COLORING) {
+					System.out.println("PresentationReconciler FULL createPresentation took:"
+							+ (System.currentTimeMillis() - time) + "ms");
+
+				}
+			}
+		};
 		reconciler.setRepairer(defDR, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setDamager(defDR, IDocument.DEFAULT_CONTENT_TYPE);
 		return reconciler;
