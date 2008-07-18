@@ -35,7 +35,7 @@
       </editor>
    </extension>
    <extension
-         point="org.eclipse.xtext.service.scope">
+         point="org.eclipse.xtext.service.ui.scope">
       <serviceScope
             id="«languageId()»"
             parentScope="«grammar().getSuperGrammar().getId()»">
@@ -44,19 +44,19 @@
 	<extension
          point="org.eclipse.ui.preferencePages">
 		<page
-			class="org.eclipse.xtext.ui.service.utils.XtextServiceExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage/«languageId()»"
+			class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage/«languageId()»"
 			id="«languageId()»"
 			name="«languageName()»">
 		</page>
 		<page
 		    category="«languageId()»"
-		    class="org.eclipse.xtext.ui.service.utils.XtextServiceExtensionFactory:org.eclipse.xtext.ui.editor.preferences.EditorPreferencePage/«languageId()»"
+		    class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.EditorPreferencePage/«languageId()»"
 		    id="«languageId()».editor"
 		    name="Editor">
 		</page>
 		<page
 		    category="«languageId()».editor"
-		    class="org.eclipse.xtext.ui.service.utils.XtextServiceExtensionFactory:org.eclipse.xtext.ui.editor.preferences.SyntaxColoringPreferencePage/«languageId()»"
+		    class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.SyntaxColoringPreferencePage/«languageId()»"
 		    id="«languageId()».editor.syntaxcoloring"
 		    name="Syntax Coloring">
 		</page>
