@@ -3,7 +3,7 @@
 <plugin>
    <extension-point id="testExtensionPoint" name="Test Extension Point" schema="schema/testExtensionPoint.exsd"/>
    <extension
-         point="org.eclipse.xtext.service.scope">
+         point="org.eclipse.xtext.service.ui.scope">
       <serviceScope
             id="org.eclipse.xtext.ui.tests.dummylanguage"
             parentScope="org.eclipse.xtext.builtin.XtextBuiltin">

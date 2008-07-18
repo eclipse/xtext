@@ -45,7 +45,7 @@
       </command>
     </extension>
    <extension
-         point="org.eclipse.xtext.service.scope">
+         point="org.eclipse.xtext.service.ui.scope">
       <serviceScope
             id="org.eclipse.xtext.builtin.XtextBuiltin">
       </serviceScope>
@@ -135,7 +135,7 @@
       </foldingStructureProvider>
    </extension>
    <extension
-         point="org.eclipse.xtext.service.serviceRegistrationFactory">
+         point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
       <serviceRegistrationFactory
             class="org.eclipse.xtext.ui.service.utils.XtextServiceRegistrationFactory">
       </serviceRegistrationFactory>
