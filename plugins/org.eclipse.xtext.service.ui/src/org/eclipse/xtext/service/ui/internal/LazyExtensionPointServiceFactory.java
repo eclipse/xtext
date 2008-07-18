@@ -1,4 +1,4 @@
-package org.eclipse.xtext.service.internal;
+package org.eclipse.xtext.service.ui.internal;
 
 
 import org.apache.commons.logging.Log;

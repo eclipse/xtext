@@ -1,7 +1,7 @@
-package org.eclipse.xtext.service;
+package org.eclipse.xtext.service.ui;
 
 import org.eclipse.core.runtime.Plugin;
-import org.eclipse.xtext.service.internal.ExtensionPointActivator;
+import org.eclipse.xtext.service.ui.internal.ExtensionPointActivator;
 import org.osgi.framework.BundleContext;
 
 public class Activator extends Plugin {

@@ -13,8 +13,8 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.eclipse.xtext.service.internal.ScopeDescriptor;
-import org.eclipse.xtext.service.internal.ScopeUtil;
+import org.eclipse.xtext.service.ui.internal.ScopeDescriptor;
+import org.eclipse.xtext.service.ui.internal.ScopeUtil;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
