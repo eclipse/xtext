@@ -49,7 +49,7 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		setDefault(this);
 		// activate service registry
-		org.eclipse.xtext.service.Activator.getDefault();
+		org.eclipse.xtext.service.ui.Activator.getDefault();
 	}
 
 	private static void setDefault(Activator activator) {

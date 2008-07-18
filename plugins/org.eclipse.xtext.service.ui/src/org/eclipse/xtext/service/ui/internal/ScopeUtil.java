@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.service.internal;
+package org.eclipse.xtext.service.ui.internal;
 
 import java.util.ArrayList;
 import java.util.Iterator;

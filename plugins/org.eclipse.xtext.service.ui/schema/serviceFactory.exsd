@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.xtext.service" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.xtext.service.ui" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.xtext.service" id="serviceRegistrationFactory" name="Service Registration Factory"/>
+         <meta.schema plugin="org.eclipse.xtext.service.ui" id="service" name="Service"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]
@@ -17,9 +17,6 @@
          </appinfo>
       </annotation>
       <complexType>
-         <sequence minOccurs="1" maxOccurs="unbounded">
-            <element ref="serviceRegistrationFactory"/>
-         </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
                <documentation>
@@ -47,7 +44,7 @@
       </complexType>
    </element>
 
-   <element name="serviceRegistrationFactory">
+   <element name="serviceFactory">
       <complexType>
          <attribute name="class" type="string" use="required">
             <annotation>
@@ -55,8 +52,26 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.service.IServiceRegistration"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.service.ui.IServiceFactory"/>
                </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="scope" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="identifier" basedOn="org.eclipse.xtext.service.ui.scope/serviceScope/@id"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+         <attribute name="priority" type="string">
+            <annotation>
+               <documentation>
+                  Defines the priority of the services. Used to resolve situations where more than one registered services can be used to fulfill a specified dependency. 
+The type is numerical and a higher number means higher priority.
+               </documentation>
             </annotation>
          </attribute>
       </complexType>

@@ -1,4 +1,4 @@
-package org.eclipse.xtext.service.internal;
+package org.eclipse.xtext.service.ui.internal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.xtext.service.Activator;
 import org.eclipse.xtext.service.IServiceRegistrationFactory;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
+import org.eclipse.xtext.service.ui.Activator;
 
 public class ExtensionPointActivator {
 
