@@ -35,6 +35,7 @@ import org.eclipse.xtext.ui.util.GrammarConstants;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
+ * @author bkolb
  * 
  */
 public class BuiltInFoldingStructureProvider implements IFoldingStructureProvider {
@@ -126,7 +127,7 @@ public class BuiltInFoldingStructureProvider implements IFoldingStructureProvide
 		catch (BadLocationException e) {
 			CoreLog.logError(e);
 		}
-		return null;
+		throw new IllegalStateException();
 	}
 
 	/**
