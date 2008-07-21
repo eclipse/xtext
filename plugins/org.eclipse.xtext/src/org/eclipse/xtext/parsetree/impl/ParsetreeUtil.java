@@ -39,7 +39,6 @@ public class ParsetreeUtil {
 		checkArgument(_this);
 		AbstractNode rootContainer = (AbstractNode) EcoreUtil.getRootContainer(_this);
 		EList<LeafNode> leafNodes = rootContainer.getLeafNodes(_this);
-		// TODO JK: Why is line set here to 1 instead of 0? (BK)
 		int line = 1;
 		for (LeafNode leafNode : leafNodes) {
 			String text = leafNode.getText();
