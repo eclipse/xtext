@@ -35,7 +35,6 @@ import org.eclipse.xtext.ui.util.GrammarConstants;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * @author bkolb
  * 
  */
 public class BuiltInFoldingStructureProvider implements IFoldingStructureProvider {
@@ -92,8 +91,7 @@ public class BuiltInFoldingStructureProvider implements IFoldingStructureProvide
 	protected void createProjectionAnnotationPositions(IDocument document, AbstractNode node, Set<Position> annotations) {
 		AbstractNode firstLeafNode = firstLeafNode(node);
 		if (isMultiLine(node, firstLeafNode)) {
-			Position normalizePosition = calculateAnnotationPosition(document, node, firstLeafNode);
-			annotations.add(normalizePosition);
+			annotations.add(calculateAnnotationPosition(document, node, firstLeafNode));
 		}
 		// Single line composite nodes for example kind (Test 2), can own
 		// preceding multiline LeafNodes e.g. Multiline Comments
