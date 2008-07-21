@@ -9,8 +9,11 @@
 
 package org.eclipse.xtext;
 
-import static org.eclipse.emf.ecore.util.EcoreUtil.*;
-import static org.eclipse.xtext.EcoreUtil2.*;
+import static org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer;
+import static org.eclipse.xtext.EcoreUtil2.eAllContentsAsList;
+import static org.eclipse.xtext.EcoreUtil2.getAllContentsOfType;
+import static org.eclipse.xtext.EcoreUtil2.getContainerOfType;
+import static org.eclipse.xtext.EcoreUtil2.typeSelect;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -153,7 +156,7 @@ public class GrammarUtil {
 			throw new IllegalArgumentException("The passed grammar is not contained in a Resourceset");
 		ResourceSet resourceSet = _this.eResource().getResourceSet();
 		URI uri = getClasspathURIForLanguageId(id);
-		uri = uri.appendFragment(""); 
+		//uri = uri.appendFragment(""); 
 		Resource resource = resourceSet.getResource(uri, true);
 		if (resource==null)
 			throw new IllegalArgumentException("Couldn't find grammar for super language "+id);
