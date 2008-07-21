@@ -21,8 +21,11 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 /**
  * 
  * @author koehnlein
+ * @author bkolb
  */
 public class ParsetreeUtil {
+	
+	private static final char[] separator = System.getProperty( "line.separator" ).toCharArray();
 
 	private static void checkArgument(AbstractNodeImpl abstractParserNode) {
 		int classifierID = abstractParserNode.eClass().getClassifierID();
@@ -36,15 +39,11 @@ public class ParsetreeUtil {
 		checkArgument(_this);
 		AbstractNode rootContainer = (AbstractNode) EcoreUtil.getRootContainer(_this);
 		EList<LeafNode> leafNodes = rootContainer.getLeafNodes(_this);
+		// TODO JK: Why is line set here to 1 instead of 0? (BK)
 		int line = 1;
 		for (LeafNode leafNode : leafNodes) {
 			String text = leafNode.getText();
-			char[] charArray = text.toCharArray();
-			for (char c : charArray) {
-				// TODO handle os specific newlines
-				if (c == '\n' || c == '\r')
-					line++;
-			}
+			line += countLines(text);
 		}
 		return line;
 	}
@@ -52,11 +51,27 @@ public class ParsetreeUtil {
 	public static int endLine(AbstractNodeImpl _this) {
 		int line = _this.getLine();
 		String text = _this.serialize();
+		line += countLines(text);
+		return line;
+	}
+
+	private static int countLines(String text) {
+		int line = 0;
 		char[] charArray = text.toCharArray();
-		for (char c : charArray) {
-			// TODO handle os specific newlines
-			if (c == '\n' || c == '\r')
-				line++;
+		if ( separator.length == 1) {
+			for (int i = 0; i<charArray.length; i++) {
+				if (charArray[i] == separator[0]) {
+					line++;
+				}
+			}
+		} else if(separator.length==2){
+			for (int i = 0; i<charArray.length; i++) {
+				if (charArray[i] == separator[0] && charArray.length>=i+1 && charArray[i+1]==separator[1]) {
+					line++;
+				}
+			}
+		} else {
+			throw new IllegalArgumentException("Separators with more than two characters are unexpected");
 		}
 		return line;
 	}
