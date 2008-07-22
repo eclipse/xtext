@@ -80,7 +80,7 @@
 	<target name="post.compile.@dot">
 		<echo message="***** Generating code from ReferenceGrammar *****"/>
 		<java classname="org.eclipse.xtext.reference.ReferenceGrammar">
-			<classpath><pathelement path="./@dot"/></classpath>
+			<classpath><pathelement path="${temp.folder}/@dot.bin"/></classpath>
 			<classpath refid="@dot.classpath"/>
 		</java>
 		<echo message="***** Compiling generated code for ReferenceGrammar *****"/>
