@@ -36,8 +36,7 @@
 	<target name="suite">
 		<property name="test-folder" value="${eclipse-home}/test_folder" />
 		<delete dir="${test-folder}" quiet="true" />
-		<ant target="java-test" antfile="${library-file}" dir="${eclipse-home}">
-			<property name="timeout" value="100000"/>
+		<ant target="core-test" antfile="${library-file}" dir="${eclipse-home}">
 			<property name="data-dir" value="${test-folder}" />
 			<property name="plugin-name" value="${plugin-name}" />
 			<property name="classname" value="${classname}" />
