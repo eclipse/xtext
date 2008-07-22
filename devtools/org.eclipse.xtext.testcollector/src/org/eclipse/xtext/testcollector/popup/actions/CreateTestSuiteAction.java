@@ -1,5 +1,7 @@
 package org.eclipse.xtext.testcollector.popup.actions;
 
+import java.io.ByteArrayInputStream;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IWorkspaceRunnable;
@@ -26,7 +28,6 @@ import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.testcollector.TestCollectorPlugin;
-import org.eclipse.xtext.util.StringInputStream;
 
 public class CreateTestSuiteAction implements IObjectActionDelegate {
 
@@ -96,7 +97,7 @@ public class CreateTestSuiteAction implements IObjectActionDelegate {
 				public void run(IProgressMonitor monitor) throws CoreException {
 					IFolder firstPackageFolder = (IFolder) firstPackage.getResource();
 					IFile file = firstPackageFolder.getFile(TEST_SUITE_NAME + ".java");
-					file.create(new StringInputStream(classBody), true, monitor);
+					file.create(new ByteArrayInputStream(classBody.getBytes()), true, monitor);
 				}
 			}, new NullProgressMonitor());
 		}
