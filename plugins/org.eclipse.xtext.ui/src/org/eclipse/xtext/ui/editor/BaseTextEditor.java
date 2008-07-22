@@ -66,7 +66,7 @@ import org.eclipse.xtext.ui.service.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.service.IPreferenceStore;
 
 /**
- * @author Dennis Hübner - Initial contribution and API
+ * @author Dennis Huebner - Initial contribution and API
  * @author Peter Friese - Initial contribution and API
  * 
  */
@@ -198,7 +198,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 
 				// Get the current element from the offset
 				int offset = textSel.getOffset();
-				AbstractNode node = ParseTreeUtil.getCurrentNodeByOffset(model.getParseTreeRootNode(), offset);
+				AbstractNode node = ParseTreeUtil.getLastCompleteNodeByOffset(model.getParseTreeRootNode(), offset);
 
 				// Synchronize the outline page
 				synchronizeOutlinePage(node);
@@ -208,7 +208,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 
 	public void synchronizeOutlinePage() {
 		int caretOffset = getSourceViewer().getTextWidget().getCaretOffset();
-		AbstractNode currentNode = ParseTreeUtil.getCurrentNodeByOffset(model.getParseTreeRootNode(), caretOffset);
+		AbstractNode currentNode = ParseTreeUtil.getLastCompleteNodeByOffset(model.getParseTreeRootNode(), caretOffset);
 		synchronizeOutlinePage(currentNode);
 	}
 
