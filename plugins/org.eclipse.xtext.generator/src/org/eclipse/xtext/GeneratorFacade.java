@@ -191,7 +191,7 @@ public class GeneratorFacade {
 	public static void cleanFolder(String srcGenPath) throws FileNotFoundException {
 		File f = new File(srcGenPath);
 		if (!f.exists()) {
-			throw new FileNotFoundException(srcGenPath);
+			throw new FileNotFoundException(srcGenPath + " " + f.getAbsolutePath());
 		}
 		log.info("Cleaning folder " + srcGenPath);
 		final File[] contents = f.listFiles();
