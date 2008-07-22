@@ -16,7 +16,7 @@
 <!-- ===================================================================== -->
 <project name="Build specific targets and properties" default="regenerateAll">
 
-	<taskdef resource="net/sf/ant4eclipse/antlib.xml" />
+	<!--<taskdef resource="net/sf/ant4eclipse/antlib.xml" />-->
 	
 	<property name="targetPlatformLocation" value="${basedir}/../../eclipse"/>
 	
