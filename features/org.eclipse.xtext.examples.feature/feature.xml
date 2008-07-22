@@ -16,6 +16,10 @@
       [Enter License Description here.]
    </license>
 
+   <requires>
+      <import feature="org.eclipse.xtext.sdk.feature" version="1.0.0"/>
+   </requires>
+
    <plugin
          id="org.eclipse.xtext.reference"
          download-size="0"
