@@ -4,25 +4,18 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.internal.Activator;
 
-public class JdtClasspathUriResolverTests extends AbstractClasspathUriResolverTests {
+public class WorkspaceClasspathUriResolverTest extends AbstractClasspathUriResolverTest {
 
 	private IJavaProject _javaProject;
 	private IClasspathUriResolver _resolver;
 
 	@Override
 	protected void setUp() throws Exception {
-		_resolver = new JdtClasspathUriResolver();
+		_resolver = new WorkspaceClasspathUriResolver();
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
-		super.tearDown();
-		if (_javaProject != null && _javaProject.exists()) {
-			_javaProject.getJavaProject().getProject().delete(true, null);
-		}
-	}
 
 	public void testClasspathUriForFileInWorkspace() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
@@ -31,7 +24,7 @@ public class JdtClasspathUriResolverTests extends AbstractClasspathUriResolverTe
 				+ MODEL_FILE);
 		URI classpathUri = URI.createURI("classpath:/" + MODEL_FILE);
 		String expectedUri = "platform:/resource/" + TEST_PROJECT_NAME + "/src/" + MODEL_FILE;
-		URI normalizedUri = _resolver.resolve(_javaProject, classpathUri);
+		URI normalizedUri = _resolver.resolve(_project, classpathUri);
 		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
 	}
 
@@ -43,7 +36,7 @@ public class JdtClasspathUriResolverTests extends AbstractClasspathUriResolverTe
 		JavaProjectSetupUtil.addJarToClasspath(_javaProject, jarFile);
 		URI classpathUri = URI.createURI("classpath:/model/" + MODEL_FILE);
 		String expectedUri = "jar:platform:/resource/" + TEST_PROJECT_NAME + "/" + JAR_FILE + "!/model/" + MODEL_FILE;
-		URI normalizedUri = _resolver.resolve(_javaProject, classpathUri);
+		URI normalizedUri = _resolver.resolve(_project, classpathUri);
 		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
 	}
 

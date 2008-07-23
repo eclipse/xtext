@@ -8,7 +8,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-public abstract class AbstractClasspathUriResolverTests extends TestCase {
+public abstract class AbstractClasspathUriResolverTest extends TestCase {
 
 	protected IProject _project;
 	protected static final String MODEL_FILE = "simple.ecore";

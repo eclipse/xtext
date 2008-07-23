@@ -1,4 +1,4 @@
-package org.eclipse.xtext;
+package org.eclipse.xtext.service.ui;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -11,8 +11,8 @@ import junit.framework.TestSuite;
 public class AutoTestSuite {
 
 	public static Test suite() {
-		TestSuite suite = new TestSuite("org.eclipse.xtext.tests");
-		suite.addTestSuite(org.eclipse.xtext.resource.ClassloaderClasspathUriResolverTests.class);
+		TestSuite suite = new TestSuite("org.eclipse.xtext.service.ui.tests");
+		suite.addTestSuite(org.eclipse.xtext.service.ui.internal.LanguageDescriptorRegistrationTest.class);
 		return suite;
 	}
 }

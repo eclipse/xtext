@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.tests;
+package org.eclipse.xtext.ui.internal;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
