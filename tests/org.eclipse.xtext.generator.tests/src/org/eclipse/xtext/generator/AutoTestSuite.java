@@ -38,8 +38,11 @@ public class AutoTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.WhitespacePreservingCallbackTest.class);
+		suite.addTestSuite(org.eclipse.xtext.reference.CommentOnEofBug_234135_Test.class);
+		suite.addTestSuite(org.eclipse.xtext.reference.LeafNodeBug_234132_Test.class);
 		suite.addTestSuite(org.eclipse.xtext.typeresolution.XtextUtilConstructionTest.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext2ecore.ActionTest.class);
+		suite.addTestSuite(org.eclipse.xtext.xtext2ecore.BootstrapModelTest.class);
 		suite.addTestSuite(org.eclipse.xtext.xtext2ecore.MultiEPackagesTest.class);
 		return suite;
 	}
