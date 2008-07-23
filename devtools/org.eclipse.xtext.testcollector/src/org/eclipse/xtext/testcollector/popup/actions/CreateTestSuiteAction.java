@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+
 package org.eclipse.xtext.testcollector.popup.actions;
 
 import java.io.ByteArrayInputStream;
@@ -32,18 +41,17 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.testcollector.TestCollectorPlugin;
 
+/**
+ * An action to automatically generate test suites.
+ *  
+ * @author Jan Köhnlein - Initial contribution and API
+ */
 public class CreateTestSuiteAction implements IObjectActionDelegate {
 
-	/**
-	 * 
-	 */
 	private static final String TEST_SUITE_NAME = "AutoTestSuite";
 	private Shell shell;
 	private IPackageFragmentRoot packageFragmentRoot;
 
-	/**
-	 * Constructor for Action1.
-	 */
 	public CreateTestSuiteAction() {
 		super();
 	}
@@ -86,11 +94,11 @@ public class CreateTestSuiteAction implements IObjectActionDelegate {
 			final String classBody = getTestSuiteCode(testClassNames, suitePackage);
 			JavaCore.run(new IWorkspaceRunnable() {
 				public void run(IProgressMonitor monitor) throws CoreException {
-					IFolder firstPackageFolder = (IFolder) suitePackage.getResource();
-					if(!firstPackageFolder.exists()) {
-						firstPackageFolder.create(true, false, monitor);
+					IFolder suitePackageFolder = (IFolder) suitePackage.getResource();
+					if(!suitePackageFolder.exists()) {
+						suitePackageFolder.create(true, false, monitor);
 					}
-					IFile file = firstPackageFolder.getFile(TEST_SUITE_NAME + ".java");
+					IFile file = suitePackageFolder.getFile(TEST_SUITE_NAME + ".java");
 					if(file.exists()) {
 						file.delete(true, monitor);
 					}
