@@ -13,15 +13,8 @@ package org.eclipse.xtext.xtext2ecore;
 import java.io.InputStream;
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.xtextutil.AbstractType;
@@ -36,7 +29,7 @@ import org.openarchitectureware.xtend.XtendFacade;
  * @author Jan Köhnlein
  * 
  */
-public class TestBootstrapModel extends AbstractGeneratorTest {
+public class BootstrapModelTest extends AbstractGeneratorTest {
 	
 	@Override
 	protected void setUp() throws Exception {
