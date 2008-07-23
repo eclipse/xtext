@@ -73,12 +73,7 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * .jface.text.IDocument)
 	 */
 	public void apply(IDocument document) {
-		try {
-			document.replace(offset, 0, proposal.getText());
-		}
-		catch (BadLocationException e) {
-			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e));
-		}
+		
 	}
 
 	/*
@@ -131,7 +126,16 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * (org.eclipse.jface.text.ITextViewer, char, int, int)
 	 */
 	public void apply(ITextViewer viewer, char trigger, int stateMask, int offset) {
-		apply(viewer.getDocument());
+		
+		try {
+			IDocument document = viewer.getDocument();
+			
+			document.replace(this.offset, offset!=this.offset ? offset - this.offset: 0, proposal.getText());
+	
+		}
+		catch (BadLocationException e) {
+			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e));
+		}
 	}
 
 	/*
@@ -142,7 +146,6 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * (org.eclipse.jface.text.ITextViewer, boolean)
 	 */
 	public void selected(ITextViewer viewer, boolean smartToggle) {
-		System.out.println("XtextCompletionProposal.selected(): " + proposal.getLabel());
 	}
 
 	/*
@@ -153,7 +156,6 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * (org.eclipse.jface.text.ITextViewer)
 	 */
 	public void unselected(ITextViewer viewer) {
-		System.out.println("XtextCompletionProposal.unselected(): " + proposal.getLabel());
 	}
 
 	/*
@@ -165,8 +167,15 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	 * org.eclipse.jface.text.DocumentEvent)
 	 */
 	public boolean validate(IDocument document, int offset, DocumentEvent event) {
-		// TODO Auto-generated method stub
-		return true;
+		boolean startsWith = false;
+		try {
+			String prefix = document.get(this.offset, offset - this.offset);
+			startsWith = getDisplayString().toLowerCase().startsWith(prefix.toLowerCase());	
+		}
+		catch (BadLocationException e) {
+			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e));
+		}
+		return startsWith;
 	}
 
 	/*

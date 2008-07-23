@@ -81,6 +81,8 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		}
 		ContentAssistant ca = new ContentAssistant();
 		ca.enableColoredLabels(true);
+		ca.enablePrefixCompletion(true);
+		ca.enableAutoInsert(true);
 		ca.setContentAssistProcessor(processor, IDocument.DEFAULT_CONTENT_TYPE);
 		ca.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE);
 		ca.setProposalPopupOrientation(IContentAssistant.PROPOSAL_STACKED);
