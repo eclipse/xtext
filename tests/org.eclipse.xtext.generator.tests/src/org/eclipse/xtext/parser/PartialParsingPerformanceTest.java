@@ -59,7 +59,9 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		String model = modelBuffer.toString();
 		CompositeNode rootNode = getRootNode(model);
 		IParseResult reparse = PartialParsingUtil.reparse(getParser(), rootNode, model.indexOf("Sven"), 4, "Peter");
-		assertTrue(reparse.getParseErrors() == null || reparse.getParseErrors().isEmpty());
+		if(reparse.getParseErrors() != null && !reparse.getParseErrors().isEmpty()) {
+			fail("Unexpected parse error " + reparse.getParseErrors().get(0).getMessage()) ;
+		}
 	}
 	
 }
