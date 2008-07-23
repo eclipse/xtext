@@ -53,7 +53,7 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		}
 		modelBuffer.append("  erwachsener ( Sven 112 )\n");
 		for(int i=0; i<NUM_ELEMENTS; ++i) {
-			modelBuffer.append("  spielzeug ( Schaufel GRÜN )\n");
+			modelBuffer.append("  spielzeug ( Schaufel ROT )\n");
 		}
 		modelBuffer.append("}\n");
 		String model = modelBuffer.toString();
