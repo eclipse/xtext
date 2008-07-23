@@ -17,6 +17,10 @@
       [Enter License Description here.]
    </license>
 
+   <includes
+         id="org.eclipse.xtext.examples.feature"
+         version="0.0.0"/>
+
    <requires>
       <import feature="org.eclipse.xtext.runtime.feature" version="1.0.0"/>
       <import feature="org.eclipse.xtext.sdk.feature" version="1.0.0"/>
