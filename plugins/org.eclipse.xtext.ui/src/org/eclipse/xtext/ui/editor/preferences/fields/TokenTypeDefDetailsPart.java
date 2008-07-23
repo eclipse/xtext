@@ -11,7 +11,10 @@ package org.eclipse.xtext.ui.editor.preferences.fields;
 import org.eclipse.jface.preference.ColorFieldEditor;
 import org.eclipse.jface.preference.FontFieldEditor;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.xtext.ui.service.impl.BuiltInPreferenceStore;
+import org.eclipse.jface.preference.RadioGroupFieldEditor;
+import org.eclipse.jface.text.TextAttribute;
+import org.eclipse.swt.SWT;
+import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 
 public class TokenTypeDefDetailsPart extends AbstractDetailsPart {
 
@@ -22,10 +25,17 @@ public class TokenTypeDefDetailsPart extends AbstractDetailsPart {
 	@Override
 	protected void createFieldEditors() {
 		{
-			addField(new ColorFieldEditor(BuiltInPreferenceStore.COLOR_SUFIX, "Color", getFieldEditorParent()));
-			addField(new ColorFieldEditor(BuiltInPreferenceStore.BACKGROUNDCOLOR_SUFIX, "Background",
+			addField(new ColorFieldEditor(PreferenceConstants.COLOR_SUFIX, "Color", getFieldEditorParent()));
+			addField(new ColorFieldEditor(PreferenceConstants.BACKGROUNDCOLOR_SUFIX, "Background",
 					getFieldEditorParent()));
-			addField(new FontFieldEditor(BuiltInPreferenceStore.FONT_SUFIX, "Font", getFieldEditorParent()));
+			// TODO change this group to checkboxgroup to allow combined styles
+			// Italic&Bold a.s.o
+			addField(new RadioGroupFieldEditor(PreferenceConstants.STYLE_SUFIX, "Style", 2, new String[][] {
+					{ "Italic", String.valueOf(SWT.ITALIC) }, { "Bold", String.valueOf(SWT.BOLD) },
+					{ "Underline", String.valueOf(TextAttribute.UNDERLINE) },
+					{ "Strike through", String.valueOf(TextAttribute.STRIKETHROUGH) },
+					{ "Use Font Style", String.valueOf(SWT.NORMAL) } }, getFieldEditorParent(), true));
+			addField(new FontFieldEditor(PreferenceConstants.FONT_SUFIX, "Font", getFieldEditorParent()));
 		}
 	}
 }

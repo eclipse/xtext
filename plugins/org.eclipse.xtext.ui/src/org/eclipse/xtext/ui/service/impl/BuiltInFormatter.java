@@ -24,7 +24,7 @@ import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
 import org.eclipse.xtext.ui.util.GrammarConstants;
 
 /**
- * To be subclassed. Use should overwrite after(LeafNode), before(LeafNode) and
+ * To be subclassed. Clients can overwrite after(LeafNode), before(LeafNode) and
  * shouldIndent(AbstractNode). The user also can use nextNode(LeafNode) and
  * previousNode() to navigate.
  * 

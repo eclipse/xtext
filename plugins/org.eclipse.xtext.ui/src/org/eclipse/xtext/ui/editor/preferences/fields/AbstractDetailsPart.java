@@ -10,7 +10,7 @@ import org.eclipse.jface.preference.PreferenceStore;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
-import org.eclipse.xtext.ui.editor.preferences.PreferencesQualifiedName;
+import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -20,10 +20,10 @@ public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 	/**
 	 * 
 	 */
-	private PreferencesQualifiedName preferencePrefix;
 	protected IPreferenceStore masterPreferenceStore;
 	protected PreferenceStore internalStore;
 	private List<FieldEditor> internalEditorsList = new ArrayList<FieldEditor>();
+	private String preferencePrefix;
 
 	public AbstractDetailsPart(IPreferenceStore masterPreferenceStore) {
 		super(GRID);
@@ -33,11 +33,11 @@ public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 
 	@Override
 	protected final void addField(FieldEditor editor) {
-		PreferencesQualifiedName prefix = null;
+		String prefix = null;
 		if (getPreferencePrefix() != null)
-			prefix = getPreferencePrefix().append(editor.getPreferenceName());
+			prefix = getPreferencePrefix() + PreferenceConstants.SEPARATOR + editor.getPreferenceName();
 		else
-			prefix = new PreferencesQualifiedName(editor.getPreferenceName());
+			prefix = editor.getPreferenceName();
 		editor.setPreferenceName(prefix.toString());
 		internalEditorsList.add(editor);
 		super.addField(editor);
@@ -48,12 +48,12 @@ public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 		return new ChainedPreferenceStore(new IPreferenceStore[] { internalStore, masterPreferenceStore });
 	}
 
-	protected final void load(PreferencesQualifiedName preferencePrefix) {
+	protected final void load(String preferencePrefix) {
 		setPreferencePrefix(preferencePrefix);
 		initialize();
 	}
 
-	protected final void loadDefaults(PreferencesQualifiedName preferencePrefix) {
+	protected final void loadDefaults(String preferencePrefix) {
 		setPreferencePrefix(preferencePrefix);
 		performDefaults();
 		for (FieldEditor fe : internalEditorsList) {
@@ -102,15 +102,19 @@ public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 	@Override
 	abstract protected void createFieldEditors();
 
-	protected final PreferencesQualifiedName getPreferencePrefix() {
+	protected final String getPreferencePrefix() {
 		return preferencePrefix;
 	}
 
-	private void setPreferencePrefix(PreferencesQualifiedName preferencePrefix) {
+	private void setPreferencePrefix(String preferencePrefix) {
 		this.preferencePrefix = preferencePrefix;
 		for (FieldEditor fe : internalEditorsList) {
-			PreferencesQualifiedName oldPreferenceName = PreferencesQualifiedName.parse(fe.getPreferenceName());
-			fe.setPreferenceName(getPreferencePrefix().append(oldPreferenceName.lastQualifier()).toString());
+			String oldPreferenceName = fe.getPreferenceName();
+			if (oldPreferenceName.indexOf(PreferenceConstants.SEPARATOR) >= 0) {
+				oldPreferenceName = oldPreferenceName.substring(oldPreferenceName
+						.lastIndexOf(PreferenceConstants.SEPARATOR) + 1);
+			}
+			fe.setPreferenceName(getPreferencePrefix() + PreferenceConstants.SEPARATOR + oldPreferenceName);
 		}
 	}
 }

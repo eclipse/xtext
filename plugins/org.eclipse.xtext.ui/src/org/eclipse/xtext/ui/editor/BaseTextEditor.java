@@ -36,6 +36,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.ContentAssistAction;
 import org.eclipse.ui.texteditor.IDocumentProvider;
@@ -59,11 +60,13 @@ import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProviderFactory;
 import org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage;
-import org.eclipse.xtext.ui.editor.preferences.PreferencesQualifiedName;
+import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.service.IFoldingStructureProvider;
-import org.eclipse.xtext.ui.service.IPreferenceStore;
+import org.eclipse.xtext.ui.service.ISyntaxColorer;
+import org.eclipse.xtext.ui.service.impl.BuiltInSyntaxColorer;
+import org.eclipse.xtext.ui.service.utils.PropertiesResolver;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -79,10 +82,12 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 			if (event != null && event.getProperty() != null
 					&& event.getProperty().startsWith(getLanguageDescriptor().getId())) {
 				// syntax highlighting
-				if (event.getProperty().startsWith(
-						PreferencesQualifiedName.parse(getLanguageDescriptor().getId()).append(
-								IPreferenceStore.SYNTAX_COLORER_PREFERENCE_TAG).toString())) {
+				if (event.getProperty().startsWith(PreferenceConstants.syntaxColorerTag(getLanguageDescriptor()))) {
 					if (getSourceViewer() instanceof TextViewer) {
+						// FIXME notify syntax colorer before viewer refreshing
+						ISyntaxColorer colorer = ServiceRegistry.getService(languageDescriptor, ISyntaxColorer.class);
+						if (colorer instanceof BuiltInSyntaxColorer)
+							((BuiltInSyntaxColorer) colorer).clearCache();
 						TextViewer tv = (TextViewer) getSourceViewer();
 						tv.invalidateTextPresentation();
 					}
@@ -257,11 +262,11 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		super.setInitializationData(cfig, propertyName, data);
 		// try plain text editor if problem occurs
 		if (languageDescriptor != null) {
-			IPreferenceStore xtextPreferenceStore = ServiceRegistry.getService(languageDescriptor,
-					IPreferenceStore.class);
+			// Preference store
+			ScopedPreferenceStore xtextPreferenceStore = PropertiesResolver.getPreferenceStore();
 			ChainedPreferenceStore chainedPreferenceStore = new ChainedPreferenceStore(
-					new org.eclipse.jface.preference.IPreferenceStore[] { getPreferenceStore(),
-							xtextPreferenceStore.getPersitablePreferenceStore() });
+					new org.eclipse.jface.preference.IPreferenceStore[] { xtextPreferenceStore, getPreferenceStore() });
+			chainedPreferenceStore.addPropertyChangeListener(new PreferenceStorePropertyChangeListener());
 
 			// source viewer setup
 			setSourceViewerConfiguration(new XtextSourceViewerConfiguration(languageDescriptor, chainedPreferenceStore,
@@ -362,8 +367,6 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		fOverviewRuler = createOverviewRuler(getSharedColors());
 		ISourceViewer projectionViewer = new ProjectionViewer(parent, ruler, getOverviewRuler(),
 				isOverviewRulerVisible(), styles);
-		ServiceRegistry.getService(languageDescriptor, IPreferenceStore.class).getPersitablePreferenceStore()
-				.addPropertyChangeListener(new PreferenceStorePropertyChangeListener());
 		getSourceViewerDecorationSupport(projectionViewer);
 		return projectionViewer;
 	}
@@ -377,7 +380,6 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		projectionSupport.addSummarizableAnnotationType("org.eclipse.ui.workbench.texteditor.warning"); //$NON-NLS-1$
 		projectionSupport.addSummarizableAnnotationType("org.eclipse.ui.workbench.texteditor.error"); //$NON-NLS-1$
 		projectionSupport.install();
-
 		// Folding stuff
 		IFoldingStructureProvider foldingProvider = ServiceRegistry.getService(languageDescriptor,
 				IFoldingStructureProvider.class);

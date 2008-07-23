@@ -8,45 +8,34 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.utils;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.RGB;
+
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
 public class TextStyle {
-	private String color;
-	private String backgroundColor;
-	private String fontData;
+	private RGB color;
+	private RGB backgroundColor;
+	private FontData[] fontData;
+	private int style = SWT.NORMAL;
 
-	/**
-	 * @param color
-	 * @param backgroundColor
-	 * @param style
-	 * @param fontData
-	 */
-	public TextStyle(String color, String backgroundColor, String fontData) {
-		super();
-		this.color = color;
-		this.backgroundColor = backgroundColor;
-		this.fontData = fontData;
-		if (color == null)
-			this.color = TextStyleConstants.DEFAULT_COLOR;
-		if (backgroundColor == null)
-			this.backgroundColor = TextStyleConstants.DEFAULT_BACKGROUNDCOLOR;
-		if (this.fontData == null) {
-			this.fontData = TextStyleConstants.DEFAULT_FONT;
-		}
-	}
-
-	public TextStyle(TextStyle textStyle) {
+	private TextStyle(TextStyle textStyle) {
 		this.backgroundColor = textStyle.backgroundColor;
 		this.color = textStyle.color;
 		this.fontData = textStyle.fontData;
+		this.style = textStyle.style;
+	}
+
+	public TextStyle() {
 	}
 
 	/**
 	 * @return the color
 	 */
-	public String getColor() {
+	public RGB getColor() {
 		return color;
 	}
 
@@ -54,14 +43,14 @@ public class TextStyle {
 	 * @param color
 	 *            the color to set
 	 */
-	public void setColor(String rgb) {
+	public void setColor(RGB rgb) {
 		this.color = rgb;
 	}
 
 	/**
 	 * @return the fontData
 	 */
-	public String getFontData() {
+	public FontData[] getFontData() {
 		return fontData;
 	}
 
@@ -69,7 +58,7 @@ public class TextStyle {
 	 * @param fontData
 	 *            the fontData to set
 	 */
-	public void setFontData(String fontName) {
+	public void setFontData(FontData[] fontName) {
 		this.fontData = fontName;
 	}
 
@@ -77,18 +66,32 @@ public class TextStyle {
 	 * @param backgroundColor
 	 *            the backgroundColor to set
 	 */
-	public void setBackgroundColor(String backgroundColor) {
+	public void setBackgroundColor(RGB backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
 
 	/**
 	 * @return the backgroundColor
 	 */
-	public String getBackgroundColor() {
+	public RGB getBackgroundColor() {
 		return backgroundColor;
+	}
+
+	/**
+	 * @return
+	 */
+	public int getStyle() {
+		return style;
 	}
 
 	public TextStyle copy() {
 		return new TextStyle(this);
+	}
+
+	/**
+	 * @param style
+	 */
+	public void setStyle(int style) {
+		this.style = style;
 	}
 }

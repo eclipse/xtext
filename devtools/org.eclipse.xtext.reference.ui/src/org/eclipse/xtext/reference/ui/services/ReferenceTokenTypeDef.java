@@ -11,6 +11,8 @@ package org.eclipse.xtext.reference.ui.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef;
@@ -36,16 +38,20 @@ public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 	}
 
 	TokenTypeDef rot() {
-		TokenTypeDef ttd = new TokenTypeDef("rot", "ROT") {
+		return new TokenTypeDef("rot", "ROT") {
 			@Override
 			public boolean match(LeafNode node) {
 				return keyWordTokenType().match(node) && "ROT".equals(node.getText());
 			}
+
+			@Override
+			public TextStyle defaultTextStyle() {
+				TextStyle textStyle = new TextStyle();
+				textStyle.setColor(new RGB(200, 10, 50));
+				textStyle.setStyle(SWT.BOLD);
+				return textStyle;
+			}
 		};
-		TextStyle ts = keyWordTokenType().textStyleCopy();
-		ts.setColor("200,10,50");
-		calculateTextStyle(ttd, ts);
-		return ttd;
 	}
 
 	TokenTypeDef gelb() {
@@ -55,9 +61,9 @@ public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 				return keyWordTokenType().match(node) && "GELB".equals(node.getText());
 			}
 		};
-		TextStyle ts = keyWordTokenType().textStyleCopy();
-		ts.setColor("221,212,88");
-		calculateTextStyle(ttd, ts);
+		// TextStyle ts = keyWordTokenType().textStyleCopy();
+		// ts.setColor("221,212,88");
+		// loadTextStyle(ttd);
 		return ttd;
 	}
 
@@ -68,9 +74,9 @@ public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 				return keyWordTokenType().match(node) && "GRÜN".equals(node.getText());
 			}
 		};
-		TextStyle ts = keyWordTokenType().textStyleCopy();
-		ts.setColor("10,200,10");
-		calculateTextStyle(ttd, ts);
+		// TextStyle ts = keyWordTokenType().textStyleCopy();
+		// ts.setColor("10,200,10");
+		// loadTextStyle(ttd);
 		return ttd;
 	}
 

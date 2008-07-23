@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.services;
 
 import static org.easymock.EasyMock.expect;
 
-import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.xtext.builtin.IXtextBuiltin;
 import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -18,7 +17,6 @@ import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.ui.AbstractEasyMockTest;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
-import org.eclipse.xtext.ui.service.impl.BuiltInPreferenceStore;
 import org.eclipse.xtext.ui.service.impl.BuiltInSyntaxColorer;
 import org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef;
 
@@ -40,16 +38,17 @@ public class BISyntaxColorerTest extends AbstractEasyMockTest {
 		colorer = new BuiltInSyntaxColorer();
 		final IServiceScope languageDescriptorMock = createMock(IServiceScope.class);
 		expect(languageDescriptorMock.getId()).andStubReturn("org.test.language");
-		final IPersistentPreferenceStore persistablePrefStore = createMock(IPersistentPreferenceStore.class);
+		colorer.setServiceScope(new IServiceScope() {
 
-		BuiltInTokenTypeDef service = new BuiltInTokenTypeDef();
-		service.setPreferenceStore(new BuiltInPreferenceStore() {
-			@Override
-			public IPersistentPreferenceStore getPersitablePreferenceStore() {
-				return persistablePrefStore;
+			public String getId() {
+				return "org.eclise.builtin";
+			}
+
+			public IServiceScope getParentScope() {
+				return null;
 			}
 		});
-		colorer.setTokenTypeDefProvider(service);
+		colorer.setTokenTypeDefProvider(new BuiltInTokenTypeDef());
 		replay();
 	}
 

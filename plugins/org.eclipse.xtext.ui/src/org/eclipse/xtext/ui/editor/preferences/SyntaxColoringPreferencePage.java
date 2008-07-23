@@ -8,30 +8,45 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.preferences;
 
-import org.eclipse.jface.preference.StringFieldEditor;
+import java.util.List;
+
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.preferences.fields.TokenTypeDefMasterDetailFieldEditor;
-import org.eclipse.xtext.ui.service.IPreferenceStore;
+import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
+import org.eclipse.xtext.ui.service.utils.PropertiesResolver;
+import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
 public class SyntaxColoringPreferencePage extends AbstractPreferencePage {
-	
+
 	@Inject
 	private ITokenTypeDefProvider ttd;
-	
+
 	@Override
-	protected void createFieldEditors() {
-		addField(new TokenTypeDefMasterDetailFieldEditor(IPreferenceStore.TOKEN_STYLES_PREFERENCE_TAG,
-				"Token Styles", getFieldEditorParent(), getPreferenceStore(), ttd.allTokenTypes()));
-		addField(new StringFieldEditor("testFeld", "Test Field", getFieldEditorParent()));
+	protected String qualifiedName() {
+		return PreferenceConstants.syntaxColorerTag(getServiceScope());
 	}
 
 	@Override
-	protected PreferencesQualifiedName qualifiedName() {
-		return super.qualifiedName().append(IPreferenceStore.SYNTAX_COLORER_PREFERENCE_TAG);
+	protected void createFieldEditors() {
+		List<ITokenTypeDef> allTokenTypes = ttd.allTokenTypes();
+		refreshTokenStyles(allTokenTypes);
+		addField(new TokenTypeDefMasterDetailFieldEditor(PreferenceConstants.TOKEN_STYLES_PREFERENCE_TAG,
+				"Token Styles", getFieldEditorParent(), getPreferenceStore(), allTokenTypes));
 	}
+
+	/**
+	 * @param allTokenTypes
+	 */
+	private void refreshTokenStyles(List<ITokenTypeDef> allTokenTypes) {
+		for (ITokenTypeDef tokenTypeDef : allTokenTypes) {
+			new PropertiesResolver(getServiceScope()).populateTextStyle(tokenTypeDef.getId(), new TextStyle(),
+					tokenTypeDef.defaultTextStyle());
+		}
+	}
+
 }

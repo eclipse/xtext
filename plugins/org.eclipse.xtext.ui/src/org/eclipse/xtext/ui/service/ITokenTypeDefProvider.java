@@ -18,6 +18,5 @@ import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
  * 
  */
 public interface ITokenTypeDefProvider extends ILanguageService {
-	// TODO discuss whether we bind this service with syntaxcolorer
 	List<ITokenTypeDef> allTokenTypes();
 }

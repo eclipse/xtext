@@ -37,183 +37,183 @@ import org.eclipse.xtext.ui.service.ILabelProvider;
 
 /**
  * An outline page for Xtext based editors.
- *
+ * 
  * @author Peter Friese - Initial contribution and API
  */
 public class XtextContentOutlinePage extends ContentOutlinePage implements IContentOutlinePage {
-    
-    public static final String XTEXT_CONTENT_OUTLINE_PAGE_SORTING_ACTION_IS_CHECKED = "XtextContentOutlinePage.SortingAction.isChecked";
 
-    private ListenerList postSelectionChangedListeners = new ListenerList();
-    private IEditorModel model;
-    private IXtextEditorModelListener xtextEditorModelListener;
-    private final BaseTextEditor xtextBaseEditor;
+	public static final String XTEXT_CONTENT_OUTLINE_PAGE_SORTING_ACTION_IS_CHECKED = "XtextContentOutlinePage.SortingAction.isChecked";
 
-    public XtextContentOutlinePage(BaseTextEditor xtextBaseEditor) {
-        this.xtextBaseEditor = xtextBaseEditor;
-    }
+	private ListenerList postSelectionChangedListeners = new ListenerList();
+	private IEditorModel model;
+	private IXtextEditorModelListener xtextEditorModelListener;
+	private final BaseTextEditor xtextBaseEditor;
 
-    @Override
-    public void createControl(Composite parent) {
-        super.createControl(parent);
-        TreeViewer viewer = getTreeViewer();
-        viewer.setAutoExpandLevel(TreeViewer.ALL_LEVELS);
-        viewer.setUseHashlookup(true);
-        
-        viewer.addSelectionChangedListener(new ISelectionChangedListener() {
-            public void selectionChanged(SelectionChangedEvent event) {
-                firePostSelectionChanged(event.getSelection());
-            }
-        });
+	public XtextContentOutlinePage(BaseTextEditor xtextBaseEditor) {
+		this.xtextBaseEditor = xtextBaseEditor;
+	}
 
-        XtextModelContentProvider modelContentProvider = new XtextModelContentProvider(xtextBaseEditor);
-        viewer.setContentProvider(modelContentProvider);
-        viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(new XtextLabelProviderDelegator(ServiceRegistry
-                .getService(xtextBaseEditor.getLanguageDescriptor(), ILabelProvider.class))));
-        viewer.setComparer(new IElementComparer() {
+	@Override
+	public void createControl(Composite parent) {
+		super.createControl(parent);
+		TreeViewer viewer = getTreeViewer();
+		viewer.setAutoExpandLevel(TreeViewer.ALL_LEVELS);
+		viewer.setUseHashlookup(true);
 
-            public boolean equals(Object a, Object b) {
-                if (a instanceof EObject) {
-                    EObject ea = (EObject) a;
-                    if (b instanceof EObject) {
-                        EObject eb = (EObject) b;
-                        URI uriA = EcoreUtil.getURI(ea);
-                        URI uriB = EcoreUtil.getURI(eb);
-                        return uriA.equals(uriB);
-                    }
-                    else {
-                        return false;
-                    }
-                }
-                else {
-                    return a.equals(b);
-                }
-            }
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			public void selectionChanged(SelectionChangedEvent event) {
+				firePostSelectionChanged(event.getSelection());
+			}
+		});
 
-            public int hashCode(Object element) {
-                if (element instanceof EObject) {
-                    return EcoreUtil.getURI((EObject) element).hashCode();
-                }
-                else {
-                    return element.hashCode();
-                }
-            }
+		XtextModelContentProvider modelContentProvider = new XtextModelContentProvider(xtextBaseEditor);
+		viewer.setContentProvider(modelContentProvider);
+		viewer.setLabelProvider(new DelegatingStyledCellLabelProvider(new XtextLabelProviderDelegator(ServiceRegistry
+				.getService(xtextBaseEditor.getLanguageDescriptor(), ILabelProvider.class))));
+		viewer.setComparer(new IElementComparer() {
 
-        });
+			public boolean equals(Object a, Object b) {
+				if (a instanceof EObject) {
+					EObject ea = (EObject) a;
+					if (b instanceof EObject) {
+						EObject eb = (EObject) b;
+						URI uriA = EcoreUtil.getURI(ea);
+						URI uriB = EcoreUtil.getURI(eb);
+						return uriA.equals(uriB);
+					}
+					else {
+						return false;
+					}
+				}
+				else {
+					return a.equals(b);
+				}
+			}
 
-        if (model != null) {
-            setViewerInput(model);
-        }
-    }
-    
-    private void registerToolbarActions(IActionBars actionBars) {
-        IToolBarManager toolBarManager = actionBars.getToolBarManager();
-        if (toolBarManager != null) {
-            toolBarManager.add(new ToggleLinkWithEditorAction(xtextBaseEditor));
-            toolBarManager.add(new XtextOutlineSortingAction(this));
-        }
-    }
-    
-    @Override
-    public void init(IPageSite pageSite) {
-        super.init(pageSite);
-        registerToolbarActions(getSite().getActionBars());
-    }
+			public int hashCode(Object element) {
+				if (element instanceof EObject) {
+					return EcoreUtil.getURI((EObject) element).hashCode();
+				}
+				else {
+					return element.hashCode();
+				}
+			}
 
-    public void addPostSelectionChangedListener(ISelectionChangedListener listener) {
-        postSelectionChangedListeners.add(listener);
-    }
+		});
 
-    public void removePostSelectionChangedListener(ISelectionChangedListener listener) {
-        postSelectionChangedListeners.remove(listener);
-    }
+		if (model != null) {
+			setViewerInput(model);
+		}
+	}
 
-    private void firePostSelectionChanged(ISelection selection) {
-        // create an event
-        SelectionChangedEvent event = new SelectionChangedEvent(this, selection);
+	private void registerToolbarActions(IActionBars actionBars) {
+		IToolBarManager toolBarManager = actionBars.getToolBarManager();
+		if (toolBarManager != null) {
+			toolBarManager.add(new ToggleLinkWithEditorAction(xtextBaseEditor));
+			toolBarManager.add(new XtextOutlineSortingAction(this));
+		}
+	}
 
-        // fire the event
-        Object[] listeners = postSelectionChangedListeners.getListeners();
-        for (int i = 0; i < listeners.length; ++i) {
-            ((ISelectionChangedListener) listeners[i]).selectionChanged(event);
-        }
-    }
+	@Override
+	public void init(IPageSite pageSite) {
+		super.init(pageSite);
+		registerToolbarActions(getSite().getActionBars());
+	}
 
-    private void setViewerInput(Object newInput) {
-        TreeViewer tree = getTreeViewer();
-        Object oldInput = tree.getInput();
+	public void addPostSelectionChangedListener(ISelectionChangedListener listener) {
+		postSelectionChangedListeners.add(listener);
+	}
 
-        boolean isXtextEditorModel = (newInput instanceof XtextEditorModel);
-        boolean wasXtextEditorModel = (oldInput instanceof XtextEditorModel);
+	public void removePostSelectionChangedListener(ISelectionChangedListener listener) {
+		postSelectionChangedListeners.remove(listener);
+	}
 
-        if (isXtextEditorModel && !wasXtextEditorModel) {
-            if (xtextEditorModelListener == null) {
-                xtextEditorModelListener = createXtextEditorModelChangeListener();
-            }
-            IEditorModel xtextEditorModel = (IEditorModel) newInput;
-            xtextEditorModel.addModelListener(xtextEditorModelListener);
-        }
-        else if (!isXtextEditorModel && wasXtextEditorModel && xtextEditorModelListener != null) {
-            IEditorModel xtextEditorModel = (IEditorModel) oldInput;
-            xtextEditorModel.removeModelListener(xtextEditorModelListener);
-            xtextEditorModelListener = null;
-        }
+	private void firePostSelectionChanged(ISelection selection) {
+		// create an event
+		SelectionChangedEvent event = new SelectionChangedEvent(this, selection);
 
-        Object[] expandedElements = tree.getExpandedElements();
-        tree.setInput(newInput);
-        tree.setExpandedElements(expandedElements);
-    }
+		// fire the event
+		Object[] listeners = postSelectionChangedListeners.getListeners();
+		for (int i = 0; i < listeners.length; ++i) {
+			((ISelectionChangedListener) listeners[i]).selectionChanged(event);
+		}
+	}
 
-    public void setInput(IEditorModel model) {
-        this.model = model;
-        if (getTreeViewer() != null) {
-            setViewerInput(model);
-        }
-    }
+	private void setViewerInput(Object newInput) {
+		TreeViewer tree = getTreeViewer();
+		Object oldInput = tree.getInput();
 
-    public void setSelection(ISelection selection) {
-        if (getTreeViewer() != null) {
-            getTreeViewer().setSelection(selection, true);
-        }
-    }
+		boolean isXtextEditorModel = (newInput instanceof XtextEditorModel);
+		boolean wasXtextEditorModel = (oldInput instanceof XtextEditorModel);
 
-    private IXtextEditorModelListener createXtextEditorModelChangeListener() {
-        return new IXtextEditorModelListener() {
-            public void modelChanged(final XtextEditorModelChangeEvent event) {
-                if (event.getModel() == model && !getControl().isDisposed()) {
-                    getControl().getDisplay().asyncExec(new Runnable() {
-                        public void run() {
-                            Control ctrl = getControl();
-                            if (ctrl != null && !ctrl.isDisposed()) {
-                                Object[] expandedElements = getTreeViewer().getExpandedElements();
-                                getTreeViewer().refresh();
-                                getTreeViewer().setExpandedElements(expandedElements);
-                            }
-                        }
-                    });
-                }
-            }
-        };
-    }
+		if (isXtextEditorModel && !wasXtextEditorModel) {
+			if (xtextEditorModelListener == null) {
+				xtextEditorModelListener = createXtextEditorModelChangeListener();
+			}
+			IEditorModel xtextEditorModel = (IEditorModel) newInput;
+			xtextEditorModel.addModelListener(xtextEditorModelListener);
+		}
+		else if (!isXtextEditorModel && wasXtextEditorModel && xtextEditorModelListener != null) {
+			IEditorModel xtextEditorModel = (IEditorModel) oldInput;
+			xtextEditorModel.removeModelListener(xtextEditorModelListener);
+			xtextEditorModelListener = null;
+		}
 
-    private ViewerComparator alphaComparator = new ViewerComparator() {
-        @Override
-        public int compare(Viewer viewer, Object e1, Object e2) {
-            XtextLabelProviderDelegator labelProvider = new XtextLabelProviderDelegator(ServiceRegistry
-                    .getService(xtextBaseEditor.getLanguageDescriptor(), ILabelProvider.class));
-            String text1 = labelProvider.getText(e1);
-            String text2 = labelProvider.getText(e2);
-            return getComparator().compare(text1, text2);
-        }
-    };
-    
-    public void sort(boolean on) {
-        if (on) {
-            getTreeViewer().setComparator(alphaComparator);
-        }
-        else {
-            getTreeViewer().setComparator(null);
-        }
-    }
+		Object[] expandedElements = tree.getExpandedElements();
+		tree.setInput(newInput);
+		tree.setExpandedElements(expandedElements);
+	}
+
+	public void setInput(IEditorModel model) {
+		this.model = model;
+		if (getTreeViewer() != null) {
+			setViewerInput(model);
+		}
+	}
+
+	public void setSelection(ISelection selection) {
+		if (getTreeViewer() != null) {
+			getTreeViewer().setSelection(selection, true);
+		}
+	}
+
+	private IXtextEditorModelListener createXtextEditorModelChangeListener() {
+		return new IXtextEditorModelListener() {
+			public void modelChanged(final XtextEditorModelChangeEvent event) {
+				if (event.getModel() == model && !getControl().isDisposed()) {
+					getControl().getDisplay().asyncExec(new Runnable() {
+						public void run() {
+							Control ctrl = getControl();
+							if (ctrl != null && !ctrl.isDisposed()) {
+								Object[] expandedElements = getTreeViewer().getExpandedElements();
+								getTreeViewer().refresh();
+								getTreeViewer().setExpandedElements(expandedElements);
+							}
+						}
+					});
+				}
+			}
+		};
+	}
+
+	private ViewerComparator alphaComparator = new ViewerComparator() {
+		@SuppressWarnings("unchecked")
+		@Override
+		public int compare(Viewer viewer, Object e1, Object e2) {
+			XtextLabelProviderDelegator labelProvider = new XtextLabelProviderDelegator(ServiceRegistry.getService(
+					xtextBaseEditor.getLanguageDescriptor(), ILabelProvider.class));
+			String text1 = labelProvider.getText(e1);
+			String text2 = labelProvider.getText(e2);
+			return getComparator().compare(text1, text2);
+		}
+	};
+
+	public void sort(boolean on) {
+		if (on) {
+			getTreeViewer().setComparator(alphaComparator);
+		}
+		else {
+			getTreeViewer().setComparator(null);
+		}
+	}
 }
-
