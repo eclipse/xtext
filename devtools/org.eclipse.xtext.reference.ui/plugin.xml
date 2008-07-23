@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.xtext.ui.proposalsProvider">
       <proposalsProvider
-            class="org.eclipse.xtext.reference.ui.services.ReferenceProposalsProvider"
+            class="org.eclipse.xtext.reference.ui.services.ReferenceProposalsProvider2"
             languageId="org.eclipse.xtext.reference.ReferenceGrammar">
       </proposalsProvider>
    </extension>
@@ -22,4 +22,45 @@
             languageId="org.eclipse.xtext.reference.ReferenceGrammar">
       </formatter>
    </extension>
+   <extension
+         point="org.eclipse.ui.editors.templates">
+      <contextType
+            class="org.eclipse.jface.text.templates.TemplateContextType"
+            id="org.eclipse.xtext.reference.ReferenceGrammar.rootContext"
+            name="ReferenceGrammar Root Context">
+      </contextType>
+      <template
+            autoinsert="true"
+            contextTypeId="org.eclipse.xtext.reference.ReferenceGrammar.rootContext"
+            description="Eine Autoritaetsperson"
+            id="org.eclipse.xtext.reference.ui.aufpasserTemplate"
+            name="aufpasser">
+         <pattern>
+            /* ein neuer aufpasser */erwachsener (${name} ${age})
+         </pattern>
+      </template>
+      <template
+            autoinsert="true"
+            contextTypeId="org.eclipse.xtext.reference.ReferenceGrammar.rootContext"
+            description="Eine ganze Familie"
+            id="org.eclipse.xtext.reference.ui.familieTemplate"
+            name="familie">
+         <pattern>
+erwachsener (${vater} ${vaterAlter})
+erwachsener (${mutter} ${mutterAlter})
+kind (${kind1} ${kind1Alter})
+kind (${kind2} ${kind2Alter})
+         </pattern>
+      </template>
+   </extension>
+    <extension
+         point="org.eclipse.ui.preferencePages">
+        <page
+            category="org.eclipse.xtext.reference.ReferenceGrammar.editor"
+            class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.XtextTemplatePreferencePage/org.eclipse.xtext.reference.ReferenceGrammar"
+            id="org.eclipse.xtext.reference.ReferenceGrammar.editor.templates"
+            name="Templates">
+        </page>
+      </extension>
+   
 </plugin>
