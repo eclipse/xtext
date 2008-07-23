@@ -23,7 +23,6 @@
 	<!-- all tests that are to be run. Initialization for individual tests -->
 	<!-- should be done within the body of the suite target. -->
 	<target name="init">
-		<property name="classname" value="org.eclipse.xtext.ui.AutoTestSuite" />
 		<tstamp />
 		<delete>
 			<fileset dir="${eclipse-home}" includes="org*.xml" />
@@ -36,10 +35,15 @@
 	<target name="suite">
 		<property name="test-folder" value="${eclipse-home}/test_folder" />
 		<delete dir="${test-folder}" quiet="true" />
+		<ant target="core-test" antfile="${library-file}" dir="${eclipse-home}">
+			<property name="data-dir" value="${test-folder}" />
+			<property name="plugin-name" value="${plugin-name}" />
+			<property name="classname" value="org.eclipse.xtext.ui.AutoTestSuite" />
+		</ant>
 		<ant target="ui-test" antfile="${library-file}" dir="${eclipse-home}">
 			<property name="data-dir" value="${test-folder}" />
 			<property name="plugin-name" value="${plugin-name}" />
-			<property name="classname" value="${classname}" />
+			<property name="classname" value="org.eclipse.xtext.ui.AllWorkbenchTests" />
 		</ant>
 	</target>
 
@@ -48,7 +52,8 @@
 	<!-- delete temporary files that have been created. -->
 	<target name="cleanup">
 		<mkdir dir="${results}/consolelogs" />
-		<copy failonerror="false" file="${eclipse-home}/results/${classname}.txt" tofile="${results}/consolelogs/${classname}_${platform}.metadata.log.txt" />
+		<copy failonerror="false" file="${eclipse-home}/results/org.eclipse.xtext.ui.AutoTestSuite.txt" tofile="${results}/consolelogs/org.eclipse.xtext.ui.AutoTestSuite_${platform}.metadata.log.txt" />
+		<copy failonerror="false" file="${eclipse-home}/results/org.eclipse.xtext.ui.AllWorkbenchTests.txt" tofile="${results}/consolelogs/org.eclipse.xtext.ui.AllWorkbenchTests_${platform}.metadata.log.txt" />
 	</target>
 
 	<!-- This target runs the test suite. Any actions that need to happen -->
