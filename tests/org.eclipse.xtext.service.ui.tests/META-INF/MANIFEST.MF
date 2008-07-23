@@ -7,3 +7,4 @@ Bundle-Vendor: www.eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.service.ui;bundle-version="1.0.0"
 Import-Package: junit.framework
+Export-Package: org.eclipse.xtext.service.ui
