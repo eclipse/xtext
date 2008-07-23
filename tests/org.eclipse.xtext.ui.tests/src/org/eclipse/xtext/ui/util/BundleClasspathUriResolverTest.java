@@ -4,7 +4,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
 
-public class BundleClasspathUriResolverTests extends AbstractClasspathUriResolverTests {
+public class BundleClasspathUriResolverTest extends AbstractClasspathUriResolverTest {
 
 	private IClasspathUriResolver _resolver;
 
