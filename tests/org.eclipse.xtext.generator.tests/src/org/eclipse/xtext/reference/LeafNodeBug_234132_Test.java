@@ -19,7 +19,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  * @author Jan Köhnlein - Initial contribution and API
  *
  */
-public class LeafNodeBug_234132 extends AbstractGeneratorTest {
+public class LeafNodeBug_234132_Test extends AbstractGeneratorTest {
 
     public void testLeafNodeBug() throws Exception {
         with(ReferenceGrammarStandaloneSetup.class);

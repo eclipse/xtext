@@ -19,7 +19,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  * @author Jan Köhnlein - Initial contribution and API
  * 
  */
-public class CommentOnEofBug_234135 extends AbstractGeneratorTest {
+public class CommentOnEofBug_234135_Test extends AbstractGeneratorTest {
 
     public void testCommentOnEof() throws Exception {
         with(ReferenceGrammarStandaloneSetup.class);
