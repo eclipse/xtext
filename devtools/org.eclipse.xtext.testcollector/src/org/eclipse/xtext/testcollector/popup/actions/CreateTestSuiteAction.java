@@ -1,6 +1,9 @@
 package org.eclipse.xtext.testcollector.popup.actions;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -57,19 +60,9 @@ public class CreateTestSuiteAction implements IObjectActionDelegate {
 	 */
 	public void run(IAction action) {
 		try {
-			final IJavaElement firstPackage = getFirstPackage();
-			final IJavaProject javaProject = packageFragmentRoot.getJavaProject();
-			StringBuffer buffer = new StringBuffer();
-			buffer.append("package " + firstPackage.getElementName() + ";\n");
-			buffer.append("\n");
-			buffer.append("import junit.framework.Test;\n");
-			buffer.append("import junit.framework.TestSuite;\n");
-			buffer.append("\n");
-			buffer.append("public class " + TEST_SUITE_NAME + " {" + "\n");
-			buffer.append("\n");
-			buffer.append("\tpublic static Test suite() {" + "\n");
-			buffer.append("\t\tTestSuite suite = new TestSuite(\"" + javaProject.getElementName() + "\");\n");
-
+			
+			List<String> testClassNames = new ArrayList<String>();
+			
 			for (IJavaElement child : packageFragmentRoot.getChildren()) {
 				if (child instanceof IPackageFragment) {
 					IPackageFragment packageFragment = (IPackageFragment) child;
@@ -79,8 +72,7 @@ public class CreateTestSuiteAction implements IObjectActionDelegate {
 							if (!Flags.isAbstract(type.getFlags())) {
 								if (type.getElementName().endsWith("Test") || type.getSuperclassName() != null
 										&& type.getSuperclassName().contains("TestCase")) {
-									buffer.append("\t\tsuite.addTestSuite(" + type.getFullyQualifiedName()
-											+ ".class);\n");
+									testClassNames.add(type.getFullyQualifiedName());
 									System.out.println(packageFragment.getElementName() + "." + type.getElementName());
 									break;
 								}
@@ -89,14 +81,19 @@ public class CreateTestSuiteAction implements IObjectActionDelegate {
 					}
 				}
 			}
-			buffer.append("\t\treturn suite;\n");
-			buffer.append("\t}\n");
-			buffer.append("}\n");
-			final String classBody = buffer.toString();
+			Collections.sort(testClassNames);
+			final IPackageFragment suitePackage = getSuitePackageFragment();
+			final String classBody = getTestSuiteCode(testClassNames, suitePackage);
 			JavaCore.run(new IWorkspaceRunnable() {
 				public void run(IProgressMonitor monitor) throws CoreException {
-					IFolder firstPackageFolder = (IFolder) firstPackage.getResource();
+					IFolder firstPackageFolder = (IFolder) suitePackage.getResource();
+					if(!firstPackageFolder.exists()) {
+						firstPackageFolder.create(true, false, monitor);
+					}
 					IFile file = firstPackageFolder.getFile(TEST_SUITE_NAME + ".java");
+					if(file.exists()) {
+						file.delete(true, monitor);
+					}
 					file.create(new ByteArrayInputStream(classBody.getBytes()), true, monitor);
 				}
 			}, new NullProgressMonitor());
@@ -108,22 +105,46 @@ public class CreateTestSuiteAction implements IObjectActionDelegate {
 		}
 	}
 
-	private IJavaElement getFirstPackage() throws JavaModelException {
-		String projectName = packageFragmentRoot.getJavaProject().getElementName();
-		if(projectName.endsWith(".tests") || projectName.endsWith(".test")) {
-			projectName = projectName.substring(0, projectName.lastIndexOf("."));
+	private String getTestSuiteCode(List<String> testClassNames, IPackageFragment javaPackage) {
+		final IJavaProject javaProject = packageFragmentRoot.getJavaProject();
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("package " + javaPackage.getElementName() + ";\n");
+		buffer.append("\n");
+		buffer.append("import junit.framework.Test;\n");
+		buffer.append("import junit.framework.TestSuite;\n");
+		buffer.append("\n");
+		buffer.append("/**\n");
+		buffer.append(" * DO NOT MODIFY MANUALLY! This class has been automatically generated. \n");
+		buffer.append(" * Install org.eclipse.xtext.testcollector and use the Xtext Tools/Create Test Suite\n");
+		buffer.append(" * action on the source folder to regenerate this.\n");
+		buffer.append(" */\n");
+		buffer.append("public class " + TEST_SUITE_NAME + " {" + "\n");
+		buffer.append("\n");
+		buffer.append("\tpublic static Test suite() {" + "\n");
+		buffer.append("\t\tTestSuite suite = new TestSuite(\"" + javaProject.getElementName() + "\");\n");
+		for(String testClassName: testClassNames) {
+			buffer.append("\t\tsuite.addTestSuite(" + testClassName
+					+ ".class);\n");
 		}
+		buffer.append("\t\treturn suite;\n");
+		buffer.append("\t}\n");
+		buffer.append("}\n");
+		final String classBody = buffer.toString();
+		return classBody;
+	}
+
+	private IPackageFragment getSuitePackageFragment() throws JavaModelException {
+		String projectName = packageFragmentRoot.getJavaProject().getElementName();
 		IPackageFragment projectNamePackageFragment = packageFragmentRoot.getPackageFragment(projectName);
 		if(projectNamePackageFragment.exists()) {
 			return projectNamePackageFragment;
+		} 
+		if(projectName.endsWith(".tests") || projectName.endsWith(".test")) {
+			String testedProjectName = projectName.substring(0, projectName.lastIndexOf("."));
+			IPackageFragment testedProjectNamePackageFragment = packageFragmentRoot.getPackageFragment(testedProjectName);
+			return testedProjectNamePackageFragment;
 		}
-		IJavaElement[] packageFragments = packageFragmentRoot.getChildren();
-		for (IJavaElement packageFragment : packageFragments) {
-			if(packageFragment.getElementName() != "") {
-				return packageFragment;
-			}
-		}
-		throw new IllegalArgumentException("Cannot find a sensible package fragment");
+		return projectNamePackageFragment;
 	}
 
 	/**
