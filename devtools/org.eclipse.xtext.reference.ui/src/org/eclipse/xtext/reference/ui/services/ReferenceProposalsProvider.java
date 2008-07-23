@@ -37,7 +37,7 @@ import org.eclipse.xtext.reference.ui.services.contentassist.XtextCompletionProp
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.model.IEditorModel;
-import org.eclipse.xtext.ui.service.IProposalsProvider;
+import org.eclipse.xtext.ui.service.IProposalsProvider0;
 import org.eclipse.xtext.ui.util.GrammarConstants;
 
 /**
@@ -48,7 +48,7 @@ import org.eclipse.xtext.ui.util.GrammarConstants;
  * @author Michael Clay
  * 
  */
-public class ReferenceProposalsProvider implements IProposalsProvider {
+public class ReferenceProposalsProvider implements IProposalsProvider0 {
 
     @Inject
     private IServiceScope languageDescriptor;

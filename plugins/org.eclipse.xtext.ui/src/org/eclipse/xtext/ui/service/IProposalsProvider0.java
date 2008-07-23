@@ -6,23 +6,19 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.service.impl;
+package org.eclipse.xtext.ui.service;
 
 import java.util.List;
 
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.ui.editor.model.IEditorModel;
-import org.eclipse.xtext.ui.service.IProposalsProvider0;
 
 /**
- * @author Peter Friese - Initial contribution and API
- *
+ * @author Dennis Hübner - Initial contribution and API
+ * 
  */
-public class BuiltInProposalsProvider implements IProposalsProvider0 {
-    
-    public List<ICompletionProposal> getProposals(IEditorModel model, ITextViewer viewer, int offset) {
-        return null;
-    }
-
+public interface IProposalsProvider0 extends ILanguageService {
+	List<ICompletionProposal> getProposals(IEditorModel model, ITextViewer viewer, int offset);
 }

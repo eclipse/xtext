@@ -19,6 +19,8 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.service.IProposalsProvider;
+import org.eclipse.xtext.ui.service.IProposalsProvider;
+import org.eclipse.xtext.ui.service.IProposalsProvider.ICompletionContext;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -34,25 +36,20 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 		this.proposalProvider = proposalProvider;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.jface.text.contentassist.IContentAssistProcessor#
-	 * computeCompletionProposals(org.eclipse.jface.text.ITextViewer, int)
-	 */
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
-		List<ICompletionProposal> proposals = proposalProvider.getProposals(modelProvider.getModel(), viewer, offset);
-		if (proposals != null && !proposals.isEmpty())
-			return proposals.toArray(new ICompletionProposal[0]);
+		if (proposalProvider instanceof IProposalsProvider) {
+			IProposalsProvider proposalsProvider2 = (IProposalsProvider) proposalProvider;
+			ICompletionContext completionContext = proposalsProvider2.computeContext(modelProvider.getModel(), viewer, offset);
+			List<ICompletionProposal> proposals = proposalsProvider2.getProposals(completionContext);
+			List<ICompletionProposal> templateProposals = proposalsProvider2.getTemplateProposals(completionContext);
+			proposals.addAll(templateProposals);
+			
+			if (proposals != null && !proposals.isEmpty())
+				return proposals.toArray(new ICompletionProposal[0]);
+		}
 		return null;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.jface.text.contentassist.IContentAssistProcessor#
-	 * computeContextInformation(org.eclipse.jface.text.ITextViewer, int)
-	 */
+	
 	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
 		List<IContextInformation> retVal = new ArrayList<IContextInformation>();
 		for (ICompletionProposal proposal : proposalProvider.getProposals(modelProvider.getModel(), viewer, offset)) {
@@ -61,45 +58,20 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 		return retVal.toArray(new IContextInformation[0]);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.jface.text.contentassist.IContentAssistProcessor#
-	 * getCompletionProposalAutoActivationCharacters()
-	 */
 	public char[] getCompletionProposalAutoActivationCharacters() {
 		// TODO ask preference store
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.jface.text.contentassist.IContentAssistProcessor#
-	 * getContextInformationAutoActivationCharacters()
-	 */
 	public char[] getContextInformationAutoActivationCharacters() {
 		// TODO ask preference store
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.jface.text.contentassist.IContentAssistProcessor#
-	 * getContextInformationValidator()
-	 */
 	public IContextInformationValidator getContextInformationValidator() {
 		return new ContextInformationValidator(this);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.text.contentassist.IContentAssistProcessor#getErrorMessage
-	 * ()
-	 */
 	public String getErrorMessage() {
 		// TODO create error handler
 		return errorMessage;
