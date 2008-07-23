@@ -9,11 +9,16 @@
 
 package org.eclipse.xtext.ui.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.service.ISyntaxColorer;
 import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
+import org.eclipse.xtext.ui.service.utils.PropertiesResolver;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 
 /**
@@ -23,6 +28,8 @@ import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 public class BuiltInSyntaxColorer implements ISyntaxColorer {
 
 	private ITokenTypeDefProvider tokenTypeDef;
+	private Map<String, TextStyle> styleCache = new HashMap<String, TextStyle>();
+	private PropertiesResolver propertiesResolver;
 
 	/*
 	 * (non-Javadoc)
@@ -33,7 +40,14 @@ public class BuiltInSyntaxColorer implements ISyntaxColorer {
 	public TextStyle color(LeafNode leafNode) {
 		for (ITokenTypeDef ttd : tokenTypeDef.allTokenTypes()) {
 			if (ttd.match(leafNode)) {
-				return ttd.textStyleCopy();
+				String tokenTpeDefId = ttd.getId();
+				TextStyle ts = styleCache.get(tokenTpeDefId);
+				if (ts == null) {
+					ts = new TextStyle();
+					propertiesResolver.populateTextStyle(tokenTpeDefId, ts, ttd.defaultTextStyle());
+					styleCache.put(tokenTpeDefId, ts);
+				}
+				return ts;
 			}
 		}
 		return null;
@@ -44,4 +58,12 @@ public class BuiltInSyntaxColorer implements ISyntaxColorer {
 		this.tokenTypeDef = service;
 	}
 
+	@Inject
+	public void setServiceScope(IServiceScope serviceScope) {
+		propertiesResolver = new PropertiesResolver(serviceScope);
+	}
+
+	public void clearCache() {
+		styleCache.clear();
+	}
 }

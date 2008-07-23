@@ -11,7 +11,7 @@ package org.eclipse.xtext.xtext.ui.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.swt.SWT;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
@@ -50,9 +50,10 @@ public class XtextTokenTypeDef extends BuiltInTokenTypeDef {
 								.equals(node.getText()));
 			}
 		};
-		TextStyle ts = keyWordTokenType().textStyleCopy();
-		ts.setFontData(JFaceResources.getFontRegistry().getItalic(ts.getFontData()).toString());
-		ttd.setTextStyle(ts);
+//		TextStyle ts = keyWordTokenType().textStyleCopy();
+//		ts.setStyle(SWT.ITALIC);
+//		ttd.setTextStyle(ts);
+//		loadTextStyle(ttd);
 		return ttd;
 	}
 }

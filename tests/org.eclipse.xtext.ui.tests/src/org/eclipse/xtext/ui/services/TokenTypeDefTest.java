@@ -14,7 +14,6 @@ import org.eclipse.jface.preference.PreferenceStore;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
-import org.eclipse.xtext.ui.service.impl.BuiltInPreferenceStore;
 import org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 
@@ -42,12 +41,6 @@ public class TokenTypeDefTest extends AbstractServiceTest {
 		super.setUp();
 		IParseResult pr = getModelForDefaultLanguage(MODEL);
 		ttds = new BuiltInTokenTypeDef();
-		ttds.setPreferenceStore(new BuiltInPreferenceStore() {
-			@Override
-			public IPersistentPreferenceStore getPersitablePreferenceStore() {
-				return new PreferenceStore();
-			}
-		});
 		leafNodes = pr.getRootNode().getLeafNodes();
 	}
 

@@ -11,14 +11,13 @@ package org.eclipse.xtext.ui.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.editor.utils.TextStyleConstants;
-import org.eclipse.xtext.ui.service.IPreferenceStore;
 import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 import org.eclipse.xtext.ui.tokentype.TokenTypeDef;
@@ -29,7 +28,6 @@ import org.eclipse.xtext.ui.util.GrammarConstants;
  * 
  */
 public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
-	private IPreferenceStore preferenceStore;
 
 	public static final String KEYWORD_ID = "keyword";
 	public static final String SL_COMMENT_ID = "slComment";
@@ -37,20 +35,22 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 	public static final String STRING_ID = "string";
 	public static final String NUMBER_ID = "number";
 
-	private List<ITokenTypeDef> retVal;
+	private List<ITokenTypeDef> tokenTypeDefs;
 
 	public List<ITokenTypeDef> allTokenTypes() {
-		retVal = new ArrayList<ITokenTypeDef>();
-		retVal.add(commentTokenType());
-		retVal.add(mlCommentTokenType());
-		retVal.add(keyWordTokenType());
-		retVal.add(stringTokenType());
-		retVal.add(numberTokenType());
-		return retVal;
+		if (tokenTypeDefs == null) {
+			tokenTypeDefs = new ArrayList<ITokenTypeDef>();
+			tokenTypeDefs.add(commentTokenType());
+			tokenTypeDefs.add(mlCommentTokenType());
+			tokenTypeDefs.add(keyWordTokenType());
+			tokenTypeDefs.add(stringTokenType());
+			tokenTypeDefs.add(numberTokenType());
+		}
+		return tokenTypeDefs;
 	}
 
 	public ITokenTypeDef commentTokenType() {
-		TokenTypeDef slComment = new TokenTypeDef(SL_COMMENT_ID, "Single Line Comment") {
+		return new TokenTypeDef(SL_COMMENT_ID, "Single Line Comment") {
 			@Override
 			public boolean match(LeafNode node) {
 				if (node.getGrammarElement() instanceof LexerRule) {
@@ -58,13 +58,19 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 				}
 				return false;
 			}
+
+			@Override
+			public TextStyle defaultTextStyle() {
+				TextStyle textStyle = super.defaultTextStyle();
+				textStyle.setColor(TextStyleConstants.COMMENT_COLOR);
+				return textStyle;
+			}
 		};
-		calculateTextStyle(slComment, new TextStyle(TextStyleConstants.COMMENT_COLOR, null, null));
-		return slComment;
+
 	}
 
 	public ITokenTypeDef mlCommentTokenType() {
-		TokenTypeDef ttd = new TokenTypeDef(ML_COMMENT_ID) {
+		return new TokenTypeDef(ML_COMMENT_ID, "Multi Line Comment") {
 			@Override
 			public boolean match(LeafNode node) {
 				if (node.getGrammarElement() instanceof LexerRule) {
@@ -73,26 +79,36 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 				}
 				return false;
 			}
+
+			@Override
+			public TextStyle defaultTextStyle() {
+				TextStyle textStyle = super.defaultTextStyle();
+				textStyle.setColor(TextStyleConstants.MULTILINE_COMMENT_COLOR);
+				return textStyle;
+			}
 		};
-		ttd.setName("Multi Line Comment");
-		calculateTextStyle(ttd, new TextStyle(TextStyleConstants.MULTILINE_COMMENT_COLOR, null, null));
-		return ttd;
 	}
 
 	public TokenTypeDef keyWordTokenType() {
-		TokenTypeDef ttd = new TokenTypeDef(KEYWORD_ID) {
+		return new TokenTypeDef(KEYWORD_ID, "Keyword") {
 			@Override
 			public boolean match(LeafNode node) {
 				return node.getGrammarElement() instanceof Keyword;
 			}
+
+			@Override
+			public TextStyle defaultTextStyle() {
+				TextStyle textStyle = super.defaultTextStyle();
+				textStyle.setColor(TextStyleConstants.KEYWORD_COLOR);
+				textStyle.setStyle(SWT.BOLD);
+				return textStyle;
+			}
 		};
-		ttd.setName("Keyword");
-		calculateTextStyle(ttd, new TextStyle(TextStyleConstants.KEYWORD_COLOR, null, null));
-		return ttd;
 	}
 
 	public ITokenTypeDef stringTokenType() {
-		TokenTypeDef ttd = new TokenTypeDef(STRING_ID) {
+		return new TokenTypeDef(STRING_ID, "String") {
+
 			@Override
 			public boolean match(LeafNode node) {
 				if (node.getGrammarElement() instanceof RuleCall) {
@@ -100,14 +116,18 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 				}
 				return false;
 			}
+
+			@Override
+			public TextStyle defaultTextStyle() {
+				TextStyle textStyle = super.defaultTextStyle();
+				textStyle.setColor(TextStyleConstants.STRING_COLOR);
+				return textStyle;
+			}
 		};
-		ttd.setName("String");
-		calculateTextStyle(ttd, new TextStyle(TextStyleConstants.STRING_COLOR, null, null));
-		return ttd;
 	}
 
 	public ITokenTypeDef numberTokenType() {
-		TokenTypeDef ttd = new TokenTypeDef(NUMBER_ID) {
+		return new TokenTypeDef(NUMBER_ID, "Number") {
 			@Override
 			public boolean match(LeafNode node) {
 				if (node.getGrammarElement() instanceof RuleCall) {
@@ -115,58 +135,14 @@ public class BuiltInTokenTypeDef implements ITokenTypeDefProvider {
 				}
 				return false;
 			}
+
+			@Override
+			public TextStyle defaultTextStyle() {
+				TextStyle textStyle = super.defaultTextStyle();
+				textStyle.setColor(TextStyleConstants.NUMBER_COLOR);
+				return textStyle;
+			}
 		};
-		ttd.setName("Number");
-		calculateTextStyle(ttd, new TextStyle(TextStyleConstants.NUMBER_COLOR, null, null));
-		return ttd;
-	}
-
-	protected void calculateTextStyle(TokenTypeDef tokenType, TextStyle textStyle) {
-		tokenType.setTextStyle(new TextStyle(getColorForTokenType(tokenType.getId(), textStyle.getColor()),
-				getBackgroundColorForTokenType(tokenType.getId(), textStyle.getBackgroundColor()), getFontForTokenType(
-						tokenType.getId(), textStyle.getFontData())));
-	}
-
-	// TODO set defaults somewhere else if possible, or check if a default
-
-	private org.eclipse.jface.preference.IPreferenceStore getPreferenceStore() {
-		return preferenceStore.getPersitablePreferenceStore();
-	}
-
-	private String getFontForTokenType(String tokenType, String defaultFont) {
-		String tokenFontPreferenceKey = getBuiltInPreferenceStore().getTokenFontPreferenceKey(tokenType);
-		if (defaultFont != null)
-			getPreferenceStore().setDefault(tokenFontPreferenceKey, defaultFont);
-		return getPreferenceStore().getString(tokenFontPreferenceKey);
-	}
-
-	private String getBackgroundColorForTokenType(String tokenType, String defaultBackgroundColor) {
-		String tokenBackgroundColorPreferenceKey = getBuiltInPreferenceStore().getTokenBackgroundColorPreferenceKey(
-				tokenType);
-		if (defaultBackgroundColor != null)
-			getPreferenceStore()
-					.setDefault(getBuiltInPreferenceStore().getTokenBackgroundColorPreferenceKey(tokenType),
-							defaultBackgroundColor);
-		String rgbString = getPreferenceStore().getString(tokenBackgroundColorPreferenceKey);
-		return rgbString;
-	}
-
-	private String getColorForTokenType(String tokenType, String defaultColor) {
-		String preferenceKey = getBuiltInPreferenceStore().getTokenColorPreferenceKey(tokenType);
-		if (defaultColor != null)
-			getPreferenceStore().setDefault(getBuiltInPreferenceStore().getTokenColorPreferenceKey(tokenType),
-					defaultColor);
-		String rgbString = getPreferenceStore().getString(preferenceKey);
-		return rgbString;
-	}
-
-	protected BuiltInPreferenceStore getBuiltInPreferenceStore() {
-		return (BuiltInPreferenceStore) preferenceStore;
-	}
-
-	@Inject
-	public void setPreferenceStore(IPreferenceStore iPreferenceStore) {
-		this.preferenceStore = iPreferenceStore;
 	}
 
 }

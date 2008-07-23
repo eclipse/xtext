@@ -17,6 +17,7 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -28,7 +29,6 @@ import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
-import org.eclipse.xtext.ui.editor.utils.TextStyleConstants;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.service.ISyntaxColorer;
@@ -90,11 +90,20 @@ public class XtextTokenScanner implements ITokenScanner {
 		// we need difference to an default TextAttribute(null,null,0,null) in
 		// DefaultDamagerRepair
 		if (textStyle == null) {
-			return new TextAttribute(EditorUtils.colorFromString(TextStyleConstants.DEFAULT_COLOR));
+			return new TextAttribute(null, null, 0, null) {
+				@Override
+				public boolean equals(Object object) {
+					return false;
+				}
+			};
 		}
-		return new TextAttribute(EditorUtils.colorFromString(textStyle.getColor()), EditorUtils
-				.colorFromString(textStyle.getBackgroundColor()), SWT.NONE, EditorUtils.fontFromFontData(textStyle
-				.getFontData()));
+		int style = textStyle.getStyle();
+		Font fontFromFontData = null;
+		if (style == SWT.NORMAL) {
+			fontFromFontData = EditorUtils.fontFromFontData(textStyle.getFontData());
+		}
+		return new TextAttribute(EditorUtils.colorFromRGB(textStyle.getColor()), EditorUtils.colorFromRGB(textStyle
+				.getBackgroundColor()), style, fontFromFontData);
 	}
 
 	public void setRange(IDocument document, int offset, int length) {

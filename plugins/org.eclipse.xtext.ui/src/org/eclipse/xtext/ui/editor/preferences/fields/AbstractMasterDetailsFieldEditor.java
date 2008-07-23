@@ -21,7 +21,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.List;
-import org.eclipse.xtext.ui.editor.preferences.PreferencesQualifiedName;
+import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 import org.eclipse.xtext.ui.tokentype.ITokenTypeDef;
 
 /**
@@ -147,8 +147,8 @@ public abstract class AbstractMasterDetailsFieldEditor extends FieldEditor {
 		getMasterList(parent).setEnabled(enabled);
 	}
 
-	private PreferencesQualifiedName calculateClientPreferencePrefix() {
-		return PreferencesQualifiedName.parse(getPreferenceName()).append(identifier(selectedObject()));
+	private String calculateClientPreferencePrefix() {
+		return getPreferenceName() + PreferenceConstants.SEPARATOR + identifier(selectedObject());
 	}
 
 	/**

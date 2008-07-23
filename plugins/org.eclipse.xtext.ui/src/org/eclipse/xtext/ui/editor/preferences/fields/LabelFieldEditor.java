@@ -9,10 +9,12 @@
 package org.eclipse.xtext.ui.editor.preferences.fields;
 
 import org.eclipse.jface.preference.FieldEditor;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
-public final class LabelField extends FieldEditor {
-	public LabelField(String labelText, Composite parent) {
+public final class LabelFieldEditor extends FieldEditor {
+
+	public LabelFieldEditor(String labelText, Composite parent) {
 		super("label", labelText, parent);
 	}
 
@@ -35,10 +37,13 @@ public final class LabelField extends FieldEditor {
 
 	@Override
 	protected void doFillIntoGrid(Composite parent, int numColumns) {
-		getLabelControl(parent);
+		getLabelControl(parent).setLayoutData(new GridData());
 	}
 
 	@Override
 	protected void adjustForNumColumns(int numColumns) {
+		GridData gd = (GridData) getLabelControl().getLayoutData();
+		gd.horizontalSpan = numColumns;
+
 	}
 }

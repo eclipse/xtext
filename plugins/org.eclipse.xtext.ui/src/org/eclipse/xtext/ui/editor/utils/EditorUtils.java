@@ -24,8 +24,9 @@ import org.eclipse.xtext.ui.internal.CoreLog;
  */
 public class EditorUtils {
 
-	public static Font fontFromFontData(String fontData) {
-		if (fontData != null && fontData.trim().length() > 0) {
+	public static Font fontFromFontData(FontData[] fontDataArray) {
+		if (fontDataArray != null && fontDataArray.length > 0) {
+			String fontData = PreferenceConverter.getStoredRepresentation(fontDataArray);
 			if (!JFaceResources.getFontRegistry().hasValueFor(fontData)) {
 				FontData[] fData = PreferenceConverter.basicGetFontData(fontData);
 				JFaceResources.getFontRegistry().put(fontData, fData);
@@ -33,6 +34,7 @@ public class EditorUtils {
 			Font font = JFaceResources.getFontRegistry().get(fontData);
 			return font;
 		}
+		;
 		return null;
 	}
 
@@ -54,4 +56,9 @@ public class EditorUtils {
 		return null;
 	}
 
+	public static Color colorFromRGB(RGB rgb) {
+		if (rgb == null)
+			return null;
+		return colorFromString(StringConverter.asString(rgb));
+	}
 }

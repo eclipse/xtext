@@ -16,8 +16,6 @@ import org.eclipse.xtext.service.ILanguageService;
  * 
  */
 public interface IPreferenceStore extends ILanguageService {
-	public static final String SYNTAX_COLORER_PREFERENCE_TAG = "syntaxColorer";
-	public static final String TOKEN_STYLES_PREFERENCE_TAG = "tokenStyles";
 
 	IPersistentPreferenceStore getPersitablePreferenceStore();
 }

@@ -12,6 +12,8 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+import junit.framework.TestCase;
+
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.eclipse.xtext.Grammar;
@@ -20,8 +22,6 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
-
-import junit.framework.TestCase;
 
 /**
  * @author Dennis Hübner - Initial contribution and API

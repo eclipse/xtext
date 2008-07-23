@@ -86,13 +86,6 @@
       </tokenTypeDef>
    </extension>
    <extension
-         point="org.eclipse.xtext.ui.preferenceStore">
-      <preferenceStore
-            class="org.eclipse.xtext.ui.service.impl.BuiltInPreferenceStore"
-            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
-      </preferenceStore>
-   </extension>
-   <extension
          point="org.eclipse.xtext.ui.outlineProvider">
       <outlineProvider
             class="org.eclipse.xtext.ui.service.impl.BuiltInOutlineProvider"
@@ -140,4 +133,5 @@
             class="org.eclipse.xtext.ui.service.utils.XtextServiceRegistrationFactory">
       </serviceRegistrationFactory>
    </extension>
+   
 </plugin>

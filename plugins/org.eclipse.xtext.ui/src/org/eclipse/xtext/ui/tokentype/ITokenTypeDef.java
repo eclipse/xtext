@@ -26,11 +26,8 @@ public interface ITokenTypeDef {
 	 */
 	String getName();
 
-	/**
-	 * @return a clone of textStyle used for this TokenTypeDef
-	 */
-	TextStyle textStyleCopy();
-
 	boolean match(LeafNode node);
+
+	TextStyle defaultTextStyle();
 
 }

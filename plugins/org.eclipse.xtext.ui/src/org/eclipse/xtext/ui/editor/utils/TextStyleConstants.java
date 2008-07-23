@@ -8,23 +8,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.utils;
 
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.swt.graphics.RGB;
+
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
 public class TextStyleConstants {
 
-	public final static String DEFAULT_COLOR = "0,0,0";
-	public final static String DEFAULT_BACKGROUNDCOLOR = "255,255,255";
-	public static final String DEFAULT_FONT = null;
+	public final static RGB DEFAULT_COLOR = new RGB(0, 0, 0);
+	public final static RGB DEFAULT_BACKGROUNDCOLOR = new RGB(255, 255, 255);
+	public static final String DEFAULT_FONT_NAME = JFaceResources.TEXT_FONT;
 
-	public final static String KEYWORD_COLOR = "127, 0, 85";
+	public final static RGB KEYWORD_COLOR = new RGB(127, 0, 85);
 
-	public final static String COMMENT_COLOR = "63, 127, 95";
+	public final static RGB COMMENT_COLOR = new RGB(63, 127, 95);
+	public final static RGB STRING_COLOR = new RGB(42, 0, 255);
 
-	public final static String STRING_COLOR = "42, 0, 255";
-
-	public final static String NUMBER_COLOR = "125,125,125";
-	public static final String MULTILINE_COMMENT_COLOR = "33, 97, 65";
+	public final static RGB NUMBER_COLOR = new RGB(125, 125, 125);
+	public static final RGB MULTILINE_COMMENT_COLOR = new RGB(33, 97, 65);
 
 }
