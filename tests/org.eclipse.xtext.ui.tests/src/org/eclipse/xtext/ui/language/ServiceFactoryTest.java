@@ -11,8 +11,8 @@ package org.eclipse.xtext.ui.language;
 import junit.framework.TestCase;
 
 import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.ui.service.ISyntaxColorer;
 
 /**
@@ -30,15 +30,21 @@ public class ServiceFactoryTest extends TestCase {
 	}
 
 	public void testGetServiceWithoutClass() {
-		IServiceScope language = ServiceScopeFactory.createScope(
-				"org.eclipse.xtexte.ui.tests.language.ServiceWithoutClass", null);
-		ISyntaxColorer syntaxColorer = null;
 		try {
-			syntaxColorer = ServiceRegistry.getService(language, ISyntaxColorer.class);
+			IServiceScope language = ServiceScopeFactory.createScope(
+					"org.eclipse.xtexte.ui.tests.language.ServiceWithoutClass", null);
+			ISyntaxColorer syntaxColorer = null;
+			try {
+				syntaxColorer = ServiceRegistry.getService(language, ISyntaxColorer.class);
+			}
+			catch (IllegalStateException ise) {
+			}
+			assertNull(syntaxColorer);
 		}
-		catch (IllegalStateException ise) {
+		catch (IllegalArgumentException iae) {
+			// Test throws an exception if run twice within the same eclipse instance 
 		}
-		assertNull(syntaxColorer);
+
 	}
 
 }

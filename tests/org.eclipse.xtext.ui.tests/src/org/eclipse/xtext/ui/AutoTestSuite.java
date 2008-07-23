@@ -12,7 +12,7 @@ public class AutoTestSuite {
 
 	public static Test suite() {
 		TestSuite suite = new TestSuite("org.eclipse.xtext.ui.tests");
-		//suite.addTestSuite(org.eclipse.xtext.ui.editor.EditorTest.class);
+		suite.addTestSuite(org.eclipse.xtext.ui.editor.EditorTest.class);
 		suite.addTestSuite(org.eclipse.xtext.ui.language.LanguageFactoryTest.class);
 		suite.addTestSuite(org.eclipse.xtext.ui.language.ReferenceGrammarTest.class);
 		suite.addTestSuite(org.eclipse.xtext.ui.language.ServiceFactoryTest.class);
