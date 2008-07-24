@@ -11,7 +11,6 @@ package org.eclipse.xtext.ui.editor.preferences.fields;
 import org.eclipse.jface.preference.ColorFieldEditor;
 import org.eclipse.jface.preference.FontFieldEditor;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.preference.RadioGroupFieldEditor;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
@@ -25,16 +24,55 @@ public class TokenTypeDefDetailsPart extends AbstractDetailsPart {
 	@Override
 	protected void createFieldEditors() {
 		{
+			// Foreground
 			addField(new ColorFieldEditor(PreferenceConstants.COLOR_SUFIX, "Color", getFieldEditorParent()));
+
+			// Background
 			addField(new ColorFieldEditor(PreferenceConstants.BACKGROUNDCOLOR_SUFIX, "Background",
 					getFieldEditorParent()));
-			// TODO change this group to checkboxgroup to allow combined styles
-			// Italic&Bold a.s.o
-			addField(new RadioGroupFieldEditor(PreferenceConstants.STYLE_SUFIX, "Style", 2, new String[][] {
+			// Style
+			// TODO extract a FontStyleCheckBoxGroupFieldEditor
+			addField(new CheckBoxGroupFieldEditor(PreferenceConstants.STYLE_SUFIX, "Style", 2, new String[][] {
 					{ "Italic", String.valueOf(SWT.ITALIC) }, { "Bold", String.valueOf(SWT.BOLD) },
 					{ "Underline", String.valueOf(TextAttribute.UNDERLINE) },
-					{ "Strike through", String.valueOf(TextAttribute.STRIKETHROUGH) },
-					{ "Use Font Style", String.valueOf(SWT.NORMAL) } }, getFieldEditorParent(), true));
+					{ "Strike through", String.valueOf(TextAttribute.STRIKETHROUGH) }, }, getFieldEditorParent(), true) {
+				protected String calculateResult(String[][] settings) {
+					int result = SWT.NORMAL;
+					for (int i = 0; i < settings.length; i++) {
+						String[] row = settings[i];
+						String value = row[1];
+						String checked = row[2];
+						if (Boolean.valueOf(checked)) {
+							result += Integer.valueOf(value);
+						}
+					}
+					return String.valueOf(result);
+				}
+
+				@Override
+				protected boolean isSelected(String fieldName, String valueToSet) {
+					int value = SWT.NORMAL;
+					try {
+						value = Integer.valueOf(valueToSet);
+					}
+					catch (NumberFormatException nfe) {
+						// ignore preference value
+						return false;
+					}
+					if (value == SWT.NORMAL)
+						return false;
+					if (fieldName.equals("Italic"))
+						return (value & SWT.ITALIC) == SWT.ITALIC;
+					else if (fieldName.equals("Bold"))
+						return (value & SWT.BOLD) == SWT.BOLD;
+					else if (fieldName.equals("Underline"))
+						return (value & TextAttribute.UNDERLINE) == TextAttribute.UNDERLINE;
+					else if (fieldName.equals("Strike through"))
+						return (value & TextAttribute.STRIKETHROUGH) == TextAttribute.STRIKETHROUGH;
+					return false;
+				}
+			});
+			// Font
 			addField(new FontFieldEditor(PreferenceConstants.FONT_SUFIX, "Font", getFieldEditorParent()));
 		}
 	}

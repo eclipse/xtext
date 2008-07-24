@@ -9,7 +9,11 @@
 package org.eclipse.xtext.ui.service.utils;
 
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.ui.editors.text.EditorsUI;
+import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
@@ -37,14 +41,26 @@ public class PropertiesResolver {
 		String backgroundKey = PREFERENCE_TAG + PreferenceConstants.getTokenBackgroundColorPreferenceKey(tokenTpeDefId);
 		String fontKey = PREFERENCE_TAG + PreferenceConstants.getTokenFontPreferenceKey(tokenTpeDefId);
 		String styleKey = PREFERENCE_TAG + PreferenceConstants.getTokenStylePreferenceKey(tokenTpeDefId);
-
+		// TODO handle texteditor system default is set
 		// Defaults
+		IPreferenceStore editorsStore = EditorsUI.getPreferenceStore();
 		if (defaults.getColor() != null)
 			PreferenceConverter.setDefault(getPreferenceStore(), colorKey, defaults.getColor());
+		else
+			PreferenceConverter.setDefault(getPreferenceStore(), colorKey, PreferenceConverter.getColor(editorsStore,
+					TextEditor.PREFERENCE_COLOR_FOREGROUND));
+
 		if (defaults.getBackgroundColor() != null)
 			PreferenceConverter.setDefault(getPreferenceStore(), backgroundKey, defaults.getBackgroundColor());
+		else
+			PreferenceConverter.setDefault(getPreferenceStore(), backgroundKey, PreferenceConverter.getColor(
+					editorsStore, TextEditor.PREFERENCE_COLOR_BACKGROUND));
+
 		if (defaults.getFontData() != null)
 			PreferenceConverter.setDefault(getPreferenceStore(), fontKey, defaults.getFontData());
+		else
+			PreferenceConverter.setDefault(getPreferenceStore(), fontKey, JFaceResources.getTextFont().getFontData());
+
 		getPreferenceStore().setDefault(styleKey, defaults.getStyle());
 
 		// populate
