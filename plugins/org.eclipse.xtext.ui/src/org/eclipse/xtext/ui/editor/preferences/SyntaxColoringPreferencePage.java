@@ -43,9 +43,10 @@ public class SyntaxColoringPreferencePage extends AbstractPreferencePage {
 	 * @param allTokenTypes
 	 */
 	private void refreshTokenStyles(List<ITokenTypeDef> allTokenTypes) {
+		PropertiesResolver propertiesResolver = new PropertiesResolver(getServiceScope());
 		for (ITokenTypeDef tokenTypeDef : allTokenTypes) {
-			new PropertiesResolver(getServiceScope()).populateTextStyle(tokenTypeDef.getId(), new TextStyle(),
-					tokenTypeDef.defaultTextStyle());
+			propertiesResolver
+					.populateTextStyle(tokenTypeDef.getId(), new TextStyle(), tokenTypeDef.defaultTextStyle());
 		}
 	}
 
