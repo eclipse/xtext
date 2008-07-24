@@ -9,9 +9,7 @@
 package org.eclipse.xtext.parser.antlr;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.Token;
@@ -26,7 +24,7 @@ public class XtextTokenStream extends CommonTokenStream {
 
 	private List<Token> lookaheadTokens = new ArrayList<Token>();
 
-	private Map<Token, String> tokenErrorMap = new HashMap<Token, String>();
+//	private Map<Token, String> tokenErrorMap = new HashMap<Token, String>();
 
 	public XtextTokenStream() {
 		super();
