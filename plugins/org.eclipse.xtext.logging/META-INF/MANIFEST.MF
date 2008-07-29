@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Logging Plug-in
+Bundle-SymbolicName: org.eclipse.xtext.logging;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: org.eclipse.xtext.logging.Activator
+Bundle-Vendor: itemis AG
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext.log4j;bundle-version="1.2.8"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
