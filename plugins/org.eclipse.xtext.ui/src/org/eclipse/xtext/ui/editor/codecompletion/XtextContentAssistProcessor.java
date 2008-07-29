@@ -19,7 +19,6 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.service.IProposalsProvider;
-import org.eclipse.xtext.ui.service.IProposalsProvider;
 import org.eclipse.xtext.ui.service.IProposalsProvider.ICompletionContext;
 
 /**
