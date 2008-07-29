@@ -8,8 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.preferences;
 
-import org.eclipse.jface.text.templates.ContextTypeRegistry;
-import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.texteditor.templates.TemplatePreferencePage;
