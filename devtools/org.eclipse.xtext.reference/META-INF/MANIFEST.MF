@@ -11,5 +11,7 @@ Export-Package: org.eclipse.xtext.reference,
  org.eclipse.xtext.reference.parsetree.reconstr,
  org.eclipse.xtext.reference.services
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;bundle-version="1.0.0",
+Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
+ org.eclipse.xtext;bundle-version="1.0.0",
  org.eclipse.xtext.generator;bundle-version="1.0.0"
+Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
