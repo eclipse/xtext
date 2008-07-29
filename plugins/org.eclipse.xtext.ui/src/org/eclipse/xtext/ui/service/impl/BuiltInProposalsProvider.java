@@ -12,17 +12,27 @@ import java.util.List;
 
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.ui.editors.text.templates.ContributionContextTypeRegistry;
 import org.eclipse.xtext.ui.editor.model.IEditorModel;
-import org.eclipse.xtext.ui.service.IProposalsProvider0;
 
 /**
  * @author Peter Friese - Initial contribution and API
  *
  */
-public class BuiltInProposalsProvider implements IProposalsProvider0 {
-    
-    public List<ICompletionProposal> getProposals(IEditorModel model, ITextViewer viewer, int offset) {
-        return null;
-    }
+public class BuiltInProposalsProvider extends AbstractProposalsProvider {
 
+	@Override
+	public ICompletionContext computeContext(IEditorModel model, ITextViewer viewer, int offset) {
+		return null;
+	}
+
+	@Override
+	public List<ICompletionProposal> getProposals(ICompletionContext context) {
+		return null;
+	}
+
+	@Override
+	protected void registerContextTypes(ContributionContextTypeRegistry registry) {
+	}
+	
 }

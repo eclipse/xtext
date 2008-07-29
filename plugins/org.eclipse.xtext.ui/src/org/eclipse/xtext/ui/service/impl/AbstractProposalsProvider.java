@@ -87,7 +87,7 @@ public abstract class AbstractProposalsProvider implements IProposalsProvider {
 		return matches;
 	}
 
-	public List<ICompletionProposal> getProposals(IEditorModel model, ITextViewer viewer, int offset) {
+	public final List<ICompletionProposal> getAllProposals(IEditorModel model, ITextViewer viewer, int offset) {
 		ICompletionContext completionContext = computeContext(model, viewer, offset);
 		return getProposals(completionContext);
 	}

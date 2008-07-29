@@ -51,7 +51,7 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	
 	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
 		List<IContextInformation> retVal = new ArrayList<IContextInformation>();
-		for (ICompletionProposal proposal : proposalProvider.getProposals(modelProvider.getModel(), viewer, offset)) {
+		for (ICompletionProposal proposal : proposalProvider.getAllProposals(modelProvider.getModel(), viewer, offset)) {
 			retVal.add(proposal.getContextInformation());
 		}
 		return retVal.toArray(new IContextInformation[0]);
