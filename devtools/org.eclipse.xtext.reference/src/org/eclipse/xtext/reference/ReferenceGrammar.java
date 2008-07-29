@@ -1,6 +1,7 @@
 package org.eclipse.xtext.reference;
 
 import java.io.IOException;
+import org.apache.log4j.Logger;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -18,6 +19,8 @@ import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
  * @author Peter Friese
  */
 public class ReferenceGrammar {
+	private Logger log = Logger.getLogger(ReferenceGrammar.class);
+	
     private static final String PATH = "src-gen";
     private static final String UI_PATH = "../org.eclipse.xtext.reference.ui_gen";
 
@@ -27,14 +30,14 @@ public class ReferenceGrammar {
         GeneratorFacade.cleanFolder(PATH);
 
         String classpathUri = "classpath:/"+getClass().getName().replace('.', '/') + ".xtext";
-        System.out.println("loading " + classpathUri);
+        log.info("loading " + classpathUri);
         ResourceSet rs = new ResourceSetImpl();
         Resource resource = rs.createResource(new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(classpathUri)));
         resource.load(null);
         Grammar grammarModel = (Grammar) resource.getContents().get(0);
 
         GeneratorFacade.generate(grammarModel, PATH, UI_PATH, "xtest", "tst");
-        System.out.println("Done.");
+        log.info("Done.");
     }
 
     public static void main(String[] args) throws IOException {

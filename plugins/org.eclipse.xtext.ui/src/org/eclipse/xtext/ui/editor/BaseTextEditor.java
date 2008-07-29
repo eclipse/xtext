@@ -61,7 +61,6 @@ import org.eclipse.xtext.ui.editor.model.XtextDocumentProviderFactory;
 import org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 import org.eclipse.xtext.ui.internal.Activator;
-import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.service.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.service.ISyntaxColorer;
 import org.eclipse.xtext.ui.service.impl.BuiltInSyntaxColorer;
@@ -70,7 +69,6 @@ import org.eclipse.xtext.ui.service.utils.PropertiesResolver;
 /**
  * @author Dennis Huebner - Initial contribution and API
  * @author Peter Friese - Initial contribution and API
- * 
  */
 public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 
@@ -212,7 +210,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 			}
 		}
 	}
-
+	
 	public void synchronizeOutlinePage() {
 		int caretOffset = getSourceViewer().getTextWidget().getCaretOffset();
 		AbstractNode currentNode = ParseTreeUtil.getLastCompleteNodeByOffset(model.getParseTreeRootNode(), caretOffset);
@@ -240,7 +238,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		}
 	}
 
-	Logger logger = Logger.getLogger(BaseTextEditor.class);
+	private static final Logger log = Logger.getLogger(BaseTextEditor.class);
 
 	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
 
@@ -279,7 +277,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 
 		}
 		else {
-			CoreLog.logError(XtextUIMessages.getFormattedString("BaseTextEditor.NoLanguageDescriptor", //$NON-NLS-1$
+			log.error(XtextUIMessages.getFormattedString("BaseTextEditor.NoLanguageDescriptor", //$NON-NLS-1$
 					this.getConfigurationElement().getNamespaceIdentifier()), new IllegalStateException());
 		}
 	}
@@ -287,7 +285,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
-		logger.warn("Initializing Xtext basic text editor.");
+		log.warn("Initializing Xtext basic text editor.");
 		
 		// Error marker
 		IResource resource = getResource();
