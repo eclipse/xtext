@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -29,7 +30,6 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.editor.model.IEditorModel;
 import org.eclipse.xtext.ui.internal.Activator;
-import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.service.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.util.GrammarConstants;
 
@@ -38,6 +38,8 @@ import org.eclipse.xtext.ui.util.GrammarConstants;
  * 
  */
 public class BuiltInFoldingStructureProvider implements IFoldingStructureProvider {
+	
+	private static final Logger log = Logger.getLogger(BuiltInFoldingStructureProvider.class);
 
 	@SuppressWarnings("unchecked")
 	public final void updateFoldingStructure(IEditorModel model, ProjectionViewer projectionViewer) {
@@ -123,7 +125,7 @@ public class BuiltInFoldingStructureProvider implements IFoldingStructureProvide
 			return new Position(start, length);
 		}
 		catch (BadLocationException e) {
-			CoreLog.logError(e);
+			log.error("Error when calculating position.", e);
 		}
 		throw new IllegalStateException();
 	}

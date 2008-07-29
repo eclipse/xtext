@@ -8,17 +8,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
-import org.eclipse.xtext.ui.internal.CoreLog;
 
 /**
  * @author Peter Friese - Initial contribution and API
  * 
  */
 public class XtextEditorModelReconcileStrategy implements IReconcilingStrategy {
+	
+	private static final Logger log = Logger.getLogger(XtextEditorModelReconcileStrategy.class);
 
 	private final IEditorModelProvider editorModelProvider;
 
@@ -34,7 +36,7 @@ public class XtextEditorModelReconcileStrategy implements IReconcilingStrategy {
 			}
 		}
 		catch (Throwable t) {
-			CoreLog.logError(t);
+			log.error("Reconciling failed. " + t);
 		}
 	}
 

@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.utils;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jface.resource.DataFormatException;
 import org.eclipse.jface.resource.JFaceResources;
@@ -16,13 +17,14 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
-import org.eclipse.xtext.ui.internal.CoreLog;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
 public class EditorUtils {
+	
+	private static final Logger log = Logger.getLogger(EditorUtils.class);
 
 	public static Font fontFromFontData(FontData[] fontDataArray) {
 		if (fontDataArray != null && fontDataArray.length > 0) {
@@ -49,7 +51,7 @@ public class EditorUtils {
 				}
 			}
 			catch (DataFormatException e) {
-				CoreLog.logError("Corrupt color value: " + rgbString, e);
+				log.error("Corrupt color value: " + rgbString, e);
 			}
 			return col;
 		}

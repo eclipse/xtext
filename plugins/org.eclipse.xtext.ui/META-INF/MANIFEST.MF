@@ -3,7 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtext UI
 Bundle-SymbolicName: org.eclipse.xtext.ui;singleton:=true
 Bundle-Version: 1.0.0
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reexport,
+Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
+ org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="3.4.0";visibility:=reexport,
  org.eclipse.ui;bundle-version="3.4.0";visibility:=reexport,
  org.eclipse.ui.editors;bundle-version="3.4.0";visibility:=reexport,
@@ -13,12 +14,10 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.eclipse.ui.views;bundle-version="3.3.0",
  org.eclipse.emf.ecore.edit;bundle-version="2.3.1",
  org.eclipse.emf.edit.ui;bundle-version="2.3.1",
- org.apache.commons.logging;bundle-version="1.0.4",
  org.eclipse.xtext.service.ui;bundle-version="1.0.0";visibility:=reexport,
  org.eclipse.ui.workbench.texteditor;bundle-version="3.4.0",
  org.eclipse.xtext.util;bundle-version="1.0.0",
- org.eclipse.jdt.core;bundle-version="3.4.0",
- org.eclipse.xtext.log4j;bundle-version="1.2.15"
+ org.eclipse.jdt.core;bundle-version="3.4.0"
 Bundle-Activator: org.eclipse.xtext.ui.internal.Activator
 Export-Package: org.eclipse.xtext.ui.editor,
  org.eclipse.xtext.ui.editor.codecompletion,

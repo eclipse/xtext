@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.service.utils;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExecutableExtension;
@@ -18,7 +19,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.service.ServiceScopeFactory;
-import org.eclipse.xtext.ui.internal.CoreLog;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -26,7 +26,9 @@ import org.eclipse.xtext.ui.internal.CoreLog;
  */
 public class XtextServiceExtensionFactory implements IExecutableExtensionFactory, IExecutableExtension {
 
-    private String id;
+    private static final Logger log = Logger.getLogger(XtextServiceExtensionFactory.class);
+	
+	private String id;
     private IConfigurationElement config;
     private String propertyName;
     private String extensionClassName;
@@ -75,13 +77,13 @@ public class XtextServiceExtensionFactory implements IExecutableExtensionFactory
             extensionInstance = extensionClass.newInstance();
         }
         catch (ClassNotFoundException e) {
-            CoreLog.logError(e);
+        	log.error("Could not instantiate delegate. Class not found.", e);
         }
         catch (InstantiationException e) {
-            CoreLog.logError(e);
+        	log.error("Could not instantiate delegate. Class could not be instantiated.", e);
         }
         catch (IllegalAccessException e) {
-            CoreLog.logError(e);
+        	log.error("Could not instantiate delegate. Illegal access.", e);
         }
 
         return extensionInstance;
