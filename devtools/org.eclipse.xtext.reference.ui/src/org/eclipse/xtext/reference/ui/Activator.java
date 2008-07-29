@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.reference.ui;
 
+import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -15,6 +16,8 @@ import org.osgi.framework.BundleContext;
  * The activator class controls the plug-in life cycle
  */
 public class Activator extends AbstractUIPlugin {
+	
+	Logger logger = Logger.getLogger(Activator.class);
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.eclipse.xtext.reference.ui";
@@ -38,6 +41,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		setDefault(this);
+		logger.debug("Starting reference activator: " + this.getClass().getName());
 	}
 
 	/*

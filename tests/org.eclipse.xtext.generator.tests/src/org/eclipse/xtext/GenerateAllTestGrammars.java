@@ -8,8 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -34,7 +33,8 @@ import org.eclipse.xtext.testlanguages.TestLanguage;
  */
 public class GenerateAllTestGrammars {
 	private static String path = "./src-gen";
-	private static Log log = LogFactory.getLog(GenerateAllTestGrammars.class);
+	
+	private static Logger log = Logger.getLogger(GenerateAllTestGrammars.class);
 
 	public final static Class<?>[] testclasses = new Class[] { AbstractTestLanguage.class,ConcreteTestLanguage.class,XtextGrammarTest.class, MetamodelRefTest.class,
 			DummyLanguage.class, TestLanguage.class, SimpleReconstrTest.class, ComplexReconstrTest.class,
