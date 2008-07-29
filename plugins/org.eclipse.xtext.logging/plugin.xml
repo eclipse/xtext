@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="loggermap" name="loggermap" schema="schema/loggermap.exsd"/>
+   
+  <extension
+        point="org.eclipse.xtext.logging.loggermap">
+     <mapentry
+           bundleId="org.eclipse.xtext"
+           loggername="org\.eclipse\.xtext\..*">
+     </mapentry>
+     <mapentry
+            bundleId="org.eclipse.xtext.reference.ui"
+           loggername="org\.eclipse\.xtext\.reference\.ui\..*">
+     </mapentry>
+      <mapentry
+            bundleId="org.eclipse.xtext.ui"
+            loggername="org\.eclipse\.xtext\.ui\..*">
+      </mapentry>
+  </extension>
+   
+
+</plugin>
