@@ -9,6 +9,7 @@
 
 package org.eclipse.xtext.reference.ui.services.contentassist;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -33,6 +34,8 @@ import org.eclipse.xtext.reference.ui.Activator;
  */
 public class XtextCompletionProposal implements ICompletionProposal, ICompletionProposalExtension2,
 		ICompletionProposalExtension6 {
+	
+	Logger logger = Logger.getLogger(XtextCompletionProposal.class);
 
 	private final Proposal proposal;
 	private final int offset;
@@ -40,6 +43,7 @@ public class XtextCompletionProposal implements ICompletionProposal, ICompletion
 	private Image image;
 
 	public XtextCompletionProposal(Proposal proposal, int offset) {
+		logger.debug("creating proposal: " + proposal.getLabel());
 		this.proposal = proposal;
 		this.offset = offset;
 		if (proposal.getLabel() != null) {

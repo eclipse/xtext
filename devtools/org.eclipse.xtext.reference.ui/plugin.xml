@@ -62,5 +62,4 @@ kind (${kind2} ${kind2Alter})
             name="Templates">
         </page>
       </extension>
-   
 </plugin>

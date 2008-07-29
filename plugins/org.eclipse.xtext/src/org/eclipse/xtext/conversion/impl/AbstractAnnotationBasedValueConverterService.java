@@ -4,15 +4,14 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverter;
 
 public class AbstractAnnotationBasedValueConverterService implements IValueConverterService {
 	
-	private Log log = LogFactory.getLog(AbstractAnnotationBasedValueConverterService.class);
+	private static Logger log = Logger.getLogger(AbstractAnnotationBasedValueConverterService.class);
 
 	public final String toString(Object value, String lexerRule) {
 		return getConverter(lexerRule).toString(value);

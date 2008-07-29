@@ -8,8 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -241,7 +240,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		}
 	}
 
-	Log log = LogFactory.getLog(BaseTextEditor.class);
+	Logger logger = Logger.getLogger(BaseTextEditor.class);
 
 	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
 
@@ -288,6 +287,8 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
+		logger.warn("Initializing Xtext basic text editor.");
+		
 		// Error marker
 		IResource resource = getResource();
 		if (resource != null && isEditable() && getModel() != null) {

@@ -19,8 +19,7 @@ import org.antlr.runtime.Parser;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -45,7 +44,7 @@ import org.eclipse.xtext.util.Strings;
 
 public abstract class AbstractAntlrParser extends Parser {
 
-	private static Log log = LogFactory.getLog(AbstractAntlrParser.class);
+	private static Logger log = Logger.getLogger(AbstractAntlrParser.class);
 
 	protected CompositeNode currentNode;
 

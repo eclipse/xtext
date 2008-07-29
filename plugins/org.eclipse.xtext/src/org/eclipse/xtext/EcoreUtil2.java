@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -19,7 +18,8 @@ import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 public class EcoreUtil2 extends EcoreUtil {
-    private static Log log = LogFactory.getLog(EcoreUtil2.class);
+	
+    private static Logger log = Logger.getLogger(EcoreUtil2.class);
 
     @SuppressWarnings("unchecked")
     public static <T extends EObject> T getContainerOfType(EObject ele, Class<T> type) {

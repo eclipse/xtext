@@ -14,8 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -23,7 +22,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Files {
 
-    private static Log log = LogFactory.getLog(Files.class);
+	private static Logger log = Logger.getLogger(Files.class);
 
     public static void copyFiles(String sourceDir, String targetDir, List<String> files) {
         File target = new File(targetDir);

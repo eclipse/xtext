@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.xtext.pdelogger" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.xtext.logging" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.xtext.pdelogger" id="loggermap" name="loggermap"/>
+         <meta.schema plugin="org.eclipse.xtext.logging" id="loggermap" name="loggermap"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]
