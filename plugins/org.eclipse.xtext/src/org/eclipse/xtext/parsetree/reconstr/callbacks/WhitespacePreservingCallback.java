@@ -16,7 +16,6 @@ import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 
 public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 
-	// private final Log log = LogFactory.getLog(getClass());
 	private Map<CompositeNode, Map<AbstractElement, Integer>> numberOfOccurences = new HashMap<CompositeNode, Map<AbstractElement, Integer>>();
 
 	public WhitespacePreservingCallback(IValueConverterService converterService) {

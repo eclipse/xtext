@@ -1,14 +1,13 @@
 package org.eclipse.xtext.xtextutil.impl;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.xtextutil.MetaModel;
 
 public class XtextutilUtil {
 	
-	private static Log log = LogFactory.getLog(XtextutilUtil.class);
+	private static Logger log = Logger.getLogger(XtextutilUtil.class);
 
 	public static String alias(MetaModelImpl metaModelImpl) {
 		AbstractMetamodelDeclaration declaration = metaModelImpl.getDeclaration();
