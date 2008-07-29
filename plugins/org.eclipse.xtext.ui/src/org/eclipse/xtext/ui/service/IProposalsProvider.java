@@ -26,7 +26,7 @@ import org.eclipse.xtext.ui.editor.model.IEditorModel;
  * @author Dennis Hübner - Initial contribution and API
  * @author Peter Friese - Initial contribution and API
  */
-public interface IProposalsProvider extends IProposalsProvider0, ILanguageService {
+public interface IProposalsProvider extends ILanguageService {
 
 	/**
 	 * Purpose of this method: find out where we are. What's left / right to the
@@ -47,6 +47,8 @@ public interface IProposalsProvider extends IProposalsProvider0, ILanguageServic
 	 * handling
 	 */
 	List<ICompletionProposal> getTemplateProposals(ICompletionContext context);
+	
+	List<ICompletionProposal> getAllProposals(IEditorModel model, ITextViewer viewer, int offset);
 	
 	// TODO refactor these two methods, they should be hosted in some kind of "Access"-Class
 	ContextTypeRegistry getTemplateContextRegistry();
