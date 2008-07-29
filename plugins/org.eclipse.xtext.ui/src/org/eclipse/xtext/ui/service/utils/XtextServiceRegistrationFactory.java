@@ -5,8 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
@@ -38,7 +37,7 @@ public class XtextServiceRegistrationFactory implements IServiceRegistrationFact
 	private static final String SCOPE = "languageId";
 	private static final String PRIO = "priority";
 
-	private final Log log = LogFactory.getLog(getClass());
+	private static final Logger log = Logger.getLogger(XtextServiceRegistrationFactory.class);
 
 	private static final Map<String, Class<? extends ILanguageService>> serviceMap;
 

@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.formatting;
 
 import java.util.LinkedList;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
@@ -25,7 +26,9 @@ import org.eclipse.xtext.ui.service.IFormatter;
  * 
  */
 public class XtextFormattingStrategy extends ContextBasedFormattingStrategy {
-
+	
+	private Logger log = Logger.getLogger(XtextFormattingStrategy.class);
+	
 	private final IFormatter formatter;
 	private static long time = 0;
 	private IEditorModelProvider editorModelProvider;
@@ -69,7 +72,7 @@ public class XtextFormattingStrategy extends ContextBasedFormattingStrategy {
 		regions.clear();
 		documents.clear();
 		if (Activator.DEBUG_FORMATTER) {
-			System.out.println("XtextFormattingStrategy.formatterStops(): Formatting took "
+			log.debug("XtextFormattingStrategy.formatterStops(): Formatting took "
 					+ (System.currentTimeMillis() - time) + " ms");
 		}
 	}

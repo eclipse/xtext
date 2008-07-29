@@ -3,6 +3,7 @@ package org.eclipse.xtext.ui.editor.hover;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.resource.JFaceResources;
@@ -23,7 +24,6 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.service.IHoverInfo;
 import org.eclipse.xtext.ui.service.IHoverInfo.IContentContainer;
 
@@ -33,6 +33,8 @@ import org.eclipse.xtext.ui.service.IHoverInfo.IContentContainer;
  */
 final class XtextInformationControl extends AbstractInformationControl implements IInformationControlExtension2,
 		IContentContainer {
+	
+	private static final Logger log = Logger.getLogger(XtextInformationControl.class);
 
 	private static final int MIN_WIDTH = 180;
 	private static final int MIN_HEIGHT = 50;
@@ -173,7 +175,7 @@ final class XtextInformationControl extends AbstractInformationControl implement
 			st.setStyleRange(style);
 		}
 		else {
-			CoreLog.logError(new IllegalArgumentException("Illegal image offset " + offset + ", content length is "
+			log.error("Error", new IllegalArgumentException("Illegal image offset " + offset + ", content length is "
 					+ st.getCharCount() + ". Offset must be higher than -1 and lower than content length."));
 		}
 	}

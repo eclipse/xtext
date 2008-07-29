@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
@@ -26,13 +27,14 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.ui.internal.Activator;
-import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Peter Friese - Initial contribution and API
  */
 public class XtextEditorModel implements IEditorModel {
+	
+	private static final Logger log = Logger.getLogger(XtextEditorModel.class);
 
     private final IDocument document;
     private IDocumentListener dirtyListener;
@@ -47,7 +49,7 @@ public class XtextEditorModel implements IEditorModel {
                 resource.load(new StringInputStream(document.get()), null);
             }
             catch (IOException e) {
-                CoreLog.logError(e);
+                log.error("IO Exception", e);
             }
         }
         this.languageDescriptor = languageDescriptor;
@@ -84,16 +86,16 @@ public class XtextEditorModel implements IEditorModel {
     private void internalReconcile(IRegion region) {
         try {
             if (Activator.DEBUG_PARSING)
-                System.out.print("EditorModel Parsing...");
+                log.debug("EditorModel Parsing...");
             long start = System.currentTimeMillis();
             resource.update(region.getOffset(), document.get(region.getOffset(), region.getLength()));
             if (Activator.DEBUG_PARSING)
-                System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
+                log.debug("...took " + (System.currentTimeMillis() - start) + "ms.");
         }
         catch (Exception e) {
-            if (Activator.DEBUG_PARSING)
-                System.out.println("fail!");
-            e.printStackTrace();
+            if (Activator.DEBUG_PARSING) {
+                log.warn("Reconciling failed.", e);
+            }
         }
         finally {
             notifyModelListeners(new XtextEditorModelChangeEvent(this));

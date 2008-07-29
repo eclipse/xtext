@@ -1,12 +1,14 @@
 package org.eclipse.xtext.ui.service.utils;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.IServiceFactory;
-import org.eclipse.xtext.ui.internal.CoreLog;
 
 public class XtextServiceFactory implements IServiceFactory {
+	
+	private Logger log = Logger.getLogger(XtextServiceFactory.class);
 
 	private static final String CLASS = "class";
 
@@ -23,7 +25,7 @@ public class XtextServiceFactory implements IServiceFactory {
 				return (ILanguageService) configurationElement.createExecutableExtension(CLASS);
 		}
 		catch (CoreException e) {
-			CoreLog.logError(e);
+			log.error("Could not create service.", e);
 		}
 		return null;
 	}

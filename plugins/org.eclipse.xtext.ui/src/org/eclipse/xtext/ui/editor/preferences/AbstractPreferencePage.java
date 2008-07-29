@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
@@ -45,7 +46,6 @@ import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.internal.Activator;
-import org.eclipse.xtext.ui.internal.CoreLog;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -53,6 +53,8 @@ import org.eclipse.xtext.ui.internal.CoreLog;
  */
 public abstract class AbstractPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage,
 		IWorkbenchPropertyPage {
+	
+	private static final Logger log = Logger.getLogger(AbstractPreferencePage.class);
 
 	private static final String USE_PROJECT_SETTINGS = "useProjectSettings";
 
@@ -148,7 +150,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				handleUseProjectSettings();
-				System.out.println("AbstractPreferencePage.widgetSelected()");
+				log.debug("AbstractPreferencePage.widgetSelected()");
 			}
 		});
 
@@ -174,7 +176,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 					new QualifiedName(qualifiedName().toString(), USE_PROJECT_SETTINGS))));
 		}
 		catch (CoreException e) {
-			CoreLog.logError(e);
+			log.error("Error", e);
 		}
 
 	}
@@ -258,7 +260,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 				((IPersistentPreferenceStore) getPreferenceStore()).save();
 			}
 			catch (Exception e) {
-				CoreLog.logError(e);
+				log.error("Error", e);
 				retVal = false;
 			}
 		}

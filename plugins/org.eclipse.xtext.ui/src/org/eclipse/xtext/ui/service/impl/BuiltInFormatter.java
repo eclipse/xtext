@@ -2,6 +2,7 @@ package org.eclipse.xtext.ui.service.impl;
 
 import java.util.ListIterator;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -18,7 +19,6 @@ import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.editor.model.IEditorModel;
 import org.eclipse.xtext.ui.editor.utils.EditorModelUtil;
 import org.eclipse.xtext.ui.internal.Activator;
-import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.service.IFormatter;
 import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
 import org.eclipse.xtext.ui.util.GrammarConstants;
@@ -32,6 +32,9 @@ import org.eclipse.xtext.ui.util.GrammarConstants;
  * 
  */
 public class BuiltInFormatter implements IFormatter {
+	
+	private static final Logger log = Logger.getLogger(BuiltInFormatter.class);
+	
 	@Inject
 	private ITokenTypeDefProvider tokenTypeDefProvider;
 
@@ -65,7 +68,7 @@ public class BuiltInFormatter implements IFormatter {
 					document.replace(formattingRegion.getOffset(), formattingRegion.getLength(), string);
 			}
 			catch (BadLocationException e) {
-				CoreLog.logError(e);
+				log.error("Could not format source.", e);
 			}
 		}
 	}

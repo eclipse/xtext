@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor;
 
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextAttribute;
@@ -30,7 +31,6 @@ import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.internal.Activator;
-import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.service.ISyntaxColorer;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -39,6 +39,8 @@ import org.eclipse.xtext.util.StringInputStream;
  * 
  */
 public class XtextTokenScanner implements ITokenScanner {
+	
+	private static final Logger log = Logger.getLogger(XtextTokenScanner.class);
 
 	private ISyntaxColorer syntaxColorer;
 	private LeafNode currentNode = null;
@@ -77,7 +79,7 @@ public class XtextTokenScanner implements ITokenScanner {
 				}
 			}
 			else {
-				CoreLog.logError(XtextUIMessages.getFormattedString(
+				log.error(XtextUIMessages.getFormattedString(
 						"XtextTokenScanner.WrongNodeType", node, LeafNode.class.getName()), //$NON-NLS-1$ 
 						new IllegalArgumentException());
 			}
@@ -153,7 +155,7 @@ public class XtextTokenScanner implements ITokenScanner {
 				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
 		}
 		catch (Exception e) {
-			CoreLog.logError("Error during parse process in token scanner. "
+			log.error("Error during parse process in token scanner. "
 					+ (e.getLocalizedMessage() != null ? e.getLocalizedMessage() : ""), e);
 			e.printStackTrace();
 			if (Activator.DEBUG_PARSING)

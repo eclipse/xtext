@@ -12,6 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -26,6 +27,9 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
  * 
  */
 public final class XtextMarkerManager {
+	
+	private static final Logger log = Logger.getLogger(XtextMarkerManager.class);
+	
 	public static final String XTEXT_PARSEERROR_MARKER_TYPE = Activator.PLUGIN_ID + ".problemmarker";
 
 	private XtextMarkerManager() {
@@ -44,10 +48,10 @@ public final class XtextMarkerManager {
 			workspaceModifyOperation.run(monitor);
 		}
 		catch (InvocationTargetException e) {
-			CoreLog.logError(e);
+			log.error("Could not create marker.", e);
 		}
 		catch (InterruptedException e) {
-			CoreLog.logError(e);
+			log.error("Could not create marker.", e);
 		}
 	}
 

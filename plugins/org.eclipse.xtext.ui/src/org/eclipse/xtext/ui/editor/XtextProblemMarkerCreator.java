@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -28,7 +29,6 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.ui.editor.model.IXtextEditorModelListener;
 import org.eclipse.xtext.ui.editor.model.XtextEditorModelChangeEvent;
 import org.eclipse.xtext.ui.internal.Activator;
-import org.eclipse.xtext.ui.internal.CoreLog;
 import org.eclipse.xtext.ui.internal.XtextMarkerManager;
 
 /**
@@ -36,6 +36,8 @@ import org.eclipse.xtext.ui.internal.XtextMarkerManager;
  * 
  */
 public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
+	
+	private static final Logger log = Logger.getLogger(XtextProblemMarkerCreator.class);
 
 	private final IResource resource;
 	private IProgressMonitor monitor;
@@ -164,7 +166,7 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(rootObject);
 			return diagnostic;
 		}
-		CoreLog.logWarning("No content found in Resource: " + resource.getURI());
+		log.warn("No content found in Resource: " + resource.getURI());
 		return null;
 	}
 }
