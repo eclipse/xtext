@@ -15,8 +15,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -40,7 +39,8 @@ import org.openarchitectureware.xpand2.output.OutputImpl;
  * 
  */
 public class GeneratorFacade {
-	private static Log log = LogFactory.getLog(GeneratorFacade.class);
+	
+	private static Logger log = Logger.getLogger(GeneratorFacade.class);
 
 	public static void generate(Grammar grammarModel, String srcGenPath, String uiProjectPath,
 			String... modelFileExtensions) throws IOException {
