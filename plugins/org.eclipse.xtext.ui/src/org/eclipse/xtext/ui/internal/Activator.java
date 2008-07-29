@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.internal;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -21,6 +22,8 @@ public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.eclipse.xtext.ui";
+	
+	private static Logger log = Logger.getLogger(Activator.class);
 
 	// TODO extract DEBUG handling to separate class!
 	public static final boolean DEBUGING = Platform.inDebugMode();
@@ -48,6 +51,9 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		setDefault(this);
+
+		log.debug("Starting Xtext UI bundle.");
+
 		// activate service registry
 		org.eclipse.xtext.service.ui.Activator.getDefault();
 	}
@@ -57,6 +63,7 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	public void stop(BundleContext context) throws Exception {
+		log.debug("Stopping Xtext UI bundle.");
 		setDefault(null);
 		super.stop(context);
 	}
