@@ -8,21 +8,34 @@
  *******************************************************************************/
 package org.eclipse.xtext.index;
 
-import java.util.List;
-
-import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
+ *
  */
-public interface IModelIndex {
+public class DanglingCrossrefEvent {
 
-	boolean exists(URI fragmentUri);
+	private URI referencer;
+	private URI referenced;
 	
-	List<URI> findReferencesTo(EObject eObject, IProject scope);
+	public DanglingCrossrefEvent(URI referencer, URI referenced) {
+		super();
+		this.referencer = referencer;
+		this.referenced = referenced;
+	}
 	
-	List<URI> findInstances(EClass eClass, IProject scope);
+	/**
+	 * @return the referenced
+	 */
+	public URI getReferenced() {
+		return referenced;
+	}
+	
+	/**
+	 * @return the referencer
+	 */
+	public URI getReferencer() {
+		return referencer;
+	}
 }

@@ -61,11 +61,8 @@ public class ResourceContainerDAO {
 	}
 
 	public static int create(URI platformURI) throws SQLException {
-		if (platformURI.isPlatform()) {
-			String uriAsString = platformURI.toString();
-			return create(uriAsString.substring(0, getContainerURILength(platformURI)));
-		}
-		throw new IllegalArgumentException("Only platform URIs are supported");
+		String uriAsString = platformURI.toString();
+		return create(uriAsString.substring(0, getContainerURILength(platformURI)));
 	}
 
 	public static int create(String uri) throws SQLException {
@@ -84,9 +81,14 @@ public class ResourceContainerDAO {
 		IndexDatabase.getInstance().insertWithAutoID(insertStatementBuffer.toString());
 	}
 
-	public static int getContainerURILength(URI platformURI) {
-		String uriAsString = platformURI.toString();
-		return uriAsString.indexOf('/', platformURI.segment(0).length() + 11);
+	public static int getContainerURILength(URI resourceURI) {
+		String uriAsString = resourceURI.toString();
+		if (resourceURI.isPlatform()) {
+			return uriAsString.indexOf('/', resourceURI.segment(0).length() + 11);
+		}
+		else {
+			return uriAsString.indexOf("!/") + 1;
+		}
 	}
 
 }

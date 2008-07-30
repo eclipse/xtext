@@ -6,29 +6,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.indexer;
-
-import junit.framework.TestCase;
-
-import org.eclipse.xtext.index.internal.dbaccess.IndexDatabase;
-
+package org.eclipse.xtext.index;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
- * 
+ *
  */
-public class DatabaseTest extends TestCase {
+public class IndexChangeEvent {
 
-	private IndexDatabase indexDatabase;
-
-	@Override
-	protected void tearDown() throws Exception {
-		if (indexDatabase != null) {
-			indexDatabase.shutdown();
-		}
-	}
-
-	public void testDatabase() throws Exception {
-		indexDatabase = IndexDatabase.getInstance();
-	}
 }

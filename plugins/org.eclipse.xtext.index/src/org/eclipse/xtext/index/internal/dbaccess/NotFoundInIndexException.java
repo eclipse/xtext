@@ -16,4 +16,12 @@ public class NotFoundInIndexException extends Exception {
 
 	private static final long serialVersionUID = -7458489937462606476L;
 
+	public NotFoundInIndexException() {
+		super();
+	}
+	
+	public NotFoundInIndexException(String message) {
+		super(message);
+	}
+
 }

@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
@@ -27,23 +26,20 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xtext.index.IModelIndex;
+import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.xtext.index.internal.dbaccess.EClassDAO;
 import org.eclipse.xtext.index.internal.dbaccess.EObjectDAO;
-import org.eclipse.xtext.index.internal.dbaccess.EPackageDAO;
+import org.eclipse.xtext.index.internal.dbaccess.IndexDatabase;
 import org.eclipse.xtext.index.internal.dbaccess.NotFoundInIndexException;
 import org.eclipse.xtext.index.internal.dbaccess.ResourceContainerDAO;
 import org.eclipse.xtext.index.internal.dbaccess.ResourceDAO;
@@ -53,123 +49,17 @@ import org.eclipse.xtext.util.Strings;
  * @author Jan Köhnlein - Initial contribution and API
  * 
  */
-public class WorkspaceModelIndex implements IModelIndex {
+public class WorkspaceModelIndexer {
 
-	private static Logger log = Logger.getLogger(WorkspaceModelIndex.class);
+	private static Logger log = Logger.getLogger(WorkspaceModelIndexer.class);
 
-	private static final Set<String> REGISTERED_EXTENSIONS = Resource.Factory.Registry.INSTANCE
-			.getExtensionToFactoryMap().keySet();
-
-	/**
-	 * @author Jan Köhnlein - Initial contribution and API
-	 * 
-	 */
-	private final class ResourceVisitor implements IResourceVisitor {
-
-		private int resourceContainerID;
-		private List<IResource> ignoredResources;
-
-		public ResourceVisitor(int resourceContainerID) {
-			this.resourceContainerID = resourceContainerID;
-			ignoredResources = new ArrayList<IResource>();
-		}
-
-		public void addIgnoredResource(IResource ignoredResource) {
-			ignoredResources.add(ignoredResource);
-		}
-
-		public boolean visit(IResource resource) throws CoreException {
-			if (resource.isDerived() || ignoredResources.contains(resource)) {
-				return false;
-			}
-			if (resource instanceof IFile) {
-				IFile file = (IFile) resource;
-				String fileExtension = file.getFileExtension();
-				if (REGISTERED_EXTENSIONS.contains(fileExtension)) {
-					indexModelFile(resourceContainerID, file);
-				}
-				return false;
-			}
-			return true;
-		}
-	}
+	static final Set<String> REGISTERED_EXTENSIONS = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
+			.keySet();
 
 	private ResourceSet resourceSet;
 
-	public WorkspaceModelIndex(boolean isRegisterEPackages) throws Exception {
+	public WorkspaceModelIndexer() throws Exception {
 		resourceSet = new ResourceSetImpl();
-		if (isRegisterEPackages) {
-			indexRegisteredEPackages();
-		}
-	}
-
-	public boolean exists(URI fragmentUri) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public List<URI> findReferencesTo(URI referencedUri, IProject scope) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<URI> findInstances(EClass eClass, IProject scope) {
-		try {
-			return EObjectDAO.findByEClass(eClass);
-		}
-		catch (Exception e) {
-			log.error(e);
-		}
-		return Collections.<URI> emptyList();
-	}
-
-	private void indexRegisteredEPackages() {
-		List<String> nsURIs = new ArrayList<String>(EPackage.Registry.INSTANCE.keySet());
-		for (String nsURI : nsURIs) {
-			try {
-				Object object = EPackage.Registry.INSTANCE.get(nsURI);
-				EPackage ePackage = null;
-				if (object instanceof EPackage.Descriptor) {
-					ePackage = ((EPackage.Descriptor) object).getEPackage();
-				}
-				else if (object instanceof EPackage) {
-					ePackage = (EPackage) object;
-				}
-				if (ePackage != null) {
-					indexEPackage(ePackage);
-				}
-			}
-			catch (Exception exc) {
-				log.error(exc);
-			}
-		}
-	}
-
-	public void indexEPackage(EPackage ePackage) throws SQLException {
-		int ePackageID;
-		List<String> allEClassNames;
-		try {
-			ePackageID = EPackageDAO.getID(ePackage);
-			allEClassNames = EClassDAO.findAllEClassNames(ePackageID);
-		}
-		catch (NotFoundInIndexException exc) {
-			ePackageID = EPackageDAO.create(ePackage);
-			allEClassNames = Collections.emptyList();
-		}
-		log.info("Indexing EPackage: " + ePackageID + " " + ePackage.getNsURI());
-		for (EClassifier classifier : ePackage.getEClassifiers()) {
-			if (classifier instanceof EClass) {
-				if (!allEClassNames.remove(classifier.getName())) {
-					EClassDAO.create((EClass) classifier, ePackageID);
-				}
-			}
-		}
-		for (String staleEClassName : allEClassNames) {
-			EClassDAO.delete(staleEClassName);
-		}
-		for (EPackage subPackage : ePackage.getESubpackages()) {
-			indexEPackage(subPackage);
-		}
 	}
 
 	public void indexWorkspace() {
@@ -188,14 +78,29 @@ public class WorkspaceModelIndex implements IModelIndex {
 				log.error(e);
 			}
 		}
+		try {
+			List<URI> allResourceURIs = ResourceDAO.findAllResources();
+			for (URI resourceUri : allResourceURIs) {
+				Resource resource = resourceSet.getResource(resourceUri, true);
+				indexCrossRefs(resource);
+				resource.unload();
+				
+			}
+		}
+		catch (SQLException exc) {
+			log.error(exc);
+		}
+		try {
+			IndexDatabase.getInstance().commitOrRollback();
+		}
+		catch (SQLException exc) {
+			log.error(exc);
+		}
 	}
 
-	/**
-	 * @param project
-	 */
 	public void indexProject(int resourceContainerID, IProject project) {
 		try {
-			IResourceVisitor resourceVisitor = new ResourceVisitor(resourceContainerID);
+			IResourceVisitor resourceVisitor = new ResourceVisitor(this, resourceContainerID);
 			project.accept(resourceVisitor);
 		}
 		catch (Exception e) {
@@ -206,17 +111,19 @@ public class WorkspaceModelIndex implements IModelIndex {
 
 	public void indexJavaProject(int resourceContainerID, IJavaProject project) {
 		try {
-			ResourceVisitor resourceVisitor = new ResourceVisitor(resourceContainerID);
-			for (IClasspathEntry classpathEntry : project.getResolvedClasspath(true)) {
+			ResourceVisitor resourceVisitor = new ResourceVisitor(this, resourceContainerID);
+			for (IClasspathEntry classpathEntry : project.getRawClasspath()) {
 				if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
 					IPath libraryPath = classpathEntry.getPath();
-					IResource libraryInWorkspace = project.getProject().getParent().findMember(libraryPath);
-					if (libraryInWorkspace != null && libraryInWorkspace.exists()
-							&& libraryInWorkspace instanceof IFile) {
-						indexJarFile(libraryInWorkspace.getLocation());
-					}
-					else {
-						indexJarFile(libraryPath);
+					if (!libraryPath.toString().startsWith(JavaRuntime.JRE_CONTAINER)) {
+						IResource libraryInWorkspace = project.getProject().getParent().findMember(libraryPath);
+						if (libraryInWorkspace != null && libraryInWorkspace.exists()
+								&& libraryInWorkspace instanceof IFile) {
+							indexJarFile(libraryInWorkspace.getLocation());
+						}
+						else {
+							indexJarFile(libraryPath);
+						}
 					}
 				}
 			}
@@ -272,7 +179,6 @@ public class WorkspaceModelIndex implements IModelIndex {
 			URI fileURI = URI.createURI(file.getLocationURI().toString());
 			Resource resource = resourceSet.getResource(fileURI, true);
 			indexResource(resourceID, resource, isAlreadyIndexed);
-			resourceSet.getResources().remove(resource);
 		}
 		catch (Exception e) {
 			log.error(e);
@@ -280,22 +186,68 @@ public class WorkspaceModelIndex implements IModelIndex {
 	}
 
 	public void indexResource(int resourceID, Resource resource, boolean isAlreadyIndexed) throws SQLException {
-		for (EObject rootElement : resource.getContents()) {
-			for (Iterator<EObject> contents = rootElement.eAllContents(); contents.hasNext();) {
-				EObject content = contents.next();
-				indexEObject(resourceID, resource, content);
+		List<String> fragmentsInResource = EObjectDAO.findFragmentsInResource(resourceID);
+		for (Iterator<EObject> contents = resource.getAllContents(); contents.hasNext();) {
+			EObject content = contents.next();
+			indexEObject(resourceID, resource, content, fragmentsInResource);
+		}
+		List<Integer> deletedEObjectIDs = new ArrayList<Integer>(fragmentsInResource.size());
+		for (String staleFragment : fragmentsInResource) {
+			try {
+				int staleEObjectID = EObjectDAO.getID(staleFragment, resourceID);
+				deletedEObjectIDs.add(staleEObjectID);
+				EObjectDAO.delete(staleEObjectID);
+			}
+			catch (NotFoundInIndexException e) {
+				log.error("Cannot find stale EObject in index", e);
 			}
 		}
+		List<URI> danglingReferences = new ArrayList<URI>();
+		for (int deletedEObjectID : deletedEObjectIDs) {
+			danglingReferences.addAll(EObjectDAO.findReferencesTo(deletedEObjectID));
+		}
+		// TODO what to do about dangling refs?
+		resourceSet.getResources().remove(resource);
 	}
 
-	public void indexEObject(int resourceID, Resource resource, EObject content) throws SQLException {
+	public void indexEObject(int resourceID, Resource resource, EObject content, List<String> fragmentsInResource)
+			throws SQLException {
 		try {
 			int eClassID = EClassDAO.getID(content.eClass());
 			String fragment = resource.getURIFragment(content);
-			EObjectDAO.create(fragment, eClassID, resourceID);
+			if (!fragmentsInResource.remove(fragment)) {
+				EObjectDAO.create(fragment, eClassID, resourceID);
+			}
 		}
 		catch (NotFoundInIndexException e) {
 			log.error("EClass " + Strings.notNull(content.eClass().getName()) + " is not indexed.", e);
+		}
+	}
+
+	private void indexCrossRefs(Resource resource) throws SQLException {
+		for (Iterator<EObject> allContents = resource.getAllContents(); allContents.hasNext();) {
+			EObject eObject = allContents.next();
+			try {
+				int sourceID = EObjectDAO.getID(eObject);
+				EList<EObject> crossReferences = eObject.eCrossReferences();
+				for (EObject crossReference : crossReferences) {
+					try {
+						if (crossReference.eResource() != null) {
+							int targetID = EObjectDAO.getID(crossReference);
+							EObjectDAO.createCrossReference(sourceID, targetID);
+						}
+					}
+					catch (NotFoundInIndexException nfiie) {
+						log.error("Illegal or dangling cross-reference");
+					}
+					catch (SQLException exc) {
+						log.error("Error creating cross-reference");
+					}
+				}
+			}
+			catch (NotFoundInIndexException exc) {
+				log.error("EObject has not been indexed. Concurrent modification?");
+			}
 		}
 	}
 
