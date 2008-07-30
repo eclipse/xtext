@@ -7,7 +7,7 @@ Bundle-Activator: org.eclipse.xtext.logging.Activator
 Bundle-Vendor: itemis AG
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.xtext.log4j;bundle-version="1.2.8"
+ org.eclipse.xtext.log4j;bundle-version="1.2.8";visibility:=reexport
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
