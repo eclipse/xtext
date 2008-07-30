@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.indexer;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,10 +19,12 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.index.internal.WorkspaceModelIndex;
+import org.eclipse.xtext.index.internal.ModelIndex;
+import org.eclipse.xtext.index.internal.dbaccess.IndexDatabase;
 import org.eclipse.xtext.ui.indexer.internal.IndexTestPlugin;
 import org.eclipse.xtext.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.PluginUtil;
@@ -30,33 +33,37 @@ import org.eclipse.xtext.ui.util.PluginUtil;
  * @author Jan Köhnlein - Initial contribution and API
  * 
  */
-public class WorkspaceModelIndexTest extends TestCase {
+public class ModelIndexTest extends TestCase {
 
 	private static final String TEST_PROJECT_NAME = "test";
 	protected static final String MODEL_FILE = "simple.ecore";
 	protected static final String JAR_FILE = "simple.jar";
 
-	private WorkspaceModelIndex workspaceElementIndexer;
 	private IProject project;
+	private ModelIndex modelIndex;
+	private ResourceSet resourceSet;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		workspaceElementIndexer = new WorkspaceModelIndex(false);
-		workspaceElementIndexer.indexEPackage(EcorePackage.eINSTANCE);
+		modelIndex = new ModelIndex(false);
+		modelIndex.getEcoreRegistryIndexer().indexEPackage(EcorePackage.eINSTANCE);
+		resourceSet = new ResourceSetImpl();
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		JavaProjectSetupUtil.deleteProject(project);
+		IndexDatabase.getInstance().clearAll();
 	}
 
 	public void testIndexModelInPlainProject() throws Exception {
 		project = JavaProjectSetupUtil.createProject(TEST_PROJECT_NAME);
 		PluginUtil.copyFileToWorkspace(IndexTestPlugin.getDefault(), "/testfiles/" + MODEL_FILE, project, MODEL_FILE);
 		String expectedURI = "platform:/resource/" + TEST_PROJECT_NAME + "/" + MODEL_FILE + "#//SimpleEClass";
-		performTestSimpleEClass(project, expectedURI);
+		EObject simpleEClass = performTestSimpleEClass(project, expectedURI);
+		performReferenceTest(simpleEClass);
 	}
 
 	public void testIndexModelInSrcFolder() throws Exception {
@@ -65,30 +72,49 @@ public class WorkspaceModelIndexTest extends TestCase {
 		PluginUtil.copyFileToWorkspace(IndexTestPlugin.getDefault(), "/testfiles/" + MODEL_FILE, project, "src/"
 				+ MODEL_FILE);
 		String expectedURI = "platform:/resource/" + TEST_PROJECT_NAME + "/src/" + MODEL_FILE + "#//SimpleEClass";
-		performTestSimpleEClass(project, expectedURI);
+		EObject simpleEClass = performTestSimpleEClass(project, expectedURI);
+		performReferenceTest(simpleEClass);
 	}
 
 	public void testIndexModelInJar() throws Exception {
 		IJavaProject javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		project = javaProject.getProject();
-		IFile jarFile = PluginUtil.copyFileToWorkspace(IndexTestPlugin.getDefault(), "/testfiles/" + JAR_FILE,
-				project, JAR_FILE);
+		IFile jarFile = PluginUtil.copyFileToWorkspace(IndexTestPlugin.getDefault(), "/testfiles/" + JAR_FILE, project,
+				JAR_FILE);
 		JavaProjectSetupUtil.addJarToClasspath(javaProject, jarFile);
-		
-		String expectedURI = "jar:" +jarFile.getLocationURI() + "!/testfiles/" + MODEL_FILE + "#//SimpleEClass";
+
+		String expectedURI = "jar:" + jarFile.getLocationURI() + "!/testfiles/" + MODEL_FILE + "#//SimpleEClass";
 		performTestSimpleEClass(project, expectedURI);
 	}
 
-	private void performTestSimpleEClass(IProject project, String expectedURI) throws SQLException {
-		workspaceElementIndexer.indexWorkspace();
-		List<URI> eClasses = workspaceElementIndexer.findInstances(EcorePackage.Literals.ECLASS, project);
+	private EObject performTestSimpleEClass(IProject project, String expectedURI) throws SQLException, IOException {
+		modelIndex.getWorkspaceModelIndexer().indexWorkspace();
+		List<URI> eClasses = modelIndex.findInstances(EcorePackage.Literals.ECLASS, project);
 		assertFalse(eClasses.isEmpty());
 		URI expected = URI.createURI(expectedURI);
 		assertTrue(eClasses.contains(expected));
 		assertEquals(expectedURI, expected.toString());
-		ResourceSet resourceSet = new ResourceSetImpl();
+
 		EObject object = resourceSet.getEObject(expected, true);
 		assertNotNull(object);
+		return object;
+
+	}
+
+	@SuppressWarnings("unchecked")
+	private void performReferenceTest(EObject object) throws IOException {
+		List<URI> references = modelIndex.findReferencesTo(object, null);
+		assertFalse(references.isEmpty());
+		URI referenceURI = references.get(0);
+		assertTrue(modelIndex.exists(referenceURI));
+		EObject referencingObject = resourceSet.getEObject(referenceURI, false);
+		assertNotNull(referencingObject);
+		EObject parent = referencingObject.eContainer();
+		Resource resource = referencingObject.eResource();
+		((List<EObject>) parent.eGet(referencingObject.eContainingFeature())).remove(referencingObject);
+		resource.save(null);
+		modelIndex.getWorkspaceModelIndexer().indexWorkspace();
+		assertFalse(modelIndex.exists(referenceURI));
 	}
 
 }

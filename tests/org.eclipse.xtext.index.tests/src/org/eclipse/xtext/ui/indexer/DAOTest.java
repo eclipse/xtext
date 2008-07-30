@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.index.internal.dbaccess.EClassDAO;
 import org.eclipse.xtext.index.internal.dbaccess.EObjectDAO;
 import org.eclipse.xtext.index.internal.dbaccess.EPackageDAO;
+import org.eclipse.xtext.index.internal.dbaccess.IndexDatabase;
 import org.eclipse.xtext.index.internal.dbaccess.ResourceContainerDAO;
 import org.eclipse.xtext.index.internal.dbaccess.ResourceDAO;
 
@@ -36,6 +37,12 @@ public class DAOTest extends TestCase {
 	private static final String RESOURCE_URI_A = PLATFORM_PLUGIN_X + "/folder/a.ecore";
 	private static final String RESOURCE_URI_B = PLATFORM_PLUGIN_X + "/folder/b.ecore";
 	private static final String RESOURCE_URI_C = PLATFORM_PLUGIN_Z + "/folder/c.ecore";
+	
+	@Override
+	protected void tearDown() throws Exception {
+		super.tearDown();
+		IndexDatabase.getInstance().clearAll();
+	}
 	
 	public void testResourceContainer() throws Exception {
 		int idX = ResourceContainerDAO.create(PLATFORM_PLUGIN_X);
@@ -63,6 +70,7 @@ public class DAOTest extends TestCase {
 	}
 	
 	public void testEPackageEClassEObject() throws Exception {
+		// Workaround for Mac OSX classloader bug
 		Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
 		int idEcore = EPackageDAO.create(EcorePackage.eINSTANCE);
 		assertEquals(idEcore, EPackageDAO.getID(EcorePackage.eINSTANCE));
@@ -75,8 +83,19 @@ public class DAOTest extends TestCase {
 		EClass newEClass = EcoreFactory.eINSTANCE.createEClass();
 		newEClass.setName("NewEClass");
 		resourceC.getContents().add(newEClass);
+		EClass referencingEClass = EcoreFactory.eINSTANCE.createEClass();
+		referencingEClass.setName("ReferencingEClass");
+		resourceC.getContents().add(referencingEClass);
 		String fragment = resourceC.getURIFragment(newEClass);
 		int idEObject = EObjectDAO.create(fragment, idEClass, resourceID);
 		assertEquals(idEObject, EObjectDAO.getID(newEClass));
+		
+		String refFragment = resourceC.getURIFragment(referencingEClass);
+		int idRefEObject = EObjectDAO.create(refFragment, idEClass, resourceID);
+		assertEquals(idRefEObject, EObjectDAO.getID(referencingEClass));
+		EObjectDAO.createCrossReference(idRefEObject, idEObject);
+		List<URI> referenceURIs = EObjectDAO.findReferencesTo(newEClass);
+		assertEquals(1, referenceURIs.size());
+		assertEquals(RESOURCE_URI_C + "#" + refFragment, referenceURIs.get(0).toString());
 	}
 }

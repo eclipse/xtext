@@ -4,4 +4,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="simple"
     nsURI="http://www.itemis.de/simple" nsPrefix="simple">
   <eClassifiers xsi:type="ecore:EClass" name="SimpleEClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferencingClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="crossRef" eType="#//SimpleEClass"/>
+  </eClassifiers>
 </ecore:EPackage>
