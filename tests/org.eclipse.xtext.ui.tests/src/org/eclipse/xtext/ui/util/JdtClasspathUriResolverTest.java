@@ -4,7 +4,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
-import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.ui.internal.XtextUITestsPlugin;
 
 public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTest {
 
@@ -27,7 +27,7 @@ public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTes
 	public void testClasspathUriForFileInWorkspace() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		_project = _javaProject.getProject();
-		PluginUtil.copyFileToWorkspace(Activator.getDefault(), "/testfiles/" + MODEL_FILE, _project, "src/"
+		PluginUtil.copyFileToWorkspace(XtextUITestsPlugin.getDefault(), "/testfiles/" + MODEL_FILE, _project, "src/"
 				+ MODEL_FILE);
 		URI classpathUri = URI.createURI("classpath:/" + MODEL_FILE);
 		String expectedUri = "platform:/resource/" + TEST_PROJECT_NAME + "/src/" + MODEL_FILE;
@@ -38,7 +38,7 @@ public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTes
 	public void testClasspathUriForFileInJarInWorkspace() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		_project = _javaProject.getProject();
-		IFile jarFile = PluginUtil.copyFileToWorkspace(Activator.getDefault(), "/testfiles/" + JAR_FILE, _project, "/"
+		IFile jarFile = PluginUtil.copyFileToWorkspace(XtextUITestsPlugin.getDefault(), "/testfiles/" + JAR_FILE, _project, "/"
 				+ JAR_FILE);
 		JavaProjectSetupUtil.addJarToClasspath(_javaProject, jarFile);
 		URI classpathUri = URI.createURI("classpath:/model/" + MODEL_FILE);
