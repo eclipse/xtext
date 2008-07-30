@@ -127,6 +127,7 @@ public class GeneratorFacade {
 		genModel.getOutlets().add(outlet("UI", uiProjectPath));
 		genModel.getOutlets().add(outlet("UI_SRC_GEN", uiProjectPath + "/src-gen"));
 		genModel.getOutlets().add(outlet("UI_MANIFEST", uiProjectPath + "/META-INF"));
+		genModel.getOutlets().add(outlet("UI_TEMPLATES", uiProjectPath + "/templates"));
 
 		GenService grammarAccessService = XtextgenFactory.eINSTANCE.createGenService();
 		grammarAccessService.setServiceInterfaceFQName("org.eclipse.xtext.IGrammarAccess");

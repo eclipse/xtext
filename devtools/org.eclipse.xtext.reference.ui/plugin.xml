@@ -53,13 +53,4 @@ kind (${kind2} ${kind2Alter})
          </pattern>
       </template>
    </extension>
-    <extension
-         point="org.eclipse.ui.preferencePages">
-        <page
-            category="org.eclipse.xtext.reference.ReferenceGrammar.editor"
-            class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.XtextTemplatePreferencePage/org.eclipse.xtext.reference.ReferenceGrammar"
-            id="org.eclipse.xtext.reference.ReferenceGrammar.editor.templates"
-            name="Templates">
-        </page>
-      </extension>
 </plugin>
