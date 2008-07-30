@@ -36,19 +36,30 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	}
 
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
+		List<ICompletionProposal> result = new ArrayList<ICompletionProposal>();
+
 		if (proposalProvider instanceof IProposalsProvider) {
 			IProposalsProvider proposalsProvider2 = (IProposalsProvider) proposalProvider;
-			ICompletionContext completionContext = proposalsProvider2.computeContext(modelProvider.getModel(), viewer, offset);
+
+			ICompletionContext completionContext = proposalsProvider2.computeContext(modelProvider.getModel(), viewer,
+					offset);
 			List<ICompletionProposal> proposals = proposalsProvider2.getProposals(completionContext);
 			List<ICompletionProposal> templateProposals = proposalsProvider2.getTemplateProposals(completionContext);
-			proposals.addAll(templateProposals);
-			
-			if (proposals != null && !proposals.isEmpty())
-				return proposals.toArray(new ICompletionProposal[0]);
+
+			if (proposals != null) {
+				result.addAll(proposals);
+			}
+			if (templateProposals != null) {
+				result.addAll(templateProposals);
+			}
+
+			if (result != null && !result.isEmpty()) {
+				return result.toArray(new ICompletionProposal[0]);
+			}
 		}
 		return null;
 	}
-	
+
 	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
 		List<IContextInformation> retVal = new ArrayList<IContextInformation>();
 		for (ICompletionProposal proposal : proposalProvider.getAllProposals(modelProvider.getModel(), viewer, offset)) {

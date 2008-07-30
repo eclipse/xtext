@@ -405,14 +405,15 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	@Override
 	protected String[] collectContextMenuPreferencePages() {
 		String[] ids = super.collectContextMenuPreferencePages();
-		String[] more = new String[ids.length + 3];
+		String[] more = new String[ids.length + 4];
 		// NOTE: preference page at index 0 will be opened, see
 		// PreferencesUtil.createPreferenceDialogOn
 		String languageId = languageDescriptor.getId();
 		more[0] = languageId + ".editor"; //$NON-NLS-1$
 		more[1] = languageId;
-		more[2] = languageId + ".editor.syntaxcoloring"; //$NON-NLS-1$
-		System.arraycopy(ids, 0, more, 3, ids.length);
+		more[2] = languageId + ".editor.templates"; //$NON-NLS-1$
+		more[3] = languageId + ".editor.syntaxcoloring"; //$NON-NLS-1$
+		System.arraycopy(ids, 0, more, 4, ids.length);
 		return more;
 	}
 }
