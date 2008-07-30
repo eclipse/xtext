@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.util.Files;
 
 /**
@@ -26,6 +27,8 @@ import org.eclipse.xtext.util.Files;
  * 
  */
 public class IndexDatabase {
+
+	private static final Logger log = Logger.getLogger(IndexDatabase.class);
 
 	private static final String USER_NAME = "user";
 	private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
@@ -36,7 +39,7 @@ public class IndexDatabase {
 	private Connection conn;
 	private List<Statement> statements;
 	private Statement insertStatement;
-	
+
 	private static IndexDatabase INSTANCE;
 
 	public static IndexDatabase getInstance() {
@@ -106,23 +109,36 @@ public class IndexDatabase {
 		}
 	}
 
-	public void shutdown() throws SQLException {
+	public void shutdown() throws Exception {
+		Exception exception = null;
 		try {
 			commitOrRollback();
-		} catch(Exception exc) {
-			// TODO: log error
 		}
-		
+		catch (Exception exc) {
+			exception = exc;
+			log.error(exc);
+		}
+
 		for (Statement statement : statements) {
 			try {
 				statement.close();
 			}
-			catch (Exception e) {
-				e.printStackTrace();
+			catch (Exception exc) {
+				exception = exc;
+				log.error(exc);
 			}
 		}
-		conn.close();
+		try {
+			conn.close();
+		}
+		catch (Exception exc) {
+			exception = exc;
+			log.error(exc);
+		}
 		INSTANCE = null;
+		if (exception != null) {
+			throw exception;
+		}
 	}
 
 	public int queryID(PreparedStatement idQuery) throws SQLException, NotFoundInIndexException {
@@ -170,5 +186,4 @@ public class IndexDatabase {
 			}
 		}
 	}
-
 }
