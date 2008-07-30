@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Index Plug-in
+Bundle-SymbolicName: org.eclipse.xtext.index
+Bundle-Version: 1.0.0
+Bundle-Activator: org.eclipse.xtext.index.internal.IndexPlugin
+Bundle-Vendor: itemis AG
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime;visibility:=reexport,
+ org.eclipse.emf.common;bundle-version="2.4.0",
+ org.apache.derby;bundle-version="10.1.2",
+ org.eclipse.emf.ecore;bundle-version="2.4.0";visibility:=reexport,
+ org.eclipse.core.resources;bundle-version="3.4.0";visibility:=reexport,
+ org.eclipse.jdt.core;bundle-version="3.4.0";visibility:=reexport,
+ org.eclipse.xtext.util;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipse.xtext.index,
+ org.eclipse.xtext.index.internal;x-friends:="org.eclipse.xtext.index.tests",
+ org.eclipse.xtext.index.internal.dbaccess;x-friends:="org.eclipse.xtext.index.tests"
