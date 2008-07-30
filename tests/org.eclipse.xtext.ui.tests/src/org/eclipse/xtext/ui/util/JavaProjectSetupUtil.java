@@ -27,7 +27,7 @@ public class JavaProjectSetupUtil {
 		return javaProject;
 	}
 
-	private static IProject createProject(String projectName)
+	public static IProject createProject(String projectName)
 			throws CoreException {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IProject project = root.getProject(projectName);
@@ -43,12 +43,12 @@ public class JavaProjectSetupUtil {
 		deleteProject(project);
 	}
 
-	private static void deleteProject(IProject project) throws CoreException {
+	public static void deleteProject(IProject project) throws CoreException {
 		if (project.exists()) {
 			if (project.isOpen()) {
 				project.close(null);
 			}
-			project.delete(true, null);
+			project.delete(true, true, null);
 		}
 	}
 

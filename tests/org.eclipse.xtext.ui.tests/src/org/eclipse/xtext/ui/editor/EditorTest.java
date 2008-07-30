@@ -22,7 +22,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.texteditor.ContentAssistAction;
-import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.ui.internal.XtextUITestsPlugin;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -40,7 +40,7 @@ public class EditorTest extends TestCase {
 			PlatformUI.getWorkbench().getIntroManager().closeIntro(
 					PlatformUI.getWorkbench().getIntroManager().getIntro());
 		// listen to CoreLog use RuntimeLog to hear more
-		Activator.getDefault().getLog().addLogListener(new ILogListener() {
+		XtextUITestsPlugin.getDefault().getLog().addLogListener(new ILogListener() {
 			public void logging(IStatus status, String plugin) {
 				if (IStatus.ERROR == status.getSeverity()) {
 					fail(status.getMessage());
