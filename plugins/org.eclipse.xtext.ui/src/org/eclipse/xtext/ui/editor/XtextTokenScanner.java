@@ -36,7 +36,6 @@ import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
  */
 public class XtextTokenScanner implements ITokenScanner {
 	
@@ -132,7 +131,7 @@ public class XtextTokenScanner implements ITokenScanner {
 				int originalLength = length - documentGrowth;
 				String change = document.get().substring(offset, offset + length);
 				if (Activator.DEBUG_PARSING)
-					System.out.print(" Reparse segment '" + change.replaceAll("\n", "\\\\n") + "'" + " documentGrowth:"
+					log.debug(" Reparse segment '" + change.replaceAll("\n", "\\\\n") + "'" + " documentGrowth:"
 							+ documentGrowth + " ");
 				parseResult = parser.reparse(lastRootNode, offset, originalLength, change);
 
@@ -147,19 +146,21 @@ public class XtextTokenScanner implements ITokenScanner {
 				// TODO remove this check if BUG # is fixed and a test is
 				// created
 				int length2 = rootNode.getLength();
-				if (length2 != document.getLength())
+				if (length2 != document.getLength()) {
 					throw new IllegalStateException("Document.length=" + document.getLength() + " rootNode.length="
 							+ length2);
+				}
 			}
-			if (Activator.DEBUG_PARSING)
-				System.out.println("...took " + (System.currentTimeMillis() - start) + "ms.");
+			if (Activator.DEBUG_PARSING) {
+				log.debug("...took " + (System.currentTimeMillis() - start) + "ms.");
+			}
 		}
 		catch (Exception e) {
 			log.error("Error during parse process in token scanner. "
 					+ (e.getLocalizedMessage() != null ? e.getLocalizedMessage() : ""), e);
-			e.printStackTrace();
-			if (Activator.DEBUG_PARSING)
-				System.err.println("fail!");
+			if (Activator.DEBUG_PARSING) {
+				log.error("Parsing failed!", e);
+			}
 		}
 	}
 }
