@@ -61,8 +61,7 @@
 		    name="Syntax Coloring">
 		</page>
       </extension>
-      
-   
+   «EXPAND templatesExtenion FOR this»
    «IF resourceFactoryService() != null-»
    «EXPAND registerResourceFactoryDescriptor FOR resourceFactoryService()-»
    «ENDIF»
@@ -101,5 +100,34 @@
             languageId="«languageId()»"
             class="«genClassFQName»">
       </«extensionPointID.toSimpleName()»>
+   </extension>
+«ENDDEFINE»
+
+«DEFINE templatesExtenion FOR GenModel»
+   <extension
+         point="org.eclipse.ui.editors.templates">
+      <contextType
+            class="org.eclipse.jface.text.templates.TemplateContextType"
+            id="«languageId()».rootContext"
+            name="«languageName()»">
+      </contextType>
+      <template
+            autoinsert="false"
+            contextTypeId="«languageId()».rootContext"
+            description="«languageName()» minimal file"
+            id="«languageId()».template.minimalFile"
+            name="file">
+         <pattern>the text which will be inserted here should be derived from the grammar
+         </pattern>
+      </template>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="«languageId()».editor"
+            class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.XtextTemplatePreferencePage/«languageId()»"
+            id="«languageId()».editor.templates"
+            name="Templates">
+      </page>
    </extension>
 «ENDDEFINE»
