@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.service.IProposalsProvider.ICompletionContext;
  */
 public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	private final IProposalsProvider proposalProvider;
-	private String errorMessage;
 	private final IEditorModelProvider modelProvider;
 
 	public XtextContentAssistProcessor(IEditorModelProvider modelProvider, IProposalsProvider proposalProvider) {
@@ -36,26 +35,20 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 	}
 
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
+		ICompletionContext completionContext = proposalProvider
+				.computeContext(modelProvider.getModel(), viewer, offset);
+		List<ICompletionProposal> proposals = proposalProvider.getProposals(completionContext);
+		List<ICompletionProposal> templateProposals = proposalProvider.getTemplateProposals(completionContext);
+
 		List<ICompletionProposal> result = new ArrayList<ICompletionProposal>();
-
-		if (proposalProvider instanceof IProposalsProvider) {
-			IProposalsProvider proposalsProvider2 = (IProposalsProvider) proposalProvider;
-
-			ICompletionContext completionContext = proposalsProvider2.computeContext(modelProvider.getModel(), viewer,
-					offset);
-			List<ICompletionProposal> proposals = proposalsProvider2.getProposals(completionContext);
-			List<ICompletionProposal> templateProposals = proposalsProvider2.getTemplateProposals(completionContext);
-
-			if (proposals != null) {
-				result.addAll(proposals);
-			}
-			if (templateProposals != null) {
-				result.addAll(templateProposals);
-			}
-
-			if (result != null && !result.isEmpty()) {
-				return result.toArray(new ICompletionProposal[0]);
-			}
+		if (proposals != null) {
+			result.addAll(proposals);
+		}
+		if (templateProposals != null) {
+			result.addAll(templateProposals);
+		}
+		if (!result.isEmpty()) {
+			return result.toArray(new ICompletionProposal[0]);
 		}
 		return null;
 	}
@@ -84,7 +77,7 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor {
 
 	public String getErrorMessage() {
 		// TODO create error handler
-		return errorMessage;
+		return null;
 	}
 
 }

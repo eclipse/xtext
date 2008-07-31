@@ -32,9 +32,9 @@ import org.eclipse.xtext.ui.util.GrammarConstants;
  * 
  */
 public class BuiltInFormatter implements IFormatter {
-	
+
 	private static final Logger log = Logger.getLogger(BuiltInFormatter.class);
-	
+
 	@Inject
 	private ITokenTypeDefProvider tokenTypeDefProvider;
 
@@ -42,7 +42,7 @@ public class BuiltInFormatter implements IFormatter {
 	public static final String NEW_LINE = System.getProperty("line.separator");
 	public static final String TAB = "\t";
 	public static final String SPACE = " ";
-	public static final String EMPTY_STRING = new String();
+	public static final String EMPTY_STRING = "";
 
 	private AbstractNode rootNode;
 	/*

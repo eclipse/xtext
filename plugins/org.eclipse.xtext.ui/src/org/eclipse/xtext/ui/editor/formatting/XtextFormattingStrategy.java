@@ -27,7 +27,7 @@ import org.eclipse.xtext.ui.service.IFormatter;
  */
 public class XtextFormattingStrategy extends ContextBasedFormattingStrategy {
 	
-	private Logger log = Logger.getLogger(XtextFormattingStrategy.class);
+	private static final Logger log = Logger.getLogger(XtextFormattingStrategy.class);
 	
 	private final IFormatter formatter;
 	private static long time = 0;
