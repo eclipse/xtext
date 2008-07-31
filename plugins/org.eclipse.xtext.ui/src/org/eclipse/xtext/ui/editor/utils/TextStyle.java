@@ -51,7 +51,7 @@ public class TextStyle {
 	 * @return the fontData
 	 */
 	public FontData[] getFontData() {
-		return fontData.clone();
+		return fontData;
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class TextStyle {
 	 *            the fontData to set
 	 */
 	public void setFontData(FontData[] fontData) {
-		this.fontData = fontData.clone();
+		this.fontData = fontData;
 	}
 
 	/**
