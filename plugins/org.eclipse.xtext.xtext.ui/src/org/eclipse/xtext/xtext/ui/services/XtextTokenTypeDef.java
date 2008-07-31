@@ -41,7 +41,7 @@ public class XtextTokenTypeDef extends BuiltInTokenTypeDef {
 	}
 
 	private ITokenTypeDef special() {
-		TokenTypeDef ttd = new TokenTypeDef("special") {
+		TokenTypeDef ttd = new TokenTypeDef("special","ID,STRING,INT") {
 			@Override
 			public boolean match(LeafNode node) {
 				return RuleCall.class.isInstance(node.getGrammarElement())
@@ -49,11 +49,13 @@ public class XtextTokenTypeDef extends BuiltInTokenTypeDef {
 								|| GrammarConstants.LEXER_RULE_STRING.equals(node.getText()) || GrammarConstants.LEXER_RULE_INT
 								.equals(node.getText()));
 			}
+			@Override
+			public TextStyle defaultTextStyle() {
+				TextStyle ts = keyWordTokenType().defaultTextStyle();
+				ts.setStyle(SWT.ITALIC|SWT.BOLD);
+				return ts;
+			}
 		};
-//		TextStyle ts = keyWordTokenType().textStyleCopy();
-//		ts.setStyle(SWT.ITALIC);
-//		ttd.setTextStyle(ts);
-//		loadTextStyle(ttd);
 		return ttd;
 	}
 }

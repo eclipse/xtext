@@ -23,7 +23,7 @@ import org.eclipse.xtext.ui.services.AbstractServiceTest;
 public class ReferenceGrammarTest extends AbstractServiceTest {
 
 	public void testParseNothing() throws Exception {
-		EObject object = getModelForDefaultLanguage(new String()).getRootASTElement();
+		EObject object = getModelForDefaultLanguage("").getRootASTElement();
 		assertNull(object);
 	}
 

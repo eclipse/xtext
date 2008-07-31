@@ -160,7 +160,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		link.setText("<A>" + "Configure Workspace Settings..." + "</A>"); //$NON-NLS-1$//$NON-NLS-3$
 		link.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				String id = qualifiedName().toString();
+				String id = qualifiedName();
 				PreferencesUtil.createPreferenceDialogOn(getShell(), id, new String[] { id }, null).open();
 			}
 		});
@@ -173,7 +173,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 		try {
 			useProjectSettingsButton.setSelection(Boolean.valueOf(currentProject().getPersistentProperty(
-					new QualifiedName(qualifiedName().toString(), USE_PROJECT_SETTINGS))));
+					new QualifiedName(qualifiedName(), USE_PROJECT_SETTINGS))));
 		}
 		catch (CoreException e) {
 			log.error("Error", e);
@@ -255,7 +255,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		if (retVal && isPropertyPage()) {
 			try {
 				currentProject().setPersistentProperty(
-						new QualifiedName(qualifiedName().toString(), USE_PROJECT_SETTINGS),
+						new QualifiedName(qualifiedName(), USE_PROJECT_SETTINGS),
 						String.valueOf(useProjectSettingsButton.getSelection()));
 				((IPersistentPreferenceStore) getPreferenceStore()).save();
 			}

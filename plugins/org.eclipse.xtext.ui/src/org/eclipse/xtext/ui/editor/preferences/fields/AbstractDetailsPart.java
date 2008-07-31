@@ -38,7 +38,7 @@ public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 			prefix = getPreferencePrefix() + PreferenceConstants.SEPARATOR + editor.getPreferenceName();
 		else
 			prefix = editor.getPreferenceName();
-		editor.setPreferenceName(prefix.toString());
+		editor.setPreferenceName(prefix);
 		internalEditorsList.add(editor);
 		super.addField(editor);
 	}
@@ -70,7 +70,7 @@ public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 			masterPreferenceStore.putValue(prefKey, internalStore.getString(prefKey));
 		}
 		if (internalStore.preferenceNames().length > 0)
-			masterPreferenceStore.firePropertyChangeEvent(getPreferencePrefix().toString(), null, null);
+			masterPreferenceStore.firePropertyChangeEvent(getPreferencePrefix(), null, null);
 		resetPreferenceStore();
 		return true;
 	}

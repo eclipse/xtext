@@ -39,7 +39,7 @@ public abstract class CheckBoxGroupFieldEditor extends FieldEditor {
 			Composite fieldEditorParent, boolean useGroup) {
 		init(name, labeltext);
 		this.numColumns = numColumns;
-		this.labelsAndValues = labelsAndValues;
+		this.labelsAndValues = labelsAndValues.clone();
 		this.useGroup = useGroup;
 		createControl(fieldEditorParent);
 	}

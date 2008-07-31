@@ -51,15 +51,15 @@ public class TextStyle {
 	 * @return the fontData
 	 */
 	public FontData[] getFontData() {
-		return fontData;
+		return fontData.clone();
 	}
 
 	/**
 	 * @param fontData
 	 *            the fontData to set
 	 */
-	public void setFontData(FontData[] fontName) {
-		this.fontData = fontName;
+	public void setFontData(FontData[] fontData) {
+		this.fontData = fontData.clone();
 	}
 
 	/**
