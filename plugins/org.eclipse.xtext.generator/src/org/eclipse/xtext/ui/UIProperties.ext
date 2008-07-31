@@ -31,4 +31,6 @@ editorClassFQN(GenModel this):
     
 editorExtensionId(GenModel this):
     editorClassFQN();
-    
+
+languageKeywordId(GenModel this):
+	packageName() + ".ui.keyword_"+languageName();

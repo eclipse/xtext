@@ -47,20 +47,36 @@
 			class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage/«languageId()»"
 			id="«languageId()»"
 			name="«languageName()»">
+			<keywordReference
+				id="«languageKeywordId()»">
+			</keywordReference>
 		</page>
 		<page
 		    category="«languageId()»"
 		    class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.EditorPreferencePage/«languageId()»"
 		    id="«languageId()».editor"
 		    name="Editor">
+		    	<keywordReference 
+           			id="org.eclipse.xtext.keyword.editor">
+     			</keywordReference>
 		</page>
 		<page
 		    category="«languageId()».editor"
 		    class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.SyntaxColoringPreferencePage/«languageId()»"
 		    id="«languageId()».editor.syntaxcoloring"
 		    name="Syntax Coloring">
+		    <keywordReference
+           		id="org.eclipse.xtext.keyword.syntax_coloring">
+			</keywordReference>
 		</page>
       </extension>
+		<extension
+			point="org.eclipse.ui.keywords">
+			<keyword
+				id="«languageKeywordId()»"
+				label="«languageName()»">
+			</keyword>
+		</extension>
    «EXPAND templatesExtenion FOR this»
    «IF resourceFactoryService() != null-»
    «EXPAND registerResourceFactoryDescriptor FOR resourceFactoryService()-»

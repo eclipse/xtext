@@ -133,5 +133,16 @@
             class="org.eclipse.xtext.ui.service.utils.XtextServiceRegistrationFactory">
       </serviceRegistrationFactory>
    </extension>
+   <extension
+         point="org.eclipse.ui.keywords">
+      <keyword
+            id="org.eclipse.xtext.keyword.editor"
+            label="Editor">
+      </keyword>
+      <keyword
+            id="org.eclipse.xtext.keyword.syntax_coloring"
+            label="Syntax">
+      </keyword>
+   </extension>
    
 </plugin>
