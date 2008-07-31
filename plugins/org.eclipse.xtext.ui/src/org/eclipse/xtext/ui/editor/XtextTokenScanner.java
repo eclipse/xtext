@@ -19,7 +19,6 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -45,12 +44,10 @@ public class XtextTokenScanner implements ITokenScanner {
 	private LeafNode currentNode = null;
 	private Iterator<LeafNode> nodeIterator;
 	private IParser parser;
-	private final IServiceScope languageDescriptor;
 	private IParseResult lastParseResult;
 
 	public XtextTokenScanner(IServiceScope languageDescriptor) {
 		Assert.isLegal(languageDescriptor != null);
-		this.languageDescriptor = languageDescriptor;
 		this.syntaxColorer = ServiceRegistry.getService(languageDescriptor, ISyntaxColorer.class);
 		this.parser = ServiceRegistry.getService(languageDescriptor, IParser.class);
 	}
@@ -117,13 +114,11 @@ public class XtextTokenScanner implements ITokenScanner {
 		}
 		long start = System.currentTimeMillis();
 
-		// TODO: dependency injection for default element factory in parser
-		IAstFactory elementFactory = ServiceRegistry.getService(languageDescriptor, IAstFactory.class);
 		IParseResult parseResult;
 		try {
 			CompositeNode lastRootNode = null;
 			if (lastParseResult == null) {
-				parseResult = parser.parse(new StringInputStream(document.get()), elementFactory);
+				parseResult = parser.parse(new StringInputStream(document.get()));
 			}
 			else {
 				lastRootNode = lastParseResult.getRootNode();
