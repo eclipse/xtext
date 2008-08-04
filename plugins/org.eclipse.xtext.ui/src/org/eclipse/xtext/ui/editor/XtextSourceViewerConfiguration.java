@@ -16,6 +16,7 @@ import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.TextPresentation;
+import org.eclipse.jface.text.DefaultInformationControl.IInformationPresenter;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
@@ -23,6 +24,8 @@ import org.eclipse.jface.text.formatter.IContentFormatter;
 import org.eclipse.jface.text.formatter.MultiPassContentFormatter;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
+import org.eclipse.jface.text.quickassist.IQuickAssistAssistant;
+import org.eclipse.jface.text.quickassist.QuickAssistAssistant;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.reconciler.MonoReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
@@ -37,6 +40,7 @@ import org.eclipse.xtext.ui.editor.formatting.XtextFormattingStrategy;
 import org.eclipse.xtext.ui.editor.hover.XtextTextHover;
 import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.editor.model.XtextEditorModelReconcileStrategy;
+import org.eclipse.xtext.ui.editor.quickfix.XtextQuickAssistProcessor;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.service.IFormatter;
 import org.eclipse.xtext.ui.service.IHoverInfo;
@@ -67,6 +71,18 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	@Override
 	public IReconciler getReconciler(ISourceViewer sourceViewer) {
 		return new MonoReconciler(new XtextEditorModelReconcileStrategy(editorModelProvider), false);
+	}
+
+	@Override
+	public IQuickAssistAssistant getQuickAssistAssistant(ISourceViewer sourceViewer) {
+		IQuickAssistAssistant assistant = new QuickAssistAssistant();
+		assistant.setQuickAssistProcessor(new XtextQuickAssistProcessor());
+		assistant.setInformationControlCreator(new AbstractReusableInformationControlCreator() {
+			public IInformationControl doCreateInformationControl(Shell parent) {
+				return new DefaultInformationControl(parent, (IInformationPresenter) null);
+			}
+		});
+		return assistant;
 	}
 
 	@Override

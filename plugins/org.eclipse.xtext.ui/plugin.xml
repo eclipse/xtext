@@ -21,12 +21,8 @@
          id="org.eclipse.xtext.ui.problemmarker"
          name="Xtext Editor Problem Marker"
          point="org.eclipse.core.resources.markers">
-      <persistent
-            value="true">
-      </persistent>
-      <super
-            type="org.eclipse.core.resources.problemmarker">
-      </super>
+      <super type="org.eclipse.emf.ecore.diagnostic"/>
+      <persistent value="true"/>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
@@ -143,6 +139,17 @@
             id="org.eclipse.xtext.keyword.syntax_coloring"
             label="Syntax">
       </keyword>
+   </extension>
+   <extension
+         point="org.eclipse.ui.ide.markerResolution">
+      <markerResolutionGenerator
+            class="org.eclipse.xtext.ui.editor.quickfix.XtextMarkerResolutionGenerator"
+            markerType="org.eclipse.xtext.ui.problemmarker">
+      </markerResolutionGenerator>
+      <!--<markerResolutionGenerator
+            class="org.eclipse.xtext.ui.editor.utils.XtextMarkerResolutionGenerator"
+            markerType="org.eclipse.emf.ecore.diagnostic">
+      </markerResolutionGenerator>-->
    </extension>
    
 </plugin>
