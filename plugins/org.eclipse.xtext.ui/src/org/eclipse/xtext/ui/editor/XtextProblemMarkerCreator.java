@@ -36,7 +36,7 @@ import org.eclipse.xtext.ui.internal.XtextMarkerManager;
  * 
  */
 public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
-	
+
 	private static final Logger log = Logger.getLogger(XtextProblemMarkerCreator.class);
 
 	private final IResource resource;
@@ -54,8 +54,7 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 	private Map<String, Object> collectMarkerAttributes(SyntaxError error) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IMarker.SEVERITY, Integer.valueOf(IMarker.SEVERITY_ERROR));
-		// TODO map.put(IMarker.LINE_NUMBER,
-		// Integer.valueOf(error.getNode().line()));
+		map.put(IMarker.LINE_NUMBER, Integer.valueOf(error.getNode().getLine()));
 		map.put(IMarker.CHAR_START, Integer.valueOf(error.getNode().getOffset()));
 		map.put(IMarker.CHAR_END, Integer.valueOf(error.getNode().getOffset() + error.getNode().getLength()));
 		map.put(IMarker.MESSAGE, error.getMessage());
