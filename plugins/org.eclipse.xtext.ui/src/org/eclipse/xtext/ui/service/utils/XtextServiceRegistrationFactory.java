@@ -29,6 +29,7 @@ import org.eclipse.xtext.ui.service.ILabelProvider;
 import org.eclipse.xtext.ui.service.IOutlineProvider;
 import org.eclipse.xtext.ui.service.IPreferenceStore;
 import org.eclipse.xtext.ui.service.IProposalsProvider;
+import org.eclipse.xtext.ui.service.IQuickFixGenerator;
 import org.eclipse.xtext.ui.service.ISyntaxColorer;
 import org.eclipse.xtext.ui.service.ITokenTypeDefProvider;
 
@@ -59,6 +60,7 @@ public class XtextServiceRegistrationFactory implements IServiceRegistrationFact
 		serviceMap.put("formatter", IFormatter.class);
 		serviceMap.put("hoverInfo", IHoverInfo.class);
 		serviceMap.put("foldingStructureProvider", IFoldingStructureProvider.class);
+		serviceMap.put("quickFixGenerator", IQuickFixGenerator.class);
 	}
 
 	public Set<IServiceRegistration> registrations() {
@@ -72,7 +74,8 @@ public class XtextServiceRegistrationFactory implements IServiceRegistrationFact
 				final IServiceScope scope = ServiceScopeFactory.get(scopeId);
 				if (scope == null) {
 					log.error("The referred scope " + scopeId + " is not registered");
-				} else {
+				}
+				else {
 					final String prio = ele.getAttribute(PRIO);
 					final IServiceFactory fa = new XtextServiceFactory(serviceMap.get(serviceDef), ele);
 					IServiceRegistration reg = new IServiceRegistration() {

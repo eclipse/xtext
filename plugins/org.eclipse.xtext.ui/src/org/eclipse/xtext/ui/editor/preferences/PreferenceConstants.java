@@ -33,7 +33,7 @@ public class PreferenceConstants {
 	public static String getTokenBackgroundColorPreferenceKey(String tokenType) {
 		return tokenType + SEPARATOR + BACKGROUNDCOLOR_SUFIX;
 	}
-
+//TODO D skj kas 
 	public static String getTokenFontPreferenceKey(String tokenType) {
 		return tokenType + SEPARATOR + FONT_SUFIX;
 	}

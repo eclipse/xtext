@@ -37,7 +37,7 @@ import org.eclipse.xtext.ui.internal.XtextMarkerManager;
  */
 public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 
-	private static final Logger log = Logger.getLogger(XtextProblemMarkerCreator.class);
+	private static final Logger LOG = Logger.getLogger(XtextProblemMarkerCreator.class);
 
 	private final IResource resource;
 	private IProgressMonitor monitor;
@@ -130,8 +130,7 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 				NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(ele);
 				if (nodeAdapter != null) {
 					CompositeNode parserNode = nodeAdapter.getParserNode();
-					// TODO map.put(IMarker.LINE_NUMBER,
-					// Integer.valueOf(parserNode.line()));
+					map.put(IMarker.LINE_NUMBER, Integer.valueOf(parserNode.getLine()));
 					int offset = parserNode.getOffset();
 					map.put(IMarker.CHAR_START, Integer.valueOf(offset));
 					map.put(IMarker.CHAR_END, Integer.valueOf(offset + parserNode.getLength()));
@@ -153,7 +152,7 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 				if (diagnostic.getSeverity() != Diagnostic.OK)
 					retVal.add(diagnostic);
 				if (Activator.DEBUG_MARKERCREATOR)
-					System.out.println("XtextProblemMarkerCreator.validateResourceSet()" + diagnostic.toString());
+					LOG.debug("XtextProblemMarkerCreator.validateResourceSet()" + diagnostic.toString());
 			}
 		}
 		return retVal;
@@ -165,7 +164,7 @@ public class XtextProblemMarkerCreator implements IXtextEditorModelListener {
 			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(rootObject);
 			return diagnostic;
 		}
-		log.warn("No content found in Resource: " + resource.getURI());
+		LOG.warn("No content found in Resource: " + resource.getURI());
 		return null;
 	}
 }
