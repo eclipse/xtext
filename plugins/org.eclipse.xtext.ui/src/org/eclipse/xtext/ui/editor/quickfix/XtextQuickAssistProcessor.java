@@ -13,21 +13,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.jface.text.contentassist.ICompletionProposalExtension3;
-import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext;
 import org.eclipse.jface.text.quickassist.IQuickAssistProcessor;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.IMarkerResolution;
-import org.eclipse.ui.IMarkerResolution2;
+import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.texteditor.SimpleMarkerAnnotation;
 
 /**
@@ -35,67 +28,6 @@ import org.eclipse.ui.texteditor.SimpleMarkerAnnotation;
  * 
  */
 public class XtextQuickAssistProcessor implements IQuickAssistProcessor {
-	class CompletionProposal implements ICompletionProposal, ICompletionProposalExtension3 {
-
-		Position position;
-		IMarkerResolution markerResolution;
-		IMarker marker;
-
-		public CompletionProposal(IMarkerResolution markerResolution, Position position, IMarker marker) {
-			this.position = position;
-			this.markerResolution = markerResolution;
-			this.marker = marker;
-		}
-
-		public void apply(IDocument document) {
-			markerResolution.run(marker);
-		}
-
-		public Point getSelection(IDocument document) {
-			return new Point(position.offset, 0);
-		}
-
-		public String getAdditionalProposalInfo() {
-			if (markerResolution instanceof IMarkerResolution2)
-				return ((IMarkerResolution2) markerResolution).getDescription();
-			return null;
-		}
-
-		public String getDisplayString() {
-			return markerResolution.getLabel();
-		}
-
-		public Image getImage() {
-			if (markerResolution instanceof IMarkerResolution2) {
-				IMarkerResolution2 resolution = (IMarkerResolution2) markerResolution;
-				return resolution.getImage();
-			}
-			return null;
-		}
-
-		public IContextInformation getContextInformation() {
-			return null;
-		}
-
-		public IInformationControlCreator getInformationControlCreator() {
-			return null;
-		}
-
-		public int getPrefixCompletionStart(IDocument document, int completionOffset) {
-			return 0;
-		}
-
-		public CharSequence getPrefixCompletionText(IDocument document, int completionOffset) {
-			return null;
-		}
-
-	}
-
-	private final XtextMarkerResolutionGenerator quickFixGenerator;
-
-	public XtextQuickAssistProcessor() {
-		this.quickFixGenerator = new XtextMarkerResolutionGenerator();
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -105,7 +37,6 @@ public class XtextQuickAssistProcessor implements IQuickAssistProcessor {
 	 * .eclipse.jface.text.quickassist.IQuickAssistInvocationContext)
 	 */
 	public boolean canAssist(IQuickAssistInvocationContext invocationContext) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -117,10 +48,11 @@ public class XtextQuickAssistProcessor implements IQuickAssistProcessor {
 	 * .jface.text.source.Annotation)
 	 */
 	public boolean canFix(Annotation annotation) {
-		if (!(annotation instanceof SimpleMarkerAnnotation))
-			return false;
-		IMarker marker = ((SimpleMarkerAnnotation) annotation).getMarker();
-		return this.quickFixGenerator.hasResolutions(marker);
+		if (annotation instanceof SimpleMarkerAnnotation) {
+			IMarker marker = ((SimpleMarkerAnnotation) annotation).getMarker();
+			return IDE.getMarkerHelpRegistry().hasResolutions(marker);
+		}
+		return false;
 	}
 
 	/*
@@ -131,41 +63,26 @@ public class XtextQuickAssistProcessor implements IQuickAssistProcessor {
 	 * (org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext)
 	 */
 	public ICompletionProposal[] computeQuickAssistProposals(IQuickAssistInvocationContext invocationContext) {
-		IAnnotationModel amodel = invocationContext.getSourceViewer().getAnnotationModel();
-		IDocument doc = invocationContext.getSourceViewer().getDocument();
-
-		int offset = invocationContext.getOffset();
-		Iterator<?> it = amodel.getAnnotationIterator();
-		List<CompletionProposal> list = new ArrayList<CompletionProposal>();
-		while (it.hasNext()) {
-			Object key = it.next();
-			if (!(key instanceof SimpleMarkerAnnotation))
-				continue;
-
-			SimpleMarkerAnnotation annotation = (SimpleMarkerAnnotation) key;
-			IMarker marker = annotation.getMarker();
-
-			IMarkerResolution[] mapping = quickFixGenerator.getResolutions(marker);
-			if (mapping != null) {
-				Position pos = amodel.getPosition(annotation);
-				try {
-					int line = doc.getLineOfOffset(pos.getOffset());
-					int start = pos.getOffset();
-					String delim = doc.getLineDelimiter(line);
-					int delimLength = delim != null ? delim.length() : 0;
-					int end = doc.getLineLength(line) + start - delimLength;
-					if (offset >= start && offset <= end) {
-						for (int i = 0; i < mapping.length; i++) {
-							list.add(new CompletionProposal(mapping[i], pos, marker));
+		IAnnotationModel anoModel = invocationContext.getSourceViewer().getAnnotationModel();
+		Iterator<?> anotationIterator = anoModel.getAnnotationIterator();
+		List<MarkerResolutionCompletionProposal> proposals = new ArrayList<MarkerResolutionCompletionProposal>();
+		while (anotationIterator.hasNext()) {
+			Object key = anotationIterator.next();
+			if (key instanceof SimpleMarkerAnnotation) {
+				SimpleMarkerAnnotation annotation = (SimpleMarkerAnnotation) key;
+				IMarker marker = annotation.getMarker();
+				IMarkerResolution[] markerResolutions = IDE.getMarkerHelpRegistry().getResolutions(marker);
+				if (markerResolutions != null && markerResolutions.length > 0) {
+					Position pos = anoModel.getPosition(annotation);
+					if (pos.overlapsWith(invocationContext.getOffset(), invocationContext.getLength())) {
+						for (int i = 0; i < markerResolutions.length; i++) {
+							proposals.add(new MarkerResolutionCompletionProposal(markerResolutions[i], pos, marker));
 						}
 					}
 				}
-				catch (BadLocationException e) {
-				}
-
 			}
 		}
-		return (ICompletionProposal[]) list.toArray(new ICompletionProposal[0]);
+		return (ICompletionProposal[]) proposals.toArray(new ICompletionProposal[0]);
 	}
 
 	/*

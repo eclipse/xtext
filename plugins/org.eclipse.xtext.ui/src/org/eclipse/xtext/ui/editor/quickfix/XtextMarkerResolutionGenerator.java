@@ -9,16 +9,28 @@
 package org.eclipse.xtext.ui.editor.quickfix;
 
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IMarkerResolution;
-import org.eclipse.ui.IMarkerResolution2;
 import org.eclipse.ui.IMarkerResolutionGenerator2;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentProviderFactory;
+import org.eclipse.xtext.ui.service.IQuickFixGenerator;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
 public class XtextMarkerResolutionGenerator implements IMarkerResolutionGenerator2 {
+	private XtextDocumentProvider documentProvider;
+	private IQuickFixGenerator qfService;
+
+	@Inject
+	public void setServiceScope(IServiceScope scope) {
+		documentProvider = XtextDocumentProviderFactory.getInstance().getDocumentProvider(scope);
+		qfService = ServiceRegistry.getService(scope, IQuickFixGenerator.class);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -27,30 +39,23 @@ public class XtextMarkerResolutionGenerator implements IMarkerResolutionGenerato
 	 * org.eclipse.ui.IMarkerResolutionGenerator#getResolutions(org.eclipse.
 	 * core.resources.IMarker)
 	 */
-	public IMarkerResolution[] getResolutions(IMarker marker) {
-		return new IMarkerResolution2[] { new IMarkerResolution2() {
-
-			public String getDescription() {
-				return "Xtext Marker Resolution Descr";
-			}
-
-			public Image getImage() {
-				return null;
-			}
-
-			public String getLabel() {
-				return "Can Fix all problemms QuickFix";
-			}
-
-			public void run(IMarker marker) {
-				// TODO Auto-generated method stub
-
-			}
-		} };
+	public IMarkerResolution[] getResolutions(final IMarker marker) {
+		if (qfService != null)
+			return qfService.getQuickFixes(marker, documentProvider);
+		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.IMarkerResolutionGenerator2#hasResolutions(org.eclipse
+	 * .core.resources.IMarker)
+	 */
 	public boolean hasResolutions(IMarker marker) {
-		return true;
+		if (qfService != null)
+			return qfService.hasQuickFixes(marker, documentProvider);
+		return false;
 	}
 
 }
