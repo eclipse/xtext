@@ -53,4 +53,11 @@ kind (${kind2} ${kind2Alter})
          </pattern>
       </template>
    </extension>
+   <extension
+         point="org.eclipse.xtext.ui.labelProvider">
+      <labelProvider
+            class="org.eclipse.xtext.reference.ui.services.ReferenceGrammarLabelProvider"
+            languageId="org.eclipse.xtext.reference.ReferenceGrammar">
+      </labelProvider>
+   </extension>
 </plugin>
