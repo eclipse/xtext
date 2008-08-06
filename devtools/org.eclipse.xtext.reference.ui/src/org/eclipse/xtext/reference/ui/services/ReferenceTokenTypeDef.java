@@ -7,7 +7,7 @@
  *
  *******************************************************************************/
 package org.eclipse.xtext.reference.ui.services;
-
+ 
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,10 +60,15 @@ public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 			public boolean match(LeafNode node) {
 				return keyWordTokenType().match(node) && "GELB".equals(node.getText());
 			}
+
+			@Override
+			public TextStyle defaultTextStyle() {
+				TextStyle textStyle = new TextStyle();
+				textStyle.setColor(new RGB(221, 212, 88));
+				textStyle.setStyle(SWT.BOLD);
+				return textStyle;
+			}
 		};
-		// TextStyle ts = keyWordTokenType().textStyleCopy();
-		// ts.setColor("221,212,88");
-		// loadTextStyle(ttd);
 		return ttd;
 	}
 
@@ -73,10 +78,15 @@ public class ReferenceTokenTypeDef extends BuiltInTokenTypeDef {
 			public boolean match(LeafNode node) {
 				return keyWordTokenType().match(node) && "GRÜN".equals(node.getText());
 			}
+
+			@Override
+			public TextStyle defaultTextStyle() {
+				TextStyle textStyle = new TextStyle();
+				textStyle.setColor(new RGB(10, 200, 10));
+				textStyle.setStyle(SWT.BOLD);
+				return textStyle;
+			}
 		};
-		// TextStyle ts = keyWordTokenType().textStyleCopy();
-		// ts.setColor("10,200,10");
-		// loadTextStyle(ttd);
 		return ttd;
 	}
 
