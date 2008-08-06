@@ -126,8 +126,8 @@ public class XtextTokenScanner implements ITokenScanner {
 				int originalLength = length - documentGrowth;
 				String change = document.get().substring(offset, offset + length);
 				if (Activator.DEBUG_PARSING)
-					log.debug(" Reparse segment '" + change.replaceAll("\n", "\\\\n") + "'" + " documentGrowth:"
-							+ documentGrowth + " ");
+					log.debug(" Reparsing segment! (Document growth:"
+							+ documentGrowth + ") ");
 				parseResult = parser.reparse(lastRootNode, offset, originalLength, change);
 
 			}

@@ -8,10 +8,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.service.utils;
 
+import java.util.Arrays;
+
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Device;
+import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
@@ -20,6 +27,10 @@ import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.internal.Activator;
 
+/**
+ * @author Dennis Hübner - Initial contribution and API
+ * 
+ */
 public class PropertiesResolver {
 	private final String PREFERENCE_TAG;
 	private static ScopedPreferenceStore preferenceStore;
@@ -41,36 +52,53 @@ public class PropertiesResolver {
 		String backgroundKey = PREFERENCE_TAG + PreferenceConstants.getTokenBackgroundColorPreferenceKey(tokenTpeDefId);
 		String fontKey = PREFERENCE_TAG + PreferenceConstants.getTokenFontPreferenceKey(tokenTpeDefId);
 		String styleKey = PREFERENCE_TAG + PreferenceConstants.getTokenStylePreferenceKey(tokenTpeDefId);
-		// TODO handle texteditor system default is set
-		// Defaults
+
+		// DefaultDefault
 		IPreferenceStore editorsStore = EditorsUI.getPreferenceStore();
+		RGB fontColorDefaultDefault = editorsStore.getBoolean(TextEditor.PREFERENCE_COLOR_FOREGROUND_SYSTEM_DEFAULT) ? getDisplay()
+				.getSystemColor(SWT.COLOR_LIST_FOREGROUND).getRGB()
+				: PreferenceConverter.getColor(editorsStore, TextEditor.PREFERENCE_COLOR_FOREGROUND);
+		RGB backgrounColorDefaultDefault = editorsStore
+				.getBoolean(TextEditor.PREFERENCE_COLOR_BACKGROUND_SYSTEM_DEFAULT) ? getDisplay().getSystemColor(
+				SWT.COLOR_LIST_BACKGROUND).getRGB() : PreferenceConverter.getColor(editorsStore,
+				TextEditor.PREFERENCE_COLOR_BACKGROUND);
+		FontData[] fontDataDefaultDefault = JFaceResources.getTextFont().getFontData();
+
+		// set defaults
+		ScopedPreferenceStore preferenceStore = getPreferenceStore();
 		if (defaults.getColor() != null)
-			PreferenceConverter.setDefault(getPreferenceStore(), colorKey, defaults.getColor());
-		else
-			PreferenceConverter.setDefault(getPreferenceStore(), colorKey, PreferenceConverter.getColor(editorsStore,
-					TextEditor.PREFERENCE_COLOR_FOREGROUND));
-
+			PreferenceConverter.setDefault(preferenceStore, colorKey, defaults.getColor());
+		else {
+			PreferenceConverter.setDefault(preferenceStore, colorKey, fontColorDefaultDefault);
+		}
 		if (defaults.getBackgroundColor() != null)
-			PreferenceConverter.setDefault(getPreferenceStore(), backgroundKey, defaults.getBackgroundColor());
-		else
-			PreferenceConverter.setDefault(getPreferenceStore(), backgroundKey, PreferenceConverter.getColor(
-					editorsStore, TextEditor.PREFERENCE_COLOR_BACKGROUND));
-
+			PreferenceConverter.setDefault(preferenceStore, backgroundKey, defaults.getBackgroundColor());
+		else {
+			PreferenceConverter.setDefault(preferenceStore, backgroundKey, backgrounColorDefaultDefault);
+		}
 		if (defaults.getFontData() != null)
-			PreferenceConverter.setDefault(getPreferenceStore(), fontKey, defaults.getFontData());
-		else
-			PreferenceConverter.setDefault(getPreferenceStore(), fontKey, JFaceResources.getTextFont().getFontData());
-
-		getPreferenceStore().setDefault(styleKey, defaults.getStyle());
+			PreferenceConverter.setDefault(preferenceStore, fontKey, defaults.getFontData());
+		else {
+			PreferenceConverter.setDefault(preferenceStore, fontKey, fontDataDefaultDefault);
+		}
+		preferenceStore.setDefault(styleKey, defaults.getStyle());
 
 		// populate
-		if (getPreferenceStore().contains(colorKey))
-			style.setColor(PreferenceConverter.getColor(getPreferenceStore(), colorKey));
-		if (getPreferenceStore().contains(backgroundKey))
-			style.setBackgroundColor(PreferenceConverter.getColor(getPreferenceStore(), backgroundKey));
-		if (getPreferenceStore().contains(fontKey))
-			style.setFontData(PreferenceConverter.getFontDataArray(getPreferenceStore(), fontKey));
-		if (getPreferenceStore().contains(styleKey))
-			style.setStyle(getPreferenceStore().getInt(styleKey));
+		RGB color = PreferenceConverter.getColor(preferenceStore, colorKey);
+		if (!color.equals(fontColorDefaultDefault))
+			style.setColor(color);
+		RGB background = PreferenceConverter.getColor(preferenceStore, backgroundKey);
+		if (!background.equals(backgrounColorDefaultDefault))
+			style.setBackgroundColor(background);
+		FontData[] fontDataArray = PreferenceConverter.getFontDataArray(preferenceStore, fontKey);
+		if (!Arrays.equals(fontDataArray, fontDataDefaultDefault)) {
+			style.setFontData(fontDataArray);
+		}
+		style.setStyle(preferenceStore.getInt(styleKey));
+	}
+
+	private Device getDisplay() {
+		Display display = Display.getCurrent();
+		return display == null ? Display.getDefault() : display;
 	}
 }

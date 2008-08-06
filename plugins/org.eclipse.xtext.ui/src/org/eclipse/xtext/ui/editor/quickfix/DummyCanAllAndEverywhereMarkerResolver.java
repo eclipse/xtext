@@ -4,6 +4,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IMarkerResolution2;
@@ -26,15 +28,15 @@ final class DummyCanAllAndEverywhereMarkerResolver implements IMarkerResolution2
 	}
 
 	public String getDescription() {
-		return "Xtext Marker Resolution for: " + MarkerUtilities.getMessage(marker);
+		return "Xtext Marker Resolution for: " + MarkerUtilities.getMessage(marker) + " problems";
 	}
 
 	public Image getImage() {
-		return null;
+		return JFaceResources.getImage(Dialog.DLG_IMG_HELP);
 	}
 
 	public String getLabel() {
-		return "Can Fix all problems particularly for " + MarkerUtilities.getMessage(marker);
+		return "Can Fix all problems, particularly the " + MarkerUtilities.getMessage(marker);
 	}
 
 	public void run(IMarker marker) {
