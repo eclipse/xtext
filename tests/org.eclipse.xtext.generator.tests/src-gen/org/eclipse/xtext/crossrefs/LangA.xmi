@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>crossrefs</idElements>
+  <idElements>LangA</idElements>
+  <parserRules name="Main">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="imports" operator="+=">
+        <terminal xsi:type="xtext:RuleCall" name="Import"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="types" operator="+=">
+        <terminal xsi:type="xtext:RuleCall" name="Type"/>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
+  <parserRules name="Import">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Keyword" value="import"/>
+      <abstractTokens xsi:type="xtext:Assignment" feature="uri" operator="=">
+        <terminal xsi:type="xtext:RuleCall" name="STRING"/>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
+  <parserRules name="Type">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="type"/>
+          <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+            <terminal xsi:type="xtext:RuleCall" name="ID"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Keyword" value="extends"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" feature="extends" operator="=">
+        <terminal xsi:type="xtext:CrossReference">
+          <type name="Type"/>
+        </terminal>
+      </abstractTokens>
+    </alternatives>
+  </parserRules>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="http://eclipse.org/xtext/langA" name="langA"/>
+</xtext:Grammar>

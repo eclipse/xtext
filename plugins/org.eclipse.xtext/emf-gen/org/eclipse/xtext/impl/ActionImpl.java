@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActionImpl.java,v 1.11 2008/06/05 15:03:51 sefftinge Exp $
+ * $Id: ActionImpl.java,v 1.12 2008/08/07 15:05:35 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -65,7 +65,7 @@ public class ActionImpl extends AbstractElementImpl implements Action
 	 */
   protected static final String OPERATOR_EDEFAULT = null;
 
-  /**
+		/**
 	 * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -75,7 +75,7 @@ public class ActionImpl extends AbstractElementImpl implements Action
 	 */
   protected String operator = OPERATOR_EDEFAULT;
 
-  /**
+		/**
 	 * The cached value of the '{@link #getTypeName() <em>Type Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

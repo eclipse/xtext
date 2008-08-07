@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeRefImpl.java,v 1.10 2008/06/05 15:03:50 sefftinge Exp $
+ * $Id: TypeRefImpl.java,v 1.11 2008/08/07 15:05:35 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -42,7 +42,7 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 	 */
   protected static final String NAME_EDEFAULT = null;
 
-  /**
+		/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -52,7 +52,7 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 	 */
   protected String name = NAME_EDEFAULT;
 
-  /**
+		/**
 	 * The default value of the '{@link #getAlias() <em>Alias</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -62,7 +62,7 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 	 */
   protected static final String ALIAS_EDEFAULT = null;
 
-  /**
+		/**
 	 * The cached value of the '{@link #getAlias() <em>Alias</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

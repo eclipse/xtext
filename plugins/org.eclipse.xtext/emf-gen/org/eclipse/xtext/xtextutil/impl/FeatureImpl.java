@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FeatureImpl.java,v 1.2 2008/06/05 08:58:45 sefftinge Exp $
+ * $Id: FeatureImpl.java,v 1.3 2008/08/07 15:05:36 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextutil.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -29,6 +30,7 @@ import org.eclipse.xtext.xtextutil.XtextutilPackage;
  *   <li>{@link org.eclipse.xtext.xtextutil.impl.FeatureImpl#getLowerBound <em>Lower Bound</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextutil.impl.FeatureImpl#getUpperBound <em>Upper Bound</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextutil.impl.FeatureImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextutil.impl.FeatureImpl#isContainment <em>Containment</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,6 +106,26 @@ public class FeatureImpl extends EObjectImpl implements Feature {
 	 * @ordered
 	 */
 	protected AbstractType type;
+
+	/**
+	 * The default value of the '{@link #isContainment() <em>Containment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isContainment()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean CONTAINMENT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isContainment() <em>Containment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isContainment()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean containment = CONTAINMENT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -230,6 +252,27 @@ public class FeatureImpl extends EObjectImpl implements Feature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isContainment() {
+		return containment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContainment(boolean newContainment) {
+		boolean oldContainment = containment;
+		containment = newContainment;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextutilPackage.FEATURE__CONTAINMENT, oldContainment, containment));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -242,6 +285,8 @@ public class FeatureImpl extends EObjectImpl implements Feature {
 			case XtextutilPackage.FEATURE__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case XtextutilPackage.FEATURE__CONTAINMENT:
+				return isContainment() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -265,6 +310,9 @@ public class FeatureImpl extends EObjectImpl implements Feature {
 				return;
 			case XtextutilPackage.FEATURE__TYPE:
 				setType((AbstractType)newValue);
+				return;
+			case XtextutilPackage.FEATURE__CONTAINMENT:
+				setContainment(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -290,6 +338,9 @@ public class FeatureImpl extends EObjectImpl implements Feature {
 			case XtextutilPackage.FEATURE__TYPE:
 				setType((AbstractType)null);
 				return;
+			case XtextutilPackage.FEATURE__CONTAINMENT:
+				setContainment(CONTAINMENT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -310,6 +361,8 @@ public class FeatureImpl extends EObjectImpl implements Feature {
 				return upperBound != UPPER_BOUND_EDEFAULT;
 			case XtextutilPackage.FEATURE__TYPE:
 				return type != null;
+			case XtextutilPackage.FEATURE__CONTAINMENT:
+				return containment != CONTAINMENT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -330,6 +383,8 @@ public class FeatureImpl extends EObjectImpl implements Feature {
 		result.append(lowerBound);
 		result.append(", upperBound: ");
 		result.append(upperBound);
+		result.append(", containment: ");
+		result.append(containment);
 		result.append(')');
 		return result.toString();
 	}

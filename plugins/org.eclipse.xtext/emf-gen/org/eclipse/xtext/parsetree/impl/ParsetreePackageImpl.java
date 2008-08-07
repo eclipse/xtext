@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackageImpl.java,v 1.8 2008/07/03 15:26:01 jkohnlein Exp $
+ * $Id: ParsetreePackageImpl.java,v 1.9 2008/08/07 15:05:36 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -188,15 +188,14 @@ public class ParsetreePackageImpl extends EPackageImpl implements ParsetreePacka
 
   /**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getAbstractNode_Element()
-  {
+	public EReference getAbstractNode_Element() {
 		return (EReference)abstractNodeEClass.getEStructuralFeatures().get(2);
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

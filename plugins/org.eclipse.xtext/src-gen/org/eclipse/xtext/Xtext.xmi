@@ -287,10 +287,32 @@
     <type name="AbstractElement"/>
     <alternatives xsi:type="xtext:Alternatives">
       <groups xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:RuleCall" name="Keyword"/>
-        <groups xsi:type="xtext:RuleCall" name="RuleCall"/>
+        <groups xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:RuleCall" name="Keyword"/>
+          <groups xsi:type="xtext:RuleCall" name="RuleCall"/>
+        </groups>
+        <groups xsi:type="xtext:RuleCall" name="ParenthesizedElement"/>
       </groups>
-      <groups xsi:type="xtext:RuleCall" name="ParenthesizedElement"/>
+      <groups xsi:type="xtext:RuleCall" name="CrossReference"/>
+    </alternatives>
+  </parserRules>
+  <parserRules name="CrossReference">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="["/>
+          <abstractTokens xsi:type="xtext:Assignment" feature="type" operator="=">
+            <terminal xsi:type="xtext:RuleCall" name="TypeRef"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Group" cardinality="?">
+          <abstractTokens xsi:type="xtext:Keyword" value="|"/>
+          <abstractTokens xsi:type="xtext:Assignment" feature="rule" operator="=">
+            <terminal xsi:type="xtext:RuleCall" name="RuleCall"/>
+          </abstractTokens>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="]"/>
     </alternatives>
   </parserRules>
   <parserRules name="ParenthesizedElement">

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextutilAdapterFactory.java,v 1.12 2008/06/05 08:58:46 sefftinge Exp $
+ * $Id: XtextutilAdapterFactory.java,v 1.13 2008/08/07 15:05:36 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextutil.util;
 
@@ -64,7 +64,7 @@ public class XtextutilAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * The switch the delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

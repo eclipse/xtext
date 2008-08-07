@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextutilPackageImpl.java,v 1.12 2008/06/05 08:58:45 sefftinge Exp $
+ * $Id: XtextutilPackageImpl.java,v 1.13 2008/08/07 15:05:36 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextutil.impl;
 
@@ -285,6 +285,15 @@ public class XtextutilPackageImpl extends EPackageImpl implements XtextutilPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getFeature_Containment() {
+		return (EAttribute)featureEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public XtextutilFactory getXtextutilFactory() {
 		return (XtextutilFactory)getEFactoryInstance();
 	}
@@ -328,6 +337,7 @@ public class XtextutilPackageImpl extends EPackageImpl implements XtextutilPacka
 		createEAttribute(featureEClass, FEATURE__LOWER_BOUND);
 		createEAttribute(featureEClass, FEATURE__UPPER_BOUND);
 		createEReference(featureEClass, FEATURE__TYPE);
+		createEAttribute(featureEClass, FEATURE__CONTAINMENT);
 	}
 
 	/**
@@ -391,6 +401,7 @@ public class XtextutilPackageImpl extends EPackageImpl implements XtextutilPacka
 		initEAttribute(getFeature_LowerBound(), ecorePackage.getEInt(), "lowerBound", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFeature_UpperBound(), ecorePackage.getEInt(), "upperBound", "1", 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFeature_Type(), this.getAbstractType(), null, "type", null, 1, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFeature_Containment(), ecorePackage.getEBoolean(), "containment", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

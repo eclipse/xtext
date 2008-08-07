@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextFactory.java,v 1.10 2008/06/05 15:03:49 sefftinge Exp $
+ * $Id: XtextFactory.java,v 1.11 2008/08/07 15:05:36 sefftinge Exp $
  */
 package org.eclipse.xtext;
 
@@ -72,6 +72,15 @@ public interface XtextFactory extends EFactory
   TypeRef createTypeRef();
 
   /**
+	 * Returns a new object of class '<em>Cross Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Cross Reference</em>'.
+	 * @generated
+	 */
+	CrossReference createCrossReference();
+
+		/**
 	 * Returns a new object of class '<em>Group</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -2,22 +2,28 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractTypeImpl.java,v 1.12 2008/06/05 08:58:45 sefftinge Exp $
+ * $Id: AbstractTypeImpl.java,v 1.13 2008/08/07 15:05:36 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextutil.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.xtextutil.AbstractType;
+import org.eclipse.xtext.xtextutil.Feature;
 import org.eclipse.xtext.xtextutil.MetaModel;
 import org.eclipse.xtext.xtextutil.XtextutilPackage;
 
@@ -151,6 +157,7 @@ public abstract class AbstractTypeImpl extends EObjectImpl implements AbstractTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -211,6 +218,7 @@ public abstract class AbstractTypeImpl extends EObjectImpl implements AbstractTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {

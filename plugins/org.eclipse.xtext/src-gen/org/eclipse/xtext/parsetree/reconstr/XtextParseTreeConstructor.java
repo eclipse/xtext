@@ -40,6 +40,8 @@ public class XtextParseTreeConstructor extends AbstractParseTreeConstructor {
 			proceedAction(getDescr(obj),callback);
 		} else 		if (ruleToCall.equals("AbstractTerminal")) {
 			proceedAbstractTerminal(getDescr(obj),callback);
+		} else 		if (ruleToCall.equals("CrossReference")) {
+			proceedCrossReference(getDescr(obj),callback);
 		} else 		if (ruleToCall.equals("ParenthesizedElement")) {
 			proceedParenthesizedElement(getDescr(obj),callback);
 		} else 		if (ruleToCall.equals("Keyword")) {
@@ -2046,6 +2048,26 @@ new Predicate(obj) {
 		public boolean check() {
 			return obj.isInstanceOf("RuleCall"); 
 		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("AbstractElement"); 
+		}
+}.check() ) {
+			
+/* xtext::Alternatives */ 
+{
+
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("Keyword"); 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("RuleCall"); 
+		}
 }.check() ) {
 			
 /* xtext::Alternatives */ 
@@ -2063,7 +2085,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13/@alternatives/@groups.0/@groups.0");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13/@alternatives/@groups.0/@groups.0/@groups.0");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedKeyword(val,callback);
@@ -2088,7 +2110,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13/@alternatives/@groups.0/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13/@alternatives/@groups.0/@groups.0/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedRuleCall(val,callback);
@@ -2122,10 +2144,44 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13/@alternatives/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13/@alternatives/@groups.0/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedParenthesizedElement(val,callback);
+			
+		} finally {
+			callback.parserRuleCallEnd();
+		}
+	
+
+}
+
+		}
+	
+		else {
+		    throw new XtextSerializationException(obj, "No alternative matched");
+		}
+	
+
+}
+
+		}
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("CrossReference"); 
+		}
+}.check() ) {
+			
+/* xtext::RuleCall */ 
+{
+
+	
+		InstanceDescription val = obj;
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13/@alternatives/@groups.1");
+		try {
+			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
+			proceedCrossReference(val,callback);
 			
 		} finally {
 			callback.parserRuleCallEnd();
@@ -2148,13 +2204,13 @@ new Predicate(obj) {
 	}
 }
 
-private String ParenthesizedElementRecursionCheck = null;
-protected void proceedParenthesizedElement(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+private String CrossReferenceRecursionCheck = null;
+protected void proceedCrossReference(InstanceDescription obj,IParseTreeConstructorCallback callback) {
 	try {
 		String s = obj.uniqueStateString();
-		if (s.equals(ParenthesizedElementRecursionCheck))
+		if (s.equals(CrossReferenceRecursionCheck))
 			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		ParenthesizedElementRecursionCheck = s;
+		CrossReferenceRecursionCheck = s;
 	
 /* xtext::Group */ 
 {
@@ -2172,12 +2228,144 @@ protected void proceedParenthesizedElement(InstanceDescription obj,IParseTreeCon
 {
 
 		
+/* xtext::Group */ 
+
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("rule")&&true; 
+		}
+}.check() ){
+
+		
+/* xtext::Assignment */ 
+{
+
+	final Object value = obj.consume("rule");
+    
+/* xtext::RuleCall */ 
+{
+
+	
+		InstanceDescription val = (getDescr((EObject)value));
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
+		try {
+			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
+			proceedRuleCall(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
+		} finally {
+			callback.parserRuleCallEnd();
+		}
+	
+
+}
+
+    if (obj.isConsumed())
+    	callback.objectCreation(obj);
+
+}
+
+		
+/* xtext::Keyword */ 
+{
+
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
+
+}
+
+
+}
+
+		
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Assignment */ 
+{
+
+	final Object value = obj.consume("type");
+    
+/* xtext::RuleCall */ 
+{
+
+	
+		InstanceDescription val = (getDescr((EObject)value));
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
+		try {
+			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
+			proceedTypeRef(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
+		} finally {
+			callback.parserRuleCallEnd();
+		}
+	
+
+}
+
+    if (obj.isConsumed())
+    	callback.objectCreation(obj);
+
+}
+
+		
+/* xtext::Keyword */ 
+{
+
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
+
+}
+
+
+}
+
+
+}
+
+
+}
+
+	} finally {
+		CrossReferenceRecursionCheck = null;
+	}
+}
+
+private String ParenthesizedElementRecursionCheck = null;
+protected void proceedParenthesizedElement(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(ParenthesizedElementRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		ParenthesizedElementRecursionCheck = s;
+	
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Keyword */ 
+{
+
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.15/@alternatives/@abstractTokens.1"));
+
+}
+
+		
+/* xtext::Group */ 
+{
+
+		
 /* xtext::RuleCall */ 
 {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.15/@alternatives/@abstractTokens.0/@abstractTokens.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAlternatives(val,callback);
@@ -2193,7 +2381,7 @@ protected void proceedParenthesizedElement(InstanceDescription obj,IParseTreeCon
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.15/@alternatives/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -2225,7 +2413,7 @@ protected void proceedKeyword(InstanceDescription obj,IParseTreeConstructorCallb
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.15/@alternatives/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.16/@alternatives/@terminal"));
 	
 
 }
@@ -2257,7 +2445,7 @@ protected void proceedRuleCall(InstanceDescription obj,IParseTreeConstructorCall
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.16/@alternatives/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.17/@alternatives/@terminal"));
 	
 
 }

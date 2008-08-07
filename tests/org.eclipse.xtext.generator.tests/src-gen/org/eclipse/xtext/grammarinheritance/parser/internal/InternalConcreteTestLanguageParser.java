@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g 2008-07-18 09:17:15
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g 2008-08-07 16:58:56
 
 package org.eclipse.xtext.grammarinheritance.parser.internal; 
 
@@ -124,36 +124,35 @@ public class InternalConcreteTestLanguageParser extends AbstractAntlrParser {
                     createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:78:1: (lv_magicNumber= RULE_REAL )
-            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:79:5: lv_magicNumber= RULE_REAL
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:80:6: lv_magicNumber= RULE_REAL
             {
             lv_magicNumber=(Token)input.LT(1);
-            match(input,RULE_REAL,FOLLOW_RULE_REAL_in_ruleConcreteParserRule134); 
+            match(input,RULE_REAL,FOLLOW_RULE_REAL_in_ruleConcreteParserRule138); 
              
                 createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "magicNumber"); 
                 
 
-                    if (current==null) {
-                        current = factory.create("ConcreteParserRule");
-                        associateNodeWithAstElement(currentNode, current);
-                    }
-                    
-                    factory.set(current, "magicNumber", lv_magicNumber,"REAL");
-                    
-                     
+            	        if (current==null) {
+            	            current = factory.create("ConcreteParserRule");
+            	            associateNodeWithAstElement(currentNode, current);
+            	        }
+            	        
+            	        factory.set(current, "magicNumber", lv_magicNumber,"REAL");
+            	         
 
             }
 
 
             }
 
-            match(input,13,FOLLOW_13_in_ruleConcreteParserRule152); 
+            match(input,13,FOLLOW_13_in_ruleConcreteParserRule159); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
-            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:97:2: (lv_elements= ruleInheritedParserRule )*
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:98:2: (lv_elements= ruleInheritedParserRule )*
             loop1:
             do {
                 int alt1=2;
@@ -166,25 +165,24 @@ public class InternalConcreteTestLanguageParser extends AbstractAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:99:5: lv_elements= ruleInheritedParserRule
+            	    // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:101:6: lv_elements= ruleInheritedParserRule
             	    {
             	     
-            	            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
-            	        
-            	    pushFollow(FOLLOW_ruleInheritedParserRule_in_ruleConcreteParserRule181);
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	    
+            	    pushFollow(FOLLOW_ruleInheritedParserRule_in_ruleConcreteParserRule194);
             	    lv_elements=ruleInheritedParserRule();
             	    _fsp--;
 
 
-            	            currentNode = currentNode.getParent();
-            	            if (current==null) {
-            	                current = factory.create("ConcreteParserRule");
-            	                associateNodeWithAstElement(currentNode, current);
-            	            }
-            	            
-            	            factory.add(current, "elements", lv_elements,null);
-            	            
-            	             
+            	    	        currentNode = currentNode.getParent();
+            	    	        if (current==null) {
+            	    	            current = factory.create("ConcreteParserRule");
+            	    	            associateNodeWithAstElement(currentNode, current);
+            	    	        }
+            	    	        
+            	    	        factory.add(current, "elements", lv_elements,null);
+            	    	         
 
             	    }
             	    break;
@@ -215,7 +213,7 @@ public class InternalConcreteTestLanguageParser extends AbstractAntlrParser {
 
 
     // $ANTLR start entryRuleInheritedParserRule
-    // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:118:1: entryRuleInheritedParserRule returns [EObject current=null] : iv_ruleInheritedParserRule= ruleInheritedParserRule EOF ;
+    // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:120:1: entryRuleInheritedParserRule returns [EObject current=null] : iv_ruleInheritedParserRule= ruleInheritedParserRule EOF ;
     public final EObject entryRuleInheritedParserRule() throws RecognitionException {
         EObject current = null;
 
@@ -223,16 +221,16 @@ public class InternalConcreteTestLanguageParser extends AbstractAntlrParser {
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:118:61: (iv_ruleInheritedParserRule= ruleInheritedParserRule EOF )
-            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:119:2: iv_ruleInheritedParserRule= ruleInheritedParserRule EOF
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:120:61: (iv_ruleInheritedParserRule= ruleInheritedParserRule EOF )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:121:2: iv_ruleInheritedParserRule= ruleInheritedParserRule EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); 
-            pushFollow(FOLLOW_ruleInheritedParserRule_in_entryRuleInheritedParserRule218);
+            pushFollow(FOLLOW_ruleInheritedParserRule_in_entryRuleInheritedParserRule234);
             iv_ruleInheritedParserRule=ruleInheritedParserRule();
             _fsp--;
 
              current =iv_ruleInheritedParserRule; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInheritedParserRule228); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInheritedParserRule244); 
 
             }
 
@@ -250,7 +248,7 @@ public class InternalConcreteTestLanguageParser extends AbstractAntlrParser {
 
 
     // $ANTLR start ruleInheritedParserRule
-    // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:126:1: ruleInheritedParserRule returns [EObject current=null] : ( 'element' (lv_name= RULE_ID ) ) ;
+    // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:128:1: ruleInheritedParserRule returns [EObject current=null] : ( 'element' (lv_name= RULE_ID ) ) ;
     public final EObject ruleInheritedParserRule() throws RecognitionException {
         EObject current = null;
 
@@ -258,33 +256,32 @@ public class InternalConcreteTestLanguageParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:128:33: ( ( 'element' (lv_name= RULE_ID ) ) )
-            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:129:1: ( 'element' (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:130:33: ( ( 'element' (lv_name= RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:131:1: ( 'element' (lv_name= RULE_ID ) )
             {
-            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:129:1: ( 'element' (lv_name= RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:129:2: 'element' (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:131:1: ( 'element' (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:131:2: 'element' (lv_name= RULE_ID )
             {
-            match(input,14,FOLLOW_14_in_ruleInheritedParserRule262); 
+            match(input,14,FOLLOW_14_in_ruleInheritedParserRule278); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@parserRules.0/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:133:1: (lv_name= RULE_ID )
-            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:134:5: lv_name= RULE_ID
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:135:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:137:6: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInheritedParserRule279); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInheritedParserRule299); 
              
                 createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
-                    if (current==null) {
-                        current = factory.create("mm::AType");
-                        associateNodeWithAstElement(currentNode, current);
-                    }
-                    
-                    factory.set(current, "name", lv_name,"ID");
-                    
-                     
+            	        if (current==null) {
+            	            current = factory.create("mm::AType");
+            	            associateNodeWithAstElement(currentNode, current);
+            	        }
+            	        
+            	        factory.set(current, "name", lv_name,"ID");
+            	         
 
             }
 
@@ -313,12 +310,12 @@ public class InternalConcreteTestLanguageParser extends AbstractAntlrParser {
     public static final BitSet FOLLOW_ruleConcreteParserRule_in_entryRuleConcreteParserRule71 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleConcreteParserRule81 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_12_in_ruleConcreteParserRule117 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_REAL_in_ruleConcreteParserRule134 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleConcreteParserRule152 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_ruleInheritedParserRule_in_ruleConcreteParserRule181 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_ruleInheritedParserRule_in_entryRuleInheritedParserRule218 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInheritedParserRule228 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleInheritedParserRule262 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleInheritedParserRule279 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_REAL_in_ruleConcreteParserRule138 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleConcreteParserRule159 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_ruleInheritedParserRule_in_ruleConcreteParserRule194 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_ruleInheritedParserRule_in_entryRuleInheritedParserRule234 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInheritedParserRule244 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleInheritedParserRule278 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleInheritedParserRule299 = new BitSet(new long[]{0x0000000000000002L});
 
 }

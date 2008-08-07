@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Feature.java,v 1.2 2008/06/05 08:58:46 sefftinge Exp $
+ * $Id: Feature.java,v 1.3 2008/08/07 15:05:35 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextutil;
 
@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.xtextutil.Feature#getLowerBound <em>Lower Bound</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextutil.Feature#getUpperBound <em>Upper Bound</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextutil.Feature#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextutil.Feature#isContainment <em>Containment</em>}</li>
  * </ul>
  * </p>
  *
@@ -132,5 +133,31 @@ public interface Feature extends EObject {
 	 * @generated
 	 */
 	void setType(AbstractType value);
+
+	/**
+	 * Returns the value of the '<em><b>Containment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Containment</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Containment</em>' attribute.
+	 * @see #setContainment(boolean)
+	 * @see org.eclipse.xtext.xtextutil.XtextutilPackage#getFeature_Containment()
+	 * @model
+	 * @generated
+	 */
+	boolean isContainment();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtextutil.Feature#isContainment <em>Containment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Containment</em>' attribute.
+	 * @see #isContainment()
+	 * @generated
+	 */
+	void setContainment(boolean value);
 
 } // Feature

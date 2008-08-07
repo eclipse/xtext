@@ -10,9 +10,9 @@ package org.eclipse.xtext.boostrap;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -20,6 +20,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.parsetree.SyntaxError;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -36,22 +39,22 @@ public class GenerateXtextGrammars {
 		String filename = "../org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext";
 		String languageName = "Xtext";
 		String languageNamespace = "org/eclipse/xtext";
-		String builtinFilename = "../org.eclipse.xtext/src/org/eclipse/xtext/builtin/XtextBuiltIn.xtext";
-		String builtinlanguageName = "XtextBuiltIn";
-		String builtinlanguageNamespace = "org/eclipse/xtext/builtin";
 		System.out.println("loading " + filename);
 		XtextStandaloneSetup.doSetup();
 
 		GeneratorFacade.cleanFolder(srcGenPath);
 		generate(srcGenPath, filename, languageName, languageNamespace);
-//		generate(srcGenPath, builtinFilename, builtinlanguageName, builtinlanguageNamespace);
 	}
 
 	private static void generate(String srcGenPath, String filename, String languageName, String languageNamespace)
 			throws FileNotFoundException, IOException {
-		ResourceSet rs = new ResourceSetImpl();
-		Resource resource = rs.createResource(URI.createURI(filename));
+		ResourceSet rs = new XtextResourceSet();
+		XtextResource resource = (XtextResource) rs.createResource(URI.createURI(filename));
 		resource.load(null);
+		List<SyntaxError> parseErrors = resource.getParseResult().getParseErrors();
+		for (SyntaxError syntaxError : parseErrors) {
+			System.err.println(syntaxError.getMessage());
+		}
 		Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
 		GeneratorFacade.generate(grammarModel, srcGenPath, uiPath, "xtext", "xtext2");
 	}

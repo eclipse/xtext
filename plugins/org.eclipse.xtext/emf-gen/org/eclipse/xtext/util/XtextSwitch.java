@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextSwitch.java,v 1.11 2008/06/05 15:03:51 sefftinge Exp $
+ * $Id: XtextSwitch.java,v 1.12 2008/08/07 15:05:36 sefftinge Exp $
  */
 package org.eclipse.xtext.util;
 
@@ -92,10 +92,44 @@ public class XtextSwitch<T>
   protected T doSwitch(int classifierID, EObject theEObject)
   {
 		switch (classifierID) {
-			case XtextPackage.GROUP: {
-				Group group = (Group)theEObject;
-				T result = caseGroup(group);
-				if (result == null) result = caseAbstractElement(group);
+			case XtextPackage.ALTERNATIVES: {
+				Alternatives alternatives = (Alternatives)theEObject;
+				T result = caseAlternatives(alternatives);
+				if (result == null) result = caseAbstractElement(alternatives);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.RULE_CALL: {
+				RuleCall ruleCall = (RuleCall)theEObject;
+				T result = caseRuleCall(ruleCall);
+				if (result == null) result = caseAbstractElement(ruleCall);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.ABSTRACT_RULE: {
+				AbstractRule abstractRule = (AbstractRule)theEObject;
+				T result = caseAbstractRule(abstractRule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.LEXER_RULE: {
+				LexerRule lexerRule = (LexerRule)theEObject;
+				T result = caseLexerRule(lexerRule);
+				if (result == null) result = caseAbstractRule(lexerRule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.KEYWORD: {
+				Keyword keyword = (Keyword)theEObject;
+				T result = caseKeyword(keyword);
+				if (result == null) result = caseAbstractElement(keyword);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.GENERATED_METAMODEL: {
+				GeneratedMetamodel generatedMetamodel = (GeneratedMetamodel)theEObject;
+				T result = caseGeneratedMetamodel(generatedMetamodel);
+				if (result == null) result = caseAbstractMetamodelDeclaration(generatedMetamodel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -105,23 +139,22 @@ public class XtextSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtextPackage.REFERENCED_METAMODEL: {
-				ReferencedMetamodel referencedMetamodel = (ReferencedMetamodel)theEObject;
-				T result = caseReferencedMetamodel(referencedMetamodel);
-				if (result == null) result = caseAbstractMetamodelDeclaration(referencedMetamodel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XtextPackage.ALTERNATIVES: {
-				Alternatives alternatives = (Alternatives)theEObject;
-				T result = caseAlternatives(alternatives);
-				if (result == null) result = caseAbstractElement(alternatives);
+			case XtextPackage.TYPE_REF: {
+				TypeRef typeRef = (TypeRef)theEObject;
+				T result = caseTypeRef(typeRef);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION: {
 				AbstractMetamodelDeclaration abstractMetamodelDeclaration = (AbstractMetamodelDeclaration)theEObject;
 				T result = caseAbstractMetamodelDeclaration(abstractMetamodelDeclaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.CROSS_REFERENCE: {
+				CrossReference crossReference = (CrossReference)theEObject;
+				T result = caseCrossReference(crossReference);
+				if (result == null) result = caseAbstractElement(crossReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -138,20 +171,6 @@ public class XtextSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtextPackage.ASSIGNMENT: {
-				Assignment assignment = (Assignment)theEObject;
-				T result = caseAssignment(assignment);
-				if (result == null) result = caseAbstractElement(assignment);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XtextPackage.RULE_CALL: {
-				RuleCall ruleCall = (RuleCall)theEObject;
-				T result = caseRuleCall(ruleCall);
-				if (result == null) result = caseAbstractElement(ruleCall);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case XtextPackage.ACTION: {
 				Action action = (Action)theEObject;
 				T result = caseAction(action);
@@ -159,36 +178,24 @@ public class XtextSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtextPackage.GENERATED_METAMODEL: {
-				GeneratedMetamodel generatedMetamodel = (GeneratedMetamodel)theEObject;
-				T result = caseGeneratedMetamodel(generatedMetamodel);
-				if (result == null) result = caseAbstractMetamodelDeclaration(generatedMetamodel);
+			case XtextPackage.GROUP: {
+				Group group = (Group)theEObject;
+				T result = caseGroup(group);
+				if (result == null) result = caseAbstractElement(group);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtextPackage.TYPE_REF: {
-				TypeRef typeRef = (TypeRef)theEObject;
-				T result = caseTypeRef(typeRef);
+			case XtextPackage.REFERENCED_METAMODEL: {
+				ReferencedMetamodel referencedMetamodel = (ReferencedMetamodel)theEObject;
+				T result = caseReferencedMetamodel(referencedMetamodel);
+				if (result == null) result = caseAbstractMetamodelDeclaration(referencedMetamodel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtextPackage.LEXER_RULE: {
-				LexerRule lexerRule = (LexerRule)theEObject;
-				T result = caseLexerRule(lexerRule);
-				if (result == null) result = caseAbstractRule(lexerRule);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XtextPackage.ABSTRACT_RULE: {
-				AbstractRule abstractRule = (AbstractRule)theEObject;
-				T result = caseAbstractRule(abstractRule);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XtextPackage.KEYWORD: {
-				Keyword keyword = (Keyword)theEObject;
-				T result = caseKeyword(keyword);
-				if (result == null) result = caseAbstractElement(keyword);
+			case XtextPackage.ASSIGNMENT: {
+				Assignment assignment = (Assignment)theEObject;
+				T result = caseAssignment(assignment);
+				if (result == null) result = caseAbstractElement(assignment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -421,6 +428,21 @@ public class XtextSwitch<T>
 	}
 
   /**
+	 * Returns the result of interpreting the object as an instance of '<em>Cross Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Cross Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCrossReference(CrossReference object) {
+		return null;
+	}
+
+		/**
 	 * Returns the result of interpreting the object as an instance of '<em>Assignment</em>'.
 	 * <!-- begin-user-doc -->
    * This implementation returns null;

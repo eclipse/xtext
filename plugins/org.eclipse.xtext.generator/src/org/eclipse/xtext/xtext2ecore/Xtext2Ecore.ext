@@ -69,7 +69,7 @@ EStructuralFeature createEStructuralFeature(Feature this) :
 	)
 ;
 
-private create EReference createEReference(Feature f) : setContainment(true) -> setResolveProxies(false);
+private create EReference createEReference(Feature f) : setContainment(f.containment) -> setResolveProxies(!f.containment);
 private create EAttribute createEAttribute(Feature f) : null /* no initialization */;
 
 private cached EPackage loadEPackage(ReferencedMetamodel this) :

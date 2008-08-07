@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Grammar.java,v 1.11 2008/06/05 15:03:50 sefftinge Exp $
+ * $Id: Grammar.java,v 1.12 2008/08/07 15:05:36 sefftinge Exp $
  */
 package org.eclipse.xtext;
 
@@ -18,12 +18,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.Grammar#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getIdElements <em>Id Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Grammar#getLexerRules <em>Lexer Rules</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getParserRules <em>Parser Rules</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getSuperGrammarIdElements <em>Super Grammar Id Elements</em>}</li>
- *   <li>{@link org.eclipse.xtext.Grammar#getLexerRules <em>Lexer Rules</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
- *   <li>{@link org.eclipse.xtext.Grammar#isAbstract <em>Abstract</em>}</li>
  * </ul>
  * </p>
  *

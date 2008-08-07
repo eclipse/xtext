@@ -23,7 +23,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 
     @Inject
 	private IGrammarAccess grammar;
-
+    
 	public IAstFactory getFactory() {
 		return factory;
 	}

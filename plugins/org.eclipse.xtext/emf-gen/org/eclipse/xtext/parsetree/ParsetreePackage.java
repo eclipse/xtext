@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackage.java,v 1.8 2008/07/03 15:26:01 jkohnlein Exp $
+ * $Id: ParsetreePackage.java,v 1.9 2008/08/07 15:05:36 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -91,13 +91,13 @@ public interface ParsetreePackage extends EPackage
   /**
 	 * The feature id for the '<em><b>Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int ABSTRACT_NODE__ELEMENT = 2;
+	int ABSTRACT_NODE__ELEMENT = 2;
 
-  /**
+		/**
 	 * The feature id for the '<em><b>Syntax Error</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -173,13 +173,13 @@ public interface ParsetreePackage extends EPackage
   /**
 	 * The feature id for the '<em><b>Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int COMPOSITE_NODE__ELEMENT = ABSTRACT_NODE__ELEMENT;
+	int COMPOSITE_NODE__ELEMENT = ABSTRACT_NODE__ELEMENT;
 
-  /**
+		/**
 	 * The feature id for the '<em><b>Syntax Error</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -273,13 +273,13 @@ int COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES = ABSTRACT_NODE_FEATURE_COUNT + 1;
   /**
 	 * The feature id for the '<em><b>Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int LEAF_NODE__ELEMENT = ABSTRACT_NODE__ELEMENT;
+	int LEAF_NODE__ELEMENT = ABSTRACT_NODE__ELEMENT;
 
-  /**
+		/**
 	 * The feature id for the '<em><b>Syntax Error</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -457,15 +457,15 @@ int COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES = ABSTRACT_NODE_FEATURE_COUNT + 1;
   /**
 	 * Returns the meta object for the reference '{@link org.eclipse.xtext.parsetree.AbstractNode#getElement <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Element</em>'.
 	 * @see org.eclipse.xtext.parsetree.AbstractNode#getElement()
 	 * @see #getAbstractNode()
 	 * @generated
 	 */
-  EReference getAbstractNode_Element();
+	EReference getAbstractNode_Element();
 
-  /**
+		/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.AbstractNode#getSyntaxError <em>Syntax Error</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -662,12 +662,12 @@ int COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES = ABSTRACT_NODE_FEATURE_COUNT + 1;
     /**
 		 * The meta object literal for the '<em><b>Element</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-    EReference ABSTRACT_NODE__ELEMENT = eINSTANCE.getAbstractNode_Element();
+		EReference ABSTRACT_NODE__ELEMENT = eINSTANCE.getAbstractNode_Element();
 
-    /**
+				/**
 		 * The meta object literal for the '<em><b>Syntax Error</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->

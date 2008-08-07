@@ -55,5 +55,5 @@
       <terminal xsi:type="xtext:RuleCall" name="STRING"/>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="TestLang" nsURI="http://www.eclipse.org/2008/xtext/TestLang"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="http://www.eclipse.org/2008/xtext/TestLang" name="TestLang"/>
 </xtext:Grammar>

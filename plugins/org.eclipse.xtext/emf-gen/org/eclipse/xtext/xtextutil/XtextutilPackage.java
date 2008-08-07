@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextutilPackage.java,v 1.12 2008/06/05 08:58:46 sefftinge Exp $
+ * $Id: XtextutilPackage.java,v 1.13 2008/08/07 15:05:36 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextutil;
 
@@ -281,13 +281,22 @@ public interface XtextutilPackage extends EPackage {
 	int FEATURE__TYPE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Containment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE__CONTAINMENT = 4;
+
+	/**
 	 * The number of structural features of the '<em>Feature</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_FEATURE_COUNT = 4;
+	int FEATURE_FEATURE_COUNT = 5;
 
 
 	/**
@@ -462,6 +471,17 @@ public interface XtextutilPackage extends EPackage {
 	EReference getFeature_Type();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextutil.Feature#isContainment <em>Containment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Containment</em>'.
+	 * @see org.eclipse.xtext.xtextutil.Feature#isContainment()
+	 * @see #getFeature()
+	 * @generated
+	 */
+	EAttribute getFeature_Containment();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -620,6 +640,14 @@ public interface XtextutilPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FEATURE__TYPE = eINSTANCE.getFeature_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Containment</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FEATURE__CONTAINMENT = eINSTANCE.getFeature_Containment();
 
 	}
 

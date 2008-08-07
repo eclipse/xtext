@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractType.java,v 1.12 2008/06/05 08:58:46 sefftinge Exp $
+ * $Id: AbstractType.java,v 1.13 2008/08/07 15:05:36 sefftinge Exp $
  */
 package org.eclipse.xtext.xtextutil;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**

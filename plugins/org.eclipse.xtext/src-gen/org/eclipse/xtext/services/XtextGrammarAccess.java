@@ -80,16 +80,20 @@ public class XtextGrammarAccess extends BaseEPackageAccess implements IGrammarAc
 		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13"),true); 
 	}
 
-	public ParserRule pr_ParenthesizedElement() {
+	public ParserRule pr_CrossReference() {
 		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14"),true); 
 	}
 
-	public ParserRule pr_Keyword() {
+	public ParserRule pr_ParenthesizedElement() {
 		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.15"),true); 
 	}
 
-	public ParserRule pr_RuleCall() {
+	public ParserRule pr_Keyword() {
 		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.16"),true); 
+	}
+
+	public ParserRule pr_RuleCall() {
+		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.17"),true); 
 	}
 
 	

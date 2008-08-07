@@ -5,6 +5,7 @@
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>LexerLanguage</idElements>
+  <lexerRules name="STRING" body=" '#' ('B')+ "/>
   <parserRules name="Model">
     <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="children" operator="+=">
       <terminal xsi:type="xtext:RuleCall" name="Element"/>
@@ -20,6 +21,5 @@
       </abstractTokens>
     </alternatives>
   </parserRules>
-  <lexerRules name="STRING" body=" '#' ('B')+ "/>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LexerLang" nsURI="http://www.eclipse.org/2008/xtext/LexerLang"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="http://www.eclipse.org/2008/xtext/LexerLang" name="LexerLang"/>
 </xtext:Grammar>

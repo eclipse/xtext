@@ -2,18 +2,22 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractElementImpl.java,v 1.10 2008/06/05 15:03:51 sefftinge Exp $
+ * $Id: AbstractElementImpl.java,v 1.11 2008/08/07 15:05:35 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 
 /**

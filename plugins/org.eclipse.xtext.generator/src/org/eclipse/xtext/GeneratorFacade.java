@@ -22,6 +22,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xtextgen.GenModel;
 import org.eclipse.xtext.xtextgen.GenService;
@@ -44,6 +47,13 @@ public class GeneratorFacade {
 
 	public static void generate(Grammar grammarModel, String srcGenPath, String uiProjectPath,
 			String... modelFileExtensions) throws IOException {
+		CompositeNode rootNode = NodeUtil.getRootNode(grammarModel);
+		EList<SyntaxError> allSyntaxErrors = rootNode.allSyntaxErrors();
+		for (SyntaxError syntaxError : allSyntaxErrors) {
+			System.err.println(syntaxError.getMessage()+":"+syntaxError.getNode().getLine());
+		}
+		if (!allSyntaxErrors.isEmpty())
+			throw new IllegalStateException("The grammar has syntax errors.");
 		GenModel genModel = assembleGeneratorModel(grammarModel, srcGenPath, uiProjectPath, modelFileExtensions);
 		generate(genModel);
 	}

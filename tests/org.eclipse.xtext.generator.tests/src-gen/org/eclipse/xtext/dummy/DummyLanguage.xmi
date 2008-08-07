@@ -31,5 +31,5 @@
       <abstractTokens xsi:type="xtext:Keyword" value=";"/>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="DummyLang" nsURI="http://www.eclipse.org/2008/xtext/DummyLang"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="http://www.eclipse.org/2008/xtext/DummyLang" name="DummyLang"/>
 </xtext:Grammar>

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNode.java,v 1.8 2008/07/03 15:26:01 jkohnlein Exp $
+ * $Id: AbstractNode.java,v 1.9 2008/08/07 15:05:36 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -90,30 +90,30 @@ public interface AbstractNode extends EObject
   /**
 	 * Returns the value of the '<em><b>Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Element</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Element</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Element</em>' reference.
 	 * @see #setElement(EObject)
 	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getAbstractNode_Element()
 	 * @model
 	 * @generated
 	 */
-  EObject getElement();
+	EObject getElement();
 
-  /**
+		/**
 	 * Sets the value of the '{@link org.eclipse.xtext.parsetree.AbstractNode#getElement <em>Element</em>}' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Element</em>' reference.
 	 * @see #getElement()
 	 * @generated
 	 */
-  void setElement(EObject value);
+	void setElement(EObject value);
 
-  /**
+		/**
 	 * Returns the value of the '<em><b>Syntax Error</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.parsetree.SyntaxError#getNode <em>Node</em>}'.
 	 * <!-- begin-user-doc -->

@@ -71,22 +71,23 @@ entryRuleModel returns [EObject current=null] :
 ruleModel returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
-(
-    
-    { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
-    }
-    lv_children=ruleElement 
-    {
-        currentNode = currentNode.getParent();
-        if ($current==null) {
-            $current = factory.create("Model");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.add($current, "children", lv_children,null);
-        
-         }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+	    }
+	    lv_children=ruleElement 
+	    {
+	        currentNode = currentNode.getParent();
+	        if ($current==null) {
+	            $current = factory.create("Model");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.add($current, "children", lv_children,null);
+	         }
+	
 )*;
     
 
@@ -103,36 +104,38 @@ entryRuleElement returns [EObject current=null] :
 ruleElement returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
-((
-    lv_name=RULE_ID
+((	
+	
+	    lv_name=RULE_ID
     { 
     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
-    {
-        if ($current==null) {
-            $current = factory.create("Element");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "name", lv_name,"ID");
-        
-         }
-)(
-    lv_h=RULE_STRING
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Element");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "name", lv_name,"ID");
+	         }
+	
+)(	
+	
+	    lv_h=RULE_STRING
     { 
     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "h"); 
     }
  
-    {
-        if ($current==null) {
-            $current = factory.create("Element");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "h", lv_h,"STRING");
-        
-         }
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Element");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "h", lv_h,"STRING");
+	         }
+	
 ));
     
 

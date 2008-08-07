@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNodeImpl.java,v 1.8 2008/07/03 15:26:01 jkohnlein Exp $
+ * $Id: AbstractNodeImpl.java,v 1.9 2008/08/07 15:05:36 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -18,6 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -60,14 +62,14 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
   /**
 	 * The cached value of the '{@link #getElement() <em>Element</em>}' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getElement()
 	 * @generated
 	 * @ordered
 	 */
-  protected EObject element;
+	protected EObject element;
 
-  /**
+		/**
 	 * The cached value of the '{@link #getSyntaxError() <em>Syntax Error</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -245,11 +247,10 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 
   /**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EObject getElement()
-  {
+	public EObject getElement() {
 		if (element != null && element.eIsProxy()) {
 			InternalEObject oldElement = (InternalEObject)element;
 			element = eResolveProxy(oldElement);
@@ -261,30 +262,28 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 		return element;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EObject basicGetElement()
-  {
+	public EObject basicGetElement() {
 		return element;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setElement(EObject newElement)
-  {
+	public void setElement(EObject newElement) {
 		EObject oldElement = element;
 		element = newElement;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__ELEMENT, oldElement, element));
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -525,7 +524,8 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
+  @SuppressWarnings("unchecked")
+		@Override
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {

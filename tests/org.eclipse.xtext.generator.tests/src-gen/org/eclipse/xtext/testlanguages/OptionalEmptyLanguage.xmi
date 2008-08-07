@@ -18,5 +18,5 @@
       </abstractTokens>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="OptionalEmpty" nsURI="http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="http://www.eclipse.org/2008/tmf/xtext/OptionalEmpty" name="OptionalEmpty"/>
 </xtext:Grammar>

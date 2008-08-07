@@ -26,5 +26,5 @@
   <superGrammarIdElements>xtext</superGrammarIdElements>
   <superGrammarIdElements>grammarinheritance</superGrammarIdElements>
   <superGrammarIdElements>AbstractTestLanguage</superGrammarIdElements>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="foo" nsURI="http://holla"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="http://holla" name="foo"/>
 </xtext:Grammar>

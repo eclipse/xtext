@@ -114,5 +114,5 @@
       <groups xsi:type="xtext:Keyword" value="GR&#xdc;N"/>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ReferenceGrammar" nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar" name="ReferenceGrammar"/>
 </xtext:Grammar>

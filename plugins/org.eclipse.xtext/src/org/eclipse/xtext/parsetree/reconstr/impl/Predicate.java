@@ -19,7 +19,7 @@ public abstract class Predicate {
 	protected InstanceDescription obj;
 
 	public Predicate(InstanceDescription obj) {
-		this.obj = obj.clone();
+		this.obj = (InstanceDescription) obj.createClone();
 	}
 
 	public abstract boolean check();

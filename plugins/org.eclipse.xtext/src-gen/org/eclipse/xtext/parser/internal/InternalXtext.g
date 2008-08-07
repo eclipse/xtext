@@ -937,9 +937,9 @@ entryRuleAbstractTerminal returns [EObject current=null] :
 ruleAbstractTerminal returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
-((
+(((
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13/@alternatives/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13/@alternatives/@groups.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
     }
     this_Keyword=ruleKeyword
     { 
@@ -949,7 +949,7 @@ ruleAbstractTerminal returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13/@alternatives/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_RuleCall=ruleRuleCall
     { 
@@ -959,12 +959,82 @@ ruleAbstractTerminal returns [EObject current=null]
 )
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_ParenthesizedElement=ruleParenthesizedElement
     { 
         $current = $this_ParenthesizedElement.current; 
         currentNode = currentNode.getParent();
+    }
+)
+    |
+    { 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.13/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_CrossReference=ruleCrossReference
+    { 
+        $current = $this_CrossReference.current; 
+        currentNode = currentNode.getParent();
+    }
+);
+    
+
+
+// Entry rule entryRuleCrossReference
+entryRuleCrossReference returns [EObject current=null] :
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleCrossReference=ruleCrossReference 
+	 { $current=$iv_ruleCrossReference.current; } 
+	 EOF 
+;
+
+// Rule CrossReference
+ruleCrossReference returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
+((('[' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+    }
+(
+    
+    { 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+    }
+    lv_type=ruleTypeRef 
+    {
+        currentNode = currentNode.getParent();
+        if ($current==null) {
+            $current = factory.create("CrossReference");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        
+        factory.set($current, "type", lv_type,null);
+        
+         }
+))('|' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+    }
+(
+    
+    { 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+    }
+    lv_rule=ruleRuleCall 
+    {
+        currentNode = currentNode.getParent();
+        if ($current==null) {
+            $current = factory.create("CrossReference");
+            associateNodeWithAstElement(currentNode, $current);
+        }
+        
+        factory.set($current, "rule", lv_rule,null);
+        
+         }
+))?)']' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
     
@@ -972,7 +1042,7 @@ ruleAbstractTerminal returns [EObject current=null]
 
 // Entry rule entryRuleParenthesizedElement
 entryRuleParenthesizedElement returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.15" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleParenthesizedElement=ruleParenthesizedElement 
 	 { $current=$iv_ruleParenthesizedElement.current; } 
 	 EOF 
@@ -984,11 +1054,11 @@ ruleParenthesizedElement returns [EObject current=null]
     @after { resetLookahead(); }:
 (('(' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.15/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.15/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
     }
     this_Alternatives=ruleAlternatives
     { 
@@ -997,7 +1067,7 @@ ruleParenthesizedElement returns [EObject current=null]
     }
 )')' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.14/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.15/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
     
@@ -1005,7 +1075,7 @@ ruleParenthesizedElement returns [EObject current=null]
 
 // Entry rule entryRuleKeyword
 entryRuleKeyword returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.15" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.16" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleKeyword=ruleKeyword 
 	 { $current=$iv_ruleKeyword.current; } 
 	 EOF 
@@ -1018,7 +1088,7 @@ ruleKeyword returns [EObject current=null]
 (
     lv_value=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.15/@alternatives/@terminal" /* xtext::RuleCall */, "value"); 
+    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.16/@alternatives/@terminal" /* xtext::RuleCall */, "value"); 
     }
  
     {
@@ -1036,7 +1106,7 @@ ruleKeyword returns [EObject current=null]
 
 // Entry rule entryRuleRuleCall
 entryRuleRuleCall returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.16" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.17" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleRuleCall=ruleRuleCall 
 	 { $current=$iv_ruleRuleCall.current; } 
 	 EOF 
@@ -1049,7 +1119,7 @@ ruleRuleCall returns [EObject current=null]
 (
     lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.16/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@parserRules.17/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
     {

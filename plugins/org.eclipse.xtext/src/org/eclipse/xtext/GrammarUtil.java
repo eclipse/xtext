@@ -38,11 +38,11 @@ import org.eclipse.xtext.util.Strings;
 public class GrammarUtil {
 
 	private static URI getClasspathURIForLanguageId(String id) {
-		return URI.createURI("classpath:/" + id.replace('.', '/') + (IXtextBuiltin.ID.equals(id)?".xmi":".xtext"));
+		return URI.createURI("classpath:/" + id.replace('.', '/') + (IXtextBuiltin.ID.equals(id) ? ".xmi" : ".xtext"));
 	}
 
 	public static EPackage loadEPackage(ReferencedMetamodel ref) {
-		if (ref==null)
+		if (ref == null)
 			throw new NullPointerException("ReferencedMetamodel was null");
 		if (EPackage.Registry.INSTANCE.containsKey(ref.getUri()))
 			return EPackage.Registry.INSTANCE.getEPackage(ref.getUri());
@@ -150,16 +150,16 @@ public class GrammarUtil {
 		if (_this == null)
 			throw new NullPointerException("Grammar was null");
 		String id = getSuperGrammarId(_this);
-		if (id==null)
+		if (id == null)
 			return null;
-		if (!(_this.eResource() != null && _this.eResource().getResourceSet() instanceof XtextResourceSet)) 
+		if (!(_this.eResource() != null && _this.eResource().getResourceSet() instanceof XtextResourceSet))
 			throw new IllegalArgumentException("The passed grammar is not contained in a Resourceset");
 		ResourceSet resourceSet = _this.eResource().getResourceSet();
 		URI uri = getClasspathURIForLanguageId(id);
-		//uri = uri.appendFragment(""); 
+		// uri = uri.appendFragment("");
 		Resource resource = resourceSet.getResource(uri, true);
-		if (resource==null)
-			throw new IllegalArgumentException("Couldn't find grammar for super language "+id);
+		if (resource == null)
+			throw new IllegalArgumentException("Couldn't find grammar for super language " + id);
 		Grammar grammar = (Grammar) resource.getContents().get(0);
 		return grammar;
 	}
@@ -309,6 +309,11 @@ public class GrammarUtil {
 
 	public static boolean isAnyCardinality(AbstractElement e) {
 		return e.getCardinality() != null && (e.getCardinality().equals("*"));
+	}
+
+	public static LexerRule getCalledLexerRule(CrossReference ref) {
+		String ruleName = ref.getRule() != null ? ref.getRule().getName() : "ID";
+		return (LexerRule) findRuleForName(getGrammar(ref), ruleName);
 	}
 
 }

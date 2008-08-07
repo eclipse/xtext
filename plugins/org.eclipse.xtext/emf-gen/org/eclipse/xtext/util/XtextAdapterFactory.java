@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextAdapterFactory.java,v 1.11 2008/06/05 15:03:51 sefftinge Exp $
+ * $Id: XtextAdapterFactory.java,v 1.12 2008/08/07 15:05:36 sefftinge Exp $
  */
 package org.eclipse.xtext.util;
 
@@ -67,7 +67,7 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
 	}
 
   /**
-	 * The switch the delegates to the <code>createXXX</code> methods.
+	 * The switch that delegates to the <code>createXXX</code> methods.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -75,24 +75,44 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
   protected XtextSwitch<Adapter> modelSwitch =
     new XtextSwitch<Adapter>() {
 			@Override
-			public Adapter caseGroup(Group object) {
-				return createGroupAdapter();
+			public Adapter caseAlternatives(Alternatives object) {
+				return createAlternativesAdapter();
+			}
+			@Override
+			public Adapter caseRuleCall(RuleCall object) {
+				return createRuleCallAdapter();
+			}
+			@Override
+			public Adapter caseAbstractRule(AbstractRule object) {
+				return createAbstractRuleAdapter();
+			}
+			@Override
+			public Adapter caseLexerRule(LexerRule object) {
+				return createLexerRuleAdapter();
+			}
+			@Override
+			public Adapter caseKeyword(Keyword object) {
+				return createKeywordAdapter();
+			}
+			@Override
+			public Adapter caseGeneratedMetamodel(GeneratedMetamodel object) {
+				return createGeneratedMetamodelAdapter();
 			}
 			@Override
 			public Adapter caseGrammar(Grammar object) {
 				return createGrammarAdapter();
 			}
 			@Override
-			public Adapter caseReferencedMetamodel(ReferencedMetamodel object) {
-				return createReferencedMetamodelAdapter();
-			}
-			@Override
-			public Adapter caseAlternatives(Alternatives object) {
-				return createAlternativesAdapter();
+			public Adapter caseTypeRef(TypeRef object) {
+				return createTypeRefAdapter();
 			}
 			@Override
 			public Adapter caseAbstractMetamodelDeclaration(AbstractMetamodelDeclaration object) {
 				return createAbstractMetamodelDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseCrossReference(CrossReference object) {
+				return createCrossReferenceAdapter();
 			}
 			@Override
 			public Adapter caseParserRule(ParserRule object) {
@@ -103,36 +123,20 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
 				return createAbstractElementAdapter();
 			}
 			@Override
-			public Adapter caseAssignment(Assignment object) {
-				return createAssignmentAdapter();
-			}
-			@Override
-			public Adapter caseRuleCall(RuleCall object) {
-				return createRuleCallAdapter();
-			}
-			@Override
 			public Adapter caseAction(Action object) {
 				return createActionAdapter();
 			}
 			@Override
-			public Adapter caseGeneratedMetamodel(GeneratedMetamodel object) {
-				return createGeneratedMetamodelAdapter();
+			public Adapter caseGroup(Group object) {
+				return createGroupAdapter();
 			}
 			@Override
-			public Adapter caseTypeRef(TypeRef object) {
-				return createTypeRefAdapter();
+			public Adapter caseReferencedMetamodel(ReferencedMetamodel object) {
+				return createReferencedMetamodelAdapter();
 			}
 			@Override
-			public Adapter caseLexerRule(LexerRule object) {
-				return createLexerRuleAdapter();
-			}
-			@Override
-			public Adapter caseAbstractRule(AbstractRule object) {
-				return createAbstractRuleAdapter();
-			}
-			@Override
-			public Adapter caseKeyword(Keyword object) {
-				return createKeywordAdapter();
+			public Adapter caseAssignment(Assignment object) {
+				return createAssignmentAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -366,6 +370,20 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
 	}
 
   /**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.CrossReference <em>Cross Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.CrossReference
+	 * @generated
+	 */
+	public Adapter createCrossReferenceAdapter() {
+		return null;
+	}
+
+		/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.Assignment <em>Assignment</em>}'.
 	 * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;

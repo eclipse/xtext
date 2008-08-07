@@ -84,5 +84,5 @@
       </groups>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LookaheadLang" nsURI="http://www.eclipse.org/2008/xtext/LookaheadLang"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="http://www.eclipse.org/2008/xtext/LookaheadLang" name="LookaheadLang"/>
 </xtext:Grammar>
