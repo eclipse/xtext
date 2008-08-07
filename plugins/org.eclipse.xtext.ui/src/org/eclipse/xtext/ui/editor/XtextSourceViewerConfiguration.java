@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
+import java.util.Map;
+
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.AbstractReusableInformationControlCreator;
 import org.eclipse.jface.text.DefaultInformationControl;
@@ -38,6 +41,7 @@ import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.editor.codecompletion.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.formatting.XtextFormattingStrategy;
 import org.eclipse.xtext.ui.editor.hover.XtextTextHover;
+import org.eclipse.xtext.ui.editor.model.IEditorModel;
 import org.eclipse.xtext.ui.editor.model.IEditorModelProvider;
 import org.eclipse.xtext.ui.editor.model.XtextEditorModelReconcileStrategy;
 import org.eclipse.xtext.ui.editor.quickfix.XtextQuickAssistProcessor;
@@ -59,13 +63,12 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	/**
 	 * @param languageDescriptor
 	 * @param preferenceStore
-	 * @param editor
+	 * @param editorModelPovider
 	 */
-	public XtextSourceViewerConfiguration(IServiceScope languageDescriptor, IPreferenceStore preferenceStore,
-			IEditorModelProvider editor) {
+	public XtextSourceViewerConfiguration(IEditorModelProvider editorModelPovider, IPreferenceStore preferenceStore) {
 		super(preferenceStore);
-		this.languageDescriptor = languageDescriptor;
-		this.editorModelProvider = editor;
+		this.editorModelProvider = editorModelPovider;
+		this.languageDescriptor = editorModelPovider.getModel().getLanguageDescriptor();
 	}
 
 	@Override
@@ -163,5 +166,20 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 			return new XtextTextHover(sourceViewer, editorModelProvider, service);
 		}
 		return super.getTextHover(sourceViewer, contentType);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected Map getHyperlinkDetectorTargets(final ISourceViewer sourceViewer) {
+		Map<Object, Object> targets = super.getHyperlinkDetectorTargets(sourceViewer);
+		targets.put("org.eclipse.xtext.ui.hyperlinkTarget", new IAdaptable() { //$NON-NLS-1$
+					public Object getAdapter(Class adapter) {
+						if (adapter.equals(IEditorModel.class)) {
+							return editorModelProvider.getModel();
+						}
+						return null;
+					}
+				});
+		return targets;
 	}
 }

@@ -264,19 +264,8 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		super.setInitializationData(cfig, propertyName, data);
 		// try plain text editor if problem occurs
 		if (languageDescriptor != null) {
-			// Preference store
-			ScopedPreferenceStore xtextPreferenceStore = PropertiesResolver.getPreferenceStore();
-			ChainedPreferenceStore chainedPreferenceStore = new ChainedPreferenceStore(
-					new org.eclipse.jface.preference.IPreferenceStore[] { xtextPreferenceStore, getPreferenceStore() });
-			chainedPreferenceStore.addPropertyChangeListener(new PreferenceStorePropertyChangeListener());
-
-			// source viewer setup
-			setSourceViewerConfiguration(new XtextSourceViewerConfiguration(languageDescriptor, chainedPreferenceStore,
-					this));
-
-			// document provider setup
+			// do document provider setup
 			setDocumentProvider(XtextDocumentProviderFactory.getInstance().getDocumentProvider(languageDescriptor));
-
 		}
 		else {
 			log.error(XtextUIMessages.getFormattedString("BaseTextEditor.NoLanguageDescriptor", //$NON-NLS-1$
@@ -287,6 +276,15 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
+		// Preference store
+		ScopedPreferenceStore xtextPreferenceStore = PropertiesResolver.getPreferenceStore();
+		ChainedPreferenceStore chainedPreferenceStore = new ChainedPreferenceStore(
+				new org.eclipse.jface.preference.IPreferenceStore[] { xtextPreferenceStore, getPreferenceStore() });
+		chainedPreferenceStore.addPropertyChangeListener(new PreferenceStorePropertyChangeListener());
+
+		// source viewer setup
+		setSourceViewerConfiguration(new XtextSourceViewerConfiguration(this, chainedPreferenceStore));
+
 		log.warn("Initializing Xtext basic text editor.");
 
 		// Error marker
@@ -309,6 +307,12 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		return languageDescriptor;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.xtext.ui.editor.model.IEditorModelProvider#getModel()
+	 * Can return null
+	 */
 	public IEditorModel getModel() {
 		if (model == null) {
 			IDocumentProvider provider = getDocumentProvider();
@@ -380,6 +384,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 
 	@Override
 	public void createPartControl(Composite parent) {
+		
 		super.createPartControl(parent);
 		// We need ProjectionViewer to support Folding
 		ProjectionViewer projectionViewer = (ProjectionViewer) getSourceViewer();
