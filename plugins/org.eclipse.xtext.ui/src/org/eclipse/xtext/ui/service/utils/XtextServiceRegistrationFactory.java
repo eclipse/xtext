@@ -25,6 +25,7 @@ import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.service.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.service.IFormatter;
 import org.eclipse.xtext.ui.service.IHoverInfo;
+import org.eclipse.xtext.ui.service.IHyperlinkCreator;
 import org.eclipse.xtext.ui.service.ILabelProvider;
 import org.eclipse.xtext.ui.service.IOutlineProvider;
 import org.eclipse.xtext.ui.service.IPreferenceStore;
@@ -61,6 +62,7 @@ public class XtextServiceRegistrationFactory implements IServiceRegistrationFact
 		serviceMap.put("hoverInfo", IHoverInfo.class);
 		serviceMap.put("foldingStructureProvider", IFoldingStructureProvider.class);
 		serviceMap.put("quickFixGenerator", IQuickFixGenerator.class);
+		serviceMap.put("hyperlinkCreator", IHyperlinkCreator.class);
 	}
 
 	public Set<IServiceRegistration> registrations() {

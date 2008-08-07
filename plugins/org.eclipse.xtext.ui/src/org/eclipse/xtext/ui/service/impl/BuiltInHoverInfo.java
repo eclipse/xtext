@@ -66,8 +66,8 @@ public class BuiltInHoverInfo implements IHoverInfo {
 
 	public Object getHoverInfo(ITextViewer textViewer, IRegion hoverRegion, IEditorModelProvider editorModelProvider) {
 		int offset = hoverRegion.getOffset();
-		AbstractNode an = EditorModelUtil.findLeafNodeAtOffset(editorModelProvider.getModel().getParseTreeRootNode(),
-				offset);
+		AbstractNode an = EditorModelUtil.findLeafNodeAtOffset((CompositeNode) editorModelProvider.getModel()
+				.getParseTreeRootNode(), offset);
 		StyledString existingInfo = null;
 		if (textViewer instanceof ISourceViewerExtension2) {
 			IAnnotationModel model = ((ISourceViewerExtension2) textViewer).getVisualAnnotationModel();

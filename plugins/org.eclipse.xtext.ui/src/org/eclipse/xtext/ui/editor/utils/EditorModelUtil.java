@@ -8,9 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.utils;
 
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 
 /**
@@ -18,18 +17,23 @@ import org.eclipse.xtext.parsetree.LeafNode;
  * 
  */
 public class EditorModelUtil {
-	public static AbstractNode findLeafNodeAtOffset(AbstractNode parseTreeRootNode, int offset) {
-		for (TreeIterator<EObject> treeIter = parseTreeRootNode.eAllContents(); treeIter.hasNext();) {
-			EObject eO = treeIter.next();
-			if (eO instanceof AbstractNode) {
-				AbstractNode ln = (AbstractNode) eO;
-				if (ln.getOffset() + ln.getLength() >= offset) {
-					if (ln.getOffset() <= offset) {
-						if (ln instanceof LeafNode)
-							return ln;
-						else
-							return findLeafNodeAtOffset(ln, offset);
-					}
+
+	/**
+	 * Pretty performance-oriented LeafNode at Offset routine
+	 * 
+	 * @param parseTreeRootNode
+	 *            - CompositeNode to search in
+	 * @param offset
+	 * @return LeafNode or null if not found
+	 */
+	public static AbstractNode findLeafNodeAtOffset(CompositeNode parseTreeRootNode, int offset) {
+		for (AbstractNode node : parseTreeRootNode.getChildren()) {
+			if (node.getOffset() + node.getLength() >= offset) {
+				if (node.getOffset() <= offset) {
+					if (node instanceof LeafNode)
+						return (LeafNode) node;
+					else if (node instanceof CompositeNode)
+						return findLeafNodeAtOffset((CompositeNode) node, offset);
 				}
 			}
 		}

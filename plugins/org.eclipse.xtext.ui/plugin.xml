@@ -18,6 +18,7 @@
    <extension-point id="hoverInfo" name="Xtext Hover Info" schema="schema/hoverInfo.exsd"/>
    <extension-point id="foldingStructureProvider" name="Xtext Folding Structure Provider" schema="schema/foldingStructureProvider.exsd"/>
    <extension-point id="quickFixGenerator" name="Xtext QuickFix Service" schema="schema/quickFixGenerator.exsd"/>
+   <extension-point id="hyperlinkCreator" name="Xtext Hyperlink Service" schema="schema/hyperlinkCreator.exsd"/>
    <extension
          id="org.eclipse.xtext.ui.problemmarker"
          name="Xtext Editor Problem Marker"
@@ -148,5 +149,24 @@
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </quickFixGenerator>
    </extension>
-   
+   <extension
+         point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
+      <hyperlinkDetector
+            activate="true"
+            class="org.eclipse.xtext.ui.editor.XtextHyperlinkDetector"
+            id="org.eclipse.xtext.ui.hyperlinkDetector"
+            name="XtextHypeLink"
+            targetId="org.eclipse.xtext.ui.hyperlinkTarget">
+      </hyperlinkDetector>
+   </extension>
+   <extension
+         point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectorTargets">
+      <target
+            description="Depends on an EditorModel contained in all Xtext editors"
+            id="org.eclipse.xtext.ui.hyperlinkTarget"
+            name="Xtext Editors">
+         <context type="org.eclipse.xtext.ui.editor.model.IEditorModel"/>
+      </target>
+   </extension>
+  
 </plugin>

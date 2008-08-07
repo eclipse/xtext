@@ -74,7 +74,7 @@ public class BuiltInFormatter implements IFormatter {
 	}
 
 	private IRegion calculateFormattingRegion(IRegion region) {
-		AbstractNode an = EditorModelUtil.findLeafNodeAtOffset(rootNode, region.getOffset());
+		AbstractNode an = EditorModelUtil.findLeafNodeAtOffset((CompositeNode) rootNode, region.getOffset());
 		if (an != null) {
 			while (!overFormattingRegion(an)) {
 				CompositeNode parent = an.getParent();
