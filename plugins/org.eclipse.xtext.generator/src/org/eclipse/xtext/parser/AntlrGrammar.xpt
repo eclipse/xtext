@@ -119,31 +119,38 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 «DEFINE ebnf2 FOR Group»«EXPAND ebnf FOREACH abstractTokens»«ENDDEFINE»
 
-«DEFINE ebnf2 FOR Assignment»
-    «IF isParserRuleAssignment()»
+«DEFINE ebnf2 FOR Assignment»	
+	«IF !eAllContents.typeSelect(CrossReference).isEmpty»
+		«REM» Cross references are handled in the linking phase «ENDREM»
+		«EXPAND ebnf FOR terminal» 
+	«ELSE»
+	    «IF isParserRuleAssignment()»
+	    { 
+	        currentNode=«EXPAND createCompositeNode FOR terminal» 
+	    }
+	    «ENDIF-»
+	    «localVar()»=«EXPAND ebnf FOR terminal» 
+	    {
+	        «IF isParserRuleAssignment()»currentNode = currentNode.getParent();
+	        «ENDIF-»
+	        if ($current==null) {
+	            $current = factory.create("«containingParserRule().getReturnTypeName()»");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        «REM»the use of input.LT(-1) in the following line is a workaroudn for a bug of antlr, where assignements of alternative keywords are ignored when there are actions«ENDREM»
+	        factory.«setOrAdd()»($current, "«feature»", «
+	        	IF isBoolean()»true«
+	        	ELSE»«eAllContents.typeSelect(Keyword).isEmpty ? localVar() : "input.LT(-1)"»«
+	        	ENDIF»,«terminal.toStringLiteral()»);
+	         }
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE ebnf2 FOR CrossReference»
+	«calledLexerRule().ruleName()-»
     { 
-        currentNode=«EXPAND createCompositeNode FOR terminal» 
+    «EXPAND createLeafNode» 
     }
-    «ENDIF-»
-    «localVar()»=«EXPAND ebnf FOR terminal» 
-    {
-        «IF isParserRuleAssignment()»currentNode = currentNode.getParent();
-        «ENDIF-»
-        if ($current==null) {
-            $current = factory.create("«containingParserRule().getReturnTypeName()»");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        «REM»the use of input.LT(-1) in the following line is a workaroudn for a bug of antlr, where assignements of alternative keywords are ignored when there are actions«ENDREM»
-        factory.«setOrAdd()»($current, "«feature»", «IF isBoolean()»true«ELSE»«eAllContents.typeSelect(Keyword).isEmpty ? localVar() : "input.LT(-1)"»«ENDIF»,«terminal.toStringLiteral()»);
-        «REM»
-        «IF isKeywordAssignment()
-            »        «
-            EXPAND createLeafNode FOR terminal
-            »«
-        ENDIF
-    »   
-        «ENDREM»
-         }
 «ENDDEFINE»
 
 «DEFINE ebnf2 FOR Action»
@@ -156,14 +163,6 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
         associateNodeWithAstElement(currentNode, $current); 
     }
 «ENDDEFINE»
-«REM»
-«DEFINE ebnf2 FOR Keyword»'«value»' 
-«IF !isAssigned()»
-    {
-        «EXPAND createLeafNode» 
-    }
-«ENDIF»«ENDDEFINE»
-«ENDREM»
 
 «DEFINE ebnf2 FOR Keyword»'«value»' 
     {
