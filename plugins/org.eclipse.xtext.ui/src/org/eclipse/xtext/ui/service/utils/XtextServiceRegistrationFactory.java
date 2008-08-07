@@ -12,6 +12,10 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.crossref.IFragmentProvider;
+import org.eclipse.xtext.crossref.ILinkProvider;
+import org.eclipse.xtext.crossref.ILinker;
+import org.eclipse.xtext.crossref.IURIChecker;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
@@ -63,6 +67,10 @@ public class XtextServiceRegistrationFactory implements IServiceRegistrationFact
 		serviceMap.put("foldingStructureProvider", IFoldingStructureProvider.class);
 		serviceMap.put("quickFixGenerator", IQuickFixGenerator.class);
 		serviceMap.put("hyperlinkCreator", IHyperlinkCreator.class);
+		serviceMap.put("linker", ILinker.class);
+		serviceMap.put("linkProvider", ILinkProvider.class);
+		serviceMap.put("uriChecker", IURIChecker.class);
+		serviceMap.put("fragmentProvider", IFragmentProvider.class);
 	}
 
 	public Set<IServiceRegistration> registrations() {

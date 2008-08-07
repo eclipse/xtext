@@ -3,7 +3,7 @@
 <schema targetNamespace="org.eclipse.xtext.ui" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.xtext.ui" id="hyperlinkCreator" name="Xtext Hyperlink Creator Service"/>
+         <meta.schema plugin="org.eclipse.xtext.ui" id="uriChecker" name="Xtext URI checker Service"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]
@@ -18,7 +18,7 @@
       </annotation>
       <complexType>
          <sequence>
-            <element ref="hypelinkCreator"/>
+            <element ref="uriChecker"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,7 +47,7 @@
       </complexType>
    </element>
 
-   <element name="hypelinkCreator">
+   <element name="uriChecker">
       <complexType>
          <attribute name="languageId" type="string" use="required">
             <annotation>
@@ -59,13 +59,13 @@
                </appinfo>
             </annotation>
          </attribute>
-         <attribute name="class" type="string">
+         <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.ui.service.IHyperlinkCreator"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.crossref.IURIChecker"/>
                </appinfo>
             </annotation>
          </attribute>
@@ -77,7 +77,7 @@
          <meta.section type="since"/>
       </appinfo>
       <documentation>
-         1.0.0
+         [Enter the first release in which this extension point appears.]
       </documentation>
    </annotation>
 
@@ -108,13 +108,5 @@
       </documentation>
    </annotation>
 
-   <annotation>
-      <appinfo>
-         <meta.section type="copyright"/>
-      </appinfo>
-      <documentation>
-         (c) 2008 itemis AG and others
-      </documentation>
-   </annotation>
 
 </schema>
