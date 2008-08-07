@@ -75,90 +75,95 @@ ruleSpielplatz returns [EObject current=null]
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
-(
-    lv_groesse=RULE_INT
+(	
+	
+	    lv_groesse=RULE_INT
     { 
     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "groesse"); 
     }
  
-    {
-        if ($current==null) {
-            $current = factory.create("Spielplatz");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "groesse", lv_groesse,"INT");
-        
-         }
-))(
-    lv_beschreibung=RULE_STRING
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Spielplatz");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "groesse", lv_groesse,"INT");
+	         }
+	
+))(	
+	
+	    lv_beschreibung=RULE_STRING
     { 
     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "beschreibung"); 
     }
  
-    {
-        if ($current==null) {
-            $current = factory.create("Spielplatz");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "beschreibung", lv_beschreibung,"STRING");
-        
-         }
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Spielplatz");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "beschreibung", lv_beschreibung,"STRING");
+	         }
+	
 )?)'{' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
-)(((
-    
-    { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
-    }
-    lv_kinder=ruleKind 
-    {
-        currentNode = currentNode.getParent();
-        if ($current==null) {
-            $current = factory.create("Spielplatz");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.add($current, "kinder", lv_kinder,null);
-        
-         }
+)(((	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	    }
+	    lv_kinder=ruleKind 
+	    {
+	        currentNode = currentNode.getParent();
+	        if ($current==null) {
+	            $current = factory.create("Spielplatz");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.add($current, "kinder", lv_kinder,null);
+	         }
+	
 )
-    |(
-    
-    { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
-    }
-    lv_erzieher=ruleErwachsener 
-    {
-        currentNode = currentNode.getParent();
-        if ($current==null) {
-            $current = factory.create("Spielplatz");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.add($current, "erzieher", lv_erzieher,null);
-        
-         }
+    |(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	    }
+	    lv_erzieher=ruleErwachsener 
+	    {
+	        currentNode = currentNode.getParent();
+	        if ($current==null) {
+	            $current = factory.create("Spielplatz");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.add($current, "erzieher", lv_erzieher,null);
+	         }
+	
 ))
-    |(
-    
-    { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
-    }
-    lv_spielzeuge=ruleSpielzeug 
-    {
-        currentNode = currentNode.getParent();
-        if ($current==null) {
-            $current = factory.create("Spielplatz");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.add($current, "spielzeuge", lv_spielzeuge,null);
-        
-         }
+    |(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	    }
+	    lv_spielzeuge=ruleSpielzeug 
+	    {
+	        currentNode = currentNode.getParent();
+	        if ($current==null) {
+	            $current = factory.create("Spielplatz");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.add($current, "spielzeuge", lv_spielzeuge,null);
+	         }
+	
 ))*)'}' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.0/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
@@ -189,36 +194,38 @@ ruleKind returns [EObject current=null]
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
-)(
-    lv_name=RULE_ID
+)(	
+	
+	    lv_name=RULE_ID
     { 
     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
-    {
-        if ($current==null) {
-            $current = factory.create("Kind");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "name", lv_name,"ID");
-        
-         }
-))(
-    lv_age=RULE_INT
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Kind");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "name", lv_name,"ID");
+	         }
+	
+))(	
+	
+	    lv_age=RULE_INT
     { 
     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "age"); 
     }
  
-    {
-        if ($current==null) {
-            $current = factory.create("Kind");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "age", lv_age,"INT");
-        
-         }
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Kind");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "age", lv_age,"INT");
+	         }
+	
 ))')' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.2/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
@@ -247,36 +254,38 @@ ruleErwachsener returns [EObject current=null]
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
-)(
-    lv_name=RULE_ID
+)(	
+	
+	    lv_name=RULE_ID
     { 
     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
-    {
-        if ($current==null) {
-            $current = factory.create("Erwachsener");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "name", lv_name,"ID");
-        
-         }
-))(
-    lv_age=RULE_INT
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Erwachsener");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "name", lv_name,"ID");
+	         }
+	
+))(	
+	
+	    lv_age=RULE_INT
     { 
     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "age"); 
     }
  
-    {
-        if ($current==null) {
-            $current = factory.create("Erwachsener");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "age", lv_age,"INT");
-        
-         }
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Erwachsener");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "age", lv_age,"INT");
+	         }
+	
 ))')' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
@@ -305,37 +314,39 @@ ruleSpielzeug returns [EObject current=null]
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
-)(
-    lv_name=RULE_ID
+)(	
+	
+	    lv_name=RULE_ID
     { 
     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
-    {
-        if ($current==null) {
-            $current = factory.create("Spielzeug");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "name", lv_name,"ID");
-        
-         }
-))(
-    
-    { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
-    }
-    lv_farbe=ruleFarbe 
-    {
-        currentNode = currentNode.getParent();
-        if ($current==null) {
-            $current = factory.create("Spielzeug");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "farbe", lv_farbe,null);
-        
-         }
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Spielzeug");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "name", lv_name,"ID");
+	         }
+	
+))(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	    }
+	    lv_farbe=ruleFarbe 
+	    {
+	        currentNode = currentNode.getParent();
+	        if ($current==null) {
+	            $current = factory.create("Spielzeug");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "farbe", lv_farbe,null);
+	         }
+	
 ))')' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@parserRules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 

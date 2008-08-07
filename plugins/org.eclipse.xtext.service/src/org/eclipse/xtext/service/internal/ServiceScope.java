@@ -41,6 +41,12 @@ public class ServiceScope implements IServiceScope {
 
 	@Override
 	public String toString() {
-	    return "Scope " + id + " -> " + parentScope!=null?parentScope.toString():""; 
+		StringBuffer buff = new StringBuffer("Scope ");
+		buff.append(id);
+		if (parentScope!=null) {
+			buff.append (" extends ");
+			buff.append (parentScope.toString());
+		}
+	    return buff.toString(); 
 	}
 }

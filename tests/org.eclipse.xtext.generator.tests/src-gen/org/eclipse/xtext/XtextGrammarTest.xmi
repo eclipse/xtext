@@ -310,5 +310,5 @@
       <terminal xsi:type="xtext:RuleCall" name="ID"/>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="XtextTest" nsURI="http://www.eclipse.org/2008/Test/XtextTest"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="http://www.eclipse.org/2008/Test/XtextTest" name="XtextTest"/>
 </xtext:Grammar>

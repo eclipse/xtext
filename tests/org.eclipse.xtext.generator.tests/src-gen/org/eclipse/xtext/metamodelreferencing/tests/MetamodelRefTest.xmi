@@ -23,5 +23,5 @@
     </alternatives>
   </parserRules>
   <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="xtext" uri="http://www.eclipse.org/2008/Xtext"/>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="SimpleTest" nsURI="http://eclipse.org/xtext/tests/SimpleTest"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="http://eclipse.org/xtext/tests/SimpleTest" name="SimpleTest"/>
 </xtext:Grammar>

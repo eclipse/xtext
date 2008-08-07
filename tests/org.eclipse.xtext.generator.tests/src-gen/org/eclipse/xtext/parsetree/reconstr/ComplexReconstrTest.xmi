@@ -63,5 +63,5 @@
       </abstractTokens>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="complexrewritetest" nsURI="http://complex/rewrite/test"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="http://complex/rewrite/test" name="complexrewritetest"/>
 </xtext:Grammar>

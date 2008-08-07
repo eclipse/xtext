@@ -35,5 +35,5 @@
       </abstractTokens>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ActionLang" nsURI="http://www.eclipse.org/2008/tmf/xtext/ActionLang"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="http://www.eclipse.org/2008/tmf/xtext/ActionLang" name="ActionLang"/>
 </xtext:Grammar>

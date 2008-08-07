@@ -71,22 +71,23 @@ entryRuleModel returns [EObject current=null] :
 ruleModel returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
-(
-    
-    { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
-    }
-    lv_child=ruleGreeting 
-    {
-        currentNode = currentNode.getParent();
-        if ($current==null) {
-            $current = factory.create("Model");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "child", lv_child,null);
-        
-         }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+	    }
+	    lv_child=ruleGreeting 
+	    {
+	        currentNode = currentNode.getParent();
+	        if ($current==null) {
+	            $current = factory.create("Model");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "child", lv_child,null);
+	         }
+	
 )?;
     
 
@@ -107,21 +108,22 @@ ruleGreeting returns [EObject current=null]
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
-(
-    lv_name=RULE_ID
+(	
+	
+	    lv_name=RULE_ID
     { 
     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
-    {
-        if ($current==null) {
-            $current = factory.create("Greeting");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "name", lv_name,"ID");
-        
-         }
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Greeting");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "name", lv_name,"ID");
+	         }
+	
 ));
     
 

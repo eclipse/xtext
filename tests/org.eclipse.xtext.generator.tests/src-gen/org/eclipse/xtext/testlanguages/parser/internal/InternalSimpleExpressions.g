@@ -92,22 +92,23 @@ ruleSequence returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)(
-    
-    { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
-    }
-    lv_expressions=ruleAddition 
-    {
-        currentNode = currentNode.getParent();
-        if ($current==null) {
-            $current = factory.create("Sequence");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.add($current, "expressions", lv_expressions,null);
-        
-         }
+)(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	    }
+	    lv_expressions=ruleAddition 
+	    {
+	        currentNode = currentNode.getParent();
+	        if ($current==null) {
+	            $current = factory.create("Sequence");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.add($current, "expressions", lv_expressions,null);
+	         }
+	
 ))*);
     
 
@@ -145,8 +146,9 @@ ruleAddition returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)(
-    lv_operator=('+' 
+)(	
+	
+	    lv_operator=('+' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
     }
@@ -156,31 +158,32 @@ ruleAddition returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
     }
 ) 
-    {
-        if ($current==null) {
-            $current = factory.create("Expression");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "operator", input.LT(-1),null);
-        
-         }
-))(
-    
-    { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
-    }
-    lv_values=ruleMultiplication 
-    {
-        currentNode = currentNode.getParent();
-        if ($current==null) {
-            $current = factory.create("Expression");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.add($current, "values", lv_values,null);
-        
-         }
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Expression");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "operator", input.LT(-1),null);
+	         }
+	
+))(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	    }
+	    lv_values=ruleMultiplication 
+	    {
+	        currentNode = currentNode.getParent();
+	        if ($current==null) {
+	            $current = factory.create("Expression");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.add($current, "values", lv_values,null);
+	         }
+	
 ))*);
     
 
@@ -218,8 +221,9 @@ ruleMultiplication returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)(
-    lv_operator=('*' 
+)(	
+	
+	    lv_operator=('*' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
     }
@@ -229,31 +233,32 @@ ruleMultiplication returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
     }
 ) 
-    {
-        if ($current==null) {
-            $current = factory.create("Expression");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "operator", input.LT(-1),null);
-        
-         }
-))(
-    
-    { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
-    }
-    lv_values=ruleTerm 
-    {
-        currentNode = currentNode.getParent();
-        if ($current==null) {
-            $current = factory.create("Expression");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.add($current, "values", lv_values,null);
-        
-         }
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Expression");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "operator", input.LT(-1),null);
+	         }
+	
+))(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	    }
+	    lv_values=ruleTerm 
+	    {
+	        currentNode = currentNode.getParent();
+	        if ($current==null) {
+	            $current = factory.create("Expression");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.add($current, "values", lv_values,null);
+	         }
+	
 ))*);
     
 
@@ -305,21 +310,22 @@ entryRuleAtom returns [EObject current=null] :
 ruleAtom returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
-(
-    lv_name=RULE_ID
+(	
+	
+	    lv_name=RULE_ID
     { 
     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.4/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
-    {
-        if ($current==null) {
-            $current = factory.create("Atom");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "name", lv_name,"ID");
-        
-         }
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Atom");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "name", lv_name,"ID");
+	         }
+	
 );
     
 

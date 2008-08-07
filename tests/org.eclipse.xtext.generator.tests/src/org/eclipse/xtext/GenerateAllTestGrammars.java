@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.crossrefs.LangA;
 import org.eclipse.xtext.dummy.DummyLanguage;
 import org.eclipse.xtext.grammarinheritance.AbstractTestLanguage;
 import org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage;
@@ -36,12 +37,11 @@ public class GenerateAllTestGrammars {
 	
 	private static Logger log = Logger.getLogger(GenerateAllTestGrammars.class);
 
-	public final static Class<?>[] testclasses = new Class[] { AbstractTestLanguage.class,ConcreteTestLanguage.class,XtextGrammarTest.class, MetamodelRefTest.class,
+	public final static Class<?>[] testclasses = new Class[] { LangA.class, AbstractTestLanguage.class,ConcreteTestLanguage.class,XtextGrammarTest.class, MetamodelRefTest.class,
 			DummyLanguage.class, TestLanguage.class, SimpleReconstrTest.class, ComplexReconstrTest.class,
 			LexerLanguage.class, SimpleExpressions.class, ActionTestLanguage.class, OptionalEmptyLanguage.class,
-			ReferenceGrammar.class, LookaheadLanguage.class 
-	};// MultiGenMMTest.
-																// class
+			ReferenceGrammar.class, LookaheadLanguage.class
+	};
 
 	public static void main(String[] args) throws Exception {
 		XtextStandaloneSetup.doSetup();

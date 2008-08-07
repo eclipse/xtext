@@ -84,5 +84,5 @@
       <abstractTokens xsi:type="xtext:Keyword" value=")"/>
     </alternatives>
   </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="simpleExpressions" nsURI="http://www.eclipse.org/xtext/test/simpleExpressions"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="http://www.eclipse.org/xtext/test/simpleExpressions" name="simpleExpressions"/>
 </xtext:Grammar>

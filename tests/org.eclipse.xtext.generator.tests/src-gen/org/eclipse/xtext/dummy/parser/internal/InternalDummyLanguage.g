@@ -71,22 +71,23 @@ entryRuleModel returns [EObject current=null] :
 ruleModel returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
-(
-    
-    { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
-    }
-    lv_elements=ruleElement 
-    {
-        currentNode = currentNode.getParent();
-        if ($current==null) {
-            $current = factory.create("Model");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.add($current, "elements", lv_elements,null);
-        
-         }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+	    }
+	    lv_elements=ruleElement 
+	    {
+	        currentNode = currentNode.getParent();
+	        if ($current==null) {
+	            $current = factory.create("Model");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.add($current, "elements", lv_elements,null);
+	         }
+	
 )*;
     
 
@@ -103,55 +104,58 @@ entryRuleElement returns [EObject current=null] :
 ruleElement returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
-(((((
-    lv_optional='optional' 
+(((((	
+	
+	    lv_optional='optional' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, "optional"); 
     }
  
-    {
-        if ($current==null) {
-            $current = factory.create("Element");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "optional", true,"optional");
-        
-         }
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Element");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "optional", true,"optional");
+	         }
+	
 )?'element' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
-)(
-    lv_name=RULE_ID
+)(	
+	
+	    lv_name=RULE_ID
     { 
     createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
-    {
-        if ($current==null) {
-            $current = factory.create("Element");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.set($current, "name", lv_name,"ID");
-        
-         }
-))(
-    lv_descriptions=RULE_STRING
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Element");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "name", lv_name,"ID");
+	         }
+	
+))(	
+	
+	    lv_descriptions=RULE_STRING
     { 
     createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "descriptions"); 
     }
  
-    {
-        if ($current==null) {
-            $current = factory.create("Element");
-            associateNodeWithAstElement(currentNode, $current);
-        }
-        
-        factory.add($current, "descriptions", lv_descriptions,"STRING");
-        
-         }
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Element");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.add($current, "descriptions", lv_descriptions,"STRING");
+	         }
+	
 )*)';' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
