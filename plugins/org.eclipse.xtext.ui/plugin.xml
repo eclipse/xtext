@@ -19,6 +19,10 @@
    <extension-point id="foldingStructureProvider" name="Xtext Folding Structure Provider" schema="schema/foldingStructureProvider.exsd"/>
    <extension-point id="quickFixGenerator" name="Xtext QuickFix Service" schema="schema/quickFixGenerator.exsd"/>
    <extension-point id="hyperlinkCreator" name="Xtext Hyperlink Service" schema="schema/hyperlinkCreator.exsd"/>
+   <extension-point id="fragmentProvider" name="Fragment Provider" schema="schema/fragmentProvider.exsd"/>
+   <extension-point id="uriChecker" name="URI Checker" schema="schema/uriChecker.exsd"/>
+   <extension-point id="linkProvider" name="Link Provider" schema="schema/linkProvider.exsd"/>
+   <extension-point id="linker" name="Linker" schema="schema/linker.exsd"/>
    <extension
          id="org.eclipse.xtext.ui.problemmarker"
          name="Xtext Editor Problem Marker"
@@ -167,6 +171,34 @@
             name="Xtext Editors">
          <context type="org.eclipse.xtext.ui.editor.model.IEditorModel"/>
       </target>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.linker">
+      <linker
+            class="org.eclipse.xtext.crossref.internal.Linker"
+            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
+      </linker>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.linkProvider">
+      <linkProvider
+            class="org.eclipse.xtext.crossref.impl.XtextBuiltinLinkProvider"
+            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
+      </linkProvider>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.uriChecker">
+      <uriChecker
+            class="org.eclipse.xtext.crossref.impl.DefaultRuntimeURIChecker"
+            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
+      </uriChecker>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.ui.fragmentProvider">
+      <fragmentProvider
+            class="org.eclipse.xtext.crossref.impl.XtextBuiltinFragmentProvider"
+            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
+      </fragmentProvider>
    </extension>
   
 </plugin>

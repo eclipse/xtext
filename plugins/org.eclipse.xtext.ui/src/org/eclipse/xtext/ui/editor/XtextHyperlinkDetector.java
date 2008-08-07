@@ -45,6 +45,7 @@ public class XtextHyperlinkDetector extends AbstractHyperlinkDetector {
 			try {
 				// FIXME create
 				// ServiceRegistry.hasService(IServiceScope,IServiceInterface)
+				// or use optional inject
 				hyperLinkService = ServiceRegistry.getService(editorModel.getLanguageDescriptor(),
 						IHyperlinkCreator.class);
 			}

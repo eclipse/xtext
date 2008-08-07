@@ -52,6 +52,7 @@ import org.eclipse.xtext.ui.service.IProposalsProvider;
 
 /**
  * 
+ *TODO inject services instead of using serviceregistry
  * 
  * @author Dennis Hübner - Initial contribution and API
  * 

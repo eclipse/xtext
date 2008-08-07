@@ -3,7 +3,8 @@ package org.eclipse.xtext.crossref;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.service.ILanguageService;
 
-public interface ILinker {
+public interface ILinker extends ILanguageService{
 	public List<BrokenLink> ensureLinked(EObject obj);
 }

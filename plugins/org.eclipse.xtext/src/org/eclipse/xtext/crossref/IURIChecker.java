@@ -10,12 +10,13 @@ package org.eclipse.xtext.crossref;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.service.ILanguageService;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public interface IURIChecker {
+public interface IURIChecker extends ILanguageService {
 	/**
 	 * @param uri
 	 * @param context
