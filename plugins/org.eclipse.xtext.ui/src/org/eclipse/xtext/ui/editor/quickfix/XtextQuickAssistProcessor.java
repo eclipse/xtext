@@ -13,12 +13,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext;
 import org.eclipse.jface.text.quickassist.IQuickAssistProcessor;
 import org.eclipse.jface.text.source.Annotation;
-import org.eclipse.jface.text.source.IAnnotationModel;
+import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.texteditor.SimpleMarkerAnnotation;
@@ -37,6 +36,7 @@ public class XtextQuickAssistProcessor implements IQuickAssistProcessor {
 	 * .eclipse.jface.text.quickassist.IQuickAssistInvocationContext)
 	 */
 	public boolean canAssist(IQuickAssistInvocationContext invocationContext) {
+		// TODO QuickAssist
 		return false;
 	}
 
@@ -63,26 +63,30 @@ public class XtextQuickAssistProcessor implements IQuickAssistProcessor {
 	 * (org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext)
 	 */
 	public ICompletionProposal[] computeQuickAssistProposals(IQuickAssistInvocationContext invocationContext) {
-		IAnnotationModel anoModel = invocationContext.getSourceViewer().getAnnotationModel();
-		Iterator<?> anotationIterator = anoModel.getAnnotationIterator();
-		List<MarkerResolutionCompletionProposal> proposals = new ArrayList<MarkerResolutionCompletionProposal>();
-		while (anotationIterator.hasNext()) {
-			Object key = anotationIterator.next();
-			if (key instanceof SimpleMarkerAnnotation) {
-				SimpleMarkerAnnotation annotation = (SimpleMarkerAnnotation) key;
-				IMarker marker = annotation.getMarker();
-				IMarkerResolution[] markerResolutions = IDE.getMarkerHelpRegistry().getResolutions(marker);
-				if (markerResolutions != null && markerResolutions.length > 0) {
-					Position pos = anoModel.getPosition(annotation);
-					if (pos.overlapsWith(invocationContext.getOffset(), invocationContext.getLength())) {
-						for (int i = 0; i < markerResolutions.length; i++) {
-							proposals.add(new MarkerResolutionCompletionProposal(markerResolutions[i], pos, marker));
+		if (invocationContext.getSourceViewer().getAnnotationModel() instanceof AnnotationModel) {
+			AnnotationModel anoModel = (AnnotationModel) invocationContext.getSourceViewer().getAnnotationModel();
+			// using 3.4 performance iterator, move offset to left so can
+			// search both sides of cursor for annotations
+			Iterator<?> anotationIterator = anoModel.getAnnotationIterator(invocationContext.getOffset() - 1, 2, true,
+					true);
+			List<MarkerResolutionCompletionProposal> proposals = new ArrayList<MarkerResolutionCompletionProposal>();
+			while (anotationIterator.hasNext()) {
+				Object key = anotationIterator.next();
+				if (key instanceof SimpleMarkerAnnotation) {
+					SimpleMarkerAnnotation annotation = (SimpleMarkerAnnotation) key;
+					IMarker marker = annotation.getMarker();
+					if (IDE.getMarkerHelpRegistry().hasResolutions(marker)) {
+						IMarkerResolution[] markerResolutions = IDE.getMarkerHelpRegistry().getResolutions(marker);
+						for (IMarkerResolution markerResolution : markerResolutions) {
+							proposals.add(new MarkerResolutionCompletionProposal(markerResolution, anoModel
+									.getPosition(annotation), marker));
 						}
+						return (ICompletionProposal[]) proposals.toArray(new ICompletionProposal[0]);
 					}
 				}
 			}
 		}
-		return (ICompletionProposal[]) proposals.toArray(new ICompletionProposal[0]);
+		return null;
 	}
 
 	/*

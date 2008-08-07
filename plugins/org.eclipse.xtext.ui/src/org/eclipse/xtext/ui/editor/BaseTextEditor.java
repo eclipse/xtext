@@ -39,7 +39,9 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.ContentAssistAction;
 import org.eclipse.ui.texteditor.IDocumentProvider;
+import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
+import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.Keyword;
@@ -210,7 +212,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 			}
 		}
 	}
-	
+
 	public void synchronizeOutlinePage() {
 		int caretOffset = getSourceViewer().getTextWidget().getCaretOffset();
 		AbstractNode currentNode = ParseTreeUtil.getLastCompleteNodeByOffset(model.getParseTreeRootNode(), caretOffset);
@@ -286,7 +288,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
 		log.warn("Initializing Xtext basic text editor.");
-		
+
 		// Error marker
 		IResource resource = getResource();
 		if (resource != null && isEditable() && getModel() != null) {
@@ -360,6 +362,9 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		setAction("Format", action); //$NON-NLS-1$
 		markAsStateDependentAction("Format", true); //$NON-NLS-1$
 		markAsSelectionDependentAction("Format", true); //$NON-NLS-1$
+		SelectMarkerRulerAction markerAction = new XtextMarkerRulerAction(XtextUIMessages.getResourceBundle(),
+				"XtextSelectAnnotationRulerAction.", this, getVerticalRuler()); //$NON-NLS-1$
+		setAction(ITextEditorActionConstants.RULER_CLICK, markerAction);
 	}
 
 	@Override
