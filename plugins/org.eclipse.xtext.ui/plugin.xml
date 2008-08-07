@@ -42,10 +42,27 @@
       </command>
     </extension>
    <extension
+         point="org.eclipse.ui.keywords">
+      <keyword
+            id="org.eclipse.xtext.keyword.editor"
+            label="Editor">
+      </keyword>
+      <keyword
+            id="org.eclipse.xtext.keyword.syntax_coloring"
+            label="Syntax">
+      </keyword>
+   </extension>
+   <extension
          point="org.eclipse.xtext.service.ui.scope">
       <serviceScope
             id="org.eclipse.xtext.builtin.XtextBuiltin">
       </serviceScope>
+   </extension>
+   <extension
+         point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
+      <serviceRegistrationFactory
+            class="org.eclipse.xtext.ui.service.utils.XtextServiceRegistrationFactory">
+      </serviceRegistrationFactory>
    </extension>
    <extension
          point="org.eclipse.xtext.ui.aSTFactory">
@@ -123,23 +140,6 @@
             class="org.eclipse.xtext.ui.service.impl.BuiltInFoldingStructureProvider"
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </foldingStructureProvider>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
-      <serviceRegistrationFactory
-            class="org.eclipse.xtext.ui.service.utils.XtextServiceRegistrationFactory">
-      </serviceRegistrationFactory>
-   </extension>
-   <extension
-         point="org.eclipse.ui.keywords">
-      <keyword
-            id="org.eclipse.xtext.keyword.editor"
-            label="Editor">
-      </keyword>
-      <keyword
-            id="org.eclipse.xtext.keyword.syntax_coloring"
-            label="Syntax">
-      </keyword>
    </extension>
    <extension
          point="org.eclipse.xtext.ui.quickFixGenerator">
