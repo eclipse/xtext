@@ -6,22 +6,23 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.parsetree.reconstr.impl;
+package org.eclipse.xtext.crossref.impl;
 
-
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.crossref.ILinkProvider;
+import org.eclipse.xtext.parsetree.LeafNode;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public abstract class Predicate {
+public class DefaultLinkResolver implements ILinkProvider {
 
-	protected InstanceDescription obj;
-
-	public Predicate(InstanceDescription obj) {
-		this.obj = (InstanceDescription) obj.createClone();
+	public URI[] getLinks(LeafNode text, CrossReference ref, EObject model) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
-	public abstract boolean check();
 
 }

@@ -6,22 +6,20 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.parsetree.reconstr.impl;
+package org.eclipse.xtext.crossref;
 
-
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
-public abstract class Predicate {
-
-	protected InstanceDescription obj;
-
-	public Predicate(InstanceDescription obj) {
-		this.obj = (InstanceDescription) obj.createClone();
-	}
-
-	public abstract boolean check();
-
+public interface IURIChecker {
+	/**
+	 * @param uri
+	 * @param context
+	 * @return
+	 */
+	boolean exists(URI uri, EObject context);
 }

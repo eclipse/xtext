@@ -21,6 +21,11 @@ cached List[MetaModel] getAllMetaModels(Grammar this) :
 theCurrentType(Action this) :
 	getAllMetaModels(grammar())->
 	currentType(this,grammar());
+
+/* just for testing */
+testCurrentType(RuleCall this) :
+	getAllMetaModels(grammar())->
+	currentType(this,grammar());
 	
 private AbstractType typeForName(Grammar this, String name) :
 	getAllMetaModels().select(mm|mm.alias()==name.getAlias()).first().types.select(e|e.name == name.getTypeName()).first();
@@ -59,11 +64,11 @@ private create ComplexType createComplexType(String name, Grammar g) :
 
 
 private setAbstractFeature(Grammar this, List[MetaModel] x) :
-	x.types.flatten().typeSelect(ComplexType).collect(e|e.setAbstract(e.isAbstract(this)));
+	x.types.flatten().typeSelect(ComplexType).collect(e|e.setAbstract((e.isAbstract(this))));
 
 private cached Boolean isAbstract(ComplexType name, Grammar g) :
 	g.eAllContents.typeSelect(Action).select(e|e.typeName.getQualifiedName() == name.getQualifiedName()).isEmpty &&
-	g.eAllContents.typeSelect(Assignment).select(e|e.currentType(g).getQualifiedName() == name.getQualifiedName()).isEmpty
+	g.eAllContents.typeSelect(Assignment).select(e|(e.currentType(g).getQualifiedName()) == (name.getQualifiedName())).isEmpty
 ;
 		
 	
@@ -101,7 +106,8 @@ private Feature update(Feature this, Assignment that, Grammar g) :
 				case '=': setUpperBound(1)
 				default : null
 			} -> 
-			this.setType(returnType(that.terminal,g))
+			this.setType(returnType(that.terminal,g)) ->
+			this.setContainment(that.eAllContents.typeSelect(CrossReference).isEmpty)
 		)
 	)
 	-> this
@@ -114,7 +120,8 @@ private Feature update(Feature this, Action that, Grammar g) :
 			case '=': setUpperBound(1)
 			default : null
 		} -> 
-		this.setType(currentType(that.eContainer,g))
+		this.setType(currentType(that.eContainer,g)) ->
+		this.setContainment(true)
 	)
 	-> this
 ;
@@ -123,6 +130,7 @@ private create DataType createDataType(String name, Grammar g) :
 	setName(name.getTypeName());
 // returnType
 private cached AbstractType returnType(Void this, Grammar g) : null; 
+private cached AbstractType returnType(CrossReference this, Grammar g) : createComplexType(getQualifiedName(this.type),g); 
 private cached AbstractType returnType(AbstractElement this, Grammar g) : error("") -> null;	
 private cached AbstractType returnType(Alternatives this, Grammar g) : groups.returnType(g).toSet().toList().first();	
 private cached AbstractType returnType(RuleCall this, Grammar g) : 
@@ -143,9 +151,9 @@ private cached DataType returnType(LexerRule this, Grammar g) :
 
 // currentType
 private cached AbstractType currentType(Void this, Grammar g) : null; 
-private cached AbstractType currentType(emf::EObject this, Grammar g) : 
+private AbstractType currentType(emf::EObject this, Grammar g) :
 	if RuleCall.isInstance(this) && !((RuleCall)this).isAssigned() then (
-		returnType(calledRule((RuleCall)this),g)
+		(returnType(calledRule((RuleCall)this),g))
 	) else (
 		let containmentList = eContainer.eContents:
 			let index = containmentList.indexOf(this) :
@@ -172,7 +180,7 @@ private cached ComplexType currentType(Action this, Grammar g) :
 	this.typeName.getQualifiedName().createComplexType(g);	
 
 private cached ComplexType currentType(ParserRule this, Grammar g) :
-	this.getReturnTypeName().createComplexType(g);	
+	getReturnTypeName().createComplexType(g);	
 
 private cached DataType currentType(LexerRule this, Grammar g) :
 	this.getReturnTypeName().createDataType(g);	

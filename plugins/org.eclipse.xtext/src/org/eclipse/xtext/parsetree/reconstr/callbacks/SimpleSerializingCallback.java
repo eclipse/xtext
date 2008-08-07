@@ -1,7 +1,9 @@
 package org.eclipse.xtext.parsetree.reconstr.callbacks;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -9,6 +11,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 
 public class SimpleSerializingCallback extends DefaultParsetreeReconstructorCallback {
+	
 	private StringBuffer buff = new StringBuffer();
 	private IValueConverterService converterService;
 	
@@ -45,6 +48,19 @@ public class SimpleSerializingCallback extends DefaultParsetreeReconstructorCall
 		}
 		prepend(converterService.toString(value, call.getName()));
 		before(current, call);
+	}
+	
+	@Override
+	public void crossRefCall(IInstanceDescription current, CrossReference call) {
+		Assignment ass = GrammarUtil.containingAssignment(call);
+		if (ass==null)
+			throw new IllegalStateException("Unassigned cross reference "+call);
+		Object object = current.get(ass.getFeature());
+		if (object instanceof EObject) {
+			EObject obj = (EObject) object;
+			prepend(obj.eResource().getURIFragment(obj));
+		}
+		throw new IllegalStateException("Can't serialize cross reference to "+object);
 	}
 	
 	@Override

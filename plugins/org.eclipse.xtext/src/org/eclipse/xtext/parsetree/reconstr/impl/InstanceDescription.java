@@ -26,7 +26,7 @@ public class InstanceDescription implements IInstanceDescription {
 	/**
 	 * 
 	 */
-	private AbstractParseTreeConstructor parseTreeConstr;
+	public AbstractParseTreeConstructor parseTreeConstr;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.xtext.parsetree.impl.IInstanceDescription#isInstanceOf(java.lang.String)
@@ -51,8 +51,8 @@ public class InstanceDescription implements IInstanceDescription {
 		return described;
 	}
 
-	private EObject described;
-	private Map<String, Integer> featureConsumedCounter = new HashMap<String, Integer>();
+	public EObject described;
+	public Map<String, Integer> featureConsumedCounter = new HashMap<String, Integer>();
 
 	public InstanceDescription(AbstractParseTreeConstructor abstractInternalParseTreeConstructor, EObject described) {
 		super();
@@ -87,6 +87,16 @@ public class InstanceDescription implements IInstanceDescription {
 		return hashCode() + "/" + described.hashCode();
 	}
 
+	/**
+	 * consumes a value in the given feature and marks it as consumed. For
+	 * multiple values (i.e. EStructuralFeature.isMultiple()==true) the values
+	 * are consumed reverse starting with the last value in the list.
+	 * 
+	 * @param feature
+	 * @return the consumed value
+	 * @throws IllegalStateException
+	 *             if the feature is not consumable
+	 */
 	public Object consume(String feature) {
 		if (!isConsumable(feature))
 			throw new IllegalStateException(feature + " is not consumable");
@@ -159,7 +169,7 @@ public class InstanceDescription implements IInstanceDescription {
 		return true;
 	}
 
-	public InstanceDescription clone() {
+	public IInstanceDescription createClone() {
 		return new InstanceDescription(this.parseTreeConstr, described, new HashMap<String, Integer>(featureConsumedCounter));
 	}
 

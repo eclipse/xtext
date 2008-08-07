@@ -63,7 +63,11 @@ Action returns Action:
 	'{' ('current' '=')? typeName=TypeRef '.' feature=ID operator=('='|'+=') 'current' '}';//TODO make assignment optional
 
 AbstractTerminal returns AbstractElement: 
-   Keyword | RuleCall | ParenthesizedElement
+   Keyword | RuleCall | ParenthesizedElement | CrossReference
+;
+
+CrossReference :
+	'[' type=TypeRef ('|' rule=RuleCall)? ']'
 ;
 
 ParenthesizedElement returns AbstractElement:

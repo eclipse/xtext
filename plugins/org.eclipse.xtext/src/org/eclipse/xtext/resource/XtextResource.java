@@ -11,13 +11,23 @@ package org.eclipse.xtext.resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.crossref.BrokenLink;
+import org.eclipse.xtext.crossref.IFragmentProvider;
+import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -38,6 +48,14 @@ public class XtextResource extends ResourceImpl {
 
 	@Inject
 	private IAstFactory elementFactory;
+
+	@Inject
+	private ILinker linker;
+
+	@Inject
+	private IFragmentProvider fragmentProvider;
+
+	private Log log = LogFactory.getLog(getClass());
 
 	private IParseResult parseResult;
 
@@ -69,6 +87,21 @@ public class XtextResource extends ResourceImpl {
 				addNodeContentAdapter();
 			}
 		}
+		doLinking();
+	}
+
+	protected void doLinking() {
+		if (parseResult.getRootASTElement() == null)
+			return;
+		indexIds();
+		List<BrokenLink> brokenLinks = linker.ensureLinked(parseResult.getRootASTElement());
+		TreeIterator<EObject> allContents = parseResult.getRootASTElement().eAllContents();
+		while (allContents.hasNext())
+			brokenLinks.addAll(linker.ensureLinked(allContents.next()));
+
+		// for (BrokenLink brokenLink : brokenLinks) {
+		// //TODO handle broken links
+		// }
 	}
 
 	private void addNodeContentAdapter() {
@@ -86,6 +119,24 @@ public class XtextResource extends ResourceImpl {
 			}
 			addNodeContentAdapter();
 		}
+		doLinking();
+	}
+
+	private void indexIds() {
+		Map<String, EObject> map = new HashMap<String, EObject>();
+		Iterator<EObject> iter = EcoreUtil.getAllContents(parseResult.getRootASTElement(), false);
+		while (iter.hasNext()) {
+			EObject object = (EObject) iter.next();
+			String fragment = fragmentProvider.getFragment(object);
+			if (fragment != null) {
+				if (map.put(fragment, object) != null) {
+					map.remove(fragment);
+					log.info("The id " + fragment
+							+ " is not unique within the resource. Will use relative pathes instead.");
+				}
+			}
+		}
+		setIntrinsicIDToEObjectMap(map);
 	}
 
 	@Override

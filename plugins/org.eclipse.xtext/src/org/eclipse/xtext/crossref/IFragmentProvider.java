@@ -6,22 +6,24 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.parsetree.reconstr.impl;
+package org.eclipse.xtext.crossref;
 
-
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.service.ILanguageService;
 
 /**
+ * Used to compute fragments (i.e. resource local IDs) for EObjects. Typically
+ * used within a Resource
+ * 
  * @author Sven Efftinge - Initial contribution and API
- *
+ * 
  */
-public abstract class Predicate {
-
-	protected InstanceDescription obj;
-
-	public Predicate(InstanceDescription obj) {
-		this.obj = (InstanceDescription) obj.createClone();
-	}
-
-	public abstract boolean check();
-
+public interface IFragmentProvider extends ILanguageService {
+	/**
+	 * @param obj
+	 *            The EObject to compute the fragment for
+	 * @return the fragment, which can be an arbitrary string but must be unique
+	 *         within a resource
+	 */
+	String getFragment(EObject obj);
 }

@@ -93,4 +93,7 @@ String getQualifiedName(TypeRef this) :
 
 Grammar getSuperGrammar(Grammar this) :
 	JAVA org.eclipse.xtext.GrammarUtil.getSuperGrammar(org.eclipse.xtext.Grammar);
+	
+LexerRule calledLexerRule(CrossReference this) :
+	JAVA org.eclipse.xtext.GrammarUtil.getCalledLexerRule(org.eclipse.xtext.CrossReference);
 
