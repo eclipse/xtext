@@ -11,7 +11,6 @@ package org.eclipse.xtext.index.internal;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
@@ -24,25 +23,21 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.launching.JavaRuntime;
-import org.eclipse.xtext.index.internal.dbaccess.EClassDAO;
-import org.eclipse.xtext.index.internal.dbaccess.EObjectDAO;
 import org.eclipse.xtext.index.internal.dbaccess.IndexDatabase;
 import org.eclipse.xtext.index.internal.dbaccess.NotFoundInIndexException;
-import org.eclipse.xtext.index.internal.dbaccess.ResourceContainerDAO;
-import org.eclipse.xtext.index.internal.dbaccess.ResourceDAO;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -51,14 +46,17 @@ import org.eclipse.xtext.util.Strings;
  */
 public class WorkspaceModelIndexer {
 
+	private IndexDatabase indexDatabase;
+
 	private static Logger log = Logger.getLogger(WorkspaceModelIndexer.class);
 
-	static final Set<String> REGISTERED_EXTENSIONS = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
-			.keySet();
+	public static final Set<String> REGISTERED_EXTENSIONS = Resource.Factory.Registry.INSTANCE
+			.getExtensionToFactoryMap().keySet();
 
 	private ResourceSet resourceSet;
 
-	public WorkspaceModelIndexer() throws Exception {
+	public WorkspaceModelIndexer(IndexDatabase indexDatabase) {
+		this.indexDatabase = indexDatabase;
 		resourceSet = new ResourceSetImpl();
 	}
 
@@ -66,78 +64,49 @@ public class WorkspaceModelIndexer {
 		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
 		for (IProject project : projects) {
 			try {
-				int resourceContainerID = getResourceContainerID(project);
-				if (project.hasNature(JavaCore.NATURE_ID)) {
-					indexJavaProject(resourceContainerID, JavaCore.create(project));
-				}
-				else {
-					indexProject(resourceContainerID, project);
-				}
+				indexProject(project);
 			}
 			catch (Exception e) {
 				log.error(e);
 			}
 		}
 		try {
-			List<URI> allResourceURIs = ResourceDAO.findAllResources();
+			List<URI> allResourceURIs = indexDatabase.getResourceDAO().findAllResources();
 			for (URI resourceUri : allResourceURIs) {
 				Resource resource = resourceSet.getResource(resourceUri, true);
 				indexCrossRefs(resource);
 				resource.unload();
-				
 			}
 		}
 		catch (SQLException exc) {
 			log.error(exc);
 		}
 		try {
-			IndexDatabase.getInstance().commitOrRollback();
+			indexDatabase.commitOrRollback();
 		}
 		catch (SQLException exc) {
 			log.error(exc);
 		}
 	}
 
-	public void indexProject(int resourceContainerID, IProject project) {
+	public void indexProject(IProject project) {
 		try {
-			IResourceVisitor resourceVisitor = new ResourceVisitor(this, resourceContainerID);
-			project.accept(resourceVisitor);
-		}
-		catch (Exception e) {
-			log.error(e);
-		}
-
-	}
-
-	public void indexJavaProject(int resourceContainerID, IJavaProject project) {
-		try {
-			ResourceVisitor resourceVisitor = new ResourceVisitor(this, resourceContainerID);
-			for (IClasspathEntry classpathEntry : project.getRawClasspath()) {
-				if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_LIBRARY) {
-					IPath libraryPath = classpathEntry.getPath();
-					if (!libraryPath.toString().startsWith(JavaRuntime.JRE_CONTAINER)) {
-						IResource libraryInWorkspace = project.getProject().getParent().findMember(libraryPath);
-						if (libraryInWorkspace != null && libraryInWorkspace.exists()
-								&& libraryInWorkspace instanceof IFile) {
-							indexJarFile(libraryInWorkspace.getLocation());
-						}
-						else {
-							indexJarFile(libraryPath);
-						}
-					}
-				}
+			if (project.hasNature(JavaCore.NATURE_ID)) {
+				indexJavaProject(JavaCore.create(project));
 			}
-			project.getProject().accept(resourceVisitor);
+			else {
+				indexPlainProject(project);
+			}
 		}
-		catch (Exception e) {
-			log.error(e);
+		catch (Exception exc) {
+			log.error(exc);
 		}
 	}
 
-	public void indexJarFile(IPath path) throws SQLException, ZipException, IOException {
+	public void indexJarFile(IPath path, int projectContainerID) throws SQLException, ZipException, IOException {
 		File jarFile = path.toFile();
 		String jarFileURI = "jar:file:" + jarFile.getAbsolutePath() + "!";
-		int containerID = ResourceContainerDAO.create(jarFileURI);
+		int containerID = indexDatabase.getResourceContainerDAO().create(jarFileURI);
 		ZipFile zipFile = new ZipFile(jarFile);
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 		while (entries.hasMoreElements()) {
@@ -153,70 +122,148 @@ public class WorkspaceModelIndexer {
 				int resourceID;
 				boolean isAlreadyIndexed = true;
 				try {
-					resourceID = ResourceDAO.getID(name, containerID);
+					resourceID = indexDatabase.getResourceDAO().getID(name, containerID);
 				}
 				catch (NotFoundInIndexException e) {
-					resourceID = ResourceDAO.create(name, containerID);
+					resourceID = indexDatabase.getResourceDAO().create(name, containerID);
 					isAlreadyIndexed = false;
 				}
-				indexResource(resourceID, resource, isAlreadyIndexed);
+				indexResource(resourceID, resource, isAlreadyIndexed, containerID);
 			}
 		}
 	}
 
-	public void indexModelFile(int resourceContainerID, IFile file) {
+	public void indexModelFile(IFile file) {
 		try {
-			String path = file.getProjectRelativePath().toString();
-			int resourceID;
-			boolean isAlreadyIndexed = true;
-			try {
-				resourceID = ResourceDAO.getID(path, resourceContainerID);
-			}
-			catch (NotFoundInIndexException exc) {
-				isAlreadyIndexed = false;
-				resourceID = ResourceDAO.create(path, resourceContainerID);
-			}
-			URI fileURI = URI.createURI(file.getLocationURI().toString());
-			Resource resource = resourceSet.getResource(fileURI, true);
-			indexResource(resourceID, resource, isAlreadyIndexed);
+			indexModelFile(file, getResourceContainerID(file.getProject()));
 		}
 		catch (Exception e) {
 			log.error(e);
 		}
 	}
 
-	public void indexResource(int resourceID, Resource resource, boolean isAlreadyIndexed) throws SQLException {
-		List<String> fragmentsInResource = EObjectDAO.findFragmentsInResource(resourceID);
+	public void indexModelFile(IFile file, int resourceContainerID) {
+		try {
+			String path = file.getProjectRelativePath().toString();
+			int resourceID;
+			boolean isAlreadyIndexed = true;
+			try {
+				resourceID = indexDatabase.getResourceDAO().getID(path, resourceContainerID);
+			}
+			catch (NotFoundInIndexException exc) {
+				isAlreadyIndexed = false;
+				resourceID = indexDatabase.getResourceDAO().create(path, resourceContainerID);
+			}
+			URI resourceURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+			Resource resource = resourceSet.getResource(resourceURI, true);
+			indexResource(resourceID, resource, isAlreadyIndexed, resourceContainerID);
+		}
+		catch (Exception e) {
+			log.error(e);
+		}
+	}
+
+	public void removeProject(IProject project) {
+	}
+
+	public void removeJarFile(IPath path) {
+		// TODO: implement
+	}
+
+	public void removeModelFile(IFile modelFile) {
+		try {
+			removeModelFile(modelFile, getResourceContainerID(modelFile.getProject()));
+		}
+		catch (Exception e) {
+			log.error(e);
+		}
+	}
+	
+	public void removeModelFile(IFile modelFile, int resourceContainerID) {
+		// TODO: implement
+	}
+
+	private int getResourceContainerID(IProject project) throws SQLException {
+		String projectURI = URI.createPlatformResourceURI(project.getFullPath().toString(), true).toString();
+		int resourceContainerID;
+		try {
+			resourceContainerID = indexDatabase.getResourceContainerDAO().getID(projectURI);
+		}
+		catch (NotFoundInIndexException exc) {
+			resourceContainerID = indexDatabase.getResourceContainerDAO().create(projectURI);
+		}
+		return resourceContainerID;
+	}
+
+	private void indexPlainProject(IProject project) {
+		try {
+			int containerID = getResourceContainerID(project);
+			ResourceVisitor resourceVisitor = new ResourceVisitor(this, containerID);
+			project.accept(resourceVisitor);
+		}
+		catch (Exception e) {
+			log.error(e);
+		}
+	}
+
+	private void indexJavaProject(IJavaProject project) {
+		try {
+			int containerID = getResourceContainerID(project.getProject());
+			for (IClasspathEntry classpathEntry : project.getRawClasspath()) {
+				IPath classpathEntryPath = classpathEntry.getPath();
+				IResource classpathEntryInWorkspace = project.getProject().getParent().findMember(classpathEntryPath);
+				switch (classpathEntry.getEntryKind()) {
+					case IClasspathEntry.CPE_LIBRARY:
+						if (!classpathEntryPath.toString().startsWith(JavaRuntime.JRE_CONTAINER)) {
+							if (classpathEntryInWorkspace != null && classpathEntryInWorkspace.exists()
+									&& classpathEntryInWorkspace instanceof IFile) {
+								indexJarFile(classpathEntryInWorkspace.getLocation(), containerID);
+							}
+							else {
+								indexJarFile(classpathEntryPath, containerID);
+							}
+						}
+						break;
+					case IClasspathEntry.CPE_SOURCE:
+						ResourceVisitor resourceVisitor = new ResourceVisitor(this, containerID);
+						classpathEntryInWorkspace.accept(resourceVisitor);
+						break;
+					default:
+						// do nothing
+				}
+			}
+		}
+		catch (Exception e) {
+			log.error(e);
+		}
+	}
+
+	private void indexResource(int resourceID, Resource resource, boolean isAlreadyIndexed, int containerID)
+			throws SQLException {
+		List<String> fragmentsInResource = indexDatabase.getEObjectDAO().findFragmentsInResource(resourceID);
 		for (Iterator<EObject> contents = resource.getAllContents(); contents.hasNext();) {
 			EObject content = contents.next();
 			indexEObject(resourceID, resource, content, fragmentsInResource);
 		}
-		List<Integer> deletedEObjectIDs = new ArrayList<Integer>(fragmentsInResource.size());
 		for (String staleFragment : fragmentsInResource) {
 			try {
-				int staleEObjectID = EObjectDAO.getID(staleFragment, resourceID);
-				deletedEObjectIDs.add(staleEObjectID);
-				EObjectDAO.delete(staleEObjectID);
+				int staleEObjectID = indexDatabase.getEObjectDAO().getID(staleFragment, resourceID);
+				indexDatabase.getEObjectDAO().deleteEObjectAndCrossrefs(staleEObjectID);
 			}
 			catch (NotFoundInIndexException e) {
 				log.error("Cannot find stale EObject in index", e);
 			}
 		}
-		List<URI> danglingReferences = new ArrayList<URI>();
-		for (int deletedEObjectID : deletedEObjectIDs) {
-			danglingReferences.addAll(EObjectDAO.findReferencesTo(deletedEObjectID));
-		}
-		// TODO what to do about dangling refs?
 		resourceSet.getResources().remove(resource);
 	}
 
-	public void indexEObject(int resourceID, Resource resource, EObject content, List<String> fragmentsInResource)
+	private void indexEObject(int resourceID, Resource resource, EObject content, List<String> fragmentsInResource)
 			throws SQLException {
 		try {
-			int eClassID = EClassDAO.getID(content.eClass());
+			int eClassID = indexDatabase.getEClassDAO().getID(content.eClass());
 			String fragment = resource.getURIFragment(content);
 			if (!fragmentsInResource.remove(fragment)) {
-				EObjectDAO.create(fragment, eClassID, resourceID);
+				indexDatabase.getEObjectDAO().create(fragment, eClassID, resourceID);
 			}
 		}
 		catch (NotFoundInIndexException e) {
@@ -228,17 +275,13 @@ public class WorkspaceModelIndexer {
 		for (Iterator<EObject> allContents = resource.getAllContents(); allContents.hasNext();) {
 			EObject eObject = allContents.next();
 			try {
-				int sourceID = EObjectDAO.getID(eObject);
-				EList<EObject> crossReferences = eObject.eCrossReferences();
-				for (EObject crossReference : crossReferences) {
+				int sourceID = indexDatabase.getEObjectDAO().getID(eObject);
+				BasicEList<EObject> crossReferences = (BasicEList<EObject>) eObject.eCrossReferences();
+				for (int i=0; i< crossReferences.size(); ++i) {
+					EObject crossReference = crossReferences.basicGet(i);
 					try {
-						if (crossReference.eResource() != null) {
-							int targetID = EObjectDAO.getID(crossReference);
-							EObjectDAO.createCrossReference(sourceID, targetID);
-						}
-					}
-					catch (NotFoundInIndexException nfiie) {
-						log.error("Illegal or dangling cross-reference");
+						URI targetURI = EcoreUtil.getURI(crossReference);
+						indexDatabase.getCrossReferenceDAO().create(sourceID, targetURI.toString());
 					}
 					catch (SQLException exc) {
 						log.error("Error creating cross-reference");
@@ -249,18 +292,6 @@ public class WorkspaceModelIndexer {
 				log.error("EObject has not been indexed. Concurrent modification?");
 			}
 		}
-	}
-
-	private int getResourceContainerID(IProject project) throws SQLException {
-		String projectURI = URI.createPlatformResourceURI(project.getFullPath().toString(), true).toString();
-		int resourceContainerID;
-		try {
-			resourceContainerID = ResourceContainerDAO.getID(projectURI);
-		}
-		catch (NotFoundInIndexException exc) {
-			resourceContainerID = ResourceContainerDAO.create(projectURI);
-		}
-		return resourceContainerID;
 	}
 
 }

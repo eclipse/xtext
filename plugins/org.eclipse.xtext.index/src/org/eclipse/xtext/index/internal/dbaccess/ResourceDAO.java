@@ -23,20 +23,21 @@ import org.eclipse.emf.ecore.resource.Resource;
  */
 public class ResourceDAO {
 
-	private static PreparedStatement selectIDByResource;
-	private static PreparedStatement selectIDByPath;
-	private static PreparedStatement selectAllResourceURIs;
+	private IndexDatabase indexDatabase;
 
-	static {
+	private PreparedStatement selectIDByResource;
+	private PreparedStatement selectIDByPath;
+	private PreparedStatement selectAllResourceURIs;
+
+	public ResourceDAO(IndexDatabase indexDatabase){
 		try {
-			selectIDByResource = IndexDatabase
-					.getInstance()
+			this.indexDatabase = indexDatabase;
+			selectIDByResource = indexDatabase
 					.prepareStatements(
 							"SELECT Resource.id FROM Resource LEFT JOIN Container ON Container.id=Resource.container WHERE Resource.path=? AND Container.uri=?");
-			selectIDByPath = IndexDatabase.getInstance().prepareStatements(
+			selectIDByPath = indexDatabase.prepareStatements(
 					"SELECT Resource.id FROM Resource WHERE path=? AND container=?");
-			selectAllResourceURIs = IndexDatabase
-					.getInstance()
+			selectAllResourceURIs = indexDatabase
 					.prepareStatements(
 							"SELECT Container.uri, Resource.path FROM Resource LEFT JOIN Container ON Resource.container=Container.id");
 		}
@@ -45,42 +46,42 @@ public class ResourceDAO {
 		}
 	}
 
-	public static int getID(Resource resource) throws SQLException, NotFoundInIndexException {
+	public int getID(Resource resource) throws SQLException, NotFoundInIndexException {
 		URI uri = resource.getURI();
 		String uriAsString = uri.toString();
-		int containerURILength = ResourceContainerDAO.getContainerURILength(uri);
+		int containerURILength = indexDatabase.getResourceContainerDAO().getContainerURILength(uri);
 		String containerURI = uriAsString.substring(0, containerURILength);
 		String path = uriAsString.substring(containerURILength + 1);
 		selectIDByResource.setString(1, path);
 		selectIDByResource.setString(2, containerURI);
-		return IndexDatabase.getInstance().queryID(selectIDByResource);
+		return indexDatabase.queryID(selectIDByResource);
 	}
 
-	public static int getID(String path, int containerID) throws SQLException, NotFoundInIndexException {
+	public int getID(String path, int containerID) throws SQLException, NotFoundInIndexException {
 		if (path.startsWith("/")) {
 			path = path.substring(1);
 		}
 		selectIDByPath.setString(1, path);
 		selectIDByPath.setInt(2, containerID);
-		return IndexDatabase.getInstance().queryID(selectIDByPath);
+		return indexDatabase.queryID(selectIDByPath);
 	}
 
-	public static int create(Resource resource, int containerID) throws SQLException {
+	public int create(Resource resource, int containerID) throws SQLException {
 		URI uri = resource.getURI();
 		return create(uri, containerID);
 	}
 
-	public static int create(URI uri, int containerID) throws SQLException {
+	public int create(URI uri, int containerID) throws SQLException {
 		if (uri.isPlatform() && uri.segmentCount() > 2) {
 			String uriAsString = uri.toString();
-			int containerURILength = ResourceContainerDAO.getContainerURILength(uri);
+			int containerURILength = indexDatabase.getResourceContainerDAO().getContainerURILength(uri);
 			String path = uriAsString.substring(containerURILength + 1);
 			return create(path, containerID);
 		}
 		throw new IllegalArgumentException("Only platform URIs are supported");
 	}
 
-	public static int create(String path, int containerID) throws SQLException {
+	public int create(String path, int containerID) throws SQLException {
 		if (path.startsWith("/")) {
 			path = path.substring(1);
 		}
@@ -89,10 +90,10 @@ public class ResourceDAO {
 		insertStatementBuffer.append("',");
 		insertStatementBuffer.append(containerID);
 		insertStatementBuffer.append(")");
-		return IndexDatabase.getInstance().insertWithAutoID(insertStatementBuffer.toString());
+		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
 	}
 
-	public static List<URI> findAllResources() throws SQLException {
+	public List<URI> findAllResources() throws SQLException {
 		ResultSet result = null;
 		try {
 			result = selectAllResourceURIs.executeQuery();

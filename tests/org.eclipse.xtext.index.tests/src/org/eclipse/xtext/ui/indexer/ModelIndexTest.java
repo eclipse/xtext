@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.index.internal.ModelIndex;
-import org.eclipse.xtext.index.internal.dbaccess.IndexDatabase;
 import org.eclipse.xtext.ui.indexer.internal.IndexTestPlugin;
 import org.eclipse.xtext.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.PluginUtil;
@@ -54,8 +53,9 @@ public class ModelIndexTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
+		modelIndex.clearAll();
+		modelIndex.shutdown();
 		JavaProjectSetupUtil.deleteProject(project);
-		IndexDatabase.getInstance().clearAll();
 	}
 
 	public void testIndexModelInPlainProject() throws Exception {

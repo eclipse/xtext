@@ -14,15 +14,22 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.index.internal.ModelIndex;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
 public interface IModelIndex {
 
+	static final IModelIndex INSTANCE = new ModelIndex(false);
+
 	boolean exists(URI fragmentUri);
-	
+
 	List<URI> findReferencesTo(EObject eObject, IProject scope);
-	
+
 	List<URI> findInstances(EClass eClass, IProject scope);
+
+	void clearAll() throws Exception;
+	
+	void shutdown() throws Exception;
 }

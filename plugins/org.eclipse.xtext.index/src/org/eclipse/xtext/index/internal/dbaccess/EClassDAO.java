@@ -22,39 +22,42 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class EClassDAO {
 
-	private static PreparedStatement selectIDByEClass;
-	private static PreparedStatement selectEClassesByEPackage;
-	private static PreparedStatement deleteEClassByName;
+	private IndexDatabase indexDatabase;
 
-	static {
+	private PreparedStatement selectIDByEClass;
+	private PreparedStatement selectEClassesByEPackage;
+	private PreparedStatement deleteEClassByName;
+
+	public EClassDAO(IndexDatabase indexDatabase) {
 		try {
-			selectIDByEClass = IndexDatabase.getInstance().prepareStatements(
+			this.indexDatabase = indexDatabase;
+			selectIDByEClass = indexDatabase.prepareStatements(
 					"SELECT EClass.id FROM EClass, EPackage WHERE EClass.name=? AND EPackage.nsUri=?");
-			selectEClassesByEPackage = IndexDatabase.getInstance().prepareStatements(
+			selectEClassesByEPackage = indexDatabase.prepareStatements(
 					"SELECT name FROM EClass WHERE ePackage=?");
-			deleteEClassByName = IndexDatabase.getInstance().prepareStatements("DELETE FROM EClass WHERE name=?");
+			deleteEClassByName = indexDatabase.prepareStatements("DELETE FROM EClass WHERE name=?");
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(e);
 		}
 	}
 
-	public static int getID(EClass eClass) throws SQLException, NotFoundInIndexException {
+	public int getID(EClass eClass) throws SQLException, NotFoundInIndexException {
 		selectIDByEClass.setString(1, eClass.getName());
 		selectIDByEClass.setString(2, eClass.getEPackage().getNsURI());
-		return IndexDatabase.getInstance().queryID(selectIDByEClass);
+		return indexDatabase.queryID(selectIDByEClass);
 	}
 
-	public static int create(EClass eClass, int ePackageID) throws SQLException {
+	public int create(EClass eClass, int ePackageID) throws SQLException {
 		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO EClass(name, ePackage) values('");
 		insertStatementBuffer.append(eClass.getName());
 		insertStatementBuffer.append("',");
 		insertStatementBuffer.append(ePackageID);
 		insertStatementBuffer.append(")");
-		return IndexDatabase.getInstance().insertWithAutoID(insertStatementBuffer.toString());
+		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
 	}
 
-	public static List<String> findAllEClassNames(int ePackageID) throws SQLException {
+	public List<String> findAllEClassNames(int ePackageID) throws SQLException {
 		selectEClassesByEPackage.setInt(1, ePackageID);
 		ResultSet result = null;
 		try {
@@ -72,7 +75,7 @@ public class EClassDAO {
 		}
 	}
 
-	public static void delete(String staleEClassName) throws SQLException {
+	public void delete(String staleEClassName) throws SQLException {
 		deleteEClassByName.setString(1, staleEClassName);
 		deleteEClassByName.execute();
 	}

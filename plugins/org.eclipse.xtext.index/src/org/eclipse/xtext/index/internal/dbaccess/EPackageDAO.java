@@ -19,27 +19,30 @@ import org.eclipse.emf.ecore.EPackage;
  */
 public class EPackageDAO {
 
-	private static PreparedStatement selectIDByEPackage;
+	private IndexDatabase indexDatabase;
 
-	static {
+	private PreparedStatement selectIDByEPackage;
+
+	public EPackageDAO(IndexDatabase indexDatabase){
 		try {
-			selectIDByEPackage = IndexDatabase.getInstance().prepareStatements("SELECT id FROM EPackage WHERE nsURI=?");
+			this.indexDatabase = indexDatabase;
+			selectIDByEPackage = indexDatabase.prepareStatements("SELECT id FROM EPackage WHERE nsURI=?");
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(e);
 		}
 	}
 
-	public static int getID(EPackage ePackage) throws SQLException, NotFoundInIndexException {
+	public int getID(EPackage ePackage) throws SQLException, NotFoundInIndexException {
 		selectIDByEPackage.setString(1, ePackage.getNsURI());
-		return IndexDatabase.getInstance().queryID(selectIDByEPackage);
+		return indexDatabase.queryID(selectIDByEPackage);
 	}
 	
-	public static int create(EPackage ePackage) throws SQLException {
+	public int create(EPackage ePackage) throws SQLException {
 		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO EPackage(nsURI) values('");
 		insertStatementBuffer.append(ePackage.getNsURI());
 		insertStatementBuffer.append("')");
-		return IndexDatabase.getInstance().insertWithAutoID(insertStatementBuffer.toString());
+		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
 	}
 
 }
