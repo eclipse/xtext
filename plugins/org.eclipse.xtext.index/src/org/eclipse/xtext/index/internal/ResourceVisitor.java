@@ -15,13 +15,13 @@ import org.eclipse.core.runtime.CoreException;
 final class ResourceVisitor implements IResourceVisitor {
 
 	private final WorkspaceModelIndexer workspaceModelIndex;
-	private int resourceContainerID;
 	private List<IResource> ignoredResources;
-
-	public ResourceVisitor(WorkspaceModelIndexer workspaceModelIndex, int resourceContainerID) {
+	private int containerID;
+	
+	public ResourceVisitor(WorkspaceModelIndexer workspaceModelIndex, int containerID) {
 		this.workspaceModelIndex = workspaceModelIndex;
-		this.resourceContainerID = resourceContainerID;
 		ignoredResources = new ArrayList<IResource>();
+		this.containerID = containerID;
 	}
 
 	public void addIgnoredResource(IResource ignoredResource) {
@@ -36,7 +36,7 @@ final class ResourceVisitor implements IResourceVisitor {
 			IFile file = (IFile) resource;
 			String fileExtension = file.getFileExtension();
 			if (WorkspaceModelIndexer.REGISTERED_EXTENSIONS.contains(fileExtension)) {
-				this.workspaceModelIndex.indexModelFile(resourceContainerID, file);
+				workspaceModelIndex.indexModelFile(file, containerID);
 			}
 			return false;
 		}

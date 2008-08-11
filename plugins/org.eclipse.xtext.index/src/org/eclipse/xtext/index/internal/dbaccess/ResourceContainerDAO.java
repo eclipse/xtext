@@ -22,14 +22,17 @@ import org.eclipse.emf.common.util.URI;
  */
 public class ResourceContainerDAO {
 
-	private static PreparedStatement selectReferences;
-	private static PreparedStatement selectIDByURI;
+	private IndexDatabase indexDatabase;
 
-	static {
+	private PreparedStatement selectReferences;
+	private PreparedStatement selectIDByURI;
+
+	public ResourceContainerDAO(IndexDatabase indexDatabase) {
 		try {
-			selectIDByURI = IndexDatabase.getInstance().prepareStatements(
+			this.indexDatabase = indexDatabase;
+			selectIDByURI = indexDatabase.prepareStatements(
 					"SELECT Container.id FROM Container WHERE uri=?");
-			selectReferences = IndexDatabase.getInstance().prepareStatements(
+			selectReferences = indexDatabase.prepareStatements(
 					"SELECT ContainerReference.target FROM ContainerReference WHERE source=?");
 		}
 		catch (Exception e) {
@@ -37,12 +40,12 @@ public class ResourceContainerDAO {
 		}
 	}
 
-	public static int getID(String uri) throws SQLException, NotFoundInIndexException {
+	public int getID(String uri) throws SQLException, NotFoundInIndexException {
 		selectIDByURI.setString(1, uri);
-		return IndexDatabase.getInstance().queryID(selectIDByURI);
+		return indexDatabase.queryID(selectIDByURI);
 	}
 
-	public static List<Integer> findDependencyIDs(int containerID) throws SQLException {
+	public List<Integer> findDependencyIDs(int containerID) throws SQLException {
 		ResultSet result = null;
 		try {
 			selectReferences.setInt(1, containerID);
@@ -60,28 +63,28 @@ public class ResourceContainerDAO {
 		}
 	}
 
-	public static int create(URI platformURI) throws SQLException {
+	public int create(URI platformURI) throws SQLException {
 		String uriAsString = platformURI.toString();
 		return create(uriAsString.substring(0, getContainerURILength(platformURI)));
 	}
 
-	public static int create(String uri) throws SQLException {
+	public int create(String uri) throws SQLException {
 		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO Container(uri) VALUES('");
 		insertStatementBuffer.append(uri);
 		insertStatementBuffer.append("')");
-		return IndexDatabase.getInstance().insertWithAutoID(insertStatementBuffer.toString());
+		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
 	}
 
-	public static void createReference(int from, int to) throws SQLException {
+	public void createReference(int from, int to) throws SQLException {
 		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO ContainerReference(source, target) VALUES(");
 		insertStatementBuffer.append(from);
 		insertStatementBuffer.append(",");
 		insertStatementBuffer.append(to);
 		insertStatementBuffer.append(")");
-		IndexDatabase.getInstance().insertWithAutoID(insertStatementBuffer.toString());
+		indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
 	}
 
-	public static int getContainerURILength(URI resourceURI) {
+	public int getContainerURILength(URI resourceURI) {
 		String uriAsString = resourceURI.toString();
 		if (resourceURI.isPlatform()) {
 			return uriAsString.indexOf('/', resourceURI.segment(0).length() + 11);

@@ -17,17 +17,21 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.index.internal.dbaccess.EClassDAO;
-import org.eclipse.xtext.index.internal.dbaccess.EPackageDAO;
+import org.eclipse.xtext.index.internal.dbaccess.IndexDatabase;
 import org.eclipse.xtext.index.internal.dbaccess.NotFoundInIndexException;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
- *
+ * 
  */
 public class EcoreRegistryIndexer {
 
 	private static Logger log = Logger.getLogger(EcoreRegistryIndexer.class);
+	private IndexDatabase indexDatabase;
+
+	public EcoreRegistryIndexer(IndexDatabase indexDatabase) {
+		this.indexDatabase = indexDatabase;
+	}
 
 	public void indexRegisteredEPackages() {
 		List<String> nsURIs = new ArrayList<String>(EPackage.Registry.INSTANCE.keySet());
@@ -55,23 +59,23 @@ public class EcoreRegistryIndexer {
 		int ePackageID;
 		List<String> allEClassNames;
 		try {
-			ePackageID = EPackageDAO.getID(ePackage);
-			allEClassNames = EClassDAO.findAllEClassNames(ePackageID);
+			ePackageID = indexDatabase.getEPackageDAO().getID(ePackage);
+			allEClassNames = indexDatabase.getEClassDAO().findAllEClassNames(ePackageID);
 		}
 		catch (NotFoundInIndexException exc) {
-			ePackageID = EPackageDAO.create(ePackage);
+			ePackageID = indexDatabase.getEPackageDAO().create(ePackage);
 			allEClassNames = Collections.emptyList();
 		}
 		log.info("Indexing EPackage: " + ePackageID + " " + ePackage.getNsURI());
 		for (EClassifier classifier : ePackage.getEClassifiers()) {
 			if (classifier instanceof EClass) {
 				if (!allEClassNames.remove(classifier.getName())) {
-					EClassDAO.create((EClass) classifier, ePackageID);
+					indexDatabase.getEClassDAO().create((EClass) classifier, ePackageID);
 				}
 			}
 		}
 		for (String staleEClassName : allEClassNames) {
-			EClassDAO.delete(staleEClassName);
+			indexDatabase.getEClassDAO().delete(staleEClassName);
 		}
 		for (EPackage subPackage : ePackage.getESubpackages()) {
 			indexEPackage(subPackage);
