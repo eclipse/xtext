@@ -1,6 +1,9 @@
 package org.eclipse.xtext.ui.util;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -11,6 +14,7 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -35,6 +39,15 @@ public class JavaProjectSetupUtil {
 		project.create(null);
 		project.open(null);
 		return project;
+	}
+	
+	public static void addProjectReference(IProject referencer, IProject referenced) throws CoreException {
+		IProjectDescription description = referencer.getDescription();
+		List<IProject> referencedProjects = new ArrayList<IProject>(Arrays.asList(description.getReferencedProjects()));
+		referencedProjects.add(referenced);
+		IProject[] refProjectsArray = referencedProjects.toArray(new IProject[referencedProjects.size()]);
+		description.setReferencedProjects(refProjectsArray);
+		referencer.setDescription(description, new NullProgressMonitor());
 	}
 
 	public static void deleteJavaProject(IJavaProject javaProject)
