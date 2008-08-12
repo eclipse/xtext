@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.indexer;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -34,7 +35,8 @@ import org.eclipse.xtext.ui.util.PluginUtil;
  */
 public class ModelIndexTest extends TestCase {
 
-	private static final String TEST_PROJECT_NAME = "test";
+	protected static final String TEST_PROJECT_NAME = "test";
+	protected static final String REFERENCING_PROJECT_NAME = "referencing";
 	protected static final String MODEL_FILE = "simple.ecore";
 	protected static final String JAR_FILE = "simple.jar";
 
@@ -47,6 +49,7 @@ public class ModelIndexTest extends TestCase {
 		super.setUp();
 		modelIndex = new ModelIndex(false);
 		modelIndex.getEcoreRegistryIndexer().indexEPackage(EcorePackage.eINSTANCE);
+		modelIndex.stopListening();
 		resourceSet = new ResourceSetImpl();
 	}
 
@@ -64,6 +67,15 @@ public class ModelIndexTest extends TestCase {
 		String expectedURI = "platform:/resource/" + TEST_PROJECT_NAME + "/" + MODEL_FILE + "#//SimpleEClass";
 		EObject simpleEClass = performTestSimpleEClass(project, expectedURI);
 		performReferenceTest(simpleEClass);
+		
+		IProject referencingProject = JavaProjectSetupUtil.createProject(REFERENCING_PROJECT_NAME);
+		modelIndex.getWorkspaceModelIndexer().indexWorkspace();
+		Collection<URI> eClasses = modelIndex.findInstances(EcorePackage.Literals.ECLASS, referencingProject);
+		assertTrue(eClasses.isEmpty());
+		
+		JavaProjectSetupUtil.addProjectReference(referencingProject, project);
+		performTestSimpleEClass(referencingProject, expectedURI);
+		JavaProjectSetupUtil.deleteProject(referencingProject);
 	}
 
 	public void testIndexModelInSrcFolder() throws Exception {
@@ -89,7 +101,7 @@ public class ModelIndexTest extends TestCase {
 
 	private EObject performTestSimpleEClass(IProject project, String expectedURI) throws SQLException, IOException {
 		modelIndex.getWorkspaceModelIndexer().indexWorkspace();
-		List<URI> eClasses = modelIndex.findInstances(EcorePackage.Literals.ECLASS, project);
+		Collection<URI> eClasses = modelIndex.findInstances(EcorePackage.Literals.ECLASS, project);
 		assertFalse(eClasses.isEmpty());
 		URI expected = URI.createURI(expectedURI);
 		assertTrue(eClasses.contains(expected));
@@ -103,9 +115,9 @@ public class ModelIndexTest extends TestCase {
 
 	@SuppressWarnings("unchecked")
 	private void performReferenceTest(EObject object) throws IOException {
-		List<URI> references = modelIndex.findReferencesTo(object, null);
+		Collection<URI> references = modelIndex.findReferencesTo(object, project);
 		assertFalse(references.isEmpty());
-		URI referenceURI = references.get(0);
+		URI referenceURI = references.iterator().next();
 		assertTrue(modelIndex.exists(referenceURI));
 		EObject referencingObject = resourceSet.getEObject(referenceURI, false);
 		assertNotNull(referencingObject);

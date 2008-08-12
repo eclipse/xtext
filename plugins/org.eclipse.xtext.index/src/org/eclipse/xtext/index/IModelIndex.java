@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.index;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
@@ -25,11 +25,15 @@ public interface IModelIndex {
 
 	boolean exists(URI fragmentUri);
 
-	List<URI> findReferencesTo(EObject eObject, IProject scope);
+	Collection<URI> findReferencesTo(EObject eObject, IProject scope);
 
-	List<URI> findInstances(EClass eClass, IProject scope);
+	Collection<URI> findInstances(EClass eClass, IProject scope);
 
 	void clearAll() throws Exception;
-	
+
+	void startListening();
+
+	void stopListening();
+
 	void shutdown() throws Exception;
 }

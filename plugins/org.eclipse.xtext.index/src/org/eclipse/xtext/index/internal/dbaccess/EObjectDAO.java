@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.index.internal.URIUtil;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -31,23 +32,28 @@ public class EObjectDAO {
 	private PreparedStatement selectIDByEObject;
 
 	private PreparedStatement selectFragmentsByResource;
-	private PreparedStatement deleteByFragmentAndResource;
-	private PreparedStatement deleteReferencesBySource;
+	private PreparedStatement deleteEObjectByID;
+
+	private PreparedStatement selectURIByEClassAndContainerID;
 
 	public EObjectDAO(IndexDatabase indexDatabase) {
 		try {
 			this.indexDatabase = indexDatabase;
-			selectIDByEObject = indexDatabase.prepareStatements(
-					"SELECT EObject.id FROM EObject WHERE EObject.fragment=? AND EObject.resource=?");
+			selectIDByEObject = indexDatabase
+					.prepareStatements("SELECT EObject.id FROM EObject WHERE EObject.fragment=? AND EObject.resource=?");
 			selectURIByEClass = indexDatabase
-					.prepareStatements(
-							"SELECT Container.uri, Resource.path, EObject.fragment FROM EObject, Resource, Container WHERE EObject.eClass=? AND EObject.resource=Resource.id AND Resource.container=Container.id");
-			selectFragmentsByResource = indexDatabase.prepareStatements(
-					"SELECT fragment FROM EObject WHERE resource=?");
-			deleteByFragmentAndResource = indexDatabase.prepareStatements(
-					"DELETE FROM EObject WHERE id=?");
-			deleteReferencesBySource = indexDatabase.prepareStatements(
-					"DELETE FROM CrossReference WHERE source=?");
+			.prepareStatements("SELECT Container.uri, Resource.path, EObject.fragment FROM EObject "
+					+ "LEFT JOIN Resource ON EObject.resource=Resource.id "
+					+ "LEFT JOIN Container ON Resource.container=Container.id " 
+					+ "WHERE EObject.eClass=?");
+			selectURIByEClassAndContainerID = indexDatabase
+					.prepareStatements("SELECT Container.uri, Resource.path, EObject.fragment FROM EObject "
+							+ "LEFT JOIN Resource ON EObject.resource=Resource.id "
+							+ "LEFT JOIN Container ON Resource.container=Container.id " 
+							+ "WHERE EObject.eClass=? AND Container.id=?");
+			selectFragmentsByResource = indexDatabase
+					.prepareStatements("SELECT fragment FROM EObject WHERE resource=?");
+			deleteEObjectByID = indexDatabase.prepareStatements("DELETE FROM EObject WHERE id=?");
 		}
 		catch (SQLException e) {
 			throw new IllegalStateException(e);
@@ -76,7 +82,24 @@ public class EObjectDAO {
 		try {
 			selectURIByEClass.setInt(1, eClassID);
 			result = selectURIByEClass.executeQuery();
-			List<URI> uris = indexDatabase.createURIsFromResult(result);
+			List<URI> uris = URIUtil.createURIsFromResult(result);
+			return uris;
+		}
+		finally {
+			if (result != null) {
+				result.close();
+			}
+		}
+	}
+	
+	public List<URI> findByEClass(EClass eClass, int resourceContainerID) throws SQLException, NotFoundInIndexException {
+		int eClassID = indexDatabase.getEClassDAO().getID(eClass);
+		ResultSet result = null;
+		try {
+			selectURIByEClassAndContainerID.setInt(1, eClassID);
+			selectURIByEClassAndContainerID.setInt(2, resourceContainerID);
+			result = selectURIByEClassAndContainerID.executeQuery();
+			List<URI> uris = URIUtil.createURIsFromResult(result);
 			return uris;
 		}
 		finally {
@@ -98,7 +121,6 @@ public class EObjectDAO {
 		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
 	}
 
-
 	public List<String> findFragmentsInResource(int resourceID) throws SQLException {
 		selectFragmentsByResource.setInt(1, resourceID);
 		ResultSet result = null;
@@ -117,12 +139,9 @@ public class EObjectDAO {
 		}
 	}
 
-	public void deleteEObjectAndCrossrefs(int eObjectID) throws SQLException {
-		deleteReferencesBySource.setInt(1, eObjectID);
-		deleteReferencesBySource.executeUpdate();
-		deleteByFragmentAndResource.setInt(1, eObjectID);
-		deleteByFragmentAndResource.executeUpdate();
+	public void delete(int eObjectID) throws SQLException {
+		deleteEObjectByID.setInt(1, eObjectID);
+		deleteEObjectByID.executeUpdate();
 	}
-	
-	
+
 }
