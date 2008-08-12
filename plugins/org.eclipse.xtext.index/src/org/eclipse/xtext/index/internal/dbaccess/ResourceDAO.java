@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.index.internal.URIUtil;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -28,40 +29,45 @@ public class ResourceDAO {
 	private PreparedStatement selectIDByResource;
 	private PreparedStatement selectIDByPath;
 	private PreparedStatement selectAllResourceURIs;
+	private PreparedStatement deleteResourceByID;
 
-	public ResourceDAO(IndexDatabase indexDatabase){
+	private PreparedStatement selectResourceURIsByContainer;
+
+	public ResourceDAO(IndexDatabase indexDatabase) {
 		try {
 			this.indexDatabase = indexDatabase;
 			selectIDByResource = indexDatabase
-					.prepareStatements(
-							"SELECT Resource.id FROM Resource LEFT JOIN Container ON Container.id=Resource.container WHERE Resource.path=? AND Container.uri=?");
-			selectIDByPath = indexDatabase.prepareStatements(
-					"SELECT Resource.id FROM Resource WHERE path=? AND container=?");
+					.prepareStatements("SELECT Resource.id FROM Resource LEFT JOIN Container ON Container.id=Resource.container WHERE Resource.path=? AND Container.uri=?");
+			selectIDByPath = indexDatabase
+					.prepareStatements("SELECT Resource.id FROM Resource WHERE path=? AND container=?");
 			selectAllResourceURIs = indexDatabase
-					.prepareStatements(
-							"SELECT Container.uri, Resource.path FROM Resource LEFT JOIN Container ON Resource.container=Container.id");
+					.prepareStatements("SELECT Container.uri, Resource.path FROM Resource LEFT JOIN Container ON Resource.container=Container.id");
+			selectResourceURIsByContainer = indexDatabase
+					.prepareStatements("SELECT Container.uri, Resource.path FROM Resource LEFT JOIN Container ON Resource.container=Container.id WHERE Container.id=?");
+			deleteResourceByID = indexDatabase.prepareStatements("DELETE FROM Resource WHERE id=?");
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(e);
 		}
 	}
 
-	public int getID(Resource resource) throws SQLException, NotFoundInIndexException {
-		URI uri = resource.getURI();
-		String uriAsString = uri.toString();
-		int containerURILength = indexDatabase.getResourceContainerDAO().getContainerURILength(uri);
+	public int getID(URI resourceURI) throws SQLException, NotFoundInIndexException {
+		String uriAsString = resourceURI.toString();
+		int containerURILength = indexDatabase.getResourceContainerDAO().getContainerURILength(resourceURI);
 		String containerURI = uriAsString.substring(0, containerURILength);
 		String path = uriAsString.substring(containerURILength + 1);
 		selectIDByResource.setString(1, path);
 		selectIDByResource.setString(2, containerURI);
 		return indexDatabase.queryID(selectIDByResource);
 	}
+		
+	public int getID(Resource resource) throws SQLException, NotFoundInIndexException {
+		URI resourceURI = resource.getURI();
+		return getID(resourceURI);
+	}
 
 	public int getID(String path, int containerID) throws SQLException, NotFoundInIndexException {
-		if (path.startsWith("/")) {
-			path = path.substring(1);
-		}
-		selectIDByPath.setString(1, path);
+		selectIDByPath.setString(1, URIUtil.trimLeadingSlash(path));
 		selectIDByPath.setInt(2, containerID);
 		return indexDatabase.queryID(selectIDByPath);
 	}
@@ -82,11 +88,8 @@ public class ResourceDAO {
 	}
 
 	public int create(String path, int containerID) throws SQLException {
-		if (path.startsWith("/")) {
-			path = path.substring(1);
-		}
 		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO Resource(path, container) VALUES('");
-		insertStatementBuffer.append(path);
+		insertStatementBuffer.append(URIUtil.trimLeadingSlash(path));
 		insertStatementBuffer.append("',");
 		insertStatementBuffer.append(containerID);
 		insertStatementBuffer.append(")");
@@ -97,15 +100,7 @@ public class ResourceDAO {
 		ResultSet result = null;
 		try {
 			result = selectAllResourceURIs.executeQuery();
-			List<URI> uris = new ArrayList<URI>();
-			while (result.next()) {
-				StringBuffer uriBuffer = new StringBuffer();
-				uriBuffer.append(result.getString(1));
-				uriBuffer.append('/');
-				uriBuffer.append(result.getString(2));
-				URI uri = URI.createURI(uriBuffer.toString());
-				uris.add(uri);
-			}
+			List<URI> uris = createResourceURIsFromResult(result);
 			return uris;
 		}
 		finally {
@@ -113,6 +108,39 @@ public class ResourceDAO {
 				result.close();
 			}
 		}
+	}
+
+	public List<URI> findByContainer(int resourceContainerID) throws SQLException {
+		ResultSet result = null;
+		try {
+			selectResourceURIsByContainer.setInt(1, resourceContainerID);
+			result = selectResourceURIsByContainer.executeQuery();
+			List<URI> uris = createResourceURIsFromResult(result);
+			return uris;
+		}
+		finally {
+			if (result != null) {
+				result.close();
+			}
+		}
+	}
+
+	public void delete(int resourceID) throws SQLException {
+		deleteResourceByID.setInt(1, resourceID);
+		deleteResourceByID.executeUpdate();
+	}
+
+	private List<URI> createResourceURIsFromResult(ResultSet result) throws SQLException {
+		List<URI> uris = new ArrayList<URI>();
+		while (result.next()) {
+			StringBuffer uriBuffer = new StringBuffer();
+			uriBuffer.append(result.getString(1));
+			uriBuffer.append('/');
+			uriBuffer.append(result.getString(2));
+			URI uri = URI.createURI(uriBuffer.toString());
+			uris.add(uri);
+		}
+		return uris;
 	}
 
 }

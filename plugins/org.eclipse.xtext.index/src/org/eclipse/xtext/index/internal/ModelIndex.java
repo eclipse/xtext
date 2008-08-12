@@ -9,8 +9,11 @@
 package org.eclipse.xtext.index.internal;
 
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
@@ -46,7 +49,7 @@ public class ModelIndex implements IModelIndex, IResourceChangeListener {
 			ecoreRegistryIndexer.indexRegisteredEPackages();
 		}
 		resourceDeltaVisitor = new ResourceDeltaVisitor(workspaceModelIndexer);
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
+		startListening();
 	}
 
 	public boolean exists(URI fragmentURI) {
@@ -68,9 +71,17 @@ public class ModelIndex implements IModelIndex, IResourceChangeListener {
 		return false;
 	}
 
-	public List<URI> findReferencesTo(EObject eObject, IProject scope) {
+	public Collection<URI> findReferencesTo(EObject eObject, IProject scope) {
 		try {
-			return indexDatabase.getCrossReferenceDAO().findReferencesTo(eObject);
+			if(scope == null) {
+				return indexDatabase.getCrossReferenceDAO().findReferencesTo(eObject);
+			}
+			List<Integer> projectScope = getProjectScope(scope);
+			Set<URI> references = new HashSet<URI>();
+			for(int resourceContainerID:projectScope) {
+				references.addAll(indexDatabase.getCrossReferenceDAO().findReferencesTo(URIUtil.getURI(eObject), resourceContainerID));
+			}
+			return references;
 		}
 		catch (Exception e) {
 			log.error(e);
@@ -78,9 +89,17 @@ public class ModelIndex implements IModelIndex, IResourceChangeListener {
 		return Collections.<URI> emptyList();
 	}
 
-	public List<URI> findInstances(EClass eClass, IProject scope) {
+	public Collection<URI> findInstances(EClass eClass, IProject scope) {
 		try {
-			return indexDatabase.getEObjectDAO().findByEClass(eClass);
+			if(scope == null) {
+				return indexDatabase.getEObjectDAO().findByEClass(eClass);
+			} 
+			List<Integer> projectScope = getProjectScope(scope);
+			Set<URI> instances = new HashSet<URI>();
+			for(int resourceContainerID:projectScope) {
+				instances.addAll(indexDatabase.getEObjectDAO().findByEClass(eClass, resourceContainerID));
+			}
+			return instances;
 		}
 		catch (Exception e) {
 			log.error(e);
@@ -111,12 +130,28 @@ public class ModelIndex implements IModelIndex, IResourceChangeListener {
 		}
 	}
 	
+	public void startListening() {
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
+	}
+	
+	
+	public void stopListening() {
+		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
+	}
+	
 	public void clearAll() throws Exception {
 		indexDatabase.clearAll();
 	}
 	
 	public void shutdown() throws Exception {
-		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
+		stopListening();
 		indexDatabase.shutdown();
+	}
+
+	private List<Integer> getProjectScope(IProject scope) throws SQLException, NotFoundInIndexException {
+		URI projectURI = URIUtil.createContainerURI(scope);
+		int projectContainerID = indexDatabase.getResourceContainerDAO().getID(projectURI.toString());
+		List<Integer> resourceContainerScope = indexDatabase.getResourceContainerDAO().findResourceContainerScope(projectContainerID);
+		return resourceContainerScope;
 	}
 }

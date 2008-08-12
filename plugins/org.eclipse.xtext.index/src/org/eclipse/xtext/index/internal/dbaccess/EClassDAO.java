@@ -26,15 +26,16 @@ public class EClassDAO {
 
 	private PreparedStatement selectIDByEClass;
 	private PreparedStatement selectEClassesByEPackage;
+	private PreparedStatement deleteEClassByID;
 	private PreparedStatement deleteEClassByName;
 
 	public EClassDAO(IndexDatabase indexDatabase) {
 		try {
 			this.indexDatabase = indexDatabase;
-			selectIDByEClass = indexDatabase.prepareStatements(
-					"SELECT EClass.id FROM EClass, EPackage WHERE EClass.name=? AND EPackage.nsUri=?");
-			selectEClassesByEPackage = indexDatabase.prepareStatements(
-					"SELECT name FROM EClass WHERE ePackage=?");
+			selectIDByEClass = indexDatabase.prepareStatements("SELECT EClass.id FROM EClass, EPackage "
+					+ "WHERE EClass.name=? AND EPackage.nsUri=?");
+			selectEClassesByEPackage = indexDatabase.prepareStatements("SELECT name FROM EClass WHERE ePackage=?");
+			deleteEClassByID = indexDatabase.prepareStatements("DELETE FROM EClass WHERE id=?");
 			deleteEClassByName = indexDatabase.prepareStatements("DELETE FROM EClass WHERE name=?");
 		}
 		catch (Exception e) {
@@ -63,7 +64,7 @@ public class EClassDAO {
 		try {
 			result = selectEClassesByEPackage.executeQuery();
 			List<String> eClasses = new ArrayList<String>();
-			while(result.next()) {
+			while (result.next()) {
 				eClasses.add(result.getString(1));
 			}
 			return eClasses;
@@ -75,8 +76,14 @@ public class EClassDAO {
 		}
 	}
 
+	public void delete(int eClassID) throws SQLException {
+		deleteEClassByID.setInt(1, eClassID);
+		deleteEClassByID.execute();
+	}
+
 	public void delete(String staleEClassName) throws SQLException {
 		deleteEClassByName.setString(1, staleEClassName);
 		deleteEClassByName.execute();
 	}
+
 }

@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.indexer;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -20,6 +21,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.index.internal.dbaccess.IndexDatabase;
+import org.eclipse.xtext.index.internal.dbaccess.NotFoundInIndexException;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -39,7 +41,11 @@ public class DAOTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		indexDatabase = new IndexDatabase();
-		indexDatabase.clearAll();
+		try {
+			indexDatabase.clearAll();
+		} catch(Exception exc) {
+			// ignore
+		}
 	}
 
 	@Override
@@ -50,15 +56,36 @@ public class DAOTest extends TestCase {
 	}
 	
 	public void testResourceContainer() throws Exception {
+		//test create
 		int idX = indexDatabase.getResourceContainerDAO().create(PLATFORM_PLUGIN_X);
 		int idY = indexDatabase.getResourceContainerDAO().create(PLATFORM_PLUGIN_Y);
 		assertEquals(idX, indexDatabase.getResourceContainerDAO().getID(PLATFORM_PLUGIN_X));
 		assertEquals(idY, indexDatabase.getResourceContainerDAO().getID(PLATFORM_PLUGIN_Y));
 		assertNotSame(idX, idY);
-		indexDatabase.getResourceContainerDAO().createReference(idX, idY);
-		List<Integer> dependencyIDs = indexDatabase.getResourceContainerDAO().findDependencyIDs(idX);
+		
+		// test create reference
+		indexDatabase.getResourceContainerReferenceDAO().create(idX, PLATFORM_PLUGIN_Y);
+		List<URI> dependencyIDs = indexDatabase.getResourceContainerReferenceDAO().findDependencyURIs(idX);
 		assertEquals(1, dependencyIDs.size());
-		assertEquals(idY, dependencyIDs.get(0).intValue());
+		assertEquals(PLATFORM_PLUGIN_Y, dependencyIDs.get(0).toString());
+		
+		// delete source -> reference is deleted
+		indexDatabase.getResourceContainerDAO().delete(idX);
+		dependencyIDs = indexDatabase.getResourceContainerReferenceDAO().findDependencyURIs(idX);
+		assertTrue(dependencyIDs.isEmpty());
+		
+		// delete target -> reference is not deleted
+		int idZ = indexDatabase.getResourceContainerDAO().create(PLATFORM_PLUGIN_Z);
+		indexDatabase.getResourceContainerReferenceDAO().create(idZ, PLATFORM_PLUGIN_Y);
+		indexDatabase.getResourceContainerDAO().delete(idY);
+		dependencyIDs = indexDatabase.getResourceContainerReferenceDAO().findDependencyURIs(idZ);
+		assertEquals(1, dependencyIDs.size());
+		assertEquals(PLATFORM_PLUGIN_Y, dependencyIDs.get(0).toString());
+		
+		// delete reference 
+		indexDatabase.getResourceContainerReferenceDAO().deleteBySource(idZ);
+		dependencyIDs = indexDatabase.getResourceContainerReferenceDAO().findDependencyURIs(idZ);
+		assertTrue(dependencyIDs.isEmpty());
 	}
 
 	public void testResource() throws Exception {
@@ -72,11 +99,19 @@ public class DAOTest extends TestCase {
 		int idYByResource = indexDatabase.getResourceDAO().create(resourceB, containerID);
 		int idY = indexDatabase.getResourceDAO().getID("folder/b.ecore", containerID);
 		assertEquals(idYByResource, idY);
+
+		List<URI> allResources = indexDatabase.getResourceDAO().findAllResources();
+		assertEquals(2, allResources.size());
+		
+		indexDatabase.getResourceDAO().delete(idX);
+		allResources = indexDatabase.getResourceDAO().findAllResources();
+		assertEquals(1, allResources.size());
 	}
 	
 	public void testEPackageEClassEObject() throws Exception {
 		// Workaround for Mac OSX classloader bug
 		Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
+		
 		int idEcore = indexDatabase.getEPackageDAO().create(EcorePackage.eINSTANCE);
 		assertEquals(idEcore, indexDatabase.getEPackageDAO().getID(EcorePackage.eINSTANCE));
 		int idEClass = indexDatabase.getEClassDAO().create(EcorePackage.Literals.ECLASS, idEcore);
@@ -103,5 +138,24 @@ public class DAOTest extends TestCase {
 		List<URI> referenceURIs = indexDatabase.getCrossReferenceDAO().findReferencesTo(newEClass);
 		assertEquals(1, referenceURIs.size());
 		assertEquals(RESOURCE_URI_C + "#" + refFragment, referenceURIs.get(0).toString());
+	}
+	
+	public void testEPackageEClass() throws SQLException, NotFoundInIndexException {
+		// Workaround for Mac OSX classloader bug
+		Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
+		
+		int idEcore = indexDatabase.getEPackageDAO().create(EcorePackage.eINSTANCE);
+		assertEquals(idEcore, indexDatabase.getEPackageDAO().getID(EcorePackage.eINSTANCE));
+		int idEClass = indexDatabase.getEClassDAO().create(EcorePackage.Literals.ECLASS, idEcore);
+		assertEquals(idEClass, indexDatabase.getEClassDAO().getID(EcorePackage.Literals.ECLASS));
+		
+		// Test cascading delete
+		indexDatabase.getEPackageDAO().delete(idEcore);
+		try {
+			indexDatabase.getEClassDAO().getID(EcorePackage.Literals.ECLASS);
+			fail("EClass should have been deleted");
+		} catch(NotFoundInIndexException exc) {
+			// success 
+		}
 	}
 }

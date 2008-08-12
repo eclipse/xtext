@@ -14,7 +14,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.index.internal.URIUtil;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -22,18 +24,20 @@ import org.eclipse.emf.common.util.URI;
  */
 public class ResourceContainerDAO {
 
+	private static final Logger log = Logger.getLogger(ResourceContainerDAO.class);
+
 	private IndexDatabase indexDatabase;
 
-	private PreparedStatement selectReferences;
 	private PreparedStatement selectIDByURI;
+	private PreparedStatement deleteContainerByID;
+	private PreparedStatement selectAllContainerIDs;
 
 	public ResourceContainerDAO(IndexDatabase indexDatabase) {
 		try {
 			this.indexDatabase = indexDatabase;
-			selectIDByURI = indexDatabase.prepareStatements(
-					"SELECT Container.id FROM Container WHERE uri=?");
-			selectReferences = indexDatabase.prepareStatements(
-					"SELECT ContainerReference.target FROM ContainerReference WHERE source=?");
+			selectIDByURI = indexDatabase.prepareStatements("SELECT Container.id FROM Container WHERE uri=?");
+			selectAllContainerIDs = indexDatabase.prepareStatements("SELECT id FROM Container");
+			deleteContainerByID = indexDatabase.prepareStatements("DELETE FROM Container WHERE id=?");
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(e);
@@ -41,26 +45,8 @@ public class ResourceContainerDAO {
 	}
 
 	public int getID(String uri) throws SQLException, NotFoundInIndexException {
-		selectIDByURI.setString(1, uri);
+		selectIDByURI.setString(1, URIUtil.trimTrailingSlash(uri));
 		return indexDatabase.queryID(selectIDByURI);
-	}
-
-	public List<Integer> findDependencyIDs(int containerID) throws SQLException {
-		ResultSet result = null;
-		try {
-			selectReferences.setInt(1, containerID);
-			result = selectReferences.executeQuery();
-			List<Integer> dependencies = new ArrayList<Integer>();
-			while (result.next()) {
-				dependencies.add(result.getInt(1));
-			}
-			return dependencies;
-		}
-		finally {
-			if (result != null) {
-				result.close();
-			}
-		}
 	}
 
 	public int create(URI platformURI) throws SQLException {
@@ -70,18 +56,47 @@ public class ResourceContainerDAO {
 
 	public int create(String uri) throws SQLException {
 		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO Container(uri) VALUES('");
-		insertStatementBuffer.append(uri);
+		insertStatementBuffer.append(URIUtil.trimTrailingSlash(uri));
 		insertStatementBuffer.append("')");
 		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
 	}
 
-	public void createReference(int from, int to) throws SQLException {
-		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO ContainerReference(source, target) VALUES(");
-		insertStatementBuffer.append(from);
-		insertStatementBuffer.append(",");
-		insertStatementBuffer.append(to);
-		insertStatementBuffer.append(")");
-		indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
+	public List<Integer> findAllResourceContainerIDs() throws SQLException {
+		ResultSet result = null;
+		try {
+			result = selectAllContainerIDs.executeQuery();
+			List<Integer> ids = new ArrayList<Integer>();
+			while (result.next()) {
+				ids.add(result.getInt(1));
+			}
+			return ids;
+		}
+		finally {
+			if (result != null) {
+				result.close();
+			}
+		}
+	}
+
+	public List<Integer> findResourceContainerScope(int resourceContainerID) throws SQLException {
+		List<URI> dependencyURIs = indexDatabase.getResourceContainerReferenceDAO().findDependencyURIs(
+				resourceContainerID);
+		List<Integer> dependencyIDs = new ArrayList<Integer>();
+		dependencyIDs.add(resourceContainerID);
+		for (int i = 0; i < dependencyURIs.size(); ++i) {
+			try {
+				int dependencyID = getID(dependencyURIs.get(i).toString());
+				if (!dependencyIDs.contains(dependencyID)) {
+					List<Integer> nextStageDependencyIDs = findResourceContainerScope(dependencyID);
+					nextStageDependencyIDs.removeAll(dependencyIDs);
+					dependencyIDs.addAll(nextStageDependencyIDs);
+				}
+			}
+			catch (NotFoundInIndexException e) {
+				log.error("Resource container not in index " + dependencyURIs.get(i).toString(), e);
+			}
+		}
+		return dependencyIDs;
 	}
 
 	public int getContainerURILength(URI resourceURI) {
@@ -92,6 +107,15 @@ public class ResourceContainerDAO {
 		else {
 			return uriAsString.indexOf("!/") + 1;
 		}
+	}
+
+	/**
+	 * @param resourceContainerID
+	 * @throws SQLException
+	 */
+	public void delete(int resourceContainerID) throws SQLException {
+		deleteContainerByID.setInt(1, resourceContainerID);
+		deleteContainerByID.executeUpdate();
 	}
 
 }

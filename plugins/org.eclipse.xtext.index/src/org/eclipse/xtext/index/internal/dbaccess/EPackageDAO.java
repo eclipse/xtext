@@ -22,11 +22,13 @@ public class EPackageDAO {
 	private IndexDatabase indexDatabase;
 
 	private PreparedStatement selectIDByEPackage;
+	private PreparedStatement deleteEPackageByID;
 
 	public EPackageDAO(IndexDatabase indexDatabase){
 		try {
 			this.indexDatabase = indexDatabase;
 			selectIDByEPackage = indexDatabase.prepareStatements("SELECT id FROM EPackage WHERE nsURI=?");
+			deleteEPackageByID = indexDatabase.prepareStatements("DELETE FROM EPackage WHERE id=?");
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(e);
@@ -43,6 +45,11 @@ public class EPackageDAO {
 		insertStatementBuffer.append(ePackage.getNsURI());
 		insertStatementBuffer.append("')");
 		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
+	}
+	
+	public void delete(int ePackageID) throws SQLException {
+		deleteEPackageByID.setInt(1, ePackageID);
+		deleteEPackageByID.executeUpdate();
 	}
 
 }
