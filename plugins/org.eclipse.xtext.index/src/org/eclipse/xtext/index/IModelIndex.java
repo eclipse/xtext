@@ -21,7 +21,7 @@ import org.eclipse.xtext.index.internal.ModelIndex;
  */
 public interface IModelIndex {
 
-	static final IModelIndex INSTANCE = new ModelIndex(false);
+	static final IModelIndex INSTANCE = ModelIndex.getInstance();
 
 	boolean exists(URI fragmentUri);
 
@@ -31,9 +31,5 @@ public interface IModelIndex {
 
 	void clearAll() throws Exception;
 
-	void startListening();
-
-	void stopListening();
-
-	void shutdown() throws Exception;
+	void close() throws Exception;
 }

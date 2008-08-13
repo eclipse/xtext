@@ -13,6 +13,7 @@ public class IndexPlugin extends AbstractUIPlugin {
 
 	// The shared instance
 	private static IndexPlugin plugin;
+
 	
 	/**
 	 * The constructor
@@ -34,6 +35,7 @@ public class IndexPlugin extends AbstractUIPlugin {
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
+		ModelIndex.closeInstance();
 		plugin = null;
 		super.stop(context);
 	}

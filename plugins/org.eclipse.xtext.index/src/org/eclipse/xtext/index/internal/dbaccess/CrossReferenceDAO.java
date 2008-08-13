@@ -27,7 +27,6 @@ public class CrossReferenceDAO {
 	private PreparedStatement createCrossReference;
 	private PreparedStatement selectSourceURIByCrossReferenceTarget;
 
-	private IndexDatabase indexDatabase;
 
 	private PreparedStatement deleteReferencesBySource;
 	private PreparedStatement selectTargetURIByCrossReferenceSource;
@@ -36,7 +35,6 @@ public class CrossReferenceDAO {
 
 	public CrossReferenceDAO(IndexDatabase indexDatabase) {
 		try {
-			this.indexDatabase = indexDatabase;
 			createCrossReference = indexDatabase
 					.prepareStatements("INSERT INTO CrossReference(source,target) VALUES(?,?)");
 			selectTargetURIByCrossReferenceSource = indexDatabase
