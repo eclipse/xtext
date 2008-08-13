@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.index.internal;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Collections;
@@ -38,15 +40,42 @@ public class ModelIndex implements IModelIndex, IResourceChangeListener {
 	private IndexDatabase indexDatabase;
 	private WorkspaceModelIndexer workspaceModelIndexer;
 	private EcoreRegistryIndexer ecoreRegistryIndexer;
+	private static final String LOCKFILE_NAME = "index.lock";
 	
 	private ResourceDeltaVisitor resourceDeltaVisitor;
 
+	public static ModelIndex INSTANCE;
+	
+	public static ModelIndex getInstance() {
+		if(INSTANCE == null) {
+			INSTANCE = new ModelIndex(true);
+		}
+		return INSTANCE;
+	}
+	
+	public static void closeInstance() throws Exception {
+		if(INSTANCE != null) {
+			INSTANCE.close();
+		}
+	}
 	public ModelIndex(boolean isRegisterEPackages) {
+		boolean isReIndex = checkLockFile();
 		indexDatabase = new IndexDatabase();
-		workspaceModelIndexer = new WorkspaceModelIndexer(indexDatabase);
+		if(isReIndex) {
+			try {
+				indexDatabase.clearAll();
+			}
+			catch (SQLException e) {
+				throw new IllegalStateException("Cannot clear model index for re-indexing", e);
+			}
+		}
 		ecoreRegistryIndexer = new EcoreRegistryIndexer(indexDatabase);
-		if (isRegisterEPackages) {
+		if (isRegisterEPackages || isReIndex) {
 			ecoreRegistryIndexer.indexRegisteredEPackages();
+		}
+		workspaceModelIndexer = new WorkspaceModelIndexer(indexDatabase);
+		if(isReIndex) {
+			workspaceModelIndexer.indexWorkspace();
 		}
 		resourceDeltaVisitor = new ResourceDeltaVisitor(workspaceModelIndexer);
 		startListening();
@@ -76,7 +105,7 @@ public class ModelIndex implements IModelIndex, IResourceChangeListener {
 			if(scope == null) {
 				return indexDatabase.getCrossReferenceDAO().findReferencesTo(eObject);
 			}
-			List<Integer> projectScope = getProjectScope(scope);
+			List<Integer> projectScope = findProjectScope(scope);
 			Set<URI> references = new HashSet<URI>();
 			for(int resourceContainerID:projectScope) {
 				references.addAll(indexDatabase.getCrossReferenceDAO().findReferencesTo(URIUtil.getURI(eObject), resourceContainerID));
@@ -94,7 +123,7 @@ public class ModelIndex implements IModelIndex, IResourceChangeListener {
 			if(scope == null) {
 				return indexDatabase.getEObjectDAO().findByEClass(eClass);
 			} 
-			List<Integer> projectScope = getProjectScope(scope);
+			List<Integer> projectScope = findProjectScope(scope);
 			Set<URI> instances = new HashSet<URI>();
 			for(int resourceContainerID:projectScope) {
 				instances.addAll(indexDatabase.getEObjectDAO().findByEClass(eClass, resourceContainerID));
@@ -143,12 +172,36 @@ public class ModelIndex implements IModelIndex, IResourceChangeListener {
 		indexDatabase.clearAll();
 	}
 	
-	public void shutdown() throws Exception {
+	public void close() throws Exception {
 		stopListening();
 		indexDatabase.shutdown();
+		deleteLockFile();
 	}
 
-	private List<Integer> getProjectScope(IProject scope) throws SQLException, NotFoundInIndexException {
+	private File getLockFile() {
+		return new File(IndexPlugin.getDefault().getStateLocation().toString() + "/" + LOCKFILE_NAME);
+	}
+
+	private boolean checkLockFile() {
+		File lockFile = getLockFile();
+		boolean lockFileExists = lockFile.exists();
+		if(!lockFileExists) {
+			try {
+				lockFile.createNewFile();
+			} catch(IOException e) {
+				throw new IllegalStateException("Error creating lock file for model index", e);
+			}
+		}
+		return lockFileExists;
+	}
+
+	private void deleteLockFile() {
+		if(!getLockFile().delete()) {
+			throw new IllegalStateException("Error deleting lock file of model index");
+		}
+	}
+
+	private List<Integer> findProjectScope(IProject scope) throws SQLException, NotFoundInIndexException {
 		URI projectURI = URIUtil.createContainerURI(scope);
 		int projectContainerID = indexDatabase.getResourceContainerDAO().getID(projectURI.toString());
 		List<Integer> resourceContainerScope = indexDatabase.getResourceContainerDAO().findResourceContainerScope(projectContainerID);

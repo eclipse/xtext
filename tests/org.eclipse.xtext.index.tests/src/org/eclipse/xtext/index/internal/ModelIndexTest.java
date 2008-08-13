@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.indexer;
+package org.eclipse.xtext.index.internal;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -24,8 +24,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.index.internal.ModelIndex;
-import org.eclipse.xtext.ui.indexer.internal.IndexTestPlugin;
 import org.eclipse.xtext.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.PluginUtil;
 
@@ -57,7 +55,7 @@ public class ModelIndexTest extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		modelIndex.clearAll();
-		modelIndex.shutdown();
+		modelIndex.close();
 		JavaProjectSetupUtil.deleteProject(project);
 	}
 

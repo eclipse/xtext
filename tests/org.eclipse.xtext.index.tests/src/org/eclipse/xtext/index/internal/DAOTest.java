@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.indexer;
+package org.eclipse.xtext.index.internal;
 
 import java.sql.SQLException;
 import java.util.List;

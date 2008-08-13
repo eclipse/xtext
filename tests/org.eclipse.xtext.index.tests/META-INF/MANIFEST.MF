@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tests Plug-in
-Bundle-SymbolicName: org.eclipse.xtext.index.tests
+Bundle-SymbolicName: org.eclipse.xtext.index.tests;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Vendor: itemis AG
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
@@ -9,5 +9,5 @@ Require-Bundle: org.eclipse.xtext.index;bundle-version="1.0.0",
  org.junit;bundle-version="3.8.2",
  org.eclipse.xtext.ui.tests;bundle-version="1.0.0",
  org.eclipse.ui;bundle-version="3.4.0"
-Bundle-Activator: org.eclipse.xtext.ui.indexer.internal.IndexTestPlugin
+Bundle-Activator: org.eclipse.xtext.index.internal.IndexTestPlugin
 Bundle-ActivationPolicy: lazy

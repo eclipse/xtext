@@ -8,5 +8,6 @@
             loggername="org.eclipse.xtext.index.logger">
       </mapentry>
    </extension>
+  
 
 </plugin>

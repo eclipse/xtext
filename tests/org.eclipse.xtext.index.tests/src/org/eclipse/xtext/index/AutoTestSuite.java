@@ -12,8 +12,8 @@ public class AutoTestSuite {
 
 	public static Test suite() {
 		TestSuite suite = new TestSuite("org.eclipse.xtext.index.tests");
-		suite.addTestSuite(org.eclipse.xtext.ui.indexer.DAOTest.class);
-		suite.addTestSuite(org.eclipse.xtext.ui.indexer.ModelIndexTest.class);
+		suite.addTestSuite(org.eclipse.xtext.index.internal.DAOTest.class);
+		suite.addTestSuite(org.eclipse.xtext.index.internal.ModelIndexTest.class);
 		return suite;
 	}
 }

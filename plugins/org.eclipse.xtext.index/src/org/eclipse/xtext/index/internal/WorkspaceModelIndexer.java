@@ -69,12 +69,7 @@ public class WorkspaceModelIndexer {
 			log.error("Error querying resouce containers", exc);
 		}
 		for (IProject project : projects) {
-			try {
-				indexProject(project, containerIDsFromDB);
-			}
-			catch (Exception e) {
-				log.error(e);
-			}
+			indexProject(project, containerIDsFromDB);
 		}
 		try {
 			List<URI> allResourceURIs = indexDatabase.getResourceDAO().findAllResources();
@@ -85,7 +80,7 @@ public class WorkspaceModelIndexer {
 			}
 		}
 		catch (SQLException exc) {
-			log.error(exc);
+			log.error("Error indexing cross-references", exc);
 		}
 		if (containerIDsFromDB != null) {
 			deleteStaleResourceContainers(containerIDsFromDB);
@@ -94,7 +89,7 @@ public class WorkspaceModelIndexer {
 			indexDatabase.commitOrRollback();
 		}
 		catch (SQLException exc) {
-			log.error(exc);
+			log.error("Error commiting changes to model index", exc);
 		}
 	}
 
@@ -107,8 +102,8 @@ public class WorkspaceModelIndexer {
 				indexPlainProject(project, containerIDsFromDB);
 			}
 		}
-		catch (Exception exc) {
-			log.error(exc);
+		catch (Exception e) {
+			log.error("Error indexing project " + project.getName());
 		}
 	}
 
@@ -139,7 +134,7 @@ public class WorkspaceModelIndexer {
 			return resourceURI;
 		}
 		catch (Exception e) {
-			log.error(e);
+			log.error("Error indexing " + file.getFullPath().toString(), e);
 		}
 		return null;
 	}
@@ -192,7 +187,6 @@ public class WorkspaceModelIndexer {
 		return getResourceContainerID(projectURI);
 	}
 
-	
 	private int getResourceContainerID(String containerURI) throws SQLException {
 		int resourceContainerID;
 		try {
@@ -251,7 +245,7 @@ public class WorkspaceModelIndexer {
 							else {
 								jarFileURI = indexJarFile(classpathEntryPath, containerIDsFromDB);
 							}
-							if(!containerReferenceURIsFromDB.remove(jarFileURI)) {
+							if (!containerReferenceURIsFromDB.remove(jarFileURI)) {
 								indexDatabase.getResourceContainerReferenceDAO().create(projectContainerID, jarFileURI);
 							}
 						}
@@ -261,15 +255,15 @@ public class WorkspaceModelIndexer {
 								resourceURIsFromDB);
 						classpathEntryInWorkspace.accept(resourceVisitor);
 						break;
-					case IClasspathEntry.CPE_PROJECT:
-						URI requiredProjectURI = URI.createPlatformResourceURI(classpathEntryPath.toString(), true);
-						if (!containerReferenceURIsFromDB.remove(requiredProjectURI)) {
-							indexDatabase.getResourceContainerReferenceDAO().create(projectContainerID,
-									requiredProjectURI);
-						}
-						break;
 					default:
 						// do nothing
+				}
+			}
+			String[] requiredProjectNames = project.getRequiredProjectNames();
+			for (String requiredProjectName : requiredProjectNames) {
+				URI requiredProjectURI = URI.createPlatformResourceURI(requiredProjectName, true);
+				if(!containerReferenceURIsFromDB.remove(requiredProjectURI)) {
+					indexDatabase.getResourceContainerReferenceDAO().create(projectContainerID, requiredProjectURI);
 				}
 			}
 			deleteStaleContainerReferences(projectContainerID, containerReferenceURIsFromDB);
@@ -283,7 +277,7 @@ public class WorkspaceModelIndexer {
 	private URI indexJarFile(IPath path, List<Integer> containerIDsFromDB) throws SQLException {
 		File jarFile = path.toFile();
 		String jarFileURIString = "jar:file:" + jarFile.getAbsolutePath() + "!/";
-		URI jarFileURI=URI.createURI(jarFileURIString);
+		URI jarFileURI = URI.createURI(jarFileURIString);
 		int jarFileContainerID = getResourceContainerID(jarFileURIString);
 		containerIDsFromDB.remove(new Integer(jarFileContainerID));
 		List<URI> resourceURIsFromDB = indexDatabase.getResourceDAO().findByContainer(jarFileContainerID);

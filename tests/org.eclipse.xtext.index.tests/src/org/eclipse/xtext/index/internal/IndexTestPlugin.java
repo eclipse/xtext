@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.indexer.internal;
+package org.eclipse.xtext.index.internal;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

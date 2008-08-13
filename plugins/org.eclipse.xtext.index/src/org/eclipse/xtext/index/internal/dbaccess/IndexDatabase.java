@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.eclipse.xtext.index.internal.IndexPlugin;
 import org.eclipse.xtext.util.Files;
 
 /**
@@ -34,7 +35,7 @@ public class IndexDatabase {
 	private static final String DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
 	private static final String PROTOCOL = "jdbc:derby:";
 	private static final String DB_NAME = "xtextIndexer";
-	private static final String DERBY_HOME = "/tmp/derby";
+	private static final String DERBY_HOME = IndexPlugin.getDefault().getStateLocation().toString();
 
 	private Connection conn;
 	private List<Statement> statements;
