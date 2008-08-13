@@ -86,7 +86,7 @@ public final class XtextMarkerManager {
 	 * @param monitor
 	 * @param markerType
 	 */
-	private static final void clearMarkerForType(final IResource resource, IProgressMonitor monitor,
+	public static final void clearMarkerForType(final IResource resource, IProgressMonitor monitor,
 			final String markerType) {
 		checkResource(resource);
 		run(new WorkspaceModifyOperation(ResourcesPlugin.getWorkspace().getRuleFactory().markerRule(resource)) {

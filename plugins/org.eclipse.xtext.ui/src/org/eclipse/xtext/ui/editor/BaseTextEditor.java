@@ -293,6 +293,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 			XtextProblemMarkerCreator markerCreator = new XtextProblemMarkerCreator(resource);
 			markerCreator.setProgressMonitor(new NullProgressMonitor());
 			getModel().addModelListener(markerCreator);
+			getModel().addModelListener(new TaskTagsMarkerListener(site.getPluginId(),getResource(),new NullProgressMonitor()));
 		}
 	}
 

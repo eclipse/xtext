@@ -101,7 +101,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	@Override
 	protected IPreferenceStore doGetPreferenceStore() {
-		String qualifier = Activator.getDefault().getBundle().getSymbolicName();
+		String qualifier = getQualifier();
 		if (isPropertyPage()) {
 			ProjectScope projectScope = new ProjectScope(currentProject());
 			ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(projectScope, qualifier);
@@ -112,6 +112,13 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(new InstanceScope(), qualifier);
 		scopedPreferenceStore.setSearchContexts(new IScopeContext[] { new InstanceScope(), new ConfigurationScope() });
 		return scopedPreferenceStore;
+	}
+
+	/**
+	 * @return the qualifer used to look up the preference node of the configured preferencesstore
+	 */
+	protected String getQualifier() {
+		return Activator.getDefault().getBundle().getSymbolicName();
 	}
 
 	/**
