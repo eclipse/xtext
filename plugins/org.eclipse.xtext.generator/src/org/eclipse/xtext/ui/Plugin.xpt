@@ -23,6 +23,16 @@
 
 <plugin>
    <extension
+         id="org.eclipse.xtext.ui.taskmarker"
+         name="Xtext Editor Task Marker"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.taskmarker"/>
+      <persistent value="false"/>
+   </extension>
+   <extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.eclipse.xtext.ui.editor.preferences.XtextPreferenceInitializer"/>	
+   </extension>
+   <extension
          point="org.eclipse.ui.editors">
       <editor
             class="org.eclipse.xtext.ui.service.utils.XtextServiceExtensionFactory:org.eclipse.xtext.ui.editor.BaseTextEditor/«languageId()»"
@@ -69,6 +79,15 @@
            		id="org.eclipse.xtext.keyword.syntax_coloring">
 			</keywordReference>
 		</page>
+		<page
+		    category="«languageId()».editor"
+		    class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.TaskTagsPreferencePage/«languageId()»"
+		    id="«languageId()».editor.tasktags"
+		    name="Task Tags"> 
+		    <keywordReference
+           		id="«languageId()».tasktags">
+			</keywordReference>
+		</page>
       </extension>
 		<extension
 			point="org.eclipse.ui.keywords">
@@ -76,6 +95,10 @@
 				id="«languageKeywordId()»"
 				label="«languageName()»">
 			</keyword>
+			<keyword
+	            id="«languageId()».tasktags"
+	            label="Task Tags">
+	        </keyword>
 		</extension>
    «EXPAND templatesExtenion FOR this»
    «IF resourceFactoryService() != null-»
