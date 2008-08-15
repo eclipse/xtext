@@ -38,7 +38,7 @@ public class XtextUtilTrafoTest extends AbstractGeneratorTest {
 				+ "Main : 	^import+=Import* 	types+=Type*;"
 				+ "Import :	'import' uri=STRING;"
 				+ "Type :	'type' name=ID 'extends' ^extends=[Type];");
-		RuleCall rc = (RuleCall) invokeWithXtend("parserRules.first().eAllContents.typeSelect(xtext::RuleCall).first()", model);
+		RuleCall rc = (RuleCall) invokeWithXtend("rules.first().eAllContents.typeSelect(xtext::RuleCall).first()", model);
 		assertNotNull(rc);
 		assertWithXtend("'Main'", "testCurrentType().name", rc);
 		assertWithXtend("false", "testCurrentType().abstract", rc);

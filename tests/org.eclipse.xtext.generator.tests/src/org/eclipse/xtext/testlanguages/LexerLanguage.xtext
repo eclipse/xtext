@@ -15,5 +15,4 @@ Model :
 Element:
 	name=ID h=STRING;
 	
-lexing:
-	STRING : " '#' ('B')+ "; 
+lexer	STRING : " '#' ('B')+ "; 

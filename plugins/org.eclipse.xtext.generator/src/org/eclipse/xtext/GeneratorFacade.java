@@ -13,11 +13,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -31,7 +33,11 @@ import org.eclipse.xtext.xtextgen.GenService;
 import org.eclipse.xtext.xtextgen.XtextgenFactory;
 import org.eclipse.xtext.xtextgen.XtextgenPackage;
 import org.eclipse.xtext.xtextutil.XtextutilPackage;
+import org.openarchitectureware.check.CheckFacade;
+import org.openarchitectureware.expression.ExecutionContextImpl;
 import org.openarchitectureware.expression.Variable;
+import org.openarchitectureware.workflow.issues.Issue;
+import org.openarchitectureware.workflow.issues.IssuesImpl;
 import org.openarchitectureware.xpand2.XpandExecutionContextImpl;
 import org.openarchitectureware.xpand2.XpandFacade;
 import org.openarchitectureware.xpand2.output.Outlet;
@@ -47,6 +53,16 @@ public class GeneratorFacade {
 
 	public static void generate(Grammar grammarModel, String srcGenPath, String uiProjectPath,
 			String... modelFileExtensions) throws IOException {
+		List<EObject> list = EcoreUtil2.eAllContentsAsList(grammarModel);
+		IssuesImpl issues = new IssuesImpl();
+		ExecutionContextImpl ctx = new ExecutionContextImpl();
+		ctx.registerMetaModel(new EmfRegistryMetaModel());
+		CheckFacade.checkAll("org::eclipse::xtext::Xtext2", list, ctx, issues);
+		
+		System.err.println(issues);
+		if (issues.hasErrors())
+			return;
+		
 		CompositeNode rootNode = NodeUtil.getRootNode(grammarModel);
 		EList<SyntaxError> allSyntaxErrors = rootNode.allSyntaxErrors();
 		for (SyntaxError syntaxError : allSyntaxErrors) {

@@ -11,11 +11,9 @@ language org.eclipse.xtext.XtextGrammarTest
 generate XtextTest "http://www.eclipse.org/2008/Test/XtextTest"
 
 Grammar  :
-	((abstract?='abstract language' | 'language') idElements+=ID ('.' idElements+=ID)* ('extends' superGrammarIdElements+=ID ('.' superGrammarIdElements+=ID)*)?)?
+    (abstract?='abstract language' | 'language') idElements+=ID ('.' idElements+=ID)* ('extends' superGrammarIdElements+=ID ('.' superGrammarIdElements+=ID)*)?
 	metamodelDeclarations+=AbstractMetamodelDeclaration* 
-    parserRules+=ParserRule*
-    ('lexing' ':'
-    lexerRules+=LexerRule+)?
+    (rules+=AbstractRule)+
 ;
 
 AbstractRule : LexerRule | ParserRule;
@@ -29,9 +27,9 @@ GeneratedMetamodel :
 ReferencedMetamodel :
 	'import' uri=STRING ('as' alias=ID)?;
 
-LexerRule  :
-	name=ID ('returns' type=TypeRef)? ':' 
-	body=STRING
+LexerRule :
+	('native'|'lexer') name=ID ('returns' type=TypeRef)? ':' 
+		body=STRING ';'
 ;
 
 ParserRule :
@@ -43,6 +41,7 @@ ParserRule :
 TypeRef :
 	(alias=ID '::')? name=ID
 ;
+
 Alternatives returns AbstractElement:
     Group ({Alternatives.groups+=current} '|' groups+=Group)*
 ;
@@ -54,16 +53,20 @@ Group returns AbstractElement:
 AbstractToken returns AbstractElement:
 	(Assignment | 
 	 Action |
-	 AbstractTerminal) cardinality=('?'|'*'|'+')?;
+	 AbstractTerminal) (cardinality=('?'|'*'|'+'))?;
 
 Assignment returns Assignment:
    feature=ID operator=('+='|'='|'?=') terminal=AbstractTerminal;
 
 Action returns Action:
-	'{' ('current' '=')? typeName=TypeRef ('.' feature=ID operator=('='|'+=') 'current')? '}';
+	'{' ('current' '=')? typeName=TypeRef '.' feature=ID operator=('='|'+=') 'current' '}';//TODO make assignment optional
 
 AbstractTerminal returns AbstractElement: 
-   Keyword | RuleCall | ParenthesizedElement
+   Keyword | RuleCall | ParenthesizedElement | CrossReference
+;
+
+CrossReference :
+	'[' type=TypeRef ('|' rule=RuleCall)? ']'
 ;
 
 ParenthesizedElement returns AbstractElement:
@@ -76,9 +79,4 @@ Keyword :
 
 RuleCall :
    name=ID ;
-   
-// lexing:
 
-// Problem: LEXER_BODY kann nicht in xtxt beschrieben werden, da das erste '#>' bereits matcht
-// Lösung: built-in lexer token
-// LEXER_BODY : <# '<#' ( options {greedy=false;} : . )* '#>' #> 
