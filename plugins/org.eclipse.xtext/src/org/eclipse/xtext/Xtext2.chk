@@ -14,6 +14,7 @@ import xtext;
 import xtextutil; 
 
 extension org::eclipse::xtext::Extensions;
+extension org::eclipse::xtext::GrammarUtil;
 
 /*
 context Action ERROR "Created class " + typeName.name + " cannot be resolved" :
@@ -24,8 +25,8 @@ context Action if resolveCreatedType() != null ERROR "Created class does not inh
 	|| ((EClass) containingParserRule().resolveReturnType().eClassifier).isSuperTypeOf((EClass) resolveCreatedType().eClassifier);
 */
 
-context Assignment ERROR "Assigned token must be a keyword or a rule call" :
-	Keyword.isInstance(terminal) || RuleCall.isInstance(terminal);
+context RuleCall ERROR "Couldn't resolve called rule "+name :
+	calledRule()!=null;
 
 context GeneratedMetamodel ERROR "Only one generated metamodel can have default alias" :
 	alias != null
@@ -38,8 +39,8 @@ context GeneratedMetamodel ERROR "Duplicate aliases are only allowed for referen
 context Group ERROR "Group cannot contain more than one action" :
 	eAllContents.typeSelect(Action).size <= 1;
 
-context ParserRule ERROR "Name mut be unique" :
-	grammar().parserRules.select(p | p.name == name).size==1;
+context AbstractRule ERROR "Name must be unique" :
+	grammar().rules.select(p | p.name == name).size==1;
 
 /*
 context ParserRule ERROR "Returned class " + getReturnTypeName() + " cannot be resolved" :

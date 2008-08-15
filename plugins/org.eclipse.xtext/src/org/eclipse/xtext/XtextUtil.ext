@@ -68,7 +68,7 @@ private setAbstractFeature(Grammar this, List[MetaModel] x) :
 
 private cached Boolean isAbstract(ComplexType name, Grammar g) :
 	g.eAllContents.typeSelect(Action).select(e|e.typeName.getQualifiedName() == name.getQualifiedName()).isEmpty &&
-	g.eAllContents.typeSelect(Assignment).select(e|(e.currentType(g).getQualifiedName()) == (name.getQualifiedName())).isEmpty
+	g.eAllContents.typeSelect(Assignment).select(e|(if e.currentType(g)==null then info(e)) -> (e.currentType(g).getQualifiedName()) == (name.getQualifiedName())).isEmpty
 ;
 		
 	

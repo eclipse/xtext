@@ -8,24 +8,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Alternatives;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
 
 /**
  * 
@@ -162,32 +154,32 @@ public final class ParseTreeUtil {
         }
 
     }
-
-    /**
-     * 
-     * Returns a list of all assignment to the given rule.
-     * 
-     * @param parserRule
-     *            the rule of the assignments (ruleCall) to match
-     * @return a list containing all {@see org.eclipse.xtext.Assignment} to the
-     *         given rule.
-     */
-    public static final List<AbstractElement> getParserRuleAssignments(ParserRule parserRule) {
-        assertParameterNotNull(parserRule, "parserRule");
-        List<AbstractElement> list = new ArrayList<AbstractElement>();
-        Grammar grammar = (Grammar) parserRule.eContainer();
-        // filter and search
-        for (ParserRule rule : grammar.getParserRules()) {
-            // excluded?
-            if (!parserRule.equals(rule)) {
-                Assignment ruleAssignment = getParserRuleAssignment(rule.getAlternatives(), parserRule);
-                if (ruleAssignment != null) {
-                    list.add(ruleAssignment);
-                }
-            }
-        }
-        return list;
-    }
+//
+//    /**
+//     * 
+//     * Returns a list of all assignment to the given rule.
+//     * 
+//     * @param parserRule
+//     *            the rule of the assignments (ruleCall) to match
+//     * @return a list containing all {@see org.eclipse.xtext.Assignment} to the
+//     *         given rule.
+//     */
+//    public static final List<AbstractElement> getParserRuleAssignments(ParserRule parserRule) {
+//        assertParameterNotNull(parserRule, "parserRule");
+//        List<AbstractElement> list = new ArrayList<AbstractElement>();
+//        Grammar grammar = (Grammar) parserRule.eContainer();
+//        // filter and search
+//        for (ParserRule rule : GrammarUtil.allParserRules(grammar)) {
+//            // excluded?
+//            if (!parserRule.equals(rule)) {
+//                Assignment ruleAssignment = getParserRuleAssignment(rule.getAlternatives(), parserRule);
+//                if (ruleAssignment != null) {
+//                    list.add(ruleAssignment);
+//                }
+//            }
+//        }
+//        return list;
+//    }
 
     /**
      * asserts if the given parameter object isnt null
@@ -225,48 +217,48 @@ public final class ParseTreeUtil {
         return abstractElement;
     }
 
-    /**
-     * 
-     * @param contextElement
-     *            element searched for assignments to the given rule
-     * @param parserRule
-     *            the rule of the assignments to search for
-     * @return an assignment object containing a rulecall to the given
-     *         parserRule or null if not found.
-     */
-    private static final Assignment getParserRuleAssignment(AbstractElement contextElement, ParserRule parserRule) {
-
-        assertParameterNotNull(contextElement, "contextElement");
-        assertParameterNotNull(parserRule, "parserRule");
-
-        Assignment assignment = null;
-        if (contextElement instanceof Group) {
-            Group group = (Group) contextElement;
-            for (AbstractElement groupElement : group.getAbstractTokens()) {
-                assignment = getParserRuleAssignment(groupElement, parserRule);
-                if (null != assignment) {
-                    break;
-                }
-            }
-        }
-        else if (contextElement instanceof Alternatives) {
-            Alternatives alternatives = (Alternatives) contextElement;
-            for (AbstractElement groupElement : alternatives.getGroups()) {
-                assignment = getParserRuleAssignment(groupElement, parserRule);
-                if (null != assignment) {
-                    break;
-                }
-            }
-        }
-        else if (contextElement instanceof Assignment) {
-            Assignment assignmentToMatch = (Assignment) contextElement;
-            if (assignmentToMatch.getTerminal() instanceof RuleCall
-                    && ((RuleCall) assignmentToMatch.getTerminal()).getName().equalsIgnoreCase(parserRule.getName())) {
-                assignment = assignmentToMatch;
-            }
-        }
-        return assignment;
-    }
+//    /**
+//     * 
+//     * @param contextElement
+//     *            element searched for assignments to the given rule
+//     * @param parserRule
+//     *            the rule of the assignments to search for
+//     * @return an assignment object containing a rulecall to the given
+//     *         parserRule or null if not found.
+//     */
+//    private static final Assignment getParserRuleAssignment(AbstractElement contextElement, ParserRule parserRule) {
+//
+//        assertParameterNotNull(contextElement, "contextElement");
+//        assertParameterNotNull(parserRule, "parserRule");
+//
+//        Assignment assignment = null;
+//        if (contextElement instanceof Group) {
+//            Group group = (Group) contextElement;
+//            for (AbstractElement groupElement : group.getAbstractTokens()) {
+//                assignment = getParserRuleAssignment(groupElement, parserRule);
+//                if (null != assignment) {
+//                    break;
+//                }
+//            }
+//        }
+//        else if (contextElement instanceof Alternatives) {
+//            Alternatives alternatives = (Alternatives) contextElement;
+//            for (AbstractElement groupElement : alternatives.getGroups()) {
+//                assignment = getParserRuleAssignment(groupElement, parserRule);
+//                if (null != assignment) {
+//                    break;
+//                }
+//            }
+//        }
+//        else if (contextElement instanceof Assignment) {
+//            Assignment assignmentToMatch = (Assignment) contextElement;
+//            if (assignmentToMatch.getTerminal() instanceof RuleCall
+//                    && ((RuleCall) assignmentToMatch.getTerminal()).getName().equalsIgnoreCase(parserRule.getName())) {
+//                assignment = assignmentToMatch;
+//            }
+//        }
+//        return assignment;
+//    }
 
     /**
      * @param abstractNode
