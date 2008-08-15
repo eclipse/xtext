@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="langA" nsURI="http://eclipse.org/xtext/langA"/>
   <idElements>org</idElements>
   <idElements>eclipse</idElements>
   <idElements>xtext</idElements>
   <idElements>crossrefs</idElements>
   <idElements>LangA</idElements>
-  <parserRules name="Main">
+  <rules xsi:type="xtext:ParserRule" name="Main">
     <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="imports" operator="+=">
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="imports">
         <terminal xsi:type="xtext:RuleCall" name="Import"/>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="types" operator="+=">
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="types">
         <terminal xsi:type="xtext:RuleCall" name="Type"/>
       </abstractTokens>
     </alternatives>
-  </parserRules>
-  <parserRules name="Import">
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Import">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Keyword" value="import"/>
-      <abstractTokens xsi:type="xtext:Assignment" feature="uri" operator="=">
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="uri">
         <terminal xsi:type="xtext:RuleCall" name="STRING"/>
       </abstractTokens>
     </alternatives>
-  </parserRules>
-  <parserRules name="Type">
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Type">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Keyword" value="type"/>
-          <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+          <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
             <terminal xsi:type="xtext:RuleCall" name="ID"/>
           </abstractTokens>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value="extends"/>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" feature="extends" operator="=">
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="extends">
         <terminal xsi:type="xtext:CrossReference">
           <type name="Type"/>
         </terminal>
       </abstractTokens>
     </alternatives>
-  </parserRules>
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" nsURI="http://eclipse.org/xtext/langA" name="langA"/>
+  </rules>
 </xtext:Grammar>

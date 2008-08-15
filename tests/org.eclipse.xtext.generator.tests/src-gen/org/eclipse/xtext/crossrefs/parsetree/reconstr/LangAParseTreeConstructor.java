@@ -52,7 +52,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedType(val,callback);
@@ -89,7 +89,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedImport(val,callback);
@@ -138,7 +138,7 @@ protected void proceedImport(InstanceDescription obj,IParseTreeConstructorCallba
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -152,7 +152,7 @@ protected void proceedImport(InstanceDescription obj,IParseTreeConstructorCallba
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.1/@alternatives/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.1/@alternatives/@abstractTokens.0"));
 
 }
 
@@ -199,7 +199,7 @@ protected void proceedType(InstanceDescription obj,IParseTreeConstructorCallback
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -217,7 +217,7 @@ protected void proceedType(InstanceDescription obj,IParseTreeConstructorCallback
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -231,7 +231,7 @@ protected void proceedType(InstanceDescription obj,IParseTreeConstructorCallback
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
 
 }
 

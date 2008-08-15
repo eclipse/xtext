@@ -76,7 +76,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedTerm(val,callback);
@@ -104,7 +104,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -113,7 +113,7 @@ new Predicate(obj) {
 {
 
 	InstanceDescription newObj = getDescr((EObject) obj.consume("addOperands"));
-	callback.actionCall(obj, newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0"));
+	callback.actionCall(obj, newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0"));
 	obj = newObj;
 
 }
@@ -147,7 +147,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedTerm(val,callback);
@@ -175,7 +175,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -184,7 +184,7 @@ new Predicate(obj) {
 {
 
 	InstanceDescription newObj = getDescr((EObject) obj.consume("minusOperands"));
-	callback.actionCall(obj, newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0"));
+	callback.actionCall(obj, newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0"));
 	obj = newObj;
 
 }
@@ -206,7 +206,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.0");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedTerm(val,callback);
@@ -249,7 +249,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.1/@alternatives/@groups.0");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.1/@alternatives/@groups.0");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAtom(val,callback);
@@ -274,7 +274,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.1/@alternatives/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.1/@alternatives/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedParens(val,callback);
@@ -317,7 +317,7 @@ protected void proceedAtom(InstanceDescription obj,IParseTreeConstructorCallback
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.2/@alternatives/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.2/@alternatives/@terminal"));
 	
 
 }
@@ -358,7 +358,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@terminal"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal"));
 
 }
 
@@ -375,7 +375,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -389,7 +389,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedOp(val,callback);
@@ -405,7 +405,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
 
 }
 

@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-08-07 16:59:07
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-08-14 08:04:45
 
 package org.eclipse.xtext.parsetree.reconstr.parser.internal; 
 
@@ -72,7 +72,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:63:44: (iv_ruleOp= ruleOp EOF )
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:64:2: iv_ruleOp= ruleOp EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleOp_in_entryRuleOp71);
             iv_ruleOp=ruleOp();
             _fsp--;
@@ -116,7 +116,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:75:5: this_Term= ruleTerm ( ( ( () '+' ) (lv_addOperands= ruleTerm ) ) | ( ( () '-' ) (lv_minusOperands= ruleTerm ) ) )*
             {
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleTerm_in_ruleOp128);
             this_Term=ruleTerm();
@@ -158,7 +158,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
             	            factory.add(temp, "addOperands",current);
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -169,7 +169,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
             	    match(input,11,FOLLOW_11_in_ruleOp148); 
 
-            	            createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+            	            createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
             	        
 
             	    }
@@ -178,7 +178,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
             	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:102:6: lv_addOperands= ruleTerm
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleTerm_in_ruleOp183);
             	    lv_addOperands=ruleTerm();
@@ -219,7 +219,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
             	            factory.add(temp, "minusOperands",current);
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -230,7 +230,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
             	    match(input,12,FOLLOW_12_in_ruleOp214); 
 
-            	            createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+            	            createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
             	        
 
             	    }
@@ -239,7 +239,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
             	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:136:6: lv_minusOperands= ruleTerm
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleTerm_in_ruleOp249);
             	    lv_minusOperands=ruleTerm();
@@ -301,7 +301,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:155:46: (iv_ruleTerm= ruleTerm EOF )
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:156:2: iv_ruleTerm= ruleTerm EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTerm_in_entryRuleTerm291);
             iv_ruleTerm=ruleTerm();
             _fsp--;
@@ -360,7 +360,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
                     // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:167:5: this_Atom= ruleAtom
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.1/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.1/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleAtom_in_ruleTerm348);
                     this_Atom=ruleAtom();
@@ -377,7 +377,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
                     // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:177:5: this_Parens= ruleParens
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleParens_in_ruleTerm375);
                     this_Parens=ruleParens();
@@ -422,7 +422,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:190:46: (iv_ruleAtom= ruleAtom EOF )
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:191:2: iv_ruleAtom= ruleAtom EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.2" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAtom_in_entryRuleAtom409);
             iv_ruleAtom=ruleAtom();
             _fsp--;
@@ -463,7 +463,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAtom464); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.2/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.2/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -505,7 +505,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:222:48: (iv_ruleParens= ruleParens EOF )
             // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:223:2: iv_ruleParens= ruleParens EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleParens_in_entryRuleParens509);
             iv_ruleParens=ruleParens();
             _fsp--;
@@ -553,10 +553,10 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
             {
             match(input,13,FOLLOW_13_in_ruleParens555); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleOp_in_ruleParens577);
             this_Op=ruleOp();
@@ -571,7 +571,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
 
             match(input,14,FOLLOW_14_in_ruleParens586); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -590,7 +590,7 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
                     lv_em=(Token)input.LT(1);
                     match(input,15,FOLLOW_15_in_ruleParens608); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "em"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal" /* xtext::Keyword */, "em"); 
                         
 
                     	        if (current==null) {

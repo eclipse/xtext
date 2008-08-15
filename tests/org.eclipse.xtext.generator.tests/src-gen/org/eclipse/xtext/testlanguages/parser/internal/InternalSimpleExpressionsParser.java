@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g 2008-08-07 16:59:08
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g 2008-08-14 08:04:46
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -72,7 +72,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:63:50: (iv_ruleSequence= ruleSequence EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:64:2: iv_ruleSequence= ruleSequence EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleSequence_in_entryRuleSequence71);
             iv_ruleSequence=ruleSequence();
             _fsp--;
@@ -114,7 +114,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:75:5: this_Addition= ruleAddition ( () (lv_expressions= ruleAddition ) )*
             {
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.0/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.0/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleAddition_in_ruleSequence128);
             this_Addition=ruleAddition();
@@ -147,7 +147,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	            factory.add(temp, "expressions",current);
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.0/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -160,7 +160,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:98:6: lv_expressions= ruleAddition
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleAddition_in_ruleSequence171);
             	    lv_expressions=ruleAddition();
@@ -219,7 +219,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:117:50: (iv_ruleAddition= ruleAddition EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:118:2: iv_ruleAddition= ruleAddition EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAddition_in_entryRuleAddition212);
             iv_ruleAddition=ruleAddition();
             _fsp--;
@@ -262,7 +262,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:129:5: this_Multiplication= ruleMultiplication ( ( () (lv_operator= ( '+' | '-' ) ) ) (lv_values= ruleMultiplication ) )*
             {
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleMultiplication_in_ruleAddition269);
             this_Multiplication=ruleMultiplication();
@@ -298,7 +298,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	            factory.add(temp, "values",current);
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -332,7 +332,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	            {
             	            match(input,11,FOLLOW_11_in_ruleAddition301); 
 
-            	                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
+            	                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
             	                
 
             	            }
@@ -342,7 +342,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	            {
             	            match(input,12,FOLLOW_12_in_ruleAddition316); 
 
-            	                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
+            	                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
             	                
 
             	            }
@@ -368,7 +368,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:173:6: lv_values= ruleMultiplication
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleMultiplication_in_ruleAddition364);
             	    lv_values=ruleMultiplication();
@@ -427,7 +427,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:192:56: (iv_ruleMultiplication= ruleMultiplication EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:193:2: iv_ruleMultiplication= ruleMultiplication EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleMultiplication_in_entryRuleMultiplication405);
             iv_ruleMultiplication=ruleMultiplication();
             _fsp--;
@@ -470,7 +470,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:204:5: this_Term= ruleTerm ( ( () (lv_operator= ( '*' | '/' ) ) ) (lv_values= ruleTerm ) )*
             {
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleTerm_in_ruleMultiplication462);
             this_Term=ruleTerm();
@@ -506,7 +506,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	            factory.add(temp, "values",current);
             	            current = temp; 
             	            temp = null;
-            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+            	            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
             	        newNode.getChildren().add(currentNode);
             	        moveLookaheadInfo(currentNode, newNode);
             	        currentNode = newNode; 
@@ -540,7 +540,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	            {
             	            match(input,13,FOLLOW_13_in_ruleMultiplication494); 
 
-            	                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
+            	                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
             	                
 
             	            }
@@ -550,7 +550,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	            {
             	            match(input,14,FOLLOW_14_in_ruleMultiplication509); 
 
-            	                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
+            	                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
             	                
 
             	            }
@@ -576,7 +576,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:248:6: lv_values= ruleTerm
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleTerm_in_ruleMultiplication557);
             	    lv_values=ruleTerm();
@@ -635,7 +635,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:267:46: (iv_ruleTerm= ruleTerm EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:268:2: iv_ruleTerm= ruleTerm EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.3" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTerm_in_entryRuleTerm598);
             iv_ruleTerm=ruleTerm();
             _fsp--;
@@ -694,7 +694,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
                     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:279:5: this_Atom= ruleAtom
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.3/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.3/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleAtom_in_ruleTerm655);
                     this_Atom=ruleAtom();
@@ -711,7 +711,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
                     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:289:5: this_Parens= ruleParens
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.3/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.3/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleParens_in_ruleTerm682);
                     this_Parens=ruleParens();
@@ -756,7 +756,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:302:46: (iv_ruleAtom= ruleAtom EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:303:2: iv_ruleAtom= ruleAtom EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.4" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAtom_in_entryRuleAtom716);
             iv_ruleAtom=ruleAtom();
             _fsp--;
@@ -797,7 +797,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAtom771); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.4/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.4/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -839,7 +839,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:334:48: (iv_ruleParens= ruleParens EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalSimpleExpressions.g:335:2: iv_ruleParens= ruleParens EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.5" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleParens_in_entryRuleParens816);
             iv_ruleParens=ruleParens();
             _fsp--;
@@ -883,10 +883,10 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
             {
             match(input,15,FOLLOW_15_in_ruleParens861); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleAddition_in_ruleParens883);
             this_Addition=ruleAddition();
@@ -901,7 +901,7 @@ public class InternalSimpleExpressionsParser extends AbstractAntlrParser {
 
             match(input,16,FOLLOW_16_in_ruleParens892); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.5/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }

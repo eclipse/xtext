@@ -27,47 +27,47 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	}
 
 	public void testLexError() throws Exception {
-		EObject root = getModel("import 'holla' % as foo");
+		EObject root = getModel("language a import 'holla' % as foo");
 		EList<SyntaxError> errors = NodeUtil.getRootNode(root).allSyntaxErrors();
 		assertEquals(1,errors.size());
 		assertEquals("%", ((LeafNode)errors.get(0).getNode()).getText());
 		assertEquals(1, errors.get(0).getNode().getLine());
-		assertEquals(15, errors.get(0).getNode().getOffset());
+		assertEquals(26, errors.get(0).getNode().getOffset());
 		assertEquals(1, errors.get(0).getNode().getLength());
 		assertEquals(1, errors.size());
 	}
 	
 	public void testParseError1() throws Exception {
-		EObject root = getModel("import 'holla' foo returns x::y::Z : name=ID;");
+		EObject root = getModel("language a import 'holla' foo returns x::y::Z : name=ID;");
 		EList<SyntaxError> errors = NodeUtil.getRootNode(root).allSyntaxErrors();
 		assertEquals("::",  ((LeafNode)errors.get(0).getNode()).getText());
 		assertEquals(1, errors.get(0).getNode().getLine());
-		assertEquals(31, errors.get(0).getNode().getOffset());
+		assertEquals(42, errors.get(0).getNode().getOffset());
 		assertEquals(2, errors.get(0).getNode().getLength());
 		assertEquals(1, errors.size());
 	}
 	
 	public void testParseError2() throws Exception {
-		Object object = getModel("import 'holla' foo returns y::Z : name=ID #;");
-		assertWithXtend("'ID'", "parserRules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
+		Object object = getModel("language a import 'holla' foo returns y::Z : name=ID #;");
+		assertWithXtend("'ID'", "rules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
 	}
 	
 	public void testParseError3() throws Exception {
-		Object object = getModel("import 'holla' foo returns y::Z : name=ID #############");
-		assertWithXtend("'ID'", "parserRules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
+		Object object = getModel("language a import 'holla' foo returns y::Z : name=ID #############");
+		assertWithXtend("'ID'", "rules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
 	}
 	
 	public void testParseError4() throws Exception {
-		Object object = getModel("import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'");
+		Object object = getModel("language a import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'");
 		//System.out.println(errors);
-		assertWithXtend("'ID'", "parserRules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
-		assertWithXtend("null", "parserRules.first().eAllContents.typeSelect(XtextTest::Keyword).first().name", object);
-		assertWithXtend("'stuff'", "parserRules.get(1).eAllContents.typeSelect(XtextTest::Keyword).first().value", object);
+		assertWithXtend("'ID'", "rules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
+		assertWithXtend("null", "rules.first().eAllContents.typeSelect(XtextTest::Keyword).first().name", object);
+		assertWithXtend("'stuff'", "rules.get(1).eAllContents.typeSelect(XtextTest::Keyword).first().value", object);
 	}
 	
 	
 	public void testname() throws Exception {
-		String model = "import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'";
+		String model = "language a import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'";
 		for (int i=model.length();0<i;i--) {
 			getModel(model.substring(0, i));
 		}

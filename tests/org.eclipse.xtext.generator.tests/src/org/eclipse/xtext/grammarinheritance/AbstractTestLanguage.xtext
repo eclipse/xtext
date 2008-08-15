@@ -5,8 +5,6 @@ import "classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore" as mm
 InheritedParserRule returns mm::AType :
 	'element' name=ID;
 
-lexing:
+lexer REAL returns ecore::EDouble : "RULE_INT '.' RULE_INT";
 
-REAL returns ecore::EDouble : "RULE_INT '.' RULE_INT";
-
-ID  		: "('^')?('a'..'z'|'A'..'Z'|'ö'|'ä'|'ü'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*";
+lexer ID  		: "('^')?('a'..'z'|'A'..'Z'|'ö'|'ä'|'ü'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*";

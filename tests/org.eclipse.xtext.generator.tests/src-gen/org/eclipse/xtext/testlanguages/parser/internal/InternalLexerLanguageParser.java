@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g 2008-08-07 16:59:07
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g 2008-08-14 08:04:46
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -72,7 +72,7 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:63:47: (iv_ruleModel= ruleModel EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:64:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel71);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -124,7 +124,7 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
             	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:77:6: lv_children= ruleElement
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleElement_in_ruleModel139);
             	    lv_children=ruleElement();
@@ -177,7 +177,7 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:96:49: (iv_ruleElement= ruleElement EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerLanguage.g:97:2: iv_ruleElement= ruleElement EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleElement_in_entryRuleElement178);
             iv_ruleElement=ruleElement();
             _fsp--;
@@ -222,7 +222,7 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleElement234); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -241,7 +241,7 @@ public class InternalLexerLanguageParser extends AbstractAntlrParser {
             lv_h=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleElement266); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "h"); 
+                createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "h"); 
                 
 
             	        if (current==null) {

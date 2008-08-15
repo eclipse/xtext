@@ -3,16 +3,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="addOperands" upperBound="-1" eType="//Expression" containment="true" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Expression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="em">
+  <eClassifiers xsi:type="ecore:EClass" name="Atom" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="minusOperands" upperBound="-1" eType="//Add" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="minusOperands" upperBound="-1" eType="//Expression" containment="true" resolveProxies="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Atom" eSuperTypes="//Expression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+  <eClassifiers xsi:type="ecore:EClass" name="Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="em">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>

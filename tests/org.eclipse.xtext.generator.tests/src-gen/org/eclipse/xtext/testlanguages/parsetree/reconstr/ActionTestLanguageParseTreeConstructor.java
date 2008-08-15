@@ -48,7 +48,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.0/@alternatives/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.0/@alternatives/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedElement(val,callback);
@@ -99,7 +99,7 @@ protected void proceedElement(InstanceDescription obj,IParseTreeConstructorCallb
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedItem(val,callback);
@@ -124,7 +124,7 @@ protected void proceedElement(InstanceDescription obj,IParseTreeConstructorCallb
 {
 
 	InstanceDescription newObj = getDescr((EObject) obj.consume("items"));
-	callback.actionCall(obj, newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0"));
+	callback.actionCall(obj, newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0"));
 	obj = newObj;
 
 }
@@ -138,7 +138,7 @@ protected void proceedElement(InstanceDescription obj,IParseTreeConstructorCallb
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedItem(val,callback);
@@ -179,7 +179,7 @@ protected void proceedItem(InstanceDescription obj,IParseTreeConstructorCallback
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -194,7 +194,7 @@ protected void proceedItem(InstanceDescription obj,IParseTreeConstructorCallback
 {
 
 	InstanceDescription newObj = getDescr((EObject) obj.consume("content"));
-	callback.actionCall(obj, newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.0"));
+	callback.actionCall(obj, newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0"));
 	obj = newObj;
 
 }
