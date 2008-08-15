@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextAdapterFactory.java,v 1.12 2008/08/07 15:05:36 sefftinge Exp $
+ * $Id: XtextAdapterFactory.java,v 1.13 2008/08/15 10:02:43 sefftinge Exp $
  */
 package org.eclipse.xtext.util;
 
@@ -75,68 +75,68 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
   protected XtextSwitch<Adapter> modelSwitch =
     new XtextSwitch<Adapter>() {
 			@Override
-			public Adapter caseAlternatives(Alternatives object) {
-				return createAlternativesAdapter();
+			public Adapter caseParserRule(ParserRule object) {
+				return createParserRuleAdapter();
 			}
 			@Override
-			public Adapter caseRuleCall(RuleCall object) {
-				return createRuleCallAdapter();
-			}
-			@Override
-			public Adapter caseAbstractRule(AbstractRule object) {
-				return createAbstractRuleAdapter();
-			}
-			@Override
-			public Adapter caseLexerRule(LexerRule object) {
-				return createLexerRuleAdapter();
-			}
-			@Override
-			public Adapter caseKeyword(Keyword object) {
-				return createKeywordAdapter();
-			}
-			@Override
-			public Adapter caseGeneratedMetamodel(GeneratedMetamodel object) {
-				return createGeneratedMetamodelAdapter();
-			}
-			@Override
-			public Adapter caseGrammar(Grammar object) {
-				return createGrammarAdapter();
-			}
-			@Override
-			public Adapter caseTypeRef(TypeRef object) {
-				return createTypeRefAdapter();
+			public Adapter caseAssignment(Assignment object) {
+				return createAssignmentAdapter();
 			}
 			@Override
 			public Adapter caseAbstractMetamodelDeclaration(AbstractMetamodelDeclaration object) {
 				return createAbstractMetamodelDeclarationAdapter();
 			}
 			@Override
+			public Adapter caseLexerRule(LexerRule object) {
+				return createLexerRuleAdapter();
+			}
+			@Override
+			public Adapter caseAlternatives(Alternatives object) {
+				return createAlternativesAdapter();
+			}
+			@Override
+			public Adapter caseGrammar(Grammar object) {
+				return createGrammarAdapter();
+			}
+			@Override
 			public Adapter caseCrossReference(CrossReference object) {
 				return createCrossReferenceAdapter();
-			}
-			@Override
-			public Adapter caseParserRule(ParserRule object) {
-				return createParserRuleAdapter();
-			}
-			@Override
-			public Adapter caseAbstractElement(AbstractElement object) {
-				return createAbstractElementAdapter();
-			}
-			@Override
-			public Adapter caseAction(Action object) {
-				return createActionAdapter();
-			}
-			@Override
-			public Adapter caseGroup(Group object) {
-				return createGroupAdapter();
 			}
 			@Override
 			public Adapter caseReferencedMetamodel(ReferencedMetamodel object) {
 				return createReferencedMetamodelAdapter();
 			}
 			@Override
-			public Adapter caseAssignment(Assignment object) {
-				return createAssignmentAdapter();
+			public Adapter caseRuleCall(RuleCall object) {
+				return createRuleCallAdapter();
+			}
+			@Override
+			public Adapter caseGroup(Group object) {
+				return createGroupAdapter();
+			}
+			@Override
+			public Adapter caseTypeRef(TypeRef object) {
+				return createTypeRefAdapter();
+			}
+			@Override
+			public Adapter caseAbstractElement(AbstractElement object) {
+				return createAbstractElementAdapter();
+			}
+			@Override
+			public Adapter caseGeneratedMetamodel(GeneratedMetamodel object) {
+				return createGeneratedMetamodelAdapter();
+			}
+			@Override
+			public Adapter caseKeyword(Keyword object) {
+				return createKeywordAdapter();
+			}
+			@Override
+			public Adapter caseAbstractRule(AbstractRule object) {
+				return createAbstractRuleAdapter();
+			}
+			@Override
+			public Adapter caseAction(Action object) {
+				return createActionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {

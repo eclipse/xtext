@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeRefImpl.java,v 1.11 2008/08/07 15:05:35 sefftinge Exp $
+ * $Id: TypeRefImpl.java,v 1.12 2008/08/15 10:02:43 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -23,8 +23,8 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.TypeRefImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.TypeRefImpl#getAlias <em>Alias</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.TypeRefImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,26 +33,6 @@ import org.eclipse.xtext.XtextPackage;
 public class TypeRefImpl extends EObjectImpl implements TypeRef
 {
   /**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-  protected static final String NAME_EDEFAULT = null;
-
-		/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-  protected String name = NAME_EDEFAULT;
-
-		/**
 	 * The default value of the '{@link #getAlias() <em>Alias</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -71,6 +51,26 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 	 * @ordered
 	 */
   protected String alias = ALIAS_EDEFAULT;
+
+		/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+  protected static final String NAME_EDEFAULT = null;
+
+		/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+  protected String name = NAME_EDEFAULT;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -148,10 +148,10 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
 		switch (featureID) {
-			case XtextPackage.TYPE_REF__NAME:
-				return getName();
 			case XtextPackage.TYPE_REF__ALIAS:
 				return getAlias();
+			case XtextPackage.TYPE_REF__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -165,11 +165,11 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
-			case XtextPackage.TYPE_REF__NAME:
-				setName((String)newValue);
-				return;
 			case XtextPackage.TYPE_REF__ALIAS:
 				setAlias((String)newValue);
+				return;
+			case XtextPackage.TYPE_REF__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -184,11 +184,11 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
   public void eUnset(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.TYPE_REF__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case XtextPackage.TYPE_REF__ALIAS:
 				setAlias(ALIAS_EDEFAULT);
+				return;
+			case XtextPackage.TYPE_REF__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -203,10 +203,10 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
   public boolean eIsSet(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.TYPE_REF__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XtextPackage.TYPE_REF__ALIAS:
 				return ALIAS_EDEFAULT == null ? alias != null : !ALIAS_EDEFAULT.equals(alias);
+			case XtextPackage.TYPE_REF__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -222,10 +222,10 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", alias: ");
+		result.append(" (alias: ");
 		result.append(alias);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

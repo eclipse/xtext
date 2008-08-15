@@ -70,13 +70,16 @@ public abstract class AbstractAntlrParser extends Parser {
 	}
 
 	protected void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
+		if (astElement == null)
+			throw new NullPointerException("passed astElement was null");
+		if (node == null)
+			throw new NullPointerException("passed node was null");
 		if (node.getElement() != null && node.getElement() != astElement) {
 			throw new ParseException("Reassignment of astElement in parse tree node");
 		}
-		node.setElement(astElement);
-		if (astElement instanceof EObject) {
-			EObject eObject = (EObject) astElement;
-			NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(eObject, AbstractNode.class);
+		if (node.getElement() != astElement) {
+			node.setElement(astElement);
+			NodeAdapter adapter = (NodeAdapter) NodeAdapterFactory.INSTANCE.adapt(astElement, AbstractNode.class);
 			adapter.setParserNode(node);
 		}
 	}
@@ -103,7 +106,8 @@ public abstract class AbstractAntlrParser extends Parser {
 	}
 
 	private EObject getGrammarElement(String grammarElementID) {
-		URI resolved = new ClassloaderClasspathUriResolver().resolve(getClass().getClassLoader(),URI.createURI(grammarElementID));
+		URI resolved = new ClassloaderClasspathUriResolver().resolve(getClass().getClassLoader(), URI
+				.createURI(grammarElementID));
 		return grammar.eResource().getResourceSet().getEObject(resolved, true);
 	}
 
@@ -111,9 +115,10 @@ public abstract class AbstractAntlrParser extends Parser {
 
 	public Map<Integer, String> getTokenTypeMap() {
 		if (antlrTypeToLexerName == null) {
+			InputStream tokenFile = getTokenFile();
 			try {
+				BufferedReader br = new BufferedReader(new InputStreamReader(tokenFile));
 				antlrTypeToLexerName = new HashMap<Integer, String>();
-				BufferedReader br = new BufferedReader(new InputStreamReader(getTokenFile()));
 				String line = br.readLine();
 				Pattern pattern = Pattern.compile("(.*)=(\\d+)");
 				while (line != null) {
@@ -129,10 +134,15 @@ public abstract class AbstractAntlrParser extends Parser {
 						antlrTypeToLexerName.put(Integer.parseInt(tokenTypeId), token.substring(prefix.length()));
 					line = br.readLine();
 				}
-			}
-			catch (IOException e) {
+			} catch (IOException e) {
 				log.error(e);
 				throw new WrappedException(e);
+			} finally {
+				try {
+					tokenFile.close();
+				} catch (IOException e) {
+					throw new WrappedException(e);
+				}
 			}
 		}
 		return antlrTypeToLexerName;
@@ -190,8 +200,7 @@ public abstract class AbstractAntlrParser extends Parser {
 			EList<LeafNode> leafNodes = currentNode.getLeafNodes();
 			if (leafNodes.isEmpty()) {
 				appendError(currentNode);
-			}
-			else {
+			} else {
 				appendError(leafNodes.get(leafNodes.size() - 1));
 			}
 		}
@@ -266,8 +275,7 @@ public abstract class AbstractAntlrParser extends Parser {
 			try {
 				Method method = this.getClass().getMethod(antlrEntryRuleName);
 				current = (EObject) method.invoke(this);
-			}
-			catch (InvocationTargetException ite) {
+			} catch (InvocationTargetException ite) {
 				Throwable targetException = ite.getTargetException();
 				if (targetException instanceof RecognitionException) {
 					throw (RecognitionException) targetException;
@@ -276,17 +284,14 @@ public abstract class AbstractAntlrParser extends Parser {
 					throw new WrappedException((Exception) targetException);
 				}
 				throw new RuntimeException(targetException);
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				throw new WrappedException(e);
 			}
 			appendTrailingHiddenTokens();
-		}
-		finally {
+		} finally {
 			try {
 				appendAllTokens();
-			}
-			finally {
+			} finally {
 				result = new ParseResult(current, currentNode);
 			}
 		}
@@ -298,12 +303,10 @@ public abstract class AbstractAntlrParser extends Parser {
 		if (!entryRuleName.startsWith("entryRule")) {
 			if (!entryRuleName.startsWith("rule")) {
 				antlrEntryRuleName = "entryRule" + entryRuleName;
-			}
-			else {
+			} else {
 				antlrEntryRuleName = "entry" + Strings.toFirstUpper(entryRuleName);
 			}
-		}
-		else {
+		} else {
 			antlrEntryRuleName = entryRuleName;
 		}
 		return antlrEntryRuleName;
@@ -331,8 +334,7 @@ public abstract class AbstractAntlrParser extends Parser {
 			LeafNode leafNode = token2NodeMap.get(lookaheadToken);
 			if (leafNode == null) {
 				deferredLookaheadMap.put(lookaheadToken, currentNode);
-			}
-			else {
+			} else {
 				currentNode.getLookaheadLeafNodes().add(leafNode);
 			}
 		}
@@ -379,9 +381,7 @@ public abstract class AbstractAntlrParser extends Parser {
 		}
 	}
 
-	protected InputStream getTokenFile() {
-		return null;
-	}
+	protected abstract InputStream getTokenFile();
 
 	/**
 	 * @return

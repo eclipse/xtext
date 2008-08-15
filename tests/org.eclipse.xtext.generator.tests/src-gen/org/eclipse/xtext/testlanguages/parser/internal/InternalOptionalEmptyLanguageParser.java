@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g 2008-08-07 16:59:09
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g 2008-08-14 08:04:47
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -72,7 +72,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:63:47: (iv_ruleModel= ruleModel EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:64:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel71);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -120,7 +120,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
                     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:77:6: lv_child= ruleGreeting
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleGreeting_in_ruleModel139);
                     lv_child=ruleGreeting();
@@ -170,7 +170,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:96:50: (iv_ruleGreeting= ruleGreeting EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:97:2: iv_ruleGreeting= ruleGreeting EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleGreeting_in_entryRuleGreeting178);
             iv_ruleGreeting=ruleGreeting();
             _fsp--;
@@ -210,7 +210,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
             {
             match(input,11,FOLLOW_11_in_ruleGreeting222); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:111:1: (lv_name= RULE_ID )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalOptionalEmptyLanguage.g:113:6: lv_name= RULE_ID
@@ -218,7 +218,7 @@ public class InternalOptionalEmptyLanguageParser extends AbstractAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGreeting243); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {

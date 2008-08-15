@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssignmentImpl.java,v 1.11 2008/06/05 15:03:51 sefftinge Exp $
+ * $Id: AssignmentImpl.java,v 1.12 2008/08/15 10:02:43 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -25,9 +25,9 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.AssignmentImpl#getTerminal <em>Terminal</em>}</li>
- *   <li>{@link org.eclipse.xtext.impl.AssignmentImpl#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.AssignmentImpl#getOperator <em>Operator</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.AssignmentImpl#getFeature <em>Feature</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.AssignmentImpl#getTerminal <em>Terminal</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,14 +36,24 @@ import org.eclipse.xtext.XtextPackage;
 public class AssignmentImpl extends AbstractElementImpl implements Assignment
 {
   /**
-	 * The cached value of the '{@link #getTerminal() <em>Terminal</em>}' containment reference.
+	 * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getTerminal()
+	 * @see #getOperator()
 	 * @generated
 	 * @ordered
 	 */
-  protected AbstractElement terminal;
+  protected static final String OPERATOR_EDEFAULT = null;
+
+  /**
+	 * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getOperator()
+	 * @generated
+	 * @ordered
+	 */
+  protected String operator = OPERATOR_EDEFAULT;
 
 		/**
 	 * The default value of the '{@link #getFeature() <em>Feature</em>}' attribute.
@@ -65,25 +75,15 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
 	 */
   protected String feature = FEATURE_EDEFAULT;
 
-  /**
-	 * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
+		/**
+	 * The cached value of the '{@link #getTerminal() <em>Terminal</em>}' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getOperator()
+	 * @see #getTerminal()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final String OPERATOR_EDEFAULT = null;
-
-  /**
-	 * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getOperator()
-	 * @generated
-	 * @ordered
-	 */
-  protected String operator = OPERATOR_EDEFAULT;
+  protected AbstractElement terminal;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -222,12 +222,12 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
 		switch (featureID) {
-			case XtextPackage.ASSIGNMENT__TERMINAL:
-				return getTerminal();
-			case XtextPackage.ASSIGNMENT__FEATURE:
-				return getFeature();
 			case XtextPackage.ASSIGNMENT__OPERATOR:
 				return getOperator();
+			case XtextPackage.ASSIGNMENT__FEATURE:
+				return getFeature();
+			case XtextPackage.ASSIGNMENT__TERMINAL:
+				return getTerminal();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -241,14 +241,14 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
-			case XtextPackage.ASSIGNMENT__TERMINAL:
-				setTerminal((AbstractElement)newValue);
+			case XtextPackage.ASSIGNMENT__OPERATOR:
+				setOperator((String)newValue);
 				return;
 			case XtextPackage.ASSIGNMENT__FEATURE:
 				setFeature((String)newValue);
 				return;
-			case XtextPackage.ASSIGNMENT__OPERATOR:
-				setOperator((String)newValue);
+			case XtextPackage.ASSIGNMENT__TERMINAL:
+				setTerminal((AbstractElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -263,14 +263,14 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
   public void eUnset(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.ASSIGNMENT__TERMINAL:
-				setTerminal((AbstractElement)null);
+			case XtextPackage.ASSIGNMENT__OPERATOR:
+				setOperator(OPERATOR_EDEFAULT);
 				return;
 			case XtextPackage.ASSIGNMENT__FEATURE:
 				setFeature(FEATURE_EDEFAULT);
 				return;
-			case XtextPackage.ASSIGNMENT__OPERATOR:
-				setOperator(OPERATOR_EDEFAULT);
+			case XtextPackage.ASSIGNMENT__TERMINAL:
+				setTerminal((AbstractElement)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -285,12 +285,12 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
   public boolean eIsSet(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.ASSIGNMENT__TERMINAL:
-				return terminal != null;
-			case XtextPackage.ASSIGNMENT__FEATURE:
-				return FEATURE_EDEFAULT == null ? feature != null : !FEATURE_EDEFAULT.equals(feature);
 			case XtextPackage.ASSIGNMENT__OPERATOR:
 				return OPERATOR_EDEFAULT == null ? operator != null : !OPERATOR_EDEFAULT.equals(operator);
+			case XtextPackage.ASSIGNMENT__FEATURE:
+				return FEATURE_EDEFAULT == null ? feature != null : !FEATURE_EDEFAULT.equals(feature);
+			case XtextPackage.ASSIGNMENT__TERMINAL:
+				return terminal != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -306,10 +306,10 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (feature: ");
-		result.append(feature);
-		result.append(", operator: ");
+		result.append(" (operator: ");
 		result.append(operator);
+		result.append(", feature: ");
+		result.append(feature);
 		result.append(')');
 		return result.toString();
 	}

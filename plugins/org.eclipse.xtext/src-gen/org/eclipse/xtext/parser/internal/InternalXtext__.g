@@ -11,48 +11,49 @@ T11 : 'abstract language' ;
 T12 : 'language' ;
 T13 : '.' ;
 T14 : 'extends' ;
-T15 : 'lexing' ;
-T16 : ':' ;
-T17 : 'generate' ;
-T18 : 'as' ;
-T19 : 'import' ;
+T15 : 'generate' ;
+T16 : 'as' ;
+T17 : 'import' ;
+T18 : 'native' ;
+T19 : 'lexer' ;
 T20 : 'returns' ;
-T21 : ';' ;
-T22 : '::' ;
-T23 : '|' ;
-T24 : '?' ;
-T25 : '*' ;
-T26 : '+' ;
-T27 : '+=' ;
-T28 : '=' ;
-T29 : '?=' ;
-T30 : '{' ;
-T31 : 'current' ;
-T32 : '}' ;
-T33 : '[' ;
-T34 : ']' ;
-T35 : '(' ;
-T36 : ')' ;
+T21 : ':' ;
+T22 : ';' ;
+T23 : '::' ;
+T24 : '|' ;
+T25 : '?' ;
+T26 : '*' ;
+T27 : '+' ;
+T28 : '+=' ;
+T29 : '=' ;
+T30 : '?=' ;
+T31 : '{' ;
+T32 : 'current' ;
+T33 : '}' ;
+T34 : '[' ;
+T35 : ']' ;
+T36 : '(' ;
+T37 : ')' ;
 
-// $ANTLR src "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g" 1139
+// $ANTLR src "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g" 1190
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g" 1141
+// $ANTLR src "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g" 1192
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g" 1143
+// $ANTLR src "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g" 1194
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |                '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g" 1145
+// $ANTLR src "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g" 1196
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g" 1147
+// $ANTLR src "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g" 1198
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')? {$channel=HIDDEN;};
 
-// $ANTLR src "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g" 1149
+// $ANTLR src "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g" 1200
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g" 1151
+// $ANTLR src "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/internal/InternalXtext.g" 1202
 RULE_ANY_OTHER : .;
 
 

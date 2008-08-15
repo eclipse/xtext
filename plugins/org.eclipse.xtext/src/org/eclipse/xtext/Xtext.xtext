@@ -9,12 +9,10 @@ language org.eclipse.xtext.Xtext
 
 generate xtext "http://www.eclipse.org/2008/Xtext"
 
-Grammar  :
+Grammar :
     (abstract?='abstract language' | 'language') idElements+=ID ('.' idElements+=ID)* ('extends' superGrammarIdElements+=ID ('.' superGrammarIdElements+=ID)*)?
 	metamodelDeclarations+=AbstractMetamodelDeclaration* 
-    parserRules+=ParserRule*
-    ('lexing' ':'
-    lexerRules+=LexerRule+)?
+    (rules+=AbstractRule)+
 ;
 
 AbstractRule : LexerRule | ParserRule;
@@ -29,7 +27,7 @@ ReferencedMetamodel :
 	'import' uri=STRING ('as' alias=ID)?;
 
 LexerRule :
-	name=ID ('returns' type=TypeRef)? ':' 
+	('native'|'lexer') name=ID ('returns' type=TypeRef)? ':' 
 		body=STRING ';'
 ;
 

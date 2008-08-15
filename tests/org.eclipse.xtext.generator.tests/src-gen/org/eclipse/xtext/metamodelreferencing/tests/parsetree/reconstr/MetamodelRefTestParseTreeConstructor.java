@@ -50,7 +50,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedNameRef(val,callback);
@@ -80,7 +80,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal"));
 	
 
 }
@@ -115,7 +115,7 @@ protected void proceedNameRef(InstanceDescription obj,IParseTreeConstructorCallb
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@parserRules.1/@alternatives/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1/@alternatives/@terminal"));
 	
 
 }

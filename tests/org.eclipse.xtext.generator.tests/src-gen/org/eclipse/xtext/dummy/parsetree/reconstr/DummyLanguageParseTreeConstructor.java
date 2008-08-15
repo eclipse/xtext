@@ -46,7 +46,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.0/@alternatives/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.0/@alternatives/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedElement(val,callback);
@@ -86,7 +86,7 @@ protected void proceedElement(InstanceDescription obj,IParseTreeConstructorCallb
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -110,7 +110,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -134,7 +134,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -152,7 +152,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -171,7 +171,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
 
 }
 

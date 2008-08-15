@@ -61,7 +61,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 // Entry rule entryRuleEntryRule
 entryRuleEntryRule returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleEntryRule=ruleEntryRule 
 	 { $current=$iv_ruleEntryRule.current; } 
 	 EOF 
@@ -75,7 +75,7 @@ ruleEntryRule returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_multiFeature=ruleAbstractRule 
 	    {
@@ -94,7 +94,7 @@ ruleEntryRule returns [EObject current=null]
 
 // Entry rule entryRuleAbstractRule
 entryRuleAbstractRule returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleAbstractRule=ruleAbstractRule 
 	 { $current=$iv_ruleAbstractRule.current; } 
 	 EOF 
@@ -106,7 +106,7 @@ ruleAbstractRule returns [EObject current=null]
     @after { resetLookahead(); }:
 (
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.1/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.1/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
     }
     this_ChoiceRule=ruleChoiceRule
     { 
@@ -116,7 +116,7 @@ ruleAbstractRule returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_ReducibleRule=ruleReducibleRule
     { 
@@ -129,7 +129,7 @@ ruleAbstractRule returns [EObject current=null]
 
 // Entry rule entryRuleChoiceRule
 entryRuleChoiceRule returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.2" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleChoiceRule=ruleChoiceRule 
 	 { $current=$iv_ruleChoiceRule.current; } 
 	 EOF 
@@ -141,13 +141,13 @@ ruleChoiceRule returns [EObject current=null]
     @after { resetLookahead(); }:
 (('choice' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    lv_optionalKeyword='optional' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "optionalKeyword"); 
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "optionalKeyword"); 
     }
  
 	    {
@@ -163,7 +163,7 @@ ruleChoiceRule returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -181,7 +181,7 @@ ruleChoiceRule returns [EObject current=null]
 
 // Entry rule entryRuleReducibleRule
 entryRuleReducibleRule returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.3" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleReducibleRule=ruleReducibleRule 
 	 { $current=$iv_ruleReducibleRule.current; } 
 	 EOF 
@@ -193,11 +193,11 @@ ruleReducibleRule returns [EObject current=null]
     @after { resetLookahead(); }:
 (('reducible' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
     }
     this_TerminalRule=ruleTerminalRule
     { 
@@ -210,7 +210,7 @@ ruleReducibleRule returns [EObject current=null]
         factory.add(temp, "actionFeature",$current);
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+        CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -220,7 +220,7 @@ ruleReducibleRule returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_actionFeature=ruleTerminalRule 
 	    {
@@ -239,7 +239,7 @@ ruleReducibleRule returns [EObject current=null]
 
 // Entry rule entryRuleTerminalRule
 entryRuleTerminalRule returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.4" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleTerminalRule=ruleTerminalRule 
 	 { $current=$iv_ruleTerminalRule.current; } 
 	 EOF 
@@ -253,7 +253,7 @@ ruleTerminalRule returns [EObject current=null]
 	
 	    lv_stringFeature=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.4/@alternatives/@terminal" /* xtext::RuleCall */, "stringFeature"); 
+    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.4/@alternatives/@terminal" /* xtext::RuleCall */, "stringFeature"); 
     }
  
 	    {

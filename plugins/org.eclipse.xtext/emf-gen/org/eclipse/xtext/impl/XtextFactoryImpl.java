@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextFactoryImpl.java,v 1.12 2008/08/07 15:05:35 sefftinge Exp $
+ * $Id: XtextFactoryImpl.java,v 1.13 2008/08/15 10:02:43 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -64,20 +64,20 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
   public EObject create(EClass eClass)
   {
 		switch (eClass.getClassifierID()) {
-			case XtextPackage.ALTERNATIVES: return createAlternatives();
-			case XtextPackage.RULE_CALL: return createRuleCall();
-			case XtextPackage.LEXER_RULE: return createLexerRule();
-			case XtextPackage.KEYWORD: return createKeyword();
-			case XtextPackage.GENERATED_METAMODEL: return createGeneratedMetamodel();
-			case XtextPackage.GRAMMAR: return createGrammar();
-			case XtextPackage.TYPE_REF: return createTypeRef();
-			case XtextPackage.CROSS_REFERENCE: return createCrossReference();
 			case XtextPackage.PARSER_RULE: return createParserRule();
-			case XtextPackage.ABSTRACT_ELEMENT: return createAbstractElement();
-			case XtextPackage.ACTION: return createAction();
-			case XtextPackage.GROUP: return createGroup();
-			case XtextPackage.REFERENCED_METAMODEL: return createReferencedMetamodel();
 			case XtextPackage.ASSIGNMENT: return createAssignment();
+			case XtextPackage.LEXER_RULE: return createLexerRule();
+			case XtextPackage.ALTERNATIVES: return createAlternatives();
+			case XtextPackage.GRAMMAR: return createGrammar();
+			case XtextPackage.CROSS_REFERENCE: return createCrossReference();
+			case XtextPackage.REFERENCED_METAMODEL: return createReferencedMetamodel();
+			case XtextPackage.RULE_CALL: return createRuleCall();
+			case XtextPackage.GROUP: return createGroup();
+			case XtextPackage.TYPE_REF: return createTypeRef();
+			case XtextPackage.ABSTRACT_ELEMENT: return createAbstractElement();
+			case XtextPackage.GENERATED_METAMODEL: return createGeneratedMetamodel();
+			case XtextPackage.KEYWORD: return createKeyword();
+			case XtextPackage.ACTION: return createAction();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

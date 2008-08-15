@@ -246,7 +246,7 @@ public class ServiceRegistry {
 		for (Method method : methods) {
 			Class<?>[] parameterTypes = method.getParameterTypes();
 			if (parameterTypes.length != 1 && method.isAnnotationPresent(Inject.class)) {
-				throw new IllegalArgumentException("Annotated method must have exactly one parameter");
+				throw new IllegalArgumentException("Annotated method "+method.toGenericString()+" must have exactly one parameter");
 			}
 			if (parameterTypes.length == 1 && method.isAnnotationPresent(Inject.class)) {
 				method.setAccessible(true);

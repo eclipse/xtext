@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Grammar.java,v 1.12 2008/08/07 15:05:36 sefftinge Exp $
+ * $Id: Grammar.java,v 1.13 2008/08/15 10:02:42 sefftinge Exp $
  */
 package org.eclipse.xtext;
 
@@ -18,12 +18,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.Grammar#isAbstract <em>Abstract</em>}</li>
- *   <li>{@link org.eclipse.xtext.Grammar#getIdElements <em>Id Elements</em>}</li>
- *   <li>{@link org.eclipse.xtext.Grammar#getLexerRules <em>Lexer Rules</em>}</li>
- *   <li>{@link org.eclipse.xtext.Grammar#getParserRules <em>Parser Rules</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getSuperGrammarIdElements <em>Super Grammar Id Elements</em>}</li>
  *   <li>{@link org.eclipse.xtext.Grammar#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Grammar#getIdElements <em>Id Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Grammar#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link org.eclipse.xtext.Grammar#getRules <em>Rules</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,22 +32,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Grammar extends EObject
 {
-  /**
-	 * Returns the value of the '<em><b>Parser Rules</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.ParserRule}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Parser Rules</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parser Rules</em>' containment reference list.
-	 * @see org.eclipse.xtext.XtextPackage#getGrammar_ParserRules()
-	 * @model containment="true"
-	 * @generated
-	 */
-  EList<ParserRule> getParserRules();
-
   /**
 	 * Returns the value of the '<em><b>Super Grammar Id Elements</b></em>' attribute list.
 	 * The list contents are of type {@link java.lang.String}.
@@ -98,22 +81,6 @@ public interface Grammar extends EObject
   EList<AbstractMetamodelDeclaration> getMetamodelDeclarations();
 
   /**
-	 * Returns the value of the '<em><b>Lexer Rules</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.LexerRule}.
-	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Lexer Rules</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Lexer Rules</em>' containment reference list.
-	 * @see org.eclipse.xtext.XtextPackage#getGrammar_LexerRules()
-	 * @model containment="true"
-	 * @generated
-	 */
-  EList<LexerRule> getLexerRules();
-
-  /**
 	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <p>
@@ -138,5 +105,21 @@ public interface Grammar extends EObject
 	 * @generated
 	 */
   void setAbstract(boolean value);
+
+		/**
+	 * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.AbstractRule}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Rules</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Rules</em>' containment reference list.
+	 * @see org.eclipse.xtext.XtextPackage#getGrammar_Rules()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<AbstractRule> getRules();
 
 } // Grammar

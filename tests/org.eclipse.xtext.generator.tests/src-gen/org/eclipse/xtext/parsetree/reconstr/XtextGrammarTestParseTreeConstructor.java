@@ -40,6 +40,8 @@ public class XtextGrammarTestParseTreeConstructor extends AbstractParseTreeConst
 			proceedAction(getDescr(obj),callback);
 		} else 		if (ruleToCall.equals("AbstractTerminal")) {
 			proceedAbstractTerminal(getDescr(obj),callback);
+		} else 		if (ruleToCall.equals("CrossReference")) {
+			proceedCrossReference(getDescr(obj),callback);
 		} else 		if (ruleToCall.equals("ParenthesizedElement")) {
 			proceedParenthesizedElement(getDescr(obj),callback);
 		} else 		if (ruleToCall.equals("Keyword")) {
@@ -64,97 +66,20 @@ protected void proceedGrammar(InstanceDescription obj,IParseTreeConstructorCallb
 {
 
 		
-/* xtext::Group */ 
-
-if (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("lexerRules")&&true&&true; 
-		}
-}.check() ){
-
-		
 /* xtext::Assignment */ 
 {
 
-	final Object value = obj.consume("lexerRules");
+	final Object value = obj.consume("rules");
     
 /* xtext::RuleCall */ 
 {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
-			proceedLexerRule(val,callback);
-			
-			if (!val.isConsumed()) 
-				throw new XtextSerializationException(val,"unserialized state");
-			
-		} finally {
-			callback.parserRuleCallEnd();
-		}
-	
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1"));
-
-}
-
-		
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
-
-}
-
-
-}
-
-
-}
-
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Assignment */ 
-
-while (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("parserRules"); 
-		}
-}.check() ){
-
-	final Object value = obj.consume("parserRules");
-    
-/* xtext::RuleCall */ 
-{
-
-	
-		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
-		try {
-			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
-			proceedParserRule(val,callback);
+			proceedAbstractRule(val,callback);
 			
 			if (!val.isConsumed()) 
 				throw new XtextSerializationException(val,"unserialized state");
@@ -192,7 +117,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAbstractMetamodelDeclaration(val,callback);
@@ -214,68 +139,7 @@ new Predicate(obj) {
 
 		
 /* xtext::Group */ 
-
-if (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
-		}
-}.check() ||
-new Predicate(obj) { 
-		public boolean check() {
-			return true&&obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
-		}
-}.check() ||
-new Predicate(obj) { 
-		public boolean check() {
-			return true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
-		}
-}.check() ||
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("superGrammarIdElements")&&true&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
-		}
-}.check() ||
-new Predicate(obj) { 
-		public boolean check() {
-			return true&&obj.checkConsume("superGrammarIdElements")&&true&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
-		}
-}.check() ||
-new Predicate(obj) { 
-		public boolean check() {
-			return true&&true&&obj.checkConsume("idElements")&&obj.checkConsume("abstract"); 
-		}
-}.check() ||
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&true; 
-		}
-}.check() ||
-new Predicate(obj) { 
-		public boolean check() {
-			return true&&obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&true; 
-		}
-}.check() ||
-new Predicate(obj) { 
-		public boolean check() {
-			return true&&obj.checkConsume("idElements")&&true&&obj.checkConsume("idElements")&&true; 
-		}
-}.check() ||
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("superGrammarIdElements")&&true&&obj.checkConsume("superGrammarIdElements")&&true&&true&&obj.checkConsume("idElements")&&true; 
-		}
-}.check() ||
-new Predicate(obj) { 
-		public boolean check() {
-			return true&&obj.checkConsume("superGrammarIdElements")&&true&&true&&obj.checkConsume("idElements")&&true; 
-		}
-}.check() ||
-new Predicate(obj) { 
-		public boolean check() {
-			return true&&true&&obj.checkConsume("idElements")&&true; 
-		}
-}.check() ){
+{
 
 		
 /* xtext::Group */ 
@@ -312,7 +176,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -326,7 +190,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
@@ -347,7 +211,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -361,7 +225,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -395,7 +259,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -409,7 +273,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
@@ -430,7 +294,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -459,7 +323,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.0/@terminal"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.0/@terminal"));
 
 }
 
@@ -479,7 +343,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.1"));
 
 }
 
@@ -489,9 +353,6 @@ new Predicate(obj) {
 		    throw new XtextSerializationException(obj, "No alternative matched");
 		}
 	
-
-}
-
 
 }
 
@@ -538,7 +399,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.1/@alternatives/@groups.0");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.1/@alternatives/@groups.0");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedLexerRule(val,callback);
@@ -563,7 +424,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.1/@alternatives/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.1/@alternatives/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedParserRule(val,callback);
@@ -612,7 +473,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.2/@alternatives/@groups.0");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.2/@alternatives/@groups.0");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedGeneratedMetamodel(val,callback);
@@ -637,7 +498,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.2/@alternatives/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.2/@alternatives/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedReferencedMetamodel(val,callback);
@@ -694,7 +555,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -708,7 +569,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.3/@alternatives/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
@@ -729,7 +590,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -753,7 +614,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -767,7 +628,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -816,7 +677,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.4/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -830,7 +691,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.4/@alternatives/@abstractTokens.1/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
@@ -851,7 +712,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -865,7 +726,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.4/@alternatives/@abstractTokens.0/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -892,6 +753,18 @@ protected void proceedLexerRule(InstanceDescription obj,IParseTreeConstructorCal
 {
 
 		
+/* xtext::Keyword */ 
+{
+
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.1"));
+
+}
+
+		
+/* xtext::Group */ 
+{
+
+		
 /* xtext::Assignment */ 
 {
 
@@ -901,7 +774,7 @@ protected void proceedLexerRule(InstanceDescription obj,IParseTreeConstructorCal
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.5/@alternatives/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -919,7 +792,7 @@ protected void proceedLexerRule(InstanceDescription obj,IParseTreeConstructorCal
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -948,7 +821,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedTypeRef(val,callback);
@@ -972,12 +845,16 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
 
 }
+
+		
+/* xtext::Group */ 
+{
 
 		
 /* xtext::Assignment */ 
@@ -989,13 +866,61 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
 	
 
 }
 
     if (obj.isConsumed())
     	callback.objectCreation(obj);
+
+}
+
+		
+/* xtext::Alternatives */ 
+{
+
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ) {
+			
+/* xtext::Keyword */ 
+{
+
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.0"));
+
+}
+
+		}
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return true; 
+		}
+}.check() ) {
+			
+/* xtext::Keyword */ 
+{
+
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.1"));
+
+}
+
+		}
+	
+		else {
+		    throw new XtextSerializationException(obj, "No alternative matched");
+		}
+	
+
+}
+
+
+}
+
 
 }
 
@@ -1028,7 +953,7 @@ protected void proceedParserRule(InstanceDescription obj,IParseTreeConstructorCa
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.6/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -1047,7 +972,7 @@ protected void proceedParserRule(InstanceDescription obj,IParseTreeConstructorCa
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAlternatives(val,callback);
@@ -1075,7 +1000,7 @@ protected void proceedParserRule(InstanceDescription obj,IParseTreeConstructorCa
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -1104,7 +1029,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedTypeRef(val,callback);
@@ -1128,7 +1053,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
@@ -1145,7 +1070,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"));
 	
 
 }
@@ -1193,7 +1118,7 @@ protected void proceedTypeRef(InstanceDescription obj,IParseTreeConstructorCallb
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.7/@alternatives/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.7/@alternatives/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -1217,7 +1142,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -1231,7 +1156,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal"));
 	
 
 }
@@ -1285,7 +1210,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.8/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedGroup(val,callback);
@@ -1313,7 +1238,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -1322,7 +1247,7 @@ new Predicate(obj) {
 {
 
 	InstanceDescription newObj = getDescr((EObject) obj.consume("groups"));
-	callback.actionCall(obj, newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
+	callback.actionCall(obj, newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0"));
 	obj = newObj;
 
 }
@@ -1339,7 +1264,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.8/@alternatives/@abstractTokens.0");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.8/@alternatives/@abstractTokens.0");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedGroup(val,callback);
@@ -1392,7 +1317,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.9/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAbstractToken(val,callback);
@@ -1417,7 +1342,7 @@ new Predicate(obj) {
 {
 
 	InstanceDescription newObj = getDescr((EObject) obj.consume("abstractTokens"));
-	callback.actionCall(obj, newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.9/@alternatives/@abstractTokens.1/@abstractTokens.0"));
+	callback.actionCall(obj, newObj, (Action) getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0"));
 	obj = newObj;
 
 }
@@ -1431,7 +1356,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.9/@alternatives/@abstractTokens.0");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.9/@alternatives/@abstractTokens.0");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAbstractToken(val,callback);
@@ -1502,7 +1427,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.10/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.10/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0"));
 
 }
 
@@ -1517,7 +1442,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.10/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.10/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1"));
 
 }
 
@@ -1541,7 +1466,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.10/@alternatives/@abstractTokens.1/@terminal/@groups.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.10/@alternatives/@abstractTokens.1/@terminal/@groups.1"));
 
 }
 
@@ -1590,7 +1515,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.10/@alternatives/@abstractTokens.0/@groups.0/@groups.0");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@groups.0/@groups.0");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAssignment(val,callback);
@@ -1615,7 +1540,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.10/@alternatives/@abstractTokens.0/@groups.0/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@groups.0/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAction(val,callback);
@@ -1649,7 +1574,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.10/@alternatives/@abstractTokens.0/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAbstractTerminal(val,callback);
@@ -1700,7 +1625,7 @@ protected void proceedAssignment(InstanceDescription obj,IParseTreeConstructorCa
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.11/@alternatives/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.11/@alternatives/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAbstractTerminal(val,callback);
@@ -1758,7 +1683,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.0"));
 
 }
 
@@ -1773,7 +1698,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.1"));
 
 }
 
@@ -1797,7 +1722,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
 
 }
 
@@ -1825,7 +1750,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal"));
 	
 
 }
@@ -1861,7 +1786,7 @@ protected void proceedAction(InstanceDescription obj,IParseTreeConstructorCallba
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -1870,20 +1795,10 @@ protected void proceedAction(InstanceDescription obj,IParseTreeConstructorCallba
 {
 
 		
-/* xtext::Group */ 
-
-if (
-new Predicate(obj) { 
-		public boolean check() {
-			return true&&obj.checkConsume("operator")&&obj.checkConsume("feature")&&true; 
-		}
-}.check() ){
-
-		
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -1910,7 +1825,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0"));
 
 }
 
@@ -1925,7 +1840,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"));
 
 }
 
@@ -1957,7 +1872,7 @@ new Predicate(obj) {
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
 	
 
 }
@@ -1968,19 +1883,14 @@ new Predicate(obj) {
 }
 
 		
+/* xtext::Group */ 
+{
+
+		
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
-
-}
-
-
-}
-
-
-}
-
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
 
 }
 
@@ -1999,7 +1909,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedTypeRef(val,callback);
@@ -2037,7 +1947,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1"));
 
 }
 
@@ -2045,7 +1955,7 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
 
 }
 
@@ -2056,7 +1966,16 @@ new Predicate(obj) {
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
+
+}
+
+
+}
+
+
+}
+
 
 }
 
@@ -2098,6 +2017,26 @@ new Predicate(obj) {
 		public boolean check() {
 			return obj.isInstanceOf("RuleCall"); 
 		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("AbstractElement"); 
+		}
+}.check() ) {
+			
+/* xtext::Alternatives */ 
+{
+
+		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("Keyword"); 
+		}
+}.check() ||
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("RuleCall"); 
+		}
 }.check() ) {
 			
 /* xtext::Alternatives */ 
@@ -2115,7 +2054,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.13/@alternatives/@groups.0/@groups.0");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.13/@alternatives/@groups.0/@groups.0/@groups.0");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedKeyword(val,callback);
@@ -2140,7 +2079,7 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.13/@alternatives/@groups.0/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.13/@alternatives/@groups.0/@groups.0/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedRuleCall(val,callback);
@@ -2174,10 +2113,44 @@ new Predicate(obj) {
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.13/@alternatives/@groups.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.13/@alternatives/@groups.0/@groups.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedParenthesizedElement(val,callback);
+			
+		} finally {
+			callback.parserRuleCallEnd();
+		}
+	
+
+}
+
+		}
+	
+		else {
+		    throw new XtextSerializationException(obj, "No alternative matched");
+		}
+	
+
+}
+
+		}
+	else		if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.isInstanceOf("CrossReference"); 
+		}
+}.check() ) {
+			
+/* xtext::RuleCall */ 
+{
+
+	
+		InstanceDescription val = obj;
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.13/@alternatives/@groups.1");
+		try {
+			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
+			proceedCrossReference(val,callback);
 			
 		} finally {
 			callback.parserRuleCallEnd();
@@ -2200,6 +2173,138 @@ new Predicate(obj) {
 	}
 }
 
+private String CrossReferenceRecursionCheck = null;
+protected void proceedCrossReference(InstanceDescription obj,IParseTreeConstructorCallback callback) {
+	try {
+		String s = obj.uniqueStateString();
+		if (s.equals(CrossReferenceRecursionCheck))
+			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
+		CrossReferenceRecursionCheck = s;
+	
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Keyword */ 
+{
+
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.14/@alternatives/@abstractTokens.1"));
+
+}
+
+		
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Group */ 
+
+if (
+new Predicate(obj) { 
+		public boolean check() {
+			return obj.checkConsume("rule")&&true; 
+		}
+}.check() ){
+
+		
+/* xtext::Assignment */ 
+{
+
+	final Object value = obj.consume("rule");
+    
+/* xtext::RuleCall */ 
+{
+
+	
+		InstanceDescription val = (getDescr((EObject)value));
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
+		try {
+			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
+			proceedRuleCall(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
+		} finally {
+			callback.parserRuleCallEnd();
+		}
+	
+
+}
+
+    if (obj.isConsumed())
+    	callback.objectCreation(obj);
+
+}
+
+		
+/* xtext::Keyword */ 
+{
+
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0"));
+
+}
+
+
+}
+
+		
+/* xtext::Group */ 
+{
+
+		
+/* xtext::Assignment */ 
+{
+
+	final Object value = obj.consume("type");
+    
+/* xtext::RuleCall */ 
+{
+
+	
+		InstanceDescription val = (getDescr((EObject)value));
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
+		try {
+			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
+			proceedTypeRef(val,callback);
+			
+			if (!val.isConsumed()) 
+				throw new XtextSerializationException(val,"unserialized state");
+			
+		} finally {
+			callback.parserRuleCallEnd();
+		}
+	
+
+}
+
+    if (obj.isConsumed())
+    	callback.objectCreation(obj);
+
+}
+
+		
+/* xtext::Keyword */ 
+{
+
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
+
+}
+
+
+}
+
+
+}
+
+
+}
+
+	} finally {
+		CrossReferenceRecursionCheck = null;
+	}
+}
+
 private String ParenthesizedElementRecursionCheck = null;
 protected void proceedParenthesizedElement(InstanceDescription obj,IParseTreeConstructorCallback callback) {
 	try {
@@ -2215,7 +2320,7 @@ protected void proceedParenthesizedElement(InstanceDescription obj,IParseTreeCon
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.14/@alternatives/@abstractTokens.1"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.15/@alternatives/@abstractTokens.1"));
 
 }
 
@@ -2229,7 +2334,7 @@ protected void proceedParenthesizedElement(InstanceDescription obj,IParseTreeCon
 
 	
 		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.15/@alternatives/@abstractTokens.0/@abstractTokens.1");
 		try {
 			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
 			proceedAlternatives(val,callback);
@@ -2245,7 +2350,7 @@ protected void proceedParenthesizedElement(InstanceDescription obj,IParseTreeCon
 /* xtext::Keyword */ 
 {
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.14/@alternatives/@abstractTokens.0/@abstractTokens.0"));
+	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.15/@alternatives/@abstractTokens.0/@abstractTokens.0"));
 
 }
 
@@ -2277,7 +2382,7 @@ protected void proceedKeyword(InstanceDescription obj,IParseTreeConstructorCallb
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.15/@alternatives/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.16/@alternatives/@terminal"));
 	
 
 }
@@ -2309,7 +2414,7 @@ protected void proceedRuleCall(InstanceDescription obj,IParseTreeConstructorCall
 {
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@parserRules.16/@alternatives/@terminal"));
+		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.17/@alternatives/@terminal"));
 	
 
 }

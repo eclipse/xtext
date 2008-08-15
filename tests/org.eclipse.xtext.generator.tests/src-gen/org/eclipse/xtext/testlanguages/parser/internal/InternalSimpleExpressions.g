@@ -61,7 +61,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 // Entry rule entryRuleSequence
 entryRuleSequence returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleSequence=ruleSequence 
 	 { $current=$iv_ruleSequence.current; } 
 	 EOF 
@@ -73,7 +73,7 @@ ruleSequence returns [EObject current=null]
     @after { resetLookahead(); }:
 (
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.0/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.0/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
     }
     this_Addition=ruleAddition
     { 
@@ -86,7 +86,7 @@ ruleSequence returns [EObject current=null]
         factory.add(temp, "expressions",$current);
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+        CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.0/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -96,7 +96,7 @@ ruleSequence returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_expressions=ruleAddition 
 	    {
@@ -115,7 +115,7 @@ ruleSequence returns [EObject current=null]
 
 // Entry rule entryRuleAddition
 entryRuleAddition returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleAddition=ruleAddition 
 	 { $current=$iv_ruleAddition.current; } 
 	 EOF 
@@ -127,7 +127,7 @@ ruleAddition returns [EObject current=null]
     @after { resetLookahead(); }:
 (
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
     }
     this_Multiplication=ruleMultiplication
     { 
@@ -140,7 +140,7 @@ ruleAddition returns [EObject current=null]
         factory.add(temp, "values",$current);
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+        CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -150,12 +150,12 @@ ruleAddition returns [EObject current=null]
 	
 	    lv_operator=('+' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
     }
 
     |'-' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
     }
 ) 
 	    {
@@ -171,7 +171,7 @@ ruleAddition returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_values=ruleMultiplication 
 	    {
@@ -190,7 +190,7 @@ ruleAddition returns [EObject current=null]
 
 // Entry rule entryRuleMultiplication
 entryRuleMultiplication returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleMultiplication=ruleMultiplication 
 	 { $current=$iv_ruleMultiplication.current; } 
 	 EOF 
@@ -202,7 +202,7 @@ ruleMultiplication returns [EObject current=null]
     @after { resetLookahead(); }:
 (
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
     }
     this_Term=ruleTerm
     { 
@@ -215,7 +215,7 @@ ruleMultiplication returns [EObject current=null]
         factory.add(temp, "values",$current);
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+        CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -225,12 +225,12 @@ ruleMultiplication returns [EObject current=null]
 	
 	    lv_operator=('*' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0" /* xtext::Keyword */, "operator"); 
     }
 
     |'/' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::Keyword */, "operator"); 
     }
 ) 
 	    {
@@ -246,7 +246,7 @@ ruleMultiplication returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_values=ruleTerm 
 	    {
@@ -265,7 +265,7 @@ ruleMultiplication returns [EObject current=null]
 
 // Entry rule entryRuleTerm
 entryRuleTerm returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.3" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleTerm=ruleTerm 
 	 { $current=$iv_ruleTerm.current; } 
 	 EOF 
@@ -277,7 +277,7 @@ ruleTerm returns [EObject current=null]
     @after { resetLookahead(); }:
 (
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.3/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.3/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
     }
     this_Atom=ruleAtom
     { 
@@ -287,7 +287,7 @@ ruleTerm returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.3/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.3/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
     }
     this_Parens=ruleParens
     { 
@@ -300,7 +300,7 @@ ruleTerm returns [EObject current=null]
 
 // Entry rule entryRuleAtom
 entryRuleAtom returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.4" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleAtom=ruleAtom 
 	 { $current=$iv_ruleAtom.current; } 
 	 EOF 
@@ -314,7 +314,7 @@ ruleAtom returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.4/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.4/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -332,7 +332,7 @@ ruleAtom returns [EObject current=null]
 
 // Entry rule entryRuleParens
 entryRuleParens returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.5" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleParens=ruleParens 
 	 { $current=$iv_ruleParens.current; } 
 	 EOF 
@@ -344,11 +344,11 @@ ruleParens returns [EObject current=null]
     @after { resetLookahead(); }:
 (('(' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.5/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
     }
     this_Addition=ruleAddition
     { 
@@ -357,7 +357,7 @@ ruleParens returns [EObject current=null]
     }
 )')' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@parserRules.5/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
     

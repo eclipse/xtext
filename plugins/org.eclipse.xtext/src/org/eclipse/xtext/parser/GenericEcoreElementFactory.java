@@ -46,9 +46,12 @@ public class GenericEcoreElementFactory implements IAstFactory {
 
 	public EObject create(String fullTypeName) {
 		EClass clazz = getEClass(fullTypeName);
-		if (clazz != null && !(clazz.isAbstract() || clazz.isInterface()))
-			return clazz.getEPackage().getEFactoryInstance().create(clazz);
-		return null;
+		if (clazz == null)
+			throw new IllegalArgumentException("Coudln't find EClass for name " + fullTypeName);
+
+		if (clazz.isAbstract() || clazz.isInterface())
+			throw new IllegalArgumentException("Can't create instance of abstract type " + fullTypeName);
+		return clazz.getEPackage().getEFactoryInstance().create(clazz);
 	}
 
 	@Deprecated
@@ -103,10 +106,10 @@ public class GenericEcoreElementFactory implements IAstFactory {
 			if (decl.getAlias() == null && alias == null || decl.getAlias() != null && decl.getAlias().equals(alias)) {
 				if (decl instanceof GeneratedMetamodel) {
 					GeneratedMetamodel mm = (GeneratedMetamodel) decl;
-					return EcoreUtil2.loadEPackage(mm.getNsURI(),grammarAccess.getClass().getClassLoader());
+					return EcoreUtil2.loadEPackage(mm.getNsURI(), grammarAccess.getClass().getClassLoader());
 				} else {
 					ReferencedMetamodel mm = (ReferencedMetamodel) decl;
-					return EcoreUtil2.loadEPackage(mm.getUri(),grammarAccess.getClass().getClassLoader());
+					return EcoreUtil2.loadEPackage(mm.getUri(), grammarAccess.getClass().getClassLoader());
 				}
 			}
 		}

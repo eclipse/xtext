@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActionImpl.java,v 1.12 2008/08/07 15:05:35 sefftinge Exp $
+ * $Id: ActionImpl.java,v 1.13 2008/08/15 10:02:43 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -25,9 +25,9 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.impl.ActionImpl#getTypeName <em>Type Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.ActionImpl#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.ActionImpl#getOperator <em>Operator</em>}</li>
- *   <li>{@link org.eclipse.xtext.impl.ActionImpl#getTypeName <em>Type Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,6 +36,16 @@ import org.eclipse.xtext.XtextPackage;
 public class ActionImpl extends AbstractElementImpl implements Action
 {
   /**
+	 * The cached value of the '{@link #getTypeName() <em>Type Name</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getTypeName()
+	 * @generated
+	 * @ordered
+	 */
+  protected TypeRef typeName;
+
+		/**
 	 * The default value of the '{@link #getFeature() <em>Feature</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -45,7 +55,7 @@ public class ActionImpl extends AbstractElementImpl implements Action
 	 */
   protected static final String FEATURE_EDEFAULT = null;
 
-  /**
+		/**
 	 * The cached value of the '{@link #getFeature() <em>Feature</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -55,7 +65,7 @@ public class ActionImpl extends AbstractElementImpl implements Action
 	 */
   protected String feature = FEATURE_EDEFAULT;
 
-  /**
+		/**
 	 * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -74,16 +84,6 @@ public class ActionImpl extends AbstractElementImpl implements Action
 	 * @ordered
 	 */
   protected String operator = OPERATOR_EDEFAULT;
-
-		/**
-	 * The cached value of the '{@link #getTypeName() <em>Type Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getTypeName()
-	 * @generated
-	 * @ordered
-	 */
-  protected TypeRef typeName;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -222,12 +222,12 @@ public class ActionImpl extends AbstractElementImpl implements Action
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
 		switch (featureID) {
+			case XtextPackage.ACTION__TYPE_NAME:
+				return getTypeName();
 			case XtextPackage.ACTION__FEATURE:
 				return getFeature();
 			case XtextPackage.ACTION__OPERATOR:
 				return getOperator();
-			case XtextPackage.ACTION__TYPE_NAME:
-				return getTypeName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -241,14 +241,14 @@ public class ActionImpl extends AbstractElementImpl implements Action
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
+			case XtextPackage.ACTION__TYPE_NAME:
+				setTypeName((TypeRef)newValue);
+				return;
 			case XtextPackage.ACTION__FEATURE:
 				setFeature((String)newValue);
 				return;
 			case XtextPackage.ACTION__OPERATOR:
 				setOperator((String)newValue);
-				return;
-			case XtextPackage.ACTION__TYPE_NAME:
-				setTypeName((TypeRef)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -263,14 +263,14 @@ public class ActionImpl extends AbstractElementImpl implements Action
   public void eUnset(int featureID)
   {
 		switch (featureID) {
+			case XtextPackage.ACTION__TYPE_NAME:
+				setTypeName((TypeRef)null);
+				return;
 			case XtextPackage.ACTION__FEATURE:
 				setFeature(FEATURE_EDEFAULT);
 				return;
 			case XtextPackage.ACTION__OPERATOR:
 				setOperator(OPERATOR_EDEFAULT);
-				return;
-			case XtextPackage.ACTION__TYPE_NAME:
-				setTypeName((TypeRef)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -285,12 +285,12 @@ public class ActionImpl extends AbstractElementImpl implements Action
   public boolean eIsSet(int featureID)
   {
 		switch (featureID) {
+			case XtextPackage.ACTION__TYPE_NAME:
+				return typeName != null;
 			case XtextPackage.ACTION__FEATURE:
 				return FEATURE_EDEFAULT == null ? feature != null : !FEATURE_EDEFAULT.equals(feature);
 			case XtextPackage.ACTION__OPERATOR:
 				return OPERATOR_EDEFAULT == null ? operator != null : !OPERATOR_EDEFAULT.equals(operator);
-			case XtextPackage.ACTION__TYPE_NAME:
-				return typeName != null;
 		}
 		return super.eIsSet(featureID);
 	}

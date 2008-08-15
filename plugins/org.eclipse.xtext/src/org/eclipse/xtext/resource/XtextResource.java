@@ -18,23 +18,22 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.BrokenLink;
 import org.eclipse.xtext.crossref.IFragmentProvider;
 import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback;
 import org.eclipse.xtext.service.Inject;
 
 /**
@@ -54,6 +53,12 @@ public class XtextResource extends ResourceImpl {
 
 	@Inject
 	private IFragmentProvider fragmentProvider;
+	
+	@Inject
+	private IParseTreeConstructor parseTreeConstructor;
+	
+	@Inject
+	private IValueConverterService valueConverterService;
 
 	private Log log = LogFactory.getLog(getClass());
 
@@ -146,23 +151,10 @@ public class XtextResource extends ResourceImpl {
 		}
 		if (!contents.isEmpty()) {
 			EObject rootElement = contents.get(0);
-			NodeAdapter rootNodeAdapter = getNodeAdapter(rootElement);
-			if (rootNodeAdapter != null) {
-				CompositeNode rootNode = rootNodeAdapter.getParserNode();
-				String serialize = rootNode.serialize();
-				outputStream.write(serialize.getBytes());
-			}
+			WhitespacePreservingCallback cb = new WhitespacePreservingCallback(valueConverterService);
+			parseTreeConstructor.update(rootElement, cb);
+			outputStream.write(cb.toString().getBytes());
 		}
-	}
-
-	private NodeAdapter getNodeAdapter(EObject object) {
-		EList<Adapter> adapters = object.eAdapters();
-		for (Adapter adapter : adapters) {
-			if (adapter.isAdapterForType(AbstractNode.class)) {
-				return (NodeAdapter) adapter;
-			}
-		}
-		return null;
 	}
 
 }

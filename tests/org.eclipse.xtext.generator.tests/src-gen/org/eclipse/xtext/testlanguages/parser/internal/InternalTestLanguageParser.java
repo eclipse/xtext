@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g 2008-08-07 16:59:06
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g 2008-08-14 08:04:44
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -72,7 +72,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:63:51: (iv_ruleEntryRule= ruleEntryRule EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:64:2: iv_ruleEntryRule= ruleEntryRule EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleEntryRule_in_entryRuleEntryRule71);
             iv_ruleEntryRule=ruleEntryRule();
             _fsp--;
@@ -124,7 +124,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
             	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:77:6: lv_multiFeature= ruleAbstractRule
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleAbstractRule_in_ruleEntryRule139);
             	    lv_multiFeature=ruleAbstractRule();
@@ -177,7 +177,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:96:54: (iv_ruleAbstractRule= ruleAbstractRule EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:97:2: iv_ruleAbstractRule= ruleAbstractRule EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleAbstractRule_in_entryRuleAbstractRule178);
             iv_ruleAbstractRule=ruleAbstractRule();
             _fsp--;
@@ -236,7 +236,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
                     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:108:5: this_ChoiceRule= ruleChoiceRule
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.1/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.1/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleChoiceRule_in_ruleAbstractRule235);
                     this_ChoiceRule=ruleChoiceRule();
@@ -253,7 +253,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
                     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:118:5: this_ReducibleRule= ruleReducibleRule
                     {
                      
-                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
+                            currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
                         
                     pushFollow(FOLLOW_ruleReducibleRule_in_ruleAbstractRule262);
                     this_ReducibleRule=ruleReducibleRule();
@@ -298,7 +298,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:131:52: (iv_ruleChoiceRule= ruleChoiceRule EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:132:2: iv_ruleChoiceRule= ruleChoiceRule EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.2" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleChoiceRule_in_entryRuleChoiceRule296);
             iv_ruleChoiceRule=ruleChoiceRule();
             _fsp--;
@@ -342,7 +342,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
             {
             match(input,11,FOLLOW_11_in_ruleChoiceRule341); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:146:1: (lv_optionalKeyword= 'optional' )?
             int alt3=2;
@@ -358,7 +358,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
                     lv_optionalKeyword=(Token)input.LT(1);
                     match(input,12,FOLLOW_12_in_ruleChoiceRule362); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "optionalKeyword"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::Keyword */, "optionalKeyword"); 
                         
 
                     	        if (current==null) {
@@ -383,7 +383,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoiceRule397); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -428,7 +428,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:183:55: (iv_ruleReducibleRule= ruleReducibleRule EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:184:2: iv_ruleReducibleRule= ruleReducibleRule EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.3" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleReducibleRule_in_entryRuleReducibleRule443);
             iv_ruleReducibleRule=ruleReducibleRule();
             _fsp--;
@@ -474,10 +474,10 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
             {
             match(input,13,FOLLOW_13_in_ruleReducibleRule488); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
              
-                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
+                    currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
                 
             pushFollow(FOLLOW_ruleTerminalRule_in_ruleReducibleRule510);
             this_TerminalRule=ruleTerminalRule();
@@ -509,7 +509,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
                             factory.add(temp, "actionFeature",current);
                             current = temp; 
                             temp = null;
-                            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
+                            CompositeNode newNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Action */, currentNode.getParent());
                         newNode.getChildren().add(currentNode);
                         moveLookaheadInfo(currentNode, newNode);
                         currentNode = newNode; 
@@ -522,7 +522,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
                     // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:222:6: lv_actionFeature= ruleTerminalRule
                     {
                      
-                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    
                     pushFollow(FOLLOW_ruleTerminalRule_in_ruleReducibleRule554);
                     lv_actionFeature=ruleTerminalRule();
@@ -578,7 +578,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:241:54: (iv_ruleTerminalRule= ruleTerminalRule EOF )
             // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalTestLanguage.g:242:2: iv_ruleTerminalRule= ruleTerminalRule EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.4" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleTerminalRule_in_entryRuleTerminalRule595);
             iv_ruleTerminalRule=ruleTerminalRule();
             _fsp--;
@@ -619,7 +619,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
             lv_stringFeature=(Token)input.LT(1);
             match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleTerminalRule650); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@parserRules.4/@alternatives/@terminal" /* xtext::RuleCall */, "stringFeature"); 
+                createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.4/@alternatives/@terminal" /* xtext::RuleCall */, "stringFeature"); 
                 
 
             	        if (current==null) {

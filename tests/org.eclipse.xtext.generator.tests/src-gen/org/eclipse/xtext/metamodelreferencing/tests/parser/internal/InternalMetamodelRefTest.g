@@ -61,7 +61,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 // Entry rule entryRuleFoo
 entryRuleFoo returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleFoo=ruleFoo 
 	 { $current=$iv_ruleFoo.current; } 
 	 EOF 
@@ -75,7 +75,7 @@ ruleFoo returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -91,7 +91,7 @@ ruleFoo returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_nameRefs=ruleNameRef 
 	    {
@@ -110,7 +110,7 @@ ruleFoo returns [EObject current=null]
 
 // Entry rule entryRuleNameRef
 entryRuleNameRef returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleNameRef=ruleNameRef 
 	 { $current=$iv_ruleNameRef.current; } 
 	 EOF 
@@ -124,7 +124,7 @@ ruleNameRef returns [EObject current=null]
 	
 	    lv_name=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@parserRules.1/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {

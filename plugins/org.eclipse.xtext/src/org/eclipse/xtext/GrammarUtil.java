@@ -152,7 +152,7 @@ public class GrammarUtil {
 		String id = getSuperGrammarId(_this);
 		if (id == null)
 			return null;
-		if (!(_this.eResource() != null && _this.eResource().getResourceSet() instanceof XtextResourceSet))
+		if (!(_this.eResource() != null && _this.eResource().getResourceSet() !=null))
 			throw new IllegalArgumentException("The passed grammar is not contained in a Resourceset");
 		ResourceSet resourceSet = _this.eResource().getResourceSet();
 		URI uri = getClasspathURIForLanguageId(id);
@@ -191,51 +191,31 @@ public class GrammarUtil {
 
 	public static List<AbstractRule> allRules(Grammar _this) {
 		List<AbstractRule> result = new ArrayList<AbstractRule>();
-		result.addAll(allParserRules(_this));
-		result.addAll(allLexerRules(_this));
+		Set<String> names = new HashSet<String>();
+		for (AbstractRule rule : _this.getRules()) {
+			if (names.add(rule.getName())) {
+				result.add(rule);
+			}
+		}
+		
+		Grammar superGrammar = getSuperGrammar(_this);
+		if (superGrammar != null) {
+			List<AbstractRule> superParserRules = allRules(superGrammar);
+			for (AbstractRule r : superParserRules) {
+				if (names.add(r.getName())) {
+					result.add(r);
+				}
+			}
+		}
 		return result;
 	}
 
 	public static List<ParserRule> allParserRules(Grammar _this) {
-		List<ParserRule> result = new ArrayList<ParserRule>();
-		Set<String> names = new HashSet<String>();
-		for (ParserRule rule : _this.getParserRules()) {
-			if (names.add(rule.getName())) {
-				result.add(rule);
-			}
-		}
-
-		Grammar superGrammar = getSuperGrammar(_this);
-		if (superGrammar != null) {
-			List<ParserRule> superParserRules = allParserRules(superGrammar);
-			for (ParserRule r : superParserRules) {
-				if (names.add(r.getName())) {
-					result.add(r);
-				}
-			}
-		}
-		return result;
+		return EcoreUtil2.typeSelect(allRules(_this), ParserRule.class);
 	}
 
 	public static List<LexerRule> allLexerRules(Grammar _this) {
-		List<LexerRule> result = new ArrayList<LexerRule>();
-		Set<String> names = new HashSet<String>();
-		for (LexerRule rule : _this.getLexerRules()) {
-			if (names.add(rule.getName())) {
-				result.add(rule);
-			}
-		}
-
-		Grammar superGrammar = getSuperGrammar(_this);
-		if (superGrammar != null) {
-			List<LexerRule> superParserRules = allLexerRules(superGrammar);
-			for (LexerRule r : superParserRules) {
-				if (names.add(r.getName())) {
-					result.add(r);
-				}
-			}
-		}
-		return result;
+		return EcoreUtil2.typeSelect(allRules(_this), LexerRule.class);
 	}
 
 	public static List<AbstractMetamodelDeclaration> allMetamodelDeclarations(Grammar _this) {

@@ -61,7 +61,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 // Entry rule entryRuleMain
 entryRuleMain returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleMain=ruleMain 
 	 { $current=$iv_ruleMain.current; } 
 	 EOF 
@@ -75,7 +75,7 @@ ruleMain returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.0/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_imports=ruleImport 
 	    {
@@ -92,7 +92,7 @@ ruleMain returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_types=ruleType 
 	    {
@@ -111,7 +111,7 @@ ruleMain returns [EObject current=null]
 
 // Entry rule entryRuleImport
 entryRuleImport returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleImport=ruleImport 
 	 { $current=$iv_ruleImport.current; } 
 	 EOF 
@@ -123,13 +123,13 @@ ruleImport returns [EObject current=null]
     @after { resetLookahead(); }:
 ('import' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.1/@alternatives/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    lv_uri=RULE_STRING
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "uri"); 
+    createLeafNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "uri"); 
     }
  
 	    {
@@ -147,7 +147,7 @@ ruleImport returns [EObject current=null]
 
 // Entry rule entryRuleType
 entryRuleType returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.2" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleType=ruleType 
 	 { $current=$iv_ruleType.current; } 
 	 EOF 
@@ -159,13 +159,13 @@ ruleType returns [EObject current=null]
     @after { resetLookahead(); }:
 ((('type' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
@@ -179,14 +179,14 @@ ruleType returns [EObject current=null]
 	
 ))'extends' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.2/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )(	
 	
 		
 (
 	RULE_ID    { 
-    createLeafNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@parserRules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "extends"); 
+    createLeafNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "extends"); 
     }
 ) 
 	

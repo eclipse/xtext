@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GrammarImpl.java,v 1.12 2008/08/07 15:05:35 sefftinge Exp $
+ * $Id: GrammarImpl.java,v 1.13 2008/08/15 10:02:43 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
@@ -36,12 +37,11 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#isAbstract <em>Abstract</em>}</li>
- *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getIdElements <em>Id Elements</em>}</li>
- *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getLexerRules <em>Lexer Rules</em>}</li>
- *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getParserRules <em>Parser Rules</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getSuperGrammarIdElements <em>Super Grammar Id Elements</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getIdElements <em>Id Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#isAbstract <em>Abstract</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.GrammarImpl#getRules <em>Rules</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,56 +50,6 @@ import org.eclipse.xtext.XtextPackage;
 public class GrammarImpl extends EObjectImpl implements Grammar
 {
   /**
-	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #isAbstract()
-	 * @generated
-	 * @ordered
-	 */
-  protected static final boolean ABSTRACT_EDEFAULT = false;
-
-  /**
-	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #isAbstract()
-	 * @generated
-	 * @ordered
-	 */
-  protected boolean abstract_ = ABSTRACT_EDEFAULT;
-
-		/**
-	 * The cached value of the '{@link #getIdElements() <em>Id Elements</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getIdElements()
-	 * @generated
-	 * @ordered
-	 */
-  protected EList<String> idElements;
-
-		/**
-	 * The cached value of the '{@link #getLexerRules() <em>Lexer Rules</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getLexerRules()
-	 * @generated
-	 * @ordered
-	 */
-  protected EList<LexerRule> lexerRules;
-
-		/**
-	 * The cached value of the '{@link #getParserRules() <em>Parser Rules</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getParserRules()
-	 * @generated
-	 * @ordered
-	 */
-  protected EList<ParserRule> parserRules;
-
-		/**
 	 * The cached value of the '{@link #getSuperGrammarIdElements() <em>Super Grammar Id Elements</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -118,6 +68,46 @@ public class GrammarImpl extends EObjectImpl implements Grammar
 	 * @ordered
 	 */
   protected EList<AbstractMetamodelDeclaration> metamodelDeclarations;
+
+		/**
+	 * The cached value of the '{@link #getIdElements() <em>Id Elements</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #getIdElements()
+	 * @generated
+	 * @ordered
+	 */
+  protected EList<String> idElements;
+
+		/**
+	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+  protected static final boolean ABSTRACT_EDEFAULT = false;
+
+		/**
+	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+  protected boolean abstract_ = ABSTRACT_EDEFAULT;
+
+		/**
+	 * The cached value of the '{@link #getRules() <em>Rules</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRules()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<AbstractRule> rules;
 
   /**
 	 * <!-- begin-user-doc -->
@@ -138,19 +128,6 @@ public class GrammarImpl extends EObjectImpl implements Grammar
   protected EClass eStaticClass()
   {
 		return XtextPackage.Literals.GRAMMAR;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EList<ParserRule> getParserRules()
-  {
-		if (parserRules == null) {
-			parserRules = new EObjectContainmentEList<ParserRule>(ParserRule.class, this, XtextPackage.GRAMMAR__PARSER_RULES);
-		}
-		return parserRules;
 	}
 
   /**
@@ -196,19 +173,6 @@ public class GrammarImpl extends EObjectImpl implements Grammar
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EList<LexerRule> getLexerRules()
-  {
-		if (lexerRules == null) {
-			lexerRules = new EObjectContainmentEList<LexerRule>(LexerRule.class, this, XtextPackage.GRAMMAR__LEXER_RULES);
-		}
-		return lexerRules;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
   public boolean isAbstract()
   {
 		return abstract_;
@@ -229,6 +193,18 @@ public class GrammarImpl extends EObjectImpl implements Grammar
 
   /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<AbstractRule> getRules() {
+		if (rules == null) {
+			rules = new EObjectContainmentEList<AbstractRule>(AbstractRule.class, this, XtextPackage.GRAMMAR__RULES);
+		}
+		return rules;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -236,12 +212,10 @@ public class GrammarImpl extends EObjectImpl implements Grammar
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
 		switch (featureID) {
-			case XtextPackage.GRAMMAR__LEXER_RULES:
-				return ((InternalEList<?>)getLexerRules()).basicRemove(otherEnd, msgs);
-			case XtextPackage.GRAMMAR__PARSER_RULES:
-				return ((InternalEList<?>)getParserRules()).basicRemove(otherEnd, msgs);
 			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
 				return ((InternalEList<?>)getMetamodelDeclarations()).basicRemove(otherEnd, msgs);
+			case XtextPackage.GRAMMAR__RULES:
+				return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -255,18 +229,16 @@ public class GrammarImpl extends EObjectImpl implements Grammar
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
 		switch (featureID) {
-			case XtextPackage.GRAMMAR__ABSTRACT:
-				return isAbstract() ? Boolean.TRUE : Boolean.FALSE;
-			case XtextPackage.GRAMMAR__ID_ELEMENTS:
-				return getIdElements();
-			case XtextPackage.GRAMMAR__LEXER_RULES:
-				return getLexerRules();
-			case XtextPackage.GRAMMAR__PARSER_RULES:
-				return getParserRules();
 			case XtextPackage.GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS:
 				return getSuperGrammarIdElements();
 			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
 				return getMetamodelDeclarations();
+			case XtextPackage.GRAMMAR__ID_ELEMENTS:
+				return getIdElements();
+			case XtextPackage.GRAMMAR__ABSTRACT:
+				return isAbstract() ? Boolean.TRUE : Boolean.FALSE;
+			case XtextPackage.GRAMMAR__RULES:
+				return getRules();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -281,21 +253,6 @@ public class GrammarImpl extends EObjectImpl implements Grammar
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
-			case XtextPackage.GRAMMAR__ABSTRACT:
-				setAbstract(((Boolean)newValue).booleanValue());
-				return;
-			case XtextPackage.GRAMMAR__ID_ELEMENTS:
-				getIdElements().clear();
-				getIdElements().addAll((Collection<? extends String>)newValue);
-				return;
-			case XtextPackage.GRAMMAR__LEXER_RULES:
-				getLexerRules().clear();
-				getLexerRules().addAll((Collection<? extends LexerRule>)newValue);
-				return;
-			case XtextPackage.GRAMMAR__PARSER_RULES:
-				getParserRules().clear();
-				getParserRules().addAll((Collection<? extends ParserRule>)newValue);
-				return;
 			case XtextPackage.GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS:
 				getSuperGrammarIdElements().clear();
 				getSuperGrammarIdElements().addAll((Collection<? extends String>)newValue);
@@ -303,6 +260,17 @@ public class GrammarImpl extends EObjectImpl implements Grammar
 			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
 				getMetamodelDeclarations().clear();
 				getMetamodelDeclarations().addAll((Collection<? extends AbstractMetamodelDeclaration>)newValue);
+				return;
+			case XtextPackage.GRAMMAR__ID_ELEMENTS:
+				getIdElements().clear();
+				getIdElements().addAll((Collection<? extends String>)newValue);
+				return;
+			case XtextPackage.GRAMMAR__ABSTRACT:
+				setAbstract(((Boolean)newValue).booleanValue());
+				return;
+			case XtextPackage.GRAMMAR__RULES:
+				getRules().clear();
+				getRules().addAll((Collection<? extends AbstractRule>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -317,23 +285,20 @@ public class GrammarImpl extends EObjectImpl implements Grammar
   public void eUnset(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.GRAMMAR__ABSTRACT:
-				setAbstract(ABSTRACT_EDEFAULT);
-				return;
-			case XtextPackage.GRAMMAR__ID_ELEMENTS:
-				getIdElements().clear();
-				return;
-			case XtextPackage.GRAMMAR__LEXER_RULES:
-				getLexerRules().clear();
-				return;
-			case XtextPackage.GRAMMAR__PARSER_RULES:
-				getParserRules().clear();
-				return;
 			case XtextPackage.GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS:
 				getSuperGrammarIdElements().clear();
 				return;
 			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
 				getMetamodelDeclarations().clear();
+				return;
+			case XtextPackage.GRAMMAR__ID_ELEMENTS:
+				getIdElements().clear();
+				return;
+			case XtextPackage.GRAMMAR__ABSTRACT:
+				setAbstract(ABSTRACT_EDEFAULT);
+				return;
+			case XtextPackage.GRAMMAR__RULES:
+				getRules().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -348,18 +313,16 @@ public class GrammarImpl extends EObjectImpl implements Grammar
   public boolean eIsSet(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.GRAMMAR__ABSTRACT:
-				return abstract_ != ABSTRACT_EDEFAULT;
-			case XtextPackage.GRAMMAR__ID_ELEMENTS:
-				return idElements != null && !idElements.isEmpty();
-			case XtextPackage.GRAMMAR__LEXER_RULES:
-				return lexerRules != null && !lexerRules.isEmpty();
-			case XtextPackage.GRAMMAR__PARSER_RULES:
-				return parserRules != null && !parserRules.isEmpty();
 			case XtextPackage.GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS:
 				return superGrammarIdElements != null && !superGrammarIdElements.isEmpty();
 			case XtextPackage.GRAMMAR__METAMODEL_DECLARATIONS:
 				return metamodelDeclarations != null && !metamodelDeclarations.isEmpty();
+			case XtextPackage.GRAMMAR__ID_ELEMENTS:
+				return idElements != null && !idElements.isEmpty();
+			case XtextPackage.GRAMMAR__ABSTRACT:
+				return abstract_ != ABSTRACT_EDEFAULT;
+			case XtextPackage.GRAMMAR__RULES:
+				return rules != null && !rules.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -375,12 +338,12 @@ public class GrammarImpl extends EObjectImpl implements Grammar
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (abstract: ");
-		result.append(abstract_);
+		result.append(" (superGrammarIdElements: ");
+		result.append(superGrammarIdElements);
 		result.append(", idElements: ");
 		result.append(idElements);
-		result.append(", superGrammarIdElements: ");
-		result.append(superGrammarIdElements);
+		result.append(", abstract: ");
+		result.append(abstract_);
 		result.append(')');
 		return result.toString();
 	}

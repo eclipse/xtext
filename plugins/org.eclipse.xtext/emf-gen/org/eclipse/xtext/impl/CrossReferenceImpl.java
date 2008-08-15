@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CrossReferenceImpl.java,v 1.1 2008/08/07 15:05:35 sefftinge Exp $
+ * $Id: CrossReferenceImpl.java,v 1.2 2008/08/15 10:02:43 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -26,24 +26,14 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.CrossReferenceImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.CrossReferenceImpl#getRule <em>Rule</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.CrossReferenceImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class CrossReferenceImpl extends AbstractElementImpl implements CrossReference {
-	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected TypeRef type;
-
 	/**
 	 * The cached value of the '{@link #getRule() <em>Rule</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -53,6 +43,16 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
 	 * @ordered
 	 */
 	protected RuleCall rule;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected TypeRef type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -167,10 +167,10 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case XtextPackage.CROSS_REFERENCE__TYPE:
-				return basicSetType(null, msgs);
 			case XtextPackage.CROSS_REFERENCE__RULE:
 				return basicSetRule(null, msgs);
+			case XtextPackage.CROSS_REFERENCE__TYPE:
+				return basicSetType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -183,10 +183,10 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XtextPackage.CROSS_REFERENCE__TYPE:
-				return getType();
 			case XtextPackage.CROSS_REFERENCE__RULE:
 				return getRule();
+			case XtextPackage.CROSS_REFERENCE__TYPE:
+				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -199,11 +199,11 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XtextPackage.CROSS_REFERENCE__TYPE:
-				setType((TypeRef)newValue);
-				return;
 			case XtextPackage.CROSS_REFERENCE__RULE:
 				setRule((RuleCall)newValue);
+				return;
+			case XtextPackage.CROSS_REFERENCE__TYPE:
+				setType((TypeRef)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -217,11 +217,11 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XtextPackage.CROSS_REFERENCE__TYPE:
-				setType((TypeRef)null);
-				return;
 			case XtextPackage.CROSS_REFERENCE__RULE:
 				setRule((RuleCall)null);
+				return;
+			case XtextPackage.CROSS_REFERENCE__TYPE:
+				setType((TypeRef)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -235,10 +235,10 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XtextPackage.CROSS_REFERENCE__TYPE:
-				return type != null;
 			case XtextPackage.CROSS_REFERENCE__RULE:
 				return rule != null;
+			case XtextPackage.CROSS_REFERENCE__TYPE:
+				return type != null;
 		}
 		return super.eIsSet(featureID);
 	}

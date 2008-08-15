@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g 2008-08-07 16:59:05
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g 2008-08-14 08:04:44
 
 package org.eclipse.xtext.dummy.parser.internal; 
 
@@ -72,7 +72,7 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:63:47: (iv_ruleModel= ruleModel EOF )
             // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:64:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.0" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel71);
             iv_ruleModel=ruleModel();
             _fsp--;
@@ -124,7 +124,7 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
             	    // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:77:6: lv_elements= ruleElement
             	    {
             	     
-            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
+            	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.0/@alternatives/@terminal" /* xtext::RuleCall */, currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleElement_in_ruleModel139);
             	    lv_elements=ruleElement();
@@ -177,7 +177,7 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:96:49: (iv_ruleElement= ruleElement EOF )
             // ./src-gen/org/eclipse/xtext/dummy/parser/internal/InternalDummyLanguage.g:97:2: iv_ruleElement= ruleElement EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleElement_in_entryRuleElement178);
             iv_ruleElement=ruleElement();
             _fsp--;
@@ -240,7 +240,7 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
                     lv_optional=(Token)input.LT(1);
                     match(input,11,FOLLOW_11_in_ruleElement237); 
 
-                            createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, "optional"); 
+                            createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::Keyword */, "optional"); 
                         
 
                     	        if (current==null) {
@@ -258,7 +258,7 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
 
             match(input,12,FOLLOW_12_in_ruleElement259); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
@@ -269,7 +269,7 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleElement281); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {
@@ -303,7 +303,7 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
             	    lv_descriptions=(Token)input.LT(1);
             	    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleElement314); 
             	     
-            	        createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "descriptions"); 
+            	        createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "descriptions"); 
             	        
 
             	    	        if (current==null) {
@@ -327,7 +327,7 @@ public class InternalDummyLanguageParser extends AbstractAntlrParser {
 
             match(input,13,FOLLOW_13_in_ruleElement336); 
 
-                    createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@parserRules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+                    createLeafNode("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }

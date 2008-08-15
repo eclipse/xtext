@@ -54,7 +54,7 @@ public class «genClassFQName.toSimpleName()» extends org.eclipse.xtext.parser.Ab
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "«grammar().parserRules.first().name»";
+		return "«grammar().allParserRules().first().name»";
 	}
 }
 «ENDFILE»

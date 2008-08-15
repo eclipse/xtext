@@ -33,10 +33,10 @@ public class Files {
 		for (String file : files) {
 			File copy = new File(target.getAbsolutePath() + File.separatorChar + file);
 			if (!copy.exists()) {
+				String uri = sourceDir + "/" + file;
+				ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+				InputStream is = contextClassLoader.getResourceAsStream(uri);
 				try {
-					ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-					String uri = sourceDir + "/" + file;
-					InputStream is = contextClassLoader.getResourceAsStream(uri);
 					copy.createNewFile();
 					FileOutputStream fwr = new FileOutputStream(copy);
 					byte[] buff = new byte[1024];
@@ -45,9 +45,14 @@ public class Files {
 						fwr.write(buff, 0, read);
 					}
 					log.debug("Copied " + copy);
-				}
-				catch (IOException e) {
+				} catch (IOException e) {
 					log.error(e);
+				} finally {
+					try {
+						is.close();
+					} catch (IOException e) {
+						log.error(e);
+					}
 				}
 			}
 		}
@@ -63,8 +68,7 @@ public class Files {
 			final File file = contents[j];
 			if (file.isDirectory()) {
 				cleanFolder(file);
-			}
-			else {
+			} else {
 				if (!file.delete()) {
 					log.error("Couldn't delete " + file.getAbsolutePath());
 				}

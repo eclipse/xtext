@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeRef.java,v 1.10 2008/06/05 15:03:50 sefftinge Exp $
+ * $Id: TypeRef.java,v 1.11 2008/08/15 10:02:42 sefftinge Exp $
  */
 package org.eclipse.xtext;
 
@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.TypeRef#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.TypeRef#getAlias <em>Alias</em>}</li>
+ *   <li>{@link org.eclipse.xtext.TypeRef#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
