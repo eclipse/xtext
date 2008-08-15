@@ -52,7 +52,7 @@ public class BootstrapModelTest extends AbstractGeneratorTest {
 		List<MetaModel> result = (List<MetaModel>) facade.call("getAllMetaModels", grammarModel);
 		MetaModel xtext = (MetaModel) invokeWithXtend("select(e|e.alias()==null).first()", result);
 		MetaModel ecore = (MetaModel) invokeWithXtend("select(e|e.alias()=='ecore').first()", result);
-		assertEquals(15,xtext.getTypes().size());
+		assertEquals(16,xtext.getTypes().size());
 		assertEquals(3,ecore.getTypes().size());
 		
 		for(AbstractType t : xtext.getTypes()) {
