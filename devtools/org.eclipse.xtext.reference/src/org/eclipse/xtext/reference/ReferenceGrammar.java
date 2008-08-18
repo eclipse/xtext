@@ -1,16 +1,16 @@
 package org.eclipse.xtext.reference;
 
 import java.io.IOException;
-import org.apache.log4j.Logger;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
+import org.eclipse.xtext.resource.XtextResourceSet;
 
 /**
  * Run this class in order to generate the Reference grammar.
@@ -31,7 +31,7 @@ public class ReferenceGrammar {
 
         String classpathUri = "classpath:/"+getClass().getName().replace('.', '/') + ".xtext";
         log.info("loading " + classpathUri);
-        ResourceSet rs = new ResourceSetImpl();
+        ResourceSet rs = new XtextResourceSet();
         Resource resource = rs.createResource(new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(classpathUri)));
         resource.load(null);
         Grammar grammarModel = (Grammar) resource.getContents().get(0);
