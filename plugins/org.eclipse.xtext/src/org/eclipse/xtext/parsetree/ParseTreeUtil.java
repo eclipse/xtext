@@ -88,7 +88,8 @@ public final class ParseTreeUtil {
 
         AbstractNode abstractNode = null;
 
-        if (contextNode.getOffset() <= offsetPosition) {
+        if (contextNode.getOffset() < offsetPosition || 
+        		(0==offsetPosition && offsetPosition==contextNode.getOffset())) {
 
             if (contextNode.getGrammarElement() instanceof AbstractElement
                     || contextNode.getGrammarElement() instanceof ParserRule) {
