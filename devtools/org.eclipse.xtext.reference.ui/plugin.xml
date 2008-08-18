@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.xtext.ui.proposalsProvider">
       <proposalsProvider
-            class="org.eclipse.xtext.reference.ui.services.ReferenceProposalsProvider"
+            class="org.eclipse.xtext.ui.service.impl.BuiltInProposalsProvider"
             languageId="org.eclipse.xtext.reference.ReferenceGrammar">
       </proposalsProvider>
    </extension>
