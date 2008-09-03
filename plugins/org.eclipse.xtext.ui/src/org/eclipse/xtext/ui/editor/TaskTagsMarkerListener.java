@@ -38,6 +38,7 @@ import org.eclipse.xtext.ui.internal.XtextMarkerManager;
  * <i>Tasks</i> View.
  * 
  * @author Michael Clay - Initial contribution and API
+ * @author Peter Friese
  * 
  * @see org.eclipse.xtext.ui.editor.model.IXtextEditorModelListener
  * 
@@ -48,6 +49,7 @@ public class TaskTagsMarkerListener implements IXtextEditorModelListener {
 	private static final String ORG_ECLIPSE_XTEXT_UI_TASKMARKER = "org.eclipse.xtext.ui.taskmarker";
 	private static final String SL_COMMENT = "SL_COMMENT";
 	private static final String ML_COMMENT = "ML_COMMENT";
+	
 	// state
 	private String pluginId;
 	private IResource resource;
@@ -59,21 +61,17 @@ public class TaskTagsMarkerListener implements IXtextEditorModelListener {
 	 * @param resource
 	 * @param progressMonitor
 	 */
-	public TaskTagsMarkerListener(String pluginId, IResource resource,
-			IProgressMonitor progressMonitor) {
+	public TaskTagsMarkerListener(String pluginId, IResource resource, IProgressMonitor progressMonitor) {
 
 		Assert.isNotNull(pluginId, "parameter 'pluginId' must not be null");
 		Assert.isNotNull(resource, "parameter 'resource' must not be null");
-		Assert.isNotNull(resource,
-				"parameter 'progressMonitor' must not be null");
+		Assert.isNotNull(resource, "parameter 'progressMonitor' must not be null");
 		this.pluginId = pluginId;
 		this.resource = resource;
 		this.progressMonitor = progressMonitor;
 
-		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(
-				new InstanceScope(), this.pluginId);
-		scopedPreferenceStore.setSearchContexts(new IScopeContext[] {
-				new InstanceScope(), new ConfigurationScope() });
+		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(new InstanceScope(), this.pluginId);
+		scopedPreferenceStore.setSearchContexts(new IScopeContext[] { new InstanceScope(), new ConfigurationScope() });
 		this.preferenceStore = scopedPreferenceStore;
 	}
 
@@ -95,39 +93,34 @@ public class TaskTagsMarkerListener implements IXtextEditorModelListener {
 
 		List<Map<String, Object>> taskMarkerAttributesMapList = new ArrayList<Map<String, Object>>();
 
-		for (LeafNode leafNode : event.getModel().getParseTreeRootNode()
-				.getLeafNodes()) {
+		for (LeafNode leafNode : event.getModel().getParseTreeRootNode().getLeafNodes()) {
 
 			TaskTag taskTag = getTaskTag(leafNode);
 
 			if (null != taskTag) {
 
 				Map<String, Object> markerAttributesMap = new HashMap<String, Object>();
+				String text = leafNode.getText();
+				String tagName = taskTag.getName();
+				int tagIndex = text.indexOf(tagName);
+				String description = text.substring(tagIndex + tagName.length()).trim();
 
-				markerAttributesMap.put(IMarker.MESSAGE, leafNode.getText()
-						.trim());
-				markerAttributesMap.put(IMarker.CHAR_START, leafNode
-						.getOffset());
-				markerAttributesMap.put(IMarker.CHAR_END, leafNode.getOffset()
-						+ leafNode.getLength());
+				markerAttributesMap.put(IMarker.MESSAGE, description);
+				markerAttributesMap.put(IMarker.CHAR_START, leafNode.getOffset());
+				markerAttributesMap.put(IMarker.CHAR_END, leafNode.getOffset() + leafNode.getLength());
 
-				if (PreferenceConstants.PRIORITY_HIGH.equalsIgnoreCase(taskTag
-						.getPriority())) {
-					markerAttributesMap.put(IMarker.PRIORITY,
-							IMarker.PRIORITY_HIGH);
-				} else if (PreferenceConstants.PRIORITY_NORMAL
-						.equalsIgnoreCase(taskTag.getPriority())) {
-					markerAttributesMap.put(IMarker.PRIORITY,
-							IMarker.PRIORITY_NORMAL);
-				} else {
-					markerAttributesMap.put(IMarker.PRIORITY,
-							IMarker.PRIORITY_LOW);
+				if (PreferenceConstants.PRIORITY_HIGH.equalsIgnoreCase(taskTag.getPriority())) {
+					markerAttributesMap.put(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
+				}
+				else if (PreferenceConstants.PRIORITY_NORMAL.equalsIgnoreCase(taskTag.getPriority())) {
+					markerAttributesMap.put(IMarker.PRIORITY, IMarker.PRIORITY_NORMAL);
+				}
+				else {
+					markerAttributesMap.put(IMarker.PRIORITY, IMarker.PRIORITY_LOW);
 				}
 
-				markerAttributesMap.put(IMarker.LOCATION, this.resource
-						.getLocationURI().toString());
-				markerAttributesMap.put(IMarker.LOCATION, "line "
-						+ leafNode.getLine());
+				markerAttributesMap.put(IMarker.LOCATION, this.resource.getLocationURI().toString());
+				markerAttributesMap.put(IMarker.LOCATION, "line " + leafNode.getLine());
 
 				taskMarkerAttributesMapList.add(markerAttributesMap);
 			}
@@ -143,20 +136,14 @@ public class TaskTagsMarkerListener implements IXtextEditorModelListener {
 	private TaskTag getTaskTag(LeafNode leafNode) {
 
 		if (leafNode.getGrammarElement() instanceof LexerRule
-				&& (((LexerRule) leafNode.getGrammarElement()).getName()
-						.equalsIgnoreCase(SL_COMMENT) || ((LexerRule) leafNode
-						.getGrammarElement()).getName().equalsIgnoreCase(
-						ML_COMMENT))) {
+				&& (((LexerRule) leafNode.getGrammarElement()).getName().equalsIgnoreCase(SL_COMMENT) || ((LexerRule) leafNode
+						.getGrammarElement()).getName().equalsIgnoreCase(ML_COMMENT))) {
 
-			List<TaskTag> todoTaskList = TaskTag
-					.getTodoTaskList(preferenceStore);
-
+			List<TaskTag> todoTaskList = TaskTag.getTodoTaskList(preferenceStore);
 			Boolean caseSensitive = TaskTag.isCaseSensitive(preferenceStore);
 
 			for (TaskTag todoTask : todoTaskList) {
-
-				if ((caseSensitive && leafNode.getText().indexOf(
-						todoTask.getName()) != -1)
+				if ((caseSensitive && leafNode.getText().indexOf(todoTask.getName()) != -1)
 						|| (!caseSensitive && leafNode.getText().toLowerCase()
 								.indexOf(todoTask.getName().toLowerCase()) != -1)) {
 					return todoTask;
