@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.xtext.runtime.feature"
       label="Xtext Runtime Feature"
-      version="1.0.0"
+      version="1.0.0.qualifier"
       provider-name="itemis AG">
 
    <description url="http://www.example.com/description">
@@ -75,6 +75,13 @@
 
    <plugin
          id="org.eclipse.xtext.service.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.log4j"
          download-size="0"
          install-size="0"
          version="0.0.0"
