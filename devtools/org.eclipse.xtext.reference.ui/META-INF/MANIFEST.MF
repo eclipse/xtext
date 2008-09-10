@@ -8,7 +8,8 @@ Bundle-Activator: org.eclipse.xtext.reference.ui.Activator
 Require-Bundle: org.eclipse.xtext.reference;bundle-version="1.0.0";visibility:=reexport,
  org.eclipse.xtext.ui;bundle-version="1.0.0";visibility:=reexport,
  org.eclipse.xtext.logging,
- org.eclipse.xtext.log4j;bundle-version="1.2.15"
+ org.eclipse.xtext.log4j;bundle-version="1.2.15",
+ org.eclipse.xtext.common.ui;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j

@@ -65,7 +65,6 @@ import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.service.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.service.ISyntaxColorer;
-import org.eclipse.xtext.ui.service.impl.BuiltInSyntaxColorer;
 import org.eclipse.xtext.ui.service.utils.PropertiesResolver;
 
 /**
@@ -88,8 +87,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 					if (getSourceViewer() instanceof TextViewer) {
 						// FIXME notify syntax colorer before viewer refreshing
 						ISyntaxColorer colorer = ServiceRegistry.getService(languageDescriptor, ISyntaxColorer.class);
-						if (colorer instanceof BuiltInSyntaxColorer)
-							((BuiltInSyntaxColorer) colorer).clearCache();
+						colorer.clearCache();
 						TextViewer tv = (TextViewer) getSourceViewer();
 						tv.invalidateTextPresentation();
 					}
@@ -293,7 +291,8 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 			XtextProblemMarkerCreator markerCreator = new XtextProblemMarkerCreator(resource);
 			markerCreator.setProgressMonitor(new NullProgressMonitor());
 			getModel().addModelListener(markerCreator);
-			getModel().addModelListener(new TaskTagsMarkerListener(site.getPluginId(),getResource(),new NullProgressMonitor()));
+			getModel().addModelListener(
+					new TaskTagsMarkerListener(site.getPluginId(), getResource(), new NullProgressMonitor()));
 		}
 	}
 
@@ -385,7 +384,7 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		
+
 		super.createPartControl(parent);
 		// We need ProjectionViewer to support Folding
 		ProjectionViewer projectionViewer = (ProjectionViewer) getSourceViewer();

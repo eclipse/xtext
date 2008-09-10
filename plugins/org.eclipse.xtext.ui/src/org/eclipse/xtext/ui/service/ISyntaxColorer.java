@@ -25,4 +25,6 @@ public interface ISyntaxColorer extends ILanguageService {
 	 */
 	TextStyle color(LeafNode leafNode);
 
+	void clearCache();
+
 }

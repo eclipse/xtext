@@ -91,62 +91,6 @@
       </valueConverter>
    </extension>
    <extension
-         point="org.eclipse.xtext.ui.syntaxColorer">
-      <syntaxColorer
-            class="org.eclipse.xtext.ui.service.impl.BuiltInSyntaxColorer"
-            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
-      </syntaxColorer>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.ui.tokenTypeDef">
-      <tokenTypeDef
-            class="org.eclipse.xtext.ui.service.impl.BuiltInTokenTypeDef"
-            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
-      </tokenTypeDef>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.ui.outlineProvider">
-      <outlineProvider
-            class="org.eclipse.xtext.ui.service.impl.BuiltInOutlineProvider"
-            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
-      </outlineProvider>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.ui.labelProvider">
-      <labelProvider
-            class="org.eclipse.xtext.ui.service.impl.BuiltInLabelProvider"
-            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
-      </labelProvider>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.ui.proposalsProvider">
-      <proposalsProvider
-            class="org.eclipse.xtext.ui.service.impl.BuiltInProposalsProvider"
-            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
-      </proposalsProvider>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.ui.formatter">
-      <formatter
-            class="org.eclipse.xtext.ui.service.impl.BuiltInFormatter"
-            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
-      </formatter>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.ui.hoverInfo">
-      <hoverInfo
-            class="org.eclipse.xtext.ui.service.impl.BuiltInHoverInfo"
-            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
-      </hoverInfo>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.ui.foldingStructureProvider">
-      <foldingStructureProvider
-            class="org.eclipse.xtext.ui.service.impl.BuiltInFoldingStructureProvider"
-            languageId="org.eclipse.xtext.builtin.XtextBuiltin">
-      </foldingStructureProvider>
-   </extension>
-   <extension
          point="org.eclipse.xtext.ui.quickFixGenerator">
       <quickFixGenerator
             class="org.eclipse.xtext.ui.editor.quickfix.DummyBuiltInQuickFixGenerator"
