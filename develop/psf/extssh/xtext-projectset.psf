@@ -27,6 +27,7 @@
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.tests,org.eclipse.xtext.tests"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.tests.feature,org.eclipse.xtext.tests.feature"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui,org.eclipse.xtext.ui"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.common.ui,org.eclipse.xtext.common.ui"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.util,org.eclipse.xtext.util"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtext.ui,org.eclipse.xtext.xtext.ui"/>
 <project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtext.ui_gen,org.eclipse.xtext.xtext.ui_gen"/>
@@ -72,6 +73,7 @@
 <item elementID="=org.eclipse.xtext.xtext.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.easymock" type="4"/>
 <item elementID="=org.eclipse.xtext.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.common.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.ui.tests" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.graphviewer.ui" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.pdelogger" type="4"/>
