@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtext UI
 Bundle-SymbolicName: org.eclipse.xtext.ui;singleton:=true
 Bundle-Version: 1.0.0
-Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
+Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15";visibility:=reexport,
  org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="3.4.0";visibility:=reexport,
  org.eclipse.ui;bundle-version="3.4.0";visibility:=reexport,
@@ -28,7 +28,6 @@ Export-Package: org.eclipse.xtext.ui.editor,
  org.eclipse.xtext.ui.editor.utils,
  org.eclipse.xtext.ui.internal,
  org.eclipse.xtext.ui.service,
- org.eclipse.xtext.ui.service.impl,
  org.eclipse.xtext.ui.service.utils,
  org.eclipse.xtext.ui.tokentype,
  org.eclipse.xtext.ui.util
