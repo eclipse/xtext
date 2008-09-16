@@ -172,6 +172,13 @@ public class ModelIndex implements IModelIndex, IResourceChangeListener {
 		indexDatabase.clearAll();
 	}
 	
+	
+    public void reIndex() throws Exception {
+    	indexDatabase.clearAll();
+    	ecoreRegistryIndexer.indexRegisteredEPackages();
+    	workspaceModelIndexer.indexWorkspace();
+    }
+    
 	public void close() throws Exception {
 		stopListening();
 		indexDatabase.shutdown();

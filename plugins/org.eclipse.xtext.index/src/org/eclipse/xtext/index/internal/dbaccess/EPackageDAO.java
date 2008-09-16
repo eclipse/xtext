@@ -24,9 +24,12 @@ public class EPackageDAO {
 	private PreparedStatement selectIDByEPackage;
 	private PreparedStatement deleteEPackageByID;
 
+	private PreparedStatement insertEntry;
+
 	public EPackageDAO(IndexDatabase indexDatabase){
 		try {
 			this.indexDatabase = indexDatabase;
+			insertEntry = indexDatabase.prepareStatements("INSERT INTO EPackage(id,nsURI) values(?,?)");
 			selectIDByEPackage = indexDatabase.prepareStatements("SELECT id FROM EPackage WHERE nsURI=?");
 			deleteEPackageByID = indexDatabase.prepareStatements("DELETE FROM EPackage WHERE id=?");
 		}
@@ -41,10 +44,15 @@ public class EPackageDAO {
 	}
 	
 	public int create(EPackage ePackage) throws SQLException {
-		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO EPackage(nsURI) values('");
-		insertStatementBuffer.append(ePackage.getNsURI());
-		insertStatementBuffer.append("')");
-		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
+		int id = indexDatabase.nextUniqueID();
+		insertEntry.setInt(1, id);
+		insertEntry.setString(2, ePackage.getNsURI());
+		insertEntry.executeUpdate();
+		return id;
+//		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO EPackage(nsURI) values('");
+//		insertStatementBuffer.append(ePackage.getNsURI());
+//		insertStatementBuffer.append("')");
+//		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
 	}
 	
 	public void delete(int ePackageID) throws SQLException {

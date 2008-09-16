@@ -24,6 +24,7 @@ public class EClassDAO {
 
 	private IndexDatabase indexDatabase;
 
+	private PreparedStatement insertEntry;
 	private PreparedStatement selectIDByEClass;
 	private PreparedStatement selectEClassesByEPackage;
 	private PreparedStatement deleteEClassByID;
@@ -32,6 +33,7 @@ public class EClassDAO {
 	public EClassDAO(IndexDatabase indexDatabase) {
 		try {
 			this.indexDatabase = indexDatabase;
+			insertEntry = indexDatabase.prepareStatements("INSERT INTO EClass(id, name, ePackage) values(?,?,?)");
 			selectIDByEClass = indexDatabase.prepareStatements("SELECT EClass.id FROM EClass, EPackage "
 					+ "WHERE EClass.name=? AND EPackage.nsUri=?");
 			selectEClassesByEPackage = indexDatabase.prepareStatements("SELECT name FROM EClass WHERE ePackage=?");
@@ -50,12 +52,20 @@ public class EClassDAO {
 	}
 
 	public int create(EClass eClass, int ePackageID) throws SQLException {
-		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO EClass(name, ePackage) values('");
-		insertStatementBuffer.append(eClass.getName());
-		insertStatementBuffer.append("',");
-		insertStatementBuffer.append(ePackageID);
-		insertStatementBuffer.append(")");
-		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
+		int id = indexDatabase.nextUniqueID();
+		insertEntry.setInt(1, id);
+		insertEntry.setString(2, eClass.getName());
+		insertEntry.setInt(3, ePackageID);
+		insertEntry.executeUpdate();
+		return id;
+		// StringBuffer insertStatementBuffer = new
+		// StringBuffer("INSERT INTO EClass(name, ePackage) values('");
+		// insertStatementBuffer.append(eClass.getName());
+		// insertStatementBuffer.append("',");
+		// insertStatementBuffer.append(ePackageID);
+		// insertStatementBuffer.append(")");
+		// return
+		// indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
 	}
 
 	public List<String> findAllEClassNames(int ePackageID) throws SQLException {

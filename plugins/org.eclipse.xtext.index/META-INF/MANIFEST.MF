@@ -20,3 +20,5 @@ Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xtext.index,
  org.eclipse.xtext.index.internal;x-friends:="org.eclipse.xtext.index.tests",
  org.eclipse.xtext.index.internal.dbaccess;x-friends:="org.eclipse.xtext.index.tests"
+Bundle-ClassPath: lib/hsqldb.jar,
+ .
