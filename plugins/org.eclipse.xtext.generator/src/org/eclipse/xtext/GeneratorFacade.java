@@ -23,7 +23,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
+import org.eclipse.emf.mwe.core.issues.IssuesImpl;
+import org.eclipse.xpand2.XpandExecutionContextImpl;
+import org.eclipse.xpand2.XpandFacade;
+import org.eclipse.xpand2.output.Outlet;
+import org.eclipse.xpand2.output.OutputImpl;
+import org.eclipse.xtend.check.CheckFacade;
+import org.eclipse.xtend.expression.ExecutionContextImpl;
+import org.eclipse.xtend.expression.Variable;
+import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.SyntaxError;
@@ -33,15 +41,6 @@ import org.eclipse.xtext.xtextgen.GenService;
 import org.eclipse.xtext.xtextgen.XtextgenFactory;
 import org.eclipse.xtext.xtextgen.XtextgenPackage;
 import org.eclipse.xtext.xtextutil.XtextutilPackage;
-import org.openarchitectureware.check.CheckFacade;
-import org.openarchitectureware.expression.ExecutionContextImpl;
-import org.openarchitectureware.expression.Variable;
-import org.openarchitectureware.workflow.issues.Issue;
-import org.openarchitectureware.workflow.issues.IssuesImpl;
-import org.openarchitectureware.xpand2.XpandExecutionContextImpl;
-import org.openarchitectureware.xpand2.XpandFacade;
-import org.openarchitectureware.xpand2.output.Outlet;
-import org.openarchitectureware.xpand2.output.OutputImpl;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

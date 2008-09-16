@@ -11,7 +11,6 @@ package org.eclipse.xtext.parsetree;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
@@ -34,287 +33,292 @@ import org.eclipse.xtext.RuleCall;
  */
 public final class ParseTreeUtil {
 
-    /**
-     * 
-     * @param abstractNode
-     *            the node to inspect
-     * @param grammarElementClass
-     *            to match
-     * @return a set of abstractNode associated with a grammarelement class
-     *         matching the given class
-     */
-    public static Set<AbstractNode> getNodesByGrammarElement(AbstractNode abstractNode, Class<?> grammarElementClass) {
+	/**
+	 * 
+	 * @param abstractNode
+	 *            the node to inspect
+	 * @param grammarElementClass
+	 *            to match
+	 * @return a set of abstractNode associated with a grammarelement class
+	 *         matching the given class
+	 */
+	public static Set<AbstractNode> getNodesByGrammarElement(AbstractNode abstractNode, Class<?> grammarElementClass) {
 
-        assertParameterNotNull(abstractNode, "abstractNode");
-        assertParameterNotNull(grammarElementClass, "grammarElementClass");
+		assertParameterNotNull(abstractNode, "abstractNode");
+		assertParameterNotNull(grammarElementClass, "grammarElementClass");
 
-        Set<AbstractNode> abstractNodeSet = new LinkedHashSet<AbstractNode>();
+		Set<AbstractNode> abstractNodeSet = new LinkedHashSet<AbstractNode>();
 
-        if (abstractNode.getGrammarElement() != null
-                && grammarElementClass.isAssignableFrom(abstractNode.getGrammarElement().getClass())) {
-            abstractNodeSet.add(abstractNode);
-        }
+		if (abstractNode.getGrammarElement() != null
+				&& grammarElementClass.isAssignableFrom(abstractNode.getGrammarElement().getClass())) {
+			abstractNodeSet.add(abstractNode);
+		}
 
-        for (AbstractNode leafNode : abstractNode.getLeafNodes()) {
-            abstractNodeSet.addAll(getNodesByGrammarElement(leafNode, grammarElementClass));
-        }
+		for (AbstractNode leafNode : abstractNode.getLeafNodes()) {
+			abstractNodeSet.addAll(getNodesByGrammarElement(leafNode, grammarElementClass));
+		}
 
-        return abstractNodeSet;
-    }
+		return abstractNodeSet;
+	}
 
-    /**
-     * Dump the composite structure (parsetree) of the given node.
-     * 
-     * @param abstractNode
-     *            the node to dump
-     */
-    public static final void dumpNode(AbstractNode abstractNode) {
-        assertParameterNotNull(abstractNode, "abstractNode");
-        System.out.println("dump parsetree with root node '" + EcoreUtil.getIdentification(abstractNode) + "'");
-        doDumpNode(abstractNode, "\t");
-    }
-    
-    /**
-     * @param contextNode
-     *            the node representing the 'scope' of the current lookup
-     * @param offsetPosition
-     *            the text position within the the current sentence
-     * @return the last 'complete' (an associated grammar element is available) node element contained within the given contextNode at
-     *         the provided position
-     */
-    public static final AbstractNode getLastCompleteNodeByOffset(AbstractNode contextNode, int offsetPosition) {
+	/**
+	 * Dump the composite structure (parsetree) of the given node.
+	 * 
+	 * @param abstractNode
+	 *            the node to dump
+	 */
+	public static final void dumpNode(AbstractNode abstractNode) {
+		assertParameterNotNull(abstractNode, "abstractNode");
+		System.out.println("dump parsetree with root node '" + EcoreUtil.getIdentification(abstractNode) + "'");
+		doDumpNode(abstractNode, "\t");
+	}
 
-        assertParameterNotNull(contextNode, "contextNode");
+	/**
+	 * @param contextNode
+	 *            the node representing the 'scope' of the current lookup
+	 * @param offsetPosition
+	 *            the text position within the the current sentence
+	 * @return the last 'complete' (an associated grammar element is available)
+	 *         node element contained within the given contextNode at the
+	 *         provided position
+	 */
+	public static final AbstractNode getLastCompleteNodeByOffset(AbstractNode contextNode, int offsetPosition) {
 
-        AbstractNode abstractNode = null;
+		assertParameterNotNull(contextNode, "contextNode");
 
-        if (contextNode.getOffset() < offsetPosition || 
-        		(0==offsetPosition && offsetPosition==contextNode.getOffset())) {
+		AbstractNode abstractNode = null;
 
-            if (contextNode.getGrammarElement() instanceof AbstractElement
-                    || contextNode.getGrammarElement() instanceof ParserRule) {
+		if (contextNode.getOffset() < offsetPosition
+				|| (0 == offsetPosition && offsetPosition == contextNode.getOffset())) {
 
-                abstractNode = contextNode;
-            }
-            for (AbstractNode childNode : contextNode.getLeafNodes()) {
+			if (contextNode.getGrammarElement() instanceof AbstractElement
+					|| contextNode.getGrammarElement() instanceof ParserRule) {
 
-                AbstractNode lastElementByOffset = getLastCompleteNodeByOffset(childNode, offsetPosition);
+				abstractNode = contextNode;
+			}
+			for (AbstractNode childNode : contextNode.getLeafNodes()) {
 
-                if (lastElementByOffset != null) {
-                    abstractNode = lastElementByOffset;
-                }
-            }
-        }
+				AbstractNode lastElementByOffset = getLastCompleteNodeByOffset(childNode, offsetPosition);
 
-        return abstractNode;
-    }
-    
-    /**
-     * 
-     * @param contextNode
-     *            the node representing the 'scope' of the current lookup
-     * @param offsetPosition
-     *            the text position within the the current sentence
-    
-     * @return the last node element at the provided position
-     */
-    public static final LeafNode getCurrentNodeByOffset(AbstractNode contextNode, int offsetPosition) {
+				if (lastElementByOffset != null) {
+					abstractNode = lastElementByOffset;
+				}
+			}
+		}
 
-        assertParameterNotNull(contextNode, "contextNode");
+		return abstractNode;
+	}
 
-        LeafNode leafNode = null;
+	/**
+	 * 
+	 * @param contextNode
+	 *            the node representing the 'scope' of the current lookup
+	 * @param offsetPosition
+	 *            the text position within the the current sentence
+	 * 
+	 * @return the last node element at the provided position
+	 */
+	public static final LeafNode getCurrentNodeByOffset(AbstractNode contextNode, int offsetPosition) {
 
-        for (AbstractNode childNode : contextNode.getLeafNodes()) {
+		assertParameterNotNull(contextNode, "contextNode");
 
-            if (childNode.getOffset() + childNode.getLength() <= offsetPosition) {
-                leafNode = (LeafNode) childNode;
-            }
-        }
+		LeafNode leafNode = null;
 
-        return leafNode;
-    }
+		for (AbstractNode childNode : contextNode.getLeafNodes()) {
 
-    /**
-     * 
-     * This method returns the parent grammar of the given eObject by recursive
-     * 'upwards' invocations, passing the eContainer property as parameter until
-     * some Grammar level object is reached.
-     * 
-     * @param eObject
-     *            an object contained or referenced within some 'root' grammar
-     * @return the {@link org.eclipse.xtext.Grammar} of the given object.
-     */
-    public static final Grammar getGrammar(EObject eObject) {
-        assertParameterNotNull(eObject, "eObject");
+			if (childNode.getOffset() + childNode.getLength() <= offsetPosition) {
+				leafNode = (LeafNode) childNode;
+			}
+		}
 
-        if (eObject instanceof Grammar) {
-            return (Grammar) eObject;
-        }
-        else {
-            return getGrammar(eObject.eContainer());
-        }
+		return leafNode;
+	}
 
-    }
-//
-//    /**
-//     * 
-//     * Returns a list of all assignment to the given rule.
-//     * 
-//     * @param parserRule
-//     *            the rule of the assignments (ruleCall) to match
-//     * @return a list containing all {@see org.eclipse.xtext.Assignment} to the
-//     *         given rule.
-//     */
-//    public static final List<AbstractElement> getParserRuleAssignments(ParserRule parserRule) {
-//        assertParameterNotNull(parserRule, "parserRule");
-//        List<AbstractElement> list = new ArrayList<AbstractElement>();
-//        Grammar grammar = (Grammar) parserRule.eContainer();
-//        // filter and search
-//        for (ParserRule rule : GrammarUtil.allParserRules(grammar)) {
-//            // excluded?
-//            if (!parserRule.equals(rule)) {
-//                Assignment ruleAssignment = getParserRuleAssignment(rule.getAlternatives(), parserRule);
-//                if (ruleAssignment != null) {
-//                    list.add(ruleAssignment);
-//                }
-//            }
-//        }
-//        return list;
-//    }
+	/**
+	 * 
+	 * This method returns the parent grammar of the given eObject by recursive
+	 * 'upwards' invocations, passing the eContainer property as parameter until
+	 * some Grammar level object is reached.
+	 * 
+	 * @param eObject
+	 *            an object contained or referenced within some 'root' grammar
+	 * @return the {@link org.eclipse.xtext.Grammar} of the given object.
+	 */
+	public static final Grammar getGrammar(EObject eObject) {
+		assertParameterNotNull(eObject, "eObject");
 
-    /**
-     * asserts if the given parameter object isnt null
-     * 
-     * @param parameter
-     *            reference to assert
-     * @param parameterName
-     *            the name of the parameter
-     */
-    public static final void assertParameterNotNull(Object parameter, String parameterName) {
-        Assert.isLegal(parameter != null, "parameter '" + parameterName + "' must not be null.");
-    }
+		if (eObject instanceof Grammar) {
+			return (Grammar) eObject;
+		} else {
+			return getGrammar(eObject.eContainer());
+		}
 
-    /**
-     * 
-     * @param abstractNode
-     *            the node of the asociated grammar element
-     * 
-     * @return the grammar element of the given node or null if its neither a
-     *         abstractElement or a parserRule
-     */
-    public static final AbstractElement getGrammarElementFromNode(AbstractNode abstractNode) {
+	}
 
-        assertParameterNotNull(abstractNode, "abstractNode");
+	//
+	// /**
+	// *
+	// * Returns a list of all assignment to the given rule.
+	// *
+	// * @param parserRule
+	// * the rule of the assignments (ruleCall) to match
+	// * @return a list containing all {@see org.eclipse.xtext.Assignment} to
+	// the
+	// * given rule.
+	// */
+	// public static final List<AbstractElement>
+	// getParserRuleAssignments(ParserRule parserRule) {
+	// assertParameterNotNull(parserRule, "parserRule");
+	// List<AbstractElement> list = new ArrayList<AbstractElement>();
+	// Grammar grammar = (Grammar) parserRule.eContainer();
+	// // filter and search
+	// for (ParserRule rule : GrammarUtil.allParserRules(grammar)) {
+	// // excluded?
+	// if (!parserRule.equals(rule)) {
+	// Assignment ruleAssignment =
+	// getParserRuleAssignment(rule.getAlternatives(), parserRule);
+	// if (ruleAssignment != null) {
+	// list.add(ruleAssignment);
+	// }
+	// }
+	// }
+	// return list;
+	// }
 
-        AbstractElement abstractElement = null;
+	/**
+	 * asserts if the given parameter object isnt null
+	 * 
+	 * @param parameter
+	 *            reference to assert
+	 * @param parameterName
+	 *            the name of the parameter
+	 */
+	public static final void assertParameterNotNull(Object parameter, String parameterName) {
+		if (parameter == null)
+			throw new IllegalArgumentException("parameter '" + parameterName + "' must not be null.");
+	}
 
-        if (abstractNode.getGrammarElement() instanceof AbstractElement) {
-            abstractElement = (AbstractElement) abstractNode.getGrammarElement();
-        }
-        else if (abstractNode.getGrammarElement() instanceof ParserRule) {
-            abstractElement = ((ParserRule) abstractNode.getGrammarElement()).getAlternatives();
+	/**
+	 * 
+	 * @param abstractNode
+	 *            the node of the asociated grammar element
+	 * 
+	 * @return the grammar element of the given node or null if its neither a
+	 *         abstractElement or a parserRule
+	 */
+	public static final AbstractElement getGrammarElementFromNode(AbstractNode abstractNode) {
 
-        }
-        return abstractElement;
-    }
+		assertParameterNotNull(abstractNode, "abstractNode");
 
-//    /**
-//     * 
-//     * @param contextElement
-//     *            element searched for assignments to the given rule
-//     * @param parserRule
-//     *            the rule of the assignments to search for
-//     * @return an assignment object containing a rulecall to the given
-//     *         parserRule or null if not found.
-//     */
-//    private static final Assignment getParserRuleAssignment(AbstractElement contextElement, ParserRule parserRule) {
-//
-//        assertParameterNotNull(contextElement, "contextElement");
-//        assertParameterNotNull(parserRule, "parserRule");
-//
-//        Assignment assignment = null;
-//        if (contextElement instanceof Group) {
-//            Group group = (Group) contextElement;
-//            for (AbstractElement groupElement : group.getAbstractTokens()) {
-//                assignment = getParserRuleAssignment(groupElement, parserRule);
-//                if (null != assignment) {
-//                    break;
-//                }
-//            }
-//        }
-//        else if (contextElement instanceof Alternatives) {
-//            Alternatives alternatives = (Alternatives) contextElement;
-//            for (AbstractElement groupElement : alternatives.getGroups()) {
-//                assignment = getParserRuleAssignment(groupElement, parserRule);
-//                if (null != assignment) {
-//                    break;
-//                }
-//            }
-//        }
-//        else if (contextElement instanceof Assignment) {
-//            Assignment assignmentToMatch = (Assignment) contextElement;
-//            if (assignmentToMatch.getTerminal() instanceof RuleCall
-//                    && ((RuleCall) assignmentToMatch.getTerminal()).getName().equalsIgnoreCase(parserRule.getName())) {
-//                assignment = assignmentToMatch;
-//            }
-//        }
-//        return assignment;
-//    }
+		AbstractElement abstractElement = null;
 
-    /**
-     * @param abstractNode
-     * @param indentString
-     */
-    private static final void doDumpNode(AbstractNode abstractNode, String indentString) {
+		if (abstractNode.getGrammarElement() instanceof AbstractElement) {
+			abstractElement = (AbstractElement) abstractNode.getGrammarElement();
+		} else if (abstractNode.getGrammarElement() instanceof ParserRule) {
+			abstractElement = ((ParserRule) abstractNode.getGrammarElement()).getAlternatives();
 
-        if (abstractNode instanceof CompositeNode) {
+		}
+		return abstractElement;
+	}
 
-            // CompositeNode compositeNode = (CompositeNode) abstractNode;
+	// /**
+	// *
+	// * @param contextElement
+	// * element searched for assignments to the given rule
+	// * @param parserRule
+	// * the rule of the assignments to search for
+	// * @return an assignment object containing a rulecall to the given
+	// * parserRule or null if not found.
+	// */
+	// private static final Assignment getParserRuleAssignment(AbstractElement
+	// contextElement, ParserRule parserRule) {
+	//
+	// assertParameterNotNull(contextElement, "contextElement");
+	// assertParameterNotNull(parserRule, "parserRule");
+	//
+	// Assignment assignment = null;
+	// if (contextElement instanceof Group) {
+	// Group group = (Group) contextElement;
+	// for (AbstractElement groupElement : group.getAbstractTokens()) {
+	// assignment = getParserRuleAssignment(groupElement, parserRule);
+	// if (null != assignment) {
+	// break;
+	// }
+	// }
+	// }
+	// else if (contextElement instanceof Alternatives) {
+	// Alternatives alternatives = (Alternatives) contextElement;
+	// for (AbstractElement groupElement : alternatives.getGroups()) {
+	// assignment = getParserRuleAssignment(groupElement, parserRule);
+	// if (null != assignment) {
+	// break;
+	// }
+	// }
+	// }
+	// else if (contextElement instanceof Assignment) {
+	// Assignment assignmentToMatch = (Assignment) contextElement;
+	// if (assignmentToMatch.getTerminal() instanceof RuleCall
+	// && ((RuleCall)
+	// assignmentToMatch.getTerminal()).getName().equalsIgnoreCase
+	// (parserRule.getName())) {
+	// assignment = assignmentToMatch;
+	// }
+	// }
+	// return assignment;
+	// }
 
-            System.out.println(indentString + "line '" + abstractNode.getLine() + "' offset '" + abstractNode.getOffset()
-                    + "'  length '" + abstractNode.getLength() + "' grammar-hierarchy  ("
-                    + dumpParentHierarchy(abstractNode) + ")");
+	/**
+	 * @param abstractNode
+	 * @param indentString
+	 */
+	private static final void doDumpNode(AbstractNode abstractNode, String indentString) {
 
-        }
-        else if (abstractNode instanceof LeafNode) {
+		if (abstractNode instanceof CompositeNode) {
 
-            LeafNode leafNode = (LeafNode) abstractNode;
-            // ommit hidden channel
-            if (!leafNode.isHidden()) {
+			// CompositeNode compositeNode = (CompositeNode) abstractNode;
 
-                System.out.println(indentString + "'" + "line '" + leafNode.getLine() + "' offset '" + leafNode.getOffset()
-                        + " length '" + leafNode.getLength() + "' "
-                        + (leafNode.getFeature() != null ? leafNode.getFeature() + " = " : "") + " text '"
-                        + leafNode.getText() + "' grammar-hierarchy (" + dumpParentHierarchy(leafNode) + ")");
+			System.out.println(indentString + "line '" + abstractNode.getLine() + "' offset '"
+					+ abstractNode.getOffset() + "'  length '" + abstractNode.getLength() + "' grammar-hierarchy  ("
+					+ dumpParentHierarchy(abstractNode) + ")");
 
-            }
+		} else if (abstractNode instanceof LeafNode) {
 
-        }
+			LeafNode leafNode = (LeafNode) abstractNode;
+			// ommit hidden channel
+			if (!leafNode.isHidden()) {
 
-        for (AbstractNode childNode : abstractNode.getLeafNodes()) {
-            doDumpNode(childNode, indentString + indentString);
-        }
+				System.out.println(indentString + "'" + "line '" + leafNode.getLine() + "' offset '"
+						+ leafNode.getOffset() + " length '" + leafNode.getLength() + "' "
+						+ (leafNode.getFeature() != null ? leafNode.getFeature() + " = " : "") + " text '"
+						+ leafNode.getText() + "' grammar-hierarchy (" + dumpParentHierarchy(leafNode) + ")");
 
-    }
+			}
 
-    private static final String dumpParentHierarchy(AbstractNode abstractNode) {
+		}
 
-        StringBuilder stringBuilder = new StringBuilder();
-        while (null != abstractNode) {
-            stringBuilder.append(abstractNode.getGrammarElement().getClass().getSimpleName());
-            if (abstractNode.getGrammarElement() instanceof ParserRule) {
-                stringBuilder.append("[" + ((ParserRule) abstractNode.getGrammarElement()).getName() + "]");
-            }
-            else if (abstractNode.getGrammarElement() instanceof RuleCall) {
-                stringBuilder.append("[" + ((RuleCall) abstractNode.getGrammarElement()).getName() + "]");
+		for (AbstractNode childNode : abstractNode.getLeafNodes()) {
+			doDumpNode(childNode, indentString + indentString);
+		}
 
-            }
-            abstractNode = abstractNode.getParent();
-            if (null != abstractNode) {
-                stringBuilder.append("->");
-            }
-        }
-        return stringBuilder.toString();
-    }
+	}
+
+	private static final String dumpParentHierarchy(AbstractNode abstractNode) {
+
+		StringBuilder stringBuilder = new StringBuilder();
+		while (null != abstractNode) {
+			stringBuilder.append(abstractNode.getGrammarElement().getClass().getSimpleName());
+			if (abstractNode.getGrammarElement() instanceof ParserRule) {
+				stringBuilder.append("[" + ((ParserRule) abstractNode.getGrammarElement()).getName() + "]");
+			} else if (abstractNode.getGrammarElement() instanceof RuleCall) {
+				stringBuilder.append("[" + ((RuleCall) abstractNode.getGrammarElement()).getName() + "]");
+
+			}
+			abstractNode = abstractNode.getParent();
+			if (null != abstractNode) {
+				stringBuilder.append("->");
+			}
+		}
+		return stringBuilder.toString();
+	}
 
 }

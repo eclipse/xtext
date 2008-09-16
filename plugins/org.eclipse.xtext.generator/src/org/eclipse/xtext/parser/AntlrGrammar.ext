@@ -10,7 +10,7 @@ import xtext;
 
 extension org::eclipse::xtext::Properties reexport;
 extension org::eclipse::xtext::Extensions reexport;
-extension org::openarchitectureware::util::stdlib::io;
+extension org::eclipse::xtend::util::stdlib::io;
 
 ruleName(ParserRule this) : 'rule'+name;
 ruleName(LexerRule this) : 'RULE_'+name.toUpperCase();

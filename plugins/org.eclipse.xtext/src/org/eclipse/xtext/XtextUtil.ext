@@ -10,7 +10,7 @@ import ecore;
 import xtext;
 import xtextutil; 
 
-extension org::openarchitectureware::util::stdlib::io; 
+extension org::eclipse::xtend::util::stdlib::io;
 extension org::eclipse::xtext::Extensions;
 
 cached List[MetaModel] getAllMetaModels(Grammar this) :

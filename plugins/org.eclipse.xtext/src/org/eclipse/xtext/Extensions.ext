@@ -12,7 +12,6 @@
 import ecore;
 import xtext;
 
-extension org::openarchitectureware::util::stdlib::io; 
 extension org::eclipse::xtext::GrammarUtil reexport;
 
 // ***********************************************************************************
