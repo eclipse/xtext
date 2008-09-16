@@ -19,7 +19,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
+import org.eclipse.xtend.XtendFacade;
+import org.eclipse.xtend.expression.ExecutionContextImpl;
+import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.GenerateAllTestGrammars;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -33,8 +35,6 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.util.StringInputStream;
-import org.openarchitectureware.expression.ExecutionContextImpl;
-import org.openarchitectureware.xtend.XtendFacade;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

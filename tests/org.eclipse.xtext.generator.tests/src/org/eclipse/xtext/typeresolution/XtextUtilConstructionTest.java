@@ -2,14 +2,14 @@ package org.eclipse.xtext.typeresolution;
 
 import java.util.List;
 
-import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
+import org.eclipse.xtend.XtendFacade;
+import org.eclipse.xtend.expression.ExecutionContextImpl;
+import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.xtextutil.MetaModel;
 import org.eclipse.xtext.xtextutil.XtextutilPackage;
-import org.openarchitectureware.expression.ExecutionContextImpl;
-import org.openarchitectureware.xtend.XtendFacade;
 
 public class XtextUtilConstructionTest extends AbstractGeneratorTest {
 
