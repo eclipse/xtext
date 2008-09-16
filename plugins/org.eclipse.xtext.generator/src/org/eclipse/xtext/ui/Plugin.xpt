@@ -156,8 +156,9 @@
             description="«languageName()» minimal file"
             id="«languageId()».template.minimalFile"
             name="file">
-         <pattern>the text which will be inserted here should be derived from the grammar
-         </pattern>
+         <pattern><![CDATA[
+         	«defaultGrammarTemplate()»
+         ]]></pattern>
       </template>
    </extension>
    <extension
