@@ -7,22 +7,22 @@
             id="org.eclipse.xtext.index.actionSet"
             label="Sample Action Set"
             visible="true">
-         <menu
-               id="sampleMenu"
-               label="Sample &amp;Menu">
-            <separator
-                  name="sampleGroup">
-            </separator>
-         </menu>
          <action
                class="org.eclipse.xtext.index.actions.QueryEClassAction"
                icon="icons/sample.gif"
                id="org.eclipse.xtext.index.actions.QueryEClassAction"
                label="&amp;Sample Action"
-               menubarPath="sampleMenu/sampleGroup"
-               toolbarPath="sampleGroup"
+               menubarPath="xtextMenu/xtextGroup"
+               toolbarPath="xtextGroup"
                tooltip="Hello, Eclipse world">
          </action>
+         <menu
+               id="xtextMenu"
+               label="&amp;Xtext">
+            <separator
+                  name="xtextGroup">
+            </separator>
+         </menu>
       </actionSet>
    </extension>
 </plugin>

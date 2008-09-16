@@ -26,16 +26,17 @@ public class ResourceDAO {
 
 	private IndexDatabase indexDatabase;
 
+	private PreparedStatement insertEntry;
 	private PreparedStatement selectIDByResource;
 	private PreparedStatement selectIDByPath;
 	private PreparedStatement selectAllResourceURIs;
-	private PreparedStatement deleteResourceByID;
-
 	private PreparedStatement selectResourceURIsByContainer;
+	private PreparedStatement deleteResourceByID;
 
 	public ResourceDAO(IndexDatabase indexDatabase) {
 		try {
 			this.indexDatabase = indexDatabase;
+			insertEntry = indexDatabase.prepareStatements("INSERT INTO Resource(id, path, container) VALUES(?,?,?)");
 			selectIDByResource = indexDatabase
 					.prepareStatements("SELECT Resource.id FROM Resource LEFT JOIN Container ON Container.id=Resource.container WHERE Resource.path=? AND Container.uri=?");
 			selectIDByPath = indexDatabase
@@ -88,12 +89,18 @@ public class ResourceDAO {
 	}
 
 	public int create(String path, int containerID) throws SQLException {
-		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO Resource(path, container) VALUES('");
-		insertStatementBuffer.append(URIUtil.trimLeadingSlash(path));
-		insertStatementBuffer.append("',");
-		insertStatementBuffer.append(containerID);
-		insertStatementBuffer.append(")");
-		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
+		int id = indexDatabase.nextUniqueID();
+		insertEntry.setInt(1, id);
+		insertEntry.setString(2, URIUtil.trimLeadingSlash(path));
+		insertEntry.setInt(3, containerID);
+		insertEntry.executeUpdate();
+		return id;
+//		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO Resource(path, container) VALUES('");
+//		insertStatementBuffer.append(URIUtil.trimLeadingSlash(path));
+//		insertStatementBuffer.append("',");
+//		insertStatementBuffer.append(containerID);
+//		insertStatementBuffer.append(")");
+//		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
 	}
 
 	public List<URI> findAllResources() throws SQLException {

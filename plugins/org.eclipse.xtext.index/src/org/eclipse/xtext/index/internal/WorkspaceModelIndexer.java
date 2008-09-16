@@ -71,26 +71,10 @@ public class WorkspaceModelIndexer {
 		for (IProject project : projects) {
 			indexProject(project, containerIDsFromDB);
 		}
-		try {
-			List<URI> allResourceURIs = indexDatabase.getResourceDAO().findAllResources();
-			for (URI resourceUri : allResourceURIs) {
-				Resource resource = resourceSet.getResource(resourceUri, true);
-				indexCrossRefs(resource);
-				resource.unload();
-			}
-		}
-		catch (SQLException exc) {
-			log.error("Error indexing cross-references", exc);
-		}
 		if (containerIDsFromDB != null) {
 			deleteStaleResourceContainers(containerIDsFromDB);
 		}
-		try {
-			indexDatabase.commitOrRollback();
-		}
-		catch (SQLException exc) {
-			log.error("Error commiting changes to model index", exc);
-		}
+		commitOrLogError();
 	}
 
 	public void indexProject(IProject project, List<Integer> containerIDsFromDB) {
@@ -101,6 +85,7 @@ public class WorkspaceModelIndexer {
 			else {
 				indexPlainProject(project, containerIDsFromDB);
 			}
+			indexDatabase.commitOrRollback();
 		}
 		catch (Exception e) {
 			log.error("Error indexing project " + project.getName());
@@ -131,6 +116,7 @@ public class WorkspaceModelIndexer {
 			URI resourceURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 			Resource resource = resourceSet.getResource(resourceURI, true);
 			indexResource(resourceID, resource, isAlreadyIndexed, resourceContainerID);
+			indexDatabase.commitOrRollback();
 			return resourceURI;
 		}
 		catch (Exception e) {
@@ -143,6 +129,7 @@ public class WorkspaceModelIndexer {
 		try {
 			int resourceContainerID = getResourceContainerID(project);
 			indexDatabase.getResourceContainerDAO().delete(resourceContainerID);
+			indexDatabase.commitOrRollback();
 		}
 		catch (SQLException e) {
 			log.error(e);
@@ -156,6 +143,7 @@ public class WorkspaceModelIndexer {
 			String jarFileURI = "jar:file:" + jarFile.getAbsolutePath() + "!";
 			int resourceContainerID = indexDatabase.getResourceContainerDAO().create(jarFileURI);
 			indexDatabase.getResourceContainerDAO().delete(resourceContainerID);
+			indexDatabase.commitOrRollback();
 		}
 		catch (SQLException e) {
 			log.error(e);
@@ -165,6 +153,7 @@ public class WorkspaceModelIndexer {
 	public void removeModelFile(IFile modelFile) {
 		try {
 			removeModelFile(modelFile, getResourceContainerID(modelFile.getProject()));
+			indexDatabase.commitOrRollback();
 		}
 		catch (Exception e) {
 			log.error(e);
@@ -176,9 +165,19 @@ public class WorkspaceModelIndexer {
 			int resourceID = indexDatabase.getResourceDAO().getID(modelFile.getProjectRelativePath().toString(),
 					resourceContainerID);
 			indexDatabase.getResourceDAO().delete(resourceID);
+			indexDatabase.commitOrRollback();
 		}
 		catch (Exception e) {
 			log.error(e);
+		}
+	}
+
+	private void commitOrLogError() {
+		try {
+			indexDatabase.commitOrRollback();
+		}
+		catch (SQLException exc) {
+			log.error("Error commiting changes to model index", exc);
 		}
 	}
 
@@ -262,7 +261,7 @@ public class WorkspaceModelIndexer {
 			String[] requiredProjectNames = project.getRequiredProjectNames();
 			for (String requiredProjectName : requiredProjectNames) {
 				URI requiredProjectURI = URI.createPlatformResourceURI(requiredProjectName, true);
-				if(!containerReferenceURIsFromDB.remove(requiredProjectURI)) {
+				if (!containerReferenceURIsFromDB.remove(requiredProjectURI)) {
 					indexDatabase.getResourceContainerReferenceDAO().create(projectContainerID, requiredProjectURI);
 				}
 			}
@@ -323,44 +322,42 @@ public class WorkspaceModelIndexer {
 		resourceSet.getResources().remove(resource);
 	}
 
-	private void indexEObject(int resourceID, Resource resource, EObject content, List<String> fragmentsInResource)
+	private void indexEObject(int resourceID, Resource resource, EObject eObject, List<String> fragmentsInResource)
 			throws SQLException {
 		try {
-			int eClassID = indexDatabase.getEClassDAO().getID(content.eClass());
-			String fragment = resource.getURIFragment(content);
+			int eClassID = indexDatabase.getEClassDAO().getID(eObject.eClass());
+			String fragment = resource.getURIFragment(eObject);
 			if (!fragmentsInResource.remove(fragment)) {
 				indexDatabase.getEObjectDAO().create(fragment, eClassID, resourceID);
 			}
+			indexCrossRefs(eObject);
 		}
 		catch (NotFoundInIndexException e) {
-			log.error("EClass " + Strings.notNull(content.eClass().getName()) + " is not indexed.", e);
+			log.error("EClass " + Strings.notNull(eObject.eClass().getName()) + " is not indexed.", e);
 		}
 	}
 
-	private void indexCrossRefs(Resource resource) throws SQLException {
-		for (Iterator<EObject> allContents = resource.getAllContents(); allContents.hasNext();) {
-			EObject eObject = allContents.next();
-			try {
-				int sourceID = indexDatabase.getEObjectDAO().getID(eObject);
-				List<URI> crossReferencesFromDB = indexDatabase.getCrossReferenceDAO().findReferencesFrom(sourceID);
-				InternalEList<EObject> crossReferences = (InternalEList<EObject>) eObject.eCrossReferences();
-				for (int i = 0; i < crossReferences.size(); ++i) {
-					EObject crossReference = crossReferences.basicGet(i);
-					try {
-						URI targetURI = EcoreUtil.getURI(crossReference);
-						if (!crossReferencesFromDB.remove(targetURI)) {
-							indexDatabase.getCrossReferenceDAO().create(sourceID, targetURI.toString());
-						}
-					}
-					catch (SQLException exc) {
-						log.error("Error creating cross-reference");
+	private void indexCrossRefs(EObject eObject) throws SQLException {
+		try {
+			int sourceID = indexDatabase.getEObjectDAO().getID(eObject);
+			List<URI> crossReferencesFromDB = indexDatabase.getCrossReferenceDAO().findReferencesFrom(sourceID);
+			InternalEList<EObject> crossReferences = (InternalEList<EObject>) eObject.eCrossReferences();
+			for (int i = 0; i < crossReferences.size(); ++i) {
+				EObject crossReference = crossReferences.basicGet(i);
+				try {
+					URI targetURI = EcoreUtil.getURI(crossReference);
+					if (!crossReferencesFromDB.remove(targetURI)) {
+						indexDatabase.getCrossReferenceDAO().create(sourceID, targetURI.toString());
 					}
 				}
-				deleteStaleCrossReferences(sourceID, crossReferencesFromDB);
+				catch (SQLException exc) {
+					log.error("Error creating cross-reference");
+				}
 			}
-			catch (NotFoundInIndexException exc) {
-				log.error("EObject has not been indexed. Concurrent modification?");
-			}
+			deleteStaleCrossReferences(sourceID, crossReferencesFromDB);
+		}
+		catch (NotFoundInIndexException exc) {
+			log.error("EObject has not been indexed. Concurrent modification?");
 		}
 	}
 

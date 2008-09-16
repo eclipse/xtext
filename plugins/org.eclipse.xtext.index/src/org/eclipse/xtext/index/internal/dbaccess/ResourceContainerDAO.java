@@ -28,6 +28,7 @@ public class ResourceContainerDAO {
 
 	private IndexDatabase indexDatabase;
 
+	private PreparedStatement insertEntry;
 	private PreparedStatement selectIDByURI;
 	private PreparedStatement deleteContainerByID;
 	private PreparedStatement selectAllContainerIDs;
@@ -35,6 +36,7 @@ public class ResourceContainerDAO {
 	public ResourceContainerDAO(IndexDatabase indexDatabase) {
 		try {
 			this.indexDatabase = indexDatabase;
+			insertEntry = indexDatabase.prepareStatements("INSERT INTO Container(id, uri) VALUES(?,?)");
 			selectIDByURI = indexDatabase.prepareStatements("SELECT Container.id FROM Container WHERE uri=?");
 			selectAllContainerIDs = indexDatabase.prepareStatements("SELECT id FROM Container");
 			deleteContainerByID = indexDatabase.prepareStatements("DELETE FROM Container WHERE id=?");
@@ -55,10 +57,15 @@ public class ResourceContainerDAO {
 	}
 
 	public int create(String uri) throws SQLException {
-		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO Container(uri) VALUES('");
-		insertStatementBuffer.append(URIUtil.trimTrailingSlash(uri));
-		insertStatementBuffer.append("')");
-		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
+		int id = indexDatabase.nextUniqueID();
+		insertEntry.setInt(1, id);
+		insertEntry.setString(2, URIUtil.trimTrailingSlash(uri));
+		insertEntry.executeUpdate();
+		return id;
+//		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO Container(uri) VALUES('");
+//		insertStatementBuffer.append(URIUtil.trimTrailingSlash(uri));
+//		insertStatementBuffer.append("')");
+//		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
 	}
 
 	public List<Integer> findAllResourceContainerIDs() throws SQLException {

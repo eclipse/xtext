@@ -25,19 +25,20 @@ public class ResourceContainerReferenceDAO {
 
 	private IndexDatabase indexDatabase;
 
-	private PreparedStatement deleteReferenceBySource;
-
+	private PreparedStatement insertEntry;
 	private PreparedStatement selectReferences;
-
+	private PreparedStatement deleteReferenceBySource;
 	private PreparedStatement deleteReferenceBySourceAndTarget;
 
 	public ResourceContainerReferenceDAO(IndexDatabase indexDatabase) {
 		try {
 			this.indexDatabase = indexDatabase;
+			insertEntry = indexDatabase.prepareStatements("INSERT INTO ContainerReference(source, target) VALUES(?,?)");
 			selectReferences = indexDatabase
 					.prepareStatements("SELECT ContainerReference.target FROM ContainerReference WHERE source=?");
 			deleteReferenceBySource = indexDatabase.prepareStatements("DELETE FROM ContainerReference WHERE source=?");
-			deleteReferenceBySourceAndTarget = indexDatabase.prepareStatements("DELETE FROM ContainerReference WHERE source=? and target=?");
+			deleteReferenceBySourceAndTarget = indexDatabase
+					.prepareStatements("DELETE FROM ContainerReference WHERE source=? and target=?");
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(e);
@@ -65,21 +66,24 @@ public class ResourceContainerReferenceDAO {
 	public void create(int sourceContainerID, URI targetURI) throws SQLException {
 		create(sourceContainerID, targetURI.toString());
 	}
-	
+
 	public void create(int sourceContainerID, String targetURI) throws SQLException {
-		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO ContainerReference(source, target) VALUES(");
-		insertStatementBuffer.append(sourceContainerID);
-		insertStatementBuffer.append(",'");
-		insertStatementBuffer.append(URIUtil.trimTrailingSlash(targetURI));
-		insertStatementBuffer.append("')");
-		indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
+		insertEntry.setInt(1, sourceContainerID);
+		insertEntry.setString(2, URIUtil.trimTrailingSlash(targetURI));
+		insertEntry.execute();
+//		StringBuffer insertStatementBuffer = new StringBuffer("INSERT INTO ContainerReference(source, target) VALUES(");
+//		insertStatementBuffer.append(sourceContainerID);
+//		insertStatementBuffer.append(",'");
+//		insertStatementBuffer.append(URIUtil.trimTrailingSlash(targetURI));
+//		insertStatementBuffer.append("')");
+//		indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
 	}
-	
+
 	public void deleteBySource(int sourceContainerID) throws SQLException {
 		deleteReferenceBySource.setInt(1, sourceContainerID);
 		deleteReferenceBySource.execute();
 	}
-	
+
 	public void deleteBySourceAndTarget(int resourceContainerID, URI targetURI) throws SQLException {
 		deleteReferenceBySourceAndTarget.setInt(1, resourceContainerID);
 		deleteReferenceBySourceAndTarget.setString(2, URIUtil.trimTrailingSlash(targetURI));

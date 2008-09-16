@@ -36,9 +36,12 @@ public class EObjectDAO {
 
 	private PreparedStatement selectURIByEClassAndContainerID;
 
+	private PreparedStatement insertEntry;
+
 	public EObjectDAO(IndexDatabase indexDatabase) {
 		try {
 			this.indexDatabase = indexDatabase;
+			insertEntry = indexDatabase.prepareStatements("INSERT INTO EObject(id, fragment, eClass, resource) VALUES(?,?,?,?)");
 			selectIDByEObject = indexDatabase
 					.prepareStatements("SELECT EObject.id FROM EObject WHERE EObject.fragment=? AND EObject.resource=?");
 			selectURIByEClass = indexDatabase
@@ -110,15 +113,22 @@ public class EObjectDAO {
 	}
 
 	public int create(String fragment, int eClassID, int resourceID) throws SQLException {
-		StringBuffer insertStatementBuffer = new StringBuffer(
-				"INSERT INTO EObject(fragment, eClass, resource) VALUES('");
-		insertStatementBuffer.append(fragment);
-		insertStatementBuffer.append("',");
-		insertStatementBuffer.append(eClassID);
-		insertStatementBuffer.append(",");
-		insertStatementBuffer.append(resourceID);
-		insertStatementBuffer.append(")");
-		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
+		int id = indexDatabase.nextUniqueID();
+		insertEntry.setInt(1, id);
+		insertEntry.setString(2, fragment);
+		insertEntry.setInt(3, eClassID);
+		insertEntry.setInt(4, resourceID);
+		insertEntry.executeUpdate();
+		return id;
+//		StringBuffer insertStatementBuffer = new StringBuffer(
+//				"INSERT INTO EObject(fragment, eClass, resource) VALUES('");
+//		insertStatementBuffer.append(fragment);
+//		insertStatementBuffer.append("',");
+//		insertStatementBuffer.append(eClassID);
+//		insertStatementBuffer.append(",");
+//		insertStatementBuffer.append(resourceID);
+//		insertStatementBuffer.append(")");
+//		return indexDatabase.insertWithAutoID(insertStatementBuffer.toString());
 	}
 
 	public List<String> findFragmentsInResource(int resourceID) throws SQLException {

@@ -30,6 +30,8 @@ public interface IModelIndex {
 	Collection<URI> findInstances(EClass eClass, IProject scope);
 
 	void clearAll() throws Exception;
+	
+	void reIndex() throws Exception;
 
 	void close() throws Exception;
 }
