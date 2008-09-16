@@ -13,7 +13,9 @@ package org.eclipse.xtext.xtext2ecore;
 import java.io.InputStream;
 import java.util.List;
 
-import org.eclipse.m2t.type.emf.EmfRegistryMetaModel;
+import org.eclipse.xtend.XtendFacade;
+import org.eclipse.xtend.expression.ExecutionContextImpl;
+import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -22,8 +24,6 @@ import org.eclipse.xtext.xtextutil.ComplexType;
 import org.eclipse.xtext.xtextutil.Feature;
 import org.eclipse.xtext.xtextutil.MetaModel;
 import org.eclipse.xtext.xtextutil.XtextutilPackage;
-import org.openarchitectureware.expression.ExecutionContextImpl;
-import org.openarchitectureware.xtend.XtendFacade;
 
 /**
  * @author Jan Köhnlein

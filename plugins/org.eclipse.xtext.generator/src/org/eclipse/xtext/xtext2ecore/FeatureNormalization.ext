@@ -11,7 +11,7 @@ import ecore;
 import xtext;
 import xtextutil;
 
-extension org::openarchitectureware::util::stdlib::io;
+extension org::eclipse::xtend::util::stdlib::io;
 extension org::eclipse::xtext::xtext2ecore::Xtext2Ecore;
 extension org::eclipse::xtext::XtextUtil;
 

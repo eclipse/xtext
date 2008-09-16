@@ -16,8 +16,8 @@
 «EXTENSION org::eclipse::xtext::Properties»
 «EXTENSION org::eclipse::xtext::parsetree::reconstr::ParseTreeConstructor»
 «EXTENSION org::eclipse::xtext::XtextUtil»
-«EXTENSION org::openarchitectureware::util::stdlib::collections»
-«EXTENSION org::openarchitectureware::util::stdlib::io»
+«EXTENSION org::eclipse::xtend::util::stdlib::collections»
+«EXTENSION org::eclipse::xtend::util::stdlib::io»
 
 «DEFINE root FOR GenService»
 «FILE genClassFQName.toJavaFilePath()-»

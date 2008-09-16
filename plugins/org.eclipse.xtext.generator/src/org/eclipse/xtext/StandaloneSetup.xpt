@@ -14,7 +14,6 @@
 
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
-«EXTENSION org::openarchitectureware::util::IO»
 
 «DEFINE root FOR GenModel»
 «FILE standaloneSetupClass(grammar()).toJavaFilePath()-»

@@ -13,10 +13,13 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.xtextgen.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.openarchitectureware.dependencies;bundle-version="4.3.0",
  org.eclipse.xtext;bundle-version="1.0.0",
  org.antlr;bundle-version="3.0.0",
  org.eclipse.xtext.util;bundle-version="1.0.0",
- org.eclipse.xtext.log4j;bundle-version="1.2.15"
+ org.eclipse.xtext.log4j;bundle-version="1.2.15",
+ org.eclipse.xtend;bundle-version="0.7.0",
+ org.eclipse.xpand;bundle-version="0.7.0",
+ org.eclipse.xtend.typesystem.emf;bundle-version="0.7.0",
+ org.eclipse.xtend.util.stdlib;bundle-version="0.7.0"
 Bundle-ActivationPolicy: lazy
 
