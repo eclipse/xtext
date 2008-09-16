@@ -16,8 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -59,8 +57,6 @@ public class XtextResource extends ResourceImpl {
 	
 	@Inject
 	private IValueConverterService valueConverterService;
-
-	private Log log = LogFactory.getLog(getClass());
 
 	private IParseResult parseResult;
 
@@ -136,8 +132,8 @@ public class XtextResource extends ResourceImpl {
 			if (fragment != null) {
 				if (map.put(fragment, object) != null) {
 					map.remove(fragment);
-					log.info("The id " + fragment
-							+ " is not unique within the resource. Will use relative pathes instead.");
+//					log.info("The id " + fragment
+//							+ " is not unique within the resource. Will use relative pathes instead.");
 				}
 			}
 		}
