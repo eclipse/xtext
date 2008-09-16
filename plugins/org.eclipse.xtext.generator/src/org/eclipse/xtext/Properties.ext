@@ -81,3 +81,9 @@ GenService resourceFactoryService() :
 	findService("org.eclipse.xtext.resource.IResourceFactory") != null 
 		? findService("org.eclipse.xtext.resource.IResourceFactory")
 		: null;
+		
+defaultGrammarTemplate() :
+	defaultGrammarTemplate(genModel());
+
+private String defaultGrammarTemplate(GenModel model) :
+	JAVA org.eclipse.xtext.GenExtensions.getDefaultGrammarTemplate(org.eclipse.xtext.xtextgen.GenModel);
