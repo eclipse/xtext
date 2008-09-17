@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Reference Plug-in
 Bundle-SymbolicName: org.eclipse.xtext.reference;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 0.7.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: itemis AG
 Export-Package: org.eclipse.xtext.reference,
@@ -12,6 +12,6 @@ Export-Package: org.eclipse.xtext.reference,
  org.eclipse.xtext.reference.services
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
- org.eclipse.xtext;bundle-version="1.0.0",
- org.eclipse.xtext.generator;bundle-version="1.0.0"
+ org.eclipse.xtext,
+ org.eclipse.xtext.generator
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j

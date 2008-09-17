@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Logging Plug-in
 Bundle-SymbolicName: org.eclipse.xtext.logging;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 0.7.0.qualifier
 Bundle-Activator: org.eclipse.xtext.logging.Activator
 Bundle-Vendor: itemis AG
 Require-Bundle: org.eclipse.ui,

@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Service Plug-in
 Bundle-SymbolicName: org.eclipse.xtext.service
-Bundle-Version: 1.0.0
+Bundle-Version: 0.7.0.qualifier
 Bundle-Vendor: itemis AG
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext.util;bundle-version="1.0.0",
+Require-Bundle: org.eclipse.xtext.util,
  org.eclipse.emf.common;bundle-version="2.3.2",
  org.eclipse.xtext.log4j;bundle-version="1.2.15"
 Export-Package: org.eclipse.xtext.service,
