@@ -2,8 +2,8 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ui Plug-in
 Bundle-SymbolicName: org.eclipse.xtext.common.ui;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 0.7.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext.ui;bundle-version="1.0.0",
+Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.xtext.log4j;bundle-version="1.2.15"
 Export-Package: org.eclipse.xtext.ui.service.impl

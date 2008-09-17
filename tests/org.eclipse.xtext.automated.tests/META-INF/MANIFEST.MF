@@ -1,14 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tests Plug-in
+Bundle-Name: Tests Plug-in (Incubation)
 Bundle-SymbolicName: org.eclipse.xtext.automated.tests
-Bundle-Version: 1.0.0
+Bundle-Version: 0.7.0.qualifier
 Bundle-Activator: org.eclipse.xtext.automated.tests.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.junit;bundle-version="3.8.2",
- org.eclipse.xtext.generator.tests;bundle-version="1.0.0",
- org.eclipse.xtext.service.tests;bundle-version="1.0.0",
- org.eclipse.xtext.tests;bundle-version="1.0.0"
+ org.eclipse.xtext.generator.tests,
+ org.eclipse.xtext.service.tests,
+ org.eclipse.xtext.tests
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
