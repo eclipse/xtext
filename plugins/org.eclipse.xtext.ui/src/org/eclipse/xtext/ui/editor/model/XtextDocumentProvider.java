@@ -134,5 +134,11 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 	protected FileInfo createEmptyFileInfo() {
 		return new XtextFileInfo();
 	}
+	
+	@Override
+	public IDocument getDocument(Object element) {
+		
+		return super.getDocument(element);
+	}
 
 }

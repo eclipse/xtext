@@ -270,6 +270,8 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 					this.getConfigurationElement().getNamespaceIdentifier()), new IllegalStateException());
 		}
 	}
+	
+	
 
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {

@@ -144,5 +144,11 @@
             languageId="org.eclipse.xtext.builtin.XtextBuiltin">
       </fragmentProvider>
    </extension>
+   <extension
+         point="org.eclipse.core.filebuffers.documentCreation">
+      <factory
+            class="org.eclipse.xtext.ui.DocumentFactory1">
+      </factory>
+   </extension>
   
 </plugin>
