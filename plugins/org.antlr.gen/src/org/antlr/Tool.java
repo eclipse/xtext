@@ -1,7 +1,13 @@
 package org.antlr;
 
 public class Tool {
-	public static void main(String[] args) {
+	
+	public Tool(String[] strings) {
 		System.out.println("This is a dummy implementation!");
 	}
+
+	public void process() {
+		System.err.println("This is really a dummy implementation!");
+	}
+
 }
