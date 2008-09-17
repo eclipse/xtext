@@ -13,7 +13,7 @@ Require-Bundle: org.antlr;bundle-version="3.0.0",
  org.eclipse.emf.compare.diff,
  org.eclipse.emf.compare.match,
  org.eclipse.xtext.log4j;bundle-version="1.2.15",
- org.eclipse.xtend;bundle-version="0.7.0",
- org.eclipse.xtend.typesystem.emf;bundle-version="0.7.0",
- org.eclipse.xtend.util.stdlib;bundle-version="0.7.0"
+ org.eclipse.xtend,
+ org.eclipse.xtend.typesystem.emf,
+ org.eclipse.xtend.util.stdlib
 Export-Package: org.eclipse.xtext
