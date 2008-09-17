@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.xtext.sdk.feature"
-      label="Xtext SDK Feature"
-      version="1.0.0"
+      label="Xtext SDK Feature (Incubation)"
+      version="0.7.0.qualifier"
       provider-name="itemis AG">
 
    <description url="http://www.example.com/description">

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.xtext.examples.feature"
-      label="Examples Feature"
-      version="1.0.0">
+      label="Examples Feature (Incubation)"
+      version="0.7.0.qualifier">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
