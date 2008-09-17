@@ -32,7 +32,7 @@ import org.eclipse.xtext.util.StringInputStream;
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public class XtextEditorModel implements IEditorModel {
+public class XtextEditorModel extends AbstractDocumentDelegation implements IEditorModel {
 	
 	private static final Logger log = Logger.getLogger(XtextEditorModel.class);
 

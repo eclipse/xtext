@@ -6,10 +6,11 @@ Bundle-Version: 0.7.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: lastversion.jar,
  .
-Require-Bundle: org.antlr;bundle-version="3.0.0",
- org.eclipse.xtext.log4j;bundle-version="1.2.15",
+Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.xpand,
  org.eclipse.xtend,
  org.eclipse.xtend.typesystem.emf,
  org.eclipse.xtend.util.stdlib,
- org.eclipse.emf.ecore;bundle-version="2.4.0"
+ org.eclipse.emf.ecore;bundle-version="2.4.0",
+ org.antlr.gen;bundle-version="3.0.0",
+ org.antlr.runtime;bundle-version="3.0.0"
