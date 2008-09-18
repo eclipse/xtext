@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builtin.IXtextBuiltin;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -44,14 +43,20 @@ public class GrammarUtil {
 	public static EPackage loadEPackage(ReferencedMetamodel ref) {
 		if (ref == null)
 			throw new NullPointerException("ReferencedMetamodel was null");
-		if (EPackage.Registry.INSTANCE.containsKey(ref.getUri()))
-			return EPackage.Registry.INSTANCE.getEPackage(ref.getUri());
-		URI uri = URI.createURI(ref.getUri());
+		String uriAsString = ref.getUri();
+		ResourceSet resourceSet = ref.eResource().getResourceSet();
+		return loadEPackage(uriAsString, resourceSet);
+	}
+
+	public static EPackage loadEPackage(String resourceOrNsURI, ResourceSet resourceSet) {
+		if (EPackage.Registry.INSTANCE.containsKey(resourceOrNsURI))
+			return EPackage.Registry.INSTANCE.getEPackage(resourceOrNsURI);
+		URI uri = URI.createURI(resourceOrNsURI);
 		if (uri.fragment() == null) {
-			Resource resource = ref.eResource().getResourceSet().getResource(uri, true);
+			Resource resource = resourceSet.getResource(uri, true);
 			return (EPackage) resource.getContents().get(0);
 		} else {
-			return (EPackage) ref.eResource().getResourceSet().getEObject(uri, true);
+			return (EPackage) resourceSet.getEObject(uri, true);
 		}
 	}
 
