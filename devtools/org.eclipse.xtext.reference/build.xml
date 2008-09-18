@@ -6,7 +6,7 @@
 	<property name="basearch" value="${arch}"/>
 	<property name="basenl" value="${nl}"/>
 	<property name="bundleId" value="org.eclipse.xtext.reference"/>
-	<property name="bundleVersion" value="0.7.0.200809171050"/>
+	<property name="bundleVersion" value="0.7.0.200809180936"/>
 
 	<available property="customBuildCallbacks" file="./customBuildCallbacks.xml" value="customBuildCallbacks.xml"/>
 
@@ -46,7 +46,7 @@
 			<isset property="buildTempFolder"/>
 		</condition>
 		<property name="pluginTemp" value="${basedir}"/>
-<condition property="build.result.folder" value="${pluginTemp}/org.eclipse.xtext.reference_0.7.0.200809171050"		>
+<condition property="build.result.folder" value="${pluginTemp}/org.eclipse.xtext.reference_0.7.0.200809180936"		>
 			<isset property="buildTempFolder"/>
 		</condition>
 		<property name="build.result.folder" value="${basedir}"/>
@@ -66,7 +66,7 @@
 		<antcall target="gather.bin.parts">
 			<param name="destination.temp.folder" value="${temp.folder}/"/>
 		</antcall>
-		<jar destfile="${plugin.destination}/org.eclipse.xtext.reference_0.7.0.200809171050.jar" basedir="${temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050" filesetmanifest="merge"/>
+		<jar destfile="${plugin.destination}/org.eclipse.xtext.reference_0.7.0.200809180936.jar" basedir="${temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936" filesetmanifest="merge"/>
 		<delete dir="${temp.folder}"/>
 	</target>
 
@@ -101,10 +101,6 @@
 			<pathelement path="../../eclipse/plugins/org.eclipse.core.expressions_3.4.0.v20080603-2000.jar"/>
 			<pathelement path="../../eclipse/plugins/org.eclipse.core.filesystem_1.2.0.v20080604-1400.jar"/>
 			<pathelement path="../../eclipse/plugins/org.eclipse.core.filesystem.linux.x86_1.2.0.v20080604-1400.jar"/>
-			<pathelement path="../../eclipse/plugins/org.antlr_3.0.0/stringtemplate-3.0.jar"/>
-			<pathelement path="../../eclipse/plugins/org.antlr_3.0.0/antlr-3.0-patched.jar"/>
-			<pathelement path="../../eclipse/plugins/org.antlr_3.0.0/antlr-2.7.7.jar"/>
-			<pathelement path="../../eclipse/plugins/org.antlr.runtime_3.0.0/antlr-runtime-3.0.jar"/>
 			<pathelement path="../../eclipse/plugins/org.eclipse.emf.ecore.xmi_2.4.0.v200806091234.jar"/>
 			<pathelement path="../org.eclipse.xtext.service/bin/"/>
 			<pathelement path="../org.eclipse.xtext.service/@dot"/>
@@ -144,6 +140,8 @@
 			<pathelement path="../org.eclipse.xtend.typesystem.emf/@dot"/>
 			<pathelement path="../org.eclipse.xtend/bin"/>
 			<pathelement path="../org.eclipse.xtend/@dot"/>
+			<pathelement path="../org.antlr.runtime"/>
+			<pathelement path="../org.antlr.runtime/@dot"/>
 			<pathelement path="../org.eclipse.emf.mwe.utils/bin/"/>
 			<pathelement path="../org.eclipse.emf.mwe.utils/@dot"/>
 			<pathelement path="../org.eclipse.xpand/bin"/>
@@ -250,25 +248,25 @@
 	</target>
 
 	<target name="gather.bin.parts" depends="init" if="destination.temp.folder">
-		<mkdir dir="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050"/>
+		<mkdir dir="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936"/>
 		<subant antfile="${customBuildCallbacks}" target="pre.gather.bin.parts" failonerror="false" buildpath="." inheritall="true">
 			<property name="build.result.folder" value="${build.result.folder}"/>
-			<property name="target.folder" value="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050"/>
+			<property name="target.folder" value="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936"/>
 		</subant>
-		<copy todir="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050" failonerror="true" overwrite="false">
+		<copy todir="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936" failonerror="true" overwrite="false">
 			<fileset dir="${build.result.folder}/@dot">
 				<include name="**"/>
 			</fileset>
 		</copy>
-		<copy todir="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050" failonerror="true" overwrite="false">
+		<copy todir="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936" failonerror="true" overwrite="false">
 			<fileset dir="${basedir}">
 				<include name="META-INF/"/>
 			</fileset>
 		</copy>
-		<eclipse.versionReplacer path="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050" version="0.7.0.200809171050"/>
+		<eclipse.versionReplacer path="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936" version="0.7.0.200809180936"/>
 		<subant antfile="${customBuildCallbacks}" target="post.gather.bin.parts" failonerror="false" buildpath="." inheritall="true">
 			<property name="build.result.folder" value="${build.result.folder}"/>
-			<property name="target.folder" value="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050"/>
+			<property name="target.folder" value="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936"/>
 		</subant>
 	</target>
 
@@ -277,15 +275,15 @@
 
 	<target name="gather.sources" depends="init" if="destination.temp.folder">
 		<subant antfile="${customBuildCallbacks}" target="pre.gather.sources" failonerror="false" buildpath="." inheritall="true">
-			<property name="target.folder" value="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050"/>
+			<property name="target.folder" value="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936"/>
 		</subant>
-		<mkdir dir="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050"/>
-		<copy file="${build.result.folder}/src.zip" todir="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050" failonerror="false" overwrite="false"/>
+		<mkdir dir="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936"/>
+		<copy file="${build.result.folder}/src.zip" todir="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936" failonerror="false" overwrite="false"/>
 		<antcall target="copy.src.includes">
-			<param name="source.destination.folder" value="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050"/>
+			<param name="source.destination.folder" value="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936"/>
 		</antcall>
 		<subant antfile="${customBuildCallbacks}" target="post.gather.sources" failonerror="false" buildpath="." inheritall="true">
-			<property name="target.folder" value="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050"/>
+			<property name="target.folder" value="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936"/>
 		</subant>
 	</target>
 
@@ -309,16 +307,16 @@
 
 	<target name="gather.logs" depends="init" if="destination.temp.folder">
 		<subant antfile="${customBuildCallbacks}" target="pre.gather.logs" failonerror="false" buildpath="." inheritall="true">
-			<property name="destination.temp.folder" value="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050"/>
+			<property name="destination.temp.folder" value="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936"/>
 		</subant>
-		<mkdir dir="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050"/>
-		<copy todir="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050" failonerror="false" overwrite="false">
+		<mkdir dir="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936"/>
+		<copy todir="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936" failonerror="false" overwrite="false">
 			<fileset dir="${temp.folder}">
 				<include name="@dot.bin${logExtension}"/>
 			</fileset>
 		</copy>
 		<subant antfile="${customBuildCallbacks}" target="post.gather.logs" failonerror="false" buildpath="." inheritall="true">
-			<property name="destination.temp.folder" value="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809171050"/>
+			<property name="destination.temp.folder" value="${destination.temp.folder}/org.eclipse.xtext.reference_0.7.0.200809180936"/>
 		</subant>
 	</target>
 
@@ -330,8 +328,8 @@
 		</subant>
 		<delete dir="${build.result.folder}/@dot"/>
 		<delete file="${build.result.folder}/src.zip"/>
-		<delete file="${plugin.destination}/org.eclipse.xtext.reference_0.7.0.200809171050.jar"/>
-		<delete file="${plugin.destination}/org.eclipse.xtext.reference_0.7.0.200809171050.zip"/>
+		<delete file="${plugin.destination}/org.eclipse.xtext.reference_0.7.0.200809180936.jar"/>
+		<delete file="${plugin.destination}/org.eclipse.xtext.reference_0.7.0.200809180936.zip"/>
 		<delete dir="${temp.folder}"/>
 		<subant antfile="${customBuildCallbacks}" target="post.clean" failonerror="false" buildpath="." inheritall="true">
 			<property name="plugin.destination" value="${plugin.destination}"/>
@@ -361,7 +359,7 @@
 				<include name="**/*.bin${logExtension}"/>
 			</fileset>
 		</delete>
-		<zip destfile="${plugin.destination}/org.eclipse.xtext.reference_0.7.0.200809171050.zip" basedir="${temp.folder}" filesonly="true" whenempty="skip" update="false"/>
+		<zip destfile="${plugin.destination}/org.eclipse.xtext.reference_0.7.0.200809180936.zip" basedir="${temp.folder}" filesonly="true" whenempty="skip" update="false"/>
 		<delete dir="${temp.folder}"/>
 	</target>
 
