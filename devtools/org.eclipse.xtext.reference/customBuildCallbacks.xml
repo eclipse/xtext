@@ -79,9 +79,11 @@
 
 	<target name="post.compile.@dot">
 		<echo message="***** Generating code from ReferenceGrammar *****" />
-		<echo message="temp=${temp.folder} srcfld=${source.foldern} basedir=${basedir}}">
+		<echo message="temp=${temp.folder}  basedir=${basedir}">
 		</echo>
-		<unjar src="../org.antlr.gen_3.0.1.jar" dest="${temp.folder}/">
+		<touch file="../org.antlr.gen.jar">
+		</touch>
+		<unjar src="../org.antlr.gen.jar" dest="${temp.folder}/">
 			<patternset>
 				<include name="**/*.jar" />
 			</patternset>
