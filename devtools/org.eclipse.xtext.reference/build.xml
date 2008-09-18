@@ -162,7 +162,6 @@
 			<pathelement path="../org.antlr/@dot"/>
 		</path>
 		<subant antfile="${customBuildCallbacks}" target="pre.@dot" failonerror="false" buildpath="." inheritall="true">
-			<property name="source.folder2" value="src-gen/"/>
 			<property name="source.folder1" value="src/"/>
 			<property name="target.folder" value="${temp.folder}/@dot.bin"/>
 			<reference refid="@dot.classpath"/>
