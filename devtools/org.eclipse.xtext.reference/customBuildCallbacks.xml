@@ -15,11 +15,11 @@
 <!-- Set customBuildCallbacks=<path/to/this/file> in your build.properties.-->
 <!-- ===================================================================== -->
 <project name="Build specific targets and properties">
-		
-	<target name="pre.@dot"/>
-	
-	<target name="pre.clean"/>  
-	
+
+	<target name="pre.@dot" />
+
+	<target name="pre.clean" />
+
 	<!-- ===================================================================== -->
 	<!-- Steps to do before the target build.jars                              -->
 	<!-- Available parameters :                                                -->
@@ -35,7 +35,7 @@
 	<!-- ===================================================================== -->
 	<target name="post.build.jars">
 	</target>
-	
+
 	<!-- ===================================================================== -->
 	<!-- Steps to do before the target build.sources                           -->
 	<!-- Available parameters :                                                -->
@@ -78,21 +78,26 @@
 	</target>
 
 	<target name="post.compile.@dot">
-		<echo message="***** Generating code from ReferenceGrammar *****"/>
+		<echo message="***** Generating code from ReferenceGrammar *****" />
+		<echo message="temp=${temp.folder} srcfld=${source.foldern} basedir=${basedir}}"></echo>
 		<java classname="org.eclipse.xtext.reference.ReferenceGrammar" dir="${temp.folder}/.." fork="true">
-			<classpath><pathelement path="${temp.folder}/@dot.bin"/></classpath>
-			<classpath refid="@dot.classpath"/>
+			<classpath>
+				<pathelement path="${temp.folder}/@dot.bin" />
+				<!--<pathelement location="lib/helper.jar" /> -->
+			</classpath>
+			<classpath refid="@dot.classpath" />
 		</java>
-		<echo message="***** Compiling generated code for ReferenceGrammar *****"/>
-		<javac destdir="${temp.folder}/@dot.bin" failonerror="${javacFailOnError}" verbose="${javacVerbose}" debug="${javacDebugInfo}" includeAntRuntime="no" bootclasspath="${bundleBootClasspath}" source="${bundleJavacSource}" target="${bundleJavacTarget}"		>
-			<compilerarg line="${compilerArg}" compiler="${build.compiler}"/>
-			<classpath refid="@dot.classpath"/>
-			<src path="src-gen/"/>
-			<compilerarg value="@${basedir}/javaCompiler...args" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-			<compilerarg line="-log '${temp.folder}/@dot.bin${logExtension}'" compiler="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+		
+		<echo message="***** Compiling generated code for ReferenceGrammar *****" />
+		<javac destdir="${temp.folder}/@dot.bin" failonerror="${javacFailOnError}" verbose="${javacVerbose}" debug="${javacDebugInfo}" includeAntRuntime="no" bootclasspath="${bundleBootClasspath}" source="${bundleJavacSource}" target="${bundleJavacTarget}">
+			<compilerarg line="${compilerArg}" compiler="${build.compiler}" />
+			<classpath refid="@dot.classpath" />
+			<src path="src-gen/" />
+			<compilerarg value="@${basedir}/javaCompiler...args" compiler="org.eclipse.jdt.core.JDTCompilerAdapter" />
+			<compilerarg line="-log '${temp.folder}/@dot.bin${logExtension}'" compiler="org.eclipse.jdt.core.JDTCompilerAdapter" />
 		</javac>
 	</target>
-	
+
 	<!-- ===================================================================== -->
 	<!-- Steps to do after the compilation target <name>                       -->
 	<!-- Substitute "name" with the name of the compilation target, eg @dot    -->
@@ -106,7 +111,7 @@
 
 	<target name="post.@dot">
 	</target>
-	
+
 	<!-- ===================================================================== -->
 	<!-- Steps to do before the target gather.bin.parts                         -->
 	<!-- Available parameters :                                                -->
@@ -115,7 +120,7 @@
 	<!-- ===================================================================== -->
 	<target name="pre.gather.bin.parts">
 	</target>
-		
+
 	<!-- ===================================================================== -->
 	<!-- Steps to do after the target gather.bin.parts                         -->
 	<!-- Available parameters :                                                -->
@@ -146,7 +151,7 @@
 	<!-- Available parameters :                                                -->
 	<!--   destination.temp.folder - destination folder                        -->
 	<!-- ===================================================================== -->
-	<target name="pre.gather.logs">        
+	<target name="pre.gather.logs">
 	</target>
 
 	<!-- ===================================================================== -->
@@ -154,7 +159,7 @@
 	<!-- Available parameters :                                                -->
 	<!--   destination.temp.folder - destination folder                        -->
 	<!-- ===================================================================== -->
-	<target name="post.gather.logs">       
+	<target name="post.gather.logs">
 	</target>
 
 	<!-- ===================================================================== -->
@@ -164,6 +169,6 @@
 	<!--   build.result.folder - results of the compilation                    -->
 	<!--   temp.folder - temporary folder                                      -->
 	<!-- ===================================================================== -->
-	<target name="post.clean">             
+	<target name="post.clean">
 	</target>
 </project>
