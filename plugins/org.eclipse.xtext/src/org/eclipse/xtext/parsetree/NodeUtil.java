@@ -120,5 +120,19 @@ public class NodeUtil {
 		}
         System.out.println("}   (" + node.getOffset() + ", " + node.getLength() + ")");
     }
+    
+	public static AbstractNode findLeafNodeAtOffset(CompositeNode parseTreeRootNode, int offset) {
+		for (AbstractNode node : parseTreeRootNode.getChildren()) {
+			if (node.getOffset() + node.getLength() >= offset) {
+				if (node.getOffset() <= offset) {
+					if (node instanceof LeafNode)
+						return (LeafNode) node;
+					else if (node instanceof CompositeNode)
+						return findLeafNodeAtOffset((CompositeNode) node, offset);
+				}
+			}
+		}
+		return null;
+	}
 
 }
