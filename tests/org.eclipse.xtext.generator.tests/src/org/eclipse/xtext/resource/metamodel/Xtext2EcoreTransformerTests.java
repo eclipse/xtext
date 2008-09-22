@@ -33,8 +33,7 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		with(XtextStandaloneSetup.class);
 	}
 
-	private EPackage getEPackageFromGrammar(String xtextGrammar)
-			throws Exception {
+	private EPackage getEPackageFromGrammar(String xtextGrammar) throws Exception {
 		Grammar grammar = (Grammar) getModel(xtextGrammar);
 		Xtext2EcoreTransformer xtext2EcoreTransformer = new Xtext2EcoreTransformer();
 		List<EPackage> metamodels = xtext2EcoreTransformer.transform(grammar);
@@ -46,22 +45,22 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		return result;
 	}
 
-	private EAttribute assertFeatureConfiguration(EClass eClass, int attributeIndex,
-			String featureName, String featureTypeName) {
+	private EAttribute assertFeatureConfiguration(EClass eClass, int attributeIndex, String featureName,
+			String featureTypeName) {
 		EAttribute feature = eClass.getEAttributes().get(attributeIndex);
 		assertEquals(featureName, feature.getName());
 		assertNotNull(feature.getEType());
 		assertEquals(featureTypeName, feature.getEType().getName());
-		
+
 		return feature;
 	}
-	
-	private EAttribute assertFeatureConfiguration(EClass eClass, int attributeIndex,
-			String featureName, String featureTypeName, int lowerBound, int upperBound) {
+
+	private EAttribute assertFeatureConfiguration(EClass eClass, int attributeIndex, String featureName,
+			String featureTypeName, int lowerBound, int upperBound) {
 		EAttribute feature = assertFeatureConfiguration(eClass, attributeIndex, featureName, featureTypeName);
 		assertEquals(lowerBound, feature.getLowerBound());
 		assertEquals(upperBound, feature.getUpperBound());
-		
+
 		return feature;
 	}
 
@@ -153,7 +152,7 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertFeatureConfiguration(ruleA, 1, "featureB", "EInt", 0, -1);
 	}
 
-	public void testFeatureAndInheritanceOptionalRuleCall() throws Exception {
+	public void testFeaturesAndInheritanceOptionalRuleCall() throws Exception {
 		final String grammar = "language test generate test 'http://test' RuleA: RuleB? featureA=INT; RuleB: featureB=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
@@ -161,15 +160,15 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertNotNull(ruleA);
 		EClass ruleB = (EClass) ePackage.getEClassifier("RuleB");
 		assertNotNull(ruleB);
-		
+
 		assertEquals(1, ruleA.getEAttributes().size());
 		assertFeatureConfiguration(ruleA, 0, "featureA", "EInt");
-		
+
 		assertEquals(1, ruleB.getEAttributes().size());
 		assertFeatureConfiguration(ruleB, 0, "featureB", "EString");
 	}
 
-	public void testFeatureAndInheritanceMandatoryRuleCall() throws Exception {
+	public void testFeaturesAndInheritanceMandatoryRuleCall() throws Exception {
 		final String grammar = "language test generate test 'http://test' RuleA: RuleB featureA=INT; RuleB: featureB=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
@@ -177,12 +176,109 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertNotNull(ruleA);
 		EClass ruleB = (EClass) ePackage.getEClassifier("RuleB");
 		assertNotNull(ruleB);
-		
+
 		assertEquals(0, ruleA.getEAttributes().size());
-		
+
 		assertEquals(2, ruleB.getEAttributes().size());
 		assertFeatureConfiguration(ruleB, 0, "featureA", "EInt");
 		assertFeatureConfiguration(ruleB, 1, "featureB", "EString");
+	}
+
+	public void testFeaturesAndInheritanceOfMandatoryAlternativeRuleCalls() throws Exception {
+		final String grammar = "language test generate test 'http://test' RuleA: (RuleB|RuleC featureC1=ID) featureA=ID; RuleB: featureB=ID; RuleC: featureC2=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(3, ePackage.getEClassifiers().size());
+		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
+		assertNotNull(ruleA);
+		EClass ruleB = (EClass) ePackage.getEClassifier("RuleB");
+		assertNotNull(ruleB);
+		EClass ruleC = (EClass) ePackage.getEClassifier("RuleC");
+		assertNotNull(ruleC);
+
+		// test inheritance
+		assertTrue(ruleA.getESuperTypes().isEmpty());
+		assertEquals(1, ruleB.getESuperTypes().size());
+		assertEquals(ruleA, ruleB.getESuperTypes().get(0));
+		assertEquals(1, ruleC.getESuperTypes().size());
+		assertEquals(ruleA, ruleC.getESuperTypes().get(0));
+
+		// test all features are separated
+		assertEquals(0, ruleA.getEAttributes().size());
+		assertEquals(2, ruleB.getEAttributes().size());
+		assertFeatureConfiguration(ruleB, 0, "featureA", "EString");
+		assertFeatureConfiguration(ruleB, 1, "featureB", "EString");
+		assertEquals(3, ruleC.getEAttributes().size());
+		assertFeatureConfiguration(ruleC, 0, "featureC1", "EString");
+		assertFeatureConfiguration(ruleC, 1, "featureA", "EString");
+		assertFeatureConfiguration(ruleC, 2, "featureC2", "EString");
+	}
+
+	public void testFeaturesAndInheritanceOfOptionalOptionalRuleCalls() throws Exception {
+		final String grammar = "language test generate test 'http://test' RuleA: (RuleB|RuleC featureC1=ID)? featureA=ID; RuleB: featureB=ID; RuleC: featureC2=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(3, ePackage.getEClassifiers().size());
+		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
+		assertNotNull(ruleA);
+		EClass ruleB = (EClass) ePackage.getEClassifier("RuleB");
+		assertNotNull(ruleB);
+		EClass ruleC = (EClass) ePackage.getEClassifier("RuleC");
+		assertNotNull(ruleC);
+
+		// test inheritance
+		assertTrue(ruleA.getESuperTypes().isEmpty());
+		assertEquals(1, ruleB.getESuperTypes().size());
+		assertEquals(ruleA, ruleB.getESuperTypes().get(0));
+		assertEquals(1, ruleC.getESuperTypes().size());
+		assertEquals(ruleA, ruleC.getESuperTypes().get(0));
+
+		// test all features are separated
+		assertEquals(1, ruleA.getEAttributes().size());
+		assertFeatureConfiguration(ruleA, 0, "featureA", "EString");
+		assertEquals(1, ruleB.getEAttributes().size());
+		assertFeatureConfiguration(ruleB, 0, "featureB", "EString");
+		assertEquals(2, ruleC.getEAttributes().size());
+		assertFeatureConfiguration(ruleC, 0, "featureC1", "EString");
+		assertFeatureConfiguration(ruleC, 1, "featureC2", "EString");
+	}
+
+	public void testFeaturesAndInheritanceOfNestedRuleCalls() throws Exception {
+		final String grammar = "language test generate test 'http://test' RuleA: ((RuleB|RuleC featureC1=ID)? featureBC=ID | (RuleC|RuleD featureD1=ID) featureCD=ID) featureA=ID; RuleB: featureB2=ID; RuleC: featureC2=ID; RuleD: featureD2=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(4, ePackage.getEClassifiers().size());
+		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
+		assertNotNull(ruleA);
+		EClass ruleB = (EClass) ePackage.getEClassifier("RuleB");
+		assertNotNull(ruleB);
+		EClass ruleC = (EClass) ePackage.getEClassifier("RuleC");
+		assertNotNull(ruleC);
+		EClass ruleD = (EClass) ePackage.getEClassifier("RuleD");
+		assertNotNull(ruleD);
+
+		// test inheritance
+		assertTrue(ruleA.getESuperTypes().isEmpty());
+		assertEquals(1, ruleB.getESuperTypes().size());
+		assertEquals(ruleA, ruleB.getESuperTypes().get(0));
+		assertEquals(1, ruleC.getESuperTypes().size());
+		assertEquals(ruleA, ruleC.getESuperTypes().get(0));
+		assertEquals(1, ruleD.getESuperTypes().size());
+		assertEquals(ruleA, ruleD.getESuperTypes().get(0));
+
+		// test all features are separated
+		assertEquals(2, ruleA.getEAttributes().size());
+		assertFeatureConfiguration(ruleA, 0, "featureBC", "EString");
+		assertFeatureConfiguration(ruleA, 1, "featureA", "EString");
+		assertEquals(1, ruleB.getEAttributes().size());
+		assertFeatureConfiguration(ruleB, 0, "featureB2", "EString");
+		assertEquals(4, ruleC.getEAttributes().size());
+		assertFeatureConfiguration(ruleC, 0, "featureC1", "EString");
+		assertFeatureConfiguration(ruleC, 1, "featureCD", "EString");
+		assertFeatureConfiguration(ruleC, 2, "featureA", "EString");
+		assertFeatureConfiguration(ruleC, 3, "featureC2", "EString");
+		assertEquals(4, ruleD.getEAttributes().size());
+		assertFeatureConfiguration(ruleD, 0, "featureD1", "EString");
+		assertFeatureConfiguration(ruleD, 1, "featureCD", "EString");
+		assertFeatureConfiguration(ruleD, 2, "featureA", "EString");
+		assertFeatureConfiguration(ruleD, 3, "featureD2", "EString");
 	}
 
 }
