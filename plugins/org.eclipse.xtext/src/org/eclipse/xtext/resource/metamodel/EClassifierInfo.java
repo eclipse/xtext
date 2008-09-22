@@ -8,9 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.metamodel;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
