@@ -46,12 +46,23 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		return result;
 	}
 
-	private void assertFeatureConfiguration(EClass eClass, int attributeIndex,
+	private EAttribute assertFeatureConfiguration(EClass eClass, int attributeIndex,
 			String featureName, String featureTypeName) {
 		EAttribute feature = eClass.getEAttributes().get(attributeIndex);
 		assertEquals(featureName, feature.getName());
 		assertNotNull(feature.getEType());
 		assertEquals(featureTypeName, feature.getEType().getName());
+		
+		return feature;
+	}
+	
+	private EAttribute assertFeatureConfiguration(EClass eClass, int attributeIndex,
+			String featureName, String featureTypeName, int lowerBound, int upperBound) {
+		EAttribute feature = assertFeatureConfiguration(eClass, attributeIndex, featureName, featureTypeName);
+		assertEquals(lowerBound, feature.getLowerBound());
+		assertEquals(upperBound, feature.getUpperBound());
+		
+		return feature;
 	}
 
 	public void testTypesOfImplicitSuperGrammar() throws Exception {
@@ -119,6 +130,29 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertFeatureConfiguration(ruleA, 2, "featureC", "EString");
 	}
 
+	public void testCardinalityOfFeatures() throws Exception {
+		final String grammar = "language test generate test 'http://test' RuleA: featureA?=ID featureB=INT featureC+=STRING;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
+		assertNotNull(ruleA);
+
+		assertEquals(3, ruleA.getEAttributes().size());
+		assertFeatureConfiguration(ruleA, 0, "featureA", "EBoolean", 0, 1);
+		assertFeatureConfiguration(ruleA, 1, "featureB", "EInt", 0, 1);
+		assertFeatureConfiguration(ruleA, 2, "featureC", "EString", 0, -1);
+	}
+
+	public void testOptionalAssignmentsInGroup() throws Exception {
+		final String grammar = "language test generate test 'http://test' RuleA: (featureA?='abstract' featureB+=INT)?;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(1, ePackage.getEClassifiers().size());
+		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
+		assertNotNull(ruleA);
+		assertEquals(2, ruleA.getEAttributes().size());
+		assertFeatureConfiguration(ruleA, 0, "featureA", "EBoolean", 0, 1);
+		assertFeatureConfiguration(ruleA, 1, "featureB", "EInt", 0, -1);
+	}
+
 	public void testFeatureAndInheritanceOptionalRuleCall() throws Exception {
 		final String grammar = "language test generate test 'http://test' RuleA: RuleB? featureA=INT; RuleB: featureB=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
@@ -135,7 +169,7 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertFeatureConfiguration(ruleB, 0, "featureB", "EString");
 	}
 
-	public void _testFeatureAndInheritanceMandatoryRuleCall() throws Exception {
+	public void testFeatureAndInheritanceMandatoryRuleCall() throws Exception {
 		final String grammar = "language test generate test 'http://test' RuleA: RuleB featureA=INT; RuleB: featureB=STRING;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
