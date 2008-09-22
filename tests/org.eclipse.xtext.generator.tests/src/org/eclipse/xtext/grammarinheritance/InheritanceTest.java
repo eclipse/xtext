@@ -7,7 +7,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class InheritanceTest extends AbstractGeneratorTest {
 	static {
-		ServiceRegistry.registerService(AbstractTestLanguageStandaloneSetup.getServiceScope(),
+		ServiceRegistry.registerService(IAbstractTestLanguage.SCOPE,
 				IValueConverterService.class, AbstractTestLanguageValueConverters.class);
 	}
 

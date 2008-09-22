@@ -22,6 +22,9 @@
 */
 package «languageInterfaceFQName.toJavaPackage()»;
 
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
+
 public interface «languageInterfaceFQName.toSimpleName()» {
 
 	/**
@@ -34,6 +37,7 @@ public interface «languageInterfaceFQName.toSimpleName()» {
 	public static final String NAME = "«grammar().getName()»";
 	public static final String NAMESPACE = "«grammar().getNamespace()»";
 	public static final String[] FILE_EXTENSIONS = new String[]{«modelFileExtensions().collect(e|'"'+e+'"').toString(",")»};
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, «languageInterface(grammar().getSuperGrammar())».SCOPE);
 	
 }
 «ENDFILE»
