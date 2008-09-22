@@ -15,7 +15,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.testlanguages.ActionTestLanguage;
 import org.eclipse.xtext.testlanguages.ActionTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.IActionTestLanguage;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -40,7 +42,7 @@ public class ActionTest extends AbstractGeneratorTest {
 	}
 
     private EPackage getActionLangEPackage() {
-        IMetamodelAccess metaModelAccess = ServiceRegistry.getService(ActionTestLanguageStandaloneSetup.getServiceScope(), IMetamodelAccess.class);
+        IMetamodelAccess metaModelAccess = ServiceRegistry.getService(IActionTestLanguage.SCOPE, IMetamodelAccess.class);
 		EPackage actionLangEPackage = metaModelAccess.getGeneratedEPackages()[0];
 		return actionLangEPackage;
     }

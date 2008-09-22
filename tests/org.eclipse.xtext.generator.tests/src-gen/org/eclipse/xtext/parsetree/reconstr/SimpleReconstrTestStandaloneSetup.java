@@ -36,15 +36,12 @@ public abstract class SimpleReconstrTestStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					ISimpleReconstrTest.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, SimpleReconstrTestGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, SimpleReconstrTestMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, SimpleReconstrTestParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, SimpleReconstrTestResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, SimpleReconstrTestParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.parsetree.reconstr.ISimpleReconstrTest.SCOPE, IGrammarAccess.class, SimpleReconstrTestGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.parsetree.reconstr.ISimpleReconstrTest.SCOPE, IMetamodelAccess.class, SimpleReconstrTestMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.parsetree.reconstr.ISimpleReconstrTest.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.parsetree.reconstr.ISimpleReconstrTest.SCOPE, IParser.class, SimpleReconstrTestParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.parsetree.reconstr.ISimpleReconstrTest.SCOPE, IResourceFactory.class, SimpleReconstrTestResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.parsetree.reconstr.ISimpleReconstrTest.SCOPE, IParseTreeConstructor.class, SimpleReconstrTestParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new SimpleReconstrTestResourceFactory();
@@ -67,11 +64,7 @@ public abstract class SimpleReconstrTestStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(ISimpleReconstrTest.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.parsetree.reconstr.ISimpleReconstrTest.SCOPE;
 	}
-			
 }

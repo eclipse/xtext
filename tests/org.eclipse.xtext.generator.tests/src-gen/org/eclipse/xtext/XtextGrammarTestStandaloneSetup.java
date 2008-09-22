@@ -36,15 +36,12 @@ public abstract class XtextGrammarTestStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					IXtextGrammarTest.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, XtextGrammarTestGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, XtextGrammarTestMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, XtextGrammarTestParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, XtextGrammarTestResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, XtextGrammarTestParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.IXtextGrammarTest.SCOPE, IGrammarAccess.class, XtextGrammarTestGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.IXtextGrammarTest.SCOPE, IMetamodelAccess.class, XtextGrammarTestMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.IXtextGrammarTest.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.IXtextGrammarTest.SCOPE, IParser.class, XtextGrammarTestParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.IXtextGrammarTest.SCOPE, IResourceFactory.class, XtextGrammarTestResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.IXtextGrammarTest.SCOPE, IParseTreeConstructor.class, XtextGrammarTestParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new XtextGrammarTestResourceFactory();
@@ -67,11 +64,7 @@ public abstract class XtextGrammarTestStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(IXtextGrammarTest.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.IXtextGrammarTest.SCOPE;
 	}
-			
 }

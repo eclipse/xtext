@@ -5,14 +5,14 @@
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="//Sequence"/>
   <eClassifiers xsi:type="ecore:EClass" name="Sequence">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1" eType="//Expression" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Op" eSuperTypes="//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1" eType="//Expression" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1" eType="//Expression" containment="true" resolveProxies="false"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="//Sequence"/>
 </ecore:EPackage>

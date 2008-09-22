@@ -36,15 +36,12 @@ public abstract class OptionalEmptyLanguageStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					IOptionalEmptyLanguage.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, OptionalEmptyLanguageGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, OptionalEmptyLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, OptionalEmptyLanguageParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, OptionalEmptyLanguageResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, OptionalEmptyLanguageParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage.SCOPE, IGrammarAccess.class, OptionalEmptyLanguageGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage.SCOPE, IMetamodelAccess.class, OptionalEmptyLanguageMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage.SCOPE, IParser.class, OptionalEmptyLanguageParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage.SCOPE, IResourceFactory.class, OptionalEmptyLanguageResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage.SCOPE, IParseTreeConstructor.class, OptionalEmptyLanguageParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new OptionalEmptyLanguageResourceFactory();
@@ -67,11 +64,7 @@ public abstract class OptionalEmptyLanguageStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(IOptionalEmptyLanguage.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage.SCOPE;
 	}
-			
 }

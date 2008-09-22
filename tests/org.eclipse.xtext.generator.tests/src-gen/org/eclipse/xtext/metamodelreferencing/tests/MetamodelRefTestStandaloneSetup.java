@@ -36,15 +36,12 @@ public abstract class MetamodelRefTestStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					IMetamodelRefTest.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, MetamodelRefTestGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, MetamodelRefTestMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, MetamodelRefTestParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, MetamodelRefTestResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, MetamodelRefTestParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.metamodelreferencing.tests.IMetamodelRefTest.SCOPE, IGrammarAccess.class, MetamodelRefTestGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.metamodelreferencing.tests.IMetamodelRefTest.SCOPE, IMetamodelAccess.class, MetamodelRefTestMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.metamodelreferencing.tests.IMetamodelRefTest.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.metamodelreferencing.tests.IMetamodelRefTest.SCOPE, IParser.class, MetamodelRefTestParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.metamodelreferencing.tests.IMetamodelRefTest.SCOPE, IResourceFactory.class, MetamodelRefTestResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.metamodelreferencing.tests.IMetamodelRefTest.SCOPE, IParseTreeConstructor.class, MetamodelRefTestParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new MetamodelRefTestResourceFactory();
@@ -67,11 +64,7 @@ public abstract class MetamodelRefTestStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(IMetamodelRefTest.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.metamodelreferencing.tests.IMetamodelRefTest.SCOPE;
 	}
-			
 }

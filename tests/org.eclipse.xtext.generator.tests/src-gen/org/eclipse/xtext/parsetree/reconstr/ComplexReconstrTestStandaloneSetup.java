@@ -36,15 +36,12 @@ public abstract class ComplexReconstrTestStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					IComplexReconstrTest.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, ComplexReconstrTestGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, ComplexReconstrTestMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, ComplexReconstrTestParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, ComplexReconstrTestResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, ComplexReconstrTestParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTest.SCOPE, IGrammarAccess.class, ComplexReconstrTestGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTest.SCOPE, IMetamodelAccess.class, ComplexReconstrTestMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTest.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTest.SCOPE, IParser.class, ComplexReconstrTestParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTest.SCOPE, IResourceFactory.class, ComplexReconstrTestResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTest.SCOPE, IParseTreeConstructor.class, ComplexReconstrTestParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new ComplexReconstrTestResourceFactory();
@@ -67,11 +64,7 @@ public abstract class ComplexReconstrTestStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(IComplexReconstrTest.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTest.SCOPE;
 	}
-			
 }

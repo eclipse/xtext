@@ -28,11 +28,8 @@ public abstract class AbstractTestLanguageStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					IAbstractTestLanguage.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, AbstractTestLanguageGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, AbstractTestLanguageMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.grammarinheritance.IAbstractTestLanguage.SCOPE, IGrammarAccess.class, AbstractTestLanguageGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.grammarinheritance.IAbstractTestLanguage.SCOPE, IMetamodelAccess.class, AbstractTestLanguageMetamodelAccess.class);
 			
 			
 			// initialize EPackages
@@ -41,11 +38,7 @@ public abstract class AbstractTestLanguageStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(IAbstractTestLanguage.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.grammarinheritance.IAbstractTestLanguage.SCOPE;
 	}
-			
 }

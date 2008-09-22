@@ -36,15 +36,12 @@ public abstract class SimpleExpressionsStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					ISimpleExpressions.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, SimpleExpressionsGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, SimpleExpressionsMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, SimpleExpressionsParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, SimpleExpressionsResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, SimpleExpressionsParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ISimpleExpressions.SCOPE, IGrammarAccess.class, SimpleExpressionsGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ISimpleExpressions.SCOPE, IMetamodelAccess.class, SimpleExpressionsMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ISimpleExpressions.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ISimpleExpressions.SCOPE, IParser.class, SimpleExpressionsParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ISimpleExpressions.SCOPE, IResourceFactory.class, SimpleExpressionsResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ISimpleExpressions.SCOPE, IParseTreeConstructor.class, SimpleExpressionsParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new SimpleExpressionsResourceFactory();
@@ -67,11 +64,7 @@ public abstract class SimpleExpressionsStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(ISimpleExpressions.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.testlanguages.ISimpleExpressions.SCOPE;
 	}
-			
 }
