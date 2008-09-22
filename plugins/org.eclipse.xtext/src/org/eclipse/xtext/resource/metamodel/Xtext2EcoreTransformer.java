@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -31,7 +30,6 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
@@ -69,6 +67,8 @@ public class Xtext2EcoreTransformer {
 		// create types:
 		// iterate rules
 		// - typeref in actions
+		// type hierarchy
+		// - actions
 		for (AbstractRule rule : grammar.getRules()) {
 			// - return types (lexer and parser rules)
 			try {
@@ -85,9 +85,7 @@ public class Xtext2EcoreTransformer {
 
 		// create features
 		// iterate rules
-		// - assignments
 		// - feature in actions
-		// multiplicity!
 		for (AbstractRule rule : grammar.getRules()) {
 			try {
 				if (rule instanceof ParserRule) {
@@ -98,10 +96,6 @@ public class Xtext2EcoreTransformer {
 				reportError(e.getMessage(), e.getErroneousElement());
 			}
 		}
-
-		// type hierarchy
-		// - rule calls (optionality)
-		// - actions
 
 		// feature normalization
 		// - uplift of common feature to supertype
@@ -118,28 +112,42 @@ public class Xtext2EcoreTransformer {
 		this.getEClassifierInfos().addAll(transformer.getEClassifierInfos());
 	}
 
-	private InterpretationContext deriveFeatures(InterpretationContext context, AbstractElement element)
-			throws TransformationException {
+	private Xtext2ECoreInterpretationContext deriveFeatures(Xtext2ECoreInterpretationContext context,
+			AbstractElement element) throws TransformationException {
 		if (element instanceof Assignment) {
 			Assignment assignment = (Assignment) element;
 			context.addFeature(assignment);
 		}
+		else if (element instanceof Alternatives) {
+			Alternatives alternatives = (Alternatives) element;
+			List<Xtext2ECoreInterpretationContext> contexts = new ArrayList<Xtext2ECoreInterpretationContext>();
+			for (AbstractElement group : alternatives.getGroups()) {
+				contexts.add(deriveFeatures(context, group));
+			}
+
+			if (!GrammarUtil.isOptionalCardinality(alternatives))
+				return context.mergeSpawnedContexts(contexts);
+		}
 		else if (element instanceof Group) {
 			Group group = (Group) element;
-			return deriveFeatures(context, group.getAbstractTokens());
+			return deriveFeatures(context.spawnContextForGroup(), group.getAbstractTokens());
 		}
 		else if (element instanceof RuleCall && !GrammarUtil.isOptionalCardinality(element)) {
 			RuleCall ruleCall = (RuleCall) element;
 			AbstractRule calledRule = GrammarUtil.findRuleForName(grammar, ruleCall.getName());
-			context = context.clone();
-			context.currentType = findOrCreateEClass(calledRule);
+			try {
+				return context.spawnContextWith(findOrCreateEClass(calledRule));
+			}
+			catch (IllegalStateException e) {
+				throw new TransformationException(e.getMessage(), ruleCall);
+			}
 		}
 
 		return context;
 	}
 
-	private InterpretationContext deriveFeatures(InterpretationContext context, EList<AbstractElement> elements)
-			throws TransformationException {
+	private Xtext2ECoreInterpretationContext deriveFeatures(Xtext2ECoreInterpretationContext context,
+			EList<AbstractElement> elements) throws TransformationException {
 		for (AbstractElement element : elements) {
 			context = deriveFeatures(context, element);
 		}
@@ -148,8 +156,7 @@ public class Xtext2EcoreTransformer {
 
 	private void deriveFeatures(ParserRule rule) throws TransformationException {
 		EClassifierInfo classInfo = findOrCreateEClass(rule);
-		boolean isGenerated = classInfo.isGenerated();
-		InterpretationContext context = new InterpretationContext(classInfo, isGenerated, true);
+		Xtext2ECoreInterpretationContext context = new Xtext2ECoreInterpretationContext(eClassifierInfos, classInfo);
 		deriveFeatures(context, rule.getAlternatives());
 	}
 
@@ -204,53 +211,6 @@ public class Xtext2EcoreTransformer {
 	private void addSuperType(TypeRef subTypeRef, EClassifierInfo superType) throws TransformationException {
 		EClassifierInfo calledRuleReturnType = findOrCreateEClass(subTypeRef);
 		calledRuleReturnType.addSupertype(superType);
-	}
-
-	class InterpretationContext {
-		public InterpretationContext(EClassifierInfo currentType, boolean isGeneratedType, boolean isRuleCallAllowed) {
-			super();
-			this.currentType = currentType;
-			this.isGeneratedType = isGeneratedType;
-			this.isRuleCallAllowed = isRuleCallAllowed;
-		}
-
-		public void addFeature(Assignment assignment) throws TransformationException {
-			String featureName = assignment.getFeature();
-			boolean isMultivalue = GrammarUtil.isMultipleAssignment(assignment);
-			EClassifierInfo featureTypeInfo;
-
-			if (GrammarUtil.isBooleanAssignment(assignment)) {
-				featureTypeInfo = getEClassifierInfoOrThrowException("ecore::EBoolean", assignment);
-				isMultivalue = false;
-			}
-			else {
-				RuleCall featureRuleCall = (RuleCall) assignment.getTerminal();
-				AbstractRule featureTypeRule = GrammarUtil.calledRule(featureRuleCall);
-				String featureTypeName = GrammarUtil.getReturnTypeName(featureTypeRule);
-				featureTypeInfo = getEClassifierInfoOrThrowException(featureTypeName, assignment);
-
-			}
-
-			currentType.addFeature(featureName, featureTypeInfo, isMultivalue);
-		}
-
-		private EClassifierInfo getEClassifierInfoOrThrowException(String typeName, AbstractElement parserElement)
-				throws TransformationException {
-			EClassifierInfo featureTypeInfo = eClassifierInfos.getInfo(typeName);
-			if (featureTypeInfo == null) {
-				throw new TransformationException("Cannot resolve type " + typeName, parserElement);
-			}
-			return featureTypeInfo;
-		}
-
-		public InterpretationContext clone() {
-			return new InterpretationContext(currentType, isGeneratedType, isRuleCallAllowed);
-		}
-
-		// TODO : Use set of types to reflect mandatory actions
-		EClassifierInfo currentType;
-		boolean isGeneratedType;
-		boolean isRuleCallAllowed = true;
 	}
 
 	private void collectEPackages() {
