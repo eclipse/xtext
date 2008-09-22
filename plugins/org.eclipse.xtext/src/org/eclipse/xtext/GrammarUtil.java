@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builtin.IXtextBuiltin;
+import org.eclipse.xtext.impl.TypeRefImpl;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -256,10 +257,26 @@ public class GrammarUtil {
 		return getQualifiedName(rule.getType());
 	}
 
-	public static String getQualifiedName(TypeRef type) {
-		return (type.getAlias() != null ? type.getAlias() + "::" : "") + type.getName();
+	public static String getQualifiedName(String alias, String name) {
+		return (alias != null ? alias + "::" : "") + name;
 	}
-
+	
+	public static String getQualifiedName(TypeRef type) {
+		return getQualifiedName(type.getAlias(), type.getName());
+	}
+	
+	public static TypeRef getTypeRef(String qualifiedName) {
+		TypeRef result = XtextFactory.eINSTANCE.createTypeRef();
+		String[] split = qualifiedName.split("::");
+		if (split.length > 1) {
+			result.setAlias(split[0]);
+			result.setName(split[1]);
+		} else {
+			result.setName(qualifiedName);
+		}
+		return result;
+	}
+	
 	public static boolean isAssigned(EObject e) {
 		return containingAssignment(e) != null;
 	}

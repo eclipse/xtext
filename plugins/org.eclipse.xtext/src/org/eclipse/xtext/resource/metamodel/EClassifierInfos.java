@@ -11,6 +11,7 @@ package org.eclipse.xtext.resource.metamodel;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
@@ -20,33 +21,31 @@ import org.eclipse.xtext.util.Strings;
  * redundant supertype references. We currently don't think thats necessary as
  * EMF handles multiple inheritance gracefully.
  * 
- * @author Jan Köhnlein - Initial contribution and API
+ * @author Jan K?hnlein - Initial contribution and API
  * 
  */
-public class EClassInfos {
+public class EClassifierInfos {
 
-	class Key extends Pair<String, String> {
-		public Key(String firstElement, String secondElement) {
-			super(firstElement, secondElement);
-		}
+	private Map<String, EClassifierInfo> infoMap = new HashMap<String, EClassifierInfo>();
+
+	public boolean addInfo(TypeRef typeRef, EClassifierInfo metatypeInfo) {
+		return infoMap.put(GrammarUtil.getQualifiedName(typeRef), metatypeInfo) != metatypeInfo;
 	}
 
-	private Map<Key, EClassInfo> infoMap = new HashMap<Key, EClassInfo>();
-
-	public boolean addInfo(TypeRef typeRef, EClassInfo metatypeInfo) {
-		return infoMap.put(key(typeRef), metatypeInfo) != metatypeInfo;
+	public boolean addInfo(String alias, String name, EClassifierInfo metatypeInfo) {
+		return infoMap.put(GrammarUtil.getQualifiedName(alias, name), metatypeInfo) != metatypeInfo;
 	}
 
-	public boolean addInfo(String alias, String name, EClassInfo metatypeInfo) {
-		return infoMap.put(new Key(alias, name), metatypeInfo) != metatypeInfo;
+	public EClassifierInfo getInfo(TypeRef typeRef) {
+		return getInfo(GrammarUtil.getQualifiedName(typeRef));
 	}
 
-	public EClassInfo getInfo(TypeRef typeRef) {
-		return infoMap.get(key(typeRef));
+	public EClassifierInfo getInfo(String qualifiedName) {
+		return infoMap.get(qualifiedName);
 	}
 
-	private Key key(TypeRef typeRef) {
-		return new Key(Strings.emptyIfNull(typeRef.getAlias()), typeRef.getName());
+	public void addAll(EClassifierInfos classInfos) {
+		infoMap.putAll(classInfos.infoMap);
 	}
-
+	
 }

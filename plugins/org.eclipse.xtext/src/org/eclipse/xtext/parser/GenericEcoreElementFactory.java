@@ -26,6 +26,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.ReferencedMetamodel;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.service.Inject;
 
@@ -119,18 +120,12 @@ public class GenericEcoreElementFactory implements IAstFactory {
 	}
 
 	public EClass getEClass(String fullTypeName) {
-		String[] split = fullTypeName.split("::");
-		String typeName = fullTypeName;
-		String alias = null;
-		if (split.length > 1) {
-			alias = split[0];
-			typeName = split[1];
-		}
-		EPackage pack = getEPackage(alias);
+		TypeRef typeRef = GrammarUtil.getTypeRef(fullTypeName);
+		EPackage pack = getEPackage(typeRef.getAlias());
 		if (pack == null) {
-			throw new IllegalStateException("Couldn't find any epackages for alias '" + alias + "'");
+			throw new IllegalStateException("Couldn't find any epackages for alias '" + typeRef.getAlias() + "'");
 		}
-		EClassifier classifier = pack.getEClassifier(typeName);
+		EClassifier classifier = pack.getEClassifier(typeRef.getName());
 		if (classifier instanceof EClass) {
 			return (EClass) classifier;
 		}
