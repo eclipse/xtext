@@ -36,15 +36,12 @@ public abstract class TestLanguageStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					ITestLanguage.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, TestLanguageGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, TestLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, TestLanguageParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, TestLanguageResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, TestLanguageParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ITestLanguage.SCOPE, IGrammarAccess.class, TestLanguageGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ITestLanguage.SCOPE, IMetamodelAccess.class, TestLanguageMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ITestLanguage.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ITestLanguage.SCOPE, IParser.class, TestLanguageParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ITestLanguage.SCOPE, IResourceFactory.class, TestLanguageResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ITestLanguage.SCOPE, IParseTreeConstructor.class, TestLanguageParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new TestLanguageResourceFactory();
@@ -67,11 +64,7 @@ public abstract class TestLanguageStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(ITestLanguage.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.testlanguages.ITestLanguage.SCOPE;
 	}
-			
 }

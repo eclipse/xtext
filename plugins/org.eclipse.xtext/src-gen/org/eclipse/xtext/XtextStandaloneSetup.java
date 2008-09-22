@@ -36,15 +36,12 @@ public abstract class XtextStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					IXtext.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, XtextGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, XtextMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, XtextParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, XtextResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, XtextParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.IXtext.SCOPE, IGrammarAccess.class, XtextGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.IXtext.SCOPE, IMetamodelAccess.class, XtextMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.IXtext.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.IXtext.SCOPE, IParser.class, XtextParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.IXtext.SCOPE, IResourceFactory.class, XtextResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.IXtext.SCOPE, IParseTreeConstructor.class, XtextParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new XtextResourceFactory();
@@ -68,11 +65,7 @@ public abstract class XtextStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(IXtext.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.IXtext.SCOPE;
 	}
-			
 }

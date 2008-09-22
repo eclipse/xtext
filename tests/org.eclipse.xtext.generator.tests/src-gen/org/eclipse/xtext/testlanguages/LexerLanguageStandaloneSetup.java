@@ -36,15 +36,12 @@ public abstract class LexerLanguageStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					ILexerLanguage.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, LexerLanguageGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, LexerLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, LexerLanguageParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, LexerLanguageResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, LexerLanguageParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE, IGrammarAccess.class, LexerLanguageGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE, IMetamodelAccess.class, LexerLanguageMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE, IParser.class, LexerLanguageParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE, IResourceFactory.class, LexerLanguageResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE, IParseTreeConstructor.class, LexerLanguageParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new LexerLanguageResourceFactory();
@@ -67,11 +64,7 @@ public abstract class LexerLanguageStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(ILexerLanguage.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE;
 	}
-			
 }

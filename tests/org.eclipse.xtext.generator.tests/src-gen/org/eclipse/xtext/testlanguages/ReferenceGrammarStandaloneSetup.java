@@ -36,15 +36,12 @@ public abstract class ReferenceGrammarStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					IReferenceGrammar.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, ReferenceGrammarGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, ReferenceGrammarMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, ReferenceGrammarParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, ReferenceGrammarResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, ReferenceGrammarParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IReferenceGrammar.SCOPE, IGrammarAccess.class, ReferenceGrammarGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IReferenceGrammar.SCOPE, IMetamodelAccess.class, ReferenceGrammarMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IReferenceGrammar.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IReferenceGrammar.SCOPE, IParser.class, ReferenceGrammarParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IReferenceGrammar.SCOPE, IResourceFactory.class, ReferenceGrammarResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IReferenceGrammar.SCOPE, IParseTreeConstructor.class, ReferenceGrammarParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new ReferenceGrammarResourceFactory();
@@ -67,11 +64,7 @@ public abstract class ReferenceGrammarStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(IReferenceGrammar.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.testlanguages.IReferenceGrammar.SCOPE;
 	}
-			
 }

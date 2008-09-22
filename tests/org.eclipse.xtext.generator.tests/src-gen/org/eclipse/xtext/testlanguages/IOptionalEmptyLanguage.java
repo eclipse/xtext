@@ -3,6 +3,9 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages;
 
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
+
 public interface IOptionalEmptyLanguage {
 
 	/**
@@ -15,5 +18,6 @@ public interface IOptionalEmptyLanguage {
 	public static final String NAME = "OptionalEmptyLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.testlanguages";
 	public static final String[] FILE_EXTENSIONS = new String[]{"optionalemptylanguage"};
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
 	
 }

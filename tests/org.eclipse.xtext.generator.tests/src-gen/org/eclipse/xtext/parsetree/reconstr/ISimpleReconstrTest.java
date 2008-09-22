@@ -3,6 +3,9 @@ Generated with Xtext
 */
 package org.eclipse.xtext.parsetree.reconstr;
 
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
+
 public interface ISimpleReconstrTest {
 
 	/**
@@ -15,5 +18,6 @@ public interface ISimpleReconstrTest {
 	public static final String NAME = "SimpleReconstrTest";
 	public static final String NAMESPACE = "org.eclipse.xtext.parsetree.reconstr";
 	public static final String[] FILE_EXTENSIONS = new String[]{"simplereconstrtest"};
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
 	
 }

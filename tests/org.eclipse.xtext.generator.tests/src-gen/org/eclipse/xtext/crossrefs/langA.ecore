@@ -6,13 +6,13 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="//Type"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Main">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1" eType="//Import" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1" eType="//Type" containment="true" resolveProxies="false"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Main">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1" eType="//Import" containment="true" resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1" eType="//Type" containment="true" resolveProxies="false"/>
   </eClassifiers>
 </ecore:EPackage>

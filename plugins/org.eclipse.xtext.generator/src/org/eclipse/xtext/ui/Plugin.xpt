@@ -143,6 +143,7 @@
 «ENDDEFINE»
 
 «DEFINE templatesExtenion FOR GenModel»
+«REM»
    <extension
          point="org.eclipse.ui.editors.templates">
       <contextType
@@ -161,6 +162,7 @@
          ]]></pattern>
       </template>
    </extension>
+«ENDREM»
    <extension
          point="org.eclipse.ui.preferencePages">
       <page

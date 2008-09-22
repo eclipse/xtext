@@ -36,15 +36,12 @@ public abstract class ActionTestLanguageStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					IActionTestLanguage.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, ActionTestLanguageGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, ActionTestLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, ActionTestLanguageParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, ActionTestLanguageResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, ActionTestLanguageParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IActionTestLanguage.SCOPE, IGrammarAccess.class, ActionTestLanguageGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IActionTestLanguage.SCOPE, IMetamodelAccess.class, ActionTestLanguageMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IActionTestLanguage.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IActionTestLanguage.SCOPE, IParser.class, ActionTestLanguageParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IActionTestLanguage.SCOPE, IResourceFactory.class, ActionTestLanguageResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IActionTestLanguage.SCOPE, IParseTreeConstructor.class, ActionTestLanguageParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new ActionTestLanguageResourceFactory();
@@ -67,11 +64,7 @@ public abstract class ActionTestLanguageStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(IActionTestLanguage.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.testlanguages.IActionTestLanguage.SCOPE;
 	}
-			
 }

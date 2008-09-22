@@ -3,6 +3,9 @@ Generated with Xtext
 */
 package org.eclipse.xtext;
 
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
+
 public interface IXtext {
 
 	/**
@@ -15,5 +18,6 @@ public interface IXtext {
 	public static final String NAME = "Xtext";
 	public static final String NAMESPACE = "org.eclipse.xtext";
 	public static final String[] FILE_EXTENSIONS = new String[]{"xtext","xtext2"};
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
 	
 }

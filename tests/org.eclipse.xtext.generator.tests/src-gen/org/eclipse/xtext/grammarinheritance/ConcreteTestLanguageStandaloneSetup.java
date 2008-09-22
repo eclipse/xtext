@@ -36,15 +36,12 @@ public abstract class ConcreteTestLanguageStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.grammarinheritance.AbstractTestLanguageStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					IConcreteTestLanguage.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.grammarinheritance.AbstractTestLanguage"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, ConcreteTestLanguageGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, ConcreteTestLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, ConcreteTestLanguageParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, ConcreteTestLanguageResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, ConcreteTestLanguageParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.grammarinheritance.IConcreteTestLanguage.SCOPE, IGrammarAccess.class, ConcreteTestLanguageGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.grammarinheritance.IConcreteTestLanguage.SCOPE, IMetamodelAccess.class, ConcreteTestLanguageMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.grammarinheritance.IConcreteTestLanguage.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.grammarinheritance.IConcreteTestLanguage.SCOPE, IParser.class, ConcreteTestLanguageParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.grammarinheritance.IConcreteTestLanguage.SCOPE, IResourceFactory.class, ConcreteTestLanguageResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.grammarinheritance.IConcreteTestLanguage.SCOPE, IParseTreeConstructor.class, ConcreteTestLanguageParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new ConcreteTestLanguageResourceFactory();
@@ -67,11 +64,7 @@ public abstract class ConcreteTestLanguageStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(IConcreteTestLanguage.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.grammarinheritance.IConcreteTestLanguage.SCOPE;
 	}
-			
 }

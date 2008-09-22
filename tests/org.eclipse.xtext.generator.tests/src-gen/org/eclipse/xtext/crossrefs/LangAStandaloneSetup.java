@@ -36,15 +36,12 @@ public abstract class LangAStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					ILangA.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, LangAGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, LangAMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, LangAParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, LangAResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, LangAParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.crossrefs.ILangA.SCOPE, IGrammarAccess.class, LangAGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.crossrefs.ILangA.SCOPE, IMetamodelAccess.class, LangAMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.crossrefs.ILangA.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.crossrefs.ILangA.SCOPE, IParser.class, LangAParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.crossrefs.ILangA.SCOPE, IResourceFactory.class, LangAResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.crossrefs.ILangA.SCOPE, IParseTreeConstructor.class, LangAParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new LangAResourceFactory();
@@ -67,11 +64,7 @@ public abstract class LangAStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(ILangA.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.crossrefs.ILangA.SCOPE;
 	}
-			
 }

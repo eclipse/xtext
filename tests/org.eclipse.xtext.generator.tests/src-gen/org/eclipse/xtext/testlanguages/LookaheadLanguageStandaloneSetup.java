@@ -36,15 +36,12 @@ public abstract class LookaheadLanguageStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					ILookaheadLanguage.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, LookaheadLanguageGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, LookaheadLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, LookaheadLanguageParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, LookaheadLanguageResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, LookaheadLanguageParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILookaheadLanguage.SCOPE, IGrammarAccess.class, LookaheadLanguageGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILookaheadLanguage.SCOPE, IMetamodelAccess.class, LookaheadLanguageMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILookaheadLanguage.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILookaheadLanguage.SCOPE, IParser.class, LookaheadLanguageParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILookaheadLanguage.SCOPE, IResourceFactory.class, LookaheadLanguageResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILookaheadLanguage.SCOPE, IParseTreeConstructor.class, LookaheadLanguageParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new LookaheadLanguageResourceFactory();
@@ -67,11 +64,7 @@ public abstract class LookaheadLanguageStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(ILookaheadLanguage.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.testlanguages.ILookaheadLanguage.SCOPE;
 	}
-			
 }

@@ -3,6 +3,9 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages;
 
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
+
 public interface ILexerLanguage {
 
 	/**
@@ -15,5 +18,6 @@ public interface ILexerLanguage {
 	public static final String NAME = "LexerLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.testlanguages";
 	public static final String[] FILE_EXTENSIONS = new String[]{"lexerlanguage"};
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
 	
 }

@@ -3,6 +3,9 @@ Generated with Xtext
 */
 package org.eclipse.xtext.dummy;
 
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
+
 public interface IDummyLanguage {
 
 	/**
@@ -15,5 +18,6 @@ public interface IDummyLanguage {
 	public static final String NAME = "DummyLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.dummy";
 	public static final String[] FILE_EXTENSIONS = new String[]{"dummylanguage"};
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
 	
 }

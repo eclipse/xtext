@@ -36,15 +36,12 @@ public abstract class DummyLanguageStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			IServiceScope scope = ServiceScopeFactory.createScope(
-					IDummyLanguage.ID, 
-					ServiceScopeFactory.get("org.eclipse.xtext.builtin.XtextBuiltin"));
-			ServiceRegistry.registerService(scope, IGrammarAccess.class, DummyLanguageGrammarAccess.class);
-			ServiceRegistry.registerService(scope, IMetamodelAccess.class, DummyLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(scope, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(scope, IParser.class, DummyLanguageParser.class);
-			ServiceRegistry.registerService(scope, IResourceFactory.class, DummyLanguageResourceFactory.class);
-			ServiceRegistry.registerService(scope, IParseTreeConstructor.class, DummyLanguageParseTreeConstructor.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.dummy.IDummyLanguage.SCOPE, IGrammarAccess.class, DummyLanguageGrammarAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.dummy.IDummyLanguage.SCOPE, IMetamodelAccess.class, DummyLanguageMetamodelAccess.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.dummy.IDummyLanguage.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.dummy.IDummyLanguage.SCOPE, IParser.class, DummyLanguageParser.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.dummy.IDummyLanguage.SCOPE, IResourceFactory.class, DummyLanguageResourceFactory.class);
+			ServiceRegistry.registerService(org.eclipse.xtext.dummy.IDummyLanguage.SCOPE, IParseTreeConstructor.class, DummyLanguageParseTreeConstructor.class);
 			
 			// register resource factory to EMF
 			IResourceFactory resourceFactory = new DummyLanguageResourceFactory();
@@ -67,11 +64,7 @@ public abstract class DummyLanguageStandaloneSetup {
 		}
 	}
 	
-	public static synchronized IServiceScope getServiceScope() {
-		if(!isInitialized) {
-			doSetup();
-		}
-		return ServiceScopeFactory.get(IDummyLanguage.ID);
+	public static IServiceScope getServiceScope() {
+		return org.eclipse.xtext.dummy.IDummyLanguage.SCOPE;
 	}
-			
 }

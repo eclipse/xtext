@@ -3,6 +3,9 @@ Generated with Xtext
 */
 package org.eclipse.xtext.crossrefs;
 
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceScopeFactory;
+
 public interface ILangA {
 
 	/**
@@ -15,5 +18,6 @@ public interface ILangA {
 	public static final String NAME = "LangA";
 	public static final String NAMESPACE = "org.eclipse.xtext.crossrefs";
 	public static final String[] FILE_EXTENSIONS = new String[]{"langa"};
+	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
 	
 }
