@@ -15,9 +15,7 @@ import org.eclipse.xtext.crossref.impl.DefaultRuntimeURIChecker;
 import org.eclipse.xtext.crossref.impl.XtextBuiltinFragmentProvider;
 import org.eclipse.xtext.crossref.impl.XtextBuiltinLinkProvider;
 import org.eclipse.xtext.crossref.internal.Linker;
-import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.service.ServiceScopeFactory;
 
 public class XtextBuiltinStandaloneSetup {
 
@@ -29,24 +27,15 @@ public class XtextBuiltinStandaloneSetup {
             Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
             EPackage.Registry.INSTANCE.put(XtextPackage.eNS_URI,XtextPackage.eINSTANCE);
             
-            IServiceScope serviceScope = ServiceScopeFactory.createScope(IXtextBuiltin.ID, null);
-
-            ServiceRegistry.registerService(serviceScope, IGrammarAccess.class, XtextBuiltinGrammarAccess.class);
-            ServiceRegistry.registerService(serviceScope, IValueConverterService.class, XtextBuiltInConverters.class);
-            ServiceRegistry.registerService(serviceScope, ILinker.class, Linker.class);
-            ServiceRegistry.registerService(serviceScope, ILinkProvider.class, XtextBuiltinLinkProvider.class);
-            ServiceRegistry.registerService(serviceScope, IURIChecker.class, DefaultRuntimeURIChecker.class);
-            ServiceRegistry.registerService(serviceScope, IFragmentProvider.class, XtextBuiltinFragmentProvider.class);
-            
+            ServiceRegistry.registerService(IXtextBuiltin.SCOPE, IGrammarAccess.class, XtextBuiltinGrammarAccess.class);
+            ServiceRegistry.registerService(IXtextBuiltin.SCOPE, IValueConverterService.class, XtextBuiltInConverters.class);
+            ServiceRegistry.registerService(IXtextBuiltin.SCOPE, ILinker.class, Linker.class);
+            ServiceRegistry.registerService(IXtextBuiltin.SCOPE, ILinkProvider.class, XtextBuiltinLinkProvider.class);
+            ServiceRegistry.registerService(IXtextBuiltin.SCOPE, IURIChecker.class, DefaultRuntimeURIChecker.class);
+            ServiceRegistry.registerService(IXtextBuiltin.SCOPE, IFragmentProvider.class, XtextBuiltinFragmentProvider.class);
             
             isInitialized = true;
         }
     }
 
-    public synchronized static IServiceScope getServiceScope() {
-        if (!isInitialized) {
-            doSetup();
-        }
-        return ServiceScopeFactory.get(IXtextBuiltin.ID);
-    }
 }
