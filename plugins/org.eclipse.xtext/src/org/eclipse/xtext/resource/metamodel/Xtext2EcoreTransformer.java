@@ -75,10 +75,10 @@ public class Xtext2EcoreTransformer {
 				EClassifierInfo generatedEClass = findOrCreateEClass(rule);
 				if (rule instanceof ParserRule) {
 					ParserRule parserRule = (ParserRule) rule;
-					deriveTypesAndHierarchy(generatedEClass, parserRule
-							.getAlternatives());
+					deriveTypesAndHierarchy(generatedEClass, parserRule.getAlternatives());
 				}
-			} catch (TransformationException e) {
+			}
+			catch (TransformationException e) {
 				reportError(e.getMessage(), e.getErroneousElement());
 			}
 		}
@@ -93,7 +93,8 @@ public class Xtext2EcoreTransformer {
 				if (rule instanceof ParserRule) {
 					this.deriveFeatures((ParserRule) rule);
 				}
-			} catch (TransformationException e) {
+			}
+			catch (TransformationException e) {
 				reportError(e.getMessage(), e.getErroneousElement());
 			}
 		}
@@ -117,22 +118,29 @@ public class Xtext2EcoreTransformer {
 		this.getEClassifierInfos().addAll(transformer.getEClassifierInfos());
 	}
 
-	private InterpretationContext deriveFeatures(InterpretationContext context,
-			AbstractElement element) throws TransformationException {
+	private InterpretationContext deriveFeatures(InterpretationContext context, AbstractElement element)
+			throws TransformationException {
 		if (element instanceof Assignment) {
 			Assignment assignment = (Assignment) element;
 			context.addFeature(assignment);
-		} else if (element instanceof Group) {
+		}
+		else if (element instanceof Group) {
 			Group group = (Group) element;
 			return deriveFeatures(context, group.getAbstractTokens());
+		}
+		else if (element instanceof RuleCall && !GrammarUtil.isOptionalCardinality(element)) {
+			RuleCall ruleCall = (RuleCall) element;
+			AbstractRule calledRule = GrammarUtil.findRuleForName(grammar, ruleCall.getName());
+			context = context.clone();
+			context.currentType = findOrCreateEClass(calledRule);
 		}
 
 		return context;
 	}
 
-	private InterpretationContext deriveFeatures(InterpretationContext context,
-			EList<AbstractElement> elements) throws TransformationException {
-		for(AbstractElement element : elements) {
+	private InterpretationContext deriveFeatures(InterpretationContext context, EList<AbstractElement> elements)
+			throws TransformationException {
+		for (AbstractElement element : elements) {
 			context = deriveFeatures(context, element);
 		}
 		return context;
@@ -141,8 +149,7 @@ public class Xtext2EcoreTransformer {
 	private void deriveFeatures(ParserRule rule) throws TransformationException {
 		EClassifierInfo classInfo = findOrCreateEClass(rule);
 		boolean isGenerated = classInfo.isGenerated();
-		InterpretationContext context = new InterpretationContext(classInfo,
-				isGenerated, true);
+		InterpretationContext context = new InterpretationContext(classInfo, isGenerated, true);
 		deriveFeatures(context, rule.getAlternatives());
 	}
 
@@ -164,72 +171,80 @@ public class Xtext2EcoreTransformer {
 	 * @param alternatives
 	 * @throws TransformationException
 	 */
-	private void deriveTypesAndHierarchy(EClassifierInfo ruleReturnType,
-			AbstractElement element) throws TransformationException {
+	private void deriveTypesAndHierarchy(EClassifierInfo ruleReturnType, AbstractElement element)
+			throws TransformationException {
 		if (element instanceof RuleCall) {
 			RuleCall ruleCall = (RuleCall) element;
 			AbstractRule calledRule = GrammarUtil.calledRule(ruleCall);
 			TypeRef calledRuleReturnTypeRef = getOrFakeReturnType(calledRule);
 			addSuperType(calledRuleReturnTypeRef, ruleReturnType);
-		} else if (element instanceof Action) {
+		}
+		else if (element instanceof Action) {
 			Action action = (Action) element;
 			TypeRef actionTypeRef = action.getTypeName();
 			addSuperType(actionTypeRef, ruleReturnType);
-		} else if (element instanceof Group) {
+		}
+		else if (element instanceof Group) {
 			Group group = (Group) element;
 			deriveTypesAndHierarchy(ruleReturnType, group.getAbstractTokens());
-		} else if (element instanceof Alternatives) {
+		}
+		else if (element instanceof Alternatives) {
 			Alternatives alternatives = (Alternatives) element;
 			deriveTypesAndHierarchy(ruleReturnType, alternatives.getGroups());
 		}
 	}
 
-	private void deriveTypesAndHierarchy(EClassifierInfo ruleReturnType,
-			List<AbstractElement> elements) throws TransformationException {
+	private void deriveTypesAndHierarchy(EClassifierInfo ruleReturnType, List<AbstractElement> elements)
+			throws TransformationException {
 		for (AbstractElement element : elements) {
 			deriveTypesAndHierarchy(ruleReturnType, element);
 		}
 	}
 
-	private void addSuperType(TypeRef subTypeRef, EClassifierInfo superType)
-			throws TransformationException {
+	private void addSuperType(TypeRef subTypeRef, EClassifierInfo superType) throws TransformationException {
 		EClassifierInfo calledRuleReturnType = findOrCreateEClass(subTypeRef);
 		calledRuleReturnType.addSupertype(superType);
 	}
 
 	class InterpretationContext {
-		public InterpretationContext(EClassifierInfo currentType,
-				boolean isGeneratedType, boolean isRuleCallAllowed) {
+		public InterpretationContext(EClassifierInfo currentType, boolean isGeneratedType, boolean isRuleCallAllowed) {
 			super();
 			this.currentType = currentType;
 			this.isGeneratedType = isGeneratedType;
 			this.isRuleCallAllowed = isRuleCallAllowed;
 		}
 
-		public void addFeature(Assignment assignment)
-				throws TransformationException {
+		public void addFeature(Assignment assignment) throws TransformationException {
 			String featureName = assignment.getFeature();
-			RuleCall featureRuleCall = (RuleCall) assignment.getTerminal();
-			AbstractRule featureTypeRule = GrammarUtil
-					.calledRule(featureRuleCall);
-			String featureTypeName = GrammarUtil
-					.getReturnTypeName(featureTypeRule);
-			EClassifierInfo featureTypeInfo = eClassifierInfos
-					.getInfo(featureTypeName);
-			if (featureTypeInfo == null) {
-				throw new TransformationException(
-						"Cannot resolve type of feature", assignment);
+			boolean isMultivalue = GrammarUtil.isMultipleAssignment(assignment);
+			EClassifierInfo featureTypeInfo;
+
+			if (GrammarUtil.isBooleanAssignment(assignment)) {
+				featureTypeInfo = getEClassifierInfoOrThrowException("ecore::EBoolean", assignment);
+				isMultivalue = false;
+			}
+			else {
+				RuleCall featureRuleCall = (RuleCall) assignment.getTerminal();
+				AbstractRule featureTypeRule = GrammarUtil.calledRule(featureRuleCall);
+				String featureTypeName = GrammarUtil.getReturnTypeName(featureTypeRule);
+				featureTypeInfo = getEClassifierInfoOrThrowException(featureTypeName, assignment);
+
 			}
 
-			currentType.addFeature(featureName, featureTypeInfo);
+			currentType.addFeature(featureName, featureTypeInfo, isMultivalue);
+		}
 
-			// TODO : fill Cardinality of attribute
-			// this.currentType.getEStructuralFeatures().add(attribute);
+		private EClassifierInfo getEClassifierInfoOrThrowException(String typeName, AbstractElement parserElement)
+				throws TransformationException {
+			EClassifierInfo featureTypeInfo = eClassifierInfos.getInfo(typeName);
+			if (featureTypeInfo == null) {
+				throw new TransformationException("Cannot resolve type " + typeName, parserElement);
+			}
+			return featureTypeInfo;
 		}
 
 		public InterpretationContext clone() {
-			return new InterpretationContext(currentType, isGeneratedType,
-					isRuleCallAllowed);
+			return new InterpretationContext(currentType, isGeneratedType, isRuleCallAllowed);
 		}
 
 		// TODO : Use set of types to reflect mandatory actions
@@ -239,36 +254,33 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private void collectEPackages() {
-		EList<AbstractMetamodelDeclaration> metamodelDeclarations = grammar
-				.getMetamodelDeclarations();
+		EList<AbstractMetamodelDeclaration> metamodelDeclarations = grammar.getMetamodelDeclarations();
 		for (AbstractMetamodelDeclaration metamodelDeclaration : metamodelDeclarations) {
 			if (metamodelDeclaration instanceof ReferencedMetamodel) {
 				// load imported metamodel
 				ReferencedMetamodel referencedMetamodel = (ReferencedMetamodel) metamodelDeclaration;
-				EPackage referencedEPackage = GrammarUtil
-						.loadEPackage(referencedMetamodel);
+				EPackage referencedEPackage = GrammarUtil.loadEPackage(referencedMetamodel);
 				if (referencedEPackage == null) {
-					reportError("Cannot not load metamodel "
-							+ referencedMetamodel.getUri(), referencedMetamodel);
-				} else {
+					reportError("Cannot not load metamodel " + referencedMetamodel.getUri(), referencedMetamodel);
+				}
+				else {
 					String alias = referencedMetamodel.getAlias();
 					if (Strings.isEmpty(alias)) {
-						reportError("Referenced metamodels must have an alias",
-								referencedMetamodel);
-					} else {
+						reportError("Referenced metamodels must have an alias", referencedMetamodel);
+					}
+					else {
 						collectClassInfosOf(referencedEPackage, alias);
 					}
 				}
-			} else if (metamodelDeclaration instanceof GeneratedMetamodel) {
+			}
+			else if (metamodelDeclaration instanceof GeneratedMetamodel) {
 				// instantiate EPackages for generated metamodel
 				GeneratedMetamodel generatedMetamodel = (GeneratedMetamodel) metamodelDeclaration;
-				EPackage generatedEPackage = EcoreFactory.eINSTANCE
-						.createEPackage();
+				EPackage generatedEPackage = EcoreFactory.eINSTANCE.createEPackage();
 				generatedEPackage.setName(generatedMetamodel.getName());
 				generatedEPackage.setNsPrefix(generatedMetamodel.getName());
 				generatedEPackage.setNsURI(generatedMetamodel.getNsURI());
-				String alias = Strings.emptyIfNull(generatedMetamodel
-						.getAlias());
+				String alias = Strings.emptyIfNull(generatedMetamodel.getAlias());
 				generatedEPackages.put(alias, generatedEPackage);
 			}
 		}
@@ -278,13 +290,12 @@ public class Xtext2EcoreTransformer {
 		for (EClassifier eClassifier : referencedEPackage.getEClassifiers()) {
 			if (eClassifier instanceof EClass) {
 				EClass eClass = (EClass) eClassifier;
-				EClassifierInfo info = EClassifierInfo.createEClassInfo(eClass,
-						false);
+				EClassifierInfo info = EClassifierInfo.createEClassInfo(eClass, false);
 				eClassifierInfos.addInfo(alias, eClassifier.getName(), info);
-			} else if (eClassifier instanceof EDataType) {
+			}
+			else if (eClassifier instanceof EDataType) {
 				EDataType eDataType = (EDataType) eClassifier;
-				EClassifierInfo info = EClassifierInfo.createEDataTypeInfo(
-						eDataType, false);
+				EClassifierInfo info = EClassifierInfo.createEDataTypeInfo(eDataType, false);
 				eClassifierInfos.addInfo(alias, eClassifier.getName(), info);
 			}
 		}
@@ -299,19 +310,16 @@ public class Xtext2EcoreTransformer {
 
 	}
 
-	private void raiseError(String message, EObject erroneousElement)
-			throws TransformationException {
+	private void raiseError(String message, EObject erroneousElement) throws TransformationException {
 		throw new TransformationException(message, erroneousElement);
 	}
 
-	private EClassifierInfo findOrCreateEClass(AbstractRule rule)
-			throws TransformationException {
+	private EClassifierInfo findOrCreateEClass(AbstractRule rule) throws TransformationException {
 		TypeRef typeRef = getOrFakeReturnType(rule);
 		return findOrCreateEClass(typeRef);
 	}
 
-	private EClassifierInfo findOrCreateEClass(TypeRef typeRef)
-			throws TransformationException {
+	private EClassifierInfo findOrCreateEClass(TypeRef typeRef) throws TransformationException {
 		EClassifierInfo info = eClassifierInfos.getInfo(typeRef);
 		if (info == null) {
 			info = createEClass(typeRef);
@@ -319,12 +327,10 @@ public class Xtext2EcoreTransformer {
 		return info;
 	}
 
-	private EClassifierInfo createEClass(TypeRef typeRef)
-			throws TransformationException {
+	private EClassifierInfo createEClass(TypeRef typeRef) throws TransformationException {
 		if (eClassifierInfos.getInfo(typeRef) != null)
-			throw new IllegalArgumentException(
-					"Cannot create EClass for same type twice"
-							+ GrammarUtil.getQualifiedName(typeRef));
+			throw new IllegalArgumentException("Cannot create EClass for same type twice"
+					+ GrammarUtil.getQualifiedName(typeRef));
 
 		EClassifierInfo info;
 		String typeRefAlias = Strings.emptyIfNull(typeRef.getAlias());

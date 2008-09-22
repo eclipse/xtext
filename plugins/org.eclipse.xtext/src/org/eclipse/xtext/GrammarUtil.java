@@ -292,6 +292,18 @@ public class GrammarUtil {
 		}
 		return kws;
 	}
+	
+	public static boolean isBooleanAssignment(Assignment a) {
+		return "?=".equals(a.getOperator());
+	}
+
+	public static boolean isSingleAssignment(Assignment a) {
+		return "=".equals(a.getOperator());
+	}
+
+	public static boolean isMultipleAssignment(Assignment a) {
+		return "+=".equals(a.getOperator());
+	}
 
 	public static boolean isOptionalCardinality(AbstractElement e) {
 		return e.getCardinality() != null && (e.getCardinality().equals("?") || e.getCardinality().equals("*"));

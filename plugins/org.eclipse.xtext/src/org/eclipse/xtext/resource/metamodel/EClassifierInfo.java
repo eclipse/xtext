@@ -27,13 +27,13 @@ public abstract class EClassifierInfo {
 
 	private EClassifier eClassifier;
 	private boolean isGenerated;
-	
+
 	private EClassifierInfo(EClassifier metaType, boolean isGenerated) {
 		super();
 		this.isGenerated = isGenerated;
 		this.eClassifier = metaType;
 	}
-	
+
 	public static EClassifierInfo createEClassInfo(EClass eClass, boolean isGenerated) {
 		return new EClassInfo(eClass, isGenerated);
 	}
@@ -51,8 +51,9 @@ public abstract class EClassifierInfo {
 	}
 
 	public abstract boolean addSupertype(EClassifierInfo superTypeInfo);
-	public abstract boolean addFeature(String featureName, EClassifierInfo featureType);
-	
+
+	public abstract boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue);
+
 	static class EClassInfo extends EClassifierInfo {
 
 		public EClassInfo(EClassifier metaType, boolean isGenerated) {
@@ -61,32 +62,33 @@ public abstract class EClassifierInfo {
 
 		@Override
 		public boolean addSupertype(EClassifierInfo superTypeInfo) {
-			if(!isGenerated()){
+			if (!isGenerated()) {
 				throw new IllegalStateException("Generated Type cannot be modified.");
 			}
-			if(!(superTypeInfo instanceof EClassInfo)) {
+			if (!(superTypeInfo instanceof EClassInfo)) {
 				throw new IllegalArgumentException("superTypeInfo must represent EClass");
 			}
-			EClass eClass = (EClass)getEClass();
-			EClass superEClass = (EClass)superTypeInfo.getEClass();
+			EClass eClass = (EClass) getEClass();
+			EClass superEClass = (EClass) superTypeInfo.getEClass();
 			return eClass.getESuperTypes().add(superEClass);
 		}
 
 		@Override
-		public boolean addFeature(String featureName,
-				EClassifierInfo featureType) {
+		public boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue) {
 
- 			EClassifier featureClassifier = featureType.getEClass();
- 			
- 			EAttribute attribute = EcoreFactory.eINSTANCE.createEAttribute();
+			EClassifier featureClassifier = featureType.getEClass();
+
+			EAttribute attribute = EcoreFactory.eINSTANCE.createEAttribute();
 			attribute.setName(featureName);
 			attribute.setEType(featureClassifier);
-			
-			EList<EStructuralFeature> features = ((EClass)getEClass()).getEStructuralFeatures();
+			attribute.setLowerBound(0);
+			attribute.setUpperBound(isMultivalue ? -1 : 1);
+
+			EList<EStructuralFeature> features = ((EClass) getEClass()).getEStructuralFeatures();
 			return features.add(attribute);
 		}
 	}
-	
+
 	static class EDataTypeInfo extends EClassifierInfo {
 
 		public EDataTypeInfo(EClassifier metaType, boolean isGenerated) {
@@ -99,10 +101,9 @@ public abstract class EClassifierInfo {
 		}
 
 		@Override
-		public boolean addFeature(String featureName,
-				EClassifierInfo featureType) {
+		public boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue) {
 			throw new UnsupportedOperationException("Cannot add feature to simple datatype");
 		}
-		
+
 	}
 }
