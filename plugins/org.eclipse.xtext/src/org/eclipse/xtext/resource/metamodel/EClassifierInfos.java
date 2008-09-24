@@ -8,20 +8,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.metamodel;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Strings;
 
 /**
  * A possible extension would be to normalize the type hierarchy and remove
  * redundant supertype references. We currently don't think thats necessary as
  * EMF handles multiple inheritance gracefully.
  * 
- * @author Jan K?hnlein - Initial contribution and API
+ * @author Jan Köhnlein - Initial contribution and API
  * 
  */
 public class EClassifierInfos {
@@ -47,5 +50,45 @@ public class EClassifierInfos {
 	public void addAll(EClassifierInfos classInfos) {
 		infoMap.putAll(classInfos.infoMap);
 	}
-	
+
+	private String getCompatibleTypeNameOf(String typeA, String typeB) {
+		EClassifier classifierA = getInfo(typeA).getEClassifier();
+		EClassifier classifierB = getInfo(typeB).getEClassifier();
+		if (classifierA.equals(classifierB))
+			return typeA;
+		if (classifierA instanceof EDataType || classifierB instanceof EDataType)
+			throw new IllegalArgumentException(
+					"Simple Datatypes (lexer rules or keywords) do not have a common supertype (" + typeA + ", "
+							+ typeB + ")");
+
+		// TODO EClass commonSupertype = EcoreUtil2.getCommonCompatibleType((EClass) classifierA, (EClass) classifierB);
+		EClass commonSupertype = classifierA.equals(classifierB) ? (EClass)classifierA : null;
+		if(commonSupertype != null)
+			return getQualifiedNameFor(commonSupertype);
+		else
+			return "ecore::EObject";
+	}
+
+	private String getQualifiedNameFor(EClass eClass) {
+		// lookup could be improved
+		for (String key : infoMap.keySet()) {
+			EClassifierInfo info = infoMap.get(key);
+			if (info.getEClassifier().equals(eClass))
+				return key;
+		}
+		return null;
+	}
+
+	public String getCompatibleTypeNameOf(Collection<String> typeNames) {
+		Iterator<String> i = typeNames.iterator();
+		if (!i.hasNext())
+			throw new IllegalArgumentException("Empty set of types cannot have a common super type.");
+
+		String result = i.next();
+		while (i.hasNext())
+			result = getCompatibleTypeNameOf(result, i.next());
+
+		return result;
+	}
+
 }
