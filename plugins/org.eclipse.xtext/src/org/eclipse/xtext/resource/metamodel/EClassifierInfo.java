@@ -9,7 +9,6 @@
 package org.eclipse.xtext.resource.metamodel;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -17,7 +16,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 
 /**
- * @author Jan K?hnlein - Initial contribution and API
+ * @author Jan Köhnlein - Initial contribution and API
+ * @author Heiko Behrens
  * 
  */
 public abstract class EClassifierInfo {
@@ -39,7 +39,7 @@ public abstract class EClassifierInfo {
 		return new EDataTypeInfo(eDataType, isGenerated);
 	}
 
-	public EClassifier getEClass() {
+	public EClassifier getEClassifier() {
 		return eClassifier;
 	}
 
@@ -65,24 +65,28 @@ public abstract class EClassifierInfo {
 			if (!(superTypeInfo instanceof EClassInfo)) {
 				throw new IllegalArgumentException("superTypeInfo must represent EClass");
 			}
-			EClass eClass = (EClass) getEClass();
-			EClass superEClass = (EClass) superTypeInfo.getEClass();
+			EClass eClass = (EClass) getEClassifier();
+			EClass superEClass = (EClass) superTypeInfo.getEClassifier();
 			return eClass.getESuperTypes().add(superEClass);
 		}
 
 		@Override
 		public boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue) {
 
-			EClassifier featureClassifier = featureType.getEClass();
+			EClassifier featureClassifier = featureType.getEClassifier();
+			EStructuralFeature newFeature;
 
-			EAttribute attribute = EcoreFactory.eINSTANCE.createEAttribute();
-			attribute.setName(featureName);
-			attribute.setEType(featureClassifier);
-			attribute.setLowerBound(0);
-			attribute.setUpperBound(isMultivalue ? -1 : 1);
+			if (featureClassifier instanceof EClass)
+				newFeature = EcoreFactory.eINSTANCE.createEReference();
+			else
+				newFeature = EcoreFactory.eINSTANCE.createEAttribute();
+			newFeature.setName(featureName);
+			newFeature.setEType(featureClassifier);
+			newFeature.setLowerBound(0);
+			newFeature.setUpperBound(isMultivalue ? -1 : 1);
 
-			EList<EStructuralFeature> features = ((EClass) getEClass()).getEStructuralFeatures();
-			return features.add(attribute);
+			EList<EStructuralFeature> features = ((EClass) getEClassifier()).getEStructuralFeatures();
+			return features.add(newFeature);
 		}
 	}
 
