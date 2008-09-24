@@ -7,23 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.metamodel;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.impl.AESCipherImpl;
-import org.eclipse.xtext.AbstractRule;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
+ * @author Heiko Behrens
+ * @see http://wiki.eclipse.org/Xtext/Documentation#Meta-Model_Inference
  */
 public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 
@@ -44,8 +43,8 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertNotNull(result);
 		return result;
 	}
-
-	private EAttribute assertFeatureConfiguration(EClass eClass, int attributeIndex, String featureName,
+	
+	private EAttribute assertAttributeConfiguration(EClass eClass, int attributeIndex, String featureName,
 			String featureTypeName) {
 		EAttribute feature = eClass.getEAttributes().get(attributeIndex);
 		assertEquals(featureName, feature.getName());
@@ -55,14 +54,26 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		return feature;
 	}
 
-	private EAttribute assertFeatureConfiguration(EClass eClass, int attributeIndex, String featureName,
+	private EAttribute assertAttributeConfiguration(EClass eClass, int attributeIndex, String featureName,
 			String featureTypeName, int lowerBound, int upperBound) {
-		EAttribute feature = assertFeatureConfiguration(eClass, attributeIndex, featureName, featureTypeName);
+		EAttribute feature = assertAttributeConfiguration(eClass, attributeIndex, featureName, featureTypeName);
 		assertEquals(lowerBound, feature.getLowerBound());
 		assertEquals(upperBound, feature.getUpperBound());
 
 		return feature;
 	}
+	
+	private EReference assertReferenceConfiguration(EClass eClass, int referenceIndex, String featureName,
+			String featureTypeName, int lowerBound, int upperBound) {
+		EReference reference = eClass.getEReferences().get(referenceIndex);
+		assertEquals(featureName, reference.getName());
+		assertNotNull(reference.getEType());
+		assertEquals(featureTypeName, reference.getEType().getName());
+		assertEquals(lowerBound, reference.getLowerBound());
+		assertEquals(upperBound, reference.getUpperBound());
+		return reference;
+	}
+
 
 	public void testTypesOfImplicitSuperGrammar() throws Exception {
 		final String xtextGrammar = "language test generate test 'http://test' MyRule: myFeature=INT;";
@@ -114,7 +125,7 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertNotNull(ruleA);
 
 		assertEquals(1, ruleA.getEAttributes().size());
-		assertFeatureConfiguration(ruleA, 0, "featureA", "EInt");
+		assertAttributeConfiguration(ruleA, 0, "featureA", "EInt");
 	}
 
 	public void testBuiltInFeatureTypes() throws Exception {
@@ -124,9 +135,9 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertNotNull(ruleA);
 
 		assertEquals(3, ruleA.getEAttributes().size());
-		assertFeatureConfiguration(ruleA, 0, "featureA", "EString");
-		assertFeatureConfiguration(ruleA, 1, "featureB", "EInt");
-		assertFeatureConfiguration(ruleA, 2, "featureC", "EString");
+		assertAttributeConfiguration(ruleA, 0, "featureA", "EString");
+		assertAttributeConfiguration(ruleA, 1, "featureB", "EInt");
+		assertAttributeConfiguration(ruleA, 2, "featureC", "EString");
 	}
 
 	public void testCardinalityOfFeatures() throws Exception {
@@ -136,9 +147,9 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertNotNull(ruleA);
 
 		assertEquals(3, ruleA.getEAttributes().size());
-		assertFeatureConfiguration(ruleA, 0, "featureA", "EBoolean", 0, 1);
-		assertFeatureConfiguration(ruleA, 1, "featureB", "EInt", 0, 1);
-		assertFeatureConfiguration(ruleA, 2, "featureC", "EString", 0, -1);
+		assertAttributeConfiguration(ruleA, 0, "featureA", "EBoolean", 0, 1);
+		assertAttributeConfiguration(ruleA, 1, "featureB", "EInt", 0, 1);
+		assertAttributeConfiguration(ruleA, 2, "featureC", "EString", 0, -1);
 	}
 
 	public void testOptionalAssignmentsInGroup() throws Exception {
@@ -148,8 +159,8 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
 		assertNotNull(ruleA);
 		assertEquals(2, ruleA.getEAttributes().size());
-		assertFeatureConfiguration(ruleA, 0, "featureA", "EBoolean", 0, 1);
-		assertFeatureConfiguration(ruleA, 1, "featureB", "EInt", 0, -1);
+		assertAttributeConfiguration(ruleA, 0, "featureA", "EBoolean", 0, 1);
+		assertAttributeConfiguration(ruleA, 1, "featureB", "EInt", 0, -1);
 	}
 
 	public void testFeaturesAndInheritanceOptionalRuleCall() throws Exception {
@@ -162,10 +173,10 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertNotNull(ruleB);
 
 		assertEquals(1, ruleA.getEAttributes().size());
-		assertFeatureConfiguration(ruleA, 0, "featureA", "EInt");
+		assertAttributeConfiguration(ruleA, 0, "featureA", "EInt");
 
 		assertEquals(1, ruleB.getEAttributes().size());
-		assertFeatureConfiguration(ruleB, 0, "featureB", "EString");
+		assertAttributeConfiguration(ruleB, 0, "featureB", "EString");
 	}
 
 	public void testFeaturesAndInheritanceMandatoryRuleCall() throws Exception {
@@ -180,8 +191,8 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertEquals(0, ruleA.getEAttributes().size());
 
 		assertEquals(2, ruleB.getEAttributes().size());
-		assertFeatureConfiguration(ruleB, 0, "featureA", "EInt");
-		assertFeatureConfiguration(ruleB, 1, "featureB", "EString");
+		assertAttributeConfiguration(ruleB, 0, "featureA", "EInt");
+		assertAttributeConfiguration(ruleB, 1, "featureB", "EString");
 	}
 
 	public void testFeaturesAndInheritanceOfMandatoryAlternativeRuleCalls() throws Exception {
@@ -205,12 +216,12 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		// test all features are separated
 		assertEquals(0, ruleA.getEAttributes().size());
 		assertEquals(2, ruleB.getEAttributes().size());
-		assertFeatureConfiguration(ruleB, 0, "featureA", "EString");
-		assertFeatureConfiguration(ruleB, 1, "featureB", "EString");
+		assertAttributeConfiguration(ruleB, 0, "featureA", "EString");
+		assertAttributeConfiguration(ruleB, 1, "featureB", "EString");
 		assertEquals(3, ruleC.getEAttributes().size());
-		assertFeatureConfiguration(ruleC, 0, "featureC1", "EString");
-		assertFeatureConfiguration(ruleC, 1, "featureA", "EString");
-		assertFeatureConfiguration(ruleC, 2, "featureC2", "EString");
+		assertAttributeConfiguration(ruleC, 0, "featureC1", "EString");
+		assertAttributeConfiguration(ruleC, 1, "featureA", "EString");
+		assertAttributeConfiguration(ruleC, 2, "featureC2", "EString");
 	}
 
 	public void testFeaturesAndInheritanceOfOptionalOptionalRuleCalls() throws Exception {
@@ -233,12 +244,12 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 
 		// test all features are separated
 		assertEquals(1, ruleA.getEAttributes().size());
-		assertFeatureConfiguration(ruleA, 0, "featureA", "EString");
+		assertAttributeConfiguration(ruleA, 0, "featureA", "EString");
 		assertEquals(1, ruleB.getEAttributes().size());
-		assertFeatureConfiguration(ruleB, 0, "featureB", "EString");
+		assertAttributeConfiguration(ruleB, 0, "featureB", "EString");
 		assertEquals(2, ruleC.getEAttributes().size());
-		assertFeatureConfiguration(ruleC, 0, "featureC1", "EString");
-		assertFeatureConfiguration(ruleC, 1, "featureC2", "EString");
+		assertAttributeConfiguration(ruleC, 0, "featureC1", "EString");
+		assertAttributeConfiguration(ruleC, 1, "featureC2", "EString");
 	}
 
 	public void testFeaturesAndInheritanceOfNestedRuleCalls() throws Exception {
@@ -265,20 +276,83 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 
 		// test all features are separated
 		assertEquals(2, ruleA.getEAttributes().size());
-		assertFeatureConfiguration(ruleA, 0, "featureBC", "EString");
-		assertFeatureConfiguration(ruleA, 1, "featureA", "EString");
+		assertAttributeConfiguration(ruleA, 0, "featureBC", "EString");
+		assertAttributeConfiguration(ruleA, 1, "featureA", "EString");
 		assertEquals(1, ruleB.getEAttributes().size());
-		assertFeatureConfiguration(ruleB, 0, "featureB2", "EString");
+		assertAttributeConfiguration(ruleB, 0, "featureB2", "EString");
 		assertEquals(4, ruleC.getEAttributes().size());
-		assertFeatureConfiguration(ruleC, 0, "featureC1", "EString");
-		assertFeatureConfiguration(ruleC, 1, "featureCD", "EString");
-		assertFeatureConfiguration(ruleC, 2, "featureA", "EString");
-		assertFeatureConfiguration(ruleC, 3, "featureC2", "EString");
+		assertAttributeConfiguration(ruleC, 0, "featureC1", "EString");
+		assertAttributeConfiguration(ruleC, 1, "featureCD", "EString");
+		assertAttributeConfiguration(ruleC, 2, "featureA", "EString");
+		assertAttributeConfiguration(ruleC, 3, "featureC2", "EString");
 		assertEquals(4, ruleD.getEAttributes().size());
-		assertFeatureConfiguration(ruleD, 0, "featureD1", "EString");
-		assertFeatureConfiguration(ruleD, 1, "featureCD", "EString");
-		assertFeatureConfiguration(ruleD, 2, "featureA", "EString");
-		assertFeatureConfiguration(ruleD, 3, "featureD2", "EString");
+		assertAttributeConfiguration(ruleD, 0, "featureD1", "EString");
+		assertAttributeConfiguration(ruleD, 1, "featureCD", "EString");
+		assertAttributeConfiguration(ruleD, 2, "featureA", "EString");
+		assertAttributeConfiguration(ruleD, 3, "featureD2", "EString");
 	}
 
+	public void testAssignedRuleCall() throws Exception {
+		final String grammar = "language test generate test 'http://test' RuleA: callA1=RuleB callA2+=RuleB simpleFeature=ID; RuleB: featureB=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(2, ePackage.getEClassifiers().size());
+		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
+		assertNotNull(ruleA);
+		EClass ruleB = (EClass) ePackage.getEClassifier("RuleB");
+		assertNotNull(ruleB);
+		
+		assertEquals(1, ruleA.getEAttributes().size());
+		assertAttributeConfiguration(ruleA, 0, "simpleFeature", "EString");
+		assertEquals(2, ruleA.getEReferences().size());
+		assertReferenceConfiguration(ruleA, 0, "callA1", "RuleB", 0, 1);
+		assertReferenceConfiguration(ruleA, 1, "callA2", "RuleB", 0, -1);
+		assertEquals(1, ruleB.getEAttributes().size());
+		assertAttributeConfiguration(ruleB, 0, "featureB", "EString");
+	}
+
+	public void testAssignedCrossReference() throws Exception {
+		final String grammar = "language test generate test 'http://test' RuleA: refA1=[TypeB] refA2+=[TypeB|RuleB] simpleFeature=ID; RuleB returns TypeB: featureB=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(2, ePackage.getEClassifiers().size());
+		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
+		assertNotNull(ruleA);
+		EClass typeB = (EClass) ePackage.getEClassifier("TypeB");
+		assertNotNull(typeB);
+		
+		assertEquals(1, ruleA.getEAttributes().size());
+		assertAttributeConfiguration(ruleA, 0, "simpleFeature", "EString");
+		assertEquals(2, ruleA.getEReferences().size());
+		assertReferenceConfiguration(ruleA, 0, "refA1", "TypeB", 0, 1);
+		assertReferenceConfiguration(ruleA, 1, "refA2", "TypeB", 0, -1);
+		assertEquals(1, typeB.getEAttributes().size());
+		assertAttributeConfiguration(typeB, 0, "featureB", "EString");
+	}
+
+	public void testAssignedParenthesizedElement() throws Exception {
+		final String grammar = "language test generate test 'http://test' RuleA: featureA1?=(RuleB) refA1=(RuleB) refA2=(RuleB|RuleC) refA3+=(RuleB|RuleC|RuleD) refA4=(RuleB|RuleD) featureA2+=('a'|'b'); RuleB returns TypeB: RuleC? featureB=ID; RuleC: featureC=ID; RuleD returns TypeB: featureD=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(3, ePackage.getEClassifiers().size());
+		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
+		assertNotNull(ruleA);
+		assertEquals(0, ruleA.getESuperTypes().size());
+		EClass typeB = (EClass) ePackage.getEClassifier("TypeB");
+		assertNotNull(typeB);
+		assertEquals(0, typeB.getESuperTypes().size());
+		EClass ruleC = (EClass) ePackage.getEClassifier("RuleC");
+		assertNotNull(ruleC);
+		assertEquals(1, ruleC.getESuperTypes().size());
+		assertEquals(typeB, ruleC.getESuperTypes().get(0));
+		
+		assertEquals(2, ruleA.getEAttributes().size());
+		assertAttributeConfiguration(ruleA, 0, "featureA1", "EBoolean");
+		assertAttributeConfiguration(ruleA, 1, "featureA2", "EString", 0, -1);
+		
+		assertEquals(4, ruleA.getEReferences().size());
+		assertReferenceConfiguration(ruleA, 0, "refA1", "TypeB", 0, 1);
+		// TODO should be common compatible type according to #248430
+		assertReferenceConfiguration(ruleA, 1, "refA2", "EObject", 0, 1);
+		assertReferenceConfiguration(ruleA, 2, "refA3", "EObject", 0, -1);
+		assertReferenceConfiguration(ruleA, 3, "refA4", "TypeB", 0, 1);
+	}
+	
 }
