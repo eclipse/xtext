@@ -11,7 +11,6 @@ package org.eclipse.xtext.parsetree;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-import org.eclipse.xtext.parsetree.AbstractNode;
 
 public class NodeAdapterFactory extends AdapterFactoryImpl {
 
