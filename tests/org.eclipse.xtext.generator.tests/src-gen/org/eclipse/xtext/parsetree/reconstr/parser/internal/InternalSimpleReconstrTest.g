@@ -125,9 +125,9 @@ entryRuleTerm returns [EObject current=null] :
 ruleTerm returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
-(
+(((
     { 
-        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.1/@alternatives/@groups.0" /* xtext::RuleCall */, currentNode); 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.1/@alternatives/@groups.0/@groups.0/@groups.0" /* xtext::RuleCall */, currentNode); 
     }
     this_Atom=ruleAtom
     { 
@@ -135,6 +135,26 @@ ruleTerm returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    |
+    { 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.1/@alternatives/@groups.0/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_TwoNumbers=ruleTwoNumbers
+    { 
+        $current = $this_TwoNumbers.current; 
+        currentNode = currentNode.getParent();
+    }
+)
+    |
+    { 
+        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.1/@alternatives/@groups.0/@groups.1" /* xtext::RuleCall */, currentNode); 
+    }
+    this_ManyStrings=ruleManyStrings
+    { 
+        $current = $this_ManyStrings.current; 
+        currentNode = currentNode.getParent();
+    }
+)
     |
     { 
         currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.1/@alternatives/@groups.1" /* xtext::RuleCall */, currentNode); 
@@ -226,6 +246,106 @@ ruleParens returns [EObject current=null]
 	         }
 	
 )?);
+    
+
+
+// Entry rule entryRuleTwoNumbers
+entryRuleTwoNumbers returns [EObject current=null] :
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleTwoNumbers=ruleTwoNumbers 
+	 { $current=$iv_ruleTwoNumbers.current; } 
+	 EOF 
+;
+
+// Rule TwoNumbers
+ruleTwoNumbers returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
+((	
+	
+	    lv_num1=RULE_INT
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "num1"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("TwoNumbers");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "num1", lv_num1,"INT");
+	         }
+	
+)(	
+	
+	    lv_num2=RULE_INT
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "num2"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("TwoNumbers");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "num2", lv_num2,"INT");
+	         }
+	
+));
+    
+
+
+// Entry rule entryRuleManyStrings
+entryRuleManyStrings returns [EObject current=null] :
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleManyStrings=ruleManyStrings 
+	 { $current=$iv_ruleManyStrings.current; } 
+	 EOF 
+;
+
+// Rule ManyStrings
+ruleManyStrings returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
+(('=' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+    }
+(	
+	
+	    lv_str1=RULE_STRING
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "str1"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("ManyStrings");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.add($current, "str1", lv_str1,"STRING");
+	         }
+	
+)*)(	
+	
+	    lv_str2=RULE_STRING
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.5/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "str2"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("ManyStrings");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.add($current, "str2", lv_str2,"STRING");
+	         }
+	
+));
     
 
 

@@ -15,8 +15,34 @@ extension org::eclipse::xtext::Extensions reexport;
 extension org::eclipse::xtext::XtextUtil;
 extension org::eclipse::xtend::util::stdlib::io;
 
+
+String elementMethodName(AbstractElement ele):
+	JAVA org.eclipse.xtext.parsetree.reconstr.ParseTreeConstructorUtil.getUniqueElementName(org.eclipse.xtext.AbstractElement);
+
+
+AbstractElement getFirstChildToCall(AbstractElement ele):
+	JAVA org.eclipse.xtext.parsetree.reconstr.ParseTreeConstructorUtil.getFirstChildToCall(org.eclipse.xtext.AbstractElement);
+	
+AbstractElement getNextElementToCall(AbstractElement ele):
+	JAVA org.eclipse.xtext.parsetree.reconstr.ParseTreeConstructorUtil.getNextElementToCall(org.eclipse.xtext.AbstractElement);
+	
+boolean hasNextElement(AbstractElement ele):
+	ele.getNextElementToCall() != null;
+	
+	
+boolean isRequired(String cardinality):
+	cardinality == null || cardinality == '' || cardinality == '+';
+	
+boolean isOptional(String cardinality):
+	cardinality == '*' || cardinality == '?';
+	
+boolean isMulti(String cardinality):
+	cardinality == '*' || cardinality == '+';
+
+
+
 methodName(AbstractRule this) :
-	'proceed'+name.toFirstUpper();
+	'rule'+name.toFirstUpper();
 		
 List inverse(List this) :
 	let x = {} : x.addAll(this) -> x.reverse();

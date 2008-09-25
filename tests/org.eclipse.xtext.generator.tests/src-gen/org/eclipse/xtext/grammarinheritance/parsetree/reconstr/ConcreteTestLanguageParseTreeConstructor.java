@@ -12,167 +12,315 @@ import org.eclipse.xtext.parsetree.reconstr.impl.*;
 public class ConcreteTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
-		if (ruleToCall.equals("ConcreteParserRule")) {
-			proceedConcreteParserRule(getDescr(obj),callback);
-		} else 		if (ruleToCall.equals("InheritedParserRule")) {
-			proceedInheritedParserRule(getDescr(obj),callback);
-		} else {
-			throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		}
+		AbstractToken t = internalSerialize(obj);
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
+		t.executeAllCallbacks(callback);
+		System.out.println("success!");
+	}
+	
+	protected AbstractToken internalSerialize(EObject obj) {
+		AbstractToken t = new ConcreteParserRule_0_Group(null);
+		t = t.createFirstSolution(getDescr(obj));
+		if(t != null) return t;
+		t = new InheritedParserRule_1_Group(null);
+		return t.createFirstSolution(getDescr(obj));
+	}
+	
+/************ begin Rule ConcreteParserRule ****************/
+
+
+protected class ConcreteParserRule_0_Group extends GroupToken {
+	
+	public ConcreteParserRule_0_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private ConcreteParserRule_0_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new ConcreteParserRule_0_Group(predecessor, true, false);
 	}
 
-	
-private String ConcreteParserRuleRecursionCheck = null;
-protected void proceedConcreteParserRule(InstanceDescription obj,IParseTreeConstructorCallback callback) {
-	try {
-		String s = obj.uniqueStateString();
-		if (s.equals(ConcreteParserRuleRecursionCheck))
-			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		ConcreteParserRuleRecursionCheck = s;
-	
-/* xtext::Group */ 
-{
-
 		
-/* xtext::Assignment */ 
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new ConcreteParserRule_0_1_Assignment_elements(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new ConcreteParserRule_0_0_Group(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
 
-while (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("elements"); 
-		}
-}.check() ){
-
-	final Object value = obj.consume("elements");
-    
-/* xtext::RuleCall */ 
-{
-
-	
-		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
-		try {
-			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
-			proceedInheritedParserRule(val,callback);
-			
-			if (!val.isConsumed()) 
-				throw new XtextSerializationException(val,"unserialized state");
-			
-		} finally {
-			callback.parserRuleCallEnd();
-		}
-	
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1"));
-
-}
-
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Assignment */ 
-{
-
-	final Object value = obj.consume("magicNumber");
-    
-/* xtext::RuleCall */ 
-{
-
-	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"));
-	
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
-
-}
-
-
-}
-
-
-}
-
-
-}
-
-	} finally {
-		ConcreteParserRuleRecursionCheck = null;
+	public void executeCallback(IParseTreeConstructorCallback callback) {
 	}
 }
 
-private String InheritedParserRuleRecursionCheck = null;
-protected void proceedInheritedParserRule(InstanceDescription obj,IParseTreeConstructorCallback callback) {
-	try {
-		String s = obj.uniqueStateString();
-		if (s.equals(InheritedParserRuleRecursionCheck))
-			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		InheritedParserRuleRecursionCheck = s;
+protected class ConcreteParserRule_0_0_Group extends GroupToken {
 	
-/* xtext::Group */ 
-{
+	public ConcreteParserRule_0_0_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private ConcreteParserRule_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new ConcreteParserRule_0_0_Group(predecessor, true, false);
+	}
 
 		
-/* xtext::Assignment */ 
-{
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new ConcreteParserRule_0_0_1_Keyword(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new ConcreteParserRule_0_0_0_Group(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
 
-	final Object value = obj.consume("name");
-    
-/* xtext::RuleCall */ 
-{
-
-	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal"));
-	
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0"));
-
-}
-
-
-}
-
-	} finally {
-		InheritedParserRuleRecursionCheck = null;
+	public void executeCallback(IParseTreeConstructorCallback callback) {
 	}
 }
 
+protected class ConcreteParserRule_0_0_0_Group extends GroupToken {
+	
+	public ConcreteParserRule_0_0_0_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private ConcreteParserRule_0_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new ConcreteParserRule_0_0_0_Group(predecessor, true, false);
+	}
+
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new ConcreteParserRule_0_0_0_1_Assignment_magicNumber(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new ConcreteParserRule_0_0_0_0_Keyword_model(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+
+
+protected class ConcreteParserRule_0_0_0_0_Keyword_model extends KeywordToken  {
+
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+	
+	public ConcreteParserRule_0_0_0_0_Keyword_model(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+		
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		throw new UnsupportedOperationException();
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(object, keyword);
+	}
+}
+
+protected class ConcreteParserRule_0_0_0_1_Assignment_magicNumber extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
+	protected Object value;
+	
+	public ConcreteParserRule_0_0_0_1_Assignment_magicNumber(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private ConcreteParserRule_0_0_0_1_Assignment_magicNumber(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new ConcreteParserRule_0_0_0_1_Assignment_magicNumber(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("magicNumber")) return null;
+		value = obj.consume("magicNumber");
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("ConcreteParserRule_0_0_0_1_Assignment_magicNumberCallback(\"xtext::RuleCall\", " + value + ")");
+		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+	}
+}
+
+
+
+protected class ConcreteParserRule_0_0_1_Keyword extends KeywordToken  {
+
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1");
+	
+	public ConcreteParserRule_0_0_1_Keyword(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+		
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		throw new UnsupportedOperationException();
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(object, keyword);
+	}
+}
+
+
+protected class ConcreteParserRule_0_1_Assignment_elements extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
+	protected Object value;
+	
+	public ConcreteParserRule_0_1_Assignment_elements(AbstractToken predecessor) {
+		super(predecessor, IS_MANY, !IS_REQUIRED);
+	}
+	
+	private ConcreteParserRule_0_1_Assignment_elements(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new ConcreteParserRule_0_1_Assignment_elements(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("elements")) return null;
+		value = obj.consume("elements");
+		AbstractToken t = new InheritedParserRule_1_Group(predecessor);
+		predecessor = t.createFirstSolution(getDescr((EObject)value));
+		if(predecessor == null) return null;
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("ConcreteParserRule_0_1_Assignment_elementsCallback(\"xtext::RuleCall\", " + value + ")");
+		// Nothing to do for ParserRule Call InheritedParserRule
+	}
+}
+
+
+/************ end Rule ConcreteParserRule ****************/
+/************ begin Rule InheritedParserRule ****************/
+
+
+protected class InheritedParserRule_1_Group extends GroupToken {
+	
+	public InheritedParserRule_1_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private InheritedParserRule_1_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new InheritedParserRule_1_Group(predecessor, true, false);
+	}
+
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new InheritedParserRule_1_1_Assignment_name(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new InheritedParserRule_1_0_Keyword_element(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+
+
+protected class InheritedParserRule_1_0_Keyword_element extends KeywordToken  {
+
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0");
+	
+	public InheritedParserRule_1_0_Keyword_element(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+		
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		throw new UnsupportedOperationException();
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(object, keyword);
+	}
+}
+
+protected class InheritedParserRule_1_1_Assignment_name extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
+	protected Object value;
+	
+	public InheritedParserRule_1_1_Assignment_name(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private InheritedParserRule_1_1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new InheritedParserRule_1_1_Assignment_name(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("name")) return null;
+		value = obj.consume("name");
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("InheritedParserRule_1_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+	}
+}
+
+
+/************ end Rule InheritedParserRule ****************/
 }

@@ -23,7 +23,7 @@ public class DefaultParsetreeReconstructorCallback implements IParseTreeConstruc
 	public void keywordCall(IInstanceDescription current, Keyword call) {
 	}
 
-	public void lexerRuleCall(IInstanceDescription current, RuleCall call) {
+	public void lexerRuleCall(IInstanceDescription current, RuleCall call, Object value) {
 	}
 
 	public void objectCreation(IInstanceDescription current) {
@@ -36,6 +36,9 @@ public class DefaultParsetreeReconstructorCallback implements IParseTreeConstruc
 	}
 
 	public void crossRefCall(IInstanceDescription current, CrossReference call) {
+	}
+
+	public void lexerRuleCall(IInstanceDescription current, RuleCall call) {
 	}
 
 }

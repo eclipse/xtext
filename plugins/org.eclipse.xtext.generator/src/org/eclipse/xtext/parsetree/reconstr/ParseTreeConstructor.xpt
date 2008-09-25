@@ -35,108 +35,290 @@ import org.eclipse.xtext.parsetree.reconstr.impl.*;
 public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructor {
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
-		«FOREACH grammar().allParserRules() AS pr SEPARATOR ' else '-»
-		if (ruleToCall.equals("«pr.name»")) {
-			«pr.methodName()»(getDescr(obj),callback);
-		}«ENDFOREACH» else {
-			throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		}
+		AbstractToken t = internalSerialize(obj);
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
+		t.executeAllCallbacks(callback);
+		System.out.println("success!");
 	}
-
-	«EXPAND method FOREACH grammar().allParserRules()»
+	
+	protected AbstractToken internalSerialize(EObject obj) {
+«FOREACH grammar().allParserRules() AS pr ITERATOR i-»
+		«IF i.firstIteration»AbstractToken «ENDIF»t = new «pr.alternatives.elementMethodName()»(null);
+«IF i.lastIteration-»
+		return t.createFirstSolution(getDescr(obj));
+«ELSE-»
+		t = t.createFirstSolution(getDescr(obj));
+		if(t != null) return t;
+«ENDIF-»
+«ENDFOREACH-»		
+	}
+	
+«EXPAND rule FOREACH grammar().allParserRules()-»
 }
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE method FOR ParserRule»
-private String «name»RecursionCheck = null;
-protected void «methodName()»(InstanceDescription obj,IParseTreeConstructorCallback callback) {
-	try {
-		String s = obj.uniqueStateString();
-		if (s.equals(«name»RecursionCheck))
-			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		«name»RecursionCheck = s;
-	«EXPAND statement FOR this.alternatives»
-	} finally {
-		«name»RecursionCheck = null;
+«DEFINE rule FOR ParserRule-»
+/************ begin Rule «name» ****************/
+
+«EXPAND element FOR alternatives-»
+
+/************ end Rule «name» ****************/
+«ENDDEFINE»
+
+«DEFINE constructor FOR AbstractElement-»
+	public «elementMethodName()»(AbstractToken predecessor) {
+		super(predecessor, «IF !cardinality.isMulti()»!«ENDIF»IS_MANY, «IF !cardinality.isRequired()»!«ENDIF»IS_REQUIRED);
+	}
+	
+	private «elementMethodName()»(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new «elementMethodName()»(predecessor, true, false);
+	}
+«ENDDEFINE»
+
+«DEFINE element FOR AbstractElement»
+// FIXME: unhandled element «metaType.name» in «elementMethodName()» 
+«ENDDEFINE»
+
+
+
+
+
+«REM» ************ Groups ************* «ENDREM»
+
+«DEFINE element FOR Group»
+protected class «elementMethodName()» extends GroupToken {
+	
+«EXPAND constructor»
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new «abstractTokens.get(1).elementMethodName()»(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new «abstractTokens.get(0).elementMethodName()»(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+«EXPAND element FOREACH abstractTokens»
+«ENDDEFINE»
+
+
+
+«REM» ************ Alternatives ************* «ENDREM»
+
+«DEFINE element FOR Alternatives»
+protected class «elementMethodName()» extends GroupToken {
+	
+	private int currentOption = «groups.size - 1»;
+
+«EXPAND constructor»
+	
+	protected boolean activateNextOption() {
+		if(currentOption > 0) {
+			currentOption--;
+			return true;
+		}
+		return false;
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t, r;
+		do {		
+			switch(currentOption) {
+«FOREACH groups.inverse() AS t ITERATOR i-»
+			case «i.counter0»: t = new «((AbstractElement)t).elementMethodName()»(predecessor); break;
+«ENDFOREACH-»
+			default: throw new RuntimeException("Undefinex Index: "+currentOption);
+			}
+			r = t.createFirstSolution(predecessor.getObject());
+		} while (r == null && activateNextOption());
+		//System.out.println("found:"+r);
+		return r;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+«EXPAND element FOREACH groups»
+«ENDDEFINE»
+
+
+
+«REM» ************ RuleCall ************* «ENDREM»
+
+«DEFINE rulecallBody FOR RuleCall-»
+«IF calledParserRule()!=null-»
+		try {
+			InstanceDescription v = getDescr((EObject)val);
+			stack.parserRuleCallStart(v, ruleCall);
+			«calledRule().methodName()»(v,stack);
+		} finally {
+			stack.parserRuleCallEnd();
+		}
+«ELSE-»
+		System.out.println("lexerRuleCall("+val+")");
+		stack.lexerRuleCall(obj, ruleCall, val);
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE element FOR RuleCall»
+protected class «elementMethodName()» extends RuleCallToken {
+	
+«EXPAND constructor»
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+«IF calledParserRule() != null-»
+		if(checkForRecursion()) return null;
+		AbstractToken t = new «calledParserRule().alternatives.elementMethodName()»(predecessor);
+		return t.createFirstSolution(predecessor.getObject());
+«ELSE-»
+		// lexer rule call
+«ENDIF-»
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
 	}
 }
 «ENDDEFINE»
 
 
-«DEFINE statement FOR AbstractElement»
-/* «metaType.name» */ 
-«IF isOptional() && checkPath()!=null»
-«cardinality=='?'?'if':'while'» («FOREACH checkPath() AS p SEPARATOR '||'»
-new Predicate(obj) { 
-		public boolean check() {
-			return «p»; 
-		}
-}.check() «ENDFOREACH»)«ENDIF»{
-«EXPAND statement2 FOR this»
+
+«REM» ************ Assignment ************* «ENDREM»
+
+«DEFINE assignmentCreate FOR AbstractElement-»
+		// FIXME: doing nothing for «metaType»
+«ENDDEFINE»
+
+«DEFINE assignmentCreate FOR Keyword-»
+		// nothing special needs to be done for «metaType»
+«ENDDEFINE»
+
+«DEFINE assignmentCreate FOR Alternatives-»
+«FOREACH containedKeywords() AS k-»
+		if("«k.value.replaceAll("\\\\","\\\\\\\\").replaceAll("\\\"","\\\\\\\"")»".equals(value))
+			element = (AbstractElement)getGrammarElement("«k.objectURI()»");
+		else «ENDFOREACH-»
+		return null;
+«ENDDEFINE»
+
+«DEFINE assignmentCreate FOR RuleCall-»
+«IF calledParserRule()!=null-»
+		AbstractToken t = new «calledParserRule().alternatives.elementMethodName()»(predecessor);
+		predecessor = t.createFirstSolution(getDescr((EObject)value));
+		if(predecessor == null) return null;
+«ELSE-»
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE assignmentCallback FOR AbstractElement-»
+		// FIXME: doing nothing for «metaType»
+«ENDDEFINE»
+
+«DEFINE assignmentCallback FOR Keyword-»
+		callback.keywordCall(object, (Keyword)element);
+«ENDDEFINE»
+
+«DEFINE assignmentCallback FOR Alternatives-»
+		if(element instanceof Keyword)
+			callback.keywordCall(object, (Keyword)element);
+«ENDDEFINE»
+
+«DEFINE assignmentCallback FOR RuleCall-»
+«IF calledParserRule()!=null-»
+		// Nothing to do for ParserRule Call «name»
+«ELSE-»
+		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE element FOR Assignment»
+protected class «elementMethodName()» extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("«terminal.objectURI()»");
+	protected Object value;
+	
+«EXPAND constructor»
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("«feature»")) return null;
+		value = obj.consume("«feature»");
+		«EXPAND assignmentCreate FOR terminal-»
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("«elementMethodName()»Callback(\"«terminal.metaType.name»\", " + value + ")");
+		«EXPAND assignmentCallback FOR terminal-»
+	}
 }
 «ENDDEFINE»
 
-«DEFINE statement2 FOR AbstractElement»//Do nothing for '«metaType.name»'\n«ENDDEFINE»
-«DEFINE statement2 FOR Assignment»
-	final Object value = obj.consume("«feature»");
-    «EXPAND statement FOR terminal»
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-«ENDDEFINE»
 
-«DEFINE statement2 FOR Keyword»
-	callback.keywordCall(obj,(Keyword)getGrammarElement("«objectURI()»"));
-«ENDDEFINE»
 
-«DEFINE statement2 FOR Action»
-	InstanceDescription newObj = getDescr((EObject) obj.consume("«feature»"));
-	callback.actionCall(obj, newObj, (Action) getGrammarElement("«objectURI()»"));
-	obj = newObj;
-«ENDDEFINE»
+«REM» ************ Action ************* «ENDREM»
 
-«DEFINE statement2 FOR RuleCall»
-	«IF calledParserRule()!=null»
-		InstanceDescription val = «isAssigned() ? '(getDescr((EObject)value))' : 'obj'»;
-		EObject ruleCall = getGrammarElement("«objectURI()»");
-		try {
-			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
-			«calledRule().methodName()»(val,callback);
-			«IF isAssigned()»
-			if (!val.isConsumed()) 
-				throw new XtextSerializationException(val,"unserialized state");
-			«ENDIF»
-		} finally {
-			callback.parserRuleCallEnd();
-		}
-	«ELSE»
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("«objectURI()»"));
-	«ENDIF»
-«ENDDEFINE»
+«DEFINE element FOR Action»
+protected class «elementMethodName()» extends AssignmentToken  {
 
-«DEFINE statement2 FOR Group»
-	«FOREACH (List[AbstractElement]) abstractTokens.inverse() AS t-»
-		«EXPAND statement FOR t»
-	«ENDFOREACH-»
-«ENDDEFINE»
-
-«DEFINE statement2 FOR Alternatives»
-	«FOREACH this.groups AS alt SEPARATOR "else"-»
-		if («FOREACH alt.checkPath() AS p SEPARATOR '||'»
-new Predicate(obj) { 
-		public boolean check() {
-			return «p»; 
-		}
-}.check() «ENDFOREACH») {
-			«EXPAND statement FOR alt»
-		}
-	«ENDFOREACH-»
-	«IF !isOptional()»
-		else {
-		    throw new XtextSerializationException(obj, "No alternative matched");
-		}
-	«ENDIF»
+«EXPAND constructor»
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("«feature»")) return null;
+		Object val = obj.consume("«feature»");
+		if(!obj.isConsumed()) return null;
+		object = getDescr((EObject)val);
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
 «ENDDEFINE»
 
 
+
+«REM» ************ Keyword ************* «ENDREM»
+
+«DEFINE element FOR Keyword»
+
+protected class «elementMethodName()» extends KeywordToken  {
+
+	protected Keyword keyword = (Keyword)getGrammarElement("«objectURI()»");
+	
+	public «elementMethodName()»(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, «IF !cardinality.isRequired()»!«ENDIF»IS_REQUIRED);
+	}
+		
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		throw new UnsupportedOperationException();
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+«IF cardinality.isRequired()-»
+		callback.keywordCall(object, keyword);
+«ELSEIF cardinality.isOptional()-»
+		// This keyword ('«value»') is optional (cardinality == «cardinality») and thereby not serialized.
+«ELSE-»
+		// FIXME: unknown cardinality '«cardinality»' 
+«ENDIF-»		
+	}
+}
+«ENDDEFINE»
 

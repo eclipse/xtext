@@ -51,13 +51,13 @@ public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 					LeafNode ln = list.get(x);
 					if (!ln.isHidden())
 						return;
-					prepend(ln.getText());
+//					prepend(ln.getText());
+					append(ln.getText());
 				}
 			}
 		}
 	}
 
-	@Override
 	protected void before(IInstanceDescription desc, AbstractElement element) {
 		CompositeNode rootNode = getEntryNode(desc);
 		if (rootNode != null)
@@ -86,7 +86,8 @@ public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 				if (consumingMode) {
 					if (!n.isHidden())
 						return;
-					prepend(n.getText());
+//					prepend(n.getText());
+					append(n.getText());					
 				}
 				if (n.getGrammarElement() == element) {
 					if (skip == 0) {

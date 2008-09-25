@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -84,7 +85,16 @@ public class InstanceDescription implements IInstanceDescription {
 
 	@Override
 	public String toString() {
-		return hashCode() + "/" + described.hashCode();
+		List<String> l = new ArrayList<String>();
+		for (Entry<String, Integer> i : featureConsumedCounter.entrySet()) {
+			EStructuralFeature f = described.eClass().getEStructuralFeature(
+					i.getKey());
+			Object v = described.eGet(f);
+			int count = (v instanceof Collection) ? ((Collection<?>) v).size() : 1;
+			l.add(i.getKey() + ":" + i.getValue() + "/" + count);
+		}
+		return hashCode() + "/" + described.eClass().getName() + ":"
+				+ described.hashCode() + ":" + l;
 	}
 
 	/**
