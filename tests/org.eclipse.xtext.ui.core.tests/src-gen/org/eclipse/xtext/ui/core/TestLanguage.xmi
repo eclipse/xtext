@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="foo" nsURI="http://foo"/>
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>ui</idElements>
+  <idElements>core</idElements>
+  <idElements>TestLanguage</idElements>
+  <rules xsi:type="xtext:ParserRule" name="File">
+    <alternatives xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="stuff">
+      <terminal xsi:type="xtext:RuleCall" name="Stuff"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Stuff">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Keyword" value="stuff"/>
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+        <terminal xsi:type="xtext:RuleCall" name="ID"/>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+</xtext:Grammar>

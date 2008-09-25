@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.xtext.ui.core.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="testlanguage"
+            id="org.eclipse.xtext.ui.core.TestLanguage"
+            name="Xtext Editor">
+      </editor>
+   </extension>
+ <extension
+       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
+    <serviceRegistrationFactory
+          class="org.eclipse.xtext.ui.core.TestLanguageUiConfig">
+    </serviceRegistrationFactory>
+    <serviceRegistrationFactory
+          class="org.eclipse.xtext.ui.core.TestLanguageRuntimeConfig">
+    </serviceRegistrationFactory>
+    <serviceRegistrationFactory
+          class="org.eclipse.xtext.builtin.XtextBuiltinRuntimeConfig">
+    </serviceRegistrationFactory>
+ </extension>
+ <extension
+       point="org.eclipse.emf.ecore.extension_parser">
+    <parser
+          class="org.eclipse.xtext.ui.core.services.TestLanguageResourceFactory"
+          type="testlanguage">
+    </parser>
+ </extension>
+</plugin>
