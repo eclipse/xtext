@@ -19,7 +19,7 @@ import org.eclipse.xtext.service.examples.InjectedService;
 import org.eclipse.xtext.service.examples.InjectedServiceFactory;
 import org.eclipse.xtext.service.examples.MyService;
 import org.eclipse.xtext.service.examples.MyServiceFactory;
-import org.eclipse.xtext.service.examples.SamplePatient;
+import org.eclipse.xtext.service.examples.WithOptionalDependency;
 
 /**
  * 
@@ -36,7 +36,7 @@ public class DependencyInjectionTest extends AbstractServiceTest {
             ServiceRegistry.getService(myScope, MyService.class);
             fail("Exepction expected due to unresolvable dependency");
         } catch (Exception e) {
-            // normal behaviour
+            System.out.println(e.getMessage());// normal behaviour
         }
     }
     
@@ -81,9 +81,9 @@ public class DependencyInjectionTest extends AbstractServiceTest {
     }
 
    public void testNonServiceInjection() throws Exception {
-       ServiceRegistry.registerService(myScope, InjectedService.class, InjectedService.class);
-       SamplePatient samplePatient = new SamplePatient();
-       ServiceRegistry.injectServices(myScope, samplePatient);
+	   WithOptionalDependency obj = new WithOptionalDependency();
+       ServiceRegistry.injectServices(myScope, obj);
+       assertNull(obj.dependency);
    }
-    
+   
 }

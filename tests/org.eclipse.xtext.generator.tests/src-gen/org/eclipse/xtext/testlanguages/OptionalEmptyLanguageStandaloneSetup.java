@@ -4,25 +4,12 @@ Generated with Xtext
 package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceScopeFactory;
-import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageGrammarAccess;
-import org.eclipse.xtext.IMetamodelAccess;
-import org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageMetamodelAccess;
-import org.eclipse.xtext.parser.IAstFactory;
-import org.eclipse.xtext.parser.GenericEcoreElementFactory;
-import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.testlanguages.parser.OptionalEmptyLanguageParser;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageResourceFactory;
-import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
-import org.eclipse.xtext.testlanguages.parsetree.reconstr.OptionalEmptyLanguageParseTreeConstructor;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
 
 import org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage;
 
@@ -32,19 +19,15 @@ public abstract class OptionalEmptyLanguageStandaloneSetup {
 
 	public synchronized static void doSetup() {
 		if(!isInitialized) {
-			
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage.SCOPE, IGrammarAccess.class, OptionalEmptyLanguageGrammarAccess.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage.SCOPE, IMetamodelAccess.class, OptionalEmptyLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage.SCOPE, IParser.class, OptionalEmptyLanguageParser.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage.SCOPE, IResourceFactory.class, OptionalEmptyLanguageResourceFactory.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IOptionalEmptyLanguage.SCOPE, IParseTreeConstructor.class, OptionalEmptyLanguageParseTreeConstructor.class);
+			for (IServiceRegistration reg :  new org.eclipse.xtext.testlanguages.OptionalEmptyLanguageRuntimeConfig().registrations()) {
+				ServiceRegistry.registerFactory(reg.scope(), reg.serviceFactory(), reg.priority());
+			}
 			
 			// register resource factory to EMF
-			IResourceFactory resourceFactory = new OptionalEmptyLanguageResourceFactory();
+			IResourceFactory resourceFactory = new org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageResourceFactory();
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("optionalemptylanguage", resourceFactory);
 			
 			

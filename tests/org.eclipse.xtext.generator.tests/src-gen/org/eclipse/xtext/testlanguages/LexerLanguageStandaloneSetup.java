@@ -4,25 +4,12 @@ Generated with Xtext
 package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceScopeFactory;
-import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.testlanguages.services.LexerLanguageGrammarAccess;
-import org.eclipse.xtext.IMetamodelAccess;
-import org.eclipse.xtext.testlanguages.services.LexerLanguageMetamodelAccess;
-import org.eclipse.xtext.parser.IAstFactory;
-import org.eclipse.xtext.parser.GenericEcoreElementFactory;
-import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.testlanguages.parser.LexerLanguageParser;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.testlanguages.services.LexerLanguageResourceFactory;
-import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
-import org.eclipse.xtext.testlanguages.parsetree.reconstr.LexerLanguageParseTreeConstructor;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
 
 import org.eclipse.xtext.testlanguages.ILexerLanguage;
 
@@ -32,19 +19,15 @@ public abstract class LexerLanguageStandaloneSetup {
 
 	public synchronized static void doSetup() {
 		if(!isInitialized) {
-			
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE, IGrammarAccess.class, LexerLanguageGrammarAccess.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE, IMetamodelAccess.class, LexerLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE, IParser.class, LexerLanguageParser.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE, IResourceFactory.class, LexerLanguageResourceFactory.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE, IParseTreeConstructor.class, LexerLanguageParseTreeConstructor.class);
+			for (IServiceRegistration reg :  new org.eclipse.xtext.testlanguages.LexerLanguageRuntimeConfig().registrations()) {
+				ServiceRegistry.registerFactory(reg.scope(), reg.serviceFactory(), reg.priority());
+			}
 			
 			// register resource factory to EMF
-			IResourceFactory resourceFactory = new LexerLanguageResourceFactory();
+			IResourceFactory resourceFactory = new org.eclipse.xtext.testlanguages.services.LexerLanguageResourceFactory();
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("lexerlanguage", resourceFactory);
 			
 			

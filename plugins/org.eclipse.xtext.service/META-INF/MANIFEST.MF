@@ -11,3 +11,5 @@ Require-Bundle: org.eclipse.xtext.util,
 Export-Package: org.eclipse.xtext.service,
  org.eclipse.xtext.service.internal;x-friends:="org.eclipse.xtext.service.tests"
 Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: lib/picocontainer-2.5.jar,
+ .

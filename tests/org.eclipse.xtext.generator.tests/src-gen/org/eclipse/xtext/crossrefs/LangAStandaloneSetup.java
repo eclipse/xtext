@@ -4,25 +4,12 @@ Generated with Xtext
 package org.eclipse.xtext.crossrefs;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceScopeFactory;
-import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.crossrefs.services.LangAGrammarAccess;
-import org.eclipse.xtext.IMetamodelAccess;
-import org.eclipse.xtext.crossrefs.services.LangAMetamodelAccess;
-import org.eclipse.xtext.parser.IAstFactory;
-import org.eclipse.xtext.parser.GenericEcoreElementFactory;
-import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.crossrefs.parser.LangAParser;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.crossrefs.services.LangAResourceFactory;
-import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
-import org.eclipse.xtext.crossrefs.parsetree.reconstr.LangAParseTreeConstructor;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
 
 import org.eclipse.xtext.crossrefs.ILangA;
 
@@ -32,19 +19,15 @@ public abstract class LangAStandaloneSetup {
 
 	public synchronized static void doSetup() {
 		if(!isInitialized) {
-			
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			ServiceRegistry.registerService(org.eclipse.xtext.crossrefs.ILangA.SCOPE, IGrammarAccess.class, LangAGrammarAccess.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.crossrefs.ILangA.SCOPE, IMetamodelAccess.class, LangAMetamodelAccess.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.crossrefs.ILangA.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.crossrefs.ILangA.SCOPE, IParser.class, LangAParser.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.crossrefs.ILangA.SCOPE, IResourceFactory.class, LangAResourceFactory.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.crossrefs.ILangA.SCOPE, IParseTreeConstructor.class, LangAParseTreeConstructor.class);
+			for (IServiceRegistration reg :  new org.eclipse.xtext.crossrefs.LangARuntimeConfig().registrations()) {
+				ServiceRegistry.registerFactory(reg.scope(), reg.serviceFactory(), reg.priority());
+			}
 			
 			// register resource factory to EMF
-			IResourceFactory resourceFactory = new LangAResourceFactory();
+			IResourceFactory resourceFactory = new org.eclipse.xtext.crossrefs.services.LangAResourceFactory();
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("langa", resourceFactory);
 			
 			

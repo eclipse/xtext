@@ -18,8 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.WrappedException;
-
 /**
  * 
  * @author Jan Köhnlein
@@ -68,9 +66,10 @@ public class ServiceRegistry {
 		isFrozen = true;
 		try {
 			injectDependencies(languageDescriptor, patient);
+		} catch (RuntimeException e) {
+			throw e;
 		} catch (Exception e) {
-			throw new WrappedException("Error injecting dependencies into "
-					+ (patient != null ? patient.getClass().getSimpleName() : "null") + " for " + languageDescriptor, e);
+			throw new IllegalStateException(e);
 		}
 	}
 
@@ -119,34 +118,35 @@ public class ServiceRegistry {
 		registerFactory(languageDescriptor, factory, PRIORITY_NORMAL);
 	}
 
-	private static <T extends Object> T internalGetService(IServiceScope currentScope,Class<T> serviceInterface) {
-		return internalGetService(currentScope, currentScope,serviceInterface);
+	private static <T extends Object> T internalGetService(IServiceScope currentScope, Class<T> serviceInterface) {
+		return internalGetService(currentScope, currentScope, serviceInterface);
 	}
+
 	@SuppressWarnings("unchecked")
-    private static <T extends Object> T internalGetService(IServiceScope currentScope,
-            IServiceScope realLanguageDescriptor, Class<T> serviceInterface) {
-        if (currentScope == null || serviceInterface == null) {
-            throw new IllegalArgumentException("Neither languageDescriptor nor serviceInterface can be null");
-        }
-        if (!Object.class.isAssignableFrom(serviceInterface)) {
+	private static <T extends Object> T internalGetService(IServiceScope currentScope,
+			IServiceScope realLanguageDescriptor, Class<T> serviceInterface) {
+		if (currentScope == null || serviceInterface == null) {
+			throw new IllegalArgumentException("Neither languageDescriptor nor serviceInterface can be null");
+		}
+		if (!Object.class.isAssignableFrom(serviceInterface)) {
 			throw new IllegalArgumentException("Annotated member's type must extend Object. Member type class: "
 					+ serviceInterface + ", but should be " + Object.class + ".");
 		}
-        List<Entry> entries = new ArrayList<Entry>(getEntryList(currentScope));
-        Collections.reverse(entries);
-        Integer currPriority = null;
-        T service = null;
-        for (Entry e : entries) {
+		List<Entry> entries = new ArrayList<Entry>(getEntryList(currentScope));
+		Collections.reverse(entries);
+		Integer currPriority = null;
+		T service = null;
+		for (Entry e : entries) {
 			if (serviceInterface.isAssignableFrom(e.factory.getServiceInterface())) {
-				if (currPriority==null) {
+				if (currPriority == null) {
 					currPriority = e.priority;
-					if (currentScope == realLanguageDescriptor && e.cachedService!=null) {
+					if (currentScope == realLanguageDescriptor && e.cachedService != null) {
 						service = (T) e.cachedService;
 					} else {
 						service = (T) e.factory.createService();
 						if (service == null)
 							return null;
-						if (currentScope==realLanguageDescriptor) {
+						if (currentScope == realLanguageDescriptor) {
 							e.cachedService = service;
 						} else {
 							addEntry(realLanguageDescriptor, e, service);
@@ -154,25 +154,26 @@ public class ServiceRegistry {
 						injectServices(realLanguageDescriptor, service);
 					}
 				} else {
-					if (e.priority==currPriority) {
-						System.err.println("Mutliple service factories for type "+serviceInterface.getName()+" in scope "+realLanguageDescriptor.getId());
+					if (e.priority == currPriority) {
+						System.err.println("Mutliple service factories for type " + serviceInterface.getName()
+								+ " in scope " + realLanguageDescriptor.getId());
 					}
 					return service;
 				}
 			}
 		}
-        if (service!=null)
-        	return service;
-        if (currentScope.getParentScope()==null)
-        	throw new IllegalStateException("Couldn't find service "+serviceInterface.getName()+" in scope "+realLanguageDescriptor.getId());
-        return internalGetService(currentScope.getParentScope(), realLanguageDescriptor, serviceInterface);
-        
-    }
+		if (service != null)
+			return service;
+		if (currentScope.getParentScope() == null)
+			return null;
+		return internalGetService(currentScope.getParentScope(), realLanguageDescriptor, serviceInterface);
+
+	}
 
 	private static void addEntry(IServiceScope realLanguageDescriptor, Entry e, Object service) {
 		Entry newe = new Entry();
-		newe.priority =e.priority;
-		newe.factory =e.factory;
+		newe.priority = e.priority;
+		newe.factory = e.factory;
 		newe.cachedService = service;
 		List<Entry> entryList = getEntryList(realLanguageDescriptor);
 		entryList.add(newe);
@@ -237,6 +238,9 @@ public class ServiceRegistry {
 					field.set(patient, languageDescriptor);
 				} else {
 					Object injectedService = internalGetService(languageDescriptor, field.getType());
+					if (injectedService == null && !field.getAnnotation(Inject.class).optional())
+						throw new IllegalStateException("No component found for non-optional dependency "
+								+ field + ".");
 					field.set(patient, injectedService);
 				}
 			}
@@ -246,7 +250,8 @@ public class ServiceRegistry {
 		for (Method method : methods) {
 			Class<?>[] parameterTypes = method.getParameterTypes();
 			if (parameterTypes.length != 1 && method.isAnnotationPresent(Inject.class)) {
-				throw new IllegalArgumentException("Annotated method "+method.toGenericString()+" must have exactly one parameter");
+				throw new IllegalArgumentException("Annotated method " + method.toGenericString()
+						+ " must have exactly one parameter");
 			}
 			if (parameterTypes.length == 1 && method.isAnnotationPresent(Inject.class)) {
 				method.setAccessible(true);
@@ -254,6 +259,9 @@ public class ServiceRegistry {
 					method.invoke(patient, languageDescriptor);
 				} else {
 					Object injectedService = internalGetService(languageDescriptor, parameterTypes[0]);
+					if (injectedService == null && !method.getAnnotation(Inject.class).optional())
+						throw new IllegalStateException("No component found for non-optional dependency " + method
+								+ ".");
 					method.invoke(patient, injectedService);
 				}
 			}
