@@ -19,60 +19,59 @@ import org.eclipse.xtext.util.EmfFormater;
 import org.eclipse.xtext.xtext2ecore.EcoreModelComparator;
 
 public class ComplexReconstrTest extends AbstractGeneratorTest {
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(ComplexReconstrTestStandaloneSetup.class);
 	}
-	
+
 	public void testPrintGrammar() {
 		ResourceSet rs = new XtextResourceSet();
-		URI u = URI.createURI("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi");
+		URI u = URI
+				.createURI("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi");
 		EObject o = rs.getResource(u, true).getContents().get(0);
-		for(Object x : o.eContents()) if(x instanceof ParserRule) {
-			ParserRule pr = (ParserRule) x;
-			if(pr.getName().toLowerCase().contains("tricky")){
-				System.out.println(EmfFormater.objToStr(pr, ""));
+		for (Object x : o.eContents())
+			if (x instanceof ParserRule) {
+				ParserRule pr = (ParserRule) x;
+				if (pr.getName().toLowerCase().contains("tricky")) {
+					System.out.println(EmfFormater.objToStr(pr, ""));
 				}
-		}
-		
+			}
+
 	}
 
-//	FIXME: Make this test work again
-	
-//	public void testSimple() throws Exception {
-//		String model = "( a + b - c ) !";
-//		assertEquals(model,parseAndSerialize(model));
-//	}
-	
-//	FIXME: Make this test work again
-	
-//	public void testComplex() throws Exception {
-//		String model = "( ( a + b ) ! - c + d + e + f - ( x + s ) - ( ( a + b ) ! - c ) ! ) !";
-//		assertEquals(model,parseAndSerialize(model));
-//	}
+	public void testSimple() throws Exception {
+		String model = "( a + b - c ) !";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	public void testComplex() throws Exception {
+		String model = "( ( a + b ) ! - c + d + e + f - ( ^x + s ) - ( ( a + b ) ! - c ) ! ) !";
+		assertEquals(model, parseAndSerialize(model));
+	}
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
+		System.out.println(EmfFormater.objToStr(result, ""));
 		IParseTreeConstructor con = getParseTreeConstructor();
-		WhitespacePreservingCallback callback = new WhitespacePreservingCallback(getValueConverterService());
-		con.update(result,callback);
+		WhitespacePreservingCallback callback = new WhitespacePreservingCallback(
+				getValueConverterService());
+		con.update(result, callback);
 		return callback.toString();
 	}
-	
-//	FIXME: Make this test work again
-	
-//	public void testNormalizableCompositeNodesIncluded() throws Exception {
-//		reconstructAndCompare("a");
-//		reconstructAndCompare("a + b");
-//	}
 
-	private void reconstructAndCompare(String mymodel) throws Exception, InterruptedException {
+	public void testNormalizableCompositeNodesIncluded() throws Exception {
+		reconstructAndCompare("a");
+		reconstructAndCompare("a + b");
+	}
+
+	private void reconstructAndCompare(String mymodel) throws Exception,
+			InterruptedException {
 		EObject model = getModel(mymodel);
 		EObject model2 = getModel(parseAndSerialize(mymodel));
 		EcoreModelComparator ecoreModelComparator = new EcoreModelComparator();
 		assertFalse(ecoreModelComparator.modelsDiffer(model, model2));
 	}
-	
+
 }
