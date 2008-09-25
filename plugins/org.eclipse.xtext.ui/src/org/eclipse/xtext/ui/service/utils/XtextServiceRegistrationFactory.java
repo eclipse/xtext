@@ -94,8 +94,8 @@ public class XtextServiceRegistrationFactory implements IServiceRegistrationFact
 							return prio != null ? Integer.valueOf(prio) : 0;
 						}
 
-						public String scopeId() {
-							return scopeId;
+						public IServiceScope scope() {
+							return scope;
 						}
 
 						public IServiceFactory serviceFactory() {
