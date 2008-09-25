@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.keywords">
+      <keyword
+            id="org.eclipse.xtext.keyword.editor"
+            label="Editor">
+      </keyword>
+      <keyword
+            id="org.eclipse.xtext.keyword.syntax_coloring"
+            label="Syntax">
+      </keyword>
+   </extension>
+   <!--extension
+         point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
+      <hyperlinkDetector
+            activate="true"
+            class="org.eclipse.xtext.ui.editor.DelegatingHyperlinkDetector"
+            id="org.eclipse.xtext.ui.hyperlinkDetector"
+            name="XtextHypeLink"
+            targetId="org.eclipse.xtext.ui.hyperlinkTarget">
+      </hyperlinkDetector>
+   </extension>
+   <extension
+         point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectorTargets">
+      <target
+            description="Depends on an EditorModel contained in all Xtext editors"
+            id="org.eclipse.xtext.ui.hyperlinkTarget"
+            name="Xtext Editors">
+         <context type="org.eclipse.xtext.ui.editor.model.IEditorModel"/>
+      </target>
+   </extension-->
+   
+</plugin>
