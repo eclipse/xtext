@@ -1,7 +1,6 @@
 package org.eclipse.xtext.parsetree.reconstr.callbacks;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
@@ -25,29 +24,37 @@ public class SimpleSerializingCallback extends DefaultParsetreeReconstructorCall
 	
 	@Override
 	public void keywordCall(IInstanceDescription current, Keyword call) {
-		prepend(call.getValue());
-		before(current, call);
+//		prepend(call.getValue());
+//		before(current, call);
+		append(call.getValue());
 	}
 	
 	
-	protected void before(IInstanceDescription current,AbstractElement element) {
-		if (buff.length()>0)
-			prepend(" ");
-	}
+//	protected void before(IInstanceDescription current,AbstractElement element) {
+//		if (buff.length()>0)
+//			prepend(" ");
+//	}
 	
-	protected void prepend(String s) {
-		buff.insert(0, s);
+//	protected void prepend(String s) {
+//		buff.insert(0, s);
+//	}
+	
+	protected void append(String str) {
+		if(buff.length() > 0) 
+			buff.append(" ");
+		buff.append(str);
 	}
 	
 	@Override
-	public void lexerRuleCall(IInstanceDescription current, RuleCall call) {
-		Assignment assignment = GrammarUtil.containingAssignment(call);
-		Object value = null;
-		if (assignment!=null) {
-			value = current.get(assignment.getFeature());
-		}
-		prepend(converterService.toString(value, call.getName()));
-		before(current, call);
+	public void lexerRuleCall(IInstanceDescription current, RuleCall call, Object value) {
+//		Assignment assignment = GrammarUtil.containingAssignment(call);
+//		Object value = null;
+//		if (assignment!=null) {
+//			value = current.get(assignment.getFeature());
+//		}
+//		prepend(converterService.toString(value, call.getName()));
+//		before(current, call);
+		append(converterService.toString(value, call.getName()));		
 	}
 	
 	@Override
@@ -58,7 +65,8 @@ public class SimpleSerializingCallback extends DefaultParsetreeReconstructorCall
 		Object object = current.get(ass.getFeature());
 		if (object instanceof EObject) {
 			EObject obj = (EObject) object;
-			prepend(obj.eResource().getURIFragment(obj));
+//			prepend(obj.eResource().getURIFragment(obj));
+			append(obj.eResource().getURIFragment(obj));
 		}
 		throw new IllegalStateException("Can't serialize cross reference to "+object);
 	}

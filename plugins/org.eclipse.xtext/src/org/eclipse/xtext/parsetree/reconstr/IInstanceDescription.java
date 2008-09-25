@@ -38,6 +38,8 @@ public interface IInstanceDescription {
 	 * @return the consumed value
 	 */
 	public abstract Object get(String feature);
+	
+	public Object consume(String feature);
 
 	/**
 	 * 

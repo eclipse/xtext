@@ -13,7 +13,7 @@ Op returns Expression:
 	Term ({Op.values+=current} values+=Term)*;
 	
 Term returns Expression:
-	Atom | Parens;
+	Atom | TwoNumbers | ManyStrings | Parens;
 	
 Atom: 
 	name=ID;
@@ -21,6 +21,10 @@ Atom:
 Parens returns Expression: 
 	'(' Op ')' em='!'?;
 	
+TwoNumbers:
+	num1=INT num2=INT;
+	
+ManyStrings: '=' (str1+=STRING)* str2+=STRING; 
 
 
 

@@ -59,6 +59,9 @@ List[RuleCall] containedRuleCalls(emf::EObject o) :
 
 List[Assignment] containedAssignments(emf::EObject o) :
 	JAVA org.eclipse.xtext.GrammarUtil.containedAssignments(org.eclipse.emf.ecore.EObject);
+	
+List[Keyword] containedKeywords(emf::EObject o) :
+	JAVA org.eclipse.xtext.GrammarUtil.containedKeywords(org.eclipse.emf.ecore.EObject);
 
 
 // ***********************************************************************************
