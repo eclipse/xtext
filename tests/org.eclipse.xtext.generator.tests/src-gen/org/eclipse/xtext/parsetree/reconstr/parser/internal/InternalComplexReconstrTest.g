@@ -268,6 +268,50 @@ ruleParens returns [EObject current=null]
 
 
 
+
+// Entry rule entryRuleTrickyA1
+entryRuleTrickyA1 returns [EObject current=null] :
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleTrickyA1=ruleTrickyA1 
+	 { $current=$iv_ruleTrickyA1.current; } 
+	 EOF 
+;
+
+// Rule TrickyA1
+ruleTrickyA1 returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
+(	
+	
+	    lv_name=RULE_ID
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.5/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("TypeD");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.add($current, "name", lv_name,"ID");
+	         }
+	
+);
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;

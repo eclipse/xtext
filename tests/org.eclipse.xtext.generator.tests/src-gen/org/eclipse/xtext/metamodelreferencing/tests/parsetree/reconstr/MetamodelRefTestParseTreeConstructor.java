@@ -12,122 +12,156 @@ import org.eclipse.xtext.parsetree.reconstr.impl.*;
 public class MetamodelRefTestParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
-		if (ruleToCall.equals("Foo")) {
-			proceedFoo(getDescr(obj),callback);
-		} else 		if (ruleToCall.equals("NameRef")) {
-			proceedNameRef(getDescr(obj),callback);
-		} else {
-			throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		}
+		AbstractToken t = internalSerialize(obj);
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
+		t.executeAllCallbacks(callback);
+		System.out.println("success!");
 	}
+	
+	protected AbstractToken internalSerialize(EObject obj) {
+		AbstractToken t = new Foo_0_Group(null);
+		t = t.createFirstSolution(getDescr(obj));
+		if(t != null) return t;
+		t = new NameRef_1_Assignment_name(null);
+		return t.createFirstSolution(getDescr(obj));
+	}
+	
+/************ begin Rule Foo ****************/
 
+
+protected class Foo_0_Group extends GroupToken {
 	
-private String FooRecursionCheck = null;
-protected void proceedFoo(InstanceDescription obj,IParseTreeConstructorCallback callback) {
-	try {
-		String s = obj.uniqueStateString();
-		if (s.equals(FooRecursionCheck))
-			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		FooRecursionCheck = s;
+	public Foo_0_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
 	
-/* xtext::Group */ 
-{
+	private Foo_0_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Foo_0_Group(predecessor, true, false);
+	}
 
 		
-/* xtext::Assignment */ 
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new Foo_0_1_Assignment_nameRefs(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new Foo_0_0_Assignment_name(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
 
-while (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("nameRefs"); 
-		}
-}.check() ){
-
-	final Object value = obj.consume("nameRefs");
-    
-/* xtext::RuleCall */ 
-{
-
-	
-		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
-		try {
-			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
-			proceedNameRef(val,callback);
-			
-			if (!val.isConsumed()) 
-				throw new XtextSerializationException(val,"unserialized state");
-			
-		} finally {
-			callback.parserRuleCallEnd();
-		}
-	
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		
-/* xtext::Assignment */ 
-{
-
-	final Object value = obj.consume("name");
-    
-/* xtext::RuleCall */ 
-{
-
-	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal"));
-	
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-
-}
-
-	} finally {
-		FooRecursionCheck = null;
+	public void executeCallback(IParseTreeConstructorCallback callback) {
 	}
 }
 
-private String NameRefRecursionCheck = null;
-protected void proceedNameRef(InstanceDescription obj,IParseTreeConstructorCallback callback) {
-	try {
-		String s = obj.uniqueStateString();
-		if (s.equals(NameRefRecursionCheck))
-			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		NameRefRecursionCheck = s;
+protected class Foo_0_0_Assignment_name extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal");
+	protected Object value;
 	
-/* xtext::Assignment */ 
-{
-
-	final Object value = obj.consume("name");
-    
-/* xtext::RuleCall */ 
-{
+	public Foo_0_0_Assignment_name(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private Foo_0_0_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Foo_0_0_Assignment_name(predecessor, true, false);
+	}
 
 	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1/@alternatives/@terminal"));
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("name")) return null;
+		value = obj.consume("name");
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
 	
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-	} finally {
-		NameRefRecursionCheck = null;
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("Foo_0_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
 	}
 }
 
+protected class Foo_0_1_Assignment_nameRefs extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
+	protected Object value;
+	
+	public Foo_0_1_Assignment_nameRefs(AbstractToken predecessor) {
+		super(predecessor, IS_MANY, !IS_REQUIRED);
+	}
+	
+	private Foo_0_1_Assignment_nameRefs(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Foo_0_1_Assignment_nameRefs(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("nameRefs")) return null;
+		value = obj.consume("nameRefs");
+		AbstractToken t = new NameRef_1_Assignment_name(predecessor);
+		predecessor = t.createFirstSolution(getDescr((EObject)value));
+		if(predecessor == null) return null;
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("Foo_0_1_Assignment_nameRefsCallback(\"xtext::RuleCall\", " + value + ")");
+		// Nothing to do for ParserRule Call NameRef
+	}
+}
+
+
+/************ end Rule Foo ****************/
+/************ begin Rule NameRef ****************/
+
+
+protected class NameRef_1_Assignment_name extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1/@alternatives/@terminal");
+	protected Object value;
+	
+	public NameRef_1_Assignment_name(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private NameRef_1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new NameRef_1_Assignment_name(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("name")) return null;
+		value = obj.consume("name");
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("NameRef_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+	}
+}
+
+/************ end Rule NameRef ****************/
 }

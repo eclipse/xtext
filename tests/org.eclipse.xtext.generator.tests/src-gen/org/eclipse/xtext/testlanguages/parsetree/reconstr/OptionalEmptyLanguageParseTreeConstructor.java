@@ -12,110 +12,146 @@ import org.eclipse.xtext.parsetree.reconstr.impl.*;
 public class OptionalEmptyLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
-		if (ruleToCall.equals("Model")) {
-			proceedModel(getDescr(obj),callback);
-		} else 		if (ruleToCall.equals("Greeting")) {
-			proceedGreeting(getDescr(obj),callback);
-		} else {
-			throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		}
+		AbstractToken t = internalSerialize(obj);
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
+		t.executeAllCallbacks(callback);
+		System.out.println("success!");
+	}
+	
+	protected AbstractToken internalSerialize(EObject obj) {
+		AbstractToken t = new Model_0_Assignment_child(null);
+		t = t.createFirstSolution(getDescr(obj));
+		if(t != null) return t;
+		t = new Greeting_0_Group(null);
+		return t.createFirstSolution(getDescr(obj));
+	}
+	
+/************ begin Rule Model ****************/
+
+
+protected class Model_0_Assignment_child extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.0/@alternatives/@terminal");
+	protected Object value;
+	
+	public Model_0_Assignment_child(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, !IS_REQUIRED);
+	}
+	
+	private Model_0_Assignment_child(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Model_0_Assignment_child(predecessor, true, false);
 	}
 
 	
-private String ModelRecursionCheck = null;
-protected void proceedModel(InstanceDescription obj,IParseTreeConstructorCallback callback) {
-	try {
-		String s = obj.uniqueStateString();
-		if (s.equals(ModelRecursionCheck))
-			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		ModelRecursionCheck = s;
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("child")) return null;
+		value = obj.consume("child");
+		AbstractToken t = new Greeting_0_Group(predecessor);
+		predecessor = t.createFirstSolution(getDescr((EObject)value));
+		if(predecessor == null) return null;
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
 	
-/* xtext::Assignment */ 
-
-if (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("child"); 
-		}
-}.check() ){
-
-	final Object value = obj.consume("child");
-    
-/* xtext::RuleCall */ 
-{
-
-	
-		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.0/@alternatives/@terminal");
-		try {
-			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
-			proceedGreeting(val,callback);
-			
-			if (!val.isConsumed()) 
-				throw new XtextSerializationException(val,"unserialized state");
-			
-		} finally {
-			callback.parserRuleCallEnd();
-		}
-	
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-	} finally {
-		ModelRecursionCheck = null;
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("Model_0_Assignment_childCallback(\"xtext::RuleCall\", " + value + ")");
+		// Nothing to do for ParserRule Call Greeting
 	}
 }
 
-private String GreetingRecursionCheck = null;
-protected void proceedGreeting(InstanceDescription obj,IParseTreeConstructorCallback callback) {
-	try {
-		String s = obj.uniqueStateString();
-		if (s.equals(GreetingRecursionCheck))
-			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		GreetingRecursionCheck = s;
+/************ end Rule Model ****************/
+/************ begin Rule Greeting ****************/
+
+
+protected class Greeting_0_Group extends GroupToken {
 	
-/* xtext::Group */ 
-{
+	public Greeting_0_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private Greeting_0_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Greeting_0_Group(predecessor, true, false);
+	}
 
 		
-/* xtext::Assignment */ 
-{
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new Greeting_0_1_Assignment_name(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new Greeting_0_0_Keyword_hallo(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
 
-	final Object value = obj.consume("name");
-    
-/* xtext::RuleCall */ 
-{
-
-	
-		callback.lexerRuleCall(obj,(RuleCall)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal"));
-	
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0"));
-
-}
-
-
-}
-
-	} finally {
-		GreetingRecursionCheck = null;
+	public void executeCallback(IParseTreeConstructorCallback callback) {
 	}
 }
 
+
+protected class Greeting_0_0_Keyword_hallo extends KeywordToken  {
+
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
+	
+	public Greeting_0_0_Keyword_hallo(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+		
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		throw new UnsupportedOperationException();
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(object, keyword);
+	}
+}
+
+protected class Greeting_0_1_Assignment_name extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal");
+	protected Object value;
+	
+	public Greeting_0_1_Assignment_name(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private Greeting_0_1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Greeting_0_1_Assignment_name(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("name")) return null;
+		value = obj.consume("name");
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("Greeting_0_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+	}
+}
+
+
+/************ end Rule Greeting ****************/
 }

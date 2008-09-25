@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-09-25 13:45:35
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-09-25 13:58:40
 
 package org.eclipse.xtext.parsetree.reconstr.parser.internal; 
 
@@ -626,6 +626,89 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
     // $ANTLR end ruleParens
 
 
+    // $ANTLR start entryRuleTrickyA1
+    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:273:1: entryRuleTrickyA1 returns [EObject current=null] : iv_ruleTrickyA1= ruleTrickyA1 EOF ;
+    public final EObject entryRuleTrickyA1() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleTrickyA1 = null;
+
+
+        try {
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:273:50: (iv_ruleTrickyA1= ruleTrickyA1 EOF )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:274:2: iv_ruleTrickyA1= ruleTrickyA1 EOF
+            {
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); 
+            pushFollow(FOLLOW_ruleTrickyA1_in_entryRuleTrickyA1658);
+            iv_ruleTrickyA1=ruleTrickyA1();
+            _fsp--;
+
+             current =iv_ruleTrickyA1; 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTrickyA1668); 
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end entryRuleTrickyA1
+
+
+    // $ANTLR start ruleTrickyA1
+    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:281:1: ruleTrickyA1 returns [EObject current=null] : (lv_name= RULE_ID ) ;
+    public final EObject ruleTrickyA1() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_name=null;
+
+         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+        try {
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:283:33: ( (lv_name= RULE_ID ) )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:284:1: (lv_name= RULE_ID )
+            {
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:284:1: (lv_name= RULE_ID )
+            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:286:6: lv_name= RULE_ID
+            {
+            lv_name=(Token)input.LT(1);
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTrickyA1713); 
+             
+                createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.5/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
+                
+
+            	        if (current==null) {
+            	            current = factory.create("TypeD");
+            	            associateNodeWithAstElement(currentNode, current);
+            	        }
+            	        
+            	        factory.add(current, "name", lv_name,"ID");
+            	         
+
+            }
+
+
+            }
+
+             resetLookahead(); 
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end ruleTrickyA1
+
+
  
 
     public static final BitSet FOLLOW_ruleOp_in_entryRuleOp71 = new BitSet(new long[]{0x0000000000000000L});
@@ -648,5 +731,8 @@ public class InternalComplexReconstrTestParser extends AbstractAntlrParser {
     public static final BitSet FOLLOW_ruleOp_in_ruleParens577 = new BitSet(new long[]{0x0000000000004000L});
     public static final BitSet FOLLOW_14_in_ruleParens586 = new BitSet(new long[]{0x0000000000008002L});
     public static final BitSet FOLLOW_15_in_ruleParens608 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrickyA1_in_entryRuleTrickyA1658 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTrickyA1668 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTrickyA1713 = new BitSet(new long[]{0x0000000000000002L});
 
 }

@@ -7,4 +7,5 @@ RULE_ANY_OTHER=10
 RULE_SL_COMMENT=8
 '('=11
 ')'=12
+'='=14
 '!'=13

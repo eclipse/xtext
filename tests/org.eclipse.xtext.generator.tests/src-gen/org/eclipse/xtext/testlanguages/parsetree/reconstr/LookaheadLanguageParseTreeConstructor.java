@@ -12,610 +12,1039 @@ import org.eclipse.xtext.parsetree.reconstr.impl.*;
 public class LookaheadLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
-		if (ruleToCall.equals("Entry")) {
-			proceedEntry(getDescr(obj),callback);
-		} else 		if (ruleToCall.equals("Alts")) {
-			proceedAlts(getDescr(obj),callback);
-		} else 		if (ruleToCall.equals("LookAhead0")) {
-			proceedLookAhead0(getDescr(obj),callback);
-		} else 		if (ruleToCall.equals("LookAhead1")) {
-			proceedLookAhead1(getDescr(obj),callback);
-		} else 		if (ruleToCall.equals("LookAhead2")) {
-			proceedLookAhead2(getDescr(obj),callback);
-		} else 		if (ruleToCall.equals("LookAhead3")) {
-			proceedLookAhead3(getDescr(obj),callback);
-		} else 		if (ruleToCall.equals("LookAhead4")) {
-			proceedLookAhead4(getDescr(obj),callback);
-		} else {
-			throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		}
+		AbstractToken t = internalSerialize(obj);
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
+		t.executeAllCallbacks(callback);
+		System.out.println("success!");
+	}
+	
+	protected AbstractToken internalSerialize(EObject obj) {
+		AbstractToken t = new Entry_0_Assignment_contents(null);
+		t = t.createFirstSolution(getDescr(obj));
+		if(t != null) return t;
+		t = new Alts_0_Alternatives(null);
+		t = t.createFirstSolution(getDescr(obj));
+		if(t != null) return t;
+		t = new LookAhead0_0_Group(null);
+		t = t.createFirstSolution(getDescr(obj));
+		if(t != null) return t;
+		t = new LookAhead1_0_Group(null);
+		t = t.createFirstSolution(getDescr(obj));
+		if(t != null) return t;
+		t = new LookAhead2_0_Group(null);
+		t = t.createFirstSolution(getDescr(obj));
+		if(t != null) return t;
+		t = new LookAhead3_0_Group(null);
+		t = t.createFirstSolution(getDescr(obj));
+		if(t != null) return t;
+		t = new LookAhead4_0_Alternatives(null);
+		return t.createFirstSolution(getDescr(obj));
+	}
+	
+/************ begin Rule Entry ****************/
+
+
+protected class Entry_0_Assignment_contents extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.0/@alternatives/@terminal");
+	protected Object value;
+	
+	public Entry_0_Assignment_contents(AbstractToken predecessor) {
+		super(predecessor, IS_MANY, !IS_REQUIRED);
+	}
+	
+	private Entry_0_Assignment_contents(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Entry_0_Assignment_contents(predecessor, true, false);
 	}
 
 	
-private String EntryRecursionCheck = null;
-protected void proceedEntry(InstanceDescription obj,IParseTreeConstructorCallback callback) {
-	try {
-		String s = obj.uniqueStateString();
-		if (s.equals(EntryRecursionCheck))
-			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		EntryRecursionCheck = s;
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("contents")) return null;
+		value = obj.consume("contents");
+		AbstractToken t = new Alts_0_Alternatives(predecessor);
+		predecessor = t.createFirstSolution(getDescr((EObject)value));
+		if(predecessor == null) return null;
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
 	
-/* xtext::Assignment */ 
-
-while (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("contents"); 
-		}
-}.check() ){
-
-	final Object value = obj.consume("contents");
-    
-/* xtext::RuleCall */ 
-{
-
-	
-		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.0/@alternatives/@terminal");
-		try {
-			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
-			proceedAlts(val,callback);
-			
-			if (!val.isConsumed()) 
-				throw new XtextSerializationException(val,"unserialized state");
-			
-		} finally {
-			callback.parserRuleCallEnd();
-		}
-	
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-	} finally {
-		EntryRecursionCheck = null;
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("Entry_0_Assignment_contentsCallback(\"xtext::RuleCall\", " + value + ")");
+		// Nothing to do for ParserRule Call Alts
 	}
 }
 
-private String AltsRecursionCheck = null;
-protected void proceedAlts(InstanceDescription obj,IParseTreeConstructorCallback callback) {
-	try {
-		String s = obj.uniqueStateString();
-		if (s.equals(AltsRecursionCheck))
-			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		AltsRecursionCheck = s;
+/************ end Rule Entry ****************/
+/************ begin Rule Alts ****************/
+
+
+protected class Alts_0_Alternatives extends GroupToken {
 	
-/* xtext::Alternatives */ 
-{
+	private int currentOption = 1;
 
-		if (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.isInstanceOf("LookAhead0"); 
-		}
-}.check() ||
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.isInstanceOf("LookAhead1"); 
-		}
-}.check() ) {
-			
-/* xtext::Alternatives */ 
-{
-
-		if (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.isInstanceOf("LookAhead0"); 
-		}
-}.check() ) {
-			
-/* xtext::RuleCall */ 
-{
+	public Alts_0_Alternatives(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private Alts_0_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Alts_0_Alternatives(predecessor, true, false);
+	}
 
 	
-		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.1/@alternatives/@groups.0/@groups.0");
-		try {
-			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
-			proceedLookAhead0(val,callback);
-			
-		} finally {
-			callback.parserRuleCallEnd();
+	protected boolean activateNextOption() {
+		if(currentOption > 0) {
+			currentOption--;
+			return true;
 		}
+		return false;
+	}
 	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t, r;
+		do {		
+			switch(currentOption) {
+			case 0: t = new Alts_0_1_RuleCall(predecessor); break;
+			case 1: t = new Alts_0_0_Alternatives(predecessor); break;
+			default: throw new RuntimeException("Undefinex Index: "+currentOption);
+			}
+			r = t.createFirstSolution(predecessor.getObject());
+		} while (r == null && activateNextOption());
+		//System.out.println("found:"+r);
+		return r;
+	}
 
-}
-
-		}
-	else		if (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.isInstanceOf("LookAhead1"); 
-		}
-}.check() ) {
-			
-/* xtext::RuleCall */ 
-{
-
-	
-		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.1/@alternatives/@groups.0/@groups.1");
-		try {
-			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
-			proceedLookAhead1(val,callback);
-			
-		} finally {
-			callback.parserRuleCallEnd();
-		}
-	
-
-}
-
-		}
-	
-		else {
-		    throw new XtextSerializationException(obj, "No alternative matched");
-		}
-	
-
-}
-
-		}
-	else		if (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.isInstanceOf("LookAhead3"); 
-		}
-}.check() ) {
-			
-/* xtext::RuleCall */ 
-{
-
-	
-		InstanceDescription val = obj;
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.1/@alternatives/@groups.1");
-		try {
-			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
-			proceedLookAhead3(val,callback);
-			
-		} finally {
-			callback.parserRuleCallEnd();
-		}
-	
-
-}
-
-		}
-	
-		else {
-		    throw new XtextSerializationException(obj, "No alternative matched");
-		}
-	
-
-}
-
-	} finally {
-		AltsRecursionCheck = null;
+	public void executeCallback(IParseTreeConstructorCallback callback) {
 	}
 }
 
-private String LookAhead0RecursionCheck = null;
-protected void proceedLookAhead0(InstanceDescription obj,IParseTreeConstructorCallback callback) {
-	try {
-		String s = obj.uniqueStateString();
-		if (s.equals(LookAhead0RecursionCheck))
-			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		LookAhead0RecursionCheck = s;
+protected class Alts_0_0_Alternatives extends GroupToken {
 	
-/* xtext::Group */ 
-{
+	private int currentOption = 1;
 
-		
-/* xtext::Assignment */ 
-{
+	public Alts_0_0_Alternatives(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private Alts_0_0_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Alts_0_0_Alternatives(predecessor, true, false);
+	}
 
-	final Object value = obj.consume("x");
-    
-/* xtext::Keyword */ 
-{
+	
+	protected boolean activateNextOption() {
+		if(currentOption > 0) {
+			currentOption--;
+			return true;
+		}
+		return false;
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t, r;
+		do {		
+			switch(currentOption) {
+			case 0: t = new Alts_0_0_1_RuleCall(predecessor); break;
+			case 1: t = new Alts_0_0_0_RuleCall(predecessor); break;
+			default: throw new RuntimeException("Undefinex Index: "+currentOption);
+			}
+			r = t.createFirstSolution(predecessor.getObject());
+		} while (r == null && activateNextOption());
+		//System.out.println("found:"+r);
+		return r;
+	}
 
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal"));
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0"));
-
-}
-
-
-}
-
-	} finally {
-		LookAhead0RecursionCheck = null;
+	public void executeCallback(IParseTreeConstructorCallback callback) {
 	}
 }
 
-private String LookAhead1RecursionCheck = null;
-protected void proceedLookAhead1(InstanceDescription obj,IParseTreeConstructorCallback callback) {
-	try {
-		String s = obj.uniqueStateString();
-		if (s.equals(LookAhead1RecursionCheck))
-			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		LookAhead1RecursionCheck = s;
+protected class Alts_0_0_0_RuleCall extends RuleCallToken {
 	
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Assignment */ 
-{
-
-	final Object value = obj.consume("x");
-    
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal"));
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Assignment */ 
-{
-
-	final Object value = obj.consume("x");
-    
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Assignment */ 
-{
-
-	final Object value = obj.consume("y");
-    
-/* xtext::RuleCall */ 
-{
+	public Alts_0_0_0_RuleCall(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private Alts_0_0_0_RuleCall(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Alts_0_0_0_RuleCall(predecessor, true, false);
+	}
 
 	
-		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
-		try {
-			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
-			proceedLookAhead2(val,callback);
-			
-			if (!val.isConsumed()) 
-				throw new XtextSerializationException(val,"unserialized state");
-			
-		} finally {
-			callback.parserRuleCallEnd();
-		}
-	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		if(checkForRecursion()) return null;
+		AbstractToken t = new LookAhead0_0_Group(predecessor);
+		return t.createFirstSolution(predecessor.getObject());
+	}
 
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
-
-}
-
-
-}
-
-
-}
-
-
-}
-
-	} finally {
-		LookAhead1RecursionCheck = null;
+	public void executeCallback(IParseTreeConstructorCallback callback) {
 	}
 }
 
-private String LookAhead2RecursionCheck = null;
-protected void proceedLookAhead2(InstanceDescription obj,IParseTreeConstructorCallback callback) {
-	try {
-		String s = obj.uniqueStateString();
-		if (s.equals(LookAhead2RecursionCheck))
-			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		LookAhead2RecursionCheck = s;
+protected class Alts_0_0_1_RuleCall extends RuleCallToken {
 	
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1"));
-
-}
-
-		
-/* xtext::Alternatives */ 
-{
-
-		if (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("z"); 
-		}
-}.check() ) {
-			
-/* xtext::Assignment */ 
-{
-
-	final Object value = obj.consume("z");
-    
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@groups.0/@terminal"));
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		}
-	else		if (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("z"); 
-		}
-}.check() ) {
-			
-/* xtext::Assignment */ 
-{
-
-	final Object value = obj.consume("z");
-    
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@groups.1/@terminal"));
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		}
+	public Alts_0_0_1_RuleCall(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
 	
-		else {
-		    throw new XtextSerializationException(obj, "No alternative matched");
-		}
+	private Alts_0_0_1_RuleCall(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
 	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Alts_0_0_1_RuleCall(predecessor, true, false);
+	}
 
-}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		if(checkForRecursion()) return null;
+		AbstractToken t = new LookAhead1_0_Group(predecessor);
+		return t.createFirstSolution(predecessor.getObject());
+	}
 
-
-}
-
-	} finally {
-		LookAhead2RecursionCheck = null;
+	public void executeCallback(IParseTreeConstructorCallback callback) {
 	}
 }
 
-private String LookAhead3RecursionCheck = null;
-protected void proceedLookAhead3(InstanceDescription obj,IParseTreeConstructorCallback callback) {
-	try {
-		String s = obj.uniqueStateString();
-		if (s.equals(LookAhead3RecursionCheck))
-			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		LookAhead3RecursionCheck = s;
+
+protected class Alts_0_1_RuleCall extends RuleCallToken {
 	
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Assignment */ 
-{
-
-	final Object value = obj.consume("z");
-    
-/* xtext::RuleCall */ 
-{
+	public Alts_0_1_RuleCall(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private Alts_0_1_RuleCall(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Alts_0_1_RuleCall(predecessor, true, false);
+	}
 
 	
-		InstanceDescription val = (getDescr((EObject)value));
-		EObject ruleCall = getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1/@terminal");
-		try {
-			callback.parserRuleCallStart(val, (RuleCall) ruleCall);
-			proceedLookAhead4(val,callback);
-			
-			if (!val.isConsumed()) 
-				throw new XtextSerializationException(val,"unserialized state");
-			
-		} finally {
-			callback.parserRuleCallEnd();
-		}
-	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		if(checkForRecursion()) return null;
+		AbstractToken t = new LookAhead3_0_Group(predecessor);
+		return t.createFirstSolution(predecessor.getObject());
+	}
 
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Assignment */ 
-{
-
-	final Object value = obj.consume("x");
-    
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"));
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		
-/* xtext::Group */ 
-{
-
-		
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1"));
-
-}
-
-		
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0"));
-
-}
-
-
-}
-
-
-}
-
-
-}
-
-	} finally {
-		LookAhead3RecursionCheck = null;
+	public void executeCallback(IParseTreeConstructorCallback callback) {
 	}
 }
 
-private String LookAhead4RecursionCheck = null;
-protected void proceedLookAhead4(InstanceDescription obj,IParseTreeConstructorCallback callback) {
-	try {
-		String s = obj.uniqueStateString();
-		if (s.equals(LookAhead4RecursionCheck))
-			throw new XtextSerializationException(obj, obj.getDelegate()+" couldn't be serialized.");
-		LookAhead4RecursionCheck = s;
+
+/************ end Rule Alts ****************/
+/************ begin Rule LookAhead0 ****************/
+
+
+protected class LookAhead0_0_Group extends GroupToken {
 	
-/* xtext::Alternatives */ 
-{
-
-		if (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("x"); 
-		}
-}.check() ) {
-			
-/* xtext::Assignment */ 
-{
-
-	final Object value = obj.consume("x");
-    
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.6/@alternatives/@groups.0/@terminal"));
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		}
-	else		if (
-new Predicate(obj) { 
-		public boolean check() {
-			return obj.checkConsume("x"); 
-		}
-}.check() ) {
-			
-/* xtext::Assignment */ 
-{
-
-	final Object value = obj.consume("x");
-    
-/* xtext::Keyword */ 
-{
-
-	callback.keywordCall(obj,(Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.6/@alternatives/@groups.1/@terminal"));
-
-}
-
-    if (obj.isConsumed())
-    	callback.objectCreation(obj);
-
-}
-
-		}
+	public LookAhead0_0_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
 	
-		else {
-		    throw new XtextSerializationException(obj, "No alternative matched");
-		}
+	private LookAhead0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
 	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead0_0_Group(predecessor, true, false);
+	}
 
-}
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new LookAhead0_0_1_Assignment_x(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new LookAhead0_0_0_Keyword_bar(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
 
-	} finally {
-		LookAhead4RecursionCheck = null;
+	public void executeCallback(IParseTreeConstructorCallback callback) {
 	}
 }
 
+
+protected class LookAhead0_0_0_Keyword_bar extends KeywordToken  {
+
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0");
+	
+	public LookAhead0_0_0_Keyword_bar(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+		
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		throw new UnsupportedOperationException();
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(object, keyword);
+	}
+}
+
+protected class LookAhead0_0_1_Assignment_x extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal");
+	protected Object value;
+	
+	public LookAhead0_0_1_Assignment_x(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead0_0_1_Assignment_x(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead0_0_1_Assignment_x(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("x")) return null;
+		value = obj.consume("x");
+		// nothing special needs to be done for xtext::Keyword
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("LookAhead0_0_1_Assignment_xCallback(\"xtext::Keyword\", " + value + ")");
+		callback.keywordCall(object, (Keyword)element);
+	}
+}
+
+
+/************ end Rule LookAhead0 ****************/
+/************ begin Rule LookAhead1 ****************/
+
+
+protected class LookAhead1_0_Group extends GroupToken {
+	
+	public LookAhead1_0_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead1_0_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead1_0_Group(predecessor, true, false);
+	}
+
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new LookAhead1_0_1_Assignment_x(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new LookAhead1_0_0_Group(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+
+protected class LookAhead1_0_0_Group extends GroupToken {
+	
+	public LookAhead1_0_0_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead1_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead1_0_0_Group(predecessor, true, false);
+	}
+
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new LookAhead1_0_0_1_Assignment_x(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new LookAhead1_0_0_0_Group(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+
+protected class LookAhead1_0_0_0_Group extends GroupToken {
+	
+	public LookAhead1_0_0_0_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead1_0_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead1_0_0_0_Group(predecessor, true, false);
+	}
+
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new LookAhead1_0_0_0_1_Assignment_y(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new LookAhead1_0_0_0_0_Keyword_foo(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+
+
+protected class LookAhead1_0_0_0_0_Keyword_foo extends KeywordToken  {
+
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+	
+	public LookAhead1_0_0_0_0_Keyword_foo(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+		
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		throw new UnsupportedOperationException();
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(object, keyword);
+	}
+}
+
+protected class LookAhead1_0_0_0_1_Assignment_y extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
+	protected Object value;
+	
+	public LookAhead1_0_0_0_1_Assignment_y(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead1_0_0_0_1_Assignment_y(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead1_0_0_0_1_Assignment_y(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("y")) return null;
+		value = obj.consume("y");
+		AbstractToken t = new LookAhead2_0_Group(predecessor);
+		predecessor = t.createFirstSolution(getDescr((EObject)value));
+		if(predecessor == null) return null;
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("LookAhead1_0_0_0_1_Assignment_yCallback(\"xtext::RuleCall\", " + value + ")");
+		// Nothing to do for ParserRule Call LookAhead2
+	}
+}
+
+
+protected class LookAhead1_0_0_1_Assignment_x extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+	protected Object value;
+	
+	public LookAhead1_0_0_1_Assignment_x(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead1_0_0_1_Assignment_x(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead1_0_0_1_Assignment_x(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("x")) return null;
+		value = obj.consume("x");
+		// nothing special needs to be done for xtext::Keyword
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("LookAhead1_0_0_1_Assignment_xCallback(\"xtext::Keyword\", " + value + ")");
+		callback.keywordCall(object, (Keyword)element);
+	}
+}
+
+
+protected class LookAhead1_0_1_Assignment_x extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal");
+	protected Object value;
+	
+	public LookAhead1_0_1_Assignment_x(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead1_0_1_Assignment_x(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead1_0_1_Assignment_x(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("x")) return null;
+		value = obj.consume("x");
+		// nothing special needs to be done for xtext::Keyword
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("LookAhead1_0_1_Assignment_xCallback(\"xtext::Keyword\", " + value + ")");
+		callback.keywordCall(object, (Keyword)element);
+	}
+}
+
+
+/************ end Rule LookAhead1 ****************/
+/************ begin Rule LookAhead2 ****************/
+
+
+protected class LookAhead2_0_Group extends GroupToken {
+	
+	public LookAhead2_0_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead2_0_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead2_0_Group(predecessor, true, false);
+	}
+
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new LookAhead2_0_1_Keyword_c(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new LookAhead2_0_0_Alternatives(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+
+protected class LookAhead2_0_0_Alternatives extends GroupToken {
+	
+	private int currentOption = 1;
+
+	public LookAhead2_0_0_Alternatives(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead2_0_0_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead2_0_0_Alternatives(predecessor, true, false);
+	}
+
+	
+	protected boolean activateNextOption() {
+		if(currentOption > 0) {
+			currentOption--;
+			return true;
+		}
+		return false;
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t, r;
+		do {		
+			switch(currentOption) {
+			case 0: t = new LookAhead2_0_0_1_Assignment_z(predecessor); break;
+			case 1: t = new LookAhead2_0_0_0_Assignment_z(predecessor); break;
+			default: throw new RuntimeException("Undefinex Index: "+currentOption);
+			}
+			r = t.createFirstSolution(predecessor.getObject());
+		} while (r == null && activateNextOption());
+		//System.out.println("found:"+r);
+		return r;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+
+protected class LookAhead2_0_0_0_Assignment_z extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@groups.0/@terminal");
+	protected Object value;
+	
+	public LookAhead2_0_0_0_Assignment_z(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead2_0_0_0_Assignment_z(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead2_0_0_0_Assignment_z(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("z")) return null;
+		value = obj.consume("z");
+		// nothing special needs to be done for xtext::Keyword
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("LookAhead2_0_0_0_Assignment_zCallback(\"xtext::Keyword\", " + value + ")");
+		callback.keywordCall(object, (Keyword)element);
+	}
+}
+
+protected class LookAhead2_0_0_1_Assignment_z extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@groups.1/@terminal");
+	protected Object value;
+	
+	public LookAhead2_0_0_1_Assignment_z(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead2_0_0_1_Assignment_z(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead2_0_0_1_Assignment_z(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("z")) return null;
+		value = obj.consume("z");
+		// nothing special needs to be done for xtext::Keyword
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("LookAhead2_0_0_1_Assignment_zCallback(\"xtext::Keyword\", " + value + ")");
+		callback.keywordCall(object, (Keyword)element);
+	}
+}
+
+
+
+protected class LookAhead2_0_1_Keyword_c extends KeywordToken  {
+
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1");
+	
+	public LookAhead2_0_1_Keyword_c(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+		
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		throw new UnsupportedOperationException();
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(object, keyword);
+	}
+}
+
+
+/************ end Rule LookAhead2 ****************/
+/************ begin Rule LookAhead3 ****************/
+
+
+protected class LookAhead3_0_Group extends GroupToken {
+	
+	public LookAhead3_0_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead3_0_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead3_0_Group(predecessor, true, false);
+	}
+
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new LookAhead3_0_1_Assignment_z(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new LookAhead3_0_0_Group(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+
+protected class LookAhead3_0_0_Group extends GroupToken {
+	
+	public LookAhead3_0_0_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead3_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead3_0_0_Group(predecessor, true, false);
+	}
+
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new LookAhead3_0_0_1_Assignment_x(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new LookAhead3_0_0_0_Group(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+
+protected class LookAhead3_0_0_0_Group extends GroupToken {
+	
+	public LookAhead3_0_0_0_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead3_0_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead3_0_0_0_Group(predecessor, true, false);
+	}
+
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new LookAhead3_0_0_0_1_Keyword_bar(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new LookAhead3_0_0_0_0_Keyword_foo(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+
+
+protected class LookAhead3_0_0_0_0_Keyword_foo extends KeywordToken  {
+
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+	
+	public LookAhead3_0_0_0_0_Keyword_foo(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+		
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		throw new UnsupportedOperationException();
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(object, keyword);
+	}
+}
+
+
+protected class LookAhead3_0_0_0_1_Keyword_bar extends KeywordToken  {
+
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+	
+	public LookAhead3_0_0_0_1_Keyword_bar(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+		
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		throw new UnsupportedOperationException();
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(object, keyword);
+	}
+}
+
+
+protected class LookAhead3_0_0_1_Assignment_x extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+	protected Object value;
+	
+	public LookAhead3_0_0_1_Assignment_x(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead3_0_0_1_Assignment_x(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead3_0_0_1_Assignment_x(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("x")) return null;
+		value = obj.consume("x");
+		// nothing special needs to be done for xtext::Keyword
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("LookAhead3_0_0_1_Assignment_xCallback(\"xtext::Keyword\", " + value + ")");
+		callback.keywordCall(object, (Keyword)element);
+	}
+}
+
+
+protected class LookAhead3_0_1_Assignment_z extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1/@terminal");
+	protected Object value;
+	
+	public LookAhead3_0_1_Assignment_z(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead3_0_1_Assignment_z(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead3_0_1_Assignment_z(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("z")) return null;
+		value = obj.consume("z");
+		AbstractToken t = new LookAhead4_0_Alternatives(predecessor);
+		predecessor = t.createFirstSolution(getDescr((EObject)value));
+		if(predecessor == null) return null;
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("LookAhead3_0_1_Assignment_zCallback(\"xtext::RuleCall\", " + value + ")");
+		// Nothing to do for ParserRule Call LookAhead4
+	}
+}
+
+
+/************ end Rule LookAhead3 ****************/
+/************ begin Rule LookAhead4 ****************/
+
+
+protected class LookAhead4_0_Alternatives extends GroupToken {
+	
+	private int currentOption = 1;
+
+	public LookAhead4_0_Alternatives(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead4_0_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead4_0_Alternatives(predecessor, true, false);
+	}
+
+	
+	protected boolean activateNextOption() {
+		if(currentOption > 0) {
+			currentOption--;
+			return true;
+		}
+		return false;
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t, r;
+		do {		
+			switch(currentOption) {
+			case 0: t = new LookAhead4_0_1_Assignment_x(predecessor); break;
+			case 1: t = new LookAhead4_0_0_Assignment_x(predecessor); break;
+			default: throw new RuntimeException("Undefinex Index: "+currentOption);
+			}
+			r = t.createFirstSolution(predecessor.getObject());
+		} while (r == null && activateNextOption());
+		//System.out.println("found:"+r);
+		return r;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+
+protected class LookAhead4_0_0_Assignment_x extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.6/@alternatives/@groups.0/@terminal");
+	protected Object value;
+	
+	public LookAhead4_0_0_Assignment_x(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead4_0_0_Assignment_x(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead4_0_0_Assignment_x(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("x")) return null;
+		value = obj.consume("x");
+		// nothing special needs to be done for xtext::Keyword
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("LookAhead4_0_0_Assignment_xCallback(\"xtext::Keyword\", " + value + ")");
+		callback.keywordCall(object, (Keyword)element);
+	}
+}
+
+protected class LookAhead4_0_1_Assignment_x extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.6/@alternatives/@groups.1/@terminal");
+	protected Object value;
+	
+	public LookAhead4_0_1_Assignment_x(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private LookAhead4_0_1_Assignment_x(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new LookAhead4_0_1_Assignment_x(predecessor, true, false);
+	}
+
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		IInstanceDescription obj = object.createClone();
+		if(!obj.isConsumable("x")) return null;
+		value = obj.consume("x");
+		// nothing special needs to be done for xtext::Keyword
+		object = (InstanceDescription)obj;
+		return predecessor;
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		// System.out.println("LookAhead4_0_1_Assignment_xCallback(\"xtext::Keyword\", " + value + ")");
+		callback.keywordCall(object, (Keyword)element);
+	}
+}
+
+
+/************ end Rule LookAhead4 ****************/
 }
