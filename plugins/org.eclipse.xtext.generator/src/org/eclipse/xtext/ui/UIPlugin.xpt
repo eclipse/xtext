@@ -19,6 +19,7 @@
 «DEFINE root FOR GenModel»
     «EXPAND Project::root FOR this»
     «EXPAND Plugin::plugin_xml FOR this»
+    «EXPAND ServiceConfig::root FOR this»
     «EXPAND Manifest::manifest_mf FOR this»
     «copyFiles("org/eclipse/xtext/ui", outletPath("UI") + "/icons/", { "editor.gif" })»  
 «ENDDEFINE»
