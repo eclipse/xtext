@@ -19,32 +19,62 @@ public class ReferenceGrammarParseTreeConstructor extends AbstractParseTreeConst
 	}
 	
 	protected AbstractToken internalSerialize(EObject obj) {
-		AbstractToken t = new Spielplatz_0_Group(null);
+		AbstractToken t = new Spielplatz_Group(null);
 		t = t.createFirstSolution(getDescr(obj));
 		if(t != null) return t;
-		t = new Person_0_Alternatives(null);
+		t = new Person_Alternatives(null);
 		t = t.createFirstSolution(getDescr(obj));
 		if(t != null) return t;
-		t = new Kind_0_Group(null);
+		t = new Kind_Group(null);
 		t = t.createFirstSolution(getDescr(obj));
 		if(t != null) return t;
-		t = new Erwachsener_0_Group(null);
+		t = new Erwachsener_Group(null);
 		t = t.createFirstSolution(getDescr(obj));
 		if(t != null) return t;
-		t = new Spielzeug_0_Group(null);
+		t = new Spielzeug_Group(null);
 		t = t.createFirstSolution(getDescr(obj));
 		if(t != null) return t;
-		t = new Farbe_0_Alternatives(null);
+		t = new Farbe_Alternatives(null);
 		return t.createFirstSolution(getDescr(obj));
 	}
 	
 /************ begin Rule Spielplatz ****************/
 
 
+protected class Spielplatz_Group extends GroupToken {
+	
+	public Spielplatz_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, !IS_REQUIRED);
+	}
+	
+	private Spielplatz_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Spielplatz_Group(predecessor, true, false);
+	}
+
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new Spielplatz_1_Keyword(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new Spielplatz_0_Group(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+
 protected class Spielplatz_0_Group extends GroupToken {
 	
 	public Spielplatz_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, !IS_REQUIRED);
+		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
 	private Spielplatz_0_Group(AbstractToken predecessor, boolean many, boolean required) {
@@ -57,7 +87,7 @@ protected class Spielplatz_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Spielplatz_0_1_Keyword(predecessor);
+		AbstractToken t1 = new Spielplatz_0_1_Alternatives(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
 		AbstractToken t0 = new Spielplatz_0_0_Group(predecessor);
@@ -87,7 +117,7 @@ protected class Spielplatz_0_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Spielplatz_0_0_1_Alternatives(predecessor);
+		AbstractToken t1 = new Spielplatz_0_0_1_Keyword(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
 		AbstractToken t0 = new Spielplatz_0_0_0_Group(predecessor);
@@ -117,7 +147,7 @@ protected class Spielplatz_0_0_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Spielplatz_0_0_0_1_Keyword(predecessor);
+		AbstractToken t1 = new Spielplatz_0_0_0_1_Assignment_beschreibung(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
 		AbstractToken t0 = new Spielplatz_0_0_0_0_Group(predecessor);
@@ -147,40 +177,10 @@ protected class Spielplatz_0_0_0_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Spielplatz_0_0_0_0_1_Assignment_beschreibung(predecessor);
+		AbstractToken t1 = new Spielplatz_0_0_0_0_1_Assignment_groesse(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
-		AbstractToken t0 = new Spielplatz_0_0_0_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-	}
-}
-
-protected class Spielplatz_0_0_0_0_0_Group extends GroupToken {
-	
-	public Spielplatz_0_0_0_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Spielplatz_0_0_0_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Spielplatz_0_0_0_0_0_Group(predecessor, true, false);
-	}
-
-		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Spielplatz_0_0_0_0_0_1_Assignment_groesse(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new Spielplatz_0_0_0_0_0_0_Keyword_spielplatz(predecessor);
+		AbstractToken t0 = new Spielplatz_0_0_0_0_0_Keyword_spielplatz(predecessor);
 		predecessor = t0.createFirstSolution(t1.getObject());
 		if(predecessor == null) return null;
 		object = t0.getObject();
@@ -192,11 +192,11 @@ protected class Spielplatz_0_0_0_0_0_Group extends GroupToken {
 }
 
 
-protected class Spielplatz_0_0_0_0_0_0_Keyword_spielplatz extends KeywordToken  {
+protected class Spielplatz_0_0_0_0_0_Keyword_spielplatz extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
 	
-	public Spielplatz_0_0_0_0_0_0_Keyword_spielplatz(AbstractToken predecessor) {
+	public Spielplatz_0_0_0_0_0_Keyword_spielplatz(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -213,21 +213,21 @@ protected class Spielplatz_0_0_0_0_0_0_Keyword_spielplatz extends KeywordToken  
 	}
 }
 
-protected class Spielplatz_0_0_0_0_0_1_Assignment_groesse extends AssignmentToken  {
+protected class Spielplatz_0_0_0_0_1_Assignment_groesse extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public Spielplatz_0_0_0_0_0_1_Assignment_groesse(AbstractToken predecessor) {
+	public Spielplatz_0_0_0_0_1_Assignment_groesse(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Spielplatz_0_0_0_0_0_1_Assignment_groesse(AbstractToken predecessor, boolean many, boolean required) {
+	private Spielplatz_0_0_0_0_1_Assignment_groesse(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Spielplatz_0_0_0_0_0_1_Assignment_groesse(predecessor, true, false);
+		return new Spielplatz_0_0_0_0_1_Assignment_groesse(predecessor, true, false);
 	}
 
 	
@@ -240,27 +240,27 @@ protected class Spielplatz_0_0_0_0_0_1_Assignment_groesse extends AssignmentToke
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Spielplatz_0_0_0_0_0_1_Assignment_groesseCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("Spielplatz_0_0_0_0_1_Assignment_groesseCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
 	}
 }
 
 
-protected class Spielplatz_0_0_0_0_1_Assignment_beschreibung extends AssignmentToken  {
+protected class Spielplatz_0_0_0_1_Assignment_beschreibung extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public Spielplatz_0_0_0_0_1_Assignment_beschreibung(AbstractToken predecessor) {
+	public Spielplatz_0_0_0_1_Assignment_beschreibung(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, !IS_REQUIRED);
 	}
 	
-	private Spielplatz_0_0_0_0_1_Assignment_beschreibung(AbstractToken predecessor, boolean many, boolean required) {
+	private Spielplatz_0_0_0_1_Assignment_beschreibung(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Spielplatz_0_0_0_0_1_Assignment_beschreibung(predecessor, true, false);
+		return new Spielplatz_0_0_0_1_Assignment_beschreibung(predecessor, true, false);
 	}
 
 	
@@ -273,18 +273,18 @@ protected class Spielplatz_0_0_0_0_1_Assignment_beschreibung extends AssignmentT
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Spielplatz_0_0_0_0_1_Assignment_beschreibungCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("Spielplatz_0_0_0_1_Assignment_beschreibungCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
 	}
 }
 
 
 
-protected class Spielplatz_0_0_0_1_Keyword extends KeywordToken  {
+protected class Spielplatz_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
 	
-	public Spielplatz_0_0_0_1_Keyword(AbstractToken predecessor) {
+	public Spielplatz_0_0_1_Keyword(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -302,20 +302,20 @@ protected class Spielplatz_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-protected class Spielplatz_0_0_1_Alternatives extends GroupToken {
+protected class Spielplatz_0_1_Alternatives extends GroupToken {
 	
 	private int currentOption = 1;
 
-	public Spielplatz_0_0_1_Alternatives(AbstractToken predecessor) {
+	public Spielplatz_0_1_Alternatives(AbstractToken predecessor) {
 		super(predecessor, IS_MANY, !IS_REQUIRED);
 	}
 	
-	private Spielplatz_0_0_1_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
+	private Spielplatz_0_1_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Spielplatz_0_0_1_Alternatives(predecessor, true, false);
+		return new Spielplatz_0_1_Alternatives(predecessor, true, false);
 	}
 
 	
@@ -331,13 +331,14 @@ protected class Spielplatz_0_0_1_Alternatives extends GroupToken {
 		AbstractToken t, r;
 		do {		
 			switch(currentOption) {
-			case 0: t = new Spielplatz_0_0_1_1_Assignment_spielzeuge(predecessor); break;
-			case 1: t = new Spielplatz_0_0_1_0_Alternatives(predecessor); break;
+			case 0: t = new Spielplatz_0_1_1_Assignment_spielzeuge(predecessor); break;
+			case 1: t = new Spielplatz_0_1_0_Alternatives(predecessor); break;
 			default: throw new RuntimeException("Undefinex Index: "+currentOption);
 			}
 			r = t.createFirstSolution(predecessor.getObject());
 		} while (r == null && activateNextOption());
-		//System.out.println("found:"+r);
+		if(r != null)
+			object = t.getObject();
 		return r;
 	}
 
@@ -345,20 +346,20 @@ protected class Spielplatz_0_0_1_Alternatives extends GroupToken {
 	}
 }
 
-protected class Spielplatz_0_0_1_0_Alternatives extends GroupToken {
+protected class Spielplatz_0_1_0_Alternatives extends GroupToken {
 	
 	private int currentOption = 1;
 
-	public Spielplatz_0_0_1_0_Alternatives(AbstractToken predecessor) {
+	public Spielplatz_0_1_0_Alternatives(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Spielplatz_0_0_1_0_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
+	private Spielplatz_0_1_0_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Spielplatz_0_0_1_0_Alternatives(predecessor, true, false);
+		return new Spielplatz_0_1_0_Alternatives(predecessor, true, false);
 	}
 
 	
@@ -374,13 +375,14 @@ protected class Spielplatz_0_0_1_0_Alternatives extends GroupToken {
 		AbstractToken t, r;
 		do {		
 			switch(currentOption) {
-			case 0: t = new Spielplatz_0_0_1_0_1_Assignment_erzieher(predecessor); break;
-			case 1: t = new Spielplatz_0_0_1_0_0_Assignment_kinder(predecessor); break;
+			case 0: t = new Spielplatz_0_1_0_1_Assignment_erzieher(predecessor); break;
+			case 1: t = new Spielplatz_0_1_0_0_Assignment_kinder(predecessor); break;
 			default: throw new RuntimeException("Undefinex Index: "+currentOption);
 			}
 			r = t.createFirstSolution(predecessor.getObject());
 		} while (r == null && activateNextOption());
-		//System.out.println("found:"+r);
+		if(r != null)
+			object = t.getObject();
 		return r;
 	}
 
@@ -388,21 +390,21 @@ protected class Spielplatz_0_0_1_0_Alternatives extends GroupToken {
 	}
 }
 
-protected class Spielplatz_0_0_1_0_0_Assignment_kinder extends AssignmentToken  {
+protected class Spielplatz_0_1_0_0_Assignment_kinder extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@terminal");
 	protected Object value;
 	
-	public Spielplatz_0_0_1_0_0_Assignment_kinder(AbstractToken predecessor) {
+	public Spielplatz_0_1_0_0_Assignment_kinder(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Spielplatz_0_0_1_0_0_Assignment_kinder(AbstractToken predecessor, boolean many, boolean required) {
+	private Spielplatz_0_1_0_0_Assignment_kinder(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Spielplatz_0_0_1_0_0_Assignment_kinder(predecessor, true, false);
+		return new Spielplatz_0_1_0_0_Assignment_kinder(predecessor, true, false);
 	}
 
 	
@@ -410,7 +412,8 @@ protected class Spielplatz_0_0_1_0_0_Assignment_kinder extends AssignmentToken  
 		IInstanceDescription obj = object.createClone();
 		if(!obj.isConsumable("kinder")) return null;
 		value = obj.consume("kinder");
-		AbstractToken t = new Kind_0_Group(predecessor);
+		if(!predecessor.getObject().isInstanceOf("Kind")) return null;
+		AbstractToken t = new Kind_Group(predecessor);
 		predecessor = t.createFirstSolution(getDescr((EObject)value));
 		if(predecessor == null) return null;
 		object = (InstanceDescription)obj;
@@ -418,26 +421,26 @@ protected class Spielplatz_0_0_1_0_0_Assignment_kinder extends AssignmentToken  
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Spielplatz_0_0_1_0_0_Assignment_kinderCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("Spielplatz_0_1_0_0_Assignment_kinderCallback(\"xtext::RuleCall\", " + value + ")");
 		// Nothing to do for ParserRule Call Kind
 	}
 }
 
-protected class Spielplatz_0_0_1_0_1_Assignment_erzieher extends AssignmentToken  {
+protected class Spielplatz_0_1_0_1_Assignment_erzieher extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal");
 	protected Object value;
 	
-	public Spielplatz_0_0_1_0_1_Assignment_erzieher(AbstractToken predecessor) {
+	public Spielplatz_0_1_0_1_Assignment_erzieher(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Spielplatz_0_0_1_0_1_Assignment_erzieher(AbstractToken predecessor, boolean many, boolean required) {
+	private Spielplatz_0_1_0_1_Assignment_erzieher(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Spielplatz_0_0_1_0_1_Assignment_erzieher(predecessor, true, false);
+		return new Spielplatz_0_1_0_1_Assignment_erzieher(predecessor, true, false);
 	}
 
 	
@@ -445,7 +448,8 @@ protected class Spielplatz_0_0_1_0_1_Assignment_erzieher extends AssignmentToken
 		IInstanceDescription obj = object.createClone();
 		if(!obj.isConsumable("erzieher")) return null;
 		value = obj.consume("erzieher");
-		AbstractToken t = new Erwachsener_0_Group(predecessor);
+		if(!predecessor.getObject().isInstanceOf("Erwachsener")) return null;
+		AbstractToken t = new Erwachsener_Group(predecessor);
 		predecessor = t.createFirstSolution(getDescr((EObject)value));
 		if(predecessor == null) return null;
 		object = (InstanceDescription)obj;
@@ -453,27 +457,27 @@ protected class Spielplatz_0_0_1_0_1_Assignment_erzieher extends AssignmentToken
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Spielplatz_0_0_1_0_1_Assignment_erzieherCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("Spielplatz_0_1_0_1_Assignment_erzieherCallback(\"xtext::RuleCall\", " + value + ")");
 		// Nothing to do for ParserRule Call Erwachsener
 	}
 }
 
 
-protected class Spielplatz_0_0_1_1_Assignment_spielzeuge extends AssignmentToken  {
+protected class Spielplatz_0_1_1_Assignment_spielzeuge extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal");
 	protected Object value;
 	
-	public Spielplatz_0_0_1_1_Assignment_spielzeuge(AbstractToken predecessor) {
+	public Spielplatz_0_1_1_Assignment_spielzeuge(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Spielplatz_0_0_1_1_Assignment_spielzeuge(AbstractToken predecessor, boolean many, boolean required) {
+	private Spielplatz_0_1_1_Assignment_spielzeuge(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Spielplatz_0_0_1_1_Assignment_spielzeuge(predecessor, true, false);
+		return new Spielplatz_0_1_1_Assignment_spielzeuge(predecessor, true, false);
 	}
 
 	
@@ -481,7 +485,8 @@ protected class Spielplatz_0_0_1_1_Assignment_spielzeuge extends AssignmentToken
 		IInstanceDescription obj = object.createClone();
 		if(!obj.isConsumable("spielzeuge")) return null;
 		value = obj.consume("spielzeuge");
-		AbstractToken t = new Spielzeug_0_Group(predecessor);
+		if(!predecessor.getObject().isInstanceOf("Spielzeug")) return null;
+		AbstractToken t = new Spielzeug_Group(predecessor);
 		predecessor = t.createFirstSolution(getDescr((EObject)value));
 		if(predecessor == null) return null;
 		object = (InstanceDescription)obj;
@@ -489,7 +494,7 @@ protected class Spielplatz_0_0_1_1_Assignment_spielzeuge extends AssignmentToken
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Spielplatz_0_0_1_1_Assignment_spielzeugeCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("Spielplatz_0_1_1_Assignment_spielzeugeCallback(\"xtext::RuleCall\", " + value + ")");
 		// Nothing to do for ParserRule Call Spielzeug
 	}
 }
@@ -497,11 +502,11 @@ protected class Spielplatz_0_0_1_1_Assignment_spielzeuge extends AssignmentToken
 
 
 
-protected class Spielplatz_0_1_Keyword extends KeywordToken  {
+protected class Spielplatz_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.1");
 	
-	public Spielplatz_0_1_Keyword(AbstractToken predecessor) {
+	public Spielplatz_1_Keyword(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -523,20 +528,20 @@ protected class Spielplatz_0_1_Keyword extends KeywordToken  {
 /************ begin Rule Person ****************/
 
 
-protected class Person_0_Alternatives extends GroupToken {
+protected class Person_Alternatives extends GroupToken {
 	
 	private int currentOption = 1;
 
-	public Person_0_Alternatives(AbstractToken predecessor) {
+	public Person_Alternatives(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Person_0_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
+	private Person_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Person_0_Alternatives(predecessor, true, false);
+		return new Person_Alternatives(predecessor, true, false);
 	}
 
 	
@@ -552,13 +557,14 @@ protected class Person_0_Alternatives extends GroupToken {
 		AbstractToken t, r;
 		do {		
 			switch(currentOption) {
-			case 0: t = new Person_0_1_RuleCall(predecessor); break;
-			case 1: t = new Person_0_0_RuleCall(predecessor); break;
+			case 0: t = new Person_1_RuleCall_Erwachsener(predecessor); break;
+			case 1: t = new Person_0_RuleCall_Kind(predecessor); break;
 			default: throw new RuntimeException("Undefinex Index: "+currentOption);
 			}
 			r = t.createFirstSolution(predecessor.getObject());
 		} while (r == null && activateNextOption());
-		//System.out.println("found:"+r);
+		if(r != null)
+			object = t.getObject();
 		return r;
 	}
 
@@ -566,50 +572,58 @@ protected class Person_0_Alternatives extends GroupToken {
 	}
 }
 
-protected class Person_0_0_RuleCall extends RuleCallToken {
+protected class Person_0_RuleCall_Kind extends RuleCallToken {
 	
-	public Person_0_0_RuleCall(AbstractToken predecessor) {
+	public Person_0_RuleCall_Kind(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Person_0_0_RuleCall(AbstractToken predecessor, boolean many, boolean required) {
+	private Person_0_RuleCall_Kind(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Person_0_0_RuleCall(predecessor, true, false);
+		return new Person_0_RuleCall_Kind(predecessor, true, false);
 	}
 
 	
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
 		if(checkForRecursion()) return null;
-		AbstractToken t = new Kind_0_Group(predecessor);
-		return t.createFirstSolution(predecessor.getObject());
+		if(!predecessor.getObject().isInstanceOf("Kind")) return null;
+		AbstractToken t = new Kind_Group(predecessor);
+		predecessor = t.createFirstSolution(object);
+		if(predecessor != null)
+			object = t.getObject();
+		return predecessor;
 	}
 
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 	}
 }
 
-protected class Person_0_1_RuleCall extends RuleCallToken {
+protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 	
-	public Person_0_1_RuleCall(AbstractToken predecessor) {
+	public Person_1_RuleCall_Erwachsener(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Person_0_1_RuleCall(AbstractToken predecessor, boolean many, boolean required) {
+	private Person_1_RuleCall_Erwachsener(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Person_0_1_RuleCall(predecessor, true, false);
+		return new Person_1_RuleCall_Erwachsener(predecessor, true, false);
 	}
 
 	
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
 		if(checkForRecursion()) return null;
-		AbstractToken t = new Erwachsener_0_Group(predecessor);
-		return t.createFirstSolution(predecessor.getObject());
+		if(!predecessor.getObject().isInstanceOf("Erwachsener")) return null;
+		AbstractToken t = new Erwachsener_Group(predecessor);
+		predecessor = t.createFirstSolution(object);
+		if(predecessor != null)
+			object = t.getObject();
+		return predecessor;
 	}
 
 	public void executeCallback(IParseTreeConstructorCallback callback) {
@@ -620,6 +634,36 @@ protected class Person_0_1_RuleCall extends RuleCallToken {
 /************ end Rule Person ****************/
 /************ begin Rule Kind ****************/
 
+
+protected class Kind_Group extends GroupToken {
+	
+	public Kind_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private Kind_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Kind_Group(predecessor, true, false);
+	}
+
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new Kind_1_Keyword(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new Kind_0_Group(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
 
 protected class Kind_0_Group extends GroupToken {
 	
@@ -637,7 +681,7 @@ protected class Kind_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Kind_0_1_Keyword(predecessor);
+		AbstractToken t1 = new Kind_0_1_Assignment_age(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
 		AbstractToken t0 = new Kind_0_0_Group(predecessor);
@@ -667,7 +711,7 @@ protected class Kind_0_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Kind_0_0_1_Assignment_age(predecessor);
+		AbstractToken t1 = new Kind_0_0_1_Assignment_name(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
 		AbstractToken t0 = new Kind_0_0_0_Group(predecessor);
@@ -697,40 +741,10 @@ protected class Kind_0_0_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Kind_0_0_0_1_Assignment_name(predecessor);
+		AbstractToken t1 = new Kind_0_0_0_1_Keyword(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
-		AbstractToken t0 = new Kind_0_0_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-	}
-}
-
-protected class Kind_0_0_0_0_Group extends GroupToken {
-	
-	public Kind_0_0_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Kind_0_0_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Kind_0_0_0_0_Group(predecessor, true, false);
-	}
-
-		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Kind_0_0_0_0_1_Keyword(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new Kind_0_0_0_0_0_Keyword_kind(predecessor);
+		AbstractToken t0 = new Kind_0_0_0_0_Keyword_kind(predecessor);
 		predecessor = t0.createFirstSolution(t1.getObject());
 		if(predecessor == null) return null;
 		object = t0.getObject();
@@ -742,11 +756,11 @@ protected class Kind_0_0_0_0_Group extends GroupToken {
 }
 
 
-protected class Kind_0_0_0_0_0_Keyword_kind extends KeywordToken  {
+protected class Kind_0_0_0_0_Keyword_kind extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
 	
-	public Kind_0_0_0_0_0_Keyword_kind(AbstractToken predecessor) {
+	public Kind_0_0_0_0_Keyword_kind(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -764,11 +778,11 @@ protected class Kind_0_0_0_0_0_Keyword_kind extends KeywordToken  {
 }
 
 
-protected class Kind_0_0_0_0_1_Keyword extends KeywordToken  {
+protected class Kind_0_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
 	
-	public Kind_0_0_0_0_1_Keyword(AbstractToken predecessor) {
+	public Kind_0_0_0_1_Keyword(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -786,21 +800,21 @@ protected class Kind_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-protected class Kind_0_0_0_1_Assignment_name extends AssignmentToken  {
+protected class Kind_0_0_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public Kind_0_0_0_1_Assignment_name(AbstractToken predecessor) {
+	public Kind_0_0_1_Assignment_name(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Kind_0_0_0_1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
+	private Kind_0_0_1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Kind_0_0_0_1_Assignment_name(predecessor, true, false);
+		return new Kind_0_0_1_Assignment_name(predecessor, true, false);
 	}
 
 	
@@ -813,27 +827,27 @@ protected class Kind_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Kind_0_0_0_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("Kind_0_0_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
 	}
 }
 
 
-protected class Kind_0_0_1_Assignment_age extends AssignmentToken  {
+protected class Kind_0_1_Assignment_age extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public Kind_0_0_1_Assignment_age(AbstractToken predecessor) {
+	public Kind_0_1_Assignment_age(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Kind_0_0_1_Assignment_age(AbstractToken predecessor, boolean many, boolean required) {
+	private Kind_0_1_Assignment_age(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Kind_0_0_1_Assignment_age(predecessor, true, false);
+		return new Kind_0_1_Assignment_age(predecessor, true, false);
 	}
 
 	
@@ -846,18 +860,18 @@ protected class Kind_0_0_1_Assignment_age extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Kind_0_0_1_Assignment_ageCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("Kind_0_1_Assignment_ageCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
 	}
 }
 
 
 
-protected class Kind_0_1_Keyword extends KeywordToken  {
+protected class Kind_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.1");
 	
-	public Kind_0_1_Keyword(AbstractToken predecessor) {
+	public Kind_1_Keyword(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -879,6 +893,36 @@ protected class Kind_0_1_Keyword extends KeywordToken  {
 /************ begin Rule Erwachsener ****************/
 
 
+protected class Erwachsener_Group extends GroupToken {
+	
+	public Erwachsener_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private Erwachsener_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Erwachsener_Group(predecessor, true, false);
+	}
+
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new Erwachsener_1_Keyword(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new Erwachsener_0_Group(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+
 protected class Erwachsener_0_Group extends GroupToken {
 	
 	public Erwachsener_0_Group(AbstractToken predecessor) {
@@ -895,7 +939,7 @@ protected class Erwachsener_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Erwachsener_0_1_Keyword(predecessor);
+		AbstractToken t1 = new Erwachsener_0_1_Assignment_age(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
 		AbstractToken t0 = new Erwachsener_0_0_Group(predecessor);
@@ -925,7 +969,7 @@ protected class Erwachsener_0_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Erwachsener_0_0_1_Assignment_age(predecessor);
+		AbstractToken t1 = new Erwachsener_0_0_1_Assignment_name(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
 		AbstractToken t0 = new Erwachsener_0_0_0_Group(predecessor);
@@ -955,40 +999,10 @@ protected class Erwachsener_0_0_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Erwachsener_0_0_0_1_Assignment_name(predecessor);
+		AbstractToken t1 = new Erwachsener_0_0_0_1_Keyword(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
-		AbstractToken t0 = new Erwachsener_0_0_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-	}
-}
-
-protected class Erwachsener_0_0_0_0_Group extends GroupToken {
-	
-	public Erwachsener_0_0_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Erwachsener_0_0_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Erwachsener_0_0_0_0_Group(predecessor, true, false);
-	}
-
-		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Erwachsener_0_0_0_0_1_Keyword(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new Erwachsener_0_0_0_0_0_Keyword_erwachsener(predecessor);
+		AbstractToken t0 = new Erwachsener_0_0_0_0_Keyword_erwachsener(predecessor);
 		predecessor = t0.createFirstSolution(t1.getObject());
 		if(predecessor == null) return null;
 		object = t0.getObject();
@@ -1000,11 +1014,11 @@ protected class Erwachsener_0_0_0_0_Group extends GroupToken {
 }
 
 
-protected class Erwachsener_0_0_0_0_0_Keyword_erwachsener extends KeywordToken  {
+protected class Erwachsener_0_0_0_0_Keyword_erwachsener extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
 	
-	public Erwachsener_0_0_0_0_0_Keyword_erwachsener(AbstractToken predecessor) {
+	public Erwachsener_0_0_0_0_Keyword_erwachsener(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -1022,11 +1036,11 @@ protected class Erwachsener_0_0_0_0_0_Keyword_erwachsener extends KeywordToken  
 }
 
 
-protected class Erwachsener_0_0_0_0_1_Keyword extends KeywordToken  {
+protected class Erwachsener_0_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
 	
-	public Erwachsener_0_0_0_0_1_Keyword(AbstractToken predecessor) {
+	public Erwachsener_0_0_0_1_Keyword(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -1044,21 +1058,21 @@ protected class Erwachsener_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-protected class Erwachsener_0_0_0_1_Assignment_name extends AssignmentToken  {
+protected class Erwachsener_0_0_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public Erwachsener_0_0_0_1_Assignment_name(AbstractToken predecessor) {
+	public Erwachsener_0_0_1_Assignment_name(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Erwachsener_0_0_0_1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
+	private Erwachsener_0_0_1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Erwachsener_0_0_0_1_Assignment_name(predecessor, true, false);
+		return new Erwachsener_0_0_1_Assignment_name(predecessor, true, false);
 	}
 
 	
@@ -1071,27 +1085,27 @@ protected class Erwachsener_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Erwachsener_0_0_0_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("Erwachsener_0_0_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
 	}
 }
 
 
-protected class Erwachsener_0_0_1_Assignment_age extends AssignmentToken  {
+protected class Erwachsener_0_1_Assignment_age extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public Erwachsener_0_0_1_Assignment_age(AbstractToken predecessor) {
+	public Erwachsener_0_1_Assignment_age(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Erwachsener_0_0_1_Assignment_age(AbstractToken predecessor, boolean many, boolean required) {
+	private Erwachsener_0_1_Assignment_age(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Erwachsener_0_0_1_Assignment_age(predecessor, true, false);
+		return new Erwachsener_0_1_Assignment_age(predecessor, true, false);
 	}
 
 	
@@ -1104,18 +1118,18 @@ protected class Erwachsener_0_0_1_Assignment_age extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Erwachsener_0_0_1_Assignment_ageCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("Erwachsener_0_1_Assignment_ageCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
 	}
 }
 
 
 
-protected class Erwachsener_0_1_Keyword extends KeywordToken  {
+protected class Erwachsener_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.1");
 	
-	public Erwachsener_0_1_Keyword(AbstractToken predecessor) {
+	public Erwachsener_1_Keyword(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -1137,6 +1151,36 @@ protected class Erwachsener_0_1_Keyword extends KeywordToken  {
 /************ begin Rule Spielzeug ****************/
 
 
+protected class Spielzeug_Group extends GroupToken {
+	
+	public Spielzeug_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private Spielzeug_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Spielzeug_Group(predecessor, true, false);
+	}
+
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new Spielzeug_1_Keyword(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new Spielzeug_0_Group(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
+
 protected class Spielzeug_0_Group extends GroupToken {
 	
 	public Spielzeug_0_Group(AbstractToken predecessor) {
@@ -1153,7 +1197,7 @@ protected class Spielzeug_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Spielzeug_0_1_Keyword(predecessor);
+		AbstractToken t1 = new Spielzeug_0_1_Assignment_farbe(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
 		AbstractToken t0 = new Spielzeug_0_0_Group(predecessor);
@@ -1183,7 +1227,7 @@ protected class Spielzeug_0_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Spielzeug_0_0_1_Assignment_farbe(predecessor);
+		AbstractToken t1 = new Spielzeug_0_0_1_Assignment_name(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
 		AbstractToken t0 = new Spielzeug_0_0_0_Group(predecessor);
@@ -1213,40 +1257,10 @@ protected class Spielzeug_0_0_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Spielzeug_0_0_0_1_Assignment_name(predecessor);
+		AbstractToken t1 = new Spielzeug_0_0_0_1_Keyword(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
-		AbstractToken t0 = new Spielzeug_0_0_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-	}
-}
-
-protected class Spielzeug_0_0_0_0_Group extends GroupToken {
-	
-	public Spielzeug_0_0_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Spielzeug_0_0_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Spielzeug_0_0_0_0_Group(predecessor, true, false);
-	}
-
-		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Spielzeug_0_0_0_0_1_Keyword(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new Spielzeug_0_0_0_0_0_Keyword_spielzeug(predecessor);
+		AbstractToken t0 = new Spielzeug_0_0_0_0_Keyword_spielzeug(predecessor);
 		predecessor = t0.createFirstSolution(t1.getObject());
 		if(predecessor == null) return null;
 		object = t0.getObject();
@@ -1258,11 +1272,11 @@ protected class Spielzeug_0_0_0_0_Group extends GroupToken {
 }
 
 
-protected class Spielzeug_0_0_0_0_0_Keyword_spielzeug extends KeywordToken  {
+protected class Spielzeug_0_0_0_0_Keyword_spielzeug extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
 	
-	public Spielzeug_0_0_0_0_0_Keyword_spielzeug(AbstractToken predecessor) {
+	public Spielzeug_0_0_0_0_Keyword_spielzeug(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -1280,11 +1294,11 @@ protected class Spielzeug_0_0_0_0_0_Keyword_spielzeug extends KeywordToken  {
 }
 
 
-protected class Spielzeug_0_0_0_0_1_Keyword extends KeywordToken  {
+protected class Spielzeug_0_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
 	
-	public Spielzeug_0_0_0_0_1_Keyword(AbstractToken predecessor) {
+	public Spielzeug_0_0_0_1_Keyword(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -1302,21 +1316,21 @@ protected class Spielzeug_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-protected class Spielzeug_0_0_0_1_Assignment_name extends AssignmentToken  {
+protected class Spielzeug_0_0_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public Spielzeug_0_0_0_1_Assignment_name(AbstractToken predecessor) {
+	public Spielzeug_0_0_1_Assignment_name(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Spielzeug_0_0_0_1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
+	private Spielzeug_0_0_1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Spielzeug_0_0_0_1_Assignment_name(predecessor, true, false);
+		return new Spielzeug_0_0_1_Assignment_name(predecessor, true, false);
 	}
 
 	
@@ -1329,27 +1343,27 @@ protected class Spielzeug_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Spielzeug_0_0_0_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("Spielzeug_0_0_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
 	}
 }
 
 
-protected class Spielzeug_0_0_1_Assignment_farbe extends AssignmentToken  {
+protected class Spielzeug_0_1_Assignment_farbe extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public Spielzeug_0_0_1_Assignment_farbe(AbstractToken predecessor) {
+	public Spielzeug_0_1_Assignment_farbe(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Spielzeug_0_0_1_Assignment_farbe(AbstractToken predecessor, boolean many, boolean required) {
+	private Spielzeug_0_1_Assignment_farbe(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Spielzeug_0_0_1_Assignment_farbe(predecessor, true, false);
+		return new Spielzeug_0_1_Assignment_farbe(predecessor, true, false);
 	}
 
 	
@@ -1357,7 +1371,8 @@ protected class Spielzeug_0_0_1_Assignment_farbe extends AssignmentToken  {
 		IInstanceDescription obj = object.createClone();
 		if(!obj.isConsumable("farbe")) return null;
 		value = obj.consume("farbe");
-		AbstractToken t = new Farbe_0_Alternatives(predecessor);
+		if(!predecessor.getObject().isInstanceOf("Farbe")) return null;
+		AbstractToken t = new Farbe_Alternatives(predecessor);
 		predecessor = t.createFirstSolution(getDescr((EObject)value));
 		if(predecessor == null) return null;
 		object = (InstanceDescription)obj;
@@ -1365,18 +1380,18 @@ protected class Spielzeug_0_0_1_Assignment_farbe extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Spielzeug_0_0_1_Assignment_farbeCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("Spielzeug_0_1_Assignment_farbeCallback(\"xtext::RuleCall\", " + value + ")");
 		// Nothing to do for ParserRule Call Farbe
 	}
 }
 
 
 
-protected class Spielzeug_0_1_Keyword extends KeywordToken  {
+protected class Spielzeug_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.1");
 	
-	public Spielzeug_0_1_Keyword(AbstractToken predecessor) {
+	public Spielzeug_1_Keyword(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -1397,6 +1412,50 @@ protected class Spielzeug_0_1_Keyword extends KeywordToken  {
 /************ end Rule Spielzeug ****************/
 /************ begin Rule Farbe ****************/
 
+
+protected class Farbe_Alternatives extends GroupToken {
+	
+	private int currentOption = 1;
+
+	public Farbe_Alternatives(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private Farbe_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new Farbe_Alternatives(predecessor, true, false);
+	}
+
+	
+	protected boolean activateNextOption() {
+		if(currentOption > 0) {
+			currentOption--;
+			return true;
+		}
+		return false;
+	}
+	
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t, r;
+		do {		
+			switch(currentOption) {
+			case 0: t = new Farbe_1_Keyword_GRN(predecessor); break;
+			case 1: t = new Farbe_0_Alternatives(predecessor); break;
+			default: throw new RuntimeException("Undefinex Index: "+currentOption);
+			}
+			r = t.createFirstSolution(predecessor.getObject());
+		} while (r == null && activateNextOption());
+		if(r != null)
+			object = t.getObject();
+		return r;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
 
 protected class Farbe_0_Alternatives extends GroupToken {
 	
@@ -1427,13 +1486,14 @@ protected class Farbe_0_Alternatives extends GroupToken {
 		AbstractToken t, r;
 		do {		
 			switch(currentOption) {
-			case 0: t = new Farbe_0_1_Keyword_GRN(predecessor); break;
+			case 0: t = new Farbe_0_1_Keyword_GELB(predecessor); break;
 			case 1: t = new Farbe_0_0_Alternatives(predecessor); break;
 			default: throw new RuntimeException("Undefinex Index: "+currentOption);
 			}
 			r = t.createFirstSolution(predecessor.getObject());
 		} while (r == null && activateNextOption());
-		//System.out.println("found:"+r);
+		if(r != null)
+			object = t.getObject();
 		return r;
 	}
 
@@ -1470,56 +1530,14 @@ protected class Farbe_0_0_Alternatives extends GroupToken {
 		AbstractToken t, r;
 		do {		
 			switch(currentOption) {
-			case 0: t = new Farbe_0_0_1_Keyword_GELB(predecessor); break;
-			case 1: t = new Farbe_0_0_0_Alternatives(predecessor); break;
+			case 0: t = new Farbe_0_0_1_Keyword_BLAU(predecessor); break;
+			case 1: t = new Farbe_0_0_0_Keyword_ROT(predecessor); break;
 			default: throw new RuntimeException("Undefinex Index: "+currentOption);
 			}
 			r = t.createFirstSolution(predecessor.getObject());
 		} while (r == null && activateNextOption());
-		//System.out.println("found:"+r);
-		return r;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-	}
-}
-
-protected class Farbe_0_0_0_Alternatives extends GroupToken {
-	
-	private int currentOption = 1;
-
-	public Farbe_0_0_0_Alternatives(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Farbe_0_0_0_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Farbe_0_0_0_Alternatives(predecessor, true, false);
-	}
-
-	
-	protected boolean activateNextOption() {
-		if(currentOption > 0) {
-			currentOption--;
-			return true;
-		}
-		return false;
-	}
-	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t, r;
-		do {		
-			switch(currentOption) {
-			case 0: t = new Farbe_0_0_0_1_Keyword_BLAU(predecessor); break;
-			case 1: t = new Farbe_0_0_0_0_Keyword_ROT(predecessor); break;
-			default: throw new RuntimeException("Undefinex Index: "+currentOption);
-			}
-			r = t.createFirstSolution(predecessor.getObject());
-		} while (r == null && activateNextOption());
-		//System.out.println("found:"+r);
+		if(r != null)
+			object = t.getObject();
 		return r;
 	}
 
@@ -1528,11 +1546,11 @@ protected class Farbe_0_0_0_Alternatives extends GroupToken {
 }
 
 
-protected class Farbe_0_0_0_0_Keyword_ROT extends KeywordToken  {
+protected class Farbe_0_0_0_Keyword_ROT extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.5/@alternatives/@groups.0/@groups.0/@groups.0");
 	
-	public Farbe_0_0_0_0_Keyword_ROT(AbstractToken predecessor) {
+	public Farbe_0_0_0_Keyword_ROT(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -1550,11 +1568,11 @@ protected class Farbe_0_0_0_0_Keyword_ROT extends KeywordToken  {
 }
 
 
-protected class Farbe_0_0_0_1_Keyword_BLAU extends KeywordToken  {
+protected class Farbe_0_0_1_Keyword_BLAU extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.5/@alternatives/@groups.0/@groups.0/@groups.1");
 	
-	public Farbe_0_0_0_1_Keyword_BLAU(AbstractToken predecessor) {
+	public Farbe_0_0_1_Keyword_BLAU(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -1573,11 +1591,11 @@ protected class Farbe_0_0_0_1_Keyword_BLAU extends KeywordToken  {
 
 
 
-protected class Farbe_0_0_1_Keyword_GELB extends KeywordToken  {
+protected class Farbe_0_1_Keyword_GELB extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.5/@alternatives/@groups.0/@groups.1");
 	
-	public Farbe_0_0_1_Keyword_GELB(AbstractToken predecessor) {
+	public Farbe_0_1_Keyword_GELB(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -1596,11 +1614,11 @@ protected class Farbe_0_0_1_Keyword_GELB extends KeywordToken  {
 
 
 
-protected class Farbe_0_1_Keyword_GRN extends KeywordToken  {
+protected class Farbe_1_Keyword_GRN extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.5/@alternatives/@groups.1");
 	
-	public Farbe_0_1_Keyword_GRN(AbstractToken predecessor) {
+	public Farbe_1_Keyword_GRN(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
