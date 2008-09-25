@@ -23,10 +23,11 @@ Bundle-Name: «languageName()» UI Plug-in
 Bundle-SymbolicName: «uiPluginBundleID»;singleton:=true
 Bundle-Version: 0.7.0.qualifier
 Require-Bundle: «nonUIPluginBundleID»,
- org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui.core,
+ org.eclipse.xtext.ui.core.common,
  org.eclipse.ui.editors;bundle-version="3.4.0",
  org.eclipse.ui
-Bundle-Vendor: itemis AG
+Bundle-Vendor: eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 «ENDFILE-»
