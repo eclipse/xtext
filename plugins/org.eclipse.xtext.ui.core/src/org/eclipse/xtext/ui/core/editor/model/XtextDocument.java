@@ -8,57 +8,76 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.ui.IURIEditorInput;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jface.text.Document;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.editor.XtextProblemMarkerCreator;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 import org.eclipse.xtext.util.StringInputStream;
 
-public class XtextDocument extends AbstractDocumentDelegation implements IXtextDocument {
+public class XtextDocument extends Document implements IXtextDocument {
 
 	private XtextResourceSet resourceSet = null;
-	XtextResource resource = null;
-	private IURIEditorInput editorInput;
-
-	public XtextDocument(IDocument doc) {
-		super(doc);
-	}
-
-	public void setURI(IURIEditorInput editorInput) {
-		Assert.isTrue(this.editorInput==null || this.editorInput.equals(editorInput));
-		if (editorInput != null)
+	private XtextResource resource = null;
+	private IEditorInput editorInput;
+	
+	public void setInput(IEditorInput editorInput) {
+		IFile file = ResourceUtil.getFile(editorInput);
+		Assert.isTrue(file != null && this.editorInput == null || this.editorInput.equals(editorInput));
+		if (this.editorInput != null)
 			return;
 		this.editorInput = editorInput;
 		resourceSet = new XtextResourceSet();
 
-		if (getIJavaProject() != null) {
+		IJavaProject javaProject = getIJavaProject(file);
+		if (javaProject != null) {
 			resourceSet.setClasspathURIContext(new JdtClasspathUriResolver());
-			resourceSet.setClasspathURIContext(getIJavaProject());
+			resourceSet.setClasspathURIContext(javaProject);
 		}
 
-		String pathName = editorInput.getURI().toString();
-		Resource aResource = resourceSet.createResource(URI.createPlatformResourceURI(pathName, true));
+		IPath path = file.getFullPath();
+		Resource aResource = resourceSet.createResource(URI.createPlatformResourceURI(path.toString(), true));
 		if (!(aResource instanceof XtextResource))
-			throw new IllegalStateException("The resource factory registered for " + pathName
+			throw new IllegalStateException("The resource factory registered for " + path
 					+ " is not an XtextResourceFactory. Make sure the right resource factory has been registered.");
 		resource = (XtextResource) aResource;
 		if (!resource.isLoaded()) {
 			try {
-				resource.load(new StringInputStream(get()), null);
+				String string = get();
+				resource.load(new StringInputStream(string), null);
 			} catch (IOException e) {
 				throw new WrappedException(e);
 			}
 		}
+		
+//		addDocumentListener(new IDocumentListener(){
+//			public void documentAboutToBeChanged(org.eclipse.jface.text.DocumentEvent event) {
+//				
+//			}
+//
+//			public void documentChanged(final org.eclipse.jface.text.DocumentEvent event) {
+//				XtextDocument.this.modify(new UnitOfWork<Object>(){
+//					public Object exec(XtextResource resource) throws Exception {
+//						resource.update(0, event.getDocument().get());
+//						return null;
+//					}});
+//			}
+//		});
 	}
 
-	private IJavaProject getIJavaProject() {
+	private IJavaProject getIJavaProject(IFile file) {
+		IJavaProject create = JavaCore.create(file.getProject());
+		if (create.exists() && create.isOpen())
+			return create;
 		return null;
 	}
 

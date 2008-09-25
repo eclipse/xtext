@@ -8,23 +8,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import static org.eclipse.xtext.ui.core.util.ResourceUtil.*;
 import junit.framework.TestCase;
 
-import org.eclipse.core.filesystem.EFS;
-import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.ILogListener;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.ITestLanguage;
+import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
+import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.core.internal.XtextUITestsPlugin;
 
 /**
@@ -35,7 +38,6 @@ public class EditorTest extends TestCase {
 
 	private static final long STEP_DELAY = 0;
 	private static final String EDITOR_ID = ITestLanguage.ID;
-	private XtextEditor openedEditor;
 
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -51,47 +53,94 @@ public class EditorTest extends TestCase {
 			}
 		});
 	}
+	
+//	public void testXmlSample() throws Exception {
+//		IProject p = createProject("foo");
+//		IFile file = createFile(p, "x.xml", "");
+//		XMLEditor openEditor = (XMLEditor) openEditor(file,"xml.editor.sample.editors.XMLEditor");
+//		openEditor.close(false);
+//		p = createProject("foo");
+//		file = createFile(p, "x.xml", "<xml/>");
+//		openEditor = (XMLEditor) openEditor(file,"xml.editor.sample.editors.XMLEditor");
+//		assertEquals("<xml/>",openEditor.getContentDescription());
+//	}
 
 	public void testOpenBlankFile() throws Exception {
-		openEditor(createBlankEditorInput());
+		IProject p = createProject("foo");
+		IFile file = createFile(p, "x.testlanguage", "");
+		XtextEditor openedEditor = openEditor(file);
 		assertNotNull(openedEditor);
+		IXtextDocument document = openedEditor.getDocument();
+		document.readOnly(new UnitOfWork<Object>() {
+
+			public Object exec(XtextResource resource) throws Exception {
+				assertNotNull(resource);
+				assertTrue(resource.getContents().isEmpty());
+				return null;
+			}
+		});
+		openedEditor.close(false);
+	}
+
+	public void testOpenFileReadModifyRead() throws Exception {
+		IProject p = createProject("foo");
+		IFile file = createFile(p, "y.testlanguage", "/* multi line */\n" +
+				"stuff foo\n" +
+				"stuff bar\n" +
+				"// end");
+		XtextEditor openEditor = openEditor(file);
+		assertNotNull(openEditor);
+		XtextDocument document = (XtextDocument) openEditor.getDocument();
+		
+		Display.getDefault().readAndDispatch();
+		document.readOnly(new UnitOfWork<Object>() {
+
+			public Object exec(XtextResource resource) throws Exception {
+				assertNotNull(resource);
+				EList<EObject> contents = resource.getContents();
+				EObject object = contents.get(0);
+				assertEquals(2, object.eContents().size());
+				return null;
+			}
+		});
+		//TODO somehow the tests are executed in the Display thread...
+//		document.replace(23, 3, "honolulu");
+//		System.out.println("Waiting for reconciler...");
+//		sleep(1000);
+//		document.readOnly(new UnitOfWork<Object>() {
+//			
+//			public Object exec(XtextResource resource) throws Exception {
+//				assertNotNull(resource);
+//				EList<EObject> contents = resource.getContents();
+//				EObject object = contents.get(0);
+//				assertEquals(2, object.eContents().size());
+//				EObject object2 = object.eContents().get(0);
+//				assertEquals("honolulu",object2.eGet(object2.eClass().getEStructuralFeature("name")));
+//				return null;
+//			}
+//		});
+		openEditor.doSave(null);
+		openEditor.close(true);
 	}
 
 	@SuppressWarnings("restriction")
-	private void openEditor(IEditorInput editorInput) throws Exception {
-
-		IEditorPart openEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(
-				editorInput, EDITOR_ID);
+	private XtextEditor openEditor(IFile file) throws Exception {
+		IEditorPart openEditor = openEditor(file,EDITOR_ID);
 		if (openEditor instanceof XtextEditor) {
-			openedEditor = (XtextEditor) openEditor;
 			waitForJobCompletion();
 			sleep(STEP_DELAY);
-		}
-		else if (openEditor instanceof org.eclipse.ui.internal.ErrorEditorPart) {
+			return (XtextEditor) openEditor;
+		} else if (openEditor instanceof org.eclipse.ui.internal.ErrorEditorPart) {
 			fail("Could not open XtextEditor. Editor produced errors during initialization.");
-		}
-		else {
+		} else {
 			fail("Opened Editor with id:" + EDITOR_ID + ", is not a BaseXtextEditor");
 		}
+		return null;
 	}
 
-	public void testOpenFile() throws Exception {
-		openEditor(createTestEditorInput());
-		assertNotNull(openedEditor);
-	}
-
-	private IEditorInput createTestEditorInput() {
-		return createEditorInput("./resources/xtest.testlanguage");
-	}
-
-	private IEditorInput createBlankEditorInput() {
-		return createEditorInput("./resources/xtestblank.testlanguage");
-	}
-
-	private IEditorInput createEditorInput(String fullPath) {
-		ResourcesPlugin.getPlugin();
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(fullPath));
-		return new FileEditorInput(file);
+	private IEditorPart openEditor(IFile file, String editorId) throws PartInitException {
+		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(
+				new FileEditorInput(file),editorId);
 	}
 
 	private void waitForJobCompletion() throws InterruptedException {
@@ -108,22 +157,10 @@ public class EditorTest extends TestCase {
 					displ.sleep();
 			}
 			displ.update();
-		}
-		else {
+		} else {
 			Thread.sleep(i);
 		}
 
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see junit.framework.TestCase#tearDown()
-	 */
-	protected void tearDown() throws Exception {
-		super.tearDown();
-		if (openedEditor != null)
-			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor(openedEditor, false);
 	}
 
 }

@@ -34,7 +34,9 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 		try {
 			document.modify(new UnitOfWork<Object>() {
 				public Object exec(XtextResource resource) throws Exception {
-					resource.update(region.getOffset(), document.get(region.getOffset(), region.getLength()));
+//TODO partial parsing doesn't work reliable yet
+//					resource.update(region.getOffset(), document.get(region.getOffset(), region.getLength()));
+					resource.update(0, document.get());
 					return null;
 				}});
 		} catch (Throwable t) {
