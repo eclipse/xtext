@@ -23,17 +23,12 @@
 package «standaloneSetupClass(grammar()).toJavaPackage()»;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceScopeFactory;
 import org.eclipse.xtext.service.ServiceRegistry;
-«FOREACH genModel().nonUiServices() AS s-»
-import «s.serviceInterfaceFQName»;
-import «s.genClassFQName»;
-«ENDFOREACH-»
+import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
 
 import «languageInterfaceFQName»;
 
@@ -43,22 +38,16 @@ public abstract class «standaloneSetupClass(grammar()).toSimpleName()» {
 
 	public synchronized static void doSetup() {
 		if(!isInitialized) {
-			«IF grammar().getSuperGrammar()!=null»
 			// setup super language first
 			«standaloneSetupClass(grammar().getSuperGrammar())».doSetup();
-			«ELSE»
-			// General setup
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new XMIResourceFactoryImpl());
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xmi", new XMIResourceFactoryImpl());
-			«ENDIF»
-			«FOREACH genModel().nonUiServices() AS s-»
-			ServiceRegistry.registerService(«languageInterface(grammar())».SCOPE, «s.serviceInterfaceFQName.toSimpleName()».class, «s.genClassFQName.toSimpleName()».class);
-			«ENDFOREACH»
+			
+			for (IServiceRegistration reg :  new «runtimeConfigClass(grammar())»().registrations()) {
+				ServiceRegistry.registerFactory(reg.scope(), reg.serviceFactory(), reg.priority());
+			}
+			
 			«IF resourceFactoryService() != null-»
 			// register resource factory to EMF
-			IResourceFactory resourceFactory = new «resourceFactoryService().genClassFQName.toSimpleName()»();
+			IResourceFactory resourceFactory = new «resourceFactoryService().genClassFQName»();
 			«FOREACH modelFileExtensions() AS modelFileExtension-»
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", resourceFactory);
 			«ENDFOREACH»
@@ -83,5 +72,29 @@ public abstract class «standaloneSetupClass(grammar()).toSimpleName()» {
 		return «languageInterface(grammar())».SCOPE;
 	}
 }
+«ENDFILE»
+
+«FILE runtimeConfigClass(grammar()).toJavaFilePath()-»
+package «runtimeConfigClass(grammar()).toJavaPackage()»;
+
+import java.util.Set;
+
+import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
+
+/**
+ * used to register components to be used at runtime.
+ */
+public class «runtimeConfigClass(grammar()).toSimpleName()» extends AbstractServiceRegistrationFactory {
+
+	public Set<IServiceRegistration> registrations() {
+		return scope(«languageInterface(grammar())».SCOPE)
+		«FOREACH genModel().nonUiServices() AS s-»
+		.with(«s.serviceInterfaceFQName».class, «s.genClassFQName».class)
+		«ENDFOREACH»
+			.registrations();
+	}
+
+}
+			
 «ENDFILE»
 «ENDDEFINE»

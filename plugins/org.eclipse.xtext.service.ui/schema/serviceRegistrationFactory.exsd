@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.service.ui.IServiceRegistration"/>
+                  <meta.attribute kind="java" basedOn=":org.eclipse.xtext.service.IServiceRegistrationFactory"/>
                </appinfo>
             </annotation>
          </attribute>

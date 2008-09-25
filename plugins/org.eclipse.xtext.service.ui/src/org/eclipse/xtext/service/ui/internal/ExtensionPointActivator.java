@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -20,46 +19,21 @@ import org.eclipse.xtext.service.ui.Activator;
 
 public class ExtensionPointActivator {
 
-	private static Log log = LogFactory.getLog(ExtensionPointActivator.class);
+	private static final Logger log = Logger.getLogger(ExtensionPointActivator.class);
 
 	private static final String SCOPE = "scope";
 	private static final String ID = "id";
 	private static final String PARENT_SCOPE = "parentScope";
 
-	private static final String SERVICE_FACTORY_EP = "serviceFactory";
-	private static final String SCOPE_ID = "scope";
-	private static final String PRIORITY = "priority";
-
 	private static final String SERVICE_REG_FACTORY_EP = "serviceRegistrationFactory";
 	private static final String CLASS = "class";
 
 	public static void activateServices() {
-		registerScopes();
-		registerServiceFactories();
-		registerServiceRegistrations();
-	}
-
-	private static void registerServiceFactories() {
-		IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(
-				Activator.getDefault().getBundle().getSymbolicName(), SERVICE_FACTORY_EP);
-		Assert.isNotNull(extensionPoint, "Extension point " + SERVICE_FACTORY_EP + " not defined!");
-
-		IConfigurationElement[] elements = extensionPoint.getConfigurationElements();
-		if (elements != null) {
-			for (IConfigurationElement ele : elements) {
-				String scopeId = ele.getAttribute(SCOPE_ID);
-				String prio = ele.getAttribute(PRIORITY);
-				IServiceScope serviceScope = ServiceScopeFactory.get(scopeId);
-				if (serviceScope == null) {
-					log.warn("The scope " + scopeId + " is not defined.");
-				} else {
-					Integer p = 0;
-					if (prio != null)
-						p = Integer.valueOf(prio);
-					ServiceRegistry.registerFactory(serviceScope, new LazyExtensionPointServiceFactory(serviceScope,
-							ele), p);
-				}
-			}
+		try {
+			registerScopes();
+			registerServiceRegistrations();
+		} catch (Exception e) {
+			log.error("Error during initialization of services", e);
 		}
 	}
 
@@ -76,9 +50,9 @@ public class ExtensionPointActivator {
 					srf = (IServiceRegistrationFactory) ele.createExecutableExtension(CLASS);
 					Set<IServiceRegistration> registrations = srf.registrations();
 					for (IServiceRegistration r : registrations) {
-						IServiceScope serviceScope = ServiceScopeFactory.get(r.scopeId());
+						IServiceScope serviceScope = r.scope();
 						if (serviceScope == null) {
-							log.warn("The scope " + r.scopeId() + " is not defined.");
+							log.warn("Undefined scope.");
 						} else {
 							ServiceRegistry.registerFactory(serviceScope, r.serviceFactory(), r.priority());
 						}

@@ -1,8 +1,7 @@
 package org.eclipse.xtext.service.ui.internal;
 
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.xtext.service.IServiceFactory;
@@ -10,7 +9,7 @@ import org.eclipse.xtext.service.IServiceScope;
 
 public class LazyExtensionPointServiceFactory implements IServiceFactory {
 	
-	private Log log = LogFactory.getLog(getClass());
+	private static final Logger log = Logger.getLogger(LazyExtensionPointServiceFactory.class);
 
 	private static final String CLASS = "class";
 

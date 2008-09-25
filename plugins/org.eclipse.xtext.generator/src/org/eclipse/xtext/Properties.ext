@@ -59,6 +59,9 @@ toSimpleName(String fqName) :
 standaloneSetupClass(Grammar this) :
 	getId() + "StandaloneSetup";
 
+runtimeConfigClass(Grammar this) :
+	getId() + "RuntimeConfig";
+
 languageInterface(Grammar this) :
 	toJavaPackage(getId()) + ".I"+toSimpleName(getId());
 

@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -21,7 +20,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ScopeUtil {
 	
-	private final static Log log = LogFactory.getLog(ScopeUtil.class);
+	private static final Logger log = Logger.getLogger(ScopeUtil.class);
 
     public static List<ScopeDescriptor> sortScopeDescriptors(List<ScopeDescriptor> descriptors) {
         List<ScopeDescriptor> result = new ArrayList<ScopeDescriptor>();

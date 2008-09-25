@@ -4,10 +4,11 @@ import java.util.Set;
 
 public interface IServiceRegistrationFactory {
 	public interface IServiceRegistration {
-		String scopeId();
+		IServiceScope scope();
 		IServiceFactory serviceFactory();
 		int priority();
 	}
 	
 	Set<IServiceRegistration> registrations();
 }	
+

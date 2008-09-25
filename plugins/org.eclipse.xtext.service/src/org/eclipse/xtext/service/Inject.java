@@ -23,4 +23,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Inherited
 public @interface Inject {
+	public boolean optional() default false;
 }

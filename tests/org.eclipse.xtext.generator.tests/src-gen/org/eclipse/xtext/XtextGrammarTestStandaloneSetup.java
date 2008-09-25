@@ -4,25 +4,12 @@ Generated with Xtext
 package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceScopeFactory;
-import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.services.XtextGrammarTestGrammarAccess;
-import org.eclipse.xtext.IMetamodelAccess;
-import org.eclipse.xtext.services.XtextGrammarTestMetamodelAccess;
-import org.eclipse.xtext.parser.IAstFactory;
-import org.eclipse.xtext.parser.GenericEcoreElementFactory;
-import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.parser.XtextGrammarTestParser;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.services.XtextGrammarTestResourceFactory;
-import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.XtextGrammarTestParseTreeConstructor;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
 
 import org.eclipse.xtext.IXtextGrammarTest;
 
@@ -32,19 +19,15 @@ public abstract class XtextGrammarTestStandaloneSetup {
 
 	public synchronized static void doSetup() {
 		if(!isInitialized) {
-			
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			ServiceRegistry.registerService(org.eclipse.xtext.IXtextGrammarTest.SCOPE, IGrammarAccess.class, XtextGrammarTestGrammarAccess.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.IXtextGrammarTest.SCOPE, IMetamodelAccess.class, XtextGrammarTestMetamodelAccess.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.IXtextGrammarTest.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.IXtextGrammarTest.SCOPE, IParser.class, XtextGrammarTestParser.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.IXtextGrammarTest.SCOPE, IResourceFactory.class, XtextGrammarTestResourceFactory.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.IXtextGrammarTest.SCOPE, IParseTreeConstructor.class, XtextGrammarTestParseTreeConstructor.class);
+			for (IServiceRegistration reg :  new org.eclipse.xtext.XtextGrammarTestRuntimeConfig().registrations()) {
+				ServiceRegistry.registerFactory(reg.scope(), reg.serviceFactory(), reg.priority());
+			}
 			
 			// register resource factory to EMF
-			IResourceFactory resourceFactory = new XtextGrammarTestResourceFactory();
+			IResourceFactory resourceFactory = new org.eclipse.xtext.services.XtextGrammarTestResourceFactory();
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xtextgrammartest", resourceFactory);
 			
 			

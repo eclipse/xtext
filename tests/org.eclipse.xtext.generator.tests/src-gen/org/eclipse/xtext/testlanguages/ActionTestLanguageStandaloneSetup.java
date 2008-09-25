@@ -4,25 +4,12 @@ Generated with Xtext
 package org.eclipse.xtext.testlanguages;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup;
-import org.eclipse.xtext.service.IServiceScope;
-import org.eclipse.xtext.service.ServiceScopeFactory;
-import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
-import org.eclipse.xtext.IMetamodelAccess;
-import org.eclipse.xtext.testlanguages.services.ActionTestLanguageMetamodelAccess;
-import org.eclipse.xtext.parser.IAstFactory;
-import org.eclipse.xtext.parser.GenericEcoreElementFactory;
-import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.testlanguages.parser.ActionTestLanguageParser;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.testlanguages.services.ActionTestLanguageResourceFactory;
-import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
-import org.eclipse.xtext.testlanguages.parsetree.reconstr.ActionTestLanguageParseTreeConstructor;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
 
 import org.eclipse.xtext.testlanguages.IActionTestLanguage;
 
@@ -32,19 +19,15 @@ public abstract class ActionTestLanguageStandaloneSetup {
 
 	public synchronized static void doSetup() {
 		if(!isInitialized) {
-			
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IActionTestLanguage.SCOPE, IGrammarAccess.class, ActionTestLanguageGrammarAccess.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IActionTestLanguage.SCOPE, IMetamodelAccess.class, ActionTestLanguageMetamodelAccess.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IActionTestLanguage.SCOPE, IAstFactory.class, GenericEcoreElementFactory.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IActionTestLanguage.SCOPE, IParser.class, ActionTestLanguageParser.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IActionTestLanguage.SCOPE, IResourceFactory.class, ActionTestLanguageResourceFactory.class);
-			ServiceRegistry.registerService(org.eclipse.xtext.testlanguages.IActionTestLanguage.SCOPE, IParseTreeConstructor.class, ActionTestLanguageParseTreeConstructor.class);
+			for (IServiceRegistration reg :  new org.eclipse.xtext.testlanguages.ActionTestLanguageRuntimeConfig().registrations()) {
+				ServiceRegistry.registerFactory(reg.scope(), reg.serviceFactory(), reg.priority());
+			}
 			
 			// register resource factory to EMF
-			IResourceFactory resourceFactory = new ActionTestLanguageResourceFactory();
+			IResourceFactory resourceFactory = new org.eclipse.xtext.testlanguages.services.ActionTestLanguageResourceFactory();
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("actiontestlanguage", resourceFactory);
 			
 			

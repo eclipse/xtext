@@ -51,7 +51,6 @@ public class XtextDocumentProvider extends TextFileDocumentProvider implements I
 			return xtextFileInfo.xtextEditorModel;
 		}
 		return null;
-
 	}
 
 	protected XtextEditorModel createXtextEditorModel(XtextResource resource, Object element2, IDocument document,
