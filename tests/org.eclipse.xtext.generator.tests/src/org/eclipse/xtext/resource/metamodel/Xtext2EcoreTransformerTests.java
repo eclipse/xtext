@@ -7,16 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.metamodel;
 
+import static org.easymock.EasyMock.anyObject;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.same;
+import static org.easymock.EasyMock.verify;
+
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -25,17 +33,24 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  * @see http://wiki.eclipse.org/Xtext/Documentation#Meta-Model_Inference
  */
 public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
+	private Xtext2EcoreTransformer xtext2EcoreTransformer;
+	private ErrorAcceptor errorAcceptorMock;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		xtext2EcoreTransformer = new Xtext2EcoreTransformer();
+		errorAcceptorMock = createMock(ErrorAcceptor.class);
 		with(XtextStandaloneSetup.class);
 	}
-
+	
 	private EPackage getEPackageFromGrammar(String xtextGrammar) throws Exception {
 		Grammar grammar = (Grammar) getModel(xtextGrammar);
-		Xtext2EcoreTransformer xtext2EcoreTransformer = new Xtext2EcoreTransformer();
+		replay(errorAcceptorMock);
+		xtext2EcoreTransformer.setErrorAcceptor(errorAcceptorMock);
 		List<EPackage> metamodels = xtext2EcoreTransformer.transform(grammar);
+		verify(errorAcceptorMock);
+		
 		assertNotNull(metamodels);
 		assertEquals(1, metamodels.size());
 
@@ -355,4 +370,28 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertReferenceConfiguration(ruleA, 3, "refA4", "TypeB", 0, 1);
 	}
 	
+	public void testImportWithoutAlias() throws Exception {
+		final String grammar = "language test generate test 'http://test' import 'http://www.eclipse.org/emf/2002/Ecore' RuleA: feature=ID;";
+		errorAcceptorMock.acceptError(same(ErrorCode.MissingAliasForReferencedMetamodel), (String)anyObject(), (EObject)anyObject());
+		getEPackageFromGrammar(grammar);
+	}
+	
+	public void testModifyingSealedModel() throws Exception {
+		final String grammar = "language test generate test 'http://test' import 'http://www.eclipse.org/emf/2002/Ecore' as ecore RuleA returns ecore::SomeNewTypeA: feature=ID;";
+		errorAcceptorMock.acceptError(same(ErrorCode.CannotCreateTypeInSealedMetamodel), (String)anyObject(), (EObject)anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.NoSuchTypeAvailable), (String)anyObject(), (EObject)anyObject());
+		getEPackageFromGrammar(grammar);
+	}
+	
+	public void testImportingUnknownModel() throws Exception {
+		final String grammar = "language test generate test 'http://test' import 'http://www.unknownModel' as unknownModel RuleA: feature=ID;";
+		errorAcceptorMock.acceptError(same(ErrorCode.CannotLoadMetamodel), (String)anyObject(), (EObject)anyObject());
+		getEPackageFromGrammar(grammar);
+	}
+	
+	public void testMoreThanOneRuleCall() throws Exception {
+		final String grammar = "language test generate test 'http://test' RuleA: RuleB RuleC; RuleB: featureB=ID; RuleC: featureC=ID;";
+		errorAcceptorMock.acceptError(same(ErrorCode.MoreThanOneTypeChangeInOneRule), (String)anyObject(), (EObject)anyObject());
+		getEPackageFromGrammar(grammar);
+	}
 }
