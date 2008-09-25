@@ -19,36 +19,36 @@ public class MetamodelRefTestParseTreeConstructor extends AbstractParseTreeConst
 	}
 	
 	protected AbstractToken internalSerialize(EObject obj) {
-		AbstractToken t = new Foo_0_Group(null);
+		AbstractToken t = new Foo_Group(null);
 		t = t.createFirstSolution(getDescr(obj));
 		if(t != null) return t;
-		t = new NameRef_1_Assignment_name(null);
+		t = new NameRef_Assignment_name(null);
 		return t.createFirstSolution(getDescr(obj));
 	}
 	
 /************ begin Rule Foo ****************/
 
 
-protected class Foo_0_Group extends GroupToken {
+protected class Foo_Group extends GroupToken {
 	
-	public Foo_0_Group(AbstractToken predecessor) {
+	public Foo_Group(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Foo_0_Group(AbstractToken predecessor, boolean many, boolean required) {
+	private Foo_Group(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Foo_0_Group(predecessor, true, false);
+		return new Foo_Group(predecessor, true, false);
 	}
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Foo_0_1_Assignment_nameRefs(predecessor);
+		AbstractToken t1 = new Foo_1_Assignment_nameRefs(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
-		AbstractToken t0 = new Foo_0_0_Assignment_name(predecessor);
+		AbstractToken t0 = new Foo_0_Assignment_name(predecessor);
 		predecessor = t0.createFirstSolution(t1.getObject());
 		if(predecessor == null) return null;
 		object = t0.getObject();
@@ -59,21 +59,21 @@ protected class Foo_0_Group extends GroupToken {
 	}
 }
 
-protected class Foo_0_0_Assignment_name extends AssignmentToken  {
+protected class Foo_0_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal");
 	protected Object value;
 	
-	public Foo_0_0_Assignment_name(AbstractToken predecessor) {
+	public Foo_0_Assignment_name(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private Foo_0_0_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
+	private Foo_0_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Foo_0_0_Assignment_name(predecessor, true, false);
+		return new Foo_0_Assignment_name(predecessor, true, false);
 	}
 
 	
@@ -86,26 +86,26 @@ protected class Foo_0_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Foo_0_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("Foo_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
 	}
 }
 
-protected class Foo_0_1_Assignment_nameRefs extends AssignmentToken  {
+protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public Foo_0_1_Assignment_nameRefs(AbstractToken predecessor) {
+	public Foo_1_Assignment_nameRefs(AbstractToken predecessor) {
 		super(predecessor, IS_MANY, !IS_REQUIRED);
 	}
 	
-	private Foo_0_1_Assignment_nameRefs(AbstractToken predecessor, boolean many, boolean required) {
+	private Foo_1_Assignment_nameRefs(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Foo_0_1_Assignment_nameRefs(predecessor, true, false);
+		return new Foo_1_Assignment_nameRefs(predecessor, true, false);
 	}
 
 	
@@ -113,7 +113,8 @@ protected class Foo_0_1_Assignment_nameRefs extends AssignmentToken  {
 		IInstanceDescription obj = object.createClone();
 		if(!obj.isConsumable("nameRefs")) return null;
 		value = obj.consume("nameRefs");
-		AbstractToken t = new NameRef_1_Assignment_name(predecessor);
+		if(!predecessor.getObject().isInstanceOf("xtext::RuleCall")) return null;
+		AbstractToken t = new NameRef_Assignment_name(predecessor);
 		predecessor = t.createFirstSolution(getDescr((EObject)value));
 		if(predecessor == null) return null;
 		object = (InstanceDescription)obj;
@@ -121,7 +122,7 @@ protected class Foo_0_1_Assignment_nameRefs extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Foo_0_1_Assignment_nameRefsCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("Foo_1_Assignment_nameRefsCallback(\"xtext::RuleCall\", " + value + ")");
 		// Nothing to do for ParserRule Call NameRef
 	}
 }
@@ -131,21 +132,21 @@ protected class Foo_0_1_Assignment_nameRefs extends AssignmentToken  {
 /************ begin Rule NameRef ****************/
 
 
-protected class NameRef_1_Assignment_name extends AssignmentToken  {
+protected class NameRef_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1/@alternatives/@terminal");
 	protected Object value;
 	
-	public NameRef_1_Assignment_name(AbstractToken predecessor) {
+	public NameRef_Assignment_name(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private NameRef_1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
+	private NameRef_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new NameRef_1_Assignment_name(predecessor, true, false);
+		return new NameRef_Assignment_name(predecessor, true, false);
 	}
 
 	
@@ -158,7 +159,7 @@ protected class NameRef_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("NameRef_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("NameRef_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
 	}
 }

@@ -25,14 +25,15 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		String model = "( a b ) !";
 		assertEquals(model, parseAndSerialize(model));
 	}
-
 	
-//	FIXME: Make this test work again
+	// FIXME: make this work again
+
 //	public void testFollowingHiddenTokens() throws Exception {
 //		String model = "a ";
 //		assertEquals(model, parseAndSerialize(model));
 //	}
-//	FIXME: Make this test work again
+
+	// FIXME: make this work again
 	
 //	public void testComplex() throws Exception {
 //		String model = "( ( a b ) ! c  d e  f (  x s ) ( \t ( a \n\rb/*ffo \n bar */ ) ! c ) ! ) //holla\n!";
@@ -49,38 +50,21 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		return callback.toString();
 	}
 
-	public void recursionTest() {
-		rec(1);
+	public void testSimpleExpressions5() throws Exception {
+		with(SimpleExpressionsStandaloneSetup.class);
+		String model = "a + b - c * d / e";
+		assertEquals(model, parseAndSerialize(model));
 	}
 
-	private void rec(int i) {
-		// max1: 345957
-		String xxx = "lala";
-		xxx += "y";
-		System.out.println(i);
-		rec(i + 1);
+	public void testSimpleExpressions1() throws Exception {
+		with(SimpleExpressionsStandaloneSetup.class);
+		String model = "a + b - c";
+		assertEquals(model, parseAndSerialize(model));
 	}
-
-//	FIXME: Make this test work again
-	
-//	public void testSimpleExpressions5() throws Exception {
-//		with(SimpleExpressionsStandaloneSetup.class);
-//		String model = "a + b - c * d / e";
-//		assertEquals(model, parseAndSerialize(model));
-//	}
-	
-//	FIXME: Make this test work again
-	
-//	public void testSimpleExpressions1() throws Exception {
-//		with(SimpleExpressionsStandaloneSetup.class);
-//		String model = "a + b - c";
-//		assertEquals(model, parseAndSerialize(model));
-//	}
 
 	public void testSimpleTwoNumbers() throws Exception {
 		String model = "2 45";
 		assertEquals(model, parseAndSerialize(model));
-
 	}
 
 	public void testSimpleManyStrings1() throws Exception {

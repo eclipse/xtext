@@ -21,12 +21,13 @@ public abstract class AbstractParseTreeConstructor implements
 		protected final static boolean IS_MANY = true;
 		protected final static boolean IS_REQUIRED = true;
 		protected boolean many;
+
+		// TODO: rename to current
 		protected InstanceDescription object;
 		protected AbstractToken otherSolution;
 
 		protected AbstractToken predecessor;
 		protected boolean required;
-
 
 		public AbstractToken(AbstractToken predecessor, boolean many,
 				boolean required) {
@@ -52,13 +53,12 @@ public abstract class AbstractParseTreeConstructor implements
 		}
 
 		public AbstractToken createFirstSolution(InstanceDescription obj) {
-			System.out.println("enter :" + depth(this)
-					+ getClass().getSimpleName() + "\t " + obj + " -> "
-					+ dsl(this));
+			System.out.println("->" + depth(this) + getClass().getSimpleName()
+					+ "\t " + obj + " -> " + dsl(this));
 			object = obj;
 			AbstractToken t1 = createOneChild(this);
 			System.out
-					.println("return:"
+					.println("< "
 							+ depth(this)
 							+ getClass().getSimpleName()
 							+ " -> "
@@ -68,16 +68,16 @@ public abstract class AbstractParseTreeConstructor implements
 				return required ? null : predecessor;
 			if (many) {
 				AbstractToken t2 = newInstance(t1);
-				t2 = t2.createFirstSolution(t1.object);
+				AbstractToken t3 = t2.createFirstSolution(t1.object);
 
-				if (t2 != null) {
+				if (t3 != null) {
 					otherSolution = t1;
-					return t2;
+					object = t2.object;
+					return t3;
 				}
 			}
 			return t1;
 		}
-
 
 		public AbstractToken createNextSolution() {
 			if (otherSolution != null) {
@@ -98,7 +98,6 @@ public abstract class AbstractParseTreeConstructor implements
 				b.append(" ");
 			return b.toString();
 		}
-
 
 		private String dsl(AbstractToken ele) {
 			SimpleSerializingCallback cb = new SimpleSerializingCallback(
@@ -121,7 +120,6 @@ public abstract class AbstractParseTreeConstructor implements
 		public InstanceDescription getObject() {
 			return object;
 		}
-
 
 		protected abstract AbstractToken newInstance(AbstractToken predecessor);
 	}

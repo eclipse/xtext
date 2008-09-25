@@ -19,15 +19,45 @@ public class ConcreteTestLanguageParseTreeConstructor extends AbstractParseTreeC
 	}
 	
 	protected AbstractToken internalSerialize(EObject obj) {
-		AbstractToken t = new ConcreteParserRule_0_Group(null);
+		AbstractToken t = new ConcreteParserRule_Group(null);
 		t = t.createFirstSolution(getDescr(obj));
 		if(t != null) return t;
-		t = new InheritedParserRule_1_Group(null);
+		t = new InheritedParserRule_Group(null);
 		return t.createFirstSolution(getDescr(obj));
 	}
 	
 /************ begin Rule ConcreteParserRule ****************/
 
+
+protected class ConcreteParserRule_Group extends GroupToken {
+	
+	public ConcreteParserRule_Group(AbstractToken predecessor) {
+		super(predecessor, !IS_MANY, IS_REQUIRED);
+	}
+	
+	private ConcreteParserRule_Group(AbstractToken predecessor, boolean many, boolean required) {
+		super(predecessor, many, required);
+	}
+	
+	protected AbstractToken newInstance(AbstractToken predecessor) {
+		return new ConcreteParserRule_Group(predecessor, true, false);
+	}
+
+		
+	protected AbstractToken createOneChild(AbstractToken predecessor) {
+		AbstractToken t1 = new ConcreteParserRule_1_Assignment_elements(predecessor);
+		predecessor = t1.createFirstSolution(object);
+		if(predecessor == null) return null;
+		AbstractToken t0 = new ConcreteParserRule_0_Group(predecessor);
+		predecessor = t0.createFirstSolution(t1.getObject());
+		if(predecessor == null) return null;
+		object = t0.getObject();
+		return predecessor;
+	}
+
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+	}
+}
 
 protected class ConcreteParserRule_0_Group extends GroupToken {
 	
@@ -45,7 +75,7 @@ protected class ConcreteParserRule_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new ConcreteParserRule_0_1_Assignment_elements(predecessor);
+		AbstractToken t1 = new ConcreteParserRule_0_1_Keyword(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
 		AbstractToken t0 = new ConcreteParserRule_0_0_Group(predecessor);
@@ -75,40 +105,10 @@ protected class ConcreteParserRule_0_0_Group extends GroupToken {
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new ConcreteParserRule_0_0_1_Keyword(predecessor);
+		AbstractToken t1 = new ConcreteParserRule_0_0_1_Assignment_magicNumber(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
-		AbstractToken t0 = new ConcreteParserRule_0_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-	}
-}
-
-protected class ConcreteParserRule_0_0_0_Group extends GroupToken {
-	
-	public ConcreteParserRule_0_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private ConcreteParserRule_0_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new ConcreteParserRule_0_0_0_Group(predecessor, true, false);
-	}
-
-		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new ConcreteParserRule_0_0_0_1_Assignment_magicNumber(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new ConcreteParserRule_0_0_0_0_Keyword_model(predecessor);
+		AbstractToken t0 = new ConcreteParserRule_0_0_0_Keyword_model(predecessor);
 		predecessor = t0.createFirstSolution(t1.getObject());
 		if(predecessor == null) return null;
 		object = t0.getObject();
@@ -120,11 +120,11 @@ protected class ConcreteParserRule_0_0_0_Group extends GroupToken {
 }
 
 
-protected class ConcreteParserRule_0_0_0_0_Keyword_model extends KeywordToken  {
+protected class ConcreteParserRule_0_0_0_Keyword_model extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
 	
-	public ConcreteParserRule_0_0_0_0_Keyword_model(AbstractToken predecessor) {
+	public ConcreteParserRule_0_0_0_Keyword_model(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -141,21 +141,21 @@ protected class ConcreteParserRule_0_0_0_0_Keyword_model extends KeywordToken  {
 	}
 }
 
-protected class ConcreteParserRule_0_0_0_1_Assignment_magicNumber extends AssignmentToken  {
+protected class ConcreteParserRule_0_0_1_Assignment_magicNumber extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public ConcreteParserRule_0_0_0_1_Assignment_magicNumber(AbstractToken predecessor) {
+	public ConcreteParserRule_0_0_1_Assignment_magicNumber(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private ConcreteParserRule_0_0_0_1_Assignment_magicNumber(AbstractToken predecessor, boolean many, boolean required) {
+	private ConcreteParserRule_0_0_1_Assignment_magicNumber(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new ConcreteParserRule_0_0_0_1_Assignment_magicNumber(predecessor, true, false);
+		return new ConcreteParserRule_0_0_1_Assignment_magicNumber(predecessor, true, false);
 	}
 
 	
@@ -168,18 +168,18 @@ protected class ConcreteParserRule_0_0_0_1_Assignment_magicNumber extends Assign
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("ConcreteParserRule_0_0_0_1_Assignment_magicNumberCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("ConcreteParserRule_0_0_1_Assignment_magicNumberCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
 	}
 }
 
 
 
-protected class ConcreteParserRule_0_0_1_Keyword extends KeywordToken  {
+protected class ConcreteParserRule_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1");
 	
-	public ConcreteParserRule_0_0_1_Keyword(AbstractToken predecessor) {
+	public ConcreteParserRule_0_1_Keyword(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -197,21 +197,21 @@ protected class ConcreteParserRule_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-protected class ConcreteParserRule_0_1_Assignment_elements extends AssignmentToken  {
+protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public ConcreteParserRule_0_1_Assignment_elements(AbstractToken predecessor) {
+	public ConcreteParserRule_1_Assignment_elements(AbstractToken predecessor) {
 		super(predecessor, IS_MANY, !IS_REQUIRED);
 	}
 	
-	private ConcreteParserRule_0_1_Assignment_elements(AbstractToken predecessor, boolean many, boolean required) {
+	private ConcreteParserRule_1_Assignment_elements(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new ConcreteParserRule_0_1_Assignment_elements(predecessor, true, false);
+		return new ConcreteParserRule_1_Assignment_elements(predecessor, true, false);
 	}
 
 	
@@ -219,7 +219,8 @@ protected class ConcreteParserRule_0_1_Assignment_elements extends AssignmentTok
 		IInstanceDescription obj = object.createClone();
 		if(!obj.isConsumable("elements")) return null;
 		value = obj.consume("elements");
-		AbstractToken t = new InheritedParserRule_1_Group(predecessor);
+		if(!predecessor.getObject().isInstanceOf("mm::AType")) return null;
+		AbstractToken t = new InheritedParserRule_Group(predecessor);
 		predecessor = t.createFirstSolution(getDescr((EObject)value));
 		if(predecessor == null) return null;
 		object = (InstanceDescription)obj;
@@ -227,7 +228,7 @@ protected class ConcreteParserRule_0_1_Assignment_elements extends AssignmentTok
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("ConcreteParserRule_0_1_Assignment_elementsCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("ConcreteParserRule_1_Assignment_elementsCallback(\"xtext::RuleCall\", " + value + ")");
 		// Nothing to do for ParserRule Call InheritedParserRule
 	}
 }
@@ -237,26 +238,26 @@ protected class ConcreteParserRule_0_1_Assignment_elements extends AssignmentTok
 /************ begin Rule InheritedParserRule ****************/
 
 
-protected class InheritedParserRule_1_Group extends GroupToken {
+protected class InheritedParserRule_Group extends GroupToken {
 	
-	public InheritedParserRule_1_Group(AbstractToken predecessor) {
+	public InheritedParserRule_Group(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private InheritedParserRule_1_Group(AbstractToken predecessor, boolean many, boolean required) {
+	private InheritedParserRule_Group(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new InheritedParserRule_1_Group(predecessor, true, false);
+		return new InheritedParserRule_Group(predecessor, true, false);
 	}
 
 		
 	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new InheritedParserRule_1_1_Assignment_name(predecessor);
+		AbstractToken t1 = new InheritedParserRule_1_Assignment_name(predecessor);
 		predecessor = t1.createFirstSolution(object);
 		if(predecessor == null) return null;
-		AbstractToken t0 = new InheritedParserRule_1_0_Keyword_element(predecessor);
+		AbstractToken t0 = new InheritedParserRule_0_Keyword_element(predecessor);
 		predecessor = t0.createFirstSolution(t1.getObject());
 		if(predecessor == null) return null;
 		object = t0.getObject();
@@ -268,11 +269,11 @@ protected class InheritedParserRule_1_Group extends GroupToken {
 }
 
 
-protected class InheritedParserRule_1_0_Keyword_element extends KeywordToken  {
+protected class InheritedParserRule_0_Keyword_element extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0");
 	
-	public InheritedParserRule_1_0_Keyword_element(AbstractToken predecessor) {
+	public InheritedParserRule_0_Keyword_element(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 		
@@ -289,21 +290,21 @@ protected class InheritedParserRule_1_0_Keyword_element extends KeywordToken  {
 	}
 }
 
-protected class InheritedParserRule_1_1_Assignment_name extends AssignmentToken  {
+protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public InheritedParserRule_1_1_Assignment_name(AbstractToken predecessor) {
+	public InheritedParserRule_1_Assignment_name(AbstractToken predecessor) {
 		super(predecessor, !IS_MANY, IS_REQUIRED);
 	}
 	
-	private InheritedParserRule_1_1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
+	private InheritedParserRule_1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
 		super(predecessor, many, required);
 	}
 	
 	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new InheritedParserRule_1_1_Assignment_name(predecessor, true, false);
+		return new InheritedParserRule_1_Assignment_name(predecessor, true, false);
 	}
 
 	
@@ -316,7 +317,7 @@ protected class InheritedParserRule_1_1_Assignment_name extends AssignmentToken 
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("InheritedParserRule_1_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("InheritedParserRule_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
 	}
 }
