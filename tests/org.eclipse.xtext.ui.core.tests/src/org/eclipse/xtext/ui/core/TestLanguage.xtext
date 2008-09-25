@@ -1,0 +1,9 @@
+language org.eclipse.xtext.ui.core.TestLanguage
+
+generate foo "http://foo"
+
+File :
+	(stuff+=Stuff)*;
+	
+Stuff :
+	"stuff" name=ID;
