@@ -8,9 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.model;
 
-import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.ui.IURIEditorInput;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 
@@ -22,13 +21,15 @@ public class XtextDocumentProvider extends FileDocumentProvider implements IDocu
 
 	@Override
 	protected IDocument createEmptyDocument() {
-		return new XtextDocument(new Document());
+		return new XtextDocument();
 	}
 	
 	@Override
 	public IDocument getDocument(Object element) {
 		XtextDocument document = (XtextDocument) super.getDocument(element);
-		document.setURI((IURIEditorInput) element);
+		if (!(element instanceof IFileEditorInput))
+			throw new IllegalArgumentException("Can only handle instances of "+IFileEditorInput.class.getSimpleName()+" as input.");
+		document.setInput((IFileEditorInput) element);
 		return document;
 	}
 
