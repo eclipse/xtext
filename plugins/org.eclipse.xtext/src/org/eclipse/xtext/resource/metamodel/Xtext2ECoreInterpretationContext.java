@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -51,9 +53,10 @@ public class Xtext2ECoreInterpretationContext {
 	}
 
 	public Xtext2ECoreInterpretationContext(EClassifierInfo newType, EClassifierInfos classifierInfos,
-			boolean isRuleCallAllowed2) {
+			boolean isRuleCallAllowed) {
 		this(classifierInfos);
 		this.currentTypes.add(newType);
+		this.isRuleCallAllowed = isRuleCallAllowed;
 	}
 
 	public void addFeature(Assignment assignment) throws TransformationException {
@@ -121,7 +124,8 @@ public class Xtext2ECoreInterpretationContext {
 			throws TransformationException {
 		EClassifierInfo featureTypeInfo = eClassifierInfos.getInfo(typeName);
 		if (featureTypeInfo == null) {
-			throw new TransformationException("Cannot resolve type " + typeName, parserElement);
+			throw new TransformationException(ErrorCode.NoSuchTypeAvailable, "Cannot resolve type " + typeName,
+					parserElement);
 		}
 		return featureTypeInfo;
 	}
@@ -132,13 +136,13 @@ public class Xtext2ECoreInterpretationContext {
 		return result;
 	}
 
-	public Xtext2ECoreInterpretationContext spawnContextWith(EClassifierInfo newType) {
+	public Xtext2ECoreInterpretationContext spawnContextWith(EClassifierInfo newType, EObject parserElement)
+			throws TransformationException {
 		if (!isRuleCallAllowed)
-			throw new IllegalStateException("Cannot change type twice within a rule");
+			throw new TransformationException(ErrorCode.MoreThanOneTypeChangeInOneRule,
+					"Cannot change type twice within a rule", parserElement);
 
-		Xtext2ECoreInterpretationContext result = new Xtext2ECoreInterpretationContext(newType, eClassifierInfos,
-				isRuleCallAllowed);
-		return result;
+		return new Xtext2ECoreInterpretationContext(newType, eClassifierInfos, false);
 	}
 
 	public Xtext2ECoreInterpretationContext mergeSpawnedContexts(List<Xtext2ECoreInterpretationContext> contexts) {

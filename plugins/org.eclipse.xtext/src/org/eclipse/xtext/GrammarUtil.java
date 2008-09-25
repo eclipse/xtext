@@ -9,8 +9,11 @@
 
 package org.eclipse.xtext;
 
-import static org.eclipse.emf.ecore.util.EcoreUtil.*;
-import static org.eclipse.xtext.EcoreUtil2.*;
+import static org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer;
+import static org.eclipse.xtext.EcoreUtil2.eAllContentsAsList;
+import static org.eclipse.xtext.EcoreUtil2.getAllContentsOfType;
+import static org.eclipse.xtext.EcoreUtil2.getContainerOfType;
+import static org.eclipse.xtext.EcoreUtil2.typeSelect;
 
 import java.util.ArrayList;
 import java.util.HashSet;

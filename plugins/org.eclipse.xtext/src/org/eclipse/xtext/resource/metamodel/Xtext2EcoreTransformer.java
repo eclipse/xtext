@@ -34,6 +34,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -46,6 +47,21 @@ public class Xtext2EcoreTransformer {
 	private Map<String, EPackage> generatedEPackages;
 	private Grammar superGrammar;
 	private EClassifierInfos eClassifierInfos;
+	private ErrorAcceptor errorAcceptor = new NullErrorAcceptor();
+
+	public ErrorAcceptor getErrorAcceptor() {
+		return errorAcceptor;
+	}
+
+	public void setErrorAcceptor(ErrorAcceptor errorAcceptor) {
+		this.errorAcceptor = errorAcceptor;
+	}
+
+	public class NullErrorAcceptor implements ErrorAcceptor {
+		public void acceptError(ErrorCode errorCode, String arg0, EObject arg1) {
+			// do nothing
+		}
+	}
 
 	public Xtext2EcoreTransformer() {
 	}
@@ -79,7 +95,7 @@ public class Xtext2EcoreTransformer {
 				}
 			}
 			catch (TransformationException e) {
-				reportError(e.getMessage(), e.getErroneousElement());
+				reportError(e.getErrorCode(), e.getMessage(), e.getErroneousElement());
 			}
 		}
 
@@ -93,7 +109,7 @@ public class Xtext2EcoreTransformer {
 				}
 			}
 			catch (TransformationException e) {
-				reportError(e.getMessage(), e.getErroneousElement());
+				reportError(e.getErrorCode(), e.getMessage(), e.getErroneousElement());
 			}
 		}
 
@@ -135,12 +151,7 @@ public class Xtext2EcoreTransformer {
 		else if (element instanceof RuleCall && !GrammarUtil.isOptionalCardinality(element)) {
 			RuleCall ruleCall = (RuleCall) element;
 			AbstractRule calledRule = GrammarUtil.findRuleForName(grammar, ruleCall.getName());
-			try {
-				return context.spawnContextWith(findOrCreateEClass(calledRule));
-			}
-			catch (IllegalStateException e) {
-				throw new TransformationException(e.getMessage(), ruleCall);
-			}
+			return context.spawnContextWith(findOrCreateEClass(calledRule), ruleCall);
 		}
 
 		return context;
@@ -155,12 +166,15 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private void deriveFeatures(ParserRule rule) throws TransformationException {
-		EClassifierInfo classInfo = findOrCreateEClass(rule);
+		EClassifierInfo classInfo = findEClass(rule);
+		if (classInfo == null)
+			throw new TransformationException(ErrorCode.NoSuchTypeAvailable, "No such type available"
+					+ GrammarUtil.getReturnTypeName(rule), rule);
 		Xtext2ECoreInterpretationContext context = new Xtext2ECoreInterpretationContext(eClassifierInfos, classInfo);
 		deriveFeatures(context, rule.getAlternatives());
 	}
 
-	// TODO : Try to get rid of
+	// TODO : Try to get rid of typref and use qualified name (String) instead
 	private TypeRef getOrFakeReturnType(AbstractRule rule) {
 		TypeRef result = rule.getType();
 		if (result == null) {
@@ -174,10 +188,6 @@ public class Xtext2EcoreTransformer {
 
 	}
 
-	/**
-	 * @param alternatives
-	 * @throws TransformationException
-	 */
 	private void deriveTypesAndHierarchy(EClassifierInfo ruleReturnType, AbstractElement element)
 			throws TransformationException {
 		if (element instanceof RuleCall) {
@@ -219,14 +229,23 @@ public class Xtext2EcoreTransformer {
 			if (metamodelDeclaration instanceof ReferencedMetamodel) {
 				// load imported metamodel
 				ReferencedMetamodel referencedMetamodel = (ReferencedMetamodel) metamodelDeclaration;
-				EPackage referencedEPackage = GrammarUtil.loadEPackage(referencedMetamodel);
+				EPackage referencedEPackage;
+				try {
+					referencedEPackage = GrammarUtil.loadEPackage(referencedMetamodel);
+				}
+				catch (RuntimeException e) {
+					referencedEPackage = null;
+				}
+				
 				if (referencedEPackage == null) {
-					reportError("Cannot not load metamodel " + referencedMetamodel.getUri(), referencedMetamodel);
+					reportError(ErrorCode.CannotLoadMetamodel, "Cannot not load metamodel "
+							+ referencedMetamodel.getUri(), referencedMetamodel);
 				}
 				else {
 					String alias = referencedMetamodel.getAlias();
 					if (Strings.isEmpty(alias)) {
-						reportError("Referenced metamodels must have an alias", referencedMetamodel);
+						reportError(ErrorCode.MissingAliasForReferencedMetamodel,
+								"Referenced metamodels must have an alias", referencedMetamodel);
 					}
 					else {
 						collectClassInfosOf(referencedEPackage, alias);
@@ -261,22 +280,18 @@ public class Xtext2EcoreTransformer {
 		}
 	}
 
-	/**
-	 * @param string
-	 * @param generatedMetamodel
-	 */
-	private void reportError(String message, EObject erroneousElement) {
-		// TODO Auto-generated method stub
-
-	}
-
-	private void raiseError(String message, EObject erroneousElement) throws TransformationException {
-		throw new TransformationException(message, erroneousElement);
+	private void reportError(ErrorCode errorCode, String message, EObject erroneousElement) {
+		errorAcceptor.acceptError(errorCode, message, erroneousElement);
 	}
 
 	private EClassifierInfo findOrCreateEClass(AbstractRule rule) throws TransformationException {
 		TypeRef typeRef = getOrFakeReturnType(rule);
 		return findOrCreateEClass(typeRef);
+	}
+
+	private EClassifierInfo findEClass(AbstractRule rule) {
+		TypeRef typeRef = getOrFakeReturnType(rule);
+		return eClassifierInfos.getInfo(typeRef);
 	}
 
 	private EClassifierInfo findOrCreateEClass(TypeRef typeRef) throws TransformationException {
@@ -297,7 +312,8 @@ public class Xtext2EcoreTransformer {
 		String typeRefName = typeRef.getName();
 		EPackage generatedEPackage = generatedEPackages.get(typeRefAlias);
 		if (generatedEPackage == null) {
-			raiseError("Cannot create type in alias " + typeRefAlias, typeRef);
+			throw new TransformationException(ErrorCode.CannotCreateTypeInSealedMetamodel,
+					"Cannot create type in alias " + typeRefAlias, typeRef);
 		}
 		EClass generatedEClass = EcoreFactory.eINSTANCE.createEClass();
 		generatedEClass.setName(typeRefName);
