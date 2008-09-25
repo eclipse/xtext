@@ -83,6 +83,7 @@ public class InstanceDescription implements IInstanceDescription {
 	}
 
 
+	
 	@Override
 	public String toString() {
 		List<String> l = new ArrayList<String>();
@@ -90,7 +91,8 @@ public class InstanceDescription implements IInstanceDescription {
 			EStructuralFeature f = described.eClass().getEStructuralFeature(
 					i.getKey());
 			Object v = described.eGet(f);
-			int count = (v instanceof Collection) ? ((Collection<?>) v).size() : 1;
+			@SuppressWarnings("unchecked")
+			int count = (v instanceof Collection) ? ((Collection) v).size() : 1;
 			l.add(i.getKey() + ":" + i.getValue() + "/" + count);
 		}
 		return hashCode() + "/" + described.eClass().getName() + ":"
