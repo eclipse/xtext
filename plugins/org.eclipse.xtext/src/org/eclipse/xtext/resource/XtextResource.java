@@ -152,5 +152,11 @@ public class XtextResource extends ResourceImpl {
 			outputStream.write(cb.toString().getBytes());
 		}
 	}
+	
+	public String serialize(EObject o) {
+		WhitespacePreservingCallback cb = new WhitespacePreservingCallback(valueConverterService);
+		parseTreeConstructor.update(o, cb);
+		return o.toString();
+	}
 
 }
