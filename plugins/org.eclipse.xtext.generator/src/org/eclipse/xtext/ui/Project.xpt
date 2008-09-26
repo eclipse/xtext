@@ -65,21 +65,20 @@
 «FILE ".classpath" UI -»
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-    <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
-    <classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-    «REM»<classpathentry kind="src" path="src-gen"/>«ENDREM»
-    <classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="src-gen"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
 «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE buildpropertiesFile FOR GenModel»
 «FILE "build.properties" UI-»
-«REM»source.. = src-gen/«ENDREM»
+source.. = src-gen/
 output.. = bin/
 bin.includes = META-INF/,\
                plugin.xml,\
                .
-
 «ENDFILE-»
 «ENDDEFINE»
