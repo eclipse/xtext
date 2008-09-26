@@ -18,7 +18,6 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyleConstants;
-import org.eclipse.xtext.ui.core.util.GrammarConstants;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
