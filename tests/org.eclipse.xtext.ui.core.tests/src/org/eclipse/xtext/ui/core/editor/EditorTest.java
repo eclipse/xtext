@@ -103,22 +103,21 @@ public class EditorTest extends TestCase {
 				return null;
 			}
 		});
-		//TODO somehow the tests are executed in the Display thread...
-//		document.replace(23, 3, "honolulu");
-//		System.out.println("Waiting for reconciler...");
-//		sleep(1000);
-//		document.readOnly(new UnitOfWork<Object>() {
-//			
-//			public Object exec(XtextResource resource) throws Exception {
-//				assertNotNull(resource);
-//				EList<EObject> contents = resource.getContents();
-//				EObject object = contents.get(0);
-//				assertEquals(2, object.eContents().size());
-//				EObject object2 = object.eContents().get(0);
-//				assertEquals("honolulu",object2.eGet(object2.eClass().getEStructuralFeature("name")));
-//				return null;
-//			}
-//		});
+		document.replace(23, 3, "honolulu");
+		System.out.println("Waiting for reconciler...");
+		sleep(3000);
+		document.readOnly(new UnitOfWork<Object>() {
+			
+			public Object exec(XtextResource resource) throws Exception {
+				assertNotNull(resource);
+				EList<EObject> contents = resource.getContents();
+				EObject object = contents.get(0);
+				assertEquals(2, object.eContents().size());
+				EObject object2 = object.eContents().get(0);
+				assertEquals("honolulu",object2.eGet(object2.eClass().getEStructuralFeature("name")));
+				return null;
+			}
+		});
 		openEditor.doSave(null);
 		openEditor.close(true);
 	}
