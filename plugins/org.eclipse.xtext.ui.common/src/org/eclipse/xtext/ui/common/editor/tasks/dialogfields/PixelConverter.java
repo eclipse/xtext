@@ -8,7 +8,7 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.util;
+package org.eclipse.xtext.ui.common.editor.tasks.dialogfields;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.graphics.Font;
