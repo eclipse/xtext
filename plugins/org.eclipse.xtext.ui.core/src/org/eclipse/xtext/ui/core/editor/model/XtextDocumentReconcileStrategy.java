@@ -35,7 +35,6 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 		try {
 			final IXtextDocument document = XtextDocumentUtil.get(sourceViewer);
 			if (document != null) {
-				System.out.println("region " + region);
 				document.modify(new UnitOfWork<Object>() {
 					public Object exec(XtextResource resource) throws Exception {
 						// TODO replace with partial parsing which doesn't work reliable yet
