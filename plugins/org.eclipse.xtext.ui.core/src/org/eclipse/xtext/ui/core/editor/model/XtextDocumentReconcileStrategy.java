@@ -21,24 +21,29 @@ import org.eclipse.xtext.resource.XtextResource;
  * @author Sven Efftinge
  */
 public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
-	
-	private static final Logger log = Logger.getLogger(XtextDocumentReconcileStrategy.class);
 
-	private final IXtextDocument document;
+	private static final Logger log = Logger.getLogger(XtextDocumentReconcileStrategy.class);
+	private ISourceViewer sourceViewer;
 
 	public XtextDocumentReconcileStrategy(ISourceViewer sourceViewer) {
-		this.document = (IXtextDocument) sourceViewer.getDocument();
+		if (sourceViewer == null)
+			throw new NullPointerException("sourceViewer was null");
+		this.sourceViewer = sourceViewer;
 	}
 
 	public void reconcile(final IRegion region) {
 		try {
-			document.modify(new UnitOfWork<Object>() {
-				public Object exec(XtextResource resource) throws Exception {
-//TODO partial parsing doesn't work reliable yet
-//					resource.update(region.getOffset(), document.get(region.getOffset(), region.getLength()));
-					resource.update(0, document.get());
-					return null;
-				}});
+			final IXtextDocument document = XtextDocumentUtil.get(sourceViewer);
+			if (document != null) {
+				System.out.println("region " + region);
+				document.modify(new UnitOfWork<Object>() {
+					public Object exec(XtextResource resource) throws Exception {
+						// TODO replace with partial parsing which doesn't work reliable yet
+						resource.update(0, document.get());
+						return null;
+					}
+				});
+			}
 		} catch (Throwable t) {
 			log.error("Reconciling failed. " + t);
 		}

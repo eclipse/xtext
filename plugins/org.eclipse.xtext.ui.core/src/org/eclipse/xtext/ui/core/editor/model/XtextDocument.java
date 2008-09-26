@@ -29,7 +29,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	private XtextResourceSet resourceSet = null;
 	private XtextResource resource = null;
 	private IEditorInput editorInput;
-	
+
 	public void setInput(IEditorInput editorInput) {
 		IFile file = ResourceUtil.getFile(editorInput);
 		Assert.isTrue(file != null && this.editorInput == null || this.editorInput.equals(editorInput));
@@ -58,20 +58,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 				throw new WrappedException(e);
 			}
 		}
-		
-//		addDocumentListener(new IDocumentListener(){
-//			public void documentAboutToBeChanged(org.eclipse.jface.text.DocumentEvent event) {
-//				
-//			}
-//
-//			public void documentChanged(final org.eclipse.jface.text.DocumentEvent event) {
-//				XtextDocument.this.modify(new UnitOfWork<Object>(){
-//					public Object exec(XtextResource resource) throws Exception {
-//						resource.update(0, event.getDocument().get());
-//						return null;
-//					}});
-//			}
-//		});
+
 	}
 
 	private IJavaProject getIJavaProject(IFile file) {

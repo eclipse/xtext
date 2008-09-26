@@ -6,9 +6,9 @@ Bundle-Version: 0.7.0.qualifier
 Export-Package: org.eclipse.xtext.reference.ui.services
 Bundle-Activator: org.eclipse.xtext.reference.ui.Activator
 Require-Bundle: org.eclipse.xtext.reference;visibility:=reexport,
- org.eclipse.xtext.ui;visibility:=reexport,
- org.eclipse.xtext.log4j;bundle-version="1.2.15",
- org.eclipse.xtext.common.ui
+ org.eclipse.xtext.ui.core,
+ org.eclipse.xtext.ui.common,
+ org.eclipse.xtext.log4j;bundle-version="1.2.15"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
