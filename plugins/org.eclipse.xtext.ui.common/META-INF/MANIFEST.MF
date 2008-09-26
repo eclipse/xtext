@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ui Plug-in
+Bundle-SymbolicName: org.eclipse.xtext.ui.common;singleton:=true
+Bundle-Version: 0.7.0.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.xtext.ui.core,
+ org.eclipse.xtext.log4j;bundle-version="1.2.15"
+Export-Package: org.eclipse.xtext.ui.common.editor.codecompletion,
+ org.eclipse.xtext.ui.common.editor.folding,
+ org.eclipse.xtext.ui.common.editor.formatting,
+ org.eclipse.xtext.ui.common.editor.hover,
+ org.eclipse.xtext.ui.common.editor.hyperlink,
+ org.eclipse.xtext.ui.common.editor.outline,
+ org.eclipse.xtext.ui.common.editor.syntaxcoloring,
+ org.eclipse.xtext.ui.common.editor.tasks
+Import-Package: org.eclipse.ui.texteditor.templates
