@@ -9,7 +9,8 @@ import org.eclipse.xtext.ui.core.editor.XtextSourceViewerConfiguration;
 public class XtextBuiltinUiConfiguration extends AbstractServiceRegistrationFactory {
 
 	public Set<IServiceRegistration> registrations() {
-		return scope(IXtextBuiltin.SCOPE).with(XtextSourceViewerConfiguration.class).registrations();
+		return scope(IXtextBuiltin.SCOPE)
+			.with(XtextSourceViewerConfiguration.class).registrations();
 	}
 
 }

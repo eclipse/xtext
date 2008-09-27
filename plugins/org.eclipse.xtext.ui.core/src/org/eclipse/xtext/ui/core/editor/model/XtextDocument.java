@@ -69,8 +69,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	private ReentrantReadWriteLock rwLock = new ReentrantReadWriteLock();
-	Lock readLock = rwLock.readLock();
-	Lock writeLock = rwLock.writeLock();
+	private Lock readLock = rwLock.readLock();
+	private Lock writeLock = rwLock.writeLock();
 
 	public <T> T readOnly(UnitOfWork<T> work) {
 		readLock.lock();

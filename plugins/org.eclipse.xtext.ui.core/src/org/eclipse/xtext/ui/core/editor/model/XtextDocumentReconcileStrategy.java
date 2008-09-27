@@ -27,7 +27,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 
 	public XtextDocumentReconcileStrategy(ISourceViewer sourceViewer) {
 		if (sourceViewer == null)
-			throw new NullPointerException("sourceViewer was null");
+			throw new IllegalArgumentException("sourceViewer was null");
 		this.sourceViewer = sourceViewer;
 	}
 

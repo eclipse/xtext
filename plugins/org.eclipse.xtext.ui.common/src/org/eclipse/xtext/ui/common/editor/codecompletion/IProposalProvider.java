@@ -2,13 +2,25 @@ package org.eclipse.xtext.ui.common.editor.codecompletion;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
+import org.eclipse.xtext.RuleCall;
 
+
+/**
+ * 
+ * This is just a marker interface.
+ * Implementers declare methods with the pattern:
+ * 
+ * public List<ICompletionProposal> completeTypename_featureName(AbstractElement ele, EObject model, String prefix)
+ * 
+ */
 public interface IProposalProvider {
 	
-	List<ICompletionProposal> getProposalsForAssignment(Assignment ass, String prefix, IXtextDocument doc);
-	List<ICompletionProposal> getProposalsForKeyword(Keyword kw, String prefix, IXtextDocument doc);
+	public List<ICompletionProposal> sortAndFilter(List<ICompletionProposal> proposals);
+	
+	public List<ICompletionProposal> completeKeyword(Keyword ele, EObject model, String prefix);
+
+	public List<ICompletionProposal> completeRuleCall(RuleCall ele, EObject model, String prefix);
 }
