@@ -12,8 +12,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -49,7 +53,8 @@ public abstract class EClassifierInfo {
 
 	public abstract boolean addSupertype(EClassifierInfo superTypeInfo);
 
-	public abstract boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue);
+	public abstract boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue,
+			boolean isContainment, EObject parserElement) throws TransformationException;
 
 	static class EClassInfo extends EClassifierInfo {
 
@@ -65,19 +70,40 @@ public abstract class EClassifierInfo {
 			if (!(superTypeInfo instanceof EClassInfo)) {
 				throw new IllegalArgumentException("superTypeInfo must represent EClass");
 			}
-			EClass eClass = (EClass) getEClassifier();
+			EClass eClass = getEClass();
 			EClass superEClass = (EClass) superTypeInfo.getEClassifier();
-			return eClass.getESuperTypes().add(superEClass);
+			if(eClass.equals(superEClass))
+				// cannot add class as it's own superclass
+				// this usually happens due to a rule call
+				return false;
+			else
+				return eClass.getESuperTypes().add(superEClass);
+		}
+
+		private EStructuralFeature findFeatureInClassIgnoringSuperclasses(EClass eClass, String featureName) {
+			for (EStructuralFeature feature : eClass.getEStructuralFeatures())
+				if (feature.getName().equals(featureName))
+					return feature;
+			return null;
 		}
 
 		@Override
-		public boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue) {
+		public boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue,
+				boolean isContainment, EObject parserElement) throws TransformationException {
 
 			EClassifier featureClassifier = featureType.getEClassifier();
+			return addFeature(featureName, featureClassifier, isMultivalue, isContainment, parserElement);
+		}
+
+		private boolean addFeature(String featureName, EClassifier featureClassifier, boolean isMultivalue,
+				boolean isContainment, EObject parserElement) throws TransformationException {
 			EStructuralFeature newFeature;
 
-			if (featureClassifier instanceof EClass)
-				newFeature = EcoreFactory.eINSTANCE.createEReference();
+			if (featureClassifier instanceof EClass) {
+				EReference reference = EcoreFactory.eINSTANCE.createEReference();
+				reference.setContainment(isContainment);
+				newFeature = reference;
+			}
 			else
 				newFeature = EcoreFactory.eINSTANCE.createEAttribute();
 			newFeature.setName(featureName);
@@ -85,8 +111,40 @@ public abstract class EClassifierInfo {
 			newFeature.setLowerBound(0);
 			newFeature.setUpperBound(isMultivalue ? -1 : 1);
 
-			EList<EStructuralFeature> features = ((EClass) getEClassifier()).getEStructuralFeatures();
-			return features.add(newFeature);
+			EList<EStructuralFeature> features = getEClass().getEStructuralFeatures();
+			EStructuralFeature existentFeature = findFeatureInClassIgnoringSuperclasses(getEClass(), featureName);
+			if (existentFeature == null) {
+				// feature does not exist, yet
+				return features.add(newFeature);
+			}
+			else {
+				if (newFeature.getLowerBound() != existentFeature.getLowerBound()
+						|| newFeature.getUpperBound() != existentFeature.getUpperBound())
+					throw new TransformationException(ErrorCode.FeatureWithDifferentConfigurationAlreadyExists,
+							"feature with different cardinality already exists " + newFeature, parserElement);
+				else {
+				    // TODO Extract into something more genreral that can be used for uplifting
+					// same name but different type => feature should have
+					// compatible type
+					// remove and add again to overcome problem with reference
+					// vs. attribute
+					EClassifier compatibleType = EcoreUtil2.getCompatibleType(existentFeature.getEType(), newFeature
+							.getEType());
+					if (compatibleType == null)
+						throw new TransformationException(ErrorCode.NoCompatibleFeatureTypeAvailable,
+								"Cannot find compatible type for features", parserElement);
+					int oldIndex = features.indexOf(existentFeature);
+					features.remove(existentFeature);
+					addFeature(featureName, compatibleType, isMultivalue, isContainment, parserElement);
+					existentFeature = findFeatureInClassIgnoringSuperclasses(getEClass(), featureName);
+					features.move(oldIndex, existentFeature);
+					return true;
+				}
+			}
+		}
+
+		private EClass getEClass() {
+			return ((EClass) getEClassifier());
 		}
 	}
 
@@ -102,7 +160,8 @@ public abstract class EClassifierInfo {
 		}
 
 		@Override
-		public boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue) {
+		public boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue,
+				boolean isContainment, EObject parserElement) throws TransformationException {
 			throw new UnsupportedOperationException("Cannot add feature to simple datatype");
 		}
 

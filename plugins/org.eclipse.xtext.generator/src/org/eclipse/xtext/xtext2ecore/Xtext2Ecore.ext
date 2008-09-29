@@ -16,7 +16,8 @@ extension org::eclipse::xtext::XtextUtil;
 extension org::eclipse::xtext::xtext2ecore::FeatureNormalization;
 
 List[EPackage] getGeneratedEPackages(Grammar g) :
-	getAllEPackages(g) -> g.getAllMetaModels().select(e|e.isGenerate()).getEPackage();
+//	getAllEPackages(g) -> g.getAllMetaModels().select(e|e.isGenerate()).getEPackage();
+	JAVA org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer.doTransform(org.eclipse.xtext.Grammar);
 
 List[EPackage] getAllEPackages(Grammar g) :
 	let x = g.getAllMetaModels().collect(mm|mm.getEPackage()) :
