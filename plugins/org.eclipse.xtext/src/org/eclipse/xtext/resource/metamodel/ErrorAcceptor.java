@@ -16,12 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ErrorAcceptor {
 	public enum ErrorCode {
-		NoSuchTypeAvailable,
-		MoreThanOneTypeChangeInOneRule,
-		CannotLoadMetamodel,
-		MissingAliasForReferencedMetamodel,
-		CannotCreateTypeInSealedMetamodel
+		NoSuchTypeAvailable, MoreThanOneTypeChangeInOneRule, CannotLoadMetamodel, CannotCreateTypeInSealedMetamodel, FeatureWithDifferentConfigurationAlreadyExists, NoCompatibleFeatureTypeAvailable, AliasForMetamodelAlreadyExists
 	}
-	
+
 	public void acceptError(ErrorCode errorCode, String message, EObject element);
 }

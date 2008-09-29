@@ -16,6 +16,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
@@ -62,6 +63,7 @@ public class Xtext2ECoreInterpretationContext {
 	public void addFeature(Assignment assignment) throws TransformationException {
 		String featureName = assignment.getFeature();
 		boolean isMultivalue = GrammarUtil.isMultipleAssignment(assignment);
+		boolean isContainment = true;
 		EClassifierInfo featureTypeInfo;
 
 		if (GrammarUtil.isBooleanAssignment(assignment)) {
@@ -70,11 +72,17 @@ public class Xtext2ECoreInterpretationContext {
 		}
 		else {
 			String featureTypeName = getTerminalTypeName(assignment.getTerminal());
+			isContainment = !(assignment.getTerminal() instanceof CrossReference);
 			featureTypeInfo = getEClassifierInfoOrThrowException(featureTypeName, assignment);
 		}
 
+		addFeature(featureName, featureTypeInfo, isMultivalue, isContainment, assignment);
+	}
+
+	public void addFeature(String featureName, EClassifierInfo featureTypeInfo, boolean isMultivalue,
+			boolean isContainment, EObject parserElement) throws TransformationException {
 		for (EClassifierInfo type : currentTypes)
-			type.addFeature(featureName, featureTypeInfo, isMultivalue);
+			type.addFeature(featureName, featureTypeInfo, isMultivalue, isContainment, parserElement);
 	}
 
 	private String getTerminalTypeName(AbstractElement terminal) {
@@ -87,6 +95,8 @@ public class Xtext2ECoreInterpretationContext {
 			CrossReference crossReference = (CrossReference) terminal;
 			return GrammarUtil.getQualifiedName(crossReference.getType());
 		}
+		else if (terminal instanceof Keyword)
+			return "ecore::EString";
 		else {
 			// terminal is ParenthesizedElement
 			// must be either: alternative of lexer rules and keywords or
@@ -136,7 +146,7 @@ public class Xtext2ECoreInterpretationContext {
 		return result;
 	}
 
-	public Xtext2ECoreInterpretationContext spawnContextWith(EClassifierInfo newType, EObject parserElement)
+	public Xtext2ECoreInterpretationContext spawnContextWithCalledRule(EClassifierInfo newType, EObject parserElement)
 			throws TransformationException {
 		if (!isRuleCallAllowed)
 			throw new TransformationException(ErrorCode.MoreThanOneTypeChangeInOneRule,
@@ -154,6 +164,14 @@ public class Xtext2ECoreInterpretationContext {
 			result.isRuleCallAllowed &= context.isRuleCallAllowed;
 		}
 		return result;
+	}
+
+	public EClassifierInfo getCurrentCompatibleType() {
+		return eClassifierInfos.getCompatibleTypeOf(currentTypes);
+	}
+
+	public Xtext2ECoreInterpretationContext spawnContextWithReferencedType(EClassifierInfo referencedType, EObject parserElement) {
+		return new Xtext2ECoreInterpretationContext(referencedType, eClassifierInfos, false);
 	}
 
 }

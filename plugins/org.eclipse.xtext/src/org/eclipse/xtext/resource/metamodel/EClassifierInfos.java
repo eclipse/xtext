@@ -10,12 +10,14 @@ package org.eclipse.xtext.resource.metamodel;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 
@@ -47,48 +49,62 @@ public class EClassifierInfos {
 		return infoMap.get(qualifiedName);
 	}
 
+	private EClassifierInfo getInfo(EClassifier eClassifier) {
+		for(EClassifierInfo info: infoMap.values())
+			if(info.getEClassifier().equals(eClassifier))
+				return info;
+		return null;
+	}
+
 	public void addAll(EClassifierInfos classInfos) {
 		infoMap.putAll(classInfos.infoMap);
 	}
 
-	private String getCompatibleTypeNameOf(String typeA, String typeB) {
-		EClassifier classifierA = getInfo(typeA).getEClassifier();
-		EClassifier classifierB = getInfo(typeB).getEClassifier();
-		if (classifierA.equals(classifierB))
-			return typeA;
-		if (classifierA instanceof EDataType || classifierB instanceof EDataType)
-			throw new IllegalArgumentException(
-					"Simple Datatypes (lexer rules or keywords) do not have a common supertype (" + typeA + ", "
-							+ typeB + ")");
+	private EClassifierInfo getCompatibleType(EClassifierInfo infoA, EClassifierInfo infoB) {
+		if (infoA.equals(infoB))
+			return infoA;
 
-		// TODO EClass commonSupertype = EcoreUtil2.getCommonCompatibleType((EClass) classifierA, (EClass) classifierB);
-		EClass commonSupertype = classifierA.equals(classifierB) ? (EClass)classifierA : null;
-		if(commonSupertype != null)
-			return getQualifiedNameFor(commonSupertype);
-		else
-			return "ecore::EObject";
+		if (infoA.getEClassifier() instanceof EDataType || infoB.getEClassifier() instanceof EDataType)
+			throw new IllegalArgumentException(
+					"Simple Datatypes (lexer rules or keywords) do not have a common supertype (" + infoA + ", "
+							+ infoB + ")");
+
+		EClassifier compatibleType = EcoreUtil2.getCompatibleType((EClass)infoA.getEClassifier(), (EClass)infoB.getEClassifier());
+		return getInfo(compatibleType);
 	}
 
-	private String getQualifiedNameFor(EClass eClass) {
+	private String getQualifiedNameFor(EClassifierInfo classifierInfo) {
 		// lookup could be improved
 		for (String key : infoMap.keySet()) {
 			EClassifierInfo info = infoMap.get(key);
-			if (info.getEClassifier().equals(eClass))
+			if (info.equals(classifierInfo))
 				return key;
 		}
 		return null;
 	}
 
-	public String getCompatibleTypeNameOf(Collection<String> typeNames) {
-		Iterator<String> i = typeNames.iterator();
+	public EClassifierInfo getCompatibleTypeOf(Collection<EClassifierInfo> types) {
+		Iterator<EClassifierInfo> i = types.iterator();
 		if (!i.hasNext())
-			throw new IllegalArgumentException("Empty set of types cannot have a common super type.");
+			throw new IllegalArgumentException("Empty set of types cannot have a compatible type.");
 
-		String result = i.next();
+		EClassifierInfo result = i.next();
 		while (i.hasNext())
-			result = getCompatibleTypeNameOf(result, i.next());
+			result = getCompatibleType(result, i.next());
 
 		return result;
+	}
+
+	public String getCompatibleTypeNameOf(Collection<String> typeNames) {
+		Collection<EClassifierInfo> types = new HashSet<EClassifierInfo>();
+		for (String typeName : typeNames)
+			types.add(getInfo(typeName));
+
+		EClassifierInfo compatibleType = getCompatibleTypeOf(types);
+		if (compatibleType != null)
+			return getQualifiedNameFor(compatibleType);
+		else
+			return "ecore::EObject";
 	}
 
 }
