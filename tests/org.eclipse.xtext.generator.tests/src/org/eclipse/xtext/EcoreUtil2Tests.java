@@ -11,11 +11,14 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
 public class EcoreUtil2Tests extends TestCase {
+	static private final EClass EOBJECT = EcorePackage.Literals.EOBJECT; 
+	
 	private EClass createEClass(String name) {
 		EClass result = EcoreFactory.eINSTANCE.createEClass();
 		result.setName(name);
@@ -39,10 +42,10 @@ public class EcoreUtil2Tests extends TestCase {
 		f.getESuperTypes().add(e);
 
 		assertSame(a, EcoreUtil2.getCompatibleType(a, a));
-		assertSame(null, EcoreUtil2.getCompatibleType(d, f));
+		assertSame(EOBJECT, EcoreUtil2.getCompatibleType(d, f));
 		assertSame(c, EcoreUtil2.getCompatibleType(d, e));
 		assertSame(b, EcoreUtil2.getCompatibleType(b, f));
-		assertSame(null, EcoreUtil2.getCompatibleType(b, c));
+		assertSame(EOBJECT, EcoreUtil2.getCompatibleType(b, c));
 	}
 
 	public void testCommonCompatibleType02() {
