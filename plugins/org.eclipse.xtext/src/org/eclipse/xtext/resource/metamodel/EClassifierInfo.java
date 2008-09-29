@@ -94,6 +94,16 @@ public abstract class EClassifierInfo {
 			EClassifier featureClassifier = featureType.getEClassifier();
 			return addFeature(featureName, featureClassifier, isMultivalue, isContainment, parserElement);
 		}
+		
+		public boolean addFeature(EStructuralFeature prototype) {
+			// TODO implement
+			try {
+				return addFeature(prototype.getName(), prototype.getEType(), prototype.isMany(), false, null);
+			}
+			catch (TransformationException e) {
+				throw new IllegalArgumentException(e.getMessage());
+			}
+		}
 
 		private boolean addFeature(String featureName, EClassifier featureClassifier, boolean isMultivalue,
 				boolean isContainment, EObject parserElement) throws TransformationException {
@@ -143,7 +153,7 @@ public abstract class EClassifierInfo {
 			}
 		}
 
-		private EClass getEClass() {
+		public EClass getEClass() {
 			return ((EClass) getEClassifier());
 		}
 	}
