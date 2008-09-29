@@ -43,22 +43,27 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		errorAcceptorMock = createMock(ErrorAcceptor.class);
 		with(XtextStandaloneSetup.class);
 	}
-	
+
 	private EPackage getEPackageFromGrammar(String xtextGrammar) throws Exception {
-		Grammar grammar = (Grammar) getModel(xtextGrammar);
-		replay(errorAcceptorMock);
-		xtext2EcoreTransformer.setErrorAcceptor(errorAcceptorMock);
-		List<EPackage> metamodels = xtext2EcoreTransformer.transform(grammar);
-		verify(errorAcceptorMock);
-		
-		assertNotNull(metamodels);
+		List<EPackage> metamodels = getEPackagesFromGrammar(xtextGrammar);
 		assertEquals(1, metamodels.size());
 
 		EPackage result = metamodels.get(0);
 		assertNotNull(result);
 		return result;
 	}
-	
+
+	private List<EPackage> getEPackagesFromGrammar(String xtextGrammar) throws Exception {
+		Grammar grammar = (Grammar) getModel(xtextGrammar);
+		replay(errorAcceptorMock);
+		xtext2EcoreTransformer.setErrorAcceptor(errorAcceptorMock);
+		List<EPackage> metamodels = xtext2EcoreTransformer.transform(grammar);
+		verify(errorAcceptorMock);
+
+		assertNotNull(metamodels);
+		return metamodels;
+	}
+
 	private EAttribute assertAttributeConfiguration(EClass eClass, int attributeIndex, String featureName,
 			String featureTypeName) {
 		EAttribute feature = eClass.getEAttributes().get(attributeIndex);
@@ -77,18 +82,18 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 
 		return feature;
 	}
-	
+
 	private EReference assertReferenceConfiguration(EClass eClass, int referenceIndex, String featureName,
-			String featureTypeName, int lowerBound, int upperBound) {
+			String featureTypeName, boolean isContainment, int lowerBound, int upperBound) {
 		EReference reference = eClass.getEReferences().get(referenceIndex);
 		assertEquals(featureName, reference.getName());
 		assertNotNull(reference.getEType());
 		assertEquals(featureTypeName, reference.getEType().getName());
+		assertEquals(isContainment, reference.isContainment());
 		assertEquals(lowerBound, reference.getLowerBound());
 		assertEquals(upperBound, reference.getUpperBound());
 		return reference;
 	}
-
 
 	public void testTypesOfImplicitSuperGrammar() throws Exception {
 		final String xtextGrammar = "language test generate test 'http://test' MyRule: myFeature=INT;";
@@ -307,6 +312,72 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertAttributeConfiguration(ruleD, 3, "featureD2", "EString");
 	}
 
+	public void testFeaturesAndInheritanceOfActions01() throws Exception {
+		final String grammar = "language test generate test 'http://test' RuleA: ({Add.a=current} '+'|{Sub.a=current} '-') featureAS=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(3, ePackage.getEClassifiers().size());
+		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
+		assertNotNull(ruleA);
+		EClass add = (EClass) ePackage.getEClassifier("Add");
+		assertNotNull(add);
+		EClass sub = (EClass) ePackage.getEClassifier("Sub");
+		assertNotNull(sub);
+
+		// test inheritance
+		assertTrue(ruleA.getESuperTypes().isEmpty());
+		assertEquals(1, add.getESuperTypes().size());
+		assertEquals(ruleA, add.getESuperTypes().get(0));
+		assertEquals(1, sub.getESuperTypes().size());
+		assertEquals(ruleA, sub.getESuperTypes().get(0));
+
+		// test features
+		assertEquals(0, ruleA.getEAttributes().size());
+		assertEquals(1, add.getEAttributes().size());
+		assertAttributeConfiguration(add, 0, "featureAS", "EString");
+		assertEquals(1, add.getEReferences().size());
+		assertReferenceConfiguration(add, 0, "a", "RuleA", true, 0, 1);
+		assertEquals(1, sub.getEAttributes().size());
+		assertAttributeConfiguration(sub, 0, "featureAS", "EString");
+		assertEquals(1, sub.getEReferences().size());
+		assertReferenceConfiguration(sub, 0, "a", "RuleA", true, 0, 1);
+	}
+
+	public void testFeaturesAndInheritanceOfActions02() throws Exception {
+		String grammar = "";
+		grammar += "language org.eclipse.xtext.testlanguages.ActionTestLanguage ";
+		grammar += "generate ActionLang";
+		grammar += " 'http://www.eclipse.org/2008/tmf/xtext/ActionLang'";
+		grammar += "";
+		grammar += " Model:";
+		grammar += " (children+=Element)*;";
+		grammar += "";
+		grammar += " Element returns Type:";
+		grammar += " Item ( { Item.items+=current } items+=Item );";
+		grammar += "";
+		grammar += " Item returns Type:";
+		grammar += " { Thing.content=current } name=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(4, ePackage.getEClassifiers().size());
+
+		EClass model = (EClass) ePackage.getEClassifier("Model");
+		assertNotNull(model);
+		EClass type = (EClass) ePackage.getEClassifier("Type");
+		assertNotNull(type);
+		EClass item = (EClass) ePackage.getEClassifier("Item");
+		assertNotNull(item);
+		EClass thing = (EClass) ePackage.getEClassifier("Thing");
+		assertNotNull(thing);
+
+		// type hierarchy
+		assertEquals(0, model.getESuperTypes().size());
+		assertEquals(0, type.getESuperTypes().size());
+		assertEquals(1, item.getESuperTypes().size());
+		assertSame(type, item.getESuperTypes().get(0));
+		assertEquals(1, thing.getESuperTypes().size());
+		assertSame(type, thing.getESuperTypes().get(0));
+
+	}
+
 	public void testAssignedRuleCall() throws Exception {
 		final String grammar = "language test generate test 'http://test' RuleA: callA1=RuleB callA2+=RuleB simpleFeature=ID; RuleB: featureB=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
@@ -315,12 +386,12 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertNotNull(ruleA);
 		EClass ruleB = (EClass) ePackage.getEClassifier("RuleB");
 		assertNotNull(ruleB);
-		
+
 		assertEquals(1, ruleA.getEAttributes().size());
 		assertAttributeConfiguration(ruleA, 0, "simpleFeature", "EString");
 		assertEquals(2, ruleA.getEReferences().size());
-		assertReferenceConfiguration(ruleA, 0, "callA1", "RuleB", 0, 1);
-		assertReferenceConfiguration(ruleA, 1, "callA2", "RuleB", 0, -1);
+		assertReferenceConfiguration(ruleA, 0, "callA1", "RuleB", true, 0, 1);
+		assertReferenceConfiguration(ruleA, 1, "callA2", "RuleB", true, 0, -1);
 		assertEquals(1, ruleB.getEAttributes().size());
 		assertAttributeConfiguration(ruleB, 0, "featureB", "EString");
 	}
@@ -333,19 +404,24 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertNotNull(ruleA);
 		EClass typeB = (EClass) ePackage.getEClassifier("TypeB");
 		assertNotNull(typeB);
-		
+
 		assertEquals(1, ruleA.getEAttributes().size());
 		assertAttributeConfiguration(ruleA, 0, "simpleFeature", "EString");
 		assertEquals(2, ruleA.getEReferences().size());
-		assertReferenceConfiguration(ruleA, 0, "refA1", "TypeB", 0, 1);
-		assertReferenceConfiguration(ruleA, 1, "refA2", "TypeB", 0, -1);
+		assertReferenceConfiguration(ruleA, 0, "refA1", "TypeB", false, 0, 1);
+		assertReferenceConfiguration(ruleA, 1, "refA2", "TypeB", false, 0, -1);
 		assertEquals(1, typeB.getEAttributes().size());
 		assertAttributeConfiguration(typeB, 0, "featureB", "EString");
 	}
 
 	public void testAssignedParenthesizedElement() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: featureA1?=(RuleB) refA1=(RuleB) refA2=(RuleB|RuleC) refA3+=(RuleB|RuleC|RuleD) refA4=(RuleB|RuleD) featureA2+=('a'|'b'); RuleB returns TypeB: RuleC? featureB=ID; RuleC: featureC=ID; RuleD returns TypeB: featureD=ID;";
+		String grammar = " language test generate test 'http://test'";
+		grammar += " RuleA: featureA1?=(RuleB) refA1=(RuleB) refA2=(RuleB|RuleC) refA3+=(RuleB|RuleC|RuleD) refA4=(RuleB|RuleD) featureA2+=('a'|'b');";
+		grammar += " RuleB returns TypeB: RuleC? featureB=ID;";
+		grammar += " RuleC: featureC=ID;";
+		grammar += " RuleD returns TypeB: featureD=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
+		
 		assertEquals(3, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
 		assertNotNull(ruleA);
@@ -357,41 +433,165 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertNotNull(ruleC);
 		assertEquals(1, ruleC.getESuperTypes().size());
 		assertEquals(typeB, ruleC.getESuperTypes().get(0));
-		
+
 		assertEquals(2, ruleA.getEAttributes().size());
 		assertAttributeConfiguration(ruleA, 0, "featureA1", "EBoolean");
 		assertAttributeConfiguration(ruleA, 1, "featureA2", "EString", 0, -1);
-		
+
 		assertEquals(4, ruleA.getEReferences().size());
-		assertReferenceConfiguration(ruleA, 0, "refA1", "TypeB", 0, 1);
+		assertReferenceConfiguration(ruleA, 0, "refA1", "TypeB", true, 0, 1);
 		// TODO should be common compatible type according to #248430
-		assertReferenceConfiguration(ruleA, 1, "refA2", "EObject", 0, 1);
-		assertReferenceConfiguration(ruleA, 2, "refA3", "EObject", 0, -1);
-		assertReferenceConfiguration(ruleA, 3, "refA4", "TypeB", 0, 1);
+		assertReferenceConfiguration(ruleA, 1, "refA2", "TypeB", true, 0, 1);
+		assertReferenceConfiguration(ruleA, 2, "refA3", "TypeB", true, 0, -1);
+		assertReferenceConfiguration(ruleA, 3, "refA4", "TypeB", true, 0, 1);
 	}
-	
+
+	public void testAssignedKeyWord() throws Exception {
+		final String grammar = "language test generate test 'http://test' RuleA: featureA?=('+'|'-') featureB=('*'|'/');";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(1, ePackage.getEClassifiers().size());
+		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
+
+		assertEquals(2, ruleA.getEAttributes().size());
+		assertAttributeConfiguration(ruleA, 0, "featureA", "EBoolean", 0, 1);
+		assertAttributeConfiguration(ruleA, 1, "featureB", "EString", 0, 1);
+	}
+
 	public void testImportWithoutAlias() throws Exception {
 		final String grammar = "language test generate test 'http://test' import 'http://www.eclipse.org/emf/2002/Ecore' RuleA: feature=ID;";
-		errorAcceptorMock.acceptError(same(ErrorCode.MissingAliasForReferencedMetamodel), (String)anyObject(), (EObject)anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.AliasForMetamodelAlreadyExists), (String) anyObject(),
+				(EObject) anyObject());
 		getEPackageFromGrammar(grammar);
 	}
-	
+
+	public void testGenerateTwoModels() throws Exception {
+		String grammar = "";
+		grammar += " language test";
+		grammar += " generate t1 'http://t1'";
+		grammar += " generate t2 'http://t2' as t2";
+		grammar += " RuleA: featureA=ID;";
+		grammar += " RuleB returns t2::TypeB: featureB=ID;";
+		List<EPackage> ePackages = getEPackagesFromGrammar(grammar);
+		assertEquals(2, ePackages.size());
+
+		EPackage t1 = ePackages.get(0);
+		assertEquals("t1", t1.getName());
+
+		assertEquals(1, t1.getEClassifiers().size());
+		EClassifier ruleA = t1.getEClassifier("RuleA");
+		assertNotNull(ruleA);
+
+		EPackage t2 = ePackages.get(1);
+		assertEquals(1, t2.getEClassifiers().size());
+		assertEquals("t2", t2.getName());
+		EClassifier typeB = t2.getEClassifier("TypeB");
+		assertNotNull(typeB);
+	}
+
+	public void testUseSameModelAlias() throws Exception {
+		String grammar = "";
+		grammar += " language test";
+		grammar += " generate t1 'http://t1' as target";
+		grammar += " generate t2 'http://t2' as target";
+		grammar += " RuleA: featureA=ID;"; // no alias => cannot be created
+		grammar += " RuleB returns target::TypeB: featureB=ID;";
+		
+		errorAcceptorMock.acceptError(same(ErrorCode.AliasForMetamodelAlreadyExists), (String) anyObject(),
+				(EObject) anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.CannotCreateTypeInSealedMetamodel), (String) anyObject(),
+				(EObject) anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.NoSuchTypeAvailable), (String) anyObject(),
+				(EObject) anyObject());
+		
+		List<EPackage> ePackages = getEPackagesFromGrammar(grammar);
+		assertEquals(1, ePackages.size());
+		EPackage t1 = ePackages.get(0);
+		assertEquals("t1", t1.getName());
+		assertEquals(1, t1.getEClassifiers().size());
+		EClassifier ruleA = t1.getEClassifier("TypeB");
+		assertNotNull(ruleA);
+	}
+
 	public void testModifyingSealedModel() throws Exception {
 		final String grammar = "language test generate test 'http://test' import 'http://www.eclipse.org/emf/2002/Ecore' as ecore RuleA returns ecore::SomeNewTypeA: feature=ID;";
-		errorAcceptorMock.acceptError(same(ErrorCode.CannotCreateTypeInSealedMetamodel), (String)anyObject(), (EObject)anyObject());
-		errorAcceptorMock.acceptError(same(ErrorCode.NoSuchTypeAvailable), (String)anyObject(), (EObject)anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.CannotCreateTypeInSealedMetamodel), (String) anyObject(),
+				(EObject) anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.NoSuchTypeAvailable), (String) anyObject(), (EObject) anyObject());
 		getEPackageFromGrammar(grammar);
 	}
-	
+
 	public void testImportingUnknownModel() throws Exception {
 		final String grammar = "language test generate test 'http://test' import 'http://www.unknownModel' as unknownModel RuleA: feature=ID;";
-		errorAcceptorMock.acceptError(same(ErrorCode.CannotLoadMetamodel), (String)anyObject(), (EObject)anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.CannotLoadMetamodel), (String) anyObject(), (EObject) anyObject());
 		getEPackageFromGrammar(grammar);
 	}
-	
+
 	public void testMoreThanOneRuleCall() throws Exception {
 		final String grammar = "language test generate test 'http://test' RuleA: RuleB RuleC; RuleB: featureB=ID; RuleC: featureC=ID;";
-		errorAcceptorMock.acceptError(same(ErrorCode.MoreThanOneTypeChangeInOneRule), (String)anyObject(), (EObject)anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.MoreThanOneTypeChangeInOneRule), (String) anyObject(),
+				(EObject) anyObject());
 		getEPackageFromGrammar(grammar);
 	}
+
+	public void testRuleCallAndAction() throws Exception {
+		final String grammar = "language test generate test 'http://test' RuleA: RuleB {TypeC.B = current}; RuleB: featureB=ID;";
+		getEPackageFromGrammar(grammar);
+	}
+
+	public void testRuleCallActionAndRuleCall() throws Exception {
+		final String grammar = "language test generate test 'http://test' RuleA: RuleB {TypeC.B = current} RuleB; RuleB: featureB=ID;";
+		errorAcceptorMock.acceptError(same(ErrorCode.MoreThanOneTypeChangeInOneRule), (String) anyObject(),
+				(EObject) anyObject());
+		getEPackageFromGrammar(grammar);
+	}
+
+	public void testAddingFeatureTwice() throws Exception {
+		final String grammar = "language test generate test 'http://test' RuleA returns TypeA: featureA=ID; RuleB returns TypeA: featureA=STRING;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(1, ePackage.getEClassifiers().size());
+		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
+		assertNotNull(typeA);
+
+		assertEquals(1, typeA.getEAttributes().size());
+		assertAttributeConfiguration(typeA, 0, "featureA", "EString");
+	}
+
+	public void testAddingDifferentFeaturesWithSameName01() throws Exception {
+		// simple datatypes do not have a common compatible type 
+		final String grammar = "" +
+				" language test generate test 'http://test'" +
+				" RuleA returns TypeA: featureA=ID;" +
+				" RuleB returns TypeA: featureA=INT;";
+		
+		errorAcceptorMock.acceptError(same(ErrorCode.NoCompatibleFeatureTypeAvailable), (String) anyObject(),
+				(EObject) anyObject());
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(1, ePackage.getEClassifiers().size());
+		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
+		assertNotNull(typeA);
+
+		assertEquals(1, typeA.getEAttributes().size());
+		assertAttributeConfiguration(typeA, 0, "featureA", "EString");
+	}
+
+	public void testAddingDifferentFeaturesWithSameName02() throws Exception {
+		String grammar = "language test generate test 'http://test'";
+		grammar += " RuleA returns TypeA: featureA=RuleD;";
+		grammar += " RuleB returns TypeA: featureA=RuleC;";
+		grammar += " RuleC: RuleD;";
+		grammar += " RuleD: featureD=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		
+		assertEquals(3, ePackage.getEClassifiers().size());
+		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
+		assertNotNull(typeA);
+		EClass ruleC = (EClass) ePackage.getEClassifier("RuleC");
+		assertNotNull(ruleC);
+		EClass ruleD = (EClass) ePackage.getEClassifier("RuleD");
+		assertNotNull(ruleD);
+
+		assertEquals(1, typeA.getEReferences().size());
+		assertReferenceConfiguration(typeA, 0, "featureA", "RuleC", true, 0, 1);
+	}
+
 }

@@ -13,6 +13,7 @@ public class AutoTestSuite {
 	public static Test suite() {
 		TestSuite suite = new TestSuite("org.eclipse.xtext.generator.tests");
 		suite.addTestSuite(org.eclipse.xtext.XtextGrammarTest.class);
+		suite.addTestSuite(org.eclipse.xtext.EcoreUtil2Tests.class);
 		suite.addTestSuite(org.eclipse.xtext.generator.resource.ResourceTest.class);
 		suite.addTestSuite(org.eclipse.xtext.grammarinheritance.InheritanceTest.class);
 		suite.addTestSuite(org.eclipse.xtext.grammarinheritance.ToEcoreTrafoTest.class);

@@ -1,0 +1,68 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext;
+
+import junit.framework.TestCase;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EcoreFactory;
+
+/**
+ * @author Heiko Behrens - Initial contribution and API
+ */
+public class EcoreUtil2Tests extends TestCase {
+	private EClass createEClass(String name) {
+		EClass result = EcoreFactory.eINSTANCE.createEClass();
+		result.setName(name);
+		return result;
+	}
+
+	public void testCommonCompatibleType01() {
+		EClass a = createEClass("a");
+		EClass b = createEClass("b");
+		EClass c = createEClass("c");
+		EClass d = createEClass("d");
+		EClass e = createEClass("e");
+		EClass f = createEClass("f");
+
+		c.getESuperTypes().add(a);
+		d.getESuperTypes().add(c);
+		d.getESuperTypes().add(b);
+		e.getESuperTypes().add(c);
+		f.getESuperTypes().add(a);
+		f.getESuperTypes().add(b);
+		f.getESuperTypes().add(e);
+
+		assertSame(a, EcoreUtil2.getCompatibleType(a, a));
+		assertSame(null, EcoreUtil2.getCompatibleType(d, f));
+		assertSame(c, EcoreUtil2.getCompatibleType(d, e));
+		assertSame(b, EcoreUtil2.getCompatibleType(b, f));
+		assertSame(null, EcoreUtil2.getCompatibleType(b, c));
+	}
+
+	public void testCommonCompatibleType02() {
+		EClass a = createEClass("a");
+		EClass b = createEClass("b");
+		EClass c = createEClass("c");
+		EClass d = createEClass("d");
+		EClass e = createEClass("e");
+
+		b.getESuperTypes().add(a);
+		c.getESuperTypes().add(a);
+		d.getESuperTypes().add(b);
+		d.getESuperTypes().add(c);
+		e.getESuperTypes().add(b);
+		e.getESuperTypes().add(c);
+
+		assertSame(a, EcoreUtil2.getCompatibleType(a, a));
+
+		assertSame(a, EcoreUtil2.getCompatibleType(b, c));
+		assertSame(b, EcoreUtil2.getCompatibleType(b, d));
+		assertSame(a, EcoreUtil2.getCompatibleType(d, e));
+	}
+}
