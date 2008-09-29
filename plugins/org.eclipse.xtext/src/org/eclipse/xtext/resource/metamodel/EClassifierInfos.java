@@ -8,10 +8,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.metamodel;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
@@ -20,6 +23,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.resource.metamodel.EClassifierInfo.EClassInfo;
 
 /**
  * A possible extension would be to normalize the type hierarchy and remove
@@ -49,9 +53,9 @@ public class EClassifierInfos {
 		return infoMap.get(qualifiedName);
 	}
 
-	private EClassifierInfo getInfo(EClassifier eClassifier) {
-		for(EClassifierInfo info: infoMap.values())
-			if(info.getEClassifier().equals(eClassifier))
+	public EClassifierInfo getInfo(EClassifier eClassifier) {
+		for (EClassifierInfo info : infoMap.values())
+			if (info.getEClassifier().equals(eClassifier))
 				return info;
 		return null;
 	}
@@ -69,7 +73,8 @@ public class EClassifierInfos {
 					"Simple Datatypes (lexer rules or keywords) do not have a common supertype (" + infoA + ", "
 							+ infoB + ")");
 
-		EClassifier compatibleType = EcoreUtil2.getCompatibleType((EClass)infoA.getEClassifier(), (EClass)infoB.getEClassifier());
+		EClassifier compatibleType = EcoreUtil2.getCompatibleType((EClass) infoA.getEClassifier(), (EClass) infoB
+				.getEClassifier());
 		return getInfo(compatibleType);
 	}
 
@@ -94,6 +99,12 @@ public class EClassifierInfos {
 
 		return result;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public EClassInfo getCompatibleTypeOf(Collection<EClassInfo> types) {
+		Collection<EClassifierInfo> infos = (Collection<EClassifierInfo>)(Collection<?>)types;
+		return (EClassInfo)getCompatibleTypeOf(infos);
+	}
 
 	public String getCompatibleTypeNameOf(Collection<String> typeNames) {
 		Collection<EClassifierInfo> types = new HashSet<EClassifierInfo>();
@@ -105,6 +116,22 @@ public class EClassifierInfos {
 			return getQualifiedNameFor(compatibleType);
 		else
 			return "ecore::EObject";
+	}
+
+	public List<EClassInfo> getAllEClassInfos() {
+		List<EClassInfo> result = new ArrayList<EClassInfo>();
+		for (EClassifierInfo classifier : this.infoMap.values())
+			if (classifier instanceof EClassInfo)
+				result.add((EClassInfo) classifier);
+
+		return Collections.unmodifiableList(result);
+	}
+
+	public List<EClassInfo> getSuperTypeInfos(EClassInfo subTypeInfo) {
+		List<EClassInfo> result = new ArrayList<EClassInfo>();
+		for (EClass superType : subTypeInfo.getEClass().getESuperTypes())
+			result.add((EClassInfo) this.getInfo(superType));
+		return result;
 	}
 
 }
