@@ -594,4 +594,29 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertReferenceConfiguration(typeA, 0, "featureA", "RuleC", true, 0, 1);
 	}
 
+	public void testAddingDifferentFeaturesWithSameName03() throws Exception {
+		// independent rules are combined as EObject
+		String grammar = "language test generate test 'http://test'";
+		grammar += " RuleA returns TypeA: featureA1=ID featureA2=RuleD featureA3=RuleC;";
+		grammar += " RuleB returns TypeA: featureA2=RuleC featureA4=INT;";
+		grammar += " RuleC: featureC=INT;";
+		grammar += " RuleD: featureD=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		
+		assertEquals(3, ePackage.getEClassifiers().size());
+		EClass typeA = (EClass) ePackage.getEClassifier("TypeA");
+		assertNotNull(typeA);
+		EClass ruleC = (EClass) ePackage.getEClassifier("RuleC");
+		assertNotNull(ruleC);
+		EClass ruleD = (EClass) ePackage.getEClassifier("RuleD");
+		assertNotNull(ruleD);
+
+		assertEquals(2, typeA.getEAllAttributes().size());
+		assertAttributeConfiguration(typeA, 0, "featureA1", "EString");
+		assertAttributeConfiguration(typeA, 1, "featureA4", "EInt");
+		
+		assertEquals(2, typeA.getEReferences().size());
+		assertReferenceConfiguration(typeA, 0, "featureA2", "EObject", true, 0, 1);
+		assertReferenceConfiguration(typeA, 1, "featureA3", "RuleC", true, 0, 1);
+	}
 }
