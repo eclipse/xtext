@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -132,7 +133,7 @@ public class EcoreUtil2 extends EcoreUtil {
 			if (isCommonCompatibleType(candidate, sortedCandidates))
 				return candidate;
 
-		return null;
+		return EcorePackage.Literals.EOBJECT;
 	}
 
 	private static class EClassTypeHierarchyComparator implements Comparator<EClass> {
