@@ -15,6 +15,7 @@ import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -38,7 +39,18 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 				document.modify(new UnitOfWork<Object>() {
 					public Object exec(XtextResource resource) throws Exception {
 						// TODO replace with partial parsing which doesn't work reliable yet
-						resource.update(0, document.get());
+						if(region instanceof DirtyRegion) {
+							DirtyRegion dirtyRegion = (DirtyRegion) region;
+							if(dirtyRegion.getType() == DirtyRegion.REMOVE) {
+								resource.update(region.getOffset(), region.getLength(), "");
+							} else if(dirtyRegion.getType() == DirtyRegion.INSERT) {
+								resource.update(region.getOffset(), 0, document.get(region.getOffset(), region.getLength()));
+							} else {
+								throw new IllegalArgumentException("Illegal DirtyRegion.getType() " +Strings.notNull(dirtyRegion.getType()));
+							}
+						} else {
+							throw new IllegalArgumentException("IRegion should be instanceof DirtyRegion");
+						}
 						return null;
 					}
 				});
