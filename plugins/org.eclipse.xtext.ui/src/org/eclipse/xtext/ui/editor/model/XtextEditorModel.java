@@ -88,7 +88,7 @@ public class XtextEditorModel extends AbstractDocumentDelegation implements IEdi
             if (Activator.DEBUG_PARSING)
                 log.debug("EditorModel Parsing...");
             long start = System.currentTimeMillis();
-            resource.update(region.getOffset(), document.get(region.getOffset(), region.getLength()));
+            resource.update(region.getOffset(), region.getLength(), document.get(region.getOffset(), region.getLength()));
             if (Activator.DEBUG_PARSING)
                 log.debug("...took " + (System.currentTimeMillis() - start) + "ms.");
         }

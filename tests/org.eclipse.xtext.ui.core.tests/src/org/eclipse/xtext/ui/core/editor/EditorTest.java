@@ -8,7 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
-import static org.eclipse.xtext.ui.core.util.ResourceUtil.*;
+import static org.eclipse.xtext.ui.core.util.ResourceUtil.createFile;
+import static org.eclipse.xtext.ui.core.util.ResourceUtil.createProject;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
