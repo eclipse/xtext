@@ -68,4 +68,19 @@ public class EcoreUtil2Tests extends TestCase {
 		assertSame(b, EcoreUtil2.getCompatibleType(b, d));
 		assertSame(a, EcoreUtil2.getCompatibleType(d, e));
 	}
+	
+	public void testGetAllSuperTypesWithCycle() {
+		EClass a = createEClass("a");
+		EClass b = createEClass("b");
+		b.getESuperTypes().add(a);
+		a.getESuperTypes().add(b);
+		
+		// inconsistent and quasi-unpredictable in complex scenarios due to caching
+		assertTrue(a.getEAllSuperTypes().contains(a));
+		assertFalse(b.getEAllSuperTypes().contains(b));
+		
+		// always stable
+		assertTrue(EcoreUtil2.getAllSuperTypes(a).contains(a));
+		assertTrue(EcoreUtil2.getAllSuperTypes(b).contains(b));
+	}
 }

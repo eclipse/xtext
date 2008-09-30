@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
@@ -180,7 +182,7 @@ public class EcoreUtil2 extends EcoreUtil {
 		ca.add(eClass);
 		return ca;
 	}
-	
+
 	public static boolean isFeatureSemanticallyEqualApartFromType(EStructuralFeature f1, EStructuralFeature f2) {
 		boolean result = f1.getName().equals(f1.getName());
 		result &= f1.getLowerBound() == f2.getLowerBound();
@@ -199,15 +201,15 @@ public class EcoreUtil2 extends EcoreUtil {
 	public enum FindResult {
 		FeatureDoesNotExist, FeatureExists, DifferentFeatureWithSameNameExists
 	}
-	
+
 	public static EStructuralFeature findFeatureByName(Collection<EStructuralFeature> features, String name) {
 		for (EStructuralFeature feature : features)
-			if(feature.getName().equals(name))
+			if (feature.getName().equals(name))
 				return feature;
-		
+
 		return null;
 	}
-	
+
 	public static FindResult containsSemanticallyEqualFeature(EClass eClass, EStructuralFeature feature) {
 		return containsSemanticallyEqualFeature(eClass.getEAllStructuralFeatures(), feature);
 	}
@@ -242,6 +244,25 @@ public class EcoreUtil2 extends EcoreUtil {
 		result.setUpperBound(prototype.getUpperBound());
 
 		return result;
+	}
+
+	private static void collectAllSuperTypes(Set<EClass> collectedTypes, EClass eClass) {
+		for (EClass superType : eClass.getESuperTypes())
+			if (!collectedTypes.contains(superType)) {
+				collectedTypes.add(superType);
+				collectAllSuperTypes(collectedTypes, superType);
+			}
+	}
+
+	/**
+	 * In addition to
+	 * org.eclipse.xtext.resource.metamodel.EClassifierInfos.getAllEClassInfos()
+	 * this implementation can deal with cycles in type hierarchy
+	 */
+	public static Collection<EClass> getAllSuperTypes(EClass eClass) {
+		Set<EClass> allSuperTypes = new HashSet<EClass>();
+		collectAllSuperTypes(allSuperTypes, eClass);
+		return Collections.unmodifiableSet(allSuperTypes);
 	}
 
 }

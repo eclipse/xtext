@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.metamodel;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,6 +21,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EcoreUtil2.FindResult;
 import org.eclipse.xtext.resource.metamodel.EClassifierInfo.EClassInfo;
+import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -30,10 +32,12 @@ public class TypeHierarchyHelper {
 	private Map<EClassInfo, Set<EClassInfo>> subTypesMap = new HashMap<EClassInfo, Set<EClassInfo>>();
 	private Set<EClassInfo> rootInfos = new HashSet<EClassInfo>();
 	private Set<EClassInfo> traversedTypes = new HashSet<EClassInfo>();
+	private ErrorAcceptor errorAcceptor;
 
-	public TypeHierarchyHelper(EClassifierInfos infos) {
+	public TypeHierarchyHelper(EClassifierInfos infos, ErrorAcceptor errorAcceptor) {
 		super();
 		this.infos = infos;
+		this.errorAcceptor = errorAcceptor;
 		collectTypeData();
 	}
 
@@ -100,7 +104,7 @@ public class TypeHierarchyHelper {
 		for (Iterator<EStructuralFeature> iterator = featuresToBeModified.iterator(); iterator.hasNext();)
 			if (EcoreUtil2.containsSemanticallyEqualFeature(features, iterator.next()) == FindResult.FeatureExists)
 				iterator.remove();
-		
+
 	}
 
 	private Collection<EStructuralFeature> joinFeaturesInto(Collection<EStructuralFeature> commonFeatures,
@@ -166,7 +170,7 @@ public class TypeHierarchyHelper {
 
 		Collection<EStructuralFeature> features = classInfo.getEClass().getEStructuralFeatures();
 		for (Iterator<EStructuralFeature> iterator = features.iterator(); iterator.hasNext();)
-			if(anySuperTypeContainsSemanticallyEqualFeature(classInfo.getEClass(), iterator.next()))
+			if (anySuperTypeContainsSemanticallyEqualFeature(classInfo.getEClass(), iterator.next()))
 				iterator.remove();
 	}
 
@@ -176,6 +180,38 @@ public class TypeHierarchyHelper {
 			allSupertypesFeatures.addAll(superType.getEAllStructuralFeatures());
 
 		return EcoreUtil2.containsSemanticallyEqualFeature(allSupertypesFeatures, feature) == FindResult.FeatureExists;
+	}
+
+	public void detectEClassesWithCyclesInTypeHierachy() {
+		for (EClassInfo info : infos.getAllEClassInfos()) {
+			EClass eClass = info.getEClass();
+			Collection<EClass> allSuperTypes = EcoreUtil2.getAllSuperTypes(eClass);
+			if (allSuperTypes.contains(eClass))
+				reportError(ErrorCode.TypeWithCycleInHierarchy, "Type with cycle in hierarchy: " + eClass.getName());
+		}
+	}
+
+	private void reportError(ErrorCode errorCode, String message) {
+		errorAcceptor.acceptError(errorCode, message, null);
+	}
+
+	public void detectDuplicatedFeatures() {
+		for (EClassInfo info : infos.getAllEClassInfos()) {
+			detectDuplicatedFeature(info);
+		}
+	}
+
+	private void detectDuplicatedFeature(EClassInfo info) {
+		EClass eClass = info.getEClass();
+		Collection<EStructuralFeature> directFeatures = eClass.getEStructuralFeatures();
+		Collection<EStructuralFeature> allFeatures = new ArrayList<EStructuralFeature>(eClass
+				.getEAllStructuralFeatures());
+		for (EStructuralFeature feature : directFeatures) {
+			allFeatures.remove(feature);
+			if (EcoreUtil2.findFeatureByName(allFeatures, feature.getName()) != null)
+				reportError(ErrorCode.MoreThanOneFeatureWithSameName, "Feature " + feature.getName()
+						+ " exists more than once in type hierarchy of " + eClass.getName());
+		}
 	}
 
 }

@@ -98,7 +98,7 @@ public class Xtext2EcoreTransformer {
 
 		deriveTypes();
 		deriveFeatures();
-		normalizeGeneratedPackages();
+		normalizeAndValidateGeneratedPackages();
 
 		return getGeneratedPackagesSortedByName();
 	}
@@ -216,10 +216,18 @@ public class Xtext2EcoreTransformer {
 		return result;
 	}
 
-	private void normalizeGeneratedPackages() {
-		TypeHierarchyHelper helper = new TypeHierarchyHelper(this.eClassifierInfos);
+	private void normalizeAndValidateGeneratedPackages() {
+		TypeHierarchyHelper helper = new TypeHierarchyHelper(this.eClassifierInfos, this.errorAcceptor);
 		helper.liftUpFeaturesRecursively();
 		helper.removeDuplicateDerivedFeatures();
+		helper.detectEClassesWithCyclesInTypeHierachy();
+		
+		// duplicated features can occur in rare cases when alternatives produce
+		// different types of a feature
+		// If the internal structure (Set) of the underlying algorithm
+		// produces the features for the subtype first the implementation of EClassInfo
+		// wont find a conflict
+		helper.detectDuplicatedFeatures();
 	}
 
 	private void deriveTypesAndHierarchy(EClassifierInfo ruleReturnType, AbstractElement element)
