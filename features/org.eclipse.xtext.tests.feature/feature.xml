@@ -35,6 +35,13 @@
          unpack="false"/>
 
    <plugin
+         id="org.eclipse.xtext.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.eclipse.xtext.service.tests"
          download-size="0"
          install-size="0"
@@ -63,13 +70,6 @@
 
    <plugin
          id="org.eclipse.xtext.service.ui.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.ui.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
