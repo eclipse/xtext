@@ -68,11 +68,8 @@ public class XtextResource extends ResourceImpl {
 		return parseResult;
 	}
 
-	public void update(int offset, String change) {
+	public void update(int offset, int originalLength, String change) {
 		CompositeNode rootNode = parseResult.getRootNode();
-		int length = change.length();
-		int documentGrowth = length - rootNode.getLength();
-		int originalLength = length - documentGrowth;
 
 		// unloading is required to ensure that any EObjects hanging around
 		// (e.g. in the outline) get a proxied URI

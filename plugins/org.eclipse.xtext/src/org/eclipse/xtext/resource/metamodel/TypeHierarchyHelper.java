@@ -15,9 +15,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.EcoreUtil2.FindResult;
 import org.eclipse.xtext.resource.metamodel.EClassifierInfo.EClassInfo;
 
 /**
@@ -59,7 +60,8 @@ public class TypeHierarchyHelper {
 		return result;
 	}
 
-	public void liftUpFeaturesOf(Collection<EClassInfo> infos) {
+	public void liftUpFeaturesRecursively(Collection<EClassInfo> infos) {
+		traversedTypes.clear();
 		for (EClassInfo info : infos)
 			liftUpFeaturesInto(info);
 	}
@@ -71,9 +73,9 @@ public class TypeHierarchyHelper {
 		traversedTypes.add(superType);
 
 		Collection<EClassInfo> subTypes = getSubTypesOf(superType);
-		if(subTypes.isEmpty())
+		if (subTypes.isEmpty())
 			return;
-		
+
 		// lift up features recursively, deepest first
 		for (EClassInfo subType : subTypes) {
 			liftUpFeaturesInto(subType);
@@ -86,7 +88,7 @@ public class TypeHierarchyHelper {
 		// only if all subtypes' compatible type is superType itself
 		// features can be lifted into superType
 		if (infos.getCompatibleTypeOf(subTypes).equals(superType)) {
-			Collection<EStructuralFeature> commonFeatures = getCommonFeatures(subTypes);
+			Collection<EStructuralFeature> commonFeatures = getCommonDirectFeatures(subTypes);
 			Collection<EStructuralFeature> liftedFeatures = joinFeaturesInto(commonFeatures, superType);
 			for (EClassInfo subClassInfo : subTypes)
 				removeFeatures(subClassInfo, liftedFeatures);
@@ -94,31 +96,30 @@ public class TypeHierarchyHelper {
 	}
 
 	private void removeFeatures(EClassInfo info, Collection<EStructuralFeature> features) {
-		Collection<EStructuralFeature> featuresToBeRemoved = new HashSet<EStructuralFeature>();
-		for (EStructuralFeature feature : info.getEClass().getEStructuralFeatures()) 
-			if(containsEqualFeature(features, feature))
-				featuresToBeRemoved.add(feature);
+		Collection<EStructuralFeature> featuresToBeModified = info.getEClass().getEStructuralFeatures();
+		for (Iterator<EStructuralFeature> iterator = featuresToBeModified.iterator(); iterator.hasNext();)
+			if (EcoreUtil2.containsSemanticallyEqualFeature(features, iterator.next()) == FindResult.FeatureExists)
+				iterator.remove();
 		
-		info.getEClass().getEStructuralFeatures().removeAll(featuresToBeRemoved);
 	}
 
 	private Collection<EStructuralFeature> joinFeaturesInto(Collection<EStructuralFeature> commonFeatures,
 			EClassInfo info) {
 		Collection<EStructuralFeature> result = new HashSet<EStructuralFeature>();
 		for (EStructuralFeature feature : commonFeatures) {
-			if (containsEqualFeature(info.getEClass().getEStructuralFeatures(), feature))
-				// feature already exists, feature can be lifted, nothing to do
-				result.add(feature);
-			else if (info.getEClass().getEStructuralFeature(feature.getName()) == null) {
-				info.addFeature(feature);
-				result.add(feature);
+			switch (EcoreUtil2.containsSemanticallyEqualFeature(info.getEClass(), feature)) {
+				case FeatureDoesNotExist:
+					info.addFeature(feature);
+				case FeatureExists:
+					result.add(feature);
+				default:
+					break;
 			}
-
 		}
 		return result;
 	}
 
-	private Collection<EStructuralFeature> getCommonFeatures(Collection<EClassInfo> infos) {
+	private Collection<EStructuralFeature> getCommonDirectFeatures(Collection<EClassInfo> infos) {
 		Collection<EStructuralFeature> result = new HashSet<EStructuralFeature>();
 
 		Iterator<EClassInfo> iterator = infos.iterator();
@@ -127,42 +128,54 @@ public class TypeHierarchyHelper {
 			result.addAll(eClass.getEStructuralFeatures());
 		}
 
-		while (iterator.hasNext()) {
-			EList<EStructuralFeature> features = iterator.next().getEClass().getEStructuralFeatures();
-			result = getCommonFeatures(result, features);
-		}
+		while (iterator.hasNext())
+			result = getCommonFeatures(iterator.next(), result);
 
 		return result;
 	}
 
-	public Collection<EStructuralFeature> getCommonFeatures(Collection<EStructuralFeature> setA,
-			EList<EStructuralFeature> setB) {
+	public Collection<EStructuralFeature> getCommonFeatures(EClassInfo info, Collection<EStructuralFeature> features) {
 		Collection<EStructuralFeature> result = new HashSet<EStructuralFeature>();
 
-		for (EStructuralFeature f : setA)
-			if (containsEqualFeature(setB, f))
+		for (EStructuralFeature f : features)
+			if (EcoreUtil2.containsSemanticallyEqualFeature(info.getEClass(), f) == FindResult.FeatureExists)
 				result.add(f);
 
 		return result;
 	}
 
-	private boolean containsEqualFeature(Collection<EStructuralFeature> features, EStructuralFeature feature) {
-		for (EStructuralFeature otherFeature : features) {
-			if (isFeatureEqualTo(feature, otherFeature))
-				return true;
+	public void liftUpFeaturesRecursively() {
+		traversedTypes.clear();
+		liftUpFeaturesRecursively(rootInfos);
+	}
+
+	public void removeDuplicateDerivedFeatures() {
+		removeDuplicateDerivedFeaturesOf(infos.getAllEClassInfos());
+	}
+
+	private void removeDuplicateDerivedFeaturesOf(Collection<EClassInfo> classInfos) {
+		for (EClassInfo classInfo : classInfos) {
+			removeDuplicateDerivedFeaturesOf(classInfo);
 		}
-		return false;
 	}
 
-	private boolean isFeatureEqualTo(EStructuralFeature f1, EStructuralFeature f2) {
-		// TODO make comparison more precise
-		// TODO extract into a common place, e.g. EcoreUtil2
-		return f1.getName().equals(f2.getName()) && f1.getEType().equals(f2.getEType()) && f1.getLowerBound() == f2.getLowerBound()
-				&& f1.getUpperBound() == f2.getUpperBound();
+	private void removeDuplicateDerivedFeaturesOf(EClassInfo classInfo) {
+		// do not modify sealed types
+		if (!classInfo.isGenerated())
+			return;
+
+		Collection<EStructuralFeature> features = classInfo.getEClass().getEStructuralFeatures();
+		for (Iterator<EStructuralFeature> iterator = features.iterator(); iterator.hasNext();)
+			if(anySuperTypeContainsSemanticallyEqualFeature(classInfo.getEClass(), iterator.next()))
+				iterator.remove();
 	}
 
-	public void liftUpFeatures() {
-		liftUpFeaturesOf(rootInfos);
+	private boolean anySuperTypeContainsSemanticallyEqualFeature(EClass eClass, EStructuralFeature feature) {
+		Collection<EStructuralFeature> allSupertypesFeatures = new HashSet<EStructuralFeature>();
+		for (EClass superType : eClass.getEAllSuperTypes())
+			allSupertypesFeatures.addAll(superType.getEAllStructuralFeatures());
+
+		return EcoreUtil2.containsSemanticallyEqualFeature(allSupertypesFeatures, feature) == FindResult.FeatureExists;
 	}
 
 }

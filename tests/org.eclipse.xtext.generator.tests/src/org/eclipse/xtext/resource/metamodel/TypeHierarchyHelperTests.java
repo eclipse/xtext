@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
 package org.eclipse.xtext.resource.metamodel;
 
 import junit.framework.TestCase;
@@ -5,19 +13,24 @@ import junit.framework.TestCase;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.resource.metamodel.EClassifierInfo.EClassInfo;
 
+/**
+ * @author Heiko Behrens - Initial contribution and API
+ * 
+ */
 public class TypeHierarchyHelperTests extends TestCase {
 
 	private TypeHierarchyHelper helper;
 	private EClassifierInfos infos = new EClassifierInfos();
 	private EDataType INT = EcoreFactory.eINSTANCE.createEDataType();
-//	private EDataType STRING = EcoreFactory.eINSTANCE.createEDataType();
+	private EDataType STRING = EcoreFactory.eINSTANCE.createEDataType();
 
 	private void liftUpFeatures() throws Exception {
 		helper = new TypeHierarchyHelper(infos);
-		helper.liftUpFeatures();
+		helper.liftUpFeaturesRecursively();
 	}
 
 	private EClassInfo addClass(String name, boolean isGenerated) {
@@ -31,11 +44,18 @@ public class TypeHierarchyHelperTests extends TestCase {
 	private EClassInfo addClass(String name) {
 		return addClass(name, true);
 	}
-	
+
 	private void addAttribute(EClassInfo eClass, EDataType eType, String name) {
 		EAttribute feature = EcoreFactory.eINSTANCE.createEAttribute();
 		feature.setName(name);
 		feature.setEType(eType);
+		eClass.getEClass().getEStructuralFeatures().add(feature);
+	}
+
+	private void addReference(EClassInfo eClass, EClassInfo ref, String name) {
+		EReference feature = EcoreFactory.eINSTANCE.createEReference();
+		feature.setName(name);
+		feature.setEType(ref.getEClassifier());
 		eClass.getEClass().getEStructuralFeatures().add(feature);
 	}
 
@@ -51,9 +71,9 @@ public class TypeHierarchyHelperTests extends TestCase {
 		assertEquals(0, a.getEClass().getEStructuralFeatures().size());
 		assertEquals(1, b.getEClass().getEStructuralFeatures().size());
 		assertEquals(1, c.getEClass().getEStructuralFeatures().size());
-		
+
 		liftUpFeatures();
-		
+
 		assertEquals(1, a.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, b.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
@@ -68,13 +88,13 @@ public class TypeHierarchyHelperTests extends TestCase {
 
 		assertEquals(0, a.getEClass().getEStructuralFeatures().size());
 		assertEquals(1, b.getEClass().getEStructuralFeatures().size());
-		
+
 		liftUpFeatures();
-		
+
 		assertEquals(0, a.getEClass().getEStructuralFeatures().size());
 		assertEquals(1, b.getEClass().getEStructuralFeatures().size());
 	}
-	
+
 	public void testRecursiveUplift01() throws Exception {
 		// no uplift for less than two children
 		EClassInfo a = addClass("a");
@@ -86,26 +106,26 @@ public class TypeHierarchyHelperTests extends TestCase {
 		c.addSupertype(a);
 		d.addSupertype(c);
 		e.addSupertype(c);
-		
+
 		addAttribute(b, INT, "f1");
 		addAttribute(d, INT, "f1");
 		addAttribute(e, INT, "f1");
-	
+
 		assertEquals(0, a.getEClass().getEStructuralFeatures().size());
 		assertEquals(1, b.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
 		assertEquals(1, d.getEClass().getEStructuralFeatures().size());
 		assertEquals(1, e.getEClass().getEStructuralFeatures().size());
-		
+
 		liftUpFeatures();
-		
+
 		assertEquals(1, a.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, b.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, d.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, e.getEClass().getEStructuralFeatures().size());
 	}
-	
+
 	public void testNikolaus() throws Exception {
 		// no uplift for less than two children
 		EClassInfo a = addClass("a");
@@ -119,24 +139,87 @@ public class TypeHierarchyHelperTests extends TestCase {
 		d.addSupertype(c);
 		e.addSupertype(b);
 		e.addSupertype(c);
-		
+
+		addAttribute(b, STRING, "f2");
+		addAttribute(c, STRING, "f2");
 		addAttribute(d, INT, "f1");
 		addAttribute(e, INT, "f1");
-	
+
 		assertEquals(0, a.getEClass().getEStructuralFeatures().size());
-		assertEquals(0, b.getEClass().getEStructuralFeatures().size());
-		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
+		assertEquals(1, b.getEClass().getEStructuralFeatures().size());
+		assertEquals(1, c.getEClass().getEStructuralFeatures().size());
 		assertEquals(1, d.getEClass().getEStructuralFeatures().size());
 		assertEquals(1, e.getEClass().getEStructuralFeatures().size());
-		
+
 		liftUpFeatures();
-		
-		assertEquals(0, a.getEClass().getEStructuralFeatures().size());
+
+		assertEquals(1, a.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, b.getEClass().getEStructuralFeatures().size());
 		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
 		assertEquals(1, d.getEClass().getEStructuralFeatures().size());
 		assertEquals(1, e.getEClass().getEStructuralFeatures().size());
 	}
+
+	public void testImcompatipleFeatures() throws Exception {
+		EClassInfo a = addClass("a");
+		EClassInfo b = addClass("b");
+		EClassInfo c = addClass("c");
+		b.addSupertype(a);
+		c.addSupertype(a);
+		addAttribute(b, INT, "f1");
+		addAttribute(c, STRING, "f1");
+
+		assertEquals(0, a.getEClass().getEStructuralFeatures().size());
+		assertEquals(1, b.getEClass().getEStructuralFeatures().size());
+		assertEquals(1, c.getEClass().getEStructuralFeatures().size());
+
+		liftUpFeatures();
+
+		assertEquals(0, a.getEClass().getEStructuralFeatures().size());
+		assertEquals(1, b.getEClass().getEStructuralFeatures().size());
+		assertEquals(1, c.getEClass().getEStructuralFeatures().size());
+	}
+
+	public void testReferences() throws Exception {
+		EClassInfo a = addClass("a");
+		EClassInfo b = addClass("b");
+		EClassInfo c = addClass("c");
+		EClassInfo d = addClass("d");
+		b.addSupertype(a);
+		c.addSupertype(a);
+		addReference(b, d, "r1");
+		addReference(c, d, "r1");
+
+		assertEquals(0, a.getEClass().getEStructuralFeatures().size());
+		assertEquals(1, b.getEClass().getEStructuralFeatures().size());
+		assertEquals(1, c.getEClass().getEStructuralFeatures().size());
+
+		liftUpFeatures();
+
+		assertEquals(1, a.getEClass().getEStructuralFeatures().size());
+		assertEquals(0, b.getEClass().getEStructuralFeatures().size());
+		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
+	}
 	
+	public void testDublicateDerivedFeature() throws Exception {
+		EClassInfo a = addClass("a");
+		EClassInfo b = addClass("b");
+		EClassInfo c = addClass("b");
+		b.addSupertype(a);
+		c.addSupertype(b);
+		addAttribute(a, INT, "f");
+		addAttribute(c, INT, "f");
+		
+		assertEquals(1, a.getEClass().getEStructuralFeatures().size());
+		assertEquals(0, b.getEClass().getEStructuralFeatures().size());
+		assertEquals(1, c.getEClass().getEStructuralFeatures().size());
+		
+		helper = new TypeHierarchyHelper(infos);
+		helper.removeDuplicateDerivedFeatures();
+
+		assertEquals(1, a.getEClass().getEStructuralFeatures().size());
+		assertEquals(0, b.getEClass().getEStructuralFeatures().size());
+		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
+	}
 
 }
