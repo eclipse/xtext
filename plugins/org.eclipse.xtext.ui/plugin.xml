@@ -64,12 +64,6 @@
       </serviceScope>
    </extension>
    <extension
-         point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
-      <serviceRegistrationFactory
-            class="org.eclipse.xtext.ui.service.utils.XtextServiceRegistrationFactory">
-      </serviceRegistrationFactory>
-   </extension>
-   <extension
          point="org.eclipse.xtext.ui.aSTFactory">
       <aSTFactory
             class="org.eclipse.xtext.parser.GenericEcoreElementFactory"
