@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.metamodel;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -72,19 +71,12 @@ public abstract class EClassifierInfo {
 			}
 			EClass eClass = getEClass();
 			EClass superEClass = (EClass) superTypeInfo.getEClassifier();
-			if(eClass.equals(superEClass))
+			if (eClass.equals(superEClass))
 				// cannot add class as it's own superclass
 				// this usually happens due to a rule call
 				return false;
 			else
 				return eClass.getESuperTypes().add(superEClass);
-		}
-
-		private EStructuralFeature findFeatureInClassIgnoringSuperclasses(EClass eClass, String featureName) {
-			for (EStructuralFeature feature : eClass.getEStructuralFeatures())
-				if (feature.getName().equals(featureName))
-					return feature;
-			return null;
 		}
 
 		@Override
@@ -94,11 +86,11 @@ public abstract class EClassifierInfo {
 			EClassifier featureClassifier = featureType.getEClassifier();
 			return addFeature(featureName, featureClassifier, isMultivalue, isContainment, parserElement);
 		}
-		
+
 		public boolean addFeature(EStructuralFeature prototype) {
-			// TODO implement
 			try {
-				return addFeature(prototype.getName(), prototype.getEType(), prototype.isMany(), false, null);
+				return addFeature(prototype.getName(), prototype.getEType(), prototype.isMany(), prototype
+						.getUpperBound() > 1, null);
 			}
 			catch (TransformationException e) {
 				throw new IllegalArgumentException(e.getMessage());
@@ -107,6 +99,41 @@ public abstract class EClassifierInfo {
 
 		private boolean addFeature(String featureName, EClassifier featureClassifier, boolean isMultivalue,
 				boolean isContainment, EObject parserElement) throws TransformationException {
+			EStructuralFeature newFeature = createFeatureWith(featureName, featureClassifier, isMultivalue,
+					isContainment);
+
+			switch (EcoreUtil2.containsSemanticallyEqualFeature(getEClass(), newFeature)) {
+				case FeatureDoesNotExist:
+					return getEClass().getEStructuralFeatures().add(newFeature);
+				case FeatureExists:
+					// do nothing
+					return false;
+			}
+
+			// feature with same name exists, but have a different, potentially
+			// incompatible configuration
+			EStructuralFeature existingFeature = getEClass().getEStructuralFeature(featureName);
+
+			if (!EcoreUtil2.isFeatureSemanticallyEqualApartFromType(newFeature, existingFeature))
+				throw new TransformationException(ErrorCode.FeatureWithDifferentConfigurationAlreadyExists,
+						"feature with different cardinality or containment configuration already exists " + newFeature,
+						parserElement);
+
+			EClassifier compatibleType = EcoreUtil2
+					.getCompatibleType(existingFeature.getEType(), newFeature.getEType());
+			if (compatibleType == null)
+				throw new TransformationException(ErrorCode.NoCompatibleFeatureTypeAvailable,
+						"Cannot find compatible type for features", parserElement);
+
+			// TODO check, whether existing feature can be changed (feature's
+			// declaring type isGenerated==true)
+			// try to avoid coupling between this class and EClassifierInfos
+			existingFeature.setEType(compatibleType);
+			return true;
+		}
+
+		private EStructuralFeature createFeatureWith(String featureName, EClassifier featureClassifier,
+				boolean isMultivalue, boolean isContainment) {
 			EStructuralFeature newFeature;
 
 			if (featureClassifier instanceof EClass) {
@@ -120,37 +147,7 @@ public abstract class EClassifierInfo {
 			newFeature.setEType(featureClassifier);
 			newFeature.setLowerBound(0);
 			newFeature.setUpperBound(isMultivalue ? -1 : 1);
-
-			EList<EStructuralFeature> features = getEClass().getEStructuralFeatures();
-			EStructuralFeature existentFeature = findFeatureInClassIgnoringSuperclasses(getEClass(), featureName);
-			if (existentFeature == null) {
-				// feature does not exist, yet
-				return features.add(newFeature);
-			}
-			else {
-				if (newFeature.getLowerBound() != existentFeature.getLowerBound()
-						|| newFeature.getUpperBound() != existentFeature.getUpperBound())
-					throw new TransformationException(ErrorCode.FeatureWithDifferentConfigurationAlreadyExists,
-							"feature with different cardinality already exists " + newFeature, parserElement);
-				else {
-				    // TODO Extract into something more genreral that can be used for uplifting
-					// same name but different type => feature should have
-					// compatible type
-					// remove and add again to overcome problem with reference
-					// vs. attribute
-					EClassifier compatibleType = EcoreUtil2.getCompatibleType(existentFeature.getEType(), newFeature
-							.getEType());
-					if (compatibleType == null)
-						throw new TransformationException(ErrorCode.NoCompatibleFeatureTypeAvailable,
-								"Cannot find compatible type for features", parserElement);
-					int oldIndex = features.indexOf(existentFeature);
-					features.remove(existentFeature);
-					addFeature(featureName, compatibleType, isMultivalue, isContainment, parserElement);
-					existentFeature = findFeatureInClassIgnoringSuperclasses(getEClass(), featureName);
-					features.move(oldIndex, existentFeature);
-					return true;
-				}
-			}
+			return newFeature;
 		}
 
 		public EClass getEClass() {

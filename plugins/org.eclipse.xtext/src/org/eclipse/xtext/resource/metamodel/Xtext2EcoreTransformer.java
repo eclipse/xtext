@@ -170,7 +170,10 @@ public class Xtext2EcoreTransformer {
 		else if (element instanceof RuleCall && !GrammarUtil.isOptionalCardinality(element)) {
 			RuleCall ruleCall = (RuleCall) element;
 			AbstractRule calledRule = GrammarUtil.findRuleForName(grammar, ruleCall.getName());
-			return context.spawnContextWithCalledRule(findOrCreateEClass(calledRule), ruleCall);
+			// do not throw an exception for missing rules, these have been
+			// announced during the first iteration
+			if (calledRule != null)
+				return context.spawnContextWithCalledRule(findOrCreateEClass(calledRule), ruleCall);
 		}
 		else if (element instanceof Action) {
 			Action action = (Action) element;
@@ -214,14 +217,9 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private void normalizeGeneratedPackages() {
-		// TODO Implement
-
-		// feature normalization
-		// - uplift of common feature to supertype
-		// - removal in subtype if already in supertype
-		// - don't combine features with different EDatatypes
-
-		// NOTE: package dependencies
+		TypeHierarchyHelper helper = new TypeHierarchyHelper(this.eClassifierInfos);
+		helper.liftUpFeaturesRecursively();
+		helper.removeDuplicateDerivedFeatures();
 	}
 
 	private void deriveTypesAndHierarchy(EClassifierInfo ruleReturnType, AbstractElement element)
@@ -229,6 +227,9 @@ public class Xtext2EcoreTransformer {
 		if (element instanceof RuleCall) {
 			RuleCall ruleCall = (RuleCall) element;
 			AbstractRule calledRule = GrammarUtil.calledRule(ruleCall);
+			if (calledRule == null)
+				throw new TransformationException(ErrorCode.NoSuchRuleAvailable, "Cannot find rule "
+						+ ruleCall.getName(), ruleCall);
 			TypeRef calledRuleReturnTypeRef = getOrFakeReturnType(calledRule);
 			addSuperType(calledRuleReturnTypeRef, ruleReturnType);
 		}

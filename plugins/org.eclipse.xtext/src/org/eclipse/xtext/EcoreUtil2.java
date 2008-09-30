@@ -9,6 +9,7 @@ package org.eclipse.xtext;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -17,10 +18,14 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -161,16 +166,82 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 
 	private static List<EClass> getSortedCommonCompatibleTypeCandidates(EClass classA, EClass classB) {
-		List<EClass> ca = new ArrayList<EClass>(classA.getEAllSuperTypes());
-		ca.add(classA);
-		List<EClass> cb = new ArrayList<EClass>(classB.getEAllSuperTypes());
-		cb.add(classB);
-		cb.retainAll(ca);
-		ca.retainAll(cb);
+		List<EClass> result = getCompatibleTypesOf(classA);
+		List<EClass> compatibleTypesOfB = getCompatibleTypesOf(classB);
+		result.retainAll(compatibleTypesOfB);
 
-		List<EClass> intersection = ca;
-		Collections.sort(intersection, new EClassTypeHierarchyComparator());
+		Collections.sort(result, new EClassTypeHierarchyComparator());
 
-		return intersection;
+		return result;
 	}
+
+	public static List<EClass> getCompatibleTypesOf(EClass eClass) {
+		List<EClass> ca = new ArrayList<EClass>(eClass.getEAllSuperTypes());
+		ca.add(eClass);
+		return ca;
+	}
+	
+	public static boolean isFeatureSemanticallyEqualApartFromType(EStructuralFeature f1, EStructuralFeature f2) {
+		boolean result = f1.getName().equals(f1.getName());
+		result &= f1.getLowerBound() == f2.getLowerBound();
+		result &= f1.getUpperBound() == f2.getUpperBound();
+		if (f1 instanceof EReference && f2 instanceof EReference)
+			result &= ((EReference) f1).isContainment() == ((EReference) f2).isContainment();
+		return result;
+	}
+
+	public static boolean isFeatureSemanticallyEqualTo(EStructuralFeature f1, EStructuralFeature f2) {
+		boolean result = isFeatureSemanticallyEqualApartFromType(f1, f2);
+		result &= f1.getEType().equals(f2.getEType());
+		return result;
+	}
+
+	public enum FindResult {
+		FeatureDoesNotExist, FeatureExists, DifferentFeatureWithSameNameExists
+	}
+	
+	public static EStructuralFeature findFeatureByName(Collection<EStructuralFeature> features, String name) {
+		for (EStructuralFeature feature : features)
+			if(feature.getName().equals(name))
+				return feature;
+		
+		return null;
+	}
+	
+	public static FindResult containsSemanticallyEqualFeature(EClass eClass, EStructuralFeature feature) {
+		return containsSemanticallyEqualFeature(eClass.getEAllStructuralFeatures(), feature);
+	}
+
+	public static FindResult containsSemanticallyEqualFeature(Collection<EStructuralFeature> features,
+			EStructuralFeature feature) {
+		EStructuralFeature potentiallyEqualFeature = findFeatureByName(features, feature.getName());
+		if (potentiallyEqualFeature == null)
+			return FindResult.FeatureDoesNotExist;
+		else if (isFeatureSemanticallyEqualTo(potentiallyEqualFeature, feature))
+			return FindResult.FeatureExists;
+		else
+			return FindResult.DifferentFeatureWithSameNameExists;
+	}
+
+	public static EStructuralFeature createFeatureAsCloneOf(EStructuralFeature prototype) {
+		EStructuralFeature result;
+		if (prototype instanceof EReference) {
+			EReference prototypeAsReference = (EReference) prototype;
+			EReference resultAsReference = EcoreFactory.eINSTANCE.createEReference();
+			resultAsReference.setContainment(prototypeAsReference.isContainment());
+			result = resultAsReference;
+		}
+		else if (prototype instanceof EAttribute)
+			result = EcoreFactory.eINSTANCE.createEAttribute();
+		else
+			throw new IllegalArgumentException("Unsupported feature type " + prototype);
+
+		result.setName(prototype.getName());
+		result.setEType(prototype.getEType());
+		result.setLowerBound(prototype.getLowerBound());
+		result.setUpperBound(prototype.getUpperBound());
+
+		return result;
+	}
+
 }
