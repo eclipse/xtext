@@ -15,6 +15,7 @@ import static org.easymock.EasyMock.verify;
 
 import java.util.List;
 
+import org.easymock.EasyMock;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -377,7 +378,6 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertSame(type, item.getESuperTypes().get(0));
 		assertEquals(1, thing.getESuperTypes().size());
 		assertSame(type, thing.getESuperTypes().get(0));
-
 	}
 
 	public void testAssignedRuleCall() throws Exception {
@@ -442,7 +442,6 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 
 		assertEquals(4, ruleA.getEReferences().size());
 		assertReferenceConfiguration(ruleA, 0, "refA1", "TypeB", true, 0, 1);
-		// TODO should be common compatible type according to #248430
 		assertReferenceConfiguration(ruleA, 1, "refA2", "TypeB", true, 0, 1);
 		assertReferenceConfiguration(ruleA, 2, "refA3", "TypeB", true, 0, -1);
 		assertReferenceConfiguration(ruleA, 3, "refA4", "TypeB", true, 0, 1);
@@ -656,6 +655,37 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertNotNull(ruleA);
 		assertEquals(1, ruleA.getEAttributes().size());
 		assertAttributeConfiguration(ruleA, 0, "featureA", "EString");
+	}
+	
+	public void testCycleInTypeHierarchy() throws Exception {
+		String grammar = "language test generate test 'http://test'";
+		grammar += " RuleA: RuleB;";
+		grammar += " RuleB: RuleC;";
+		grammar += " RuleC: RuleA;";
+		grammar += " RuleD: RuleA;";
 		
+		errorAcceptorMock.acceptError(same(ErrorCode.TypeWithCycleInHierarchy), (String) anyObject(),
+				(EObject) anyObject());
+		EasyMock.expectLastCall().times(3);
+		
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(4, ePackage.getEClassifiers().size());
+		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
+		assertNotNull(ruleA);
+		EClass ruleB = (EClass) ePackage.getEClassifier("RuleB");
+		assertNotNull(ruleB);
+		EClass ruleC = (EClass) ePackage.getEClassifier("RuleC");
+		assertNotNull(ruleC);	
+		EClass ruleD = (EClass) ePackage.getEClassifier("RuleD");
+		assertNotNull(ruleD);	
+		
+		assertEquals(2, ruleA.getESuperTypes().size());
+		assertSame(ruleC, ruleA.getESuperTypes().get(0));
+		assertSame(ruleD, ruleA.getESuperTypes().get(1));
+		assertEquals(1, ruleB.getESuperTypes().size());
+		assertSame(ruleA, ruleB.getESuperTypes().get(0));
+		assertEquals(1, ruleC.getESuperTypes().size());
+		assertSame(ruleB, ruleC.getESuperTypes().get(0));
+		assertEquals(0, ruleD.getESuperTypes().size());
 	}
 }
