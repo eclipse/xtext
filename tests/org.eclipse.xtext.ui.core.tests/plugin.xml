@@ -20,9 +20,6 @@
     <serviceRegistrationFactory
           class="org.eclipse.xtext.ui.core.TestLanguageRuntimeConfig">
     </serviceRegistrationFactory>
-    <serviceRegistrationFactory
-          class="org.eclipse.xtext.builtin.XtextBuiltinRuntimeConfig">
-    </serviceRegistrationFactory>
  </extension>
  <extension
        point="org.eclipse.emf.ecore.extension_parser">

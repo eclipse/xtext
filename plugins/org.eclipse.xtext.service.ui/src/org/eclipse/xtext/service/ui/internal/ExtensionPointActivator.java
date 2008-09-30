@@ -6,7 +6,6 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
@@ -45,6 +44,7 @@ public class ExtensionPointActivator {
 		IConfigurationElement[] elements = extensionPoint.getConfigurationElements();
 		if (elements != null) {
 			for (IConfigurationElement ele : elements) {
+				System.out.println(ele.getContributor());
 				IServiceRegistrationFactory srf;
 				try {
 					srf = (IServiceRegistrationFactory) ele.createExecutableExtension(CLASS);
@@ -57,7 +57,7 @@ public class ExtensionPointActivator {
 							ServiceRegistry.registerFactory(serviceScope, r.serviceFactory(), r.priority());
 						}
 					}
-				} catch (CoreException e) {
+				} catch (Throwable e) {
 					log.error(e);
 				}
 			}
@@ -82,7 +82,7 @@ public class ExtensionPointActivator {
 			for (ScopeDescriptor scopeDesc : scopes) {
 				try {
 					IServiceScope parentScope = ServiceScopeFactory.get(scopeDesc.parentScope);
-					ServiceScopeFactory.createScope(scopeDesc.id, parentScope);
+//					ServiceScopeFactory.createScope(scopeDesc.id, parentScope);
 				} catch (Exception e) {
 					log.error(e);
 				}
