@@ -33,7 +33,7 @@ public abstract class AbstractServiceRegistrationFactory implements IServiceRegi
 		public ScopedServiceRegistration with(Class<?> interf, Class<?> clazz) {
 			return with(interf,clazz,ServiceRegistry.PRIORITY_NORMAL);
 		}
-			public ScopedServiceRegistration with(Class<?> interf, Class<?> clazz, int prio) {
+		public ScopedServiceRegistration with(Class<?> interf, Class<?> clazz, int prio) {
 			regs.add(new ServiceReg(scope,new GenericServiceFactory(interf,clazz), prio));
 			return this;
 		}
