@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * @author Dennis Hübner - Initial contribution and API
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.syntaxcoloring.tokentype;
+package org.eclipse.xtext.ui.common.editor.syntaxcoloring.old.tokentype;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -62,9 +62,12 @@ standaloneSetupClass(Grammar this) :
 runtimeConfigClass(Grammar this) :
 	getId() + "RuntimeConfig";
 
-uiConfigClass(Grammar this) :
-	getId() + "UiConfig";
+uiConfigClass() :
+	grammar().getId() + "UiConfig";
 
+tokenScannerClass() :
+	grammar().getId() + "TokenScanner";
+	
 languageInterface(Grammar this) :
 	toJavaPackage(getId()) + ".I"+toSimpleName(getId());
 

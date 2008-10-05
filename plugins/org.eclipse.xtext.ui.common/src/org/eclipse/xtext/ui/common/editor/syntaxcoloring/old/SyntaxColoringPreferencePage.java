@@ -6,14 +6,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
+package org.eclipse.xtext.ui.common.editor.syntaxcoloring.old;
 
 import java.util.List;
 
 import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.tokentype.ITokenTypeDef;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.tokentype.ITokenTypeDefProvider;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.tokentype.TokenTypeDefMasterDetailFieldEditor;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.old.tokentype.ITokenTypeDef;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.old.tokentype.ITokenTypeDefProvider;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.old.tokentype.TokenTypeDefMasterDetailFieldEditor;
 import org.eclipse.xtext.ui.core.editor.preferences.AbstractPreferencePage;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 

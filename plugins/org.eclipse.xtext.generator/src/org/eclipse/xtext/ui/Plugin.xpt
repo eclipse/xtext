@@ -37,9 +37,9 @@
  <extension
        point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
     <serviceRegistrationFactory
-          class="«uiConfigClass(grammar())»"/>
+          class="«uiConfigClass()»"/>
     <serviceRegistrationFactory
-          class="«runtimeConfigClass(grammar())»"/>
+          class="«grammar().runtimeConfigClass()»"/>
  </extension>
 	<extension
 		point="org.eclipse.ui.keywords">

@@ -17,8 +17,11 @@
 
 «DEFINE root FOR GenModel»
 
-«FILE "src-gen/"+uiConfigClass(grammar()).toJavaFilePath() UI -»
-package «uiConfigClass(grammar()).toJavaPackage()»;
+«FILE "src-gen/"+uiConfigClass().toJavaFilePath() UI -»
+/*
+«fileHeader()»
+*/
+package «uiConfigClass().toJavaPackage()»;
 
 import java.util.Set;
 
@@ -27,7 +30,7 @@ import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
 /**
  * used to register components to be used at runtime.
  */
-public class «uiConfigClass(grammar()).toSimpleName()» extends AbstractServiceRegistrationFactory {
+public class «uiConfigClass().toSimpleName()» extends AbstractServiceRegistrationFactory {
 
 	public Set<IServiceRegistration> registrations() {
 		return scope(«languageInterface(grammar())».SCOPE)

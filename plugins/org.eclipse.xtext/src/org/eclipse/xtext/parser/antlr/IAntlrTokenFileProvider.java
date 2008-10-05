@@ -4,27 +4,15 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
+package org.eclipse.xtext.parser.antlr;
 
-package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
-
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
+import java.io.InputStream;
 
 /**
- * @author Dennis Huebner - Initial contribution and API
- * 
+ * @author Jan Köhnlein - Initial contribution and API
  */
-public interface ISyntaxColorer extends ILanguageService {
+public interface IAntlrTokenFileProvider {
 
-	/**
-	 * @param leafNode
-	 * @return
-	 */
-	TextStyle color(LeafNode leafNode);
-
-	void clearCache();
-
+	InputStream getAntlrTokenFile();
 }

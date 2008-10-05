@@ -27,6 +27,9 @@ internalPackageFullPath(GenService service) :
 internalAntlrGrammarFullPath(GenService service) :
 	internalPackageFullPath(service) + '/' + internalAntlrGrammarName() + '.g';
 	
+internalAntlrTokensFullPath(GenService service) :
+	internalPackageFullPath(service) + '/' + internalAntlrGrammarName() + '.tokens';
+	
 internalAntlrGrammarName() :
 	 'Internal' + languageName();
 	 

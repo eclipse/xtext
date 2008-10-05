@@ -21,6 +21,7 @@ import org.eclipse.xtext.crossref.impl.DefaultRuntimeURIChecker;
 import org.eclipse.xtext.crossref.impl.XtextBuiltinFragmentProvider;
 import org.eclipse.xtext.crossref.impl.XtextBuiltinLinkProvider;
 import org.eclipse.xtext.crossref.internal.Linker;
+import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
 
 /**
@@ -39,6 +40,7 @@ public class XtextBuiltinRuntimeConfig extends AbstractServiceRegistrationFactor
 				.with(ILinkProvider.class, XtextBuiltinLinkProvider.class)
 				.with(IURIChecker.class, DefaultRuntimeURIChecker.class)
 				.with(IFragmentProvider.class, XtextBuiltinFragmentProvider.class)
+				.with(AntlrTokenDefProvider.class)
 				.registrations();
 	}
 

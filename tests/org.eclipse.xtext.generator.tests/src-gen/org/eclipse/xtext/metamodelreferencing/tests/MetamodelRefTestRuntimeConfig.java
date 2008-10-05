@@ -15,6 +15,7 @@ public class MetamodelRefTestRuntimeConfig extends AbstractServiceRegistrationFa
 		.with(org.eclipse.xtext.IMetamodelAccess.class, org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestMetamodelAccess.class)
 		.with(org.eclipse.xtext.parser.IAstFactory.class, org.eclipse.xtext.parser.GenericEcoreElementFactory.class)
 		.with(org.eclipse.xtext.parser.IParser.class, org.eclipse.xtext.metamodelreferencing.tests.parser.MetamodelRefTestParser.class)
+		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, org.eclipse.xtext.metamodelreferencing.tests.parser.MetamodelRefTestAntlrTokenFileProvider.class)
 		.with(org.eclipse.xtext.resource.IResourceFactory.class, org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestResourceFactory.class)
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, org.eclipse.xtext.metamodelreferencing.tests.parsetree.reconstr.MetamodelRefTestParseTreeConstructor.class)
 		

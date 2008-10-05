@@ -16,11 +16,11 @@
 «EXTENSION org::eclipse::xtext::Properties»
 
 «DEFINE root FOR GenModel»
-«FILE standaloneSetupClass(grammar()).toJavaFilePath()-»
+«FILE grammar().standaloneSetupClass().toJavaFilePath()-»
 /*
 «fileHeader()»
 */
-package «standaloneSetupClass(grammar()).toJavaPackage()»;
+package «grammar().standaloneSetupClass().toJavaPackage()»;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.EcoreUtil2;
@@ -32,7 +32,7 @@ import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistratio
 
 import «languageInterfaceFQName»;
 
-public abstract class «standaloneSetupClass(grammar()).toSimpleName()» {
+public abstract class «grammar().standaloneSetupClass().toSimpleName()» {
 
 	private static boolean isInitialized = false;
 

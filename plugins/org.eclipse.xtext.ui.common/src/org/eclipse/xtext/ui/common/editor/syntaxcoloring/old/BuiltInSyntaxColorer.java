@@ -7,7 +7,7 @@
  *
  *******************************************************************************/
 
-package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
+package org.eclipse.xtext.ui.common.editor.syntaxcoloring.old;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +15,8 @@ import java.util.Map;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.tokentype.ITokenTypeDef;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.tokentype.ITokenTypeDefProvider;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.old.tokentype.ITokenTypeDef;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.old.tokentype.ITokenTypeDefProvider;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 
 /**

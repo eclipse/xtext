@@ -13,5 +13,6 @@ Export-Package: org.eclipse.xtext.ui.common.editor.codecompletion,
  org.eclipse.xtext.ui.common.editor.hyperlink,
  org.eclipse.xtext.ui.common.editor.outline,
  org.eclipse.xtext.ui.common.editor.syntaxcoloring,
- org.eclipse.xtext.ui.common.editor.tasks
+ org.eclipse.xtext.ui.common.editor.tasks,
+ org.eclipse.xtext.ui.common.editor.tasks.dialogfields
 Import-Package: org.eclipse.ui.texteditor.templates
