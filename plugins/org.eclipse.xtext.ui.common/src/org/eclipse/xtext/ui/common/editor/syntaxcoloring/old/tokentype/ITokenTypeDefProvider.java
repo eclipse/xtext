@@ -6,25 +6,16 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
+package org.eclipse.xtext.ui.common.editor.syntaxcoloring.old.tokentype;
 
-package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
+import java.util.List;
 
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.ILanguageService;
-import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 
 /**
- * @author Dennis Huebner - Initial contribution and API
+ * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public interface ISyntaxColorer extends ILanguageService {
-
-	/**
-	 * @param leafNode
-	 * @return
-	 */
-	TextStyle color(LeafNode leafNode);
-
-	void clearCache();
-
+public interface ITokenTypeDefProvider extends ILanguageService {
+	List<ITokenTypeDef> allTokenTypes();
 }

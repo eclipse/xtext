@@ -15,6 +15,7 @@ public class OptionalEmptyLanguageRuntimeConfig extends AbstractServiceRegistrat
 		.with(org.eclipse.xtext.IMetamodelAccess.class, org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageMetamodelAccess.class)
 		.with(org.eclipse.xtext.parser.IAstFactory.class, org.eclipse.xtext.parser.GenericEcoreElementFactory.class)
 		.with(org.eclipse.xtext.parser.IParser.class, org.eclipse.xtext.testlanguages.parser.OptionalEmptyLanguageParser.class)
+		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, org.eclipse.xtext.testlanguages.parser.OptionalEmptyLanguageAntlrTokenFileProvider.class)
 		.with(org.eclipse.xtext.resource.IResourceFactory.class, org.eclipse.xtext.testlanguages.services.OptionalEmptyLanguageResourceFactory.class)
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, org.eclipse.xtext.testlanguages.parsetree.reconstr.OptionalEmptyLanguageParseTreeConstructor.class)
 		

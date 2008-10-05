@@ -6,14 +6,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.syntaxcoloring.tokentype;
+package org.eclipse.xtext.ui.common.editor.syntaxcoloring.old.tokentype;
 
 import org.eclipse.jface.preference.ColorFieldEditor;
 import org.eclipse.jface.preference.FontFieldEditor;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.swt.SWT;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.PreferenceConstants;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.old.PreferenceConstants;
 import org.eclipse.xtext.ui.core.editor.preferences.fields.AbstractDetailsPart;
 import org.eclipse.xtext.ui.core.editor.preferences.fields.CheckBoxGroupFieldEditor;
 

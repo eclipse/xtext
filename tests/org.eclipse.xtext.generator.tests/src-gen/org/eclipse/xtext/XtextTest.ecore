@@ -13,24 +13,25 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="metamodelDeclarations" upperBound="-1" eType="//AbstractMetamodelDeclaration" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1" eType="//AbstractRule" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractRule"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LexerRule" eSuperTypes="//AbstractRule">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//TypeRef"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//TypeRef" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LexerRule" eSuperTypes="//AbstractRule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="body">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParserRule" eSuperTypes="//AbstractRule">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//TypeRef" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="alternatives" eType="//AbstractElement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractMetamodelDeclaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractMetamodelDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GeneratedMetamodel" eSuperTypes="//AbstractMetamodelDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -38,15 +39,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsURI">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReferencedMetamodel" eSuperTypes="//AbstractMetamodelDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
@@ -70,9 +65,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="abstractTokens" upperBound="-1" eType="//AbstractElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="//AbstractElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinality">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="feature">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
@@ -82,9 +74,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="terminal" eType="//AbstractElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Action" eSuperTypes="//AbstractElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinality">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeName" eType="//TypeRef" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="feature">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>

@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
+package org.eclipse.xtext.ui.common.editor.syntaxcoloring.old;
 
 import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
