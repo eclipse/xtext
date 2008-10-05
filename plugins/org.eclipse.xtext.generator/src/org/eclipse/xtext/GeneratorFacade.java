@@ -142,17 +142,19 @@ public class GeneratorFacade {
 		genModel.getModelFileExtensions().addAll(Arrays.asList(modelFileExtensions));
 		genModel.setFileHeader("Generated with Xtext");
 		genModel.setLanguageInterfaceFQName(namespace + ".I" + languageName);
+
+		genModel.getOutlets().add(outlet("", srcGenPath));
+
 		if (uiProjectPath != null) {
 			String uiPluginID = uiProjectPath.substring(uiProjectPath.lastIndexOf('/') + 1);
 			genModel.setNonUIPluginBundleID(namespace);
 			genModel.setUiPluginBundleID(uiPluginID);
-		}
 
-		genModel.getOutlets().add(outlet("", srcGenPath));
-		genModel.getOutlets().add(outlet("UI", uiProjectPath));
-		genModel.getOutlets().add(outlet("UI_SRC_GEN", uiProjectPath + "/src-gen"));
-		genModel.getOutlets().add(outlet("UI_MANIFEST", uiProjectPath + "/META-INF"));
-		genModel.getOutlets().add(outlet("UI_TEMPLATES", uiProjectPath + "/templates"));
+			genModel.getOutlets().add(outlet("UI", uiProjectPath));
+			genModel.getOutlets().add(outlet("UI_SRC_GEN", uiProjectPath + "/src-gen"));
+			genModel.getOutlets().add(outlet("UI_MANIFEST", uiProjectPath + "/META-INF"));
+			genModel.getOutlets().add(outlet("UI_TEMPLATES", uiProjectPath + "/templates"));
+		}
 
 		GenService grammarAccessService = XtextgenFactory.eINSTANCE.createGenService();
 		grammarAccessService.setServiceInterfaceFQName("org.eclipse.xtext.IGrammarAccess");
@@ -185,6 +187,13 @@ public class GeneratorFacade {
 			parserService.setExtensionPointID("org.eclipse.xtext.ui.parser");
 			genModel.getServices().add(parserService);
 
+			GenService tokenFileProviderService = XtextgenFactory.eINSTANCE.createGenService();
+			tokenFileProviderService.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider");
+			tokenFileProviderService.setGenClassFQName(namespace + ".parser." + languageName + "AntlrTokenFileProvider");
+			tokenFileProviderService.setTemplatePath("org::eclipse::xtext::parser::AntlrTokenFileProvider::root");
+			//tokenFileProviderService.setExtensionPointID("org.eclipse.xtext.ui.parser");
+			genModel.getServices().add(tokenFileProviderService);
+
 			GenService resourceFactoryService = XtextgenFactory.eINSTANCE.createGenService();
 			resourceFactoryService.setServiceInterfaceFQName("org.eclipse.xtext.resource.IResourceFactory");
 			resourceFactoryService.setGenClassFQName(namespace + ".services." + languageName + "ResourceFactory");
@@ -201,6 +210,14 @@ public class GeneratorFacade {
 					.setTemplatePath("org::eclipse::xtext::parsetree::reconstr::ParseTreeConstructor::root");
 			parsetreeReconstructorService.setExtensionPointID("org.eclipse.xtext.ui.parseTreeConstructor");
 			genModel.getServices().add(parsetreeReconstructorService);
+			
+			if (uiProjectPath != null) {
+				GenService tokenScannerService = XtextgenFactory.eINSTANCE.createGenService();
+				tokenScannerService.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.Lexer");
+				tokenScannerService.setGenClassFQName(namespace + ".parser.internal.Internal" + languageName + "Lexer");
+				tokenScannerService.setUiService(true);
+				genModel.getServices().add(tokenScannerService);
+			}
 
 		}
 
