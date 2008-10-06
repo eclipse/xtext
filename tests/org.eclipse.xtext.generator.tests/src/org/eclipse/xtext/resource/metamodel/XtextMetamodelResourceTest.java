@@ -12,6 +12,7 @@ import junit.framework.TestCase;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -31,6 +32,8 @@ public class XtextMetamodelResourceTest extends TestCase {
 		Resource resource = rs.getResource(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xtext"), true);
 		EList<EObject> contents = resource.getContents();
 		assertEquals(1, contents.size());
-		fail();
+		assertTrue(contents.get(0) instanceof EPackage);
+		EPackage ePackage = (EPackage) contents.get(0);
+		assertEquals(6, ePackage.getEClassifiers().size());
 	}
 }
