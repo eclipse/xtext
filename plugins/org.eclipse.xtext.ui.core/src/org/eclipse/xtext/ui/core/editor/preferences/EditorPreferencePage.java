@@ -24,6 +24,6 @@ public class EditorPreferencePage extends AbstractPreferencePage {
 
 	@Override
 	protected String qualifiedName() {
-		return "editor";
+		return PreferenceConstants.EDITOR_NODE_NAME;
 	}
 }
