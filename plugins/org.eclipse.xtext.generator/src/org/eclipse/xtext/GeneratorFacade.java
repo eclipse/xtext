@@ -46,7 +46,7 @@ import org.eclipse.xtext.xtextgen.XtextgenPackage;
  * 
  */
 public class GeneratorFacade {
-	
+
 	private static Logger log = Logger.getLogger(GeneratorFacade.class);
 
 	public static void generate(Grammar grammarModel, String srcGenPath, String uiProjectPath,
@@ -56,15 +56,15 @@ public class GeneratorFacade {
 		ExecutionContextImpl ctx = new ExecutionContextImpl();
 		ctx.registerMetaModel(new EmfRegistryMetaModel());
 		CheckFacade.checkAll("org::eclipse::xtext::Xtext2", list, ctx, issues);
-		
+
 		System.err.println(issues);
 		if (issues.hasErrors())
 			return;
-		
+
 		CompositeNode rootNode = NodeUtil.getRootNode(grammarModel);
 		EList<SyntaxError> allSyntaxErrors = rootNode.allSyntaxErrors();
 		for (SyntaxError syntaxError : allSyntaxErrors) {
-			System.err.println(syntaxError.getMessage()+":"+syntaxError.getNode().getLine());
+			System.err.println(syntaxError.getMessage() + ":" + syntaxError.getNode().getLine());
 		}
 		if (!allSyntaxErrors.isEmpty())
 			throw new IllegalStateException("The grammar has syntax errors.");
@@ -82,7 +82,7 @@ public class GeneratorFacade {
 		EList<org.eclipse.xtext.xtextgen.Outlet> outletMap = genModel.getOutlets();
 		for (org.eclipse.xtext.xtextgen.Outlet o : outletMap) {
 			Outlet outlet = new Outlet(o.getTargetFolder());
-			if (o.getName().length()>0)
+			if (o.getName().length() > 0)
 				outlet.setName(o.getName());
 			output.addOutlet(outlet);
 		}
@@ -95,8 +95,7 @@ public class GeneratorFacade {
 		EmfRegistryMetaModel metamodel = new EmfRegistryMetaModel() {
 			@Override
 			protected EPackage[] allPackages() {
-				return new EPackage[] { XtextPackage.eINSTANCE,XtextgenPackage.eINSTANCE,
-						EcorePackage.eINSTANCE };
+				return new EPackage[] { XtextPackage.eINSTANCE, XtextgenPackage.eINSTANCE, EcorePackage.eINSTANCE };
 			}
 		};
 		execCtx.registerMetaModel(metamodel);
@@ -187,10 +186,13 @@ public class GeneratorFacade {
 			genModel.getServices().add(parserService);
 
 			GenService tokenFileProviderService = XtextgenFactory.eINSTANCE.createGenService();
-			tokenFileProviderService.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider");
-			tokenFileProviderService.setGenClassFQName(namespace + ".parser." + languageName + "AntlrTokenFileProvider");
+			tokenFileProviderService
+					.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider");
+			tokenFileProviderService
+					.setGenClassFQName(namespace + ".parser." + languageName + "AntlrTokenFileProvider");
 			tokenFileProviderService.setTemplatePath("org::eclipse::xtext::parser::AntlrTokenFileProvider::root");
-			//tokenFileProviderService.setExtensionPointID("org.eclipse.xtext.ui.parser");
+			// tokenFileProviderService.setExtensionPointID(
+			// "org.eclipse.xtext.ui.parser");
 			genModel.getServices().add(tokenFileProviderService);
 
 			GenService resourceFactoryService = XtextgenFactory.eINSTANCE.createGenService();
@@ -209,14 +211,11 @@ public class GeneratorFacade {
 					.setTemplatePath("org::eclipse::xtext::parsetree::reconstr::ParseTreeConstructor::root");
 			parsetreeReconstructorService.setExtensionPointID("org.eclipse.xtext.ui.parseTreeConstructor");
 			genModel.getServices().add(parsetreeReconstructorService);
-			
-			if (uiProjectPath != null) {
-				GenService tokenScannerService = XtextgenFactory.eINSTANCE.createGenService();
-				tokenScannerService.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.Lexer");
-				tokenScannerService.setGenClassFQName(namespace + ".parser.internal.Internal" + languageName + "Lexer");
-				tokenScannerService.setUiService(true);
-				genModel.getServices().add(tokenScannerService);
-			}
+
+			GenService tokenScannerService = XtextgenFactory.eINSTANCE.createGenService();
+			tokenScannerService.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.Lexer");
+			tokenScannerService.setGenClassFQName(namespace + ".parser.internal.Internal" + languageName + "Lexer");
+			genModel.getServices().add(tokenScannerService);
 
 		}
 
