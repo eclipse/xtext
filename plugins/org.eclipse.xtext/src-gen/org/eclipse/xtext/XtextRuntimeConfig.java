@@ -18,6 +18,7 @@ public class XtextRuntimeConfig extends AbstractServiceRegistrationFactory {
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, org.eclipse.xtext.parser.XtextAntlrTokenFileProvider.class)
 		.with(org.eclipse.xtext.resource.IResourceFactory.class, org.eclipse.xtext.services.XtextResourceFactory.class)
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, org.eclipse.xtext.parsetree.reconstr.XtextParseTreeConstructor.class)
+		.with(org.eclipse.xtext.parser.antlr.Lexer.class, org.eclipse.xtext.parser.internal.InternalXtextLexer.class)
 		
 			.registrations();
 	}

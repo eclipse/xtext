@@ -18,6 +18,7 @@ public class ConcreteTestLanguageRuntimeConfig extends AbstractServiceRegistrati
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, org.eclipse.xtext.grammarinheritance.parser.ConcreteTestLanguageAntlrTokenFileProvider.class)
 		.with(org.eclipse.xtext.resource.IResourceFactory.class, org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageResourceFactory.class)
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, org.eclipse.xtext.grammarinheritance.parsetree.reconstr.ConcreteTestLanguageParseTreeConstructor.class)
+		.with(org.eclipse.xtext.parser.antlr.Lexer.class, org.eclipse.xtext.grammarinheritance.parser.internal.InternalConcreteTestLanguageLexer.class)
 		
 			.registrations();
 	}
