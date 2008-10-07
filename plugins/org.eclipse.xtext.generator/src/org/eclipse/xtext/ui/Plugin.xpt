@@ -41,6 +41,26 @@
     <serviceRegistrationFactory
           class="«grammar().runtimeConfigClass()»"/>
  </extension>
+ <extension
+         point="org.eclipse.ui.preferencePages">
+		<page
+			class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/«languageId()»"
+			id="«languageId()»"
+			name="«languageName()»">
+			<keywordReference
+				id="«languageKeywordId()»">
+			</keywordReference>
+		</page>
+		<page
+		    category="«languageId()»"
+		    class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/«languageId()»"
+		    id="«languageId()».editor"
+		    name="Editor">
+		    	<keywordReference 
+           			id="org.eclipse.xtext.keyword.editor">
+     			</keywordReference>
+		</page>
+      </extension>
 	<extension
 		point="org.eclipse.ui.keywords">
 		<keyword
