@@ -8,7 +8,7 @@
  * Contributors:
  * committers of openArchitectureWare - initial API and implementation
  *******************************************************************************/
-package org.eclipse.xtext.xtext2ecore;
+package org.eclipse.xtext.tests;
 
 import java.util.ArrayList;
 import java.util.HashMap;
