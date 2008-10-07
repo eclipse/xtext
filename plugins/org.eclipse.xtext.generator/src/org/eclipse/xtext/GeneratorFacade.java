@@ -40,7 +40,6 @@ import org.eclipse.xtext.xtextgen.GenModel;
 import org.eclipse.xtext.xtextgen.GenService;
 import org.eclipse.xtext.xtextgen.XtextgenFactory;
 import org.eclipse.xtext.xtextgen.XtextgenPackage;
-import org.eclipse.xtext.xtextutil.XtextutilPackage;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -96,7 +95,7 @@ public class GeneratorFacade {
 		EmfRegistryMetaModel metamodel = new EmfRegistryMetaModel() {
 			@Override
 			protected EPackage[] allPackages() {
-				return new EPackage[] { XtextPackage.eINSTANCE, XtextutilPackage.eINSTANCE, XtextgenPackage.eINSTANCE,
+				return new EPackage[] { XtextPackage.eINSTANCE,XtextgenPackage.eINSTANCE,
 						EcorePackage.eINSTANCE };
 			}
 		};

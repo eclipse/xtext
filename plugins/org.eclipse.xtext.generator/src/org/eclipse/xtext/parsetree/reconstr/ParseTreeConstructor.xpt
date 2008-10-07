@@ -15,7 +15,6 @@
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
 «EXTENSION org::eclipse::xtext::parsetree::reconstr::ParseTreeConstructor»
-«EXTENSION org::eclipse::xtext::XtextUtil»
 «EXTENSION org::eclipse::xtend::util::stdlib::collections»
 «EXTENSION org::eclipse::xtend::util::stdlib::io»
 

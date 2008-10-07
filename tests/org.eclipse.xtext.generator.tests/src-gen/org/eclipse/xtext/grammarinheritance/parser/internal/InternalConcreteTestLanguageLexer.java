@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g 2008-10-05 14:49:15
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g 2008-10-07 13:49:52
 
 package org.eclipse.xtext.grammarinheritance.parser.internal;
 

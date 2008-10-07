@@ -14,7 +14,6 @@
 
 «EXTENSION org::eclipse::xtext::parser::AntlrGrammar»
 «EXTENSION org::eclipse::xtext::Extensions»
-«EXTENSION org::eclipse::xtext::XtextUtil»
 «EXTENSION org::eclipse::xtext::parser::Parser»
 
 «DEFINE root FOR GenService»
