@@ -8,49 +8,33 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+
 
 public class ComplexReconstrTestParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
-		AbstractToken t = internalSerialize(obj);
+		Solution t = internalSerialize(obj);
 		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		t.executeAllCallbacks(callback);
+		t.getPredecessor().executeAllCallbacks(callback);
 		System.out.println("success!");
 	}
 	
-	protected AbstractToken internalSerialize(EObject obj) {
-		AbstractToken t = new Op_Group(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new Term_Alternatives(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new Atom_Assignment_name(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new Parens_Group(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new TrickyA_Group(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new TrickyA1_Assignment_name(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new TrickyB_Group(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new TrickyC_Group(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new TrickyD_Group(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new TrickyE_Group(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new TrickyF_Group(null);
-		return t.createFirstSolution(getDescr(obj));
+	protected Solution internalSerialize(EObject obj) {
+		InstanceDescription inst = getDescr(obj);
+		Solution s;
+		if((s = new Op_Group(inst, null).firstSolution()) != null) return s;
+		if((s = new Term_Alternatives(inst, null).firstSolution()) != null) return s;
+		if((s = new Atom_Assignment_name(inst, null).firstSolution()) != null) return s;
+		if((s = new Parens_Group(inst, null).firstSolution()) != null) return s;
+		if((s = new TrickyA_Group(inst, null).firstSolution()) != null) return s;
+		if((s = new TrickyA1_Assignment_name(inst, null).firstSolution()) != null) return s;
+		if((s = new TrickyB_Group(inst, null).firstSolution()) != null) return s;
+		if((s = new TrickyC_Group(inst, null).firstSolution()) != null) return s;
+		if((s = new TrickyD_Group(inst, null).firstSolution()) != null) return s;
+		if((s = new TrickyE_Group(inst, null).firstSolution()) != null) return s;
+		if((s = new TrickyF_Group(inst, null).firstSolution()) != null) return s;
+		return null;
 	}
 	
 /************ begin Rule Op ****************/
@@ -58,193 +42,99 @@ public class ComplexReconstrTestParseTreeConstructor extends AbstractParseTreeCo
 
 protected class Op_Group extends GroupToken {
 	
-	public Op_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Op_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Op_Group(predecessor, true, false);
+	public Op_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Op_1_Alternatives(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new Op_0_RuleCall_Term(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new Op_1_Alternatives(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new Op_0_RuleCall_Term(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class Op_0_RuleCall_Term extends RuleCallToken {
 	
-	public Op_0_RuleCall_Term(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Op_0_RuleCall_Term(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Op_0_RuleCall_Term(predecessor, true, false);
+	public Op_0_RuleCall_Term(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(checkForRecursion()) return null;
-		if(!predecessor.getObject().isInstanceOf("Expression")) return null;
-		AbstractToken t = new Term_Alternatives(predecessor);
-		predecessor = t.createFirstSolution(object);
-		if(predecessor != null)
-			object = t.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		if(checkForRecursion(Term_Alternatives.class, current)) return null;
+		if(!current.isInstanceOf("Expression")) return null;
+		return new Term_Alternatives(current, this).firstSolution();
 	}
 }
 
 protected class Op_1_Alternatives extends GroupToken {
 	
-	private int currentOption = 1;
+	private boolean first = true;
 
-	public Op_1_Alternatives(AbstractToken predecessor) {
-		super(predecessor, IS_MANY, !IS_REQUIRED);
-	}
-	
-	private Op_1_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Op_1_Alternatives(predecessor, true, false);
+	public Op_1_Alternatives(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 
 	
-	protected boolean activateNextOption() {
-		if(currentOption > 0) {
-			currentOption--;
+	protected boolean activateNextSolution() {
+		if(first) {
+			first = false;
 			return true;
 		}
 		return false;
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t, r;
-		do {		
-			switch(currentOption) {
-			case 0: t = new Op_1_1_Group(predecessor); break;
-			case 1: t = new Op_1_0_Group(predecessor); break;
-			default: throw new RuntimeException("Undefinex Index: "+currentOption);
-			}
-			r = t.createFirstSolution(predecessor.getObject());
-		} while (r == null && activateNextOption());
-		if(r != null)
-			object = t.getObject();
-		return r;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new Op_1_1_Group(current, this) : new Op_1_0_Group(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		return s; 
 	}
 }
 
 protected class Op_1_0_Group extends GroupToken {
 	
-	public Op_1_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Op_1_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Op_1_0_Group(predecessor, true, false);
+	public Op_1_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Op_1_0_1_Assignment_addOperands(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new Op_1_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new Op_1_0_1_Assignment_addOperands(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new Op_1_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class Op_1_0_0_Group extends GroupToken {
 	
-	public Op_1_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Op_1_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Op_1_0_0_Group(predecessor, true, false);
+	public Op_1_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Op_1_0_0_1_Keyword(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new Op_1_0_0_0_Action_Add_addOperands(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new Op_1_0_0_1_Keyword(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new Op_1_0_0_0_Action_Add_addOperands(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class Op_1_0_0_0_Action_Add_addOperands extends AssignmentToken  {
 
-	public Op_1_0_0_0_Action_Add_addOperands(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Op_1_0_0_0_Action_Add_addOperands(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Op_1_0_0_0_Action_Add_addOperands(predecessor, true, false);
+	public Op_1_0_0_0_Action_Add_addOperands(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(!object.isInstanceOf("Add")) return null;
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("addOperands")) return null;
+	protected Solution createSolution() {
+		if(!current.isInstanceOf("Add")) return null;
+		if(!current.isConsumable("addOperands")) return null;
+		IInstanceDescription obj = current.createClone();
 		Object val = obj.consume("addOperands");
 		if(!obj.isConsumed()) return null;
-		object = getDescr((EObject)val);
-		return predecessor;
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+		return new Solution(getDescr((EObject)val));
 	}
 }
 
@@ -253,20 +143,16 @@ protected class Op_1_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.1");
 	
-	public Op_1_0_0_1_Keyword(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public Op_1_0_0_1_Keyword(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
@@ -276,29 +162,22 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public Op_1_0_1_Assignment_addOperands(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Op_1_0_1_Assignment_addOperands(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Op_1_0_1_Assignment_addOperands(predecessor, true, false);
+	public Op_1_0_1_Assignment_addOperands(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("addOperands")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("addOperands")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("addOperands");
-		if(!predecessor.getObject().isInstanceOf("Expression")) return null;
-		AbstractToken t = new Term_Alternatives(predecessor);
-		predecessor = t.createFirstSolution(getDescr((EObject)value));
-		if(predecessor == null) return null;
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		InstanceDescription param = getDescr((EObject)value);
+		if(!param.isInstanceOf("Expression")) return null;
+		AbstractToken t = new Term_Alternatives(param, this);
+		Solution s =  t.firstSolution();
+		if(s == null) return null;
+		return new Solution(obj,s.getPredecessor());
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
@@ -310,90 +189,46 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 
 protected class Op_1_1_Group extends GroupToken {
 	
-	public Op_1_1_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Op_1_1_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Op_1_1_Group(predecessor, true, false);
+	public Op_1_1_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Op_1_1_1_Assignment_minusOperands(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new Op_1_1_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new Op_1_1_1_Assignment_minusOperands(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new Op_1_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class Op_1_1_0_Group extends GroupToken {
 	
-	public Op_1_1_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Op_1_1_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Op_1_1_0_Group(predecessor, true, false);
+	public Op_1_1_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Op_1_1_0_1_Keyword(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new Op_1_1_0_0_Action_Minus_minusOperands(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new Op_1_1_0_1_Keyword(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new Op_1_1_0_0_Action_Minus_minusOperands(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class Op_1_1_0_0_Action_Minus_minusOperands extends AssignmentToken  {
 
-	public Op_1_1_0_0_Action_Minus_minusOperands(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Op_1_1_0_0_Action_Minus_minusOperands(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Op_1_1_0_0_Action_Minus_minusOperands(predecessor, true, false);
+	public Op_1_1_0_0_Action_Minus_minusOperands(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(!object.isInstanceOf("Minus")) return null;
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("minusOperands")) return null;
+	protected Solution createSolution() {
+		if(!current.isInstanceOf("Minus")) return null;
+		if(!current.isConsumable("minusOperands")) return null;
+		IInstanceDescription obj = current.createClone();
 		Object val = obj.consume("minusOperands");
 		if(!obj.isConsumed()) return null;
-		object = getDescr((EObject)val);
-		return predecessor;
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+		return new Solution(getDescr((EObject)val));
 	}
 }
 
@@ -402,20 +237,16 @@ protected class Op_1_1_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1");
 	
-	public Op_1_1_0_1_Keyword(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public Op_1_1_0_1_Keyword(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
@@ -425,29 +256,22 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public Op_1_1_1_Assignment_minusOperands(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Op_1_1_1_Assignment_minusOperands(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Op_1_1_1_Assignment_minusOperands(predecessor, true, false);
+	public Op_1_1_1_Assignment_minusOperands(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("minusOperands")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("minusOperands")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("minusOperands");
-		if(!predecessor.getObject().isInstanceOf("Expression")) return null;
-		AbstractToken t = new Term_Alternatives(predecessor);
-		predecessor = t.createFirstSolution(getDescr((EObject)value));
-		if(predecessor == null) return null;
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		InstanceDescription param = getDescr((EObject)value);
+		if(!param.isInstanceOf("Expression")) return null;
+		AbstractToken t = new Term_Alternatives(param, this);
+		Solution s =  t.firstSolution();
+		if(s == null) return null;
+		return new Solution(obj,s.getPredecessor());
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
@@ -465,103 +289,54 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 
 protected class Term_Alternatives extends GroupToken {
 	
-	private int currentOption = 1;
+	private boolean first = true;
 
-	public Term_Alternatives(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Term_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Term_Alternatives(predecessor, true, false);
+	public Term_Alternatives(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected boolean activateNextOption() {
-		if(currentOption > 0) {
-			currentOption--;
+	protected boolean activateNextSolution() {
+		if(first) {
+			first = false;
 			return true;
 		}
 		return false;
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t, r;
-		do {		
-			switch(currentOption) {
-			case 0: t = new Term_1_RuleCall_Parens(predecessor); break;
-			case 1: t = new Term_0_RuleCall_Atom(predecessor); break;
-			default: throw new RuntimeException("Undefinex Index: "+currentOption);
-			}
-			r = t.createFirstSolution(predecessor.getObject());
-		} while (r == null && activateNextOption());
-		if(r != null)
-			object = t.getObject();
-		return r;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new Term_1_RuleCall_Parens(current, this) : new Term_0_RuleCall_Atom(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		return s; 
 	}
 }
 
 protected class Term_0_RuleCall_Atom extends RuleCallToken {
 	
-	public Term_0_RuleCall_Atom(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Term_0_RuleCall_Atom(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Term_0_RuleCall_Atom(predecessor, true, false);
+	public Term_0_RuleCall_Atom(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(checkForRecursion()) return null;
-		if(!predecessor.getObject().isInstanceOf("Atom")) return null;
-		AbstractToken t = new Atom_Assignment_name(predecessor);
-		predecessor = t.createFirstSolution(object);
-		if(predecessor != null)
-			object = t.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		if(checkForRecursion(Atom_Assignment_name.class, current)) return null;
+		if(!current.isInstanceOf("Atom")) return null;
+		return new Atom_Assignment_name(current, this).firstSolution();
 	}
 }
 
 protected class Term_1_RuleCall_Parens extends RuleCallToken {
 	
-	public Term_1_RuleCall_Parens(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Term_1_RuleCall_Parens(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Term_1_RuleCall_Parens(predecessor, true, false);
+	public Term_1_RuleCall_Parens(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(checkForRecursion()) return null;
-		if(!predecessor.getObject().isInstanceOf("Expression")) return null;
-		AbstractToken t = new Parens_Group(predecessor);
-		predecessor = t.createFirstSolution(object);
-		if(predecessor != null)
-			object = t.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		if(checkForRecursion(Parens_Group.class, current)) return null;
+		if(!current.isInstanceOf("Expression")) return null;
+		return new Parens_Group(current, this).firstSolution();
 	}
 }
 
@@ -575,30 +350,22 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.2/@alternatives/@terminal");
 	protected Object value;
 	
-	public Atom_Assignment_name(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Atom_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Atom_Assignment_name(predecessor, true, false);
+	public Atom_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("name")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("name")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("name");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("Atom_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -608,91 +375,43 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 
 protected class Parens_Group extends GroupToken {
 	
-	public Parens_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Parens_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Parens_Group(predecessor, true, false);
+	public Parens_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Parens_1_Assignment_em(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new Parens_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new Parens_1_Assignment_em(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new Parens_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class Parens_0_Group extends GroupToken {
 	
-	public Parens_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Parens_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Parens_0_Group(predecessor, true, false);
+	public Parens_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Parens_0_1_Keyword(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new Parens_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new Parens_0_1_Keyword(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new Parens_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class Parens_0_0_Group extends GroupToken {
 	
-	public Parens_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Parens_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Parens_0_0_Group(predecessor, true, false);
+	public Parens_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new Parens_0_0_1_RuleCall_Op(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new Parens_0_0_0_Keyword(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new Parens_0_0_1_RuleCall_Op(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new Parens_0_0_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
@@ -701,49 +420,30 @@ protected class Parens_0_0_0_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
 	
-	public Parens_0_0_0_Keyword(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public Parens_0_0_0_Keyword(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
 protected class Parens_0_0_1_RuleCall_Op extends RuleCallToken {
 	
-	public Parens_0_0_1_RuleCall_Op(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Parens_0_0_1_RuleCall_Op(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Parens_0_0_1_RuleCall_Op(predecessor, true, false);
+	public Parens_0_0_1_RuleCall_Op(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(checkForRecursion()) return null;
-		if(!predecessor.getObject().isInstanceOf("Expression")) return null;
-		AbstractToken t = new Op_Group(predecessor);
-		predecessor = t.createFirstSolution(object);
-		if(predecessor != null)
-			object = t.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		if(checkForRecursion(Op_Group.class, current)) return null;
+		if(!current.isInstanceOf("Expression")) return null;
+		return new Op_Group(current, this).firstSolution();
 	}
 }
 
@@ -753,20 +453,16 @@ protected class Parens_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1");
 	
-	public Parens_0_1_Keyword(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public Parens_0_1_Keyword(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
@@ -776,31 +472,22 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public Parens_1_Assignment_em(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, !IS_REQUIRED);
-	}
-	
-	private Parens_1_Assignment_em(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Parens_1_Assignment_em(predecessor, true, false);
+	public Parens_1_Assignment_em(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("em")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("em")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("em");
-		// nothing special needs to be done for xtext::Keyword
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::Keyword
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("Parens_1_Assignment_emCallback(\"xtext::Keyword\", " + value + ")");
-		callback.keywordCall(object, (Keyword)element);
+		callback.keywordCall(current, (Keyword)element);
 	}
 }
 
@@ -811,120 +498,57 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 
 protected class TrickyA_Group extends GroupToken {
 	
-	public TrickyA_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyA_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyA_Group(predecessor, true, false);
+	public TrickyA_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyA_1_Assignment_name(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyA_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyA_1_Assignment_name(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyA_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyA_0_Group extends GroupToken {
 	
-	public TrickyA_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyA_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyA_0_Group(predecessor, true, false);
+	public TrickyA_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyA_0_1_Alternatives(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyA_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyA_0_1_Alternatives(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyA_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyA_0_0_Group extends GroupToken {
 	
-	public TrickyA_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyA_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyA_0_0_Group(predecessor, true, false);
+	public TrickyA_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyA_0_0_1_Assignment_name(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyA_0_0_0_RuleCall_TrickyA1(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyA_0_0_1_Assignment_name(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyA_0_0_0_RuleCall_TrickyA1(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyA_0_0_0_RuleCall_TrickyA1 extends RuleCallToken {
 	
-	public TrickyA_0_0_0_RuleCall_TrickyA1(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyA_0_0_0_RuleCall_TrickyA1(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyA_0_0_0_RuleCall_TrickyA1(predecessor, true, false);
+	public TrickyA_0_0_0_RuleCall_TrickyA1(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(checkForRecursion()) return null;
-		if(!predecessor.getObject().isInstanceOf("TypeD")) return null;
-		AbstractToken t = new TrickyA1_Assignment_name(predecessor);
-		predecessor = t.createFirstSolution(object);
-		if(predecessor != null)
-			object = t.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		if(checkForRecursion(TrickyA1_Assignment_name.class, current)) return null;
+		if(!current.isInstanceOf("TypeD")) return null;
+		return new TrickyA1_Assignment_name(current, this).firstSolution();
 	}
 }
 
@@ -933,134 +557,79 @@ protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyA_0_0_1_Assignment_name(AbstractToken predecessor) {
-		super(predecessor, IS_MANY, !IS_REQUIRED);
-	}
-	
-	private TrickyA_0_0_1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyA_0_0_1_Assignment_name(predecessor, true, false);
+	public TrickyA_0_0_1_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("name")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("name")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("name");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyA_0_0_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
 
 protected class TrickyA_0_1_Alternatives extends GroupToken {
 	
-	private int currentOption = 1;
+	private boolean first = true;
 
-	public TrickyA_0_1_Alternatives(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, !IS_REQUIRED);
-	}
-	
-	private TrickyA_0_1_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyA_0_1_Alternatives(predecessor, true, false);
+	public TrickyA_0_1_Alternatives(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 
 	
-	protected boolean activateNextOption() {
-		if(currentOption > 0) {
-			currentOption--;
+	protected boolean activateNextSolution() {
+		if(first) {
+			first = false;
 			return true;
 		}
 		return false;
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t, r;
-		do {		
-			switch(currentOption) {
-			case 0: t = new TrickyA_0_1_1_Group(predecessor); break;
-			case 1: t = new TrickyA_0_1_0_Group(predecessor); break;
-			default: throw new RuntimeException("Undefinex Index: "+currentOption);
-			}
-			r = t.createFirstSolution(predecessor.getObject());
-		} while (r == null && activateNextOption());
-		if(r != null)
-			object = t.getObject();
-		return r;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new TrickyA_0_1_1_Group(current, this) : new TrickyA_0_1_0_Group(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		return s; 
 	}
 }
 
 protected class TrickyA_0_1_0_Group extends GroupToken {
 	
-	public TrickyA_0_1_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyA_0_1_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyA_0_1_0_Group(predecessor, true, false);
+	public TrickyA_0_1_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyA_0_1_0_1_Keyword_x(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyA_0_1_0_0_Action_TypeB_x(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyA_0_1_0_1_Keyword_x(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyA_0_1_0_0_Action_TypeB_x(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyA_0_1_0_0_Action_TypeB_x extends AssignmentToken  {
 
-	public TrickyA_0_1_0_0_Action_TypeB_x(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyA_0_1_0_0_Action_TypeB_x(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyA_0_1_0_0_Action_TypeB_x(predecessor, true, false);
+	public TrickyA_0_1_0_0_Action_TypeB_x(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(!object.isInstanceOf("TypeB")) return null;
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("x")) return null;
+	protected Solution createSolution() {
+		if(!current.isInstanceOf("TypeB")) return null;
+		if(!current.isConsumable("x")) return null;
+		IInstanceDescription obj = current.createClone();
 		Object val = obj.consume("x");
 		if(!obj.isConsumed()) return null;
-		object = getDescr((EObject)val);
-		return predecessor;
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+		return new Solution(getDescr((EObject)val));
 	}
 }
 
@@ -1069,80 +638,48 @@ protected class TrickyA_0_1_0_1_Keyword_x extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.1");
 	
-	public TrickyA_0_1_0_1_Keyword_x(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public TrickyA_0_1_0_1_Keyword_x(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
 
 protected class TrickyA_0_1_1_Group extends GroupToken {
 	
-	public TrickyA_0_1_1_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyA_0_1_1_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyA_0_1_1_Group(predecessor, true, false);
+	public TrickyA_0_1_1_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyA_0_1_1_1_Keyword_y(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyA_0_1_1_0_Action_TypeC_x(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyA_0_1_1_1_Keyword_y(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyA_0_1_1_0_Action_TypeC_x(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyA_0_1_1_0_Action_TypeC_x extends AssignmentToken  {
 
-	public TrickyA_0_1_1_0_Action_TypeC_x(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyA_0_1_1_0_Action_TypeC_x(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyA_0_1_1_0_Action_TypeC_x(predecessor, true, false);
+	public TrickyA_0_1_1_0_Action_TypeC_x(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(!object.isInstanceOf("TypeC")) return null;
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("x")) return null;
+	protected Solution createSolution() {
+		if(!current.isInstanceOf("TypeC")) return null;
+		if(!current.isConsumable("x")) return null;
+		IInstanceDescription obj = current.createClone();
 		Object val = obj.consume("x");
 		if(!obj.isConsumed()) return null;
-		object = getDescr((EObject)val);
-		return predecessor;
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+		return new Solution(getDescr((EObject)val));
 	}
 }
 
@@ -1151,20 +688,16 @@ protected class TrickyA_0_1_1_1_Keyword_y extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.1");
 	
-	public TrickyA_0_1_1_1_Keyword_y(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public TrickyA_0_1_1_1_Keyword_y(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
@@ -1176,30 +709,22 @@ protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyA_1_Assignment_name(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyA_1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyA_1_Assignment_name(predecessor, true, false);
+	public TrickyA_1_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("name")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("name")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("name");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyA_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -1213,30 +738,22 @@ protected class TrickyA1_Assignment_name extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.5/@alternatives/@terminal");
 	protected Object value;
 	
-	public TrickyA1_Assignment_name(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyA1_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyA1_Assignment_name(predecessor, true, false);
+	public TrickyA1_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("name")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("name")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("name");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyA1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -1246,61 +763,29 @@ protected class TrickyA1_Assignment_name extends AssignmentToken  {
 
 protected class TrickyB_Group extends GroupToken {
 	
-	public TrickyB_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyB_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyB_Group(predecessor, true, false);
+	public TrickyB_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyB_1_Assignment_type(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyB_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyB_1_Assignment_type(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyB_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyB_0_Group extends GroupToken {
 	
-	public TrickyB_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, !IS_REQUIRED);
-	}
-	
-	private TrickyB_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyB_0_Group(predecessor, true, false);
+	public TrickyB_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyB_0_1_Assignment_type(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyB_0_0_Assignment_name(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyB_0_1_Assignment_type(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyB_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
@@ -1309,30 +794,22 @@ protected class TrickyB_0_0_Assignment_name extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal");
 	protected Object value;
 	
-	public TrickyB_0_0_Assignment_name(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyB_0_0_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyB_0_0_Assignment_name(predecessor, true, false);
+	public TrickyB_0_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("name")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("name")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("name");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyB_0_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -1341,30 +818,22 @@ protected class TrickyB_0_1_Assignment_type extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyB_0_1_Assignment_type(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyB_0_1_Assignment_type(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyB_0_1_Assignment_type(predecessor, true, false);
+	public TrickyB_0_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("type")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("type")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("type");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyB_0_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -1374,30 +843,22 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyB_1_Assignment_type(AbstractToken predecessor) {
-		super(predecessor, IS_MANY, !IS_REQUIRED);
-	}
-	
-	private TrickyB_1_Assignment_type(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyB_1_Assignment_type(predecessor, true, false);
+	public TrickyB_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("type")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("type")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("type");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyB_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -1408,91 +869,43 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 
 protected class TrickyC_Group extends GroupToken {
 	
-	public TrickyC_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyC_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyC_Group(predecessor, true, false);
+	public TrickyC_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyC_1_Group(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyC_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyC_1_Group(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyC_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyC_0_Group extends GroupToken {
 	
-	public TrickyC_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyC_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyC_0_Group(predecessor, true, false);
+	public TrickyC_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyC_0_1_Group(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyC_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyC_0_1_Group(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyC_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyC_0_0_Group extends GroupToken {
 	
-	public TrickyC_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyC_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyC_0_0_Group(predecessor, true, false);
+	public TrickyC_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyC_0_0_1_Group(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyC_0_0_0_Assignment_name(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyC_0_0_1_Group(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyC_0_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
@@ -1501,89 +914,53 @@ protected class TrickyC_0_0_0_Assignment_name extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal");
 	protected Object value;
 	
-	public TrickyC_0_0_0_Assignment_name(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyC_0_0_0_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyC_0_0_0_Assignment_name(predecessor, true, false);
+	public TrickyC_0_0_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("name")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("name")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("name");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyC_0_0_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
 protected class TrickyC_0_0_1_Group extends GroupToken {
 	
-	public TrickyC_0_0_1_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, !IS_REQUIRED);
-	}
-	
-	private TrickyC_0_0_1_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyC_0_0_1_Group(predecessor, true, false);
+	public TrickyC_0_0_1_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyC_0_0_1_1_Keyword_x(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyC_0_0_1_0_Action_C1_x(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyC_0_0_1_1_Keyword_x(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyC_0_0_1_0_Action_C1_x(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyC_0_0_1_0_Action_C1_x extends AssignmentToken  {
 
-	public TrickyC_0_0_1_0_Action_C1_x(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyC_0_0_1_0_Action_C1_x(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyC_0_0_1_0_Action_C1_x(predecessor, true, false);
+	public TrickyC_0_0_1_0_Action_C1_x(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(!object.isInstanceOf("C1")) return null;
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("x")) return null;
+	protected Solution createSolution() {
+		if(!current.isInstanceOf("C1")) return null;
+		if(!current.isConsumable("x")) return null;
+		IInstanceDescription obj = current.createClone();
 		Object val = obj.consume("x");
 		if(!obj.isConsumed()) return null;
-		object = getDescr((EObject)val);
-		return predecessor;
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+		return new Solution(getDescr((EObject)val));
 	}
 }
 
@@ -1592,20 +969,16 @@ protected class TrickyC_0_0_1_1_Keyword_x extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
 	
-	public TrickyC_0_0_1_1_Keyword_x(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public TrickyC_0_0_1_1_Keyword_x(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
@@ -1613,60 +986,32 @@ protected class TrickyC_0_0_1_1_Keyword_x extends KeywordToken  {
 
 protected class TrickyC_0_1_Group extends GroupToken {
 	
-	public TrickyC_0_1_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, !IS_REQUIRED);
-	}
-	
-	private TrickyC_0_1_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyC_0_1_Group(predecessor, true, false);
+	public TrickyC_0_1_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyC_0_1_1_Keyword_y(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyC_0_1_0_Action_C2_y(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyC_0_1_1_Keyword_y(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyC_0_1_0_Action_C2_y(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyC_0_1_0_Action_C2_y extends AssignmentToken  {
 
-	public TrickyC_0_1_0_Action_C2_y(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyC_0_1_0_Action_C2_y(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyC_0_1_0_Action_C2_y(predecessor, true, false);
+	public TrickyC_0_1_0_Action_C2_y(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(!object.isInstanceOf("C2")) return null;
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("y")) return null;
+	protected Solution createSolution() {
+		if(!current.isInstanceOf("C2")) return null;
+		if(!current.isConsumable("y")) return null;
+		IInstanceDescription obj = current.createClone();
 		Object val = obj.consume("y");
 		if(!obj.isConsumed()) return null;
-		object = getDescr((EObject)val);
-		return predecessor;
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+		return new Solution(getDescr((EObject)val));
 	}
 }
 
@@ -1675,20 +1020,16 @@ protected class TrickyC_0_1_1_Keyword_y extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
 	
-	public TrickyC_0_1_1_Keyword_y(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public TrickyC_0_1_1_Keyword_y(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
@@ -1696,60 +1037,32 @@ protected class TrickyC_0_1_1_Keyword_y extends KeywordToken  {
 
 protected class TrickyC_1_Group extends GroupToken {
 	
-	public TrickyC_1_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, !IS_REQUIRED);
-	}
-	
-	private TrickyC_1_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyC_1_Group(predecessor, true, false);
+	public TrickyC_1_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyC_1_1_Keyword_z(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyC_1_0_Action_C3_z(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyC_1_1_Keyword_z(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyC_1_0_Action_C3_z(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyC_1_0_Action_C3_z extends AssignmentToken  {
 
-	public TrickyC_1_0_Action_C3_z(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyC_1_0_Action_C3_z(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyC_1_0_Action_C3_z(predecessor, true, false);
+	public TrickyC_1_0_Action_C3_z(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(!object.isInstanceOf("C3")) return null;
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("z")) return null;
+	protected Solution createSolution() {
+		if(!current.isInstanceOf("C3")) return null;
+		if(!current.isConsumable("z")) return null;
+		IInstanceDescription obj = current.createClone();
 		Object val = obj.consume("z");
 		if(!obj.isConsumed()) return null;
-		object = getDescr((EObject)val);
-		return predecessor;
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+		return new Solution(getDescr((EObject)val));
 	}
 }
 
@@ -1758,20 +1071,16 @@ protected class TrickyC_1_1_Keyword_z extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.1/@abstractTokens.1");
 	
-	public TrickyC_1_1_Keyword_z(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public TrickyC_1_1_Keyword_z(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
@@ -1783,121 +1092,57 @@ protected class TrickyC_1_1_Keyword_z extends KeywordToken  {
 
 protected class TrickyD_Group extends GroupToken {
 	
-	public TrickyD_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyD_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyD_Group(predecessor, true, false);
+	public TrickyD_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyD_1_Assignment_type(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyD_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyD_1_Assignment_type(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyD_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyD_0_Group extends GroupToken {
 	
-	public TrickyD_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyD_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyD_0_Group(predecessor, true, false);
+	public TrickyD_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyD_0_1_Group(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyD_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyD_0_1_Group(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyD_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyD_0_0_Group extends GroupToken {
 	
-	public TrickyD_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, !IS_REQUIRED);
-	}
-	
-	private TrickyD_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyD_0_0_Group(predecessor, true, false);
+	public TrickyD_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyD_0_0_1_Assignment_type(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyD_0_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyD_0_0_1_Assignment_type(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyD_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyD_0_0_0_Group extends GroupToken {
 	
-	public TrickyD_0_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyD_0_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyD_0_0_0_Group(predecessor, true, false);
+	public TrickyD_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyD_0_0_0_1_Assignment_foo(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyD_0_0_0_0_Assignment_name(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyD_0_0_0_1_Assignment_foo(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyD_0_0_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
@@ -1906,30 +1151,22 @@ protected class TrickyD_0_0_0_0_Assignment_name extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal");
 	protected Object value;
 	
-	public TrickyD_0_0_0_0_Assignment_name(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyD_0_0_0_0_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyD_0_0_0_0_Assignment_name(predecessor, true, false);
+	public TrickyD_0_0_0_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("name")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("name")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("name");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyD_0_0_0_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -1938,30 +1175,22 @@ protected class TrickyD_0_0_0_1_Assignment_foo extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyD_0_0_0_1_Assignment_foo(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyD_0_0_0_1_Assignment_foo(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyD_0_0_0_1_Assignment_foo(predecessor, true, false);
+	public TrickyD_0_0_0_1_Assignment_foo(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("foo")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("foo")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("foo");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyD_0_0_0_1_Assignment_fooCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -1971,61 +1200,37 @@ protected class TrickyD_0_0_1_Assignment_type extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyD_0_0_1_Assignment_type(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyD_0_0_1_Assignment_type(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyD_0_0_1_Assignment_type(predecessor, true, false);
+	public TrickyD_0_0_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("type")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("type")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("type");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyD_0_0_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
 
 protected class TrickyD_0_1_Group extends GroupToken {
 	
-	public TrickyD_0_1_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, !IS_REQUIRED);
-	}
-	
-	private TrickyD_0_1_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyD_0_1_Group(predecessor, true, false);
+	public TrickyD_0_1_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyD_0_1_1_Assignment_type(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyD_0_1_0_Assignment_name(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyD_0_1_1_Assignment_type(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyD_0_1_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
@@ -2034,30 +1239,22 @@ protected class TrickyD_0_1_0_Assignment_name extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal");
 	protected Object value;
 	
-	public TrickyD_0_1_0_Assignment_name(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyD_0_1_0_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyD_0_1_0_Assignment_name(predecessor, true, false);
+	public TrickyD_0_1_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("name")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("name")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("name");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyD_0_1_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -2066,30 +1263,22 @@ protected class TrickyD_0_1_1_Assignment_type extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyD_0_1_1_Assignment_type(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyD_0_1_1_Assignment_type(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyD_0_1_1_Assignment_type(predecessor, true, false);
+	public TrickyD_0_1_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("type")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("type")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("type");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyD_0_1_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -2100,30 +1289,22 @@ protected class TrickyD_1_Assignment_type extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyD_1_Assignment_type(AbstractToken predecessor) {
-		super(predecessor, IS_MANY, !IS_REQUIRED);
-	}
-	
-	private TrickyD_1_Assignment_type(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyD_1_Assignment_type(predecessor, true, false);
+	public TrickyD_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("type")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("type")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("type");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyD_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -2134,121 +1315,57 @@ protected class TrickyD_1_Assignment_type extends AssignmentToken  {
 
 protected class TrickyE_Group extends GroupToken {
 	
-	public TrickyE_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyE_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyE_Group(predecessor, true, false);
+	public TrickyE_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyE_1_Group(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyE_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyE_1_Group(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyE_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyE_0_Group extends GroupToken {
 	
-	public TrickyE_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyE_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyE_0_Group(predecessor, true, false);
+	public TrickyE_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyE_0_1_Keyword_x(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyE_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyE_0_1_Keyword_x(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyE_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyE_0_0_Group extends GroupToken {
 	
-	public TrickyE_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, IS_MANY, !IS_REQUIRED);
-	}
-	
-	private TrickyE_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyE_0_0_Group(predecessor, true, false);
+	public TrickyE_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyE_0_0_1_Assignment_type(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyE_0_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyE_0_0_1_Assignment_type(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyE_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyE_0_0_0_Group extends GroupToken {
 	
-	public TrickyE_0_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyE_0_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyE_0_0_0_Group(predecessor, true, false);
+	public TrickyE_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyE_0_0_0_1_Assignment_foo(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyE_0_0_0_0_Assignment_name(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyE_0_0_0_1_Assignment_foo(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyE_0_0_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
@@ -2257,30 +1374,22 @@ protected class TrickyE_0_0_0_0_Assignment_name extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal");
 	protected Object value;
 	
-	public TrickyE_0_0_0_0_Assignment_name(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyE_0_0_0_0_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyE_0_0_0_0_Assignment_name(predecessor, true, false);
+	public TrickyE_0_0_0_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("name")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("name")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("name");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyE_0_0_0_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -2289,30 +1398,22 @@ protected class TrickyE_0_0_0_1_Assignment_foo extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyE_0_0_0_1_Assignment_foo(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyE_0_0_0_1_Assignment_foo(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyE_0_0_0_1_Assignment_foo(predecessor, true, false);
+	public TrickyE_0_0_0_1_Assignment_foo(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("foo")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("foo")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("foo");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyE_0_0_0_1_Assignment_fooCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -2322,30 +1423,22 @@ protected class TrickyE_0_0_1_Assignment_type extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyE_0_0_1_Assignment_type(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyE_0_0_1_Assignment_type(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyE_0_0_1_Assignment_type(predecessor, true, false);
+	public TrickyE_0_0_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("type")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("type")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("type");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyE_0_0_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -2355,51 +1448,31 @@ protected class TrickyE_0_1_Keyword_x extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1");
 	
-	public TrickyE_0_1_Keyword_x(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public TrickyE_0_1_Keyword_x(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
 
 protected class TrickyE_1_Group extends GroupToken {
 	
-	public TrickyE_1_Group(AbstractToken predecessor) {
-		super(predecessor, IS_MANY, !IS_REQUIRED);
-	}
-	
-	private TrickyE_1_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyE_1_Group(predecessor, true, false);
+	public TrickyE_1_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyE_1_1_Assignment_type(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyE_1_0_Assignment_name(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyE_1_1_Assignment_type(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyE_1_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
@@ -2408,30 +1481,22 @@ protected class TrickyE_1_0_Assignment_name extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@terminal");
 	protected Object value;
 	
-	public TrickyE_1_0_Assignment_name(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyE_1_0_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyE_1_0_Assignment_name(predecessor, true, false);
+	public TrickyE_1_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("name")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("name")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("name");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyE_1_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -2440,30 +1505,22 @@ protected class TrickyE_1_1_Assignment_type extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyE_1_1_Assignment_type(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyE_1_1_Assignment_type(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyE_1_1_Assignment_type(predecessor, true, false);
+	public TrickyE_1_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("type")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("type")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("type");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyE_1_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -2475,61 +1532,29 @@ protected class TrickyE_1_1_Assignment_type extends AssignmentToken  {
 
 protected class TrickyF_Group extends GroupToken {
 	
-	public TrickyF_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyF_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyF_Group(predecessor, true, false);
+	public TrickyF_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyF_1_Alternatives(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyF_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyF_1_Alternatives(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyF_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class TrickyF_0_Group extends GroupToken {
 	
-	public TrickyF_0_Group(AbstractToken predecessor) {
-		super(predecessor, IS_MANY, !IS_REQUIRED);
-	}
-	
-	private TrickyF_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyF_0_Group(predecessor, true, false);
+	public TrickyF_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new TrickyF_0_1_Assignment_type(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new TrickyF_0_0_Assignment_name(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new TrickyF_0_1_Assignment_type(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyF_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
@@ -2538,30 +1563,22 @@ protected class TrickyF_0_0_Assignment_name extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal");
 	protected Object value;
 	
-	public TrickyF_0_0_Assignment_name(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyF_0_0_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyF_0_0_Assignment_name(predecessor, true, false);
+	public TrickyF_0_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("name")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("name")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("name");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyF_0_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -2570,75 +1587,48 @@ protected class TrickyF_0_1_Assignment_type extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyF_0_1_Assignment_type(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyF_0_1_Assignment_type(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyF_0_1_Assignment_type(predecessor, true, false);
+	public TrickyF_0_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("type")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("type")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("type");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyF_0_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
 
 protected class TrickyF_1_Alternatives extends GroupToken {
 	
-	private int currentOption = 1;
+	private boolean first = true;
 
-	public TrickyF_1_Alternatives(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyF_1_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyF_1_Alternatives(predecessor, true, false);
+	public TrickyF_1_Alternatives(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected boolean activateNextOption() {
-		if(currentOption > 0) {
-			currentOption--;
+	protected boolean activateNextSolution() {
+		if(first) {
+			first = false;
 			return true;
 		}
 		return false;
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t, r;
-		do {		
-			switch(currentOption) {
-			case 0: t = new TrickyF_1_1_Assignment_type(predecessor); break;
-			case 1: t = new TrickyF_1_0_Assignment_name(predecessor); break;
-			default: throw new RuntimeException("Undefinex Index: "+currentOption);
-			}
-			r = t.createFirstSolution(predecessor.getObject());
-		} while (r == null && activateNextOption());
-		if(r != null)
-			object = t.getObject();
-		return r;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new TrickyF_1_1_Assignment_type(current, this) : new TrickyF_1_0_Assignment_name(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		return s; 
 	}
 }
 
@@ -2647,30 +1637,22 @@ protected class TrickyF_1_0_Assignment_name extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.1/@groups.0/@terminal");
 	protected Object value;
 	
-	public TrickyF_1_0_Assignment_name(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyF_1_0_Assignment_name(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyF_1_0_Assignment_name(predecessor, true, false);
+	public TrickyF_1_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("name")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("name")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("name");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyF_1_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
@@ -2679,30 +1661,22 @@ protected class TrickyF_1_1_Assignment_type extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.1/@groups.1/@terminal");
 	protected Object value;
 	
-	public TrickyF_1_1_Assignment_type(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private TrickyF_1_1_Assignment_type(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new TrickyF_1_1_Assignment_type(predecessor, true, false);
+	public TrickyF_1_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("type")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("type")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("type");
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("TrickyF_1_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 

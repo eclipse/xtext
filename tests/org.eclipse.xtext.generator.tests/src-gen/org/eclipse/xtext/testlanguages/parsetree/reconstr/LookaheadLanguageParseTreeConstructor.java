@@ -8,37 +8,29 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+
 
 public class LookaheadLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
-		AbstractToken t = internalSerialize(obj);
+		Solution t = internalSerialize(obj);
 		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		t.executeAllCallbacks(callback);
+		t.getPredecessor().executeAllCallbacks(callback);
 		System.out.println("success!");
 	}
 	
-	protected AbstractToken internalSerialize(EObject obj) {
-		AbstractToken t = new Entry_Assignment_contents(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new Alts_Alternatives(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new LookAhead0_Group(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new LookAhead1_Group(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new LookAhead2_Group(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new LookAhead3_Group(null);
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-		t = new LookAhead4_Alternatives(null);
-		return t.createFirstSolution(getDescr(obj));
+	protected Solution internalSerialize(EObject obj) {
+		InstanceDescription inst = getDescr(obj);
+		Solution s;
+		if((s = new Entry_Assignment_contents(inst, null).firstSolution()) != null) return s;
+		if((s = new Alts_Alternatives(inst, null).firstSolution()) != null) return s;
+		if((s = new LookAhead0_Group(inst, null).firstSolution()) != null) return s;
+		if((s = new LookAhead1_Group(inst, null).firstSolution()) != null) return s;
+		if((s = new LookAhead2_Group(inst, null).firstSolution()) != null) return s;
+		if((s = new LookAhead3_Group(inst, null).firstSolution()) != null) return s;
+		if((s = new LookAhead4_Alternatives(inst, null).firstSolution()) != null) return s;
+		return null;
 	}
 	
 /************ begin Rule Entry ****************/
@@ -49,29 +41,22 @@ protected class Entry_Assignment_contents extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.0/@alternatives/@terminal");
 	protected Object value;
 	
-	public Entry_Assignment_contents(AbstractToken predecessor) {
-		super(predecessor, IS_MANY, !IS_REQUIRED);
-	}
-	
-	private Entry_Assignment_contents(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Entry_Assignment_contents(predecessor, true, false);
+	public Entry_Assignment_contents(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("contents")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("contents")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("contents");
-		if(!predecessor.getObject().isInstanceOf("Alts")) return null;
-		AbstractToken t = new Alts_Alternatives(predecessor);
-		predecessor = t.createFirstSolution(getDescr((EObject)value));
-		if(predecessor == null) return null;
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		InstanceDescription param = getDescr((EObject)value);
+		if(!param.isInstanceOf("Alts")) return null;
+		AbstractToken t = new Alts_Alternatives(param, this);
+		Solution s =  t.firstSolution();
+		if(s == null) return null;
+		return new Solution(obj,s.getPredecessor());
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
@@ -86,177 +71,94 @@ protected class Entry_Assignment_contents extends AssignmentToken  {
 
 protected class Alts_Alternatives extends GroupToken {
 	
-	private int currentOption = 1;
+	private boolean first = true;
 
-	public Alts_Alternatives(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Alts_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Alts_Alternatives(predecessor, true, false);
+	public Alts_Alternatives(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected boolean activateNextOption() {
-		if(currentOption > 0) {
-			currentOption--;
+	protected boolean activateNextSolution() {
+		if(first) {
+			first = false;
 			return true;
 		}
 		return false;
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t, r;
-		do {		
-			switch(currentOption) {
-			case 0: t = new Alts_1_RuleCall_LookAhead3(predecessor); break;
-			case 1: t = new Alts_0_Alternatives(predecessor); break;
-			default: throw new RuntimeException("Undefinex Index: "+currentOption);
-			}
-			r = t.createFirstSolution(predecessor.getObject());
-		} while (r == null && activateNextOption());
-		if(r != null)
-			object = t.getObject();
-		return r;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new Alts_1_RuleCall_LookAhead3(current, this) : new Alts_0_Alternatives(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		return s; 
 	}
 }
 
 protected class Alts_0_Alternatives extends GroupToken {
 	
-	private int currentOption = 1;
+	private boolean first = true;
 
-	public Alts_0_Alternatives(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Alts_0_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Alts_0_Alternatives(predecessor, true, false);
+	public Alts_0_Alternatives(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected boolean activateNextOption() {
-		if(currentOption > 0) {
-			currentOption--;
+	protected boolean activateNextSolution() {
+		if(first) {
+			first = false;
 			return true;
 		}
 		return false;
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t, r;
-		do {		
-			switch(currentOption) {
-			case 0: t = new Alts_0_1_RuleCall_LookAhead1(predecessor); break;
-			case 1: t = new Alts_0_0_RuleCall_LookAhead0(predecessor); break;
-			default: throw new RuntimeException("Undefinex Index: "+currentOption);
-			}
-			r = t.createFirstSolution(predecessor.getObject());
-		} while (r == null && activateNextOption());
-		if(r != null)
-			object = t.getObject();
-		return r;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new Alts_0_1_RuleCall_LookAhead1(current, this) : new Alts_0_0_RuleCall_LookAhead0(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		return s; 
 	}
 }
 
 protected class Alts_0_0_RuleCall_LookAhead0 extends RuleCallToken {
 	
-	public Alts_0_0_RuleCall_LookAhead0(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Alts_0_0_RuleCall_LookAhead0(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Alts_0_0_RuleCall_LookAhead0(predecessor, true, false);
+	public Alts_0_0_RuleCall_LookAhead0(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(checkForRecursion()) return null;
-		if(!predecessor.getObject().isInstanceOf("LookAhead0")) return null;
-		AbstractToken t = new LookAhead0_Group(predecessor);
-		predecessor = t.createFirstSolution(object);
-		if(predecessor != null)
-			object = t.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		if(checkForRecursion(LookAhead0_Group.class, current)) return null;
+		if(!current.isInstanceOf("LookAhead0")) return null;
+		return new LookAhead0_Group(current, this).firstSolution();
 	}
 }
 
 protected class Alts_0_1_RuleCall_LookAhead1 extends RuleCallToken {
 	
-	public Alts_0_1_RuleCall_LookAhead1(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Alts_0_1_RuleCall_LookAhead1(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Alts_0_1_RuleCall_LookAhead1(predecessor, true, false);
+	public Alts_0_1_RuleCall_LookAhead1(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(checkForRecursion()) return null;
-		if(!predecessor.getObject().isInstanceOf("LookAhead1")) return null;
-		AbstractToken t = new LookAhead1_Group(predecessor);
-		predecessor = t.createFirstSolution(object);
-		if(predecessor != null)
-			object = t.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		if(checkForRecursion(LookAhead1_Group.class, current)) return null;
+		if(!current.isInstanceOf("LookAhead1")) return null;
+		return new LookAhead1_Group(current, this).firstSolution();
 	}
 }
 
 
 protected class Alts_1_RuleCall_LookAhead3 extends RuleCallToken {
 	
-	public Alts_1_RuleCall_LookAhead3(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private Alts_1_RuleCall_LookAhead3(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new Alts_1_RuleCall_LookAhead3(predecessor, true, false);
+	public Alts_1_RuleCall_LookAhead3(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(checkForRecursion()) return null;
-		if(!predecessor.getObject().isInstanceOf("LookAhead3")) return null;
-		AbstractToken t = new LookAhead3_Group(predecessor);
-		predecessor = t.createFirstSolution(object);
-		if(predecessor != null)
-			object = t.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		if(checkForRecursion(LookAhead3_Group.class, current)) return null;
+		if(!current.isInstanceOf("LookAhead3")) return null;
+		return new LookAhead3_Group(current, this).firstSolution();
 	}
 }
 
@@ -267,31 +169,15 @@ protected class Alts_1_RuleCall_LookAhead3 extends RuleCallToken {
 
 protected class LookAhead0_Group extends GroupToken {
 	
-	public LookAhead0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead0_Group(predecessor, true, false);
+	public LookAhead0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new LookAhead0_1_Assignment_x(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new LookAhead0_0_Keyword_bar(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new LookAhead0_1_Assignment_x(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new LookAhead0_0_Keyword_bar(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
@@ -300,20 +186,16 @@ protected class LookAhead0_0_Keyword_bar extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0");
 	
-	public LookAhead0_0_Keyword_bar(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public LookAhead0_0_Keyword_bar(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
@@ -322,31 +204,22 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public LookAhead0_1_Assignment_x(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead0_1_Assignment_x(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead0_1_Assignment_x(predecessor, true, false);
+	public LookAhead0_1_Assignment_x(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("x")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("x")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("x");
-		// nothing special needs to be done for xtext::Keyword
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::Keyword
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("LookAhead0_1_Assignment_xCallback(\"xtext::Keyword\", " + value + ")");
-		callback.keywordCall(object, (Keyword)element);
+		callback.keywordCall(current, (Keyword)element);
 	}
 }
 
@@ -357,91 +230,43 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 
 protected class LookAhead1_Group extends GroupToken {
 	
-	public LookAhead1_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead1_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead1_Group(predecessor, true, false);
+	public LookAhead1_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new LookAhead1_1_Assignment_x(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new LookAhead1_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new LookAhead1_1_Assignment_x(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new LookAhead1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class LookAhead1_0_Group extends GroupToken {
 	
-	public LookAhead1_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead1_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead1_0_Group(predecessor, true, false);
+	public LookAhead1_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new LookAhead1_0_1_Assignment_x(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new LookAhead1_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new LookAhead1_0_1_Assignment_x(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new LookAhead1_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class LookAhead1_0_0_Group extends GroupToken {
 	
-	public LookAhead1_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead1_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead1_0_0_Group(predecessor, true, false);
+	public LookAhead1_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new LookAhead1_0_0_1_Assignment_y(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new LookAhead1_0_0_0_Keyword_foo(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new LookAhead1_0_0_1_Assignment_y(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new LookAhead1_0_0_0_Keyword_foo(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
@@ -450,20 +275,16 @@ protected class LookAhead1_0_0_0_Keyword_foo extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
 	
-	public LookAhead1_0_0_0_Keyword_foo(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public LookAhead1_0_0_0_Keyword_foo(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
@@ -472,29 +293,22 @@ protected class LookAhead1_0_0_1_Assignment_y extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public LookAhead1_0_0_1_Assignment_y(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead1_0_0_1_Assignment_y(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead1_0_0_1_Assignment_y(predecessor, true, false);
+	public LookAhead1_0_0_1_Assignment_y(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("y")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("y")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("y");
-		if(!predecessor.getObject().isInstanceOf("LookAhead2")) return null;
-		AbstractToken t = new LookAhead2_Group(predecessor);
-		predecessor = t.createFirstSolution(getDescr((EObject)value));
-		if(predecessor == null) return null;
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		InstanceDescription param = getDescr((EObject)value);
+		if(!param.isInstanceOf("LookAhead2")) return null;
+		AbstractToken t = new LookAhead2_Group(param, this);
+		Solution s =  t.firstSolution();
+		if(s == null) return null;
+		return new Solution(obj,s.getPredecessor());
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
@@ -509,31 +323,22 @@ protected class LookAhead1_0_1_Assignment_x extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public LookAhead1_0_1_Assignment_x(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead1_0_1_Assignment_x(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead1_0_1_Assignment_x(predecessor, true, false);
+	public LookAhead1_0_1_Assignment_x(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("x")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("x")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("x");
-		// nothing special needs to be done for xtext::Keyword
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::Keyword
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("LookAhead1_0_1_Assignment_xCallback(\"xtext::Keyword\", " + value + ")");
-		callback.keywordCall(object, (Keyword)element);
+		callback.keywordCall(current, (Keyword)element);
 	}
 }
 
@@ -543,31 +348,22 @@ protected class LookAhead1_1_Assignment_x extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public LookAhead1_1_Assignment_x(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead1_1_Assignment_x(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead1_1_Assignment_x(predecessor, true, false);
+	public LookAhead1_1_Assignment_x(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("x")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("x")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("x");
-		// nothing special needs to be done for xtext::Keyword
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::Keyword
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("LookAhead1_1_Assignment_xCallback(\"xtext::Keyword\", " + value + ")");
-		callback.keywordCall(object, (Keyword)element);
+		callback.keywordCall(current, (Keyword)element);
 	}
 }
 
@@ -578,75 +374,40 @@ protected class LookAhead1_1_Assignment_x extends AssignmentToken  {
 
 protected class LookAhead2_Group extends GroupToken {
 	
-	public LookAhead2_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead2_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead2_Group(predecessor, true, false);
+	public LookAhead2_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new LookAhead2_1_Keyword_c(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new LookAhead2_0_Alternatives(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new LookAhead2_1_Keyword_c(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new LookAhead2_0_Alternatives(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class LookAhead2_0_Alternatives extends GroupToken {
 	
-	private int currentOption = 1;
+	private boolean first = true;
 
-	public LookAhead2_0_Alternatives(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead2_0_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead2_0_Alternatives(predecessor, true, false);
+	public LookAhead2_0_Alternatives(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected boolean activateNextOption() {
-		if(currentOption > 0) {
-			currentOption--;
+	protected boolean activateNextSolution() {
+		if(first) {
+			first = false;
 			return true;
 		}
 		return false;
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t, r;
-		do {		
-			switch(currentOption) {
-			case 0: t = new LookAhead2_0_1_Assignment_z(predecessor); break;
-			case 1: t = new LookAhead2_0_0_Assignment_z(predecessor); break;
-			default: throw new RuntimeException("Undefinex Index: "+currentOption);
-			}
-			r = t.createFirstSolution(predecessor.getObject());
-		} while (r == null && activateNextOption());
-		if(r != null)
-			object = t.getObject();
-		return r;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new LookAhead2_0_1_Assignment_z(current, this) : new LookAhead2_0_0_Assignment_z(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		return s; 
 	}
 }
 
@@ -655,31 +416,22 @@ protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@groups.0/@terminal");
 	protected Object value;
 	
-	public LookAhead2_0_0_Assignment_z(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead2_0_0_Assignment_z(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead2_0_0_Assignment_z(predecessor, true, false);
+	public LookAhead2_0_0_Assignment_z(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("z")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("z")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("z");
-		// nothing special needs to be done for xtext::Keyword
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::Keyword
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("LookAhead2_0_0_Assignment_zCallback(\"xtext::Keyword\", " + value + ")");
-		callback.keywordCall(object, (Keyword)element);
+		callback.keywordCall(current, (Keyword)element);
 	}
 }
 
@@ -688,31 +440,22 @@ protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@groups.1/@terminal");
 	protected Object value;
 	
-	public LookAhead2_0_1_Assignment_z(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead2_0_1_Assignment_z(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead2_0_1_Assignment_z(predecessor, true, false);
+	public LookAhead2_0_1_Assignment_z(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("z")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("z")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("z");
-		// nothing special needs to be done for xtext::Keyword
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::Keyword
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("LookAhead2_0_1_Assignment_zCallback(\"xtext::Keyword\", " + value + ")");
-		callback.keywordCall(object, (Keyword)element);
+		callback.keywordCall(current, (Keyword)element);
 	}
 }
 
@@ -722,20 +465,16 @@ protected class LookAhead2_1_Keyword_c extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1");
 	
-	public LookAhead2_1_Keyword_c(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public LookAhead2_1_Keyword_c(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
@@ -746,91 +485,43 @@ protected class LookAhead2_1_Keyword_c extends KeywordToken  {
 
 protected class LookAhead3_Group extends GroupToken {
 	
-	public LookAhead3_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead3_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead3_Group(predecessor, true, false);
+	public LookAhead3_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new LookAhead3_1_Assignment_z(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new LookAhead3_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new LookAhead3_1_Assignment_z(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new LookAhead3_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class LookAhead3_0_Group extends GroupToken {
 	
-	public LookAhead3_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead3_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead3_0_Group(predecessor, true, false);
+	public LookAhead3_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new LookAhead3_0_1_Assignment_x(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new LookAhead3_0_0_Group(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new LookAhead3_0_1_Assignment_x(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new LookAhead3_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
 protected class LookAhead3_0_0_Group extends GroupToken {
 	
-	public LookAhead3_0_0_Group(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead3_0_0_Group(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead3_0_0_Group(predecessor, true, false);
+	public LookAhead3_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new LookAhead3_0_0_1_Keyword_bar(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new LookAhead3_0_0_0_Keyword_foo(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new LookAhead3_0_0_1_Keyword_bar(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new LookAhead3_0_0_0_Keyword_foo(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
@@ -839,20 +530,16 @@ protected class LookAhead3_0_0_0_Keyword_foo extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
 	
-	public LookAhead3_0_0_0_Keyword_foo(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public LookAhead3_0_0_0_Keyword_foo(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
@@ -861,20 +548,16 @@ protected class LookAhead3_0_0_1_Keyword_bar extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
 	
-	public LookAhead3_0_0_1_Keyword_bar(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public LookAhead3_0_0_1_Keyword_bar(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 	}
 }
 
@@ -884,31 +567,22 @@ protected class LookAhead3_0_1_Assignment_x extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public LookAhead3_0_1_Assignment_x(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead3_0_1_Assignment_x(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead3_0_1_Assignment_x(predecessor, true, false);
+	public LookAhead3_0_1_Assignment_x(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("x")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("x")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("x");
-		// nothing special needs to be done for xtext::Keyword
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::Keyword
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("LookAhead3_0_1_Assignment_xCallback(\"xtext::Keyword\", " + value + ")");
-		callback.keywordCall(object, (Keyword)element);
+		callback.keywordCall(current, (Keyword)element);
 	}
 }
 
@@ -918,29 +592,22 @@ protected class LookAhead3_1_Assignment_z extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public LookAhead3_1_Assignment_z(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead3_1_Assignment_z(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead3_1_Assignment_z(predecessor, true, false);
+	public LookAhead3_1_Assignment_z(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("z")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("z")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("z");
-		if(!predecessor.getObject().isInstanceOf("LookAhead4")) return null;
-		AbstractToken t = new LookAhead4_Alternatives(predecessor);
-		predecessor = t.createFirstSolution(getDescr((EObject)value));
-		if(predecessor == null) return null;
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::RuleCall
+		InstanceDescription param = getDescr((EObject)value);
+		if(!param.isInstanceOf("LookAhead4")) return null;
+		AbstractToken t = new LookAhead4_Alternatives(param, this);
+		Solution s =  t.firstSolution();
+		if(s == null) return null;
+		return new Solution(obj,s.getPredecessor());
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
@@ -956,45 +623,26 @@ protected class LookAhead3_1_Assignment_z extends AssignmentToken  {
 
 protected class LookAhead4_Alternatives extends GroupToken {
 	
-	private int currentOption = 1;
+	private boolean first = true;
 
-	public LookAhead4_Alternatives(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead4_Alternatives(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead4_Alternatives(predecessor, true, false);
+	public LookAhead4_Alternatives(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected boolean activateNextOption() {
-		if(currentOption > 0) {
-			currentOption--;
+	protected boolean activateNextSolution() {
+		if(first) {
+			first = false;
 			return true;
 		}
 		return false;
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t, r;
-		do {		
-			switch(currentOption) {
-			case 0: t = new LookAhead4_1_Assignment_x(predecessor); break;
-			case 1: t = new LookAhead4_0_Assignment_x(predecessor); break;
-			default: throw new RuntimeException("Undefinex Index: "+currentOption);
-			}
-			r = t.createFirstSolution(predecessor.getObject());
-		} while (r == null && activateNextOption());
-		if(r != null)
-			object = t.getObject();
-		return r;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new LookAhead4_1_Assignment_x(current, this) : new LookAhead4_0_Assignment_x(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		return s; 
 	}
 }
 
@@ -1003,31 +651,22 @@ protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.6/@alternatives/@groups.0/@terminal");
 	protected Object value;
 	
-	public LookAhead4_0_Assignment_x(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead4_0_Assignment_x(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead4_0_Assignment_x(predecessor, true, false);
+	public LookAhead4_0_Assignment_x(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("x")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("x")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("x");
-		// nothing special needs to be done for xtext::Keyword
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::Keyword
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("LookAhead4_0_Assignment_xCallback(\"xtext::Keyword\", " + value + ")");
-		callback.keywordCall(object, (Keyword)element);
+		callback.keywordCall(current, (Keyword)element);
 	}
 }
 
@@ -1036,31 +675,22 @@ protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.6/@alternatives/@groups.1/@terminal");
 	protected Object value;
 	
-	public LookAhead4_1_Assignment_x(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, IS_REQUIRED);
-	}
-	
-	private LookAhead4_1_Assignment_x(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new LookAhead4_1_Assignment_x(predecessor, true, false);
+	public LookAhead4_1_Assignment_x(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("x")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("x")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("x");
-		// nothing special needs to be done for xtext::Keyword
-		object = (InstanceDescription)obj;
-		return predecessor;
+		// handling xtext::Keyword
+		return new Solution(obj);
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 		// System.out.println("LookAhead4_1_Assignment_xCallback(\"xtext::Keyword\", " + value + ")");
-		callback.keywordCall(object, (Keyword)element);
+		callback.keywordCall(current, (Keyword)element);
 	}
 }
 

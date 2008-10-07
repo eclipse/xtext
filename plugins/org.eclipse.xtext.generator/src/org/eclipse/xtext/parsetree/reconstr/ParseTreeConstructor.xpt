@@ -30,26 +30,25 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+
 
 public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructor {
 
 	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
-		AbstractToken t = internalSerialize(obj);
+		Solution t = internalSerialize(obj);
 		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		t.executeAllCallbacks(callback);
+		t.getPredecessor().executeAllCallbacks(callback);
 		System.out.println("success!");
 	}
 	
-	protected AbstractToken internalSerialize(EObject obj) {
-«FOREACH grammar().allParserRules() AS pr ITERATOR i-»
-		«IF i.firstIteration»AbstractToken «ENDIF»t = new «pr.alternatives.elementMethodName()»(null);
-«IF i.lastIteration-»
-		return t.createFirstSolution(getDescr(obj));
-«ELSE-»
-		t = t.createFirstSolution(getDescr(obj));
-		if(t != null) return t;
-«ENDIF-»
+	protected Solution internalSerialize(EObject obj) {
+		InstanceDescription inst = getDescr(obj);
+		Solution s;
+«FOREACH grammar().allParserRules() AS pr-»
+		if((s = new «pr.alternatives.elementMethodName()»(inst, null).firstSolution()) != null) return s;
 «ENDFOREACH-»		
+		return null;
 	}
 	
 «EXPAND rule FOREACH grammar().allParserRules()-»
@@ -66,16 +65,8 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 «ENDDEFINE»
 
 «DEFINE constructor FOR AbstractElement-»
-	public «elementMethodName()»(AbstractToken predecessor) {
-		super(predecessor, «IF !cardinality.isMulti()»!«ENDIF»IS_MANY, «IF !cardinality.isRequired()»!«ENDIF»IS_REQUIRED);
-	}
-	
-	private «elementMethodName()»(AbstractToken predecessor, boolean many, boolean required) {
-		super(predecessor, many, required);
-	}
-	
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		return new «elementMethodName()»(predecessor, true, false);
+	public «elementMethodName()»(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, «IF !cardinality.isMulti()»!«ENDIF»IS_MANY, «IF !cardinality.isRequired()»!«ENDIF»IS_REQUIRED);
 	}
 «ENDDEFINE»
 
@@ -94,18 +85,10 @@ protected class «elementMethodName()» extends GroupToken {
 	
 «EXPAND constructor»
 		
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t1 = new «abstractTokens.get(1).elementMethodName()»(predecessor);
-		predecessor = t1.createFirstSolution(object);
-		if(predecessor == null) return null;
-		AbstractToken t0 = new «abstractTokens.get(0).elementMethodName()»(predecessor);
-		predecessor = t0.createFirstSolution(t1.getObject());
-		if(predecessor == null) return null;
-		object = t0.getObject();
-		return predecessor;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		Solution s1 = new «abstractTokens.get(1).elementMethodName()»(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new «abstractTokens.get(0).elementMethodName()»(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 «EXPAND element FOREACH abstractTokens»
@@ -118,35 +101,23 @@ protected class «elementMethodName()» extends GroupToken {
 «DEFINE element FOR Alternatives»
 protected class «elementMethodName()» extends GroupToken {
 	
-	private int currentOption = «groups.size - 1»;
+	private boolean first = true;
 
 «EXPAND constructor»
 	
-	protected boolean activateNextOption() {
-		if(currentOption > 0) {
-			currentOption--;
+	protected boolean activateNextSolution() {
+		if(first) {
+			first = false;
 			return true;
 		}
 		return false;
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		AbstractToken t, r;
-		do {		
-			switch(currentOption) {
-«FOREACH groups.inverse() AS t ITERATOR i-»
-			case «i.counter0»: t = new «((AbstractElement)t).elementMethodName()»(predecessor); break;
-«ENDFOREACH-»
-			default: throw new RuntimeException("Undefinex Index: "+currentOption);
-			}
-			r = t.createFirstSolution(predecessor.getObject());
-		} while (r == null && activateNextOption());
-		if(r != null)
-			object = t.getObject();
-		return r;
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new «groups.get(1).elementMethodName()»(current, this) : new «groups.get(0).elementMethodName()»(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		return s; 
 	}
 }
 «EXPAND element FOREACH groups»
@@ -161,22 +132,15 @@ protected class «elementMethodName()» extends RuleCallToken {
 	
 «EXPAND constructor»
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
+	protected Solution createSolution() {
 «IF calledParserRule() != null-»
-		if(checkForRecursion()) return null;
-		if(!predecessor.getObject().isInstanceOf("«calledParserRule().getReturnTypeName()»")) return null;
-		AbstractToken t = new «calledParserRule().alternatives.elementMethodName()»(predecessor);
-		predecessor = t.createFirstSolution(object);
-		if(predecessor != null)
-			object = t.getObject();
-		return predecessor;
+		if(checkForRecursion(«calledParserRule().alternatives.elementMethodName()».class, current)) return null;
+		if(!current.isInstanceOf("«calledParserRule().getReturnTypeName()»")) return null;
+		return new «calledParserRule().alternatives.elementMethodName()»(current, this).firstSolution();
 «ELSE-»
 		// lexer rule call
 		return this;
 «ENDIF-»
-	}
-
-	public void executeCallback(IParseTreeConstructorCallback callback) {
 	}
 }
 «ENDDEFINE»
@@ -186,10 +150,11 @@ protected class «elementMethodName()» extends RuleCallToken {
 
 «DEFINE assignmentCreate FOR AbstractElement-»
 		// FIXME: doing nothing for «metaType»
+		return null;
 «ENDDEFINE»
 
 «DEFINE assignmentCreate FOR Keyword-»
-		// nothing special needs to be done for «metaType»
+		return new Solution(obj);
 «ENDDEFINE»
 
 «DEFINE assignmentCreate FOR Alternatives-»
@@ -198,15 +163,19 @@ protected class «elementMethodName()» extends RuleCallToken {
 			element = (AbstractElement)getGrammarElement("«k.objectURI()»");
 		else «ENDFOREACH-»
 		return null;
+		return new Solution(obj);
 «ENDDEFINE»
 
 «DEFINE assignmentCreate FOR RuleCall-»
 «IF calledParserRule()!=null-»
-		if(!predecessor.getObject().isInstanceOf("«calledParserRule().getReturnTypeName()»")) return null;
-		AbstractToken t = new «calledParserRule().alternatives.elementMethodName()»(predecessor);
-		predecessor = t.createFirstSolution(getDescr((EObject)value));
-		if(predecessor == null) return null;
+		InstanceDescription param = getDescr((EObject)value);
+		if(!param.isInstanceOf("«calledParserRule().getReturnTypeName()»")) return null;
+		AbstractToken t = new «calledParserRule().alternatives.elementMethodName()»(param, this);
+		Solution s =  t.firstSolution();
+		if(s == null) return null;
+		return new Solution(obj,s.getPredecessor());
 «ELSE-»
+		return new Solution(obj);
 «ENDIF-»
 «ENDDEFINE»
 
@@ -215,19 +184,19 @@ protected class «elementMethodName()» extends RuleCallToken {
 «ENDDEFINE»
 
 «DEFINE assignmentCallback FOR Keyword-»
-		callback.keywordCall(object, (Keyword)element);
+		callback.keywordCall(current, (Keyword)element);
 «ENDDEFINE»
 
 «DEFINE assignmentCallback FOR Alternatives-»
 		if(element instanceof Keyword)
-			callback.keywordCall(object, (Keyword)element);
+			callback.keywordCall(current, (Keyword)element);
 «ENDDEFINE»
 
 «DEFINE assignmentCallback FOR RuleCall-»
 «IF calledParserRule()!=null-»
 		// Nothing to do for ParserRule Call «name»
 «ELSE-»
-		callback.lexerRuleCall(getObject(), (RuleCall) element, value);
+		callback.lexerRuleCall(current, (RuleCall) element, value);
 «ENDIF-»
 «ENDDEFINE»
 
@@ -239,13 +208,12 @@ protected class «elementMethodName()» extends AssignmentToken  {
 	
 «EXPAND constructor»
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("«feature»")) return null;
+	protected Solution createSolution() {
+		if(!current.isConsumable("«feature»")) return null;
+		InstanceDescription obj = (InstanceDescription)current.createClone();
 		value = obj.consume("«feature»");
+		// handling «terminal.metaType»
 		«EXPAND assignmentCreate FOR terminal-»
-		object = (InstanceDescription)obj;
-		return predecessor;
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
@@ -264,17 +232,13 @@ protected class «elementMethodName()» extends AssignmentToken  {
 
 «EXPAND constructor»
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		if(!object.isInstanceOf("«typeName.name»")) return null;
-		IInstanceDescription obj = object.createClone();
-		if(!obj.isConsumable("«feature»")) return null;
+	protected Solution createSolution() {
+		if(!current.isInstanceOf("«typeName.name»")) return null;
+		if(!current.isConsumable("«feature»")) return null;
+		IInstanceDescription obj = current.createClone();
 		Object val = obj.consume("«feature»");
 		if(!obj.isConsumed()) return null;
-		object = getDescr((EObject)val);
-		return predecessor;
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
+		return new Solution(getDescr((EObject)val));
 	}
 }
 «ENDDEFINE»
@@ -289,21 +253,17 @@ protected class «elementMethodName()» extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("«objectURI()»");
 	
-	public «elementMethodName()»(AbstractToken predecessor) {
-		super(predecessor, !IS_MANY, «IF !cardinality.isRequired()»!«ENDIF»IS_REQUIRED);
-	}
-		
-	protected AbstractToken newInstance(AbstractToken predecessor) {
-		throw new UnsupportedOperationException();
+	public «elementMethodName()»(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, «IF !cardinality.isRequired()»!«ENDIF»IS_REQUIRED);
 	}
 	
-	protected AbstractToken createOneChild(AbstractToken predecessor) {
-		return predecessor;
+	protected Solution createSolution() {
+		return new Solution();
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
 «IF cardinality.isRequired()-»
-		callback.keywordCall(object, keyword);
+		callback.keywordCall(current, keyword);
 «ELSEIF cardinality.isOptional()-»
 		// This keyword ('«value»') is optional (cardinality == «cardinality») and thereby not serialized.
 «ELSE-»
