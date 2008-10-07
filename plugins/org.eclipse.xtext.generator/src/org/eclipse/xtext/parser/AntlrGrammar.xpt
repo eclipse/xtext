@@ -14,7 +14,6 @@
 
 «EXTENSION org::eclipse::xtext::parser::AntlrGrammar»
 «EXTENSION org::eclipse::xtext::Extensions»
-«EXTENSION org::eclipse::xtext::XtextUtil»
 «EXTENSION org::eclipse::xtext::parser::Parser»
 
 «DEFINE grammar FOR GenService»
@@ -155,7 +154,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 «DEFINE ebnf2 FOR Action»
     { 
-        temp=factory.create("«theCurrentType(this).getQualifiedName()»");
+        temp=factory.create("«this.typeName.getQualifiedName()»");
         factory.«setOrAdd()»(temp, "«feature»",$current);
         $current = temp; 
         temp = null;

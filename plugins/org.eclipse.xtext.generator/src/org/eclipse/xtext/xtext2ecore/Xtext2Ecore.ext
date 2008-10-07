@@ -9,70 +9,11 @@
 
 import ecore;
 import xtext;
-import xtextutil; 
 
 extension org::eclipse::xtext::Extensions;
-extension org::eclipse::xtext::XtextUtil;
-extension org::eclipse::xtext::xtext2ecore::FeatureNormalization;
 
 List[EPackage] getGeneratedEPackages(Grammar g) :
-//	getAllEPackages(g) -> g.getAllMetaModels().select(e|e.isGenerate()).getEPackage();
 	JAVA org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer.doTransform(org.eclipse.xtext.Grammar);
-
-List[EPackage] getAllEPackages(Grammar g) :
-	let x = g.getAllMetaModels().collect(mm|mm.getEPackage()) :
-		normalize(g) ->
-		x
-;
-
-cached EPackage getEPackage(MetaModel this) :
-	if this.isGenerate() then
-		createEPackage((GeneratedMetamodel)declaration, this)
-	else 
-		loadEPackage((ReferencedMetamodel)declaration);
-
-create EPackage createEPackage(GeneratedMetamodel mm, MetaModel metaModel) :
-	setName(mm.name) ->
-	setNsURI(mm.nsURI) ->
-	setNsPrefix(mm.name) ->
-	eClassifiers.addAll(metaModel.types.getEClassifier()) 
-;
-
-getEClassifier(AbstractType t) :
-	if (t.metaModel.isGenerate()) then (
-		createEClassifier(t)
-	) else (
-		t.metaModel.getEPackage().eClassifiers.select(e|e.name==t.name).first()
-	)
-;
-
-EClassifier createEClassifier(AbstractType t) : null;
-
-create EClass createEClassifier(ComplexType t) : 
-	setName(t.name) ->
-	setAbstract(t.abstract) ->
-	eSuperTypes.addAll(t.superTypes.createEClassifier()) ->
-	eStructuralFeatures.addAll(t.features.createEStructuralFeature())
-;
-
-EStructuralFeature createEStructuralFeature(Feature this) :
-	let f = (EStructuralFeature) (if (ComplexType.isInstance(type)) then 
-				createEReference(this)
-			else
-				createEAttribute(this)) : (
-		f.setName(name)->
-		f.setEType(type.getEClassifier()) ->
-		f.setUpperBound(upperBound) ->
-		f.setLowerBound(lowerBound) ->
-		f
-	)
-;
-
-private create EReference createEReference(Feature f) : setContainment(f.containment) -> setResolveProxies(!f.containment);
-private create EAttribute createEAttribute(Feature f) : null /* no initialization */;
-
-private cached EPackage loadEPackage(ReferencedMetamodel this) :
-	JAVA org.eclipse.xtext.GrammarUtil.loadEPackage(org.eclipse.xtext.ReferencedMetamodel);
 
 Void saveMetamodel(EPackage ePackage, String path) :
 	JAVA org.eclipse.xtext.EcoreUtil2.saveEPackage(org.eclipse.emf.ecore.EPackage, java.lang.String);
