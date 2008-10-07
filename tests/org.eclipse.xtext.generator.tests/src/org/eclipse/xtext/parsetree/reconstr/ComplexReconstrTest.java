@@ -15,8 +15,8 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.tests.EcoreModelComparator;
 import org.eclipse.xtext.util.EmfFormater;
-import org.eclipse.xtext.xtext2ecore.EcoreModelComparator;
 
 public class ComplexReconstrTest extends AbstractGeneratorTest {
 
