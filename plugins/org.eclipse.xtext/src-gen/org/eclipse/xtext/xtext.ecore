@@ -14,10 +14,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1" eType="//AbstractRule" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//TypeRef"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//TypeRef"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LexerRule" eSuperTypes="//AbstractRule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="body">
