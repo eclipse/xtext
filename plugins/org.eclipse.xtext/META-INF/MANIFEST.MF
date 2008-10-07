@@ -27,9 +27,7 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.resource.metamodel,
  org.eclipse.xtext.service,
  org.eclipse.xtext.services,
- org.eclipse.xtext.util,
- org.eclipse.xtext.xtextutil,
- org.eclipse.xtext.xtextutil.util
+ org.eclipse.xtext.util
 Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;bundle-version="2.3.2";visibility:=reexport,
