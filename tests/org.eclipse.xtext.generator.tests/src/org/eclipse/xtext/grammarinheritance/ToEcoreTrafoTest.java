@@ -71,16 +71,11 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 
 	@SuppressWarnings("unchecked")
 	public void testConcreteLanguageToMetamodel1() throws Exception {
-		try {
-			XtextResource r = getResource("classpath:/" + ConcreteTestLanguage.class.getName().replace('.', '/')
-					+ ".xtext");
-			EObject element = r.getParseResult().getRootASTElement();
-			List<EPackage> mms = (List<EPackage>) invokeWithXtend("getGeneratedEPackages(this)", element);
-			assertNotNull(mms);
-			assertEquals(1, mms.size());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		XtextResource r = getResource("classpath:/" + ConcreteTestLanguage.class.getName().replace('.', '/') + ".xtext");
+		EObject element = r.getParseResult().getRootASTElement();
+		List<EPackage> mms = (List<EPackage>) invokeWithXtend("getGeneratedEPackages(this)", element);
+		assertNotNull(mms);
+		assertEquals(1, mms.size());
 	}
 
 	private XtextResource getResource(String uri) {
@@ -96,6 +91,6 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 
 	@Override
 	protected String[] importedExtensions() {
-		return new String[] { "org::eclipse::xtext::XtextUtil", "org::eclipse::xtext::xtext2ecore::Xtext2Ecore" };
+		return new String[] { "org::eclipse::xtext::xtext2ecore::Xtext2Ecore" };
 	}
 }

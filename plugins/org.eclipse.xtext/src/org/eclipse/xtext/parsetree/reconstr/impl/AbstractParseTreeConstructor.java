@@ -1,5 +1,8 @@
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -18,79 +21,78 @@ import org.eclipse.xtext.service.Inject;
 public abstract class AbstractParseTreeConstructor implements
 		IParseTreeConstructor {
 	public abstract class AbstractToken {
+
+		public class Solution {
+			private final InstanceDescription current;
+			private final AbstractToken predecessor;
+
+			public Solution() {
+				super();
+				this.current = AbstractToken.this.current;
+				this.predecessor = AbstractToken.this;
+			}
+
+			public Solution(AbstractToken predecessor) {
+				super();
+				this.current = AbstractToken.this.current;
+				this.predecessor = predecessor;
+			}
+
+			public Solution(final InstanceDescription current) {
+				super();
+				this.current = current;
+				this.predecessor = AbstractToken.this;
+			}
+
+			public Solution(InstanceDescription current,
+					AbstractToken predecessor) {
+				super();
+				this.current = current;
+				this.predecessor = predecessor;
+			}
+
+			public InstanceDescription getCurrent() {
+				return current;
+			}
+
+			public AbstractToken getPredecessor() {
+				return predecessor;
+			}
+		}
+
 		protected final static boolean IS_MANY = true;
 		protected final static boolean IS_REQUIRED = true;
-		protected boolean many;
+		protected final InstanceDescription current;
+		protected final boolean many;
+		protected Solution otherSolution;
+		protected final AbstractToken predecessor;
+		protected final boolean required;
 
-		// TODO: rename to current
-		protected InstanceDescription object;
-		protected AbstractToken otherSolution;
-
-		protected AbstractToken predecessor;
-		protected boolean required;
-
-		public AbstractToken(AbstractToken predecessor, boolean many,
-				boolean required) {
+		public AbstractToken(InstanceDescription curr, AbstractToken pred,
+				boolean many, boolean required) {
 			super();
-			this.predecessor = predecessor;
+			this.current = curr;
+			this.predecessor = pred;
 			this.many = many;
 			this.required = required;
 		}
 
-		protected boolean activateNextOption() {
+		protected boolean activateNextSolution() {
 			return false;
 		}
 
-		protected boolean checkForRecursion() {
-			Class<?> clazz = getClass();
+		protected boolean checkForRecursion(Class<?> clazz,
+				IInstanceDescription curr) {
 			AbstractToken token = predecessor;
 			while (token != null) {
 				if (token.getClass() == clazz)
-					return token.object == object;
+					return token.current == curr;
 				token = token.predecessor;
 			}
 			return false;
 		}
 
-		public AbstractToken createFirstSolution(InstanceDescription obj) {
-			System.out.println("->" + depth(this) + getClass().getSimpleName()
-					+ "\t " + obj + " -> " + dsl(this));
-			object = obj;
-			AbstractToken t1 = createOneChild(this);
-			System.out
-					.println("< "
-							+ depth(this)
-							+ getClass().getSimpleName()
-							+ " -> "
-							+ ((t1 == null) ? "failed" : "success" + "\t "
-									+ t1.object));
-			if (t1 == null)
-				return required ? null : predecessor;
-			if (many) {
-				AbstractToken t2 = newInstance(t1);
-				AbstractToken t3 = t2.createFirstSolution(t1.object);
-
-				if (t3 != null) {
-					otherSolution = t1;
-					object = t2.object;
-					return t3;
-				}
-			}
-			return t1;
-		}
-
-		public AbstractToken createNextSolution() {
-			if (otherSolution != null) {
-				AbstractToken t = otherSolution;
-				otherSolution = null;
-				return t;
-			} else if (activateNextOption())
-				return createFirstSolution(object);
-			return null;
-		}
-
-		protected abstract AbstractToken createOneChild(
-				AbstractToken predecessor);
+		protected abstract Solution createSolution();
 
 		private String depth(AbstractToken ele) {
 			StringBuffer b = new StringBuffer();
@@ -114,66 +116,118 @@ public abstract class AbstractParseTreeConstructor implements
 			}
 		}
 
-		protected abstract void executeCallback(
-				IParseTreeConstructorCallback callback);
-
-		public InstanceDescription getObject() {
-			return object;
+		protected void executeCallback(IParseTreeConstructorCallback callback) {
 		}
 
-		protected abstract AbstractToken newInstance(AbstractToken predecessor);
+		public Solution firstSolution() {
+			System.out.println("->" + depth(this) + getClass().getSimpleName()
+					+ "\t " + current + " -> " + dsl(this));
+			Solution t1 = createSolution();
+			System.out
+					.println("< "
+							+ depth(this)
+							+ getClass().getSimpleName()
+							+ " -> "
+							+ ((t1 == null) ? "failed" : "success" + "\t "
+									+ t1.current));
+			if (t1 == null)
+				return required ? null : new Solution(current, predecessor);
+			if (many) {
+				Solution t3 = newInstance(t1.getCurrent(), t1.getPredecessor())
+						.firstSolution();
+
+				if (t3 != null) {
+					otherSolution = t1;
+					return t3;
+				}
+			}
+			return t1;
+		}
+
+		protected AbstractToken newInstance(InstanceDescription curr,
+				AbstractToken pred) {
+			try {
+				Constructor<?> c = getClass().getConstructor(
+						getClass().getEnclosingClass(),
+						InstanceDescription.class, AbstractToken.class);
+				return (AbstractToken) c.newInstance(
+						AbstractParseTreeConstructor.this, curr, pred);
+			} catch (SecurityException e) {
+				throw new RuntimeException(e);
+			} catch (NoSuchMethodException e) {
+				throw new RuntimeException(e);
+			} catch (IllegalArgumentException e) {
+				throw new RuntimeException(e);
+			} catch (InstantiationException e) {
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				throw new RuntimeException(e);
+			} catch (InvocationTargetException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+		public Solution nextSolution() {
+			if (otherSolution != null) {
+				Solution t = otherSolution;
+				otherSolution = null;
+				return t;
+			} else if (activateNextSolution())
+				return firstSolution();
+			return null;
+		}
 	}
 
 	public abstract class ActionToken extends AbstractToken {
 
-		public ActionToken(AbstractToken predecessor, boolean many,
-				boolean optional) {
-			super(predecessor, many, optional);
+		public ActionToken(InstanceDescription curr, AbstractToken pred,
+				boolean many, boolean required) {
+			super(curr, pred, many, required);
 		}
 
 	}
 
 	public abstract class AlternativeToken extends AbstractToken {
 
-		public AlternativeToken(AbstractToken predecessor, boolean many,
-				boolean optional) {
-			super(predecessor, many, optional);
+		public AlternativeToken(InstanceDescription curr, AbstractToken pred,
+				boolean many, boolean required) {
+			super(curr, pred, many, required);
 		}
 
 	}
 
 	public abstract class AssignmentToken extends AbstractToken {
 
-		public AssignmentToken(AbstractToken predecessor, boolean many,
-				boolean optional) {
-			super(predecessor, many, optional);
+		public AssignmentToken(InstanceDescription curr, AbstractToken pred,
+				boolean many, boolean required) {
+			super(curr, pred, many, required);
 		}
 
 	}
 
 	public abstract class GroupToken extends AbstractToken {
 
-		public GroupToken(AbstractToken predecessor, boolean many,
-				boolean optional) {
-			super(predecessor, many, optional);
+		public GroupToken(InstanceDescription curr, AbstractToken pred,
+				boolean many, boolean required) {
+			super(curr, pred, many, required);
 		}
 
 	}
 
 	public abstract class KeywordToken extends AbstractToken {
 
-		public KeywordToken(AbstractToken predecessor, boolean many,
-				boolean optional) {
-			super(predecessor, many, optional);
+		public KeywordToken(InstanceDescription curr, AbstractToken pred,
+				boolean many, boolean required) {
+			super(curr, pred, many, required);
 		}
 
 	}
 
 	public abstract class RuleCallToken extends AbstractToken {
 
-		public RuleCallToken(AbstractToken predecessor, boolean many,
-				boolean optional) {
-			super(predecessor, many, optional);
+		public RuleCallToken(InstanceDescription curr, AbstractToken pred,
+				boolean many, boolean required) {
+			super(curr, pred, many, required);
 		}
 
 	}
