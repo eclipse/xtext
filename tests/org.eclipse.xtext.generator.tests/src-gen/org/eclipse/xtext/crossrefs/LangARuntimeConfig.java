@@ -18,6 +18,7 @@ public class LangARuntimeConfig extends AbstractServiceRegistrationFactory {
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, org.eclipse.xtext.crossrefs.parser.LangAAntlrTokenFileProvider.class)
 		.with(org.eclipse.xtext.resource.IResourceFactory.class, org.eclipse.xtext.crossrefs.services.LangAResourceFactory.class)
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, org.eclipse.xtext.crossrefs.parsetree.reconstr.LangAParseTreeConstructor.class)
+		.with(org.eclipse.xtext.parser.antlr.Lexer.class, org.eclipse.xtext.crossrefs.parser.internal.InternalLangALexer.class)
 		
 			.registrations();
 	}

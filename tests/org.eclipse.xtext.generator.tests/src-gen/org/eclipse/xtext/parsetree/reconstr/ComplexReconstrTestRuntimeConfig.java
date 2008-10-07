@@ -18,6 +18,7 @@ public class ComplexReconstrTestRuntimeConfig extends AbstractServiceRegistratio
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, org.eclipse.xtext.parsetree.reconstr.parser.ComplexReconstrTestAntlrTokenFileProvider.class)
 		.with(org.eclipse.xtext.resource.IResourceFactory.class, org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestResourceFactory.class)
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, org.eclipse.xtext.parsetree.reconstr.parsetree.reconstr.ComplexReconstrTestParseTreeConstructor.class)
+		.with(org.eclipse.xtext.parser.antlr.Lexer.class, org.eclipse.xtext.parsetree.reconstr.parser.internal.InternalComplexReconstrTestLexer.class)
 		
 			.registrations();
 	}

@@ -18,6 +18,7 @@ public class SimpleReconstrTestRuntimeConfig extends AbstractServiceRegistration
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, org.eclipse.xtext.parsetree.reconstr.parser.SimpleReconstrTestAntlrTokenFileProvider.class)
 		.with(org.eclipse.xtext.resource.IResourceFactory.class, org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestResourceFactory.class)
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, org.eclipse.xtext.parsetree.reconstr.parsetree.reconstr.SimpleReconstrTestParseTreeConstructor.class)
+		.with(org.eclipse.xtext.parser.antlr.Lexer.class, org.eclipse.xtext.parsetree.reconstr.parser.internal.InternalSimpleReconstrTestLexer.class)
 		
 			.registrations();
 	}
