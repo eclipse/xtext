@@ -55,13 +55,14 @@ public class DefaultTokenScanner implements ITokenScanner {
 				+ CommonPreferenceConstants.SEPARATOR + CommonPreferenceConstants.EDITOR_NODE_NAME;
 		String preferencePagePath = parentPreferencePagePath + preferencePagePathSeparator
 				+ PreferenceStoreAccessor.syntaxColorerTag(scope);
-		if (PlatformUI.getWorkbench().getPreferenceManager().find(preferencePagePath) != null) {
+		if (PlatformUI.getWorkbench().getPreferenceManager().find(preferencePagePath) == null) {
 			SyntaxColoringPreferencePage preferencePage = new SyntaxColoringPreferencePage();
 			preferencePage.setTitle("Syntax Colorer");
 			ServiceRegistry.injectServices(scope, preferencePage);
 			PlatformUI.getWorkbench().getPreferenceManager().addTo(parentPreferencePagePath,
 					new PreferenceNode(preferencePage.qualifiedName(), preferencePage));
 		}
+		// TODO redraw/revalidate editor's StyledText control
 	}
 
 	private org.antlr.runtime.CommonToken currentAntlrToken;
