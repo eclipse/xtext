@@ -46,21 +46,26 @@ public class DefaultTokenScanner implements ITokenScanner {
 	private PreferenceStoreAccessor preferenceStoreAccessor;
 
 	@Inject
-	protected void setServiceScope(IServiceScope scope) {
+	protected void setServiceScope(final IServiceScope scope) {
 		this.preferenceStoreAccessor = new PreferenceStoreAccessor(scope);
 		// XXX LITTLE HACK, adding PrefPage on the fly
 		String languageTag = PreferenceStoreAccessor.languageTag(scope);
 		String preferencePagePathSeparator = "/";
 		String parentPreferencePagePath = languageTag + preferencePagePathSeparator + languageTag
 				+ CommonPreferenceConstants.SEPARATOR + CommonPreferenceConstants.EDITOR_NODE_NAME;
-		String preferencePagePath = parentPreferencePagePath + preferencePagePathSeparator
-				+ PreferenceStoreAccessor.syntaxColorerTag(scope);
+		String syntaxColorerPrefPageTag = PreferenceStoreAccessor.syntaxColorerTag(scope);
+		String preferencePagePath = parentPreferencePagePath + preferencePagePathSeparator + syntaxColorerPrefPageTag;
 		if (PlatformUI.getWorkbench().getPreferenceManager().find(preferencePagePath) == null) {
-			SyntaxColoringPreferencePage preferencePage = new SyntaxColoringPreferencePage();
-			preferencePage.setTitle("Syntax Colorer");
-			ServiceRegistry.injectServices(scope, preferencePage);
-			PlatformUI.getWorkbench().getPreferenceManager().addTo(parentPreferencePagePath,
-					new PreferenceNode(preferencePage.qualifiedName(), preferencePage));
+			PreferenceNode node = new PreferenceNode(syntaxColorerPrefPageTag, "Syntax Colorer", null, null) {
+				@Override
+				public void createPage() {
+					SyntaxColoringPreferencePage page = new SyntaxColoringPreferencePage();
+					page.setTitle(getLabelText());
+					ServiceRegistry.injectServices(scope, page);
+					setPage(page);
+				}
+			};
+			PlatformUI.getWorkbench().getPreferenceManager().addTo(parentPreferencePagePath, node);
 		}
 		// TODO redraw/revalidate editor's StyledText control
 	}
