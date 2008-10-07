@@ -32,7 +32,9 @@ import org.eclipse.ui.IURIEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.ContentAssistAction;
+import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
+import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -75,7 +77,8 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 				if (selectionProvider instanceof IPostSelectionProvider) {
 					IPostSelectionProvider provider = (IPostSelectionProvider) selectionProvider;
 					provider.addPostSelectionChangedListener(this);
-				} else {
+				}
+				else {
 					selectionProvider.addSelectionChangedListener(this);
 				}
 			}
@@ -86,7 +89,8 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 				if (selectionProvider instanceof IPostSelectionProvider) {
 					IPostSelectionProvider provider = (IPostSelectionProvider) selectionProvider;
 					provider.removePostSelectionChangedListener(this);
-				} else {
+				}
+				else {
 					selectionProvider.removeSelectionChangedListener(this);
 				}
 			}
@@ -144,13 +148,13 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 
 	@Override
 	protected void doSetInput(IEditorInput input) throws CoreException {
-		System.out.println("doSetInput:"+input);
+		System.out.println("doSetInput:" + input);
 		super.doSetInput(input);
 	}
-	
+
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
-		System.out.println("init:"+input);
+		System.out.println("init:" + input);
 		if (!(input instanceof IURIEditorInput))
 			throw new IllegalArgumentException("Can only handle IURIEditorInputs");
 
@@ -201,11 +205,10 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 			markAsStateDependentAction("Format", true); //$NON-NLS-1$
 			markAsSelectionDependentAction("Format", true); //$NON-NLS-1$
 		}
-
-		// TODO What's that?
-//		SelectMarkerRulerAction markerAction = new XtextMarkerRulerAction(XtextUIMessages.getResourceBundle(),
-//				"XtextSelectAnnotationRulerAction.", this, getVerticalRuler()); //$NON-NLS-1$
-//		setAction(ITextEditorActionConstants.RULER_CLICK, markerAction);
+		// Creates an build-in click an ruler annotation marks corresponding text action
+		SelectMarkerRulerAction markerAction = new XtextMarkerRulerAction(XtextUIMessages.getResourceBundle(),
+				"XtextSelectAnnotationRulerAction.", this, getVerticalRuler()); //$NON-NLS-1$
+		setAction(ITextEditorActionConstants.RULER_CLICK, markerAction);
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public class BuiltinTokenColorer extends AbstractAntlrTokenColorer {
 		if(QUOTED.matcher(antlrTokenDef).matches()) {
 			return BuiltinTokenStyles.KEYWORD;
 		}
-		if("RULE_STRING".equals(antlrTokenDef) || "RULE_ID".equals(antlrTokenDef)) {
+		if("RULE_STRING".equals(antlrTokenDef)) {
 			return BuiltinTokenStyles.STRING;
 		} 
 		if("RULE_INT".equals(antlrTokenDef)) {

@@ -16,4 +16,5 @@ package org.eclipse.xtext.ui.core.editor.preferences;
 public class PreferenceConstants {
 
 	public static final char SEPARATOR = '.';
+	public static final String EDITOR_NODE_NAME = "editor";
 }

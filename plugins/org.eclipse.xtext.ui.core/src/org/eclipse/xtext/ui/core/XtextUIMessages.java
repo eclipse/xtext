@@ -16,7 +16,8 @@ import org.eclipse.osgi.util.NLS;
 
 /**
  * 
- * Singleton for all message bundle classes used from within <i>org.eclipse.xtext.ui</i>.  
+ * Singleton for all message bundle classes used from within
+ * <i>org.eclipse.xtext.ui.core</i>.
  * 
  * @author Dennis Hübner - Initial contribution and API
  * @author Michael Clay
@@ -24,15 +25,15 @@ import org.eclipse.osgi.util.NLS;
  * 
  */
 public class XtextUIMessages extends NLS {
-	
-	private static final String BUNDLE_NAME = "org.eclipse.xtext.ui.messages"; //$NON-NLS-1$
+
+	private static final String BUNDLE_NAME = XtextUIMessages.class.getPackage().getName() + ".messages"; //$NON-NLS-1$
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
 
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, XtextUIMessages.class);
 	}
-	
+
 	private XtextUIMessages() {
 	}
 

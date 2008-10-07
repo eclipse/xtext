@@ -53,13 +53,14 @@ import org.eclipse.xtext.ui.core.internal.Activator;
  */
 public abstract class AbstractPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage,
 		IWorkbenchPropertyPage {
-	
+
 	private static final Logger log = Logger.getLogger(AbstractPreferencePage.class);
 
 	private static final String USE_PROJECT_SETTINGS = "useProjectSettings";
 
 	@Inject
-	private IServiceScope languageDescriptor;
+	private IServiceScope serviceScope;
+
 	private IWorkbench workbench;
 	private IProject project;
 	private String languageName;
@@ -115,7 +116,8 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 	}
 
 	/**
-	 * @return the qualifer used to look up the preference node of the configured preferencesstore
+	 * @return the qualifer used to look up the preference node of the
+	 *         configured preferencesstore
 	 */
 	protected String getQualifier() {
 		return Activator.getDefault().getBundle().getSymbolicName();
@@ -125,7 +127,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 	 * @return
 	 */
 	protected IServiceScope getServiceScope() {
-		return languageDescriptor;
+		return serviceScope;
 	}
 
 	/*
@@ -261,8 +263,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		boolean retVal = super.performOk();
 		if (retVal && isPropertyPage()) {
 			try {
-				currentProject().setPersistentProperty(
-						new QualifiedName(qualifiedName(), USE_PROJECT_SETTINGS),
+				currentProject().setPersistentProperty(new QualifiedName(qualifiedName(), USE_PROJECT_SETTINGS),
 						String.valueOf(useProjectSettingsButton.getSelection()));
 				((IPersistentPreferenceStore) getPreferenceStore()).save();
 			}
