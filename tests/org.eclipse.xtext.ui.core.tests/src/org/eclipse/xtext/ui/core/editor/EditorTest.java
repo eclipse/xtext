@@ -10,22 +10,16 @@ package org.eclipse.xtext.ui.core.editor;
 
 import static org.eclipse.xtext.ui.core.util.ResourceUtil.createFile;
 import static org.eclipse.xtext.ui.core.util.ResourceUtil.createProject;
-import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.ILogListener;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.core.ITestLanguage;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
@@ -35,10 +29,7 @@ import org.eclipse.xtext.ui.core.internal.XtextUITestsPlugin;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class EditorTest extends TestCase {
-
-	private static final long STEP_DELAY = 0;
-	private static final String EDITOR_ID = ITestLanguage.ID;
+public class EditorTest extends AbstractEditorTest {
 
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -123,44 +114,51 @@ public class EditorTest extends TestCase {
 		openEditor.close(true);
 	}
 
-	@SuppressWarnings("restriction")
-	private XtextEditor openEditor(IFile file) throws Exception {
-		IEditorPart openEditor = openEditor(file,EDITOR_ID);
-		if (openEditor instanceof XtextEditor) {
-			waitForJobCompletion();
-			sleep(STEP_DELAY);
-			return (XtextEditor) openEditor;
-		} else if (openEditor instanceof org.eclipse.ui.internal.ErrorEditorPart) {
-			fail("Could not open XtextEditor. Editor produced errors during initialization.");
-		} else {
-			fail("Opened Editor with id:" + EDITOR_ID + ", is not a BaseXtextEditor");
-		}
-		return null;
-	}
-
-	private IEditorPart openEditor(IFile file, String editorId) throws PartInitException {
-		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(
-				new FileEditorInput(file),editorId);
-	}
-
-	private void waitForJobCompletion() throws InterruptedException {
-		while (Job.getJobManager().currentJob() != null)
-			sleep(500);
-	}
-
-	private void sleep(long i) throws InterruptedException {
-		Display displ = Display.getCurrent();
-		if (displ != null) {
-			long timeToGo = System.currentTimeMillis() + i;
-			while (System.currentTimeMillis() < timeToGo) {
-				if (!displ.readAndDispatch())
-					displ.sleep();
+	public void testOpenFileReadModifyReadSecond() throws Exception {
+		IProject p = createProject("foo");
+		IFile file = createFile(p, "z.testlanguage", "/* multi line */\n" +
+				"stuff foo\n" +
+				"stuff bar\n" +
+				"// end");
+		XtextEditor openEditor = openEditor(file);
+		assertNotNull(openEditor);
+		XtextDocument document = (XtextDocument) openEditor.getDocument();
+		
+		Display.getDefault().readAndDispatch();
+		document.readOnly(new UnitOfWork<Object>() {
+	
+			public Object exec(XtextResource resource) throws Exception {
+				assertNotNull(resource);
+				EList<EObject> contents = resource.getContents();
+				EObject object = contents.get(0);
+				assertEquals(2, object.eContents().size());
+				return null;
 			}
-			displ.update();
-		} else {
-			Thread.sleep(i);
-		}
-
+		});
+		document.replace(36, 0, "a");
+		System.out.println("Waiting for reconciler...");
+		sleep(3000);
+		document.readOnly(new UnitOfWork<Object>() {
+			
+			public Object exec(XtextResource resource) throws Exception {
+				assertNotNull(resource);
+				EList<EObject> contents = resource.getContents();
+				
+				EObject object = contents.get(0);
+				assertEquals(2, object.eContents().size());
+				
+				EObject object2 = object.eContents().get(0);
+				assertEquals("foo",object2.eGet(object2.eClass().getEStructuralFeature("name")));
+				
+				EObject object3 = object.eContents().get(1);
+				Object name = object3.eGet(object3.eClass().getEStructuralFeature("name"));
+				assertEquals("bara", name);
+				
+				return null;
+			}
+		});
+		openEditor.doSave(null);
+		openEditor.close(true);
 	}
 
 }
