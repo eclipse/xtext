@@ -4,6 +4,6 @@ Bundle-Name: Xtext2 UI
 Bundle-SymbolicName: org.eclipse.xtext.xtext.ui;singleton:=true
 Bundle-Version: 0.7.0.qualifier
 Bundle-Activator: org.eclipse.xtext.xtext.ui.Activator
-Require-Bundle: org.eclipse.xtext.ui,
- org.eclipse.xtext.common.ui
+Require-Bundle: org.eclipse.xtext.ui.core;bundle-version="0.7.0",
+ org.eclipse.xtext.ui.common;bundle-version="0.7.0"
 Bundle-ActivationPolicy: lazy
