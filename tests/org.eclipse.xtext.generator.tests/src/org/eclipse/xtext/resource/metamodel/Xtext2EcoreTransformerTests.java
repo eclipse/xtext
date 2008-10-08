@@ -337,7 +337,7 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertEquals(1, ruleA.getEAttributes().size());
 		assertAttributeConfiguration(ruleA, 0, "featureAS", "EString");
 		assertEquals(1, ruleA.getEReferences().size());
-		assertReferenceConfiguration(ruleA, 0, "a", "RuleA", false, 0, 1);
+		assertReferenceConfiguration(ruleA, 0, "a", "RuleA", true, 0, 1);
 		
 		assertEquals(0, add.getEAttributes().size());
 		assertEquals(0, add.getEReferences().size());

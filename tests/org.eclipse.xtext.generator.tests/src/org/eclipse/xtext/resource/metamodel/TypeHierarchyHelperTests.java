@@ -71,11 +71,12 @@ public class TypeHierarchyHelperTests extends TestCase {
 		eClass.getEClass().getEStructuralFeatures().add(feature);
 	}
 
-	private void addReference(EClassInfo eClass, EClassInfo ref, String name) {
+	private EReference addReference(EClassInfo eClass, EClassInfo ref, String name) {
 		EReference feature = EcoreFactory.eINSTANCE.createEReference();
 		feature.setName(name);
 		feature.setEType(ref.getEClassifier());
 		eClass.getEClass().getEStructuralFeatures().add(feature);
+		return feature;
 	}
 
 	public void testSimpeCase01() throws Exception {
@@ -220,6 +221,32 @@ public class TypeHierarchyHelperTests extends TestCase {
 		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
 	}
 	
+	public void testConfigurationOfLiftedReference() throws Exception {
+		EClassInfo a = addClass("a");
+		EClassInfo b = addClass("b");
+		EClassInfo c = addClass("c");
+		
+		b.addSupertype(a);
+		c.addSupertype(a);
+		EReference refB = addReference(b, a, "ref");
+		refB.setContainment(true);
+		EReference refC = addReference(c, a, "ref");
+		refC.setContainment(true);
+		
+		assertEquals(0, a.getEClass().getEStructuralFeatures().size());
+		assertEquals(1, b.getEClass().getEStructuralFeatures().size());
+		assertEquals(1, c.getEClass().getEStructuralFeatures().size());
+		
+		liftUpFeatures();
+		
+		assertEquals(1, a.getEClass().getEStructuralFeatures().size());
+		assertEquals(0, b.getEClass().getEStructuralFeatures().size());
+		assertEquals(0, c.getEClass().getEStructuralFeatures().size());
+		
+		EReference refA = (EReference) a.getEClass().getEStructuralFeatures().get(0);
+		assertTrue(refA.isContainment());
+	}
+
 	public void testDublicateDerivedFeature() throws Exception {
 		EClassInfo a = addClass("a");
 		EClassInfo b = addClass("b");
