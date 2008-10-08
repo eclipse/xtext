@@ -17,7 +17,14 @@
             bundleId="org.eclipse.xtext.ui"
             loggername="org\.eclipse\.xtext\.ui\..*">
       </mapentry>
+      <mapentry
+            bundleId="org.eclipse.xtext.ui.core"
+            loggername="org\.eclipse\.xtext\.ui\.core\..*">
+      </mapentry>
+      <mapentry
+            bundleId="org.eclipse.xtext.ui.common"
+            loggername="org\.eclipse\.xtext\.ui\.common\..*">
+      </mapentry>
   </extension>
    
-
 </plugin>

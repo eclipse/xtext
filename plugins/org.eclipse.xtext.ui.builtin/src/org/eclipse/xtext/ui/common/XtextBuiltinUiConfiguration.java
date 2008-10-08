@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.eclipse.xtext.builtin.IXtextBuiltin;
 import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
+import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultTokenScanner;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ITokenColorer;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.tokens.BuiltinTokenColorer;
@@ -14,6 +15,7 @@ public class XtextBuiltinUiConfiguration extends AbstractServiceRegistrationFact
 	public Set<IServiceRegistration> registrations() {
 		return scope(IXtextBuiltin.SCOPE)
 			.with(XtextSourceViewerConfiguration.class)
+			.with(XtextContentOutlinePage.class)
 			.with(ITokenColorer.class, BuiltinTokenColorer.class)
 			.with(DefaultTokenScanner.class).registrations();
 	}
