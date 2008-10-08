@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension
-         point="org.eclipse.xtext.ui.tokenTypeDef">
-      <tokenTypeDef
-            class="org.eclipse.xtext.xtext.ui.services.XtextTokenTypeDef"
-            languageId="org.eclipse.xtext.Xtext">
-      </tokenTypeDef>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.ui.formatter">
-      <formatter
-            class="org.eclipse.xtext.xtext.ui.services.XtextFormatter"
-            languageId="org.eclipse.xtext.Xtext">
-      </formatter>
-   </extension>
-
+  
 </plugin>
