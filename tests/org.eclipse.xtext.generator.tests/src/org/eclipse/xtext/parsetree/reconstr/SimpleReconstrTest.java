@@ -8,7 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
+import java.io.ByteArrayOutputStream;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -25,29 +28,31 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		String model = "( a b ) !";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
-	// FIXME: make this work again
 
-//	public void testFollowingHiddenTokens() throws Exception {
-//		String model = "a ";
-//		assertEquals(model, parseAndSerialize(model));
-//	}
+	public void testFollowingHiddenTokens() throws Exception {
+		String model = "a ";
+		assertEquals(model, parseAndSerialize(model));
+	}
 
-	// FIXME: make this work again
-	
-//	public void testComplex() throws Exception {
-//		String model = "( ( a b ) ! c  d e  f (  x s ) ( \t ( a \n\rb/*ffo \n bar */ ) ! c ) ! ) //holla\n!";
-//		assertEquals(model, parseAndSerialize(model));
-//	}
+	public void testComplex() throws Exception {
+		String model = "( ( a b ) ! c  d e  f (  x s ) ( \t ( a \n\rb/*ffo \n bar */ ) ! c ) ! ) //holla\n!";
+		assertEquals(model, parseAndSerialize(model));
+	}
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
 		System.out.println(EmfFormater.objToStr(result, ""));
+		System.out.println(EmfFormater.objToStr(NodeUtil.getRootNode(result),
+				""));
+		System.out.println(EmfFormater.objToStr(NodeUtil.getRootNode(result)
+				.getLeafNodes(), ""));
+
 		IParseTreeConstructor con = getParseTreeConstructor();
-		WhitespacePreservingCallback callback = new WhitespacePreservingCallback(
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		WhitespacePreservingCallback callback = new WhitespacePreservingCallback(out,
 				getValueConverterService());
 		con.update(result, callback);
-		return callback.toString();
+		return out.toString();
 	}
 
 	public void testSimpleExpressions5() throws Exception {

@@ -16,7 +16,9 @@ public class ComplexReconstrTestParseTreeConstructor extends AbstractParseTreeCo
 	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
 		Solution t = internalSerialize(obj);
 		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
+		callback.beginSerialize();
 		t.getPredecessor().executeAllCallbacks(callback);
+		callback.endSerialize();
 		System.out.println("success!");
 	}
 	
