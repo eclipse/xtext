@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
+import java.io.ByteArrayOutputStream;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -55,10 +57,11 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 		EObject result = (EObject) getModel(model);
 		System.out.println(EmfFormater.objToStr(result, ""));
 		IParseTreeConstructor con = getParseTreeConstructor();
-		WhitespacePreservingCallback callback = new WhitespacePreservingCallback(
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		WhitespacePreservingCallback callback = new WhitespacePreservingCallback(out,
 				getValueConverterService());
 		con.update(result, callback);
-		return callback.toString();
+		return out.toString();
 	}
 
 	public void testNormalizableCompositeNodesIncluded() throws Exception {
