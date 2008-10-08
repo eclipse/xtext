@@ -10,4 +10,8 @@ public interface IXtextDocument extends IDocument {
 	
 	public <T> T getAdapter(Class<T> adapterType);
 
+	public void addModelListener(IXtextModelListener listener);
+
+	public void removeModelListener(IXtextModelListener listener);
+
 }

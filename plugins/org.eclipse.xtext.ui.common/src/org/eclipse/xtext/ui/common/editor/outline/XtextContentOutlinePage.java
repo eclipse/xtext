@@ -19,11 +19,13 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.core.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
 
@@ -53,7 +55,33 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 	private void configureDocument() {
 		if (sourceViewer != null) {
 			IDocument document = sourceViewer.getDocument();
+			IXtextDocument xtextDocument = XtextDocumentUtil.get(document);
+			xtextDocument.addModelListener(new IXtextModelListener() {
+				public void modelChanged(XtextResource resource) {
+					logger.debug("Document has been changed. Triggering update of outline.");
+					runInSWTThread(new Runnable() {
+						public void run() {
+							TreeViewer viewer = getTreeViewer();
+							viewer.refresh();
+						}
+					});
+				}
+			});
 			internalSetInput(document);
+		}
+	}
+
+	/**
+	 * Runs the runnable in the SWT thread. (Simply runs the runnable if the
+	 * current thread is the UI thread, otherwise calls the runnable in
+	 * asyncexec.)
+	 */
+	public void runInSWTThread(Runnable runnable) {
+		if (Display.getCurrent() == null) {
+			Display.getDefault().asyncExec(runnable);
+		}
+		else {
+			runnable.run();
 		}
 	}
 

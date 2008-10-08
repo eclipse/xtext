@@ -33,6 +33,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 	}
 
 	public void reconcile(final IRegion region) {
+		log.debug("Preparing reconciliation.");
 		try {
 			final IXtextDocument document = XtextDocumentUtil.get(sourceViewer);
 			if (document != null) {
@@ -42,8 +43,10 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 						if(region instanceof DirtyRegion) {
 							DirtyRegion dirtyRegion = (DirtyRegion) region;
 							if(dirtyRegion.getType() == DirtyRegion.REMOVE) {
+								log.debug("Requesting reconciliation after REMOVE.");
 								resource.update(region.getOffset(), region.getLength(), "");
 							} else if(dirtyRegion.getType() == DirtyRegion.INSERT) {
+								log.debug("Requesting reconciliation after INSERT.");
 								resource.update(region.getOffset(), 0, document.get(region.getOffset(), region.getLength()));
 							} else {
 								throw new IllegalArgumentException("Illegal DirtyRegion.getType() " +Strings.notNull(dirtyRegion.getType()));
@@ -58,6 +61,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 		} catch (Throwable t) {
 			log.error("Reconciling failed. " + t);
 		}
+		log.debug("Reconciliation finished.");
 	}
 
 	public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion) {

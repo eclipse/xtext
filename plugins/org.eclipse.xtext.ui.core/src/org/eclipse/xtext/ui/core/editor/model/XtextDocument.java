@@ -9,6 +9,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -90,6 +91,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		try {
 			T exec = work.exec(resource);
 			checkAndUpdateMarkers(resource);
+			notifyDocumentListeners(resource);
 			// TODO track modifications and serialize back to the text buffer
 			return exec;
 		} catch (RuntimeException e) {
@@ -98,6 +100,25 @@ public class XtextDocument extends Document implements IXtextDocument {
 			throw new WrappedException(e);
 		} finally {
 			writeLock.unlock();
+		}
+	}
+	
+	ListenerList modelListeners = new ListenerList(ListenerList.IDENTITY);
+	
+	public void addModelListener(IXtextModelListener listener) {
+		Assert.isNotNull(listener);
+		modelListeners.add(listener);
+	}
+	
+	public void removeModelListener(IXtextModelListener listener) {
+		Assert.isNotNull(listener);
+		modelListeners.remove(listener);
+	}
+	
+	private void notifyDocumentListeners(XtextResource res) {
+		Object[] listeners = modelListeners.getListeners();
+		for (int i = 0; i < listeners.length; i++) {
+			((IXtextModelListener) listeners[i]).modelChanged(res);
 		}
 	}
 
