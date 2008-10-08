@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -89,8 +90,12 @@ public abstract class EClassifierInfo {
 
 		public boolean addFeature(EStructuralFeature prototype) {
 			try {
-				return addFeature(prototype.getName(), prototype.getEType(), prototype.isMany(), prototype
-						.getUpperBound() > 1, null);
+				boolean isContainment = false;
+				if (prototype instanceof EReference) {
+					EReference reference = (EReference) prototype;
+					isContainment = reference.isContainment();
+				}
+				return addFeature(prototype.getName(), prototype.getEType(), prototype.isMany(), isContainment, null);
 			}
 			catch (TransformationException e) {
 				throw new IllegalArgumentException(e.getMessage());
@@ -163,13 +168,16 @@ public abstract class EClassifierInfo {
 
 		@Override
 		public boolean addSupertype(EClassifierInfo superTypeInfo) {
-			throw new UnsupportedOperationException("Cannot add supertype to simple datatype");
+			throw new UnsupportedOperationException("Cannot add supertype "
+					+ Strings.emptyIfNull(superTypeInfo.getEClassifier().getName()) + " to simple datatype "
+					+ Strings.emptyIfNull(this.getEClassifier().getName()));
 		}
 
 		@Override
 		public boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue,
 				boolean isContainment, EObject parserElement) throws TransformationException {
-			throw new UnsupportedOperationException("Cannot add feature to simple datatype");
+			throw new UnsupportedOperationException("Cannot add feature " + featureName + " to simple datatype"
+					+ Strings.emptyIfNull(this.getEClassifier().getName()));
 		}
 
 	}
