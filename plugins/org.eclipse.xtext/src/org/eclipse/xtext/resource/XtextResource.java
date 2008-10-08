@@ -144,16 +144,17 @@ public class XtextResource extends ResourceImpl {
 		}
 		if (!contents.isEmpty()) {
 			EObject rootElement = contents.get(0);
-			WhitespacePreservingCallback cb = new WhitespacePreservingCallback(valueConverterService);
+			WhitespacePreservingCallback cb = new WhitespacePreservingCallback(
+					outputStream, valueConverterService);
 			parseTreeConstructor.update(rootElement, cb);
-			outputStream.write(cb.toString().getBytes());
+			// outputStream.write(cb.toString().getBytes());
 		}
 	}
 	
-	public String serialize(EObject o) {
-		WhitespacePreservingCallback cb = new WhitespacePreservingCallback(valueConverterService);
-		parseTreeConstructor.update(o, cb);
-		return o.toString();
-	}
+//	public String serialize(EObject o) {
+//		WhitespacePreservingCallback cb = new WhitespacePreservingCallback(valueConverterService);
+//		parseTreeConstructor.update(o, cb);
+//		return o.toString();
+//	}
 
 }

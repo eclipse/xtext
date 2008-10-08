@@ -23,13 +23,18 @@ public interface IParseTreeConstructorCallback extends ILanguageService {
 	void objectCreation(IInstanceDescription current);
 
 	void lexerRuleCall(IInstanceDescription current, RuleCall call, Object value);
-	
+
 	@Deprecated
 	void lexerRuleCall(IInstanceDescription current, RuleCall call);
 
 	void keywordCall(IInstanceDescription current, Keyword call);
 
-	void actionCall(IInstanceDescription oldCurrent, IInstanceDescription newCurrent, Action action);
+	void actionCall(IInstanceDescription oldCurrent,
+			IInstanceDescription newCurrent, Action action);
 
 	void crossRefCall(IInstanceDescription current, CrossReference call);
+
+	void beginSerialize();
+
+	void endSerialize();
 }
