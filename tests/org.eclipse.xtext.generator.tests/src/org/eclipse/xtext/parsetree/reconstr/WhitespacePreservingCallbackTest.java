@@ -1,6 +1,9 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
+import java.io.ByteArrayOutputStream;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -15,11 +18,9 @@ public class WhitespacePreservingCallbackTest extends AbstractGeneratorTest {
 		check("a");
 	}
 
-//	FIXME: Make this test work again
-	
-//	public void testHiddenInBetween() throws Exception {
-//		check("a \t /* foo bar */ + b");
-//	}
+	public void testHiddenInBetween() throws Exception {
+		check("a \t /* foo bar */ + b");
+	}
 
 	
 //	FIXME: Make this test work again
@@ -65,15 +66,17 @@ public class WhitespacePreservingCallbackTest extends AbstractGeneratorTest {
 
 	private String serialize(EObject result) {
 		IParseTreeConstructor con = getParseTreeConstructor();
-		WhitespacePreservingCallback cb = new WhitespacePreservingCallback(getValueConverterService());
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		WhitespacePreservingCallback cb = new WhitespacePreservingCallback(out,getValueConverterService());
 		con.update(result, cb);
-		return cb.toString();
+		return out.toString();
 	}
 
 	private void failsWith(EObject o, Class<? extends RuntimeException> clazz) {
 		try {
 			IParseTreeConstructor con = getParseTreeConstructor();
-			WhitespacePreservingCallback cb = new WhitespacePreservingCallback(getValueConverterService());
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			WhitespacePreservingCallback cb = new WhitespacePreservingCallback(out,getValueConverterService());
 			con.update(o, cb);
 			fail("Should fail with "+clazz.getSimpleName());
 		} catch (RuntimeException e) {
