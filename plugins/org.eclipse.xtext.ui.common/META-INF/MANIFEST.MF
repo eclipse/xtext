@@ -17,3 +17,4 @@ Export-Package: org.eclipse.xtext.ui.common.editor.codecompletion,
  org.eclipse.xtext.ui.common.editor.tasks,
  org.eclipse.xtext.ui.common.editor.tasks.dialogfields
 Import-Package: org.eclipse.ui.texteditor.templates
+Eclipse-RegisterBuddy: org.eclipse.xtext.log4j

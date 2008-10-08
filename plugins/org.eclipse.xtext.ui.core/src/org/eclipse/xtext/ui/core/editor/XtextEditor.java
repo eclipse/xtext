@@ -57,16 +57,29 @@ import org.eclipse.xtext.ui.core.internal.Activator;
  */
 public class XtextEditor extends TextEditor implements IExecutableExtension {
 
+	private static final Logger log = Logger.getLogger(XtextEditor.class);
+
+	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
+
+	@Inject
+	private XtextSourceViewerConfiguration sourceViewerConfiguration;
+
+	@Inject(optional = true)
+	private IContentOutlinePage outlinePage;
+
+	// TODO private IFoldingUpdater foldingSupport;
+
 	public XtextEditor() {
-		System.out.println("constructing editor");
+		log.debug("Creating Xtext Editor. Instance: [" + this.toString() + "]");
 	}
 
 	public void setInitializationData(IConfigurationElement config, String propertyName, Object data) {
 		super.setInitializationData(config, propertyName, data);
 		String id = config.getAttribute("id");
 		IServiceScope scope = ServiceScopeFactory.get(id);
-		if (scope == null)
+		if (scope == null) {
 			throw new IllegalStateException("scope " + data + " has not been registered.");
+		}
 		ServiceRegistry.injectServices(scope, this);
 	}
 
@@ -133,48 +146,36 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 		return XtextDocumentUtil.get(getSourceViewer());
 	}
 
-	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(XtextEditor.class);
-
-	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
-
-	@Inject
-	private XtextSourceViewerConfiguration sourceViewerConfiguration;
-
-	@Inject(optional = true)
-	private IContentOutlinePage outlinePage;
-
-	// TODO private IFoldingUpdater foldingSupport;
-
 	@Override
 	protected void doSetInput(IEditorInput input) throws CoreException {
-		System.out.println("doSetInput:" + input);
+		log.debug("doSetInput:" + input);
+		log.debug("Editor instance is [" + this.toString() + "]");
 		super.doSetInput(input);
 	}
-
+	
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
-		System.out.println("init:" + input);
+		log.debug("init:" + input);
 		if (!(input instanceof IURIEditorInput))
 			throw new IllegalArgumentException("Can only handle IURIEditorInputs");
 
 		// do document provider setup
 		setDocumentProvider(new XtextDocumentProvider());
+
 		// source viewer setup
 		setSourceViewerConfiguration(sourceViewerConfiguration);
 
-		if (outlinePage != null) {
-			if (outlinePage instanceof ISourceViewerAware)
-				((ISourceViewerAware) outlinePage).setSourceViewer(getSourceViewer());
-			outlinePage.addSelectionChangedListener(new OutlineSelectionChangedListener());
-		}
+		// NOTE: Outline CANNOT be initialized here, since we do not have access
+		// to the sourceviewer yet (it will be created later).
+		
 		super.init(site, input);
 	}
 
 	public IResource getResource() {
 		Object adapter = getEditorInput().getAdapter(IResource.class);
-		if (adapter != null)
+		if (adapter != null) {
 			return (IResource) adapter;
+		}
 		return null;
 	}
 
@@ -182,9 +183,28 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 	@Override
 	public Object getAdapter(Class adapter) {
 		if (adapter.equals(IContentOutlinePage.class)) {
-			return outlinePage;
+			return getContentOutlinePage();
 		}
 		return super.getAdapter(adapter);
+	}
+
+	private IContentOutlinePage getContentOutlinePage() {
+		if (outlinePage != null) {
+			if (outlinePage instanceof ISourceViewerAware) {
+				((ISourceViewerAware) outlinePage).setSourceViewer(getSourceViewer());
+			}
+			outlinePage.addSelectionChangedListener(getOutlineSelectionChangedListener());
+		}
+		return outlinePage;
+	}
+	
+	private OutlineSelectionChangedListener outlineSelectionChangedListener;
+
+	private OutlineSelectionChangedListener getOutlineSelectionChangedListener() {
+		if (outlineSelectionChangedListener == null) {
+			outlineSelectionChangedListener = new OutlineSelectionChangedListener();
+		}
+		return outlineSelectionChangedListener;
 	}
 
 	@Override
@@ -205,6 +225,7 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 			markAsStateDependentAction("Format", true); //$NON-NLS-1$
 			markAsSelectionDependentAction("Format", true); //$NON-NLS-1$
 		}
+
 		// Creates an build-in click an ruler annotation marks corresponding text action
 		SelectMarkerRulerAction markerAction = new XtextMarkerRulerAction(XtextUIMessages.getResourceBundle(),
 				"XtextSelectAnnotationRulerAction.", this, getVerticalRuler()); //$NON-NLS-1$
@@ -213,6 +234,7 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 
 	@Override
 	protected ISourceViewer createSourceViewer(Composite parent, IVerticalRuler ruler, int styles) {
+		log.debug("Creating Xtext source viewer.");
 		// overwrite superclass implementation to allow folding
 		fAnnotationAccess = createAnnotationAccess();
 		fOverviewRuler = createOverviewRuler(getSharedColors());
@@ -240,8 +262,16 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 	@Override
 	public void dispose() {
 		super.dispose();
-		if (projectionSupport != null)
+		if (projectionSupport != null) {
 			projectionSupport.dispose();
+		}
+		if (outlineSelectionChangedListener != null) {
+			outlinePage.removeSelectionChangedListener(outlineSelectionChangedListener);
+			outlineSelectionChangedListener = null;
+		}
+		if (outlinePage != null) {
+			outlinePage = null;
+		}
 	}
 
 	// @Override
