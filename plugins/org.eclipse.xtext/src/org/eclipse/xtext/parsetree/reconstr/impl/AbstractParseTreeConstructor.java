@@ -1,5 +1,7 @@
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
+
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -102,10 +104,11 @@ public abstract class AbstractParseTreeConstructor implements
 		}
 
 		private String dsl(AbstractToken ele) {
-			SimpleSerializingCallback cb = new SimpleSerializingCallback(
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			SimpleSerializingCallback cb = new SimpleSerializingCallback(out,
 					converterService);
 			executeAllCallbacks(cb);
-			return cb.toString();
+			return out.toString();
 		}
 
 		public void executeAllCallbacks(IParseTreeConstructorCallback callback) {

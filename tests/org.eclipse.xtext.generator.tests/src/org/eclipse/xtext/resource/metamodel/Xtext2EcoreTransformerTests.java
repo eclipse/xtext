@@ -27,6 +27,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.util.EmfFormater;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -687,5 +688,16 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertEquals(1, ruleC.getESuperTypes().size());
 		assertSame(ruleB, ruleC.getESuperTypes().get(0));
 		assertEquals(0, ruleD.getESuperTypes().size());
+	}
+	
+	public void testExpressionLikeLangauge() throws Exception {
+		String grammar = "language test generate test 'http://test'";
+		grammar += " Ex :	Atom  ({ChainExpression.left+=current} operator=('+'|'-'|'*'|'/') right=Atom )*;" +
+				"Atom returns Ex :   Number |  '(' Ex ')';" +
+				"Number : value=INT";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		EClass classifier = (EClass) ePackage.getEClassifier("Ex");
+		System.out.println(EmfFormater.objToStr(ePackage, ""));
+		assertEquals(0,classifier.getEStructuralFeatures().size());
 	}
 }

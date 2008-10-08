@@ -1,13 +1,12 @@
 package org.eclipse.xtext.parsetree.reconstr.callbacks;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.OutputStream;
+import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
@@ -16,95 +15,72 @@ import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 
 public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 
-	private Map<CompositeNode, Map<AbstractElement, Integer>> numberOfOccurences = new HashMap<CompositeNode, Map<AbstractElement, Integer>>();
+	private List<LeafNode> allLeafs = null;
 
-	public WhitespacePreservingCallback(IValueConverterService converterService) {
-		super(converterService);
+	private int lastLeaf = -1;
+
+	public WhitespacePreservingCallback(OutputStream output,
+			IValueConverterService converterService) {
+		super(output, converterService);
 	}
 
-	private Integer getOccurencesAndIncrease(CompositeNode node, AbstractElement ele) {
-		Map<AbstractElement, Integer> map = null;
-		if (numberOfOccurences.containsKey(node)) {
-			map = numberOfOccurences.get(node);
-		}
-		if (map == null)
-			map = new HashMap<AbstractElement, Integer>();
-		Integer n = 0;
-		if (map.containsKey(ele)) {
-			n = map.get(ele);
-		}
-		// increase
-		n++;
-		map.put(ele, n);
-		numberOfOccurences.put(node, map);
-		return n - 1;
-	}
-
-	@Override
-	public void parserRuleCallStart(IInstanceDescription current, RuleCall call) {
-		super.parserRuleCallStart(current, call);
-		if (getBuff().length() == 0) {
-			CompositeNode rootNode = getEntryNode(current);
-			if (rootNode != null) {
-				EList<LeafNode> list = rootNode.getLeafNodes();
-				for (int x = list.size() - 1; x >= 0; x--) {
-					LeafNode ln = list.get(x);
-					if (!ln.isHidden())
-						return;
-//					prepend(ln.getText());
-					append(ln.getText());
-				}
+	protected void before(IInstanceDescription curr, AbstractElement ele) {
+		int i = lastLeaf, last = findLeafNodeFor(curr, ele);
+		if (last < 0)
+			defaultSpacing(curr, ele);
+		else
+			while (++i < last) {
+				LeafNode n = allLeafs.get(i);
+				if (n.isHidden())
+					append(n.getText());
 			}
-		}
 	}
 
-	protected void before(IInstanceDescription desc, AbstractElement element) {
-		CompositeNode rootNode = getEntryNode(desc);
-		if (rootNode != null)
-			iterateChldren(element, rootNode);
+	public void beginSerialize() {
+		lastLeaf = -1;
+		allLeafs = null;
 	}
 
-	private CompositeNode getEntryNode(IInstanceDescription desc) {
-		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(desc.getDelegate());
-		if (nodeAdapter == null)
-			return null;
-		CompositeNode rootNode = nodeAdapter.getParserNode();
-		// go up normalizable rulecalls
-		while (rootNode.getParent() != null && rootNode.getParent().getElement() == null)
-			rootNode = rootNode.getParent();
-		return rootNode;
+	protected void defaultSpacing(IInstanceDescription curr, AbstractElement ele) {
+		if (outputHasStarted)
+			append(" ");
 	}
 
-	private void iterateChldren(AbstractElement element, CompositeNode rootNode) {
-		EList<AbstractNode> leafNodes = rootNode.getChildren();
-		boolean consumingMode = false;
-		int skip = getOccurencesAndIncrease(rootNode, element);
-		for (int x = leafNodes.size() - 1; x >= 0; x--) {
-			AbstractNode an = leafNodes.get(x);
-			if (an instanceof LeafNode) {
-				LeafNode n = (LeafNode) an;
-				if (consumingMode) {
-					if (!n.isHidden())
-						return;
-//					prepend(n.getText());
-					append(n.getText());					
-				}
-				if (n.getGrammarElement() == element) {
-					if (skip == 0) {
-						consumingMode = true;
-					} else {
-						skip--;
-					}
-				}
-			} else if (an instanceof CompositeNode) {
-				CompositeNode cn = (CompositeNode) an;
-				if (rootNode.getElement() == null) {
-					iterateChldren(element, cn);
-				}
+	public void endSerialize() {
+		if (allLeafs != null)
+			for (int i = lastLeaf + 1; i < allLeafs.size(); i++) {
+				LeafNode n = allLeafs.get(i);
+				if (n.isHidden())
+					append(n.getText());
 			}
-			// if (n.getGrammarElement() == element)
-			// log.info(debugInfo(n.getGrammarElement()));
+	}
+
+	protected int findLeafNodeFor(IInstanceDescription curr, AbstractElement ele) {
+		NodeAdapter currAdapter = NodeUtil.getNodeAdapter(curr.getDelegate());
+		if (currAdapter == null)
+			return -1;
+
+		if (allLeafs == null)
+			allLeafs = ((CompositeNode) EcoreUtil.getRootContainer(currAdapter
+					.getParserNode())).getLeafNodes();
+
+		for (int i = lastLeaf + 1; i < allLeafs.size(); i++)
+			if (nodeMatches(curr, ele, allLeafs.get(i)))
+				return lastLeaf = i;
+
+		return -1;
+	}
+
+	protected boolean nodeMatches(IInstanceDescription curr,
+			AbstractElement ele, LeafNode leaf) {
+		if (leaf.getGrammarElement() != ele)
+			return false;
+		if (ele instanceof Assignment) {
+			Assignment a = (Assignment) ele;
+			if (a.getFeature() != leaf.getFeature())
+				return false;
 		}
+		return true;
 	}
 
 }

@@ -41,4 +41,10 @@ public class DefaultParsetreeReconstructorCallback implements IParseTreeConstruc
 	public void lexerRuleCall(IInstanceDescription current, RuleCall call) {
 	}
 
+	public void beginSerialize() {
+	}
+
+	public void endSerialize() {
+	}
+
 }
