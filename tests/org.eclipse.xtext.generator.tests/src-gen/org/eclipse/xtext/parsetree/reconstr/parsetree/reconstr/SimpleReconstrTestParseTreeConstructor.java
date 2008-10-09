@@ -13,30 +13,32 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class SimpleReconstrTestParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
-		if((s = new Op_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Term_Alternatives(inst, null).firstSolution()) != null) return s;
-		if((s = new Atom_Assignment_name(inst, null).firstSolution()) != null) return s;
-		if((s = new Parens_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new TwoNumbers_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new ManyStrings_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Op_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("TwoNumbers") && (s = new TwoNumbers_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("ManyStrings") && (s = new ManyStrings_Group(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
-/************ begin Rule Op ****************/
+/************ begin Rule Op ****************
+ *
+ * Op returns Expression : Term ( { current = Op . values += current } values += Term ) * ;
+ *
+ **/
 
 
+// Term ( { current = Op . values += current } values += Term ) *
 protected class Op_Group extends GroupToken {
 	
 	public Op_Group(InstanceDescription curr, AbstractToken pred) {
@@ -51,6 +53,7 @@ protected class Op_Group extends GroupToken {
 	}
 }
 
+// Term
 protected class Op_0_RuleCall_Term extends RuleCallToken {
 	
 	public Op_0_RuleCall_Term(InstanceDescription curr, AbstractToken pred) {
@@ -65,6 +68,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 	}
 }
 
+// ( { current = Op . values += current } values += Term ) *
 protected class Op_1_Group extends GroupToken {
 	
 	public Op_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -79,6 +83,7 @@ protected class Op_1_Group extends GroupToken {
 	}
 }
 
+// { current = Op . values += current }
 protected class Op_1_0_Action_Op_values extends AssignmentToken  {
 
 	public Op_1_0_Action_Op_values(InstanceDescription curr, AbstractToken pred) {
@@ -96,6 +101,7 @@ protected class Op_1_0_Action_Op_values extends AssignmentToken  {
 	}
 }
 
+// values += Term
 protected class Op_1_1_Assignment_values extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -128,9 +134,15 @@ protected class Op_1_1_Assignment_values extends AssignmentToken  {
 
 
 /************ end Rule Op ****************/
-/************ begin Rule Term ****************/
+
+/************ begin Rule Term ****************
+ *
+ * Term returns Expression : Atom | TwoNumbers | ManyStrings | Parens ;
+ *
+ **/
 
 
+// Atom | TwoNumbers | ManyStrings | Parens
 protected class Term_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -156,6 +168,7 @@ protected class Term_Alternatives extends GroupToken {
 	}
 }
 
+// Atom | TwoNumbers | ManyStrings
 protected class Term_0_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -181,6 +194,7 @@ protected class Term_0_Alternatives extends GroupToken {
 	}
 }
 
+// Atom | TwoNumbers
 protected class Term_0_0_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -206,6 +220,7 @@ protected class Term_0_0_Alternatives extends GroupToken {
 	}
 }
 
+// Atom
 protected class Term_0_0_0_RuleCall_Atom extends RuleCallToken {
 	
 	public Term_0_0_0_RuleCall_Atom(InstanceDescription curr, AbstractToken pred) {
@@ -220,6 +235,7 @@ protected class Term_0_0_0_RuleCall_Atom extends RuleCallToken {
 	}
 }
 
+// TwoNumbers
 protected class Term_0_0_1_RuleCall_TwoNumbers extends RuleCallToken {
 	
 	public Term_0_0_1_RuleCall_TwoNumbers(InstanceDescription curr, AbstractToken pred) {
@@ -235,6 +251,7 @@ protected class Term_0_0_1_RuleCall_TwoNumbers extends RuleCallToken {
 }
 
 
+// ManyStrings
 protected class Term_0_1_RuleCall_ManyStrings extends RuleCallToken {
 	
 	public Term_0_1_RuleCall_ManyStrings(InstanceDescription curr, AbstractToken pred) {
@@ -250,6 +267,7 @@ protected class Term_0_1_RuleCall_ManyStrings extends RuleCallToken {
 }
 
 
+// Parens
 protected class Term_1_RuleCall_Parens extends RuleCallToken {
 	
 	public Term_1_RuleCall_Parens(InstanceDescription curr, AbstractToken pred) {
@@ -266,9 +284,15 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 
 
 /************ end Rule Term ****************/
-/************ begin Rule Atom ****************/
+
+/************ begin Rule Atom ****************
+ *
+ * Atom : name = ID ;
+ *
+ **/
 
 
+// name = ID
 protected class Atom_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.2/@alternatives/@terminal");
@@ -294,9 +318,15 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 }
 
 /************ end Rule Atom ****************/
-/************ begin Rule Parens ****************/
+
+/************ begin Rule Parens ****************
+ *
+ * Parens returns Expression : '(' Op ')' ( em = '!' ) ? ;
+ *
+ **/
 
 
+// '(' Op ')' ( em = '!' ) ?
 protected class Parens_Group extends GroupToken {
 	
 	public Parens_Group(InstanceDescription curr, AbstractToken pred) {
@@ -311,6 +341,7 @@ protected class Parens_Group extends GroupToken {
 	}
 }
 
+// '(' Op ')'
 protected class Parens_0_Group extends GroupToken {
 	
 	public Parens_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -325,6 +356,7 @@ protected class Parens_0_Group extends GroupToken {
 	}
 }
 
+// '(' Op
 protected class Parens_0_0_Group extends GroupToken {
 	
 	public Parens_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -339,7 +371,7 @@ protected class Parens_0_0_Group extends GroupToken {
 	}
 }
 
-
+// '('
 protected class Parens_0_0_0_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
@@ -357,6 +389,7 @@ protected class Parens_0_0_0_Keyword extends KeywordToken  {
 	}
 }
 
+// Op
 protected class Parens_0_0_1_RuleCall_Op extends RuleCallToken {
 	
 	public Parens_0_0_1_RuleCall_Op(InstanceDescription curr, AbstractToken pred) {
@@ -372,7 +405,7 @@ protected class Parens_0_0_1_RuleCall_Op extends RuleCallToken {
 }
 
 
-
+// ')'
 protected class Parens_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1");
@@ -391,6 +424,7 @@ protected class Parens_0_1_Keyword extends KeywordToken  {
 }
 
 
+// ( em = '!' ) ?
 protected class Parens_1_Assignment_em extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal");
@@ -417,9 +451,15 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 
 
 /************ end Rule Parens ****************/
-/************ begin Rule TwoNumbers ****************/
+
+/************ begin Rule TwoNumbers ****************
+ *
+ * TwoNumbers : num1 = INT num2 = INT ;
+ *
+ **/
 
 
+// num1 = INT num2 = INT
 protected class TwoNumbers_Group extends GroupToken {
 	
 	public TwoNumbers_Group(InstanceDescription curr, AbstractToken pred) {
@@ -434,6 +474,7 @@ protected class TwoNumbers_Group extends GroupToken {
 	}
 }
 
+// num1 = INT
 protected class TwoNumbers_0_Assignment_num1 extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@terminal");
@@ -458,6 +499,7 @@ protected class TwoNumbers_0_Assignment_num1 extends AssignmentToken  {
 	}
 }
 
+// num2 = INT
 protected class TwoNumbers_1_Assignment_num2 extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.1/@terminal");
@@ -484,9 +526,15 @@ protected class TwoNumbers_1_Assignment_num2 extends AssignmentToken  {
 
 
 /************ end Rule TwoNumbers ****************/
-/************ begin Rule ManyStrings ****************/
+
+/************ begin Rule ManyStrings ****************
+ *
+ * ManyStrings : '=' ( str1 += STRING ) * str2 += STRING ;
+ *
+ **/
 
 
+// '=' ( str1 += STRING ) * str2 += STRING
 protected class ManyStrings_Group extends GroupToken {
 	
 	public ManyStrings_Group(InstanceDescription curr, AbstractToken pred) {
@@ -501,6 +549,7 @@ protected class ManyStrings_Group extends GroupToken {
 	}
 }
 
+// '=' ( str1 += STRING ) *
 protected class ManyStrings_0_Group extends GroupToken {
 	
 	public ManyStrings_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -515,7 +564,7 @@ protected class ManyStrings_0_Group extends GroupToken {
 	}
 }
 
-
+// '='
 protected class ManyStrings_0_0_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0");
@@ -533,6 +582,7 @@ protected class ManyStrings_0_0_Keyword extends KeywordToken  {
 	}
 }
 
+// ( str1 += STRING ) *
 protected class ManyStrings_0_1_Assignment_str1 extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -558,6 +608,7 @@ protected class ManyStrings_0_1_Assignment_str1 extends AssignmentToken  {
 }
 
 
+// str2 += STRING
 protected class ManyStrings_1_Assignment_str2 extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.5/@alternatives/@abstractTokens.1/@terminal");
@@ -584,4 +635,5 @@ protected class ManyStrings_1_Assignment_str2 extends AssignmentToken  {
 
 
 /************ end Rule ManyStrings ****************/
+
 }

@@ -22,7 +22,7 @@ public abstract class TestLanguageStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			for (IServiceRegistration reg :  new org.eclipse.xtext.ui.core.TestLanguageUiConfig().registrations()) {
+			for (IServiceRegistration reg :  new org.eclipse.xtext.ui.core.TestLanguageRuntimeConfig().registrations()) {
 				ServiceRegistry.registerFactory(reg.scope(), reg.serviceFactory(), reg.priority());
 			}
 			

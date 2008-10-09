@@ -13,26 +13,28 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class DummyLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
-		if((s = new Model_Assignment_elements(inst, null).firstSolution()) != null) return s;
-		if((s = new Element_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Model") && (s = new Model_Assignment_elements(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Element") && (s = new Element_Group(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
-/************ begin Rule Model ****************/
+/************ begin Rule Model ****************
+ *
+ * Model : ( elements += Element ) * ;
+ *
+ **/
 
 
+// ( elements += Element ) *
 protected class Model_Assignment_elements extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.0/@alternatives/@terminal");
@@ -63,9 +65,15 @@ protected class Model_Assignment_elements extends AssignmentToken  {
 }
 
 /************ end Rule Model ****************/
-/************ begin Rule Element ****************/
+
+/************ begin Rule Element ****************
+ *
+ * Element : ( optional ?= 'optional' ) ? 'element' name = ID ( descriptions += STRING ) * ';' ;
+ *
+ **/
 
 
+// ( optional ?= 'optional' ) ? 'element' name = ID ( descriptions += STRING ) * ';'
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(InstanceDescription curr, AbstractToken pred) {
@@ -80,6 +88,7 @@ protected class Element_Group extends GroupToken {
 	}
 }
 
+// ( optional ?= 'optional' ) ? 'element' name = ID ( descriptions += STRING ) *
 protected class Element_0_Group extends GroupToken {
 	
 	public Element_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -94,6 +103,7 @@ protected class Element_0_Group extends GroupToken {
 	}
 }
 
+// ( optional ?= 'optional' ) ? 'element' name = ID
 protected class Element_0_0_Group extends GroupToken {
 	
 	public Element_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -108,6 +118,7 @@ protected class Element_0_0_Group extends GroupToken {
 	}
 }
 
+// ( optional ?= 'optional' ) ? 'element'
 protected class Element_0_0_0_Group extends GroupToken {
 	
 	public Element_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -122,6 +133,7 @@ protected class Element_0_0_0_Group extends GroupToken {
 	}
 }
 
+// ( optional ?= 'optional' ) ?
 protected class Element_0_0_0_0_Assignment_optional extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal");
@@ -146,7 +158,7 @@ protected class Element_0_0_0_0_Assignment_optional extends AssignmentToken  {
 	}
 }
 
-
+// 'element'
 protected class Element_0_0_0_1_Keyword_element extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
@@ -165,6 +177,7 @@ protected class Element_0_0_0_1_Keyword_element extends KeywordToken  {
 }
 
 
+// name = ID
 protected class Element_0_0_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -190,6 +203,7 @@ protected class Element_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
+// ( descriptions += STRING ) *
 protected class Element_0_1_Assignment_descriptions extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -215,7 +229,7 @@ protected class Element_0_1_Assignment_descriptions extends AssignmentToken  {
 }
 
 
-
+// ';'
 protected class Element_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1");
@@ -235,4 +249,5 @@ protected class Element_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule Element ****************/
+
 }

@@ -13,30 +13,32 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class SimpleExpressionsParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
-		if((s = new Sequence_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Addition_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Multiplication_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Term_Alternatives(inst, null).firstSolution()) != null) return s;
-		if((s = new Atom_Assignment_name(inst, null).firstSolution()) != null) return s;
-		if((s = new Parens_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Sequence") && (s = new Sequence_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Addition_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Multiplication_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
-/************ begin Rule Sequence ****************/
+/************ begin Rule Sequence ****************
+ *
+ * Sequence : Addition ( { current = Sequence . expressions += current } expressions += Addition ) * ;
+ *
+ **/
 
 
+// Addition ( { current = Sequence . expressions += current } expressions += Addition ) *
 protected class Sequence_Group extends GroupToken {
 	
 	public Sequence_Group(InstanceDescription curr, AbstractToken pred) {
@@ -51,6 +53,7 @@ protected class Sequence_Group extends GroupToken {
 	}
 }
 
+// Addition
 protected class Sequence_0_RuleCall_Addition extends RuleCallToken {
 	
 	public Sequence_0_RuleCall_Addition(InstanceDescription curr, AbstractToken pred) {
@@ -65,6 +68,7 @@ protected class Sequence_0_RuleCall_Addition extends RuleCallToken {
 	}
 }
 
+// ( { current = Sequence . expressions += current } expressions += Addition ) *
 protected class Sequence_1_Group extends GroupToken {
 	
 	public Sequence_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -79,6 +83,7 @@ protected class Sequence_1_Group extends GroupToken {
 	}
 }
 
+// { current = Sequence . expressions += current }
 protected class Sequence_1_0_Action_Sequence_expressions extends AssignmentToken  {
 
 	public Sequence_1_0_Action_Sequence_expressions(InstanceDescription curr, AbstractToken pred) {
@@ -96,6 +101,7 @@ protected class Sequence_1_0_Action_Sequence_expressions extends AssignmentToken
 	}
 }
 
+// expressions += Addition
 protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.0/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -128,9 +134,15 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 
 
 /************ end Rule Sequence ****************/
-/************ begin Rule Addition ****************/
+
+/************ begin Rule Addition ****************
+ *
+ * Addition returns Expression : Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) * ;
+ *
+ **/
 
 
+// Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
 protected class Addition_Group extends GroupToken {
 	
 	public Addition_Group(InstanceDescription curr, AbstractToken pred) {
@@ -145,6 +157,7 @@ protected class Addition_Group extends GroupToken {
 	}
 }
 
+// Multiplication
 protected class Addition_0_RuleCall_Multiplication extends RuleCallToken {
 	
 	public Addition_0_RuleCall_Multiplication(InstanceDescription curr, AbstractToken pred) {
@@ -159,6 +172,7 @@ protected class Addition_0_RuleCall_Multiplication extends RuleCallToken {
 	}
 }
 
+// ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
 protected class Addition_1_Group extends GroupToken {
 	
 	public Addition_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -173,6 +187,7 @@ protected class Addition_1_Group extends GroupToken {
 	}
 }
 
+// { current = Op . values += current } operator = ( '+' | '-' )
 protected class Addition_1_0_Group extends GroupToken {
 	
 	public Addition_1_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -187,6 +202,7 @@ protected class Addition_1_0_Group extends GroupToken {
 	}
 }
 
+// { current = Op . values += current }
 protected class Addition_1_0_0_Action_Op_values extends AssignmentToken  {
 
 	public Addition_1_0_0_Action_Op_values(InstanceDescription curr, AbstractToken pred) {
@@ -204,6 +220,7 @@ protected class Addition_1_0_0_Action_Op_values extends AssignmentToken  {
 	}
 }
 
+// operator = ( '+' | '-' )
 protected class Addition_1_0_1_Assignment_operator extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -235,6 +252,7 @@ protected class Addition_1_0_1_Assignment_operator extends AssignmentToken  {
 }
 
 
+// values += Multiplication
 protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -267,9 +285,15 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 
 
 /************ end Rule Addition ****************/
-/************ begin Rule Multiplication ****************/
+
+/************ begin Rule Multiplication ****************
+ *
+ * Multiplication returns Expression : Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) * ;
+ *
+ **/
 
 
+// Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) *
 protected class Multiplication_Group extends GroupToken {
 	
 	public Multiplication_Group(InstanceDescription curr, AbstractToken pred) {
@@ -284,6 +308,7 @@ protected class Multiplication_Group extends GroupToken {
 	}
 }
 
+// Term
 protected class Multiplication_0_RuleCall_Term extends RuleCallToken {
 	
 	public Multiplication_0_RuleCall_Term(InstanceDescription curr, AbstractToken pred) {
@@ -298,6 +323,7 @@ protected class Multiplication_0_RuleCall_Term extends RuleCallToken {
 	}
 }
 
+// ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) *
 protected class Multiplication_1_Group extends GroupToken {
 	
 	public Multiplication_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -312,6 +338,7 @@ protected class Multiplication_1_Group extends GroupToken {
 	}
 }
 
+// { current = Op . values += current } operator = ( '*' | '/' )
 protected class Multiplication_1_0_Group extends GroupToken {
 	
 	public Multiplication_1_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -326,6 +353,7 @@ protected class Multiplication_1_0_Group extends GroupToken {
 	}
 }
 
+// { current = Op . values += current }
 protected class Multiplication_1_0_0_Action_Op_values extends AssignmentToken  {
 
 	public Multiplication_1_0_0_Action_Op_values(InstanceDescription curr, AbstractToken pred) {
@@ -343,6 +371,7 @@ protected class Multiplication_1_0_0_Action_Op_values extends AssignmentToken  {
 	}
 }
 
+// operator = ( '*' | '/' )
 protected class Multiplication_1_0_1_Assignment_operator extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -374,6 +403,7 @@ protected class Multiplication_1_0_1_Assignment_operator extends AssignmentToken
 }
 
 
+// values += Term
 protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -406,9 +436,15 @@ protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 
 
 /************ end Rule Multiplication ****************/
-/************ begin Rule Term ****************/
+
+/************ begin Rule Term ****************
+ *
+ * Term returns Expression : Atom | Parens ;
+ *
+ **/
 
 
+// Atom | Parens
 protected class Term_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -434,6 +470,7 @@ protected class Term_Alternatives extends GroupToken {
 	}
 }
 
+// Atom
 protected class Term_0_RuleCall_Atom extends RuleCallToken {
 	
 	public Term_0_RuleCall_Atom(InstanceDescription curr, AbstractToken pred) {
@@ -448,6 +485,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 	}
 }
 
+// Parens
 protected class Term_1_RuleCall_Parens extends RuleCallToken {
 	
 	public Term_1_RuleCall_Parens(InstanceDescription curr, AbstractToken pred) {
@@ -464,9 +502,15 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 
 
 /************ end Rule Term ****************/
-/************ begin Rule Atom ****************/
+
+/************ begin Rule Atom ****************
+ *
+ * Atom : name = ID ;
+ *
+ **/
 
 
+// name = ID
 protected class Atom_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.4/@alternatives/@terminal");
@@ -492,9 +536,15 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 }
 
 /************ end Rule Atom ****************/
-/************ begin Rule Parens ****************/
+
+/************ begin Rule Parens ****************
+ *
+ * Parens returns Expression : '(' Addition ')' ;
+ *
+ **/
 
 
+// '(' Addition ')'
 protected class Parens_Group extends GroupToken {
 	
 	public Parens_Group(InstanceDescription curr, AbstractToken pred) {
@@ -509,6 +559,7 @@ protected class Parens_Group extends GroupToken {
 	}
 }
 
+// '(' Addition
 protected class Parens_0_Group extends GroupToken {
 	
 	public Parens_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -523,7 +574,7 @@ protected class Parens_0_Group extends GroupToken {
 	}
 }
 
-
+// '('
 protected class Parens_0_0_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0");
@@ -541,6 +592,7 @@ protected class Parens_0_0_Keyword extends KeywordToken  {
 	}
 }
 
+// Addition
 protected class Parens_0_1_RuleCall_Addition extends RuleCallToken {
 	
 	public Parens_0_1_RuleCall_Addition(InstanceDescription curr, AbstractToken pred) {
@@ -556,7 +608,7 @@ protected class Parens_0_1_RuleCall_Addition extends RuleCallToken {
 }
 
 
-
+// ')'
 protected class Parens_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5/@alternatives/@abstractTokens.1");
@@ -576,4 +628,5 @@ protected class Parens_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule Parens ****************/
+
 }

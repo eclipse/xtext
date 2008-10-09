@@ -13,29 +13,31 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
-		if((s = new EntryRule_Assignment_multiFeature(inst, null).firstSolution()) != null) return s;
-		if((s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null) return s;
-		if((s = new ChoiceRule_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new ReducibleRule_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new TerminalRule_Assignment_stringFeature(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Model") && (s = new EntryRule_Assignment_multiFeature(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("AbstractElement") && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("ChoiceElement") && (s = new ChoiceRule_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("ReducibleElement") && (s = new ReducibleRule_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("TerminalElement") && (s = new TerminalRule_Assignment_stringFeature(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
-/************ begin Rule EntryRule ****************/
+/************ begin Rule EntryRule ****************
+ *
+ * EntryRule returns Model : ( multiFeature += AbstractRule ) * ;
+ *
+ **/
 
 
+// ( multiFeature += AbstractRule ) *
 protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.0/@alternatives/@terminal");
@@ -66,9 +68,15 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 }
 
 /************ end Rule EntryRule ****************/
-/************ begin Rule AbstractRule ****************/
+
+/************ begin Rule AbstractRule ****************
+ *
+ * AbstractRule returns AbstractElement : ChoiceRule | ReducibleRule ;
+ *
+ **/
 
 
+// ChoiceRule | ReducibleRule
 protected class AbstractRule_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -94,6 +102,7 @@ protected class AbstractRule_Alternatives extends GroupToken {
 	}
 }
 
+// ChoiceRule
 protected class AbstractRule_0_RuleCall_ChoiceRule extends RuleCallToken {
 	
 	public AbstractRule_0_RuleCall_ChoiceRule(InstanceDescription curr, AbstractToken pred) {
@@ -108,6 +117,7 @@ protected class AbstractRule_0_RuleCall_ChoiceRule extends RuleCallToken {
 	}
 }
 
+// ReducibleRule
 protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 	
 	public AbstractRule_1_RuleCall_ReducibleRule(InstanceDescription curr, AbstractToken pred) {
@@ -124,9 +134,15 @@ protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 
 
 /************ end Rule AbstractRule ****************/
-/************ begin Rule ChoiceRule ****************/
+
+/************ begin Rule ChoiceRule ****************
+ *
+ * ChoiceRule returns ChoiceElement : 'choice' ( optionalKeyword ?= 'optional' ) ? name = ID ;
+ *
+ **/
 
 
+// 'choice' ( optionalKeyword ?= 'optional' ) ? name = ID
 protected class ChoiceRule_Group extends GroupToken {
 	
 	public ChoiceRule_Group(InstanceDescription curr, AbstractToken pred) {
@@ -141,6 +157,7 @@ protected class ChoiceRule_Group extends GroupToken {
 	}
 }
 
+// 'choice' ( optionalKeyword ?= 'optional' ) ?
 protected class ChoiceRule_0_Group extends GroupToken {
 	
 	public ChoiceRule_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -155,7 +172,7 @@ protected class ChoiceRule_0_Group extends GroupToken {
 	}
 }
 
-
+// 'choice'
 protected class ChoiceRule_0_0_Keyword_choice extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0");
@@ -173,6 +190,7 @@ protected class ChoiceRule_0_0_Keyword_choice extends KeywordToken  {
 	}
 }
 
+// ( optionalKeyword ?= 'optional' ) ?
 protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -198,6 +216,7 @@ protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToke
 }
 
 
+// name = ID
 protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal");
@@ -224,9 +243,15 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 
 
 /************ end Rule ChoiceRule ****************/
-/************ begin Rule ReducibleRule ****************/
+
+/************ begin Rule ReducibleRule ****************
+ *
+ * ReducibleRule returns ReducibleElement : 'reducible' TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ? ;
+ *
+ **/
 
 
+// 'reducible' TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
 protected class ReducibleRule_Group extends GroupToken {
 	
 	public ReducibleRule_Group(InstanceDescription curr, AbstractToken pred) {
@@ -241,6 +266,7 @@ protected class ReducibleRule_Group extends GroupToken {
 	}
 }
 
+// 'reducible' TerminalRule
 protected class ReducibleRule_0_Group extends GroupToken {
 	
 	public ReducibleRule_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -255,7 +281,7 @@ protected class ReducibleRule_0_Group extends GroupToken {
 	}
 }
 
-
+// 'reducible'
 protected class ReducibleRule_0_0_Keyword_reducible extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0");
@@ -273,6 +299,7 @@ protected class ReducibleRule_0_0_Keyword_reducible extends KeywordToken  {
 	}
 }
 
+// TerminalRule
 protected class ReducibleRule_0_1_RuleCall_TerminalRule extends RuleCallToken {
 	
 	public ReducibleRule_0_1_RuleCall_TerminalRule(InstanceDescription curr, AbstractToken pred) {
@@ -288,6 +315,7 @@ protected class ReducibleRule_0_1_RuleCall_TerminalRule extends RuleCallToken {
 }
 
 
+// ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
 protected class ReducibleRule_1_Group extends GroupToken {
 	
 	public ReducibleRule_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -302,6 +330,7 @@ protected class ReducibleRule_1_Group extends GroupToken {
 	}
 }
 
+// { current = ReducibleComposite . actionFeature += current }
 protected class ReducibleRule_1_0_Action_ReducibleComposite_actionFeature extends AssignmentToken  {
 
 	public ReducibleRule_1_0_Action_ReducibleComposite_actionFeature(InstanceDescription curr, AbstractToken pred) {
@@ -319,6 +348,7 @@ protected class ReducibleRule_1_0_Action_ReducibleComposite_actionFeature extend
 	}
 }
 
+// actionFeature += TerminalRule
 protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -351,9 +381,15 @@ protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentTok
 
 
 /************ end Rule ReducibleRule ****************/
-/************ begin Rule TerminalRule ****************/
+
+/************ begin Rule TerminalRule ****************
+ *
+ * TerminalRule returns TerminalElement : stringFeature = STRING ;
+ *
+ **/
 
 
+// stringFeature = STRING
 protected class TerminalRule_Assignment_stringFeature extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.4/@alternatives/@terminal");
@@ -379,4 +415,5 @@ protected class TerminalRule_Assignment_stringFeature extends AssignmentToken  {
 }
 
 /************ end Rule TerminalRule ****************/
+
 }

@@ -13,26 +13,28 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class LexerLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
-		if((s = new Model_Assignment_children(inst, null).firstSolution()) != null) return s;
-		if((s = new Element_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Model") && (s = new Model_Assignment_children(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Element") && (s = new Element_Group(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
-/************ begin Rule Model ****************/
+/************ begin Rule Model ****************
+ *
+ * Model : ( children += Element ) * ;
+ *
+ **/
 
 
+// ( children += Element ) *
 protected class Model_Assignment_children extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.0/@alternatives/@terminal");
@@ -63,9 +65,15 @@ protected class Model_Assignment_children extends AssignmentToken  {
 }
 
 /************ end Rule Model ****************/
-/************ begin Rule Element ****************/
+
+/************ begin Rule Element ****************
+ *
+ * Element : name = ID h = STRING ;
+ *
+ **/
 
 
+// name = ID h = STRING
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(InstanceDescription curr, AbstractToken pred) {
@@ -80,6 +88,7 @@ protected class Element_Group extends GroupToken {
 	}
 }
 
+// name = ID
 protected class Element_0_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@terminal");
@@ -104,6 +113,7 @@ protected class Element_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
+// h = STRING
 protected class Element_1_Assignment_h extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal");
@@ -130,4 +140,5 @@ protected class Element_1_Assignment_h extends AssignmentToken  {
 
 
 /************ end Rule Element ****************/
+
 }

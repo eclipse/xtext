@@ -18,6 +18,7 @@ public class LookaheadLanguageRuntimeConfig extends AbstractServiceRegistrationF
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, org.eclipse.xtext.testlanguages.parser.LookaheadLanguageAntlrTokenFileProvider.class)
 		.with(org.eclipse.xtext.resource.IResourceFactory.class, org.eclipse.xtext.testlanguages.services.LookaheadLanguageResourceFactory.class)
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, org.eclipse.xtext.testlanguages.parsetree.reconstr.LookaheadLanguageParseTreeConstructor.class)
+		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructorCallback.class, org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback.class)
 		.with(org.eclipse.xtext.parser.antlr.Lexer.class, org.eclipse.xtext.testlanguages.parser.internal.InternalLookaheadLanguageLexer.class)
 		
 			.registrations();

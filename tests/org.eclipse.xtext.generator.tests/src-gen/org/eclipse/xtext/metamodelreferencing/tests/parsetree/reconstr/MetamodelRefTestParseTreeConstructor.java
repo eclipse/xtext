@@ -13,26 +13,28 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class MetamodelRefTestParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
-		if((s = new Foo_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new NameRef_Assignment_name(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Foo") && (s = new Foo_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("xtext::RuleCall") && (s = new NameRef_Assignment_name(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
-/************ begin Rule Foo ****************/
+/************ begin Rule Foo ****************
+ *
+ * Foo : name = ID ( nameRefs += NameRef ) * ;
+ *
+ **/
 
 
+// name = ID ( nameRefs += NameRef ) *
 protected class Foo_Group extends GroupToken {
 	
 	public Foo_Group(InstanceDescription curr, AbstractToken pred) {
@@ -47,6 +49,7 @@ protected class Foo_Group extends GroupToken {
 	}
 }
 
+// name = ID
 protected class Foo_0_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal");
@@ -71,6 +74,7 @@ protected class Foo_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
+// ( nameRefs += NameRef ) *
 protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
@@ -102,9 +106,15 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 
 
 /************ end Rule Foo ****************/
-/************ begin Rule NameRef ****************/
+
+/************ begin Rule NameRef ****************
+ *
+ * NameRef returns xtext :: RuleCall : name = STRING ;
+ *
+ **/
 
 
+// name = STRING
 protected class NameRef_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1/@alternatives/@terminal");
@@ -130,4 +140,5 @@ protected class NameRef_Assignment_name extends AssignmentToken  {
 }
 
 /************ end Rule NameRef ****************/
+
 }

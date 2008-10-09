@@ -13,42 +13,44 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class XtextGrammarTestParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
-		if((s = new Grammar_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null) return s;
-		if((s = new AbstractMetamodelDeclaration_Alternatives(inst, null).firstSolution()) != null) return s;
-		if((s = new GeneratedMetamodel_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new ReferencedMetamodel_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new LexerRule_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new ParserRule_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new TypeRef_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Alternatives_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Group_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new AbstractToken_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Assignment_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Action_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new AbstractTerminal_Alternatives(inst, null).firstSolution()) != null) return s;
-		if((s = new CrossReference_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new ParenthesizedElement_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Keyword_Assignment_value(inst, null).firstSolution()) != null) return s;
-		if((s = new RuleCall_Assignment_name(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Grammar") && (s = new Grammar_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("AbstractRule") && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("AbstractMetamodelDeclaration") && (s = new AbstractMetamodelDeclaration_Alternatives(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("GeneratedMetamodel") && (s = new GeneratedMetamodel_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("ReferencedMetamodel") && (s = new ReferencedMetamodel_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("LexerRule") && (s = new LexerRule_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("ParserRule") && (s = new ParserRule_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("TypeRef") && (s = new TypeRef_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("AbstractElement") && (s = new Alternatives_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("AbstractElement") && (s = new Group_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("AbstractElement") && (s = new AbstractToken_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Assignment") && (s = new Assignment_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Action") && (s = new Action_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("AbstractElement") && (s = new AbstractTerminal_Alternatives(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("CrossReference") && (s = new CrossReference_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("AbstractElement") && (s = new ParenthesizedElement_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Keyword") && (s = new Keyword_Assignment_value(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("RuleCall") && (s = new RuleCall_Assignment_name(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
-/************ begin Rule Grammar ****************/
+/************ begin Rule Grammar ****************
+ *
+ * Grammar : ( abstract ?= 'abstract language' | 'language' ) idElements += ID ( '.' idElements += ID ) * ( 'extends' superGrammarIdElements += ID ( '.' superGrammarIdElements += ID ) * ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) + ;
+ *
+ **/
 
 
+// ( abstract ?= 'abstract language' | 'language' ) idElements += ID ( '.' idElements += ID ) * ( 'extends' superGrammarIdElements += ID ( '.' superGrammarIdElements += ID ) * ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) +
 protected class Grammar_Group extends GroupToken {
 	
 	public Grammar_Group(InstanceDescription curr, AbstractToken pred) {
@@ -63,6 +65,7 @@ protected class Grammar_Group extends GroupToken {
 	}
 }
 
+// ( abstract ?= 'abstract language' | 'language' ) idElements += ID ( '.' idElements += ID ) * ( 'extends' superGrammarIdElements += ID ( '.' superGrammarIdElements += ID ) * ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) *
 protected class Grammar_0_Group extends GroupToken {
 	
 	public Grammar_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -77,6 +80,7 @@ protected class Grammar_0_Group extends GroupToken {
 	}
 }
 
+// ( abstract ?= 'abstract language' | 'language' ) idElements += ID ( '.' idElements += ID ) * ( 'extends' superGrammarIdElements += ID ( '.' superGrammarIdElements += ID ) * ) ?
 protected class Grammar_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -91,6 +95,7 @@ protected class Grammar_0_0_Group extends GroupToken {
 	}
 }
 
+// ( abstract ?= 'abstract language' | 'language' ) idElements += ID ( '.' idElements += ID ) *
 protected class Grammar_0_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -105,6 +110,7 @@ protected class Grammar_0_0_0_Group extends GroupToken {
 	}
 }
 
+// ( abstract ?= 'abstract language' | 'language' ) idElements += ID
 protected class Grammar_0_0_0_0_Group extends GroupToken {
 	
 	public Grammar_0_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -119,6 +125,7 @@ protected class Grammar_0_0_0_0_Group extends GroupToken {
 	}
 }
 
+// abstract ?= 'abstract language' | 'language'
 protected class Grammar_0_0_0_0_0_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -144,6 +151,7 @@ protected class Grammar_0_0_0_0_0_Alternatives extends GroupToken {
 	}
 }
 
+// abstract ?= 'abstract language'
 protected class Grammar_0_0_0_0_0_0_Assignment_abstract extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.0/@terminal");
@@ -168,7 +176,7 @@ protected class Grammar_0_0_0_0_0_0_Assignment_abstract extends AssignmentToken 
 	}
 }
 
-
+// 'language'
 protected class Grammar_0_0_0_0_0_1_Keyword_language extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.1");
@@ -187,6 +195,7 @@ protected class Grammar_0_0_0_0_0_1_Keyword_language extends KeywordToken  {
 }
 
 
+// idElements += ID
 protected class Grammar_0_0_0_0_1_Assignment_idElements extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -212,6 +221,7 @@ protected class Grammar_0_0_0_0_1_Assignment_idElements extends AssignmentToken 
 }
 
 
+// ( '.' idElements += ID ) *
 protected class Grammar_0_0_0_1_Group extends GroupToken {
 	
 	public Grammar_0_0_0_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -226,7 +236,7 @@ protected class Grammar_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-
+// '.'
 protected class Grammar_0_0_0_1_0_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
@@ -244,6 +254,7 @@ protected class Grammar_0_0_0_1_0_Keyword extends KeywordToken  {
 	}
 }
 
+// idElements += ID
 protected class Grammar_0_0_0_1_1_Assignment_idElements extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -270,6 +281,7 @@ protected class Grammar_0_0_0_1_1_Assignment_idElements extends AssignmentToken 
 
 
 
+// ( 'extends' superGrammarIdElements += ID ( '.' superGrammarIdElements += ID ) * ) ?
 protected class Grammar_0_0_1_Group extends GroupToken {
 	
 	public Grammar_0_0_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -284,6 +296,7 @@ protected class Grammar_0_0_1_Group extends GroupToken {
 	}
 }
 
+// 'extends' superGrammarIdElements += ID
 protected class Grammar_0_0_1_0_Group extends GroupToken {
 	
 	public Grammar_0_0_1_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -298,7 +311,7 @@ protected class Grammar_0_0_1_0_Group extends GroupToken {
 	}
 }
 
-
+// 'extends'
 protected class Grammar_0_0_1_0_0_Keyword_extends extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0");
@@ -316,6 +329,7 @@ protected class Grammar_0_0_1_0_0_Keyword_extends extends KeywordToken  {
 	}
 }
 
+// superGrammarIdElements += ID
 protected class Grammar_0_0_1_0_1_Assignment_superGrammarIdElements extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -341,6 +355,7 @@ protected class Grammar_0_0_1_0_1_Assignment_superGrammarIdElements extends Assi
 }
 
 
+// ( '.' superGrammarIdElements += ID ) *
 protected class Grammar_0_0_1_1_Group extends GroupToken {
 	
 	public Grammar_0_0_1_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -355,7 +370,7 @@ protected class Grammar_0_0_1_1_Group extends GroupToken {
 	}
 }
 
-
+// '.'
 protected class Grammar_0_0_1_1_0_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.0");
@@ -373,6 +388,7 @@ protected class Grammar_0_0_1_1_0_Keyword extends KeywordToken  {
 	}
 }
 
+// superGrammarIdElements += ID
 protected class Grammar_0_0_1_1_1_Assignment_superGrammarIdElements extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -400,6 +416,7 @@ protected class Grammar_0_0_1_1_1_Assignment_superGrammarIdElements extends Assi
 
 
 
+// ( metamodelDeclarations += AbstractMetamodelDeclaration ) *
 protected class Grammar_0_1_Assignment_metamodelDeclarations extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -430,6 +447,7 @@ protected class Grammar_0_1_Assignment_metamodelDeclarations extends AssignmentT
 }
 
 
+// ( rules += AbstractRule ) +
 protected class Grammar_1_Assignment_rules extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
@@ -461,9 +479,15 @@ protected class Grammar_1_Assignment_rules extends AssignmentToken  {
 
 
 /************ end Rule Grammar ****************/
-/************ begin Rule AbstractRule ****************/
+
+/************ begin Rule AbstractRule ****************
+ *
+ * AbstractRule : LexerRule | ParserRule ;
+ *
+ **/
 
 
+// LexerRule | ParserRule
 protected class AbstractRule_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -489,6 +513,7 @@ protected class AbstractRule_Alternatives extends GroupToken {
 	}
 }
 
+// LexerRule
 protected class AbstractRule_0_RuleCall_LexerRule extends RuleCallToken {
 	
 	public AbstractRule_0_RuleCall_LexerRule(InstanceDescription curr, AbstractToken pred) {
@@ -503,6 +528,7 @@ protected class AbstractRule_0_RuleCall_LexerRule extends RuleCallToken {
 	}
 }
 
+// ParserRule
 protected class AbstractRule_1_RuleCall_ParserRule extends RuleCallToken {
 	
 	public AbstractRule_1_RuleCall_ParserRule(InstanceDescription curr, AbstractToken pred) {
@@ -519,9 +545,15 @@ protected class AbstractRule_1_RuleCall_ParserRule extends RuleCallToken {
 
 
 /************ end Rule AbstractRule ****************/
-/************ begin Rule AbstractMetamodelDeclaration ****************/
+
+/************ begin Rule AbstractMetamodelDeclaration ****************
+ *
+ * AbstractMetamodelDeclaration : GeneratedMetamodel | ReferencedMetamodel ;
+ *
+ **/
 
 
+// GeneratedMetamodel | ReferencedMetamodel
 protected class AbstractMetamodelDeclaration_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -547,6 +579,7 @@ protected class AbstractMetamodelDeclaration_Alternatives extends GroupToken {
 	}
 }
 
+// GeneratedMetamodel
 protected class AbstractMetamodelDeclaration_0_RuleCall_GeneratedMetamodel extends RuleCallToken {
 	
 	public AbstractMetamodelDeclaration_0_RuleCall_GeneratedMetamodel(InstanceDescription curr, AbstractToken pred) {
@@ -561,6 +594,7 @@ protected class AbstractMetamodelDeclaration_0_RuleCall_GeneratedMetamodel exten
 	}
 }
 
+// ReferencedMetamodel
 protected class AbstractMetamodelDeclaration_1_RuleCall_ReferencedMetamodel extends RuleCallToken {
 	
 	public AbstractMetamodelDeclaration_1_RuleCall_ReferencedMetamodel(InstanceDescription curr, AbstractToken pred) {
@@ -577,9 +611,15 @@ protected class AbstractMetamodelDeclaration_1_RuleCall_ReferencedMetamodel exte
 
 
 /************ end Rule AbstractMetamodelDeclaration ****************/
-/************ begin Rule GeneratedMetamodel ****************/
+
+/************ begin Rule GeneratedMetamodel ****************
+ *
+ * GeneratedMetamodel : 'generate' name = ID nsURI = STRING ( 'as' alias = ID ) ? ;
+ *
+ **/
 
 
+// 'generate' name = ID nsURI = STRING ( 'as' alias = ID ) ?
 protected class GeneratedMetamodel_Group extends GroupToken {
 	
 	public GeneratedMetamodel_Group(InstanceDescription curr, AbstractToken pred) {
@@ -594,6 +634,7 @@ protected class GeneratedMetamodel_Group extends GroupToken {
 	}
 }
 
+// 'generate' name = ID nsURI = STRING
 protected class GeneratedMetamodel_0_Group extends GroupToken {
 	
 	public GeneratedMetamodel_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -608,6 +649,7 @@ protected class GeneratedMetamodel_0_Group extends GroupToken {
 	}
 }
 
+// 'generate' name = ID
 protected class GeneratedMetamodel_0_0_Group extends GroupToken {
 	
 	public GeneratedMetamodel_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -622,7 +664,7 @@ protected class GeneratedMetamodel_0_0_Group extends GroupToken {
 	}
 }
 
-
+// 'generate'
 protected class GeneratedMetamodel_0_0_0_Keyword_generate extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
@@ -640,6 +682,7 @@ protected class GeneratedMetamodel_0_0_0_Keyword_generate extends KeywordToken  
 	}
 }
 
+// name = ID
 protected class GeneratedMetamodel_0_0_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -665,6 +708,7 @@ protected class GeneratedMetamodel_0_0_1_Assignment_name extends AssignmentToken
 }
 
 
+// nsURI = STRING
 protected class GeneratedMetamodel_0_1_Assignment_nsURI extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -690,6 +734,7 @@ protected class GeneratedMetamodel_0_1_Assignment_nsURI extends AssignmentToken 
 }
 
 
+// ( 'as' alias = ID ) ?
 protected class GeneratedMetamodel_1_Group extends GroupToken {
 	
 	public GeneratedMetamodel_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -704,7 +749,7 @@ protected class GeneratedMetamodel_1_Group extends GroupToken {
 	}
 }
 
-
+// 'as'
 protected class GeneratedMetamodel_1_0_Keyword_as extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.3/@alternatives/@abstractTokens.1/@abstractTokens.0");
@@ -722,6 +767,7 @@ protected class GeneratedMetamodel_1_0_Keyword_as extends KeywordToken  {
 	}
 }
 
+// alias = ID
 protected class GeneratedMetamodel_1_1_Assignment_alias extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -749,9 +795,15 @@ protected class GeneratedMetamodel_1_1_Assignment_alias extends AssignmentToken 
 
 
 /************ end Rule GeneratedMetamodel ****************/
-/************ begin Rule ReferencedMetamodel ****************/
+
+/************ begin Rule ReferencedMetamodel ****************
+ *
+ * ReferencedMetamodel : 'import' uri = STRING ( 'as' alias = ID ) ? ;
+ *
+ **/
 
 
+// 'import' uri = STRING ( 'as' alias = ID ) ?
 protected class ReferencedMetamodel_Group extends GroupToken {
 	
 	public ReferencedMetamodel_Group(InstanceDescription curr, AbstractToken pred) {
@@ -766,6 +818,7 @@ protected class ReferencedMetamodel_Group extends GroupToken {
 	}
 }
 
+// 'import' uri = STRING
 protected class ReferencedMetamodel_0_Group extends GroupToken {
 	
 	public ReferencedMetamodel_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -780,7 +833,7 @@ protected class ReferencedMetamodel_0_Group extends GroupToken {
 	}
 }
 
-
+// 'import'
 protected class ReferencedMetamodel_0_0_Keyword_import extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0");
@@ -798,6 +851,7 @@ protected class ReferencedMetamodel_0_0_Keyword_import extends KeywordToken  {
 	}
 }
 
+// uri = STRING
 protected class ReferencedMetamodel_0_1_Assignment_uri extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -823,6 +877,7 @@ protected class ReferencedMetamodel_0_1_Assignment_uri extends AssignmentToken  
 }
 
 
+// ( 'as' alias = ID ) ?
 protected class ReferencedMetamodel_1_Group extends GroupToken {
 	
 	public ReferencedMetamodel_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -837,7 +892,7 @@ protected class ReferencedMetamodel_1_Group extends GroupToken {
 	}
 }
 
-
+// 'as'
 protected class ReferencedMetamodel_1_0_Keyword_as extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.0");
@@ -855,6 +910,7 @@ protected class ReferencedMetamodel_1_0_Keyword_as extends KeywordToken  {
 	}
 }
 
+// alias = ID
 protected class ReferencedMetamodel_1_1_Assignment_alias extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -882,9 +938,15 @@ protected class ReferencedMetamodel_1_1_Assignment_alias extends AssignmentToken
 
 
 /************ end Rule ReferencedMetamodel ****************/
-/************ begin Rule LexerRule ****************/
+
+/************ begin Rule LexerRule ****************
+ *
+ * LexerRule : ( 'native' | 'lexer' ) name = ID ( 'returns' type = TypeRef ) ? ':' body = STRING ';' ;
+ *
+ **/
 
 
+// ( 'native' | 'lexer' ) name = ID ( 'returns' type = TypeRef ) ? ':' body = STRING ';'
 protected class LexerRule_Group extends GroupToken {
 	
 	public LexerRule_Group(InstanceDescription curr, AbstractToken pred) {
@@ -899,6 +961,7 @@ protected class LexerRule_Group extends GroupToken {
 	}
 }
 
+// ( 'native' | 'lexer' ) name = ID ( 'returns' type = TypeRef ) ? ':' body = STRING
 protected class LexerRule_0_Group extends GroupToken {
 	
 	public LexerRule_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -913,6 +976,7 @@ protected class LexerRule_0_Group extends GroupToken {
 	}
 }
 
+// ( 'native' | 'lexer' ) name = ID ( 'returns' type = TypeRef ) ? ':'
 protected class LexerRule_0_0_Group extends GroupToken {
 	
 	public LexerRule_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -927,6 +991,7 @@ protected class LexerRule_0_0_Group extends GroupToken {
 	}
 }
 
+// ( 'native' | 'lexer' ) name = ID ( 'returns' type = TypeRef ) ?
 protected class LexerRule_0_0_0_Group extends GroupToken {
 	
 	public LexerRule_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -941,6 +1006,7 @@ protected class LexerRule_0_0_0_Group extends GroupToken {
 	}
 }
 
+// ( 'native' | 'lexer' ) name = ID
 protected class LexerRule_0_0_0_0_Group extends GroupToken {
 	
 	public LexerRule_0_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -955,6 +1021,7 @@ protected class LexerRule_0_0_0_0_Group extends GroupToken {
 	}
 }
 
+// 'native' | 'lexer'
 protected class LexerRule_0_0_0_0_0_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -980,7 +1047,7 @@ protected class LexerRule_0_0_0_0_0_Alternatives extends GroupToken {
 	}
 }
 
-
+// 'native'
 protected class LexerRule_0_0_0_0_0_0_Keyword_native extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.0");
@@ -998,7 +1065,7 @@ protected class LexerRule_0_0_0_0_0_0_Keyword_native extends KeywordToken  {
 	}
 }
 
-
+// 'lexer'
 protected class LexerRule_0_0_0_0_0_1_Keyword_lexer extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@groups.1");
@@ -1017,6 +1084,7 @@ protected class LexerRule_0_0_0_0_0_1_Keyword_lexer extends KeywordToken  {
 }
 
 
+// name = ID
 protected class LexerRule_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -1042,6 +1110,7 @@ protected class LexerRule_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
+// ( 'returns' type = TypeRef ) ?
 protected class LexerRule_0_0_0_1_Group extends GroupToken {
 	
 	public LexerRule_0_0_0_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1056,7 +1125,7 @@ protected class LexerRule_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-
+// 'returns'
 protected class LexerRule_0_0_0_1_0_Keyword_returns extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
@@ -1074,6 +1143,7 @@ protected class LexerRule_0_0_0_1_0_Keyword_returns extends KeywordToken  {
 	}
 }
 
+// type = TypeRef
 protected class LexerRule_0_0_0_1_1_Assignment_type extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -1105,7 +1175,7 @@ protected class LexerRule_0_0_0_1_1_Assignment_type extends AssignmentToken  {
 
 
 
-
+// ':'
 protected class LexerRule_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
@@ -1124,6 +1194,7 @@ protected class LexerRule_0_0_1_Keyword extends KeywordToken  {
 }
 
 
+// body = STRING
 protected class LexerRule_0_1_Assignment_body extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -1149,7 +1220,7 @@ protected class LexerRule_0_1_Assignment_body extends AssignmentToken  {
 }
 
 
-
+// ';'
 protected class LexerRule_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.5/@alternatives/@abstractTokens.1");
@@ -1169,9 +1240,15 @@ protected class LexerRule_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule LexerRule ****************/
-/************ begin Rule ParserRule ****************/
+
+/************ begin Rule ParserRule ****************
+ *
+ * ParserRule : name = ID ( 'returns' type = TypeRef ) ? ':' alternatives = Alternatives ';' ;
+ *
+ **/
 
 
+// name = ID ( 'returns' type = TypeRef ) ? ':' alternatives = Alternatives ';'
 protected class ParserRule_Group extends GroupToken {
 	
 	public ParserRule_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1186,6 +1263,7 @@ protected class ParserRule_Group extends GroupToken {
 	}
 }
 
+// name = ID ( 'returns' type = TypeRef ) ? ':' alternatives = Alternatives
 protected class ParserRule_0_Group extends GroupToken {
 	
 	public ParserRule_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1200,6 +1278,7 @@ protected class ParserRule_0_Group extends GroupToken {
 	}
 }
 
+// name = ID ( 'returns' type = TypeRef ) ? ':'
 protected class ParserRule_0_0_Group extends GroupToken {
 	
 	public ParserRule_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1214,6 +1293,7 @@ protected class ParserRule_0_0_Group extends GroupToken {
 	}
 }
 
+// name = ID ( 'returns' type = TypeRef ) ?
 protected class ParserRule_0_0_0_Group extends GroupToken {
 	
 	public ParserRule_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1228,6 +1308,7 @@ protected class ParserRule_0_0_0_Group extends GroupToken {
 	}
 }
 
+// name = ID
 protected class ParserRule_0_0_0_0_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal");
@@ -1252,6 +1333,7 @@ protected class ParserRule_0_0_0_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
+// ( 'returns' type = TypeRef ) ?
 protected class ParserRule_0_0_0_1_Group extends GroupToken {
 	
 	public ParserRule_0_0_0_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1266,7 +1348,7 @@ protected class ParserRule_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-
+// 'returns'
 protected class ParserRule_0_0_0_1_0_Keyword_returns extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
@@ -1284,6 +1366,7 @@ protected class ParserRule_0_0_0_1_0_Keyword_returns extends KeywordToken  {
 	}
 }
 
+// type = TypeRef
 protected class ParserRule_0_0_0_1_1_Assignment_type extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -1315,7 +1398,7 @@ protected class ParserRule_0_0_0_1_1_Assignment_type extends AssignmentToken  {
 
 
 
-
+// ':'
 protected class ParserRule_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
@@ -1334,6 +1417,7 @@ protected class ParserRule_0_0_1_Keyword extends KeywordToken  {
 }
 
 
+// alternatives = Alternatives
 protected class ParserRule_0_1_Assignment_alternatives extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -1364,7 +1448,7 @@ protected class ParserRule_0_1_Assignment_alternatives extends AssignmentToken  
 }
 
 
-
+// ';'
 protected class ParserRule_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.6/@alternatives/@abstractTokens.1");
@@ -1384,9 +1468,15 @@ protected class ParserRule_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule ParserRule ****************/
-/************ begin Rule TypeRef ****************/
+
+/************ begin Rule TypeRef ****************
+ *
+ * TypeRef : ( alias = ID '::' ) ? name = ID ;
+ *
+ **/
 
 
+// ( alias = ID '::' ) ? name = ID
 protected class TypeRef_Group extends GroupToken {
 	
 	public TypeRef_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1401,6 +1491,7 @@ protected class TypeRef_Group extends GroupToken {
 	}
 }
 
+// ( alias = ID '::' ) ?
 protected class TypeRef_0_Group extends GroupToken {
 	
 	public TypeRef_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1415,6 +1506,7 @@ protected class TypeRef_0_Group extends GroupToken {
 	}
 }
 
+// alias = ID
 protected class TypeRef_0_0_Assignment_alias extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal");
@@ -1439,7 +1531,7 @@ protected class TypeRef_0_0_Assignment_alias extends AssignmentToken  {
 	}
 }
 
-
+// '::'
 protected class TypeRef_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1");
@@ -1458,6 +1550,7 @@ protected class TypeRef_0_1_Keyword extends KeywordToken  {
 }
 
 
+// name = ID
 protected class TypeRef_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.7/@alternatives/@abstractTokens.1/@terminal");
@@ -1484,9 +1577,15 @@ protected class TypeRef_1_Assignment_name extends AssignmentToken  {
 
 
 /************ end Rule TypeRef ****************/
-/************ begin Rule Alternatives ****************/
+
+/************ begin Rule Alternatives ****************
+ *
+ * Alternatives returns AbstractElement : Group ( { current = Alternatives . groups += current } '|' groups += Group ) * ;
+ *
+ **/
 
 
+// Group ( { current = Alternatives . groups += current } '|' groups += Group ) *
 protected class Alternatives_Group extends GroupToken {
 	
 	public Alternatives_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1501,6 +1600,7 @@ protected class Alternatives_Group extends GroupToken {
 	}
 }
 
+// Group
 protected class Alternatives_0_RuleCall_Group extends RuleCallToken {
 	
 	public Alternatives_0_RuleCall_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1515,6 +1615,7 @@ protected class Alternatives_0_RuleCall_Group extends RuleCallToken {
 	}
 }
 
+// ( { current = Alternatives . groups += current } '|' groups += Group ) *
 protected class Alternatives_1_Group extends GroupToken {
 	
 	public Alternatives_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1529,6 +1630,7 @@ protected class Alternatives_1_Group extends GroupToken {
 	}
 }
 
+// { current = Alternatives . groups += current } '|'
 protected class Alternatives_1_0_Group extends GroupToken {
 	
 	public Alternatives_1_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1543,6 +1645,7 @@ protected class Alternatives_1_0_Group extends GroupToken {
 	}
 }
 
+// { current = Alternatives . groups += current }
 protected class Alternatives_1_0_0_Action_Alternatives_groups extends AssignmentToken  {
 
 	public Alternatives_1_0_0_Action_Alternatives_groups(InstanceDescription curr, AbstractToken pred) {
@@ -1560,7 +1663,7 @@ protected class Alternatives_1_0_0_Action_Alternatives_groups extends Assignment
 	}
 }
 
-
+// '|'
 protected class Alternatives_1_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.8/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1");
@@ -1579,6 +1682,7 @@ protected class Alternatives_1_0_1_Keyword extends KeywordToken  {
 }
 
 
+// groups += Group
 protected class Alternatives_1_1_Assignment_groups extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.8/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -1611,9 +1715,15 @@ protected class Alternatives_1_1_Assignment_groups extends AssignmentToken  {
 
 
 /************ end Rule Alternatives ****************/
-/************ begin Rule Group ****************/
+
+/************ begin Rule Group ****************
+ *
+ * Group returns AbstractElement : AbstractToken ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) * ;
+ *
+ **/
 
 
+// AbstractToken ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) *
 protected class Group_Group extends GroupToken {
 	
 	public Group_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1628,6 +1738,7 @@ protected class Group_Group extends GroupToken {
 	}
 }
 
+// AbstractToken
 protected class Group_0_RuleCall_AbstractToken extends RuleCallToken {
 	
 	public Group_0_RuleCall_AbstractToken(InstanceDescription curr, AbstractToken pred) {
@@ -1642,6 +1753,7 @@ protected class Group_0_RuleCall_AbstractToken extends RuleCallToken {
 	}
 }
 
+// ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) *
 protected class Group_1_Group extends GroupToken {
 	
 	public Group_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1656,6 +1768,7 @@ protected class Group_1_Group extends GroupToken {
 	}
 }
 
+// { current = Group . abstractTokens += current }
 protected class Group_1_0_Action_Group_abstractTokens extends AssignmentToken  {
 
 	public Group_1_0_Action_Group_abstractTokens(InstanceDescription curr, AbstractToken pred) {
@@ -1673,6 +1786,7 @@ protected class Group_1_0_Action_Group_abstractTokens extends AssignmentToken  {
 	}
 }
 
+// abstractTokens += AbstractToken
 protected class Group_1_1_Assignment_abstractTokens extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -1705,9 +1819,15 @@ protected class Group_1_1_Assignment_abstractTokens extends AssignmentToken  {
 
 
 /************ end Rule Group ****************/
-/************ begin Rule AbstractToken ****************/
+
+/************ begin Rule AbstractToken ****************
+ *
+ * AbstractToken returns AbstractElement : ( Assignment | Action | AbstractTerminal ) ( cardinality = ( '?' | '*' | '+' ) ) ? ;
+ *
+ **/
 
 
+// ( Assignment | Action | AbstractTerminal ) ( cardinality = ( '?' | '*' | '+' ) ) ?
 protected class AbstractToken_Group extends GroupToken {
 	
 	public AbstractToken_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1722,6 +1842,7 @@ protected class AbstractToken_Group extends GroupToken {
 	}
 }
 
+// Assignment | Action | AbstractTerminal
 protected class AbstractToken_0_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -1747,6 +1868,7 @@ protected class AbstractToken_0_Alternatives extends GroupToken {
 	}
 }
 
+// Assignment | Action
 protected class AbstractToken_0_0_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -1772,6 +1894,7 @@ protected class AbstractToken_0_0_Alternatives extends GroupToken {
 	}
 }
 
+// Assignment
 protected class AbstractToken_0_0_0_RuleCall_Assignment extends RuleCallToken {
 	
 	public AbstractToken_0_0_0_RuleCall_Assignment(InstanceDescription curr, AbstractToken pred) {
@@ -1786,6 +1909,7 @@ protected class AbstractToken_0_0_0_RuleCall_Assignment extends RuleCallToken {
 	}
 }
 
+// Action
 protected class AbstractToken_0_0_1_RuleCall_Action extends RuleCallToken {
 	
 	public AbstractToken_0_0_1_RuleCall_Action(InstanceDescription curr, AbstractToken pred) {
@@ -1801,6 +1925,7 @@ protected class AbstractToken_0_0_1_RuleCall_Action extends RuleCallToken {
 }
 
 
+// AbstractTerminal
 protected class AbstractToken_0_1_RuleCall_AbstractTerminal extends RuleCallToken {
 	
 	public AbstractToken_0_1_RuleCall_AbstractTerminal(InstanceDescription curr, AbstractToken pred) {
@@ -1816,6 +1941,7 @@ protected class AbstractToken_0_1_RuleCall_AbstractTerminal extends RuleCallToke
 }
 
 
+// ( cardinality = ( '?' | '*' | '+' ) ) ?
 protected class AbstractToken_1_Assignment_cardinality extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.10/@alternatives/@abstractTokens.1/@terminal");
@@ -1850,9 +1976,15 @@ protected class AbstractToken_1_Assignment_cardinality extends AssignmentToken  
 
 
 /************ end Rule AbstractToken ****************/
-/************ begin Rule Assignment ****************/
+
+/************ begin Rule Assignment ****************
+ *
+ * Assignment returns Assignment : feature = ID operator = ( '+=' | '=' | '?=' ) terminal = AbstractTerminal ;
+ *
+ **/
 
 
+// feature = ID operator = ( '+=' | '=' | '?=' ) terminal = AbstractTerminal
 protected class Assignment_Group extends GroupToken {
 	
 	public Assignment_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1867,6 +1999,7 @@ protected class Assignment_Group extends GroupToken {
 	}
 }
 
+// feature = ID operator = ( '+=' | '=' | '?=' )
 protected class Assignment_0_Group extends GroupToken {
 	
 	public Assignment_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1881,6 +2014,7 @@ protected class Assignment_0_Group extends GroupToken {
 	}
 }
 
+// feature = ID
 protected class Assignment_0_0_Assignment_feature extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal");
@@ -1905,6 +2039,7 @@ protected class Assignment_0_0_Assignment_feature extends AssignmentToken  {
 	}
 }
 
+// operator = ( '+=' | '=' | '?=' )
 protected class Assignment_0_1_Assignment_operator extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.11/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -1938,6 +2073,7 @@ protected class Assignment_0_1_Assignment_operator extends AssignmentToken  {
 }
 
 
+// terminal = AbstractTerminal
 protected class Assignment_1_Assignment_terminal extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.11/@alternatives/@abstractTokens.1/@terminal");
@@ -1969,9 +2105,15 @@ protected class Assignment_1_Assignment_terminal extends AssignmentToken  {
 
 
 /************ end Rule Assignment ****************/
-/************ begin Rule Action ****************/
+
+/************ begin Rule Action ****************
+ *
+ * Action returns Action : '{' ( 'current' '=' ) ? typeName = TypeRef '.' feature = ID operator = ( '=' | '+=' ) 'current' '}' ;
+ *
+ **/
 
 
+// '{' ( 'current' '=' ) ? typeName = TypeRef '.' feature = ID operator = ( '=' | '+=' ) 'current' '}'
 protected class Action_Group extends GroupToken {
 	
 	public Action_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1986,6 +2128,7 @@ protected class Action_Group extends GroupToken {
 	}
 }
 
+// '{' ( 'current' '=' ) ? typeName = TypeRef '.' feature = ID operator = ( '=' | '+=' ) 'current'
 protected class Action_0_Group extends GroupToken {
 	
 	public Action_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -2000,6 +2143,7 @@ protected class Action_0_Group extends GroupToken {
 	}
 }
 
+// '{' ( 'current' '=' ) ? typeName = TypeRef '.' feature = ID operator = ( '=' | '+=' )
 protected class Action_0_0_Group extends GroupToken {
 	
 	public Action_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -2014,6 +2158,7 @@ protected class Action_0_0_Group extends GroupToken {
 	}
 }
 
+// '{' ( 'current' '=' ) ? typeName = TypeRef '.' feature = ID
 protected class Action_0_0_0_Group extends GroupToken {
 	
 	public Action_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -2028,6 +2173,7 @@ protected class Action_0_0_0_Group extends GroupToken {
 	}
 }
 
+// '{' ( 'current' '=' ) ? typeName = TypeRef '.'
 protected class Action_0_0_0_0_Group extends GroupToken {
 	
 	public Action_0_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -2042,6 +2188,7 @@ protected class Action_0_0_0_0_Group extends GroupToken {
 	}
 }
 
+// '{' ( 'current' '=' ) ? typeName = TypeRef
 protected class Action_0_0_0_0_0_Group extends GroupToken {
 	
 	public Action_0_0_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -2056,6 +2203,7 @@ protected class Action_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
+// '{' ( 'current' '=' ) ?
 protected class Action_0_0_0_0_0_0_Group extends GroupToken {
 	
 	public Action_0_0_0_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -2070,7 +2218,7 @@ protected class Action_0_0_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-
+// '{'
 protected class Action_0_0_0_0_0_0_0_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
@@ -2088,6 +2236,7 @@ protected class Action_0_0_0_0_0_0_0_Keyword extends KeywordToken  {
 	}
 }
 
+// ( 'current' '=' ) ?
 protected class Action_0_0_0_0_0_0_1_Group extends GroupToken {
 	
 	public Action_0_0_0_0_0_0_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -2102,7 +2251,7 @@ protected class Action_0_0_0_0_0_0_1_Group extends GroupToken {
 	}
 }
 
-
+// 'current'
 protected class Action_0_0_0_0_0_0_1_0_Keyword_current extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
@@ -2120,7 +2269,7 @@ protected class Action_0_0_0_0_0_0_1_0_Keyword_current extends KeywordToken  {
 	}
 }
 
-
+// '='
 protected class Action_0_0_0_0_0_0_1_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
@@ -2140,6 +2289,7 @@ protected class Action_0_0_0_0_0_0_1_1_Keyword extends KeywordToken  {
 
 
 
+// typeName = TypeRef
 protected class Action_0_0_0_0_0_1_Assignment_typeName extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -2170,7 +2320,7 @@ protected class Action_0_0_0_0_0_1_Assignment_typeName extends AssignmentToken  
 }
 
 
-
+// '.'
 protected class Action_0_0_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
@@ -2189,6 +2339,7 @@ protected class Action_0_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
+// feature = ID
 protected class Action_0_0_0_1_Assignment_feature extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -2214,6 +2365,7 @@ protected class Action_0_0_0_1_Assignment_feature extends AssignmentToken  {
 }
 
 
+// operator = ( '=' | '+=' )
 protected class Action_0_0_1_Assignment_operator extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -2245,7 +2397,7 @@ protected class Action_0_0_1_Assignment_operator extends AssignmentToken  {
 }
 
 
-
+// 'current'
 protected class Action_0_1_Keyword_current extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.0/@abstractTokens.1");
@@ -2264,7 +2416,7 @@ protected class Action_0_1_Keyword_current extends KeywordToken  {
 }
 
 
-
+// '}'
 protected class Action_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.12/@alternatives/@abstractTokens.1");
@@ -2284,9 +2436,15 @@ protected class Action_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule Action ****************/
-/************ begin Rule AbstractTerminal ****************/
+
+/************ begin Rule AbstractTerminal ****************
+ *
+ * AbstractTerminal returns AbstractElement : Keyword | RuleCall | ParenthesizedElement | CrossReference ;
+ *
+ **/
 
 
+// Keyword | RuleCall | ParenthesizedElement | CrossReference
 protected class AbstractTerminal_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -2312,6 +2470,7 @@ protected class AbstractTerminal_Alternatives extends GroupToken {
 	}
 }
 
+// Keyword | RuleCall | ParenthesizedElement
 protected class AbstractTerminal_0_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -2337,6 +2496,7 @@ protected class AbstractTerminal_0_Alternatives extends GroupToken {
 	}
 }
 
+// Keyword | RuleCall
 protected class AbstractTerminal_0_0_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -2362,6 +2522,7 @@ protected class AbstractTerminal_0_0_Alternatives extends GroupToken {
 	}
 }
 
+// Keyword
 protected class AbstractTerminal_0_0_0_RuleCall_Keyword extends RuleCallToken {
 	
 	public AbstractTerminal_0_0_0_RuleCall_Keyword(InstanceDescription curr, AbstractToken pred) {
@@ -2376,6 +2537,7 @@ protected class AbstractTerminal_0_0_0_RuleCall_Keyword extends RuleCallToken {
 	}
 }
 
+// RuleCall
 protected class AbstractTerminal_0_0_1_RuleCall_RuleCall extends RuleCallToken {
 	
 	public AbstractTerminal_0_0_1_RuleCall_RuleCall(InstanceDescription curr, AbstractToken pred) {
@@ -2391,6 +2553,7 @@ protected class AbstractTerminal_0_0_1_RuleCall_RuleCall extends RuleCallToken {
 }
 
 
+// ParenthesizedElement
 protected class AbstractTerminal_0_1_RuleCall_ParenthesizedElement extends RuleCallToken {
 	
 	public AbstractTerminal_0_1_RuleCall_ParenthesizedElement(InstanceDescription curr, AbstractToken pred) {
@@ -2406,6 +2569,7 @@ protected class AbstractTerminal_0_1_RuleCall_ParenthesizedElement extends RuleC
 }
 
 
+// CrossReference
 protected class AbstractTerminal_1_RuleCall_CrossReference extends RuleCallToken {
 	
 	public AbstractTerminal_1_RuleCall_CrossReference(InstanceDescription curr, AbstractToken pred) {
@@ -2422,9 +2586,15 @@ protected class AbstractTerminal_1_RuleCall_CrossReference extends RuleCallToken
 
 
 /************ end Rule AbstractTerminal ****************/
-/************ begin Rule CrossReference ****************/
+
+/************ begin Rule CrossReference ****************
+ *
+ * CrossReference : '[' type = TypeRef ( '|' rule = RuleCall ) ? ']' ;
+ *
+ **/
 
 
+// '[' type = TypeRef ( '|' rule = RuleCall ) ? ']'
 protected class CrossReference_Group extends GroupToken {
 	
 	public CrossReference_Group(InstanceDescription curr, AbstractToken pred) {
@@ -2439,6 +2609,7 @@ protected class CrossReference_Group extends GroupToken {
 	}
 }
 
+// '[' type = TypeRef ( '|' rule = RuleCall ) ?
 protected class CrossReference_0_Group extends GroupToken {
 	
 	public CrossReference_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -2453,6 +2624,7 @@ protected class CrossReference_0_Group extends GroupToken {
 	}
 }
 
+// '[' type = TypeRef
 protected class CrossReference_0_0_Group extends GroupToken {
 	
 	public CrossReference_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -2467,7 +2639,7 @@ protected class CrossReference_0_0_Group extends GroupToken {
 	}
 }
 
-
+// '['
 protected class CrossReference_0_0_0_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
@@ -2485,6 +2657,7 @@ protected class CrossReference_0_0_0_Keyword extends KeywordToken  {
 	}
 }
 
+// type = TypeRef
 protected class CrossReference_0_0_1_Assignment_type extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -2515,6 +2688,7 @@ protected class CrossReference_0_0_1_Assignment_type extends AssignmentToken  {
 }
 
 
+// ( '|' rule = RuleCall ) ?
 protected class CrossReference_0_1_Group extends GroupToken {
 	
 	public CrossReference_0_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -2529,7 +2703,7 @@ protected class CrossReference_0_1_Group extends GroupToken {
 	}
 }
 
-
+// '|'
 protected class CrossReference_0_1_0_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
@@ -2547,6 +2721,7 @@ protected class CrossReference_0_1_0_Keyword extends KeywordToken  {
 	}
 }
 
+// rule = RuleCall
 protected class CrossReference_0_1_1_Assignment_rule extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -2578,7 +2753,7 @@ protected class CrossReference_0_1_1_Assignment_rule extends AssignmentToken  {
 
 
 
-
+// ']'
 protected class CrossReference_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.14/@alternatives/@abstractTokens.1");
@@ -2598,9 +2773,15 @@ protected class CrossReference_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule CrossReference ****************/
-/************ begin Rule ParenthesizedElement ****************/
+
+/************ begin Rule ParenthesizedElement ****************
+ *
+ * ParenthesizedElement returns AbstractElement : '(' Alternatives ')' ;
+ *
+ **/
 
 
+// '(' Alternatives ')'
 protected class ParenthesizedElement_Group extends GroupToken {
 	
 	public ParenthesizedElement_Group(InstanceDescription curr, AbstractToken pred) {
@@ -2615,6 +2796,7 @@ protected class ParenthesizedElement_Group extends GroupToken {
 	}
 }
 
+// '(' Alternatives
 protected class ParenthesizedElement_0_Group extends GroupToken {
 	
 	public ParenthesizedElement_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -2629,7 +2811,7 @@ protected class ParenthesizedElement_0_Group extends GroupToken {
 	}
 }
 
-
+// '('
 protected class ParenthesizedElement_0_0_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.15/@alternatives/@abstractTokens.0/@abstractTokens.0");
@@ -2647,6 +2829,7 @@ protected class ParenthesizedElement_0_0_Keyword extends KeywordToken  {
 	}
 }
 
+// Alternatives
 protected class ParenthesizedElement_0_1_RuleCall_Alternatives extends RuleCallToken {
 	
 	public ParenthesizedElement_0_1_RuleCall_Alternatives(InstanceDescription curr, AbstractToken pred) {
@@ -2662,7 +2845,7 @@ protected class ParenthesizedElement_0_1_RuleCall_Alternatives extends RuleCallT
 }
 
 
-
+// ')'
 protected class ParenthesizedElement_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.15/@alternatives/@abstractTokens.1");
@@ -2682,9 +2865,15 @@ protected class ParenthesizedElement_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule ParenthesizedElement ****************/
-/************ begin Rule Keyword ****************/
+
+/************ begin Rule Keyword ****************
+ *
+ * Keyword : value = STRING ;
+ *
+ **/
 
 
+// value = STRING
 protected class Keyword_Assignment_value extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.16/@alternatives/@terminal");
@@ -2710,9 +2899,15 @@ protected class Keyword_Assignment_value extends AssignmentToken  {
 }
 
 /************ end Rule Keyword ****************/
-/************ begin Rule RuleCall ****************/
+
+/************ begin Rule RuleCall ****************
+ *
+ * RuleCall : name = ID ;
+ *
+ **/
 
 
+// name = ID
 protected class RuleCall_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.17/@alternatives/@terminal");
@@ -2738,4 +2933,5 @@ protected class RuleCall_Assignment_name extends AssignmentToken  {
 }
 
 /************ end Rule RuleCall ****************/
+
 }
