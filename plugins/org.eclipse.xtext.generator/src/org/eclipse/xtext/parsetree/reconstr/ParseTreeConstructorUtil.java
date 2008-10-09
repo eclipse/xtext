@@ -1,16 +1,21 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
-import java.util.List;
+import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.parsetree.reconstr.callbacks.SimpleSerializingCallback;
+import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
+import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.service.ServiceRegistry;
 
 public class ParseTreeConstructorUtil {
 
@@ -53,34 +58,17 @@ public class ParseTreeConstructorUtil {
 		return "UnknownRule_" + r;
 	}
 
-	// return the next sibling or the parent's next sibling
-	public static AbstractElement getNextElementToCall(AbstractElement ele) {
-
-		// we are probably done with the rule
-		if (!(ele.eContainer() instanceof AbstractElement))
-			return null;
-
-		if (ele.eContainer() instanceof Group) {
-			Group parent = (Group) ele.eContainer();
-			List<AbstractElement> list = parent.getAbstractTokens();
-			int i = list.indexOf(ele) - 1;
-			if (i >= 0)
-				return (AbstractElement) list.get(i);
-			else
-				return getNextElementToCall(parent);
-		} else if (ele.eContainer() instanceof Alternatives) {
-			return getNextElementToCall((Alternatives) ele.eContainer());
-		} else
-			return null;
-	}
-	
-
-	public static AbstractElement getFirstChildToCall(AbstractElement ele) {
-		List<EObject> list = ele.eContents();
-		for (int i = list.size() - 1; i >= 0; i--)
-			if (list.get(i) instanceof AbstractElement)
-				return (AbstractElement) list.get(i);
-		return null;
+	public static String grammarFragmentToStr(EObject obj) {
+		IServiceScope ss = XtextStandaloneSetup.getServiceScope();
+		IParseTreeConstructor ser = ServiceRegistry.getService(ss,
+				IParseTreeConstructor.class);
+		SimpleSerializingCallback cb = new SimpleSerializingCallback();
+		ServiceRegistry.injectServices(ss, cb);
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		Map<String, Object> opt = new HashMap<String, Object>();
+		opt.put(AbstractParseTreeConstructor.OPTION_SERIALIZER_STRATEGY, cb);
+		ser.serialize(out, obj, opt);
+		return out.toString();
 	}
 
 }

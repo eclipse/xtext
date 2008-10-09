@@ -1,10 +1,9 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parser.IAstFactory;
-import org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class WhitespacePreservingCallbackTest extends AbstractGeneratorTest {
@@ -65,10 +64,14 @@ public class WhitespacePreservingCallbackTest extends AbstractGeneratorTest {
 	}
 
 	private String serialize(EObject result) {
+//		IParseTreeConstructor con = getParseTreeConstructor();
+//		ByteArrayOutputStream out = new ByteArrayOutputStream();
+//		WhitespacePreservingCallback cb = new WhitespacePreservingCallback(out,getValueConverterService());
+//		con.update(result, cb);
+//		return out.toString();
 		IParseTreeConstructor con = getParseTreeConstructor();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		WhitespacePreservingCallback cb = new WhitespacePreservingCallback(out,getValueConverterService());
-		con.update(result, cb);
+		con.serialize(out, result, Collections.emptyMap());
 		return out.toString();
 	}
 
@@ -76,8 +79,7 @@ public class WhitespacePreservingCallbackTest extends AbstractGeneratorTest {
 		try {
 			IParseTreeConstructor con = getParseTreeConstructor();
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			WhitespacePreservingCallback cb = new WhitespacePreservingCallback(out,getValueConverterService());
-			con.update(o, cb);
+			con.serialize(out, o, Collections.emptyMap());
 			fail("Should fail with "+clazz.getSimpleName());
 		} catch (RuntimeException e) {
 			if (!clazz.isInstance(e)) {

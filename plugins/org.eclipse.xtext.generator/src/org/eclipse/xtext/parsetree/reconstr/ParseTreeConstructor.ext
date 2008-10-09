@@ -9,6 +9,7 @@
 import xtext;
 import xtextgen;
 import predicate;
+import emf;
 
 extension org::eclipse::xtext::Properties reexport;
 extension org::eclipse::xtext::Extensions reexport;
@@ -18,17 +19,9 @@ extension org::eclipse::xtend::util::stdlib::io;
 String elementMethodName(AbstractElement ele):
 	JAVA org.eclipse.xtext.parsetree.reconstr.ParseTreeConstructorUtil.getUniqueElementName(org.eclipse.xtext.AbstractElement);
 
-
-AbstractElement getFirstChildToCall(AbstractElement ele):
-	JAVA org.eclipse.xtext.parsetree.reconstr.ParseTreeConstructorUtil.getFirstChildToCall(org.eclipse.xtext.AbstractElement);
-	
-AbstractElement getNextElementToCall(AbstractElement ele):
-	JAVA org.eclipse.xtext.parsetree.reconstr.ParseTreeConstructorUtil.getNextElementToCall(org.eclipse.xtext.AbstractElement);
-	
-boolean hasNextElement(AbstractElement ele):
-	ele.getNextElementToCall() != null;
-	
-	
+String grammarFragmentToStr(EObject ele):	
+	JAVA org.eclipse.xtext.parsetree.reconstr.ParseTreeConstructorUtil.grammarFragmentToStr(org.eclipse.emf.ecore.EObject);
+		
 boolean isRequired(String cardinality):
 	cardinality == null || cardinality == '' || cardinality == '+';
 	

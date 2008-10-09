@@ -9,12 +9,12 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.tests.EcoreModelComparator;
@@ -40,7 +40,6 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 					System.out.println(EmfFormater.objToStr(pr, ""));
 				}
 			}
-
 	}
 
 	public void testSimple() throws Exception {
@@ -58,9 +57,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 		System.out.println(EmfFormater.objToStr(result, ""));
 		IParseTreeConstructor con = getParseTreeConstructor();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		WhitespacePreservingCallback callback = new WhitespacePreservingCallback(out,
-				getValueConverterService());
-		con.update(result, callback);
+		con.serialize(out, result, Collections.emptyMap());
 		return out.toString();
 	}
 

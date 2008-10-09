@@ -212,6 +212,11 @@ public class GeneratorFacade {
 			parsetreeReconstructorService.setExtensionPointID("org.eclipse.xtext.ui.parseTreeConstructor");
 			genModel.getServices().add(parsetreeReconstructorService);
 
+			GenService serializationStrategy = XtextgenFactory.eINSTANCE.createGenService();
+			serializationStrategy.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructorCallback");
+			serializationStrategy.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback");
+			genModel.getServices().add(serializationStrategy);
+
 			GenService tokenScannerService = XtextgenFactory.eINSTANCE.createGenService();
 			tokenScannerService.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.Lexer");
 			tokenScannerService.setGenClassFQName(namespace + ".parser.internal.Internal" + languageName + "Lexer");
