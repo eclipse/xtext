@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-  
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="Xtext"
+            id="org.eclipse.xtext.projectwiz">
+      </category>
+      <wizard
+            name="New Xtext Project"
+            icon="icons/editor.gif"
+            category="org.eclipse.xtext.projectwiz"
+            class="org.eclipse.xtext.xtext.ui.wiz.project.NewXtextProjectWizard"
+            id="org.eclipse.xtext.xtext.ui.wiz.project.NewXtextProjectWizard">
+      </wizard>
+   </extension>
 </plugin>

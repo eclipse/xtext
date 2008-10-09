@@ -1,3 +1,4 @@
+«REM»
 /*******************************************************************************
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
@@ -6,19 +7,32 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.xtext.ui;
+«ENDREM»
+«DEFINE root FOR XtextProjectInfo»
+«FILE "Activator.java" ACTIVATOR_OUTLET -»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+package «this.basePackage».ui;
 
-import org.eclipse.jface.resource.ImageDescriptor;
+import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 /**
- * @author Dennis Hübner - Initial contribution and API
- * 
+ * The activator class controls the plug-in life cycle
  */
 public class Activator extends AbstractUIPlugin {
+	
+	Logger logger = Logger.getLogger(Activator.class);
+
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.eclipse.xtext.xtext.ui";
+	public static final String PLUGIN_ID = "«this.basePackage».ui";
 
 	// The shared instance
 	private static Activator plugin;
@@ -39,6 +53,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		setDefault(this);
+		logger.debug("Starting reference activator: " + this.getClass().getName());
 	}
 
 	/*
@@ -65,14 +80,6 @@ public class Activator extends AbstractUIPlugin {
 	private static void setDefault(Activator activator) {
 		plugin = activator;
 	}
-	/**
-	 * Returns an image descriptor for the image file at the given
-	 * plug-in relative path
-	 *
-	 * @param path the path
-	 * @return the image descriptor
-	 */
-	public static ImageDescriptor getImageDescriptor(String path) {
-		return imageDescriptorFromPlugin(PLUGIN_ID, path);
-	}
 }
+«ENDFILE»
+«ENDDEFINE»
