@@ -1,0 +1,70 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+«DEFINE root FOR XtextProjectInfo»
+«FILE this.languageNameAbbreviation+"Grammar.java" GENERATOR_OUTLET -»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+package «this.basePackage»;
+
+import java.io.IOException;
+
+import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.GeneratorFacade;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
+import org.eclipse.xtext.resource.XtextResourceSet;
+
+/**
+ * Run this class in order to generate the Reference grammar.
+ */
+public class «this.languageNameAbbreviation»Grammar {
+	private Logger log = Logger.getLogger(«this.languageNameAbbreviation»Grammar.class);
+	
+    private static final String PATH = "src-gen";
+    private static final String UI_PATH = "../«this.projectName».ui_gen";
+
+    public void generate() throws IOException {
+        XtextStandaloneSetup.doSetup();
+
+        GeneratorFacade.cleanFolder(PATH);
+
+        String classpathUri = "classpath:/«this.basePath»/«this.languageNameAbbreviation».xtext";
+        log.info("loading " + classpathUri);
+        ResourceSet rs = new XtextResourceSet();
+        Resource resource = rs.createResource(new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(classpathUri)));
+        resource.load(null);
+        Grammar grammarModel = (Grammar) resource.getContents().get(0);
+
+        GeneratorFacade.generate(grammarModel, PATH, UI_PATH, "«this.fileExtension»");
+        log.info("Done.");
+    }
+
+    public static void main(String[] args) throws IOException {
+        «this.languageNameAbbreviation»Grammar generator = new «this.languageNameAbbreviation»Grammar();
+        generator.generate();
+    }
+
+}
+
+«ENDFILE»
+«ENDDEFINE»
+
+
