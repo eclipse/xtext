@@ -12,19 +12,17 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
+import org.eclipse.xtext.service.Inject;
 
 public class SimpleSerializingCallback extends
 		DefaultParsetreeReconstructorCallback {
 
-	protected final OutputStream out;
-	protected final IValueConverterService converterService;
-	protected boolean outputHasStarted;
+	@Inject
+	protected IValueConverterService converterService;
 
-	public SimpleSerializingCallback(OutputStream output,
-			IValueConverterService converterService) {
-		this.converterService = converterService;
-		this.out = output;
-	}
+	protected OutputStream out;
+
+	protected boolean outputHasStarted;
 
 	protected void append(String str) {
 		try {
@@ -43,9 +41,10 @@ public class SimpleSerializingCallback extends
 			append(" ");
 	}
 
-	public void beginSerialize() {
-		super.beginSerialize();
+	public void beginSerialize(OutputStream output) {
+		super.beginSerialize(output);
 		outputHasStarted = false;
+		out = output;
 	}
 
 	public void crossRefCall(IInstanceDescription current, CrossReference call) {
@@ -65,6 +64,10 @@ public class SimpleSerializingCallback extends
 				+ object);
 	}
 
+	public IValueConverterService getConverterService() {
+		return converterService;
+	}
+
 	public void keywordCall(IInstanceDescription current, Keyword call) {
 		before(current, call);
 		append(call.getValue());
@@ -74,5 +77,9 @@ public class SimpleSerializingCallback extends
 			Object value) {
 		before(current, call);
 		append(converterService.toString(value, call.getName()));
+	}
+
+	public void setConverterService(IValueConverterService converterService) {
+		this.converterService = converterService;
 	}
 }

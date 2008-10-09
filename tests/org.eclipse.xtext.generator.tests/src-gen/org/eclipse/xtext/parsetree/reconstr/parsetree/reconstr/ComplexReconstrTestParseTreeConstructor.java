@@ -13,35 +13,37 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class ComplexReconstrTestParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
-		if((s = new Op_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Term_Alternatives(inst, null).firstSolution()) != null) return s;
-		if((s = new Atom_Assignment_name(inst, null).firstSolution()) != null) return s;
-		if((s = new Parens_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new TrickyA_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new TrickyA1_Assignment_name(inst, null).firstSolution()) != null) return s;
-		if((s = new TrickyB_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new TrickyC_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new TrickyD_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new TrickyE_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new TrickyF_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Op_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("TypeA1") && (s = new TrickyA_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("TypeD") && (s = new TrickyA1_Assignment_name(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("TrickyB") && (s = new TrickyB_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("TrickyC") && (s = new TrickyC_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("TrickyD") && (s = new TrickyD_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("TrickyE") && (s = new TrickyE_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("TrickyF") && (s = new TrickyF_Group(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
-/************ begin Rule Op ****************/
+/************ begin Rule Op ****************
+ *
+ * Op returns Expression : Term ( { current = Add . addOperands += current } '+' addOperands += Term | { current = Minus . minusOperands += current } '-' minusOperands += Term ) * ;
+ *
+ **/
 
 
+// Term ( { current = Add . addOperands += current } '+' addOperands += Term | { current = Minus . minusOperands += current } '-' minusOperands += Term ) *
 protected class Op_Group extends GroupToken {
 	
 	public Op_Group(InstanceDescription curr, AbstractToken pred) {
@@ -56,6 +58,7 @@ protected class Op_Group extends GroupToken {
 	}
 }
 
+// Term
 protected class Op_0_RuleCall_Term extends RuleCallToken {
 	
 	public Op_0_RuleCall_Term(InstanceDescription curr, AbstractToken pred) {
@@ -70,6 +73,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 	}
 }
 
+// ( { current = Add . addOperands += current } '+' addOperands += Term | { current = Minus . minusOperands += current } '-' minusOperands += Term ) *
 protected class Op_1_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -95,6 +99,7 @@ protected class Op_1_Alternatives extends GroupToken {
 	}
 }
 
+// { current = Add . addOperands += current } '+' addOperands += Term
 protected class Op_1_0_Group extends GroupToken {
 	
 	public Op_1_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -109,6 +114,7 @@ protected class Op_1_0_Group extends GroupToken {
 	}
 }
 
+// { current = Add . addOperands += current } '+'
 protected class Op_1_0_0_Group extends GroupToken {
 	
 	public Op_1_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -123,6 +129,7 @@ protected class Op_1_0_0_Group extends GroupToken {
 	}
 }
 
+// { current = Add . addOperands += current }
 protected class Op_1_0_0_0_Action_Add_addOperands extends AssignmentToken  {
 
 	public Op_1_0_0_0_Action_Add_addOperands(InstanceDescription curr, AbstractToken pred) {
@@ -140,7 +147,7 @@ protected class Op_1_0_0_0_Action_Add_addOperands extends AssignmentToken  {
 	}
 }
 
-
+// '+'
 protected class Op_1_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.1");
@@ -159,6 +166,7 @@ protected class Op_1_0_0_1_Keyword extends KeywordToken  {
 }
 
 
+// addOperands += Term
 protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.1/@terminal");
@@ -189,6 +197,7 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 }
 
 
+// { current = Minus . minusOperands += current } '-' minusOperands += Term
 protected class Op_1_1_Group extends GroupToken {
 	
 	public Op_1_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -203,6 +212,7 @@ protected class Op_1_1_Group extends GroupToken {
 	}
 }
 
+// { current = Minus . minusOperands += current } '-'
 protected class Op_1_1_0_Group extends GroupToken {
 	
 	public Op_1_1_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -217,6 +227,7 @@ protected class Op_1_1_0_Group extends GroupToken {
 	}
 }
 
+// { current = Minus . minusOperands += current }
 protected class Op_1_1_0_0_Action_Minus_minusOperands extends AssignmentToken  {
 
 	public Op_1_1_0_0_Action_Minus_minusOperands(InstanceDescription curr, AbstractToken pred) {
@@ -234,7 +245,7 @@ protected class Op_1_1_0_0_Action_Minus_minusOperands extends AssignmentToken  {
 	}
 }
 
-
+// '-'
 protected class Op_1_1_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1");
@@ -253,6 +264,7 @@ protected class Op_1_1_0_1_Keyword extends KeywordToken  {
 }
 
 
+// minusOperands += Term
 protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.1/@terminal");
@@ -286,9 +298,15 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 
 
 /************ end Rule Op ****************/
-/************ begin Rule Term ****************/
+
+/************ begin Rule Term ****************
+ *
+ * Term returns Expression : Atom | Parens ;
+ *
+ **/
 
 
+// Atom | Parens
 protected class Term_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -314,6 +332,7 @@ protected class Term_Alternatives extends GroupToken {
 	}
 }
 
+// Atom
 protected class Term_0_RuleCall_Atom extends RuleCallToken {
 	
 	public Term_0_RuleCall_Atom(InstanceDescription curr, AbstractToken pred) {
@@ -328,6 +347,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 	}
 }
 
+// Parens
 protected class Term_1_RuleCall_Parens extends RuleCallToken {
 	
 	public Term_1_RuleCall_Parens(InstanceDescription curr, AbstractToken pred) {
@@ -344,9 +364,15 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 
 
 /************ end Rule Term ****************/
-/************ begin Rule Atom ****************/
+
+/************ begin Rule Atom ****************
+ *
+ * Atom : name = ID ;
+ *
+ **/
 
 
+// name = ID
 protected class Atom_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.2/@alternatives/@terminal");
@@ -372,9 +398,15 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 }
 
 /************ end Rule Atom ****************/
-/************ begin Rule Parens ****************/
+
+/************ begin Rule Parens ****************
+ *
+ * Parens returns Expression : '(' Op ')' ( em = '!' ) ? ;
+ *
+ **/
 
 
+// '(' Op ')' ( em = '!' ) ?
 protected class Parens_Group extends GroupToken {
 	
 	public Parens_Group(InstanceDescription curr, AbstractToken pred) {
@@ -389,6 +421,7 @@ protected class Parens_Group extends GroupToken {
 	}
 }
 
+// '(' Op ')'
 protected class Parens_0_Group extends GroupToken {
 	
 	public Parens_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -403,6 +436,7 @@ protected class Parens_0_Group extends GroupToken {
 	}
 }
 
+// '(' Op
 protected class Parens_0_0_Group extends GroupToken {
 	
 	public Parens_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -417,7 +451,7 @@ protected class Parens_0_0_Group extends GroupToken {
 	}
 }
 
-
+// '('
 protected class Parens_0_0_0_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
@@ -435,6 +469,7 @@ protected class Parens_0_0_0_Keyword extends KeywordToken  {
 	}
 }
 
+// Op
 protected class Parens_0_0_1_RuleCall_Op extends RuleCallToken {
 	
 	public Parens_0_0_1_RuleCall_Op(InstanceDescription curr, AbstractToken pred) {
@@ -450,7 +485,7 @@ protected class Parens_0_0_1_RuleCall_Op extends RuleCallToken {
 }
 
 
-
+// ')'
 protected class Parens_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1");
@@ -469,6 +504,7 @@ protected class Parens_0_1_Keyword extends KeywordToken  {
 }
 
 
+// ( em = '!' ) ?
 protected class Parens_1_Assignment_em extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal");
@@ -495,9 +531,15 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 
 
 /************ end Rule Parens ****************/
-/************ begin Rule TrickyA ****************/
+
+/************ begin Rule TrickyA ****************
+ *
+ * TrickyA returns TypeA1 : 'TA' TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ? name += STRING ;
+ *
+ **/
 
 
+// 'TA' TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ? name += STRING
 protected class TrickyA_Group extends GroupToken {
 	
 	public TrickyA_Group(InstanceDescription curr, AbstractToken pred) {
@@ -512,6 +554,7 @@ protected class TrickyA_Group extends GroupToken {
 	}
 }
 
+// 'TA' TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ?
 protected class TrickyA_0_Group extends GroupToken {
 	
 	public TrickyA_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -526,6 +569,7 @@ protected class TrickyA_0_Group extends GroupToken {
 	}
 }
 
+// 'TA' TrickyA1 ( name += ID ) *
 protected class TrickyA_0_0_Group extends GroupToken {
 	
 	public TrickyA_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -536,13 +580,47 @@ protected class TrickyA_0_0_Group extends GroupToken {
 	protected Solution createSolution() {
 		Solution s1 = new TrickyA_0_0_1_Assignment_name(current, this).firstSolution();
 		if(s1 == null) return null;
-		return new TrickyA_0_0_0_RuleCall_TrickyA1(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		return new TrickyA_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
-protected class TrickyA_0_0_0_RuleCall_TrickyA1 extends RuleCallToken {
+// 'TA' TrickyA1
+protected class TrickyA_0_0_0_Group extends GroupToken {
 	
-	public TrickyA_0_0_0_RuleCall_TrickyA1(InstanceDescription curr, AbstractToken pred) {
+	public TrickyA_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+
+		
+	protected Solution createSolution() {
+		Solution s1 = new TrickyA_0_0_0_1_RuleCall_TrickyA1(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyA_0_0_0_0_Keyword_TA(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+	}
+}
+
+// 'TA'
+protected class TrickyA_0_0_0_0_Keyword_TA extends KeywordToken  {
+
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+	
+	public TrickyA_0_0_0_0_Keyword_TA(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	protected Solution createSolution() {
+		return new Solution();
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(current, keyword);
+	}
+}
+
+// TrickyA1
+protected class TrickyA_0_0_0_1_RuleCall_TrickyA1 extends RuleCallToken {
+	
+	public TrickyA_0_0_0_1_RuleCall_TrickyA1(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
@@ -554,6 +632,8 @@ protected class TrickyA_0_0_0_RuleCall_TrickyA1 extends RuleCallToken {
 	}
 }
 
+
+// ( name += ID ) *
 protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -579,6 +659,7 @@ protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
+// ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ?
 protected class TrickyA_0_1_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -604,6 +685,7 @@ protected class TrickyA_0_1_Alternatives extends GroupToken {
 	}
 }
 
+// { current = TypeB . x = current } 'x'
 protected class TrickyA_0_1_0_Group extends GroupToken {
 	
 	public TrickyA_0_1_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -618,6 +700,7 @@ protected class TrickyA_0_1_0_Group extends GroupToken {
 	}
 }
 
+// { current = TypeB . x = current }
 protected class TrickyA_0_1_0_0_Action_TypeB_x extends AssignmentToken  {
 
 	public TrickyA_0_1_0_0_Action_TypeB_x(InstanceDescription curr, AbstractToken pred) {
@@ -635,7 +718,7 @@ protected class TrickyA_0_1_0_0_Action_TypeB_x extends AssignmentToken  {
 	}
 }
 
-
+// 'x'
 protected class TrickyA_0_1_0_1_Keyword_x extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.1");
@@ -654,6 +737,7 @@ protected class TrickyA_0_1_0_1_Keyword_x extends KeywordToken  {
 }
 
 
+// { current = TypeC . x = current } 'y'
 protected class TrickyA_0_1_1_Group extends GroupToken {
 	
 	public TrickyA_0_1_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -668,6 +752,7 @@ protected class TrickyA_0_1_1_Group extends GroupToken {
 	}
 }
 
+// { current = TypeC . x = current }
 protected class TrickyA_0_1_1_0_Action_TypeC_x extends AssignmentToken  {
 
 	public TrickyA_0_1_1_0_Action_TypeC_x(InstanceDescription curr, AbstractToken pred) {
@@ -685,7 +770,7 @@ protected class TrickyA_0_1_1_0_Action_TypeC_x extends AssignmentToken  {
 	}
 }
 
-
+// 'y'
 protected class TrickyA_0_1_1_1_Keyword_y extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.1");
@@ -706,6 +791,7 @@ protected class TrickyA_0_1_1_1_Keyword_y extends KeywordToken  {
 
 
 
+// name += STRING
 protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.1/@terminal");
@@ -732,9 +818,15 @@ protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 
 
 /************ end Rule TrickyA ****************/
-/************ begin Rule TrickyA1 ****************/
+
+/************ begin Rule TrickyA1 ****************
+ *
+ * TrickyA1 returns TypeD : name += ID ;
+ *
+ **/
 
 
+// name += ID
 protected class TrickyA1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.5/@alternatives/@terminal");
@@ -760,9 +852,15 @@ protected class TrickyA1_Assignment_name extends AssignmentToken  {
 }
 
 /************ end Rule TrickyA1 ****************/
-/************ begin Rule TrickyB ****************/
+
+/************ begin Rule TrickyB ****************
+ *
+ * TrickyB : 'TB' ( name = ID type += INT ) ? ( type += ID ) * ;
+ *
+ **/
 
 
+// 'TB' ( name = ID type += INT ) ? ( type += ID ) *
 protected class TrickyB_Group extends GroupToken {
 	
 	public TrickyB_Group(InstanceDescription curr, AbstractToken pred) {
@@ -777,26 +875,61 @@ protected class TrickyB_Group extends GroupToken {
 	}
 }
 
+// 'TB' ( name = ID type += INT ) ?
 protected class TrickyB_0_Group extends GroupToken {
 	
 	public TrickyB_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+
+		
+	protected Solution createSolution() {
+		Solution s1 = new TrickyB_0_1_Group(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyB_0_0_Keyword_TB(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+	}
+}
+
+// 'TB'
+protected class TrickyB_0_0_Keyword_TB extends KeywordToken  {
+
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0");
+	
+	public TrickyB_0_0_Keyword_TB(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	protected Solution createSolution() {
+		return new Solution();
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(current, keyword);
+	}
+}
+
+// ( name = ID type += INT ) ?
+protected class TrickyB_0_1_Group extends GroupToken {
+	
+	public TrickyB_0_1_Group(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 
 		
 	protected Solution createSolution() {
-		Solution s1 = new TrickyB_0_1_Assignment_type(current, this).firstSolution();
+		Solution s1 = new TrickyB_0_1_1_Assignment_type(current, this).firstSolution();
 		if(s1 == null) return null;
-		return new TrickyB_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		return new TrickyB_0_1_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
-protected class TrickyB_0_0_Assignment_name extends AssignmentToken  {
+// name = ID
+protected class TrickyB_0_1_0_Assignment_name extends AssignmentToken  {
 
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal");
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal");
 	protected Object value;
 	
-	public TrickyB_0_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public TrickyB_0_1_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
@@ -810,17 +943,18 @@ protected class TrickyB_0_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("TrickyB_0_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("TrickyB_0_1_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
-protected class TrickyB_0_1_Assignment_type extends AssignmentToken  {
+// type += INT
+protected class TrickyB_0_1_1_Assignment_type extends AssignmentToken  {
 
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyB_0_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
+	public TrickyB_0_1_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
@@ -834,12 +968,14 @@ protected class TrickyB_0_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("TrickyB_0_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("TrickyB_0_1_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
 
+
+// ( type += ID ) *
 protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.1/@terminal");
@@ -866,9 +1002,15 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 
 
 /************ end Rule TrickyB ****************/
-/************ begin Rule TrickyC ****************/
+
+/************ begin Rule TrickyC ****************
+ *
+ * TrickyC : 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ? ( { current = C3 . z = current } 'z' ) ? ;
+ *
+ **/
 
 
+// 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ? ( { current = C3 . z = current } 'z' ) ?
 protected class TrickyC_Group extends GroupToken {
 	
 	public TrickyC_Group(InstanceDescription curr, AbstractToken pred) {
@@ -883,6 +1025,7 @@ protected class TrickyC_Group extends GroupToken {
 	}
 }
 
+// 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ?
 protected class TrickyC_0_Group extends GroupToken {
 	
 	public TrickyC_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -897,6 +1040,7 @@ protected class TrickyC_0_Group extends GroupToken {
 	}
 }
 
+// 'TC' name = ID ( { current = C1 . x = current } 'x' ) ?
 protected class TrickyC_0_0_Group extends GroupToken {
 	
 	public TrickyC_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -907,16 +1051,50 @@ protected class TrickyC_0_0_Group extends GroupToken {
 	protected Solution createSolution() {
 		Solution s1 = new TrickyC_0_0_1_Group(current, this).firstSolution();
 		if(s1 == null) return null;
-		return new TrickyC_0_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		return new TrickyC_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
-protected class TrickyC_0_0_0_Assignment_name extends AssignmentToken  {
+// 'TC' name = ID
+protected class TrickyC_0_0_0_Group extends GroupToken {
+	
+	public TrickyC_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
 
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal");
+		
+	protected Solution createSolution() {
+		Solution s1 = new TrickyC_0_0_0_1_Assignment_name(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyC_0_0_0_0_Keyword_TC(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+	}
+}
+
+// 'TC'
+protected class TrickyC_0_0_0_0_Keyword_TC extends KeywordToken  {
+
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+	
+	public TrickyC_0_0_0_0_Keyword_TC(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	protected Solution createSolution() {
+		return new Solution();
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(current, keyword);
+	}
+}
+
+// name = ID
+protected class TrickyC_0_0_0_1_Assignment_name extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyC_0_0_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public TrickyC_0_0_0_1_Assignment_name(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
@@ -930,11 +1108,13 @@ protected class TrickyC_0_0_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("TrickyC_0_0_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("TrickyC_0_0_0_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
+
+// ( { current = C1 . x = current } 'x' ) ?
 protected class TrickyC_0_0_1_Group extends GroupToken {
 	
 	public TrickyC_0_0_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -949,6 +1129,7 @@ protected class TrickyC_0_0_1_Group extends GroupToken {
 	}
 }
 
+// { current = C1 . x = current }
 protected class TrickyC_0_0_1_0_Action_C1_x extends AssignmentToken  {
 
 	public TrickyC_0_0_1_0_Action_C1_x(InstanceDescription curr, AbstractToken pred) {
@@ -966,7 +1147,7 @@ protected class TrickyC_0_0_1_0_Action_C1_x extends AssignmentToken  {
 	}
 }
 
-
+// 'x'
 protected class TrickyC_0_0_1_1_Keyword_x extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
@@ -986,6 +1167,7 @@ protected class TrickyC_0_0_1_1_Keyword_x extends KeywordToken  {
 
 
 
+// ( { current = C2 . y = current } 'y' ) ?
 protected class TrickyC_0_1_Group extends GroupToken {
 	
 	public TrickyC_0_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1000,6 +1182,7 @@ protected class TrickyC_0_1_Group extends GroupToken {
 	}
 }
 
+// { current = C2 . y = current }
 protected class TrickyC_0_1_0_Action_C2_y extends AssignmentToken  {
 
 	public TrickyC_0_1_0_Action_C2_y(InstanceDescription curr, AbstractToken pred) {
@@ -1017,7 +1200,7 @@ protected class TrickyC_0_1_0_Action_C2_y extends AssignmentToken  {
 	}
 }
 
-
+// 'y'
 protected class TrickyC_0_1_1_Keyword_y extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
@@ -1037,6 +1220,7 @@ protected class TrickyC_0_1_1_Keyword_y extends KeywordToken  {
 
 
 
+// ( { current = C3 . z = current } 'z' ) ?
 protected class TrickyC_1_Group extends GroupToken {
 	
 	public TrickyC_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1051,6 +1235,7 @@ protected class TrickyC_1_Group extends GroupToken {
 	}
 }
 
+// { current = C3 . z = current }
 protected class TrickyC_1_0_Action_C3_z extends AssignmentToken  {
 
 	public TrickyC_1_0_Action_C3_z(InstanceDescription curr, AbstractToken pred) {
@@ -1068,7 +1253,7 @@ protected class TrickyC_1_0_Action_C3_z extends AssignmentToken  {
 	}
 }
 
-
+// 'z'
 protected class TrickyC_1_1_Keyword_z extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.1/@abstractTokens.1");
@@ -1089,9 +1274,15 @@ protected class TrickyC_1_1_Keyword_z extends KeywordToken  {
 
 
 /************ end Rule TrickyC ****************/
-/************ begin Rule TrickyD ****************/
+
+/************ begin Rule TrickyD ****************
+ *
+ * TrickyD : 'TD' ( name += INT foo = STRING type += ID ) ? ( name += INT type += ID ) ? ( type += ID ) * ;
+ *
+ **/
 
 
+// 'TD' ( name += INT foo = STRING type += ID ) ? ( name += INT type += ID ) ? ( type += ID ) *
 protected class TrickyD_Group extends GroupToken {
 	
 	public TrickyD_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1106,6 +1297,7 @@ protected class TrickyD_Group extends GroupToken {
 	}
 }
 
+// 'TD' ( name += INT foo = STRING type += ID ) ? ( name += INT type += ID ) ?
 protected class TrickyD_0_Group extends GroupToken {
 	
 	public TrickyD_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1120,40 +1312,76 @@ protected class TrickyD_0_Group extends GroupToken {
 	}
 }
 
+// 'TD' ( name += INT foo = STRING type += ID ) ?
 protected class TrickyD_0_0_Group extends GroupToken {
 	
 	public TrickyD_0_0_Group(InstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, !IS_REQUIRED);
-	}
-
-		
-	protected Solution createSolution() {
-		Solution s1 = new TrickyD_0_0_1_Assignment_type(current, this).firstSolution();
-		if(s1 == null) return null;
-		return new TrickyD_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-	}
-}
-
-protected class TrickyD_0_0_0_Group extends GroupToken {
-	
-	public TrickyD_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
 	protected Solution createSolution() {
-		Solution s1 = new TrickyD_0_0_0_1_Assignment_foo(current, this).firstSolution();
+		Solution s1 = new TrickyD_0_0_1_Group(current, this).firstSolution();
 		if(s1 == null) return null;
-		return new TrickyD_0_0_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		return new TrickyD_0_0_0_Keyword_TD(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
-protected class TrickyD_0_0_0_0_Assignment_name extends AssignmentToken  {
+// 'TD'
+protected class TrickyD_0_0_0_Keyword_TD extends KeywordToken  {
 
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal");
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+	
+	public TrickyD_0_0_0_Keyword_TD(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	protected Solution createSolution() {
+		return new Solution();
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(current, keyword);
+	}
+}
+
+// ( name += INT foo = STRING type += ID ) ?
+protected class TrickyD_0_0_1_Group extends GroupToken {
+	
+	public TrickyD_0_0_1_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	}
+
+		
+	protected Solution createSolution() {
+		Solution s1 = new TrickyD_0_0_1_1_Assignment_type(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyD_0_0_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+	}
+}
+
+// name += INT foo = STRING
+protected class TrickyD_0_0_1_0_Group extends GroupToken {
+	
+	public TrickyD_0_0_1_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+
+		
+	protected Solution createSolution() {
+		Solution s1 = new TrickyD_0_0_1_0_1_Assignment_foo(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyD_0_0_1_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+	}
+}
+
+// name += INT
+protected class TrickyD_0_0_1_0_0_Assignment_name extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@terminal");
 	protected Object value;
 	
-	public TrickyD_0_0_0_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public TrickyD_0_0_1_0_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
@@ -1167,17 +1395,18 @@ protected class TrickyD_0_0_0_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("TrickyD_0_0_0_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("TrickyD_0_0_1_0_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
-protected class TrickyD_0_0_0_1_Assignment_foo extends AssignmentToken  {
+// foo = STRING
+protected class TrickyD_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyD_0_0_0_1_Assignment_foo(InstanceDescription curr, AbstractToken pred) {
+	public TrickyD_0_0_1_0_1_Assignment_foo(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
@@ -1191,18 +1420,19 @@ protected class TrickyD_0_0_0_1_Assignment_foo extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("TrickyD_0_0_0_1_Assignment_fooCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("TrickyD_0_0_1_0_1_Assignment_fooCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
 
-protected class TrickyD_0_0_1_Assignment_type extends AssignmentToken  {
+// type += ID
+protected class TrickyD_0_0_1_1_Assignment_type extends AssignmentToken  {
 
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyD_0_0_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
+	public TrickyD_0_0_1_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
@@ -1216,12 +1446,14 @@ protected class TrickyD_0_0_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("TrickyD_0_0_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("TrickyD_0_0_1_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
 
+
+// ( name += INT type += ID ) ?
 protected class TrickyD_0_1_Group extends GroupToken {
 	
 	public TrickyD_0_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1236,6 +1468,7 @@ protected class TrickyD_0_1_Group extends GroupToken {
 	}
 }
 
+// name += INT
 protected class TrickyD_0_1_0_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal");
@@ -1260,6 +1493,7 @@ protected class TrickyD_0_1_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
+// type += ID
 protected class TrickyD_0_1_1_Assignment_type extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -1286,6 +1520,7 @@ protected class TrickyD_0_1_1_Assignment_type extends AssignmentToken  {
 
 
 
+// ( type += ID ) *
 protected class TrickyD_1_Assignment_type extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.1/@terminal");
@@ -1312,9 +1547,15 @@ protected class TrickyD_1_Assignment_type extends AssignmentToken  {
 
 
 /************ end Rule TrickyD ****************/
-/************ begin Rule TrickyE ****************/
+
+/************ begin Rule TrickyE ****************
+ *
+ * TrickyE : 'TE' ( name += INT foo += STRING type += ID ) * 'x' ( name += INT type += ID ) * ;
+ *
+ **/
 
 
+// 'TE' ( name += INT foo += STRING type += ID ) * 'x' ( name += INT type += ID ) *
 protected class TrickyE_Group extends GroupToken {
 	
 	public TrickyE_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1329,6 +1570,7 @@ protected class TrickyE_Group extends GroupToken {
 	}
 }
 
+// 'TE' ( name += INT foo += STRING type += ID ) * 'x'
 protected class TrickyE_0_Group extends GroupToken {
 	
 	public TrickyE_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1343,40 +1585,76 @@ protected class TrickyE_0_Group extends GroupToken {
 	}
 }
 
+// 'TE' ( name += INT foo += STRING type += ID ) *
 protected class TrickyE_0_0_Group extends GroupToken {
 	
 	public TrickyE_0_0_Group(InstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, IS_MANY, !IS_REQUIRED);
-	}
-
-		
-	protected Solution createSolution() {
-		Solution s1 = new TrickyE_0_0_1_Assignment_type(current, this).firstSolution();
-		if(s1 == null) return null;
-		return new TrickyE_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
-	}
-}
-
-protected class TrickyE_0_0_0_Group extends GroupToken {
-	
-	public TrickyE_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
 		
 	protected Solution createSolution() {
-		Solution s1 = new TrickyE_0_0_0_1_Assignment_foo(current, this).firstSolution();
+		Solution s1 = new TrickyE_0_0_1_Group(current, this).firstSolution();
 		if(s1 == null) return null;
-		return new TrickyE_0_0_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		return new TrickyE_0_0_0_Keyword_TE(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
-protected class TrickyE_0_0_0_0_Assignment_name extends AssignmentToken  {
+// 'TE'
+protected class TrickyE_0_0_0_Keyword_TE extends KeywordToken  {
 
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal");
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+	
+	public TrickyE_0_0_0_Keyword_TE(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	protected Solution createSolution() {
+		return new Solution();
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(current, keyword);
+	}
+}
+
+// ( name += INT foo += STRING type += ID ) *
+protected class TrickyE_0_0_1_Group extends GroupToken {
+	
+	public TrickyE_0_0_1_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	}
+
+		
+	protected Solution createSolution() {
+		Solution s1 = new TrickyE_0_0_1_1_Assignment_type(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyE_0_0_1_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+	}
+}
+
+// name += INT foo += STRING
+protected class TrickyE_0_0_1_0_Group extends GroupToken {
+	
+	public TrickyE_0_0_1_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+
+		
+	protected Solution createSolution() {
+		Solution s1 = new TrickyE_0_0_1_0_1_Assignment_foo(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyE_0_0_1_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+	}
+}
+
+// name += INT
+protected class TrickyE_0_0_1_0_0_Assignment_name extends AssignmentToken  {
+
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@terminal");
 	protected Object value;
 	
-	public TrickyE_0_0_0_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public TrickyE_0_0_1_0_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
@@ -1390,17 +1668,18 @@ protected class TrickyE_0_0_0_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("TrickyE_0_0_0_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("TrickyE_0_0_1_0_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
-protected class TrickyE_0_0_0_1_Assignment_foo extends AssignmentToken  {
+// foo += STRING
+protected class TrickyE_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyE_0_0_0_1_Assignment_foo(InstanceDescription curr, AbstractToken pred) {
+	public TrickyE_0_0_1_0_1_Assignment_foo(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
@@ -1414,18 +1693,19 @@ protected class TrickyE_0_0_0_1_Assignment_foo extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("TrickyE_0_0_0_1_Assignment_fooCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("TrickyE_0_0_1_0_1_Assignment_fooCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
 
-protected class TrickyE_0_0_1_Assignment_type extends AssignmentToken  {
+// type += ID
+protected class TrickyE_0_0_1_1_Assignment_type extends AssignmentToken  {
 
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyE_0_0_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
+	public TrickyE_0_0_1_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
@@ -1439,13 +1719,14 @@ protected class TrickyE_0_0_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("TrickyE_0_0_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("TrickyE_0_0_1_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
 
 
+// 'x'
 protected class TrickyE_0_1_Keyword_x extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1");
@@ -1464,6 +1745,7 @@ protected class TrickyE_0_1_Keyword_x extends KeywordToken  {
 }
 
 
+// ( name += INT type += ID ) *
 protected class TrickyE_1_Group extends GroupToken {
 	
 	public TrickyE_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1478,6 +1760,7 @@ protected class TrickyE_1_Group extends GroupToken {
 	}
 }
 
+// name += INT
 protected class TrickyE_1_0_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@terminal");
@@ -1502,6 +1785,7 @@ protected class TrickyE_1_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
+// type += ID
 protected class TrickyE_1_1_Assignment_type extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -1529,9 +1813,15 @@ protected class TrickyE_1_1_Assignment_type extends AssignmentToken  {
 
 
 /************ end Rule TrickyE ****************/
-/************ begin Rule TrickyF ****************/
+
+/************ begin Rule TrickyF ****************
+ *
+ * TrickyF : 'TF' ( name += ID type += INT ) * ( name += ID | type += INT ) ;
+ *
+ **/
 
 
+// 'TF' ( name += ID type += INT ) * ( name += ID | type += INT )
 protected class TrickyF_Group extends GroupToken {
 	
 	public TrickyF_Group(InstanceDescription curr, AbstractToken pred) {
@@ -1546,26 +1836,61 @@ protected class TrickyF_Group extends GroupToken {
 	}
 }
 
+// 'TF' ( name += ID type += INT ) *
 protected class TrickyF_0_Group extends GroupToken {
 	
 	public TrickyF_0_Group(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+
+		
+	protected Solution createSolution() {
+		Solution s1 = new TrickyF_0_1_Group(current, this).firstSolution();
+		if(s1 == null) return null;
+		return new TrickyF_0_0_Keyword_TF(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+	}
+}
+
+// 'TF'
+protected class TrickyF_0_0_Keyword_TF extends KeywordToken  {
+
+	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0");
+	
+	public TrickyF_0_0_Keyword_TF(InstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	protected Solution createSolution() {
+		return new Solution();
+	}
+	
+	public void executeCallback(IParseTreeConstructorCallback callback) {
+		callback.keywordCall(current, keyword);
+	}
+}
+
+// ( name += ID type += INT ) *
+protected class TrickyF_0_1_Group extends GroupToken {
+	
+	public TrickyF_0_1_Group(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 
 		
 	protected Solution createSolution() {
-		Solution s1 = new TrickyF_0_1_Assignment_type(current, this).firstSolution();
+		Solution s1 = new TrickyF_0_1_1_Assignment_type(current, this).firstSolution();
 		if(s1 == null) return null;
-		return new TrickyF_0_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		return new TrickyF_0_1_0_Assignment_name(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 	}
 }
 
-protected class TrickyF_0_0_Assignment_name extends AssignmentToken  {
+// name += ID
+protected class TrickyF_0_1_0_Assignment_name extends AssignmentToken  {
 
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal");
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal");
 	protected Object value;
 	
-	public TrickyF_0_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public TrickyF_0_1_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
@@ -1579,17 +1904,18 @@ protected class TrickyF_0_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("TrickyF_0_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("TrickyF_0_1_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
-protected class TrickyF_0_1_Assignment_type extends AssignmentToken  {
+// type += INT
+protected class TrickyF_0_1_1_Assignment_type extends AssignmentToken  {
 
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal");
 	protected Object value;
 	
-	public TrickyF_0_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
+	public TrickyF_0_1_1_Assignment_type(InstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 
@@ -1603,12 +1929,14 @@ protected class TrickyF_0_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("TrickyF_0_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
+		// System.out.println("TrickyF_0_1_1_Assignment_typeCallback(\"xtext::RuleCall\", " + value + ")");
 		callback.lexerRuleCall(current, (RuleCall) element, value);
 	}
 }
 
 
+
+// name += ID | type += INT
 protected class TrickyF_1_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -1634,6 +1962,7 @@ protected class TrickyF_1_Alternatives extends GroupToken {
 	}
 }
 
+// name += ID
 protected class TrickyF_1_0_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.1/@groups.0/@terminal");
@@ -1658,6 +1987,7 @@ protected class TrickyF_1_0_Assignment_name extends AssignmentToken  {
 	}
 }
 
+// type += INT
 protected class TrickyF_1_1_Assignment_type extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.1/@groups.1/@terminal");
@@ -1685,4 +2015,5 @@ protected class TrickyF_1_1_Assignment_type extends AssignmentToken  {
 
 
 /************ end Rule TrickyF ****************/
+
 }

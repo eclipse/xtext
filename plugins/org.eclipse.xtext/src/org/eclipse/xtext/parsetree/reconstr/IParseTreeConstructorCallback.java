@@ -8,12 +8,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
+import java.io.OutputStream;
+
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.service.ILanguageService;
 
+// TODO: rename to ISerializerStrategy
 public interface IParseTreeConstructorCallback extends ILanguageService {
 
 	void parserRuleCallStart(IInstanceDescription current, RuleCall call);
@@ -34,7 +37,7 @@ public interface IParseTreeConstructorCallback extends ILanguageService {
 
 	void crossRefCall(IInstanceDescription current, CrossReference call);
 
-	void beginSerialize();
+	void beginSerialize(OutputStream output);
 
 	void endSerialize();
 }

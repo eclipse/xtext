@@ -13,26 +13,28 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class ConcreteTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
-		if((s = new ConcreteParserRule_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new InheritedParserRule_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("ConcreteParserRule") && (s = new ConcreteParserRule_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("mm::AType") && (s = new InheritedParserRule_Group(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
-/************ begin Rule ConcreteParserRule ****************/
+/************ begin Rule ConcreteParserRule ****************
+ *
+ * ConcreteParserRule : 'model' magicNumber = REAL ':' ( elements += InheritedParserRule ) * ;
+ *
+ **/
 
 
+// 'model' magicNumber = REAL ':' ( elements += InheritedParserRule ) *
 protected class ConcreteParserRule_Group extends GroupToken {
 	
 	public ConcreteParserRule_Group(InstanceDescription curr, AbstractToken pred) {
@@ -47,6 +49,7 @@ protected class ConcreteParserRule_Group extends GroupToken {
 	}
 }
 
+// 'model' magicNumber = REAL ':'
 protected class ConcreteParserRule_0_Group extends GroupToken {
 	
 	public ConcreteParserRule_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -61,6 +64,7 @@ protected class ConcreteParserRule_0_Group extends GroupToken {
 	}
 }
 
+// 'model' magicNumber = REAL
 protected class ConcreteParserRule_0_0_Group extends GroupToken {
 	
 	public ConcreteParserRule_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -75,7 +79,7 @@ protected class ConcreteParserRule_0_0_Group extends GroupToken {
 	}
 }
 
-
+// 'model'
 protected class ConcreteParserRule_0_0_0_Keyword_model extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
@@ -93,6 +97,7 @@ protected class ConcreteParserRule_0_0_0_Keyword_model extends KeywordToken  {
 	}
 }
 
+// magicNumber = REAL
 protected class ConcreteParserRule_0_0_1_Assignment_magicNumber extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -118,7 +123,7 @@ protected class ConcreteParserRule_0_0_1_Assignment_magicNumber extends Assignme
 }
 
 
-
+// ':'
 protected class ConcreteParserRule_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1");
@@ -137,6 +142,7 @@ protected class ConcreteParserRule_0_1_Keyword extends KeywordToken  {
 }
 
 
+// ( elements += InheritedParserRule ) *
 protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
@@ -168,9 +174,15 @@ protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken
 
 
 /************ end Rule ConcreteParserRule ****************/
-/************ begin Rule InheritedParserRule ****************/
+
+/************ begin Rule InheritedParserRule ****************
+ *
+ * InheritedParserRule returns mm :: AType : 'element' name = ID ;
+ *
+ **/
 
 
+// 'element' name = ID
 protected class InheritedParserRule_Group extends GroupToken {
 	
 	public InheritedParserRule_Group(InstanceDescription curr, AbstractToken pred) {
@@ -185,7 +197,7 @@ protected class InheritedParserRule_Group extends GroupToken {
 	}
 }
 
-
+// 'element'
 protected class InheritedParserRule_0_Keyword_element extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0");
@@ -203,6 +215,7 @@ protected class InheritedParserRule_0_Keyword_element extends KeywordToken  {
 	}
 }
 
+// name = ID
 protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
@@ -229,4 +242,5 @@ protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 
 
 /************ end Rule InheritedParserRule ****************/
+
 }

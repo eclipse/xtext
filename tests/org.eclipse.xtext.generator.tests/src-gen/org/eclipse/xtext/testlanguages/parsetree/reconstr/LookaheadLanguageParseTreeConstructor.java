@@ -13,31 +13,33 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class LookaheadLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
-		if((s = new Entry_Assignment_contents(inst, null).firstSolution()) != null) return s;
-		if((s = new Alts_Alternatives(inst, null).firstSolution()) != null) return s;
-		if((s = new LookAhead0_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new LookAhead1_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new LookAhead2_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new LookAhead3_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new LookAhead4_Alternatives(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Entry") && (s = new Entry_Assignment_contents(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Alts") && (s = new Alts_Alternatives(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("LookAhead0") && (s = new LookAhead0_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("LookAhead1") && (s = new LookAhead1_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("LookAhead2") && (s = new LookAhead2_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("LookAhead3") && (s = new LookAhead3_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("LookAhead4") && (s = new LookAhead4_Alternatives(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
-/************ begin Rule Entry ****************/
+/************ begin Rule Entry ****************
+ *
+ * Entry : ( contents += Alts ) * ;
+ *
+ **/
 
 
+// ( contents += Alts ) *
 protected class Entry_Assignment_contents extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.0/@alternatives/@terminal");
@@ -68,9 +70,15 @@ protected class Entry_Assignment_contents extends AssignmentToken  {
 }
 
 /************ end Rule Entry ****************/
-/************ begin Rule Alts ****************/
+
+/************ begin Rule Alts ****************
+ *
+ * Alts : LookAhead0 | LookAhead1 | LookAhead3 ;
+ *
+ **/
 
 
+// LookAhead0 | LookAhead1 | LookAhead3
 protected class Alts_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -96,6 +104,7 @@ protected class Alts_Alternatives extends GroupToken {
 	}
 }
 
+// LookAhead0 | LookAhead1
 protected class Alts_0_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -121,6 +130,7 @@ protected class Alts_0_Alternatives extends GroupToken {
 	}
 }
 
+// LookAhead0
 protected class Alts_0_0_RuleCall_LookAhead0 extends RuleCallToken {
 	
 	public Alts_0_0_RuleCall_LookAhead0(InstanceDescription curr, AbstractToken pred) {
@@ -135,6 +145,7 @@ protected class Alts_0_0_RuleCall_LookAhead0 extends RuleCallToken {
 	}
 }
 
+// LookAhead1
 protected class Alts_0_1_RuleCall_LookAhead1 extends RuleCallToken {
 	
 	public Alts_0_1_RuleCall_LookAhead1(InstanceDescription curr, AbstractToken pred) {
@@ -150,6 +161,7 @@ protected class Alts_0_1_RuleCall_LookAhead1 extends RuleCallToken {
 }
 
 
+// LookAhead3
 protected class Alts_1_RuleCall_LookAhead3 extends RuleCallToken {
 	
 	public Alts_1_RuleCall_LookAhead3(InstanceDescription curr, AbstractToken pred) {
@@ -166,9 +178,15 @@ protected class Alts_1_RuleCall_LookAhead3 extends RuleCallToken {
 
 
 /************ end Rule Alts ****************/
-/************ begin Rule LookAhead0 ****************/
+
+/************ begin Rule LookAhead0 ****************
+ *
+ * LookAhead0 : 'bar' x = 'a' ;
+ *
+ **/
 
 
+// 'bar' x = 'a'
 protected class LookAhead0_Group extends GroupToken {
 	
 	public LookAhead0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -183,7 +201,7 @@ protected class LookAhead0_Group extends GroupToken {
 	}
 }
 
-
+// 'bar'
 protected class LookAhead0_0_Keyword_bar extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0");
@@ -201,6 +219,7 @@ protected class LookAhead0_0_Keyword_bar extends KeywordToken  {
 	}
 }
 
+// x = 'a'
 protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal");
@@ -227,9 +246,15 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 
 
 /************ end Rule LookAhead0 ****************/
-/************ begin Rule LookAhead1 ****************/
+
+/************ begin Rule LookAhead1 ****************
+ *
+ * LookAhead1 : 'foo' y = LookAhead2 x = 'b' x = 'd' ;
+ *
+ **/
 
 
+// 'foo' y = LookAhead2 x = 'b' x = 'd'
 protected class LookAhead1_Group extends GroupToken {
 	
 	public LookAhead1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -244,6 +269,7 @@ protected class LookAhead1_Group extends GroupToken {
 	}
 }
 
+// 'foo' y = LookAhead2 x = 'b'
 protected class LookAhead1_0_Group extends GroupToken {
 	
 	public LookAhead1_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -258,6 +284,7 @@ protected class LookAhead1_0_Group extends GroupToken {
 	}
 }
 
+// 'foo' y = LookAhead2
 protected class LookAhead1_0_0_Group extends GroupToken {
 	
 	public LookAhead1_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -272,7 +299,7 @@ protected class LookAhead1_0_0_Group extends GroupToken {
 	}
 }
 
-
+// 'foo'
 protected class LookAhead1_0_0_0_Keyword_foo extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
@@ -290,6 +317,7 @@ protected class LookAhead1_0_0_0_Keyword_foo extends KeywordToken  {
 	}
 }
 
+// y = LookAhead2
 protected class LookAhead1_0_0_1_Assignment_y extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -320,6 +348,7 @@ protected class LookAhead1_0_0_1_Assignment_y extends AssignmentToken  {
 }
 
 
+// x = 'b'
 protected class LookAhead1_0_1_Assignment_x extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -345,6 +374,7 @@ protected class LookAhead1_0_1_Assignment_x extends AssignmentToken  {
 }
 
 
+// x = 'd'
 protected class LookAhead1_1_Assignment_x extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal");
@@ -371,9 +401,15 @@ protected class LookAhead1_1_Assignment_x extends AssignmentToken  {
 
 
 /************ end Rule LookAhead1 ****************/
-/************ begin Rule LookAhead2 ****************/
+
+/************ begin Rule LookAhead2 ****************
+ *
+ * LookAhead2 : ( z = 'foo' | z = 'bar' ) 'c' ;
+ *
+ **/
 
 
+// ( z = 'foo' | z = 'bar' ) 'c'
 protected class LookAhead2_Group extends GroupToken {
 	
 	public LookAhead2_Group(InstanceDescription curr, AbstractToken pred) {
@@ -388,6 +424,7 @@ protected class LookAhead2_Group extends GroupToken {
 	}
 }
 
+// z = 'foo' | z = 'bar'
 protected class LookAhead2_0_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -413,6 +450,7 @@ protected class LookAhead2_0_Alternatives extends GroupToken {
 	}
 }
 
+// z = 'foo'
 protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@groups.0/@terminal");
@@ -437,6 +475,7 @@ protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 	}
 }
 
+// z = 'bar'
 protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@groups.1/@terminal");
@@ -462,7 +501,7 @@ protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 }
 
 
-
+// 'c'
 protected class LookAhead2_1_Keyword_c extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1");
@@ -482,9 +521,15 @@ protected class LookAhead2_1_Keyword_c extends KeywordToken  {
 
 
 /************ end Rule LookAhead2 ****************/
-/************ begin Rule LookAhead3 ****************/
+
+/************ begin Rule LookAhead3 ****************
+ *
+ * LookAhead3 : 'foo' 'bar' x = 'b' z = LookAhead4 ;
+ *
+ **/
 
 
+// 'foo' 'bar' x = 'b' z = LookAhead4
 protected class LookAhead3_Group extends GroupToken {
 	
 	public LookAhead3_Group(InstanceDescription curr, AbstractToken pred) {
@@ -499,6 +544,7 @@ protected class LookAhead3_Group extends GroupToken {
 	}
 }
 
+// 'foo' 'bar' x = 'b'
 protected class LookAhead3_0_Group extends GroupToken {
 	
 	public LookAhead3_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -513,6 +559,7 @@ protected class LookAhead3_0_Group extends GroupToken {
 	}
 }
 
+// 'foo' 'bar'
 protected class LookAhead3_0_0_Group extends GroupToken {
 	
 	public LookAhead3_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -527,7 +574,7 @@ protected class LookAhead3_0_0_Group extends GroupToken {
 	}
 }
 
-
+// 'foo'
 protected class LookAhead3_0_0_0_Keyword_foo extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
@@ -545,7 +592,7 @@ protected class LookAhead3_0_0_0_Keyword_foo extends KeywordToken  {
 	}
 }
 
-
+// 'bar'
 protected class LookAhead3_0_0_1_Keyword_bar extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
@@ -564,6 +611,7 @@ protected class LookAhead3_0_0_1_Keyword_bar extends KeywordToken  {
 }
 
 
+// x = 'b'
 protected class LookAhead3_0_1_Assignment_x extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -589,6 +637,7 @@ protected class LookAhead3_0_1_Assignment_x extends AssignmentToken  {
 }
 
 
+// z = LookAhead4
 protected class LookAhead3_1_Assignment_z extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1/@terminal");
@@ -620,9 +669,15 @@ protected class LookAhead3_1_Assignment_z extends AssignmentToken  {
 
 
 /************ end Rule LookAhead3 ****************/
-/************ begin Rule LookAhead4 ****************/
+
+/************ begin Rule LookAhead4 ****************
+ *
+ * LookAhead4 : x = 'c' | x = 'd' ;
+ *
+ **/
 
 
+// x = 'c' | x = 'd'
 protected class LookAhead4_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -648,6 +703,7 @@ protected class LookAhead4_Alternatives extends GroupToken {
 	}
 }
 
+// x = 'c'
 protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.6/@alternatives/@groups.0/@terminal");
@@ -672,6 +728,7 @@ protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 	}
 }
 
+// x = 'd'
 protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.6/@alternatives/@groups.1/@terminal");
@@ -698,4 +755,5 @@ protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 
 
 /************ end Rule LookAhead4 ****************/
+
 }

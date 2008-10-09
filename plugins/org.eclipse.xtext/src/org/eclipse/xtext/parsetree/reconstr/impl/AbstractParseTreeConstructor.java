@@ -1,23 +1,20 @@
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
-
-import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructorCallback;
-import org.eclipse.xtext.parsetree.reconstr.callbacks.SimpleSerializingCallback;
 import org.eclipse.xtext.service.Inject;
 
 public abstract class AbstractParseTreeConstructor implements
@@ -104,11 +101,12 @@ public abstract class AbstractParseTreeConstructor implements
 		}
 
 		private String dsl(AbstractToken ele) {
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			SimpleSerializingCallback cb = new SimpleSerializingCallback(out,
-					converterService);
-			executeAllCallbacks(cb);
-			return out.toString();
+			// ByteArrayOutputStream out = new ByteArrayOutputStream();
+			// SimpleSerializingCallback cb = new SimpleSerializingCallback(out,
+			// converterService);
+			// executeAllCallbacks(cb);
+			// return out.toString();
+			return "";
 		}
 
 		public void executeAllCallbacks(IParseTreeConstructorCallback callback) {
@@ -123,16 +121,17 @@ public abstract class AbstractParseTreeConstructor implements
 		}
 
 		public Solution firstSolution() {
-			System.out.println("->" + depth(this) + getClass().getSimpleName()
-					+ "\t " + current + " -> " + dsl(this));
+			if (log.isDebugEnabled())
+				log.debug("->" + depth(this) + getClass().getSimpleName()
+						+ "\t " + current + " -> " + dsl(this));
 			Solution t1 = createSolution();
-			System.out
-					.println("< "
-							+ depth(this)
-							+ getClass().getSimpleName()
-							+ " -> "
-							+ ((t1 == null) ? "failed" : "success" + "\t "
-									+ t1.current));
+			if (log.isDebugEnabled())
+				log.debug("< "
+						+ depth(this)
+						+ getClass().getSimpleName()
+						+ " -> "
+						+ ((t1 == null) ? "failed" : "success" + "\t "
+								+ t1.current));
 			if (t1 == null)
 				return required ? null : new Solution(current, predecessor);
 			if (many) {
@@ -235,8 +234,13 @@ public abstract class AbstractParseTreeConstructor implements
 
 	}
 
+	protected Logger log = Logger.getLogger(AbstractParseTreeConstructor.class);
+
 	@Inject
-	protected IValueConverterService converterService;
+	private IParseTreeConstructorCallback serializerStrategy;
+
+	@Inject
+	private IValueConverterService converterService;
 
 	@Inject
 	private IAstFactory factory;
@@ -265,18 +269,33 @@ public abstract class AbstractParseTreeConstructor implements
 				URI.createURI(string), true);
 	}
 
-	protected IValueConverterService getValueConverterService() {
+	public IValueConverterService getValueConverterService() {
 		return converterService;
 	}
 
-	protected abstract void internalDoUpdate(EObject obj, String ruleToCall,
-			IParseTreeConstructorCallback callback);
+	public static final String OPTION_SERIALIZER_STRATEGY = "OPTION_SERIALIZER_STRATEGY";
 
-	public void update(EObject object, IParseTreeConstructorCallback callback) {
-		EObject root = EcoreUtil.getRootContainer(object);
-		ParserRule parserRule = GrammarUtil.getDefaultEntryRule(getGrammar());
-		String ruleToCall = parserRule.getName();
-		internalDoUpdate(root, ruleToCall, callback);
+	private IParseTreeConstructorCallback getSerializerStrategy(
+			Map<?, ?> options) {
+		Object serObj = options.get(OPTION_SERIALIZER_STRATEGY);
+		if (serObj == null)
+			return serializerStrategy;
+		if (serObj instanceof IParseTreeConstructorCallback)
+			return (IParseTreeConstructorCallback) serObj;
+		throw new IllegalStateException("The Object supplied with "
+				+ OPTION_SERIALIZER_STRATEGY + " needs to be of type "
+				+ IParseTreeConstructorCallback.class.getName());
 	}
+
+	public void serialize(OutputStream outputStream, EObject object,
+			Map<?, ?> options) {
+		IParseTreeConstructorCallback ser = getSerializerStrategy(options);
+		ser.beginSerialize(outputStream);
+		internalSerialize(object, ser);
+		ser.endSerialize();
+	}
+
+	protected abstract void internalSerialize(EObject object,
+			IParseTreeConstructorCallback strategy);
 
 }

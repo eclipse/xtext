@@ -11,6 +11,7 @@
 
 «IMPORT xtext»
 «IMPORT xtextgen»
+«IMPORT emf»
 
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
@@ -35,20 +36,17 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
 «FOREACH grammar().allParserRules() AS pr-»
-		if((s = new «pr.alternatives.elementMethodName()»(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("«pr.getReturnTypeName()»") && (s = new «pr.alternatives.elementMethodName()»(inst, null).firstSolution()) != null) return s;
 «ENDFOREACH-»		
 		return null;
 	}
@@ -59,11 +57,16 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 «ENDDEFINE»
 
 «DEFINE rule FOR ParserRule-»
-/************ begin Rule «name» ****************/
+/************ begin Rule «name» ****************
+ *
+ * «grammarFragmentToStr()»
+ *
+ **/
 
 «EXPAND element FOR alternatives-»
 
 /************ end Rule «name» ****************/
+
 «ENDDEFINE»
 
 «DEFINE constructor FOR AbstractElement-»
@@ -83,6 +86,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 «REM» ************ Groups ************* «ENDREM»
 
 «DEFINE element FOR Group»
+// «grammarFragmentToStr()»
 protected class «elementMethodName()» extends GroupToken {
 	
 «EXPAND constructor»
@@ -101,6 +105,7 @@ protected class «elementMethodName()» extends GroupToken {
 «REM» ************ Alternatives ************* «ENDREM»
 
 «DEFINE element FOR Alternatives»
+// «grammarFragmentToStr()»
 protected class «elementMethodName()» extends GroupToken {
 	
 	private boolean first = true;
@@ -130,6 +135,7 @@ protected class «elementMethodName()» extends GroupToken {
 «REM» ************ RuleCall ************* «ENDREM»
 
 «DEFINE element FOR RuleCall»
+// «grammarFragmentToStr()»
 protected class «elementMethodName()» extends RuleCallToken {
 	
 «EXPAND constructor»
@@ -203,6 +209,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 «ENDDEFINE»
 
 «DEFINE element FOR Assignment»
+// «grammarFragmentToStr()»
 protected class «elementMethodName()» extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("«terminal.objectURI()»");
@@ -230,6 +237,7 @@ protected class «elementMethodName()» extends AssignmentToken  {
 «REM» ************ Action ************* «ENDREM»
 
 «DEFINE element FOR Action»
+// «grammarFragmentToStr()»
 protected class «elementMethodName()» extends AssignmentToken  {
 
 «EXPAND constructor»
@@ -250,7 +258,7 @@ protected class «elementMethodName()» extends AssignmentToken  {
 «REM» ************ Keyword ************* «ENDREM»
 
 «DEFINE element FOR Keyword»
-
+// «grammarFragmentToStr()»
 protected class «elementMethodName()» extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("«objectURI()»");

@@ -13,30 +13,32 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class ReferenceGrammarParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
-		if((s = new Spielplatz_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Person_Alternatives(inst, null).firstSolution()) != null) return s;
-		if((s = new Kind_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Erwachsener_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Spielzeug_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Farbe_Alternatives(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Spielplatz") && (s = new Spielplatz_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Person") && (s = new Person_Alternatives(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Kind") && (s = new Kind_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Erwachsener") && (s = new Erwachsener_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Spielzeug") && (s = new Spielzeug_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Farbe") && (s = new Farbe_Alternatives(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
-/************ begin Rule Spielplatz ****************/
+/************ begin Rule Spielplatz ****************
+ *
+ * Spielplatz : ( 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug ) * '}' ) ? ;
+ *
+ **/
 
 
+// ( 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug ) * '}' ) ?
 protected class Spielplatz_Group extends GroupToken {
 	
 	public Spielplatz_Group(InstanceDescription curr, AbstractToken pred) {
@@ -51,6 +53,7 @@ protected class Spielplatz_Group extends GroupToken {
 	}
 }
 
+// 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug ) *
 protected class Spielplatz_0_Group extends GroupToken {
 	
 	public Spielplatz_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -65,6 +68,7 @@ protected class Spielplatz_0_Group extends GroupToken {
 	}
 }
 
+// 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{'
 protected class Spielplatz_0_0_Group extends GroupToken {
 	
 	public Spielplatz_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -79,6 +83,7 @@ protected class Spielplatz_0_0_Group extends GroupToken {
 	}
 }
 
+// 'spielplatz' groesse = INT ( beschreibung = STRING ) ?
 protected class Spielplatz_0_0_0_Group extends GroupToken {
 	
 	public Spielplatz_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -93,6 +98,7 @@ protected class Spielplatz_0_0_0_Group extends GroupToken {
 	}
 }
 
+// 'spielplatz' groesse = INT
 protected class Spielplatz_0_0_0_0_Group extends GroupToken {
 	
 	public Spielplatz_0_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -107,7 +113,7 @@ protected class Spielplatz_0_0_0_0_Group extends GroupToken {
 	}
 }
 
-
+// 'spielplatz'
 protected class Spielplatz_0_0_0_0_0_Keyword_spielplatz extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
@@ -125,6 +131,7 @@ protected class Spielplatz_0_0_0_0_0_Keyword_spielplatz extends KeywordToken  {
 	}
 }
 
+// groesse = INT
 protected class Spielplatz_0_0_0_0_1_Assignment_groesse extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -150,6 +157,7 @@ protected class Spielplatz_0_0_0_0_1_Assignment_groesse extends AssignmentToken 
 }
 
 
+// ( beschreibung = STRING ) ?
 protected class Spielplatz_0_0_0_1_Assignment_beschreibung extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -175,7 +183,7 @@ protected class Spielplatz_0_0_0_1_Assignment_beschreibung extends AssignmentTok
 }
 
 
-
+// '{'
 protected class Spielplatz_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
@@ -194,6 +202,7 @@ protected class Spielplatz_0_0_1_Keyword extends KeywordToken  {
 }
 
 
+// ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug ) *
 protected class Spielplatz_0_1_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -219,6 +228,7 @@ protected class Spielplatz_0_1_Alternatives extends GroupToken {
 	}
 }
 
+// kinder += Kind | erzieher += Erwachsener
 protected class Spielplatz_0_1_0_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -244,6 +254,7 @@ protected class Spielplatz_0_1_0_Alternatives extends GroupToken {
 	}
 }
 
+// kinder += Kind
 protected class Spielplatz_0_1_0_0_Assignment_kinder extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@terminal");
@@ -273,6 +284,7 @@ protected class Spielplatz_0_1_0_0_Assignment_kinder extends AssignmentToken  {
 	}
 }
 
+// erzieher += Erwachsener
 protected class Spielplatz_0_1_0_1_Assignment_erzieher extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal");
@@ -303,6 +315,7 @@ protected class Spielplatz_0_1_0_1_Assignment_erzieher extends AssignmentToken  
 }
 
 
+// spielzeuge += Spielzeug
 protected class Spielplatz_0_1_1_Assignment_spielzeuge extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal");
@@ -334,7 +347,7 @@ protected class Spielplatz_0_1_1_Assignment_spielzeuge extends AssignmentToken  
 
 
 
-
+// '}'
 protected class Spielplatz_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.1");
@@ -354,9 +367,15 @@ protected class Spielplatz_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule Spielplatz ****************/
-/************ begin Rule Person ****************/
+
+/************ begin Rule Person ****************
+ *
+ * Person : Kind | Erwachsener ;
+ *
+ **/
 
 
+// Kind | Erwachsener
 protected class Person_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -382,6 +401,7 @@ protected class Person_Alternatives extends GroupToken {
 	}
 }
 
+// Kind
 protected class Person_0_RuleCall_Kind extends RuleCallToken {
 	
 	public Person_0_RuleCall_Kind(InstanceDescription curr, AbstractToken pred) {
@@ -396,6 +416,7 @@ protected class Person_0_RuleCall_Kind extends RuleCallToken {
 	}
 }
 
+// Erwachsener
 protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 	
 	public Person_1_RuleCall_Erwachsener(InstanceDescription curr, AbstractToken pred) {
@@ -412,9 +433,15 @@ protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 
 
 /************ end Rule Person ****************/
-/************ begin Rule Kind ****************/
+
+/************ begin Rule Kind ****************
+ *
+ * Kind : 'kind' '(' name = ID age = INT ')' ;
+ *
+ **/
 
 
+// 'kind' '(' name = ID age = INT ')'
 protected class Kind_Group extends GroupToken {
 	
 	public Kind_Group(InstanceDescription curr, AbstractToken pred) {
@@ -429,6 +456,7 @@ protected class Kind_Group extends GroupToken {
 	}
 }
 
+// 'kind' '(' name = ID age = INT
 protected class Kind_0_Group extends GroupToken {
 	
 	public Kind_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -443,6 +471,7 @@ protected class Kind_0_Group extends GroupToken {
 	}
 }
 
+// 'kind' '(' name = ID
 protected class Kind_0_0_Group extends GroupToken {
 	
 	public Kind_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -457,6 +486,7 @@ protected class Kind_0_0_Group extends GroupToken {
 	}
 }
 
+// 'kind' '('
 protected class Kind_0_0_0_Group extends GroupToken {
 	
 	public Kind_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -471,7 +501,7 @@ protected class Kind_0_0_0_Group extends GroupToken {
 	}
 }
 
-
+// 'kind'
 protected class Kind_0_0_0_0_Keyword_kind extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
@@ -489,7 +519,7 @@ protected class Kind_0_0_0_0_Keyword_kind extends KeywordToken  {
 	}
 }
 
-
+// '('
 protected class Kind_0_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
@@ -508,6 +538,7 @@ protected class Kind_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
+// name = ID
 protected class Kind_0_0_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -533,6 +564,7 @@ protected class Kind_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
+// age = INT
 protected class Kind_0_1_Assignment_age extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -558,7 +590,7 @@ protected class Kind_0_1_Assignment_age extends AssignmentToken  {
 }
 
 
-
+// ')'
 protected class Kind_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.1");
@@ -578,9 +610,15 @@ protected class Kind_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule Kind ****************/
-/************ begin Rule Erwachsener ****************/
+
+/************ begin Rule Erwachsener ****************
+ *
+ * Erwachsener : 'erwachsener' '(' name = ID age = INT ')' ;
+ *
+ **/
 
 
+// 'erwachsener' '(' name = ID age = INT ')'
 protected class Erwachsener_Group extends GroupToken {
 	
 	public Erwachsener_Group(InstanceDescription curr, AbstractToken pred) {
@@ -595,6 +633,7 @@ protected class Erwachsener_Group extends GroupToken {
 	}
 }
 
+// 'erwachsener' '(' name = ID age = INT
 protected class Erwachsener_0_Group extends GroupToken {
 	
 	public Erwachsener_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -609,6 +648,7 @@ protected class Erwachsener_0_Group extends GroupToken {
 	}
 }
 
+// 'erwachsener' '(' name = ID
 protected class Erwachsener_0_0_Group extends GroupToken {
 	
 	public Erwachsener_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -623,6 +663,7 @@ protected class Erwachsener_0_0_Group extends GroupToken {
 	}
 }
 
+// 'erwachsener' '('
 protected class Erwachsener_0_0_0_Group extends GroupToken {
 	
 	public Erwachsener_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -637,7 +678,7 @@ protected class Erwachsener_0_0_0_Group extends GroupToken {
 	}
 }
 
-
+// 'erwachsener'
 protected class Erwachsener_0_0_0_0_Keyword_erwachsener extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
@@ -655,7 +696,7 @@ protected class Erwachsener_0_0_0_0_Keyword_erwachsener extends KeywordToken  {
 	}
 }
 
-
+// '('
 protected class Erwachsener_0_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
@@ -674,6 +715,7 @@ protected class Erwachsener_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
+// name = ID
 protected class Erwachsener_0_0_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -699,6 +741,7 @@ protected class Erwachsener_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
+// age = INT
 protected class Erwachsener_0_1_Assignment_age extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -724,7 +767,7 @@ protected class Erwachsener_0_1_Assignment_age extends AssignmentToken  {
 }
 
 
-
+// ')'
 protected class Erwachsener_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.1");
@@ -744,9 +787,15 @@ protected class Erwachsener_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule Erwachsener ****************/
-/************ begin Rule Spielzeug ****************/
+
+/************ begin Rule Spielzeug ****************
+ *
+ * Spielzeug : 'spielzeug' '(' name = ID farbe = Farbe ')' ;
+ *
+ **/
 
 
+// 'spielzeug' '(' name = ID farbe = Farbe ')'
 protected class Spielzeug_Group extends GroupToken {
 	
 	public Spielzeug_Group(InstanceDescription curr, AbstractToken pred) {
@@ -761,6 +810,7 @@ protected class Spielzeug_Group extends GroupToken {
 	}
 }
 
+// 'spielzeug' '(' name = ID farbe = Farbe
 protected class Spielzeug_0_Group extends GroupToken {
 	
 	public Spielzeug_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -775,6 +825,7 @@ protected class Spielzeug_0_Group extends GroupToken {
 	}
 }
 
+// 'spielzeug' '(' name = ID
 protected class Spielzeug_0_0_Group extends GroupToken {
 	
 	public Spielzeug_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -789,6 +840,7 @@ protected class Spielzeug_0_0_Group extends GroupToken {
 	}
 }
 
+// 'spielzeug' '('
 protected class Spielzeug_0_0_0_Group extends GroupToken {
 	
 	public Spielzeug_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -803,7 +855,7 @@ protected class Spielzeug_0_0_0_Group extends GroupToken {
 	}
 }
 
-
+// 'spielzeug'
 protected class Spielzeug_0_0_0_0_Keyword_spielzeug extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
@@ -821,7 +873,7 @@ protected class Spielzeug_0_0_0_0_Keyword_spielzeug extends KeywordToken  {
 	}
 }
 
-
+// '('
 protected class Spielzeug_0_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
@@ -840,6 +892,7 @@ protected class Spielzeug_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
+// name = ID
 protected class Spielzeug_0_0_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -865,6 +918,7 @@ protected class Spielzeug_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
+// farbe = Farbe
 protected class Spielzeug_0_1_Assignment_farbe extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -895,7 +949,7 @@ protected class Spielzeug_0_1_Assignment_farbe extends AssignmentToken  {
 }
 
 
-
+// ')'
 protected class Spielzeug_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.1");
@@ -915,9 +969,15 @@ protected class Spielzeug_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule Spielzeug ****************/
-/************ begin Rule Farbe ****************/
+
+/************ begin Rule Farbe ****************
+ *
+ * Farbe : 'ROT' | 'BLAU' | 'GELB' | 'GRÜN' ;
+ *
+ **/
 
 
+// 'ROT' | 'BLAU' | 'GELB' | 'GRÜN'
 protected class Farbe_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -943,6 +1003,7 @@ protected class Farbe_Alternatives extends GroupToken {
 	}
 }
 
+// 'ROT' | 'BLAU' | 'GELB'
 protected class Farbe_0_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -968,6 +1029,7 @@ protected class Farbe_0_Alternatives extends GroupToken {
 	}
 }
 
+// 'ROT' | 'BLAU'
 protected class Farbe_0_0_Alternatives extends GroupToken {
 	
 	private boolean first = true;
@@ -993,7 +1055,7 @@ protected class Farbe_0_0_Alternatives extends GroupToken {
 	}
 }
 
-
+// 'ROT'
 protected class Farbe_0_0_0_Keyword_ROT extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.5/@alternatives/@groups.0/@groups.0/@groups.0");
@@ -1011,7 +1073,7 @@ protected class Farbe_0_0_0_Keyword_ROT extends KeywordToken  {
 	}
 }
 
-
+// 'BLAU'
 protected class Farbe_0_0_1_Keyword_BLAU extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.5/@alternatives/@groups.0/@groups.0/@groups.1");
@@ -1030,7 +1092,7 @@ protected class Farbe_0_0_1_Keyword_BLAU extends KeywordToken  {
 }
 
 
-
+// 'GELB'
 protected class Farbe_0_1_Keyword_GELB extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.5/@alternatives/@groups.0/@groups.1");
@@ -1049,7 +1111,7 @@ protected class Farbe_0_1_Keyword_GELB extends KeywordToken  {
 }
 
 
-
+// 'GRÜN'
 protected class Farbe_1_Keyword_GRN extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.5/@alternatives/@groups.1");
@@ -1069,4 +1131,5 @@ protected class Farbe_1_Keyword_GRN extends KeywordToken  {
 
 
 /************ end Rule Farbe ****************/
+
 }

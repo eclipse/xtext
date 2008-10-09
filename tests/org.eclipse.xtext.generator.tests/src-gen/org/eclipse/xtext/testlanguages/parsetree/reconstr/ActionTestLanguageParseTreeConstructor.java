@@ -13,27 +13,29 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class ActionTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
-		if((s = new Model_Assignment_children(inst, null).firstSolution()) != null) return s;
-		if((s = new Element_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Item_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Model") && (s = new Model_Assignment_children(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Type") && (s = new Element_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Type") && (s = new Item_Group(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
-/************ begin Rule Model ****************/
+/************ begin Rule Model ****************
+ *
+ * Model : ( children += Element ) * ;
+ *
+ **/
 
 
+// ( children += Element ) *
 protected class Model_Assignment_children extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.0/@alternatives/@terminal");
@@ -64,9 +66,15 @@ protected class Model_Assignment_children extends AssignmentToken  {
 }
 
 /************ end Rule Model ****************/
-/************ begin Rule Element ****************/
+
+/************ begin Rule Element ****************
+ *
+ * Element returns Type : Item ( { current = Item . items += current } items += Item ) ;
+ *
+ **/
 
 
+// Item ( { current = Item . items += current } items += Item )
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(InstanceDescription curr, AbstractToken pred) {
@@ -81,6 +89,7 @@ protected class Element_Group extends GroupToken {
 	}
 }
 
+// Item
 protected class Element_0_RuleCall_Item extends RuleCallToken {
 	
 	public Element_0_RuleCall_Item(InstanceDescription curr, AbstractToken pred) {
@@ -95,6 +104,7 @@ protected class Element_0_RuleCall_Item extends RuleCallToken {
 	}
 }
 
+// { current = Item . items += current } items += Item
 protected class Element_1_Group extends GroupToken {
 	
 	public Element_1_Group(InstanceDescription curr, AbstractToken pred) {
@@ -109,6 +119,7 @@ protected class Element_1_Group extends GroupToken {
 	}
 }
 
+// { current = Item . items += current }
 protected class Element_1_0_Action_Item_items extends AssignmentToken  {
 
 	public Element_1_0_Action_Item_items(InstanceDescription curr, AbstractToken pred) {
@@ -126,6 +137,7 @@ protected class Element_1_0_Action_Item_items extends AssignmentToken  {
 	}
 }
 
+// items += Item
 protected class Element_1_1_Assignment_items extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
@@ -158,9 +170,15 @@ protected class Element_1_1_Assignment_items extends AssignmentToken  {
 
 
 /************ end Rule Element ****************/
-/************ begin Rule Item ****************/
+
+/************ begin Rule Item ****************
+ *
+ * Item returns Type : { current = Thing . content = current } name = ID ;
+ *
+ **/
 
 
+// { current = Thing . content = current } name = ID
 protected class Item_Group extends GroupToken {
 	
 	public Item_Group(InstanceDescription curr, AbstractToken pred) {
@@ -175,6 +193,7 @@ protected class Item_Group extends GroupToken {
 	}
 }
 
+// { current = Thing . content = current }
 protected class Item_0_Action_Thing_content extends AssignmentToken  {
 
 	public Item_0_Action_Thing_content(InstanceDescription curr, AbstractToken pred) {
@@ -192,6 +211,7 @@ protected class Item_0_Action_Thing_content extends AssignmentToken  {
 	}
 }
 
+// name = ID
 protected class Item_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal");
@@ -218,4 +238,5 @@ protected class Item_1_Assignment_name extends AssignmentToken  {
 
 
 /************ end Rule Item ****************/
+
 }

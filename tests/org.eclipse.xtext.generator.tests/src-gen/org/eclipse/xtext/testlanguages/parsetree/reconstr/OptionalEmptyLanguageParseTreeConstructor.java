@@ -13,26 +13,28 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class OptionalEmptyLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
-		if((s = new Model_Assignment_child(inst, null).firstSolution()) != null) return s;
-		if((s = new Greeting_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Model") && (s = new Model_Assignment_child(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Greeting") && (s = new Greeting_Group(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
-/************ begin Rule Model ****************/
+/************ begin Rule Model ****************
+ *
+ * Model : ( child = Greeting ) ? ;
+ *
+ **/
 
 
+// ( child = Greeting ) ?
 protected class Model_Assignment_child extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.0/@alternatives/@terminal");
@@ -63,9 +65,15 @@ protected class Model_Assignment_child extends AssignmentToken  {
 }
 
 /************ end Rule Model ****************/
-/************ begin Rule Greeting ****************/
+
+/************ begin Rule Greeting ****************
+ *
+ * Greeting : 'hallo' name = ID ;
+ *
+ **/
 
 
+// 'hallo' name = ID
 protected class Greeting_Group extends GroupToken {
 	
 	public Greeting_Group(InstanceDescription curr, AbstractToken pred) {
@@ -80,7 +88,7 @@ protected class Greeting_Group extends GroupToken {
 	}
 }
 
-
+// 'hallo'
 protected class Greeting_0_Keyword_hallo extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
@@ -98,6 +106,7 @@ protected class Greeting_0_Keyword_hallo extends KeywordToken  {
 	}
 }
 
+// name = ID
 protected class Greeting_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal");
@@ -124,4 +133,5 @@ protected class Greeting_1_Assignment_name extends AssignmentToken  {
 
 
 /************ end Rule Greeting ****************/
+
 }

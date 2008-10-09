@@ -69,7 +69,10 @@
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
-          <abstractTokens xsi:type="xtext:RuleCall" name="TrickyA1"/>
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="TA"/>
+            <abstractTokens xsi:type="xtext:RuleCall" name="TrickyA1"/>
+          </abstractTokens>
           <abstractTokens xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="name">
             <terminal xsi:type="xtext:RuleCall" name="ID"/>
           </abstractTokens>
@@ -102,12 +105,15 @@
   </rules>
   <rules xsi:type="xtext:ParserRule" name="TrickyB">
     <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group" cardinality="?">
-        <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
-          <terminal xsi:type="xtext:RuleCall" name="ID"/>
-        </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="type">
-          <terminal xsi:type="xtext:RuleCall" name="INT"/>
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="TB"/>
+        <abstractTokens xsi:type="xtext:Group" cardinality="?">
+          <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+            <terminal xsi:type="xtext:RuleCall" name="ID"/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="type">
+            <terminal xsi:type="xtext:RuleCall" name="INT"/>
+          </abstractTokens>
         </abstractTokens>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="type">
@@ -119,8 +125,11 @@
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
-          <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
-            <terminal xsi:type="xtext:RuleCall" name="ID"/>
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="TC"/>
+            <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+              <terminal xsi:type="xtext:RuleCall" name="ID"/>
+            </abstractTokens>
           </abstractTokens>
           <abstractTokens xsi:type="xtext:Group" cardinality="?">
             <abstractTokens xsi:type="xtext:Action" feature="x" operator="=">
@@ -147,17 +156,20 @@
   <rules xsi:type="xtext:ParserRule" name="TrickyD">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Group" cardinality="?">
-          <abstractTokens xsi:type="xtext:Group">
-            <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="name">
-              <terminal xsi:type="xtext:RuleCall" name="INT"/>
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="TD"/>
+          <abstractTokens xsi:type="xtext:Group" cardinality="?">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="name">
+                <terminal xsi:type="xtext:RuleCall" name="INT"/>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="foo">
+                <terminal xsi:type="xtext:RuleCall" name="STRING"/>
+              </abstractTokens>
             </abstractTokens>
-            <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="foo">
-              <terminal xsi:type="xtext:RuleCall" name="STRING"/>
+            <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="type">
+              <terminal xsi:type="xtext:RuleCall" name="ID"/>
             </abstractTokens>
-          </abstractTokens>
-          <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="type">
-            <terminal xsi:type="xtext:RuleCall" name="ID"/>
           </abstractTokens>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Group" cardinality="?">
@@ -177,17 +189,20 @@
   <rules xsi:type="xtext:ParserRule" name="TrickyE">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
-        <abstractTokens xsi:type="xtext:Group" cardinality="*">
-          <abstractTokens xsi:type="xtext:Group">
-            <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="name">
-              <terminal xsi:type="xtext:RuleCall" name="INT"/>
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="TE"/>
+          <abstractTokens xsi:type="xtext:Group" cardinality="*">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="name">
+                <terminal xsi:type="xtext:RuleCall" name="INT"/>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="foo">
+                <terminal xsi:type="xtext:RuleCall" name="STRING"/>
+              </abstractTokens>
             </abstractTokens>
-            <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="foo">
-              <terminal xsi:type="xtext:RuleCall" name="STRING"/>
+            <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="type">
+              <terminal xsi:type="xtext:RuleCall" name="ID"/>
             </abstractTokens>
-          </abstractTokens>
-          <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="type">
-            <terminal xsi:type="xtext:RuleCall" name="ID"/>
           </abstractTokens>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value="x"/>
@@ -204,12 +219,15 @@
   </rules>
   <rules xsi:type="xtext:ParserRule" name="TrickyF">
     <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Group" cardinality="*">
-        <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="name">
-          <terminal xsi:type="xtext:RuleCall" name="ID"/>
-        </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="type">
-          <terminal xsi:type="xtext:RuleCall" name="INT"/>
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="TF"/>
+        <abstractTokens xsi:type="xtext:Group" cardinality="*">
+          <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="name">
+            <terminal xsi:type="xtext:RuleCall" name="ID"/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="type">
+            <terminal xsi:type="xtext:RuleCall" name="INT"/>
+          </abstractTokens>
         </abstractTokens>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Alternatives">

@@ -9,10 +9,10 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfFormater;
@@ -49,9 +49,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 
 		IParseTreeConstructor con = getParseTreeConstructor();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		WhitespacePreservingCallback callback = new WhitespacePreservingCallback(out,
-				getValueConverterService());
-		con.update(result, callback);
+		con.serialize(out, result, Collections.emptyMap());
 		return out.toString();
 	}
 

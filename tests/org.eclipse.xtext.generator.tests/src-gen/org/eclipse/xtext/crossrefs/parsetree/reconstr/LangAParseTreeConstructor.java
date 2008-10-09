@@ -13,27 +13,29 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class LangAParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalDoUpdate(EObject obj, String ruleToCall, IParseTreeConstructorCallback callback) {
+	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
 		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "Couldn't find rule '"+ruleToCall+"'");
-		callback.beginSerialize();
-		t.getPredecessor().executeAllCallbacks(callback);
-		callback.endSerialize();
-		System.out.println("success!");
+		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
+		t.getPredecessor().executeAllCallbacks(strategy);
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
 		InstanceDescription inst = getDescr(obj);
 		Solution s;
-		if((s = new Main_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Import_Group(inst, null).firstSolution()) != null) return s;
-		if((s = new Type_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Main") && (s = new Main_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Import") && (s = new Import_Group(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Type") && (s = new Type_Group(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
-/************ begin Rule Main ****************/
+/************ begin Rule Main ****************
+ *
+ * Main : ( imports += Import ) * ( types += Type ) * ;
+ *
+ **/
 
 
+// ( imports += Import ) * ( types += Type ) *
 protected class Main_Group extends GroupToken {
 	
 	public Main_Group(InstanceDescription curr, AbstractToken pred) {
@@ -48,6 +50,7 @@ protected class Main_Group extends GroupToken {
 	}
 }
 
+// ( imports += Import ) *
 protected class Main_0_Assignment_imports extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal");
@@ -77,6 +80,7 @@ protected class Main_0_Assignment_imports extends AssignmentToken  {
 	}
 }
 
+// ( types += Type ) *
 protected class Main_1_Assignment_types extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
@@ -108,9 +112,15 @@ protected class Main_1_Assignment_types extends AssignmentToken  {
 
 
 /************ end Rule Main ****************/
-/************ begin Rule Import ****************/
+
+/************ begin Rule Import ****************
+ *
+ * Import : 'import' uri = STRING ;
+ *
+ **/
 
 
+// 'import' uri = STRING
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(InstanceDescription curr, AbstractToken pred) {
@@ -125,7 +135,7 @@ protected class Import_Group extends GroupToken {
 	}
 }
 
-
+// 'import'
 protected class Import_0_Keyword_import extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.1/@alternatives/@abstractTokens.0");
@@ -143,6 +153,7 @@ protected class Import_0_Keyword_import extends KeywordToken  {
 	}
 }
 
+// uri = STRING
 protected class Import_1_Assignment_uri extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal");
@@ -169,9 +180,15 @@ protected class Import_1_Assignment_uri extends AssignmentToken  {
 
 
 /************ end Rule Import ****************/
-/************ begin Rule Type ****************/
+
+/************ begin Rule Type ****************
+ *
+ * Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
+ *
+ **/
 
 
+// 'type' name = ID 'extends' ^extends = [ Type ]
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(InstanceDescription curr, AbstractToken pred) {
@@ -186,6 +203,7 @@ protected class Type_Group extends GroupToken {
 	}
 }
 
+// 'type' name = ID 'extends'
 protected class Type_0_Group extends GroupToken {
 	
 	public Type_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -200,6 +218,7 @@ protected class Type_0_Group extends GroupToken {
 	}
 }
 
+// 'type' name = ID
 protected class Type_0_0_Group extends GroupToken {
 	
 	public Type_0_0_Group(InstanceDescription curr, AbstractToken pred) {
@@ -214,7 +233,7 @@ protected class Type_0_0_Group extends GroupToken {
 	}
 }
 
-
+// 'type'
 protected class Type_0_0_0_Keyword_type extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
@@ -232,6 +251,7 @@ protected class Type_0_0_0_Keyword_type extends KeywordToken  {
 	}
 }
 
+// name = ID
 protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
@@ -257,7 +277,7 @@ protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-
+// 'extends'
 protected class Type_0_1_Keyword_extends extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1");
@@ -276,6 +296,7 @@ protected class Type_0_1_Keyword_extends extends KeywordToken  {
 }
 
 
+// ^extends = [ Type ]
 protected class Type_1_Assignment_extends extends AssignmentToken  {
 
 	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal");
@@ -303,4 +324,5 @@ protected class Type_1_Assignment_extends extends AssignmentToken  {
 
 
 /************ end Rule Type ****************/
+
 }

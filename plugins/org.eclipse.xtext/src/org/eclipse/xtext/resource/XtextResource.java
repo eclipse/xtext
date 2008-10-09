@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.BrokenLink;
 import org.eclipse.xtext.crossref.IFragmentProvider;
 import org.eclipse.xtext.crossref.ILinker;
@@ -31,7 +30,6 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback;
 import org.eclipse.xtext.service.Inject;
 
 /**
@@ -55,9 +53,6 @@ public class XtextResource extends ResourceImpl {
 	@Inject
 	private IParseTreeConstructor parseTreeConstructor;
 	
-	@Inject
-	private IValueConverterService valueConverterService;
-
 	private IParseResult parseResult;
 
 	public XtextResource(URI uri) {
@@ -136,25 +131,11 @@ public class XtextResource extends ResourceImpl {
 		}
 		setIntrinsicIDToEObjectMap(map);
 	}
-
+	
 	@Override
 	public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
-		if (contents.size() > 1) {
-			throw new IllegalStateException("Xtext resource cannot contain multiple root elements");
-		}
-		if (!contents.isEmpty()) {
-			EObject rootElement = contents.get(0);
-			WhitespacePreservingCallback cb = new WhitespacePreservingCallback(
-					outputStream, valueConverterService);
-			parseTreeConstructor.update(rootElement, cb);
-			// outputStream.write(cb.toString().getBytes());
-		}
+		if (contents.size() != 1)
+			throw new IllegalStateException("The Xtext resource must contain exactly one root element");
+		parseTreeConstructor.serialize(outputStream, contents.get(0), options);
 	}
-	
-//	public String serialize(EObject o) {
-//		WhitespacePreservingCallback cb = new WhitespacePreservingCallback(valueConverterService);
-//		parseTreeConstructor.update(o, cb);
-//		return o.toString();
-//	}
-
 }
