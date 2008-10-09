@@ -34,5 +34,4 @@ Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.xtext.service;visibility:=reexport,
  org.eclipse.xtext.util,
  org.junit;resolution:=optional,
- org.eclipse.xtend.util.stdlib,
  org.antlr.runtime;bundle-version="3.0.0";visibility:=reexport

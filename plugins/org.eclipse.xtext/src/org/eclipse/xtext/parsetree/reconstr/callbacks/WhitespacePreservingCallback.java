@@ -6,7 +6,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
@@ -19,10 +18,6 @@ public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 
 	private int lastLeaf = -1;
 
-	public WhitespacePreservingCallback(OutputStream output,
-			IValueConverterService converterService) {
-		super(output, converterService);
-	}
 
 	protected void before(IInstanceDescription curr, AbstractElement ele) {
 		int i = lastLeaf, last = findLeafNodeFor(curr, ele);
@@ -36,7 +31,8 @@ public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 			}
 	}
 
-	public void beginSerialize() {
+	public void beginSerialize(OutputStream output) {
+		super.beginSerialize(output);
 		lastLeaf = -1;
 		allLeafs = null;
 	}
