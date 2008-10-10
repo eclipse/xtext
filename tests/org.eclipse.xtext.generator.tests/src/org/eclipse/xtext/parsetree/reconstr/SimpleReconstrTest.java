@@ -11,6 +11,7 @@ package org.eclipse.xtext.parsetree.reconstr;
 import java.io.ByteArrayOutputStream;
 import java.util.Collections;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
@@ -18,6 +19,8 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfFormater;
 
 public class SimpleReconstrTest extends AbstractGeneratorTest {
+	
+	private static final Logger logger = Logger.getLogger(SimpleReconstrTest.class);
 
 	public void testSimple1() throws Exception {
 		String model = "a b";
@@ -41,10 +44,10 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
-		System.out.println(EmfFormater.objToStr(result, ""));
-		System.out.println(EmfFormater.objToStr(NodeUtil.getRootNode(result),
+		logger.debug(EmfFormater.objToStr(result, ""));
+		logger.debug(EmfFormater.objToStr(NodeUtil.getRootNode(result),
 				""));
-		System.out.println(EmfFormater.objToStr(NodeUtil.getRootNode(result)
+		logger.debug(EmfFormater.objToStr(NodeUtil.getRootNode(result)
 				.getLeafNodes(), ""));
 
 		IParseTreeConstructor con = getParseTreeConstructor();

@@ -11,6 +11,7 @@ package org.eclipse.xtext.parsetree.reconstr;
 import java.io.ByteArrayOutputStream;
 import java.util.Collections;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -22,6 +23,8 @@ import org.eclipse.xtext.util.EmfFormater;
 
 public class ComplexReconstrTest extends AbstractGeneratorTest {
 
+	private static final Logger logger = Logger.getLogger(ComplexReconstrTest.class);
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -37,7 +40,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 			if (x instanceof ParserRule) {
 				ParserRule pr = (ParserRule) x;
 				if (pr.getName().toLowerCase().contains("tricky")) {
-					System.out.println(EmfFormater.objToStr(pr, ""));
+					logger.debug(EmfFormater.objToStr(pr, ""));
 				}
 			}
 	}
@@ -54,7 +57,7 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
-		System.out.println(EmfFormater.objToStr(result, ""));
+		logger.debug(EmfFormater.objToStr(result, ""));
 		IParseTreeConstructor con = getParseTreeConstructor();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		con.serialize(out, result, Collections.emptyMap());

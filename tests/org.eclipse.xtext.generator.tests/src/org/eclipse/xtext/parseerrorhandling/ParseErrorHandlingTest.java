@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parseerrorhandling;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.XtextGrammarTestStandaloneSetup;
@@ -19,6 +20,8 @@ import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class ParseErrorHandlingTest extends AbstractGeneratorTest {
+	
+	private static final Logger logger = Logger.getLogger(ParseErrorHandlingTest.class);
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -59,7 +62,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	
 	public void testParseError4() throws Exception {
 		Object object = getModel("language a import 'holla' foo returns y::Z : name=ID # 'foo'; bar : 'stuff'");
-		//System.out.println(errors);
+		//logger.debug(errors);
 		assertWithXtend("'ID'", "rules.first().eAllContents.typeSelect(XtextTest::RuleCall).first().name", object);
 		assertWithXtend("null", "rules.first().eAllContents.typeSelect(XtextTest::Keyword).first().name", object);
 		assertWithXtend("'stuff'", "rules.get(1).eAllContents.typeSelect(XtextTest::Keyword).first().value", object);
@@ -92,7 +95,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		EObject object = getModel(model);
 		CompositeNode node = NodeUtil.getRootNode(object);
 		assertEquals(1,node.allSyntaxErrors().size());
-		System.out.println(node.allSyntaxErrors().get(0).getMessage());
+		logger.debug(node.allSyntaxErrors().get(0).getMessage());
 	}
 
 }
