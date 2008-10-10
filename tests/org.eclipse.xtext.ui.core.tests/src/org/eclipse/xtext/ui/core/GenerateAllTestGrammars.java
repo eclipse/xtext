@@ -29,7 +29,7 @@ public class GenerateAllTestGrammars {
 	public final static Class<?>[] testclasses = new Class[] { TestLanguage.class };
 
 	public static void main(String[] args) throws Exception {
-		System.out.println(Thread.currentThread().getContextClassLoader());
+		log.info(Thread.currentThread().getContextClassLoader());
 		XtextStandaloneSetup.doSetup();
 		if (args.length > 0) {
 			path = args[0] + "/" + path;

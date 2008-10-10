@@ -1,6 +1,7 @@
 package org.eclipse.xtext.util;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -17,8 +18,7 @@ public class EmfFormater {
 			StringBuffer buf = new StringBuffer();
 			EObject eobj = (EObject) obj;
 			buf.append(eobj.eClass().getName() + " {\n");
-			for (EStructuralFeature f : eobj.eClass()
-					.getEAllStructuralFeatures()) {
+			for (EStructuralFeature f : eobj.eClass().getEAllStructuralFeatures()) {
 				if (!eobj.eIsSet(f))
 					continue;
 				String fType = "unknown";
@@ -28,13 +28,15 @@ public class EmfFormater {
 					if (r.isContainment()) {
 						val = objToStr(eobj.eGet(f), innerIdent);
 						fType = "cref";
-					} else {
+					}
+					else {
 						val = refToStr(eobj, r);
 						fType = "ref";
 					}
-				} else if (f instanceof EAttribute) {
+				}
+				else if (f instanceof EAttribute) {
 					fType = "attr";
-					// System.out.println(Msg.create("Path:").path(eobj));
+					// logger.debug(Msg.create("Path:").path(eobj));
 					Object at = eobj.eGet(f);
 					if (eobj != at)
 						val = objToStr(at, innerIdent);
@@ -43,8 +45,7 @@ public class EmfFormater {
 				}
 				String vType = f.getEType().getName();
 				String name = f.getName();
-				buf.append(innerIdent + fType + " " + vType + " " + name + " "
-						+ val + "\n");
+				buf.append(innerIdent + fType + " " + vType + " " + name + " " + val + "\n");
 			}
 			buf.append(ident + "}");
 			return buf.toString();
@@ -62,15 +63,27 @@ public class EmfFormater {
 		return "null";
 	}
 
+	@SuppressWarnings("unchecked")
 	private static String refToStr(EObject obj, EReference ref) {
+		StringBuffer buf = new StringBuffer();
 		Object o = obj.eGet(ref);
 		if (o instanceof EObject) {
 			EObject eo = (EObject) o;
 
-			StringBuffer buf = new StringBuffer();
 			if (eo instanceof ENamedElement)
 				buf.append("'" + ((ENamedElement) eo).getName() + "' ");
 			buf.append("ref:" + EcoreUtil.getURI(eo));
+			return buf.toString();
+		}
+		if (o instanceof Collection) {
+			buf.append("[");
+			for (Iterator i = ((Collection) o).iterator(); i.hasNext();) {
+				Object item = (Object) i.next();
+				buf.append(EcoreUtil.getURI((EObject) item));
+				if (i.hasNext())
+					buf.append(", ");
+			}
+			buf.append("]");
 			return buf.toString();
 		}
 		return "?????";

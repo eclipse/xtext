@@ -15,6 +15,7 @@ import static org.easymock.EasyMock.verify;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.util.EmfFormater;
  * @see http://wiki.eclipse.org/Xtext/Documentation#Meta-Model_Inference
  */
 public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
+	private static final Logger logger = Logger.getLogger(Xtext2EcoreTransformerTests.class);
 	private Xtext2EcoreTransformer xtext2EcoreTransformer;
 	private ErrorAcceptor errorAcceptorMock;
 
@@ -697,7 +699,7 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 				"Number : value=INT";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EClass classifier = (EClass) ePackage.getEClassifier("Ex");
-		System.out.println(EmfFormater.objToStr(ePackage, ""));
+		logger.debug(EmfFormater.objToStr(ePackage, ""));
 		assertEquals(0,classifier.getEStructuralFeatures().size());
 	}
 }

@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
  */
 public class GenerateXtextGrammars {
 	private static final String uiPath = "../org.eclipse.xtext.xtext.ui_gen";
+	private static final Logger logger = Logger.getLogger(GenerateXtextGrammars.class);
 
 	public static void main(String[] args) throws Exception {
 		EcorePackage.eINSTANCE.eClass();
@@ -39,7 +41,7 @@ public class GenerateXtextGrammars {
 		String filename = "../org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext";
 		String languageName = "Xtext";
 		String languageNamespace = "org/eclipse/xtext";
-		System.out.println("loading " + filename);
+		logger.info("loading " + filename);
 		XtextStandaloneSetup.doSetup();
 
 		GeneratorFacade.cleanFolder(srcGenPath);
@@ -53,7 +55,7 @@ public class GenerateXtextGrammars {
 		resource.load(null);
 		List<SyntaxError> parseErrors = resource.getParseResult().getParseErrors();
 		for (SyntaxError syntaxError : parseErrors) {
-			System.err.println(syntaxError.getMessage());
+			logger.error(syntaxError.getMessage());
 		}
 		Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
 		GeneratorFacade.generate(grammarModel, srcGenPath, uiPath, "xtext", "xtext2");

@@ -11,6 +11,7 @@ package org.eclipse.xtext.parsetree;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
@@ -32,6 +33,9 @@ import org.eclipse.xtext.RuleCall;
  * @see org.eclipse.xtext.parsetree.AbstractNode
  */
 public final class ParseTreeUtil {
+
+	private static final Logger logger = Logger.getLogger(ParseTreeUtil.class);
+
 
 	/**
 	 * 
@@ -60,7 +64,7 @@ public final class ParseTreeUtil {
 
 		return abstractNodeSet;
 	}
-
+	
 	/**
 	 * Dump the composite structure (parsetree) of the given node.
 	 * 
@@ -69,7 +73,7 @@ public final class ParseTreeUtil {
 	 */
 	public static final void dumpNode(AbstractNode abstractNode) {
 		assertParameterNotNull(abstractNode, "abstractNode");
-		System.out.println("dump parsetree with root node '" + EcoreUtil.getIdentification(abstractNode) + "'");
+		logger.debug("dump parsetree with root node '" + EcoreUtil.getIdentification(abstractNode) + "'");
 		doDumpNode(abstractNode, "\t");
 	}
 
@@ -277,7 +281,7 @@ public final class ParseTreeUtil {
 
 			// CompositeNode compositeNode = (CompositeNode) abstractNode;
 
-			System.out.println(indentString + "line '" + abstractNode.getLine() + "' offset '"
+			logger.debug(indentString + "line '" + abstractNode.getLine() + "' offset '"
 					+ abstractNode.getOffset() + "'  length '" + abstractNode.getLength() + "' grammar-hierarchy  ("
 					+ dumpParentHierarchy(abstractNode) + ")");
 
@@ -287,7 +291,7 @@ public final class ParseTreeUtil {
 			// ommit hidden channel
 			if (!leafNode.isHidden()) {
 
-				System.out.println(indentString + "'" + "line '" + leafNode.getLine() + "' offset '"
+				logger.debug(indentString + "'" + "line '" + leafNode.getLine() + "' offset '"
 						+ leafNode.getOffset() + " length '" + leafNode.getLength() + "' "
 						+ (leafNode.getFeature() != null ? leafNode.getFeature() + " = " : "") + " text '"
 						+ leafNode.getText() + "' grammar-hierarchy (" + dumpParentHierarchy(leafNode) + ")");

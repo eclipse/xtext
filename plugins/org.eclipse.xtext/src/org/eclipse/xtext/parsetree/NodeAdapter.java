@@ -39,7 +39,7 @@ public class NodeAdapter implements Adapter {
 //				}
 //			}
 //		} else {
-//			System.out.println(n);
+//			logger.debug(n);
 //		}
 	}
 

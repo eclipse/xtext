@@ -12,6 +12,7 @@ import static org.eclipse.xtext.parsetree.NodeUtil.dumpCompositeNodes;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
@@ -26,6 +27,8 @@ import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
  * 
  */
 public class PartialParsingPointerTest extends AbstractPartialParserTest {
+	
+	private static final Logger logger = Logger.getLogger(PartialParsingPointerTest.class);
 
 	public void testExpression() throws Exception {
 		with(SimpleExpressionsStandaloneSetup.class);
@@ -60,7 +63,7 @@ public class PartialParsingPointerTest extends AbstractPartialParserTest {
 		with(LookaheadLanguageStandaloneSetup.class);
 		String model = "bar a foo bar c b d foo bar b c";
 		for (int i = 0; i < model.length(); ++i) {
-			System.out.println(i);
+			logger.debug(i);
 			PartialParsingPointers parsingPointers = calculatePartialParsingPointers(model, i, 1);
 			if (i < 3) {
 				checkParseRegionPointers(parsingPointers, model, "Entry", "Entry", "Entry", null, null);
@@ -106,15 +109,16 @@ public class PartialParsingPointerTest extends AbstractPartialParserTest {
 		CompositeNode rootNode = getRootNode(model);
 		if (DEBUG) {
 			dumpCompositeNodes("", rootNode);
-			System.out.println(model);
+			logger.debug(model);
+			String line = "";
 			for (int k = 0; k < changeRegionStart; ++k) {
-				System.out.print('#');
+				line += "#";
 			}
-			System.out.print(model.substring(changeRegionStart, changeRegionStart + changeRegionSize));
+			line += model.substring(changeRegionStart, changeRegionStart + changeRegionSize);
 			for (int k = changeRegionStart + changeRegionSize; k < model.length(); ++k) {
-				System.out.print('#');
+				line += "#";
 			}
-			System.out.println();
+			logger.debug(line);
 		}
 		PartialParsingPointers partialParsingPointers = PartialParsingUtil.calculatePartialParsingPointers(rootNode,
 				changeRegionStart, changeRegionSize);

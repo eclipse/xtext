@@ -44,7 +44,7 @@ public class ExtensionPointActivator {
 		IConfigurationElement[] elements = extensionPoint.getConfigurationElements();
 		if (elements != null) {
 			for (IConfigurationElement ele : elements) {
-				System.out.println(ele.getContributor());
+				log.debug(ele.getContributor());
 				IServiceRegistrationFactory srf;
 				try {
 					srf = (IServiceRegistrationFactory) ele.createExecutableExtension(CLASS);

@@ -3,6 +3,7 @@ package org.eclipse.xtext.parsetree.reconstr.callbacks;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
@@ -16,6 +17,8 @@ import org.eclipse.xtext.service.Inject;
 
 public class SimpleSerializingCallback extends
 		DefaultParsetreeReconstructorCallback {
+
+	static final Logger logger = Logger.getLogger(SimpleSerializingCallback.class);
 
 	@Inject
 	protected IValueConverterService converterService;
@@ -46,9 +49,9 @@ public class SimpleSerializingCallback extends
 		outputHasStarted = false;
 		out = output;
 	}
-
+	
 	public void crossRefCall(IInstanceDescription current, CrossReference call) {
-		System.out.println("crossRefCall(" + call + ")");
+		logger.debug("crossRefCall(" + call + ")");
 		Assignment ass = GrammarUtil.containingAssignment(call);
 		if (ass == null)
 			throw new IllegalStateException("Unassigned cross reference "

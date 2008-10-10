@@ -26,7 +26,7 @@
 */
 package «genClassFQName.toJavaPackage()»;
 
-
+//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
@@ -211,7 +211,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 «DEFINE element FOR Assignment»
 // «grammarFragmentToStr()»
 protected class «elementMethodName()» extends AssignmentToken  {
-
+	//private static Logger logger = Logger.getLogger(«elementMethodName()».class);
 	protected AbstractElement element = (AbstractElement)getGrammarElement("«terminal.objectURI()»");
 	protected Object value;
 	
@@ -226,7 +226,7 @@ protected class «elementMethodName()» extends AssignmentToken  {
 	}
 	
 	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("«elementMethodName()»Callback(\"«terminal.metaType.name»\", " + value + ")");
+		// logger.debug("«elementMethodName()»Callback(\"«terminal.metaType.name»\", " + value + ")");
 		«EXPAND assignmentCallback FOR terminal-»
 	}
 }

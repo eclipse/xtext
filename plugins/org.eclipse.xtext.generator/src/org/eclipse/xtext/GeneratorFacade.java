@@ -57,14 +57,15 @@ public class GeneratorFacade {
 		ctx.registerMetaModel(new EmfRegistryMetaModel());
 		CheckFacade.checkAll("org::eclipse::xtext::Xtext2", list, ctx, issues);
 
-		System.err.println(issues);
-		if (issues.hasErrors())
+		if (issues.hasErrors()) {
+			log.error(issues);
 			return;
+		}
 
 		CompositeNode rootNode = NodeUtil.getRootNode(grammarModel);
 		EList<SyntaxError> allSyntaxErrors = rootNode.allSyntaxErrors();
 		for (SyntaxError syntaxError : allSyntaxErrors) {
-			System.err.println(syntaxError.getMessage() + ":" + syntaxError.getNode().getLine());
+			log.error(syntaxError.getMessage() + ":" + syntaxError.getNode().getLine());
 		}
 		if (!allSyntaxErrors.isEmpty())
 			throw new IllegalStateException("The grammar has syntax errors.");
