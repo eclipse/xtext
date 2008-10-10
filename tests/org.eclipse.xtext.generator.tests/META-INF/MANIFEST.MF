@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext2 Generator Tests Plug-in
+Bundle-Name: Xtext Generator Tests Plug-in
 Bundle-SymbolicName: org.eclipse.xtext.generator.tests;singleton:=true
 Bundle-Version: 0.7.0.qualifier
-Bundle-Vendor: eclipse.org
+Bundle-Vendor: Eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.generator,
