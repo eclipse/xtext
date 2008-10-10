@@ -9,6 +9,7 @@
 package org.eclipse.xtext.reference;
 
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -20,6 +21,8 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  *
  */
 public class LeafNodeBug_234132_Test extends AbstractGeneratorTest {
+	
+	private static final Logger logger = Logger.getLogger(LeafNodeBug_234132_Test.class);
 
     public void testLeafNodeBug() throws Exception {
         with(ReferenceGrammarStandaloneSetup.class);
@@ -27,10 +30,10 @@ public class LeafNodeBug_234132_Test extends AbstractGeneratorTest {
         CompositeNode rootNode = getRootNode(model);
         
         EList<LeafNode> leafNodes = rootNode.getLeafNodes();
-        System.out.println("Model length=" + model.length());
+        logger.debug("Model length=" + model.length());
         for (LeafNode leafNode : leafNodes) {
             String text = leafNode.getText();
-            System.out.println("Leaf node" + leafNode.toString() + " offset=" + leafNode.getOffset() + " length=" + leafNode.getLength() + " text=" + ((text != null)? text : ""));
+            logger.debug("Leaf node" + leafNode.toString() + " offset=" + leafNode.getOffset() + " length=" + leafNode.getLength() + " text=" + ((text != null)? text : ""));
             assertTrue(leafNode.getLength() + leafNode.getOffset() <= model.length());
             assertEquals(model.substring(leafNode.getOffset(), leafNode.getOffset() + leafNode.getLength()), leafNode.getText());
         }

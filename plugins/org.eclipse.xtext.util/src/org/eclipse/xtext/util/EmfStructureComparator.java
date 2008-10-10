@@ -30,7 +30,7 @@ public class EmfStructureComparator {
 		if(!isSameStructure(left, right)) {
 			Assert.fail(errorMessage);
 		}
-		//System.out.println("" + counter + " elements compared");
+		//logger.debug("" + counter + " elements compared");
 	}
 	
 	public boolean isSameStructure(EObject left, EObject right) {

@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
 import org.eclipse.xtext.parser.impl.PartialParsingUtil;
@@ -23,6 +24,8 @@ import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
  */
 public class PartialParserReplaceTest extends AbstractPartialParserTest {
 
+	private static final Logger logger = Logger.getLogger(PartialParserReplaceTest.class);
+	
 	public void testExpression() throws Exception {
 		with(SimpleExpressionsStandaloneSetup.class);
 		String model = "(a+b+c)*(c/d)";
@@ -58,7 +61,7 @@ public class PartialParserReplaceTest extends AbstractPartialParserTest {
 		IParseResult partiallyReparse = PartialParsingUtil.reparse(getParser(), rootNode, offset, length, change);
 		EList<SyntaxError> errors = partiallyReparse.getRootNode().allSyntaxErrors();
 		for (SyntaxError syntaxError : errors) {
-			System.out.println(model + offset + length + change + ":" + syntaxError.getMessage());
+			logger.debug(model + offset + length + change + ":" + syntaxError.getMessage());
 		}
 		assertTrue(partiallyReparse.getRootNode().allSyntaxErrors().isEmpty());
 		String expectedReparseModel = model.substring(0, offset) + change + model.substring(offset + length);

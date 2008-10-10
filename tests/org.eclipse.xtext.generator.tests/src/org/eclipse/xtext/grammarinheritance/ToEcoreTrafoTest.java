@@ -2,6 +2,7 @@ package org.eclipse.xtext.grammarinheritance;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -20,6 +21,8 @@ import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class ToEcoreTrafoTest extends AbstractGeneratorTest {
+	private static final Logger logger = Logger.getLogger(ToEcoreTrafoTest.class);
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -32,14 +35,14 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 		if (!r.getParseResult().getParseErrors().isEmpty()) {
 			List<SyntaxError> errors = r.getParseResult().getParseErrors();
 			for (SyntaxError syntaxError : errors) {
-				System.out.println(syntaxError.getMessage() + " - " + syntaxError.getNode().getLine());
+				logger.debug(syntaxError.getMessage() + " - " + syntaxError.getNode().getLine());
 			}
 			fail();
 		}
 		List<LexerRule> lexerRules = GrammarUtil.allLexerRules(element);
 		assertEquals(8, lexerRules.size());
 		for (LexerRule lexerRule : lexerRules) {
-			System.out.println(lexerRule.getName());
+			logger.debug(lexerRule.getName());
 		}
 
 		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer();
@@ -54,7 +57,7 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 		List<LexerRule> lexerRules = GrammarUtil.allLexerRules(element);
 		assertEquals(8, lexerRules.size());
 		for (LexerRule lexerRule : lexerRules) {
-			System.out.println(lexerRule.getName());
+			logger.debug(lexerRule.getName());
 		}
 		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer();
 		List<EPackage> list = transformer.transform(element);

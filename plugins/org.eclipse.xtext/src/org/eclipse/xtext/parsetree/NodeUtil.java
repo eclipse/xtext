@@ -11,6 +11,7 @@ package org.eclipse.xtext.parsetree;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -19,6 +20,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * 
  */
 public class NodeUtil {
+	
+	private static final Logger logger = Logger.getLogger(NodeUtil.class);
 	
     public static NodeAdapter getNodeAdapter(EObject obj) {
         return (NodeAdapter) EcoreUtil.getAdapter(obj.eAdapters(), AbstractNode.class);
@@ -103,7 +106,7 @@ public class NodeUtil {
             }
         }
     }
-
+    
     public static void dumpCompositeNodeInfo(String indent, CompositeNode node) {
         EObject grammarElement = node.getGrammarElement();
         String name;
@@ -113,12 +116,12 @@ public class NodeUtil {
             name = grammarElement.getClass().getSimpleName();
         }
         String astElementAsString = (node.getElement() == null) ? "null" : node.getElement().eClass().getName();
-        System.out.print(indent + name + " : " + node.serialize()
-                + " -> " + astElementAsString + "  la={ ");
+        String line = indent + name + " : " + node.serialize()
+                + " -> " + astElementAsString + "  la={ ";
         for (LeafNode lookaheadNode : node.getLookaheadLeafNodes()) {
-        	System.out.print("\""+ lookaheadNode.getText() +"\" ");
+        	line += "\""+ lookaheadNode.getText() +"\" ";
 		}
-        System.out.println("}   (" + node.getOffset() + ", " + node.getLength() + ")");
+        logger.debug("}   (" + node.getOffset() + ", " + node.getLength() + ")");
     }
     
 	public static AbstractNode findLeafNodeAtOffset(CompositeNode parseTreeRootNode, int offset) {

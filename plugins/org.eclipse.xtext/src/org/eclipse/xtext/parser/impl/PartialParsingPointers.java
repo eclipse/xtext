@@ -12,6 +12,7 @@ import static org.eclipse.xtext.parsetree.NodeUtil.dumpCompositeNodeInfo;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
@@ -29,6 +30,8 @@ import org.eclipse.xtext.util.Strings;
  * 
  */
 public class PartialParsingPointers {
+
+	private static final Logger logger = Logger.getLogger(PartialParsingPointers.class);
 
 	private CompositeNode rootNode;
 	private int length;
@@ -195,16 +198,19 @@ public class PartialParsingPointers {
 	public void dump() {
 		dump(getDefaultReplaceRootNode());
 	}
-
+		
 	public void dump(CompositeNode replaceRootNode) {
-		System.out.println("Parsing " + findReparseRegion(replaceRootNode));
-		System.out.println("with rule " + findEntryRuleName(replaceRootNode));
+		if (!logger.isDebugEnabled())
+			return;
+		
+		logger.debug("Parsing " + findReparseRegion(replaceRootNode));
+		logger.debug("with rule " + findEntryRuleName(replaceRootNode));
 		dumpCompositeNodeInfo("Replacing node ", replaceRootNode);
-		System.out.println("Replacing AST element " + findASTReplaceElement(replaceRootNode).eClass().getName());
+		logger.debug("Replacing AST element " + findASTReplaceElement(replaceRootNode).eClass().getName());
 		EObject astParentElement = findASTParentElement(replaceRootNode);
 		String astParentElementClassName = astParentElement != null ? astParentElement.eClass().getName() : "null";
-		System.out.println("in AST parent reference " + astParentElementClassName + "."
+		logger.debug("in AST parent reference " + astParentElementClassName + "."
 				+ Strings.notNull(findASTContainmentFeatureName(replaceRootNode)));
-		System.out.println();
+		logger.debug("");
 	}
 }
