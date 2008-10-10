@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.compare.diff.metamodel.AttributeChange;
 import org.eclipse.emf.compare.diff.metamodel.DiffElement;
 import org.eclipse.emf.compare.diff.metamodel.DiffGroup;
@@ -39,6 +40,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class EcoreModelComparator {
 
+	private static final Logger logger = Logger.getLogger(EcoreModelComparator.class);
 	private Map<String, Object> options;
 	private IMatchEngine matchEngine;
 	private List<EStructuralFeature> ignoredFeatures = new ArrayList<EStructuralFeature>();
@@ -122,18 +124,18 @@ public class EcoreModelComparator {
 		if (diffElement instanceof AttributeChange) {
 			AttributeChange change = (AttributeChange) diffElement;
 			EAttribute attribute = change.getAttribute();
-			System.err.println("Detected attribute difference: " + attribute.getName());
-			System.err.println("\t" + change.getLeftElement());
-			System.err.println("\t" + change.getRightElement());
+			logger.error("Detected attribute difference: " + attribute.getName());
+			logger.error("\t" + change.getLeftElement());
+			logger.error("\t" + change.getRightElement());
 		} else if (diffElement instanceof ReferenceChange) {
 			ReferenceChange change = (ReferenceChange) diffElement;
 			EReference reference = change.getReference();
-			System.err.println("Detected reference difference: " + reference.getName());
-			System.err.println("\t" + change.getLeftElement() +" "+reference.getName()+" = "+change.getLeftElement().eGet(reference));
-			System.err.println("\t" + change.getRightElement()+" "+reference.getName()+" = "+change.getRightElement().eGet(reference));
+			logger.error("Detected reference difference: " + reference.getName());
+			logger.error("\t" + change.getLeftElement() +" "+reference.getName()+" = "+change.getLeftElement().eGet(reference));
+			logger.error("\t" + change.getRightElement()+" "+reference.getName()+" = "+change.getRightElement().eGet(reference));
 		} else {
-			// TODO: add more sysouts here...
-			System.err.println(diffElement.toString());
+			// TODO: add more logging here...
+			logger.error(diffElement.toString());
 		}
 	}
 }
