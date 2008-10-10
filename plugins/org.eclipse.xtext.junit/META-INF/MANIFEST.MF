@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Junit Support Plug-in
 Bundle-SymbolicName: org.eclipse.xtext.junit
 Bundle-Version: 1.0.0
-Bundle-Vendor: eclipse.org
+Bundle-Vendor: Eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtend;bundle-version="0.7.0",
  org.eclipse.xtext,
