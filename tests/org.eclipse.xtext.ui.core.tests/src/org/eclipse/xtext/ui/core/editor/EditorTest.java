@@ -11,6 +11,7 @@ package org.eclipse.xtext.ui.core.editor;
 import static org.eclipse.xtext.ui.core.util.ResourceUtil.createFile;
 import static org.eclipse.xtext.ui.core.util.ResourceUtil.createProject;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.ILogListener;
@@ -31,6 +32,8 @@ import org.eclipse.xtext.ui.core.internal.XtextUITestsPlugin;
  */
 public class EditorTest extends AbstractEditorTest {
 
+	private static final Logger logger = Logger.getLogger(EditorTest.class);
+	
 	protected void setUp() throws Exception {
 		super.setUp();
 		if (PlatformUI.getWorkbench().getIntroManager().getIntro() != null)
@@ -96,7 +99,7 @@ public class EditorTest extends AbstractEditorTest {
 			}
 		});
 		document.replace(23, 3, "honolulu");
-		System.out.println("Waiting for reconciler...");
+		logger.debug("Waiting for reconciler...");
 		sleep(3000);
 		document.readOnly(new UnitOfWork<Object>() {
 			
@@ -136,7 +139,7 @@ public class EditorTest extends AbstractEditorTest {
 			}
 		});
 		document.replace(36, 0, "a");
-		System.out.println("Waiting for reconciler...");
+		logger.debug("Waiting for reconciler...");
 		sleep(3000);
 		document.readOnly(new UnitOfWork<Object>() {
 			

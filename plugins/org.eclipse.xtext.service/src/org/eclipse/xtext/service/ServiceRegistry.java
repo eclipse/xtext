@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 /**
  * 
  * @author Jan Köhnlein
@@ -25,6 +27,7 @@ import java.util.Map;
  */
 public class ServiceRegistry {
 
+	private static final Logger logger = Logger.getLogger(ServiceRegistry.class);
 	public static final int PRIORITY_MIN = Integer.MIN_VALUE;
 	public static final int PRIORITY_NORMAL = 0;
 	public static final int PRIORITY_MAX = Integer.MAX_VALUE;
@@ -155,7 +158,7 @@ public class ServiceRegistry {
 					}
 				} else {
 					if (e.priority == currPriority) {
-						System.err.println("Mutliple service factories for type " + serviceInterface.getName()
+						logger.error("Mutliple service factories for type " + serviceInterface.getName()
 								+ " in scope " + realLanguageDescriptor.getId());
 					}
 					return service;
@@ -281,7 +284,7 @@ public class ServiceRegistry {
 	// public static void dump() {
 	// Set<ServiceKey> keySet = entryMap.keySet();
 	// for (ServiceKey pair : keySet) {
-	// System.out.println(pair.getFirstElement() + " " +
+	// logger.debug(pair.getFirstElement() + " " +
 	// pair.getSecondElement().getSimpleName());
 	// }
 	// }

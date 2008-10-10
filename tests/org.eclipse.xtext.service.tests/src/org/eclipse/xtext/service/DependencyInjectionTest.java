@@ -9,7 +9,7 @@
 
 package org.eclipse.xtext.service;
 
-
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.service.examples.CircularDependencyFactory0;
 import org.eclipse.xtext.service.examples.CircularDependencyFactory1;
 import org.eclipse.xtext.service.examples.CircularDependencyService0;
@@ -28,7 +28,8 @@ import org.eclipse.xtext.service.examples.WithOptionalDependency;
  */
 public class DependencyInjectionTest extends AbstractServiceTest {
 
-   
+    private static final Logger logger = Logger.getLogger(DependencyInjectionTest.class); 
+	
     public void testIncompleteDependencies() throws Exception {
         ServiceRegistry.registerFactory(myScope, new MyServiceFactory());
 
@@ -36,7 +37,7 @@ public class DependencyInjectionTest extends AbstractServiceTest {
             ServiceRegistry.getService(myScope, MyService.class);
             fail("Exepction expected due to unresolvable dependency");
         } catch (Exception e) {
-            System.out.println(e.getMessage());// normal behaviour
+            logger.debug(e.getMessage());// normal behaviour
         }
     }
     
