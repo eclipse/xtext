@@ -11,7 +11,6 @@ package org.eclipse.xtext.parsetree.reconstr;
 import java.io.ByteArrayOutputStream;
 import java.util.Collections;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
@@ -19,8 +18,6 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfFormater;
 
 public class SimpleReconstrTest extends AbstractGeneratorTest {
-	
-	private static final Logger logger = Logger.getLogger(SimpleReconstrTest.class);
 
 	public void testSimple1() throws Exception {
 		String model = "a b";
@@ -44,10 +41,10 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
-		logger.debug(EmfFormater.objToStr(result, ""));
-		logger.debug(EmfFormater.objToStr(NodeUtil.getRootNode(result),
+		System.out.println(EmfFormater.objToStr(result, ""));
+		System.out.println(EmfFormater.objToStr(NodeUtil.getRootNode(result),
 				""));
-		logger.debug(EmfFormater.objToStr(NodeUtil.getRootNode(result)
+		System.out.println(EmfFormater.objToStr(NodeUtil.getRootNode(result)
 				.getLeafNodes(), ""));
 
 		IParseTreeConstructor con = getParseTreeConstructor();
@@ -72,6 +69,16 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		String model = "2 45";
 		assertEquals(model, parseAndSerialize(model));
 	}
+	
+	public void testSimpleTwoNumbersWithDefault() throws Exception {
+		String model = "0 45";
+		assertEquals(model, parseAndSerialize(model));
+	}
+	
+	public void testSimpleTwoNumbersWithDefault2() throws Exception {
+		String model = "0 45 # 0 # 1 # 2";
+		assertEquals(model, parseAndSerialize(model));
+	}
 
 	public void testSimpleManyStrings1() throws Exception {
 		String model = "= 'xxx' 'yyy'";
@@ -82,6 +89,24 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		String model = "= 'xxx' 'yyy' 'zzzz'";
 		assertEquals(model, parseAndSerialize(model));
 	}
+
+	public void testSimpleAlternativeAssignment1() throws Exception {
+		String model = "#2 mykeyword1";
+		assertEquals(model, parseAndSerialize(model));
+	}
+
+	// FIXME: this depends on
+	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=250313
+	// public void testSimpleAlternativeAssignment2() throws Exception {
+	// String model = "#2 'str'";
+	// assertEquals(model, parseAndSerialize(model));
+	// }
+
+	// FIXME: make this work
+	// public void testCrossRef() throws Exception {
+	// String model = "type A extends B type B extends A";
+	// assertEquals(model, parseAndSerialize(model));
+	// }
 
 	@Override
 	protected void setUp() throws Exception {
