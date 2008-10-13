@@ -3,7 +3,7 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages.parsetree.reconstr;
 
-
+//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
@@ -20,7 +20,7 @@ public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstruct
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
-		InstanceDescription inst = getDescr(obj);
+		IInstanceDescription inst = getDescr(obj);
 		Solution s;
 		if(inst.isInstanceOf("Model") && (s = new EntryRule_Assignment_multiFeature(inst, null).firstSolution()) != null) return s;
 		if(inst.isInstanceOf("AbstractElement") && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null) return s;
@@ -39,31 +39,25 @@ public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstruct
 
 // ( multiFeature += AbstractRule ) *
 protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.0/@alternatives/@terminal");
-	protected Object value;
 	
-	public EntryRule_Assignment_multiFeature(InstanceDescription curr, AbstractToken pred) {
+	public EntryRule_Assignment_multiFeature(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("multiFeature")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("multiFeature");
-		// handling xtext::RuleCall
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("AbstractElement")) return null;
-		AbstractToken t = new AbstractRule_Alternatives(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("EntryRule_Assignment_multiFeatureCallback(\"xtext::RuleCall\", " + value + ")");
-		// Nothing to do for ParserRule Call AbstractRule
+		if((value = current.getConsumable("multiFeature",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("multiFeature");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("AbstractElement")) {
+				Solution s = new AbstractRule_Alternatives(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
 	}
 }
 
@@ -77,21 +71,10 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 
 
 // ChoiceRule | ReducibleRule
-protected class AbstractRule_Alternatives extends GroupToken {
-	
-	private boolean first = true;
+protected class AbstractRule_Alternatives extends AlternativesToken {
 
-	public AbstractRule_Alternatives(InstanceDescription curr, AbstractToken pred) {
+	public AbstractRule_Alternatives(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-
-	
-	protected boolean activateNextSolution() {
-		if(first) {
-			first = false;
-			return true;
-		}
-		return false;
 	}
 	
 	protected Solution createSolution() {
@@ -105,10 +88,9 @@ protected class AbstractRule_Alternatives extends GroupToken {
 // ChoiceRule
 protected class AbstractRule_0_RuleCall_ChoiceRule extends RuleCallToken {
 	
-	public AbstractRule_0_RuleCall_ChoiceRule(InstanceDescription curr, AbstractToken pred) {
+	public AbstractRule_0_RuleCall_ChoiceRule(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
 		if(checkForRecursion(ChoiceRule_Group.class, current)) return null;
@@ -120,10 +102,9 @@ protected class AbstractRule_0_RuleCall_ChoiceRule extends RuleCallToken {
 // ReducibleRule
 protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 	
-	public AbstractRule_1_RuleCall_ReducibleRule(InstanceDescription curr, AbstractToken pred) {
+	public AbstractRule_1_RuleCall_ReducibleRule(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
 		if(checkForRecursion(ReducibleRule_Group.class, current)) return null;
@@ -145,10 +126,9 @@ protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 // 'choice' ( optionalKeyword ?= 'optional' ) ? name = ID
 protected class ChoiceRule_Group extends GroupToken {
 	
-	public ChoiceRule_Group(InstanceDescription curr, AbstractToken pred) {
+	public ChoiceRule_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new ChoiceRule_1_Assignment_name(current, this).firstSolution();
@@ -160,10 +140,9 @@ protected class ChoiceRule_Group extends GroupToken {
 // 'choice' ( optionalKeyword ?= 'optional' ) ?
 protected class ChoiceRule_0_Group extends GroupToken {
 	
-	public ChoiceRule_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public ChoiceRule_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new ChoiceRule_0_1_Assignment_optionalKeyword(current, this).firstSolution();
@@ -177,7 +156,7 @@ protected class ChoiceRule_0_0_Keyword_choice extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0");
 	
-	public ChoiceRule_0_0_Keyword_choice(InstanceDescription curr, AbstractToken pred) {
+	public ChoiceRule_0_0_Keyword_choice(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -192,52 +171,40 @@ protected class ChoiceRule_0_0_Keyword_choice extends KeywordToken  {
 
 // ( optionalKeyword ?= 'optional' ) ?
 protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public ChoiceRule_0_1_Assignment_optionalKeyword(InstanceDescription curr, AbstractToken pred) {
+	public ChoiceRule_0_1_Assignment_optionalKeyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("optionalKeyword")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("optionalKeyword");
-		// handling xtext::Keyword
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("ChoiceRule_0_1_Assignment_optionalKeywordCallback(\"xtext::Keyword\", " + value + ")");
-		callback.keywordCall(current, (Keyword)element);
+		if((value = current.getConsumable("optionalKeyword",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("optionalKeyword");
+		if("optional".equals(value)) { // xtext::Keyword
+			type = AssignmentType.KW;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
 
 // name = ID
 protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public ChoiceRule_1_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public ChoiceRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("name")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("name");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("ChoiceRule_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("name",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
@@ -254,10 +221,9 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 // 'reducible' TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
 protected class ReducibleRule_Group extends GroupToken {
 	
-	public ReducibleRule_Group(InstanceDescription curr, AbstractToken pred) {
+	public ReducibleRule_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new ReducibleRule_1_Group(current, this).firstSolution();
@@ -269,10 +235,9 @@ protected class ReducibleRule_Group extends GroupToken {
 // 'reducible' TerminalRule
 protected class ReducibleRule_0_Group extends GroupToken {
 	
-	public ReducibleRule_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public ReducibleRule_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new ReducibleRule_0_1_RuleCall_TerminalRule(current, this).firstSolution();
@@ -286,7 +251,7 @@ protected class ReducibleRule_0_0_Keyword_reducible extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0");
 	
-	public ReducibleRule_0_0_Keyword_reducible(InstanceDescription curr, AbstractToken pred) {
+	public ReducibleRule_0_0_Keyword_reducible(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -302,10 +267,9 @@ protected class ReducibleRule_0_0_Keyword_reducible extends KeywordToken  {
 // TerminalRule
 protected class ReducibleRule_0_1_RuleCall_TerminalRule extends RuleCallToken {
 	
-	public ReducibleRule_0_1_RuleCall_TerminalRule(InstanceDescription curr, AbstractToken pred) {
+	public ReducibleRule_0_1_RuleCall_TerminalRule(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
 		if(checkForRecursion(TerminalRule_Assignment_stringFeature.class, current)) return null;
@@ -318,10 +282,9 @@ protected class ReducibleRule_0_1_RuleCall_TerminalRule extends RuleCallToken {
 // ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
 protected class ReducibleRule_1_Group extends GroupToken {
 	
-	public ReducibleRule_1_Group(InstanceDescription curr, AbstractToken pred) {
+	public ReducibleRule_1_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new ReducibleRule_1_1_Assignment_actionFeature(current, this).firstSolution();
@@ -333,48 +296,40 @@ protected class ReducibleRule_1_Group extends GroupToken {
 // { current = ReducibleComposite . actionFeature += current }
 protected class ReducibleRule_1_0_Action_ReducibleComposite_actionFeature extends AssignmentToken  {
 
-	public ReducibleRule_1_0_Action_ReducibleComposite_actionFeature(InstanceDescription curr, AbstractToken pred) {
+	public ReducibleRule_1_0_Action_ReducibleComposite_actionFeature(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("ReducibleComposite")) return null;
-		if(!current.isConsumable("actionFeature")) return null;
-		IInstanceDescription obj = current.createClone();
-		Object val = obj.consume("actionFeature");
-		if(!obj.isConsumed()) return null;
+		Object val = current.getConsumable("actionFeature", false);
+		if(val == null) return null;
+		if(!current.isConsumedWithLastConsumtion("actionFeature")) return null;
 		return new Solution(getDescr((EObject)val));
 	}
 }
 
 // actionFeature += TerminalRule
 protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public ReducibleRule_1_1_Assignment_actionFeature(InstanceDescription curr, AbstractToken pred) {
+	public ReducibleRule_1_1_Assignment_actionFeature(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("actionFeature")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("actionFeature");
-		// handling xtext::RuleCall
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("TerminalElement")) return null;
-		AbstractToken t = new TerminalRule_Assignment_stringFeature(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("ReducibleRule_1_1_Assignment_actionFeatureCallback(\"xtext::RuleCall\", " + value + ")");
-		// Nothing to do for ParserRule Call TerminalRule
+		if((value = current.getConsumable("actionFeature",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("actionFeature");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("TerminalElement")) {
+				Solution s = new TerminalRule_Assignment_stringFeature(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
 	}
 }
 
@@ -391,26 +346,20 @@ protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentTok
 
 // stringFeature = STRING
 protected class TerminalRule_Assignment_stringFeature extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.4/@alternatives/@terminal");
-	protected Object value;
 	
-	public TerminalRule_Assignment_stringFeature(InstanceDescription curr, AbstractToken pred) {
+	public TerminalRule_Assignment_stringFeature(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("stringFeature")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("stringFeature");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("TerminalRule_Assignment_stringFeatureCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("stringFeature",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("stringFeature");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.4/@alternatives/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 

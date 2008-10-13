@@ -3,7 +3,7 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages.parsetree.reconstr;
 
-
+//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
@@ -20,7 +20,7 @@ public class ReferenceGrammarParseTreeConstructor extends AbstractParseTreeConst
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
-		InstanceDescription inst = getDescr(obj);
+		IInstanceDescription inst = getDescr(obj);
 		Solution s;
 		if(inst.isInstanceOf("Spielplatz") && (s = new Spielplatz_Group(inst, null).firstSolution()) != null) return s;
 		if(inst.isInstanceOf("Person") && (s = new Person_Alternatives(inst, null).firstSolution()) != null) return s;
@@ -41,10 +41,9 @@ public class ReferenceGrammarParseTreeConstructor extends AbstractParseTreeConst
 // ( 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug ) * '}' ) ?
 protected class Spielplatz_Group extends GroupToken {
 	
-	public Spielplatz_Group(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Spielplatz_1_Keyword(current, this).firstSolution();
@@ -56,10 +55,9 @@ protected class Spielplatz_Group extends GroupToken {
 // 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug ) *
 protected class Spielplatz_0_Group extends GroupToken {
 	
-	public Spielplatz_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Spielplatz_0_1_Alternatives(current, this).firstSolution();
@@ -71,10 +69,9 @@ protected class Spielplatz_0_Group extends GroupToken {
 // 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{'
 protected class Spielplatz_0_0_Group extends GroupToken {
 	
-	public Spielplatz_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Spielplatz_0_0_1_Keyword(current, this).firstSolution();
@@ -86,10 +83,9 @@ protected class Spielplatz_0_0_Group extends GroupToken {
 // 'spielplatz' groesse = INT ( beschreibung = STRING ) ?
 protected class Spielplatz_0_0_0_Group extends GroupToken {
 	
-	public Spielplatz_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Spielplatz_0_0_0_1_Assignment_beschreibung(current, this).firstSolution();
@@ -101,10 +97,9 @@ protected class Spielplatz_0_0_0_Group extends GroupToken {
 // 'spielplatz' groesse = INT
 protected class Spielplatz_0_0_0_0_Group extends GroupToken {
 	
-	public Spielplatz_0_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Spielplatz_0_0_0_0_1_Assignment_groesse(current, this).firstSolution();
@@ -118,7 +113,7 @@ protected class Spielplatz_0_0_0_0_0_Keyword_spielplatz extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
 	
-	public Spielplatz_0_0_0_0_0_Keyword_spielplatz(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_0_0_0_0_Keyword_spielplatz(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -133,52 +128,40 @@ protected class Spielplatz_0_0_0_0_0_Keyword_spielplatz extends KeywordToken  {
 
 // groesse = INT
 protected class Spielplatz_0_0_0_0_1_Assignment_groesse extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Spielplatz_0_0_0_0_1_Assignment_groesse(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_0_0_0_1_Assignment_groesse(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("groesse")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("groesse");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Spielplatz_0_0_0_0_1_Assignment_groesseCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("groesse",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("groesse");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
 
 // ( beschreibung = STRING ) ?
 protected class Spielplatz_0_0_0_1_Assignment_beschreibung extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Spielplatz_0_0_0_1_Assignment_beschreibung(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_0_0_1_Assignment_beschreibung(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("beschreibung")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("beschreibung");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Spielplatz_0_0_0_1_Assignment_beschreibungCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("beschreibung",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("beschreibung");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
@@ -188,7 +171,7 @@ protected class Spielplatz_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
 	
-	public Spielplatz_0_0_1_Keyword(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -203,21 +186,10 @@ protected class Spielplatz_0_0_1_Keyword extends KeywordToken  {
 
 
 // ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug ) *
-protected class Spielplatz_0_1_Alternatives extends GroupToken {
-	
-	private boolean first = true;
+protected class Spielplatz_0_1_Alternatives extends AlternativesToken {
 
-	public Spielplatz_0_1_Alternatives(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
-	}
-
-	
-	protected boolean activateNextSolution() {
-		if(first) {
-			first = false;
-			return true;
-		}
-		return false;
 	}
 	
 	protected Solution createSolution() {
@@ -229,21 +201,10 @@ protected class Spielplatz_0_1_Alternatives extends GroupToken {
 }
 
 // kinder += Kind | erzieher += Erwachsener
-protected class Spielplatz_0_1_0_Alternatives extends GroupToken {
-	
-	private boolean first = true;
+protected class Spielplatz_0_1_0_Alternatives extends AlternativesToken {
 
-	public Spielplatz_0_1_0_Alternatives(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_1_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-
-	
-	protected boolean activateNextSolution() {
-		if(first) {
-			first = false;
-			return true;
-		}
-		return false;
 	}
 	
 	protected Solution createSolution() {
@@ -256,92 +217,74 @@ protected class Spielplatz_0_1_0_Alternatives extends GroupToken {
 
 // kinder += Kind
 protected class Spielplatz_0_1_0_0_Assignment_kinder extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@terminal");
-	protected Object value;
 	
-	public Spielplatz_0_1_0_0_Assignment_kinder(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_1_0_0_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("kinder")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("kinder");
-		// handling xtext::RuleCall
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("Kind")) return null;
-		AbstractToken t = new Kind_Group(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Spielplatz_0_1_0_0_Assignment_kinderCallback(\"xtext::RuleCall\", " + value + ")");
-		// Nothing to do for ParserRule Call Kind
+		if((value = current.getConsumable("kinder",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("kinder");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Kind")) {
+				Solution s = new Kind_Group(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
 	}
 }
 
 // erzieher += Erwachsener
 protected class Spielplatz_0_1_0_1_Assignment_erzieher extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal");
-	protected Object value;
 	
-	public Spielplatz_0_1_0_1_Assignment_erzieher(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_1_0_1_Assignment_erzieher(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("erzieher")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("erzieher");
-		// handling xtext::RuleCall
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("Erwachsener")) return null;
-		AbstractToken t = new Erwachsener_Group(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Spielplatz_0_1_0_1_Assignment_erzieherCallback(\"xtext::RuleCall\", " + value + ")");
-		// Nothing to do for ParserRule Call Erwachsener
+		if((value = current.getConsumable("erzieher",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("erzieher");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Erwachsener")) {
+				Solution s = new Erwachsener_Group(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
 	}
 }
 
 
 // spielzeuge += Spielzeug
 protected class Spielplatz_0_1_1_Assignment_spielzeuge extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal");
-	protected Object value;
 	
-	public Spielplatz_0_1_1_Assignment_spielzeuge(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_1_1_Assignment_spielzeuge(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("spielzeuge")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("spielzeuge");
-		// handling xtext::RuleCall
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("Spielzeug")) return null;
-		AbstractToken t = new Spielzeug_Group(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Spielplatz_0_1_1_Assignment_spielzeugeCallback(\"xtext::RuleCall\", " + value + ")");
-		// Nothing to do for ParserRule Call Spielzeug
+		if((value = current.getConsumable("spielzeuge",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("spielzeuge");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Spielzeug")) {
+				Solution s = new Spielzeug_Group(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
 	}
 }
 
@@ -352,7 +295,7 @@ protected class Spielplatz_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.1");
 	
-	public Spielplatz_1_Keyword(InstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -376,21 +319,10 @@ protected class Spielplatz_1_Keyword extends KeywordToken  {
 
 
 // Kind | Erwachsener
-protected class Person_Alternatives extends GroupToken {
-	
-	private boolean first = true;
+protected class Person_Alternatives extends AlternativesToken {
 
-	public Person_Alternatives(InstanceDescription curr, AbstractToken pred) {
+	public Person_Alternatives(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-
-	
-	protected boolean activateNextSolution() {
-		if(first) {
-			first = false;
-			return true;
-		}
-		return false;
 	}
 	
 	protected Solution createSolution() {
@@ -404,10 +336,9 @@ protected class Person_Alternatives extends GroupToken {
 // Kind
 protected class Person_0_RuleCall_Kind extends RuleCallToken {
 	
-	public Person_0_RuleCall_Kind(InstanceDescription curr, AbstractToken pred) {
+	public Person_0_RuleCall_Kind(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
 		if(checkForRecursion(Kind_Group.class, current)) return null;
@@ -419,10 +350,9 @@ protected class Person_0_RuleCall_Kind extends RuleCallToken {
 // Erwachsener
 protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 	
-	public Person_1_RuleCall_Erwachsener(InstanceDescription curr, AbstractToken pred) {
+	public Person_1_RuleCall_Erwachsener(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
 		if(checkForRecursion(Erwachsener_Group.class, current)) return null;
@@ -444,10 +374,9 @@ protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 // 'kind' '(' name = ID age = INT ')'
 protected class Kind_Group extends GroupToken {
 	
-	public Kind_Group(InstanceDescription curr, AbstractToken pred) {
+	public Kind_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Kind_1_Keyword(current, this).firstSolution();
@@ -459,10 +388,9 @@ protected class Kind_Group extends GroupToken {
 // 'kind' '(' name = ID age = INT
 protected class Kind_0_Group extends GroupToken {
 	
-	public Kind_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Kind_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Kind_0_1_Assignment_age(current, this).firstSolution();
@@ -474,10 +402,9 @@ protected class Kind_0_Group extends GroupToken {
 // 'kind' '(' name = ID
 protected class Kind_0_0_Group extends GroupToken {
 	
-	public Kind_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Kind_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Kind_0_0_1_Assignment_name(current, this).firstSolution();
@@ -489,10 +416,9 @@ protected class Kind_0_0_Group extends GroupToken {
 // 'kind' '('
 protected class Kind_0_0_0_Group extends GroupToken {
 	
-	public Kind_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Kind_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Kind_0_0_0_1_Keyword(current, this).firstSolution();
@@ -506,7 +432,7 @@ protected class Kind_0_0_0_0_Keyword_kind extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
 	
-	public Kind_0_0_0_0_Keyword_kind(InstanceDescription curr, AbstractToken pred) {
+	public Kind_0_0_0_0_Keyword_kind(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -524,7 +450,7 @@ protected class Kind_0_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
 	
-	public Kind_0_0_0_1_Keyword(InstanceDescription curr, AbstractToken pred) {
+	public Kind_0_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -540,52 +466,40 @@ protected class Kind_0_0_0_1_Keyword extends KeywordToken  {
 
 // name = ID
 protected class Kind_0_0_1_Assignment_name extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Kind_0_0_1_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public Kind_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("name")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("name");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Kind_0_0_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("name",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
 
 // age = INT
 protected class Kind_0_1_Assignment_age extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Kind_0_1_Assignment_age(InstanceDescription curr, AbstractToken pred) {
+	public Kind_0_1_Assignment_age(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("age")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("age");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Kind_0_1_Assignment_ageCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("age",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("age");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
@@ -595,7 +509,7 @@ protected class Kind_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.1");
 	
-	public Kind_1_Keyword(InstanceDescription curr, AbstractToken pred) {
+	public Kind_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -621,10 +535,9 @@ protected class Kind_1_Keyword extends KeywordToken  {
 // 'erwachsener' '(' name = ID age = INT ')'
 protected class Erwachsener_Group extends GroupToken {
 	
-	public Erwachsener_Group(InstanceDescription curr, AbstractToken pred) {
+	public Erwachsener_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Erwachsener_1_Keyword(current, this).firstSolution();
@@ -636,10 +549,9 @@ protected class Erwachsener_Group extends GroupToken {
 // 'erwachsener' '(' name = ID age = INT
 protected class Erwachsener_0_Group extends GroupToken {
 	
-	public Erwachsener_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Erwachsener_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Erwachsener_0_1_Assignment_age(current, this).firstSolution();
@@ -651,10 +563,9 @@ protected class Erwachsener_0_Group extends GroupToken {
 // 'erwachsener' '(' name = ID
 protected class Erwachsener_0_0_Group extends GroupToken {
 	
-	public Erwachsener_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Erwachsener_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Erwachsener_0_0_1_Assignment_name(current, this).firstSolution();
@@ -666,10 +577,9 @@ protected class Erwachsener_0_0_Group extends GroupToken {
 // 'erwachsener' '('
 protected class Erwachsener_0_0_0_Group extends GroupToken {
 	
-	public Erwachsener_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Erwachsener_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Erwachsener_0_0_0_1_Keyword(current, this).firstSolution();
@@ -683,7 +593,7 @@ protected class Erwachsener_0_0_0_0_Keyword_erwachsener extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
 	
-	public Erwachsener_0_0_0_0_Keyword_erwachsener(InstanceDescription curr, AbstractToken pred) {
+	public Erwachsener_0_0_0_0_Keyword_erwachsener(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -701,7 +611,7 @@ protected class Erwachsener_0_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
 	
-	public Erwachsener_0_0_0_1_Keyword(InstanceDescription curr, AbstractToken pred) {
+	public Erwachsener_0_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -717,52 +627,40 @@ protected class Erwachsener_0_0_0_1_Keyword extends KeywordToken  {
 
 // name = ID
 protected class Erwachsener_0_0_1_Assignment_name extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Erwachsener_0_0_1_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public Erwachsener_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("name")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("name");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Erwachsener_0_0_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("name",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
 
 // age = INT
 protected class Erwachsener_0_1_Assignment_age extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Erwachsener_0_1_Assignment_age(InstanceDescription curr, AbstractToken pred) {
+	public Erwachsener_0_1_Assignment_age(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("age")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("age");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Erwachsener_0_1_Assignment_ageCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("age",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("age");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
@@ -772,7 +670,7 @@ protected class Erwachsener_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.1");
 	
-	public Erwachsener_1_Keyword(InstanceDescription curr, AbstractToken pred) {
+	public Erwachsener_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -798,10 +696,9 @@ protected class Erwachsener_1_Keyword extends KeywordToken  {
 // 'spielzeug' '(' name = ID farbe = Farbe ')'
 protected class Spielzeug_Group extends GroupToken {
 	
-	public Spielzeug_Group(InstanceDescription curr, AbstractToken pred) {
+	public Spielzeug_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Spielzeug_1_Keyword(current, this).firstSolution();
@@ -813,10 +710,9 @@ protected class Spielzeug_Group extends GroupToken {
 // 'spielzeug' '(' name = ID farbe = Farbe
 protected class Spielzeug_0_Group extends GroupToken {
 	
-	public Spielzeug_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Spielzeug_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Spielzeug_0_1_Assignment_farbe(current, this).firstSolution();
@@ -828,10 +724,9 @@ protected class Spielzeug_0_Group extends GroupToken {
 // 'spielzeug' '(' name = ID
 protected class Spielzeug_0_0_Group extends GroupToken {
 	
-	public Spielzeug_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Spielzeug_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Spielzeug_0_0_1_Assignment_name(current, this).firstSolution();
@@ -843,10 +738,9 @@ protected class Spielzeug_0_0_Group extends GroupToken {
 // 'spielzeug' '('
 protected class Spielzeug_0_0_0_Group extends GroupToken {
 	
-	public Spielzeug_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Spielzeug_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Spielzeug_0_0_0_1_Keyword(current, this).firstSolution();
@@ -860,7 +754,7 @@ protected class Spielzeug_0_0_0_0_Keyword_spielzeug extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
 	
-	public Spielzeug_0_0_0_0_Keyword_spielzeug(InstanceDescription curr, AbstractToken pred) {
+	public Spielzeug_0_0_0_0_Keyword_spielzeug(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -878,7 +772,7 @@ protected class Spielzeug_0_0_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
 	
-	public Spielzeug_0_0_0_1_Keyword(InstanceDescription curr, AbstractToken pred) {
+	public Spielzeug_0_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -894,57 +788,45 @@ protected class Spielzeug_0_0_0_1_Keyword extends KeywordToken  {
 
 // name = ID
 protected class Spielzeug_0_0_1_Assignment_name extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Spielzeug_0_0_1_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public Spielzeug_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("name")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("name");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Spielzeug_0_0_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("name",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
 
 // farbe = Farbe
 protected class Spielzeug_0_1_Assignment_farbe extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Spielzeug_0_1_Assignment_farbe(InstanceDescription curr, AbstractToken pred) {
+	public Spielzeug_0_1_Assignment_farbe(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("farbe")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("farbe");
-		// handling xtext::RuleCall
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("Farbe")) return null;
-		AbstractToken t = new Farbe_Alternatives(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Spielzeug_0_1_Assignment_farbeCallback(\"xtext::RuleCall\", " + value + ")");
-		// Nothing to do for ParserRule Call Farbe
+		if((value = current.getConsumable("farbe",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("farbe");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Farbe")) {
+				Solution s = new Farbe_Alternatives(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
 	}
 }
 
@@ -954,7 +836,7 @@ protected class Spielzeug_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.1");
 	
-	public Spielzeug_1_Keyword(InstanceDescription curr, AbstractToken pred) {
+	public Spielzeug_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -978,21 +860,10 @@ protected class Spielzeug_1_Keyword extends KeywordToken  {
 
 
 // 'ROT' | 'BLAU' | 'GELB' | 'GRÜN'
-protected class Farbe_Alternatives extends GroupToken {
-	
-	private boolean first = true;
+protected class Farbe_Alternatives extends AlternativesToken {
 
-	public Farbe_Alternatives(InstanceDescription curr, AbstractToken pred) {
+	public Farbe_Alternatives(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-
-	
-	protected boolean activateNextSolution() {
-		if(first) {
-			first = false;
-			return true;
-		}
-		return false;
 	}
 	
 	protected Solution createSolution() {
@@ -1004,21 +875,10 @@ protected class Farbe_Alternatives extends GroupToken {
 }
 
 // 'ROT' | 'BLAU' | 'GELB'
-protected class Farbe_0_Alternatives extends GroupToken {
-	
-	private boolean first = true;
+protected class Farbe_0_Alternatives extends AlternativesToken {
 
-	public Farbe_0_Alternatives(InstanceDescription curr, AbstractToken pred) {
+	public Farbe_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-
-	
-	protected boolean activateNextSolution() {
-		if(first) {
-			first = false;
-			return true;
-		}
-		return false;
 	}
 	
 	protected Solution createSolution() {
@@ -1030,21 +890,10 @@ protected class Farbe_0_Alternatives extends GroupToken {
 }
 
 // 'ROT' | 'BLAU'
-protected class Farbe_0_0_Alternatives extends GroupToken {
-	
-	private boolean first = true;
+protected class Farbe_0_0_Alternatives extends AlternativesToken {
 
-	public Farbe_0_0_Alternatives(InstanceDescription curr, AbstractToken pred) {
+	public Farbe_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
-	}
-
-	
-	protected boolean activateNextSolution() {
-		if(first) {
-			first = false;
-			return true;
-		}
-		return false;
 	}
 	
 	protected Solution createSolution() {
@@ -1060,7 +909,7 @@ protected class Farbe_0_0_0_Keyword_ROT extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.5/@alternatives/@groups.0/@groups.0/@groups.0");
 	
-	public Farbe_0_0_0_Keyword_ROT(InstanceDescription curr, AbstractToken pred) {
+	public Farbe_0_0_0_Keyword_ROT(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -1078,7 +927,7 @@ protected class Farbe_0_0_1_Keyword_BLAU extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.5/@alternatives/@groups.0/@groups.0/@groups.1");
 	
-	public Farbe_0_0_1_Keyword_BLAU(InstanceDescription curr, AbstractToken pred) {
+	public Farbe_0_0_1_Keyword_BLAU(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -1097,7 +946,7 @@ protected class Farbe_0_1_Keyword_GELB extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.5/@alternatives/@groups.0/@groups.1");
 	
-	public Farbe_0_1_Keyword_GELB(InstanceDescription curr, AbstractToken pred) {
+	public Farbe_0_1_Keyword_GELB(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -1116,7 +965,7 @@ protected class Farbe_1_Keyword_GRN extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.5/@alternatives/@groups.1");
 	
-	public Farbe_1_Keyword_GRN(InstanceDescription curr, AbstractToken pred) {
+	public Farbe_1_Keyword_GRN(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	

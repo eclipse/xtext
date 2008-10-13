@@ -10,6 +10,7 @@ package org.eclipse.xtext.parsetree.reconstr;
 
 import java.io.OutputStream;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
@@ -34,8 +35,11 @@ public interface IParseTreeConstructorCallback extends ILanguageService {
 
 	void actionCall(IInstanceDescription oldCurrent,
 			IInstanceDescription newCurrent, Action action);
-
+	
+	@Deprecated
 	void crossRefCall(IInstanceDescription current, CrossReference call);
+	
+	void crossRefCall(IInstanceDescription current, CrossReference call, EObject value);
 
 	void beginSerialize(OutputStream output);
 

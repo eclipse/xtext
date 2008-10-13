@@ -43,7 +43,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
-		InstanceDescription inst = getDescr(obj);
+		IInstanceDescription inst = getDescr(obj);
 		Solution s;
 «FOREACH grammar().allParserRules() AS pr-»
 		if(inst.isInstanceOf("«pr.getReturnTypeName()»") && (s = new «pr.alternatives.elementMethodName()»(inst, null).firstSolution()) != null) return s;
@@ -70,7 +70,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 «ENDDEFINE»
 
 «DEFINE constructor FOR AbstractElement-»
-	public «elementMethodName()»(InstanceDescription curr, AbstractToken pred) {
+	public «elementMethodName()»(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, «IF !cardinality.isMulti()»!«ENDIF»IS_MANY, «IF !cardinality.isRequired()»!«ENDIF»IS_REQUIRED);
 	}
 «ENDDEFINE»
@@ -89,7 +89,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 // «grammarFragmentToStr()»
 protected class «elementMethodName()» extends GroupToken {
 	
-«EXPAND constructor»
+«EXPAND constructor-»
 		
 	protected Solution createSolution() {
 		Solution s1 = new «abstractTokens.get(1).elementMethodName()»(current, this).firstSolution();
@@ -106,19 +106,9 @@ protected class «elementMethodName()» extends GroupToken {
 
 «DEFINE element FOR Alternatives»
 // «grammarFragmentToStr()»
-protected class «elementMethodName()» extends GroupToken {
-	
-	private boolean first = true;
+protected class «elementMethodName()» extends AlternativesToken {
 
-«EXPAND constructor»
-	
-	protected boolean activateNextSolution() {
-		if(first) {
-			first = false;
-			return true;
-		}
-		return false;
-	}
+«EXPAND constructor-»
 	
 	protected Solution createSolution() {
 		AbstractToken t = (first) ? new «groups.get(1).elementMethodName()»(current, this) : new «groups.get(0).elementMethodName()»(current, this);
@@ -138,7 +128,7 @@ protected class «elementMethodName()» extends GroupToken {
 // «grammarFragmentToStr()»
 protected class «elementMethodName()» extends RuleCallToken {
 	
-«EXPAND constructor»
+«EXPAND constructor-»
 	
 	protected Solution createSolution() {
 «IF calledParserRule() != null-»
@@ -146,8 +136,8 @@ protected class «elementMethodName()» extends RuleCallToken {
 		if(!current.isInstanceOf("«calledParserRule().getReturnTypeName()»")) return null;
 		return new «calledParserRule().alternatives.elementMethodName()»(current, this).firstSolution();
 «ELSE-»
-		// lexer rule call
-		return this;
+		// FIXME: lexer rule call
+		return null;
 «ENDIF-»
 	}
 }
@@ -158,76 +148,60 @@ protected class «elementMethodName()» extends RuleCallToken {
 
 «DEFINE assignmentCreate FOR AbstractElement-»
 		// FIXME: doing nothing for «metaType»
-		return null;
 «ENDDEFINE»
 
 «DEFINE assignmentCreate FOR Keyword-»
-		return new Solution(obj);
+		if("«value.replaceAll("\\\\","\\\\\\\\").replaceAll("\\\"","\\\\\\\"")»".equals(value)) { // «metaType.name»
+			type = AssignmentType.KW;
+			element = (AbstractElement)getGrammarElement("«objectURI()»");
+			return new Solution(obj);
+		}
 «ENDDEFINE»
 
-«DEFINE assignmentCreate FOR Alternatives-»
-«FOREACH containedKeywords() AS k-»
-		if("«k.value.replaceAll("\\\\","\\\\\\\\").replaceAll("\\\"","\\\\\\\"")»".equals(value))
-			element = (AbstractElement)getGrammarElement("«k.objectURI()»");
-		else «ENDFOREACH-»
-		return null;
-		return new Solution(obj);
+«DEFINE assignmentCreate FOR CrossReference-»
+		if(value instanceof EObject) { // «metaType.name»
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("«type.name»")) {
+				type = AssignmentType.CR;
+				element = (AbstractElement)getGrammarElement("«objectURI()»"); 
+				return new Solution(obj);
+			}
+		}
 «ENDDEFINE»
 
 «DEFINE assignmentCreate FOR RuleCall-»
 «IF calledParserRule()!=null-»
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("«calledParserRule().getReturnTypeName()»")) return null;
-		AbstractToken t = new «calledParserRule().alternatives.elementMethodName()»(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
+		if(value instanceof EObject) { // «metaType.name»
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("«calledParserRule().getReturnTypeName()»")) {
+				Solution s = new «calledParserRule().alternatives.elementMethodName()»(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
 «ELSE-»
-		return new Solution(obj);
+		if(true) { // «metaType.name» FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("«objectURI()»"); 
+			return new Solution(obj);
+		}
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE assignmentCallback FOR AbstractElement-»
-		// FIXME: doing nothing for «metaType»
-«ENDDEFINE»
-
-«DEFINE assignmentCallback FOR Keyword-»
-		callback.keywordCall(current, (Keyword)element);
-«ENDDEFINE»
-
-«DEFINE assignmentCallback FOR Alternatives-»
-		if(element instanceof Keyword)
-			callback.keywordCall(current, (Keyword)element);
-«ENDDEFINE»
-
-«DEFINE assignmentCallback FOR RuleCall-»
-«IF calledParserRule()!=null-»
-		// Nothing to do for ParserRule Call «name»
-«ELSE-»
-		callback.lexerRuleCall(current, (RuleCall) element, value);
-«ENDIF-»
-«ENDDEFINE»
 
 «DEFINE element FOR Assignment»
 // «grammarFragmentToStr()»
 protected class «elementMethodName()» extends AssignmentToken  {
-	//private static Logger logger = Logger.getLogger(«elementMethodName()».class);
-	protected AbstractElement element = (AbstractElement)getGrammarElement("«terminal.objectURI()»");
-	protected Object value;
 	
-«EXPAND constructor»
+«EXPAND constructor-»
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("«feature»")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("«feature»");
-		// handling «terminal.metaType»
-		«EXPAND assignmentCreate FOR terminal-»
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// logger.debug("«elementMethodName()»Callback(\"«terminal.metaType.name»\", " + value + ")");
-		«EXPAND assignmentCallback FOR terminal-»
+		if((value = current.getConsumable("«feature»",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("«feature»");
+		«EXPAND assignmentCreate FOREACH getNestedElementsFromAssignment()-»
+		return null;
 	}
 }
 «ENDDEFINE»
@@ -240,14 +214,13 @@ protected class «elementMethodName()» extends AssignmentToken  {
 // «grammarFragmentToStr()»
 protected class «elementMethodName()» extends AssignmentToken  {
 
-«EXPAND constructor»
+«EXPAND constructor-»
 	
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("«typeName.name»")) return null;
-		if(!current.isConsumable("«feature»")) return null;
-		IInstanceDescription obj = current.createClone();
-		Object val = obj.consume("«feature»");
-		if(!obj.isConsumed()) return null;
+		Object val = current.getConsumable("«feature»", false);
+		if(val == null) return null;
+		if(!current.isConsumedWithLastConsumtion("«feature»")) return null;
 		return new Solution(getDescr((EObject)val));
 	}
 }
@@ -263,7 +236,7 @@ protected class «elementMethodName()» extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("«objectURI()»");
 	
-	public «elementMethodName()»(InstanceDescription curr, AbstractToken pred) {
+	public «elementMethodName()»(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, «IF !cardinality.isRequired()»!«ENDIF»IS_REQUIRED);
 	}
 	
@@ -279,6 +252,24 @@ protected class «elementMethodName()» extends KeywordToken  {
 «ELSE-»
 		// FIXME: unknown cardinality '«cardinality»' 
 «ENDIF-»		
+	}
+}
+«ENDDEFINE»
+
+
+«REM» ************ CrossReference ************* «ENDREM»
+
+«DEFINE element FOR CrossReference»
+// «grammarFragmentToStr()»
+protected class «elementMethodName()» extends AbstractToken  {
+
+«EXPAND constructor-»
+	
+	protected Solution createSolution() {
+		// FIXME: This class has been generated because there is an unassigned 
+		// CrossReference in your grammar. This means your grammar is invalid, 
+		// since CrossReferences are only allowed inside Assignments.
+		return null;
 	}
 }
 «ENDDEFINE»

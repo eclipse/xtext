@@ -29,23 +29,33 @@ public class InstanceDescription implements IInstanceDescription {
 	 */
 	public AbstractParseTreeConstructor parseTreeConstr;
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.parsetree.impl.IInstanceDescription#isInstanceOf(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.xtext.parsetree.impl.IInstanceDescription#isInstanceOf(java
+	 * .lang.String)
 	 */
 	public boolean isInstanceOf(String string) {
 		EClass class1 = this.parseTreeConstr.getFactory().getEClass(string);
 		return class1 != null && class1.isSuperTypeOf(getDelegate().eClass());
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.parsetree.impl.IInstanceDescription#isOfType(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.xtext.parsetree.impl.IInstanceDescription#isOfType(java.lang
+	 * .String)
 	 */
 	public boolean isOfType(String string) {
 		EClass class1 = this.parseTreeConstr.getFactory().getEClass(string);
 		return class1 != null && class1.equals(getDelegate().eClass());
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.xtext.parsetree.impl.IInstanceDescription#getDelegate()
 	 */
 	public EObject getDelegate() {
@@ -55,13 +65,16 @@ public class InstanceDescription implements IInstanceDescription {
 	public EObject described;
 	public Map<String, Integer> featureConsumedCounter = new HashMap<String, Integer>();
 
-	public InstanceDescription(AbstractParseTreeConstructor abstractInternalParseTreeConstructor, EObject described) {
+	public InstanceDescription(
+			AbstractParseTreeConstructor abstractInternalParseTreeConstructor,
+			EObject described) {
 		super();
 		this.parseTreeConstr = abstractInternalParseTreeConstructor;
 		if (described == null)
 			throw new NullPointerException("described");
 		this.described = described;
-		EList<EStructuralFeature> features = described.eClass().getEAllStructuralFeatures();
+		EList<EStructuralFeature> features = described.eClass()
+				.getEAllStructuralFeatures();
 		for (EStructuralFeature f : features) {
 			Integer integer = 0;
 			if (described.eIsSet(f)) {
@@ -75,15 +88,15 @@ public class InstanceDescription implements IInstanceDescription {
 		}
 	}
 
-	private InstanceDescription(AbstractParseTreeConstructor abstractInternalParseTreeConstructor, EObject described, Map<String, Integer> featureConsumedCounter) {
+	private InstanceDescription(
+			AbstractParseTreeConstructor abstractInternalParseTreeConstructor,
+			EObject described, Map<String, Integer> featureConsumedCounter) {
 		super();
 		this.parseTreeConstr = abstractInternalParseTreeConstructor;
 		this.described = described;
 		this.featureConsumedCounter = featureConsumedCounter;
 	}
 
-
-	
 	@Override
 	public String toString() {
 		List<String> l = new ArrayList<String>();
@@ -122,9 +135,13 @@ public class InstanceDescription implements IInstanceDescription {
 		featureConsumedCounter.put(feature, counter - 1);
 		return get;
 	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.parsetree.impl.IInstanceDescription#get(java.lang.String)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.xtext.parsetree.impl.IInstanceDescription#get(java.lang.String
+	 * )
 	 */
 	public Object get(String feature) {
 		Integer counter = lazyGet(feature);
@@ -163,14 +180,20 @@ public class InstanceDescription implements IInstanceDescription {
 		return described.eClass().getEStructuralFeature(feature);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.parsetree.impl.IInstanceDescription#isConsumable(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.xtext.parsetree.impl.IInstanceDescription#isConsumable(java
+	 * .lang.String)
 	 */
 	public boolean isConsumable(String feature) {
 		return lazyGet(feature) > 0;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.xtext.parsetree.impl.IInstanceDescription#isConsumed()
 	 */
 	public boolean isConsumed() {
@@ -182,26 +205,63 @@ public class InstanceDescription implements IInstanceDescription {
 	}
 
 	public IInstanceDescription createClone() {
-		return new InstanceDescription(this.parseTreeConstr, described, new HashMap<String, Integer>(featureConsumedCounter));
+		return new InstanceDescription(this.parseTreeConstr, described,
+				new HashMap<String, Integer>(featureConsumedCounter));
 	}
 
 	public int getConsumed(String feature) {
-		EStructuralFeature feature2 = described.eClass().getEStructuralFeature(feature);
+		EStructuralFeature feature2 = described.eClass().getEStructuralFeature(
+				feature);
 		if (feature2.isMany()) {
-			return ((Collection<?>)described.eGet(feature2)).size()-featureConsumedCounter.get(feature);
+			return ((Collection<?>) described.eGet(feature2)).size()
+					- featureConsumedCounter.get(feature);
 		}
-		return 1-featureConsumedCounter.get(feature); 
+		return 1 - featureConsumedCounter.get(feature);
 	}
-	
+
 	public String uniqueStateString() {
 		StringBuffer buff = new StringBuffer();
 		buff.append(getDelegate());
-		List<String> features = new ArrayList<String>(featureConsumedCounter.keySet());
+		List<String> features = new ArrayList<String>(featureConsumedCounter
+				.keySet());
 		Collections.sort(features);
 		for (String f : features) {
 			buff.append(f).append(featureConsumedCounter.get(f));
 		}
 		return buff.toString();
+	}
+
+	public IInstanceDescription cloneAndConsume(String feature) {
+		InstanceDescription inst = new InstanceDescription(
+				this.parseTreeConstr, described, new HashMap<String, Integer>(
+						featureConsumedCounter));
+		inst.featureConsumedCounter.put(feature, inst.lazyGet(feature) - 1);
+		return inst;
+	}
+
+	public Object getConsumable(String feature, boolean allowDefault) {
+		EStructuralFeature f = getFeature(feature);
+		if (f != null
+				&& (isConsumable(feature) || (allowDefault && !f.isMany()))) {
+			Integer counter = lazyGet(feature);
+			Object get = described.eGet(f);
+			if (f.isMany()) {
+				List<?> list = (List<?>) get;
+				get = list.get(counter - 1);
+			}
+			return get;
+		}
+		return null;
+	}
+
+	public boolean isConsumedWithLastConsumtion(String feature) {
+		for (Entry<String, Integer> e : featureConsumedCounter.entrySet()) {
+			Integer i = (e.getKey().equals(feature)) ? e.getValue() - 1 : e
+					.getValue();
+			if (i > 0)
+				return false;
+		}
+		return true;
 	}
 
 }

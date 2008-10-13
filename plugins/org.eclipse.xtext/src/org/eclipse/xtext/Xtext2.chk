@@ -38,6 +38,8 @@ context GeneratedMetamodel ERROR "Duplicate aliases are only allowed for referen
 
 context AbstractRule ERROR "Name must be unique" :
 	grammar().rules.select(p | p.name == name).size==1;
+	
+// TODO: check that CrossReferences can only appear inside Assignments
 
 /*
 context ParserRule ERROR "Returned class " + getReturnTypeName() + " cannot be resolved" :

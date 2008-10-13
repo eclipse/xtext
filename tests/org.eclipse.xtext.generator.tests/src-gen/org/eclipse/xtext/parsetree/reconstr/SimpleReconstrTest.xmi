@@ -26,12 +26,18 @@
     <alternatives xsi:type="xtext:Alternatives">
       <groups xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:RuleCall" name="Atom"/>
-          <groups xsi:type="xtext:RuleCall" name="TwoNumbers"/>
+          <groups xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Alternatives">
+              <groups xsi:type="xtext:RuleCall" name="Atom"/>
+              <groups xsi:type="xtext:RuleCall" name="TwoNumbers"/>
+            </groups>
+            <groups xsi:type="xtext:RuleCall" name="ManyStrings"/>
+          </groups>
+          <groups xsi:type="xtext:RuleCall" name="Parens"/>
         </groups>
-        <groups xsi:type="xtext:RuleCall" name="ManyStrings"/>
+        <groups xsi:type="xtext:RuleCall" name="Type"/>
       </groups>
-      <groups xsi:type="xtext:RuleCall" name="Parens"/>
+      <groups xsi:type="xtext:RuleCall" name="Ref2"/>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Atom">
@@ -56,11 +62,19 @@
   </rules>
   <rules xsi:type="xtext:ParserRule" name="TwoNumbers">
     <alternatives xsi:type="xtext:Group">
-      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="num1">
-        <terminal xsi:type="xtext:RuleCall" name="INT"/>
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="num1">
+          <terminal xsi:type="xtext:RuleCall" name="INT"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="num2">
+          <terminal xsi:type="xtext:RuleCall" name="INT"/>
+        </abstractTokens>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="num2">
-        <terminal xsi:type="xtext:RuleCall" name="INT"/>
+      <abstractTokens xsi:type="xtext:Group" cardinality="*">
+        <abstractTokens xsi:type="xtext:Keyword" value="#"/>
+        <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="num3">
+          <terminal xsi:type="xtext:RuleCall" name="INT"/>
+        </abstractTokens>
       </abstractTokens>
     </alternatives>
   </rules>
@@ -74,6 +88,38 @@
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="str2">
         <terminal xsi:type="xtext:RuleCall" name="STRING"/>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Type">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="type"/>
+          <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+            <terminal xsi:type="xtext:RuleCall" name="ID"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Keyword" value="extends"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="extends">
+        <terminal xsi:type="xtext:CrossReference">
+          <type name="Type"/>
+        </terminal>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Ref2">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Keyword" value="#2"/>
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="ref2">
+        <terminal xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Keyword" value="mykeyword1"/>
+            <groups xsi:type="xtext:RuleCall" name="STRING"/>
+          </groups>
+          <groups xsi:type="xtext:Keyword" value="mykeyword2"/>
+        </terminal>
       </abstractTokens>
     </alternatives>
   </rules>

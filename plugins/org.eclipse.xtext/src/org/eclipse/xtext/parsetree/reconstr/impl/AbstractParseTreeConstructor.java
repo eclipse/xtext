@@ -8,8 +8,12 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
@@ -19,10 +23,15 @@ import org.eclipse.xtext.service.Inject;
 
 public abstract class AbstractParseTreeConstructor implements
 		IParseTreeConstructor {
+
+	protected enum AssignmentType {
+		KW, PRC, LRC, CR
+	};
+
 	public abstract class AbstractToken {
 
 		public class Solution {
-			private final InstanceDescription current;
+			private final IInstanceDescription current;
 			private final AbstractToken predecessor;
 
 			public Solution() {
@@ -37,20 +46,20 @@ public abstract class AbstractParseTreeConstructor implements
 				this.predecessor = predecessor;
 			}
 
-			public Solution(final InstanceDescription current) {
+			public Solution(final IInstanceDescription current) {
 				super();
 				this.current = current;
 				this.predecessor = AbstractToken.this;
 			}
 
-			public Solution(InstanceDescription current,
+			public Solution(IInstanceDescription current,
 					AbstractToken predecessor) {
 				super();
 				this.current = current;
 				this.predecessor = predecessor;
 			}
 
-			public InstanceDescription getCurrent() {
+			public IInstanceDescription getCurrent() {
 				return current;
 			}
 
@@ -61,13 +70,13 @@ public abstract class AbstractParseTreeConstructor implements
 
 		protected final static boolean IS_MANY = true;
 		protected final static boolean IS_REQUIRED = true;
-		protected final InstanceDescription current;
+		protected final IInstanceDescription current;
 		protected final boolean many;
 		protected Solution otherSolution;
 		protected final AbstractToken predecessor;
 		protected final boolean required;
 
-		public AbstractToken(InstanceDescription curr, AbstractToken pred,
+		public AbstractToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
 			super();
 			this.current = curr;
@@ -146,12 +155,12 @@ public abstract class AbstractParseTreeConstructor implements
 			return t1;
 		}
 
-		protected AbstractToken newInstance(InstanceDescription curr,
+		protected AbstractToken newInstance(IInstanceDescription curr,
 				AbstractToken pred) {
 			try {
 				Constructor<?> c = getClass().getConstructor(
 						getClass().getEnclosingClass(),
-						InstanceDescription.class, AbstractToken.class);
+						IInstanceDescription.class, AbstractToken.class);
 				return (AbstractToken) c.newInstance(
 						AbstractParseTreeConstructor.this, curr, pred);
 			} catch (SecurityException e) {
@@ -182,34 +191,63 @@ public abstract class AbstractParseTreeConstructor implements
 
 	public abstract class ActionToken extends AbstractToken {
 
-		public ActionToken(InstanceDescription curr, AbstractToken pred,
+		public ActionToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
 			super(curr, pred, many, required);
 		}
 
 	}
 
-	public abstract class AlternativeToken extends AbstractToken {
+	public abstract class AlternativesToken extends AbstractToken {
 
-		public AlternativeToken(InstanceDescription curr, AbstractToken pred,
+		protected boolean first = true;
+
+		public AlternativesToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
 			super(curr, pred, many, required);
 		}
 
+		protected boolean activateNextSolution() {
+			if (first) {
+				first = false;
+				return true;
+			}
+			return false;
+		}
 	}
 
 	public abstract class AssignmentToken extends AbstractToken {
+		protected AbstractElement element;
+		protected Object value;
+		protected AssignmentType type;
 
-		public AssignmentToken(InstanceDescription curr, AbstractToken pred,
+		public AssignmentToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
 			super(curr, pred, many, required);
 		}
 
+		public void executeCallback(IParseTreeConstructorCallback callback) {
+			if (type != null)
+				switch (type) {
+				case KW:
+					callback.keywordCall(current, (Keyword) element);
+					return;
+				case PRC: /* noting to do for parser rule calls */
+					return;
+				case LRC:
+					callback.lexerRuleCall(current, (RuleCall) element, value);
+					return;
+				case CR:
+					callback.crossRefCall(current, (CrossReference) element,
+							(EObject) value);
+					return;
+				}
+		}
 	}
 
 	public abstract class GroupToken extends AbstractToken {
 
-		public GroupToken(InstanceDescription curr, AbstractToken pred,
+		public GroupToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
 			super(curr, pred, many, required);
 		}
@@ -218,7 +256,7 @@ public abstract class AbstractParseTreeConstructor implements
 
 	public abstract class KeywordToken extends AbstractToken {
 
-		public KeywordToken(InstanceDescription curr, AbstractToken pred,
+		public KeywordToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
 			super(curr, pred, many, required);
 		}
@@ -227,7 +265,7 @@ public abstract class AbstractParseTreeConstructor implements
 
 	public abstract class RuleCallToken extends AbstractToken {
 
-		public RuleCallToken(InstanceDescription curr, AbstractToken pred,
+		public RuleCallToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
 			super(curr, pred, many, required);
 		}
@@ -248,7 +286,7 @@ public abstract class AbstractParseTreeConstructor implements
 	@Inject
 	private IGrammarAccess grammar;
 
-	protected final InstanceDescription getDescr(EObject obj) {
+	protected final IInstanceDescription getDescr(EObject obj) {
 		return new InstanceDescription(this, obj);
 	}
 

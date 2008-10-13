@@ -10,6 +10,7 @@ package org.eclipse.xtext.parsetree.reconstr.callbacks;
 
 import java.io.OutputStream;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
@@ -47,5 +48,8 @@ public class DefaultParsetreeReconstructorCallback implements IParseTreeConstruc
 	}
 
 	public void endSerialize() {
+	}
+
+	public void crossRefCall(IInstanceDescription current, CrossReference call, EObject value) {
 	}
 }

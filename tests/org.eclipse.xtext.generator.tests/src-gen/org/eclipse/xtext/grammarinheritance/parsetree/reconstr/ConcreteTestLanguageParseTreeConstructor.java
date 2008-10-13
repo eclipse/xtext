@@ -3,7 +3,7 @@ Generated with Xtext
 */
 package org.eclipse.xtext.grammarinheritance.parsetree.reconstr;
 
-
+//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
@@ -20,7 +20,7 @@ public class ConcreteTestLanguageParseTreeConstructor extends AbstractParseTreeC
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
-		InstanceDescription inst = getDescr(obj);
+		IInstanceDescription inst = getDescr(obj);
 		Solution s;
 		if(inst.isInstanceOf("ConcreteParserRule") && (s = new ConcreteParserRule_Group(inst, null).firstSolution()) != null) return s;
 		if(inst.isInstanceOf("mm::AType") && (s = new InheritedParserRule_Group(inst, null).firstSolution()) != null) return s;
@@ -37,10 +37,9 @@ public class ConcreteTestLanguageParseTreeConstructor extends AbstractParseTreeC
 // 'model' magicNumber = REAL ':' ( elements += InheritedParserRule ) *
 protected class ConcreteParserRule_Group extends GroupToken {
 	
-	public ConcreteParserRule_Group(InstanceDescription curr, AbstractToken pred) {
+	public ConcreteParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new ConcreteParserRule_1_Assignment_elements(current, this).firstSolution();
@@ -52,10 +51,9 @@ protected class ConcreteParserRule_Group extends GroupToken {
 // 'model' magicNumber = REAL ':'
 protected class ConcreteParserRule_0_Group extends GroupToken {
 	
-	public ConcreteParserRule_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public ConcreteParserRule_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new ConcreteParserRule_0_1_Keyword(current, this).firstSolution();
@@ -67,10 +65,9 @@ protected class ConcreteParserRule_0_Group extends GroupToken {
 // 'model' magicNumber = REAL
 protected class ConcreteParserRule_0_0_Group extends GroupToken {
 	
-	public ConcreteParserRule_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public ConcreteParserRule_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new ConcreteParserRule_0_0_1_Assignment_magicNumber(current, this).firstSolution();
@@ -84,7 +81,7 @@ protected class ConcreteParserRule_0_0_0_Keyword_model extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
 	
-	public ConcreteParserRule_0_0_0_Keyword_model(InstanceDescription curr, AbstractToken pred) {
+	public ConcreteParserRule_0_0_0_Keyword_model(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -99,26 +96,20 @@ protected class ConcreteParserRule_0_0_0_Keyword_model extends KeywordToken  {
 
 // magicNumber = REAL
 protected class ConcreteParserRule_0_0_1_Assignment_magicNumber extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public ConcreteParserRule_0_0_1_Assignment_magicNumber(InstanceDescription curr, AbstractToken pred) {
+	public ConcreteParserRule_0_0_1_Assignment_magicNumber(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("magicNumber")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("magicNumber");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("ConcreteParserRule_0_0_1_Assignment_magicNumberCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("magicNumber",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("magicNumber");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
@@ -128,7 +119,7 @@ protected class ConcreteParserRule_0_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1");
 	
-	public ConcreteParserRule_0_1_Keyword(InstanceDescription curr, AbstractToken pred) {
+	public ConcreteParserRule_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -144,31 +135,25 @@ protected class ConcreteParserRule_0_1_Keyword extends KeywordToken  {
 
 // ( elements += InheritedParserRule ) *
 protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public ConcreteParserRule_1_Assignment_elements(InstanceDescription curr, AbstractToken pred) {
+	public ConcreteParserRule_1_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("elements")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("elements");
-		// handling xtext::RuleCall
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("mm::AType")) return null;
-		AbstractToken t = new InheritedParserRule_Group(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("ConcreteParserRule_1_Assignment_elementsCallback(\"xtext::RuleCall\", " + value + ")");
-		// Nothing to do for ParserRule Call InheritedParserRule
+		if((value = current.getConsumable("elements",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("mm::AType")) {
+				Solution s = new InheritedParserRule_Group(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
 	}
 }
 
@@ -185,10 +170,9 @@ protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken
 // 'element' name = ID
 protected class InheritedParserRule_Group extends GroupToken {
 	
-	public InheritedParserRule_Group(InstanceDescription curr, AbstractToken pred) {
+	public InheritedParserRule_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new InheritedParserRule_1_Assignment_name(current, this).firstSolution();
@@ -202,7 +186,7 @@ protected class InheritedParserRule_0_Keyword_element extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0");
 	
-	public InheritedParserRule_0_Keyword_element(InstanceDescription curr, AbstractToken pred) {
+	public InheritedParserRule_0_Keyword_element(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -217,26 +201,20 @@ protected class InheritedParserRule_0_Keyword_element extends KeywordToken  {
 
 // name = ID
 protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public InheritedParserRule_1_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public InheritedParserRule_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("name")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("name");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("InheritedParserRule_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("name",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 

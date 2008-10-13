@@ -1,7 +1,9 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
@@ -9,6 +11,8 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextStandaloneSetup;
@@ -59,16 +63,35 @@ public class ParseTreeConstructorUtil {
 	}
 
 	public static String grammarFragmentToStr(EObject obj) {
-		IServiceScope ss = XtextStandaloneSetup.getServiceScope();
-		IParseTreeConstructor ser = ServiceRegistry.getService(ss,
-				IParseTreeConstructor.class);
-		SimpleSerializingCallback cb = new SimpleSerializingCallback();
-		ServiceRegistry.injectServices(ss, cb);
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		Map<String, Object> opt = new HashMap<String, Object>();
-		opt.put(AbstractParseTreeConstructor.OPTION_SERIALIZER_STRATEGY, cb);
-		ser.serialize(out, obj, opt);
-		return out.toString();
+		try {
+			IServiceScope ss = XtextStandaloneSetup.getServiceScope();
+			IParseTreeConstructor ser = ServiceRegistry.getService(ss,
+					IParseTreeConstructor.class);
+			SimpleSerializingCallback cb = new SimpleSerializingCallback();
+			ServiceRegistry.injectServices(ss, cb);
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			Map<String, Object> o = new HashMap<String, Object>();
+			o.put(AbstractParseTreeConstructor.OPTION_SERIALIZER_STRATEGY, cb);
+			ser.serialize(out, obj, o);
+			return out.toString();
+		} catch (Throwable e) {
+			return "(error)";
+		}
+	}
+
+	public static List<AbstractElement> getNestedElementsFromAssignment(
+			Assignment assignment) {
+		AbstractElement t = assignment.getTerminal();
+		ArrayList<AbstractElement> r = new ArrayList<AbstractElement>();
+		if (t instanceof Keyword || t instanceof RuleCall
+				|| t instanceof CrossReference)
+			r.add(t);
+		else {
+			r.addAll(GrammarUtil.containedKeywords(t));
+			r.addAll(GrammarUtil.containedRuleCalls(t));
+			r.addAll(GrammarUtil.containedCrossReferences(t));
+		}
+		return r;
 	}
 
 }

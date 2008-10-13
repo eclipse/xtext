@@ -3,7 +3,7 @@ Generated with Xtext
 */
 package org.eclipse.xtext.crossrefs.parsetree.reconstr;
 
-
+//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
@@ -20,7 +20,7 @@ public class LangAParseTreeConstructor extends AbstractParseTreeConstructor {
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
-		InstanceDescription inst = getDescr(obj);
+		IInstanceDescription inst = getDescr(obj);
 		Solution s;
 		if(inst.isInstanceOf("Main") && (s = new Main_Group(inst, null).firstSolution()) != null) return s;
 		if(inst.isInstanceOf("Import") && (s = new Import_Group(inst, null).firstSolution()) != null) return s;
@@ -38,10 +38,9 @@ public class LangAParseTreeConstructor extends AbstractParseTreeConstructor {
 // ( imports += Import ) * ( types += Type ) *
 protected class Main_Group extends GroupToken {
 	
-	public Main_Group(InstanceDescription curr, AbstractToken pred) {
+	public Main_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Main_1_Assignment_types(current, this).firstSolution();
@@ -52,61 +51,49 @@ protected class Main_Group extends GroupToken {
 
 // ( imports += Import ) *
 protected class Main_0_Assignment_imports extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal");
-	protected Object value;
 	
-	public Main_0_Assignment_imports(InstanceDescription curr, AbstractToken pred) {
+	public Main_0_Assignment_imports(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("imports")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("imports");
-		// handling xtext::RuleCall
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("Import")) return null;
-		AbstractToken t = new Import_Group(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Main_0_Assignment_importsCallback(\"xtext::RuleCall\", " + value + ")");
-		// Nothing to do for ParserRule Call Import
+		if((value = current.getConsumable("imports",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("imports");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Import")) {
+				Solution s = new Import_Group(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
 	}
 }
 
 // ( types += Type ) *
 protected class Main_1_Assignment_types extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Main_1_Assignment_types(InstanceDescription curr, AbstractToken pred) {
+	public Main_1_Assignment_types(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("types")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("types");
-		// handling xtext::RuleCall
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("Type")) return null;
-		AbstractToken t = new Type_Group(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Main_1_Assignment_typesCallback(\"xtext::RuleCall\", " + value + ")");
-		// Nothing to do for ParserRule Call Type
+		if((value = current.getConsumable("types",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("types");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Type")) {
+				Solution s = new Type_Group(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
 	}
 }
 
@@ -123,10 +110,9 @@ protected class Main_1_Assignment_types extends AssignmentToken  {
 // 'import' uri = STRING
 protected class Import_Group extends GroupToken {
 	
-	public Import_Group(InstanceDescription curr, AbstractToken pred) {
+	public Import_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Import_1_Assignment_uri(current, this).firstSolution();
@@ -140,7 +126,7 @@ protected class Import_0_Keyword_import extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.1/@alternatives/@abstractTokens.0");
 	
-	public Import_0_Keyword_import(InstanceDescription curr, AbstractToken pred) {
+	public Import_0_Keyword_import(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -155,26 +141,20 @@ protected class Import_0_Keyword_import extends KeywordToken  {
 
 // uri = STRING
 protected class Import_1_Assignment_uri extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Import_1_Assignment_uri(InstanceDescription curr, AbstractToken pred) {
+	public Import_1_Assignment_uri(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("uri")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("uri");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Import_1_Assignment_uriCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("uri",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("uri");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
@@ -191,10 +171,9 @@ protected class Import_1_Assignment_uri extends AssignmentToken  {
 // 'type' name = ID 'extends' ^extends = [ Type ]
 protected class Type_Group extends GroupToken {
 	
-	public Type_Group(InstanceDescription curr, AbstractToken pred) {
+	public Type_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Type_1_Assignment_extends(current, this).firstSolution();
@@ -206,10 +185,9 @@ protected class Type_Group extends GroupToken {
 // 'type' name = ID 'extends'
 protected class Type_0_Group extends GroupToken {
 	
-	public Type_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Type_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Type_0_1_Keyword_extends(current, this).firstSolution();
@@ -221,10 +199,9 @@ protected class Type_0_Group extends GroupToken {
 // 'type' name = ID
 protected class Type_0_0_Group extends GroupToken {
 	
-	public Type_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Type_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Type_0_0_1_Assignment_name(current, this).firstSolution();
@@ -238,7 +215,7 @@ protected class Type_0_0_0_Keyword_type extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
 	
-	public Type_0_0_0_Keyword_type(InstanceDescription curr, AbstractToken pred) {
+	public Type_0_0_0_Keyword_type(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -253,26 +230,20 @@ protected class Type_0_0_0_Keyword_type extends KeywordToken  {
 
 // name = ID
 protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Type_0_0_1_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public Type_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("name")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("name");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Type_0_0_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("name",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
@@ -282,7 +253,7 @@ protected class Type_0_1_Keyword_extends extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1");
 	
-	public Type_0_1_Keyword_extends(InstanceDescription curr, AbstractToken pred) {
+	public Type_0_1_Keyword_extends(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -298,27 +269,23 @@ protected class Type_0_1_Keyword_extends extends KeywordToken  {
 
 // ^extends = [ Type ]
 protected class Type_1_Assignment_extends extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Type_1_Assignment_extends(InstanceDescription curr, AbstractToken pred) {
+	public Type_1_Assignment_extends(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("extends")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("extends");
-		// handling xtext::CrossReference
-		// FIXME: doing nothing for xtext::CrossReference
+		if((value = current.getConsumable("extends",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("extends");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Type")) {
+				type = AssignmentType.CR;
+				element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal"); 
+				return new Solution(obj);
+			}
+		}
 		return null;
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Type_1_Assignment_extendsCallback(\"xtext::CrossReference\", " + value + ")");
-		// FIXME: doing nothing for xtext::CrossReference
 	}
 }
 

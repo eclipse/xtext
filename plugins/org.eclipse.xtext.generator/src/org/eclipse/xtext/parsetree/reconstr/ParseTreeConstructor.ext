@@ -21,6 +21,9 @@ String elementMethodName(AbstractElement ele):
 
 String grammarFragmentToStr(EObject ele):	
 	JAVA org.eclipse.xtext.parsetree.reconstr.ParseTreeConstructorUtil.grammarFragmentToStr(org.eclipse.emf.ecore.EObject);
+	
+List[AbstractElement] getNestedElementsFromAssignment(Assignment ass):
+	JAVA org.eclipse.xtext.parsetree.reconstr.ParseTreeConstructorUtil.getNestedElementsFromAssignment(org.eclipse.xtext.Assignment);
 		
 boolean isRequired(String cardinality):
 	cardinality == null || cardinality == '' || cardinality == '+';

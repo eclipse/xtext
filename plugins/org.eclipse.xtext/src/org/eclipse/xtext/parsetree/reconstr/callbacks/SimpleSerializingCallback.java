@@ -6,9 +6,7 @@ import java.io.OutputStream;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -18,7 +16,8 @@ import org.eclipse.xtext.service.Inject;
 public class SimpleSerializingCallback extends
 		DefaultParsetreeReconstructorCallback {
 
-	static final Logger logger = Logger.getLogger(SimpleSerializingCallback.class);
+	static final Logger logger = Logger
+			.getLogger(SimpleSerializingCallback.class);
 
 	@Inject
 	protected IValueConverterService converterService;
@@ -49,22 +48,11 @@ public class SimpleSerializingCallback extends
 		outputHasStarted = false;
 		out = output;
 	}
-	
-	public void crossRefCall(IInstanceDescription current, CrossReference call) {
-		logger.debug("crossRefCall(" + call + ")");
-		Assignment ass = GrammarUtil.containingAssignment(call);
-		if (ass == null)
-			throw new IllegalStateException("Unassigned cross reference "
-					+ call);
-		Object object = current.get(ass.getFeature());
-		if (object instanceof EObject) {
-			EObject obj = (EObject) object;
-			// prepend(obj.eResource().getURIFragment(obj));
-			before(current, call);
-			append(obj.eResource().getURIFragment(obj));
-		}
-		throw new IllegalStateException("Can't serialize cross reference to "
-				+ object);
+
+	public void crossRefCall(IInstanceDescription current, CrossReference call,
+			EObject value) {
+		before(current, call);
+		append(value.eResource().getURIFragment(value));
 	}
 
 	public IValueConverterService getConverterService() {
