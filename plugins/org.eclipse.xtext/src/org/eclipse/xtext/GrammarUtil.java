@@ -114,6 +114,10 @@ public class GrammarUtil {
 	public static List<Keyword> containedKeywords(EObject e) {
 		return getAllContentsOfType(e, Keyword.class);
 	}
+	
+	public static List<CrossReference> containedCrossReferences(EObject e) {
+		return getAllContentsOfType(e, CrossReference.class);
+	}
 
 	public static List<AbstractElement> elementsBeforeThisInContainingGroup(AbstractElement _this) {
 		Group g = containingGroup(_this);

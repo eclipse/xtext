@@ -24,7 +24,7 @@ public interface IInstanceDescription {
 	 *            language
 	 * @return true if the delegate's type is assignable to the given type
 	 */
-	public abstract boolean isOfType(String string);
+//	public abstract boolean isOfType(String string);
 
 	/**
 	 * @return the wrapped EObject
@@ -37,8 +37,15 @@ public interface IInstanceDescription {
 	 * @param feature
 	 * @return the consumed value
 	 */
-	public abstract Object get(String feature);
+//	public abstract Object get(String feature);
 	
+	public Object getConsumable(String feature, boolean allowDefault);
+	
+	public IInstanceDescription cloneAndConsume(String feature);
+	
+	public boolean isConsumedWithLastConsumtion(String feature);
+	
+	@Deprecated
 	public Object consume(String feature);
 
 	/**
@@ -46,18 +53,22 @@ public interface IInstanceDescription {
 	 * @param feature
 	 * @return whether there are any consumable values for the given feature
 	 */
+	@Deprecated
 	public abstract boolean isConsumable(String feature);
 
 	/**
 	 * 
 	 * @return whether all values referenced by the delegate have been consumed
 	 */
+	@Deprecated
 	public abstract boolean isConsumed();
 
 	/**
 	 * @param feature
 	 * @return the number of values already consumed for this feature
 	 */
-	public abstract int getConsumed(String feature);
+//	public abstract int getConsumed(String feature);
+	
+	public IInstanceDescription createClone();
 
 }
