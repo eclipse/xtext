@@ -12,6 +12,48 @@
             label="Syntax">
       </keyword>
    </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="org.eclipse.xtext.ui.core.service.view.ServiceRegistryView"
+            id="org.eclipse.xtext.ui.core.ServiceRegistryView"
+            name="Service Registry"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.viewActions">
+      <viewContribution
+            id="org.eclipse.xtext.ui.core.serviceRegViewContribution"
+            targetID="org.eclipse.xtext.ui.core.ServiceRegistryView">
+         <menu
+               id="org.eclipse.xtext.ui.core.serviceRegistryViewerMenu"
+               label="Main Menu">
+            <groupMarker
+                  name="org.eclipse.xtext.ui.core.mainGroup">
+            </groupMarker>
+         </menu>
+         <action
+               class="org.eclipse.xtext.ui.core.service.view.LinkWithEditorViewAction"
+               icon="icons/elcl16/synced.gif"
+               id="org.eclipse.xtext.ui.core.linkWithEditor"
+               label="Link with Editor"
+               menubarPath="mainGroup"
+               state="false"
+               style="toggle"
+               toolbarPath="mainGroup">
+         </action>
+         <action
+               class="org.eclipse.xtext.ui.core.service.view.ShowAllScopesVieweAction"
+               icon="icons/elcl16/all_instances.gif"
+               id="org.eclipse.xtext.ui.core.showAllScopes"
+               label="Show All Scopes"
+               menubarPath="mainGroup"
+               style="push"
+               toolbarPath="mainGroup">
+         </action>
+      </viewContribution>
+   </extension>
    <!--extension
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
       <hyperlinkDetector

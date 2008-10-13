@@ -23,6 +23,7 @@ import org.apache.log4j.Logger;
 /**
  * 
  * @author Jan Köhnlein
+ * @author Dennis Hübner
  * 
  */
 public class ServiceRegistry {
@@ -34,7 +35,7 @@ public class ServiceRegistry {
 
 	private static volatile boolean isFrozen = false;
 
-	private static class Entry implements Comparable<Entry> {
+	public static class Entry implements Comparable<Entry> {
 		int priority;
 		IServiceFactory factory;
 		Object cachedService;
@@ -56,6 +57,24 @@ public class ServiceRegistry {
 		public int compareTo(Entry arg0) {
 			return ((Integer) priority).compareTo(arg0.priority);
 		}
+
+		public int getPriority() {
+			return priority;
+		}
+
+		public Class<?> getServiceInterface() {
+			return factory.getServiceInterface();
+		}
+
+		public boolean isLoaded() {
+			return cachedService != null;
+		}
+
+		public Class<?> getCachedServiceClass() {
+			if (isLoaded())
+				return cachedService.getClass();
+			return null;
+		}
 	}
 
 	private static Map<IServiceScope, List<Entry>> entryMap = new HashMap<IServiceScope, List<Entry>>();
@@ -69,9 +88,11 @@ public class ServiceRegistry {
 		isFrozen = true;
 		try {
 			injectDependencies(languageDescriptor, patient);
-		} catch (RuntimeException e) {
+		}
+		catch (RuntimeException e) {
 			throw e;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new IllegalStateException(e);
 		}
 	}
@@ -145,18 +166,21 @@ public class ServiceRegistry {
 					currPriority = e.priority;
 					if (currentScope == realLanguageDescriptor && e.cachedService != null) {
 						service = (T) e.cachedService;
-					} else {
+					}
+					else {
 						service = (T) e.factory.createService();
 						if (service == null)
 							return null;
 						if (currentScope == realLanguageDescriptor) {
 							e.cachedService = service;
-						} else {
+						}
+						else {
 							addEntry(realLanguageDescriptor, e, service);
 						}
 						injectServices(realLanguageDescriptor, service);
 					}
-				} else {
+				}
+				else {
 					if (e.priority == currPriority) {
 						logger.error("Mutliple service factories for type " + serviceInterface.getName()
 								+ " in scope " + realLanguageDescriptor.getId());
@@ -217,6 +241,14 @@ public class ServiceRegistry {
 		return entries;
 	}
 
+	public static List<Entry> getRegisteredServices(IServiceScope languageDescriptor) {
+		return new ArrayList<Entry>(getEntryList(languageDescriptor));
+	}
+
+	public static List<IServiceScope> getRegisteredScopes() {
+		return new ArrayList<IServiceScope>(entryMap.keySet());
+	}
+
 	private static void injectDependencies(IServiceScope languageDescriptor, Object patient)
 			throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, SecurityException,
 			NoSuchMethodException {
@@ -231,24 +263,120 @@ public class ServiceRegistry {
 		}
 	}
 
+	public abstract class ServiceDependency {
+
+		private final Inject annotation;
+
+		private void inject(Object patient, Object dependency) throws IllegalAccessException, InvocationTargetException {
+			if (getServiceType().isInstance(dependency)) {
+				injectInternal(patient, dependency);
+			}
+		}
+
+		public ServiceDependency(Inject annotation) {
+			if (annotation == null) {
+				throw new IllegalArgumentException("Injection annotation cann't be null");
+			}
+			this.annotation = annotation;
+		}
+
+		protected abstract void injectInternal(Object patient, Object dependency) throws IllegalAccessException,
+				InvocationTargetException;
+
+		public boolean isOptional() {
+			return annotation.optional();
+		}
+
+		public abstract Class<?> getServiceType();
+
+		abstract public String getName();
+	}
+
+	class FieldServiceDependency extends ServiceDependency {
+		private final Field field;
+
+		public FieldServiceDependency(Field field) {
+			super(field.getAnnotation(Inject.class));
+			this.field = field;
+		}
+
+		@Override
+		protected void injectInternal(Object patient, Object dependency) throws IllegalArgumentException,
+				IllegalAccessException {
+			field.set(patient, dependency);
+		}
+
+		@Override
+		public String getName() {
+			return field.getName();
+		}
+
+		@Override
+		public Class<?> getServiceType() {
+			return field.getType();
+		}
+
+	}
+
+	class MethodServiceDependency extends ServiceDependency {
+		private final Method method;
+
+		public MethodServiceDependency(Method method) {
+			super(method.getAnnotation(Inject.class));
+			this.method = method;
+		}
+
+		@Override
+		protected void injectInternal(Object patient, Object dependency) throws IllegalAccessException,
+				InvocationTargetException {
+			method.invoke(patient, dependency);
+		}
+
+		@Override
+		public String getName() {
+			return method.getName();
+		}
+
+		@Override
+		public Class<?> getServiceType() {
+			return method.getParameterTypes()[0];
+		}
+
+	}
+
 	private static void injectServicesForClass(IServiceScope languageDescriptor, Object patient, Class<?> inspectedClass)
 			throws IllegalAccessException, InvocationTargetException {
+		List<ServiceDependency> dependencies = gatherDependencies(inspectedClass);
+		for (ServiceDependency serviceDependency : dependencies) {
+			if (IServiceScope.class.equals(serviceDependency.getServiceType())) {
+				serviceDependency.inject(patient, languageDescriptor);
+			}
+			else {
+				Object injectedService = internalGetService(languageDescriptor, serviceDependency.getServiceType());
+				if (injectedService == null && !serviceDependency.isOptional())
+					throw new IllegalStateException("No component found for non-optional dependency "
+							+ serviceDependency.getName() + ".");
+				serviceDependency.inject(patient, injectedService);
+			}
+		}
+
+	}
+
+	/**
+	 * @param inspectedClass
+	 * @return
+	 */
+	public static List<ServiceDependency> gatherDependencies(Class<?> inspectedClass) {
+		List<ServiceDependency> dependencies = new ArrayList<ServiceDependency>();
+		// lookup Fields
 		Field[] fields = inspectedClass.getDeclaredFields();
 		for (Field field : fields) {
 			if (field.isAnnotationPresent(Inject.class)) {
 				field.setAccessible(true);
-				if (IServiceScope.class.equals(field.getType())) {
-					field.set(patient, languageDescriptor);
-				} else {
-					Object injectedService = internalGetService(languageDescriptor, field.getType());
-					if (injectedService == null && !field.getAnnotation(Inject.class).optional())
-						throw new IllegalStateException("No component found for non-optional dependency "
-								+ field + ".");
-					field.set(patient, injectedService);
-				}
+				dependencies.add(new ServiceRegistry().new FieldServiceDependency(field));
 			}
 		}
-
+		// lookup Methods
 		Method[] methods = inspectedClass.getDeclaredMethods();
 		for (Method method : methods) {
 			Class<?>[] parameterTypes = method.getParameterTypes();
@@ -258,17 +386,10 @@ public class ServiceRegistry {
 			}
 			if (parameterTypes.length == 1 && method.isAnnotationPresent(Inject.class)) {
 				method.setAccessible(true);
-				if (IServiceScope.class.equals(parameterTypes[0])) {
-					method.invoke(patient, languageDescriptor);
-				} else {
-					Object injectedService = internalGetService(languageDescriptor, parameterTypes[0]);
-					if (injectedService == null && !method.getAnnotation(Inject.class).optional())
-						throw new IllegalStateException("No component found for non-optional dependency " + method
-								+ ".");
-					method.invoke(patient, injectedService);
-				}
+				dependencies.add(new ServiceRegistry().new MethodServiceDependency(method));
 			}
 		}
+		return dependencies;
 	}
 
 	/**

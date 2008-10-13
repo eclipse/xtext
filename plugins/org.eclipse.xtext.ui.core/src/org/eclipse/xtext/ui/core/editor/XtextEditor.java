@@ -67,6 +67,8 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 	@Inject(optional = true)
 	private IContentOutlinePage outlinePage;
 
+	private IServiceScope scope;
+
 	// TODO private IFoldingUpdater foldingSupport;
 
 	public XtextEditor() {
@@ -76,11 +78,15 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 	public void setInitializationData(IConfigurationElement config, String propertyName, Object data) {
 		super.setInitializationData(config, propertyName, data);
 		String id = config.getAttribute("id");
-		IServiceScope scope = ServiceScopeFactory.get(id);
+		scope = ServiceScopeFactory.get(id);
 		if (scope == null) {
 			throw new IllegalStateException("scope " + data + " has not been registered.");
 		}
 		ServiceRegistry.injectServices(scope, this);
+	}
+
+	public IServiceScope getScope() {
+		return scope;
 	}
 
 	private abstract class AbstractSelectionChangedListener implements ISelectionChangedListener {
@@ -152,7 +158,7 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 		log.debug("Editor instance is [" + this.toString() + "]");
 		super.doSetInput(input);
 	}
-	
+
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		log.debug("init:" + input);
@@ -167,7 +173,7 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 
 		// NOTE: Outline CANNOT be initialized here, since we do not have access
 		// to the sourceviewer yet (it will be created later).
-		
+
 		super.init(site, input);
 	}
 
@@ -197,7 +203,7 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 		}
 		return outlinePage;
 	}
-	
+
 	private OutlineSelectionChangedListener outlineSelectionChangedListener;
 
 	private OutlineSelectionChangedListener getOutlineSelectionChangedListener() {
@@ -226,7 +232,8 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 			markAsSelectionDependentAction("Format", true); //$NON-NLS-1$
 		}
 
-		// Creates an build-in click an ruler annotation marks corresponding text action
+		// Creates an build-in click an ruler annotation marks corresponding
+		// text action
 		SelectMarkerRulerAction markerAction = new XtextMarkerRulerAction(XtextUIMessages.getResourceBundle(),
 				"XtextSelectAnnotationRulerAction.", this, getVerticalRuler()); //$NON-NLS-1$
 		setAction(ITextEditorActionConstants.RULER_CLICK, markerAction);
