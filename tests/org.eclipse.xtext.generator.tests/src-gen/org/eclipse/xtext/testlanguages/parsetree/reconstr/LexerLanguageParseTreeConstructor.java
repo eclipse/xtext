@@ -3,7 +3,7 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages.parsetree.reconstr;
 
-
+//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
@@ -20,7 +20,7 @@ public class LexerLanguageParseTreeConstructor extends AbstractParseTreeConstruc
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
-		InstanceDescription inst = getDescr(obj);
+		IInstanceDescription inst = getDescr(obj);
 		Solution s;
 		if(inst.isInstanceOf("Model") && (s = new Model_Assignment_children(inst, null).firstSolution()) != null) return s;
 		if(inst.isInstanceOf("Element") && (s = new Element_Group(inst, null).firstSolution()) != null) return s;
@@ -36,31 +36,25 @@ public class LexerLanguageParseTreeConstructor extends AbstractParseTreeConstruc
 
 // ( children += Element ) *
 protected class Model_Assignment_children extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.0/@alternatives/@terminal");
-	protected Object value;
 	
-	public Model_Assignment_children(InstanceDescription curr, AbstractToken pred) {
+	public Model_Assignment_children(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("children")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("children");
-		// handling xtext::RuleCall
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("Element")) return null;
-		AbstractToken t = new Element_Group(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Model_Assignment_childrenCallback(\"xtext::RuleCall\", " + value + ")");
-		// Nothing to do for ParserRule Call Element
+		if((value = current.getConsumable("children",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("children");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Element")) {
+				Solution s = new Element_Group(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
 	}
 }
 
@@ -76,10 +70,9 @@ protected class Model_Assignment_children extends AssignmentToken  {
 // name = ID h = STRING
 protected class Element_Group extends GroupToken {
 	
-	public Element_Group(InstanceDescription curr, AbstractToken pred) {
+	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Element_1_Assignment_h(current, this).firstSolution();
@@ -90,51 +83,39 @@ protected class Element_Group extends GroupToken {
 
 // name = ID
 protected class Element_0_Assignment_name extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@terminal");
-	protected Object value;
 	
-	public Element_0_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public Element_0_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("name")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("name");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Element_0_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("name",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
 // h = STRING
 protected class Element_1_Assignment_h extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Element_1_Assignment_h(InstanceDescription curr, AbstractToken pred) {
+	public Element_1_Assignment_h(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("h")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("h");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Element_1_Assignment_hCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("h",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("h");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 

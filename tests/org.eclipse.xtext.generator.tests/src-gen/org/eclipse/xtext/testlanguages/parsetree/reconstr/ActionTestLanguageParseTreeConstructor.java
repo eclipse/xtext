@@ -3,7 +3,7 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages.parsetree.reconstr;
 
-
+//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
@@ -20,7 +20,7 @@ public class ActionTestLanguageParseTreeConstructor extends AbstractParseTreeCon
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
-		InstanceDescription inst = getDescr(obj);
+		IInstanceDescription inst = getDescr(obj);
 		Solution s;
 		if(inst.isInstanceOf("Model") && (s = new Model_Assignment_children(inst, null).firstSolution()) != null) return s;
 		if(inst.isInstanceOf("Type") && (s = new Element_Group(inst, null).firstSolution()) != null) return s;
@@ -37,31 +37,25 @@ public class ActionTestLanguageParseTreeConstructor extends AbstractParseTreeCon
 
 // ( children += Element ) *
 protected class Model_Assignment_children extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.0/@alternatives/@terminal");
-	protected Object value;
 	
-	public Model_Assignment_children(InstanceDescription curr, AbstractToken pred) {
+	public Model_Assignment_children(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("children")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("children");
-		// handling xtext::RuleCall
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("Type")) return null;
-		AbstractToken t = new Element_Group(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Model_Assignment_childrenCallback(\"xtext::RuleCall\", " + value + ")");
-		// Nothing to do for ParserRule Call Element
+		if((value = current.getConsumable("children",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("children");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Type")) {
+				Solution s = new Element_Group(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
 	}
 }
 
@@ -77,10 +71,9 @@ protected class Model_Assignment_children extends AssignmentToken  {
 // Item ( { current = Item . items += current } items += Item )
 protected class Element_Group extends GroupToken {
 	
-	public Element_Group(InstanceDescription curr, AbstractToken pred) {
+	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Element_1_Group(current, this).firstSolution();
@@ -92,10 +85,9 @@ protected class Element_Group extends GroupToken {
 // Item
 protected class Element_0_RuleCall_Item extends RuleCallToken {
 	
-	public Element_0_RuleCall_Item(InstanceDescription curr, AbstractToken pred) {
+	public Element_0_RuleCall_Item(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
 		if(checkForRecursion(Item_Group.class, current)) return null;
@@ -107,10 +99,9 @@ protected class Element_0_RuleCall_Item extends RuleCallToken {
 // { current = Item . items += current } items += Item
 protected class Element_1_Group extends GroupToken {
 	
-	public Element_1_Group(InstanceDescription curr, AbstractToken pred) {
+	public Element_1_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Element_1_1_Assignment_items(current, this).firstSolution();
@@ -122,48 +113,40 @@ protected class Element_1_Group extends GroupToken {
 // { current = Item . items += current }
 protected class Element_1_0_Action_Item_items extends AssignmentToken  {
 
-	public Element_1_0_Action_Item_items(InstanceDescription curr, AbstractToken pred) {
+	public Element_1_0_Action_Item_items(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("Item")) return null;
-		if(!current.isConsumable("items")) return null;
-		IInstanceDescription obj = current.createClone();
-		Object val = obj.consume("items");
-		if(!obj.isConsumed()) return null;
+		Object val = current.getConsumable("items", false);
+		if(val == null) return null;
+		if(!current.isConsumedWithLastConsumtion("items")) return null;
 		return new Solution(getDescr((EObject)val));
 	}
 }
 
 // items += Item
 protected class Element_1_1_Assignment_items extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Element_1_1_Assignment_items(InstanceDescription curr, AbstractToken pred) {
+	public Element_1_1_Assignment_items(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("items")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("items");
-		// handling xtext::RuleCall
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("Type")) return null;
-		AbstractToken t = new Item_Group(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Element_1_1_Assignment_itemsCallback(\"xtext::RuleCall\", " + value + ")");
-		// Nothing to do for ParserRule Call Item
+		if((value = current.getConsumable("items",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("items");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Type")) {
+				Solution s = new Item_Group(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
 	}
 }
 
@@ -181,10 +164,9 @@ protected class Element_1_1_Assignment_items extends AssignmentToken  {
 // { current = Thing . content = current } name = ID
 protected class Item_Group extends GroupToken {
 	
-	public Item_Group(InstanceDescription curr, AbstractToken pred) {
+	public Item_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Item_1_Assignment_name(current, this).firstSolution();
@@ -196,43 +178,35 @@ protected class Item_Group extends GroupToken {
 // { current = Thing . content = current }
 protected class Item_0_Action_Thing_content extends AssignmentToken  {
 
-	public Item_0_Action_Thing_content(InstanceDescription curr, AbstractToken pred) {
+	public Item_0_Action_Thing_content(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
 		if(!current.isInstanceOf("Thing")) return null;
-		if(!current.isConsumable("content")) return null;
-		IInstanceDescription obj = current.createClone();
-		Object val = obj.consume("content");
-		if(!obj.isConsumed()) return null;
+		Object val = current.getConsumable("content", false);
+		if(val == null) return null;
+		if(!current.isConsumedWithLastConsumtion("content")) return null;
 		return new Solution(getDescr((EObject)val));
 	}
 }
 
 // name = ID
 protected class Item_1_Assignment_name extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Item_1_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public Item_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("name")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("name");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Item_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("name",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 

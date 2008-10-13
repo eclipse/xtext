@@ -3,7 +3,7 @@ Generated with Xtext
 */
 package org.eclipse.xtext.testlanguages.parsetree.reconstr;
 
-
+//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
@@ -20,7 +20,7 @@ public class OptionalEmptyLanguageParseTreeConstructor extends AbstractParseTree
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
-		InstanceDescription inst = getDescr(obj);
+		IInstanceDescription inst = getDescr(obj);
 		Solution s;
 		if(inst.isInstanceOf("Model") && (s = new Model_Assignment_child(inst, null).firstSolution()) != null) return s;
 		if(inst.isInstanceOf("Greeting") && (s = new Greeting_Group(inst, null).firstSolution()) != null) return s;
@@ -36,31 +36,25 @@ public class OptionalEmptyLanguageParseTreeConstructor extends AbstractParseTree
 
 // ( child = Greeting ) ?
 protected class Model_Assignment_child extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.0/@alternatives/@terminal");
-	protected Object value;
 	
-	public Model_Assignment_child(InstanceDescription curr, AbstractToken pred) {
+	public Model_Assignment_child(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("child")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("child");
-		// handling xtext::RuleCall
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("Greeting")) return null;
-		AbstractToken t = new Greeting_Group(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Model_Assignment_childCallback(\"xtext::RuleCall\", " + value + ")");
-		// Nothing to do for ParserRule Call Greeting
+		if((value = current.getConsumable("child",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("child");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Greeting")) {
+				Solution s = new Greeting_Group(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
 	}
 }
 
@@ -76,10 +70,9 @@ protected class Model_Assignment_child extends AssignmentToken  {
 // 'hallo' name = ID
 protected class Greeting_Group extends GroupToken {
 	
-	public Greeting_Group(InstanceDescription curr, AbstractToken pred) {
+	public Greeting_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Greeting_1_Assignment_name(current, this).firstSolution();
@@ -93,7 +86,7 @@ protected class Greeting_0_Keyword_hallo extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
 	
-	public Greeting_0_Keyword_hallo(InstanceDescription curr, AbstractToken pred) {
+	public Greeting_0_Keyword_hallo(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -108,26 +101,20 @@ protected class Greeting_0_Keyword_hallo extends KeywordToken  {
 
 // name = ID
 protected class Greeting_1_Assignment_name extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Greeting_1_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public Greeting_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("name")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("name");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Greeting_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("name",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 

@@ -48,6 +48,14 @@ public class SimpleReconstrTestGrammarAccess extends BaseEPackageAccess implemen
 		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.5"),true); 
 	}
 
+	public ParserRule pr_Type() {
+		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.6"),true); 
+	}
+
+	public ParserRule pr_Ref2() {
+		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.7"),true); 
+	}
+
 	
 	public LexerRule lr_ID() {
 		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"),true); 

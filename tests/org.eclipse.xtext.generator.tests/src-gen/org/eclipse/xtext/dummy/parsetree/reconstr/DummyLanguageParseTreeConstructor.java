@@ -3,7 +3,7 @@ Generated with Xtext
 */
 package org.eclipse.xtext.dummy.parsetree.reconstr;
 
-
+//import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
@@ -20,7 +20,7 @@ public class DummyLanguageParseTreeConstructor extends AbstractParseTreeConstruc
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
-		InstanceDescription inst = getDescr(obj);
+		IInstanceDescription inst = getDescr(obj);
 		Solution s;
 		if(inst.isInstanceOf("Model") && (s = new Model_Assignment_elements(inst, null).firstSolution()) != null) return s;
 		if(inst.isInstanceOf("Element") && (s = new Element_Group(inst, null).firstSolution()) != null) return s;
@@ -36,31 +36,25 @@ public class DummyLanguageParseTreeConstructor extends AbstractParseTreeConstruc
 
 // ( elements += Element ) *
 protected class Model_Assignment_elements extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.0/@alternatives/@terminal");
-	protected Object value;
 	
-	public Model_Assignment_elements(InstanceDescription curr, AbstractToken pred) {
+	public Model_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("elements")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("elements");
-		// handling xtext::RuleCall
-		InstanceDescription param = getDescr((EObject)value);
-		if(!param.isInstanceOf("Element")) return null;
-		AbstractToken t = new Element_Group(param, this);
-		Solution s =  t.firstSolution();
-		if(s == null) return null;
-		return new Solution(obj,s.getPredecessor());
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Model_Assignment_elementsCallback(\"xtext::RuleCall\", " + value + ")");
-		// Nothing to do for ParserRule Call Element
+		if((value = current.getConsumable("elements",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Element")) {
+				Solution s = new Element_Group(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
 	}
 }
 
@@ -76,10 +70,9 @@ protected class Model_Assignment_elements extends AssignmentToken  {
 // ( optional ?= 'optional' ) ? 'element' name = ID ( descriptions += STRING ) * ';'
 protected class Element_Group extends GroupToken {
 	
-	public Element_Group(InstanceDescription curr, AbstractToken pred) {
+	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Element_1_Keyword(current, this).firstSolution();
@@ -91,10 +84,9 @@ protected class Element_Group extends GroupToken {
 // ( optional ?= 'optional' ) ? 'element' name = ID ( descriptions += STRING ) *
 protected class Element_0_Group extends GroupToken {
 	
-	public Element_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Element_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Element_0_1_Assignment_descriptions(current, this).firstSolution();
@@ -106,10 +98,9 @@ protected class Element_0_Group extends GroupToken {
 // ( optional ?= 'optional' ) ? 'element' name = ID
 protected class Element_0_0_Group extends GroupToken {
 	
-	public Element_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Element_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Element_0_0_1_Assignment_name(current, this).firstSolution();
@@ -121,10 +112,9 @@ protected class Element_0_0_Group extends GroupToken {
 // ( optional ?= 'optional' ) ? 'element'
 protected class Element_0_0_0_Group extends GroupToken {
 	
-	public Element_0_0_0_Group(InstanceDescription curr, AbstractToken pred) {
+	public Element_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 		
 	protected Solution createSolution() {
 		Solution s1 = new Element_0_0_0_1_Keyword_element(current, this).firstSolution();
@@ -135,26 +125,20 @@ protected class Element_0_0_0_Group extends GroupToken {
 
 // ( optional ?= 'optional' ) ?
 protected class Element_0_0_0_0_Assignment_optional extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal");
-	protected Object value;
 	
-	public Element_0_0_0_0_Assignment_optional(InstanceDescription curr, AbstractToken pred) {
+	public Element_0_0_0_0_Assignment_optional(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("optional")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("optional");
-		// handling xtext::Keyword
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Element_0_0_0_0_Assignment_optionalCallback(\"xtext::Keyword\", " + value + ")");
-		callback.keywordCall(current, (Keyword)element);
+		if((value = current.getConsumable("optional",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("optional");
+		if("optional".equals(value)) { // xtext::Keyword
+			type = AssignmentType.KW;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal");
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
@@ -163,7 +147,7 @@ protected class Element_0_0_0_1_Keyword_element extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
 	
-	public Element_0_0_0_1_Keyword_element(InstanceDescription curr, AbstractToken pred) {
+	public Element_0_0_0_1_Keyword_element(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -179,52 +163,40 @@ protected class Element_0_0_0_1_Keyword_element extends KeywordToken  {
 
 // name = ID
 protected class Element_0_0_1_Assignment_name extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Element_0_0_1_Assignment_name(InstanceDescription curr, AbstractToken pred) {
+	public Element_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("name")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("name");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Element_0_0_1_Assignment_nameCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("name",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
 
 // ( descriptions += STRING ) *
 protected class Element_0_1_Assignment_descriptions extends AssignmentToken  {
-
-	protected AbstractElement element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
-	protected Object value;
 	
-	public Element_0_1_Assignment_descriptions(InstanceDescription curr, AbstractToken pred) {
+	public Element_0_1_Assignment_descriptions(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
-
 	
 	protected Solution createSolution() {
-		if(!current.isConsumable("descriptions")) return null;
-		InstanceDescription obj = (InstanceDescription)current.createClone();
-		value = obj.consume("descriptions");
-		// handling xtext::RuleCall
-		return new Solution(obj);
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		// System.out.println("Element_0_1_Assignment_descriptionsCallback(\"xtext::RuleCall\", " + value + ")");
-		callback.lexerRuleCall(current, (RuleCall) element, value);
+		if((value = current.getConsumable("descriptions",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("descriptions");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
 	}
 }
 
@@ -234,7 +206,7 @@ protected class Element_1_Keyword extends KeywordToken  {
 
 	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1");
 	
-	public Element_1_Keyword(InstanceDescription curr, AbstractToken pred) {
+	public Element_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	

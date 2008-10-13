@@ -20,12 +20,26 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="num2">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="num3" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ManyStrings" eSuperTypes="//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="str1" upperBound="-1">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="str2" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ref2" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref2">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
