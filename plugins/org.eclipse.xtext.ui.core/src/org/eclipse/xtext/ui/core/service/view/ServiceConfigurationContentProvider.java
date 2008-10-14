@@ -14,8 +14,6 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.service.ServiceRegistry.Entry;
-import org.eclipse.xtext.service.ServiceRegistry.ServiceDependency;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -54,11 +52,6 @@ public class ServiceConfigurationContentProvider implements ITreeContentProvider
 		if (parentElement instanceof IServiceScope) {
 			return ServiceRegistry.getRegisteredServices((IServiceScope) parentElement).toArray();
 		}
-		if (parentElement instanceof Entry) {
-			return ServiceRegistry.gatherDependencies(((Entry) parentElement).getServiceInterface()).toArray();
-		}
-		if (parentElement instanceof ServiceDependency)
-			return ServiceRegistry.gatherDependencies(((ServiceDependency) parentElement).getServiceType()).toArray();
 		return new Object[] {};
 	}
 

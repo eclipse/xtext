@@ -39,7 +39,6 @@
                id="org.eclipse.xtext.ui.core.linkWithEditor"
                label="Link with Editor"
                menubarPath="mainGroup"
-               state="false"
                style="toggle"
                toolbarPath="mainGroup">
          </action>
