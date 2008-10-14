@@ -10,6 +10,8 @@ package org.eclipse.xtext.ui.core.service.view;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.ui.IActionDelegate2;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
 
@@ -17,9 +19,11 @@ import org.eclipse.ui.IViewPart;
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class LinkWithEditorViewAction implements IViewActionDelegate {
+public class LinkWithEditorViewAction implements IViewActionDelegate, IActionDelegate2 {
 
 	private IViewPart view;
+	private IAction action;
+	private ISelection selection;
 
 	/*
 	 * (non-Javadoc)
@@ -28,6 +32,7 @@ public class LinkWithEditorViewAction implements IViewActionDelegate {
 	 */
 	public void init(IViewPart view) {
 		this.view = view;
+
 	}
 
 	/*
@@ -37,7 +42,7 @@ public class LinkWithEditorViewAction implements IViewActionDelegate {
 	 */
 	public void run(IAction action) {
 		if (this.view instanceof ServiceRegistryView)
-			((ServiceRegistryView) view).linkWithEditor(action.isChecked());
+			((ServiceRegistryView) view).getLinkWithEditor(action.isChecked());
 	}
 
 	/*
@@ -48,8 +53,22 @@ public class LinkWithEditorViewAction implements IViewActionDelegate {
 	 * .IAction, org.eclipse.jface.viewers.ISelection)
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
+		this.action = action;
+		this.selection = selection;
+	}
+
+	public void dispose() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void init(IAction action) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void runWithEvent(IAction action, Event event) {
+		run(action);
 	}
 
 }

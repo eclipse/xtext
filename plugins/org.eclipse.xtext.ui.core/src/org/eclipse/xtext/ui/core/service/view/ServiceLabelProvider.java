@@ -12,7 +12,6 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry.Entry;
-import org.eclipse.xtext.service.ServiceRegistry.ServiceDependency;
 import org.eclipse.xtext.ui.core.internal.XtextPluginImages;
 
 /**
@@ -29,13 +28,14 @@ public class ServiceLabelProvider extends LabelProvider {
 		}
 		if (element instanceof Entry) {
 			Entry entry = (Entry) element;
-			return entry.getServiceInterface().getName() + " (Prio: " + entry.getPriority() + ")"+(entry.isLoaded()?"-> "+entry.getCachedServiceClass():"");
+			return entry.getServiceInterface().getName() + " (Prio: " + entry.getPriority() + ")";
 		}
-		if (element instanceof ServiceDependency) {
-			ServiceDependency serviceDependency = (ServiceDependency) element;
-			return serviceDependency.getName() + " Type: " + serviceDependency.getServiceType().getName()
-					+ " (optional:" + serviceDependency.isOptional() + ")";
-		}
+		// if (element instanceof ServiceDependency) {
+		// ServiceDependency serviceDependency = (ServiceDependency) element;
+		// return serviceDependency.getName() + " Type: " +
+		// serviceDependency.getServiceType().getName()
+		// + " (optional:" + serviceDependency.isOptional() + ")";
+		// }
 		return super.getText(element);
 	}
 
@@ -45,17 +45,17 @@ public class ServiceLabelProvider extends LabelProvider {
 			return XtextPluginImages.get(XtextPluginImages.OBJ_DESC_LANGUAGE);
 		}
 		if (element instanceof Entry) {
-			Entry entry = (Entry) element;
-			if (entry.isLoaded()) {
-				return XtextPluginImages.get(XtextPluginImages.OBJ_DESC_SERVICE_LOADED);
-			}
-			else {
-				return XtextPluginImages.get(XtextPluginImages.OBJ_DESC_SERVICE_NOT_LOADED);
-
-			}
-		}
-		if (element instanceof ServiceDependency) {
-			return XtextPluginImages.get(XtextPluginImages.OBJ_DESC_SERVICE_NOT_LOADED);
+//			Entry entry = (Entry) element;
+			return XtextPluginImages.get(XtextPluginImages.OBJ_DESC_SERVICE_LOADED);
+			// if (entry.isLoaded()) {
+			// return
+			// XtextPluginImages.get(XtextPluginImages.OBJ_DESC_SERVICE_LOADED);
+			// }
+			// else {
+			// return
+			// XtextPluginImages.get(XtextPluginImages.OBJ_DESC_SERVICE_NOT_LOADED);
+			//
+			// }
 		}
 
 		return super.getImage(element);

@@ -65,16 +65,6 @@ public class ServiceRegistry {
 		public Class<?> getServiceInterface() {
 			return factory.getServiceInterface();
 		}
-
-		public boolean isLoaded() {
-			return cachedService != null;
-		}
-
-		public Class<?> getCachedServiceClass() {
-			if (isLoaded())
-				return cachedService.getClass();
-			return null;
-		}
 	}
 
 	private static Map<IServiceScope, List<Entry>> entryMap = new HashMap<IServiceScope, List<Entry>>();
@@ -182,8 +172,8 @@ public class ServiceRegistry {
 				}
 				else {
 					if (e.priority == currPriority) {
-						logger.error("Mutliple service factories for type " + serviceInterface.getName()
-								+ " in scope " + realLanguageDescriptor.getId());
+						logger.error("Mutliple service factories for type " + serviceInterface.getName() + " in scope "
+								+ realLanguageDescriptor.getId());
 					}
 					return service;
 				}
@@ -263,7 +253,7 @@ public class ServiceRegistry {
 		}
 	}
 
-	public abstract class ServiceDependency {
+	abstract class ServiceDependency {
 
 		private final Inject annotation;
 
@@ -366,7 +356,7 @@ public class ServiceRegistry {
 	 * @param inspectedClass
 	 * @return
 	 */
-	public static List<ServiceDependency> gatherDependencies(Class<?> inspectedClass) {
+	private static List<ServiceDependency> gatherDependencies(Class<?> inspectedClass) {
 		List<ServiceDependency> dependencies = new ArrayList<ServiceDependency>();
 		// lookup Fields
 		Field[] fields = inspectedClass.getDeclaredFields();
