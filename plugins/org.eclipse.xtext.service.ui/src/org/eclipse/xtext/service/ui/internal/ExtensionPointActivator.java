@@ -31,7 +31,8 @@ public class ExtensionPointActivator {
 		try {
 			registerScopes();
 			registerServiceRegistrations();
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			log.error("Error during initialization of services", e);
 		}
 	}
@@ -52,12 +53,17 @@ public class ExtensionPointActivator {
 					for (IServiceRegistration r : registrations) {
 						IServiceScope serviceScope = r.scope();
 						if (serviceScope == null) {
-							log.warn("Undefined scope.");
-						} else {
+							log.warn("Can't register "
+									+ (r.serviceFactory() == null ? "service" : "'"
+											+ r.serviceFactory().getServiceInterface() + "'")
+									+ " , scope is undefined. In " + ele.getContributor());
+						}
+						else {
 							ServiceRegistry.registerFactory(serviceScope, r.serviceFactory(), r.priority());
 						}
 					}
-				} catch (Throwable e) {
+				}
+				catch (Throwable e) {
 					log.error(e);
 				}
 			}
@@ -82,8 +88,10 @@ public class ExtensionPointActivator {
 			for (ScopeDescriptor scopeDesc : scopes) {
 				try {
 					IServiceScope parentScope = ServiceScopeFactory.get(scopeDesc.parentScope);
-//					ServiceScopeFactory.createScope(scopeDesc.id, parentScope);
-				} catch (Exception e) {
+					// ServiceScopeFactory.createScope(scopeDesc.id,
+					// parentScope);
+				}
+				catch (Exception e) {
 					log.error(e);
 				}
 			}

@@ -9,7 +9,11 @@
 package org.eclipse.xtext.ui.core.service.view;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
@@ -50,8 +54,8 @@ public class ServiceRegistryView extends ViewPart implements ISelectionListener 
 		filteredTree.setBackground(parent.getDisplay().getSystemColor(SWT.COLOR_LIST_BACKGROUND));
 
 		this.treeViewer = filteredTree.getViewer();
-		this.treeViewer.setLabelProvider(new ServiceLabelProvider(settings));
-		final ServiceConfigurationContentProvider provider = new ServiceConfigurationContentProvider();
+		this.treeViewer.setLabelProvider(new DelegatingStyledCellLabelProvider(new ServiceLabelProvider(settings)));
+		final ServiceRegistryContentProvider provider = new ServiceRegistryContentProvider();
 		this.treeViewer.setContentProvider(provider);
 		this.treeViewer.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent event) {
@@ -102,7 +106,23 @@ public class ServiceRegistryView extends ViewPart implements ISelectionListener 
 
 	// Commands delegates
 	public void showScopes() {
-		updateInput(ServiceRegistry.getRegisteredScopes());
+		List<IServiceScope> registeredScopes = ServiceRegistry.getRegisteredScopes();
+		Collections.sort(registeredScopes, new Comparator<IServiceScope>() {
+			public int compare(IServiceScope o1, IServiceScope o2) {
+				if (o1.getParentScope() == null) {
+					if (o2.getParentScope() != null) {
+						return -1;
+					}
+				}
+				else {
+					if (o2.getParentScope() == null) {
+						return 1;
+					}
+				}
+				return o1.getId().compareTo(o2.getId());
+			}
+		});
+		updateInput(registeredScopes);
 	}
 
 	// Toggles

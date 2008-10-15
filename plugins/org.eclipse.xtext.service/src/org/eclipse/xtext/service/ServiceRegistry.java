@@ -342,19 +342,22 @@ public class ServiceRegistry {
 				serviceDependency.inject(patient, languageDescriptor);
 			}
 			else {
-				Object injectedService = internalGetService(languageDescriptor, serviceDependency.getServiceType());
-				if (injectedService == null && !serviceDependency.isOptional())
+				Object alreadyRegisteredService = internalGetService(languageDescriptor, serviceDependency.getServiceType());
+				if (alreadyRegisteredService == null && !serviceDependency.isOptional())
 					throw new IllegalStateException("No component found for non-optional dependency "
 							+ serviceDependency.getName() + ".");
-				serviceDependency.inject(patient, injectedService);
+				serviceDependency.inject(patient, alreadyRegisteredService);
 			}
 		}
 
 	}
 
 	/**
+	 * Gather all fields and methods that are annotated with an <code>@Inject</code>. <br>
+	 * Makes them accessible if necessary
+	 * 
 	 * @param inspectedClass
-	 * @return
+	 * @return all fields and methods that are annotated with an <code>@Inject</code>
 	 */
 	private static List<ServiceDependency> gatherDependencies(Class<?> inspectedClass) {
 		List<ServiceDependency> dependencies = new ArrayList<ServiceDependency>();

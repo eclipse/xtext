@@ -9,17 +9,21 @@
 package org.eclipse.xtext.ui.core.service.view;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.service.ServiceRegistry.Entry;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class ServiceConfigurationContentProvider implements ITreeContentProvider {
+public class ServiceRegistryContentProvider implements ITreeContentProvider {
 
 	/*
 	 * (non-Javadoc)
@@ -50,7 +54,16 @@ public class ServiceConfigurationContentProvider implements ITreeContentProvider
 
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof IServiceScope) {
-			return ServiceRegistry.getRegisteredServices((IServiceScope) parentElement).toArray();
+			List<Entry> registeredServices = ServiceRegistry.getRegisteredServices((IServiceScope) parentElement);
+			Collections.sort(registeredServices, new Comparator<Entry>() {
+				public int compare(Entry o1, Entry o2) {
+					int result = o1.getServiceInterface().getName().compareTo(o2.getServiceInterface().getName());
+					if (result == 0)
+						return o1.compareTo(o2);
+					return result;
+				}
+			});
+			return registeredServices.toArray();
 		}
 		return new Object[] {};
 	}
