@@ -16,42 +16,63 @@
          point="org.eclipse.ui.views">
       <view
             class="org.eclipse.xtext.ui.core.service.view.ServiceRegistryView"
-            id="org.eclipse.xtext.ui.core.ServiceRegistryView"
-            name="Service Registry"
+            id="org.eclipse.xtext.ui.core.views.ServiceRegistryView"
+            name="%ServiceRegistryView.name"
             restorable="true">
       </view>
    </extension>
    <extension
-         point="org.eclipse.ui.viewActions">
-      <viewContribution
-            id="org.eclipse.xtext.ui.core.serviceRegViewContribution"
-            targetID="org.eclipse.xtext.ui.core.ServiceRegistryView">
-         <menu
-               id="org.eclipse.xtext.ui.core.serviceRegistryViewerMenu"
-               label="Main Menu">
-            <groupMarker
-                  name="org.eclipse.xtext.ui.core.mainGroup">
-            </groupMarker>
-         </menu>
-         <action
-               class="org.eclipse.xtext.ui.core.service.view.LinkWithEditorViewAction"
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="toolbar:org.eclipse.xtext.ui.core.views.ServiceRegistryView">
+         <command
+               commandId="org.eclipse.xtext.ui.core.serviceregistry.linkWithEditor"
+               disabledIcon="icons/dlcl16/synced.gif"
                icon="icons/elcl16/synced.gif"
-               id="org.eclipse.xtext.ui.core.linkWithEditor"
-               label="Link with Editor"
-               menubarPath="mainGroup"
-               style="toggle"
-               toolbarPath="mainGroup">
-         </action>
-         <action
-               class="org.eclipse.xtext.ui.core.service.view.ShowAllScopesVieweAction"
+               style="toggle">
+         </command>
+         <command
+               commandId="org.eclipse.xtext.ui.core.serviceregistry.showScopes"
                icon="icons/elcl16/all_instances.gif"
-               id="org.eclipse.xtext.ui.core.showAllScopes"
-               label="Show All Scopes"
-               menubarPath="mainGroup"
-               style="push"
-               toolbarPath="mainGroup">
-         </action>
-      </viewContribution>
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            locationURI="menu:org.eclipse.xtext.ui.core.views.ServiceRegistryView">
+         <command
+               commandId="org.eclipse.xtext.ui.core.serviceregistry.showFQNames"
+               style="toggle">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="org.eclipse.xtext.ui.core.views.registry"
+            name="%ServiceRegistryView.category.name">
+      </category>
+      <command
+            categoryId="org.eclipse.xtext.ui.core.views.registry"
+            defaultHandler="org.eclipse.xtext.ui.core.service.view.handler.ShowFQNamesHandler"
+            id="org.eclipse.xtext.ui.core.serviceregistry.showFQNames"
+            name="%ServiceRegistryView.ShowFQNames.name">
+         <state
+               class="org.eclipse.jface.commands.ToggleState"
+               id="STYLE">
+         </state>
+      </command>
+      <command
+            categoryId="org.eclipse.xtext.ui.core.views.registry"
+            defaultHandler="org.eclipse.xtext.ui.core.service.view.handler.LinkWithEditorHandler"
+            id="org.eclipse.xtext.ui.core.serviceregistry.linkWithEditor"
+            name="%ServiceRegistryView.LinkWithEditor.name">
+      </command>
+      <command
+            categoryId="org.eclipse.xtext.ui.core.views.registry"
+            defaultHandler="org.eclipse.xtext.ui.core.service.view.handler.ShowAllScopesHandler"
+            id="org.eclipse.xtext.ui.core.serviceregistry.showScopes"
+            name="%ServiceRegistryView.ShowScopes.name">
+      </command>
    </extension>
    <!--extension
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">

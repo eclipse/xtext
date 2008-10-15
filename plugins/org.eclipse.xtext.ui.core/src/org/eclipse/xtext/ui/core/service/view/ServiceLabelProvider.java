@@ -20,15 +20,23 @@ import org.eclipse.xtext.ui.core.internal.XtextPluginImages;
  */
 public class ServiceLabelProvider extends LabelProvider {
 
+	private final ServiceRegistryViewSettings configs;
+
+	public ServiceLabelProvider(ServiceRegistryViewSettings configs) {
+		this.configs = configs;
+	}
+
 	@Override
 	public String getText(Object element) {
 		if (element instanceof IServiceScope) {
 			IServiceScope scope = (IServiceScope) element;
-			return scope.getId();
+			return scope.toString();
 		}
 		if (element instanceof Entry) {
 			Entry entry = (Entry) element;
-			return entry.getServiceInterface().getName() + " (Prio: " + entry.getPriority() + ")";
+			String name = configs.isShowFQNames() ? entry.getServiceInterface().getName() : entry.getServiceInterface()
+					.getSimpleName();
+			return name + " (Prio: " + entry.getPriority() + ")";
 		}
 		// if (element instanceof ServiceDependency) {
 		// ServiceDependency serviceDependency = (ServiceDependency) element;
@@ -45,7 +53,7 @@ public class ServiceLabelProvider extends LabelProvider {
 			return XtextPluginImages.get(XtextPluginImages.OBJ_DESC_LANGUAGE);
 		}
 		if (element instanceof Entry) {
-//			Entry entry = (Entry) element;
+			// Entry entry = (Entry) element;
 			return XtextPluginImages.get(XtextPluginImages.OBJ_DESC_SERVICE_LOADED);
 			// if (entry.isLoaded()) {
 			// return
