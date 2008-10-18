@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.xtext.ui.wiz.project;
+package org.eclipse.xtext.xtext.ui.wizard.project;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -43,7 +43,7 @@ import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xtend.expression.Variable;
-import org.eclipse.xtext.xtext.ui.wiz.EclipseResourceUtil;
+import org.eclipse.xtext.xtext.ui.wizard.EclipseResourceUtil;
 
 /**
  * This is a project wizard used to help in the creation of new Xtext Projects.

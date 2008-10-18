@@ -11,8 +11,8 @@
             name="New Xtext Project"
             icon="icons/editor.gif"
             category="org.eclipse.xtext.projectwiz"
-            class="org.eclipse.xtext.xtext.ui.wiz.project.NewXtextProjectWizard"
-            id="org.eclipse.xtext.xtext.ui.wiz.project.NewXtextProjectWizard">
+            class="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
+            id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard">
       </wizard>
    </extension>
 </plugin>

@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.xtext.ui.wiz.project;
+package org.eclipse.xtext.xtext.ui.wizard.project;
 
 import java.net.URI;
 import java.net.URISyntaxException;
