@@ -267,9 +267,9 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 			execCtx.registerMetaModel(new JavaMetaModel());
 			// generate generator and activator for dsl and dsl.ui project
 			XpandFacade facade = XpandFacade.create(execCtx);
-			facade.evaluate("org::eclipse::xtext::xtext::ui::wiz::project::XtextTemplateFile::root", xtextProjectInfo);
-			facade.evaluate("org::eclipse::xtext::xtext::ui::wiz::project::GrammarGenerator::root", xtextProjectInfo);
-			facade.evaluate("org::eclipse::xtext::xtext::ui::wiz::project::Activator::root", xtextProjectInfo);
+			facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::XtextTemplateFile::root", xtextProjectInfo);
+			facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::GrammarGenerator::root", xtextProjectInfo);
+			facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::Activator::root", xtextProjectInfo);
 			EclipseResourceUtil.createFile("dummy.properties", createSubPackages(basePackage + ".ui.services",
 					dslUIProject, (IFolder) dslUIProject.findMember(SRC_ROOT), monitor), "a=b", monitor);
 
