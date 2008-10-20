@@ -63,12 +63,21 @@ public class XtextProblemMarkerCreator {
 		if (resource.getAllContents().hasNext()) {
 			EObject rootObject = resource.getAllContents().next();
 			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(rootObject);
-			if (!diagnostic.getChildren().isEmpty()) {
-				for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
-					emfMarkers.add(collectMarkerAttributesForDiagnostic(childDiagnostic));
-				}
-			} else {
-				emfMarkers.add(collectMarkerAttributesForDiagnostic(diagnostic));
+			// diagnostic != null should not happen, but in exception state NPE
+			// can occur and and reconciler thread will die, so prevent this
+			if (diagnostic != null) {
+				// The root Diagnostician is a BasicDiagnostic that normally act
+				// as a chain start and has any kind of impotent information if
+				// Severity is OK, so just ignore it
+				if (diagnostic.getSeverity() != Diagnostic.OK)
+					if (!diagnostic.getChildren().isEmpty()) {
+						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
+							emfMarkers.add(collectMarkerAttributesForDiagnostic(childDiagnostic));
+						}
+					}
+					else {
+						emfMarkers.add(collectMarkerAttributesForDiagnostic(diagnostic));
+					}
 			}
 		}
 
@@ -87,13 +96,13 @@ public class XtextProblemMarkerCreator {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sever = IMarker.SEVERITY_ERROR;
 		switch (diagnostic.getSeverity()) {
-		case Diagnostic.WARNING:
-			sever = IMarker.SEVERITY_WARNING;
-			break;
-		case Diagnostic.OK:
-		case Diagnostic.INFO:
-			sever = IMarker.SEVERITY_INFO;
-			break;
+			case Diagnostic.WARNING:
+				sever = IMarker.SEVERITY_WARNING;
+				break;
+			case Diagnostic.OK:
+			case Diagnostic.INFO:
+				sever = IMarker.SEVERITY_INFO;
+				break;
 		}
 		map.put(IMarker.SEVERITY, sever);
 		List<?> data = diagnostic.getData();
