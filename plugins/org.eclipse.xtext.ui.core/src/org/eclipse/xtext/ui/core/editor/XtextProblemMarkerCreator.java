@@ -34,7 +34,6 @@ import org.eclipse.xtext.ui.core.internal.XtextMarkerManager;
  */
 public class XtextProblemMarkerCreator {
 
-	@SuppressWarnings("unused")
 	private static final Logger LOG = Logger.getLogger(XtextProblemMarkerCreator.class);
 
 	private XtextProblemMarkerCreator() {
@@ -69,7 +68,8 @@ public class XtextProblemMarkerCreator {
 				// The root Diagnostician is a BasicDiagnostic that normally act
 				// as a chain start and has any kind of impotent information if
 				// Severity is OK, so just ignore it
-				if (diagnostic.getSeverity() != Diagnostic.OK)
+				boolean emfDiagFail = diagnostic.getSeverity() != Diagnostic.OK;
+				if (emfDiagFail) {
 					if (!diagnostic.getChildren().isEmpty()) {
 						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
 							emfMarkers.add(collectMarkerAttributesForDiagnostic(childDiagnostic));
@@ -78,14 +78,22 @@ public class XtextProblemMarkerCreator {
 					else {
 						emfMarkers.add(collectMarkerAttributesForDiagnostic(diagnostic));
 					}
+				}
+				if (LOG.isDebugEnabled()) {
+					LOG.debug("EMF Diagnostic " + (emfDiagFail ? "FAIL" : "OK") + "!");
+				}
 			}
 		}
 
 		List<SyntaxError> parseErrors = resource.getParseResult().getParseErrors();
-		if (!parseErrors.isEmpty()) {
+		boolean parserDiagFail = !parseErrors.isEmpty();
+		if (parserDiagFail) {
 			for (SyntaxError error : parseErrors) {
 				emfMarkers.add(collectMarkerAttributes(error));
 			}
+		}
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Parser Diagnostic " + (parserDiagFail ? "FAIL" : "OK") + "!");
 		}
 		if (!emfMarkers.isEmpty())
 			XtextMarkerManager.createMarker(file, emfMarkers, monitor);

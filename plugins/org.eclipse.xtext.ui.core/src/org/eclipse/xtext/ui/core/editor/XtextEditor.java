@@ -31,9 +31,7 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IURIEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.TextEditor;
-import org.eclipse.ui.texteditor.ContentAssistAction;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
-import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
@@ -217,13 +215,6 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 	protected void createActions() {
 		super.createActions();
 		Action action = null;
-		if (getSourceViewerConfiguration().getContentAssistant(getSourceViewer()) != null) {
-			action = new ContentAssistAction(XtextUIMessages.getResourceBundle(), "ContentAssistProposal.", this);//$NON-NLS-1$
-			action.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
-			setAction("ContentAssistProposal", action);//$NON-NLS-1$
-			markAsStateDependentAction("ContentAssistProposal", true); //$NON-NLS-1$
-		}
-
 		if (getSourceViewerConfiguration().getContentFormatter(getSourceViewer()) != null) {
 			action = new TextOperationAction(XtextUIMessages.getResourceBundle(), "Format.", this, ISourceViewer.FORMAT); //$NON-NLS-1$
 			action.setActionDefinitionId(Activator.PLUGIN_ID + ".FormatAction");
@@ -232,11 +223,19 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 			markAsSelectionDependentAction("Format", true); //$NON-NLS-1$
 		}
 
-		// Creates an build-in click an ruler annotation marks corresponding
-		// text action
+		// Creates an build-in "click an ruler annotation, marks corresponding
+		// text" - action
 		SelectMarkerRulerAction markerAction = new XtextMarkerRulerAction(XtextUIMessages.getResourceBundle(),
 				"XtextSelectAnnotationRulerAction.", this, getVerticalRuler()); //$NON-NLS-1$
 		setAction(ITextEditorActionConstants.RULER_CLICK, markerAction);
+	}
+
+	/**
+	 * @return true if content assist is available
+	 * 
+	 */
+	public boolean isContentAssistAvailable() {
+		return getSourceViewerConfiguration().getContentAssistant(getSourceViewer()) != null;
 	}
 
 	@Override
