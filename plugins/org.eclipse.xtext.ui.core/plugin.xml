@@ -44,6 +44,19 @@
                style="toggle">
          </command>
       </menuContribution>
+   <menuContribution
+            locationURI="popup:#TextEditorContext?after=additions">
+         <command
+               commandId="org.eclipse.ui.edit.text.contentAssist.proposals"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+                     definitionId="isActiveEditorAnInstanceOfXtextEditor">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -73,6 +86,30 @@
             id="org.eclipse.xtext.ui.core.serviceregistry.showScopes"
             name="%ServiceRegistryView.ShowScopes.name">
       </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.xtext.ui.core.editor.handler.ContentAssistHandler"
+            commandId="org.eclipse.ui.edit.text.contentAssist.proposals">
+         <activeWhen>
+            <reference
+                  definitionId="isActiveEditorAnInstanceOfXtextEditor">
+            </reference>
+         </activeWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="isActiveEditorAnInstanceOfXtextEditor">
+         <with
+               variable="activeEditor">
+            <instanceof
+                  value="org.eclipse.xtext.ui.core.editor.XtextEditor">
+            </instanceof>
+         </with>
+      </definition>
    </extension>
    <!--extension
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
