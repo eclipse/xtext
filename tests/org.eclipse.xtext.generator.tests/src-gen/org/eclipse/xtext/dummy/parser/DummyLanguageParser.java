@@ -4,16 +4,20 @@ Generated with Xtext
 package org.eclipse.xtext.dummy.parser;
 
 import org.antlr.runtime.ANTLRInputStream;
+import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.service.Inject;
 
 import org.eclipse.xtext.dummy.parser.internal.InternalDummyLanguageLexer;
 import org.eclipse.xtext.dummy.parser.internal.InternalDummyLanguageParser;
 
-
 public class DummyLanguageParser extends org.eclipse.xtext.parser.AbstractParser {
+	
+	@Inject 
+    protected AntlrTokenDefProvider antlrTokenDefProvider;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
@@ -21,6 +25,7 @@ public class DummyLanguageParser extends org.eclipse.xtext.parser.AbstractParser
 		XtextTokenStream stream = new XtextTokenStream(lexer);
 		InternalDummyLanguageParser parser = new InternalDummyLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
+		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null) {
 				return parser.parse(ruleName);

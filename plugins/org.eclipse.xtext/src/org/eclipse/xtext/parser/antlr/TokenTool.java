@@ -51,4 +51,15 @@ public class TokenTool {
 		String text = getText(t);
 		return text!=null ? text.length() : 0;
 	}
+	
+	public static final String LEXER_RULE_PREFIX = "RULE_";
+	
+	public static boolean isLexerRule(String antlrTokenDef) {
+		return antlrTokenDef.startsWith(LEXER_RULE_PREFIX);
+	}
+	
+	public static String getLexerRuleName(String antlrTokenDef) {
+		return antlrTokenDef.substring(LEXER_RULE_PREFIX.length());
+	}
+
 }
