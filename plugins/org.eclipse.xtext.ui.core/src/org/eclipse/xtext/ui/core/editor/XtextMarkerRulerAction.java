@@ -16,7 +16,6 @@ import org.eclipse.jface.text.quickassist.IQuickFixableAnnotation;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRulerInfo;
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
 
 /**
@@ -40,8 +39,8 @@ public final class XtextMarkerRulerAction extends SelectMarkerRulerAction {
 		// dialog
 		for (Object m : getMarkers()) {
 			if (m instanceof IMarker) {
-				MarkerAnnotation qfAno = getAnnotationModel().getMarkerAnnotation((IMarker) m);
-				if (qfAno instanceof IQuickFixableAnnotation && ((IQuickFixableAnnotation) qfAno).isQuickFixable()) {
+				IQuickFixableAnnotation qfAno = getAnnotationModel().getMarkerAnnotation((IMarker) m);
+				if (qfAno.isQuickFixable()) {
 					ITextOperationTarget operation = (ITextOperationTarget) textEditor
 							.getAdapter(ITextOperationTarget.class);
 					final int opCode = ISourceViewer.QUICK_ASSIST;

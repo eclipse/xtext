@@ -150,7 +150,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 		}
 
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-			logger.debug("Outline input has changed.");
+			logger.debug("Outline input has changed: " + newInput);
 		}
 
 	}
