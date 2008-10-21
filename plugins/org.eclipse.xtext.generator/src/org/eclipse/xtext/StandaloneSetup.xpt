@@ -74,7 +74,7 @@ public abstract class «grammar().standaloneSetupClass().toSimpleName()» {
 }
 «ENDFILE»
 
-«FILE runtimeConfigClass(grammar()).toJavaFilePath()-»
+«FILE runtimeConfigClass(grammar()).toJavaPackage().toPath()+"/Abstract"+runtimeConfigClass(grammar()).toSimpleName()+".java"-»
 package «runtimeConfigClass(grammar()).toJavaPackage()»;
 
 import java.util.Set;
@@ -84,7 +84,7 @@ import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
 /**
  * used to register components to be used at runtime.
  */
-public class «runtimeConfigClass(grammar()).toSimpleName()» extends AbstractServiceRegistrationFactory {
+public class Abstract«runtimeConfigClass(grammar()).toSimpleName()» extends AbstractServiceRegistrationFactory {
 
 	public Set<IServiceRegistration> registrations() {
 		return scope(«languageInterface(grammar())».SCOPE)
@@ -92,6 +92,27 @@ public class «runtimeConfigClass(grammar()).toSimpleName()» extends AbstractServ
 		.with(«s.serviceInterfaceFQName».class, «s.genClassFQName».class)
 		«ENDFOREACH»
 			.registrations();
+	}
+
+}
+			
+«ENDFILE»
+«FILE runtimeConfigClass(grammar()).toJavaFilePath() SRC-»
+package «runtimeConfigClass(grammar()).toJavaPackage()»;
+
+import java.util.Set;
+
+import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
+
+/**
+ * used to register components to be used at runtime.
+ */
+public class «runtimeConfigClass(grammar()).toSimpleName()» extends Abstract«runtimeConfigClass(grammar()).toSimpleName()» {
+
+	public Set<IServiceRegistration> registrations() {
+		Set<IServiceRegistration> generated = super.registrations();
+		// do stuff 
+		return generated;
 	}
 
 }
