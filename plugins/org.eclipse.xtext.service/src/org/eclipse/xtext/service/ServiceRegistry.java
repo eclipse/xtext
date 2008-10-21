@@ -79,6 +79,13 @@ public class ServiceRegistry {
 		try {
 			injectDependencies(languageDescriptor, patient);
 		}
+		catch (VirtualMachineError e) {
+			// TODO : should be checked in advance or while resolving dependencies
+			if(e instanceof StackOverflowError || e instanceof OutOfMemoryError)
+				throw new IllegalStateException(e.getMessage() + " - might be caused by cyclic dependencies of stateful services.");
+			else
+				throw e;
+		}
 		catch (RuntimeException e) {
 			throw e;
 		}
@@ -161,7 +168,7 @@ public class ServiceRegistry {
 						service = (T) e.factory.createService();
 						if (service == null)
 							return null;
-						if (currentScope == realLanguageDescriptor) {
+						if (currentScope == realLanguageDescriptor && isServiceStateless(service)) {
 							e.cachedService = service;
 						}
 						else {
@@ -191,10 +198,15 @@ public class ServiceRegistry {
 		Entry newe = new Entry();
 		newe.priority = e.priority;
 		newe.factory = e.factory;
-		newe.cachedService = service;
+		if(isServiceStateless(service))
+			newe.cachedService = service;
 		List<Entry> entryList = getEntryList(realLanguageDescriptor);
 		entryList.add(newe);
 		Collections.sort(entryList);
+	}
+
+	private static boolean isServiceStateless(Object service) {
+		return !service.getClass().isAnnotationPresent(StatefulService.class);
 	}
 
 	private static IServiceFactory registerFactory(IServiceScope languageDescriptor,
@@ -342,7 +354,8 @@ public class ServiceRegistry {
 				serviceDependency.inject(patient, languageDescriptor);
 			}
 			else {
-				Object alreadyRegisteredService = internalGetService(languageDescriptor, serviceDependency.getServiceType());
+				Object alreadyRegisteredService = internalGetService(languageDescriptor, serviceDependency
+						.getServiceType());
 				if (alreadyRegisteredService == null && !serviceDependency.isOptional())
 					throw new IllegalStateException("No component found for non-optional dependency "
 							+ serviceDependency.getName() + ".");
@@ -353,11 +366,13 @@ public class ServiceRegistry {
 	}
 
 	/**
-	 * Gather all fields and methods that are annotated with an <code>@Inject</code>. <br>
+	 * Gather all fields and methods that are annotated with an
+	 * <code>@Inject</code>. <br>
 	 * Makes them accessible if necessary
 	 * 
 	 * @param inspectedClass
-	 * @return all fields and methods that are annotated with an <code>@Inject</code>
+	 * @return all fields and methods that are annotated with an
+	 *         <code>@Inject</code>
 	 */
 	private static List<ServiceDependency> gatherDependencies(Class<?> inspectedClass) {
 		List<ServiceDependency> dependencies = new ArrayList<ServiceDependency>();
