@@ -1,17 +1,13 @@
 package org.eclipse.xtext.parser.antlr;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Map.Entry;
 
 import org.antlr.runtime.BitSet;
 import org.antlr.runtime.IntStream;
@@ -19,7 +15,6 @@ import org.antlr.runtime.Parser;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -43,8 +38,6 @@ import org.eclipse.xtext.util.MultiMap;
 import org.eclipse.xtext.util.Strings;
 
 public abstract class AbstractAntlrParser extends Parser {
-
-	private static Logger log = Logger.getLogger(AbstractAntlrParser.class);
 
 	protected CompositeNode currentNode;
 
@@ -113,43 +106,18 @@ public abstract class AbstractAntlrParser extends Parser {
 
 	private Map<Integer, String> antlrTypeToLexerName = null;
 
-	public Map<Integer, String> getTokenTypeMap() {
-		if (antlrTypeToLexerName == null) {
-			InputStream tokenFile = getTokenFile();
-			try {
-				BufferedReader br = new BufferedReader(new InputStreamReader(tokenFile));
-				antlrTypeToLexerName = new HashMap<Integer, String>();
-				String line = br.readLine();
-				Pattern pattern = Pattern.compile("(.*)=(\\d+)");
-				while (line != null) {
-					Matcher m = pattern.matcher(line);
-					if (!m.matches()) {
-						throw new IllegalStateException("Couldn't match line : '" + line + "'");
-					}
-
-					String tokenTypeId = m.group(2);
-					String token = m.group(1);
-					String prefix = "RULE_";
-					if (token.startsWith(prefix))
-						antlrTypeToLexerName.put(Integer.parseInt(tokenTypeId), token.substring(prefix.length()));
-					line = br.readLine();
-				}
-			} catch (IOException e) {
-				log.error(e);
-				throw new WrappedException(e);
-			} finally {
-				try {
-					tokenFile.close();
-				} catch (IOException e) {
-					throw new WrappedException(e);
-				}
+	public void setTokenTypeMap(Map<Integer, String> tokenTypeMap) {
+		antlrTypeToLexerName = new HashMap<Integer, String>();
+		for(Entry<Integer, String> mapEntry: tokenTypeMap.entrySet()) {
+			String value = mapEntry.getValue();
+			if(TokenTool.isLexerRule(value)) {
+				antlrTypeToLexerName.put(mapEntry.getKey(), TokenTool.getLexerRuleName(value));
 			}
 		}
-		return antlrTypeToLexerName;
 	}
 
 	protected void setLexerRule(LeafNode leafNode, Token hidden) {
-		String ruleName = getTokenTypeMap().get(hidden.getType());
+		String ruleName = antlrTypeToLexerName.get(hidden.getType());
 		AbstractRule rule = GrammarUtil.findRuleForName(grammar, ruleName);
 		if (rule instanceof LexerRule) {
 			leafNode.setGrammarElement(rule);
