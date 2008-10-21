@@ -24,16 +24,20 @@
 package «genClassFQName.toJavaPackage()»;
 
 import org.antlr.runtime.ANTLRInputStream;
+import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.service.Inject;
 
 import «internalPackage()».«internalLexerClassName()»;
 import «internalPackage()».«internalParserClassName()»;
 
-
 public class «genClassFQName.toSimpleName()» extends org.eclipse.xtext.parser.AbstractParser {
+	
+	@Inject 
+    protected AntlrTokenDefProvider antlrTokenDefProvider;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
@@ -41,6 +45,7 @@ public class «genClassFQName.toSimpleName()» extends org.eclipse.xtext.parser.Ab
 		XtextTokenStream stream = new XtextTokenStream(lexer);
 		«internalParserClassName()» parser = new «internalParserClassName()»(
 				stream, factory, grammarAccess.getGrammar());
+		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null) {
 				return parser.parse(ruleName);
