@@ -4,16 +4,20 @@ Generated with Xtext
 package org.eclipse.xtext.grammarinheritance.parser;
 
 import org.antlr.runtime.ANTLRInputStream;
+import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.service.Inject;
 
 import org.eclipse.xtext.grammarinheritance.parser.internal.InternalConcreteTestLanguageLexer;
 import org.eclipse.xtext.grammarinheritance.parser.internal.InternalConcreteTestLanguageParser;
 
-
 public class ConcreteTestLanguageParser extends org.eclipse.xtext.parser.AbstractParser {
+	
+	@Inject 
+    protected AntlrTokenDefProvider antlrTokenDefProvider;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
@@ -21,6 +25,7 @@ public class ConcreteTestLanguageParser extends org.eclipse.xtext.parser.Abstrac
 		XtextTokenStream stream = new XtextTokenStream(lexer);
 		InternalConcreteTestLanguageParser parser = new InternalConcreteTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
+		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {
 			if(ruleName != null) {
 				return parser.parse(ruleName);
