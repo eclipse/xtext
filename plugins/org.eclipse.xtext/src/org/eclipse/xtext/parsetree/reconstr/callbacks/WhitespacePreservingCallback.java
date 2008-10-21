@@ -18,7 +18,6 @@ public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 
 	private int lastLeaf = -1;
 
-
 	protected void before(IInstanceDescription curr, AbstractElement ele) {
 		int i = lastLeaf, last = findLeafNodeFor(curr, ele);
 		if (last < 0)
@@ -57,8 +56,7 @@ public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 			return -1;
 
 		if (allLeafs == null)
-			allLeafs = ((CompositeNode) EcoreUtil.getRootContainer(currAdapter
-					.getParserNode())).getLeafNodes();
+			allLeafs = ((CompositeNode) EcoreUtil.getRootContainer(currAdapter.getParserNode())).getLeafNodes();
 
 		for (int i = lastLeaf + 1; i < allLeafs.size(); i++)
 			if (nodeMatches(curr, ele, allLeafs.get(i)))
@@ -67,13 +65,12 @@ public class WhitespacePreservingCallback extends SimpleSerializingCallback {
 		return -1;
 	}
 
-	protected boolean nodeMatches(IInstanceDescription curr,
-			AbstractElement ele, LeafNode leaf) {
+	protected boolean nodeMatches(IInstanceDescription curr, AbstractElement ele, LeafNode leaf) {
 		if (leaf.getGrammarElement() != ele)
 			return false;
 		if (ele instanceof Assignment) {
 			Assignment a = (Assignment) ele;
-			if (a.getFeature() != leaf.getFeature())
+			if (!a.getFeature().equals(leaf.getFeature()))
 				return false;
 		}
 		return true;
