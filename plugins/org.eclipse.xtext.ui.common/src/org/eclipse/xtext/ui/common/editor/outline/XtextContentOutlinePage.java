@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.StatefulService;
 import org.eclipse.xtext.ui.core.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.IXtextModelListener;
@@ -34,6 +35,8 @@ import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
  * 
  * @author Peter Friese - Initial contribution and API
  */
+
+@StatefulService
 public class XtextContentOutlinePage extends ContentOutlinePage implements IContentOutlinePage, ISourceViewerAware {
 
 	private static final Logger logger = Logger.getLogger(XtextContentOutlinePage.class);
