@@ -49,7 +49,7 @@ public class GeneratorFacade {
 
 	private static Logger log = Logger.getLogger(GeneratorFacade.class);
 
-	public static void generate(Grammar grammarModel, String srcGenPath, String uiProjectPath,
+	public static void generate(Grammar grammarModel, String srcGenPath, String srcPath, String uiProjectPath,
 			String... modelFileExtensions) throws IOException {
 		List<EObject> list = EcoreUtil2.eAllContentsAsList(grammarModel);
 		IssuesImpl issues = new IssuesImpl();
@@ -69,7 +69,8 @@ public class GeneratorFacade {
 		}
 		if (!allSyntaxErrors.isEmpty())
 			throw new IllegalStateException("The grammar has syntax errors.");
-		GenModel genModel = assembleGeneratorModel(grammarModel, srcGenPath, uiProjectPath, modelFileExtensions);
+		GenModel genModel = assembleGeneratorModel(grammarModel, srcGenPath, srcPath, uiProjectPath,
+				modelFileExtensions);
 		generate(genModel);
 	}
 
@@ -131,8 +132,8 @@ public class GeneratorFacade {
 		return genModel.getOutlets().get(0).getTargetFolder();
 	}
 
-	private static GenModel assembleGeneratorModel(Grammar grammarModel, String srcGenPath, String uiProjectPath,
-			String... modelFileExtensions) {
+	private static GenModel assembleGeneratorModel(Grammar grammarModel, String srcGenPath, String srcPath,
+			String uiProjectPath, String... modelFileExtensions) {
 		String languageName = GrammarUtil.getName(grammarModel);
 		String namespace = GrammarUtil.getNamespace(grammarModel);
 
@@ -143,6 +144,7 @@ public class GeneratorFacade {
 		genModel.setLanguageInterfaceFQName(namespace + ".I" + languageName);
 
 		genModel.getOutlets().add(outlet("", srcGenPath));
+		genModel.getOutlets().add(outlet("SRC", srcPath));
 
 		if (uiProjectPath != null) {
 			String uiPluginID = uiProjectPath.substring(uiProjectPath.lastIndexOf('/') + 1);
@@ -214,8 +216,10 @@ public class GeneratorFacade {
 			genModel.getServices().add(parsetreeReconstructorService);
 
 			GenService serializationStrategy = XtextgenFactory.eINSTANCE.createGenService();
-			serializationStrategy.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructorCallback");
-			serializationStrategy.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback");
+			serializationStrategy
+					.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructorCallback");
+			serializationStrategy
+					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback");
 			genModel.getServices().add(serializationStrategy);
 
 			GenService tokenScannerService = XtextgenFactory.eINSTANCE.createGenService();
