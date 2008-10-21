@@ -9,37 +9,44 @@ package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.service.Inject;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
+ * @author Dennis Hübner
  */
 public abstract class AbstractAntlrTokenColorer implements ITokenColorer {
-	
+
 	@Inject
 	protected AntlrTokenDefProvider tokenDefProvider;
-	
+
 	private Map<Integer, ITokenStyle> tokenStyleMap;
-	
+
 	protected Map<Integer, ITokenStyle> getTokenStyleMap() {
 		if (tokenStyleMap == null) {
 			tokenStyleMap = new HashMap<Integer, ITokenStyle>();
 			Map<Integer, String> tokenDefMap = tokenDefProvider.getTokenDefMap();
-			for (Integer antlrTokenId : tokenDefMap.keySet()) {
-				String antlrTokenDef = tokenDefMap.get(antlrTokenId);
+			//Using entrySet iterator is more efficient as keySet+get(key)
+			for (Entry<Integer, String> antlrTokenEntry : tokenDefMap.entrySet()) {
+				String antlrTokenDef = antlrTokenEntry.getValue();
 				ITokenStyle tokenStyle = deriveTokenStyle(antlrTokenDef);
-				tokenStyleMap.put(antlrTokenId, tokenStyle);
+				tokenStyleMap.put(antlrTokenEntry.getKey(), tokenStyle);
 			}
 		}
 		return tokenStyleMap;
 	}
-	
+
 	protected abstract ITokenStyle deriveTokenStyle(String antlrTokenDef);
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.syntaxcoloring.tokentype.ITokenColorer#getTokenStyle(org.antlr.runtime.Token)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.xtext.ui.common.editor.syntaxcoloring.tokentype.ITokenColorer
+	 * #getTokenStyle(org.antlr.runtime.Token)
 	 */
 	public ITokenStyle getTokenStyle(int tokenTypeID) {
 		ITokenStyle tokenStyle = getTokenStyleMap().get(tokenTypeID);

@@ -3,6 +3,7 @@ package org.eclipse.xtext.ui.common.editor.codecompletion;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ContextInformationValidator;
@@ -50,14 +51,19 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				});
 				Assert.isNotNull(rootNode);
 				LeafNode currentNode = ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
-				//AbstractNode lastNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
+				// AbstractNode lastNode =
+				// ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
 				String prefix = viewer.getTextWidget().getText(currentNode.getOffset(), offset);
 				List<ICompletionProposal> allProposals = null;
-				if (currentNode instanceof Keyword) {
-				//FIXME	allProposals = proposalProvider.completeKeyword((Keyword) currentNode, rootNode, prefix);
+				EObject grammarElement = currentNode.getGrammarElement();
+				if (grammarElement instanceof Keyword) {
+					allProposals = proposalProvider.completeKeyword((Keyword) grammarElement,
+							rootNode, prefix, xtextDocument);
 				}
-				else if (currentNode instanceof RuleCall) {
-				//FIXME	allProposals = proposalProvider.completeRuleCall((RuleCall) currentNode, rootNode, prefix);
+				else if (grammarElement instanceof RuleCall) {
+					// FIXME allProposals =
+					// proposalProvider.completeRuleCall((RuleCall) currentNode,
+					// rootNode, prefix);
 				}
 				if (allProposals != null) {
 					return (ICompletionProposal[]) proposalProvider.sortAndFilter(allProposals).toArray();
