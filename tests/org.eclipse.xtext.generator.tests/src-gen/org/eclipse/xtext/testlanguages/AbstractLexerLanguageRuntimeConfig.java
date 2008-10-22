@@ -7,7 +7,7 @@ import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
 /**
  * used to register components to be used at runtime.
  */
-public class LexerLanguageRuntimeConfig extends AbstractServiceRegistrationFactory {
+public class AbstractLexerLanguageRuntimeConfig extends AbstractServiceRegistrationFactory {
 
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE)

@@ -7,7 +7,7 @@ import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
 /**
  * used to register components to be used at runtime.
  */
-public class XtextRuntimeConfig extends AbstractServiceRegistrationFactory {
+public class AbstractXtextRuntimeConfig extends AbstractServiceRegistrationFactory {
 
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.IXtext.SCOPE)
@@ -19,6 +19,7 @@ public class XtextRuntimeConfig extends AbstractServiceRegistrationFactory {
 		.with(org.eclipse.xtext.resource.IResourceFactory.class, org.eclipse.xtext.services.XtextResourceFactory.class)
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, org.eclipse.xtext.parsetree.reconstr.XtextParseTreeConstructor.class)
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructorCallback.class, org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback.class)
+		.with(org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer.class, org.eclipse.xtext.parsetree.reconstr.impl.SimpleCrossReferenceSerializer.class)
 		.with(org.eclipse.xtext.parser.antlr.Lexer.class, org.eclipse.xtext.parser.internal.InternalXtextLexer.class)
 		
 			.registrations();

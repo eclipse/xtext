@@ -7,7 +7,7 @@ import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
 /**
  * used to register components to be used at runtime.
  */
-public class ComplexReconstrTestRuntimeConfig extends AbstractServiceRegistrationFactory {
+public class AbstractComplexReconstrTestRuntimeConfig extends AbstractServiceRegistrationFactory {
 
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.parsetree.reconstr.IComplexReconstrTest.SCOPE)

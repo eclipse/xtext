@@ -22,6 +22,7 @@ import org.eclipse.xtext.crossref.impl.XtextBuiltinFragmentProvider;
 import org.eclipse.xtext.crossref.impl.XtextBuiltinLinkProvider;
 import org.eclipse.xtext.crossref.internal.Linker;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
+import org.eclipse.xtext.parsetree.reconstr.impl.DefaultCrossReferenceSerializer;
 import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
 
 /**
@@ -41,6 +42,7 @@ public class XtextBuiltinRuntimeConfig extends AbstractServiceRegistrationFactor
 				.with(IURIChecker.class, DefaultRuntimeURIChecker.class)
 				.with(IFragmentProvider.class, XtextBuiltinFragmentProvider.class)
 				.with(AntlrTokenDefProvider.class)
+				.with(DefaultCrossReferenceSerializer.class)
 				.registrations();
 	}
 

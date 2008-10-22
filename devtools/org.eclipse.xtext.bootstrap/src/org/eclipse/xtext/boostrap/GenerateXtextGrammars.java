@@ -15,9 +15,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
@@ -37,6 +35,7 @@ public class GenerateXtextGrammars {
 		EcorePackage.eINSTANCE.eClass();
 		EcorePackage.eINSTANCE.getNsURI();
 		XtextStandaloneSetup.doSetup();
+		String srcPath = "../org.eclipse.xtext/src";
 		String srcGenPath = "../org.eclipse.xtext/src-gen";
 		String filename = "../org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext";
 		String languageName = "Xtext";
@@ -45,10 +44,10 @@ public class GenerateXtextGrammars {
 		XtextStandaloneSetup.doSetup();
 
 		GeneratorFacade.cleanFolder(srcGenPath);
-		generate(srcGenPath, filename, languageName, languageNamespace);
+		generate(srcGenPath, srcPath, filename, languageName, languageNamespace);
 	}
 
-	private static void generate(String srcGenPath, String filename, String languageName, String languageNamespace)
+	private static void generate(String srcGenPath, String srcPath, String filename, String languageName, String languageNamespace)
 			throws FileNotFoundException, IOException {
 		ResourceSet rs = new XtextResourceSet();
 		XtextResource resource = (XtextResource) rs.createResource(URI.createURI(filename));
@@ -58,6 +57,6 @@ public class GenerateXtextGrammars {
 			logger.error(syntaxError.getMessage());
 		}
 		Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
-		GeneratorFacade.generate(grammarModel, srcGenPath, uiPath, "xtext", "xtext2");
+		GeneratorFacade.generate(grammarModel, srcGenPath, srcPath, uiPath, "xtext", "xtext2");
 	}
 }
