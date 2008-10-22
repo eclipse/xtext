@@ -10,6 +10,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.service.Inject;
 
@@ -21,6 +22,9 @@ public class SimpleSerializingCallback extends
 
 	@Inject
 	protected IValueConverterService converterService;
+
+	@Inject
+	protected ICrossReferenceSerializer crossRefSerializer;
 
 	protected OutputStream out;
 
@@ -52,11 +56,7 @@ public class SimpleSerializingCallback extends
 	public void crossRefCall(IInstanceDescription current, CrossReference call,
 			EObject value) {
 		before(current, call);
-		append(value.eResource().getURIFragment(value));
-	}
-
-	public IValueConverterService getConverterService() {
-		return converterService;
+		append(crossRefSerializer.serializeCrossRef(current, call, value));
 	}
 
 	public void keywordCall(IInstanceDescription current, Keyword call) {
@@ -68,9 +68,5 @@ public class SimpleSerializingCallback extends
 			Object value) {
 		before(current, call);
 		append(converterService.toString(value, call.getName()));
-	}
-
-	public void setConverterService(IValueConverterService converterService) {
-		this.converterService = converterService;
 	}
 }
