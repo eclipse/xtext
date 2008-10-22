@@ -7,20 +7,61 @@ import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
 /**
  * used to register components to be used at runtime.
  */
-public class AbstractLexerLanguageRuntimeConfig extends AbstractServiceRegistrationFactory {
+public abstract class AbstractLexerLanguageRuntimeConfig extends AbstractServiceRegistrationFactory {
 
+	protected Class<? extends org.eclipse.xtext.IGrammarAccess> getIGrammarAccess() {
+		return org.eclipse.xtext.testlanguages.services.LexerLanguageGrammarAccess.class;
+	}
+		
+	protected Class<? extends org.eclipse.xtext.IMetamodelAccess> getIMetamodelAccess() {
+		return org.eclipse.xtext.testlanguages.services.LexerLanguageMetamodelAccess.class;
+	}
+		
+	protected Class<? extends org.eclipse.xtext.parser.IAstFactory> getIAstFactory() {
+		return org.eclipse.xtext.parser.GenericEcoreElementFactory.class;
+	}
+		
+	protected Class<? extends org.eclipse.xtext.parser.IParser> getIParser() {
+		return org.eclipse.xtext.testlanguages.parser.LexerLanguageParser.class;
+	}
+		
+	protected Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> getIAntlrTokenFileProvider() {
+		return org.eclipse.xtext.testlanguages.parser.LexerLanguageAntlrTokenFileProvider.class;
+	}
+		
+	protected Class<? extends org.eclipse.xtext.resource.IResourceFactory> getIResourceFactory() {
+		return org.eclipse.xtext.testlanguages.services.LexerLanguageResourceFactory.class;
+	}
+		
+	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> getIParseTreeConstructor() {
+		return org.eclipse.xtext.testlanguages.parsetree.reconstr.LexerLanguageParseTreeConstructor.class;
+	}
+		
+	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructorCallback> getIParseTreeConstructorCallback() {
+		return org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback.class;
+	}
+		
+	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer> getICrossReferenceSerializer() {
+		return org.eclipse.xtext.parsetree.reconstr.impl.SimpleCrossReferenceSerializer.class;
+	}
+		
+	protected Class<? extends org.eclipse.xtext.parser.antlr.Lexer> getLexer() {
+		return org.eclipse.xtext.testlanguages.parser.internal.InternalLexerLanguageLexer.class;
+	}
+		
+	
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.testlanguages.ILexerLanguage.SCOPE)
-		.with(org.eclipse.xtext.IGrammarAccess.class, org.eclipse.xtext.testlanguages.services.LexerLanguageGrammarAccess.class)
-		.with(org.eclipse.xtext.IMetamodelAccess.class, org.eclipse.xtext.testlanguages.services.LexerLanguageMetamodelAccess.class)
-		.with(org.eclipse.xtext.parser.IAstFactory.class, org.eclipse.xtext.parser.GenericEcoreElementFactory.class)
-		.with(org.eclipse.xtext.parser.IParser.class, org.eclipse.xtext.testlanguages.parser.LexerLanguageParser.class)
-		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, org.eclipse.xtext.testlanguages.parser.LexerLanguageAntlrTokenFileProvider.class)
-		.with(org.eclipse.xtext.resource.IResourceFactory.class, org.eclipse.xtext.testlanguages.services.LexerLanguageResourceFactory.class)
-		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, org.eclipse.xtext.testlanguages.parsetree.reconstr.LexerLanguageParseTreeConstructor.class)
-		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructorCallback.class, org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback.class)
-		.with(org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer.class, org.eclipse.xtext.parsetree.reconstr.impl.SimpleCrossReferenceSerializer.class)
-		.with(org.eclipse.xtext.parser.antlr.Lexer.class, org.eclipse.xtext.testlanguages.parser.internal.InternalLexerLanguageLexer.class)
+		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
+		.with(org.eclipse.xtext.IMetamodelAccess.class, getIMetamodelAccess())
+		.with(org.eclipse.xtext.parser.IAstFactory.class, getIAstFactory())
+		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
+		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, getIAntlrTokenFileProvider())
+		.with(org.eclipse.xtext.resource.IResourceFactory.class, getIResourceFactory())
+		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, getIParseTreeConstructor())
+		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructorCallback.class, getIParseTreeConstructorCallback())
+		.with(org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer.class, getICrossReferenceSerializer())
+		.with(org.eclipse.xtext.parser.antlr.Lexer.class, getLexer())
 		
 			.registrations();
 	}

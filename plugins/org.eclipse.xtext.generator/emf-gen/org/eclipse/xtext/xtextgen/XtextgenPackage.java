@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenPackage.java,v 1.5 2008/07/14 08:15:32 sefftinge Exp $
+ * $Id: XtextgenPackage.java,v 1.6 2008/10/22 14:02:05 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen;
 
@@ -252,13 +252,22 @@ public interface XtextgenPackage extends EPackage {
 	int OUTLET__TARGET_FOLDER = 1;
 
 	/**
+	 * The feature id for the '<em><b>Overwrite</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTLET__OVERWRITE = 2;
+
+	/**
 	 * The number of structural features of the '<em>Outlet</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OUTLET_FEATURE_COUNT = 2;
+	int OUTLET_FEATURE_COUNT = 3;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtextgen.GenService <em>Gen Service</em>}'.
@@ -467,6 +476,17 @@ public interface XtextgenPackage extends EPackage {
 	EAttribute getOutlet_TargetFolder();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextgen.Outlet#isOverwrite <em>Overwrite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Overwrite</em>'.
+	 * @see org.eclipse.xtext.xtextgen.Outlet#isOverwrite()
+	 * @see #getOutlet()
+	 * @generated
+	 */
+	EAttribute getOutlet_Overwrite();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -645,6 +665,14 @@ public interface XtextgenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute OUTLET__TARGET_FOLDER = eINSTANCE.getOutlet_TargetFolder();
+
+		/**
+		 * The meta object literal for the '<em><b>Overwrite</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OUTLET__OVERWRITE = eINSTANCE.getOutlet_Overwrite();
 
 	}
 

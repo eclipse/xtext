@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutletImpl.java,v 1.1 2008/07/14 08:15:32 sefftinge Exp $
+ * $Id: OutletImpl.java,v 1.2 2008/10/22 14:02:04 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
@@ -25,6 +25,7 @@ import org.eclipse.xtext.xtextgen.XtextgenPackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextgen.impl.OutletImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.impl.OutletImpl#getTargetFolder <em>Target Folder</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.impl.OutletImpl#isOverwrite <em>Overwrite</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,6 +71,26 @@ public class OutletImpl extends EObjectImpl implements Outlet {
 	 * @ordered
 	 */
 	protected String targetFolder = TARGET_FOLDER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isOverwrite() <em>Overwrite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverwrite()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean OVERWRITE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOverwrite() <em>Overwrite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverwrite()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean overwrite = OVERWRITE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -137,6 +158,27 @@ public class OutletImpl extends EObjectImpl implements Outlet {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isOverwrite() {
+		return overwrite;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOverwrite(boolean newOverwrite) {
+		boolean oldOverwrite = overwrite;
+		overwrite = newOverwrite;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextgenPackage.OUTLET__OVERWRITE, oldOverwrite, overwrite));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -144,6 +186,8 @@ public class OutletImpl extends EObjectImpl implements Outlet {
 				return getName();
 			case XtextgenPackage.OUTLET__TARGET_FOLDER:
 				return getTargetFolder();
+			case XtextgenPackage.OUTLET__OVERWRITE:
+				return isOverwrite() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -161,6 +205,9 @@ public class OutletImpl extends EObjectImpl implements Outlet {
 				return;
 			case XtextgenPackage.OUTLET__TARGET_FOLDER:
 				setTargetFolder((String)newValue);
+				return;
+			case XtextgenPackage.OUTLET__OVERWRITE:
+				setOverwrite(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -180,6 +227,9 @@ public class OutletImpl extends EObjectImpl implements Outlet {
 			case XtextgenPackage.OUTLET__TARGET_FOLDER:
 				setTargetFolder(TARGET_FOLDER_EDEFAULT);
 				return;
+			case XtextgenPackage.OUTLET__OVERWRITE:
+				setOverwrite(OVERWRITE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -196,6 +246,8 @@ public class OutletImpl extends EObjectImpl implements Outlet {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XtextgenPackage.OUTLET__TARGET_FOLDER:
 				return TARGET_FOLDER_EDEFAULT == null ? targetFolder != null : !TARGET_FOLDER_EDEFAULT.equals(targetFolder);
+			case XtextgenPackage.OUTLET__OVERWRITE:
+				return overwrite != OVERWRITE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -214,6 +266,8 @@ public class OutletImpl extends EObjectImpl implements Outlet {
 		result.append(name);
 		result.append(", targetFolder: ");
 		result.append(targetFolder);
+		result.append(", Overwrite: ");
+		result.append(overwrite);
 		result.append(')');
 		return result.toString();
 	}

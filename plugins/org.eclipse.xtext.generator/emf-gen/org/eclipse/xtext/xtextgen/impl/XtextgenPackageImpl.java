@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextgenPackageImpl.java,v 1.5 2008/07/14 08:15:32 sefftinge Exp $
+ * $Id: XtextgenPackageImpl.java,v 1.6 2008/10/22 14:02:04 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen.impl;
 
@@ -294,6 +294,15 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getOutlet_Overwrite() {
+		return (EAttribute)outletEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public XtextgenFactory getXtextgenFactory() {
 		return (XtextgenFactory)getEFactoryInstance();
 	}
@@ -338,6 +347,7 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 		outletEClass = createEClass(OUTLET);
 		createEAttribute(outletEClass, OUTLET__NAME);
 		createEAttribute(outletEClass, OUTLET__TARGET_FOLDER);
+		createEAttribute(outletEClass, OUTLET__OVERWRITE);
 	}
 
 	/**
@@ -399,6 +409,7 @@ public class XtextgenPackageImpl extends EPackageImpl implements XtextgenPackage
 		initEClass(outletEClass, Outlet.class, "Outlet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOutlet_Name(), ecorePackage.getEString(), "name", null, 0, 1, Outlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOutlet_TargetFolder(), ecorePackage.getEString(), "targetFolder", null, 0, 1, Outlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOutlet_Overwrite(), ecorePackage.getEBoolean(), "Overwrite", null, 0, 1, Outlet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

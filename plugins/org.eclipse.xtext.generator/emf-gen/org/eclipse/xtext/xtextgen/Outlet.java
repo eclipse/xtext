@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Outlet.java,v 1.1 2008/07/14 08:15:32 sefftinge Exp $
+ * $Id: Outlet.java,v 1.2 2008/10/22 14:02:05 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtextgen;
 
@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextgen.Outlet#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextgen.Outlet#getTargetFolder <em>Target Folder</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextgen.Outlet#isOverwrite <em>Overwrite</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,5 +78,31 @@ public interface Outlet extends EObject {
 	 * @generated
 	 */
 	void setTargetFolder(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Overwrite</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Overwrite</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Overwrite</em>' attribute.
+	 * @see #setOverwrite(boolean)
+	 * @see org.eclipse.xtext.xtextgen.XtextgenPackage#getOutlet_Overwrite()
+	 * @model id="true"
+	 * @generated
+	 */
+	boolean isOverwrite();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtextgen.Outlet#isOverwrite <em>Overwrite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Overwrite</em>' attribute.
+	 * @see #isOverwrite()
+	 * @generated
+	 */
+	void setOverwrite(boolean value);
 
 } // Outlet

@@ -86,6 +86,7 @@ public class GeneratorFacade {
 			Outlet outlet = new Outlet(o.getTargetFolder());
 			if (o.getName().length() > 0)
 				outlet.setName(o.getName());
+			outlet.setOverwrite(o.isOverwrite());
 			output.addOutlet(outlet);
 		}
 
@@ -144,7 +145,9 @@ public class GeneratorFacade {
 		genModel.setLanguageInterfaceFQName(namespace + ".I" + languageName);
 
 		genModel.getOutlets().add(outlet("", srcGenPath));
-		genModel.getOutlets().add(outlet("SRC", srcPath));
+		org.eclipse.xtext.xtextgen.Outlet srcOutlet = outlet("SRC", srcPath);
+		srcOutlet.setOverwrite(false);
+		genModel.getOutlets().add(srcOutlet);
 
 		if (uiProjectPath != null) {
 			String uiPluginID = uiProjectPath.substring(uiProjectPath.lastIndexOf('/') + 1);
@@ -241,6 +244,7 @@ public class GeneratorFacade {
 		org.eclipse.xtext.xtextgen.Outlet result = XtextgenFactory.eINSTANCE.createOutlet();
 		result.setName(name);
 		result.setTargetFolder(srcGenPath);
+		result.setOverwrite(true);
 		return result;
 	}
 

@@ -84,12 +84,18 @@ import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
 /**
  * used to register components to be used at runtime.
  */
-public class Abstract«runtimeConfigClass(grammar()).toSimpleName()» extends AbstractServiceRegistrationFactory {
+public abstract class Abstract«runtimeConfigClass(grammar()).toSimpleName()» extends AbstractServiceRegistrationFactory {
 
+	«FOREACH genModel().nonUiServices() AS s-»
+	protected Class<? extends «s.serviceInterfaceFQName»> get«s.serviceInterfaceFQName.toSimpleName()»() {
+		return «s.genClassFQName».class;
+	}
+		
+	«ENDFOREACH»
 	public Set<IServiceRegistration> registrations() {
 		return scope(«languageInterface(grammar())».SCOPE)
 		«FOREACH genModel().nonUiServices() AS s-»
-		.with(«s.serviceInterfaceFQName».class, «s.genClassFQName».class)
+		.with(«s.serviceInterfaceFQName».class, get«s.serviceInterfaceFQName.toSimpleName()»())
 		«ENDFOREACH»
 			.registrations();
 	}
