@@ -33,7 +33,8 @@ import org.eclipse.xtext.testlanguages.TestLanguage;
  * 
  */
 public class GenerateAllTestGrammars {
-	private static String path = "./src-gen";
+	private static String srcGenPath = "./src-gen";
+	private static String srcPath= "./src";
 	
 	private static Logger log = Logger.getLogger(GenerateAllTestGrammars.class);
 
@@ -46,9 +47,10 @@ public class GenerateAllTestGrammars {
 	public static void main(String[] args) throws Exception {
 		XtextStandaloneSetup.doSetup();
 		if (args.length > 0) {
-			path = args[0] + "/" + path;
+			srcGenPath = args[0] + "/" + srcGenPath;
+			srcPath = args[0] + "/" + srcPath;
 		}
-		GeneratorFacade.cleanFolder(path);
+		GeneratorFacade.cleanFolder(srcGenPath);
 		for (Class<?> c : testclasses) {
 			String filename = "classpath:/" + c.getName().replace('.', '/') + ".xtext";
 			log.info("loading " + filename);
@@ -57,7 +59,7 @@ public class GenerateAllTestGrammars {
 			Resource resource = rs.createResource(uri);
 			resource.load(null);
 			Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
-			GeneratorFacade.generate(grammarModel, path, null, c.getSimpleName().toLowerCase());
+			GeneratorFacade.generate(grammarModel, srcGenPath, srcPath, null, c.getSimpleName().toLowerCase());
 		}
 	}
 
