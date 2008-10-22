@@ -38,13 +38,14 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 public class «this.languageNameAbbreviation»Grammar {
 	private Logger log = Logger.getLogger(«this.languageNameAbbreviation»Grammar.class);
 	
-    private static final String PATH = "src-gen";
+    private static final String SRC_PATH = "src";
+    private static final String SRC_GEN_PATH = "src-gen";
     private static final String UI_PATH = "../«this.projectName».ui_gen";
 
     public void generate() throws IOException {
         XtextStandaloneSetup.doSetup();
 
-        GeneratorFacade.cleanFolder(PATH);
+        GeneratorFacade.cleanFolder(SRC_GEN_PATH);
 
         String classpathUri = "classpath:/«this.basePath»/«this.languageNameAbbreviation».xtext";
         log.info("loading " + classpathUri);
@@ -53,7 +54,7 @@ public class «this.languageNameAbbreviation»Grammar {
         resource.load(null);
         Grammar grammarModel = (Grammar) resource.getContents().get(0);
 
-        GeneratorFacade.generate(grammarModel, PATH, UI_PATH, "«this.fileExtension»");
+        GeneratorFacade.generate(grammarModel, SRC_GEN_PATH, SRC_PATH, UI_PATH, "«this.fileExtension»");
         log.info("Done.");
     }
 
