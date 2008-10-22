@@ -7,7 +7,7 @@ import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
 /**
  * used to register components to be used at runtime.
  */
-public class LangARuntimeConfig extends AbstractServiceRegistrationFactory {
+public class AbstractLangARuntimeConfig extends AbstractServiceRegistrationFactory {
 
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.crossrefs.ILangA.SCOPE)
