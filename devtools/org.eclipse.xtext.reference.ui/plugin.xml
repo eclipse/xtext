@@ -1,63 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-<!--   <extension
-         point="org.eclipse.xtext.ui.proposalsProvider">
-      <proposalsProvider
-            class="org.eclipse.xtext.ui.service.impl.BuiltInProposalsProvider"
-            languageId="org.eclipse.xtext.reference.ReferenceGrammar">
-      </proposalsProvider>
-   </extension>
    <extension
-         point="org.eclipse.xtext.ui.tokenTypeDef">
-      <tokenTypeDef
-            class="org.eclipse.xtext.reference.ui.services.ReferenceTokenTypeDef"
-            languageId="org.eclipse.xtext.reference.ReferenceGrammar">
-      </tokenTypeDef>
+         point="org.eclipse.xtend.typesystem.emf.checks">
+      <metaModel
+            nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar">
+         <checkFile
+               path="org/eclipse/xtext/reference/ui/check/Checks.chk">
+         </checkFile>
+      </metaModel>
    </extension>
-   <extension
-         point="org.eclipse.xtext.ui.formatter">
-      <formatter
-            class="org.eclipse.xtext.reference.ui.services.ReferenceFormatter"
-            languageId="org.eclipse.xtext.reference.ReferenceGrammar">
-      </formatter>
-   </extension>
-   <extension
-         point="org.eclipse.ui.editors.templates">
-      <contextType
-            class="org.eclipse.jface.text.templates.TemplateContextType"
-            id="org.eclipse.xtext.reference.ReferenceGrammar.rootContext"
-            name="ReferenceGrammar Root Context">
-      </contextType>
-      <template
-            autoinsert="true"
-            contextTypeId="org.eclipse.xtext.reference.ReferenceGrammar.rootContext"
-            description="Eine Autoritaetsperson"
-            id="org.eclipse.xtext.reference.ui.aufpasserTemplate"
-            name="aufpasser">
-         <pattern>
-            /* ein neuer aufpasser */erwachsener (${name} ${age})
-         </pattern>
-      </template>
-      <template
-            autoinsert="true"
-            contextTypeId="org.eclipse.xtext.reference.ReferenceGrammar.rootContext"
-            description="Eine ganze Familie"
-            id="org.eclipse.xtext.reference.ui.familieTemplate"
-            name="familie">
-         <pattern>
-erwachsener (${vater} ${vaterAlter})
-erwachsener (${mutter} ${mutterAlter})
-kind (${kind1} ${kind1Alter})
-kind (${kind2} ${kind2Alter})
-         </pattern>
-      </template>
-   </extension>
-   <extension
-         point="org.eclipse.xtext.ui.labelProvider">
-      <labelProvider
-            class="org.eclipse.xtext.reference.ui.services.ReferenceGrammarLabelProvider"
-            languageId="org.eclipse.xtext.reference.ReferenceGrammar">
-      </labelProvider>
-   </extension> -->
+
 </plugin>

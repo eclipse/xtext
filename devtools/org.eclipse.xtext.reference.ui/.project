@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.eclipse.xtext.ui.reference</name>
+	<name>org.eclipse.xtext.reference.ui</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -20,9 +20,15 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.openarchitectureware.base.oawBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.pde.PluginNature</nature>
+		<nature>org.openarchitectureware.base.oawNature</nature>
 	</natures>
 </projectDescription>
