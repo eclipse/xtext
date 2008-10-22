@@ -102,11 +102,10 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 	// assertEquals(model, parseAndSerialize(model));
 	// }
 
-	// FIXME: make this work
-	// public void testCrossRef() throws Exception {
-	// String model = "type A extends B type B extends A";
-	// assertEquals(model, parseAndSerialize(model));
-	// }
+	public void testCrossRef() throws Exception {
+		String model = "type A extends B type B extends A";
+		assertEquals(model, parseAndSerialize(model));
+	}
 
 	@Override
 	protected void setUp() throws Exception {
