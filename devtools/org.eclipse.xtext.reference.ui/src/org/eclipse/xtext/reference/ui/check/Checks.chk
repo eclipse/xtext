@@ -1,0 +1,15 @@
+/*
+ * Demo validation for the reference language using Check.
+ *
+ * The checks in this file are executed using the CheckEValidator. 
+ * See plugin.xml for registration. 
+ */
+ 
+import ReferenceGrammar;
+ 
+context Spielplatz ERROR "Spielplatz hat negative Größe" :
+	groesse >=0; 
+
+context Spielplatz WARNING "Keine Kinder auf dem Spielplatz" :
+	!kinder.isEmpty;	
+	
