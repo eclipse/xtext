@@ -73,15 +73,8 @@ public class PartialParsingUtil {
 			// on error fully reparse
 			return fullyReparse(parser, rootNode, offset, replacedTextLength, newText);
 		}
-		if (replaceNode != rootNode) {
-			CompositeNode replaceNodeParent = replaceNode.getParent();
-			EList<AbstractNode> replaceNodeSiblings = replaceNodeParent.getChildren();
-			int nodeChildIndex = replaceNodeSiblings.indexOf(replaceNode);
-			replaceNodeSiblings.set(nodeChildIndex, parseResult.getRootNode());
-			parseResult.setRootNode(rootNode);
-		}
-		EObject replaceAstElement = parsingPointers.findASTReplaceElement(replaceNode);
 		EObject astParentElement = parsingPointers.findASTParentElement(replaceNode);
+		EObject replaceAstElement = parsingPointers.findASTReplaceElement(replaceNode);
 		if (astParentElement != null) {
 			String featureName = parsingPointers.findASTContainmentFeatureName(replaceNode);
 			EClass astParentEClass = astParentElement.eClass();
@@ -94,7 +87,14 @@ public class PartialParsingUtil {
 			else {
 				astParentElement.eSet(feature, parseResult.getRootASTElement());
 			}
-			parseResult.setRootASTElement(NodeUtil.getASTElementForRootNode(parseResult.getRootNode()));
+			parseResult.setRootASTElement(NodeUtil.getASTElementForRootNode(rootNode));
+		}
+		if (replaceNode != rootNode) {
+			CompositeNode replaceNodeParent = replaceNode.getParent();
+			EList<AbstractNode> replaceNodeSiblings = replaceNodeParent.getChildren();
+			int nodeChildIndex = replaceNodeSiblings.indexOf(replaceNode);
+			replaceNodeSiblings.set(nodeChildIndex, parseResult.getRootNode());
+			parseResult.setRootNode(rootNode);
 		}
 		return parseResult;
 	}
