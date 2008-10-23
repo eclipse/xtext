@@ -63,7 +63,7 @@ public class XtextResource extends ResourceImpl {
 		return parseResult;
 	}
 
-	public void update(int offset, int originalLength, String change) {
+	public void update(int offset, int replacedTextLength, String newText) {
 		CompositeNode rootNode = parseResult.getRootNode();
 
 		// unloading is required to ensure that any EObjects hanging around
@@ -71,7 +71,7 @@ public class XtextResource extends ResourceImpl {
 		// and thus still can be compared by their URI
 		unload();
 
-		parseResult = parser.reparse(rootNode, offset, originalLength, change);
+		parseResult = parser.reparse(rootNode, offset, replacedTextLength, newText);
 		getContents().clear();
 		if (parseResult != null) {
 			if (parseResult.getRootASTElement() != null)
