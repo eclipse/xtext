@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -136,6 +137,34 @@ public class NodeUtil {
 			}
 		}
 		return null;
+	}
+	
+	public static CompositeNode findLastCompositeGrandChild(CompositeNode parentNode) {
+		EList<AbstractNode> children = parentNode.getChildren();
+		for(int i=children.size()-1; i>=0; --i) {
+			AbstractNode child = children.get(i);
+			if (child instanceof CompositeNode) {
+				return findLastCompositeGrandChild((CompositeNode) child);
+			}
+		}
+		return parentNode;
+	}
+	
+	public static void checkOffsetConsistency(CompositeNode rootNode) {
+		int currentOffset = rootNode.getOffset();
+		for(AbstractNode child:rootNode.getChildren()) {
+			if(child.getOffset() != currentOffset) {
+				throw new IllegalStateException("Invalid offset: Should be " + currentOffset + " but is " + child.getOffset() + "\n" + child.serialize());
+			}
+			if(child instanceof CompositeNode) {
+				checkOffsetConsistency((CompositeNode) child);
+			}
+			int serializedLength = child.serialize().length();
+			if(child.getLength() != serializedLength) {
+				throw new IllegalStateException("Invalid length: Should be " + serializedLength + " but is " + child.getLength() + "\n" + child.serialize());	
+			}
+			currentOffset += serializedLength;
+		}
 	}
 
 }
