@@ -43,7 +43,7 @@ public class GenerateAllTestGrammars {
 			Resource resource = rs.createResource(uri);
 			resource.load(null);
 			Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
-			GeneratorFacade.generate(grammarModel, path, null, c.getSimpleName().toLowerCase());
+			GeneratorFacade.generate(grammarModel, path,"src", null, c.getSimpleName().toLowerCase());
 		}
 	}
 

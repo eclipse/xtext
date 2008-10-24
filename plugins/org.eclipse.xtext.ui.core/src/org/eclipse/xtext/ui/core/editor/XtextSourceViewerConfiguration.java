@@ -33,6 +33,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		XtextDocumentReconcileStrategy strategy = new XtextDocumentReconcileStrategy(sourceViewer);
 		MonoReconciler monoReconciler = new MonoReconciler(strategy, true);
 		monoReconciler.setDelay(500);
+		monoReconciler.setIsIncrementalReconciler(false);
 		return monoReconciler;
 	}
 

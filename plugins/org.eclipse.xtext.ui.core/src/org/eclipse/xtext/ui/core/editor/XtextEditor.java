@@ -36,6 +36,7 @@ import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.service.IServiceScope;
@@ -135,8 +136,14 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 					NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(astNode);
 					CompositeNode parserNode = nodeAdapter.getParserNode();
 
-					int offset = parserNode.getOffset();
-					int length = parserNode.getLength();
+					int trailingHidden = 0;
+					for (LeafNode leafNode : parserNode.getLeafNodes()) {
+						if (!leafNode.isHidden())
+							break;
+						trailingHidden += leafNode.getLength();
+					}
+					int offset = parserNode.getOffset()+trailingHidden;
+					int length = parserNode.getLength()-trailingHidden;
 
 					getSourceViewer().revealRange(offset, length);
 					getSourceViewer().setSelectedRange(offset, length);
