@@ -39,7 +39,6 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 			if (document != null) {
 				document.modify(new UnitOfWork<Object>() {
 					public Object exec(XtextResource resource) throws Exception {
-						// TODO replace with partial parsing which doesn't work reliable yet
 						if(region instanceof DirtyRegion) {
 							DirtyRegion dirtyRegion = (DirtyRegion) region;
 							if(dirtyRegion.getType() == DirtyRegion.REMOVE) {
@@ -52,7 +51,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 								throw new IllegalArgumentException("Illegal DirtyRegion.getType() " +Strings.notNull(dirtyRegion.getType()));
 							}
 						} else {
-							throw new IllegalArgumentException("IRegion should be instanceof DirtyRegion");
+							resource.update(0, resource.getParseResult().getRootNode().getLength(), document.get());
 						}
 						return null;
 					}
@@ -69,6 +68,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 	}
 
 	public void setDocument(IDocument document) {
+		
 	}
 
 }
