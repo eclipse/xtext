@@ -27,6 +27,7 @@ import org.eclipse.xtext.testlanguages.OptionalEmptyLanguage;
 import org.eclipse.xtext.testlanguages.ReferenceGrammar;
 import org.eclipse.xtext.testlanguages.SimpleExpressions;
 import org.eclipse.xtext.testlanguages.TestLanguage;
+import org.eclipse.xtext.valueconverter.Bug250313;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -41,7 +42,7 @@ public class GenerateAllTestGrammars {
 	public final static Class<?>[] testclasses = new Class[] { LangA.class, AbstractTestLanguage.class,ConcreteTestLanguage.class,XtextGrammarTest.class, MetamodelRefTest.class,
 			DummyLanguage.class, TestLanguage.class, SimpleReconstrTest.class, ComplexReconstrTest.class,
 			LexerLanguage.class, SimpleExpressions.class, ActionTestLanguage.class, OptionalEmptyLanguage.class,
-			ReferenceGrammar.class, LookaheadLanguage.class
+			ReferenceGrammar.class, LookaheadLanguage.class,Bug250313.class
 	};
 
 	public static void main(String[] args) throws Exception {
