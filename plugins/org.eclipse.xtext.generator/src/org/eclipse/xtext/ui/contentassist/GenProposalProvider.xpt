@@ -27,6 +27,7 @@ package «uiGenProposalProviderClass().toJavaPackage()»;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
@@ -43,7 +44,7 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider;
-import org.eclipse.xtext.ui.editor.model.XtextCompletionProposal;
+import org.eclipse.xtext.ui.common.editor.codecompletion.XtextCompletionProposal;
 
 /**
  * Represents a generated, default implementation of interface {@link IProposalProvider}.
@@ -72,9 +73,11 @@ import org.eclipse.xtext.ui.editor.model.XtextCompletionProposal;
  *   
  */
 public class «uiGenProposalProviderClass().toSimpleName()» extends ContentAssistant implements IProposalProvider {
-
 	// constants
 	private static final String UI_PLUGIN_ID = "«uiPluginBundleID»";
+	// logger available to subclasses
+	protected final Logger logger = Logger.getLogger(«uiGenProposalProviderClass().toSimpleName()».class);
+
 	@Inject
 	private IContentAssistProcessor contentAssistProcessor;
 	
@@ -95,6 +98,10 @@ public class «uiGenProposalProviderClass().toSimpleName()» extends ContentAssist
 	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeKeyword(org.eclipse.xtext.Keyword, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
 	 */
 	public List<ICompletionProposal> completeKeyword(Keyword keyword, EObject model, String prefix, IDocument doc,int offset) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeKeyword '" + keyword.getValue() + "' for model '" + model + "' and prefix '"
+					+ prefix.trim() + "'");
+		}
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 		String text = keyword.getValue().length() == 1 ? keyword.getValue() : keyword.getValue() + " ";
 		XtextCompletionProposal xtextCompletionProposal = new XtextCompletionProposal(text, new StyledString(text),
@@ -107,7 +114,11 @@ public class «uiGenProposalProviderClass().toSimpleName()» extends ContentAssist
 	 * (non-Javadoc)
 	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeRuleCall(org.eclipse.xtext.RuleCall, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument)
 	 */
-	public List<ICompletionProposal> completeRuleCall(RuleCall ele, EObject model, String prefix, IDocument doc) {
+	public List<ICompletionProposal> completeRuleCall(RuleCall ruleCall, EObject model, String prefix, IDocument doc) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeRuleCall '" + ruleCall.getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + model + "' and prefix '" + prefix.trim() + "'");
+		}
 		return null;
 	}
 
@@ -123,11 +134,20 @@ public class «uiGenProposalProviderClass().toSimpleName()» extends ContentAssist
 	«IF null==getGlobalVar(fqnFeatureName)-»
 	«storeGlobalVar(fqnFeatureName,"")-»	 
 	public List<ICompletionProposal> complete«fqnFeatureName»(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("complete«fqnFeatureName» feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ prefix.trim() + "'");
+		}
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 		«IF CrossReference.isInstance(assignment.terminal)-»
 		lookupCrossReference(assignment, model, offset, completionProposalList);
-		«ELSE-»
+		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).name=="ID" -»
 		completionProposalList.add(newXtextCompletionProposal("«fqnFeatureName»", offset));		
+		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).name=="INT" -»
+		completionProposalList.add(newXtextCompletionProposal("1", offset));		
+		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).name=="STRING" -»
+		completionProposalList.add(newXtextCompletionProposal("\"«fqnFeatureName»\"", offset));		
 		«ENDIF-»
 		return completionProposalList;
 	}
