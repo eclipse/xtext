@@ -5,9 +5,11 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Assert;
@@ -43,13 +45,15 @@ import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 
 /**
+ * @author Michael Clay - Initial contribution and API
  * @author Dennis Hübner - Initial contribution and API
- * 
  */
 public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 	@Inject
 	private IProposalProvider proposalProvider;
+
+	private final Map<String, Method> methodLookupMap = new HashMap<String, Method>();
 
 	/**
 	 * computes the possible grammar elements following the one at the given
@@ -70,9 +74,9 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				});
 				Assert.isNotNull(rootNode);
 
-				// last COMPLETE node element (node with associated grammar element)
+				// last COMPLETE node element with associated grammar element
 				AbstractNode lastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
-				// node at the CURRENT cursor position (node with or without grammar element)
+				// node at CURRENT cursor pos. with or without grammar element
 				LeafNode currentLeafNode = (LeafNode) ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
 				// get associated grammar element
 				AbstractElement grammarElement = ParseTreeUtil.getGrammarElementFromNode(lastCompleteNode);
@@ -85,41 +89,10 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 						.iterator(); iterator.hasNext();) {
 					AbstractElement nextElement = iterator.next();
 
-					List<EObject> resolvedElementOrRuleList = resolveElement(nextElement);
+					List<EObject> resolvedElementOrRuleList = resolveElement(nextElement, true);
 
-					for (Iterator<EObject> elementOrRuleIterator = resolvedElementOrRuleList.iterator(); elementOrRuleIterator
-							.hasNext();) {
-						EObject abstractElement = elementOrRuleIterator.next();
-
-						if (abstractElement instanceof Keyword) {
-							completionProposalList.addAll(proposalProvider.completeKeyword((Keyword) abstractElement,
-									currentLeafNode, prefix, xtextDocument, offset));
-						}
-						else if (abstractElement instanceof Assignment) {
-
-							Assignment assignment = (Assignment) abstractElement;
-
-							ParserRule lexerRule = GrammarUtil.containingParserRule(assignment);
-
-							Method method = findMethod(proposalProvider.getClass(), "complete"
-									+ firstLetterCapitalized(lexerRule.getName())
-									+ firstLetterCapitalized(assignment.getFeature()), Assignment.class, EObject.class,
-									String.class, IDocument.class, int.class);
-							
-							Collection<? extends ICompletionProposal> assignmentProposalList = (Collection<? extends ICompletionProposal>) invokeMethod(method, proposalProvider, assignment, currentLeafNode, prefix, xtextDocument,
-									offset);
-
-							completionProposalList.addAll(assignmentProposalList);
-						}
-						else if (abstractElement instanceof LexerRule) {
-						}
-						else if (abstractElement instanceof RuleCall) {
-						}
-						else if (abstractElement instanceof CrossReference) {
-						}
-						else if (abstractElement instanceof Action) {
-						}
-					}
+					collectCompletionProposalList(resolvedElementOrRuleList, completionProposalList, xtextDocument,
+							currentLeafNode, prefix, offset);
 				}
 
 				if (completionProposalList != null) {
@@ -130,6 +103,155 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 			}
 		}
 		return null;
+	}
+
+	private void collectCompletionProposalList(List<EObject> resolvedElementOrRuleList,
+			List<ICompletionProposal> completionProposalList, XtextDocument xtextDocument, LeafNode currentLeafNode,
+			String prefix, final int offset) {
+		for (Iterator<EObject> elementOrRuleIterator = resolvedElementOrRuleList.iterator(); elementOrRuleIterator
+				.hasNext();) {
+			EObject abstractElement = elementOrRuleIterator.next();
+
+			if (abstractElement instanceof Keyword) {
+				completionProposalList.addAll(proposalProvider.completeKeyword((Keyword) abstractElement,
+						currentLeafNode, prefix, xtextDocument, offset));
+			}
+			else if (abstractElement instanceof Assignment) {
+
+				Assignment assignment = (Assignment) abstractElement;
+
+				ParserRule lexerRule = GrammarUtil.containingParserRule(assignment);
+
+				Method method = findMethod(proposalProvider.getClass(),
+						"complete" + firstLetterCapitalized(lexerRule.getName())
+								+ firstLetterCapitalized(assignment.getFeature()), Assignment.class, EObject.class,
+						String.class, IDocument.class, int.class);
+
+				Collection<ICompletionProposal> assignmentProposalList = invokeMethod(method, proposalProvider,
+						assignment, currentLeafNode, prefix, xtextDocument, offset);
+
+				completionProposalList.addAll(assignmentProposalList);
+			}
+			else if (abstractElement instanceof RuleCall) {
+				List<ICompletionProposal> proposalList = this.proposalProvider.completeRuleCall(
+						(RuleCall) abstractElement, currentLeafNode, prefix, xtextDocument);
+				if (null == proposalList || proposalList.isEmpty()) {
+					collectCompletionProposalList(
+							resolveElement((AbstractElement) abstractElement.eContainer(), false),
+							completionProposalList, xtextDocument, currentLeafNode, prefix, offset);
+				}
+			}
+			else if (abstractElement instanceof LexerRule) {
+			}
+			else if (abstractElement instanceof CrossReference) {
+			}
+			else if (abstractElement instanceof Action) {
+			}
+		}
+	}
+
+	protected final List<EObject> resolveElement(AbstractElement abstractElement, boolean resolveRuleCall) {
+
+		List<EObject> elementList = new ArrayList<EObject>();
+
+		if (abstractElement instanceof Alternatives) {
+			for (AbstractElement alternativeElement : ((Alternatives) abstractElement).getGroups()) {
+				elementList.addAll(resolveElement(alternativeElement, resolveRuleCall));
+			}
+		}
+		else if (abstractElement instanceof Group) {
+			boolean includeNext = true;
+			for (Iterator<AbstractElement> iterator = ((Group) abstractElement).getAbstractTokens().iterator(); iterator
+					.hasNext()
+					&& includeNext;) {
+				AbstractElement groupElement = iterator.next();
+				elementList.addAll(resolveElement(groupElement, resolveRuleCall));
+				includeNext = GrammarUtil.isOptionalCardinality(groupElement);
+			}
+
+		}
+		else if (abstractElement instanceof Assignment) {
+
+			Assignment assignment = (Assignment) abstractElement;
+
+			if (assignment.getTerminal() instanceof RuleCall && resolveRuleCall) {
+				elementList.addAll(resolveElement(assignment.getTerminal(), resolveRuleCall));
+			}
+			else if (assignment.getTerminal() instanceof Alternatives) {
+				elementList.addAll(resolveElement(assignment.getTerminal(), resolveRuleCall));
+			}
+			else {
+				elementList.add(assignment);
+			}
+
+		}
+		else if (abstractElement instanceof RuleCall) {
+
+			AbstractRule abstractRule = GrammarUtil.calledRule((RuleCall) abstractElement);
+
+			if (abstractRule instanceof ParserRule) {
+				elementList.addAll(resolveElement(((ParserRule) abstractRule).getAlternatives(), resolveRuleCall));
+			}
+			else {
+				elementList.add(abstractElement);
+			}
+		}
+		else {
+			elementList.add(abstractElement);
+		}
+		return elementList;
+	}
+
+	public char[] getCompletionProposalAutoActivationCharacters() {
+		return null;
+	}
+
+	public String getErrorMessage() {
+		return null;
+	}
+
+	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
+		return null;
+	}
+
+	public char[] getContextInformationAutoActivationCharacters() {
+		return null;
+	}
+
+	public IContextInformationValidator getContextInformationValidator() {
+		return new ContextInformationValidator(this);
+	}
+
+	protected void handleReflectionException(Exception ex) {
+		if (ex instanceof NoSuchMethodException) {
+			throw new IllegalStateException("Method not found: " + ex.getMessage());
+		}
+		if (ex instanceof IllegalAccessException) {
+			throw new IllegalStateException("Could not access method: " + ex.getMessage());
+		}
+		if (ex instanceof InvocationTargetException) {
+			rethrowRuntimeException(((InvocationTargetException) ex).getTargetException());
+		}
+		if (ex instanceof RuntimeException) {
+			throw (RuntimeException) ex;
+		}
+		handleUnexpectedException(ex);
+	}
+
+	private final void rethrowRuntimeException(Throwable ex) {
+		if (ex instanceof RuntimeException) {
+			throw (RuntimeException) ex;
+		}
+		if (ex instanceof Error) {
+			throw (Error) ex;
+		}
+		handleUnexpectedException(ex);
+	}
+
+	protected void handleUnexpectedException(Throwable ex) {
+		IllegalStateException isex = new IllegalStateException("Unexpected exception thrown");
+		isex.initCause(ex);
+		throw isex;
 	}
 
 	protected final Set<AbstractElement> calculatePossibleElementSet(AbstractNode contextNode,
@@ -237,116 +359,6 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		return elementSet;
 	}
 
-	protected final List<EObject> resolveElement(AbstractElement abstractElement) {
-
-		List<EObject> elementList = new ArrayList<EObject>();
-
-		if (abstractElement instanceof Alternatives) {
-			for (AbstractElement alternativeElement : ((Alternatives) abstractElement).getGroups()) {
-				elementList.addAll(resolveElement(alternativeElement));
-			}
-		}
-		else if (abstractElement instanceof Assignment) {
-
-			Assignment assignment = (Assignment) abstractElement;
-
-			if (assignment.getTerminal() instanceof RuleCall) {
-
-				AbstractRule abstractRule = GrammarUtil.calledRule((RuleCall) assignment.getTerminal());
-
-				if (abstractRule instanceof ParserRule) {
-					elementList.addAll(resolveElement(assignment.getTerminal()));
-				}
-				else {
-					elementList.add(assignment);
-				}
-			}
-			else {
-				elementList.add(assignment);
-			}
-		}
-		else if (abstractElement instanceof RuleCall) {
-			AbstractRule abstractRule = GrammarUtil.calledRule((RuleCall) abstractElement);
-
-			if (null == abstractRule) {
-				elementList.add(abstractElement);
-			}
-			else if (abstractRule instanceof LexerRule) {
-				elementList.add(abstractRule);
-			}
-			else {
-				return resolveElement(((ParserRule) abstractRule).getAlternatives());
-			}
-		}
-		else if (abstractElement instanceof Group) {
-			boolean includeNext = true;
-			for (Iterator<AbstractElement> iterator = ((Group) abstractElement).getAbstractTokens().iterator(); iterator
-					.hasNext()
-					&& includeNext;) {
-				AbstractElement groupElement = iterator.next();
-				elementList.addAll(resolveElement(groupElement));
-				includeNext = GrammarUtil.isOptionalCardinality(groupElement);
-			}
-
-		}
-		else {
-			elementList.add(abstractElement);
-		}
-		return elementList;
-	}
-
-	public char[] getCompletionProposalAutoActivationCharacters() {
-		return null;
-	}
-
-	public String getErrorMessage() {
-		return null;
-	}
-
-	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
-		return null;
-	}
-
-	public char[] getContextInformationAutoActivationCharacters() {
-		return null;
-	}
-
-	public IContextInformationValidator getContextInformationValidator() {
-		return new ContextInformationValidator(this);
-	}
-
-	protected void handleReflectionException(Exception ex) {
-		if (ex instanceof NoSuchMethodException) {
-			throw new IllegalStateException("Method not found: " + ex.getMessage());
-		}
-		if (ex instanceof IllegalAccessException) {
-			throw new IllegalStateException("Could not access method: " + ex.getMessage());
-		}
-		if (ex instanceof InvocationTargetException) {
-			rethrowRuntimeException(((InvocationTargetException) ex).getTargetException());
-		}
-		if (ex instanceof RuntimeException) {
-			throw (RuntimeException) ex;
-		}
-		handleUnexpectedException(ex);
-	}
-
-	private final void rethrowRuntimeException(Throwable ex) {
-		if (ex instanceof RuntimeException) {
-			throw (RuntimeException) ex;
-		}
-		if (ex instanceof Error) {
-			throw (Error) ex;
-		}
-		handleUnexpectedException(ex);
-	}
-
-	protected void handleUnexpectedException(Throwable ex) {
-		IllegalStateException isex = new IllegalStateException("Unexpected exception thrown");
-		isex.initCause(ex);
-		throw isex;
-	}
-
 	private final String firstLetterCapitalized(String name) {
 		return name.substring(0, 1).toUpperCase() + name.substring(1);
 	}
@@ -354,24 +366,27 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 	private final Method findMethod(Class<?> clazz, String name, Class<?>... paramTypes) {
 		Assert.isNotNull(clazz, "Class must not be null");
 		Assert.isNotNull(name, "Method name must not be null");
+		Method result = methodLookupMap.get(name);
 		Class<?> searchType = clazz;
-		while (!Object.class.equals(searchType) && searchType != null) {
+		while (!Object.class.equals(searchType) && searchType != null && null == result) {
 			Method[] methods = (searchType.isInterface() ? searchType.getMethods() : searchType.getDeclaredMethods());
-			for (int i = 0; i < methods.length; i++) {
+			for (int i = 0; i < methods.length && null == result; i++) {
 				Method method = methods[i];
 				if (name.equals(method.getName())
 						&& (paramTypes == null || Arrays.equals(paramTypes, method.getParameterTypes()))) {
-					return method;
+					result = method;
+					methodLookupMap.put(name, method);
 				}
 			}
 			searchType = searchType.getSuperclass();
 		}
-		return null;
+		return result;
 	}
 
-	private final Object invokeMethod(Method method, Object target, Object... args) {
+	@SuppressWarnings("unchecked")
+	private final Collection<ICompletionProposal> invokeMethod(Method method, Object target, Object... args) {
 		try {
-			return method.invoke(target, args);
+			return (Collection<ICompletionProposal>) method.invoke(target, args);
 		}
 		catch (Exception ex) {
 			handleReflectionException(ex);
