@@ -1,6 +1,6 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g 2008-10-27 14:57:20
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g 2008-10-27 14:57:24
 
-package org.eclipse.xtext.parsetree.reconstr.parser.internal;
+package org.eclipse.xtext.valueconverter.parser.internal;
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
@@ -12,35 +12,33 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
-public class InternalComplexReconstrTestLexer extends Lexer {
+public class InternalBug250313Lexer extends Lexer {
     public static final int RULE_ML_COMMENT=7;
-    public static final int T14=14;
-    public static final int RULE_ID=4;
+    public static final int RULE_ID=5;
     public static final int RULE_WS=9;
     public static final int T11=11;
-    public static final int T15=15;
     public static final int EOF=-1;
-    public static final int RULE_INT=5;
-    public static final int RULE_STRING=6;
+    public static final int RULE_INT=6;
+    public static final int RULE_STRING=4;
     public static final int T12=12;
-    public static final int Tokens=16;
+    public static final int Tokens=13;
     public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int T13=13;
-    public InternalComplexReconstrTestLexer() {;} 
-    public InternalComplexReconstrTestLexer(CharStream input) {
+    public InternalBug250313Lexer() {;} 
+    public InternalBug250313Lexer(CharStream input) {
         super(input);
     }
-    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g"; }
+    public String getGrammarFileName() { return "./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g"; }
 
     // $ANTLR start T11
     public final void mT11() throws RecognitionException {
         try {
             int _type = T11;
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:10:5: ( '+' )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:10:7: '+'
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:10:5: ( '#2' )
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:10:7: '#2'
             {
-            match('+'); 
+            match("#2"); 
+
 
             }
 
@@ -55,10 +53,11 @@ public class InternalComplexReconstrTestLexer extends Lexer {
     public final void mT12() throws RecognitionException {
         try {
             int _type = T12;
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:11:5: ( '-' )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:11:7: '-'
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:11:5: ( 'mykeyword1' )
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:11:7: 'mykeyword1'
             {
-            match('-'); 
+            match("mykeyword1"); 
+
 
             }
 
@@ -69,68 +68,14 @@ public class InternalComplexReconstrTestLexer extends Lexer {
     }
     // $ANTLR end T12
 
-    // $ANTLR start T13
-    public final void mT13() throws RecognitionException {
-        try {
-            int _type = T13;
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:12:5: ( '(' )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:12:7: '('
-            {
-            match('('); 
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T13
-
-    // $ANTLR start T14
-    public final void mT14() throws RecognitionException {
-        try {
-            int _type = T14;
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:13:5: ( ')' )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:13:7: ')'
-            {
-            match(')'); 
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T14
-
-    // $ANTLR start T15
-    public final void mT15() throws RecognitionException {
-        try {
-            int _type = T15;
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:14:5: ( '!' )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:14:7: '!'
-            {
-            match('!'); 
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T15
-
     // $ANTLR start RULE_ID
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:315:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:315:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:109:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:109:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:315:11: ( '^' )?
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:109:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -139,7 +84,7 @@ public class InternalComplexReconstrTestLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:315:12: '^'
+                    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:109:12: '^'
                     {
                     match('^'); 
 
@@ -158,7 +103,7 @@ public class InternalComplexReconstrTestLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:315:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:109:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -171,7 +116,7 @@ public class InternalComplexReconstrTestLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:
+            	    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -206,10 +151,10 @@ public class InternalComplexReconstrTestLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:317:10: ( ( '0' .. '9' )+ )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:317:12: ( '0' .. '9' )+
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:111:10: ( ( '0' .. '9' )+ )
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:111:12: ( '0' .. '9' )+
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:317:12: ( '0' .. '9' )+
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:111:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -223,7 +168,7 @@ public class InternalComplexReconstrTestLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:317:13: '0' .. '9'
+            	    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:111:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -253,7 +198,7 @@ public class InternalComplexReconstrTestLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:319:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:113:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -265,16 +210,16 @@ public class InternalComplexReconstrTestLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("319:1: RULE_STRING : ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' );", 6, 0, input);
+                    new NoViableAltException("113:1: RULE_STRING : ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' );", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:319:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
+                    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:113:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
                     {
                     match('\"'); 
-                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:319:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
+                    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:113:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -290,7 +235,7 @@ public class InternalComplexReconstrTestLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:319:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:113:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -307,7 +252,7 @@ public class InternalComplexReconstrTestLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:319:65: ~ ( '\\\\' | '\"' )
+                    	    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:113:65: ~ ( '\\\\' | '\"' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -333,10 +278,10 @@ public class InternalComplexReconstrTestLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:319:101: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
+                    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:113:101: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
                     {
                     match('\''); 
-                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:319:106: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
+                    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:113:106: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -352,7 +297,7 @@ public class InternalComplexReconstrTestLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:319:108: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:113:108: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -369,7 +314,7 @@ public class InternalComplexReconstrTestLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:319:152: ~ ( '\\\\' | '\\'' )
+                    	    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:113:152: ~ ( '\\\\' | '\\'' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -407,12 +352,12 @@ public class InternalComplexReconstrTestLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:321:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:321:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:115:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:115:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:321:24: ( options {greedy=false; } : . )*
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:115:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -437,7 +382,7 @@ public class InternalComplexReconstrTestLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:321:52: .
+            	    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:115:52: .
             	    {
             	    matchAny(); 
 
@@ -466,12 +411,12 @@ public class InternalComplexReconstrTestLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:323:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )? )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:323:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )?
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:117:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )? )
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:117:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:323:24: (~ ( '\\n' | '\\r' ) )*
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:117:24: (~ ( '\\n' | '\\r' ) )*
             loop8:
             do {
                 int alt8=2;
@@ -484,7 +429,7 @@ public class InternalComplexReconstrTestLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:323:24: ~ ( '\\n' | '\\r' )
+            	    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:117:24: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -505,7 +450,7 @@ public class InternalComplexReconstrTestLexer extends Lexer {
                 }
             } while (true);
 
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:323:38: ( ( '\\r' )? '\\n' )?
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:117:38: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -514,9 +459,9 @@ public class InternalComplexReconstrTestLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:323:39: ( '\\r' )? '\\n'
+                    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:117:39: ( '\\r' )? '\\n'
                     {
-                    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:323:39: ( '\\r' )?
+                    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:117:39: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -525,7 +470,7 @@ public class InternalComplexReconstrTestLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:323:39: '\\r'
+                            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:117:39: '\\r'
                             {
                             match('\r'); 
 
@@ -556,10 +501,10 @@ public class InternalComplexReconstrTestLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:325:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:325:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:119:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:119:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:325:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:119:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -573,7 +518,7 @@ public class InternalComplexReconstrTestLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:
+            	    // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -613,8 +558,8 @@ public class InternalComplexReconstrTestLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:327:16: ( . )
-            // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:327:18: .
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:121:16: ( . )
+            // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:121:18: .
             {
             matchAny(); 
 
@@ -628,166 +573,202 @@ public class InternalComplexReconstrTestLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:1:8: ( T11 | T12 | T13 | T14 | T15 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=12;
+        // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:1:8: ( T11 | T12 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=9;
         int LA12_0 = input.LA(1);
 
-        if ( (LA12_0=='+') ) {
-            alt12=1;
+        if ( (LA12_0=='#') ) {
+            int LA12_1 = input.LA(2);
+
+            if ( (LA12_1=='2') ) {
+                alt12=1;
+            }
+            else {
+                alt12=9;}
         }
-        else if ( (LA12_0=='-') ) {
-            alt12=2;
-        }
-        else if ( (LA12_0=='(') ) {
-            alt12=3;
-        }
-        else if ( (LA12_0==')') ) {
-            alt12=4;
-        }
-        else if ( (LA12_0=='!') ) {
-            alt12=5;
+        else if ( (LA12_0=='m') ) {
+            int LA12_2 = input.LA(2);
+
+            if ( (LA12_2=='y') ) {
+                int LA12_12 = input.LA(3);
+
+                if ( (LA12_12=='k') ) {
+                    int LA12_19 = input.LA(4);
+
+                    if ( (LA12_19=='e') ) {
+                        int LA12_20 = input.LA(5);
+
+                        if ( (LA12_20=='y') ) {
+                            int LA12_21 = input.LA(6);
+
+                            if ( (LA12_21=='w') ) {
+                                int LA12_22 = input.LA(7);
+
+                                if ( (LA12_22=='o') ) {
+                                    int LA12_23 = input.LA(8);
+
+                                    if ( (LA12_23=='r') ) {
+                                        int LA12_24 = input.LA(9);
+
+                                        if ( (LA12_24=='d') ) {
+                                            int LA12_25 = input.LA(10);
+
+                                            if ( (LA12_25=='1') ) {
+                                                int LA12_26 = input.LA(11);
+
+                                                if ( ((LA12_26>='0' && LA12_26<='9')||(LA12_26>='A' && LA12_26<='Z')||LA12_26=='_'||(LA12_26>='a' && LA12_26<='z')) ) {
+                                                    alt12=3;
+                                                }
+                                                else {
+                                                    alt12=2;}
+                                            }
+                                            else {
+                                                alt12=3;}
+                                        }
+                                        else {
+                                            alt12=3;}
+                                    }
+                                    else {
+                                        alt12=3;}
+                                }
+                                else {
+                                    alt12=3;}
+                            }
+                            else {
+                                alt12=3;}
+                        }
+                        else {
+                            alt12=3;}
+                    }
+                    else {
+                        alt12=3;}
+                }
+                else {
+                    alt12=3;}
+            }
+            else {
+                alt12=3;}
         }
         else if ( (LA12_0=='^') ) {
-            int LA12_6 = input.LA(2);
+            int LA12_3 = input.LA(2);
 
-            if ( ((LA12_6>='A' && LA12_6<='Z')||LA12_6=='_'||(LA12_6>='a' && LA12_6<='z')) ) {
-                alt12=6;
+            if ( ((LA12_3>='A' && LA12_3<='Z')||LA12_3=='_'||(LA12_3>='a' && LA12_3<='z')) ) {
+                alt12=3;
             }
             else {
-                alt12=12;}
+                alt12=9;}
         }
-        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='z')) ) {
-            alt12=6;
+        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='l')||(LA12_0>='n' && LA12_0<='z')) ) {
+            alt12=3;
         }
         else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
-            alt12=7;
+            alt12=4;
         }
         else if ( (LA12_0=='\"') ) {
-            int LA12_9 = input.LA(2);
+            int LA12_6 = input.LA(2);
 
-            if ( ((LA12_9>='\u0000' && LA12_9<='\uFFFE')) ) {
-                alt12=8;
+            if ( ((LA12_6>='\u0000' && LA12_6<='\uFFFE')) ) {
+                alt12=5;
             }
             else {
-                alt12=12;}
+                alt12=9;}
         }
         else if ( (LA12_0=='\'') ) {
-            int LA12_10 = input.LA(2);
+            int LA12_7 = input.LA(2);
 
-            if ( ((LA12_10>='\u0000' && LA12_10<='\uFFFE')) ) {
-                alt12=8;
+            if ( ((LA12_7>='\u0000' && LA12_7<='\uFFFE')) ) {
+                alt12=5;
             }
             else {
-                alt12=12;}
+                alt12=9;}
         }
         else if ( (LA12_0=='/') ) {
             switch ( input.LA(2) ) {
-            case '/':
-                {
-                alt12=10;
-                }
-                break;
             case '*':
                 {
-                alt12=9;
+                alt12=6;
+                }
+                break;
+            case '/':
+                {
+                alt12=7;
                 }
                 break;
             default:
-                alt12=12;}
+                alt12=9;}
 
         }
         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
-            alt12=11;
+            alt12=8;
         }
-        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||(LA12_0>='#' && LA12_0<='&')||LA12_0=='*'||LA12_0==','||LA12_0=='.'||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFE')) ) {
-            alt12=12;
+        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='$' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFE')) ) {
+            alt12=9;
         }
         else {
             NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
+                new NoViableAltException("1:1: Tokens : ( T11 | T12 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
 
             throw nvae;
         }
         switch (alt12) {
             case 1 :
-                // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:1:10: T11
+                // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:1:10: T11
                 {
                 mT11(); 
 
                 }
                 break;
             case 2 :
-                // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:1:14: T12
+                // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:1:14: T12
                 {
                 mT12(); 
 
                 }
                 break;
             case 3 :
-                // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:1:18: T13
-                {
-                mT13(); 
-
-                }
-                break;
-            case 4 :
-                // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:1:22: T14
-                {
-                mT14(); 
-
-                }
-                break;
-            case 5 :
-                // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:1:26: T15
-                {
-                mT15(); 
-
-                }
-                break;
-            case 6 :
-                // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:1:30: RULE_ID
+                // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:1:18: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 7 :
-                // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:1:38: RULE_INT
+            case 4 :
+                // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:1:26: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 8 :
-                // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:1:47: RULE_STRING
+            case 5 :
+                // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:1:35: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 9 :
-                // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:1:59: RULE_ML_COMMENT
+            case 6 :
+                // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:1:47: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 10 :
-                // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:1:75: RULE_SL_COMMENT
+            case 7 :
+                // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:1:63: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 11 :
-                // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:1:91: RULE_WS
+            case 8 :
+                // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:1:79: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 12 :
-                // ./src-gen/org/eclipse/xtext/parsetree/reconstr/parser/internal/InternalComplexReconstrTest.g:1:99: RULE_ANY_OTHER
+            case 9 :
+                // ./src-gen/org/eclipse/xtext/valueconverter/parser/internal/InternalBug250313.g:1:87: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
