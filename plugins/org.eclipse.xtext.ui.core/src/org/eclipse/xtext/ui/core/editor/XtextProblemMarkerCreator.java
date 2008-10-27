@@ -48,8 +48,24 @@ public class XtextProblemMarkerCreator {
 		map.put(IMarker.MESSAGE, error.getMessage());
 		map.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 		return map;
-
 	}
+	
+	private static Map<String, Object> collectMarkerAttributes(org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic, Object severity) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put(IMarker.SEVERITY, severity);
+		map.put(IMarker.LINE_NUMBER, diagnostic.getLine());
+		map.put(IMarker.MESSAGE, diagnostic.getMessage());
+		map.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
+		
+		if (diagnostic instanceof XtextResource.Diagnostic) {
+			XtextResource.Diagnostic xtextDiagnostic = (XtextResource.Diagnostic) diagnostic;
+			map.put(IMarker.CHAR_START, xtextDiagnostic.getOffset());
+			map.put(IMarker.CHAR_END, xtextDiagnostic.getOffset() + xtextDiagnostic.getLength());
+		}
+		
+		return map;
+	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -95,6 +111,12 @@ public class XtextProblemMarkerCreator {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Parser Diagnostic " + (parserDiagFail ? "FAIL" : "OK") + "!");
 		}
+		
+		for(org.eclipse.emf.ecore.resource.Resource.Diagnostic error: resource.getErrors())
+			emfMarkers.add(collectMarkerAttributes(error, IMarker.SEVERITY_ERROR));
+		for(org.eclipse.emf.ecore.resource.Resource.Diagnostic warning: resource.getWarnings())
+			emfMarkers.add(collectMarkerAttributes(warning, IMarker.SEVERITY_WARNING));
+		
 		if (!emfMarkers.isEmpty())
 			XtextMarkerManager.createMarker(file, emfMarkers, monitor);
 

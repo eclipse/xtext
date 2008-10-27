@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.crossref.BrokenLink;
 import org.eclipse.xtext.crossref.IFragmentProvider;
 import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.parser.IAstFactory;
@@ -72,7 +71,7 @@ public class XtextResource extends ResourceImpl {
 		unload();
 
 		parseResult = parser.reparse(rootNode, offset, replacedTextLength, newText);
-		getContents().clear();
+		clearOutput();
 		if (parseResult != null) {
 			if (parseResult.getRootASTElement() != null)
 				getContents().add(parseResult.getRootASTElement());
@@ -87,14 +86,13 @@ public class XtextResource extends ResourceImpl {
 		if (parseResult.getRootASTElement() == null)
 			return;
 		indexIds();
-		List<BrokenLink> brokenLinks = linker.ensureLinked(parseResult.getRootASTElement());
+		List<Diagnostic> brokenLinks = linker.ensureLinked(parseResult.getRootASTElement());
 		TreeIterator<EObject> allContents = parseResult.getRootASTElement().eAllContents();
 		while (allContents.hasNext())
 			brokenLinks.addAll(linker.ensureLinked(allContents.next()));
 
-		// for (BrokenLink brokenLink : brokenLinks) {
-		// //TODO handle broken links
-		// }
+		getErrors().addAll(brokenLinks);
+		//logger.debug("errors: " + errors.size());
 	}
 
 	private void addNodeContentAdapter() {
@@ -103,7 +101,7 @@ public class XtextResource extends ResourceImpl {
 
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		getContents().clear();
+		clearOutput();
 		parseResult = parser.parse(inputStream, elementFactory);
 		if (parseResult != null) {
 			EObject rootElement = parseResult.getRootASTElement();
@@ -113,6 +111,10 @@ public class XtextResource extends ResourceImpl {
 			addNodeContentAdapter();
 		}
 		doLinking();
+	}
+
+	private void clearOutput() {
+		getContents().clear();
 	}
 
 	private void indexIds() {
@@ -137,5 +139,10 @@ public class XtextResource extends ResourceImpl {
 		if (contents.size() != 1)
 			throw new IllegalStateException("The Xtext resource must contain exactly one root element");
 		parseTreeConstructor.serialize(outputStream, contents.get(0), options);
+	}
+	
+	public interface Diagnostic extends org.eclipse.emf.ecore.resource.Resource.Diagnostic {
+		public int getOffset();
+		public int getLength();
 	}
 }

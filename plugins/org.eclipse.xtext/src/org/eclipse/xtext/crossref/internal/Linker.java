@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.crossref.BrokenLink;
 import org.eclipse.xtext.crossref.ILinkProvider;
 import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.crossref.IURIChecker;
@@ -31,6 +30,8 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResource.Diagnostic;
 import org.eclipse.xtext.service.Inject;
 
 public final class Linker implements ILinker {
@@ -44,8 +45,8 @@ public final class Linker implements ILinker {
 	@Inject
 	private IURIChecker checker;
 
-	public List<BrokenLink> ensureLinked(EObject obj) {
-		List<BrokenLink> brokenLinks = new ArrayList<BrokenLink>();
+	public List<XtextResource.Diagnostic> ensureLinked(EObject obj) {
+		List<XtextResource.Diagnostic> brokenLinks = new ArrayList<XtextResource.Diagnostic>();
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
 		if (nodeAdapter == null)
 			return brokenLinks;
@@ -59,13 +60,17 @@ public final class Linker implements ILinker {
 		}
 		return brokenLinks;
 	}
-
+	
+	private XtextResource.Diagnostic createError(EObject from, LeafNode linkInformation, CrossReference grammarElement, URI resolvedURI) {
+		return new XtextLinkingDiagnostic(linkInformation);
+	}
+	
 	@SuppressWarnings("unchecked")
-	private List<BrokenLink> ensureIsLinked(EObject obj, LeafNode node, CrossReference ref) {
-		List<BrokenLink> brokenLinks = new ArrayList<BrokenLink>();
+	private List<XtextResource.Diagnostic> ensureIsLinked(EObject obj, LeafNode node, CrossReference ref) {
+		List<XtextResource.Diagnostic> brokenLinks = new ArrayList<XtextResource.Diagnostic>();
 		URI[] links = linker.getLinks((LeafNode) node, ref, obj);
 		if (links==null || links.length == 0) {
-			brokenLinks.add(new BrokenLink(obj, node, ref, null));
+			brokenLinks.add(createError(obj, node, ref, null));
 			return brokenLinks;
 		}
 		EReference eRef = getReference(ref, obj.eClass());
@@ -81,7 +86,7 @@ public final class Linker implements ILinker {
 				EObject proxy = createProxy(ref, uri);
 				obj.eSet(eRef, proxy);
 			} else {
-				brokenLinks.add(new BrokenLink(obj, node, ref, uri));
+				brokenLinks.add(createError(obj, node, ref, uri));
 			}
 		} else { // eRef.getUpperBound() == -1
 			for (URI uri : links) {
@@ -89,7 +94,7 @@ public final class Linker implements ILinker {
 					EObject proxy = createProxy(ref, uri);
 					((EList<EObject>) obj.eGet(eRef)).add(proxy);
 				} else {
-					brokenLinks.add(new BrokenLink(obj, node, ref, uri));
+					brokenLinks.add(createError(obj, node, ref, uri));
 				}
 			}
 		}
