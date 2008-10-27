@@ -1,0 +1,165 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT xtext»
+«IMPORT xtextgen»
+
+«EXTENSION org::eclipse::xtend::util::stdlib::globalvar»
+«EXTENSION org::eclipse::xtext::Extensions»
+«EXTENSION org::eclipse::xtext::Properties»
+«EXTENSION org::eclipse::xtext::ui::UIProperties»
+
+«DEFINE root FOR GenModel»
+«FILE "src-gen/"+uiGenProposalProviderClass().toJavaFilePath() UI -»
+/*
+«fileHeader()»
+*/
+package «uiGenProposalProviderClass().toJavaPackage()»;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.contentassist.ContentAssistant;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
+import org.eclipse.jface.text.contentassist.IContentAssistant;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider;
+import org.eclipse.xtext.ui.editor.model.XtextCompletionProposal;
+
+/**
+ * Represents a generated, default implementation of interface {@link IProposalProvider}.
+ * 
+ * In addition to the declared methods, the framework tries to call grammar dependent methods for assignments using reflection.
+ * The signature of such methods invoked reflectively follows the following pattern:
+ * 
+ * public List<ICompletionProposal> complete[Typename][featureName](Assignment ele, EObject model, String prefix)
+ * 
+ * <b>Example</b>
+ *  Given the following grammar :
+ *  <code>
+ *  RuleA returns MyType :
+ *  	"myType" name=ID;
+ *  </code>
+ *
+ * One could provide the following method in an implementation of this interface:
+ *  <code>
+ * 	public List<ICompletionProposal> completeMyTypeName(Assignment ele, EObject model, String prefix, IDocument doc) {...}
+ *  </code>
+ *  Note that if you have generated Java classes for your domain model (meta model) you can alternatively declare the second parameter using 
+ *  a specific type:
+ *  <code>
+ * 	public List<ICompletionProposal> completeMyTypeName(Assignment ele, MyType model, String prefix, IDocument doc) {...}
+ *  </code>
+ *   
+ */
+public class «uiGenProposalProviderClass().toSimpleName()» extends ContentAssistant implements IProposalProvider {
+
+	// constants
+	private static final String UI_PLUGIN_ID = "«uiPluginBundleID»";
+	@Inject
+	private IContentAssistProcessor contentAssistProcessor;
+	
+	public «uiGenProposalProviderClass().toSimpleName()»() {
+		enableAutoActivation(true);
+		setAutoActivationDelay(500);
+		setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY);
+		setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE);
+	}
+	
+	@Override
+	public IContentAssistProcessor getContentAssistProcessor(String contentType) {
+		return this.contentAssistProcessor;
+	}
+		
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeKeyword(org.eclipse.xtext.Keyword, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
+	 */
+	public List<ICompletionProposal> completeKeyword(Keyword keyword, EObject model, String prefix, IDocument doc,int offset) {
+		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
+		String text = keyword.getValue().length() == 1 ? keyword.getValue() : keyword.getValue() + " ";
+		XtextCompletionProposal xtextCompletionProposal = new XtextCompletionProposal(text, new StyledString(text),
+				text, "icons/editor.gif", UI_PLUGIN_ID, offset);
+		completionProposalList.add(xtextCompletionProposal);
+		return completionProposalList;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeRuleCall(org.eclipse.xtext.RuleCall, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument)
+	 */
+	public List<ICompletionProposal> completeRuleCall(RuleCall ele, EObject model, String prefix, IDocument doc) {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#sortAndFilter(java.util.List)
+	 */
+	public List<ICompletionProposal> sortAndFilter(List<ICompletionProposal> proposals) {
+		return proposals;
+	}
+	«FOREACH grammar().containedAssignments() AS assignment-»
+	«LET assignment.containingParserRule().name.toFirstUpper()+assignment.feature.toFirstUpper() AS fqnFeatureName»
+	«IF null==getGlobalVar(fqnFeatureName)-»
+	«storeGlobalVar(fqnFeatureName,"")-»	 
+	public List<ICompletionProposal> complete«fqnFeatureName»(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
+		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
+		«IF CrossReference.isInstance(assignment.terminal)-»
+		lookupCrossReference(assignment, model, offset, completionProposalList);
+		«ELSE-»
+		completionProposalList.add(newXtextCompletionProposal("«fqnFeatureName»", offset));		
+		«ENDIF-»
+		return completionProposalList;
+	}
+	«ENDIF-»
+	«ENDLET-»
+    «ENDFOREACH-»
+    
+    private final void lookupCrossReference(Assignment assignment, EObject model, int offset,
+			List<ICompletionProposal> completionProposalList) {
+		CrossReference crossReference = (CrossReference) assignment.getTerminal();
+		for (CompositeNode compositeNode : EcoreUtil2.getAllContentsOfType(EcoreUtil2.getRootContainer(model),
+				CompositeNode.class)) {
+			if (compositeNode.getGrammarElement() instanceof RuleCall
+					&& crossReference.getType().getName().equals(
+							((RuleCall) compositeNode.getGrammarElement()).getName())) {
+				for (LeafNode leafNode : compositeNode.getLeafNodes()) {
+					if (leafNode.getGrammarElement() instanceof RuleCall
+							&& "ID".equalsIgnoreCase(((RuleCall) leafNode.getGrammarElement()).getName())) {
+						XtextCompletionProposal xtextCompletionProposal = newXtextCompletionProposal(leafNode.getText(), offset);
+						completionProposalList.add(xtextCompletionProposal);
+					}
+				}
+			}
+		}
+	}
+
+	private final XtextCompletionProposal newXtextCompletionProposal(String text, int offset) {
+		return new XtextCompletionProposal(text, new StyledString(text),
+				text, "icons/editor.gif", UI_PLUGIN_ID, offset);
+	}
+
+}
+«ENDFILE»
+«ENDDEFINE»
+

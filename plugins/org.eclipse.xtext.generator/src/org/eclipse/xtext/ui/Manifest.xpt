@@ -23,6 +23,7 @@ Bundle-Name: «languageName()» UI Plug-in
 Bundle-SymbolicName: «uiPluginBundleID»;singleton:=true
 Bundle-Version: 0.7.0.qualifier
 Require-Bundle: «nonUIPluginBundleID»,
+ org.eclipse.xtext.ui,
  org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.common,
  org.eclipse.xtext.ui.builtin,

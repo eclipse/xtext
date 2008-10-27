@@ -10,7 +10,7 @@ language org. eclipse. xtext. reference. ReferenceGrammar
 generate ReferenceGrammar "http://eclipse.org/xtext/reference/ReferenceGrammar"
 	
 	Spielplatz :
-		 ( "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug ) * "}" ) ? ;
+		 ( "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) * "}" ) ? ;
 	
 	Person :
 		 Kind | Erwachsener ;
@@ -23,6 +23,9 @@ generate ReferenceGrammar "http://eclipse.org/xtext/reference/ReferenceGrammar"
 	
 	Spielzeug :
 		 "spielzeug" "(" name = ID farbe = Farbe ")" ;
+	
+	Familie :
+		 "familie" "(" mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] ("," kinder+=[Kind])* ")" ;
 	
 	Farbe :
 		 wert=("ROT" | "BLAU" | "GELB" | "GRÜN");

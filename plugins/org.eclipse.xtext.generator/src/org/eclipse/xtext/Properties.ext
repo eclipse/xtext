@@ -64,6 +64,9 @@ runtimeConfigClass(Grammar this) :
 
 uiConfigClass() :
 	grammar().getId() + "UiConfig";
+	
+uiGenProposalProviderClass() :
+	grammar().getId() + "GenProposalProvider";
 
 tokenScannerClass() :
 	grammar().getId() + "TokenScanner";
