@@ -114,6 +114,7 @@ public class Xtext2ECoreInterpretationContext {
 		}
 		else if (element instanceof Group) {
 			Group group = (Group) element;
+			//TODO Too strict. What about : foo(Bar|Foo ';')
 			if (group.getAbstractTokens().size() != 1)
 				throw new IllegalArgumentException("Group must have exactly one element.");
 			return getCompatibleTypeNameOfAlternatives(group.getAbstractTokens().get(0));
