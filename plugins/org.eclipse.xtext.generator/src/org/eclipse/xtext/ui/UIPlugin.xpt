@@ -21,6 +21,7 @@
     «EXPAND Plugin::plugin_xml FOR this»
     «EXPAND ServiceConfig::root FOR this»
     «EXPAND Manifest::manifest_mf FOR this»
+    «EXPAND contentassist::GenProposalProvider::root FOR this»
     «copyFiles("org/eclipse/xtext/ui", outletPath("UI") + "/icons/", { "editor.gif" })»  
 «ENDDEFINE»
 

@@ -234,6 +234,24 @@ public class GeneratorFacade {
 			tokenScannerService.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.Lexer");
 			tokenScannerService.setGenClassFQName(namespace + ".parser.internal.Internal" + languageName + "Lexer");
 			genModel.getServices().add(tokenScannerService);
+			
+			GenService proposalProvider = XtextgenFactory.eINSTANCE.createGenService();
+			proposalProvider.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider");
+			proposalProvider.setGenClassFQName(namespace +"."+ languageName+"GenProposalProvider");
+			proposalProvider.setUiService(true);
+			genModel.getServices().add(proposalProvider);
+			
+			GenService contentAssist = XtextgenFactory.eINSTANCE.createGenService();
+			contentAssist.setServiceInterfaceFQName("org.eclipse.jface.text.contentassist.IContentAssistant");
+			contentAssist.setGenClassFQName(namespace +"."+ languageName+"GenProposalProvider");
+			contentAssist.setUiService(true);
+			genModel.getServices().add(contentAssist);
+			
+			GenService contentAssistProcessor = XtextgenFactory.eINSTANCE.createGenService();
+			contentAssistProcessor.setServiceInterfaceFQName("org.eclipse.jface.text.contentassist.IContentAssistProcessor");
+			contentAssistProcessor.setGenClassFQName("org.eclipse.xtext.ui.common.editor.codecompletion.DefaultContentAssistProcessor");
+			contentAssistProcessor.setUiService(true);
+			genModel.getServices().add(contentAssistProcessor);
 
 		}
 
