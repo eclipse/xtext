@@ -1,8 +1,17 @@
 package org.eclipse.xtext.ui.common.editor.codecompletion;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
@@ -11,7 +20,17 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.LexerRule;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -50,27 +69,230 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 					}
 				});
 				Assert.isNotNull(rootNode);
-				LeafNode currentNode = ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
-				// AbstractNode lastNode =
-				// ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
-				String prefix = viewer.getTextWidget().getText(currentNode.getOffset(), offset);
-				List<ICompletionProposal> allProposals = null;
-				EObject grammarElement = currentNode.getGrammarElement();
-				if (grammarElement instanceof Keyword) {
-					allProposals = proposalProvider.completeKeyword((Keyword) grammarElement,
-							rootNode, prefix, xtextDocument);
+
+				// last COMPLETE node element (node with associated grammar element)
+				AbstractNode lastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
+				// node at the CURRENT cursor position (node with or without grammar element)
+				LeafNode currentLeafNode = (LeafNode) ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
+				// get associated grammar element
+				AbstractElement grammarElement = ParseTreeUtil.getGrammarElementFromNode(lastCompleteNode);
+
+				String prefix = viewer.getTextWidget().getText(currentLeafNode.getOffset(), offset);
+
+				List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
+
+				for (Iterator<AbstractElement> iterator = calculatePossibleElementSet(lastCompleteNode, grammarElement)
+						.iterator(); iterator.hasNext();) {
+					AbstractElement nextElement = iterator.next();
+
+					List<EObject> resolvedElementOrRuleList = resolveElement(nextElement);
+
+					for (Iterator<EObject> elementOrRuleIterator = resolvedElementOrRuleList.iterator(); elementOrRuleIterator
+							.hasNext();) {
+						EObject abstractElement = elementOrRuleIterator.next();
+
+						if (abstractElement instanceof Keyword) {
+							completionProposalList.addAll(proposalProvider.completeKeyword((Keyword) abstractElement,
+									currentLeafNode, prefix, xtextDocument, offset));
+						}
+						else if (abstractElement instanceof Assignment) {
+
+							Assignment assignment = (Assignment) abstractElement;
+
+							ParserRule lexerRule = GrammarUtil.containingParserRule(assignment);
+
+							Method method = findMethod(proposalProvider.getClass(), "complete"
+									+ firstLetterCapitalized(lexerRule.getName())
+									+ firstLetterCapitalized(assignment.getFeature()), Assignment.class, EObject.class,
+									String.class, IDocument.class, int.class);
+							
+							Collection<? extends ICompletionProposal> assignmentProposalList = (Collection<? extends ICompletionProposal>) invokeMethod(method, proposalProvider, assignment, currentLeafNode, prefix, xtextDocument,
+									offset);
+
+							completionProposalList.addAll(assignmentProposalList);
+						}
+						else if (abstractElement instanceof LexerRule) {
+						}
+						else if (abstractElement instanceof RuleCall) {
+						}
+						else if (abstractElement instanceof CrossReference) {
+						}
+						else if (abstractElement instanceof Action) {
+						}
+					}
 				}
-				else if (grammarElement instanceof RuleCall) {
-					// FIXME allProposals =
-					// proposalProvider.completeRuleCall((RuleCall) currentNode,
-					// rootNode, prefix);
-				}
-				if (allProposals != null) {
-					return (ICompletionProposal[]) proposalProvider.sortAndFilter(allProposals).toArray();
+
+				if (completionProposalList != null) {
+					List<ICompletionProposal> sortAndFilter = proposalProvider.sortAndFilter(completionProposalList);
+					return (ICompletionProposal[]) sortAndFilter.toArray(new ICompletionProposal[] {});
+
 				}
 			}
 		}
 		return null;
+	}
+
+	protected final Set<AbstractElement> calculatePossibleElementSet(AbstractNode contextNode,
+			AbstractElement grammarElement) {
+
+		Assert.isNotNull(contextNode, "parameter 'contextNode' must not be null");
+		Assert.isNotNull(grammarElement, "parameter 'grammarElement' must not be null");
+
+		Set<AbstractElement> elementSet = new LinkedHashSet<AbstractElement>();
+
+		if (grammarElement.eContainer() instanceof ParserRule) {
+
+			/**
+			 * we have completed the rule of the current context.continue at the
+			 * parent context
+			 */
+			boolean hasLeafNodes = false;
+
+			for (Iterator<LeafNode> iterator = contextNode.getLeafNodes().listIterator(); !hasLeafNodes
+					&& iterator.hasNext(); hasLeafNodes = !iterator.next().isHidden()) {
+				;
+			}
+
+			contextNode = contextNode.getParent();
+
+			while (contextNode != null && contextNode.getGrammarElement() == null) {
+				contextNode = contextNode.getParent();
+			}
+
+			if (null != contextNode) {
+
+				elementSet.addAll(calculatePossibleElementSet(contextNode, ParseTreeUtil
+						.getGrammarElementFromNode(contextNode)));
+
+			}
+			else if (grammarElement.eContainer() instanceof ParserRule) {
+
+				if (!hasLeafNodes || GrammarUtil.isMultipleCardinality(grammarElement)) {
+					elementSet.add(grammarElement);
+				}
+
+			}
+
+		}
+		else if (grammarElement.eContainer() instanceof Alternatives) {
+			/**
+			 * one out of the alternatives is already fullfilled so we can
+			 * simply skip and proceed to the parent
+			 */
+
+			elementSet.addAll(calculatePossibleElementSet(contextNode, (AbstractElement) grammarElement.eContainer()));
+
+		}
+		else if (grammarElement.eContainer() instanceof Group) {
+
+			EList<AbstractElement> contents = ((Group) grammarElement.eContainer()).getAbstractTokens();
+
+			int indexOf = contents.indexOf(grammarElement) + 1;
+
+			int size = contents.size();
+
+			// add the current one if has an oneOrMore cardinality
+			if (GrammarUtil.isOneOrMoreCardinality(grammarElement)) {
+				elementSet.add(grammarElement);
+			}
+
+			/**
+			 * start at the current (maybe the last) or at the following one
+			 * with optional cardinality and add all following with optional
+			 * cardinality
+			 */
+			AbstractElement last = GrammarUtil.isAnyCardinality(grammarElement) || indexOf == size ? grammarElement
+					: contents.get(indexOf++);
+
+			while (GrammarUtil.isOptionalCardinality(last) && indexOf < size) {
+				elementSet.add(last);
+				last = indexOf < size ? contents.get(indexOf++) : last;
+			}
+
+			// always add the following if available or the last one if has an
+			// any cardinality
+			if (last != grammarElement || GrammarUtil.isAnyCardinality(last)) {
+				elementSet.add(last);
+			}
+
+			// ask parent groups only if we've completed the whole group
+			if (indexOf == size) {
+
+				boolean startedAtlastGrammarElementInGroup = last == grammarElement;
+
+				if (startedAtlastGrammarElementInGroup || GrammarUtil.isOptionalCardinality(last)) {
+
+					elementSet.addAll(calculatePossibleElementSet(contextNode, (AbstractElement) grammarElement
+							.eContainer()));
+				}
+
+			}
+
+		}
+		else {
+			elementSet.addAll(calculatePossibleElementSet(contextNode, (AbstractElement) grammarElement.eContainer()));
+
+		}
+
+		return elementSet;
+	}
+
+	protected final List<EObject> resolveElement(AbstractElement abstractElement) {
+
+		List<EObject> elementList = new ArrayList<EObject>();
+
+		if (abstractElement instanceof Alternatives) {
+			for (AbstractElement alternativeElement : ((Alternatives) abstractElement).getGroups()) {
+				elementList.addAll(resolveElement(alternativeElement));
+			}
+		}
+		else if (abstractElement instanceof Assignment) {
+
+			Assignment assignment = (Assignment) abstractElement;
+
+			if (assignment.getTerminal() instanceof RuleCall) {
+
+				AbstractRule abstractRule = GrammarUtil.calledRule((RuleCall) assignment.getTerminal());
+
+				if (abstractRule instanceof ParserRule) {
+					elementList.addAll(resolveElement(assignment.getTerminal()));
+				}
+				else {
+					elementList.add(assignment);
+				}
+			}
+			else {
+				elementList.add(assignment);
+			}
+		}
+		else if (abstractElement instanceof RuleCall) {
+			AbstractRule abstractRule = GrammarUtil.calledRule((RuleCall) abstractElement);
+
+			if (null == abstractRule) {
+				elementList.add(abstractElement);
+			}
+			else if (abstractRule instanceof LexerRule) {
+				elementList.add(abstractRule);
+			}
+			else {
+				return resolveElement(((ParserRule) abstractRule).getAlternatives());
+			}
+		}
+		else if (abstractElement instanceof Group) {
+			boolean includeNext = true;
+			for (Iterator<AbstractElement> iterator = ((Group) abstractElement).getAbstractTokens().iterator(); iterator
+					.hasNext()
+					&& includeNext;) {
+				AbstractElement groupElement = iterator.next();
+				elementList.addAll(resolveElement(groupElement));
+				includeNext = GrammarUtil.isOptionalCardinality(groupElement);
+			}
+
+		}
+		else {
+			elementList.add(abstractElement);
+		}
+		return elementList;
 	}
 
 	public char[] getCompletionProposalAutoActivationCharacters() {
@@ -91,6 +313,70 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 	public IContextInformationValidator getContextInformationValidator() {
 		return new ContextInformationValidator(this);
+	}
+
+	protected void handleReflectionException(Exception ex) {
+		if (ex instanceof NoSuchMethodException) {
+			throw new IllegalStateException("Method not found: " + ex.getMessage());
+		}
+		if (ex instanceof IllegalAccessException) {
+			throw new IllegalStateException("Could not access method: " + ex.getMessage());
+		}
+		if (ex instanceof InvocationTargetException) {
+			rethrowRuntimeException(((InvocationTargetException) ex).getTargetException());
+		}
+		if (ex instanceof RuntimeException) {
+			throw (RuntimeException) ex;
+		}
+		handleUnexpectedException(ex);
+	}
+
+	private final void rethrowRuntimeException(Throwable ex) {
+		if (ex instanceof RuntimeException) {
+			throw (RuntimeException) ex;
+		}
+		if (ex instanceof Error) {
+			throw (Error) ex;
+		}
+		handleUnexpectedException(ex);
+	}
+
+	protected void handleUnexpectedException(Throwable ex) {
+		IllegalStateException isex = new IllegalStateException("Unexpected exception thrown");
+		isex.initCause(ex);
+		throw isex;
+	}
+
+	private final String firstLetterCapitalized(String name) {
+		return name.substring(0, 1).toUpperCase() + name.substring(1);
+	}
+
+	private final Method findMethod(Class<?> clazz, String name, Class<?>... paramTypes) {
+		Assert.isNotNull(clazz, "Class must not be null");
+		Assert.isNotNull(name, "Method name must not be null");
+		Class<?> searchType = clazz;
+		while (!Object.class.equals(searchType) && searchType != null) {
+			Method[] methods = (searchType.isInterface() ? searchType.getMethods() : searchType.getDeclaredMethods());
+			for (int i = 0; i < methods.length; i++) {
+				Method method = methods[i];
+				if (name.equals(method.getName())
+						&& (paramTypes == null || Arrays.equals(paramTypes, method.getParameterTypes()))) {
+					return method;
+				}
+			}
+			searchType = searchType.getSuperclass();
+		}
+		return null;
+	}
+
+	private final Object invokeMethod(Method method, Object target, Object... args) {
+		try {
+			return method.invoke(target, args);
+		}
+		catch (Exception ex) {
+			handleReflectionException(ex);
+		}
+		throw new IllegalStateException("huh?");
 	}
 
 }
