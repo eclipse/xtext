@@ -215,6 +215,7 @@ public class XtextCompletionProposal implements ICompletionProposal,
 
 	private void initializeImage(String imageName) {
 		Image newImage = JFaceResources.getImage(imageName);
+		//TODO: needs plugin to resolve image path
 //		if (newImage == null) {
 //			ImageDescriptor imageDescriptorFromPlugin = Activator
 //					.imageDescriptorFromPlugin(this.pluginIdentifier, imageName);
