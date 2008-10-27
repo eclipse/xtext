@@ -40,7 +40,6 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.ui.editor.model.IEditorModel;
-import org.eclipse.xtext.ui.editor.model.XtextCompletionProposal;
 import org.eclipse.xtext.ui.util.GrammarConstants;
 
 /**
@@ -287,22 +286,22 @@ public class BuiltInProposalsProvider extends AbstractProposalsProvider
 	protected void processProposal(Proposal proposal, LeafNode currentLeafNode,
 			int offset, List<ICompletionProposal> completionProposalList) {
 		// filter proposals
-		if (currentLeafNode != null
-				&& !"".equals(currentLeafNode.getText().trim())
-				&& (currentLeafNode.isHidden())) {
-			if (proposal.getText().startsWith(currentLeafNode.getText())) {
-				proposal.setText(proposal.getText().replaceFirst(
-						currentLeafNode.getText(), ""));
-				completionProposalList.add(new XtextCompletionProposal(proposal
-						.getText(), proposal.getLabel(), proposal
-						.getDescription(), proposal.getImage(),
-						this.namespaceIdentifier, offset));
-			}
-		} else {
-			completionProposalList.add(new XtextCompletionProposal(proposal
-					.getText(), proposal.getLabel(), proposal.getDescription(),
-					proposal.getImage(), this.namespaceIdentifier, offset));
-		}
+//		if (currentLeafNode != null
+//				&& !"".equals(currentLeafNode.getText().trim())
+//				&& (currentLeafNode.isHidden())) {
+//			if (proposal.getText().startsWith(currentLeafNode.getText())) {
+//				proposal.setText(proposal.getText().replaceFirst(
+//						currentLeafNode.getText(), ""));
+//				completionProposalList.add(new XtextCompletionProposal(proposal
+//						.getText(), proposal.getLabel(), proposal
+//						.getDescription(), proposal.getImage(),
+//						this.namespaceIdentifier, offset));
+//			}
+//		} else {
+//			completionProposalList.add(new XtextCompletionProposal(proposal
+//					.getText(), proposal.getLabel(), proposal.getDescription(),
+//					proposal.getImage(), this.namespaceIdentifier, offset));
+//		}
 	}
 
 	protected final List<Proposal> toProposalList(AbstractNode rootNode,

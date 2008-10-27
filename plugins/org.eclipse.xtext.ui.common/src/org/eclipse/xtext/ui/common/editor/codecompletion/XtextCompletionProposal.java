@@ -1,5 +1,6 @@
-package org.eclipse.xtext.ui.editor.model;
+package org.eclipse.xtext.ui.common.editor.codecompletion;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -17,7 +18,6 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.xtext.ui.internal.Activator;
 
 /**
  * Default Xtext implementation of interface <code>ICompletionProposal</code>.
@@ -30,6 +30,8 @@ import org.eclipse.xtext.ui.internal.Activator;
  */
 public class XtextCompletionProposal implements ICompletionProposal,
 		ICompletionProposalExtension2, ICompletionProposalExtension6 {
+	
+	private Logger logger = Logger.getLogger(XtextCompletionProposal.class);
 
 	private String text;
 	private String description;
@@ -146,9 +148,7 @@ public class XtextCompletionProposal implements ICompletionProposal,
 					- this.offset : 0, this.text);
 
 		} catch (BadLocationException e) {
-			Activator.getDefault().getLog().log(
-					new Status(IStatus.ERROR, Activator.PLUGIN_ID, e
-							.getMessage(), e));
+			logger.error(e);
 		}
 	}
 
@@ -187,9 +187,7 @@ public class XtextCompletionProposal implements ICompletionProposal,
 			startsWith = getDisplayString().toLowerCase().startsWith(
 					prefix.toLowerCase());
 		} catch (BadLocationException e) {
-			Activator.getDefault().getLog().log(
-					new Status(IStatus.ERROR, Activator.PLUGIN_ID, e
-							.getMessage(), e));
+			logger.error(e);
 		}
 		return startsWith;
 	}
@@ -217,15 +215,15 @@ public class XtextCompletionProposal implements ICompletionProposal,
 
 	private void initializeImage(String imageName) {
 		Image newImage = JFaceResources.getImage(imageName);
-		if (newImage == null) {
-			ImageDescriptor imageDescriptorFromPlugin = Activator
-					.imageDescriptorFromPlugin(this.pluginIdentifier, imageName);
-			if (imageDescriptorFromPlugin != null) {
-				JFaceResources.getImageRegistry().put(imageName,
-						imageDescriptorFromPlugin);
-				newImage = JFaceResources.getImage(imageName);
-			}
-		}
+//		if (newImage == null) {
+//			ImageDescriptor imageDescriptorFromPlugin = Activator
+//					.imageDescriptorFromPlugin(this.pluginIdentifier, imageName);
+//			if (imageDescriptorFromPlugin != null) {
+//				JFaceResources.getImageRegistry().put(imageName,
+//						imageDescriptorFromPlugin);
+//				newImage = JFaceResources.getImage(imageName);
+//			}
+//		}
 		this.image = newImage;
 	}
 }
