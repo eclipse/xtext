@@ -27,6 +27,10 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ * 
+ */
 public class XtextContentOutlineProvider extends LabelProvider implements ITreeContentProvider {
 
 	private final static Logger logger = Logger.getLogger(XtextContentOutlineProvider.class);
@@ -42,7 +46,7 @@ public class XtextContentOutlineProvider extends LabelProvider implements ITreeC
 		return document.readOnly(new UnitOfWork<URI[]>() {
 
 			public URI[] exec(XtextResource resource) throws Exception {
-				EObject obj = resolveEObject(resource,parentElement);
+				EObject obj = resolveEObject(resource, parentElement);
 				ITreeContentProvider tcp = getITreeContentProvider(obj);
 				Object[] children = tcp.getChildren(obj);
 				URI[] uris = new URI[children.length];
@@ -66,7 +70,7 @@ public class XtextContentOutlineProvider extends LabelProvider implements ITreeC
 		if (element instanceof URI) {
 			return resource.getResourceSet().getEObject((URI) element, true);
 		}
-		logger.error("Expected URI but was "+element);
+		logger.error("Expected URI but was " + element);
 		return null;
 	}
 
@@ -89,7 +93,7 @@ public class XtextContentOutlineProvider extends LabelProvider implements ITreeC
 		return document.readOnly(new UnitOfWork<URI>() {
 
 			public URI exec(XtextResource resource) throws Exception {
-				EObject obj = resolveEObject(resource,element);
+				EObject obj = resolveEObject(resource, element);
 				Object parent = getITreeContentProvider(obj).getParent(obj);
 				if (parent == null)
 					return null;
@@ -106,7 +110,7 @@ public class XtextContentOutlineProvider extends LabelProvider implements ITreeC
 		return document.readOnly(new UnitOfWork<Boolean>() {
 
 			public Boolean exec(XtextResource resource) throws Exception {
-				EObject obj = resolveEObject(resource,element);
+				EObject obj = resolveEObject(resource, element);
 				return getITreeContentProvider(obj).hasChildren(obj);
 			}
 		});
@@ -120,8 +124,7 @@ public class XtextContentOutlineProvider extends LabelProvider implements ITreeC
 		return document.readOnly(new UnitOfWork<URI[]>() {
 			public URI[] exec(XtextResource resource) throws Exception {
 				EObject root = resource.getParseResult().getRootASTElement();
-				URI uri = EcoreUtil.getURI(root);
-				return root != null ? new URI[] { uri } : new URI[0];
+				return root != null ? new URI[] { EcoreUtil.getURI(root) } : new URI[0];
 			}
 		});
 	}
@@ -138,7 +141,7 @@ public class XtextContentOutlineProvider extends LabelProvider implements ITreeC
 	public String getText(final Object element) {
 		return document.readOnly(new UnitOfWork<String>() {
 			public String exec(XtextResource resource) throws Exception {
-				EObject obj = resolveEObject(resource,element);
+				EObject obj = resolveEObject(resource, element);
 				return getLabelProvider(obj).getText(obj);
 			}
 		});
@@ -148,7 +151,7 @@ public class XtextContentOutlineProvider extends LabelProvider implements ITreeC
 	public Image getImage(final Object element) {
 		return document.readOnly(new UnitOfWork<Image>() {
 			public Image exec(XtextResource resource) throws Exception {
-				EObject obj = resolveEObject(resource,element);
+				EObject obj = resolveEObject(resource, element);
 				return getLabelProvider(obj).getImage(obj);
 			}
 		});
