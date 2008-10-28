@@ -1,6 +1,8 @@
 package org.eclipse.xtext.ui.core.editor;
 
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.contentassist.ContentAssistant;
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
@@ -17,6 +19,10 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	@Inject(optional = true)
 	private IContentAssistant contentAssistant;
+	
+	
+	@Inject(optional = true)
+	private IContentAssistProcessor contentAssistProcessor;
 
 	@Inject(optional = true)
 	private ITokenScanner tokenScanner;
@@ -25,6 +31,10 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
 		if (contentAssistant instanceof ISourceViewerAware)
 			((ISourceViewerAware) contentAssistant).setSourceViewer(sourceViewer);
+		if (contentAssistant instanceof ContentAssistant && contentAssistProcessor != null) {
+			((ContentAssistant) contentAssistant).setContentAssistProcessor(contentAssistProcessor,
+					IDocument.DEFAULT_CONTENT_TYPE);
+		}
 		return contentAssistant;
 	}
 

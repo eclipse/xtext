@@ -35,7 +35,7 @@ import org.eclipse.xtext.reference.ui.Activator;
 public class XtextCompletionProposal implements ICompletionProposal, ICompletionProposalExtension2,
 		ICompletionProposalExtension6 {
 	
-	Logger logger = Logger.getLogger(XtextCompletionProposal.class);
+	private final Logger logger = Logger.getLogger(XtextCompletionProposal.class);
 
 	private final Proposal proposal;
 	private final int offset;

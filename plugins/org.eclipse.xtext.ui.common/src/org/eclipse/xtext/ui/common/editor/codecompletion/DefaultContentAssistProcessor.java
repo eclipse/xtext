@@ -24,14 +24,11 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parser.IParseResult;
@@ -63,6 +60,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		if (proposalProvider != null) {
 			IDocument document = viewer.getDocument();
 			if (document instanceof XtextDocument) {
+
 				XtextDocument xtextDocument = (XtextDocument) document;
 
 				CompositeNode rootNode = xtextDocument.readOnly(new UnitOfWork<CompositeNode>() {
@@ -89,14 +87,14 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 						.iterator(); iterator.hasNext();) {
 					AbstractElement nextElement = iterator.next();
 
-					List<EObject> resolvedElementOrRuleList = resolveElement(nextElement, true);
+					List<EObject> resolvedElementOrRuleList = resolveElement(nextElement);
 
 					collectCompletionProposalList(resolvedElementOrRuleList, completionProposalList, xtextDocument,
 							currentLeafNode, prefix, offset);
 				}
 
 				if (completionProposalList != null) {
-					List<ICompletionProposal> sortAndFilter = proposalProvider.sortAndFilter(completionProposalList);
+					List<? extends ICompletionProposal> sortAndFilter = proposalProvider.sortAndFilter(completionProposalList);
 					return (ICompletionProposal[]) sortAndFilter.toArray(new ICompletionProposal[] {});
 
 				}
@@ -127,36 +125,33 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 								+ firstLetterCapitalized(assignment.getFeature()), Assignment.class, EObject.class,
 						String.class, IDocument.class, int.class);
 
-				Collection<ICompletionProposal> assignmentProposalList = invokeMethod(method, proposalProvider,
+				Collection<? extends ICompletionProposal> assignmentProposalList = invokeMethod(method, proposalProvider,
 						assignment, currentLeafNode, prefix, xtextDocument, offset);
 
-				completionProposalList.addAll(assignmentProposalList);
+				if (null != assignmentProposalList) {
+					completionProposalList.addAll(assignmentProposalList);
+				}
+
 			}
 			else if (abstractElement instanceof RuleCall) {
-				List<ICompletionProposal> proposalList = this.proposalProvider.completeRuleCall(
-						(RuleCall) abstractElement, currentLeafNode, prefix, xtextDocument);
-				if (null == proposalList || proposalList.isEmpty()) {
-					collectCompletionProposalList(
-							resolveElement((AbstractElement) abstractElement.eContainer(), false),
-							completionProposalList, xtextDocument, currentLeafNode, prefix, offset);
+
+				List<? extends ICompletionProposal> ruleCallProposalList = this.proposalProvider.completeRuleCall(
+						(RuleCall) abstractElement, currentLeafNode, prefix, xtextDocument,offset);
+
+				if (null != ruleCallProposalList) {
+					completionProposalList.addAll(ruleCallProposalList);
 				}
-			}
-			else if (abstractElement instanceof LexerRule) {
-			}
-			else if (abstractElement instanceof CrossReference) {
-			}
-			else if (abstractElement instanceof Action) {
 			}
 		}
 	}
 
-	protected final List<EObject> resolveElement(AbstractElement abstractElement, boolean resolveRuleCall) {
+	protected final List<EObject> resolveElement(AbstractElement abstractElement) {
 
 		List<EObject> elementList = new ArrayList<EObject>();
 
 		if (abstractElement instanceof Alternatives) {
 			for (AbstractElement alternativeElement : ((Alternatives) abstractElement).getGroups()) {
-				elementList.addAll(resolveElement(alternativeElement, resolveRuleCall));
+				elementList.addAll(resolveElement(alternativeElement));
 			}
 		}
 		else if (abstractElement instanceof Group) {
@@ -165,7 +160,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 					.hasNext()
 					&& includeNext;) {
 				AbstractElement groupElement = iterator.next();
-				elementList.addAll(resolveElement(groupElement, resolveRuleCall));
+				elementList.addAll(resolveElement(groupElement));
 				includeNext = GrammarUtil.isOptionalCardinality(groupElement);
 			}
 
@@ -174,26 +169,24 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 			Assignment assignment = (Assignment) abstractElement;
 
-			if (assignment.getTerminal() instanceof RuleCall && resolveRuleCall) {
-				elementList.addAll(resolveElement(assignment.getTerminal(), resolveRuleCall));
+			if (assignment.getTerminal() instanceof RuleCall) {
+				elementList.addAll(resolveElement(assignment.getTerminal()));
 			}
 			else if (assignment.getTerminal() instanceof Alternatives) {
-				elementList.addAll(resolveElement(assignment.getTerminal(), resolveRuleCall));
+				elementList.addAll(resolveElement(assignment.getTerminal()));
 			}
-			else {
-				elementList.add(assignment);
-			}
+
+			elementList.add(assignment);
 
 		}
 		else if (abstractElement instanceof RuleCall) {
 
+			elementList.add(abstractElement);
+
 			AbstractRule abstractRule = GrammarUtil.calledRule((RuleCall) abstractElement);
 
 			if (abstractRule instanceof ParserRule) {
-				elementList.addAll(resolveElement(((ParserRule) abstractRule).getAlternatives(), resolveRuleCall));
-			}
-			else {
-				elementList.add(abstractElement);
+				elementList.addAll(resolveElement(((ParserRule) abstractRule).getAlternatives()));
 			}
 		}
 		else {
