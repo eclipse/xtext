@@ -243,7 +243,7 @@ public class GeneratorFacade {
 			
 			GenService contentAssist = XtextgenFactory.eINSTANCE.createGenService();
 			contentAssist.setServiceInterfaceFQName("org.eclipse.jface.text.contentassist.IContentAssistant");
-			contentAssist.setGenClassFQName(namespace +"."+ languageName+"GenProposalProvider");
+			contentAssist.setGenClassFQName("org.eclipse.jface.text.contentassist.ContentAssistant");
 			contentAssist.setUiService(true);
 			genModel.getServices().add(contentAssist);
 			
