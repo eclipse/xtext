@@ -35,38 +35,42 @@ import org.eclipse.xtext.RuleCall;
  * 	public List<ICompletionProposal> completeMyTypeName(Assignment ele, MyType model, String prefix, IDocument doc) {...}
  *  </code>
  *   
+ *   @author Sven Efftinge - Initial contribution and API
+ *   @author Michael Clay
  */
 public interface IProposalProvider {
 	
 	/**
 	 * Is invoked by the framework if (with respect to the grammar) it is possible that the keyword passed as first parameter
-	 * can occure next up.
+	 * can occur next up.
 	 * 
-	 * @param ele - the keyword to be completed
+	 * @param keyword - the keyword to be completed
 	 * @param model - the most specific model element under the cursor. 
 	 * @param prefix - the prefix under the cursor or null if there is no prefix
-	 * @param doc - the IDocument instance used by the editor
-	 * @return
+	 * @param document - the IDocument instance used by the editor
+	 * @param offset - an offset within the document for which completions should be computed
+	 * @return a list of matching {@link ICompletionProposal}
 	 */
-	public List<ICompletionProposal> completeKeyword(Keyword ele, EObject model, String prefix, IDocument doc,int offset);
+	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword, EObject model, String prefix, IDocument document,int offset);
 
 	/**
 	 * Is invoked by the framework if (with respect to the grammar) it is possible that the keyword passed as first parameter
 	 * can occure next up.
 	 * 
-	 * @param ele - the keyword to be completed
+	 * @param ruleCall - the keyword to be completed
 	 * @param model - the most specific model element under the cursor. 
 	 * @param prefix - the prefix under the cursor or null if there is no prefix
-	 * @param doc - the IDocument instance used by the editor
-	 * @return
+	 * @param document - the IDocument instance used by the editor
+	 * @param offset - an offset within the document for which completions should be computed
+	 * @return a list of matching {@link ICompletionProposal}
 	 */
-	public List<ICompletionProposal> completeRuleCall(RuleCall ele, EObject model, String prefix, IDocument doc);
+	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall, EObject model, String prefix, IDocument document,int offset);
 
 	/**
-	 * used to filter and sort a list of completion proposals.
-	 * is invoked by the framework after all possible completions have been collected.
-	 * @param proposals
-	 * @return
+	 * Used to filter and sort a list of completion proposals.
+	 * This method is invoked by the framework after all possible completions have been collected.
+	 * @param completionProposalList
+	 * @return the sorted and filtered <code>ICompletionProposal</code> list.
 	 */
-	public List<ICompletionProposal> sortAndFilter(List<ICompletionProposal> proposals);
+	public List<? extends ICompletionProposal> sortAndFilter(List<? extends ICompletionProposal> completionProposalList);
 }
