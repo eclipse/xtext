@@ -9,9 +9,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.LexerRule;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -31,10 +36,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#
-	 * completeKeyword(org.eclipse.xtext.Keyword, org.eclipse.emf.ecore.EObject,
-	 * java.lang.String, org.eclipse.jface.text.IDocument, int)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeKeyword(org.eclipse.xtext.Keyword, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
 	 */
 	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword, EObject model, String prefix,
 			IDocument doc, int offset) {
@@ -49,11 +51,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#
-	 * completeRuleCall(org.eclipse.xtext.RuleCall,
-	 * org.eclipse.emf.ecore.EObject, java.lang.String,
-	 * org.eclipse.jface.text.IDocument, int)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeRuleCall(org.eclipse.xtext.RuleCall, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
 	 */
 	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall, EObject model, String prefix,
 			IDocument doc, int offset) {
@@ -61,6 +59,12 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 			logger.debug("completeRuleCall '" + ruleCall.getName() + "' cardinality '" + ruleCall.getCardinality()
 					+ "' for model '" + model + "' and prefix '" + prefix.trim() + "'");
 		}
+		AbstractRule calledRule = GrammarUtil.calledRule(ruleCall);
+		
+		if (calledRule instanceof LexerRule) {
+			return doCompleteLexerRuleRuleCall((LexerRule) calledRule, ruleCall, offset);
+		} 
+		
 		return Collections.emptyList();
 	}
 
@@ -82,10 +86,32 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 			List<? extends ICompletionProposal> completionProposalList) {
 		return completionProposalList;
 	}
+	
+	/**
+	 * Concrete subclasses can override this to provide a more meaningful and sophisticated behaviour
+	 * whenever a list of ICompletionProposal's should be computed for simple <code>LexerRule</code> call's.
+	 * 
+	 * This implementation returns one <code>ICompletionProposal</code> with a displayString composed
+	 * of the name of the containing rule plus the featurename of an optional assignment and at the end the name 
+	 * of the given LexerRule. (e.i. ParserRuleName+AssignmentFeatureName+LexerRuleName)
+	 * 
+	 * @param lexerRule the 'called' LexerRule instance
+	 * @param ruleCall the ruleCall for the provided lexerRule
+	 * @param offset an offset within the document for which completions should be computed
+	 * @return a computed list of <code>ICompletionProposal</code> for the given <code>LexerRule</code>
+	 */
+	protected List<? extends ICompletionProposal> doCompleteLexerRuleRuleCall(LexerRule lexerRule,RuleCall ruleCall, int offset) {
+		ParserRule containingParserRule = GrammarUtil.containingParserRule(ruleCall);
+		Assignment containingAssignment = GrammarUtil.containingAssignment(ruleCall);
+		String defaultDisplayString = containingParserRule.getName()
+				+ (null != containingAssignment ? firstLetterCapitalized(containingAssignment.getFeature()) : "")
+				+ lexerRule.getName();
+		return Collections.singletonList(createCompletionProposal(defaultDisplayString, offset));
+	}
 
 	/**
 	 * 
-	 * @return the id of the plug-in containing the image file;
+	 * @return the id of the plug-in containing the image files;
 	 *         <code>null</code> is returned if the plug-in does not exist
 	 */
 	protected abstract String getPluginId();
@@ -93,7 +119,8 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	/**
 	 * Returns the the relative path of the default image file, relative to the
 	 * root of the containing plug-in; the path must be legal The image would
-	 * typically be shown to the left of the display string.
+	 * typically be shown to the left of the <code>ICompletionProposal</code>
+	 * display string.
 	 * 
 	 * @return the image file path of the default image to be shown or
 	 *         <code>null</code> if no image is desired
@@ -103,14 +130,17 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 	/**
 	 * Concrete subclasses can override this to provide custom lookup behaviour
-	 * for <code>CrossReference</code>. The default behaviour of this method is
-	 * to lookup all <code>RuleCall</code> within the current parsetree matching
-	 * the type of the given CrossReference.
+	 * for <code>CrossReference</code>.
+	 * 
+	 * The default behaviour of this method is to lookup all
+	 * <code>RuleCall</code> within the current parsetree matching the type of
+	 * the given CrossReference.
 	 * 
 	 * @return a list of <code>ICompletionProposal</code> matching the given
 	 *         assignment
 	 */
-	protected List<? extends ICompletionProposal> lookupCrossReference(CrossReference crossReference, EObject model, int offset) {
+	protected List<? extends ICompletionProposal> lookupCrossReference(CrossReference crossReference, EObject model,
+			int offset) {
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 		for (CompositeNode compositeNode : EcoreUtil2.getAllContentsOfType(EcoreUtil2.getRootContainer(model),
 				CompositeNode.class)) {
@@ -136,5 +166,17 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		return new XtextCompletionProposal(text, new StyledString(text), text, getDefaultImageFilePath(),
 				getPluginId(), offset);
 	}
+	
+	/**
+	 * @param text to apply
+	 * @return the provided string with the first letter capitalized
+	 */
+	protected final String firstLetterCapitalized(String text) {
+		if (text == null || text.length() == 0) {
+			return text;
+		}
+		return text.substring(0, 1).toUpperCase() + text.substring(1, text.length());
+	}
+
 
 }
