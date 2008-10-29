@@ -31,6 +31,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -83,7 +84,8 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 				List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
-				for (Iterator<AbstractElement> iterator = calculatePossibleElementSet(lastCompleteNode, grammarElement)
+				Set<AbstractElement> calculatePossibleElementSet = calculatePossibleElementSet(lastCompleteNode, grammarElement);
+				for (Iterator<AbstractElement> iterator = calculatePossibleElementSet
 						.iterator(); iterator.hasNext();) {
 					AbstractElement nextElement = iterator.next();
 
@@ -141,6 +143,27 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				if (null != ruleCallProposalList) {
 					completionProposalList.addAll(ruleCallProposalList);
 				}
+				
+				AbstractRule calledRule = GrammarUtil.calledRule((RuleCall) abstractElement);
+				
+				if (calledRule.getType()!=null) {
+					
+					TypeRef typeRef = calledRule.getType();
+
+					Method method = findMethod(proposalProvider.getClass(),
+							"complete" + firstLetterCapitalized(typeRef.getAlias())
+									+ firstLetterCapitalized(typeRef.getName()), RuleCall.class, EObject.class,
+							String.class, IDocument.class, int.class);
+					
+					Collection<? extends ICompletionProposal> proposalList = invokeMethod(method, proposalProvider,
+							abstractElement, currentLeafNode, prefix, xtextDocument, offset);
+					
+					if (null != proposalList) {
+						completionProposalList.addAll(proposalList);
+					}
+
+				} 
+				
 			}
 		}
 	}
@@ -378,6 +401,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 	@SuppressWarnings("unchecked")
 	private final Collection<ICompletionProposal> invokeMethod(Method method, Object target, Object... args) {
+		
 		try {
 			return (Collection<ICompletionProposal>) method.invoke(target, args);
 		}
