@@ -43,6 +43,8 @@ public class AutoTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.reference.LeafNodeBug_234132_Test.class);
 		suite.addTestSuite(org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformerTests.class);
 		suite.addTestSuite(org.eclipse.xtext.resource.metamodel.TypeHierarchyHelperTests.class);
+		suite.addTestSuite(org.eclipse.xtext.crossrefs.CrossRefTest.class);
+		suite.addTestSuite(org.eclipse.xtext.crossrefs.LinkingErrorTest.class);
 		return suite;
 	}
 }
