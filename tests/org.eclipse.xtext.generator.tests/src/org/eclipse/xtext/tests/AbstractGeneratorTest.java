@@ -113,7 +113,15 @@ public abstract class AbstractGeneratorTest extends TestCase {
 
 	public EObject getModel(InputStream model) throws Exception {
 		XtextResource resource = getResource(model);
+		return getModel(resource);
+	}
+
+	protected EObject getModel(XtextResource resource) {
 		return resource.getParseResult().getRootASTElement();
+	}
+	
+	protected XtextResource getResourceFromString(String model) throws Exception {
+		return getResource(new org.eclipse.xtext.util.StringInputStream(model));
 	}
 
 	protected XtextResource getResource(InputStream in) throws Exception {
