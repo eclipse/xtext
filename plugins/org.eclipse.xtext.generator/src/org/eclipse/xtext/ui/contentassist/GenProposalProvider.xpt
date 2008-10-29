@@ -32,6 +32,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.common.editor.codecompletion.AbstractProposalProvider;
 import org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider;
 
@@ -86,6 +87,22 @@ public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProp
 		«ELSE-»
 		return Collections.emptyList();
 		«ENDIF-»
+	}
+	«ENDIF-»
+	«ENDLET-»
+    «ENDFOREACH-»
+    
+    «FOREACH grammar().allParserRules().select(parserRule|parserRule.type!=null) AS parserRule-»
+    «LET parserRule.type.alias.toFirstUpper()+parserRule.type.name.toFirstUpper() AS fqnFeatureName»
+	«IF null==getGlobalVar(fqnFeatureName)-»
+	«storeGlobalVar(fqnFeatureName,"")-»	 
+	public List<? extends ICompletionProposal> complete«fqnFeatureName»(RuleCall ruleCall, EObject model, String prefix,
+			IDocument doc, int offset) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("complete«fqnFeatureName» '" + ruleCall.getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + model + "' and prefix '" + prefix.trim() + "'");
+		}
+		return Collections.emptyList();
 	}
 	«ENDIF-»
 	«ENDLET-»
