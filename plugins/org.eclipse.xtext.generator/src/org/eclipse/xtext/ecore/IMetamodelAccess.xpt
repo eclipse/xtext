@@ -16,7 +16,7 @@
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 
 «DEFINE metamodelAccess FOR GenService»
-«FILE genClassFQName.toJavaFilePath()-»
+«FILE genClassFQName.toJavaFilePath() SRC_GEN-»
 /*
 «fileHeader()»
 */

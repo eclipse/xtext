@@ -8,8 +8,6 @@
 *******************************************************************************/
 language org.eclipse.xtext.reference.ReferenceGrammar 
 generate ReferenceGrammar "http://eclipse.org/xtext/reference/ReferenceGrammar" 
-import "classpath:/org/eclipse/xtext/reference/ReferenceModel.ecore" as ReferenceModel
-
 
 Spielplatz :
 	 ( "spielplatz" groesse = INT ( beschreibung = STRING ) ? "{" 

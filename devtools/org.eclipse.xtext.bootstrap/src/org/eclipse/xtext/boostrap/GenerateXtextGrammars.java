@@ -28,6 +28,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
  * 
  */
 public class GenerateXtextGrammars {
+	private static final String path = "../org.eclipse.xtext";
 	private static final String uiPath = "../org.eclipse.xtext.xtext.ui_gen";
 	private static final Logger logger = Logger.getLogger(GenerateXtextGrammars.class);
 
@@ -35,20 +36,12 @@ public class GenerateXtextGrammars {
 		EcorePackage.eINSTANCE.eClass();
 		EcorePackage.eINSTANCE.getNsURI();
 		XtextStandaloneSetup.doSetup();
-		String srcPath = "../org.eclipse.xtext/src";
-		String srcGenPath = "../org.eclipse.xtext/src-gen";
-		String filename = "../org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext";
-		String languageName = "Xtext";
-		String languageNamespace = "org/eclipse/xtext";
+		String filename = path+"/src/org/eclipse/xtext/Xtext.xtext";
 		logger.info("loading " + filename);
 		XtextStandaloneSetup.doSetup();
 
-		GeneratorFacade.cleanFolder(srcGenPath);
-		generate(srcGenPath, srcPath, filename, languageName, languageNamespace);
-	}
-
-	private static void generate(String srcGenPath, String srcPath, String filename, String languageName, String languageNamespace)
-			throws FileNotFoundException, IOException {
+		GeneratorFacade.cleanFolder(path+"/src-gen");
+		GeneratorFacade.cleanFolder(uiPath+"/src-gen");
 		ResourceSet rs = new XtextResourceSet();
 		XtextResource resource = (XtextResource) rs.createResource(URI.createURI(filename));
 		resource.load(null);
@@ -57,6 +50,7 @@ public class GenerateXtextGrammars {
 			logger.error(syntaxError.getMessage());
 		}
 		Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
-		GeneratorFacade.generate(grammarModel, srcGenPath, srcPath, uiPath, "xtext", "xtext2");
+		GeneratorFacade.generate(grammarModel, path, uiPath, "xtext", "xtext2");
 	}
+
 }

@@ -17,7 +17,7 @@
 «EXTENSION org::eclipse::xtext::parser::Parser»
 
 «DEFINE grammar FOR GenService»
-«FILE internalAntlrGrammarFullPath()»
+«FILE internalAntlrGrammarFullPath() SRC_GEN-»
 /*
 «fileHeader()»
 */

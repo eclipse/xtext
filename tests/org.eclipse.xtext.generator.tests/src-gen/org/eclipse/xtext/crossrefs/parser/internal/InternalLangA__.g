@@ -11,25 +11,25 @@ T11 : 'import' ;
 T12 : 'type' ;
 T13 : 'extends' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g" 198
+// $ANTLR src "./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g" 197
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g" 200
+// $ANTLR src "./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g" 199
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g" 202
+// $ANTLR src "./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g" 201
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |                '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g" 204
+// $ANTLR src "./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g" 203
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g" 206
+// $ANTLR src "./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g" 205
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')? {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g" 208
+// $ANTLR src "./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g" 207
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g" 210
+// $ANTLR src "./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g" 209
 RULE_ANY_OTHER : .;
 
 

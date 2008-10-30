@@ -11,6 +11,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.common.editor.codecompletion.AbstractProposalProvider;
 import org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider;
 
@@ -99,6 +100,15 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 		return Collections.emptyList();
 	}
 	
+	public List<? extends ICompletionProposal> completeSpielplatzTypes(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeSpielplatzTypes feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ prefix.trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+	
 	public List<? extends ICompletionProposal> completeKindName(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeKindName feature '" + assignment.getFeature() + "' terminal '"
@@ -153,6 +163,15 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 		return Collections.emptyList();
 	}
 	
+	public List<? extends ICompletionProposal> completeFamilieName(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeFamilieName feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ prefix.trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+	
 	public List<? extends ICompletionProposal> completeFamilieMutter(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeFamilieMutter feature '" + assignment.getFeature() + "' terminal '"
@@ -186,6 +205,25 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 			logger.debug("completeFarbeWert feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+	
+	public List<? extends ICompletionProposal> completeCustomTypeParserRuleName(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeCustomTypeParserRuleName feature '" + assignment.getFeature() + "' terminal '"
+					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
+					+ prefix.trim() + "'");
+		}
+		return Collections.singletonList(createCompletionProposal("CustomTypeParserRuleName", offset));
+	}
+    
+    
+	public List<? extends ICompletionProposal> completeReferenceModelCustomType(RuleCall ruleCall, EObject model, String prefix,
+			IDocument doc, int offset) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("completeReferenceModelCustomType '" + ruleCall.getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + model + "' and prefix '" + prefix.trim() + "'");
 		}
 		return Collections.emptyList();
 	}

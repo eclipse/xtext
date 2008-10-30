@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 
-<!-- Generated with Xtext -->
-
 <plugin>
 	<extension
          point="org.eclipse.ui.editors">
@@ -19,8 +17,6 @@
        point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
     <serviceRegistrationFactory
           class="org.eclipse.xtext.reference.ReferenceGrammarUiConfig"/>
-    <serviceRegistrationFactory
-          class="org.eclipse.xtext.reference.ReferenceGrammarRuntimeConfig"/>
  </extension>
  <extension
          point="org.eclipse.ui.preferencePages">
@@ -53,18 +49,4 @@
             label="Task Tags">
         </keyword>
 	</extension>
-   <extension
-         point="org.eclipse.emf.ecore.extension_parser">
-      <parser
-            class="org.eclipse.xtext.reference.services.ReferenceGrammarResourceFactory"
-            type="xtest">
-      </parser>
-   </extension>
-   <extension
-         point="org.eclipse.emf.ecore.extension_parser">
-      <parser
-            class="org.eclipse.xtext.reference.services.ReferenceGrammarResourceFactory"
-            type="tst">
-      </parser>
-   </extension>
 </plugin>

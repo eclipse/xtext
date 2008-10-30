@@ -7,25 +7,25 @@ package org.eclipse.xtext.testlanguages.parser.internal;
 import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 194
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 193
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 196
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 195
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 198
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 197
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |                '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 200
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 199
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 202
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 201
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')? {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 204
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 203
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 206
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalActionTestLanguage.g" 205
 RULE_ANY_OTHER : .;
 
 

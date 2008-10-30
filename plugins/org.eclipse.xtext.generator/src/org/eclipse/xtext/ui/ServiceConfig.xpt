@@ -17,7 +17,33 @@
 
 «DEFINE root FOR GenModel»
 
-«FILE "src-gen/"+uiConfigClass().toJavaFilePath() UI -»
+«FILE generatedUiConfigClass().toJavaFilePath() UI_SRC_GEN -»
+/*
+«fileHeader()»
+*/
+package «generatedUiConfigClass().toJavaPackage()»;
+
+import java.util.Set;
+
+import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
+
+/**
+ * GENERATED! Manual modification goes to «uiConfigClass().toSimpleName()»
+ */
+public class «generatedUiConfigClass().toSimpleName()» extends AbstractServiceRegistrationFactory {
+
+	public Set<IServiceRegistration> registrations() {
+		return scope(«languageInterface(grammar())».SCOPE)
+		«FOREACH genModel().services.select(e|e.uiService) AS s-»
+		.with(«s.serviceInterfaceFQName».class, «s.genClassFQName».class)
+		«ENDFOREACH»
+			.registrations();
+	}
+
+}
+«ENDFILE»
+
+«FILE uiConfigClass().toJavaFilePath() UI_SRC -»
 /*
 «fileHeader()»
 */
@@ -28,16 +54,12 @@ import java.util.Set;
 import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
 
 /**
- * used to register components to be used at runtime.
+ * used to register components to be used within the IDE.
  */
-public class «uiConfigClass().toSimpleName()» extends AbstractServiceRegistrationFactory {
+public class «uiConfigClass().toSimpleName()» extends «generatedUiConfigClass()» {
 
 	public Set<IServiceRegistration> registrations() {
-		return scope(«languageInterface(grammar())».SCOPE)
-		«FOREACH genModel().services.select(e|e.uiService) AS s-»
-		.with(«s.serviceInterfaceFQName».class, «s.genClassFQName».class)
-		«ENDFOREACH»
-			.registrations();
+		return super.registrations();
 	}
 
 }

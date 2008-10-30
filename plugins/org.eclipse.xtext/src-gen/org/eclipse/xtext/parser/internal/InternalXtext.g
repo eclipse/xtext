@@ -1,4 +1,3 @@
-
 /*
 Generated with Xtext
 */

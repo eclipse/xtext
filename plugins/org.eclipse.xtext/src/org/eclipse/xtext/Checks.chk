@@ -5,8 +5,6 @@
 * which accompanies this distribution, and is available at
 * http://www.eclipse.org/legal/epl-v10.html
 *
-* Contributors:
-* committers of openArchitectureWare - initial API and implementation
 *******************************************************************************/
 
 import ecore;
@@ -16,14 +14,6 @@ import xtextutil;
 extension org::eclipse::xtext::Extensions;
 extension org::eclipse::xtext::GrammarUtil;
 
-/*
-context Action ERROR "Created class " + typeName.name + " cannot be resolved" :
-	resolveCreatedType() != null;
-	
-context Action if resolveCreatedType() != null ERROR "Created class does not inherit from the rule's return type" :
-	!resolveCreatedType().referenced() 
-	|| ((EClass) containingParserRule().resolveReturnType().eClassifier).isSuperTypeOf((EClass) resolveCreatedType().eClassifier);
-*/
 
 context RuleCall ERROR "Couldn't resolve called rule "+name :
 	calledRule()!=null;
@@ -38,16 +28,3 @@ context GeneratedMetamodel ERROR "Duplicate aliases are only allowed for referen
 
 context AbstractRule ERROR "Name must be unique" :
 	grammar().rules.select(p | p.name == name).size==1;
-	
-// TODO: check that CrossReferences can only appear inside Assignments
-
-/*
-context ParserRule ERROR "Returned class " + getReturnTypeName() + " cannot be resolved" :
-	resolveReturnType() != null;
-	
-// referenced EPackages must not contain duplicate classifiers
-
-context ReferencedMetamodel ERROR "Metamodels with same alias must not have a classifier in common" :
-	loadMetaModel().ePackage.eClassifiers.name.intersect(
-		grammar().referencedMetamodels().select(mm|mm.alias==alias && mm.declaration != this).ePackage.eClassifiers.name.flatten()).isEmpty;
-*/

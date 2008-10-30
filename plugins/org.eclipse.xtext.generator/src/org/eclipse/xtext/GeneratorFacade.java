@@ -55,7 +55,7 @@ public class GeneratorFacade {
 		IssuesImpl issues = new IssuesImpl();
 		ExecutionContextImpl ctx = new ExecutionContextImpl();
 		ctx.registerMetaModel(new EmfRegistryMetaModel());
-		CheckFacade.checkAll("org::eclipse::xtext::Xtext2", list, ctx, issues);
+		CheckFacade.checkAll("org::eclipse::xtext::Checks", list, ctx, issues);
 
 		if (issues.hasErrors()) {
 			log.error(issues);
@@ -106,7 +106,7 @@ public class GeneratorFacade {
 		// save grammar model
 		XtextResourceSet setImpl = new XtextResourceSet();
 		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(genModel.getGrammar());
-		Resource resource = setImpl.createResource(URI.createURI(defaultPath(genModel) + "/" + xmiPath));
+		Resource resource = setImpl.createResource(URI.createURI(GenExtensions.outletPath(genModel,"SRC_GEN") + "/" + xmiPath));
 		resource.getContents().add(genModel.getGrammar());
 		resource.save(null);
 
@@ -128,10 +128,6 @@ public class GeneratorFacade {
 		}
 	}
 
-	private static String defaultPath(GenModel genModel) {
-		return genModel.getOutlets().get(0).getTargetFolder();
-	}
-
 	private static GenModel assembleGeneratorModel(Grammar grammarModel, String runtimeProjectPath,
 			String uiProjectPath, String... modelFileExtensions) {
 		String languageName = GrammarUtil.getName(grammarModel);
@@ -143,9 +139,9 @@ public class GeneratorFacade {
 		genModel.setFileHeader("Generated with Xtext");
 		genModel.setLanguageInterfaceFQName(namespace + ".I" + languageName);
 
-		genModel.getOutlets().add(outlet("", runtimeProjectPath+"/src-gen", true));
-		genModel.getOutlets().add(outlet("SRC", runtimeProjectPath+"/src", false));
 		genModel.getOutlets().add(outlet("RUNTIME", runtimeProjectPath, false));
+		genModel.getOutlets().add(outlet("SRC", runtimeProjectPath+"/src", false));
+		genModel.getOutlets().add(outlet("SRC_GEN", runtimeProjectPath+"/src-gen", true));
 
 		if (uiProjectPath != null) {
 			String uiPluginID = uiProjectPath.substring(uiProjectPath.lastIndexOf('/') + 1);
@@ -153,6 +149,7 @@ public class GeneratorFacade {
 			genModel.setUiPluginBundleID(uiPluginID);
 
 			genModel.getOutlets().add(outlet("UI", uiProjectPath, false));
+			genModel.getOutlets().add(outlet("UI_SRC", uiProjectPath+"/src", false));
 			genModel.getOutlets().add(outlet("UI_SRC_GEN", uiProjectPath + "/src-gen", true));
 //			genModel.getOutlets().add(outlet("UI_TEMPLATES", uiProjectPath + "/templates", true));
 		}
