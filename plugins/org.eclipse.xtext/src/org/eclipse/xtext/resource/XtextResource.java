@@ -29,6 +29,8 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
+import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken;
 import org.eclipse.xtext.service.Inject;
 
 /**
@@ -51,6 +53,9 @@ public class XtextResource extends ResourceImpl {
 	
 	@Inject
 	private IParseTreeConstructor parseTreeConstructor;
+	
+	@Inject
+	private ITokenSerializer tokenSerializer;
 	
 	private IParseResult parseResult;
 
@@ -138,7 +143,8 @@ public class XtextResource extends ResourceImpl {
 	public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
 		if (contents.size() != 1)
 			throw new IllegalStateException("The Xtext resource must contain exactly one root element");
-		parseTreeConstructor.serialize(outputStream, contents.get(0), options);
+		IAbstractToken tokenList = parseTreeConstructor.serialize(contents.get(0));
+		tokenSerializer.serialize(tokenList, outputStream);
 	}
 	
 	public interface Diagnostic extends org.eclipse.emf.ecore.resource.Resource.Diagnostic {

@@ -1,34 +1,36 @@
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
-import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructorCallback;
 import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.service.ServiceRegistry;
 
 public abstract class AbstractParseTreeConstructor implements
 		IParseTreeConstructor {
 
-	protected enum AssignmentType {
-		KW, PRC, LRC, CR
-	};
+	public abstract class AbstractToken implements IAbstractToken {
 
-	public abstract class AbstractToken {
+		public IInstanceDescription getCurrent() {
+			return current;
+		}
+
+		public IAbstractToken getNext() {
+			return predecessor;
+		}
 
 		public class Solution {
 			private final IInstanceDescription current;
@@ -74,7 +76,7 @@ public abstract class AbstractParseTreeConstructor implements
 		protected final boolean many;
 		protected Solution otherSolution;
 		protected final AbstractToken predecessor;
-		protected final boolean required;
+		protected boolean required; // TODO: make this final again
 
 		public AbstractToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
@@ -102,7 +104,7 @@ public abstract class AbstractParseTreeConstructor implements
 
 		protected abstract Solution createSolution();
 
-		private String depth(AbstractToken ele) {
+		protected String depth(AbstractToken ele) {
 			StringBuffer b = new StringBuffer();
 			for (AbstractToken t = ele.predecessor; t != null; t = t.predecessor)
 				b.append(" ");
@@ -110,23 +112,17 @@ public abstract class AbstractParseTreeConstructor implements
 		}
 
 		private String dsl(AbstractToken ele) {
-			// ByteArrayOutputStream out = new ByteArrayOutputStream();
-			// SimpleSerializingCallback cb = new SimpleSerializingCallback(out,
-			// converterService);
-			// executeAllCallbacks(cb);
-			// return out.toString();
-			return "";
-		}
-
-		public void executeAllCallbacks(IParseTreeConstructorCallback callback) {
-			AbstractToken ele = this;
-			while (ele != null) {
-				ele.executeCallback(callback);
-				ele = ele.predecessor;
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			try {
+				SimpleTokenSerializer sts = new SimpleTokenSerializer();
+				ServiceRegistry.injectServices(XtextStandaloneSetup
+						.getServiceScope(), sts);
+				sts.serialize(ele, out);
+			} catch (Throwable e) {
+				e.printStackTrace();
+				return "Error: " + e.getMessage();
 			}
-		}
-
-		protected void executeCallback(IParseTreeConstructorCallback callback) {
+			return out.toString();
 		}
 
 		public Solution firstSolution() {
@@ -141,16 +137,20 @@ public abstract class AbstractParseTreeConstructor implements
 						+ " -> "
 						+ ((t1 == null) ? "failed" : "success" + "\t "
 								+ t1.current));
+
 			if (t1 == null)
 				return required ? null : new Solution(current, predecessor);
+			else
+				otherSolution = required ? null : new Solution(current,
+						predecessor);
 			if (many) {
-				Solution t3 = newInstance(t1.getCurrent(), t1.getPredecessor())
-						.firstSolution();
+				AbstractToken t = newInstance(t1.getCurrent(), t1
+						.getPredecessor());
+				t.required = false;
+				Solution t3 = t.firstSolution();
 
-				if (t3 != null) {
-					otherSolution = t1;
+				if (t3 != null)
 					return t3;
-				}
 			}
 			return t1;
 		}
@@ -178,7 +178,7 @@ public abstract class AbstractParseTreeConstructor implements
 			}
 		}
 
-		public Solution nextSolution() {
+		protected Solution localNextSolution() {
 			if (otherSolution != null) {
 				Solution t = otherSolution;
 				otherSolution = null;
@@ -187,9 +187,38 @@ public abstract class AbstractParseTreeConstructor implements
 				return firstSolution();
 			return null;
 		}
+
+		public Solution nextSolution(AbstractToken limit) {
+			if (log.isDebugEnabled())
+				log.debug("--" + depth(limit)
+						+ limit.getClass().getSimpleName()
+						+ " -> nextSolution()");
+			AbstractToken t = this;
+			while (t != null && t != limit) {
+				Solution s = t.localNextSolution();
+				if (s != null) {
+					if (log.isDebugEnabled())
+						log.debug("--" + depth(this)
+								+ getClass().getSimpleName()
+								+ " -> nextSolution() -> "
+								+ t.getClass().getSimpleName() + " ("
+								+ s.getPredecessor().getClass().getSimpleName()
+								+ ")");
+					return s;
+				}
+				t = t.predecessor;
+			}
+			if (log.isDebugEnabled())
+				log.debug("-- " + depth(this) + getClass().getSimpleName()
+						+ " -> nextSolution() -> not found");
+			if (t == null)
+				throw new IllegalStateException("Bug found");
+			return null;
+		}
 	}
 
-	public abstract class ActionToken extends AbstractToken {
+	public abstract class ActionToken extends AbstractToken implements
+			IActionToken {
 
 		public ActionToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
@@ -198,9 +227,16 @@ public abstract class AbstractParseTreeConstructor implements
 
 	}
 
-	public abstract class AlternativesToken extends AbstractToken {
+	public abstract class AlternativesToken extends AbstractToken implements
+			IAlternativeesToken {
 
 		protected boolean first = true;
+
+		protected AbstractToken last;
+
+		public IAbstractToken getLast() {
+			return last;
+		}
 
 		public AlternativesToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
@@ -216,7 +252,25 @@ public abstract class AbstractParseTreeConstructor implements
 		}
 	}
 
-	public abstract class AssignmentToken extends AbstractToken {
+	public abstract class AssignmentToken extends AbstractToken implements
+			IAssignmentToken {
+
+		public AbstractElement getAssignmentElement() {
+			return element;
+		}
+
+		public Assignment getGrammarElement() {
+			return GrammarUtil.containingAssignment(element);
+		}
+
+		public AssignmentType getType() {
+			return type;
+		}
+
+		public Object getValue() {
+			return value;
+		}
+
 		protected AbstractElement element;
 		protected Object value;
 		protected AssignmentType type;
@@ -226,26 +280,16 @@ public abstract class AbstractParseTreeConstructor implements
 			super(curr, pred, many, required);
 		}
 
-		public void executeCallback(IParseTreeConstructorCallback callback) {
-			if (type != null)
-				switch (type) {
-				case KW:
-					callback.keywordCall(current, (Keyword) element);
-					return;
-				case PRC: /* noting to do for parser rule calls */
-					return;
-				case LRC:
-					callback.lexerRuleCall(current, (RuleCall) element, value);
-					return;
-				case CR:
-					callback.crossRefCall(current, (CrossReference) element,
-							(EObject) value);
-					return;
-				}
-		}
 	}
 
-	public abstract class GroupToken extends AbstractToken {
+	public abstract class GroupToken extends AbstractToken implements
+			IGroupToken {
+
+		protected AbstractToken last;
+
+		public IAbstractToken getLast() {
+			return last;
+		}
 
 		public GroupToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
@@ -254,16 +298,21 @@ public abstract class AbstractParseTreeConstructor implements
 
 	}
 
-	public abstract class KeywordToken extends AbstractToken {
+	public abstract class KeywordToken extends AbstractToken implements
+			IKeywordToken {
 
 		public KeywordToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
 			super(curr, pred, many, required);
 		}
 
+		protected Solution createSolution() {
+			return new Solution();
+		}
 	}
 
-	public abstract class RuleCallToken extends AbstractToken {
+	public abstract class RuleCallToken extends AbstractToken implements
+			IRuleCallToken {
 
 		public RuleCallToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
@@ -274,11 +323,8 @@ public abstract class AbstractParseTreeConstructor implements
 
 	protected Logger log = Logger.getLogger(AbstractParseTreeConstructor.class);
 
-	@Inject
-	private IParseTreeConstructorCallback serializerStrategy;
-
-	@Inject
-	private IValueConverterService converterService;
+	// @Inject
+	// private IValueConverterService converterService;
 
 	@Inject
 	private IAstFactory factory;
@@ -302,38 +348,19 @@ public abstract class AbstractParseTreeConstructor implements
 		return grammar.getGrammar();
 	}
 
-	protected EObject getGrammarElement(String string) {
+	protected EObject getGrammarEle(String string) {
 		return grammar.getGrammar().eResource().getResourceSet().getEObject(
 				URI.createURI(string), true);
 	}
 
-	public IValueConverterService getValueConverterService() {
-		return converterService;
-	}
+	// public IValueConverterService getValueConverterService() {
+	// return converterService;
+	// }
 
-	public static final String OPTION_SERIALIZER_STRATEGY = "OPTION_SERIALIZER_STRATEGY";
+	// public static final String OPTION_SERIALIZER_STRATEGY =
+	// "OPTION_SERIALIZER_STRATEGY";
 
-	private IParseTreeConstructorCallback getSerializerStrategy(
-			Map<?, ?> options) {
-		Object serObj = options.get(OPTION_SERIALIZER_STRATEGY);
-		if (serObj == null)
-			return serializerStrategy;
-		if (serObj instanceof IParseTreeConstructorCallback)
-			return (IParseTreeConstructorCallback) serObj;
-		throw new IllegalStateException("The Object supplied with "
-				+ OPTION_SERIALIZER_STRATEGY + " needs to be of type "
-				+ IParseTreeConstructorCallback.class.getName());
-	}
-
-	public void serialize(OutputStream outputStream, EObject object,
-			Map<?, ?> options) {
-		IParseTreeConstructorCallback ser = getSerializerStrategy(options);
-		ser.beginSerialize(outputStream);
-		internalSerialize(object, ser);
-		ser.endSerialize();
-	}
-
-	protected abstract void internalSerialize(EObject object,
-			IParseTreeConstructorCallback strategy);
+	// public abstract void serialize(OutputStream outputStream, EObject object,
+	// Map<?, ?> options);
 
 }
