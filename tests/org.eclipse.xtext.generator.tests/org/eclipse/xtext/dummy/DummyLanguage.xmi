@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="DummyLang" nsURI="http://www.eclipse.org/2008/xtext/DummyLang"/>
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>dummy</idElements>
+  <idElements>DummyLanguage</idElements>
+  <rules xsi:type="xtext:ParserRule" name="Model">
+    <alternatives xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="elements">
+      <terminal xsi:type="xtext:RuleCall" name="Element"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Element">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Assignment" cardinality="?" operator="?=" feature="optional">
+              <terminal xsi:type="xtext:Keyword" value="optional"/>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Keyword" value="element"/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+            <terminal xsi:type="xtext:RuleCall" name="ID"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="descriptions">
+          <terminal xsi:type="xtext:RuleCall" name="STRING"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value=";"/>
+    </alternatives>
+  </rules>
+</xtext:Grammar>
