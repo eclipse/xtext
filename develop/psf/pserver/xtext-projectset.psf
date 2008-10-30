@@ -1,3 +1,4 @@
+pserver:dev.eclipse.org:/cvsroot
 <?xml version="1.0" encoding="UTF-8"?>
 <psf version="2.0">
 <provider id="org.eclipse.team.cvs.core.cvsnature">
@@ -9,7 +10,6 @@
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.di,org.eclipse.emf.mwe.di"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/tests/org.eclipse.emf.mwe.di.tests,org.eclipse.emf.mwe.di.tests"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.di.ui,org.eclipse.emf.mwe.di.ui"/>
-<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.di.ui_gen,org.eclipse.emf.mwe.di.ui_gen"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.emf/org.eclipse.emf.mwe/plugins/org.eclipse.emf.mwe.utils,org.eclipse.emf.mwe.utils"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/plugins/org.eclipse.xpand,org.eclipse.xpand"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.m2t/org.eclipse.xpand/plugins/org.eclipse.xtend,org.eclipse.xtend"/>
@@ -29,7 +29,6 @@
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.logging,org.eclipse.xtext.logging"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/devtools/org.eclipse.xtext.reference,org.eclipse.xtext.reference"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/devtools/org.eclipse.xtext.reference.ui,org.eclipse.xtext.reference.ui"/>
-<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/devtools/org.eclipse.xtext.reference.ui_gen,org.eclipse.xtext.reference.ui_gen"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext.releng,org.eclipse.xtext.releng"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.runtime.feature,org.eclipse.xtext.runtime.feature"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/features/org.eclipse.xtext.sdk.feature,org.eclipse.xtext.sdk.feature"/>
@@ -46,7 +45,6 @@
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/tests/org.eclipse.xtext.ui.core.tests,org.eclipse.xtext.ui.core.tests"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.util,org.eclipse.xtext.util"/>
 <project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtext.ui,org.eclipse.xtext.xtext.ui"/>
-<project reference="1.0,:pserver:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.xtext.ui_gen,org.eclipse.xtext.xtext.ui_gen"/>
 </provider>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="MWE" name="MWE">
 <item elementID="=org.eclipse.emf.mwe.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -56,7 +54,6 @@
 <item elementID="=org.eclipse.emf.mwe.di.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.emf.mwe.di.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.emf.mwe.di" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.emf.mwe.di.ui_gen" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xpand" name="Xpand">
 <item elementID="=org.eclipse.xtend.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -98,7 +95,6 @@
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext Reference" name="Xtext Reference">
 <item elementID="=org.eclipse.xtext.reference.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.reference.ui_gen" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.reference" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSets>
 <workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" label="Xtext UI" name="Xtext UI">
@@ -108,7 +104,6 @@
 <item elementID="=org.eclipse.xtext.ui.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.ui.builtin" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.service.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=org.eclipse.xtext.xtext.ui_gen" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.ui.common" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.common.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.xtext.service.ui.tests" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
