@@ -1,4 +1,11 @@
 <plugin>
+	<extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="classpath:/org/eclipse/xtext/reference/ReferenceModel.ecore"
+            class="ReferenceModel.ReferenceModelPackage">
+      </package>
+   </extension>
     <extension
          point="org.eclipse.xtend.typesystem.emf.checks">
       
