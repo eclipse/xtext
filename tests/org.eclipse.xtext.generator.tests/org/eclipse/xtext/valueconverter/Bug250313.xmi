@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="bug250313" nsURI="http://org.eclipse.xtext.valueconverter.Bug250313"/>
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>valueconverter</idElements>
+  <idElements>Bug250313</idElements>
+  <rules xsi:type="xtext:ParserRule" name="Ref2">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Keyword" value="#2"/>
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="ref2">
+        <terminal xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Keyword" value="mykeyword1"/>
+            <groups xsi:type="xtext:RuleCall" name="STRING"/>
+          </groups>
+          <groups xsi:type="xtext:RuleCall" name="ID"/>
+        </terminal>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+</xtext:Grammar>
