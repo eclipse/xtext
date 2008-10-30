@@ -20,29 +20,34 @@ import org.eclipse.xtext.resource.XtextResourceSet;
  */
 public class ReferenceGrammar {
 	private Logger log = Logger.getLogger(ReferenceGrammar.class);
-	
-    private static final String RUNTIME_PATH = ".";
-    private static final String UI_PATH = "../org.eclipse.xtext.reference.ui";
 
-    public void generate() throws IOException {
-        XtextStandaloneSetup.doSetup();
+	private static final String RUNTIME_PATH = ".";
+	private static final String UI_PATH = "../org.eclipse.xtext.reference.ui";
 
-        GeneratorFacade.cleanFolder(RUNTIME_PATH+"/src-gen");
+	public void generate() throws IOException {
+		XtextStandaloneSetup.doSetup();
 
-        String classpathUri = "classpath:/"+getClass().getName().replace('.', '/') + ".xtext";
-        log.info("loading " + classpathUri);
-        ResourceSet rs = new XtextResourceSet();
-        Resource resource = rs.createResource(new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(classpathUri)));
-        resource.load(null);
-        Grammar grammarModel = (Grammar) resource.getContents().get(0);
+		GeneratorFacade.cleanFolder(RUNTIME_PATH + "/src-gen");
 
-        GeneratorFacade.generate(grammarModel, RUNTIME_PATH, UI_PATH, "xtest", "tst");
-        log.info("Done.");
-    }
+		String classpathUri = "classpath:/" + getClass().getName().replace('.', '/') + ".xtext";
+		log.info("loading " + classpathUri);
+		ResourceSet rs = new XtextResourceSet();
+		Resource resource = rs.createResource(new ClassloaderClasspathUriResolver().resolve(null, URI
+				.createURI(classpathUri)));
+		resource.load(null);
+		Grammar grammarModel = (Grammar) resource.getContents().get(0);
 
-    public static void main(String[] args) throws IOException {
-        ReferenceGrammar generator = new ReferenceGrammar();
-        generator.generate();
-    }
+		GeneratorFacade.generate(grammarModel, RUNTIME_PATH, UI_PATH, "xtest", "tst");
+		log.info("Done.");
+	}
+
+	public static void main(String[] args) throws IOException {
+		try {
+			ReferenceGrammar generator = new ReferenceGrammar();
+			generator.generate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }

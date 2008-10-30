@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LexerLang" nsURI="http://www.eclipse.org/2008/xtext/LexerLang"/>
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>testlanguages</idElements>
+  <idElements>LexerLanguage</idElements>
+  <rules xsi:type="xtext:ParserRule" name="Model">
+    <alternatives xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="children">
+      <terminal xsi:type="xtext:RuleCall" name="Element"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Element">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+        <terminal xsi:type="xtext:RuleCall" name="ID"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="h">
+        <terminal xsi:type="xtext:RuleCall" name="STRING"/>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:LexerRule" name="STRING" body=" '#' ('B')+ "/>
+</xtext:Grammar>

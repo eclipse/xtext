@@ -8,9 +8,9 @@ import java.util.Set;
 import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
 
 /**
- * used to register components to be used at runtime.
+ * GENERATED! Manual modification goes to ReferenceGrammarUiConfig
  */
-public class ReferenceGrammarUiConfig extends AbstractServiceRegistrationFactory {
+public class GenReferenceGrammarUiConfig extends AbstractServiceRegistrationFactory {
 
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.reference.IReferenceGrammar.SCOPE)
