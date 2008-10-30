@@ -17,27 +17,29 @@ public class XtextGrammarReconcilationTest extends AbstractGeneratorTest {
 		XtextStandaloneSetup.doSetup();
 		with(XtextStandaloneSetup.class);
 	}
-	
+
 	public void testSimple() throws Exception {
 		// this fails see bug #252181
-//		String model = "language foo Honolulu : name=ID;";
-//
-//		// load grammar model
-//		XtextResourceSet rs = new XtextResourceSet();
-//		Resource resource = rs.createResource(URI.createURI("foo.xtext"));
-//		resource.load(new StringInputStream(model),null);
-//		Grammar object = (Grammar) resource.getContents().get(0);
-//		
-//		// modify first rule
-//		object.getRules().get(0).setName("HONOLULU");
-//		
-//		// save
-//		ByteArrayOutputStream out = new ByteArrayOutputStream();
-//		resource.save(out, null);
-//		String result = new String(out.toByteArray());
-//		
-//		// check
-//		assertFalse(model.equals(result));
-//		assertEquals(model.toLowerCase(),result.toLowerCase());
+		String model = "language foo Honolulu : name=ID;";
+
+		// load grammar model
+		XtextResourceSet rs = new XtextResourceSet();
+		Resource resource = rs.createResource(URI.createURI("foo.xtext"));
+		resource.load(new StringInputStream(model), null);
+		Grammar object = (Grammar) resource.getContents().get(0);
+
+		// modify first rule
+		object.getRules().get(0).setName("HONOLULU");
+
+		// System.out.println(EmfFormater.objToStr(object, ""));
+
+		// save
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		resource.save(out, null);
+		String result = new String(out.toByteArray());
+
+		// check
+		assertFalse(model.equals(result));
+		assertEquals(model.toLowerCase(), result.toLowerCase());
 	}
 }

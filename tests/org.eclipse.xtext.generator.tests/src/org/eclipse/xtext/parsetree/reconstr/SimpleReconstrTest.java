@@ -8,9 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
-import java.io.ByteArrayOutputStream;
-import java.util.Collections;
-
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
@@ -18,6 +16,9 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfFormater;
 
 public class SimpleReconstrTest extends AbstractGeneratorTest {
+
+	private static final Logger logger = Logger
+			.getLogger(ComplexReconstrTest.class);
 
 	public void testSimple1() throws Exception {
 		String model = "a b";
@@ -41,16 +42,15 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
-		System.out.println(EmfFormater.objToStr(result, ""));
-		System.out.println(EmfFormater.objToStr(NodeUtil.getRootNode(result),
-				""));
-		System.out.println(EmfFormater.objToStr(NodeUtil.getRootNode(result)
-				.getLeafNodes(), ""));
-
-		IParseTreeConstructor con = getParseTreeConstructor();
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		con.serialize(out, result, Collections.emptyMap());
-		return out.toString();
+		if (logger.isDebugEnabled()) {
+			logger.debug(EmfFormater.objToStr(result, ""));
+			logger
+					.debug(EmfFormater.objToStr(NodeUtil.getRootNode(result),
+							""));
+			logger.debug(EmfFormater.objToStr(NodeUtil.getRootNode(result)
+					.getLeafNodes(), ""));
+		}
+		return serialize(result);
 	}
 
 	public void testSimpleExpressions5() throws Exception {
@@ -69,12 +69,12 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		String model = "2 45";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testSimpleTwoNumbersWithDefault() throws Exception {
 		String model = "0 45";
 		assertEquals(model, parseAndSerialize(model));
 	}
-	
+
 	public void testSimpleTwoNumbersWithDefault2() throws Exception {
 		String model = "0 45 # 0 # 1 # 2";
 		assertEquals(model, parseAndSerialize(model));
@@ -104,6 +104,11 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 
 	public void testCrossRef() throws Exception {
 		String model = "type A extends B type B extends A";
+		assertEquals(model, parseAndSerialize(model));
+	}
+	
+	public void testSpare() throws Exception {
+		String model = "#3 id1";
 		assertEquals(model, parseAndSerialize(model));
 	}
 

@@ -21,14 +21,13 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 public class ReferenceGrammar {
 	private Logger log = Logger.getLogger(ReferenceGrammar.class);
 	
-    private static final String SRC_GEN_PATH = "src-gen";
-    private static final String SRC_PATH = "src-gen";
-    private static final String UI_PATH = "../org.eclipse.xtext.reference.ui_gen";
+    private static final String RUNTIME_PATH = ".";
+    private static final String UI_PATH = "../org.eclipse.xtext.reference.ui";
 
     public void generate() throws IOException {
         XtextStandaloneSetup.doSetup();
 
-        GeneratorFacade.cleanFolder(SRC_GEN_PATH);
+        GeneratorFacade.cleanFolder(RUNTIME_PATH+"/src-gen");
 
         String classpathUri = "classpath:/"+getClass().getName().replace('.', '/') + ".xtext";
         log.info("loading " + classpathUri);
@@ -37,7 +36,7 @@ public class ReferenceGrammar {
         resource.load(null);
         Grammar grammarModel = (Grammar) resource.getContents().get(0);
 
-        GeneratorFacade.generate(grammarModel, SRC_GEN_PATH, SRC_PATH, UI_PATH, "xtest", "tst");
+        GeneratorFacade.generate(grammarModel, RUNTIME_PATH, UI_PATH, "xtest", "tst");
         log.info("Done.");
     }
 

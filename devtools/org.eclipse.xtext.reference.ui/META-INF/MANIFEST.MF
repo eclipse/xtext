@@ -1,15 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Reference
+Bundle-Name: ReferenceGrammar UI Plug-in
 Bundle-SymbolicName: org.eclipse.xtext.reference.ui;singleton:=true
 Bundle-Version: 0.7.0.qualifier
-Export-Package: org.eclipse.xtext.reference.ui.services
-Bundle-Activator: org.eclipse.xtext.reference.ui.Activator
-Require-Bundle: org.eclipse.xtext.reference;visibility:=reexport,
+Require-Bundle: org.eclipse.xtext.reference,
  org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.common,
- org.eclipse.xtext.log4j;bundle-version="1.2.15",
- org.eclipse.xtend.typesystem.emf;bundle-version="0.7.0"
+ org.eclipse.xtext.ui.builtin,
+ org.eclipse.ui.editors;bundle-version="3.4.0",
+ org.eclipse.ui
+Bundle-Vendor: eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Eclipse-RegisterBuddy: org.eclipse.xtext.log4j

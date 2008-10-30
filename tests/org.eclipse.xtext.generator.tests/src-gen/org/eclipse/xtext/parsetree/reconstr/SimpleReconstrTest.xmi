@@ -28,16 +28,19 @@
         <groups xsi:type="xtext:Alternatives">
           <groups xsi:type="xtext:Alternatives">
             <groups xsi:type="xtext:Alternatives">
-              <groups xsi:type="xtext:RuleCall" name="Atom"/>
-              <groups xsi:type="xtext:RuleCall" name="TwoNumbers"/>
+              <groups xsi:type="xtext:Alternatives">
+                <groups xsi:type="xtext:RuleCall" name="Atom"/>
+                <groups xsi:type="xtext:RuleCall" name="TwoNumbers"/>
+              </groups>
+              <groups xsi:type="xtext:RuleCall" name="ManyStrings"/>
             </groups>
-            <groups xsi:type="xtext:RuleCall" name="ManyStrings"/>
+            <groups xsi:type="xtext:RuleCall" name="Parens"/>
           </groups>
-          <groups xsi:type="xtext:RuleCall" name="Parens"/>
+          <groups xsi:type="xtext:RuleCall" name="Type"/>
         </groups>
-        <groups xsi:type="xtext:RuleCall" name="Type"/>
+        <groups xsi:type="xtext:RuleCall" name="Ref2"/>
       </groups>
-      <groups xsi:type="xtext:RuleCall" name="Ref2"/>
+      <groups xsi:type="xtext:RuleCall" name="Spare"/>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Atom">
@@ -120,6 +123,22 @@
           </groups>
           <groups xsi:type="xtext:Keyword" value="mykeyword2"/>
         </terminal>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Spare">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Keyword" value="#3"/>
+        <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="id">
+          <terminal xsi:type="xtext:RuleCall" name="ID"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Group" cardinality="*">
+        <abstractTokens xsi:type="xtext:Keyword" value="."/>
+        <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="id">
+          <terminal xsi:type="xtext:RuleCall" name="ID"/>
+        </abstractTokens>
       </abstractTokens>
     </alternatives>
   </rules>

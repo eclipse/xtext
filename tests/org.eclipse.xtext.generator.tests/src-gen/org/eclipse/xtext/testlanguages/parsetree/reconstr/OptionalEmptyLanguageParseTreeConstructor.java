@@ -13,10 +13,10 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class OptionalEmptyLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
-		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
-		t.getPredecessor().executeAllCallbacks(strategy);
+	public IAbstractToken serialize(EObject object) {
+		Solution t = internalSerialize(object);
+		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
+		return t.getPredecessor();
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
@@ -39,6 +39,10 @@ protected class Model_Assignment_child extends AssignmentToken  {
 	
 	public Model_Assignment_child(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.0/@alternatives");
 	}
 	
 	protected Solution createSolution() {
@@ -73,30 +77,38 @@ protected class Greeting_Group extends GroupToken {
 	public Greeting_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives");
+	}
 		
-	protected Solution createSolution() {
+	protected Solution createSolution() {	
 		Solution s1 = new Greeting_1_Assignment_name(current, this).firstSolution();
-		if(s1 == null) return null;
-		return new Greeting_0_Keyword_hallo(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Greeting_0_Keyword_hallo(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
 	}
 }
 
 // 'hallo'
 protected class Greeting_0_Keyword_hallo extends KeywordToken  {
-
-	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
 	
 	public Greeting_0_Keyword_hallo(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected Solution createSolution() {
-		return new Solution();
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(current, keyword);
-	}
+	public Keyword getGrammarElement() {
+		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
+	}	
 }
 
 // name = ID
@@ -106,12 +118,16 @@ protected class Greeting_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1");
+	}
+	
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",required)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal"); 
+			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal"); 
 			return new Solution(obj);
 		}
 		return null;

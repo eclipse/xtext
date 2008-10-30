@@ -13,10 +13,10 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class DummyLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
-		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
-		t.getPredecessor().executeAllCallbacks(strategy);
+	public IAbstractToken serialize(EObject object) {
+		Solution t = internalSerialize(object);
+		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
+		return t.getPredecessor();
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
@@ -39,6 +39,10 @@ protected class Model_Assignment_elements extends AssignmentToken  {
 	
 	public Model_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.0/@alternatives");
 	}
 	
 	protected Solution createSolution() {
@@ -73,11 +77,25 @@ protected class Element_Group extends GroupToken {
 	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives");
+	}
 		
-	protected Solution createSolution() {
+	protected Solution createSolution() {	
 		Solution s1 = new Element_1_Keyword(current, this).firstSolution();
-		if(s1 == null) return null;
-		return new Element_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Element_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
 	}
 }
 
@@ -87,11 +105,25 @@ protected class Element_0_Group extends GroupToken {
 	public Element_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
+	}
 		
-	protected Solution createSolution() {
+	protected Solution createSolution() {	
 		Solution s1 = new Element_0_1_Assignment_descriptions(current, this).firstSolution();
-		if(s1 == null) return null;
-		return new Element_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Element_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
 	}
 }
 
@@ -101,11 +133,25 @@ protected class Element_0_0_Group extends GroupToken {
 	public Element_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0");
+	}
 		
-	protected Solution createSolution() {
+	protected Solution createSolution() {	
 		Solution s1 = new Element_0_0_1_Assignment_name(current, this).firstSolution();
-		if(s1 == null) return null;
-		return new Element_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Element_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
 	}
 }
 
@@ -115,11 +161,25 @@ protected class Element_0_0_0_Group extends GroupToken {
 	public Element_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+	}
 		
-	protected Solution createSolution() {
+	protected Solution createSolution() {	
 		Solution s1 = new Element_0_0_0_1_Keyword_element(current, this).firstSolution();
-		if(s1 == null) return null;
-		return new Element_0_0_0_0_Assignment_optional(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Element_0_0_0_0_Assignment_optional(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
 	}
 }
 
@@ -130,12 +190,16 @@ protected class Element_0_0_0_0_Assignment_optional extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, !IS_REQUIRED);
 	}
 	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+	}
+	
 	protected Solution createSolution() {
 		if((value = current.getConsumable("optional",required)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("optional");
 		if("optional".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal");
+			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal");
 			return new Solution(obj);
 		}
 		return null;
@@ -144,20 +208,14 @@ protected class Element_0_0_0_0_Assignment_optional extends AssignmentToken  {
 
 // 'element'
 protected class Element_0_0_0_1_Keyword_element extends KeywordToken  {
-
-	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
 	
 	public Element_0_0_0_1_Keyword_element(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected Solution createSolution() {
-		return new Solution();
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(current, keyword);
-	}
+	public Keyword getGrammarElement() {
+		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+	}	
 }
 
 
@@ -168,12 +226,16 @@ protected class Element_0_0_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+	}
+	
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",required)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
 			return new Solution(obj);
 		}
 		return null;
@@ -188,12 +250,16 @@ protected class Element_0_1_Assignment_descriptions extends AssignmentToken  {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
 	}
 	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1");
+	}
+	
 	protected Solution createSolution() {
 		if((value = current.getConsumable("descriptions",required)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("descriptions");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"); 
 			return new Solution(obj);
 		}
 		return null;
@@ -203,20 +269,14 @@ protected class Element_0_1_Assignment_descriptions extends AssignmentToken  {
 
 // ';'
 protected class Element_1_Keyword extends KeywordToken  {
-
-	protected Keyword keyword = (Keyword)getGrammarElement("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1");
 	
 	public Element_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
-	protected Solution createSolution() {
-		return new Solution();
-	}
-	
-	public void executeCallback(IParseTreeConstructorCallback callback) {
-		callback.keywordCall(current, keyword);
-	}
+	public Keyword getGrammarElement() {
+		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1");
+	}	
 }
 
 

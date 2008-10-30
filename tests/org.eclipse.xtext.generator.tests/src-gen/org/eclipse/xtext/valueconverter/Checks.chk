@@ -1,0 +1,13 @@
+
+
+import bug250313;
+
+
+/*
+ * this check file is used to specify constraints for the derived metamodels
+ * example:
+ * context Entity WARNING "Entity names should start with a capital" :
+ *    name.toFirstUpper() == name;
+ */
+context EObject ERROR "message" :
+	true;

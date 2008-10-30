@@ -37,8 +37,8 @@ public abstract class AbstractSimpleExpressionsRuntimeConfig extends AbstractSer
 		return org.eclipse.xtext.testlanguages.parsetree.reconstr.SimpleExpressionsParseTreeConstructor.class;
 	}
 		
-	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructorCallback> getIParseTreeConstructorCallback() {
-		return org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback.class;
+	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.ITokenSerializer> getITokenSerializer() {
+		return org.eclipse.xtext.parsetree.reconstr.impl.WhitespacePreservingTokenSerializer.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer> getICrossReferenceSerializer() {
@@ -59,7 +59,7 @@ public abstract class AbstractSimpleExpressionsRuntimeConfig extends AbstractSer
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, getIAntlrTokenFileProvider())
 		.with(org.eclipse.xtext.resource.IResourceFactory.class, getIResourceFactory())
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, getIParseTreeConstructor())
-		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructorCallback.class, getIParseTreeConstructorCallback())
+		.with(org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.class, getITokenSerializer())
 		.with(org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer.class, getICrossReferenceSerializer())
 		.with(org.eclipse.xtext.parser.antlr.Lexer.class, getLexer())
 		

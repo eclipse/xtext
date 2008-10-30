@@ -10,8 +10,10 @@ RULE_SL_COMMENT=8
 '#'=14
 ')'=12
 'type'=16
+'.'=22
 'extends'=17
 'mykeyword2'=20
 '='=15
+'#3'=21
 'mykeyword1'=19
 '!'=13

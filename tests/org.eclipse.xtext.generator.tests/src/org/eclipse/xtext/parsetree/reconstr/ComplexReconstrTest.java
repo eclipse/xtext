@@ -8,9 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
-import java.io.ByteArrayOutputStream;
-import java.util.Collections;
-
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -23,8 +20,9 @@ import org.eclipse.xtext.util.EmfFormater;
 
 public class ComplexReconstrTest extends AbstractGeneratorTest {
 
-	private static final Logger logger = Logger.getLogger(ComplexReconstrTest.class);
-	
+	private static final Logger logger = Logger
+			.getLogger(ComplexReconstrTest.class);
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -57,11 +55,9 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = (EObject) getModel(model);
-		logger.debug(EmfFormater.objToStr(result, ""));
-		IParseTreeConstructor con = getParseTreeConstructor();
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		con.serialize(out, result, Collections.emptyMap());
-		return out.toString();
+		if (logger.isDebugEnabled())
+			logger.debug(EmfFormater.objToStr(result, ""));
+		return serialize(result);
 	}
 
 	public void testNormalizableCompositeNodesIncluded() throws Exception {
