@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
+import java.util.StringTokenizer;
+
 /**
  * Simple valueobject class containing all relevant attributes necessary for the
  * creation of new Xtext projects.
@@ -82,6 +84,19 @@ public class XtextProjectInfo {
 	public String getLanguageNameAbbreviation() {
 		String[] packageNames = languageName.split("\\.");
 		return packageNames[packageNames.length - 1];
+	}
+
+	/**
+	 * @return the firstFileExtension
+	 */
+	public String getFirstFileExtension() {
+		String delim = ",";
+		if (getFileExtension() != null && getFileExtension().contains(delim)) {
+			StringTokenizer tokenizer = new StringTokenizer(getFileExtension(), delim, false);
+			if (tokenizer.hasMoreTokens())
+				return tokenizer.nextToken().trim();
+		}
+		return fileExtension;
 	}
 
 }

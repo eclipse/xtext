@@ -9,14 +9,9 @@
  *******************************************************************************/
 «ENDREM»
 «DEFINE root FOR XtextProjectInfo»
-«FILE this.languageNameAbbreviation+"Grammar.java" GENERATOR_OUTLET -»
+«FILE this.languageNameAbbreviation+"Grammar.java" GRAMMAR_GENERATOR_OUTLET -»
 
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
  * generated with "/org.eclipse.xtext.xtext.ui/src/org/eclipse/xtext/xtext/ui/wizard/project/GrammarGenerator.xpt"
  *******************************************************************************/
 package «this.basePackage»;
