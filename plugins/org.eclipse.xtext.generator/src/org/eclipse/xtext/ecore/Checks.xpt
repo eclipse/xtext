@@ -1,0 +1,23 @@
+«IMPORT xtext»
+
+«EXTENSION org::eclipse::xtext::Properties»
+«EXTENSION org::eclipse::xtext::ecore::Xtext2Ecore»
+
+«DEFINE root FOR Grammar»
+«IF !getGeneratedEPackages().isEmpty»
+«FILE languageNamespace().toPath()+"/Checks.chk" SRC»
+«FOREACH getGeneratedEPackages() AS p»
+import «p.name»;
+«ENDFOREACH»
+
+/*
+ * this check file is used to specify constraints for the derived metamodels
+ * example:
+ * context Entity WARNING "Entity names should start with a capital" :
+ *    name.toFirstUpper() == name;
+ */
+context EObject ERROR "message" :
+	true;
+«ENDFILE»
+«ENDIF»
+«ENDDEFINE»

@@ -13,7 +13,7 @@ Op returns Expression:
 	Term ({Op.values+=current} values+=Term)*;
 	
 Term returns Expression:
-	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2;
+	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare;
 	
 Atom: 
 	name=ID;
@@ -31,6 +31,9 @@ Type :
 	'type' name=ID 'extends' ^extends=[Type];
 
 Ref2:
-	'#2' ref2=('mykeyword1' | STRING | 'mykeyword2') ;
+	'#2' ref2=('mykeyword1' | STRING | 'mykeyword2');
+	
+Spare:
+	'#3' id+=ID ('.' id+=ID)*;
 
 

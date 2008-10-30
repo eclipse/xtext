@@ -10,6 +10,7 @@ import xtext;
 import xtextgen;
 import predicate;
 import emf;
+import oaw;
 
 extension org::eclipse::xtext::Properties reexport;
 extension org::eclipse::xtext::Extensions reexport;
@@ -33,6 +34,9 @@ boolean isOptional(String cardinality):
 	
 boolean isMulti(String cardinality):
 	cardinality == '*' || cardinality == '+';
+	
+String simpleName(Type type):
+	type.name.split("::").last();
 
 
 

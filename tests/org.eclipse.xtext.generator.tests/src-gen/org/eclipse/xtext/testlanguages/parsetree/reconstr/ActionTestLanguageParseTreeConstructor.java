@@ -13,10 +13,10 @@ import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.Ab
 
 public class ActionTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
-	protected void internalSerialize(EObject obj, IParseTreeConstructorCallback strategy) {
-		Solution t = internalSerialize(obj);
-		if(t == null) throw new XtextSerializationException(getDescr(obj), "No rule found for serialization");
-		t.getPredecessor().executeAllCallbacks(strategy);
+	public IAbstractToken serialize(EObject object) {
+		Solution t = internalSerialize(object);
+		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
+		return t.getPredecessor();
 	}
 	
 	protected Solution internalSerialize(EObject obj) {
@@ -40,6 +40,10 @@ protected class Model_Assignment_children extends AssignmentToken  {
 	
 	public Model_Assignment_children(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.0/@alternatives");
 	}
 	
 	protected Solution createSolution() {
@@ -74,11 +78,25 @@ protected class Element_Group extends GroupToken {
 	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives");
+	}
 		
-	protected Solution createSolution() {
+	protected Solution createSolution() {	
 		Solution s1 = new Element_1_Group(current, this).firstSolution();
-		if(s1 == null) return null;
-		return new Element_0_RuleCall_Item(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Element_0_RuleCall_Item(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
 	}
 }
 
@@ -87,6 +105,10 @@ protected class Element_0_RuleCall_Item extends RuleCallToken {
 	
 	public Element_0_RuleCall_Item(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
 	}
 	
 	protected Solution createSolution() {
@@ -102,19 +124,37 @@ protected class Element_1_Group extends GroupToken {
 	public Element_1_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1");
+	}
 		
-	protected Solution createSolution() {
+	protected Solution createSolution() {	
 		Solution s1 = new Element_1_1_Assignment_items(current, this).firstSolution();
-		if(s1 == null) return null;
-		return new Element_1_0_Action_Item_items(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Element_1_0_Action_Item_items(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
 	}
 }
 
 // { current = Item . items += current }
-protected class Element_1_0_Action_Item_items extends AssignmentToken  {
+protected class Element_1_0_Action_Item_items extends ActionToken  {
 
 	public Element_1_0_Action_Item_items(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Action getGrammarElement() {
+		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0");
 	}
 	
 	protected Solution createSolution() {
@@ -131,6 +171,10 @@ protected class Element_1_1_Assignment_items extends AssignmentToken  {
 	
 	public Element_1_1_Assignment_items(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.1");
 	}
 	
 	protected Solution createSolution() {
@@ -167,19 +211,37 @@ protected class Item_Group extends GroupToken {
 	public Item_Group(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives");
+	}
 		
-	protected Solution createSolution() {
+	protected Solution createSolution() {	
 		Solution s1 = new Item_1_Assignment_name(current, this).firstSolution();
-		if(s1 == null) return null;
-		return new Item_0_Action_Thing_content(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Item_0_Action_Thing_content(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
 	}
 }
 
 // { current = Thing . content = current }
-protected class Item_0_Action_Thing_content extends AssignmentToken  {
+protected class Item_0_Action_Thing_content extends ActionToken  {
 
 	public Item_0_Action_Thing_content(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Action getGrammarElement() {
+		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0");
 	}
 	
 	protected Solution createSolution() {
@@ -198,12 +260,16 @@ protected class Item_1_Assignment_name extends AssignmentToken  {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1");
+	}
+	
 	protected Solution createSolution() {
 		if((value = current.getConsumable("name",required)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarElement("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal"); 
+			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal"); 
 			return new Solution(obj);
 		}
 		return null;

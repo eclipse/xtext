@@ -191,6 +191,10 @@ public class InstanceDescription implements IInstanceDescription {
 		return lazyGet(feature) > 0;
 	}
 
+	public boolean isConsumable(String feature, boolean allowDefault) {
+		return lazyGet(feature) > (allowDefault ? -1 : 0);
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -242,7 +246,8 @@ public class InstanceDescription implements IInstanceDescription {
 	public Object getConsumable(String feature, boolean allowDefault) {
 		EStructuralFeature f = getFeature(feature);
 		if (f != null
-				&& (isConsumable(feature) || (allowDefault && !f.isMany()))) {
+				&& (isConsumable(feature, allowDefault && !f.isMany()
+						&& !described.eIsSet(f)))) {
 			Integer counter = lazyGet(feature);
 			Object get = described.eGet(f);
 			if (f.isMany()) {

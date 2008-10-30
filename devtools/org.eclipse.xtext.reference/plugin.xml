@@ -1,0 +1,13 @@
+<plugin>
+    <extension
+         point="org.eclipse.xtend.typesystem.emf.checks">
+      
+      <metaModel
+            nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar">
+         <checkFile
+               path="org/eclipse/xtext/reference/check/Checks.chk">
+         </checkFile>
+      </metaModel>
+      
+   </extension>
+</plugin>

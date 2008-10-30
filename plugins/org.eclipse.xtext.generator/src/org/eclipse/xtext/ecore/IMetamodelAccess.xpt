@@ -14,7 +14,6 @@
 
 «EXTENSION org::eclipse::xtext::Properties»
 «EXTENSION org::eclipse::xtext::GrammarUtil»
-«EXTENSION org::eclipse::xtext::metamodelaccess::MetamodelAccess»
 
 «DEFINE metamodelAccess FOR GenService»
 «FILE genClassFQName.toJavaFilePath()-»

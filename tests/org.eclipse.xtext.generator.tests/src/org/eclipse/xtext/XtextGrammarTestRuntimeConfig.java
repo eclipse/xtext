@@ -2,7 +2,7 @@ package org.eclipse.xtext;
 
 import java.util.Set;
 
-import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
+import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
 
 /**
  * used to register components to be used at runtime.
