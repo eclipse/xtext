@@ -5,10 +5,16 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.5 2008/10/07 12:09:29 sefftinge Exp $
+ $Id: plugin.xml,v 1.6 2008/10/30 14:31:25 sefftinge Exp $
 -->
 
 <plugin>
+
+ <extension
+       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
+    <serviceRegistrationFactory
+          class="org.eclipse.xtext.XtextRuntimeConfig"/>
+ </extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -24,13 +30,18 @@
        genModel = "model/parsetree.genmodel" /> 
   </extension>
 
-  <!--
-  <extension
-        point="org.eclipse.emf.ecore.extension_parser">
-     <parser
-           class="org.eclipse.xtext.resource.metamodel.XtextMetamodelResourceFactory"
-           type="xtext">
-     </parser>
-  </extension>
--->
+     <extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="org.eclipse.xtext.services.XtextResourceFactory"
+            type="xtext">
+      </parser>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="org.eclipse.xtext.services.XtextResourceFactory"
+            type="xtext2">
+      </parser>
+   </extension>
 </plugin>
