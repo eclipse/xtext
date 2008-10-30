@@ -191,7 +191,7 @@ public class NewXtextProjectWizardPage extends WizardPage {
 			return;
 		}
 		if (!xtextProjectInfo.getBasePackage().matches("\\w+[\\w\\.]*\\w+")) {
-			setErrorMessage("Base package name must be specified (example: org.xtext.example.MyDsl)");
+			setErrorMessage("Base package name must be specified (example: org.xtext.example.mydsl)");
 			setPageComplete(false);
 			return;
 		}
@@ -214,7 +214,7 @@ public class NewXtextProjectWizardPage extends WizardPage {
 
 	private void initializeDefaultValues() {
 		String dslName = findNextValidDSLName("org.xtext.example.My", "Dsl");
-		projectText.setText("org.xtext.example.My" + dslName);
+		projectText.setText("org.xtext.example.my" + dslName.toLowerCase());
 		languageNameText.setText("org.xtext.example.My" + dslName);
 		fileExtensionText.setText(dslName.toLowerCase());
 		nsURIText.setText("http://example.xtext.org/My" + dslName);
