@@ -8,8 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.boostrap;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -29,28 +27,33 @@ import org.eclipse.xtext.resource.XtextResourceSet;
  */
 public class GenerateXtextGrammars {
 	private static final String path = "../org.eclipse.xtext";
-	private static final String uiPath = "../org.eclipse.xtext.xtext.ui_gen";
+	private static final String uiPath = "../org.eclipse.xtext.xtext.ui";
 	private static final Logger logger = Logger.getLogger(GenerateXtextGrammars.class);
 
 	public static void main(String[] args) throws Exception {
-		EcorePackage.eINSTANCE.eClass();
-		EcorePackage.eINSTANCE.getNsURI();
-		XtextStandaloneSetup.doSetup();
-		String filename = path+"/src/org/eclipse/xtext/Xtext.xtext";
-		logger.info("loading " + filename);
-		XtextStandaloneSetup.doSetup();
+		try {
+			EcorePackage.eINSTANCE.eClass();
+			EcorePackage.eINSTANCE.getNsURI();
+			XtextStandaloneSetup.doSetup();
+			String filename = path + "/src/org/eclipse/xtext/Xtext.xtext";
+			logger.info("loading " + filename);
+			XtextStandaloneSetup.doSetup();
 
-		GeneratorFacade.cleanFolder(path+"/src-gen");
-		GeneratorFacade.cleanFolder(uiPath+"/src-gen");
-		ResourceSet rs = new XtextResourceSet();
-		XtextResource resource = (XtextResource) rs.createResource(URI.createURI(filename));
-		resource.load(null);
-		List<SyntaxError> parseErrors = resource.getParseResult().getParseErrors();
-		for (SyntaxError syntaxError : parseErrors) {
-			logger.error(syntaxError.getMessage());
+			GeneratorFacade.cleanFolder(path + "/src-gen");
+			GeneratorFacade.cleanFolder(uiPath + "/src-gen");
+			ResourceSet rs = new XtextResourceSet();
+			XtextResource resource = (XtextResource) rs.createResource(URI.createURI(filename));
+			resource.load(null);
+			List<SyntaxError> parseErrors = resource.getParseResult().getParseErrors();
+			for (SyntaxError syntaxError : parseErrors) {
+				logger.error(syntaxError.getMessage());
+			}
+			Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
+			GeneratorFacade.generate(grammarModel, path, uiPath, "xtext", "xtext2");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
-		Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
-		GeneratorFacade.generate(grammarModel, path, uiPath, "xtext", "xtext2");
 	}
 
 }
