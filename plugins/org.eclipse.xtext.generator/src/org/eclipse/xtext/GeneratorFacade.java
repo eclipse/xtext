@@ -49,7 +49,7 @@ public class GeneratorFacade {
 
 	private static Logger log = Logger.getLogger(GeneratorFacade.class);
 
-	public static void generate(Grammar grammarModel, String srcGenPath, String srcPath, String uiProjectPath,
+	public static void generate(Grammar grammarModel, String runtimeProjectPath, String uiProjectPath,
 			String... modelFileExtensions) throws IOException {
 		List<EObject> list = EcoreUtil2.eAllContentsAsList(grammarModel);
 		IssuesImpl issues = new IssuesImpl();
@@ -69,7 +69,7 @@ public class GeneratorFacade {
 		}
 		if (!allSyntaxErrors.isEmpty())
 			throw new IllegalStateException("The grammar has syntax errors.");
-		GenModel genModel = assembleGeneratorModel(grammarModel, srcGenPath, srcPath, uiProjectPath,
+		GenModel genModel = assembleGeneratorModel(grammarModel, runtimeProjectPath, uiProjectPath,
 				modelFileExtensions);
 		generate(genModel);
 	}
@@ -120,8 +120,7 @@ public class GeneratorFacade {
 			}
 		}
 
-		facade.evaluate("org::eclipse::xtext::ILanguage::root", genModel);
-		facade.evaluate("org::eclipse::xtext::StandaloneSetup::root", genModel);
+		facade.evaluate("org::eclipse::xtext::RuntimePlugin::root", genModel);
 
 		if (genModel.getUiPluginBundleID() != null) {
 			facade.evaluate("org::eclipse::xtext::ui::UIPlugin::root", genModel);
@@ -133,7 +132,7 @@ public class GeneratorFacade {
 		return genModel.getOutlets().get(0).getTargetFolder();
 	}
 
-	private static GenModel assembleGeneratorModel(Grammar grammarModel, String srcGenPath, String srcPath,
+	private static GenModel assembleGeneratorModel(Grammar grammarModel, String runtimeProjectPath,
 			String uiProjectPath, String... modelFileExtensions) {
 		String languageName = GrammarUtil.getName(grammarModel);
 		String namespace = GrammarUtil.getNamespace(grammarModel);
@@ -144,20 +143,18 @@ public class GeneratorFacade {
 		genModel.setFileHeader("Generated with Xtext");
 		genModel.setLanguageInterfaceFQName(namespace + ".I" + languageName);
 
-		genModel.getOutlets().add(outlet("", srcGenPath));
-		org.eclipse.xtext.xtextgen.Outlet srcOutlet = outlet("SRC", srcPath);
-		srcOutlet.setOverwrite(false);
-		genModel.getOutlets().add(srcOutlet);
+		genModel.getOutlets().add(outlet("", runtimeProjectPath+"/src-gen", true));
+		genModel.getOutlets().add(outlet("SRC", runtimeProjectPath+"/src", false));
+		genModel.getOutlets().add(outlet("RUNTIME", runtimeProjectPath, false));
 
 		if (uiProjectPath != null) {
 			String uiPluginID = uiProjectPath.substring(uiProjectPath.lastIndexOf('/') + 1);
 			genModel.setNonUIPluginBundleID(namespace);
 			genModel.setUiPluginBundleID(uiPluginID);
 
-			genModel.getOutlets().add(outlet("UI", uiProjectPath));
-			genModel.getOutlets().add(outlet("UI_SRC_GEN", uiProjectPath + "/src-gen"));
-			genModel.getOutlets().add(outlet("UI_MANIFEST", uiProjectPath + "/META-INF"));
-			genModel.getOutlets().add(outlet("UI_TEMPLATES", uiProjectPath + "/templates"));
+			genModel.getOutlets().add(outlet("UI", uiProjectPath, false));
+			genModel.getOutlets().add(outlet("UI_SRC_GEN", uiProjectPath + "/src-gen", true));
+//			genModel.getOutlets().add(outlet("UI_TEMPLATES", uiProjectPath + "/templates", true));
 		}
 
 		GenService grammarAccessService = XtextgenFactory.eINSTANCE.createGenService();
@@ -166,11 +163,11 @@ public class GeneratorFacade {
 		grammarAccessService.setTemplatePath("org::eclipse::xtext::grammaraccess::GrammarAccess::root");
 		grammarAccessService.setExtensionPointID("org.eclipse.xtext.ui.grammarAccess");
 		genModel.getServices().add(grammarAccessService);
-
+		
 		GenService metamodelAccessService = XtextgenFactory.eINSTANCE.createGenService();
 		metamodelAccessService.setServiceInterfaceFQName("org.eclipse.xtext.IMetamodelAccess");
 		metamodelAccessService.setGenClassFQName(namespace + ".services." + languageName + "MetamodelAccess");
-		metamodelAccessService.setTemplatePath("org::eclipse::xtext::metamodelaccess::MetamodelAccess::root");
+		metamodelAccessService.setTemplatePath("org::eclipse::xtext::ecore::Ecore::root");
 		metamodelAccessService.setExtensionPointID("org.eclipse.xtext.ui.metamodelAccess");
 		genModel.getServices().add(metamodelAccessService);
 
@@ -219,10 +216,8 @@ public class GeneratorFacade {
 			genModel.getServices().add(parsetreeReconstructorService);
 
 			GenService serializationStrategy = XtextgenFactory.eINSTANCE.createGenService();
-			serializationStrategy
-					.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructorCallback");
-			serializationStrategy
-					.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.callbacks.WhitespacePreservingCallback");
+			serializationStrategy.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.ITokenSerializer");
+			serializationStrategy.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.WhitespacePreservingTokenSerializer");
 			genModel.getServices().add(serializationStrategy);
 
 			GenService crossRefSerializer = XtextgenFactory.eINSTANCE.createGenService();
@@ -258,11 +253,11 @@ public class GeneratorFacade {
 		return genModel;
 	}
 
-	private static org.eclipse.xtext.xtextgen.Outlet outlet(String name, String srcGenPath) {
+	private static org.eclipse.xtext.xtextgen.Outlet outlet(String name, String srcGenPath, boolean overwrite) {
 		org.eclipse.xtext.xtextgen.Outlet result = XtextgenFactory.eINSTANCE.createOutlet();
 		result.setName(name);
 		result.setTargetFolder(srcGenPath);
-		result.setOverwrite(true);
+		result.setOverwrite(overwrite);
 		return result;
 	}
 

@@ -29,6 +29,7 @@ import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -62,6 +63,10 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	
 	public IServiceScope getCurrentServiceScope() {
 		return currentScope;
+	}
+
+	protected String serialize(EObject obj) {
+		return SerializerUtil.serialize(currentScope, obj);
 	}
 
 	@Override

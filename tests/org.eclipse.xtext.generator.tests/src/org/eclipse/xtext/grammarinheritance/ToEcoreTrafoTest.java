@@ -94,6 +94,6 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 
 	@Override
 	protected String[] importedExtensions() {
-		return new String[] { "org::eclipse::xtext::xtext2ecore::Xtext2Ecore" };
+		return new String[] { "org::eclipse::xtext::ecore::Xtext2Ecore" };
 	}
 }

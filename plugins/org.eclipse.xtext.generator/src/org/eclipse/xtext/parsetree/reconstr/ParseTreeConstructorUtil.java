@@ -2,9 +2,7 @@ package org.eclipse.xtext.parsetree.reconstr;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
@@ -16,9 +14,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.parsetree.reconstr.callbacks.SimpleSerializingCallback;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
-import org.eclipse.xtext.service.IServiceScope;
+import org.eclipse.xtext.parsetree.reconstr.impl.SimpleTokenSerializer;
 import org.eclipse.xtext.service.ServiceRegistry;
 
 public class ParseTreeConstructorUtil {
@@ -62,17 +58,23 @@ public class ParseTreeConstructorUtil {
 		return "UnknownRule_" + r;
 	}
 
+	private static IParseTreeConstructor AST_SERIALIZER = ServiceRegistry
+			.getService(XtextStandaloneSetup.getServiceScope(),
+					IParseTreeConstructor.class);
+	private static ITokenSerializer TOKEN_SERIALIZER = createTokenSerializer();
+
+	private static ITokenSerializer createTokenSerializer() {
+		ITokenSerializer ts = new SimpleTokenSerializer();
+		ServiceRegistry.injectServices(XtextStandaloneSetup.getServiceScope(),
+				ts);
+		return ts;
+	}
+
 	public static String grammarFragmentToStr(EObject obj) {
 		try {
-			IServiceScope ss = XtextStandaloneSetup.getServiceScope();
-			IParseTreeConstructor ser = ServiceRegistry.getService(ss,
-					IParseTreeConstructor.class);
-			SimpleSerializingCallback cb = new SimpleSerializingCallback();
-			ServiceRegistry.injectServices(ss, cb);
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			Map<String, Object> o = new HashMap<String, Object>();
-			o.put(AbstractParseTreeConstructor.OPTION_SERIALIZER_STRATEGY, cb);
-			ser.serialize(out, obj, o);
+			 SerializerUtil
+					.serialize(AST_SERIALIZER, TOKEN_SERIALIZER, obj, out);
 			return out.toString();
 		} catch (Throwable e) {
 			return "(error)";

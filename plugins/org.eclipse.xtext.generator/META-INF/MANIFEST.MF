@@ -20,6 +20,11 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xpand,
  org.eclipse.xtend.typesystem.emf,
  org.eclipse.xtend.util.stdlib,
- org.antlr.gen
+ org.antlr.gen,
+ org.eclipse.emf.codegen;bundle-version="2.4.0",
+ org.eclipse.emf.codegen.ecore;bundle-version="2.4.0",
+ org.eclipse.emf.importer.ecore;bundle-version="2.4.0",
+ org.eclipse.emf.importer;bundle-version="2.4.0",
+ org.eclipse.emf.codegen.ecore.ui;bundle-version="2.4.0"
 Bundle-ActivationPolicy: lazy
 

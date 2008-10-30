@@ -16,7 +16,7 @@
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
 «DEFINE manifest_mf FOR GenModel»
-«FILE "MANIFEST.MF" UI_MANIFEST -»
+«FILE "META-INF/MANIFEST.MF" UI-»
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: «languageName()» UI Plug-in

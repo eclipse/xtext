@@ -9,18 +9,34 @@
  *******************************************************************************/
 «ENDREM»
 
-«IMPORT xtext»
 «IMPORT xtextgen»
 
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
-«EXTENSION org::eclipse::xtext::ui::UIProperties»
+«EXTENSION org::eclipse::xtext::ecore::Xtext2Ecore»
 
 «DEFINE root FOR GenModel»
-    «EXPAND Plugin::plugin_xml»
-    «EXPAND ServiceConfig::root»
-    «EXPAND Manifest::manifest_mf»
-    «EXPAND contentassist::GenProposalProvider::root»
-    «copyFiles("org/eclipse/xtext/ui", outletPath("UI") + "/icons/", { "editor.gif" })»  
+«EXPAND ILanguage::root»
+«EXPAND StandaloneSetup::root»
+«EXPAND pluginxml»
 «ENDDEFINE»
 
+«DEFINE pluginxml FOR GenModel»
+«IF !getGeneratedEPackages(grammar()).isEmpty»
+«FILE "plugin.xml" RUNTIME-»
+<plugin>
+    <extension
+         point="org.eclipse.xtend.typesystem.emf.checks">
+      «FOREACH getGeneratedEPackages(grammar()) AS p»
+      <metaModel
+            nsURI="«p.nsURI»">
+         <checkFile
+               path="«languageNamespace().toPath()»/check/Checks.chk">
+         </checkFile>
+      </metaModel>
+      «ENDFOREACH»
+   </extension>
+</plugin>
+«ENDFILE»
+«ENDIF»
+«ENDDEFINE»
