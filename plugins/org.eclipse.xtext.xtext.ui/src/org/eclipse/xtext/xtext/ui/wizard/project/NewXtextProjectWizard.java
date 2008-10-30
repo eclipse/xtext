@@ -191,7 +191,9 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 			final IProject dslProject = EclipseResourceUtil.createProject(xtextProjectInfo.getProjectName(),
 					SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(Arrays.asList(
 							"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"", "org.eclipse.xtext",
-							"org.eclipse.xtext.generator")), Arrays.asList(basePackage, basePackage + ".parser",
+							"org.eclipse.xtext.generator", "org.apache.log4j", "org.antlr", "org.eclipse.xtend",
+							"org.eclipse.xtend.typesystem.emf", "org.eclipse.xpand", "org.apache.commons.logging",
+							"org.eclipse.xtend.util.stdlib")), Arrays.asList(basePackage, basePackage + ".parser",
 							basePackage + ".parser.internal", basePackage + ".parsetree.reconstr", basePackage
 									+ ".services"), null, monitor, NewXtextProjectWizard.this.getShell());
 
@@ -207,8 +209,7 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 							"org.eclipse.xtext.ui.core", "org.eclipse.xtext.ui.common",
 							"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"",
 							"org.eclipse.ui.editors;bundle-version=\"3.4.0\"")), Arrays.asList(basePackage
-							+ ".ui.services"), basePackage + ".ui.Activator", monitor, NewXtextProjectWizard.this
-							.getShell());
+							+ ".ui.services"), null, monitor, NewXtextProjectWizard.this.getShell());
 
 			if (dslUIProject == null) {
 				return;
@@ -216,11 +217,12 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 			monitor.worked(1);
 
 			// Generator Project
+			IProject dslGeneratorProject = null;
 			if (xtextProjectInfo.isCreateGeneratorProject()) {
-				final IProject dslGeneratorProject = EclipseResourceUtil.createProject(xtextProjectInfo
-						.getProjectName()
-						+ ".generator", SRC_FOLDER_LIST, Collections.<IProject> emptyList(),
-						new LinkedHashSet<String>(), Collections.<String> emptyList(), null, monitor,
+				dslGeneratorProject = EclipseResourceUtil.createProject(xtextProjectInfo.getProjectName()
+						+ ".generator", SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(
+						Arrays.asList(xtextProjectInfo.getProjectName().toLowerCase(), "org.eclipse.xtext",
+								"org.eclipse.xtext.generator")), Collections.<String> emptyList(), null, monitor,
 						NewXtextProjectWizard.this.getShell());
 
 				if (dslGeneratorProject == null) {
@@ -234,14 +236,23 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 
 			OutputImpl output = new OutputImpl();
 			String defaultEncoding = System.getProperty("file.encoding");
-			output.addOutlet(new Outlet(false, defaultEncoding, "GENERATOR_OUTLET", true, basePackageFolder
+			output.addOutlet(new Outlet(false, defaultEncoding, "GRAMMAR_GENERATOR_OUTLET", true, basePackageFolder
 					.getLocation().makeAbsolute().toOSString()));
+			if (dslGeneratorProject != null) {
+				output.addOutlet(new Outlet(false, defaultEncoding, "GENERATOR_OUTLET", true, createSubPackages(
+						basePackage, dslGeneratorProject, (IFolder) dslGeneratorProject.findMember(SRC_ROOT), monitor)
+						.getLocation().makeAbsolute().toOSString()));
+				EclipseResourceUtil.createFile("Model." + xtextProjectInfo.getFirstFileExtension(), createSubPackages(
+						"model", dslGeneratorProject, (IFolder) dslGeneratorProject.findMember(SRC_ROOT), monitor),
+						"//Your model", monitor);
+			}
 			output.addOutlet(new Outlet(false, defaultEncoding, "ACTIVATOR_OUTLET", true, dslUIProject.getFolder(
 					SRC_ROOT + IPath.SEPARATOR + xtextProjectInfo.getBasePath() + IPath.SEPARATOR + "ui").getLocation()
 					.makeAbsolute().toOSString()));
 			XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null, Collections.singletonMap(
 					"xtextProjectInfo", new Variable("xtextProjectInfo", xtextProjectInfo)), null, null);
 			execCtx.registerMetaModel(new JavaMetaModel());
+
 			// generate generator and activator for dsl and dsl.ui project
 			XpandFacade facade = XpandFacade.create(execCtx);
 			facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::XtextTemplateFile::root",
@@ -249,7 +260,8 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 			facade
 					.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::GrammarGenerator::root",
 							xtextProjectInfo);
-			facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::Activator::root", xtextProjectInfo);
+			facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::Generator::root", xtextProjectInfo);
+
 			EclipseResourceUtil.createFile("dummy.properties", createSubPackages(basePackage + ".ui.services",
 					dslUIProject, (IFolder) dslUIProject.findMember(SRC_ROOT), monitor), "a=b", monitor);
 

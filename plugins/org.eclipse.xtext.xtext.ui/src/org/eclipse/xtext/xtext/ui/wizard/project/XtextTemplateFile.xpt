@@ -9,7 +9,7 @@
  *******************************************************************************/
 «ENDREM»
 «DEFINE root FOR XtextProjectInfo»
-«FILE this.languageNameAbbreviation+".xtext" GENERATOR_OUTLET -»
+«FILE this.languageNameAbbreviation+".xtext" GRAMMAR_GENERATOR_OUTLET -»
 language «this.basePackage».«this.languageNameAbbreviation»
 generate «this.languageNameAbbreviation» "«this.nsURI»"
 
@@ -26,5 +26,4 @@ Bar :
 	"bar" name=ID;
 «ENDFILE»
 «ENDDEFINE»
-
 

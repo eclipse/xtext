@@ -9,62 +9,48 @@
  *******************************************************************************/
 «ENDREM»
 «DEFINE root FOR XtextProjectInfo»
-«FILE "Genrator.java" GENERATOR_OUTLET -»
-/*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- *******************************************************************************/
+«FILE "Generator.java" GENERATOR_OUTLET -»
+
 package «this.basePackage»;
 
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.GeneratorFacade;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 /**
- * Run this class to start the Generator
- * generated with /org.eclipse.xtext.xtext.ui/src/org/eclipse/xtext/xtext/ui/wizard/project/Generator.xpt
+ * Run this class to start the Generator<br>
+ * generated with: <br>
+ * org.eclipse.xtext.xtext.ui/src/org/eclipse/xtext/xtext/ui/wizard/project/Generator.xpt
  */
 public class Generator {
-	private Logger log = Logger.getLogger(«this.languageNameAbbreviation»Grammar.class);
-	
-    private static final String SRC_PATH = "src";
-    private static final String SRC_GEN_PATH = "src-gen";
-    private static final String UI_PATH = "../«this.projectName».ui_gen";
+	private static final String SRC_GEN_PATH = "src-gen";
 
-    public void generate() throws IOException {
-        XtextStandaloneSetup.doSetup();
+	public void generate() throws IOException {
+		«this.languageNameAbbreviation»GrammarStandaloneSetup.doSetup();
 
-        GeneratorFacade.cleanFolder(SRC_GEN_PATH);
+		GeneratorFacade.cleanFolder(SRC_GEN_PATH);
 
-        String classpathUri = "classpath:/«this.basePath»/«this.languageNameAbbreviation».xtext";
-        log.info("loading " + classpathUri);
-        ResourceSet rs = new XtextResourceSet();
-        Resource resource = rs.createResource(new ClassloaderClasspathUriResolver().resolve(null, URI.createURI(classpathUri)));
-        resource.load(null);
-        Grammar grammarModel = (Grammar) resource.getContents().get(0);
+		String classpathUri = "classpath:/model/Model.«this.firstFileExtension»";
+		ResourceSet rs = new XtextResourceSet();
+		Resource resource = rs
+				.createResource(new ClassloaderClasspathUriResolver().resolve(
+						null, URI.createURI(classpathUri)));
+		resource.load(null);
 
-        GeneratorFacade.generate(grammarModel, SRC_GEN_PATH, SRC_PATH, UI_PATH, "«this.fileExtension»");
-        log.info("Done.");
-    }
+	}
 
-    public static void main(String[] args) throws IOException {
-        «this.languageNameAbbreviation»Grammar generator = new «this.languageNameAbbreviation»Grammar();
-        generator.generate();
-    }
+	public static void main(String[] args) throws IOException {
+		Generator generator = new Generator();
+		generator.generate();
+	}
 
 }
+
 
 «ENDFILE»
 «ENDDEFINE»
