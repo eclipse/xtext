@@ -34,32 +34,35 @@ import org.eclipse.xtext.valueconverter.Bug250313;
  * 
  */
 public class GenerateAllTestGrammars {
-	private static String path= ".";
-	
+	private static String path = ".";
+
 	private static Logger log = Logger.getLogger(GenerateAllTestGrammars.class);
 
-	public final static Class<?>[] testclasses = new Class[] { LangA.class, AbstractTestLanguage.class,ConcreteTestLanguage.class,XtextGrammarTest.class, MetamodelRefTest.class,
-			DummyLanguage.class, TestLanguage.class, SimpleReconstrTest.class, ComplexReconstrTest.class,
-			LexerLanguage.class, SimpleExpressions.class, ActionTestLanguage.class, OptionalEmptyLanguage.class,
-			ReferenceGrammar.class, LookaheadLanguage.class,Bug250313.class
-	};
+	public final static Class<?>[] testclasses = new Class[] { LangA.class, AbstractTestLanguage.class,
+			ConcreteTestLanguage.class, XtextGrammarTest.class, MetamodelRefTest.class, DummyLanguage.class,
+			TestLanguage.class, SimpleReconstrTest.class, ComplexReconstrTest.class, LexerLanguage.class,
+			SimpleExpressions.class, ActionTestLanguage.class, OptionalEmptyLanguage.class, ReferenceGrammar.class,
+			LookaheadLanguage.class, Bug250313.class };
 
 	public static void main(String[] args) throws Exception {
-		XtextStandaloneSetup.doSetup();
-		if (args.length > 0) {
-			path = args[0];
-		}
-		GeneratorFacade.cleanFolder(path+"/src-gen");
-		for (Class<?> c : testclasses) {
-			String filename = "classpath:/" + c.getName().replace('.', '/') + ".xtext";
-			log.info("loading " + filename);
-			ResourceSetImpl rs = new XtextResourceSet();
-			URI uri = URI.createURI(filename);
-			Resource resource = rs.createResource(uri);
-			resource.load(null);
-			Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
-			GeneratorFacade.generate(grammarModel, path, null, c.getSimpleName().toLowerCase());
+		try {
+			XtextStandaloneSetup.doSetup();
+			if (args.length > 0) {
+				path = args[0];
+			}
+			GeneratorFacade.cleanFolder(path + "/src-gen");
+			for (Class<?> c : testclasses) {
+				String filename = "classpath:/" + c.getName().replace('.', '/') + ".xtext";
+				log.info("loading " + filename);
+				ResourceSetImpl rs = new XtextResourceSet();
+				URI uri = URI.createURI(filename);
+				Resource resource = rs.createResource(uri);
+				resource.load(null);
+				Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
+				GeneratorFacade.generate(grammarModel, path, null, c.getSimpleName().toLowerCase());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
-
 }

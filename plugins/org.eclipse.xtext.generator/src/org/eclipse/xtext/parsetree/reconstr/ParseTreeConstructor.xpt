@@ -20,7 +20,7 @@
 «EXTENSION org::eclipse::xtend::util::stdlib::io»
 
 «DEFINE root FOR GenService»
-«FILE genClassFQName.toJavaFilePath()-»
+«FILE genClassFQName.toJavaFilePath() SRC_GEN-»
 /*
 «fileHeader()»
 */

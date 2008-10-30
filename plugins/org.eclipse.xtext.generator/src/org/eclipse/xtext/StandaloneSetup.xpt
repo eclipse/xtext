@@ -16,7 +16,7 @@
 «EXTENSION org::eclipse::xtext::Properties»
 
 «DEFINE root FOR GenModel»
-«FILE grammar().standaloneSetupClass().toJavaFilePath()-»
+«FILE grammar().standaloneSetupClass().toJavaFilePath() SRC_GEN-»
 /*
 «fileHeader()»
 */
@@ -74,7 +74,7 @@ public abstract class «grammar().standaloneSetupClass().toSimpleName()» {
 }
 «ENDFILE»
 
-«FILE runtimeConfigClass(grammar()).toJavaPackage().toPath()+"/Abstract"+runtimeConfigClass(grammar()).toSimpleName()+".java"-»
+«FILE runtimeConfigClass(grammar()).toJavaPackage().toPath()+"/Abstract"+runtimeConfigClass(grammar()).toSimpleName()+".java" SRC_GEN-»
 package «runtimeConfigClass(grammar()).toJavaPackage()»;
 
 import java.util.Set;

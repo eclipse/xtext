@@ -64,6 +64,9 @@ runtimeConfigClass(Grammar this) :
 
 uiConfigClass() :
 	grammar().getId() + "UiConfig";
+
+generatedUiConfigClass() :
+	grammar().getNamespace()+".Gen"+grammar().getName() + "UiConfig";
 	
 uiGenProposalProviderClass() :
 	grammar().getId() + "GenProposalProvider";

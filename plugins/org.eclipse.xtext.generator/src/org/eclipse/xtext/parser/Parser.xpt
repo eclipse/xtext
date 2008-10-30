@@ -17,5 +17,5 @@
 «DEFINE root FOR GenService»
 	«EXPAND IParser::parser»
 	«EXPAND AntlrGrammar::grammar»
-	«runAntlrTool(outletPath("") + "/" +internalAntlrGrammarFullPath())»
+	«runAntlrTool(outletPath("SRC_GEN") + "/" +internalAntlrGrammarFullPath())»
 «ENDDEFINE»

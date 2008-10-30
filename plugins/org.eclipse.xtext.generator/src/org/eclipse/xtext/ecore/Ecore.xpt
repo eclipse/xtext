@@ -17,7 +17,7 @@
 
 «DEFINE root FOR GenService»
 	«EXPAND IMetamodelAccess::metamodelAccess»
-	«getGeneratedEPackages(grammar()).collect(m|saveMetamodel(m, outletPath("") + "/" + languageNamespace().toPath()))»
+	«getGeneratedEPackages(grammar()).collect(m|saveMetamodel(m, outletPath("SRC_GEN") + "/" + languageNamespace().toPath()))»
 	
 	«EXPAND Checks::root FOR grammar()»
 «ENDDEFINE»

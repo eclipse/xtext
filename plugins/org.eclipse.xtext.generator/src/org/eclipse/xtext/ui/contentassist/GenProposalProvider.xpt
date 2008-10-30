@@ -18,7 +18,7 @@
 «EXTENSION org::eclipse::xtext::ui::UIProperties»
 
 «DEFINE root FOR GenModel»
-«FILE "src-gen/"+uiGenProposalProviderClass().toJavaFilePath() UI -»
+«FILE uiGenProposalProviderClass().toJavaFilePath() UI_SRC_GEN -»
 /*
 «fileHeader()»
 */

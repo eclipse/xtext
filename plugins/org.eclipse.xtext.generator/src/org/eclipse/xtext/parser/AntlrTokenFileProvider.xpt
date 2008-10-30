@@ -17,7 +17,7 @@
 «EXTENSION org::eclipse::xtext::parser::Parser»
 
 «DEFINE root FOR GenService»
-«FILE genClassFQName.toJavaFilePath()-»
+«FILE genClassFQName.toJavaFilePath() SRC_GEN-»
 /*
 «fileHeader()»
 */

@@ -15,7 +15,7 @@
 «EXTENSION org::eclipse::xtext::Properties»
 
 «DEFINE root FOR GenService»
-«FILE genClassFQName.toJavaFilePath()-»
+«FILE genClassFQName.toJavaFilePath() SRC_GEN-»
 /*
 «fileHeader()»
 */
