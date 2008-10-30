@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -47,6 +48,9 @@ import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
  * @author Dennis Hübner - Initial contribution and API
  */
 public class DefaultContentAssistProcessor implements IContentAssistProcessor {
+
+	// logger available to subclasses
+	protected final Logger logger = Logger.getLogger(getClass());
 
 	@Inject
 	private IProposalProvider proposalProvider;
@@ -84,9 +88,9 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 				List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
-				Set<AbstractElement> calculatePossibleElementSet = calculatePossibleElementSet(lastCompleteNode, grammarElement);
-				for (Iterator<AbstractElement> iterator = calculatePossibleElementSet
-						.iterator(); iterator.hasNext();) {
+				Set<AbstractElement> calculatePossibleElementSet = calculatePossibleElementSet(lastCompleteNode,
+						grammarElement);
+				for (Iterator<AbstractElement> iterator = calculatePossibleElementSet.iterator(); iterator.hasNext();) {
 					AbstractElement nextElement = iterator.next();
 
 					List<EObject> resolvedElementOrRuleList = resolveElement(nextElement);
@@ -96,7 +100,8 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				}
 
 				if (completionProposalList != null) {
-					List<? extends ICompletionProposal> sortAndFilter = proposalProvider.sortAndFilter(completionProposalList);
+					List<? extends ICompletionProposal> sortAndFilter = proposalProvider
+							.sortAndFilter(completionProposalList);
 					return (ICompletionProposal[]) sortAndFilter.toArray(new ICompletionProposal[] {});
 
 				}
@@ -120,15 +125,36 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 				Assignment assignment = (Assignment) abstractElement;
 
-				ParserRule lexerRule = GrammarUtil.containingParserRule(assignment);
+				ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
 
-				Method method = findMethod(proposalProvider.getClass(),
-						"complete" + firstLetterCapitalized(lexerRule.getName())
-								+ firstLetterCapitalized(assignment.getFeature()), Assignment.class, EObject.class,
+				Method method = findMethod(proposalProvider.getClass(), "complete"
+						+ firstLetterCapitalized(parserRule.getName())
+						+ firstLetterCapitalized(assignment.getFeature()), Assignment.class, EObject.class,
 						String.class, IDocument.class, int.class);
+				Object model = currentLeafNode;
 
-				Collection<? extends ICompletionProposal> assignmentProposalList = invokeMethod(method, proposalProvider,
-						assignment, currentLeafNode, prefix, xtextDocument, offset);
+				// prefer assignment completion proposal method with custom return types (class) over EObject ones
+				if (parserRule.getType() != null) {
+
+					try {
+						Class<?> type = Class.forName(parserRule.getType().getAlias() + "."
+								+ parserRule.getType().getName());
+						method = findMethod(proposalProvider.getClass(), "complete"
+								+ firstLetterCapitalized(parserRule.getName())
+								+ firstLetterCapitalized(assignment.getFeature()), Assignment.class, type,
+								String.class, IDocument.class, int.class);
+						model = ((CompositeNode) currentLeafNode.eContainer()).getElement();
+					}
+					catch (ClassNotFoundException e) {
+						if (logger.isTraceEnabled()) {
+							logger.trace("Custom type '" + parserRule.getType().getAlias() + "."
+									+ parserRule.getType().getName() + "' could not be determined.");
+						}
+					}
+				}
+
+				Collection<? extends ICompletionProposal> assignmentProposalList = invokeMethod(method,
+						proposalProvider, assignment, model, prefix, xtextDocument, offset);
 
 				if (null != assignmentProposalList) {
 					completionProposalList.addAll(assignmentProposalList);
@@ -138,32 +164,31 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 			else if (abstractElement instanceof RuleCall) {
 
 				List<? extends ICompletionProposal> ruleCallProposalList = this.proposalProvider.completeRuleCall(
-						(RuleCall) abstractElement, currentLeafNode, prefix, xtextDocument,offset);
+						(RuleCall) abstractElement, currentLeafNode, prefix, xtextDocument, offset);
 
 				if (null != ruleCallProposalList) {
 					completionProposalList.addAll(ruleCallProposalList);
 				}
-				
+
 				AbstractRule calledRule = GrammarUtil.calledRule((RuleCall) abstractElement);
-				
-				if (calledRule.getType()!=null) {
-					
+
+				if (calledRule.getType() != null) {
+
 					TypeRef typeRef = calledRule.getType();
 
-					Method method = findMethod(proposalProvider.getClass(),
-							"complete" + firstLetterCapitalized(typeRef.getAlias())
-									+ firstLetterCapitalized(typeRef.getName()), RuleCall.class, EObject.class,
-							String.class, IDocument.class, int.class);
-					
+					Method method = findMethod(proposalProvider.getClass(), "complete"
+							+ firstLetterCapitalized(typeRef.getAlias()) + firstLetterCapitalized(typeRef.getName()),
+							RuleCall.class, EObject.class, String.class, IDocument.class, int.class);
+
 					Collection<? extends ICompletionProposal> proposalList = invokeMethod(method, proposalProvider,
 							abstractElement, currentLeafNode, prefix, xtextDocument, offset);
-					
+
 					if (null != proposalList) {
 						completionProposalList.addAll(proposalList);
 					}
 
-				} 
-				
+				}
+
 			}
 		}
 	}
@@ -401,7 +426,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 	@SuppressWarnings("unchecked")
 	private final Collection<ICompletionProposal> invokeMethod(Method method, Object target, Object... args) {
-		
+
 		try {
 			return (Collection<ICompletionProposal>) method.invoke(target, args);
 		}
