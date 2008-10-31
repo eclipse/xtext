@@ -78,10 +78,6 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 
 	private IServiceScope scope;
 
-	public boolean isEditorSelectionUpdating;
-
-	public boolean isOutlineSelectionUpdating;
-
 	// TODO private IFoldingUpdater foldingSupport;
 
 	public XtextEditor() {
@@ -109,10 +105,6 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 	private final class OutlineSelectionChangedListener extends AbstractSelectionChangedListener {
 
 		public void selectionChanged(SelectionChangedEvent event) {
-			updateSelection(event);
-		}
-
-		protected void updateSelection(SelectionChangedEvent event) {
 			ISelection sel = event.getSelection();
 			if (sel instanceof IStructuredSelection) {
 				IStructuredSelection structuredSelection = (IStructuredSelection) sel;
@@ -124,18 +116,18 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 							EObject astNode = resource.getResourceSet().getEObject(uri, true);
 							NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(astNode);
 							CompositeNode parserNode = nodeAdapter.getParserNode();
-
+			
 							AbstractNode selectionNode = findSelectionNode(parserNode);
 							int offset = selectionNode.getOffset();
 							int length = selectionNode.getLength();
-
+			
 							getSourceViewer().revealRange(offset, length);
 							getSourceViewer().setSelectedRange(offset, length);
-
+			
 							return null;
 						}
 					});
-
+			
 				}
 			}
 		}
@@ -178,32 +170,28 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 	 */
 	private final class EditorSelectionChangedListener extends AbstractSelectionChangedListener {
 		public void selectionChanged(SelectionChangedEvent event) {
-			handleSelectionChangedSourcePage(event);
-		}
-
-		protected void handleSelectionChangedSourcePage(SelectionChangedEvent event) {
 			ISelection selection = event.getSelection();
 			if (!selection.isEmpty() && selection instanceof ITextSelection) {
-
+			
 				final ITextSelection textSel = (ITextSelection) selection;
-
+			
 				getDocument().readOnly(new UnitOfWork<Object>() {
-					public CompositeNode exec(XtextResource resource) throws Exception {
+					public Object exec(XtextResource resource) throws Exception {
 						IParseResult parseResult = resource.getParseResult();
 						Assert.isNotNull(parseResult);
 						CompositeNode rootNode = parseResult.getRootNode();
-
+			
 						// Get the current element from the offset
 						int offset = textSel.getOffset();
 						AbstractNode node = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
-
+			
 						// Synchronize the outline page
 						synchronizeOutlinePage(node);
-
+			
 						return null;
 					}
 				});
-
+			
 			}
 		}
 	}
@@ -227,7 +215,7 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 		return true;
 	}
 
-	public void synchronizeOutlinePage(AbstractNode node) {
+	private void synchronizeOutlinePage(AbstractNode node) {
 		ISelection selection = StructuredSelection.EMPTY;
 
 		if (shouldSynchronizeOutlinePage()) {
