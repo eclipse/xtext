@@ -32,6 +32,7 @@ import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken;
 import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * An EMF resource that reads and writes models of an Xtext DSL.
@@ -67,6 +68,10 @@ public class XtextResource extends ResourceImpl {
 		return parseResult;
 	}
 
+	public void reparse(String newContent) {
+		doLoad(new StringInputStream(newContent), null);
+	}
+	
 	public void update(int offset, int replacedTextLength, String newText) {
 		CompositeNode rootNode = parseResult.getRootNode();
 
@@ -105,7 +110,7 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	@Override
-	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
+	protected void doLoad(InputStream inputStream, Map<?, ?> options) {
 		clearOutput();
 		parseResult = parser.parse(inputStream, elementFactory);
 		if (parseResult != null) {
