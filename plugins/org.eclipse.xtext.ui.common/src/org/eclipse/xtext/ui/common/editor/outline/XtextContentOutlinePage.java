@@ -10,11 +10,14 @@ package org.eclipse.xtext.ui.common.editor.outline;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -83,6 +86,20 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 		configureDocument();
 	}
 
+	@Override
+	public void init(IPageSite pageSite) {
+		super.init(pageSite);
+		registerToolbarActions(getSite().getActionBars());
+	}
+
+	private void registerToolbarActions(IActionBars actionBars) {
+		IToolBarManager toolBarManager = actionBars.getToolBarManager();
+		if (toolBarManager != null) {
+			// toolBarManager.add(new ToggleLinkWithEditorAction(sourceViewer));
+			// toolBarManager.add(new XtextOutlineSortingAction(this));
+		}
+	}
+
 	private void internalSetInput(IXtextDocument xtextDocument) {
 		if (getTreeViewer() != null) {
 			getTreeViewer().setInput(xtextDocument);
@@ -97,7 +114,8 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 	public void runInSWTThread(Runnable runnable) {
 		if (Display.getCurrent() == null) {
 			Display.getDefault().asyncExec(runnable);
-		} else {
+		}
+		else {
 			runnable.run();
 		}
 	}
