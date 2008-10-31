@@ -12,6 +12,8 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
+import ReferenceModel.ReferenceModelPackage;
+
 /**
  * Run this class in order to generate the Reference grammar.
  * 
@@ -26,6 +28,7 @@ public class ReferenceGrammar {
 
 	public void generate() throws IOException {
 		XtextStandaloneSetup.doSetup();
+		ReferenceModelPackage.eINSTANCE.getCustomType(); // initialize
 
 		GeneratorFacade.cleanFolder(RUNTIME_PATH + "/src-gen");
 

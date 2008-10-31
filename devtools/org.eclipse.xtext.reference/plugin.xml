@@ -2,7 +2,7 @@
 	<extension
          point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="classpath:/org/eclipse/xtext/reference/ReferenceModel.ecore"
+            uri="http://eclipse.org/xtext/reference/ReferenceModel"
             class="ReferenceModel.ReferenceModelPackage">
       </package>
    </extension>
@@ -12,7 +12,7 @@
       <metaModel
             nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar">
          <checkFile
-               path="org/eclipse/xtext/reference/check/Checks.chk">
+               path="org/eclipse/xtext/reference/Checks.chk">
          </checkFile>
       </metaModel>
       
