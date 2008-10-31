@@ -49,76 +49,82 @@ public class XtextProblemMarkerCreator {
 		map.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 		return map;
 	}
-	
-	private static Map<String, Object> collectMarkerAttributes(org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic, Object severity) {
+
+	private static Map<String, Object> collectMarkerAttributes(
+			org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic, Object severity) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IMarker.SEVERITY, severity);
 		map.put(IMarker.LINE_NUMBER, diagnostic.getLine());
 		map.put(IMarker.MESSAGE, diagnostic.getMessage());
 		map.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
-		
+
 		if (diagnostic instanceof XtextResource.Diagnostic) {
 			XtextResource.Diagnostic xtextDiagnostic = (XtextResource.Diagnostic) diagnostic;
 			map.put(IMarker.CHAR_START, xtextDiagnostic.getOffset());
 			map.put(IMarker.CHAR_END, xtextDiagnostic.getOffset() + xtextDiagnostic.getLength());
 		}
-		
+
 		return map;
 	}
-
 
 	/*
 	 * (non-Javadoc)
 	 */
 	public static void checkAndUpdateMarkers(final XtextResource resource, IFile file) {
-		IProgressMonitor monitor = new NullProgressMonitor();
+		try {
+			IProgressMonitor monitor = new NullProgressMonitor();
 
-		XtextMarkerManager.clearMarkers(file, null);
-		List<Map<String, Object>> emfMarkers = new ArrayList<Map<String, Object>>();
-		if (resource.getAllContents().hasNext()) {
-			EObject rootObject = resource.getAllContents().next();
-			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(rootObject);
-			// diagnostic != null should not happen, but in exception state NPE
-			// can occur and and reconciler thread will die, so prevent this
-			if (diagnostic != null) {
-				// The root Diagnostician is a BasicDiagnostic that normally act
-				// as a chain start and has any kind of impotent information if
-				// Severity is OK, so just ignore it
-				boolean emfDiagFail = diagnostic.getSeverity() != Diagnostic.OK;
-				if (emfDiagFail) {
-					if (!diagnostic.getChildren().isEmpty()) {
-						for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
-							emfMarkers.add(collectMarkerAttributesForDiagnostic(childDiagnostic));
+			XtextMarkerManager.clearMarkers(file, null);
+			List<Map<String, Object>> emfMarkers = new ArrayList<Map<String, Object>>();
+			if (resource.getAllContents().hasNext()) {
+				EObject rootObject = resource.getAllContents().next();
+				Diagnostic diagnostic = Diagnostician.INSTANCE.validate(rootObject);
+				// diagnostic != null should not happen, but in exception state
+				// NPE
+				// can occur and and reconciler thread will die, so prevent this
+				if (diagnostic != null) {
+					// The root Diagnostician is a BasicDiagnostic that normally
+					// act
+					// as a chain start and has any kind of impotent information
+					// if
+					// Severity is OK, so just ignore it
+					boolean emfDiagFail = diagnostic.getSeverity() != Diagnostic.OK;
+					if (emfDiagFail) {
+						if (!diagnostic.getChildren().isEmpty()) {
+							for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
+								emfMarkers.add(collectMarkerAttributesForDiagnostic(childDiagnostic));
+							}
+						} else {
+							emfMarkers.add(collectMarkerAttributesForDiagnostic(diagnostic));
 						}
 					}
-					else {
-						emfMarkers.add(collectMarkerAttributesForDiagnostic(diagnostic));
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("EMF Diagnostic " + (emfDiagFail ? "FAIL" : "OK") + "!");
 					}
 				}
-				if (LOG.isDebugEnabled()) {
-					LOG.debug("EMF Diagnostic " + (emfDiagFail ? "FAIL" : "OK") + "!");
+			}
+
+			List<SyntaxError> parseErrors = resource.getParseResult().getParseErrors();
+			boolean parserDiagFail = !parseErrors.isEmpty();
+			if (parserDiagFail) {
+				for (SyntaxError error : parseErrors) {
+					emfMarkers.add(collectMarkerAttributes(error));
 				}
 			}
-		}
-
-		List<SyntaxError> parseErrors = resource.getParseResult().getParseErrors();
-		boolean parserDiagFail = !parseErrors.isEmpty();
-		if (parserDiagFail) {
-			for (SyntaxError error : parseErrors) {
-				emfMarkers.add(collectMarkerAttributes(error));
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("Parser Diagnostic " + (parserDiagFail ? "FAIL" : "OK") + "!");
 			}
+
+			for (org.eclipse.emf.ecore.resource.Resource.Diagnostic error : resource.getErrors())
+				emfMarkers.add(collectMarkerAttributes(error, IMarker.SEVERITY_ERROR));
+			for (org.eclipse.emf.ecore.resource.Resource.Diagnostic warning : resource.getWarnings())
+				emfMarkers.add(collectMarkerAttributes(warning, IMarker.SEVERITY_WARNING));
+
+			if (!emfMarkers.isEmpty())
+				XtextMarkerManager.createMarker(file, emfMarkers, monitor);
+		} catch (Exception e) {
+			LOG.error(e.getMessage(), e);
 		}
-		if (LOG.isDebugEnabled()) {
-			LOG.debug("Parser Diagnostic " + (parserDiagFail ? "FAIL" : "OK") + "!");
-		}
-		
-		for(org.eclipse.emf.ecore.resource.Resource.Diagnostic error: resource.getErrors())
-			emfMarkers.add(collectMarkerAttributes(error, IMarker.SEVERITY_ERROR));
-		for(org.eclipse.emf.ecore.resource.Resource.Diagnostic warning: resource.getWarnings())
-			emfMarkers.add(collectMarkerAttributes(warning, IMarker.SEVERITY_WARNING));
-		
-		if (!emfMarkers.isEmpty())
-			XtextMarkerManager.createMarker(file, emfMarkers, monitor);
 
 	}
 
@@ -126,13 +132,13 @@ public class XtextProblemMarkerCreator {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sever = IMarker.SEVERITY_ERROR;
 		switch (diagnostic.getSeverity()) {
-			case Diagnostic.WARNING:
-				sever = IMarker.SEVERITY_WARNING;
-				break;
-			case Diagnostic.OK:
-			case Diagnostic.INFO:
-				sever = IMarker.SEVERITY_INFO;
-				break;
+		case Diagnostic.WARNING:
+			sever = IMarker.SEVERITY_WARNING;
+			break;
+		case Diagnostic.OK:
+		case Diagnostic.INFO:
+			sever = IMarker.SEVERITY_INFO;
+			break;
 		}
 		map.put(IMarker.SEVERITY, sever);
 		List<?> data = diagnostic.getData();
