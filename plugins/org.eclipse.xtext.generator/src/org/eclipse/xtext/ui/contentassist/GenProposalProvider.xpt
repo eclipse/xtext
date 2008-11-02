@@ -110,7 +110,7 @@ public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProp
     
     @Override
 	protected String getDefaultImageFilePath() {
-		return "iconds/editor.gif";
+		return "icons/editor.gif";
 	}
 
 	@Override
