@@ -57,10 +57,6 @@ public class XtextProjectInfo {
 		this.languageName = languageName;
 	}
 
-	public String getNsURI() {
-		return nsURI;
-	}
-
 	public void setNsURI(String nsURI) {
 		this.nsURI = nsURI;
 	}
@@ -84,6 +80,18 @@ public class XtextProjectInfo {
 	public String getLanguageNameAbbreviation() {
 		String[] packageNames = languageName.split("\\.");
 		return packageNames[packageNames.length - 1];
+	}
+	
+	public String getNsURI() {
+		String[] strings = languageName.split("\\.");
+		if (strings.length<2) {
+			return "http://www."+languageName;
+		}
+		String s = "http://www."+strings[1]+"."+strings[0];
+		for (int i=2;i<strings.length;i++) {
+			s+="/"+strings[i];
+		}
+		return s;
 	}
 
 	/**
