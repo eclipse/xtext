@@ -99,9 +99,10 @@ public abstract class AbstractAntlrParser extends Parser {
 	}
 
 	private EObject getGrammarElement(String grammarElementID) {
-		URI resolved = new ClassloaderClasspathUriResolver().resolve(getClass().getClassLoader(), URI
-				.createURI(grammarElementID));
-		return grammar.eResource().getResourceSet().getEObject(resolved, true);
+		URI uri = URI
+				.createURI(grammarElementID);
+//		URI resolved = new ClassloaderClasspathUriResolver().resolve(getClass().getClassLoader(), uri);
+		return grammar.eResource().getResourceSet().getEObject(uri, true);
 	}
 
 	private Map<Integer, String> antlrTypeToLexerName = null;
