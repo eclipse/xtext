@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -12,31 +13,39 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.crossref.ILinkingService;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.util.Pair;
 
 /**
  * Convenient super class for <code>IProposalProvider</code> implementations.
  * 
  * @author Michael Clay - Initial contribution and API
+ * @author Heiko Behrens
  * 
  * @see IProposalProvider
  */
 public abstract class AbstractProposalProvider implements IProposalProvider {
-
 	protected static final String LEXER_RULE_ID = "ID";
 	// logger available to subclasses
 	protected final Logger logger = Logger.getLogger(getClass());
 
+	@Inject
+	protected ILinkingService linkingService;
+
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeKeyword(org.eclipse.xtext.Keyword, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
+	 * 
+	 * @seeorg.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#
+	 * completeKeyword(org.eclipse.xtext.Keyword, org.eclipse.emf.ecore.EObject,
+	 * java.lang.String, org.eclipse.jface.text.IDocument, int)
 	 */
 	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword, EObject model, String prefix,
 			IDocument doc, int offset) {
@@ -51,7 +60,11 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeRuleCall(org.eclipse.xtext.RuleCall, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
+	 * 
+	 * @seeorg.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#
+	 * completeRuleCall(org.eclipse.xtext.RuleCall,
+	 * org.eclipse.emf.ecore.EObject, java.lang.String,
+	 * org.eclipse.jface.text.IDocument, int)
 	 */
 	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall, EObject model, String prefix,
 			IDocument doc, int offset) {
@@ -59,6 +72,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 			logger.debug("completeRuleCall '" + ruleCall.getName() + "' cardinality '" + ruleCall.getCardinality()
 					+ "' for model '" + model + "' and prefix '" + prefix.trim() + "'");
 		}
+		
 		AbstractRule calledRule = GrammarUtil.calledRule(ruleCall);
 		
 		if (calledRule instanceof LexerRule) {
@@ -86,7 +100,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 			List<? extends ICompletionProposal> completionProposalList) {
 		return completionProposalList;
 	}
-	
+
 	/**
 	 * Concrete subclasses can override this to provide a more meaningful and sophisticated behaviour
 	 * whenever a list of ICompletionProposal's should be computed for simple <code>LexerRule</code> call's.
@@ -130,31 +144,24 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 	/**
 	 * Concrete subclasses can override this to provide custom lookup behaviour
-	 * for <code>CrossReference</code>.
-	 * 
-	 * The default behaviour of this method is to lookup all
-	 * <code>RuleCall</code> within the current parsetree matching the type of
-	 * the given CrossReference.
+	 * for <code>CrossReference</code>. This implementation delegates to the
+	 * injected LinkingService
 	 * 
 	 * @return a list of <code>ICompletionProposal</code> matching the given
 	 *         assignment
 	 */
 	protected List<? extends ICompletionProposal> lookupCrossReference(CrossReference crossReference, EObject model,
 			int offset) {
+		
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
-		for (CompositeNode compositeNode : EcoreUtil2.getAllContentsOfType(EcoreUtil2.getRootContainer(model),
-				CompositeNode.class)) {
-			if (compositeNode.getGrammarElement() instanceof RuleCall
-					&& crossReference.getType().getName().equals(
-							((RuleCall) compositeNode.getGrammarElement()).getName())) {
-				for (LeafNode leafNode : compositeNode.getLeafNodes()) {
-					if (leafNode.getGrammarElement() instanceof RuleCall
-							&& LEXER_RULE_ID.equalsIgnoreCase(((RuleCall) leafNode.getGrammarElement()).getName())) {
-						completionProposalList.add(createCompletionProposal(leafNode.getText(), offset));
-					}
-				}
-			}
+
+		if (linkingService != null) {
+			EObject semanticModel = NodeUtil.getNearestSemanticObject((AbstractNode) model);
+			List<Pair<String, URI>> candidates = linkingService.getLinkCandidates(semanticModel, crossReference, "");
+			for (Pair<String, URI> candidate : candidates)
+				completionProposalList.add(createCompletionProposal(candidate.getFirstElement(), offset));
 		}
+
 		return completionProposalList;
 	}
 
@@ -166,7 +173,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		return new XtextCompletionProposal(text, new StyledString(text), text, getDefaultImageFilePath(),
 				getPluginId(), offset);
 	}
-	
+
 	/**
 	 * @param text to apply
 	 * @return the provided string with the first letter capitalized
@@ -177,6 +184,5 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		}
 		return text.substring(0, 1).toUpperCase() + text.substring(1, text.length());
 	}
-
 
 }
