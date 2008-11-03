@@ -121,6 +121,12 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 «DEFINE ebnf2 FOR Assignment»	
 	«IF !eAllContents.typeSelect(CrossReference).isEmpty»
 		«REM» Cross references are handled in the linking phase «ENDREM»
+		{
+			if ($current==null) {
+	            $current = factory.create("«containingParserRule().getReturnTypeName()»");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
 		«EXPAND ebnf FOR terminal» 
 	«ELSE»
 	    «IF isParserRuleAssignment()»
