@@ -188,18 +188,21 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 
 			String basePackage = xtextProjectInfo.getBasePackage();
 			// DSL Project
+			List<String> exportedPackages = Arrays.asList(basePackage, basePackage + ".parser",
+			basePackage + ".parser.internal", basePackage + ".parsetree.reconstr", basePackage
+					+ ".services");
 			final IProject dslProject = EclipseResourceUtil.createProject(xtextProjectInfo.getProjectName(),
 					SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(Arrays.asList(
 							"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"", "org.eclipse.xtext",
-							"org.eclipse.xtext.generator", "org.apache.log4j", "org.antlr", "org.eclipse.xtend",
+							"org.eclipse.xtext.generator", "org.apache.log4j", "org.antlr.gen", "org.eclipse.xtend",
 							"org.eclipse.xtend.typesystem.emf", "org.eclipse.xpand", "org.apache.commons.logging",
-							"org.eclipse.xtend.util.stdlib")), Arrays.asList(basePackage, basePackage + ".parser",
-							basePackage + ".parser.internal", basePackage + ".parsetree.reconstr", basePackage
-									+ ".services"), null, monitor, NewXtextProjectWizard.this.getShell());
+							"org.eclipse.xtend.util.stdlib")), exportedPackages, null, monitor, NewXtextProjectWizard.this.getShell());
 
 			if (dslProject == null) {
 				return;
 			}
+			
+			EclipseResourceUtil.createPackagesWithDummyClasses(dslProject,"src-gen",exportedPackages);
 			monitor.worked(1);
 
 			// DSL UI Project

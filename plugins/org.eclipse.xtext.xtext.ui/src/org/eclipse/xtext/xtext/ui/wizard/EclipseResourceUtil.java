@@ -202,7 +202,7 @@ public class EclipseResourceUtil {
 		mainContent.append("Bundle-Version: 1.0.0\n");
 		mainContent.append("Bundle-SymbolicName: " + projectName.toLowerCase() + "; singleton:=true\n");
 		mainContent.append("Eclipse-RegisterBuddy: org.eclipse.xtext.log4j\n");
-		mainContent.append("Bundle-RequiredExecutionEnvironment: J2SE-1.5\n");
+//		mainContent.append("Bundle-RequiredExecutionEnvironment: J2SE-1.5\n");
 		if (null != activatorClassName) {
 			mainContent.append("Bundle-Activator: " + activatorClassName + "\n");
 		}
@@ -308,6 +308,22 @@ public class EclipseResourceUtil {
 				}
 			}
 		});
+	}
+
+	public static void createPackagesWithDummyClasses(IProject dslProject, String string, List<String> exportedPackages) throws CoreException {
+		for (String string2 : exportedPackages) {
+			IFolder folder = dslProject.getFolder(string+"/"+(string2.replace('.', '/')));
+			create(folder);
+			IFile file = folder.getFile("Foo.java");
+			String contents = "package "+string2+";\nclass Foo {}";
+			file.create(new ByteArrayInputStream(contents.getBytes()), true, null);
+		}
+	}
+
+	private static void create(IFolder folder) throws CoreException {
+		if (!folder.getParent().exists())
+			create((IFolder) folder.getParent());
+		folder.create(true, true, null);
 	}
 
 }
