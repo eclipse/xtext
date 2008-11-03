@@ -21,8 +21,6 @@ public class XtextProjectInfo {
 	private String projectName;
 	private String languageName;
 	private String fileExtension;
-	private String nsURI;
-	private String basePackage;
 	private boolean createGeneratorProject = false;
 
 	public boolean isCreateGeneratorProject() {
@@ -31,14 +29,6 @@ public class XtextProjectInfo {
 
 	public void setCreateGeneratorProject(boolean createGeneratorProject) {
 		this.createGeneratorProject = createGeneratorProject;
-	}
-
-	public String getBasePackage() {
-		return basePackage;
-	}
-
-	public void setBasePackage(String basePackage) {
-		this.basePackage = basePackage;
 	}
 
 	public String getFileExtension() {
@@ -57,10 +47,6 @@ public class XtextProjectInfo {
 		this.languageName = languageName;
 	}
 
-	public void setNsURI(String nsURI) {
-		this.nsURI = nsURI;
-	}
-
 	public String getProjectName() {
 		return projectName;
 	}
@@ -73,8 +59,13 @@ public class XtextProjectInfo {
 		return getLanguageName().replaceAll("\\s", "_") + ".xtxt";
 	}
 
-	public String getBasePath() {
+	public String getBasePackagePath() {
 		return getBasePackage().replaceAll("\\.", "/");
+	}
+	
+	public String getBasePackage() {
+		int lastIndexOf = getLanguageName().lastIndexOf(".");
+		return getLanguageName().substring(0,(lastIndexOf==-1?getLanguageName().length():lastIndexOf));
 	}
 
 	public String getLanguageNameAbbreviation() {
@@ -107,4 +98,5 @@ public class XtextProjectInfo {
 		return fileExtension;
 	}
 
+	
 }

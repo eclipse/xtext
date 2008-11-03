@@ -43,7 +43,7 @@ public class  «this.languageNameAbbreviation»Grammar {
 		GeneratorFacade.cleanFolder(PATH + "/src-gen");
 		GeneratorFacade.cleanFolder(UI_PATH + "/src-gen");
 
-		String classpathUri = "classpath:/«this.basePath»/«this.languageNameAbbreviation».xtext";
+		String classpathUri = "classpath:/«this.basePackagePath»/«this.languageNameAbbreviation».xtext";
 		log.info("loading " + classpathUri);
 		ResourceSet rs = new XtextResourceSet();
 		Resource resource = rs

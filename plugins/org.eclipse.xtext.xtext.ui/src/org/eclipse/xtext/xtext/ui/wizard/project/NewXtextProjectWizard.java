@@ -249,7 +249,7 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 						"//Your model", monitor);
 			}
 			output.addOutlet(new Outlet(false, defaultEncoding, "ACTIVATOR_OUTLET", true, dslUIProject.getFolder(
-					SRC_ROOT + IPath.SEPARATOR + xtextProjectInfo.getBasePath() + IPath.SEPARATOR + "ui").getLocation()
+					SRC_ROOT + IPath.SEPARATOR + xtextProjectInfo.getBasePackagePath() + IPath.SEPARATOR + "ui").getLocation()
 					.makeAbsolute().toOSString()));
 			XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null, Collections.singletonMap(
 					"xtextProjectInfo", new Variable("xtextProjectInfo", xtextProjectInfo)), null, null);
