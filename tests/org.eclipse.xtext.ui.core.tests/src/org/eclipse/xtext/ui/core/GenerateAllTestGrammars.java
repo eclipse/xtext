@@ -29,21 +29,25 @@ public class GenerateAllTestGrammars {
 	public final static Class<?>[] testclasses = new Class[] { TestLanguage.class };
 
 	public static void main(String[] args) throws Exception {
-		log.info(Thread.currentThread().getContextClassLoader());
-		XtextStandaloneSetup.doSetup();
-		if (args.length > 0) {
-			path = args[0] + "/" + path;
-		}
-		GeneratorFacade.cleanFolder(path);
-		for (Class<?> c : testclasses) {
-			String filename = "classpath:/" + c.getName().replace('.', '/') + ".xtext";
-			log.info("loading " + filename);
-			ResourceSetImpl rs = new XtextResourceSet();
-			URI uri = URI.createURI(filename);
-			Resource resource = rs.createResource(uri);
-			resource.load(null);
-			Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
-			GeneratorFacade.generate(grammarModel, ".", null, c.getSimpleName().toLowerCase());
+		try {
+			log.info(Thread.currentThread().getContextClassLoader());
+			XtextStandaloneSetup.doSetup();
+			if (args.length > 0) {
+				path = args[0] + "/" + path;
+			}
+			GeneratorFacade.cleanFolder(path);
+			for (Class<?> c : testclasses) {
+				String filename = "classpath:/" + c.getName().replace('.', '/') + ".xtext";
+				log.info("loading " + filename);
+				ResourceSetImpl rs = new XtextResourceSet();
+				URI uri = URI.createURI(filename);
+				Resource resource = rs.createResource(uri);
+				resource.load(null);
+				Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
+				GeneratorFacade.generate(grammarModel, ".", null, c.getSimpleName().toLowerCase());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
