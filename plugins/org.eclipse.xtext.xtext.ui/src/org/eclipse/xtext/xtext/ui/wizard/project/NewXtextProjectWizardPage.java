@@ -43,10 +43,6 @@ public class NewXtextProjectWizardPage extends WizardPage {
 
 	private Text fileExtensionText;
 
-	private Text nsURIText;
-
-	private Text basePackageText;
-
 	private Button generateGenProject;
 
 	private XtextProjectInfo xtextProjectInfo = new XtextProjectInfo();
@@ -110,28 +106,6 @@ public class NewXtextProjectWizardPage extends WizardPage {
 				dialogChanged();
 			}
 		});
-		label = new Label(container, SWT.NULL);
-		label.setText("nsURI:");
-
-		nsURIText = new Text(container, SWT.BORDER | SWT.SINGLE);
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		nsURIText.setLayoutData(gd);
-		nsURIText.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				dialogChanged();
-			}
-		});
-		label = new Label(container, SWT.NULL);
-		label.setText("Base package:");
-
-		basePackageText = new Text(container, SWT.BORDER | SWT.SINGLE);
-		gd = new GridData(GridData.FILL_HORIZONTAL);
-		basePackageText.setLayoutData(gd);
-		basePackageText.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				dialogChanged();
-			}
-		});
 
 		label = new Label(container, SWT.NULL);
 		label.setText("Create generator project:");
@@ -166,11 +140,9 @@ public class NewXtextProjectWizardPage extends WizardPage {
 	 * Ensures that both text fields are set.
 	 */
 	void dialogChanged() {
-		xtextProjectInfo.setBasePackage(basePackageText.getText());
 		xtextProjectInfo.setProjectName(projectText.getText());
 		xtextProjectInfo.setLanguageName(languageNameText.getText());
 		xtextProjectInfo.setFileExtension(fileExtensionText.getText());
-		xtextProjectInfo.setNsURI(nsURIText.getText());
 		xtextProjectInfo.setCreateGeneratorProject(generateGenProject.getSelection());
 
 		if (!xtextProjectInfo.getProjectName().matches("\\w+[\\w\\.]*\\w+")) {
@@ -187,11 +159,6 @@ public class NewXtextProjectWizardPage extends WizardPage {
 		}
 		if (!xtextProjectInfo.getLanguageName().matches("\\w+[\\w\\.]*\\w+")) {
 			setErrorMessage("Language name must be specified (example: org.xtext.example.MyDsl)");
-			setPageComplete(false);
-			return;
-		}
-		if (!xtextProjectInfo.getBasePackage().matches("\\w+[\\w\\.]*\\w+")) {
-			setErrorMessage("Base package name must be specified (example: org.xtext.example.mydsl)");
 			setPageComplete(false);
 			return;
 		}
@@ -217,8 +184,6 @@ public class NewXtextProjectWizardPage extends WizardPage {
 		projectText.setText("org.xtext.example.my" + dslName.toLowerCase());
 		languageNameText.setText("org.xtext.example.My" + dslName);
 		fileExtensionText.setText(dslName.toLowerCase());
-		nsURIText.setText("http://example.xtext.org/My" + dslName);
-		basePackageText.setText("org.xtext.example.my" + dslName.toLowerCase());
 		generateGenProject.setSelection(true);
 	}
 
