@@ -183,6 +183,12 @@ ruleType returns [EObject current=null]
 )(	
 	
 		
+		{
+			if ($current==null) {
+	            $current = factory.create("Type");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
 (
 	RULE_ID    { 
     createLeafNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "extends"); 

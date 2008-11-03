@@ -437,6 +437,12 @@ ruleType returns [EObject current=null]
 )(	
 	
 		
+		{
+			if ($current==null) {
+	            $current = factory.create("Type");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
 (
 	RULE_ID    { 
     createLeafNode("classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "extends"); 
