@@ -39,7 +39,7 @@
 			id="org.eclipse.xtext.Xtext"
 			name="Xtext">
 			<keywordReference
-				id="org.eclipse.xtext.xtext.ui_gen.ui.keyword_Xtext">
+				id="org.eclipse.xtext.xtext.ui.keyword_Xtext">
 			</keywordReference>
 		</page>
 		<page
@@ -55,7 +55,7 @@
 	<extension
 		point="org.eclipse.ui.keywords">
 		<keyword
-			id="org.eclipse.xtext.xtext.ui_gen.ui.keyword_Xtext"
+			id="org.eclipse.xtext.xtext.ui.keyword_Xtext"
 			label="Xtext">
 		</keyword>
 		<keyword
