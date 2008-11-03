@@ -65,7 +65,6 @@ import org.eclipse.xtext.xtext.ui.wizard.EclipseResourceUtil;
  * <ul>
  * <li>main project name}</li>
  * <li>main project name}.ui</li>
- * <li>main project name}.ui_gen</li>
  * <li>[{main project name}.generator] based on the checkbox state mentioned
  * above</li>
  * </ul>
