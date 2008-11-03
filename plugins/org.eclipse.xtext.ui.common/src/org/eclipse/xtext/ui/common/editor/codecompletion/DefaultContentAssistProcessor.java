@@ -53,7 +53,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 	@Inject
 	private IProposalProvider proposalProvider;
-
+	
 	private final Map<String, Method> methodLookupMap = new HashMap<String, Method>();
 
 	/**
@@ -76,6 +76,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				});
 				Assert.isNotNull(rootNode);
 
+				
 				// last COMPLETE node element with associated grammar element
 				AbstractNode lastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
 				// node at CURRENT cursor pos. with or without grammar element
@@ -83,7 +84,9 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				// get associated grammar element
 				AbstractElement grammarElement = ParseTreeUtil.getGrammarElementFromNode(lastCompleteNode);
 
-				String prefix = viewer.getTextWidget().getText(currentLeafNode.getOffset(), offset);
+				String prefix = viewer.getTextWidget().getCharCount()>0 ?
+					viewer.getTextWidget().getText(currentLeafNode.getOffset(), offset<viewer.getTextWidget().getCharCount()?offset : 
+					viewer.getTextWidget().getCharCount()-1) : "";
 
 				List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
@@ -179,38 +182,6 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		return elementList;
 	}
 	
-	protected void handleReflectionException(Exception ex) {
-		if (ex instanceof NoSuchMethodException) {
-			throw new IllegalStateException("Method not found: " + ex.getMessage());
-		}
-		if (ex instanceof IllegalAccessException) {
-			throw new IllegalStateException("Could not access method: " + ex.getMessage());
-		}
-		if (ex instanceof InvocationTargetException) {
-			rethrowRuntimeException(((InvocationTargetException) ex).getTargetException());
-		}
-		if (ex instanceof RuntimeException) {
-			throw (RuntimeException) ex;
-		}
-		handleUnexpectedException(ex);
-	}
-
-	private final void rethrowRuntimeException(Throwable ex) {
-		if (ex instanceof RuntimeException) {
-			throw (RuntimeException) ex;
-		}
-		if (ex instanceof Error) {
-			throw (Error) ex;
-		}
-		handleUnexpectedException(ex);
-	}
-
-	protected void handleUnexpectedException(Throwable ex) {
-		IllegalStateException isex = new IllegalStateException("Unexpected exception thrown");
-		isex.initCause(ex);
-		throw isex;
-	}
-
 	protected final Set<AbstractElement> calculatePossibleElementSet(AbstractNode contextNode,
 			AbstractElement grammarElement) {
 
@@ -329,15 +300,17 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 				ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
 
-				EObject model = ((CompositeNode) currentLeafNode.eContainer()).getElement();
+				EObject model = null==((CompositeNode) currentLeafNode.eContainer()).getElement() ? 
+						currentLeafNode.eContainer()
+						: ((CompositeNode) currentLeafNode.eContainer()).getElement();
 				
 				Method method = findMethod(proposalProvider.getClass(), "complete"
 						+ firstLetterCapitalized(parserRule.getName())
-						+ firstLetterCapitalized(assignment.getFeature()), Assignment.class, null==model.getClass() ? EObject.class : model.getClass(),
-						String.class, document.getClass(), int.class);
+						+ firstLetterCapitalized(assignment.getFeature()), Assignment.class, model.getClass(),String.class, document.getClass(), int.class);
 
-				Collection<? extends ICompletionProposal> assignmentProposalList = invokeMethod(method,
-						proposalProvider, assignment, model, prefix, document, offset);
+				Collection<? extends ICompletionProposal> assignmentProposalList = null==method ? 
+						null :
+						invokeMethod(method,proposalProvider, assignment, model, prefix, document, offset);
 
 				if (null != assignmentProposalList) {
 					completionProposalList.addAll(assignmentProposalList);
@@ -346,7 +319,9 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 			}
 			else if (abstractElement instanceof RuleCall) {
 
-				EObject model = ((CompositeNode) currentLeafNode.eContainer()).getElement();
+				EObject model = null==((CompositeNode) currentLeafNode.eContainer()).getElement() ? 
+						currentLeafNode.eContainer()
+						: ((CompositeNode) currentLeafNode.eContainer()).getElement();
 				
 				List<? extends ICompletionProposal> ruleCallProposalList = this.proposalProvider.completeRuleCall(
 						(RuleCall) abstractElement, model, prefix, document, offset);
@@ -363,10 +338,11 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 					Method method = findMethod(proposalProvider.getClass(), "complete"
 							+ firstLetterCapitalized(typeRef.getAlias()) + firstLetterCapitalized(typeRef.getName()),
-							RuleCall.class, null==model.getClass() ? EObject.class : model.getClass(), String.class, document.getClass(), int.class);
+							RuleCall.class, model.getClass(), String.class, document.getClass(), int.class);
 
-					Collection<? extends ICompletionProposal> proposalList = invokeMethod(method, proposalProvider,
-							abstractElement, model, prefix, document, offset);
+					Collection<? extends ICompletionProposal> proposalList = null==method ? 
+							null :
+							invokeMethod(method, proposalProvider, abstractElement, model, prefix, document, offset);
 
 					if (null != proposalList) {
 						completionProposalList.addAll(proposalList);
@@ -401,6 +377,38 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 			searchType = searchType.getSuperclass();
 		}
 		return result;
+	}
+	
+	private void handleReflectionException(Exception ex) {
+		if (ex instanceof NoSuchMethodException) {
+			throw new IllegalStateException("Method not found: " + ex.getMessage());
+		}
+		if (ex instanceof IllegalAccessException) {
+			throw new IllegalStateException("Could not access method: " + ex.getMessage());
+		}
+		if (ex instanceof InvocationTargetException) {
+			rethrowRuntimeException(((InvocationTargetException) ex).getTargetException());
+		}
+		if (ex instanceof RuntimeException) {
+			throw (RuntimeException) ex;
+		}
+		handleUnexpectedException(ex);
+	}
+
+	private void handleUnexpectedException(Throwable ex) {
+		IllegalStateException isex = new IllegalStateException("Unexpected exception thrown");
+		isex.initCause(ex);
+		throw isex;
+	}
+	
+	private final void rethrowRuntimeException(Throwable ex) {
+		if (ex instanceof RuntimeException) {
+			throw (RuntimeException) ex;
+		}
+		if (ex instanceof Error) {
+			throw (Error) ex;
+		}
+		handleUnexpectedException(ex);
 	}
 
 	@SuppressWarnings("unchecked")

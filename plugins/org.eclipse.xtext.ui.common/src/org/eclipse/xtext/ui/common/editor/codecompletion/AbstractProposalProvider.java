@@ -33,7 +33,10 @@ import org.eclipse.xtext.util.Pair;
  * @see IProposalProvider
  */
 public abstract class AbstractProposalProvider implements IProposalProvider {
+	// constants
 	protected static final String LEXER_RULE_ID = "ID";
+	protected static final String LEXER_RULE_INT = "INT";
+	protected static final String LEXER_RULE_STRING = "STRING";
 	// logger available to subclasses
 	protected final Logger logger = Logger.getLogger(getClass());
 
@@ -42,10 +45,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#
-	 * completeKeyword(org.eclipse.xtext.Keyword, org.eclipse.emf.ecore.EObject,
-	 * java.lang.String, org.eclipse.jface.text.IDocument, int)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeKeyword(org.eclipse.xtext.Keyword, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
 	 */
 	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword, EObject model, String prefix,
 			IDocument doc, int offset) {
@@ -57,14 +57,10 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 		return Collections.singletonList(createCompletionProposal(text, offset));
 	}
-
+	
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#
-	 * completeRuleCall(org.eclipse.xtext.RuleCall,
-	 * org.eclipse.emf.ecore.EObject, java.lang.String,
-	 * org.eclipse.jface.text.IDocument, int)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeRuleCall(org.eclipse.xtext.RuleCall, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
 	 */
 	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall, EObject model, String prefix,
 			IDocument doc, int offset) {
@@ -81,17 +77,16 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		
 		return Collections.emptyList();
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seeorg.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#
-	 * sortAndFilter(java.util.List)
+	 * @seeorg.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#sortAndFilter(java.util.List)
 	 */
 	public List<? extends ICompletionProposal> sortAndFilter(List<? extends ICompletionProposal> completionProposalList) {
 		return doSortAndFilter(completionProposalList);
 	}
-
+	
 	/**
 	 * Concrete subclasses can override this for custom sort and filter
 	 * behavior. Gets called after all completion proposals have been collected.
@@ -100,14 +95,15 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 			List<? extends ICompletionProposal> completionProposalList) {
 		return completionProposalList;
 	}
-
+	
 	/**
 	 * Concrete subclasses can override this to provide a more meaningful and sophisticated behaviour
 	 * whenever a list of ICompletionProposal's should be computed for simple <code>LexerRule</code> call's.
 	 * 
 	 * This implementation returns one <code>ICompletionProposal</code> with a displayString composed
 	 * of the name of the containing rule plus the featurename of an optional assignment and at the end the name 
-	 * of the given LexerRule. (e.i. ParserRuleName+AssignmentFeatureName+LexerRuleName)
+	 * of the given LexerRule (e.i. ParserRuleName+AssignmentFeatureName+LexerRuleName) or {@link #getDefaultIntegerValue()} 
+	 * if its <i>INT</i> based LexerRule.
 	 * 
 	 * @param lexerRule the 'called' LexerRule instance
 	 * @param ruleCall the ruleCall for the provided lexerRule
@@ -117,12 +113,26 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	protected List<? extends ICompletionProposal> doCompleteLexerRuleRuleCall(LexerRule lexerRule,RuleCall ruleCall, int offset) {
 		ParserRule containingParserRule = GrammarUtil.containingParserRule(ruleCall);
 		Assignment containingAssignment = GrammarUtil.containingAssignment(ruleCall);
-		String defaultDisplayString = containingParserRule.getName()
-				+ (null != containingAssignment ? firstLetterCapitalized(containingAssignment.getFeature()) : "")
-				+ lexerRule.getName();
+		
+		String defaultDisplayString = containingParserRule.getName() + 
+			(null != containingAssignment ? firstLetterCapitalized(containingAssignment.getFeature()) : "") + lexerRule.getName();
+		
+		if (LEXER_RULE_INT.equalsIgnoreCase(lexerRule.getName())) {
+			defaultDisplayString=String.valueOf(getDefaultIntegerValue());
+		} else if (LEXER_RULE_STRING.equalsIgnoreCase(lexerRule.getName())) {
+			defaultDisplayString="\""+defaultDisplayString+"\"";
+		} 
+		
 		return Collections.singletonList(createCompletionProposal(defaultDisplayString, offset));
 	}
-
+	
+	/**
+	 * @return the default integer value for ecore::EInt <code>RuleCall<>
+	 */
+	protected int getDefaultIntegerValue() {
+		return 0;
+	}
+	
 	/**
 	 * 
 	 * @return the id of the plug-in containing the image files;
@@ -156,10 +166,11 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
 		if (linkingService != null) {
-			EObject semanticModel = NodeUtil.getNearestSemanticObject((AbstractNode) model);
+			EObject semanticModel = model instanceof AbstractNode ? NodeUtil.getNearestSemanticObject((AbstractNode) model) : model;
 			List<Pair<String, URI>> candidates = linkingService.getLinkCandidates(semanticModel, crossReference, "");
-			for (Pair<String, URI> candidate : candidates)
+			for (Pair<String, URI> candidate : candidates) {
 				completionProposalList.add(createCompletionProposal(candidate.getFirstElement(), offset));
+			}
 		}
 
 		return completionProposalList;
