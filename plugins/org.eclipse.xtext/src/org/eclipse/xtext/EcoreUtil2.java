@@ -271,4 +271,12 @@ public class EcoreUtil2 extends EcoreUtil {
 		return Collections.unmodifiableSet(allSuperTypes);
 	}
 
+	public static boolean isAssignableFrom(EClass target, EClass candidate) {
+		return (target.equals(candidate) || target.isSuperTypeOf(candidate));
+	}
+
+	public static boolean isAssignableFrom(EClass target, EObject candidate) {
+		return isAssignableFrom(target, candidate.eClass());
+	}
+
 }

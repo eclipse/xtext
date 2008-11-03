@@ -23,7 +23,7 @@ public interface IFragmentProvider extends ILanguageService {
 	 * @param obj
 	 *            The EObject to compute the fragment for
 	 * @return the fragment, which can be an arbitrary string but must be unique
-	 *         within a resource
+	 *         within a resource. Return null to use default implementation
 	 */
 	String getFragment(EObject obj);
 }

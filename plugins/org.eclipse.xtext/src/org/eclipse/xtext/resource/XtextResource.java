@@ -11,7 +11,6 @@ package org.eclipse.xtext.resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +37,7 @@ import org.eclipse.xtext.util.StringInputStream;
  * An EMF resource that reads and writes models of an Xtext DSL.
  * 
  * @author Jan Köhnlein
+ * @author Heiko Behrens
  */
 public class XtextResource extends ResourceImpl {
 	@Inject
@@ -51,10 +51,10 @@ public class XtextResource extends ResourceImpl {
 
 	@Inject
 	private IFragmentProvider fragmentProvider;
-	
+
 	@Inject
 	private IParseTreeConstructor parseTreeConstructor;
-	
+
 	@Inject
 	private ITokenSerializer tokenSerializer;
 	
@@ -67,8 +67,8 @@ public class XtextResource extends ResourceImpl {
 	public IParseResult getParseResult() {
 		return parseResult;
 	}
-
-	public void reparse(String newContent) {
+	
+	public void reparse(String newContent) throws IOException{
 		doLoad(new StringInputStream(newContent), null);
 	}
 	
@@ -95,14 +95,13 @@ public class XtextResource extends ResourceImpl {
 	protected void doLinking() {
 		if (parseResult.getRootASTElement() == null)
 			return;
-		indexIds();
 		List<Diagnostic> brokenLinks = linker.ensureLinked(parseResult.getRootASTElement());
 		TreeIterator<EObject> allContents = parseResult.getRootASTElement().eAllContents();
 		while (allContents.hasNext())
 			brokenLinks.addAll(linker.ensureLinked(allContents.next()));
 
 		getErrors().addAll(brokenLinks);
-		//logger.debug("errors: " + errors.size());
+		// logger.debug("errors: " + errors.size());
 	}
 
 	private void addNodeContentAdapter() {
@@ -110,7 +109,7 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	@Override
-	protected void doLoad(InputStream inputStream, Map<?, ?> options) {
+	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
 		clearOutput();
 		parseResult = parser.parse(inputStream, elementFactory);
 		if (parseResult != null) {
@@ -125,25 +124,31 @@ public class XtextResource extends ResourceImpl {
 
 	private void clearOutput() {
 		getContents().clear();
+		getErrors().clear();
 	}
 
-	private void indexIds() {
-		Map<String, EObject> map = new HashMap<String, EObject>();
+	@Override
+	public EObject getEObject(String uriFragment) {
 		Iterator<EObject> iter = EcoreUtil.getAllContents(parseResult.getRootASTElement(), false);
 		while (iter.hasNext()) {
 			EObject object = (EObject) iter.next();
 			String fragment = fragmentProvider.getFragment(object);
-			if (fragment != null) {
-				if (map.put(fragment, object) != null) {
-					map.remove(fragment);
-//					log.info("The id " + fragment
-//							+ " is not unique within the resource. Will use relative pathes instead.");
-				}
-			}
+			if (fragment != null && fragment.equals(uriFragment))
+				return object;
 		}
-		setIntrinsicIDToEObjectMap(map);
+		return super.getEObject(uriFragment);
 	}
-	
+
+	@Override
+	public String getURIFragment(EObject object) {
+		String result = (fragmentProvider != null) ? fragmentProvider.getFragment(object) : null;
+
+		if (result == null)
+			result = super.getURIFragment(object);
+
+		return result;
+	}
+ 
 	@Override
 	public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
 		if (contents.size() != 1)
@@ -151,9 +156,10 @@ public class XtextResource extends ResourceImpl {
 		IAbstractToken tokenList = parseTreeConstructor.serialize(contents.get(0));
 		tokenSerializer.serialize(tokenList, outputStream);
 	}
-	
+
 	public interface Diagnostic extends org.eclipse.emf.ecore.resource.Resource.Diagnostic {
 		public int getOffset();
+
 		public int getLength();
 	}
 }
