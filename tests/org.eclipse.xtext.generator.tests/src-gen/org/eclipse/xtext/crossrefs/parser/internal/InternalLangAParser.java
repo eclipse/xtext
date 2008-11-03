@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g 2008-11-03 13:22:00
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g 2008-11-03 16:10:59
 
 package org.eclipse.xtext.crossrefs.parser.internal; 
 
@@ -396,12 +396,18 @@ public class InternalLangAParser extends AbstractAntlrParser {
             }
 
             // ./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g:183:2: ( ( RULE_ID ) )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g:186:1: ( RULE_ID )
+            // ./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g:186:3: ( RULE_ID )
             {
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g:186:1: ( RULE_ID )
-            // ./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g:187:2: RULE_ID
+
+            			if (current==null) {
+            	            current = factory.create("Type");
+            	            associateNodeWithAstElement(currentNode, current);
+            	        }
+                    
+            // ./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g:192:1: ( RULE_ID )
+            // ./src-gen/org/eclipse/xtext/crossrefs/parser/internal/InternalLangA.g:193:2: RULE_ID
             {
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleType438); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleType442); 
              
                 createLeafNode("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "extends"); 
                 
@@ -446,6 +452,6 @@ public class InternalLangAParser extends AbstractAntlrParser {
     public static final BitSet FOLLOW_12_in_ruleType375 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleType396 = new BitSet(new long[]{0x0000000000002000L});
     public static final BitSet FOLLOW_13_in_ruleType417 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleType438 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleType442 = new BitSet(new long[]{0x0000000000000002L});
 
 }

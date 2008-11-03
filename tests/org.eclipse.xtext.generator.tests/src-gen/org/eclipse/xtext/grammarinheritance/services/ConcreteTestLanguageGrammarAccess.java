@@ -29,16 +29,16 @@ public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implem
 	}
 
 	public ParserRule pr_InheritedParserRule() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0"),true); 
+		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#InheritedParserRule"),true); 
 	}
 
 	
 	public LexerRule lr_REAL() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.1"),true); 
+		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#REAL"),true); 
 	}
 
 	public LexerRule lr_ID() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.2"),true); 
+		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#ID"),true); 
 	}
 
 	public LexerRule lr_INT() {
