@@ -21,8 +21,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.crossref.ILinkProvider;
 import org.eclipse.xtext.crossref.ILinker;
+import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.IURIChecker;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -31,13 +31,12 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResource.Diagnostic;
 import org.eclipse.xtext.service.Inject;
 
 public final class Linker implements ILinker {
 
 	@Inject
-	private ILinkProvider linker;
+	private ILinkingService linkingService;
 
 	@Inject
 	private IAstFactory factory;
@@ -68,8 +67,8 @@ public final class Linker implements ILinker {
 	@SuppressWarnings("unchecked")
 	private List<XtextResource.Diagnostic> ensureIsLinked(EObject obj, LeafNode node, CrossReference ref) {
 		List<XtextResource.Diagnostic> brokenLinks = new ArrayList<XtextResource.Diagnostic>();
-		URI[] links = linker.getLinks((LeafNode) node, ref, obj);
-		if (links==null || links.length == 0) {
+		List<URI> links = linkingService.getLinkedObjects(obj, ref, (LeafNode)node);
+		if (links==null || links.size() == 0) {
 			brokenLinks.add(createError(obj, node, ref, null));
 			return brokenLinks;
 		}
@@ -77,11 +76,11 @@ public final class Linker implements ILinker {
 		if (eRef == null)
 			throw new IllegalStateException("Couldn't find EReference for cross reference " + ref);
 		if (eRef.getUpperBound() == 1) {
-			if (links.length > 1)
+			if (links.size() > 1)
 				throw new IllegalStateException("The feature " + eRef.getName() + " cannot hold multiple values : "
 						+ Arrays.asList(links));
 
-			URI uri = links[0];
+			URI uri = links.get(0);
 			if (checker.exists(uri,obj)) {
 				EObject proxy = createProxy(ref, uri);
 				obj.eSet(eRef, proxy);

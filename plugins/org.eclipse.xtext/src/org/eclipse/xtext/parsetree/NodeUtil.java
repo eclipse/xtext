@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Heiko Behrens
  * 
  */
 public class NodeUtil {
@@ -165,6 +166,17 @@ public class NodeUtil {
 			}
 			currentOffset += serializedLength;
 		}
+	}
+
+	public static EObject getNearestSemanticObject(AbstractNode node) {
+		while(node != null) {
+			if(node.getElement()!=null)
+				return node.getElement();
+			
+			node = (AbstractNode) node.eContainer();
+		}	
+
+		return null;
 	}
 
 }
