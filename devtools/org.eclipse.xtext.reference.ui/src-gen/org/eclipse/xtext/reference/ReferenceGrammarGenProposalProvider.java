@@ -230,7 +230,7 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
     
     @Override
 	protected String getDefaultImageFilePath() {
-		return "iconds/editor.gif";
+		return "icons/editor.gif";
 	}
 
 	@Override
