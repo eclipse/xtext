@@ -57,7 +57,7 @@ public class XtextResource extends ResourceImpl {
 
 	@Inject
 	private ITokenSerializer tokenSerializer;
-	
+
 	private IParseResult parseResult;
 
 	public XtextResource(URI uri) {
@@ -67,29 +67,39 @@ public class XtextResource extends ResourceImpl {
 	public IParseResult getParseResult() {
 		return parseResult;
 	}
-	
-	public void reparse(String newContent) throws IOException{
+
+	public void reparse(String newContent) throws IOException {
 		doLoad(new StringInputStream(newContent), null);
 	}
-	
+
+	@Override
+	protected void doUnload() {
+		super.doUnload();
+		parseResult = null;
+	}
+
 	public void update(int offset, int replacedTextLength, String newText) {
-		CompositeNode rootNode = parseResult.getRootNode();
-
-		// unloading is required to ensure that any EObjects hanging around
-		// (e.g. in the outline) get a proxied URI
-		// and thus still can be compared by their URI
-		unload();
-
-		parseResult = parser.reparse(rootNode, offset, replacedTextLength, newText);
-		clearOutput();
-		if (parseResult != null) {
-			if (parseResult.getRootASTElement() != null)
-				getContents().add(parseResult.getRootASTElement());
-			if (parseResult.getRootNode() != rootNode) {
-				addNodeContentAdapter();
-			}
+		if (!isLoaded()) {
+			throw new IllegalStateException("You can't update an unloaded resource.");
 		}
-		doLinking();
+		try {
+			isLoading = true;
+			CompositeNode rootNode = parseResult.getRootNode();
+
+			parseResult = parser.reparse(rootNode, offset, replacedTextLength, newText);
+			getContents().clear();
+			getErrors().clear();
+			if (parseResult != null) {
+				if (parseResult.getRootASTElement() != null)
+					getContents().add(parseResult.getRootASTElement());
+				if (parseResult.getRootNode() != rootNode) {
+					addNodeContentAdapter();
+				}
+			}
+			doLinking();
+		} finally {
+			isLoading = false;
+		}
 	}
 
 	protected void doLinking() {
@@ -105,12 +115,11 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	private void addNodeContentAdapter() {
-		parseResult.getRootNode().eAdapters().add(new NodeContentAdapter());
+		NodeContentAdapter.createAdapterAndAddToNode(parseResult.getRootNode());
 	}
 
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		clearOutput();
 		parseResult = parser.parse(inputStream, elementFactory);
 		if (parseResult != null) {
 			EObject rootElement = parseResult.getRootASTElement();
@@ -120,11 +129,6 @@ public class XtextResource extends ResourceImpl {
 			addNodeContentAdapter();
 		}
 		doLinking();
-	}
-
-	private void clearOutput() {
-		getContents().clear();
-		getErrors().clear();
 	}
 
 	@Override
@@ -148,7 +152,7 @@ public class XtextResource extends ResourceImpl {
 
 		return result;
 	}
- 
+
 	@Override
 	public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
 		if (contents.size() != 1)
