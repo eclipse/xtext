@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.common.editor.outline;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.xtext.ui.core.XtextUIMessages;
-import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.internal.XtextPluginImages;
 
 /**
@@ -18,12 +17,12 @@ import org.eclipse.xtext.ui.core.internal.XtextPluginImages;
  */
 public class ToggleLinkWithEditorAction extends Action {
 
-	XtextEditor editor;
+	private final XtextContentOutlinePage outlinePage;
 
-	public ToggleLinkWithEditorAction(XtextEditor editor) {
+	public ToggleLinkWithEditorAction(XtextContentOutlinePage outlinePage) {
 		super(XtextUIMessages.getString("ToggleLinkWithEditorAction.label")); //$NON-NLS-1$
+		this.outlinePage = outlinePage;
 		setChecked(LinkingHelper.isLinkingEnabled());
-		this.editor = editor;
 		setToolTipText(XtextUIMessages.getString("ToggleLinkWithEditorAction.toolTip")); //$NON-NLS-1$
 		setDescription(XtextUIMessages.getString("ToggleLinkWithEditorAction.description")); //$NON-NLS-1$
 		setImageDescriptor(XtextPluginImages.DESC_LINK_WITH_EDITOR);
@@ -33,7 +32,7 @@ public class ToggleLinkWithEditorAction extends Action {
 	public void run() {
 		LinkingHelper.setLinkingEnabled(isChecked());
 		if (isChecked()) {
-			editor.synchronizeOutlinePage();
+			outlinePage.synchronizeOutlinePage();
 		}
 	}
 

@@ -15,14 +15,16 @@ import org.eclipse.xtext.ui.common.internal.Activator;
  */
 public final class LinkingHelper {
 
+	private static final String TOGGLE_LINK_WITH_EDITOR_ACTION_IS_CHECKED = "ToggleLinkWithEditorAction.isChecked"; //$NON-NLS-1$
+
 	public static boolean isLinkingEnabled() {
 		boolean isLinkingEnabled = Activator.getDefault().getPreferenceStore().getBoolean(
-				"ToggleLinkWithEditorAction.isChecked"); //$NON-NLS-1$
+				TOGGLE_LINK_WITH_EDITOR_ACTION_IS_CHECKED); 
 		return isLinkingEnabled;
 	}
 
 	public static void setLinkingEnabled(boolean enabled) {
-		Activator.getDefault().getPreferenceStore().setValue("ToggleLinkWithEditorAction.isChecked", enabled); //$NON-NLS-1$
+		Activator.getDefault().getPreferenceStore().setValue(TOGGLE_LINK_WITH_EDITOR_ACTION_IS_CHECKED, enabled);
 	}
 
 }
