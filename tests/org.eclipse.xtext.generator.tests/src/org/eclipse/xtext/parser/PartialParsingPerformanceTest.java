@@ -19,17 +19,19 @@ import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
  */
 public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 
-	private static final int NUM_ELEMENTS = 20;
+	private static final int NUM_ELEMENTS = 100;
 	
 	public void testExpression() throws Exception {
 		with(SimpleExpressionsStandaloneSetup.class);
-		StringBuffer modelBuffer = new StringBuffer();
+		String d = ")+d)";
+		String A_B = "(a+(b*";
+		StringBuffer modelBuffer = new StringBuffer(NUM_ELEMENTS * (A_B.length() + d.length()) + 1);
 		for(int i=0; i<NUM_ELEMENTS; ++i) {
-			modelBuffer.append("(a+(b*");
+			modelBuffer.append(A_B);
 		}
 		modelBuffer.append("c");
 		for(int i=0; i<NUM_ELEMENTS; ++i) {
-			modelBuffer.append(")+d)");
+			modelBuffer.append(d);
 		}
 		String model = modelBuffer.toString();
 		CompositeNode rootNode = getRootNode(model);
