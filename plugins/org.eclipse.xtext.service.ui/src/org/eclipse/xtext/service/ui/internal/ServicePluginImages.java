@@ -34,7 +34,7 @@ public class ServicePluginImages {
 	 */
 
 	private static final String PATH_OBJ = ICONS_PATH + "obj16/"; //$NON-NLS-1$
-	//    private static final String PATH_VIEW = ICONS_PATH + "view16/"; //$NON-NLS-1$
+	//private static final String PATH_VIEW = ICONS_PATH + "view16/"; //$NON-NLS-1$
 	private static final String PATH_LCL = ICONS_PATH + "elcl16/"; //$NON-NLS-1$
 	private static final String PATH_LCL_DISABLED = ICONS_PATH + "dlcl16/"; //$NON-NLS-1$
 	//    private static final String PATH_TOOL = ICONS_PATH + "etool16/"; //$NON-NLS-1$
@@ -79,6 +79,7 @@ public class ServicePluginImages {
 	/**
 	 * View
 	 */
+	//public static final ImageDescriptor DESC_SERVICE_VIEW = create(PATH_VIEW, "class_hi.gif"); //$NON-NLS-1$
 
 	private static ImageDescriptor create(String prefix, String name) {
 		return ImageDescriptor.createFromURL(makeImageURL(prefix, name));
