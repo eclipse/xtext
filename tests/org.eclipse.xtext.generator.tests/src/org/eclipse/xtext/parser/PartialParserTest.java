@@ -8,16 +8,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import java.util.Iterator;
+
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
 import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.testlanguages.LookaheadLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
- * 
+ * @author Sebastian Zarnekow
  */
 public class PartialParserTest extends AbstractPartialParserTest {
 
@@ -40,6 +43,37 @@ public class PartialParserTest extends AbstractPartialParserTest {
 				partiallyParseAndCompare(rootNode, i, j);
 			}
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void testNodeState() throws Exception {
+		with(SimpleExpressionsStandaloneSetup.class);
+		String model = "(a\r\n+(b\r\n*c\r\n)+d\r\n)";
+		CompositeNode rootNode = getRootNode(model);
+		Iterator iter = rootNode.getLeafNodes().iterator();
+		boolean found = false;
+		while(iter.hasNext()) {
+			LeafNode leaf = (LeafNode) iter.next();
+			if ( leaf.getText().equals("c")) {
+				assertEquals("before", 3, leaf.getLine());
+				assertEquals("before", 10, leaf.getOffset());
+				found = true;
+			}
+		}
+		assertTrue("node c found", found);
+		IParseResult reparse = PartialParsingUtil.reparse(getParser(), rootNode, model.indexOf('c'), 1, "xy");
+		assertTrue(reparse.getParseErrors() == null || reparse.getParseErrors().isEmpty());
+		iter = rootNode.getLeafNodes().iterator();
+		found = false;
+		while(iter.hasNext()) {
+			LeafNode leaf = (LeafNode) iter.next();
+			if ( leaf.getText().equals("xy")) {
+				assertEquals("after", 3, leaf.getLine());
+				assertEquals("after", 10, leaf.getOffset());
+				found = true;
+			}
+		}
+		assertTrue("node xy found", found);
 	}
 
 	private void partiallyParseAndCompare(CompositeNode rootNode, int offset, int length) throws Exception {
