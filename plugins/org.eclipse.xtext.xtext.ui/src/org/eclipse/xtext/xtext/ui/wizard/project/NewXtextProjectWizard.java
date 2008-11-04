@@ -205,20 +205,18 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 			EclipseResourceUtil.createPackagesWithDummyClasses(dslProject, "src-gen", exportedPackages);
 			monitor.worked(1);
 
-			List<String> exportedUiPackages = Arrays.asList(basePackage + ".ui.services");
 			// DSL UI Project
 			final IProject dslUIProject = EclipseResourceUtil.createProject(xtextProjectInfo.getProjectName() + ".ui",
 					SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(Arrays.asList(
 							xtextProjectInfo.getProjectName().toLowerCase() + ";visibility:=reexport",
 							"org.eclipse.xtext.ui.core", "org.eclipse.xtext.ui.common",
 							"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"",
-							"org.eclipse.ui.editors;bundle-version=\"3.4.0\"")), exportedUiPackages, null, monitor,
+							"org.eclipse.ui.editors;bundle-version=\"3.4.0\"")), null, null, monitor,
 					NewXtextProjectWizard.this.getShell());
 
 			if (dslUIProject == null) {
 				return;
 			}
-			EclipseResourceUtil.createPackagesWithDummyClasses(dslUIProject, "src-gen", exportedUiPackages);
 			monitor.worked(1);
 
 			// Generator Project
