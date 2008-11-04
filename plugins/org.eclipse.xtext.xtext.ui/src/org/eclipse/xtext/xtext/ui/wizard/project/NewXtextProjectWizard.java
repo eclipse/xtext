@@ -70,6 +70,7 @@ import org.eclipse.xtext.xtext.ui.wizard.EclipseResourceUtil;
  * </ul>
  * 
  * @author Michael Clay - Initial contribution and API
+ * @author Dennis Huebner
  */
 
 public class NewXtextProjectWizard extends Wizard implements INewWizard {
@@ -106,18 +107,22 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
 				try {
 					doFinish(page.getXtextProjectInfo(), monitor);
-				} catch (Exception e) {
+				}
+				catch (Exception e) {
 					throw new InvocationTargetException(e);
-				} finally {
+				}
+				finally {
 					monitor.done();
 				}
 			}
 		};
 		try {
 			getContainer().run(true, false, op);
-		} catch (InterruptedException e) {
+		}
+		catch (InterruptedException e) {
 			return false;
-		} catch (InvocationTargetException e) {
+		}
+		catch (InvocationTargetException e) {
 			Throwable realException = e.getTargetException();
 			MessageDialog.openError(getShell(), "Error", realException.getMessage());
 			return false;
@@ -138,9 +143,11 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 			public IStatus runInUIThread(final IProgressMonitor monitor) {
 				try {
 					new XtextProjectCreator(xtextProjectInfo).run(monitor);
-				} catch (final InvocationTargetException e) {
+				}
+				catch (final InvocationTargetException e) {
 					logger.error(e);
-				} catch (final InterruptedException e) {
+				}
+				catch (final InterruptedException e) {
 					logger.error(e);
 				}
 				return Status.OK_STATUS;
@@ -220,7 +227,8 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 				dslGeneratorProject = EclipseResourceUtil.createProject(xtextProjectInfo.getProjectName()
 						+ ".generator", SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(
 						Arrays.asList(xtextProjectInfo.getProjectName().toLowerCase(), "org.eclipse.xtext",
-								"org.eclipse.xtext.generator")), Collections.<String> emptyList(), null, monitor,
+								"org.eclipse.xtext.generator", "org.eclipse.xpand", "org.eclipse.xtend",
+								"org.eclipse.xtend.typesystem.emf")), Collections.<String> emptyList(), null, monitor,
 						NewXtextProjectWizard.this.getShell());
 
 				if (dslGeneratorProject == null) {
@@ -242,7 +250,12 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 						.getLocation().makeAbsolute().toOSString()));
 				EclipseResourceUtil.createFile("Model." + xtextProjectInfo.getFirstFileExtension(), createSubPackages(
 						"model", dslGeneratorProject, (IFolder) dslGeneratorProject.findMember(SRC_ROOT), monitor),
-						"//Your model", monitor);
+						"//Your model\n" + "foo test\n bar test2", monitor);
+				EclipseResourceUtil.createFile("Template.xpt", createSubPackages("templates", dslGeneratorProject,
+						(IFolder) dslGeneratorProject.findMember(SRC_ROOT), monitor),
+						"«DEFINE root FOR MyDsl::Model»\n" + "«FILE \"output.txt\"»\n"
+								+ "«FOREACH this.elements AS e»\n" + "«e.name» («e.metaType»)\n" + "«ENDFOREACH»\n"
+								+ "«ENDFILE»\n" + "«ENDDEFINE»\n", monitor);
 			}
 			output.addOutlet(new Outlet(false, defaultEncoding, "ACTIVATOR_OUTLET", true, dslUIProject.getFolder(
 					SRC_ROOT + IPath.SEPARATOR + xtextProjectInfo.getBasePackagePath() + IPath.SEPARATOR + "ui")
