@@ -5,5 +5,5 @@ import ReferenceGrammar;
  * context Entity WARNING "Entity names should start with a capital" :
  *    name.toFirstUpper() == name;
  */
-context Spielplatz ERROR "Zu gross" : 
-	groesse<100;
+context Spielplatz ERROR "Der Spielplatz ist zu gross fuer die Kinder." : 
+	groesse < 100;
