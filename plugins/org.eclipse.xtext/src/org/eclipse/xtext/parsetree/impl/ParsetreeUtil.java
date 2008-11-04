@@ -54,7 +54,7 @@ public class ParsetreeUtil {
 		return line;
 	}
 
-	private static int countLines(String text) {
+	public static int countLines(String text) {
 		int line = 0;
 		char[] charArray = text.toCharArray();
 		if ( separator.length == 1) {
