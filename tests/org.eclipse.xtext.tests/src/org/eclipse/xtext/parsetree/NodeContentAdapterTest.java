@@ -30,10 +30,10 @@ public class NodeContentAdapterTest extends TestCase {
 	private NodeContentAdapter contentAdapter;
 
 	/**
-	 * root +- leaf0
-	 *      +- comp0 +- leaf1
-	 *      +- comp1 +- leaf2
-	 *      +- leaf3
+	 * root +- leaf0 = TEXT0
+	 *      +- comp0 +- leaf1 = TEXT1
+	 *      +- comp1 +- leaf2 = TEXT2
+	 *      +- leaf3 = TEXT3
 	 */
 	@Override
 	protected void setUp() throws Exception {
@@ -64,12 +64,12 @@ public class NodeContentAdapterTest extends TestCase {
 	
 	public void testAdaptContainment() throws Exception {
 		createTree(root);
-		root.eAdapters().add(contentAdapter);
+		contentAdapter.addToNode(root);
 		assertInitialSetting();		
 	}
 
 	public void testAdaptOnAdd() throws Exception {
-		root.eAdapters().add(contentAdapter);
+		contentAdapter.addToNode(root);
 		createTree(root);
 		assertInitialSetting();		
 	}
@@ -110,7 +110,7 @@ public class NodeContentAdapterTest extends TestCase {
 	
 	public void testRemove() throws Exception {
 		createTree(root);
-		root.eAdapters().add(contentAdapter);
+		contentAdapter.addToNode(root);
 		
 		comp0.getChildren().remove(leaf1);
 
@@ -138,7 +138,7 @@ public class NodeContentAdapterTest extends TestCase {
 
 	public void testAdd() throws Exception {
 		createTree(root);
-		root.eAdapters().add(contentAdapter);
+		contentAdapter.addToNode(root);
 		
 		LeafNode leaf4 = ParsetreeFactory.eINSTANCE.createLeafNode();
 		leaf4.setText(TEXT4);
