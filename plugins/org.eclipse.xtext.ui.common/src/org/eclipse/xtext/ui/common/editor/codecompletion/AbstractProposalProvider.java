@@ -161,13 +161,13 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	 *         assignment
 	 */
 	protected List<? extends ICompletionProposal> lookupCrossReference(CrossReference crossReference, EObject model,
-			int offset) {
+			String prefix, int offset) {
 		
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
-		if (linkingService != null && model instanceof AbstractNode) {
-			EObject semanticModel = NodeUtil.getNearestSemanticObject((AbstractNode) model);
-			List<Pair<String, URI>> candidates = linkingService.getLinkCandidates(semanticModel, crossReference, "");
+		if (linkingService != null) {
+			EObject semanticModel = model instanceof AbstractNode?NodeUtil.getNearestSemanticObject((AbstractNode) model):model;
+			List<Pair<String, URI>> candidates = linkingService.getLinkCandidates(semanticModel, crossReference, prefix);
 			for (Pair<String, URI> candidate : candidates) {
 				completionProposalList.add(createCompletionProposal(candidate.getFirstElement(), offset));
 			}

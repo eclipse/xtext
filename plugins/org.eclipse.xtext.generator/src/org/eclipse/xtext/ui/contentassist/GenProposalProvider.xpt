@@ -77,7 +77,7 @@ public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProp
 					+ prefix.trim() + "'");
 		}
 		«IF CrossReference.isInstance(assignment.terminal)-»
-		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, offset);
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, prefix, offset);
 		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).name=="ID" -»
 		return Collections.singletonList(createCompletionProposal("«fqnFeatureName»", offset));
 		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).name=="INT" -»

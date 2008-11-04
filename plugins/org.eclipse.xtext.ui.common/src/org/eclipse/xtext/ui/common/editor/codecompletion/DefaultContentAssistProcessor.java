@@ -22,6 +22,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
@@ -53,7 +54,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 	@Inject
 	private IProposalProvider proposalProvider;
-	
+
 	private final Map<String, Method> methodLookupMap = new HashMap<String, Method>();
 
 	/**
@@ -76,7 +77,6 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				});
 				Assert.isNotNull(rootNode);
 
-				
 				// last COMPLETE node element with associated grammar element
 				AbstractNode lastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
 				// node at CURRENT cursor pos. with or without grammar element
@@ -84,9 +84,13 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				// get associated grammar element
 				AbstractElement grammarElement = ParseTreeUtil.getGrammarElementFromNode(lastCompleteNode);
 
-				String prefix = viewer.getTextWidget().getCharCount()>0 ?
-					viewer.getTextWidget().getText(currentLeafNode.getOffset(), offset<viewer.getTextWidget().getCharCount()?offset : 
-					viewer.getTextWidget().getCharCount()-1) : "";
+				String prefix = "";
+				StyledText textWidget = viewer.getTextWidget();
+				if (textWidget.getCharCount() > 0) {
+					int boundedOffset = Math.min(offset, textWidget.getCharCount()) -1;
+					if(currentLeafNode.getOffset() <= boundedOffset)
+						prefix = textWidget.getText(currentLeafNode.getOffset(), boundedOffset);
+				}
 
 				List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
@@ -181,7 +185,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		}
 		return elementList;
 	}
-	
+
 	protected final Set<AbstractElement> calculatePossibleElementSet(AbstractNode contextNode,
 			AbstractElement grammarElement) {
 
@@ -300,17 +304,16 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 				ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
 
-				EObject model = null==((CompositeNode) currentLeafNode.eContainer()).getElement() ? 
-						currentLeafNode.eContainer()
-						: ((CompositeNode) currentLeafNode.eContainer()).getElement();
-				
+				EObject model = null == ((CompositeNode) currentLeafNode.eContainer()).getElement() ? currentLeafNode
+						.eContainer() : ((CompositeNode) currentLeafNode.eContainer()).getElement();
+
 				Method method = findMethod(proposalProvider.getClass(), "complete"
 						+ firstLetterCapitalized(parserRule.getName())
-						+ firstLetterCapitalized(assignment.getFeature()), Assignment.class, model.getClass(),String.class, document.getClass(), int.class);
+						+ firstLetterCapitalized(assignment.getFeature()), Assignment.class, model.getClass(),
+						String.class, document.getClass(), int.class);
 
-				Collection<? extends ICompletionProposal> assignmentProposalList = null==method ? 
-						null :
-						invokeMethod(method,proposalProvider, assignment, model, prefix, document, offset);
+				Collection<? extends ICompletionProposal> assignmentProposalList = null == method ? null
+						: invokeMethod(method, proposalProvider, assignment, model, prefix, document, offset);
 
 				if (null != assignmentProposalList) {
 					completionProposalList.addAll(assignmentProposalList);
@@ -319,10 +322,9 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 			}
 			else if (abstractElement instanceof RuleCall) {
 
-				EObject model = null==((CompositeNode) currentLeafNode.eContainer()).getElement() ? 
-						currentLeafNode.eContainer()
-						: ((CompositeNode) currentLeafNode.eContainer()).getElement();
-				
+				EObject model = null == ((CompositeNode) currentLeafNode.eContainer()).getElement() ? currentLeafNode
+						.eContainer() : ((CompositeNode) currentLeafNode.eContainer()).getElement();
+
 				List<? extends ICompletionProposal> ruleCallProposalList = this.proposalProvider.completeRuleCall(
 						(RuleCall) abstractElement, model, prefix, document, offset);
 
@@ -340,9 +342,8 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 							+ firstLetterCapitalized(typeRef.getAlias()) + firstLetterCapitalized(typeRef.getName()),
 							RuleCall.class, model.getClass(), String.class, document.getClass(), int.class);
 
-					Collection<? extends ICompletionProposal> proposalList = null==method ? 
-							null :
-							invokeMethod(method, proposalProvider, abstractElement, model, prefix, document, offset);
+					Collection<? extends ICompletionProposal> proposalList = null == method ? null : invokeMethod(
+							method, proposalProvider, abstractElement, model, prefix, document, offset);
 
 					if (null != proposalList) {
 						completionProposalList.addAll(proposalList);
@@ -352,7 +353,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 			}
 		}
 	}
-	
+
 	private final String firstLetterCapitalized(String name) {
 		return name.substring(0, 1).toUpperCase() + name.substring(1);
 	}
@@ -366,9 +367,10 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 			Method[] methods = (searchType.isInterface() ? searchType.getMethods() : searchType.getDeclaredMethods());
 			for (int i = 0; i < methods.length; i++) {
 				Method method = methods[i];
-				if (name.equals(method.getName()) && (paramTypes == null || equalOrAssignableTypes(method.getParameterTypes(),paramTypes))) {
-					if (result == null || 
-							equalOrAssignableTypes(result.getParameterTypes(), method.getParameterTypes())) {			
+				if (name.equals(method.getName())
+						&& (paramTypes == null || equalOrAssignableTypes(method.getParameterTypes(), paramTypes))) {
+					if (result == null
+							|| equalOrAssignableTypes(result.getParameterTypes(), method.getParameterTypes())) {
 						result = method;
 						methodLookupMap.put(name, method);
 					}
@@ -378,7 +380,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		}
 		return result;
 	}
-	
+
 	private void handleReflectionException(Exception ex) {
 		if (ex instanceof NoSuchMethodException) {
 			throw new IllegalStateException("Method not found: " + ex.getMessage());
@@ -400,7 +402,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		isex.initCause(ex);
 		throw isex;
 	}
-	
+
 	private final void rethrowRuntimeException(Throwable ex) {
 		if (ex instanceof RuntimeException) {
 			throw (RuntimeException) ex;
@@ -422,31 +424,31 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		}
 		throw new IllegalStateException("huh?");
 	}
-	
+
 	private boolean equalOrAssignableTypes(Class<?>[] a, Class<?>[] a2) {
-        if (a==a2) {
-        	return true;
-        }
+		if (a == a2) {
+			return true;
+		}
 
-        if (a==null || a2==null) {        	
-        	return false;
-        }
+		if (a == null || a2 == null) {
+			return false;
+		}
 
-        int length = a.length;
-        
-        if (a2.length != length) {
-        	return false;        	
-        }
+		int length = a.length;
 
-        for (int i=0; i<length; i++) {
-            Class<?> o1 = a[i];
-            Class<?> o2 = a2[i];
-            
-            if (!(o1==null ? o2==null : o1.equals(o2) || o1.isAssignableFrom(o2))) {
-            	return false;
-            }
-        }
-        return true;
-    }
+		if (a2.length != length) {
+			return false;
+		}
+
+		for (int i = 0; i < length; i++) {
+			Class<?> o1 = a[i];
+			Class<?> o2 = a2[i];
+
+			if (!(o1 == null ? o2 == null : o1.equals(o2) || o1.isAssignableFrom(o2))) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 }
