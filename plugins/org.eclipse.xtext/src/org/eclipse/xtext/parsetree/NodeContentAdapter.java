@@ -10,15 +10,25 @@ package org.eclipse.xtext.parsetree;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.parsetree.impl.ParsetreeUtil;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
- * 
+ * @author Sebastian Zarnekow
  */
 public class NodeContentAdapter extends EContentAdapter {
 
+	public static void createAdapterAndAddToNode(final CompositeNode node) {
+		new NodeContentAdapter().addToNode(node);
+	}
+	
+	public void addToNode(final CompositeNode node) {
+		node.eAdapters().add(this);
+		updateCompositeNode(node, -1, new NodeInfo(0, 1));
+	}
+	
 	@Override
 	public void notifyChanged(Notification notification) {
 		super.notifyChanged(notification);
@@ -27,33 +37,26 @@ public class NodeContentAdapter extends EContentAdapter {
 			CompositeNode parent = (CompositeNode) notifier;
 			Object feature = notification.getFeature();
 			if (ParsetreePackage.Literals.COMPOSITE_NODE__CHILDREN.equals(feature)) {
-				AbstractNode child = (AbstractNode) notification.getNewValue();
 				int eventType = notification.getEventType();
-				int position = notification.getPosition();
 				switch (eventType) {
 					case Notification.ADD:
-						if (position == 0) {
-							updateNodeInfo(child, new NodeInfo(parent.getOffset(), parent.getLine()));
+						int newIdx = notification.getPosition();
+						int startIndex = parent.getOffset() - 1;
+						if (newIdx >= 1) {
+							AbstractNode prevSibling = parent.getChildren().get(newIdx - 1);
+							startIndex = prevSibling.getOffset() + prevSibling.getLength() - 1;
 						}
-						else {
-							AbstractNode predecessor = parent.getChildren().get(position - 1);
-							updateNodeInfo(child, new NodeInfo((predecessor.getOffset() + predecessor.getLength()),
-									predecessor.endLine()));
-						}
+						updateCompositeNode(getRootNode(parent), 
+								startIndex, new NodeInfo(0, 1));
 						break;
 					case Notification.REMOVE:
-						if (position == 0) {
-							updateNodeInfo(parent, new NodeInfo(parent.getOffset(), parent.getLine()));
-						}
-						else {
-							AbstractNode successor = parent.getChildren().get(position);
-							updateNodeInfo(successor, new NodeInfo(child.getOffset(), child.getLine()));
-						}
+						updateCompositeNode(getRootNode(parent), 
+								((AbstractNode) notification.getOldValue()).getOffset() - 1, new NodeInfo(0, 1));
 						break;
 					case Notification.ADD_MANY:
 					case Notification.MOVE:
 					case Notification.REMOVE_MANY:
-						updateNodeInfo(parent, new NodeInfo(parent.getOffset(), parent.getLine()));
+						updateNodeInfo(parent);
 						break;
 					default:
 						break;
@@ -62,30 +65,92 @@ public class NodeContentAdapter extends EContentAdapter {
 		}
 	}
 
-	@Override
-	protected void setTarget(EObject target) {
-		super.setTarget(target);
-		if (target instanceof AbstractNode) {
-			AbstractNode targetNode = (AbstractNode) target;
-			CompositeNode parent = targetNode.getParent();
-			if (parent != null) {
-				EList<AbstractNode> siblings = parent.getChildren();
-				int index = siblings.indexOf(target);
-				if (index == 0) {
-					updateNodeInfo(targetNode, new NodeInfo(parent.getOffset(), parent.getLine()));
-				}
-				else {
-					AbstractNode predecessor = siblings.get(index - 1);
-					updateNodeInfo(targetNode, new NodeInfo((predecessor.getOffset() + predecessor.getLength()),
-							predecessor.endLine()));
-				}
-			}
-			else {
-				updateNodeInfo(targetNode, new NodeInfo(0, 1));
-			}
-		}
+	private CompositeNode getRootNode(AbstractNode node) {
+		return (CompositeNode) EcoreUtil.getRootContainer(node);
 	}
 
+	/**
+	 * Perform necessary updates in any nodes, that are required due
+     * to changes in the given targetNode.
+	 * 
+	 * @param targetNode
+	 */
+	public void updateNodeInfo(AbstractNode targetNode) {
+		CompositeNode root = getRootNode(targetNode);
+		CompositeNode parent = targetNode.getParent();
+		if (parent != null) {
+			EList<AbstractNode> siblings = parent.getChildren();
+			int index = siblings.indexOf(target);
+			if (index <= 0) {
+				updateCompositeNode(root, parent.getOffset() - 1, new NodeInfo(0, 1));
+			}
+			else {
+				AbstractNode predecessor = siblings.get(index - 1);
+				updateCompositeNode(root, predecessor.getOffset() + predecessor.getLength() - 1, new NodeInfo(0, 1));
+			}
+		}
+		else {
+			updateCompositeNode(root, -1, new NodeInfo(0, 1));
+		}
+	}
+	
+	/**
+	 * Recursive implementation for updates of composite nodes due to change events in the node tree.
+	 * The given workingInfo is used as an aggregating parameter.
+	 * @param nodeToUpdate the current node, that will be updated
+	 * @param startAtOffset Update only nodes, that are affected be changes at this index.
+	 * @param workingInfo aggregating object.
+	 */
+	protected void updateCompositeNode(CompositeNode nodeToUpdate, int startAtOffset, NodeInfo workingInfo) {
+		if (nodeToUpdate.getOffset() + nodeToUpdate.getLength() < startAtOffset && nodeToUpdate.getLength() >= 0) {
+			workingInfo.offset += nodeToUpdate.getLength();
+			return;
+		}
+		if (nodeToUpdate.getOffset() > startAtOffset) {
+			nodeToUpdate.setOffset(workingInfo.offset);
+			nodeToUpdate.setLine(workingInfo.line);
+		} else {
+			workingInfo.line = nodeToUpdate.getLine();			
+		}		
+		EList<AbstractNode> children = nodeToUpdate.getChildren();
+		for(int i = 0; i < children.size(); i++) {
+			AbstractNode child = children.get(i);
+			if (child instanceof CompositeNode) {
+				updateCompositeNode((CompositeNode) child, startAtOffset, workingInfo);
+			} else {
+				updateLeafNode((LeafNode) child, workingInfo);
+			}
+		}
+		nodeToUpdate.setLength(workingInfo.offset - nodeToUpdate.getOffset());
+	}
+	
+	/**
+	 * Updates a leaf node and modifies the given workingInfo.
+	 * @param node
+	 * @param workingInfo
+	 */
+	protected void updateLeafNode(LeafNode node, NodeInfo workingInfo) {
+		node.setLength(node.getText().length());
+		node.setOffset(workingInfo.offset);
+		node.setLine(workingInfo.line);
+		workingInfo.offset += node.getLength();
+		workingInfo.line += ParsetreeUtil.countLines(node.getText());
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.emf.common.notify.impl.AdapterImpl#isAdapterForType(java.lang.Object)
+	 */
+	@Override
+	public boolean isAdapterForType(Object type) {
+		return type == NodeContentAdapter.class;
+	}
+	
+	/**
+	 * Internal data structure.
+	 * Serves as an aggregating parameter.
+	 */
 	static class NodeInfo {
 		int offset;
 		int line;
@@ -94,75 +159,5 @@ public class NodeContentAdapter extends EContentAdapter {
 			this.offset = offset;
 			this.line = line;
 		}
-	}
-
-	/**
-	 * Set <code>info</code> on <code>node</code> and then descent into the
-	 * contents of node updating length and offset.
-	 * 
-	 * @param node
-	 * @param info
-	 * @return
-	 */
-	protected NodeInfo updateNodeInfoInContents(AbstractNode node, NodeInfo info) {
-		node.setOffset(info.offset);
-		node.setLine(info.line);
-		if (node instanceof LeafNode) {
-			node.setLength(((LeafNode) node).getText().length());
-			info.offset += node.getLength();
-			info.line = node.endLine();
-		}
-		else if (node instanceof CompositeNode) {
-			int length = 0;
-			for (AbstractNode child : ((CompositeNode) node).getChildren()) {
-				info = updateNodeInfoInContents(child, info);
-				length += child.getLength();
-			}
-			node.setLength(length);
-		}
-		return info;
-	}
-
-	protected void updateNodeInfo(AbstractNode node, NodeInfo info) {
-		updateNodeInfoInContents(node, info);
-		updateFollowingNodes(node, info);
-	}
-
-	/**
-	 * If a node in a tree changes its size, the offset of all following nodes
-	 * (successors, their contents, successors of the parent and their content)
-	 * must be updated.
-	 * 
-	 * @param node
-	 * @param info
-	 */
-	protected void updateFollowingNodes(AbstractNode node, NodeInfo info) {
-		CompositeNode parent = node.getParent();
-		if (parent != null) {
-			EList<AbstractNode> siblings = parent.getChildren();
-			int index = siblings.indexOf(node);
-			int parentLength=0;
-			for (int i = 0; i < siblings.size(); ++i) {
-				AbstractNode sibling = siblings.get(i);
-				parentLength += sibling.getLength();
-				if(i > index) {
-					info = updateNodeInfoInContents(sibling, info);
-				}
-			}
-			parent.setLength(parentLength);
-			updateFollowingNodes(parent, info);
-		}
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.emf.common.notify.impl.AdapterImpl#isAdapterForType(java.
-	 * lang.Object)
-	 */
-	@Override
-	public boolean isAdapterForType(Object type) {
-		return type == NodeContentAdapter.class;
 	}
 }
