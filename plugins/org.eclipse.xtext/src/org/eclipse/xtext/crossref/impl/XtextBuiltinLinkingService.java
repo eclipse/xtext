@@ -96,7 +96,7 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 
 	private boolean isPartialLinkTextMatching(String partialLinkText, String linktext) {
 		// TODO this might be unnecessary due to filtering on the UI side
-		return linktext.startsWith(partialLinkText);
+		return linktext.toUpperCase().startsWith(partialLinkText.trim().toUpperCase());
 	}
 
 }
