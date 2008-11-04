@@ -165,8 +165,8 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
-		if (linkingService != null) {
-			EObject semanticModel = model instanceof AbstractNode ? NodeUtil.getNearestSemanticObject((AbstractNode) model) : model;
+		if (linkingService != null && model instanceof AbstractNode) {
+			EObject semanticModel = NodeUtil.getNearestSemanticObject((AbstractNode) model);
 			List<Pair<String, URI>> candidates = linkingService.getLinkCandidates(semanticModel, crossReference, "");
 			for (Pair<String, URI> candidate : candidates) {
 				completionProposalList.add(createCompletionProposal(candidate.getFirstElement(), offset));
