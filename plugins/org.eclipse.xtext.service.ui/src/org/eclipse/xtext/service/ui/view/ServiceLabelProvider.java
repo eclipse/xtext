@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.service.view;
+package org.eclipse.xtext.service.ui.view;
 
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
@@ -14,7 +14,7 @@ import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelP
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry.Entry;
-import org.eclipse.xtext.ui.core.internal.XtextPluginImages;
+import org.eclipse.xtext.service.ui.internal.ServicePluginImages;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -51,18 +51,18 @@ public class ServiceLabelProvider extends LabelProvider implements IStyledLabelP
 	@Override
 	public Image getImage(Object element) {
 		if (element instanceof IServiceScope) {
-			return XtextPluginImages.get(XtextPluginImages.OBJ_DESC_LANGUAGE);
+			return ServicePluginImages.get(ServicePluginImages.OBJ_DESC_LANGUAGE);
 		}
 		if (element instanceof Entry) {
 			// Entry entry = (Entry) element;
-			return XtextPluginImages.get(XtextPluginImages.OBJ_DESC_SERVICE_LOADED);
+			return ServicePluginImages.get(ServicePluginImages.OBJ_DESC_SERVICE_LOADED);
 			// if (entry.isLoaded()) {
 			// return
-			// XtextPluginImages.get(XtextPluginImages.OBJ_DESC_SERVICE_LOADED);
+			// ServicePluginImages.get(ServicePluginImages.OBJ_DESC_SERVICE_LOADED);
 			// }
 			// else {
 			// return
-			// XtextPluginImages.get(XtextPluginImages.OBJ_DESC_SERVICE_NOT_LOADED);
+			// ServicePluginImages.get(ServicePluginImages.OBJ_DESC_SERVICE_NOT_LOADED);
 			//
 			// }
 		}

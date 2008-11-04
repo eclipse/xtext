@@ -116,22 +116,22 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 							EObject astNode = resource.getResourceSet().getEObject(uri, true);
 							NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(astNode);
 							CompositeNode parserNode = nodeAdapter.getParserNode();
-			
+
 							AbstractNode selectionNode = findSelectionNode(parserNode);
 							int offset = selectionNode.getOffset();
 							int length = selectionNode.getLength();
-			
+
 							getSourceViewer().revealRange(offset, length);
 							getSourceViewer().setSelectedRange(offset, length);
-			
+
 							return null;
 						}
 					});
-			
+
 				}
 			}
 		}
-		
+
 		private AbstractNode findSelectionNode(CompositeNode startNode) {
 			EList<AbstractNode> leafNodes = startNode.getChildren();
 			AbstractNode keywordNode = null;
@@ -172,26 +172,26 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 		public void selectionChanged(SelectionChangedEvent event) {
 			ISelection selection = event.getSelection();
 			if (!selection.isEmpty() && selection instanceof ITextSelection) {
-			
+
 				final ITextSelection textSel = (ITextSelection) selection;
-			
+
 				getDocument().readOnly(new UnitOfWork<Object>() {
 					public Object exec(XtextResource resource) throws Exception {
 						IParseResult parseResult = resource.getParseResult();
 						Assert.isNotNull(parseResult);
 						CompositeNode rootNode = parseResult.getRootNode();
-			
+
 						// Get the current element from the offset
 						int offset = textSel.getOffset();
 						AbstractNode node = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
-			
+
 						// Synchronize the outline page
 						synchronizeOutlinePage(node);
-			
+
 						return null;
 					}
 				});
-			
+
 			}
 		}
 	}
@@ -275,6 +275,9 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 	public Object getAdapter(Class adapter) {
 		if (adapter.equals(IContentOutlinePage.class)) {
 			return getContentOutlinePage();
+		}
+		else if (IServiceScope.class.equals(adapter)) {
+			return getScope();
 		}
 		return super.getAdapter(adapter);
 	}
