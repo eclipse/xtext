@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.service.view.handler;
+package org.eclipse.xtext.service.ui.view.handler;
 
 import java.util.Map;
 
@@ -14,7 +14,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.commands.IElementUpdater;
 import org.eclipse.ui.menus.UIElement;
-import org.eclipse.xtext.ui.core.service.view.ServiceRegistryView;
+import org.eclipse.xtext.service.ui.view.ServiceRegistryView;
 
 /**
  * @author Dennis Hübner - Initial contribution and API

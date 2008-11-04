@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.core.service.view;
+package org.eclipse.xtext.service.ui.view;
 
 import org.eclipse.jface.dialogs.IDialogSettings;
 

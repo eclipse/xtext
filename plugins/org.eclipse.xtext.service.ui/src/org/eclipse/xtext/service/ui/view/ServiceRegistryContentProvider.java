@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.service.view;
+package org.eclipse.xtext.service.ui.view;
 
 import java.util.Collection;
 import java.util.Collections;

@@ -6,13 +6,14 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.service.view;
+package org.eclipse.xtext.service.ui.view;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -30,8 +31,7 @@ import org.eclipse.ui.dialogs.PatternFilter;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.ui.core.editor.XtextEditor;
-import org.eclipse.xtext.ui.core.internal.Activator;
+import org.eclipse.xtext.service.ui.Activator;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -95,13 +95,21 @@ public class ServiceRegistryView extends ViewPart implements ISelectionListener 
 		filteredTree.dispose();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeorg.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.
+	 * IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
+	 */
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
-		if (settings.isLinkWithEditor() && part instanceof XtextEditor) {
-			IServiceScope scope = ((XtextEditor) part).getScope();
-			treeViewer.setSelection(new StructuredSelection(scope));
-			// treeViewer.expandToLevel(scope, 1);
+		if (settings.isLinkWithEditor() && part instanceof IAdaptable) {
+			IServiceScope scope = (IServiceScope) ((IAdaptable) part).getAdapter(IServiceScope.class);
+			if (scope != null) {
+				treeViewer.setSelection(new StructuredSelection(scope));
+				// treeViewer.expandToLevel(scope, 1);
+				treeViewer.refresh(true);
+			}
 		}
-		treeViewer.refresh(true);
 	}
 
 	// Commands delegates

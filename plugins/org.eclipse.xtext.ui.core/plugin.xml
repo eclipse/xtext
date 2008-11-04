@@ -12,82 +12,7 @@
             label="Syntax">
       </keyword>
    </extension>
-   <extension
-         point="org.eclipse.ui.views">
-      <view
-            class="org.eclipse.xtext.ui.core.service.view.ServiceRegistryView"
-            id="org.eclipse.xtext.ui.core.views.ServiceRegistryView"
-            name="%ServiceRegistryView.name"
-            restorable="true">
-      </view>
-   </extension>
-   <extension
-         point="org.eclipse.ui.menus">
-      <menuContribution
-            locationURI="toolbar:org.eclipse.xtext.ui.core.views.ServiceRegistryView">
-         <command
-               commandId="org.eclipse.xtext.ui.core.serviceregistry.linkWithEditor"
-               disabledIcon="icons/dlcl16/synced.gif"
-               icon="icons/elcl16/synced.gif"
-               style="toggle">
-         </command>
-         <command
-               commandId="org.eclipse.xtext.ui.core.serviceregistry.showScopes"
-               icon="icons/elcl16/all_instances.gif"
-               style="push">
-         </command>
-      </menuContribution>
-      <menuContribution
-            locationURI="menu:org.eclipse.xtext.ui.core.views.ServiceRegistryView">
-         <command
-               commandId="org.eclipse.xtext.ui.core.serviceregistry.showFQNames"
-               style="toggle">
-         </command>
-      </menuContribution>
-   <menuContribution
-            locationURI="popup:#TextEditorContext?after=additions">
-         <command
-               commandId="org.eclipse.ui.edit.text.contentAssist.proposals"
-               style="push">
-            <visibleWhen
-                  checkEnabled="false">
-               <reference
-                     definitionId="isActiveEditorAnInstanceOfXtextEditor">
-               </reference>
-            </visibleWhen>
-         </command>
-      </menuContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.commands">
-      <category
-            id="org.eclipse.xtext.ui.core.views.registry"
-            name="%ServiceRegistryView.category.name">
-      </category>
-      <command
-            categoryId="org.eclipse.xtext.ui.core.views.registry"
-            defaultHandler="org.eclipse.xtext.ui.core.service.view.handler.ShowFQNamesHandler"
-            id="org.eclipse.xtext.ui.core.serviceregistry.showFQNames"
-            name="%ServiceRegistryView.ShowFQNames.name">
-         <state
-               class="org.eclipse.jface.commands.ToggleState"
-               id="STYLE">
-         </state>
-      </command>
-      <command
-            categoryId="org.eclipse.xtext.ui.core.views.registry"
-            defaultHandler="org.eclipse.xtext.ui.core.service.view.handler.LinkWithEditorHandler"
-            id="org.eclipse.xtext.ui.core.serviceregistry.linkWithEditor"
-            name="%ServiceRegistryView.LinkWithEditor.name">
-      </command>
-      <command
-            categoryId="org.eclipse.xtext.ui.core.views.registry"
-            defaultHandler="org.eclipse.xtext.ui.core.service.view.handler.ShowAllScopesHandler"
-            id="org.eclipse.xtext.ui.core.serviceregistry.showScopes"
-            name="%ServiceRegistryView.ShowScopes.name">
-      </command>
-   </extension>
-   <extension
+  <extension
          point="org.eclipse.ui.handlers">
       <handler
             class="org.eclipse.xtext.ui.core.editor.handler.ContentAssistHandler"
@@ -111,6 +36,23 @@
          </with>
       </definition>
    </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+            <menuContribution
+            locationURI="popup:#TextEditorContext?after=additions">
+         <command
+               commandId="org.eclipse.ui.edit.text.contentAssist.proposals"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+                     definitionId="isActiveEditorAnInstanceOfXtextEditor">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   
    <!--extension
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
       <hyperlinkDetector

@@ -1,24 +1,31 @@
 package org.eclipse.xtext.service.ui;
 
-import org.eclipse.core.runtime.Plugin;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.service.ui.internal.ExtensionPointActivator;
 import org.osgi.framework.BundleContext;
 
-public class Activator extends Plugin {
+/**
+ * @author Dennis Hübner - Initial contribution and API
+ * 
+ */
+public class Activator extends AbstractUIPlugin {
 
 	private static Activator plugin;
-	
+
+	// The plug-in ID
+	public static final String PLUGIN_ID = "org.eclipse.xtext.service.ui";
+
 	public static Activator getDefault() {
 		return plugin;
 	}
 
 	public Activator() {
 	}
-	
+
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		setDefault(this);
-		
+
 		ExtensionPointActivator.activateServices();
 	}
 
@@ -30,5 +37,5 @@ public class Activator extends Plugin {
 		setDefault(null);
 		super.stop(context);
 	}
-	
+
 }

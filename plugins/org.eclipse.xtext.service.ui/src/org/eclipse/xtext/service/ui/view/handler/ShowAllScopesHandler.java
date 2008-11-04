@@ -6,34 +6,22 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.service.view.handler;
-
-import java.util.Map;
+package org.eclipse.xtext.service.ui.view.handler;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.ui.commands.IElementUpdater;
-import org.eclipse.ui.menus.UIElement;
-import org.eclipse.xtext.ui.core.service.view.ServiceRegistryView;
+import org.eclipse.xtext.service.ui.view.ServiceRegistryView;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class ShowFQNamesHandler extends AbstractServiceViewHandler implements IElementUpdater {
+public class ShowAllScopesHandler extends AbstractServiceViewHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		ServiceRegistryView view = getView(event);
-		if (view != null)
-			view.toggleShowFQName();
+		if(view!=null)
+			view.showScopes();
 		return this;
 	}
-
-	@SuppressWarnings("unchecked")
-	public void updateElement(UIElement element, Map parameters) {
-		ServiceRegistryView view = getView(parameters);
-		if (view != null)
-			element.setChecked(view.isShowFQNames());
-	}
-
 }
