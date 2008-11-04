@@ -15,13 +15,26 @@ public class Activator extends AbstractUIPlugin {
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.eclipse.xtext.service.ui";
 
+	/**
+	 * @return singleton instance
+	 */
 	public static Activator getDefault() {
 		return plugin;
 	}
 
+	/**
+	 * Constructor
+	 */
 	public Activator() {
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+	 * )
+	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		setDefault(this);
@@ -33,6 +46,13 @@ public class Activator extends AbstractUIPlugin {
 		plugin = activator;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+	 * )
+	 */
 	public void stop(BundleContext context) throws Exception {
 		setDefault(null);
 		super.stop(context);
