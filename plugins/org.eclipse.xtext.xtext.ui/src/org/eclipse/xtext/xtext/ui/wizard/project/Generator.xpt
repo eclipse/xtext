@@ -16,8 +16,14 @@ package «this.basePackage»;
 import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xpand2.XpandExecutionContextImpl;
+import org.eclipse.xpand2.XpandFacade;
+import org.eclipse.xpand2.output.Outlet;
+import org.eclipse.xpand2.output.OutputImpl;
+import org.eclipse.xtend.typesystem.emf.EmfMetaModel;
 import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -25,14 +31,16 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 /**
  * Run this class to start the Generator<br>
  * generated with: <br>
- * org.eclipse.xtext.xtext.ui/src/org/eclipse/xtext/xtext/ui/wizard/project/Generator.xpt
+ * org.eclipse.xtext.xtext.ui/src/org/eclipse/xtext/xtext/ui/wizard/project/
+ * Generator.xpt
  */
 public class Generator {
 	private static final String SRC_GEN_PATH = "src-gen";
 
 	public void generate() throws IOException {
-		«this.languageNameAbbreviation»GrammarStandaloneSetup.doSetup();
+		«this.languageNameAbbreviation»StandaloneSetup.doSetup();
 
+	
 		GeneratorFacade.cleanFolder(SRC_GEN_PATH);
 
 		String classpathUri = "classpath:/model/Model.«this.firstFileExtension»";
@@ -41,7 +49,23 @@ public class Generator {
 				.createResource(new ClassloaderClasspathUriResolver().resolve(
 						null, URI.createURI(classpathUri)));
 		resource.load(null);
+		EObject model = resource.getContents().get(0);
+		System.out.println(model);
 
+		OutputImpl output = new OutputImpl();
+		String defaultEncoding = System.getProperty("file.encoding");
+		output.addOutlet(new Outlet(false, defaultEncoding, null, true,
+				SRC_GEN_PATH));
+
+		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(
+				output, null, null, null, null);
+		execCtx
+				.registerMetaModel(new EmfMetaModel(model.eClass()
+						.getEPackage()));
+
+		// generate
+		XpandFacade facade = XpandFacade.create(execCtx);
+		facade.evaluate("templates::Template::root", model);
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -50,7 +74,6 @@ public class Generator {
 	}
 
 }
-
 
 «ENDFILE»
 «ENDDEFINE»
