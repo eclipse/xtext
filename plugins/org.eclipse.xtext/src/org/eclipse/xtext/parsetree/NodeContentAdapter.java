@@ -26,7 +26,7 @@ public class NodeContentAdapter extends EContentAdapter {
 	
 	public void addToNode(final CompositeNode node) {
 		node.eAdapters().add(this);
-		updateCompositeNode(node, -1, new NodeInfo(0, 1));
+		updateCompositeNode(node, -1, createWorkingNodeInfo());
 	}
 	
 	@Override
@@ -40,23 +40,29 @@ public class NodeContentAdapter extends EContentAdapter {
 				int eventType = notification.getEventType();
 				switch (eventType) {
 					case Notification.ADD:
-						int newIdx = notification.getPosition();
-						int startIndex = parent.getOffset() - 1;
-						if (newIdx >= 1) {
-							AbstractNode prevSibling = parent.getChildren().get(newIdx - 1);
-							startIndex = prevSibling.getOffset() + prevSibling.getLength() - 1;
+					case Notification.ADD_MANY:
+					case Notification.REMOVE_MANY:
+						{
+							int idx = notification.getPosition();
+							int startIndex = idx < 1 ? 
+								parent.getOffset() - 1:
+								getOffsetOfNextLeaf(parent.getChildren().get(idx - 1)) - 1;
+							updateCompositeNode(getRootNode(parent), startIndex, createWorkingNodeInfo());
 						}
-						updateCompositeNode(getRootNode(parent), 
-								startIndex, new NodeInfo(0, 1));
 						break;
 					case Notification.REMOVE:
-						updateCompositeNode(getRootNode(parent), 
-								((AbstractNode) notification.getOldValue()).getOffset() - 1, new NodeInfo(0, 1));
+					case Notification.SET:
+						updateCompositeNode(getRootNode(parent), ((AbstractNode) notification.getOldValue()).getOffset() - 1, 
+								createWorkingNodeInfo());
 						break;
-					case Notification.ADD_MANY:
 					case Notification.MOVE:
-					case Notification.REMOVE_MANY:
-						updateNodeInfo(parent);
+						{
+							int leftPos = Math.min(notification.getPosition(), (Integer)notification.getOldValue());
+							int startIndex = leftPos < 1 ? 
+								parent.getOffset() - 1:
+								getOffsetOfNextLeaf(parent.getChildren().get(leftPos - 1)) - 1;
+							updateCompositeNode(getRootNode(parent), startIndex, createWorkingNodeInfo());
+						}
 						break;
 					default:
 						break;
@@ -65,33 +71,21 @@ public class NodeContentAdapter extends EContentAdapter {
 		}
 	}
 
+	private int getOffsetOfNextLeaf(AbstractNode node) {
+		return node.getOffset() + node.getLength();
+	}
+
+	private NodeInfo createWorkingNodeInfo() {
+		return new NodeInfo(0, 1);
+	}
+
 	private CompositeNode getRootNode(AbstractNode node) {
 		return (CompositeNode) EcoreUtil.getRootContainer(node);
 	}
 
-	/**
-	 * Perform necessary updates in any nodes, that are required due
-     * to changes in the given targetNode.
-	 * 
-	 * @param targetNode
-	 */
-	public void updateNodeInfo(AbstractNode targetNode) {
-		CompositeNode root = getRootNode(targetNode);
-		CompositeNode parent = targetNode.getParent();
-		if (parent != null) {
-			EList<AbstractNode> siblings = parent.getChildren();
-			int index = siblings.indexOf(target);
-			if (index <= 0) {
-				updateCompositeNode(root, parent.getOffset() - 1, new NodeInfo(0, 1));
-			}
-			else {
-				AbstractNode predecessor = siblings.get(index - 1);
-				updateCompositeNode(root, predecessor.getOffset() + predecessor.getLength() - 1, new NodeInfo(0, 1));
-			}
-		}
-		else {
-			updateCompositeNode(root, -1, new NodeInfo(0, 1));
-		}
+	private boolean isUpdateRequired(AbstractNode node, int updateFromOffset, int lastOffset) {
+		return node.getOffset() >= updateFromOffset || 
+			getOffsetOfNextLeaf(node) > updateFromOffset;
 	}
 	
 	/**
@@ -102,15 +96,16 @@ public class NodeContentAdapter extends EContentAdapter {
 	 * @param workingInfo aggregating object.
 	 */
 	protected void updateCompositeNode(CompositeNode nodeToUpdate, int startAtOffset, NodeInfo workingInfo) {
-		if (nodeToUpdate.getOffset() + nodeToUpdate.getLength() < startAtOffset && nodeToUpdate.getLength() >= 0) {
+		if (workingInfo.offset < startAtOffset && !isUpdateRequired(nodeToUpdate, startAtOffset, workingInfo.offset)) {
 			workingInfo.offset += nodeToUpdate.getLength();
+//			workingInfo.line = nodeToUpdate.getLine();		
 			return;
 		}
-		if (nodeToUpdate.getOffset() > startAtOffset) {
+		if (workingInfo.offset >= startAtOffset || nodeToUpdate.getOffset() >= startAtOffset) {
 			nodeToUpdate.setOffset(workingInfo.offset);
 			nodeToUpdate.setLine(workingInfo.line);
 		} else {
-			workingInfo.line = nodeToUpdate.getLine();			
+			workingInfo.line = nodeToUpdate.getLine();
 		}		
 		EList<AbstractNode> children = nodeToUpdate.getChildren();
 		for(int i = 0; i < children.size(); i++) {
@@ -123,7 +118,7 @@ public class NodeContentAdapter extends EContentAdapter {
 		}
 		nodeToUpdate.setLength(workingInfo.offset - nodeToUpdate.getOffset());
 	}
-	
+
 	/**
 	 * Updates a leaf node and modifies the given workingInfo.
 	 * @param node

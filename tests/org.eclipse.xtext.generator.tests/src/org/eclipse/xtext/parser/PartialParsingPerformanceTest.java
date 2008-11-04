@@ -23,11 +23,11 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 	
 	public void testExpression() throws Exception {
 		with(SimpleExpressionsStandaloneSetup.class);
-		String d = ")+d)";
-		String A_B = "(a+(b*";
-		StringBuffer modelBuffer = new StringBuffer(NUM_ELEMENTS * (A_B.length() + d.length()) + 1);
+		String d = ")+d)\r\n";
+		String a_b = "(a+(b*\r\n";
+		StringBuffer modelBuffer = new StringBuffer(NUM_ELEMENTS * (a_b.length() + d.length()) + 1);
 		for(int i=0; i<NUM_ELEMENTS; ++i) {
-			modelBuffer.append(A_B);
+			modelBuffer.append(a_b);
 		}
 		modelBuffer.append("c");
 		for(int i=0; i<NUM_ELEMENTS; ++i) {
