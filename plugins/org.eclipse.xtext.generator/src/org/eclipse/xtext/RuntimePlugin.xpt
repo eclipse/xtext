@@ -34,7 +34,7 @@
       <metaModel
             nsURI="«p.nsURI»">
          <checkFile
-               path="«languageNamespace().toPath()»/check/Checks.chk">
+               path="«languageNamespace().toPath()»/«p.name.toFirstUpper()»Checks.chk">
          </checkFile>
       </metaModel>
       «ENDFOREACH»
