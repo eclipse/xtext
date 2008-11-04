@@ -106,22 +106,18 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
 				try {
 					doFinish(page.getXtextProjectInfo(), monitor);
-				}
-				catch (Exception e) {
+				} catch (Exception e) {
 					throw new InvocationTargetException(e);
-				}
-				finally {
+				} finally {
 					monitor.done();
 				}
 			}
 		};
 		try {
 			getContainer().run(true, false, op);
-		}
-		catch (InterruptedException e) {
+		} catch (InterruptedException e) {
 			return false;
-		}
-		catch (InvocationTargetException e) {
+		} catch (InvocationTargetException e) {
 			Throwable realException = e.getTargetException();
 			MessageDialog.openError(getShell(), "Error", realException.getMessage());
 			return false;
@@ -142,11 +138,9 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 			public IStatus runInUIThread(final IProgressMonitor monitor) {
 				try {
 					new XtextProjectCreator(xtextProjectInfo).run(monitor);
-				}
-				catch (final InvocationTargetException e) {
+				} catch (final InvocationTargetException e) {
 					logger.error(e);
-				}
-				catch (final InterruptedException e) {
+				} catch (final InterruptedException e) {
 					logger.error(e);
 				}
 				return Status.OK_STATUS;
@@ -187,35 +181,37 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 
 			String basePackage = xtextProjectInfo.getBasePackage();
 			// DSL Project
-			List<String> exportedPackages = Arrays.asList(basePackage, basePackage + ".parser",
-			basePackage + ".parser.internal", basePackage + ".parsetree.reconstr", basePackage
-					+ ".services");
+			List<String> exportedPackages = Arrays.asList(basePackage, basePackage + ".parser", basePackage
+					+ ".parser.internal", basePackage + ".parsetree.reconstr", basePackage + ".services");
 			final IProject dslProject = EclipseResourceUtil.createProject(xtextProjectInfo.getProjectName(),
 					SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(Arrays.asList(
 							"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"", "org.eclipse.xtext",
 							"org.eclipse.xtext.generator", "org.antlr.gen", "org.eclipse.xtend",
 							"org.eclipse.xtend.typesystem.emf", "org.eclipse.xpand", "org.apache.commons.logging",
-							"org.eclipse.xtend.util.stdlib")), exportedPackages, null, monitor, NewXtextProjectWizard.this.getShell());
+							"org.eclipse.xtend.util.stdlib")), exportedPackages, null, monitor,
+					NewXtextProjectWizard.this.getShell());
 
 			if (dslProject == null) {
 				return;
 			}
-			
-			EclipseResourceUtil.createPackagesWithDummyClasses(dslProject,"src-gen",exportedPackages);
+
+			EclipseResourceUtil.createPackagesWithDummyClasses(dslProject, "src-gen", exportedPackages);
 			monitor.worked(1);
 
+			List<String> exportedUiPackages = Arrays.asList(basePackage + ".ui.services");
 			// DSL UI Project
 			final IProject dslUIProject = EclipseResourceUtil.createProject(xtextProjectInfo.getProjectName() + ".ui",
 					SRC_FOLDER_LIST, Collections.<IProject> emptyList(), new LinkedHashSet<String>(Arrays.asList(
 							xtextProjectInfo.getProjectName().toLowerCase() + ";visibility:=reexport",
 							"org.eclipse.xtext.ui.core", "org.eclipse.xtext.ui.common",
 							"org.eclipse.xtext.log4j;bundle-version=\"1.2.15\"",
-							"org.eclipse.ui.editors;bundle-version=\"3.4.0\"")), Arrays.asList(basePackage
-							+ ".ui.services"), null, monitor, NewXtextProjectWizard.this.getShell());
+							"org.eclipse.ui.editors;bundle-version=\"3.4.0\"")), exportedUiPackages, null, monitor,
+					NewXtextProjectWizard.this.getShell());
 
 			if (dslUIProject == null) {
 				return;
 			}
+			EclipseResourceUtil.createPackagesWithDummyClasses(dslUIProject, "src-gen", exportedUiPackages);
 			monitor.worked(1);
 
 			// Generator Project
@@ -249,8 +245,8 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 						"//Your model", monitor);
 			}
 			output.addOutlet(new Outlet(false, defaultEncoding, "ACTIVATOR_OUTLET", true, dslUIProject.getFolder(
-					SRC_ROOT + IPath.SEPARATOR + xtextProjectInfo.getBasePackagePath() + IPath.SEPARATOR + "ui").getLocation()
-					.makeAbsolute().toOSString()));
+					SRC_ROOT + IPath.SEPARATOR + xtextProjectInfo.getBasePackagePath() + IPath.SEPARATOR + "ui")
+					.getLocation().makeAbsolute().toOSString()));
 			XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null, Collections.singletonMap(
 					"xtextProjectInfo", new Variable("xtextProjectInfo", xtextProjectInfo)), null, null);
 			execCtx.registerMetaModel(new JavaMetaModel());
@@ -263,9 +259,6 @@ public class NewXtextProjectWizard extends Wizard implements INewWizard {
 					.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::GrammarGenerator::root",
 							xtextProjectInfo);
 			facade.evaluate("org::eclipse::xtext::xtext::ui::wizard::project::Generator::root", xtextProjectInfo);
-
-			EclipseResourceUtil.createFile("dummy.properties", createSubPackages(basePackage + ".ui.services",
-					dslUIProject, (IFolder) dslUIProject.findMember(SRC_ROOT), monitor), "a=b", monitor);
 
 			monitor.worked(1);
 

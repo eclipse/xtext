@@ -8,11 +8,12 @@
             id="org.eclipse.xtext.projectwiz">
       </category>
       <wizard
-            name="New Xtext Project"
-            icon="icons/editor.gif"
             category="org.eclipse.xtext.projectwiz"
             class="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
-            id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard">
+            icon="icons/editor.gif"
+            id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
+            name="New Xtext Project"
+            project="true">
       </wizard>
    </extension>
    
