@@ -178,7 +178,7 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, offset);
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, prefix, offset);
 	}
 	
 	public List<? extends ICompletionProposal> completeFamilieVater(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -187,7 +187,7 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, offset);
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, prefix, offset);
 	}
 	
 	public List<? extends ICompletionProposal> completeFamilieKinder(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -196,7 +196,7 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, offset);
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, prefix, offset);
 	}
 	
 	

@@ -439,6 +439,12 @@ ruleFamilie returns [EObject current=null]
 ))(	
 	
 		
+		{
+			if ($current==null) {
+	            $current = factory.create("Familie");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
 (
 	RULE_ID    { 
     createLeafNode("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "mutter"); 
@@ -448,6 +454,12 @@ ruleFamilie returns [EObject current=null]
 ))(	
 	
 		
+		{
+			if ($current==null) {
+	            $current = factory.create("Familie");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
 (
 	RULE_ID    { 
     createLeafNode("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "vater"); 
@@ -457,6 +469,12 @@ ruleFamilie returns [EObject current=null]
 ))(	
 	
 		
+		{
+			if ($current==null) {
+	            $current = factory.create("Familie");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
 (
 	RULE_ID    { 
     createLeafNode("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "kinder"); 
@@ -470,6 +488,12 @@ ruleFamilie returns [EObject current=null]
 (	
 	
 		
+		{
+			if ($current==null) {
+	            $current = factory.create("Familie");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
 (
 	RULE_ID    { 
     createLeafNode("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "kinder"); 

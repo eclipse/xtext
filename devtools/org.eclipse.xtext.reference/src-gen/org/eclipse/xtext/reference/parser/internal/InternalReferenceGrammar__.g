@@ -24,25 +24,25 @@ T24 : 'GELB' ;
 T25 : 'GRÜN' ;
 T26 : 'type' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 571
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 595
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 573
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 597
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 575
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 599
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |                '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 577
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 601
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 579
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 603
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')? {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 581
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 605
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 583
+// $ANTLR src "./src-gen/org/eclipse/xtext/reference/parser/internal/InternalReferenceGrammar.g" 607
 RULE_ANY_OTHER : .;
 
 
