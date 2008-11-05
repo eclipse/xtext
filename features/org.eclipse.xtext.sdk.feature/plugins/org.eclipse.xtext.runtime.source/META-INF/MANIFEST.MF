@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Bundle-Name: %pluginName
-Bundle-SymbolicName: org.eclipse.xtext.runtime.source; singleton=true
-Bundle-Version: 0.7.0.200811051404
-Bundle-Localization: plugin
-Bundle-Vendor: %providerName
