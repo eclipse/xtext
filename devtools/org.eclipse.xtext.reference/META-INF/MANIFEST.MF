@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext Reference Plug-in
+Bundle-Name: Xtext Reference (Incubation)
 Bundle-SymbolicName: org.eclipse.xtext.reference;singleton:=true
 Bundle-Version: 0.7.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Bundle-Vendor: itemis AG
+Bundle-Vendor: Eclipse.org
 Export-Package: org.eclipse.xtext.reference,
  ReferenceModel,
  org.eclipse.xtext.reference.parser,
