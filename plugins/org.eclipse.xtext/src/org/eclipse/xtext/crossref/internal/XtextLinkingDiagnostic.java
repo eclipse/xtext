@@ -16,10 +16,17 @@ import org.eclipse.xtext.resource.XtextResource;
 public class XtextLinkingDiagnostic implements XtextResource.Diagnostic{
 
 	private final LeafNode node;
+	private final String message;
 
 	public XtextLinkingDiagnostic(LeafNode linkInformation) {
-		node = linkInformation;
+		this(linkInformation, "Cannot resolve reference " + linkInformation.getText());
 	}
+	
+	public XtextLinkingDiagnostic(LeafNode linkInformation, String message) {
+		this.node = linkInformation;
+		this.message = message;
+	}
+	
 
 	public int getLength() {
 		return node.getLength();
@@ -42,7 +49,7 @@ public class XtextLinkingDiagnostic implements XtextResource.Diagnostic{
 	}
 
 	public String getMessage() {
-		return "Cannot resolve reference " + node.getText();
+		return message;
 	}
 
 }

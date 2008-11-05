@@ -8,9 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.internal;
 
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -59,41 +57,53 @@ public final class Linker implements ILinker {
 		}
 		return brokenLinks;
 	}
-	
-	private XtextResource.Diagnostic createError(EObject from, LeafNode linkInformation, CrossReference grammarElement, URI resolvedURI) {
+
+	private XtextResource.Diagnostic createError(LeafNode linkInformation) {
 		return new XtextLinkingDiagnostic(linkInformation);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private List<XtextResource.Diagnostic> ensureIsLinked(EObject obj, LeafNode node, CrossReference ref) {
 		List<XtextResource.Diagnostic> brokenLinks = new ArrayList<XtextResource.Diagnostic>();
-		List<URI> links = linkingService.getLinkedObjects(obj, ref, (LeafNode)node);
-		if (links==null || links.size() == 0) {
-			brokenLinks.add(createError(obj, node, ref, null));
+		List<URI> links = linkingService.getLinkedObjects(obj, ref, (LeafNode) node);
+		
+		if (links == null || links.size() == 0) {
+			brokenLinks.add(createError(node));
 			return brokenLinks;
 		}
-		EReference eRef = getReference(ref, obj.eClass());
-		if (eRef == null)
-			throw new IllegalStateException("Couldn't find EReference for cross reference " + ref);
-		if (eRef.getUpperBound() == 1) {
-			if (links.size() > 1)
-				throw new IllegalStateException("The feature " + eRef.getName() + " cannot hold multiple values : "
-						+ Arrays.asList(links));
 
+		EReference eRef = getReference(ref, obj.eClass());
+		if (eRef == null) {
+			brokenLinks.add(new XtextLinkingDiagnostic(node, "Cannot find reference " + ref));
+			return brokenLinks;
+		}
+		
+		if (eRef.getUpperBound() >= 0 && links.size() > eRef.getUpperBound()) {
+			brokenLinks.add(new XtextLinkingDiagnostic(node, "Too many matches (" + links.size() + ") for "
+					+ node.getText() + ". Feature " + eRef.getName() + " can only hold " + eRef.getUpperBound()
+					+ " reference(s)."));
+			return brokenLinks;
+		}
+
+		if (eRef.getUpperBound() == 1) {
 			URI uri = links.get(0);
-			if (checker.exists(uri,obj)) {
+			if (checker.exists(uri, obj)) {
 				EObject proxy = createProxy(ref, uri);
 				obj.eSet(eRef, proxy);
-			} else {
-				brokenLinks.add(createError(obj, node, ref, uri));
 			}
-		} else { // eRef.getUpperBound() == -1
+			else {
+				brokenLinks.add(createError(node));
+			}
+		}
+		else { // eRef.getUpperBound() == -1 || 
+			   // eRef.getUpperBound() < links.size
 			for (URI uri : links) {
-				if (checker.exists(uri,obj)) {
+				if (checker.exists(uri, obj)) {
 					EObject proxy = createProxy(ref, uri);
 					((EList<EObject>) obj.eGet(eRef)).add(proxy);
-				} else {
-					brokenLinks.add(createError(obj, node, ref, uri));
+				}
+				else {
+					brokenLinks.add(createError(node));
 				}
 			}
 		}
