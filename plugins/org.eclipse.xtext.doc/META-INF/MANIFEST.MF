@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Doc Plug-in
+Bundle-Localization: plugin
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.doc
 Bundle-Version: 0.7.0.qualifier
-Bundle-Vendor: itemis AG
+Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

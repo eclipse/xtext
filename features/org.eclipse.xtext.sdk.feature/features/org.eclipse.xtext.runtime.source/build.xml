@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="org.eclipse.xtext.runtime.source" default="build.update.jar" basedir=".">
+
+	<target name="init">
+		<property name="feature.temp.folder" value="${basedir}/feature.temp.folder"/>
+		<property name="feature.destination" value="${basedir}"/>
+	</target>
+
+	<target name="all.plugins" depends="init">
+		<ant antfile="build.xml" dir="../../plugins/org.eclipse.xtext.runtime.source" target="${target}">
+			<property name="arch" value="x86"/>
+			<property name="os" value="macosx"/>
+			<property name="ws" value="carbon"/>
+		</ant>
+	</target>
+	<target name="all.features" depends="init">
+	</target>
+	<target name="update.feature" depends="init">
+	</target>
+
+	<target name="all.children" depends="init,all.features,all.plugins,update.feature">
+	</target>
+
+	<target name="children" if="include.children">
+		<antcall target="all.children"/>
+	</target>
+
+	<target name="build.jars" depends="init" description="Build all the jars for the feature: org.eclipse.xtext.runtime.source.">
+		<antcall target="all.children">
+			<param name="target" value="build.jars"/>
+		</antcall>
+	</target>
+
+	<target name="build.sources" depends="init">
+		<antcall target="all.children">
+			<param name="target" value="build.sources"/>
+		</antcall>
+	</target>
+
+	<target name="build.zips" depends="init">
+		<antcall target="all.children">
+			<param name="target" value="build.zips"/>
+		</antcall>
+	</target>
+
+	<target name="build.update.jar" depends="init" description="Build the feature jar of: org.eclipse.xtext.runtime.source for an update site.">
+		<antcall target="all.children">
+			<param name="target" value="build.update.jar"/>
+		</antcall>
+		<property name="feature.base" value="${feature.temp.folder}"/>
+		<delete dir="${feature.temp.folder}"/>
+		<mkdir dir="${feature.temp.folder}"/>
+		<mkdir dir="${feature.temp.folder}/features/org.eclipse.xtext.runtime.source_0.7.0.200811051404"/>
+		<antcall target="gather.bin.parts" inheritAll="false">
+			<param name="updateJar.omitRootfiles" value="true"/>
+			<param name="arch" value="*"/>
+			<param name="ws" value="*"/>
+			<param name="nl" value="*"/>
+			<param name="os" value="*"/>
+			<param name="feature.base" value="${feature.temp.folder}"/>
+		</antcall>
+		<jar destfile="${feature.destination}/org.eclipse.xtext.runtime.source_0.7.0.200811051404.jar" basedir="${feature.temp.folder}/features/org.eclipse.xtext.runtime.source_0.7.0.200811051404"/>
+		<delete dir="${feature.temp.folder}"/>
+	</target>
+
+	<target name="gather.bin.parts" depends="init" if="feature.base">
+		<mkdir dir="${feature.base}/features/org.eclipse.xtext.runtime.source_0.7.0.200811051404"/>
+		<antcall target="children">
+			<param name="destination.temp.folder" value="${feature.base}/plugins"/>
+			<param name="target" value="gather.bin.parts"/>
+		</antcall>
+		<copy todir="${feature.base}/features/org.eclipse.xtext.runtime.source_0.7.0.200811051404" failonerror="true" overwrite="false">
+			<fileset dir="${basedir}">
+				<include name="feature.xml"/>
+			</fileset>
+		</copy>
+		<eclipse.idReplacer featureFilePath="${feature.base}/features/org.eclipse.xtext.runtime.source_0.7.0.200811051404/feature.xml"  selfVersion="0.7.0.200811051404" featureIds="" pluginIds=""/>
+		<antcall target="rootFiles">
+			<param name="rootTarget" value="rootFiles${os}_${ws}_${arch}"/>
+		</antcall>
+	</target>
+	<target name="rootFiles" unless="updateJar.omitRootfiles">
+		<antcall target="${rootTarget}"/>
+	</target>
+
+	<target name="rootFilesmacosx_carbon_x86">
+	</target>
+	<target name="rootFilesgroup_group_group">
+		<antcall target="rootFilesmacosx_carbon_x86"/>
+	</target>
+
+	<target name="zip.distribution" depends="init" description="Create a zip containing all the plug-ins and features for the feature: org.eclipse.xtext.runtime.source.">
+		<delete dir="${feature.temp.folder}"/>
+		<mkdir dir="${feature.temp.folder}"/>
+		<antcall target="gather.bin.parts">
+			<param name="arch" value="*"/>
+			<param name="ws" value="*"/>
+			<param name="nl" value="*"/>
+			<param name="include.children" value="true"/>
+			<param name="feature.base" value="${feature.temp.folder}"/>
+			<param name="os" value="*"/>
+		</antcall>
+		<zip destfile="${feature.destination}/org.eclipse.xtext.runtime.source_0.7.0.200811051404.bin.dist.zip" basedir="${feature.temp.folder}" filesonly="false" whenempty="skip" update="false"/>
+		<delete dir="${feature.temp.folder}"/>
+	</target>
+
+	<target name="zip.sources" depends="init">
+		<delete dir="${feature.temp.folder}"/>
+		<mkdir dir="${feature.temp.folder}"/>
+		<antcall target="all.children">
+			<param name="destination.temp.folder" value="${feature.temp.folder}/plugins/null/src"/>
+			<param name="include.children" value="true"/>
+			<param name="target" value="gather.sources"/>
+		</antcall>
+		<zip destfile="${feature.destination}/org.eclipse.xtext.runtime.source_0.7.0.200811051404.src.zip" basedir="${feature.temp.folder}" filesonly="true" whenempty="skip" update="false"/>
+		<delete dir="${feature.temp.folder}"/>
+	</target>
+
+	<target name="zip.logs" depends="init">
+		<delete dir="${feature.temp.folder}"/>
+		<mkdir dir="${feature.temp.folder}"/>
+		<antcall target="all.children" inheritAll="false">
+			<param name="destination.temp.folder" value="${feature.temp.folder}/plugins"/>
+			<param name="include.children" value="true"/>
+			<param name="target" value="gather.logs"/>
+		</antcall>
+		<zip destfile="${feature.destination}/org.eclipse.xtext.runtime.source_0.7.0.200811051404.log.zip" basedir="${feature.temp.folder}" filesonly="true" whenempty="skip" update="false"/>
+		<delete dir="${feature.temp.folder}"/>
+	</target>
+
+	<target name="clean" depends="init" description="Clean the feature: org.eclipse.xtext.runtime.source of all the zips, jars and logs created.">
+		<delete file="${feature.destination}/org.eclipse.xtext.runtime.source_0.7.0.200811051404.jar"/>
+		<delete file="${feature.destination}/org.eclipse.xtext.runtime.source_0.7.0.200811051404.bin.dist.zip"/>
+		<delete file="${feature.destination}/org.eclipse.xtext.runtime.source_0.7.0.200811051404.log.zip"/>
+		<delete file="${feature.destination}/org.eclipse.xtext.runtime.source_0.7.0.200811051404.src.zip"/>
+		<delete dir="${feature.temp.folder}"/>
+		<antcall target="all.children">
+			<param name="target" value="clean"/>
+		</antcall>
+	</target>
+
+	<target name="refresh" depends="init" if="eclipse.running" description="Refresh this folder.">
+		<eclipse.convertPath fileSystemPath="/Users/huebner/Entwicklung/workspace-oaw5/org.eclipse.xtext.sdk.feature/features/org.eclipse.xtext.runtime.source/" property="resourcePath"/>
+		<eclipse.refreshLocal resource="${resourcePath}" depth="infinite"/>
+		<antcall target="all.children">
+			<param name="target" value="refresh"/>
+		</antcall>
+	</target>
+	<target name="gather.sources">
+		<antcall target="children">
+			<param name="destination.temp.folder" value="${feature.temp.folder}/plugins/null/src"/>
+			<param name="target" value="gather.sources"/>
+		</antcall>
+	</target>
+
+	<target name="gather.logs" depends="init">
+		<mkdir dir="${feature.temp.folder}"/>
+		<antcall target="all.children" inheritAll="false">
+			<param name="destination.temp.folder" value="${feature.temp.folder}/plugins"/>
+			<param name="target" value="gather.logs"/>
+		</antcall>
+	</target>
+
+</project>

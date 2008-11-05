@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.xtext.sdk.feature"
-      label="Xtext SDK Feature (Incubation)"
+      label="%featureName"
       version="0.7.0.qualifier"
-      provider-name="itemis AG"
+      provider-name="%providerName"
       image="modeling32.png">
 
    <description url="http://www.example.com/description">
@@ -21,9 +21,11 @@
    <includes
          id="org.eclipse.xtext.runtime.feature"
          version="0.0.0"/>
-	<includes
+
+   <includes
          id="org.eclipse.xtext.runtime.source"
          version="0.0.0"/>
+
    <plugin
          id="org.eclipse.xtext.bootstrap"
          download-size="0"

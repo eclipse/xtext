@@ -1,6 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext Bootstrap Plug-in
+Bundle-Localization: plugin
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.bootstrap
 Bundle-Version: 0.7.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
@@ -14,4 +15,4 @@ Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.emf.ecore;bundle-version="2.4.0",
  org.antlr.gen,
  org.antlr.runtime;bundle-version="3.0.0"
-Bundle-Vendor: Eclipse.org
+Bundle-Vendor: %providerName
