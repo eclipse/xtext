@@ -127,11 +127,13 @@ public class XtextReconciler extends Job implements IReconciler {
 			document.modify(new UnitOfWork<Object>() {
 				public Object exec(XtextResource resource) throws Exception {
 					try {
-						log.debug("XtextReconiler: Reparsing document.");
+						if (log.isDebugEnabled())
+							log.debug("XtextReconiler: Reparsing document.");
 						resource.reparse(document.get());
 					}
 					catch (Throwable t) {
-						log.error("Partial parsing failed. Performing full reparse", t);
+						if (log.isDebugEnabled())
+							log.debug("Partial parsing failed. Performing full reparse", t);
 					}
 					return null;
 				}
@@ -159,7 +161,11 @@ public class XtextReconciler extends Job implements IReconciler {
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
-		log.debug("Preparing reconciliation.");
+		long start = System.currentTimeMillis();
+		if (log.isDebugEnabled()) {
+			log.debug("Preparing reconciliation.");
+		}
+
 		final IXtextDocument document = XtextDocumentUtil.get(textViewer);
 		IStatus result = null;
 		if (document != null) {
@@ -177,7 +183,8 @@ public class XtextReconciler extends Job implements IReconciler {
 				strategy.reconcile(replaceRegionToBeProcessed);
 			}
 		}
-		log.debug("Reconciliation finished.");
+		if (log.isDebugEnabled())
+			log.debug("Reconciliation finished. Time required: " + (System.currentTimeMillis() - start));
 		return (result != null) ? result : Status.OK_STATUS;
 	}
 }

@@ -27,7 +27,10 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 	private XtextDocument document;
 
 	public void reconcile(final IRegion region) {
-		log.debug("Preparing reconciliation.");
+
+		if (log.isDebugEnabled())
+			log.debug("Preparing reconciliation.");
+		
 		document.modify(new UnitOfWork<Object>() {
 			public Object exec(XtextResource resource) throws Exception {
 				try {
@@ -35,12 +38,16 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 						throw new IllegalArgumentException("Region to be reconciled must be a ReplaceRegion");
 					}
 					ReplaceRegion replaceRegionToBeProcessed = (ReplaceRegion) region;
-					log.debug("Parsing replace region '" + replaceRegionToBeProcessed.getText() + "'.");
+					
+					if(log.isTraceEnabled())
+						log.trace("Parsing replace region '" + replaceRegionToBeProcessed.getText() + "'.");
+					
 					resource.update(replaceRegionToBeProcessed.getOffset(), replaceRegionToBeProcessed.getLength(),
 							replaceRegionToBeProcessed.getText());
 				}
 				catch (Throwable t) {
-					log.debug("Partial parsing failed. Performing full reparse", t);
+					if (log.isDebugEnabled())
+						log.debug("Partial parsing failed. Performing full reparse", t);
 					resource.reparse(document.get());
 				}
 				return null;
@@ -55,7 +62,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 
 	public void setDocument(IDocument document) {
 		if (!(document instanceof XtextDocument)) {
-			throw new IllegalArgumentException("document must be an XtextDocument");
+			throw new IllegalArgumentException("Document must be an "  + XtextDocument.class.getSimpleName());
 		}
 		this.document = (XtextDocument) document;
 	}

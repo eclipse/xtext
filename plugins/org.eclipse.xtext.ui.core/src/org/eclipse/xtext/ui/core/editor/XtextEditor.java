@@ -60,7 +60,8 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 	// TODO private IFoldingUpdater foldingSupport;
 
 	public XtextEditor() {
-		log.debug("Creating Xtext Editor. Instance: [" + this.toString() + "]");
+		if (log.isDebugEnabled())
+			log.debug("Creating Xtext Editor. Instance: [" + this.toString() + "]");
 	}
 
 	public void setInitializationData(IConfigurationElement config, String propertyName, Object data) {
@@ -83,14 +84,18 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 
 	@Override
 	protected void doSetInput(IEditorInput input) throws CoreException {
-		log.debug("doSetInput:" + input);
-		log.debug("Editor instance is [" + this.toString() + "]");
+		if (log.isDebugEnabled() ) {
+			log.debug("doSetInput:" + input);
+			log.debug("Editor instance is [" + this.toString() + "]");
+		}
 		super.doSetInput(input);
 	}
 
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
-		log.debug("init:" + input);
+		if (log.isDebugEnabled())
+			log.debug("init:" + input);
+		
 		if (!(input instanceof IURIEditorInput))
 			throw new IllegalArgumentException("Can only handle IURIEditorInputs");
 
@@ -164,7 +169,9 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 
 	@Override
 	protected ISourceViewer createSourceViewer(Composite parent, IVerticalRuler ruler, int styles) {
-		log.debug("Creating Xtext source viewer.");
+		if (log.isDebugEnabled())
+			log.debug("Creating Xtext source viewer.");
+		
 		// overwrite superclass implementation to allow folding
 		fAnnotationAccess = createAnnotationAccess();
 		fOverviewRuler = createOverviewRuler(getSharedColors());

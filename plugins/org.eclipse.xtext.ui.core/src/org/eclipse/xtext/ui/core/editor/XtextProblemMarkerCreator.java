@@ -34,7 +34,7 @@ import org.eclipse.xtext.ui.core.internal.XtextMarkerManager;
  */
 public class XtextProblemMarkerCreator {
 
-	private static final Logger LOG = Logger.getLogger(XtextProblemMarkerCreator.class);
+	private static final Logger log = Logger.getLogger(XtextProblemMarkerCreator.class);
 
 	private XtextProblemMarkerCreator() {
 	}
@@ -98,8 +98,8 @@ public class XtextProblemMarkerCreator {
 							emfMarkers.add(collectMarkerAttributesForDiagnostic(diagnostic));
 						}
 					}
-					if (LOG.isDebugEnabled()) {
-						LOG.debug("EMF Diagnostic " + (emfDiagFail ? "FAIL" : "OK") + "!");
+					if (log.isDebugEnabled()) {
+						log.debug("EMF Diagnostic " + (emfDiagFail ? "FAIL" : "OK") + "!");
 					}
 				}
 			}
@@ -111,8 +111,8 @@ public class XtextProblemMarkerCreator {
 					emfMarkers.add(collectMarkerAttributes(error));
 				}
 			}
-			if (LOG.isDebugEnabled()) {
-				LOG.debug("Parser Diagnostic " + (parserDiagFail ? "FAIL" : "OK") + "!");
+			if (log.isDebugEnabled()) {
+				log.debug("Parser Diagnostic " + (parserDiagFail ? "FAIL" : "OK") + "!");
 			}
 
 			for (org.eclipse.emf.ecore.resource.Resource.Diagnostic error : resource.getErrors())
@@ -123,7 +123,7 @@ public class XtextProblemMarkerCreator {
 			if (!emfMarkers.isEmpty())
 				XtextMarkerManager.createMarker(file, emfMarkers, monitor);
 		} catch (Exception e) {
-			LOG.error(e.getMessage(), e);
+			log.error(e.getMessage(), e);
 		}
 
 	}
