@@ -8,10 +8,13 @@
 package org.eclipse.xtext.crossrefs;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -51,5 +54,40 @@ public class LinkingErrorTest extends AbstractGeneratorTest {
 		assertEquals(35, verboseError.getOffset());
 		assertEquals(1, verboseError.getLength());
 	}
+	
+	private int getTreeIteratorContentSize(TreeIterator<Object> iterator) {
+		int result = 0;
+		while(iterator.hasNext()) {
+			result ++;
+			Object item = iterator.next();
+			logger.debug(item);
+		}
+		return result;
+	}
+	
+	private int getContentSize(EObject model) {
+		Resource resource = model.eResource();
+		assertNotNull(resource);
+		ResourceSet resourceSet = resource.getResourceSet();
+		assertNotNull(resourceSet);
+		TreeIterator<Object> iterator = EcoreUtil2.getAllProperContents(resourceSet, true);
+		return getTreeIteratorContentSize(iterator);
+	}
+	
+	public void testReparse() throws Exception {
+		String modelText = " type A extends B \n type B extends C";
+		XtextResource resource = getResourceFromString(modelText);
+		EObject model = getModel(resource);
+		logger.debug(invokeWithXtend("types.collect(e|e.name+'->'+e.extends.name).toString(',')", model));
+		
+		assertWithXtend("2", "types.size", model);
+		assertEquals(4, getContentSize(model));
+
+		resource.reparse(modelText);
+		model = getModel(resource);
+		assertWithXtend("2", "types.size", model);
+		assertEquals(4, getContentSize(model));
+	}
+
 
 }
