@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.xtext.runtime.feature"
-      label="Xtext Runtime Feature (Incubation)"
+      label="Xtext Runtime (Incubation)"
       version="0.7.0.qualifier"
-      provider-name="itemis AG">
+      provider-name="Eclipse.org">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
