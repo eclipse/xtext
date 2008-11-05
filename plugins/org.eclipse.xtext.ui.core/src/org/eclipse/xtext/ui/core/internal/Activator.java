@@ -53,7 +53,8 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		setDefault(this);
 
-		log.debug("Starting Xtext UI Core bundle.");
+		if (log.isDebugEnabled())
+			log.debug("Starting Xtext UI Core bundle.");
 
 		// activate service registry
 		org.eclipse.xtext.service.ui.Activator.getDefault();
@@ -64,7 +65,9 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	public void stop(BundleContext context) throws Exception {
-		log.debug("Stopping Xtext UI bundle.");
+		if (log.isDebugEnabled())
+			log.debug("Stopping Xtext UI bundle.");
+		
 		setDefault(null);
 		super.stop(context);
 	}

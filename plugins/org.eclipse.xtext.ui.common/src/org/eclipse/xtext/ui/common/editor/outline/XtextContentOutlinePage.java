@@ -54,7 +54,8 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 	private EditorSelectionChangedListener editorSelectionChangedListener;
 
 	public XtextContentOutlinePage() {
-		logger.debug("Creating content outline page. Outline instance [" + this.toString() + "]");
+		if (logger.isDebugEnabled())
+			logger.debug("Creating content outline page. Outline instance [" + this.toString() + "]");
 	}
 	
 	@Override
@@ -72,7 +73,8 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 			IXtextDocument xtextDocument = XtextDocumentUtil.get(document);
 			xtextDocument.addModelListener(new IXtextModelListener() {
 				public void modelChanged(XtextResource resource) {
-					logger.debug("Document has been changed. Triggering update of outline.");
+					if (logger.isDebugEnabled())
+						logger.debug("Document has been changed. Triggering update of outline.");
 					runInSWTThread(new Runnable() {
 						public void run() {
 							TreeViewer viewer = getTreeViewer();

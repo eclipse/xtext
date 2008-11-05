@@ -7,7 +7,7 @@ import org.eclipse.xtext.service.ILanguageService;
 import org.eclipse.xtext.service.IServiceFactory;
 
 public class XtextServiceFactory implements IServiceFactory {
-	
+
 	private Logger log = Logger.getLogger(XtextServiceFactory.class);
 
 	private static final String CLASS = "class";
@@ -15,14 +15,15 @@ public class XtextServiceFactory implements IServiceFactory {
 	private IConfigurationElement configurationElement;
 	private Class<? extends ILanguageService> serviceInterface;
 
-	public XtextServiceFactory(Class<? extends ILanguageService> serviceInterface, IConfigurationElement configurationElement) {
+	public XtextServiceFactory(Class<? extends ILanguageService> serviceInterface,
+			IConfigurationElement configurationElement) {
 		this.serviceInterface = serviceInterface;
 		this.configurationElement = configurationElement;
 	}
 
 	public ILanguageService createService() {
 		try {
-				return (ILanguageService) configurationElement.createExecutableExtension(CLASS);
+			return (ILanguageService) configurationElement.createExecutableExtension(CLASS);
 		}
 		catch (CoreException e) {
 			log.error("Could not create service.", e);
