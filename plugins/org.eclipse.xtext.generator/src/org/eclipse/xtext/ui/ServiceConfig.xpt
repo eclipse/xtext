@@ -35,8 +35,8 @@ public class «generatedUiConfigClass().toSimpleName()» extends AbstractServiceRe
 	public Set<IServiceRegistration> registrations() {
 		return scope(«languageInterface(grammar())».SCOPE)
 		«FOREACH genModel().services.select(e|e.uiService) AS s-»
-		.with(«s.serviceInterfaceFQName».class, «s.genClassFQName».class)
-		«ENDFOREACH»
+			.with(«s.serviceInterfaceFQName».class, «s.genClassFQName».class)
+		«ENDFOREACH-»
 			.registrations();
 	}
 
