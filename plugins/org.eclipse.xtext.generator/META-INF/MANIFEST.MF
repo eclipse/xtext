@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName (Incubation)
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.generator; singleton:=true
 Bundle-Version: 0.7.0.qualifier
 Bundle-ClassPath: .
