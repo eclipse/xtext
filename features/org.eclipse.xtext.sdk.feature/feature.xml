@@ -3,7 +3,8 @@
       id="org.eclipse.xtext.sdk.feature"
       label="Xtext SDK Feature (Incubation)"
       version="0.7.0.qualifier"
-      provider-name="itemis AG">
+      provider-name="itemis AG"
+      image="modeling32.png">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
