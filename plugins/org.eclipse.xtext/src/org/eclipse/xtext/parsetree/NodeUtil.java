@@ -110,20 +110,22 @@ public class NodeUtil {
     }
     
     public static void dumpCompositeNodeInfo(String indent, CompositeNode node) {
-        EObject grammarElement = node.getGrammarElement();
-        String name;
-        try {
-            name = grammarElement.getClass().getMethod("getName").invoke(grammarElement).toString();
-        } catch (Exception exc) {
-            name = grammarElement.getClass().getSimpleName();
-        }
-        String astElementAsString = (node.getElement() == null) ? "null" : node.getElement().eClass().getName();
-        String line = indent + name + " : " + node.serialize()
-                + " -> " + astElementAsString + "  la={ ";
-        for (LeafNode lookaheadNode : node.getLookaheadLeafNodes()) {
-        	line += "\""+ lookaheadNode.getText() +"\" ";
+    	if (logger.isTraceEnabled()) {
+			EObject grammarElement = node.getGrammarElement();
+			String name;
+			try {
+				name = grammarElement.getClass().getMethod("getName").invoke(grammarElement).toString();
+			}
+			catch (Exception exc) {
+				name = grammarElement.getClass().getSimpleName();
+			}
+			String astElementAsString = (node.getElement() == null) ? "null" : node.getElement().eClass().getName();
+			String line = indent + name + " : " + node.serialize() + " -> " + astElementAsString + "  la={ ";
+			for (LeafNode lookaheadNode : node.getLookaheadLeafNodes()) {
+				line += "\"" + lookaheadNode.getText() + "\" ";
+			}
+			logger.trace("}   (" + node.getOffset() + ", " + node.getLength() + ")");
 		}
-        logger.debug("}   (" + node.getOffset() + ", " + node.getLength() + ")");
     }
     
 	public static AbstractNode findLeafNodeAtOffset(CompositeNode parseTreeRootNode, int offset) {
