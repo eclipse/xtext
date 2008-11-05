@@ -69,6 +69,7 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	public void reparse(String newContent) throws IOException {
+		clearOutput();
 		doLoad(new StringInputStream(newContent), null);
 	}
 
@@ -87,8 +88,7 @@ public class XtextResource extends ResourceImpl {
 			CompositeNode rootNode = parseResult.getRootNode();
 
 			parseResult = parser.reparse(rootNode, offset, replacedTextLength, newText);
-			getContents().clear();
-			getErrors().clear();
+			clearOutput();
 			if (parseResult != null) {
 				if (parseResult.getRootASTElement() != null)
 					getContents().add(parseResult.getRootASTElement());
@@ -100,6 +100,11 @@ public class XtextResource extends ResourceImpl {
 		} finally {
 			isLoading = false;
 		}
+	}
+
+	private void clearOutput() {
+		getContents().clear();
+		getErrors().clear();
 	}
 
 	protected void doLinking() {
