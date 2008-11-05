@@ -22,7 +22,7 @@
          id="org.eclipse.xtext.runtime.feature"
          version="0.0.0"/>
 	<includes
-         id="org.eclipse.xtext.runtime.source.feature"
+         id="org.eclipse.xtext.runtime.source"
          version="0.0.0"/>
    <plugin
          id="org.eclipse.xtext.bootstrap"
