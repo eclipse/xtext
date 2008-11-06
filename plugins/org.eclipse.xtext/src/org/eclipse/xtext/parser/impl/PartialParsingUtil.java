@@ -39,6 +39,7 @@ public class PartialParsingUtil {
 	@SuppressWarnings("unchecked")
 	public static IParseResult reparse(IParser parser, CompositeNode rootNode, int offset, int replacedTextLength,
 			String newText) {
+		
 		if (offset + replacedTextLength > rootNode.getLength()) {
 			log.error("Invalid replace region offset=" + offset + " length=" + replacedTextLength + " originalLength="
 					+ rootNode.getLength());
@@ -89,6 +90,7 @@ public class PartialParsingUtil {
 			}
 			parseResult.setRootASTElement(NodeUtil.getASTElementForRootNode(rootNode));
 		}
+		parseResult.getRootNode().setGrammarElement(replaceNode.getGrammarElement());
 		if (replaceNode != rootNode) {
 			CompositeNode replaceNodeParent = replaceNode.getParent();
 			EList<AbstractNode> replaceNodeSiblings = replaceNodeParent.getChildren();
