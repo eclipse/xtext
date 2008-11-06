@@ -18,6 +18,10 @@
       [Enter License Description here.]
    </license>
 
+   <url>
+      <update label="%updateSiteName" url="http://download.eclipse.org/modeling/tmf/updates/interim/"/>
+   </url>
+
    <includes
          id="org.eclipse.xtext.runtime.feature"
          version="0.0.0"/>
