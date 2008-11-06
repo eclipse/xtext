@@ -35,7 +35,7 @@ public final class EditorSelectionChangedListener extends AbstractSelectionChang
 
 					// Get the current element from the offset
 					int offset = textSel.getOffset();
-					AbstractNode node = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
+					AbstractNode node = ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
 
 					// Synchronize the outline page
 					outlinePage.synchronizeOutlinePage(node);
