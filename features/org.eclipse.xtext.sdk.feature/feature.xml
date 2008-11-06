@@ -27,7 +27,7 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.xtext.runtime.source"
+         id="org.eclipse.xtext.source"
          version="0.0.0"/>
 
    <plugin
