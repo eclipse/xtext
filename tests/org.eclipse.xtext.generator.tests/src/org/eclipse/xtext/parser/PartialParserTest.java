@@ -20,6 +20,7 @@ import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.LookaheadLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
@@ -43,16 +44,38 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		String model = "bar a foo bar c b d foo bar b c";
 		parseAndCompareAllSubstrings(model);
 	}
-	
+
 	private void parseAndCompareAllSubstrings(String model) throws Exception {
 		CompositeNode rootNode = getRootNode(model);
-		for (int i = 0; i < model.length()-1; ++i) {
-			for(int j=1; j+i<model.length(); ++j) {
+		for (int i = 0; i < model.length() - 1; ++i) {
+			for (int j = 1; j + i < model.length(); ++j) {
 				partiallyParseAndCompare(rootNode, i, j);
 			}
 		}
 	}
-	
+
+	public void testErrorMarkers() throws Exception {
+		with(ReferenceGrammarStandaloneSetup.class);
+		String model = "spielplatz 1 {kind (k 1}"; // model contains an error
+													// due to missing ) at idx
+													// 23
+		XtextResource resource = getResourceFromString(model);
+		assertEquals(1, resource.getParseResult().getParseErrors().size());
+		CompositeNode rootNode = resource.getParseResult().getRootNode();
+		AbstractNode leaf = NodeUtil.findLeafNodeAtOffset(rootNode, 24);
+		assertTrue(leaf.getSyntaxError() != null);
+		// resource.update(23, 0, ")");
+		// assertTrue(resource.getParseResult().getParseErrors().isEmpty());
+		IParseResult reparse = PartialParsingUtil.reparse(getParser(), rootNode, 23, 0, ")");
+		rootNode = reparse.getRootNode();
+		String expectedFixedModel = "spielplatz 1 {kind (k 1)}";
+		String fixedModel = rootNode.serialize();
+		assertEquals("serialized model as expected", expectedFixedModel, fixedModel);
+		resource = getResourceFromString(fixedModel);
+		assertEquals("full reparse is fine", 0, resource.getParseResult().getParseErrors().size());
+		assertTrue("partial reparse is fine", reparse.getParseErrors() == null || reparse.getParseErrors().isEmpty());
+	}
+
 	public void testGrammarElementAssigned() throws Exception {
 		with(ReferenceGrammarStandaloneSetup.class);
 		String model = "spielplatz 1 {kind (k 1)\n}";
@@ -63,7 +86,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		rootNode = reparse.getRootNode();
 		checkGrammarAssigned(rootNode);
 	}
-	
+
 	@SuppressWarnings("serial")
 	private void checkGrammarAssigned(CompositeNode rootNode) {
 		TreeIterator<AbstractNode> iter = new AbstractTreeIterator<AbstractNode>(rootNode) {
@@ -71,17 +94,17 @@ public class PartialParserTest extends AbstractPartialParserTest {
 			protected Iterator<? extends AbstractNode> getChildren(Object object) {
 				if (object instanceof CompositeNode)
 					return ((CompositeNode) object).getChildren().iterator();
-				return Collections.<AbstractNode>emptyList().iterator();
+				return Collections.<AbstractNode> emptyList().iterator();
 			}
 		};
-		while(iter.hasNext()) {
+		while (iter.hasNext()) {
 			AbstractNode node = iter.next();
 			assertNotNull(node.getGrammarElement());
 			EObject grammarElement = node.getGrammarElement();
-			assertEquals(node.getParent()==null, grammarElement instanceof ParserRule);
+			assertEquals(node.getParent() == null, grammarElement instanceof ParserRule);
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void testNodeState() throws Exception {
 		with(SimpleExpressionsStandaloneSetup.class);
@@ -89,9 +112,9 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		CompositeNode rootNode = getRootNode(model);
 		Iterator iter = rootNode.getLeafNodes().iterator();
 		boolean found = false;
-		while(iter.hasNext()) {
+		while (iter.hasNext()) {
 			LeafNode leaf = (LeafNode) iter.next();
-			if ( leaf.getText().equals("c")) {
+			if (leaf.getText().equals("c")) {
 				assertEquals("before", 3, leaf.getLine());
 				assertEquals("before", 10, leaf.getOffset());
 				found = true;
@@ -102,9 +125,9 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		assertTrue(reparse.getParseErrors() == null || reparse.getParseErrors().isEmpty());
 		iter = rootNode.getLeafNodes().iterator();
 		found = false;
-		while(iter.hasNext()) {
+		while (iter.hasNext()) {
 			LeafNode leaf = (LeafNode) iter.next();
-			if ( leaf.getText().equals("xy")) {
+			if (leaf.getText().equals("xy")) {
 				assertEquals("after", 3, leaf.getLine());
 				assertEquals("after", 10, leaf.getOffset());
 				found = true;
@@ -114,9 +137,11 @@ public class PartialParserTest extends AbstractPartialParserTest {
 	}
 
 	private void partiallyParseAndCompare(CompositeNode rootNode, int offset, int length) throws Exception {
-		PartialParsingPointers parsingPointers = PartialParsingUtil.calculatePartialParsingPointers(rootNode, offset, length);
+		PartialParsingPointers parsingPointers = PartialParsingUtil.calculatePartialParsingPointers(rootNode, offset,
+				length);
 		String entryRuleName = parsingPointers.findEntryRuleName();
-		IParseResult parseResult = ((AbstractParser) getParser()).parse(entryRuleName, new StringInputStream(parsingPointers.findReparseRegion()), getASTFactory());
+		IParseResult parseResult = ((AbstractParser) getParser()).parse(entryRuleName, new StringInputStream(
+				parsingPointers.findReparseRegion()), getASTFactory());
 		comparator.assertSameStructure(parsingPointers.getDefaultReplaceRootNode(), parseResult.getRootNode());
 		comparator.assertSameStructure(parsingPointers.findASTReplaceElement(), parseResult.getRootASTElement());
 		assertEquals(parsingPointers.getDefaultReplaceRootNode().serialize(), parseResult.getRootNode().serialize());
