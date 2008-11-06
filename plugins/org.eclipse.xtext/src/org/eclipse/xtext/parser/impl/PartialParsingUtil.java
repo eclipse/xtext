@@ -26,6 +26,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -39,7 +40,7 @@ public class PartialParsingUtil {
 	@SuppressWarnings("unchecked")
 	public static IParseResult reparse(IParser parser, CompositeNode rootNode, int offset, int replacedTextLength,
 			String newText) {
-		
+
 		if (offset + replacedTextLength > rootNode.getLength()) {
 			log.error("Invalid replace region offset=" + offset + " length=" + replacedTextLength + " originalLength="
 					+ rootNode.getLength());
@@ -132,17 +133,61 @@ public class PartialParsingUtil {
 			--offset;
 			replacedTextLength = 1;
 		}
-		List<CompositeNode> nodesEnclosingRegion = collectNodesEnclosingChangeRegion(rootNode, offset,
-				replacedTextLength);
+		// include any existing parse errors
+		Range range = new Range(offset, offset + replacedTextLength);
+		mergeErrorRange(rootNode, range);
+		offset = range.fromOffset;
+//		EList<SyntaxError> allErrors = rootNode.allSyntaxErrors(); // uses TreeIterator and is not as fast as it should be
+		
+		List<CompositeNode> nodesEnclosingRegion = collectNodesEnclosingChangeRegion(rootNode, range.fromOffset,
+				range.toOffset - range.fromOffset);
 		List<CompositeNode> validReplaceRootNodes = internalFindValidReplaceRootNodeForChangeRegion(
-				nodesEnclosingRegion, offset, replacedTextLength);
+				nodesEnclosingRegion, range.fromOffset,
+				range.toOffset - range.fromOffset);
 		if (validReplaceRootNodes.isEmpty()) {
 			validReplaceRootNodes = Collections.<CompositeNode> singletonList(rootNode);
 		}
 		return new PartialParsingPointers(rootNode, offset, replacedTextLength, validReplaceRootNodes,
 				nodesEnclosingRegion);
 	}
+	
+	public static void mergeErrorRange(AbstractNode node, Range result) {
+		if (node.getSyntaxError() != null)
+			result.merge(node.getSyntaxError());
+		else if (node instanceof CompositeNode) {
+			for(AbstractNode child: ((CompositeNode)node).getChildren()) {
+				mergeErrorRange(child, result);
+			}
+		}
+	}
 
+	static class Range {
+		int fromOffset;
+		int toOffset;
+		
+		Range(SyntaxError error) {
+			this(error.getNode());
+		}
+		
+		Range(AbstractNode node) {
+			this(node.getOffset(), node.getOffset() + node.getLength());
+		}
+		
+		Range(int fromOffest, int toOffset) {
+			this.fromOffset = fromOffest;
+			this.toOffset = toOffset;
+		}
+		
+		void merge(Range range) {
+			this.fromOffset = Math.min(fromOffset, range.fromOffset);
+			this.toOffset = Math.max(toOffset, range.toOffset);
+		}
+		
+		void merge(SyntaxError error) {
+			merge(new Range(error));
+		}
+	}
+	
 	/**
 	 * Collects a list of all nodes containing the change region
 	 */
