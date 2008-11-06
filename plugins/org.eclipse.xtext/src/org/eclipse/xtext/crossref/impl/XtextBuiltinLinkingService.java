@@ -73,7 +73,7 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 			}
 		}
 
-		return true;
+		return false;
 	}
 
 	public List<Pair<String, URI>> getLinkCandidates(EObject context, CrossReference ref, String partialLinkText) {
