@@ -8,14 +8,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 
@@ -36,6 +41,36 @@ import org.eclipse.xtext.RuleCall;
 public final class ParseTreeUtil {
 
 	private static final Logger logger = Logger.getLogger(ParseTreeUtil.class);
+	/**
+	 * @param rootNode
+	 * @param offset
+	 *            the text position within the the current sentence
+	 * @return the set of elements which are <i>valid</i> or <i>possible</i>
+	 *         from the given position according to the grammar
+	 */
+	public static Set<AbstractElement> getElementSetValidFromOffset(CompositeNode rootNode, int offset) {
+		return getElementSetValidFromOffset(rootNode, getLastCompleteNodeByOffset(rootNode, offset), offset);
+	}
+
+	/**
+	 * @param rootNode
+	 *            the root node of the tree
+	 * @param last
+	 *            complete node element (with an associated grammar element)
+	 *            within the given rootNode
+	 * @param offset
+	 *            the text position within the the current sentence
+	 * @return the set of elements which are <i>valid</i> or <i>possible</i>
+	 *         from the given position according to the grammar
+	 */
+	public static Set<AbstractElement> getElementSetValidFromOffset(CompositeNode rootNode,
+			AbstractNode lastCompleteNode, int offset) {
+
+		AbstractElement grammarElement = getGrammarElementFromNode(lastCompleteNode);
+
+		return calculatePossibleElementSet(lastCompleteNode, grammarElement);
+
+	}
 
 	/**
 	 * 
@@ -130,7 +165,9 @@ public final class ParseTreeUtil {
 
 		LeafNode leafNode = null;
 
-		for (AbstractNode childNode : contextNode.getLeafNodes()) {
+		EList<LeafNode> leafNodes = contextNode.getLeafNodes();
+		for (Iterator<LeafNode> iterator = leafNodes.iterator(); iterator.hasNext() && leafNode==null;) {
+			LeafNode childNode = iterator.next();
 			if (childNode.getOffset() <= offsetPosition && offsetPosition <= childNode.getOffset() + childNode.getLength()) {
 				leafNode = (LeafNode) childNode;
 			}
@@ -160,36 +197,6 @@ public final class ParseTreeUtil {
 		}
 
 	}
-
-	//
-	// /**
-	// *
-	// * Returns a list of all assignment to the given rule.
-	// *
-	// * @param parserRule
-	// * the rule of the assignments (ruleCall) to match
-	// * @return a list containing all {@see org.eclipse.xtext.Assignment} to
-	// the
-	// * given rule.
-	// */
-	// public static final List<AbstractElement>
-	// getParserRuleAssignments(ParserRule parserRule) {
-	// assertParameterNotNull(parserRule, "parserRule");
-	// List<AbstractElement> list = new ArrayList<AbstractElement>();
-	// Grammar grammar = (Grammar) parserRule.eContainer();
-	// // filter and search
-	// for (ParserRule rule : GrammarUtil.allParserRules(grammar)) {
-	// // excluded?
-	// if (!parserRule.equals(rule)) {
-	// Assignment ruleAssignment =
-	// getParserRuleAssignment(rule.getAlternatives(), parserRule);
-	// if (ruleAssignment != null) {
-	// list.add(ruleAssignment);
-	// }
-	// }
-	// }
-	// return list;
-	// }
 
 	/**
 	 * asserts if the given parameter object isnt null
@@ -228,51 +235,107 @@ public final class ParseTreeUtil {
 		return abstractElement;
 	}
 
-	// /**
-	// *
-	// * @param contextElement
-	// * element searched for assignments to the given rule
-	// * @param parserRule
-	// * the rule of the assignments to search for
-	// * @return an assignment object containing a rulecall to the given
-	// * parserRule or null if not found.
-	// */
-	// private static final Assignment getParserRuleAssignment(AbstractElement
-	// contextElement, ParserRule parserRule) {
-	//
-	// assertParameterNotNull(contextElement, "contextElement");
-	// assertParameterNotNull(parserRule, "parserRule");
-	//
-	// Assignment assignment = null;
-	// if (contextElement instanceof Group) {
-	// Group group = (Group) contextElement;
-	// for (AbstractElement groupElement : group.getAbstractTokens()) {
-	// assignment = getParserRuleAssignment(groupElement, parserRule);
-	// if (null != assignment) {
-	// break;
-	// }
-	// }
-	// }
-	// else if (contextElement instanceof Alternatives) {
-	// Alternatives alternatives = (Alternatives) contextElement;
-	// for (AbstractElement groupElement : alternatives.getGroups()) {
-	// assignment = getParserRuleAssignment(groupElement, parserRule);
-	// if (null != assignment) {
-	// break;
-	// }
-	// }
-	// }
-	// else if (contextElement instanceof Assignment) {
-	// Assignment assignmentToMatch = (Assignment) contextElement;
-	// if (assignmentToMatch.getTerminal() instanceof RuleCall
-	// && ((RuleCall)
-	// assignmentToMatch.getTerminal()).getName().equalsIgnoreCase
-	// (parserRule.getName())) {
-	// assignment = assignmentToMatch;
-	// }
-	// }
-	// return assignment;
-	// }
+	private static Set<AbstractElement> calculatePossibleElementSet(AbstractNode contextNode,
+			AbstractElement grammarElement) {
+
+		assertParameterNotNull(contextNode, "parameter 'contextNode' must not be null");
+		assertParameterNotNull(grammarElement, "parameter 'grammarElement' must not be null");
+
+		Set<AbstractElement> elementSet = new LinkedHashSet<AbstractElement>();
+
+		if (grammarElement.eContainer() instanceof ParserRule) {
+
+			/**
+			 * we have completed the rule of the current context.continue at the
+			 * parent context
+			 */
+			boolean hasLeafNodes = false;
+
+			for (Iterator<LeafNode> iterator = contextNode.getLeafNodes().listIterator(); !hasLeafNodes
+					&& iterator.hasNext(); hasLeafNodes = !iterator.next().isHidden()) {
+				;
+			}
+
+			contextNode = contextNode.getParent();
+
+			while (contextNode != null && contextNode.getGrammarElement() == null) {
+				contextNode = contextNode.getParent();
+			}
+
+			if (null != contextNode) {
+
+				elementSet.addAll(calculatePossibleElementSet(contextNode, ParseTreeUtil
+						.getGrammarElementFromNode(contextNode)));
+
+			}
+			else if (grammarElement.eContainer() instanceof ParserRule) {
+
+				if (!hasLeafNodes || GrammarUtil.isMultipleCardinality(grammarElement)) {
+					elementSet.add(grammarElement);
+				}
+			}
+		}
+		else if (grammarElement.eContainer() instanceof Alternatives) {
+			/**
+			 * one out of the alternatives is already fullfilled so we can
+			 * simply skip and proceed to the parent
+			 */
+
+			elementSet.addAll(calculatePossibleElementSet(contextNode, (AbstractElement) grammarElement.eContainer()));
+
+		}
+		else if (grammarElement.eContainer() instanceof Group) {
+
+			EList<AbstractElement> contents = ((Group) grammarElement.eContainer()).getAbstractTokens();
+
+			int indexOf = contents.indexOf(grammarElement) + 1;
+
+			int size = contents.size();
+
+			// add the current one if has an oneOrMore cardinality
+			if (GrammarUtil.isOneOrMoreCardinality(grammarElement)) {
+				elementSet.add(grammarElement);
+			}
+
+			/**
+			 * start at the current (maybe the last) or at the following one
+			 * with optional cardinality and add all following with optional
+			 * cardinality
+			 */
+			AbstractElement last = GrammarUtil.isAnyCardinality(grammarElement) || indexOf == size ? grammarElement
+					: contents.get(indexOf++);
+
+			while (GrammarUtil.isOptionalCardinality(last) && indexOf < size) {
+				elementSet.add(last);
+				last = indexOf < size ? contents.get(indexOf++) : last;
+			}
+
+			// always add the following if available or the last one if has an
+			// any cardinality
+			if (last != grammarElement || GrammarUtil.isAnyCardinality(last)) {
+				elementSet.add(last);
+			}
+
+			// ask parent groups only if we've completed the whole group
+			if (indexOf == size) {
+
+				boolean startedAtlastGrammarElementInGroup = last == grammarElement;
+
+				if (startedAtlastGrammarElementInGroup || GrammarUtil.isOptionalCardinality(last)) {
+
+					elementSet.addAll(calculatePossibleElementSet(contextNode, (AbstractElement) grammarElement
+							.eContainer()));
+				}
+			}
+		}
+		else {
+			elementSet.addAll(calculatePossibleElementSet(contextNode, (AbstractElement) grammarElement.eContainer()));
+
+		}
+
+		return elementSet;
+	}
+	
 
 	/**
 	 * @param abstractNode
