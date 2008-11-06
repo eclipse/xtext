@@ -48,6 +48,10 @@ public class ReferenceGrammarGrammarAccess extends BaseEPackageAccess implements
 		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.5"),true); 
 	}
 
+	public ParserRule pr_Familie() {
+		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6"),true); 
+	}
+
 	
 	public LexerRule lr_ID() {
 		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"),true); 

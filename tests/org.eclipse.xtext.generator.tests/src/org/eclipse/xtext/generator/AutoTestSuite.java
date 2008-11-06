@@ -39,6 +39,7 @@ public class AutoTestSuite {
 		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest.class);
 		suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.WhitespacePreservingCallbackTest.class);
+		suite.addTestSuite(org.eclipse.xtext.parsetree.ParseTreeUtilTest.class);
 		suite.addTestSuite(org.eclipse.xtext.reference.CommentOnEofBug_234135_Test.class);
 		suite.addTestSuite(org.eclipse.xtext.reference.LeafNodeBug_234132_Test.class);
 		suite.addTestSuite(org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformerTests.class);
