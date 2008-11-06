@@ -39,6 +39,7 @@ import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Heiko Behrens
  * 
  */
 public abstract class AbstractGeneratorTest extends TestCase {
@@ -138,6 +139,10 @@ public abstract class AbstractGeneratorTest extends TestCase {
 
 	protected CompositeNode getRootNode(InputStream model) throws Exception {
 		XtextResource resource = getResource(model);
+		return getRootNode(resource);
+	}
+
+	protected CompositeNode getRootNode(XtextResource resource) {
 		return resource.getParseResult().getRootNode();
 	}
 
