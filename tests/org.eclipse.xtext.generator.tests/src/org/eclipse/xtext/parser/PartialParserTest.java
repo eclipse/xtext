@@ -8,13 +8,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
+import java.util.Collections;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.AbstractTreeIterator;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
 import org.eclipse.xtext.parser.impl.PartialParsingUtil;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.LookaheadLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -42,6 +50,35 @@ public class PartialParserTest extends AbstractPartialParserTest {
 			for(int j=1; j+i<model.length(); ++j) {
 				partiallyParseAndCompare(rootNode, i, j);
 			}
+		}
+	}
+	
+	public void testGrammarElementAssigned() throws Exception {
+		with(ReferenceGrammarStandaloneSetup.class);
+		String model = "spielplatz 1 {kind (k 1)\n}";
+		XtextResource resource = getResourceFromString(model);
+		CompositeNode rootNode = resource.getParseResult().getRootNode();
+		checkGrammarAssigned(rootNode);
+		IParseResult reparse = PartialParsingUtil.reparse(getParser(), rootNode, model.length() - 2, 0, "\n");
+		rootNode = reparse.getRootNode();
+		checkGrammarAssigned(rootNode);
+	}
+	
+	@SuppressWarnings("serial")
+	private void checkGrammarAssigned(CompositeNode rootNode) {
+		TreeIterator<AbstractNode> iter = new AbstractTreeIterator<AbstractNode>(rootNode) {
+			@Override
+			protected Iterator<? extends AbstractNode> getChildren(Object object) {
+				if (object instanceof CompositeNode)
+					return ((CompositeNode) object).getChildren().iterator();
+				return Collections.<AbstractNode>emptyList().iterator();
+			}
+		};
+		while(iter.hasNext()) {
+			AbstractNode node = iter.next();
+			assertNotNull(node.getGrammarElement());
+			EObject grammarElement = node.getGrammarElement();
+			assertEquals(node.getParent()==null, grammarElement instanceof ParserRule);
 		}
 	}
 	
