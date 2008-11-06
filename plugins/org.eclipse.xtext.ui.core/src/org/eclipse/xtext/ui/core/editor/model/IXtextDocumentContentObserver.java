@@ -4,19 +4,17 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.model;
 
-import org.eclipse.xtext.resource.XtextResource;
+
+import org.eclipse.jface.text.IDocumentListener;
 
 /**
- * @author Sebastian Zarnekow
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface UnitOfWork<T> {
-	T exec(XtextResource resource) throws Exception;
+public interface IXtextDocumentContentObserver extends IDocumentListener {
+
+	void performNecessaryUpdates(UnitOfWork.Processor processor);
 	
-	interface Processor {
-		<T> T process(UnitOfWork<T> transaction);
-	}
 }

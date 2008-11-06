@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.model;
 
 import java.io.IOException;
@@ -76,6 +84,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	public <T> T readOnly(UnitOfWork<T> work) {
 		readLock.lock();
 		try {
+			updateContentBeforeRead();
 			return work.exec(resource);
 		} catch (RuntimeException e) {
 			throw e;
@@ -91,7 +100,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		try {
 			T exec = work.exec(resource);
 			checkAndUpdateMarkers(resource);
-			notifyDocumentListeners(resource);
+			notifyModelListeners(resource);
 			// TODO track modifications and serialize back to the text buffer
 			return exec;
 		} catch (RuntimeException e) {
@@ -115,11 +124,49 @@ public class XtextDocument extends Document implements IXtextDocument {
 		modelListeners.remove(listener);
 	}
 	
-	private void notifyDocumentListeners(XtextResource res) {
+	private void notifyModelListeners(XtextResource res) {
 		Object[] listeners = modelListeners.getListeners();
 		for (int i = 0; i < listeners.length; i++) {
 			((IXtextModelListener) listeners[i]).modelChanged(res);
 		}
+	}
+	
+	private ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
+	
+	public void addXtextDocumentContentObserver(IXtextDocumentContentObserver observer) {
+		addDocumentListener(observer);
+		xtextDocumentObservers.add(observer);
+	}
+
+	public void removeXtextDocumentContentObserver(IXtextDocumentContentObserver observer) {
+		xtextDocumentObservers.remove(observer);
+		removeDocumentListener(observer);
+	}
+	
+	private <T> void updateContentBeforeRead() {
+		Object[] listeners = xtextDocumentObservers.getListeners();
+		UnitOfWork.Processor processor = new LockAwareProcessor();
+		for (int i = 0; i < listeners.length; i++) {
+			((IXtextDocumentContentObserver) listeners[i]).performNecessaryUpdates(processor);
+		}
+	}
+	
+	class LockAwareProcessor implements UnitOfWork.Processor{
+
+		public <T> T process(UnitOfWork<T> transaction) {
+			if (transaction!=null) {
+				readLock.unlock();
+				writeLock.lock();
+				try {
+					return modify(transaction);
+				} finally {
+					readLock.lock();
+					writeLock.unlock();
+				}
+			} else
+				return null;
+		}
+		
 	}
 
 	private void checkAndUpdateMarkers(XtextResource res) {
