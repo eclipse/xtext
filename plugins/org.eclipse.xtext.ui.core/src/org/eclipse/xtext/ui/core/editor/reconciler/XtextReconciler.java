@@ -21,8 +21,10 @@ import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.core.editor.model.IXtextDocumentContentObserver;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.ui.core.editor.model.UnitOfWork.Processor;
 
 /**
  * Standard JFace Reconcilers, e.g. the MonoReconciler, convert an replace event
@@ -49,7 +51,7 @@ public class XtextReconciler extends Job implements IReconciler {
 	private int delay;
 	private IReconcilingStrategy strategy;
 
-	class DocumentListener implements IDocumentListener {
+	class DocumentListener implements IDocumentListener, IXtextDocumentContentObserver {
 
 		public void documentAboutToBeChanged(DocumentEvent event) {
 			// do nothing so far
@@ -57,6 +59,16 @@ public class XtextReconciler extends Job implements IReconciler {
 
 		public void documentChanged(DocumentEvent event) {
 			handleDocumentChanged(event);
+		}
+		
+		public void performNecessaryUpdates(Processor processor) {
+			final IXtextDocument document = XtextDocumentUtil.get(textViewer);
+			if (document != null) {
+				final ReplaceRegion replaceRegionToBeProcessed = getAndResetReplaceRegion();
+				if (replaceRegionToBeProcessed != null) {
+					processor.process(XtextReconcilerHelper.createReconcileJob(replaceRegionToBeProcessed, document));
+				}
+			}
 		}
 
 	}
@@ -118,10 +130,10 @@ public class XtextReconciler extends Job implements IReconciler {
 	 */
 	private void handleInputDocumentChanged(IDocument oldInput, IDocument newInput) {
 		if (oldInput != null) {
-			oldInput.removeDocumentListener(documentListener);
+			((IXtextDocument)oldInput).removeXtextDocumentContentObserver(documentListener);
 		}
 		if (newInput != null) {
-			newInput.addDocumentListener(documentListener);
+			((IXtextDocument) newInput).addXtextDocumentContentObserver(documentListener);
 			final IXtextDocument document = XtextDocumentUtil.get(textViewer);
 			strategy.setDocument(document);
 			document.modify(new UnitOfWork<Object>() {
@@ -165,26 +177,32 @@ public class XtextReconciler extends Job implements IReconciler {
 		if (log.isDebugEnabled()) {
 			log.debug("Preparing reconciliation.");
 		}
-
-		final IXtextDocument document = XtextDocumentUtil.get(textViewer);
+		
 		IStatus result = null;
+		final IXtextDocument document = XtextDocumentUtil.get(textViewer);
 		if (document != null) {
-			final ReplaceRegion replaceRegionToBeProcessed;
-			synchronized (pendingReplaceRegionLock) {
-				if (pendingReplaceRegion != null) {
-					replaceRegionToBeProcessed = pendingReplaceRegion;
-				}
-				else {
-					replaceRegionToBeProcessed = null;
-				}
-				pendingReplaceRegion = null;
-			}
+			final ReplaceRegion replaceRegionToBeProcessed = getAndResetReplaceRegion();
 			if (replaceRegionToBeProcessed != null) {
 				strategy.reconcile(replaceRegionToBeProcessed);
 			}
 		}
 		if (log.isDebugEnabled())
-			log.debug("Reconciliation finished. Time required: " + (System.currentTimeMillis() - start));
+			log.debug("Reconciliation finished. Time required: " + (System.currentTimeMillis() - start));	
 		return (result != null) ? result : Status.OK_STATUS;
 	}
+
+	private ReplaceRegion getAndResetReplaceRegion() {
+		final ReplaceRegion replaceRegionToBeProcessed;
+		synchronized (pendingReplaceRegionLock) {
+			if (pendingReplaceRegion != null) {
+				replaceRegionToBeProcessed = pendingReplaceRegion;
+			}
+			else {
+				replaceRegionToBeProcessed = null;
+			}
+			pendingReplaceRegion = null;
+		}
+		return replaceRegionToBeProcessed;
+	}
+
 }
