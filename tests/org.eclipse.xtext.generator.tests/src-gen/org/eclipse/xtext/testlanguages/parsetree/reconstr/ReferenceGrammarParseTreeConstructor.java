@@ -28,17 +28,18 @@ public class ReferenceGrammarParseTreeConstructor extends AbstractParseTreeConst
 		if(inst.isInstanceOf("Erwachsener") && (s = new Erwachsener_Group(inst, null).firstSolution()) != null) return s;
 		if(inst.isInstanceOf("Spielzeug") && (s = new Spielzeug_Group(inst, null).firstSolution()) != null) return s;
 		if(inst.isInstanceOf("Farbe") && (s = new Farbe_Alternatives(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("Familie") && (s = new Familie_Group(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
 /************ begin Rule Spielplatz ****************
  *
- * Spielplatz : ( 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug ) * '}' ) ? ;
+ * Spielplatz : ( 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) * '}' ) ? ;
  *
  **/
 
 
-// ( 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug ) * '}' ) ?
+// ( 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) * '}' ) ?
 protected class Spielplatz_Group extends GroupToken {
 	
 	public Spielplatz_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -66,7 +67,7 @@ protected class Spielplatz_Group extends GroupToken {
 	}
 }
 
-// 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug ) *
+// 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) *
 protected class Spielplatz_0_Group extends GroupToken {
 	
 	public Spielplatz_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -251,7 +252,7 @@ protected class Spielplatz_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug ) *
+// ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) *
 protected class Spielplatz_0_1_Alternatives extends AlternativesToken {
 
 	public Spielplatz_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -263,7 +264,7 @@ protected class Spielplatz_0_1_Alternatives extends AlternativesToken {
 	}
 	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Spielplatz_0_1_1_Assignment_spielzeuge(current, this) : new Spielplatz_0_1_0_Alternatives(current, this);
+		AbstractToken t = (first) ? new Spielplatz_0_1_1_Assignment_familie(current, this) : new Spielplatz_0_1_0_Alternatives(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -272,7 +273,7 @@ protected class Spielplatz_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// kinder += Kind | erzieher += Erwachsener
+// kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug
 protected class Spielplatz_0_1_0_Alternatives extends AlternativesToken {
 
 	public Spielplatz_0_1_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -284,7 +285,28 @@ protected class Spielplatz_0_1_0_Alternatives extends AlternativesToken {
 	}
 	
 	protected Solution createSolution() {
-		AbstractToken t = (first) ? new Spielplatz_0_1_0_1_Assignment_erzieher(current, this) : new Spielplatz_0_1_0_0_Assignment_kinder(current, this);
+		AbstractToken t = (first) ? new Spielplatz_0_1_0_1_Assignment_spielzeuge(current, this) : new Spielplatz_0_1_0_0_Alternatives(current, this);
+		Solution s = t.firstSolution();
+		if(s == null && activateNextSolution()) s = createSolution();
+		if(s == null) return null;
+		last = s.getPredecessor();
+		return s; 
+	}
+}
+
+// kinder += Kind | erzieher += Erwachsener
+protected class Spielplatz_0_1_0_0_Alternatives extends AlternativesToken {
+
+	public Spielplatz_0_1_0_0_Alternatives(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0");
+	}
+	
+	protected Solution createSolution() {
+		AbstractToken t = (first) ? new Spielplatz_0_1_0_0_1_Assignment_erzieher(current, this) : new Spielplatz_0_1_0_0_0_Assignment_kinder(current, this);
 		Solution s = t.firstSolution();
 		if(s == null && activateNextSolution()) s = createSolution();
 		if(s == null) return null;
@@ -294,14 +316,14 @@ protected class Spielplatz_0_1_0_Alternatives extends AlternativesToken {
 }
 
 // kinder += Kind
-protected class Spielplatz_0_1_0_0_Assignment_kinder extends AssignmentToken  {
+protected class Spielplatz_0_1_0_0_0_Assignment_kinder extends AssignmentToken  {
 	
-	public Spielplatz_0_1_0_0_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_1_0_0_0_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0");
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0");
 	}
 	
 	protected Solution createSolution() {
@@ -322,14 +344,14 @@ protected class Spielplatz_0_1_0_0_Assignment_kinder extends AssignmentToken  {
 }
 
 // erzieher += Erwachsener
-protected class Spielplatz_0_1_0_1_Assignment_erzieher extends AssignmentToken  {
+protected class Spielplatz_0_1_0_0_1_Assignment_erzieher extends AssignmentToken  {
 	
-	public Spielplatz_0_1_0_1_Assignment_erzieher(IInstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_1_0_0_1_Assignment_erzieher(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1");
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.1");
 	}
 	
 	protected Solution createSolution() {
@@ -351,14 +373,14 @@ protected class Spielplatz_0_1_0_1_Assignment_erzieher extends AssignmentToken  
 
 
 // spielzeuge += Spielzeug
-protected class Spielplatz_0_1_1_Assignment_spielzeuge extends AssignmentToken  {
+protected class Spielplatz_0_1_0_1_Assignment_spielzeuge extends AssignmentToken  {
 	
-	public Spielplatz_0_1_1_Assignment_spielzeuge(IInstanceDescription curr, AbstractToken pred) {
+	public Spielplatz_0_1_0_1_Assignment_spielzeuge(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1");
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1");
 	}
 	
 	protected Solution createSolution() {
@@ -368,6 +390,35 @@ protected class Spielplatz_0_1_1_Assignment_spielzeuge extends AssignmentToken  
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Spielzeug")) {
 				Solution s = new Spielzeug_Group(param, this).firstSolution();
+				if(s != null) {
+					type = AssignmentType.PRC; 
+					return new Solution(obj,s.getPredecessor());
+				} 
+			}
+		}
+		return null;
+	}
+}
+
+
+// familie += Familie
+protected class Spielplatz_0_1_1_Assignment_familie extends AssignmentToken  {
+	
+	public Spielplatz_0_1_1_Assignment_familie(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1");
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("familie",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("familie");
+		if(value instanceof EObject) { // xtext::RuleCall
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Familie")) {
+				Solution s = new Familie_Group(param, this).firstSolution();
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -1210,5 +1261,431 @@ protected class Farbe_1_Keyword_GRN extends KeywordToken  {
 
 
 /************ end Rule Farbe ****************/
+
+/************ begin Rule Familie ****************
+ *
+ * Familie : 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')' ;
+ *
+ **/
+
+
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')'
+protected class Familie_Group extends GroupToken {
+	
+	public Familie_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives");
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Familie_1_Keyword(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Familie_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) *
+protected class Familie_0_Group extends GroupToken {
+	
+	public Familie_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0");
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Familie_0_1_Group(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Familie_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ]
+protected class Familie_0_0_Group extends GroupToken {
+	
+	public Familie_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0");
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Familie_0_0_1_Assignment_kinder(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Familie_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ]
+protected class Familie_0_0_0_Group extends GroupToken {
+	
+	public Familie_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Familie_0_0_0_1_Assignment_vater(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Familie_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ]
+protected class Familie_0_0_0_0_Group extends GroupToken {
+	
+	public Familie_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Familie_0_0_0_0_1_Assignment_mutter(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Familie_0_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// 'familie' '(' name = ( 'keyword' | STRING | ID )
+protected class Familie_0_0_0_0_0_Group extends GroupToken {
+	
+	public Familie_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Familie_0_0_0_0_0_1_Assignment_name(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Familie_0_0_0_0_0_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// 'familie' '('
+protected class Familie_0_0_0_0_0_0_Group extends GroupToken {
+	
+	public Familie_0_0_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Familie_0_0_0_0_0_0_1_Keyword(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Familie_0_0_0_0_0_0_0_Keyword_familie(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// 'familie'
+protected class Familie_0_0_0_0_0_0_0_Keyword_familie extends KeywordToken  {
+	
+	public Familie_0_0_0_0_0_0_0_Keyword_familie(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+	}	
+}
+
+// '('
+protected class Familie_0_0_0_0_0_0_1_Keyword extends KeywordToken  {
+	
+	public Familie_0_0_0_0_0_0_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+	}	
+}
+
+
+// name = ( 'keyword' | STRING | ID )
+protected class Familie_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
+	
+	public Familie_0_0_0_0_0_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("name",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if("keyword".equals(value)) { // xtext::Keyword
+			type = AssignmentType.KW;
+			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.0");
+			return new Solution(obj);
+		}
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.1"); 
+			return new Solution(obj);
+		}
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"); 
+			return new Solution(obj);
+		}
+		return null;
+	}
+}
+
+
+// mutter = [ Erwachsener ]
+protected class Familie_0_0_0_0_1_Assignment_mutter extends AssignmentToken  {
+	
+	public Familie_0_0_0_0_1_Assignment_mutter(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("mutter",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("mutter");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Erwachsener")) {
+				type = AssignmentType.CR;
+				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+				return new Solution(obj);
+			}
+		}
+		return null;
+	}
+}
+
+
+// vater = [ Erwachsener ]
+protected class Familie_0_0_0_1_Assignment_vater extends AssignmentToken  {
+	
+	public Familie_0_0_0_1_Assignment_vater(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("vater",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("vater");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Erwachsener")) {
+				type = AssignmentType.CR;
+				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+				return new Solution(obj);
+			}
+		}
+		return null;
+	}
+}
+
+
+// kinder += [ Kind ]
+protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
+	
+	public Familie_0_0_1_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("kinder",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("kinder");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Kind")) {
+				type = AssignmentType.CR;
+				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+				return new Solution(obj);
+			}
+		}
+		return null;
+	}
+}
+
+
+// ( ',' kinder += [ Kind ] ) *
+protected class Familie_0_1_Group extends GroupToken {
+	
+	public Familie_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, IS_MANY, !IS_REQUIRED);
+	}
+	
+	public Group getGrammarElement() {
+		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1");
+	}
+		
+	protected Solution createSolution() {	
+		Solution s1 = new Familie_0_1_1_Assignment_kinder(current, this).firstSolution();
+		while(s1 != null) {
+			Solution s2 = new Familie_0_1_0_Keyword(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			if(s2 == null) {
+				s1 = s1.getPredecessor().nextSolution(this);
+				if(s1 == null) return null;
+			} else {
+				last = s2.getPredecessor();
+				return s2;
+			}
+		}
+		return null;
+		
+	}
+}
+
+// ','
+protected class Familie_0_1_0_Keyword extends KeywordToken  {
+	
+	public Familie_0_1_0_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
+	}	
+}
+
+// kinder += [ Kind ]
+protected class Familie_0_1_1_Assignment_kinder extends AssignmentToken  {
+	
+	public Familie_0_1_1_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("kinder",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("kinder");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("Kind")) {
+				type = AssignmentType.CR;
+				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"); 
+				return new Solution(obj);
+			}
+		}
+		return null;
+	}
+}
+
+
+
+// ')'
+protected class Familie_1_Keyword extends KeywordToken  {
+	
+	public Familie_1_Keyword(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Keyword getGrammarElement() {
+		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.1");
+	}	
+}
+
+
+/************ end Rule Familie ****************/
 
 }

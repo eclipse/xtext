@@ -6,14 +6,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
@@ -25,10 +23,8 @@ import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
@@ -63,10 +59,18 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 	 * offset and calls the respective methods on the proposal provider.
 	 */
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, final int offset) {
+		
+		ICompletionProposal[] completionProposals = null;
+		
 		if (proposalProvider != null) {
-			IDocument document = viewer.getDocument();
-			if (document instanceof XtextDocument) {
 
+			
+			IDocument document = viewer.getDocument();
+			
+			if (document instanceof XtextDocument) {
+				
+				List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
+				
 				XtextDocument xtextDocument = (XtextDocument) document;
 
 				CompositeNode rootNode = xtextDocument.readOnly(new UnitOfWork<CompositeNode>() {
@@ -76,14 +80,12 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 						return parseResult.getRootNode();
 					}
 				});
+				
 				Assert.isNotNull(rootNode);
 
-				// last COMPLETE node element with associated grammar element
 				AbstractNode lastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
-				// node at CURRENT cursor pos. with or without grammar element
+
 				LeafNode currentLeafNode = (LeafNode) ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
-				// get associated grammar element
-				AbstractElement grammarElement = ParseTreeUtil.getGrammarElementFromNode(lastCompleteNode);
 
 				String prefix = "";
 				StyledText textWidget = viewer.getTextWidget();
@@ -93,28 +95,26 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 						prefix = textWidget.getText(currentLeafNode.getOffset(), boundedOffset);
 				}
 
-				List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
+				Set<AbstractElement> nextValidElementSet = ParseTreeUtil.getElementSetValidFromOffset(rootNode,lastCompleteNode, offset);
+				
+				for (List<EObject> resolvedElementOrRuleList : new ProposalCandidateResolverSwitch(nextValidElementSet)) {
 
-				Set<AbstractElement> calculatePossibleElementSet = calculatePossibleElementSet(lastCompleteNode,
-						grammarElement);
-				for (Iterator<AbstractElement> iterator = calculatePossibleElementSet.iterator(); iterator.hasNext();) {
-					AbstractElement nextElement = iterator.next();
-
-					List<EObject> resolvedElementOrRuleList = resolveElement(nextElement);
-
-					collectCompletionProposalList(resolvedElementOrRuleList, completionProposalList, xtextDocument,
+					List<ICompletionProposal> collectedCompletionProposalList = collectCompletionProposalList(resolvedElementOrRuleList,  xtextDocument,
 							lastCompleteNode, prefix, offset);
+					
+					completionProposalList.addAll(collectedCompletionProposalList);
 				}
 
 				if (completionProposalList != null) {
 					List<? extends ICompletionProposal> sortAndFilter = proposalProvider
 							.sortAndFilter(completionProposalList);
-					return (ICompletionProposal[]) sortAndFilter.toArray(new ICompletionProposal[] {});
+					completionProposals =  sortAndFilter.toArray(new ICompletionProposal[] {});
 
 				}
 			}
 		}
-		return null;
+		
+		return completionProposals;
 	}
 
 	public char[] getCompletionProposalAutoActivationCharacters() {
@@ -137,160 +137,11 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		return new ContextInformationValidator(this);
 	}
 
-	protected final List<EObject> resolveElement(AbstractElement abstractElement) {
-
-		List<EObject> elementList = new ArrayList<EObject>();
-
-		if (abstractElement instanceof Alternatives) {
-			for (AbstractElement alternativeElement : ((Alternatives) abstractElement).getGroups()) {
-				elementList.addAll(resolveElement(alternativeElement));
-			}
-		}
-		else if (abstractElement instanceof Group) {
-			boolean includeNext = true;
-			for (Iterator<AbstractElement> iterator = ((Group) abstractElement).getAbstractTokens().iterator(); iterator
-					.hasNext()
-					&& includeNext;) {
-				AbstractElement groupElement = iterator.next();
-				elementList.addAll(resolveElement(groupElement));
-				includeNext = GrammarUtil.isOptionalCardinality(groupElement);
-			}
-
-		}
-		else if (abstractElement instanceof Assignment) {
-
-			Assignment assignment = (Assignment) abstractElement;
-
-			if (assignment.getTerminal() instanceof RuleCall) {
-				elementList.addAll(resolveElement(assignment.getTerminal()));
-			}
-			else if (assignment.getTerminal() instanceof Alternatives) {
-				elementList.addAll(resolveElement(assignment.getTerminal()));
-			}
-
-			elementList.add(assignment);
-
-		}
-		else if (abstractElement instanceof RuleCall) {
-
-			elementList.add(abstractElement);
-
-			AbstractRule abstractRule = GrammarUtil.calledRule((RuleCall) abstractElement);
-
-			if (abstractRule instanceof ParserRule) {
-				elementList.addAll(resolveElement(((ParserRule) abstractRule).getAlternatives()));
-			}
-		}
-		else {
-			elementList.add(abstractElement);
-		}
-		return elementList;
-	}
-
-	protected final Set<AbstractElement> calculatePossibleElementSet(AbstractNode contextNode,
-			AbstractElement grammarElement) {
-
-		Assert.isNotNull(contextNode, "parameter 'contextNode' must not be null");
-		Assert.isNotNull(grammarElement, "parameter 'grammarElement' must not be null");
-
-		Set<AbstractElement> elementSet = new LinkedHashSet<AbstractElement>();
-
-		if (grammarElement.eContainer() instanceof ParserRule) {
-
-			/**
-			 * we have completed the rule of the current context.continue at the
-			 * parent context
-			 */
-			boolean hasLeafNodes = false;
-
-			for (Iterator<LeafNode> iterator = contextNode.getLeafNodes().listIterator(); !hasLeafNodes
-					&& iterator.hasNext(); hasLeafNodes = !iterator.next().isHidden()) {
-				;
-			}
-
-			contextNode = contextNode.getParent();
-
-			while (contextNode != null && contextNode.getGrammarElement() == null) {
-				contextNode = contextNode.getParent();
-			}
-
-			if (null != contextNode) {
-
-				elementSet.addAll(calculatePossibleElementSet(contextNode, ParseTreeUtil
-						.getGrammarElementFromNode(contextNode)));
-
-			}
-			else if (grammarElement.eContainer() instanceof ParserRule) {
-
-				if (!hasLeafNodes || GrammarUtil.isMultipleCardinality(grammarElement)) {
-					elementSet.add(grammarElement);
-				}
-			}
-		}
-		else if (grammarElement.eContainer() instanceof Alternatives) {
-			/**
-			 * one out of the alternatives is already fullfilled so we can
-			 * simply skip and proceed to the parent
-			 */
-
-			elementSet.addAll(calculatePossibleElementSet(contextNode, (AbstractElement) grammarElement.eContainer()));
-
-		}
-		else if (grammarElement.eContainer() instanceof Group) {
-
-			EList<AbstractElement> contents = ((Group) grammarElement.eContainer()).getAbstractTokens();
-
-			int indexOf = contents.indexOf(grammarElement) + 1;
-
-			int size = contents.size();
-
-			// add the current one if has an oneOrMore cardinality
-			if (GrammarUtil.isOneOrMoreCardinality(grammarElement)) {
-				elementSet.add(grammarElement);
-			}
-
-			/**
-			 * start at the current (maybe the last) or at the following one
-			 * with optional cardinality and add all following with optional
-			 * cardinality
-			 */
-			AbstractElement last = GrammarUtil.isAnyCardinality(grammarElement) || indexOf == size ? grammarElement
-					: contents.get(indexOf++);
-
-			while (GrammarUtil.isOptionalCardinality(last) && indexOf < size) {
-				elementSet.add(last);
-				last = indexOf < size ? contents.get(indexOf++) : last;
-			}
-
-			// always add the following if available or the last one if has an
-			// any cardinality
-			if (last != grammarElement || GrammarUtil.isAnyCardinality(last)) {
-				elementSet.add(last);
-			}
-
-			// ask parent groups only if we've completed the whole group
-			if (indexOf == size) {
-
-				boolean startedAtlastGrammarElementInGroup = last == grammarElement;
-
-				if (startedAtlastGrammarElementInGroup || GrammarUtil.isOptionalCardinality(last)) {
-
-					elementSet.addAll(calculatePossibleElementSet(contextNode, (AbstractElement) grammarElement
-							.eContainer()));
-				}
-			}
-		}
-		else {
-			elementSet.addAll(calculatePossibleElementSet(contextNode, (AbstractElement) grammarElement.eContainer()));
-
-		}
-
-		return elementSet;
-	}
-
-	private void collectCompletionProposalList(List<EObject> resolvedElementOrRuleList,
-			List<ICompletionProposal> completionProposalList, IDocument document, AbstractNode currentLeafNode,
+	private List<ICompletionProposal> collectCompletionProposalList(List<EObject> resolvedElementOrRuleList, IDocument document, AbstractNode currentLeafNode,
 			String prefix, final int offset) {
+
+		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
+		
 		for (Iterator<EObject> elementOrRuleIterator = resolvedElementOrRuleList.iterator(); elementOrRuleIterator
 				.hasNext();) {
 			EObject abstractElement = elementOrRuleIterator.next();
@@ -353,10 +204,8 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				}
 			}
 		}
-	}
-
-	private final String firstLetterCapitalized(String name) {
-		return name.substring(0, 1).toUpperCase() + name.substring(1);
+		
+		return completionProposalList;
 	}
 
 	private final Method findMethod(Class<?> clazz, String name, Class<?>... paramTypes) {
@@ -380,6 +229,18 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 			searchType = searchType.getSuperclass();
 		}
 		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private final Collection<ICompletionProposal> invokeMethod(Method method, Object target, Object... args) {
+
+		try {
+			return (Collection<ICompletionProposal>) method.invoke(target, args);
+		}
+		catch (Exception ex) {
+			handleReflectionException(ex);
+		}
+		throw new IllegalStateException("huh?");
 	}
 
 	private void handleReflectionException(Exception ex) {
@@ -414,18 +275,6 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		handleUnexpectedException(ex);
 	}
 
-	@SuppressWarnings("unchecked")
-	private final Collection<ICompletionProposal> invokeMethod(Method method, Object target, Object... args) {
-
-		try {
-			return (Collection<ICompletionProposal>) method.invoke(target, args);
-		}
-		catch (Exception ex) {
-			handleReflectionException(ex);
-		}
-		throw new IllegalStateException("huh?");
-	}
-
 	private boolean equalOrAssignableTypes(Class<?>[] a, Class<?>[] a2) {
 		if (a == a2) {
 			return true;
@@ -451,5 +300,10 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		}
 		return true;
 	}
+	
+	private final String firstLetterCapitalized(String name) {
+		return name.substring(0, 1).toUpperCase() + name.substring(1);
+	}
+
 
 }

@@ -25,15 +25,20 @@
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Alternatives" cardinality="*">
           <groups xsi:type="xtext:Alternatives">
-            <groups xsi:type="xtext:Assignment" operator="+=" feature="kinder">
-              <terminal xsi:type="xtext:RuleCall" name="Kind"/>
+            <groups xsi:type="xtext:Alternatives">
+              <groups xsi:type="xtext:Assignment" operator="+=" feature="kinder">
+                <terminal xsi:type="xtext:RuleCall" name="Kind"/>
+              </groups>
+              <groups xsi:type="xtext:Assignment" operator="+=" feature="erzieher">
+                <terminal xsi:type="xtext:RuleCall" name="Erwachsener"/>
+              </groups>
             </groups>
-            <groups xsi:type="xtext:Assignment" operator="+=" feature="erzieher">
-              <terminal xsi:type="xtext:RuleCall" name="Erwachsener"/>
+            <groups xsi:type="xtext:Assignment" operator="+=" feature="spielzeuge">
+              <terminal xsi:type="xtext:RuleCall" name="Spielzeug"/>
             </groups>
           </groups>
-          <groups xsi:type="xtext:Assignment" operator="+=" feature="spielzeuge">
-            <terminal xsi:type="xtext:RuleCall" name="Spielzeug"/>
+          <groups xsi:type="xtext:Assignment" operator="+=" feature="familie">
+            <terminal xsi:type="xtext:RuleCall" name="Familie"/>
           </groups>
         </abstractTokens>
       </abstractTokens>
@@ -113,6 +118,57 @@
         <groups xsi:type="xtext:Keyword" value="GELB"/>
       </groups>
       <groups xsi:type="xtext:Keyword" value="GR&#xdc;N"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Familie">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Group">
+                <abstractTokens xsi:type="xtext:Group">
+                  <abstractTokens xsi:type="xtext:Keyword" value="familie"/>
+                  <abstractTokens xsi:type="xtext:Keyword" value="("/>
+                </abstractTokens>
+                <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+                  <terminal xsi:type="xtext:Alternatives">
+                    <groups xsi:type="xtext:Alternatives">
+                      <groups xsi:type="xtext:Keyword" value="keyword"/>
+                      <groups xsi:type="xtext:RuleCall" name="STRING"/>
+                    </groups>
+                    <groups xsi:type="xtext:RuleCall" name="ID"/>
+                  </terminal>
+                </abstractTokens>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="mutter">
+                <terminal xsi:type="xtext:CrossReference">
+                  <type name="Erwachsener"/>
+                </terminal>
+              </abstractTokens>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="vater">
+              <terminal xsi:type="xtext:CrossReference">
+                <type name="Erwachsener"/>
+              </terminal>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="kinder">
+            <terminal xsi:type="xtext:CrossReference">
+              <type name="Kind"/>
+            </terminal>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Group" cardinality="*">
+          <abstractTokens xsi:type="xtext:Keyword" value=","/>
+          <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="kinder">
+            <terminal xsi:type="xtext:CrossReference">
+              <type name="Kind"/>
+            </terminal>
+          </abstractTokens>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value=")"/>
     </alternatives>
   </rules>
 </xtext:Grammar>

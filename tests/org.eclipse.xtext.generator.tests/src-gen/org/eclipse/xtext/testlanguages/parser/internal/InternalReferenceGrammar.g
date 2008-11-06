@@ -110,11 +110,11 @@ ruleSpielplatz returns [EObject current=null]
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
-)(((	
+)((((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_kinder=ruleKind 
 	    {
@@ -132,7 +132,7 @@ ruleSpielplatz returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_erzieher=ruleErwachsener 
 	    {
@@ -150,7 +150,7 @@ ruleSpielplatz returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_spielzeuge=ruleSpielzeug 
 	    {
@@ -161,6 +161,24 @@ ruleSpielplatz returns [EObject current=null]
 	        }
 	        
 	        factory.add($current, "spielzeuge", lv_spielzeuge,null);
+	         }
+	
+))
+    |(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	    }
+	    lv_familie=ruleFamilie 
+	    {
+	        currentNode = currentNode.getParent();
+	        if ($current==null) {
+	            $current = factory.create("Spielplatz");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.add($current, "familie", lv_familie,null);
 	         }
 	
 ))*)'}' 
@@ -384,6 +402,124 @@ ruleFarbe returns [EObject current=null]
     |'GRÜN' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.5/@alternatives/@groups.1" /* xtext::Keyword */, null); 
+    }
+);
+    
+
+
+// Entry rule entryRuleFamilie
+entryRuleFamilie returns [EObject current=null] :
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); }
+	 iv_ruleFamilie=ruleFamilie 
+	 { $current=$iv_ruleFamilie.current; } 
+	 EOF 
+;
+
+// Rule Familie
+ruleFamilie returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
+((((((('familie' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+    }
+'(' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+    }
+)(	
+	
+	    lv_name=(('keyword' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "name"); 
+    }
+
+    |RULE_STRING
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::RuleCall */, "name"); 
+    }
+)
+    |RULE_ID
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::RuleCall */, "name"); 
+    }
+) 
+	    {
+	        if ($current==null) {
+	            $current = factory.create("Familie");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        factory.set($current, "name", input.LT(-1),null);
+	         }
+	
+))(	
+	
+		
+		{
+			if ($current==null) {
+	            $current = factory.create("Familie");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
+(
+	RULE_ID    { 
+    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "mutter"); 
+    }
+) 
+	
+))(	
+	
+		
+		{
+			if ($current==null) {
+	            $current = factory.create("Familie");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
+(
+	RULE_ID    { 
+    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "vater"); 
+    }
+) 
+	
+))(	
+	
+		
+		{
+			if ($current==null) {
+	            $current = factory.create("Familie");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
+(
+	RULE_ID    { 
+    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "kinder"); 
+    }
+) 
+	
+))(',' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+    }
+(	
+	
+		
+		{
+			if ($current==null) {
+	            $current = factory.create("Familie");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
+(
+	RULE_ID    { 
+    createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "kinder"); 
+    }
+) 
+	
+))*)')' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammar.xmi#//@rules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
     
