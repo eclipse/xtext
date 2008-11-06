@@ -46,6 +46,7 @@ import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 /**
  * @author Michael Clay - Initial contribution and API
  * @author Dennis Hübner - Initial contribution and API
+ * @author Heiko Behrens
  */
 public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
@@ -102,7 +103,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 					List<EObject> resolvedElementOrRuleList = resolveElement(nextElement);
 
 					collectCompletionProposalList(resolvedElementOrRuleList, completionProposalList, xtextDocument,
-							currentLeafNode, prefix, offset);
+							lastCompleteNode, prefix, offset);
 				}
 
 				if (completionProposalList != null) {
@@ -288,7 +289,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 	}
 
 	private void collectCompletionProposalList(List<EObject> resolvedElementOrRuleList,
-			List<ICompletionProposal> completionProposalList, IDocument document, LeafNode currentLeafNode,
+			List<ICompletionProposal> completionProposalList, IDocument document, AbstractNode currentLeafNode,
 			String prefix, final int offset) {
 		for (Iterator<EObject> elementOrRuleIterator = resolvedElementOrRuleList.iterator(); elementOrRuleIterator
 				.hasNext();) {
