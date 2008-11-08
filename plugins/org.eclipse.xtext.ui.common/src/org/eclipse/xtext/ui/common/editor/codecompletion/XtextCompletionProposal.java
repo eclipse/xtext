@@ -2,9 +2,6 @@ package org.eclipse.xtext.ui.common.editor.codecompletion;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
@@ -74,6 +71,24 @@ public class XtextCompletionProposal implements ICompletionProposal,
 		if (imageFilePath != null) {
 			initializeImage(imageFilePath);
 		}
+	}
+	
+	/**
+	 * Setter for the text to insert
+	 * 
+	 * @param text
+	 */
+	public void setText(String text) {
+		this.text = text;
+	}
+	
+	
+	/**
+	 * Getter for the text to insert
+	 * @return the text to insert
+	 */
+	public String getText() {
+		return text;
 	}
 
 	/*
