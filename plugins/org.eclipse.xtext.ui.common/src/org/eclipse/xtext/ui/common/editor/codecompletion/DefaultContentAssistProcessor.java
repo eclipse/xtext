@@ -12,7 +12,11 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ContextInformationValidator;
@@ -20,10 +24,11 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
@@ -33,6 +38,7 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.Inject;
@@ -64,7 +70,6 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		
 		if (proposalProvider != null) {
 
-			
 			IDocument document = viewer.getDocument();
 			
 			if (document instanceof XtextDocument) {
@@ -85,17 +90,17 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 				AbstractNode lastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
 
-				LeafNode currentLeafNode = (LeafNode) ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
+				LeafNode currentLeafNode = ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
 
-				String prefix = "";
-				StyledText textWidget = viewer.getTextWidget();
-				if (textWidget.getCharCount() > 0) {
-					int boundedOffset = Math.min(offset, textWidget.getCharCount()) -1;
-					if(currentLeafNode.getOffset() <= boundedOffset)
-						prefix = textWidget.getText(currentLeafNode.getOffset(), boundedOffset);
-				}
+				String prefix = null==currentLeafNode ? "" : currentLeafNode.getText();
 
 				Set<AbstractElement> nextValidElementSet = ParseTreeUtil.getElementSetValidFromOffset(rootNode,lastCompleteNode, offset);
+				/**
+				 * in the case of a non linked crossreference we delegate to proposalProvider (again)  
+				 */
+				if (lastCompleteNode.getGrammarElement() instanceof CrossReference && !isLinked(lastCompleteNode) ) {
+					nextValidElementSet.add((AbstractElement) lastCompleteNode.getGrammarElement().eContainer());
+				}
 				
 				for (List<EObject> resolvedElementOrRuleList : new ProposalCandidateResolverSwitch(nextValidElementSet)) {
 
@@ -106,10 +111,8 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				}
 
 				if (completionProposalList != null) {
-					List<? extends ICompletionProposal> sortAndFilter = proposalProvider
-							.sortAndFilter(completionProposalList);
+					List<? extends ICompletionProposal> sortAndFilter = proposalProvider.sortAndFilter(completionProposalList,currentLeafNode,prefix);
 					completionProposals =  sortAndFilter.toArray(new ICompletionProposal[] {});
-
 				}
 			}
 		}
@@ -303,6 +306,49 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 	
 	private final String firstLetterCapitalized(String name) {
 		return name.substring(0, 1).toUpperCase() + name.substring(1);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private boolean isLinked(AbstractNode lastCompleteNode) {
+		
+		EObject semanticModel = NodeUtil.getNearestSemanticObject(lastCompleteNode);
+				
+		EReference eReference = getReference((CrossReference) lastCompleteNode.getGrammarElement(), semanticModel.eClass());
+		
+		if (eReference.getUpperBound() == 1 ) {
+		
+			if (null!=semanticModel.eGet(eReference)) {
+				return true;
+			}
+		}
+		else { 
+			
+			EcoreEList<EObject> ecoreEList = (EcoreEList<EObject>) semanticModel.eGet(eReference);
+			
+			for (Iterator<EObject> iterator = ecoreEList.iterator(); iterator.hasNext();) {
+				
+				EObject object = iterator.next();
+				
+				if (EcoreUtil2.getURIFragment(object).equalsIgnoreCase(((LeafNode)lastCompleteNode).getText())) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	private EReference getReference(CrossReference ref, EClass class1) {
+		
+		EList<EReference> references = class1.getEAllReferences();
+		
+		String feature = GrammarUtil.containingAssignment(ref).getFeature();
+		
+		for (EReference reference : references) {
+			if (!reference.isContainment() && reference.getName().equals(feature))
+				return reference;
+		}
+		return null;
 	}
 
 

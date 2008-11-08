@@ -2,7 +2,10 @@ package org.eclipse.xtext.ui.common.editor.codecompletion;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -20,6 +23,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.util.Pair;
@@ -54,7 +58,6 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 					+ prefix.trim() + "'");
 		}
 		String text = keyword.getValue().length() == 1 ? keyword.getValue() : keyword.getValue() + " ";
-
 		return Collections.singletonList(createCompletionProposal(text, offset));
 	}
 	
@@ -80,19 +83,63 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#sortAndFilter(java.util.List)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#sortAndFilter(java.util.List, org.eclipse.emf.ecore.EObject, java.lang.String)
 	 */
-	public List<? extends ICompletionProposal> sortAndFilter(List<? extends ICompletionProposal> completionProposalList) {
-		return doSortAndFilter(completionProposalList);
+	public List<? extends ICompletionProposal> sortAndFilter(
+			List<? extends ICompletionProposal> completionProposalList, EObject model, String prefix) {
+		return doSortAndFilter(completionProposalList,model,prefix);
 	}
 	
 	/**
 	 * Concrete subclasses can override this for custom sort and filter
 	 * behavior. Gets called after all completion proposals have been collected.
+	 * 
+	 * The default behavior of this implementation is to sort duplicates and to trim 
+	 * matching <code>ICompletionProposal#displayString</code> with matching prefix values.
+	 * 
+	 * @param completionProposalList matching {@link ICompletionProposal} to sort and filter
+	 * @param model - the most specific model element under the cursor. 
+	 * @param prefix - the prefix under the cursor or null if there is no prefix
+	 * @return the sorted and filtered <code>ICompletionProposal</code> list.
+	 * 
 	 */
 	protected List<? extends ICompletionProposal> doSortAndFilter(
-			List<? extends ICompletionProposal> completionProposalList) {
+			List<? extends ICompletionProposal> completionProposalList,EObject model,String prefix) {
+		
+		if (model instanceof LeafNode) {
+			
+			LeafNode leafNode = (LeafNode) model;
+			
+			Map<String,ICompletionProposal> displayString2ICompletionProposalMap = new HashMap<String,ICompletionProposal>();
+			
+			for (Iterator<? extends ICompletionProposal> iterator = completionProposalList.iterator(); iterator.hasNext();) {
+
+				ICompletionProposal completionProposal = iterator.next();
+				
+				// filter duplicate displayString
+				if (!displayString2ICompletionProposalMap.containsKey(completionProposal.getDisplayString())) {
+				
+					displayString2ICompletionProposalMap.put(completionProposal.getDisplayString(), completionProposal);
+					
+					// trim displayString
+					if (leafNode.isHidden() && !"".equals(leafNode.getText().trim()) ) {
+						
+						if (completionProposal.getDisplayString().startsWith(leafNode.getText()) && 
+								completionProposal instanceof XtextCompletionProposal) {
+							
+							XtextCompletionProposal xtextCompletionProposal = (XtextCompletionProposal) completionProposal;
+							
+							xtextCompletionProposal.setText(xtextCompletionProposal.getText().replaceFirst(leafNode.getText(), ""));
+						}  else {
+							iterator.remove();
+						}
+					}
+				} else {
+					iterator.remove();
+				}
+			}
+		} 
+		
 		return completionProposalList;
 	}
 	
