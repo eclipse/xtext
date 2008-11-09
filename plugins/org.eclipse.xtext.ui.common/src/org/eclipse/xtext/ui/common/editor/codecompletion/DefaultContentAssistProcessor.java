@@ -1,13 +1,8 @@
 package org.eclipse.xtext.ui.common.editor.codecompletion;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -25,15 +20,9 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -58,7 +47,6 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 	@Inject
 	private IProposalProvider proposalProvider;
 
-	private final Map<String, Method> methodLookupMap = new HashMap<String, Method>();
 
 	/**
 	 * computes the possible grammar elements following the one at the given
@@ -93,25 +81,37 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				LeafNode currentLeafNode = ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
 
 				String prefix = null==currentLeafNode ? "" : currentLeafNode.getText();
-
-				Set<AbstractElement> nextValidElementSet = ParseTreeUtil.getElementSetValidFromOffset(rootNode,lastCompleteNode, offset);
+				
+				Set<AbstractElement> nextValidElementSet = new LinkedHashSet<AbstractElement>();
 				/**
-				 * in the case of a non linked crossreference we delegate to proposalProvider (again)  
+				 * in the case of a non linked crossreference we delegate to proposalProvider (again) 
 				 */
-				if (lastCompleteNode.getGrammarElement() instanceof CrossReference && !isLinked(lastCompleteNode) ) {
-					nextValidElementSet.add((AbstractElement) lastCompleteNode.getGrammarElement().eContainer());
+				if (lastCompleteNode.getGrammarElement() instanceof CrossReference && !isLinked(lastCompleteNode)) {
+					
+					nextValidElementSet.add((AbstractElement) lastCompleteNode.getGrammarElement());
+				} 
+				/**
+				 * in the case we are at the end of the completed previous element add for 'right-to-left' backtracking cases
+				 */
+				else if (currentLeafNode==lastCompleteNode) {
+					nextValidElementSet.add((AbstractElement) lastCompleteNode.getGrammarElement());
 				}
+				
+				nextValidElementSet.addAll(ParseTreeUtil.getElementSetValidFromOffset(rootNode,lastCompleteNode, offset));
+				
+				ProposalProviderInvokerSwitch proposalProviderInvokerSwitch = new ProposalProviderInvokerSwitch(
+						lastCompleteNode, document, offset, prefix, proposalProvider);
 				
 				for (List<EObject> resolvedElementOrRuleList : new ProposalCandidateResolverSwitch(nextValidElementSet)) {
 
-					List<ICompletionProposal> collectedCompletionProposalList = collectCompletionProposalList(resolvedElementOrRuleList,  xtextDocument,
-							lastCompleteNode, prefix, offset);
+					List<ICompletionProposal> collectedCompletionProposalList = 
+						proposalProviderInvokerSwitch.collectCompletionProposalList(resolvedElementOrRuleList);
 					
 					completionProposalList.addAll(collectedCompletionProposalList);
 				}
 
 				if (completionProposalList != null) {
-					List<? extends ICompletionProposal> sortAndFilter = proposalProvider.sortAndFilter(completionProposalList,currentLeafNode,prefix);
+					List<? extends ICompletionProposal> sortAndFilter = proposalProvider.sortAndFilter(completionProposalList,currentLeafNode,prefix,document,offset);
 					completionProposals =  sortAndFilter.toArray(new ICompletionProposal[] {});
 				}
 			}
@@ -140,210 +140,42 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		return new ContextInformationValidator(this);
 	}
 
-	private List<ICompletionProposal> collectCompletionProposalList(List<EObject> resolvedElementOrRuleList, IDocument document, AbstractNode currentLeafNode,
-			String prefix, final int offset) {
-
-		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
-		
-		for (Iterator<EObject> elementOrRuleIterator = resolvedElementOrRuleList.iterator(); elementOrRuleIterator
-				.hasNext();) {
-			EObject abstractElement = elementOrRuleIterator.next();
-
-			if (abstractElement instanceof Keyword) {
-				completionProposalList.addAll(proposalProvider.completeKeyword((Keyword) abstractElement,
-						currentLeafNode, prefix, document, offset));
-			}
-			else if (abstractElement instanceof Assignment) {
-
-				Assignment assignment = (Assignment) abstractElement;
-
-				ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
-
-				EObject model = null == ((CompositeNode) currentLeafNode.eContainer()).getElement() ? currentLeafNode
-						.eContainer() : ((CompositeNode) currentLeafNode.eContainer()).getElement();
-
-				Method method = findMethod(proposalProvider.getClass(), "complete"
-						+ firstLetterCapitalized(parserRule.getName())
-						+ firstLetterCapitalized(assignment.getFeature()), Assignment.class, model.getClass(),
-						String.class, document.getClass(), int.class);
-
-				Collection<? extends ICompletionProposal> assignmentProposalList = null == method ? null
-						: invokeMethod(method, proposalProvider, assignment, model, prefix, document, offset);
-
-				if (null != assignmentProposalList) {
-					completionProposalList.addAll(assignmentProposalList);
-				}
-
-			}
-			else if (abstractElement instanceof RuleCall) {
-
-				EObject model = null == ((CompositeNode) currentLeafNode.eContainer()).getElement() ? currentLeafNode
-						.eContainer() : ((CompositeNode) currentLeafNode.eContainer()).getElement();
-
-				List<? extends ICompletionProposal> ruleCallProposalList = this.proposalProvider.completeRuleCall(
-						(RuleCall) abstractElement, model, prefix, document, offset);
-
-				if (null != ruleCallProposalList) {
-					completionProposalList.addAll(ruleCallProposalList);
-				}
-
-				AbstractRule calledRule = GrammarUtil.calledRule((RuleCall) abstractElement);
-
-				if (calledRule.getType() != null) {
-
-					TypeRef typeRef = calledRule.getType();
-
-					Method method = findMethod(proposalProvider.getClass(), "complete"
-							+ firstLetterCapitalized(typeRef.getAlias()) + firstLetterCapitalized(typeRef.getName()),
-							RuleCall.class, model.getClass(), String.class, document.getClass(), int.class);
-
-					Collection<? extends ICompletionProposal> proposalList = null == method ? null : invokeMethod(
-							method, proposalProvider, abstractElement, model, prefix, document, offset);
-
-					if (null != proposalList) {
-						completionProposalList.addAll(proposalList);
-					}
-
-				}
-			}
-		}
-		
-		return completionProposalList;
-	}
-
-	private final Method findMethod(Class<?> clazz, String name, Class<?>... paramTypes) {
-		Assert.isNotNull(clazz, "Class must not be null");
-		Assert.isNotNull(name, "Method name must not be null");
-		Method result = methodLookupMap.get(name);
-		Class<?> searchType = clazz;
-		while (!Object.class.equals(searchType) && searchType != null && null == result) {
-			Method[] methods = (searchType.isInterface() ? searchType.getMethods() : searchType.getDeclaredMethods());
-			for (int i = 0; i < methods.length; i++) {
-				Method method = methods[i];
-				if (name.equals(method.getName())
-						&& (paramTypes == null || equalOrAssignableTypes(method.getParameterTypes(), paramTypes))) {
-					if (result == null
-							|| equalOrAssignableTypes(result.getParameterTypes(), method.getParameterTypes())) {
-						result = method;
-						methodLookupMap.put(name, method);
-					}
-				}
-			}
-			searchType = searchType.getSuperclass();
-		}
-		return result;
-	}
-	
-	@SuppressWarnings("unchecked")
-	private final Collection<ICompletionProposal> invokeMethod(Method method, Object target, Object... args) {
-
-		try {
-			return (Collection<ICompletionProposal>) method.invoke(target, args);
-		}
-		catch (Exception ex) {
-			handleReflectionException(ex);
-		}
-		throw new IllegalStateException("huh?");
-	}
-
-	private void handleReflectionException(Exception ex) {
-		if (ex instanceof NoSuchMethodException) {
-			throw new IllegalStateException("Method not found: " + ex.getMessage());
-		}
-		if (ex instanceof IllegalAccessException) {
-			throw new IllegalStateException("Could not access method: " + ex.getMessage());
-		}
-		if (ex instanceof InvocationTargetException) {
-			rethrowRuntimeException(((InvocationTargetException) ex).getTargetException());
-		}
-		if (ex instanceof RuntimeException) {
-			throw (RuntimeException) ex;
-		}
-		handleUnexpectedException(ex);
-	}
-
-	private void handleUnexpectedException(Throwable ex) {
-		IllegalStateException isex = new IllegalStateException("Unexpected exception thrown");
-		isex.initCause(ex);
-		throw isex;
-	}
-
-	private final void rethrowRuntimeException(Throwable ex) {
-		if (ex instanceof RuntimeException) {
-			throw (RuntimeException) ex;
-		}
-		if (ex instanceof Error) {
-			throw (Error) ex;
-		}
-		handleUnexpectedException(ex);
-	}
-
-	private boolean equalOrAssignableTypes(Class<?>[] a, Class<?>[] a2) {
-		if (a == a2) {
-			return true;
-		}
-
-		if (a == null || a2 == null) {
-			return false;
-		}
-
-		int length = a.length;
-
-		if (a2.length != length) {
-			return false;
-		}
-
-		for (int i = 0; i < length; i++) {
-			Class<?> o1 = a[i];
-			Class<?> o2 = a2[i];
-
-			if (!(o1 == null ? o2 == null : o1.equals(o2) || o1.isAssignableFrom(o2))) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	private final String firstLetterCapitalized(String name) {
-		return name.substring(0, 1).toUpperCase() + name.substring(1);
-	}
 	
 	@SuppressWarnings("unchecked")
 	private boolean isLinked(AbstractNode lastCompleteNode) {
-		
+
 		EObject semanticModel = NodeUtil.getNearestSemanticObject(lastCompleteNode);
-				
-		EReference eReference = getReference((CrossReference) lastCompleteNode.getGrammarElement(), semanticModel.eClass());
-		
-		if (eReference.getUpperBound() == 1 ) {
-		
-			if (null!=semanticModel.eGet(eReference)) {
+
+		EReference eReference = getReference((CrossReference) lastCompleteNode.getGrammarElement(), semanticModel
+				.eClass());
+
+		if (eReference.getUpperBound() == 1) {
+
+			if (null != semanticModel.eGet(eReference)) {
 				return true;
 			}
 		}
-		else { 
-			
+		else {
+
 			EcoreEList<EObject> ecoreEList = (EcoreEList<EObject>) semanticModel.eGet(eReference);
-			
-			for (Iterator<EObject> iterator = ecoreEList.iterator(); iterator.hasNext();) {
-				
-				EObject object = iterator.next();
-				
-				if (EcoreUtil2.getURIFragment(object).equalsIgnoreCase(((LeafNode)lastCompleteNode).getText())) {
+
+			for (EObject object : ecoreEList) {
+
+				if (EcoreUtil2.getURIFragment(object).equalsIgnoreCase(((LeafNode) lastCompleteNode).getText())) {
 					return true;
 				}
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	private EReference getReference(CrossReference ref, EClass class1) {
-		
+
 		EList<EReference> references = class1.getEAllReferences();
-		
+
 		String feature = GrammarUtil.containingAssignment(ref).getFeature();
-		
+
 		for (EReference reference : references) {
 			if (!reference.isContainment() && reference.getName().equals(feature))
 				return reference;

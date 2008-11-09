@@ -71,8 +71,8 @@ public interface IProposalProvider {
 	 * This method is invoked by the framework after all possible completions have been collected.
 	 * @param completionProposalList matching {@link ICompletionProposal} to sort and filter
 	 * @param model - the most specific model element under the cursor. 
-	 * @param prefix - the prefix under the cursor or null if there is no prefix
 	 * @return the sorted and filtered <code>ICompletionProposal</code> list.
+	 * 
 	 */
-	public List<? extends ICompletionProposal> sortAndFilter(List<? extends ICompletionProposal> completionProposalList,EObject model,String prefix);
+	public List<? extends ICompletionProposal> sortAndFilter(List<? extends ICompletionProposal> completionProposalList,EObject model, String prefix, IDocument document,int offset);
 }

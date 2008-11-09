@@ -52,7 +52,7 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal("1", offset));		
+		return Collections.singletonList(createCompletionProposal(assignment,model,"1", offset));		
 	}
 	
 	public List<? extends ICompletionProposal> completeSpielplatzBeschreibung(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -61,7 +61,7 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal("\"SpielplatzBeschreibung\"", offset));		
+		return Collections.singletonList(createCompletionProposal(assignment,model,"\"SpielplatzBeschreibung\"", offset));		
 	}
 	
 	public List<? extends ICompletionProposal> completeSpielplatzKinder(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -115,7 +115,7 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal("KindName", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"KindName", offset));
 	}
 	
 	public List<? extends ICompletionProposal> completeKindAge(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -124,7 +124,7 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal("1", offset));		
+		return Collections.singletonList(createCompletionProposal(assignment,model,"1", offset));		
 	}
 	
 	public List<? extends ICompletionProposal> completeErwachsenerName(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -133,7 +133,7 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal("ErwachsenerName", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"ErwachsenerName", offset));
 	}
 	
 	public List<? extends ICompletionProposal> completeErwachsenerAge(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -142,7 +142,7 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal("1", offset));		
+		return Collections.singletonList(createCompletionProposal(assignment,model,"1", offset));		
 	}
 	
 	public List<? extends ICompletionProposal> completeSpielzeugName(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -151,7 +151,7 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal("SpielzeugName", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"SpielzeugName", offset));
 	}
 	
 	public List<? extends ICompletionProposal> completeSpielzeugFarbe(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -215,7 +215,7 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal("CustomTypeParserRuleName", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"CustomTypeParserRuleName", offset));
 	}
     
     

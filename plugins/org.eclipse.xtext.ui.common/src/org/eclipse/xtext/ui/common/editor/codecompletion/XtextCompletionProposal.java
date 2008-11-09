@@ -2,6 +2,7 @@ package org.eclipse.xtext.ui.common.editor.codecompletion;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
@@ -15,6 +16,7 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.xtext.AbstractElement;
 
 /**
  * Default Xtext implementation of interface <code>ICompletionProposal</code>.
@@ -28,8 +30,11 @@ import org.eclipse.swt.graphics.Point;
 public class XtextCompletionProposal implements ICompletionProposal,
 		ICompletionProposalExtension2, ICompletionProposalExtension6 {
 	
-	private Logger logger = Logger.getLogger(XtextCompletionProposal.class);
+	protected final Logger logger = Logger.getLogger(XtextCompletionProposal.class);
 
+	
+	private EObject model;
+	private AbstractElement abstractElement;
 	private String text;
 	private String description;
 	private Image image;
@@ -38,6 +43,9 @@ public class XtextCompletionProposal implements ICompletionProposal,
 	private String pluginIdentifier;
 
 	/**
+	 * @param element
+	 *            the element for which this CompletionProposal is created for
+	 * @param model the last semtantically complete object 
 	 * @param text
 	 *            the text value to be replaced/inserted
 	 * @param label
@@ -52,12 +60,14 @@ public class XtextCompletionProposal implements ICompletionProposal,
 	 * @param offset
 	 *            the offset of the text
 	 */
-	public XtextCompletionProposal(String text, StyledString label,
+	public XtextCompletionProposal(AbstractElement element,EObject model,String text, StyledString label,
 			String description, String imageFilePath, String pluginIdentifier,
 			int offset) {
 		Assert.isNotNull(text, "parameter 'text' must not be null");
 		Assert.isNotNull(pluginIdentifier,
 				"pluginIdentifier 'text' must not be null");
+		this.abstractElement = element;
+		this.model = model;
 		this.text = text;
 		this.description = description;
 		this.offset = offset;
@@ -73,6 +83,45 @@ public class XtextCompletionProposal implements ICompletionProposal,
 		}
 	}
 	
+	/**
+	 * 
+	 * Getter for model property.
+	 * 
+	 * @return the associated model object
+	 */
+	public EObject getModel() {
+		return model;
+	}
+	
+	/**
+	 * Setter for model property.
+	 * 
+	 * @param model to set
+	 */
+	public void setModel(EObject model) {
+		this.model = model;
+	}
+
+
+	/**
+	 * Getter for abstractElement property.
+	 * 
+	 * @return the associated element
+	 */
+	public AbstractElement getAbstractElement() {
+		return abstractElement;
+	}
+
+
+	/**
+	 * Setter for abstractElement property.
+	 * @param abstractElement to set
+	 */
+	public void setAbstractElement(AbstractElement abstractElement) {
+		this.abstractElement = abstractElement;
+	}
+
+
 	/**
 	 * Setter for the text to insert
 	 * 
@@ -226,6 +275,11 @@ public class XtextCompletionProposal implements ICompletionProposal,
 	 */
 	public Point getSelection(IDocument document) {
 		return new Point(offset + this.text.length(), 0);
+	}
+	
+	@Override
+	public String toString() {
+		return "XtextCompletionPoposal[text='"+getText()+"']";
 	}
 
 	private void initializeImage(String imageName) {
