@@ -17,6 +17,14 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.ParseTreeUtil;
 
 /**
  * Default Xtext implementation of interface <code>ICompletionProposal</code>.
@@ -206,10 +214,46 @@ public class XtextCompletionProposal implements ICompletionProposal,
 			int offset) {
 
 		try {
+			
 			IDocument document = viewer.getDocument();
+			
+			if (model != null) {
+				CompositeNode parserNode = NodeUtil.getRootNode(model);
+				
+				LeafNode currentLeafNode=ParseTreeUtil.getCurrentNodeByOffset(parserNode, offset);
+				
+				boolean isCursorAtTheEndOfTheLastElement = offset == (currentLeafNode.getOffset() + currentLeafNode
+						.getLength());
+				
+				if ((currentLeafNode.isHidden() && !"".equals(currentLeafNode.getText().trim()))
+						|| isCursorAtTheEndOfTheLastElement) {
+					if (getDisplayString().startsWith(currentLeafNode.getText())) {
+						setText(getText().substring(currentLeafNode.getText().length()));
+					}
+				} 
+				
+				if (!currentLeafNode.isHidden() && 
+						isCursorAtTheEndOfTheLastElement && 
+						getDisplayString().equalsIgnoreCase(getText())) {
 
+					if (currentLeafNode.getGrammarElement() instanceof CrossReference
+							&& abstractElement instanceof CrossReference) {
+						setText(" " + getText());
+					}
+					else if (currentLeafNode.getGrammarElement() instanceof RuleCall
+							&& currentLeafNode.getGrammarElement().eContainer() instanceof Assignment
+							&& abstractElement instanceof Assignment) {
+						setText(" " + getText());
+					}
+					else if (!GrammarUtil.containingParserRule(abstractElement).equals(GrammarUtil.containingParserRule(currentLeafNode.getGrammarElement()))) {
+						setText(" " + getText());
+					}
+
+				}	
+			}
+			
 			document.replace(this.offset, offset != this.offset ? offset
-					- this.offset : 0, this.text);
+					- this.offset : 0, getText());
 
 		} catch (BadLocationException e) {
 			logger.error(e);

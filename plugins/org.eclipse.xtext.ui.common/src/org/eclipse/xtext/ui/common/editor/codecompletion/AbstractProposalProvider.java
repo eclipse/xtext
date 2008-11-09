@@ -24,8 +24,10 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.util.Pair;
 
@@ -82,9 +84,10 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		return Collections.emptyList();
 	}
 
+
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#sortAndFilter(java.util.List, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#sortAndFilter(java.util.List, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int, org.eclipse.xtext.parsetree.AbstractNode, org.eclipse.xtext.parsetree.LeafNode)
 	 */
 	public List<? extends ICompletionProposal> sortAndFilter(
 			List<? extends ICompletionProposal> completionProposalList, EObject model, String prefix,
@@ -173,10 +176,8 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
 		if (linkingService != null) {
-			EObject semanticModel = model instanceof AbstractNode ? NodeUtil
-					.getNearestSemanticObject((AbstractNode) model) : model;
 			List<Pair<String, URI>> candidates = linkingService
-					.getLinkCandidates(semanticModel, crossReference, prefix);
+					.getLinkCandidates(model, crossReference, prefix);
 			for (Pair<String, URI> candidate : candidates) {
 				completionProposalList.add(createCompletionProposal(crossReference, model, candidate.getFirstElement(),
 						offset));
@@ -201,85 +202,60 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	 * behavior. Gets called after all completion proposals have been collected.
 	 * 
 	 * The default behavior of this implementation is to sort duplicates and to
-	 * trim matching <code>ICompletionProposal#displayString</code> with
-	 * matching prefix values.
+	 * trim matching <code>ICompletionProposal#displayString</code> with matching prefix values.
 	 * 
-	 * @param completionProposalList
-	 *            matching {@link ICompletionProposal} to sort and filter
-	 * @param model
-	 *            - the most specific model element under the cursor.
-	 * @param prefix
-	 *            - the prefix under the cursor or null if there is no prefix
-	 * @param offset
-	 * @param document
-	 * @return the sorted and filtered <code>ICompletionProposal</code> list.
-	 * 
+	 * @see #sortAndFilter(List, EObject, String, IDocument, int, AbstractNode, LeafNode) 
 	 */
 	protected List<? extends ICompletionProposal> doSortAndFilter(
-			List<? extends ICompletionProposal> completionProposalList, EObject model, String prefix,
-			IDocument document, int offset) {
+			List<? extends ICompletionProposal> completionProposalList, EObject model, String prefix,IDocument document, int offset) {
 
-		if (model instanceof LeafNode) {
+		Map<String, ICompletionProposal> displayString2ICompletionProposalMap = new HashMap<String, ICompletionProposal>();
+		
+		for (Iterator<? extends ICompletionProposal> iterator = completionProposalList.iterator(); iterator.hasNext();) {
 
-			LeafNode leafNode = (LeafNode) model;
+			ICompletionProposal completionProposal = iterator.next();
+			
+			// filter duplicate displayString
+			if (!displayString2ICompletionProposalMap.containsKey(completionProposal.getDisplayString())) {
 
-			Map<String, ICompletionProposal> displayString2ICompletionProposalMap = new HashMap<String, ICompletionProposal>();
+				displayString2ICompletionProposalMap.put(completionProposal.getDisplayString(), completionProposal);
+				
+				if (model != null) {
+					
+					CompositeNode parserNode = NodeUtil.getRootNode(model);
+					
+					LeafNode currentLeafNode=ParseTreeUtil.getCurrentNodeByOffset(parserNode, offset);
 
-			for (Iterator<? extends ICompletionProposal> iterator = completionProposalList.iterator(); iterator
-					.hasNext();) {
-
-				ICompletionProposal completionProposal = iterator.next();
-
-				// filter duplicate displayString
-				if (!displayString2ICompletionProposalMap.containsKey(completionProposal.getDisplayString())) {
-
-					displayString2ICompletionProposalMap.put(completionProposal.getDisplayString(), completionProposal);
-
-					boolean cursorIsAtTheEndOfTheLastElement = offset == (leafNode.getOffset() + leafNode.getLength());
-					/**
-					 * 1. filter and trim proposal's matching the prefix of the
-					 * current leafNode (e.g. leafNode 'kin' for keyword 'kind'
-					 * will be trimmed to 'd' , displayString stays the same)
-					 * <p/>
-					 * 2. special case for crossref: if the cursor is at the end
-					 * of the previous element kind>|< we want to apply the
-					 * filter only to instances of the previous grammarElement
-					 * in order to always show all matches for 'right-to-left'
-					 * backtracking use-cases
-					 */
-					if ((leafNode.isHidden() || cursorIsAtTheEndOfTheLastElement)
-							&& !"".equals(leafNode.getText().trim())
-							&& completionProposal instanceof XtextCompletionProposal) {
+					boolean isCursorAtTheEndOfTheLastElement = offset == (currentLeafNode.getOffset() + currentLeafNode.getLength());
+					
+					if (isCursorAtTheEndOfTheLastElement && completionProposal instanceof XtextCompletionProposal) {
 
 						XtextCompletionProposal xtextCompletionProposal = (XtextCompletionProposal) completionProposal;
 
 						AbstractElement abstractElement = xtextCompletionProposal.getAbstractElement();
 
-						EObject grammarElement = leafNode.getGrammarElement();
-						// at the end of the last element we want to filter only
-						// the CompletionProposal for the same grammar element
-						if (completionProposal.getDisplayString().startsWith(leafNode.getText())) {
-							xtextCompletionProposal.setText(xtextCompletionProposal.getText().substring(
-									leafNode.getText().length()));
-						}
-						else if ((cursorIsAtTheEndOfTheLastElement && abstractElement.equals(grammarElement))
-								|| !cursorIsAtTheEndOfTheLastElement) {
+						EObject grammarElement = currentLeafNode.getGrammarElement();
+						// at the end of the last element we want to filter only the CompletionProposal for the same grammar element
+						if (((isCursorAtTheEndOfTheLastElement && abstractElement.equals(grammarElement))
+								|| !isCursorAtTheEndOfTheLastElement) && !completionProposal.getDisplayString().startsWith(currentLeafNode.getText())) {
 							if (logger.isDebugEnabled()) {
 								logger.debug("filter completionProposal '" + completionProposal + "'");
 							}
 							iterator.remove();
 						}
-					}
+					}	
 				}
-				else {
-					if (logger.isDebugEnabled()) {
-						logger.debug("filter duplicate completionProposal '" + completionProposal + "'");
-					}
+				
+			}
+			else {
+				if (logger.isDebugEnabled()) {
+					logger.debug("filter duplicate completionProposal '" + completionProposal + "'");
+				}
 
-					iterator.remove();
-				}
+				iterator.remove();
 			}
 		}
+		
 
 		return completionProposalList;
 	}

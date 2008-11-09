@@ -27,8 +27,9 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.util.XtextSwitch;
 
 /**
- * Represents a <b>Switch</b> for the Xtext model's inheritance hierarchy to resolve
- * potential completion proposal candidate's.
+ * Represents a <b>Switch</b> for the Xtext model's inheritance hierarchy to
+ * resolve (or flatten) 'container' level elements like <code>Group</code> or
+ * <code>Alternatives</code> to gather potential completion proposal candidates.
  * 
  * It supports the call {@link #doSwitch(EObject) doSwitch(object)} instead of
  * typical <code>if (x instanceof y)</code> code blocks.
