@@ -28,8 +28,6 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.util.XtextSwitch;
 
 /**
@@ -53,7 +51,7 @@ public class ProposalProviderInvokerSwitch extends XtextSwitch<List<ICompletionP
 
 	private final IDocument document;
 
-	private final AbstractNode currentLeafNode;
+	private final EObject model;
 
 	private final String prefix;
 
@@ -63,8 +61,7 @@ public class ProposalProviderInvokerSwitch extends XtextSwitch<List<ICompletionP
 
 	/**
 	 * 
-	 * @param currentLeafNode
-	 *            the last node in the document
+	 * @param model the most specific model element under the cursor. 
 	 * @param document
 	 *            the document itself
 	 * @param offset
@@ -75,10 +72,10 @@ public class ProposalProviderInvokerSwitch extends XtextSwitch<List<ICompletionP
 	 * @param proposalProvider
 	 *            the proposalProvider to callback and invoke
 	 */
-	public ProposalProviderInvokerSwitch(AbstractNode currentLeafNode, IDocument document, int offset, String prefix,
+	public ProposalProviderInvokerSwitch(EObject model, IDocument document, int offset, String prefix,
 			IProposalProvider proposalProvider) {
 		super();
-		this.currentLeafNode = currentLeafNode;
+		this.model = model;
 		this.document = document;
 		this.offset = offset;
 		this.prefix = prefix;
@@ -112,12 +109,9 @@ public class ProposalProviderInvokerSwitch extends XtextSwitch<List<ICompletionP
 	public List<ICompletionProposal> caseAssignment(Assignment assignment) {
 		ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
 
-		EObject model = null == ((CompositeNode) currentLeafNode.eContainer()).getElement() ? currentLeafNode
-				.eContainer() : ((CompositeNode) currentLeafNode.eContainer()).getElement();
-
 		Method method = findMethod(proposalProvider.getClass(), "complete"
 				+ firstLetterCapitalized(parserRule.getName()) + firstLetterCapitalized(assignment.getFeature()),
-				Assignment.class, model.getClass(), String.class, document.getClass(), int.class);
+				Assignment.class, model==null? EObject.class : model.getClass(), String.class, document.getClass(), int.class);
 
 		Collection<? extends ICompletionProposal> assignmentProposalList = null == method ? null : invokeMethod(method,
 				proposalProvider, assignment, model, prefix, document, offset);
@@ -131,18 +125,13 @@ public class ProposalProviderInvokerSwitch extends XtextSwitch<List<ICompletionP
 
 	@Override
 	public List<ICompletionProposal> caseKeyword(Keyword keyword) {
-		completionProposalList.addAll(proposalProvider.completeKeyword(keyword, currentLeafNode, prefix, document,
-				offset));
+		completionProposalList.addAll(proposalProvider.completeKeyword(keyword, model, prefix, document,offset));
 		return null;
 	}
 
 	@Override
 	public List<ICompletionProposal> caseRuleCall(RuleCall ruleCall) {
 		
-		EObject model = null == ((CompositeNode) currentLeafNode.eContainer()).getElement() ? currentLeafNode
-				.eContainer() : ((CompositeNode) currentLeafNode.eContainer()).getElement();
-
-				
 		List<? extends ICompletionProposal> ruleCallProposalList = this.proposalProvider.completeRuleCall(ruleCall,
 				model, prefix, document, offset);
 
@@ -158,7 +147,7 @@ public class ProposalProviderInvokerSwitch extends XtextSwitch<List<ICompletionP
 
 			Method method = findMethod(proposalProvider.getClass(), "complete"
 					+ firstLetterCapitalized(typeRef.getAlias()) + firstLetterCapitalized(typeRef.getName()),
-					RuleCall.class, model.getClass(), String.class, document.getClass(), int.class);
+					RuleCall.class, model==null? EObject.class : model.getClass(), String.class, document.getClass(), int.class);
 
 			Collection<? extends ICompletionProposal> proposalList = null == method ? null : invokeMethod(method,
 					proposalProvider, ruleCall, model, prefix, document, offset);

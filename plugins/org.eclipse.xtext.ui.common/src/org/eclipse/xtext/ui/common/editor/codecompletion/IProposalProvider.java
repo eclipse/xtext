@@ -71,6 +71,9 @@ public interface IProposalProvider {
 	 * This method is invoked by the framework after all possible completions have been collected.
 	 * @param completionProposalList matching {@link ICompletionProposal} to sort and filter
 	 * @param model - the most specific model element under the cursor. 
+	 * @param prefix - the prefix under the cursor or null if there is no prefix
+	 * @param document - the IDocument instance used by the editor
+	 * @param offset - an offset within the document for which completions should be computed
 	 * @return the sorted and filtered <code>ICompletionProposal</code> list.
 	 * 
 	 */

@@ -82,37 +82,48 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 				String prefix = null==currentLeafNode ? "" : currentLeafNode.getText();
 				
+				EObject model = lastCompleteNode instanceof AbstractNode ? NodeUtil
+						.getNearestSemanticObject((AbstractNode) lastCompleteNode) : lastCompleteNode;
+				
 				Set<AbstractElement> nextValidElementSet = new LinkedHashSet<AbstractElement>();
 				/**
-				 * in the case of a non linked crossreference we delegate to proposalProvider (again) 
+				 * in case of a crossreference which isnt linked already we evaluate it again and delegate to proposalProvider (again) 
 				 */
 				if (lastCompleteNode.getGrammarElement() instanceof CrossReference && !isLinked(lastCompleteNode)) {
-					
 					nextValidElementSet.add((AbstractElement) lastCompleteNode.getGrammarElement());
+					nextValidElementSet.addAll(ParseTreeUtil.getElementSetValidFromOffset(rootNode,lastCompleteNode, offset));
 				} 
 				/**
-				 * in the case we are at the end of the completed previous element add for 'right-to-left' backtracking cases
+				 * in case of 'at-the-end' of the previous,completed element we evaluate it again for 'right-to-left-backtracking' cases (e.g. for keyword 'kind' kind>|< |=cursorpos)
 				 */
 				else if (currentLeafNode==lastCompleteNode) {
+					nextValidElementSet = ParseTreeUtil.getElementSetValidFromOffset(rootNode,lastCompleteNode, offset);
 					nextValidElementSet.add((AbstractElement) lastCompleteNode.getGrammarElement());
+				} else {
+					nextValidElementSet = ParseTreeUtil.getElementSetValidFromOffset(rootNode,lastCompleteNode, offset);
 				}
-				
-				nextValidElementSet.addAll(ParseTreeUtil.getElementSetValidFromOffset(rootNode,lastCompleteNode, offset));
 				
 				ProposalProviderInvokerSwitch proposalProviderInvokerSwitch = new ProposalProviderInvokerSwitch(
-						lastCompleteNode, document, offset, prefix, proposalProvider);
+						model, document, offset, prefix, proposalProvider);
 				
-				for (List<EObject> resolvedElementOrRuleList : new ProposalCandidateResolverSwitch(nextValidElementSet)) {
+				
+				try {
+					for (List<EObject> resolvedElementOrRuleList : new ProposalCandidateResolverSwitch(
+							nextValidElementSet)) {
 
-					List<ICompletionProposal> collectedCompletionProposalList = 
-						proposalProviderInvokerSwitch.collectCompletionProposalList(resolvedElementOrRuleList);
-					
-					completionProposalList.addAll(collectedCompletionProposalList);
+						List<ICompletionProposal> collectedCompletionProposalList = proposalProviderInvokerSwitch
+								.collectCompletionProposalList(resolvedElementOrRuleList);
+
+						completionProposalList.addAll(collectedCompletionProposalList);
+					}
+					if (completionProposalList != null) {
+						List<? extends ICompletionProposal> processedCompletionProposalList = proposalProvider
+								.sortAndFilter(completionProposalList, model, prefix, document, offset);
+						completionProposals = processedCompletionProposalList.toArray(new ICompletionProposal[] {});
+					}
 				}
-
-				if (completionProposalList != null) {
-					List<? extends ICompletionProposal> sortAndFilter = proposalProvider.sortAndFilter(completionProposalList,currentLeafNode,prefix,document,offset);
-					completionProposals =  sortAndFilter.toArray(new ICompletionProposal[] {});
+				catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}
