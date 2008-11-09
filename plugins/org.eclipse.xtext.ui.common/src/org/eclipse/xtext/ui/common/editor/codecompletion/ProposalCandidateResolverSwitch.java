@@ -19,6 +19,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
@@ -26,7 +27,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.util.XtextSwitch;
 
 /**
- * Represents <b>Switch</b> for the model's inheritance hierarchy to resolve
+ * Represents a <b>Switch</b> for the Xtext model's inheritance hierarchy to resolve
  * potential completion proposal candidate's.
  * 
  * It supports the call {@link #doSwitch(EObject) doSwitch(object)} instead of
@@ -114,6 +115,11 @@ public class ProposalCandidateResolverSwitch extends XtextSwitch<List<EObject>> 
 			addWithNullCheck(elementList, doSwitch(((ParserRule) abstractRule).getAlternatives()));
 		}
 		return elementList;
+	}
+	
+	@Override
+	public List<EObject> caseCrossReference(CrossReference crossReference) {
+		return Collections.singletonList(crossReference.eContainer());
 	}
 
 	@Override

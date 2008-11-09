@@ -79,11 +79,11 @@ public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProp
 		«IF CrossReference.isInstance(assignment.terminal)-»
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, prefix, offset);
 		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).name=="ID" -»
-		return Collections.singletonList(createCompletionProposal("«fqnFeatureName»", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"«fqnFeatureName»", offset));
 		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).name=="INT" -»
-		return Collections.singletonList(createCompletionProposal("1", offset));		
+		return Collections.singletonList(createCompletionProposal(assignment,model,"1", offset));		
 		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).name=="STRING" -»
-		return Collections.singletonList(createCompletionProposal("\"«fqnFeatureName»\"", offset));		
+		return Collections.singletonList(createCompletionProposal(assignment,model,"\"«fqnFeatureName»\"", offset));		
 		«ELSE-»
 		return Collections.emptyList();
 		«ENDIF-»
@@ -107,7 +107,6 @@ public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProp
 	«ENDIF-»
 	«ENDLET-»
     «ENDFOREACH-»
-    
     @Override
 	protected String getDefaultImageFilePath() {
 		return "icons/editor.gif";
@@ -117,7 +116,6 @@ public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProp
 	protected String getPluginId() {
 		return UI_PLUGIN_ID;
 	}
-    
 }
 «ENDFILE»
 «ENDDEFINE»
