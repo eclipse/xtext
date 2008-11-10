@@ -19,10 +19,12 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -47,23 +49,22 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 	@Inject
 	private IProposalProvider proposalProvider;
 
-
 	/**
 	 * computes the possible grammar elements following the one at the given
 	 * offset and calls the respective methods on the proposal provider.
 	 */
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, final int offset) {
-		
+
 		ICompletionProposal[] completionProposals = null;
-		
+
 		if (proposalProvider != null) {
 
 			IDocument document = viewer.getDocument();
-			
+
 			if (document instanceof XtextDocument) {
-				
+
 				List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
-				
+
 				XtextDocument xtextDocument = (XtextDocument) document;
 
 				CompositeNode rootNode = xtextDocument.readOnly(new UnitOfWork<CompositeNode>() {
@@ -73,40 +74,46 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 						return parseResult.getRootNode();
 					}
 				});
-				
+
 				Assert.isNotNull(rootNode);
 
 				AbstractNode lastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
 
 				LeafNode currentLeafNode = ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
 
-				String prefix = null==currentLeafNode ? "" : currentLeafNode.getText();
-				
+				String prefix = calculatePrefix(viewer, offset, currentLeafNode);
+
 				EObject model = lastCompleteNode instanceof AbstractNode ? NodeUtil
 						.getNearestSemanticObject((AbstractNode) lastCompleteNode) : lastCompleteNode;
-				
+
 				Set<AbstractElement> nextValidElementSet = new LinkedHashSet<AbstractElement>();
 				/**
-				 * in case of a crossreference which isnt linked already we evaluate it again and delegate to proposalProvider (again) 
+				 * in case of a crossreference which isnt linked already we
+				 * evaluate it again and delegate to proposalProvider (again)
 				 */
 				if (lastCompleteNode.getGrammarElement() instanceof CrossReference && !isLinked(lastCompleteNode)) {
 					nextValidElementSet.add((AbstractElement) lastCompleteNode.getGrammarElement());
-					nextValidElementSet.addAll(ParseTreeUtil.getElementSetValidFromOffset(rootNode,lastCompleteNode, offset));
-				} 
-				/**
-				 * in case of 'at-the-end' of the previous,completed element we evaluate it again for 'right-to-left-backtracking' cases (e.g. for keyword 'kind' kind>|< |=cursorpos)
-				 */
-				else if (currentLeafNode==lastCompleteNode) {
-					nextValidElementSet = ParseTreeUtil.getElementSetValidFromOffset(rootNode,lastCompleteNode, offset);
-					nextValidElementSet.add((AbstractElement) lastCompleteNode.getGrammarElement());
-				} else {
-					nextValidElementSet = ParseTreeUtil.getElementSetValidFromOffset(rootNode,lastCompleteNode, offset);
+					nextValidElementSet.addAll(ParseTreeUtil.getElementSetValidFromOffset(rootNode, lastCompleteNode,
+							offset));
 				}
-				
-				ProposalProviderInvokerSwitch proposalProviderInvokerSwitch = new ProposalProviderInvokerSwitch(
-						model, document, offset, prefix, proposalProvider);
-				
-				
+				/**
+				 * in case of 'at-the-end' of the previous,completed element we
+				 * evaluate it again for 'right-to-left-backtracking' cases
+				 * (e.g. for keyword 'kind' kind>|< |=cursorpos)
+				 */
+				else if (currentLeafNode == lastCompleteNode) {
+					nextValidElementSet = ParseTreeUtil
+							.getElementSetValidFromOffset(rootNode, lastCompleteNode, offset);
+					nextValidElementSet.add((AbstractElement) lastCompleteNode.getGrammarElement());
+				}
+				else {
+					nextValidElementSet = ParseTreeUtil
+							.getElementSetValidFromOffset(rootNode, lastCompleteNode, offset);
+				}
+
+				ProposalProviderInvokerSwitch proposalProviderInvokerSwitch = new ProposalProviderInvokerSwitch(model,
+						document, offset, prefix, proposalProvider);
+
 				try {
 					for (List<EObject> resolvedElementOrRuleList : new ProposalCandidateResolverSwitch(
 							nextValidElementSet)) {
@@ -127,8 +134,33 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				}
 			}
 		}
-		
+
 		return completionProposals;
+	}
+
+	protected String calculatePrefix(ITextViewer viewer, final int offset, LeafNode currentLeafNode) {
+
+		if (currentLeafNode == null)
+			return "";
+
+		String prefix = "";
+		StyledText textWidget = viewer.getTextWidget();
+		if (textWidget.getCharCount() > 0) {
+			int boundedOffset = Math.min(offset, textWidget.getCharCount()) - 1;
+			if (currentLeafNode.getOffset() <= boundedOffset)
+				prefix = textWidget.getText(currentLeafNode.getOffset(), boundedOffset);
+		}
+
+		// if cursor is behind a complete keyword, accept any input => empty
+		// prefix
+		// TODO: Find a way to distinguish between keywords like "+" or "-" and
+		// "extends" or "class"
+		// in the latter case, the prefix "" would not always be sufficient
+		if (currentLeafNode.getGrammarElement() instanceof Keyword && currentLeafNode.getText().equals(prefix)) {
+			prefix = "";
+		}
+
+		return prefix;
 	}
 
 	public char[] getCompletionProposalAutoActivationCharacters() {
@@ -151,7 +183,6 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		return new ContextInformationValidator(this);
 	}
 
-	
 	@SuppressWarnings("unchecked")
 	private boolean isLinked(AbstractNode lastCompleteNode) {
 
@@ -193,6 +224,5 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		}
 		return null;
 	}
-
 
 }
