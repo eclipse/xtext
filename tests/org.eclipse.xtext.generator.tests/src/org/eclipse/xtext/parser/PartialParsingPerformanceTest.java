@@ -66,4 +66,30 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		}
 	}
 	
+	public void testReferenceWithErrorAtEnd() throws Exception {
+		with(ReferenceGrammarStandaloneSetup.class);
+		StringBuffer modelBuffer = new StringBuffer();
+		modelBuffer.append("spielplatz 17 {\n");
+		for(int i=0; i<NUM_ELEMENTS; ++i) {
+			modelBuffer.append("  kind ( Herbert");
+			modelBuffer.append(i);
+			modelBuffer.append(" 11 )\n");
+		}
+		for(int i=0; i<NUM_ELEMENTS; ++i) {
+			modelBuffer.append("  erwachsener ( Hugo");
+			modelBuffer.append(i);
+			modelBuffer.append(" 111 )\n");
+		}
+		modelBuffer.append("  erwachsener ( Sven 112 )\n");
+		for(int i=0; i<NUM_ELEMENTS; ++i) {
+			modelBuffer.append("  spielzeug ( Schaufel ROT )\n");
+		}
+		modelBuffer.append(" kind (Herbert " + NUM_ELEMENTS + 1 + "\n");
+		modelBuffer.append("}\n");
+		String model = modelBuffer.toString();
+		CompositeNode rootNode = getRootNode(model);
+		IParseResult reparse = PartialParsingUtil.reparse(getParser(), rootNode, model.indexOf("Sven"), 4, "Peter");
+		assertEquals(1, reparse.getParseErrors().size());
+	}
+	
 }
