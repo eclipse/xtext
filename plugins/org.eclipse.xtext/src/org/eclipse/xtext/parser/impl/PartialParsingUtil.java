@@ -71,10 +71,12 @@ public class PartialParsingUtil {
 		}
 		catch (ParseException exc) {
 		}
-		if (parseResult == null || parseResult.getParseErrors() != null && !parseResult.getParseErrors().isEmpty()) {
+		if (parseResult == null || parseResult.getParseErrors() != null && !parseResult.getParseErrors().isEmpty() && !rootNode.equals(replaceNode)) {
 			// on error fully reparse
 			return fullyReparse(parser, rootNode, offset, replacedTextLength, newText);
 		}
+		if (rootNode.equals(replaceNode))
+			return parseResult;
 		EObject astParentElement = parsingPointers.findASTParentElement(replaceNode);
 		EObject replaceAstElement = parsingPointers.findASTReplaceElement(replaceNode);
 		if (astParentElement != null) {
