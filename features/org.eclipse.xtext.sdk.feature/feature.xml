@@ -26,20 +26,27 @@
          id="org.eclipse.xtext.runtime.feature"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.xtext.sdk.source"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.runtime.source"
+         version="0.0.0"/>
+  
+	<includes
+         id="org.eclipse.xtext.examples.source"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.examples.feature"
+         version="0.0.0"/>
+
    <plugin
          id="org.eclipse.xtext.bootstrap"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-    
-     <includes
-         id="org.eclipse.xtext.sdk.source" 
-         version="0.0.0"/>
-             <includes
-         id="org.eclipse.xtext.runtime.source" 
-         version="0.0.0"/>
-             <includes
-         id="org.eclipse.xtext.examples.source" 
-         version="0.0.0"/>
+
 </feature>
