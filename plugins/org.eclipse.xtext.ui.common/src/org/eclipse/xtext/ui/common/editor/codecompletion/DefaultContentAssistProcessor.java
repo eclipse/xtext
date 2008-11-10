@@ -8,6 +8,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -33,6 +35,7 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.ui.common.editor.outline.LinkingHelper;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 
@@ -183,33 +186,24 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		return new ContextInformationValidator(this);
 	}
 
-	@SuppressWarnings("unchecked")
+	@Inject
+	private ILinkingService linkingService;
+
 	private boolean isLinked(AbstractNode lastCompleteNode) {
-
 		EObject semanticModel = NodeUtil.getNearestSemanticObject(lastCompleteNode);
+		CrossReference crossReference = (CrossReference) lastCompleteNode.getGrammarElement();
+		EReference eReference = getReference(crossReference, semanticModel.eClass());
 
-		EReference eReference = getReference((CrossReference) lastCompleteNode.getGrammarElement(), semanticModel
-				.eClass());
-
-		if (eReference.getUpperBound() == 1) {
-
-			if (null != semanticModel.eGet(eReference)) {
-				return true;
-			}
-		}
+		List<EObject> referencedObjects = EcoreUtil2.getAllReferencedObjects(semanticModel, eReference);
+		
+		if (referencedObjects.isEmpty())
+			return false;
 		else {
-
-			EcoreEList<EObject> ecoreEList = (EcoreEList<EObject>) semanticModel.eGet(eReference);
-
-			for (EObject object : ecoreEList) {
-
-				if (EcoreUtil2.getURIFragment(object).equalsIgnoreCase(((LeafNode) lastCompleteNode).getText())) {
-					return true;
-				}
-			}
+			List<URI> referencedURIs = EcoreUtil2.getURIs(referencedObjects);
+			List<URI> linkCandidates = linkingService.getLinkedObjects(semanticModel, crossReference,
+					(LeafNode) lastCompleteNode);
+			return !linkCandidates.isEmpty() && referencedURIs.containsAll(linkCandidates);
 		}
-
-		return false;
 	}
 
 	private EReference getReference(CrossReference ref, EClass class1) {

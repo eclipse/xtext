@@ -37,8 +37,10 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
@@ -277,6 +279,28 @@ public class EcoreUtil2 extends EcoreUtil {
 
 	public static boolean isAssignableFrom(EClass target, EObject candidate) {
 		return isAssignableFrom(target, candidate.eClass());
+	}
+
+	@SuppressWarnings("unchecked")
+	public static List<EObject> getAllReferencedObjects(EObject referer, EReference reference) {
+		if (reference.getUpperBound() == 1) {
+			EObject eObject = (EObject) referer.eGet(reference);
+			if (null != eObject)
+				return (List<EObject>) Collections.singleton(eObject);
+			else
+				return Collections.EMPTY_LIST;
+		}
+		else
+			return (List<EObject>) referer.eGet(reference);
+	}
+	
+	public static List<URI> getURIs(List<EObject> objects) {
+		
+		List<URI> result = new ArrayList<URI>(objects.size());
+		for(EObject o : objects)
+			result.add(getURI(o));
+		
+		return result ;
 	}
 
 }
