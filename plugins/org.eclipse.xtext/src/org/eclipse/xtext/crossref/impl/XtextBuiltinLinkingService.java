@@ -84,7 +84,7 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 			if (isCandiateCompatibleFor(o, context, ref)) {
 				URI uri = EcoreUtil2.getURI(o);
 				String linktext = getLinkAsText(context, uri);
-//				if (isPartialLinkTextMatching(partialLinkText, linktext))
+				if (isPartialLinkTextMatching(partialLinkText, linktext))
 				result.add(new Pair<String, URI>(linktext, uri));
 			}
 		}
@@ -94,8 +94,8 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 		return result;
 	}
 	// TODO this might be unnecessary due to filtering on the UI side
-//	private boolean isPartialLinkTextMatching(String partialLinkText, String linktext) {
-//		return linktext.toUpperCase().startsWith(partialLinkText.trim().toUpperCase());
-//	}
+	private boolean isPartialLinkTextMatching(String partialLinkText, String linktext) {
+		return linktext.toUpperCase().startsWith(partialLinkText.trim().toUpperCase());
+	}
 
 }
