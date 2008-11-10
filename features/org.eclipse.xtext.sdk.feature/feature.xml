@@ -34,6 +34,12 @@
          unpack="false"/>
     
      <includes
-         id="org.eclipse.xtext.source" 
+         id="org.eclipse.xtext.sdk.source" 
+         version="0.0.0"/>
+             <includes
+         id="org.eclipse.xtext.runtime.source" 
+         version="0.0.0"/>
+             <includes
+         id="org.eclipse.xtext.examples.source" 
          version="0.0.0"/>
 </feature>
