@@ -3,6 +3,5 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Antlr Generator Dummy Plug-in
 Bundle-SymbolicName: org.antlr.gen
 Bundle-Version: 3.0.0
-Bundle-Vendor: www.eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.antlr
