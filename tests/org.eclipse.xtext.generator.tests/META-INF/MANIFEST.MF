@@ -16,4 +16,11 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtend.typesystem.emf,
  org.eclipse.xtend.util.stdlib,
  org.easymock;bundle-version="2.3.0"
-Export-Package: org.eclipse.xtext
+Export-Package: org.eclipse.xtext,
+ org.eclipse.xtext.crossrefs,
+ org.eclipse.xtext.testlanguages,
+ org.eclipse.xtext.testlanguages.parser,
+ org.eclipse.xtext.testlanguages.parser.internal,
+ org.eclipse.xtext.testlanguages.parsetree.reconstr,
+ org.eclipse.xtext.testlanguages.services,
+ org.eclipse.xtext.tests
