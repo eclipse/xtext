@@ -37,10 +37,8 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
@@ -256,16 +254,14 @@ public class EcoreUtil2 extends EcoreUtil {
 
 	private static void collectAllSuperTypes(Set<EClass> collectedTypes, EClass eClass) {
 		for (EClass superType : eClass.getESuperTypes())
-			if (!collectedTypes.contains(superType)) {
-				collectedTypes.add(superType);
+			if (collectedTypes.add(superType)) {
 				collectAllSuperTypes(collectedTypes, superType);
 			}
 	}
 
 	/**
-	 * In addition to
-	 * org.eclipse.xtext.resource.metamodel.EClassifierInfos.getAllEClassInfos()
-	 * this implementation can deal with cycles in type hierarchy
+	 * In addition to {@link org.eclipse.xtext.resource.metamodel.EClassifierInfos#getAllEClassInfos()} this implementation can
+	 * deal with cycles in type hierarchy
 	 */
 	public static Collection<EClass> getAllSuperTypes(EClass eClass) {
 		Set<EClass> allSuperTypes = new HashSet<EClass>();
@@ -286,9 +282,9 @@ public class EcoreUtil2 extends EcoreUtil {
 		if (reference.getUpperBound() == 1) {
 			EObject eObject = (EObject) referer.eGet(reference);
 			if (null != eObject)
-				return (List<EObject>) Collections.singleton(eObject);
+				return (List<EObject>) Collections.singletonList(eObject);
 			else
-				return Collections.EMPTY_LIST;
+				return Collections.<EObject>emptyList();
 		}
 		else
 			return (List<EObject>) referer.eGet(reference);

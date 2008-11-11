@@ -7,9 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
+import java.util.List;
+
 import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 
@@ -82,5 +87,30 @@ public class EcoreUtil2Tests extends TestCase {
 		// always stable
 		assertTrue(EcoreUtil2.getAllSuperTypes(a).contains(a));
 		assertTrue(EcoreUtil2.getAllSuperTypes(b).contains(b));
+	}
+	
+	public void testGetAllReferencedObjects() {
+		EClass a = createEClass("a");
+		EClass b = createEClass("b");
+		
+		EPackage pack = EcoreFactory.eINSTANCE.createEPackage();
+		pack.setName("empty");
+		pack.setNsPrefix("empty");
+		pack.setNsURI("empty");
+		pack.getEClassifiers().add(a);
+		pack.getEClassifiers().add(b);
+		
+		EReference ref = EcoreFactory.eINSTANCE.createEReference();
+		a.getEStructuralFeatures().add(ref);
+		ref.setUpperBound(1);
+		ref.setEType(b);
+		EObject objA = pack.getEFactoryInstance().create(a);
+		EObject objB = pack.getEFactoryInstance().create(b);
+		List<EObject> res = EcoreUtil2.getAllReferencedObjects(objA, ref);
+		assertNotNull(res);
+		assertTrue(res.isEmpty());
+		res = EcoreUtil2.getAllReferencedObjects(objA, ref);
+		assertNotNull(res);
+		objA.eSet(ref, objB);
 	}
 }
