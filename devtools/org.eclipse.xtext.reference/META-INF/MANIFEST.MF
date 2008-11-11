@@ -2,17 +2,17 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Reference (Incubation)
 Bundle-SymbolicName: org.eclipse.xtext.reference;singleton:=true
-Bundle-Version: 0.7.0.qualifier
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: Eclipse.org
+Bundle-Version: 0.7.0.qualifier
+Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xtext.reference,
  ReferenceModel,
  org.eclipse.xtext.reference.parser,
  org.eclipse.xtext.reference.parser.internal,
  org.eclipse.xtext.reference.parsetree.reconstr,
  org.eclipse.xtext.reference.services
-Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.log4j;bundle-version="1.2.15",
  org.eclipse.xtext,
  org.eclipse.xtext.generator
-Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
