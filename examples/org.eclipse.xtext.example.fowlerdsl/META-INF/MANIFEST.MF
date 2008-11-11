@@ -11,6 +11,16 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.generator,
  org.eclipse.xtext.logging;bundle-version="0.7.0"
 Export-Package: org.eclipse.xtext.example,
- org.eclipse.xtext.example.parser,
- org.eclipse.xtext.example.parsetree.reconstr,
- org.eclipse.xtext.example.services
+ org.eclipse.xtext.example.parser;uses:="org.eclipse.xtext.parser,org.eclipse.xtext.parser.antlr,org.antlr.runtime",
+ org.eclipse.xtext.example.parsetree.reconstr;
+  uses:="org.eclipse.xtext.parsetree.reconstr,
+   org.eclipse.xtext,
+   org.eclipse.xtext.parsetree.reconstr.impl,
+   org.eclipse.emf.ecore",
+ org.eclipse.xtext.example.services;
+  uses:="org.eclipse.xtext,
+   org.eclipse.xtext.parser,
+   org.eclipse.xtext.resource,
+   org.eclipse.emf.common.util,
+   org.eclipse.emf.ecore,
+   org.eclipse.emf.ecore.resource"
