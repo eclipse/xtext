@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Common UI Tests (Incubation)
+Bundle-SymbolicName: org.eclipse.xtext.ui.common.tests;singleton:=true
+Bundle-Version: 0.7.0.qualifier
+Bundle-Activator: org.eclipse.xtext.ui.common.tests.Activator
+Bundle-Vendor: Eclipse.org
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext.ui.core.tests;bundle-version="0.7.0",
+ org.junit;bundle-version="3.8.2",
+ org.eclipse.ui.views;bundle-version="3.3.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
