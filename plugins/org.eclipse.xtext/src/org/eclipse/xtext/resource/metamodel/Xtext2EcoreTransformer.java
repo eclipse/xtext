@@ -43,6 +43,7 @@ import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
+ * @author Heiko Behrens
  * 
  */
 public class Xtext2EcoreTransformer {
