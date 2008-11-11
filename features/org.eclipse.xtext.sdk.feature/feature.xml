@@ -25,6 +25,9 @@
    <includes
          id="org.eclipse.xtext.runtime.feature"
          version="0.0.0"/>
+   <includes
+         id="org.eclipse.xtext.examples.feature"
+         version="0.0.0"/>
 
    <includes
          id="org.eclipse.xtext.sdk.source"
@@ -38,9 +41,6 @@
          id="org.eclipse.xtext.examples.source"
          version="0.0.0"/>
 
-   <includes
-         id="org.eclipse.xtext.examples.feature"
-         version="0.0.0"/>
 
    <plugin
          id="org.eclipse.xtext.bootstrap"
