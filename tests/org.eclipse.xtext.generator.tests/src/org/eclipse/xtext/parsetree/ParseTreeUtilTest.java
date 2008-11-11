@@ -35,7 +35,7 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 		with(ReferenceGrammarStandaloneSetup.class);
 	}
 
-	public void testFetGrammarElementFromNode() throws Exception {
+	public void testGetGrammarElementFromNode() throws Exception {
 		String text = "spielplatz 1 \"junit\" {  ";
 		CompositeNode rootNode = getRootNode(text);
 		AbstractNode lastCompleteNodeByOffset = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, text.length());
