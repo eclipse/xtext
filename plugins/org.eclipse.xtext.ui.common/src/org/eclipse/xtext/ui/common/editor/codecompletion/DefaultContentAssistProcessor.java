@@ -34,8 +34,8 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
-import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -49,6 +49,14 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 	@Inject
 	private IProposalProvider proposalProvider;
+	
+
+	/**
+	 * @param proposalProvider the proposalProvider to set
+	 */
+	public void setProposalProvider(IProposalProvider proposalProvider) {
+		this.proposalProvider = proposalProvider;
+	}
 
 	/**
 	 * computes the possible grammar elements following the one at the given
@@ -62,11 +70,11 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 			IDocument document = viewer.getDocument();
 
-			if (document instanceof XtextDocument) {
+			if (document instanceof IXtextDocument) {
 
 				List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
-				XtextDocument xtextDocument = (XtextDocument) document;
+				IXtextDocument xtextDocument = (IXtextDocument) document;
 
 				CompositeNode rootNode = xtextDocument.readOnly(new UnitOfWork<CompositeNode>() {
 					public CompositeNode exec(XtextResource resource) throws Exception {
@@ -115,23 +123,17 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				ProposalProviderInvokerSwitch proposalProviderInvokerSwitch = new ProposalProviderInvokerSwitch(model,
 						document, offset, prefix, proposalProvider);
 
-				try {
-					for (List<EObject> resolvedElementOrRuleList : new ProposalCandidateResolverSwitch(
-							nextValidElementSet)) {
+				for (List<EObject> resolvedElementOrRuleList : new ProposalCandidateResolverSwitch(nextValidElementSet)) {
 
-						List<ICompletionProposal> collectedCompletionProposalList = proposalProviderInvokerSwitch
-								.collectCompletionProposalList(resolvedElementOrRuleList);
+					List<ICompletionProposal> collectedCompletionProposalList = proposalProviderInvokerSwitch
+							.collectCompletionProposalList(resolvedElementOrRuleList);
 
-						completionProposalList.addAll(collectedCompletionProposalList);
-					}
-					if (completionProposalList != null) {
-						List<? extends ICompletionProposal> processedCompletionProposalList = proposalProvider
-								.sortAndFilter(completionProposalList, model, prefix, document, offset);
-						completionProposals = processedCompletionProposalList.toArray(new ICompletionProposal[] {});
-					}
+					completionProposalList.addAll(collectedCompletionProposalList);
 				}
-				catch (Exception e) {
-					e.printStackTrace();
+				if (completionProposalList != null) {
+					List<? extends ICompletionProposal> processedCompletionProposalList = proposalProvider
+							.sortAndFilter(completionProposalList, model, prefix, document, offset);
+					completionProposals = processedCompletionProposalList.toArray(new ICompletionProposal[] {});
 				}
 			}
 		}
