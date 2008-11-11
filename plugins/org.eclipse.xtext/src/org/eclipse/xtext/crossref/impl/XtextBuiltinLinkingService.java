@@ -14,11 +14,10 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.crossref.ILinkingScopeService;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -64,14 +63,10 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 	}
 
 	private boolean isCandiateCompatibleFor(EObject candidate, EObject context, CrossReference ref) {
-
-		if (ref != null && ref.eContainer() instanceof Assignment) {
-			Assignment assignment = (Assignment) ref.eContainer();
-			EStructuralFeature feature = context.eClass().getEStructuralFeature(assignment.getFeature());
-			if (feature != null && feature.getEType() instanceof EClass) {
-				EClass neededType = (EClass) feature.getEType();
+		if (ref != null) {
+			EClass neededType = GrammarUtil.getReferencedEClass(context.eResource(), ref);
+			if(neededType != null)
 				return EcoreUtil2.isAssignableFrom(neededType, candidate);
-			}
 		}
 
 		return false;
@@ -93,9 +88,9 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 
 		return result;
 	}
-	// TODO this might be unnecessary due to filtering on the UI side
+
 	private boolean isPartialLinkTextMatching(String partialLinkText, String linktext) {
 		return linktext.toUpperCase().startsWith(partialLinkText.trim().toUpperCase());
 	}
-
+	
 }

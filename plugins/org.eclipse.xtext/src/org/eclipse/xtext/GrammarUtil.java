@@ -22,6 +22,8 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -31,8 +33,9 @@ import org.eclipse.xtext.util.Strings;
 
 /**
  * 
- * @author koehnlein
- * @author svenefftinge
+ * @author Jan Koehnlein
+ * @author Sven Efftinge
+ * @author Heiko Behrens
  */
 public class GrammarUtil {
 
@@ -55,7 +58,8 @@ public class GrammarUtil {
 		if (uri.fragment() == null) {
 			Resource resource = resourceSet.getResource(uri, true);
 			return (EPackage) resource.getContents().get(0);
-		} else {
+		}
+		else {
 			return (EPackage) resourceSet.getEObject(uri, true);
 		}
 	}
@@ -110,11 +114,11 @@ public class GrammarUtil {
 	public static List<Assignment> containedAssignments(EObject e) {
 		return getAllContentsOfType(e, Assignment.class);
 	}
-	
+
 	public static List<Keyword> containedKeywords(EObject e) {
 		return getAllContentsOfType(e, Keyword.class);
 	}
-	
+
 	public static List<CrossReference> containedCrossReferences(EObject e) {
 		return getAllContentsOfType(e, CrossReference.class);
 	}
@@ -125,7 +129,8 @@ public class GrammarUtil {
 		for (AbstractElement ae : g.getAbstractTokens()) {
 			if (ae == _this || eAllContentsAsList(ae).contains(_this)) {
 				return result;
-			} else {
+			}
+			else {
 				result.add(ae);
 			}
 		}
@@ -165,7 +170,7 @@ public class GrammarUtil {
 		String id = getSuperGrammarId(_this);
 		if (id == null)
 			return null;
-		if (!(_this.eResource() != null && _this.eResource().getResourceSet() !=null))
+		if (!(_this.eResource() != null && _this.eResource().getResourceSet() != null))
 			throw new IllegalArgumentException("The passed grammar is not contained in a Resourceset");
 		ResourceSet resourceSet = _this.eResource().getResourceSet();
 		URI uri = getClasspathURIForLanguageId(id);
@@ -210,7 +215,7 @@ public class GrammarUtil {
 				result.add(rule);
 			}
 		}
-		
+
 		Grammar superGrammar = getSuperGrammar(_this);
 		if (superGrammar != null) {
 			List<AbstractRule> superParserRules = allRules(superGrammar);
@@ -267,23 +272,24 @@ public class GrammarUtil {
 	public static String getQualifiedName(String alias, String name) {
 		return (alias != null ? alias + "::" : "") + name;
 	}
-	
+
 	public static String getQualifiedName(TypeRef type) {
 		return getQualifiedName(type.getAlias(), type.getName());
 	}
-	
+
 	public static TypeRef getTypeRef(String qualifiedName) {
 		TypeRef result = XtextFactory.eINSTANCE.createTypeRef();
 		String[] split = qualifiedName.split("::");
 		if (split.length > 1) {
 			result.setAlias(split[0]);
 			result.setName(split[1]);
-		} else {
+		}
+		else {
 			result.setName(qualifiedName);
 		}
 		return result;
 	}
-	
+
 	public static boolean isAssigned(EObject e) {
 		return containingAssignment(e) != null;
 	}
@@ -299,7 +305,7 @@ public class GrammarUtil {
 		}
 		return kws;
 	}
-	
+
 	public static boolean isBooleanAssignment(Assignment a) {
 		return "?=".equals(a.getOperator());
 	}
@@ -311,7 +317,7 @@ public class GrammarUtil {
 	public static boolean isMultipleAssignment(Assignment a) {
 		return "+=".equals(a.getOperator());
 	}
-	
+
 	public static boolean isMultipleAssignment(Action a) {
 		return "+=".equals(a.getOperator());
 	}
@@ -339,6 +345,38 @@ public class GrammarUtil {
 	public static LexerRule getCalledLexerRule(CrossReference ref) {
 		String ruleName = ref.getRule() != null ? ref.getRule().getName() : "ID";
 		return (LexerRule) findRuleForName(getGrammar(ref), ruleName);
+	}
+
+	private static boolean isSameAlias(String alias, String alias2) {
+		return alias == null ? alias2 == null : alias.equals(alias2);
+	}
+
+	public static EPackage getEPackage(ResourceSet resourceSet, Grammar grammar, String alias) {
+		EList<AbstractMetamodelDeclaration> metamodelDeclarations = grammar.getMetamodelDeclarations();
+		for (AbstractMetamodelDeclaration metamodelDeclaration : metamodelDeclarations) {
+			if (isSameAlias(alias, metamodelDeclaration.getAlias())) {
+				if (metamodelDeclaration instanceof ReferencedMetamodel) {
+					ReferencedMetamodel ref = (ReferencedMetamodel) metamodelDeclaration;
+					return GrammarUtil.loadEPackage(ref.getUri(), resourceSet);
+				}
+				else if (metamodelDeclaration instanceof GeneratedMetamodel) {
+					GeneratedMetamodel gen = (GeneratedMetamodel) metamodelDeclaration;
+					return GrammarUtil.loadEPackage(gen.getNsURI(), resourceSet);
+				}
+			}
+		}
+		return null;
+	}
+
+	public static EClass getReferencedEClass(Resource resource, CrossReference ref) {
+		Grammar grammar = GrammarUtil.getGrammar(ref);
+		EPackage ePackage = getEPackage(resource.getResourceSet(), grammar, ref.getType().getAlias());
+		if (ePackage != null) {
+			EClassifier classifier = ePackage.getEClassifier(ref.getType().getName());
+			if (classifier instanceof EClass)
+				return (EClass) classifier;
+		}
+		return null;
 	}
 
 }
