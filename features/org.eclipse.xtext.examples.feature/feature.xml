@@ -18,22 +18,7 @@
    </license>
 
    <requires>
-      <import feature="org.eclipse.xtext.sdk.feature" version="0.0.0"/>
    </requires>
-
-   <plugin
-         id="org.eclipse.xtext.reference"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.reference.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="org.eclipse.xtext.example.fowlerdsl"
@@ -48,5 +33,19 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+   <plugin
+         id="org.eclipse.xtext.reference"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.reference.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 
 </feature>
