@@ -19,8 +19,10 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jface.text.ITextViewer;
@@ -43,6 +45,7 @@ import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
  * @author Michael Clay - Initial contribution and API
  * @see org.eclipse.xtext.ui.common.editor.codecompletion.DefaultContentAssistProcessor
  */
+@SuppressWarnings("unchecked")
 public class DefaultContentAssistProcessorTest extends AbstractUiTest 
 {
 
@@ -60,7 +63,6 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 		ServiceRegistry.injectServices(getCurrentServiceScope(), defaultContentAssistProcessor);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void testComputeCompletionProposalsCount() throws Exception {
 		
 		Map<String, Integer> model2ExpectedProposalCountMap = new HashMap<String, Integer>();
@@ -101,6 +103,49 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 		}
 
 	}
+	
+	public void testComputeCompletionProposalsText() throws Exception {
+		
+		Map<String, List<String>> model2ExpectedProposalTextMap = new HashMap<String, List<String>>();
+		model2ExpectedProposalTextMap.put("", Arrays.asList("spielplatz "));
+		model2ExpectedProposalTextMap.put("spielplatz ", Arrays.asList("0","1"));
+
+		for (Iterator<String> iterator = model2ExpectedProposalTextMap.keySet()
+				.iterator(); iterator.hasNext();) {
+
+			String testDslModel = iterator.next();
+			
+			List<String> expectedTextList = model2ExpectedProposalTextMap.get(testDslModel);
+
+			CompositeNode rootNode = getRootNode(testDslModel);
+			
+			reset(textViewerMock,xtextDocumentMock,textViewerMock);
+			
+			expect(textViewerMock.getDocument()).andReturn(xtextDocumentMock);
+			expect(xtextDocumentMock.readOnly((UnitOfWork<CompositeNode>) anyObject())).andReturn(rootNode);
+			expect(textViewerMock.getTextWidget()).andReturn(newStyledTextWidgetMock(testDslModel));
+			
+			replay(textViewerMock,xtextDocumentMock);
+
+			ICompletionProposal[] computeCompletionProposals = defaultContentAssistProcessor
+					.computeCompletionProposals(textViewerMock, testDslModel
+							.length());
+			
+			assertEquals("expect only " + expectedTextList.size()+ " CompletionProposal item for model '" + testDslModel+ "'", 
+					expectedTextList.size(),
+					computeCompletionProposals.length);
+			
+			for (int i = 0; i < computeCompletionProposals.length; i++) {
+				ICompletionProposal completionProposal = computeCompletionProposals[i];
+				assertTrue("expect completionProposal text '"+completionProposal+"' ", expectedTextList.contains(completionProposal.getDisplayString()));
+			}
+			
+			
+		}
+
+	}
+	
+	
 
 	private StyledText newStyledTextWidgetMock(final String testDslModel) {
 		return new StyledText(new Shell(), SWT.NONE) {

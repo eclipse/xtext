@@ -34,9 +34,12 @@ public class AbstractUiTest extends AbstractGeneratorTest {
 		Method registrationsMethod = uiConfig.getMethod("registrations");
 		Set<IServiceRegistration> uiServiceRegistrationSet = (Set<IServiceRegistration>) registrationsMethod
 				.invoke(uiConfig.newInstance());
-		for (IServiceRegistration serviceRegistration : uiServiceRegistrationSet) {
-			ServiceRegistry.registerFactory(serviceRegistration.scope(), serviceRegistration.serviceFactory(),
-					serviceRegistration.priority());
+		try {
+			for (IServiceRegistration serviceRegistration : uiServiceRegistrationSet) {
+				ServiceRegistry.registerFactory(serviceRegistration.scope(), serviceRegistration.serviceFactory(),
+						serviceRegistration.priority());
+			}
 		}
+		catch (Exception e) {}
 	}
 }
