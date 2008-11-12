@@ -2,7 +2,8 @@ package org.antlr;
 
 public class Tool {
 
-	private static final String MESSAGE = "This is a dummy implementation! Please install Real Antlr Generator Plugin 3.0.1";
+	private static final String MESSAGE = "This is a dummy implementation of Antlr Generator!"
+			+ "Please install Real Antlr Generator Plugin 3.0.1 " + "from http://ftp.itemis.de/files/xtext/antlr.zip";
 
 	public Tool(String[] strings) {
 		System.out.println(MESSAGE);
