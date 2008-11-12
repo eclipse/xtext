@@ -17,6 +17,11 @@ import static org.easymock.EasyMock.anyObject;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.reset;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -24,8 +29,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarUiConfig;
+import org.eclipse.xtext.ui.common.AbstractUiTest;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 
@@ -36,7 +43,7 @@ import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
  * @author Michael Clay - Initial contribution and API
  * @see org.eclipse.xtext.ui.common.editor.codecompletion.DefaultContentAssistProcessor
  */
-public class DefaultContentAssistProcessorTest extends AbstractGeneratorTest 
+public class DefaultContentAssistProcessorTest extends AbstractUiTest 
 {
 
 	private DefaultContentAssistProcessor defaultContentAssistProcessor;
@@ -46,39 +53,53 @@ public class DefaultContentAssistProcessorTest extends AbstractGeneratorTest
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(ReferenceGrammarStandaloneSetup.class);
+		withUi(ReferenceGrammarStandaloneSetup.class,ReferenceGrammarUiConfig.class);
 		textViewerMock = createMock(ITextViewer.class);
 		xtextDocumentMock = createMock(IXtextDocument.class);
 		defaultContentAssistProcessor = new DefaultContentAssistProcessor();
-		defaultContentAssistProcessor.setProposalProvider(new AbstractProposalProvider(){
-			@Override
-			protected String getDefaultImageFilePath() {
-				return "JUNIT";
-			}
-
-			@Override
-			protected String getPluginId() {
-				return "JUNIT";
-			}}
-		);
+		ServiceRegistry.injectServices(getCurrentServiceScope(), defaultContentAssistProcessor);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public void testComputeCompletionProposalsCount() throws Exception {
 		
-		final String testDslModel = "spielplatz ";
-		
-		CompositeNode rootNode = getRootNode(testDslModel);
-		expect(textViewerMock.getDocument()).andReturn(xtextDocumentMock);
-		expect(xtextDocumentMock.readOnly((UnitOfWork<CompositeNode>) anyObject()))
-				.andReturn(rootNode);
-		expect(textViewerMock.getTextWidget()).andReturn(newStyledTextWidgetMock(testDslModel));
-		replay(textViewerMock);
-		replay(xtextDocumentMock);
+		Map<String, Integer> model2ExpectedProposalCountMap = new HashMap<String, Integer>();
+		model2ExpectedProposalCountMap.put("", 1);
+		model2ExpectedProposalCountMap.put("spielplatz ", 2);
+		model2ExpectedProposalCountMap.put("spielplatz 1 ", 3);
+		model2ExpectedProposalCountMap.put("spielplatz 1 \"JUNIT\" ", 1);
+		model2ExpectedProposalCountMap.put("spielplatz 1 \"JUNIT\" { ", 5);
+		model2ExpectedProposalCountMap.put("spielplatz 1 \"JUNIT\" { kind ", 1);
+		model2ExpectedProposalCountMap.put("spielplatz 1 \"JUNIT\" { kind(k1 0) erwachsener(e1 0) erwachsener(e2 0) familie( f1 ",2);
+		model2ExpectedProposalCountMap.put("spielplatz 1 \"JUNIT\" { kind(k1 0) erwachsener(e1 0) erwachsener(e2 0) familie( f1 e1 ",2);
+		model2ExpectedProposalCountMap.put("spielplatz 1 \"JUNIT\" { kind(k1 0) erwachsener(e1 0) erwachsener(e2 0) familie( f1 e1 e2 ",1);
 
-		ICompletionProposal[] computeCompletionProposals = defaultContentAssistProcessor.computeCompletionProposals(textViewerMock, testDslModel.length());
-		
-		assertEquals("expect only 1 ICompletionProposal item",1,computeCompletionProposals.length);
+		for (Iterator<String> iterator = model2ExpectedProposalCountMap.keySet()
+				.iterator(); iterator.hasNext();) {
+
+			String testDslModel = iterator.next();
+			
+			int expectedProposalCount = model2ExpectedProposalCountMap.get(testDslModel);
+
+			CompositeNode rootNode = getRootNode(testDslModel);
+			
+			reset(textViewerMock,xtextDocumentMock,textViewerMock);
+			
+			expect(textViewerMock.getDocument()).andReturn(xtextDocumentMock);
+			expect(xtextDocumentMock.readOnly((UnitOfWork<CompositeNode>) anyObject())).andReturn(rootNode);
+			expect(textViewerMock.getTextWidget()).andReturn(newStyledTextWidgetMock(testDslModel));
+			
+			replay(textViewerMock,xtextDocumentMock);
+
+			ICompletionProposal[] computeCompletionProposals = defaultContentAssistProcessor
+					.computeCompletionProposals(textViewerMock, testDslModel
+							.length());
+			
+			assertEquals("expect only " + expectedProposalCount+ " CompletionProposal item for model '" + testDslModel+ "'", 
+					expectedProposalCount,
+					computeCompletionProposals.length);
+		}
+
 	}
 
 	private StyledText newStyledTextWidgetMock(final String testDslModel) {
