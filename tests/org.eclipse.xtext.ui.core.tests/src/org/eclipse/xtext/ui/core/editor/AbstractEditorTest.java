@@ -10,22 +10,20 @@ package org.eclipse.xtext.ui.core.editor;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.ui.core.ITestLanguage;
-
-import junit.framework.TestCase;
+import org.eclipse.xtext.ui.core.workbench.AbstractWorkbenchTest;
 
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public abstract class AbstractEditorTest extends TestCase {
-	
+public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
+
 	static final long STEP_DELAY = 0;
-	static final String EDITOR_ID = ITestLanguage.ID;	
+	static final String EDITOR_ID = ITestLanguage.ID;
 
 	public AbstractEditorTest() {
 		super();
@@ -37,14 +35,16 @@ public abstract class AbstractEditorTest extends TestCase {
 
 	@SuppressWarnings("restriction")
 	protected XtextEditor openEditor(IFile file) throws Exception {
-		IEditorPart openEditor = openEditor(file,EDITOR_ID);
+		IEditorPart openEditor = openEditor(file, EDITOR_ID);
 		if (openEditor instanceof XtextEditor) {
 			waitForJobCompletion();
 			sleep(STEP_DELAY);
 			return (XtextEditor) openEditor;
-		} else if (openEditor instanceof org.eclipse.ui.internal.ErrorEditorPart) {
+		}
+		else if (openEditor instanceof org.eclipse.ui.internal.ErrorEditorPart) {
 			fail("Could not open XtextEditor. Editor produced errors during initialization.");
-		} else {
+		}
+		else {
 			fail("Opened Editor with id:" + EDITOR_ID + ", is not a BaseXtextEditor");
 		}
 		return null;
@@ -52,27 +52,13 @@ public abstract class AbstractEditorTest extends TestCase {
 
 	private IEditorPart openEditor(IFile file, String editorId) throws PartInitException {
 		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(
-				new FileEditorInput(file),editorId);
+				new FileEditorInput(file), editorId);
 	}
 
 	private void waitForJobCompletion() throws InterruptedException {
-		while (Job.getJobManager().currentJob() != null)
+		while (Job.getJobManager().currentJob() != null) {
 			sleep(500);
-	}
-
-	protected void sleep(long i) throws InterruptedException {
-		Display displ = Display.getCurrent();
-		if (displ != null) {
-			long timeToGo = System.currentTimeMillis() + i;
-			while (System.currentTimeMillis() < timeToGo) {
-				if (!displ.readAndDispatch())
-					displ.sleep();
-			}
-			displ.update();
-		} else {
-			Thread.sleep(i);
 		}
-	
 	}
 
 }

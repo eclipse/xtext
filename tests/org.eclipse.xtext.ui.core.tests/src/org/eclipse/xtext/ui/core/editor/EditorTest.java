@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
@@ -27,8 +26,10 @@ import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.core.internal.XtextUITestsPlugin;
 
 /**
- * @author Dennis Hübner - Initial contribution and API
+ * A test for the Xtext editor.
  * 
+ * @author Dennis Hübner - Initial contribution and API
+ * @author Peter Friese
  */
 public class EditorTest extends AbstractEditorTest {
 
@@ -36,9 +37,7 @@ public class EditorTest extends AbstractEditorTest {
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		if (PlatformUI.getWorkbench().getIntroManager().getIntro() != null)
-			PlatformUI.getWorkbench().getIntroManager().closeIntro(
-					PlatformUI.getWorkbench().getIntroManager().getIntro());
+		
 		// listen to CoreLog use RuntimeLog to hear more
 		XtextUITestsPlugin.getDefault().getLog().addLogListener(new ILogListener() {
 			public void logging(IStatus status, String plugin) {
@@ -47,19 +46,9 @@ public class EditorTest extends AbstractEditorTest {
 				}
 			}
 		});
+		
 	}
 	
-//	public void testXmlSample() throws Exception {
-//		IProject p = createProject("foo");
-//		IFile file = createFile(p, "x.xml", "");
-//		XMLEditor openEditor = (XMLEditor) openEditor(file,"xml.editor.sample.editors.XMLEditor");
-//		openEditor.close(false);
-//		p = createProject("foo");
-//		file = createFile(p, "x.xml", "<xml/>");
-//		openEditor = (XMLEditor) openEditor(file,"xml.editor.sample.editors.XMLEditor");
-//		assertEquals("<xml/>",openEditor.getContentDescription());
-//	}
-
 	public void testOpenBlankFile() throws Exception {
 		IProject p = createProject("foo");
 		IFile file = createFile(p, "x.testlanguage", "");
