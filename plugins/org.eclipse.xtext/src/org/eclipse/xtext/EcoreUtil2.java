@@ -89,6 +89,15 @@ public class EcoreUtil2 extends EcoreUtil {
 			result.add(iterator.next());
 		return result;
 	}
+	
+	public static List<EObject> eAllContentsAsList(Resource resource) {
+		List<EObject> result = new ArrayList<EObject>();
+		TreeIterator<EObject> iterator = resource.getAllContents();
+		while (iterator.hasNext()) {
+			result.add(iterator.next());
+		}
+		return result;
+	}
 
 	/**
      */
