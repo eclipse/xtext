@@ -66,15 +66,16 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 	public void testComputeCompletionProposalsCount() throws Exception {
 		
 		Map<String, Integer> model2ExpectedProposalCountMap = new HashMap<String, Integer>();
-		model2ExpectedProposalCountMap.put("", 1);
-		model2ExpectedProposalCountMap.put("spielplatz ", 2);
-		model2ExpectedProposalCountMap.put("spielplatz 1 ", 3);
-		model2ExpectedProposalCountMap.put("spielplatz 1 \"JUNIT\" ", 1);
-		model2ExpectedProposalCountMap.put("spielplatz 1 \"JUNIT\" { ", 5);
-		model2ExpectedProposalCountMap.put("spielplatz 1 \"JUNIT\" { kind ", 1);
-		model2ExpectedProposalCountMap.put("spielplatz 1 \"JUNIT\" { kind(k1 0) erwachsener(e1 0) erwachsener(e2 0) familie( f1 ",2);
-		model2ExpectedProposalCountMap.put("spielplatz 1 \"JUNIT\" { kind(k1 0) erwachsener(e1 0) erwachsener(e2 0) familie( f1 e1 ",2);
-		model2ExpectedProposalCountMap.put("spielplatz 1 \"JUNIT\" { kind(k1 0) erwachsener(e1 0) erwachsener(e2 0) familie( f1 e1 e2 ",1);
+		StringBuilder modelBuilder = new StringBuilder("");
+		model2ExpectedProposalCountMap.put(modelBuilder.toString(), 1);
+		model2ExpectedProposalCountMap.put(modelBuilder.append("spielplatz ").toString(), 2);
+		model2ExpectedProposalCountMap.put(modelBuilder.append("1 ").toString(), 3);
+		model2ExpectedProposalCountMap.put(modelBuilder.append("\"JUNIT\" ").toString(), 1);
+		model2ExpectedProposalCountMap.put(modelBuilder.append("{ ").toString(), 5);
+		model2ExpectedProposalCountMap.put(modelBuilder.append("kind ").toString(), 1);
+		model2ExpectedProposalCountMap.put(modelBuilder.append("(k1 0) erwachsener(e1 0) erwachsener(e2 0) familie( f1 ").toString(),2);
+		model2ExpectedProposalCountMap.put(modelBuilder.append("e1 ").toString(),2);
+		model2ExpectedProposalCountMap.put(modelBuilder.append("e2 ").toString(),1);
 
 		for (Iterator<String> iterator = model2ExpectedProposalCountMap.keySet()
 				.iterator(); iterator.hasNext();) {
