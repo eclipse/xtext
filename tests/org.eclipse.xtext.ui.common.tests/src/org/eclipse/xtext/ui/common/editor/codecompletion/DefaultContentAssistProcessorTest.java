@@ -108,9 +108,32 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 	public void testComputeCompletionProposalsText() throws Exception {
 		
 		Map<String, List<String>> model2ExpectedProposalTextMap = new HashMap<String, List<String>>();
-		model2ExpectedProposalTextMap.put("", Arrays.asList("spielplatz "));
-		model2ExpectedProposalTextMap.put("spielplatz ", Arrays.asList("0","1"));
-
+		StringBuilder modelBuilder = new StringBuilder("");
+		model2ExpectedProposalTextMap.put(modelBuilder.toString(), Arrays.asList("spielplatz "));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("spielplatz ").toString(), Arrays.asList("0","1"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("1 ").toString(), Arrays.asList("\"SpielplatzBeschreibungSTRING\"","\"SpielplatzBeschreibung\"","{"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("\"SpielplatzBeschreibung\" ").toString(), Arrays.asList("{"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("{ ").toString(), Arrays.asList("erwachsener ","familie ","spielzeug ","kind ","}"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("erwachsener ").toString(), Arrays.asList("("));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("( ").toString(), Arrays.asList("ErwachsenerNameID","ErwachsenerName"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("e1 ").toString(), Arrays.asList("0","1"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("0 ").toString(), Arrays.asList(")"));
+		modelBuilder.append(")").append("erwachsener (e2 0)");
+		model2ExpectedProposalTextMap.put(modelBuilder.append("kind ").toString(), Arrays.asList("("));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("( ").toString(), Arrays.asList("KindNameID","KindName"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("k1 ").toString(), Arrays.asList("0","1"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("0 ").toString(), Arrays.asList(")"));
+		modelBuilder.append(")").append("kind (k2 0)");
+		model2ExpectedProposalTextMap.put(modelBuilder.append("familie ").toString(), Arrays.asList("("));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("( ").toString(), Arrays.asList("keyword ","\"FamilieNameSTRING\"","FamilieNameID"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("keyword ").toString(), Arrays.asList("e1","e2"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("e1 ").toString(), Arrays.asList("e1","e2"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("").toString(), Arrays.asList("e1","e2"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("e2 ").toString(), Arrays.asList("k1","k2"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("k").toString(), Arrays.asList("k1","k2",",",")"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("1 ").toString(), Arrays.asList(",",")"));
+		model2ExpectedProposalTextMap.put(modelBuilder.append("k2 ").toString(), Arrays.asList(",",")"));
+		
 		for (Iterator<String> iterator = model2ExpectedProposalTextMap.keySet()
 				.iterator(); iterator.hasNext();) {
 
