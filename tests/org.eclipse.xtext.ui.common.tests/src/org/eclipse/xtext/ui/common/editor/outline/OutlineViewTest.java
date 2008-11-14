@@ -207,6 +207,7 @@ public class OutlineViewTest extends AbstractEditorTest {
 			List<EObject> contents = EcoreUtil2.eAllContentsAsList(resource);
 			EObject objInEditor = contents.get(elementIndex);
 			
+			// just debugging purposes
 			LeafNode currentEditorNode = getCurrentEditorNode();
 			System.out.println("Selection [" + offset + ";" + length + "] yields node text [" + currentEditorNode.getText() + "]");
 			

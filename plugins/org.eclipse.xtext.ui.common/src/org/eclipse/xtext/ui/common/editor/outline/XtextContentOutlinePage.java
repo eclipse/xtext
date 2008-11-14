@@ -190,7 +190,15 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 	}
 
 	private boolean shouldSynchronizeOutlinePage() {
+		return isLinkingEnabled();
+	}
+	
+	public boolean isLinkingEnabled() {
 		return LinkingHelper.isLinkingEnabled();
+	}
+	
+	public void setLinkingEnabled(boolean enabled) {
+		LinkingHelper.setLinkingEnabled(enabled);
 	}
 
 	public void synchronizeOutlinePage(AbstractNode node) {
