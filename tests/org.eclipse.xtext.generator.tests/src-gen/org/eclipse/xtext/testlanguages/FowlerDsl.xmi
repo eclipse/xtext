@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="fowlerdsl" nsURI="http://example.xtext.org/FowlerDsl"/>
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>testlanguages</idElements>
+  <idElements>FowlerDsl</idElements>
+  <rules xsi:type="xtext:ParserRule" name="Statemachine">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Group">
+                <abstractTokens xsi:type="xtext:Keyword" value="events"/>
+                <abstractTokens xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="events">
+                  <terminal xsi:type="xtext:RuleCall" name="Event"/>
+                </abstractTokens>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Keyword" value="end"/>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Keyword" value="commands"/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="commands">
+            <terminal xsi:type="xtext:RuleCall" name="Command"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Keyword" value="end"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="states">
+        <terminal xsi:type="xtext:RuleCall" name="State"/>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Event">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="?" operator="?=" feature="resetting">
+          <terminal xsi:type="xtext:Keyword" value="resetting"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+          <terminal xsi:type="xtext:RuleCall" name="ID"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="code">
+        <terminal xsi:type="xtext:RuleCall" name="ID"/>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Command">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+        <terminal xsi:type="xtext:RuleCall" name="ID"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="code">
+        <terminal xsi:type="xtext:RuleCall" name="ID"/>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="State">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="state"/>
+            <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+              <terminal xsi:type="xtext:RuleCall" name="ID"/>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Group" cardinality="?">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Group">
+                <abstractTokens xsi:type="xtext:Keyword" value="actions"/>
+                <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Assignment" cardinality="+" operator="+=" feature="actions">
+                <terminal xsi:type="xtext:CrossReference">
+                  <type name="Command"/>
+                </terminal>
+              </abstractTokens>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="transitions">
+          <terminal xsi:type="xtext:RuleCall" name="Transition"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="end"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Transition">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="event">
+          <terminal xsi:type="xtext:CrossReference">
+            <type name="Event"/>
+          </terminal>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Keyword" value="=>"/>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="state">
+        <terminal xsi:type="xtext:CrossReference">
+          <type name="State"/>
+        </terminal>
+      </abstractTokens>
+    </alternatives>
+  </rules>
+</xtext:Grammar>
