@@ -10,6 +10,7 @@ package org.eclipse.xtext.crossref.impl;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.crossref.ILinkingScopeService;
 
 /**
@@ -20,6 +21,6 @@ public abstract class AbstractLinkingScopeService implements ILinkingScopeServic
 	/* 
 	 * @see org.eclipse.xtext.crossref.ILinkingScopeService#getObjectsInScope(org.eclipse.emf.ecore.EObject)
 	 */
-	public abstract List<EObject> getObjectsInScope(EObject context);
+	public abstract List<EObject> getObjectsInScope(EObject context, CrossReference reference);
 
 }

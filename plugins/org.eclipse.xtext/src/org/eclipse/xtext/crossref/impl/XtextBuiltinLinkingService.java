@@ -32,14 +32,28 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 
 	@Inject
 	private ILinkingScopeService linkingScopeService;
+	
+	/**
+	 * For testing purpose only
+	 */
+	public ILinkingScopeService getLinkingScopeService() {
+		return linkingScopeService;
+	}
+
+	/**
+	 * For testing purpose only
+	 */
+	public void setLinkingScopeService(ILinkingScopeService linkingScopeService) {
+		this.linkingScopeService = linkingScopeService;
+	}
 
 	@Inject
 	private ILinkingNameService linkingNameService;
 
-	private List<EObject> getObjectsInScope(EObject context) {
+	private List<EObject> getObjectsInScope(EObject context, CrossReference reference) {
 		if (linkingScopeService == null)
 			throw new IllegalStateException("LinkingScopeService must not be null.");
-		return linkingScopeService.getObjectsInScope(context);
+		return linkingScopeService.getObjectsInScope(context, reference);
 	}
 
 	public List<EObject> getLinkedObjects(EObject context, CrossReference ref, LeafNode text) {
@@ -47,7 +61,7 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 	}
 
 	public List<EObject> doGetLinkedObjects(EObject context, CrossReference ref, String text, boolean exactMatch) {
-		final Iterator<EObject> iter = linkingNameService.getMatches(getObjectsInScope(context), ref, text, exactMatch);
+		final Iterator<EObject> iter = linkingNameService.getMatches(getObjectsInScope(context, ref), ref, text, exactMatch);
 		final EClass requiredType = GrammarUtil.getReferencedEClass(context.eResource(), ref);
 		if (requiredType == null)
 			return Collections.<EObject> emptyList();
