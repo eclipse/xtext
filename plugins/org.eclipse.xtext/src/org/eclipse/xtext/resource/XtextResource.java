@@ -11,7 +11,6 @@ package org.eclipse.xtext.resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +18,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.crossref.IFragmentProvider;
 import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.parser.IAstFactory;
@@ -71,6 +69,17 @@ public class XtextResource extends ResourceImpl {
 	public void reparse(String newContent) throws IOException {
 		clearOutput();
 		doLoad(new StringInputStream(newContent), null);
+		reattachModificationTracker();
+		setModified(false);
+	}
+
+	private void reattachModificationTracker() {
+		if (isTrackingModification() && !getContents().isEmpty())
+			// copied from ResourceImpl.setTrackingModification
+			for (TreeIterator<EObject> i = getAllProperContents(getContents()); i.hasNext();) {
+				EObject eObject = i.next();
+				eObject.eAdapters().add(modificationTrackingAdapter);
+			}
 	}
 
 	@Override
@@ -91,13 +100,16 @@ public class XtextResource extends ResourceImpl {
 			clearOutput();
 			if (parseResult != null) {
 				if (parseResult.getRootASTElement() != null)
-					getContents().add(parseResult.getRootASTElement());
+					if (getContents().add(parseResult.getRootASTElement()))
+						reattachModificationTracker();
 				if (parseResult.getRootNode() != rootNode) {
-					addNodeContentAdapter();
+					addAdaptersToRoot();
 				}
 			}
 			doLinking();
-		} finally {
+			setModified(false);
+		}
+		finally {
 			isLoading = false;
 		}
 	}
@@ -110,6 +122,7 @@ public class XtextResource extends ResourceImpl {
 	protected void doLinking() {
 		if (parseResult.getRootASTElement() == null)
 			return;
+
 		List<Diagnostic> brokenLinks = linker.ensureLinked(parseResult.getRootASTElement());
 		TreeIterator<EObject> allContents = parseResult.getRootASTElement().eAllContents();
 		while (allContents.hasNext())
@@ -119,7 +132,7 @@ public class XtextResource extends ResourceImpl {
 		// logger.debug("errors: " + errors.size());
 	}
 
-	private void addNodeContentAdapter() {
+	private void addAdaptersToRoot() {
 		NodeContentAdapter.createAdapterAndAddToNode(parseResult.getRootNode());
 	}
 
@@ -131,21 +144,19 @@ public class XtextResource extends ResourceImpl {
 			if (rootElement != null) {
 				getContents().add(rootElement);
 			}
-			addNodeContentAdapter();
+			addAdaptersToRoot();
 		}
 		doLinking();
 	}
 
 	@Override
 	public EObject getEObject(String uriFragment) {
-		Iterator<EObject> iter = EcoreUtil.getAllContents(parseResult.getRootASTElement(), false);
-		while (iter.hasNext()) {
-			EObject object = (EObject) iter.next();
-			String fragment = fragmentProvider.getFragment(object);
-			if (fragment != null && fragment.equals(uriFragment))
-				return object;
-		}
-		return super.getEObject(uriFragment);
+		EObject result = (fragmentProvider != null) ? fragmentProvider.getEObject(this, uriFragment) : null;
+
+		if (result == null)
+			result = super.getEObject(uriFragment);
+
+		return result;
 	}
 
 	@Override

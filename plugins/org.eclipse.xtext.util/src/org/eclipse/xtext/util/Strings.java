@@ -17,14 +17,8 @@ import java.util.List;
 public class Strings {
 
 	public static String notNull(Object o) {
-		if (o == null) {
-			return "null";
-		}
-		String string = o.toString();
-		if (string == null) {
-			return "null";
-		}
-		return string;
+		String string = String.valueOf(o);
+		return string == null ? "null" : string;
 	}
 
 	public static String emptyIfNull(String s) {
