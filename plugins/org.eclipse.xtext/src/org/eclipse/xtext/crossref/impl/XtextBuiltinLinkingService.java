@@ -33,20 +33,6 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 	@Inject
 	private ILinkingScopeService linkingScopeService;
 	
-	/**
-	 * For testing purpose only
-	 */
-	public ILinkingScopeService getLinkingScopeService() {
-		return linkingScopeService;
-	}
-
-	/**
-	 * For testing purpose only
-	 */
-	public void setLinkingScopeService(ILinkingScopeService linkingScopeService) {
-		this.linkingScopeService = linkingScopeService;
-	}
-
 	@Inject
 	private ILinkingNameService linkingNameService;
 
