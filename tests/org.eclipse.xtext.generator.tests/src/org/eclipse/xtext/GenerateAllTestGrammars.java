@@ -21,6 +21,7 @@ import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest;
 import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testlanguages.ActionTestLanguage;
+import org.eclipse.xtext.testlanguages.FowlerDsl;
 import org.eclipse.xtext.testlanguages.LexerLanguage;
 import org.eclipse.xtext.testlanguages.LookaheadLanguage;
 import org.eclipse.xtext.testlanguages.OptionalEmptyLanguage;
@@ -42,7 +43,7 @@ public class GenerateAllTestGrammars {
 			ConcreteTestLanguage.class, XtextGrammarTest.class, MetamodelRefTest.class, DummyLanguage.class,
 			TestLanguage.class, SimpleReconstrTest.class, ComplexReconstrTest.class, LexerLanguage.class,
 			SimpleExpressions.class, ActionTestLanguage.class, OptionalEmptyLanguage.class, ReferenceGrammar.class,
-			LookaheadLanguage.class, Bug250313.class };
+			LookaheadLanguage.class, Bug250313.class, FowlerDsl.class };
 
 	public static void main(String[] args) throws Exception {
 		try {
