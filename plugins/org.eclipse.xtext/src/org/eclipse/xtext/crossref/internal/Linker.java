@@ -12,17 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.crossref.ILinkingService;
-import org.eclipse.xtext.crossref.IURIChecker;
-import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -35,12 +31,6 @@ public final class Linker implements ILinker {
 
 	@Inject
 	private ILinkingService linkingService;
-
-	@Inject
-	private IAstFactory factory;
-
-	@Inject
-	private IURIChecker checker;
 
 	public List<XtextResource.Diagnostic> ensureLinked(EObject obj) {
 		List<XtextResource.Diagnostic> brokenLinks = new ArrayList<XtextResource.Diagnostic>();
@@ -65,8 +55,8 @@ public final class Linker implements ILinker {
 	@SuppressWarnings("unchecked")
 	private List<XtextResource.Diagnostic> ensureIsLinked(EObject obj, LeafNode node, CrossReference ref) {
 		List<XtextResource.Diagnostic> brokenLinks = new ArrayList<XtextResource.Diagnostic>();
-		List<URI> links = linkingService.getLinkedObjects(obj, ref, (LeafNode) node);
-		
+		List<EObject> links = linkingService.getLinkedObjects(obj, ref, (LeafNode) node);
+
 		if (links == null || links.size() == 0) {
 			brokenLinks.add(createError(node));
 			return brokenLinks;
@@ -77,7 +67,7 @@ public final class Linker implements ILinker {
 			brokenLinks.add(new XtextLinkingDiagnostic(node, "Cannot find reference " + ref));
 			return brokenLinks;
 		}
-		
+
 		if (eRef.getUpperBound() >= 0 && links.size() > eRef.getUpperBound()) {
 			brokenLinks.add(new XtextLinkingDiagnostic(node, "Too many matches (" + links.size() + ") for "
 					+ node.getText() + ". Feature " + eRef.getName() + " can only hold " + eRef.getUpperBound()
@@ -86,34 +76,14 @@ public final class Linker implements ILinker {
 		}
 
 		if (eRef.getUpperBound() == 1) {
-			URI uri = links.get(0);
-			if (checker.exists(uri, obj)) {
-				EObject proxy = createProxy(ref, uri);
-				obj.eSet(eRef, proxy);
-			}
-			else {
-				brokenLinks.add(createError(node));
-			}
+			EObject link = links.get(0);
+			obj.eSet(eRef, link);
 		}
 		else { // eRef.getUpperBound() == -1 || 
-			   // eRef.getUpperBound() < links.size
-			for (URI uri : links) {
-				if (checker.exists(uri, obj)) {
-					EObject proxy = createProxy(ref, uri);
-					((EList<EObject>) obj.eGet(eRef)).add(proxy);
-				}
-				else {
-					brokenLinks.add(createError(node));
-				}
-			}
+			// eRef.getUpperBound() < links.size
+			((EList<EObject>) obj.eGet(eRef)).addAll(links);
 		}
 		return brokenLinks;
-	}
-
-	private EObject createProxy(CrossReference ref, URI uri) {
-		EObject proxy = factory.create(GrammarUtil.getQualifiedName(ref.getType()));
-		((InternalEObject) proxy).eSetProxyURI(uri);
-		return proxy;
 	}
 
 	private EReference getReference(CrossReference ref, EClass class1) {

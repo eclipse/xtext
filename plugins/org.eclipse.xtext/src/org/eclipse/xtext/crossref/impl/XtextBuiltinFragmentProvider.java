@@ -7,31 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.crossref.IFragmentProvider;
 
 /**
+ * TODO: think about an efficient way to compute fragments.
  * @author Sven Efftinge - Initial contribution and API
  * @author Peter Friese
+ * @author Sebastian Zarnekow
  */
 public class XtextBuiltinFragmentProvider implements IFragmentProvider {
 
 	public String getFragment(EObject obj) {
-		EClass eclass = obj.eClass();
-		
-		EStructuralFeature structuralFeature = eclass.getEStructuralFeature("name");
-		if (structuralFeature != null) {
-			if (structuralFeature instanceof EAttribute) {
-				EAttribute attribute = (EAttribute) structuralFeature;
-				Object name = obj.eGet(attribute);
-				if (name instanceof String) {
-					return (String) name;
-				}
-			}
-		}
+		return null;
+	}
+
+	public EObject getEObject(Resource resource, String fragment) {
 		return null;
 	}
 

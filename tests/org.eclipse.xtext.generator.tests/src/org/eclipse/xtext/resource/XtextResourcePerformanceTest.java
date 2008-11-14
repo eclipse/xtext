@@ -1,0 +1,61 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.resource;
+
+import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
+import org.eclipse.xtext.tests.AbstractGeneratorTest;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class XtextResourcePerformanceTest extends AbstractGeneratorTest {
+
+	private static final int NUM_ELEMENTS = 100;
+	private String model;
+	
+	protected void setUp() throws Exception {
+		super.setUp();
+		with(ReferenceGrammarStandaloneSetup.class);
+		StringBuilder modelBuilder = new StringBuilder(NUM_ELEMENTS * 64);
+		modelBuilder.append("spielplatz " + NUM_ELEMENTS + " {\r\n");
+		for(int i = 1; i <= NUM_ELEMENTS; i++ ) {
+			modelBuilder.append("  kind (Bob" + i + " " + i + ")\r\n");
+			modelBuilder.append("  kind (Joe" + i + " " + i + ")\r\n");
+			modelBuilder.append("  erwachsener (Mutter" + i + " " + i + ")\r\n");
+			modelBuilder.append("  erwachsener (Vater" + i + " " + i + ")\r\n");
+			modelBuilder.append("  familie(Familie" + i + " Vater" + i + " Mutter" + i + " Bob" + i + ", Joe" + i + ")\r\n");
+		}
+		modelBuilder.append('}');
+		model = modelBuilder.toString();
+	}
+	
+	public void testLoad() throws Exception {
+		XtextResource resource = getResourceFromString(model);
+		assertNotNull(resource);
+		assertTrue(resource.getParseResult().getParseErrors().isEmpty());
+	}
+	
+	public void testLoadModelWithLinkingErrors() throws Exception {
+		StringBuilder modelBuilder = new StringBuilder(NUM_ELEMENTS * 64);
+		modelBuilder.append("spielplatz " + NUM_ELEMENTS + " {\r\n");
+		for(int i = 1; i <= NUM_ELEMENTS; i++ ) {
+			modelBuilder.append("  kind (Bob " + i + ")\r\n");
+			modelBuilder.append("  kind (Joe " + i + ")\r\n");
+			modelBuilder.append("  erwachsener (Mutter " + i + ")\r\n");
+			modelBuilder.append("  erwachsener (Vater " + i + ")\r\n");
+			modelBuilder.append("  familie(Familie" + i + " Vater Mutter Bob, Joe)\r\n");
+		}
+		modelBuilder.append('}');
+		model = modelBuilder.toString();
+		XtextResource resource = getResourceFromString(model);
+		assertNotNull(resource);
+		assertTrue(resource.getParseResult().getParseErrors().isEmpty());
+		assertEquals(2 * NUM_ELEMENTS, resource.getErrors().size());
+	}
+	
+}

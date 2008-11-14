@@ -24,10 +24,8 @@ public class ResourceTests extends AbstractGeneratorTest {
 	public void testFragmentsWorkInBothDirections() throws Exception {
 		EObject model = getModel("type A extends B type B extends A");
 		EObject typeA1 = (EObject) invokeWithXtend("types.first()", model);
-		EObject typeA2 = model.eResource().getEObject("A");
+		EObject typeA2 = model.eResource().getEObject(model.eResource().getURIFragment(typeA1));
 		assertEquals(typeA1, typeA2);
-		String uriFrament = model.eResource().getURIFragment(typeA1);
-		assertEquals("A", uriFrament);
 	}
 
 }

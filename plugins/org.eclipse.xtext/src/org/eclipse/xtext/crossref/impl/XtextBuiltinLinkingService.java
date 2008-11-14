@@ -8,89 +8,62 @@
 package org.eclipse.xtext.crossref.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.crossref.ILinkingNameService;
 import org.eclipse.xtext.crossref.ILinkingScopeService;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.util.Pair;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
  * @author Michael Clay
+ * @author Sebastian Zarnekow
  */
 public class XtextBuiltinLinkingService implements ILinkingService {
 
 	@Inject
 	private ILinkingScopeService linkingScopeService;
-	
-	private static final Logger logger = Logger.getLogger(XtextBuiltinLinkingService.class);
+
+	@Inject
+	private ILinkingNameService linkingNameService;
 
 	private List<EObject> getObjectsInScope(EObject context) {
-		if(linkingScopeService==null)
+		if (linkingScopeService == null)
 			throw new IllegalStateException("LinkingScopeService must not be null.");
 		return linkingScopeService.getObjectsInScope(context);
 	}
 
-	public List<URI> getLinkedObjects(EObject context, CrossReference ref, LeafNode text) {
-		List<URI> result = new ArrayList<URI>();
+	public List<EObject> getLinkedObjects(EObject context, CrossReference ref, LeafNode text) {
+		return doGetLinkedObjects(context, ref, text.getText(), true);
+	}
 
-		for (EObject o : getObjectsInScope(context))
-			if (EcoreUtil2.getURIFragment(o).equals(text.getText()))
-				result.add(EcoreUtil2.getURI(o));
+	public List<EObject> doGetLinkedObjects(EObject context, CrossReference ref, String text, boolean exactMatch) {
+		final Iterator<EObject> iter = linkingNameService.getMatches(getObjectsInScope(context), ref, text, exactMatch);
+		final EClass requiredType = GrammarUtil.getReferencedEClass(context.eResource(), ref);
+		if (requiredType == null)
+			return Collections.<EObject> emptyList();
+
+		final List<EObject> result = new ArrayList<EObject>();
+		while (iter.hasNext()) {
+			final EObject candidate = iter.next();
+			if (EcoreUtil2.isAssignableFrom(requiredType, candidate))
+				result.add(candidate);
+		}
 
 		return result;
 	}
 
-	public String getLinkAsText(EObject context, URI referencedObject) {
-		// the same object can be referenced by different URIs. It is not
-		// sufficient to extract the fragment of the passed URI
-		ResourceSet resourceSet = context.eResource().getResourceSet();
-		EObject eObject = resourceSet.getEObject(referencedObject, true);
-		if (eObject == null)
-			return null;
-
-		return EcoreUtil2.getURIFragment(eObject);
+	public List<EObject> getLinkCandidates(EObject context, CrossReference ref, String textFragment) {
+		return doGetLinkedObjects(context, ref, textFragment.trim(), false);
 	}
 
-	private boolean isCandiateCompatibleFor(EObject candidate, EObject context, CrossReference ref) {
-		if (ref != null) {
-			EClass neededType = GrammarUtil.getReferencedEClass(context.eResource(), ref);
-			if(neededType != null)
-				return EcoreUtil2.isAssignableFrom(neededType, candidate);
-		}
-
-		return false;
-	}
-
-	public List<Pair<String, URI>> getLinkCandidates(EObject context, CrossReference ref, String partialLinkText) {
-		List<Pair<String, URI>> result = new ArrayList<Pair<String, URI>>();
-
-		for (EObject o : getObjectsInScope(context)) {
-			if (isCandiateCompatibleFor(o, context, ref)) {
-				URI uri = EcoreUtil2.getURI(o);
-				String linktext = getLinkAsText(context, uri);
-				if (isPartialLinkTextMatching(partialLinkText, linktext))
-				result.add(new Pair<String, URI>(linktext, uri));
-			}
-		}
-
-		logger.debug("result.size: " + result.size());
-
-		return result;
-	}
-
-	private boolean isPartialLinkTextMatching(String partialLinkText, String linktext) {
-		return linktext.toUpperCase().startsWith(partialLinkText.trim().toUpperCase());
-	}
-	
 }

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -22,6 +21,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.crossref.ILinkingNameService;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -29,7 +29,7 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * Convenient super class for <code>IProposalProvider</code> implementations.
@@ -50,9 +50,15 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	@Inject
 	protected ILinkingService linkingService;
 
+	@Inject
+	protected ILinkingNameService linkingNameService;
+
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeKeyword(org.eclipse.xtext.Keyword, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
+	 * 
+	 * @see
+	 * org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeKeyword(org.eclipse.xtext.Keyword,
+	 * org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
 	 */
 	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword, EObject model, String prefix,
 			IDocument doc, int offset) {
@@ -66,7 +72,10 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeRuleCall(org.eclipse.xtext.RuleCall, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
+	 * 
+	 * @see
+	 * org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeRuleCall(org.eclipse.xtext.RuleCall,
+	 * org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
 	 */
 	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall, EObject model, String prefix,
 			IDocument doc, int offset) {
@@ -84,10 +93,12 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		return Collections.emptyList();
 	}
 
-
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#sortAndFilter(java.util.List, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int, org.eclipse.xtext.parsetree.AbstractNode, org.eclipse.xtext.parsetree.LeafNode)
+	 * 
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#sortAndFilter(java.util.List,
+	 * org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int,
+	 * org.eclipse.xtext.parsetree.AbstractNode, org.eclipse.xtext.parsetree.LeafNode)
 	 */
 	public List<? extends ICompletionProposal> sortAndFilter(
 			List<? extends ICompletionProposal> completionProposalList, EObject model, String prefix,
@@ -96,25 +107,21 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	}
 
 	/**
-	 * Concrete subclasses can override this to provide a more meaningful and
-	 * sophisticated behaviour whenever a list of ICompletionProposal's should
-	 * be computed for simple <code>LexerRule</code> call's.
+	 * Concrete subclasses can override this to provide a more meaningful and sophisticated behaviour whenever a list of
+	 * ICompletionProposal's should be computed for simple <code>LexerRule</code> call's.
 	 * 
-	 * This implementation returns one <code>ICompletionProposal</code> with a
-	 * displayString composed of the name of the containing rule plus the
-	 * featurename of an optional assignment and at the end the name of the
-	 * given LexerRule (e.i. ParserRuleName+AssignmentFeatureName+LexerRuleName)
-	 * or {@link #getDefaultIntegerValue()} if its <i>INT</i> based LexerRule.
+	 * This implementation returns one <code>ICompletionProposal</code> with a displayString composed of the name of the
+	 * containing rule plus the featurename of an optional assignment and at the end the name of the given LexerRule
+	 * (e.i. ParserRuleName+AssignmentFeatureName+LexerRuleName) or {@link #getDefaultIntegerValue()} if its <i>INT</i>
+	 * based LexerRule.
 	 * 
 	 * @param lexerRule
 	 *            the 'called' LexerRule instance
 	 * @param ruleCall
 	 *            the ruleCall for the provided lexerRule
 	 * @param offset
-	 *            an offset within the document for which completions should be
-	 *            computed
-	 * @return a computed list of <code>ICompletionProposal</code> for the given
-	 *         <code>LexerRule</code>
+	 *            an offset within the document for which completions should be computed
+	 * @return a computed list of <code>ICompletionProposal</code> for the given <code>LexerRule</code>
 	 */
 	protected List<? extends ICompletionProposal> doCompleteLexerRuleRuleCall(LexerRule lexerRule, RuleCall ruleCall,
 			EObject model, int offset) {
@@ -145,30 +152,26 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 	/**
 	 * 
-	 * @return the id of the plug-in containing the image files; <code>null
-	 *         </code> is returned if the plug-in does not exist
+	 * @return the id of the plug-in containing the image files; <code>null </code> is returned if the plug-in does not
+	 *         exist
 	 */
 	protected abstract String getPluginId();
 
 	/**
-	 * Returns the the relative path of the default image file, relative to the
-	 * root of the containing plug-in; the path must be legal The image would
-	 * typically be shown to the left of the <code>ICompletionProposal</code>
-	 * display string.
+	 * Returns the the relative path of the default image file, relative to the root of the containing plug-in; the path
+	 * must be legal The image would typically be shown to the left of the <code>ICompletionProposal</code> display
+	 * string.
 	 * 
-	 * @return the image file path of the default image to be shown or
-	 *         <code>null</code> if no image is desired
+	 * @return the image file path of the default image to be shown or <code>null</code> if no image is desired
 	 * @see #getPluginId()
 	 */
 	protected abstract String getDefaultImageFilePath();
 
 	/**
-	 * Concrete subclasses can override this to provide custom lookup behaviour
-	 * for <code>CrossReference</code>. This implementation delegates to the
-	 * injected LinkingService
+	 * Concrete subclasses can override this to provide custom lookup behaviour for <code>CrossReference</code>. This
+	 * implementation delegates to the injected LinkingService
 	 * 
-	 * @return a list of <code>ICompletionProposal</code> matching the given
-	 *         assignment
+	 * @return a list of <code>ICompletionProposal</code> matching the given assignment
 	 */
 	protected List<? extends ICompletionProposal> lookupCrossReference(CrossReference crossReference, EObject model,
 			String prefix, int offset) {
@@ -176,11 +179,10 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
 		if (linkingService != null) {
-			List<Pair<String, URI>> candidates = linkingService
-					.getLinkCandidates(model, crossReference, prefix);
-			for (Pair<String, URI> candidate : candidates) {
-				completionProposalList.add(createCompletionProposal(crossReference, model, candidate.getFirstElement(),
-						offset));
+			List<EObject> candidates = linkingService.getLinkCandidates(model, crossReference, prefix);
+			for (EObject candidate : candidates) {
+				completionProposalList.add(createCompletionProposal(crossReference, model, linkingNameService.getText(
+						candidate, crossReference), offset));
 			}
 		}
 
@@ -188,46 +190,47 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	}
 
 	/**
-	 * @return a new <code>XtextCompletionProposal</code> for the given text and
-	 *         offset.
+	 * @return a new <code>XtextCompletionProposal</code> for the given text and offset.
 	 */
 	protected final XtextCompletionProposal createCompletionProposal(AbstractElement abstractElement, EObject model,
 			String text, int offset) {
 		return new XtextCompletionProposal(abstractElement, model, text, new StyledString(text), text,
 				getDefaultImageFilePath(), getPluginId(), offset);
 	}
-	
+
 	/**
-	 * Concrete subclasses can override this for custom sort and filter
-	 * behavior. Gets called after all completion proposals have been collected.
+	 * Concrete subclasses can override this for custom sort and filter behavior. Gets called after all completion
+	 * proposals have been collected.
 	 * 
-	 * The default behavior of this implementation is to sort duplicates and to
-	 * trim matching <code>ICompletionProposal#displayString</code> with matching prefix values.
+	 * The default behavior of this implementation is to sort duplicates and to trim matching
+	 * <code>ICompletionProposal#displayString</code> with matching prefix values.
 	 * 
-	 * @see #sortAndFilter(List, EObject, String, IDocument, int, AbstractNode, LeafNode) 
+	 * @see #sortAndFilter(List, EObject, String, IDocument, int, AbstractNode, LeafNode)
 	 */
 	protected List<? extends ICompletionProposal> doSortAndFilter(
-			List<? extends ICompletionProposal> completionProposalList, EObject model, String prefix,IDocument document, int offset) {
+			List<? extends ICompletionProposal> completionProposalList, EObject model, String prefix,
+			IDocument document, int offset) {
 
 		Map<String, ICompletionProposal> displayString2ICompletionProposalMap = new HashMap<String, ICompletionProposal>();
-		
+
 		for (Iterator<? extends ICompletionProposal> iterator = completionProposalList.iterator(); iterator.hasNext();) {
 
 			ICompletionProposal completionProposal = iterator.next();
-			
+
 			// filter duplicate displayString
 			if (!displayString2ICompletionProposalMap.containsKey(completionProposal.getDisplayString())) {
 
 				displayString2ICompletionProposalMap.put(completionProposal.getDisplayString(), completionProposal);
-				
-				if (model != null) {
-					
-					CompositeNode parserNode = NodeUtil.getRootNode(model);
-					
-					LeafNode currentLeafNode=ParseTreeUtil.getCurrentNodeByOffset(parserNode, offset);
 
-					boolean isCursorAtTheEndOfTheLastElement = offset == (currentLeafNode.getOffset() + currentLeafNode.getLength());
-					
+				if (model != null) {
+
+					CompositeNode parserNode = NodeUtil.getRootNode(model);
+
+					LeafNode currentLeafNode = ParseTreeUtil.getCurrentNodeByOffset(parserNode, offset);
+
+					boolean isCursorAtTheEndOfTheLastElement = offset == (currentLeafNode.getOffset() + currentLeafNode
+							.getLength());
+
 					if (isCursorAtTheEndOfTheLastElement && completionProposal instanceof XtextCompletionProposal) {
 
 						XtextCompletionProposal xtextCompletionProposal = (XtextCompletionProposal) completionProposal;
@@ -236,16 +239,16 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 						EObject grammarElement = currentLeafNode.getGrammarElement();
 						// at the end of the last element we want to filter only the CompletionProposal for the same grammar element
-						if (((isCursorAtTheEndOfTheLastElement && abstractElement.equals(grammarElement))
-								|| !isCursorAtTheEndOfTheLastElement) && !completionProposal.getDisplayString().startsWith(currentLeafNode.getText())) {
+						if (((isCursorAtTheEndOfTheLastElement && abstractElement.equals(grammarElement)) || !isCursorAtTheEndOfTheLastElement)
+								&& !completionProposal.getDisplayString().startsWith(currentLeafNode.getText())) {
 							if (logger.isDebugEnabled()) {
 								logger.debug("filter completionProposal '" + completionProposal + "'");
 							}
 							iterator.remove();
 						}
-					}	
+					}
 				}
-				
+
 			}
 			else {
 				if (logger.isDebugEnabled()) {
@@ -255,7 +258,6 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 				iterator.remove();
 			}
 		}
-		
 
 		return completionProposalList;
 	}
@@ -266,10 +268,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	 * @return the provided string with the first letter capitalized
 	 */
 	protected final String firstLetterCapitalized(String text) {
-		if (text == null || text.length() == 0) {
-			return text;
-		}
-		return text.substring(0, 1).toUpperCase() + text.substring(1, text.length());
+		return Strings.toFirstUpper(text);
 	}
 
 }
