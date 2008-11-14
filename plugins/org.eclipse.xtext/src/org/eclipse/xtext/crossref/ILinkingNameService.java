@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref;
 
-import java.util.Collection;
-import java.util.Iterator;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.service.ILanguageService;
@@ -28,7 +25,6 @@ public interface ILinkingNameService extends ILanguageService {
 	 */
 	String getText(EObject object, CrossReference reference);
 
-	Iterator<EObject> getMatches(Collection<EObject> candidates, CrossReference reference, String text,
-			boolean exactMatch);
+	Iterable<EObject> getMatches(Iterable<EObject> candidates, CrossReference reference, String text, boolean exactMatch);
 
 }

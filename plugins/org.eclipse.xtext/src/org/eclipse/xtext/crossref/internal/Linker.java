@@ -9,8 +9,11 @@
 package org.eclipse.xtext.crossref.internal;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -76,12 +79,21 @@ public final class Linker implements ILinker {
 		}
 
 		if (eRef.getUpperBound() == 1) {
-			EObject link = links.get(0);
-			obj.eSet(eRef, link);
+			obj.eSet(eRef, links.get(0));
 		}
 		else { // eRef.getUpperBound() == -1 || 
 			// eRef.getUpperBound() < links.size
-			((EList<EObject>) obj.eGet(eRef)).addAll(links);
+			// TODO extract and check weather equals or identity is used by list
+			List<EObject> list = (List<EObject>) obj.eGet(eRef);
+			if (eRef.isUnique() && (list instanceof BasicEList)) {
+				Set<EObject> addUs = new LinkedHashSet<EObject>(links);
+				//addUs.removeAll(list); // removeAll calls most likely list.contains() which is rather slow
+				for (int i = 0; i < list.size(); i++)
+					addUs.remove(list.get(i));
+				((BasicEList) list).addAllUnique(addUs);
+			}
+			else
+				list.addAll(links);
 		}
 		return brokenLinks;
 	}

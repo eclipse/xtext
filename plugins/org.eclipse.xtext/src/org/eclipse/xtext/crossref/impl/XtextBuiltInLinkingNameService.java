@@ -7,19 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
-import java.util.Collection;
-import java.util.Iterator;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.crossref.ILinkingNameService;
+import org.eclipse.xtext.util.Filter;
+import org.eclipse.xtext.util.FilteringIterator;
 import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.SimpleCache;
 
@@ -52,48 +52,30 @@ public class XtextBuiltInLinkingNameService implements ILinkingNameService, Adap
 				if (attr != null) {
 					param.eAdapters().add(XtextBuiltInLinkingNameService.this);
 				}
-				return attr != null ? (String) param.eGet(attr) : null;
+				// TODO: think about String.intern()
+//				return attr != null ? ((String) param.eGet(attr)).intern() : null;
+				return attr != null ? ((String) param.eGet(attr)) : null;
 			}
 		});
 	}
 
 	public String getText(EObject object, CrossReference reference) {
+		if (object instanceof ENamedElement)
+			return ((ENamedElement) object).getName();
 		return nameCache.get(object);
 	}
 
-	public Iterator<EObject> getMatches(Collection<EObject> candidates, final CrossReference reference,
+	public Iterable<EObject> getMatches(Iterable<EObject> candidates, final CrossReference reference,
 			final String text, final boolean exactMatch) {
-		final Iterator<EObject> result = candidates.iterator();
-		return new Iterator<EObject>() {
-
-			private EObject next;
-
-			public boolean hasNext() {
-				if (next != null)
-					return true;
-				while (next == null && result.hasNext()) {
-					final EObject nextCandidate = result.next();
-					final String candidateAsText = getText(nextCandidate, reference);
-					if (text.equals(candidateAsText) || !exactMatch && candidateAsText != null
-							&& candidateAsText.toUpperCase().startsWith(text.toUpperCase()))
-						next = nextCandidate;
-				}
-				return next != null;
+		return new FilteringIterator<EObject>(candidates.iterator(), new Filter<EObject>() {
+			public boolean matches(EObject param) {
+				final String candidateAsText = getText(param, reference);
+				// TODO: think about camel humps
+				return text.equals(candidateAsText) || !exactMatch && candidateAsText != null
+						&& candidateAsText.length() > text.length()
+						&& text.regionMatches(!exactMatch, 0, candidateAsText, 0, text.length());
 			}
-
-			public EObject next() {
-				if (next == null && !hasNext())
-					throw new IllegalStateException("call hasNext first");
-				final EObject res = next;
-				next = null;
-				return res;
-			}
-
-			public void remove() {
-				throw new UnsupportedOperationException("remove is not supported by this implementation");
-			}
-
-		};
+		});
 	}
 
 	public Notifier getTarget() {
@@ -117,7 +99,7 @@ public class XtextBuiltInLinkingNameService implements ILinkingNameService, Adap
 	}
 
 	public void setTarget(Notifier newTarget) {
-		// TODO Auto-generated method stub
+		// nothing to do
 	}
 
 }

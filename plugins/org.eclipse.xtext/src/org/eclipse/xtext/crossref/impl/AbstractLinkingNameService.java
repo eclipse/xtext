@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
-import org.eclipse.xtext.crossref.ILinkingScopeService;
+import org.eclipse.xtext.crossref.ILinkingNameService;
 
 /**
- * @author Heiko Behrens - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractLinkingScopeService implements ILinkingScopeService {
+public abstract class AbstractLinkingNameService implements ILinkingNameService {
 
 }
