@@ -214,9 +214,13 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 				}
 			}
 			outlineSelectionChangedListener.uninstall(this);
-			this.setSelection(selection);
+			this.setSelection(selection, true);
 			outlineSelectionChangedListener.install(this);
 		}
+	}
+	
+	public void setSelection(ISelection selection, boolean reveal) {
+		getTreeViewer().setSelection(selection, reveal);
 	}
 	
 }
