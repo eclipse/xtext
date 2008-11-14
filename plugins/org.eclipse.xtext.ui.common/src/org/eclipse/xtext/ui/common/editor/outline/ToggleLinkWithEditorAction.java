@@ -22,16 +22,24 @@ public class ToggleLinkWithEditorAction extends Action {
 	public ToggleLinkWithEditorAction(XtextContentOutlinePage outlinePage) {
 		super(XtextUIMessages.getString("ToggleLinkWithEditorAction.label")); //$NON-NLS-1$
 		this.outlinePage = outlinePage;
-		setChecked(LinkingHelper.isLinkingEnabled());
+		setChecked(isLinkingEnabled());
 		setToolTipText(XtextUIMessages.getString("ToggleLinkWithEditorAction.toolTip")); //$NON-NLS-1$
 		setDescription(XtextUIMessages.getString("ToggleLinkWithEditorAction.description")); //$NON-NLS-1$
 		setImageDescriptor(XtextPluginImages.DESC_LINK_WITH_EDITOR);
 		setDisabledImageDescriptor(XtextPluginImages.DESC_LINK_WITH_EDITOR_DISABLED);
 	}
+	
+	protected boolean isLinkingEnabled() {
+		return outlinePage.isLinkingEnabled();
+	}
+	
+	protected void setLinkingEnabled(boolean enabled) {
+		outlinePage.setLinkingEnabled(enabled);
+	}
 
 	public void run() {
-		LinkingHelper.setLinkingEnabled(isChecked());
-		if (isChecked()) {
+		setLinkingEnabled(isChecked());
+		if (isLinkingEnabled()) {
 			outlinePage.synchronizeOutlinePage();
 		}
 	}
