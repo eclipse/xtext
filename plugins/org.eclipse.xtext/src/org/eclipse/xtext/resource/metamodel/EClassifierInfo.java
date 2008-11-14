@@ -65,7 +65,8 @@ public abstract class EClassifierInfo {
 		@Override
 		public boolean addSupertype(EClassifierInfo superTypeInfo) {
 			if (!isGenerated()) {
-				throw new IllegalStateException("Generated Type cannot be modified.");
+				throw new IllegalStateException("Type " + this.getEClassifier().getName()
+						+ " is not generated and cannot be modified.");
 			}
 			if (!(superTypeInfo instanceof EClassInfo)) {
 				throw new IllegalArgumentException("superTypeInfo must represent EClass");
@@ -83,7 +84,6 @@ public abstract class EClassifierInfo {
 		@Override
 		public boolean addFeature(String featureName, EClassifierInfo featureType, boolean isMultivalue,
 				boolean isContainment, EObject parserElement) throws TransformationException {
-
 			EClassifier featureClassifier = featureType.getEClassifier();
 			return addFeature(featureName, featureClassifier, isMultivalue, isContainment, parserElement);
 		}

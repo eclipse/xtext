@@ -5,13 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.crossref.impl;
-
-import org.eclipse.xtext.crossref.ILinkingScopeService;
+package org.eclipse.xtext.util;
 
 /**
- * @author Heiko Behrens - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractLinkingScopeService implements ILinkingScopeService {
+public interface Filter<P> {
 
+	boolean matches(P param);
+	
 }

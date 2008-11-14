@@ -32,7 +32,7 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 
 	@Inject
 	private ILinkingScopeService linkingScopeService;
-	
+
 	@Inject
 	private ILinkingNameService linkingNameService;
 
@@ -47,18 +47,18 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 	}
 
 	public List<EObject> doGetLinkedObjects(EObject context, CrossReference ref, String text, boolean exactMatch) {
-		final Iterator<EObject> iter = linkingNameService.getMatches(getObjectsInScope(context, ref), ref, text, exactMatch);
 		final EClass requiredType = GrammarUtil.getReferencedEClass(context.eResource(), ref);
 		if (requiredType == null)
 			return Collections.<EObject> emptyList();
 
+		final List<EObject> scope = getObjectsInScope(context, ref);
+		final Iterator<EObject> iter = linkingNameService.getMatches(scope, ref, text, exactMatch).iterator();
 		final List<EObject> result = new ArrayList<EObject>();
 		while (iter.hasNext()) {
 			final EObject candidate = iter.next();
 			if (EcoreUtil2.isAssignableFrom(requiredType, candidate))
 				result.add(candidate);
 		}
-
 		return result;
 	}
 

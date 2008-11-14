@@ -53,9 +53,9 @@ public class XtextBuiltinLinkingScopeService extends AbstractLinkingScopeService
 				if (logger.isTraceEnabled()) {
 					logger.trace("collecting objects of " + resource.toString());
 				}
-				Iterator<Object> iter = EcoreUtil.getAllContents(resource, false);
+				final Iterator<Object> iter = EcoreUtil.getAllContents(resource, false);
 				while (iter.hasNext()) {
-					Object candidate = iter.next();
+					final Object candidate = iter.next();
 					if (candidate instanceof EObject)
 						result.add((EObject) candidate);
 				}
@@ -64,7 +64,7 @@ public class XtextBuiltinLinkingScopeService extends AbstractLinkingScopeService
 				}
 			}
 		});
-		logger.debug("Creating " + XtextBuiltinLinkingScopeService.class.getName());
+		logger.debug("Created " + XtextBuiltinLinkingScopeService.class.getName());
 	}
 
 	/*
@@ -76,10 +76,10 @@ public class XtextBuiltinLinkingScopeService extends AbstractLinkingScopeService
 		if (logger.isTraceEnabled()) {
 			logger.trace("retrieving objects in scope of " + context.toString());
 		}
-		ResourceSet set = context.eResource().getResourceSet();
+		final ResourceSet set = context.eResource().getResourceSet();
 		List<EObject> result = null;
 		for (int i = 0; i < set.getResources().size(); i++) {
-			Resource r = set.getResources().get(i);
+			final Resource r = set.getResources().get(i);
 			if (result == null)
 				result = new ArrayList<EObject>(cache.get(r));
 			else
@@ -106,7 +106,7 @@ public class XtextBuiltinLinkingScopeService extends AbstractLinkingScopeService
 				logger.trace("received notification " + notification.getEventType());
 				logger.trace("discarding cache of " + notification.getNotifier().toString());
 			}
-			Resource r = (Resource) notification.getNotifier();
+			final Resource r = (Resource) notification.getNotifier();
 			cache.discard(r);
 			r.eAdapters().remove(this);
 		}
