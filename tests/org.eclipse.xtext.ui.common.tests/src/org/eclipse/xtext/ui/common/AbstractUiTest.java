@@ -23,7 +23,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 /**
  * @author Michael Clay - Initial contribution and API
  */
-public class AbstractUiTest extends AbstractGeneratorTest {
+public abstract class AbstractUiTest extends AbstractGeneratorTest {
 
 	/**
 	 * used to populate the serviceRegistry
