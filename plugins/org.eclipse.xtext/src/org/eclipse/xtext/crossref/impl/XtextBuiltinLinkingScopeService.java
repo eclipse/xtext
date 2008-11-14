@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.SimpleCache;
@@ -71,7 +72,7 @@ public class XtextBuiltinLinkingScopeService extends AbstractLinkingScopeService
 	 * 
 	 * @see org.eclipse.xtext.crossref.ILinkingScopeService#getObjectsInScope(org.eclipse.emf.ecore.EObject)
 	 */
-	public List<EObject> getObjectsInScope(EObject context) {
+	public List<EObject> getObjectsInScope(EObject context, CrossReference reference) {
 		if (logger.isTraceEnabled()) {
 			logger.trace("retrieving objects in scope of " + context.toString());
 		}
@@ -114,4 +115,5 @@ public class XtextBuiltinLinkingScopeService extends AbstractLinkingScopeService
 	public void setTarget(Notifier newTarget) {
 		// nothing to do
 	}
+
 }
