@@ -8,7 +8,6 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -49,18 +48,18 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 	@Inject
 	private IProposalProvider proposalProvider;
-	
 
 	/**
-	 * @param proposalProvider the proposalProvider to set
+	 * @param proposalProvider
+	 *            the proposalProvider to set
 	 */
 	public void setProposalProvider(IProposalProvider proposalProvider) {
 		this.proposalProvider = proposalProvider;
 	}
 
 	/**
-	 * computes the possible grammar elements following the one at the given
-	 * offset and calls the respective methods on the proposal provider.
+	 * computes the possible grammar elements following the one at the given offset and calls the respective methods on
+	 * the proposal provider.
 	 */
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, final int offset) {
 
@@ -97,8 +96,8 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 				Set<AbstractElement> nextValidElementSet = new LinkedHashSet<AbstractElement>();
 				/**
-				 * in case of a crossreference which isnt linked already we
-				 * evaluate it again and delegate to proposalProvider (again)
+				 * in case of a crossreference which isnt linked already we evaluate it again and delegate to
+				 * proposalProvider (again)
 				 */
 				if (lastCompleteNode.getGrammarElement() instanceof CrossReference && !isLinked(lastCompleteNode)) {
 					nextValidElementSet.add((AbstractElement) lastCompleteNode.getGrammarElement());
@@ -106,9 +105,8 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 							offset));
 				}
 				/**
-				 * in case of 'at-the-end' of the previous,completed element we
-				 * evaluate it again for 'right-to-left-backtracking' cases
-				 * (e.g. for keyword 'kind' kind>|< |=cursorpos)
+				 * in case of 'at-the-end' of the previous,completed element we evaluate it again for
+				 * 'right-to-left-backtracking' cases (e.g. for keyword 'kind' kind>|< |=cursorpos)
 				 */
 				else if (currentLeafNode == lastCompleteNode) {
 					nextValidElementSet = ParseTreeUtil
@@ -195,19 +193,17 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		EReference eReference = getReference(crossReference, semanticModel.eClass());
 
 		List<EObject> referencedObjects = EcoreUtil2.getAllReferencedObjects(semanticModel, eReference);
-		
+
 		if (referencedObjects.isEmpty())
 			return false;
 		else {
-			List<URI> referencedURIs = EcoreUtil2.getURIs(referencedObjects);
-			List<URI> linkCandidates = linkingService.getLinkedObjects(semanticModel, crossReference,
+			List<EObject> linkCandidates = linkingService.getLinkedObjects(semanticModel, crossReference,
 					(LeafNode) lastCompleteNode);
-			return !linkCandidates.isEmpty() && referencedURIs.containsAll(linkCandidates);
+			return !linkCandidates.isEmpty() && referencedObjects.containsAll(linkCandidates);
 		}
 	}
 
 	private EReference getReference(CrossReference ref, EClass class1) {
-
 		EList<EReference> references = class1.getEAllReferences();
 
 		String feature = GrammarUtil.containingAssignment(ref).getFeature();
