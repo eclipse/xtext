@@ -24,7 +24,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 	private XtextDocument document;
 
 	public void reconcile(final IRegion region) {
-		document.modify(XtextReconcilerHelper.createReconcileJob(region, document));
+		document.modify(new XtextReconcilerUnitOfWork(region, document));
 	}
 
 	public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion) {
