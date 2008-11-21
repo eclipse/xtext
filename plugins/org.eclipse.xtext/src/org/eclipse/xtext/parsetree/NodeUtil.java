@@ -100,13 +100,15 @@ public class NodeUtil {
 	}
 
     public static void dumpCompositeNodes(String indent, CompositeNode node) {
-        dumpCompositeNodeInfo(indent, node);
-        for (AbstractNode childNode : node.getChildren()) {
-            if (childNode instanceof CompositeNode) {
-                CompositeNode compositeNode = (CompositeNode) childNode;
-                dumpCompositeNodes(indent + "  ", compositeNode);
-            }
-        }
+    	if (logger.isTraceEnabled()) {
+	    	dumpCompositeNodeInfo(indent, node);
+	        for (AbstractNode childNode : node.getChildren()) {
+	            if (childNode instanceof CompositeNode) {
+	                CompositeNode compositeNode = (CompositeNode) childNode;
+	                dumpCompositeNodes(indent + "  ", compositeNode);
+	            }
+	        }
+    	}
     }
     
     public static void dumpCompositeNodeInfo(String indent, CompositeNode node) {

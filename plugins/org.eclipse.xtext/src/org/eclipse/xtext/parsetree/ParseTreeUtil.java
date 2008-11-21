@@ -107,9 +107,11 @@ public final class ParseTreeUtil {
 	 *            the node to dump
 	 */
 	public static final void dumpNode(AbstractNode abstractNode) {
-		assertParameterNotNull(abstractNode, "abstractNode");
-		logger.debug("dump parsetree with root node '" + EcoreUtil.getIdentification(abstractNode) + "'");
-		doDumpNode(abstractNode, "\t");
+		if (logger.isDebugEnabled()) {
+			assertParameterNotNull(abstractNode, "abstractNode");
+			logger.debug("dump parsetree with root node '" + EcoreUtil.getIdentification(abstractNode) + "'");
+			doDumpNode(abstractNode, "\t");
+		}
 	}
 
 	/**
@@ -342,39 +344,39 @@ public final class ParseTreeUtil {
 	 * @param indentString
 	 */
 	private static final void doDumpNode(AbstractNode abstractNode, String indentString) {
-
-		if (abstractNode instanceof CompositeNode) {
-
-			// CompositeNode compositeNode = (CompositeNode) abstractNode;
-
-			logger.debug(indentString + "line '" + abstractNode.getLine() + "' offset '" + abstractNode.getOffset()
-					+ "'  length '" + abstractNode.getLength() + "' grammar-hierarchy  ("
-					+ dumpParentHierarchy(abstractNode) + ")");
-
-		}
-		else if (abstractNode instanceof LeafNode) {
-
-			LeafNode leafNode = (LeafNode) abstractNode;
-			// ommit hidden channel
-			if (!leafNode.isHidden()) {
-
-				logger.debug(indentString + "'" + "line '" + leafNode.getLine() + "' offset '" + leafNode.getOffset()
-						+ " length '" + leafNode.getLength() + "' "
-						+ (leafNode.getFeature() != null ? leafNode.getFeature() + " = " : "") + " text '"
-						+ leafNode.getText() + "' grammar-hierarchy (" + dumpParentHierarchy(leafNode) + ")");
-
+		if (logger.isDebugEnabled()) {
+			if (abstractNode instanceof CompositeNode) {
+	
+				// CompositeNode compositeNode = (CompositeNode) abstractNode;
+	
+				logger.debug(indentString + "line '" + abstractNode.getLine() + "' offset '" + abstractNode.getOffset()
+						+ "'  length '" + abstractNode.getLength() + "' grammar-hierarchy  ("
+						+ dumpParentHierarchy(abstractNode) + ")");
+	
 			}
-
-		}
-
-		for (AbstractNode childNode : abstractNode.getLeafNodes()) {
-			doDumpNode(childNode, indentString + indentString);
+			else if (abstractNode instanceof LeafNode) {
+	
+				LeafNode leafNode = (LeafNode) abstractNode;
+				// ommit hidden channel
+				if (!leafNode.isHidden()) {
+	
+					logger.debug(indentString + "'" + "line '" + leafNode.getLine() + "' offset '" + leafNode.getOffset()
+							+ " length '" + leafNode.getLength() + "' "
+							+ (leafNode.getFeature() != null ? leafNode.getFeature() + " = " : "") + " text '"
+							+ leafNode.getText() + "' grammar-hierarchy (" + dumpParentHierarchy(leafNode) + ")");
+	
+				}
+	
+			}
+	
+			for (AbstractNode childNode : abstractNode.getLeafNodes()) {
+				doDumpNode(childNode, indentString + indentString);
+			}
 		}
 
 	}
 
 	private static final String dumpParentHierarchy(AbstractNode abstractNode) {
-
 		StringBuilder stringBuilder = new StringBuilder();
 		while (null != abstractNode) {
 			stringBuilder.append(abstractNode.getGrammarElement().getClass().getSimpleName());
