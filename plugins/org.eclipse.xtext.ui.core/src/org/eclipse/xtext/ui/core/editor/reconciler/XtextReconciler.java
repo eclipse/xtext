@@ -66,7 +66,7 @@ public class XtextReconciler extends Job implements IReconciler {
 			if (document != null) {
 				final ReplaceRegion replaceRegionToBeProcessed = getAndResetReplaceRegion();
 				if (replaceRegionToBeProcessed != null) {
-					processor.process(XtextReconcilerHelper.createReconcileJob(replaceRegionToBeProcessed, document));
+					processor.process(new XtextReconcilerUnitOfWork(replaceRegionToBeProcessed, document));
 				}
 			}
 		}
