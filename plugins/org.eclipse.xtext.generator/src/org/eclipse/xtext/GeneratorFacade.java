@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.issues.IssuesImpl;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
@@ -52,7 +53,7 @@ public class GeneratorFacade {
 	public static void generate(Grammar grammarModel, String runtimeProjectPath, String uiProjectPath,
 			String... modelFileExtensions) throws IOException {
 		List<EObject> list = EcoreUtil2.eAllContentsAsList(grammarModel);
-		IssuesImpl issues = new IssuesImpl();
+		Issues issues = new IssuesImpl();
 		ExecutionContextImpl ctx = new ExecutionContextImpl();
 		ctx.registerMetaModel(new EmfRegistryMetaModel());
 		CheckFacade.checkAll("org::eclipse::xtext::Checks", list, ctx, issues);
