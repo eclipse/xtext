@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.core.editor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +21,10 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.SyntaxError;
@@ -94,7 +97,8 @@ public class XtextProblemMarkerCreator {
 							for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
 								emfMarkers.add(collectMarkerAttributesForDiagnostic(childDiagnostic));
 							}
-						} else {
+						}
+						else {
 							emfMarkers.add(collectMarkerAttributesForDiagnostic(diagnostic));
 						}
 					}
@@ -122,7 +126,8 @@ public class XtextProblemMarkerCreator {
 
 			if (!emfMarkers.isEmpty())
 				XtextMarkerManager.createMarker(file, emfMarkers, monitor);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
 
@@ -132,23 +137,34 @@ public class XtextProblemMarkerCreator {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sever = IMarker.SEVERITY_ERROR;
 		switch (diagnostic.getSeverity()) {
-		case Diagnostic.WARNING:
-			sever = IMarker.SEVERITY_WARNING;
-			break;
-		case Diagnostic.OK:
-		case Diagnostic.INFO:
-			sever = IMarker.SEVERITY_INFO;
-			break;
+			case Diagnostic.WARNING:
+				sever = IMarker.SEVERITY_WARNING;
+				break;
+			case Diagnostic.OK:
+			case Diagnostic.INFO:
+				sever = IMarker.SEVERITY_INFO;
+				break;
 		}
 		map.put(IMarker.SEVERITY, sever);
-		List<?> data = diagnostic.getData();
-		Object causer = data.get(0);
+		Iterator<?> data = diagnostic.getData().iterator();
+		// causer is the first element see Diagnostician.getData
+		Object causer = data.next();
 		if (causer instanceof EObject) {
 			EObject ele = (EObject) causer;
-			// Persist only own marker
 			NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(ele);
 			if (nodeAdapter != null) {
-				CompositeNode parserNode = nodeAdapter.getParserNode();
+				AbstractNode parserNode = nodeAdapter.getParserNode();
+				// feature is the second element see Diagnostician.getData
+				Object feature = data.next();
+				EStructuralFeature structuralFeature = resolveStructuralFeature(ele, feature);
+				if (structuralFeature != null) {
+					for (LeafNode lNode : parserNode.getLeafNodes()) {
+						if (structuralFeature.getName().equals(lNode.getFeature())) {
+							parserNode = lNode;
+							break;
+						}
+					}
+				}
 				map.put(IMarker.LINE_NUMBER, Integer.valueOf(parserNode.getLine()));
 				int offset = parserNode.getOffset();
 				map.put(IMarker.CHAR_START, Integer.valueOf(offset));
@@ -158,6 +174,16 @@ public class XtextProblemMarkerCreator {
 		}
 		map.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 		return map;
+	}
+
+	private static EStructuralFeature resolveStructuralFeature(EObject ele, Object feature) {
+		if (feature instanceof String) {
+			return ele.eClass().getEStructuralFeature((String) feature);
+		}
+		else if (feature instanceof EStructuralFeature) {
+			return (EStructuralFeature) feature;
+		}
+		return null;
 	}
 
 }
