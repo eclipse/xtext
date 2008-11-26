@@ -5,22 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser;
-
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.testlanguages.FowlerDslTestLanguageStandaloneSetup;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
+package org.eclipse.xtext.testlanguages;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextParserBugsTest extends AbstractGeneratorTest {
-
-	public void testFirstTokenIsIllegal_254841() throws Exception {
-		with(FowlerDslTestLanguageStandaloneSetup.class);
-		String model = "firstToken";
-		CompositeNode rootNode = getRootNode(model);
-		assertNotNull(rootNode);
-	}
+public abstract class TreeTestLanguage {
 
 }
