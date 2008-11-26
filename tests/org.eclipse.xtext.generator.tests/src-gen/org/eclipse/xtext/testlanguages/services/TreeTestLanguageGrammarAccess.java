@@ -2,15 +2,15 @@
 Generated with Xtext
 */
 
-package org.eclipse.xtext.grammarinheritance.services;
+package org.eclipse.xtext.testlanguages.services;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+public class TreeTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 
-	private static final String CONCRETETESTLANGUAGE_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi";
+	private static final String TREETESTLANGUAGE_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi";
 	private static Grammar GRAMMAR = null;
 	
 	@SuppressWarnings("unused")
@@ -18,27 +18,23 @@ public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implem
 		if (GRAMMAR==null) {
 			// assert the XtextPackage implementation is loaded
 			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(ConcreteTestLanguageGrammarAccess.class.getClassLoader(),CONCRETETESTLANGUAGE_GRAMMAR_CP_URI);
+			GRAMMAR = (Grammar) loadGrammarFile(TreeTestLanguageGrammarAccess.class.getClassLoader(),TREETESTLANGUAGE_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;
 	}
 	
 	
-	public ParserRule pr_ConcreteParserRule() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0"),true); 
+	public ParserRule pr_Model() {
+		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.0"),true); 
 	}
 
-	public ParserRule pr_InheritedParserRule() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0"),true); 
+	public ParserRule pr_Node() {
+		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1"),true); 
 	}
 
 	
-	public LexerRule lr_REAL() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.1"),true); 
-	}
-
 	public LexerRule lr_ID() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.2"),true); 
+		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"),true); 
 	}
 
 	public LexerRule lr_INT() {

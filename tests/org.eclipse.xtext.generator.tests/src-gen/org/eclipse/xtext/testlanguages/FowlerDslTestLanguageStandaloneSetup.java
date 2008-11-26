@@ -11,9 +11,9 @@ import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.service.IServiceRegistrationFactory.IServiceRegistration;
 
-import org.eclipse.xtext.testlanguages.IFowlerDsl;
+import org.eclipse.xtext.testlanguages.IFowlerDslTestLanguage;
 
-public abstract class FowlerDslStandaloneSetup {
+public abstract class FowlerDslTestLanguageStandaloneSetup {
 
 	private static boolean isInitialized = false;
 
@@ -22,25 +22,25 @@ public abstract class FowlerDslStandaloneSetup {
 			// setup super language first
 			org.eclipse.xtext.builtin.XtextBuiltinStandaloneSetup.doSetup();
 			
-			for (IServiceRegistration reg :  new org.eclipse.xtext.testlanguages.FowlerDslRuntimeConfig().registrations()) {
+			for (IServiceRegistration reg :  new org.eclipse.xtext.testlanguages.FowlerDslTestLanguageRuntimeConfig().registrations()) {
 				ServiceRegistry.registerFactory(reg.scope(), reg.serviceFactory(), reg.priority());
 			}
 			
 			// register resource factory to EMF
-			IResourceFactory resourceFactory = new org.eclipse.xtext.testlanguages.services.FowlerDslResourceFactory();
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("fowlerdsl", resourceFactory);
+			IResourceFactory resourceFactory = new org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageResourceFactory();
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("fowlerdsltestlanguage", resourceFactory);
 			
 			
 			// initialize EPackages
 			
-				if (!EPackage.Registry.INSTANCE.containsKey("http://example.xtext.org/FowlerDsl")) {
+				if (!EPackage.Registry.INSTANCE.containsKey("http://example.xtext.org/FowlerDslTestLanguage")) {
 					EPackage fowlerdsl = EcoreUtil2.loadEPackage(
 							"classpath:/org/eclipse/xtext/testlanguages/fowlerdsl.ecore",
-							FowlerDslStandaloneSetup.class.getClassLoader());
+							FowlerDslTestLanguageStandaloneSetup.class.getClassLoader());
 					if (fowlerdsl == null)
 						throw new IllegalStateException(
 								"Couldn't load EPackage from 'classpath:/org/eclipse/xtext/testlanguages/fowlerdsl.ecore'");
-					EPackage.Registry.INSTANCE.put("http://example.xtext.org/FowlerDsl", fowlerdsl);
+					EPackage.Registry.INSTANCE.put("http://example.xtext.org/FowlerDslTestLanguage", fowlerdsl);
 				}
 			
 			isInitialized = true;
@@ -48,6 +48,6 @@ public abstract class FowlerDslStandaloneSetup {
 	}
 	
 	public static IServiceScope getServiceScope() {
-		return org.eclipse.xtext.testlanguages.IFowlerDsl.SCOPE;
+		return org.eclipse.xtext.testlanguages.IFowlerDslTestLanguage.SCOPE;
 	}
 }

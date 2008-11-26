@@ -8,9 +8,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class FowlerDslGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 
-	private static final String FOWLERDSL_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/testlanguages/FowlerDsl.xmi";
+	private static final String FOWLERDSLTESTLANGUAGE_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi";
 	private static Grammar GRAMMAR = null;
 	
 	@SuppressWarnings("unused")
@@ -18,30 +18,30 @@ public class FowlerDslGrammarAccess extends BaseEPackageAccess implements IGramm
 		if (GRAMMAR==null) {
 			// assert the XtextPackage implementation is loaded
 			XtextPackage xtextPackage = XtextPackage.eINSTANCE;
-			GRAMMAR = (Grammar) loadGrammarFile(FowlerDslGrammarAccess.class.getClassLoader(),FOWLERDSL_GRAMMAR_CP_URI);
+			GRAMMAR = (Grammar) loadGrammarFile(FowlerDslTestLanguageGrammarAccess.class.getClassLoader(),FOWLERDSLTESTLANGUAGE_GRAMMAR_CP_URI);
 		}
 		return GRAMMAR;
 	}
 	
 	
 	public ParserRule pr_Statemachine() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/FowlerDsl.xmi#//@rules.0"),true); 
+		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.0"),true); 
 	}
 
 	public ParserRule pr_Event() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/FowlerDsl.xmi#//@rules.1"),true); 
+		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.1"),true); 
 	}
 
 	public ParserRule pr_Command() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/FowlerDsl.xmi#//@rules.2"),true); 
+		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.2"),true); 
 	}
 
 	public ParserRule pr_State() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/FowlerDsl.xmi#//@rules.3"),true); 
+		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3"),true); 
 	}
 
 	public ParserRule pr_Transition() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/FowlerDsl.xmi#//@rules.4"),true); 
+		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.4"),true); 
 	}
 
 	

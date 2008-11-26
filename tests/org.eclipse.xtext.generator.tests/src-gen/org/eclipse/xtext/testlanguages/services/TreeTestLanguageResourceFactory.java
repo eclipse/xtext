@@ -10,10 +10,10 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.service.ServiceScopeFactory;
 
-public class FowlerDslResourceFactory implements IResourceFactory {
+public class TreeTestLanguageResourceFactory implements IResourceFactory {
 
 	public String[] getModelFileExtensions() {
-		return new String[] { "fowlerdsl" };
+		return new String[] { "treetestlanguage" };
 	}
 	
 	 /* (non-Javadoc)
@@ -21,7 +21,7 @@ public class FowlerDslResourceFactory implements IResourceFactory {
      */
     public Resource createResource(URI uri) {
         XtextResource resource = new XtextResource(uri);
-        ServiceRegistry.injectServices(ServiceScopeFactory.get("org.eclipse.xtext.testlanguages.FowlerDsl"), resource);
+        ServiceRegistry.injectServices(ServiceScopeFactory.get("org.eclipse.xtext.testlanguages.TreeTestLanguage"), resource);
         return resource;
     }
     

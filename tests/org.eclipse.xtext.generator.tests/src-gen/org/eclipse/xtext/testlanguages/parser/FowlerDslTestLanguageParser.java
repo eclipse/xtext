@@ -11,19 +11,19 @@ import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.service.Inject;
 
-import org.eclipse.xtext.testlanguages.parser.internal.InternalFowlerDslLexer;
-import org.eclipse.xtext.testlanguages.parser.internal.InternalFowlerDslParser;
+import org.eclipse.xtext.testlanguages.parser.internal.InternalFowlerDslTestLanguageLexer;
+import org.eclipse.xtext.testlanguages.parser.internal.InternalFowlerDslTestLanguageParser;
 
-public class FowlerDslParser extends org.eclipse.xtext.parser.AbstractParser {
+public class FowlerDslTestLanguageParser extends org.eclipse.xtext.parser.AbstractParser {
 	
 	@Inject 
     protected AntlrTokenDefProvider antlrTokenDefProvider;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in, IAstFactory factory) {
-		InternalFowlerDslLexer lexer = new InternalFowlerDslLexer(in);
+		InternalFowlerDslTestLanguageLexer lexer = new InternalFowlerDslTestLanguageLexer(in);
 		XtextTokenStream stream = new XtextTokenStream(lexer);
-		InternalFowlerDslParser parser = new InternalFowlerDslParser(
+		InternalFowlerDslTestLanguageParser parser = new InternalFowlerDslTestLanguageParser(
 				stream, factory, grammarAccess.getGrammar());
 		parser.setTokenTypeMap(antlrTokenDefProvider.getTokenDefMap());
 		try {

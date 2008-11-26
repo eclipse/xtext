@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="fowlerdsl" nsURI="http://example.xtext.org/FowlerDsl"/>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="fowlerdsl" nsURI="http://example.xtext.org/FowlerDslTestLanguage"/>
   <idElements>org</idElements>
   <idElements>eclipse</idElements>
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
-  <idElements>FowlerDsl</idElements>
+  <idElements>FowlerDslTestLanguage</idElements>
   <rules xsi:type="xtext:ParserRule" name="Statemachine">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">

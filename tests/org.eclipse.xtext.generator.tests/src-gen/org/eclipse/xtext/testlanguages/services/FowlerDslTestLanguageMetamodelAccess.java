@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 
-public class FowlerDslMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
+public class FowlerDslTestLanguageMetamodelAccess extends BaseEPackageAccess implements IMetamodelAccess {
 
 {
 
@@ -42,7 +42,7 @@ public class FowlerDslMetamodelAccess extends BaseEPackageAccess implements IMet
 	}
 
 	
-	protected static final String FOWLERDSL_NS_URI = "http://example.xtext.org/FowlerDsl";
+	protected static final String FOWLERDSL_NS_URI = "http://example.xtext.org/FowlerDslTestLanguage";
 	
 	protected EPackage getFowlerdslEPackage() {	
 		return EPackage.Registry.INSTANCE.getEPackage(FOWLERDSL_NS_URI);

@@ -261,7 +261,7 @@ protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#ID"); 
+			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal"); 
 			return new Solution(obj);
 		}
 		return null;
