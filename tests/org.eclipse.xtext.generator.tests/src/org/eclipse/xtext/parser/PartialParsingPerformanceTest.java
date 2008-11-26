@@ -10,8 +10,10 @@ package org.eclipse.xtext.parser;
 
 import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
+import org.eclipse.xtext.testlanguages.TreeTestLanguageStandaloneSetup;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -90,6 +92,22 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		CompositeNode rootNode = getRootNode(model);
 		IParseResult reparse = PartialParsingUtil.reparse(getParser(), rootNode, model.indexOf("Sven"), 4, "Peter");
 		assertEquals(1, reparse.getParseErrors().size());
+	}
+	
+	public void testBug_255015() throws Exception {
+		with(TreeTestLanguageStandaloneSetup.class);
+		StringBuffer modelBuffer = new StringBuffer(NUM_ELEMENTS * 128);
+		for(int i = 0; i < Math.sqrt(NUM_ELEMENTS) * 2; i++) {
+			modelBuffer.append("parent (\"Teststring\") {\n");
+			for (int j = 0; j < Math.sqrt(NUM_ELEMENTS) * 2; j++) {
+				modelBuffer.append("  child (\"Teststring\"){};");
+			}
+			modelBuffer.append("};");
+		}
+		String model = modelBuffer.toString();
+		XtextResource resource = getResourceFromString(model);
+		assertEquals(0, resource.getParseResult().getParseErrors().size());
+		
 	}
 	
 }
