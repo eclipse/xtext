@@ -13,9 +13,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.CrossReference;
@@ -32,6 +32,8 @@ import org.eclipse.xtext.service.Inject;
 
 public final class Linker implements ILinker {
 
+	private static final Logger log = Logger.getLogger(Linker.class);
+	
 	@Inject
 	private ILinkingService linkingService;
 
@@ -57,15 +59,16 @@ public final class Linker implements ILinker {
 
 	@SuppressWarnings("unchecked")
 	private List<XtextResource.Diagnostic> ensureIsLinked(EObject obj, LeafNode node, CrossReference ref) {
-		List<XtextResource.Diagnostic> brokenLinks = new ArrayList<XtextResource.Diagnostic>();
-		List<EObject> links = linkingService.getLinkedObjects(obj, ref, (LeafNode) node);
+		final List<XtextResource.Diagnostic> brokenLinks = new ArrayList<XtextResource.Diagnostic>();
+		final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());
+		final List<EObject> links = linkingService.getLinkedObjects(obj, eRef, (LeafNode) node);
 
 		if (links == null || links.size() == 0) {
 			brokenLinks.add(createError(node));
 			return brokenLinks;
 		}
 
-		EReference eRef = getReference(ref, obj.eClass());
+		
 		if (eRef == null) {
 			brokenLinks.add(new XtextLinkingDiagnostic(node, "Cannot find reference " + ref));
 			return brokenLinks;
@@ -97,14 +100,5 @@ public final class Linker implements ILinker {
 		}
 		return brokenLinks;
 	}
-
-	private EReference getReference(CrossReference ref, EClass class1) {
-		EList<EReference> references = class1.getEAllReferences();
-		String feature = GrammarUtil.containingAssignment(ref).getFeature();
-		for (EReference reference : references) {
-			if (!reference.isContainment() && reference.getName().equals(feature))
-				return reference;
-		}
-		return null;
-	}
+	
 }
