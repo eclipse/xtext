@@ -4,12 +4,17 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ *
  *******************************************************************************/
-package org.eclipse.xtext.testlanguages;
+ language org.eclipse.xtext.testlanguages.TreeTestLanguage
+ generate TreeTestLanguage "http://www.eclipse.org/2008/tmf/xtext/TreeTestLanguage" 
+ 
+Model:
+  (children+=Node)*;
 
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-public class FowlerDsl {
+Node:
+  name=ID
+  '(' attrib=STRING ')'
+  '{'(children+=Node)*'};';
 
-}
+

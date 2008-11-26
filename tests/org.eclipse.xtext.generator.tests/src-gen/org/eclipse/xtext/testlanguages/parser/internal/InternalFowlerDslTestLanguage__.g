@@ -1,4 +1,4 @@
-lexer grammar InternalFowlerDsl;
+lexer grammar InternalFowlerDslTestLanguage;
 @header {
 package org.eclipse.xtext.testlanguages.parser.internal;
 
@@ -17,25 +17,25 @@ T17 : '{' ;
 T18 : '}' ;
 T19 : '=>' ;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDsl.g" 391
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDslTestLanguage.g" 391
 RULE_ID : ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDsl.g" 393
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDslTestLanguage.g" 393
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDsl.g" 395
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDslTestLanguage.g" 395
 RULE_STRING : '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' |                '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'\'') )* '\'';
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDsl.g" 397
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDslTestLanguage.g" 397
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDsl.g" 399
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDslTestLanguage.g" 399
 RULE_SL_COMMENT : '//' ~('\n'|'\r')* ('\r'? '\n')? {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDsl.g" 401
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDslTestLanguage.g" 401
 RULE_WS : (' '|'\t'|'\r'|'\n')+ {$channel=HIDDEN;};
 
-// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDsl.g" 403
+// $ANTLR src "./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalFowlerDslTestLanguage.g" 403
 RULE_ANY_OTHER : .;
 
 

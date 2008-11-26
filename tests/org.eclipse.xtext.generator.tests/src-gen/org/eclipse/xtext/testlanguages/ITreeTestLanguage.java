@@ -6,7 +6,7 @@ package org.eclipse.xtext.testlanguages;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceScopeFactory;
 
-public interface IFowlerDsl {
+public interface ITreeTestLanguage {
 
 	/**
 	 * the unique identifier of this language. 
@@ -14,10 +14,10 @@ public interface IFowlerDsl {
 	 * Within ILanguageServices it is encouraged to use dependency injection instead
 	 * of directly accessing the ServiceRegistry 
 	 */
-	public static final String ID = "org.eclipse.xtext.testlanguages.FowlerDsl";
-	public static final String NAME = "FowlerDsl";
+	public static final String ID = "org.eclipse.xtext.testlanguages.TreeTestLanguage";
+	public static final String NAME = "TreeTestLanguage";
 	public static final String NAMESPACE = "org.eclipse.xtext.testlanguages";
-	public static final String[] FILE_EXTENSIONS = new String[]{"fowlerdsl"};
+	public static final String[] FILE_EXTENSIONS = new String[]{"treetestlanguage"};
 	public static final IServiceScope SCOPE = ServiceScopeFactory.createScope(ID, org.eclipse.xtext.builtin.IXtextBuiltin.SCOPE);
 	
 }

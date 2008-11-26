@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g 2008-11-06 21:59:05
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g 2008-11-25 13:05:28
 
 package org.eclipse.xtext.grammarinheritance.parser.internal; 
 
@@ -224,7 +224,7 @@ public class InternalConcreteTestLanguageParser extends AbstractAntlrParser {
             // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:119:61: (iv_ruleInheritedParserRule= ruleInheritedParserRule EOF )
             // ./src-gen/org/eclipse/xtext/grammarinheritance/parser/internal/InternalConcreteTestLanguage.g:120:2: iv_ruleInheritedParserRule= ruleInheritedParserRule EOF
             {
-             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#InheritedParserRule" /* xtext::ParserRule */, currentNode); 
+             currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
             pushFollow(FOLLOW_ruleInheritedParserRule_in_entryRuleInheritedParserRule233);
             iv_ruleInheritedParserRule=ruleInheritedParserRule();
             _fsp--;
@@ -272,7 +272,7 @@ public class InternalConcreteTestLanguageParser extends AbstractAntlrParser {
             lv_name=(Token)input.LT(1);
             match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInheritedParserRule298); 
              
-                createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#ID" /* xtext::RuleCall */, "name"); 
+                createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
 
             	        if (current==null) {

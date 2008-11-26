@@ -7,14 +7,14 @@ import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
 /**
  * used to register components to be used at runtime.
  */
-public abstract class AbstractFowlerDslRuntimeConfig extends AbstractServiceRegistrationFactory {
+public abstract class AbstractFowlerDslTestLanguageRuntimeConfig extends AbstractServiceRegistrationFactory {
 
 	protected Class<? extends org.eclipse.xtext.IGrammarAccess> getIGrammarAccess() {
-		return org.eclipse.xtext.testlanguages.services.FowlerDslGrammarAccess.class;
+		return org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.IMetamodelAccess> getIMetamodelAccess() {
-		return org.eclipse.xtext.testlanguages.services.FowlerDslMetamodelAccess.class;
+		return org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageMetamodelAccess.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.IAstFactory> getIAstFactory() {
@@ -22,19 +22,19 @@ public abstract class AbstractFowlerDslRuntimeConfig extends AbstractServiceRegi
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.IParser> getIParser() {
-		return org.eclipse.xtext.testlanguages.parser.FowlerDslParser.class;
+		return org.eclipse.xtext.testlanguages.parser.FowlerDslTestLanguageParser.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> getIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.testlanguages.parser.FowlerDslAntlrTokenFileProvider.class;
+		return org.eclipse.xtext.testlanguages.parser.FowlerDslTestLanguageAntlrTokenFileProvider.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.resource.IResourceFactory> getIResourceFactory() {
-		return org.eclipse.xtext.testlanguages.services.FowlerDslResourceFactory.class;
+		return org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageResourceFactory.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> getIParseTreeConstructor() {
-		return org.eclipse.xtext.testlanguages.parsetree.reconstr.FowlerDslParseTreeConstructor.class;
+		return org.eclipse.xtext.testlanguages.parsetree.reconstr.FowlerDslTestLanguageParseTreeConstructor.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.ITokenSerializer> getITokenSerializer() {
@@ -46,12 +46,12 @@ public abstract class AbstractFowlerDslRuntimeConfig extends AbstractServiceRegi
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.antlr.Lexer> getLexer() {
-		return org.eclipse.xtext.testlanguages.parser.internal.InternalFowlerDslLexer.class;
+		return org.eclipse.xtext.testlanguages.parser.internal.InternalFowlerDslTestLanguageLexer.class;
 	}
 		
 	
 	public Set<IServiceRegistration> registrations() {
-		return scope(org.eclipse.xtext.testlanguages.IFowlerDsl.SCOPE)
+		return scope(org.eclipse.xtext.testlanguages.IFowlerDslTestLanguage.SCOPE)
 		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
 		.with(org.eclipse.xtext.IMetamodelAccess.class, getIMetamodelAccess())
 		.with(org.eclipse.xtext.parser.IAstFactory.class, getIAstFactory())

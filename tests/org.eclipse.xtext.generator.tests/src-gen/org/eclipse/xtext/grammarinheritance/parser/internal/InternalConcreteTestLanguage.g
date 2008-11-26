@@ -117,7 +117,7 @@ ruleConcreteParserRule returns [EObject current=null]
 
 // Entry rule entryRuleInheritedParserRule
 entryRuleInheritedParserRule returns [EObject current=null] :
-	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#InheritedParserRule" /* xtext::ParserRule */, currentNode); }
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
 	 iv_ruleInheritedParserRule=ruleInheritedParserRule 
 	 { $current=$iv_ruleInheritedParserRule.current; } 
 	 EOF 
@@ -135,7 +135,7 @@ ruleInheritedParserRule returns [EObject current=null]
 	
 	    lv_name=RULE_ID
     { 
-    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#ID" /* xtext::RuleCall */, "name"); 
+    createLeafNode("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
     }
  
 	    {
