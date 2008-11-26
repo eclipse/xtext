@@ -1,17 +1,19 @@
 package org.eclipse.xtext.crossrefs;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.impl.XtextBuiltinLinkingService;
 import org.eclipse.xtext.crossrefs.services.LangAGrammarAccess;
+import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -33,8 +35,10 @@ public class CrossRefTest extends AbstractGeneratorTest {
 		assertWithXtend("types.first()", "types.first().extends.extends", model);
 	}
 
-	public void testGetLinkCandidates01() throws Exception {
-		EObject model = getModel("type TypeA extends TypeB type TypeB extends TypeA type AnotherType extends TypeA");
+	public void testGetLinkedObjects() throws Exception {
+		XtextResource r = getResourceFromString("type TypeA extends TypeB type TypeB extends TypeA type AnotherType extends TypeA");
+		EObject model = r.getParseResult().getRootASTElement();
+		LeafNode leaf = (LeafNode) NodeUtil.findLeafNodeAtOffset(r.getParseResult().getRootNode(), 6);
 
 		assertWithXtend("3", "types.size", model);
 
@@ -42,28 +46,9 @@ public class CrossRefTest extends AbstractGeneratorTest {
 		ParserRule prType = new LangAGrammarAccess().pr_Type();
 		Assignment asExtends = (Assignment) ((Group) prType.getAlternatives()).getAbstractTokens().get(1);
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
+		EReference ref = GrammarUtil.getReference(xref, context.eClass());
 
-		assertEquals(3, linkingService.doGetLinkedObjects(context, xref, "", false).size());
-		assertEquals(2, linkingService.doGetLinkedObjects(context, xref, "Type", false).size());
-		assertEquals(1, linkingService.doGetLinkedObjects(context, xref, "TypeA", false).size());
-		assertEquals(0, linkingService.doGetLinkedObjects(context, xref, "TypeC", false).size());
+		assertEquals(1, linkingService.getLinkedObjects(context, ref, leaf).size());
 	}
 
-	public void testGetLinkCandidates02() throws Exception {
-		EObject model = getModel("type TypeA extends TypeB type TypeB extends TypeA type AnotherType extends TypeA");
-
-		EObject context = (EObject) invokeWithXtend("types.first()", model);
-		ParserRule prType = new LangAGrammarAccess().pr_Type();
-		Assignment asExtends = (Assignment) ((Group) prType.getAlternatives()).getAbstractTokens().get(1);
-		CrossReference xref = (CrossReference) asExtends.getTerminal();
-
-		List<EObject> candidates = linkingService.getLinkCandidates(context, xref, "TypeA");
-		assertEquals(1, candidates.size());
-		EObject candidate = candidates.get(0);
-		EStructuralFeature feature = candidate.eClass().getEStructuralFeature("name");
-		assertNotNull(feature);
-		Object name = candidate.eGet(feature);
-		assertNotNull(name);
-		assertEquals("TypeA", name);
-	}
 }

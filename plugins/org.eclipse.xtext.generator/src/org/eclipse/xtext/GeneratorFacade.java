@@ -244,6 +244,12 @@ public class GeneratorFacade {
 			contentAssistProcessor.setGenClassFQName("org.eclipse.xtext.ui.common.editor.codecompletion.DefaultContentAssistProcessor");
 			contentAssistProcessor.setUiService(true);
 			genModel.getServices().add(contentAssistProcessor);
+			
+			GenService linkingCandidatesService = XtextgenFactory.eINSTANCE.createGenService();
+			linkingCandidatesService.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.codecompletion.ILinkingCandidatesService");
+			linkingCandidatesService.setGenClassFQName("org.eclipse.xtext.ui.common.editor.codecompletion.impl.DefaultLinkingCandidatesService");
+			linkingCandidatesService.setUiService(true);
+			genModel.getServices().add(linkingCandidatesService);
 
 		}
 
