@@ -48,9 +48,11 @@ public final class XtextMarkerManager {
 	private static final void run(WorkspaceModifyOperation workspaceModifyOperation, IProgressMonitor monitor) {
 		try {
 			workspaceModifyOperation.run(monitor);
-		} catch (InvocationTargetException e) {
+		}
+		catch (InvocationTargetException e) {
 			log.error("Could not create marker.", e);
-		} catch (InterruptedException e) {
+		}
+		catch (InterruptedException e) {
 			log.error("Could not create marker.", e);
 		}
 	}
@@ -79,8 +81,8 @@ public final class XtextMarkerManager {
 	 *            a map contains a List of marker attributes by type
 	 * @param monitor
 	 */
-	public static final void createMarker(final IResource resource,
-			final List<Map<String, Object>> markerAttributes, IProgressMonitor monitor) {
+	public static final void createMarker(final IResource resource, final List<Map<String, Object>> markerAttributes,
+			IProgressMonitor monitor) {
 		checkResource(resource);
 		run(new WorkspaceModifyOperation(ResourcesPlugin.getWorkspace().getRuleFactory().markerRule(resource)) {
 			@Override
@@ -88,7 +90,12 @@ public final class XtextMarkerManager {
 					InterruptedException {
 				for (Map<String, Object> map : markerAttributes) {
 					IMarker marker = resource.createMarker(MARKER_ID);
-					map.put(IMarker.LOCATION, resource.getFullPath().toString());
+					Object lNr = map.get(IMarker.LINE_NUMBER);
+					String lineNR = "";
+					if (lNr != null) {
+						lineNR = "line: " + lNr + " ";
+					}
+					map.put(IMarker.LOCATION, lineNR + resource.getFullPath().toString());
 					marker.setAttributes(map);
 				}
 			}
