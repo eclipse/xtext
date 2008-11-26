@@ -1,5 +1,5 @@
-language org.eclipse.xtext.testlanguages.FowlerDsl
-generate fowlerdsl "http://example.xtext.org/FowlerDsl"
+language org.eclipse.xtext.testlanguages.FowlerDslTestLanguage
+generate fowlerdsl "http://example.xtext.org/FowlerDslTestLanguage"
 
 Statemachine :
   'events'
