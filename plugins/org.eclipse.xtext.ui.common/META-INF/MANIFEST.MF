@@ -8,6 +8,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.log4j;bundle-version="1.2.15"
 Export-Package: org.eclipse.xtext.ui.common.editor.codecompletion,
+ org.eclipse.xtext.ui.common.editor.codecompletion.impl,
  org.eclipse.xtext.ui.common.editor.folding,
  org.eclipse.xtext.ui.common.editor.formatting,
  org.eclipse.xtext.ui.common.editor.hover,

@@ -218,7 +218,6 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 		return Collections.singletonList(createCompletionProposal(assignment,model,"CustomTypeParserRuleName", offset));
 	}
     
-    
 	public List<? extends ICompletionProposal> completeReferenceModelCustomType(RuleCall ruleCall, EObject model, String prefix,
 			IDocument doc, int offset) {
 		if (logger.isDebugEnabled()) {
@@ -227,7 +226,6 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 		}
 		return Collections.emptyList();
 	}
-    
     @Override
 	protected String getDefaultImageFilePath() {
 		return "icons/editor.gif";
@@ -237,5 +235,4 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 	protected String getPluginId() {
 		return UI_PLUGIN_ID;
 	}
-    
 }

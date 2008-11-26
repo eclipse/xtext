@@ -22,6 +22,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testlanguages.ReferenceGrammar;
+import org.eclipse.xtext.testlanguages.TreeTestLanguage;
 
 /**
  * Generates all required testgrammars with UI configuration for this test project.
@@ -41,7 +42,7 @@ public class GenerateAllTestGrammarsWithUiConfig {
 
 	private static Logger logger = Logger.getLogger(GenerateAllTestGrammarsWithUiConfig.class);
 
-	private final static Class<?>[] testClasses = new Class[] { ReferenceGrammar.class };
+	private final static Class<?>[] testClasses = new Class[] { ReferenceGrammar.class, TreeTestLanguage.class };
 	/**
 	 * @return the testclasses
 	 */
