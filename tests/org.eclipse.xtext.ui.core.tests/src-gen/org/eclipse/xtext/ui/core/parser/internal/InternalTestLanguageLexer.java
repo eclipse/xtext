@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g 2008-11-03 13:20:14
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g 2008-11-24 19:32:02
 
 package org.eclipse.xtext.ui.core.parser.internal;
 
@@ -13,16 +13,16 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalTestLanguageLexer extends Lexer {
-    public static final int RULE_ID=4;
-    public static final int RULE_STRING=6;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=5;
-    public static final int T11=11;
-    public static final int RULE_WS=9;
-    public static final int Tokens=12;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
     public static final int RULE_ML_COMMENT=7;
+    public static final int RULE_ID=4;
+    public static final int RULE_WS=9;
+    public static final int T11=11;
+    public static final int EOF=-1;
+    public static final int RULE_INT=5;
+    public static final int RULE_STRING=6;
+    public static final int Tokens=12;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_SL_COMMENT=8;
     public InternalTestLanguageLexer() {;} 
     public InternalTestLanguageLexer(CharStream input) {
         super(input);
@@ -625,14 +625,14 @@ public class InternalTestLanguageLexer extends Lexer {
         }
         else if ( (LA12_0=='/') ) {
             switch ( input.LA(2) ) {
-            case '*':
-                {
-                alt12=5;
-                }
-                break;
             case '/':
                 {
                 alt12=6;
+                }
+                break;
+            case '*':
+                {
+                alt12=5;
                 }
                 break;
             default:

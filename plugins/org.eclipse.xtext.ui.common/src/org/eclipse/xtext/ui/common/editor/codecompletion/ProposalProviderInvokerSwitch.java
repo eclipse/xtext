@@ -28,6 +28,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 
 /**
@@ -254,7 +255,7 @@ public class ProposalProviderInvokerSwitch extends XtextSwitch<List<ICompletionP
 	}
 
 	private final String firstLetterCapitalized(String name) {
-		return name.substring(0, 1).toUpperCase() + name.substring(1);
+		return Strings.toFirstUpper(name);
 	}
 
 }

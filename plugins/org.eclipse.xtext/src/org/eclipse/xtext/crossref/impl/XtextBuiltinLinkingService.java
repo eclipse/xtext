@@ -14,10 +14,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.CrossReference;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.crossref.ILinkingNameService;
 import org.eclipse.xtext.crossref.ILinkingScopeService;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -33,26 +31,25 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 	@Inject
 	private ILinkingScopeService linkingScopeService;
 
-	@Inject
-	private ILinkingNameService linkingNameService;
+	private SimpleAttributeResolver<String> nameResolver;
 
-	private List<EObject> getObjectsInScope(EObject context, CrossReference reference) {
+	public XtextBuiltinLinkingService() {
+		this.nameResolver = SimpleAttributeResolver.newResolver(String.class, "name");
+	}
+
+	private List<EObject> getObjectsInScope(EObject context, EReference reference) {
 		if (linkingScopeService == null)
 			throw new IllegalStateException("LinkingScopeService must not be null.");
 		return linkingScopeService.getObjectsInScope(context, reference);
 	}
 
-	public List<EObject> getLinkedObjects(EObject context, CrossReference ref, LeafNode text) {
-		return doGetLinkedObjects(context, ref, text.getText(), true);
-	}
-
-	public List<EObject> doGetLinkedObjects(EObject context, CrossReference ref, String text, boolean exactMatch) {
-		final EClass requiredType = GrammarUtil.getReferencedEClass(context.eResource(), ref);
+	public List<EObject> getLinkedObjects(EObject context, EReference ref, LeafNode text) {
+		final EClass requiredType = ref.getEReferenceType();
 		if (requiredType == null)
 			return Collections.<EObject> emptyList();
 
 		final List<EObject> scope = getObjectsInScope(context, ref);
-		final Iterator<EObject> iter = linkingNameService.getMatches(scope, ref, text, exactMatch).iterator();
+		final Iterator<EObject> iter = nameResolver.getMatches(scope, text.getText()).iterator();
 		final List<EObject> result = new ArrayList<EObject>();
 		while (iter.hasNext()) {
 			final EObject candidate = iter.next();
@@ -62,8 +59,8 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 		return result;
 	}
 
-	public List<EObject> getLinkCandidates(EObject context, CrossReference ref, String textFragment) {
-		return doGetLinkedObjects(context, ref, textFragment.trim(), false);
+	public String getLinkText(EObject object, EReference reference, EObject context) {
+		return this.nameResolver.getValue(object);
 	}
 
 }

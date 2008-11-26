@@ -26,13 +26,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builtin.IXtextBuiltin;
 import org.eclipse.xtext.util.Strings;
 
 /**
- * 
  * @author Jan Koehnlein
  * @author Sven Efftinge
  * @author Heiko Behrens
@@ -375,6 +375,16 @@ public class GrammarUtil {
 			EClassifier classifier = ePackage.getEClassifier(ref.getType().getName());
 			if (classifier instanceof EClass)
 				return (EClass) classifier;
+		}
+		return null;
+	}
+	
+	public static EReference getReference(CrossReference ref, EClass referenceOwner) {
+		final List<EReference> references = referenceOwner.getEAllReferences();
+		final String feature = GrammarUtil.containingAssignment(ref).getFeature();
+		for (EReference reference : references) {
+			if (!reference.isContainment() && reference.getName().equals(feature))
+				return reference;
 		}
 		return null;
 	}

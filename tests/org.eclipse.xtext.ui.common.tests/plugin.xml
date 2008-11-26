@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+	<extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.xtext.ui.core.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="treetestlanguage"
+            id="org.eclipse.xtext.testlanguages.TreeTestLanguage"
+            name="TreeTestLanguage Editor">
+      </editor>
+   </extension>
+ <extension
+       point="org.eclipse.xtext.service.ui.serviceRegistrationFactory">
+    <serviceRegistrationFactory
+          class="org.eclipse.xtext.testlanguages.TreeTestLanguageUiConfig"/>
+ </extension>
+ <extension
+         point="org.eclipse.ui.preferencePages">
+		<page
+			class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage/org.eclipse.xtext.testlanguages.TreeTestLanguage"
+			id="org.eclipse.xtext.testlanguages.TreeTestLanguage"
+			name="TreeTestLanguage">
+			<keywordReference
+				id="..ui.keyword_TreeTestLanguage">
+			</keywordReference>
+		</page>
+		<page
+		    category="org.eclipse.xtext.testlanguages.TreeTestLanguage"
+		    class="org.eclipse.xtext.service.ui.ServiceInjectingExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.EditorPreferencePage/org.eclipse.xtext.testlanguages.TreeTestLanguage"
+		    id="org.eclipse.xtext.testlanguages.TreeTestLanguage.editor"
+		    name="Editor">
+		    	<keywordReference 
+           			id="org.eclipse.xtext.keyword.editor">
+     			</keywordReference>
+		</page>
+      </extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="..ui.keyword_TreeTestLanguage"
+			label="TreeTestLanguage">
+		</keyword>
+		<keyword
+            id="org.eclipse.xtext.testlanguages.TreeTestLanguage.tasktags"
+            label="Task Tags">
+        </keyword>
+	</extension>
+</plugin>

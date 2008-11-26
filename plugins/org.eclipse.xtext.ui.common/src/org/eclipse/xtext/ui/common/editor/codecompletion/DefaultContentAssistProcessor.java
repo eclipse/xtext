@@ -7,8 +7,6 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.IDocument;
@@ -190,29 +188,17 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 	private boolean isLinked(AbstractNode lastCompleteNode) {
 		EObject semanticModel = NodeUtil.getNearestSemanticObject(lastCompleteNode);
 		CrossReference crossReference = (CrossReference) lastCompleteNode.getGrammarElement();
-		EReference eReference = getReference(crossReference, semanticModel.eClass());
+		EReference eReference = GrammarUtil.getReference(crossReference, semanticModel.eClass());
 
 		List<EObject> referencedObjects = EcoreUtil2.getAllReferencedObjects(semanticModel, eReference);
 
 		if (referencedObjects.isEmpty())
 			return false;
 		else {
-			List<EObject> linkCandidates = linkingService.getLinkedObjects(semanticModel, crossReference,
+			List<EObject> linkCandidates = linkingService.getLinkedObjects(semanticModel, eReference,
 					(LeafNode) lastCompleteNode);
 			return !linkCandidates.isEmpty() && referencedObjects.containsAll(linkCandidates);
 		}
-	}
-
-	private EReference getReference(CrossReference ref, EClass class1) {
-		EList<EReference> references = class1.getEAllReferences();
-
-		String feature = GrammarUtil.containingAssignment(ref).getFeature();
-
-		for (EReference reference : references) {
-			if (!reference.isContainment() && reference.getName().equals(feature))
-				return reference;
-		}
-		return null;
 	}
 
 }

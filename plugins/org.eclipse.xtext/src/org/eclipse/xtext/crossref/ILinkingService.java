@@ -10,7 +10,7 @@ package org.eclipse.xtext.crossref;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.CrossReference;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.ILanguageService;
 
@@ -23,11 +23,15 @@ public interface ILinkingService extends ILanguageService {
 	/**
 	 * Returns all EObjects referenced by the given link text in the given context.
 	 */
-	List<EObject> getLinkedObjects(EObject context, CrossReference ref, LeafNode text);
+	List<EObject> getLinkedObjects(EObject context, EReference reference, LeafNode text);
 
 	/**
-	 * Returns all possible link matches of a partially provided link text. This could be the starting of a link text or
-	 * in case of nested namespaces the fragment.
+	 * Returns the textual representation of a given object as it would be serialized in the given context.
+	 * 
+	 * @param object
+	 * @param reference
+	 * @param context
+	 * @return the text representation.
 	 */
-	List<EObject> getLinkCandidates(EObject context, CrossReference ref, String textFragment);
+	String getLinkText(EObject object, EReference reference, EObject context);
 }

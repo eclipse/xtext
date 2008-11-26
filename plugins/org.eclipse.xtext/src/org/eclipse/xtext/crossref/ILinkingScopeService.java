@@ -10,11 +10,10 @@ package org.eclipse.xtext.crossref;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.CrossReference;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.service.ILanguageService;
 
 /**
- * @todo Change type of reference from CrossReference to EReference
  * @todo Find a proper way to test these Services in the life cycle (reference parameter is not tested, currently) 
  * @author Heiko Behrens - Initial contribution and API
  */
@@ -28,8 +27,8 @@ public interface ILinkingScopeService extends ILanguageService {
 	 * to influence the scope. Type filtering is done by the linker.
 	 *  
 	 * @param context meta model element that defines the scope 
-	 * @param reference cross reference to have fine grained access for visibility  
+	 * @param reference reference to have fine grained access for visibility  
 	 * @return List of EObjects in the given scope
 	 */
-	public List<EObject> getObjectsInScope(EObject context, CrossReference reference);
+	public List<EObject> getObjectsInScope(EObject context, EReference reference);
 }

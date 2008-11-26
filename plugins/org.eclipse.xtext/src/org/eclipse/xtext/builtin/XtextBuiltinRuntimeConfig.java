@@ -15,12 +15,10 @@ import org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.IFragmentProvider;
 import org.eclipse.xtext.crossref.ILinker;
-import org.eclipse.xtext.crossref.ILinkingNameService;
 import org.eclipse.xtext.crossref.ILinkingScopeService;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.IURIChecker;
 import org.eclipse.xtext.crossref.impl.DefaultRuntimeURIChecker;
-import org.eclipse.xtext.crossref.impl.XtextBuiltInLinkingNameService;
 import org.eclipse.xtext.crossref.impl.XtextBuiltinFragmentProvider;
 import org.eclipse.xtext.crossref.impl.XtextBuiltinLinkingScopeService;
 import org.eclipse.xtext.crossref.impl.XtextBuiltinLinkingService;
@@ -45,16 +43,11 @@ public class XtextBuiltinRuntimeConfig extends AbstractServiceRegistrationFactor
 				.with(ILinker.class, getILinker())
 				.with(ILinkingService.class, getILinkingService())
 				.with(ILinkingScopeService.class, getILinkingScopeService())
-				.with(ILinkingNameService.class, getILinkingNameService())
 				.with(IURIChecker.class, getIURIChecker())
 				.with(IFragmentProvider.class, getIFragmentProvider())
 				.with(AntlrTokenDefProvider.class)
 				.with(DefaultCrossReferenceSerializer.class)
 				.registrations();
-	}
-
-	protected Class<? extends ILinkingNameService> getILinkingNameService() {
-		return XtextBuiltInLinkingNameService.class;
 	}
 
 	protected Class<? extends IFragmentProvider> getIFragmentProvider() {

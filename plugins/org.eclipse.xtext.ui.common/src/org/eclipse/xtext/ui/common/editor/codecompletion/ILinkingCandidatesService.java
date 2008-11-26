@@ -5,26 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.crossref;
+package org.eclipse.xtext.ui.common.editor.codecompletion;
+
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.service.ILanguageService;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ILinkingNameService extends ILanguageService {
+public interface ILinkingCandidatesService {
 
 	/**
-	 * Returns the text representation of a given object as it would be serialized in the given reference.
-	 * 
-	 * @param object
-	 * @param reference
-	 * @return the text representation.
+	 * Returns all EObjects, that can be referenced in the given context.
 	 */
-	String getText(EObject object, CrossReference reference);
-
-	Iterable<EObject> getMatches(Iterable<EObject> candidates, CrossReference reference, String text, boolean exactMatch);
+	List<EObject> getLinkingCandidates(EObject context, EReference reference);
+	
+	
 
 }

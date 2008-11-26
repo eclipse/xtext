@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
@@ -21,8 +22,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.crossref.ILinkingNameService;
-import org.eclipse.xtext.crossref.ILinkingService;
+import org.eclipse.xtext.crossref.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -48,10 +48,17 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	protected final Logger logger = Logger.getLogger(getClass());
 
 	@Inject
-	protected ILinkingService linkingService;
+	protected ILinkingCandidatesService linkingCandidatesService;
 
-	@Inject
-	protected ILinkingNameService linkingNameService;
+	protected SimpleAttributeResolver<String> nameResolver;
+	
+	protected SimpleAttributeResolver<String> createNameResolver() {
+		return SimpleAttributeResolver.newResolver(String.class, "name");
+	}
+	
+	public AbstractProposalProvider() {
+		nameResolver = createNameResolver();
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -178,15 +185,20 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
-		if (linkingService != null) {
-			List<EObject> candidates = linkingService.getLinkCandidates(model, crossReference, prefix);
+		if (linkingCandidatesService != null) {
+			final EReference ref = GrammarUtil.getReference(crossReference, model.eClass());
+			final List<EObject> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
 			for (EObject candidate : candidates) {
-				completionProposalList.add(createCompletionProposal(crossReference, model, linkingNameService.getText(
-						candidate, crossReference), offset));
+				completionProposalList.add(createCompletionProposal(crossReference, model, getLabel(
+						candidate, ref, model), offset));
 			}
 		}
 
 		return completionProposalList;
+	}
+	
+	protected String getLabel(EObject candidate, EReference ref, EObject context) {
+		return nameResolver.getValue(candidate);
 	}
 
 	/**

@@ -5,13 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.crossref.impl;
-
-import org.eclipse.xtext.crossref.ILinkingNameService;
+package org.eclipse.xtext.ui.common.editor.codecompletion;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractLinkingNameService implements ILinkingNameService {
+public abstract class AbstractLinkingCandidatesService implements ILinkingCandidatesService {
 
 }
