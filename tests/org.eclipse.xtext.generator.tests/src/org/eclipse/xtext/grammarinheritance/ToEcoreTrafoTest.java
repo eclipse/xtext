@@ -10,11 +10,11 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
@@ -22,7 +22,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 	private static final Logger logger = Logger.getLogger(ToEcoreTrafoTest.class);
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -32,10 +32,10 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 	public void testAbstractLanguageToMetamodel() throws Exception {
 		XtextResource r = getResource("classpath:/" + AbstractTestLanguage.class.getName().replace('.', '/') + ".xtext");
 		Grammar element = (Grammar) r.getParseResult().getRootASTElement();
-		if (!r.getParseResult().getParseErrors().isEmpty()) {
-			List<SyntaxError> errors = r.getParseResult().getParseErrors();
-			for (SyntaxError syntaxError : errors) {
-				logger.debug(syntaxError.getMessage() + " - " + syntaxError.getNode().getLine());
+		if (!r.getErrors().isEmpty()) {
+			EList<Diagnostic> errors = r.getErrors();
+			for (Diagnostic syntaxError : errors) {
+				logger.debug(syntaxError.getMessage() + " - " + syntaxError.getLine());
 			}
 			fail();
 		}

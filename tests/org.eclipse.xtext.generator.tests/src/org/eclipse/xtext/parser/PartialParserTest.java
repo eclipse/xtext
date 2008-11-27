@@ -57,9 +57,10 @@ public class PartialParserTest extends AbstractPartialParserTest {
 	public void testErrorMarkers() throws Exception {
 		with(ReferenceGrammarStandaloneSetup.class);
 		String model = "spielplatz 1 {kind (k 1}"; // model contains an error
-													// due to missing ) at idx
-													// 23
+		// due to missing ) at idx
+		// 23
 		XtextResource resource = getResourceFromString(model);
+		assertEquals(1, resource.getErrors().size());
 		assertEquals(1, resource.getParseResult().getParseErrors().size());
 		CompositeNode rootNode = resource.getParseResult().getRootNode();
 		AbstractNode leaf = NodeUtil.findLeafNodeAtOffset(rootNode, 24);
@@ -72,7 +73,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		String fixedModel = rootNode.serialize();
 		assertEquals("serialized model as expected", expectedFixedModel, fixedModel);
 		resource = getResourceFromString(fixedModel);
-		assertEquals("full reparse is fine", 0, resource.getParseResult().getParseErrors().size());
+		assertEquals("full reparse is fine", 0, resource.getErrors().size());
 		assertTrue("partial reparse is fine", reparse.getParseErrors() == null || reparse.getParseErrors().isEmpty());
 	}
 
