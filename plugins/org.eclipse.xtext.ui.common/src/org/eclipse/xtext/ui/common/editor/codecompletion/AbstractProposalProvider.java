@@ -244,23 +244,47 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 				if (model != null) {
 
-					CompositeNode parserNode = NodeUtil.getRootNode(model);
-
-					LeafNode currentLeafNode = ParseTreeUtil.getCurrentNodeByOffset(parserNode, offset);
-
-					boolean isCursorAtTheEndOfTheLastElement = offset == (currentLeafNode.getTotalOffset() + currentLeafNode
-							.getTotalLength());
-
-					if (isCursorAtTheEndOfTheLastElement && completionProposal instanceof XtextCompletionProposal) {
+					// filter by prefix 
+					// TODO: this works only if we have access to the corresponding grammarelement 
+					if (completionProposal instanceof XtextCompletionProposal) {
 
 						XtextCompletionProposal xtextCompletionProposal = (XtextCompletionProposal) completionProposal;
 
-						AbstractElement abstractElement = xtextCompletionProposal.getAbstractElement();
+						AbstractElement abstractElement = null;
 
-						EObject grammarElement = currentLeafNode.getGrammarElement();
-						// at the end of the last element we want to filter only the CompletionProposal for the same grammar element
-						if (((isCursorAtTheEndOfTheLastElement && abstractElement.equals(grammarElement)) || !isCursorAtTheEndOfTheLastElement)
-								&& !completionProposal.getDisplayString().startsWith(currentLeafNode.getText())) {
+						if (xtextCompletionProposal.getAbstractElement() instanceof Keyword ||
+							xtextCompletionProposal.getAbstractElement() instanceof CrossReference) {
+							abstractElement = GrammarUtil.containingAssignment(xtextCompletionProposal.getAbstractElement());
+						} 
+						
+						if (null==abstractElement) {
+							abstractElement = xtextCompletionProposal.getAbstractElement();
+						}
+						
+						CompositeNode rootNode = NodeUtil.getRootNode(model);
+
+						AbstractNode lastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
+
+						LeafNode currentLeafNode = ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
+
+						EObject grammarElement =  GrammarUtil.containingAssignment(currentLeafNode.getGrammarElement());
+						
+						if (null==grammarElement) {
+							grammarElement = currentLeafNode.getGrammarElement();
+						}
+
+						boolean atTheEndOfTheLastCompleteNode = currentLeafNode == lastCompleteNode;
+						
+						boolean candidateToCompare 			= false;
+						
+						// means if we are at the end of a complete token we want to filter only equal grammarelements (not the 'next' ones)
+						if (atTheEndOfTheLastCompleteNode && abstractElement.equals(grammarElement)) {
+							candidateToCompare = true;
+						} else if (!atTheEndOfTheLastCompleteNode ) {
+							candidateToCompare = true;
+						}
+						
+						if ( candidateToCompare && (!"".equals(prefix.trim()) && !completionProposal.getDisplayString().toUpperCase().startsWith(prefix.toUpperCase()))) {
 							if (logger.isDebugEnabled()) {
 								logger.debug("filter completionProposal '" + completionProposal + "'");
 							}

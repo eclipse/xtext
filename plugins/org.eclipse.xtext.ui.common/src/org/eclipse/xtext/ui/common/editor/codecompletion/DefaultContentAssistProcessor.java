@@ -18,10 +18,12 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -107,9 +109,15 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 				 * 'right-to-left-backtracking' cases (e.g. for keyword 'kind' kind>|< |=cursorpos)
 				 */
 				else if (currentLeafNode == lastCompleteNode) {
-					nextValidElementSet = ParseTreeUtil
-							.getElementSetValidFromOffset(rootNode, lastCompleteNode, offset);
-					nextValidElementSet.add((AbstractElement) lastCompleteNode.getGrammarElement());
+					Assignment containingAssignment = GrammarUtil.containingAssignment(lastCompleteNode.getGrammarElement());
+					
+					if (lastCompleteNode.getGrammarElement() instanceof RuleCall && containingAssignment!=null) {
+						nextValidElementSet.add(containingAssignment);
+						nextValidElementSet.addAll(ParseTreeUtil.getElementSetValidFromOffset(rootNode, lastCompleteNode, offset));
+					} else {
+						nextValidElementSet = ParseTreeUtil.getElementSetValidFromOffset(rootNode, lastCompleteNode, offset);
+						nextValidElementSet.add((AbstractElement) lastCompleteNode.getGrammarElement());
+					}
 				}
 				else {
 					nextValidElementSet = ParseTreeUtil

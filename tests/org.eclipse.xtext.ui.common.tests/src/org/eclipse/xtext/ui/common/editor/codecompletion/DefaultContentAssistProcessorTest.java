@@ -13,30 +13,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.codecompletion;
 
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.reset;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarUiConfig;
 import org.eclipse.xtext.ui.common.AbstractUiTest;
-import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 
 
 /**
@@ -45,144 +24,72 @@ import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
  * @author Michael Clay - Initial contribution and API
  * @see org.eclipse.xtext.ui.common.editor.codecompletion.DefaultContentAssistProcessor
  */
-@SuppressWarnings("unchecked")
 public class DefaultContentAssistProcessorTest extends AbstractUiTest 
 {
 
-	private DefaultContentAssistProcessor defaultContentAssistProcessor;
-    private ITextViewer textViewerMock;
-    private IXtextDocument xtextDocumentMock;
-
+    private ContentAssistProcessorTestBuilder contentAssistProcessorTestBuilder;
+    
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		withUi(ReferenceGrammarStandaloneSetup.class,ReferenceGrammarUiConfig.class);
-		textViewerMock = createMock(ITextViewer.class);
-		xtextDocumentMock = createMock(IXtextDocument.class);
-		defaultContentAssistProcessor = new DefaultContentAssistProcessor();
-		ServiceRegistry.injectServices(getCurrentServiceScope(), defaultContentAssistProcessor);
+		contentAssistProcessorTestBuilder = new ContentAssistProcessorTestBuilder(getCurrentServiceScope(),new DefaultContentAssistProcessor());
 	}
 	
 	public void testComputeCompletionProposalsCount() throws Exception {
-		
-		Map<String, Integer> model2ExpectedProposalCountMap = new HashMap<String, Integer>();
-		StringBuilder modelBuilder = new StringBuilder("");
-		model2ExpectedProposalCountMap.put(modelBuilder.toString(), 1);
-		model2ExpectedProposalCountMap.put(modelBuilder.append("spielplatz ").toString(), 2);
-		model2ExpectedProposalCountMap.put(modelBuilder.append("1 ").toString(), 3);
-		model2ExpectedProposalCountMap.put(modelBuilder.append("\"JUNIT\" ").toString(), 1);
-		model2ExpectedProposalCountMap.put(modelBuilder.append("{ ").toString(), 5);
-		model2ExpectedProposalCountMap.put(modelBuilder.append("kind ").toString(), 1);
-		model2ExpectedProposalCountMap.put(modelBuilder.append("(k1 0) erwachsener(e1 0) erwachsener(e2 0) familie( f1 ").toString(),2);
-		model2ExpectedProposalCountMap.put(modelBuilder.append("e1 ").toString(),2);
-		model2ExpectedProposalCountMap.put(modelBuilder.append("e2 ").toString(),1);
-
-		for (Iterator<String> iterator = model2ExpectedProposalCountMap.keySet()
-				.iterator(); iterator.hasNext();) {
-
-			String testDslModel = iterator.next();
-			
-			int expectedProposalCount = model2ExpectedProposalCountMap.get(testDslModel);
-
-			CompositeNode rootNode = getRootNode(testDslModel);
-			
-			reset(textViewerMock,xtextDocumentMock,textViewerMock);
-			
-			expect(textViewerMock.getDocument()).andReturn(xtextDocumentMock);
-			expect(xtextDocumentMock.readOnly((UnitOfWork<CompositeNode>) anyObject())).andReturn(rootNode);
-			expect(textViewerMock.getTextWidget()).andReturn(newStyledTextWidgetMock(testDslModel));
-			
-			replay(textViewerMock,xtextDocumentMock);
-
-			ICompletionProposal[] computeCompletionProposals = defaultContentAssistProcessor
-					.computeCompletionProposals(textViewerMock, testDslModel
-							.length());
-			
-			assertEquals("expect only " + expectedProposalCount+ " CompletionProposal item for model '" + testDslModel+ "'", 
-					expectedProposalCount,
-					computeCompletionProposals.length);
-		}
-
+		contentAssistProcessorTestBuilder.assertCount(1)
+			.append("spielplatz ").assertCount(2)
+			.append("1 ").assertCount(3)
+			.append("\"JUNIT\" ").assertCount(1)
+			.append("{ ").assertCount(5)
+			.append("kind ").assertCount(1)
+			.append("(k1 0) erwachsener(e1 0) erwachsener(e2 0) familie( f1 ").assertCount(2)
+			.append("e1 ").assertCount(2)
+			.append("e2").assertCount(1);
 	}
 	
 	public void testComputeCompletionProposalsText() throws Exception {
+		contentAssistProcessorTestBuilder.assertText("spielplatz ")
+			.applyText().assertText("0","1")
+			.applyText().assertText("\"SpielplatzBeschreibungSTRING\"","\"SpielplatzBeschreibung\"","{")
+			.applyText().assertText("{")
+			.applyText().assertText("erwachsener ","familie ","spielzeug ","kind ","}")
+			.append("erwachsener ").assertText("(")
+			.applyText().assertText("ErwachsenerNameID","ErwachsenerName")
+			.append("e1 ").assertText("0","1")
+			.applyText().assertText(")")
+			.applyText().append("erwachsener (e2 0) kind ").assertText("(")
+			.applyText().assertText("KindNameID","KindName")
+			.append("k1 ").assertText("0","1")
+			.applyText().assertText(")")
+			.applyText().append("kind (k2 0) familie ").assertText("(")
+			.applyText().assertText("keyword ","\"FamilieNameSTRING\"","FamilieNameID")
+			.append("keyword ").assertText("e1","e2")
+			.applyText().assertText("e1","e2")
+			.append("e2 ").assertText("k1","k2")
+			.append("k").assertText("k1","k2",",",")")
+			.append("1 ").assertText(",",")")
+			.append("k2 ").assertText(",",")")
+		;
 		
-		Map<String, List<String>> model2ExpectedProposalTextMap = new HashMap<String, List<String>>();
-		StringBuilder modelBuilder = new StringBuilder("");
-		model2ExpectedProposalTextMap.put(modelBuilder.toString(), Arrays.asList("spielplatz "));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("spielplatz ").toString(), Arrays.asList("0","1"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("1 ").toString(), Arrays.asList("\"SpielplatzBeschreibungSTRING\"","\"SpielplatzBeschreibung\"","{"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("\"SpielplatzBeschreibung\" ").toString(), Arrays.asList("{"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("{ ").toString(), Arrays.asList("erwachsener ","familie ","spielzeug ","kind ","}"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("erwachsener ").toString(), Arrays.asList("("));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("( ").toString(), Arrays.asList("ErwachsenerNameID","ErwachsenerName"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("e1 ").toString(), Arrays.asList("0","1"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("0 ").toString(), Arrays.asList(")"));
-		modelBuilder.append(")").append("erwachsener (e2 0)");
-		model2ExpectedProposalTextMap.put(modelBuilder.append("kind ").toString(), Arrays.asList("("));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("( ").toString(), Arrays.asList("KindNameID","KindName"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("k1 ").toString(), Arrays.asList("0","1"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("0 ").toString(), Arrays.asList(")"));
-		modelBuilder.append(")").append("kind (k2 0)");
-		model2ExpectedProposalTextMap.put(modelBuilder.append("familie ").toString(), Arrays.asList("("));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("( ").toString(), Arrays.asList("keyword ","\"FamilieNameSTRING\"","FamilieNameID"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("keyword ").toString(), Arrays.asList("e1","e2"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("e1 ").toString(), Arrays.asList("e1","e2"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("").toString(), Arrays.asList("e1","e2"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("e2 ").toString(), Arrays.asList("k1","k2"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("k").toString(), Arrays.asList("k1","k2",",",")"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("1 ").toString(), Arrays.asList(",",")"));
-		model2ExpectedProposalTextMap.put(modelBuilder.append("k2 ").toString(), Arrays.asList(",",")"));
 		
-		for (Iterator<String> iterator = model2ExpectedProposalTextMap.keySet()
-				.iterator(); iterator.hasNext();) {
-
-			String testDslModel = iterator.next();
-			
-			List<String> expectedTextList = model2ExpectedProposalTextMap.get(testDslModel);
-
-			CompositeNode rootNode = getRootNode(testDslModel);
-			
-			reset(textViewerMock,xtextDocumentMock,textViewerMock);
-			
-			expect(textViewerMock.getDocument()).andReturn(xtextDocumentMock);
-			expect(xtextDocumentMock.readOnly((UnitOfWork<CompositeNode>) anyObject())).andReturn(rootNode);
-			expect(textViewerMock.getTextWidget()).andReturn(newStyledTextWidgetMock(testDslModel));
-			
-			replay(textViewerMock,xtextDocumentMock);
-
-			ICompletionProposal[] computeCompletionProposals = defaultContentAssistProcessor
-					.computeCompletionProposals(textViewerMock, testDslModel
-							.length());
-			
-			assertEquals("expect only " + expectedTextList.size()+ " CompletionProposal item for model '" + testDslModel+ "'", 
-					expectedTextList.size(),
-					computeCompletionProposals.length);
-			
-			for (int i = 0; i < computeCompletionProposals.length; i++) {
-				ICompletionProposal completionProposal = computeCompletionProposals[i];
-				assertTrue("expect completionProposal text '"+completionProposal+"' ", expectedTextList.contains(completionProposal.getDisplayString()));
-			}
-			
-			
-		}
-
 	}
 	
-	
-
-	private StyledText newStyledTextWidgetMock(final String testDslModel) {
-		return new StyledText(new Shell(), SWT.NONE) {
-			@Override
-			public int getCharCount() {
-				return testDslModel.length();
-			}
-
-			@Override
-			public String getText(int start, int end) {
-				return testDslModel.substring(start, end);
-			}
-		};
+	public void testComputeCompletionProposalsIgnoreCase() throws Exception {
+		contentAssistProcessorTestBuilder.set("spielplatz 1 \"SpielplatzBeschreibung\" { kind(k1 0) kind(k2 0) erwachsener(e1 0) erwachsener(e2 0) ")
+			.append(" KI").assertText("kind ").delete(3)
+			.append(" ER").assertText("erwachsener ").delete(3)
+			.append(" SP").assertText("spielzeug ").delete(3)
+			.append(" FA").assertText("familie ").delete(3)
+			.append(" familie ( KEY").assertText("keyword ").delete(13)
+			.append(" familie ( \"").assertText("\"FamilieNameSTRING\"").delete(12)
+			.append(" familie ( K").assertText("keyword ").delete(11)
+			.append(" familie ( keyword E").assertText("e1","e2").delete(19)
+			.append(" familie ( keyword e1 E").assertText("e1","e2").delete(22)
+			.append(" familie ( keyword e1 e2 K").assertText("k1","k2",",",")").delete(25)
+			.append(" familie ( keyword e1 e2 k1,K").assertText("k1","k2",",",")").delete(28)
+			.append(" familie ( keyword e1 e2 k1,k2").assertText("k2",",",")")
+		;
 	}
-
+	
 }
