@@ -129,8 +129,8 @@ public final class ParseTreeUtil {
 
 		AbstractNode abstractNode = null;
 
-		if (contextNode.getOffset() < offsetPosition
-				|| (0 == offsetPosition && offsetPosition == contextNode.getOffset())) {
+		if (contextNode.getTotalOffset() < offsetPosition
+				|| (0 == offsetPosition && offsetPosition == contextNode.getTotalOffset())) {
 
 			for (AbstractNode childNode : contextNode.getLeafNodes()) {
 				AbstractNode lastElementByOffset = getLastCompleteNodeByOffset(childNode, offsetPosition);
@@ -140,7 +140,7 @@ public final class ParseTreeUtil {
 				}
 			}
 
-			if (abstractNode == null && contextNode.getOffset() + contextNode.getLength() <= offsetPosition) {
+			if (abstractNode == null && contextNode.getTotalOffset() + contextNode.getTotalLength() <= offsetPosition) {
 				EObject grammarElement = contextNode.getGrammarElement();
 				if (grammarElement instanceof AbstractElement || grammarElement instanceof ParserRule) {
 					abstractNode = contextNode;
@@ -170,7 +170,7 @@ public final class ParseTreeUtil {
 		EList<LeafNode> leafNodes = contextNode.getLeafNodes();
 		for (Iterator<LeafNode> iterator = leafNodes.iterator(); iterator.hasNext() && leafNode==null;) {
 			LeafNode childNode = iterator.next();
-			if (childNode.getOffset() <= offsetPosition && offsetPosition <= childNode.getOffset() + childNode.getLength()) {
+			if (childNode.getTotalOffset() <= offsetPosition && offsetPosition <= childNode.getTotalOffset() + childNode.getTotalLength()) {
 				leafNode = (LeafNode) childNode;
 			}
 		}
@@ -349,8 +349,8 @@ public final class ParseTreeUtil {
 	
 				// CompositeNode compositeNode = (CompositeNode) abstractNode;
 	
-				logger.debug(indentString + "line '" + abstractNode.getLine() + "' offset '" + abstractNode.getOffset()
-						+ "'  length '" + abstractNode.getLength() + "' grammar-hierarchy  ("
+				logger.debug(indentString + "line '" + abstractNode.getTotalLine() + "' offset '" + abstractNode.getTotalOffset()
+						+ "'  length '" + abstractNode.getTotalLength() + "' grammar-hierarchy  ("
 						+ dumpParentHierarchy(abstractNode) + ")");
 	
 			}
@@ -360,8 +360,8 @@ public final class ParseTreeUtil {
 				// ommit hidden channel
 				if (!leafNode.isHidden()) {
 	
-					logger.debug(indentString + "'" + "line '" + leafNode.getLine() + "' offset '" + leafNode.getOffset()
-							+ " length '" + leafNode.getLength() + "' "
+					logger.debug(indentString + "'" + "line '" + leafNode.getTotalLine() + "' offset '" + leafNode.getTotalOffset()
+							+ " length '" + leafNode.getTotalLength() + "' "
 							+ (leafNode.getFeature() != null ? leafNode.getFeature() + " = " : "") + " text '"
 							+ leafNode.getText() + "' grammar-hierarchy (" + dumpParentHierarchy(leafNode) + ")");
 	

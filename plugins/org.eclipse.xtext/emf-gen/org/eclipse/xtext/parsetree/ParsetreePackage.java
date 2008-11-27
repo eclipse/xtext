@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParsetreePackage.java,v 1.9 2008/08/07 15:05:36 sefftinge Exp $
+ * $Id: ParsetreePackage.java,v 1.10 2008/11/27 15:59:42 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -107,31 +107,31 @@ public interface ParsetreePackage extends EPackage
 	int ABSTRACT_NODE__SYNTAX_ERROR = 3;
 
 		/**
-	 * The feature id for the '<em><b>Offset</b></em>' attribute.
+	 * The feature id for the '<em><b>Total Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__OFFSET = 4;
+	int ABSTRACT_NODE__TOTAL_OFFSET = 4;
 
 		/**
-	 * The feature id for the '<em><b>Line</b></em>' attribute.
+	 * The feature id for the '<em><b>Total Line</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__LINE = 5;
+	int ABSTRACT_NODE__TOTAL_LINE = 5;
 
 		/**
-	 * The feature id for the '<em><b>Length</b></em>' attribute.
+	 * The feature id for the '<em><b>Total Length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_NODE__LENGTH = 6;
+	int ABSTRACT_NODE__TOTAL_LENGTH = 6;
 
 		/**
 	 * The number of structural features of the '<em>Abstract Node</em>' class.
@@ -189,33 +189,33 @@ public interface ParsetreePackage extends EPackage
 	int COMPOSITE_NODE__SYNTAX_ERROR = ABSTRACT_NODE__SYNTAX_ERROR;
 
 		/**
-	 * The feature id for the '<em><b>Offset</b></em>' attribute.
+	 * The feature id for the '<em><b>Total Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_NODE__OFFSET = ABSTRACT_NODE__OFFSET;
+	int COMPOSITE_NODE__TOTAL_OFFSET = ABSTRACT_NODE__TOTAL_OFFSET;
 
 		/**
-	 * The feature id for the '<em><b>Line</b></em>' attribute.
+	 * The feature id for the '<em><b>Total Line</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_NODE__LINE = ABSTRACT_NODE__LINE;
+	int COMPOSITE_NODE__TOTAL_LINE = ABSTRACT_NODE__TOTAL_LINE;
 
 		/**
-	 * The feature id for the '<em><b>Length</b></em>' attribute.
+	 * The feature id for the '<em><b>Total Length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_NODE__LENGTH = ABSTRACT_NODE__LENGTH;
+	int COMPOSITE_NODE__TOTAL_LENGTH = ABSTRACT_NODE__TOTAL_LENGTH;
 
-/**
+		/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
@@ -289,31 +289,31 @@ int COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES = ABSTRACT_NODE_FEATURE_COUNT + 1;
 	int LEAF_NODE__SYNTAX_ERROR = ABSTRACT_NODE__SYNTAX_ERROR;
 
 		/**
-	 * The feature id for the '<em><b>Offset</b></em>' attribute.
+	 * The feature id for the '<em><b>Total Offset</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE__OFFSET = ABSTRACT_NODE__OFFSET;
+	int LEAF_NODE__TOTAL_OFFSET = ABSTRACT_NODE__TOTAL_OFFSET;
 
 		/**
-	 * The feature id for the '<em><b>Line</b></em>' attribute.
+	 * The feature id for the '<em><b>Total Line</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE__LINE = ABSTRACT_NODE__LINE;
+	int LEAF_NODE__TOTAL_LINE = ABSTRACT_NODE__TOTAL_LINE;
 
 		/**
-	 * The feature id for the '<em><b>Length</b></em>' attribute.
+	 * The feature id for the '<em><b>Total Length</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LEAF_NODE__LENGTH = ABSTRACT_NODE__LENGTH;
+	int LEAF_NODE__TOTAL_LENGTH = ABSTRACT_NODE__TOTAL_LENGTH;
 
 		/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -477,37 +477,37 @@ int COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES = ABSTRACT_NODE_FEATURE_COUNT + 1;
 	EReference getAbstractNode_SyntaxError();
 
 		/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.AbstractNode#getOffset <em>Offset</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.AbstractNode#getTotalOffset <em>Total Offset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Offset</em>'.
-	 * @see org.eclipse.xtext.parsetree.AbstractNode#getOffset()
+	 * @return the meta object for the attribute '<em>Total Offset</em>'.
+	 * @see org.eclipse.xtext.parsetree.AbstractNode#getTotalOffset()
 	 * @see #getAbstractNode()
 	 * @generated
 	 */
-	EAttribute getAbstractNode_Offset();
+	EAttribute getAbstractNode_TotalOffset();
 
 		/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.AbstractNode#getLine <em>Line</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.AbstractNode#getTotalLine <em>Total Line</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Line</em>'.
-	 * @see org.eclipse.xtext.parsetree.AbstractNode#getLine()
+	 * @return the meta object for the attribute '<em>Total Line</em>'.
+	 * @see org.eclipse.xtext.parsetree.AbstractNode#getTotalLine()
 	 * @see #getAbstractNode()
 	 * @generated
 	 */
-	EAttribute getAbstractNode_Line();
+	EAttribute getAbstractNode_TotalLine();
 
 		/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.AbstractNode#getLength <em>Length</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.AbstractNode#getTotalLength <em>Total Length</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Length</em>'.
-	 * @see org.eclipse.xtext.parsetree.AbstractNode#getLength()
+	 * @return the meta object for the attribute '<em>Total Length</em>'.
+	 * @see org.eclipse.xtext.parsetree.AbstractNode#getTotalLength()
 	 * @see #getAbstractNode()
 	 * @generated
 	 */
-	EAttribute getAbstractNode_Length();
+	EAttribute getAbstractNode_TotalLength();
 
 		/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.LeafNode <em>Leaf Node</em>}'.
@@ -676,28 +676,28 @@ int COMPOSITE_NODE__LOOKAHEAD_LEAF_NODES = ABSTRACT_NODE_FEATURE_COUNT + 1;
 		EReference ABSTRACT_NODE__SYNTAX_ERROR = eINSTANCE.getAbstractNode_SyntaxError();
 
 				/**
-		 * The meta object literal for the '<em><b>Offset</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Total Offset</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_NODE__OFFSET = eINSTANCE.getAbstractNode_Offset();
+		EAttribute ABSTRACT_NODE__TOTAL_OFFSET = eINSTANCE.getAbstractNode_TotalOffset();
 
 				/**
-		 * The meta object literal for the '<em><b>Line</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Total Line</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_NODE__LINE = eINSTANCE.getAbstractNode_Line();
+		EAttribute ABSTRACT_NODE__TOTAL_LINE = eINSTANCE.getAbstractNode_TotalLine();
 
 				/**
-		 * The meta object literal for the '<em><b>Length</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Total Length</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_NODE__LENGTH = eINSTANCE.getAbstractNode_Length();
+		EAttribute ABSTRACT_NODE__TOTAL_LENGTH = eINSTANCE.getAbstractNode_TotalLength();
 
 				/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.parsetree.impl.LeafNodeImpl <em>Leaf Node</em>}' class.

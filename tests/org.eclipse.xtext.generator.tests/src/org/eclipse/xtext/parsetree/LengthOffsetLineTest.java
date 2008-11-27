@@ -21,23 +21,23 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 		CompositeNode node = (CompositeNode) getRootNode(model);
 		EList<LeafNode> leafNodes = node.getLeafNodes();
 		Iterator<LeafNode> iter = leafNodes.iterator();
-		assertEquals(0,iter.next().getOffset());
-		assertEquals(7,iter.next().getOffset());
-		assertEquals(8,iter.next().getOffset());
-		assertEquals(11,iter.next().getOffset());
-		assertEquals(12,iter.next().getOffset());
-		assertEquals(13,iter.next().getOffset());
-		assertEquals(20,iter.next().getOffset());
-		assertEquals(21,iter.next().getOffset());
-		assertEquals(24,iter.next().getOffset());
+		assertEquals(0,iter.next().getTotalOffset());
+		assertEquals(7,iter.next().getTotalOffset());
+		assertEquals(8,iter.next().getTotalOffset());
+		assertEquals(11,iter.next().getTotalOffset());
+		assertEquals(12,iter.next().getTotalOffset());
+		assertEquals(13,iter.next().getTotalOffset());
+		assertEquals(20,iter.next().getTotalOffset());
+		assertEquals(21,iter.next().getTotalOffset());
+		assertEquals(24,iter.next().getTotalOffset());
 	}
 	
 	public void testOffset2() throws Exception {
 		String model = "element foo;\nelement bar;";
 		CompositeNode node = (CompositeNode) getRootNode(model);
 		Iterator<AbstractNode> iter = node.getChildren().iterator();
-		assertEquals(0,iter.next().getOffset());
-		assertEquals(12,iter.next().getOffset());
+		assertEquals(0,iter.next().getTotalOffset());
+		assertEquals(12,iter.next().getTotalOffset());
 		assertFalse(iter.hasNext());
 	}
 
@@ -46,15 +46,15 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 		CompositeNode node = (CompositeNode) getRootNode(model);
 		EList<LeafNode> leafNodes = node.getLeafNodes();
 		Iterator<LeafNode> iter = leafNodes.iterator();
-		assertEquals(1,iter.next().getLine());
-		assertEquals(1,iter.next().getLine());
-		assertEquals(1,iter.next().getLine());
-		assertEquals(1,iter.next().getLine());
-		assertEquals(1,iter.next().getLine());
-		assertEquals(2,iter.next().getLine());
-		assertEquals(2,iter.next().getLine());
-		assertEquals(2,iter.next().getLine());
-		assertEquals(2,iter.next().getLine());
+		assertEquals(1,iter.next().getTotalLine());
+		assertEquals(1,iter.next().getTotalLine());
+		assertEquals(1,iter.next().getTotalLine());
+		assertEquals(1,iter.next().getTotalLine());
+		assertEquals(1,iter.next().getTotalLine());
+		assertEquals(2,iter.next().getTotalLine());
+		assertEquals(2,iter.next().getTotalLine());
+		assertEquals(2,iter.next().getTotalLine());
+		assertEquals(2,iter.next().getTotalLine());
 		assertFalse(iter.hasNext());
 	}
 	
@@ -62,12 +62,12 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 		String model = "element foo;\nelement bar;\nelement bar;\nelement bar;";
 		CompositeNode node = (CompositeNode) getRootNode(model);
 		Iterator<AbstractNode> iter = node.getChildren().iterator();
-		assertEquals(1,iter.next().getLine());
+		assertEquals(1,iter.next().getTotalLine());
 		//Note: because preceding whitespace is added to the following node,
 		// the '\n' is always added to the following composite node
-		assertEquals(1,iter.next().getLine());
-		assertEquals(2,iter.next().getLine());
-		assertEquals(3,iter.next().getLine());
+		assertEquals(1,iter.next().getTotalLine());
+		assertEquals(2,iter.next().getTotalLine());
+		assertEquals(3,iter.next().getTotalLine());
 		assertFalse(iter.hasNext());
 	}
 	
@@ -80,8 +80,8 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 		assertEquals(5,nodes.size());
 		int offset = 0;
 		for (LeafNode leafNode : nodes) {
-			assertEquals(offset,leafNode.getOffset());
-			offset += leafNode.getLength();
+			assertEquals(offset,leafNode.getTotalOffset());
+			offset += leafNode.getTotalLength();
 		}
 	}
 	

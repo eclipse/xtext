@@ -146,8 +146,8 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 		StyledText textWidget = viewer.getTextWidget();
 		if (textWidget.getCharCount() > 0) {
 			int boundedOffset = Math.min(offset, textWidget.getCharCount()) - 1;
-			if (currentLeafNode.getOffset() <= boundedOffset)
-				prefix = textWidget.getText(currentLeafNode.getOffset(), boundedOffset);
+			if (currentLeafNode.getTotalOffset() <= boundedOffset)
+				prefix = textWidget.getText(currentLeafNode.getTotalOffset(), boundedOffset);
 		}
 
 		// if cursor is behind a complete keyword, accept any input => empty

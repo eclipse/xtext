@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNode.java,v 1.9 2008/08/07 15:05:36 sefftinge Exp $
+ * $Id: AbstractNode.java,v 1.10 2008/11/27 15:59:42 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree;
 
@@ -21,9 +21,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getGrammarElement <em>Grammar Element</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getElement <em>Element</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getSyntaxError <em>Syntax Error</em>}</li>
- *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getOffset <em>Offset</em>}</li>
- *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getLine <em>Line</em>}</li>
- *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getLength <em>Length</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getTotalOffset <em>Total Offset</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getTotalLine <em>Total Line</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.AbstractNode#getTotalLength <em>Total Length</em>}</li>
  * </ul>
  * </p>
  *
@@ -142,83 +142,130 @@ public interface AbstractNode extends EObject
 	void setSyntaxError(SyntaxError value);
 
 		/**
-	 * Returns the value of the '<em><b>Offset</b></em>' attribute.
+	 * Returns the value of the '<em><b>Total Offset</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Total Offset</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Total Offset</em>' attribute.
+	 * @see #setTotalOffset(int)
+	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getAbstractNode_TotalOffset()
+	 * @model
+	 * @generated
+	 */
+	int getTotalOffset();
+
+		/**
+	 * Sets the value of the '{@link org.eclipse.xtext.parsetree.AbstractNode#getTotalOffset <em>Total Offset</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Total Offset</em>' attribute.
+	 * @see #getTotalOffset()
+	 * @generated
+	 */
+	void setTotalOffset(int value);
+
+		/**
+	 * Returns the value of the '<em><b>Total Line</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Total Line</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Total Line</em>' attribute.
+	 * @see #setTotalLine(int)
+	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getAbstractNode_TotalLine()
+	 * @model
+	 * @generated
+	 */
+	int getTotalLine();
+
+		/**
+	 * Sets the value of the '{@link org.eclipse.xtext.parsetree.AbstractNode#getTotalLine <em>Total Line</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Total Line</em>' attribute.
+	 * @see #getTotalLine()
+	 * @generated
+	 */
+	void setTotalLine(int value);
+
+		/**
+	 * Returns the value of the '<em><b>Total Length</b></em>' attribute.
+	 * The default value is <code>"-1"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Total Length</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Total Length</em>' attribute.
+	 * @see #setTotalLength(int)
+	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getAbstractNode_TotalLength()
+	 * @model default="-1" ordered="false"
+	 * @generated
+	 */
+	int getTotalLength();
+
+		/**
+	 * Sets the value of the '{@link org.eclipse.xtext.parsetree.AbstractNode#getTotalLength <em>Total Length</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Total Length</em>' attribute.
+	 * @see #getTotalLength()
+	 * @generated
+	 */
+	void setTotalLength(int value);
+
+		/**
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Offset</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Offset</em>' attribute.
-	 * @see #setOffset(int)
-	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getAbstractNode_Offset()
-	 * @model
+	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ParsetreeUtil.getOffset(this);'"
 	 * @generated
 	 */
 	int getOffset();
 
 		/**
-	 * Sets the value of the '{@link org.eclipse.xtext.parsetree.AbstractNode#getOffset <em>Offset</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Offset</em>' attribute.
-	 * @see #getOffset()
-	 * @generated
-	 */
-	void setOffset(int value);
-
-		/**
-	 * Returns the value of the '<em><b>Line</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Line</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Line</em>' attribute.
-	 * @see #setLine(int)
-	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getAbstractNode_Line()
-	 * @model
+	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ParsetreeUtil.getLine(this);'"
 	 * @generated
 	 */
 	int getLine();
 
 		/**
-	 * Sets the value of the '{@link org.eclipse.xtext.parsetree.AbstractNode#getLine <em>Line</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Line</em>' attribute.
-	 * @see #getLine()
-	 * @generated
-	 */
-	void setLine(int value);
-
-		/**
-	 * Returns the value of the '<em><b>Length</b></em>' attribute.
-	 * The default value is <code>"-1"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Length</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Length</em>' attribute.
-	 * @see #setLength(int)
-	 * @see org.eclipse.xtext.parsetree.ParsetreePackage#getAbstractNode_Length()
-	 * @model default="-1" ordered="false"
+	 * @model kind="operation"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ParsetreeUtil.getLength(this);'"
 	 * @generated
 	 */
 	int getLength();
 
 		/**
-	 * Sets the value of the '{@link org.eclipse.xtext.parsetree.AbstractNode#getLength <em>Length</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Length</em>' attribute.
-	 * @see #getLength()
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='return ParsetreeUtil.endLine(this);'"
 	 * @generated
 	 */
-	void setLength(int value);
+	int endLine();
 
 		/**
 	 * <!-- begin-user-doc -->
@@ -257,9 +304,9 @@ public interface AbstractNode extends EObject
 		/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.endLine((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.endLine((LeafNodeImpl) this);} else {return ParsetreeUtil.endLine((AbstractNodeImpl) this);}'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.totalEndLine((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.totalEndLine((LeafNodeImpl) this);} else {return ParsetreeUtil.totalEndLine((AbstractNodeImpl) this);}'"
 	 * @generated
 	 */
-	int endLine();
+	int totalEndLine();
 
 } // AbstractNode

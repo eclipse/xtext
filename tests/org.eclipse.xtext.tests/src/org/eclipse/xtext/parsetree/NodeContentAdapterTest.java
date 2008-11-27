@@ -87,29 +87,29 @@ public class NodeContentAdapterTest extends TestCase {
 		assertTrue(leaf2.eAdapters().contains(contentAdapter));
 		assertTrue(leaf3.eAdapters().contains(contentAdapter));
 		
-		assertEquals(0, root.getOffset());
-		assertEquals(0, leaf0.getOffset());
-		assertEquals(TEXT0.length(), comp0.getOffset());
-		assertEquals(TEXT0.length(), leaf1.getOffset());
-		assertEquals(TEXT0.length() + TEXT1.length(), comp1.getOffset());
-		assertEquals(TEXT0.length() + TEXT1.length(), leaf2.getOffset());
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length(), leaf3.getOffset());
+		assertEquals(0, root.getTotalOffset());
+		assertEquals(0, leaf0.getTotalOffset());
+		assertEquals(TEXT0.length(), comp0.getTotalOffset());
+		assertEquals(TEXT0.length(), leaf1.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT1.length(), comp1.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT1.length(), leaf2.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length(), leaf3.getTotalOffset());
 
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT3.length(), root.getLength());
-		assertEquals(TEXT0.length(), leaf0.getLength());
-		assertEquals(TEXT1.length(), comp0.getLength());
-		assertEquals(TEXT1.length(), leaf1.getLength());
-		assertEquals(TEXT2.length(), comp1.getLength());
-		assertEquals(TEXT2.length(), leaf2.getLength());
-		assertEquals(TEXT3.length(), leaf3.getLength());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT3.length(), root.getTotalLength());
+		assertEquals(TEXT0.length(), leaf0.getTotalLength());
+		assertEquals(TEXT1.length(), comp0.getTotalLength());
+		assertEquals(TEXT1.length(), leaf1.getTotalLength());
+		assertEquals(TEXT2.length(), comp1.getTotalLength());
+		assertEquals(TEXT2.length(), leaf2.getTotalLength());
+		assertEquals(TEXT3.length(), leaf3.getTotalLength());
 		
-		assertEquals(1, root.getLine());
-		assertEquals(1, leaf0.getLine());
-		assertEquals(2, comp0.getLine());
-		assertEquals(2, leaf1.getLine());
-		assertEquals(3, comp1.getLine());
-		assertEquals(3, leaf2.getLine());
-		assertEquals(4, leaf3.getLine());
+		assertEquals(1, root.getTotalLine());
+		assertEquals(1, leaf0.getTotalLine());
+		assertEquals(2, comp0.getTotalLine());
+		assertEquals(2, leaf1.getTotalLine());
+		assertEquals(3, comp1.getTotalLine());
+		assertEquals(3, leaf2.getTotalLine());
+		assertEquals(4, leaf3.getTotalLine());
 	}
 	
 	public void testRemove() throws Exception {
@@ -118,26 +118,26 @@ public class NodeContentAdapterTest extends TestCase {
 		
 		comp0.getChildren().remove(leaf1);
 
-		assertEquals(0, root.getOffset());
-		assertEquals(0, leaf0.getOffset());
-		assertEquals(TEXT0.length(), comp0.getOffset());
-		assertEquals(TEXT0.length(), comp1.getOffset());
-		assertEquals(TEXT0.length(), leaf2.getOffset());
-		assertEquals(TEXT0.length() + TEXT2.length(), leaf3.getOffset());
+		assertEquals(0, root.getTotalOffset());
+		assertEquals(0, leaf0.getTotalOffset());
+		assertEquals(TEXT0.length(), comp0.getTotalOffset());
+		assertEquals(TEXT0.length(), comp1.getTotalOffset());
+		assertEquals(TEXT0.length(), leaf2.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT2.length(), leaf3.getTotalOffset());
 		
-		assertEquals(TEXT0.length() + TEXT2.length() + TEXT3.length(), root.getLength());
-		assertEquals(TEXT0.length(), leaf0.getLength());
-		assertEquals(0, comp0.getLength());
-		assertEquals(TEXT2.length(), comp1.getLength());		
-		assertEquals(TEXT2.length(), leaf2.getLength());		
-		assertEquals(TEXT3.length(), leaf3.getLength());		
+		assertEquals(TEXT0.length() + TEXT2.length() + TEXT3.length(), root.getTotalLength());
+		assertEquals(TEXT0.length(), leaf0.getTotalLength());
+		assertEquals(0, comp0.getTotalLength());
+		assertEquals(TEXT2.length(), comp1.getTotalLength());		
+		assertEquals(TEXT2.length(), leaf2.getTotalLength());		
+		assertEquals(TEXT3.length(), leaf3.getTotalLength());		
 		
-		assertEquals(1, root.getLine());
-		assertEquals(1, leaf0.getLine());
-		assertEquals(2, comp0.getLine());
-		assertEquals(2, comp1.getLine());
-		assertEquals(2, leaf2.getLine());
-		assertEquals(3, leaf3.getLine());
+		assertEquals(1, root.getTotalLine());
+		assertEquals(1, leaf0.getTotalLine());
+		assertEquals(2, comp0.getTotalLine());
+		assertEquals(2, comp1.getTotalLine());
+		assertEquals(2, leaf2.getTotalLine());
+		assertEquals(3, leaf3.getTotalLine());
 	}
 	
 	public void testMoveRight() throws Exception {
@@ -153,29 +153,29 @@ public class NodeContentAdapterTest extends TestCase {
 		assertTrue(leaf2.eAdapters().contains(contentAdapter));
 		assertTrue(leaf3.eAdapters().contains(contentAdapter));
 		
-		assertEquals(0, root.getOffset());
-		assertEquals(0, leaf0.getOffset());
-		assertEquals(TEXT0.length(), comp1.getOffset());
-		assertEquals(TEXT0.length(), leaf2.getOffset());
-		assertEquals(TEXT0.length() + TEXT2.length(), comp0.getOffset());
-		assertEquals(TEXT0.length() + TEXT2.length(), leaf1.getOffset());
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length(), leaf3.getOffset());
+		assertEquals(0, root.getTotalOffset());
+		assertEquals(0, leaf0.getTotalOffset());
+		assertEquals(TEXT0.length(), comp1.getTotalOffset());
+		assertEquals(TEXT0.length(), leaf2.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT2.length(), comp0.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT2.length(), leaf1.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length(), leaf3.getTotalOffset());
 
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT3.length(), root.getLength());
-		assertEquals(TEXT0.length(), leaf0.getLength());
-		assertEquals(TEXT1.length(), comp0.getLength());
-		assertEquals(TEXT1.length(), leaf1.getLength());
-		assertEquals(TEXT2.length(), comp1.getLength());
-		assertEquals(TEXT2.length(), leaf2.getLength());
-		assertEquals(TEXT3.length(), leaf3.getLength());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT3.length(), root.getTotalLength());
+		assertEquals(TEXT0.length(), leaf0.getTotalLength());
+		assertEquals(TEXT1.length(), comp0.getTotalLength());
+		assertEquals(TEXT1.length(), leaf1.getTotalLength());
+		assertEquals(TEXT2.length(), comp1.getTotalLength());
+		assertEquals(TEXT2.length(), leaf2.getTotalLength());
+		assertEquals(TEXT3.length(), leaf3.getTotalLength());
 		
-		assertEquals(1, root.getLine());
-		assertEquals(1, leaf0.getLine());
-		assertEquals(3, comp0.getLine());
-		assertEquals(3, leaf1.getLine());
-		assertEquals(2, comp1.getLine());
-		assertEquals(2, leaf2.getLine());
-		assertEquals(4, leaf3.getLine());
+		assertEquals(1, root.getTotalLine());
+		assertEquals(1, leaf0.getTotalLine());
+		assertEquals(3, comp0.getTotalLine());
+		assertEquals(3, leaf1.getTotalLine());
+		assertEquals(2, comp1.getTotalLine());
+		assertEquals(2, leaf2.getTotalLine());
+		assertEquals(4, leaf3.getTotalLine());
 	}
 	
 	public void testMoveLeft() throws Exception {
@@ -191,29 +191,29 @@ public class NodeContentAdapterTest extends TestCase {
 		assertTrue(leaf2.eAdapters().contains(contentAdapter));
 		assertTrue(leaf3.eAdapters().contains(contentAdapter));
 		
-		assertEquals(0, root.getOffset());
-		assertEquals(0, leaf0.getOffset());
-		assertEquals(TEXT0.length(), comp1.getOffset());
-		assertEquals(TEXT0.length(), leaf2.getOffset());
-		assertEquals(TEXT0.length() + TEXT2.length(), comp0.getOffset());
-		assertEquals(TEXT0.length() + TEXT2.length(), leaf1.getOffset());
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length(), leaf3.getOffset());
+		assertEquals(0, root.getTotalOffset());
+		assertEquals(0, leaf0.getTotalOffset());
+		assertEquals(TEXT0.length(), comp1.getTotalOffset());
+		assertEquals(TEXT0.length(), leaf2.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT2.length(), comp0.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT2.length(), leaf1.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length(), leaf3.getTotalOffset());
 
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT3.length(), root.getLength());
-		assertEquals(TEXT0.length(), leaf0.getLength());
-		assertEquals(TEXT1.length(), comp0.getLength());
-		assertEquals(TEXT1.length(), leaf1.getLength());
-		assertEquals(TEXT2.length(), comp1.getLength());
-		assertEquals(TEXT2.length(), leaf2.getLength());
-		assertEquals(TEXT3.length(), leaf3.getLength());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT3.length(), root.getTotalLength());
+		assertEquals(TEXT0.length(), leaf0.getTotalLength());
+		assertEquals(TEXT1.length(), comp0.getTotalLength());
+		assertEquals(TEXT1.length(), leaf1.getTotalLength());
+		assertEquals(TEXT2.length(), comp1.getTotalLength());
+		assertEquals(TEXT2.length(), leaf2.getTotalLength());
+		assertEquals(TEXT3.length(), leaf3.getTotalLength());
 		
-		assertEquals(1, root.getLine());
-		assertEquals(1, leaf0.getLine());
-		assertEquals(3, comp0.getLine());
-		assertEquals(3, leaf1.getLine());
-		assertEquals(2, comp1.getLine());
-		assertEquals(2, leaf2.getLine());
-		assertEquals(4, leaf3.getLine());
+		assertEquals(1, root.getTotalLine());
+		assertEquals(1, leaf0.getTotalLine());
+		assertEquals(3, comp0.getTotalLine());
+		assertEquals(3, leaf1.getTotalLine());
+		assertEquals(2, comp1.getTotalLine());
+		assertEquals(2, leaf2.getTotalLine());
+		assertEquals(4, leaf3.getTotalLine());
 	}
 	
 	public void testRemoveManyLastFirst() throws Exception {
@@ -226,17 +226,17 @@ public class NodeContentAdapterTest extends TestCase {
 		
 		root.getChildren().removeAll(removeUs);
 
-		assertEquals(0, root.getOffset());
-		assertEquals(0, leaf0.getOffset());
-		assertEquals(TEXT0.length(), leaf3.getOffset());
+		assertEquals(0, root.getTotalOffset());
+		assertEquals(0, leaf0.getTotalOffset());
+		assertEquals(TEXT0.length(), leaf3.getTotalOffset());
 		
-		assertEquals(TEXT0.length() + TEXT3.length(), root.getLength());
-		assertEquals(TEXT0.length(), leaf0.getLength());
-		assertEquals(TEXT3.length(), leaf3.getLength());		
+		assertEquals(TEXT0.length() + TEXT3.length(), root.getTotalLength());
+		assertEquals(TEXT0.length(), leaf0.getTotalLength());
+		assertEquals(TEXT3.length(), leaf3.getTotalLength());		
 		
-		assertEquals(1, root.getLine());
-		assertEquals(1, leaf0.getLine());
-		assertEquals(2, leaf3.getLine());
+		assertEquals(1, root.getTotalLine());
+		assertEquals(1, leaf0.getTotalLine());
+		assertEquals(2, leaf3.getTotalLine());
 	}
 	
 	public void testRemoveMany() throws Exception {
@@ -249,17 +249,17 @@ public class NodeContentAdapterTest extends TestCase {
 		
 		root.getChildren().removeAll(removeUs);
 
-		assertEquals(0, root.getOffset());
-		assertEquals(0, leaf0.getOffset());
-		assertEquals(TEXT0.length(), leaf3.getOffset());
+		assertEquals(0, root.getTotalOffset());
+		assertEquals(0, leaf0.getTotalOffset());
+		assertEquals(TEXT0.length(), leaf3.getTotalOffset());
 		
-		assertEquals(TEXT0.length() + TEXT3.length(), root.getLength());
-		assertEquals(TEXT0.length(), leaf0.getLength());
-		assertEquals(TEXT3.length(), leaf3.getLength());		
+		assertEquals(TEXT0.length() + TEXT3.length(), root.getTotalLength());
+		assertEquals(TEXT0.length(), leaf0.getTotalLength());
+		assertEquals(TEXT3.length(), leaf3.getTotalLength());		
 		
-		assertEquals(1, root.getLine());
-		assertEquals(1, leaf0.getLine());
-		assertEquals(2, leaf3.getLine());
+		assertEquals(1, root.getTotalLine());
+		assertEquals(1, leaf0.getTotalLine());
+		assertEquals(2, leaf3.getTotalLine());
 	}
 	
 	public void testSet() throws Exception {
@@ -271,29 +271,29 @@ public class NodeContentAdapterTest extends TestCase {
 		
 		root.getChildren().set(3, leaf4);
 
-		assertEquals(0, root.getOffset());
-		assertEquals(0, leaf0.getOffset());
-		assertEquals(TEXT0.length(), comp0.getOffset());
-		assertEquals(TEXT0.length(), leaf1.getOffset());
-		assertEquals(TEXT0.length() + TEXT1.length(), comp1.getOffset());
-		assertEquals(TEXT0.length() + TEXT1.length(), leaf2.getOffset());
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length(), leaf4.getOffset());
+		assertEquals(0, root.getTotalOffset());
+		assertEquals(0, leaf0.getTotalOffset());
+		assertEquals(TEXT0.length(), comp0.getTotalOffset());
+		assertEquals(TEXT0.length(), leaf1.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT1.length(), comp1.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT1.length(), leaf2.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length(), leaf4.getTotalOffset());
 
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT4.length(), root.getLength());
-		assertEquals(TEXT0.length(), leaf0.getLength());
-		assertEquals(TEXT1.length(), comp0.getLength());
-		assertEquals(TEXT1.length(), leaf1.getLength());
-		assertEquals(TEXT2.length(), comp1.getLength());
-		assertEquals(TEXT2.length(), leaf2.getLength());
-		assertEquals(TEXT4.length(), leaf4.getLength());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT4.length(), root.getTotalLength());
+		assertEquals(TEXT0.length(), leaf0.getTotalLength());
+		assertEquals(TEXT1.length(), comp0.getTotalLength());
+		assertEquals(TEXT1.length(), leaf1.getTotalLength());
+		assertEquals(TEXT2.length(), comp1.getTotalLength());
+		assertEquals(TEXT2.length(), leaf2.getTotalLength());
+		assertEquals(TEXT4.length(), leaf4.getTotalLength());
 		
-		assertEquals(1, root.getLine());
-		assertEquals(1, leaf0.getLine());
-		assertEquals(2, comp0.getLine());
-		assertEquals(2, leaf1.getLine());
-		assertEquals(3, comp1.getLine());
-		assertEquals(3, leaf2.getLine());
-		assertEquals(4, leaf4.getLine());
+		assertEquals(1, root.getTotalLine());
+		assertEquals(1, leaf0.getTotalLine());
+		assertEquals(2, comp0.getTotalLine());
+		assertEquals(2, leaf1.getTotalLine());
+		assertEquals(3, comp1.getTotalLine());
+		assertEquals(3, leaf2.getTotalLine());
+		assertEquals(4, leaf4.getTotalLine());
 	}
 	
 	public void testAddMany() throws Exception {
@@ -311,35 +311,35 @@ public class NodeContentAdapterTest extends TestCase {
 
 		comp0.getChildren().addAll(0, addUs);
 		
-		assertEquals(0, root.getOffset());
-		assertEquals(0, leaf0.getOffset());
-		assertEquals(TEXT0.length(), comp0.getOffset());
-		assertEquals(TEXT0.length(), leaf4.getOffset());
-		assertEquals(TEXT0.length() + TEXT4.length(), leaf5.getOffset());
-		assertEquals(TEXT0.length() + TEXT4.length() + TEXT5.length(), leaf1.getOffset());
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT4.length() + TEXT5.length(), comp1.getOffset());
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT4.length() + TEXT5.length(), leaf2.getOffset());
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT4.length() + TEXT5.length(), leaf3.getOffset());
+		assertEquals(0, root.getTotalOffset());
+		assertEquals(0, leaf0.getTotalOffset());
+		assertEquals(TEXT0.length(), comp0.getTotalOffset());
+		assertEquals(TEXT0.length(), leaf4.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT4.length(), leaf5.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT4.length() + TEXT5.length(), leaf1.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT4.length() + TEXT5.length(), comp1.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT4.length() + TEXT5.length(), leaf2.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT4.length() + TEXT5.length(), leaf3.getTotalOffset());
 
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT3.length() + TEXT4.length() + TEXT5.length(), root.getLength());
-		assertEquals(TEXT0.length(), leaf0.getLength());
-		assertEquals(TEXT4.length() + TEXT5.length() + TEXT1.length(), comp0.getLength());
-		assertEquals(TEXT4.length(), leaf4.getLength());
-		assertEquals(TEXT5.length(), leaf5.getLength());
-		assertEquals(TEXT1.length(), leaf1.getLength());
-		assertEquals(TEXT2.length(), comp1.getLength());
-		assertEquals(TEXT2.length(), leaf2.getLength());
-		assertEquals(TEXT3.length(), leaf3.getLength());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT3.length() + TEXT4.length() + TEXT5.length(), root.getTotalLength());
+		assertEquals(TEXT0.length(), leaf0.getTotalLength());
+		assertEquals(TEXT4.length() + TEXT5.length() + TEXT1.length(), comp0.getTotalLength());
+		assertEquals(TEXT4.length(), leaf4.getTotalLength());
+		assertEquals(TEXT5.length(), leaf5.getTotalLength());
+		assertEquals(TEXT1.length(), leaf1.getTotalLength());
+		assertEquals(TEXT2.length(), comp1.getTotalLength());
+		assertEquals(TEXT2.length(), leaf2.getTotalLength());
+		assertEquals(TEXT3.length(), leaf3.getTotalLength());
 		
-		assertEquals(1, root.getLine());
-		assertEquals(1, leaf0.getLine());
-		assertEquals(2, comp0.getLine());
-		assertEquals(2, leaf4.getLine());
-		assertEquals(3, leaf5.getLine());
-		assertEquals(4, leaf1.getLine());
-		assertEquals(5, comp1.getLine());
-		assertEquals(5, leaf2.getLine());
-		assertEquals(6, leaf3.getLine());
+		assertEquals(1, root.getTotalLine());
+		assertEquals(1, leaf0.getTotalLine());
+		assertEquals(2, comp0.getTotalLine());
+		assertEquals(2, leaf4.getTotalLine());
+		assertEquals(3, leaf5.getTotalLine());
+		assertEquals(4, leaf1.getTotalLine());
+		assertEquals(5, comp1.getTotalLine());
+		assertEquals(5, leaf2.getTotalLine());
+		assertEquals(6, leaf3.getTotalLine());
 	}
 
 	public void testAdd() throws Exception {
@@ -351,31 +351,31 @@ public class NodeContentAdapterTest extends TestCase {
 		
 		comp0.getChildren().add(0, leaf4);
 
-		assertEquals(0, root.getOffset());
-		assertEquals(0, leaf0.getOffset());
-		assertEquals(TEXT0.length(), comp0.getOffset());
-		assertEquals(TEXT0.length(), leaf4.getOffset());
-		assertEquals(TEXT0.length() + TEXT4.length(), leaf1.getOffset());
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT4.length(), comp1.getOffset());
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT4.length(), leaf2.getOffset());
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT4.length(), leaf3.getOffset());
+		assertEquals(0, root.getTotalOffset());
+		assertEquals(0, leaf0.getTotalOffset());
+		assertEquals(TEXT0.length(), comp0.getTotalOffset());
+		assertEquals(TEXT0.length(), leaf4.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT4.length(), leaf1.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT4.length(), comp1.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT4.length(), leaf2.getTotalOffset());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT4.length(), leaf3.getTotalOffset());
 
-		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT3.length() + TEXT4.length(), root.getLength());
-		assertEquals(TEXT0.length(), leaf0.getLength());
-		assertEquals(TEXT4.length() + TEXT1.length(), comp0.getLength());
-		assertEquals(TEXT4.length(), leaf4.getLength());
-		assertEquals(TEXT1.length(), leaf1.getLength());
-		assertEquals(TEXT2.length(), comp1.getLength());
-		assertEquals(TEXT2.length(), leaf2.getLength());
-		assertEquals(TEXT3.length(), leaf3.getLength());
+		assertEquals(TEXT0.length() + TEXT1.length() + TEXT2.length() + TEXT3.length() + TEXT4.length(), root.getTotalLength());
+		assertEquals(TEXT0.length(), leaf0.getTotalLength());
+		assertEquals(TEXT4.length() + TEXT1.length(), comp0.getTotalLength());
+		assertEquals(TEXT4.length(), leaf4.getTotalLength());
+		assertEquals(TEXT1.length(), leaf1.getTotalLength());
+		assertEquals(TEXT2.length(), comp1.getTotalLength());
+		assertEquals(TEXT2.length(), leaf2.getTotalLength());
+		assertEquals(TEXT3.length(), leaf3.getTotalLength());
 		
-		assertEquals(1, root.getLine());
-		assertEquals(1, leaf0.getLine());
-		assertEquals(2, comp0.getLine());
-		assertEquals(2, leaf4.getLine());
-		assertEquals(3, leaf1.getLine());
-		assertEquals(4, comp1.getLine());
-		assertEquals(4, leaf2.getLine());
-		assertEquals(5, leaf3.getLine());
+		assertEquals(1, root.getTotalLine());
+		assertEquals(1, leaf0.getTotalLine());
+		assertEquals(2, comp0.getTotalLine());
+		assertEquals(2, leaf4.getTotalLine());
+		assertEquals(3, leaf1.getTotalLine());
+		assertEquals(4, comp1.getTotalLine());
+		assertEquals(4, leaf2.getTotalLine());
+		assertEquals(5, leaf3.getTotalLine());
 	}
 }

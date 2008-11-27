@@ -45,21 +45,21 @@ public class NodeContentAdapter extends EContentAdapter {
 						{
 							int idx = notification.getPosition();
 							int startIndex = idx < 1 ? 
-								parent.getOffset() - 1:
+								parent.getTotalOffset() - 1:
 								getOffsetOfNextLeaf(parent.getChildren().get(idx - 1)) - 1;
 							updateCompositeNode(getRootNode(parent), startIndex, createWorkingNodeInfo());
 						}
 						break;
 					case Notification.REMOVE:
 					case Notification.SET:
-						updateCompositeNode(getRootNode(parent), ((AbstractNode) notification.getOldValue()).getOffset() - 1, 
+						updateCompositeNode(getRootNode(parent), ((AbstractNode) notification.getOldValue()).getTotalOffset() - 1, 
 								createWorkingNodeInfo());
 						break;
 					case Notification.MOVE:
 						{
 							int leftPos = Math.min(notification.getPosition(), (Integer)notification.getOldValue());
 							int startIndex = leftPos < 1 ? 
-								parent.getOffset() - 1:
+								parent.getTotalOffset() - 1:
 								getOffsetOfNextLeaf(parent.getChildren().get(leftPos - 1)) - 1;
 							updateCompositeNode(getRootNode(parent), startIndex, createWorkingNodeInfo());
 						}
@@ -72,7 +72,7 @@ public class NodeContentAdapter extends EContentAdapter {
 	}
 
 	private int getOffsetOfNextLeaf(AbstractNode node) {
-		return node.getOffset() + node.getLength();
+		return node.getTotalOffset() + node.getTotalLength();
 	}
 
 	private NodeInfo createWorkingNodeInfo() {
@@ -84,7 +84,7 @@ public class NodeContentAdapter extends EContentAdapter {
 	}
 
 	private boolean isUpdateRequired(AbstractNode node, int updateFromOffset, int lastOffset) {
-		return node.getOffset() >= updateFromOffset || 
+		return node.getTotalOffset() >= updateFromOffset || 
 			getOffsetOfNextLeaf(node) > updateFromOffset;
 	}
 	
@@ -96,27 +96,35 @@ public class NodeContentAdapter extends EContentAdapter {
 	 * @param workingInfo aggregating object.
 	 */
 	protected void updateCompositeNode(CompositeNode nodeToUpdate, int startAtOffset, NodeInfo workingInfo) {
-		if (workingInfo.offset < startAtOffset && !isUpdateRequired(nodeToUpdate, startAtOffset, workingInfo.offset)) {
-			workingInfo.offset += nodeToUpdate.getLength();
+		if (workingInfo.totalOffset < startAtOffset && !isUpdateRequired(nodeToUpdate, startAtOffset, workingInfo.totalOffset)) {
+			workingInfo.totalOffset += nodeToUpdate.getTotalLength();
 //			workingInfo.line = nodeToUpdate.getLine();		
 			return;
 		}
-		if (workingInfo.offset >= startAtOffset || nodeToUpdate.getOffset() >= startAtOffset) {
-			nodeToUpdate.setOffset(workingInfo.offset);
-			nodeToUpdate.setLine(workingInfo.line);
+		if (workingInfo.totalOffset >= startAtOffset || nodeToUpdate.getTotalOffset() >= startAtOffset) {
+			nodeToUpdate.setTotalOffset(workingInfo.totalOffset);
+			nodeToUpdate.setTotalLine(workingInfo.totalLine);
 		} else {
-			workingInfo.line = nodeToUpdate.getLine();
+			workingInfo.totalLine = nodeToUpdate.getTotalLine();
 		}		
-		EList<AbstractNode> children = nodeToUpdate.getChildren();
+		final EList<AbstractNode> children = nodeToUpdate.getChildren();
+		boolean firstVisibleChild = true;		
 		for(int i = 0; i < children.size(); i++) {
 			AbstractNode child = children.get(i);
 			if (child instanceof CompositeNode) {
+				firstVisibleChild = false;
 				updateCompositeNode((CompositeNode) child, startAtOffset, workingInfo);
 			} else {
+				if (firstVisibleChild) {
+					if (!((LeafNode) child).isHidden()) {
+						
+					}
+					firstVisibleChild = false;
+				}
 				updateLeafNode((LeafNode) child, workingInfo);
 			}
 		}
-		nodeToUpdate.setLength(workingInfo.offset - nodeToUpdate.getOffset());
+		nodeToUpdate.setTotalLength(workingInfo.totalOffset - nodeToUpdate.getTotalOffset());
 	}
 
 	/**
@@ -125,11 +133,12 @@ public class NodeContentAdapter extends EContentAdapter {
 	 * @param workingInfo
 	 */
 	protected void updateLeafNode(LeafNode node, NodeInfo workingInfo) {
-		node.setLength(node.getText().length());
-		node.setOffset(workingInfo.offset);
-		node.setLine(workingInfo.line);
-		workingInfo.offset += node.getLength();
-		workingInfo.line += ParsetreeUtil.countLines(node.getText());
+		node.setTotalLength(node.getText().length());
+		node.setTotalOffset(workingInfo.totalOffset);
+		node.setTotalLine(workingInfo.totalLine);
+		
+		workingInfo.totalOffset += node.getTotalLength();
+		workingInfo.totalLine += ParsetreeUtil.countLines(node.getText());
 	}
 	
 	/*
@@ -147,12 +156,12 @@ public class NodeContentAdapter extends EContentAdapter {
 	 * Serves as an aggregating parameter.
 	 */
 	static class NodeInfo {
-		int offset;
-		int line;
+		int totalOffset;
+		int totalLine;
 
-		public NodeInfo(int offset, int line) {
-			this.offset = offset;
-			this.line = line;
+		public NodeInfo(int totalOffset, int totalLine) {
+			this.totalOffset = totalOffset;
+			this.totalLine = totalLine;
 		}
 	}
 }

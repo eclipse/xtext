@@ -14,14 +14,15 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParsetreePackage;
 import org.eclipse.xtext.parsetree.SyntaxError;
 
 /**
- * 
  * @author koehnlein
  * @author bkolb
+ * @author Sebastian Zarnekow
  */
 public class ParsetreeUtil {
 	
@@ -47,8 +48,8 @@ public class ParsetreeUtil {
 		return line;
 	}
 	
-	public static int endLine(AbstractNodeImpl _this) {
-		int line = _this.getLine();
+	public static int totalEndLine(AbstractNodeImpl _this) {
+		int line = _this.getTotalLine();
 		String text = _this.serialize();
 		line += countLines(text);
 		return line;
@@ -128,6 +129,84 @@ public class ParsetreeUtil {
 
 	public static EList<SyntaxError> allSyntaxErrors(AbstractNodeImpl abstractNodeImpl) {
 		return null;
+	}
+
+	/**
+	 * @param abstractNode
+	 * @return
+	 */
+	public static int getOffset(AbstractNode abstractNode) {
+		if (abstractNode instanceof LeafNode)
+			return abstractNode.getTotalOffset();
+		final CompositeNode node = (CompositeNode) abstractNode;
+		for(int i = 0; i < node.getChildren().size(); i++) {
+			final AbstractNode child = node.getChildren().get(i);
+			if (child instanceof CompositeNode) 
+				return child.getTotalOffset();
+			final LeafNode leaf = (LeafNode) child;
+			if (!leaf.isHidden())
+				return leaf.getTotalOffset();
+		}
+		// every child node is a hidden node, return total offset
+		return abstractNode.getTotalOffset();
+	}
+
+	/**
+	 * @param abstractNode
+	 * @return
+	 */
+	public static int getLine(AbstractNode abstractNode) {
+		if (abstractNode instanceof LeafNode)
+			return abstractNode.getTotalLine();
+		final CompositeNode node = (CompositeNode) abstractNode;
+		for(int i = 0; i < node.getChildren().size(); i++) {
+			final AbstractNode child = node.getChildren().get(i);
+			if (child instanceof CompositeNode) 
+				return child.getTotalLine();
+			final LeafNode leaf = (LeafNode) child;
+			if (!leaf.isHidden())
+				return leaf.getTotalLine();
+		}
+		// every child node is a hidden node, return total line
+		return abstractNode.getTotalLine();
+	}
+
+	/**
+	 * @param abstractNode
+	 * @return
+	 */
+	public static int getLength(AbstractNode abstractNode) {
+		if (abstractNode instanceof LeafNode)
+			return abstractNode.getTotalLength();
+		final CompositeNode node = (CompositeNode) abstractNode;
+		for(int i = node.getChildren().size() - 1; i >= 0 ; i--) {
+			final AbstractNode child = node.getChildren().get(i);
+			if (child instanceof CompositeNode)
+				return child.getTotalOffset() - abstractNode.getOffset() + child.getTotalLength();
+			if (!((LeafNode) child).isHidden())
+				return child.getTotalOffset() - abstractNode.getOffset() + child.getTotalLength();
+		}
+		// every child node is a hidden node, return total length
+		return abstractNode.getTotalLength();
+	}
+
+	/**
+	 * @param abstractNode
+	 * @return
+	 */
+	public static int endLine(AbstractNode abstractNode) {
+		if (abstractNode instanceof LeafNode)
+			return abstractNode.totalEndLine();
+		final CompositeNode node = (CompositeNode) abstractNode;
+		for(int i = node.getChildren().size() - 1; i >= 0 ; i--) {
+			final AbstractNode child = node.getChildren().get(i);
+			if (child instanceof CompositeNode)
+				return child.totalEndLine();
+			if (!((LeafNode) child).isHidden())
+				return child.totalEndLine();
+		}
+		// every child node is a hidden node, return total endLine
+		return abstractNode.totalEndLine();
 	}
 
 }

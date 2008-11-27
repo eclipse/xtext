@@ -248,8 +248,8 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 					LeafNode currentLeafNode = ParseTreeUtil.getCurrentNodeByOffset(parserNode, offset);
 
-					boolean isCursorAtTheEndOfTheLastElement = offset == (currentLeafNode.getOffset() + currentLeafNode
-							.getLength());
+					boolean isCursorAtTheEndOfTheLastElement = offset == (currentLeafNode.getTotalOffset() + currentLeafNode
+							.getTotalLength());
 
 					if (isCursorAtTheEndOfTheLastElement && completionProposal instanceof XtextCompletionProposal) {
 

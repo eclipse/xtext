@@ -20,6 +20,9 @@ projectName(GenModel this):
 packageName(GenModel this):
     uiPluginBundleID;
     
+foo(GenModel this) :
+	this.packageName();
+    
 activatorClassFQN(GenModel this):
     packageName() + ".internal." + "Activator";
     
@@ -34,3 +37,6 @@ editorExtensionId(GenModel this):
 
 languageKeywordId(GenModel this):
 	packageName() + ".ui.keyword_"+languageName();
+
+create ecore::EClass entity(ecore::EClass clazz) :
+	clazz.eRootContainer.eAllContents.typeSelect(ecore::EReference).select(e|e.name=="foo").first();

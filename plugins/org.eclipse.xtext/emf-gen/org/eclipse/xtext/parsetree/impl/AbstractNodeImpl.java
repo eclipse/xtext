@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractNodeImpl.java,v 1.9 2008/08/07 15:05:36 sefftinge Exp $
+ * $Id: AbstractNodeImpl.java,v 1.10 2008/11/27 15:59:42 sefftinge Exp $
  */
 package org.eclipse.xtext.parsetree.impl;
 
@@ -39,9 +39,9 @@ import org.eclipse.xtext.parsetree.SyntaxError;
  *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getGrammarElement <em>Grammar Element</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getElement <em>Element</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getSyntaxError <em>Syntax Error</em>}</li>
- *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getOffset <em>Offset</em>}</li>
- *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getLine <em>Line</em>}</li>
- *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getLength <em>Length</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getTotalOffset <em>Total Offset</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getTotalLine <em>Total Line</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.impl.AbstractNodeImpl#getTotalLength <em>Total Length</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,64 +80,64 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	protected SyntaxError syntaxError;
 
 		/**
-	 * The default value of the '{@link #getOffset() <em>Offset</em>}' attribute.
+	 * The default value of the '{@link #getTotalOffset() <em>Total Offset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOffset()
+	 * @see #getTotalOffset()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int OFFSET_EDEFAULT = 0;
+	protected static final int TOTAL_OFFSET_EDEFAULT = 0;
 
 		/**
-	 * The cached value of the '{@link #getOffset() <em>Offset</em>}' attribute.
+	 * The cached value of the '{@link #getTotalOffset() <em>Total Offset</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOffset()
+	 * @see #getTotalOffset()
 	 * @generated
 	 * @ordered
 	 */
-	protected int offset = OFFSET_EDEFAULT;
+	protected int totalOffset = TOTAL_OFFSET_EDEFAULT;
 
 		/**
-	 * The default value of the '{@link #getLine() <em>Line</em>}' attribute.
+	 * The default value of the '{@link #getTotalLine() <em>Total Line</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLine()
+	 * @see #getTotalLine()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int LINE_EDEFAULT = 0;
+	protected static final int TOTAL_LINE_EDEFAULT = 0;
 
 		/**
-	 * The cached value of the '{@link #getLine() <em>Line</em>}' attribute.
+	 * The cached value of the '{@link #getTotalLine() <em>Total Line</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLine()
+	 * @see #getTotalLine()
 	 * @generated
 	 * @ordered
 	 */
-	protected int line = LINE_EDEFAULT;
+	protected int totalLine = TOTAL_LINE_EDEFAULT;
 
 		/**
-	 * The default value of the '{@link #getLength() <em>Length</em>}' attribute.
+	 * The default value of the '{@link #getTotalLength() <em>Total Length</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLength()
+	 * @see #getTotalLength()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int LENGTH_EDEFAULT = -1;
+	protected static final int TOTAL_LENGTH_EDEFAULT = -1;
 
 		/**
-	 * The cached value of the '{@link #getLength() <em>Length</em>}' attribute.
+	 * The cached value of the '{@link #getTotalLength() <em>Total Length</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLength()
+	 * @see #getTotalLength()
 	 * @generated
 	 * @ordered
 	 */
-	protected int length = LENGTH_EDEFAULT;
+	protected int totalLength = TOTAL_LENGTH_EDEFAULT;
 
 		/**
 	 * <!-- begin-user-doc -->
@@ -331,8 +331,8 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getOffset() {
-		return offset;
+	public int getTotalOffset() {
+		return totalOffset;
 	}
 
 		/**
@@ -340,11 +340,62 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOffset(int newOffset) {
-		int oldOffset = offset;
-		offset = newOffset;
+	public void setTotalOffset(int newTotalOffset) {
+		int oldTotalOffset = totalOffset;
+		totalOffset = newTotalOffset;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__OFFSET, oldOffset, offset));
+			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__TOTAL_OFFSET, oldTotalOffset, totalOffset));
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getTotalLine() {
+		return totalLine;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTotalLine(int newTotalLine) {
+		int oldTotalLine = totalLine;
+		totalLine = newTotalLine;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__TOTAL_LINE, oldTotalLine, totalLine));
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getTotalLength() {
+		return totalLength;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTotalLength(int newTotalLength) {
+		int oldTotalLength = totalLength;
+		totalLength = newTotalLength;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__TOTAL_LENGTH, oldTotalLength, totalLength));
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getOffset() {
+		return ParsetreeUtil.getOffset(this);
 	}
 
 		/**
@@ -353,19 +404,7 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * @generated
 	 */
 	public int getLine() {
-		return line;
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLine(int newLine) {
-		int oldLine = line;
-		line = newLine;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__LINE, oldLine, line));
+		return ParsetreeUtil.getLine(this);
 	}
 
 		/**
@@ -374,7 +413,7 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * @generated
 	 */
 	public int getLength() {
-		return length;
+		return ParsetreeUtil.getLength(this);
 	}
 
 		/**
@@ -382,11 +421,8 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLength(int newLength) {
-		int oldLength = length;
-		length = newLength;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ParsetreePackage.ABSTRACT_NODE__LENGTH, oldLength, length));
+	public int endLine() {
+		return ParsetreeUtil.endLine(this);
 	}
 
 		/**
@@ -433,8 +469,8 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int endLine() {
-		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.endLine((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.endLine((LeafNodeImpl) this);} else {return ParsetreeUtil.endLine((AbstractNodeImpl) this);}
+	public int totalEndLine() {
+		if (this instanceof CompositeNodeImpl) { return ParsetreeUtil.totalEndLine((CompositeNodeImpl) this);} else if (this instanceof LeafNodeImpl) { return ParsetreeUtil.totalEndLine((LeafNodeImpl) this);} else {return ParsetreeUtil.totalEndLine((AbstractNodeImpl) this);}
 	}
 
 		/**
@@ -509,12 +545,12 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 				return basicGetElement();
 			case ParsetreePackage.ABSTRACT_NODE__SYNTAX_ERROR:
 				return getSyntaxError();
-			case ParsetreePackage.ABSTRACT_NODE__OFFSET:
-				return new Integer(getOffset());
-			case ParsetreePackage.ABSTRACT_NODE__LINE:
-				return new Integer(getLine());
-			case ParsetreePackage.ABSTRACT_NODE__LENGTH:
-				return new Integer(getLength());
+			case ParsetreePackage.ABSTRACT_NODE__TOTAL_OFFSET:
+				return new Integer(getTotalOffset());
+			case ParsetreePackage.ABSTRACT_NODE__TOTAL_LINE:
+				return new Integer(getTotalLine());
+			case ParsetreePackage.ABSTRACT_NODE__TOTAL_LENGTH:
+				return new Integer(getTotalLength());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -541,14 +577,14 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 			case ParsetreePackage.ABSTRACT_NODE__SYNTAX_ERROR:
 				setSyntaxError((SyntaxError)newValue);
 				return;
-			case ParsetreePackage.ABSTRACT_NODE__OFFSET:
-				setOffset(((Integer)newValue).intValue());
+			case ParsetreePackage.ABSTRACT_NODE__TOTAL_OFFSET:
+				setTotalOffset(((Integer)newValue).intValue());
 				return;
-			case ParsetreePackage.ABSTRACT_NODE__LINE:
-				setLine(((Integer)newValue).intValue());
+			case ParsetreePackage.ABSTRACT_NODE__TOTAL_LINE:
+				setTotalLine(((Integer)newValue).intValue());
 				return;
-			case ParsetreePackage.ABSTRACT_NODE__LENGTH:
-				setLength(((Integer)newValue).intValue());
+			case ParsetreePackage.ABSTRACT_NODE__TOTAL_LENGTH:
+				setTotalLength(((Integer)newValue).intValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -575,14 +611,14 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 			case ParsetreePackage.ABSTRACT_NODE__SYNTAX_ERROR:
 				setSyntaxError((SyntaxError)null);
 				return;
-			case ParsetreePackage.ABSTRACT_NODE__OFFSET:
-				setOffset(OFFSET_EDEFAULT);
+			case ParsetreePackage.ABSTRACT_NODE__TOTAL_OFFSET:
+				setTotalOffset(TOTAL_OFFSET_EDEFAULT);
 				return;
-			case ParsetreePackage.ABSTRACT_NODE__LINE:
-				setLine(LINE_EDEFAULT);
+			case ParsetreePackage.ABSTRACT_NODE__TOTAL_LINE:
+				setTotalLine(TOTAL_LINE_EDEFAULT);
 				return;
-			case ParsetreePackage.ABSTRACT_NODE__LENGTH:
-				setLength(LENGTH_EDEFAULT);
+			case ParsetreePackage.ABSTRACT_NODE__TOTAL_LENGTH:
+				setTotalLength(TOTAL_LENGTH_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -605,12 +641,12 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 				return element != null;
 			case ParsetreePackage.ABSTRACT_NODE__SYNTAX_ERROR:
 				return syntaxError != null;
-			case ParsetreePackage.ABSTRACT_NODE__OFFSET:
-				return offset != OFFSET_EDEFAULT;
-			case ParsetreePackage.ABSTRACT_NODE__LINE:
-				return line != LINE_EDEFAULT;
-			case ParsetreePackage.ABSTRACT_NODE__LENGTH:
-				return length != LENGTH_EDEFAULT;
+			case ParsetreePackage.ABSTRACT_NODE__TOTAL_OFFSET:
+				return totalOffset != TOTAL_OFFSET_EDEFAULT;
+			case ParsetreePackage.ABSTRACT_NODE__TOTAL_LINE:
+				return totalLine != TOTAL_LINE_EDEFAULT;
+			case ParsetreePackage.ABSTRACT_NODE__TOTAL_LENGTH:
+				return totalLength != TOTAL_LENGTH_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -625,12 +661,12 @@ public abstract class AbstractNodeImpl extends EObjectImpl implements AbstractNo
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (offset: ");
-		result.append(offset);
-		result.append(", line: ");
-		result.append(line);
-		result.append(", length: ");
-		result.append(length);
+		result.append(" (totalOffset: ");
+		result.append(totalOffset);
+		result.append(", totalLine: ");
+		result.append(totalLine);
+		result.append(", totalLength: ");
+		result.append(totalLength);
 		result.append(')');
 		return result.toString();
 	}
