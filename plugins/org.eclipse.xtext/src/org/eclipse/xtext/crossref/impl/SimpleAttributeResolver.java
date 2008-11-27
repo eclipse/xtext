@@ -12,7 +12,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.util.Filter;
@@ -23,7 +23,7 @@ import org.eclipse.xtext.util.SimpleCache;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SimpleAttributeResolver<T> implements Adapter {
+public class SimpleAttributeResolver<T> {
 
 	private final SimpleCache<EClass, EAttribute> attributeCache;
 
@@ -31,19 +31,20 @@ public class SimpleAttributeResolver<T> implements Adapter {
 
 	private final String attributeName;
 
+	private final Adapter discardingAdapter;
+
 	public static <T> SimpleAttributeResolver<T> newResolver(final Class<T> type, final String attributeName) {
 		return new SimpleAttributeResolver<T>(type, attributeName);
 	}
-	
+
 	public SimpleAttributeResolver(final Class<T> type, final String attributeName) {
 		this.attributeName = attributeName;
+		this.discardingAdapter = new DiscardingAdapter();
 		attributeCache = new SimpleCache<EClass, EAttribute>(new Function<EClass, EAttribute>() {
 			public EAttribute exec(EClass param) {
-				EStructuralFeature structuralFeature = param.getEStructuralFeature(attributeName);
-				if (structuralFeature != null && structuralFeature instanceof EAttribute
-						&& structuralFeature.getEType() instanceof EDataType) {
-					EDataType dt = (EDataType) structuralFeature.getEType();
-					if (type.equals(dt.getInstanceClass())) {
+				final EStructuralFeature structuralFeature = param.getEStructuralFeature(attributeName);
+				if (structuralFeature != null && structuralFeature instanceof EAttribute && !structuralFeature.isMany()) {
+					if (type.isAssignableFrom(structuralFeature.getEType().getInstanceClass())) {
 						return (EAttribute) structuralFeature;
 					}
 				}
@@ -53,13 +54,11 @@ public class SimpleAttributeResolver<T> implements Adapter {
 		valueCache = new SimpleCache<EObject, T>(new Function<EObject, T>() {
 			@SuppressWarnings("unchecked")
 			public T exec(EObject param) {
-				final EAttribute attr = attributeCache.get(param.eClass());
-				if (attr != null) {
-					param.eAdapters().add(SimpleAttributeResolver.this);
+				final EStructuralFeature feature = attributeCache.get(param.eClass());
+				if (feature != null) {
+					param.eAdapters().add(discardingAdapter);
 				}
-				// TODO: think about String.intern()
-				//				return attr != null ? ((String) param.eGet(attr)).intern() : null;
-				return attr != null ? ((T) param.eGet(attr)) : null;
+				return feature != null ? ((T) param.eGet(feature)) : null;
 			}
 		});
 	}
@@ -68,7 +67,7 @@ public class SimpleAttributeResolver<T> implements Adapter {
 		return valueCache.get(object);
 	}
 
-	public Iterable<EObject> getMatches(Iterable<EObject> candidates, final T value) {
+	public Iterable<EObject> getMatches(Iterable<? extends EObject> candidates, final T value) {
 		return new FilteringIterator<EObject>(candidates.iterator(), new Filter<EObject>() {
 			public boolean matches(EObject param) {
 				final T candidateValue = getValue(param);
@@ -77,28 +76,32 @@ public class SimpleAttributeResolver<T> implements Adapter {
 		});
 	}
 
-	public Notifier getTarget() {
-		return null;
-	}
+	private class DiscardingAdapter implements Adapter {
 
-	public boolean isAdapterForType(Object type) {
-		return type instanceof EObject;
-	}
-
-	public void notifyChanged(Notification notification) {
-		if (!notification.isTouch() && Notification.SET == notification.getEventType()) {
-			final Object feature = notification.getFeature();
-			if (feature != null && feature instanceof EAttribute) {
-				if (attributeName.equals(((EAttribute) feature).getName())) {
-					valueCache.discard((EObject) notification.getNotifier());
-				}
-			}
-
+		public Notifier getTarget() {
+			return null;
 		}
-	}
 
-	public void setTarget(Notifier newTarget) {
-		// nothing to do
+		public boolean isAdapterForType(Object type) {
+			return type instanceof EObject;
+		}
+
+		public void notifyChanged(Notification notification) {
+			if (!notification.isTouch() && Notification.SET == notification.getEventType()) {
+				final Object feature = notification.getFeature();
+				if (feature != null) {
+					if (attributeName.equals(((ENamedElement) feature).getName())) {
+						valueCache.discard((EObject) notification.getNotifier());
+						((EObject) notification.getNotifier()).eAdapters().remove(this);
+					}
+				}
+
+			}
+		}
+
+		public void setTarget(Notifier newTarget) {
+			// nothing to do
+		}
 	}
 
 }

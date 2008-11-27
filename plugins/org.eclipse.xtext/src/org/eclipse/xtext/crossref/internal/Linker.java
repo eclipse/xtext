@@ -13,7 +13,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -32,8 +31,6 @@ import org.eclipse.xtext.service.Inject;
 
 public final class Linker implements ILinker {
 
-	private static final Logger log = Logger.getLogger(Linker.class);
-	
 	@Inject
 	private ILinkingService linkingService;
 
@@ -87,9 +84,9 @@ public final class Linker implements ILinker {
 		else { // eRef.getUpperBound() == -1 || 
 			// eRef.getUpperBound() < links.size
 			// TODO extract and check weather equals or identity is used by list
-			List<EObject> list = (List<EObject>) obj.eGet(eRef);
+			final List<EObject> list = (List<EObject>) obj.eGet(eRef);
 			if (eRef.isUnique() && (list instanceof BasicEList)) {
-				Set<EObject> addUs = new LinkedHashSet<EObject>(links);
+				final Set<EObject> addUs = new LinkedHashSet<EObject>(links);
 				//addUs.removeAll(list); // removeAll calls most likely list.contains() which is rather slow
 				for (int i = 0; i < list.size(); i++)
 					addUs.remove(list.get(i));
