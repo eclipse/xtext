@@ -28,7 +28,7 @@ public class DefaultLinkingCandidatesService extends AbstractLinkingCandidatesSe
 	private ILinkingScopeService scopeService;
 
 	public List<EObject> getLinkingCandidates(EObject context, EReference reference) {
-		final List<EObject> candidates = scopeService.getObjectsInScope(context, reference);
+		final Iterable<EObject> candidates = scopeService.getObjectsInScope(context, reference);
 		final List<EObject> result = new ArrayList<EObject>();
 		final Iterator<EObject> iter = candidates.iterator();
 		final EClass requiredType = reference.getEReferenceType();

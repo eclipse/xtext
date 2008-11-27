@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.service.ILanguageService;
@@ -30,5 +28,5 @@ public interface ILinkingScopeService extends ILanguageService {
 	 * @param reference reference to have fine grained access for visibility  
 	 * @return List of EObjects in the given scope
 	 */
-	public List<EObject> getObjectsInScope(EObject context, EReference reference);
+	public Iterable<EObject> getObjectsInScope(EObject context, EReference reference);
 }

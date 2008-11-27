@@ -37,7 +37,7 @@ public class SimpleAttributeResolver<T> {
 		return new SimpleAttributeResolver<T>(type, attributeName);
 	}
 
-	public SimpleAttributeResolver(final Class<T> type, final String attributeName) {
+	private SimpleAttributeResolver(final Class<T> type, final String attributeName) {
 		this.attributeName = attributeName;
 		this.discardingAdapter = new DiscardingAdapter();
 		attributeCache = new SimpleCache<EClass, EAttribute>(new Function<EClass, EAttribute>() {
