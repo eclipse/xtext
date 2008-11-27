@@ -217,7 +217,11 @@ public class XtextCompletionProposal implements ICompletionProposal,
 			
 			IDocument document = viewer.getDocument();
 			
+			int offsetToApply = this.offset;
+
 			if (model != null) {
+				
+				
 				CompositeNode parserNode = NodeUtil.getRootNode(model);
 				
 				LeafNode currentLeafNode=ParseTreeUtil.getCurrentNodeByOffset(parserNode, offset);
@@ -227,14 +231,14 @@ public class XtextCompletionProposal implements ICompletionProposal,
 				
 				if ((currentLeafNode.isHidden() && !"".equals(currentLeafNode.getText().trim()))
 						|| isCursorAtTheEndOfTheLastElement) {
-					if (getDisplayString().startsWith(currentLeafNode.getText())) {
-						setText(getText().substring(currentLeafNode.getText().length()));
+					if (getDisplayString().toUpperCase().startsWith(currentLeafNode.getText().toUpperCase())) {
+						offsetToApply-=currentLeafNode.getText().trim().length();
 					}
 				} 
 				
 				if (!currentLeafNode.isHidden() && 
 						isCursorAtTheEndOfTheLastElement && 
-						getDisplayString().equalsIgnoreCase(getText())) {
+						offsetToApply==offset) {
 
 					if (currentLeafNode.getGrammarElement() instanceof CrossReference
 							&& abstractElement instanceof CrossReference) {
@@ -252,8 +256,8 @@ public class XtextCompletionProposal implements ICompletionProposal,
 				}	
 			}
 			
-			document.replace(this.offset, offset != this.offset ? offset
-					- this.offset : 0, getText());
+			document.replace(offsetToApply, offset != offsetToApply ? offset
+					- offsetToApply : 0, getText());
 
 		} catch (BadLocationException e) {
 			logger.error(e);
