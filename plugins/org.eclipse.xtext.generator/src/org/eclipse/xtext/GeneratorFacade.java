@@ -66,7 +66,7 @@ public class GeneratorFacade {
 		CompositeNode rootNode = NodeUtil.getRootNode(grammarModel);
 		EList<SyntaxError> allSyntaxErrors = rootNode.allSyntaxErrors();
 		for (SyntaxError syntaxError : allSyntaxErrors) {
-			log.error(syntaxError.getMessage() + ":" + syntaxError.getNode().getLine());
+			log.error(syntaxError.getMessage() + ":" + syntaxError.getNode().getTotalLine());
 		}
 		if (!allSyntaxErrors.isEmpty())
 			throw new IllegalStateException("The grammar has syntax errors.");
