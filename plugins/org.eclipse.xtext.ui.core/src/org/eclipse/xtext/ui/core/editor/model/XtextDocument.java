@@ -9,6 +9,8 @@
 package org.eclipse.xtext.ui.core.editor.model;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -18,6 +20,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.ListenerList;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -29,7 +32,8 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.core.editor.XtextProblemMarkerCreator;
+import org.eclipse.xtext.ui.core.editor.XtextResourceChecker;
+import org.eclipse.xtext.ui.core.internal.XtextMarkerManager;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -63,7 +67,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 			try {
 				String string = get();
 				resource.load(new StringInputStream(string), null);
-			} catch (IOException e) {
+			}
+			catch (IOException e) {
 				throw new WrappedException(e);
 			}
 		}
@@ -86,11 +91,14 @@ public class XtextDocument extends Document implements IXtextDocument {
 		try {
 			updateContentBeforeRead();
 			return work.exec(resource);
-		} catch (RuntimeException e) {
+		}
+		catch (RuntimeException e) {
 			throw e;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new WrappedException(e);
-		} finally {
+		}
+		finally {
 			readLock.unlock();
 		}
 	}
@@ -103,36 +111,39 @@ public class XtextDocument extends Document implements IXtextDocument {
 			notifyModelListeners(resource);
 			// TODO track modifications and serialize back to the text buffer
 			return exec;
-		} catch (RuntimeException e) {
+		}
+		catch (RuntimeException e) {
 			throw e;
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new WrappedException(e);
-		} finally {
+		}
+		finally {
 			writeLock.unlock();
 		}
 	}
-	
+
 	ListenerList modelListeners = new ListenerList(ListenerList.IDENTITY);
-	
+
 	public void addModelListener(IXtextModelListener listener) {
 		Assert.isNotNull(listener);
 		modelListeners.add(listener);
 	}
-	
+
 	public void removeModelListener(IXtextModelListener listener) {
 		Assert.isNotNull(listener);
 		modelListeners.remove(listener);
 	}
-	
+
 	private void notifyModelListeners(XtextResource res) {
 		Object[] listeners = modelListeners.getListeners();
 		for (int i = 0; i < listeners.length; i++) {
 			((IXtextModelListener) listeners[i]).modelChanged(res);
 		}
 	}
-	
+
 	private ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
-	
+
 	public void addXtextDocumentContentObserver(IXtextDocumentContentObserver observer) {
 		addDocumentListener(observer);
 		xtextDocumentObservers.add(observer);
@@ -142,7 +153,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		xtextDocumentObservers.remove(observer);
 		removeDocumentListener(observer);
 	}
-	
+
 	private <T> void updateContentBeforeRead() {
 		Object[] listeners = xtextDocumentObservers.getListeners();
 		UnitOfWork.Processor processor = new LockAwareProcessor();
@@ -150,30 +161,39 @@ public class XtextDocument extends Document implements IXtextDocument {
 			((IXtextDocumentContentObserver) listeners[i]).performNecessaryUpdates(processor);
 		}
 	}
-	
-	class LockAwareProcessor implements UnitOfWork.Processor{
+
+	class LockAwareProcessor implements UnitOfWork.Processor {
 
 		public <T> T process(UnitOfWork<T> transaction) {
-			if (transaction!=null) {
+			if (transaction != null) {
 				readLock.unlock();
 				writeLock.lock();
 				try {
 					return modify(transaction);
-				} finally {
+				}
+				finally {
 					readLock.lock();
 					writeLock.unlock();
 				}
-			} else
+			}
+			else
 				return null;
 		}
-		
+
 	}
 
-	private void checkAndUpdateMarkers(XtextResource res) {
+	private void checkAndUpdateMarkers(XtextResource xtextResource) {
+		// check
+		List<Map<String, Object>> issues = XtextResourceChecker.check(xtextResource);
 		IFile file = getAdapter(IFile.class);
 		if (file == null)
 			throw new IllegalStateException("Couldn't find IFile for Document");
-		XtextProblemMarkerCreator.checkAndUpdateMarkers(res, file);
+		// cleanup
+		XtextMarkerManager.clearMarkers(file, null);
+		if (!issues.isEmpty()) {
+			// update
+			XtextMarkerManager.createMarker(file, issues, new NullProgressMonitor());
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -181,7 +201,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 		URI uri = resource.getURI();
 		if ((adapterType == IFile.class || adapterType == IResource.class) && uri.isPlatformResource()) {
 			return (T) ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
-		} else {
+		}
+		else {
 			return null;
 		}
 	}
