@@ -37,7 +37,7 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 		this.nameResolver = SimpleAttributeResolver.newResolver(String.class, "name");
 	}
 
-	private List<EObject> getObjectsInScope(EObject context, EReference reference) {
+	private Iterable<EObject> getObjectsInScope(EObject context, EReference reference) {
 		if (linkingScopeService == null)
 			throw new IllegalStateException("LinkingScopeService must not be null.");
 		return linkingScopeService.getObjectsInScope(context, reference);
@@ -48,7 +48,7 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 		if (requiredType == null)
 			return Collections.<EObject> emptyList();
 
-		final List<EObject> scope = getObjectsInScope(context, ref);
+		final Iterable<EObject> scope = getObjectsInScope(context, ref);
 		final Iterator<EObject> iter = nameResolver.getMatches(scope, text.getText()).iterator();
 		final List<EObject> result = new ArrayList<EObject>();
 		while (iter.hasNext()) {
