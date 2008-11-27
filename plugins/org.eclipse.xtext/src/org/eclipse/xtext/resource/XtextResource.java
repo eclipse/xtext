@@ -11,6 +11,7 @@ package org.eclipse.xtext.resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,8 +24,10 @@ import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
+import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken;
@@ -36,6 +39,7 @@ import org.eclipse.xtext.util.StringInputStream;
  * 
  * @author Jan Köhnlein
  * @author Heiko Behrens
+ * @author Dennis Hübner
  */
 public class XtextResource extends ResourceImpl {
 	@Inject
@@ -99,6 +103,7 @@ public class XtextResource extends ResourceImpl {
 			parseResult = parser.reparse(rootNode, offset, replacedTextLength, newText);
 			clearOutput();
 			if (parseResult != null) {
+				getErrors().addAll(createDiagnostics(parseResult));
 				if (parseResult.getRootASTElement() != null)
 					if (getContents().add(parseResult.getRootASTElement()))
 						reattachModificationTracker();
@@ -140,6 +145,7 @@ public class XtextResource extends ResourceImpl {
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
 		parseResult = parser.parse(inputStream, elementFactory);
 		if (parseResult != null) {
+			getErrors().addAll(createDiagnostics(parseResult));
 			EObject rootElement = parseResult.getRootASTElement();
 			if (rootElement != null) {
 				getContents().add(rootElement);
@@ -175,6 +181,22 @@ public class XtextResource extends ResourceImpl {
 			throw new IllegalStateException("The Xtext resource must contain exactly one root element");
 		IAbstractToken tokenList = parseTreeConstructor.serialize(contents.get(0));
 		tokenSerializer.serialize(tokenList, outputStream);
+	}
+
+	/**
+	 * Creates {@link XtextResource.Diagnostic}s from {@link SyntaxError}s in
+	 * {@link ParseResult}
+	 * 
+	 * @param list
+	 *            of {@link SyntaxError}s
+	 * @return list of {@link XtextResource.Diagnostic}
+	 */
+	private List<Diagnostic> createDiagnostics(IParseResult parseResult) {
+		List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
+		for (SyntaxError error : parseResult.getParseErrors()) {
+			diagnostics.add(new XtextSyntaxDiagnostic(error));
+		}
+		return diagnostics;
 	}
 
 	public interface Diagnostic extends org.eclipse.emf.ecore.resource.Resource.Diagnostic {
