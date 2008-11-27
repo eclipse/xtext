@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
-import java.util.List;
+import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.crossref.ILinkingScopeService;
@@ -35,7 +35,17 @@ public class XtextBuiltinLinkingScopeServiceTest extends AbstractGeneratorTest {
 	}
 	
 	public void testGetObjectsInScope() {
-		List<EObject> scope = scopeService.getObjectsInScope(model, null); // reference is ignored by default implementation
-		assertEquals(5, scope.size()); // default implementation returns every navigateable EObject in the resource 
+		Iterable<EObject> scope = scopeService.getObjectsInScope(model, null); // reference is ignored by default implementation
+		assertEquals(5, size(scope)); // default implementation returns every navigateable EObject in the resource 
+	}
+
+	private int size(Iterable<EObject> scope) {
+		int i = 0;
+		Iterator<EObject> iterator = scope.iterator();
+		while (iterator.hasNext()) {
+			iterator.next();
+			i++;
+		}
+		return i;
 	}
 }
