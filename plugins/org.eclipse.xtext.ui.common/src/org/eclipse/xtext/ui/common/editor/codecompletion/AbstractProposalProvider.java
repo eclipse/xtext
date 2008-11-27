@@ -188,13 +188,21 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		if (linkingCandidatesService != null) {
 			final EReference ref = GrammarUtil.getReference(crossReference, model.eClass());
 			final List<EObject> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
+			final String trimmedPrefix = prefix.trim();
 			for (EObject candidate : candidates) {
-				completionProposalList.add(createCompletionProposal(crossReference, model, getLabel(
-						candidate, ref, model), offset));
+				if (isCandidateMatchingPrefix(model, ref, candidate, trimmedPrefix)) {
+					completionProposalList.add(createCompletionProposal(crossReference, model, getLabel(
+							candidate, ref, model), offset));
+				}
 			}
 		}
 
 		return completionProposalList;
+	}
+	
+	protected boolean isCandidateMatchingPrefix(EObject model, EReference ref, EObject candidate, String prefix) {
+		final String label = getLabel(candidate, ref, model); 
+		return label != null && label.regionMatches(true, 0, prefix, 0, prefix.length());
 	}
 	
 	protected String getLabel(EObject candidate, EReference ref, EObject context) {
