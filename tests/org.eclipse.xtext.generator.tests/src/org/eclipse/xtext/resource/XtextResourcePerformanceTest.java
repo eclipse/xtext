@@ -39,6 +39,7 @@ public class XtextResourcePerformanceTest extends AbstractGeneratorTest {
 		XtextResource resource = getResourceFromString(model);
 		assertNotNull(resource);
 		assertTrue(resource.getParseResult().getParseErrors().isEmpty());
+		assertTrue(resource.getErrors().isEmpty());
 	}
 
 	public void testLoadModelWithLinkingErrors() throws Exception {
