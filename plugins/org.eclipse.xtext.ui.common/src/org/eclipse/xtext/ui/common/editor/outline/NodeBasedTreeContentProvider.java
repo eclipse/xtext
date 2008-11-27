@@ -51,8 +51,8 @@ public class NodeBasedTreeContentProvider implements ITreeContentProvider {
 					return -1;
 				if (nodeAdapter2 == null)
 					return 1;
-				return ((Integer) nodeAdapter1.getParserNode().getOffset()).compareTo(nodeAdapter2.getParserNode()
-						.getOffset());
+				return ((Integer) nodeAdapter1.getParserNode().getTotalOffset()).compareTo(nodeAdapter2.getParserNode()
+						.getTotalOffset());
 			}
 		});
 		return children;

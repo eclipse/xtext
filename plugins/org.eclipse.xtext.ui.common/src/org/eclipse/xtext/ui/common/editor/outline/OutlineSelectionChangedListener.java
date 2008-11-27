@@ -49,8 +49,8 @@ public final class OutlineSelectionChangedListener extends AbstractSelectionChan
 						CompositeNode parserNode = nodeAdapter.getParserNode();
 
 						AbstractNode selectionNode = findSelectionNode(parserNode);
-						int offset = selectionNode.getOffset();
-						int length = selectionNode.getLength();
+						int offset = selectionNode.getTotalOffset();
+						int length = selectionNode.getTotalLength();
 
 						getSourceViewer().revealRange(offset, length);
 						getSourceViewer().setSelectedRange(offset, length);

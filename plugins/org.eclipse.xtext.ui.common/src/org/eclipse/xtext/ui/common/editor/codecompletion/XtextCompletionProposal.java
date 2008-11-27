@@ -222,8 +222,8 @@ public class XtextCompletionProposal implements ICompletionProposal,
 				
 				LeafNode currentLeafNode=ParseTreeUtil.getCurrentNodeByOffset(parserNode, offset);
 				
-				boolean isCursorAtTheEndOfTheLastElement = offset == (currentLeafNode.getOffset() + currentLeafNode
-						.getLength());
+				boolean isCursorAtTheEndOfTheLastElement = offset == (currentLeafNode.getTotalOffset() + currentLeafNode
+						.getTotalLength());
 				
 				if ((currentLeafNode.isHidden() && !"".equals(currentLeafNode.getText().trim()))
 						|| isCursorAtTheEndOfTheLastElement) {
