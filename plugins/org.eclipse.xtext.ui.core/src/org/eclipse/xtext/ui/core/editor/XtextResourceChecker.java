@@ -48,11 +48,11 @@ public class XtextResourceChecker {
 		List<Map<String, Object>> markers = new ArrayList<Map<String, Object>>();
 		try {
 			// Syntactical errors
-			// EMF Resource stuff
+			// Collect EMF Resource Diagnostics
 			for (org.eclipse.emf.ecore.resource.Resource.Diagnostic error : resource.getErrors())
-				markers.add(collectMarkerAttributes(error, IMarker.SEVERITY_ERROR));
+				markers.add(markerFromXtextResourceDiagnostic(error, IMarker.SEVERITY_ERROR));
 			for (org.eclipse.emf.ecore.resource.Resource.Diagnostic warning : resource.getWarnings())
-				markers.add(collectMarkerAttributes(warning, IMarker.SEVERITY_WARNING));
+				markers.add(markerFromXtextResourceDiagnostic(warning, IMarker.SEVERITY_WARNING));
 			boolean syntaxDiagFail = !markers.isEmpty();
 			logCheckStatus(resource, syntaxDiagFail, "Syntax");
 
@@ -73,11 +73,11 @@ public class XtextResourceChecker {
 					if (semanticDiagFail) {
 						if (!diagnostic.getChildren().isEmpty()) {
 							for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
-								markers.add(collectMarkerAttributesForDiagnostic(childDiagnostic));
+								markers.add(markerFromEValidatorDiagnostic(childDiagnostic));
 							}
 						}
 						else {
-							markers.add(collectMarkerAttributesForDiagnostic(diagnostic));
+							markers.add(markerFromEValidatorDiagnostic(diagnostic));
 						}
 					}
 					logCheckStatus(resource, semanticDiagFail, "Semantic");
@@ -96,7 +96,7 @@ public class XtextResourceChecker {
 		}
 	}
 
-	private static Map<String, Object> collectMarkerAttributes(
+	private static Map<String, Object> markerFromXtextResourceDiagnostic(
 			org.eclipse.emf.ecore.resource.Resource.Diagnostic diagnostic, Object severity) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(IMarker.SEVERITY, severity);
@@ -113,7 +113,7 @@ public class XtextResourceChecker {
 		return map;
 	}
 
-	private static Map<String, Object> collectMarkerAttributesForDiagnostic(Diagnostic diagnostic) {
+	private static Map<String, Object> markerFromEValidatorDiagnostic(Diagnostic diagnostic) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sever = IMarker.SEVERITY_ERROR;
 		switch (diagnostic.getSeverity()) {
