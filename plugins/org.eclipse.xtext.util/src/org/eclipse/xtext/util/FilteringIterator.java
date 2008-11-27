@@ -10,15 +10,15 @@ public final class FilteringIterator<T> implements Iterator<T>, Iterable<T> {
 
 	private final Filter<T> matcher;
 
-	private final Iterator<T> base;
+	private final Iterator<? extends T> base;
 
 	private T next;
 
-	public FilteringIterator(final Iterable<T> origin, final Filter<T> matcher) {
+	public FilteringIterator(final Iterable<? extends T> origin, final Filter<T> matcher) {
 		this(origin.iterator(), matcher);
 	}
 
-	public FilteringIterator(final Iterator<T> iterator, final Filter<T> matcher) {
+	public FilteringIterator(final Iterator<? extends T> iterator, final Filter<T> matcher) {
 		this.base = iterator;
 		this.matcher = matcher;
 	}

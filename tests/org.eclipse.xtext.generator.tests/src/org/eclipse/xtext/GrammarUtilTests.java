@@ -10,6 +10,7 @@ package org.eclipse.xtext;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.crossrefs.LangAStandaloneSetup;
 import org.eclipse.xtext.crossrefs.services.LangAGrammarAccess;
@@ -70,6 +71,22 @@ public class GrammarUtilTests extends AbstractGeneratorTest {
 		EObject model = getModel(resource);
 		EObject typeA = (EObject) invokeWithXtend("types.first()", model);
 		assertEquals(typeA.eClass(), referencedEClass);
+	}
+	
+	public void testGetReference() throws Exception {
+		with(LangAStandaloneSetup.class);
+		XtextResource resource = getResourceFromString("type A extends B");
+		
+		ParserRule prType = (new LangAGrammarAccess()).pr_Type();
+		Assignment asExtends = (Assignment)((Group)prType.getAlternatives()).getAbstractTokens().get(1);
+		CrossReference xref = (CrossReference) asExtends.getTerminal();
+		EObject model = getModel(resource);
+		EObject typeA = (EObject) invokeWithXtend("types.first()", model);
+		EReference ref = GrammarUtil.getReference(xref, typeA.eClass());
+		assertNotNull(ref);
+		assertEquals("extends", ref.getName());
+		assertFalse(ref.isMany());
+		assertEquals(typeA.eClass(), ref.getEReferenceType());
 	}
 
 }
