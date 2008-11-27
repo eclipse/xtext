@@ -126,14 +126,14 @@ public class NodeUtil {
 			for (LeafNode lookaheadNode : node.getLookaheadLeafNodes()) {
 				line += "\"" + lookaheadNode.getText() + "\" ";
 			}
-			logger.trace("}   (" + node.getOffset() + ", " + node.getLength() + ")");
+			logger.trace("}   (" + node.getTotalOffset() + ", " + node.getTotalLength() + ")");
 		}
     }
     
 	public static AbstractNode findLeafNodeAtOffset(CompositeNode parseTreeRootNode, int offset) {
 		for (AbstractNode node : parseTreeRootNode.getChildren()) {
-			if (node.getOffset() + node.getLength() >= offset) {
-				if (node.getOffset() <= offset) {
+			if (node.getTotalOffset() + node.getTotalLength() >= offset) {
+				if (node.getTotalOffset() <= offset) {
 					if (node instanceof LeafNode)
 						return (LeafNode) node;
 					else if (node instanceof CompositeNode)
@@ -156,17 +156,17 @@ public class NodeUtil {
 	}
 	
 	public static void checkOffsetConsistency(CompositeNode rootNode) {
-		int currentOffset = rootNode.getOffset();
+		int currentOffset = rootNode.getTotalOffset();
 		for(AbstractNode child:rootNode.getChildren()) {
-			if(child.getOffset() != currentOffset) {
-				throw new IllegalStateException("Invalid offset: Should be " + currentOffset + " but is " + child.getOffset() + "\n" + child.serialize());
+			if(child.getTotalOffset() != currentOffset) {
+				throw new IllegalStateException("Invalid offset: Should be " + currentOffset + " but is " + child.getTotalOffset() + "\n" + child.serialize());
 			}
 			if(child instanceof CompositeNode) {
 				checkOffsetConsistency((CompositeNode) child);
 			}
 			int serializedLength = child.serialize().length();
-			if(child.getLength() != serializedLength) {
-				throw new IllegalStateException("Invalid length: Should be " + serializedLength + " but is " + child.getLength() + "\n" + child.serialize());	
+			if(child.getTotalLength() != serializedLength) {
+				throw new IllegalStateException("Invalid length: Should be " + serializedLength + " but is " + child.getTotalLength() + "\n" + child.serialize());	
 			}
 			currentOffset += serializedLength;
 		}

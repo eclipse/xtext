@@ -116,8 +116,8 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		while (iter.hasNext()) {
 			LeafNode leaf = (LeafNode) iter.next();
 			if (leaf.getText().equals("c")) {
-				assertEquals("before", 3, leaf.getLine());
-				assertEquals("before", 10, leaf.getOffset());
+				assertEquals("before", 3, leaf.getTotalLine());
+				assertEquals("before", 10, leaf.getTotalOffset());
 				found = true;
 			}
 		}
@@ -129,8 +129,8 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		while (iter.hasNext()) {
 			LeafNode leaf = (LeafNode) iter.next();
 			if (leaf.getText().equals("xy")) {
-				assertEquals("after", 3, leaf.getLine());
-				assertEquals("after", 10, leaf.getOffset());
+				assertEquals("after", 3, leaf.getTotalLine());
+				assertEquals("after", 10, leaf.getTotalOffset());
 				found = true;
 			}
 		}

@@ -41,9 +41,9 @@ public class PartialParsingUtil {
 	public static IParseResult reparse(IParser parser, CompositeNode rootNode, int offset, int replacedTextLength,
 			String newText) {
 
-		if (offset + replacedTextLength > rootNode.getLength()) {
+		if (offset + replacedTextLength > rootNode.getTotalLength()) {
 			log.error("Invalid replace region offset=" + offset + " length=" + replacedTextLength + " originalLength="
-					+ rootNode.getLength());
+					+ rootNode.getTotalLength());
 			return fullyReparse(parser, rootNode, offset, replacedTextLength, newText);
 		}
 		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(rootNode, offset, replacedTextLength);
@@ -119,7 +119,7 @@ public class PartialParsingUtil {
 	public static String insertChangeIntoReplaceRegion(CompositeNode replaceRootNode, int offset,
 			int replacedTextLength, String newText) {
 		String originalRegion = replaceRootNode.serialize();
-		int changeOffset = offset - replaceRootNode.getOffset();
+		int changeOffset = offset - replaceRootNode.getTotalOffset();
 		StringBuffer reparseRegion = new StringBuffer();
 		reparseRegion.append(originalRegion.substring(0, changeOffset));
 		reparseRegion.append(newText);
@@ -130,7 +130,7 @@ public class PartialParsingUtil {
 
 	public static PartialParsingPointers calculatePartialParsingPointers(CompositeNode rootNode, int offset,
 			int replacedTextLength) {
-		if (offset == rootNode.getLength() && offset != 0) {
+		if (offset == rootNode.getTotalLength() && offset != 0) {
 			// newText is appended, so look for the last original character instead 
 			--offset;
 			replacedTextLength = 1;
@@ -172,7 +172,7 @@ public class PartialParsingUtil {
 		}
 		
 		Range(AbstractNode node) {
-			this(node.getOffset(), node.getOffset() + node.getLength());
+			this(node.getTotalOffset(), node.getTotalOffset() + node.getTotalLength());
 		}
 		
 		Range(int fromOffest, int toOffset) {
@@ -220,7 +220,7 @@ public class PartialParsingUtil {
 	}
 
 	private static boolean nodeEnclosesRegion(CompositeNode node, int offset, int length) {
-		return node.getOffset() <= offset && node.getOffset() + node.getLength() >= offset + length;
+		return node.getTotalOffset() <= offset && node.getTotalOffset() + node.getTotalLength() >= offset + length;
 	}
 
 	/**
@@ -268,7 +268,7 @@ public class PartialParsingUtil {
 	}
 
 	private static boolean nodeIsBeforeRegion(LeafNode node, int offset) {
-		return node.getOffset() + node.getLength() <= offset;
+		return node.getTotalOffset() + node.getTotalLength() <= offset;
 	}
 
 }
