@@ -39,7 +39,7 @@ public class XtextResourceTest extends AbstractGeneratorTest {
 		assertNotNull("parseResult", parseResult);
 		assertNotNull(parseResult.getRootNode());
 		assertEquals(0, parseResult.getParseErrors().size());
-		assertEquals(0, parseResult.getRootNode().getLength());
+		assertEquals(0, parseResult.getRootNode().getTotalLength());
 		assertNull(parseResult.getRootASTElement());
 	}
 	
@@ -105,7 +105,7 @@ public class XtextResourceTest extends AbstractGeneratorTest {
 		assertNotNull("parseResult", parseResult);
 		assertNotNull(parseResult.getRootNode());
 		assertEquals(0, parseResult.getParseErrors().size());
-		assertEquals(simpleModel.length(), parseResult.getRootNode().getLength());
+		assertEquals(simpleModel.length(), parseResult.getRootNode().getTotalLength());
 		assertNotNull(parseResult.getRootASTElement());
 	}
 	

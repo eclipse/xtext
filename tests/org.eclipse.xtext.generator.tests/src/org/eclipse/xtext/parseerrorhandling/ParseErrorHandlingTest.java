@@ -34,9 +34,9 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		EList<SyntaxError> errors = NodeUtil.getRootNode(root).allSyntaxErrors();
 		assertEquals(1,errors.size());
 		assertEquals("%", ((LeafNode)errors.get(0).getNode()).getText());
-		assertEquals(1, errors.get(0).getNode().getLine());
-		assertEquals(26, errors.get(0).getNode().getOffset());
-		assertEquals(1, errors.get(0).getNode().getLength());
+		assertEquals(1, errors.get(0).getNode().getTotalLine());
+		assertEquals(26, errors.get(0).getNode().getTotalOffset());
+		assertEquals(1, errors.get(0).getNode().getTotalLength());
 		assertEquals(1, errors.size());
 	}
 	
@@ -44,9 +44,9 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 		EObject root = getModel("language a import 'holla' foo returns x::y::Z : name=ID;");
 		EList<SyntaxError> errors = NodeUtil.getRootNode(root).allSyntaxErrors();
 		assertEquals("::",  ((LeafNode)errors.get(0).getNode()).getText());
-		assertEquals(1, errors.get(0).getNode().getLine());
-		assertEquals(42, errors.get(0).getNode().getOffset());
-		assertEquals(2, errors.get(0).getNode().getLength());
+		assertEquals(1, errors.get(0).getNode().getTotalLine());
+		assertEquals(42, errors.get(0).getNode().getTotalOffset());
+		assertEquals(2, errors.get(0).getNode().getTotalLength());
 		assertEquals(1, errors.size());
 	}
 	
