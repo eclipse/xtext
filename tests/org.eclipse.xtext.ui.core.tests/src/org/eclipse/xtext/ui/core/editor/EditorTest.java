@@ -23,7 +23,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
-import org.eclipse.xtext.ui.core.internal.XtextUITestsPlugin;
+import org.eclipse.xtext.ui.core.internal.XtextUICoreTestsPlugin;
 
 /**
  * A test for the Xtext editor.
@@ -39,7 +39,7 @@ public class EditorTest extends AbstractEditorTest {
 		super.setUp();
 		
 		// listen to CoreLog use RuntimeLog to hear more
-		XtextUITestsPlugin.getDefault().getLog().addLogListener(new ILogListener() {
+		XtextUICoreTestsPlugin.getDefault().getLog().addLogListener(new ILogListener() {
 			public void logging(IStatus status, String plugin) {
 				if (IStatus.ERROR == status.getSeverity()) {
 					fail(status.getMessage());
