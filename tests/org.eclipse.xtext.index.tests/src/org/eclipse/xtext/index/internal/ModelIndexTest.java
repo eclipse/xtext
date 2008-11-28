@@ -24,8 +24,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.ui.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.ui.util.PluginUtil;
+import org.eclipse.xtext.ui.core.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.core.util.PluginUtil;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API

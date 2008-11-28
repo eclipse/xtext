@@ -35,7 +35,7 @@ public class IndexDatabase {
 		DERBY, HSQL_MEM, HSQL_FILE
 	};
 
-	private static DB_IMPL_TYPE DB_IMPL = DB_IMPL_TYPE.HSQL_FILE;
+	private static DB_IMPL_TYPE DB_IMPL = DB_IMPL_TYPE.DERBY;
 
 	private static final String USER_NAME = "sa";
 	private static final String PASSWORD = "";
