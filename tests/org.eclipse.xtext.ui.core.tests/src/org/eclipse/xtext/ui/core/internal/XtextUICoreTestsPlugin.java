@@ -6,18 +6,18 @@ import org.osgi.framework.BundleContext;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class XtextUITestsPlugin extends AbstractUIPlugin {
+public class XtextUICoreTestsPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "org.eclipse.xtext.ui.core.tests";
 
 	// The shared instance
-	private static XtextUITestsPlugin plugin;
+	private static XtextUICoreTestsPlugin plugin;
 
 	/**
 	 * The constructor
 	 */
-	public XtextUITestsPlugin() {
+	public XtextUICoreTestsPlugin() {
 	}
 
 	/*
@@ -49,11 +49,11 @@ public class XtextUITestsPlugin extends AbstractUIPlugin {
 	 * 
 	 * @return the shared instance
 	 */
-	public static XtextUITestsPlugin getDefault() {
+	public static XtextUICoreTestsPlugin getDefault() {
 		return plugin;
 	}
 
-	private static void setDefault(XtextUITestsPlugin activator) {
+	private static void setDefault(XtextUICoreTestsPlugin activator) {
 		plugin = activator;
 	}
 }
