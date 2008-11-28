@@ -213,4 +213,5 @@ public class PartialParsingPointers {
 				+ Strings.notNull(findASTContainmentFeatureName(replaceRootNode)));
 		logger.debug("");
 	}
+	
 }

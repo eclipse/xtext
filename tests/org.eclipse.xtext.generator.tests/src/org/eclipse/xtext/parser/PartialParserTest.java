@@ -87,6 +87,25 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		rootNode = reparse.getRootNode();
 		checkGrammarAssigned(rootNode);
 	}
+	
+	public void testParseIsPartial() throws Exception {
+		with(ReferenceGrammarStandaloneSetup.class);
+		String model = "spielplatz 1 {kind (k 1)\n}";
+		XtextResource resource = getResourceFromString(model);
+		CompositeNode rootNode = resource.getParseResult().getRootNode();
+		resource.update(model.indexOf("k 1"), 3, "l 2");
+		assertSame(rootNode, resource.getParseResult().getRootNode());
+	}
+	
+	public void testParseIsPartialTwice() throws Exception {
+		with(ReferenceGrammarStandaloneSetup.class);
+		String model = "spielplatz 1 {kind (k 1)\n}";
+		XtextResource resource = getResourceFromString(model);
+		CompositeNode rootNode = resource.getParseResult().getRootNode();
+		resource.update(model.indexOf("k 1"), 3, "l 2");
+		resource.update(model.indexOf("k 1"), 3, "m 3");
+		assertSame(rootNode, resource.getParseResult().getRootNode());
+	}
 
 	@SuppressWarnings("serial")
 	private void checkGrammarAssigned(CompositeNode rootNode) {
