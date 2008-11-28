@@ -5,14 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.crossref;
-
-import java.util.List;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.service.ILanguageService;
-
-public interface ILinker extends ILanguageService{
-	public List<XtextResource.Diagnostic> ensureLinked(EObject obj);
-}
+ import importedURI;
+/*
+ * this check file is used to specify constraints for the derived metamodels
+ * example:
+ * context Entity WARNING "Entity names should start with a capital" :
+ *    name.toFirstUpper() == name;
+ */

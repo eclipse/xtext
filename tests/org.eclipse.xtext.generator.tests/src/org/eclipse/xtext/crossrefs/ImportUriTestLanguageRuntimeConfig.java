@@ -5,14 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.crossref;
+package org.eclipse.xtext.crossrefs;
 
-import java.util.List;
+import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.service.ILanguageService;
+/**
+ * used to register components to be used at runtime.
+ */
+public class ImportUriTestLanguageRuntimeConfig extends AbstractImportUriTestLanguageRuntimeConfig {
 
-public interface ILinker extends ILanguageService{
-	public List<XtextResource.Diagnostic> ensureLinked(EObject obj);
+	public Set<IServiceRegistration> registrations() {
+		Set<IServiceRegistration> generated = super.registrations();
+		return generated;
+	}
+
 }
+			

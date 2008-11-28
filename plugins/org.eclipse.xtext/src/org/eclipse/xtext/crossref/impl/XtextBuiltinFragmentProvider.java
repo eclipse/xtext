@@ -18,7 +18,7 @@ import org.eclipse.xtext.crossref.IFragmentProvider;
  * @author Sebastian Zarnekow
  */
 public class XtextBuiltinFragmentProvider implements IFragmentProvider {
-
+	
 	public String getFragment(EObject obj) {
 		return null;
 	}

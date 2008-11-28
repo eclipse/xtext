@@ -5,14 +5,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.crossref;
+package org.eclipse.xtext.crossrefs;
 
-import java.util.List;
+public class ImportUriTestLanguage {
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.service.ILanguageService;
-
-public interface ILinker extends ILanguageService{
-	public List<XtextResource.Diagnostic> ensureLinked(EObject obj);
 }
