@@ -5,22 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.codecompletion;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.util.Pair;
+language org.eclipse.xtext.crossrefs.ImportUriTestLanguage
 
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-public interface ILinkingCandidatesService {
+generate importedURI "http://eclipse.org/xtext/importUriTestLanguage"
 
-	/**
-	 * Returns all EObjects, that can be referenced in the given context.
-	 */
-	Iterable<Pair<String, EObject>> getLinkingCandidates(EObject context, EReference reference);
+Main : 
+	imports+=Import*
+	types+=Type*;
 	
+Import :
+	'import' importURI=STRING;
 	
-
-}
+Type :
+	'type' name=ID 'extends' ^extends=[Type];

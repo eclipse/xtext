@@ -7,17 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.codecompletion.impl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.crossref.ILinkingScopeService;
+import org.eclipse.xtext.crossref.IScope;
+import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.common.editor.codecompletion.AbstractLinkingCandidatesService;
+import org.eclipse.xtext.util.Pair;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,33 +21,25 @@ import org.eclipse.xtext.ui.common.editor.codecompletion.AbstractLinkingCandidat
 public class DefaultLinkingCandidatesService extends AbstractLinkingCandidatesService {
 
 	@Inject
-	private ILinkingScopeService scopeService;
+	private IScopeProvider scopeProvider;
 
-	public List<EObject> getLinkingCandidates(EObject context, EReference reference) {
-		final Iterable<EObject> candidates = scopeService.getObjectsInScope(context, reference);
-		final List<EObject> result = new ArrayList<EObject>();
-		final Iterator<EObject> iter = candidates.iterator();
-		final EClass requiredType = reference.getEReferenceType();
-		while (iter.hasNext()) {
-			final EObject candidate = iter.next();
-			if (EcoreUtil2.isAssignableFrom(requiredType, candidate))
-				result.add(candidate);
-		}
-		return result;
+	public Iterable<Pair<String,EObject>> getLinkingCandidates(EObject context, EReference reference) {
+		final IScope<EObject> candidates = scopeProvider.getScope(context, reference);
+		return candidates.getAllContents();
 	}
 	
 	/**
 	 * @return the scopeService
 	 */
-	public ILinkingScopeService getScopeService() {
-		return scopeService;
+	public IScopeProvider getScopeService() {
+		return scopeProvider;
 	}
 
 	/**
 	 * @param scopeService the scopeService to set
 	 */
-	public void setScopeService(ILinkingScopeService scopeService) {
-		this.scopeService = scopeService;
+	public void setScopeService(IScopeProvider scopeService) {
+		this.scopeProvider = scopeService;
 	}
 
 }

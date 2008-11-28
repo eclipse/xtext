@@ -5,22 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.codecompletion;
+package org.eclipse.xtext.crossrefs;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.util.Pair;
+import java.util.Set;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * used to register components to be used at runtime.
  */
-public interface ILinkingCandidatesService {
+public class ImportUriTestLanguageRuntimeConfig extends AbstractImportUriTestLanguageRuntimeConfig {
 
-	/**
-	 * Returns all EObjects, that can be referenced in the given context.
-	 */
-	Iterable<Pair<String, EObject>> getLinkingCandidates(EObject context, EReference reference);
-	
-	
+	public Set<IServiceRegistration> registrations() {
+		Set<IServiceRegistration> generated = super.registrations();
+		return generated;
+	}
 
 }
+			
