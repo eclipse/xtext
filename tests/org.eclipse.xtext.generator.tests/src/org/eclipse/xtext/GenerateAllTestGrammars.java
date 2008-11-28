@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.crossrefs.ImportUriTestLanguage;
 import org.eclipse.xtext.crossrefs.LangA;
 import org.eclipse.xtext.dummy.DummyLanguage;
 import org.eclipse.xtext.grammarinheritance.AbstractTestLanguage;
@@ -44,7 +45,7 @@ public class GenerateAllTestGrammars {
 			ConcreteTestLanguage.class, XtextGrammarTest.class, MetamodelRefTest.class, DummyLanguage.class,
 			TestLanguage.class, SimpleReconstrTest.class, ComplexReconstrTest.class, LexerLanguage.class,
 			SimpleExpressions.class, ActionTestLanguage.class, OptionalEmptyLanguage.class, ReferenceGrammar.class,
-			LookaheadLanguage.class, Bug250313.class, FowlerDslTestLanguage.class, TreeTestLanguage.class };
+			LookaheadLanguage.class, Bug250313.class, FowlerDslTestLanguage.class, TreeTestLanguage.class, ImportUriTestLanguage.class };
 
 	public static void main(String[] args) throws Exception {
 		try {
@@ -63,7 +64,7 @@ public class GenerateAllTestGrammars {
 				Grammar grammarModel = (Grammar) resource.getContents().iterator().next();
 				GeneratorFacade.generate(grammarModel, path, null, c.getSimpleName().toLowerCase());
 			}
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 	}

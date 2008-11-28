@@ -57,7 +57,7 @@ public class XtextResourcePerformanceTest extends AbstractGeneratorTest {
 		XtextResource resource = getResourceFromString(model);
 		assertNotNull(resource);
 		assertTrue(resource.getParseResult().getParseErrors().isEmpty());
-		assertEquals(2 * NUM_ELEMENTS, resource.getErrors().size());
+		assertEquals(4 * NUM_ELEMENTS, resource.getErrors().size());
 	}
 
 }
