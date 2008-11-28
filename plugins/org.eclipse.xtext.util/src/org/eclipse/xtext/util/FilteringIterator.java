@@ -3,6 +3,7 @@ package org.eclipse.xtext.util;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -13,6 +14,7 @@ public final class FilteringIterator<T> implements Iterator<T>, Iterable<T> {
 	private final Iterator<? extends T> base;
 
 	private T next;
+	
 
 	public FilteringIterator(final Iterable<? extends T> origin, final Filter<T> matcher) {
 		this(origin.iterator(), matcher);
@@ -21,6 +23,10 @@ public final class FilteringIterator<T> implements Iterator<T>, Iterable<T> {
 	public FilteringIterator(final Iterator<? extends T> iterator, final Filter<T> matcher) {
 		this.base = iterator;
 		this.matcher = matcher;
+	}
+	
+	public static <T> FilteringIterator<T> create(final Iterator<? extends T> iterator, final Filter<T> matcher) {
+		return new FilteringIterator<T>(iterator,matcher);
 	}
 
 	public boolean hasNext() {

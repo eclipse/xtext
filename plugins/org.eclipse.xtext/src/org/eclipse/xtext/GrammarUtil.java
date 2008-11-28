@@ -379,6 +379,7 @@ public class GrammarUtil {
 		return null;
 	}
 	
+	//TODO replace me by compiled grammar model 
 	public static EReference getReference(CrossReference ref, EClass referenceOwner) {
 		final List<EReference> references = referenceOwner.getEAllReferences();
 		final String feature = GrammarUtil.containingAssignment(ref).getFeature();

@@ -7,10 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.codecompletion;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.util.Pair;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,7 +19,7 @@ public interface ILinkingCandidatesService {
 	/**
 	 * Returns all EObjects, that can be referenced in the given context.
 	 */
-	List<EObject> getLinkingCandidates(EObject context, EReference reference);
+	Iterable<Pair<String, EObject>> getLinkingCandidates(EObject context, EReference reference);
 	
 	
 

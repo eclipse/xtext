@@ -12,21 +12,18 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.service.ILanguageService;
 
 /**
- * @todo Find a proper way to test these Services in the life cycle (reference parameter is not tested, currently) 
+ * @TODO Find a proper way to test these Services in the life cycle (reference parameter is not tested, currently) 
  * @author Heiko Behrens - Initial contribution and API
  */
-public interface ILinkingScopeService extends ILanguageService {
+public interface IScopeProvider extends ILanguageService {
 	
 	/**
-	 * Provides all EObjects that can be accessed from a given context.
-	 * <p>
-	 * LinkingScope should not filter the visible EObjects with
-	 * respect to their type. The passed cross reference is only used
-	 * to influence the scope. Type filtering is done by the linker.
+	 * Returns a scope for the given context.
+	 *
 	 *  
 	 * @param context meta model element that defines the scope 
 	 * @param reference reference to have fine grained access for visibility  
 	 * @return List of EObjects in the given scope
 	 */
-	public Iterable<EObject> getObjectsInScope(EObject context, EReference reference);
+	public IScope<EObject> getScope(EObject context, EReference reference);
 }

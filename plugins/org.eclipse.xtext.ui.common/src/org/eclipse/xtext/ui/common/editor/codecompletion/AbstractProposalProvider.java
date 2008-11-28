@@ -29,6 +29,7 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -186,13 +187,13 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
 		if (linkingCandidatesService != null) {
+			//TODO the passed model is not always an instance of type, the cross reference is declared for.
 			final EReference ref = GrammarUtil.getReference(crossReference, model.eClass());
-			final List<EObject> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
+			final Iterable<Pair<String,EObject>> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
 			final String trimmedPrefix = prefix.trim();
-			for (EObject candidate : candidates) {
+			for (Pair<String,EObject> candidate : candidates) {
 				if (isCandidateMatchingPrefix(model, ref, candidate, trimmedPrefix)) {
-					completionProposalList.add(createCompletionProposal(crossReference, model, getLabel(
-							candidate, ref, model), offset));
+					completionProposalList.add(createCompletionProposal(crossReference, model, candidate.getFirstElement(), offset));
 				}
 			}
 		}
@@ -200,9 +201,8 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		return completionProposalList;
 	}
 	
-	protected boolean isCandidateMatchingPrefix(EObject model, EReference ref, EObject candidate, String prefix) {
-		final String label = getLabel(candidate, ref, model); 
-		return label != null && label.regionMatches(true, 0, prefix, 0, prefix.length());
+	protected boolean isCandidateMatchingPrefix(EObject model, EReference ref, Pair<String,EObject> candidate, String prefix) {
+		return candidate.getFirstElement().regionMatches(true, 0, prefix, 0, prefix.length());
 	}
 	
 	protected String getLabel(EObject candidate, EReference ref, EObject context) {

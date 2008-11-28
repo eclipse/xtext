@@ -15,12 +15,10 @@ import org.eclipse.xtext.builtin.conversion.XtextBuiltInConverters;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.IFragmentProvider;
 import org.eclipse.xtext.crossref.ILinker;
-import org.eclipse.xtext.crossref.ILinkingScopeService;
 import org.eclipse.xtext.crossref.ILinkingService;
-import org.eclipse.xtext.crossref.IURIChecker;
-import org.eclipse.xtext.crossref.impl.DefaultRuntimeURIChecker;
+import org.eclipse.xtext.crossref.IScopeProvider;
+import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
 import org.eclipse.xtext.crossref.impl.XtextBuiltinFragmentProvider;
-import org.eclipse.xtext.crossref.impl.XtextBuiltinLinkingScopeService;
 import org.eclipse.xtext.crossref.impl.XtextBuiltinLinkingService;
 import org.eclipse.xtext.crossref.internal.Linker;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
@@ -42,8 +40,7 @@ public class XtextBuiltinRuntimeConfig extends AbstractServiceRegistrationFactor
 				.with(IValueConverterService.class, getIValueConverterService())
 				.with(ILinker.class, getILinker())
 				.with(ILinkingService.class, getILinkingService())
-				.with(ILinkingScopeService.class, getILinkingScopeService())
-				.with(IURIChecker.class, getIURIChecker())
+				.with(IScopeProvider.class, getIScopeProvider())
 				.with(IFragmentProvider.class, getIFragmentProvider())
 				.with(AntlrTokenDefProvider.class)
 				.with(DefaultCrossReferenceSerializer.class)
@@ -54,12 +51,8 @@ public class XtextBuiltinRuntimeConfig extends AbstractServiceRegistrationFactor
 		return XtextBuiltinFragmentProvider.class;
 	}
 
-	protected Class<? extends IURIChecker> getIURIChecker() {
-		return DefaultRuntimeURIChecker.class;
-	}
-
-	protected Class<? extends ILinkingScopeService> getILinkingScopeService() {
-		return XtextBuiltinLinkingScopeService.class;
+	protected Class<? extends IScopeProvider> getIScopeProvider() {
+		return DefaultScopeProvider.class;
 	}
 
 	protected Class<? extends ILinkingService> getILinkingService() {

@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
-import org.eclipse.xtext.crossref.ILinkingScopeService;
+import org.eclipse.xtext.crossref.IScopeProvider;
+
 
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
-public abstract class AbstractLinkingScopeService implements ILinkingScopeService {
+public abstract class AbstractScopeProvider implements IScopeProvider {
 
 }
