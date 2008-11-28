@@ -63,4 +63,12 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 		return this.nameResolver.getValue(object);
 	}
 
+	public ILinkingScopeService getLinkingScopeService() {
+		return linkingScopeService;
+	}
+
+	public void setLinkingScopeService(ILinkingScopeService linkingScopeService) {
+		this.linkingScopeService = linkingScopeService;
+	}
+
 }

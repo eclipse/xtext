@@ -10,6 +10,7 @@ package org.eclipse.xtext.parser.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -40,7 +41,6 @@ public class PartialParsingUtil {
 	@SuppressWarnings("unchecked")
 	public static IParseResult reparse(IParser parser, CompositeNode rootNode, int offset, int replacedTextLength,
 			String newText) {
-
 		if (offset + replacedTextLength > rootNode.getTotalLength()) {
 			log.error("Invalid replace region offset=" + offset + " length=" + replacedTextLength + " originalLength="
 					+ rootNode.getTotalLength());
@@ -98,16 +98,50 @@ public class PartialParsingUtil {
 			CompositeNode replaceNodeParent = replaceNode.getParent();
 			EList<AbstractNode> replaceNodeSiblings = replaceNodeParent.getChildren();
 			int nodeChildIndex = replaceNodeSiblings.indexOf(replaceNode);
+			transferLookAhead(replaceNode, parseResult.getRootNode());
 			replaceNodeSiblings.set(nodeChildIndex, parseResult.getRootNode());
 			parseResult.setRootNode(rootNode);
 		}
 		return parseResult;
 	}
+	
+	private static void transferLookAhead(CompositeNode from, CompositeNode to) {
+		if (!from.getLookaheadLeafNodes().isEmpty()) {
+			final boolean wasEmpty = to.getLookaheadLeafNodes().isEmpty();
+			int lookAhead = from.getLookaheadLeafNodes().size();
+			// add every old lookAhead leaf node to the new lookAhead if
+			// it precedes the old node
+			final Iterator<LeafNode> lookAheadIter = from.getLookaheadLeafNodes().iterator();
+			int idx = 0;
+			while(lookAheadIter.hasNext()) {
+				final LeafNode leaf = lookAheadIter.next();
+				if (leaf.getTotalOffset() < from.getTotalOffset())
+				{
+					to.getLookaheadLeafNodes().add(idx, leaf);
+					idx++;
+					lookAhead--;
+				} else
+					break;
+			}
+			if (wasEmpty) {
+				// We assume, that the lookahead-length should be the same as before
+				final Iterator<LeafNode> leafIter = to.getLeafNodes().iterator();
+				while(leafIter.hasNext() && lookAhead > 0) {
+					LeafNode nextLeaf = leafIter.next();
+					while(nextLeaf.isHidden() && leafIter.hasNext())
+						nextLeaf = leafIter.next();
+					if (!nextLeaf.isHidden()) {
+						to.getLookaheadLeafNodes().add(nextLeaf);
+						lookAhead--;
+					}
+				}
+			}
+		}
+	}
 
 	private static IParseResult fullyReparse(IParser parser, CompositeNode rootNode, int offset,
 			int replacedTextLength, String newText) {
-		String reparseRegion;
-		reparseRegion = insertChangeIntoReplaceRegion(rootNode, offset, replacedTextLength, newText);
+		String reparseRegion = insertChangeIntoReplaceRegion(rootNode, offset, replacedTextLength, newText);
 		return parser.parse(new StringInputStream(reparseRegion));
 	}
 
@@ -138,14 +172,15 @@ public class PartialParsingUtil {
 		// include any existing parse errors
 		Range range = new Range(offset, offset + replacedTextLength);
 		mergeErrorRange(rootNode, range);
+		
 		offset = range.fromOffset;
 //		EList<SyntaxError> allErrors = rootNode.allSyntaxErrors(); // uses TreeIterator and is not as fast as it should be
-		
 		List<CompositeNode> nodesEnclosingRegion = collectNodesEnclosingChangeRegion(rootNode, range.fromOffset,
 				range.toOffset - range.fromOffset);
 		List<CompositeNode> validReplaceRootNodes = internalFindValidReplaceRootNodeForChangeRegion(
 				nodesEnclosingRegion, range.fromOffset,
 				range.toOffset - range.fromOffset);
+		
 		if (validReplaceRootNodes.isEmpty()) {
 			validReplaceRootNodes = Collections.<CompositeNode> singletonList(rootNode);
 		}
@@ -187,6 +222,11 @@ public class PartialParsingUtil {
 		
 		void merge(SyntaxError error) {
 			merge(new Range(error));
+		}
+		
+		@Override
+		public String toString() {
+			return fromOffset + " - " + toOffset;
 		}
 	}
 	

@@ -204,4 +204,56 @@ public class XtextResource extends ResourceImpl {
 
 		public int getLength();
 	}
+
+	public IParser getParser() {
+		return parser;
+	}
+
+	public void setParser(IParser parser) {
+		this.parser = parser;
+	}
+
+	public IAstFactory getElementFactory() {
+		return elementFactory;
+	}
+
+	public void setElementFactory(IAstFactory elementFactory) {
+		this.elementFactory = elementFactory;
+	}
+
+	public ILinker getLinker() {
+		return linker;
+	}
+
+	public void setLinker(ILinker linker) {
+		this.linker = linker;
+	}
+
+	public IFragmentProvider getFragmentProvider() {
+		return fragmentProvider;
+	}
+
+	public void setFragmentProvider(IFragmentProvider fragmentProvider) {
+		this.fragmentProvider = fragmentProvider;
+	}
+
+	public IParseTreeConstructor getParseTreeConstructor() {
+		return parseTreeConstructor;
+	}
+
+	public void setParseTreeConstructor(IParseTreeConstructor parseTreeConstructor) {
+		this.parseTreeConstructor = parseTreeConstructor;
+	}
+
+	public ITokenSerializer getTokenSerializer() {
+		return tokenSerializer;
+	}
+
+	public void setTokenSerializer(ITokenSerializer tokenSerializer) {
+		this.tokenSerializer = tokenSerializer;
+	}
+
+	public void setParseResult(IParseResult parseResult) {
+		this.parseResult = parseResult;
+	}
 }

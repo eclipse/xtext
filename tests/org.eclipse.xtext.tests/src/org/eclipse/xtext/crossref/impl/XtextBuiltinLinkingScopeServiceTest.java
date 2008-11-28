@@ -29,7 +29,7 @@ public class XtextBuiltinLinkingScopeServiceTest extends AbstractGeneratorTest {
 				"kind (Bob 1)" +
 				"kind (Joe 2)" +
 				"erwachsener (Biff 3)" +
-				"erwachsener (Bommel 4)";
+				"erwachsener (Bommel 4) }";
 		model = getModel(modelAsString);
 		scopeService = new XtextBuiltinLinkingScopeService();
 	}
@@ -41,7 +41,7 @@ public class XtextBuiltinLinkingScopeServiceTest extends AbstractGeneratorTest {
 
 	private int size(Iterable<EObject> scope) {
 		int i = 0;
-		Iterator<EObject> iterator = scope.iterator();
+		final Iterator<EObject> iterator = scope.iterator();
 		while (iterator.hasNext()) {
 			iterator.next();
 			i++;

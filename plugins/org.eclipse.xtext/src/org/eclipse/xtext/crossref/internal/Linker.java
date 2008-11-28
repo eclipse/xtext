@@ -13,6 +13,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -31,6 +32,8 @@ import org.eclipse.xtext.service.Inject;
 
 public final class Linker implements ILinker {
 
+	private static Logger log = Logger.getLogger(Linker.class);
+	
 	@Inject
 	private ILinkingService linkingService;
 
@@ -39,6 +42,7 @@ public final class Linker implements ILinker {
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
 		if (nodeAdapter == null)
 			return brokenLinks;
+		clearReferences(obj);
 		CompositeNode node = nodeAdapter.getParserNode();
 		EList<AbstractNode> children = node.getChildren();
 		for (AbstractNode abstractNode : children) {
@@ -48,6 +52,12 @@ public final class Linker implements ILinker {
 			}
 		}
 		return brokenLinks;
+	}
+	
+	private void clearReferences(EObject obj) {
+		for(EReference ref: obj.eClass().getEReferences())
+			if (!ref.isContainment() && !ref.isContainer())
+				obj.eUnset(ref);
 	}
 
 	private XtextResource.Diagnostic createError(LeafNode linkInformation) {
@@ -64,7 +74,6 @@ public final class Linker implements ILinker {
 			brokenLinks.add(createError(node));
 			return brokenLinks;
 		}
-
 		
 		if (eRef == null) {
 			brokenLinks.add(new XtextLinkingDiagnostic(node, "Cannot find reference " + ref));
@@ -94,8 +103,17 @@ public final class Linker implements ILinker {
 			}
 			else
 				list.addAll(links);
+			log.trace("list.size() == " + list.size());
 		}
 		return brokenLinks;
+	}
+
+	public ILinkingService getLinkingService() {
+		return linkingService;
+	}
+
+	public void setLinkingService(ILinkingService linkingService) {
+		this.linkingService = linkingService;
 	}
 	
 }
