@@ -52,6 +52,8 @@ public class DefaultScopeProvider extends AbstractScopeProvider implements IScop
 		}
 	};
 
+	//TODO SimpleCache uses WeakHashMap, since the pairs are never referenced from somewhere else, GC will clean them up ASAP. 
+	// this might result in no caching at all, depending on how often the GC is triggered
 	private final SimpleCache<Pair<Resource, EClass>, IScope> cache = new SimpleCache<Pair<Resource, EClass>, IScope>(
 			new Function<Pair<Resource, EClass>, IScope>() {
 
