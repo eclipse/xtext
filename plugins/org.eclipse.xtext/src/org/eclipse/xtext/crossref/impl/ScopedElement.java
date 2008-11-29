@@ -7,24 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.crossref.IScopedElement;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
- * @param <T>
+ * @param 
  */
-public class ScopedElement<T> implements IScopedElement<T>{
+public class ScopedElement implements IScopedElement{
 	
-	public static <T> IScopedElement<T> create(String name, T element, Object additionalInformation) {
-		return new ScopedElement<T>(name,element,additionalInformation);
+	public static  IScopedElement create(String name, EObject element, Object additionalInformation) {
+		return new ScopedElement(name,element,additionalInformation);
 	}
 	
-	public static <T> IScopedElement<T> create(String name, T element) {
+	public static  IScopedElement create(String name, EObject element) {
 		return create(name,element,null);
 	}
 	
-	private ScopedElement(String name, T element, Object additionalInformation) {
+	private ScopedElement(String name, EObject element, Object additionalInformation) {
 		super();
 		this.name = name;
 		this.element = element;
@@ -32,14 +33,14 @@ public class ScopedElement<T> implements IScopedElement<T>{
 	}
 
 	private String name;
-	private T element;
+	private EObject element;
 	private Object additionalInformation;
 
 	public Object additionalInformation() {
 		return additionalInformation;
 	}
 
-	public T element() {
+	public EObject element() {
 		return element;
 	}
 

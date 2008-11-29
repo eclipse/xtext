@@ -67,7 +67,7 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 	/**
 	 * We try to emulate a changed scope after a partial parsing so we mock the ScopeService.
 	 */
-	public IScope<EObject> getScope(EObject context, EReference reference) {
+	public IScope getScope(EObject context, EReference reference) {
 //TODO
 //		if ((this.context == context) && (this.reference == reference)) {
 //			if (scope == null) {

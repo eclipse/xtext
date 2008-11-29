@@ -18,45 +18,44 @@ import org.eclipse.xtext.util.FilteringIterator;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
- * @param <EObject>
+ * 
  */
-public abstract class AbstractNestedScope<EObject> implements IScope<EObject> {
-	
-	private IScope<EObject> parent;
-	
-	public AbstractNestedScope(IScope<EObject> parent) {
+public abstract class AbstractNestedScope implements IScope {
+
+	private IScope parent;
+
+	public AbstractNestedScope(IScope parent) {
 		this.parent = parent;
 	}
-	
-	public final Iterable<IScopedElement<EObject>> getAllContents() {
+
+	public final Iterable<IScopedElement> getAllContents() {
 		final Set<String> identifiers = new HashSet<String>();
-		return new ChainedIterator<IScopedElement<EObject>>(
-				FilteringIterator.create(getContents().iterator(),new Filter<IScopedElement<EObject>>(){
-					public boolean matches(IScopedElement<EObject> param) {
+		return new ChainedIterator<IScopedElement>(FilteringIterator.create(getContents().iterator(),
+				new Filter<IScopedElement>() {
+					public boolean matches(IScopedElement param) {
 						identifiers.add(param.name());
 						return true;
 					}
-				}),
-				FilteringIterator.create(getParent().getAllContents().iterator(),new Filter<IScopedElement<EObject>>(){
-					public boolean matches(IScopedElement<EObject> param) {
-						return !identifiers.contains(param.name());
-					}}));
+				}), FilteringIterator.create(getParent().getAllContents().iterator(), new Filter<IScopedElement>() {
+			public boolean matches(IScopedElement param) {
+				return !identifiers.contains(param.name());
+			}
+		}));
 	}
 
-	public IScope<EObject> getParent() {
+	public IScope getParent() {
 		return parent;
 	}
-	
-	private Iterable<IScopedElement<EObject>> elements;
-	
-	public AbstractNestedScope(IScope<EObject> parent, Iterable<IScopedElement<EObject>> elements) {
+
+	private Iterable<IScopedElement> elements;
+
+	public AbstractNestedScope(IScope parent, Iterable<IScopedElement> elements) {
 		this(parent);
 		this.elements = elements;
 	}
 
-	public Iterable<IScopedElement<EObject>> getContents() {
+	public Iterable<IScopedElement> getContents() {
 		return elements;
 	}
-	
+
 }

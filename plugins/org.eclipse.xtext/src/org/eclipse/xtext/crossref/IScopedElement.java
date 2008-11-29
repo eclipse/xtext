@@ -7,13 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref;
 
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
+ * represents an element of a scope
  */
-public interface IScopedElement<T> {
+public interface IScopedElement {
+	
+	/**
+	 * @return the name, this element can be accessed within it's scope 
+	 */
 	String name();
-	T element();
+	
+	/**
+	 * @return the actual element, this element is referring to
+	 */
+	EObject element();
+	
+	
+	/**
+	 * @return can be used to pass additional information
+	 */
 	Object additionalInformation();
 }
