@@ -14,26 +14,25 @@ import java.util.Collections;
  *
  * @param <T>
  */
-public interface IScope<T> {
+public interface IScope {
 	
-    public final static IScope<?> NULLSCOPE = new IScope<Object>(){
+    public final static IScope NULLSCOPE = new IScope(){
 
-		public Iterable<IScopedElement<Object>> getAllContents() {
+		public Iterable<IScopedElement> getAllContents() {
 			return Collections.emptyList();
 		}
 
-		public Iterable<IScopedElement<Object>> getContents() {
+		public Iterable<IScopedElement> getContents() {
 			return Collections.emptyList();
 		}
 
-		@SuppressWarnings("unchecked")
-		public IScope<Object> getParent() {
-			return (IScope<Object>) NULLSCOPE;
+		public IScope getParent() {
+			return (IScope) NULLSCOPE;
 		}
     	
     };
     
-	IScope<T> getParent();
-    Iterable<IScopedElement<T>> getContents();
-    Iterable<IScopedElement<T>> getAllContents();
+    IScope getParent();
+    Iterable<IScopedElement> getContents();
+    Iterable<IScopedElement> getAllContents();
 }

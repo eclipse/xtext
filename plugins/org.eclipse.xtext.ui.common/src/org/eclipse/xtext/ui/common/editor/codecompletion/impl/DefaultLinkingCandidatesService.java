@@ -23,8 +23,8 @@ public class DefaultLinkingCandidatesService extends AbstractLinkingCandidatesSe
 	@Inject
 	private IScopeProvider scopeProvider;
 
-	public Iterable<IScopedElement<EObject>> getLinkingCandidates(EObject context, EReference reference) {
-		final IScope<EObject> candidates = scopeProvider.getScope(context, reference);
+	public Iterable<IScopedElement> getLinkingCandidates(EObject context, EReference reference) {
+		final IScope candidates = scopeProvider.getScope(context, reference);
 		return candidates.getAllContents();
 	}
 	

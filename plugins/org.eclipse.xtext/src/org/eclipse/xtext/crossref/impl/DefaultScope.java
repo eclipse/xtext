@@ -31,7 +31,7 @@ import org.eclipse.xtext.util.FilteringIterator;
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class DefaultScope extends AbstractNestedScope<EObject> {
+public class DefaultScope extends AbstractNestedScope {
 
 	private Map<String, EObject> elements;
 	private EClass type;
@@ -43,8 +43,7 @@ public class DefaultScope extends AbstractNestedScope<EObject> {
 		this.type = type;
 	}
 
-	@SuppressWarnings("unchecked")
-	private static IScope<EObject> getParent(Iterator<EObject> iter, EClass type) {
+	private static IScope getParent(Iterator<EObject> iter, EClass type) {
 		while (iter.hasNext()) {
 			EObject object = (EObject) iter.next();
 			String uri = getImportURI(object);
@@ -52,7 +51,7 @@ public class DefaultScope extends AbstractNestedScope<EObject> {
 				return new LazyReferencedResourceScope(object, type, uri, getParent(iter, type));
 			}
 		}
-		return (IScope<EObject>) IScope.NULLSCOPE;
+		return (IScope) IScope.NULLSCOPE;
 	}
 
 	private static String getImportURI(EObject object) {
@@ -62,19 +61,19 @@ public class DefaultScope extends AbstractNestedScope<EObject> {
 		return (String) object.eGet(structuralFeature);
 	}
 
-	public Iterable<IScopedElement<EObject>> getContents() {
+	public Iterable<IScopedElement> getContents() {
 		return convert(elements, type);
 	}
 
-	private static Iterable<IScopedElement<EObject>> convert(final Map<String, EObject> elements, final EClass type) {
+	private static Iterable<IScopedElement> convert(final Map<String, EObject> elements, final EClass type) {
 		final Iterator<Entry<String, EObject>> iterator = elements.entrySet().iterator();
-		return FilteringIterator.create(new Iterator<IScopedElement<EObject>>() {
+		return FilteringIterator.create(new Iterator<IScopedElement>() {
 
 			public boolean hasNext() {
 				return iterator.hasNext();
 			}
 
-			public IScopedElement<EObject> next() {
+			public IScopedElement next() {
 				Entry<String, EObject> entry = iterator.next();
 				if (entry != null)
 					return ScopedElement.create(entry.getKey(), entry.getValue());
@@ -84,15 +83,15 @@ public class DefaultScope extends AbstractNestedScope<EObject> {
 			public void remove() {
 				iterator.remove();
 			}
-		}, new Filter<IScopedElement<EObject>>() {
+		}, new Filter<IScopedElement>() {
 
-			public boolean matches(IScopedElement<EObject> param) {
+			public boolean matches(IScopedElement param) {
 				return type == null ? true : EcoreUtil2.isAssignableFrom(type, param.element());
 			}
 		});
 	}
 
-	static class LazyReferencedResourceScope extends AbstractNestedScope<EObject> {
+	static class LazyReferencedResourceScope extends AbstractNestedScope {
 
 		private EObject context;
 		private String uri;
@@ -100,7 +99,7 @@ public class DefaultScope extends AbstractNestedScope<EObject> {
 		private SimpleAttributeResolver<String> resolver = SimpleAttributeResolver.newResolver(String.class, "name");
 		private EClass type;
 
-		public LazyReferencedResourceScope(EObject context, EClass type, String uri, IScope<EObject> parent) {
+		public LazyReferencedResourceScope(EObject context, EClass type, String uri, IScope parent) {
 			super(parent);
 			this.context = context;
 			this.uri = uri;
@@ -108,7 +107,7 @@ public class DefaultScope extends AbstractNestedScope<EObject> {
 		}
 
 		@Override
-		public synchronized Iterable<IScopedElement<EObject>> getContents() {
+		public synchronized Iterable<IScopedElement> getContents() {
 			if (elements == null) {
 				try {
 					Resource resource = context.eResource().getResourceSet().getResource(URI.createURI(uri), true);

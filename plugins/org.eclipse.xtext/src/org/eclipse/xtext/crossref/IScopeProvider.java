@@ -25,5 +25,5 @@ public interface IScopeProvider extends ILanguageService {
 	 * @param reference reference to have fine grained access for visibility  
 	 * @return List of EObjects in the given scope
 	 */
-	public IScope<EObject> getScope(EObject context, EReference reference);
+	public IScope getScope(EObject context, EReference reference);
 }

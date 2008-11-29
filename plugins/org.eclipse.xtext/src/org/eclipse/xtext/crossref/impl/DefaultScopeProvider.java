@@ -52,10 +52,10 @@ public class DefaultScopeProvider extends AbstractScopeProvider implements IScop
 		}
 	};
 
-	private final SimpleCache<Pair<Resource, EClass>, IScope<EObject>> cache = new SimpleCache<Pair<Resource, EClass>, IScope<EObject>>(
-			new Function<Pair<Resource, EClass>, IScope<EObject>>() {
+	private final SimpleCache<Pair<Resource, EClass>, IScope> cache = new SimpleCache<Pair<Resource, EClass>, IScope>(
+			new Function<Pair<Resource, EClass>, IScope>() {
 
-				public IScope<EObject> exec(Pair<Resource, EClass> param) {
+				public IScope exec(Pair<Resource, EClass> param) {
 					EList<Adapter> adapters = param.getFirstElement().getResourceSet().eAdapters();
 					if (!adapters.contains(adapter))
 						adapters.add(adapter);
@@ -63,7 +63,7 @@ public class DefaultScopeProvider extends AbstractScopeProvider implements IScop
 				}
 			});
 
-	public IScope<EObject> getScope(EObject context, EReference reference) {
+	public IScope getScope(EObject context, EReference reference) {
 		return cache.get(new Pair<Resource, EClass>(context.eResource(), reference != null ? reference
 				.getEReferenceType() : null));
 	}
