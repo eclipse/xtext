@@ -19,6 +19,6 @@ public interface ILinkingCandidatesService {
 	/**
 	 * Returns all EObjects, that can be referenced in the given context.
 	 */
-	Iterable<IScopedElement<EObject>> getLinkingCandidates(EObject context, EReference reference);
+	Iterable<IScopedElement> getLinkingCandidates(EObject context, EReference reference);
 	
 }

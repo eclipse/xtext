@@ -189,9 +189,9 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		if (linkingCandidatesService != null) {
 			//TODO the passed model is not always an instance of type, the cross reference is declared for.
 			final EReference ref = GrammarUtil.getReference(crossReference, model.eClass());
-			final Iterable<IScopedElement<EObject>> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
+			final Iterable<IScopedElement> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
 			final String trimmedPrefix = prefix.trim();
-			for (IScopedElement<EObject> candidate : candidates) {
+			for (IScopedElement candidate : candidates) {
 				if (isCandidateMatchingPrefix(model, ref, candidate, trimmedPrefix)) {
 					completionProposalList.add(createCompletionProposal(crossReference, model, candidate.name(), offset));
 				}
@@ -201,7 +201,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		return completionProposalList;
 	}
 	
-	protected boolean isCandidateMatchingPrefix(EObject model, EReference ref, IScopedElement<EObject> candidate, String prefix) {
+	protected boolean isCandidateMatchingPrefix(EObject model, EReference ref, IScopedElement candidate, String prefix) {
 		return candidate.name().regionMatches(true, 0, prefix, 0, prefix.length());
 	}
 	
