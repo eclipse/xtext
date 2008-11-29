@@ -22,6 +22,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.crossref.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -29,7 +30,6 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -189,11 +189,11 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		if (linkingCandidatesService != null) {
 			//TODO the passed model is not always an instance of type, the cross reference is declared for.
 			final EReference ref = GrammarUtil.getReference(crossReference, model.eClass());
-			final Iterable<Pair<String,EObject>> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
+			final Iterable<IScopedElement<EObject>> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
 			final String trimmedPrefix = prefix.trim();
-			for (Pair<String,EObject> candidate : candidates) {
+			for (IScopedElement<EObject> candidate : candidates) {
 				if (isCandidateMatchingPrefix(model, ref, candidate, trimmedPrefix)) {
-					completionProposalList.add(createCompletionProposal(crossReference, model, candidate.getFirstElement(), offset));
+					completionProposalList.add(createCompletionProposal(crossReference, model, candidate.name(), offset));
 				}
 			}
 		}
@@ -201,8 +201,8 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		return completionProposalList;
 	}
 	
-	protected boolean isCandidateMatchingPrefix(EObject model, EReference ref, Pair<String,EObject> candidate, String prefix) {
-		return candidate.getFirstElement().regionMatches(true, 0, prefix, 0, prefix.length());
+	protected boolean isCandidateMatchingPrefix(EObject model, EReference ref, IScopedElement<EObject> candidate, String prefix) {
+		return candidate.name().regionMatches(true, 0, prefix, 0, prefix.length());
 	}
 	
 	protected String getLabel(EObject candidate, EReference ref, EObject context) {
