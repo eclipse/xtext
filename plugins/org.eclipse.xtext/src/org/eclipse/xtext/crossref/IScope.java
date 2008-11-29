@@ -9,8 +9,6 @@ package org.eclipse.xtext.crossref;
 
 import java.util.Collections;
 
-import org.eclipse.xtext.util.Pair;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
@@ -20,11 +18,11 @@ public interface IScope<T> {
 	
     public final static IScope<?> NULLSCOPE = new IScope<Object>(){
 
-		public Iterable<Pair<String,Object>> getAllContents() {
+		public Iterable<IScopedElement<Object>> getAllContents() {
 			return Collections.emptyList();
 		}
 
-		public Iterable<Pair<String,Object>> getContents() {
+		public Iterable<IScopedElement<Object>> getContents() {
 			return Collections.emptyList();
 		}
 
@@ -36,6 +34,6 @@ public interface IScope<T> {
     };
     
 	IScope<T> getParent();
-    Iterable<Pair<String,T>> getContents();
-    Iterable<Pair<String,T>> getAllContents();
+    Iterable<IScopedElement<T>> getContents();
+    Iterable<IScopedElement<T>> getAllContents();
 }
