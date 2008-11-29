@@ -11,9 +11,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopeProvider;
+import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.common.editor.codecompletion.AbstractLinkingCandidatesService;
-import org.eclipse.xtext.util.Pair;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,7 +23,7 @@ public class DefaultLinkingCandidatesService extends AbstractLinkingCandidatesSe
 	@Inject
 	private IScopeProvider scopeProvider;
 
-	public Iterable<Pair<String,EObject>> getLinkingCandidates(EObject context, EReference reference) {
+	public Iterable<IScopedElement<EObject>> getLinkingCandidates(EObject context, EReference reference) {
 		final IScope<EObject> candidates = scopeProvider.getScope(context, reference);
 		return candidates.getAllContents();
 	}

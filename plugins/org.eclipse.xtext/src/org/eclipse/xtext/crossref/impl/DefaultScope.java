@@ -23,9 +23,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.crossref.IScope;
+import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.util.Filter;
 import org.eclipse.xtext.util.FilteringIterator;
-import org.eclipse.xtext.util.Pair;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -62,32 +62,32 @@ public class DefaultScope extends AbstractNestedScope<EObject> {
 		return (String) object.eGet(structuralFeature);
 	}
 
-	public Iterable<Pair<String, EObject>> getContents() {
+	public Iterable<IScopedElement<EObject>> getContents() {
 		return convert(elements, type);
 	}
 
-	private static Iterable<Pair<String, EObject>> convert(final Map<String, EObject> elements, final EClass type) {
+	private static Iterable<IScopedElement<EObject>> convert(final Map<String, EObject> elements, final EClass type) {
 		final Iterator<Entry<String, EObject>> iterator = elements.entrySet().iterator();
-		return FilteringIterator.create(new Iterator<Pair<String, EObject>>() {
+		return FilteringIterator.create(new Iterator<IScopedElement<EObject>>() {
 
 			public boolean hasNext() {
 				return iterator.hasNext();
 			}
 
-			public Pair<String, EObject> next() {
+			public IScopedElement<EObject> next() {
 				Entry<String, EObject> entry = iterator.next();
 				if (entry != null)
-					return new Pair<String, EObject>(entry.getKey(), entry.getValue());
+					return ScopedElement.create(entry.getKey(), entry.getValue());
 				return null;
 			}
 
 			public void remove() {
 				iterator.remove();
 			}
-		}, new Filter<Pair<String, EObject>>() {
+		}, new Filter<IScopedElement<EObject>>() {
 
-			public boolean matches(Pair<String, EObject> param) {
-				return type == null ? true : EcoreUtil2.isAssignableFrom(type, param.getSecondElement());
+			public boolean matches(IScopedElement<EObject> param) {
+				return type == null ? true : EcoreUtil2.isAssignableFrom(type, param.element());
 			}
 		});
 	}
@@ -108,7 +108,7 @@ public class DefaultScope extends AbstractNestedScope<EObject> {
 		}
 
 		@Override
-		public synchronized Iterable<Pair<String, EObject>> getContents() {
+		public synchronized Iterable<IScopedElement<EObject>> getContents() {
 			if (elements == null) {
 				try {
 					Resource resource = context.eResource().getResourceSet().getResource(URI.createURI(uri), true);

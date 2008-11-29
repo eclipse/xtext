@@ -17,9 +17,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopeProvider;
+import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.util.Pair;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -49,12 +49,12 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 			return Collections.<EObject> emptyList();
 
 		final IScope<EObject> scope = getObjectsInScope(context, ref);
-		Iterator<Pair<String, EObject>> iterator = scope.getAllContents().iterator();
+		Iterator<IScopedElement<EObject>> iterator = scope.getAllContents().iterator();
 		String text2 = text.getText();
 		while (iterator.hasNext()) {
-			Pair<String, EObject> pair = (Pair<String, EObject>) iterator.next();
-			if (pair.getFirstElement().equals(text2))
-				return Collections.singletonList(pair.getSecondElement());
+			IScopedElement<EObject> element = iterator.next();
+			if (element.name().equals(text2))
+				return Collections.singletonList(element.element());
 		}
 		return Collections.emptyList();
 	}
