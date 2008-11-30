@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Tests Plug-in
-Bundle-SymbolicName: org.eclipse.xtext.preference.tests
-Bundle-Version: 0.0.1
-Bundle-Vendor: www.eclipse.org
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
