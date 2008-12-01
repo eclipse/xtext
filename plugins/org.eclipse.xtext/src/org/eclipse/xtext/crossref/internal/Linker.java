@@ -70,7 +70,7 @@ public final class Linker implements ILinker {
 		final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());
 		final List<EObject> links = linkingService.getLinkedObjects(obj, eRef, (LeafNode) node);
 
-		if (links == null || links.size() == 0) {
+		if (links == null || links.isEmpty()) {
 			brokenLinks.add(createError(node));
 			return brokenLinks;
 		}
@@ -94,15 +94,17 @@ public final class Linker implements ILinker {
 			// eRef.getUpperBound() < links.size
 			// TODO extract and check weather equals or identity is used by list
 			final List<EObject> list = (List<EObject>) obj.eGet(eRef);
-			if (eRef.isUnique() && (list instanceof BasicEList)) {
+			if (links.size() > 1 && eRef.isUnique() && (list instanceof BasicEList)) {
 				final Set<EObject> addUs = new LinkedHashSet<EObject>(links);
 				//addUs.removeAll(list); // removeAll calls most likely list.contains() which is rather slow
 				for (int i = 0; i < list.size(); i++)
 					addUs.remove(list.get(i));
-				((BasicEList) list).addAllUnique(addUs);
+				if (!((BasicEList) list).addAllUnique(addUs))
+					brokenLinks.add(new XtextLinkingDiagnostic(node, "Cannot refer '" + node.getText() + "' more than once."));
 			}
 			else
-				list.addAll(links);
+				if (!list.addAll(links))
+					brokenLinks.add(new XtextLinkingDiagnostic(node, "Cannot refer to '" + node.getText() + "' more than once."));
 			log.trace("list.size() == " + list.size());
 		}
 		return brokenLinks;

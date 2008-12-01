@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.crossref.IScope;
@@ -35,6 +34,7 @@ public class DefaultScope extends AbstractNestedScope {
 
 	private Map<String, EObject> elements;
 	private EClass type;
+	private static final SimpleAttributeResolver<String> importResolver = SimpleAttributeResolver.newResolver(String.class, "importURI");
 
 	public DefaultScope(Resource res, EClass type) {
 		super(getParent(res.getAllContents(), type));
@@ -46,19 +46,12 @@ public class DefaultScope extends AbstractNestedScope {
 	private static IScope getParent(Iterator<EObject> iter, EClass type) {
 		while (iter.hasNext()) {
 			EObject object = (EObject) iter.next();
-			String uri = getImportURI(object);
+			String uri = importResolver.getValue(object);
 			if (uri != null) {
 				return new LazyReferencedResourceScope(object, type, uri, getParent(iter, type));
 			}
 		}
 		return (IScope) IScope.NULLSCOPE;
-	}
-
-	private static String getImportURI(EObject object) {
-		EStructuralFeature structuralFeature = object.eClass().getEStructuralFeature("importURI");
-		if (structuralFeature == null)
-			return null;
-		return (String) object.eGet(structuralFeature);
 	}
 
 	public Iterable<IScopedElement> getContents() {
@@ -118,7 +111,6 @@ public class DefaultScope extends AbstractNestedScope {
 			}
 			return convert(elements, type);
 		}
-
 	}
 
 	private static Map<String, EObject> createMap(Resource resource, SimpleAttributeResolver<String> resolver) {

@@ -24,8 +24,8 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  */
 public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeProvider {
 
-//	private Map<Object, EObject> scope;
-
+	private boolean doFakeScope;
+	
 	private EObject context;
 
 	private EObject model;
@@ -68,16 +68,8 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 	 * We try to emulate a changed scope after a partial parsing so we mock the ScopeService.
 	 */
 	public IScope getScope(EObject context, EReference reference) {
-//TODO
-//		if ((this.context == context) && (this.reference == reference)) {
-//			if (scope == null) {
-//				final Iterator<Pair<String, EObject>> iter = scopeProvider.getScope(context, reference).getAllContents().iterator();
-//				this.scope = new WeakHashMap<Object, EObject>();
-//				while (iter.hasNext())
-//					this.scope.put(new Object(), iter.next());
-//			}
-//			return scope.values();
-//		}
+		if (doFakeScope && context == this.context && reference == this.reference)
+			return IScope.NULLSCOPE;
 		return scopeProvider.getScope(context, reference);
 	}
 
@@ -97,19 +89,19 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 		EList<EObject> content = (EList<EObject>) context.eGet(reference);
 		assertEquals(1, content.size());
 	}
-//TODO	
-//	@SuppressWarnings("unchecked")
-//	public void testPartialLinkingFakedScope() {
-//		replaceLinker(resource);
-//		int idx = modelAsText.indexOf("Bommel2 2");
-//		assertNull(scope);
-//		resource.update(idx + 1, 1, "o");
-//		assertNotNull(scope);
-//		scope.clear();
-//		resource.update(idx + 1, 1, "o");
-//		EList<EObject> content = (EList<EObject>) context.eGet(reference);
-//		assertEquals(0, content.size());
-//	}
+
+	@SuppressWarnings("unchecked")
+	public void testPartialLinkingFakedScope() {
+		replaceLinker(resource);
+		assertTrue(resource.getErrors().isEmpty());
+		int idx = modelAsText.indexOf("Bommel2 2");
+		resource.update(idx + 1, 1, "o");
+		doFakeScope = true;;
+		resource.update(idx + 1, 1, "o");
+		EList<EObject> content = (EList<EObject>) context.eGet(reference);
+		assertEquals(0, content.size());
+		assertEquals(1, resource.getErrors().size());
+	}
 	
 	@SuppressWarnings("unchecked")
 	public void testLinking() {
@@ -124,7 +116,5 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 		linker.setLinkingService(linkingService);
 		resource.setLinker(linker);
 	}
-
-
 
 }
