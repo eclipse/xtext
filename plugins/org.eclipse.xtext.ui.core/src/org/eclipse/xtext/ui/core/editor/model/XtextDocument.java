@@ -53,7 +53,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 		IJavaProject javaProject = getIJavaProject(file);
 		if (javaProject != null) {
-			resourceSet.setClasspathURIContext(new JdtClasspathUriResolver());
+			resourceSet.setClasspathUriResolver(new JdtClasspathUriResolver());
 			resourceSet.setClasspathURIContext(javaProject);
 		}
 
