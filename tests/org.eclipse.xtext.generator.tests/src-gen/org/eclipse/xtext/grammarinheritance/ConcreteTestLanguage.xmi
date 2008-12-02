@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>grammarinheritance</idElements>
+  <idElements>ConcreteTestLanguage</idElements>
   <superGrammarIdElements>org</superGrammarIdElements>
   <superGrammarIdElements>eclipse</superGrammarIdElements>
   <superGrammarIdElements>xtext</superGrammarIdElements>
   <superGrammarIdElements>grammarinheritance</superGrammarIdElements>
   <superGrammarIdElements>AbstractTestLanguage</superGrammarIdElements>
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="foo" nsURI="http://holla"/>
-  <idElements>org</idElements>
-  <idElements>eclipse</idElements>
-  <idElements>xtext</idElements>
-  <idElements>grammarinheritance</idElements>
-  <idElements>ConcreteTestLanguage</idElements>
   <rules xsi:type="xtext:ParserRule" name="ConcreteParserRule">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Keyword" value="model"/>
-          <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="magicNumber">
-            <terminal xsi:type="xtext:RuleCall" name="REAL"/>
+          <abstractTokens xsi:type="xtext:Assignment" feature="magicNumber" operator="=">
+            <terminal xsi:type="xtext:RuleCall">
+              <rule href="classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext#//@rules.1"/>
+            </terminal>
           </abstractTokens>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value=":"/>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="elements">
-        <terminal xsi:type="xtext:RuleCall" name="InheritedParserRule"/>
+      <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="elements" operator="+=">
+        <terminal xsi:type="xtext:RuleCall">
+          <rule href="classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext#//@rules.0"/>
+        </terminal>
       </abstractTokens>
     </alternatives>
   </rules>

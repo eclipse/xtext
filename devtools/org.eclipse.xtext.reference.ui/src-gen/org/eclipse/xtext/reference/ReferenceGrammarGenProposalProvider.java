@@ -218,10 +218,11 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 		return Collections.singletonList(createCompletionProposal(assignment,model,"CustomTypeParserRuleName", offset));
 	}
     
+    
 	public List<? extends ICompletionProposal> completeReferenceModelCustomType(RuleCall ruleCall, EObject model, String prefix,
 			IDocument doc, int offset) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeReferenceModelCustomType '" + ruleCall.getName() + "' cardinality '" + ruleCall.getCardinality()
+			logger.debug("completeReferenceModelCustomType '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
 					+ "' for model '" + model + "' and prefix '" + prefix.trim() + "'");
 		}
 		return Collections.emptyList();

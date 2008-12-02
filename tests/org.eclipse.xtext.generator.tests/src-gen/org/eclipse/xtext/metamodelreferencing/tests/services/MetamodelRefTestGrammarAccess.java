@@ -32,6 +32,10 @@ public class MetamodelRefTestGrammarAccess extends BaseEPackageAccess implements
 		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1"),true); 
 	}
 
+	public ParserRule pr_MyRule() {
+		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.2"),true); 
+	}
+
 	
 	public LexerRule lr_ID() {
 		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"),true); 

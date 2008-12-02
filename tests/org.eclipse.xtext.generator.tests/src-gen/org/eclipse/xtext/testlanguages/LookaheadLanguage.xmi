@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LookaheadLang" nsURI="http://www.eclipse.org/2008/xtext/LookaheadLang"/>
   <idElements>org</idElements>
   <idElements>eclipse</idElements>
   <idElements>xtext</idElements>
   <idElements>testlanguages</idElements>
   <idElements>LookaheadLanguage</idElements>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="LookaheadLang" nsURI="http://www.eclipse.org/2008/xtext/LookaheadLang"/>
   <rules xsi:type="xtext:ParserRule" name="Entry">
-    <alternatives xsi:type="xtext:Assignment" cardinality="*" operator="+=" feature="contents">
-      <terminal xsi:type="xtext:RuleCall" name="Alts"/>
+    <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="contents" operator="+=">
+      <terminal xsi:type="xtext:RuleCall" rule="//@rules.1"/>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Alts">
     <alternatives xsi:type="xtext:Alternatives">
       <groups xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:RuleCall" name="LookAhead0"/>
-        <groups xsi:type="xtext:RuleCall" name="LookAhead1"/>
+        <groups xsi:type="xtext:RuleCall" rule="//@rules.2"/>
+        <groups xsi:type="xtext:RuleCall" rule="//@rules.3"/>
       </groups>
-      <groups xsi:type="xtext:RuleCall" name="LookAhead3"/>
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.5"/>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="LookAhead0">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Keyword" value="bar"/>
-      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="x">
+      <abstractTokens xsi:type="xtext:Assignment" feature="x" operator="=">
         <terminal xsi:type="xtext:Keyword" value="a"/>
       </abstractTokens>
     </alternatives>
@@ -33,15 +33,15 @@
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Keyword" value="foo"/>
-          <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="y">
-            <terminal xsi:type="xtext:RuleCall" name="LookAhead2"/>
+          <abstractTokens xsi:type="xtext:Assignment" feature="y" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="//@rules.4"/>
           </abstractTokens>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="x">
+        <abstractTokens xsi:type="xtext:Assignment" feature="x" operator="=">
           <terminal xsi:type="xtext:Keyword" value="b"/>
         </abstractTokens>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="x">
+      <abstractTokens xsi:type="xtext:Assignment" feature="x" operator="=">
         <terminal xsi:type="xtext:Keyword" value="d"/>
       </abstractTokens>
     </alternatives>
@@ -49,10 +49,10 @@
   <rules xsi:type="xtext:ParserRule" name="LookAhead2">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:Assignment" operator="=" feature="z">
+        <groups xsi:type="xtext:Assignment" feature="z" operator="=">
           <terminal xsi:type="xtext:Keyword" value="foo"/>
         </groups>
-        <groups xsi:type="xtext:Assignment" operator="=" feature="z">
+        <groups xsi:type="xtext:Assignment" feature="z" operator="=">
           <terminal xsi:type="xtext:Keyword" value="bar"/>
         </groups>
       </abstractTokens>
@@ -66,21 +66,21 @@
           <abstractTokens xsi:type="xtext:Keyword" value="foo"/>
           <abstractTokens xsi:type="xtext:Keyword" value="bar"/>
         </abstractTokens>
-        <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="x">
+        <abstractTokens xsi:type="xtext:Assignment" feature="x" operator="=">
           <terminal xsi:type="xtext:Keyword" value="b"/>
         </abstractTokens>
       </abstractTokens>
-      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="z">
-        <terminal xsi:type="xtext:RuleCall" name="LookAhead4"/>
+      <abstractTokens xsi:type="xtext:Assignment" feature="z" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="//@rules.6"/>
       </abstractTokens>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="LookAhead4">
     <alternatives xsi:type="xtext:Alternatives">
-      <groups xsi:type="xtext:Assignment" operator="=" feature="x">
+      <groups xsi:type="xtext:Assignment" feature="x" operator="=">
         <terminal xsi:type="xtext:Keyword" value="c"/>
       </groups>
-      <groups xsi:type="xtext:Assignment" operator="=" feature="x">
+      <groups xsi:type="xtext:Assignment" feature="x" operator="=">
         <terminal xsi:type="xtext:Keyword" value="d"/>
       </groups>
     </alternatives>
