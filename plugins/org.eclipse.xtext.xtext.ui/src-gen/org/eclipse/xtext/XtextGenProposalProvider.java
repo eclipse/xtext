@@ -9,6 +9,9 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.common.editor.codecompletion.AbstractProposalProvider;
 import org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider;
 
@@ -58,7 +61,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "GrammarIdElements", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"GrammarIdElements", offset));
 	}
 	
 	
@@ -68,7 +71,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "GrammarSuperGrammarIdElements", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"GrammarSuperGrammarIdElements", offset));
 	}
 	
 	
@@ -96,7 +99,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "GeneratedMetamodelName", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"GeneratedMetamodelName", offset));
 	}
 	
 	public List<? extends ICompletionProposal> completeGeneratedMetamodelNsURI(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -105,7 +108,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "\"GeneratedMetamodelNsURI\"", offset));		
+		return Collections.singletonList(createCompletionProposal(assignment,model,"\"GeneratedMetamodelNsURI\"", offset));		
 	}
 	
 	public List<? extends ICompletionProposal> completeGeneratedMetamodelAlias(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -114,7 +117,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "GeneratedMetamodelAlias", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"GeneratedMetamodelAlias", offset));
 	}
 	
 	public List<? extends ICompletionProposal> completeReferencedMetamodelUri(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -123,7 +126,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "\"ReferencedMetamodelUri\"", offset));		
+		return Collections.singletonList(createCompletionProposal(assignment,model,"\"ReferencedMetamodelUri\"", offset));		
 	}
 	
 	public List<? extends ICompletionProposal> completeReferencedMetamodelAlias(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -132,7 +135,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "ReferencedMetamodelAlias", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"ReferencedMetamodelAlias", offset));
 	}
 	
 	public List<? extends ICompletionProposal> completeLexerRuleName(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -141,7 +144,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "LexerRuleName", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"LexerRuleName", offset));
 	}
 	
 	public List<? extends ICompletionProposal> completeLexerRuleType(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -159,7 +162,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "\"LexerRuleBody\"", offset));		
+		return Collections.singletonList(createCompletionProposal(assignment,model,"\"LexerRuleBody\"", offset));		
 	}
 	
 	public List<? extends ICompletionProposal> completeParserRuleName(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -168,7 +171,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "ParserRuleName", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"ParserRuleName", offset));
 	}
 	
 	public List<? extends ICompletionProposal> completeParserRuleType(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -195,7 +198,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "TypeRefAlias", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"TypeRefAlias", offset));
 	}
 	
 	public List<? extends ICompletionProposal> completeTypeRefName(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -204,7 +207,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "TypeRefName", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"TypeRefName", offset));
 	}
 	
 	public List<? extends ICompletionProposal> completeAlternativesGroups(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -240,7 +243,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "AssignmentFeature", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"AssignmentFeature", offset));
 	}
 	
 	public List<? extends ICompletionProposal> completeAssignmentOperator(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -276,7 +279,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "ActionFeature", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"ActionFeature", offset));
 	}
 	
 	public List<? extends ICompletionProposal> completeActionOperator(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -312,7 +315,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "\"KeywordValue\"", offset));		
+		return Collections.singletonList(createCompletionProposal(assignment,model,"\"KeywordValue\"", offset));		
 	}
 	
 	public List<? extends ICompletionProposal> completeRuleCallName(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -321,7 +324,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment, model, "RuleCallName", offset));
+		return Collections.singletonList(createCompletionProposal(assignment,model,"RuleCallName", offset));
 	}
     
     
@@ -335,14 +338,17 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 	}
     
     
+    
+    
+    
+    
     @Override
 	protected String getDefaultImageFilePath() {
-		return "iconds/editor.gif";
+		return "icons/editor.gif";
 	}
 
 	@Override
 	protected String getPluginId() {
 		return UI_PLUGIN_ID;
 	}
-    
 }

@@ -23,6 +23,7 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.LookaheadLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.PartialParserTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
 import org.eclipse.xtext.util.StringInputStream;
@@ -105,6 +106,78 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		resource.update(model.indexOf("k 1"), 3, "l 2");
 		resource.update(model.indexOf("k 1"), 3, "m 3");
 		assertSame(rootNode, resource.getParseResult().getRootNode());
+	}
+	
+	private AbstractNode findLeafNodeByText(CompositeNode root, String model, String text) {
+		return NodeUtil.findLeafNodeAtOffset(root, model.indexOf(text) + 1);
+	}
+	
+	public void testPartialParseConcreteRuleInnermostToken() throws Exception {
+		with(PartialParserTestLanguageStandaloneSetup.class);
+		String model = "container c1 {\n" +
+				"  children {\n" +
+				"    -> C ( ch1 )\n" +
+				"  }" +
+				"}";
+		XtextResource resource = getResourceFromString(model);
+		assertTrue(resource.getErrors().isEmpty());
+		CompositeNode root = resource.getParseResult().getRootNode();
+		AbstractNode children = findLeafNodeByText(root, model, "children");
+		resource.update(model.indexOf("ch1") + 1, 1, "h");
+		resource.update(model.indexOf("ch1") + 1, 1, "h");
+		assertSame(root, resource.getParseResult().getRootNode());
+		assertNotSame(children, findLeafNodeByText(root, model, "children"));
+	}
+	
+	public void testPartialParseConcreteRuleInnerToken() throws Exception {
+		with(PartialParserTestLanguageStandaloneSetup.class);
+		String model = "container c1 {\n" +
+				"  children {\n" +
+				"    -> C ( ch1 )\n" +
+				"  }" +
+				"}";
+		XtextResource resource = getResourceFromString(model);
+		assertTrue(resource.getErrors().isEmpty());
+		CompositeNode root = resource.getParseResult().getRootNode();
+		AbstractNode children = findLeafNodeByText(root, model, "children");
+		resource.update(model.indexOf("C"), 1, "C");
+		resource.update(model.indexOf("C"), 1, "C");
+		assertSame(root, resource.getParseResult().getRootNode());
+		assertNotSame(children, findLeafNodeByText(root, model, "children"));
+	}
+	
+	public void testPartialParseConcreteRuleFirstInnerToken() throws Exception {
+		with(PartialParserTestLanguageStandaloneSetup.class);
+		String model = "container c1 {\n" +
+				"  children {\n" +
+				"    -> C ( ch1 )\n" +
+				"  }" +
+				"}";
+		XtextResource resource = getResourceFromString(model);
+		assertTrue(resource.getErrors().isEmpty());
+		CompositeNode root = resource.getParseResult().getRootNode();
+		AbstractNode children = findLeafNodeByText(root, model, "children");
+		resource.update(model.indexOf("->"), 2, "->");
+		resource.update(model.indexOf("->"), 2, "->");
+		assertSame(root, resource.getParseResult().getRootNode());
+		assertNotSame(children, findLeafNodeByText(root, model, "children"));
+	}
+	
+	public void testPartialParseConcreteRuleFirstToken() throws Exception {
+		with(PartialParserTestLanguageStandaloneSetup.class);
+		String model = "container c1 {\n" +
+				"  children {\n" +
+				"    -> C ( ch1 )\n" +
+				"  }" +
+				"}";
+		XtextResource resource = getResourceFromString(model);
+		assertTrue(resource.getErrors().isEmpty());
+		CompositeNode root = resource.getParseResult().getRootNode();
+		AbstractNode children = findLeafNodeByText(root, model, "children");
+		resource.update(model.indexOf("n {") + 2, 1, "{");
+		resource.update(model.indexOf("n {") + 2, 1, "{");
+		assertSame(root, resource.getParseResult().getRootNode());
+		assertNotSame(children, findLeafNodeByText(root, model, "children"));
 	}
 
 	@SuppressWarnings("serial")

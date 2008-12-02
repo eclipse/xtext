@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="partialParserTestLanguage" nsURI="http://example.xtext.org/PartialParserTestLanguage"/>
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>testlanguages</idElements>
+  <idElements>PartialParserTestLanguage</idElements>
+  <rules xsi:type="xtext:ParserRule" name="Container">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="container"/>
+            <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
+              <terminal xsi:type="xtext:RuleCall" name="ID"/>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Alternatives" cardinality="*">
+          <groups xsi:type="xtext:Assignment" operator="+=" feature="nested">
+            <terminal xsi:type="xtext:RuleCall" name="Nested"/>
+          </groups>
+          <groups xsi:type="xtext:Assignment" operator="+=" feature="content">
+            <terminal xsi:type="xtext:RuleCall" name="Content"/>
+          </groups>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Nested">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="nested"/>
+          <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="+" operator="+=" feature="nested">
+          <terminal xsi:type="xtext:RuleCall" name="Container"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Content">
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:RuleCall" name="Children"/>
+      <groups xsi:type="xtext:RuleCall" name="AbstractChildren"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Children">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="children"/>
+            <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="children">
+            <terminal xsi:type="xtext:RuleCall" name="Child"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Group" cardinality="*">
+          <abstractTokens xsi:type="xtext:Keyword" value=","/>
+          <abstractTokens xsi:type="xtext:Assignment" operator="+=" feature="children">
+            <terminal xsi:type="xtext:RuleCall" name="Child"/>
+          </abstractTokens>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Child">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="->"/>
+            <abstractTokens xsi:type="xtext:Keyword" value="C"/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value="("/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="value">
+          <terminal xsi:type="xtext:RuleCall" name="Named"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value=")"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="AbstractChildren">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Keyword" value="abstract children"/>
+          <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="+" operator="+=" feature="abstractChildren">
+          <terminal xsi:type="xtext:RuleCall" name="AbstractChild"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="AbstractChild">
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:RuleCall" name="FirstConcrete"/>
+      <groups xsi:type="xtext:RuleCall" name="SecondConcrete"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="FirstConcrete">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Keyword" value="->"/>
+              <abstractTokens xsi:type="xtext:Keyword" value="F"/>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Keyword" value="("/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="value">
+            <terminal xsi:type="xtext:RuleCall" name="Named"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="?" operator="=" feature="referencedContainer">
+          <terminal xsi:type="xtext:CrossReference">
+            <type name="Container"/>
+          </terminal>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value=")"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="SecondConcrete">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Group">
+                <abstractTokens xsi:type="xtext:Keyword" value="->"/>
+                <abstractTokens xsi:type="xtext:Keyword" value="F"/>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Keyword" value="S"/>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Keyword" value="("/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="value">
+            <terminal xsi:type="xtext:RuleCall" name="Named"/>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" cardinality="?" operator="+=" feature="referencedChildren">
+          <terminal xsi:type="xtext:CrossReference">
+            <type name="Child"/>
+          </terminal>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value=")"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Named">
+    <alternatives xsi:type="xtext:Assignment" operator="=" feature="name">
+      <terminal xsi:type="xtext:RuleCall" name="ID"/>
+    </alternatives>
+  </rules>
+</xtext:Grammar>
