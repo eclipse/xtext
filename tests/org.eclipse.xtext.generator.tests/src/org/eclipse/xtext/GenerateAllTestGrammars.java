@@ -22,6 +22,7 @@ import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest;
 import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testlanguages.ActionTestLanguage;
+import org.eclipse.xtext.testlanguages.ContentAssistTestLanguage;
 import org.eclipse.xtext.testlanguages.FowlerDslTestLanguage;
 import org.eclipse.xtext.testlanguages.LexerLanguage;
 import org.eclipse.xtext.testlanguages.LookaheadLanguage;
@@ -43,12 +44,18 @@ public class GenerateAllTestGrammars {
 	private static Logger log = Logger.getLogger(GenerateAllTestGrammars.class);
 
 	public final static Class<?>[] testclasses = new Class[] { 
-			LangA.class, AbstractTestLanguage.class,
-			ConcreteTestLanguage.class, XtextGrammarTest.class, MetamodelRefTest.class, DummyLanguage.class,
-			TestLanguage.class, SimpleReconstrTest.class, ComplexReconstrTest.class, LexerLanguage.class,
+			LangA.class,
+			AbstractTestLanguage.class,
+			ConcreteTestLanguage.class,
+			XtextGrammarTest.class, 
+			MetamodelRefTest.class,
+			DummyLanguage.class,
+			TestLanguage.class,
+			SimpleReconstrTest.class, ComplexReconstrTest.class, LexerLanguage.class,
 			SimpleExpressions.class, ActionTestLanguage.class, OptionalEmptyLanguage.class, ReferenceGrammar.class,
 			LookaheadLanguage.class, Bug250313.class, FowlerDslTestLanguage.class, TreeTestLanguage.class, ImportUriTestLanguage.class,
-			PartialParserTestLanguage.class };
+			PartialParserTestLanguage.class, ContentAssistTestLanguage.class 
+			};
 
 	public static void main(String[] args) throws Exception {
 		try {
