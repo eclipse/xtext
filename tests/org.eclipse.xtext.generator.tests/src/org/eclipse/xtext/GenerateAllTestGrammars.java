@@ -26,6 +26,7 @@ import org.eclipse.xtext.testlanguages.FowlerDslTestLanguage;
 import org.eclipse.xtext.testlanguages.LexerLanguage;
 import org.eclipse.xtext.testlanguages.LookaheadLanguage;
 import org.eclipse.xtext.testlanguages.OptionalEmptyLanguage;
+import org.eclipse.xtext.testlanguages.PartialParserTestLanguage;
 import org.eclipse.xtext.testlanguages.ReferenceGrammar;
 import org.eclipse.xtext.testlanguages.SimpleExpressions;
 import org.eclipse.xtext.testlanguages.TestLanguage;
@@ -41,11 +42,13 @@ public class GenerateAllTestGrammars {
 
 	private static Logger log = Logger.getLogger(GenerateAllTestGrammars.class);
 
-	public final static Class<?>[] testclasses = new Class[] { LangA.class, AbstractTestLanguage.class,
+	public final static Class<?>[] testclasses = new Class[] { 
+			LangA.class, AbstractTestLanguage.class,
 			ConcreteTestLanguage.class, XtextGrammarTest.class, MetamodelRefTest.class, DummyLanguage.class,
 			TestLanguage.class, SimpleReconstrTest.class, ComplexReconstrTest.class, LexerLanguage.class,
 			SimpleExpressions.class, ActionTestLanguage.class, OptionalEmptyLanguage.class, ReferenceGrammar.class,
-			LookaheadLanguage.class, Bug250313.class, FowlerDslTestLanguage.class, TreeTestLanguage.class, ImportUriTestLanguage.class };
+			LookaheadLanguage.class, Bug250313.class, FowlerDslTestLanguage.class, TreeTestLanguage.class, ImportUriTestLanguage.class,
+			PartialParserTestLanguage.class };
 
 	public static void main(String[] args) throws Exception {
 		try {
