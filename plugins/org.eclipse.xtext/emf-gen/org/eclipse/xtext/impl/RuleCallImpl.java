@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleCallImpl.java,v 1.10 2008/06/05 15:03:51 sefftinge Exp $
+ * $Id: RuleCallImpl.java,v 1.11 2008/12/02 20:42:07 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -10,8 +10,10 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextPackage;
 
@@ -22,7 +24,7 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.RuleCallImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.RuleCallImpl#getRule <em>Rule</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,26 +33,16 @@ import org.eclipse.xtext.XtextPackage;
 public class RuleCallImpl extends AbstractElementImpl implements RuleCall
 {
   /**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getRule() <em>Rule</em>}' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getName()
+	 * <!-- end-user-doc -->
+	 * @see #getRule()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final String NAME_EDEFAULT = null;
+	protected AbstractRule rule;
 
-  /**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-  protected String name = NAME_EDEFAULT;
-
-  /**
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -73,28 +65,43 @@ public class RuleCallImpl extends AbstractElementImpl implements RuleCall
 
   /**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getName()
-  {
-		return name;
+	public AbstractRule getRule() {
+		if (rule != null && rule.eIsProxy()) {
+			InternalEObject oldRule = (InternalEObject)rule;
+			rule = (AbstractRule)eResolveProxy(oldRule);
+			if (rule != oldRule) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XtextPackage.RULE_CALL__RULE, oldRule, rule));
+			}
+		}
+		return rule;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setName(String newName)
-  {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.RULE_CALL__NAME, oldName, name));
+	public AbstractRule basicGetRule() {
+		return rule;
 	}
 
-  /**
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRule(AbstractRule newRule) {
+		AbstractRule oldRule = rule;
+		rule = newRule;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.RULE_CALL__RULE, oldRule, rule));
+	}
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -103,8 +110,9 @@ public class RuleCallImpl extends AbstractElementImpl implements RuleCall
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
 		switch (featureID) {
-			case XtextPackage.RULE_CALL__NAME:
-				return getName();
+			case XtextPackage.RULE_CALL__RULE:
+				if (resolve) return getRule();
+				return basicGetRule();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,8 +126,8 @@ public class RuleCallImpl extends AbstractElementImpl implements RuleCall
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
-			case XtextPackage.RULE_CALL__NAME:
-				setName((String)newValue);
+			case XtextPackage.RULE_CALL__RULE:
+				setRule((AbstractRule)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -134,8 +142,8 @@ public class RuleCallImpl extends AbstractElementImpl implements RuleCall
   public void eUnset(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.RULE_CALL__NAME:
-				setName(NAME_EDEFAULT);
+			case XtextPackage.RULE_CALL__RULE:
+				setRule((AbstractRule)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -150,27 +158,10 @@ public class RuleCallImpl extends AbstractElementImpl implements RuleCall
   public boolean eIsSet(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.RULE_CALL__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case XtextPackage.RULE_CALL__RULE:
+				return rule != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  @Override
-  public String toString()
-  {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //RuleCallImpl

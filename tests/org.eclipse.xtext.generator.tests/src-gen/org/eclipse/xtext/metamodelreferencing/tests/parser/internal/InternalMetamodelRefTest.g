@@ -121,22 +121,23 @@ ruleNameRef returns [EObject current=null]
     @after { resetLookahead(); }:
 (	
 	
-	    lv_name=RULE_STRING
-    { 
-    createLeafNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
-    }
- 
-	    {
-	        if ($current==null) {
+		
+		{
+			if ($current==null) {
 	            $current = factory.create("xtext::RuleCall");
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
-	        factory.set($current, "name", lv_name,"STRING");
-	         }
+        }
+(
+	RULE_ID    { 
+    createLeafNode("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1/@alternatives/@terminal" /* xtext::CrossReference */, "rule"); 
+    }
+) 
 	
 );
     
+
+
 
 
 

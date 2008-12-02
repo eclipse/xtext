@@ -36,7 +36,7 @@ public class ParseTreeConstructorUtil {
 		else if (ele instanceof Assignment)
 			r = ((Assignment) ele).getFeature();
 		else if (ele instanceof RuleCall)
-			r = ((RuleCall) ele).getName();
+			r = ((RuleCall) ele).getRule().getName();
 		else if (ele instanceof Action) {
 			Action a = (Action) ele;
 			r = a.getTypeName().getName() + "_" + a.getFeature();

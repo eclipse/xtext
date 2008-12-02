@@ -36,22 +36,22 @@ public class PartialParsingPointerTest extends AbstractPartialParserTest {
 		PartialParsingPointers parsingPointers;
 		
 		parsingPointers = calculatePartialParsingPointers(model, 1, 1);
-		checkParseRegionPointers(parsingPointers, "(a+b+c)", "Parens", "Parens", "Op", "Op", "values");
+		checkParseRegionPointers(parsingPointers, "(a+b+c)", "RuleCallImpl", "Parens", "Op", "Op", "values");
 
 		parsingPointers = calculatePartialParsingPointers(model, 3, 1);
-		checkParseRegionPointers(parsingPointers, "b", "Multiplication", "Multiplication", "Atom", "Op", "values");
+		checkParseRegionPointers(parsingPointers, "b", "RuleCallImpl", "Multiplication", "Atom", "Op", "values");
 
 		parsingPointers = calculatePartialParsingPointers(model, 5, 2);
-		checkParseRegionPointers(parsingPointers, "(a+b+c)", "Parens", "Parens", "Op", "Op", "values");
+		checkParseRegionPointers(parsingPointers, "(a+b+c)", "RuleCallImpl", "Parens", "Op", "Op", "values");
 
 		parsingPointers = calculatePartialParsingPointers(model, 6, 1);
-		checkParseRegionPointers(parsingPointers, "(a+b+c)", "Parens", "Parens", "Op", "Op", "values");
+		checkParseRegionPointers(parsingPointers, "(a+b+c)", "RuleCallImpl", "Parens", "Op", "Op", "values");
 
 		parsingPointers = calculatePartialParsingPointers(model, 8, 2);
-		checkParseRegionPointers(parsingPointers, "(c/d)", "Term", "Term", "Op", "Op", "values");
+		checkParseRegionPointers(parsingPointers, "(c/d)", "RuleCallImpl", "Term", "Op", "Op", "values");
 
 		parsingPointers = calculatePartialParsingPointers(model, 9, 2);
-		checkParseRegionPointers(parsingPointers, "(c/d)", "Parens", "Parens", "Op", "Op", "values");
+		checkParseRegionPointers(parsingPointers, "(c/d)", "RuleCallImpl", "Parens", "Op", "Op", "values");
 
 		model = "a b";
 		parsingPointers = calculatePartialParsingPointers(model, 1, 1);
@@ -68,29 +68,29 @@ public class PartialParsingPointerTest extends AbstractPartialParserTest {
 				checkParseRegionPointers(parsingPointers, model, "Entry", "Entry", "Entry", null, null);
 			}
 			else if (i < 5) {
-				checkParseRegionPointers(parsingPointers, "bar a", "LookAhead0", "LookAhead0", "LookAhead0", "Entry",
+				checkParseRegionPointers(parsingPointers, "bar a", "RuleCallImpl", "LookAhead0", "LookAhead0", "Entry",
 						"contents");
 			}
 			else if (i < 9) {
 				checkParseRegionPointers(parsingPointers, model, "Entry", "Entry", "Entry", null, null);
 			}
 			else if (i < 15) {
-				checkParseRegionPointers(parsingPointers, " foo bar c b d", "Alts", "Alts", "LookAhead1", "Entry",
+				checkParseRegionPointers(parsingPointers, " foo bar c b d", "RuleCallImpl", "Alts", "LookAhead1", "Entry",
 						"contents");
 			}
 			else if (i < 19) {
-				checkParseRegionPointers(parsingPointers, " foo bar c b d", "LookAhead1", "LookAhead1", "LookAhead1",
+				checkParseRegionPointers(parsingPointers, " foo bar c b d", "RuleCallImpl", "LookAhead1", "LookAhead1",
 						"Entry", "contents");
 			}
 			else if (i < 23) {
 				checkParseRegionPointers(parsingPointers, model, "Entry", "Entry", "Entry", null, null);
 			}
 			else if (i < 29) {
-				checkParseRegionPointers(parsingPointers, " foo bar b c", "Alts", "Alts", "LookAhead3", "Entry",
+				checkParseRegionPointers(parsingPointers, " foo bar b c", "RuleCallImpl", "Alts", "LookAhead3", "Entry",
 						"contents");
 			}
 			else {
-				checkParseRegionPointers(parsingPointers, " foo bar b c", "LookAhead3", "LookAhead3", "LookAhead3", "Entry",
+				checkParseRegionPointers(parsingPointers, " foo bar b c", "RuleCallImpl", "LookAhead3", "LookAhead3", "Entry",
 				"contents");
 			}
 		}
@@ -100,7 +100,7 @@ public class PartialParsingPointerTest extends AbstractPartialParserTest {
 		with(ReferenceGrammarStandaloneSetup.class);
 		String model = "spielplatz 17 { kind ( Dennis 6 ) kind ( Sven 7 ) }";
 		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(model, model.indexOf("Sven"), 4);
-		checkParseRegionPointers(parsingPointers, " kind ( Sven 7 )", "Kind", "Kind", "Kind", "Spielplatz", "kinder");
+		checkParseRegionPointers(parsingPointers, " kind ( Sven 7 )", "RuleCallImpl", "Kind", "Kind", "Spielplatz", "kinder");
 	}
 
 	private PartialParsingPointers calculatePartialParsingPointers(String model, int changeRegionStart,

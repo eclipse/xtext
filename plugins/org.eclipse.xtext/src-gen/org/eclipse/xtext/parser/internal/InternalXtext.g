@@ -1065,20 +1065,18 @@ ruleCrossReference returns [EObject current=null]
     }
 (	
 	
-	    
-	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
-	    }
-	    lv_rule=ruleRuleCall 
-	    {
-	        currentNode = currentNode.getParent();
-	        if ($current==null) {
+		
+		{
+			if ($current==null) {
 	            $current = factory.create("CrossReference");
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
-	        factory.set($current, "rule", lv_rule,null);
-	         }
+        }
+(
+	RULE_ID    { 
+    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "rule"); 
+    }
+) 
 	
 ))?)']' 
     {
@@ -1167,19 +1165,18 @@ ruleRuleCall returns [EObject current=null]
     @after { resetLookahead(); }:
 (	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.17/@alternatives/@terminal" /* xtext::RuleCall */, "name"); 
-    }
- 
-	    {
-	        if ($current==null) {
+		
+		{
+			if ($current==null) {
 	            $current = factory.create("RuleCall");
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+        }
+(
+	RULE_ID    { 
+    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.17/@alternatives/@terminal" /* xtext::CrossReference */, "rule"); 
+    }
+) 
 	
 );
     

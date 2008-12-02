@@ -73,7 +73,7 @@ public class SimpleTokenSerializer extends DefaultTokenSerializer {
 	protected void elementLexerRuleCall(IInstanceDescription current,
 			RuleCall call, Object value) throws IOException {
 		beforeElement(current, call);
-		append(converterService.toString(value, call.getName()));
+		append(converterService.toString(value, call.getRule().getName()));
 		afterElement(current, call);
 	}
 

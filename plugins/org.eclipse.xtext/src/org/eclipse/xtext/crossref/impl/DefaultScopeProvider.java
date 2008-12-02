@@ -61,13 +61,17 @@ public class DefaultScopeProvider extends AbstractScopeProvider implements IScop
 					EList<Adapter> adapters = param.getFirstElement().getResourceSet().eAdapters();
 					if (!adapters.contains(adapter))
 						adapters.add(adapter);
-					return new DefaultScope(param.getFirstElement(), param.getSecondElement());
+					return createScope(param.getFirstElement(), param.getSecondElement());
 				}
 			});
+	
+	protected IScope createScope(Resource resource, EClass type) {
+		return new DefaultScope(resource, type);
+	}
 
 	public IScope getScope(EObject context, EReference reference) {
 		return cache.get(new Pair<Resource, EClass>(context.eResource(), reference != null ? reference
-				.getEReferenceType() : null));
+				.getEReferenceType() : context.eClass().eClass()));
 	}
 
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CrossReference.java,v 1.2 2008/08/15 10:02:42 sefftinge Exp $
+ * $Id: CrossReference.java,v 1.3 2008/12/02 20:42:05 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -15,8 +15,8 @@ package org.eclipse.xtext;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.CrossReference#getRule <em>Rule</em>}</li>
  *   <li>{@link org.eclipse.xtext.CrossReference#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.CrossReference#getRule <em>Rule</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,29 +52,29 @@ public interface CrossReference extends AbstractElement {
 	void setType(TypeRef value);
 
 	/**
-	 * Returns the value of the '<em><b>Rule</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Rule</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Rule</em>' containment reference.
-	 * @see #setRule(RuleCall)
+	 * @return the value of the '<em>Rule</em>' reference.
+	 * @see #setRule(LexerRule)
 	 * @see org.eclipse.xtext.XtextPackage#getCrossReference_Rule()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
-	RuleCall getRule();
+	LexerRule getRule();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.CrossReference#getRule <em>Rule</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.CrossReference#getRule <em>Rule</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Rule</em>' containment reference.
+	 * @param value the new value of the '<em>Rule</em>' reference.
 	 * @see #getRule()
 	 * @generated
 	 */
-	void setRule(RuleCall value);
+	void setRule(LexerRule value);
 
 } // CrossReference

@@ -30,11 +30,11 @@ setOrAdd(Assignment this) : if operator=='+=' then 'add' else 'set';
 isCalled(ParserRule this) :
 	let x = grammar().allParserRules() :
 		x.indexOf(this)==0 || 
-		x.eAllContents.flatten().typeSelect(RuleCall).exists(e|e.calledParserRule()==this);
+		x.grammar().eAllContents.flatten().typeSelect(RuleCall).rule.name.contains(this.name);
 
 //TODO make localVars unique
 localVar(Assignment this) : 'lv_'+feature;
-localVar(RuleCall this) : 'this_'+name;
+localVar(RuleCall this) : 'this_'+rule.name;
 
 toStringLiteral(xtext::AbstractElement this) :
 	"null";

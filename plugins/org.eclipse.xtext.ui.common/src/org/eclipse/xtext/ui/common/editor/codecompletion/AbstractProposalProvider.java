@@ -88,7 +88,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall, EObject model, String prefix,
 			IDocument doc, int offset) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeRuleCall '" + ruleCall.getName() + "' cardinality '" + ruleCall.getCardinality()
+			logger.debug("completeRuleCall '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
 					+ "' for model '" + model + "' and prefix '" + prefix.trim() + "'");
 		}
 

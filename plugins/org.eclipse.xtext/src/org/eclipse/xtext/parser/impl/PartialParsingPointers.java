@@ -69,7 +69,7 @@ public class PartialParsingPointers {
 	public String findEntryRuleName(CompositeNode replaceRootNode) {
 		EObject grammarElement = replaceRootNode.getGrammarElement();
 		if (GrammarUtil.isParserRuleCall(grammarElement)) {
-			return ((RuleCall) grammarElement).getName();
+			return ((RuleCall) grammarElement).getRule().getName();
 		}
 		else if (grammarElement instanceof ParserRule) {
 			return ((ParserRule) grammarElement).getName();

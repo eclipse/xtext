@@ -306,7 +306,7 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.emptyList();
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, prefix, offset);
 	}
 	
 	public List<? extends ICompletionProposal> completeKeywordValue(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -318,20 +318,20 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 		return Collections.singletonList(createCompletionProposal(assignment,model,"\"KeywordValue\"", offset));		
 	}
 	
-	public List<? extends ICompletionProposal> completeRuleCallName(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
+	public List<? extends ICompletionProposal> completeRuleCallRule(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeRuleCallName feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeRuleCallRule feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment,model,"RuleCallName", offset));
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, prefix, offset);
 	}
     
     
 	public List<? extends ICompletionProposal> complete(RuleCall ruleCall, EObject model, String prefix,
 			IDocument doc, int offset) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("complete '" + ruleCall.getName() + "' cardinality '" + ruleCall.getCardinality()
+			logger.debug("complete '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
 					+ "' for model '" + model + "' and prefix '" + prefix.trim() + "'");
 		}
 		return Collections.emptyList();

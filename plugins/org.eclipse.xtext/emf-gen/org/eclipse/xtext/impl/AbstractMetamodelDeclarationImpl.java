@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractMetamodelDeclarationImpl.java,v 1.10 2008/06/05 15:03:51 sefftinge Exp $
+ * $Id: AbstractMetamodelDeclarationImpl.java,v 1.11 2008/12/02 20:42:07 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -29,7 +29,7 @@ import org.eclipse.xtext.XtextPackage;
  *
  * @generated
  */
-public abstract class AbstractMetamodelDeclarationImpl extends EObjectImpl implements AbstractMetamodelDeclaration
+public class AbstractMetamodelDeclarationImpl extends EObjectImpl implements AbstractMetamodelDeclaration
 {
   /**
 	 * The default value of the '{@link #getAlias() <em>Alias</em>}' attribute.

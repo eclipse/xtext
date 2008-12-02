@@ -14,10 +14,6 @@ import xtextutil;
 extension org::eclipse::xtext::Extensions;
 extension org::eclipse::xtext::GrammarUtil;
 
-
-context RuleCall ERROR "Couldn't resolve called rule "+name :
-	calledRule()!=null;
-
 context GeneratedMetamodel ERROR "Only one generated metamodel can have default alias" :
 	alias != null
 	|| alias != ""

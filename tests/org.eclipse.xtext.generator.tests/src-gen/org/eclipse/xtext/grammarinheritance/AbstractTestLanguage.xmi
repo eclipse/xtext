@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext" abstract="true">
-  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="mm" uri="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore"/>
   <idElements>org</idElements>
   <idElements>eclipse</idElements>
   <idElements>xtext</idElements>
   <idElements>grammarinheritance</idElements>
   <idElements>AbstractTestLanguage</idElements>
+  <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="mm" uri="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore"/>
   <rules xsi:type="xtext:ParserRule" name="InheritedParserRule">
     <type alias="mm" name="AType"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Keyword" value="element"/>
-      <abstractTokens xsi:type="xtext:Assignment" operator="=" feature="name">
-        <terminal xsi:type="xtext:RuleCall" name="ID"/>
+      <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+        <terminal xsi:type="xtext:RuleCall" rule="//@rules.2"/>
       </abstractTokens>
     </alternatives>
   </rules>

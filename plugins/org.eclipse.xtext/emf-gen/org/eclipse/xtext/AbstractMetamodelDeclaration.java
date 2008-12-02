@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractMetamodelDeclaration.java,v 1.10 2008/06/05 15:03:50 sefftinge Exp $
+ * $Id: AbstractMetamodelDeclaration.java,v 1.11 2008/12/02 20:42:05 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see org.eclipse.xtext.XtextPackage#getAbstractMetamodelDeclaration()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface AbstractMetamodelDeclaration extends EObject

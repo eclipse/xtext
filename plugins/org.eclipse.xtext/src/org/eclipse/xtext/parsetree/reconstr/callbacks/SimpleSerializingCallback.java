@@ -67,6 +67,6 @@ public class SimpleSerializingCallback extends
 	public void lexerRuleCall(IInstanceDescription current, RuleCall call,
 			Object value) {
 		before(current, call);
-		append(converterService.toString(value, call.getName()));
+		append(converterService.toString(value, call.getRule().getName()));
 	}
 }

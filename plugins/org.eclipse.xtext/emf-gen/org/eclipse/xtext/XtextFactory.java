@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextFactory.java,v 1.11 2008/08/07 15:05:36 sefftinge Exp $
+ * $Id: XtextFactory.java,v 1.12 2008/12/02 20:42:05 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -54,6 +54,15 @@ public interface XtextFactory extends EFactory
   Grammar createGrammar();
 
   /**
+	 * Returns a new object of class '<em>Abstract Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Abstract Rule</em>'.
+	 * @generated
+	 */
+	AbstractRule createAbstractRule();
+
+		/**
 	 * Returns a new object of class '<em>Parser Rule</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -63,6 +72,15 @@ public interface XtextFactory extends EFactory
   ParserRule createParserRule();
 
   /**
+	 * Returns a new object of class '<em>Abstract Metamodel Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Abstract Metamodel Declaration</em>'.
+	 * @generated
+	 */
+	AbstractMetamodelDeclaration createAbstractMetamodelDeclaration();
+
+		/**
 	 * Returns a new object of class '<em>Type Ref</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

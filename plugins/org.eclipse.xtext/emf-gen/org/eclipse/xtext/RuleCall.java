@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleCall.java,v 1.10 2008/06/05 15:03:49 sefftinge Exp $
+ * $Id: RuleCall.java,v 1.11 2008/12/02 20:42:05 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -15,7 +15,7 @@ package org.eclipse.xtext;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.RuleCall#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.RuleCall#getRule <em>Rule</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,29 +26,29 @@ package org.eclipse.xtext;
 public interface RuleCall extends AbstractElement
 {
   /**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.eclipse.xtext.XtextPackage#getRuleCall_Name()
+	 * <p>
+	 * If the meaning of the '<em>Rule</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Rule</em>' reference.
+	 * @see #setRule(AbstractRule)
+	 * @see org.eclipse.xtext.XtextPackage#getRuleCall_Rule()
 	 * @model
 	 * @generated
 	 */
-  String getName();
+	AbstractRule getRule();
 
-  /**
-	 * Sets the value of the '{@link org.eclipse.xtext.RuleCall#getName <em>Name</em>}' attribute.
+		/**
+	 * Sets the value of the '{@link org.eclipse.xtext.RuleCall#getRule <em>Rule</em>}' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Rule</em>' reference.
+	 * @see #getRule()
 	 * @generated
 	 */
-  void setName(String value);
+	void setRule(AbstractRule value);
 
 } // RuleCall

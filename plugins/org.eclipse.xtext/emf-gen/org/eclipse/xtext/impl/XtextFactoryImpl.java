@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextFactoryImpl.java,v 1.13 2008/08/15 10:02:43 sefftinge Exp $
+ * $Id: XtextFactoryImpl.java,v 1.14 2008/12/02 20:42:07 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -64,20 +64,22 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
   public EObject create(EClass eClass)
   {
 		switch (eClass.getClassifierID()) {
-			case XtextPackage.PARSER_RULE: return createParserRule();
-			case XtextPackage.ASSIGNMENT: return createAssignment();
-			case XtextPackage.LEXER_RULE: return createLexerRule();
-			case XtextPackage.ALTERNATIVES: return createAlternatives();
 			case XtextPackage.GRAMMAR: return createGrammar();
-			case XtextPackage.CROSS_REFERENCE: return createCrossReference();
+			case XtextPackage.ABSTRACT_RULE: return createAbstractRule();
+			case XtextPackage.LEXER_RULE: return createLexerRule();
+			case XtextPackage.PARSER_RULE: return createParserRule();
+			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION: return createAbstractMetamodelDeclaration();
+			case XtextPackage.GENERATED_METAMODEL: return createGeneratedMetamodel();
 			case XtextPackage.REFERENCED_METAMODEL: return createReferencedMetamodel();
-			case XtextPackage.RULE_CALL: return createRuleCall();
-			case XtextPackage.GROUP: return createGroup();
 			case XtextPackage.TYPE_REF: return createTypeRef();
 			case XtextPackage.ABSTRACT_ELEMENT: return createAbstractElement();
-			case XtextPackage.GENERATED_METAMODEL: return createGeneratedMetamodel();
-			case XtextPackage.KEYWORD: return createKeyword();
+			case XtextPackage.ALTERNATIVES: return createAlternatives();
+			case XtextPackage.GROUP: return createGroup();
+			case XtextPackage.ASSIGNMENT: return createAssignment();
 			case XtextPackage.ACTION: return createAction();
+			case XtextPackage.KEYWORD: return createKeyword();
+			case XtextPackage.RULE_CALL: return createRuleCall();
+			case XtextPackage.CROSS_REFERENCE: return createCrossReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -118,6 +120,16 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
 
   /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AbstractRule createAbstractRule() {
+		AbstractRuleImpl abstractRule = new AbstractRuleImpl();
+		return abstractRule;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -128,6 +140,16 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
 	}
 
   /**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AbstractMetamodelDeclaration createAbstractMetamodelDeclaration() {
+		AbstractMetamodelDeclarationImpl abstractMetamodelDeclaration = new AbstractMetamodelDeclarationImpl();
+		return abstractMetamodelDeclaration;
+	}
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated

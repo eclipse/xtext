@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextPackage.java,v 1.13 2008/08/15 10:02:42 sefftinge Exp $
+ * $Id: XtextPackage.java,v 1.14 2008/12/02 20:42:05 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -68,7 +68,7 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getAbstractMetamodelDeclaration()
 	 * @generated
 	 */
-  int ABSTRACT_METAMODEL_DECLARATION = 2;
+  int ABSTRACT_METAMODEL_DECLARATION = 4;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.GeneratedMetamodelImpl <em>Generated Metamodel</em>}' class.
@@ -78,7 +78,7 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getGeneratedMetamodel()
 	 * @generated
 	 */
-  int GENERATED_METAMODEL = 12;
+  int GENERATED_METAMODEL = 5;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
@@ -88,7 +88,7 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getAbstractElement()
 	 * @generated
 	 */
-  int ABSTRACT_ELEMENT = 11;
+  int ABSTRACT_ELEMENT = 8;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.GrammarImpl <em>Grammar</em>}' class.
@@ -98,7 +98,7 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getGrammar()
 	 * @generated
 	 */
-  int GRAMMAR = 5;
+  int GRAMMAR = 0;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.AbstractRuleImpl <em>Abstract Rule</em>}' class.
@@ -108,7 +108,7 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getAbstractRule()
 	 * @generated
 	 */
-  int ABSTRACT_RULE = 14;
+  int ABSTRACT_RULE = 1;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.ParserRuleImpl <em>Parser Rule</em>}' class.
@@ -118,7 +118,7 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getParserRule()
 	 * @generated
 	 */
-  int PARSER_RULE = 0;
+  int PARSER_RULE = 3;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.TypeRefImpl <em>Type Ref</em>}' class.
@@ -128,7 +128,7 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getTypeRef()
 	 * @generated
 	 */
-  int TYPE_REF = 10;
+  int TYPE_REF = 7;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.GroupImpl <em>Group</em>}' class.
@@ -138,7 +138,7 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getGroup()
 	 * @generated
 	 */
-  int GROUP = 9;
+  int GROUP = 10;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.ActionImpl <em>Action</em>}' class.
@@ -148,7 +148,7 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getAction()
 	 * @generated
 	 */
-  int ACTION = 15;
+  int ACTION = 12;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.AlternativesImpl <em>Alternatives</em>}' class.
@@ -158,7 +158,7 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getAlternatives()
 	 * @generated
 	 */
-  int ALTERNATIVES = 4;
+  int ALTERNATIVES = 9;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.RuleCallImpl <em>Rule Call</em>}' class.
@@ -168,7 +168,7 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getRuleCall()
 	 * @generated
 	 */
-  int RULE_CALL = 8;
+  int RULE_CALL = 14;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.ReferencedMetamodelImpl <em>Referenced Metamodel</em>}' class.
@@ -178,7 +178,7 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getReferencedMetamodel()
 	 * @generated
 	 */
-  int REFERENCED_METAMODEL = 7;
+  int REFERENCED_METAMODEL = 6;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.LexerRuleImpl <em>Lexer Rule</em>}' class.
@@ -188,7 +188,7 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getLexerRule()
 	 * @generated
 	 */
-  int LEXER_RULE = 3;
+  int LEXER_RULE = 2;
 
   /**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.KeywordImpl <em>Keyword</em>}' class.
@@ -208,36 +208,9 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getAssignment()
 	 * @generated
 	 */
-  int ASSIGNMENT = 1;
+  int ASSIGNMENT = 11;
 
   /**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ABSTRACT_RULE__NAME = 0;
-
-		/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ABSTRACT_RULE__TYPE = 1;
-
-		/**
-	 * The number of structural features of the '<em>Abstract Rule</em>' class.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ABSTRACT_RULE_FEATURE_COUNT = 2;
-
-		/**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.CrossReferenceImpl <em>Cross Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -245,214 +218,7 @@ public interface XtextPackage extends EPackage
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getCrossReference()
 	 * @generated
 	 */
-	int CROSS_REFERENCE = 6;
-
-		/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int PARSER_RULE__NAME = ABSTRACT_RULE__NAME;
-
-		/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int PARSER_RULE__TYPE = ABSTRACT_RULE__TYPE;
-
-		/**
-	 * The feature id for the '<em><b>Alternatives</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int PARSER_RULE__ALTERNATIVES = ABSTRACT_RULE_FEATURE_COUNT + 0;
-
-		/**
-	 * The number of structural features of the '<em>Parser Rule</em>' class.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int PARSER_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 1;
-
-		/**
-	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ABSTRACT_ELEMENT__CARDINALITY = 0;
-
-		/**
-	 * The number of structural features of the '<em>Abstract Element</em>' class.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ABSTRACT_ELEMENT_FEATURE_COUNT = 1;
-
-		/**
-	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ASSIGNMENT__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
-
-		/**
-	 * The feature id for the '<em><b>Operator</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ASSIGNMENT__OPERATOR = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
-
-		/**
-	 * The feature id for the '<em><b>Feature</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ASSIGNMENT__FEATURE = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
-
-		/**
-	 * The feature id for the '<em><b>Terminal</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ASSIGNMENT__TERMINAL = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
-
-		/**
-	 * The number of structural features of the '<em>Assignment</em>' class.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ASSIGNMENT_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 3;
-
-		/**
-	 * The feature id for the '<em><b>Alias</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ABSTRACT_METAMODEL_DECLARATION__ALIAS = 0;
-
-		/**
-	 * The number of structural features of the '<em>Abstract Metamodel Declaration</em>' class.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT = 1;
-
-		/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int LEXER_RULE__NAME = ABSTRACT_RULE__NAME;
-
-		/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int LEXER_RULE__TYPE = ABSTRACT_RULE__TYPE;
-
-		/**
-	 * The feature id for the '<em><b>Body</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int LEXER_RULE__BODY = ABSTRACT_RULE_FEATURE_COUNT + 0;
-
-		/**
-	 * The number of structural features of the '<em>Lexer Rule</em>' class.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int LEXER_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 1;
-
-		/**
-	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ALTERNATIVES__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
-
-		/**
-	 * The feature id for the '<em><b>Groups</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ALTERNATIVES__GROUPS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
-
-		/**
-	 * The number of structural features of the '<em>Alternatives</em>' class.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int ALTERNATIVES_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
-
-		/**
-	 * The feature id for the '<em><b>Super Grammar Id Elements</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS = 0;
-
-		/**
-	 * The feature id for the '<em><b>Metamodel Declarations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int GRAMMAR__METAMODEL_DECLARATIONS = 1;
-
-		/**
-	 * The feature id for the '<em><b>Id Elements</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int GRAMMAR__ID_ELEMENTS = 2;
+	int CROSS_REFERENCE = 15;
 
 		/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -461,7 +227,34 @@ public interface XtextPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-  int GRAMMAR__ABSTRACT = 3;
+  int GRAMMAR__ABSTRACT = 0;
+
+		/**
+	 * The feature id for the '<em><b>Id Elements</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int GRAMMAR__ID_ELEMENTS = 1;
+
+		/**
+	 * The feature id for the '<em><b>Super Grammar Id Elements</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAMMAR__SUPER_GRAMMAR_ID_ELEMENTS = 2;
+
+		/**
+	 * The feature id for the '<em><b>Metamodel Declarations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int GRAMMAR__METAMODEL_DECLARATIONS = 3;
 
 		/**
 	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
@@ -482,76 +275,40 @@ public interface XtextPackage extends EPackage
   int GRAMMAR_FEATURE_COUNT = 5;
 
 		/**
-	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CROSS_REFERENCE__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+  int ABSTRACT_RULE__TYPE = 0;
 
 		/**
-	 * The feature id for the '<em><b>Rule</b></em>' containment reference.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+   * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CROSS_REFERENCE__RULE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int ABSTRACT_RULE__NAME = 1;
+
+		/**
+	 * The number of structural features of the '<em>Abstract Rule</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ABSTRACT_RULE_FEATURE_COUNT = 2;
 
 		/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CROSS_REFERENCE__TYPE = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
-
-		/**
-	 * The number of structural features of the '<em>Cross Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CROSS_REFERENCE_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
-
-		/**
-	 * The feature id for the '<em><b>Alias</b></em>' attribute.
-	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int REFERENCED_METAMODEL__ALIAS = ABSTRACT_METAMODEL_DECLARATION__ALIAS;
-
-		/**
-	 * The feature id for the '<em><b>Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int REFERENCED_METAMODEL__URI = ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT + 0;
-
-		/**
-	 * The number of structural features of the '<em>Referenced Metamodel</em>' class.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int REFERENCED_METAMODEL_FEATURE_COUNT = ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT + 1;
-
-		/**
-	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int RULE_CALL__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+  int LEXER_RULE__TYPE = ABSTRACT_RULE__TYPE;
 
 		/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -560,52 +317,34 @@ public interface XtextPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-  int RULE_CALL__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int LEXER_RULE__NAME = ABSTRACT_RULE__NAME;
 
 		/**
-	 * The number of structural features of the '<em>Rule Call</em>' class.
+	 * The feature id for the '<em><b>Body</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int RULE_CALL_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int LEXER_RULE__BODY = ABSTRACT_RULE_FEATURE_COUNT + 0;
 
 		/**
-	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+	 * The number of structural features of the '<em>Lexer Rule</em>' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int GROUP__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+  int LEXER_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 1;
 
 		/**
-	 * The feature id for the '<em><b>Abstract Tokens</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int GROUP__ABSTRACT_TOKENS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
-
-		/**
-	 * The number of structural features of the '<em>Group</em>' class.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int GROUP_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
-
-		/**
-	 * The feature id for the '<em><b>Alias</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-  int TYPE_REF__ALIAS = 0;
+  int PARSER_RULE__TYPE = ABSTRACT_RULE__TYPE;
 
 		/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -614,16 +353,43 @@ public interface XtextPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-  int TYPE_REF__NAME = 1;
+  int PARSER_RULE__NAME = ABSTRACT_RULE__NAME;
 
 		/**
-	 * The number of structural features of the '<em>Type Ref</em>' class.
+	 * The feature id for the '<em><b>Alternatives</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int TYPE_REF_FEATURE_COUNT = 2;
+  int PARSER_RULE__ALTERNATIVES = ABSTRACT_RULE_FEATURE_COUNT + 0;
+
+		/**
+	 * The number of structural features of the '<em>Parser Rule</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int PARSER_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 1;
+
+		/**
+	 * The feature id for the '<em><b>Alias</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ABSTRACT_METAMODEL_DECLARATION__ALIAS = 0;
+
+		/**
+	 * The number of structural features of the '<em>Abstract Metamodel Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT = 1;
 
 		/**
 	 * The feature id for the '<em><b>Alias</b></em>' attribute.
@@ -662,31 +428,175 @@ public interface XtextPackage extends EPackage
   int GENERATED_METAMODEL_FEATURE_COUNT = ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT + 2;
 
 		/**
+	 * The feature id for the '<em><b>Alias</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int REFERENCED_METAMODEL__ALIAS = ABSTRACT_METAMODEL_DECLARATION__ALIAS;
+
+		/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int REFERENCED_METAMODEL__URI = ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT + 0;
+
+		/**
+	 * The number of structural features of the '<em>Referenced Metamodel</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int REFERENCED_METAMODEL_FEATURE_COUNT = ABSTRACT_METAMODEL_DECLARATION_FEATURE_COUNT + 1;
+
+		/**
+	 * The feature id for the '<em><b>Alias</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int TYPE_REF__ALIAS = 0;
+
+		/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int TYPE_REF__NAME = 1;
+
+		/**
+	 * The number of structural features of the '<em>Type Ref</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int TYPE_REF_FEATURE_COUNT = 2;
+
+		/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int KEYWORD__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+  int ABSTRACT_ELEMENT__CARDINALITY = 0;
 
 		/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * The number of structural features of the '<em>Abstract Element</em>' class.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int KEYWORD__VALUE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int ABSTRACT_ELEMENT_FEATURE_COUNT = 1;
 
 		/**
-	 * The number of structural features of the '<em>Keyword</em>' class.
+	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-  int KEYWORD_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int ALTERNATIVES__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+		/**
+	 * The feature id for the '<em><b>Groups</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ALTERNATIVES__GROUPS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+		/**
+	 * The number of structural features of the '<em>Alternatives</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ALTERNATIVES_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+		/**
+	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int GROUP__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+		/**
+	 * The feature id for the '<em><b>Abstract Tokens</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int GROUP__ABSTRACT_TOKENS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+		/**
+	 * The number of structural features of the '<em>Group</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int GROUP_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+		/**
+	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ASSIGNMENT__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+		/**
+	 * The feature id for the '<em><b>Feature</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ASSIGNMENT__FEATURE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+		/**
+	 * The feature id for the '<em><b>Operator</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ASSIGNMENT__OPERATOR = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+		/**
+	 * The feature id for the '<em><b>Terminal</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ASSIGNMENT__TERMINAL = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
+
+		/**
+	 * The number of structural features of the '<em>Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int ASSIGNMENT_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 3;
 
 		/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -732,6 +642,96 @@ public interface XtextPackage extends EPackage
 	 * @ordered
 	 */
   int ACTION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 3;
+
+		/**
+	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int KEYWORD__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+		/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int KEYWORD__VALUE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+		/**
+	 * The number of structural features of the '<em>Keyword</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int KEYWORD_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+		/**
+	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int RULE_CALL__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+		/**
+	 * The feature id for the '<em><b>Rule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_CALL__RULE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+		/**
+	 * The number of structural features of the '<em>Rule Call</em>' class.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+  int RULE_CALL_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+		/**
+	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CROSS_REFERENCE__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+		/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CROSS_REFERENCE__TYPE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+		/**
+	 * The feature id for the '<em><b>Rule</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CROSS_REFERENCE__RULE = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+		/**
+	 * The number of structural features of the '<em>Cross Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CROSS_REFERENCE_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
 
 
   /**
@@ -1033,17 +1033,17 @@ public interface XtextPackage extends EPackage
   EClass getRuleCall();
 
   /**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.RuleCall#getName <em>Name</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.RuleCall#getRule <em>Rule</em>}'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtext.RuleCall#getName()
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Rule</em>'.
+	 * @see org.eclipse.xtext.RuleCall#getRule()
 	 * @see #getRuleCall()
 	 * @generated
 	 */
-  EAttribute getRuleCall_Name();
+	EReference getRuleCall_Rule();
 
-  /**
+		/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.ReferencedMetamodel <em>Referenced Metamodel</em>}'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1149,10 +1149,10 @@ public interface XtextPackage extends EPackage
 	EReference getCrossReference_Type();
 
 		/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.CrossReference#getRule <em>Rule</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.CrossReference#getRule <em>Rule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Rule</em>'.
+	 * @return the meta object for the reference '<em>Rule</em>'.
 	 * @see org.eclipse.xtext.CrossReference#getRule()
 	 * @see #getCrossReference()
 	 * @generated
@@ -1470,14 +1470,14 @@ public interface XtextPackage extends EPackage
     EClass RULE_CALL = eINSTANCE.getRuleCall();
 
     /**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Rule</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-    EAttribute RULE_CALL__NAME = eINSTANCE.getRuleCall_Name();
+		EReference RULE_CALL__RULE = eINSTANCE.getRuleCall_Rule();
 
-    /**
+				/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.impl.ReferencedMetamodelImpl <em>Referenced Metamodel</em>}' class.
 		 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1568,7 +1568,7 @@ public interface XtextPackage extends EPackage
 		EReference CROSS_REFERENCE__TYPE = eINSTANCE.getCrossReference_Type();
 
 				/**
-		 * The meta object literal for the '<em><b>Rule</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Rule</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

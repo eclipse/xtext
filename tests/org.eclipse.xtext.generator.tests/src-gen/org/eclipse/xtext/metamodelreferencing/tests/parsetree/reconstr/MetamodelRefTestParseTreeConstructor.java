@@ -23,7 +23,8 @@ public class MetamodelRefTestParseTreeConstructor extends AbstractParseTreeConst
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
 		if(inst.isInstanceOf("Foo") && (s = new Foo_Group(inst, null).firstSolution()) != null) return s;
-		if(inst.isInstanceOf("xtext::RuleCall") && (s = new NameRef_Assignment_name(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("xtext::RuleCall") && (s = new NameRef_Assignment_rule(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("xtext::ParserRule") && (s = new MyRule_Assignment_name(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
@@ -102,7 +103,7 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("xtext::RuleCall")) {
-				Solution s = new NameRef_Assignment_name(param, this).firstSolution();
+				Solution s = new NameRef_Assignment_rule(param, this).firstSolution();
 				if(s != null) {
 					type = AssignmentType.PRC; 
 					return new Solution(obj,s.getPredecessor());
@@ -118,15 +119,15 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 
 /************ begin Rule NameRef ****************
  *
- * NameRef returns xtext :: RuleCall : name = STRING ;
+ * NameRef returns xtext :: RuleCall : rule = [ MyRule ] ;
  *
  **/
 
 
-// name = STRING
-protected class NameRef_Assignment_name extends AssignmentToken  {
+// rule = [ MyRule ]
+protected class NameRef_Assignment_rule extends AssignmentToken  {
 	
-	public NameRef_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
+	public NameRef_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -135,17 +136,52 @@ protected class NameRef_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1/@alternatives/@terminal"); 
-			return new Solution(obj);
+		if((value = current.getConsumable("rule",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("rule");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("MyRule")) {
+				type = AssignmentType.CR;
+				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1/@alternatives/@terminal"); 
+				return new Solution(obj);
+			}
 		}
 		return null;
 	}
 }
 
 /************ end Rule NameRef ****************/
+
+/************ begin Rule MyRule ****************
+ *
+ * MyRule returns xtext :: ParserRule : name = ID ;
+ *
+ **/
+
+
+// name = ID
+protected class MyRule_Assignment_name extends AssignmentToken  {
+	
+	public MyRule_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
+		super(curr, pred, !IS_MANY, IS_REQUIRED);
+	}
+	
+	public Assignment getGrammarElement() {
+		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.2/@alternatives");
+	}
+	
+	protected Solution createSolution() {
+		if((value = current.getConsumable("name",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
+			type = AssignmentType.LRC;
+			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.2/@alternatives/@terminal"); 
+			return new Solution(obj);
+		}
+		return null;
+	}
+}
+
+/************ end Rule MyRule ****************/
 
 }

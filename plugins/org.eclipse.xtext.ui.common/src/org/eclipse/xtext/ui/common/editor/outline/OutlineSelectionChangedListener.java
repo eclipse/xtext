@@ -71,7 +71,7 @@ public final class OutlineSelectionChangedListener extends AbstractSelectionChan
 			EObject grammarElement = leafNode.getGrammarElement();
 			if (grammarElement instanceof RuleCall) {
 				RuleCall ruleCall = (RuleCall) grammarElement;
-				String ruleName = ruleCall.getName();
+				String ruleName = ruleCall.getRule().getName();
 				if (idNode == null && ruleName.equals("ID")) {
 					idNode = leafNode;
 				}
