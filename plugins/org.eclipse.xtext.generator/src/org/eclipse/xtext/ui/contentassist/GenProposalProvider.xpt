@@ -78,11 +78,11 @@ public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProp
 		}
 		«IF CrossReference.isInstance(assignment.terminal)-»
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, prefix, offset);
-		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).name=="ID" -»
+		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="ID" -»
 		return Collections.singletonList(createCompletionProposal(assignment,model,"«fqnFeatureName»", offset));
-		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).name=="INT" -»
+		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="INT" -»
 		return Collections.singletonList(createCompletionProposal(assignment,model,"1", offset));		
-		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).name=="STRING" -»
+		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="STRING" -»
 		return Collections.singletonList(createCompletionProposal(assignment,model,"\"«fqnFeatureName»\"", offset));		
 		«ELSE-»
 		return Collections.emptyList();
@@ -99,7 +99,7 @@ public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProp
 	public List<? extends ICompletionProposal> complete«fqnFeatureName»(RuleCall ruleCall, EObject model, String prefix,
 			IDocument doc, int offset) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("complete«fqnFeatureName» '" + ruleCall.getName() + "' cardinality '" + ruleCall.getCardinality()
+			logger.debug("complete«fqnFeatureName» '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
 					+ "' for model '" + model + "' and prefix '" + prefix.trim() + "'");
 		}
 		return Collections.emptyList();

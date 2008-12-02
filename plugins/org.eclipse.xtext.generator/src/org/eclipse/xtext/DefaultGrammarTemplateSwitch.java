@@ -77,7 +77,7 @@ public final class DefaultGrammarTemplateSwitch extends XtextSwitch<String> {
 		String patternName = containingParserRule.getName()
 				+ "_"
 				+ (ruleCall.eContainer() instanceof Assignment ? ((Assignment) ruleCall.eContainer()).getFeature()
-						: ruleCall.getName());
+						: ruleCall.getRule().getName());
 
 		if (calledRule instanceof LexerRule) {
 
