@@ -1,7 +1,26 @@
+/*******************************************************************************
+* Copyright (c) 2008 itemis AG and others.
+* All rights reserved. This program and the accompanying materials
+* are made available under the terms of the Eclipse Public License v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
+*
+*******************************************************************************/
+
+import ecore;
 import xtext;
-/*
- * this check file is used to specify constraints for the derived metamodels
- * example:
- * context Entity WARNING "Entity names should start with a capital" :
- *    name.toFirstUpper() == name;
- */
+import xtextutil; 
+
+extension org::eclipse::xtext::Extensions;
+extension org::eclipse::xtext::GrammarUtil;
+
+context GeneratedMetamodel ERROR "Only one generated metamodel can have default alias" :
+	alias != null
+	|| alias != ""
+	|| grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel).select(gmm|gmm.alias == null || gmm.alias =="").size == 1;
+
+context GeneratedMetamodel ERROR "Duplicate aliases are only allowed for referenced metamodels" :
+	grammar().metamodelDeclarations.typeSelect(GeneratedMetamodel).select(gmm|gmm.alias == alias).size == 1;
+
+context AbstractRule ERROR "Name must be unique" :
+	grammar().rules.select(p | p.name == name).size==1;

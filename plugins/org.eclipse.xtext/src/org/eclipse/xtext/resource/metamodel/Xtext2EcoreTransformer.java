@@ -170,7 +170,7 @@ public class Xtext2EcoreTransformer {
 		}
 		else if (element instanceof RuleCall && !GrammarUtil.isOptionalCardinality(element)) {
 			RuleCall ruleCall = (RuleCall) element;
-			AbstractRule calledRule = GrammarUtil.findRuleForName(grammar, ruleCall.getName());
+			AbstractRule calledRule = ruleCall.getRule();
 			// do not throw an exception for missing rules, these have been
 			// announced during the first iteration
 			if (calledRule != null)
@@ -235,10 +235,10 @@ public class Xtext2EcoreTransformer {
 			throws TransformationException {
 		if (element instanceof RuleCall) {
 			RuleCall ruleCall = (RuleCall) element;
-			AbstractRule calledRule = GrammarUtil.calledRule(ruleCall);
-			if (calledRule == null)
+			AbstractRule calledRule = ruleCall.getRule();
+			if (calledRule == null) // TODO: use NodeAdapter to create error message 
 				throw new TransformationException(ErrorCode.NoSuchRuleAvailable, "Cannot find rule "
-						+ ruleCall.getName(), ruleCall);
+						+ ruleCall, ruleCall);
 			TypeRef calledRuleReturnTypeRef = getOrFakeReturnType(calledRule);
 			addSuperType(calledRuleReturnTypeRef, ruleReturnType);
 		}

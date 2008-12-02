@@ -154,14 +154,7 @@ public class GrammarUtil {
 	}
 
 	public static AbstractRule calledRule(RuleCall ruleCall) {
-		Grammar g = getGrammar(ruleCall);
-		List<AbstractRule> rules = allRules(g);
-		for (AbstractRule rule : rules) {
-			if (ruleCall.getName().equals(rule.getName())) {
-				return rule;
-			}
-		}
-		return null;
+		return ruleCall.getRule();
 	}
 
 	public static Grammar getSuperGrammar(Grammar _this) {
@@ -343,8 +336,9 @@ public class GrammarUtil {
 	}
 
 	public static LexerRule getCalledLexerRule(CrossReference ref) {
-		String ruleName = ref.getRule() != null ? ref.getRule().getName() : "ID";
-		return (LexerRule) findRuleForName(getGrammar(ref), ruleName);
+		if (ref.getRule() != null)
+			return ref.getRule();
+		return (LexerRule) findRuleForName(getGrammar(ref), "ID");
 	}
 
 	private static boolean isSameAlias(String alias, String alias2) {

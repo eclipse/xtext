@@ -384,7 +384,7 @@ public final class ParseTreeUtil {
 				stringBuilder.append("[" + ((ParserRule) abstractNode.getGrammarElement()).getName() + "]");
 			}
 			else if (abstractNode.getGrammarElement() instanceof RuleCall) {
-				stringBuilder.append("[" + ((RuleCall) abstractNode.getGrammarElement()).getName() + "]");
+				stringBuilder.append("[" + ((RuleCall) abstractNode.getGrammarElement()).getRule().getName() + "]");
 
 			}
 			abstractNode = abstractNode.getParent();

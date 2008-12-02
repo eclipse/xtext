@@ -4,18 +4,12 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
-language org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest
+package org.eclipse.xtext.testlanguages;
 
-import 				"http://www.eclipse.org/2008/Xtext" 		as xtext
-generate SimpleTest "http://eclipse.org/xtext/tests/SimpleTest"
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class ContentAssistTestLanguage {
 
-Foo : 
-	name=ID (nameRefs+=NameRef)*;
-
-NameRef returns xtext::RuleCall : 
-	rule=[MyRule];
-	
-MyRule returns xtext::ParserRule :
-    name=ID;
+}
