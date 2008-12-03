@@ -36,12 +36,12 @@ public class SimpleReconstrTestParseTreeConstructor extends AbstractParseTreeCon
 	
 /************ begin Rule Op ****************
  *
- * Op returns Expression : Term ( { current = Op . values += current } values += Term ) * ;
+ * Op returns simplerewritetest :: Expression : Term ( { current = simplerewritetest :: Op . values += current } values += Term ) * ;
  *
  **/
 
 
-// Term ( { current = Op . values += current } values += Term ) *
+// Term ( { current = simplerewritetest :: Op . values += current } values += Term ) *
 protected class Op_Group extends GroupToken {
 	
 	public Op_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -87,7 +87,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 	}
 }
 
-// ( { current = Op . values += current } values += Term ) *
+// ( { current = simplerewritetest :: Op . values += current } values += Term ) *
 protected class Op_1_Group extends GroupToken {
 	
 	public Op_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -115,7 +115,7 @@ protected class Op_1_Group extends GroupToken {
 	}
 }
 
-// { current = Op . values += current }
+// { current = simplerewritetest :: Op . values += current }
 protected class Op_1_0_Action_Op_values extends ActionToken  {
 
 	public Op_1_0_Action_Op_values(IInstanceDescription curr, AbstractToken pred) {
@@ -169,7 +169,7 @@ protected class Op_1_1_Assignment_values extends AssignmentToken  {
 
 /************ begin Rule Term ****************
  *
- * Term returns Expression : Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare ;
+ * Term returns simplerewritetest :: Expression : Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare ;
  *
  **/
 
@@ -468,7 +468,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * Parens returns Expression : '(' Op ')' ( em = '!' ) ? ;
+ * Parens returns simplerewritetest :: Expression : '(' Op ')' ( em = '!' ) ? ;
  *
  **/
 
@@ -931,12 +931,12 @@ protected class ManyStrings_1_Assignment_str2 extends AssignmentToken  {
 
 /************ begin Rule Type ****************
  *
- * Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
+ * Type : 'type' name = ID 'extends' ^extends = [ simplerewritetest :: Type ] ;
  *
  **/
 
 
-// 'type' name = ID 'extends' ^extends = [ Type ]
+// 'type' name = ID 'extends' ^extends = [ simplerewritetest :: Type ]
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1069,7 +1069,7 @@ protected class Type_0_1_Keyword_extends extends KeywordToken  {
 }
 
 
-// ^extends = [ Type ]
+// ^extends = [ simplerewritetest :: Type ]
 protected class Type_1_Assignment_extends extends AssignmentToken  {
 	
 	public Type_1_Assignment_extends(IInstanceDescription curr, AbstractToken pred) {

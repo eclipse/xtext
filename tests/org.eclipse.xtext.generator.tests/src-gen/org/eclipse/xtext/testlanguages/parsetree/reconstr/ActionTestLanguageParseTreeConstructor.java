@@ -67,12 +67,12 @@ protected class Model_Assignment_children extends AssignmentToken  {
 
 /************ begin Rule Element ****************
  *
- * Element returns Type : Item ( { current = Item . items += current } items += Item ) ;
+ * Element returns ActionLang :: Type : Item ( { current = ActionLang :: Item . items += current } items += Item ) ;
  *
  **/
 
 
-// Item ( { current = Item . items += current } items += Item )
+// Item ( { current = ActionLang :: Item . items += current } items += Item )
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -118,7 +118,7 @@ protected class Element_0_RuleCall_Item extends RuleCallToken {
 	}
 }
 
-// { current = Item . items += current } items += Item
+// { current = ActionLang :: Item . items += current } items += Item
 protected class Element_1_Group extends GroupToken {
 	
 	public Element_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -146,7 +146,7 @@ protected class Element_1_Group extends GroupToken {
 	}
 }
 
-// { current = Item . items += current }
+// { current = ActionLang :: Item . items += current }
 protected class Element_1_0_Action_Item_items extends ActionToken  {
 
 	public Element_1_0_Action_Item_items(IInstanceDescription curr, AbstractToken pred) {
@@ -200,12 +200,12 @@ protected class Element_1_1_Assignment_items extends AssignmentToken  {
 
 /************ begin Rule Item ****************
  *
- * Item returns Type : { current = Thing . content = current } name = ID ;
+ * Item returns ActionLang :: Type : { current = ActionLang :: Thing . content = current } name = ID ;
  *
  **/
 
 
-// { current = Thing . content = current } name = ID
+// { current = ActionLang :: Thing . content = current } name = ID
 protected class Item_Group extends GroupToken {
 	
 	public Item_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -233,7 +233,7 @@ protected class Item_Group extends GroupToken {
 	}
 }
 
-// { current = Thing . content = current }
+// { current = ActionLang :: Thing . content = current }
 protected class Item_0_Action_Thing_content extends ActionToken  {
 
 	public Item_0_Action_Thing_content(IInstanceDescription curr, AbstractToken pred) {

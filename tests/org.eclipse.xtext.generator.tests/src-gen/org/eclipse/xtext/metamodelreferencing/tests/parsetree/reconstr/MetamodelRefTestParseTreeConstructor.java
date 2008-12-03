@@ -119,12 +119,12 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 
 /************ begin Rule NameRef ****************
  *
- * NameRef returns xtext :: RuleCall : rule = [ MyRule ] ;
+ * (error)
  *
  **/
 
 
-// rule = [ MyRule ]
+// rule = [ SimpleTest :: MyRule ]
 protected class NameRef_Assignment_rule extends AssignmentToken  {
 	
 	public NameRef_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
@@ -154,7 +154,7 @@ protected class NameRef_Assignment_rule extends AssignmentToken  {
 
 /************ begin Rule MyRule ****************
  *
- * MyRule returns xtext :: ParserRule : name = ID ;
+ * (error)
  *
  **/
 

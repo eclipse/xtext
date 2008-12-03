@@ -1212,12 +1212,12 @@ protected class AbstractChild_1_RuleCall_SecondConcrete extends RuleCallToken {
 
 /************ begin Rule FirstConcrete ****************
  *
- * FirstConcrete : '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ? ')' ;
+ * FirstConcrete : '->' 'F' '(' value = Named ( referencedContainer = [ partialParserTestLanguage :: Container ] ) ? ')' ;
  *
  **/
 
 
-// '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ? ')'
+// '->' 'F' '(' value = Named ( referencedContainer = [ partialParserTestLanguage :: Container ] ) ? ')'
 protected class FirstConcrete_Group extends GroupToken {
 	
 	public FirstConcrete_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1245,7 +1245,7 @@ protected class FirstConcrete_Group extends GroupToken {
 	}
 }
 
-// '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ?
+// '->' 'F' '(' value = Named ( referencedContainer = [ partialParserTestLanguage :: Container ] ) ?
 protected class FirstConcrete_0_Group extends GroupToken {
 	
 	public FirstConcrete_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1424,7 +1424,7 @@ protected class FirstConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 }
 
 
-// ( referencedContainer = [ Container ] ) ?
+// ( referencedContainer = [ partialParserTestLanguage :: Container ] ) ?
 protected class FirstConcrete_0_1_Assignment_referencedContainer extends AssignmentToken  {
 	
 	public FirstConcrete_0_1_Assignment_referencedContainer(IInstanceDescription curr, AbstractToken pred) {
@@ -1468,12 +1468,12 @@ protected class FirstConcrete_1_Keyword extends KeywordToken  {
 
 /************ begin Rule SecondConcrete ****************
  *
- * SecondConcrete : '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ? ')' ;
+ * SecondConcrete : '->' 'F' 'S' '(' value = Named ( referencedChildren += [ partialParserTestLanguage :: Child ] ) ? ')' ;
  *
  **/
 
 
-// '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ? ')'
+// '->' 'F' 'S' '(' value = Named ( referencedChildren += [ partialParserTestLanguage :: Child ] ) ? ')'
 protected class SecondConcrete_Group extends GroupToken {
 	
 	public SecondConcrete_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1501,7 +1501,7 @@ protected class SecondConcrete_Group extends GroupToken {
 	}
 }
 
-// '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ?
+// '->' 'F' 'S' '(' value = Named ( referencedChildren += [ partialParserTestLanguage :: Child ] ) ?
 protected class SecondConcrete_0_Group extends GroupToken {
 	
 	public SecondConcrete_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1721,7 +1721,7 @@ protected class SecondConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 }
 
 
-// ( referencedChildren += [ Child ] ) ?
+// ( referencedChildren += [ partialParserTestLanguage :: Child ] ) ?
 protected class SecondConcrete_0_1_Assignment_referencedChildren extends AssignmentToken  {
 	
 	public SecondConcrete_0_1_Assignment_referencedChildren(IInstanceDescription curr, AbstractToken pred) {

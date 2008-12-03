@@ -38,12 +38,12 @@ public class ComplexReconstrTestParseTreeConstructor extends AbstractParseTreeCo
 	
 /************ begin Rule Op ****************
  *
- * Op returns Expression : Term ( { current = Add . addOperands += current } '+' addOperands += Term | { current = Minus . minusOperands += current } '-' minusOperands += Term ) * ;
+ * Op returns complexrewritetest :: Expression : Term ( { current = complexrewritetest :: Add . addOperands += current } '+' addOperands += Term | { current = complexrewritetest :: Minus . minusOperands += current } '-' minusOperands += Term ) * ;
  *
  **/
 
 
-// Term ( { current = Add . addOperands += current } '+' addOperands += Term | { current = Minus . minusOperands += current } '-' minusOperands += Term ) *
+// Term ( { current = complexrewritetest :: Add . addOperands += current } '+' addOperands += Term | { current = complexrewritetest :: Minus . minusOperands += current } '-' minusOperands += Term ) *
 protected class Op_Group extends GroupToken {
 	
 	public Op_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -89,7 +89,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 	}
 }
 
-// ( { current = Add . addOperands += current } '+' addOperands += Term | { current = Minus . minusOperands += current } '-' minusOperands += Term ) *
+// ( { current = complexrewritetest :: Add . addOperands += current } '+' addOperands += Term | { current = complexrewritetest :: Minus . minusOperands += current } '-' minusOperands += Term ) *
 protected class Op_1_Alternatives extends AlternativesToken {
 
 	public Op_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -110,7 +110,7 @@ protected class Op_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// { current = Add . addOperands += current } '+' addOperands += Term
+// { current = complexrewritetest :: Add . addOperands += current } '+' addOperands += Term
 protected class Op_1_0_Group extends GroupToken {
 	
 	public Op_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -138,7 +138,7 @@ protected class Op_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = Add . addOperands += current } '+'
+// { current = complexrewritetest :: Add . addOperands += current } '+'
 protected class Op_1_0_0_Group extends GroupToken {
 	
 	public Op_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -166,7 +166,7 @@ protected class Op_1_0_0_Group extends GroupToken {
 	}
 }
 
-// { current = Add . addOperands += current }
+// { current = complexrewritetest :: Add . addOperands += current }
 protected class Op_1_0_0_0_Action_Add_addOperands extends ActionToken  {
 
 	public Op_1_0_0_0_Action_Add_addOperands(IInstanceDescription curr, AbstractToken pred) {
@@ -228,7 +228,7 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 }
 
 
-// { current = Minus . minusOperands += current } '-' minusOperands += Term
+// { current = complexrewritetest :: Minus . minusOperands += current } '-' minusOperands += Term
 protected class Op_1_1_Group extends GroupToken {
 	
 	public Op_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -256,7 +256,7 @@ protected class Op_1_1_Group extends GroupToken {
 	}
 }
 
-// { current = Minus . minusOperands += current } '-'
+// { current = complexrewritetest :: Minus . minusOperands += current } '-'
 protected class Op_1_1_0_Group extends GroupToken {
 	
 	public Op_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -284,7 +284,7 @@ protected class Op_1_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = Minus . minusOperands += current }
+// { current = complexrewritetest :: Minus . minusOperands += current }
 protected class Op_1_1_0_0_Action_Minus_minusOperands extends ActionToken  {
 
 	public Op_1_1_0_0_Action_Minus_minusOperands(IInstanceDescription curr, AbstractToken pred) {
@@ -352,7 +352,7 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 
 /************ begin Rule Term ****************
  *
- * Term returns Expression : Atom | Parens ;
+ * Term returns complexrewritetest :: Expression : Atom | Parens ;
  *
  **/
 
@@ -451,7 +451,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * Parens returns Expression : '(' Op ')' ( em = '!' ) ? ;
+ * Parens returns complexrewritetest :: Expression : '(' Op ')' ( em = '!' ) ? ;
  *
  **/
 
@@ -612,12 +612,12 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 
 /************ begin Rule TrickyA ****************
  *
- * TrickyA returns TypeA1 : 'TA' TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ? name += STRING ;
+ * TrickyA returns complexrewritetest :: TypeA1 : 'TA' TrickyA1 ( name += ID ) * ( { current = complexrewritetest :: TypeB . x = current } 'x' | { current = complexrewritetest :: TypeC . x = current } 'y' ) ? name += STRING ;
  *
  **/
 
 
-// 'TA' TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ? name += STRING
+// 'TA' TrickyA1 ( name += ID ) * ( { current = complexrewritetest :: TypeB . x = current } 'x' | { current = complexrewritetest :: TypeC . x = current } 'y' ) ? name += STRING
 protected class TrickyA_Group extends GroupToken {
 	
 	public TrickyA_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -645,7 +645,7 @@ protected class TrickyA_Group extends GroupToken {
 	}
 }
 
-// 'TA' TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ?
+// 'TA' TrickyA1 ( name += ID ) * ( { current = complexrewritetest :: TypeB . x = current } 'x' | { current = complexrewritetest :: TypeC . x = current } 'y' ) ?
 protected class TrickyA_0_Group extends GroupToken {
 	
 	public TrickyA_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -784,7 +784,7 @@ protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ?
+// ( { current = complexrewritetest :: TypeB . x = current } 'x' | { current = complexrewritetest :: TypeC . x = current } 'y' ) ?
 protected class TrickyA_0_1_Alternatives extends AlternativesToken {
 
 	public TrickyA_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -805,7 +805,7 @@ protected class TrickyA_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// { current = TypeB . x = current } 'x'
+// { current = complexrewritetest :: TypeB . x = current } 'x'
 protected class TrickyA_0_1_0_Group extends GroupToken {
 	
 	public TrickyA_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -833,7 +833,7 @@ protected class TrickyA_0_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = TypeB . x = current }
+// { current = complexrewritetest :: TypeB . x = current }
 protected class TrickyA_0_1_0_0_Action_TypeB_x extends ActionToken  {
 
 	public TrickyA_0_1_0_0_Action_TypeB_x(IInstanceDescription curr, AbstractToken pred) {
@@ -866,7 +866,7 @@ protected class TrickyA_0_1_0_1_Keyword_x extends KeywordToken  {
 }
 
 
-// { current = TypeC . x = current } 'y'
+// { current = complexrewritetest :: TypeC . x = current } 'y'
 protected class TrickyA_0_1_1_Group extends GroupToken {
 	
 	public TrickyA_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -894,7 +894,7 @@ protected class TrickyA_0_1_1_Group extends GroupToken {
 	}
 }
 
-// { current = TypeC . x = current }
+// { current = complexrewritetest :: TypeC . x = current }
 protected class TrickyA_0_1_1_0_Action_TypeC_x extends ActionToken  {
 
 	public TrickyA_0_1_1_0_Action_TypeC_x(IInstanceDescription curr, AbstractToken pred) {
@@ -957,7 +957,7 @@ protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule TrickyA1 ****************
  *
- * TrickyA1 returns TypeD : name += ID ;
+ * TrickyA1 returns complexrewritetest :: TypeD : name += ID ;
  *
  **/
 
@@ -1166,12 +1166,12 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 
 /************ begin Rule TrickyC ****************
  *
- * TrickyC : 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ? ( { current = C3 . z = current } 'z' ) ? ;
+ * TrickyC : 'TC' name = ID ( { current = complexrewritetest :: C1 . x = current } 'x' ) ? ( { current = complexrewritetest :: C2 . y = current } 'y' ) ? ( { current = complexrewritetest :: C3 . z = current } 'z' ) ? ;
  *
  **/
 
 
-// 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ? ( { current = C3 . z = current } 'z' ) ?
+// 'TC' name = ID ( { current = complexrewritetest :: C1 . x = current } 'x' ) ? ( { current = complexrewritetest :: C2 . y = current } 'y' ) ? ( { current = complexrewritetest :: C3 . z = current } 'z' ) ?
 protected class TrickyC_Group extends GroupToken {
 	
 	public TrickyC_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1199,7 +1199,7 @@ protected class TrickyC_Group extends GroupToken {
 	}
 }
 
-// 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ?
+// 'TC' name = ID ( { current = complexrewritetest :: C1 . x = current } 'x' ) ? ( { current = complexrewritetest :: C2 . y = current } 'y' ) ?
 protected class TrickyC_0_Group extends GroupToken {
 	
 	public TrickyC_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1227,7 +1227,7 @@ protected class TrickyC_0_Group extends GroupToken {
 	}
 }
 
-// 'TC' name = ID ( { current = C1 . x = current } 'x' ) ?
+// 'TC' name = ID ( { current = complexrewritetest :: C1 . x = current } 'x' ) ?
 protected class TrickyC_0_0_Group extends GroupToken {
 	
 	public TrickyC_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1319,7 +1319,7 @@ protected class TrickyC_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( { current = C1 . x = current } 'x' ) ?
+// ( { current = complexrewritetest :: C1 . x = current } 'x' ) ?
 protected class TrickyC_0_0_1_Group extends GroupToken {
 	
 	public TrickyC_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1347,7 +1347,7 @@ protected class TrickyC_0_0_1_Group extends GroupToken {
 	}
 }
 
-// { current = C1 . x = current }
+// { current = complexrewritetest :: C1 . x = current }
 protected class TrickyC_0_0_1_0_Action_C1_x extends ActionToken  {
 
 	public TrickyC_0_0_1_0_Action_C1_x(IInstanceDescription curr, AbstractToken pred) {
@@ -1381,7 +1381,7 @@ protected class TrickyC_0_0_1_1_Keyword_x extends KeywordToken  {
 
 
 
-// ( { current = C2 . y = current } 'y' ) ?
+// ( { current = complexrewritetest :: C2 . y = current } 'y' ) ?
 protected class TrickyC_0_1_Group extends GroupToken {
 	
 	public TrickyC_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1409,7 +1409,7 @@ protected class TrickyC_0_1_Group extends GroupToken {
 	}
 }
 
-// { current = C2 . y = current }
+// { current = complexrewritetest :: C2 . y = current }
 protected class TrickyC_0_1_0_Action_C2_y extends ActionToken  {
 
 	public TrickyC_0_1_0_Action_C2_y(IInstanceDescription curr, AbstractToken pred) {
@@ -1443,7 +1443,7 @@ protected class TrickyC_0_1_1_Keyword_y extends KeywordToken  {
 
 
 
-// ( { current = C3 . z = current } 'z' ) ?
+// ( { current = complexrewritetest :: C3 . z = current } 'z' ) ?
 protected class TrickyC_1_Group extends GroupToken {
 	
 	public TrickyC_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1471,7 +1471,7 @@ protected class TrickyC_1_Group extends GroupToken {
 	}
 }
 
-// { current = C3 . z = current }
+// { current = complexrewritetest :: C3 . z = current }
 protected class TrickyC_1_0_Action_C3_z extends ActionToken  {
 
 	public TrickyC_1_0_Action_C3_z(IInstanceDescription curr, AbstractToken pred) {

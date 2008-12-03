@@ -8,14 +8,14 @@
   <idElements>ComplexReconstrTest</idElements>
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="complexrewritetest" nsURI="http://complex/rewrite/test"/>
   <rules xsi:type="xtext:ParserRule" name="Op">
-    <type name="Expression"/>
+    <type metamodel="//@metamodelDeclarations.0" name="Expression"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.1"/>
       <abstractTokens xsi:type="xtext:Alternatives" cardinality="*">
         <groups xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Group">
             <abstractTokens xsi:type="xtext:Action" feature="addOperands" operator="+=">
-              <typeName name="Add"/>
+              <typeName metamodel="//@metamodelDeclarations.0" name="Add"/>
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Keyword" value="+"/>
           </abstractTokens>
@@ -26,7 +26,7 @@
         <groups xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Group">
             <abstractTokens xsi:type="xtext:Action" feature="minusOperands" operator="+=">
-              <typeName name="Minus"/>
+              <typeName metamodel="//@metamodelDeclarations.0" name="Minus"/>
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Keyword" value="-"/>
           </abstractTokens>
@@ -38,7 +38,7 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Term">
-    <type name="Expression"/>
+    <type metamodel="//@metamodelDeclarations.0" name="Expression"/>
     <alternatives xsi:type="xtext:Alternatives">
       <groups xsi:type="xtext:RuleCall" rule="//@rules.2"/>
       <groups xsi:type="xtext:RuleCall" rule="//@rules.3"/>
@@ -52,7 +52,7 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Parens">
-    <type name="Expression"/>
+    <type metamodel="//@metamodelDeclarations.0" name="Expression"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
@@ -67,7 +67,7 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="TrickyA">
-    <type name="TypeA1"/>
+    <type metamodel="//@metamodelDeclarations.0" name="TypeA1"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
@@ -84,13 +84,13 @@
         <abstractTokens xsi:type="xtext:Alternatives" cardinality="?">
           <groups xsi:type="xtext:Group">
             <abstractTokens xsi:type="xtext:Action" feature="x" operator="=">
-              <typeName name="TypeB"/>
+              <typeName metamodel="//@metamodelDeclarations.0" name="TypeB"/>
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Keyword" value="x"/>
           </groups>
           <groups xsi:type="xtext:Group">
             <abstractTokens xsi:type="xtext:Action" feature="x" operator="=">
-              <typeName name="TypeC"/>
+              <typeName metamodel="//@metamodelDeclarations.0" name="TypeC"/>
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Keyword" value="y"/>
           </groups>
@@ -104,7 +104,7 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="TrickyA1">
-    <type name="TypeD"/>
+    <type metamodel="//@metamodelDeclarations.0" name="TypeD"/>
     <alternatives xsi:type="xtext:Assignment" feature="name" operator="+=">
       <terminal xsi:type="xtext:RuleCall">
         <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
@@ -149,21 +149,21 @@
           </abstractTokens>
           <abstractTokens xsi:type="xtext:Group" cardinality="?">
             <abstractTokens xsi:type="xtext:Action" feature="x" operator="=">
-              <typeName name="C1"/>
+              <typeName metamodel="//@metamodelDeclarations.0" name="C1"/>
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Keyword" value="x"/>
           </abstractTokens>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Group" cardinality="?">
           <abstractTokens xsi:type="xtext:Action" feature="y" operator="=">
-            <typeName name="C2"/>
+            <typeName metamodel="//@metamodelDeclarations.0" name="C2"/>
           </abstractTokens>
           <abstractTokens xsi:type="xtext:Keyword" value="y"/>
         </abstractTokens>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Group" cardinality="?">
         <abstractTokens xsi:type="xtext:Action" feature="z" operator="=">
-          <typeName name="C3"/>
+          <typeName metamodel="//@metamodelDeclarations.0" name="C3"/>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value="z"/>
       </abstractTokens>

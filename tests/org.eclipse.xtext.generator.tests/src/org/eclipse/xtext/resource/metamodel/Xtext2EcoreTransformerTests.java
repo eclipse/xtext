@@ -502,17 +502,18 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 
 		errorAcceptorMock.acceptError(same(ErrorCode.AliasForMetamodelAlreadyExists), (String) anyObject(),
 				(EObject) anyObject());
-		errorAcceptorMock.acceptError(same(ErrorCode.CannotCreateTypeInSealedMetamodel), (String) anyObject(),
+		errorAcceptorMock.acceptError(same(ErrorCode.UnknownMetaModelAlias), (String) anyObject(),
 				(EObject) anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.UnknownMetaModelAlias), (String) anyObject(),
+				(EObject) anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.NoSuchTypeAvailable), (String) anyObject(), (EObject) anyObject());
 		errorAcceptorMock.acceptError(same(ErrorCode.NoSuchTypeAvailable), (String) anyObject(), (EObject) anyObject());
 
 		List<EPackage> ePackages = getEPackagesFromGrammar(grammar);
 		assertEquals(1, ePackages.size());
 		EPackage t1 = ePackages.get(0);
 		assertEquals("t1", t1.getName());
-		assertEquals(1, t1.getEClassifiers().size());
-		EClassifier ruleA = t1.getEClassifier("TypeB");
-		assertNotNull(ruleA);
+		assertTrue(t1.getEClassifiers().isEmpty());
 	}
 
 	public void testModifyingSealedModel() throws Exception {
