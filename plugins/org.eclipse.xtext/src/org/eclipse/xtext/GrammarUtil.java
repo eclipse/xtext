@@ -262,22 +262,22 @@ public class GrammarUtil {
 		return getQualifiedName(rule.getType());
 	}
 
-	public static String getQualifiedName(String alias, String name) {
-		return (alias != null ? alias + "::" : "") + name;
+	public static String getQualifiedName(AbstractMetamodelDeclaration metaModel, String name) {
+		return (metaModel != null && !Strings.isEmpty(metaModel.getAlias()) ? metaModel.getAlias() + "::" : "") + name;
 	}
 
 	public static String getQualifiedName(TypeRef type) {
-		return getQualifiedName(type.getAlias(), type.getName());
+		return getQualifiedName(type.getMetamodel(), type.getName());
 	}
 
-	public static TypeRef getTypeRef(String qualifiedName) {
+	public static TypeRef getTypeRef(Grammar grammar, String qualifiedName) {
 		TypeRef result = XtextFactory.eINSTANCE.createTypeRef();
 		String[] split = qualifiedName.split("::");
 		if (split.length > 1) {
-			result.setAlias(split[0]);
+			result.setMetamodel(findMetaModel(grammar, split[0], true));
 			result.setName(split[1]);
-		}
-		else {
+		} else {
+			result.setMetamodel(findDefaultMetaModel(grammar, true));
 			result.setName(qualifiedName);
 		}
 		return result;
@@ -342,31 +342,70 @@ public class GrammarUtil {
 	}
 
 	private static boolean isSameAlias(String alias, String alias2) {
-		return alias == null ? alias2 == null : alias.equals(alias2);
+		return Strings.isEmpty(alias) ? Strings.isEmpty(alias2) : alias.equals(alias2);
 	}
 
 	public static EPackage getEPackage(ResourceSet resourceSet, Grammar grammar, String alias) {
 		EList<AbstractMetamodelDeclaration> metamodelDeclarations = grammar.getMetamodelDeclarations();
 		for (AbstractMetamodelDeclaration metamodelDeclaration : metamodelDeclarations) {
 			if (isSameAlias(alias, metamodelDeclaration.getAlias())) {
-				if (metamodelDeclaration instanceof ReferencedMetamodel) {
-					ReferencedMetamodel ref = (ReferencedMetamodel) metamodelDeclaration;
-					return GrammarUtil.loadEPackage(ref.getUri(), resourceSet);
-				}
-				else if (metamodelDeclaration instanceof GeneratedMetamodel) {
-					GeneratedMetamodel gen = (GeneratedMetamodel) metamodelDeclaration;
-					return GrammarUtil.loadEPackage(gen.getNsURI(), resourceSet);
-				}
+				return getEPackage(resourceSet, metamodelDeclaration);
 			}
 		}
 		return null;
 	}
 
+	/**
+	 * @param resourceSet
+	 * @param grammar
+	 * @param metamodelDeclaration
+	 * @return
+	 */
+	private static EPackage getEPackage(ResourceSet resourceSet, AbstractMetamodelDeclaration metamodelDeclaration) {
+		if (metamodelDeclaration instanceof ReferencedMetamodel) {
+			ReferencedMetamodel ref = (ReferencedMetamodel) metamodelDeclaration;
+			return GrammarUtil.loadEPackage(ref.getUri(), resourceSet);
+		} else if (metamodelDeclaration instanceof GeneratedMetamodel) {
+			GeneratedMetamodel gen = (GeneratedMetamodel) metamodelDeclaration;
+			return GrammarUtil.loadEPackage(gen.getNsURI(), resourceSet);
+		} else
+			return null;
+	}
+	
+	public static AbstractMetamodelDeclaration findDefaultMetaModel(Grammar grammar) {
+		return findMetaModel(grammar, "", true);
+	}
+	
+	public static AbstractMetamodelDeclaration findDefaultMetaModel(Grammar grammar, boolean useInherited) {
+		return findMetaModel(grammar, "", useInherited);
+	}
+	
+	public static AbstractMetamodelDeclaration findMetaModel(Grammar grammar, String alias) {
+		return findMetaModel(grammar, alias, true);
+	}
+	
+	public static AbstractMetamodelDeclaration findMetaModel(Grammar grammar, String alias, boolean useInherited) {
+		final List<AbstractMetamodelDeclaration> declarations = 
+			useInherited ? allMetamodelDeclarations(grammar) : grammar.getMetamodelDeclarations();
+		if (declarations.size() == 1 && Strings.isEmpty(alias))
+			return declarations.get(0);
+		AbstractMetamodelDeclaration result = null;
+		for (AbstractMetamodelDeclaration decl : declarations) {
+			if (isSameAlias(decl.getAlias(), alias)) {
+				if (result != null)
+					return decl;
+				result = decl;
+			}
+		}
+		return result;
+	}
+
 	public static EClass getReferencedEClass(Resource resource, CrossReference ref) {
-		Grammar grammar = GrammarUtil.getGrammar(ref);
-		EPackage ePackage = getEPackage(resource.getResourceSet(), grammar, ref.getType().getAlias());
+		final AbstractMetamodelDeclaration decl = ref.getType().getMetamodel() == null ?
+				findDefaultMetaModel(GrammarUtil.getGrammar(ref)) : ref.getType().getMetamodel();
+		final EPackage ePackage = getEPackage(resource.getResourceSet(), decl);
 		if (ePackage != null) {
-			EClassifier classifier = ePackage.getEClassifier(ref.getType().getName());
+			final EClassifier classifier = ePackage.getEClassifier(ref.getType().getName());
 			if (classifier instanceof EClass)
 				return (EClass) classifier;
 		}

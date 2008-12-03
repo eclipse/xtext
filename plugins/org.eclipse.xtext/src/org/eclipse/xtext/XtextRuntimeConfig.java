@@ -2,7 +2,9 @@ package org.eclipse.xtext;
 
 import java.util.Set;
 
+import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.crossref.IScopeProvider;
+import org.eclipse.xtext.xtext.XtextLinker;
 import org.eclipse.xtext.xtext.XtextScopeProvider;
 
 /**
@@ -12,7 +14,11 @@ public class XtextRuntimeConfig extends AbstractXtextRuntimeConfig {
 
 	public Set<IServiceRegistration> registrations() {
 		Set<IServiceRegistration> inherited = super.registrations();
-		inherited.addAll(scope(IXtext.SCOPE).with(IScopeProvider.class, XtextScopeProvider.class).registrations());
+		inherited.addAll(
+				scope(IXtext.SCOPE)
+					.with(IScopeProvider.class, XtextScopeProvider.class)
+					.with(ILinker.class, XtextLinker.class)
+					.registrations());
 		return inherited;
 	}
 

@@ -64,7 +64,6 @@ public class GrammarUtilTests extends AbstractGeneratorTest {
 		Assignment asExtends = (Assignment)((Group)prType.getAlternatives()).getAbstractTokens().get(1);
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
 		
-		
 		EClass referencedEClass = GrammarUtil.getReferencedEClass(resource, xref);
 		assertNotNull(referencedEClass);
 		

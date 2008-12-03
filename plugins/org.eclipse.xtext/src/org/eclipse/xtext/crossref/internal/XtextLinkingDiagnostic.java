@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.internal;
 
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.resource.XtextResource;
 
@@ -15,14 +16,14 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public class XtextLinkingDiagnostic implements XtextResource.Diagnostic{
 
-	private final LeafNode node;
+	private final AbstractNode node;
 	private final String message;
 
 	public XtextLinkingDiagnostic(LeafNode linkInformation) {
 		this(linkInformation, "Cannot resolve reference " + linkInformation.getText());
 	}
 	
-	public XtextLinkingDiagnostic(LeafNode linkInformation, String message) {
+	public XtextLinkingDiagnostic(AbstractNode linkInformation, String message) {
 		this.node = linkInformation;
 		this.message = message;
 	}

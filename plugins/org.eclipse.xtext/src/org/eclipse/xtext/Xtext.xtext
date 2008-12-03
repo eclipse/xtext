@@ -38,7 +38,7 @@ ParserRule :
 ;
 
 TypeRef :
-	(alias=ID '::')? name=ID
+	(metamodel=[AbstractMetamodelDeclaration] '::')? name=ID
 ;
 
 Alternatives returns AbstractElement:
@@ -78,4 +78,3 @@ Keyword :
 
 RuleCall :
    rule=[AbstractRule];
-

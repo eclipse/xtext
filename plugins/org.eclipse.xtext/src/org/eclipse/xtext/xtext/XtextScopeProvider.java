@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.crossref.IScope;
@@ -23,6 +24,9 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 
 	@Override
 	protected IScope createScope(Resource resource, EClass type) {
+		if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass()))
+			return new XtextMetaModelReferenceScope(resource, type);
+		
 		if (resource.getContents().size() != 1)
 			throw new IllegalArgumentException("resource is not as expected: contents.size == "
 					+ resource.getContents().size() + " but expected: 1");

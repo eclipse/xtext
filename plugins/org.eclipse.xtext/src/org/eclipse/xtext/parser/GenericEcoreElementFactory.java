@@ -10,7 +10,6 @@
 package org.eclipse.xtext.parser;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
@@ -100,30 +99,28 @@ public class GenericEcoreElementFactory implements IAstFactory {
 		}
 	}
 
-	protected EPackage getEPackage(String alias) {
-		List<AbstractMetamodelDeclaration> declarations = GrammarUtil.allMetamodelDeclarations(grammarAccess
-				.getGrammar());
-		for (AbstractMetamodelDeclaration decl : declarations) {
-			if (decl.getAlias() == null && alias == null || decl.getAlias() != null && decl.getAlias().equals(alias)) {
-				if (decl instanceof GeneratedMetamodel) {
-					GeneratedMetamodel mm = (GeneratedMetamodel) decl;
-					return EcoreUtil2.loadEPackage(mm.getNsURI(), grammarAccess.getClass().getClassLoader());
-				} else {
-					ReferencedMetamodel mm = (ReferencedMetamodel) decl;
-					return EcoreUtil2.loadEPackage(mm.getUri(), grammarAccess.getClass().getClassLoader());
-				}
+	protected EPackage getEPackage(AbstractMetamodelDeclaration metaModelDecl) {
+		AbstractMetamodelDeclaration decl = metaModelDecl == null ? 
+				GrammarUtil.findDefaultMetaModel(grammarAccess.getGrammar()) : metaModelDecl;
+		if (decl != null) {
+			if (decl instanceof GeneratedMetamodel) {
+				GeneratedMetamodel mm = (GeneratedMetamodel) decl;
+				return EcoreUtil2.loadEPackage(mm.getNsURI(), grammarAccess.getClass().getClassLoader());
+			} else {
+				ReferencedMetamodel mm = (ReferencedMetamodel) decl;
+				return EcoreUtil2.loadEPackage(mm.getUri(), grammarAccess.getClass().getClassLoader());
 			}
 		}
 		String languageId = GrammarUtil.getLanguageId(grammarAccess.getGrammar());
-		throw new IllegalArgumentException("No EPackage with alias '" + alias + "' could be found for language "
+		throw new IllegalArgumentException("No EPackage without alias could be found for language "
 				+ languageId);
 	}
 
 	public EClass getEClass(String fullTypeName) {
-		TypeRef typeRef = GrammarUtil.getTypeRef(fullTypeName);
-		EPackage pack = getEPackage(typeRef.getAlias());
+		TypeRef typeRef = GrammarUtil.getTypeRef(grammarAccess.getGrammar(), fullTypeName);
+		EPackage pack = getEPackage(typeRef.getMetamodel());
 		if (pack == null) {
-			throw new IllegalStateException("Couldn't find any epackages for alias '" + typeRef.getAlias() + "'");
+			throw new IllegalStateException("Couldn't find any epackages for typeref '" + fullTypeName + "'");
 		}
 		EClassifier classifier = pack.getEClassifier(typeRef.getName());
 		if (classifier instanceof EClass) {

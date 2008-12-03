@@ -9,6 +9,7 @@
 package org.eclipse.xtext.crossref.internal;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,7 +31,7 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.Inject;
 
-public final class Linker implements ILinker {
+public class Linker implements ILinker {
 
 	private static Logger log = Logger.getLogger(Linker.class);
 	
@@ -38,26 +39,42 @@ public final class Linker implements ILinker {
 	private ILinkingService linkingService;
 
 	public List<XtextResource.Diagnostic> ensureLinked(EObject obj) {
-		List<XtextResource.Diagnostic> brokenLinks = new ArrayList<XtextResource.Diagnostic>();
+		final List<XtextResource.Diagnostic> brokenLinks = new ArrayList<XtextResource.Diagnostic>();
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
 		if (nodeAdapter == null)
 			return brokenLinks;
 		clearReferences(obj);
-		CompositeNode node = nodeAdapter.getParserNode();
+		final CompositeNode node = nodeAdapter.getParserNode();
 		EList<AbstractNode> children = node.getChildren();
+		Set<EReference> handledReferences = new HashSet<EReference>();
 		for (AbstractNode abstractNode : children) {
 			if (abstractNode instanceof LeafNode && abstractNode.getGrammarElement() instanceof CrossReference) {
 				CrossReference ref = (CrossReference) abstractNode.getGrammarElement();
-				brokenLinks.addAll(ensureIsLinked(obj, (LeafNode) abstractNode, ref));
+				brokenLinks.addAll(ensureIsLinked(obj, (LeafNode) abstractNode, ref, handledReferences));
 			}
 		}
+		setDefaultValues(obj, handledReferences, new DiagnosticProducer() {
+			public void addDiagnostic(String message) {
+				brokenLinks.add(new XtextLinkingDiagnostic(node, message));
+			}
+		});
 		return brokenLinks;
 	}
 	
 	private void clearReferences(EObject obj) {
-		for(EReference ref: obj.eClass().getEReferences())
+		for(EReference ref: obj.eClass().getEAllReferences())
 			if (!ref.isContainment() && !ref.isContainer())
 				obj.eUnset(ref);
+	}
+	
+	private void setDefaultValues(EObject obj, Set<EReference> references, DiagnosticProducer producer) {
+		for(EReference ref: obj.eClass().getEAllReferences())
+			if (!ref.isContainment() && !ref.isContainer() && !references.contains(ref))
+				setDefaultValue(obj, ref, producer);
+	}
+	
+	protected void setDefaultValue(EObject obj, EReference ref, DiagnosticProducer producer) {
+		// may be overridden by clients
 	}
 
 	private XtextResource.Diagnostic createError(LeafNode linkInformation) {
@@ -65,9 +82,11 @@ public final class Linker implements ILinker {
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<XtextResource.Diagnostic> ensureIsLinked(EObject obj, LeafNode node, CrossReference ref) {
+	private List<XtextResource.Diagnostic> ensureIsLinked(EObject obj, LeafNode node, CrossReference ref, 
+			Set<EReference> handledReferences) {
 		final List<XtextResource.Diagnostic> brokenLinks = new ArrayList<XtextResource.Diagnostic>();
 		final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());
+		handledReferences.add(eRef);
 		final List<EObject> links = linkingService.getLinkedObjects(obj, eRef, (LeafNode) node);
 
 		if (links == null || links.isEmpty()) {

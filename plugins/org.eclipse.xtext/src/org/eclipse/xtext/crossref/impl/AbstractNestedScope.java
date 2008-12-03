@@ -8,14 +8,8 @@
 package org.eclipse.xtext.crossref.impl;
 
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
-import java.util.Map.Entry;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.util.ChainedIterator;
@@ -51,6 +45,10 @@ public abstract class AbstractNestedScope implements IScope {
 
 	public IScope getParent() {
 		return parent;
+	}
+	
+	protected void setParent(IScope parent) {
+		this.parent = parent;
 	}
 
 	private Iterable<IScopedElement> elements;
