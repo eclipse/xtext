@@ -93,7 +93,7 @@ public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProp
     «ENDFOREACH-»
     
     «FOREACH grammar().allParserRules().select(parserRule|parserRule.type!=null) AS parserRule-»
-    «LET parserRule.type.alias.toFirstUpper()+parserRule.type.name.toFirstUpper() AS fqnFeatureName»
+    «LET parserRule.type.metamodel.alias.toFirstUpper()+parserRule.type.name.toFirstUpper() AS fqnFeatureName»
 	«IF null==getGlobalVar(fqnFeatureName)-»
 	«storeGlobalVar(fqnFeatureName,"")-»	 
 	public List<? extends ICompletionProposal> complete«fqnFeatureName»(RuleCall ruleCall, EObject model, String prefix,
