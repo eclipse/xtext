@@ -13,6 +13,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.codecompletion;
 
+import org.eclipse.xtext.XtextGrammarTestStandaloneSetup;
+import org.eclipse.xtext.XtextGrammarTestUiConfig;
+import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiConfig;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarUiConfig;
 import org.eclipse.xtext.ui.common.AbstractUiTest;
@@ -32,6 +36,8 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		withUi(XtextGrammarTestStandaloneSetup.class, XtextGrammarTestUiConfig.class);
+		withUi(ContentAssistTestLanguageStandaloneSetup.class, ContentAssistTestLanguageUiConfig.class);
 		withUi(ReferenceGrammarStandaloneSetup.class,ReferenceGrammarUiConfig.class);
 		contentAssistProcessorTestBuilder = new ContentAssistProcessorTestBuilder(getCurrentServiceScope(),new DefaultContentAssistProcessor());
 	}
@@ -90,6 +96,40 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 			.append(" familie ( keyword e1 e2 k1,K").assertText("k1","k2",",",")").delete(28)
 			.append(" familie ( keyword e1 e2 k1,k2").assertText("k2",",",")")
 		;
+	}
+	
+	private ContentAssistProcessorTestBuilder newBuilder(Class<?> standAloneSetup, Class<?> uiConfig) throws Exception {
+		withUi(standAloneSetup, uiConfig);
+		return new ContentAssistProcessorTestBuilder(getCurrentServiceScope(), new DefaultContentAssistProcessor());
+	}
+	
+	public void testCompleteRuleCall() throws Exception {
+		newBuilder(XtextGrammarTestStandaloneSetup.class, XtextGrammarTestUiConfig.class)
+			.appendNl("language foo")
+			.appendNl("generate foo \"foo\"")
+			.appendNl("R1 : (attr+=R2)*;")
+			.appendNl("R2 : (attr=INT)? prop=R3;")
+			.append("R3: attr+=").assertText(
+//					"R1", 
+//					"R2",
+//					"R3",
+					"\"KeywordValueSTRING\"", 
+					"\"KeywordValue\"", 
+					"(", 
+					"[", 
+					"+= " // TODO: Why does this proposal come up?
+			);
+	}
+	
+	public void testCompleteAbstractRuleCall() throws Exception {
+		newBuilder(ContentAssistTestLanguageStandaloneSetup.class, ContentAssistTestLanguageUiConfig.class)
+			.appendNl("abstract rules")
+			.appendNl("R1 ();")
+			.append("R2 rule :").assertText(
+//					"R1", 
+//					"R2",
+					":" // TODO: Why does this proposal come up?
+			);
 	}
 	
 }

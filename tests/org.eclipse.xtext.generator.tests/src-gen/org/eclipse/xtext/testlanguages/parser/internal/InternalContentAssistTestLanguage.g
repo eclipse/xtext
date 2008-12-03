@@ -183,7 +183,7 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	        factory.add($current, "elements", lv_elements,null);
 	         }
 	
-))')' 
+)+)')' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }

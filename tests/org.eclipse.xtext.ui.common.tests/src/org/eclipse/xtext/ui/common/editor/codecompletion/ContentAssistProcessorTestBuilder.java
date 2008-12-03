@@ -21,7 +21,9 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -40,6 +42,7 @@ import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * Represents a builder for <code>IContentAssistProcessor</code> tests.
@@ -79,6 +82,10 @@ public class ContentAssistProcessorTestBuilder {
 		this.modelBuilder.append(model);
 		this.cursorPosition += model.length();
 		return this;
+	}
+	
+	public ContentAssistProcessorTestBuilder appendNl(String model) {
+		return append(model).append(Strings.newLine());
 	}
 
 	public ContentAssistProcessorTestBuilder insert(String model, int cursorPosition) {
@@ -135,7 +142,10 @@ public class ContentAssistProcessorTestBuilder {
 				cursorPosition);
 
 		assertEquals("expect only " + expectedText.length + " CompletionProposal item for model '"
-				+ currentModelToParse + "'", expectedText.length, computeCompletionProposals.length);
+				+ currentModelToParse + "': expectation was:\n" + 
+				Strings.concat(", ", Arrays.asList(expectedText)) + 
+				"\nbut actual was:\n" + Strings.concat(", ", toString(computeCompletionProposals)),
+				expectedText.length, computeCompletionProposals.length);
 
 		for (int i = 0; i < computeCompletionProposals.length; i++) {
 			ICompletionProposal completionProposal = computeCompletionProposals[i];
@@ -144,6 +154,14 @@ public class ContentAssistProcessorTestBuilder {
 		}
 
 		return this;
+	}
+	
+	private List<String> toString(ICompletionProposal[] proposals) {
+		List<String> res = new ArrayList<String>(proposals.length);
+		for(ICompletionProposal proposal: proposals) {
+			res.add(proposal.getDisplayString());
+		}
+		return res;
 	}
 
 	public ContentAssistProcessorTestBuilder assertCountAtCursorPosition(int completionProposalCount, int cursorPosition)

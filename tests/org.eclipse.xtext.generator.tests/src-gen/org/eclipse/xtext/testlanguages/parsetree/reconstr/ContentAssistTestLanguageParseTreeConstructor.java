@@ -218,12 +218,12 @@ protected class AbstractRule_1_RuleCall_SecondAbstractRuleChild extends RuleCall
 
 /************ begin Rule FirstAbstractRuleChild ****************
  *
- * FirstAbstractRuleChild : name = ID '(' elements += AbstractRule ')' ';' ;
+ * FirstAbstractRuleChild : name = ID '(' ( elements += AbstractRule ) + ')' ';' ;
  *
  **/
 
 
-// name = ID '(' elements += AbstractRule ')' ';'
+// name = ID '(' ( elements += AbstractRule ) + ')' ';'
 protected class FirstAbstractRuleChild_Group extends GroupToken {
 	
 	public FirstAbstractRuleChild_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -251,7 +251,7 @@ protected class FirstAbstractRuleChild_Group extends GroupToken {
 	}
 }
 
-// name = ID '(' elements += AbstractRule ')'
+// name = ID '(' ( elements += AbstractRule ) + ')'
 protected class FirstAbstractRuleChild_0_Group extends GroupToken {
 	
 	public FirstAbstractRuleChild_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -279,7 +279,7 @@ protected class FirstAbstractRuleChild_0_Group extends GroupToken {
 	}
 }
 
-// name = ID '(' elements += AbstractRule
+// name = ID '(' ( elements += AbstractRule ) +
 protected class FirstAbstractRuleChild_0_0_Group extends GroupToken {
 	
 	public FirstAbstractRuleChild_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -371,11 +371,11 @@ protected class FirstAbstractRuleChild_0_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// elements += AbstractRule
+// ( elements += AbstractRule ) +
 protected class FirstAbstractRuleChild_0_0_1_Assignment_elements extends AssignmentToken  {
 	
 	public FirstAbstractRuleChild_0_0_1_Assignment_elements(IInstanceDescription curr, AbstractToken pred) {
-		super(curr, pred, !IS_MANY, IS_REQUIRED);
+		super(curr, pred, IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
