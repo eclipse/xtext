@@ -56,7 +56,7 @@ public class TypeHierarchyHelperTests extends TestCase {
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 		eClass.setName(name);
 		EClassInfo info = (EClassInfo) EClassifierInfo.createEClassInfo(eClass, isGenerated);
-		infos.addInfo("", name, info);
+		infos.addInfo(null, name, info);
 		return info;
 	}
 
