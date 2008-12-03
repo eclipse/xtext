@@ -10,7 +10,7 @@ language org.eclipse.xtext.XtextGrammarTest
 
 generate XtextTest "http://www.eclipse.org/2008/Test/XtextTest"
 
-Grammar  :
+Grammar :
     (abstract?='abstract language' | 'language') idElements+=ID ('.' idElements+=ID)* ('extends' superGrammarIdElements+=ID ('.' superGrammarIdElements+=ID)*)?
 	metamodelDeclarations+=AbstractMetamodelDeclaration* 
     (rules+=AbstractRule)+
@@ -66,7 +66,7 @@ AbstractTerminal returns AbstractElement:
 ;
 
 CrossReference :
-	'[' type=TypeRef ('|' rule=RuleCall)? ']'
+	'[' type=TypeRef ('|' rule=[LexerRule])? ']'
 ;
 
 ParenthesizedElement returns AbstractElement:
@@ -78,5 +78,5 @@ Keyword :
 ;
 
 RuleCall :
-   name=ID ;
+   rule=[AbstractRule];
 
