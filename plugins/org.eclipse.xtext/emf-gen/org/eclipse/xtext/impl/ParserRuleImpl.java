@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParserRuleImpl.java,v 1.11 2008/06/05 15:03:51 sefftinge Exp $
+ * $Id: ParserRuleImpl.java,v 1.12 2008/12/03 20:57:10 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -36,14 +36,14 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
   /**
 	 * The cached value of the '{@link #getAlternatives() <em>Alternatives</em>}' containment reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getAlternatives()
 	 * @generated
 	 * @ordered
 	 */
-  protected AbstractElement alternatives;
+	protected AbstractElement alternatives;
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -64,23 +64,21 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 		return XtextPackage.Literals.PARSER_RULE;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public AbstractElement getAlternatives()
-  {
+	public AbstractElement getAlternatives() {
 		return alternatives;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public NotificationChain basicSetAlternatives(AbstractElement newAlternatives, NotificationChain msgs)
-  {
+	public NotificationChain basicSetAlternatives(AbstractElement newAlternatives, NotificationChain msgs) {
 		AbstractElement oldAlternatives = alternatives;
 		alternatives = newAlternatives;
 		if (eNotificationRequired()) {
@@ -90,13 +88,12 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 		return msgs;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setAlternatives(AbstractElement newAlternatives)
-  {
+	public void setAlternatives(AbstractElement newAlternatives) {
 		if (newAlternatives != alternatives) {
 			NotificationChain msgs = null;
 			if (alternatives != null)
@@ -110,14 +107,13 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.PARSER_RULE__ALTERNATIVES, newAlternatives, newAlternatives));
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case XtextPackage.PARSER_RULE__ALTERNATIVES:
 				return basicSetAlternatives(null, msgs);
@@ -125,14 +121,13 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case XtextPackage.PARSER_RULE__ALTERNATIVES:
 				return getAlternatives();
@@ -140,14 +135,13 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case XtextPackage.PARSER_RULE__ALTERNATIVES:
 				setAlternatives((AbstractElement)newValue);
@@ -156,14 +150,13 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 		super.eSet(featureID, newValue);
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eUnset(int featureID)
-  {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case XtextPackage.PARSER_RULE__ALTERNATIVES:
 				setAlternatives((AbstractElement)null);
@@ -172,14 +165,13 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
 		super.eUnset(featureID);
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case XtextPackage.PARSER_RULE__ALTERNATIVES:
 				return alternatives != null;

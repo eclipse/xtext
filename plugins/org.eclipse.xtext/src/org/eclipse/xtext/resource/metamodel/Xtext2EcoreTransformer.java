@@ -86,7 +86,6 @@ public class Xtext2EcoreTransformer {
 	 * pre-conditions - ensure non-duplicate aliases - ensure all aliases have
 	 * matching metamodel declarations
 	 */
-
 	public List<EPackage> transform(Grammar grammar) {
 		this.grammar = grammar;
 		eClassifierInfos = new EClassifierInfos();
@@ -207,12 +206,11 @@ public class Xtext2EcoreTransformer {
 		deriveFeatures(context, rule.getAlternatives());
 	}
 
-	// TODO : Try to get rid of typref and use qualified name (String) instead
 	private TypeRef getOrFakeReturnType(AbstractRule rule) {
 		TypeRef result = rule.getType();
 		if (result == null) {
 			String returnTypeName = GrammarUtil.getReturnTypeName(rule);
-			result = GrammarUtil.getTypeRef(returnTypeName);
+			result = GrammarUtil.getTypeRef(grammar, returnTypeName);
 		}
 		return result;
 	}
@@ -277,7 +275,6 @@ public class Xtext2EcoreTransformer {
 		for (AbstractMetamodelDeclaration metamodelDeclaration : metamodelDeclarations) {
 			try {
 				String alias = Strings.emptyIfNull(metamodelDeclaration.getAlias());
-
 				if (usedAliases.contains(alias))
 					throw new TransformationException(ErrorCode.AliasForMetamodelAlreadyExists, "alias already exists "
 							+ alias, metamodelDeclaration);
@@ -298,7 +295,7 @@ public class Xtext2EcoreTransformer {
 						throw new TransformationException(ErrorCode.CannotLoadMetamodel, "Cannot not load metamodel "
 								+ referencedMetamodel.getUri(), referencedMetamodel);
 
-					collectClassInfosOf(referencedEPackage, alias);
+					collectClassInfosOf(referencedEPackage, referencedMetamodel);
 				}
 				else if (metamodelDeclaration instanceof GeneratedMetamodel) {
 					// instantiate EPackages for generated metamodel
@@ -307,7 +304,7 @@ public class Xtext2EcoreTransformer {
 					generatedEPackage.setName(generatedMetamodel.getName());
 					generatedEPackage.setNsPrefix(generatedMetamodel.getName());
 					generatedEPackage.setNsURI(generatedMetamodel.getNsURI());
-					generatedEPackages.put(alias, generatedEPackage);
+					generatedEPackages.put(generatedMetamodel.getAlias(), generatedEPackage);
 				}
 
 			}
@@ -317,17 +314,17 @@ public class Xtext2EcoreTransformer {
 		}
 	}
 
-	private void collectClassInfosOf(EPackage referencedEPackage, String alias) {
+	private void collectClassInfosOf(EPackage referencedEPackage, AbstractMetamodelDeclaration metaModel) {
 		for (EClassifier eClassifier : referencedEPackage.getEClassifiers()) {
 			if (eClassifier instanceof EClass) {
 				EClass eClass = (EClass) eClassifier;
 				EClassifierInfo info = EClassifierInfo.createEClassInfo(eClass, false);
-				eClassifierInfos.addInfo(alias, eClassifier.getName(), info);
+				eClassifierInfos.addInfo(metaModel, eClassifier.getName(), info);
 			}
 			else if (eClassifier instanceof EDataType) {
 				EDataType eDataType = (EDataType) eClassifier;
 				EClassifierInfo info = EClassifierInfo.createEDataTypeInfo(eDataType, false);
-				eClassifierInfos.addInfo(alias, eClassifier.getName(), info);
+				eClassifierInfos.addInfo(metaModel, eClassifier.getName(), info);
 			}
 		}
 	}
@@ -364,12 +361,15 @@ public class Xtext2EcoreTransformer {
 					+ GrammarUtil.getQualifiedName(typeRef));
 
 		EClassifierInfo info;
-		String typeRefAlias = Strings.emptyIfNull(typeRef.getAlias());
 		String typeRefName = typeRef.getName();
-		EPackage generatedEPackage = generatedEPackages.get(typeRefAlias);
+		AbstractMetamodelDeclaration metaModel = typeRef.getMetamodel();
+		if (metaModel == null)
+			throw new TransformationException(ErrorCode.UnknownMetaModelAlias,
+					"Cannot create type for " + typeRef.getName() + " because its MetaModel is unknown.", typeRef);
+		EPackage generatedEPackage = generatedEPackages.get(metaModel.getAlias());
 		if (generatedEPackage == null) {
 			throw new TransformationException(ErrorCode.CannotCreateTypeInSealedMetamodel,
-					"Cannot create type in alias " + typeRefAlias, typeRef);
+					"Cannot create type in alias " + typeRef.getMetamodel().getAlias(), typeRef);
 		}
 		EClass generatedEClass = EcoreFactory.eINSTANCE.createEClass();
 		generatedEClass.setName(typeRefName);

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractElementImpl.java,v 1.11 2008/08/07 15:05:35 sefftinge Exp $
+ * $Id: AbstractElementImpl.java,v 1.12 2008/12/03 20:57:10 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;

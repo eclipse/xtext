@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextFactoryImpl.java,v 1.14 2008/12/02 20:42:07 szarnekow Exp $
+ * $Id: XtextFactoryImpl.java,v 1.15 2008/12/03 20:57:10 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -101,17 +101,6 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public AbstractElement createAbstractElement()
-  {
-		AbstractElementImpl abstractElement = new AbstractElementImpl();
-		return abstractElement;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
   public Grammar createGrammar()
   {
 		GrammarImpl grammar = new GrammarImpl();
@@ -165,45 +154,52 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CrossReference createCrossReference() {
-		CrossReferenceImpl crossReference = new CrossReferenceImpl();
-		return crossReference;
+	public AbstractElement createAbstractElement() {
+		AbstractElementImpl abstractElement = new AbstractElementImpl();
+		return abstractElement;
 	}
 
 		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public Group createGroup()
-  {
-		GroupImpl group = new GroupImpl();
-		return group;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Action createAction()
-  {
-		ActionImpl action = new ActionImpl();
-		return action;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Alternatives createAlternatives()
-  {
+	public Alternatives createAlternatives() {
 		AlternativesImpl alternatives = new AlternativesImpl();
 		return alternatives;
 	}
 
-  /**
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Group createGroup() {
+		GroupImpl group = new GroupImpl();
+		return group;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Assignment createAssignment() {
+		AssignmentImpl assignment = new AssignmentImpl();
+		return assignment;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Action createAction() {
+		ActionImpl action = new ActionImpl();
+		return action;
+	}
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -215,6 +211,16 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
 	}
 
   /**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CrossReference createCrossReference() {
+		CrossReferenceImpl crossReference = new CrossReferenceImpl();
+		return crossReference;
+	}
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -245,17 +251,6 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
   {
 		KeywordImpl keyword = new KeywordImpl();
 		return keyword;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public Assignment createAssignment()
-  {
-		AssignmentImpl assignment = new AssignmentImpl();
-		return assignment;
 	}
 
   /**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeRefImpl.java,v 1.12 2008/08/15 10:02:43 sefftinge Exp $
+ * $Id: TypeRefImpl.java,v 1.13 2008/12/03 20:57:10 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -10,9 +10,11 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 
@@ -23,7 +25,7 @@ import org.eclipse.xtext.XtextPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.impl.TypeRefImpl#getAlias <em>Alias</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.TypeRefImpl#getMetamodel <em>Metamodel</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.TypeRefImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
@@ -33,24 +35,14 @@ import org.eclipse.xtext.XtextPackage;
 public class TypeRefImpl extends EObjectImpl implements TypeRef
 {
   /**
-	 * The default value of the '{@link #getAlias() <em>Alias</em>}' attribute.
+	 * The cached value of the '{@link #getMetamodel() <em>Metamodel</em>}' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getAlias()
+	 * <!-- end-user-doc -->
+	 * @see #getMetamodel()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final String ALIAS_EDEFAULT = null;
-
-		/**
-	 * The cached value of the '{@link #getAlias() <em>Alias</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getAlias()
-	 * @generated
-	 * @ordered
-	 */
-  protected String alias = ALIAS_EDEFAULT;
+	protected AbstractMetamodelDeclaration metamodel;
 
 		/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -95,6 +87,44 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 
   /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AbstractMetamodelDeclaration getMetamodel() {
+		if (metamodel != null && metamodel.eIsProxy()) {
+			InternalEObject oldMetamodel = (InternalEObject)metamodel;
+			metamodel = (AbstractMetamodelDeclaration)eResolveProxy(oldMetamodel);
+			if (metamodel != oldMetamodel) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XtextPackage.TYPE_REF__METAMODEL, oldMetamodel, metamodel));
+			}
+		}
+		return metamodel;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AbstractMetamodelDeclaration basicGetMetamodel() {
+		return metamodel;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMetamodel(AbstractMetamodelDeclaration newMetamodel) {
+		AbstractMetamodelDeclaration oldMetamodel = metamodel;
+		metamodel = newMetamodel;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.TYPE_REF__METAMODEL, oldMetamodel, metamodel));
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -121,35 +151,13 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getAlias()
-  {
-		return alias;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public void setAlias(String newAlias)
-  {
-		String oldAlias = alias;
-		alias = newAlias;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.TYPE_REF__ALIAS, oldAlias, alias));
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
 		switch (featureID) {
-			case XtextPackage.TYPE_REF__ALIAS:
-				return getAlias();
+			case XtextPackage.TYPE_REF__METAMODEL:
+				if (resolve) return getMetamodel();
+				return basicGetMetamodel();
 			case XtextPackage.TYPE_REF__NAME:
 				return getName();
 		}
@@ -165,8 +173,8 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
-			case XtextPackage.TYPE_REF__ALIAS:
-				setAlias((String)newValue);
+			case XtextPackage.TYPE_REF__METAMODEL:
+				setMetamodel((AbstractMetamodelDeclaration)newValue);
 				return;
 			case XtextPackage.TYPE_REF__NAME:
 				setName((String)newValue);
@@ -184,8 +192,8 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
   public void eUnset(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.TYPE_REF__ALIAS:
-				setAlias(ALIAS_EDEFAULT);
+			case XtextPackage.TYPE_REF__METAMODEL:
+				setMetamodel((AbstractMetamodelDeclaration)null);
 				return;
 			case XtextPackage.TYPE_REF__NAME:
 				setName(NAME_EDEFAULT);
@@ -203,8 +211,8 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
   public boolean eIsSet(int featureID)
   {
 		switch (featureID) {
-			case XtextPackage.TYPE_REF__ALIAS:
-				return ALIAS_EDEFAULT == null ? alias != null : !ALIAS_EDEFAULT.equals(alias);
+			case XtextPackage.TYPE_REF__METAMODEL:
+				return metamodel != null;
 			case XtextPackage.TYPE_REF__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
@@ -222,9 +230,7 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (alias: ");
-		result.append(alias);
-		result.append(", name: ");
+		result.append(" (name: ");
 		result.append(name);
 		result.append(')');
 		return result.toString();

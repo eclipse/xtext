@@ -33,12 +33,12 @@ public class SimpleExpressionsParseTreeConstructor extends AbstractParseTreeCons
 	
 /************ begin Rule Sequence ****************
  *
- * Sequence : Addition ( { current = Sequence . expressions += current } expressions += Addition ) * ;
+ * Sequence : Addition ( { current = simpleExpressions :: Sequence . expressions += current } expressions += Addition ) * ;
  *
  **/
 
 
-// Addition ( { current = Sequence . expressions += current } expressions += Addition ) *
+// Addition ( { current = simpleExpressions :: Sequence . expressions += current } expressions += Addition ) *
 protected class Sequence_Group extends GroupToken {
 	
 	public Sequence_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -84,7 +84,7 @@ protected class Sequence_0_RuleCall_Addition extends RuleCallToken {
 	}
 }
 
-// ( { current = Sequence . expressions += current } expressions += Addition ) *
+// ( { current = simpleExpressions :: Sequence . expressions += current } expressions += Addition ) *
 protected class Sequence_1_Group extends GroupToken {
 	
 	public Sequence_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -112,7 +112,7 @@ protected class Sequence_1_Group extends GroupToken {
 	}
 }
 
-// { current = Sequence . expressions += current }
+// { current = simpleExpressions :: Sequence . expressions += current }
 protected class Sequence_1_0_Action_Sequence_expressions extends ActionToken  {
 
 	public Sequence_1_0_Action_Sequence_expressions(IInstanceDescription curr, AbstractToken pred) {
@@ -166,12 +166,12 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 
 /************ begin Rule Addition ****************
  *
- * Addition returns Expression : Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) * ;
+ * Addition returns simpleExpressions :: Expression : Multiplication ( { current = simpleExpressions :: Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) * ;
  *
  **/
 
 
-// Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
+// Multiplication ( { current = simpleExpressions :: Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
 protected class Addition_Group extends GroupToken {
 	
 	public Addition_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -217,7 +217,7 @@ protected class Addition_0_RuleCall_Multiplication extends RuleCallToken {
 	}
 }
 
-// ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
+// ( { current = simpleExpressions :: Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
 protected class Addition_1_Group extends GroupToken {
 	
 	public Addition_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -245,7 +245,7 @@ protected class Addition_1_Group extends GroupToken {
 	}
 }
 
-// { current = Op . values += current } operator = ( '+' | '-' )
+// { current = simpleExpressions :: Op . values += current } operator = ( '+' | '-' )
 protected class Addition_1_0_Group extends GroupToken {
 	
 	public Addition_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -273,7 +273,7 @@ protected class Addition_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = Op . values += current }
+// { current = simpleExpressions :: Op . values += current }
 protected class Addition_1_0_0_Action_Op_values extends ActionToken  {
 
 	public Addition_1_0_0_Action_Op_values(IInstanceDescription curr, AbstractToken pred) {
@@ -356,12 +356,12 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 
 /************ begin Rule Multiplication ****************
  *
- * Multiplication returns Expression : Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) * ;
+ * Multiplication returns simpleExpressions :: Expression : Term ( { current = simpleExpressions :: Op . values += current } operator = ( '*' | '/' ) values += Term ) * ;
  *
  **/
 
 
-// Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) *
+// Term ( { current = simpleExpressions :: Op . values += current } operator = ( '*' | '/' ) values += Term ) *
 protected class Multiplication_Group extends GroupToken {
 	
 	public Multiplication_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -407,7 +407,7 @@ protected class Multiplication_0_RuleCall_Term extends RuleCallToken {
 	}
 }
 
-// ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) *
+// ( { current = simpleExpressions :: Op . values += current } operator = ( '*' | '/' ) values += Term ) *
 protected class Multiplication_1_Group extends GroupToken {
 	
 	public Multiplication_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -435,7 +435,7 @@ protected class Multiplication_1_Group extends GroupToken {
 	}
 }
 
-// { current = Op . values += current } operator = ( '*' | '/' )
+// { current = simpleExpressions :: Op . values += current } operator = ( '*' | '/' )
 protected class Multiplication_1_0_Group extends GroupToken {
 	
 	public Multiplication_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -463,7 +463,7 @@ protected class Multiplication_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = Op . values += current }
+// { current = simpleExpressions :: Op . values += current }
 protected class Multiplication_1_0_0_Action_Op_values extends ActionToken  {
 
 	public Multiplication_1_0_0_Action_Op_values(IInstanceDescription curr, AbstractToken pred) {
@@ -546,7 +546,7 @@ protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 
 /************ begin Rule Term ****************
  *
- * Term returns Expression : Atom | Parens ;
+ * Term returns simpleExpressions :: Expression : Atom | Parens ;
  *
  **/
 
@@ -645,7 +645,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * Parens returns Expression : '(' Addition ')' ;
+ * Parens returns simpleExpressions :: Expression : '(' Addition ')' ;
  *
  **/
 

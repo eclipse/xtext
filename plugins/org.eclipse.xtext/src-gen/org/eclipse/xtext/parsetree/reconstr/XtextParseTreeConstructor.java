@@ -1682,12 +1682,12 @@ protected class ParserRule_1_Keyword extends KeywordToken  {
 
 /************ begin Rule TypeRef ****************
  *
- * TypeRef : ( alias = ID '::' ) ? name = ID ;
+ * TypeRef : ( metamodel = [ xtext :: AbstractMetamodelDeclaration ] '::' ) ? name = ID ;
  *
  **/
 
 
-// ( alias = ID '::' ) ? name = ID
+// ( metamodel = [ xtext :: AbstractMetamodelDeclaration ] '::' ) ? name = ID
 protected class TypeRef_Group extends GroupToken {
 	
 	public TypeRef_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1715,7 +1715,7 @@ protected class TypeRef_Group extends GroupToken {
 	}
 }
 
-// ( alias = ID '::' ) ?
+// ( metamodel = [ xtext :: AbstractMetamodelDeclaration ] '::' ) ?
 protected class TypeRef_0_Group extends GroupToken {
 	
 	public TypeRef_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1729,7 +1729,7 @@ protected class TypeRef_0_Group extends GroupToken {
 	protected Solution createSolution() {	
 		Solution s1 = new TypeRef_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new TypeRef_0_0_Assignment_alias(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new TypeRef_0_0_Assignment_metamodel(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this);
 				if(s1 == null) return null;
@@ -1743,10 +1743,10 @@ protected class TypeRef_0_Group extends GroupToken {
 	}
 }
 
-// alias = ID
-protected class TypeRef_0_0_Assignment_alias extends AssignmentToken  {
+// metamodel = [ xtext :: AbstractMetamodelDeclaration ]
+protected class TypeRef_0_0_Assignment_metamodel extends AssignmentToken  {
 	
-	public TypeRef_0_0_Assignment_alias(IInstanceDescription curr, AbstractToken pred) {
+	public TypeRef_0_0_Assignment_metamodel(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -1755,12 +1755,15 @@ protected class TypeRef_0_0_Assignment_alias extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("alias",required)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("alias");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal"); 
-			return new Solution(obj);
+		if((value = current.getConsumable("metamodel",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("metamodel");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("AbstractMetamodelDeclaration")) {
+				type = AssignmentType.CR;
+				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal"); 
+				return new Solution(obj);
+			}
 		}
 		return null;
 	}
@@ -1807,12 +1810,12 @@ protected class TypeRef_1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule Alternatives ****************
  *
- * Alternatives returns AbstractElement : Group ( { current = Alternatives . groups += current } '|' groups += Group ) * ;
+ * Alternatives returns xtext :: AbstractElement : Group ( { current = xtext :: Alternatives . groups += current } '|' groups += Group ) * ;
  *
  **/
 
 
-// Group ( { current = Alternatives . groups += current } '|' groups += Group ) *
+// Group ( { current = xtext :: Alternatives . groups += current } '|' groups += Group ) *
 protected class Alternatives_Group extends GroupToken {
 	
 	public Alternatives_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1858,7 +1861,7 @@ protected class Alternatives_0_RuleCall_Group extends RuleCallToken {
 	}
 }
 
-// ( { current = Alternatives . groups += current } '|' groups += Group ) *
+// ( { current = xtext :: Alternatives . groups += current } '|' groups += Group ) *
 protected class Alternatives_1_Group extends GroupToken {
 	
 	public Alternatives_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1886,7 +1889,7 @@ protected class Alternatives_1_Group extends GroupToken {
 	}
 }
 
-// { current = Alternatives . groups += current } '|'
+// { current = xtext :: Alternatives . groups += current } '|'
 protected class Alternatives_1_0_Group extends GroupToken {
 	
 	public Alternatives_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1914,7 +1917,7 @@ protected class Alternatives_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = Alternatives . groups += current }
+// { current = xtext :: Alternatives . groups += current }
 protected class Alternatives_1_0_0_Action_Alternatives_groups extends ActionToken  {
 
 	public Alternatives_1_0_0_Action_Alternatives_groups(IInstanceDescription curr, AbstractToken pred) {
@@ -1981,12 +1984,12 @@ protected class Alternatives_1_1_Assignment_groups extends AssignmentToken  {
 
 /************ begin Rule Group ****************
  *
- * Group returns AbstractElement : AbstractToken ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) * ;
+ * Group returns xtext :: AbstractElement : AbstractToken ( { current = xtext :: Group . abstractTokens += current } abstractTokens += AbstractToken ) * ;
  *
  **/
 
 
-// AbstractToken ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) *
+// AbstractToken ( { current = xtext :: Group . abstractTokens += current } abstractTokens += AbstractToken ) *
 protected class Group_Group extends GroupToken {
 	
 	public Group_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2032,7 +2035,7 @@ protected class Group_0_RuleCall_AbstractToken extends RuleCallToken {
 	}
 }
 
-// ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) *
+// ( { current = xtext :: Group . abstractTokens += current } abstractTokens += AbstractToken ) *
 protected class Group_1_Group extends GroupToken {
 	
 	public Group_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2060,7 +2063,7 @@ protected class Group_1_Group extends GroupToken {
 	}
 }
 
-// { current = Group . abstractTokens += current }
+// { current = xtext :: Group . abstractTokens += current }
 protected class Group_1_0_Action_Group_abstractTokens extends ActionToken  {
 
 	public Group_1_0_Action_Group_abstractTokens(IInstanceDescription curr, AbstractToken pred) {
@@ -2114,7 +2117,7 @@ protected class Group_1_1_Assignment_abstractTokens extends AssignmentToken  {
 
 /************ begin Rule AbstractToken ****************
  *
- * AbstractToken returns AbstractElement : ( Assignment | Action | AbstractTerminal ) ( cardinality = ( '?' | '*' | '+' ) ) ? ;
+ * AbstractToken returns xtext :: AbstractElement : ( Assignment | Action | AbstractTerminal ) ( cardinality = ( '?' | '*' | '+' ) ) ? ;
  *
  **/
 
@@ -2283,7 +2286,7 @@ protected class AbstractToken_1_Assignment_cardinality extends AssignmentToken  
 
 /************ begin Rule Assignment ****************
  *
- * Assignment returns Assignment : feature = ID operator = ( '+=' | '=' | '?=' ) terminal = AbstractTerminal ;
+ * Assignment returns xtext :: Assignment : feature = ID operator = ( '+=' | '=' | '?=' ) terminal = AbstractTerminal ;
  *
  **/
 
@@ -2434,7 +2437,7 @@ protected class Assignment_1_Assignment_terminal extends AssignmentToken  {
 
 /************ begin Rule Action ****************
  *
- * Action returns Action : '{' ( 'current' '=' ) ? typeName = TypeRef '.' feature = ID operator = ( '=' | '+=' ) 'current' '}' ;
+ * Action returns xtext :: Action : '{' ( 'current' '=' ) ? typeName = TypeRef '.' feature = ID operator = ( '=' | '+=' ) 'current' '}' ;
  *
  **/
 
@@ -2826,7 +2829,7 @@ protected class Action_1_Keyword extends KeywordToken  {
 
 /************ begin Rule AbstractTerminal ****************
  *
- * AbstractTerminal returns AbstractElement : Keyword | RuleCall | ParenthesizedElement | CrossReference ;
+ * AbstractTerminal returns xtext :: AbstractElement : Keyword | RuleCall | ParenthesizedElement | CrossReference ;
  *
  **/
 
@@ -2973,12 +2976,12 @@ protected class AbstractTerminal_1_RuleCall_CrossReference extends RuleCallToken
 
 /************ begin Rule CrossReference ****************
  *
- * CrossReference : '[' type = TypeRef ( '|' rule = [ LexerRule ] ) ? ']' ;
+ * CrossReference : '[' type = TypeRef ( '|' rule = [ xtext :: LexerRule ] ) ? ']' ;
  *
  **/
 
 
-// '[' type = TypeRef ( '|' rule = [ LexerRule ] ) ? ']'
+// '[' type = TypeRef ( '|' rule = [ xtext :: LexerRule ] ) ? ']'
 protected class CrossReference_Group extends GroupToken {
 	
 	public CrossReference_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3006,7 +3009,7 @@ protected class CrossReference_Group extends GroupToken {
 	}
 }
 
-// '[' type = TypeRef ( '|' rule = [ LexerRule ] ) ?
+// '[' type = TypeRef ( '|' rule = [ xtext :: LexerRule ] ) ?
 protected class CrossReference_0_Group extends GroupToken {
 	
 	public CrossReference_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3103,7 +3106,7 @@ protected class CrossReference_0_0_1_Assignment_type extends AssignmentToken  {
 }
 
 
-// ( '|' rule = [ LexerRule ] ) ?
+// ( '|' rule = [ xtext :: LexerRule ] ) ?
 protected class CrossReference_0_1_Group extends GroupToken {
 	
 	public CrossReference_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3143,7 +3146,7 @@ protected class CrossReference_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// rule = [ LexerRule ]
+// rule = [ xtext :: LexerRule ]
 protected class CrossReference_0_1_1_Assignment_rule extends AssignmentToken  {
 	
 	public CrossReference_0_1_1_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
@@ -3188,7 +3191,7 @@ protected class CrossReference_1_Keyword extends KeywordToken  {
 
 /************ begin Rule ParenthesizedElement ****************
  *
- * ParenthesizedElement returns AbstractElement : '(' Alternatives ')' ;
+ * ParenthesizedElement returns xtext :: AbstractElement : '(' Alternatives ')' ;
  *
  **/
 
@@ -3329,12 +3332,12 @@ protected class Keyword_Assignment_value extends AssignmentToken  {
 
 /************ begin Rule RuleCall ****************
  *
- * RuleCall : rule = [ AbstractRule ] ;
+ * RuleCall : rule = [ xtext :: AbstractRule ] ;
  *
  **/
 
 
-// rule = [ AbstractRule ]
+// rule = [ xtext :: AbstractRule ]
 protected class RuleCall_Assignment_rule extends AssignmentToken  {
 	
 	public RuleCall_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {

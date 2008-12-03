@@ -11,7 +11,7 @@
       <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.1"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
         <abstractTokens xsi:type="xtext:Action" feature="expressions" operator="+=">
-          <typeName name="Sequence"/>
+          <typeName metamodel="//@metamodelDeclarations.0" name="Sequence"/>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Assignment" feature="expressions" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="//@rules.1"/>
@@ -20,13 +20,13 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Addition">
-    <type name="Expression"/>
+    <type metamodel="//@metamodelDeclarations.0" name="Expression"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.2"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Action" feature="values" operator="+=">
-            <typeName name="Op"/>
+            <typeName metamodel="//@metamodelDeclarations.0" name="Op"/>
           </abstractTokens>
           <abstractTokens xsi:type="xtext:Assignment" feature="operator" operator="=">
             <terminal xsi:type="xtext:Alternatives">
@@ -42,13 +42,13 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Multiplication">
-    <type name="Expression"/>
+    <type metamodel="//@metamodelDeclarations.0" name="Expression"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.3"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Action" feature="values" operator="+=">
-            <typeName name="Op"/>
+            <typeName metamodel="//@metamodelDeclarations.0" name="Op"/>
           </abstractTokens>
           <abstractTokens xsi:type="xtext:Assignment" feature="operator" operator="=">
             <terminal xsi:type="xtext:Alternatives">
@@ -64,7 +64,7 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Term">
-    <type name="Expression"/>
+    <type metamodel="//@metamodelDeclarations.0" name="Expression"/>
     <alternatives xsi:type="xtext:Alternatives">
       <groups xsi:type="xtext:RuleCall" rule="//@rules.4"/>
       <groups xsi:type="xtext:RuleCall" rule="//@rules.5"/>
@@ -78,7 +78,7 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Parens">
-    <type name="Expression"/>
+    <type metamodel="//@metamodelDeclarations.0" name="Expression"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Keyword" value="("/>

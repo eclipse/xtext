@@ -1807,12 +1807,12 @@ protected class TypeRef_1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule Alternatives ****************
  *
- * Alternatives returns AbstractElement : Group ( { current = Alternatives . groups += current } '|' groups += Group ) * ;
+ * Alternatives returns XtextTest :: AbstractElement : Group ( { current = XtextTest :: Alternatives . groups += current } '|' groups += Group ) * ;
  *
  **/
 
 
-// Group ( { current = Alternatives . groups += current } '|' groups += Group ) *
+// Group ( { current = XtextTest :: Alternatives . groups += current } '|' groups += Group ) *
 protected class Alternatives_Group extends GroupToken {
 	
 	public Alternatives_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1858,7 +1858,7 @@ protected class Alternatives_0_RuleCall_Group extends RuleCallToken {
 	}
 }
 
-// ( { current = Alternatives . groups += current } '|' groups += Group ) *
+// ( { current = XtextTest :: Alternatives . groups += current } '|' groups += Group ) *
 protected class Alternatives_1_Group extends GroupToken {
 	
 	public Alternatives_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1886,7 +1886,7 @@ protected class Alternatives_1_Group extends GroupToken {
 	}
 }
 
-// { current = Alternatives . groups += current } '|'
+// { current = XtextTest :: Alternatives . groups += current } '|'
 protected class Alternatives_1_0_Group extends GroupToken {
 	
 	public Alternatives_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1914,7 +1914,7 @@ protected class Alternatives_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = Alternatives . groups += current }
+// { current = XtextTest :: Alternatives . groups += current }
 protected class Alternatives_1_0_0_Action_Alternatives_groups extends ActionToken  {
 
 	public Alternatives_1_0_0_Action_Alternatives_groups(IInstanceDescription curr, AbstractToken pred) {
@@ -1981,12 +1981,12 @@ protected class Alternatives_1_1_Assignment_groups extends AssignmentToken  {
 
 /************ begin Rule Group ****************
  *
- * Group returns AbstractElement : AbstractToken ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) * ;
+ * Group returns XtextTest :: AbstractElement : AbstractToken ( { current = XtextTest :: Group . abstractTokens += current } abstractTokens += AbstractToken ) * ;
  *
  **/
 
 
-// AbstractToken ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) *
+// AbstractToken ( { current = XtextTest :: Group . abstractTokens += current } abstractTokens += AbstractToken ) *
 protected class Group_Group extends GroupToken {
 	
 	public Group_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2032,7 +2032,7 @@ protected class Group_0_RuleCall_AbstractToken extends RuleCallToken {
 	}
 }
 
-// ( { current = Group . abstractTokens += current } abstractTokens += AbstractToken ) *
+// ( { current = XtextTest :: Group . abstractTokens += current } abstractTokens += AbstractToken ) *
 protected class Group_1_Group extends GroupToken {
 	
 	public Group_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -2060,7 +2060,7 @@ protected class Group_1_Group extends GroupToken {
 	}
 }
 
-// { current = Group . abstractTokens += current }
+// { current = XtextTest :: Group . abstractTokens += current }
 protected class Group_1_0_Action_Group_abstractTokens extends ActionToken  {
 
 	public Group_1_0_Action_Group_abstractTokens(IInstanceDescription curr, AbstractToken pred) {
@@ -2114,7 +2114,7 @@ protected class Group_1_1_Assignment_abstractTokens extends AssignmentToken  {
 
 /************ begin Rule AbstractToken ****************
  *
- * AbstractToken returns AbstractElement : ( Assignment | Action | AbstractTerminal ) ( cardinality = ( '?' | '*' | '+' ) ) ? ;
+ * AbstractToken returns XtextTest :: AbstractElement : ( Assignment | Action | AbstractTerminal ) ( cardinality = ( '?' | '*' | '+' ) ) ? ;
  *
  **/
 
@@ -2283,7 +2283,7 @@ protected class AbstractToken_1_Assignment_cardinality extends AssignmentToken  
 
 /************ begin Rule Assignment ****************
  *
- * Assignment returns Assignment : feature = ID operator = ( '+=' | '=' | '?=' ) terminal = AbstractTerminal ;
+ * Assignment returns XtextTest :: Assignment : feature = ID operator = ( '+=' | '=' | '?=' ) terminal = AbstractTerminal ;
  *
  **/
 
@@ -2434,7 +2434,7 @@ protected class Assignment_1_Assignment_terminal extends AssignmentToken  {
 
 /************ begin Rule Action ****************
  *
- * Action returns Action : '{' ( 'current' '=' ) ? typeName = TypeRef '.' feature = ID operator = ( '=' | '+=' ) 'current' '}' ;
+ * Action returns XtextTest :: Action : '{' ( 'current' '=' ) ? typeName = TypeRef '.' feature = ID operator = ( '=' | '+=' ) 'current' '}' ;
  *
  **/
 
@@ -2826,7 +2826,7 @@ protected class Action_1_Keyword extends KeywordToken  {
 
 /************ begin Rule AbstractTerminal ****************
  *
- * AbstractTerminal returns AbstractElement : Keyword | RuleCall | ParenthesizedElement | CrossReference ;
+ * AbstractTerminal returns XtextTest :: AbstractElement : Keyword | RuleCall | ParenthesizedElement | CrossReference ;
  *
  **/
 
@@ -2973,12 +2973,12 @@ protected class AbstractTerminal_1_RuleCall_CrossReference extends RuleCallToken
 
 /************ begin Rule CrossReference ****************
  *
- * CrossReference : '[' type = TypeRef ( '|' rule = [ LexerRule ] ) ? ']' ;
+ * CrossReference : '[' type = TypeRef ( '|' rule = [ XtextTest :: LexerRule ] ) ? ']' ;
  *
  **/
 
 
-// '[' type = TypeRef ( '|' rule = [ LexerRule ] ) ? ']'
+// '[' type = TypeRef ( '|' rule = [ XtextTest :: LexerRule ] ) ? ']'
 protected class CrossReference_Group extends GroupToken {
 	
 	public CrossReference_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3006,7 +3006,7 @@ protected class CrossReference_Group extends GroupToken {
 	}
 }
 
-// '[' type = TypeRef ( '|' rule = [ LexerRule ] ) ?
+// '[' type = TypeRef ( '|' rule = [ XtextTest :: LexerRule ] ) ?
 protected class CrossReference_0_Group extends GroupToken {
 	
 	public CrossReference_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3103,7 +3103,7 @@ protected class CrossReference_0_0_1_Assignment_type extends AssignmentToken  {
 }
 
 
-// ( '|' rule = [ LexerRule ] ) ?
+// ( '|' rule = [ XtextTest :: LexerRule ] ) ?
 protected class CrossReference_0_1_Group extends GroupToken {
 	
 	public CrossReference_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3143,7 +3143,7 @@ protected class CrossReference_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// rule = [ LexerRule ]
+// rule = [ XtextTest :: LexerRule ]
 protected class CrossReference_0_1_1_Assignment_rule extends AssignmentToken  {
 	
 	public CrossReference_0_1_1_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
@@ -3188,7 +3188,7 @@ protected class CrossReference_1_Keyword extends KeywordToken  {
 
 /************ begin Rule ParenthesizedElement ****************
  *
- * ParenthesizedElement returns AbstractElement : '(' Alternatives ')' ;
+ * ParenthesizedElement returns XtextTest :: AbstractElement : '(' Alternatives ')' ;
  *
  **/
 
@@ -3329,12 +3329,12 @@ protected class Keyword_Assignment_value extends AssignmentToken  {
 
 /************ begin Rule RuleCall ****************
  *
- * RuleCall : rule = [ AbstractRule ] ;
+ * RuleCall : rule = [ XtextTest :: AbstractRule ] ;
  *
  **/
 
 
-// rule = [ AbstractRule ]
+// rule = [ XtextTest :: AbstractRule ]
 protected class RuleCall_Assignment_rule extends AssignmentToken  {
 	
 	public RuleCall_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {

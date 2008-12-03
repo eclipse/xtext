@@ -12,12 +12,12 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Element">
-    <type name="Type"/>
+    <type metamodel="//@metamodelDeclarations.0" name="Type"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.2"/>
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Action" feature="items" operator="+=">
-          <typeName name="Item"/>
+          <typeName metamodel="//@metamodelDeclarations.0" name="Item"/>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Assignment" feature="items" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="//@rules.2"/>
@@ -26,10 +26,10 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Item">
-    <type name="Type"/>
+    <type metamodel="//@metamodelDeclarations.0" name="Type"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Action" feature="content" operator="=">
-        <typeName name="Thing"/>
+        <typeName metamodel="//@metamodelDeclarations.0" name="Thing"/>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
         <terminal xsi:type="xtext:RuleCall">

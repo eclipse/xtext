@@ -200,7 +200,7 @@ protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken
 
 /************ begin Rule InheritedParserRule ****************
  *
- * InheritedParserRule returns mm :: AType : 'element' name = ID ;
+ * (error)
  *
  **/
 

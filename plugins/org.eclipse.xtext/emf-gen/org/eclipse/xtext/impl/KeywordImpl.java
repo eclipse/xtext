@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KeywordImpl.java,v 1.10 2008/06/05 15:03:51 sefftinge Exp $
+ * $Id: KeywordImpl.java,v 1.11 2008/12/03 20:57:10 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.XtextPackage;
 

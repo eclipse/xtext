@@ -2,9 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Keyword.java,v 1.10 2008/06/05 15:03:49 sefftinge Exp $
+ * $Id: Keyword.java,v 1.11 2008/12/03 20:57:09 szarnekow Exp $
  */
 package org.eclipse.xtext;
+
+import org.eclipse.emf.ecore.EObject;
 
 
 /**

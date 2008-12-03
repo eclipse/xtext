@@ -182,9 +182,9 @@
   <rules xsi:type="xtext:ParserRule" name="TypeRef">
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group" cardinality="?">
-        <abstractTokens xsi:type="xtext:Assignment" feature="alias" operator="=">
-          <terminal xsi:type="xtext:RuleCall">
-            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+        <abstractTokens xsi:type="xtext:Assignment" feature="metamodel" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="//@metamodelDeclarations.0" name="AbstractMetamodelDeclaration"/>
           </terminal>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value="::"/>
@@ -197,13 +197,13 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Alternatives">
-    <type name="AbstractElement"/>
+    <type metamodel="//@metamodelDeclarations.0" name="AbstractElement"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.9"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
         <abstractTokens xsi:type="xtext:Group">
           <abstractTokens xsi:type="xtext:Action" feature="groups" operator="+=">
-            <typeName name="Alternatives"/>
+            <typeName metamodel="//@metamodelDeclarations.0" name="Alternatives"/>
           </abstractTokens>
           <abstractTokens xsi:type="xtext:Keyword" value="|"/>
         </abstractTokens>
@@ -214,12 +214,12 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Group">
-    <type name="AbstractElement"/>
+    <type metamodel="//@metamodelDeclarations.0" name="AbstractElement"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:RuleCall" rule="//@rules.10"/>
       <abstractTokens xsi:type="xtext:Group" cardinality="*">
         <abstractTokens xsi:type="xtext:Action" feature="abstractTokens" operator="+=">
-          <typeName name="Group"/>
+          <typeName metamodel="//@metamodelDeclarations.0" name="Group"/>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Assignment" feature="abstractTokens" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="//@rules.10"/>
@@ -228,7 +228,7 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="AbstractToken">
-    <type name="AbstractElement"/>
+    <type metamodel="//@metamodelDeclarations.0" name="AbstractElement"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:Alternatives">
@@ -249,7 +249,7 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Assignment">
-    <type name="Assignment"/>
+    <type metamodel="//@metamodelDeclarations.0" name="Assignment"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Assignment" feature="feature" operator="=">
@@ -273,7 +273,7 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Action">
-    <type name="Action"/>
+    <type metamodel="//@metamodelDeclarations.0" name="Action"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Group">
@@ -312,7 +312,7 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="AbstractTerminal">
-    <type name="AbstractElement"/>
+    <type metamodel="//@metamodelDeclarations.0" name="AbstractElement"/>
     <alternatives xsi:type="xtext:Alternatives">
       <groups xsi:type="xtext:Alternatives">
         <groups xsi:type="xtext:Alternatives">
@@ -337,7 +337,7 @@
           <abstractTokens xsi:type="xtext:Keyword" value="|"/>
           <abstractTokens xsi:type="xtext:Assignment" feature="rule" operator="=">
             <terminal xsi:type="xtext:CrossReference">
-              <type name="LexerRule"/>
+              <type metamodel="//@metamodelDeclarations.0" name="LexerRule"/>
             </terminal>
           </abstractTokens>
         </abstractTokens>
@@ -346,7 +346,7 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="ParenthesizedElement">
-    <type name="AbstractElement"/>
+    <type metamodel="//@metamodelDeclarations.0" name="AbstractElement"/>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Keyword" value="("/>
@@ -365,7 +365,7 @@
   <rules xsi:type="xtext:ParserRule" name="RuleCall">
     <alternatives xsi:type="xtext:Assignment" feature="rule" operator="=">
       <terminal xsi:type="xtext:CrossReference">
-        <type name="AbstractRule"/>
+        <type metamodel="//@metamodelDeclarations.0" name="AbstractRule"/>
       </terminal>
     </alternatives>
   </rules>

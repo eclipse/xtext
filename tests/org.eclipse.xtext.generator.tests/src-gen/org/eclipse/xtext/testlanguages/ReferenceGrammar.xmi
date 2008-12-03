@@ -161,19 +161,19 @@
               </abstractTokens>
               <abstractTokens xsi:type="xtext:Assignment" feature="mutter" operator="=">
                 <terminal xsi:type="xtext:CrossReference">
-                  <type name="Erwachsener"/>
+                  <type metamodel="//@metamodelDeclarations.0" name="Erwachsener"/>
                 </terminal>
               </abstractTokens>
             </abstractTokens>
             <abstractTokens xsi:type="xtext:Assignment" feature="vater" operator="=">
               <terminal xsi:type="xtext:CrossReference">
-                <type name="Erwachsener"/>
+                <type metamodel="//@metamodelDeclarations.0" name="Erwachsener"/>
               </terminal>
             </abstractTokens>
           </abstractTokens>
           <abstractTokens xsi:type="xtext:Assignment" feature="kinder" operator="+=">
             <terminal xsi:type="xtext:CrossReference">
-              <type name="Kind"/>
+              <type metamodel="//@metamodelDeclarations.0" name="Kind"/>
             </terminal>
           </abstractTokens>
         </abstractTokens>
@@ -181,7 +181,7 @@
           <abstractTokens xsi:type="xtext:Keyword" value=","/>
           <abstractTokens xsi:type="xtext:Assignment" feature="kinder" operator="+=">
             <terminal xsi:type="xtext:CrossReference">
-              <type name="Kind"/>
+              <type metamodel="//@metamodelDeclarations.0" name="Kind"/>
             </terminal>
           </abstractTokens>
         </abstractTokens>

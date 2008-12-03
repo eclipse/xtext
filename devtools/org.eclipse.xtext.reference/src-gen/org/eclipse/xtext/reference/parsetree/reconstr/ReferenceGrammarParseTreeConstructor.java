@@ -1192,12 +1192,12 @@ protected class Spielzeug_1_Keyword extends KeywordToken  {
 
 /************ begin Rule Familie ****************
  *
- * Familie : 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')' ;
+ * Familie : 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ ReferenceGrammar :: Erwachsener ] vater = [ ReferenceGrammar :: Erwachsener ] kinder += [ ReferenceGrammar :: Kind ] ( ',' kinder += [ ReferenceGrammar :: Kind ] ) * ')' ;
  *
  **/
 
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')'
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ ReferenceGrammar :: Erwachsener ] vater = [ ReferenceGrammar :: Erwachsener ] kinder += [ ReferenceGrammar :: Kind ] ( ',' kinder += [ ReferenceGrammar :: Kind ] ) * ')'
 protected class Familie_Group extends GroupToken {
 	
 	public Familie_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1225,7 +1225,7 @@ protected class Familie_Group extends GroupToken {
 	}
 }
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) *
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ ReferenceGrammar :: Erwachsener ] vater = [ ReferenceGrammar :: Erwachsener ] kinder += [ ReferenceGrammar :: Kind ] ( ',' kinder += [ ReferenceGrammar :: Kind ] ) *
 protected class Familie_0_Group extends GroupToken {
 	
 	public Familie_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1253,7 +1253,7 @@ protected class Familie_0_Group extends GroupToken {
 	}
 }
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ]
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ ReferenceGrammar :: Erwachsener ] vater = [ ReferenceGrammar :: Erwachsener ] kinder += [ ReferenceGrammar :: Kind ]
 protected class Familie_0_0_Group extends GroupToken {
 	
 	public Familie_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1281,7 +1281,7 @@ protected class Familie_0_0_Group extends GroupToken {
 	}
 }
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ]
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ ReferenceGrammar :: Erwachsener ] vater = [ ReferenceGrammar :: Erwachsener ]
 protected class Familie_0_0_0_Group extends GroupToken {
 	
 	public Familie_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1309,7 +1309,7 @@ protected class Familie_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ]
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ ReferenceGrammar :: Erwachsener ]
 protected class Familie_0_0_0_0_Group extends GroupToken {
 	
 	public Familie_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1452,7 +1452,7 @@ protected class Familie_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// mutter = [ Erwachsener ]
+// mutter = [ ReferenceGrammar :: Erwachsener ]
 protected class Familie_0_0_0_0_1_Assignment_mutter extends AssignmentToken  {
 	
 	public Familie_0_0_0_0_1_Assignment_mutter(IInstanceDescription curr, AbstractToken pred) {
@@ -1479,7 +1479,7 @@ protected class Familie_0_0_0_0_1_Assignment_mutter extends AssignmentToken  {
 }
 
 
-// vater = [ Erwachsener ]
+// vater = [ ReferenceGrammar :: Erwachsener ]
 protected class Familie_0_0_0_1_Assignment_vater extends AssignmentToken  {
 	
 	public Familie_0_0_0_1_Assignment_vater(IInstanceDescription curr, AbstractToken pred) {
@@ -1506,7 +1506,7 @@ protected class Familie_0_0_0_1_Assignment_vater extends AssignmentToken  {
 }
 
 
-// kinder += [ Kind ]
+// kinder += [ ReferenceGrammar :: Kind ]
 protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
 	
 	public Familie_0_0_1_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
@@ -1533,7 +1533,7 @@ protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
 }
 
 
-// ( ',' kinder += [ Kind ] ) *
+// ( ',' kinder += [ ReferenceGrammar :: Kind ] ) *
 protected class Familie_0_1_Group extends GroupToken {
 	
 	public Familie_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1573,7 +1573,7 @@ protected class Familie_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// kinder += [ Kind ]
+// kinder += [ ReferenceGrammar :: Kind ]
 protected class Familie_0_1_1_Assignment_kinder extends AssignmentToken  {
 	
 	public Familie_0_1_1_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
@@ -1665,7 +1665,7 @@ protected class Farbe_Assignment_wert extends AssignmentToken  {
 
 /************ begin Rule CustomTypeParserRule ****************
  *
- * CustomTypeParserRule returns ReferenceModel :: CustomType : 'type' name = ID ;
+ * (error)
  *
  **/
 

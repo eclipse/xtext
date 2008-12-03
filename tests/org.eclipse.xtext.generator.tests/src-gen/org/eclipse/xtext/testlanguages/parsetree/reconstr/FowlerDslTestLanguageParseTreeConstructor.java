@@ -567,12 +567,12 @@ protected class Command_1_Assignment_code extends AssignmentToken  {
 
 /************ begin Rule State ****************
  *
- * State : 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ? ( transitions += Transition ) * 'end' ;
+ * State : 'state' name = ID ( 'actions' '{' ( actions += [ fowlerdsl :: Command ] ) + '}' ) ? ( transitions += Transition ) * 'end' ;
  *
  **/
 
 
-// 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ? ( transitions += Transition ) * 'end'
+// 'state' name = ID ( 'actions' '{' ( actions += [ fowlerdsl :: Command ] ) + '}' ) ? ( transitions += Transition ) * 'end'
 protected class State_Group extends GroupToken {
 	
 	public State_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -600,7 +600,7 @@ protected class State_Group extends GroupToken {
 	}
 }
 
-// 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ? ( transitions += Transition ) *
+// 'state' name = ID ( 'actions' '{' ( actions += [ fowlerdsl :: Command ] ) + '}' ) ? ( transitions += Transition ) *
 protected class State_0_Group extends GroupToken {
 	
 	public State_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -628,7 +628,7 @@ protected class State_0_Group extends GroupToken {
 	}
 }
 
-// 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ?
+// 'state' name = ID ( 'actions' '{' ( actions += [ fowlerdsl :: Command ] ) + '}' ) ?
 protected class State_0_0_Group extends GroupToken {
 	
 	public State_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -720,7 +720,7 @@ protected class State_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ?
+// ( 'actions' '{' ( actions += [ fowlerdsl :: Command ] ) + '}' ) ?
 protected class State_0_0_1_Group extends GroupToken {
 	
 	public State_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -748,7 +748,7 @@ protected class State_0_0_1_Group extends GroupToken {
 	}
 }
 
-// 'actions' '{' ( actions += [ Command ] ) +
+// 'actions' '{' ( actions += [ fowlerdsl :: Command ] ) +
 protected class State_0_0_1_0_Group extends GroupToken {
 	
 	public State_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -829,7 +829,7 @@ protected class State_0_0_1_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// ( actions += [ Command ] ) +
+// ( actions += [ fowlerdsl :: Command ] ) +
 protected class State_0_0_1_0_1_Assignment_actions extends AssignmentToken  {
 	
 	public State_0_0_1_0_1_Assignment_actions(IInstanceDescription curr, AbstractToken pred) {
@@ -916,12 +916,12 @@ protected class State_1_Keyword_end extends KeywordToken  {
 
 /************ begin Rule Transition ****************
  *
- * Transition : event = [ Event ] '=>' state = [ State ] ;
+ * Transition : event = [ fowlerdsl :: Event ] '=>' state = [ fowlerdsl :: State ] ;
  *
  **/
 
 
-// event = [ Event ] '=>' state = [ State ]
+// event = [ fowlerdsl :: Event ] '=>' state = [ fowlerdsl :: State ]
 protected class Transition_Group extends GroupToken {
 	
 	public Transition_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -949,7 +949,7 @@ protected class Transition_Group extends GroupToken {
 	}
 }
 
-// event = [ Event ] '=>'
+// event = [ fowlerdsl :: Event ] '=>'
 protected class Transition_0_Group extends GroupToken {
 	
 	public Transition_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -977,7 +977,7 @@ protected class Transition_0_Group extends GroupToken {
 	}
 }
 
-// event = [ Event ]
+// event = [ fowlerdsl :: Event ]
 protected class Transition_0_0_Assignment_event extends AssignmentToken  {
 	
 	public Transition_0_0_Assignment_event(IInstanceDescription curr, AbstractToken pred) {
@@ -1016,7 +1016,7 @@ protected class Transition_0_1_Keyword extends KeywordToken  {
 }
 
 
-// state = [ State ]
+// state = [ fowlerdsl :: State ]
 protected class Transition_1_Assignment_state extends AssignmentToken  {
 	
 	public Transition_1_Assignment_state(IInstanceDescription curr, AbstractToken pred) {

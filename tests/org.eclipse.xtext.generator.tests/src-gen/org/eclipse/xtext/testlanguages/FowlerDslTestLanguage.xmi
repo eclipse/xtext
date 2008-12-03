@@ -86,7 +86,7 @@
               </abstractTokens>
               <abstractTokens xsi:type="xtext:Assignment" cardinality="+" feature="actions" operator="+=">
                 <terminal xsi:type="xtext:CrossReference">
-                  <type name="Command"/>
+                  <type metamodel="//@metamodelDeclarations.0" name="Command"/>
                 </terminal>
               </abstractTokens>
             </abstractTokens>
@@ -105,14 +105,14 @@
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Assignment" feature="event" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type name="Event"/>
+            <type metamodel="//@metamodelDeclarations.0" name="Event"/>
           </terminal>
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Keyword" value="=>"/>
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" feature="state" operator="=">
         <terminal xsi:type="xtext:CrossReference">
-          <type name="State"/>
+          <type metamodel="//@metamodelDeclarations.0" name="State"/>
         </terminal>
       </abstractTokens>
     </alternatives>

@@ -68,7 +68,7 @@
   <rules xsi:type="xtext:ParserRule" name="AbstractRuleCall">
     <alternatives xsi:type="xtext:Assignment" feature="rule" operator="=">
       <terminal xsi:type="xtext:CrossReference">
-        <type name="AbstractRule"/>
+        <type metamodel="//@metamodelDeclarations.0" name="AbstractRule"/>
       </terminal>
     </alternatives>
   </rules>

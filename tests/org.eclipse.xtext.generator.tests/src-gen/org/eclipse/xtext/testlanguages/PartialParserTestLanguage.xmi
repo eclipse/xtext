@@ -128,7 +128,7 @@
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="referencedContainer" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type name="Container"/>
+            <type metamodel="//@metamodelDeclarations.0" name="Container"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>
@@ -155,7 +155,7 @@
         </abstractTokens>
         <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="referencedChildren" operator="+=">
           <terminal xsi:type="xtext:CrossReference">
-            <type name="Child"/>
+            <type metamodel="//@metamodelDeclarations.0" name="Child"/>
           </terminal>
         </abstractTokens>
       </abstractTokens>

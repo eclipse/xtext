@@ -2,9 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CrossReference.java,v 1.3 2008/12/02 20:42:05 szarnekow Exp $
+ * $Id: CrossReference.java,v 1.4 2008/12/03 20:57:09 szarnekow Exp $
  */
 package org.eclipse.xtext;
+
+import org.eclipse.emf.ecore.EObject;
 
 
 /**

@@ -49,11 +49,11 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 			return Collections.<EObject> emptyList();
 
 		final IScope scope = getObjectsInScope(context, ref);
-		Iterator<IScopedElement> iterator = scope.getAllContents().iterator();
-		String text2 = text.getText();
+		final Iterator<IScopedElement> iterator = scope.getAllContents().iterator();
+		final String s = text.getText();
 		while (iterator.hasNext()) {
-			IScopedElement element = iterator.next();
-			if (element.name().equals(text2))
+			final IScopedElement element = iterator.next();
+			if (element.name().equals(s))
 				return Collections.singletonList(element.element());
 		}
 		return Collections.emptyList();

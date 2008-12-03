@@ -642,12 +642,12 @@ protected class SecondAbstractRuleChild_1_Keyword extends KeywordToken  {
 
 /************ begin Rule AbstractRuleCall ****************
  *
- * AbstractRuleCall : rule = [ AbstractRule ] ;
+ * AbstractRuleCall : rule = [ contentAssistTestLanguage :: AbstractRule ] ;
  *
  **/
 
 
-// rule = [ AbstractRule ]
+// rule = [ contentAssistTestLanguage :: AbstractRule ]
 protected class AbstractRuleCall_Assignment_rule extends AssignmentToken  {
 	
 	public AbstractRuleCall_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {

@@ -5,30 +5,30 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.crossref.impl;
-
-
-import java.util.Collections;
-import java.util.Map;
+package org.eclipse.xtext.xtext;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.crossref.IScope;
+import org.eclipse.xtext.crossref.impl.SimpleCachingScope;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SimpleCachingScope extends AbstractCachingScope {
+public class XtextMetaModelReferenceScope extends SimpleCachingScope {
 
-	public SimpleCachingScope(IScope parent, Resource resource, EClass type) {
-		super(parent, type);
-		initElements(resource);
+	public XtextMetaModelReferenceScope(Resource resource, EClass type) {
+		super(IScope.NULLSCOPE, resource, type);
 	}
 
 	@Override
-	protected Map<String, EObject> initElements(SimpleAttributeResolver<String> resolver) {
-		return Collections.emptyMap();
+	protected String getNameFeature(EClass type) {
+		if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass())) {
+//			return type.getEStructuralFeature(XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS).getName();
+			return "alias";
+		}
+		return super.getNameFeature(type);
 	}
-
+	
 }

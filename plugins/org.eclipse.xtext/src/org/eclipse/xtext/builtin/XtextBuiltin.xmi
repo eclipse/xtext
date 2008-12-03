@@ -9,7 +9,7 @@
   <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore" uri="http://www.eclipse.org/emf/2002/Ecore"/>
   <rules xsi:type="xtext:LexerRule" name="ID" body="('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*"/>
   <rules xsi:type="xtext:LexerRule" name="INT" body="('0'..'9')+"> 
-  	<type alias="ecore" name="EInt"/>
+  	<type metamodel="//@metamodelDeclarations.0" name="EInt"/>
   </rules>
   <rules xsi:type="xtext:LexerRule" name="STRING" body="'&quot;' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'&quot;') )* '&quot;' | 
               '\'' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\&quot;'|'\''|'\\') | ~('\\'|'\'') )* '\''"/>

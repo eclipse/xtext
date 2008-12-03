@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextPackageImpl.java,v 1.14 2008/12/02 20:42:06 szarnekow Exp $
+ * $Id: XtextPackageImpl.java,v 1.15 2008/12/03 20:57:10 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -52,13 +52,6 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass abstractElementEClass = null;
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
   private EClass grammarEClass = null;
 
   /**
@@ -77,19 +70,40 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 
   /**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass groupEClass = null;
+	private EClass abstractElementEClass = null;
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass actionEClass = null;
+	private EClass alternativesEClass = null;
 
-  /**
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass groupEClass = null;
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass assignmentEClass = null;
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass actionEClass = null;
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -101,16 +115,16 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  private EClass alternativesEClass = null;
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
   private EClass ruleCallEClass = null;
 
   /**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass crossReferenceEClass = null;
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -137,20 +151,6 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 * @generated
 	 */
   private EClass abstractMetamodelDeclarationEClass = null;
-
-  /**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass crossReferenceEClass = null;
-
-		/**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  private EClass assignmentEClass = null;
 
   /**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -257,26 +257,6 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getAbstractElement()
-  {
-		return abstractElementEClass;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EAttribute getAbstractElement_Cardinality()
-  {
-		return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(0);
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
   public EClass getGrammar()
   {
 		return grammarEClass;
@@ -342,15 +322,14 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 
   /**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getParserRule_Alternatives()
-  {
+	public EReference getParserRule_Alternatives() {
 		return (EReference)parserRuleEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -362,6 +341,15 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 
   /**
 	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypeRef_Metamodel() {
+		return (EReference)typeRefEClass.getEStructuralFeatures().get(0);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -372,75 +360,131 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 
   /**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getTypeRef_Alias()
-  {
-		return (EAttribute)typeRefEClass.getEStructuralFeatures().get(0);
+	public EClass getAbstractElement() {
+		return abstractElementEClass;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getGroup()
-  {
+	public EAttribute getAbstractElement_Cardinality() {
+		return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(0);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAlternatives() {
+		return alternativesEClass;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAlternatives_Groups() {
+		return (EReference)alternativesEClass.getEStructuralFeatures().get(0);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getGroup() {
 		return groupEClass;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EReference getGroup_AbstractTokens()
-  {
+	public EReference getGroup_AbstractTokens() {
 		return (EReference)groupEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EClass getAction()
-  {
+	public EClass getAssignment() {
+		return assignmentEClass;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAssignment_Feature() {
+		return (EAttribute)assignmentEClass.getEStructuralFeatures().get(0);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAssignment_Operator() {
+		return (EAttribute)assignmentEClass.getEStructuralFeatures().get(1);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAssignment_Terminal() {
+		return (EReference)assignmentEClass.getEStructuralFeatures().get(2);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAction() {
 		return actionEClass;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public EAttribute getAction_Feature()
-  {
-		return (EAttribute)actionEClass.getEStructuralFeatures().get(1);
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EAttribute getAction_Operator()
-  {
-		return (EAttribute)actionEClass.getEStructuralFeatures().get(2);
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EReference getAction_TypeName()
-  {
+	public EReference getAction_TypeName() {
 		return (EReference)actionEClass.getEStructuralFeatures().get(0);
 	}
 
-  /**
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAction_Feature() {
+		return (EAttribute)actionEClass.getEStructuralFeatures().get(1);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAction_Operator() {
+		return (EAttribute)actionEClass.getEStructuralFeatures().get(2);
+	}
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -457,7 +501,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
   public EAttribute getAbstractRule_Name()
   {
-		return (EAttribute)abstractRuleEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)abstractRuleEClass.getEStructuralFeatures().get(0);
 	}
 
   /**
@@ -467,27 +511,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
   public EReference getAbstractRule_Type()
   {
-		return (EReference)abstractRuleEClass.getEStructuralFeatures().get(0);
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EClass getAlternatives()
-  {
-		return alternativesEClass;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EReference getAlternatives_Groups()
-  {
-		return (EReference)alternativesEClass.getEStructuralFeatures().get(0);
+		return (EReference)abstractRuleEClass.getEStructuralFeatures().get(1);
 	}
 
   /**
@@ -507,6 +531,33 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 	 */
 	public EReference getRuleCall_Rule() {
 		return (EReference)ruleCallEClass.getEStructuralFeatures().get(0);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCrossReference() {
+		return crossReferenceEClass;
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCrossReference_Type() {
+		return (EReference)crossReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCrossReference_Rule() {
+		return (EReference)crossReferenceEClass.getEStructuralFeatures().get(1);
 	}
 
 		/**
@@ -591,73 +642,6 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 
   /**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getCrossReference() {
-		return crossReferenceEClass;
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCrossReference_Type() {
-		return (EReference)crossReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCrossReference_Rule() {
-		return (EReference)crossReferenceEClass.getEStructuralFeatures().get(1);
-	}
-
-		/**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EClass getAssignment()
-  {
-		return assignmentEClass;
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EAttribute getAssignment_Feature()
-  {
-		return (EAttribute)assignmentEClass.getEStructuralFeatures().get(0);
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EReference getAssignment_Terminal()
-  {
-		return (EReference)assignmentEClass.getEStructuralFeatures().get(2);
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  public EAttribute getAssignment_Operator()
-  {
-		return (EAttribute)assignmentEClass.getEStructuralFeatures().get(1);
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -694,8 +678,8 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 		createEReference(grammarEClass, GRAMMAR__RULES);
 
 		abstractRuleEClass = createEClass(ABSTRACT_RULE);
-		createEReference(abstractRuleEClass, ABSTRACT_RULE__TYPE);
 		createEAttribute(abstractRuleEClass, ABSTRACT_RULE__NAME);
+		createEReference(abstractRuleEClass, ABSTRACT_RULE__TYPE);
 
 		lexerRuleEClass = createEClass(LEXER_RULE);
 		createEAttribute(lexerRuleEClass, LEXER_RULE__BODY);
@@ -714,7 +698,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 		createEAttribute(referencedMetamodelEClass, REFERENCED_METAMODEL__URI);
 
 		typeRefEClass = createEClass(TYPE_REF);
-		createEAttribute(typeRefEClass, TYPE_REF__ALIAS);
+		createEReference(typeRefEClass, TYPE_REF__METAMODEL);
 		createEAttribute(typeRefEClass, TYPE_REF__NAME);
 
 		abstractElementEClass = createEClass(ABSTRACT_ELEMENT);
@@ -797,8 +781,8 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 		initEReference(getGrammar_Rules(), this.getAbstractRule(), null, "rules", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractRuleEClass, AbstractRule.class, "AbstractRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractRule_Type(), this.getTypeRef(), null, "type", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractRule_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractRule_Type(), this.getTypeRef(), null, "type", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(lexerRuleEClass, LexerRule.class, "LexerRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLexerRule_Body(), ecorePackage.getEString(), "body", null, 0, 1, LexerRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -817,7 +801,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 		initEAttribute(getReferencedMetamodel_Uri(), ecorePackage.getEString(), "uri", null, 0, 1, ReferencedMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeRefEClass, TypeRef.class, "TypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTypeRef_Alias(), ecorePackage.getEString(), "alias", null, 0, 1, TypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeRef_Metamodel(), this.getAbstractMetamodelDeclaration(), null, "metamodel", null, 0, 1, TypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTypeRef_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractElementEClass, AbstractElement.class, "AbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextFactory.java,v 1.12 2008/12/02 20:42:05 szarnekow Exp $
+ * $Id: XtextFactory.java,v 1.13 2008/12/03 20:57:09 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -34,15 +34,6 @@ public interface XtextFactory extends EFactory
 	 * @generated
 	 */
   GeneratedMetamodel createGeneratedMetamodel();
-
-  /**
-	 * Returns a new object of class '<em>Abstract Element</em>'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Abstract Element</em>'.
-	 * @generated
-	 */
-  AbstractElement createAbstractElement();
 
   /**
 	 * Returns a new object of class '<em>Grammar</em>'.
@@ -90,42 +81,51 @@ public interface XtextFactory extends EFactory
   TypeRef createTypeRef();
 
   /**
-	 * Returns a new object of class '<em>Cross Reference</em>'.
+	 * Returns a new object of class '<em>Abstract Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Cross Reference</em>'.
+	 * @return a new object of class '<em>Abstract Element</em>'.
 	 * @generated
 	 */
-	CrossReference createCrossReference();
+	AbstractElement createAbstractElement();
+
+		/**
+	 * Returns a new object of class '<em>Alternatives</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Alternatives</em>'.
+	 * @generated
+	 */
+	Alternatives createAlternatives();
 
 		/**
 	 * Returns a new object of class '<em>Group</em>'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Group</em>'.
 	 * @generated
 	 */
-  Group createGroup();
+	Group createGroup();
 
-  /**
+		/**
+	 * Returns a new object of class '<em>Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Assignment</em>'.
+	 * @generated
+	 */
+	Assignment createAssignment();
+
+		/**
 	 * Returns a new object of class '<em>Action</em>'.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>Action</em>'.
 	 * @generated
 	 */
-  Action createAction();
+	Action createAction();
 
-  /**
-	 * Returns a new object of class '<em>Alternatives</em>'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Alternatives</em>'.
-	 * @generated
-	 */
-  Alternatives createAlternatives();
-
-  /**
+		/**
 	 * Returns a new object of class '<em>Rule Call</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -135,6 +135,15 @@ public interface XtextFactory extends EFactory
   RuleCall createRuleCall();
 
   /**
+	 * Returns a new object of class '<em>Cross Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Cross Reference</em>'.
+	 * @generated
+	 */
+	CrossReference createCrossReference();
+
+		/**
 	 * Returns a new object of class '<em>Referenced Metamodel</em>'.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -160,15 +169,6 @@ public interface XtextFactory extends EFactory
 	 * @generated
 	 */
   Keyword createKeyword();
-
-  /**
-	 * Returns a new object of class '<em>Assignment</em>'.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Assignment</em>'.
-	 * @generated
-	 */
-  Assignment createAssignment();
 
   /**
 	 * Returns the package supported by this factory.

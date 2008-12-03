@@ -197,12 +197,12 @@ protected class Import_1_Assignment_uri extends AssignmentToken  {
 
 /************ begin Rule Type ****************
  *
- * Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
+ * Type : 'type' name = ID 'extends' ^extends = [ langA :: Type ] ;
  *
  **/
 
 
-// 'type' name = ID 'extends' ^extends = [ Type ]
+// 'type' name = ID 'extends' ^extends = [ langA :: Type ]
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -335,7 +335,7 @@ protected class Type_0_1_Keyword_extends extends KeywordToken  {
 }
 
 
-// ^extends = [ Type ]
+// ^extends = [ langA :: Type ]
 protected class Type_1_Assignment_extends extends AssignmentToken  {
 	
 	public Type_1_Assignment_extends(IInstanceDescription curr, AbstractToken pred) {

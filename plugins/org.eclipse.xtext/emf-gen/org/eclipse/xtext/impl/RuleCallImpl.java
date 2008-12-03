@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleCallImpl.java,v 1.11 2008/12/02 20:42:07 szarnekow Exp $
+ * $Id: RuleCallImpl.java,v 1.12 2008/12/03 20:57:10 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextPackage;
@@ -63,7 +64,7 @@ public class RuleCallImpl extends AbstractElementImpl implements RuleCall
 		return XtextPackage.Literals.RULE_CALL;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -103,12 +104,11 @@ public class RuleCallImpl extends AbstractElementImpl implements RuleCall
 
 		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case XtextPackage.RULE_CALL__RULE:
 				if (resolve) return getRule();
@@ -117,14 +117,13 @@ public class RuleCallImpl extends AbstractElementImpl implements RuleCall
 		return super.eGet(featureID, resolve, coreType);
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
+	@Override
+	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case XtextPackage.RULE_CALL__RULE:
 				setRule((AbstractRule)newValue);
@@ -133,14 +132,13 @@ public class RuleCallImpl extends AbstractElementImpl implements RuleCall
 		super.eSet(featureID, newValue);
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public void eUnset(int featureID)
-  {
+	@Override
+	public void eUnset(int featureID) {
 		switch (featureID) {
 			case XtextPackage.RULE_CALL__RULE:
 				setRule((AbstractRule)null);
@@ -149,14 +147,13 @@ public class RuleCallImpl extends AbstractElementImpl implements RuleCall
 		super.eUnset(featureID);
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
+	@Override
+	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case XtextPackage.RULE_CALL__RULE:
 				return rule != null;

@@ -41,7 +41,7 @@
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" feature="extends" operator="=">
         <terminal xsi:type="xtext:CrossReference">
-          <type name="Type"/>
+          <type metamodel="//@metamodelDeclarations.0" name="Type"/>
         </terminal>
       </abstractTokens>
     </alternatives>

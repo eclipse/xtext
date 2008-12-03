@@ -192,13 +192,13 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 		return Collections.emptyList();
 	}
 	
-	public List<? extends ICompletionProposal> completeTypeRefAlias(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
+	public List<? extends ICompletionProposal> completeTypeRefMetamodel(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeTypeRefAlias feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeTypeRefMetamodel feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment,model,"TypeRefAlias", offset));
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, prefix, offset);
 	}
 	
 	public List<? extends ICompletionProposal> completeTypeRefName(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
