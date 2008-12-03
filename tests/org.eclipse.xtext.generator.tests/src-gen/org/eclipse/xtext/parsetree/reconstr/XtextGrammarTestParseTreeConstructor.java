@@ -39,7 +39,7 @@ public class XtextGrammarTestParseTreeConstructor extends AbstractParseTreeConst
 		if(inst.isInstanceOf("CrossReference") && (s = new CrossReference_Group(inst, null).firstSolution()) != null) return s;
 		if(inst.isInstanceOf("AbstractElement") && (s = new ParenthesizedElement_Group(inst, null).firstSolution()) != null) return s;
 		if(inst.isInstanceOf("Keyword") && (s = new Keyword_Assignment_value(inst, null).firstSolution()) != null) return s;
-		if(inst.isInstanceOf("RuleCall") && (s = new RuleCall_Assignment_name(inst, null).firstSolution()) != null) return s;
+		if(inst.isInstanceOf("RuleCall") && (s = new RuleCall_Assignment_rule(inst, null).firstSolution()) != null) return s;
 		return null;
 	}
 	
@@ -2924,9 +2924,9 @@ protected class AbstractTerminal_0_0_1_RuleCall_RuleCall extends RuleCallToken {
 	}
 	
 	protected Solution createSolution() {
-		if(checkForRecursion(RuleCall_Assignment_name.class, current)) return null;
+		if(checkForRecursion(RuleCall_Assignment_rule.class, current)) return null;
 		if(!current.isInstanceOf("RuleCall")) return null;
-		return new RuleCall_Assignment_name(current, this).firstSolution();
+		return new RuleCall_Assignment_rule(current, this).firstSolution();
 	}
 }
 
@@ -2973,12 +2973,12 @@ protected class AbstractTerminal_1_RuleCall_CrossReference extends RuleCallToken
 
 /************ begin Rule CrossReference ****************
  *
- * CrossReference : '[' type = TypeRef ( '|' rule = RuleCall ) ? ']' ;
+ * CrossReference : '[' type = TypeRef ( '|' rule = [ LexerRule ] ) ? ']' ;
  *
  **/
 
 
-// '[' type = TypeRef ( '|' rule = RuleCall ) ? ']'
+// '[' type = TypeRef ( '|' rule = [ LexerRule ] ) ? ']'
 protected class CrossReference_Group extends GroupToken {
 	
 	public CrossReference_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3006,7 +3006,7 @@ protected class CrossReference_Group extends GroupToken {
 	}
 }
 
-// '[' type = TypeRef ( '|' rule = RuleCall ) ?
+// '[' type = TypeRef ( '|' rule = [ LexerRule ] ) ?
 protected class CrossReference_0_Group extends GroupToken {
 	
 	public CrossReference_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3103,7 +3103,7 @@ protected class CrossReference_0_0_1_Assignment_type extends AssignmentToken  {
 }
 
 
-// ( '|' rule = RuleCall ) ?
+// ( '|' rule = [ LexerRule ] ) ?
 protected class CrossReference_0_1_Group extends GroupToken {
 	
 	public CrossReference_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3143,7 +3143,7 @@ protected class CrossReference_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// rule = RuleCall
+// rule = [ LexerRule ]
 protected class CrossReference_0_1_1_Assignment_rule extends AssignmentToken  {
 	
 	public CrossReference_0_1_1_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
@@ -3157,14 +3157,12 @@ protected class CrossReference_0_1_1_Assignment_rule extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rule",required)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rule");
-		if(value instanceof EObject) { // xtext::RuleCall
+		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("RuleCall")) {
-				Solution s = new RuleCall_Assignment_name(param, this).firstSolution();
-				if(s != null) {
-					type = AssignmentType.PRC; 
-					return new Solution(obj,s.getPredecessor());
-				} 
+			if(param.isInstanceOf("LexerRule")) {
+				type = AssignmentType.CR;
+				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.14/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"); 
+				return new Solution(obj);
 			}
 		}
 		return null;
@@ -3331,15 +3329,15 @@ protected class Keyword_Assignment_value extends AssignmentToken  {
 
 /************ begin Rule RuleCall ****************
  *
- * RuleCall : name = ID ;
+ * RuleCall : rule = [ AbstractRule ] ;
  *
  **/
 
 
-// name = ID
-protected class RuleCall_Assignment_name extends AssignmentToken  {
+// rule = [ AbstractRule ]
+protected class RuleCall_Assignment_rule extends AssignmentToken  {
 	
-	public RuleCall_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
+	public RuleCall_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
@@ -3348,12 +3346,15 @@ protected class RuleCall_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.17/@alternatives/@terminal"); 
-			return new Solution(obj);
+		if((value = current.getConsumable("rule",required)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("rule");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("AbstractRule")) {
+				type = AssignmentType.CR;
+				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/XtextGrammarTest.xmi#//@rules.17/@alternatives/@terminal"); 
+				return new Solution(obj);
+			}
 		}
 		return null;
 	}
