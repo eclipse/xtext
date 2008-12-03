@@ -69,4 +69,8 @@ public class Strings {
 		return s == null || s.equals("");
 	}
 
+	public static String newLine() {
+		return System.getProperty("line.separator");
+	}
+
 }
