@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.xtext.tests.feature"
+      id="org.eclipse.xtext.tests"
       label="Xtext Tests (Incubation)"
       version="0.7.0.qualifier"
       provider-name="Eclipse.org">
@@ -18,13 +18,13 @@
    </license>
 
    <includes
-         id="org.eclipse.xtext.examples.feature"
+         id="org.eclipse.xtext.examples"
          version="0.0.0"/>
 
    <requires>
-      <import feature="org.eclipse.xtext.runtime.feature" version="0.0.0"/>
-      <import feature="org.eclipse.xtext.sdk.feature" version="0.0.0"/>
-      <import feature="org.eclipse.xtext.examples.feature" version="0.0.0"/>
+      <import feature="org.eclipse.xtext.runtime" version="0.0.0"/>
+      <import feature="org.eclipse.xtext.sdk" version="0.0.0"/>
+      <import feature="org.eclipse.xtext.examples" version="0.0.0"/>
    </requires>
 
    <plugin
