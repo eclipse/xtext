@@ -30,19 +30,15 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 		if (resource.getContents().size() != 1)
 			throw new IllegalArgumentException("resource is not as expected: contents.size == "
 					+ resource.getContents().size() + " but expected: 1");
-		EObject firstContent = resource.getContents().get(0);
+		final EObject firstContent = resource.getContents().get(0);
 		if (!(firstContent instanceof Grammar))
 			throw new IllegalArgumentException("resource does not contain a grammar, but: " + firstContent);
 		return createScope((Grammar) firstContent, type);
 	}
 
 	protected IScope createScope(Grammar g, EClass type) {
-		Grammar superGrammar = GrammarUtil.getSuperGrammar(g);
-		IScope parent;
-		if (superGrammar != null)
-			parent = createScope(superGrammar, type);
-		else
-			parent = IScope.NULLSCOPE;
+		final Grammar superGrammar = GrammarUtil.getSuperGrammar(g);
+		final IScope parent = superGrammar != null ? createScope(superGrammar, type): IScope.NULLSCOPE;
 		return new SimpleCachingScope(parent, g.eResource(), type);
 	}
 
