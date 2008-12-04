@@ -110,9 +110,9 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 			.appendNl("R1 : (attr+=R2)*;")
 			.appendNl("R2 : (attr=INT)? prop=R3;")
 			.append("R3: attr+=").assertText(
-//					"R1", 
-//					"R2",
-//					"R3",
+					"R1", 
+					"R2",
+					"R3",
 					"\"KeywordValueSTRING\"", 
 					"\"KeywordValue\"", 
 					"(", 
@@ -126,8 +126,8 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 			.appendNl("abstract rules")
 			.appendNl("R1 ();")
 			.append("R2 rule :").assertText(
-//					"R1", 
-//					"R2",
+					"R1", 
+					"R2",
 					":" // TODO: Why does this proposal come up?
 			);
 	}

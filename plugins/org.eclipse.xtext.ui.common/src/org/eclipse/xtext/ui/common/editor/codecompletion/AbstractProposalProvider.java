@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.IDocument;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.util.Strings;
 
@@ -187,8 +189,11 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
 		if (linkingCandidatesService != null) {
-			//TODO the passed model is not always an instance of type, the cross reference is declared for.
-			final EReference ref = GrammarUtil.getReference(crossReference, model.eClass());
+			
+			final XtextResource xtextResource = (XtextResource) model.eResource();
+			final ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
+			final EClass eClass = xtextResource.getElementFactory().getEClass(GrammarUtil.getReturnTypeName(containingParserRule));
+			final EReference ref = GrammarUtil.getReference(crossReference, eClass);
 			final Iterable<IScopedElement> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
 			final String trimmedPrefix = prefix.trim();
 			for (IScopedElement candidate : candidates) {
