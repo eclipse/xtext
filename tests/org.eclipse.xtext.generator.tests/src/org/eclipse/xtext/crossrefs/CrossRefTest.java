@@ -43,7 +43,7 @@ public class CrossRefTest extends AbstractGeneratorTest {
 		assertWithXtend("3", "types.size", model);
 
 		EObject context = (EObject) invokeWithXtend("types.first()", model);
-		ParserRule prType = new LangAGrammarAccess().pr_Type();
+		ParserRule prType = new LangAGrammarAccess().prType().getRule();
 		Assignment asExtends = (Assignment) ((Group) prType.getAlternatives()).getAbstractTokens().get(1);
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
 		EReference ref = GrammarUtil.getReference(xref, context.eClass());
