@@ -1,0 +1,85 @@
+import xtext;
+import emf;
+
+extension org::eclipse::xtext::GrammarUtil;
+
+String toJavaIdentifier(String text, boolean uppercaseFirst):
+	JAVA org.eclipse.xtext.grammaraccess.GrammarAccessUtil.toJavaIdentifier(java.lang.String, java.lang.Boolean);
+	
+String gaRuleIdentifyer(AbstractRule rule):
+	rule.name.toJavaIdentifier(true);
+	
+String gaElementIdentifyer(AbstractElement element):
+	JAVA org.eclipse.xtext.grammaraccess.GrammarAccessUtil.getUniqueElementName(org.eclipse.xtext.AbstractElement);
+
+
+String gaFQName(Grammar grammar):
+	JAVA org.eclipse.xtext.grammaraccess.GrammarAccessUtil.getGrammarAccessFQName(org.eclipse.xtext.Grammar);
+	
+String gaSimpleName(Grammar grammar):
+	JAVA org.eclipse.xtext.grammaraccess.GrammarAccessUtil.getGrammarAccessSimpleName(org.eclipse.xtext.Grammar);
+	
+	
+String gaRuleAccessMethodName(AbstractRule rule):
+	"unknownRuleType" + rule.gaRuleIdentifyer();
+	
+String gaRuleAccessMethodName(LexerRule rule):
+	"lr" + rule.gaRuleIdentifyer();
+	
+String gaRuleAccessMethodName(ParserRule rule):
+	"pr" + rule.gaRuleIdentifyer();
+	
+String gaElementAccessMethodeName(AbstractElement element):
+	"ele" + element.gaElementIdentifyer();
+	
+String gaRuleAccesorClassName(AbstractRule rule):
+	rule.gaRuleIdentifyer() + "Elements";
+	
+List[Grammar] includedGrammars(Grammar g):
+	if(g.getSuperGrammar() == null) then { g }
+	else includedGrammars(g.getSuperGrammar()).add(g);
+	
+	
+	
+String gaRuleAccessor(AbstractRule rule):
+	rule.gaRuleAccessMethodName() + "()";
+	
+String gaElementAccessor(AbstractElement ele):
+	ele.gaElementAccessMethodeName() + "()";
+	
+String gaRuleElementAccessor(AbstractElement ele):
+	ele.containingParserRule().gaRuleAccessor() + "." + ele.gaElementAccessor();
+	
+String gaFullAccessor(AbstractElement ele):
+	ele.grammar().gaSimpleName() + ".INSTANCE." + ele.gaRuleElementAccessor();
+	
+// local stuff
+
+String gaElementAccessorLocalVarName(AbstractElement ele):
+	"c" + ele.gaElementIdentifyer();
+	
+String gaRuleAccessorLocalVarName(AbstractRule rule):
+	"unknownRule" + rule.gaRuleIdentifyer();
+
+String gaRuleAccessorLocalVarName(ParserRule rule):
+	"p" + rule.gaRuleIdentifyer();
+
+String gaRuleAccessorLocalVarName(LexerRule rule):
+	"l" + rule.gaRuleIdentifyer();
+	
+String getClassName(EObject obj):
+	JAVA org.eclipse.xtext.grammaraccess.GrammarAccessUtil.getClassName(org.eclipse.emf.ecore.EObject);
+	
+String loadElementParentStatement(AbstractElement ele):
+	if (AbstractElement.isInstance(ele.eContainer)) then
+		((AbstractElement)ele.eContainer).gaElementAccessor() 
+	else "getRule()";
+
+String loadElementStatement(AbstractElement ele):
+	"(" + ele.getClassName() + ")" + 
+	ele.loadElementParentStatement() + 
+	".eContents().get("+ele.eContainer.eContents.indexOf(ele)+")";
+
+	
+	
+	

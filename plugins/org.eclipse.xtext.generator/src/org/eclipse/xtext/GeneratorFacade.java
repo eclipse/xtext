@@ -33,6 +33,7 @@ import org.eclipse.xtend.check.CheckFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
+import org.eclipse.xtext.grammaraccess.GrammarAccessUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.SyntaxError;
@@ -155,11 +156,16 @@ public class GeneratorFacade {
 //			genModel.getOutlets().add(outlet("UI_TEMPLATES", uiProjectPath + "/templates", true));
 		}
 
+		// Moritz: I've refactored the determination of the GrammarAccessFQName to GrammarAccessUtil,
+		// since there are other services (e.g. Serialization, eventually Parsing) that have hard
+		// dependencies on the GrammarAccess specific to their language. By hard dependency I mean that
+		// they are not satisfied with some implementation of the interface, but need exactly the 
+		// implementation for their language. 
 		GenService grammarAccessService = XtextgenFactory.eINSTANCE.createGenService();
 		grammarAccessService.setServiceInterfaceFQName("org.eclipse.xtext.IGrammarAccess");
-		grammarAccessService.setGenClassFQName(namespace + ".services." + languageName + "GrammarAccess");
+		grammarAccessService.setGenClassFQName(GrammarAccessUtil.getGrammarAccessFQName(grammarModel));
 		grammarAccessService.setTemplatePath("org::eclipse::xtext::grammaraccess::GrammarAccess::root");
-		grammarAccessService.setExtensionPointID("org.eclipse.xtext.ui.grammarAccess");
+		//grammarAccessService.setExtensionPointID("org.eclipse.xtext.ui.grammarAccess");
 		genModel.getServices().add(grammarAccessService);
 		
 		GenService metamodelAccessService = XtextgenFactory.eINSTANCE.createGenService();

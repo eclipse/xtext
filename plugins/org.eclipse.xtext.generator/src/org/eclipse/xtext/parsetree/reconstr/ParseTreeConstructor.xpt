@@ -16,6 +16,7 @@
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
 «EXTENSION org::eclipse::xtext::parsetree::reconstr::ParseTreeConstructor»
+«EXTENSION org::eclipse::xtext::grammaraccess::GrammarAccess»
 «EXTENSION org::eclipse::xtend::util::stdlib::collections»
 «EXTENSION org::eclipse::xtend::util::stdlib::io»
 
@@ -32,7 +33,9 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
-
+«FOREACH grammar().includedGrammars() AS g-»
+import «g.gaFQName()»;
+«ENDFOREACH»
 
 public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructor {
 
@@ -75,7 +78,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 	}
 	
 	public «metaType.simpleName()» getGrammarElement() {
-		return («metaType.simpleName()»)getGrammarEle("«objectURI()»");
+		return «gaFullAccessor()»;
 	}
 «ENDDEFINE»
 
@@ -169,7 +172,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 «DEFINE assignmentCreate FOR Keyword-»
 		if("«value.replaceAll("\\\\","\\\\\\\\").replaceAll("\\\"","\\\\\\\"")»".equals(value)) { // «metaType.name»
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("«objectURI()»");
+			element = «gaFullAccessor()»;
 			return new Solution(obj);
 		}
 «ENDDEFINE»
@@ -179,7 +182,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("«type.name»")) {
 				type = AssignmentType.CR;
-				element = (AbstractElement)getGrammarEle("«objectURI()»"); 
+				element = «gaFullAccessor()»; 
 				return new Solution(obj);
 			}
 		}
@@ -200,7 +203,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 «ELSE-»
 		if(true) { // «metaType.name» FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("«objectURI()»"); 
+			element = «gaFullAccessor()»;
 			return new Solution(obj);
 		}
 «ENDIF-»
@@ -255,7 +258,7 @@ protected class «elementMethodName()» extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("«objectURI()»");
+		return «gaFullAccessor()»;
 	}	
 }
 «ENDDEFINE»
