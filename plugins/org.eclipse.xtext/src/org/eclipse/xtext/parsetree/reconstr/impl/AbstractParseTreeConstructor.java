@@ -5,13 +5,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
@@ -329,8 +326,8 @@ public abstract class AbstractParseTreeConstructor implements
 	@Inject
 	private IAstFactory factory;
 
-	@Inject
-	private IGrammarAccess grammar;
+//	@Inject
+//	private IGrammarAccess grammar;
 
 	protected final IInstanceDescription getDescr(EObject obj) {
 		return new InstanceDescription(this, obj);
@@ -344,14 +341,14 @@ public abstract class AbstractParseTreeConstructor implements
 		return factory;
 	}
 
-	protected Grammar getGrammar() {
-		return grammar.getGrammar();
-	}
-
-	protected EObject getGrammarEle(String string) {
-		return grammar.getGrammar().eResource().getResourceSet().getEObject(
-				URI.createURI(string), true);
-	}
+//	protected Grammar getGrammar() {
+//		return grammar.getGrammar();
+//	}
+//
+//	protected EObject getGrammarEle(String string) {
+//		return grammar.getGrammar().eResource().getResourceSet().getEObject(
+//				URI.createURI(string), true);
+//	}
 
 	// public IValueConverterService getValueConverterService() {
 	// return converterService;

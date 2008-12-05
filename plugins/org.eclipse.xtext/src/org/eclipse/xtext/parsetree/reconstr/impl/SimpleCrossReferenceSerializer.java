@@ -18,13 +18,19 @@ public class SimpleCrossReferenceSerializer extends
 	public String serializeCrossRef(IInstanceDescription container,
 			CrossReference grammarElement, EObject target) {
 		final EObject context = container.getDelegate();
-		final EReference ref = GrammarUtil.getReference(grammarElement, context.eClass());
+		final EReference ref = GrammarUtil.getReference(grammarElement, context
+				.eClass());
 		final String text = linkingService.getLinkText(target, ref, context);
 		if (text == null)
-			throw new XtextSerializationException(container,
-					"Unable to create a string represenation for reference '"
-							+ grammarElement.getType().getName() + "'.");
+			throw new XtextSerializationException(
+					container,
+					"Error serializing CrossRefs: "
+							+ "Unable to create a string represenation for reference '"
+							+ grammarElement.getType().getName() + "' using "
+							+ linkingService.getClass().getName()
+							+ " EReference: " + ref.getName() + " Context:"
+							+ context + " Target:" + target);
 		return text;
 	}
-	
+
 }
