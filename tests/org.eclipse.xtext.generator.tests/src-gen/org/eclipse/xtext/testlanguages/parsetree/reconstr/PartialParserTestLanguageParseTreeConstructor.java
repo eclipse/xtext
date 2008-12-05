@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammarAccess;
 
 
 public class PartialParserTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -50,7 +52,7 @@ protected class Container_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.0/@alternatives");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -78,7 +80,7 @@ protected class Container_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -106,7 +108,7 @@ protected class Container_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -134,7 +136,7 @@ protected class Container_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -162,7 +164,7 @@ protected class Container_0_0_0_0_Keyword_container extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele0000KeywordContainer();
 	}	
 }
 
@@ -174,7 +176,7 @@ protected class Container_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele0001AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -182,7 +184,7 @@ protected class Container_0_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele00010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -198,7 +200,7 @@ protected class Container_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele001Keyword();
 	}	
 }
 
@@ -211,7 +213,7 @@ protected class Container_0_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele01Alternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -232,7 +234,7 @@ protected class Container_0_1_0_Assignment_nested extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele010AssignmentNested();
 	}
 	
 	protected Solution createSolution() {
@@ -260,7 +262,7 @@ protected class Container_0_1_1_Assignment_content extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele011AssignmentContent();
 	}
 	
 	protected Solution createSolution() {
@@ -290,7 +292,7 @@ protected class Container_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele1Keyword();
 	}	
 }
 
@@ -312,7 +314,7 @@ protected class Nested_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.1/@alternatives");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -340,7 +342,7 @@ protected class Nested_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -368,7 +370,7 @@ protected class Nested_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -396,7 +398,7 @@ protected class Nested_0_0_0_Keyword_nested extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().ele000KeywordNested();
 	}	
 }
 
@@ -408,7 +410,7 @@ protected class Nested_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().ele001Keyword();
 	}	
 }
 
@@ -421,7 +423,7 @@ protected class Nested_0_1_Assignment_nested extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().ele01AssignmentNested();
 	}
 	
 	protected Solution createSolution() {
@@ -450,7 +452,7 @@ protected class Nested_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().ele1Keyword();
 	}	
 }
 
@@ -472,7 +474,7 @@ protected class Content_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.2/@alternatives");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContent().eleAlternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -493,7 +495,7 @@ protected class Content_0_RuleCall_Children extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.2/@alternatives/@groups.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContent().ele0ParserRuleCallChildren();
 	}
 	
 	protected Solution createSolution() {
@@ -511,7 +513,7 @@ protected class Content_1_RuleCall_AbstractChildren extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.2/@alternatives/@groups.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContent().ele1ParserRuleCallAbstractChildren();
 	}
 	
 	protected Solution createSolution() {
@@ -539,7 +541,7 @@ protected class Children_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.3/@alternatives");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -567,7 +569,7 @@ protected class Children_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -595,7 +597,7 @@ protected class Children_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -623,7 +625,7 @@ protected class Children_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -651,7 +653,7 @@ protected class Children_0_0_0_0_Keyword_children extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele0000KeywordChildren();
 	}	
 }
 
@@ -663,7 +665,7 @@ protected class Children_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele0001Keyword();
 	}	
 }
 
@@ -676,7 +678,7 @@ protected class Children_0_0_1_Assignment_children extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele001AssignmentChildren();
 	}
 	
 	protected Solution createSolution() {
@@ -705,7 +707,7 @@ protected class Children_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele01Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -733,7 +735,7 @@ protected class Children_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele010Keyword();
 	}	
 }
 
@@ -745,7 +747,7 @@ protected class Children_0_1_1_Assignment_children extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele011AssignmentChildren();
 	}
 	
 	protected Solution createSolution() {
@@ -775,7 +777,7 @@ protected class Children_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele1Keyword();
 	}	
 }
 
@@ -797,7 +799,7 @@ protected class Child_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.4/@alternatives");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -825,7 +827,7 @@ protected class Child_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -853,7 +855,7 @@ protected class Child_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -881,7 +883,7 @@ protected class Child_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -909,7 +911,7 @@ protected class Child_0_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele0000Keyword();
 	}	
 }
 
@@ -921,7 +923,7 @@ protected class Child_0_0_0_1_Keyword_C extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele0001KeywordC();
 	}	
 }
 
@@ -934,7 +936,7 @@ protected class Child_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele001Keyword();
 	}	
 }
 
@@ -947,7 +949,7 @@ protected class Child_0_1_Assignment_value extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele01AssignmentValue();
 	}
 	
 	protected Solution createSolution() {
@@ -976,7 +978,7 @@ protected class Child_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele1Keyword();
 	}	
 }
 
@@ -998,7 +1000,7 @@ protected class AbstractChildren_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.5/@alternatives");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -1026,7 +1028,7 @@ protected class AbstractChildren_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1054,7 +1056,7 @@ protected class AbstractChildren_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1082,7 +1084,7 @@ protected class AbstractChildren_0_0_0_Keyword_abstractchildren extends KeywordT
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().ele000KeywordAbstractChildren();
 	}	
 }
 
@@ -1094,7 +1096,7 @@ protected class AbstractChildren_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().ele001Keyword();
 	}	
 }
 
@@ -1107,7 +1109,7 @@ protected class AbstractChildren_0_1_Assignment_abstractChildren extends Assignm
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().ele01AssignmentAbstractChildren();
 	}
 	
 	protected Solution createSolution() {
@@ -1136,7 +1138,7 @@ protected class AbstractChildren_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().ele1Keyword();
 	}	
 }
 
@@ -1158,7 +1160,7 @@ protected class AbstractChild_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.6/@alternatives");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChild().eleAlternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -1179,7 +1181,7 @@ protected class AbstractChild_0_RuleCall_FirstConcrete extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.6/@alternatives/@groups.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChild().ele0ParserRuleCallFirstConcrete();
 	}
 	
 	protected Solution createSolution() {
@@ -1197,7 +1199,7 @@ protected class AbstractChild_1_RuleCall_SecondConcrete extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.6/@alternatives/@groups.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChild().ele1ParserRuleCallSecondConcrete();
 	}
 	
 	protected Solution createSolution() {
@@ -1212,12 +1214,12 @@ protected class AbstractChild_1_RuleCall_SecondConcrete extends RuleCallToken {
 
 /************ begin Rule FirstConcrete ****************
  *
- * FirstConcrete : '->' 'F' '(' value = Named ( referencedContainer = [ partialParserTestLanguage :: Container ] ) ? ')' ;
+ * (error)
  *
  **/
 
 
-// '->' 'F' '(' value = Named ( referencedContainer = [ partialParserTestLanguage :: Container ] ) ? ')'
+// (error)
 protected class FirstConcrete_Group extends GroupToken {
 	
 	public FirstConcrete_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1225,7 +1227,7 @@ protected class FirstConcrete_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.7/@alternatives");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -1245,7 +1247,7 @@ protected class FirstConcrete_Group extends GroupToken {
 	}
 }
 
-// '->' 'F' '(' value = Named ( referencedContainer = [ partialParserTestLanguage :: Container ] ) ?
+// (error)
 protected class FirstConcrete_0_Group extends GroupToken {
 	
 	public FirstConcrete_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1253,7 +1255,7 @@ protected class FirstConcrete_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1281,7 +1283,7 @@ protected class FirstConcrete_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1309,7 +1311,7 @@ protected class FirstConcrete_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1337,7 +1339,7 @@ protected class FirstConcrete_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele0000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1365,7 +1367,7 @@ protected class FirstConcrete_0_0_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele00000Keyword();
 	}	
 }
 
@@ -1377,7 +1379,7 @@ protected class FirstConcrete_0_0_0_0_1_Keyword_F extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele00001KeywordF();
 	}	
 }
 
@@ -1390,7 +1392,7 @@ protected class FirstConcrete_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele0001Keyword();
 	}	
 }
 
@@ -1403,7 +1405,7 @@ protected class FirstConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele001AssignmentValue();
 	}
 	
 	protected Solution createSolution() {
@@ -1424,7 +1426,7 @@ protected class FirstConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 }
 
 
-// ( referencedContainer = [ partialParserTestLanguage :: Container ] ) ?
+// (error)
 protected class FirstConcrete_0_1_Assignment_referencedContainer extends AssignmentToken  {
 	
 	public FirstConcrete_0_1_Assignment_referencedContainer(IInstanceDescription curr, AbstractToken pred) {
@@ -1432,7 +1434,7 @@ protected class FirstConcrete_0_1_Assignment_referencedContainer extends Assignm
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele01AssignmentReferencedContainer();
 	}
 	
 	protected Solution createSolution() {
@@ -1442,7 +1444,7 @@ protected class FirstConcrete_0_1_Assignment_referencedContainer extends Assignm
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Container")) {
 				type = AssignmentType.CR;
-				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+				element = PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele010CrossReferenceContainer(); 
 				return new Solution(obj);
 			}
 		}
@@ -1459,7 +1461,7 @@ protected class FirstConcrete_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele1Keyword();
 	}	
 }
 
@@ -1468,12 +1470,12 @@ protected class FirstConcrete_1_Keyword extends KeywordToken  {
 
 /************ begin Rule SecondConcrete ****************
  *
- * SecondConcrete : '->' 'F' 'S' '(' value = Named ( referencedChildren += [ partialParserTestLanguage :: Child ] ) ? ')' ;
+ * (error)
  *
  **/
 
 
-// '->' 'F' 'S' '(' value = Named ( referencedChildren += [ partialParserTestLanguage :: Child ] ) ? ')'
+// (error)
 protected class SecondConcrete_Group extends GroupToken {
 	
 	public SecondConcrete_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1481,7 +1483,7 @@ protected class SecondConcrete_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -1501,7 +1503,7 @@ protected class SecondConcrete_Group extends GroupToken {
 	}
 }
 
-// '->' 'F' 'S' '(' value = Named ( referencedChildren += [ partialParserTestLanguage :: Child ] ) ?
+// (error)
 protected class SecondConcrete_0_Group extends GroupToken {
 	
 	public SecondConcrete_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1509,7 +1511,7 @@ protected class SecondConcrete_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1537,7 +1539,7 @@ protected class SecondConcrete_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1565,7 +1567,7 @@ protected class SecondConcrete_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1593,7 +1595,7 @@ protected class SecondConcrete_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele0000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1621,7 +1623,7 @@ protected class SecondConcrete_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele00000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1649,7 +1651,7 @@ protected class SecondConcrete_0_0_0_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele000000Keyword();
 	}	
 }
 
@@ -1661,7 +1663,7 @@ protected class SecondConcrete_0_0_0_0_0_1_Keyword_F extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele000001KeywordF();
 	}	
 }
 
@@ -1674,7 +1676,7 @@ protected class SecondConcrete_0_0_0_0_1_Keyword_S extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele00001KeywordS();
 	}	
 }
 
@@ -1687,7 +1689,7 @@ protected class SecondConcrete_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele0001Keyword();
 	}	
 }
 
@@ -1700,7 +1702,7 @@ protected class SecondConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele001AssignmentValue();
 	}
 	
 	protected Solution createSolution() {
@@ -1721,7 +1723,7 @@ protected class SecondConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 }
 
 
-// ( referencedChildren += [ partialParserTestLanguage :: Child ] ) ?
+// (error)
 protected class SecondConcrete_0_1_Assignment_referencedChildren extends AssignmentToken  {
 	
 	public SecondConcrete_0_1_Assignment_referencedChildren(IInstanceDescription curr, AbstractToken pred) {
@@ -1729,7 +1731,7 @@ protected class SecondConcrete_0_1_Assignment_referencedChildren extends Assignm
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele01AssignmentReferencedChildren();
 	}
 	
 	protected Solution createSolution() {
@@ -1739,7 +1741,7 @@ protected class SecondConcrete_0_1_Assignment_referencedChildren extends Assignm
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Child")) {
 				type = AssignmentType.CR;
-				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+				element = PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele010CrossReferenceChild(); 
 				return new Solution(obj);
 			}
 		}
@@ -1756,7 +1758,7 @@ protected class SecondConcrete_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.1");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele1Keyword();
 	}	
 }
 
@@ -1778,7 +1780,7 @@ protected class Named_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.9/@alternatives");
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNamed().eleAssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -1786,7 +1788,7 @@ protected class Named_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.9/@alternatives/@terminal"); 
+			element = PartialParserTestLanguageGrammarAccess.INSTANCE.prNamed().ele0LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;

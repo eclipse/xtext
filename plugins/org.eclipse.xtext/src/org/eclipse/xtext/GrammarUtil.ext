@@ -60,6 +60,9 @@ List[Assignment] containedAssignments(emf::EObject o) :
 	
 List[Keyword] containedKeywords(emf::EObject o) :
 	JAVA org.eclipse.xtext.GrammarUtil.containedKeywords(org.eclipse.emf.ecore.EObject);
+	
+List[AbstractElement] containedAbstractElements(emf::EObject o) :
+	JAVA org.eclipse.xtext.GrammarUtil.containedAbstractElements(org.eclipse.emf.ecore.EObject);
 
 
 // ***********************************************************************************

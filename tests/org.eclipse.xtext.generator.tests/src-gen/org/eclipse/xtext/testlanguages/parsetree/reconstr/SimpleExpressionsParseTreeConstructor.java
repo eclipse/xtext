@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.testlanguages.services.SimpleExpressionsGrammarAccess;
 
 
 public class SimpleExpressionsParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -33,12 +35,12 @@ public class SimpleExpressionsParseTreeConstructor extends AbstractParseTreeCons
 	
 /************ begin Rule Sequence ****************
  *
- * Sequence : Addition ( { current = simpleExpressions :: Sequence . expressions += current } expressions += Addition ) * ;
+ * (error)
  *
  **/
 
 
-// Addition ( { current = simpleExpressions :: Sequence . expressions += current } expressions += Addition ) *
+// (error)
 protected class Sequence_Group extends GroupToken {
 	
 	public Sequence_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -46,7 +48,7 @@ protected class Sequence_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.0/@alternatives");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prSequence().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -74,7 +76,7 @@ protected class Sequence_0_RuleCall_Addition extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.0/@alternatives/@abstractTokens.0");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prSequence().ele0ParserRuleCallAddition();
 	}
 	
 	protected Solution createSolution() {
@@ -84,7 +86,7 @@ protected class Sequence_0_RuleCall_Addition extends RuleCallToken {
 	}
 }
 
-// ( { current = simpleExpressions :: Sequence . expressions += current } expressions += Addition ) *
+// (error)
 protected class Sequence_1_Group extends GroupToken {
 	
 	public Sequence_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -92,7 +94,7 @@ protected class Sequence_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.0/@alternatives/@abstractTokens.1");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prSequence().ele1Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -112,7 +114,7 @@ protected class Sequence_1_Group extends GroupToken {
 	}
 }
 
-// { current = simpleExpressions :: Sequence . expressions += current }
+// (error)
 protected class Sequence_1_0_Action_Sequence_expressions extends ActionToken  {
 
 	public Sequence_1_0_Action_Sequence_expressions(IInstanceDescription curr, AbstractToken pred) {
@@ -120,7 +122,7 @@ protected class Sequence_1_0_Action_Sequence_expressions extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.0/@alternatives/@abstractTokens.1/@abstractTokens.0");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prSequence().ele10ActionSequenceexpressions();
 	}
 	
 	protected Solution createSolution() {
@@ -140,7 +142,7 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.0/@alternatives/@abstractTokens.1/@abstractTokens.1");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prSequence().ele11AssignmentExpressions();
 	}
 	
 	protected Solution createSolution() {
@@ -166,12 +168,12 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 
 /************ begin Rule Addition ****************
  *
- * Addition returns simpleExpressions :: Expression : Multiplication ( { current = simpleExpressions :: Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) * ;
+ * (error)
  *
  **/
 
 
-// Multiplication ( { current = simpleExpressions :: Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
+// (error)
 protected class Addition_Group extends GroupToken {
 	
 	public Addition_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -179,7 +181,7 @@ protected class Addition_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prAddition().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -207,7 +209,7 @@ protected class Addition_0_RuleCall_Multiplication extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.0");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prAddition().ele0ParserRuleCallMultiplication();
 	}
 	
 	protected Solution createSolution() {
@@ -217,7 +219,7 @@ protected class Addition_0_RuleCall_Multiplication extends RuleCallToken {
 	}
 }
 
-// ( { current = simpleExpressions :: Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
+// (error)
 protected class Addition_1_Group extends GroupToken {
 	
 	public Addition_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -225,7 +227,7 @@ protected class Addition_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prAddition().ele1Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -245,7 +247,7 @@ protected class Addition_1_Group extends GroupToken {
 	}
 }
 
-// { current = simpleExpressions :: Op . values += current } operator = ( '+' | '-' )
+// (error)
 protected class Addition_1_0_Group extends GroupToken {
 	
 	public Addition_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -253,7 +255,7 @@ protected class Addition_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prAddition().ele10Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -273,7 +275,7 @@ protected class Addition_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = simpleExpressions :: Op . values += current }
+// (error)
 protected class Addition_1_0_0_Action_Op_values extends ActionToken  {
 
 	public Addition_1_0_0_Action_Op_values(IInstanceDescription curr, AbstractToken pred) {
@@ -281,7 +283,7 @@ protected class Addition_1_0_0_Action_Op_values extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prAddition().ele100ActionOpvalues();
 	}
 	
 	protected Solution createSolution() {
@@ -301,7 +303,7 @@ protected class Addition_1_0_1_Assignment_operator extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prAddition().ele101AssignmentOperator();
 	}
 	
 	protected Solution createSolution() {
@@ -309,12 +311,12 @@ protected class Addition_1_0_1_Assignment_operator extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("operator");
 		if("+".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0");
+			element = SimpleExpressionsGrammarAccess.INSTANCE.prAddition().ele10100Keyword();
 			return new Solution(obj);
 		}
 		if("-".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1");
+			element = SimpleExpressionsGrammarAccess.INSTANCE.prAddition().ele10101Keyword();
 			return new Solution(obj);
 		}
 		return null;
@@ -330,7 +332,7 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.1");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prAddition().ele11AssignmentValues();
 	}
 	
 	protected Solution createSolution() {
@@ -356,12 +358,12 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 
 /************ begin Rule Multiplication ****************
  *
- * Multiplication returns simpleExpressions :: Expression : Term ( { current = simpleExpressions :: Op . values += current } operator = ( '*' | '/' ) values += Term ) * ;
+ * (error)
  *
  **/
 
 
-// Term ( { current = simpleExpressions :: Op . values += current } operator = ( '*' | '/' ) values += Term ) *
+// (error)
 protected class Multiplication_Group extends GroupToken {
 	
 	public Multiplication_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -369,7 +371,7 @@ protected class Multiplication_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prMultiplication().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -397,7 +399,7 @@ protected class Multiplication_0_RuleCall_Term extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.0");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prMultiplication().ele0ParserRuleCallTerm();
 	}
 	
 	protected Solution createSolution() {
@@ -407,7 +409,7 @@ protected class Multiplication_0_RuleCall_Term extends RuleCallToken {
 	}
 }
 
-// ( { current = simpleExpressions :: Op . values += current } operator = ( '*' | '/' ) values += Term ) *
+// (error)
 protected class Multiplication_1_Group extends GroupToken {
 	
 	public Multiplication_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -415,7 +417,7 @@ protected class Multiplication_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prMultiplication().ele1Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -435,7 +437,7 @@ protected class Multiplication_1_Group extends GroupToken {
 	}
 }
 
-// { current = simpleExpressions :: Op . values += current } operator = ( '*' | '/' )
+// (error)
 protected class Multiplication_1_0_Group extends GroupToken {
 	
 	public Multiplication_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -443,7 +445,7 @@ protected class Multiplication_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prMultiplication().ele10Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -463,7 +465,7 @@ protected class Multiplication_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = simpleExpressions :: Op . values += current }
+// (error)
 protected class Multiplication_1_0_0_Action_Op_values extends ActionToken  {
 
 	public Multiplication_1_0_0_Action_Op_values(IInstanceDescription curr, AbstractToken pred) {
@@ -471,7 +473,7 @@ protected class Multiplication_1_0_0_Action_Op_values extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prMultiplication().ele100ActionOpvalues();
 	}
 	
 	protected Solution createSolution() {
@@ -491,7 +493,7 @@ protected class Multiplication_1_0_1_Assignment_operator extends AssignmentToken
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prMultiplication().ele101AssignmentOperator();
 	}
 	
 	protected Solution createSolution() {
@@ -499,12 +501,12 @@ protected class Multiplication_1_0_1_Assignment_operator extends AssignmentToken
 		IInstanceDescription obj = current.cloneAndConsume("operator");
 		if("*".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0");
+			element = SimpleExpressionsGrammarAccess.INSTANCE.prMultiplication().ele10100Keyword();
 			return new Solution(obj);
 		}
 		if("/".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1");
+			element = SimpleExpressionsGrammarAccess.INSTANCE.prMultiplication().ele10101Keyword();
 			return new Solution(obj);
 		}
 		return null;
@@ -520,7 +522,7 @@ protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.2/@alternatives/@abstractTokens.1/@abstractTokens.1");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prMultiplication().ele11AssignmentValues();
 	}
 	
 	protected Solution createSolution() {
@@ -546,7 +548,7 @@ protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 
 /************ begin Rule Term ****************
  *
- * Term returns simpleExpressions :: Expression : Atom | Parens ;
+ * (error)
  *
  **/
 
@@ -559,7 +561,7 @@ protected class Term_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.3/@alternatives");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prTerm().eleAlternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -580,7 +582,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.3/@alternatives/@groups.0");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prTerm().ele0ParserRuleCallAtom();
 	}
 	
 	protected Solution createSolution() {
@@ -598,7 +600,7 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.3/@alternatives/@groups.1");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prTerm().ele1ParserRuleCallParens();
 	}
 	
 	protected Solution createSolution() {
@@ -626,7 +628,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.4/@alternatives");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prAtom().eleAssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -634,7 +636,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.4/@alternatives/@terminal"); 
+			element = SimpleExpressionsGrammarAccess.INSTANCE.prAtom().ele0LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -645,7 +647,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * Parens returns simpleExpressions :: Expression : '(' Addition ')' ;
+ * (error)
  *
  **/
 
@@ -658,7 +660,7 @@ protected class Parens_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5/@alternatives");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prParens().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -686,7 +688,7 @@ protected class Parens_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5/@alternatives/@abstractTokens.0");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prParens().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -714,7 +716,7 @@ protected class Parens_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prParens().ele00Keyword();
 	}	
 }
 
@@ -726,7 +728,7 @@ protected class Parens_0_1_RuleCall_Addition extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prParens().ele01ParserRuleCallAddition();
 	}
 	
 	protected Solution createSolution() {
@@ -745,7 +747,7 @@ protected class Parens_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressions.xmi#//@rules.5/@alternatives/@abstractTokens.1");
+		return SimpleExpressionsGrammarAccess.INSTANCE.prParens().ele1Keyword();
 	}	
 }
 

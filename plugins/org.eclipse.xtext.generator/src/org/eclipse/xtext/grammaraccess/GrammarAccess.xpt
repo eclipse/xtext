@@ -14,6 +14,9 @@
 
 «EXTENSION org::eclipse::xtext::Extensions»
 «EXTENSION org::eclipse::xtext::Properties»
+«EXTENSION org::eclipse::xtext::grammaraccess::GrammarAccess»
+«EXTENSION org::eclipse::xtext::parsetree::reconstr::ParseTreeConstructor»
+«EXTENSION org::eclipse::xtext::GrammarUtil»
 
 «DEFINE root FOR GenService»
 «FILE genClassFQName.toJavaFilePath() SRC_GEN-»
@@ -21,17 +24,21 @@
 «fileHeader()»
 */
 
-package «genClassFQName.toJavaPackage()»;
+package «grammar().gaFQName().toJavaPackage()»;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
+import «grammar().getSuperGrammar().gaFQName()»;
 
-public class «genClassFQName.toSimpleName()» extends BaseEPackageAccess implements IGrammarAccess {
+public class «grammar().gaSimpleName()» extends BaseEPackageAccess implements IGrammarAccess {
+	«EXPAND parseRuleClasses FOREACH grammar().rules.typeSelect(ParserRule)-»
+	
+	public final static «grammar().gaSimpleName()» INSTANCE = new «grammar().gaSimpleName()»();
 
 	private static final String «languageName().toUpperCase()»_GRAMMAR_CP_URI = "«grammarResourceURI(grammar())»";
 	private static Grammar GRAMMAR = null;
-	
+	«EXPAND cache FOREACH grammar().rules-»
+
 	@SuppressWarnings("unused")
 	public synchronized Grammar getGrammar() {	
 		if (GRAMMAR==null) {
@@ -42,21 +49,67 @@ public class «genClassFQName.toSimpleName()» extends BaseEPackageAccess implemen
 		return GRAMMAR;
 	}
 	
-	«EXPAND getter FOREACH grammar().allParserRules()»
-	«EXPAND getter FOREACH grammar().allLexerRules()»
-   
+	public «grammar().getSuperGrammar().gaSimpleName()» getSuperGrammar() {
+		return «grammar().getSuperGrammar().gaSimpleName()».INSTANCE;		
+	}
+
+	«EXPAND getter FOREACH grammar().rules-»
 }
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE getter FOR ParserRule»
-	public ParserRule pr_«name»() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("«objectURI(this)»"),true); 
+
+
+«DEFINE parseRuleClasses FOR ParserRule»
+	public class «gaRuleAccesorClassName()» implements IParserRuleAccess {
+		private ParserRule rule;
+«FOREACH containedAbstractElements() AS e-»
+		private «e.getClassName()» «e.gaElementAccessorLocalVarName()»;
+«ENDFOREACH-»
+		
+		// «grammarFragmentToStr()»
+		public ParserRule getRule() {
+			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(«grammar().eContents.indexOf(this)»)); 
+		}
+«FOREACH containedAbstractElements() AS e»
+		// «e.grammarFragmentToStr()»
+		public «e.getClassName()» «e.gaElementAccessMethodeName()»() {
+			return («e.gaElementAccessorLocalVarName()» != null) ? «e.gaElementAccessorLocalVarName()» : («e.gaElementAccessorLocalVarName()» = «e.loadElementStatement()»); 
+		}
+«ENDFOREACH-»
 	}
 «ENDDEFINE»
 
+	
+
+«DEFINE cache FOR AbstractRule»
+	// FIXME: unknow rule type «metaType»
+«ENDDEFINE»
+
+«DEFINE cache FOR ParserRule-»
+	private static «gaRuleAccesorClassName()» «gaRuleAccessorLocalVarName()»;
+«ENDDEFINE»
+
+«DEFINE cache FOR LexerRule-»
+	private static LexerRule «gaRuleAccessorLocalVarName()»;
+«ENDDEFINE»
+
+
+
+«DEFINE getter FOR AbstractRule»
+	// FIXME: unknow rule type «metaType»
+«ENDDEFINE»
+
+«DEFINE getter FOR ParserRule»
+	// «grammarFragmentToStr()»
+	public «gaRuleAccesorClassName()» «gaRuleAccessMethodName()»() {
+		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = new «gaRuleAccesorClassName()»());
+	} 
+«ENDDEFINE»
+
 «DEFINE getter FOR LexerRule»
-	public LexerRule lr_«name»() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("«objectURI(this)»"),true); 
-	}
+	// «grammarFragmentToStr()»
+	public LexerRule «gaRuleAccessMethodName()»() {
+		return («gaRuleAccessorLocalVarName()» != null) ? «gaRuleAccessorLocalVarName()» : («gaRuleAccessorLocalVarName()» = (LexerRule) getGrammar().eContents().get(«grammar().eContents.indexOf(this)»));
+	} 
 «ENDDEFINE»

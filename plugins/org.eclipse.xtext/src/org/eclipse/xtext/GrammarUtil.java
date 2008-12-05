@@ -118,6 +118,10 @@ public class GrammarUtil {
 	public static List<Keyword> containedKeywords(EObject e) {
 		return getAllContentsOfType(e, Keyword.class);
 	}
+	
+	public static List<AbstractElement> containedAbstractElements(EObject e) {
+		return getAllContentsOfType(e, AbstractElement.class);
+	}
 
 	public static List<CrossReference> containedCrossReferences(EObject e) {
 		return getAllContentsOfType(e, CrossReference.class);
@@ -156,7 +160,7 @@ public class GrammarUtil {
 	public static AbstractRule calledRule(RuleCall ruleCall) {
 		return ruleCall.getRule();
 	}
-
+	
 	public static Grammar getSuperGrammar(Grammar _this) {
 		if (_this == null)
 			throw new NullPointerException("Grammar was null");

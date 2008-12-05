@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
 
 
 public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -32,7 +34,7 @@ public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstruct
 	
 /************ begin Rule EntryRule ****************
  *
- * EntryRule returns TestLang :: Model : ( multiFeature += AbstractRule ) * ;
+ * (error)
  *
  **/
 
@@ -45,7 +47,7 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.0/@alternatives");
+		return TestLanguageGrammarAccess.INSTANCE.prEntryRule().eleAssignmentMultiFeature();
 	}
 	
 	protected Solution createSolution() {
@@ -69,7 +71,7 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 
 /************ begin Rule AbstractRule ****************
  *
- * AbstractRule returns TestLang :: AbstractElement : ChoiceRule | ReducibleRule ;
+ * (error)
  *
  **/
 
@@ -82,7 +84,7 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.1/@alternatives");
+		return TestLanguageGrammarAccess.INSTANCE.prAbstractRule().eleAlternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -103,7 +105,7 @@ protected class AbstractRule_0_RuleCall_ChoiceRule extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.1/@alternatives/@groups.0");
+		return TestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele0ParserRuleCallChoiceRule();
 	}
 	
 	protected Solution createSolution() {
@@ -121,7 +123,7 @@ protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.1/@alternatives/@groups.1");
+		return TestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele1ParserRuleCallReducibleRule();
 	}
 	
 	protected Solution createSolution() {
@@ -136,7 +138,7 @@ protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 
 /************ begin Rule ChoiceRule ****************
  *
- * ChoiceRule returns TestLang :: ChoiceElement : 'choice' ( optionalKeyword ?= 'optional' ) ? name = ID ;
+ * (error)
  *
  **/
 
@@ -149,7 +151,7 @@ protected class ChoiceRule_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives");
+		return TestLanguageGrammarAccess.INSTANCE.prChoiceRule().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -177,7 +179,7 @@ protected class ChoiceRule_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0");
+		return TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -205,7 +207,7 @@ protected class ChoiceRule_0_0_Keyword_choice extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele00KeywordChoice();
 	}	
 }
 
@@ -217,7 +219,7 @@ protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToke
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele01AssignmentOptionalKeyword();
 	}
 	
 	protected Solution createSolution() {
@@ -225,7 +227,7 @@ protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToke
 		IInstanceDescription obj = current.cloneAndConsume("optionalKeyword");
 		if("optional".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+			element = TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele010KeywordOptional();
 			return new Solution(obj);
 		}
 		return null;
@@ -241,7 +243,7 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1");
+		return TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele1AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -249,7 +251,7 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal"); 
+			element = TestLanguageGrammarAccess.INSTANCE.prChoiceRule().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -261,12 +263,12 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule ReducibleRule ****************
  *
- * ReducibleRule returns TestLang :: ReducibleElement : 'reducible' TerminalRule ( { current = TestLang :: ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ? ;
+ * (error)
  *
  **/
 
 
-// 'reducible' TerminalRule ( { current = TestLang :: ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
+// (error)
 protected class ReducibleRule_Group extends GroupToken {
 	
 	public ReducibleRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -274,7 +276,7 @@ protected class ReducibleRule_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives");
+		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -302,7 +304,7 @@ protected class ReducibleRule_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0");
+		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -330,7 +332,7 @@ protected class ReducibleRule_0_0_Keyword_reducible extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele00KeywordReducible();
 	}	
 }
 
@@ -342,7 +344,7 @@ protected class ReducibleRule_0_1_RuleCall_TerminalRule extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele01ParserRuleCallTerminalRule();
 	}
 	
 	protected Solution createSolution() {
@@ -353,7 +355,7 @@ protected class ReducibleRule_0_1_RuleCall_TerminalRule extends RuleCallToken {
 }
 
 
-// ( { current = TestLang :: ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
+// (error)
 protected class ReducibleRule_1_Group extends GroupToken {
 	
 	public ReducibleRule_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -361,7 +363,7 @@ protected class ReducibleRule_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1");
+		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele1Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -381,7 +383,7 @@ protected class ReducibleRule_1_Group extends GroupToken {
 	}
 }
 
-// { current = TestLang :: ReducibleComposite . actionFeature += current }
+// (error)
 protected class ReducibleRule_1_0_Action_ReducibleComposite_actionFeature extends ActionToken  {
 
 	public ReducibleRule_1_0_Action_ReducibleComposite_actionFeature(IInstanceDescription curr, AbstractToken pred) {
@@ -389,7 +391,7 @@ protected class ReducibleRule_1_0_Action_ReducibleComposite_actionFeature extend
 	}
 	
 	public Action getGrammarElement() {
-		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@abstractTokens.0");
+		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele10ActionReducibleCompositeactionFeature();
 	}
 	
 	protected Solution createSolution() {
@@ -409,7 +411,7 @@ protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentTok
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@abstractTokens.1");
+		return TestLanguageGrammarAccess.INSTANCE.prReducibleRule().ele11AssignmentActionFeature();
 	}
 	
 	protected Solution createSolution() {
@@ -435,7 +437,7 @@ protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentTok
 
 /************ begin Rule TerminalRule ****************
  *
- * TerminalRule returns TestLang :: TerminalElement : stringFeature = STRING ;
+ * (error)
  *
  **/
 
@@ -448,7 +450,7 @@ protected class TerminalRule_Assignment_stringFeature extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.4/@alternatives");
+		return TestLanguageGrammarAccess.INSTANCE.prTerminalRule().eleAssignmentStringFeature();
 	}
 	
 	protected Solution createSolution() {
@@ -456,7 +458,7 @@ protected class TerminalRule_Assignment_stringFeature extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("stringFeature");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xmi#//@rules.4/@alternatives/@terminal"); 
+			element = TestLanguageGrammarAccess.INSTANCE.prTerminalRule().ele0LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;

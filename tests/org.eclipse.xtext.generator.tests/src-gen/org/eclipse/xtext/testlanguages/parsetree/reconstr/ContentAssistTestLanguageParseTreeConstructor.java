@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammarAccess;
 
 
 public class ContentAssistTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -45,7 +47,7 @@ protected class Start_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.0/@alternatives");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -73,7 +75,7 @@ protected class Start_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -101,7 +103,7 @@ protected class Start_0_0_Keyword_abstractrules extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart().ele00KeywordAbstractRules();
 	}	
 }
 
@@ -113,7 +115,7 @@ protected class Start_0_1_Assignment_rules extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart().ele01AssignmentRules();
 	}
 	
 	protected Solution createSolution() {
@@ -142,7 +144,7 @@ protected class Start_1_Keyword_end extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prStart().ele1KeywordEnd();
 	}	
 }
 
@@ -164,7 +166,7 @@ protected class AbstractRule_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.1/@alternatives");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRule().eleAlternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -185,7 +187,7 @@ protected class AbstractRule_0_RuleCall_FirstAbstractRuleChild extends RuleCallT
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.1/@alternatives/@groups.0");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele0ParserRuleCallFirstAbstractRuleChild();
 	}
 	
 	protected Solution createSolution() {
@@ -203,7 +205,7 @@ protected class AbstractRule_1_RuleCall_SecondAbstractRuleChild extends RuleCall
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.1/@alternatives/@groups.1");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRule().ele1ParserRuleCallSecondAbstractRuleChild();
 	}
 	
 	protected Solution createSolution() {
@@ -231,7 +233,7 @@ protected class FirstAbstractRuleChild_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.2/@alternatives");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -259,7 +261,7 @@ protected class FirstAbstractRuleChild_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -287,7 +289,7 @@ protected class FirstAbstractRuleChild_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -315,7 +317,7 @@ protected class FirstAbstractRuleChild_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -343,7 +345,7 @@ protected class FirstAbstractRuleChild_0_0_0_0_Assignment_name extends Assignmen
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele0000AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -351,7 +353,7 @@ protected class FirstAbstractRuleChild_0_0_0_0_Assignment_name extends Assignmen
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"); 
+			element = ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele00000LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -366,7 +368,7 @@ protected class FirstAbstractRuleChild_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele0001Keyword();
 	}	
 }
 
@@ -379,7 +381,7 @@ protected class FirstAbstractRuleChild_0_0_1_Assignment_elements extends Assignm
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele001AssignmentElements();
 	}
 	
 	protected Solution createSolution() {
@@ -408,7 +410,7 @@ protected class FirstAbstractRuleChild_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele01Keyword();
 	}	
 }
 
@@ -421,7 +423,7 @@ protected class FirstAbstractRuleChild_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele1Keyword();
 	}	
 }
 
@@ -443,7 +445,7 @@ protected class SecondAbstractRuleChild_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.3/@alternatives");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -471,7 +473,7 @@ protected class SecondAbstractRuleChild_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -499,7 +501,7 @@ protected class SecondAbstractRuleChild_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -527,7 +529,7 @@ protected class SecondAbstractRuleChild_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -555,7 +557,7 @@ protected class SecondAbstractRuleChild_0_0_0_0_Assignment_name extends Assignme
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele0000AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -563,7 +565,7 @@ protected class SecondAbstractRuleChild_0_0_0_0_Assignment_name extends Assignme
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"); 
+			element = ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele00000LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -578,7 +580,7 @@ protected class SecondAbstractRuleChild_0_0_0_1_Keyword_rule extends KeywordToke
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele0001KeywordRule();
 	}	
 }
 
@@ -591,7 +593,7 @@ protected class SecondAbstractRuleChild_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele001Keyword();
 	}	
 }
 
@@ -604,7 +606,7 @@ protected class SecondAbstractRuleChild_0_1_Assignment_rule extends AssignmentTo
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele01AssignmentRule();
 	}
 	
 	protected Solution createSolution() {
@@ -633,7 +635,7 @@ protected class SecondAbstractRuleChild_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele1Keyword();
 	}	
 }
 
@@ -642,12 +644,12 @@ protected class SecondAbstractRuleChild_1_Keyword extends KeywordToken  {
 
 /************ begin Rule AbstractRuleCall ****************
  *
- * AbstractRuleCall : rule = [ contentAssistTestLanguage :: AbstractRule ] ;
+ * (error)
  *
  **/
 
 
-// rule = [ contentAssistTestLanguage :: AbstractRule ]
+// (error)
 protected class AbstractRuleCall_Assignment_rule extends AssignmentToken  {
 	
 	public AbstractRuleCall_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
@@ -655,7 +657,7 @@ protected class AbstractRuleCall_Assignment_rule extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.4/@alternatives");
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRuleCall().eleAssignmentRule();
 	}
 	
 	protected Solution createSolution() {
@@ -665,7 +667,7 @@ protected class AbstractRuleCall_Assignment_rule extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractRule")) {
 				type = AssignmentType.CR;
-				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.xmi#//@rules.4/@alternatives/@terminal"); 
+				element = ContentAssistTestLanguageGrammarAccess.INSTANCE.prAbstractRuleCall().ele0CrossReferenceAbstractRule(); 
 				return new Solution(obj);
 			}
 		}

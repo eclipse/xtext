@@ -4,15 +4,73 @@ Generated with Xtext
 
 package org.eclipse.xtext.testlanguages.services;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
 public class OptionalEmptyLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+	
+	public class ModelElements implements IParserRuleAccess {
+		private ParserRule rule;
+		private Assignment cAssignmentChild;
+		private RuleCall c0ParserRuleCallGreeting;
+		
+		// Model : ( child = Greeting ) ? ;
+		public ParserRule getRule() {
+			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(1)); 
+		}
+
+		// ( child = Greeting ) ?
+		public Assignment eleAssignmentChild() {
+			return (cAssignmentChild != null) ? cAssignmentChild : (cAssignmentChild = (Assignment)getRule().eContents().get(0)); 
+		}
+
+		// Greeting
+		public RuleCall ele0ParserRuleCallGreeting() {
+			return (c0ParserRuleCallGreeting != null) ? c0ParserRuleCallGreeting : (c0ParserRuleCallGreeting = (RuleCall)eleAssignmentChild().eContents().get(0)); 
+		}
+	}
+
+	public class GreetingElements implements IParserRuleAccess {
+		private ParserRule rule;
+		private Group cGroup;
+		private Keyword c0KeywordHallo;
+		private Assignment c1AssignmentName;
+		private RuleCall c10LexerRuleCallID;
+		
+		// Greeting : 'hallo' name = ID ;
+		public ParserRule getRule() {
+			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
+		}
+
+		// 'hallo' name = ID
+		public Group eleGroup() {
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+		}
+
+		// 'hallo'
+		public Keyword ele0KeywordHallo() {
+			return (c0KeywordHallo != null) ? c0KeywordHallo : (c0KeywordHallo = (Keyword)eleGroup().eContents().get(0)); 
+		}
+
+		// name = ID
+		public Assignment ele1AssignmentName() {
+			return (c1AssignmentName != null) ? c1AssignmentName : (c1AssignmentName = (Assignment)eleGroup().eContents().get(1)); 
+		}
+
+		// ID
+		public RuleCall ele10LexerRuleCallID() {
+			return (c10LexerRuleCallID != null) ? c10LexerRuleCallID : (c10LexerRuleCallID = (RuleCall)ele1AssignmentName().eContents().get(0)); 
+		}
+	}
+	
+	public final static OptionalEmptyLanguageGrammarAccess INSTANCE = new OptionalEmptyLanguageGrammarAccess();
 
 	private static final String OPTIONALEMPTYLANGUAGE_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi";
 	private static Grammar GRAMMAR = null;
-	
+	private static ModelElements pModel;
+	private static GreetingElements pGreeting;
+
 	@SuppressWarnings("unused")
 	public synchronized Grammar getGrammar() {	
 		if (GRAMMAR==null) {
@@ -23,43 +81,18 @@ public class OptionalEmptyLanguageGrammarAccess extends BaseEPackageAccess imple
 		return GRAMMAR;
 	}
 	
-	
-	public ParserRule pr_Model() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.0"),true); 
-	}
-
-	public ParserRule pr_Greeting() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyLanguage.xmi#//@rules.1"),true); 
+	public XtextBuiltinGrammarAccess getSuperGrammar() {
+		return XtextBuiltinGrammarAccess.INSTANCE;		
 	}
 
 	
-	public LexerRule lr_ID() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"),true); 
-	}
+	// Model : ( child = Greeting ) ? ;
+	public ModelElements prModel() {
+		return (pModel != null) ? pModel : (pModel = new ModelElements());
+	} 
 
-	public LexerRule lr_INT() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"),true); 
-	}
-
-	public LexerRule lr_STRING() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.2"),true); 
-	}
-
-	public LexerRule lr_ML_COMMENT() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.3"),true); 
-	}
-
-	public LexerRule lr_SL_COMMENT() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.4"),true); 
-	}
-
-	public LexerRule lr_WS() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.5"),true); 
-	}
-
-	public LexerRule lr_ANY_OTHER() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.6"),true); 
-	}
-
-   
+	// Greeting : 'hallo' name = ID ;
+	public GreetingElements prGreeting() {
+		return (pGreeting != null) ? pGreeting : (pGreeting = new GreetingElements());
+	} 
 }

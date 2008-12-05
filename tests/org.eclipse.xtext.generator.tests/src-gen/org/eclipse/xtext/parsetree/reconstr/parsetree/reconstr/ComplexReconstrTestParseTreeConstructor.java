@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestGrammarAccess;
 
 
 public class ComplexReconstrTestParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -38,12 +40,12 @@ public class ComplexReconstrTestParseTreeConstructor extends AbstractParseTreeCo
 	
 /************ begin Rule Op ****************
  *
- * Op returns complexrewritetest :: Expression : Term ( { current = complexrewritetest :: Add . addOperands += current } '+' addOperands += Term | { current = complexrewritetest :: Minus . minusOperands += current } '-' minusOperands += Term ) * ;
+ * (error)
  *
  **/
 
 
-// Term ( { current = complexrewritetest :: Add . addOperands += current } '+' addOperands += Term | { current = complexrewritetest :: Minus . minusOperands += current } '-' minusOperands += Term ) *
+// (error)
 protected class Op_Group extends GroupToken {
 	
 	public Op_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -51,7 +53,7 @@ protected class Op_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prOp().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -79,7 +81,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prOp().ele0ParserRuleCallTerm();
 	}
 	
 	protected Solution createSolution() {
@@ -89,7 +91,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 	}
 }
 
-// ( { current = complexrewritetest :: Add . addOperands += current } '+' addOperands += Term | { current = complexrewritetest :: Minus . minusOperands += current } '-' minusOperands += Term ) *
+// (error)
 protected class Op_1_Alternatives extends AlternativesToken {
 
 	public Op_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -97,7 +99,7 @@ protected class Op_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prOp().ele1Alternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -110,7 +112,7 @@ protected class Op_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// { current = complexrewritetest :: Add . addOperands += current } '+' addOperands += Term
+// (error)
 protected class Op_1_0_Group extends GroupToken {
 	
 	public Op_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -118,7 +120,7 @@ protected class Op_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prOp().ele10Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -138,7 +140,7 @@ protected class Op_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = complexrewritetest :: Add . addOperands += current } '+'
+// (error)
 protected class Op_1_0_0_Group extends GroupToken {
 	
 	public Op_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -146,7 +148,7 @@ protected class Op_1_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prOp().ele100Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -166,7 +168,7 @@ protected class Op_1_0_0_Group extends GroupToken {
 	}
 }
 
-// { current = complexrewritetest :: Add . addOperands += current }
+// (error)
 protected class Op_1_0_0_0_Action_Add_addOperands extends ActionToken  {
 
 	public Op_1_0_0_0_Action_Add_addOperands(IInstanceDescription curr, AbstractToken pred) {
@@ -174,7 +176,7 @@ protected class Op_1_0_0_0_Action_Add_addOperands extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prOp().ele1000ActionAddaddOperands();
 	}
 	
 	protected Solution createSolution() {
@@ -194,7 +196,7 @@ protected class Op_1_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prOp().ele1001Keyword();
 	}	
 }
 
@@ -207,7 +209,7 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prOp().ele101AssignmentAddOperands();
 	}
 	
 	protected Solution createSolution() {
@@ -228,7 +230,7 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 }
 
 
-// { current = complexrewritetest :: Minus . minusOperands += current } '-' minusOperands += Term
+// (error)
 protected class Op_1_1_Group extends GroupToken {
 	
 	public Op_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -236,7 +238,7 @@ protected class Op_1_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prOp().ele11Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -256,7 +258,7 @@ protected class Op_1_1_Group extends GroupToken {
 	}
 }
 
-// { current = complexrewritetest :: Minus . minusOperands += current } '-'
+// (error)
 protected class Op_1_1_0_Group extends GroupToken {
 	
 	public Op_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -264,7 +266,7 @@ protected class Op_1_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prOp().ele110Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -284,7 +286,7 @@ protected class Op_1_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = complexrewritetest :: Minus . minusOperands += current }
+// (error)
 protected class Op_1_1_0_0_Action_Minus_minusOperands extends ActionToken  {
 
 	public Op_1_1_0_0_Action_Minus_minusOperands(IInstanceDescription curr, AbstractToken pred) {
@@ -292,7 +294,7 @@ protected class Op_1_1_0_0_Action_Minus_minusOperands extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prOp().ele1100ActionMinusminusOperands();
 	}
 	
 	protected Solution createSolution() {
@@ -312,7 +314,7 @@ protected class Op_1_1_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prOp().ele1101Keyword();
 	}	
 }
 
@@ -325,7 +327,7 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.0/@alternatives/@abstractTokens.1/@groups.1/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prOp().ele111AssignmentMinusOperands();
 	}
 	
 	protected Solution createSolution() {
@@ -352,7 +354,7 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 
 /************ begin Rule Term ****************
  *
- * Term returns complexrewritetest :: Expression : Atom | Parens ;
+ * (error)
  *
  **/
 
@@ -365,7 +367,7 @@ protected class Term_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.1/@alternatives");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTerm().eleAlternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -386,7 +388,7 @@ protected class Term_0_RuleCall_Atom extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.1/@alternatives/@groups.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTerm().ele0ParserRuleCallAtom();
 	}
 	
 	protected Solution createSolution() {
@@ -404,7 +406,7 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.1/@alternatives/@groups.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTerm().ele1ParserRuleCallParens();
 	}
 	
 	protected Solution createSolution() {
@@ -432,7 +434,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.2/@alternatives");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prAtom().eleAssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -440,7 +442,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.2/@alternatives/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prAtom().ele0LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -451,7 +453,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * Parens returns complexrewritetest :: Expression : '(' Op ')' ( em = '!' ) ? ;
+ * (error)
  *
  **/
 
@@ -464,7 +466,7 @@ protected class Parens_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prParens().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -492,7 +494,7 @@ protected class Parens_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prParens().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -520,7 +522,7 @@ protected class Parens_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prParens().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -548,7 +550,7 @@ protected class Parens_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prParens().ele000Keyword();
 	}	
 }
 
@@ -560,7 +562,7 @@ protected class Parens_0_0_1_RuleCall_Op extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prParens().ele001ParserRuleCallOp();
 	}
 	
 	protected Solution createSolution() {
@@ -579,7 +581,7 @@ protected class Parens_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prParens().ele01Keyword();
 	}	
 }
 
@@ -592,7 +594,7 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prParens().ele1AssignmentEm();
 	}
 	
 	protected Solution createSolution() {
@@ -600,7 +602,7 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("em");
 		if("!".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal");
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prParens().ele10Keyword();
 			return new Solution(obj);
 		}
 		return null;
@@ -612,12 +614,12 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 
 /************ begin Rule TrickyA ****************
  *
- * TrickyA returns complexrewritetest :: TypeA1 : 'TA' TrickyA1 ( name += ID ) * ( { current = complexrewritetest :: TypeB . x = current } 'x' | { current = complexrewritetest :: TypeC . x = current } 'y' ) ? name += STRING ;
+ * (error)
  *
  **/
 
 
-// 'TA' TrickyA1 ( name += ID ) * ( { current = complexrewritetest :: TypeB . x = current } 'x' | { current = complexrewritetest :: TypeC . x = current } 'y' ) ? name += STRING
+// (error)
 protected class TrickyA_Group extends GroupToken {
 	
 	public TrickyA_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -625,7 +627,7 @@ protected class TrickyA_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -645,7 +647,7 @@ protected class TrickyA_Group extends GroupToken {
 	}
 }
 
-// 'TA' TrickyA1 ( name += ID ) * ( { current = complexrewritetest :: TypeB . x = current } 'x' | { current = complexrewritetest :: TypeC . x = current } 'y' ) ?
+// (error)
 protected class TrickyA_0_Group extends GroupToken {
 	
 	public TrickyA_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -653,7 +655,7 @@ protected class TrickyA_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -681,7 +683,7 @@ protected class TrickyA_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -709,7 +711,7 @@ protected class TrickyA_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -737,7 +739,7 @@ protected class TrickyA_0_0_0_0_Keyword_TA extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele0000KeywordTA();
 	}	
 }
 
@@ -749,7 +751,7 @@ protected class TrickyA_0_0_0_1_RuleCall_TrickyA1 extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele0001ParserRuleCallTrickyA1();
 	}
 	
 	protected Solution createSolution() {
@@ -768,7 +770,7 @@ protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele001AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -776,7 +778,7 @@ protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele0010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -784,7 +786,7 @@ protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( { current = complexrewritetest :: TypeB . x = current } 'x' | { current = complexrewritetest :: TypeC . x = current } 'y' ) ?
+// (error)
 protected class TrickyA_0_1_Alternatives extends AlternativesToken {
 
 	public TrickyA_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -792,7 +794,7 @@ protected class TrickyA_0_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele01Alternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -805,7 +807,7 @@ protected class TrickyA_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// { current = complexrewritetest :: TypeB . x = current } 'x'
+// (error)
 protected class TrickyA_0_1_0_Group extends GroupToken {
 	
 	public TrickyA_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -813,7 +815,7 @@ protected class TrickyA_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele010Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -833,7 +835,7 @@ protected class TrickyA_0_1_0_Group extends GroupToken {
 	}
 }
 
-// { current = complexrewritetest :: TypeB . x = current }
+// (error)
 protected class TrickyA_0_1_0_0_Action_TypeB_x extends ActionToken  {
 
 	public TrickyA_0_1_0_0_Action_TypeB_x(IInstanceDescription curr, AbstractToken pred) {
@@ -841,7 +843,7 @@ protected class TrickyA_0_1_0_0_Action_TypeB_x extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele0100ActionTypeBx();
 	}
 	
 	protected Solution createSolution() {
@@ -861,12 +863,12 @@ protected class TrickyA_0_1_0_1_Keyword_x extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele0101KeywordX();
 	}	
 }
 
 
-// { current = complexrewritetest :: TypeC . x = current } 'y'
+// (error)
 protected class TrickyA_0_1_1_Group extends GroupToken {
 	
 	public TrickyA_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -874,7 +876,7 @@ protected class TrickyA_0_1_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele011Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -894,7 +896,7 @@ protected class TrickyA_0_1_1_Group extends GroupToken {
 	}
 }
 
-// { current = complexrewritetest :: TypeC . x = current }
+// (error)
 protected class TrickyA_0_1_1_0_Action_TypeC_x extends ActionToken  {
 
 	public TrickyA_0_1_1_0_Action_TypeC_x(IInstanceDescription curr, AbstractToken pred) {
@@ -902,7 +904,7 @@ protected class TrickyA_0_1_1_0_Action_TypeC_x extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele0110ActionTypeCx();
 	}
 	
 	protected Solution createSolution() {
@@ -922,7 +924,7 @@ protected class TrickyA_0_1_1_1_Keyword_y extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele0111KeywordY();
 	}	
 }
 
@@ -937,7 +939,7 @@ protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele1AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -945,7 +947,7 @@ protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.4/@alternatives/@abstractTokens.1/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA().ele10LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -957,7 +959,7 @@ protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule TrickyA1 ****************
  *
- * TrickyA1 returns complexrewritetest :: TypeD : name += ID ;
+ * (error)
  *
  **/
 
@@ -970,7 +972,7 @@ protected class TrickyA1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.5/@alternatives");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA1().eleAssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -978,7 +980,7 @@ protected class TrickyA1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.5/@alternatives/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyA1().ele0LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1002,7 +1004,7 @@ protected class TrickyB_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyB().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -1030,7 +1032,7 @@ protected class TrickyB_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyB().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1058,7 +1060,7 @@ protected class TrickyB_0_0_Keyword_TB extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyB().ele00KeywordTB();
 	}	
 }
 
@@ -1070,7 +1072,7 @@ protected class TrickyB_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyB().ele01Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1098,7 +1100,7 @@ protected class TrickyB_0_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyB().ele010AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -1106,7 +1108,7 @@ protected class TrickyB_0_1_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyB().ele0100LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1121,7 +1123,7 @@ protected class TrickyB_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyB().ele011AssignmentType();
 	}
 	
 	protected Solution createSolution() {
@@ -1129,7 +1131,7 @@ protected class TrickyB_0_1_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyB().ele0110LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -1146,7 +1148,7 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyB().ele1AssignmentType();
 	}
 	
 	protected Solution createSolution() {
@@ -1154,7 +1156,7 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.6/@alternatives/@abstractTokens.1/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyB().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1166,12 +1168,12 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 
 /************ begin Rule TrickyC ****************
  *
- * TrickyC : 'TC' name = ID ( { current = complexrewritetest :: C1 . x = current } 'x' ) ? ( { current = complexrewritetest :: C2 . y = current } 'y' ) ? ( { current = complexrewritetest :: C3 . z = current } 'z' ) ? ;
+ * (error)
  *
  **/
 
 
-// 'TC' name = ID ( { current = complexrewritetest :: C1 . x = current } 'x' ) ? ( { current = complexrewritetest :: C2 . y = current } 'y' ) ? ( { current = complexrewritetest :: C3 . z = current } 'z' ) ?
+// (error)
 protected class TrickyC_Group extends GroupToken {
 	
 	public TrickyC_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1179,7 +1181,7 @@ protected class TrickyC_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -1199,7 +1201,7 @@ protected class TrickyC_Group extends GroupToken {
 	}
 }
 
-// 'TC' name = ID ( { current = complexrewritetest :: C1 . x = current } 'x' ) ? ( { current = complexrewritetest :: C2 . y = current } 'y' ) ?
+// (error)
 protected class TrickyC_0_Group extends GroupToken {
 	
 	public TrickyC_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1207,7 +1209,7 @@ protected class TrickyC_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1227,7 +1229,7 @@ protected class TrickyC_0_Group extends GroupToken {
 	}
 }
 
-// 'TC' name = ID ( { current = complexrewritetest :: C1 . x = current } 'x' ) ?
+// (error)
 protected class TrickyC_0_0_Group extends GroupToken {
 	
 	public TrickyC_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1235,7 +1237,7 @@ protected class TrickyC_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1263,7 +1265,7 @@ protected class TrickyC_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1291,7 +1293,7 @@ protected class TrickyC_0_0_0_0_Keyword_TC extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele0000KeywordTC();
 	}	
 }
 
@@ -1303,7 +1305,7 @@ protected class TrickyC_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele0001AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -1311,7 +1313,7 @@ protected class TrickyC_0_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele00010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1319,7 +1321,7 @@ protected class TrickyC_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( { current = complexrewritetest :: C1 . x = current } 'x' ) ?
+// (error)
 protected class TrickyC_0_0_1_Group extends GroupToken {
 	
 	public TrickyC_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1327,7 +1329,7 @@ protected class TrickyC_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele001Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1347,7 +1349,7 @@ protected class TrickyC_0_0_1_Group extends GroupToken {
 	}
 }
 
-// { current = complexrewritetest :: C1 . x = current }
+// (error)
 protected class TrickyC_0_0_1_0_Action_C1_x extends ActionToken  {
 
 	public TrickyC_0_0_1_0_Action_C1_x(IInstanceDescription curr, AbstractToken pred) {
@@ -1355,7 +1357,7 @@ protected class TrickyC_0_0_1_0_Action_C1_x extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele0010ActionC1x();
 	}
 	
 	protected Solution createSolution() {
@@ -1375,13 +1377,13 @@ protected class TrickyC_0_0_1_1_Keyword_x extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele0011KeywordX();
 	}	
 }
 
 
 
-// ( { current = complexrewritetest :: C2 . y = current } 'y' ) ?
+// (error)
 protected class TrickyC_0_1_Group extends GroupToken {
 	
 	public TrickyC_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1389,7 +1391,7 @@ protected class TrickyC_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele01Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1409,7 +1411,7 @@ protected class TrickyC_0_1_Group extends GroupToken {
 	}
 }
 
-// { current = complexrewritetest :: C2 . y = current }
+// (error)
 protected class TrickyC_0_1_0_Action_C2_y extends ActionToken  {
 
 	public TrickyC_0_1_0_Action_C2_y(IInstanceDescription curr, AbstractToken pred) {
@@ -1417,7 +1419,7 @@ protected class TrickyC_0_1_0_Action_C2_y extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele010ActionC2y();
 	}
 	
 	protected Solution createSolution() {
@@ -1437,13 +1439,13 @@ protected class TrickyC_0_1_1_Keyword_y extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele011KeywordY();
 	}	
 }
 
 
 
-// ( { current = complexrewritetest :: C3 . z = current } 'z' ) ?
+// (error)
 protected class TrickyC_1_Group extends GroupToken {
 	
 	public TrickyC_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1451,7 +1453,7 @@ protected class TrickyC_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele1Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1471,7 +1473,7 @@ protected class TrickyC_1_Group extends GroupToken {
 	}
 }
 
-// { current = complexrewritetest :: C3 . z = current }
+// (error)
 protected class TrickyC_1_0_Action_C3_z extends ActionToken  {
 
 	public TrickyC_1_0_Action_C3_z(IInstanceDescription curr, AbstractToken pred) {
@@ -1479,7 +1481,7 @@ protected class TrickyC_1_0_Action_C3_z extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.1/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele10ActionC3z();
 	}
 	
 	protected Solution createSolution() {
@@ -1499,7 +1501,7 @@ protected class TrickyC_1_1_Keyword_z extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.7/@alternatives/@abstractTokens.1/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyC().ele11KeywordZ();
 	}	
 }
 
@@ -1522,7 +1524,7 @@ protected class TrickyD_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -1550,7 +1552,7 @@ protected class TrickyD_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1578,7 +1580,7 @@ protected class TrickyD_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1606,7 +1608,7 @@ protected class TrickyD_0_0_0_Keyword_TD extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele000KeywordTD();
 	}	
 }
 
@@ -1618,7 +1620,7 @@ protected class TrickyD_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele001Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1646,7 +1648,7 @@ protected class TrickyD_0_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele0010Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1674,7 +1676,7 @@ protected class TrickyD_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele00100AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -1682,7 +1684,7 @@ protected class TrickyD_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele001000LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -1697,7 +1699,7 @@ protected class TrickyD_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele00101AssignmentFoo();
 	}
 	
 	protected Solution createSolution() {
@@ -1705,7 +1707,7 @@ protected class TrickyD_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("foo");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele001010LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -1721,7 +1723,7 @@ protected class TrickyD_0_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele0011AssignmentType();
 	}
 	
 	protected Solution createSolution() {
@@ -1729,7 +1731,7 @@ protected class TrickyD_0_0_1_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele00110LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1746,7 +1748,7 @@ protected class TrickyD_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele01Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1774,7 +1776,7 @@ protected class TrickyD_0_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele010AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -1782,7 +1784,7 @@ protected class TrickyD_0_1_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele0100LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -1797,7 +1799,7 @@ protected class TrickyD_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele011AssignmentType();
 	}
 	
 	protected Solution createSolution() {
@@ -1805,7 +1807,7 @@ protected class TrickyD_0_1_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele0110LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1822,7 +1824,7 @@ protected class TrickyD_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele1AssignmentType();
 	}
 	
 	protected Solution createSolution() {
@@ -1830,7 +1832,7 @@ protected class TrickyD_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.8/@alternatives/@abstractTokens.1/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyD().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1855,7 +1857,7 @@ protected class TrickyE_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -1883,7 +1885,7 @@ protected class TrickyE_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1911,7 +1913,7 @@ protected class TrickyE_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1939,7 +1941,7 @@ protected class TrickyE_0_0_0_Keyword_TE extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele000KeywordTE();
 	}	
 }
 
@@ -1951,7 +1953,7 @@ protected class TrickyE_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele001Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1979,7 +1981,7 @@ protected class TrickyE_0_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele0010Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -2007,7 +2009,7 @@ protected class TrickyE_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele00100AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -2015,7 +2017,7 @@ protected class TrickyE_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele001000LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -2030,7 +2032,7 @@ protected class TrickyE_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele00101AssignmentFoo();
 	}
 	
 	protected Solution createSolution() {
@@ -2038,7 +2040,7 @@ protected class TrickyE_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("foo");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele001010LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -2054,7 +2056,7 @@ protected class TrickyE_0_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele0011AssignmentType();
 	}
 	
 	protected Solution createSolution() {
@@ -2062,7 +2064,7 @@ protected class TrickyE_0_0_1_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele00110LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -2079,7 +2081,7 @@ protected class TrickyE_0_1_Keyword_x extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele01KeywordX();
 	}	
 }
 
@@ -2092,7 +2094,7 @@ protected class TrickyE_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele1Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -2120,7 +2122,7 @@ protected class TrickyE_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele10AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -2128,7 +2130,7 @@ protected class TrickyE_1_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.0/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele100LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -2143,7 +2145,7 @@ protected class TrickyE_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele11AssignmentType();
 	}
 	
 	protected Solution createSolution() {
@@ -2151,7 +2153,7 @@ protected class TrickyE_1_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.9/@alternatives/@abstractTokens.1/@abstractTokens.1/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyE().ele110LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -2177,7 +2179,7 @@ protected class TrickyF_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyF().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -2205,7 +2207,7 @@ protected class TrickyF_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyF().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -2233,7 +2235,7 @@ protected class TrickyF_0_0_Keyword_TF extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyF().ele00KeywordTF();
 	}	
 }
 
@@ -2245,7 +2247,7 @@ protected class TrickyF_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyF().ele01Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -2273,7 +2275,7 @@ protected class TrickyF_0_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyF().ele010AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -2281,7 +2283,7 @@ protected class TrickyF_0_1_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyF().ele0100LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -2296,7 +2298,7 @@ protected class TrickyF_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyF().ele011AssignmentType();
 	}
 	
 	protected Solution createSolution() {
@@ -2304,7 +2306,7 @@ protected class TrickyF_0_1_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyF().ele0110LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -2321,7 +2323,7 @@ protected class TrickyF_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyF().ele1Alternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -2342,7 +2344,7 @@ protected class TrickyF_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.1/@groups.0");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyF().ele10AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -2350,7 +2352,7 @@ protected class TrickyF_1_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.1/@groups.0/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyF().ele100LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -2365,7 +2367,7 @@ protected class TrickyF_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.1/@groups.1");
+		return ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyF().ele11AssignmentType();
 	}
 	
 	protected Solution createSolution() {
@@ -2373,7 +2375,7 @@ protected class TrickyF_1_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi#//@rules.10/@alternatives/@abstractTokens.1/@groups.1/@terminal"); 
+			element = ComplexReconstrTestGrammarAccess.INSTANCE.prTrickyF().ele110LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;

@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 
 
 public class Bug250313ParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -41,7 +43,7 @@ protected class Ref2_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives");
+		return Bug250313GrammarAccess.INSTANCE.prRef2().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -69,7 +71,7 @@ protected class Ref2_0_Keyword_2 extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.0");
+		return Bug250313GrammarAccess.INSTANCE.prRef2().ele0Keyword();
 	}	
 }
 
@@ -81,7 +83,7 @@ protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.1");
+		return Bug250313GrammarAccess.INSTANCE.prRef2().ele1AssignmentRef2();
 	}
 	
 	protected Solution createSolution() {
@@ -89,17 +91,17 @@ protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("ref2");
 		if("mykeyword1".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.0");
+			element = Bug250313GrammarAccess.INSTANCE.prRef2().ele1000KeywordMykeyword1();
 			return new Solution(obj);
 		}
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.0/@groups.1"); 
+			element = Bug250313GrammarAccess.INSTANCE.prRef2().ele1001LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/valueconverter/Bug250313.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal/@groups.1"); 
+			element = Bug250313GrammarAccess.INSTANCE.prRef2().ele101LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;

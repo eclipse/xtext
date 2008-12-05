@@ -4,15 +4,80 @@ Generated with Xtext
 
 package org.eclipse.xtext.testlanguages.services;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
 public class LexerLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+	
+	public class ModelElements implements IParserRuleAccess {
+		private ParserRule rule;
+		private Assignment cAssignmentChildren;
+		private RuleCall c0ParserRuleCallElement;
+		
+		// Model : ( children += Element ) * ;
+		public ParserRule getRule() {
+			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(1)); 
+		}
+
+		// ( children += Element ) *
+		public Assignment eleAssignmentChildren() {
+			return (cAssignmentChildren != null) ? cAssignmentChildren : (cAssignmentChildren = (Assignment)getRule().eContents().get(0)); 
+		}
+
+		// Element
+		public RuleCall ele0ParserRuleCallElement() {
+			return (c0ParserRuleCallElement != null) ? c0ParserRuleCallElement : (c0ParserRuleCallElement = (RuleCall)eleAssignmentChildren().eContents().get(0)); 
+		}
+	}
+
+	public class ElementElements implements IParserRuleAccess {
+		private ParserRule rule;
+		private Group cGroup;
+		private Assignment c0AssignmentName;
+		private RuleCall c00LexerRuleCallID;
+		private Assignment c1AssignmentH;
+		private RuleCall c10LexerRuleCallSTRING;
+		
+		// Element : name = ID h = STRING ;
+		public ParserRule getRule() {
+			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
+		}
+
+		// name = ID h = STRING
+		public Group eleGroup() {
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+		}
+
+		// name = ID
+		public Assignment ele0AssignmentName() {
+			return (c0AssignmentName != null) ? c0AssignmentName : (c0AssignmentName = (Assignment)eleGroup().eContents().get(0)); 
+		}
+
+		// ID
+		public RuleCall ele00LexerRuleCallID() {
+			return (c00LexerRuleCallID != null) ? c00LexerRuleCallID : (c00LexerRuleCallID = (RuleCall)ele0AssignmentName().eContents().get(0)); 
+		}
+
+		// h = STRING
+		public Assignment ele1AssignmentH() {
+			return (c1AssignmentH != null) ? c1AssignmentH : (c1AssignmentH = (Assignment)eleGroup().eContents().get(1)); 
+		}
+
+		// STRING
+		public RuleCall ele10LexerRuleCallSTRING() {
+			return (c10LexerRuleCallSTRING != null) ? c10LexerRuleCallSTRING : (c10LexerRuleCallSTRING = (RuleCall)ele1AssignmentH().eContents().get(0)); 
+		}
+	}
+	
+	public final static LexerLanguageGrammarAccess INSTANCE = new LexerLanguageGrammarAccess();
 
 	private static final String LEXERLANGUAGE_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi";
 	private static Grammar GRAMMAR = null;
-	
+	private static ModelElements pModel;
+	private static ElementElements pElement;
+	private static LexerRule lSTRING;
+
 	@SuppressWarnings("unused")
 	public synchronized Grammar getGrammar() {	
 		if (GRAMMAR==null) {
@@ -23,43 +88,23 @@ public class LexerLanguageGrammarAccess extends BaseEPackageAccess implements IG
 		return GRAMMAR;
 	}
 	
-	
-	public ParserRule pr_Model() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.0"),true); 
-	}
-
-	public ParserRule pr_Element() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1"),true); 
+	public XtextBuiltinGrammarAccess getSuperGrammar() {
+		return XtextBuiltinGrammarAccess.INSTANCE;		
 	}
 
 	
-	public LexerRule lr_STRING() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.2"),true); 
-	}
+	// Model : ( children += Element ) * ;
+	public ModelElements prModel() {
+		return (pModel != null) ? pModel : (pModel = new ModelElements());
+	} 
 
-	public LexerRule lr_ID() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"),true); 
-	}
+	// Element : name = ID h = STRING ;
+	public ElementElements prElement() {
+		return (pElement != null) ? pElement : (pElement = new ElementElements());
+	} 
 
-	public LexerRule lr_INT() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"),true); 
-	}
-
-	public LexerRule lr_ML_COMMENT() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.3"),true); 
-	}
-
-	public LexerRule lr_SL_COMMENT() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.4"),true); 
-	}
-
-	public LexerRule lr_WS() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.5"),true); 
-	}
-
-	public LexerRule lr_ANY_OTHER() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.6"),true); 
-	}
-
-   
+	// lexer STRING : " '#' ('B')+ " ;
+	public LexerRule lrSTRING() {
+		return (lSTRING != null) ? lSTRING : (lSTRING = (LexerRule) getGrammar().eContents().get(3));
+	} 
 }

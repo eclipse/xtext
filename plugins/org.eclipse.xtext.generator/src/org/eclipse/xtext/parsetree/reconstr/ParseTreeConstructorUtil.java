@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -18,6 +19,9 @@ import org.eclipse.xtext.parsetree.reconstr.impl.SimpleTokenSerializer;
 import org.eclipse.xtext.service.ServiceRegistry;
 
 public class ParseTreeConstructorUtil {
+
+	private static Logger log = Logger
+			.getLogger(ParseTreeConstructorUtil.class);
 
 	private static String toIDString(String val) {
 		if (val == null)
@@ -73,10 +77,11 @@ public class ParseTreeConstructorUtil {
 	public static String grammarFragmentToStr(EObject obj) {
 		try {
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			 SerializerUtil
+			SerializerUtil
 					.serialize(AST_SERIALIZER, TOKEN_SERIALIZER, obj, out);
 			return out.toString();
 		} catch (Throwable e) {
+			log.warn("Error serializing grammar fragment.", e);
 			return "(error)";
 		}
 	}

@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess;
 
 
 public class FowlerDslTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -45,7 +47,7 @@ protected class Statemachine_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.0/@alternatives");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -73,7 +75,7 @@ protected class Statemachine_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -101,7 +103,7 @@ protected class Statemachine_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -129,7 +131,7 @@ protected class Statemachine_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -157,7 +159,7 @@ protected class Statemachine_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele0000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -185,7 +187,7 @@ protected class Statemachine_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele00000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -213,7 +215,7 @@ protected class Statemachine_0_0_0_0_0_0_Keyword_events extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele000000KeywordEvents();
 	}	
 }
 
@@ -225,7 +227,7 @@ protected class Statemachine_0_0_0_0_0_1_Assignment_events extends AssignmentTok
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele000001AssignmentEvents();
 	}
 	
 	protected Solution createSolution() {
@@ -254,7 +256,7 @@ protected class Statemachine_0_0_0_0_1_Keyword_end extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele00001KeywordEnd();
 	}	
 }
 
@@ -267,7 +269,7 @@ protected class Statemachine_0_0_0_1_Keyword_commands extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele0001KeywordCommands();
 	}	
 }
 
@@ -280,7 +282,7 @@ protected class Statemachine_0_0_1_Assignment_commands extends AssignmentToken  
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele001AssignmentCommands();
 	}
 	
 	protected Solution createSolution() {
@@ -309,7 +311,7 @@ protected class Statemachine_0_1_Keyword_end extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele01KeywordEnd();
 	}	
 }
 
@@ -322,7 +324,7 @@ protected class Statemachine_1_Assignment_states extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prStatemachine().ele1AssignmentStates();
 	}
 	
 	protected Solution createSolution() {
@@ -360,7 +362,7 @@ protected class Event_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.1/@alternatives");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -388,7 +390,7 @@ protected class Event_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -416,7 +418,7 @@ protected class Event_0_0_Assignment_resetting extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele00AssignmentResetting();
 	}
 	
 	protected Solution createSolution() {
@@ -424,7 +426,7 @@ protected class Event_0_0_Assignment_resetting extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("resetting");
 		if("resetting".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal");
+			element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele000KeywordResetting();
 			return new Solution(obj);
 		}
 		return null;
@@ -439,7 +441,7 @@ protected class Event_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele01AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -447,7 +449,7 @@ protected class Event_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -463,7 +465,7 @@ protected class Event_1_Assignment_code extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele1AssignmentCode();
 	}
 	
 	protected Solution createSolution() {
@@ -471,7 +473,7 @@ protected class Event_1_Assignment_code extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("code");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal"); 
+			element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prEvent().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -496,7 +498,7 @@ protected class Command_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.2/@alternatives");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prCommand().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -524,7 +526,7 @@ protected class Command_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prCommand().ele0AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -532,7 +534,7 @@ protected class Command_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@terminal"); 
+			element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prCommand().ele00LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -547,7 +549,7 @@ protected class Command_1_Assignment_code extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prCommand().ele1AssignmentCode();
 	}
 	
 	protected Solution createSolution() {
@@ -555,7 +557,7 @@ protected class Command_1_Assignment_code extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("code");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal"); 
+			element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prCommand().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -567,12 +569,12 @@ protected class Command_1_Assignment_code extends AssignmentToken  {
 
 /************ begin Rule State ****************
  *
- * State : 'state' name = ID ( 'actions' '{' ( actions += [ fowlerdsl :: Command ] ) + '}' ) ? ( transitions += Transition ) * 'end' ;
+ * (error)
  *
  **/
 
 
-// 'state' name = ID ( 'actions' '{' ( actions += [ fowlerdsl :: Command ] ) + '}' ) ? ( transitions += Transition ) * 'end'
+// (error)
 protected class State_Group extends GroupToken {
 	
 	public State_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -580,7 +582,7 @@ protected class State_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -600,7 +602,7 @@ protected class State_Group extends GroupToken {
 	}
 }
 
-// 'state' name = ID ( 'actions' '{' ( actions += [ fowlerdsl :: Command ] ) + '}' ) ? ( transitions += Transition ) *
+// (error)
 protected class State_0_Group extends GroupToken {
 	
 	public State_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -608,7 +610,7 @@ protected class State_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -628,7 +630,7 @@ protected class State_0_Group extends GroupToken {
 	}
 }
 
-// 'state' name = ID ( 'actions' '{' ( actions += [ fowlerdsl :: Command ] ) + '}' ) ?
+// (error)
 protected class State_0_0_Group extends GroupToken {
 	
 	public State_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -636,7 +638,7 @@ protected class State_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -664,7 +666,7 @@ protected class State_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -692,7 +694,7 @@ protected class State_0_0_0_0_Keyword_state extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele0000KeywordState();
 	}	
 }
 
@@ -704,7 +706,7 @@ protected class State_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele0001AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -712,7 +714,7 @@ protected class State_0_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele00010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -720,7 +722,7 @@ protected class State_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// ( 'actions' '{' ( actions += [ fowlerdsl :: Command ] ) + '}' ) ?
+// (error)
 protected class State_0_0_1_Group extends GroupToken {
 	
 	public State_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -728,7 +730,7 @@ protected class State_0_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele001Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -748,7 +750,7 @@ protected class State_0_0_1_Group extends GroupToken {
 	}
 }
 
-// 'actions' '{' ( actions += [ fowlerdsl :: Command ] ) +
+// (error)
 protected class State_0_0_1_0_Group extends GroupToken {
 	
 	public State_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -756,7 +758,7 @@ protected class State_0_0_1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele0010Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -784,7 +786,7 @@ protected class State_0_0_1_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele00100Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -812,7 +814,7 @@ protected class State_0_0_1_0_0_0_Keyword_actions extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele001000KeywordActions();
 	}	
 }
 
@@ -824,12 +826,12 @@ protected class State_0_0_1_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele001001Keyword();
 	}	
 }
 
 
-// ( actions += [ fowlerdsl :: Command ] ) +
+// (error)
 protected class State_0_0_1_0_1_Assignment_actions extends AssignmentToken  {
 	
 	public State_0_0_1_0_1_Assignment_actions(IInstanceDescription curr, AbstractToken pred) {
@@ -837,7 +839,7 @@ protected class State_0_0_1_0_1_Assignment_actions extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele00101AssignmentActions();
 	}
 	
 	protected Solution createSolution() {
@@ -847,7 +849,7 @@ protected class State_0_0_1_0_1_Assignment_actions extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Command")) {
 				type = AssignmentType.CR;
-				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+				element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele001010CrossReferenceCommand(); 
 				return new Solution(obj);
 			}
 		}
@@ -864,7 +866,7 @@ protected class State_0_0_1_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele0011Keyword();
 	}	
 }
 
@@ -878,7 +880,7 @@ protected class State_0_1_Assignment_transitions extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele01AssignmentTransitions();
 	}
 	
 	protected Solution createSolution() {
@@ -907,7 +909,7 @@ protected class State_1_Keyword_end extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prState().ele1KeywordEnd();
 	}	
 }
 
@@ -916,12 +918,12 @@ protected class State_1_Keyword_end extends KeywordToken  {
 
 /************ begin Rule Transition ****************
  *
- * Transition : event = [ fowlerdsl :: Event ] '=>' state = [ fowlerdsl :: State ] ;
+ * (error)
  *
  **/
 
 
-// event = [ fowlerdsl :: Event ] '=>' state = [ fowlerdsl :: State ]
+// (error)
 protected class Transition_Group extends GroupToken {
 	
 	public Transition_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -929,7 +931,7 @@ protected class Transition_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.4/@alternatives");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -949,7 +951,7 @@ protected class Transition_Group extends GroupToken {
 	}
 }
 
-// event = [ fowlerdsl :: Event ] '=>'
+// (error)
 protected class Transition_0_Group extends GroupToken {
 	
 	public Transition_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -957,7 +959,7 @@ protected class Transition_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -977,7 +979,7 @@ protected class Transition_0_Group extends GroupToken {
 	}
 }
 
-// event = [ fowlerdsl :: Event ]
+// (error)
 protected class Transition_0_0_Assignment_event extends AssignmentToken  {
 	
 	public Transition_0_0_Assignment_event(IInstanceDescription curr, AbstractToken pred) {
@@ -985,7 +987,7 @@ protected class Transition_0_0_Assignment_event extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition().ele00AssignmentEvent();
 	}
 	
 	protected Solution createSolution() {
@@ -995,7 +997,7 @@ protected class Transition_0_0_Assignment_event extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Event")) {
 				type = AssignmentType.CR;
-				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal"); 
+				element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition().ele000CrossReferenceEvent(); 
 				return new Solution(obj);
 			}
 		}
@@ -1011,12 +1013,12 @@ protected class Transition_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition().ele01Keyword();
 	}	
 }
 
 
-// state = [ fowlerdsl :: State ]
+// (error)
 protected class Transition_1_Assignment_state extends AssignmentToken  {
 	
 	public Transition_1_Assignment_state(IInstanceDescription curr, AbstractToken pred) {
@@ -1024,7 +1026,7 @@ protected class Transition_1_Assignment_state extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1");
+		return FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition().ele1AssignmentState();
 	}
 	
 	protected Solution createSolution() {
@@ -1034,7 +1036,7 @@ protected class Transition_1_Assignment_state extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("State")) {
 				type = AssignmentType.CR;
-				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1/@terminal"); 
+				element = FowlerDslTestLanguageGrammarAccess.INSTANCE.prTransition().ele10CrossReferenceState(); 
 				return new Solution(obj);
 			}
 		}

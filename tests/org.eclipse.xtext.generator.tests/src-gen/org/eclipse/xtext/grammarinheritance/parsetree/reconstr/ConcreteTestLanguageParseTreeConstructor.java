@@ -9,6 +9,9 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess;
+import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess;
 
 
 public class ConcreteTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -42,7 +45,7 @@ protected class ConcreteParserRule_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives");
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prConcreteParserRule().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -70,7 +73,7 @@ protected class ConcreteParserRule_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0");
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prConcreteParserRule().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -98,7 +101,7 @@ protected class ConcreteParserRule_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prConcreteParserRule().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -126,7 +129,7 @@ protected class ConcreteParserRule_0_0_0_Keyword_model extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prConcreteParserRule().ele000KeywordModel();
 	}	
 }
 
@@ -138,7 +141,7 @@ protected class ConcreteParserRule_0_0_1_Assignment_magicNumber extends Assignme
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prConcreteParserRule().ele001AssignmentMagicNumber();
 	}
 	
 	protected Solution createSolution() {
@@ -146,7 +149,7 @@ protected class ConcreteParserRule_0_0_1_Assignment_magicNumber extends Assignme
 		IInstanceDescription obj = current.cloneAndConsume("magicNumber");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = ConcreteTestLanguageGrammarAccess.INSTANCE.prConcreteParserRule().ele0010LexerRuleCallREAL();
 			return new Solution(obj);
 		}
 		return null;
@@ -162,7 +165,7 @@ protected class ConcreteParserRule_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prConcreteParserRule().ele01Keyword();
 	}	
 }
 
@@ -175,7 +178,7 @@ protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1");
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prConcreteParserRule().ele1AssignmentElements();
 	}
 	
 	protected Solution createSolution() {
@@ -200,7 +203,7 @@ protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken
 
 /************ begin Rule InheritedParserRule ****************
  *
- * (error)
+ * InheritedParserRule returns mm :: AType : 'element' name = ID ;
  *
  **/
 
@@ -213,7 +216,7 @@ protected class InheritedParserRule_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives");
+		return AbstractTestLanguageGrammarAccess.INSTANCE.prInheritedParserRule().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -241,7 +244,7 @@ protected class InheritedParserRule_0_Keyword_element extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0");
+		return AbstractTestLanguageGrammarAccess.INSTANCE.prInheritedParserRule().ele0KeywordElement();
 	}	
 }
 
@@ -253,7 +256,7 @@ protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1");
+		return AbstractTestLanguageGrammarAccess.INSTANCE.prInheritedParserRule().ele1AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -261,7 +264,7 @@ protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1/@terminal"); 
+			element = AbstractTestLanguageGrammarAccess.INSTANCE.prInheritedParserRule().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
