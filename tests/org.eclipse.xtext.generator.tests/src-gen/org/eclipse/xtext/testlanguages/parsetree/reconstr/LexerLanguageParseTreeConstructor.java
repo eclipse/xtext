@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.testlanguages.services.LexerLanguageGrammarAccess;
 
 
 public class LexerLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -42,7 +44,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.0/@alternatives");
+		return LexerLanguageGrammarAccess.INSTANCE.prModel().eleAssignmentChildren();
 	}
 	
 	protected Solution createSolution() {
@@ -79,7 +81,7 @@ protected class Element_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1/@alternatives");
+		return LexerLanguageGrammarAccess.INSTANCE.prElement().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -107,7 +109,7 @@ protected class Element_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
+		return LexerLanguageGrammarAccess.INSTANCE.prElement().ele0AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -115,7 +117,7 @@ protected class Element_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@terminal"); 
+			element = LexerLanguageGrammarAccess.INSTANCE.prElement().ele00LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -130,7 +132,7 @@ protected class Element_1_Assignment_h extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1");
+		return LexerLanguageGrammarAccess.INSTANCE.prElement().ele1AssignmentH();
 	}
 	
 	protected Solution createSolution() {
@@ -138,7 +140,7 @@ protected class Element_1_Assignment_h extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("h");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LexerLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal"); 
+			element = LexerLanguageGrammarAccess.INSTANCE.prElement().ele10LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;

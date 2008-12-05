@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 
 
 public class ActionTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -43,7 +45,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.0/@alternatives");
+		return ActionTestLanguageGrammarAccess.INSTANCE.prModel().eleAssignmentChildren();
 	}
 	
 	protected Solution createSolution() {
@@ -67,12 +69,12 @@ protected class Model_Assignment_children extends AssignmentToken  {
 
 /************ begin Rule Element ****************
  *
- * Element returns ActionLang :: Type : Item ( { current = ActionLang :: Item . items += current } items += Item ) ;
+ * (error)
  *
  **/
 
 
-// Item ( { current = ActionLang :: Item . items += current } items += Item )
+// (error)
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -80,7 +82,7 @@ protected class Element_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives");
+		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -108,7 +110,7 @@ protected class Element_0_RuleCall_Item extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
+		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().ele0ParserRuleCallItem();
 	}
 	
 	protected Solution createSolution() {
@@ -118,7 +120,7 @@ protected class Element_0_RuleCall_Item extends RuleCallToken {
 	}
 }
 
-// { current = ActionLang :: Item . items += current } items += Item
+// (error)
 protected class Element_1_Group extends GroupToken {
 	
 	public Element_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -126,7 +128,7 @@ protected class Element_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1");
+		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().ele1Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -146,7 +148,7 @@ protected class Element_1_Group extends GroupToken {
 	}
 }
 
-// { current = ActionLang :: Item . items += current }
+// (error)
 protected class Element_1_0_Action_Item_items extends ActionToken  {
 
 	public Element_1_0_Action_Item_items(IInstanceDescription curr, AbstractToken pred) {
@@ -154,7 +156,7 @@ protected class Element_1_0_Action_Item_items extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.0");
+		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().ele10ActionItemitems();
 	}
 	
 	protected Solution createSolution() {
@@ -174,7 +176,7 @@ protected class Element_1_1_Assignment_items extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@abstractTokens.1");
+		return ActionTestLanguageGrammarAccess.INSTANCE.prElement().ele11AssignmentItems();
 	}
 	
 	protected Solution createSolution() {
@@ -200,12 +202,12 @@ protected class Element_1_1_Assignment_items extends AssignmentToken  {
 
 /************ begin Rule Item ****************
  *
- * Item returns ActionLang :: Type : { current = ActionLang :: Thing . content = current } name = ID ;
+ * (error)
  *
  **/
 
 
-// { current = ActionLang :: Thing . content = current } name = ID
+// (error)
 protected class Item_Group extends GroupToken {
 	
 	public Item_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -213,7 +215,7 @@ protected class Item_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives");
+		return ActionTestLanguageGrammarAccess.INSTANCE.prItem().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -233,7 +235,7 @@ protected class Item_Group extends GroupToken {
 	}
 }
 
-// { current = ActionLang :: Thing . content = current }
+// (error)
 protected class Item_0_Action_Thing_content extends ActionToken  {
 
 	public Item_0_Action_Thing_content(IInstanceDescription curr, AbstractToken pred) {
@@ -241,7 +243,7 @@ protected class Item_0_Action_Thing_content extends ActionToken  {
 	}
 	
 	public Action getGrammarElement() {
-		return (Action)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0");
+		return ActionTestLanguageGrammarAccess.INSTANCE.prItem().ele0ActionThingcontent();
 	}
 	
 	protected Solution createSolution() {
@@ -261,7 +263,7 @@ protected class Item_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1");
+		return ActionTestLanguageGrammarAccess.INSTANCE.prItem().ele1AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -269,7 +271,7 @@ protected class Item_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal"); 
+			element = ActionTestLanguageGrammarAccess.INSTANCE.prItem().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;

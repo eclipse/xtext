@@ -4,15 +4,101 @@ Generated with Xtext
 
 package org.eclipse.xtext.metamodelreferencing.tests.services;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
 public class MetamodelRefTestGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
+	
+	public class FooElements implements IParserRuleAccess {
+		private ParserRule rule;
+		private Group cGroup;
+		private Assignment c0AssignmentName;
+		private RuleCall c00LexerRuleCallID;
+		private Assignment c1AssignmentNameRefs;
+		private RuleCall c10ParserRuleCallNameRef;
+		
+		// Foo : name = ID ( nameRefs += NameRef ) * ;
+		public ParserRule getRule() {
+			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
+		}
+
+		// name = ID ( nameRefs += NameRef ) *
+		public Group eleGroup() {
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+		}
+
+		// name = ID
+		public Assignment ele0AssignmentName() {
+			return (c0AssignmentName != null) ? c0AssignmentName : (c0AssignmentName = (Assignment)eleGroup().eContents().get(0)); 
+		}
+
+		// ID
+		public RuleCall ele00LexerRuleCallID() {
+			return (c00LexerRuleCallID != null) ? c00LexerRuleCallID : (c00LexerRuleCallID = (RuleCall)ele0AssignmentName().eContents().get(0)); 
+		}
+
+		// ( nameRefs += NameRef ) *
+		public Assignment ele1AssignmentNameRefs() {
+			return (c1AssignmentNameRefs != null) ? c1AssignmentNameRefs : (c1AssignmentNameRefs = (Assignment)eleGroup().eContents().get(1)); 
+		}
+
+		// NameRef
+		public RuleCall ele10ParserRuleCallNameRef() {
+			return (c10ParserRuleCallNameRef != null) ? c10ParserRuleCallNameRef : (c10ParserRuleCallNameRef = (RuleCall)ele1AssignmentNameRefs().eContents().get(0)); 
+		}
+	}
+
+	public class NameRefElements implements IParserRuleAccess {
+		private ParserRule rule;
+		private Assignment cAssignmentRule;
+		private CrossReference c0CrossReferenceMyRule;
+		
+		// (error)
+		public ParserRule getRule() {
+			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(3)); 
+		}
+
+		// (error)
+		public Assignment eleAssignmentRule() {
+			return (cAssignmentRule != null) ? cAssignmentRule : (cAssignmentRule = (Assignment)getRule().eContents().get(1)); 
+		}
+
+		// (error)
+		public CrossReference ele0CrossReferenceMyRule() {
+			return (c0CrossReferenceMyRule != null) ? c0CrossReferenceMyRule : (c0CrossReferenceMyRule = (CrossReference)eleAssignmentRule().eContents().get(0)); 
+		}
+	}
+
+	public class MyRuleElements implements IParserRuleAccess {
+		private ParserRule rule;
+		private Assignment cAssignmentName;
+		private RuleCall c0LexerRuleCallID;
+		
+		// MyRule returns xtext :: ParserRule : name = ID ;
+		public ParserRule getRule() {
+			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(4)); 
+		}
+
+		// name = ID
+		public Assignment eleAssignmentName() {
+			return (cAssignmentName != null) ? cAssignmentName : (cAssignmentName = (Assignment)getRule().eContents().get(1)); 
+		}
+
+		// ID
+		public RuleCall ele0LexerRuleCallID() {
+			return (c0LexerRuleCallID != null) ? c0LexerRuleCallID : (c0LexerRuleCallID = (RuleCall)eleAssignmentName().eContents().get(0)); 
+		}
+	}
+	
+	public final static MetamodelRefTestGrammarAccess INSTANCE = new MetamodelRefTestGrammarAccess();
 
 	private static final String METAMODELREFTEST_GRAMMAR_CP_URI = "classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi";
 	private static Grammar GRAMMAR = null;
-	
+	private static FooElements pFoo;
+	private static NameRefElements pNameRef;
+	private static MyRuleElements pMyRule;
+
 	@SuppressWarnings("unused")
 	public synchronized Grammar getGrammar() {	
 		if (GRAMMAR==null) {
@@ -23,47 +109,23 @@ public class MetamodelRefTestGrammarAccess extends BaseEPackageAccess implements
 		return GRAMMAR;
 	}
 	
-	
-	public ParserRule pr_Foo() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0"),true); 
-	}
-
-	public ParserRule pr_NameRef() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1"),true); 
-	}
-
-	public ParserRule pr_MyRule() {
-		return (ParserRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.2"),true); 
+	public XtextBuiltinGrammarAccess getSuperGrammar() {
+		return XtextBuiltinGrammarAccess.INSTANCE;		
 	}
 
 	
-	public LexerRule lr_ID() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"),true); 
-	}
+	// Foo : name = ID ( nameRefs += NameRef ) * ;
+	public FooElements prFoo() {
+		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
+	} 
 
-	public LexerRule lr_INT() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"),true); 
-	}
+	// (error)
+	public NameRefElements prNameRef() {
+		return (pNameRef != null) ? pNameRef : (pNameRef = new NameRefElements());
+	} 
 
-	public LexerRule lr_STRING() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.2"),true); 
-	}
-
-	public LexerRule lr_ML_COMMENT() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.3"),true); 
-	}
-
-	public LexerRule lr_SL_COMMENT() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.4"),true); 
-	}
-
-	public LexerRule lr_WS() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.5"),true); 
-	}
-
-	public LexerRule lr_ANY_OTHER() {
-		return (LexerRule) getGrammar().eResource().getResourceSet().getEObject(URI.createURI("classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.6"),true); 
-	}
-
-   
+	// MyRule returns xtext :: ParserRule : name = ID ;
+	public MyRuleElements prMyRule() {
+		return (pMyRule != null) ? pMyRule : (pMyRule = new MyRuleElements());
+	} 
 }

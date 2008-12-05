@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestGrammarAccess;
 
 
 public class MetamodelRefTestParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -43,7 +45,7 @@ protected class Foo_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives");
+		return MetamodelRefTestGrammarAccess.INSTANCE.prFoo().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -71,7 +73,7 @@ protected class Foo_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.0");
+		return MetamodelRefTestGrammarAccess.INSTANCE.prFoo().ele0AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -79,7 +81,7 @@ protected class Foo_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.0/@terminal"); 
+			element = MetamodelRefTestGrammarAccess.INSTANCE.prFoo().ele00LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -94,7 +96,7 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.0/@alternatives/@abstractTokens.1");
+		return MetamodelRefTestGrammarAccess.INSTANCE.prFoo().ele1AssignmentNameRefs();
 	}
 	
 	protected Solution createSolution() {
@@ -124,7 +126,7 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
  **/
 
 
-// rule = [ SimpleTest :: MyRule ]
+// (error)
 protected class NameRef_Assignment_rule extends AssignmentToken  {
 	
 	public NameRef_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
@@ -132,7 +134,7 @@ protected class NameRef_Assignment_rule extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1/@alternatives");
+		return MetamodelRefTestGrammarAccess.INSTANCE.prNameRef().eleAssignmentRule();
 	}
 	
 	protected Solution createSolution() {
@@ -142,7 +144,7 @@ protected class NameRef_Assignment_rule extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("MyRule")) {
 				type = AssignmentType.CR;
-				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.1/@alternatives/@terminal"); 
+				element = MetamodelRefTestGrammarAccess.INSTANCE.prNameRef().ele0CrossReferenceMyRule(); 
 				return new Solution(obj);
 			}
 		}
@@ -154,7 +156,7 @@ protected class NameRef_Assignment_rule extends AssignmentToken  {
 
 /************ begin Rule MyRule ****************
  *
- * (error)
+ * MyRule returns xtext :: ParserRule : name = ID ;
  *
  **/
 
@@ -167,7 +169,7 @@ protected class MyRule_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.2/@alternatives");
+		return MetamodelRefTestGrammarAccess.INSTANCE.prMyRule().eleAssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -175,7 +177,7 @@ protected class MyRule_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTest.xmi#//@rules.2/@alternatives/@terminal"); 
+			element = MetamodelRefTestGrammarAccess.INSTANCE.prMyRule().ele0LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;

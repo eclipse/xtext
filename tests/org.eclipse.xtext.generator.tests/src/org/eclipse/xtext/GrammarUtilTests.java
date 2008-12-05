@@ -60,7 +60,7 @@ public class GrammarUtilTests extends AbstractGeneratorTest {
 		with(LangAStandaloneSetup.class);
 		XtextResource resource = getResourceFromString("type A extends A");
 		
-		ParserRule prType = (new LangAGrammarAccess()).pr_Type();
+		ParserRule prType = (new LangAGrammarAccess()).prType().getRule();
 		Assignment asExtends = (Assignment)((Group)prType.getAlternatives()).getAbstractTokens().get(1);
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
 		
@@ -76,7 +76,7 @@ public class GrammarUtilTests extends AbstractGeneratorTest {
 		with(LangAStandaloneSetup.class);
 		XtextResource resource = getResourceFromString("type A extends B");
 		
-		ParserRule prType = (new LangAGrammarAccess()).pr_Type();
+		ParserRule prType = (new LangAGrammarAccess()).prType().getRule();
 		Assignment asExtends = (Assignment)((Group)prType.getAlternatives()).getAbstractTokens().get(1);
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
 		EObject model = getModel(resource);

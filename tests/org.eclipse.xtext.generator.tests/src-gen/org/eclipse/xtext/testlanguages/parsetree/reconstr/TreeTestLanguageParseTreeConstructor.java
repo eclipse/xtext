@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess;
 
 
 public class TreeTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -42,7 +44,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.0/@alternatives");
+		return TreeTestLanguageGrammarAccess.INSTANCE.prModel().eleAssignmentChildren();
 	}
 	
 	protected Solution createSolution() {
@@ -79,7 +81,7 @@ protected class Node_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives");
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -107,7 +109,7 @@ protected class Node_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -135,7 +137,7 @@ protected class Node_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -163,7 +165,7 @@ protected class Node_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -191,7 +193,7 @@ protected class Node_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele0000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -219,7 +221,7 @@ protected class Node_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele00000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -247,7 +249,7 @@ protected class Node_0_0_0_0_0_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele000000AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -255,7 +257,7 @@ protected class Node_0_0_0_0_0_0_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal"); 
+			element = TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele0000000LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -270,7 +272,7 @@ protected class Node_0_0_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele000001Keyword();
 	}	
 }
 
@@ -283,7 +285,7 @@ protected class Node_0_0_0_0_1_Assignment_attrib extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele00001AssignmentAttrib();
 	}
 	
 	protected Solution createSolution() {
@@ -291,7 +293,7 @@ protected class Node_0_0_0_0_1_Assignment_attrib extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("attrib");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele000010LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -307,7 +309,7 @@ protected class Node_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele0001Keyword();
 	}	
 }
 
@@ -320,7 +322,7 @@ protected class Node_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele001Keyword();
 	}	
 }
 
@@ -333,7 +335,7 @@ protected class Node_0_1_Assignment_children extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele01AssignmentChildren();
 	}
 	
 	protected Solution createSolution() {
@@ -362,7 +364,7 @@ protected class Node_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1");
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele1Keyword();
 	}	
 }
 

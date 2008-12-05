@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.dummy.services.DummyLanguageGrammarAccess;
 
 
 public class DummyLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -42,7 +44,7 @@ protected class Model_Assignment_elements extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.0/@alternatives");
+		return DummyLanguageGrammarAccess.INSTANCE.prModel().eleAssignmentElements();
 	}
 	
 	protected Solution createSolution() {
@@ -79,7 +81,7 @@ protected class Element_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives");
+		return DummyLanguageGrammarAccess.INSTANCE.prElement().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -107,7 +109,7 @@ protected class Element_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
+		return DummyLanguageGrammarAccess.INSTANCE.prElement().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -135,7 +137,7 @@ protected class Element_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return DummyLanguageGrammarAccess.INSTANCE.prElement().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -163,7 +165,7 @@ protected class Element_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return DummyLanguageGrammarAccess.INSTANCE.prElement().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -191,7 +193,7 @@ protected class Element_0_0_0_0_Assignment_optional extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return DummyLanguageGrammarAccess.INSTANCE.prElement().ele0000AssignmentOptional();
 	}
 	
 	protected Solution createSolution() {
@@ -199,7 +201,7 @@ protected class Element_0_0_0_0_Assignment_optional extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("optional");
 		if("optional".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal");
+			element = DummyLanguageGrammarAccess.INSTANCE.prElement().ele00000KeywordOptional();
 			return new Solution(obj);
 		}
 		return null;
@@ -214,7 +216,7 @@ protected class Element_0_0_0_1_Keyword_element extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return DummyLanguageGrammarAccess.INSTANCE.prElement().ele0001KeywordElement();
 	}	
 }
 
@@ -227,7 +229,7 @@ protected class Element_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return DummyLanguageGrammarAccess.INSTANCE.prElement().ele001AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -235,7 +237,7 @@ protected class Element_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = DummyLanguageGrammarAccess.INSTANCE.prElement().ele0010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -251,7 +253,7 @@ protected class Element_0_1_Assignment_descriptions extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return DummyLanguageGrammarAccess.INSTANCE.prElement().ele01AssignmentDescriptions();
 	}
 	
 	protected Solution createSolution() {
@@ -259,7 +261,7 @@ protected class Element_0_1_Assignment_descriptions extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("descriptions");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = DummyLanguageGrammarAccess.INSTANCE.prElement().ele010LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -275,7 +277,7 @@ protected class Element_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/dummy/DummyLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1");
+		return DummyLanguageGrammarAccess.INSTANCE.prElement().ele1Keyword();
 	}	
 }
 

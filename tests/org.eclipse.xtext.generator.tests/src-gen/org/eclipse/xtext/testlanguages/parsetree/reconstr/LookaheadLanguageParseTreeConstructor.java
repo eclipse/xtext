@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.testlanguages.services.LookaheadLanguageGrammarAccess;
 
 
 public class LookaheadLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -47,7 +49,7 @@ protected class Entry_Assignment_contents extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.0/@alternatives");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prEntry().eleAssignmentContents();
 	}
 	
 	protected Solution createSolution() {
@@ -84,7 +86,7 @@ protected class Alts_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.1/@alternatives");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prAlts().eleAlternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -105,7 +107,7 @@ protected class Alts_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.1/@alternatives/@groups.0");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prAlts().ele0Alternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -126,7 +128,7 @@ protected class Alts_0_0_RuleCall_LookAhead0 extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.1/@alternatives/@groups.0/@groups.0");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prAlts().ele00ParserRuleCallLookAhead0();
 	}
 	
 	protected Solution createSolution() {
@@ -144,7 +146,7 @@ protected class Alts_0_1_RuleCall_LookAhead1 extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.1/@alternatives/@groups.0/@groups.1");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prAlts().ele01ParserRuleCallLookAhead1();
 	}
 	
 	protected Solution createSolution() {
@@ -163,7 +165,7 @@ protected class Alts_1_RuleCall_LookAhead3 extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.1/@alternatives/@groups.1");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prAlts().ele1ParserRuleCallLookAhead3();
 	}
 	
 	protected Solution createSolution() {
@@ -191,7 +193,7 @@ protected class LookAhead0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.2/@alternatives");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead0().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -219,7 +221,7 @@ protected class LookAhead0_0_Keyword_bar extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead0().ele0KeywordBar();
 	}	
 }
 
@@ -231,7 +233,7 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead0().ele1AssignmentX();
 	}
 	
 	protected Solution createSolution() {
@@ -239,7 +241,7 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("x");
 		if("a".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal");
+			element = LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead0().ele10KeywordA();
 			return new Solution(obj);
 		}
 		return null;
@@ -264,7 +266,7 @@ protected class LookAhead1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead1().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -292,7 +294,7 @@ protected class LookAhead1_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead1().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -320,7 +322,7 @@ protected class LookAhead1_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead1().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -348,7 +350,7 @@ protected class LookAhead1_0_0_0_Keyword_foo extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead1().ele000KeywordFoo();
 	}	
 }
 
@@ -360,7 +362,7 @@ protected class LookAhead1_0_0_1_Assignment_y extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead1().ele001AssignmentY();
 	}
 	
 	protected Solution createSolution() {
@@ -389,7 +391,7 @@ protected class LookAhead1_0_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead1().ele01AssignmentX();
 	}
 	
 	protected Solution createSolution() {
@@ -397,7 +399,7 @@ protected class LookAhead1_0_1_Assignment_x extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("x");
 		if("b".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+			element = LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead1().ele010KeywordB();
 			return new Solution(obj);
 		}
 		return null;
@@ -413,7 +415,7 @@ protected class LookAhead1_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead1().ele1AssignmentX();
 	}
 	
 	protected Solution createSolution() {
@@ -421,7 +423,7 @@ protected class LookAhead1_1_Assignment_x extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("x");
 		if("d".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1/@terminal");
+			element = LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead1().ele10KeywordD();
 			return new Solution(obj);
 		}
 		return null;
@@ -446,7 +448,7 @@ protected class LookAhead2_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead2().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -474,7 +476,7 @@ protected class LookAhead2_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead2().ele0Alternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -495,7 +497,7 @@ protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@groups.0");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead2().ele00AssignmentZ();
 	}
 	
 	protected Solution createSolution() {
@@ -503,7 +505,7 @@ protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("z");
 		if("foo".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@groups.0/@terminal");
+			element = LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead2().ele000KeywordFoo();
 			return new Solution(obj);
 		}
 		return null;
@@ -518,7 +520,7 @@ protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@groups.1");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead2().ele01AssignmentZ();
 	}
 	
 	protected Solution createSolution() {
@@ -526,7 +528,7 @@ protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("z");
 		if("bar".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@groups.1/@terminal");
+			element = LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead2().ele010KeywordBar();
 			return new Solution(obj);
 		}
 		return null;
@@ -542,7 +544,7 @@ protected class LookAhead2_1_Keyword_c extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead2().ele1KeywordC();
 	}	
 }
 
@@ -564,7 +566,7 @@ protected class LookAhead3_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead3().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -592,7 +594,7 @@ protected class LookAhead3_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead3().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -620,7 +622,7 @@ protected class LookAhead3_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead3().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -648,7 +650,7 @@ protected class LookAhead3_0_0_0_Keyword_foo extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead3().ele000KeywordFoo();
 	}	
 }
 
@@ -660,7 +662,7 @@ protected class LookAhead3_0_0_1_Keyword_bar extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead3().ele001KeywordBar();
 	}	
 }
 
@@ -673,7 +675,7 @@ protected class LookAhead3_0_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead3().ele01AssignmentX();
 	}
 	
 	protected Solution createSolution() {
@@ -681,7 +683,7 @@ protected class LookAhead3_0_1_Assignment_x extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("x");
 		if("b".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal");
+			element = LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead3().ele010KeywordB();
 			return new Solution(obj);
 		}
 		return null;
@@ -697,7 +699,7 @@ protected class LookAhead3_1_Assignment_z extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead3().ele1AssignmentZ();
 	}
 	
 	protected Solution createSolution() {
@@ -735,7 +737,7 @@ protected class LookAhead4_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.6/@alternatives");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead4().eleAlternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -756,7 +758,7 @@ protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.6/@alternatives/@groups.0");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead4().ele0AssignmentX();
 	}
 	
 	protected Solution createSolution() {
@@ -764,7 +766,7 @@ protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("x");
 		if("c".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.6/@alternatives/@groups.0/@terminal");
+			element = LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead4().ele00KeywordC();
 			return new Solution(obj);
 		}
 		return null;
@@ -779,7 +781,7 @@ protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.6/@alternatives/@groups.1");
+		return LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead4().ele1AssignmentX();
 	}
 	
 	protected Solution createSolution() {
@@ -787,7 +789,7 @@ protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("x");
 		if("d".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/testlanguages/LookaheadLanguage.xmi#//@rules.6/@alternatives/@groups.1/@terminal");
+			element = LookaheadLanguageGrammarAccess.INSTANCE.prLookAhead4().ele10KeywordD();
 			return new Solution(obj);
 		}
 		return null;

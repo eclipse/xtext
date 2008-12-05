@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.crossrefs.services.LangAGrammarAccess;
 
 
 public class LangAParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -43,7 +45,7 @@ protected class Main_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.0/@alternatives");
+		return LangAGrammarAccess.INSTANCE.prMain().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -71,7 +73,7 @@ protected class Main_0_Assignment_imports extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.0/@alternatives/@abstractTokens.0");
+		return LangAGrammarAccess.INSTANCE.prMain().ele0AssignmentImports();
 	}
 	
 	protected Solution createSolution() {
@@ -99,7 +101,7 @@ protected class Main_1_Assignment_types extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.0/@alternatives/@abstractTokens.1");
+		return LangAGrammarAccess.INSTANCE.prMain().ele1AssignmentTypes();
 	}
 	
 	protected Solution createSolution() {
@@ -137,7 +139,7 @@ protected class Import_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.1/@alternatives");
+		return LangAGrammarAccess.INSTANCE.prImport().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -165,7 +167,7 @@ protected class Import_0_Keyword_import extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.1/@alternatives/@abstractTokens.0");
+		return LangAGrammarAccess.INSTANCE.prImport().ele0KeywordImport();
 	}	
 }
 
@@ -177,7 +179,7 @@ protected class Import_1_Assignment_uri extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.1/@alternatives/@abstractTokens.1");
+		return LangAGrammarAccess.INSTANCE.prImport().ele1AssignmentUri();
 	}
 	
 	protected Solution createSolution() {
@@ -185,7 +187,7 @@ protected class Import_1_Assignment_uri extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("uri");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal"); 
+			element = LangAGrammarAccess.INSTANCE.prImport().ele10LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -197,12 +199,12 @@ protected class Import_1_Assignment_uri extends AssignmentToken  {
 
 /************ begin Rule Type ****************
  *
- * Type : 'type' name = ID 'extends' ^extends = [ langA :: Type ] ;
+ * (error)
  *
  **/
 
 
-// 'type' name = ID 'extends' ^extends = [ langA :: Type ]
+// (error)
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -210,7 +212,7 @@ protected class Type_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives");
+		return LangAGrammarAccess.INSTANCE.prType().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -238,7 +240,7 @@ protected class Type_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0");
+		return LangAGrammarAccess.INSTANCE.prType().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -266,7 +268,7 @@ protected class Type_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return LangAGrammarAccess.INSTANCE.prType().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -294,7 +296,7 @@ protected class Type_0_0_0_Keyword_type extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return LangAGrammarAccess.INSTANCE.prType().ele000KeywordType();
 	}	
 }
 
@@ -306,7 +308,7 @@ protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return LangAGrammarAccess.INSTANCE.prType().ele001AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -314,7 +316,7 @@ protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = LangAGrammarAccess.INSTANCE.prType().ele0010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -330,12 +332,12 @@ protected class Type_0_1_Keyword_extends extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return LangAGrammarAccess.INSTANCE.prType().ele01KeywordExtends();
 	}	
 }
 
 
-// ^extends = [ langA :: Type ]
+// (error)
 protected class Type_1_Assignment_extends extends AssignmentToken  {
 	
 	public Type_1_Assignment_extends(IInstanceDescription curr, AbstractToken pred) {
@@ -343,7 +345,7 @@ protected class Type_1_Assignment_extends extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.1");
+		return LangAGrammarAccess.INSTANCE.prType().ele1AssignmentExtends();
 	}
 	
 	protected Solution createSolution() {
@@ -353,7 +355,7 @@ protected class Type_1_Assignment_extends extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Type")) {
 				type = AssignmentType.CR;
-				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/crossrefs/LangA.xmi#//@rules.2/@alternatives/@abstractTokens.1/@terminal"); 
+				element = LangAGrammarAccess.INSTANCE.prType().ele10CrossReferenceType(); 
 				return new Solution(obj);
 			}
 		}
