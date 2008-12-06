@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess;
 
 
 public class ReferenceGrammarParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -48,7 +50,7 @@ protected class Spielplatz_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -76,7 +78,7 @@ protected class Spielplatz_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -104,7 +106,7 @@ protected class Spielplatz_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -132,7 +134,7 @@ protected class Spielplatz_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -160,7 +162,7 @@ protected class Spielplatz_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele0000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -188,7 +190,7 @@ protected class Spielplatz_0_0_0_0_0_Keyword_spielplatz extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele00000KeywordSpielplatz();
 	}	
 }
 
@@ -200,7 +202,7 @@ protected class Spielplatz_0_0_0_0_1_Assignment_groesse extends AssignmentToken 
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele00001AssignmentGroesse();
 	}
 	
 	protected Solution createSolution() {
@@ -208,7 +210,7 @@ protected class Spielplatz_0_0_0_0_1_Assignment_groesse extends AssignmentToken 
 		IInstanceDescription obj = current.cloneAndConsume("groesse");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele000010LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -224,7 +226,7 @@ protected class Spielplatz_0_0_0_1_Assignment_beschreibung extends AssignmentTok
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele0001AssignmentBeschreibung();
 	}
 	
 	protected Solution createSolution() {
@@ -232,7 +234,7 @@ protected class Spielplatz_0_0_0_1_Assignment_beschreibung extends AssignmentTok
 		IInstanceDescription obj = current.cloneAndConsume("beschreibung");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele00010LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		return null;
@@ -248,7 +250,7 @@ protected class Spielplatz_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele001Keyword();
 	}	
 }
 
@@ -261,7 +263,7 @@ protected class Spielplatz_0_1_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele01Alternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -282,7 +284,7 @@ protected class Spielplatz_0_1_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele010Alternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -303,7 +305,7 @@ protected class Spielplatz_0_1_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele0100Alternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -324,7 +326,7 @@ protected class Spielplatz_0_1_0_0_0_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele01000Alternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -345,7 +347,7 @@ protected class Spielplatz_0_1_0_0_0_0_Assignment_kinder extends AssignmentToken
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele010000AssignmentKinder();
 	}
 	
 	protected Solution createSolution() {
@@ -373,7 +375,7 @@ protected class Spielplatz_0_1_0_0_0_1_Assignment_erzieher extends AssignmentTok
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@groups.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele010001AssignmentErzieher();
 	}
 	
 	protected Solution createSolution() {
@@ -402,7 +404,7 @@ protected class Spielplatz_0_1_0_0_1_Assignment_spielzeuge extends AssignmentTok
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele01001AssignmentSpielzeuge();
 	}
 	
 	protected Solution createSolution() {
@@ -431,7 +433,7 @@ protected class Spielplatz_0_1_0_1_Assignment_familie extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele0101AssignmentFamilie();
 	}
 	
 	protected Solution createSolution() {
@@ -460,7 +462,7 @@ protected class Spielplatz_0_1_1_Assignment_types extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele011AssignmentTypes();
 	}
 	
 	protected Solution createSolution() {
@@ -490,7 +492,7 @@ protected class Spielplatz_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.0/@alternatives/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielplatz().ele1Keyword();
 	}	
 }
 
@@ -512,7 +514,7 @@ protected class Person_Alternatives extends AlternativesToken {
 	}
 	
 	public Alternatives getGrammarElement() {
-		return (Alternatives)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.1/@alternatives");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prPerson().eleAlternatives();
 	}
 	
 	protected Solution createSolution() {
@@ -533,7 +535,7 @@ protected class Person_0_RuleCall_Kind extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.1/@alternatives/@groups.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prPerson().ele0ParserRuleCallKind();
 	}
 	
 	protected Solution createSolution() {
@@ -551,7 +553,7 @@ protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 	}
 	
 	public RuleCall getGrammarElement() {
-		return (RuleCall)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.1/@alternatives/@groups.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prPerson().ele1ParserRuleCallErwachsener();
 	}
 	
 	protected Solution createSolution() {
@@ -579,7 +581,7 @@ protected class Kind_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.2/@alternatives");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prKind().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -607,7 +609,7 @@ protected class Kind_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prKind().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -635,7 +637,7 @@ protected class Kind_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prKind().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -663,7 +665,7 @@ protected class Kind_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prKind().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -691,7 +693,7 @@ protected class Kind_0_0_0_0_Keyword_kind extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prKind().ele0000KeywordKind();
 	}	
 }
 
@@ -703,7 +705,7 @@ protected class Kind_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prKind().ele0001Keyword();
 	}	
 }
 
@@ -716,7 +718,7 @@ protected class Kind_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prKind().ele001AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -724,7 +726,7 @@ protected class Kind_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prKind().ele0010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -740,7 +742,7 @@ protected class Kind_0_1_Assignment_age extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prKind().ele01AssignmentAge();
 	}
 	
 	protected Solution createSolution() {
@@ -748,7 +750,7 @@ protected class Kind_0_1_Assignment_age extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("age");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prKind().ele010LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -764,7 +766,7 @@ protected class Kind_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.2/@alternatives/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prKind().ele1Keyword();
 	}	
 }
 
@@ -786,7 +788,7 @@ protected class Erwachsener_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.3/@alternatives");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prErwachsener().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -814,7 +816,7 @@ protected class Erwachsener_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prErwachsener().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -842,7 +844,7 @@ protected class Erwachsener_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prErwachsener().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -870,7 +872,7 @@ protected class Erwachsener_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prErwachsener().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -898,7 +900,7 @@ protected class Erwachsener_0_0_0_0_Keyword_erwachsener extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prErwachsener().ele0000KeywordErwachsener();
 	}	
 }
 
@@ -910,7 +912,7 @@ protected class Erwachsener_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prErwachsener().ele0001Keyword();
 	}	
 }
 
@@ -923,7 +925,7 @@ protected class Erwachsener_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prErwachsener().ele001AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -931,7 +933,7 @@ protected class Erwachsener_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prErwachsener().ele0010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -947,7 +949,7 @@ protected class Erwachsener_0_1_Assignment_age extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prErwachsener().ele01AssignmentAge();
 	}
 	
 	protected Solution createSolution() {
@@ -955,7 +957,7 @@ protected class Erwachsener_0_1_Assignment_age extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("age");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prErwachsener().ele010LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;
@@ -971,7 +973,7 @@ protected class Erwachsener_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.3/@alternatives/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prErwachsener().ele1Keyword();
 	}	
 }
 
@@ -993,7 +995,7 @@ protected class Spielzeug_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.4/@alternatives");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielzeug().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -1021,7 +1023,7 @@ protected class Spielzeug_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielzeug().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1049,7 +1051,7 @@ protected class Spielzeug_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielzeug().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1077,7 +1079,7 @@ protected class Spielzeug_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielzeug().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1105,7 +1107,7 @@ protected class Spielzeug_0_0_0_0_Keyword_spielzeug extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielzeug().ele0000KeywordSpielzeug();
 	}	
 }
 
@@ -1117,7 +1119,7 @@ protected class Spielzeug_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielzeug().ele0001Keyword();
 	}	
 }
 
@@ -1130,7 +1132,7 @@ protected class Spielzeug_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielzeug().ele001AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -1138,7 +1140,7 @@ protected class Spielzeug_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prSpielzeug().ele0010LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1154,7 +1156,7 @@ protected class Spielzeug_0_1_Assignment_farbe extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielzeug().ele01AssignmentFarbe();
 	}
 	
 	protected Solution createSolution() {
@@ -1183,7 +1185,7 @@ protected class Spielzeug_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.4/@alternatives/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prSpielzeug().ele1Keyword();
 	}	
 }
 
@@ -1192,12 +1194,12 @@ protected class Spielzeug_1_Keyword extends KeywordToken  {
 
 /************ begin Rule Familie ****************
  *
- * Familie : 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ ReferenceGrammar :: Erwachsener ] vater = [ ReferenceGrammar :: Erwachsener ] kinder += [ ReferenceGrammar :: Kind ] ( ',' kinder += [ ReferenceGrammar :: Kind ] ) * ')' ;
+ * (error)
  *
  **/
 
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ ReferenceGrammar :: Erwachsener ] vater = [ ReferenceGrammar :: Erwachsener ] kinder += [ ReferenceGrammar :: Kind ] ( ',' kinder += [ ReferenceGrammar :: Kind ] ) * ')'
+// (error)
 protected class Familie_Group extends GroupToken {
 	
 	public Familie_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1205,7 +1207,7 @@ protected class Familie_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -1225,7 +1227,7 @@ protected class Familie_Group extends GroupToken {
 	}
 }
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ ReferenceGrammar :: Erwachsener ] vater = [ ReferenceGrammar :: Erwachsener ] kinder += [ ReferenceGrammar :: Kind ] ( ',' kinder += [ ReferenceGrammar :: Kind ] ) *
+// (error)
 protected class Familie_0_Group extends GroupToken {
 	
 	public Familie_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1233,7 +1235,7 @@ protected class Familie_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele0Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1253,7 +1255,7 @@ protected class Familie_0_Group extends GroupToken {
 	}
 }
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ ReferenceGrammar :: Erwachsener ] vater = [ ReferenceGrammar :: Erwachsener ] kinder += [ ReferenceGrammar :: Kind ]
+// (error)
 protected class Familie_0_0_Group extends GroupToken {
 	
 	public Familie_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1261,7 +1263,7 @@ protected class Familie_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele00Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1281,7 +1283,7 @@ protected class Familie_0_0_Group extends GroupToken {
 	}
 }
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ ReferenceGrammar :: Erwachsener ] vater = [ ReferenceGrammar :: Erwachsener ]
+// (error)
 protected class Familie_0_0_0_Group extends GroupToken {
 	
 	public Familie_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1289,7 +1291,7 @@ protected class Familie_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1309,7 +1311,7 @@ protected class Familie_0_0_0_Group extends GroupToken {
 	}
 }
 
-// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ ReferenceGrammar :: Erwachsener ]
+// (error)
 protected class Familie_0_0_0_0_Group extends GroupToken {
 	
 	public Familie_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1317,7 +1319,7 @@ protected class Familie_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele0000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1345,7 +1347,7 @@ protected class Familie_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele00000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1373,7 +1375,7 @@ protected class Familie_0_0_0_0_0_0_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele000000Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1401,7 +1403,7 @@ protected class Familie_0_0_0_0_0_0_0_Keyword_familie extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele0000000KeywordFamilie();
 	}	
 }
 
@@ -1413,7 +1415,7 @@ protected class Familie_0_0_0_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele0000001Keyword();
 	}	
 }
 
@@ -1426,7 +1428,7 @@ protected class Familie_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele000001AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -1434,17 +1436,17 @@ protected class Familie_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if("keyword".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.0");
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele000001000KeywordKeyword();
 			return new Solution(obj);
 		}
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.1"); 
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele000001001LexerRuleCallSTRING();
 			return new Solution(obj);
 		}
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1"); 
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele00000101LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
@@ -1452,7 +1454,7 @@ protected class Familie_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// mutter = [ ReferenceGrammar :: Erwachsener ]
+// (error)
 protected class Familie_0_0_0_0_1_Assignment_mutter extends AssignmentToken  {
 	
 	public Familie_0_0_0_0_1_Assignment_mutter(IInstanceDescription curr, AbstractToken pred) {
@@ -1460,7 +1462,7 @@ protected class Familie_0_0_0_0_1_Assignment_mutter extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele00001AssignmentMutter();
 	}
 	
 	protected Solution createSolution() {
@@ -1470,7 +1472,7 @@ protected class Familie_0_0_0_0_1_Assignment_mutter extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Erwachsener")) {
 				type = AssignmentType.CR;
-				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+				element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele000010CrossReferenceErwachsener(); 
 				return new Solution(obj);
 			}
 		}
@@ -1479,7 +1481,7 @@ protected class Familie_0_0_0_0_1_Assignment_mutter extends AssignmentToken  {
 }
 
 
-// vater = [ ReferenceGrammar :: Erwachsener ]
+// (error)
 protected class Familie_0_0_0_1_Assignment_vater extends AssignmentToken  {
 	
 	public Familie_0_0_0_1_Assignment_vater(IInstanceDescription curr, AbstractToken pred) {
@@ -1487,7 +1489,7 @@ protected class Familie_0_0_0_1_Assignment_vater extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele0001AssignmentVater();
 	}
 	
 	protected Solution createSolution() {
@@ -1497,7 +1499,7 @@ protected class Familie_0_0_0_1_Assignment_vater extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Erwachsener")) {
 				type = AssignmentType.CR;
-				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+				element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele00010CrossReferenceErwachsener(); 
 				return new Solution(obj);
 			}
 		}
@@ -1506,7 +1508,7 @@ protected class Familie_0_0_0_1_Assignment_vater extends AssignmentToken  {
 }
 
 
-// kinder += [ ReferenceGrammar :: Kind ]
+// (error)
 protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
 	
 	public Familie_0_0_1_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
@@ -1514,7 +1516,7 @@ protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele001AssignmentKinder();
 	}
 	
 	protected Solution createSolution() {
@@ -1524,7 +1526,7 @@ protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Kind")) {
 				type = AssignmentType.CR;
-				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal"); 
+				element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele0010CrossReferenceKind(); 
 				return new Solution(obj);
 			}
 		}
@@ -1533,7 +1535,7 @@ protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
 }
 
 
-// ( ',' kinder += [ ReferenceGrammar :: Kind ] ) *
+// (error)
 protected class Familie_0_1_Group extends GroupToken {
 	
 	public Familie_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1541,7 +1543,7 @@ protected class Familie_0_1_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele01Group();
 	}
 		
 	protected Solution createSolution() {	
@@ -1569,11 +1571,11 @@ protected class Familie_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele010Keyword();
 	}	
 }
 
-// kinder += [ ReferenceGrammar :: Kind ]
+// (error)
 protected class Familie_0_1_1_Assignment_kinder extends AssignmentToken  {
 	
 	public Familie_0_1_1_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
@@ -1581,7 +1583,7 @@ protected class Familie_0_1_1_Assignment_kinder extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele011AssignmentKinder();
 	}
 	
 	protected Solution createSolution() {
@@ -1591,7 +1593,7 @@ protected class Familie_0_1_1_Assignment_kinder extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Kind")) {
 				type = AssignmentType.CR;
-				element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal"); 
+				element = ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele0110CrossReferenceKind(); 
 				return new Solution(obj);
 			}
 		}
@@ -1609,7 +1611,7 @@ protected class Familie_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.5/@alternatives/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFamilie().ele1Keyword();
 	}	
 }
 
@@ -1631,7 +1633,7 @@ protected class Farbe_Assignment_wert extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.6/@alternatives");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prFarbe().eleAssignmentWert();
 	}
 	
 	protected Solution createSolution() {
@@ -1639,22 +1641,22 @@ protected class Farbe_Assignment_wert extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("wert");
 		if("ROT".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.6/@alternatives/@terminal/@groups.0/@groups.0/@groups.0");
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prFarbe().ele0000KeywordROT();
 			return new Solution(obj);
 		}
 		if("BLAU".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.6/@alternatives/@terminal/@groups.0/@groups.0/@groups.1");
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prFarbe().ele0001KeywordBLAU();
 			return new Solution(obj);
 		}
 		if("GELB".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.6/@alternatives/@terminal/@groups.0/@groups.1");
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prFarbe().ele001KeywordGELB();
 			return new Solution(obj);
 		}
 		if("GRÜN".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.6/@alternatives/@terminal/@groups.1");
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prFarbe().ele01KeywordGRÜN();
 			return new Solution(obj);
 		}
 		return null;
@@ -1665,7 +1667,7 @@ protected class Farbe_Assignment_wert extends AssignmentToken  {
 
 /************ begin Rule CustomTypeParserRule ****************
  *
- * (error)
+ * CustomTypeParserRule returns ReferenceModel :: CustomType : 'type' name = ID ;
  *
  **/
 
@@ -1678,7 +1680,7 @@ protected class CustomTypeParserRule_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.7/@alternatives");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prCustomTypeParserRule().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -1706,7 +1708,7 @@ protected class CustomTypeParserRule_0_Keyword_type extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.7/@alternatives/@abstractTokens.0");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prCustomTypeParserRule().ele0KeywordType();
 	}	
 }
 
@@ -1718,7 +1720,7 @@ protected class CustomTypeParserRule_1_Assignment_name extends AssignmentToken  
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.7/@alternatives/@abstractTokens.1");
+		return ReferenceGrammarGrammarAccess.INSTANCE.prCustomTypeParserRule().ele1AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -1726,7 +1728,7 @@ protected class CustomTypeParserRule_1_Assignment_name extends AssignmentToken  
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/reference/ReferenceGrammar.xmi#//@rules.7/@alternatives/@abstractTokens.1/@terminal"); 
+			element = ReferenceGrammarGrammarAccess.INSTANCE.prCustomTypeParserRule().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
