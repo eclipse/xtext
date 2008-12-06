@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/example/parser/internal/InternalFowlerDsl.g 2008-12-03 21:42:09
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/example/parser/internal/InternalFowlerDsl.g 2008-12-06 11:02:16
 
 package org.eclipse.xtext.example.parser.internal; 
 
