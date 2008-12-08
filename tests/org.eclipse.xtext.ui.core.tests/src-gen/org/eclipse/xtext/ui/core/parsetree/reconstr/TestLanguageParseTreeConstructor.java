@@ -9,6 +9,8 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.*;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken.Solution;
+import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
+import org.eclipse.xtext.ui.core.services.TestLanguageGrammarAccess;
 
 
 public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
@@ -42,7 +44,7 @@ protected class File_Assignment_stuff extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/ui/core/TestLanguage.xmi#//@rules.0/@alternatives");
+		return TestLanguageGrammarAccess.INSTANCE.prFile().eleAssignmentStuff();
 	}
 	
 	protected Solution createSolution() {
@@ -79,7 +81,7 @@ protected class Stuff_Group extends GroupToken {
 	}
 	
 	public Group getGrammarElement() {
-		return (Group)getGrammarEle("classpath:/org/eclipse/xtext/ui/core/TestLanguage.xmi#//@rules.1/@alternatives");
+		return TestLanguageGrammarAccess.INSTANCE.prStuff().eleGroup();
 	}
 		
 	protected Solution createSolution() {	
@@ -107,7 +109,7 @@ protected class Stuff_0_Keyword_stuff extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return (Keyword)getGrammarEle("classpath:/org/eclipse/xtext/ui/core/TestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0");
+		return TestLanguageGrammarAccess.INSTANCE.prStuff().ele0KeywordStuff();
 	}	
 }
 
@@ -119,7 +121,7 @@ protected class Stuff_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	public Assignment getGrammarElement() {
-		return (Assignment)getGrammarEle("classpath:/org/eclipse/xtext/ui/core/TestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1");
+		return TestLanguageGrammarAccess.INSTANCE.prStuff().ele1AssignmentName();
 	}
 	
 	protected Solution createSolution() {
@@ -127,7 +129,7 @@ protected class Stuff_1_Assignment_name extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = (AbstractElement)getGrammarEle("classpath:/org/eclipse/xtext/ui/core/TestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1/@terminal"); 
+			element = TestLanguageGrammarAccess.INSTANCE.prStuff().ele10LexerRuleCallID();
 			return new Solution(obj);
 		}
 		return null;
