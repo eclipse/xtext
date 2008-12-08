@@ -3,6 +3,7 @@ package org.eclipse.xtext.ui.common.editor.codecompletion;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
@@ -20,11 +21,10 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.ParseTreeUtil;
 
 /**
  * Default Xtext implementation of interface <code>ICompletionProposal</code>.
@@ -54,19 +54,13 @@ public class XtextCompletionProposal implements ICompletionProposal,
 	 * @param element
 	 *            the element for which this CompletionProposal is created for
 	 * @param model the last semtantically complete object 
-	 * @param text
-	 *            the text value to be replaced/inserted
-	 * @param label
-	 *            the label to be displayed
-	 * @param description
-	 *            some additional description for the tooltip
-	 * @param imageFilePath
-	 *            the relative path of the image file, relative to the root of
+	 * @param text the text value to be replaced/inserted
+	 * @param label the label to be displayed
+	 * @param description some additional description for the tooltip
+	 * @param imageFilePath the relative path of the image file, relative to the root of
 	 *            the plug-in; the path must be legal
-	 * @param pluginId
-	 *            the id of the plug-in containing the image file;
-	 * @param offset
-	 *            the offset of the text
+	 * @param pluginId the id of the plug-in containing the image file;
+	 * @param offset the offset of the text
 	 */
 	public XtextCompletionProposal(AbstractElement element,EObject model,String text, StyledString label,
 			String description, String imageFilePath, String pluginIdentifier,
@@ -217,47 +211,38 @@ public class XtextCompletionProposal implements ICompletionProposal,
 			
 			IDocument document = viewer.getDocument();
 			
-			int offsetToApply = this.offset;
-
 			if (model != null) {
 				
+				ContentAssistContextAdapter contentAssistContextAdapter = getContextAdapater();
 				
-				CompositeNode parserNode = NodeUtil.getRootNode(model);
+				AbstractNode abstractNode = contentAssistContextAdapter.getCurrentNode();
 				
-				LeafNode currentLeafNode=ParseTreeUtil.getCurrentNodeByOffset(parserNode, offset);
-				
-				boolean isCursorAtTheEndOfTheLastElement = offset == (currentLeafNode.getTotalOffset() + currentLeafNode
-						.getTotalLength());
-				
-				if ((currentLeafNode.isHidden() && !"".equals(currentLeafNode.getText().trim()))
-						|| isCursorAtTheEndOfTheLastElement) {
+				if (abstractNode instanceof LeafNode) {
+					
+					LeafNode currentLeafNode = (LeafNode) abstractNode;
+					
 					if (getDisplayString().toUpperCase().startsWith(currentLeafNode.getText().toUpperCase())) {
-						offsetToApply-=currentLeafNode.getText().trim().length();
+						setText(getText().substring(this.offset - currentLeafNode.getTotalOffset()));
+					} else if (contentAssistContextAdapter.isCusorAtEndOfLastCompleteNode()) {
+
+						if (currentLeafNode.getGrammarElement() instanceof CrossReference
+								&& abstractElement instanceof CrossReference) {
+							setText(" " + getText());
+						}
+						else if (currentLeafNode.getGrammarElement() instanceof RuleCall
+								&& currentLeafNode.getGrammarElement().eContainer() instanceof Assignment
+								&& abstractElement instanceof Assignment) {
+							setText(" " + getText());
+						}
+						else if (!GrammarUtil.containingParserRule(abstractElement).equals(
+								  GrammarUtil.containingParserRule(currentLeafNode.getGrammarElement()))) {
+							setText(" " + getText());
+						}
 					}
 				} 
-				
-				if (!currentLeafNode.isHidden() && 
-						isCursorAtTheEndOfTheLastElement && 
-						offsetToApply==offset) {
-
-					if (currentLeafNode.getGrammarElement() instanceof CrossReference
-							&& abstractElement instanceof CrossReference) {
-						setText(" " + getText());
-					}
-					else if (currentLeafNode.getGrammarElement() instanceof RuleCall
-							&& currentLeafNode.getGrammarElement().eContainer() instanceof Assignment
-							&& abstractElement instanceof Assignment) {
-						setText(" " + getText());
-					}
-					else if (!GrammarUtil.containingParserRule(abstractElement).equals(GrammarUtil.containingParserRule(currentLeafNode.getGrammarElement()))) {
-						setText(" " + getText());
-					}
-
-				}	
 			}
 			
-			document.replace(offsetToApply, offset != offsetToApply ? offset
-					- offsetToApply : 0, getText());
+			document.replace(this.offset, document.getLength()<(this.offset+getText().length()) ? 0:getText().length() , getText());
 
 		} catch (BadLocationException e) {
 			logger.error(e);
@@ -325,6 +310,50 @@ public class XtextCompletionProposal implements ICompletionProposal,
 		return new Point(offset + this.text.length(), 0);
 	}
 	
+	/**
+	 * 
+	 * @param prefix to match
+	 * @return true or false whether the given prefix matches the text of this completion proposal
+	 */
+	public boolean matches(String prefix) {
+		
+		boolean matches = true;
+		
+		if (model != null) {
+			
+			AbstractElement abstractElement = null;
+
+			if (getAbstractElement() instanceof Keyword ||
+				getAbstractElement() instanceof CrossReference) {
+				abstractElement = GrammarUtil.containingAssignment(getAbstractElement());
+			} 
+			
+			if (null==abstractElement) {
+				abstractElement = getAbstractElement();
+			}
+			
+			ContentAssistContextAdapter contentAssistContextAdapter = getContextAdapater();
+			
+			boolean candidateToCompare 	= false;
+			
+			// means if we are at the end of a complete token we want to filter only equal grammarelements (not the 'next' ones)
+			if (contentAssistContextAdapter.isCusorAtEndOfLastCompleteNode() && 
+					abstractElement.equals(contentAssistContextAdapter.getCurrentGrammarElement())) {
+				candidateToCompare = true;
+			} else if (!contentAssistContextAdapter.isCusorAtEndOfLastCompleteNode() ) {
+				candidateToCompare = true;
+			}
+			
+			if ( candidateToCompare && (!"".equals(prefix.trim()) && 
+					!getDisplayString().toUpperCase().trim().startsWith(prefix.toUpperCase().trim()))) {
+				matches = false;
+			}	
+		}
+		
+		
+		return matches;
+	}
+
 	@Override
 	public String toString() {
 		return "XtextCompletionPoposal[text='"+getText()+"']";
@@ -343,5 +372,11 @@ public class XtextCompletionProposal implements ICompletionProposal,
 //			}
 //		}
 		this.image = newImage;
+	}
+	
+	private ContentAssistContextAdapter getContextAdapater() {
+		ContentAssistContextAdapter contentAssistContextAdapter = (ContentAssistContextAdapter) 
+			EcoreUtil.getAdapter(model.eAdapters(), ContentAssistContextAdapter.class);
+		return contentAssistContextAdapter;
 	}
 }

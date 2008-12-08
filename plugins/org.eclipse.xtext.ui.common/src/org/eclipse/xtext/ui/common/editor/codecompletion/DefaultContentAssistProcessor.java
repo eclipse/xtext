@@ -7,8 +7,10 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ContextInformationValidator;
@@ -23,6 +25,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.parser.IParseResult;
@@ -48,14 +51,10 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 	@Inject
 	private IProposalProvider proposalProvider;
+	
+	@Inject
+	private ILinkingService linkingService;
 
-	/**
-	 * @param proposalProvider
-	 *            the proposalProvider to set
-	 */
-	public void setProposalProvider(IProposalProvider proposalProvider) {
-		this.proposalProvider = proposalProvider;
-	}
 
 	/**
 	 * computes the possible grammar elements following the one at the given offset and calls the respective methods on
@@ -65,111 +64,91 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 		ICompletionProposal[] completionProposals = null;
 
-		if (proposalProvider != null) {
+		IDocument document = viewer.getDocument();
 
-			IDocument document = viewer.getDocument();
+		if (document instanceof IXtextDocument) {
 
-			if (document instanceof IXtextDocument) {
+			List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
-				List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
+			IXtextDocument xtextDocument = (IXtextDocument) document;
 
-				IXtextDocument xtextDocument = (IXtextDocument) document;
+			CompositeNode rootNode = xtextDocument.readOnly(new UnitOfWork<CompositeNode>() {
+				public CompositeNode exec(XtextResource resource) throws Exception {
+					IParseResult parseResult = resource.getParseResult();
+					Assert.isNotNull(parseResult);
+					return parseResult.getRootNode();
+				}
+			});
 
-				CompositeNode rootNode = xtextDocument.readOnly(new UnitOfWork<CompositeNode>() {
-					public CompositeNode exec(XtextResource resource) throws Exception {
-						IParseResult parseResult = resource.getParseResult();
-						Assert.isNotNull(parseResult);
-						return parseResult.getRootNode();
-					}
-				});
+			Assert.isNotNull(rootNode);
 
-				Assert.isNotNull(rootNode);
+			AbstractNode lastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
 
-				AbstractNode lastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
+			AbstractNode currentNode = ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
 
-				LeafNode currentLeafNode = ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
+			String prefix = calculatePrefix(viewer, offset, currentNode);
 
-				String prefix = calculatePrefix(viewer, offset, currentLeafNode);
+			EObject model = lastCompleteNode instanceof AbstractNode ? NodeUtil
+					.getNearestSemanticObject((AbstractNode) lastCompleteNode) : lastCompleteNode;
+					
+			addOrReplaceCaContextAdapter(model, new ContentAssistContextAdapter(rootNode,currentNode,lastCompleteNode,offset,prefix));
 
-				EObject model = lastCompleteNode instanceof AbstractNode ? NodeUtil
-						.getNearestSemanticObject((AbstractNode) lastCompleteNode) : lastCompleteNode;
+			Set<AbstractElement> nextValidElementSet = new LinkedHashSet<AbstractElement>();
+			/**
+			 * in case of a crossreference which isnt linked properly we evaluate or propose it again
+			 */
+			if (lastCompleteNode.getGrammarElement() instanceof CrossReference && !isLinked(lastCompleteNode)) {
+				nextValidElementSet.add(getAbstractElement(lastCompleteNode));
+				nextValidElementSet.addAll(ParseTreeUtil.getElementSetValidFromOffset(rootNode, lastCompleteNode,
+						offset));
+			}
+			/**
+			 * in case of 'at-the-end' of the previous,completed element we evaluate it again for 
+			 * 'right-to-left-backtracking' cases (e.g. for keyword 'kind' kind>|< |=cursorpos)
+			 */
+			else if (lastCompleteNode == currentNode) {
+				
+				Assignment containingAssignment = GrammarUtil
+						.containingAssignment(lastCompleteNode.getGrammarElement());
 
-				Set<AbstractElement> nextValidElementSet = new LinkedHashSet<AbstractElement>();
-				/**
-				 * in case of a crossreference which isnt linked already we evaluate it again and delegate to
-				 * proposalProvider (again)
-				 */
-				if (lastCompleteNode.getGrammarElement() instanceof CrossReference && !isLinked(lastCompleteNode)) {
-					nextValidElementSet.add((AbstractElement) lastCompleteNode.getGrammarElement());
+				if (lastCompleteNode.getGrammarElement() instanceof RuleCall && containingAssignment != null) {
+					nextValidElementSet.add(containingAssignment);
 					nextValidElementSet.addAll(ParseTreeUtil.getElementSetValidFromOffset(rootNode, lastCompleteNode,
 							offset));
 				}
-				/**
-				 * in case of 'at-the-end' of the previous,completed element we evaluate it again for
-				 * 'right-to-left-backtracking' cases (e.g. for keyword 'kind' kind>|< |=cursorpos)
-				 */
-				else if (currentLeafNode == lastCompleteNode) {
-					Assignment containingAssignment = GrammarUtil.containingAssignment(lastCompleteNode.getGrammarElement());
-					
-					if (lastCompleteNode.getGrammarElement() instanceof RuleCall && containingAssignment!=null) {
-						nextValidElementSet.add(containingAssignment);
-						nextValidElementSet.addAll(ParseTreeUtil.getElementSetValidFromOffset(rootNode, lastCompleteNode, offset));
-					} else {
-						nextValidElementSet = ParseTreeUtil.getElementSetValidFromOffset(rootNode, lastCompleteNode, offset);
-						nextValidElementSet.add((AbstractElement) lastCompleteNode.getGrammarElement());
-					}
-				}
 				else {
-					nextValidElementSet = ParseTreeUtil
-							.getElementSetValidFromOffset(rootNode, lastCompleteNode, offset);
-				}
-
-				ProposalProviderInvokerSwitch proposalProviderInvokerSwitch = new ProposalProviderInvokerSwitch(model,
-						document, offset, prefix, proposalProvider);
-
-				for (List<EObject> resolvedElementOrRuleList : new ProposalCandidateResolverSwitch(nextValidElementSet)) {
-
-					List<ICompletionProposal> collectedCompletionProposalList = proposalProviderInvokerSwitch
-							.collectCompletionProposalList(resolvedElementOrRuleList);
-
-					completionProposalList.addAll(collectedCompletionProposalList);
-				}
-				if (completionProposalList != null) {
-					List<? extends ICompletionProposal> processedCompletionProposalList = proposalProvider
-							.sortAndFilter(completionProposalList, model, prefix, document, offset);
-					completionProposals = processedCompletionProposalList.toArray(new ICompletionProposal[] {});
+					nextValidElementSet = ParseTreeUtil.getElementSetValidFromOffset(rootNode, lastCompleteNode, offset);
+					nextValidElementSet.add(getAbstractElement(lastCompleteNode));
 				}
 			}
+			else {
+				nextValidElementSet = ParseTreeUtil.getElementSetValidFromOffset(rootNode, lastCompleteNode, offset);
+			}
+
+			ProposalProviderInvokerSwitch proposalProviderInvokerSwitch = new ProposalProviderInvokerSwitch(model,
+					document, offset, prefix, proposalProvider);
+
+			for (List<EObject> resolvedElementOrRuleList : new ProposalCandidateResolverSwitch(nextValidElementSet)) {
+
+				List<ICompletionProposal> collectedCompletionProposalList = proposalProviderInvokerSwitch
+						.collectCompletionProposalList(resolvedElementOrRuleList);
+
+				completionProposalList.addAll(collectedCompletionProposalList);
+			}
+			
+			if (completionProposalList != null) {
+				List<? extends ICompletionProposal> processedCompletionProposalList = proposalProvider.sortAndFilter(
+						completionProposalList, model, prefix, document, offset);
+				completionProposals = processedCompletionProposalList.toArray(
+						new ICompletionProposal[processedCompletionProposalList.size()]);
+			}
+			
 		}
 
 		return completionProposals;
 	}
 
-	protected String calculatePrefix(ITextViewer viewer, final int offset, LeafNode currentLeafNode) {
-
-		if (currentLeafNode == null)
-			return "";
-
-		String prefix = "";
-		StyledText textWidget = viewer.getTextWidget();
-		if (textWidget.getCharCount() > 0) {
-			int boundedOffset = Math.min(offset, textWidget.getCharCount()) - 1;
-			if (currentLeafNode.getTotalOffset() <= boundedOffset)
-				prefix = textWidget.getText(currentLeafNode.getTotalOffset(), boundedOffset);
-		}
-
-		// if cursor is behind a complete keyword, accept any input => empty
-		// prefix
-		// TODO: Find a way to distinguish between keywords like "+" or "-" and
-		// "extends" or "class"
-		// in the latter case, the prefix "" would not always be sufficient
-		if (currentLeafNode.getGrammarElement() instanceof Keyword && currentLeafNode.getText().equals(prefix)) {
-			prefix = "";
-		}
-
-		return prefix;
-	}
-
+	
 	public char[] getCompletionProposalAutoActivationCharacters() {
 		return null;
 	}
@@ -189,10 +168,48 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 	public IContextInformationValidator getContextInformationValidator() {
 		return new ContextInformationValidator(this);
 	}
+	
+	protected String calculatePrefix(ITextViewer viewer, final int offset, AbstractNode abstractNode) {
 
-	@Inject
-	private ILinkingService linkingService;
+		if (abstractNode == null)
+			return "";
 
+		String prefix = "";
+		StyledText textWidget = viewer.getTextWidget();
+		if (textWidget.getCharCount() > 0) {
+			int boundedOffset = Math.min(offset, textWidget.getCharCount()) - 1;
+			if (abstractNode.getTotalOffset() <= boundedOffset)
+				prefix = textWidget.getText(abstractNode.getTotalOffset(), boundedOffset);
+		}
+
+		// if cursor is behind a complete keyword, accept any input => empty
+		// prefix
+		// TODO: Find a way to distinguish between keywords like "+" or "-" and
+		// "extends" or "class"
+		// in the latter case, the prefix "" would not always be sufficient
+		if (abstractNode.getGrammarElement() instanceof Keyword && (abstractNode instanceof LeafNode  && ((LeafNode)abstractNode).getText().equals(prefix))) {
+			prefix = "";
+		}
+
+		return prefix;
+	}
+
+	
+	private void addOrReplaceCaContextAdapter(EObject model, ContentAssistContextAdapter contentAssistContextAdapter) {
+		
+		if (model != null) {
+
+			Adapter existingAdapter = EcoreUtil.getAdapter(model.eAdapters(), ContentAssistContextAdapter.class);
+
+			if (existingAdapter != null) {
+				model.eAdapters().remove(existingAdapter);
+			}
+
+			model.eAdapters().add(contentAssistContextAdapter);
+		}
+	}
+
+	
 	private boolean isLinked(AbstractNode lastCompleteNode) {
 		EObject semanticModel = NodeUtil.getNearestSemanticObject(lastCompleteNode);
 		CrossReference crossReference = (CrossReference) lastCompleteNode.getGrammarElement();
@@ -207,6 +224,11 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 					(LeafNode) lastCompleteNode);
 			return !linkCandidates.isEmpty() && referencedObjects.containsAll(linkCandidates);
 		}
+	}
+	
+	private AbstractElement getAbstractElement(AbstractNode lastCompleteNode) {
+		return (AbstractElement) (lastCompleteNode.getGrammarElement() instanceof ParserRule ?
+				((ParserRule)lastCompleteNode.getGrammarElement()).getAlternatives(): lastCompleteNode.getGrammarElement());
 	}
 
 }

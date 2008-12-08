@@ -28,6 +28,7 @@ import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
@@ -177,7 +178,7 @@ public class OutlineViewTest extends AbstractEditorTest {
 		assertSynchronized(editor, 2, 45, 0);
 	}
 
-	protected LeafNode getCurrentEditorNode() {
+	protected AbstractNode getCurrentEditorNode() {
 		XtextDocument document = (XtextDocument) editor.getDocument();
 
 		ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
@@ -195,8 +196,7 @@ public class OutlineViewTest extends AbstractEditorTest {
 		});
 		Assert.isNotNull(rootNode);
 
-		LeafNode currentNodeByOffset = ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
-		return currentNodeByOffset;
+		return  ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
 	}
 
 	protected void assertSynchronized(XtextEditor editor, int elementIndex, int offset, int length) {
@@ -239,9 +239,12 @@ public class OutlineViewTest extends AbstractEditorTest {
 			EObject objInEditor = contents.get(elementIndex);
 
 			// just debugging purposes
-			LeafNode currentEditorNode = getCurrentEditorNode();
-			System.out.println("Selection [" + offset + ";" + length + "] yields node text ["
-					+ currentEditorNode.getText() + "]");
+			AbstractNode currentEditorNode = getCurrentEditorNode();
+			if (currentEditorNode instanceof LeafNode) {
+				System.out.println("Selection [" + offset + ";" + length + "] yields node text ["
+						+ ((LeafNode)currentEditorNode).getText() + "]");
+			}
+			
 
 			// obtain selected model element in outline
 			EObject objInOutline = resource.getEObject(uri.fragment());
