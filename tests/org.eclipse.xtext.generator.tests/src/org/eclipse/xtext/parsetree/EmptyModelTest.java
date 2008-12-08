@@ -2,7 +2,7 @@ package org.eclipse.xtext.parsetree;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.testlanguages.OptionalEmptyLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -11,7 +11,7 @@ public class EmptyModelTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(OptionalEmptyLanguageStandaloneSetup.class);
+		with(OptionalEmptyTestLanguageStandaloneSetup.class);
 	}
 	
 	public void testParseEmpty() throws Exception {

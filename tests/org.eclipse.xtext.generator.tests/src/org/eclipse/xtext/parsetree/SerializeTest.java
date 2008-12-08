@@ -1,6 +1,6 @@
 package org.eclipse.xtext.parsetree;
 
-import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
+import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class SerializeTest extends AbstractGeneratorTest {
@@ -8,7 +8,7 @@ public class SerializeTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(SimpleExpressionsStandaloneSetup.class);
+		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 	}
 	
 	public void testUncompleteComment() throws Exception {

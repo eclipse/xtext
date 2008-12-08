@@ -8,12 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.lexer;
 
+import junit.framework.TestCase;
+
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.CommonTokenStream;
-import org.eclipse.xtext.testlanguages.parser.internal.InternalSimpleExpressionsLexer;
-
-import junit.framework.TestCase;
+import org.eclipse.xtext.testlanguages.parser.internal.InternalSimpleExpressionsTestLanguageLexer;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
@@ -22,12 +22,12 @@ import junit.framework.TestCase;
 public class LexerSLComment extends TestCase {
 	public void testSlComment() {
 		String model = "//sl comment\na";
-		InternalSimpleExpressionsLexer lexer = new InternalSimpleExpressionsLexer();
+		InternalSimpleExpressionsTestLanguageLexer lexer = new InternalSimpleExpressionsTestLanguageLexer();
 		lexer.setCharStream(new ANTLRStringStream(model));
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		Object inLineComment = stream.getTokens().get(0);
 		assertTrue(inLineComment instanceof CommonToken);
-		assertEquals(InternalSimpleExpressionsLexer.RULE_SL_COMMENT, ((CommonToken) inLineComment).getType());
+		assertEquals(InternalSimpleExpressionsTestLanguageLexer.RULE_SL_COMMENT, ((CommonToken) inLineComment).getType());
 	}
 
 	/**
@@ -36,13 +36,13 @@ public class LexerSLComment extends TestCase {
 	 */
 	public void testSlCommentEOF() {
 		String model = "a\n//sl comment";
-		InternalSimpleExpressionsLexer lexer = new InternalSimpleExpressionsLexer();
+		InternalSimpleExpressionsTestLanguageLexer lexer = new InternalSimpleExpressionsTestLanguageLexer();
 		lexer.setCharStream(new ANTLRStringStream(model));
 		CommonTokenStream stream = new CommonTokenStream(lexer);
 		Object eofLineComment = stream.getTokens().get(2);
 		assertTrue(eofLineComment instanceof CommonToken);
 		CommonToken commonToken = (CommonToken) eofLineComment;
 		int type = commonToken.getType();
-		assertEquals(InternalSimpleExpressionsLexer.RULE_SL_COMMENT, type);
+		assertEquals(InternalSimpleExpressionsTestLanguageLexer.RULE_SL_COMMENT, type);
 	}
 }

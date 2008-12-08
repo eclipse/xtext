@@ -11,7 +11,7 @@ package org.eclipse.xtext.parsetree;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.dummy.DummyLanguageStandaloneSetup;
+import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class LengthOffsetLineTest extends AbstractGeneratorTest {
@@ -88,6 +88,6 @@ public class LengthOffsetLineTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(DummyLanguageStandaloneSetup.class);
+		with(DummyTestLanguageStandaloneSetup.class);
 	}
 }

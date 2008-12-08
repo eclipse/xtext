@@ -16,7 +16,7 @@ import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
 import org.eclipse.xtext.crossref.impl.XtextBuiltinLinkingService;
 import org.eclipse.xtext.crossref.internal.Linker;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -40,7 +40,7 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		scopeProvider = new DefaultScopeProvider();
 		modelAsText = 
 			"spielplatz 1 {\n" + 

@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.metamodelreferencing.tests;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -17,13 +18,13 @@ public class MultiGenMMTest extends AbstractGeneratorTest {
     protected void setUp() throws Exception {
         super.setUp();
         XtextPackage.eINSTANCE.getAbstractElement(); // initialize EPackage
-        with(MetamodelRefTestStandaloneSetup.class);
+        with(MultiGenMMTestLanguageStandaloneSetup.class);
     }
 
     public void testStuff() throws Exception {
-        Object parse = getModel("foo bar");
+        EObject parse = getModel("foo 'bar'");
         assertWithXtend("'SimpleTest::Foo'", "metaType.name", parse);
-        assertWithXtend("'xtext::RuleCall'", "nameRefs.first().metaType.name", parse);
+        assertWithXtend("'OtherTest::FooBar'", "nameRefs.first().metaType.name", parse);
     }
 
 }

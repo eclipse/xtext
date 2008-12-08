@@ -8,7 +8,7 @@
 package org.eclipse.xtext.resource.metamodel;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.crossrefs.LangAStandaloneSetup;
+import org.eclipse.xtext.crossrefs.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -18,7 +18,7 @@ public class ResourceTests extends AbstractGeneratorTest {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(LangAStandaloneSetup.class);
+		with(LangATestLanguageStandaloneSetup.class);
 	}
 	
 	public void testFragmentsWorkInBothDirections() throws Exception {
