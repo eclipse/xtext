@@ -4,6 +4,7 @@
       label="%featureName"
       version="0.7.0.qualifier"
       provider-name="%providerName"
+      plugin="org.eclipse.xtext"
       image="modeling32.png">
 
    <description url="http://www.example.com/description">
