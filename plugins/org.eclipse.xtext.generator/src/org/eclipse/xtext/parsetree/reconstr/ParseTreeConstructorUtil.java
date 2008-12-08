@@ -1,5 +1,6 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
+
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextStandaloneSetup;
@@ -27,6 +29,24 @@ public class ParseTreeConstructorUtil {
 		if (val == null)
 			return "";
 		return val.replaceAll("[^a-zA-Z0-9_]", "");
+	}
+	
+	public static boolean isAssignmentRequired(Assignment assignment) {
+		if (GrammarUtil.isOptionalCardinality(assignment))
+			return false;
+		if (assignment.eContainer() instanceof Group)
+			return !isOptionaGroup((Group) assignment.eContainer());
+		return true;
+	}
+
+	private static boolean isOptionaGroup(Group group) {
+		if (GrammarUtil.containedAssignments(group).size() != 1)
+			return false;
+		if (GrammarUtil.isOptionalCardinality(group))
+			return true;
+		if (group.eContainer() instanceof Group)
+			return isOptionaGroup((Group) group.eContainer());
+		return false;
 	}
 
 	public static String getUniqueElementName(AbstractElement ele) {

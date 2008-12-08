@@ -229,6 +229,11 @@ public class GeneratorFacade {
 			crossRefSerializer.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.SimpleCrossReferenceSerializer");
 			genModel.getServices().add(crossRefSerializer);
 
+			GenService transientValueService = XtextgenFactory.eINSTANCE.createGenService();
+			transientValueService.setServiceInterfaceFQName("org.eclipse.xtext.parsetree.reconstr.ITransientValueService");
+			transientValueService.setGenClassFQName("org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService");
+			genModel.getServices().add(transientValueService);
+
 			GenService tokenScannerService = XtextgenFactory.eINSTANCE.createGenService();
 			tokenScannerService.setServiceInterfaceFQName("org.eclipse.xtext.parser.antlr.Lexer");
 			tokenScannerService.setGenClassFQName(namespace + ".parser.internal.Internal" + languageName + "Lexer");
