@@ -489,32 +489,32 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends BaseEPackageAcces
 		private CrossReference c0110CrossReferenceKind;
 		private Keyword c1Keyword;
 		
-		// (error)
+		// Familie : 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')' ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(7)); 
 		}
 
-		// (error)
+		// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')'
 		public Group eleGroup() {
 			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
 		}
 
-		// (error)
+		// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) *
 		public Group ele0Group() {
 			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
 		}
 
-		// (error)
+		// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ]
 		public Group ele00Group() {
 			return (c00Group != null) ? c00Group : (c00Group = (Group)ele0Group().eContents().get(0)); 
 		}
 
-		// (error)
+		// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ]
 		public Group ele000Group() {
 			return (c000Group != null) ? c000Group : (c000Group = (Group)ele00Group().eContents().get(0)); 
 		}
 
-		// (error)
+		// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ]
 		public Group ele0000Group() {
 			return (c0000Group != null) ? c0000Group : (c0000Group = (Group)ele000Group().eContents().get(0)); 
 		}
@@ -569,37 +569,37 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends BaseEPackageAcces
 			return (c00000101LexerRuleCallID != null) ? c00000101LexerRuleCallID : (c00000101LexerRuleCallID = (RuleCall)ele0000010Alternatives().eContents().get(1)); 
 		}
 
-		// (error)
+		// mutter = [ Erwachsener ]
 		public Assignment ele00001AssignmentMutter() {
 			return (c00001AssignmentMutter != null) ? c00001AssignmentMutter : (c00001AssignmentMutter = (Assignment)ele0000Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// [ Erwachsener ]
 		public CrossReference ele000010CrossReferenceErwachsener() {
 			return (c000010CrossReferenceErwachsener != null) ? c000010CrossReferenceErwachsener : (c000010CrossReferenceErwachsener = (CrossReference)ele00001AssignmentMutter().eContents().get(0)); 
 		}
 
-		// (error)
+		// vater = [ Erwachsener ]
 		public Assignment ele0001AssignmentVater() {
 			return (c0001AssignmentVater != null) ? c0001AssignmentVater : (c0001AssignmentVater = (Assignment)ele000Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// [ Erwachsener ]
 		public CrossReference ele00010CrossReferenceErwachsener() {
 			return (c00010CrossReferenceErwachsener != null) ? c00010CrossReferenceErwachsener : (c00010CrossReferenceErwachsener = (CrossReference)ele0001AssignmentVater().eContents().get(0)); 
 		}
 
-		// (error)
+		// kinder += [ Kind ]
 		public Assignment ele001AssignmentKinder() {
 			return (c001AssignmentKinder != null) ? c001AssignmentKinder : (c001AssignmentKinder = (Assignment)ele00Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// [ Kind ]
 		public CrossReference ele0010CrossReferenceKind() {
 			return (c0010CrossReferenceKind != null) ? c0010CrossReferenceKind : (c0010CrossReferenceKind = (CrossReference)ele001AssignmentKinder().eContents().get(0)); 
 		}
 
-		// (error)
+		// ( ',' kinder += [ Kind ] ) *
 		public Group ele01Group() {
 			return (c01Group != null) ? c01Group : (c01Group = (Group)ele0Group().eContents().get(1)); 
 		}
@@ -609,12 +609,12 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends BaseEPackageAcces
 			return (c010Keyword != null) ? c010Keyword : (c010Keyword = (Keyword)ele01Group().eContents().get(0)); 
 		}
 
-		// (error)
+		// kinder += [ Kind ]
 		public Assignment ele011AssignmentKinder() {
 			return (c011AssignmentKinder != null) ? c011AssignmentKinder : (c011AssignmentKinder = (Assignment)ele01Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// [ Kind ]
 		public CrossReference ele0110CrossReferenceKind() {
 			return (c0110CrossReferenceKind != null) ? c0110CrossReferenceKind : (c0110CrossReferenceKind = (CrossReference)ele011AssignmentKinder().eContents().get(0)); 
 		}
@@ -682,7 +682,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends BaseEPackageAcces
 		return (pFarbe != null) ? pFarbe : (pFarbe = new FarbeElements());
 	} 
 
-	// (error)
+	// Familie : 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')' ;
 	public FamilieElements prFamilie() {
 		return (pFamilie != null) ? pFamilie : (pFamilie = new FamilieElements());
 	} 

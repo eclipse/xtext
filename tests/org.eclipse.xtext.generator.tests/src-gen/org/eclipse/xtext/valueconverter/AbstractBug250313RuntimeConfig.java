@@ -45,6 +45,10 @@ public abstract class AbstractBug250313RuntimeConfig extends AbstractServiceRegi
 		return org.eclipse.xtext.parsetree.reconstr.impl.SimpleCrossReferenceSerializer.class;
 	}
 		
+	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.ITransientValueService> getITransientValueService() {
+		return org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService.class;
+	}
+		
 	protected Class<? extends org.eclipse.xtext.parser.antlr.Lexer> getLexer() {
 		return org.eclipse.xtext.valueconverter.parser.internal.InternalBug250313Lexer.class;
 	}
@@ -61,6 +65,7 @@ public abstract class AbstractBug250313RuntimeConfig extends AbstractServiceRegi
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, getIParseTreeConstructor())
 		.with(org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.class, getITokenSerializer())
 		.with(org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer.class, getICrossReferenceSerializer())
+		.with(org.eclipse.xtext.parsetree.reconstr.ITransientValueService.class, getITransientValueService())
 		.with(org.eclipse.xtext.parser.antlr.Lexer.class, getLexer())
 		
 			.registrations();

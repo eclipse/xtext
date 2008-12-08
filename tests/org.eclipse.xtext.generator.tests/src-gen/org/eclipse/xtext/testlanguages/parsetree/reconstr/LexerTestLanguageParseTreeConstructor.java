@@ -16,6 +16,7 @@ import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess;
 public class LexerTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -48,7 +49,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("children",required)) == null) return null;
+		if((value = current.getConsumable("children",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -113,7 +114,7 @@ protected class Element_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -136,7 +137,7 @@ protected class Element_1_Assignment_h extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("h",required)) == null) return null;
+		if((value = current.getConsumable("h",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("h");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;

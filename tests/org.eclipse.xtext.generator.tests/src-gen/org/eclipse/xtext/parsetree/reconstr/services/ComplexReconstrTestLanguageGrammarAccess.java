@@ -28,12 +28,12 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 		private Assignment c111AssignmentMinusOperands;
 		private RuleCall c1110ParserRuleCallTerm;
 		
-		// (error)
+		// Op returns Expression : Term ( { current = Add . addOperands += current } '+' addOperands += Term | { current = Minus . minusOperands += current } '-' minusOperands += Term ) * ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(1)); 
 		}
 
-		// (error)
+		// Term ( { current = Add . addOperands += current } '+' addOperands += Term | { current = Minus . minusOperands += current } '-' minusOperands += Term ) *
 		public Group eleGroup() {
 			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
@@ -43,22 +43,22 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 			return (c0ParserRuleCallTerm != null) ? c0ParserRuleCallTerm : (c0ParserRuleCallTerm = (RuleCall)eleGroup().eContents().get(0)); 
 		}
 
-		// (error)
+		// ( { current = Add . addOperands += current } '+' addOperands += Term | { current = Minus . minusOperands += current } '-' minusOperands += Term ) *
 		public Alternatives ele1Alternatives() {
 			return (c1Alternatives != null) ? c1Alternatives : (c1Alternatives = (Alternatives)eleGroup().eContents().get(1)); 
 		}
 
-		// (error)
+		// { current = Add . addOperands += current } '+' addOperands += Term
 		public Group ele10Group() {
 			return (c10Group != null) ? c10Group : (c10Group = (Group)ele1Alternatives().eContents().get(0)); 
 		}
 
-		// (error)
+		// { current = Add . addOperands += current } '+'
 		public Group ele100Group() {
 			return (c100Group != null) ? c100Group : (c100Group = (Group)ele10Group().eContents().get(0)); 
 		}
 
-		// (error)
+		// { current = Add . addOperands += current }
 		public Action ele1000ActionAddaddOperands() {
 			return (c1000ActionAddaddOperands != null) ? c1000ActionAddaddOperands : (c1000ActionAddaddOperands = (Action)ele100Group().eContents().get(0)); 
 		}
@@ -78,17 +78,17 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 			return (c1010ParserRuleCallTerm != null) ? c1010ParserRuleCallTerm : (c1010ParserRuleCallTerm = (RuleCall)ele101AssignmentAddOperands().eContents().get(0)); 
 		}
 
-		// (error)
+		// { current = Minus . minusOperands += current } '-' minusOperands += Term
 		public Group ele11Group() {
 			return (c11Group != null) ? c11Group : (c11Group = (Group)ele1Alternatives().eContents().get(1)); 
 		}
 
-		// (error)
+		// { current = Minus . minusOperands += current } '-'
 		public Group ele110Group() {
 			return (c110Group != null) ? c110Group : (c110Group = (Group)ele11Group().eContents().get(0)); 
 		}
 
-		// (error)
+		// { current = Minus . minusOperands += current }
 		public Action ele1100ActionMinusminusOperands() {
 			return (c1100ActionMinusminusOperands != null) ? c1100ActionMinusminusOperands : (c1100ActionMinusminusOperands = (Action)ele110Group().eContents().get(0)); 
 		}
@@ -115,7 +115,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 		private RuleCall c0ParserRuleCallAtom;
 		private RuleCall c1ParserRuleCallParens;
 		
-		// (error)
+		// Term returns Expression : Atom | Parens ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
 		}
@@ -168,7 +168,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 		private Assignment c1AssignmentEm;
 		private Keyword c10Keyword;
 		
-		// (error)
+		// Parens returns Expression : '(' Op ')' ( em = '!' ) ? ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(4)); 
 		}
@@ -234,17 +234,17 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 		private Assignment c1AssignmentName;
 		private RuleCall c10LexerRuleCallSTRING;
 		
-		// (error)
+		// TrickyA returns TypeA1 : 'TA' TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ? name += STRING ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(5)); 
 		}
 
-		// (error)
+		// 'TA' TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ? name += STRING
 		public Group eleGroup() {
 			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
-		// (error)
+		// 'TA' TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ?
 		public Group ele0Group() {
 			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
 		}
@@ -279,17 +279,17 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 			return (c0010LexerRuleCallID != null) ? c0010LexerRuleCallID : (c0010LexerRuleCallID = (RuleCall)ele001AssignmentName().eContents().get(0)); 
 		}
 
-		// (error)
+		// ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ?
 		public Alternatives ele01Alternatives() {
 			return (c01Alternatives != null) ? c01Alternatives : (c01Alternatives = (Alternatives)ele0Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// { current = TypeB . x = current } 'x'
 		public Group ele010Group() {
 			return (c010Group != null) ? c010Group : (c010Group = (Group)ele01Alternatives().eContents().get(0)); 
 		}
 
-		// (error)
+		// { current = TypeB . x = current }
 		public Action ele0100ActionTypeBx() {
 			return (c0100ActionTypeBx != null) ? c0100ActionTypeBx : (c0100ActionTypeBx = (Action)ele010Group().eContents().get(0)); 
 		}
@@ -299,12 +299,12 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 			return (c0101KeywordX != null) ? c0101KeywordX : (c0101KeywordX = (Keyword)ele010Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// { current = TypeC . x = current } 'y'
 		public Group ele011Group() {
 			return (c011Group != null) ? c011Group : (c011Group = (Group)ele01Alternatives().eContents().get(1)); 
 		}
 
-		// (error)
+		// { current = TypeC . x = current }
 		public Action ele0110ActionTypeCx() {
 			return (c0110ActionTypeCx != null) ? c0110ActionTypeCx : (c0110ActionTypeCx = (Action)ele011Group().eContents().get(0)); 
 		}
@@ -330,7 +330,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 		private Assignment cAssignmentName;
 		private RuleCall c0LexerRuleCallID;
 		
-		// (error)
+		// TrickyA1 returns TypeD : name += ID ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(6)); 
 		}
@@ -434,22 +434,22 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 		private Action c10ActionC3z;
 		private Keyword c11KeywordZ;
 		
-		// (error)
+		// TrickyC : 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ? ( { current = C3 . z = current } 'z' ) ? ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(8)); 
 		}
 
-		// (error)
+		// 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ? ( { current = C3 . z = current } 'z' ) ?
 		public Group eleGroup() {
 			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
 		}
 
-		// (error)
+		// 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ?
 		public Group ele0Group() {
 			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
 		}
 
-		// (error)
+		// 'TC' name = ID ( { current = C1 . x = current } 'x' ) ?
 		public Group ele00Group() {
 			return (c00Group != null) ? c00Group : (c00Group = (Group)ele0Group().eContents().get(0)); 
 		}
@@ -474,12 +474,12 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 			return (c00010LexerRuleCallID != null) ? c00010LexerRuleCallID : (c00010LexerRuleCallID = (RuleCall)ele0001AssignmentName().eContents().get(0)); 
 		}
 
-		// (error)
+		// ( { current = C1 . x = current } 'x' ) ?
 		public Group ele001Group() {
 			return (c001Group != null) ? c001Group : (c001Group = (Group)ele00Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// { current = C1 . x = current }
 		public Action ele0010ActionC1x() {
 			return (c0010ActionC1x != null) ? c0010ActionC1x : (c0010ActionC1x = (Action)ele001Group().eContents().get(0)); 
 		}
@@ -489,12 +489,12 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 			return (c0011KeywordX != null) ? c0011KeywordX : (c0011KeywordX = (Keyword)ele001Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// ( { current = C2 . y = current } 'y' ) ?
 		public Group ele01Group() {
 			return (c01Group != null) ? c01Group : (c01Group = (Group)ele0Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// { current = C2 . y = current }
 		public Action ele010ActionC2y() {
 			return (c010ActionC2y != null) ? c010ActionC2y : (c010ActionC2y = (Action)ele01Group().eContents().get(0)); 
 		}
@@ -504,12 +504,12 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 			return (c011KeywordY != null) ? c011KeywordY : (c011KeywordY = (Keyword)ele01Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// ( { current = C3 . z = current } 'z' ) ?
 		public Group ele1Group() {
 			return (c1Group != null) ? c1Group : (c1Group = (Group)eleGroup().eContents().get(1)); 
 		}
 
-		// (error)
+		// { current = C3 . z = current }
 		public Action ele10ActionC3z() {
 			return (c10ActionC3z != null) ? c10ActionC3z : (c10ActionC3z = (Action)ele1Group().eContents().get(0)); 
 		}
@@ -878,12 +878,12 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 	}
 
 	
-	// (error)
+	// Op returns Expression : Term ( { current = Add . addOperands += current } '+' addOperands += Term | { current = Minus . minusOperands += current } '-' minusOperands += Term ) * ;
 	public OpElements prOp() {
 		return (pOp != null) ? pOp : (pOp = new OpElements());
 	} 
 
-	// (error)
+	// Term returns Expression : Atom | Parens ;
 	public TermElements prTerm() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	} 
@@ -893,17 +893,17 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 		return (pAtom != null) ? pAtom : (pAtom = new AtomElements());
 	} 
 
-	// (error)
+	// Parens returns Expression : '(' Op ')' ( em = '!' ) ? ;
 	public ParensElements prParens() {
 		return (pParens != null) ? pParens : (pParens = new ParensElements());
 	} 
 
-	// (error)
+	// TrickyA returns TypeA1 : 'TA' TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ? name += STRING ;
 	public TrickyAElements prTrickyA() {
 		return (pTrickyA != null) ? pTrickyA : (pTrickyA = new TrickyAElements());
 	} 
 
-	// (error)
+	// TrickyA1 returns TypeD : name += ID ;
 	public TrickyA1Elements prTrickyA1() {
 		return (pTrickyA1 != null) ? pTrickyA1 : (pTrickyA1 = new TrickyA1Elements());
 	} 
@@ -913,7 +913,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 		return (pTrickyB != null) ? pTrickyB : (pTrickyB = new TrickyBElements());
 	} 
 
-	// (error)
+	// TrickyC : 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ? ( { current = C3 . z = current } 'z' ) ? ;
 	public TrickyCElements prTrickyC() {
 		return (pTrickyC != null) ? pTrickyC : (pTrickyC = new TrickyCElements());
 	} 

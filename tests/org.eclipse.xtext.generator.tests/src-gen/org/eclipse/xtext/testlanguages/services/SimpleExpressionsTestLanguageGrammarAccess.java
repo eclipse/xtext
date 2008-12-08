@@ -19,12 +19,12 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		private Assignment c11AssignmentExpressions;
 		private RuleCall c110ParserRuleCallAddition;
 		
-		// (error)
+		// Sequence : Addition ( { current = Sequence . expressions += current } expressions += Addition ) * ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(1)); 
 		}
 
-		// (error)
+		// Addition ( { current = Sequence . expressions += current } expressions += Addition ) *
 		public Group eleGroup() {
 			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
 		}
@@ -34,12 +34,12 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 			return (c0ParserRuleCallAddition != null) ? c0ParserRuleCallAddition : (c0ParserRuleCallAddition = (RuleCall)eleGroup().eContents().get(0)); 
 		}
 
-		// (error)
+		// ( { current = Sequence . expressions += current } expressions += Addition ) *
 		public Group ele1Group() {
 			return (c1Group != null) ? c1Group : (c1Group = (Group)eleGroup().eContents().get(1)); 
 		}
 
-		// (error)
+		// { current = Sequence . expressions += current }
 		public Action ele10ActionSequenceexpressions() {
 			return (c10ActionSequenceexpressions != null) ? c10ActionSequenceexpressions : (c10ActionSequenceexpressions = (Action)ele1Group().eContents().get(0)); 
 		}
@@ -69,12 +69,12 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		private Assignment c11AssignmentValues;
 		private RuleCall c110ParserRuleCallMultiplication;
 		
-		// (error)
+		// Addition returns Expression : Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) * ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
 		}
 
-		// (error)
+		// Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
 		public Group eleGroup() {
 			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
@@ -84,17 +84,17 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 			return (c0ParserRuleCallMultiplication != null) ? c0ParserRuleCallMultiplication : (c0ParserRuleCallMultiplication = (RuleCall)eleGroup().eContents().get(0)); 
 		}
 
-		// (error)
+		// ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
 		public Group ele1Group() {
 			return (c1Group != null) ? c1Group : (c1Group = (Group)eleGroup().eContents().get(1)); 
 		}
 
-		// (error)
+		// { current = Op . values += current } operator = ( '+' | '-' )
 		public Group ele10Group() {
 			return (c10Group != null) ? c10Group : (c10Group = (Group)ele1Group().eContents().get(0)); 
 		}
 
-		// (error)
+		// { current = Op . values += current }
 		public Action ele100ActionOpvalues() {
 			return (c100ActionOpvalues != null) ? c100ActionOpvalues : (c100ActionOpvalues = (Action)ele10Group().eContents().get(0)); 
 		}
@@ -144,12 +144,12 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		private Assignment c11AssignmentValues;
 		private RuleCall c110ParserRuleCallTerm;
 		
-		// (error)
+		// Multiplication returns Expression : Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) * ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(3)); 
 		}
 
-		// (error)
+		// Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) *
 		public Group eleGroup() {
 			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
@@ -159,17 +159,17 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 			return (c0ParserRuleCallTerm != null) ? c0ParserRuleCallTerm : (c0ParserRuleCallTerm = (RuleCall)eleGroup().eContents().get(0)); 
 		}
 
-		// (error)
+		// ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) *
 		public Group ele1Group() {
 			return (c1Group != null) ? c1Group : (c1Group = (Group)eleGroup().eContents().get(1)); 
 		}
 
-		// (error)
+		// { current = Op . values += current } operator = ( '*' | '/' )
 		public Group ele10Group() {
 			return (c10Group != null) ? c10Group : (c10Group = (Group)ele1Group().eContents().get(0)); 
 		}
 
-		// (error)
+		// { current = Op . values += current }
 		public Action ele100ActionOpvalues() {
 			return (c100ActionOpvalues != null) ? c100ActionOpvalues : (c100ActionOpvalues = (Action)ele10Group().eContents().get(0)); 
 		}
@@ -211,7 +211,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		private RuleCall c0ParserRuleCallAtom;
 		private RuleCall c1ParserRuleCallParens;
 		
-		// (error)
+		// Term returns Expression : Atom | Parens ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(4)); 
 		}
@@ -261,7 +261,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		private RuleCall c01ParserRuleCallAddition;
 		private Keyword c1Keyword;
 		
-		// (error)
+		// Parens returns Expression : '(' Addition ')' ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(6)); 
 		}
@@ -318,22 +318,22 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 	}
 
 	
-	// (error)
+	// Sequence : Addition ( { current = Sequence . expressions += current } expressions += Addition ) * ;
 	public SequenceElements prSequence() {
 		return (pSequence != null) ? pSequence : (pSequence = new SequenceElements());
 	} 
 
-	// (error)
+	// Addition returns Expression : Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) * ;
 	public AdditionElements prAddition() {
 		return (pAddition != null) ? pAddition : (pAddition = new AdditionElements());
 	} 
 
-	// (error)
+	// Multiplication returns Expression : Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) * ;
 	public MultiplicationElements prMultiplication() {
 		return (pMultiplication != null) ? pMultiplication : (pMultiplication = new MultiplicationElements());
 	} 
 
-	// (error)
+	// Term returns Expression : Atom | Parens ;
 	public TermElements prTerm() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	} 
@@ -343,7 +343,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 		return (pAtom != null) ? pAtom : (pAtom = new AtomElements());
 	} 
 
-	// (error)
+	// Parens returns Expression : '(' Addition ')' ;
 	public ParensElements prParens() {
 		return (pParens != null) ? pParens : (pParens = new ParensElements());
 	} 

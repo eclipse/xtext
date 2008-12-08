@@ -16,6 +16,7 @@ import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 public class Bug250313ParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -87,7 +88,7 @@ protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("ref2",required)) == null) return null;
+		if((value = current.getConsumable("ref2",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ref2");
 		if("mykeyword1".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;

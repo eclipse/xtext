@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.XtendFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
@@ -134,6 +135,13 @@ public abstract class AbstractGeneratorTest extends TestCase {
 		ResourceSet rs = new XtextResourceSet();
 		XtextResource resource = (XtextResource) rs.createResource(URI.createURI("mytestmodel."+getResourceFactory().getModelFileExtensions()[0]));
 		resource.load(in, null);
+		
+		for(Diagnostic d: resource.getErrors())
+			System.out.println("Resource Error: "+d);
+		
+		for(Diagnostic d: resource.getWarnings())
+			System.out.println("Resource Warning: "+d);
+		
 		return resource;
 	}
 

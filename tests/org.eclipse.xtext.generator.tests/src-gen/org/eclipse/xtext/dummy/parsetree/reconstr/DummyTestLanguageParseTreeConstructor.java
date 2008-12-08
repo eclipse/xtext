@@ -16,6 +16,7 @@ import org.eclipse.xtext.dummy.services.DummyTestLanguageGrammarAccess;
 public class DummyTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -48,7 +49,7 @@ protected class Model_Assignment_elements extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("elements",required)) == null) return null;
+		if((value = current.getConsumable("elements",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -197,7 +198,7 @@ protected class Element_0_0_0_0_Assignment_optional extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("optional",required)) == null) return null;
+		if((value = current.getConsumable("optional",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("optional");
 		if("optional".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -233,7 +234,7 @@ protected class Element_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -257,7 +258,7 @@ protected class Element_0_1_Assignment_descriptions extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("descriptions",required)) == null) return null;
+		if((value = current.getConsumable("descriptions",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("descriptions");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;

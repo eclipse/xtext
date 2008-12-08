@@ -16,6 +16,7 @@ import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 public class ActionTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -49,7 +50,7 @@ protected class Model_Assignment_children extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("children",required)) == null) return null;
+		if((value = current.getConsumable("children",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -69,12 +70,12 @@ protected class Model_Assignment_children extends AssignmentToken  {
 
 /************ begin Rule Element ****************
  *
- * (error)
+ * Element returns Type : Item ( { current = Item . items += current } items += Item ) ;
  *
  **/
 
 
-// (error)
+// Item ( { current = Item . items += current } items += Item )
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -120,7 +121,7 @@ protected class Element_0_RuleCall_Item extends RuleCallToken {
 	}
 }
 
-// (error)
+// { current = Item . items += current } items += Item
 protected class Element_1_Group extends GroupToken {
 	
 	public Element_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -148,7 +149,7 @@ protected class Element_1_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = Item . items += current }
 protected class Element_1_0_Action_Item_items extends ActionToken  {
 
 	public Element_1_0_Action_Item_items(IInstanceDescription curr, AbstractToken pred) {
@@ -180,7 +181,7 @@ protected class Element_1_1_Assignment_items extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("items",required)) == null) return null;
+		if((value = current.getConsumable("items",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("items");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -202,12 +203,12 @@ protected class Element_1_1_Assignment_items extends AssignmentToken  {
 
 /************ begin Rule Item ****************
  *
- * (error)
+ * Item returns Type : { current = Thing . content = current } name = ID ;
  *
  **/
 
 
-// (error)
+// { current = Thing . content = current } name = ID
 protected class Item_Group extends GroupToken {
 	
 	public Item_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -235,7 +236,7 @@ protected class Item_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = Thing . content = current }
 protected class Item_0_Action_Thing_content extends ActionToken  {
 
 	public Item_0_Action_Thing_content(IInstanceDescription curr, AbstractToken pred) {
@@ -267,7 +268,7 @@ protected class Item_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;

@@ -237,17 +237,17 @@ public class ContentAssistTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private Assignment cAssignmentRule;
 		private CrossReference c0CrossReferenceAbstractRule;
 		
-		// (error)
+		// AbstractRuleCall : rule = [ AbstractRule ] ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(5)); 
 		}
 
-		// (error)
+		// rule = [ AbstractRule ]
 		public Assignment eleAssignmentRule() {
 			return (cAssignmentRule != null) ? cAssignmentRule : (cAssignmentRule = (Assignment)getRule().eContents().get(0)); 
 		}
 
-		// (error)
+		// [ AbstractRule ]
 		public CrossReference ele0CrossReferenceAbstractRule() {
 			return (c0CrossReferenceAbstractRule != null) ? c0CrossReferenceAbstractRule : (c0CrossReferenceAbstractRule = (CrossReference)eleAssignmentRule().eContents().get(0)); 
 		}
@@ -298,7 +298,7 @@ public class ContentAssistTestLanguageGrammarAccess extends BaseEPackageAccess i
 		return (pSecondAbstractRuleChild != null) ? pSecondAbstractRuleChild : (pSecondAbstractRuleChild = new SecondAbstractRuleChildElements());
 	} 
 
-	// (error)
+	// AbstractRuleCall : rule = [ AbstractRule ] ;
 	public AbstractRuleCallElements prAbstractRuleCall() {
 		return (pAbstractRuleCall != null) ? pAbstractRuleCall : (pAbstractRuleCall = new AbstractRuleCallElements());
 	} 

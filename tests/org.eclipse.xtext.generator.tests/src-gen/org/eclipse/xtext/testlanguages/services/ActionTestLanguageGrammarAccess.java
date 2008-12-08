@@ -40,12 +40,12 @@ public class ActionTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private Assignment c11AssignmentItems;
 		private RuleCall c110ParserRuleCallItem;
 		
-		// (error)
+		// Element returns Type : Item ( { current = Item . items += current } items += Item ) ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
 		}
 
-		// (error)
+		// Item ( { current = Item . items += current } items += Item )
 		public Group eleGroup() {
 			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
@@ -55,12 +55,12 @@ public class ActionTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 			return (c0ParserRuleCallItem != null) ? c0ParserRuleCallItem : (c0ParserRuleCallItem = (RuleCall)eleGroup().eContents().get(0)); 
 		}
 
-		// (error)
+		// { current = Item . items += current } items += Item
 		public Group ele1Group() {
 			return (c1Group != null) ? c1Group : (c1Group = (Group)eleGroup().eContents().get(1)); 
 		}
 
-		// (error)
+		// { current = Item . items += current }
 		public Action ele10ActionItemitems() {
 			return (c10ActionItemitems != null) ? c10ActionItemitems : (c10ActionItemitems = (Action)ele1Group().eContents().get(0)); 
 		}
@@ -83,17 +83,17 @@ public class ActionTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		private Assignment c1AssignmentName;
 		private RuleCall c10LexerRuleCallID;
 		
-		// (error)
+		// Item returns Type : { current = Thing . content = current } name = ID ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(3)); 
 		}
 
-		// (error)
+		// { current = Thing . content = current } name = ID
 		public Group eleGroup() {
 			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
-		// (error)
+		// { current = Thing . content = current }
 		public Action ele0ActionThingcontent() {
 			return (c0ActionThingcontent != null) ? c0ActionThingcontent : (c0ActionThingcontent = (Action)eleGroup().eContents().get(0)); 
 		}
@@ -137,12 +137,12 @@ public class ActionTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 
 
-	// (error)
+	// Element returns Type : Item ( { current = Item . items += current } items += Item ) ;
 	public ElementElements prElement() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	} 
 
-	// (error)
+	// Item returns Type : { current = Thing . content = current } name = ID ;
 	public ItemElements prItem() {
 		return (pItem != null) ? pItem : (pItem = new ItemElements());
 	} 

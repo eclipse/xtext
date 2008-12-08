@@ -16,6 +16,7 @@ import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
 public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -34,7 +35,7 @@ public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstruct
 	
 /************ begin Rule EntryRule ****************
  *
- * (error)
+ * EntryRule returns Model : ( multiFeature += AbstractRule ) * ;
  *
  **/
 
@@ -51,7 +52,7 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("multiFeature",required)) == null) return null;
+		if((value = current.getConsumable("multiFeature",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("multiFeature");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -71,7 +72,7 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 
 /************ begin Rule AbstractRule ****************
  *
- * (error)
+ * AbstractRule returns AbstractElement : ChoiceRule | ReducibleRule ;
  *
  **/
 
@@ -138,7 +139,7 @@ protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 
 /************ begin Rule ChoiceRule ****************
  *
- * (error)
+ * ChoiceRule returns ChoiceElement : 'choice' ( optionalKeyword ?= 'optional' ) ? name = ID ;
  *
  **/
 
@@ -223,7 +224,7 @@ protected class ChoiceRule_0_1_Assignment_optionalKeyword extends AssignmentToke
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("optionalKeyword",required)) == null) return null;
+		if((value = current.getConsumable("optionalKeyword",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("optionalKeyword");
 		if("optional".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -247,7 +248,7 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -263,12 +264,12 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule ReducibleRule ****************
  *
- * (error)
+ * ReducibleRule returns ReducibleElement : 'reducible' TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ? ;
  *
  **/
 
 
-// (error)
+// 'reducible' TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
 protected class ReducibleRule_Group extends GroupToken {
 	
 	public ReducibleRule_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -355,7 +356,7 @@ protected class ReducibleRule_0_1_RuleCall_TerminalRule extends RuleCallToken {
 }
 
 
-// (error)
+// ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
 protected class ReducibleRule_1_Group extends GroupToken {
 	
 	public ReducibleRule_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -383,7 +384,7 @@ protected class ReducibleRule_1_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = ReducibleComposite . actionFeature += current }
 protected class ReducibleRule_1_0_Action_ReducibleComposite_actionFeature extends ActionToken  {
 
 	public ReducibleRule_1_0_Action_ReducibleComposite_actionFeature(IInstanceDescription curr, AbstractToken pred) {
@@ -415,7 +416,7 @@ protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentTok
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("actionFeature",required)) == null) return null;
+		if((value = current.getConsumable("actionFeature",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("actionFeature");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -437,7 +438,7 @@ protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentTok
 
 /************ begin Rule TerminalRule ****************
  *
- * (error)
+ * TerminalRule returns TerminalElement : stringFeature = STRING ;
  *
  **/
 
@@ -454,7 +455,7 @@ protected class TerminalRule_Assignment_stringFeature extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("stringFeature",required)) == null) return null;
+		if((value = current.getConsumable("stringFeature",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stringFeature");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
