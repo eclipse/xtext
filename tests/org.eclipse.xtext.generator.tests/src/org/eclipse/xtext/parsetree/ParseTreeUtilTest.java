@@ -61,27 +61,27 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 
 		String text = "spielplatz 1 \"junit\" { kin  ";
 		CompositeNode rootNode = getRootNode(text);
-		LeafNode currentNodeByOffset = ParseTreeUtil.getCurrentNodeByOffset(rootNode, 26);
+		LeafNode currentNodeByOffset = (LeafNode) ParseTreeUtil.getCurrentNodeByOffset(rootNode, 26);
 		assertEquals("expect leafnode with text 'kin'", currentNodeByOffset.getText(), "kin");
 
 		text = "spielplatz 1 \"junit\" { kind (";
 		rootNode = getRootNode(text);
-		currentNodeByOffset = ParseTreeUtil.getCurrentNodeByOffset(rootNode, text.length());
+		currentNodeByOffset = (LeafNode) ParseTreeUtil.getCurrentNodeByOffset(rootNode, text.length());
 		assertEquals("expect leafnode with text '('", currentNodeByOffset.getText(), "(");
 
 		text = "spielplatz 1 \"junit\" { kind (  ";
 		rootNode = getRootNode(text);
-		currentNodeByOffset = ParseTreeUtil.getCurrentNodeByOffset(rootNode, text.length());
+		currentNodeByOffset = (LeafNode) ParseTreeUtil.getCurrentNodeByOffset(rootNode, text.length());
 		assertEquals("expect leafnode with WS text '__'", currentNodeByOffset.getText(), "  ");
 
 		text = "spielplatz 1 \"junit\" { kind (";
 		rootNode = getRootNode(text);
-		currentNodeByOffset = ParseTreeUtil.getCurrentNodeByOffset(rootNode, text.length() - 1);
-		assertEquals("expect leafnode with WS text '_'", currentNodeByOffset.getText(), " ");
+		currentNodeByOffset = (LeafNode) ParseTreeUtil.getCurrentNodeByOffset(rootNode, text.length() - 1);
+		assertEquals("expect leafnode with '('", currentNodeByOffset.getText(), "(");
 
 		text = "spielplatz 1 \"junit\" { kind (";
 		rootNode = getRootNode(text);
-		currentNodeByOffset = ParseTreeUtil.getCurrentNodeByOffset(rootNode, 0);
+		currentNodeByOffset = (LeafNode) ParseTreeUtil.getCurrentNodeByOffset(rootNode, 0);
 		assertEquals("expect leafnode with WS text 'spielplatz'", currentNodeByOffset.getText(), "spielplatz");
 
 	}

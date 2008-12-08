@@ -2,6 +2,7 @@ package org.eclipse.xtext.ui.common.editor.codecompletion;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -26,10 +27,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.crossref.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.util.Strings;
@@ -47,6 +45,8 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	protected static final String LEXER_RULE_ID = "ID";
 	protected static final String LEXER_RULE_INT = "INT";
 	protected static final String LEXER_RULE_STRING = "STRING";
+	
+	protected static final Comparator<ICompletionProposal> PROPOSAL_COMPARATOR= new ProposalComparator();
 	// logger available to subclasses
 	protected final Logger logger = Logger.getLogger(getClass());
 
@@ -66,9 +66,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeKeyword(org.eclipse.xtext.Keyword,
-	 * org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeKeyword(org.eclipse.xtext.Keyword,org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
 	 */
 	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword, EObject model, String prefix,
 			IDocument doc, int offset) {
@@ -83,9 +81,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeRuleCall(org.eclipse.xtext.RuleCall,
-	 * org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeRuleCall(org.eclipse.xtext.RuleCall, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
 	 */
 	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall, EObject model, String prefix,
 			IDocument doc, int offset) {
@@ -106,9 +102,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#sortAndFilter(java.util.List,
-	 * org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int,
-	 * org.eclipse.xtext.parsetree.AbstractNode, org.eclipse.xtext.parsetree.LeafNode)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#sortAndFilter(java.util.List, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int, org.eclipse.xtext.parsetree.AbstractNode, org.eclipse.xtext.parsetree.LeafNode)
 	 */
 	public List<? extends ICompletionProposal> sortAndFilter(
 			List<? extends ICompletionProposal> completionProposalList, EObject model, String prefix,
@@ -125,12 +119,9 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	 * (e.i. ParserRuleName+AssignmentFeatureName+LexerRuleName) or {@link #getDefaultIntegerValue()} if its <i>INT</i>
 	 * based LexerRule.
 	 * 
-	 * @param lexerRule
-	 *            the 'called' LexerRule instance
-	 * @param ruleCall
-	 *            the ruleCall for the provided lexerRule
-	 * @param offset
-	 *            an offset within the document for which completions should be computed
+	 * @param lexerRule the 'called' LexerRule instance
+	 * @param ruleCall  the ruleCall for the provided lexerRule
+	 * @param offset an offset within the document for which completions should be computed
 	 * @return a computed list of <code>ICompletionProposal</code> for the given <code>LexerRule</code>
 	 */
 	protected List<? extends ICompletionProposal> doCompleteLexerRuleRuleCall(LexerRule lexerRule, RuleCall ruleCall,
@@ -190,15 +181,23 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 		if (linkingCandidatesService != null) {
 			
-			final XtextResource xtextResource = (XtextResource) model.eResource();
-			final ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
-			final EClass eClass = xtextResource.getElementFactory().getEClass(GrammarUtil.getReturnTypeName(containingParserRule));
-			final EReference ref = GrammarUtil.getReference(crossReference, eClass);
-			final Iterable<IScopedElement> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
-			final String trimmedPrefix = prefix.trim();
+			XtextResource xtextResource = (XtextResource) model.eResource();
+			
+			ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
+			
+			EClass eClass = xtextResource.getElementFactory().
+				getEClass(GrammarUtil.getReturnTypeName(containingParserRule));
+			
+			EReference ref = GrammarUtil.getReference(crossReference, eClass);
+			
+			Iterable<IScopedElement> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
+			
+			String trimmedPrefix = prefix.trim();
+			
 			for (IScopedElement candidate : candidates) {
 				if (isCandidateMatchingPrefix(model, ref, candidate, trimmedPrefix)) {
-					completionProposalList.add(createCompletionProposal(crossReference, model, candidate.name(), offset));
+					completionProposalList.add(
+							createCompletionProposal(crossReference, model, candidate.name(), offset));
 				}
 			}
 		}
@@ -224,7 +223,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	}
 
 	/**
-	 * Concrete subclasses can override this for custom sort and filter behavior. Gets called after all completion
+	 * Concrete subclasses can override this for custom sort and filter behavior. Called right after all completion
 	 * proposals have been collected.
 	 * 
 	 * The default behavior of this implementation is to sort duplicates and to trim matching
@@ -242,82 +241,71 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 			ICompletionProposal completionProposal = iterator.next();
 
-			// filter duplicate displayString
+			// filter duplicate
 			if (!displayString2ICompletionProposalMap.containsKey(completionProposal.getDisplayString())) {
 
 				displayString2ICompletionProposalMap.put(completionProposal.getDisplayString(), completionProposal);
 
-				if (model != null) {
-
-					// filter by prefix 
-					// TODO: this works only if we have access to the corresponding grammarelement 
-					if (completionProposal instanceof XtextCompletionProposal) {
-
-						XtextCompletionProposal xtextCompletionProposal = (XtextCompletionProposal) completionProposal;
-
-						AbstractElement abstractElement = null;
-
-						if (xtextCompletionProposal.getAbstractElement() instanceof Keyword ||
-							xtextCompletionProposal.getAbstractElement() instanceof CrossReference) {
-							abstractElement = GrammarUtil.containingAssignment(xtextCompletionProposal.getAbstractElement());
-						} 
-						
-						if (null==abstractElement) {
-							abstractElement = xtextCompletionProposal.getAbstractElement();
-						}
-						
-						CompositeNode rootNode = NodeUtil.getRootNode(model);
-
-						AbstractNode lastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
-
-						LeafNode currentLeafNode = ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
-
-						EObject grammarElement =  GrammarUtil.containingAssignment(currentLeafNode.getGrammarElement());
-						
-						if (null==grammarElement) {
-							grammarElement = currentLeafNode.getGrammarElement();
-						}
-
-						boolean atTheEndOfTheLastCompleteNode = currentLeafNode == lastCompleteNode;
-						
-						boolean candidateToCompare 			= false;
-						
-						// means if we are at the end of a complete token we want to filter only equal grammarelements (not the 'next' ones)
-						if (atTheEndOfTheLastCompleteNode && abstractElement.equals(grammarElement)) {
-							candidateToCompare = true;
-						} else if (!atTheEndOfTheLastCompleteNode ) {
-							candidateToCompare = true;
-						}
-						
-						if ( candidateToCompare && (!"".equals(prefix.trim()) && !completionProposal.getDisplayString().toUpperCase().startsWith(prefix.toUpperCase()))) {
-							if (logger.isDebugEnabled()) {
-								logger.debug("filter completionProposal '" + completionProposal + "'");
-							}
-							iterator.remove();
-						}
+				// filter by prefix 
+				if (isFiltered(model, prefix, completionProposal)) {
+					if (logger.isDebugEnabled()) {
+						logger.debug("filter completionProposal '" + completionProposal + "'");
 					}
+					iterator.remove();
 				}
-
 			}
 			else {
 				if (logger.isDebugEnabled()) {
 					logger.debug("filter duplicate completionProposal '" + completionProposal + "'");
 				}
-
 				iterator.remove();
 			}
 		}
 
+		Collections.sort(completionProposalList, PROPOSAL_COMPARATOR);
+		
 		return completionProposalList;
 	}
 
 	/**
-	 * @param text
-	 *            to apply
+	 * The default behaviour of this method delegates to {@link XtextCompletionProposal#matches(String)} to 
+	 * test if the given prefix string matches or not.
+	 * 
+	 * @param model the last semtantically complete object 
+	 * @param prefix
+	 * @param completionProposal contains information used to present the proposed completion to the user
+	 * @return true or false whether the given prefix matches the text of this completion proposal
+	 */
+	protected boolean isFiltered(EObject model, String prefix, ICompletionProposal completionProposal) {
+		
+		if (completionProposal instanceof XtextCompletionProposal) {
+		
+			XtextCompletionProposal xtextCompletionProposal = (XtextCompletionProposal) completionProposal;
+			
+			return !xtextCompletionProposal.matches(prefix);
+		}
+		
+		return false;
+	}
+
+	/**
+	 * @param text to apply
 	 * @return the provided string with the first letter capitalized
 	 */
 	protected final String firstLetterCapitalized(String text) {
 		return Strings.toFirstUpper(text);
+	}
+	
+	/**
+	 * 
+	 * Simple {@link Comparator} implementation to compare
+	 * <code>ICompletionProposal</code> by disaply strings'.
+	 * 
+	 */
+	private static final class ProposalComparator implements Comparator<ICompletionProposal> {
+		public int compare(ICompletionProposal o1, ICompletionProposal o2) {
+			return o1.getDisplayString().compareTo(o2.getDisplayString());
+		}
 	}
 
 }
