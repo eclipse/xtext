@@ -16,6 +16,7 @@ import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGra
 public class SimpleExpressionsTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -35,12 +36,12 @@ public class SimpleExpressionsTestLanguageParseTreeConstructor extends AbstractP
 	
 /************ begin Rule Sequence ****************
  *
- * (error)
+ * Sequence : Addition ( { current = Sequence . expressions += current } expressions += Addition ) * ;
  *
  **/
 
 
-// (error)
+// Addition ( { current = Sequence . expressions += current } expressions += Addition ) *
 protected class Sequence_Group extends GroupToken {
 	
 	public Sequence_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -86,7 +87,7 @@ protected class Sequence_0_RuleCall_Addition extends RuleCallToken {
 	}
 }
 
-// (error)
+// ( { current = Sequence . expressions += current } expressions += Addition ) *
 protected class Sequence_1_Group extends GroupToken {
 	
 	public Sequence_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -114,7 +115,7 @@ protected class Sequence_1_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = Sequence . expressions += current }
 protected class Sequence_1_0_Action_Sequence_expressions extends ActionToken  {
 
 	public Sequence_1_0_Action_Sequence_expressions(IInstanceDescription curr, AbstractToken pred) {
@@ -146,7 +147,7 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("expressions",required)) == null) return null;
+		if((value = current.getConsumable("expressions",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("expressions");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -168,12 +169,12 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 
 /************ begin Rule Addition ****************
  *
- * (error)
+ * Addition returns Expression : Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) * ;
  *
  **/
 
 
-// (error)
+// Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
 protected class Addition_Group extends GroupToken {
 	
 	public Addition_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -219,7 +220,7 @@ protected class Addition_0_RuleCall_Multiplication extends RuleCallToken {
 	}
 }
 
-// (error)
+// ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
 protected class Addition_1_Group extends GroupToken {
 	
 	public Addition_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -247,7 +248,7 @@ protected class Addition_1_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = Op . values += current } operator = ( '+' | '-' )
 protected class Addition_1_0_Group extends GroupToken {
 	
 	public Addition_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -275,7 +276,7 @@ protected class Addition_1_0_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = Op . values += current }
 protected class Addition_1_0_0_Action_Op_values extends ActionToken  {
 
 	public Addition_1_0_0_Action_Op_values(IInstanceDescription curr, AbstractToken pred) {
@@ -307,7 +308,7 @@ protected class Addition_1_0_1_Assignment_operator extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("operator",required)) == null) return null;
+		if((value = current.getConsumable("operator",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
 		if("+".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -336,7 +337,7 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("values",required)) == null) return null;
+		if((value = current.getConsumable("values",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -358,12 +359,12 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 
 /************ begin Rule Multiplication ****************
  *
- * (error)
+ * Multiplication returns Expression : Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) * ;
  *
  **/
 
 
-// (error)
+// Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) *
 protected class Multiplication_Group extends GroupToken {
 	
 	public Multiplication_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -409,7 +410,7 @@ protected class Multiplication_0_RuleCall_Term extends RuleCallToken {
 	}
 }
 
-// (error)
+// ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) *
 protected class Multiplication_1_Group extends GroupToken {
 	
 	public Multiplication_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -437,7 +438,7 @@ protected class Multiplication_1_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = Op . values += current } operator = ( '*' | '/' )
 protected class Multiplication_1_0_Group extends GroupToken {
 	
 	public Multiplication_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -465,7 +466,7 @@ protected class Multiplication_1_0_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = Op . values += current }
 protected class Multiplication_1_0_0_Action_Op_values extends ActionToken  {
 
 	public Multiplication_1_0_0_Action_Op_values(IInstanceDescription curr, AbstractToken pred) {
@@ -497,7 +498,7 @@ protected class Multiplication_1_0_1_Assignment_operator extends AssignmentToken
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("operator",required)) == null) return null;
+		if((value = current.getConsumable("operator",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
 		if("*".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -526,7 +527,7 @@ protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("values",required)) == null) return null;
+		if((value = current.getConsumable("values",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -548,7 +549,7 @@ protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 
 /************ begin Rule Term ****************
  *
- * (error)
+ * Term returns Expression : Atom | Parens ;
  *
  **/
 
@@ -632,7 +633,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -647,7 +648,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * (error)
+ * Parens returns Expression : '(' Addition ')' ;
  *
  **/
 

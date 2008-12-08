@@ -16,6 +16,7 @@ import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammar
 public class PartialParserTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -180,7 +181,7 @@ protected class Container_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -238,7 +239,7 @@ protected class Container_0_1_0_Assignment_nested extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("nested",required)) == null) return null;
+		if((value = current.getConsumable("nested",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nested");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -266,7 +267,7 @@ protected class Container_0_1_1_Assignment_content extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("content",required)) == null) return null;
+		if((value = current.getConsumable("content",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("content");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -427,7 +428,7 @@ protected class Nested_0_1_Assignment_nested extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("nested",required)) == null) return null;
+		if((value = current.getConsumable("nested",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nested");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -682,7 +683,7 @@ protected class Children_0_0_1_Assignment_children extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("children",required)) == null) return null;
+		if((value = current.getConsumable("children",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -751,7 +752,7 @@ protected class Children_0_1_1_Assignment_children extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("children",required)) == null) return null;
+		if((value = current.getConsumable("children",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -953,7 +954,7 @@ protected class Child_0_1_Assignment_value extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("value",required)) == null) return null;
+		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -1113,7 +1114,7 @@ protected class AbstractChildren_0_1_Assignment_abstractChildren extends Assignm
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("abstractChildren",required)) == null) return null;
+		if((value = current.getConsumable("abstractChildren",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("abstractChildren");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -1214,12 +1215,12 @@ protected class AbstractChild_1_RuleCall_SecondConcrete extends RuleCallToken {
 
 /************ begin Rule FirstConcrete ****************
  *
- * (error)
+ * FirstConcrete : '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ? ')' ;
  *
  **/
 
 
-// (error)
+// '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ? ')'
 protected class FirstConcrete_Group extends GroupToken {
 	
 	public FirstConcrete_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1247,7 +1248,7 @@ protected class FirstConcrete_Group extends GroupToken {
 	}
 }
 
-// (error)
+// '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ?
 protected class FirstConcrete_0_Group extends GroupToken {
 	
 	public FirstConcrete_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1409,7 +1410,7 @@ protected class FirstConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("value",required)) == null) return null;
+		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -1426,7 +1427,7 @@ protected class FirstConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 }
 
 
-// (error)
+// ( referencedContainer = [ Container ] ) ?
 protected class FirstConcrete_0_1_Assignment_referencedContainer extends AssignmentToken  {
 	
 	public FirstConcrete_0_1_Assignment_referencedContainer(IInstanceDescription curr, AbstractToken pred) {
@@ -1438,7 +1439,7 @@ protected class FirstConcrete_0_1_Assignment_referencedContainer extends Assignm
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("referencedContainer",required)) == null) return null;
+		if((value = current.getConsumable("referencedContainer",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("referencedContainer");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
@@ -1470,12 +1471,12 @@ protected class FirstConcrete_1_Keyword extends KeywordToken  {
 
 /************ begin Rule SecondConcrete ****************
  *
- * (error)
+ * SecondConcrete : '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ? ')' ;
  *
  **/
 
 
-// (error)
+// '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ? ')'
 protected class SecondConcrete_Group extends GroupToken {
 	
 	public SecondConcrete_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1503,7 +1504,7 @@ protected class SecondConcrete_Group extends GroupToken {
 	}
 }
 
-// (error)
+// '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ?
 protected class SecondConcrete_0_Group extends GroupToken {
 	
 	public SecondConcrete_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1706,7 +1707,7 @@ protected class SecondConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("value",required)) == null) return null;
+		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -1723,7 +1724,7 @@ protected class SecondConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 }
 
 
-// (error)
+// ( referencedChildren += [ Child ] ) ?
 protected class SecondConcrete_0_1_Assignment_referencedChildren extends AssignmentToken  {
 	
 	public SecondConcrete_0_1_Assignment_referencedChildren(IInstanceDescription curr, AbstractToken pred) {
@@ -1735,7 +1736,7 @@ protected class SecondConcrete_0_1_Assignment_referencedChildren extends Assignm
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("referencedChildren",required)) == null) return null;
+		if((value = current.getConsumable("referencedChildren",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("referencedChildren");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
@@ -1784,7 +1785,7 @@ protected class Named_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;

@@ -19,12 +19,12 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private Assignment c11AssignmentValues;
 		private RuleCall c110ParserRuleCallTerm;
 		
-		// (error)
+		// Op returns Expression : Term ( { current = Op . values += current } values += Term ) * ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(1)); 
 		}
 
-		// (error)
+		// Term ( { current = Op . values += current } values += Term ) *
 		public Group eleGroup() {
 			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
@@ -34,12 +34,12 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 			return (c0ParserRuleCallTerm != null) ? c0ParserRuleCallTerm : (c0ParserRuleCallTerm = (RuleCall)eleGroup().eContents().get(0)); 
 		}
 
-		// (error)
+		// ( { current = Op . values += current } values += Term ) *
 		public Group ele1Group() {
 			return (c1Group != null) ? c1Group : (c1Group = (Group)eleGroup().eContents().get(1)); 
 		}
 
-		// (error)
+		// { current = Op . values += current }
 		public Action ele10ActionOpvalues() {
 			return (c10ActionOpvalues != null) ? c10ActionOpvalues : (c10ActionOpvalues = (Action)ele1Group().eContents().get(0)); 
 		}
@@ -71,7 +71,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private RuleCall c01ParserRuleCallRef2;
 		private RuleCall c1ParserRuleCallSpare;
 		
-		// (error)
+		// Term returns Expression : Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
 		}
@@ -174,7 +174,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private Assignment c1AssignmentEm;
 		private Keyword c10Keyword;
 		
-		// (error)
+		// Parens returns Expression : '(' Op ')' ( em = '!' ) ? ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(4)); 
 		}
@@ -352,12 +352,12 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		private Assignment c1AssignmentExtends;
 		private CrossReference c10CrossReferenceType;
 		
-		// (error)
+		// Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(7)); 
 		}
 
-		// (error)
+		// 'type' name = ID 'extends' ^extends = [ Type ]
 		public Group eleGroup() {
 			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
 		}
@@ -392,12 +392,12 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 			return (c01KeywordExtends != null) ? c01KeywordExtends : (c01KeywordExtends = (Keyword)ele0Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// ^extends = [ Type ]
 		public Assignment ele1AssignmentExtends() {
 			return (c1AssignmentExtends != null) ? c1AssignmentExtends : (c1AssignmentExtends = (Assignment)eleGroup().eContents().get(1)); 
 		}
 
-		// (error)
+		// [ Type ]
 		public CrossReference ele10CrossReferenceType() {
 			return (c10CrossReferenceType != null) ? c10CrossReferenceType : (c10CrossReferenceType = (CrossReference)ele1AssignmentExtends().eContents().get(0)); 
 		}
@@ -552,12 +552,12 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 	}
 
 	
-	// (error)
+	// Op returns Expression : Term ( { current = Op . values += current } values += Term ) * ;
 	public OpElements prOp() {
 		return (pOp != null) ? pOp : (pOp = new OpElements());
 	} 
 
-	// (error)
+	// Term returns Expression : Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare ;
 	public TermElements prTerm() {
 		return (pTerm != null) ? pTerm : (pTerm = new TermElements());
 	} 
@@ -567,7 +567,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		return (pAtom != null) ? pAtom : (pAtom = new AtomElements());
 	} 
 
-	// (error)
+	// Parens returns Expression : '(' Op ')' ( em = '!' ) ? ;
 	public ParensElements prParens() {
 		return (pParens != null) ? pParens : (pParens = new ParensElements());
 	} 
@@ -582,7 +582,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 		return (pManyStrings != null) ? pManyStrings : (pManyStrings = new ManyStringsElements());
 	} 
 
-	// (error)
+	// Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
 	public TypeElements prType() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	} 

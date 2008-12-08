@@ -9,6 +9,12 @@
  *******************************************************************************/
 «ENDREM»
 
+«REM»
+/**
+ * @author Moritz Eysholdt
+ */
+ «ENDREM»
+
 «IMPORT xtext»
 «IMPORT xtextgen»
 
@@ -83,7 +89,7 @@ public class «grammar().gaSimpleName()» extends BaseEPackageAccess implements IG
 	
 
 «DEFINE cache FOR AbstractRule»
-	// FIXME: unknow rule type «metaType»
+	// FIXME: unknown rule type «metaType»
 «ENDDEFINE»
 
 «DEFINE cache FOR ParserRule-»
@@ -97,7 +103,7 @@ public class «grammar().gaSimpleName()» extends BaseEPackageAccess implements IG
 
 
 «DEFINE getter FOR AbstractRule»
-	// FIXME: unknow rule type «metaType»
+	// FIXME: unknown rule type «metaType»
 «ENDDEFINE»
 
 «DEFINE getter FOR ParserRule»

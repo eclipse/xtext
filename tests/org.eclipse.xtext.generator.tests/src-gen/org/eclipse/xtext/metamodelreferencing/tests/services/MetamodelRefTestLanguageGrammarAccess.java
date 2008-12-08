@@ -54,17 +54,17 @@ public class MetamodelRefTestLanguageGrammarAccess extends BaseEPackageAccess im
 		private Assignment cAssignmentRule;
 		private CrossReference c0CrossReferenceMyRule;
 		
-		// (error)
+		// NameRef returns xtext :: RuleCall : rule = [ MyRule ] ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(3)); 
 		}
 
-		// (error)
+		// rule = [ MyRule ]
 		public Assignment eleAssignmentRule() {
 			return (cAssignmentRule != null) ? cAssignmentRule : (cAssignmentRule = (Assignment)getRule().eContents().get(1)); 
 		}
 
-		// (error)
+		// [ MyRule ]
 		public CrossReference ele0CrossReferenceMyRule() {
 			return (c0CrossReferenceMyRule != null) ? c0CrossReferenceMyRule : (c0CrossReferenceMyRule = (CrossReference)eleAssignmentRule().eContents().get(0)); 
 		}
@@ -119,7 +119,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends BaseEPackageAccess im
 		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
 	} 
 
-	// (error)
+	// NameRef returns xtext :: RuleCall : rule = [ MyRule ] ;
 	public NameRefElements prNameRef() {
 		return (pNameRef != null) ? pNameRef : (pNameRef = new NameRefElements());
 	} 

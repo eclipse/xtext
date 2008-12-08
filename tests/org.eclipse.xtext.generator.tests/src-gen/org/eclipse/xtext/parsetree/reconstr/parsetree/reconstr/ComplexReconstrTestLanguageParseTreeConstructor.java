@@ -16,6 +16,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguage
 public class ComplexReconstrTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -40,12 +41,12 @@ public class ComplexReconstrTestLanguageParseTreeConstructor extends AbstractPar
 	
 /************ begin Rule Op ****************
  *
- * (error)
+ * Op returns Expression : Term ( { current = Add . addOperands += current } '+' addOperands += Term | { current = Minus . minusOperands += current } '-' minusOperands += Term ) * ;
  *
  **/
 
 
-// (error)
+// Term ( { current = Add . addOperands += current } '+' addOperands += Term | { current = Minus . minusOperands += current } '-' minusOperands += Term ) *
 protected class Op_Group extends GroupToken {
 	
 	public Op_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -91,7 +92,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 	}
 }
 
-// (error)
+// ( { current = Add . addOperands += current } '+' addOperands += Term | { current = Minus . minusOperands += current } '-' minusOperands += Term ) *
 protected class Op_1_Alternatives extends AlternativesToken {
 
 	public Op_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -112,7 +113,7 @@ protected class Op_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// (error)
+// { current = Add . addOperands += current } '+' addOperands += Term
 protected class Op_1_0_Group extends GroupToken {
 	
 	public Op_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -140,7 +141,7 @@ protected class Op_1_0_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = Add . addOperands += current } '+'
 protected class Op_1_0_0_Group extends GroupToken {
 	
 	public Op_1_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -168,7 +169,7 @@ protected class Op_1_0_0_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = Add . addOperands += current }
 protected class Op_1_0_0_0_Action_Add_addOperands extends ActionToken  {
 
 	public Op_1_0_0_0_Action_Add_addOperands(IInstanceDescription curr, AbstractToken pred) {
@@ -213,7 +214,7 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("addOperands",required)) == null) return null;
+		if((value = current.getConsumable("addOperands",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("addOperands");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -230,7 +231,7 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 }
 
 
-// (error)
+// { current = Minus . minusOperands += current } '-' minusOperands += Term
 protected class Op_1_1_Group extends GroupToken {
 	
 	public Op_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -258,7 +259,7 @@ protected class Op_1_1_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = Minus . minusOperands += current } '-'
 protected class Op_1_1_0_Group extends GroupToken {
 	
 	public Op_1_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -286,7 +287,7 @@ protected class Op_1_1_0_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = Minus . minusOperands += current }
 protected class Op_1_1_0_0_Action_Minus_minusOperands extends ActionToken  {
 
 	public Op_1_1_0_0_Action_Minus_minusOperands(IInstanceDescription curr, AbstractToken pred) {
@@ -331,7 +332,7 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("minusOperands",required)) == null) return null;
+		if((value = current.getConsumable("minusOperands",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("minusOperands");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -354,7 +355,7 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 
 /************ begin Rule Term ****************
  *
- * (error)
+ * Term returns Expression : Atom | Parens ;
  *
  **/
 
@@ -438,7 +439,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -453,7 +454,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * (error)
+ * Parens returns Expression : '(' Op ')' ( em = '!' ) ? ;
  *
  **/
 
@@ -598,7 +599,7 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("em",required)) == null) return null;
+		if((value = current.getConsumable("em",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("em");
 		if("!".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -614,12 +615,12 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 
 /************ begin Rule TrickyA ****************
  *
- * (error)
+ * TrickyA returns TypeA1 : 'TA' TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ? name += STRING ;
  *
  **/
 
 
-// (error)
+// 'TA' TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ? name += STRING
 protected class TrickyA_Group extends GroupToken {
 	
 	public TrickyA_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -647,7 +648,7 @@ protected class TrickyA_Group extends GroupToken {
 	}
 }
 
-// (error)
+// 'TA' TrickyA1 ( name += ID ) * ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ?
 protected class TrickyA_0_Group extends GroupToken {
 	
 	public TrickyA_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -774,7 +775,7 @@ protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -786,7 +787,7 @@ protected class TrickyA_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// (error)
+// ( { current = TypeB . x = current } 'x' | { current = TypeC . x = current } 'y' ) ?
 protected class TrickyA_0_1_Alternatives extends AlternativesToken {
 
 	public TrickyA_0_1_Alternatives(IInstanceDescription curr, AbstractToken pred) {
@@ -807,7 +808,7 @@ protected class TrickyA_0_1_Alternatives extends AlternativesToken {
 	}
 }
 
-// (error)
+// { current = TypeB . x = current } 'x'
 protected class TrickyA_0_1_0_Group extends GroupToken {
 	
 	public TrickyA_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -835,7 +836,7 @@ protected class TrickyA_0_1_0_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = TypeB . x = current }
 protected class TrickyA_0_1_0_0_Action_TypeB_x extends ActionToken  {
 
 	public TrickyA_0_1_0_0_Action_TypeB_x(IInstanceDescription curr, AbstractToken pred) {
@@ -868,7 +869,7 @@ protected class TrickyA_0_1_0_1_Keyword_x extends KeywordToken  {
 }
 
 
-// (error)
+// { current = TypeC . x = current } 'y'
 protected class TrickyA_0_1_1_Group extends GroupToken {
 	
 	public TrickyA_0_1_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -896,7 +897,7 @@ protected class TrickyA_0_1_1_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = TypeC . x = current }
 protected class TrickyA_0_1_1_0_Action_TypeC_x extends ActionToken  {
 
 	public TrickyA_0_1_1_0_Action_TypeC_x(IInstanceDescription curr, AbstractToken pred) {
@@ -943,7 +944,7 @@ protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -959,7 +960,7 @@ protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule TrickyA1 ****************
  *
- * (error)
+ * TrickyA1 returns TypeD : name += ID ;
  *
  **/
 
@@ -976,7 +977,7 @@ protected class TrickyA1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -1104,7 +1105,7 @@ protected class TrickyB_0_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -1127,7 +1128,7 @@ protected class TrickyB_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("type",required)) == null) return null;
+		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -1152,7 +1153,7 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("type",required)) == null) return null;
+		if((value = current.getConsumable("type",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -1168,12 +1169,12 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 
 /************ begin Rule TrickyC ****************
  *
- * (error)
+ * TrickyC : 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ? ( { current = C3 . z = current } 'z' ) ? ;
  *
  **/
 
 
-// (error)
+// 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ? ( { current = C3 . z = current } 'z' ) ?
 protected class TrickyC_Group extends GroupToken {
 	
 	public TrickyC_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1201,7 +1202,7 @@ protected class TrickyC_Group extends GroupToken {
 	}
 }
 
-// (error)
+// 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ?
 protected class TrickyC_0_Group extends GroupToken {
 	
 	public TrickyC_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1229,7 +1230,7 @@ protected class TrickyC_0_Group extends GroupToken {
 	}
 }
 
-// (error)
+// 'TC' name = ID ( { current = C1 . x = current } 'x' ) ?
 protected class TrickyC_0_0_Group extends GroupToken {
 	
 	public TrickyC_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1309,7 +1310,7 @@ protected class TrickyC_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -1321,7 +1322,7 @@ protected class TrickyC_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// (error)
+// ( { current = C1 . x = current } 'x' ) ?
 protected class TrickyC_0_0_1_Group extends GroupToken {
 	
 	public TrickyC_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1349,7 +1350,7 @@ protected class TrickyC_0_0_1_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = C1 . x = current }
 protected class TrickyC_0_0_1_0_Action_C1_x extends ActionToken  {
 
 	public TrickyC_0_0_1_0_Action_C1_x(IInstanceDescription curr, AbstractToken pred) {
@@ -1383,7 +1384,7 @@ protected class TrickyC_0_0_1_1_Keyword_x extends KeywordToken  {
 
 
 
-// (error)
+// ( { current = C2 . y = current } 'y' ) ?
 protected class TrickyC_0_1_Group extends GroupToken {
 	
 	public TrickyC_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1411,7 +1412,7 @@ protected class TrickyC_0_1_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = C2 . y = current }
 protected class TrickyC_0_1_0_Action_C2_y extends ActionToken  {
 
 	public TrickyC_0_1_0_Action_C2_y(IInstanceDescription curr, AbstractToken pred) {
@@ -1445,7 +1446,7 @@ protected class TrickyC_0_1_1_Keyword_y extends KeywordToken  {
 
 
 
-// (error)
+// ( { current = C3 . z = current } 'z' ) ?
 protected class TrickyC_1_Group extends GroupToken {
 	
 	public TrickyC_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1473,7 +1474,7 @@ protected class TrickyC_1_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = C3 . z = current }
 protected class TrickyC_1_0_Action_C3_z extends ActionToken  {
 
 	public TrickyC_1_0_Action_C3_z(IInstanceDescription curr, AbstractToken pred) {
@@ -1680,7 +1681,7 @@ protected class TrickyD_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -1703,7 +1704,7 @@ protected class TrickyD_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("foo",required)) == null) return null;
+		if((value = current.getConsumable("foo",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("foo");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -1727,7 +1728,7 @@ protected class TrickyD_0_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("type",required)) == null) return null;
+		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -1780,7 +1781,7 @@ protected class TrickyD_0_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -1803,7 +1804,7 @@ protected class TrickyD_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("type",required)) == null) return null;
+		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -1828,7 +1829,7 @@ protected class TrickyD_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("type",required)) == null) return null;
+		if((value = current.getConsumable("type",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -2013,7 +2014,7 @@ protected class TrickyE_0_0_1_0_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -2036,7 +2037,7 @@ protected class TrickyE_0_0_1_0_1_Assignment_foo extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("foo",required)) == null) return null;
+		if((value = current.getConsumable("foo",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("foo");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -2060,7 +2061,7 @@ protected class TrickyE_0_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("type",required)) == null) return null;
+		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -2126,7 +2127,7 @@ protected class TrickyE_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -2149,7 +2150,7 @@ protected class TrickyE_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("type",required)) == null) return null;
+		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -2279,7 +2280,7 @@ protected class TrickyF_0_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -2302,7 +2303,7 @@ protected class TrickyF_0_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("type",required)) == null) return null;
+		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -2348,7 +2349,7 @@ protected class TrickyF_1_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -2371,7 +2372,7 @@ protected class TrickyF_1_1_Assignment_type extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("type",required)) == null) return null;
+		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;

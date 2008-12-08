@@ -17,6 +17,7 @@ import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammar
 public class ConcreteTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -145,7 +146,7 @@ protected class ConcreteParserRule_0_0_1_Assignment_magicNumber extends Assignme
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("magicNumber",required)) == null) return null;
+		if((value = current.getConsumable("magicNumber",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("magicNumber");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -182,7 +183,7 @@ protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("elements",required)) == null) return null;
+		if((value = current.getConsumable("elements",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -260,7 +261,7 @@ protected class InheritedParserRule_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;

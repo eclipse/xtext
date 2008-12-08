@@ -16,6 +16,7 @@ import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammar
 public class ContentAssistTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -119,7 +120,7 @@ protected class Start_0_1_Assignment_rules extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("rules",required)) == null) return null;
+		if((value = current.getConsumable("rules",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rules");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -349,7 +350,7 @@ protected class FirstAbstractRuleChild_0_0_0_0_Assignment_name extends Assignmen
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -385,7 +386,7 @@ protected class FirstAbstractRuleChild_0_0_1_Assignment_elements extends Assignm
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("elements",required)) == null) return null;
+		if((value = current.getConsumable("elements",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -561,7 +562,7 @@ protected class SecondAbstractRuleChild_0_0_0_0_Assignment_name extends Assignme
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -610,7 +611,7 @@ protected class SecondAbstractRuleChild_0_1_Assignment_rule extends AssignmentTo
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("rule",required)) == null) return null;
+		if((value = current.getConsumable("rule",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rule");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -644,12 +645,12 @@ protected class SecondAbstractRuleChild_1_Keyword extends KeywordToken  {
 
 /************ begin Rule AbstractRuleCall ****************
  *
- * (error)
+ * AbstractRuleCall : rule = [ AbstractRule ] ;
  *
  **/
 
 
-// (error)
+// rule = [ AbstractRule ]
 protected class AbstractRuleCall_Assignment_rule extends AssignmentToken  {
 	
 	public AbstractRuleCall_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
@@ -661,7 +662,7 @@ protected class AbstractRuleCall_Assignment_rule extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("rule",required)) == null) return null;
+		if((value = current.getConsumable("rule",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rule");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);

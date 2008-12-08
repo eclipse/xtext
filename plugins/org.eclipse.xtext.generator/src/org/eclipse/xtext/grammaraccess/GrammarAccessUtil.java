@@ -13,6 +13,9 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.builtin.IXtextBuiltin;
 import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 
+/**
+ * @author Moritz Eysholdt
+ */
 public class GrammarAccessUtil {
 
 	public static String getClassName(EObject obj) {

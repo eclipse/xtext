@@ -13,21 +13,17 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 public abstract class AbstractParseTreeConstructor implements
 		IParseTreeConstructor {
 
 	public abstract class AbstractToken implements IAbstractToken {
-
-		public IInstanceDescription getCurrent() {
-			return current;
-		}
-
-		public IAbstractToken getNext() {
-			return predecessor;
-		}
 
 		public class Solution {
 			private final IInstanceDescription current;
@@ -68,7 +64,9 @@ public abstract class AbstractParseTreeConstructor implements
 		}
 
 		protected final static boolean IS_MANY = true;
+
 		protected final static boolean IS_REQUIRED = true;
+
 		protected final IInstanceDescription current;
 		protected final boolean many;
 		protected Solution otherSolution;
@@ -152,6 +150,24 @@ public abstract class AbstractParseTreeConstructor implements
 			return t1;
 		}
 
+		public IInstanceDescription getCurrent() {
+			return current;
+		}
+
+		public IAbstractToken getNext() {
+			return predecessor;
+		}
+
+		protected Solution localNextSolution() {
+			if (otherSolution != null) {
+				Solution t = otherSolution;
+				otherSolution = null;
+				return t;
+			} else if (activateNextSolution())
+				return firstSolution();
+			return null;
+		}
+
 		protected AbstractToken newInstance(IInstanceDescription curr,
 				AbstractToken pred) {
 			try {
@@ -173,16 +189,6 @@ public abstract class AbstractParseTreeConstructor implements
 			} catch (InvocationTargetException e) {
 				throw new RuntimeException(e);
 			}
-		}
-
-		protected Solution localNextSolution() {
-			if (otherSolution != null) {
-				Solution t = otherSolution;
-				otherSolution = null;
-				return t;
-			} else if (activateNextSolution())
-				return firstSolution();
-			return null;
 		}
 
 		public Solution nextSolution(AbstractToken limit) {
@@ -231,10 +237,6 @@ public abstract class AbstractParseTreeConstructor implements
 
 		protected AbstractToken last;
 
-		public IAbstractToken getLast() {
-			return last;
-		}
-
 		public AlternativesToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
 			super(curr, pred, many, required);
@@ -247,10 +249,25 @@ public abstract class AbstractParseTreeConstructor implements
 			}
 			return false;
 		}
+
+		public IAbstractToken getLast() {
+			return last;
+		}
 	}
 
 	public abstract class AssignmentToken extends AbstractToken implements
 			IAssignmentToken {
+
+		protected AbstractElement element;
+
+		protected Object value;
+
+		protected AssignmentType type;
+
+		public AssignmentToken(IInstanceDescription curr, AbstractToken pred,
+				boolean many, boolean required) {
+			super(curr, pred, many, required);
+		}
 
 		public AbstractElement getAssignmentElement() {
 			return element;
@@ -268,15 +285,6 @@ public abstract class AbstractParseTreeConstructor implements
 			return value;
 		}
 
-		protected AbstractElement element;
-		protected Object value;
-		protected AssignmentType type;
-
-		public AssignmentToken(IInstanceDescription curr, AbstractToken pred,
-				boolean many, boolean required) {
-			super(curr, pred, many, required);
-		}
-
 	}
 
 	public abstract class GroupToken extends AbstractToken implements
@@ -284,13 +292,13 @@ public abstract class AbstractParseTreeConstructor implements
 
 		protected AbstractToken last;
 
-		public IAbstractToken getLast() {
-			return last;
-		}
-
 		public GroupToken(IInstanceDescription curr, AbstractToken pred,
 				boolean many, boolean required) {
 			super(curr, pred, many, required);
+		}
+
+		public IAbstractToken getLast() {
+			return last;
 		}
 
 	}
@@ -320,14 +328,11 @@ public abstract class AbstractParseTreeConstructor implements
 
 	protected Logger log = Logger.getLogger(AbstractParseTreeConstructor.class);
 
-	// @Inject
-	// private IValueConverterService converterService;
-
 	@Inject
 	private IAstFactory factory;
 
-//	@Inject
-//	private IGrammarAccess grammar;
+	@Inject
+	private ITransientValueService tvService;
 
 	protected final IInstanceDescription getDescr(EObject obj) {
 		return new InstanceDescription(this, obj);
@@ -341,23 +346,8 @@ public abstract class AbstractParseTreeConstructor implements
 		return factory;
 	}
 
-//	protected Grammar getGrammar() {
-//		return grammar.getGrammar();
-//	}
-//
-//	protected EObject getGrammarEle(String string) {
-//		return grammar.getGrammar().eResource().getResourceSet().getEObject(
-//				URI.createURI(string), true);
-//	}
-
-	// public IValueConverterService getValueConverterService() {
-	// return converterService;
-	// }
-
-	// public static final String OPTION_SERIALIZER_STRATEGY =
-	// "OPTION_SERIALIZER_STRATEGY";
-
-	// public abstract void serialize(OutputStream outputStream, EObject object,
-	// Map<?, ?> options);
+	public ITransientValueService getTVService() {
+		return tvService;
+	}
 
 }

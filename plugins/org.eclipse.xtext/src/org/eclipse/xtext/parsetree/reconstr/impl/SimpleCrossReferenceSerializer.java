@@ -9,6 +9,9 @@ import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
 import org.eclipse.xtext.service.Inject;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 public class SimpleCrossReferenceSerializer extends
 		DefaultCrossReferenceSerializer {
 

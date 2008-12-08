@@ -84,6 +84,22 @@ public abstract class AbstractServiceRegistrationFactory implements IServiceRegi
 			return factory;
 		}
 
+		public boolean equals(Object obj) {
+			if (obj instanceof IServiceRegistration) {
+				IServiceRegistration r = (IServiceRegistration) obj;
+				return scope.equals(r.scope())
+						&& prio == r.priority()
+						&& factory.getServiceInterface().equals(
+								r.serviceFactory().getServiceInterface());
+			}
+			return false;
+		}
+
+		public int hashCode() {
+			return prio + scope.hashCode()
+					+ factory.getServiceInterface().hashCode();
+		}
+
 	}
 
 }

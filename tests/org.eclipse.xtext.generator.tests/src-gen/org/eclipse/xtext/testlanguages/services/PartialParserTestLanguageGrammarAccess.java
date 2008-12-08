@@ -443,17 +443,17 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private CrossReference c010CrossReferenceContainer;
 		private Keyword c1Keyword;
 		
-		// (error)
+		// FirstConcrete : '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ? ')' ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(8)); 
 		}
 
-		// (error)
+		// '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ? ')'
 		public Group eleGroup() {
 			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
 		}
 
-		// (error)
+		// '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ?
 		public Group ele0Group() {
 			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
 		}
@@ -498,12 +498,12 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 			return (c0010ParserRuleCallNamed != null) ? c0010ParserRuleCallNamed : (c0010ParserRuleCallNamed = (RuleCall)ele001AssignmentValue().eContents().get(0)); 
 		}
 
-		// (error)
+		// ( referencedContainer = [ Container ] ) ?
 		public Assignment ele01AssignmentReferencedContainer() {
 			return (c01AssignmentReferencedContainer != null) ? c01AssignmentReferencedContainer : (c01AssignmentReferencedContainer = (Assignment)ele0Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// [ Container ]
 		public CrossReference ele010CrossReferenceContainer() {
 			return (c010CrossReferenceContainer != null) ? c010CrossReferenceContainer : (c010CrossReferenceContainer = (CrossReference)ele01AssignmentReferencedContainer().eContents().get(0)); 
 		}
@@ -532,17 +532,17 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private CrossReference c010CrossReferenceChild;
 		private Keyword c1Keyword;
 		
-		// (error)
+		// SecondConcrete : '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ? ')' ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(9)); 
 		}
 
-		// (error)
+		// '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ? ')'
 		public Group eleGroup() {
 			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
 		}
 
-		// (error)
+		// '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ?
 		public Group ele0Group() {
 			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
 		}
@@ -597,12 +597,12 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 			return (c0010ParserRuleCallNamed != null) ? c0010ParserRuleCallNamed : (c0010ParserRuleCallNamed = (RuleCall)ele001AssignmentValue().eContents().get(0)); 
 		}
 
-		// (error)
+		// ( referencedChildren += [ Child ] ) ?
 		public Assignment ele01AssignmentReferencedChildren() {
 			return (c01AssignmentReferencedChildren != null) ? c01AssignmentReferencedChildren : (c01AssignmentReferencedChildren = (Assignment)ele0Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// [ Child ]
 		public CrossReference ele010CrossReferenceChild() {
 			return (c010CrossReferenceChild != null) ? c010CrossReferenceChild : (c010CrossReferenceChild = (CrossReference)ele01AssignmentReferencedChildren().eContents().get(0)); 
 		}
@@ -699,12 +699,12 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 		return (pAbstractChild != null) ? pAbstractChild : (pAbstractChild = new AbstractChildElements());
 	} 
 
-	// (error)
+	// FirstConcrete : '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ? ')' ;
 	public FirstConcreteElements prFirstConcrete() {
 		return (pFirstConcrete != null) ? pFirstConcrete : (pFirstConcrete = new FirstConcreteElements());
 	} 
 
-	// (error)
+	// SecondConcrete : '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ? ')' ;
 	public SecondConcreteElements prSecondConcrete() {
 		return (pSecondConcrete != null) ? pSecondConcrete : (pSecondConcrete = new SecondConcreteElements());
 	} 

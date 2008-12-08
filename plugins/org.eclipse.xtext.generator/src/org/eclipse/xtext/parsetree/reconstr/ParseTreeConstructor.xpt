@@ -40,6 +40,7 @@ import «g.gaFQName()»;
 public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -217,7 +218,7 @@ protected class «elementMethodName()» extends AssignmentToken  {
 «EXPAND constructor-»
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("«feature»",required)) == null) return null;
+		if((value = current.getConsumable("«feature»",«IF !isAssignmentRequired()»!«ENDIF»IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("«feature»");
 		«EXPAND assignmentCreate FOREACH getNestedElementsFromAssignment()-»
 		return null;

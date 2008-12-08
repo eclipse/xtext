@@ -94,12 +94,12 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		private Assignment c1AssignmentExtends;
 		private CrossReference c10CrossReferenceType;
 		
-		// (error)
+		// Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(3)); 
 		}
 
-		// (error)
+		// 'type' name = ID 'extends' ^extends = [ Type ]
 		public Group eleGroup() {
 			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
 		}
@@ -134,12 +134,12 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 			return (c01KeywordExtends != null) ? c01KeywordExtends : (c01KeywordExtends = (Keyword)ele0Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// ^extends = [ Type ]
 		public Assignment ele1AssignmentExtends() {
 			return (c1AssignmentExtends != null) ? c1AssignmentExtends : (c1AssignmentExtends = (Assignment)eleGroup().eContents().get(1)); 
 		}
 
-		// (error)
+		// [ Type ]
 		public CrossReference ele10CrossReferenceType() {
 			return (c10CrossReferenceType != null) ? c10CrossReferenceType : (c10CrossReferenceType = (CrossReference)ele1AssignmentExtends().eContents().get(0)); 
 		}
@@ -178,7 +178,7 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	} 
 
-	// (error)
+	// Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
 	public TypeElements prType() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	} 

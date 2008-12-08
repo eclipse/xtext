@@ -14,6 +14,9 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 public class WhitespacePreservingTokenSerializer extends SimpleTokenSerializer {
 
 	private List<LeafNode> allLeafs = null;

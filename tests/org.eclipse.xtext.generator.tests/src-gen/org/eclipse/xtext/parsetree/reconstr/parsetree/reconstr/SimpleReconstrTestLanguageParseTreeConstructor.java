@@ -16,6 +16,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageG
 public class SimpleReconstrTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -38,12 +39,12 @@ public class SimpleReconstrTestLanguageParseTreeConstructor extends AbstractPars
 	
 /************ begin Rule Op ****************
  *
- * (error)
+ * Op returns Expression : Term ( { current = Op . values += current } values += Term ) * ;
  *
  **/
 
 
-// (error)
+// Term ( { current = Op . values += current } values += Term ) *
 protected class Op_Group extends GroupToken {
 	
 	public Op_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -89,7 +90,7 @@ protected class Op_0_RuleCall_Term extends RuleCallToken {
 	}
 }
 
-// (error)
+// ( { current = Op . values += current } values += Term ) *
 protected class Op_1_Group extends GroupToken {
 	
 	public Op_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -117,7 +118,7 @@ protected class Op_1_Group extends GroupToken {
 	}
 }
 
-// (error)
+// { current = Op . values += current }
 protected class Op_1_0_Action_Op_values extends ActionToken  {
 
 	public Op_1_0_Action_Op_values(IInstanceDescription curr, AbstractToken pred) {
@@ -149,7 +150,7 @@ protected class Op_1_1_Assignment_values extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("values",required)) == null) return null;
+		if((value = current.getConsumable("values",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -171,7 +172,7 @@ protected class Op_1_1_Assignment_values extends AssignmentToken  {
 
 /************ begin Rule Term ****************
  *
- * (error)
+ * Term returns Expression : Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare ;
  *
  **/
 
@@ -455,7 +456,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -470,7 +471,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * (error)
+ * Parens returns Expression : '(' Op ')' ( em = '!' ) ? ;
  *
  **/
 
@@ -615,7 +616,7 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("em",required)) == null) return null;
+		if((value = current.getConsumable("em",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("em");
 		if("!".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -704,7 +705,7 @@ protected class TwoNumbers_0_0_Assignment_num1 extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("num1",required)) == null) return null;
+		if((value = current.getConsumable("num1",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("num1");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -727,7 +728,7 @@ protected class TwoNumbers_0_1_Assignment_num2 extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("num2",required)) == null) return null;
+		if((value = current.getConsumable("num2",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("num2");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -791,7 +792,7 @@ protected class TwoNumbers_1_1_Assignment_num3 extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("num3",required)) == null) return null;
+		if((value = current.getConsumable("num3",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("num3");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -893,7 +894,7 @@ protected class ManyStrings_0_1_Assignment_str1 extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("str1",required)) == null) return null;
+		if((value = current.getConsumable("str1",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("str1");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -917,7 +918,7 @@ protected class ManyStrings_1_Assignment_str2 extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("str2",required)) == null) return null;
+		if((value = current.getConsumable("str2",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("str2");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -933,12 +934,12 @@ protected class ManyStrings_1_Assignment_str2 extends AssignmentToken  {
 
 /************ begin Rule Type ****************
  *
- * (error)
+ * Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
  *
  **/
 
 
-// (error)
+// 'type' name = ID 'extends' ^extends = [ Type ]
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1046,7 +1047,7 @@ protected class Type_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -1071,7 +1072,7 @@ protected class Type_0_1_Keyword_extends extends KeywordToken  {
 }
 
 
-// (error)
+// ^extends = [ Type ]
 protected class Type_1_Assignment_extends extends AssignmentToken  {
 	
 	public Type_1_Assignment_extends(IInstanceDescription curr, AbstractToken pred) {
@@ -1083,7 +1084,7 @@ protected class Type_1_Assignment_extends extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("extends",required)) == null) return null;
+		if((value = current.getConsumable("extends",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("extends");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
@@ -1159,7 +1160,7 @@ protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("ref2",required)) == null) return null;
+		if((value = current.getConsumable("ref2",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ref2");
 		if("mykeyword1".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -1270,7 +1271,7 @@ protected class Spare_0_1_Assignment_id extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("id",required)) == null) return null;
+		if((value = current.getConsumable("id",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -1334,7 +1335,7 @@ protected class Spare_1_1_Assignment_id extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("id",required)) == null) return null;
+		if((value = current.getConsumable("id",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("id");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;

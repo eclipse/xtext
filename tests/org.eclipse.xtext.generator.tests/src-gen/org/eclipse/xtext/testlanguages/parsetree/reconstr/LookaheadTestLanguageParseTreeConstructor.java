@@ -16,6 +16,7 @@ import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAcce
 public class LookaheadTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -53,7 +54,7 @@ protected class Entry_Assignment_contents extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("contents",required)) == null) return null;
+		if((value = current.getConsumable("contents",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("contents");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -237,7 +238,7 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("x",required)) == null) return null;
+		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
 		if("a".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -366,7 +367,7 @@ protected class LookAhead1_0_0_1_Assignment_y extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("y",required)) == null) return null;
+		if((value = current.getConsumable("y",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("y");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -395,7 +396,7 @@ protected class LookAhead1_0_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("x",required)) == null) return null;
+		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
 		if("b".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -419,7 +420,7 @@ protected class LookAhead1_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("x",required)) == null) return null;
+		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
 		if("d".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -501,7 +502,7 @@ protected class LookAhead2_0_0_Assignment_z extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("z",required)) == null) return null;
+		if((value = current.getConsumable("z",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
 		if("foo".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -524,7 +525,7 @@ protected class LookAhead2_0_1_Assignment_z extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("z",required)) == null) return null;
+		if((value = current.getConsumable("z",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
 		if("bar".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -679,7 +680,7 @@ protected class LookAhead3_0_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("x",required)) == null) return null;
+		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
 		if("b".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -703,7 +704,7 @@ protected class LookAhead3_1_Assignment_z extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("z",required)) == null) return null;
+		if((value = current.getConsumable("z",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -762,7 +763,7 @@ protected class LookAhead4_0_Assignment_x extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("x",required)) == null) return null;
+		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
 		if("c".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -785,7 +786,7 @@ protected class LookAhead4_1_Assignment_x extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("x",required)) == null) return null;
+		if((value = current.getConsumable("x",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
 		if("d".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;

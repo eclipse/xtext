@@ -16,6 +16,7 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLan
 public class MetamodelRefTestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -77,7 +78,7 @@ protected class Foo_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -100,7 +101,7 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("nameRefs",required)) == null) return null;
+		if((value = current.getConsumable("nameRefs",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nameRefs");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -121,12 +122,12 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 
 /************ begin Rule NameRef ****************
  *
- * (error)
+ * NameRef returns xtext :: RuleCall : rule = [ MyRule ] ;
  *
  **/
 
 
-// (error)
+// rule = [ MyRule ]
 protected class NameRef_Assignment_rule extends AssignmentToken  {
 	
 	public NameRef_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
@@ -138,7 +139,7 @@ protected class NameRef_Assignment_rule extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("rule",required)) == null) return null;
+		if((value = current.getConsumable("rule",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rule");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
@@ -173,7 +174,7 @@ protected class MyRule_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;

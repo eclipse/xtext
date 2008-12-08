@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
  * been consumed by a serialization process.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Moritz Eysholdt
  */
 public interface IInstanceDescription {
 
@@ -19,56 +20,13 @@ public interface IInstanceDescription {
 	public abstract boolean isInstanceOf(String string);
 
 	/**
-	 * @param the
-	 *            type name as it is used within the grammar of the given
-	 *            language
-	 * @return true if the delegate's type is assignable to the given type
-	 */
-//	public abstract boolean isOfType(String string);
-
-	/**
 	 * @return the wrapped EObject
 	 */
 	public abstract EObject getDelegate();
-
-	/**
-	 * returns the last consumed value in the given feature
-	 * 
-	 * @param feature
-	 * @return the consumed value
-	 */
-//	public abstract Object get(String feature);
 	
 	public Object getConsumable(String feature, boolean allowDefault);
 	
 	public IInstanceDescription cloneAndConsume(String feature);
 	
 	public boolean isConsumedWithLastConsumtion(String feature);
-	
-	@Deprecated
-	public Object consume(String feature);
-
-	/**
-	 * 
-	 * @param feature
-	 * @return whether there are any consumable values for the given feature
-	 */
-	@Deprecated
-	public abstract boolean isConsumable(String feature);
-
-	/**
-	 * 
-	 * @return whether all values referenced by the delegate have been consumed
-	 */
-	@Deprecated
-	public abstract boolean isConsumed();
-
-	/**
-	 * @param feature
-	 * @return the number of values already consumed for this feature
-	 */
-//	public abstract int getConsumed(String feature);
-	
-	public IInstanceDescription createClone();
-
 }
