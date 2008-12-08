@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
@@ -161,23 +162,46 @@ public final class ParseTreeUtil {
 	 * 
 	 * @return the node element that starts at or spans across the provided position
 	 */
-	public static final LeafNode getCurrentNodeByOffset(AbstractNode contextNode, int offsetPosition) {
+	public static final AbstractNode getCurrentNodeByOffset(AbstractNode contextNode, int offsetPosition) {
 
 		assertParameterNotNull(contextNode, "contextNode");
+		
+		AbstractNode result = contextNode;
 
-		LeafNode leafNode = null;
+		TreeIterator<EObject> allContentsTreeIterator = EcoreUtil.getRootContainer(contextNode).eAllContents();
 
-		EList<LeafNode> leafNodes = contextNode.getLeafNodes();
-		for (Iterator<LeafNode> iterator = leafNodes.iterator(); iterator.hasNext() && leafNode==null;) {
-			LeafNode childNode = iterator.next();
-			if (childNode.getTotalOffset() <= offsetPosition && offsetPosition <= childNode.getTotalOffset() + childNode.getTotalLength()) {
-				leafNode = (LeafNode) childNode;
+		while (allContentsTreeIterator.hasNext()) {
+			
+			EObject eObject = allContentsTreeIterator.next(); 
+			
+			if (eObject instanceof AbstractNode) {
+				
+				AbstractNode abstractNode = (AbstractNode) eObject;
+			
+				if ((abstractNode.getTotalOffset() + abstractNode.getTotalLength())<offsetPosition ) {
+					allContentsTreeIterator.prune();
+				} else if (abstractNode.getTotalOffset() <= offsetPosition && 
+						           		  offsetPosition <= abstractNode.getTotalOffset() + abstractNode.getTotalLength()) {
+					if (abstractNode.getTotalLength() > 0 
+							|| (result==null || result.getTotalLength()==0)) {
+						
+						if (abstractNode instanceof LeafNode && 
+								abstractNode.getTotalOffset()==offsetPosition && ((LeafNode)abstractNode).isHidden()) {
+							;
+						} else {
+							result = abstractNode;
+						}
+					}
+				} else if (abstractNode.getTotalOffset() > offsetPosition ) {
+					break;
+				} 
 			}
 		}
-
-		return leafNode;
+		
+		return null==result ? contextNode : result;
 	}
 
+	
 	/**
 	 * 
 	 * This method returns the parent grammar of the given eObject by recursive
