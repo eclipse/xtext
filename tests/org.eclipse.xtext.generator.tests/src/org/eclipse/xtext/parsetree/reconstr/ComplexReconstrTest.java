@@ -26,13 +26,13 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(ComplexReconstrTestStandaloneSetup.class);
+		with(ComplexReconstrTestLanguageStandaloneSetup.class);
 	}
 
 	public void testPrintGrammar() {
 		ResourceSet rs = new XtextResourceSet();
 		URI u = URI
-				.createURI("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTest.xmi");
+				.createURI("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xmi");
 		EObject o = rs.getResource(u, true).getContents().get(0);
 		for (Object x : o.eContents())
 			if (x instanceof ParserRule) {

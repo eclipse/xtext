@@ -7,7 +7,7 @@ public class WhitespacePreservingCallbackTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(ComplexReconstrTestStandaloneSetup.class);
+		with(ComplexReconstrTestLanguageStandaloneSetup.class);
 	}
 
 	public void testSimple() throws Exception {

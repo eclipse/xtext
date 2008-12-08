@@ -11,7 +11,7 @@ package org.eclipse.xtext.parsetree.reconstr;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
+import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfFormater;
 
@@ -54,13 +54,13 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 	}
 
 	public void testSimpleExpressions5() throws Exception {
-		with(SimpleExpressionsStandaloneSetup.class);
+		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		String model = "a + b - c * d / e";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
 	public void testSimpleExpressions1() throws Exception {
-		with(SimpleExpressionsStandaloneSetup.class);
+		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		String model = "a + b - c";
 		assertEquals(model, parseAndSerialize(model));
 	}
@@ -114,7 +114,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 
 	@Override
 	protected void setUp() throws Exception {
-		with(SimpleReconstrTestStandaloneSetup.class);
+		with(SimpleReconstrTestLanguageStandaloneSetup.class);
 		super.setUp();
 	}
 }

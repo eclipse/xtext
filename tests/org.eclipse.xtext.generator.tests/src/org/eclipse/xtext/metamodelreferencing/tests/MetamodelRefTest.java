@@ -18,7 +18,7 @@ public class MetamodelRefTest extends AbstractGeneratorTest {
     protected void setUp() throws Exception {
         super.setUp();
         XtextPackage.eINSTANCE.getAbstractElement(); // initialize EPackage
-        with(MetamodelRefTestStandaloneSetup.class);
+        with(MetamodelRefTestLanguageStandaloneSetup.class);
     }
 
     public void testStuff() throws Exception {

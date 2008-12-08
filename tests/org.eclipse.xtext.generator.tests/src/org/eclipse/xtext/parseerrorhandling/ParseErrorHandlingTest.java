@@ -11,12 +11,12 @@ package org.eclipse.xtext.parseerrorhandling;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.XtextGrammarTestStandaloneSetup;
+import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.SyntaxError;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class ParseErrorHandlingTest extends AbstractGeneratorTest {
@@ -26,7 +26,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(XtextGrammarTestStandaloneSetup.class);
+		with(XtextGrammarTestLanguageStandaloneSetup.class);
 	}
 
 	public void testLexError() throws Exception {
@@ -81,7 +81,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	 * @throws Exception
 	 */
 	public void testBug236425() throws Exception {
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 100 }";
 		EObject object = getModel(model);
 		CompositeNode node = NodeUtil.getRootNode(object);
@@ -90,7 +90,7 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	
 	
 	public void testLexerError() throws Exception {
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 100 '}";
 		EObject object = getModel(model);
 		CompositeNode node = NodeUtil.getRootNode(object);

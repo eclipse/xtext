@@ -11,8 +11,8 @@ package org.eclipse.xtext.parser;
 import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
-import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.TreeTestLanguageStandaloneSetup;
 
 /**
@@ -24,7 +24,7 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 	private static final int NUM_ELEMENTS = 100;
 	
 	public void testExpression() throws Exception {
-		with(SimpleExpressionsStandaloneSetup.class);
+		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		String d = ")+d)\r\n";
 		String a_b = "(a+(b*\r\n";
 		StringBuffer modelBuffer = new StringBuffer(NUM_ELEMENTS * (a_b.length() + d.length()) + 1);
@@ -42,7 +42,7 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 	}
 	
 	public void testReference() throws Exception {
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		StringBuffer modelBuffer = new StringBuffer();
 		modelBuffer.append("spielplatz 17 {\n");
 		for(int i=0; i<NUM_ELEMENTS; ++i) {
@@ -69,7 +69,7 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 	}
 	
 	public void testReferenceWithErrorAtEnd() throws Exception {
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		StringBuffer modelBuffer = new StringBuffer();
 		modelBuffer.append("spielplatz 17 {\n");
 		for(int i=0; i<NUM_ELEMENTS; ++i) {

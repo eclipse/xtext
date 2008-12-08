@@ -15,8 +15,8 @@ import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.SyntaxError;
-import org.eclipse.xtext.testlanguages.LookaheadLanguageStandaloneSetup;
-import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
+import org.eclipse.xtext.testlanguages.LookaheadTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -27,7 +27,7 @@ public class PartialParserReplaceTest extends AbstractPartialParserTest {
 	private static final Logger logger = Logger.getLogger(PartialParserReplaceTest.class);
 	
 	public void testExpression() throws Exception {
-		with(SimpleExpressionsStandaloneSetup.class);
+		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		String model = "(a+b+c)*(c/d)";
 		replaceAndReparse(model, 2, 2, "+hugo+egon", "(a+hugo+egon+c)");
 		replaceAndReparse(model, 8, 5, "egon", "egon");
@@ -40,7 +40,7 @@ public class PartialParserReplaceTest extends AbstractPartialParserTest {
 	}
 
 	public void testLookahead() throws Exception {
-		with(LookaheadLanguageStandaloneSetup.class);
+		with(LookaheadTestLanguageStandaloneSetup.class);
 		String model = "foo bar b c";
 		replaceAndReparse(model, 10, 1, "d", "foo bar b d");
 		replaceAndReparse(model, 8, 1, "b", "foo bar b c");

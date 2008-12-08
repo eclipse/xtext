@@ -9,7 +9,7 @@
 package org.eclipse.xtext.parsetree;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.testlanguages.OptionalEmptyLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -19,7 +19,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 public class InvalidTokenTest extends AbstractGeneratorTest {
 
 	public void testInvalidTokenError() throws Exception {
-		with(OptionalEmptyLanguageStandaloneSetup.class);
+		with(OptionalEmptyTestLanguageStandaloneSetup.class);
 		CompositeNode rootNode = getRootNode("/*");
 		EList<SyntaxError> allSyntaxErrors = rootNode.allSyntaxErrors();
 		assertFalse(allSyntaxErrors.isEmpty());

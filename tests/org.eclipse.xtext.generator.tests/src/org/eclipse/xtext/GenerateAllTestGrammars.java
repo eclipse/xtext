@@ -13,23 +13,24 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.crossrefs.ImportUriTestLanguage;
-import org.eclipse.xtext.crossrefs.LangA;
-import org.eclipse.xtext.dummy.DummyLanguage;
+import org.eclipse.xtext.crossrefs.LangATestLanguage;
+import org.eclipse.xtext.dummy.DummyTestLanguage;
 import org.eclipse.xtext.grammarinheritance.AbstractTestLanguage;
 import org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage;
-import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest;
-import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest;
-import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTest;
+import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage;
+import org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage;
+import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage;
+import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testlanguages.ActionTestLanguage;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguage;
 import org.eclipse.xtext.testlanguages.FowlerDslTestLanguage;
-import org.eclipse.xtext.testlanguages.LexerLanguage;
-import org.eclipse.xtext.testlanguages.LookaheadLanguage;
-import org.eclipse.xtext.testlanguages.OptionalEmptyLanguage;
+import org.eclipse.xtext.testlanguages.LexerTestLanguage;
+import org.eclipse.xtext.testlanguages.LookaheadTestLanguage;
+import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguage;
 import org.eclipse.xtext.testlanguages.PartialParserTestLanguage;
-import org.eclipse.xtext.testlanguages.ReferenceGrammar;
-import org.eclipse.xtext.testlanguages.SimpleExpressions;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage;
+import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage;
 import org.eclipse.xtext.testlanguages.TestLanguage;
 import org.eclipse.xtext.testlanguages.TreeTestLanguage;
 import org.eclipse.xtext.valueconverter.Bug250313;
@@ -44,16 +45,17 @@ public class GenerateAllTestGrammars {
 	private static Logger log = Logger.getLogger(GenerateAllTestGrammars.class);
 
 	public final static Class<?>[] testclasses = new Class[] { 
-			LangA.class,
+			LangATestLanguage.class,
 			AbstractTestLanguage.class,
 			ConcreteTestLanguage.class,
-			XtextGrammarTest.class, 
-			MetamodelRefTest.class,
-			DummyLanguage.class,
+			XtextGrammarTestLanguage.class, 
+			MetamodelRefTestLanguage.class,
+			MultiGenMMTestLanguage.class,
+			DummyTestLanguage.class,
 			TestLanguage.class,
-			SimpleReconstrTest.class, ComplexReconstrTest.class, LexerLanguage.class,
-			SimpleExpressions.class, ActionTestLanguage.class, OptionalEmptyLanguage.class, ReferenceGrammar.class,
-			LookaheadLanguage.class, Bug250313.class, FowlerDslTestLanguage.class, TreeTestLanguage.class, ImportUriTestLanguage.class,
+			SimpleReconstrTestLanguage.class, ComplexReconstrTestLanguage.class, LexerTestLanguage.class,
+			SimpleExpressionsTestLanguage.class, ActionTestLanguage.class, OptionalEmptyTestLanguage.class, ReferenceGrammarTestLanguage.class,
+			LookaheadTestLanguage.class, Bug250313.class, FowlerDslTestLanguage.class, TreeTestLanguage.class, ImportUriTestLanguage.class,
 			PartialParserTestLanguage.class, ContentAssistTestLanguage.class 
 			};
 
