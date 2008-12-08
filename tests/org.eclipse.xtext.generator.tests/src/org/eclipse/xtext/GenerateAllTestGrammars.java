@@ -21,6 +21,7 @@ import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage;
 import org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage;
 import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage;
 import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage;
+import org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testlanguages.ActionTestLanguage;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguage;
@@ -56,7 +57,7 @@ public class GenerateAllTestGrammars {
 			SimpleReconstrTestLanguage.class, ComplexReconstrTestLanguage.class, LexerTestLanguage.class,
 			SimpleExpressionsTestLanguage.class, ActionTestLanguage.class, OptionalEmptyTestLanguage.class, ReferenceGrammarTestLanguage.class,
 			LookaheadTestLanguage.class, Bug250313.class, FowlerDslTestLanguage.class, TreeTestLanguage.class, ImportUriTestLanguage.class,
-			PartialParserTestLanguage.class, ContentAssistTestLanguage.class 
+			PartialParserTestLanguage.class, ContentAssistTestLanguage.class, TransientValuesTest.class 
 			};
 
 	public static void main(String[] args) throws Exception {

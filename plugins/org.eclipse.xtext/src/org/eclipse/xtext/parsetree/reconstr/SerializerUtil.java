@@ -8,6 +8,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 public class SerializerUtil {
 	public static void serialize(IParseTreeConstructor astSerializer,
 			ITokenSerializer tokenSerializer, EObject obj, OutputStream out)

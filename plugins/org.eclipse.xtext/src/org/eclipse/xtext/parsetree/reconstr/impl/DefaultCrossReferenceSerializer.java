@@ -5,6 +5,9 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 public class DefaultCrossReferenceSerializer implements
 		ICrossReferenceSerializer {
 

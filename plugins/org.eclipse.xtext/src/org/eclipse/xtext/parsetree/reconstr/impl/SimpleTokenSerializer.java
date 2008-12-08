@@ -15,12 +15,14 @@ import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAbstractToken;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IAssignmentToken;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.IKeywordToken;
-import org.eclipse.xtext.parsetree.reconstr.callbacks.SimpleSerializingCallback;
 import org.eclipse.xtext.service.Inject;
 
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
 public class SimpleTokenSerializer extends DefaultTokenSerializer {
 	static final Logger logger = Logger
-			.getLogger(SimpleSerializingCallback.class);
+			.getLogger(SimpleTokenSerializer.class);
 
 	@Inject
 	protected IValueConverterService converterService;

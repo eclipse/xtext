@@ -20,14 +20,12 @@ import org.eclipse.xtext.service.ILanguageService;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Moritz Eysholt
  * 
  */
 
 // TODO: rename to IAstSerializer
 public interface IParseTreeConstructor extends ILanguageService {
-
-//	public static final String OPTION_SERIALIZER_STRATEGY = "OPTION_SERIALIZER_STRATEGY";
-
 
 	public IAbstractToken serialize(EObject object);
 
