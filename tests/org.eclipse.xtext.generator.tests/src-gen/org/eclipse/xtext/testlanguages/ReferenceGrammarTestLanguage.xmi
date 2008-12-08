@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>testlanguages</idElements>
+  <idElements>ReferenceGrammarTestLanguage</idElements>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="ReferenceGrammar" nsURI="http://eclipse.org/xtext/reference/ReferenceGrammar"/>
+  <rules xsi:type="xtext:ParserRule" name="Spielplatz">
+    <alternatives xsi:type="xtext:Group" cardinality="?">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Keyword" value="spielplatz"/>
+              <abstractTokens xsi:type="xtext:Assignment" feature="groesse" operator="=">
+                <terminal xsi:type="xtext:RuleCall">
+                  <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"/>
+                </terminal>
+              </abstractTokens>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Assignment" cardinality="?" feature="beschreibung" operator="=">
+              <terminal xsi:type="xtext:RuleCall">
+                <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.2"/>
+              </terminal>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Keyword" value="{"/>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Alternatives" cardinality="*">
+          <groups xsi:type="xtext:Alternatives">
+            <groups xsi:type="xtext:Alternatives">
+              <groups xsi:type="xtext:Assignment" feature="kinder" operator="+=">
+                <terminal xsi:type="xtext:RuleCall" rule="//@rules.2"/>
+              </groups>
+              <groups xsi:type="xtext:Assignment" feature="erzieher" operator="+=">
+                <terminal xsi:type="xtext:RuleCall" rule="//@rules.3"/>
+              </groups>
+            </groups>
+            <groups xsi:type="xtext:Assignment" feature="spielzeuge" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="//@rules.4"/>
+            </groups>
+          </groups>
+          <groups xsi:type="xtext:Assignment" feature="familie" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="//@rules.6"/>
+          </groups>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value="}"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Person">
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.2"/>
+      <groups xsi:type="xtext:RuleCall" rule="//@rules.3"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Kind">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="kind"/>
+            <abstractTokens xsi:type="xtext:Keyword" value="("/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+            <terminal xsi:type="xtext:RuleCall">
+              <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+            </terminal>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="age" operator="=">
+          <terminal xsi:type="xtext:RuleCall">
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"/>
+          </terminal>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value=")"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Erwachsener">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="erwachsener"/>
+            <abstractTokens xsi:type="xtext:Keyword" value="("/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+            <terminal xsi:type="xtext:RuleCall">
+              <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+            </terminal>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="age" operator="=">
+          <terminal xsi:type="xtext:RuleCall">
+            <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"/>
+          </terminal>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value=")"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Spielzeug">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Keyword" value="spielzeug"/>
+            <abstractTokens xsi:type="xtext:Keyword" value="("/>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+            <terminal xsi:type="xtext:RuleCall">
+              <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+            </terminal>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Assignment" feature="farbe" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="//@rules.5"/>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value=")"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Farbe">
+    <alternatives xsi:type="xtext:Alternatives">
+      <groups xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Keyword" value="ROT"/>
+          <groups xsi:type="xtext:Keyword" value="BLAU"/>
+        </groups>
+        <groups xsi:type="xtext:Keyword" value="GELB"/>
+      </groups>
+      <groups xsi:type="xtext:Keyword" value="GR&#xdc;N"/>
+    </alternatives>
+  </rules>
+  <rules xsi:type="xtext:ParserRule" name="Familie">
+    <alternatives xsi:type="xtext:Group">
+      <abstractTokens xsi:type="xtext:Group">
+        <abstractTokens xsi:type="xtext:Group">
+          <abstractTokens xsi:type="xtext:Group">
+            <abstractTokens xsi:type="xtext:Group">
+              <abstractTokens xsi:type="xtext:Group">
+                <abstractTokens xsi:type="xtext:Group">
+                  <abstractTokens xsi:type="xtext:Keyword" value="familie"/>
+                  <abstractTokens xsi:type="xtext:Keyword" value="("/>
+                </abstractTokens>
+                <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
+                  <terminal xsi:type="xtext:Alternatives">
+                    <groups xsi:type="xtext:Alternatives">
+                      <groups xsi:type="xtext:Keyword" value="keyword"/>
+                      <groups xsi:type="xtext:RuleCall">
+                        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.2"/>
+                      </groups>
+                    </groups>
+                    <groups xsi:type="xtext:RuleCall">
+                      <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+                    </groups>
+                  </terminal>
+                </abstractTokens>
+              </abstractTokens>
+              <abstractTokens xsi:type="xtext:Assignment" feature="mutter" operator="=">
+                <terminal xsi:type="xtext:CrossReference">
+                  <type metamodel="//@metamodelDeclarations.0" name="Erwachsener"/>
+                </terminal>
+              </abstractTokens>
+            </abstractTokens>
+            <abstractTokens xsi:type="xtext:Assignment" feature="vater" operator="=">
+              <terminal xsi:type="xtext:CrossReference">
+                <type metamodel="//@metamodelDeclarations.0" name="Erwachsener"/>
+              </terminal>
+            </abstractTokens>
+          </abstractTokens>
+          <abstractTokens xsi:type="xtext:Assignment" feature="kinder" operator="+=">
+            <terminal xsi:type="xtext:CrossReference">
+              <type metamodel="//@metamodelDeclarations.0" name="Kind"/>
+            </terminal>
+          </abstractTokens>
+        </abstractTokens>
+        <abstractTokens xsi:type="xtext:Group" cardinality="*">
+          <abstractTokens xsi:type="xtext:Keyword" value=","/>
+          <abstractTokens xsi:type="xtext:Assignment" feature="kinder" operator="+=">
+            <terminal xsi:type="xtext:CrossReference">
+              <type metamodel="//@metamodelDeclarations.0" name="Kind"/>
+            </terminal>
+          </abstractTokens>
+        </abstractTokens>
+      </abstractTokens>
+      <abstractTokens xsi:type="xtext:Keyword" value=")"/>
+    </alternatives>
+  </rules>
+</xtext:Grammar>

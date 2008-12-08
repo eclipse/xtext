@@ -10,7 +10,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.crossref.impl.XtextBuiltinLinkingService;
-import org.eclipse.xtext.crossrefs.services.LangAGrammarAccess;
+import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
@@ -24,8 +24,8 @@ public class CrossRefTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(LangAStandaloneSetup.class);
-		linkingService = (XtextBuiltinLinkingService) ServiceRegistry.getService(ILangA.SCOPE, ILinkingService.class);
+		with(LangATestLanguageStandaloneSetup.class);
+		linkingService = (XtextBuiltinLinkingService) ServiceRegistry.getService(ILangATestLanguage.SCOPE, ILinkingService.class);
 	}
 
 	public void testSimple() throws Exception {
@@ -43,7 +43,7 @@ public class CrossRefTest extends AbstractGeneratorTest {
 		assertWithXtend("3", "types.size", model);
 
 		EObject context = (EObject) invokeWithXtend("types.first()", model);
-		ParserRule prType = new LangAGrammarAccess().prType().getRule();
+		ParserRule prType = new LangATestLanguageGrammarAccess().prType().getRule();
 		Assignment asExtends = (Assignment) ((Group) prType.getAlternatives()).getAbstractTokens().get(1);
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
 		EReference ref = GrammarUtil.getReference(xref, context.eClass());

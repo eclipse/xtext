@@ -18,7 +18,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -32,7 +32,7 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 	}
 
 	public void testGetGrammarElementFromNode() throws Exception {

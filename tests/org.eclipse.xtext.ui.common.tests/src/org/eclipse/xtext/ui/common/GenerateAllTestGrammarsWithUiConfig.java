@@ -19,11 +19,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.GeneratorFacade;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.XtextGrammarTest;
+import org.eclipse.xtext.XtextGrammarTestLanguage;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguage;
-import org.eclipse.xtext.testlanguages.ReferenceGrammar;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage;
 import org.eclipse.xtext.testlanguages.TreeTestLanguage;
 
 /**
@@ -44,8 +44,8 @@ public class GenerateAllTestGrammarsWithUiConfig {
 
 	private static Logger logger = Logger.getLogger(GenerateAllTestGrammarsWithUiConfig.class);
 
-	private final static Class<?>[] testClasses = new Class[] { ReferenceGrammar.class, TreeTestLanguage.class,
-		XtextGrammarTest.class, ContentAssistTestLanguage.class };
+	private final static Class<?>[] testClasses = new Class[] { ReferenceGrammarTestLanguage.class, TreeTestLanguage.class,
+		XtextGrammarTestLanguage.class, ContentAssistTestLanguage.class };
 	/**
 	 * @return the testclasses
 	 */
