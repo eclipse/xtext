@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -20,7 +20,7 @@ public class XtextResourcePerformanceTest extends AbstractGeneratorTest {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		StringBuilder modelBuilder = new StringBuilder(NUM_ELEMENTS * 64);
 		modelBuilder.append("spielplatz " + NUM_ELEMENTS + " {\n");
 		for (int i = 1; i <= NUM_ELEMENTS; i++) {

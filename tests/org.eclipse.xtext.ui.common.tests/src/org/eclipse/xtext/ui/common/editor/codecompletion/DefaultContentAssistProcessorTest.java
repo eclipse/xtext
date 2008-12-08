@@ -13,12 +13,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.codecompletion;
 
-import org.eclipse.xtext.XtextGrammarTestStandaloneSetup;
-import org.eclipse.xtext.XtextGrammarTestUiConfig;
+import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.XtextGrammarTestLanguageUiConfig;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiConfig;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarUiConfig;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiConfig;
 import org.eclipse.xtext.ui.common.AbstractUiTest;
 
 
@@ -36,9 +36,9 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		withUi(XtextGrammarTestStandaloneSetup.class, XtextGrammarTestUiConfig.class);
+		withUi(XtextGrammarTestLanguageStandaloneSetup.class, XtextGrammarTestLanguageUiConfig.class);
 		withUi(ContentAssistTestLanguageStandaloneSetup.class, ContentAssistTestLanguageUiConfig.class);
-		withUi(ReferenceGrammarStandaloneSetup.class,ReferenceGrammarUiConfig.class);
+		withUi(ReferenceGrammarTestLanguageStandaloneSetup.class,ReferenceGrammarTestLanguageUiConfig.class);
 		contentAssistProcessorTestBuilder = new ContentAssistProcessorTestBuilder(getCurrentServiceScope(),new DefaultContentAssistProcessor());
 	}
 	
@@ -104,7 +104,7 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 	}
 	
 	public void testCompleteRuleCall() throws Exception {
-		newBuilder(XtextGrammarTestStandaloneSetup.class, XtextGrammarTestUiConfig.class)
+		newBuilder(XtextGrammarTestLanguageStandaloneSetup.class, XtextGrammarTestLanguageUiConfig.class)
 			.appendNl("language foo")
 			.appendNl("generate foo \"foo\"")
 			.appendNl("R1 : (attr+=R2)*;")

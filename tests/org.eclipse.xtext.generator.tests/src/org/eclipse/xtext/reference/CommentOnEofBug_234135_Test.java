@@ -12,7 +12,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -22,7 +22,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 public class CommentOnEofBug_234135_Test extends AbstractGeneratorTest {
 
     public void testCommentOnEof() throws Exception {
-        with(ReferenceGrammarStandaloneSetup.class);
+        with(ReferenceGrammarTestLanguageStandaloneSetup.class);
         String model = "//comment";
         EList<LeafNode> leafNodes = getRootNode(model).getLeafNodes();
         assertEquals(1, leafNodes.size());

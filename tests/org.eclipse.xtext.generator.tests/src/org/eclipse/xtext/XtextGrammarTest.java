@@ -21,7 +21,7 @@ public class XtextGrammarTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(XtextGrammarTestStandaloneSetup.class);
+		with(XtextGrammarTestLanguageStandaloneSetup.class);
 	}
 	
 	public void testInstantiate() throws Exception {

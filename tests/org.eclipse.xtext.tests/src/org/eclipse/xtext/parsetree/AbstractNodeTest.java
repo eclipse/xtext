@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
-import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -27,7 +27,7 @@ public class AbstractNodeTest extends AbstractGeneratorTest {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		model = "// comment before root\n" +
 				"\n" +
 				"  spielplatz 0 \"Rummel\" {\n" +

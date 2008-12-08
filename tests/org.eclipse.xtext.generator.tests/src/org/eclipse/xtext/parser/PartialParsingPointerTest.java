@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
 import org.eclipse.xtext.parser.impl.PartialParsingUtil;
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.testlanguages.LookaheadLanguageStandaloneSetup;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
-import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
+import org.eclipse.xtext.testlanguages.LookaheadTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -31,7 +31,7 @@ public class PartialParsingPointerTest extends AbstractPartialParserTest {
 	private static final Logger logger = Logger.getLogger(PartialParsingPointerTest.class);
 
 	public void testExpression() throws Exception {
-		with(SimpleExpressionsStandaloneSetup.class);
+		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		String model = "(a+b+c)*(c/d)";
 		PartialParsingPointers parsingPointers;
 		
@@ -59,7 +59,7 @@ public class PartialParsingPointerTest extends AbstractPartialParserTest {
 	}
 
 	public void testLookahead() throws Exception {
-		with(LookaheadLanguageStandaloneSetup.class);
+		with(LookaheadTestLanguageStandaloneSetup.class);
 		String model = "bar a foo bar c b d foo bar b c";
 		for (int i = 0; i < model.length(); ++i) {
 			logger.debug(i);
@@ -97,7 +97,7 @@ public class PartialParsingPointerTest extends AbstractPartialParserTest {
 	}
 
 	public void testReference() throws Exception {
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 17 { kind ( Dennis 6 ) kind ( Sven 7 ) }";
 		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(model, model.indexOf("Sven"), 4);
 		checkParseRegionPointers(parsingPointers, " kind ( Sven 7 )", "RuleCallImpl", "Kind", "Kind", "Spielplatz", "kinder");

@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
-import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -18,7 +18,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 public class NodeContentAdapterTest extends AbstractGeneratorTest{
 
 	public void testNodeContentAdapter() throws Exception {
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		CompositeNode rootNode = getRootNode("spielplatz 112 'Jajaja' { kind ( Dennis 7) }");
 		NodeUtil.dumpCompositeNodes("", rootNode);
 	}

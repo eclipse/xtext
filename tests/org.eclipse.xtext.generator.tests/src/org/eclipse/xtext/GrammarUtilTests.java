@@ -12,10 +12,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.crossrefs.LangAStandaloneSetup;
-import org.eclipse.xtext.crossrefs.services.LangAGrammarAccess;
-import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestStandaloneSetup;
-import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestGrammarAccess;
+import org.eclipse.xtext.crossrefs.LangATestLanguageStandaloneSetup;
+import org.eclipse.xtext.crossrefs.services.LangATestLanguageGrammarAccess;
+import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguageStandaloneSetup;
+import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -25,8 +25,8 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
 public class GrammarUtilTests extends AbstractGeneratorTest {
 
 	public void testGetEPackage() throws Exception {
-		with(LangAStandaloneSetup.class);
-		Grammar grammar = (new LangAGrammarAccess()).getGrammar();
+		with(LangATestLanguageStandaloneSetup.class);
+		Grammar grammar = (new LangATestLanguageGrammarAccess()).getGrammar();
 		EObject model = getModel("type A extends A");
 		assertNotNull(model);
 		ResourceSet resourceSet = model.eResource().getResourceSet();
@@ -39,8 +39,8 @@ public class GrammarUtilTests extends AbstractGeneratorTest {
 	}
 	
 	public void testImport() throws Exception {
-		with(MetamodelRefTestStandaloneSetup.class);
-		Grammar grammar = (new MetamodelRefTestGrammarAccess()).getGrammar();
+		with(MetamodelRefTestLanguageStandaloneSetup.class);
+		Grammar grammar = (new MetamodelRefTestLanguageGrammarAccess()).getGrammar();
 		EObject model = getModel("test");
 		assertNotNull(model);
 		ResourceSet resourceSet = model.eResource().getResourceSet();
@@ -57,10 +57,10 @@ public class GrammarUtilTests extends AbstractGeneratorTest {
 	}
 	
 	public void testGetEClass() throws Exception {
-		with(LangAStandaloneSetup.class);
+		with(LangATestLanguageStandaloneSetup.class);
 		XtextResource resource = getResourceFromString("type A extends A");
 		
-		ParserRule prType = (new LangAGrammarAccess()).prType().getRule();
+		ParserRule prType = (new LangATestLanguageGrammarAccess()).prType().getRule();
 		Assignment asExtends = (Assignment)((Group)prType.getAlternatives()).getAbstractTokens().get(1);
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
 		
@@ -73,10 +73,10 @@ public class GrammarUtilTests extends AbstractGeneratorTest {
 	}
 	
 	public void testGetReference() throws Exception {
-		with(LangAStandaloneSetup.class);
+		with(LangATestLanguageStandaloneSetup.class);
 		XtextResource resource = getResourceFromString("type A extends B");
 		
-		ParserRule prType = (new LangAGrammarAccess()).prType().getRule();
+		ParserRule prType = (new LangATestLanguageGrammarAccess()).prType().getRule();
 		Assignment asExtends = (Assignment)((Group)prType.getAlternatives()).getAbstractTokens().get(1);
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
 		EObject model = getModel(resource);
