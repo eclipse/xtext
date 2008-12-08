@@ -27,7 +27,7 @@ public class LinkingErrorTest extends AbstractGeneratorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(LangAStandaloneSetup.class);
+		with(LangATestLanguageStandaloneSetup.class);
 	}
 	
 	public void testNoErrors() throws Exception {

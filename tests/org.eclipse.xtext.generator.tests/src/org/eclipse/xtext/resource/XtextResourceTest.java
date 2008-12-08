@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.crossref.internal.XtextLinkingDiagnostic;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -24,7 +24,7 @@ public class XtextResourceTest extends AbstractGeneratorTest {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		resource = getResourceFromString("");
 	}
 	

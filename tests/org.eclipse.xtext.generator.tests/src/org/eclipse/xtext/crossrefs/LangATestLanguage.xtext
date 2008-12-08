@@ -1,0 +1,13 @@
+language org.eclipse.xtext.crossrefs.LangATestLanguage
+
+generate langATestLanguage "http://eclipse.org/xtext/langATestLanguage"
+
+Main : 
+	imports+=Import*
+	types+=Type*;
+	
+Import :
+	'import' uri=STRING;
+	
+Type :
+	'type' name=ID 'extends' ^extends=[Type];

@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -25,7 +25,7 @@ public class LeafNodeBug_234132_Test extends AbstractGeneratorTest {
 	private static final Logger logger = Logger.getLogger(LeafNodeBug_234132_Test.class);
 
     public void testLeafNodeBug() throws Exception {
-        with(ReferenceGrammarStandaloneSetup.class);
+        with(ReferenceGrammarTestLanguageStandaloneSetup.class);
         String model = readFileIntoString("org/eclipse/xtext/reference/leafNodeBug_234132.tst");
         CompositeNode rootNode = getRootNode(model);
         

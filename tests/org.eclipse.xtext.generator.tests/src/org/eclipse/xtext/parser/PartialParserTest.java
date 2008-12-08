@@ -22,10 +22,10 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.testlanguages.LookaheadLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.LookaheadTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.PartialParserTestLanguageStandaloneSetup;
-import org.eclipse.xtext.testlanguages.ReferenceGrammarStandaloneSetup;
-import org.eclipse.xtext.testlanguages.SimpleExpressionsStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -35,13 +35,13 @@ import org.eclipse.xtext.util.StringInputStream;
 public class PartialParserTest extends AbstractPartialParserTest {
 
 	public void testExpression() throws Exception {
-		with(SimpleExpressionsStandaloneSetup.class);
+		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		String model = "(a+b+c)*(c/d)";
 		parseAndCompareAllSubstrings(model);
 	}
 
 	public void testLookahead() throws Exception {
-		with(LookaheadLanguageStandaloneSetup.class);
+		with(LookaheadTestLanguageStandaloneSetup.class);
 		String model = "bar a foo bar c b d foo bar b c";
 		parseAndCompareAllSubstrings(model);
 	}
@@ -56,7 +56,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 	}
 
 	public void testErrorMarkers() throws Exception {
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 1 {kind (k 1}"; // model contains an error
 		// due to missing ) at idx
 		// 23
@@ -79,7 +79,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 	}
 
 	public void testGrammarElementAssigned() throws Exception {
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 1 {kind (k 1)\n}";
 		XtextResource resource = getResourceFromString(model);
 		CompositeNode rootNode = resource.getParseResult().getRootNode();
@@ -90,7 +90,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 	}
 	
 	public void testParseIsPartial() throws Exception {
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 1 {kind (k 1)\n}";
 		XtextResource resource = getResourceFromString(model);
 		CompositeNode rootNode = resource.getParseResult().getRootNode();
@@ -99,7 +99,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 	}
 	
 	public void testParseIsPartialTwice() throws Exception {
-		with(ReferenceGrammarStandaloneSetup.class);
+		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
 		String model = "spielplatz 1 {kind (k 1)\n}";
 		XtextResource resource = getResourceFromString(model);
 		CompositeNode rootNode = resource.getParseResult().getRootNode();
@@ -200,7 +200,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 
 	@SuppressWarnings("unchecked")
 	public void testNodeState() throws Exception {
-		with(SimpleExpressionsStandaloneSetup.class);
+		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		String model = "(a\r\n+(b\r\n*c\r\n)+d\r\n)";
 		CompositeNode rootNode = getRootNode(model);
 		Iterator iter = rootNode.getLeafNodes().iterator();
