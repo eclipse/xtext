@@ -11,8 +11,6 @@ import java.util.Collections;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
- * @param <T>
  */
 public interface IScope {
 	
@@ -33,6 +31,9 @@ public interface IScope {
     };
     
     IScope getParent();
+    
     Iterable<IScopedElement> getContents();
+    
     Iterable<IScopedElement> getAllContents();
+    
 }

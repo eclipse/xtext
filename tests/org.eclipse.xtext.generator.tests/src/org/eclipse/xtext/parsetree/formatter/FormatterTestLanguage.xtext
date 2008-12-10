@@ -4,19 +4,19 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ *
  *******************************************************************************/
-package org.eclipse.xtext.parsetree.reconstr.impl;
+language org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage
+generate formattertestlanguage "http://simple/formattertestlanguage"
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-
-/**
- * @author Moritz Eysholdt - Initial contribution and API
- */
-public class SimpleTransientValueService extends DefaultTransientValueService {
-	public boolean isTransient(EObject owner, EStructuralFeature feature,
-			int index) {
-		return !owner.eIsSet(feature);
-	}
-
-}
+Root:
+	"test" (TestLinewrap | TestIndentation);
+	
+Line:
+	type+=ID name+=ID ";";
+	
+TestLinewrap:
+	"linewrap" items+=Line*;
+	
+TestIndentation:
+	"indentation" "{" (sub+=TestIndentation | items+=Line)* "}"; 
