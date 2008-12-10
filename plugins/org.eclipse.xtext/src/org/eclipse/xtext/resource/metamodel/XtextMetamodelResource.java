@@ -67,10 +67,7 @@ public class XtextMetamodelResource extends ResourceImpl {
 					+ " does not contain a root element of type Grammar");
 		}
 		Grammar grammar = (Grammar) firstObject;
-		Xtext2EcoreTransformer xtext2EcoreTransformer = new Xtext2EcoreTransformer();
-		// TODO bind ErrorAcceptor
-
-		List<EPackage> ePackages = xtext2EcoreTransformer.transform(grammar);
+		List<EPackage> ePackages = Xtext2EcoreTransformer.doGetGeneratedPackages(grammar);
 		getContents().addAll(ePackages);
 	}
 

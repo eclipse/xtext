@@ -600,19 +600,18 @@ ruleTypeRef returns [EObject current=null]
     }
 )?(	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
-    }
- 
-	    {
-	        if ($current==null) {
+		
+		{
+			if ($current==null) {
 	            $current = factory.create("TypeRef");
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+        }
+(
+	RULE_ID    { 
+    createLeafNode("classpath:/org/eclipse/xtext/Xtext.xmi#//@rules.7/@alternatives/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "type"); 
+    }
+) 
 	
 ));
     

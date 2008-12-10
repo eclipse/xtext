@@ -12,9 +12,9 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
- * 
  */
 public interface ErrorAcceptor {
+	
 	public enum ErrorCode {
 		NoSuchTypeAvailable, 
 		MoreThanOneTypeChangeInOneRule, 

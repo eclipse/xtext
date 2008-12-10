@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextSwitch.java,v 1.15 2008/12/03 20:57:10 szarnekow Exp $
+ * $Id: XtextSwitch.java,v 1.16 2008/12/10 11:49:38 szarnekow Exp $
  */
 package org.eclipse.xtext.util;
 
@@ -104,20 +104,6 @@ public class XtextSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtextPackage.LEXER_RULE: {
-				LexerRule lexerRule = (LexerRule)theEObject;
-				T result = caseLexerRule(lexerRule);
-				if (result == null) result = caseAbstractRule(lexerRule);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XtextPackage.PARSER_RULE: {
-				ParserRule parserRule = (ParserRule)theEObject;
-				T result = caseParserRule(parserRule);
-				if (result == null) result = caseAbstractRule(parserRule);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case XtextPackage.ABSTRACT_METAMODEL_DECLARATION: {
 				AbstractMetamodelDeclaration abstractMetamodelDeclaration = (AbstractMetamodelDeclaration)theEObject;
 				T result = caseAbstractMetamodelDeclaration(abstractMetamodelDeclaration);
@@ -138,6 +124,20 @@ public class XtextSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XtextPackage.LEXER_RULE: {
+				LexerRule lexerRule = (LexerRule)theEObject;
+				T result = caseLexerRule(lexerRule);
+				if (result == null) result = caseAbstractRule(lexerRule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.PARSER_RULE: {
+				ParserRule parserRule = (ParserRule)theEObject;
+				T result = caseParserRule(parserRule);
+				if (result == null) result = caseAbstractRule(parserRule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case XtextPackage.TYPE_REF: {
 				TypeRef typeRef = (TypeRef)theEObject;
 				T result = caseTypeRef(typeRef);
@@ -147,20 +147,6 @@ public class XtextSwitch<T>
 			case XtextPackage.ABSTRACT_ELEMENT: {
 				AbstractElement abstractElement = (AbstractElement)theEObject;
 				T result = caseAbstractElement(abstractElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XtextPackage.ALTERNATIVES: {
-				Alternatives alternatives = (Alternatives)theEObject;
-				T result = caseAlternatives(alternatives);
-				if (result == null) result = caseAbstractElement(alternatives);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XtextPackage.GROUP: {
-				Group group = (Group)theEObject;
-				T result = caseGroup(group);
-				if (result == null) result = caseAbstractElement(group);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -178,6 +164,13 @@ public class XtextSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XtextPackage.CROSS_REFERENCE: {
+				CrossReference crossReference = (CrossReference)theEObject;
+				T result = caseCrossReference(crossReference);
+				if (result == null) result = caseAbstractElement(crossReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case XtextPackage.KEYWORD: {
 				Keyword keyword = (Keyword)theEObject;
 				T result = caseKeyword(keyword);
@@ -192,10 +185,17 @@ public class XtextSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtextPackage.CROSS_REFERENCE: {
-				CrossReference crossReference = (CrossReference)theEObject;
-				T result = caseCrossReference(crossReference);
-				if (result == null) result = caseAbstractElement(crossReference);
+			case XtextPackage.ALTERNATIVES: {
+				Alternatives alternatives = (Alternatives)theEObject;
+				T result = caseAlternatives(alternatives);
+				if (result == null) result = caseAbstractElement(alternatives);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.GROUP: {
+				Group group = (Group)theEObject;
+				T result = caseGroup(group);
+				if (result == null) result = caseAbstractElement(group);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

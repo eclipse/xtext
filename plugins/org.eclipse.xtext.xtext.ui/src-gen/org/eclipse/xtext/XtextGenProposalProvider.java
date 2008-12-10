@@ -201,13 +201,13 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, prefix, offset);
 	}
 	
-	public List<? extends ICompletionProposal> completeTypeRefName(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
+	public List<? extends ICompletionProposal> completeTypeRefType(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeTypeRefName feature '" + assignment.getFeature() + "' terminal '"
+			logger.debug("completeTypeRefType feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ prefix.trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment,model,"TypeRefName", offset));
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, prefix, offset);
 	}
 	
 	public List<? extends ICompletionProposal> completeAlternativesGroups(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
@@ -336,6 +336,17 @@ public class XtextGenProposalProvider  extends AbstractProposalProvider {
 		}
 		return Collections.emptyList();
 	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

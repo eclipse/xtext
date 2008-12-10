@@ -219,6 +219,21 @@ public class ReferenceGrammarGenProposalProvider  extends AbstractProposalProvid
 	}
     
     
+	public List<? extends ICompletionProposal> complete(RuleCall ruleCall, EObject model, String prefix,
+			IDocument doc, int offset) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("complete '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
+					+ "' for model '" + model + "' and prefix '" + prefix.trim() + "'");
+		}
+		return Collections.emptyList();
+	}
+    
+    
+    
+    
+    
+    
+    
 	public List<? extends ICompletionProposal> completeReferenceModelCustomType(RuleCall ruleCall, EObject model, String prefix,
 			IDocument doc, int offset) {
 		if (logger.isDebugEnabled()) {

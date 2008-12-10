@@ -2,10 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeRef.java,v 1.12 2008/12/03 20:57:09 szarnekow Exp $
+ * $Id: TypeRef.java,v 1.13 2008/12/10 11:49:38 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -17,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.TypeRef#getMetamodel <em>Metamodel</em>}</li>
- *   <li>{@link org.eclipse.xtext.TypeRef#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.TypeRef#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,30 +56,30 @@ public interface TypeRef extends EObject
 	 */
 	void setMetamodel(AbstractMetamodelDeclaration value);
 
-		/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	/**
+	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.eclipse.xtext.XtextPackage#getTypeRef_Name()
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type</em>' reference.
+	 * @see #setType(EClassifier)
+	 * @see org.eclipse.xtext.XtextPackage#getTypeRef_Type()
 	 * @model
 	 * @generated
 	 */
-  String getName();
+	EClassifier getType();
 
-  /**
-	 * Sets the value of the '{@link org.eclipse.xtext.TypeRef#getName <em>Name</em>}' attribute.
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.TypeRef#getType <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' reference.
+	 * @see #getType()
 	 * @generated
 	 */
-  void setName(String value);
+	void setType(EClassifier value);
 
 } // TypeRef

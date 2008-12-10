@@ -25,7 +25,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends BaseEPackageAccess im
 
 		// name = ID ( nameRefs += NameRef ) *
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// name = ID
@@ -52,21 +52,21 @@ public class MetamodelRefTestLanguageGrammarAccess extends BaseEPackageAccess im
 	public class NameRefElements implements IParserRuleAccess {
 		private ParserRule rule;
 		private Assignment cAssignmentRule;
-		private CrossReference c0CrossReferenceMyRule;
+		private CrossReference c0CrossReferenceParserRule;
 		
-		// NameRef returns xtext :: RuleCall : rule = [ MyRule ] ;
+		// NameRef returns RuleCall : rule = [ ParserRule ] ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(3)); 
 		}
 
-		// rule = [ MyRule ]
+		// rule = [ ParserRule ]
 		public Assignment eleAssignmentRule() {
 			return (cAssignmentRule != null) ? cAssignmentRule : (cAssignmentRule = (Assignment)getRule().eContents().get(1)); 
 		}
 
-		// [ MyRule ]
-		public CrossReference ele0CrossReferenceMyRule() {
-			return (c0CrossReferenceMyRule != null) ? c0CrossReferenceMyRule : (c0CrossReferenceMyRule = (CrossReference)eleAssignmentRule().eContents().get(0)); 
+		// [ ParserRule ]
+		public CrossReference ele0CrossReferenceParserRule() {
+			return (c0CrossReferenceParserRule != null) ? c0CrossReferenceParserRule : (c0CrossReferenceParserRule = (CrossReference)eleAssignmentRule().eContents().get(0)); 
 		}
 	}
 
@@ -75,7 +75,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends BaseEPackageAccess im
 		private Assignment cAssignmentName;
 		private RuleCall c0LexerRuleCallID;
 		
-		// MyRule returns xtext :: ParserRule : name = ID ;
+		// MyRule returns ParserRule : name = ID ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(4)); 
 		}
@@ -119,12 +119,12 @@ public class MetamodelRefTestLanguageGrammarAccess extends BaseEPackageAccess im
 		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
 	} 
 
-	// NameRef returns xtext :: RuleCall : rule = [ MyRule ] ;
+	// NameRef returns RuleCall : rule = [ ParserRule ] ;
 	public NameRefElements prNameRef() {
 		return (pNameRef != null) ? pNameRef : (pNameRef = new NameRefElements());
 	} 
 
-	// MyRule returns xtext :: ParserRule : name = ID ;
+	// MyRule returns ParserRule : name = ID ;
 	public MyRuleElements prMyRule() {
 		return (pMyRule != null) ? pMyRule : (pMyRule = new MyRuleElements());
 	} 

@@ -181,7 +181,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 «DEFINE assignmentCreate FOR CrossReference-»
 		if(value instanceof EObject) { // «metaType.name»
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("«type.name»")) {
+			if(param.isInstanceOf("«type.type.name»")) {
 				type = AssignmentType.CR;
 				element = «gaFullAccessor()»; 
 				return new Solution(obj);
@@ -237,7 +237,7 @@ protected class «elementMethodName()» extends ActionToken  {
 «EXPAND constructor-»
 	
 	protected Solution createSolution() {
-		if(!current.isInstanceOf("«typeName.name»")) return null;
+		if(!current.isInstanceOf("«typeName.type.name»")) return null;
 		Object val = current.getConsumable("«feature»", false);
 		if(val == null) return null;
 		if(!current.isConsumedWithLastConsumtion("«feature»")) return null;

@@ -122,12 +122,12 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 
 /************ begin Rule NameRef ****************
  *
- * NameRef returns xtext :: RuleCall : rule = [ MyRule ] ;
+ * NameRef returns RuleCall : rule = [ ParserRule ] ;
  *
  **/
 
 
-// rule = [ MyRule ]
+// rule = [ ParserRule ]
 protected class NameRef_Assignment_rule extends AssignmentToken  {
 	
 	public NameRef_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
@@ -143,9 +143,9 @@ protected class NameRef_Assignment_rule extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("rule");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("MyRule")) {
+			if(param.isInstanceOf("ParserRule")) {
 				type = AssignmentType.CR;
-				element = MetamodelRefTestLanguageGrammarAccess.INSTANCE.prNameRef().ele0CrossReferenceMyRule(); 
+				element = MetamodelRefTestLanguageGrammarAccess.INSTANCE.prNameRef().ele0CrossReferenceParserRule(); 
 				return new Solution(obj);
 			}
 		}
@@ -157,7 +157,7 @@ protected class NameRef_Assignment_rule extends AssignmentToken  {
 
 /************ begin Rule MyRule ****************
  *
- * MyRule returns xtext :: ParserRule : name = ID ;
+ * MyRule returns ParserRule : name = ID ;
  *
  **/
 

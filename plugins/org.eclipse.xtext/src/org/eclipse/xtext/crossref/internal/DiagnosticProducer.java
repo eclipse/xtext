@@ -7,11 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.internal;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.parsetree.AbstractNode;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface DiagnosticProducer {
 
 	void addDiagnostic(String message);
+	
+	void addDefaultDiagnostic();
+	
+	AbstractNode getNode();
+	
+	void setNode(AbstractNode node);
+	
+	void setTarget(EObject object, EStructuralFeature feature);
 	
 }

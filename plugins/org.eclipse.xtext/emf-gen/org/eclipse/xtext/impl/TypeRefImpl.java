@@ -2,18 +2,22 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeRefImpl.java,v 1.13 2008/12/03 20:57:10 szarnekow Exp $
+ * $Id: TypeRefImpl.java,v 1.14 2008/12/10 11:49:37 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
@@ -26,7 +30,7 @@ import org.eclipse.xtext.XtextPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.TypeRefImpl#getMetamodel <em>Metamodel</em>}</li>
- *   <li>{@link org.eclipse.xtext.impl.TypeRefImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.TypeRefImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,26 +49,16 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 	protected AbstractMetamodelDeclaration metamodel;
 
 		/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getName()
+	 * <!-- end-user-doc -->
+	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-  protected static final String NAME_EDEFAULT = null;
+	protected EClassifier type;
 
 		/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-  protected String name = NAME_EDEFAULT;
-
-  /**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -125,28 +119,43 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 
 		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public String getName()
-  {
-		return name;
+	public EClassifier getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (EClassifier)eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XtextPackage.TYPE_REF__TYPE, oldType, type));
+			}
+		}
+		return type;
 	}
 
-  /**
+		/**
 	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-  public void setName(String newName)
-  {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.TYPE_REF__NAME, oldName, name));
+	public EClassifier basicGetType() {
+		return type;
 	}
 
-  /**
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(EClassifier newType) {
+		EClassifier oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.TYPE_REF__TYPE, oldType, type));
+	}
+
+		/**
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
 	 * @generated
@@ -158,8 +167,9 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 			case XtextPackage.TYPE_REF__METAMODEL:
 				if (resolve) return getMetamodel();
 				return basicGetMetamodel();
-			case XtextPackage.TYPE_REF__NAME:
-				return getName();
+			case XtextPackage.TYPE_REF__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -169,15 +179,16 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
    * <!-- end-user-doc -->
 	 * @generated
 	 */
-  @Override
+  @SuppressWarnings("unchecked")
+		@Override
   public void eSet(int featureID, Object newValue)
   {
 		switch (featureID) {
 			case XtextPackage.TYPE_REF__METAMODEL:
 				setMetamodel((AbstractMetamodelDeclaration)newValue);
 				return;
-			case XtextPackage.TYPE_REF__NAME:
-				setName((String)newValue);
+			case XtextPackage.TYPE_REF__TYPE:
+				setType((EClassifier)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -195,8 +206,8 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 			case XtextPackage.TYPE_REF__METAMODEL:
 				setMetamodel((AbstractMetamodelDeclaration)null);
 				return;
-			case XtextPackage.TYPE_REF__NAME:
-				setName(NAME_EDEFAULT);
+			case XtextPackage.TYPE_REF__TYPE:
+				setType((EClassifier)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -213,27 +224,10 @@ public class TypeRefImpl extends EObjectImpl implements TypeRef
 		switch (featureID) {
 			case XtextPackage.TYPE_REF__METAMODEL:
 				return metamodel != null;
-			case XtextPackage.TYPE_REF__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case XtextPackage.TYPE_REF__TYPE:
+				return type != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-  /**
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  @Override
-  public String toString()
-  {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //TypeRefImpl

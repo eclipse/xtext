@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CrossReference.java,v 1.4 2008/12/03 20:57:09 szarnekow Exp $
+ * $Id: CrossReference.java,v 1.5 2008/12/10 11:49:38 szarnekow Exp $
  */
 package org.eclipse.xtext;
 
@@ -62,12 +62,12 @@ public interface CrossReference extends AbstractElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Rule</em>' reference.
-	 * @see #setRule(LexerRule)
+	 * @see #setRule(AbstractRule)
 	 * @see org.eclipse.xtext.XtextPackage#getCrossReference_Rule()
 	 * @model
 	 * @generated
 	 */
-	LexerRule getRule();
+	AbstractRule getRule();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.xtext.CrossReference#getRule <em>Rule</em>}' reference.
@@ -77,6 +77,6 @@ public interface CrossReference extends AbstractElement {
 	 * @see #getRule()
 	 * @generated
 	 */
-	void setRule(LexerRule value);
+	void setRule(AbstractRule value);
 
 } // CrossReference

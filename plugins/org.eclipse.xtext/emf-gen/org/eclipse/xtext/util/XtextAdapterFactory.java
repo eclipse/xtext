@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtextAdapterFactory.java,v 1.15 2008/12/03 20:57:10 szarnekow Exp $
+ * $Id: XtextAdapterFactory.java,v 1.16 2008/12/10 11:49:38 szarnekow Exp $
  */
 package org.eclipse.xtext.util;
 
@@ -83,14 +83,6 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
 				return createAbstractRuleAdapter();
 			}
 			@Override
-			public Adapter caseLexerRule(LexerRule object) {
-				return createLexerRuleAdapter();
-			}
-			@Override
-			public Adapter caseParserRule(ParserRule object) {
-				return createParserRuleAdapter();
-			}
-			@Override
 			public Adapter caseAbstractMetamodelDeclaration(AbstractMetamodelDeclaration object) {
 				return createAbstractMetamodelDeclarationAdapter();
 			}
@@ -103,20 +95,20 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
 				return createReferencedMetamodelAdapter();
 			}
 			@Override
+			public Adapter caseLexerRule(LexerRule object) {
+				return createLexerRuleAdapter();
+			}
+			@Override
+			public Adapter caseParserRule(ParserRule object) {
+				return createParserRuleAdapter();
+			}
+			@Override
 			public Adapter caseTypeRef(TypeRef object) {
 				return createTypeRefAdapter();
 			}
 			@Override
 			public Adapter caseAbstractElement(AbstractElement object) {
 				return createAbstractElementAdapter();
-			}
-			@Override
-			public Adapter caseAlternatives(Alternatives object) {
-				return createAlternativesAdapter();
-			}
-			@Override
-			public Adapter caseGroup(Group object) {
-				return createGroupAdapter();
 			}
 			@Override
 			public Adapter caseAssignment(Assignment object) {
@@ -127,6 +119,10 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
 				return createActionAdapter();
 			}
 			@Override
+			public Adapter caseCrossReference(CrossReference object) {
+				return createCrossReferenceAdapter();
+			}
+			@Override
 			public Adapter caseKeyword(Keyword object) {
 				return createKeywordAdapter();
 			}
@@ -135,8 +131,12 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
 				return createRuleCallAdapter();
 			}
 			@Override
-			public Adapter caseCrossReference(CrossReference object) {
-				return createCrossReferenceAdapter();
+			public Adapter caseAlternatives(Alternatives object) {
+				return createAlternativesAdapter();
+			}
+			@Override
+			public Adapter caseGroup(Group object) {
+				return createGroupAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {

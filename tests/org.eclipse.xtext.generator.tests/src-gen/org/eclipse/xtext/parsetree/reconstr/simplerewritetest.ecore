@@ -5,9 +5,6 @@
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Op" eSuperTypes="//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1" eType="//Expression" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Atom" eSuperTypes="//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -47,5 +44,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" upperBound="-1">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Op" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1" eType="//Expression" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

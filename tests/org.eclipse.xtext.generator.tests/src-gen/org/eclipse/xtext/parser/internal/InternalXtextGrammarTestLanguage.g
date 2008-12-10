@@ -581,19 +581,18 @@ ruleTypeRef returns [EObject current=null]
     @after { resetLookahead(); }:
 (((	
 	
-	    lv_alias=RULE_ID
-    { 
-    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, "alias"); 
-    }
- 
-	    {
-	        if ($current==null) {
+		
+		{
+			if ($current==null) {
 	            $current = factory.create("TypeRef");
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
-	        factory.set($current, "alias", lv_alias,"ID");
-	         }
+        }
+(
+	RULE_ID    { 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::CrossReference */, "metamodel"); 
+    }
+) 
 	
 )'::' 
     {
@@ -601,19 +600,18 @@ ruleTypeRef returns [EObject current=null]
     }
 )?(	
 	
-	    lv_name=RULE_ID
-    { 
-    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
-    }
- 
-	    {
-	        if ($current==null) {
+		
+		{
+			if ($current==null) {
 	            $current = factory.create("TypeRef");
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+        }
+(
+	RULE_ID    { 
+    createLeafNode("classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "type"); 
+    }
+) 
 	
 ));
     

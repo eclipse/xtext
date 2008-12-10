@@ -196,7 +196,7 @@ public class OutlineViewTest extends AbstractEditorTest {
 		});
 		Assert.isNotNull(rootNode);
 
-		return  ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
+		return  ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, offset);
 	}
 
 	protected void assertSynchronized(XtextEditor editor, int elementIndex, int offset, int length) {

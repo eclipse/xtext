@@ -22,7 +22,7 @@ public class LexerTestLanguageGrammarAccess extends BaseEPackageAccess implement
 
 		// ( children += Element ) *
 		public Assignment eleAssignmentChildren() {
-			return (cAssignmentChildren != null) ? cAssignmentChildren : (cAssignmentChildren = (Assignment)getRule().eContents().get(0)); 
+			return (cAssignmentChildren != null) ? cAssignmentChildren : (cAssignmentChildren = (Assignment)getRule().eContents().get(1)); 
 		}
 
 		// Element
@@ -46,7 +46,7 @@ public class LexerTestLanguageGrammarAccess extends BaseEPackageAccess implement
 
 		// name = ID h = STRING
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// name = ID

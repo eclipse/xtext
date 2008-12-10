@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CrossReferenceImpl.java,v 1.4 2008/12/03 20:57:10 szarnekow Exp $
+ * $Id: CrossReferenceImpl.java,v 1.5 2008/12/10 11:49:38 szarnekow Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.LexerRule;
@@ -54,7 +55,7 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
 	 * @generated
 	 * @ordered
 	 */
-	protected LexerRule rule;
+	protected AbstractRule rule;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -123,10 +124,10 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LexerRule getRule() {
+	public AbstractRule getRule() {
 		if (rule != null && rule.eIsProxy()) {
 			InternalEObject oldRule = (InternalEObject)rule;
-			rule = (LexerRule)eResolveProxy(oldRule);
+			rule = (AbstractRule)eResolveProxy(oldRule);
 			if (rule != oldRule) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XtextPackage.CROSS_REFERENCE__RULE, oldRule, rule));
@@ -140,7 +141,7 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LexerRule basicGetRule() {
+	public AbstractRule basicGetRule() {
 		return rule;
 	}
 
@@ -149,8 +150,8 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRule(LexerRule newRule) {
-		LexerRule oldRule = rule;
+	public void setRule(AbstractRule newRule) {
+		AbstractRule oldRule = rule;
 		rule = newRule;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.CROSS_REFERENCE__RULE, oldRule, rule));
@@ -199,7 +200,7 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
 				setType((TypeRef)newValue);
 				return;
 			case XtextPackage.CROSS_REFERENCE__RULE:
-				setRule((LexerRule)newValue);
+				setRule((AbstractRule)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -217,7 +218,7 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
 				setType((TypeRef)null);
 				return;
 			case XtextPackage.CROSS_REFERENCE__RULE:
-				setRule((LexerRule)null);
+				setRule((AbstractRule)null);
 				return;
 		}
 		super.eUnset(featureID);

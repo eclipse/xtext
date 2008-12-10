@@ -9,19 +9,19 @@ import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
  */
 public abstract class AbstractAbstractTestLanguageRuntimeConfig extends AbstractServiceRegistrationFactory {
 
-	protected Class<? extends org.eclipse.xtext.IGrammarAccess> getIGrammarAccess() {
-		return org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess.class;
-	}
-		
 	protected Class<? extends org.eclipse.xtext.IMetamodelAccess> getIMetamodelAccess() {
 		return org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageMetamodelAccess.class;
+	}
+		
+	protected Class<? extends org.eclipse.xtext.IGrammarAccess> getIGrammarAccess() {
+		return org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess.class;
 	}
 		
 	
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.grammarinheritance.IAbstractTestLanguage.SCOPE)
-		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
 		.with(org.eclipse.xtext.IMetamodelAccess.class, getIMetamodelAccess())
+		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
 		
 			.registrations();
 	}

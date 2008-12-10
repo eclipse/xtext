@@ -147,7 +147,7 @@ public class ProposalProviderInvokerSwitch extends XtextSwitch<List<ICompletionP
 			TypeRef typeRef = calledRule.getType();
 
 			Method method = findMethod(proposalProvider.getClass(), "complete"
-					+ firstLetterCapitalized(typeRef.getMetamodel().getAlias()) + firstLetterCapitalized(typeRef.getName()),
+					+ firstLetterCapitalized(typeRef.getMetamodel().getAlias()) + firstLetterCapitalized(typeRef.getType().getName()),
 					RuleCall.class, model==null? EObject.class : model.getClass(), String.class, document.getClass(), int.class);
 
 			Collection<? extends ICompletionProposal> proposalList = null == method ? null : invokeMethod(method,

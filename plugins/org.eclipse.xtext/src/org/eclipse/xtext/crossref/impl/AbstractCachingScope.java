@@ -7,12 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
@@ -21,6 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
+import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Filter;
 import org.eclipse.xtext.util.FilteringIterator;
 
@@ -29,79 +29,107 @@ import org.eclipse.xtext.util.FilteringIterator;
  */
 public abstract class AbstractCachingScope extends AbstractNestedScope {
 
-	private Map<String, EObject> elements;
+	private Iterable<IScopedElement> elements;
+	
+	private boolean refuseDuplicates;
 	
 	private final EClass type;
 	
 	protected AbstractCachingScope(IScope parent, Iterable<IScopedElement> elements, EClass type) {
 		super(parent, elements);
+		this.refuseDuplicates = true;
 		this.type = type;
 	}
 	
-	protected AbstractCachingScope(IScope parent, EClass type) {
+	protected AbstractCachingScope(IScope parent, EClass type, boolean refuseDuplicates) {
 		this(parent, null, type);
+		this.refuseDuplicates = refuseDuplicates;
 	}
 
 	public Iterable<IScopedElement> getContents() {
-		if (elements == null)
-			this.elements = initElements(SimpleAttributeResolver.newResolver(String.class, getNameFeature(type)));
-		return convert(elements, type);
+		if (elements == null) {
+			ScopedElementProducer producer = new ScopedElementProducer(refuseDuplicates);
+			initElements(SimpleAttributeResolver.newResolver(String.class, getNameFeature(type)), producer);
+			this.elements = producer.getProducedElements();
+		}
+		return filter(elements, type);
 	}
 	
 	protected void initElements(Resource resource) {
-		this.elements = initElements(SimpleAttributeResolver.newResolver(String.class, getNameFeature(type)), resource);
+		ScopedElementProducer producer = new ScopedElementProducer(refuseDuplicates);
+		initElements(SimpleAttributeResolver.newResolver(String.class, getNameFeature(type)), resource, producer);
+		this.elements = producer.getProducedElements();
 	}
 	
-	protected abstract Map<String, EObject> initElements(SimpleAttributeResolver<String> resolver);
+	protected abstract void initElements(SimpleAttributeResolver<String> resolver, ScopedElementProducer producer);
 
-	protected Map<String, EObject> initElements(SimpleAttributeResolver<String> resolver, Resource resource) {
-		Map<String, EObject> elements = new HashMap<String, EObject>();
-		Set<String> usedNames = new HashSet<String>();
-		TreeIterator<EObject> iterator = resource.getAllContents();
+	protected void initElements(SimpleAttributeResolver<String> resolver, Resource resource,
+			ScopedElementProducer producer) {
+		final TreeIterator<EObject> iterator = resource.getAllContents();
 		while (iterator.hasNext()) {
-			EObject object = (EObject) iterator.next();
+			final EObject object = (EObject) iterator.next();
 			if (EcoreUtil2.isAssignableFrom(type, object.eClass())) {
 				String value = resolver.getValue(object);
-				if (value != null) {
-					if (usedNames.add(value)) {
-						elements.put(value, object);
-					} else {
-						elements.remove(value);
-					}
-				}
+				producer.produce(value, object);
 			}
 		}
-		return elements;
 	}
 
 	protected String getNameFeature(EClass type) {
 		return "name";	
 	}
 	
-	protected Iterable<IScopedElement> convert(final Map<String, EObject> elements, final EClass type) {
-		final Iterator<Entry<String, EObject>> iterator = elements.entrySet().iterator();
-		return FilteringIterator.create(new Iterator<IScopedElement>() {
+	public void setRefuseDuplicates(boolean refuseDuplicates) {
+		this.refuseDuplicates = refuseDuplicates;
+	}
+
+	public boolean isRefuseDuplicates() {
+		return refuseDuplicates;
+	}
 	
-			public boolean hasNext() {
-				return iterator.hasNext();
-			}
-	
-			public IScopedElement next() {
-				Entry<String, EObject> entry = iterator.next();
-				if (entry != null)
-					return ScopedElement.create(entry.getKey(), entry.getValue());
-				return null;
-			}
-	
-			public void remove() {
-				iterator.remove();
-			}
-		}, new Filter<IScopedElement>() {
-	
+	protected Iterable<IScopedElement> filter(final Iterable<IScopedElement> elements, final EClass type) {
+		return FilteringIterator.create(elements.iterator(), new Filter<IScopedElement>() {
 			public boolean matches(IScopedElement param) {
 				return type == null ? true : EcoreUtil2.isAssignableFrom(type, param.element());
 			}
 		});
+	}
+	
+	protected static class ScopedElementProducer {
+		private Map<String, Collection<IScopedElement>> elements;
+		private boolean refuseDuplicates;
+
+		protected ScopedElementProducer(boolean refuseDuplicateNames) {
+			this.elements = new HashMap<String, Collection<IScopedElement>>();
+			this.refuseDuplicates = refuseDuplicateNames;
+		}
+		
+		public void produce(String name, EObject object) {
+			produce(name, object, null);
+		}
+		
+		public void produce(String name, EObject object, Object additionalInfo) {
+			Collection<IScopedElement> current = elements.get(name);
+			if (current==null) {
+				if (refuseDuplicates)
+					current = Collections.singleton(ScopedElement.create(name, object, additionalInfo));
+				else {
+					current = new ArrayList<IScopedElement>();
+					current.add(ScopedElement.create(name, object, additionalInfo));
+				}
+				elements.put(name, current);
+			} else {
+				if (refuseDuplicates)
+					elements.put(name, Collections.<IScopedElement>emptySet());
+				else
+					current.add(ScopedElement.create(name, object, additionalInfo));
+			}
+				
+		}
+		
+		public Iterable<IScopedElement> getProducedElements() {
+			return CollectionUtils.flatten(elements.values());
+		}
 	}
 
 }

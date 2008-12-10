@@ -127,11 +127,8 @@ public class XtextResource extends ResourceImpl {
 	protected void doLinking() {
 		if (parseResult.getRootASTElement() == null)
 			return;
-
-		List<Diagnostic> brokenLinks = linker.ensureLinked(parseResult.getRootASTElement());
-		TreeIterator<EObject> allContents = parseResult.getRootASTElement().eAllContents();
-		while (allContents.hasNext())
-			brokenLinks.addAll(linker.ensureLinked(allContents.next()));
+		
+		List<Diagnostic> brokenLinks = linker.linkModel(parseResult.getRootASTElement());
 
 		getErrors().addAll(brokenLinks);
 		// logger.debug("errors: " + errors.size());

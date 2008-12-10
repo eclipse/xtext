@@ -22,7 +22,7 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// ( contents += Alts ) *
 		public Assignment eleAssignmentContents() {
-			return (cAssignmentContents != null) ? cAssignmentContents : (cAssignmentContents = (Assignment)getRule().eContents().get(0)); 
+			return (cAssignmentContents != null) ? cAssignmentContents : (cAssignmentContents = (Assignment)getRule().eContents().get(1)); 
 		}
 
 		// Alts
@@ -46,7 +46,7 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// LookAhead0 | LookAhead1 | LookAhead3
 		public Alternatives eleAlternatives() {
-			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(0)); 
+			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(1)); 
 		}
 
 		// LookAhead0 | LookAhead1
@@ -84,7 +84,7 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// 'bar' x = 'a'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'bar'
@@ -123,7 +123,7 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// 'foo' y = LookAhead2 x = 'b' x = 'd'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'foo' y = LookAhead2 x = 'b'
@@ -189,7 +189,7 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// ( z = 'foo' | z = 'bar' ) 'c'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// z = 'foo' | z = 'bar'
@@ -242,7 +242,7 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// 'foo' 'bar' x = 'b' z = LookAhead4
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'foo' 'bar' x = 'b'
@@ -301,7 +301,7 @@ public class LookaheadTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// x = 'c' | x = 'd'
 		public Alternatives eleAlternatives() {
-			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(0)); 
+			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(1)); 
 		}
 
 		// x = 'c'

@@ -16,6 +16,7 @@ import org.eclipse.xtext.ui.core.services.TestLanguageGrammarAccess;
 public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -48,7 +49,7 @@ protected class File_Assignment_stuff extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("stuff",required)) == null) return null;
+		if((value = current.getConsumable("stuff",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stuff");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -125,7 +126,7 @@ protected class Stuff_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;

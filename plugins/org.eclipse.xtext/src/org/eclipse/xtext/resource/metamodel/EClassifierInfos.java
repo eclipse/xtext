@@ -47,7 +47,7 @@ public class EClassifierInfos {
 	}
 
 	public EClassifierInfo getInfo(TypeRef typeRef) {
-		return getInfo(GrammarUtil.getQualifiedName(typeRef));
+		return typeRef.getType() == null ? null : getInfo(GrammarUtil.getQualifiedName(typeRef));
 	}
 
 	public EClassifierInfo getInfo(String qualifiedName) {

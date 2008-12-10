@@ -16,6 +16,7 @@ import org.eclipse.xtext.reference.services.ReferenceGrammarGrammarAccess;
 public class ReferenceGrammarParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -206,7 +207,7 @@ protected class Spielplatz_0_0_0_0_1_Assignment_groesse extends AssignmentToken 
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("groesse",required)) == null) return null;
+		if((value = current.getConsumable("groesse",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("groesse");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -230,7 +231,7 @@ protected class Spielplatz_0_0_0_1_Assignment_beschreibung extends AssignmentTok
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("beschreibung",required)) == null) return null;
+		if((value = current.getConsumable("beschreibung",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("beschreibung");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -351,7 +352,7 @@ protected class Spielplatz_0_1_0_0_0_0_Assignment_kinder extends AssignmentToken
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("kinder",required)) == null) return null;
+		if((value = current.getConsumable("kinder",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -379,7 +380,7 @@ protected class Spielplatz_0_1_0_0_0_1_Assignment_erzieher extends AssignmentTok
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("erzieher",required)) == null) return null;
+		if((value = current.getConsumable("erzieher",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("erzieher");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -408,7 +409,7 @@ protected class Spielplatz_0_1_0_0_1_Assignment_spielzeuge extends AssignmentTok
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("spielzeuge",required)) == null) return null;
+		if((value = current.getConsumable("spielzeuge",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spielzeuge");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -437,7 +438,7 @@ protected class Spielplatz_0_1_0_1_Assignment_familie extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("familie",required)) == null) return null;
+		if((value = current.getConsumable("familie",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("familie");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -466,7 +467,7 @@ protected class Spielplatz_0_1_1_Assignment_types extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("types",required)) == null) return null;
+		if((value = current.getConsumable("types",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("types");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -722,7 +723,7 @@ protected class Kind_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -746,7 +747,7 @@ protected class Kind_0_1_Assignment_age extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("age",required)) == null) return null;
+		if((value = current.getConsumable("age",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("age");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -929,7 +930,7 @@ protected class Erwachsener_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -953,7 +954,7 @@ protected class Erwachsener_0_1_Assignment_age extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("age",required)) == null) return null;
+		if((value = current.getConsumable("age",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("age");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -1136,7 +1137,7 @@ protected class Spielzeug_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -1160,7 +1161,7 @@ protected class Spielzeug_0_1_Assignment_farbe extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("farbe",required)) == null) return null;
+		if((value = current.getConsumable("farbe",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("farbe");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -1194,12 +1195,12 @@ protected class Spielzeug_1_Keyword extends KeywordToken  {
 
 /************ begin Rule Familie ****************
  *
- * (error)
+ * Familie : 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')' ;
  *
  **/
 
 
-// (error)
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')'
 protected class Familie_Group extends GroupToken {
 	
 	public Familie_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1227,7 +1228,7 @@ protected class Familie_Group extends GroupToken {
 	}
 }
 
-// (error)
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) *
 protected class Familie_0_Group extends GroupToken {
 	
 	public Familie_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1255,7 +1256,7 @@ protected class Familie_0_Group extends GroupToken {
 	}
 }
 
-// (error)
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ]
 protected class Familie_0_0_Group extends GroupToken {
 	
 	public Familie_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1283,7 +1284,7 @@ protected class Familie_0_0_Group extends GroupToken {
 	}
 }
 
-// (error)
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ]
 protected class Familie_0_0_0_Group extends GroupToken {
 	
 	public Familie_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1311,7 +1312,7 @@ protected class Familie_0_0_0_Group extends GroupToken {
 	}
 }
 
-// (error)
+// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ]
 protected class Familie_0_0_0_0_Group extends GroupToken {
 	
 	public Familie_0_0_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1432,7 +1433,7 @@ protected class Familie_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if("keyword".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -1454,7 +1455,7 @@ protected class Familie_0_0_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// (error)
+// mutter = [ Erwachsener ]
 protected class Familie_0_0_0_0_1_Assignment_mutter extends AssignmentToken  {
 	
 	public Familie_0_0_0_0_1_Assignment_mutter(IInstanceDescription curr, AbstractToken pred) {
@@ -1466,7 +1467,7 @@ protected class Familie_0_0_0_0_1_Assignment_mutter extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("mutter",required)) == null) return null;
+		if((value = current.getConsumable("mutter",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("mutter");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
@@ -1481,7 +1482,7 @@ protected class Familie_0_0_0_0_1_Assignment_mutter extends AssignmentToken  {
 }
 
 
-// (error)
+// vater = [ Erwachsener ]
 protected class Familie_0_0_0_1_Assignment_vater extends AssignmentToken  {
 	
 	public Familie_0_0_0_1_Assignment_vater(IInstanceDescription curr, AbstractToken pred) {
@@ -1493,7 +1494,7 @@ protected class Familie_0_0_0_1_Assignment_vater extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("vater",required)) == null) return null;
+		if((value = current.getConsumable("vater",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("vater");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
@@ -1508,7 +1509,7 @@ protected class Familie_0_0_0_1_Assignment_vater extends AssignmentToken  {
 }
 
 
-// (error)
+// kinder += [ Kind ]
 protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
 	
 	public Familie_0_0_1_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
@@ -1520,7 +1521,7 @@ protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("kinder",required)) == null) return null;
+		if((value = current.getConsumable("kinder",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
@@ -1535,7 +1536,7 @@ protected class Familie_0_0_1_Assignment_kinder extends AssignmentToken  {
 }
 
 
-// (error)
+// ( ',' kinder += [ Kind ] ) *
 protected class Familie_0_1_Group extends GroupToken {
 	
 	public Familie_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1575,7 +1576,7 @@ protected class Familie_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// (error)
+// kinder += [ Kind ]
 protected class Familie_0_1_1_Assignment_kinder extends AssignmentToken  {
 	
 	public Familie_0_1_1_Assignment_kinder(IInstanceDescription curr, AbstractToken pred) {
@@ -1587,7 +1588,7 @@ protected class Familie_0_1_1_Assignment_kinder extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("kinder",required)) == null) return null;
+		if((value = current.getConsumable("kinder",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
@@ -1637,7 +1638,7 @@ protected class Farbe_Assignment_wert extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("wert",required)) == null) return null;
+		if((value = current.getConsumable("wert",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("wert");
 		if("ROT".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -1667,7 +1668,7 @@ protected class Farbe_Assignment_wert extends AssignmentToken  {
 
 /************ begin Rule CustomTypeParserRule ****************
  *
- * CustomTypeParserRule returns ReferenceModel :: CustomType : 'type' name = ID ;
+ * CustomTypeParserRule returns CustomType : 'type' name = ID ;
  *
  **/
 
@@ -1724,7 +1725,7 @@ protected class CustomTypeParserRule_1_Assignment_name extends AssignmentToken  
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;

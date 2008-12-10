@@ -36,7 +36,7 @@ public class FowlerDslGrammarAccess extends BaseEPackageAccess implements IGramm
 
 		// 'events' ( events += Event ) * 'end' 'commands' ( commands += Command ) * 'end' ( states += State ) *
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'events' ( events += Event ) * 'end' 'commands' ( commands += Command ) * 'end'
@@ -133,7 +133,7 @@ public class FowlerDslGrammarAccess extends BaseEPackageAccess implements IGramm
 
 		// ( resetting ?= 'resetting' ) ? name = ID code = ID
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// ( resetting ?= 'resetting' ) ? name = ID
@@ -187,7 +187,7 @@ public class FowlerDslGrammarAccess extends BaseEPackageAccess implements IGramm
 
 		// name = ID code = ID
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// name = ID
@@ -232,22 +232,22 @@ public class FowlerDslGrammarAccess extends BaseEPackageAccess implements IGramm
 		private RuleCall c010ParserRuleCallTransition;
 		private Keyword c1KeywordEnd;
 		
-		// (error)
+		// State : 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ? ( transitions += Transition ) * 'end' ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(4)); 
 		}
 
-		// (error)
+		// 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ? ( transitions += Transition ) * 'end'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
-		// (error)
+		// 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ? ( transitions += Transition ) *
 		public Group ele0Group() {
 			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
 		}
 
-		// (error)
+		// 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ?
 		public Group ele00Group() {
 			return (c00Group != null) ? c00Group : (c00Group = (Group)ele0Group().eContents().get(0)); 
 		}
@@ -272,12 +272,12 @@ public class FowlerDslGrammarAccess extends BaseEPackageAccess implements IGramm
 			return (c00010LexerRuleCallID != null) ? c00010LexerRuleCallID : (c00010LexerRuleCallID = (RuleCall)ele0001AssignmentName().eContents().get(0)); 
 		}
 
-		// (error)
+		// ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ?
 		public Group ele001Group() {
 			return (c001Group != null) ? c001Group : (c001Group = (Group)ele00Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// 'actions' '{' ( actions += [ Command ] ) +
 		public Group ele0010Group() {
 			return (c0010Group != null) ? c0010Group : (c0010Group = (Group)ele001Group().eContents().get(0)); 
 		}
@@ -297,12 +297,12 @@ public class FowlerDslGrammarAccess extends BaseEPackageAccess implements IGramm
 			return (c001001Keyword != null) ? c001001Keyword : (c001001Keyword = (Keyword)ele00100Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// ( actions += [ Command ] ) +
 		public Assignment ele00101AssignmentActions() {
 			return (c00101AssignmentActions != null) ? c00101AssignmentActions : (c00101AssignmentActions = (Assignment)ele0010Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// [ Command ]
 		public CrossReference ele001010CrossReferenceCommand() {
 			return (c001010CrossReferenceCommand != null) ? c001010CrossReferenceCommand : (c001010CrossReferenceCommand = (CrossReference)ele00101AssignmentActions().eContents().get(0)); 
 		}
@@ -338,27 +338,27 @@ public class FowlerDslGrammarAccess extends BaseEPackageAccess implements IGramm
 		private Assignment c1AssignmentState;
 		private CrossReference c10CrossReferenceState;
 		
-		// (error)
+		// Transition : event = [ Event ] '=>' state = [ State ] ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(5)); 
 		}
 
-		// (error)
+		// event = [ Event ] '=>' state = [ State ]
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
-		// (error)
+		// event = [ Event ] '=>'
 		public Group ele0Group() {
 			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
 		}
 
-		// (error)
+		// event = [ Event ]
 		public Assignment ele00AssignmentEvent() {
 			return (c00AssignmentEvent != null) ? c00AssignmentEvent : (c00AssignmentEvent = (Assignment)ele0Group().eContents().get(0)); 
 		}
 
-		// (error)
+		// [ Event ]
 		public CrossReference ele000CrossReferenceEvent() {
 			return (c000CrossReferenceEvent != null) ? c000CrossReferenceEvent : (c000CrossReferenceEvent = (CrossReference)ele00AssignmentEvent().eContents().get(0)); 
 		}
@@ -368,12 +368,12 @@ public class FowlerDslGrammarAccess extends BaseEPackageAccess implements IGramm
 			return (c01Keyword != null) ? c01Keyword : (c01Keyword = (Keyword)ele0Group().eContents().get(1)); 
 		}
 
-		// (error)
+		// state = [ State ]
 		public Assignment ele1AssignmentState() {
 			return (c1AssignmentState != null) ? c1AssignmentState : (c1AssignmentState = (Assignment)eleGroup().eContents().get(1)); 
 		}
 
-		// (error)
+		// [ State ]
 		public CrossReference ele10CrossReferenceState() {
 			return (c10CrossReferenceState != null) ? c10CrossReferenceState : (c10CrossReferenceState = (CrossReference)ele1AssignmentState().eContents().get(0)); 
 		}
@@ -419,12 +419,12 @@ public class FowlerDslGrammarAccess extends BaseEPackageAccess implements IGramm
 		return (pCommand != null) ? pCommand : (pCommand = new CommandElements());
 	} 
 
-	// (error)
+	// State : 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ? ( transitions += Transition ) * 'end' ;
 	public StateElements prState() {
 		return (pState != null) ? pState : (pState = new StateElements());
 	} 
 
-	// (error)
+	// Transition : event = [ Event ] '=>' state = [ State ] ;
 	public TransitionElements prTransition() {
 		return (pTransition != null) ? pTransition : (pTransition = new TransitionElements());
 	} 

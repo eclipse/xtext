@@ -27,7 +27,7 @@ public class TransientValuesTestGrammarAccess extends BaseEPackageAccess impleme
 
 		// 'test' ( TestRequired | TestOptional | TestList )
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'test'
@@ -78,7 +78,7 @@ public class TransientValuesTestGrammarAccess extends BaseEPackageAccess impleme
 
 		// 'required' required1 = INT required2 = INT
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'required' required1 = INT
@@ -131,7 +131,7 @@ public class TransientValuesTestGrammarAccess extends BaseEPackageAccess impleme
 
 		// 'optional' ( opt1 = INT ) ? ( ':' opt2 = INT ) ?
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'optional' ( opt1 = INT ) ?
@@ -189,7 +189,7 @@ public class TransientValuesTestGrammarAccess extends BaseEPackageAccess impleme
 
 		// 'list' ( item += INT ) *
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'list'

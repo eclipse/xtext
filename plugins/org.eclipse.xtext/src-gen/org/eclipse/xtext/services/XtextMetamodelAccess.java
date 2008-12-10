@@ -28,13 +28,15 @@ public class XtextMetamodelAccess extends BaseEPackageAccess implements IMetamod
 
 	private EPackage[] referenced = new EPackage[] {
 		
+		BaseEPackageAccess.getEPackageFromRegistry("http://www.eclipse.org/emf/2002/Ecore")
+		
 		};
 	public EPackage[] getReferencedEPackages() {
 		return referenced;
 	}
 	
 	private EPackage[] all = new EPackage[] {
-	    getXtextEPackage()
+	    getXtextEPackage(),BaseEPackageAccess.getEPackageFromRegistry("http://www.eclipse.org/emf/2002/Ecore")
 		};
 	
 	public EPackage[] getAllEPackages() {

@@ -19,14 +19,6 @@
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LexerRule" eSuperTypes="//AbstractRule">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="body">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ParserRule" eSuperTypes="//AbstractRule">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="alternatives" eType="//AbstractElement" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractMetamodelDeclaration">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -45,22 +37,24 @@
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LexerRule" eSuperTypes="//AbstractRule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="body">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParserRule" eSuperTypes="//AbstractRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alternatives" eType="//AbstractElement" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeRef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="metamodel" eType="//AbstractMetamodelDeclaration"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type">
+      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EClassifier"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinality">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Alternatives" eSuperTypes="//AbstractElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1" eType="//AbstractElement" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="//AbstractElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="abstractTokens" upperBound="-1" eType="//AbstractElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="feature">
@@ -80,6 +74,10 @@
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CrossReference" eSuperTypes="//AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//TypeRef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="//AbstractRule"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Keyword" eSuperTypes="//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -88,8 +86,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="RuleCall" eSuperTypes="//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="//AbstractRule"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CrossReference" eSuperTypes="//AbstractElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//TypeRef" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="//LexerRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Alternatives" eSuperTypes="//AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1" eType="//AbstractElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="//AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="abstractTokens" upperBound="-1" eType="//AbstractElement" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

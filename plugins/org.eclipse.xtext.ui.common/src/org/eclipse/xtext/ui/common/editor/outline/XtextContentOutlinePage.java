@@ -205,8 +205,8 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ICont
 		ISelection selection = StructuredSelection.EMPTY;
 
 		if (shouldSynchronizeOutlinePage()) {
-			if (node != null && node instanceof LeafNode) {
-				CompositeNode compositeNode = node.getParent();
+			if (node != null) {
+				CompositeNode compositeNode = node instanceof CompositeNode? (CompositeNode) node : node.getParent();
 				EObject astElement = NodeUtil.getASTElementForRootNode(compositeNode);
 				if (astElement != null) {
 					URI uri = EcoreUtil.getURI(astElement);

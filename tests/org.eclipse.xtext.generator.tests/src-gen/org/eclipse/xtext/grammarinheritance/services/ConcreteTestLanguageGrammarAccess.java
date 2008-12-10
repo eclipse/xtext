@@ -29,7 +29,7 @@ public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implem
 
 		// 'model' magicNumber = REAL ':' ( elements += InheritedParserRule ) *
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'model' magicNumber = REAL ':'

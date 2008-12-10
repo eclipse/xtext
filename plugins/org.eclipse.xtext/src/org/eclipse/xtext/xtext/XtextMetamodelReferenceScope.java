@@ -16,10 +16,10 @@ import org.eclipse.xtext.crossref.impl.SimpleCachingScope;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextMetaModelReferenceScope extends SimpleCachingScope {
+public class XtextMetamodelReferenceScope extends SimpleCachingScope {
 
-	public XtextMetaModelReferenceScope(Resource resource, EClass type) {
-		super(IScope.NULLSCOPE, resource, type);
+	public XtextMetamodelReferenceScope(Resource resource, EClass type) {
+		super(IScope.NULLSCOPE, resource, type, false);
 	}
 
 	@Override

@@ -10,6 +10,7 @@ package org.eclipse.xtext.parsetree;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -162,7 +163,7 @@ public final class ParseTreeUtil {
 	 * 
 	 * @return the node element that starts at or spans across the provided position
 	 */
-	public static final AbstractNode getCurrentNodeByOffset(AbstractNode contextNode, int offsetPosition) {
+	public static final AbstractNode getCurrentOrFollowingNodeByOffset(AbstractNode contextNode, int offsetPosition) {
 
 		assertParameterNotNull(contextNode, "contextNode");
 		
@@ -199,6 +200,100 @@ public final class ParseTreeUtil {
 		}
 		
 		return null==result ? contextNode : result;
+	}
+	
+	/**
+	 * @param contextNode
+	 *            the node representing the 'scope' of the current lookup
+	 * @param offsetPosition
+	 *            the text position within the the current sentence
+	 * 
+	 * @return the node element that starts at or spans across the provided position
+	 */
+	public static final AbstractNode getCurrentOrPrecedingNodeByOffset(AbstractNode contextNode, int offsetPosition) {
+
+		assertParameterNotNull(contextNode, "contextNode");
+		if (contextNode.getTotalOffset() > offsetPosition || contextNode.getTotalOffset() + contextNode.getTotalLength() < offsetPosition)
+			throw new IllegalArgumentException("contextNode does not cover offsetPosition: " + contextNode + "/" + offsetPosition); 
+		
+		int offset = contextNode.getOffset();
+		if (offset > offsetPosition || offset + contextNode.getLength() < offsetPosition)
+			return contextNode;
+		
+		if (contextNode instanceof CompositeNode) {
+			final List<AbstractNode> children = ((CompositeNode) contextNode).getChildren();
+			for(int i = 0; i < children.size(); i++) {
+				AbstractNode child = children.get(i);
+				int childOffset = child.getOffset();
+				if (childOffset <= offsetPosition && offsetPosition <= childOffset + child.getLength()) {
+					AbstractNode result = getCurrentOrPrecedingNodeByOffset(child, offsetPosition);
+					if (result instanceof LeafNode && ((LeafNode) result).isHidden() && offsetPosition < childOffset + child.getLength())
+						return contextNode;
+					if (!(result instanceof LeafNode && ((LeafNode) result).isHidden()))
+						return result;
+				}
+				if (child.getTotalOffset() > offsetPosition) {
+					return contextNode;
+				}
+			}
+		}
+		return contextNode;
+//		
+//		if (contextNode instanceof CompositeNode) {
+//			if (contextNode.getOffset() > offsetPosition) {
+//				return findFirstVisibleLeaf(contextNode);
+//			} else if (contextNode.getLength() + contextNode.getOffset() <= offsetPosition){
+//				return findLastVisibleLeaf(contextNode);
+//			} else {
+//				final List<AbstractNode> children = ((CompositeNode) contextNode).getChildren();
+//				for(int i = 0; i < children.size(); i++) {
+//					final AbstractNode child = children.get(i);
+//					if (child.getOffset() == offsetPosition) {
+//						if (child instanceof CompositeNode)
+//							return findFirstVisibleLeaf(child);
+//					}
+//					if (child.getOffset() > offsetPosition) {
+//						if (i == 0) {
+//							return findFirstVisibleLeaf(child);
+//						} else {
+//							for (int j = i - 1; j >= 0; j--) {
+//								final AbstractNode prevChild = children.get(j);
+//								final LeafNode result = findLastVisibleLeaf(prevChild);
+//								if (!result.isHidden())
+//									return result;
+//							}
+//							return findFirstVisibleLeaf(child);
+//						}
+//					} else if (child.getTotalOffset() <= offsetPosition && child.getTotalLength() + child.getTotalOffset() > offsetPosition) {
+//						LeafNode result = getCurrentOrPrecedingVisibleNodeByOffset(child, offsetPosition);
+//						if (result.getSyntaxError() == null && result.isHidden()) {
+//							for (int j = i - 1; j >= 0; j--) {
+//								final AbstractNode prevChild = children.get(j);
+//								result = findLastVisibleLeaf(prevChild);
+//								if (result.getSyntaxError() != null || !result.isHidden())
+//									return result;
+//							}
+//						}
+//						return result;
+//					}						
+//				}
+//				return findFirstVisibleLeaf(contextNode);
+//			}
+//		} else {
+//			return (LeafNode) contextNode;
+//		}
+
+		
+//		EList<LeafNode> leafNodes = contextNode.getLeafNodes();
+//		for (Iterator<LeafNode> iterator = leafNodes.iterator(); iterator.hasNext() && leafNode==null;) {
+//			LeafNode childNode = iterator.next();
+//			if (childNode.getTotalOffset() <= offsetPosition && offsetPosition <= childNode.getTotalOffset() + childNode.getTotalLength()) {
+//				if (!childNode.isHidden())
+//					leafNode = childNode;
+//			}
+//		}
+//
+//		return leafNode;
 	}
 
 	

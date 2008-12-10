@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
   <idElements>org</idElements>
   <idElements>eclipse</idElements>
   <idElements>xtext</idElements>
@@ -8,6 +8,9 @@
   <idElements>TransientValuesTest</idElements>
   <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="transientvaluestest" nsURI="http://simple/transientvaluestest"/>
   <rules xsi:type="xtext:ParserRule" name="Root">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//Root"/>
+    </type>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Keyword" value="test"/>
       <abstractTokens xsi:type="xtext:Alternatives">
@@ -20,6 +23,9 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="TestRequired">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestRequired"/>
+    </type>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Keyword" value="required"/>
@@ -37,6 +43,9 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="TestOptional">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestOptional"/>
+    </type>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Group">
         <abstractTokens xsi:type="xtext:Keyword" value="optional"/>
@@ -57,6 +66,9 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="TestList">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://simple/transientvaluestest#//TestList"/>
+    </type>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Keyword" value="list"/>
       <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="item" operator="+=">

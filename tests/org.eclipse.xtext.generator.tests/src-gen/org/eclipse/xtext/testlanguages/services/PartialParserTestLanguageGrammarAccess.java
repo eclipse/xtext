@@ -34,7 +34,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// 'container' name = ID '{' ( nested += Nested | content += Content ) * '}'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'container' name = ID '{' ( nested += Nested | content += Content ) *
@@ -121,7 +121,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// 'nested' '{' ( nested += Container ) + '}'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'nested' '{' ( nested += Container ) +
@@ -173,7 +173,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// Children | AbstractChildren
 		public Alternatives eleAlternatives() {
-			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(0)); 
+			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(1)); 
 		}
 
 		// Children
@@ -210,7 +210,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// 'children' '{' children += Child ( ',' children += Child ) * '}'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'children' '{' children += Child ( ',' children += Child ) *
@@ -294,7 +294,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// '->' 'C' '(' value = Named ')'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// '->' 'C' '(' value = Named
@@ -361,7 +361,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// 'abstract children' '{' ( abstractChildren += AbstractChild ) + '}'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'abstract children' '{' ( abstractChildren += AbstractChild ) +
@@ -413,7 +413,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// FirstConcrete | SecondConcrete
 		public Alternatives eleAlternatives() {
-			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(0)); 
+			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(1)); 
 		}
 
 		// FirstConcrete
@@ -450,7 +450,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ? ')'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// '->' 'F' '(' value = Named ( referencedContainer = [ Container ] ) ?
@@ -539,7 +539,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ? ')'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// '->' 'F' 'S' '(' value = Named ( referencedChildren += [ Child ] ) ?
@@ -625,7 +625,7 @@ public class PartialParserTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// name = ID
 		public Assignment eleAssignmentName() {
-			return (cAssignmentName != null) ? cAssignmentName : (cAssignmentName = (Assignment)getRule().eContents().get(0)); 
+			return (cAssignmentName != null) ? cAssignmentName : (cAssignmentName = (Assignment)getRule().eContents().get(1)); 
 		}
 
 		// ID

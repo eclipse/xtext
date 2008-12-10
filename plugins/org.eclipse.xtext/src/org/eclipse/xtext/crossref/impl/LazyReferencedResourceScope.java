@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
-import java.util.Collections;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -22,21 +19,18 @@ import org.eclipse.xtext.crossref.IScope;
 public class LazyReferencedResourceScope extends AbstractCachingScope {
 
 	private EObject context;
-	
+
 	private String uri;
-	
+
 	public LazyReferencedResourceScope(IScope parent, EClass type, EObject context, String uri) {
-		super(parent, type);
+		super(parent, type, true);
 		this.context = context;
 		this.uri = uri;
 	}
-	
-	protected Map<String, EObject> initElements(SimpleAttributeResolver<String> resolver) {
-		try {
-			Resource resource = context.eResource().getResourceSet().getResource(URI.createURI(uri), true);
-			return initElements(resolver, resource);
-		} catch (RuntimeException e) {
-			return Collections.emptyMap();
-		}
+
+	@Override
+	protected void initElements(SimpleAttributeResolver<String> resolver, ScopedElementProducer producer) {
+		final Resource resource = context.eResource().getResourceSet().getResource(URI.createURI(uri), true);
+		initElements(resolver, resource, producer);
 	}
 }

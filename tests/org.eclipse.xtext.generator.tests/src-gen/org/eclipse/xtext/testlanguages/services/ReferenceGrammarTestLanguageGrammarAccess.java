@@ -43,7 +43,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends BaseEPackageAcces
 
 		// ( 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) * '}' ) ?
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie ) *
@@ -170,7 +170,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends BaseEPackageAcces
 
 		// Kind | Erwachsener
 		public Alternatives eleAlternatives() {
-			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(0)); 
+			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(1)); 
 		}
 
 		// Kind
@@ -205,7 +205,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends BaseEPackageAcces
 
 		// 'kind' '(' name = ID age = INT ')'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'kind' '(' name = ID age = INT
@@ -280,7 +280,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends BaseEPackageAcces
 
 		// 'erwachsener' '(' name = ID age = INT ')'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'erwachsener' '(' name = ID age = INT
@@ -355,7 +355,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends BaseEPackageAcces
 
 		// 'spielzeug' '(' name = ID farbe = Farbe ')'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'spielzeug' '(' name = ID farbe = Farbe
@@ -426,7 +426,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends BaseEPackageAcces
 
 		// 'ROT' | 'BLAU' | 'GELB' | 'GRÜN'
 		public Alternatives eleAlternatives() {
-			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(0)); 
+			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(1)); 
 		}
 
 		// 'ROT' | 'BLAU' | 'GELB'
@@ -496,7 +496,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends BaseEPackageAcces
 
 		// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) * ')'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'familie' '(' name = ( 'keyword' | STRING | ID ) mutter = [ Erwachsener ] vater = [ Erwachsener ] kinder += [ Kind ] ( ',' kinder += [ Kind ] ) *

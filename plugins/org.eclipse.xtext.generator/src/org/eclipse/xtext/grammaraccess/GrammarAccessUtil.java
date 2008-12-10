@@ -31,12 +31,12 @@ public class GrammarAccessUtil {
 			return ((RuleCall) ele).getRule().getName();
 		if (ele instanceof Action) {
 			Action a = (Action) ele;
-			return a.getTypeName().getName() + a.getFeature();
+			return (a.getTypeName() != null && a.getTypeName().getType() != null ? a.getTypeName().getType().getName() : "") + a.getFeature();
 		}
 		if (ele instanceof CrossReference) {
 			CrossReference cr = (CrossReference) ele;
-			String rule = (cr.getRule() != null) ? cr.getRule().getName() : "";
-			String type = (cr.getType() != null) ? cr.getType().getName() : "";
+			String rule = (cr.getRule() != null && cr.getRule().getType() != null && cr.getRule().getType().getType() != null) ? cr.getRule().getType().getType().getName() : "";
+			String type = (cr.getType() != null && cr.getType().getType() != null) ? cr.getType().getType().getName() : "";
 			return rule + type;
 		}
 		return "";
