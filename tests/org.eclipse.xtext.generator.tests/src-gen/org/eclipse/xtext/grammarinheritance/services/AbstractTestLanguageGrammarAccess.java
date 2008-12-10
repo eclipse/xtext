@@ -17,7 +17,7 @@ public class AbstractTestLanguageGrammarAccess extends BaseEPackageAccess implem
 		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
-		// InheritedParserRule returns mm :: AType : 'element' name = ID ;
+		// InheritedParserRule returns AType : 'element' name = ID ;
 		public ParserRule getRule() { return rule; }
 
 		// 'element' name = ID
@@ -56,12 +56,12 @@ public class AbstractTestLanguageGrammarAccess extends BaseEPackageAccess implem
 	}
 
 	
-	// InheritedParserRule returns mm :: AType : 'element' name = ID ;
+	// InheritedParserRule returns AType : 'element' name = ID ;
 	public InheritedParserRuleElements prInheritedParserRule() {
 		return (pInheritedParserRule != null) ? pInheritedParserRule : (pInheritedParserRule = new InheritedParserRuleElements());
 	} 
 
-	// lexer REAL returns ecore :: EDouble : "RULE_INT '.' RULE_INT" ;
+	// lexer REAL returns EDouble : "RULE_INT '.' RULE_INT" ;
 	public LexerRule lrREAL() {
 		return (lREAL != null) ? lREAL : (lREAL = (LexerRule) getGrammar().eContents().get(3));
 	} 

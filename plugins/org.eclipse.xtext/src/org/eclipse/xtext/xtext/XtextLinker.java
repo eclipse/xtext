@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.crossref.IScopeProvider;
@@ -61,9 +62,9 @@ public class XtextLinker extends Linker {
 	protected void setDefaultValueImpl(EObject obj, EReference ref, DiagnosticProducer producer) {
 		if (XtextPackage.eINSTANCE.getTypeRef_Metamodel() == ref) {
 			final TypeRef typeRef = (TypeRef) obj;
-			final String typeRefName = XtextMetamodelReferenceHelper.getTypeRefName(typeRef);
+			final String typeRefName = GrammarUtil.getTypeRefName(typeRef);
 			final List<EObject> metamodels = XtextMetamodelReferenceHelper.findBestMetamodelForType(
-					typeRef, ref, "", typeRefName, scopeProvider.getScope(typeRef, ref));
+					typeRef, "", typeRefName, scopeProvider.getScope(typeRef, ref));
 			if (metamodels.isEmpty() || metamodels.size() > 1)
 				producer.addDiagnostic("Cannot find meta model for type '" + typeRefName + "'");
 			else

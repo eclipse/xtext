@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/internal/InternalTransientValuesTest.g 2008-12-10 15:09:25
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/transientvalues/parser/internal/InternalTransientValuesTest.g 2008-12-10 21:58:23
 
 package org.eclipse.xtext.parsetree.transientvalues.parser.internal;
 

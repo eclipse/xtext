@@ -5,18 +5,29 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.util;
+package org.eclipse.xtext.resource.metamodel;
+
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EPackage;
 
 /**
- * Strategy to compute a value from a given parameter.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface Function<Param, Result> {
+public interface IDeclaredMetamodelAccess {
 
 	/**
-	 * @param param the input parameter
-	 * @return the computed result
+	 * @return the referenced package or <code>null<code>
 	 */
-	Result exec(Param param);
+	EPackage getPackage();
 	
+	/**
+	 * @return the classifiers, that are contained in the metamodel. May never return <code>null</code>
+	 */
+	Iterable<EClassifier> getEClassifiers();
+	
+	/**
+	 * @param name the name of the classifier
+	 * @return the found classifier or <code>null</code>
+	 */
+	EClassifier getEClassifier(String name);
 }

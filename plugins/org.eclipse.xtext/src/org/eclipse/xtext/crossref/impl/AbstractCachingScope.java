@@ -22,7 +22,6 @@ import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Filter;
-import org.eclipse.xtext.util.FilteringIterator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -88,9 +87,9 @@ public abstract class AbstractCachingScope extends AbstractNestedScope {
 	}
 	
 	protected Iterable<IScopedElement> filter(final Iterable<IScopedElement> elements, final EClass type) {
-		return FilteringIterator.create(elements.iterator(), new Filter<IScopedElement>() {
+		return CollectionUtils.filter(elements.iterator(), new Filter<IScopedElement>() {
 			public boolean matches(IScopedElement param) {
-				return type == null ? true : EcoreUtil2.isAssignableFrom(type, param.element());
+				return type == null || EcoreUtil2.isAssignableFrom(type, param.element());
 			}
 		});
 	}

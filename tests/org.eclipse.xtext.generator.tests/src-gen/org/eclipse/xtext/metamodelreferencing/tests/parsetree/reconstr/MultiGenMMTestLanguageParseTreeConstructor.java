@@ -121,7 +121,7 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 
 /************ begin Rule NameRef ****************
  *
- * NameRef returns FooBar : name = STRING ;
+ * NameRef returns other :: FooBar : name = STRING ;
  *
  **/
 

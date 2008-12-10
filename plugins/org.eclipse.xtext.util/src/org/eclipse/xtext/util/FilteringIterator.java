@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.util;
 
 import java.util.Iterator;
@@ -7,7 +14,7 @@ import java.util.NoSuchElementException;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public final class FilteringIterator<T> implements Iterator<T>, Iterable<T> {
+final class FilteringIterator<T> implements Iterator<T>, Iterable<T> {
 
 	private final Filter<T> matcher;
 
@@ -15,18 +22,13 @@ public final class FilteringIterator<T> implements Iterator<T>, Iterable<T> {
 
 	private T next;
 	
-
-	public FilteringIterator(final Iterable<? extends T> origin, final Filter<T> matcher) {
+	FilteringIterator(final Iterable<? extends T> origin, final Filter<T> matcher) {
 		this(origin.iterator(), matcher);
 	}
 
-	public FilteringIterator(final Iterator<? extends T> iterator, final Filter<T> matcher) {
+	FilteringIterator(final Iterator<? extends T> iterator, final Filter<T> matcher) {
 		this.base = iterator;
 		this.matcher = matcher;
-	}
-	
-	public static <T> FilteringIterator<T> create(final Iterator<? extends T> iterator, final Filter<T> matcher) {
-		return new FilteringIterator<T>(iterator,matcher);
 	}
 
 	public boolean hasNext() {

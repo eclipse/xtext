@@ -50,7 +50,7 @@ public class XtextLinkingService extends XtextBuiltinLinkingService {
 					return super.getLinkedObjects(context, ref, text);
 				if (!(leaf.getGrammarElement() instanceof Keyword) && !leaf.isHidden()) {
 					return XtextMetamodelReferenceHelper.findBestMetamodelForType(
-							context, ref, text.getText(), leaf.getText(), getObjectsInScope(context, ref));
+							context, text.getText(), leaf.getText(), getObjectsInScope(context, ref));
 				}
 			}				
 		}

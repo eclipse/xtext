@@ -12,9 +12,8 @@ import java.util.Set;
 
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.util.ChainedIterator;
+import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Filter;
-import org.eclipse.xtext.util.FilteringIterator;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -30,13 +29,13 @@ public abstract class AbstractNestedScope implements IScope {
 
 	public final Iterable<IScopedElement> getAllContents() {
 		final Set<String> identifiers = new HashSet<String>();
-		return new ChainedIterator<IScopedElement>(FilteringIterator.create(getContents().iterator(),
+		return CollectionUtils.join(CollectionUtils.filter(getContents().iterator(),
 				new Filter<IScopedElement>() {
 					public boolean matches(IScopedElement param) {
 						identifiers.add(param.name());
 						return true;
 					}
-				}), FilteringIterator.create(getParent().getAllContents().iterator(), new Filter<IScopedElement>() {
+				}), CollectionUtils.filter(getParent().getAllContents().iterator(), new Filter<IScopedElement>() {
 			public boolean matches(IScopedElement param) {
 				return !identifiers.contains(param.name());
 			}
