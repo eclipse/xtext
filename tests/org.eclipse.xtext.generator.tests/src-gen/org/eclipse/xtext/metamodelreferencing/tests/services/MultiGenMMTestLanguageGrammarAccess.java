@@ -42,7 +42,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends BaseEPackageAccess impl
 		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
 		private final RuleCall c0LexerRuleCallSTRING = (RuleCall)cAssignmentName.eContents().get(0);
 		
-		// NameRef returns FooBar : name = STRING ;
+		// NameRef returns other :: FooBar : name = STRING ;
 		public ParserRule getRule() { return rule; }
 
 		// name = STRING
@@ -79,7 +79,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends BaseEPackageAccess impl
 		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
 	} 
 
-	// NameRef returns FooBar : name = STRING ;
+	// NameRef returns other :: FooBar : name = STRING ;
 	public NameRefElements prNameRef() {
 		return (pNameRef != null) ? pNameRef : (pNameRef = new NameRefElements());
 	} 
