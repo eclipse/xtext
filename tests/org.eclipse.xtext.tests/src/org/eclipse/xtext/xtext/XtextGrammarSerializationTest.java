@@ -31,35 +31,49 @@ public class XtextGrammarSerializationTest extends AbstractGeneratorTest {
 		with(XtextStandaloneSetup.class);
 	}
 
-	public void testSerialization() throws Exception {
-		String model = "language foo\n"
-				+ "generate mm \"http://bar\" as fooMM\n"
-				+ "StartRule returns T: name=ID;";
-		String expectedModel = "language foo\n"
-				+ "generate mm 'http://bar' as fooMM\n"
-				+ "StartRule returns fooMM :: T: name=ID;";
-		XtextResource resource = getResourceFromString(model);
-		assertTrue(resource.getErrors().isEmpty());
-		Grammar g = (Grammar) resource.getParseResult().getRootASTElement();
-		assertNotNull(g);
-		OutputStream outputStream = new ByteArrayOutputStream();
-		resource.save(outputStream, Collections.emptyMap());
-		String serializedModel = outputStream.toString();
-		assertEquals(expectedModel, serializedModel);
+	public void testSimpleSerialization() throws Exception {
+		final String model = "language foo\n"
+			+ "generate mm \"http://bar\" as fooMM\n"
+			+ "StartRule returns T: name=ID;";
+		final String expectedModel = "language foo\n"
+			+ "generate mm 'http://bar' as fooMM\n"
+			+ "StartRule returns T: name=ID;";
+		doTestSerialization(model, expectedModel);
 	}
 
-	/**
-	 * TODO for Sebastian from Moritz: Can you please make this test work again.
-	 * It fails becuse
-	 * org.eclipse.xtext.xtext.XtextLinkingService.getLinkText(EObject,
-	 * EReference, EObject) returns null. In my opinion it must never do so. For
-	 * details, talk to me.
-	 */
-//	public void testXtestSerializationSelfTest() throws Exception {
-//		Resource res = new XtextResourceSet().createResource(URI
-//				.createURI("myfile.xtext"));
-//		res.getContents().add(XtextGrammarAccess.INSTANCE.getGrammar());
-//		res.save(System.out, Collections.emptyMap());
-//	}
+	private void doTestSerialization(String model, String expectedModel) throws Exception {
+		final XtextResource resource = getResourceFromString(model);
+		assertTrue(resource.getErrors().isEmpty());
+		final Grammar g = (Grammar) resource.getParseResult().getRootASTElement();
+		assertNotNull(g);
+		final OutputStream outputStream = new ByteArrayOutputStream();
+		resource.save(outputStream, Collections.emptyMap());
+		final String serializedModel = outputStream.toString();
+		assertEquals(expectedModel, serializedModel);
+	}
+	
+	public void testMetamodelRefSerialization() throws Exception {
+		final String model = "language foo\n" 
+			+ "import \"http://www.eclipse.org/2008/Xtext\" as xtext\n"
+			+ "generate mm \"http://bar\" as fooMM\n"
+			+ "Foo : name=ID (nameRefs+=NameRef)*;\n"
+			+ "NameRef returns xtext::RuleCall : rule=[ParserRule];\n"
+			+ "MyRule returns xtext::ParserRule : name=ID;";
+		final String expectedModel = "language foo\n" 
+			+ "import 'http://www.eclipse.org/2008/Xtext' as xtext\n"
+			+ "generate mm 'http://bar' as fooMM\n"
+			+ "Foo : name=ID (nameRefs+=NameRef)*;\n"
+			+ "NameRef returns RuleCall : rule=[ParserRule];\n"
+			+ "MyRule returns ParserRule : name=ID;";
+		doTestSerialization(model, expectedModel);
+	}
+
+	public void _testXtestSerializationSelfTest() throws Exception {
+		Resource res = new XtextResourceSet().createResource(URI
+				.createURI("myfile.xtext"));
+		res.getContents().add(XtextGrammarAccess.INSTANCE.getGrammar());
+		OutputStream outputStream = new ByteArrayOutputStream();
+		res.save(outputStream, Collections.emptyMap());
+	}
 
 }
