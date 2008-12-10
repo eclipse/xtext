@@ -5,25 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.crossref.internal;
+package org.eclipse.xtext.crossref.impl;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.crossref.IScope;
+import org.eclipse.xtext.crossref.IScopedElement;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface DiagnosticProducer {
+public class SimpleScope extends AbstractNestedScope {
 
-	void addDiagnostic(String message);
-	
-	void addDefaultDiagnostic();
-	
-	AbstractNode getNode();
-	
-	void setNode(AbstractNode node);
-	
-	void setTarget(EObject object, EStructuralFeature feature);
-	
+	public SimpleScope(IScope parent, Iterable<IScopedElement> elements) {
+		super(parent, elements);
+	}
+
 }

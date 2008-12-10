@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -124,7 +125,8 @@ public class EcoreUtil2 extends EcoreUtil {
 	public static void saveEPackage(EPackage ePackage, String path) throws IOException {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
 		URI uri = URI.createFileURI(path + "/" + ePackage.getName() + ".ecore");
-		Resource metaModelResource = new ResourceSetImpl().createResource(uri);
+		ResourceSet resourceSet = ePackage.eResource().getResourceSet();
+		Resource metaModelResource = resourceSet.createResource(uri);
 		metaModelResource.getContents().add(ePackage);
 		metaModelResource.save(null);
 	}

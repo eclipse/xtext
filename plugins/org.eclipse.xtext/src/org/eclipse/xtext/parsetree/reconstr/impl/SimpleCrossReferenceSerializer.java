@@ -29,7 +29,7 @@ public class SimpleCrossReferenceSerializer extends
 					container,
 					"Error serializing CrossRefs: "
 							+ "Unable to create a string represenation for reference '"
-							+ grammarElement.getType().getName() + "' using "
+							+ grammarElement.getType().getType().getName() + "' using "
 							+ linkingService.getClass().getName()
 							+ " EReference: " + ref.getName() + " Context:"
 							+ context + " Target:" + target);

@@ -13,6 +13,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.ILanguageService;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public interface ILinker extends ILanguageService{
-	public List<XtextResource.Diagnostic> ensureLinked(EObject obj);
+	
+	List<XtextResource.Diagnostic> linkModel(EObject model);
+	
 }

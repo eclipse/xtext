@@ -14,16 +14,33 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface DiagnosticProducer {
+public class AbstractDecoratingDiagnosticProducer implements DiagnosticProducer {
 
-	void addDiagnostic(String message);
+	private final DiagnosticProducer producer;
 	
-	void addDefaultDiagnostic();
-	
-	AbstractNode getNode();
-	
-	void setNode(AbstractNode node);
-	
-	void setTarget(EObject object, EStructuralFeature feature);
+	public AbstractDecoratingDiagnosticProducer(DiagnosticProducer producer) {
+		super();
+		this.producer = producer;
+	}
+
+	public void addDefaultDiagnostic() {
+		producer.addDefaultDiagnostic();
+	}
+
+	public void addDiagnostic(String message) {
+		producer.addDiagnostic(message);
+	}
+
+	public AbstractNode getNode() {
+		return producer.getNode();
+	}
+
+	public void setNode(AbstractNode node) {
+		producer.setNode(node);
+	}
+
+	public void setTarget(EObject object, EStructuralFeature feature) {
+		producer.setTarget(object, feature);
+	}
 	
 }

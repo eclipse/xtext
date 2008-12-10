@@ -9,21 +9,25 @@
 package org.eclipse.xtext.resource.metamodel;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
@@ -39,7 +43,11 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
+import org.eclipse.xtext.util.CollectionUtils;
+import org.eclipse.xtext.util.Filter;
+import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xtext.XtextMetamodelReferenceHelper;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -71,23 +79,52 @@ public class Xtext2EcoreTransformer {
 	public Xtext2EcoreTransformer() {
 	}
 
-	public static List<EPackage> doTransform(Grammar grammar) throws Exception {
-		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer();
-		try {
-			return transformer.transform(grammar);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
+	public static void doTransform(Grammar grammar) {
+		new Xtext2EcoreTransformer().transform(grammar);
+	}
+
+	public static List<EPackage> doGetGeneratedPackages(final Grammar grammar) {
+		return new Xtext2EcoreTransformer().getGeneratedPackages(grammar);
+	}
+
+	public List<EPackage> getGeneratedPackages(final Grammar grammar) {
+		final List<EPackage> result = new ArrayList<EPackage>();
+		final ResourceSet resourceSet = grammar.eResource().getResourceSet();
+		if (resourceSet == null)
+			throw new NullPointerException();
+		CollectionUtils.addAll(result, CollectionUtils.filter(CollectionUtils.map(CollectionUtils.filter(grammar
+				.getMetamodelDeclarations(), new Filter<AbstractMetamodelDeclaration>() {
+			public boolean matches(AbstractMetamodelDeclaration param) {
+				return param instanceof GeneratedMetamodel;
+			}
+		}), new Function<AbstractMetamodelDeclaration, EPackage>() {
+			public EPackage exec(AbstractMetamodelDeclaration param) {
+				for (Resource resource : resourceSet.getResources()) {
+					for (EObject content : resource.getContents()) {
+						if (content instanceof EPackage) {
+							final EPackage candidate = (EPackage) content;
+							if (((GeneratedMetamodel) param).getNsURI().equals(candidate.getNsURI())) {
+								return candidate;
+							}
+						}
+					}
+				}
+				return null;
+			}
+		}), new Filter<EPackage>() {
+			public boolean matches(EPackage param) {
+				return param != null;
+			}
+		}));
+		return getPackagesSortedByName(result);
 	}
 
 	/*
-	 * pre-conditions - ensure non-duplicate aliases - ensure all aliases have
-	 * matching metamodel declarations
+	 * pre-conditions - ensure non-duplicate aliases - ensure all aliases have matching metamodel declarations
 	 */
-	public List<EPackage> transform(Grammar grammar) {
+	public void transform(Grammar grammar) {
 		this.grammar = grammar;
+		removeGeneratedPackages();
 		eClassifierInfos = new EClassifierInfos();
 		generatedEPackages = new HashMap<String, EPackage>();
 		superGrammar = GrammarUtil.getSuperGrammar(grammar);
@@ -99,12 +136,26 @@ public class Xtext2EcoreTransformer {
 		deriveTypes();
 		deriveFeatures();
 		normalizeAndValidateGeneratedPackages();
-
-		return getGeneratedPackagesSortedByName();
 	}
 
-	private List<EPackage> getGeneratedPackagesSortedByName() {
-		ArrayList<EPackage> result = new ArrayList<EPackage>(generatedEPackages.values());
+	private void removeGeneratedPackages() {
+		final ResourceSet resourceSet = grammar.eResource().getResourceSet();
+		final Iterator<Resource> resourceIter = resourceSet.getResources().iterator();
+		final Collection<EPackage> packages = getGeneratedPackages(grammar);
+		// TODO check against grammar
+		while (resourceIter.hasNext()) {
+			Resource r = resourceIter.next();
+			CONTENT: for (EObject content : r.getContents()) {
+				if (content instanceof EPackage && packages.contains(content)) {
+					resourceIter.remove();
+					break CONTENT;
+				}
+			}
+		}
+	}
+
+	private static List<EPackage> getPackagesSortedByName(Collection<EPackage> packages) {
+		ArrayList<EPackage> result = new ArrayList<EPackage>(packages);
 		Collections.sort(result, new Comparator<EPackage>() {
 			public int compare(EPackage o1, EPackage o2) {
 				return o1.getName().compareTo(o2.getName());
@@ -116,7 +167,15 @@ public class Xtext2EcoreTransformer {
 	private void deriveTypes() {
 		for (AbstractRule rule : grammar.getRules()) {
 			try {
-				EClassifierInfo generatedEClass = findOrCreateEClass(rule);
+				findOrCreateEClassifierInfo(rule);
+			}
+			catch (TransformationException e) {
+				reportError(e);
+			}
+		}
+		for (AbstractRule rule : grammar.getRules()) {
+			try {
+				EClassifierInfo generatedEClass = findOrCreateEClassifierInfo(rule);
 				if (rule instanceof ParserRule) {
 					ParserRule parserRule = (ParserRule) rule;
 					deriveTypesAndHierarchy(generatedEClass, parserRule.getAlternatives());
@@ -173,12 +232,12 @@ public class Xtext2EcoreTransformer {
 			// do not throw an exception for missing rules, these have been
 			// announced during the first iteration
 			if (calledRule != null)
-				return context.spawnContextWithCalledRule(findOrCreateEClass(calledRule), ruleCall);
+				return context.spawnContextWithCalledRule(findOrCreateEClassifierInfo(calledRule), ruleCall);
 		}
 		else if (element instanceof Action) {
 			Action action = (Action) element;
 			TypeRef actionTypeRef = action.getTypeName();
-			EClassifierInfo actionType = findOrCreateEClass(actionTypeRef);
+			EClassifierInfo actionType = findOrCreateEClassifierInfo(actionTypeRef, null);
 			EClassifierInfo currentCompatibleType = context.getCurrentCompatibleType();
 			context = context.spawnContextWithReferencedType(actionType, action);
 			context.addFeature(action.getFeature(), currentCompatibleType, GrammarUtil.isMultipleAssignment(action),
@@ -198,7 +257,7 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private void deriveFeatures(ParserRule rule) throws TransformationException {
-		EClassifierInfo classInfo = findEClass(rule);
+		EClassifierInfo classInfo = findEClassifierInfo(rule);
 		if (classInfo == null)
 			throw new TransformationException(ErrorCode.NoSuchTypeAvailable, "No such type available"
 					+ GrammarUtil.getReturnTypeName(rule), rule);
@@ -211,6 +270,25 @@ public class Xtext2EcoreTransformer {
 		if (result == null) {
 			String returnTypeName = GrammarUtil.getReturnTypeName(rule);
 			result = GrammarUtil.getTypeRef(grammar, returnTypeName);
+			if (result.getMetamodel() == null) {
+				AbstractMetamodelDeclaration bestMatch = null;
+				for(AbstractMetamodelDeclaration decl: grammar.getMetamodelDeclarations()) {
+					if (decl instanceof GeneratedMetamodel) {
+						if (bestMatch == null)
+							bestMatch = decl;
+						else if (Strings.isEmpty(decl.getAlias())) {
+							result.setMetamodel(decl);
+							break;
+						} else {
+							bestMatch = null;
+							break;
+						}
+					}
+				}
+				if (result.getMetamodel() == null)
+					result.setMetamodel(bestMatch);
+			}
+			rule.setType(result);
 		}
 		return result;
 	}
@@ -220,7 +298,7 @@ public class Xtext2EcoreTransformer {
 		helper.liftUpFeaturesRecursively();
 		helper.removeDuplicateDerivedFeatures();
 		helper.detectEClassesWithCyclesInTypeHierachy();
-		
+
 		// duplicated features can occur in rare cases when alternatives produce
 		// different types of a feature
 		// If the internal structure (Set) of the underlying algorithm
@@ -235,8 +313,8 @@ public class Xtext2EcoreTransformer {
 			RuleCall ruleCall = (RuleCall) element;
 			AbstractRule calledRule = ruleCall.getRule();
 			if (calledRule == null) // TODO: use NodeAdapter to create error message 
-				throw new TransformationException(ErrorCode.NoSuchRuleAvailable, "Cannot find rule "
-						+ ruleCall, ruleCall);
+				throw new TransformationException(ErrorCode.NoSuchRuleAvailable, "Cannot find rule " + ruleCall,
+						ruleCall);
 			TypeRef calledRuleReturnTypeRef = getOrFakeReturnType(calledRule);
 			addSuperType(calledRuleReturnTypeRef, ruleReturnType);
 		}
@@ -263,23 +341,17 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private void addSuperType(TypeRef subTypeRef, EClassifierInfo superType) throws TransformationException {
-		EClassifierInfo calledRuleReturnType = findOrCreateEClass(subTypeRef);
+		EClassifierInfo calledRuleReturnType = findOrCreateEClassifierInfo(subTypeRef, null);
 		calledRuleReturnType.addSupertype(superType);
 	}
 
 	private void collectEPackages() {
 		// TODO derive alias configuration from supergrammar
-		Set<String> usedAliases = new HashSet<String>();
+		final List<AbstractMetamodelDeclaration> metamodelDeclarations = grammar.getMetamodelDeclarations();
+		final Map<String, GeneratedMetamodel> generateUs = new HashMap<String, GeneratedMetamodel>();
 
-		EList<AbstractMetamodelDeclaration> metamodelDeclarations = grammar.getMetamodelDeclarations();
 		for (AbstractMetamodelDeclaration metamodelDeclaration : metamodelDeclarations) {
 			try {
-				String alias = Strings.emptyIfNull(metamodelDeclaration.getAlias());
-				if (usedAliases.contains(alias))
-					throw new TransformationException(ErrorCode.AliasForMetamodelAlreadyExists, "alias already exists "
-							+ alias, metamodelDeclaration);
-				usedAliases.add(alias);
-
 				if (metamodelDeclaration instanceof ReferencedMetamodel) {
 					// load imported metamodel
 					ReferencedMetamodel referencedMetamodel = (ReferencedMetamodel) metamodelDeclaration;
@@ -298,17 +370,27 @@ public class Xtext2EcoreTransformer {
 					collectClassInfosOf(referencedEPackage, referencedMetamodel);
 				}
 				else if (metamodelDeclaration instanceof GeneratedMetamodel) {
-					// instantiate EPackages for generated metamodel
-					GeneratedMetamodel generatedMetamodel = (GeneratedMetamodel) metamodelDeclaration;
-					EPackage generatedEPackage = EcoreFactory.eINSTANCE.createEPackage();
-					generatedEPackage.setName(generatedMetamodel.getName());
-					generatedEPackage.setNsPrefix(generatedMetamodel.getName());
-					generatedEPackage.setNsURI(generatedMetamodel.getNsURI());
-					generatedEPackages.put(generatedMetamodel.getAlias(), generatedEPackage);
+					String alias = Strings.emptyIfNull(metamodelDeclaration.getAlias());
+					if (generateUs.containsKey(alias)) {
+						generateUs.put(alias, null);
+						throw new TransformationException(ErrorCode.AliasForMetamodelAlreadyExists, "Alias '" + alias + "' registered more than once.", metamodelDeclaration);
+					} else {
+						generateUs.put(alias, (GeneratedMetamodel) metamodelDeclaration);
+					}
 				}
+				else
+					throw new IllegalStateException("unknown metamodelDeclaraton " + metamodelDeclaration);
 
 			}
 			catch (TransformationException e) {
+				reportError(e);
+			}
+		}
+		for(GeneratedMetamodel metamodel: generateUs.values()) {
+			try {
+				if (metamodel != null)
+					addGeneratedEPackage(metamodel);
+			} catch(TransformationException e) {
 				reportError(e);
 			}
 		}
@@ -326,6 +408,7 @@ public class Xtext2EcoreTransformer {
 				EClassifierInfo info = EClassifierInfo.createEDataTypeInfo(eDataType, false);
 				eClassifierInfos.addInfo(metaModel, eClassifier.getName(), info);
 			}
+			// TODO: Enums
 		}
 	}
 
@@ -337,46 +420,93 @@ public class Xtext2EcoreTransformer {
 		reportError(exception.getErrorCode(), exception.getMessage(), exception.getErroneousElement());
 	}
 
-	private EClassifierInfo findOrCreateEClass(AbstractRule rule) throws TransformationException {
+	private EClassifierInfo findOrCreateEClassifierInfo(AbstractRule rule) throws TransformationException {
 		TypeRef typeRef = getOrFakeReturnType(rule);
-		return findOrCreateEClass(typeRef);
+		return findOrCreateEClassifierInfo(typeRef, rule.getName());
 	}
 
-	private EClassifierInfo findEClass(AbstractRule rule) {
+	private EClassifierInfo findEClassifierInfo(AbstractRule rule) {
 		TypeRef typeRef = getOrFakeReturnType(rule);
+		if (typeRef == null)
+			throw new NullPointerException();
+		if (rule.getType() != typeRef)
+			throw new IllegalStateException();
 		return eClassifierInfos.getInfo(typeRef);
 	}
 
-	private EClassifierInfo findOrCreateEClass(TypeRef typeRef) throws TransformationException {
+	private EClassifierInfo findOrCreateEClassifierInfo(TypeRef typeRef, String name) throws TransformationException {
 		EClassifierInfo info = eClassifierInfos.getInfo(typeRef);
 		if (info == null) {
-			info = createEClass(typeRef);
+			info = createEClassifierInfo(typeRef, name);
 		}
 		return info;
 	}
 
-	private EClassifierInfo createEClass(TypeRef typeRef) throws TransformationException {
+	private EClassifierInfo createEClassifierInfo(TypeRef typeRef, String name) throws TransformationException {
 		if (eClassifierInfos.getInfo(typeRef) != null)
-			throw new IllegalArgumentException("Cannot create EClass for same type twice"
-					+ GrammarUtil.getQualifiedName(typeRef));
+			throw new IllegalArgumentException("Cannot create EClass for same type twice "
+					+ typeRef.getType().getName());
+		//					+ GrammarUtil.getQualifiedName(typeRef));
 
-		EClassifierInfo info;
-		String typeRefName = typeRef.getName();
+		String typeRefName = null;
+		//		typeRefName = typeRef.getName();
+		typeRefName = XtextMetamodelReferenceHelper.getTypeRefName(typeRef);
+		if (typeRefName == null)
+			typeRefName = name;
+		if (typeRefName == null)
+			throw new NullPointerException("typeRefName may not be null");
+
 		AbstractMetamodelDeclaration metaModel = typeRef.getMetamodel();
 		if (metaModel == null)
-			throw new TransformationException(ErrorCode.UnknownMetaModelAlias,
-					"Cannot create type for " + typeRef.getName() + " because its MetaModel is unknown.", typeRef);
-		EPackage generatedEPackage = generatedEPackages.get(metaModel.getAlias());
+			throw new TransformationException(ErrorCode.UnknownMetaModelAlias, "Cannot create type for " + typeRefName
+					+ " because its MetaModel is unknown.", typeRef);
+		EPackage generatedEPackage = getGeneratedEPackage(metaModel);
 		if (generatedEPackage == null) {
 			throw new TransformationException(ErrorCode.CannotCreateTypeInSealedMetamodel,
 					"Cannot create type in alias " + typeRef.getMetamodel().getAlias(), typeRef);
 		}
-		EClass generatedEClass = EcoreFactory.eINSTANCE.createEClass();
-		generatedEClass.setName(typeRefName);
-		generatedEPackage.getEClassifiers().add(generatedEClass);
-		info = EClassifierInfo.createEClassInfo(generatedEClass, true);
-		eClassifierInfos.addInfo(typeRef, info);
-		return info;
+
+		EClassifier generatedEClass = generatedEPackage.getEClassifier(typeRefName);
+		if (generatedEClass == null) {
+			generatedEClass = EcoreFactory.eINSTANCE.createEClass();
+			generatedEClass.setName(typeRefName);
+			generatedEPackage.getEClassifiers().add(generatedEClass);
+		}
+		typeRef.setType(generatedEClass);
+
+		EClassifierInfo result;
+		// TODO: Enums?
+		if (generatedEClass instanceof EClass)
+			result = EClassifierInfo.createEClassInfo((EClass) generatedEClass, true);
+		else
+			result = EClassifierInfo.createEDataTypeInfo((EDataType) generatedEClass, true);
+
+		if (!eClassifierInfos.addInfo(typeRef, result))
+			throw new IllegalStateException();
+		return result;
+	}
+
+	private void addGeneratedEPackage(GeneratedMetamodel generatedMetamodel) throws TransformationException {
+		// we do not allow the same alias twice for generated metamodels
+		String alias = Strings.emptyIfNull(generatedMetamodel.getAlias());
+		if (generatedEPackages.containsKey(alias))
+			throw new TransformationException(ErrorCode.AliasForMetamodelAlreadyExists, "alias '" + alias
+					+ "' already exists", generatedMetamodel);
+
+		// instantiate EPackages for generated metamodel
+		EPackage generatedEPackage = EcoreFactory.eINSTANCE.createEPackage();
+		generatedEPackage.setName(generatedMetamodel.getName());
+		generatedEPackage.setNsPrefix(generatedMetamodel.getName());
+		generatedEPackage.setNsURI(generatedMetamodel.getNsURI());
+		Resource generatedPackageResource = new XMIResourceFactoryImpl().createResource(URI
+				.createURI(generatedMetamodel.getNsURI()));
+		grammar.eResource().getResourceSet().getResources().add(generatedPackageResource);
+		generatedPackageResource.getContents().add(generatedEPackage);
+		generatedEPackages.put(alias, generatedEPackage);
+	}
+
+	private EPackage getGeneratedEPackage(AbstractMetamodelDeclaration metaModel) {
+		return generatedEPackages.get(Strings.emptyIfNull(metaModel.getAlias()));
 	}
 
 	public EClassifierInfos getEClassifierInfos() {

@@ -7,12 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.impl;
 
-
-import java.util.Collections;
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.crossref.IScope;
 
@@ -22,13 +17,18 @@ import org.eclipse.xtext.crossref.IScope;
 public class SimpleCachingScope extends AbstractCachingScope {
 
 	public SimpleCachingScope(IScope parent, Resource resource, EClass type) {
-		super(parent, type);
+		this(parent, resource, type, true);
+	}
+
+	public SimpleCachingScope(IScope parent, Resource resource, EClass type, boolean refuseDuplicates) {
+		super(parent, type, refuseDuplicates);
 		initElements(resource);
 	}
 
 	@Override
-	protected Map<String, EObject> initElements(SimpleAttributeResolver<String> resolver) {
-		return Collections.emptyMap();
+	protected void initElements(SimpleAttributeResolver<String> resolver, ScopedElementProducer producer) {
+		// should never be called
+		throw new UnsupportedOperationException();
 	}
 
 }

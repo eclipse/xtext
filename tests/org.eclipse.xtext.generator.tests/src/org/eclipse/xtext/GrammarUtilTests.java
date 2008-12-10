@@ -8,6 +8,7 @@
 package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -64,12 +65,14 @@ public class GrammarUtilTests extends AbstractGeneratorTest {
 		Assignment asExtends = (Assignment)((Group)prType.getAlternatives()).getAbstractTokens().get(1);
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
 		
-		EClass referencedEClass = GrammarUtil.getReferencedEClass(resource, xref);
-		assertNotNull(referencedEClass);
+		EClassifier referencedClassifier = GrammarUtil.getReferencedEClass(resource, xref);
+		assertNotNull(referencedClassifier);
+		assertNotNull(referencedClassifier.getName());
 		
 		EObject model = getModel(resource);
 		EObject typeA = (EObject) invokeWithXtend("types.first()", model);
-		assertEquals(typeA.eClass(), referencedEClass);
+		assertEquals("typeA.eClass()[" + typeA.eClass().getName() + "] <> referencedClassifier["+ referencedClassifier.getName() +"]", 
+				referencedClassifier, typeA.eClass());
 	}
 	
 	public void testGetReference() throws Exception {

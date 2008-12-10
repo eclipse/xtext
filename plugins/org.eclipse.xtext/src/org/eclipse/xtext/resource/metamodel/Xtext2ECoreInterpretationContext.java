@@ -23,7 +23,10 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
+import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xtext.XtextMetamodelReferenceHelper;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -84,7 +87,8 @@ public class Xtext2ECoreInterpretationContext {
 			type.addFeature(featureName, featureTypeInfo, isMultivalue, isContainment, parserElement);
 	}
 
-	private String getTerminalTypeName(AbstractElement terminal) {
+
+	private String getTerminalTypeName(AbstractElement terminal) throws TransformationException {
 		if (terminal instanceof RuleCall) {
 			RuleCall featureRuleCall = (RuleCall) terminal;
 			AbstractRule featureTypeRule = GrammarUtil.calledRule(featureRuleCall);
@@ -92,6 +96,14 @@ public class Xtext2ECoreInterpretationContext {
 		}
 		else if (terminal instanceof CrossReference) {
 			CrossReference crossReference = (CrossReference) terminal;
+			TypeRef type = crossReference.getType();
+			if (type.getType() == null) {
+				String name = XtextMetamodelReferenceHelper.getTypeRefName(type);
+				if (Strings.isEmpty(name))
+					throw new NullPointerException();
+				EClassifierInfo info = getEClassifierInfoOrThrowException(GrammarUtil.getQualifiedName(type.getMetamodel(), name), crossReference);
+				type.setType(info.getEClassifier());
+			}
 			return GrammarUtil.getQualifiedName(crossReference.getType());
 		}
 		else if (terminal instanceof Keyword)

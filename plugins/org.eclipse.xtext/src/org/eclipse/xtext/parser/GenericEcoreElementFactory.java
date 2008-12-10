@@ -10,6 +10,7 @@
 package org.eclipse.xtext.parser;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
@@ -21,13 +22,14 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GeneratedMetamodel;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.ReferencedMetamodel;
-import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -117,16 +119,48 @@ public class GenericEcoreElementFactory implements IAstFactory {
 	}
 
 	public EClass getEClass(String fullTypeName) {
-		TypeRef typeRef = GrammarUtil.getTypeRef(grammarAccess.getGrammar(), fullTypeName);
-		EPackage pack = getEPackage(typeRef.getMetamodel());
-		if (pack == null) {
-			throw new IllegalStateException("Couldn't find any epackages for typeref '" + fullTypeName + "'");
+		return findEClassByName(grammarAccess.getGrammar(), fullTypeName);
+	}
+	
+	public EClass findEClassByName(Grammar grammar, String fullTypeName) {
+		final String[] splitted = fullTypeName.split("::");
+		String alias = "";
+		String type = fullTypeName;
+		if (splitted.length > 1) {
+			alias = splitted[0];
+			type = splitted[1];
 		}
-		EClassifier classifier = pack.getEClassifier(typeRef.getName());
-		if (classifier instanceof EClass) {
-			return (EClass) classifier;
+		final List<AbstractMetamodelDeclaration> declarations = GrammarUtil.allMetamodelDeclarations(grammar);
+		AbstractMetamodelDeclaration resultMetaModel = null;
+		EClassifier result = null;
+		for (AbstractMetamodelDeclaration decl : declarations) {
+			if (Strings.isEmpty(alias) || GrammarUtil.isSameAlias(decl.getAlias(), alias)) {
+				EPackage pack = getEPackage(decl);
+				EClassifier candidate = pack.getEClassifier(type);
+				if (candidate != null) {
+					if (resultMetaModel == null) {
+						resultMetaModel = decl;
+						result = candidate;
+					} else {
+						if (GrammarUtil.isSameAlias(resultMetaModel.getAlias(), alias)) {
+							if (GrammarUtil.isSameAlias(decl.getAlias(), alias)) {
+								return null;
+							}
+						} else {
+							if (GrammarUtil.isSameAlias(decl.getAlias(), alias)) {
+								resultMetaModel = decl;
+								result = candidate;
+							} else {
+								result = null;
+							}
+						}
+					}
+				} 
+			}
 		}
-		return null;
+		if (!(result instanceof EClass))
+			return null;
+		return (EClass) result;
 	}
 
 }

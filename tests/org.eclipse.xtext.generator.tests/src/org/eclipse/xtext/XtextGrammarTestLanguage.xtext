@@ -9,6 +9,7 @@
 language org.eclipse.xtext.XtextGrammarTestLanguage
 
 generate XtextTest "http://www.eclipse.org/2008/Test/XtextTest"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Grammar :
     (abstract?='abstract language' | 'language') idElements+=ID ('.' idElements+=ID)* ('extends' superGrammarIdElements+=ID ('.' superGrammarIdElements+=ID)*)?
@@ -21,9 +22,13 @@ AbstractRule : LexerRule | ParserRule;
 AbstractMetamodelDeclaration :
 	GeneratedMetamodel | ReferencedMetamodel;
 	
+// constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
+// generated metamodels have to have different aliases
 GeneratedMetamodel :
 	'generate' name=ID nsURI=STRING ('as' alias=ID)?;
 
+// referenced metamodels may share aliases with other referenced metamodels
+// and with generated metamodels
 ReferencedMetamodel :
 	'import' uri=STRING ('as' alias=ID)?;
 
@@ -39,7 +44,7 @@ ParserRule :
 ;
 
 TypeRef :
-	(alias=ID '::')? name=ID
+	(metamodel=[AbstractMetamodelDeclaration] '::')? type=[EClassifier]
 ;
 
 Alternatives returns AbstractElement:
@@ -66,7 +71,7 @@ AbstractTerminal returns AbstractElement:
 ;
 
 CrossReference :
-	'[' type=TypeRef ('|' rule=[LexerRule])? ']'
+	'[' type=TypeRef ('|' rule=[AbstractRule])? ']'
 ;
 
 ParenthesizedElement returns AbstractElement:
@@ -79,4 +84,3 @@ Keyword :
 
 RuleCall :
    rule=[AbstractRule];
-

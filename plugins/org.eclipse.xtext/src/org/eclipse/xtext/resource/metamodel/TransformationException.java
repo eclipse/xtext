@@ -29,11 +29,6 @@ public class TransformationException extends Exception {
 		this.erroneousElement = erroneousElement;
 	}
 	
-	@Deprecated
-	public TransformationException(ErrorCode errorCode, String message) {
-		this(errorCode, message, null);
-	}
-
 	public ErrorCode getErrorCode() {
 		return errorCode;
 	}

@@ -25,7 +25,8 @@ public class XtextParserTest extends AbstractGeneratorTest {
 	}
 	
 	public void testParseCrossRef() throws Exception {
-		Grammar model = (Grammar) getModel("language foo generate foo 'bar' Model : 'a' stuff+=Stuff*; Stuff : 'stuff' name=ID refersTo=[Stuff];");
-		assertWithXtend("'Stuff'", "eAllContents.typeSelect(xtext::CrossReference).first().type.name", model);
+		Grammar model = (Grammar) getModel("language foo generate foo 'bar' as boo Model : 'a' stuff+=Stuff*; Stuff : 'stuff' name=ID refersTo=[Stuff];");
+		assertWithXtend("'boo'", "eAllContents.typeSelect(xtext::CrossReference).first().type.metamodel.alias", model);
+		assertWithXtend("'Stuff'", "eAllContents.typeSelect(xtext::CrossReference).first().type.type.name", model);
 	}
 }

@@ -37,7 +37,7 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 		this.nameResolver = SimpleAttributeResolver.newResolver(String.class, "name");
 	}
 
-	private IScope getObjectsInScope(EObject context, EReference reference) {
+	protected IScope getObjectsInScope(EObject context, EReference reference) {
 		if (scopeProvider == null)
 			throw new IllegalStateException("scopeProvider must not be null.");
 		return scopeProvider.getScope(context, reference);
@@ -53,7 +53,7 @@ public class XtextBuiltinLinkingService implements ILinkingService {
 		final String s = text.getText();
 		while (iterator.hasNext()) {
 			final IScopedElement element = iterator.next();
-			if (element.name().equals(s))
+			if (s.equals(element.name()))
 				return Collections.singletonList(element.element());
 		}
 		return Collections.emptyList();
