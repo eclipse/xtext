@@ -61,7 +61,8 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		Grammar grammar = (Grammar) getModel(xtextGrammar);
 		replay(errorAcceptorMock);
 		xtext2EcoreTransformer.setErrorAcceptor(errorAcceptorMock);
-		List<EPackage> metamodels = xtext2EcoreTransformer.transform(grammar);
+		xtext2EcoreTransformer.transform(grammar);
+		List<EPackage> metamodels = xtext2EcoreTransformer.getGeneratedPackages(grammar);
 		verify(errorAcceptorMock);
 
 		assertNotNull(metamodels);
@@ -463,8 +464,6 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 
 	public void testImportWithoutAlias() throws Exception {
 		final String grammar = "language test generate test 'http://test' import 'http://www.eclipse.org/emf/2002/Ecore' RuleA: feature=ID;";
-		errorAcceptorMock.acceptError(same(ErrorCode.AliasForMetamodelAlreadyExists), (String) anyObject(),
-				(EObject) anyObject());
 		getEPackageFromGrammar(grammar);
 	}
 
@@ -500,26 +499,22 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		grammar += " RuleA: featureA=ID;"; // no alias => cannot be created
 		grammar += " RuleB returns target::TypeB: featureB=ID;";
 
-		errorAcceptorMock.acceptError(same(ErrorCode.AliasForMetamodelAlreadyExists), (String) anyObject(),
-				(EObject) anyObject());
-		errorAcceptorMock.acceptError(same(ErrorCode.UnknownMetaModelAlias), (String) anyObject(),
-				(EObject) anyObject());
-		errorAcceptorMock.acceptError(same(ErrorCode.UnknownMetaModelAlias), (String) anyObject(),
-				(EObject) anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.AliasForMetamodelAlreadyExists), (String) anyObject(),	(EObject) anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
 		errorAcceptorMock.acceptError(same(ErrorCode.NoSuchTypeAvailable), (String) anyObject(), (EObject) anyObject());
 		errorAcceptorMock.acceptError(same(ErrorCode.NoSuchTypeAvailable), (String) anyObject(), (EObject) anyObject());
 
 		List<EPackage> ePackages = getEPackagesFromGrammar(grammar);
-		assertEquals(1, ePackages.size());
-		EPackage t1 = ePackages.get(0);
-		assertEquals("t1", t1.getName());
-		assertTrue(t1.getEClassifiers().isEmpty());
+		assertEquals(0, ePackages.size());
 	}
 
 	public void testModifyingSealedModel() throws Exception {
 		final String grammar = "language test generate test 'http://test' import 'http://www.eclipse.org/emf/2002/Ecore' as ecore RuleA returns ecore::SomeNewTypeA: feature=ID;";
-		errorAcceptorMock.acceptError(same(ErrorCode.CannotCreateTypeInSealedMetamodel), (String) anyObject(),
-				(EObject) anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.CannotCreateTypeInSealedMetamodel), (String) anyObject(), (EObject) anyObject());
+		errorAcceptorMock.acceptError(same(ErrorCode.CannotCreateTypeInSealedMetamodel), (String) anyObject(), (EObject) anyObject());
 		errorAcceptorMock.acceptError(same(ErrorCode.NoSuchTypeAvailable), (String) anyObject(), (EObject) anyObject());
 		getEPackageFromGrammar(grammar);
 	}
