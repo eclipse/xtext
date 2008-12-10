@@ -11,180 +11,126 @@ import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class EntryRuleElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Assignment cAssignmentMultiFeature;
-		private RuleCall c0ParserRuleCallAbstractRule;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
+		private final Assignment cAssignmentMultiFeature = (Assignment)rule.eContents().get(1);
+		private final RuleCall c0ParserRuleCallAbstractRule = (RuleCall)cAssignmentMultiFeature.eContents().get(0);
 		
 		// EntryRule returns Model : ( multiFeature += AbstractRule ) * ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(1)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// ( multiFeature += AbstractRule ) *
-		public Assignment eleAssignmentMultiFeature() {
-			return (cAssignmentMultiFeature != null) ? cAssignmentMultiFeature : (cAssignmentMultiFeature = (Assignment)getRule().eContents().get(1)); 
-		}
+		public Assignment eleAssignmentMultiFeature() { return cAssignmentMultiFeature; }
 
 		// AbstractRule
-		public RuleCall ele0ParserRuleCallAbstractRule() {
-			return (c0ParserRuleCallAbstractRule != null) ? c0ParserRuleCallAbstractRule : (c0ParserRuleCallAbstractRule = (RuleCall)eleAssignmentMultiFeature().eContents().get(0)); 
-		}
+		public RuleCall ele0ParserRuleCallAbstractRule() { return c0ParserRuleCallAbstractRule; }
 	}
 
 	public class AbstractRuleElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Alternatives cAlternatives;
-		private RuleCall c0ParserRuleCallChoiceRule;
-		private RuleCall c1ParserRuleCallReducibleRule;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall c0ParserRuleCallChoiceRule = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall c1ParserRuleCallReducibleRule = (RuleCall)cAlternatives.eContents().get(1);
 		
 		// AbstractRule returns AbstractElement : ChoiceRule | ReducibleRule ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// ChoiceRule | ReducibleRule
-		public Alternatives eleAlternatives() {
-			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(1)); 
-		}
+		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// ChoiceRule
-		public RuleCall ele0ParserRuleCallChoiceRule() {
-			return (c0ParserRuleCallChoiceRule != null) ? c0ParserRuleCallChoiceRule : (c0ParserRuleCallChoiceRule = (RuleCall)eleAlternatives().eContents().get(0)); 
-		}
+		public RuleCall ele0ParserRuleCallChoiceRule() { return c0ParserRuleCallChoiceRule; }
 
 		// ReducibleRule
-		public RuleCall ele1ParserRuleCallReducibleRule() {
-			return (c1ParserRuleCallReducibleRule != null) ? c1ParserRuleCallReducibleRule : (c1ParserRuleCallReducibleRule = (RuleCall)eleAlternatives().eContents().get(1)); 
-		}
+		public RuleCall ele1ParserRuleCallReducibleRule() { return c1ParserRuleCallReducibleRule; }
 	}
 
 	public class ChoiceRuleElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private Group c0Group;
-		private Keyword c00KeywordChoice;
-		private Assignment c01AssignmentOptionalKeyword;
-		private Keyword c010KeywordOptional;
-		private Assignment c1AssignmentName;
-		private RuleCall c10LexerRuleCallID;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group c0Group = (Group)cGroup.eContents().get(0);
+		private final Keyword c00KeywordChoice = (Keyword)c0Group.eContents().get(0);
+		private final Assignment c01AssignmentOptionalKeyword = (Assignment)c0Group.eContents().get(1);
+		private final Keyword c010KeywordOptional = (Keyword)c01AssignmentOptionalKeyword.eContents().get(0);
+		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
 		// ChoiceRule returns ChoiceElement : 'choice' ( optionalKeyword ?= 'optional' ) ? name = ID ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(3)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// 'choice' ( optionalKeyword ?= 'optional' ) ? name = ID
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// 'choice' ( optionalKeyword ?= 'optional' ) ?
-		public Group ele0Group() {
-			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
-		}
+		public Group ele0Group() { return c0Group; }
 
 		// 'choice'
-		public Keyword ele00KeywordChoice() {
-			return (c00KeywordChoice != null) ? c00KeywordChoice : (c00KeywordChoice = (Keyword)ele0Group().eContents().get(0)); 
-		}
+		public Keyword ele00KeywordChoice() { return c00KeywordChoice; }
 
 		// ( optionalKeyword ?= 'optional' ) ?
-		public Assignment ele01AssignmentOptionalKeyword() {
-			return (c01AssignmentOptionalKeyword != null) ? c01AssignmentOptionalKeyword : (c01AssignmentOptionalKeyword = (Assignment)ele0Group().eContents().get(1)); 
-		}
+		public Assignment ele01AssignmentOptionalKeyword() { return c01AssignmentOptionalKeyword; }
 
 		// 'optional'
-		public Keyword ele010KeywordOptional() {
-			return (c010KeywordOptional != null) ? c010KeywordOptional : (c010KeywordOptional = (Keyword)ele01AssignmentOptionalKeyword().eContents().get(0)); 
-		}
+		public Keyword ele010KeywordOptional() { return c010KeywordOptional; }
 
 		// name = ID
-		public Assignment ele1AssignmentName() {
-			return (c1AssignmentName != null) ? c1AssignmentName : (c1AssignmentName = (Assignment)eleGroup().eContents().get(1)); 
-		}
+		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// ID
-		public RuleCall ele10LexerRuleCallID() {
-			return (c10LexerRuleCallID != null) ? c10LexerRuleCallID : (c10LexerRuleCallID = (RuleCall)ele1AssignmentName().eContents().get(0)); 
-		}
+		public RuleCall ele10LexerRuleCallID() { return c10LexerRuleCallID; }
 	}
 
 	public class ReducibleRuleElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private Group c0Group;
-		private Keyword c00KeywordReducible;
-		private RuleCall c01ParserRuleCallTerminalRule;
-		private Group c1Group;
-		private Action c10ActionReducibleCompositeactionFeature;
-		private Assignment c11AssignmentActionFeature;
-		private RuleCall c110ParserRuleCallTerminalRule;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(4);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group c0Group = (Group)cGroup.eContents().get(0);
+		private final Keyword c00KeywordReducible = (Keyword)c0Group.eContents().get(0);
+		private final RuleCall c01ParserRuleCallTerminalRule = (RuleCall)c0Group.eContents().get(1);
+		private final Group c1Group = (Group)cGroup.eContents().get(1);
+		private final Action c10ActionReducibleCompositeactionFeature = (Action)c1Group.eContents().get(0);
+		private final Assignment c11AssignmentActionFeature = (Assignment)c1Group.eContents().get(1);
+		private final RuleCall c110ParserRuleCallTerminalRule = (RuleCall)c11AssignmentActionFeature.eContents().get(0);
 		
 		// ReducibleRule returns ReducibleElement : 'reducible' TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ? ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(4)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// 'reducible' TerminalRule ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// 'reducible' TerminalRule
-		public Group ele0Group() {
-			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
-		}
+		public Group ele0Group() { return c0Group; }
 
 		// 'reducible'
-		public Keyword ele00KeywordReducible() {
-			return (c00KeywordReducible != null) ? c00KeywordReducible : (c00KeywordReducible = (Keyword)ele0Group().eContents().get(0)); 
-		}
+		public Keyword ele00KeywordReducible() { return c00KeywordReducible; }
 
 		// TerminalRule
-		public RuleCall ele01ParserRuleCallTerminalRule() {
-			return (c01ParserRuleCallTerminalRule != null) ? c01ParserRuleCallTerminalRule : (c01ParserRuleCallTerminalRule = (RuleCall)ele0Group().eContents().get(1)); 
-		}
+		public RuleCall ele01ParserRuleCallTerminalRule() { return c01ParserRuleCallTerminalRule; }
 
 		// ( { current = ReducibleComposite . actionFeature += current } actionFeature += TerminalRule ) ?
-		public Group ele1Group() {
-			return (c1Group != null) ? c1Group : (c1Group = (Group)eleGroup().eContents().get(1)); 
-		}
+		public Group ele1Group() { return c1Group; }
 
 		// { current = ReducibleComposite . actionFeature += current }
-		public Action ele10ActionReducibleCompositeactionFeature() {
-			return (c10ActionReducibleCompositeactionFeature != null) ? c10ActionReducibleCompositeactionFeature : (c10ActionReducibleCompositeactionFeature = (Action)ele1Group().eContents().get(0)); 
-		}
+		public Action ele10ActionReducibleCompositeactionFeature() { return c10ActionReducibleCompositeactionFeature; }
 
 		// actionFeature += TerminalRule
-		public Assignment ele11AssignmentActionFeature() {
-			return (c11AssignmentActionFeature != null) ? c11AssignmentActionFeature : (c11AssignmentActionFeature = (Assignment)ele1Group().eContents().get(1)); 
-		}
+		public Assignment ele11AssignmentActionFeature() { return c11AssignmentActionFeature; }
 
 		// TerminalRule
-		public RuleCall ele110ParserRuleCallTerminalRule() {
-			return (c110ParserRuleCallTerminalRule != null) ? c110ParserRuleCallTerminalRule : (c110ParserRuleCallTerminalRule = (RuleCall)ele11AssignmentActionFeature().eContents().get(0)); 
-		}
+		public RuleCall ele110ParserRuleCallTerminalRule() { return c110ParserRuleCallTerminalRule; }
 	}
 
 	public class TerminalRuleElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Assignment cAssignmentStringFeature;
-		private RuleCall c0LexerRuleCallSTRING;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
+		private final Assignment cAssignmentStringFeature = (Assignment)rule.eContents().get(1);
+		private final RuleCall c0LexerRuleCallSTRING = (RuleCall)cAssignmentStringFeature.eContents().get(0);
 		
 		// TerminalRule returns TerminalElement : stringFeature = STRING ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(5)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// stringFeature = STRING
-		public Assignment eleAssignmentStringFeature() {
-			return (cAssignmentStringFeature != null) ? cAssignmentStringFeature : (cAssignmentStringFeature = (Assignment)getRule().eContents().get(1)); 
-		}
+		public Assignment eleAssignmentStringFeature() { return cAssignmentStringFeature; }
 
 		// STRING
-		public RuleCall ele0LexerRuleCallSTRING() {
-			return (c0LexerRuleCallSTRING != null) ? c0LexerRuleCallSTRING : (c0LexerRuleCallSTRING = (RuleCall)eleAssignmentStringFeature().eContents().get(0)); 
-		}
+		public RuleCall ele0LexerRuleCallSTRING() { return c0LexerRuleCallSTRING; }
 	}
 	
 	public final static TestLanguageGrammarAccess INSTANCE = new TestLanguageGrammarAccess();

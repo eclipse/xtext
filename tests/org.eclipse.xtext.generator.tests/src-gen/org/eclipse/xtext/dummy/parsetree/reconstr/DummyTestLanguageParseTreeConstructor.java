@@ -278,7 +278,7 @@ protected class Element_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return DummyTestLanguageGrammarAccess.INSTANCE.prElement().ele1Keyword();
+		return DummyTestLanguageGrammarAccess.INSTANCE.prElement().ele1KeywordSemicolon();
 	}	
 }
 

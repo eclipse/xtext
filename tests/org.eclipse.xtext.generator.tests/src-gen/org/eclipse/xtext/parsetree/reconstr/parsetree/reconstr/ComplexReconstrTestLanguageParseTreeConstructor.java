@@ -197,7 +197,7 @@ protected class Op_1_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele1001Keyword();
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele1001KeywordPlusSign();
 	}	
 }
 
@@ -315,7 +315,7 @@ protected class Op_1_1_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele1101Keyword();
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prOp().ele1101KeywordHyphenMinus();
 	}	
 }
 
@@ -551,7 +551,7 @@ protected class Parens_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele000Keyword();
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele000KeywordLeftParenthesis();
 	}	
 }
 
@@ -582,7 +582,7 @@ protected class Parens_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele01Keyword();
+		return ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele01KeywordRightParenthesis();
 	}	
 }
 
@@ -603,7 +603,7 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("em");
 		if("!".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele10Keyword();
+			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele10KeywordExclamationMark();
 			return new Solution(obj);
 		}
 		return null;

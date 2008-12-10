@@ -11,57 +11,41 @@ import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class FileElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Assignment cAssignmentStuff;
-		private RuleCall c0ParserRuleCallStuff;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
+		private final Assignment cAssignmentStuff = (Assignment)rule.eContents().get(1);
+		private final RuleCall c0ParserRuleCallStuff = (RuleCall)cAssignmentStuff.eContents().get(0);
 		
 		// File : ( stuff += Stuff ) * ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(1)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// ( stuff += Stuff ) *
-		public Assignment eleAssignmentStuff() {
-			return (cAssignmentStuff != null) ? cAssignmentStuff : (cAssignmentStuff = (Assignment)getRule().eContents().get(1)); 
-		}
+		public Assignment eleAssignmentStuff() { return cAssignmentStuff; }
 
 		// Stuff
-		public RuleCall ele0ParserRuleCallStuff() {
-			return (c0ParserRuleCallStuff != null) ? c0ParserRuleCallStuff : (c0ParserRuleCallStuff = (RuleCall)eleAssignmentStuff().eContents().get(0)); 
-		}
+		public RuleCall ele0ParserRuleCallStuff() { return c0ParserRuleCallStuff; }
 	}
 
 	public class StuffElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private Keyword c0KeywordStuff;
-		private Assignment c1AssignmentName;
-		private RuleCall c10LexerRuleCallID;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword c0KeywordStuff = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
 		// Stuff : 'stuff' name = ID ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// 'stuff' name = ID
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// 'stuff'
-		public Keyword ele0KeywordStuff() {
-			return (c0KeywordStuff != null) ? c0KeywordStuff : (c0KeywordStuff = (Keyword)eleGroup().eContents().get(0)); 
-		}
+		public Keyword ele0KeywordStuff() { return c0KeywordStuff; }
 
 		// name = ID
-		public Assignment ele1AssignmentName() {
-			return (c1AssignmentName != null) ? c1AssignmentName : (c1AssignmentName = (Assignment)eleGroup().eContents().get(1)); 
-		}
+		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// ID
-		public RuleCall ele10LexerRuleCallID() {
-			return (c10LexerRuleCallID != null) ? c10LexerRuleCallID : (c10LexerRuleCallID = (RuleCall)ele1AssignmentName().eContents().get(0)); 
-		}
+		public RuleCall ele10LexerRuleCallID() { return c10LexerRuleCallID; }
 	}
 	
 	public final static TestLanguageGrammarAccess INSTANCE = new TestLanguageGrammarAccess();

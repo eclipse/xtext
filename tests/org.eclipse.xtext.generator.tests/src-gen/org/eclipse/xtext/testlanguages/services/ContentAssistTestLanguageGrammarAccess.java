@@ -11,246 +11,170 @@ import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 public class ContentAssistTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class StartElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private Group c0Group;
-		private Keyword c00KeywordAbstractRules;
-		private Assignment c01AssignmentRules;
-		private RuleCall c010ParserRuleCallAbstractRule;
-		private Keyword c1KeywordEnd;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group c0Group = (Group)cGroup.eContents().get(0);
+		private final Keyword c00KeywordAbstractRules = (Keyword)c0Group.eContents().get(0);
+		private final Assignment c01AssignmentRules = (Assignment)c0Group.eContents().get(1);
+		private final RuleCall c010ParserRuleCallAbstractRule = (RuleCall)c01AssignmentRules.eContents().get(0);
+		private final Keyword c1KeywordEnd = (Keyword)cGroup.eContents().get(1);
 		
 		// Start : 'abstract rules' ( rules += AbstractRule ) + 'end' ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(1)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// 'abstract rules' ( rules += AbstractRule ) + 'end'
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// 'abstract rules' ( rules += AbstractRule ) +
-		public Group ele0Group() {
-			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
-		}
+		public Group ele0Group() { return c0Group; }
 
 		// 'abstract rules'
-		public Keyword ele00KeywordAbstractRules() {
-			return (c00KeywordAbstractRules != null) ? c00KeywordAbstractRules : (c00KeywordAbstractRules = (Keyword)ele0Group().eContents().get(0)); 
-		}
+		public Keyword ele00KeywordAbstractRules() { return c00KeywordAbstractRules; }
 
 		// ( rules += AbstractRule ) +
-		public Assignment ele01AssignmentRules() {
-			return (c01AssignmentRules != null) ? c01AssignmentRules : (c01AssignmentRules = (Assignment)ele0Group().eContents().get(1)); 
-		}
+		public Assignment ele01AssignmentRules() { return c01AssignmentRules; }
 
 		// AbstractRule
-		public RuleCall ele010ParserRuleCallAbstractRule() {
-			return (c010ParserRuleCallAbstractRule != null) ? c010ParserRuleCallAbstractRule : (c010ParserRuleCallAbstractRule = (RuleCall)ele01AssignmentRules().eContents().get(0)); 
-		}
+		public RuleCall ele010ParserRuleCallAbstractRule() { return c010ParserRuleCallAbstractRule; }
 
 		// 'end'
-		public Keyword ele1KeywordEnd() {
-			return (c1KeywordEnd != null) ? c1KeywordEnd : (c1KeywordEnd = (Keyword)eleGroup().eContents().get(1)); 
-		}
+		public Keyword ele1KeywordEnd() { return c1KeywordEnd; }
 	}
 
 	public class AbstractRuleElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Alternatives cAlternatives;
-		private RuleCall c0ParserRuleCallFirstAbstractRuleChild;
-		private RuleCall c1ParserRuleCallSecondAbstractRuleChild;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall c0ParserRuleCallFirstAbstractRuleChild = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall c1ParserRuleCallSecondAbstractRuleChild = (RuleCall)cAlternatives.eContents().get(1);
 		
 		// AbstractRule : FirstAbstractRuleChild | SecondAbstractRuleChild ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// FirstAbstractRuleChild | SecondAbstractRuleChild
-		public Alternatives eleAlternatives() {
-			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(1)); 
-		}
+		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// FirstAbstractRuleChild
-		public RuleCall ele0ParserRuleCallFirstAbstractRuleChild() {
-			return (c0ParserRuleCallFirstAbstractRuleChild != null) ? c0ParserRuleCallFirstAbstractRuleChild : (c0ParserRuleCallFirstAbstractRuleChild = (RuleCall)eleAlternatives().eContents().get(0)); 
-		}
+		public RuleCall ele0ParserRuleCallFirstAbstractRuleChild() { return c0ParserRuleCallFirstAbstractRuleChild; }
 
 		// SecondAbstractRuleChild
-		public RuleCall ele1ParserRuleCallSecondAbstractRuleChild() {
-			return (c1ParserRuleCallSecondAbstractRuleChild != null) ? c1ParserRuleCallSecondAbstractRuleChild : (c1ParserRuleCallSecondAbstractRuleChild = (RuleCall)eleAlternatives().eContents().get(1)); 
-		}
+		public RuleCall ele1ParserRuleCallSecondAbstractRuleChild() { return c1ParserRuleCallSecondAbstractRuleChild; }
 	}
 
 	public class FirstAbstractRuleChildElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private Group c0Group;
-		private Group c00Group;
-		private Group c000Group;
-		private Assignment c0000AssignmentName;
-		private RuleCall c00000LexerRuleCallID;
-		private Keyword c0001Keyword;
-		private Assignment c001AssignmentElements;
-		private RuleCall c0010ParserRuleCallAbstractRule;
-		private Keyword c01Keyword;
-		private Keyword c1Keyword;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group c0Group = (Group)cGroup.eContents().get(0);
+		private final Group c00Group = (Group)c0Group.eContents().get(0);
+		private final Group c000Group = (Group)c00Group.eContents().get(0);
+		private final Assignment c0000AssignmentName = (Assignment)c000Group.eContents().get(0);
+		private final RuleCall c00000LexerRuleCallID = (RuleCall)c0000AssignmentName.eContents().get(0);
+		private final Keyword c0001KeywordLeftParenthesis = (Keyword)c000Group.eContents().get(1);
+		private final Assignment c001AssignmentElements = (Assignment)c00Group.eContents().get(1);
+		private final RuleCall c0010ParserRuleCallAbstractRule = (RuleCall)c001AssignmentElements.eContents().get(0);
+		private final Keyword c01KeywordRightParenthesis = (Keyword)c0Group.eContents().get(1);
+		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
 		// FirstAbstractRuleChild : name = ID '(' ( elements += AbstractRule ) + ')' ';' ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(3)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// name = ID '(' ( elements += AbstractRule ) + ')' ';'
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// name = ID '(' ( elements += AbstractRule ) + ')'
-		public Group ele0Group() {
-			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
-		}
+		public Group ele0Group() { return c0Group; }
 
 		// name = ID '(' ( elements += AbstractRule ) +
-		public Group ele00Group() {
-			return (c00Group != null) ? c00Group : (c00Group = (Group)ele0Group().eContents().get(0)); 
-		}
+		public Group ele00Group() { return c00Group; }
 
 		// name = ID '('
-		public Group ele000Group() {
-			return (c000Group != null) ? c000Group : (c000Group = (Group)ele00Group().eContents().get(0)); 
-		}
+		public Group ele000Group() { return c000Group; }
 
 		// name = ID
-		public Assignment ele0000AssignmentName() {
-			return (c0000AssignmentName != null) ? c0000AssignmentName : (c0000AssignmentName = (Assignment)ele000Group().eContents().get(0)); 
-		}
+		public Assignment ele0000AssignmentName() { return c0000AssignmentName; }
 
 		// ID
-		public RuleCall ele00000LexerRuleCallID() {
-			return (c00000LexerRuleCallID != null) ? c00000LexerRuleCallID : (c00000LexerRuleCallID = (RuleCall)ele0000AssignmentName().eContents().get(0)); 
-		}
+		public RuleCall ele00000LexerRuleCallID() { return c00000LexerRuleCallID; }
 
 		// '('
-		public Keyword ele0001Keyword() {
-			return (c0001Keyword != null) ? c0001Keyword : (c0001Keyword = (Keyword)ele000Group().eContents().get(1)); 
-		}
+		public Keyword ele0001KeywordLeftParenthesis() { return c0001KeywordLeftParenthesis; }
 
 		// ( elements += AbstractRule ) +
-		public Assignment ele001AssignmentElements() {
-			return (c001AssignmentElements != null) ? c001AssignmentElements : (c001AssignmentElements = (Assignment)ele00Group().eContents().get(1)); 
-		}
+		public Assignment ele001AssignmentElements() { return c001AssignmentElements; }
 
 		// AbstractRule
-		public RuleCall ele0010ParserRuleCallAbstractRule() {
-			return (c0010ParserRuleCallAbstractRule != null) ? c0010ParserRuleCallAbstractRule : (c0010ParserRuleCallAbstractRule = (RuleCall)ele001AssignmentElements().eContents().get(0)); 
-		}
+		public RuleCall ele0010ParserRuleCallAbstractRule() { return c0010ParserRuleCallAbstractRule; }
 
 		// ')'
-		public Keyword ele01Keyword() {
-			return (c01Keyword != null) ? c01Keyword : (c01Keyword = (Keyword)ele0Group().eContents().get(1)); 
-		}
+		public Keyword ele01KeywordRightParenthesis() { return c01KeywordRightParenthesis; }
 
 		// ';'
-		public Keyword ele1Keyword() {
-			return (c1Keyword != null) ? c1Keyword : (c1Keyword = (Keyword)eleGroup().eContents().get(1)); 
-		}
+		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
 	}
 
 	public class SecondAbstractRuleChildElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private Group c0Group;
-		private Group c00Group;
-		private Group c000Group;
-		private Assignment c0000AssignmentName;
-		private RuleCall c00000LexerRuleCallID;
-		private Keyword c0001KeywordRule;
-		private Keyword c001Keyword;
-		private Assignment c01AssignmentRule;
-		private RuleCall c010ParserRuleCallAbstractRuleCall;
-		private Keyword c1Keyword;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(4);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group c0Group = (Group)cGroup.eContents().get(0);
+		private final Group c00Group = (Group)c0Group.eContents().get(0);
+		private final Group c000Group = (Group)c00Group.eContents().get(0);
+		private final Assignment c0000AssignmentName = (Assignment)c000Group.eContents().get(0);
+		private final RuleCall c00000LexerRuleCallID = (RuleCall)c0000AssignmentName.eContents().get(0);
+		private final Keyword c0001KeywordRule = (Keyword)c000Group.eContents().get(1);
+		private final Keyword c001KeywordColon = (Keyword)c00Group.eContents().get(1);
+		private final Assignment c01AssignmentRule = (Assignment)c0Group.eContents().get(1);
+		private final RuleCall c010ParserRuleCallAbstractRuleCall = (RuleCall)c01AssignmentRule.eContents().get(0);
+		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
 		// SecondAbstractRuleChild : name = ID 'rule' ':' rule = AbstractRuleCall ';' ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(4)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// name = ID 'rule' ':' rule = AbstractRuleCall ';'
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// name = ID 'rule' ':' rule = AbstractRuleCall
-		public Group ele0Group() {
-			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
-		}
+		public Group ele0Group() { return c0Group; }
 
 		// name = ID 'rule' ':'
-		public Group ele00Group() {
-			return (c00Group != null) ? c00Group : (c00Group = (Group)ele0Group().eContents().get(0)); 
-		}
+		public Group ele00Group() { return c00Group; }
 
 		// name = ID 'rule'
-		public Group ele000Group() {
-			return (c000Group != null) ? c000Group : (c000Group = (Group)ele00Group().eContents().get(0)); 
-		}
+		public Group ele000Group() { return c000Group; }
 
 		// name = ID
-		public Assignment ele0000AssignmentName() {
-			return (c0000AssignmentName != null) ? c0000AssignmentName : (c0000AssignmentName = (Assignment)ele000Group().eContents().get(0)); 
-		}
+		public Assignment ele0000AssignmentName() { return c0000AssignmentName; }
 
 		// ID
-		public RuleCall ele00000LexerRuleCallID() {
-			return (c00000LexerRuleCallID != null) ? c00000LexerRuleCallID : (c00000LexerRuleCallID = (RuleCall)ele0000AssignmentName().eContents().get(0)); 
-		}
+		public RuleCall ele00000LexerRuleCallID() { return c00000LexerRuleCallID; }
 
 		// 'rule'
-		public Keyword ele0001KeywordRule() {
-			return (c0001KeywordRule != null) ? c0001KeywordRule : (c0001KeywordRule = (Keyword)ele000Group().eContents().get(1)); 
-		}
+		public Keyword ele0001KeywordRule() { return c0001KeywordRule; }
 
 		// ':'
-		public Keyword ele001Keyword() {
-			return (c001Keyword != null) ? c001Keyword : (c001Keyword = (Keyword)ele00Group().eContents().get(1)); 
-		}
+		public Keyword ele001KeywordColon() { return c001KeywordColon; }
 
 		// rule = AbstractRuleCall
-		public Assignment ele01AssignmentRule() {
-			return (c01AssignmentRule != null) ? c01AssignmentRule : (c01AssignmentRule = (Assignment)ele0Group().eContents().get(1)); 
-		}
+		public Assignment ele01AssignmentRule() { return c01AssignmentRule; }
 
 		// AbstractRuleCall
-		public RuleCall ele010ParserRuleCallAbstractRuleCall() {
-			return (c010ParserRuleCallAbstractRuleCall != null) ? c010ParserRuleCallAbstractRuleCall : (c010ParserRuleCallAbstractRuleCall = (RuleCall)ele01AssignmentRule().eContents().get(0)); 
-		}
+		public RuleCall ele010ParserRuleCallAbstractRuleCall() { return c010ParserRuleCallAbstractRuleCall; }
 
 		// ';'
-		public Keyword ele1Keyword() {
-			return (c1Keyword != null) ? c1Keyword : (c1Keyword = (Keyword)eleGroup().eContents().get(1)); 
-		}
+		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
 	}
 
 	public class AbstractRuleCallElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Assignment cAssignmentRule;
-		private CrossReference c0CrossReferenceAbstractRule;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
+		private final Assignment cAssignmentRule = (Assignment)rule.eContents().get(1);
+		private final CrossReference c0CrossReferenceAbstractRule = (CrossReference)cAssignmentRule.eContents().get(0);
 		
 		// AbstractRuleCall : rule = [ AbstractRule ] ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(5)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// rule = [ AbstractRule ]
-		public Assignment eleAssignmentRule() {
-			return (cAssignmentRule != null) ? cAssignmentRule : (cAssignmentRule = (Assignment)getRule().eContents().get(1)); 
-		}
+		public Assignment eleAssignmentRule() { return cAssignmentRule; }
 
 		// [ AbstractRule ]
-		public CrossReference ele0CrossReferenceAbstractRule() {
-			return (c0CrossReferenceAbstractRule != null) ? c0CrossReferenceAbstractRule : (c0CrossReferenceAbstractRule = (CrossReference)eleAssignmentRule().eContents().get(0)); 
-		}
+		public CrossReference ele0CrossReferenceAbstractRule() { return c0CrossReferenceAbstractRule; }
 	}
 	
 	public final static ContentAssistTestLanguageGrammarAccess INSTANCE = new ContentAssistTestLanguageGrammarAccess();

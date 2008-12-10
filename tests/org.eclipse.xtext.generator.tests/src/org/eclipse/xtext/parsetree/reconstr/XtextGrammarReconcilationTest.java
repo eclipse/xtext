@@ -40,6 +40,7 @@ public class XtextGrammarReconcilationTest extends AbstractGeneratorTest {
 
 		// check
 		assertFalse(model.equals(result));
-		assertEquals(model.toLowerCase(), result.toLowerCase());
+		String expectedModel = "language foo\n\nHONOLULU:\n  name=ID;";
+		assertEquals(expectedModel, result);
 	}
 }

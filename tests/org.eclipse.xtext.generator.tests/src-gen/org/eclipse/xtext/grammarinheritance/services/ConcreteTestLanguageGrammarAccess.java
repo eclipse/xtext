@@ -11,66 +11,46 @@ import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammar
 public class ConcreteTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class ConcreteParserRuleElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private Group c0Group;
-		private Group c00Group;
-		private Keyword c000KeywordModel;
-		private Assignment c001AssignmentMagicNumber;
-		private RuleCall c0010LexerRuleCallREAL;
-		private Keyword c01Keyword;
-		private Assignment c1AssignmentElements;
-		private RuleCall c10ParserRuleCallInheritedParserRule;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group c0Group = (Group)cGroup.eContents().get(0);
+		private final Group c00Group = (Group)c0Group.eContents().get(0);
+		private final Keyword c000KeywordModel = (Keyword)c00Group.eContents().get(0);
+		private final Assignment c001AssignmentMagicNumber = (Assignment)c00Group.eContents().get(1);
+		private final RuleCall c0010LexerRuleCallREAL = (RuleCall)c001AssignmentMagicNumber.eContents().get(0);
+		private final Keyword c01KeywordColon = (Keyword)c0Group.eContents().get(1);
+		private final Assignment c1AssignmentElements = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10ParserRuleCallInheritedParserRule = (RuleCall)c1AssignmentElements.eContents().get(0);
 		
 		// ConcreteParserRule : 'model' magicNumber = REAL ':' ( elements += InheritedParserRule ) * ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(1)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// 'model' magicNumber = REAL ':' ( elements += InheritedParserRule ) *
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// 'model' magicNumber = REAL ':'
-		public Group ele0Group() {
-			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
-		}
+		public Group ele0Group() { return c0Group; }
 
 		// 'model' magicNumber = REAL
-		public Group ele00Group() {
-			return (c00Group != null) ? c00Group : (c00Group = (Group)ele0Group().eContents().get(0)); 
-		}
+		public Group ele00Group() { return c00Group; }
 
 		// 'model'
-		public Keyword ele000KeywordModel() {
-			return (c000KeywordModel != null) ? c000KeywordModel : (c000KeywordModel = (Keyword)ele00Group().eContents().get(0)); 
-		}
+		public Keyword ele000KeywordModel() { return c000KeywordModel; }
 
 		// magicNumber = REAL
-		public Assignment ele001AssignmentMagicNumber() {
-			return (c001AssignmentMagicNumber != null) ? c001AssignmentMagicNumber : (c001AssignmentMagicNumber = (Assignment)ele00Group().eContents().get(1)); 
-		}
+		public Assignment ele001AssignmentMagicNumber() { return c001AssignmentMagicNumber; }
 
 		// REAL
-		public RuleCall ele0010LexerRuleCallREAL() {
-			return (c0010LexerRuleCallREAL != null) ? c0010LexerRuleCallREAL : (c0010LexerRuleCallREAL = (RuleCall)ele001AssignmentMagicNumber().eContents().get(0)); 
-		}
+		public RuleCall ele0010LexerRuleCallREAL() { return c0010LexerRuleCallREAL; }
 
 		// ':'
-		public Keyword ele01Keyword() {
-			return (c01Keyword != null) ? c01Keyword : (c01Keyword = (Keyword)ele0Group().eContents().get(1)); 
-		}
+		public Keyword ele01KeywordColon() { return c01KeywordColon; }
 
 		// ( elements += InheritedParserRule ) *
-		public Assignment ele1AssignmentElements() {
-			return (c1AssignmentElements != null) ? c1AssignmentElements : (c1AssignmentElements = (Assignment)eleGroup().eContents().get(1)); 
-		}
+		public Assignment ele1AssignmentElements() { return c1AssignmentElements; }
 
 		// InheritedParserRule
-		public RuleCall ele10ParserRuleCallInheritedParserRule() {
-			return (c10ParserRuleCallInheritedParserRule != null) ? c10ParserRuleCallInheritedParserRule : (c10ParserRuleCallInheritedParserRule = (RuleCall)ele1AssignmentElements().eContents().get(0)); 
-		}
+		public RuleCall ele10ParserRuleCallInheritedParserRule() { return c10ParserRuleCallInheritedParserRule; }
 	}
 	
 	public final static ConcreteTestLanguageGrammarAccess INSTANCE = new ConcreteTestLanguageGrammarAccess();

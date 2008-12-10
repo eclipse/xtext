@@ -827,7 +827,7 @@ protected class State_0_0_1_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FowlerDslGrammarAccess.INSTANCE.prState().ele001001Keyword();
+		return FowlerDslGrammarAccess.INSTANCE.prState().ele001001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -867,7 +867,7 @@ protected class State_0_0_1_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FowlerDslGrammarAccess.INSTANCE.prState().ele0011Keyword();
+		return FowlerDslGrammarAccess.INSTANCE.prState().ele0011KeywordRightCurlyBracket();
 	}	
 }
 
@@ -1014,7 +1014,7 @@ protected class Transition_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return FowlerDslGrammarAccess.INSTANCE.prTransition().ele01Keyword();
+		return FowlerDslGrammarAccess.INSTANCE.prTransition().ele01KeywordEqualsSignGreaterThanSign();
 	}	
 }
 

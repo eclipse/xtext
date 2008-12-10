@@ -11,63 +11,45 @@ import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 public class MultiGenMMTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class FooElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private Assignment c0AssignmentName;
-		private RuleCall c00LexerRuleCallID;
-		private Assignment c1AssignmentNameRefs;
-		private RuleCall c10ParserRuleCallNameRef;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment c0AssignmentName = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall c00LexerRuleCallID = (RuleCall)c0AssignmentName.eContents().get(0);
+		private final Assignment c1AssignmentNameRefs = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10ParserRuleCallNameRef = (RuleCall)c1AssignmentNameRefs.eContents().get(0);
 		
 		// Foo : name = ID ( nameRefs += NameRef ) * ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// name = ID ( nameRefs += NameRef ) *
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// name = ID
-		public Assignment ele0AssignmentName() {
-			return (c0AssignmentName != null) ? c0AssignmentName : (c0AssignmentName = (Assignment)eleGroup().eContents().get(0)); 
-		}
+		public Assignment ele0AssignmentName() { return c0AssignmentName; }
 
 		// ID
-		public RuleCall ele00LexerRuleCallID() {
-			return (c00LexerRuleCallID != null) ? c00LexerRuleCallID : (c00LexerRuleCallID = (RuleCall)ele0AssignmentName().eContents().get(0)); 
-		}
+		public RuleCall ele00LexerRuleCallID() { return c00LexerRuleCallID; }
 
 		// ( nameRefs += NameRef ) *
-		public Assignment ele1AssignmentNameRefs() {
-			return (c1AssignmentNameRefs != null) ? c1AssignmentNameRefs : (c1AssignmentNameRefs = (Assignment)eleGroup().eContents().get(1)); 
-		}
+		public Assignment ele1AssignmentNameRefs() { return c1AssignmentNameRefs; }
 
 		// NameRef
-		public RuleCall ele10ParserRuleCallNameRef() {
-			return (c10ParserRuleCallNameRef != null) ? c10ParserRuleCallNameRef : (c10ParserRuleCallNameRef = (RuleCall)ele1AssignmentNameRefs().eContents().get(0)); 
-		}
+		public RuleCall ele10ParserRuleCallNameRef() { return c10ParserRuleCallNameRef; }
 	}
 
 	public class NameRefElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Assignment cAssignmentName;
-		private RuleCall c0LexerRuleCallSTRING;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
+		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
+		private final RuleCall c0LexerRuleCallSTRING = (RuleCall)cAssignmentName.eContents().get(0);
 		
 		// NameRef returns FooBar : name = STRING ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(3)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// name = STRING
-		public Assignment eleAssignmentName() {
-			return (cAssignmentName != null) ? cAssignmentName : (cAssignmentName = (Assignment)getRule().eContents().get(1)); 
-		}
+		public Assignment eleAssignmentName() { return cAssignmentName; }
 
 		// STRING
-		public RuleCall ele0LexerRuleCallSTRING() {
-			return (c0LexerRuleCallSTRING != null) ? c0LexerRuleCallSTRING : (c0LexerRuleCallSTRING = (RuleCall)eleAssignmentName().eContents().get(0)); 
-		}
+		public RuleCall ele0LexerRuleCallSTRING() { return c0LexerRuleCallSTRING; }
 	}
 	
 	public final static MultiGenMMTestLanguageGrammarAccess INSTANCE = new MultiGenMMTestLanguageGrammarAccess();

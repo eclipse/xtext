@@ -11,57 +11,41 @@ import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 public class OptionalEmptyTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class ModelElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Assignment cAssignmentChild;
-		private RuleCall c0ParserRuleCallGreeting;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
+		private final Assignment cAssignmentChild = (Assignment)rule.eContents().get(1);
+		private final RuleCall c0ParserRuleCallGreeting = (RuleCall)cAssignmentChild.eContents().get(0);
 		
 		// Model : ( child = Greeting ) ? ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(1)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// ( child = Greeting ) ?
-		public Assignment eleAssignmentChild() {
-			return (cAssignmentChild != null) ? cAssignmentChild : (cAssignmentChild = (Assignment)getRule().eContents().get(1)); 
-		}
+		public Assignment eleAssignmentChild() { return cAssignmentChild; }
 
 		// Greeting
-		public RuleCall ele0ParserRuleCallGreeting() {
-			return (c0ParserRuleCallGreeting != null) ? c0ParserRuleCallGreeting : (c0ParserRuleCallGreeting = (RuleCall)eleAssignmentChild().eContents().get(0)); 
-		}
+		public RuleCall ele0ParserRuleCallGreeting() { return c0ParserRuleCallGreeting; }
 	}
 
 	public class GreetingElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private Keyword c0KeywordHallo;
-		private Assignment c1AssignmentName;
-		private RuleCall c10LexerRuleCallID;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword c0KeywordHallo = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
 		// Greeting : 'hallo' name = ID ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// 'hallo' name = ID
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// 'hallo'
-		public Keyword ele0KeywordHallo() {
-			return (c0KeywordHallo != null) ? c0KeywordHallo : (c0KeywordHallo = (Keyword)eleGroup().eContents().get(0)); 
-		}
+		public Keyword ele0KeywordHallo() { return c0KeywordHallo; }
 
 		// name = ID
-		public Assignment ele1AssignmentName() {
-			return (c1AssignmentName != null) ? c1AssignmentName : (c1AssignmentName = (Assignment)eleGroup().eContents().get(1)); 
-		}
+		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// ID
-		public RuleCall ele10LexerRuleCallID() {
-			return (c10LexerRuleCallID != null) ? c10LexerRuleCallID : (c10LexerRuleCallID = (RuleCall)ele1AssignmentName().eContents().get(0)); 
-		}
+		public RuleCall ele10LexerRuleCallID() { return c10LexerRuleCallID; }
 	}
 	
 	public final static OptionalEmptyTestLanguageGrammarAccess INSTANCE = new OptionalEmptyTestLanguageGrammarAccess();

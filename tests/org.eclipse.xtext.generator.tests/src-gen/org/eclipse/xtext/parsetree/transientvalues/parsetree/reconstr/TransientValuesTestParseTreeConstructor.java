@@ -440,7 +440,7 @@ protected class TestOptional_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return TransientValuesTestGrammarAccess.INSTANCE.prTestOptional().ele10Keyword();
+		return TransientValuesTestGrammarAccess.INSTANCE.prTestOptional().ele10KeywordColon();
 	}	
 }
 

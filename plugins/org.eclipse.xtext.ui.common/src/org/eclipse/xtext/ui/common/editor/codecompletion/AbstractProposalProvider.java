@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.codecompletion;
 
 import java.util.ArrayList;
@@ -25,7 +32,6 @@ import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.crossref.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.resource.XtextResource;
@@ -52,16 +58,6 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 	@Inject
 	protected ILinkingCandidatesService linkingCandidatesService;
-
-	protected SimpleAttributeResolver<String> nameResolver;
-	
-	protected SimpleAttributeResolver<String> createNameResolver() {
-		return SimpleAttributeResolver.newResolver(String.class, "name");
-	}
-	
-	public AbstractProposalProvider() {
-		nameResolver = createNameResolver();
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -145,7 +141,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	}
 
 	/**
-	 * @return the default integer value for ecore::EInt <code>RuleCall<>
+	 * @return the default integer value for ecore::EInt <code>RuleCall<></code>
 	 */
 	protected int getDefaultIntegerValue() {
 		return 0;
@@ -192,8 +188,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 			
 			Iterable<IScopedElement> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
 			
-			String trimmedPrefix = prefix.trim();
-			
+			final String trimmedPrefix = prefix.trim();
 			for (IScopedElement candidate : candidates) {
 				if (candidate.name() != null && isCandidateMatchingPrefix(model, ref, candidate, trimmedPrefix)) {
 					completionProposalList.add(
@@ -206,13 +201,11 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	}
 	
 	protected boolean isCandidateMatchingPrefix(EObject model, EReference ref, IScopedElement candidate, String prefix) {
-		return Strings.emptyIfNull(candidate.name()).regionMatches(true, 0, prefix, 0, prefix.length());
+		if (candidate.name() == null)
+			throw new IllegalArgumentException("unnamed candidates may not be proposed");
+		return candidate.name().regionMatches(true, 0, prefix, 0, prefix.length());
 	}
 	
-	protected String getLabel(EObject candidate, EReference ref, EObject context) {
-		return nameResolver.getValue(candidate);
-	}
-
 	/**
 	 * @return a new <code>XtextCompletionProposal</code> for the given text and offset.
 	 */

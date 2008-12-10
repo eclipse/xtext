@@ -11,102 +11,72 @@ import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 public class ActionTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class ModelElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Assignment cAssignmentChildren;
-		private RuleCall c0ParserRuleCallElement;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
+		private final Assignment cAssignmentChildren = (Assignment)rule.eContents().get(1);
+		private final RuleCall c0ParserRuleCallElement = (RuleCall)cAssignmentChildren.eContents().get(0);
 		
 		// Model : ( children += Element ) * ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(1)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// ( children += Element ) *
-		public Assignment eleAssignmentChildren() {
-			return (cAssignmentChildren != null) ? cAssignmentChildren : (cAssignmentChildren = (Assignment)getRule().eContents().get(1)); 
-		}
+		public Assignment eleAssignmentChildren() { return cAssignmentChildren; }
 
 		// Element
-		public RuleCall ele0ParserRuleCallElement() {
-			return (c0ParserRuleCallElement != null) ? c0ParserRuleCallElement : (c0ParserRuleCallElement = (RuleCall)eleAssignmentChildren().eContents().get(0)); 
-		}
+		public RuleCall ele0ParserRuleCallElement() { return c0ParserRuleCallElement; }
 	}
 
 	public class ElementElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private RuleCall c0ParserRuleCallItem;
-		private Group c1Group;
-		private Action c10ActionItemitems;
-		private Assignment c11AssignmentItems;
-		private RuleCall c110ParserRuleCallItem;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall c0ParserRuleCallItem = (RuleCall)cGroup.eContents().get(0);
+		private final Group c1Group = (Group)cGroup.eContents().get(1);
+		private final Action c10ActionItemitems = (Action)c1Group.eContents().get(0);
+		private final Assignment c11AssignmentItems = (Assignment)c1Group.eContents().get(1);
+		private final RuleCall c110ParserRuleCallItem = (RuleCall)c11AssignmentItems.eContents().get(0);
 		
 		// Element returns Type : Item ( { current = Item . items += current } items += Item ) ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// Item ( { current = Item . items += current } items += Item )
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// Item
-		public RuleCall ele0ParserRuleCallItem() {
-			return (c0ParserRuleCallItem != null) ? c0ParserRuleCallItem : (c0ParserRuleCallItem = (RuleCall)eleGroup().eContents().get(0)); 
-		}
+		public RuleCall ele0ParserRuleCallItem() { return c0ParserRuleCallItem; }
 
 		// { current = Item . items += current } items += Item
-		public Group ele1Group() {
-			return (c1Group != null) ? c1Group : (c1Group = (Group)eleGroup().eContents().get(1)); 
-		}
+		public Group ele1Group() { return c1Group; }
 
 		// { current = Item . items += current }
-		public Action ele10ActionItemitems() {
-			return (c10ActionItemitems != null) ? c10ActionItemitems : (c10ActionItemitems = (Action)ele1Group().eContents().get(0)); 
-		}
+		public Action ele10ActionItemitems() { return c10ActionItemitems; }
 
 		// items += Item
-		public Assignment ele11AssignmentItems() {
-			return (c11AssignmentItems != null) ? c11AssignmentItems : (c11AssignmentItems = (Assignment)ele1Group().eContents().get(1)); 
-		}
+		public Assignment ele11AssignmentItems() { return c11AssignmentItems; }
 
 		// Item
-		public RuleCall ele110ParserRuleCallItem() {
-			return (c110ParserRuleCallItem != null) ? c110ParserRuleCallItem : (c110ParserRuleCallItem = (RuleCall)ele11AssignmentItems().eContents().get(0)); 
-		}
+		public RuleCall ele110ParserRuleCallItem() { return c110ParserRuleCallItem; }
 	}
 
 	public class ItemElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private Action c0ActionThingcontent;
-		private Assignment c1AssignmentName;
-		private RuleCall c10LexerRuleCallID;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action c0ActionThingcontent = (Action)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentName = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentName.eContents().get(0);
 		
 		// Item returns Type : { current = Thing . content = current } name = ID ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(3)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// { current = Thing . content = current } name = ID
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// { current = Thing . content = current }
-		public Action ele0ActionThingcontent() {
-			return (c0ActionThingcontent != null) ? c0ActionThingcontent : (c0ActionThingcontent = (Action)eleGroup().eContents().get(0)); 
-		}
+		public Action ele0ActionThingcontent() { return c0ActionThingcontent; }
 
 		// name = ID
-		public Assignment ele1AssignmentName() {
-			return (c1AssignmentName != null) ? c1AssignmentName : (c1AssignmentName = (Assignment)eleGroup().eContents().get(1)); 
-		}
+		public Assignment ele1AssignmentName() { return c1AssignmentName; }
 
 		// ID
-		public RuleCall ele10LexerRuleCallID() {
-			return (c10LexerRuleCallID != null) ? c10LexerRuleCallID : (c10LexerRuleCallID = (RuleCall)ele1AssignmentName().eContents().get(0)); 
-		}
+		public RuleCall ele10LexerRuleCallID() { return c10LexerRuleCallID; }
 	}
 	
 	public final static ActionTestLanguageGrammarAccess INSTANCE = new ActionTestLanguageGrammarAccess();

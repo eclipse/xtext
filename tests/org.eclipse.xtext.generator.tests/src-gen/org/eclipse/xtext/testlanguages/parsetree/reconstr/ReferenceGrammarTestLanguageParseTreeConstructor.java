@@ -250,7 +250,7 @@ protected class Spielplatz_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele001Keyword();
+		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -442,7 +442,7 @@ protected class Spielplatz_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele1Keyword();
+		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielplatz().ele1KeywordRightCurlyBracket();
 	}	
 }
 
@@ -655,7 +655,7 @@ protected class Kind_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele0001Keyword();
+		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele0001KeywordLeftParenthesis();
 	}	
 }
 
@@ -716,7 +716,7 @@ protected class Kind_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele1Keyword();
+		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prKind().ele1KeywordRightParenthesis();
 	}	
 }
 
@@ -862,7 +862,7 @@ protected class Erwachsener_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele0001Keyword();
+		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele0001KeywordLeftParenthesis();
 	}	
 }
 
@@ -923,7 +923,7 @@ protected class Erwachsener_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele1Keyword();
+		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prErwachsener().ele1KeywordRightParenthesis();
 	}	
 }
 
@@ -1069,7 +1069,7 @@ protected class Spielzeug_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele0001Keyword();
+		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele0001KeywordLeftParenthesis();
 	}	
 }
 
@@ -1135,7 +1135,7 @@ protected class Spielzeug_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele1Keyword();
+		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prSpielzeug().ele1KeywordRightParenthesis();
 	}	
 }
 
@@ -1488,7 +1488,7 @@ protected class Familie_0_0_0_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele0000001Keyword();
+		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele0000001KeywordLeftParenthesis();
 	}	
 }
 
@@ -1644,7 +1644,7 @@ protected class Familie_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele010Keyword();
+		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele010KeywordComma();
 	}	
 }
 
@@ -1684,7 +1684,7 @@ protected class Familie_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele1Keyword();
+		return ReferenceGrammarTestLanguageGrammarAccess.INSTANCE.prFamilie().ele1KeywordRightParenthesis();
 	}	
 }
 

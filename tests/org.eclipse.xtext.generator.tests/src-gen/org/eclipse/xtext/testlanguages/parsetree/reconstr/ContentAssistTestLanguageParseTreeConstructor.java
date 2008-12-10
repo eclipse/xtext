@@ -369,7 +369,7 @@ protected class FirstAbstractRuleChild_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele0001Keyword();
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele0001KeywordLeftParenthesis();
 	}	
 }
 
@@ -411,7 +411,7 @@ protected class FirstAbstractRuleChild_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele01Keyword();
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele01KeywordRightParenthesis();
 	}	
 }
 
@@ -424,7 +424,7 @@ protected class FirstAbstractRuleChild_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele1Keyword();
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prFirstAbstractRuleChild().ele1KeywordSemicolon();
 	}	
 }
 
@@ -594,7 +594,7 @@ protected class SecondAbstractRuleChild_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele001Keyword();
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele001KeywordColon();
 	}	
 }
 
@@ -636,7 +636,7 @@ protected class SecondAbstractRuleChild_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele1Keyword();
+		return ContentAssistTestLanguageGrammarAccess.INSTANCE.prSecondAbstractRuleChild().ele1KeywordSemicolon();
 	}	
 }
 

@@ -273,7 +273,7 @@ protected class Node_0_0_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele000001Keyword();
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele000001KeywordLeftParenthesis();
 	}	
 }
 
@@ -310,7 +310,7 @@ protected class Node_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele0001Keyword();
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele0001KeywordRightParenthesis();
 	}	
 }
 
@@ -323,7 +323,7 @@ protected class Node_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele001Keyword();
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -365,7 +365,7 @@ protected class Node_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele1Keyword();
+		return TreeTestLanguageGrammarAccess.INSTANCE.prNode().ele1KeywordRightCurlyBracketSemicolon();
 	}	
 }
 
