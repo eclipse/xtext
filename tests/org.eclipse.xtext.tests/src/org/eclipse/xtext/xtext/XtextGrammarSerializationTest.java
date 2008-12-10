@@ -35,9 +35,9 @@ public class XtextGrammarSerializationTest extends AbstractGeneratorTest {
 		final String model = "language foo\n"
 			+ "generate mm \"http://bar\" as fooMM\n"
 			+ "StartRule returns T: name=ID;";
-		final String expectedModel = "language foo\n"
-			+ "generate mm 'http://bar' as fooMM\n"
-			+ "StartRule returns T: name=ID;";
+		final String expectedModel = "language foo\n" + "\n"
+			+ "generate mm 'http://bar' as fooMM\n" + "\n"
+			+ "StartRule returns T:\n" + "  name=ID;";
 		doTestSerialization(model, expectedModel);
 	}
 
@@ -59,12 +59,12 @@ public class XtextGrammarSerializationTest extends AbstractGeneratorTest {
 			+ "Foo : name=ID (nameRefs+=NameRef)*;\n"
 			+ "NameRef returns xtext::RuleCall : rule=[ParserRule];\n"
 			+ "MyRule returns xtext::ParserRule : name=ID;";
-		final String expectedModel = "language foo\n" 
+		final String expectedModel = "language foo\n" + "\n"
 			+ "import 'http://www.eclipse.org/2008/Xtext' as xtext\n"
-			+ "generate mm 'http://bar' as fooMM\n"
-			+ "Foo : name=ID (nameRefs+=NameRef)*;\n"
-			+ "NameRef returns RuleCall : rule=[ParserRule];\n"
-			+ "MyRule returns ParserRule : name=ID;";
+			+ "\n" + "generate mm 'http://bar' as fooMM\n" + "\n"
+			+ "Foo:\n" + "  name=ID (nameRefs+=NameRef)*;\n" + "\n"
+			+ "NameRef returns RuleCall:\n" + "  rule=[ParserRule];\n"
+			+ "\n" + "MyRule returns ParserRule:\n" + "  name=ID;";
 		doTestSerialization(model, expectedModel);
 	}
 

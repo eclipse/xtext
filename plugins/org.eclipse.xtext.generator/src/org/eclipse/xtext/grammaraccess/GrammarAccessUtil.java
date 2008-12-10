@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.grammaraccess;
 
 import org.eclipse.emf.ecore.EObject;
@@ -42,6 +49,23 @@ public class GrammarAccessUtil {
 		return "";
 	}
 
+	private static String getElementJavaDescription(AbstractElement ele) {
+		String name = getElementDescription(ele);
+		if (name == null || "".equals(name))
+			return "";
+		String jName = toJavaIdentifier(name, true);
+		if (jName == null || "".equals(jName)) {
+			StringBuffer b = new StringBuffer();
+			for (char c : name.toCharArray()) {
+				String n = UnicodeCharacterDatabaseNames.getCharacterName(c);
+				if (n != null)
+					b.append(n + " ");
+			}
+			return toJavaIdentifier(b.toString().toLowerCase().trim(), true);
+		}
+		return jName;
+	}
+
 	private static String getElementPath(AbstractElement ele) {
 		EObject obj = ele;
 		StringBuffer buf = new StringBuffer();
@@ -81,7 +105,7 @@ public class GrammarAccessUtil {
 		StringBuffer r = new StringBuffer();
 		r.append(getElementPath(ele));
 		r.append(getElementTypeDescription(ele));
-		r.append(toJavaIdentifier(getElementDescription(ele), true));
+		r.append(getElementJavaDescription(ele));
 		return r.toString();
 	}
 
