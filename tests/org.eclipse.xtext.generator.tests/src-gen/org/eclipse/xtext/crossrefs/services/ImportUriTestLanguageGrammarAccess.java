@@ -11,138 +11,96 @@ import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class MainElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private Assignment c0AssignmentImports;
-		private RuleCall c00ParserRuleCallImport;
-		private Assignment c1AssignmentTypes;
-		private RuleCall c10ParserRuleCallType;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment c0AssignmentImports = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall c00ParserRuleCallImport = (RuleCall)c0AssignmentImports.eContents().get(0);
+		private final Assignment c1AssignmentTypes = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10ParserRuleCallType = (RuleCall)c1AssignmentTypes.eContents().get(0);
 		
 		// Main : ( imports += Import ) * ( types += Type ) * ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(1)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// ( imports += Import ) * ( types += Type ) *
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// ( imports += Import ) *
-		public Assignment ele0AssignmentImports() {
-			return (c0AssignmentImports != null) ? c0AssignmentImports : (c0AssignmentImports = (Assignment)eleGroup().eContents().get(0)); 
-		}
+		public Assignment ele0AssignmentImports() { return c0AssignmentImports; }
 
 		// Import
-		public RuleCall ele00ParserRuleCallImport() {
-			return (c00ParserRuleCallImport != null) ? c00ParserRuleCallImport : (c00ParserRuleCallImport = (RuleCall)ele0AssignmentImports().eContents().get(0)); 
-		}
+		public RuleCall ele00ParserRuleCallImport() { return c00ParserRuleCallImport; }
 
 		// ( types += Type ) *
-		public Assignment ele1AssignmentTypes() {
-			return (c1AssignmentTypes != null) ? c1AssignmentTypes : (c1AssignmentTypes = (Assignment)eleGroup().eContents().get(1)); 
-		}
+		public Assignment ele1AssignmentTypes() { return c1AssignmentTypes; }
 
 		// Type
-		public RuleCall ele10ParserRuleCallType() {
-			return (c10ParserRuleCallType != null) ? c10ParserRuleCallType : (c10ParserRuleCallType = (RuleCall)ele1AssignmentTypes().eContents().get(0)); 
-		}
+		public RuleCall ele10ParserRuleCallType() { return c10ParserRuleCallType; }
 	}
 
 	public class ImportElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private Keyword c0KeywordImport;
-		private Assignment c1AssignmentImportURI;
-		private RuleCall c10LexerRuleCallSTRING;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword c0KeywordImport = (Keyword)cGroup.eContents().get(0);
+		private final Assignment c1AssignmentImportURI = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall c10LexerRuleCallSTRING = (RuleCall)c1AssignmentImportURI.eContents().get(0);
 		
 		// Import : 'import' importURI = STRING ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// 'import' importURI = STRING
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// 'import'
-		public Keyword ele0KeywordImport() {
-			return (c0KeywordImport != null) ? c0KeywordImport : (c0KeywordImport = (Keyword)eleGroup().eContents().get(0)); 
-		}
+		public Keyword ele0KeywordImport() { return c0KeywordImport; }
 
 		// importURI = STRING
-		public Assignment ele1AssignmentImportURI() {
-			return (c1AssignmentImportURI != null) ? c1AssignmentImportURI : (c1AssignmentImportURI = (Assignment)eleGroup().eContents().get(1)); 
-		}
+		public Assignment ele1AssignmentImportURI() { return c1AssignmentImportURI; }
 
 		// STRING
-		public RuleCall ele10LexerRuleCallSTRING() {
-			return (c10LexerRuleCallSTRING != null) ? c10LexerRuleCallSTRING : (c10LexerRuleCallSTRING = (RuleCall)ele1AssignmentImportURI().eContents().get(0)); 
-		}
+		public RuleCall ele10LexerRuleCallSTRING() { return c10LexerRuleCallSTRING; }
 	}
 
 	public class TypeElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private Group c0Group;
-		private Group c00Group;
-		private Keyword c000KeywordType;
-		private Assignment c001AssignmentName;
-		private RuleCall c0010LexerRuleCallID;
-		private Keyword c01KeywordExtends;
-		private Assignment c1AssignmentExtends;
-		private CrossReference c10CrossReferenceType;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group c0Group = (Group)cGroup.eContents().get(0);
+		private final Group c00Group = (Group)c0Group.eContents().get(0);
+		private final Keyword c000KeywordType = (Keyword)c00Group.eContents().get(0);
+		private final Assignment c001AssignmentName = (Assignment)c00Group.eContents().get(1);
+		private final RuleCall c0010LexerRuleCallID = (RuleCall)c001AssignmentName.eContents().get(0);
+		private final Keyword c01KeywordExtends = (Keyword)c0Group.eContents().get(1);
+		private final Assignment c1AssignmentExtends = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference c10CrossReferenceType = (CrossReference)c1AssignmentExtends.eContents().get(0);
 		
 		// Type : 'type' name = ID 'extends' ^extends = [ Type ] ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(3)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// 'type' name = ID 'extends' ^extends = [ Type ]
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// 'type' name = ID 'extends'
-		public Group ele0Group() {
-			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
-		}
+		public Group ele0Group() { return c0Group; }
 
 		// 'type' name = ID
-		public Group ele00Group() {
-			return (c00Group != null) ? c00Group : (c00Group = (Group)ele0Group().eContents().get(0)); 
-		}
+		public Group ele00Group() { return c00Group; }
 
 		// 'type'
-		public Keyword ele000KeywordType() {
-			return (c000KeywordType != null) ? c000KeywordType : (c000KeywordType = (Keyword)ele00Group().eContents().get(0)); 
-		}
+		public Keyword ele000KeywordType() { return c000KeywordType; }
 
 		// name = ID
-		public Assignment ele001AssignmentName() {
-			return (c001AssignmentName != null) ? c001AssignmentName : (c001AssignmentName = (Assignment)ele00Group().eContents().get(1)); 
-		}
+		public Assignment ele001AssignmentName() { return c001AssignmentName; }
 
 		// ID
-		public RuleCall ele0010LexerRuleCallID() {
-			return (c0010LexerRuleCallID != null) ? c0010LexerRuleCallID : (c0010LexerRuleCallID = (RuleCall)ele001AssignmentName().eContents().get(0)); 
-		}
+		public RuleCall ele0010LexerRuleCallID() { return c0010LexerRuleCallID; }
 
 		// 'extends'
-		public Keyword ele01KeywordExtends() {
-			return (c01KeywordExtends != null) ? c01KeywordExtends : (c01KeywordExtends = (Keyword)ele0Group().eContents().get(1)); 
-		}
+		public Keyword ele01KeywordExtends() { return c01KeywordExtends; }
 
 		// ^extends = [ Type ]
-		public Assignment ele1AssignmentExtends() {
-			return (c1AssignmentExtends != null) ? c1AssignmentExtends : (c1AssignmentExtends = (Assignment)eleGroup().eContents().get(1)); 
-		}
+		public Assignment ele1AssignmentExtends() { return c1AssignmentExtends; }
 
 		// [ Type ]
-		public CrossReference ele10CrossReferenceType() {
-			return (c10CrossReferenceType != null) ? c10CrossReferenceType : (c10CrossReferenceType = (CrossReference)ele1AssignmentExtends().eContents().get(0)); 
-		}
+		public CrossReference ele10CrossReferenceType() { return c10CrossReferenceType; }
 	}
 	
 	public final static ImportUriTestLanguageGrammarAccess INSTANCE = new ImportUriTestLanguageGrammarAccess();

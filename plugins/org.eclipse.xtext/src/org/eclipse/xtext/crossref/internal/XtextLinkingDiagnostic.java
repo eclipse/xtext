@@ -27,7 +27,6 @@ public class XtextLinkingDiagnostic implements XtextResource.Diagnostic{
 		this.node = linkInformation;
 		this.message = message;
 	}
-	
 
 	public int getLength() {
 		return node.getLength();

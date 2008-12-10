@@ -310,7 +310,7 @@ protected class Grammar_0_0_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele00010Keyword();
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele00010KeywordFullStop();
 	}	
 }
 
@@ -467,7 +467,7 @@ protected class Grammar_0_0_1_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prGrammar().ele00110Keyword();
+		return XtextGrammarAccess.INSTANCE.prGrammar().ele00110KeywordFullStop();
 	}	
 }
 
@@ -1370,7 +1370,7 @@ protected class LexerRule_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prLexerRule().ele001Keyword();
+		return XtextGrammarAccess.INSTANCE.prLexerRule().ele001KeywordColon();
 	}	
 }
 
@@ -1407,7 +1407,7 @@ protected class LexerRule_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prLexerRule().ele1Keyword();
+		return XtextGrammarAccess.INSTANCE.prLexerRule().ele1KeywordSemicolon();
 	}	
 }
 
@@ -1634,7 +1634,7 @@ protected class ParserRule_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prParserRule().ele001Keyword();
+		return XtextGrammarAccess.INSTANCE.prParserRule().ele001KeywordColon();
 	}	
 }
 
@@ -1676,7 +1676,7 @@ protected class ParserRule_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prParserRule().ele1Keyword();
+		return XtextGrammarAccess.INSTANCE.prParserRule().ele1KeywordSemicolon();
 	}	
 }
 
@@ -1780,7 +1780,7 @@ protected class TypeRef_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prTypeRef().ele01Keyword();
+		return XtextGrammarAccess.INSTANCE.prTypeRef().ele01KeywordColonColon();
 	}	
 }
 
@@ -1951,7 +1951,7 @@ protected class Alternatives_1_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prAlternatives().ele101Keyword();
+		return XtextGrammarAccess.INSTANCE.prAlternatives().ele101KeywordVerticalLine();
 	}	
 }
 
@@ -2270,17 +2270,17 @@ protected class AbstractToken_1_Assignment_cardinality extends AssignmentToken  
 		IInstanceDescription obj = current.cloneAndConsume("cardinality");
 		if("?".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = XtextGrammarAccess.INSTANCE.prAbstractToken().ele1000Keyword();
+			element = XtextGrammarAccess.INSTANCE.prAbstractToken().ele1000KeywordQuestionMark();
 			return new Solution(obj);
 		}
 		if("*".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = XtextGrammarAccess.INSTANCE.prAbstractToken().ele1001Keyword();
+			element = XtextGrammarAccess.INSTANCE.prAbstractToken().ele1001KeywordAsterisk();
 			return new Solution(obj);
 		}
 		if("+".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = XtextGrammarAccess.INSTANCE.prAbstractToken().ele101Keyword();
+			element = XtextGrammarAccess.INSTANCE.prAbstractToken().ele101KeywordPlusSign();
 			return new Solution(obj);
 		}
 		return null;
@@ -2392,17 +2392,17 @@ protected class Assignment_0_1_Assignment_operator extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("operator");
 		if("+=".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = XtextGrammarAccess.INSTANCE.prAssignment().ele01000Keyword();
+			element = XtextGrammarAccess.INSTANCE.prAssignment().ele01000KeywordPlusSignEqualsSign();
 			return new Solution(obj);
 		}
 		if("=".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = XtextGrammarAccess.INSTANCE.prAssignment().ele01001Keyword();
+			element = XtextGrammarAccess.INSTANCE.prAssignment().ele01001KeywordEqualsSign();
 			return new Solution(obj);
 		}
 		if("?=".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = XtextGrammarAccess.INSTANCE.prAssignment().ele0101Keyword();
+			element = XtextGrammarAccess.INSTANCE.prAssignment().ele0101KeywordQuestionMarkEqualsSign();
 			return new Solution(obj);
 		}
 		return null;
@@ -2652,7 +2652,7 @@ protected class Action_0_0_0_0_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prAction().ele0000000Keyword();
+		return XtextGrammarAccess.INSTANCE.prAction().ele0000000KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -2704,7 +2704,7 @@ protected class Action_0_0_0_0_0_0_1_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prAction().ele00000011Keyword();
+		return XtextGrammarAccess.INSTANCE.prAction().ele00000011KeywordEqualsSign();
 	}	
 }
 
@@ -2747,7 +2747,7 @@ protected class Action_0_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prAction().ele00001Keyword();
+		return XtextGrammarAccess.INSTANCE.prAction().ele00001KeywordFullStop();
 	}	
 }
 
@@ -2792,12 +2792,12 @@ protected class Action_0_0_1_Assignment_operator extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("operator");
 		if("=".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = XtextGrammarAccess.INSTANCE.prAction().ele00100Keyword();
+			element = XtextGrammarAccess.INSTANCE.prAction().ele00100KeywordEqualsSign();
 			return new Solution(obj);
 		}
 		if("+=".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = XtextGrammarAccess.INSTANCE.prAction().ele00101Keyword();
+			element = XtextGrammarAccess.INSTANCE.prAction().ele00101KeywordPlusSignEqualsSign();
 			return new Solution(obj);
 		}
 		return null;
@@ -2826,7 +2826,7 @@ protected class Action_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prAction().ele1Keyword();
+		return XtextGrammarAccess.INSTANCE.prAction().ele1KeywordRightCurlyBracket();
 	}	
 }
 
@@ -3079,7 +3079,7 @@ protected class CrossReference_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prCrossReference().ele000Keyword();
+		return XtextGrammarAccess.INSTANCE.prCrossReference().ele000KeywordLeftSquareBracket();
 	}	
 }
 
@@ -3148,7 +3148,7 @@ protected class CrossReference_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prCrossReference().ele010Keyword();
+		return XtextGrammarAccess.INSTANCE.prCrossReference().ele010KeywordVerticalLine();
 	}	
 }
 
@@ -3188,7 +3188,7 @@ protected class CrossReference_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prCrossReference().ele1Keyword();
+		return XtextGrammarAccess.INSTANCE.prCrossReference().ele1KeywordRightSquareBracket();
 	}	
 }
 
@@ -3266,7 +3266,7 @@ protected class ParenthesizedElement_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prParenthesizedElement().ele00Keyword();
+		return XtextGrammarAccess.INSTANCE.prParenthesizedElement().ele00KeywordLeftParenthesis();
 	}	
 }
 
@@ -3297,7 +3297,7 @@ protected class ParenthesizedElement_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return XtextGrammarAccess.INSTANCE.prParenthesizedElement().ele1Keyword();
+		return XtextGrammarAccess.INSTANCE.prParenthesizedElement().ele1KeywordRightParenthesis();
 	}	
 }
 

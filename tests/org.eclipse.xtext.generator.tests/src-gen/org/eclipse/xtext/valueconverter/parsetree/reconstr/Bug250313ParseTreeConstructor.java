@@ -72,7 +72,7 @@ protected class Ref2_0_Keyword_2 extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return Bug250313GrammarAccess.INSTANCE.prRef2().ele0Keyword();
+		return Bug250313GrammarAccess.INSTANCE.prRef2().ele0KeywordNumberSignDigitTwo();
 	}	
 }
 

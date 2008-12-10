@@ -11,285 +11,197 @@ import org.eclipse.xtext.builtin.XtextBuiltinGrammarAccess;
 public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAccess implements IGrammarAccess {
 	
 	public class SequenceElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private RuleCall c0ParserRuleCallAddition;
-		private Group c1Group;
-		private Action c10ActionSequenceexpressions;
-		private Assignment c11AssignmentExpressions;
-		private RuleCall c110ParserRuleCallAddition;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall c0ParserRuleCallAddition = (RuleCall)cGroup.eContents().get(0);
+		private final Group c1Group = (Group)cGroup.eContents().get(1);
+		private final Action c10ActionSequenceexpressions = (Action)c1Group.eContents().get(0);
+		private final Assignment c11AssignmentExpressions = (Assignment)c1Group.eContents().get(1);
+		private final RuleCall c110ParserRuleCallAddition = (RuleCall)c11AssignmentExpressions.eContents().get(0);
 		
 		// Sequence : Addition ( { current = Sequence . expressions += current } expressions += Addition ) * ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(1)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// Addition ( { current = Sequence . expressions += current } expressions += Addition ) *
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// Addition
-		public RuleCall ele0ParserRuleCallAddition() {
-			return (c0ParserRuleCallAddition != null) ? c0ParserRuleCallAddition : (c0ParserRuleCallAddition = (RuleCall)eleGroup().eContents().get(0)); 
-		}
+		public RuleCall ele0ParserRuleCallAddition() { return c0ParserRuleCallAddition; }
 
 		// ( { current = Sequence . expressions += current } expressions += Addition ) *
-		public Group ele1Group() {
-			return (c1Group != null) ? c1Group : (c1Group = (Group)eleGroup().eContents().get(1)); 
-		}
+		public Group ele1Group() { return c1Group; }
 
 		// { current = Sequence . expressions += current }
-		public Action ele10ActionSequenceexpressions() {
-			return (c10ActionSequenceexpressions != null) ? c10ActionSequenceexpressions : (c10ActionSequenceexpressions = (Action)ele1Group().eContents().get(0)); 
-		}
+		public Action ele10ActionSequenceexpressions() { return c10ActionSequenceexpressions; }
 
 		// expressions += Addition
-		public Assignment ele11AssignmentExpressions() {
-			return (c11AssignmentExpressions != null) ? c11AssignmentExpressions : (c11AssignmentExpressions = (Assignment)ele1Group().eContents().get(1)); 
-		}
+		public Assignment ele11AssignmentExpressions() { return c11AssignmentExpressions; }
 
 		// Addition
-		public RuleCall ele110ParserRuleCallAddition() {
-			return (c110ParserRuleCallAddition != null) ? c110ParserRuleCallAddition : (c110ParserRuleCallAddition = (RuleCall)ele11AssignmentExpressions().eContents().get(0)); 
-		}
+		public RuleCall ele110ParserRuleCallAddition() { return c110ParserRuleCallAddition; }
 	}
 
 	public class AdditionElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private RuleCall c0ParserRuleCallMultiplication;
-		private Group c1Group;
-		private Group c10Group;
-		private Action c100ActionOpvalues;
-		private Assignment c101AssignmentOperator;
-		private Alternatives c1010Alternatives;
-		private Keyword c10100Keyword;
-		private Keyword c10101Keyword;
-		private Assignment c11AssignmentValues;
-		private RuleCall c110ParserRuleCallMultiplication;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(2);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall c0ParserRuleCallMultiplication = (RuleCall)cGroup.eContents().get(0);
+		private final Group c1Group = (Group)cGroup.eContents().get(1);
+		private final Group c10Group = (Group)c1Group.eContents().get(0);
+		private final Action c100ActionOpvalues = (Action)c10Group.eContents().get(0);
+		private final Assignment c101AssignmentOperator = (Assignment)c10Group.eContents().get(1);
+		private final Alternatives c1010Alternatives = (Alternatives)c101AssignmentOperator.eContents().get(0);
+		private final Keyword c10100KeywordPlusSign = (Keyword)c1010Alternatives.eContents().get(0);
+		private final Keyword c10101KeywordHyphenMinus = (Keyword)c1010Alternatives.eContents().get(1);
+		private final Assignment c11AssignmentValues = (Assignment)c1Group.eContents().get(1);
+		private final RuleCall c110ParserRuleCallMultiplication = (RuleCall)c11AssignmentValues.eContents().get(0);
 		
 		// Addition returns Expression : Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) * ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(2)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// Multiplication ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// Multiplication
-		public RuleCall ele0ParserRuleCallMultiplication() {
-			return (c0ParserRuleCallMultiplication != null) ? c0ParserRuleCallMultiplication : (c0ParserRuleCallMultiplication = (RuleCall)eleGroup().eContents().get(0)); 
-		}
+		public RuleCall ele0ParserRuleCallMultiplication() { return c0ParserRuleCallMultiplication; }
 
 		// ( { current = Op . values += current } operator = ( '+' | '-' ) values += Multiplication ) *
-		public Group ele1Group() {
-			return (c1Group != null) ? c1Group : (c1Group = (Group)eleGroup().eContents().get(1)); 
-		}
+		public Group ele1Group() { return c1Group; }
 
 		// { current = Op . values += current } operator = ( '+' | '-' )
-		public Group ele10Group() {
-			return (c10Group != null) ? c10Group : (c10Group = (Group)ele1Group().eContents().get(0)); 
-		}
+		public Group ele10Group() { return c10Group; }
 
 		// { current = Op . values += current }
-		public Action ele100ActionOpvalues() {
-			return (c100ActionOpvalues != null) ? c100ActionOpvalues : (c100ActionOpvalues = (Action)ele10Group().eContents().get(0)); 
-		}
+		public Action ele100ActionOpvalues() { return c100ActionOpvalues; }
 
 		// operator = ( '+' | '-' )
-		public Assignment ele101AssignmentOperator() {
-			return (c101AssignmentOperator != null) ? c101AssignmentOperator : (c101AssignmentOperator = (Assignment)ele10Group().eContents().get(1)); 
-		}
+		public Assignment ele101AssignmentOperator() { return c101AssignmentOperator; }
 
 		// '+' | '-'
-		public Alternatives ele1010Alternatives() {
-			return (c1010Alternatives != null) ? c1010Alternatives : (c1010Alternatives = (Alternatives)ele101AssignmentOperator().eContents().get(0)); 
-		}
+		public Alternatives ele1010Alternatives() { return c1010Alternatives; }
 
 		// '+'
-		public Keyword ele10100Keyword() {
-			return (c10100Keyword != null) ? c10100Keyword : (c10100Keyword = (Keyword)ele1010Alternatives().eContents().get(0)); 
-		}
+		public Keyword ele10100KeywordPlusSign() { return c10100KeywordPlusSign; }
 
 		// '-'
-		public Keyword ele10101Keyword() {
-			return (c10101Keyword != null) ? c10101Keyword : (c10101Keyword = (Keyword)ele1010Alternatives().eContents().get(1)); 
-		}
+		public Keyword ele10101KeywordHyphenMinus() { return c10101KeywordHyphenMinus; }
 
 		// values += Multiplication
-		public Assignment ele11AssignmentValues() {
-			return (c11AssignmentValues != null) ? c11AssignmentValues : (c11AssignmentValues = (Assignment)ele1Group().eContents().get(1)); 
-		}
+		public Assignment ele11AssignmentValues() { return c11AssignmentValues; }
 
 		// Multiplication
-		public RuleCall ele110ParserRuleCallMultiplication() {
-			return (c110ParserRuleCallMultiplication != null) ? c110ParserRuleCallMultiplication : (c110ParserRuleCallMultiplication = (RuleCall)ele11AssignmentValues().eContents().get(0)); 
-		}
+		public RuleCall ele110ParserRuleCallMultiplication() { return c110ParserRuleCallMultiplication; }
 	}
 
 	public class MultiplicationElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private RuleCall c0ParserRuleCallTerm;
-		private Group c1Group;
-		private Group c10Group;
-		private Action c100ActionOpvalues;
-		private Assignment c101AssignmentOperator;
-		private Alternatives c1010Alternatives;
-		private Keyword c10100Keyword;
-		private Keyword c10101Keyword;
-		private Assignment c11AssignmentValues;
-		private RuleCall c110ParserRuleCallTerm;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall c0ParserRuleCallTerm = (RuleCall)cGroup.eContents().get(0);
+		private final Group c1Group = (Group)cGroup.eContents().get(1);
+		private final Group c10Group = (Group)c1Group.eContents().get(0);
+		private final Action c100ActionOpvalues = (Action)c10Group.eContents().get(0);
+		private final Assignment c101AssignmentOperator = (Assignment)c10Group.eContents().get(1);
+		private final Alternatives c1010Alternatives = (Alternatives)c101AssignmentOperator.eContents().get(0);
+		private final Keyword c10100KeywordAsterisk = (Keyword)c1010Alternatives.eContents().get(0);
+		private final Keyword c10101KeywordSolidus = (Keyword)c1010Alternatives.eContents().get(1);
+		private final Assignment c11AssignmentValues = (Assignment)c1Group.eContents().get(1);
+		private final RuleCall c110ParserRuleCallTerm = (RuleCall)c11AssignmentValues.eContents().get(0);
 		
 		// Multiplication returns Expression : Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) * ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(3)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// Term ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) *
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// Term
-		public RuleCall ele0ParserRuleCallTerm() {
-			return (c0ParserRuleCallTerm != null) ? c0ParserRuleCallTerm : (c0ParserRuleCallTerm = (RuleCall)eleGroup().eContents().get(0)); 
-		}
+		public RuleCall ele0ParserRuleCallTerm() { return c0ParserRuleCallTerm; }
 
 		// ( { current = Op . values += current } operator = ( '*' | '/' ) values += Term ) *
-		public Group ele1Group() {
-			return (c1Group != null) ? c1Group : (c1Group = (Group)eleGroup().eContents().get(1)); 
-		}
+		public Group ele1Group() { return c1Group; }
 
 		// { current = Op . values += current } operator = ( '*' | '/' )
-		public Group ele10Group() {
-			return (c10Group != null) ? c10Group : (c10Group = (Group)ele1Group().eContents().get(0)); 
-		}
+		public Group ele10Group() { return c10Group; }
 
 		// { current = Op . values += current }
-		public Action ele100ActionOpvalues() {
-			return (c100ActionOpvalues != null) ? c100ActionOpvalues : (c100ActionOpvalues = (Action)ele10Group().eContents().get(0)); 
-		}
+		public Action ele100ActionOpvalues() { return c100ActionOpvalues; }
 
 		// operator = ( '*' | '/' )
-		public Assignment ele101AssignmentOperator() {
-			return (c101AssignmentOperator != null) ? c101AssignmentOperator : (c101AssignmentOperator = (Assignment)ele10Group().eContents().get(1)); 
-		}
+		public Assignment ele101AssignmentOperator() { return c101AssignmentOperator; }
 
 		// '*' | '/'
-		public Alternatives ele1010Alternatives() {
-			return (c1010Alternatives != null) ? c1010Alternatives : (c1010Alternatives = (Alternatives)ele101AssignmentOperator().eContents().get(0)); 
-		}
+		public Alternatives ele1010Alternatives() { return c1010Alternatives; }
 
 		// '*'
-		public Keyword ele10100Keyword() {
-			return (c10100Keyword != null) ? c10100Keyword : (c10100Keyword = (Keyword)ele1010Alternatives().eContents().get(0)); 
-		}
+		public Keyword ele10100KeywordAsterisk() { return c10100KeywordAsterisk; }
 
 		// '/'
-		public Keyword ele10101Keyword() {
-			return (c10101Keyword != null) ? c10101Keyword : (c10101Keyword = (Keyword)ele1010Alternatives().eContents().get(1)); 
-		}
+		public Keyword ele10101KeywordSolidus() { return c10101KeywordSolidus; }
 
 		// values += Term
-		public Assignment ele11AssignmentValues() {
-			return (c11AssignmentValues != null) ? c11AssignmentValues : (c11AssignmentValues = (Assignment)ele1Group().eContents().get(1)); 
-		}
+		public Assignment ele11AssignmentValues() { return c11AssignmentValues; }
 
 		// Term
-		public RuleCall ele110ParserRuleCallTerm() {
-			return (c110ParserRuleCallTerm != null) ? c110ParserRuleCallTerm : (c110ParserRuleCallTerm = (RuleCall)ele11AssignmentValues().eContents().get(0)); 
-		}
+		public RuleCall ele110ParserRuleCallTerm() { return c110ParserRuleCallTerm; }
 	}
 
 	public class TermElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Alternatives cAlternatives;
-		private RuleCall c0ParserRuleCallAtom;
-		private RuleCall c1ParserRuleCallParens;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(4);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall c0ParserRuleCallAtom = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall c1ParserRuleCallParens = (RuleCall)cAlternatives.eContents().get(1);
 		
 		// Term returns Expression : Atom | Parens ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(4)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// Atom | Parens
-		public Alternatives eleAlternatives() {
-			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(1)); 
-		}
+		public Alternatives eleAlternatives() { return cAlternatives; }
 
 		// Atom
-		public RuleCall ele0ParserRuleCallAtom() {
-			return (c0ParserRuleCallAtom != null) ? c0ParserRuleCallAtom : (c0ParserRuleCallAtom = (RuleCall)eleAlternatives().eContents().get(0)); 
-		}
+		public RuleCall ele0ParserRuleCallAtom() { return c0ParserRuleCallAtom; }
 
 		// Parens
-		public RuleCall ele1ParserRuleCallParens() {
-			return (c1ParserRuleCallParens != null) ? c1ParserRuleCallParens : (c1ParserRuleCallParens = (RuleCall)eleAlternatives().eContents().get(1)); 
-		}
+		public RuleCall ele1ParserRuleCallParens() { return c1ParserRuleCallParens; }
 	}
 
 	public class AtomElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Assignment cAssignmentName;
-		private RuleCall c0LexerRuleCallID;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(5);
+		private final Assignment cAssignmentName = (Assignment)rule.eContents().get(1);
+		private final RuleCall c0LexerRuleCallID = (RuleCall)cAssignmentName.eContents().get(0);
 		
 		// Atom : name = ID ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(5)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// name = ID
-		public Assignment eleAssignmentName() {
-			return (cAssignmentName != null) ? cAssignmentName : (cAssignmentName = (Assignment)getRule().eContents().get(1)); 
-		}
+		public Assignment eleAssignmentName() { return cAssignmentName; }
 
 		// ID
-		public RuleCall ele0LexerRuleCallID() {
-			return (c0LexerRuleCallID != null) ? c0LexerRuleCallID : (c0LexerRuleCallID = (RuleCall)eleAssignmentName().eContents().get(0)); 
-		}
+		public RuleCall ele0LexerRuleCallID() { return c0LexerRuleCallID; }
 	}
 
 	public class ParensElements implements IParserRuleAccess {
-		private ParserRule rule;
-		private Group cGroup;
-		private Group c0Group;
-		private Keyword c00Keyword;
-		private RuleCall c01ParserRuleCallAddition;
-		private Keyword c1Keyword;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(6);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group c0Group = (Group)cGroup.eContents().get(0);
+		private final Keyword c00KeywordLeftParenthesis = (Keyword)c0Group.eContents().get(0);
+		private final RuleCall c01ParserRuleCallAddition = (RuleCall)c0Group.eContents().get(1);
+		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
 		
 		// Parens returns Expression : '(' Addition ')' ;
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(6)); 
-		}
+		public ParserRule getRule() { return rule; }
 
 		// '(' Addition ')'
-		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
-		}
+		public Group eleGroup() { return cGroup; }
 
 		// '(' Addition
-		public Group ele0Group() {
-			return (c0Group != null) ? c0Group : (c0Group = (Group)eleGroup().eContents().get(0)); 
-		}
+		public Group ele0Group() { return c0Group; }
 
 		// '('
-		public Keyword ele00Keyword() {
-			return (c00Keyword != null) ? c00Keyword : (c00Keyword = (Keyword)ele0Group().eContents().get(0)); 
-		}
+		public Keyword ele00KeywordLeftParenthesis() { return c00KeywordLeftParenthesis; }
 
 		// Addition
-		public RuleCall ele01ParserRuleCallAddition() {
-			return (c01ParserRuleCallAddition != null) ? c01ParserRuleCallAddition : (c01ParserRuleCallAddition = (RuleCall)ele0Group().eContents().get(1)); 
-		}
+		public RuleCall ele01ParserRuleCallAddition() { return c01ParserRuleCallAddition; }
 
 		// ')'
-		public Keyword ele1Keyword() {
-			return (c1Keyword != null) ? c1Keyword : (c1Keyword = (Keyword)eleGroup().eContents().get(1)); 
-		}
+		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
 	}
 	
 	public final static SimpleExpressionsTestLanguageGrammarAccess INSTANCE = new SimpleExpressionsTestLanguageGrammarAccess();

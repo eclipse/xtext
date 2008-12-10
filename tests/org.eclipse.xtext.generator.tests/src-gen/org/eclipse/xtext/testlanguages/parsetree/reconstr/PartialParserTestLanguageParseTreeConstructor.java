@@ -201,7 +201,7 @@ protected class Container_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele001Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -293,7 +293,7 @@ protected class Container_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele1Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prContainer().ele1KeywordRightCurlyBracket();
 	}	
 }
 
@@ -411,7 +411,7 @@ protected class Nested_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().ele001Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().ele001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -453,7 +453,7 @@ protected class Nested_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().ele1Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prNested().ele1KeywordRightCurlyBracket();
 	}	
 }
 
@@ -666,7 +666,7 @@ protected class Children_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele0001Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele0001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -736,7 +736,7 @@ protected class Children_0_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele010Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele010KeywordComma();
 	}	
 }
 
@@ -778,7 +778,7 @@ protected class Children_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele1Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChildren().ele1KeywordRightCurlyBracket();
 	}	
 }
 
@@ -912,7 +912,7 @@ protected class Child_0_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele0000Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele0000KeywordHyphenMinusGreaterThanSign();
 	}	
 }
 
@@ -937,7 +937,7 @@ protected class Child_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele001Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele001KeywordLeftParenthesis();
 	}	
 }
 
@@ -979,7 +979,7 @@ protected class Child_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele1Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prChild().ele1KeywordRightParenthesis();
 	}	
 }
 
@@ -1097,7 +1097,7 @@ protected class AbstractChildren_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().ele001Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().ele001KeywordLeftCurlyBracket();
 	}	
 }
 
@@ -1139,7 +1139,7 @@ protected class AbstractChildren_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().ele1Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prAbstractChildren().ele1KeywordRightCurlyBracket();
 	}	
 }
 
@@ -1368,7 +1368,7 @@ protected class FirstConcrete_0_0_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele00000Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele00000KeywordHyphenMinusGreaterThanSign();
 	}	
 }
 
@@ -1393,7 +1393,7 @@ protected class FirstConcrete_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele0001Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele0001KeywordLeftParenthesis();
 	}	
 }
 
@@ -1462,7 +1462,7 @@ protected class FirstConcrete_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele1Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prFirstConcrete().ele1KeywordRightParenthesis();
 	}	
 }
 
@@ -1652,7 +1652,7 @@ protected class SecondConcrete_0_0_0_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele000000Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele000000KeywordHyphenMinusGreaterThanSign();
 	}	
 }
 
@@ -1690,7 +1690,7 @@ protected class SecondConcrete_0_0_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele0001Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele0001KeywordLeftParenthesis();
 	}	
 }
 
@@ -1759,7 +1759,7 @@ protected class SecondConcrete_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele1Keyword();
+		return PartialParserTestLanguageGrammarAccess.INSTANCE.prSecondConcrete().ele1KeywordRightParenthesis();
 	}	
 }
 

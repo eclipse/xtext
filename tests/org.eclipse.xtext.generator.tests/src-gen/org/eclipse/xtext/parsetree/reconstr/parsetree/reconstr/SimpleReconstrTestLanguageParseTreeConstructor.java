@@ -568,7 +568,7 @@ protected class Parens_0_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele000Keyword();
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele000KeywordLeftParenthesis();
 	}	
 }
 
@@ -599,7 +599,7 @@ protected class Parens_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele01Keyword();
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele01KeywordRightParenthesis();
 	}	
 }
 
@@ -620,7 +620,7 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("em");
 		if("!".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele10Keyword();
+			element = SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prParens().ele10KeywordExclamationMark();
 			return new Solution(obj);
 		}
 		return null;
@@ -776,7 +776,7 @@ protected class TwoNumbers_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTwoNumbers().ele10Keyword();
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prTwoNumbers().ele10KeywordNumberSign();
 	}	
 }
 
@@ -878,7 +878,7 @@ protected class ManyStrings_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prManyStrings().ele00Keyword();
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prManyStrings().ele00KeywordEqualsSign();
 	}	
 }
 
@@ -1144,7 +1144,7 @@ protected class Ref2_0_Keyword_2 extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prRef2().ele0Keyword();
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prRef2().ele0KeywordNumberSignDigitTwo();
 	}	
 }
 
@@ -1255,7 +1255,7 @@ protected class Spare_0_0_Keyword_3 extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prSpare().ele00Keyword();
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prSpare().ele00KeywordNumberSignDigitThree();
 	}	
 }
 
@@ -1319,7 +1319,7 @@ protected class Spare_1_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prSpare().ele10Keyword();
+		return SimpleReconstrTestLanguageGrammarAccess.INSTANCE.prSpare().ele10KeywordFullStop();
 	}	
 }
 

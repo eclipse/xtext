@@ -68,20 +68,16 @@ public class «grammar().gaSimpleName()» extends BaseEPackageAccess implements IG
 
 «DEFINE parseRuleClasses FOR ParserRule»
 	public class «gaRuleAccesorClassName()» implements IParserRuleAccess {
-		private ParserRule rule;
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(«grammar().eContents.indexOf(this)»);
 «FOREACH containedAbstractElements() AS e-»
-		private «e.getClassName()» «e.gaElementAccessorLocalVarName()»;
+		private final «e.getClassName()» «e.gaElementAccessorLocalVarName()» = «e.loadElementStatement()»;
 «ENDFOREACH-»
 		
 		// «grammarFragmentToStr()»
-		public ParserRule getRule() {
-			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(«grammar().eContents.indexOf(this)»)); 
-		}
+		public ParserRule getRule() { return rule; }
 «FOREACH containedAbstractElements() AS e»
 		// «e.grammarFragmentToStr()»
-		public «e.getClassName()» «e.gaElementAccessMethodeName()»() {
-			return («e.gaElementAccessorLocalVarName()» != null) ? «e.gaElementAccessorLocalVarName()» : («e.gaElementAccessorLocalVarName()» = «e.loadElementStatement()»); 
-		}
+		public «e.getClassName()» «e.gaElementAccessMethodeName()»() { return «e.gaElementAccessorLocalVarName()»; }
 «ENDFOREACH-»
 	}
 «ENDDEFINE»

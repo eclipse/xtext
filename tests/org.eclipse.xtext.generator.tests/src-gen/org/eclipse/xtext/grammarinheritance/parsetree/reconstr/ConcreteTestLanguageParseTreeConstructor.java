@@ -166,7 +166,7 @@ protected class ConcreteParserRule_0_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return ConcreteTestLanguageGrammarAccess.INSTANCE.prConcreteParserRule().ele01Keyword();
+		return ConcreteTestLanguageGrammarAccess.INSTANCE.prConcreteParserRule().ele01KeywordColon();
 	}	
 }
 

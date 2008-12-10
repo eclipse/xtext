@@ -312,12 +312,12 @@ protected class Addition_1_0_1_Assignment_operator extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("operator");
 		if("+".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele10100Keyword();
+			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele10100KeywordPlusSign();
 			return new Solution(obj);
 		}
 		if("-".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele10101Keyword();
+			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prAddition().ele10101KeywordHyphenMinus();
 			return new Solution(obj);
 		}
 		return null;
@@ -502,12 +502,12 @@ protected class Multiplication_1_0_1_Assignment_operator extends AssignmentToken
 		IInstanceDescription obj = current.cloneAndConsume("operator");
 		if("*".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele10100Keyword();
+			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele10100KeywordAsterisk();
 			return new Solution(obj);
 		}
 		if("/".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
-			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele10101Keyword();
+			element = SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prMultiplication().ele10101KeywordSolidus();
 			return new Solution(obj);
 		}
 		return null;
@@ -717,7 +717,7 @@ protected class Parens_0_0_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prParens().ele00Keyword();
+		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prParens().ele00KeywordLeftParenthesis();
 	}	
 }
 
@@ -748,7 +748,7 @@ protected class Parens_1_Keyword extends KeywordToken  {
 	}
 	
 	public Keyword getGrammarElement() {
-		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prParens().ele1Keyword();
+		return SimpleExpressionsTestLanguageGrammarAccess.INSTANCE.prParens().ele1KeywordRightParenthesis();
 	}	
 }
 
