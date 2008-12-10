@@ -46,7 +46,7 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 		}
 
 		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer();
-		List<EPackage> list = transformer.transform(element);
+		List<EPackage> list = Xtext2EcoreTransformer.doGetGeneratedPackages(element);
 		assertNotNull(list);
 		assertEquals(0, list.size());
 	}
@@ -59,8 +59,7 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 		for (LexerRule lexerRule : lexerRules) {
 			logger.debug(lexerRule.getName());
 		}
-		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer();
-		List<EPackage> list = transformer.transform(element);
+		List<EPackage> list = Xtext2EcoreTransformer.doGetGeneratedPackages(element);
 		EPackage metaModel = list.get(0);
 		assertNotNull(metaModel);
 		assertNotNull(metaModel.getNsPrefix());

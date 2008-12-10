@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.issues.IssuesImpl;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
@@ -106,7 +107,7 @@ public class GeneratorFacade {
 		execCtx.registerMetaModel(metamodel);
 
 		// save grammar model
-		XtextResourceSet setImpl = new XtextResourceSet();
+		ResourceSet setImpl = genModel.getGrammar().eResource().getResourceSet();
 		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(genModel.getGrammar());
 		Resource resource = setImpl.createResource(URI.createURI(GenExtensions.outletPath(genModel,"SRC_GEN") + "/" + xmiPath));
 		resource.getContents().add(genModel.getGrammar());
@@ -155,6 +156,13 @@ public class GeneratorFacade {
 			genModel.getOutlets().add(outlet("UI_SRC_GEN", uiProjectPath + "/src-gen", true));
 //			genModel.getOutlets().add(outlet("UI_TEMPLATES", uiProjectPath + "/templates", true));
 		}
+		
+		GenService metamodelAccessService = XtextgenFactory.eINSTANCE.createGenService();
+		metamodelAccessService.setServiceInterfaceFQName("org.eclipse.xtext.IMetamodelAccess");
+		metamodelAccessService.setGenClassFQName(namespace + ".services." + languageName + "MetamodelAccess");
+		metamodelAccessService.setTemplatePath("org::eclipse::xtext::ecore::Ecore::root");
+		metamodelAccessService.setExtensionPointID("org.eclipse.xtext.ui.metamodelAccess");
+		genModel.getServices().add(metamodelAccessService);
 
 		// Moritz: I've refactored the determination of the GrammarAccessFQName to GrammarAccessUtil,
 		// since there are other services (e.g. Serialization, eventually Parsing) that have hard
@@ -168,13 +176,6 @@ public class GeneratorFacade {
 		//grammarAccessService.setExtensionPointID("org.eclipse.xtext.ui.grammarAccess");
 		genModel.getServices().add(grammarAccessService);
 		
-		GenService metamodelAccessService = XtextgenFactory.eINSTANCE.createGenService();
-		metamodelAccessService.setServiceInterfaceFQName("org.eclipse.xtext.IMetamodelAccess");
-		metamodelAccessService.setGenClassFQName(namespace + ".services." + languageName + "MetamodelAccess");
-		metamodelAccessService.setTemplatePath("org::eclipse::xtext::ecore::Ecore::root");
-		metamodelAccessService.setExtensionPointID("org.eclipse.xtext.ui.metamodelAccess");
-		genModel.getServices().add(metamodelAccessService);
-
 		if (!GrammarUtil.isAbstract(grammarModel)) {
 
 			GenService elementFactoryService = XtextgenFactory.eINSTANCE.createGenService();

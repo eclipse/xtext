@@ -19,7 +19,7 @@ ruleName(AbstractRule this) : error("Unsupported");
 entryRuleName(ParserRule this) : 'entryRule'+name;
 
 
-typeName(Action this) : typeName.name;
+typeName(Action this) : typeName.type.name;
 typeName(ParserRule this) : getReturnTypeName();
 
 setOrAdd(Action this) : if operator=='+=' then 'add' else 'set';

@@ -13,7 +13,7 @@ import xtext;
 extension org::eclipse::xtext::Extensions;
 
 List[EPackage] getGeneratedEPackages(Grammar g) :
-	JAVA org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer.doTransform(org.eclipse.xtext.Grammar);
+	JAVA org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer.doGetGeneratedPackages(org.eclipse.xtext.Grammar);
 
 Void saveMetamodel(EPackage ePackage, String path) :
 	JAVA org.eclipse.xtext.EcoreUtil2.saveEPackage(org.eclipse.emf.ecore.EPackage, java.lang.String);
