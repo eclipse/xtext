@@ -12,11 +12,28 @@
             label="Syntax">
       </keyword>
    </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+         <command
+               id="org.eclipse.xtext.ui.core.editor.handler.openDeclaration"
+               name="Open Declaration"
+               description="Opens the declaration for the currently selected CrossReference">
+         </command>
+   </extension>
   <extension
          point="org.eclipse.ui.handlers">
       <handler
             class="org.eclipse.xtext.ui.core.editor.handler.ContentAssistHandler"
             commandId="org.eclipse.ui.edit.text.contentAssist.proposals">
+         <activeWhen>
+            <reference
+                  definitionId="isActiveEditorAnInstanceOfXtextEditor">
+            </reference>
+         </activeWhen>
+      </handler>
+      <handler
+            class="org.eclipse.xtext.ui.core.editor.handler.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.core.editor.handler.openDeclaration">
          <activeWhen>
             <reference
                   definitionId="isActiveEditorAnInstanceOfXtextEditor">
@@ -38,10 +55,9 @@
    </extension>
    <extension
          point="org.eclipse.ui.menus">
-            <menuContribution
+        <menuContribution
             locationURI="popup:#TextEditorContext?after=additions">
-         <command
-               commandId="org.eclipse.ui.edit.text.contentAssist.proposals"
+         <command commandId="org.eclipse.ui.edit.text.contentAssist.proposals"
                style="push">
             <visibleWhen
                   checkEnabled="false">
@@ -51,8 +67,23 @@
             </visibleWhen>
          </command>
       </menuContribution>
+      <menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+         <command commandId="org.eclipse.xtext.ui.core.editor.handler.openDeclaration">
+            <visibleWhen checkEnabled="false">
+               <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+            </visibleWhen>
+         </command>
+      </menuContribution>
    </extension>
-   
+   <extension
+         point="org.eclipse.ui.bindings">
+         <key
+               contextId="org.eclipse.ui.textEditorScope"
+               schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+               sequence="F3"
+               commandId="org.eclipse.xtext.ui.core.editor.handler.openDeclaration">
+         </key>
+   </extension>
    <!--extension
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
       <hyperlinkDetector
