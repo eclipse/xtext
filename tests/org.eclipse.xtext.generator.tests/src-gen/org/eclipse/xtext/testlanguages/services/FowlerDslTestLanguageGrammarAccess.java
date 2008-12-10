@@ -36,7 +36,7 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// 'events' ( events += Event ) * 'end' 'commands' ( commands += Command ) * 'end' ( states += State ) *
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'events' ( events += Event ) * 'end' 'commands' ( commands += Command ) * 'end'
@@ -133,7 +133,7 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// ( resetting ?= 'resetting' ) ? name = ID code = ID
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// ( resetting ?= 'resetting' ) ? name = ID
@@ -187,7 +187,7 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// name = ID code = ID
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// name = ID
@@ -239,7 +239,7 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ? ( transitions += Transition ) * 'end'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ? ( transitions += Transition ) *
@@ -345,7 +345,7 @@ public class FowlerDslTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// event = [ Event ] '=>' state = [ State ]
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// event = [ Event ] '=>'

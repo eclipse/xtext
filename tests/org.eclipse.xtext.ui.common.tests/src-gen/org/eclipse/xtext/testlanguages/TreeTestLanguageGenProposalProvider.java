@@ -82,6 +82,8 @@ public class TreeTestLanguageGenProposalProvider  extends AbstractProposalProvid
 		return Collections.emptyList();
 	}
     
+    
+    
     @Override
 	protected String getDefaultImageFilePath() {
 		return "icons/editor.gif";

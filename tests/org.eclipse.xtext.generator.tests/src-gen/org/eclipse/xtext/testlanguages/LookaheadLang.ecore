@@ -12,13 +12,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="LookAhead1" eSuperTypes="//Alts">
     <eStructuralFeatures xsi:type="ecore:EReference" name="y" eType="//LookAhead2" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LookAhead3" eSuperTypes="//Alts">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="z" eType="//LookAhead4" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LookAhead2">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="z">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LookAhead3" eSuperTypes="//Alts">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="z" eType="//LookAhead4" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LookAhead4">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="x">

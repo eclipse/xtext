@@ -22,7 +22,7 @@ public class OptionalEmptyTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// ( child = Greeting ) ?
 		public Assignment eleAssignmentChild() {
-			return (cAssignmentChild != null) ? cAssignmentChild : (cAssignmentChild = (Assignment)getRule().eContents().get(0)); 
+			return (cAssignmentChild != null) ? cAssignmentChild : (cAssignmentChild = (Assignment)getRule().eContents().get(1)); 
 		}
 
 		// Greeting
@@ -45,7 +45,7 @@ public class OptionalEmptyTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// 'hallo' name = ID
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'hallo'

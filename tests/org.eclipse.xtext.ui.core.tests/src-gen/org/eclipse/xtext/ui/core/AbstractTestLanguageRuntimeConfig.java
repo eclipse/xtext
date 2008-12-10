@@ -9,12 +9,12 @@ import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
  */
 public abstract class AbstractTestLanguageRuntimeConfig extends AbstractServiceRegistrationFactory {
 
-	protected Class<? extends org.eclipse.xtext.IGrammarAccess> getIGrammarAccess() {
-		return org.eclipse.xtext.ui.core.services.TestLanguageGrammarAccess.class;
-	}
-		
 	protected Class<? extends org.eclipse.xtext.IMetamodelAccess> getIMetamodelAccess() {
 		return org.eclipse.xtext.ui.core.services.TestLanguageMetamodelAccess.class;
+	}
+		
+	protected Class<? extends org.eclipse.xtext.IGrammarAccess> getIGrammarAccess() {
+		return org.eclipse.xtext.ui.core.services.TestLanguageGrammarAccess.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.IAstFactory> getIAstFactory() {
@@ -45,6 +45,10 @@ public abstract class AbstractTestLanguageRuntimeConfig extends AbstractServiceR
 		return org.eclipse.xtext.parsetree.reconstr.impl.SimpleCrossReferenceSerializer.class;
 	}
 		
+	protected Class<? extends org.eclipse.xtext.parsetree.reconstr.ITransientValueService> getITransientValueService() {
+		return org.eclipse.xtext.parsetree.reconstr.impl.SimpleTransientValueService.class;
+	}
+		
 	protected Class<? extends org.eclipse.xtext.parser.antlr.Lexer> getLexer() {
 		return org.eclipse.xtext.ui.core.parser.internal.InternalTestLanguageLexer.class;
 	}
@@ -52,8 +56,8 @@ public abstract class AbstractTestLanguageRuntimeConfig extends AbstractServiceR
 	
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.ui.core.ITestLanguage.SCOPE)
-		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
 		.with(org.eclipse.xtext.IMetamodelAccess.class, getIMetamodelAccess())
+		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
 		.with(org.eclipse.xtext.parser.IAstFactory.class, getIAstFactory())
 		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, getIAntlrTokenFileProvider())
@@ -61,6 +65,7 @@ public abstract class AbstractTestLanguageRuntimeConfig extends AbstractServiceR
 		.with(org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.class, getIParseTreeConstructor())
 		.with(org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.class, getITokenSerializer())
 		.with(org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer.class, getICrossReferenceSerializer())
+		.with(org.eclipse.xtext.parsetree.reconstr.ITransientValueService.class, getITransientValueService())
 		.with(org.eclipse.xtext.parser.antlr.Lexer.class, getLexer())
 		
 			.registrations();

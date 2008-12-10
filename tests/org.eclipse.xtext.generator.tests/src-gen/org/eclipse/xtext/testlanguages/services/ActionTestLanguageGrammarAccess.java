@@ -22,7 +22,7 @@ public class ActionTestLanguageGrammarAccess extends BaseEPackageAccess implemen
 
 		// ( children += Element ) *
 		public Assignment eleAssignmentChildren() {
-			return (cAssignmentChildren != null) ? cAssignmentChildren : (cAssignmentChildren = (Assignment)getRule().eContents().get(0)); 
+			return (cAssignmentChildren != null) ? cAssignmentChildren : (cAssignmentChildren = (Assignment)getRule().eContents().get(1)); 
 		}
 
 		// Element

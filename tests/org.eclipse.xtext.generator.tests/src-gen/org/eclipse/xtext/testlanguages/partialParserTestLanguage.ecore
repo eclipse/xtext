@@ -14,11 +14,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="Children" eSuperTypes="//Content">
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1" eType="//Child" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractChildren" eSuperTypes="//Content">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="abstractChildren" upperBound="-1" eType="//AbstractChild" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Child">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//Named" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractChildren" eSuperTypes="//Content">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="abstractChildren" upperBound="-1" eType="//AbstractChild" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractChild">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//Named" containment="true"/>

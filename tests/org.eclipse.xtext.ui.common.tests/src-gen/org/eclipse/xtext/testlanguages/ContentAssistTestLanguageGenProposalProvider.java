@@ -100,6 +100,11 @@ public class ContentAssistTestLanguageGenProposalProvider  extends AbstractPropo
 		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, prefix, offset);
 	}
     
+    
+    
+    
+    
+    
     @Override
 	protected String getDefaultImageFilePath() {
 		return "icons/editor.gif";

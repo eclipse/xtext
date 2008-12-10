@@ -18,7 +18,6 @@ import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
-import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.ui.core.editor.reconciler.XtextDocumentReconcileStrategy;
 import org.eclipse.xtext.ui.core.editor.reconciler.XtextReconciler;
@@ -30,9 +29,6 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	
 	@Inject(optional = true)
 	private IContentAssistProcessor contentAssistProcessor;
-	
-	@Inject(optional = true)
-	private ILinkingService linkingService;
 
 	@Inject(optional = true)
 	private ITokenScanner tokenScanner;
@@ -55,8 +51,6 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		xtextReconciler.setDelay(500);
 		return xtextReconciler;
 	}
-	
-	
 
 	@Override
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
@@ -94,7 +88,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 				});
 			}
 		}
-		detectors.add(new XtextHyperlinkDetector(this.linkingService));
+		detectors.add(new XtextHyperlinkDetector());
 		return detectors.toArray(new IHyperlinkDetector[detectors.size()]);
 	}
 

@@ -195,7 +195,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 			String trimmedPrefix = prefix.trim();
 			
 			for (IScopedElement candidate : candidates) {
-				if (isCandidateMatchingPrefix(model, ref, candidate, trimmedPrefix)) {
+				if (candidate.name() != null && isCandidateMatchingPrefix(model, ref, candidate, trimmedPrefix)) {
 					completionProposalList.add(
 							createCompletionProposal(crossReference, model, candidate.name(), offset));
 				}
@@ -206,7 +206,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	}
 	
 	protected boolean isCandidateMatchingPrefix(EObject model, EReference ref, IScopedElement candidate, String prefix) {
-		return candidate.name().regionMatches(true, 0, prefix, 0, prefix.length());
+		return Strings.emptyIfNull(candidate.name()).regionMatches(true, 0, prefix, 0, prefix.length());
 	}
 	
 	protected String getLabel(EObject candidate, EReference ref, EObject context) {

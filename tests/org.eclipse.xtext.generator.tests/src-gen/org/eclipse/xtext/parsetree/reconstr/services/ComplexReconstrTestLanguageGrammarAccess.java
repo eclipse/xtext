@@ -148,7 +148,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 
 		// name = ID
 		public Assignment eleAssignmentName() {
-			return (cAssignmentName != null) ? cAssignmentName : (cAssignmentName = (Assignment)getRule().eContents().get(0)); 
+			return (cAssignmentName != null) ? cAssignmentName : (cAssignmentName = (Assignment)getRule().eContents().get(1)); 
 		}
 
 		// ID
@@ -366,7 +366,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 
 		// 'TB' ( name = ID type += INT ) ? ( type += ID ) *
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'TB' ( name = ID type += INT ) ?
@@ -441,7 +441,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 
 		// 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ? ( { current = C3 . z = current } 'z' ) ?
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'TC' name = ID ( { current = C1 . x = current } 'x' ) ? ( { current = C2 . y = current } 'y' ) ?
@@ -549,7 +549,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 
 		// 'TD' ( name += INT foo = STRING type += ID ) ? ( name += INT type += ID ) ? ( type += ID ) *
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'TD' ( name += INT foo = STRING type += ID ) ? ( name += INT type += ID ) ?
@@ -671,7 +671,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 
 		// 'TE' ( name += INT foo += STRING type += ID ) * 'x' ( name += INT type += ID ) *
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'TE' ( name += INT foo += STRING type += ID ) * 'x'
@@ -783,7 +783,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 
 		// 'TF' ( name += ID type += INT ) * ( name += ID | type += INT )
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'TF' ( name += ID type += INT ) *

@@ -28,7 +28,7 @@ public class Bug250313GrammarAccess extends BaseEPackageAccess implements IGramm
 
 		// '#2' ref2 = ( 'mykeyword1' | STRING | ID )
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// '#2'

@@ -22,7 +22,7 @@ public class DummyTestLanguageGrammarAccess extends BaseEPackageAccess implement
 
 		// ( elements += Element ) *
 		public Assignment eleAssignmentElements() {
-			return (cAssignmentElements != null) ? cAssignmentElements : (cAssignmentElements = (Assignment)getRule().eContents().get(0)); 
+			return (cAssignmentElements != null) ? cAssignmentElements : (cAssignmentElements = (Assignment)getRule().eContents().get(1)); 
 		}
 
 		// Element
@@ -53,7 +53,7 @@ public class DummyTestLanguageGrammarAccess extends BaseEPackageAccess implement
 
 		// ( optional ?= 'optional' ) ? 'element' name = ID ( descriptions += STRING ) * ';'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// ( optional ?= 'optional' ) ? 'element' name = ID ( descriptions += STRING ) *

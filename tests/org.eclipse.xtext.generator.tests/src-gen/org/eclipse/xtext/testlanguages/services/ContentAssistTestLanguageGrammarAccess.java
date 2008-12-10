@@ -26,7 +26,7 @@ public class ContentAssistTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// 'abstract rules' ( rules += AbstractRule ) + 'end'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'abstract rules' ( rules += AbstractRule ) +
@@ -68,7 +68,7 @@ public class ContentAssistTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// FirstAbstractRuleChild | SecondAbstractRuleChild
 		public Alternatives eleAlternatives() {
-			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(0)); 
+			return (cAlternatives != null) ? cAlternatives : (cAlternatives = (Alternatives)getRule().eContents().get(1)); 
 		}
 
 		// FirstAbstractRuleChild
@@ -103,7 +103,7 @@ public class ContentAssistTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// name = ID '(' ( elements += AbstractRule ) + ')' ';'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// name = ID '(' ( elements += AbstractRule ) + ')'
@@ -178,7 +178,7 @@ public class ContentAssistTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// name = ID 'rule' ':' rule = AbstractRuleCall ';'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// name = ID 'rule' ':' rule = AbstractRuleCall
@@ -244,7 +244,7 @@ public class ContentAssistTestLanguageGrammarAccess extends BaseEPackageAccess i
 
 		// rule = [ AbstractRule ]
 		public Assignment eleAssignmentRule() {
-			return (cAssignmentRule != null) ? cAssignmentRule : (cAssignmentRule = (Assignment)getRule().eContents().get(0)); 
+			return (cAssignmentRule != null) ? cAssignmentRule : (cAssignmentRule = (Assignment)getRule().eContents().get(1)); 
 		}
 
 		// [ AbstractRule ]

@@ -1685,12 +1685,12 @@ protected class ParserRule_1_Keyword extends KeywordToken  {
 
 /************ begin Rule TypeRef ****************
  *
- * TypeRef : ( alias = ID '::' ) ? name = ID ;
+ * TypeRef : ( metamodel = [ AbstractMetamodelDeclaration ] '::' ) ? type = [ EClassifier ] ;
  *
  **/
 
 
-// ( alias = ID '::' ) ? name = ID
+// ( metamodel = [ AbstractMetamodelDeclaration ] '::' ) ? type = [ EClassifier ]
 protected class TypeRef_Group extends GroupToken {
 	
 	public TypeRef_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1702,7 +1702,7 @@ protected class TypeRef_Group extends GroupToken {
 	}
 		
 	protected Solution createSolution() {	
-		Solution s1 = new TypeRef_1_Assignment_name(current, this).firstSolution();
+		Solution s1 = new TypeRef_1_Assignment_type(current, this).firstSolution();
 		while(s1 != null) {
 			Solution s2 = new TypeRef_0_Group(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
@@ -1718,7 +1718,7 @@ protected class TypeRef_Group extends GroupToken {
 	}
 }
 
-// ( alias = ID '::' ) ?
+// ( metamodel = [ AbstractMetamodelDeclaration ] '::' ) ?
 protected class TypeRef_0_Group extends GroupToken {
 	
 	public TypeRef_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1732,7 +1732,7 @@ protected class TypeRef_0_Group extends GroupToken {
 	protected Solution createSolution() {	
 		Solution s1 = new TypeRef_0_1_Keyword(current, this).firstSolution();
 		while(s1 != null) {
-			Solution s2 = new TypeRef_0_0_Assignment_alias(s1.getCurrent(), s1.getPredecessor()).firstSolution();
+			Solution s2 = new TypeRef_0_0_Assignment_metamodel(s1.getCurrent(), s1.getPredecessor()).firstSolution();
 			if(s2 == null) {
 				s1 = s1.getPredecessor().nextSolution(this);
 				if(s1 == null) return null;
@@ -1746,24 +1746,27 @@ protected class TypeRef_0_Group extends GroupToken {
 	}
 }
 
-// alias = ID
-protected class TypeRef_0_0_Assignment_alias extends AssignmentToken  {
+// metamodel = [ AbstractMetamodelDeclaration ]
+protected class TypeRef_0_0_Assignment_metamodel extends AssignmentToken  {
 	
-	public TypeRef_0_0_Assignment_alias(IInstanceDescription curr, AbstractToken pred) {
+	public TypeRef_0_0_Assignment_metamodel(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTypeRef().ele00AssignmentAlias();
+		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTypeRef().ele00AssignmentMetamodel();
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("alias",!IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("alias");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTypeRef().ele000LexerRuleCallID();
-			return new Solution(obj);
+		if((value = current.getConsumable("metamodel",!IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("metamodel");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("AbstractMetamodelDeclaration")) {
+				type = AssignmentType.CR;
+				element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTypeRef().ele000CrossReferenceAbstractMetamodelDeclaration(); 
+				return new Solution(obj);
+			}
 		}
 		return null;
 	}
@@ -1782,24 +1785,27 @@ protected class TypeRef_0_1_Keyword extends KeywordToken  {
 }
 
 
-// name = ID
-protected class TypeRef_1_Assignment_name extends AssignmentToken  {
+// type = [ EClassifier ]
+protected class TypeRef_1_Assignment_type extends AssignmentToken  {
 	
-	public TypeRef_1_Assignment_name(IInstanceDescription curr, AbstractToken pred) {
+	public TypeRef_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
 		super(curr, pred, !IS_MANY, IS_REQUIRED);
 	}
 	
 	public Assignment getGrammarElement() {
-		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTypeRef().ele1AssignmentName();
+		return XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTypeRef().ele1AssignmentType();
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTypeRef().ele10LexerRuleCallID();
-			return new Solution(obj);
+		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("type");
+		if(value instanceof EObject) { // xtext::CrossReference
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf("EClassifier")) {
+				type = AssignmentType.CR;
+				element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prTypeRef().ele10CrossReferenceEClassifier(); 
+				return new Solution(obj);
+			}
 		}
 		return null;
 	}
@@ -2286,7 +2292,7 @@ protected class AbstractToken_1_Assignment_cardinality extends AssignmentToken  
 
 /************ begin Rule Assignment ****************
  *
- * Assignment returns Assignment : feature = ID operator = ( '+=' | '=' | '?=' ) terminal = AbstractTerminal ;
+ * Assignment : feature = ID operator = ( '+=' | '=' | '?=' ) terminal = AbstractTerminal ;
  *
  **/
 
@@ -2437,7 +2443,7 @@ protected class Assignment_1_Assignment_terminal extends AssignmentToken  {
 
 /************ begin Rule Action ****************
  *
- * Action returns Action : '{' ( 'current' '=' ) ? typeName = TypeRef '.' feature = ID operator = ( '=' | '+=' ) 'current' '}' ;
+ * Action : '{' ( 'current' '=' ) ? typeName = TypeRef '.' feature = ID operator = ( '=' | '+=' ) 'current' '}' ;
  *
  **/
 
@@ -2976,12 +2982,12 @@ protected class AbstractTerminal_1_RuleCall_CrossReference extends RuleCallToken
 
 /************ begin Rule CrossReference ****************
  *
- * CrossReference : '[' type = TypeRef ( '|' rule = [ LexerRule ] ) ? ']' ;
+ * CrossReference : '[' type = TypeRef ( '|' rule = [ AbstractRule ] ) ? ']' ;
  *
  **/
 
 
-// '[' type = TypeRef ( '|' rule = [ LexerRule ] ) ? ']'
+// '[' type = TypeRef ( '|' rule = [ AbstractRule ] ) ? ']'
 protected class CrossReference_Group extends GroupToken {
 	
 	public CrossReference_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3009,7 +3015,7 @@ protected class CrossReference_Group extends GroupToken {
 	}
 }
 
-// '[' type = TypeRef ( '|' rule = [ LexerRule ] ) ?
+// '[' type = TypeRef ( '|' rule = [ AbstractRule ] ) ?
 protected class CrossReference_0_Group extends GroupToken {
 	
 	public CrossReference_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3106,7 +3112,7 @@ protected class CrossReference_0_0_1_Assignment_type extends AssignmentToken  {
 }
 
 
-// ( '|' rule = [ LexerRule ] ) ?
+// ( '|' rule = [ AbstractRule ] ) ?
 protected class CrossReference_0_1_Group extends GroupToken {
 	
 	public CrossReference_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -3146,7 +3152,7 @@ protected class CrossReference_0_1_0_Keyword extends KeywordToken  {
 	}	
 }
 
-// rule = [ LexerRule ]
+// rule = [ AbstractRule ]
 protected class CrossReference_0_1_1_Assignment_rule extends AssignmentToken  {
 	
 	public CrossReference_0_1_1_Assignment_rule(IInstanceDescription curr, AbstractToken pred) {
@@ -3162,9 +3168,9 @@ protected class CrossReference_0_1_1_Assignment_rule extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("rule");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("LexerRule")) {
+			if(param.isInstanceOf("AbstractRule")) {
 				type = AssignmentType.CR;
-				element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prCrossReference().ele0110CrossReferenceLexerRule(); 
+				element = XtextGrammarTestLanguageGrammarAccess.INSTANCE.prCrossReference().ele0110CrossReferenceAbstractRule(); 
 				return new Solution(obj);
 			}
 		}

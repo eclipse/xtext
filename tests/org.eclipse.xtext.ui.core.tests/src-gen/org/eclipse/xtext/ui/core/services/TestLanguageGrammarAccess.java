@@ -22,7 +22,7 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 
 		// ( stuff += Stuff ) *
 		public Assignment eleAssignmentStuff() {
-			return (cAssignmentStuff != null) ? cAssignmentStuff : (cAssignmentStuff = (Assignment)getRule().eContents().get(0)); 
+			return (cAssignmentStuff != null) ? cAssignmentStuff : (cAssignmentStuff = (Assignment)getRule().eContents().get(1)); 
 		}
 
 		// Stuff
@@ -45,7 +45,7 @@ public class TestLanguageGrammarAccess extends BaseEPackageAccess implements IGr
 
 		// 'stuff' name = ID
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'stuff'

@@ -154,7 +154,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 
 		// name = ID
 		public Assignment eleAssignmentName() {
-			return (cAssignmentName != null) ? cAssignmentName : (cAssignmentName = (Assignment)getRule().eContents().get(0)); 
+			return (cAssignmentName != null) ? cAssignmentName : (cAssignmentName = (Assignment)getRule().eContents().get(1)); 
 		}
 
 		// ID
@@ -240,7 +240,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 
 		// num1 = INT num2 = INT ( '#' num3 += INT ) *
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// num1 = INT num2 = INT
@@ -306,7 +306,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 
 		// '=' ( str1 += STRING ) * str2 += STRING
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// '=' ( str1 += STRING ) *
@@ -359,7 +359,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 
 		// 'type' name = ID 'extends' ^extends = [ Type ]
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'type' name = ID 'extends'
@@ -421,7 +421,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 
 		// '#2' ref2 = ( 'mykeyword1' | STRING | 'mykeyword2' )
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// '#2'
@@ -479,7 +479,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends BaseEPackageAccess 
 
 		// '#3' id += ID ( '.' id += ID ) *
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// '#3' id += ID

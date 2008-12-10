@@ -9,12 +9,12 @@ import org.eclipse.xtext.service.AbstractServiceRegistrationFactory;
  */
 public abstract class AbstractReferenceGrammarTestLanguageRuntimeConfig extends AbstractServiceRegistrationFactory {
 
-	protected Class<? extends org.eclipse.xtext.IGrammarAccess> getIGrammarAccess() {
-		return org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess.class;
-	}
-		
 	protected Class<? extends org.eclipse.xtext.IMetamodelAccess> getIMetamodelAccess() {
 		return org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageMetamodelAccess.class;
+	}
+		
+	protected Class<? extends org.eclipse.xtext.IGrammarAccess> getIGrammarAccess() {
+		return org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess.class;
 	}
 		
 	protected Class<? extends org.eclipse.xtext.parser.IAstFactory> getIAstFactory() {
@@ -56,8 +56,8 @@ public abstract class AbstractReferenceGrammarTestLanguageRuntimeConfig extends 
 	
 	public Set<IServiceRegistration> registrations() {
 		return scope(org.eclipse.xtext.testlanguages.IReferenceGrammarTestLanguage.SCOPE)
-		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
 		.with(org.eclipse.xtext.IMetamodelAccess.class, getIMetamodelAccess())
+		.with(org.eclipse.xtext.IGrammarAccess.class, getIGrammarAccess())
 		.with(org.eclipse.xtext.parser.IAstFactory.class, getIAstFactory())
 		.with(org.eclipse.xtext.parser.IParser.class, getIParser())
 		.with(org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider.class, getIAntlrTokenFileProvider())

@@ -16,6 +16,7 @@ import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
 public class FowlerDslParseTreeConstructor extends AbstractParseTreeConstructor {
 
 	public IAbstractToken serialize(EObject object) {
+		if(object == null) throw new IllegalArgumentException("The to-be-serialialized model is null");
 		Solution t = internalSerialize(object);
 		if(t == null) throw new XtextSerializationException(getDescr(object), "No rule found for serialization");
 		return t.getPredecessor();
@@ -231,7 +232,7 @@ protected class Statemachine_0_0_0_0_0_1_Assignment_events extends AssignmentTok
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("events",required)) == null) return null;
+		if((value = current.getConsumable("events",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("events");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -286,7 +287,7 @@ protected class Statemachine_0_0_1_Assignment_commands extends AssignmentToken  
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("commands",required)) == null) return null;
+		if((value = current.getConsumable("commands",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("commands");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -328,7 +329,7 @@ protected class Statemachine_1_Assignment_states extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("states",required)) == null) return null;
+		if((value = current.getConsumable("states",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("states");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -422,7 +423,7 @@ protected class Event_0_0_Assignment_resetting extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("resetting",required)) == null) return null;
+		if((value = current.getConsumable("resetting",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("resetting");
 		if("resetting".equals(value)) { // xtext::Keyword
 			type = AssignmentType.KW;
@@ -445,7 +446,7 @@ protected class Event_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -469,7 +470,7 @@ protected class Event_1_Assignment_code extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("code",required)) == null) return null;
+		if((value = current.getConsumable("code",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("code");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -530,7 +531,7 @@ protected class Command_0_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -553,7 +554,7 @@ protected class Command_1_Assignment_code extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("code",required)) == null) return null;
+		if((value = current.getConsumable("code",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("code");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -569,12 +570,12 @@ protected class Command_1_Assignment_code extends AssignmentToken  {
 
 /************ begin Rule State ****************
  *
- * (error)
+ * State : 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ? ( transitions += Transition ) * 'end' ;
  *
  **/
 
 
-// (error)
+// 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ? ( transitions += Transition ) * 'end'
 protected class State_Group extends GroupToken {
 	
 	public State_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -602,7 +603,7 @@ protected class State_Group extends GroupToken {
 	}
 }
 
-// (error)
+// 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ? ( transitions += Transition ) *
 protected class State_0_Group extends GroupToken {
 	
 	public State_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -630,7 +631,7 @@ protected class State_0_Group extends GroupToken {
 	}
 }
 
-// (error)
+// 'state' name = ID ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ?
 protected class State_0_0_Group extends GroupToken {
 	
 	public State_0_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -710,7 +711,7 @@ protected class State_0_0_0_1_Assignment_name extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("name",required)) == null) return null;
+		if((value = current.getConsumable("name",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
@@ -722,7 +723,7 @@ protected class State_0_0_0_1_Assignment_name extends AssignmentToken  {
 }
 
 
-// (error)
+// ( 'actions' '{' ( actions += [ Command ] ) + '}' ) ?
 protected class State_0_0_1_Group extends GroupToken {
 	
 	public State_0_0_1_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -750,7 +751,7 @@ protected class State_0_0_1_Group extends GroupToken {
 	}
 }
 
-// (error)
+// 'actions' '{' ( actions += [ Command ] ) +
 protected class State_0_0_1_0_Group extends GroupToken {
 	
 	public State_0_0_1_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -831,7 +832,7 @@ protected class State_0_0_1_0_0_1_Keyword extends KeywordToken  {
 }
 
 
-// (error)
+// ( actions += [ Command ] ) +
 protected class State_0_0_1_0_1_Assignment_actions extends AssignmentToken  {
 	
 	public State_0_0_1_0_1_Assignment_actions(IInstanceDescription curr, AbstractToken pred) {
@@ -843,7 +844,7 @@ protected class State_0_0_1_0_1_Assignment_actions extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("actions",required)) == null) return null;
+		if((value = current.getConsumable("actions",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("actions");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
@@ -884,7 +885,7 @@ protected class State_0_1_Assignment_transitions extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("transitions",required)) == null) return null;
+		if((value = current.getConsumable("transitions",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("transitions");
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
@@ -918,12 +919,12 @@ protected class State_1_Keyword_end extends KeywordToken  {
 
 /************ begin Rule Transition ****************
  *
- * (error)
+ * Transition : event = [ Event ] '=>' state = [ State ] ;
  *
  **/
 
 
-// (error)
+// event = [ Event ] '=>' state = [ State ]
 protected class Transition_Group extends GroupToken {
 	
 	public Transition_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -951,7 +952,7 @@ protected class Transition_Group extends GroupToken {
 	}
 }
 
-// (error)
+// event = [ Event ] '=>'
 protected class Transition_0_Group extends GroupToken {
 	
 	public Transition_0_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -979,7 +980,7 @@ protected class Transition_0_Group extends GroupToken {
 	}
 }
 
-// (error)
+// event = [ Event ]
 protected class Transition_0_0_Assignment_event extends AssignmentToken  {
 	
 	public Transition_0_0_Assignment_event(IInstanceDescription curr, AbstractToken pred) {
@@ -991,7 +992,7 @@ protected class Transition_0_0_Assignment_event extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("event",required)) == null) return null;
+		if((value = current.getConsumable("event",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("event");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);
@@ -1018,7 +1019,7 @@ protected class Transition_0_1_Keyword extends KeywordToken  {
 }
 
 
-// (error)
+// state = [ State ]
 protected class Transition_1_Assignment_state extends AssignmentToken  {
 	
 	public Transition_1_Assignment_state(IInstanceDescription curr, AbstractToken pred) {
@@ -1030,7 +1031,7 @@ protected class Transition_1_Assignment_state extends AssignmentToken  {
 	}
 	
 	protected Solution createSolution() {
-		if((value = current.getConsumable("state",required)) == null) return null;
+		if((value = current.getConsumable("state",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("state");
 		if(value instanceof EObject) { // xtext::CrossReference
 			IInstanceDescription param = getDescr((EObject)value);

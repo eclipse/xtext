@@ -84,7 +84,7 @@ public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 			AbstractNode lastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
 
-			AbstractNode currentNode = ParseTreeUtil.getCurrentNodeByOffset(rootNode, offset);
+			AbstractNode currentNode = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, offset);
 
 			String prefix = calculatePrefix(viewer, offset, currentNode);
 

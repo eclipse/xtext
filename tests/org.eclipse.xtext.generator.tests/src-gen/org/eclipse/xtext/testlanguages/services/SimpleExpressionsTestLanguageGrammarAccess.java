@@ -26,7 +26,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 
 		// Addition ( { current = Sequence . expressions += current } expressions += Addition ) *
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// Addition
@@ -244,7 +244,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends BaseEPackageAcce
 
 		// name = ID
 		public Assignment eleAssignmentName() {
-			return (cAssignmentName != null) ? cAssignmentName : (cAssignmentName = (Assignment)getRule().eContents().get(0)); 
+			return (cAssignmentName != null) ? cAssignmentName : (cAssignmentName = (Assignment)getRule().eContents().get(1)); 
 		}
 
 		// ID

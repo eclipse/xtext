@@ -1,4 +1,4 @@
-// $ANTLR 3.0 ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g 2008-12-08 11:19:44
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g 2008-12-10 12:13:52
 
 package org.eclipse.xtext.ui.core.parser.internal; 
 
@@ -62,14 +62,14 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleFile
     // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:62:1: entryRuleFile returns [EObject current=null] : iv_ruleFile= ruleFile EOF ;
-    public EObject entryRuleFile() throws RecognitionException {
+    public final EObject entryRuleFile() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleFile = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:63:2: (iv_ruleFile= ruleFile EOF )
+            // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:62:46: (iv_ruleFile= ruleFile EOF )
             // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:63:2: iv_ruleFile= ruleFile EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/ui/core/TestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
@@ -97,7 +97,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleFile
     // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:70:1: ruleFile returns [EObject current=null] : (lv_stuff= ruleStuff )* ;
-    public EObject ruleFile() throws RecognitionException {
+    public final EObject ruleFile() throws RecognitionException {
         EObject current = null;
 
         EObject lv_stuff = null;
@@ -105,7 +105,7 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:73:1: ( (lv_stuff= ruleStuff )* )
+            // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:72:33: ( (lv_stuff= ruleStuff )* )
             // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:73:1: (lv_stuff= ruleStuff )*
             {
             // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:73:1: (lv_stuff= ruleStuff )*
@@ -167,14 +167,14 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start entryRuleStuff
     // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:95:1: entryRuleStuff returns [EObject current=null] : iv_ruleStuff= ruleStuff EOF ;
-    public EObject entryRuleStuff() throws RecognitionException {
+    public final EObject entryRuleStuff() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleStuff = null;
 
 
         try {
-            // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:96:2: (iv_ruleStuff= ruleStuff EOF )
+            // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:95:47: (iv_ruleStuff= ruleStuff EOF )
             // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:96:2: iv_ruleStuff= ruleStuff EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/ui/core/TestLanguage.xmi#//@rules.1" /* xtext::ParserRule */, currentNode); 
@@ -202,14 +202,14 @@ public class InternalTestLanguageParser extends AbstractAntlrParser {
 
     // $ANTLR start ruleStuff
     // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:103:1: ruleStuff returns [EObject current=null] : ( 'stuff' (lv_name= RULE_ID ) ) ;
-    public EObject ruleStuff() throws RecognitionException {
+    public final EObject ruleStuff() throws RecognitionException {
         EObject current = null;
 
         Token lv_name=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:106:1: ( ( 'stuff' (lv_name= RULE_ID ) ) )
+            // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:105:33: ( ( 'stuff' (lv_name= RULE_ID ) ) )
             // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:106:1: ( 'stuff' (lv_name= RULE_ID ) )
             {
             // ./src-gen/org/eclipse/xtext/ui/core/parser/internal/InternalTestLanguage.g:106:1: ( 'stuff' (lv_name= RULE_ID ) )

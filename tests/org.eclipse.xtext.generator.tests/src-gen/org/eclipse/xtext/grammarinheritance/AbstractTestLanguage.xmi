@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xtext="http://www.eclipse.org/2008/Xtext" abstract="true">
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext" abstract="true">
   <idElements>org</idElements>
   <idElements>eclipse</idElements>
   <idElements>xtext</idElements>
@@ -8,7 +8,9 @@
   <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="mm" uri="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore"/>
   <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore" uri="http://www.eclipse.org/emf/2002/Ecore"/>
   <rules xsi:type="xtext:ParserRule" name="InheritedParserRule">
-    <type metamodel="//@metamodelDeclarations.0" name="AType"/>
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore#//AType"/>
+    </type>
     <alternatives xsi:type="xtext:Group">
       <abstractTokens xsi:type="xtext:Keyword" value="element"/>
       <abstractTokens xsi:type="xtext:Assignment" feature="name" operator="=">
@@ -17,7 +19,13 @@
     </alternatives>
   </rules>
   <rules xsi:type="xtext:LexerRule" name="REAL" body="RULE_INT '.' RULE_INT">
-    <type metamodel="//@metamodelDeclarations.1" name="EDouble"/>
+    <type metamodel="//@metamodelDeclarations.1">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </type>
   </rules>
-  <rules xsi:type="xtext:LexerRule" name="ID" body="('^')?('a'..'z'|'A'..'Z'|'&#xf6;'|'&#xe4;'|'&#xfc;'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*"/>
+  <rules xsi:type="xtext:LexerRule" name="ID" body="('^')?('a'..'z'|'A'..'Z'|'&#xf6;'|'&#xe4;'|'&#xfc;'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*">
+    <type metamodel="//@metamodelDeclarations.1">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </type>
+  </rules>
 </xtext:Grammar>

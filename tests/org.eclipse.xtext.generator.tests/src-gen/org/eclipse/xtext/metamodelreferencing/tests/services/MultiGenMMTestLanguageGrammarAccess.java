@@ -25,7 +25,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends BaseEPackageAccess impl
 
 		// name = ID ( nameRefs += NameRef ) *
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// name = ID
@@ -54,7 +54,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends BaseEPackageAccess impl
 		private Assignment cAssignmentName;
 		private RuleCall c0LexerRuleCallSTRING;
 		
-		// NameRef returns other :: FooBar : name = STRING ;
+		// NameRef returns FooBar : name = STRING ;
 		public ParserRule getRule() {
 			return (rule != null) ? rule : (rule = (ParserRule) getGrammar().eContents().get(3)); 
 		}
@@ -97,7 +97,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends BaseEPackageAccess impl
 		return (pFoo != null) ? pFoo : (pFoo = new FooElements());
 	} 
 
-	// NameRef returns other :: FooBar : name = STRING ;
+	// NameRef returns FooBar : name = STRING ;
 	public NameRefElements prNameRef() {
 		return (pNameRef != null) ? pNameRef : (pNameRef = new NameRefElements());
 	} 

@@ -31,7 +31,6 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.crossref.ILinkingService;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -56,12 +55,6 @@ public class XtextHyperlinkDetector implements IHyperlinkDetector {
 	// logger available to subclasses
 	protected final Logger logger = Logger.getLogger(getClass());
 
-	private ILinkingService linkingService;
-
-	public XtextHyperlinkDetector(ILinkingService linkingService) {
-		this.linkingService = linkingService;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -72,18 +65,29 @@ public class XtextHyperlinkDetector implements IHyperlinkDetector {
 	 */
 	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, IRegion region, boolean canShowMultipleHyperlinks) {
 
+		// TODO: should all of this be part of the read transaction?
 		CompositeNode rootNode = getRootNode(textViewer.getDocument());
-		LeafNode currentNode = (LeafNode) ParseTreeUtil.getCurrentNodeByOffset(rootNode, region.getOffset());
+		LeafNode currentNode = (LeafNode) ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, region.getOffset());
 
 		if (currentNode.getGrammarElement() instanceof CrossReference) {
 
 			EObject semanticModel = NodeUtil.getNearestSemanticObject(currentNode);
 			EReference eReference = GrammarUtil.getReference((CrossReference) currentNode.getGrammarElement(),
 					semanticModel.eClass());
-			List<EObject> linkedObjects = this.linkingService.getLinkedObjects(semanticModel, eReference, currentNode);
+			EObject linkMe = null;
+			if (eReference.isMany()) {
+				List<?> values = (List<?>) semanticModel.eGet(eReference);
+				if (!values.isEmpty() && values.get(0) instanceof EObject)
+					linkMe = (EObject) values.get(0);
+			} else {
+				Object value = semanticModel.eGet(eReference);
+				if (value instanceof EObject)
+					linkMe = (EObject) value;
+			}
+//			List<EObject> linkedObjects = this.linkingService.getLinkedObjects(semanticModel, eReference, currentNode);
 
-			if (!linkedObjects.isEmpty()) {
-				return createXtextHyperlink(currentNode, linkedObjects.iterator().next());
+			if (linkMe != null) {
+				return createXtextHyperlink(currentNode, linkMe);
 			}
 
 		}

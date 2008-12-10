@@ -5,12 +5,6 @@
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="addOperands" upperBound="-1" eType="//Expression" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="minusOperands" upperBound="-1" eType="//Expression" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Atom" eSuperTypes="//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -21,12 +15,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" upperBound="-1">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeB" eSuperTypes="//TypeA1">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="//TypeD" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeC" eSuperTypes="//TypeA1">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="//TypeD" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TrickyB">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
@@ -40,15 +28,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="C1" eSuperTypes="//TrickyC">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="//TrickyC" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="C2" eSuperTypes="//TrickyC">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="y" eType="//C1" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="C3" eSuperTypes="//TrickyC">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="z" eType="//C2" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TrickyD">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" upperBound="-1">
@@ -79,5 +58,26 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" upperBound="-1">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="addOperands" upperBound="-1" eType="//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="minusOperands" upperBound="-1" eType="//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeB" eSuperTypes="//TypeA1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="//TypeD" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeC" eSuperTypes="//TypeA1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="//TypeD" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="C1" eSuperTypes="//TrickyC">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x" eType="//TrickyC" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="C2" eSuperTypes="//TrickyC">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="y" eType="//C1" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="C3" eSuperTypes="//TrickyC">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="z" eType="//C2" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

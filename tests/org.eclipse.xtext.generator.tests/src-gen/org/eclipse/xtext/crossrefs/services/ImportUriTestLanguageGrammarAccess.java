@@ -25,7 +25,7 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// ( imports += Import ) * ( types += Type ) *
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// ( imports += Import ) *
@@ -63,7 +63,7 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// 'import' importURI = STRING
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'import'
@@ -101,7 +101,7 @@ public class ImportUriTestLanguageGrammarAccess extends BaseEPackageAccess imple
 
 		// 'type' name = ID 'extends' ^extends = [ Type ]
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// 'type' name = ID 'extends'

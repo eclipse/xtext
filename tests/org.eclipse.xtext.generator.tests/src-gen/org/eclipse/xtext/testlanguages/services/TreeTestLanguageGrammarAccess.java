@@ -22,7 +22,7 @@ public class TreeTestLanguageGrammarAccess extends BaseEPackageAccess implements
 
 		// ( children += Node ) *
 		public Assignment eleAssignmentChildren() {
-			return (cAssignmentChildren != null) ? cAssignmentChildren : (cAssignmentChildren = (Assignment)getRule().eContents().get(0)); 
+			return (cAssignmentChildren != null) ? cAssignmentChildren : (cAssignmentChildren = (Assignment)getRule().eContents().get(1)); 
 		}
 
 		// Node
@@ -57,7 +57,7 @@ public class TreeTestLanguageGrammarAccess extends BaseEPackageAccess implements
 
 		// name = ID '(' attrib = STRING ')' '{' ( children += Node ) * '};'
 		public Group eleGroup() {
-			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(0)); 
+			return (cGroup != null) ? cGroup : (cGroup = (Group)getRule().eContents().get(1)); 
 		}
 
 		// name = ID '(' attrib = STRING ')' '{' ( children += Node ) *
