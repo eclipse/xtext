@@ -1,6 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.util;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 
 import junit.framework.TestCase;
@@ -19,7 +27,7 @@ public class ChainedIteratorTest extends TestCase {
 	
 	public void testFirstArgNull() throws Exception {
 		try {
-			new ChainedIterator<String>(null,null);
+			new ChainedIterator<String>(null, Collections.<String>emptyList().iterator());
 			fail("nullpointer exception expected");
 		} catch (NullPointerException npe){
 			//expected
