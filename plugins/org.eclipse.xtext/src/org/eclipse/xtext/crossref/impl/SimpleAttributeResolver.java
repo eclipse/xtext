@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Filter;
-import org.eclipse.xtext.util.FilteringIterator;
 import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.SimpleCache;
 
@@ -68,7 +68,7 @@ public class SimpleAttributeResolver<T> {
 	}
 
 	public Iterable<EObject> getMatches(Iterable<? extends EObject> candidates, final T value) {
-		return new FilteringIterator<EObject>(candidates.iterator(), new Filter<EObject>() {
+		return CollectionUtils.filter(candidates.iterator(), new Filter<EObject>() {
 			public boolean matches(EObject param) {
 				final T candidateValue = getValue(param);
 				return value.equals(candidateValue);

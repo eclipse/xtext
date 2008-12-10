@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.impl.SimpleCachingScope;
 
@@ -25,8 +26,7 @@ public class XtextMetamodelReferenceScope extends SimpleCachingScope {
 	@Override
 	protected String getNameFeature(EClass type) {
 		if (AbstractMetamodelDeclaration.class.isAssignableFrom(type.getInstanceClass())) {
-//			return type.getEStructuralFeature(XtextPackage.ABSTRACT_METAMODEL_DECLARATION__ALIAS).getName();
-			return "alias";
+			return XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_Alias().getName();
 		}
 		return super.getNameFeature(type);
 	}

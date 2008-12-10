@@ -8,6 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.metamodel;
 
+import static org.eclipse.xtext.util.CollectionUtils.addAll;
+import static org.eclipse.xtext.util.CollectionUtils.filter;
+import static org.eclipse.xtext.util.CollectionUtils.map;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -43,11 +47,9 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
-import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Filter;
 import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xtext.XtextMetamodelReferenceHelper;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -76,9 +78,6 @@ public class Xtext2EcoreTransformer {
 		}
 	}
 
-	public Xtext2EcoreTransformer() {
-	}
-
 	public static void doTransform(Grammar grammar) {
 		new Xtext2EcoreTransformer().transform(grammar);
 	}
@@ -92,30 +91,14 @@ public class Xtext2EcoreTransformer {
 		final ResourceSet resourceSet = grammar.eResource().getResourceSet();
 		if (resourceSet == null)
 			throw new NullPointerException();
-		CollectionUtils.addAll(result, CollectionUtils.filter(CollectionUtils.map(CollectionUtils.filter(grammar
-				.getMetamodelDeclarations(), new Filter<AbstractMetamodelDeclaration>() {
-			public boolean matches(AbstractMetamodelDeclaration param) {
-				return param instanceof GeneratedMetamodel;
-			}
-		}), new Function<AbstractMetamodelDeclaration, EPackage>() {
-			public EPackage exec(AbstractMetamodelDeclaration param) {
-				for (Resource resource : resourceSet.getResources()) {
-					for (EObject content : resource.getContents()) {
-						if (content instanceof EPackage) {
-							final EPackage candidate = (EPackage) content;
-							if (((GeneratedMetamodel) param).getNsURI().equals(candidate.getNsURI())) {
-								return candidate;
-							}
-						}
+		addAll(result, filter(map(filter(grammar.getMetamodelDeclarations(), Filter.Util
+				.<AbstractMetamodelDeclaration> instanceOf(GeneratedMetamodel.class)),
+				new Function<AbstractMetamodelDeclaration, EPackage>() {
+					public EPackage exec(AbstractMetamodelDeclaration param) {
+						IDeclaredMetamodelAccess metamodelAccess = DeclaredMetamodelAccessFactory.getAccessTo(param);
+						return metamodelAccess.getPackage();
 					}
-				}
-				return null;
-			}
-		}), new Filter<EPackage>() {
-			public boolean matches(EPackage param) {
-				return param != null;
-			}
-		}));
+				}), Filter.Util.<EPackage> notNull()));
 		return getPackagesSortedByName(result);
 	}
 
@@ -272,14 +255,15 @@ public class Xtext2EcoreTransformer {
 			result = GrammarUtil.getTypeRef(grammar, returnTypeName);
 			if (result.getMetamodel() == null) {
 				AbstractMetamodelDeclaration bestMatch = null;
-				for(AbstractMetamodelDeclaration decl: grammar.getMetamodelDeclarations()) {
+				for (AbstractMetamodelDeclaration decl : grammar.getMetamodelDeclarations()) {
 					if (decl instanceof GeneratedMetamodel) {
 						if (bestMatch == null)
 							bestMatch = decl;
 						else if (Strings.isEmpty(decl.getAlias())) {
 							result.setMetamodel(decl);
 							break;
-						} else {
+						}
+						else {
 							bestMatch = null;
 							break;
 						}
@@ -373,8 +357,10 @@ public class Xtext2EcoreTransformer {
 					String alias = Strings.emptyIfNull(metamodelDeclaration.getAlias());
 					if (generateUs.containsKey(alias)) {
 						generateUs.put(alias, null);
-						throw new TransformationException(ErrorCode.AliasForMetamodelAlreadyExists, "Alias '" + alias + "' registered more than once.", metamodelDeclaration);
-					} else {
+						throw new TransformationException(ErrorCode.AliasForMetamodelAlreadyExists, "Alias '" + alias
+								+ "' registered more than once.", metamodelDeclaration);
+					}
+					else {
 						generateUs.put(alias, (GeneratedMetamodel) metamodelDeclaration);
 					}
 				}
@@ -386,11 +372,12 @@ public class Xtext2EcoreTransformer {
 				reportError(e);
 			}
 		}
-		for(GeneratedMetamodel metamodel: generateUs.values()) {
+		for (GeneratedMetamodel metamodel : generateUs.values()) {
 			try {
 				if (metamodel != null)
 					addGeneratedEPackage(metamodel);
-			} catch(TransformationException e) {
+			}
+			catch (TransformationException e) {
 				reportError(e);
 			}
 		}
@@ -450,7 +437,7 @@ public class Xtext2EcoreTransformer {
 
 		String typeRefName = null;
 		//		typeRefName = typeRef.getName();
-		typeRefName = XtextMetamodelReferenceHelper.getTypeRefName(typeRef);
+		typeRefName = GrammarUtil.getTypeRefName(typeRef);
 		if (typeRefName == null)
 			typeRefName = name;
 		if (typeRefName == null)

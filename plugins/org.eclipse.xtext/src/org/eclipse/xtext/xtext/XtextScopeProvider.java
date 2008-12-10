@@ -7,19 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.ReferencedMetamodel;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.crossref.IScope;
@@ -28,6 +28,8 @@ import org.eclipse.xtext.crossref.impl.DefaultScopeProvider;
 import org.eclipse.xtext.crossref.impl.ScopedElement;
 import org.eclipse.xtext.crossref.impl.SimpleCachingScope;
 import org.eclipse.xtext.crossref.impl.SimpleScope;
+import org.eclipse.xtext.resource.metamodel.IDeclaredMetamodelAccess;
+import org.eclipse.xtext.resource.metamodel.DeclaredMetamodelAccessFactory;
 import org.eclipse.xtext.util.CollectionUtils;
 import org.eclipse.xtext.util.Function;
 
@@ -38,34 +40,39 @@ public class XtextScopeProvider extends DefaultScopeProvider {
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		if ((context instanceof TypeRef) && reference.getFeatureID() == XtextPackage.TYPE_REF__TYPE) {
-			TypeRef typeRef = (TypeRef) context;
-			AbstractMetamodelDeclaration metaModel = typeRef.getMetamodel();
-			if (metaModel != null && metaModel instanceof ReferencedMetamodel) {
-				try {
-					final EPackage pack = GrammarUtil.loadEPackage((ReferencedMetamodel) metaModel);
-					if (pack != null) {
-						List<EClassifier> classifiers = pack.getEClassifiers();
-						return new SimpleScope(IScope.NULLSCOPE, 
-								CollectionUtils.map(classifiers, new Function<EClassifier, IScopedElement>() {
-									public IScopedElement exec(EClassifier param) {
-										return ScopedElement.create(param.getName(), param);
-									}
-								}));
-					}
+		if (reference == XtextPackage.eINSTANCE.getTypeRef_Type()) {
+			if (context instanceof TypeRef) {
+				final TypeRef typeRef = (TypeRef) context;
+				final AbstractMetamodelDeclaration metaModel = typeRef.getMetamodel();
+				if (metaModel != null) {
+					return createClassifierScope(DeclaredMetamodelAccessFactory.getAccessTo(metaModel).getEClassifiers());
+				} else if (metaModel == null) {
+					return createReferencedPackagesScope(GrammarUtil.getGrammar(context));
 				}
-				catch (RuntimeException ex) {
-					if (ex.getCause() instanceof IOException) {
-						// invalid url
-					} else {
-						throw ex;
-					}
-				}
-				return IScope.NULLSCOPE;
-			} else
-				return IScope.NULLSCOPE;
+			} else if (context instanceof CrossReference || context instanceof ParserRule) {
+				return createReferencedPackagesScope(GrammarUtil.getGrammar(context));
+			} 
+			return IScope.NULLSCOPE;
 		} else 
 			return super.getScope(context, reference);
+	}
+
+	private SimpleScope createClassifierScope(Iterable<EClassifier> classifiers) {
+		return new SimpleScope(IScope.NULLSCOPE, 
+				CollectionUtils.map(classifiers, new Function<EClassifier, IScopedElement>() {
+					public IScopedElement exec(EClassifier param) {
+						return ScopedElement.create(param.getName(), param);
+					}
+				}));
+	}
+	
+	protected IScope createReferencedPackagesScope(Grammar g) {
+		final Collection<EClassifier> allClassifiers = new ArrayList<EClassifier>();
+		for(AbstractMetamodelDeclaration decl: g.getMetamodelDeclarations()) {
+			final IDeclaredMetamodelAccess access = DeclaredMetamodelAccessFactory.getAccessTo(decl);
+			CollectionUtils.addAll(allClassifiers, access.getEClassifiers());
+		}
+		return createClassifierScope(allClassifiers);
 	}
 	
 	@Override

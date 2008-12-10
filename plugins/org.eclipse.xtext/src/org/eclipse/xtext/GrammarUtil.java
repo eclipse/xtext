@@ -30,8 +30,13 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builtin.IXtextBuiltin;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeAdapter;
+import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.resource.metamodel.IDeclaredMetamodelAccess;
+import org.eclipse.xtext.resource.metamodel.DeclaredMetamodelAccessFactory;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xtext.XtextMetamodelReferenceHelper;
 
 /**
  * @author Jan Koehnlein
@@ -283,14 +288,34 @@ public class GrammarUtil {
 	public static TypeRef getTypeRef(Grammar grammar, String qualifiedName) {
 		TypeRef result = XtextFactory.eINSTANCE.createTypeRef();
 		String[] split = qualifiedName.split("::");
+		String name = qualifiedName;
 		if (split.length > 1) {
 			result.setMetamodel(findMetaModel(grammar, split[0], true));
-			result.setType(XtextMetamodelReferenceHelper.findEClassifier(split[1], result.getMetamodel()));
+			name = split[1];
 		} else {
 			result.setMetamodel(findDefaultMetaModel(grammar, true));
-			result.setType(XtextMetamodelReferenceHelper.findEClassifier(qualifiedName, result.getMetamodel()));
+		}
+		if (result.getMetamodel() instanceof ReferencedMetamodel) {
+			IDeclaredMetamodelAccess metamodelAccess = DeclaredMetamodelAccessFactory.getAccessTo(result.getMetamodel());
+			result.setType(metamodelAccess.getEClassifier(name));
 		}
 		return result;
+	}
+	
+	public static String getTypeRefName(TypeRef typeRef) {
+		if (typeRef.getType() != null)
+			return typeRef.getType().getName();
+		final NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(typeRef);
+		if (nodeAdapter != null) {
+			final CompositeNode node = nodeAdapter.getParserNode();
+			final List<LeafNode> leafNodes = node.getLeafNodes();
+			for (int i = leafNodes.size() - 1; i >= 0; i++) {
+				final LeafNode leaf = leafNodes.get(i);
+				if (!leaf.isHidden())
+					return leaf.getText();
+			}
+		}
+		return null;
 	}
 
 	public static boolean isAssigned(EObject e) {
