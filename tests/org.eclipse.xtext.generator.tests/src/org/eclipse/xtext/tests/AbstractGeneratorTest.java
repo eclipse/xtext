@@ -24,12 +24,14 @@ import org.eclipse.xtend.XtendFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.GenerateAllTestGrammars;
+import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
@@ -110,6 +112,14 @@ public abstract class AbstractGeneratorTest extends TestCase {
 	
 	protected IValueConverterService getValueConverterService() {
 		return ServiceRegistry.getService(currentScope, IValueConverterService.class);
+	}
+	
+	protected IMetamodelAccess getMetamodelAccess() {
+		return ServiceRegistry.getService(currentScope, IMetamodelAccess.class);
+	}
+	
+	protected ITokenSerializer getTokenSerializer() {
+		return ServiceRegistry.getService(currentScope, ITokenSerializer.class);
 	}
 
 	// parse methods

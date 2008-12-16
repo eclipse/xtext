@@ -19,6 +19,7 @@ import org.eclipse.xtext.grammarinheritance.AbstractTestLanguage;
 import org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage;
 import org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage;
 import org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage;
+import org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage;
 import org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage;
 import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage;
 import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage;
@@ -55,11 +56,23 @@ public class GenerateAllTestGrammars {
 			MultiGenMMTestLanguage.class,
 			DummyTestLanguage.class,
 			TestLanguage.class,
-			SimpleReconstrTestLanguage.class, ComplexReconstrTestLanguage.class, LexerTestLanguage.class,
-			SimpleExpressionsTestLanguage.class, ActionTestLanguage.class, OptionalEmptyTestLanguage.class, ReferenceGrammarTestLanguage.class,
-			LookaheadTestLanguage.class, Bug250313.class, FowlerDslTestLanguage.class, TreeTestLanguage.class, ImportUriTestLanguage.class,
-			PartialParserTestLanguage.class, ContentAssistTestLanguage.class, TransientValuesTest.class,
-			FormatterTestLanguage.class
+			SimpleReconstrTestLanguage.class, 
+			ComplexReconstrTestLanguage.class, 
+			LexerTestLanguage.class,
+			SimpleExpressionsTestLanguage.class, 
+			ActionTestLanguage.class, 
+			OptionalEmptyTestLanguage.class, 
+			ReferenceGrammarTestLanguage.class,
+			LookaheadTestLanguage.class, 
+			Bug250313.class, 
+			FowlerDslTestLanguage.class, 
+			TreeTestLanguage.class, 
+			ImportUriTestLanguage.class,
+			PartialParserTestLanguage.class, 
+			ContentAssistTestLanguage.class, 
+			TransientValuesTest.class,
+			FormatterTestLanguage.class,
+			DatatypeRulesTestLanguage.class
 			};
 
 	public static void main(String[] args) throws Exception {

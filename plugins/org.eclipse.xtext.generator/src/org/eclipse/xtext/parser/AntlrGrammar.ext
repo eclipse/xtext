@@ -20,7 +20,7 @@ entryRuleName(ParserRule this) : 'entryRule'+name;
 
 
 typeName(Action this) : typeName.type.name;
-typeName(ParserRule this) : getReturnTypeName();
+typeName(AbstractRule this) : type.type.name;
 
 setOrAdd(Action this) : if operator=='+=' then 'add' else 'set';
 
@@ -40,7 +40,7 @@ toStringLiteral(xtext::AbstractElement this) :
 	"null";
 
 toStringLiteral(RuleCall this) :
-	this.calledParserRule()!=null ? "null" : '"'+this.calledRule().name+'"';
+	rule!=null ? '"'+this.rule.name+'"' :  "null";
 
 toStringLiteral(Keyword this) :
 	'"'+this.value+'"';

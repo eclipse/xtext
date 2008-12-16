@@ -47,6 +47,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
 }
 
 @parser::members {
@@ -88,6 +89,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 «DEFINE rule FOR ParserRule»
 «IF isCalled()»
+«IF !isDatatypeRule()»
 // Entry rule «entryRuleName()»
 «entryRuleName()» returns [EObject current=null] :
 	{ currentNode = «EXPAND createCompositeNode» }
@@ -101,7 +103,23 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
     «EXPAND ebnf FOR this.alternatives»;
-    «ENDIF»
+«ELSE»
+// Entry rule «entryRuleName()»
+«entryRuleName()» returns [String current=null] :
+	{ currentNode = «EXPAND createCompositeNode» } 
+	 iv_«ruleName()»=«ruleName()» 
+	 { $current=$iv_«ruleName()».current; }  
+	 EOF 
+;
+
+// Rule «name»
+«ruleName()» returns [String current=null] 
+    @init { StringBuilder buffer=new StringBuilder(20); setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); current = buffer.length() > 0 ? buffer.toString() : null; }:
+   «EXPAND dataTypeEbnf FOR this.alternatives»
+    ;
+«ENDIF»
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE rule FOR LexerRule»
@@ -110,6 +128,49 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 «DEFINE ebnf FOR AbstractElement-»
 «IF mustBeParenthesized()»(«EXPAND ebnf2»)«ELSE»«EXPAND ebnf2»«ENDIF»«cardinality-»
+«ENDDEFINE»
+
+«DEFINE dataTypeEbnf FOR AbstractElement-»
+«IF mustBeParenthesized()»(«EXPAND dataTypeEbnf2»)«ELSE»«EXPAND dataTypeEbnf2»«ENDIF»«cardinality-»
+«ENDDEFINE»
+
+«DEFINE dataTypeEbnf2 FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
+
+«DEFINE dataTypeEbnf2 FOR Alternatives-»«EXPAND dataTypeEbnf FOREACH groups SEPARATOR '\n    |'»«ENDDEFINE»
+
+«DEFINE dataTypeEbnf2 FOR Group»«EXPAND dataTypeEbnf FOREACH abstractTokens»«ENDDEFINE»
+
+«DEFINE dataTypeEbnf2 FOR Keyword»'«value»' 
+    {
+        buffer.append(«toStringLiteral()»);
+        «EXPAND createLeafNode» 
+    }
+«ENDDEFINE»
+
+«DEFINE dataTypeEbnf2 FOR RuleCall-»
+«IF ParserRule.isInstance(rule) && !isAssigned()»
+    { 
+        currentNode=«EXPAND createCompositeNode» 
+    }
+«ENDIF-»
+    «localVar()»=«rule.ruleName()-»
+    {
+«IF ParserRule.isInstance(rule)»
+		if ($«localVar()».current != null) buffer.append($«localVar()».current);
+«ELSE»
+		buffer.append($«localVar()».text);
+«ENDIF»
+    }
+«IF ParserRule.isInstance(rule) && !isAssigned()»
+    { 
+        currentNode = currentNode.getParent();
+    }
+«ENDIF-»
+«IF LexerRule.isInstance(rule)»
+    { 
+    «EXPAND createLeafNode» 
+    }
+«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE ebnf2 FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
@@ -123,7 +184,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 		«REM» Cross references are handled in the linking phase «ENDREM»
 		{
 			if ($current==null) {
-	            $current = factory.create("«containingParserRule().getReturnTypeName()»");
+	            $current = factory.create("«containingParserRule().typeName()»");
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
@@ -139,15 +200,19 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 	        «IF isParserRuleAssignment()»currentNode = currentNode.getParent();
 	        «ENDIF-»
 	        if ($current==null) {
-	            $current = factory.create("«containingParserRule().getReturnTypeName()»");
+	            $current = factory.create("«containingParserRule().typeName()»");
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        «REM»the use of input.LT(-1) in the following line is a workaroudn for a bug of antlr, where assignements of alternative keywords are ignored when there are actions«ENDREM»
-	        factory.«setOrAdd()»($current, "«feature»", «
-	        	IF isBoolean()»true«
-	        	ELSE»«eAllContents.typeSelect(Keyword).isEmpty ? localVar() : "input.LT(-1)"»«
-	        	ENDIF»,«terminal.toStringLiteral()»);
-	         }
+	        try {
+	        	factory.«setOrAdd()»($current, "«feature»", «
+	        		IF isBoolean()»true«
+	        		ELSE»«eAllContents.typeSelect(Keyword).isEmpty ? localVar() : "input.LT(-1)"»«
+	        		ENDIF»,«terminal.toStringLiteral()»);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	«ENDIF»
 «ENDDEFINE»
 
@@ -176,19 +241,19 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 «ENDDEFINE»
 
 «DEFINE ebnf2 FOR RuleCall-»
-«IF ParserRule.isInstance(calledRule()) && !isAssigned()»
+«IF ParserRule.isInstance(rule) && !isAssigned()»
     { 
         currentNode=«EXPAND createCompositeNode» 
     }
     «localVar()»=«ENDIF-»
-«calledRule().ruleName()-»
-«IF ParserRule.isInstance(calledRule()) && !isAssigned()»
+«rule.ruleName()-»
+«IF ParserRule.isInstance(rule) && !isAssigned()»
     { 
         $current = $«localVar()».current; 
         currentNode = currentNode.getParent();
     }
 «ENDIF-»
-«IF LexerRule.isInstance(calledRule())»
+«IF LexerRule.isInstance(rule)»
     { 
     «EXPAND createLeafNode» 
     }

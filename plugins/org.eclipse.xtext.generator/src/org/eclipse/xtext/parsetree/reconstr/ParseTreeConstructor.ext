@@ -68,7 +68,7 @@ List[String] checkPath(Assignment this) :
 	{'obj.checkConsume("'+feature+'")'};
 	
 List[String] checkPath(RuleCall this) : 
-	{if calledParserRule()!=null then 'obj.isInstanceOf("'+calledParserRule().getReturnTypeName()+'")' else "true"};
+	{if calledParserRule()!=null then 'obj.isInstanceOf("'+calledParserRule().type.type.name+'")' else "true"};
 
 		
 List[String] checkPath(Alternatives this) : 
