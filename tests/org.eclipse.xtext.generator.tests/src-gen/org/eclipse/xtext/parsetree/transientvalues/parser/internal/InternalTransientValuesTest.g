@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
 }
 
 @parser::members {
@@ -55,6 +56,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
         appendSkippedTokens();
     } 
 }
+
 
 
 
@@ -104,7 +106,9 @@ ruleRoot returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 ));
-    
+
+
+
 
 
 // Entry rule entryRuleTestRequired
@@ -136,8 +140,12 @@ ruleTestRequired returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "required1", lv_required1,"INT");
-	         }
+	        try {
+	        	factory.set($current, "required1", lv_required1,"INT");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(	
 	
@@ -152,11 +160,17 @@ ruleTestRequired returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "required2", lv_required2,"INT");
-	         }
+	        try {
+	        	factory.set($current, "required2", lv_required2,"INT");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ));
-    
+
+
+
 
 
 // Entry rule entryRuleTestOptional
@@ -188,8 +202,12 @@ ruleTestOptional returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "opt1", lv_opt1,"INT");
-	         }
+	        try {
+	        	factory.set($current, "opt1", lv_opt1,"INT");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )?)(':' 
     {
@@ -208,11 +226,17 @@ ruleTestOptional returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "opt2", lv_opt2,"INT");
-	         }
+	        try {
+	        	factory.set($current, "opt2", lv_opt2,"INT");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))?);
-    
+
+
+
 
 
 // Entry rule entryRuleTestList
@@ -244,11 +268,16 @@ ruleTestList returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "item", lv_item,"INT");
-	         }
+	        try {
+	        	factory.add($current, "item", lv_item,"INT");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )*);
-    
+
+
 
 
 

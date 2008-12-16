@@ -25,13 +25,22 @@ public class FormatterTestLanguageParseTreeConstructor extends AbstractParseTree
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Root") && (s = new Root_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Line") && (s = new Line_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TestLinewrap") && (s = new TestLinewrap_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TestIndentation") && (s = new TestIndentation_Group(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Root ****************
  *
  * Root : 'test' ( TestLinewrap | TestIndentation ) ;
@@ -139,6 +148,7 @@ protected class Root_1_1_RuleCall_TestIndentation extends RuleCallToken {
 
 
 /************ end Rule Root ****************/
+
 
 /************ begin Rule Line ****************
  *
@@ -265,6 +275,7 @@ protected class Line_1_Keyword extends KeywordToken  {
 
 /************ end Rule Line ****************/
 
+
 /************ begin Rule TestLinewrap ****************
  *
  * TestLinewrap : 'linewrap' ( items += Line ) * ;
@@ -326,6 +337,7 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("items",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("items");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Line")) {
@@ -336,12 +348,14 @@ protected class TestLinewrap_1_Assignment_items extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
 
 
 /************ end Rule TestLinewrap ****************/
+
 
 /************ begin Rule TestIndentation ****************
  *
@@ -494,6 +508,7 @@ protected class TestIndentation_0_1_0_Assignment_sub extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("sub",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("sub");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("TestIndentation")) {
@@ -504,6 +519,7 @@ protected class TestIndentation_0_1_0_Assignment_sub extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -522,6 +538,7 @@ protected class TestIndentation_0_1_1_Assignment_items extends AssignmentToken  
 	protected Solution createSolution() {
 		if((value = current.getConsumable("items",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("items");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Line")) {
@@ -532,6 +549,7 @@ protected class TestIndentation_0_1_1_Assignment_items extends AssignmentToken  
 				} 
 			}
 		}
+
 		return null;
 	}
 }

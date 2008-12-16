@@ -25,15 +25,28 @@ public class SimpleExpressionsTestLanguageParseTreeConstructor extends AbstractP
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Sequence") && (s = new Sequence_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Expression") && (s = new Addition_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Expression") && (s = new Multiplication_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Sequence ****************
  *
  * Sequence : Addition ( { current = Sequence . expressions += current } expressions += Addition ) * ;
@@ -149,6 +162,7 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("expressions",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("expressions");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Expression")) {
@@ -159,6 +173,7 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -166,6 +181,7 @@ protected class Sequence_1_1_Assignment_expressions extends AssignmentToken  {
 
 
 /************ end Rule Sequence ****************/
+
 
 /************ begin Rule Addition ****************
  *
@@ -339,6 +355,7 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("values",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Expression")) {
@@ -349,6 +366,7 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -356,6 +374,7 @@ protected class Addition_1_1_Assignment_values extends AssignmentToken  {
 
 
 /************ end Rule Addition ****************/
+
 
 /************ begin Rule Multiplication ****************
  *
@@ -529,6 +548,7 @@ protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("values",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Expression")) {
@@ -539,6 +559,7 @@ protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -546,6 +567,7 @@ protected class Multiplication_1_1_Assignment_values extends AssignmentToken  {
 
 
 /************ end Rule Multiplication ****************/
+
 
 /************ begin Rule Term ****************
  *
@@ -614,6 +636,7 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 
 /************ end Rule Term ****************/
 
+
 /************ begin Rule Atom ****************
  *
  * Atom : name = ID ;
@@ -645,6 +668,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 }
 
 /************ end Rule Atom ****************/
+
 
 /************ begin Rule Parens ****************
  *

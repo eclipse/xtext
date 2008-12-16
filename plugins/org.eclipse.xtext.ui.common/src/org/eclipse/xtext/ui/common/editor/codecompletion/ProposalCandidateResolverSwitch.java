@@ -110,7 +110,7 @@ public class ProposalCandidateResolverSwitch extends XtextSwitch<List<EObject>> 
 		List<EObject> elementList = new ArrayList<EObject>();
 		elementList.add(ruleCall);
 
-		AbstractRule abstractRule = GrammarUtil.calledRule(ruleCall);
+		AbstractRule abstractRule = ruleCall.getRule();
 
 		if (abstractRule instanceof ParserRule) {
 			addWithNullCheck(elementList, doSwitch(((ParserRule) abstractRule).getAlternatives()));

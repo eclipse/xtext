@@ -25,12 +25,19 @@ public class ImportUriTestLanguageParseTreeConstructor extends AbstractParseTree
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Main") && (s = new Main_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Import") && (s = new Import_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Type") && (s = new Type_Group(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Main ****************
  *
  * Main : ( imports += Import ) * ( types += Type ) * ;
@@ -80,6 +87,7 @@ protected class Main_0_Assignment_imports extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("imports",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("imports");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Import")) {
@@ -90,6 +98,7 @@ protected class Main_0_Assignment_imports extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -108,6 +117,7 @@ protected class Main_1_Assignment_types extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("types",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("types");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Type")) {
@@ -118,12 +128,14 @@ protected class Main_1_Assignment_types extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
 
 
 /************ end Rule Main ****************/
+
 
 /************ begin Rule Import ****************
  *
@@ -197,6 +209,7 @@ protected class Import_1_Assignment_importURI extends AssignmentToken  {
 
 
 /************ end Rule Import ****************/
+
 
 /************ begin Rule Type ****************
  *

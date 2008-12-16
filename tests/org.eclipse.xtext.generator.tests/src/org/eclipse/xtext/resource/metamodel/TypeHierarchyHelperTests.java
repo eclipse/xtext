@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.xtext.GeneratedMetamodel;
+import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.resource.metamodel.EClassifierInfo.EClassInfo;
 import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 
@@ -34,11 +36,14 @@ public class TypeHierarchyHelperTests extends TestCase {
 	private EDataType INT = EcoreFactory.eINSTANCE.createEDataType();
 	private EDataType STRING = EcoreFactory.eINSTANCE.createEDataType();
 	private ErrorAcceptor errorAcceptorMock;
+	private GeneratedMetamodel metamodel;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		errorAcceptorMock = createMock(ErrorAcceptor.class);
+		metamodel = XtextFactory.eINSTANCE.createGeneratedMetamodel();
+		metamodel.setNsURI("myURI");
 	}
 	
 	private void liftUpFeatures() throws Exception {
@@ -56,7 +61,7 @@ public class TypeHierarchyHelperTests extends TestCase {
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 		eClass.setName(name);
 		EClassInfo info = (EClassInfo) EClassifierInfo.createEClassInfo(eClass, isGenerated);
-		infos.addInfo(null, name, info);
+		infos.addInfo(metamodel, name, info);
 		return info;
 	}
 

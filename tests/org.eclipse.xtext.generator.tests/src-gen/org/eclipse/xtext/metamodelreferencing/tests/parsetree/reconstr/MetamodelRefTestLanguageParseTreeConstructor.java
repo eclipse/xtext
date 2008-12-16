@@ -25,12 +25,19 @@ public class MetamodelRefTestLanguageParseTreeConstructor extends AbstractParseT
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Foo") && (s = new Foo_Group(inst, null).firstSolution()) != null) return s;
-		if(inst.isInstanceOf("xtext::RuleCall") && (s = new NameRef_Assignment_rule(inst, null).firstSolution()) != null) return s;
-		if(inst.isInstanceOf("xtext::ParserRule") && (s = new MyRule_Assignment_name(inst, null).firstSolution()) != null) return s;
+
+
+		if(inst.isInstanceOf("RuleCall") && (s = new NameRef_Assignment_rule(inst, null).firstSolution()) != null) return s;
+
+
+		if(inst.isInstanceOf("ParserRule") && (s = new MyRule_Assignment_name(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Foo ****************
  *
  * Foo : name = ID ( nameRefs += NameRef ) * ;
@@ -103,9 +110,10 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("nameRefs",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nameRefs");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("xtext::RuleCall")) {
+			if(param.isInstanceOf("RuleCall")) {
 				Solution s = new NameRef_Assignment_rule(param, this).firstSolution();
 				if(s != null) {
 					type = AssignmentType.PRC; 
@@ -113,12 +121,14 @@ protected class Foo_1_Assignment_nameRefs extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
 
 
 /************ end Rule Foo ****************/
+
 
 /************ begin Rule NameRef ****************
  *
@@ -154,6 +164,7 @@ protected class NameRef_Assignment_rule extends AssignmentToken  {
 }
 
 /************ end Rule NameRef ****************/
+
 
 /************ begin Rule MyRule ****************
  *

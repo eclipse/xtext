@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
 }
 
 @parser::members {
@@ -58,6 +59,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 
 
+
 // Entry rule entryRuleEntry
 entryRuleEntry returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -84,11 +86,17 @@ ruleEntry returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "contents", lv_contents,null);
-	         }
+	        try {
+	        	factory.add($current, "contents", lv_contents,"Alts");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )*;
-    
+
+
+
 
 
 // Entry rule entryRuleAlts
@@ -133,7 +141,9 @@ ruleAlts returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleLookAhead0
@@ -165,11 +175,17 @@ ruleLookAhead0 returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "x", input.LT(-1),"a");
-	         }
+	        try {
+	        	factory.set($current, "x", input.LT(-1),"a");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ));
-    
+
+
+
 
 
 // Entry rule entryRuleLookAhead1
@@ -202,8 +218,12 @@ ruleLookAhead1 returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "y", lv_y,null);
-	         }
+	        try {
+	        	factory.set($current, "y", lv_y,"LookAhead2");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(	
 	
@@ -218,8 +238,12 @@ ruleLookAhead1 returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "x", input.LT(-1),"b");
-	         }
+	        try {
+	        	factory.set($current, "x", input.LT(-1),"b");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(	
 	
@@ -234,11 +258,17 @@ ruleLookAhead1 returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "x", input.LT(-1),"d");
-	         }
+	        try {
+	        	factory.set($current, "x", input.LT(-1),"d");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ));
-    
+
+
+
 
 
 // Entry rule entryRuleLookAhead2
@@ -266,8 +296,12 @@ ruleLookAhead2 returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "z", input.LT(-1),"foo");
-	         }
+	        try {
+	        	factory.set($current, "z", input.LT(-1),"foo");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )
     |(	
@@ -283,15 +317,21 @@ ruleLookAhead2 returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "z", input.LT(-1),"bar");
-	         }
+	        try {
+	        	factory.set($current, "z", input.LT(-1),"bar");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))'c' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleLookAhead3
@@ -327,8 +367,12 @@ ruleLookAhead3 returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "x", input.LT(-1),"b");
-	         }
+	        try {
+	        	factory.set($current, "x", input.LT(-1),"b");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(	
 	
@@ -344,11 +388,17 @@ ruleLookAhead3 returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "z", lv_z,null);
-	         }
+	        try {
+	        	factory.set($current, "z", lv_z,"LookAhead4");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ));
-    
+
+
+
 
 
 // Entry rule entryRuleLookAhead4
@@ -376,8 +426,12 @@ ruleLookAhead4 returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "x", input.LT(-1),"c");
-	         }
+	        try {
+	        	factory.set($current, "x", input.LT(-1),"c");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )
     |(	
@@ -393,11 +447,16 @@ ruleLookAhead4 returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "x", input.LT(-1),"d");
-	         }
+	        try {
+	        	factory.set($current, "x", input.LT(-1),"d");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ));
-    
+
+
 
 
 

@@ -25,19 +25,40 @@ public class PartialParserTestLanguageParseTreeConstructor extends AbstractParse
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Container") && (s = new Container_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Nested") && (s = new Nested_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Content") && (s = new Content_Alternatives(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Children") && (s = new Children_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Child") && (s = new Child_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("AbstractChildren") && (s = new AbstractChildren_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("AbstractChild") && (s = new AbstractChild_Alternatives(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("FirstConcrete") && (s = new FirstConcrete_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("SecondConcrete") && (s = new SecondConcrete_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Named") && (s = new Named_Assignment_name(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Container ****************
  *
  * Container : 'container' name = ID '{' ( nested += Nested | content += Content ) * '}' ;
@@ -241,6 +262,7 @@ protected class Container_0_1_0_Assignment_nested extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("nested",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nested");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Nested")) {
@@ -251,6 +273,7 @@ protected class Container_0_1_0_Assignment_nested extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -269,6 +292,7 @@ protected class Container_0_1_1_Assignment_content extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("content",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("content");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Content")) {
@@ -279,6 +303,7 @@ protected class Container_0_1_1_Assignment_content extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -299,6 +324,7 @@ protected class Container_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule Container ****************/
+
 
 /************ begin Rule Nested ****************
  *
@@ -430,6 +456,7 @@ protected class Nested_0_1_Assignment_nested extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("nested",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nested");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Container")) {
@@ -440,6 +467,7 @@ protected class Nested_0_1_Assignment_nested extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -459,6 +487,7 @@ protected class Nested_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule Nested ****************/
+
 
 /************ begin Rule Content ****************
  *
@@ -526,6 +555,7 @@ protected class Content_1_RuleCall_AbstractChildren extends RuleCallToken {
 
 
 /************ end Rule Content ****************/
+
 
 /************ begin Rule Children ****************
  *
@@ -685,6 +715,7 @@ protected class Children_0_0_1_Assignment_children extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("children",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Child")) {
@@ -695,6 +726,7 @@ protected class Children_0_0_1_Assignment_children extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -754,6 +786,7 @@ protected class Children_0_1_1_Assignment_children extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("children",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("children");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Child")) {
@@ -764,6 +797,7 @@ protected class Children_0_1_1_Assignment_children extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -784,6 +818,7 @@ protected class Children_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule Children ****************/
+
 
 /************ begin Rule Child ****************
  *
@@ -956,6 +991,7 @@ protected class Child_0_1_Assignment_value extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Named")) {
@@ -966,6 +1002,7 @@ protected class Child_0_1_Assignment_value extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -985,6 +1022,7 @@ protected class Child_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule Child ****************/
+
 
 /************ begin Rule AbstractChildren ****************
  *
@@ -1116,6 +1154,7 @@ protected class AbstractChildren_0_1_Assignment_abstractChildren extends Assignm
 	protected Solution createSolution() {
 		if((value = current.getConsumable("abstractChildren",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("abstractChildren");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractChild")) {
@@ -1126,6 +1165,7 @@ protected class AbstractChildren_0_1_Assignment_abstractChildren extends Assignm
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -1145,6 +1185,7 @@ protected class AbstractChildren_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule AbstractChildren ****************/
+
 
 /************ begin Rule AbstractChild ****************
  *
@@ -1212,6 +1253,7 @@ protected class AbstractChild_1_RuleCall_SecondConcrete extends RuleCallToken {
 
 
 /************ end Rule AbstractChild ****************/
+
 
 /************ begin Rule FirstConcrete ****************
  *
@@ -1412,6 +1454,7 @@ protected class FirstConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Named")) {
@@ -1422,6 +1465,7 @@ protected class FirstConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -1468,6 +1512,7 @@ protected class FirstConcrete_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule FirstConcrete ****************/
+
 
 /************ begin Rule SecondConcrete ****************
  *
@@ -1709,6 +1754,7 @@ protected class SecondConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("value",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Named")) {
@@ -1719,6 +1765,7 @@ protected class SecondConcrete_0_0_1_Assignment_value extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -1765,6 +1812,7 @@ protected class SecondConcrete_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule SecondConcrete ****************/
+
 
 /************ begin Rule Named ****************
  *

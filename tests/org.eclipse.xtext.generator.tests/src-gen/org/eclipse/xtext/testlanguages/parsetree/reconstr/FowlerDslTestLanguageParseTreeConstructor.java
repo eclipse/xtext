@@ -25,14 +25,25 @@ public class FowlerDslTestLanguageParseTreeConstructor extends AbstractParseTree
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Statemachine") && (s = new Statemachine_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Event") && (s = new Event_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Command") && (s = new Command_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("State") && (s = new State_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Transition") && (s = new Transition_Group(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Statemachine ****************
  *
  * Statemachine : 'events' ( events += Event ) * 'end' 'commands' ( commands += Command ) * 'end' ( states += State ) * ;
@@ -234,6 +245,7 @@ protected class Statemachine_0_0_0_0_0_1_Assignment_events extends AssignmentTok
 	protected Solution createSolution() {
 		if((value = current.getConsumable("events",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("events");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Event")) {
@@ -244,6 +256,7 @@ protected class Statemachine_0_0_0_0_0_1_Assignment_events extends AssignmentTok
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -289,6 +302,7 @@ protected class Statemachine_0_0_1_Assignment_commands extends AssignmentToken  
 	protected Solution createSolution() {
 		if((value = current.getConsumable("commands",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("commands");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Command")) {
@@ -299,6 +313,7 @@ protected class Statemachine_0_0_1_Assignment_commands extends AssignmentToken  
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -331,6 +346,7 @@ protected class Statemachine_1_Assignment_states extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("states",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("states");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("State")) {
@@ -341,12 +357,14 @@ protected class Statemachine_1_Assignment_states extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
 
 
 /************ end Rule Statemachine ****************/
+
 
 /************ begin Rule Event ****************
  *
@@ -484,6 +502,7 @@ protected class Event_1_Assignment_code extends AssignmentToken  {
 
 /************ end Rule Event ****************/
 
+
 /************ begin Rule Command ****************
  *
  * Command : name = ID code = ID ;
@@ -567,6 +586,7 @@ protected class Command_1_Assignment_code extends AssignmentToken  {
 
 
 /************ end Rule Command ****************/
+
 
 /************ begin Rule State ****************
  *
@@ -887,6 +907,7 @@ protected class State_0_1_Assignment_transitions extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("transitions",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("transitions");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Transition")) {
@@ -897,6 +918,7 @@ protected class State_0_1_Assignment_transitions extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -916,6 +938,7 @@ protected class State_1_Keyword_end extends KeywordToken  {
 
 
 /************ end Rule State ****************/
+
 
 /************ begin Rule Transition ****************
  *
