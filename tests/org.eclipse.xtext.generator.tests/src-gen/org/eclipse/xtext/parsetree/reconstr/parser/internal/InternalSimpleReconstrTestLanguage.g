@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
 }
 
 @parser::members {
@@ -55,6 +56,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
         appendSkippedTokens();
     } 
 }
+
 
 
 
@@ -105,11 +107,17 @@ ruleOp returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "values", lv_values,null);
-	         }
+	        try {
+	        	factory.add($current, "values", lv_values,"Term");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))*);
-    
+
+
+
 
 
 // Entry rule entryRuleTerm
@@ -194,7 +202,9 @@ ruleTerm returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleAtom
@@ -222,11 +232,17 @@ ruleAtom returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 );
-    
+
+
+
 
 
 // Entry rule entryRuleParens
@@ -271,11 +287,17 @@ ruleParens returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "em", input.LT(-1),"!");
-	         }
+	        try {
+	        	factory.set($current, "em", input.LT(-1),"!");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )?);
-    
+
+
+
 
 
 // Entry rule entryRuleTwoNumbers
@@ -303,8 +325,12 @@ ruleTwoNumbers returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "num1", lv_num1,"INT");
-	         }
+	        try {
+	        	factory.set($current, "num1", lv_num1,"INT");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )(	
 	
@@ -319,8 +345,12 @@ ruleTwoNumbers returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "num2", lv_num2,"INT");
-	         }
+	        try {
+	        	factory.set($current, "num2", lv_num2,"INT");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))('#' 
     {
@@ -339,11 +369,17 @@ ruleTwoNumbers returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "num3", lv_num3,"INT");
-	         }
+	        try {
+	        	factory.add($current, "num3", lv_num3,"INT");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))*);
-    
+
+
+
 
 
 // Entry rule entryRuleManyStrings
@@ -375,8 +411,12 @@ ruleManyStrings returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "str1", lv_str1,"STRING");
-	         }
+	        try {
+	        	factory.add($current, "str1", lv_str1,"STRING");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )*)(	
 	
@@ -391,11 +431,17 @@ ruleManyStrings returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "str2", lv_str2,"STRING");
-	         }
+	        try {
+	        	factory.add($current, "str2", lv_str2,"STRING");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ));
-    
+
+
+
 
 
 // Entry rule entryRuleType
@@ -427,8 +473,12 @@ ruleType returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))'extends' 
     {
@@ -450,7 +500,9 @@ ruleType returns [EObject current=null]
 ) 
 	
 ));
-    
+
+
+
 
 
 // Entry rule entryRuleRef2
@@ -492,11 +544,17 @@ ruleRef2 returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "ref2", input.LT(-1),null);
-	         }
+	        try {
+	        	factory.set($current, "ref2", input.LT(-1),null);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ));
-    
+
+
+
 
 
 // Entry rule entryRuleSpare
@@ -528,8 +586,12 @@ ruleSpare returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "id", lv_id,"ID");
-	         }
+	        try {
+	        	factory.add($current, "id", lv_id,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))('.' 
     {
@@ -548,11 +610,16 @@ ruleSpare returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "id", lv_id,"ID");
-	         }
+	        try {
+	        	factory.add($current, "id", lv_id,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))*);
-    
+
+
 
 
 

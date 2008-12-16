@@ -26,11 +26,16 @@ public class ConcreteTestLanguageParseTreeConstructor extends AbstractParseTreeC
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("ConcreteParserRule") && (s = new ConcreteParserRule_Group(inst, null).firstSolution()) != null) return s;
-		if(inst.isInstanceOf("mm::AType") && (s = new InheritedParserRule_Group(inst, null).firstSolution()) != null) return s;
+
+
+		if(inst.isInstanceOf("AType") && (s = new InheritedParserRule_Group(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule ConcreteParserRule ****************
  *
  * ConcreteParserRule : 'model' magicNumber = REAL ':' ( elements += InheritedParserRule ) * ;
@@ -185,9 +190,10 @@ protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken
 	protected Solution createSolution() {
 		if((value = current.getConsumable("elements",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("elements");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("mm::AType")) {
+			if(param.isInstanceOf("AType")) {
 				Solution s = new InheritedParserRule_Group(param, this).firstSolution();
 				if(s != null) {
 					type = AssignmentType.PRC; 
@@ -195,12 +201,14 @@ protected class ConcreteParserRule_1_Assignment_elements extends AssignmentToken
 				} 
 			}
 		}
+
 		return null;
 	}
 }
 
 
 /************ end Rule ConcreteParserRule ****************/
+
 
 /************ begin Rule InheritedParserRule ****************
  *

@@ -50,7 +50,9 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
 «FOREACH grammar().allParserRules() AS pr-»
-		if(inst.isInstanceOf("«pr.getReturnTypeName()»") && (s = new «pr.alternatives.elementMethodName()»(inst, null).firstSolution()) != null) return s;
+«IF !pr.isDatatypeRule()»
+		if(inst.isInstanceOf("«pr.type.type.name»") && (s = new «pr.alternatives.elementMethodName()»(inst, null).firstSolution()) != null) return s;
+«ENDIF»
 «ENDFOREACH-»		
 		return null;
 	}
@@ -61,6 +63,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 «ENDDEFINE»
 
 «DEFINE rule FOR ParserRule-»
+«IF !isDatatypeRule()»
 /************ begin Rule «name» ****************
  *
  * «grammarFragmentToStr()»
@@ -70,7 +73,7 @@ public class «genClassFQName.toSimpleName()» extends AbstractParseTreeConstructo
 «EXPAND element FOR alternatives-»
 
 /************ end Rule «name» ****************/
-
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE constructor FOR AbstractElement-»
@@ -153,7 +156,7 @@ protected class «elementMethodName()» extends RuleCallToken {
 	protected Solution createSolution() {
 «IF calledParserRule() != null-»
 		if(checkForRecursion(«calledParserRule().alternatives.elementMethodName()».class, current)) return null;
-		if(!current.isInstanceOf("«calledParserRule().getReturnTypeName()»")) return null;
+		if(!current.isInstanceOf("«calledParserRule().type.type.name»")) return null;
 		return new «calledParserRule().alternatives.elementMethodName()»(current, this).firstSolution();
 «ELSE-»
 		// FIXME: lexer rule call
@@ -191,9 +194,10 @@ protected class «elementMethodName()» extends RuleCallToken {
 
 «DEFINE assignmentCreate FOR RuleCall-»
 «IF calledParserRule()!=null-»
+«IF !isDatatypeRule(calledParserRule())»
 		if(value instanceof EObject) { // «metaType.name»
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("«calledParserRule().getReturnTypeName()»")) {
+			if(param.isInstanceOf("«calledParserRule().type.type.name»")) {
 				Solution s = new «calledParserRule().alternatives.elementMethodName()»(param, this).firstSolution();
 				if(s != null) {
 					type = AssignmentType.PRC; 
@@ -201,6 +205,13 @@ protected class «elementMethodName()» extends RuleCallToken {
 				} 
 			}
 		}
+«ELSE»
+		if(true) { // «metaType.name» FIXME: check if value is valid for datatype rule
+			type = AssignmentType.PRC;
+			element = «gaFullAccessor()»;
+			return new Solution(obj);
+		}
+«ENDIF»
 «ELSE-»
 		if(true) { // «metaType.name» FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;

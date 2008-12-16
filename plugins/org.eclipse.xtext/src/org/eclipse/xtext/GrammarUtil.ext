@@ -67,18 +67,15 @@ List[AbstractElement] containedAbstractElements(emf::EObject o) :
 
 // ***********************************************************************************
 // Shortcuts
-	 
-AbstractRule calledRule(RuleCall this) :
-	JAVA org.eclipse.xtext.GrammarUtil.calledRule(org.eclipse.xtext.RuleCall);
-
-String getReturnTypeName(AbstractRule p) :
-	JAVA org.eclipse.xtext.GrammarUtil.getReturnTypeName(org.eclipse.xtext.AbstractRule);
 	
 Assignment containingAssignment(emf::EObject this) :
 	JAVA org.eclipse.xtext.GrammarUtil.containingAssignment(org.eclipse.emf.ecore.EObject);
-	
+
 Boolean isAssigned(emf::EObject this) : 
-	JAVA org.eclipse.xtext.GrammarUtil.isAssigned(org.eclipse.emf.ecore.EObject);	
+	JAVA org.eclipse.xtext.GrammarUtil.isAssigned(org.eclipse.emf.ecore.EObject);
+	
+Boolean isDatatypeRule(ParserRule this) : 
+	JAVA org.eclipse.xtext.GrammarUtil.isDatatypeRule(org.eclipse.xtext.ParserRule);	
 	
 List[LexerRule] allLexerRules(Grammar this) :
 	JAVA org.eclipse.xtext.GrammarUtil.allLexerRules(org.eclipse.xtext.Grammar);

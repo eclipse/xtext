@@ -13,33 +13,37 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Group;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
-import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.Function;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
+ * @author Sebastian Zarnekow
+ * 
  * @see http://wiki.eclipse.org/Xtext/Documentation#Meta-Model_Inference
  */
 public class Xtext2ECoreInterpretationContext {
-	private EClassifierInfos eClassifierInfos;
+	
+	private final EClassifierInfos eClassifierInfos;
+	
+	private final Function<AbstractElement, EClassifier> classifierCalculator;
 
 	Set<EClassifierInfo> currentTypes = new HashSet<EClassifierInfo>();
 	boolean isRuleCallAllowed = true;
 
 	private Xtext2ECoreInterpretationContext(EClassifierInfos classifierInfos) {
 		super();
+		if (classifierInfos == null)
+			throw new NullPointerException("classifierInfos may not be null");
 		this.eClassifierInfos = classifierInfos;
+		this.classifierCalculator = new ElementTypeCalculator(this.eClassifierInfos);
 	}
 
 	public Xtext2ECoreInterpretationContext(EClassifierInfos eClassifierInfos, EClassifierInfo currentType) {
@@ -68,13 +72,13 @@ public class Xtext2ECoreInterpretationContext {
 		EClassifierInfo featureTypeInfo;
 
 		if (GrammarUtil.isBooleanAssignment(assignment)) {
-			featureTypeInfo = getEClassifierInfoOrThrowException("ecore::EBoolean", assignment);
+			featureTypeInfo = getEClassifierInfoOrThrowException(EcorePackage.Literals.EBOOLEAN, assignment);
 			isMultivalue = false;
 		}
 		else {
-			String featureTypeName = getTerminalTypeName(assignment.getTerminal());
+			EClassifier type = getTerminalType(assignment.getTerminal());
 			isContainment = !(assignment.getTerminal() instanceof CrossReference);
-			featureTypeInfo = getEClassifierInfoOrThrowException(featureTypeName, assignment);
+			featureTypeInfo = getEClassifierInfoOrThrowException(type, assignment);
 		}
 
 		addFeature(featureName, featureTypeInfo, isMultivalue, isContainment, assignment);
@@ -87,65 +91,15 @@ public class Xtext2ECoreInterpretationContext {
 	}
 
 
-	private String getTerminalTypeName(AbstractElement terminal) throws TransformationException {
-		if (terminal instanceof RuleCall) {
-			RuleCall featureRuleCall = (RuleCall) terminal;
-			AbstractRule featureTypeRule = GrammarUtil.calledRule(featureRuleCall);
-			return GrammarUtil.getReturnTypeName(featureTypeRule);
-		}
-		else if (terminal instanceof CrossReference) {
-			CrossReference crossReference = (CrossReference) terminal;
-			TypeRef type = crossReference.getType();
-			if (type.getType() == null) {
-				String name = GrammarUtil.getTypeRefName(type);
-				if (Strings.isEmpty(name))
-					throw new NullPointerException();
-				EClassifierInfo info = getEClassifierInfoOrThrowException(GrammarUtil.getQualifiedName(type.getMetamodel(), name), crossReference);
-				type.setType(info.getEClassifier());
-			}
-			return GrammarUtil.getQualifiedName(crossReference.getType());
-		}
-		else if (terminal instanceof Keyword)
-			return "ecore::EString";
-		else {
-			// terminal is ParenthesizedElement
-			// must be either: alternative of lexer rules and keywords or
-			// alternative of parser rules
-			return getCompatibleTypeNameOfAlternatives((Alternatives) terminal);
-		}
+	private EClassifier getTerminalType(AbstractElement terminal) throws TransformationException {
+		return classifierCalculator.exec(terminal);
 	}
 
-	private String getCompatibleTypeNameOfAlternatives(AbstractElement element) {
-		if (element instanceof Alternatives) {
-			Alternatives alternative = (Alternatives) element;
-			Set<String> typeNames = new HashSet<String>();
-			for (AbstractElement group : alternative.getGroups())
-				typeNames.add(getCompatibleTypeNameOfAlternatives(group));
-			return eClassifierInfos.getCompatibleTypeNameOf(typeNames);
-		}
-		else if (element instanceof Group) {
-			Group group = (Group) element;
-			//TODO Too strict. What about : foo(Bar|Foo ';')
-			if (group.getAbstractTokens().size() != 1)
-				throw new IllegalArgumentException("Group must have exactly one element.");
-			return getCompatibleTypeNameOfAlternatives(group.getAbstractTokens().get(0));
-		}
-		else if (element instanceof RuleCall) {
-			AbstractRule calledRule = GrammarUtil.calledRule((RuleCall) element);
-			return GrammarUtil.getReturnTypeName(calledRule);
-		}
-		else if (element instanceof Keyword) {
-			return "ecore::EString";
-		}
-		else
-			throw new IllegalArgumentException("Terminal has no type");
-	}
-
-	private EClassifierInfo getEClassifierInfoOrThrowException(String typeName, AbstractElement parserElement)
+	private EClassifierInfo getEClassifierInfoOrThrowException(EClassifier type, AbstractElement parserElement)
 			throws TransformationException {
-		EClassifierInfo featureTypeInfo = eClassifierInfos.getInfo(typeName);
+		EClassifierInfo featureTypeInfo = eClassifierInfos.getInfo(type);
 		if (featureTypeInfo == null) {
-			throw new TransformationException(ErrorCode.NoSuchTypeAvailable, "Cannot resolve type " + typeName,
+			throw new TransformationException(ErrorCode.NoSuchTypeAvailable, "Cannot resolve type " + type.getName(),
 					parserElement);
 		}
 		return featureTypeInfo;

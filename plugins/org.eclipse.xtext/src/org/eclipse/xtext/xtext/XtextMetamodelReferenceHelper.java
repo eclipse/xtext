@@ -107,7 +107,7 @@ class XtextMetamodelReferenceHelper {
 			}
 		}), new Filter<AbstractMetamodelDeclaration>() {
 			public boolean matches(AbstractMetamodelDeclaration param) {
-				return metaModelAliasMatches(param, alias);
+				return metamodelAliasMatches(param, alias);
 			}
 		}), generatedMetamodels, importedMetamodels, new Filter<AbstractMetamodelDeclaration>() {
 			public boolean matches(AbstractMetamodelDeclaration param) {
@@ -116,7 +116,7 @@ class XtextMetamodelReferenceHelper {
 		});
 	}
 
-	private static boolean metaModelAliasMatches(AbstractMetamodelDeclaration metamodelDeclaration, String text) {
+	private static boolean metamodelAliasMatches(AbstractMetamodelDeclaration metamodelDeclaration, String text) {
 		return Strings.isEmpty(text) || text.equals(metamodelDeclaration.getAlias());
 	}
 	

@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
 }
 
 @parser::members {
@@ -55,6 +56,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
         appendSkippedTokens();
     } 
 }
+
 
 
 
@@ -105,11 +107,17 @@ ruleSequence returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "expressions", lv_expressions,null);
-	         }
+	        try {
+	        	factory.add($current, "expressions", lv_expressions,"Addition");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))*);
-    
+
+
+
 
 
 // Entry rule entryRuleAddition
@@ -163,8 +171,12 @@ ruleAddition returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "operator", input.LT(-1),null);
-	         }
+	        try {
+	        	factory.set($current, "operator", input.LT(-1),null);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(	
 	
@@ -180,11 +192,17 @@ ruleAddition returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "values", lv_values,null);
-	         }
+	        try {
+	        	factory.add($current, "values", lv_values,"Multiplication");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))*);
-    
+
+
+
 
 
 // Entry rule entryRuleMultiplication
@@ -238,8 +256,12 @@ ruleMultiplication returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "operator", input.LT(-1),null);
-	         }
+	        try {
+	        	factory.set($current, "operator", input.LT(-1),null);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(	
 	
@@ -255,11 +277,17 @@ ruleMultiplication returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "values", lv_values,null);
-	         }
+	        try {
+	        	factory.add($current, "values", lv_values,"Term");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))*);
-    
+
+
+
 
 
 // Entry rule entryRuleTerm
@@ -294,7 +322,9 @@ ruleTerm returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleAtom
@@ -322,11 +352,17 @@ ruleAtom returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 );
-    
+
+
+
 
 
 // Entry rule entryRuleParens
@@ -359,7 +395,8 @@ ruleParens returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
 
 
 

@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
 }
 
 @parser::members {
@@ -55,6 +56,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
         appendSkippedTokens();
     } 
 }
+
 
 
 
@@ -109,8 +111,12 @@ ruleOp returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "addOperands", lv_addOperands,null);
-	         }
+	        try {
+	        	factory.add($current, "addOperands", lv_addOperands,"Term");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))
     |(((
@@ -143,11 +149,17 @@ ruleOp returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "minusOperands", lv_minusOperands,null);
-	         }
+	        try {
+	        	factory.add($current, "minusOperands", lv_minusOperands,"Term");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )))*);
-    
+
+
+
 
 
 // Entry rule entryRuleTerm
@@ -182,7 +194,9 @@ ruleTerm returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleAtom
@@ -210,11 +224,17 @@ ruleAtom returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 );
-    
+
+
+
 
 
 // Entry rule entryRuleParens
@@ -259,11 +279,17 @@ ruleParens returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "em", input.LT(-1),"!");
-	         }
+	        try {
+	        	factory.set($current, "em", input.LT(-1),"!");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )?);
-    
+
+
+
 
 
 
@@ -293,11 +319,16 @@ ruleTrickyA1 returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.add($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 );
-    
+
+
 
 
 

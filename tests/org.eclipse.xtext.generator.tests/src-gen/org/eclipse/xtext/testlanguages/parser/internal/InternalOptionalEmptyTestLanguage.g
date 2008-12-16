@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
 }
 
 @parser::members {
@@ -58,6 +59,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 
 
+
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -84,11 +86,17 @@ ruleModel returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "child", lv_child,null);
-	         }
+	        try {
+	        	factory.set($current, "child", lv_child,"Greeting");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )?;
-    
+
+
+
 
 
 // Entry rule entryRuleGreeting
@@ -120,11 +128,16 @@ ruleGreeting returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ));
-    
+
+
 
 
 

@@ -25,16 +25,31 @@ public class LookaheadTestLanguageParseTreeConstructor extends AbstractParseTree
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Entry") && (s = new Entry_Assignment_contents(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Alts") && (s = new Alts_Alternatives(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("LookAhead0") && (s = new LookAhead0_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("LookAhead1") && (s = new LookAhead1_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("LookAhead2") && (s = new LookAhead2_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("LookAhead3") && (s = new LookAhead3_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("LookAhead4") && (s = new LookAhead4_Alternatives(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Entry ****************
  *
  * Entry : ( contents += Alts ) * ;
@@ -56,6 +71,7 @@ protected class Entry_Assignment_contents extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("contents",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("contents");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Alts")) {
@@ -66,11 +82,13 @@ protected class Entry_Assignment_contents extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
 
 /************ end Rule Entry ****************/
+
 
 /************ begin Rule Alts ****************
  *
@@ -179,6 +197,7 @@ protected class Alts_1_RuleCall_LookAhead3 extends RuleCallToken {
 
 /************ end Rule Alts ****************/
 
+
 /************ begin Rule LookAhead0 ****************
  *
  * LookAhead0 : 'bar' x = 'a' ;
@@ -251,6 +270,7 @@ protected class LookAhead0_1_Assignment_x extends AssignmentToken  {
 
 
 /************ end Rule LookAhead0 ****************/
+
 
 /************ begin Rule LookAhead1 ****************
  *
@@ -369,6 +389,7 @@ protected class LookAhead1_0_0_1_Assignment_y extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("y",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("y");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("LookAhead2")) {
@@ -379,6 +400,7 @@ protected class LookAhead1_0_0_1_Assignment_y extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -433,6 +455,7 @@ protected class LookAhead1_1_Assignment_x extends AssignmentToken  {
 
 
 /************ end Rule LookAhead1 ****************/
+
 
 /************ begin Rule LookAhead2 ****************
  *
@@ -551,6 +574,7 @@ protected class LookAhead2_1_Keyword_c extends KeywordToken  {
 
 
 /************ end Rule LookAhead2 ****************/
+
 
 /************ begin Rule LookAhead3 ****************
  *
@@ -706,6 +730,7 @@ protected class LookAhead3_1_Assignment_z extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("z",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("z");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("LookAhead4")) {
@@ -716,12 +741,14 @@ protected class LookAhead3_1_Assignment_z extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
 
 
 /************ end Rule LookAhead3 ****************/
+
 
 /************ begin Rule LookAhead4 ****************
  *

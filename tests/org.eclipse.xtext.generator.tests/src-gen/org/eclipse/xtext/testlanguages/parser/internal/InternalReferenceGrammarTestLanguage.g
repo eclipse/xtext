@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
 }
 
 @parser::members {
@@ -55,6 +56,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
         appendSkippedTokens();
     } 
 }
+
 
 
 
@@ -87,8 +89,12 @@ ruleSpielplatz returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "groesse", lv_groesse,"INT");
-	         }
+	        try {
+	        	factory.set($current, "groesse", lv_groesse,"INT");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(	
 	
@@ -103,8 +109,12 @@ ruleSpielplatz returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "beschreibung", lv_beschreibung,"STRING");
-	         }
+	        try {
+	        	factory.set($current, "beschreibung", lv_beschreibung,"STRING");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )?)'{' 
     {
@@ -124,8 +134,12 @@ ruleSpielplatz returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "kinder", lv_kinder,null);
-	         }
+	        try {
+	        	factory.add($current, "kinder", lv_kinder,"Kind");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )
     |(	
@@ -142,8 +156,12 @@ ruleSpielplatz returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "erzieher", lv_erzieher,null);
-	         }
+	        try {
+	        	factory.add($current, "erzieher", lv_erzieher,"Erwachsener");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))
     |(	
@@ -160,8 +178,12 @@ ruleSpielplatz returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "spielzeuge", lv_spielzeuge,null);
-	         }
+	        try {
+	        	factory.add($current, "spielzeuge", lv_spielzeuge,"Spielzeug");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))
     |(	
@@ -178,15 +200,21 @@ ruleSpielplatz returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "familie", lv_familie,null);
-	         }
+	        try {
+	        	factory.add($current, "familie", lv_familie,"Familie");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))*)'}' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )?;
-    
+
+
+
 
 
 
@@ -224,8 +252,12 @@ ruleKind returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(	
 	
@@ -240,15 +272,21 @@ ruleKind returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "age", lv_age,"INT");
-	         }
+	        try {
+	        	factory.set($current, "age", lv_age,"INT");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))')' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleErwachsener
@@ -284,8 +322,12 @@ ruleErwachsener returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(	
 	
@@ -300,15 +342,21 @@ ruleErwachsener returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "age", lv_age,"INT");
-	         }
+	        try {
+	        	factory.set($current, "age", lv_age,"INT");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))')' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleSpielzeug
@@ -344,8 +392,12 @@ ruleSpielzeug returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(	
 	
@@ -361,15 +413,21 @@ ruleSpielzeug returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "farbe", lv_farbe,null);
-	         }
+	        try {
+	        	factory.set($current, "farbe", lv_farbe,"Farbe");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))')' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleFarbe
@@ -404,7 +462,9 @@ ruleFarbe returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.5/@alternatives/@groups.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleFamilie
@@ -450,8 +510,12 @@ ruleFamilie returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", input.LT(-1),null);
-	         }
+	        try {
+	        	factory.set($current, "name", input.LT(-1),null);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(	
 	
@@ -522,7 +586,8 @@ ruleFamilie returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
 
 
 

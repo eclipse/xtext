@@ -25,11 +25,16 @@ public class DummyTestLanguageParseTreeConstructor extends AbstractParseTreeCons
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Model") && (s = new Model_Assignment_elements(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Element") && (s = new Element_Group(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Model ****************
  *
  * Model : ( elements += Element ) * ;
@@ -51,6 +56,7 @@ protected class Model_Assignment_elements extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("elements",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("elements");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Element")) {
@@ -61,11 +67,13 @@ protected class Model_Assignment_elements extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
 
 /************ end Rule Model ****************/
+
 
 /************ begin Rule Element ****************
  *

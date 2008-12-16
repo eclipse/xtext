@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
 }
 
 @parser::members {
@@ -55,6 +56,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
         appendSkippedTokens();
     } 
 }
+
 
 
 
@@ -94,7 +96,9 @@ ruleRoot returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 ));
-    
+
+
+
 
 
 // Entry rule entryRuleLine
@@ -122,8 +126,12 @@ ruleLine returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "type", lv_type,"ID");
-	         }
+	        try {
+	        	factory.add($current, "type", lv_type,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )(	
 	
@@ -138,15 +146,21 @@ ruleLine returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.add($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))';' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleTestLinewrap
@@ -179,11 +193,17 @@ ruleTestLinewrap returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "items", lv_items,null);
-	         }
+	        try {
+	        	factory.add($current, "items", lv_items,"Line");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )*);
-    
+
+
+
 
 
 // Entry rule entryRuleTestIndentation
@@ -220,8 +240,12 @@ ruleTestIndentation returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "sub", lv_sub,null);
-	         }
+	        try {
+	        	factory.add($current, "sub", lv_sub,"TestIndentation");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )
     |(	
@@ -238,15 +262,20 @@ ruleTestIndentation returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "items", lv_items,null);
-	         }
+	        try {
+	        	factory.add($current, "items", lv_items,"Line");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))*)'}' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
 
 
 

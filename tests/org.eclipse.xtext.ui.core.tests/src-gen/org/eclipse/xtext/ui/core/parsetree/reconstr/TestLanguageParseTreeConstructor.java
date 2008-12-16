@@ -25,11 +25,16 @@ public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstruct
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("File") && (s = new File_Assignment_stuff(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Stuff") && (s = new Stuff_Group(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule File ****************
  *
  * File : ( stuff += Stuff ) * ;
@@ -51,6 +56,7 @@ protected class File_Assignment_stuff extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("stuff",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stuff");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Stuff")) {
@@ -61,11 +67,13 @@ protected class File_Assignment_stuff extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
 
 /************ end Rule File ****************/
+
 
 /************ begin Rule Stuff ****************
  *

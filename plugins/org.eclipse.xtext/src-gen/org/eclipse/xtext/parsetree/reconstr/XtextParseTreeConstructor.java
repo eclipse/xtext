@@ -25,27 +25,64 @@ public class XtextParseTreeConstructor extends AbstractParseTreeConstructor {
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Grammar") && (s = new Grammar_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("AbstractRule") && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("AbstractMetamodelDeclaration") && (s = new AbstractMetamodelDeclaration_Alternatives(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("GeneratedMetamodel") && (s = new GeneratedMetamodel_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("ReferencedMetamodel") && (s = new ReferencedMetamodel_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("LexerRule") && (s = new LexerRule_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("ParserRule") && (s = new ParserRule_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TypeRef") && (s = new TypeRef_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("AbstractElement") && (s = new Alternatives_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("AbstractElement") && (s = new Group_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("AbstractElement") && (s = new AbstractToken_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Assignment") && (s = new Assignment_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Action") && (s = new Action_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("AbstractElement") && (s = new AbstractTerminal_Alternatives(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("CrossReference") && (s = new CrossReference_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("AbstractElement") && (s = new ParenthesizedElement_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Keyword") && (s = new Keyword_Assignment_value(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("RuleCall") && (s = new RuleCall_Assignment_rule(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Grammar ****************
  *
  * Grammar : ( abstract ?= 'abstract language' | 'language' ) idElements += ID ( '.' idElements += ID ) * ( 'extends' superGrammarIdElements += ID ( '.' superGrammarIdElements += ID ) * ) ? ( metamodelDeclarations += AbstractMetamodelDeclaration ) * ( rules += AbstractRule ) + ;
@@ -511,6 +548,7 @@ protected class Grammar_0_1_Assignment_metamodelDeclarations extends AssignmentT
 	protected Solution createSolution() {
 		if((value = current.getConsumable("metamodelDeclarations",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("metamodelDeclarations");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractMetamodelDeclaration")) {
@@ -521,6 +559,7 @@ protected class Grammar_0_1_Assignment_metamodelDeclarations extends AssignmentT
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -540,6 +579,7 @@ protected class Grammar_1_Assignment_rules extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rules",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rules");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractRule")) {
@@ -550,12 +590,14 @@ protected class Grammar_1_Assignment_rules extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
 
 
 /************ end Rule Grammar ****************/
+
 
 /************ begin Rule AbstractRule ****************
  *
@@ -624,6 +666,7 @@ protected class AbstractRule_1_RuleCall_ParserRule extends RuleCallToken {
 
 /************ end Rule AbstractRule ****************/
 
+
 /************ begin Rule AbstractMetamodelDeclaration ****************
  *
  * AbstractMetamodelDeclaration : GeneratedMetamodel | ReferencedMetamodel ;
@@ -690,6 +733,7 @@ protected class AbstractMetamodelDeclaration_1_RuleCall_ReferencedMetamodel exte
 
 
 /************ end Rule AbstractMetamodelDeclaration ****************/
+
 
 /************ begin Rule GeneratedMetamodel ****************
  *
@@ -909,6 +953,7 @@ protected class GeneratedMetamodel_1_1_Assignment_alias extends AssignmentToken 
 
 /************ end Rule GeneratedMetamodel ****************/
 
+
 /************ begin Rule ReferencedMetamodel ****************
  *
  * ReferencedMetamodel : 'import' uri = STRING ( 'as' alias = ID ) ? ;
@@ -1074,6 +1119,7 @@ protected class ReferencedMetamodel_1_1_Assignment_alias extends AssignmentToken
 
 
 /************ end Rule ReferencedMetamodel ****************/
+
 
 /************ begin Rule LexerRule ****************
  *
@@ -1346,6 +1392,7 @@ protected class LexerRule_0_0_0_1_1_Assignment_type extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("TypeRef")) {
@@ -1356,6 +1403,7 @@ protected class LexerRule_0_0_0_1_1_Assignment_type extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -1413,6 +1461,7 @@ protected class LexerRule_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule LexerRule ****************/
+
 
 /************ begin Rule ParserRule ****************
  *
@@ -1610,6 +1659,7 @@ protected class ParserRule_0_0_0_1_1_Assignment_type extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("TypeRef")) {
@@ -1620,6 +1670,7 @@ protected class ParserRule_0_0_0_1_1_Assignment_type extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -1653,6 +1704,7 @@ protected class ParserRule_0_1_Assignment_alternatives extends AssignmentToken  
 	protected Solution createSolution() {
 		if((value = current.getConsumable("alternatives",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alternatives");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractElement")) {
@@ -1663,6 +1715,7 @@ protected class ParserRule_0_1_Assignment_alternatives extends AssignmentToken  
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -1682,6 +1735,7 @@ protected class ParserRule_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule ParserRule ****************/
+
 
 /************ begin Rule TypeRef ****************
  *
@@ -1813,6 +1867,7 @@ protected class TypeRef_1_Assignment_type extends AssignmentToken  {
 
 
 /************ end Rule TypeRef ****************/
+
 
 /************ begin Rule Alternatives ****************
  *
@@ -1970,6 +2025,7 @@ protected class Alternatives_1_1_Assignment_groups extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("groups",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("groups");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractElement")) {
@@ -1980,6 +2036,7 @@ protected class Alternatives_1_1_Assignment_groups extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -1987,6 +2044,7 @@ protected class Alternatives_1_1_Assignment_groups extends AssignmentToken  {
 
 
 /************ end Rule Alternatives ****************/
+
 
 /************ begin Rule Group ****************
  *
@@ -2103,6 +2161,7 @@ protected class Group_1_1_Assignment_abstractTokens extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("abstractTokens",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("abstractTokens");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractElement")) {
@@ -2113,6 +2172,7 @@ protected class Group_1_1_Assignment_abstractTokens extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -2120,6 +2180,7 @@ protected class Group_1_1_Assignment_abstractTokens extends AssignmentToken  {
 
 
 /************ end Rule Group ****************/
+
 
 /************ begin Rule AbstractToken ****************
  *
@@ -2290,6 +2351,7 @@ protected class AbstractToken_1_Assignment_cardinality extends AssignmentToken  
 
 /************ end Rule AbstractToken ****************/
 
+
 /************ begin Rule Assignment ****************
  *
  * Assignment : feature = ID operator = ( '+=' | '=' | '?=' ) terminal = AbstractTerminal ;
@@ -2424,6 +2486,7 @@ protected class Assignment_1_Assignment_terminal extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("terminal",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("terminal");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractElement")) {
@@ -2434,12 +2497,14 @@ protected class Assignment_1_Assignment_terminal extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
 
 
 /************ end Rule Assignment ****************/
+
 
 /************ begin Rule Action ****************
  *
@@ -2724,6 +2789,7 @@ protected class Action_0_0_0_0_0_1_Assignment_typeName extends AssignmentToken  
 	protected Solution createSolution() {
 		if((value = current.getConsumable("typeName",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("typeName");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("TypeRef")) {
@@ -2734,6 +2800,7 @@ protected class Action_0_0_0_0_0_1_Assignment_typeName extends AssignmentToken  
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -2832,6 +2899,7 @@ protected class Action_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule Action ****************/
+
 
 /************ begin Rule AbstractTerminal ****************
  *
@@ -2980,6 +3048,7 @@ protected class AbstractTerminal_1_RuleCall_CrossReference extends RuleCallToken
 
 /************ end Rule AbstractTerminal ****************/
 
+
 /************ begin Rule CrossReference ****************
  *
  * CrossReference : '[' type = TypeRef ( '|' rule = [ AbstractRule ] ) ? ']' ;
@@ -3097,6 +3166,7 @@ protected class CrossReference_0_0_1_Assignment_type extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("type",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("TypeRef")) {
@@ -3107,6 +3177,7 @@ protected class CrossReference_0_0_1_Assignment_type extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -3194,6 +3265,7 @@ protected class CrossReference_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule CrossReference ****************/
+
 
 /************ begin Rule ParenthesizedElement ****************
  *
@@ -3304,6 +3376,7 @@ protected class ParenthesizedElement_1_Keyword extends KeywordToken  {
 
 /************ end Rule ParenthesizedElement ****************/
 
+
 /************ begin Rule Keyword ****************
  *
  * Keyword : value = STRING ;
@@ -3335,6 +3408,7 @@ protected class Keyword_Assignment_value extends AssignmentToken  {
 }
 
 /************ end Rule Keyword ****************/
+
 
 /************ begin Rule RuleCall ****************
  *

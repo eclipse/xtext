@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
 }
 
 @parser::members {
@@ -55,6 +56,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
         appendSkippedTokens();
     } 
 }
+
 
 
 
@@ -87,8 +89,12 @@ ruleContainer returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))'{' 
     {
@@ -108,8 +114,12 @@ ruleContainer returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "nested", lv_nested,null);
-	         }
+	        try {
+	        	factory.add($current, "nested", lv_nested,"Nested");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )
     |(	
@@ -126,15 +136,21 @@ ruleContainer returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "content", lv_content,null);
-	         }
+	        try {
+	        	factory.add($current, "content", lv_content,"Content");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))*)'}' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleNested
@@ -171,15 +187,21 @@ ruleNested returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "nested", lv_nested,null);
-	         }
+	        try {
+	        	factory.add($current, "nested", lv_nested,"Container");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )+)'}' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleContent
@@ -214,7 +236,9 @@ ruleContent returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleChildren
@@ -251,8 +275,12 @@ ruleChildren returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "children", lv_children,null);
-	         }
+	        try {
+	        	factory.add($current, "children", lv_children,"Child");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(',' 
     {
@@ -272,15 +300,21 @@ ruleChildren returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "children", lv_children,null);
-	         }
+	        try {
+	        	factory.add($current, "children", lv_children,"Child");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))*)'}' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleChild
@@ -321,15 +355,21 @@ ruleChild returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "value", lv_value,null);
-	         }
+	        try {
+	        	factory.set($current, "value", lv_value,"Named");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))')' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleAbstractChildren
@@ -366,15 +406,21 @@ ruleAbstractChildren returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "abstractChildren", lv_abstractChildren,null);
-	         }
+	        try {
+	        	factory.add($current, "abstractChildren", lv_abstractChildren,"AbstractChild");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )+)'}' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleAbstractChild
@@ -409,7 +455,9 @@ ruleAbstractChild returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleFirstConcrete
@@ -450,8 +498,12 @@ ruleFirstConcrete returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "value", lv_value,null);
-	         }
+	        try {
+	        	factory.set($current, "value", lv_value,"Named");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(	
 	
@@ -473,7 +525,9 @@ ruleFirstConcrete returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.7/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleSecondConcrete
@@ -518,8 +572,12 @@ ruleSecondConcrete returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "value", lv_value,null);
-	         }
+	        try {
+	        	factory.set($current, "value", lv_value,"Named");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(	
 	
@@ -541,7 +599,9 @@ ruleSecondConcrete returns [EObject current=null]
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xmi#//@rules.8/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleNamed
@@ -569,11 +629,16 @@ ruleNamed returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 );
-    
+
+
 
 
 

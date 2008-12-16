@@ -140,7 +140,7 @@ public class ProposalProviderInvokerSwitch extends XtextSwitch<List<ICompletionP
 			completionProposalList.addAll(ruleCallProposalList);
 		}
 
-		AbstractRule calledRule = GrammarUtil.calledRule(ruleCall);
+		AbstractRule calledRule = ruleCall.getRule();
 
 		if (calledRule.getType() != null) {
 

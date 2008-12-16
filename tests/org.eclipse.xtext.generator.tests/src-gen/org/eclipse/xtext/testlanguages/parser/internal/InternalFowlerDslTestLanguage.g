@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
 }
 
 @parser::members {
@@ -55,6 +56,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
         appendSkippedTokens();
     } 
 }
+
 
 
 
@@ -88,8 +90,12 @@ ruleStatemachine returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "events", lv_events,null);
-	         }
+	        try {
+	        	factory.add($current, "events", lv_events,"Event");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )*)'end' 
     {
@@ -113,8 +119,12 @@ ruleStatemachine returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "commands", lv_commands,null);
-	         }
+	        try {
+	        	factory.add($current, "commands", lv_commands,"Command");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )*)'end' 
     {
@@ -134,11 +144,17 @@ ruleStatemachine returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "states", lv_states,null);
-	         }
+	        try {
+	        	factory.add($current, "states", lv_states,"State");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )*);
-    
+
+
+
 
 
 // Entry rule entryRuleEvent
@@ -166,8 +182,12 @@ ruleEvent returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "resetting", true,"resetting");
-	         }
+	        try {
+	        	factory.set($current, "resetting", true,"resetting");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )?(	
 	
@@ -182,8 +202,12 @@ ruleEvent returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))(	
 	
@@ -198,11 +222,17 @@ ruleEvent returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "code", lv_code,"ID");
-	         }
+	        try {
+	        	factory.set($current, "code", lv_code,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ));
-    
+
+
+
 
 
 // Entry rule entryRuleCommand
@@ -230,8 +260,12 @@ ruleCommand returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )(	
 	
@@ -246,11 +280,17 @@ ruleCommand returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "code", lv_code,"ID");
-	         }
+	        try {
+	        	factory.set($current, "code", lv_code,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ));
-    
+
+
+
 
 
 // Entry rule entryRuleState
@@ -282,8 +322,12 @@ ruleState returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))((('actions' 
     {
@@ -326,15 +370,21 @@ ruleState returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "transitions", lv_transitions,null);
-	         }
+	        try {
+	        	factory.add($current, "transitions", lv_transitions,"Transition");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )*)'end' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
+
 
 
 // Entry rule entryRuleTransition
@@ -384,7 +434,8 @@ ruleTransition returns [EObject current=null]
 ) 
 	
 ));
-    
+
+
 
 
 

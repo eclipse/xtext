@@ -25,13 +25,22 @@ public class TransientValuesTestParseTreeConstructor extends AbstractParseTreeCo
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Root") && (s = new Root_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TestRequired") && (s = new TestRequired_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TestOptional") && (s = new TestOptional_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TestList") && (s = new TestList_Group(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Root ****************
  *
  * Root : 'test' ( TestRequired | TestOptional | TestList ) ;
@@ -180,6 +189,7 @@ protected class Root_1_1_RuleCall_TestList extends RuleCallToken {
 
 /************ end Rule Root ****************/
 
+
 /************ begin Rule TestRequired ****************
  *
  * TestRequired : 'required' required1 = INT required2 = INT ;
@@ -304,6 +314,7 @@ protected class TestRequired_1_Assignment_required2 extends AssignmentToken  {
 
 
 /************ end Rule TestRequired ****************/
+
 
 /************ begin Rule TestOptional ****************
  *
@@ -470,6 +481,7 @@ protected class TestOptional_1_1_Assignment_opt2 extends AssignmentToken  {
 
 
 /************ end Rule TestOptional ****************/
+
 
 /************ begin Rule TestList ****************
  *

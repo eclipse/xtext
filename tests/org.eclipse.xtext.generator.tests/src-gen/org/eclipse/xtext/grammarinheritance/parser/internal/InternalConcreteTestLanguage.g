@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
 }
 
 @parser::members {
@@ -55,6 +56,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
         appendSkippedTokens();
     } 
 }
+
 
 
 
@@ -87,8 +89,12 @@ ruleConcreteParserRule returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "magicNumber", lv_magicNumber,"REAL");
-	         }
+	        try {
+	        	factory.set($current, "magicNumber", lv_magicNumber,"REAL");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))':' 
     {
@@ -108,11 +114,17 @@ ruleConcreteParserRule returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "elements", lv_elements,null);
-	         }
+	        try {
+	        	factory.add($current, "elements", lv_elements,"InheritedParserRule");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )*);
-    
+
+
+
 
 
 // Entry rule entryRuleInheritedParserRule
@@ -140,15 +152,20 @@ ruleInheritedParserRule returns [EObject current=null]
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create("mm::AType");
+	            $current = factory.create("AType");
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ));
-    
+
+
 
 
 

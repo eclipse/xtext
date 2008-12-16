@@ -14,7 +14,9 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
@@ -120,7 +122,14 @@ public class SimpleTokenSerializer extends DefaultTokenSerializer {
 			elementLexerRuleCall(ass.getCurrent(), (RuleCall) ass
 					.getAssignmentElement(), ass.getValue());
 			break;
-		case PRC: // nothing to do for Parser Rule Calls
+		case PRC: 
+			final RuleCall ruleCall = (RuleCall) ass.getAssignmentElement();
+			if (ruleCall != null) {
+				final ParserRule parserRule = (ParserRule) ruleCall.getRule();
+				if (GrammarUtil.isDatatypeRule(parserRule)) {
+					elementLexerRuleCall(ass.getCurrent(), ruleCall, ass.getValue());	
+				}
+			}
 			break;
 		default:
 			break;

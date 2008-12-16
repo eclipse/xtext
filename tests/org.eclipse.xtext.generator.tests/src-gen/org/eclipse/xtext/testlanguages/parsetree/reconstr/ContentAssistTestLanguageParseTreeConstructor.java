@@ -25,14 +25,25 @@ public class ContentAssistTestLanguageParseTreeConstructor extends AbstractParse
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Start") && (s = new Start_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("AbstractRule") && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("FirstAbstractRuleChild") && (s = new FirstAbstractRuleChild_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("SecondAbstractRuleChild") && (s = new SecondAbstractRuleChild_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("AbstractRuleCall") && (s = new AbstractRuleCall_Assignment_rule(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Start ****************
  *
  * Start : 'abstract rules' ( rules += AbstractRule ) + 'end' ;
@@ -122,6 +133,7 @@ protected class Start_0_1_Assignment_rules extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rules",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rules");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractRule")) {
@@ -132,6 +144,7 @@ protected class Start_0_1_Assignment_rules extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -151,6 +164,7 @@ protected class Start_1_Keyword_end extends KeywordToken  {
 
 
 /************ end Rule Start ****************/
+
 
 /************ begin Rule AbstractRule ****************
  *
@@ -218,6 +232,7 @@ protected class AbstractRule_1_RuleCall_SecondAbstractRuleChild extends RuleCall
 
 
 /************ end Rule AbstractRule ****************/
+
 
 /************ begin Rule FirstAbstractRuleChild ****************
  *
@@ -388,6 +403,7 @@ protected class FirstAbstractRuleChild_0_0_1_Assignment_elements extends Assignm
 	protected Solution createSolution() {
 		if((value = current.getConsumable("elements",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("elements");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractRule")) {
@@ -398,6 +414,7 @@ protected class FirstAbstractRuleChild_0_0_1_Assignment_elements extends Assignm
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -430,6 +447,7 @@ protected class FirstAbstractRuleChild_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule FirstAbstractRuleChild ****************/
+
 
 /************ begin Rule SecondAbstractRuleChild ****************
  *
@@ -613,6 +631,7 @@ protected class SecondAbstractRuleChild_0_1_Assignment_rule extends AssignmentTo
 	protected Solution createSolution() {
 		if((value = current.getConsumable("rule",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("rule");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractRuleCall")) {
@@ -623,6 +642,7 @@ protected class SecondAbstractRuleChild_0_1_Assignment_rule extends AssignmentTo
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -642,6 +662,7 @@ protected class SecondAbstractRuleChild_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule SecondAbstractRuleChild ****************/
+
 
 /************ begin Rule AbstractRuleCall ****************
  *

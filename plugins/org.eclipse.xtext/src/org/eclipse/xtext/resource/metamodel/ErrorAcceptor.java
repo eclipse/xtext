@@ -26,7 +26,8 @@ public interface ErrorAcceptor {
 		NoSuchRuleAvailable, 
 		TypeWithCycleInHierarchy, 
 		MoreThanOneFeatureWithSameName,
-		UnknownMetaModelAlias
+		UnknownMetaModelAlias, 
+		InvalidDatatypeRule
 	}
 
 	public void acceptError(ErrorCode errorCode, String message, EObject element);

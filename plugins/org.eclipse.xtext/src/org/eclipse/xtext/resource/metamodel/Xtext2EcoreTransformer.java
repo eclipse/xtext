@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -42,19 +43,22 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
+import org.eclipse.xtext.LexerRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 import org.eclipse.xtext.util.Filter;
 import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.XtextSwitch;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  * @author Heiko Behrens
- * 
+ * @author Sebastian Zarnekow
  */
 public class Xtext2EcoreTransformer {
 
@@ -91,8 +95,8 @@ public class Xtext2EcoreTransformer {
 		final ResourceSet resourceSet = grammar.eResource().getResourceSet();
 		if (resourceSet == null)
 			throw new NullPointerException();
-		addAll(result, filter(map(filter(grammar.getMetamodelDeclarations(), Filter.Util
-				.<AbstractMetamodelDeclaration> instanceOf(GeneratedMetamodel.class)),
+		addAll(result, filter(map(filter(grammar.getMetamodelDeclarations(), 
+				Filter.Util.<AbstractMetamodelDeclaration> instanceOf(GeneratedMetamodel.class)),
 				new Function<AbstractMetamodelDeclaration, EPackage>() {
 					public EPackage exec(AbstractMetamodelDeclaration param) {
 						IDeclaredMetamodelAccess metamodelAccess = DeclaredMetamodelAccessFactory.getAccessTo(param);
@@ -138,7 +142,7 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private static List<EPackage> getPackagesSortedByName(Collection<EPackage> packages) {
-		ArrayList<EPackage> result = new ArrayList<EPackage>(packages);
+		final ArrayList<EPackage> result = new ArrayList<EPackage>(packages);
 		Collections.sort(result, new Comparator<EPackage>() {
 			public int compare(EPackage o1, EPackage o2) {
 				return o1.getName().compareTo(o2.getName());
@@ -161,7 +165,14 @@ public class Xtext2EcoreTransformer {
 				EClassifierInfo generatedEClass = findOrCreateEClassifierInfo(rule);
 				if (rule instanceof ParserRule) {
 					ParserRule parserRule = (ParserRule) rule;
-					deriveTypesAndHierarchy(generatedEClass, parserRule.getAlternatives());
+					if (GrammarUtil.isDatatypeRule(parserRule)) {
+						if (!DatatypeRuleUtil.isValidDatatypeRule(parserRule)) {
+							throw new TransformationException(ErrorCode.InvalidDatatypeRule, 
+									"Datatype rules may only use other datatype rules, lexer rules and keywords.", parserRule);
+						}
+					} else {
+						deriveTypesAndHierarchy(generatedEClass, parserRule.getAlternatives());
+					}
 				}
 			}
 			catch (TransformationException e) {
@@ -173,7 +184,7 @@ public class Xtext2EcoreTransformer {
 	private void deriveFeatures() {
 		for (AbstractRule rule : grammar.getRules()) {
 			try {
-				if (rule instanceof ParserRule) {
+				if (rule instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) rule)) {
 					this.deriveFeatures((ParserRule) rule);
 				}
 			}
@@ -189,46 +200,89 @@ public class Xtext2EcoreTransformer {
 		this.getEClassifierInfos().addAll(transformer.getEClassifierInfos());
 	}
 
-	private Xtext2ECoreInterpretationContext deriveFeatures(Xtext2ECoreInterpretationContext context,
+	private Xtext2ECoreInterpretationContext deriveFeatures(final Xtext2ECoreInterpretationContext context,
 			AbstractElement element) throws TransformationException {
-		if (element instanceof Assignment) {
-			Assignment assignment = (Assignment) element;
-			context.addFeature(assignment);
-		}
-		else if (element instanceof Alternatives) {
-			Alternatives alternatives = (Alternatives) element;
-			List<Xtext2ECoreInterpretationContext> contexts = new ArrayList<Xtext2ECoreInterpretationContext>();
-			for (AbstractElement group : alternatives.getGroups()) {
-				contexts.add(deriveFeatures(context, group));
+		XtextSwitch<Xtext2ECoreInterpretationContext> visitor = new XtextSwitch<Xtext2ECoreInterpretationContext>() {
+			@Override
+			public Xtext2ECoreInterpretationContext caseAlternatives(Alternatives object) {
+				try {
+					List<Xtext2ECoreInterpretationContext> contexts = new ArrayList<Xtext2ECoreInterpretationContext>();
+					for (AbstractElement group : object.getGroups()) {
+						contexts.add(deriveFeatures(context, group));
+					}
+					if (!GrammarUtil.isOptionalCardinality(object))
+						return context.mergeSpawnedContexts(contexts);
+				} catch(TransformationException ex) {
+					throw new RuntimeException(ex);
+				}
+				return context;
 			}
 
-			if (!GrammarUtil.isOptionalCardinality(alternatives))
-				return context.mergeSpawnedContexts(contexts);
-		}
-		else if (element instanceof Group) {
-			Group group = (Group) element;
-			return deriveFeatures(context.spawnContextForGroup(), group.getAbstractTokens());
-		}
-		else if (element instanceof RuleCall && !GrammarUtil.isOptionalCardinality(element)) {
-			RuleCall ruleCall = (RuleCall) element;
-			AbstractRule calledRule = ruleCall.getRule();
-			// do not throw an exception for missing rules, these have been
-			// announced during the first iteration
-			if (calledRule != null)
-				return context.spawnContextWithCalledRule(findOrCreateEClassifierInfo(calledRule), ruleCall);
-		}
-		else if (element instanceof Action) {
-			Action action = (Action) element;
-			TypeRef actionTypeRef = action.getTypeName();
-			EClassifierInfo actionType = findOrCreateEClassifierInfo(actionTypeRef, null);
-			EClassifierInfo currentCompatibleType = context.getCurrentCompatibleType();
-			context = context.spawnContextWithReferencedType(actionType, action);
-			context.addFeature(action.getFeature(), currentCompatibleType, GrammarUtil.isMultipleAssignment(action),
-					true, action);
-			return context;
-		}
+			@Override
+			public Xtext2ECoreInterpretationContext caseAssignment(Assignment object) {
+				try {
+					context.addFeature(object);
+				} catch(TransformationException ex) {
+					throw new RuntimeException(ex);
+				}
+				return context;
+			}
 
-		return context;
+			@Override
+			public Xtext2ECoreInterpretationContext caseGroup(Group object) {
+				try {
+					return deriveFeatures(context.spawnContextForGroup(), object.getAbstractTokens());
+				}
+				catch (TransformationException e) {
+					throw new RuntimeException(e);
+				}
+			}
+
+			@Override
+			public Xtext2ECoreInterpretationContext caseRuleCall(RuleCall object) {
+				if (!GrammarUtil.isOptionalCardinality(object)) {
+					AbstractRule calledRule = object.getRule();
+					// do not throw an exception for missing rules, these have been
+					// announced during the first iteration
+					if (calledRule != null)
+						try {
+							return context.spawnContextWithCalledRule(findOrCreateEClassifierInfo(calledRule), object);
+						}
+						catch (TransformationException e) {
+							throw new RuntimeException(e);
+						}
+				}
+				return context;
+			}
+
+			@Override
+			public Xtext2ECoreInterpretationContext caseAction(Action object) {
+				try {
+					TypeRef actionTypeRef = object.getTypeName();
+					EClassifierInfo actionType = findOrCreateEClassifierInfo(actionTypeRef, null);
+					EClassifierInfo currentCompatibleType = context.getCurrentCompatibleType();
+					Xtext2ECoreInterpretationContext ctx = context.spawnContextWithReferencedType(actionType, object);
+					ctx.addFeature(object.getFeature(), currentCompatibleType,
+							GrammarUtil.isMultipleAssignment(object), true, object);
+					return ctx;
+				}
+				catch (TransformationException e) {
+					throw new RuntimeException(e);
+				}
+			}
+
+			@Override
+			public Xtext2ECoreInterpretationContext defaultCase(EObject object) {
+				return context;
+			}
+		};
+		try {
+			return visitor.doSwitch(element);
+		} catch(RuntimeException e) {
+			if (e.getCause() instanceof TransformationException)
+				throw (TransformationException)e.getCause();
+			throw e;
+		}
 	}
 
 	private Xtext2ECoreInterpretationContext deriveFeatures(Xtext2ECoreInterpretationContext context,
@@ -242,17 +296,20 @@ public class Xtext2EcoreTransformer {
 	private void deriveFeatures(ParserRule rule) throws TransformationException {
 		EClassifierInfo classInfo = findEClassifierInfo(rule);
 		if (classInfo == null)
-			throw new TransformationException(ErrorCode.NoSuchTypeAvailable, "No such type available"
-					+ GrammarUtil.getReturnTypeName(rule), rule);
+			throw new TransformationException(ErrorCode.NoSuchTypeAvailable, "No type available for rule " +
+					rule.getName(), rule);
 		Xtext2ECoreInterpretationContext context = new Xtext2ECoreInterpretationContext(eClassifierInfos, classInfo);
 		deriveFeatures(context, rule.getAlternatives());
 	}
 
-	private TypeRef getOrFakeReturnType(AbstractRule rule) {
+	private TypeRef getOrComputeReturnType(AbstractRule rule) {
 		TypeRef result = rule.getType();
 		if (result == null) {
-			String returnTypeName = GrammarUtil.getReturnTypeName(rule);
-			result = GrammarUtil.getTypeRef(grammar, returnTypeName);
+			EClassifier classifier = getClassifierFor(rule);
+			if (classifier == null)
+				result = getTypeRef(rule.getName());
+			else
+				result = getTypeRef(classifier);
 			if (result.getMetamodel() == null) {
 				AbstractMetamodelDeclaration bestMatch = null;
 				for (AbstractMetamodelDeclaration decl : grammar.getMetamodelDeclarations()) {
@@ -273,6 +330,47 @@ public class Xtext2EcoreTransformer {
 					result.setMetamodel(bestMatch);
 			}
 			rule.setType(result);
+		}
+		return result;
+	}
+	
+	EClassifier getClassifierFor(AbstractRule rule) {
+		if (rule.getType() != null && rule.getType().getType() != null)
+			return rule.getType().getType();
+		if (rule instanceof LexerRule || DatatypeRuleUtil.isDatatypeRule((ParserRule) rule)) {
+			return EcorePackage.Literals.ESTRING;
+		}
+		return null;
+	}
+	
+	TypeRef getTypeRef(EClassifier classifier) {
+		TypeRef result = XtextFactory.eINSTANCE.createTypeRef();
+		result.setType(classifier);
+		EPackage pack = classifier.getEPackage();
+		String packNsURI = pack.getNsURI();
+		for(AbstractMetamodelDeclaration decl: GrammarUtil.allMetamodelDeclarations(grammar)) {
+			String nsURI = decl instanceof ReferencedMetamodel ? ((ReferencedMetamodel) decl).getUri() : ((GeneratedMetamodel) decl).getNsURI();
+			if (packNsURI.equals(nsURI)) {
+				result.setMetamodel(decl);
+				return result;
+			}
+		}
+		return result;
+	}
+	
+	TypeRef getTypeRef(String qualifiedName) {
+		TypeRef result = XtextFactory.eINSTANCE.createTypeRef();
+		String[] split = qualifiedName.split("::");
+		String name = qualifiedName;
+		if (split.length > 1) {
+			result.setMetamodel(GrammarUtil.findMetaModel(grammar, split[0], true));
+			name = split[1];
+		} else {
+			result.setMetamodel(GrammarUtil.findDefaultMetaModel(grammar, true));
+		}
+		if (result.getMetamodel() instanceof ReferencedMetamodel) {
+			IDeclaredMetamodelAccess metamodelAccess = DeclaredMetamodelAccessFactory.getAccessTo(result.getMetamodel());
+			result.setType(metamodelAccess.getEClassifier(name));
 		}
 		return result;
 	}
@@ -299,7 +397,7 @@ public class Xtext2EcoreTransformer {
 			if (calledRule == null) // TODO: use NodeAdapter to create error message 
 				throw new TransformationException(ErrorCode.NoSuchRuleAvailable, "Cannot find rule " + ruleCall,
 						ruleCall);
-			TypeRef calledRuleReturnTypeRef = getOrFakeReturnType(calledRule);
+			TypeRef calledRuleReturnTypeRef = getOrComputeReturnType(calledRule);
 			addSuperType(calledRuleReturnTypeRef, ruleReturnType);
 		}
 		else if (element instanceof Action) {
@@ -339,14 +437,8 @@ public class Xtext2EcoreTransformer {
 				if (metamodelDeclaration instanceof ReferencedMetamodel) {
 					// load imported metamodel
 					ReferencedMetamodel referencedMetamodel = (ReferencedMetamodel) metamodelDeclaration;
-					EPackage referencedEPackage;
-					try {
-						referencedEPackage = GrammarUtil.loadEPackage(referencedMetamodel);
-					}
-					catch (RuntimeException e) {
-						referencedEPackage = null;
-					}
-
+					IDeclaredMetamodelAccess access = DeclaredMetamodelAccessFactory.getAccessTo(referencedMetamodel);
+					EPackage referencedEPackage = access.getPackage();
 					if (referencedEPackage == null)
 						throw new TransformationException(ErrorCode.CannotLoadMetamodel, "Cannot not load metamodel "
 								+ referencedMetamodel.getUri(), referencedMetamodel);
@@ -408,12 +500,12 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private EClassifierInfo findOrCreateEClassifierInfo(AbstractRule rule) throws TransformationException {
-		TypeRef typeRef = getOrFakeReturnType(rule);
+		TypeRef typeRef = getOrComputeReturnType(rule);
 		return findOrCreateEClassifierInfo(typeRef, rule.getName());
 	}
 
 	private EClassifierInfo findEClassifierInfo(AbstractRule rule) {
-		TypeRef typeRef = getOrFakeReturnType(rule);
+		TypeRef typeRef = getOrComputeReturnType(rule);
 		if (typeRef == null)
 			throw new NullPointerException();
 		if (rule.getType() != typeRef)
@@ -435,17 +527,17 @@ public class Xtext2EcoreTransformer {
 					+ typeRef.getType().getName());
 		//					+ GrammarUtil.getQualifiedName(typeRef));
 
-		String typeRefName = null;
+		String classifierName = null;
 		//		typeRefName = typeRef.getName();
-		typeRefName = GrammarUtil.getTypeRefName(typeRef);
-		if (typeRefName == null)
-			typeRefName = name;
-		if (typeRefName == null)
+		classifierName = GrammarUtil.getTypeRefName(typeRef);
+		if (classifierName == null)
+			classifierName = name;
+		if (classifierName == null)
 			throw new NullPointerException("typeRefName may not be null");
 
 		AbstractMetamodelDeclaration metaModel = typeRef.getMetamodel();
 		if (metaModel == null)
-			throw new TransformationException(ErrorCode.UnknownMetaModelAlias, "Cannot create type for " + typeRefName
+			throw new TransformationException(ErrorCode.UnknownMetaModelAlias, "Cannot create type for " + classifierName
 					+ " because its MetaModel is unknown.", typeRef);
 		EPackage generatedEPackage = getGeneratedEPackage(metaModel);
 		if (generatedEPackage == null) {
@@ -453,24 +545,27 @@ public class Xtext2EcoreTransformer {
 					"Cannot create type in alias " + typeRef.getMetamodel().getAlias(), typeRef);
 		}
 
-		EClassifier generatedEClass = generatedEPackage.getEClassifier(typeRefName);
-		if (generatedEClass == null) {
-			generatedEClass = EcoreFactory.eINSTANCE.createEClass();
-			generatedEClass.setName(typeRefName);
-			generatedEPackage.getEClassifiers().add(generatedEClass);
+		EClassifier classifier = generatedEPackage.getEClassifier(classifierName);
+		if (classifier == null) {
+			classifier = EcoreFactory.eINSTANCE.createEClass();
+			classifier.setName(classifierName);
+			generatedEPackage.getEClassifiers().add(classifier);
+			typeRef.setType(classifier);
+			
+			EClassifierInfo result;
+			// TODO: Enums?
+			if (classifier instanceof EClass)
+				result = EClassifierInfo.createEClassInfo((EClass) classifier, true);
+			else
+				result = EClassifierInfo.createEDataTypeInfo((EDataType) classifier, true);
+
+			if (!eClassifierInfos.addInfo(typeRef, result))
+				throw new IllegalStateException("cannot add type for typeRef twice: '" + classifierName + "'");
+			return result;
+		} else {
+			typeRef.setType(classifier);
+			return eClassifierInfos.getInfo(classifier);
 		}
-		typeRef.setType(generatedEClass);
-
-		EClassifierInfo result;
-		// TODO: Enums?
-		if (generatedEClass instanceof EClass)
-			result = EClassifierInfo.createEClassInfo((EClass) generatedEClass, true);
-		else
-			result = EClassifierInfo.createEDataTypeInfo((EDataType) generatedEClass, true);
-
-		if (!eClassifierInfos.addInfo(typeRef, result))
-			throw new IllegalStateException();
-		return result;
 	}
 
 	private void addGeneratedEPackage(GeneratedMetamodel generatedMetamodel) throws TransformationException {

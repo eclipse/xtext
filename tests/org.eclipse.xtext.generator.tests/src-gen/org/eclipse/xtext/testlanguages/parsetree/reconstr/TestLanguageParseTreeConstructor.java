@@ -25,14 +25,25 @@ public class TestLanguageParseTreeConstructor extends AbstractParseTreeConstruct
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Model") && (s = new EntryRule_Assignment_multiFeature(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("AbstractElement") && (s = new AbstractRule_Alternatives(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("ChoiceElement") && (s = new ChoiceRule_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("ReducibleElement") && (s = new ReducibleRule_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TerminalElement") && (s = new TerminalRule_Assignment_stringFeature(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule EntryRule ****************
  *
  * EntryRule returns Model : ( multiFeature += AbstractRule ) * ;
@@ -54,6 +65,7 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("multiFeature",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("multiFeature");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("AbstractElement")) {
@@ -64,11 +76,13 @@ protected class EntryRule_Assignment_multiFeature extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
 
 /************ end Rule EntryRule ****************/
+
 
 /************ begin Rule AbstractRule ****************
  *
@@ -136,6 +150,7 @@ protected class AbstractRule_1_RuleCall_ReducibleRule extends RuleCallToken {
 
 
 /************ end Rule AbstractRule ****************/
+
 
 /************ begin Rule ChoiceRule ****************
  *
@@ -261,6 +276,7 @@ protected class ChoiceRule_1_Assignment_name extends AssignmentToken  {
 
 
 /************ end Rule ChoiceRule ****************/
+
 
 /************ begin Rule ReducibleRule ****************
  *
@@ -418,6 +434,7 @@ protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentTok
 	protected Solution createSolution() {
 		if((value = current.getConsumable("actionFeature",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("actionFeature");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("TerminalElement")) {
@@ -428,6 +445,7 @@ protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentTok
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -435,6 +453,7 @@ protected class ReducibleRule_1_1_Assignment_actionFeature extends AssignmentTok
 
 
 /************ end Rule ReducibleRule ****************/
+
 
 /************ begin Rule TerminalRule ****************
  *

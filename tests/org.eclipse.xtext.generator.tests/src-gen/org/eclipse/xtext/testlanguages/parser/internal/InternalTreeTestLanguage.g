@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
 }
 
 @parser::members {
@@ -58,6 +59,7 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 
 
+
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); }
@@ -84,11 +86,17 @@ ruleModel returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "children", lv_children,null);
-	         }
+	        try {
+	        	factory.add($current, "children", lv_children,"Node");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )*;
-    
+
+
+
 
 
 // Entry rule entryRuleNode
@@ -116,8 +124,12 @@ ruleNode returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "name", lv_name,"ID");
-	         }
+	        try {
+	        	factory.set($current, "name", lv_name,"ID");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )'(' 
     {
@@ -136,8 +148,12 @@ ruleNode returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.set($current, "attrib", lv_attrib,"STRING");
-	         }
+	        try {
+	        	factory.set($current, "attrib", lv_attrib,"STRING");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 ))')' 
     {
@@ -161,15 +177,20 @@ ruleNode returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
-	        factory.add($current, "children", lv_children,null);
-	         }
+	        try {
+	        	factory.add($current, "children", lv_children,"Node");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 	
 )*)'};' 
     {
         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 );
-    
+
+
 
 
 

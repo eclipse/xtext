@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g 2008-12-10 21:59:33
+// $ANTLR 3.0.1 ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g 2008-12-16 15:37:24
 
 package org.eclipse.xtext.testlanguages.parser.internal; 
 
@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
 
 
 import org.antlr.runtime.*;
@@ -61,7 +62,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
     // $ANTLR start entryRuleSpielplatz
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:62:1: entryRuleSpielplatz returns [EObject current=null] : iv_ruleSpielplatz= ruleSpielplatz EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:64:1: entryRuleSpielplatz returns [EObject current=null] : iv_ruleSpielplatz= ruleSpielplatz EOF ;
     public final EObject entryRuleSpielplatz() throws RecognitionException {
         EObject current = null;
 
@@ -69,16 +70,16 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:62:52: (iv_ruleSpielplatz= ruleSpielplatz EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:63:2: iv_ruleSpielplatz= ruleSpielplatz EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:64:52: (iv_ruleSpielplatz= ruleSpielplatz EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:65:2: iv_ruleSpielplatz= ruleSpielplatz EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.0" /* xtext::ParserRule */, currentNode); 
-            pushFollow(FOLLOW_ruleSpielplatz_in_entryRuleSpielplatz70);
+            pushFollow(FOLLOW_ruleSpielplatz_in_entryRuleSpielplatz71);
             iv_ruleSpielplatz=ruleSpielplatz();
             _fsp--;
 
              current =iv_ruleSpielplatz; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSpielplatz80); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSpielplatz81); 
 
             }
 
@@ -96,7 +97,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
     // $ANTLR start ruleSpielplatz
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:70:1: ruleSpielplatz returns [EObject current=null] : ( ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' ) ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )* ) '}' )? ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:72:1: ruleSpielplatz returns [EObject current=null] : ( ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' ) ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )* ) '}' )? ;
     public final EObject ruleSpielplatz() throws RecognitionException {
         EObject current = null;
 
@@ -113,10 +114,10 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:72:33: ( ( ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' ) ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )* ) '}' )? )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:73:1: ( ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' ) ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )* ) '}' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:74:33: ( ( ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' ) ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )* ) '}' )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:75:1: ( ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' ) ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )* ) '}' )?
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:73:1: ( ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' ) ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )* ) '}' )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:75:1: ( ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' ) ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )* ) '}' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -125,29 +126,29 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:73:2: ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' ) ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )* ) '}'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:75:2: ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' ) ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )* ) '}'
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:73:2: ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' ) ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )* )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:73:3: ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' ) ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )*
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:75:2: ( ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' ) ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )* )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:75:3: ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' ) ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )*
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:73:3: ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:73:4: ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:75:3: ( ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:75:4: ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? ) '{'
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:73:4: ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:73:5: ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:75:4: ( ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )? )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:75:5: ( 'spielplatz' (lv_groesse= RULE_INT ) ) (lv_beschreibung= RULE_STRING )?
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:73:5: ( 'spielplatz' (lv_groesse= RULE_INT ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:73:6: 'spielplatz' (lv_groesse= RULE_INT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:75:5: ( 'spielplatz' (lv_groesse= RULE_INT ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:75:6: 'spielplatz' (lv_groesse= RULE_INT )
                     {
-                    match(input,11,FOLLOW_11_in_ruleSpielplatz118); 
+                    match(input,11,FOLLOW_11_in_ruleSpielplatz119); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:77:1: (lv_groesse= RULE_INT )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:79:6: lv_groesse= RULE_INT
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:79:1: (lv_groesse= RULE_INT )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:81:6: lv_groesse= RULE_INT
                     {
                     lv_groesse=(Token)input.LT(1);
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSpielplatz139); 
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSpielplatz140); 
                      
                         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "groesse"); 
                         
@@ -157,15 +158,19 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                     	        
-                    	        factory.set(current, "groesse", lv_groesse,"INT");
-                    	         
+                    	        try {
+                    	        	factory.set(current, "groesse", lv_groesse,"INT");
+                    	        } catch (ValueConverterException vce) {
+                    				handleValueConverterException(vce);
+                    	        }
+                    	    
 
                     }
 
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:93:3: (lv_beschreibung= RULE_STRING )?
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:99:3: (lv_beschreibung= RULE_STRING )?
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -174,10 +179,10 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     }
                     switch (alt1) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:95:6: lv_beschreibung= RULE_STRING
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:101:6: lv_beschreibung= RULE_STRING
                             {
                             lv_beschreibung=(Token)input.LT(1);
-                            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleSpielplatz172); 
+                            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleSpielplatz173); 
                              
                                 createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "beschreibung"); 
                                 
@@ -187,8 +192,12 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                             	            associateNodeWithAstElement(currentNode, current);
                             	        }
                             	        
-                            	        factory.set(current, "beschreibung", lv_beschreibung,"STRING");
-                            	         
+                            	        try {
+                            	        	factory.set(current, "beschreibung", lv_beschreibung,"STRING");
+                            	        } catch (ValueConverterException vce) {
+                            				handleValueConverterException(vce);
+                            	        }
+                            	    
 
                             }
                             break;
@@ -198,14 +207,14 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
                     }
 
-                    match(input,12,FOLLOW_12_in_ruleSpielplatz194); 
+                    match(input,12,FOLLOW_12_in_ruleSpielplatz195); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
 
                     }
 
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:113:2: ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )*
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:123:2: ( ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) ) | (lv_familie= ruleFamilie ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -221,9 +230,9 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:113:3: ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:123:3: ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) )
                     	    {
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:113:3: ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:123:3: ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) )
                     	    int alt3=2;
                     	    int LA3_0 = input.LA(1);
 
@@ -235,15 +244,15 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     	    }
                     	    else {
                     	        NoViableAltException nvae =
-                    	            new NoViableAltException("113:3: ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) )", 3, 0, input);
+                    	            new NoViableAltException("123:3: ( ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) ) | (lv_spielzeuge= ruleSpielzeug ) )", 3, 0, input);
 
                     	        throw nvae;
                     	    }
                     	    switch (alt3) {
                     	        case 1 :
-                    	            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:113:4: ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) )
+                    	            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:123:4: ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) )
                     	            {
-                    	            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:113:4: ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) )
+                    	            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:123:4: ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) )
                     	            int alt2=2;
                     	            int LA2_0 = input.LA(1);
 
@@ -255,21 +264,21 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     	            }
                     	            else {
                     	                NoViableAltException nvae =
-                    	                    new NoViableAltException("113:4: ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) )", 2, 0, input);
+                    	                    new NoViableAltException("123:4: ( (lv_kinder= ruleKind ) | (lv_erzieher= ruleErwachsener ) )", 2, 0, input);
 
                     	                throw nvae;
                     	            }
                     	            switch (alt2) {
                     	                case 1 :
-                    	                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:113:5: (lv_kinder= ruleKind )
+                    	                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:123:5: (lv_kinder= ruleKind )
                     	                    {
-                    	                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:113:5: (lv_kinder= ruleKind )
-                    	                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:116:6: lv_kinder= ruleKind
+                    	                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:123:5: (lv_kinder= ruleKind )
+                    	                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:126:6: lv_kinder= ruleKind
                     	                    {
                     	                     
                     	                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.0/@terminal" /* xtext::RuleCall */, currentNode); 
                     	                    	    
-                    	                    pushFollow(FOLLOW_ruleKind_in_ruleSpielplatz232);
+                    	                    pushFollow(FOLLOW_ruleKind_in_ruleSpielplatz233);
                     	                    lv_kinder=ruleKind();
                     	                    _fsp--;
 
@@ -280,8 +289,12 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     	                    	            associateNodeWithAstElement(currentNode, current);
                     	                    	        }
                     	                    	        
-                    	                    	        factory.add(current, "kinder", lv_kinder,null);
-                    	                    	         
+                    	                    	        try {
+                    	                    	        	factory.add(current, "kinder", lv_kinder,"Kind");
+                    	                    	        } catch (ValueConverterException vce) {
+                    	                    				handleValueConverterException(vce);
+                    	                    	        }
+                    	                    	    
 
                     	                    }
 
@@ -289,15 +302,15 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     	                    }
                     	                    break;
                     	                case 2 :
-                    	                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:131:6: (lv_erzieher= ruleErwachsener )
+                    	                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:145:6: (lv_erzieher= ruleErwachsener )
                     	                    {
-                    	                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:131:6: (lv_erzieher= ruleErwachsener )
-                    	                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:134:6: lv_erzieher= ruleErwachsener
+                    	                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:145:6: (lv_erzieher= ruleErwachsener )
+                    	                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:148:6: lv_erzieher= ruleErwachsener
                     	                    {
                     	                     
                     	                    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	                    	    
-                    	                    pushFollow(FOLLOW_ruleErwachsener_in_ruleSpielplatz276);
+                    	                    pushFollow(FOLLOW_ruleErwachsener_in_ruleSpielplatz277);
                     	                    lv_erzieher=ruleErwachsener();
                     	                    _fsp--;
 
@@ -308,8 +321,12 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     	                    	            associateNodeWithAstElement(currentNode, current);
                     	                    	        }
                     	                    	        
-                    	                    	        factory.add(current, "erzieher", lv_erzieher,null);
-                    	                    	         
+                    	                    	        try {
+                    	                    	        	factory.add(current, "erzieher", lv_erzieher,"Erwachsener");
+                    	                    	        } catch (ValueConverterException vce) {
+                    	                    				handleValueConverterException(vce);
+                    	                    	        }
+                    	                    	    
 
                     	                    }
 
@@ -323,15 +340,15 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     	            }
                     	            break;
                     	        case 2 :
-                    	            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:149:6: (lv_spielzeuge= ruleSpielzeug )
+                    	            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:167:6: (lv_spielzeuge= ruleSpielzeug )
                     	            {
-                    	            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:149:6: (lv_spielzeuge= ruleSpielzeug )
-                    	            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:152:6: lv_spielzeuge= ruleSpielzeug
+                    	            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:167:6: (lv_spielzeuge= ruleSpielzeug )
+                    	            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:170:6: lv_spielzeuge= ruleSpielzeug
                     	            {
                     	             
                     	            	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.0/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	            	    
-                    	            pushFollow(FOLLOW_ruleSpielzeug_in_ruleSpielplatz321);
+                    	            pushFollow(FOLLOW_ruleSpielzeug_in_ruleSpielplatz322);
                     	            lv_spielzeuge=ruleSpielzeug();
                     	            _fsp--;
 
@@ -342,8 +359,12 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     	            	            associateNodeWithAstElement(currentNode, current);
                     	            	        }
                     	            	        
-                    	            	        factory.add(current, "spielzeuge", lv_spielzeuge,null);
-                    	            	         
+                    	            	        try {
+                    	            	        	factory.add(current, "spielzeuge", lv_spielzeuge,"Spielzeug");
+                    	            	        } catch (ValueConverterException vce) {
+                    	            				handleValueConverterException(vce);
+                    	            	        }
+                    	            	    
 
                     	            }
 
@@ -357,15 +378,15 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:167:6: (lv_familie= ruleFamilie )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:189:6: (lv_familie= ruleFamilie )
                     	    {
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:167:6: (lv_familie= ruleFamilie )
-                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:170:6: lv_familie= ruleFamilie
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:189:6: (lv_familie= ruleFamilie )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:192:6: lv_familie= ruleFamilie
                     	    {
                     	     
                     	    	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.0/@abstractTokens.1/@groups.1/@terminal" /* xtext::RuleCall */, currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleFamilie_in_ruleSpielplatz366);
+                    	    pushFollow(FOLLOW_ruleFamilie_in_ruleSpielplatz367);
                     	    lv_familie=ruleFamilie();
                     	    _fsp--;
 
@@ -376,8 +397,12 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     	    	            associateNodeWithAstElement(currentNode, current);
                     	    	        }
                     	    	        
-                    	    	        factory.add(current, "familie", lv_familie,null);
-                    	    	         
+                    	    	        try {
+                    	    	        	factory.add(current, "familie", lv_familie,"Familie");
+                    	    	        } catch (ValueConverterException vce) {
+                    	    				handleValueConverterException(vce);
+                    	    	        }
+                    	    	    
 
                     	    }
 
@@ -393,7 +418,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
                     }
 
-                    match(input,13,FOLLOW_13_in_ruleSpielplatz382); 
+                    match(input,13,FOLLOW_13_in_ruleSpielplatz383); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.0/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                         
@@ -421,7 +446,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
     // $ANTLR start entryRuleKind
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:195:1: entryRuleKind returns [EObject current=null] : iv_ruleKind= ruleKind EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:223:1: entryRuleKind returns [EObject current=null] : iv_ruleKind= ruleKind EOF ;
     public final EObject entryRuleKind() throws RecognitionException {
         EObject current = null;
 
@@ -429,16 +454,16 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:195:46: (iv_ruleKind= ruleKind EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:196:2: iv_ruleKind= ruleKind EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:223:46: (iv_ruleKind= ruleKind EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:224:2: iv_ruleKind= ruleKind EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); 
-            pushFollow(FOLLOW_ruleKind_in_entryRuleKind420);
+            pushFollow(FOLLOW_ruleKind_in_entryRuleKind419);
             iv_ruleKind=ruleKind();
             _fsp--;
 
              current =iv_ruleKind; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleKind430); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleKind429); 
 
             }
 
@@ -456,7 +481,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
     // $ANTLR start ruleKind
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:203:1: ruleKind returns [EObject current=null] : ( ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:231:1: ruleKind returns [EObject current=null] : ( ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' ) ;
     public final EObject ruleKind() throws RecognitionException {
         EObject current = null;
 
@@ -465,37 +490,37 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:205:33: ( ( ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:206:1: ( ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:233:33: ( ( ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:234:1: ( ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:206:1: ( ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:206:2: ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:234:1: ( ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:234:2: ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:206:2: ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:206:3: ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:234:2: ( ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:234:3: ( ( 'kind' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:206:3: ( ( 'kind' '(' ) (lv_name= RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:206:4: ( 'kind' '(' ) (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:234:3: ( ( 'kind' '(' ) (lv_name= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:234:4: ( 'kind' '(' ) (lv_name= RULE_ID )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:206:4: ( 'kind' '(' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:206:5: 'kind' '('
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:234:4: ( 'kind' '(' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:234:5: 'kind' '('
             {
-            match(input,14,FOLLOW_14_in_ruleKind467); 
+            match(input,14,FOLLOW_14_in_ruleKind466); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            match(input,15,FOLLOW_15_in_ruleKind476); 
+            match(input,15,FOLLOW_15_in_ruleKind475); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:214:2: (lv_name= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:216:6: lv_name= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:242:2: (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:244:6: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleKind498); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleKind497); 
              
                 createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
@@ -505,19 +530,23 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
-            	        factory.set(current, "name", lv_name,"ID");
-            	         
+            	        try {
+            	        	factory.set(current, "name", lv_name,"ID");
+            	        } catch (ValueConverterException vce) {
+            				handleValueConverterException(vce);
+            	        }
+            	    
 
             }
 
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:230:3: (lv_age= RULE_INT )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:232:6: lv_age= RULE_INT
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:262:3: (lv_age= RULE_INT )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:264:6: lv_age= RULE_INT
             {
             lv_age=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleKind531); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleKind530); 
              
                 createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "age"); 
                 
@@ -527,15 +556,19 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
-            	        factory.set(current, "age", lv_age,"INT");
-            	         
+            	        try {
+            	        	factory.set(current, "age", lv_age,"INT");
+            	        } catch (ValueConverterException vce) {
+            				handleValueConverterException(vce);
+            	        }
+            	    
 
             }
 
 
             }
 
-            match(input,16,FOLLOW_16_in_ruleKind552); 
+            match(input,16,FOLLOW_16_in_ruleKind551); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -560,7 +593,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
     // $ANTLR start entryRuleErwachsener
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:255:1: entryRuleErwachsener returns [EObject current=null] : iv_ruleErwachsener= ruleErwachsener EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:293:1: entryRuleErwachsener returns [EObject current=null] : iv_ruleErwachsener= ruleErwachsener EOF ;
     public final EObject entryRuleErwachsener() throws RecognitionException {
         EObject current = null;
 
@@ -568,16 +601,16 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:255:53: (iv_ruleErwachsener= ruleErwachsener EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:256:2: iv_ruleErwachsener= ruleErwachsener EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:293:53: (iv_ruleErwachsener= ruleErwachsener EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:294:2: iv_ruleErwachsener= ruleErwachsener EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); 
-            pushFollow(FOLLOW_ruleErwachsener_in_entryRuleErwachsener587);
+            pushFollow(FOLLOW_ruleErwachsener_in_entryRuleErwachsener584);
             iv_ruleErwachsener=ruleErwachsener();
             _fsp--;
 
              current =iv_ruleErwachsener; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleErwachsener597); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleErwachsener594); 
 
             }
 
@@ -595,7 +628,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
     // $ANTLR start ruleErwachsener
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:263:1: ruleErwachsener returns [EObject current=null] : ( ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:301:1: ruleErwachsener returns [EObject current=null] : ( ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' ) ;
     public final EObject ruleErwachsener() throws RecognitionException {
         EObject current = null;
 
@@ -604,37 +637,37 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:265:33: ( ( ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:266:1: ( ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:303:33: ( ( ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:304:1: ( ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:266:1: ( ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:266:2: ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:304:1: ( ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:304:2: ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) ) ')'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:266:2: ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:266:3: ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:304:2: ( ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:304:3: ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) ) (lv_age= RULE_INT )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:266:3: ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:266:4: ( 'erwachsener' '(' ) (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:304:3: ( ( 'erwachsener' '(' ) (lv_name= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:304:4: ( 'erwachsener' '(' ) (lv_name= RULE_ID )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:266:4: ( 'erwachsener' '(' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:266:5: 'erwachsener' '('
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:304:4: ( 'erwachsener' '(' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:304:5: 'erwachsener' '('
             {
-            match(input,17,FOLLOW_17_in_ruleErwachsener634); 
+            match(input,17,FOLLOW_17_in_ruleErwachsener631); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            match(input,15,FOLLOW_15_in_ruleErwachsener643); 
+            match(input,15,FOLLOW_15_in_ruleErwachsener640); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:274:2: (lv_name= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:276:6: lv_name= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:312:2: (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:314:6: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleErwachsener665); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleErwachsener662); 
              
                 createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
@@ -644,19 +677,23 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
-            	        factory.set(current, "name", lv_name,"ID");
-            	         
+            	        try {
+            	        	factory.set(current, "name", lv_name,"ID");
+            	        } catch (ValueConverterException vce) {
+            				handleValueConverterException(vce);
+            	        }
+            	    
 
             }
 
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:290:3: (lv_age= RULE_INT )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:292:6: lv_age= RULE_INT
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:332:3: (lv_age= RULE_INT )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:334:6: lv_age= RULE_INT
             {
             lv_age=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleErwachsener698); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleErwachsener695); 
              
                 createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "age"); 
                 
@@ -666,15 +703,19 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
-            	        factory.set(current, "age", lv_age,"INT");
-            	         
+            	        try {
+            	        	factory.set(current, "age", lv_age,"INT");
+            	        } catch (ValueConverterException vce) {
+            				handleValueConverterException(vce);
+            	        }
+            	    
 
             }
 
 
             }
 
-            match(input,16,FOLLOW_16_in_ruleErwachsener719); 
+            match(input,16,FOLLOW_16_in_ruleErwachsener716); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -699,7 +740,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
     // $ANTLR start entryRuleSpielzeug
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:315:1: entryRuleSpielzeug returns [EObject current=null] : iv_ruleSpielzeug= ruleSpielzeug EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:363:1: entryRuleSpielzeug returns [EObject current=null] : iv_ruleSpielzeug= ruleSpielzeug EOF ;
     public final EObject entryRuleSpielzeug() throws RecognitionException {
         EObject current = null;
 
@@ -707,16 +748,16 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:315:51: (iv_ruleSpielzeug= ruleSpielzeug EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:316:2: iv_ruleSpielzeug= ruleSpielzeug EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:363:51: (iv_ruleSpielzeug= ruleSpielzeug EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:364:2: iv_ruleSpielzeug= ruleSpielzeug EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); 
-            pushFollow(FOLLOW_ruleSpielzeug_in_entryRuleSpielzeug754);
+            pushFollow(FOLLOW_ruleSpielzeug_in_entryRuleSpielzeug749);
             iv_ruleSpielzeug=ruleSpielzeug();
             _fsp--;
 
              current =iv_ruleSpielzeug; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSpielzeug764); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSpielzeug759); 
 
             }
 
@@ -734,7 +775,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
     // $ANTLR start ruleSpielzeug
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:323:1: ruleSpielzeug returns [EObject current=null] : ( ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:371:1: ruleSpielzeug returns [EObject current=null] : ( ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')' ) ;
     public final EObject ruleSpielzeug() throws RecognitionException {
         EObject current = null;
 
@@ -744,37 +785,37 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:325:33: ( ( ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:326:1: ( ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:373:33: ( ( ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:374:1: ( ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:326:1: ( ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:326:2: ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:374:1: ( ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:374:2: ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) ) ')'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:326:2: ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:326:3: ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:374:2: ( ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:374:3: ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) ) (lv_farbe= ruleFarbe )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:326:3: ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:326:4: ( 'spielzeug' '(' ) (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:374:3: ( ( 'spielzeug' '(' ) (lv_name= RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:374:4: ( 'spielzeug' '(' ) (lv_name= RULE_ID )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:326:4: ( 'spielzeug' '(' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:326:5: 'spielzeug' '('
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:374:4: ( 'spielzeug' '(' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:374:5: 'spielzeug' '('
             {
-            match(input,18,FOLLOW_18_in_ruleSpielzeug801); 
+            match(input,18,FOLLOW_18_in_ruleSpielzeug796); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            match(input,15,FOLLOW_15_in_ruleSpielzeug810); 
+            match(input,15,FOLLOW_15_in_ruleSpielzeug805); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:334:2: (lv_name= RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:336:6: lv_name= RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:382:2: (lv_name= RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:384:6: lv_name= RULE_ID
             {
             lv_name=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSpielzeug832); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSpielzeug827); 
              
                 createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, "name"); 
                 
@@ -784,21 +825,25 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
-            	        factory.set(current, "name", lv_name,"ID");
-            	         
+            	        try {
+            	        	factory.set(current, "name", lv_name,"ID");
+            	        } catch (ValueConverterException vce) {
+            				handleValueConverterException(vce);
+            	        }
+            	    
 
             }
 
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:350:3: (lv_farbe= ruleFarbe )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:353:6: lv_farbe= ruleFarbe
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:402:3: (lv_farbe= ruleFarbe )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:405:6: lv_farbe= ruleFarbe
             {
              
             	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
             	    
-            pushFollow(FOLLOW_ruleFarbe_in_ruleSpielzeug878);
+            pushFollow(FOLLOW_ruleFarbe_in_ruleSpielzeug873);
             lv_farbe=ruleFarbe();
             _fsp--;
 
@@ -809,15 +854,19 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
-            	        factory.set(current, "farbe", lv_farbe,null);
-            	         
+            	        try {
+            	        	factory.set(current, "farbe", lv_farbe,"Farbe");
+            	        } catch (ValueConverterException vce) {
+            				handleValueConverterException(vce);
+            	        }
+            	    
 
             }
 
 
             }
 
-            match(input,16,FOLLOW_16_in_ruleSpielzeug892); 
+            match(input,16,FOLLOW_16_in_ruleSpielzeug887); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -842,7 +891,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
     // $ANTLR start entryRuleFarbe
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:376:1: entryRuleFarbe returns [EObject current=null] : iv_ruleFarbe= ruleFarbe EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:434:1: entryRuleFarbe returns [EObject current=null] : iv_ruleFarbe= ruleFarbe EOF ;
     public final EObject entryRuleFarbe() throws RecognitionException {
         EObject current = null;
 
@@ -850,16 +899,16 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:376:47: (iv_ruleFarbe= ruleFarbe EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:377:2: iv_ruleFarbe= ruleFarbe EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:434:47: (iv_ruleFarbe= ruleFarbe EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:435:2: iv_ruleFarbe= ruleFarbe EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); 
-            pushFollow(FOLLOW_ruleFarbe_in_entryRuleFarbe927);
+            pushFollow(FOLLOW_ruleFarbe_in_entryRuleFarbe920);
             iv_ruleFarbe=ruleFarbe();
             _fsp--;
 
              current =iv_ruleFarbe; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFarbe937); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFarbe930); 
 
             }
 
@@ -877,16 +926,16 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
     // $ANTLR start ruleFarbe
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:384:1: ruleFarbe returns [EObject current=null] : ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:442:1: ruleFarbe returns [EObject current=null] : ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' ) ;
     public final EObject ruleFarbe() throws RecognitionException {
         EObject current = null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:386:33: ( ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:387:1: ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:444:33: ( ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:445:1: ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:387:1: ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:445:1: ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -898,15 +947,15 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("387:1: ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' )", 8, 0, input);
+                    new NoViableAltException("445:1: ( ( ( 'ROT' | 'BLAU' ) | 'GELB' ) | 'GRÜN' )", 8, 0, input);
 
                 throw nvae;
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:387:2: ( ( 'ROT' | 'BLAU' ) | 'GELB' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:445:2: ( ( 'ROT' | 'BLAU' ) | 'GELB' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:387:2: ( ( 'ROT' | 'BLAU' ) | 'GELB' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:445:2: ( ( 'ROT' | 'BLAU' ) | 'GELB' )
                     int alt7=2;
                     int LA7_0 = input.LA(1);
 
@@ -918,15 +967,15 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("387:2: ( ( 'ROT' | 'BLAU' ) | 'GELB' )", 7, 0, input);
+                            new NoViableAltException("445:2: ( ( 'ROT' | 'BLAU' ) | 'GELB' )", 7, 0, input);
 
                         throw nvae;
                     }
                     switch (alt7) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:387:3: ( 'ROT' | 'BLAU' )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:445:3: ( 'ROT' | 'BLAU' )
                             {
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:387:3: ( 'ROT' | 'BLAU' )
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:445:3: ( 'ROT' | 'BLAU' )
                             int alt6=2;
                             int LA6_0 = input.LA(1);
 
@@ -938,15 +987,15 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("387:3: ( 'ROT' | 'BLAU' )", 6, 0, input);
+                                    new NoViableAltException("445:3: ( 'ROT' | 'BLAU' )", 6, 0, input);
 
                                 throw nvae;
                             }
                             switch (alt6) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:387:4: 'ROT'
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:445:4: 'ROT'
                                     {
-                                    match(input,19,FOLLOW_19_in_ruleFarbe973); 
+                                    match(input,19,FOLLOW_19_in_ruleFarbe966); 
 
                                             createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.5/@alternatives/@groups.0/@groups.0/@groups.0" /* xtext::Keyword */, null); 
                                         
@@ -954,9 +1003,9 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                                     }
                                     break;
                                 case 2 :
-                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:392:6: 'BLAU'
+                                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:450:6: 'BLAU'
                                     {
-                                    match(input,20,FOLLOW_20_in_ruleFarbe988); 
+                                    match(input,20,FOLLOW_20_in_ruleFarbe981); 
 
                                             createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.5/@alternatives/@groups.0/@groups.0/@groups.1" /* xtext::Keyword */, null); 
                                         
@@ -970,9 +1019,9 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:397:6: 'GELB'
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:455:6: 'GELB'
                             {
-                            match(input,21,FOLLOW_21_in_ruleFarbe1004); 
+                            match(input,21,FOLLOW_21_in_ruleFarbe997); 
 
                                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.5/@alternatives/@groups.0/@groups.1" /* xtext::Keyword */, null); 
                                 
@@ -986,9 +1035,9 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:402:6: 'GRÜN'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:460:6: 'GRÜN'
                     {
-                    match(input,22,FOLLOW_22_in_ruleFarbe1020); 
+                    match(input,22,FOLLOW_22_in_ruleFarbe1013); 
 
                             createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.5/@alternatives/@groups.1" /* xtext::Keyword */, null); 
                         
@@ -1016,7 +1065,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
     // $ANTLR start entryRuleFamilie
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:411:1: entryRuleFamilie returns [EObject current=null] : iv_ruleFamilie= ruleFamilie EOF ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:471:1: entryRuleFamilie returns [EObject current=null] : iv_ruleFamilie= ruleFamilie EOF ;
     public final EObject entryRuleFamilie() throws RecognitionException {
         EObject current = null;
 
@@ -1024,16 +1073,16 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:411:49: (iv_ruleFamilie= ruleFamilie EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:412:2: iv_ruleFamilie= ruleFamilie EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:471:49: (iv_ruleFamilie= ruleFamilie EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:472:2: iv_ruleFamilie= ruleFamilie EOF
             {
              currentNode = createCompositeNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); 
-            pushFollow(FOLLOW_ruleFamilie_in_entryRuleFamilie1055);
+            pushFollow(FOLLOW_ruleFamilie_in_entryRuleFamilie1046);
             iv_ruleFamilie=ruleFamilie();
             _fsp--;
 
              current =iv_ruleFamilie; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFamilie1065); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFamilie1056); 
 
             }
 
@@ -1051,7 +1100,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
 
     // $ANTLR start ruleFamilie
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:419:1: ruleFamilie returns [EObject current=null] : ( ( ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ',' ( ( RULE_ID ) ) )* ) ')' ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:479:1: ruleFamilie returns [EObject current=null] : ( ( ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ',' ( ( RULE_ID ) ) )* ) ')' ) ;
     public final EObject ruleFamilie() throws RecognitionException {
         EObject current = null;
 
@@ -1059,45 +1108,45 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:421:33: ( ( ( ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ',' ( ( RULE_ID ) ) )* ) ')' ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:1: ( ( ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ',' ( ( RULE_ID ) ) )* ) ')' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:481:33: ( ( ( ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ',' ( ( RULE_ID ) ) )* ) ')' ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:1: ( ( ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ',' ( ( RULE_ID ) ) )* ) ')' )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:1: ( ( ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ',' ( ( RULE_ID ) ) )* ) ')' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:2: ( ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ',' ( ( RULE_ID ) ) )* ) ')'
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:1: ( ( ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ',' ( ( RULE_ID ) ) )* ) ')' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:2: ( ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ',' ( ( RULE_ID ) ) )* ) ')'
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:2: ( ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ',' ( ( RULE_ID ) ) )* )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:3: ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ',' ( ( RULE_ID ) ) )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:2: ( ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ',' ( ( RULE_ID ) ) )* )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:3: ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ',' ( ( RULE_ID ) ) )*
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:3: ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:4: ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:3: ( ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:4: ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:4: ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:5: ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:4: ( ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:5: ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) ) ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:5: ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:6: ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:5: ( ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:6: ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) ) ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:6: ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:7: ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:6: ( ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:7: ( 'familie' '(' ) (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:7: ( 'familie' '(' )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:422:8: 'familie' '('
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:7: ( 'familie' '(' )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:482:8: 'familie' '('
             {
-            match(input,23,FOLLOW_23_in_ruleFamilie1105); 
+            match(input,23,FOLLOW_23_in_ruleFamilie1096); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
                 
-            match(input,15,FOLLOW_15_in_ruleFamilie1114); 
+            match(input,15,FOLLOW_15_in_ruleFamilie1105); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:430:2: (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:432:6: lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:490:2: (lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:492:6: lv_name= ( ( 'keyword' | RULE_STRING ) | RULE_ID )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:432:14: ( ( 'keyword' | RULE_STRING ) | RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:492:14: ( ( 'keyword' | RULE_STRING ) | RULE_ID )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1109,15 +1158,15 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("432:14: ( ( 'keyword' | RULE_STRING ) | RULE_ID )", 10, 0, input);
+                    new NoViableAltException("492:14: ( ( 'keyword' | RULE_STRING ) | RULE_ID )", 10, 0, input);
 
                 throw nvae;
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:432:15: ( 'keyword' | RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:492:15: ( 'keyword' | RULE_STRING )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:432:15: ( 'keyword' | RULE_STRING )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:492:15: ( 'keyword' | RULE_STRING )
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1129,15 +1178,15 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("432:15: ( 'keyword' | RULE_STRING )", 9, 0, input);
+                            new NoViableAltException("492:15: ( 'keyword' | RULE_STRING )", 9, 0, input);
 
                         throw nvae;
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:432:16: 'keyword'
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:492:16: 'keyword'
                             {
-                            match(input,24,FOLLOW_24_in_ruleFamilie1138); 
+                            match(input,24,FOLLOW_24_in_ruleFamilie1129); 
 
                                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.0" /* xtext::Keyword */, "name"); 
                                 
@@ -1145,9 +1194,9 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:437:6: RULE_STRING
+                            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:497:6: RULE_STRING
                             {
-                            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleFamilie1153); 
+                            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleFamilie1144); 
                              
                                 createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.0/@groups.1" /* xtext::RuleCall */, "name"); 
                                 
@@ -1161,9 +1210,9 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:442:6: RULE_ID
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:502:6: RULE_ID
                     {
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1168); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1159); 
                      
                         createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal/@groups.1" /* xtext::RuleCall */, "name"); 
                         
@@ -1179,16 +1228,20 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
             	            associateNodeWithAstElement(currentNode, current);
             	        }
             	        
-            	        factory.set(current, "name", input.LT(-1),null);
-            	         
+            	        try {
+            	        	factory.set(current, "name", input.LT(-1),null);
+            	        } catch (ValueConverterException vce) {
+            				handleValueConverterException(vce);
+            	        }
+            	    
 
             }
 
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:456:3: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:459:3: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:520:3: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:523:3: ( RULE_ID )
             {
 
             			if (current==null) {
@@ -1196,10 +1249,10 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:465:1: ( RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:466:2: RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:529:1: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:530:2: RULE_ID
             {
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1205); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1196); 
              
                 createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "mutter"); 
                 
@@ -1212,8 +1265,8 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:471:3: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:474:3: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:535:3: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:538:3: ( RULE_ID )
             {
 
             			if (current==null) {
@@ -1221,10 +1274,10 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:480:1: ( RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:481:2: RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:544:1: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:545:2: RULE_ID
             {
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1234); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1225); 
              
                 createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "vater"); 
                 
@@ -1237,8 +1290,8 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:486:3: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:489:3: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:550:3: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:553:3: ( RULE_ID )
             {
 
             			if (current==null) {
@@ -1246,10 +1299,10 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:495:1: ( RULE_ID )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:496:2: RULE_ID
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:559:1: ( RULE_ID )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:560:2: RULE_ID
             {
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1263); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1254); 
              
                 createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "kinder"); 
                 
@@ -1262,7 +1315,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
             }
 
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:501:3: ( ',' ( ( RULE_ID ) ) )*
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:565:3: ( ',' ( ( RULE_ID ) ) )*
             loop11:
             do {
                 int alt11=2;
@@ -1275,14 +1328,14 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:501:4: ',' ( ( RULE_ID ) )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:565:4: ',' ( ( RULE_ID ) )
             	    {
-            	    match(input,25,FOLLOW_25_in_ruleFamilie1278); 
+            	    match(input,25,FOLLOW_25_in_ruleFamilie1269); 
 
             	            createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
             	        
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:505:1: ( ( RULE_ID ) )
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:508:3: ( RULE_ID )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:569:1: ( ( RULE_ID ) )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:572:3: ( RULE_ID )
             	    {
 
             	    			if (current==null) {
@@ -1290,10 +1343,10 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	            
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:514:1: ( RULE_ID )
-            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:515:2: RULE_ID
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:578:1: ( RULE_ID )
+            	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalReferenceGrammarTestLanguage.g:579:2: RULE_ID
             	    {
-            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1302); 
+            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1293); 
             	     
             	        createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::CrossReference */, "kinder"); 
             	        
@@ -1315,7 +1368,7 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
             }
 
-            match(input,16,FOLLOW_16_in_ruleFamilie1318); 
+            match(input,16,FOLLOW_16_in_ruleFamilie1309); 
 
                     createLeafNode("classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xmi#//@rules.6/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
                 
@@ -1341,56 +1394,56 @@ public class InternalReferenceGrammarTestLanguageParser extends AbstractAntlrPar
 
  
 
-    public static final BitSet FOLLOW_ruleSpielplatz_in_entryRuleSpielplatz70 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSpielplatz80 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleSpielplatz118 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleSpielplatz139 = new BitSet(new long[]{0x0000000000001020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleSpielplatz172 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleSpielplatz194 = new BitSet(new long[]{0x0000000000866000L});
-    public static final BitSet FOLLOW_ruleKind_in_ruleSpielplatz232 = new BitSet(new long[]{0x0000000000866000L});
-    public static final BitSet FOLLOW_ruleErwachsener_in_ruleSpielplatz276 = new BitSet(new long[]{0x0000000000866000L});
-    public static final BitSet FOLLOW_ruleSpielzeug_in_ruleSpielplatz321 = new BitSet(new long[]{0x0000000000866000L});
-    public static final BitSet FOLLOW_ruleFamilie_in_ruleSpielplatz366 = new BitSet(new long[]{0x0000000000866000L});
-    public static final BitSet FOLLOW_13_in_ruleSpielplatz382 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleKind_in_entryRuleKind420 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleKind430 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleKind467 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleKind476 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleKind498 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleKind531 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleKind552 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleErwachsener_in_entryRuleErwachsener587 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleErwachsener597 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleErwachsener634 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleErwachsener643 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleErwachsener665 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleErwachsener698 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleErwachsener719 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSpielzeug_in_entryRuleSpielzeug754 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSpielzeug764 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_ruleSpielzeug801 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleSpielzeug810 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSpielzeug832 = new BitSet(new long[]{0x0000000000780000L});
-    public static final BitSet FOLLOW_ruleFarbe_in_ruleSpielzeug878 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleSpielzeug892 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFarbe_in_entryRuleFarbe927 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFarbe937 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_ruleFarbe973 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleFarbe988 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_ruleFarbe1004 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_ruleFarbe1020 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFamilie_in_entryRuleFamilie1055 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFamilie1065 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_ruleFamilie1105 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleFamilie1114 = new BitSet(new long[]{0x0000000001000060L});
-    public static final BitSet FOLLOW_24_in_ruleFamilie1138 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleFamilie1153 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1168 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1205 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1234 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1263 = new BitSet(new long[]{0x0000000002010000L});
-    public static final BitSet FOLLOW_25_in_ruleFamilie1278 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1302 = new BitSet(new long[]{0x0000000002010000L});
-    public static final BitSet FOLLOW_16_in_ruleFamilie1318 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSpielplatz_in_entryRuleSpielplatz71 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSpielplatz81 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleSpielplatz119 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleSpielplatz140 = new BitSet(new long[]{0x0000000000001020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleSpielplatz173 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleSpielplatz195 = new BitSet(new long[]{0x0000000000866000L});
+    public static final BitSet FOLLOW_ruleKind_in_ruleSpielplatz233 = new BitSet(new long[]{0x0000000000866000L});
+    public static final BitSet FOLLOW_ruleErwachsener_in_ruleSpielplatz277 = new BitSet(new long[]{0x0000000000866000L});
+    public static final BitSet FOLLOW_ruleSpielzeug_in_ruleSpielplatz322 = new BitSet(new long[]{0x0000000000866000L});
+    public static final BitSet FOLLOW_ruleFamilie_in_ruleSpielplatz367 = new BitSet(new long[]{0x0000000000866000L});
+    public static final BitSet FOLLOW_13_in_ruleSpielplatz383 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleKind_in_entryRuleKind419 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleKind429 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleKind466 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleKind475 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleKind497 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleKind530 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleKind551 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleErwachsener_in_entryRuleErwachsener584 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleErwachsener594 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleErwachsener631 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleErwachsener640 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleErwachsener662 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleErwachsener695 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleErwachsener716 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSpielzeug_in_entryRuleSpielzeug749 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSpielzeug759 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_ruleSpielzeug796 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleSpielzeug805 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSpielzeug827 = new BitSet(new long[]{0x0000000000780000L});
+    public static final BitSet FOLLOW_ruleFarbe_in_ruleSpielzeug873 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleSpielzeug887 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFarbe_in_entryRuleFarbe920 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFarbe930 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_ruleFarbe966 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_ruleFarbe981 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_ruleFarbe997 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_ruleFarbe1013 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFamilie_in_entryRuleFamilie1046 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFamilie1056 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_ruleFamilie1096 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleFamilie1105 = new BitSet(new long[]{0x0000000001000060L});
+    public static final BitSet FOLLOW_24_in_ruleFamilie1129 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleFamilie1144 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1159 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1196 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1225 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1254 = new BitSet(new long[]{0x0000000002010000L});
+    public static final BitSet FOLLOW_25_in_ruleFamilie1269 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1293 = new BitSet(new long[]{0x0000000002010000L});
+    public static final BitSet FOLLOW_16_in_ruleFamilie1309 = new BitSet(new long[]{0x0000000000000002L});
 
 }

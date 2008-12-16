@@ -229,6 +229,21 @@ public abstract class AbstractAntlrParser extends Parser {
 			currentError = getErrorMessage(re, getTokenNames());
 		super.recover(input, re);
 	}
+	
+	protected void handleValueConverterException(ValueConverterException vce) throws RecognitionException {
+		Exception cause = (Exception) vce.getCause();
+		if (vce != cause) {
+			currentError = cause.getMessage();
+			List<AbstractNode> children = currentNode.getChildren();
+			if (children.isEmpty()) {
+				appendError(currentNode);
+			} else {
+				appendError(children.get(children.size() - 1));
+			}
+		} else {
+			throw vce;
+		}
+	}
 
 	@Override
 	public void recoverFromMismatchedToken(IntStream in, RecognitionException re, int ttype, BitSet follow)

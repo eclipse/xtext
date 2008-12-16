@@ -6,7 +6,6 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-
 package org.eclipse.xtext;
 
 import static org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer;
@@ -20,12 +19,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -34,46 +32,29 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.resource.metamodel.IDeclaredMetamodelAccess;
-import org.eclipse.xtext.resource.metamodel.DeclaredMetamodelAccessFactory;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Jan Koehnlein
  * @author Sven Efftinge
  * @author Heiko Behrens
+ * @author Sebastian Zarnekow
  */
 public class GrammarUtil {
 
 	private static URI getClasspathURIForLanguageId(String id) {
 		return URI.createURI("classpath:/" + id.replace('.', '/') + (IXtextBuiltin.ID.equals(id) ? ".xmi" : ".xtext"));
 	}
-
-	public static EPackage loadEPackage(ReferencedMetamodel ref) {
-		if (ref == null)
-			throw new NullPointerException("ReferencedMetamodel was null");
-		String uriAsString = ref.getUri();
-		ResourceSet resourceSet = ref.eResource().getResourceSet();
-		return loadEPackage(uriAsString, resourceSet);
-	}
-
-	public static EPackage loadEPackage(String resourceOrNsURI, ResourceSet resourceSet) {
-		if (EPackage.Registry.INSTANCE.containsKey(resourceOrNsURI))
-			return EPackage.Registry.INSTANCE.getEPackage(resourceOrNsURI);
-		URI uri = URI.createURI(resourceOrNsURI);
-		if (uri.fragment() == null) {
-			Resource resource = resourceSet.getResource(uri, true);
-			return (EPackage) resource.getContents().get(0);
-		}
-		else {
-			return (EPackage) resourceSet.getEObject(uri, true);
-		}
+	
+	public static String getClasspathRelativePathToXmi(Grammar grammar) {
+		return getLanguageId(grammar).replace('.', '/') + ".xmi";
 	}
 
 	public static ParserRule getDefaultEntryRule(Grammar g) {
 		if (g.isAbstract())
 			return null;
-		return GrammarUtil.allParserRules(g).get(0);
+		return allParserRules(g).get(0);
 	}
 
 	public static String getLanguageId(Grammar g) {
@@ -149,7 +130,7 @@ public class GrammarUtil {
 
 	public static boolean isLexerRuleCall(EObject grammarElement) {
 		if (grammarElement instanceof RuleCall) {
-			AbstractRule calledRule = calledRule((RuleCall) grammarElement);
+			AbstractRule calledRule = ((RuleCall) grammarElement).getRule();
 			return calledRule != null && (calledRule instanceof LexerRule);
 		}
 		return false;
@@ -157,16 +138,12 @@ public class GrammarUtil {
 
 	public static boolean isParserRuleCall(EObject grammarElement) {
 		if (grammarElement instanceof RuleCall) {
-			AbstractRule calledRule = calledRule((RuleCall) grammarElement);
+			AbstractRule calledRule = ((RuleCall) grammarElement).getRule();
 			return calledRule != null && (calledRule instanceof ParserRule);
 		}
 		return false;
 	}
 
-	public static AbstractRule calledRule(RuleCall ruleCall) {
-		return ruleCall.getRule();
-	}
-	
 	public static Grammar getSuperGrammar(Grammar _this) {
 		if (_this == null)
 			throw new NullPointerException("Grammar was null");
@@ -232,51 +209,46 @@ public class GrammarUtil {
 	}
 
 	public static List<ParserRule> allParserRules(Grammar _this) {
-		return EcoreUtil2.typeSelect(allRules(_this), ParserRule.class);
+		return typeSelect(allRules(_this), ParserRule.class);
 	}
 
 	public static List<LexerRule> allLexerRules(Grammar _this) {
-		return EcoreUtil2.typeSelect(allRules(_this), LexerRule.class);
+		return typeSelect(allRules(_this), LexerRule.class);
 	}
 
 	public static List<AbstractMetamodelDeclaration> allMetamodelDeclarations(Grammar _this) {
-		List<AbstractMetamodelDeclaration> result = new ArrayList<AbstractMetamodelDeclaration>();
-		Set<String> usedAliases = new HashSet<String>();
-		EList<AbstractMetamodelDeclaration> list = _this.getMetamodelDeclarations();
-		for (AbstractMetamodelDeclaration dec : list) {
-			if (usedAliases.add(dec.getAlias()))
-				result.add(dec);
-		}
-
-		Grammar superGrammar = getSuperGrammar(_this);
-		if (superGrammar != null) {
-			for (AbstractMetamodelDeclaration dec : allMetamodelDeclarations(superGrammar)) {
-				if (usedAliases.add(dec.getAlias()))
-					result.add(dec);
+		final List<AbstractMetamodelDeclaration> result = new ArrayList<AbstractMetamodelDeclaration>();
+		final Set<Pair<String, String>> pairs = new HashSet<Pair<String,String>>();
+		Grammar g = _this;
+		while(g != null) {
+			for(AbstractMetamodelDeclaration decl: g.getMetamodelDeclarations()) {
+				if (pairs.add(getURIAliasPair(decl))) {
+					result.add(decl);
+				}
 			}
+			g = getSuperGrammar(g);
 		}
 		return result;
 	}
-
+	
+	private static Pair<String, String> getURIAliasPair(AbstractMetamodelDeclaration decl) {
+		if (decl instanceof GeneratedMetamodel) {
+			return new Pair<String, String>(((GeneratedMetamodel) decl).getNsURI(), Strings.emptyIfNull(decl.getAlias()));
+		} else {
+			return new Pair<String, String>(((ReferencedMetamodel) decl).getUri(), Strings.emptyIfNull(decl.getAlias()));
+		}
+	}
+	
 	public static boolean isAbstract(Grammar grammarModel) {
 		return grammarModel.isAbstract();
 	}
 
-	public static String getReturnTypeName(AbstractRule rule) {
-		if (rule.getType() != null && rule.getType().getType() != null)
-			return getQualifiedName(rule.getType());
-		if (rule instanceof LexerRule) {
-			return "ecore::EString";
-		}
-		return rule.getName();
-	}
-
-	public static String getQualifiedName(AbstractMetamodelDeclaration metaModel, String name) {
-		return (metaModel != null && !Strings.isEmpty(metaModel.getAlias()) ? metaModel.getAlias() + "::" : "") + name;
+	public static String getQualifiedName(AbstractMetamodelDeclaration metamodel, String name) {
+		return (metamodel != null && !Strings.isEmpty(metamodel.getAlias()) ? metamodel.getAlias() + "::" : "") + name;
 	}
 	
-	public static String getQualifiedName(AbstractMetamodelDeclaration metaModel, EClassifier type) {
-		return (metaModel != null && !Strings.isEmpty(metaModel.getAlias()) ? metaModel.getAlias() + "::" : "") + type.getName();
+	public static String getQualifiedName(AbstractMetamodelDeclaration metamodel, EClassifier type) {
+		return getQualifiedName(metamodel, type.getName());
 	}
 
 	public static String getQualifiedName(TypeRef type) {
@@ -285,23 +257,6 @@ public class GrammarUtil {
 		return getQualifiedName(type.getMetamodel(), type.getType());
 	}
 
-	public static TypeRef getTypeRef(Grammar grammar, String qualifiedName) {
-		TypeRef result = XtextFactory.eINSTANCE.createTypeRef();
-		String[] split = qualifiedName.split("::");
-		String name = qualifiedName;
-		if (split.length > 1) {
-			result.setMetamodel(findMetaModel(grammar, split[0], true));
-			name = split[1];
-		} else {
-			result.setMetamodel(findDefaultMetaModel(grammar, true));
-		}
-		if (result.getMetamodel() instanceof ReferencedMetamodel) {
-			IDeclaredMetamodelAccess metamodelAccess = DeclaredMetamodelAccessFactory.getAccessTo(result.getMetamodel());
-			result.setType(metamodelAccess.getEClassifier(name));
-		}
-		return result;
-	}
-	
 	public static String getTypeRefName(TypeRef typeRef) {
 		if (typeRef.getType() != null)
 			return typeRef.getType().getName();
@@ -358,16 +313,16 @@ public class GrammarUtil {
 		return isOneOrMoreCardinality(e) || isAnyCardinality(e);
 	}
 
-	public static String getClasspathRelativePathToXmi(Grammar grammar) {
-		return getLanguageId(grammar).replace('.', '/') + ".xmi";
-	}
-
 	public static boolean isOneOrMoreCardinality(AbstractElement e) {
 		return e.getCardinality() != null && (e.getCardinality().equals("+"));
 	}
 
 	public static boolean isAnyCardinality(AbstractElement e) {
 		return e.getCardinality() != null && (e.getCardinality().equals("*"));
+	}
+	
+	public static boolean isDatatypeRule(ParserRule parserRule) {
+		return parserRule.getType() != null && parserRule.getType().getType() instanceof EDataType; 
 	}
 
 	public static AbstractRule getCalledLexerRule(CrossReference ref) {
@@ -379,38 +334,9 @@ public class GrammarUtil {
 	public static boolean isSameAlias(String alias, String alias2) {
 		return Strings.isEmpty(alias) ? Strings.isEmpty(alias2) : alias.equals(alias2);
 	}
-
-	public static EPackage getEPackage(ResourceSet resourceSet, Grammar grammar, String alias) {
-		final List<AbstractMetamodelDeclaration> metamodelDeclarations = grammar.getMetamodelDeclarations();
-		for (AbstractMetamodelDeclaration metamodelDeclaration : metamodelDeclarations) {
-			if (isSameAlias(alias, metamodelDeclaration.getAlias())) {
-				return getEPackage(resourceSet, metamodelDeclaration);
-			}
-		}
-		return null;
-	}
-
-	private static EPackage getEPackage(ResourceSet resourceSet, AbstractMetamodelDeclaration metamodelDeclaration) {
-		if (metamodelDeclaration instanceof ReferencedMetamodel) {
-			ReferencedMetamodel ref = (ReferencedMetamodel) metamodelDeclaration;
-			return GrammarUtil.loadEPackage(ref.getUri(), resourceSet);
-		} else if (metamodelDeclaration instanceof GeneratedMetamodel) {
-			GeneratedMetamodel gen = (GeneratedMetamodel) metamodelDeclaration;
-			return GrammarUtil.loadEPackage(gen.getNsURI(), resourceSet);
-		} else
-			return null;
-	}
-	
-	public static AbstractMetamodelDeclaration findDefaultMetaModel(Grammar grammar) {
-		return findMetaModel(grammar, "", true);
-	}
 	
 	public static AbstractMetamodelDeclaration findDefaultMetaModel(Grammar grammar, boolean useInherited) {
 		return findMetaModel(grammar, "", useInherited);
-	}
-	
-	public static AbstractMetamodelDeclaration findMetaModel(Grammar grammar, String alias) {
-		return findMetaModel(grammar, alias, true);
 	}
 	
 	public static AbstractMetamodelDeclaration findMetaModel(Grammar grammar, String alias, boolean useInherited) {
@@ -427,10 +353,6 @@ public class GrammarUtil {
 			}
 		}
 		return result;
-	}
-	
-	public static EClassifier getReferencedEClass(Resource resource, CrossReference ref) {
-		return ref.getType().getType();
 	}
 	
 	//TODO replace me by compiled grammar model 

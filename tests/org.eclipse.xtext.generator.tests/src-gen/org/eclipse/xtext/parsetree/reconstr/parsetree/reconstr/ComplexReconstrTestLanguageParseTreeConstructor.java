@@ -25,20 +25,43 @@ public class ComplexReconstrTestLanguageParseTreeConstructor extends AbstractPar
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Expression") && (s = new Op_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TypeA1") && (s = new TrickyA_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TypeD") && (s = new TrickyA1_Assignment_name(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TrickyB") && (s = new TrickyB_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TrickyC") && (s = new TrickyC_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TrickyD") && (s = new TrickyD_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TrickyE") && (s = new TrickyE_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TrickyF") && (s = new TrickyF_Group(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Op ****************
  *
  * Op returns Expression : Term ( { current = Add . addOperands += current } '+' addOperands += Term | { current = Minus . minusOperands += current } '-' minusOperands += Term ) * ;
@@ -216,6 +239,7 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("addOperands",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("addOperands");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Expression")) {
@@ -226,6 +250,7 @@ protected class Op_1_0_1_Assignment_addOperands extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -334,6 +359,7 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("minusOperands",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("minusOperands");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Expression")) {
@@ -344,6 +370,7 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -352,6 +379,7 @@ protected class Op_1_1_1_Assignment_minusOperands extends AssignmentToken  {
 
 
 /************ end Rule Op ****************/
+
 
 /************ begin Rule Term ****************
  *
@@ -420,6 +448,7 @@ protected class Term_1_RuleCall_Parens extends RuleCallToken {
 
 /************ end Rule Term ****************/
 
+
 /************ begin Rule Atom ****************
  *
  * Atom : name = ID ;
@@ -451,6 +480,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 }
 
 /************ end Rule Atom ****************/
+
 
 /************ begin Rule Parens ****************
  *
@@ -612,6 +642,7 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 
 
 /************ end Rule Parens ****************/
+
 
 /************ begin Rule TrickyA ****************
  *
@@ -958,6 +989,7 @@ protected class TrickyA_1_Assignment_name extends AssignmentToken  {
 
 /************ end Rule TrickyA ****************/
 
+
 /************ begin Rule TrickyA1 ****************
  *
  * TrickyA1 returns TypeD : name += ID ;
@@ -989,6 +1021,7 @@ protected class TrickyA1_Assignment_name extends AssignmentToken  {
 }
 
 /************ end Rule TrickyA1 ****************/
+
 
 /************ begin Rule TrickyB ****************
  *
@@ -1166,6 +1199,7 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 
 
 /************ end Rule TrickyB ****************/
+
 
 /************ begin Rule TrickyC ****************
  *
@@ -1510,6 +1544,7 @@ protected class TrickyC_1_1_Keyword_z extends KeywordToken  {
 
 /************ end Rule TrickyC ****************/
 
+
 /************ begin Rule TrickyD ****************
  *
  * TrickyD : 'TD' ( name += INT foo = STRING type += ID ) ? ( name += INT type += ID ) ? ( type += ID ) * ;
@@ -1843,6 +1878,7 @@ protected class TrickyD_1_Assignment_type extends AssignmentToken  {
 
 /************ end Rule TrickyD ****************/
 
+
 /************ begin Rule TrickyE ****************
  *
  * TrickyE : 'TE' ( name += INT foo += STRING type += ID ) * 'x' ( name += INT type += ID ) * ;
@@ -2164,6 +2200,7 @@ protected class TrickyE_1_1_Assignment_type extends AssignmentToken  {
 
 
 /************ end Rule TrickyE ****************/
+
 
 /************ begin Rule TrickyF ****************
  *

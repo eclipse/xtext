@@ -70,7 +70,7 @@ public final class DefaultGrammarTemplateSwitch extends XtextSwitch<String> {
 	@Override
 	public String caseRuleCall(RuleCall ruleCall) {
 
-		AbstractRule calledRule = GrammarUtil.calledRule(ruleCall);
+		AbstractRule calledRule = ruleCall.getRule();
 
 		ParserRule containingParserRule = GrammarUtil.containingParserRule(ruleCall);
 

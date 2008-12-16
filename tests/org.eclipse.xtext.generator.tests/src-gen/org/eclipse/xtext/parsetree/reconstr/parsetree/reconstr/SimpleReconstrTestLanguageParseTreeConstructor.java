@@ -25,18 +25,37 @@ public class SimpleReconstrTestLanguageParseTreeConstructor extends AbstractPars
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Expression") && (s = new Op_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Expression") && (s = new Term_Alternatives(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Atom") && (s = new Atom_Assignment_name(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Expression") && (s = new Parens_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("TwoNumbers") && (s = new TwoNumbers_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("ManyStrings") && (s = new ManyStrings_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Type") && (s = new Type_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Ref2") && (s = new Ref2_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Spare") && (s = new Spare_Group(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Op ****************
  *
  * Op returns Expression : Term ( { current = Op . values += current } values += Term ) * ;
@@ -152,6 +171,7 @@ protected class Op_1_1_Assignment_values extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("values",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("values");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Expression")) {
@@ -162,6 +182,7 @@ protected class Op_1_1_Assignment_values extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -169,6 +190,7 @@ protected class Op_1_1_Assignment_values extends AssignmentToken  {
 
 
 /************ end Rule Op ****************/
+
 
 /************ begin Rule Term ****************
  *
@@ -437,6 +459,7 @@ protected class Term_1_RuleCall_Spare extends RuleCallToken {
 
 /************ end Rule Term ****************/
 
+
 /************ begin Rule Atom ****************
  *
  * Atom : name = ID ;
@@ -468,6 +491,7 @@ protected class Atom_Assignment_name extends AssignmentToken  {
 }
 
 /************ end Rule Atom ****************/
+
 
 /************ begin Rule Parens ****************
  *
@@ -629,6 +653,7 @@ protected class Parens_1_Assignment_em extends AssignmentToken  {
 
 
 /************ end Rule Parens ****************/
+
 
 /************ begin Rule TwoNumbers ****************
  *
@@ -807,6 +832,7 @@ protected class TwoNumbers_1_1_Assignment_num3 extends AssignmentToken  {
 
 /************ end Rule TwoNumbers ****************/
 
+
 /************ begin Rule ManyStrings ****************
  *
  * ManyStrings : '=' ( str1 += STRING ) * str2 += STRING ;
@@ -931,6 +957,7 @@ protected class ManyStrings_1_Assignment_str2 extends AssignmentToken  {
 
 
 /************ end Rule ManyStrings ****************/
+
 
 /************ begin Rule Type ****************
  *
@@ -1101,6 +1128,7 @@ protected class Type_1_Assignment_extends extends AssignmentToken  {
 
 /************ end Rule Type ****************/
 
+
 /************ begin Rule Ref2 ****************
  *
  * Ref2 : '#2' ref2 = ( 'mykeyword1' | STRING | 'mykeyword2' ) ;
@@ -1183,6 +1211,7 @@ protected class Ref2_1_Assignment_ref2 extends AssignmentToken  {
 
 
 /************ end Rule Ref2 ****************/
+
 
 /************ begin Rule Spare ****************
  *

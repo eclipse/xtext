@@ -6,7 +6,6 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-
 package org.eclipse.xtext.parser;
 
 import java.util.Collection;
@@ -20,20 +19,19 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
-import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.parser.antlr.ValueConverterException;
+import org.eclipse.xtext.resource.metamodel.DeclaredMetamodelAccessFactory;
+import org.eclipse.xtext.resource.metamodel.IDeclaredMetamodelAccess;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
 public class GenericEcoreElementFactory implements IAstFactory {
 
@@ -49,7 +47,7 @@ public class GenericEcoreElementFactory implements IAstFactory {
 	public EObject create(String fullTypeName) {
 		EClass clazz = getEClass(fullTypeName);
 		if (clazz == null)
-			throw new IllegalArgumentException("Coudln't find EClass for name " + fullTypeName);
+			throw new IllegalArgumentException("Couldn't find EClass for name " + fullTypeName);
 
 		if (clazz.isAbstract() || clazz.isInterface())
 			throw new IllegalArgumentException("Can't create instance of abstract type " + fullTypeName);
@@ -63,15 +61,24 @@ public class GenericEcoreElementFactory implements IAstFactory {
 
 	public void set(EObject _this, String feature, Object value, String ruleName) throws RecognitionException {
 		try {
-			if (value instanceof Token) {
-				value = ((Token) value).getText();
-				if (ruleName != null) {
+			// TODO: provide AbstractNode as hint for conversion
+			try {
+				if (value instanceof String) {
 					value = converterService.toValue((String) value, ruleName);
+				} else if (value instanceof Token) {
+					value = ((Token) value).getText();
+					if (ruleName != null) {
+						value = converterService.toValue((String) value, ruleName);
+					}
 				}
+			} catch(Exception e) {
+				throw new ValueConverterException(e);
 			}
 			EObject eo = (EObject) _this;
 			EStructuralFeature structuralFeature = eo.eClass().getEStructuralFeature(feature);
 			eo.eSet(structuralFeature, value);
+		} catch (ValueConverterException vce) {
+			throw vce;
 		} catch (Exception exc) {
 			throw new RecognitionException();
 		}
@@ -103,19 +110,14 @@ public class GenericEcoreElementFactory implements IAstFactory {
 
 	protected EPackage getEPackage(AbstractMetamodelDeclaration metaModelDecl) {
 		AbstractMetamodelDeclaration decl = metaModelDecl == null ? 
-				GrammarUtil.findDefaultMetaModel(grammarAccess.getGrammar()) : metaModelDecl;
-		if (decl != null) {
-			if (decl instanceof GeneratedMetamodel) {
-				GeneratedMetamodel mm = (GeneratedMetamodel) decl;
-				return EcoreUtil2.loadEPackage(mm.getNsURI(), grammarAccess.getClass().getClassLoader());
-			} else {
-				ReferencedMetamodel mm = (ReferencedMetamodel) decl;
-				return EcoreUtil2.loadEPackage(mm.getUri(), grammarAccess.getClass().getClassLoader());
-			}
+				GrammarUtil.findDefaultMetaModel(grammarAccess.getGrammar(), true) : metaModelDecl;
+		if (decl == null) {
+			String languageId = GrammarUtil.getLanguageId(grammarAccess.getGrammar());
+			throw new IllegalArgumentException("No EPackage without alias could be found for language "
+					+ languageId);
 		}
-		String languageId = GrammarUtil.getLanguageId(grammarAccess.getGrammar());
-		throw new IllegalArgumentException("No EPackage without alias could be found for language "
-				+ languageId);
+		IDeclaredMetamodelAccess access = DeclaredMetamodelAccessFactory.getAccessTo(decl);
+		return access.getPackage();		
 	}
 
 	public EClass getEClass(String fullTypeName) {
@@ -136,26 +138,28 @@ public class GenericEcoreElementFactory implements IAstFactory {
 		for (AbstractMetamodelDeclaration decl : declarations) {
 			if (Strings.isEmpty(alias) || GrammarUtil.isSameAlias(decl.getAlias(), alias)) {
 				EPackage pack = getEPackage(decl);
-				EClassifier candidate = pack.getEClassifier(type);
-				if (candidate != null) {
-					if (resultMetaModel == null) {
-						resultMetaModel = decl;
-						result = candidate;
-					} else {
-						if (GrammarUtil.isSameAlias(resultMetaModel.getAlias(), alias)) {
-							if (GrammarUtil.isSameAlias(decl.getAlias(), alias)) {
-								return null;
-							}
+				if (pack != null) {
+					EClassifier candidate = pack.getEClassifier(type);
+					if (candidate != null) {
+						if (resultMetaModel == null) {
+							resultMetaModel = decl;
+							result = candidate;
 						} else {
-							if (GrammarUtil.isSameAlias(decl.getAlias(), alias)) {
-								resultMetaModel = decl;
-								result = candidate;
+							if (GrammarUtil.isSameAlias(resultMetaModel.getAlias(), alias)) {
+								if (GrammarUtil.isSameAlias(decl.getAlias(), alias)) {
+									return null;
+								}
 							} else {
-								result = null;
+								if (GrammarUtil.isSameAlias(decl.getAlias(), alias)) {
+									resultMetaModel = decl;
+									result = candidate;
+								} else {
+									result = null;
+								}
 							}
 						}
-					}
-				} 
+					} 
+				}
 			}
 		}
 		if (!(result instanceof EClass))

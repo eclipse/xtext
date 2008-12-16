@@ -34,7 +34,6 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.util.Strings;
 
@@ -86,7 +85,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 					+ "' for model '" + model + "' and prefix '" + prefix.trim() + "'");
 		}
 
-		AbstractRule calledRule = GrammarUtil.calledRule(ruleCall);
+		AbstractRule calledRule = ruleCall.getRule();
 
 		if (calledRule instanceof LexerRule) {
 			return doCompleteLexerRuleRuleCall((LexerRule) calledRule, ruleCall, model, offset);
@@ -176,24 +175,18 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
 		if (linkingCandidatesService != null) {
-			
-			XtextResource xtextResource = (XtextResource) model.eResource();
-			
 			ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
-			
-			EClass eClass = xtextResource.getElementFactory().
-				getEClass(GrammarUtil.getReturnTypeName(containingParserRule));
-			
-			EReference ref = GrammarUtil.getReference(crossReference, eClass);
-			
-			Iterable<IScopedElement> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
-			
-			final String trimmedPrefix = prefix.trim();
-			for (IScopedElement candidate : candidates) {
-				if (candidate.name() != null && isCandidateMatchingPrefix(model, ref, candidate, trimmedPrefix)) {
-					completionProposalList.add(
-							createCompletionProposal(crossReference, model, candidate.name(), offset));
-				}
+			if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
+				final EClass eClass = (EClass) containingParserRule.getType().getType();
+				final EReference ref = GrammarUtil.getReference(crossReference, eClass);
+				final String trimmedPrefix = prefix.trim();
+				final Iterable<IScopedElement> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
+				for (IScopedElement candidate : candidates) {
+					if (candidate.name() != null && isCandidateMatchingPrefix(model, ref, candidate, trimmedPrefix)) {
+						completionProposalList.add(
+								createCompletionProposal(crossReference, model, candidate.name(), offset));
+					}
+				}	
 			}
 		}
 

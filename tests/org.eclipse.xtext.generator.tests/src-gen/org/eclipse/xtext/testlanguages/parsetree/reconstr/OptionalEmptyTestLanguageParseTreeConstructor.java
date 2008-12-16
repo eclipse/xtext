@@ -25,11 +25,16 @@ public class OptionalEmptyTestLanguageParseTreeConstructor extends AbstractParse
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Model") && (s = new Model_Assignment_child(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Greeting") && (s = new Greeting_Group(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Model ****************
  *
  * Model : ( child = Greeting ) ? ;
@@ -51,6 +56,7 @@ protected class Model_Assignment_child extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("child",!IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("child");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Greeting")) {
@@ -61,11 +67,13 @@ protected class Model_Assignment_child extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
 
 /************ end Rule Model ****************/
+
 
 /************ begin Rule Greeting ****************
  *

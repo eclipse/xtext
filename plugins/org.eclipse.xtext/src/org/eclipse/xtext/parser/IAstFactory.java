@@ -36,6 +36,7 @@ public interface IAstFactory extends ILanguageService {
 	 * @param value
 	 * @throws RecognitionException 
 	 */
+	@Deprecated
 	public void set(EObject _this, String feature, Object value) throws RecognitionException;
 	public void set(EObject _this, String feature, Object value, String lexerRule) throws RecognitionException;
 
@@ -46,6 +47,7 @@ public interface IAstFactory extends ILanguageService {
 	 * @param feature
 	 * @param value
 	 */
+	@Deprecated
 	public void add(EObject _this, String feature, Object value) throws RecognitionException;
 	public void add(EObject _this, String feature, Object value, String lexerRule) throws RecognitionException;
 

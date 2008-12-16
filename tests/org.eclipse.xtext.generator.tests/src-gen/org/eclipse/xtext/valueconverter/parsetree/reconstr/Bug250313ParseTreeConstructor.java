@@ -25,10 +25,13 @@ public class Bug250313ParseTreeConstructor extends AbstractParseTreeConstructor 
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Ref2") && (s = new Ref2_Group(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Ref2 ****************
  *
  * Ref2 : '#2' ref2 = ( 'mykeyword1' | STRING | ID ) ;

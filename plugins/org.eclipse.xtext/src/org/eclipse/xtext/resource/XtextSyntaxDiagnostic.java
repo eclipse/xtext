@@ -29,7 +29,7 @@ public class XtextSyntaxDiagnostic implements Diagnostic {
 	 * @see org.eclipse.xtext.resource.XtextResource.Diagnostic#getLength()
 	 */
 	public int getLength() {
-		return error.getNode().getTotalLength();
+		return error.getNode().getLength();
 	}
 
 	/*
@@ -38,7 +38,7 @@ public class XtextSyntaxDiagnostic implements Diagnostic {
 	 * @see org.eclipse.xtext.resource.XtextResource.Diagnostic#getOffset()
 	 */
 	public int getOffset() {
-		return error.getNode().getTotalOffset();
+		return error.getNode().getOffset();
 	}
 
 	/*
@@ -57,7 +57,7 @@ public class XtextSyntaxDiagnostic implements Diagnostic {
 	 * @see org.eclipse.emf.ecore.resource.Resource.Diagnostic#getLine()
 	 */
 	public int getLine() {
-		return error.getNode().getTotalLine();
+		return error.getNode().getLine();
 	}
 
 	/*

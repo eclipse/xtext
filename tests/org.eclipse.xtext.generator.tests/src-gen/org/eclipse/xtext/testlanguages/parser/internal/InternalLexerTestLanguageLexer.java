@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g 2008-12-10 21:58:17
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g 2008-12-16 15:27:10
 
 package org.eclipse.xtext.testlanguages.parser.internal;
 
@@ -32,11 +32,11 @@ public class InternalLexerTestLanguageLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:143:13: ( '#' ( 'B' )+ )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:143:16: '#' ( 'B' )+
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:160:13: ( '#' ( 'B' )+ )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:160:16: '#' ( 'B' )+
             {
             match('#'); 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:143:20: ( 'B' )+
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:160:20: ( 'B' )+
             int cnt1=0;
             loop1:
             do {
@@ -50,7 +50,7 @@ public class InternalLexerTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:143:21: 'B'
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:160:21: 'B'
             	    {
             	    match('B'); 
 
@@ -80,10 +80,10 @@ public class InternalLexerTestLanguageLexer extends Lexer {
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:145:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:145:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:162:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:162:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:145:11: ( '^' )?
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:162:11: ( '^' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -92,7 +92,7 @@ public class InternalLexerTestLanguageLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:145:12: '^'
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:162:12: '^'
                     {
                     match('^'); 
 
@@ -111,7 +111,7 @@ public class InternalLexerTestLanguageLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:145:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:162:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop3:
             do {
                 int alt3=2;
@@ -159,10 +159,10 @@ public class InternalLexerTestLanguageLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:147:10: ( ( '0' .. '9' )+ )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:147:12: ( '0' .. '9' )+
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:164:10: ( ( '0' .. '9' )+ )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:164:12: ( '0' .. '9' )+
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:147:12: ( '0' .. '9' )+
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:164:12: ( '0' .. '9' )+
             int cnt4=0;
             loop4:
             do {
@@ -176,7 +176,7 @@ public class InternalLexerTestLanguageLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:147:13: '0' .. '9'
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:164:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -206,12 +206,12 @@ public class InternalLexerTestLanguageLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:149:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:149:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:166:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:166:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:149:24: ( options {greedy=false; } : . )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:166:24: ( options {greedy=false; } : . )*
             loop5:
             do {
                 int alt5=2;
@@ -236,7 +236,7 @@ public class InternalLexerTestLanguageLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:149:52: .
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:166:52: .
             	    {
             	    matchAny(); 
 
@@ -265,12 +265,12 @@ public class InternalLexerTestLanguageLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:151:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )? )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:151:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )?
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:168:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )? )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:168:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:151:24: (~ ( '\\n' | '\\r' ) )*
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:168:24: (~ ( '\\n' | '\\r' ) )*
             loop6:
             do {
                 int alt6=2;
@@ -283,7 +283,7 @@ public class InternalLexerTestLanguageLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:151:24: ~ ( '\\n' | '\\r' )
+            	    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:168:24: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -304,7 +304,7 @@ public class InternalLexerTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:151:38: ( ( '\\r' )? '\\n' )?
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:168:38: ( ( '\\r' )? '\\n' )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -313,9 +313,9 @@ public class InternalLexerTestLanguageLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:151:39: ( '\\r' )? '\\n'
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:168:39: ( '\\r' )? '\\n'
                     {
-                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:151:39: ( '\\r' )?
+                    // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:168:39: ( '\\r' )?
                     int alt7=2;
                     int LA7_0 = input.LA(1);
 
@@ -324,7 +324,7 @@ public class InternalLexerTestLanguageLexer extends Lexer {
                     }
                     switch (alt7) {
                         case 1 :
-                            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:151:39: '\\r'
+                            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:168:39: '\\r'
                             {
                             match('\r'); 
 
@@ -355,10 +355,10 @@ public class InternalLexerTestLanguageLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:153:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:153:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:170:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:170:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:153:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:170:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt9=0;
             loop9:
             do {
@@ -412,8 +412,8 @@ public class InternalLexerTestLanguageLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:155:16: ( . )
-            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:155:18: .
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:172:16: ( . )
+            // ./src-gen/org/eclipse/xtext/testlanguages/parser/internal/InternalLexerTestLanguage.g:172:18: .
             {
             matchAny(); 
 
