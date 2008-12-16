@@ -16,7 +16,7 @@ extension org::eclipse::xtext::GrammarUtil reexport;
 // Shortcuts
 	 
 ParserRule calledParserRule(RuleCall this) :
-	if ParserRule.isInstance(calledRule()) then calledRule();
+	if ParserRule.isInstance(rule) then rule;
 	
 boolean isKeywordAssignment(Assignment a) :
 	Keyword.isInstance(a.terminal) || 

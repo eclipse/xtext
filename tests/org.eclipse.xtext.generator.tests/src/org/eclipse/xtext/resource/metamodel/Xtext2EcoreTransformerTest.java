@@ -24,7 +24,11 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ReferencedMetamodel;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -35,8 +39,8 @@ import org.eclipse.xtext.util.EmfFormater;
  * @author Heiko Behrens
  * @see http://wiki.eclipse.org/Xtext/Documentation#Meta-Model_Inference
  */
-public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
-	private static final Logger logger = Logger.getLogger(Xtext2EcoreTransformerTests.class);
+public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
+	private static final Logger logger = Logger.getLogger(Xtext2EcoreTransformerTest.class);
 	private Xtext2EcoreTransformer xtext2EcoreTransformer;
 	private ErrorAcceptor errorAcceptorMock;
 
@@ -106,10 +110,16 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer();
 		transformer.transform(grammar);
 		// directly from grammar
-		assertNotNull(transformer.getEClassifierInfos().getInfo("MyRule"));
+		AbstractRule rule = grammar.getRules().get(0);
+		TypeRef type = rule.getType();
+		assertNotNull(type);
+		assertNotNull(transformer.getEClassifierInfos().getInfo(type));
 		// ecore data types
-		assertNotNull(transformer.getEClassifierInfos().getInfo("ecore::EString"));
-		assertNotNull(transformer.getEClassifierInfos().getInfo("ecore::EInt"));
+		ReferencedMetamodel referenced = (ReferencedMetamodel) GrammarUtil.allMetamodelDeclarations(grammar).get(1);
+		assertNotNull(referenced);
+		assertEquals("ecore", referenced.getAlias());
+		assertNotNull(transformer.getEClassifierInfos().getInfo(referenced, "EString"));
+		assertNotNull(transformer.getEClassifierInfos().getInfo(referenced, "EInt"));
 	}
 
 	public void testRuleWithoutExplicitReturnType() throws Exception {
@@ -403,7 +413,9 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 	}
 
 	public void testAssignedCrossReference() throws Exception {
-		final String grammar = "language test generate test 'http://test' RuleA: refA1=[TypeB] refA2+=[TypeB|RuleB] simpleFeature=ID; RuleB returns TypeB: featureB=ID;";
+		final String grammar = "language test generate test 'http://test' " +
+				"RuleA: refA1=[TypeB] refA2+=[TypeB|RuleB] simpleFeature=ID; " +
+				"RuleB returns TypeB: featureB=ID;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(2, ePackage.getEClassifiers().size());
 		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
@@ -451,7 +463,7 @@ public class Xtext2EcoreTransformerTests extends AbstractGeneratorTest {
 		assertReferenceConfiguration(ruleA, 3, "refA4", "TypeB", true, 0, 1);
 	}
 
-	public void testAssignedKeyWord() throws Exception {
+	public void testAssignedKeyword() throws Exception {
 		final String grammar = "language test generate test 'http://test' RuleA: featureA?=('+'|'-') featureB=('*'|'/');";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		assertEquals(1, ePackage.getEClassifiers().size());

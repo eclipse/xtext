@@ -70,6 +70,7 @@ public class TypeHierarchyHelper {
 			liftUpFeaturesInto(info);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void liftUpFeaturesInto(EClassInfo superType) {
 		// do not look at types twice (might happen due to multiple inheritance)
 		if (traversedTypes.contains(superType))
@@ -91,7 +92,8 @@ public class TypeHierarchyHelper {
 
 		// only if all subtypes' compatible type is superType itself
 		// features can be lifted into superType
-		if (infos.getCompatibleTypeOf(subTypes).equals(superType)) {
+		Collection<? extends EClassifierInfo> subTypesAsClassifiers = subTypes;
+		if (infos.getCompatibleTypeOf((Collection<EClassifierInfo>) subTypesAsClassifiers).equals(superType)) {
 			Collection<EStructuralFeature> commonFeatures = getCommonDirectFeatures(subTypes);
 			Collection<EStructuralFeature> liftedFeatures = joinFeaturesInto(commonFeatures, superType);
 			for (EClassInfo subClassInfo : subTypes)

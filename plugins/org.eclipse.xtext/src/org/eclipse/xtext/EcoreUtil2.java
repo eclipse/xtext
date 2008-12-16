@@ -300,14 +300,5 @@ public class EcoreUtil2 extends EcoreUtil {
 		else
 			return (List<EObject>) referer.eGet(reference);
 	}
-	
-	public static List<URI> getURIs(List<EObject> objects) {
-		
-		List<URI> result = new ArrayList<URI>(objects.size());
-		for(EObject o : objects)
-			result.add(getURI(o));
-		
-		return result ;
-	}
 
 }

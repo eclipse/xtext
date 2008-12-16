@@ -51,5 +51,18 @@ public class XtextLinkingDiagnostic implements XtextResource.Diagnostic{
 	public String getMessage() {
 		return message;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuffer b = new StringBuffer();
+		b.append(getClass().getSimpleName());
+		b.append(": ");
+		b.append(getLocation());
+		b.append(":");
+		b.append(getLine());
+		b.append(" ");
+		b.append(getMessage());
+		return b.toString();
+	}
 
 }
