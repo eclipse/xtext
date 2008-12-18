@@ -26,7 +26,7 @@ public class DatatypeRulesTestLanguageValueConverters extends XtextBuiltInConver
 			protected Object internalToValue(String string) {
 				String[] splitted = string.split("/");
 				if (splitted.length > 1) {
-					return new BigDecimal(splitted[0]).divide(new BigDecimal(splitted[1]));
+					return new BigDecimal(splitted[0].trim()).divide(new BigDecimal(splitted[1].trim()));
 				} else {
 					return new BigDecimal(string);
 				}

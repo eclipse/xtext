@@ -234,6 +234,8 @@ public abstract class AbstractAntlrParser extends Parser {
 		Exception cause = (Exception) vce.getCause();
 		if (vce != cause) {
 			currentError = cause.getMessage();
+			if (currentError == null)
+				currentError = cause.getClass().getSimpleName();
 			List<AbstractNode> children = currentNode.getChildren();
 			if (children.isEmpty()) {
 				appendError(currentNode);

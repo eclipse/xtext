@@ -15,7 +15,7 @@ CompositeModel:
   (model+=Model)+; 
 
 Model: 
-  id=NestedModelId (':' value=Fraction)? ';';
+  id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ';';
   
 ModelId returns ecore::EString:
   ID '.' ID;
@@ -25,3 +25,9 @@ NestedModelId :
   
 Fraction returns EBigDecimal:
   INT ('/' INT)?;
+  
+Vector :
+  '(' INT INT ')';
+  
+Dots returns EString:
+  ( '.' '.' ) | '..';

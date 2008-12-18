@@ -24,6 +24,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.parser.antlr.DatatypeRuleToken;
 import org.eclipse.xtext.parser.antlr.ValueConverterException;
 import org.eclipse.xtext.resource.metamodel.DeclaredMetamodelAccessFactory;
 import org.eclipse.xtext.resource.metamodel.IDeclaredMetamodelAccess;
@@ -63,13 +64,13 @@ public class GenericEcoreElementFactory implements IAstFactory {
 		try {
 			// TODO: provide AbstractNode as hint for conversion
 			try {
-				if (value instanceof String) {
-					value = converterService.toValue((String) value, ruleName);
+				if (value instanceof DatatypeRuleToken) {
+					value = ((DatatypeRuleToken) value).getText();
 				} else if (value instanceof Token) {
 					value = ((Token) value).getText();
-					if (ruleName != null) {
-						value = converterService.toValue((String) value, ruleName);
-					}
+				}
+				if (value instanceof String && ruleName != null) {
+					value = converterService.toValue((String) value, ruleName);
 				}
 			} catch(Exception e) {
 				throw new ValueConverterException(e);
