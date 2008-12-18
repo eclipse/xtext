@@ -20,8 +20,8 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.metamodel.ErrorAcceptor;
+import org.eclipse.xtext.resource.metamodel.TransformationErrorCode;
 import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
-import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 /**
@@ -58,13 +58,12 @@ public class MetamodelTransformationErrorTest extends AbstractGeneratorTest {
 		assertNotNull(resource);
 		assertNotNull(transformer);
 		assertNotNull(errorAcceptor);
-		// TODO: populate resource with transformation errors
-		assertEquals(0, resource.getErrors().size());
+		assertEquals(2, resource.getErrors().size());
 	}
 	
 	public void testErrorMessages() throws Exception {
-		errorAcceptor.acceptError(same(ErrorCode.InvalidDatatypeRule), (String) anyObject(), same(grammar.getRules().get(3)));
-		errorAcceptor.acceptError(same(ErrorCode.InvalidDatatypeRule), (String) anyObject(), same(grammar.getRules().get(4)));
+		errorAcceptor.acceptError(same(TransformationErrorCode.InvalidDatatypeRule), (String) anyObject(), same(grammar.getRules().get(3)));
+		errorAcceptor.acceptError(same(TransformationErrorCode.InvalidDatatypeRule), (String) anyObject(), same(grammar.getRules().get(4)));
 		transform();
 	}
 	
