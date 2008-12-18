@@ -154,7 +154,7 @@
       </abstractTokens>
       <abstractTokens xsi:type="xtext:Assignment" cardinality="*" feature="type" operator="+=">
         <terminal xsi:type="xtext:RuleCall">
-          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+          <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.1"/>
         </terminal>
       </abstractTokens>
     </alternatives>

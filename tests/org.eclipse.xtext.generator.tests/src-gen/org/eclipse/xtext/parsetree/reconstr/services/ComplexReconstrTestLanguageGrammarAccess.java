@@ -251,12 +251,12 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 		private final Assignment c011AssignmentType = (Assignment)c01Group.eContents().get(1);
 		private final RuleCall c0110LexerRuleCallINT = (RuleCall)c011AssignmentType.eContents().get(0);
 		private final Assignment c1AssignmentType = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall c10LexerRuleCallID = (RuleCall)c1AssignmentType.eContents().get(0);
+		private final RuleCall c10LexerRuleCallINT = (RuleCall)c1AssignmentType.eContents().get(0);
 		
-		// TrickyB : 'TB' ( name = ID type += INT ) ? ( type += ID ) * ;
+		// TrickyB : 'TB' ( name = ID type += INT ) ? ( type += INT ) * ;
 		public ParserRule getRule() { return rule; }
 
-		// 'TB' ( name = ID type += INT ) ? ( type += ID ) *
+		// 'TB' ( name = ID type += INT ) ? ( type += INT ) *
 		public Group eleGroup() { return cGroup; }
 
 		// 'TB' ( name = ID type += INT ) ?
@@ -280,11 +280,11 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 		// INT
 		public RuleCall ele0110LexerRuleCallINT() { return c0110LexerRuleCallINT; }
 
-		// ( type += ID ) *
+		// ( type += INT ) *
 		public Assignment ele1AssignmentType() { return c1AssignmentType; }
 
-		// ID
-		public RuleCall ele10LexerRuleCallID() { return c10LexerRuleCallID; }
+		// INT
+		public RuleCall ele10LexerRuleCallINT() { return c10LexerRuleCallINT; }
 	}
 
 	public class TrickyCElements implements IParserRuleAccess {
@@ -640,7 +640,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends BaseEPackageAccess
 		return (pTrickyA1 != null) ? pTrickyA1 : (pTrickyA1 = new TrickyA1Elements());
 	} 
 
-	// TrickyB : 'TB' ( name = ID type += INT ) ? ( type += ID ) * ;
+	// TrickyB : 'TB' ( name = ID type += INT ) ? ( type += INT ) * ;
 	public TrickyBElements prTrickyB() {
 		return (pTrickyB != null) ? pTrickyB : (pTrickyB = new TrickyBElements());
 	} 

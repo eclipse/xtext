@@ -47,10 +47,8 @@ public class DeclaredMetamodelAccessFactory extends XtextSwitch<IDeclaredMetamod
 				}
 			}
 		}
-		EPackage pack = loadEPackage(object.getNsURI(), set);
-		if (pack != null) {
-			return new PackageBasedMetamodelAccess(pack);
-		}
+		if (EPackage.Registry.INSTANCE.containsKey(object.getNsURI()))
+			return new PackageBasedMetamodelAccess(EPackage.Registry.INSTANCE.getEPackage(object.getNsURI()));
 		return NullMetamodelAccess.INSTANCE;
 	}
 
@@ -84,7 +82,7 @@ public class DeclaredMetamodelAccessFactory extends XtextSwitch<IDeclaredMetamod
 				return (EPackage) resourceSet.getEObject(uri, true);
 			}
 		} catch(RuntimeException ex) {
-			log.debug("Cannot load package with URI '" + resourceOrNsURI + "'", ex);
+			log.trace("Cannot load package with URI '" + resourceOrNsURI + "'", ex);
 			return null;
 		}
 	}

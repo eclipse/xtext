@@ -1025,12 +1025,12 @@ protected class TrickyA1_Assignment_name extends AssignmentToken  {
 
 /************ begin Rule TrickyB ****************
  *
- * TrickyB : 'TB' ( name = ID type += INT ) ? ( type += ID ) * ;
+ * TrickyB : 'TB' ( name = ID type += INT ) ? ( type += INT ) * ;
  *
  **/
 
 
-// 'TB' ( name = ID type += INT ) ? ( type += ID ) *
+// 'TB' ( name = ID type += INT ) ? ( type += INT ) *
 protected class TrickyB_Group extends GroupToken {
 	
 	public TrickyB_Group(IInstanceDescription curr, AbstractToken pred) {
@@ -1174,7 +1174,7 @@ protected class TrickyB_0_1_1_Assignment_type extends AssignmentToken  {
 
 
 
-// ( type += ID ) *
+// ( type += INT ) *
 protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 	
 	public TrickyB_1_Assignment_type(IInstanceDescription curr, AbstractToken pred) {
@@ -1190,7 +1190,7 @@ protected class TrickyB_1_Assignment_type extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(true) { // xtext::RuleCall FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele10LexerRuleCallID();
+			element = ComplexReconstrTestLanguageGrammarAccess.INSTANCE.prTrickyB().ele10LexerRuleCallINT();
 			return new Solution(obj);
 		}
 		return null;

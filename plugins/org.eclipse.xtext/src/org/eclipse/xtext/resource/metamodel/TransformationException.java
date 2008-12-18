@@ -9,7 +9,6 @@
 package org.eclipse.xtext.resource.metamodel;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -21,15 +20,15 @@ public class TransformationException extends Exception {
 
 	private EObject erroneousElement;
 
-	private ErrorCode errorCode;
+	private TransformationErrorCode errorCode;
 
-	public TransformationException(ErrorCode errorCode, String message, EObject erroneousElement) {
+	public TransformationException(TransformationErrorCode errorCode, String message, EObject erroneousElement) {
 		super(message);
 		this.errorCode = errorCode;
 		this.erroneousElement = erroneousElement;
 	}
 	
-	public ErrorCode getErrorCode() {
+	public TransformationErrorCode getErrorCode() {
 		return errorCode;
 	}
 

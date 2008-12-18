@@ -26,6 +26,8 @@ public class NodeUtil {
 	private static final Logger logger = Logger.getLogger(NodeUtil.class);
 	
     public static NodeAdapter getNodeAdapter(EObject obj) {
+    	if (obj == null)
+    		return null;
         return (NodeAdapter) EcoreUtil.getAdapter(obj.eAdapters(), AbstractNode.class);
     }
 

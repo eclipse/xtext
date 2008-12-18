@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.service.ILanguageService;
 
 /**
@@ -18,6 +16,6 @@ import org.eclipse.xtext.service.ILanguageService;
  */
 public interface ILinker extends ILanguageService{
 	
-	List<XtextResource.Diagnostic> linkModel(EObject model);
+	void linkModel(EObject model, IDiagnosticConsumer diagnosticsConsumer);
 	
 }

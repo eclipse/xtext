@@ -13,19 +13,21 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.EcoreUtil2.FindResult;
 import org.eclipse.xtext.resource.metamodel.EClassifierInfo.EClassInfo;
-import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
- * 
  */
 public class TypeHierarchyHelper {
 	private EClassifierInfos infos;
@@ -33,9 +35,11 @@ public class TypeHierarchyHelper {
 	private Set<EClassInfo> rootInfos = new HashSet<EClassInfo>();
 	private Set<EClassInfo> traversedTypes = new HashSet<EClassInfo>();
 	private ErrorAcceptor errorAcceptor;
+	private final Grammar grammar;
 
-	public TypeHierarchyHelper(EClassifierInfos infos, ErrorAcceptor errorAcceptor) {
+	public TypeHierarchyHelper(Grammar grammar, EClassifierInfos infos, ErrorAcceptor errorAcceptor) {
 		super();
+		this.grammar = grammar;
 		this.infos = infos;
 		this.errorAcceptor = errorAcceptor;
 		collectTypeData();
@@ -48,10 +52,14 @@ public class TypeHierarchyHelper {
 
 	private void collectTypeData() {
 		for (EClassInfo classInfo : infos.getAllEClassInfos()) {
-			if (classInfo.getEClass().getESuperTypes().isEmpty())
-				rootInfos.add(classInfo);
-			for (EClassInfo superInfo : infos.getSuperTypeInfos(classInfo))
-				registerSubType(superInfo, classInfo);
+				if (classInfo.getEClass().getESuperTypes().isEmpty())
+					rootInfos.add(classInfo);
+				try {
+					for (EClassInfo superInfo : infos.getSuperTypeInfos(classInfo))
+						registerSubType(superInfo, classInfo);
+				} catch(UnexpectedClassInfoException ex) {
+					reportError(ex.getSuperInfo(), ex.getErrorCode(), "Cannot inherit from DataType " + ex.getInfo().getEClassifier().getName());
+				}
 		}
 	}
 
@@ -188,22 +196,36 @@ public class TypeHierarchyHelper {
 		for (EClassInfo info : infos.getAllEClassInfos()) {
 			EClass eClass = info.getEClass();
 			Collection<EClass> allSuperTypes = EcoreUtil2.getAllSuperTypes(eClass);
-			if (allSuperTypes.contains(eClass))
-				reportError(ErrorCode.TypeWithCycleInHierarchy, "Type with cycle in hierarchy: " + eClass.getName());
+			if (allSuperTypes.contains(eClass)) {
+				reportError(info, TransformationErrorCode.TypeWithCycleInHierarchy, "Type with cycle in hierarchy: " + eClass.getName());
+			}
 		}
 	}
 
-	private void reportError(ErrorCode errorCode, String message) {
-		errorAcceptor.acceptError(errorCode, message, null);
+	private void reportError(EClassifierInfo info, TransformationErrorCode errorCode, String message) {
+		if (grammar == null) {
+			reportError(errorCode, message, null);
+			return;
+		}
+		List<TypeRef> typeRefs = EcoreUtil2.getAllContentsOfType(grammar, TypeRef.class);
+		for(TypeRef typeRef: typeRefs) {
+			EClassifierInfo otherInfo = infos.getInfo(typeRef);
+			if (otherInfo == info)
+				reportError(errorCode, message, typeRef);
+		}
+	}
+
+	private void reportError(TransformationErrorCode errorCode, String message, EObject object) {
+		errorAcceptor.acceptError(errorCode, message, object);
 	}
 
 	public void detectDuplicatedFeatures() {
 		for (EClassInfo info : infos.getAllEClassInfos()) {
-			detectDuplicatedFeature(info);
+			detectDuplicatedFeature(grammar, info);
 		}
 	}
 
-	private void detectDuplicatedFeature(EClassInfo info) {
+	private void detectDuplicatedFeature(Grammar grammar, EClassInfo info) {
 		EClass eClass = info.getEClass();
 		Collection<EStructuralFeature> directFeatures = eClass.getEStructuralFeatures();
 		Collection<EStructuralFeature> allFeatures = new ArrayList<EStructuralFeature>(eClass
@@ -211,7 +233,7 @@ public class TypeHierarchyHelper {
 		for (EStructuralFeature feature : directFeatures) {
 			allFeatures.remove(feature);
 			if (EcoreUtil2.findFeatureByName(allFeatures, feature.getName()) != null)
-				reportError(ErrorCode.MoreThanOneFeatureWithSameName, "Feature " + feature.getName()
+				reportError(info, TransformationErrorCode.MoreThanOneFeatureWithSameName, "Feature " + feature.getName()
 						+ " exists more than once in type hierarchy of " + eClass.getName());
 		}
 	}

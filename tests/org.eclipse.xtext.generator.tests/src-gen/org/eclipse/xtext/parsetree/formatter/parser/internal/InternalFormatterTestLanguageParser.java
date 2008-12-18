@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/internal/InternalFormatterTestLanguage.g 2008-12-18 11:06:29
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parsetree/formatter/parser/internal/InternalFormatterTestLanguage.g 2008-12-18 18:58:55
 
 package org.eclipse.xtext.parsetree.formatter.parser.internal; 
 

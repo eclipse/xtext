@@ -41,6 +41,16 @@ public class EClassifierInfos {
 
 	private Map<Pair<String, String>, EClassifierInfo> infoMap = new HashMap<Pair<String, String>, EClassifierInfo>();
 	
+	private EClassifierInfos parent;
+	
+	public EClassifierInfos getParent() {
+		return parent;
+	}
+
+	public void setParent(EClassifierInfos parent) {
+		this.parent = parent;
+	}
+
 	public boolean addInfo(TypeRef typeRef, EClassifierInfo metatypeInfo) {
 		if (typeRef.getMetamodel() == null || typeRef.getType() == null)
 			throw new NullPointerException();
@@ -78,13 +88,16 @@ public class EClassifierInfos {
 		for (EClassifierInfo info : infoMap.values())
 			if (info.getEClassifier().getName().equals(eClassifier.getName()))
 				return info;
-		throw new NullPointerException("cannot find type info for classifier '" + eClassifier.getName() + "' in map " + infoMap);
+		throw new NullPointerException("cannot find type info for classifier '" + eClassifier.getName() + "'");
 	}
 
-	public void addAll(EClassifierInfos classInfos) {
-		infoMap.putAll(classInfos.infoMap);
+	public EClassifierInfo getInfoOrNull(EClassifier eClassifier) {
+		for (EClassifierInfo info : infoMap.values())
+			if (info.getEClassifier().getName().equals(eClassifier.getName()))
+				return info;
+		return null;
 	}
-
+	
 	private EClassifierInfo getCompatibleType(EClassifierInfo infoA, EClassifierInfo infoB) {
 		if (infoA.equals(infoB))
 			return infoA;
@@ -99,16 +112,6 @@ public class EClassifierInfos {
 		return getInfo(compatibleType);
 	}
 
-//	private String getQualifiedNameFor(EClassifierInfo classifierInfo) {
-//		// lookup could be improved
-//		for (String key : infoMap.keySet()) {
-//			EClassifierInfo info = infoMap.get(key);
-//			if (info.equals(classifierInfo))
-//				return key;
-//		}
-//		return null;
-//	}
-
 	public EClassifierInfo getCompatibleTypeOf(Collection<EClassifierInfo> types) {
 		Iterator<EClassifierInfo> i = types.iterator();
 		if (!i.hasNext())
@@ -120,17 +123,20 @@ public class EClassifierInfos {
 
 		return result;
 	}
-	
-//	@SuppressWarnings("unchecked")
-//	public EClassInfo getCompatibleTypeOf(Collection<EClassInfo> types) {
-//		Collection<EClassifierInfo> infos = (Collection<EClassifierInfo>)(Collection<?>)types;
-//		return (EClassInfo)getCompatibleTypeOf(infos);
-//	}
 
-	public EClassifier getCompatibleTypeNameOf(Collection<EClassifier> typeNames) {
+	public EClassifier getCompatibleTypeNameOf(Collection<EClassifier> classifiers, boolean useParent) {
 		Collection<EClassifierInfo> types = new HashSet<EClassifierInfo>();
-		for (EClassifier typeName : typeNames)
-			types.add(getInfo(typeName));
+		for (EClassifier classifier : classifiers) {
+			EClassifierInfo info = getInfoOrNull(classifier);
+			EClassifierInfos lookUp = getParent();
+			while(info == null && lookUp != null) {
+				info = lookUp.getInfoOrNull(classifier);
+				lookUp = lookUp.getParent();
+			}
+			if (info == null)
+				throw new NullPointerException("cannot find type info for classifier '" + classifier.getName() + "'");
+			types.add(info);
+		}
 
 		EClassifierInfo compatibleType = getCompatibleTypeOf(types);
 		if (compatibleType != null)
@@ -148,10 +154,15 @@ public class EClassifierInfos {
 		return Collections.unmodifiableList(result);
 	}
 
-	public List<EClassInfo> getSuperTypeInfos(EClassInfo subTypeInfo) {
+	public List<EClassInfo> getSuperTypeInfos(EClassInfo subTypeInfo) throws UnexpectedClassInfoException {
 		List<EClassInfo> result = new ArrayList<EClassInfo>();
-		for (EClass superType : subTypeInfo.getEClass().getESuperTypes())
-			result.add((EClassInfo) this.getInfo(superType));
+		for (EClass superType : subTypeInfo.getEClass().getESuperTypes()) {
+			EClassifierInfo info = getInfo(superType);
+			if (info instanceof EClassInfo)
+				result.add((EClassInfo) this.getInfo(superType));
+			else
+				throw new UnexpectedClassInfoException(TransformationErrorCode.InvalidSupertype, subTypeInfo, info, null);
+		}
 		return result;
 	}
 

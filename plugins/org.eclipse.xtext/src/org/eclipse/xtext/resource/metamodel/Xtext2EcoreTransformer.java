@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -49,7 +50,6 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
-import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 import org.eclipse.xtext.util.Filter;
 import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Strings;
@@ -62,6 +62,8 @@ import org.eclipse.xtext.util.XtextSwitch;
  */
 public class Xtext2EcoreTransformer {
 
+	private static final Logger log = Logger.getLogger(Xtext2EcoreTransformer.class);
+	
 	private Grammar grammar;
 	private Map<String, EPackage> generatedEPackages;
 	private Grammar superGrammar;
@@ -77,7 +79,7 @@ public class Xtext2EcoreTransformer {
 	}
 
 	public class NullErrorAcceptor implements ErrorAcceptor {
-		public void acceptError(ErrorCode errorCode, String arg0, EObject arg1) {
+		public void acceptError(TransformationErrorCode errorCode, String arg0, EObject arg1) {
 			// do nothing
 		}
 	}
@@ -120,8 +122,12 @@ public class Xtext2EcoreTransformer {
 			collectEClassInfosOfSuperGrammar();
 		collectEPackages();
 
-		deriveTypes();
-		deriveFeatures();
+		if (!deriveTypes())
+			return;
+		
+		if (!deriveFeatures())
+			return;
+		
 		normalizeAndValidateGeneratedPackages();
 	}
 
@@ -151,37 +157,43 @@ public class Xtext2EcoreTransformer {
 		return result;
 	}
 
-	private void deriveTypes() {
+	private boolean deriveTypes() {
+		boolean result = true;
 		for (AbstractRule rule : grammar.getRules()) {
 			try {
 				findOrCreateEClassifierInfo(rule);
-			}
-			catch (TransformationException e) {
-				reportError(e);
-			}
-		}
-		for (AbstractRule rule : grammar.getRules()) {
-			try {
-				EClassifierInfo generatedEClass = findOrCreateEClassifierInfo(rule);
-				if (rule instanceof ParserRule) {
-					ParserRule parserRule = (ParserRule) rule;
-					if (GrammarUtil.isDatatypeRule(parserRule)) {
-						if (!DatatypeRuleUtil.isValidDatatypeRule(parserRule)) {
-							throw new TransformationException(ErrorCode.InvalidDatatypeRule, 
-									"Datatype rules may only use other datatype rules, lexer rules and keywords.", parserRule);
-						}
-					} else {
-						deriveTypesAndHierarchy(generatedEClass, parserRule.getAlternatives());
-					}
+				if (rule instanceof ParserRule && GrammarUtil.isDatatypeRule((ParserRule) rule) && !DatatypeRuleUtil.isValidDatatypeRule((ParserRule) rule)) {
+					throw new TransformationException(TransformationErrorCode.InvalidDatatypeRule, 
+						"Datatype rules may only use other datatype rules, lexer rules and keywords.", rule);
 				}
 			}
 			catch (TransformationException e) {
 				reportError(e);
+				result = false;
 			}
 		}
+		if (result) {
+			for (AbstractRule rule : grammar.getRules()) {
+				try {
+					EClassifierInfo generatedEClass = findOrCreateEClassifierInfo(rule);
+					if (rule instanceof ParserRule) {
+						ParserRule parserRule = (ParserRule) rule;
+						if (!GrammarUtil.isDatatypeRule(parserRule)) {
+							deriveTypesAndHierarchy(generatedEClass, parserRule.getAlternatives());
+						}
+					}
+				}
+				catch (TransformationException e) {
+					reportError(e);
+					result = false;
+				}
+			}
+		}
+		return result;
 	}
 
-	private void deriveFeatures() {
+	private boolean deriveFeatures() {
+		boolean result = true;
 		for (AbstractRule rule : grammar.getRules()) {
 			try {
 				if (rule instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) rule)) {
@@ -189,15 +201,17 @@ public class Xtext2EcoreTransformer {
 				}
 			}
 			catch (TransformationException e) {
+				result = false;
 				reportError(e);
 			}
 		}
+		return result;
 	}
 
 	private void collectEClassInfosOfSuperGrammar() {
 		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer();
 		transformer.transform(superGrammar);
-		this.getEClassifierInfos().addAll(transformer.getEClassifierInfos());
+		this.getEClassifierInfos().setParent(transformer.getEClassifierInfos());
 	}
 
 	private Xtext2ECoreInterpretationContext deriveFeatures(final Xtext2ECoreInterpretationContext context,
@@ -213,7 +227,7 @@ public class Xtext2EcoreTransformer {
 					if (!GrammarUtil.isOptionalCardinality(object))
 						return context.mergeSpawnedContexts(contexts);
 				} catch(TransformationException ex) {
-					throw new RuntimeException(ex);
+					reportError(ex);
 				}
 				return context;
 			}
@@ -223,7 +237,7 @@ public class Xtext2EcoreTransformer {
 				try {
 					context.addFeature(object);
 				} catch(TransformationException ex) {
-					throw new RuntimeException(ex);
+					reportError(ex);
 				}
 				return context;
 			}
@@ -234,7 +248,8 @@ public class Xtext2EcoreTransformer {
 					return deriveFeatures(context.spawnContextForGroup(), object.getAbstractTokens());
 				}
 				catch (TransformationException e) {
-					throw new RuntimeException(e);
+					reportError(e);
+					return context;
 				}
 			}
 
@@ -249,7 +264,7 @@ public class Xtext2EcoreTransformer {
 							return context.spawnContextWithCalledRule(findOrCreateEClassifierInfo(calledRule), object);
 						}
 						catch (TransformationException e) {
-							throw new RuntimeException(e);
+							reportError(e);
 						}
 				}
 				return context;
@@ -267,8 +282,9 @@ public class Xtext2EcoreTransformer {
 					return ctx;
 				}
 				catch (TransformationException e) {
-					throw new RuntimeException(e);
+					reportError(e);
 				}
+				return context;
 			}
 
 			@Override
@@ -276,13 +292,7 @@ public class Xtext2EcoreTransformer {
 				return context;
 			}
 		};
-		try {
-			return visitor.doSwitch(element);
-		} catch(RuntimeException e) {
-			if (e.getCause() instanceof TransformationException)
-				throw (TransformationException)e.getCause();
-			throw e;
-		}
+		return visitor.doSwitch(element);
 	}
 
 	private Xtext2ECoreInterpretationContext deriveFeatures(Xtext2ECoreInterpretationContext context,
@@ -296,7 +306,7 @@ public class Xtext2EcoreTransformer {
 	private void deriveFeatures(ParserRule rule) throws TransformationException {
 		EClassifierInfo classInfo = findEClassifierInfo(rule);
 		if (classInfo == null)
-			throw new TransformationException(ErrorCode.NoSuchTypeAvailable, "No type available for rule " +
+			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "No type available for rule " +
 					rule.getName(), rule);
 		Xtext2ECoreInterpretationContext context = new Xtext2ECoreInterpretationContext(eClassifierInfos, classInfo);
 		deriveFeatures(context, rule.getAlternatives());
@@ -376,7 +386,7 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private void normalizeAndValidateGeneratedPackages() {
-		TypeHierarchyHelper helper = new TypeHierarchyHelper(this.eClassifierInfos, this.errorAcceptor);
+		TypeHierarchyHelper helper = new TypeHierarchyHelper(grammar, this.eClassifierInfos, this.errorAcceptor);
 		helper.liftUpFeaturesRecursively();
 		helper.removeDuplicateDerivedFeatures();
 		helper.detectEClassesWithCyclesInTypeHierachy();
@@ -395,7 +405,7 @@ public class Xtext2EcoreTransformer {
 			RuleCall ruleCall = (RuleCall) element;
 			AbstractRule calledRule = ruleCall.getRule();
 			if (calledRule == null) // TODO: use NodeAdapter to create error message 
-				throw new TransformationException(ErrorCode.NoSuchRuleAvailable, "Cannot find rule " + ruleCall,
+				throw new TransformationException(TransformationErrorCode.NoSuchRuleAvailable, "Cannot find rule " + ruleCall,
 						ruleCall);
 			TypeRef calledRuleReturnTypeRef = getOrComputeReturnType(calledRule);
 			addSuperType(calledRuleReturnTypeRef, ruleReturnType);
@@ -440,7 +450,7 @@ public class Xtext2EcoreTransformer {
 					IDeclaredMetamodelAccess access = DeclaredMetamodelAccessFactory.getAccessTo(referencedMetamodel);
 					EPackage referencedEPackage = access.getPackage();
 					if (referencedEPackage == null)
-						throw new TransformationException(ErrorCode.CannotLoadMetamodel, "Cannot not load metamodel "
+						throw new TransformationException(TransformationErrorCode.CannotLoadMetamodel, "Cannot not load metamodel "
 								+ referencedMetamodel.getUri(), referencedMetamodel);
 
 					collectClassInfosOf(referencedEPackage, referencedMetamodel);
@@ -449,7 +459,7 @@ public class Xtext2EcoreTransformer {
 					String alias = Strings.emptyIfNull(metamodelDeclaration.getAlias());
 					if (generateUs.containsKey(alias)) {
 						generateUs.put(alias, null);
-						throw new TransformationException(ErrorCode.AliasForMetamodelAlreadyExists, "Alias '" + alias
+						throw new TransformationException(TransformationErrorCode.AliasForMetamodelAlreadyExists, "Alias '" + alias
 								+ "' registered more than once.", metamodelDeclaration);
 					}
 					else {
@@ -491,11 +501,12 @@ public class Xtext2EcoreTransformer {
 		}
 	}
 
-	private void reportError(ErrorCode errorCode, String message, EObject erroneousElement) {
+	private void reportError(TransformationErrorCode errorCode, String message, EObject erroneousElement) {
 		errorAcceptor.acceptError(errorCode, message, erroneousElement);
 	}
 
 	private void reportError(TransformationException exception) {
+		log.trace(exception.getErrorCode(), exception);
 		reportError(exception.getErrorCode(), exception.getMessage(), exception.getErroneousElement());
 	}
 
@@ -516,6 +527,17 @@ public class Xtext2EcoreTransformer {
 	private EClassifierInfo findOrCreateEClassifierInfo(TypeRef typeRef, String name) throws TransformationException {
 		EClassifierInfo info = eClassifierInfos.getInfo(typeRef);
 		if (info == null) {
+			// we assumend EString for lexer rules and datatype rules, so
+			// we have to do a look up in super grammar
+			if (typeRef.getType() == EcorePackage.Literals.ESTRING) {
+				EClassifierInfos parent = eClassifierInfos.getParent();
+				while(parent != null && info == null) {
+					info = parent.getInfo(typeRef);
+					parent = parent.getParent();
+				}
+				if (info != null)
+					return info;
+			}
 			info = createEClassifierInfo(typeRef, name);
 		}
 		return info;
@@ -537,12 +559,12 @@ public class Xtext2EcoreTransformer {
 
 		AbstractMetamodelDeclaration metaModel = typeRef.getMetamodel();
 		if (metaModel == null)
-			throw new TransformationException(ErrorCode.UnknownMetaModelAlias, "Cannot create type for " + classifierName
+			throw new TransformationException(TransformationErrorCode.UnknownMetaModelAlias, "Cannot create type for " + classifierName
 					+ " because its MetaModel is unknown.", typeRef);
 		EPackage generatedEPackage = getGeneratedEPackage(metaModel);
 		if (generatedEPackage == null) {
-			throw new TransformationException(ErrorCode.CannotCreateTypeInSealedMetamodel,
-					"Cannot create type in alias " + typeRef.getMetamodel().getAlias(), typeRef);
+			throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel,
+					"Cannot create type '" + classifierName + "' in alias " + typeRef.getMetamodel().getAlias(), typeRef);
 		}
 
 		EClassifier classifier = generatedEPackage.getEClassifier(classifierName);
@@ -572,7 +594,7 @@ public class Xtext2EcoreTransformer {
 		// we do not allow the same alias twice for generated metamodels
 		String alias = Strings.emptyIfNull(generatedMetamodel.getAlias());
 		if (generatedEPackages.containsKey(alias))
-			throw new TransformationException(ErrorCode.AliasForMetamodelAlreadyExists, "alias '" + alias
+			throw new TransformationException(TransformationErrorCode.AliasForMetamodelAlreadyExists, "alias '" + alias
 					+ "' already exists", generatedMetamodel);
 
 		// instantiate EPackages for generated metamodel

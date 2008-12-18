@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTestLanguage.g 2008-12-18 11:06:18
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/internal/InternalMetamodelRefTestLanguage.g 2008-12-18 18:58:44
 
 package org.eclipse.xtext.metamodelreferencing.tests.parser.internal; 
 

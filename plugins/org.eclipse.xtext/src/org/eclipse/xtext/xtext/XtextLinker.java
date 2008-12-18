@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -19,10 +20,12 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.crossref.IScopeProvider;
-import org.eclipse.xtext.crossref.internal.AbstractDecoratingDiagnosticProducer;
-import org.eclipse.xtext.crossref.internal.DiagnosticProducer;
 import org.eclipse.xtext.crossref.internal.Linker;
-import org.eclipse.xtext.resource.XtextResource.Diagnostic;
+import org.eclipse.xtext.diagnostics.AbstractDiagnosticProducerDecorator;
+import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
+import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
+import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
+import org.eclipse.xtext.resource.metamodel.TransformationDiagnosticsProducer;
 import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 import org.eclipse.xtext.service.Inject;
 
@@ -31,18 +34,15 @@ import org.eclipse.xtext.service.Inject;
  */
 public class XtextLinker extends Linker {
 
+	private static Logger log = Logger.getLogger(XtextLinker.class);
+	
 	@Inject
 	private IScopeProvider scopeProvider;
 	
 	@Override
-	protected DiagnosticProducer decorateDiagnosticProducer(final DiagnosticProducer producer) {
-		return new AbstractDecoratingDiagnosticProducer(super.decorateDiagnosticProducer(producer)) {
+	protected IDiagnosticProducer createDiagnosticProducer(final IDiagnosticConsumer consumer) {
+		return new AbstractDiagnosticProducerDecorator(super.createDiagnosticProducer(consumer)) {
 			private boolean filter = false;
-
-			public void addDefaultDiagnostic() {
-				if (!filter)
-					super.addDefaultDiagnostic();
-			}
 
 			public void addDiagnostic(String message) {
 				if (!filter)
@@ -59,7 +59,7 @@ public class XtextLinker extends Linker {
 		};
 	}
 
-	protected void setDefaultValueImpl(EObject obj, EReference ref, DiagnosticProducer producer) {
+	protected void setDefaultValueImpl(EObject obj, EReference ref, IDiagnosticProducer producer) {
 		if (XtextPackage.eINSTANCE.getTypeRef_Metamodel() == ref) {
 			final TypeRef typeRef = (TypeRef) obj;
 			final String typeRefName = GrammarUtil.getTypeRefName(typeRef);
@@ -75,7 +75,7 @@ public class XtextLinker extends Linker {
 	}
 
 	@Override
-	protected void beforeEnsureIsLinked(EObject obj, EReference ref, DiagnosticProducer producer) {
+	protected void beforeEnsureIsLinked(EObject obj, EReference ref, IDiagnosticProducer producer) {
 		if (XtextPackage.eINSTANCE.getTypeRef_Type() == ref) {
 			final TypeRef typeRef = (TypeRef) obj;
 			if (typeRef.getMetamodel() == null)
@@ -85,15 +85,19 @@ public class XtextLinker extends Linker {
 	}
 
 	@Override
-	public List<Diagnostic> linkModel(EObject model) {
-		List<Diagnostic> result = super.linkModel(model);
-		// TODO: fill results from metamodel transformation
-		// transformer should use diagnostics producer
-		if (result.isEmpty() && model.eResource().getErrors().isEmpty()) {
+	public void linkModel(EObject model, IDiagnosticConsumer consumer) {
+		super.linkModel(model, consumer);
+		if (!consumer.hasConsumedDiagnostics() && model.eResource().getErrors().isEmpty()) {
 			Grammar grammar = (Grammar) model;
-			Xtext2EcoreTransformer.doTransform(grammar);
+			Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer();
+			transformer.setErrorAcceptor(new TransformationDiagnosticsProducer(consumer));
+			try {
+				transformer.transform(grammar);
+			} catch(Exception e) {
+				log.error(e.getMessage(), e);
+				consumer.consume(new ExceptionDiagnostic(e));
+			}
 		}
-		return result;
 	}
 	
 	
