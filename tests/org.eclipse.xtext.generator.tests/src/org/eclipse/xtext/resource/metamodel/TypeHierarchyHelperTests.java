@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.resource.metamodel.EClassifierInfo.EClassInfo;
-import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -54,7 +53,7 @@ public class TypeHierarchyHelperTests extends TestCase {
 
 	private void initializeHelper() {
 		EasyMock.replay(errorAcceptorMock);
-		helper = new TypeHierarchyHelper(infos, errorAcceptorMock);
+		helper = new TypeHierarchyHelper(null, infos, errorAcceptorMock);
 	}
 
 	private EClassInfo addClass(String name, boolean isGenerated) {
@@ -283,7 +282,7 @@ public class TypeHierarchyHelperTests extends TestCase {
 		c.addSupertype(b);
 		d.addSupertype(a);
 		
-		errorAcceptorMock.acceptError(same(ErrorCode.TypeWithCycleInHierarchy), (String) anyObject(),
+		errorAcceptorMock.acceptError(same(TransformationErrorCode.TypeWithCycleInHierarchy), (String) anyObject(),
 				(EObject) anyObject());
 		EasyMock.expectLastCall().times(3);
 		
@@ -301,7 +300,7 @@ public class TypeHierarchyHelperTests extends TestCase {
 		addAttribute(a, STRING, "f2");
 		addAttribute(b, INT, "f2");
 		
-		errorAcceptorMock.acceptError(same(ErrorCode.MoreThanOneFeatureWithSameName), (String) anyObject(),
+		errorAcceptorMock.acceptError(same(TransformationErrorCode.MoreThanOneFeatureWithSameName), (String) anyObject(),
 				(EObject) anyObject());
 		
 		

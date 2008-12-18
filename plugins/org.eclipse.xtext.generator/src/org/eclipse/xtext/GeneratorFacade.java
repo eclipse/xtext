@@ -54,6 +54,14 @@ public class GeneratorFacade {
 
 	public static void generate(Grammar grammarModel, String runtimeProjectPath, String uiProjectPath,
 			String... modelFileExtensions) throws IOException {
+		if (!grammarModel.eResource().getErrors().isEmpty()) {
+			log.error(grammarModel.eResource().getErrors());
+			return;
+		}
+		if (!grammarModel.eResource().getWarnings().isEmpty()) {
+			log.warn(grammarModel.eResource().getWarnings());
+		}
+			
 		List<EObject> list = EcoreUtil2.eAllContentsAsList(grammarModel);
 		Issues issues = new IssuesImpl();
 		ExecutionContextImpl ctx = new ExecutionContextImpl();
@@ -65,13 +73,13 @@ public class GeneratorFacade {
 			return;
 		}
 
-		CompositeNode rootNode = NodeUtil.getRootNode(grammarModel);
-		EList<SyntaxError> allSyntaxErrors = rootNode.allSyntaxErrors();
-		for (SyntaxError syntaxError : allSyntaxErrors) {
-			log.error(syntaxError.getMessage() + ":" + syntaxError.getNode().getTotalLine());
-		}
-		if (!allSyntaxErrors.isEmpty())
-			throw new IllegalStateException("The grammar has syntax errors.");
+//		CompositeNode rootNode = NodeUtil.getRootNode(grammarModel);
+//		EList<SyntaxError> allSyntaxErrors = rootNode.allSyntaxErrors();
+//		for (SyntaxError syntaxError : allSyntaxErrors) {
+//			log.error(syntaxError.getMessage() + ":" + syntaxError.getNode().getTotalLine());
+//		}
+//		if (!allSyntaxErrors.isEmpty())
+//			throw new IllegalStateException("The grammar has syntax errors.");
 		GenModel genModel = assembleGeneratorModel(grammarModel, runtimeProjectPath, uiProjectPath,
 				modelFileExtensions);
 		generate(genModel);

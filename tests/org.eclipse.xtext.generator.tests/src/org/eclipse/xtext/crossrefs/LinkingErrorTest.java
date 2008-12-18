@@ -12,8 +12,8 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -47,10 +47,10 @@ public class LinkingErrorTest extends AbstractGeneratorTest {
 		assertEquals(1, resource.getErrors().size());
 		assertEquals(0, resource.getWarnings().size());
 		
-		Diagnostic error = resource.getErrors().get(0);
+		Diagnostic error = (Diagnostic) resource.getErrors().get(0);
 		assertEquals(2, error.getLine());
-		assertTrue(error instanceof XtextResource.Diagnostic);
-		XtextResource.Diagnostic verboseError = (XtextResource.Diagnostic)error;
+		assertTrue(error instanceof Diagnostic);
+		Diagnostic verboseError = (Diagnostic)error;
 		assertEquals(35, verboseError.getOffset());
 		assertEquals(1, verboseError.getLength());
 	}
