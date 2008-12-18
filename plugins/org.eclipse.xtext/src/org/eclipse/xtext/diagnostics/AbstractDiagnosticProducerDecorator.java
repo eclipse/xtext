@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.crossref.internal;
+package org.eclipse.xtext.diagnostics;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -14,17 +14,13 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class AbstractDecoratingDiagnosticProducer implements DiagnosticProducer {
+public class AbstractDiagnosticProducerDecorator implements IDiagnosticProducer {
 
-	private final DiagnosticProducer producer;
+	private final IDiagnosticProducer producer;
 	
-	public AbstractDecoratingDiagnosticProducer(DiagnosticProducer producer) {
+	public AbstractDiagnosticProducerDecorator(IDiagnosticProducer producer) {
 		super();
 		this.producer = producer;
-	}
-
-	public void addDefaultDiagnostic() {
-		producer.addDefaultDiagnostic();
 	}
 
 	public void addDiagnostic(String message) {

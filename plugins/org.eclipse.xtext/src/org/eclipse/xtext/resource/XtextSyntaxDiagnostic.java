@@ -8,91 +8,35 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.diagnostics.Diagnostic;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.SyntaxError;
-import org.eclipse.xtext.resource.XtextResource.Diagnostic;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
-public class XtextSyntaxDiagnostic implements Diagnostic {
+public class XtextSyntaxDiagnostic extends AbstractDiagnostic implements Diagnostic {
 
-	private final SyntaxError error;
+	final SyntaxError error;
 
 	public XtextSyntaxDiagnostic(SyntaxError error) {
 		this.error = error;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.resource.XtextResource.Diagnostic#getLength()
-	 */
-	public int getLength() {
-		return error.getNode().getLength();
+	@Override
+	protected AbstractNode getNode() {
+		return error.getNode();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.resource.XtextResource.Diagnostic#getOffset()
-	 */
-	public int getOffset() {
-		return error.getNode().getOffset();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.emf.ecore.resource.Resource.Diagnostic#getColumn()
-	 */
-	public int getColumn() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.emf.ecore.resource.Resource.Diagnostic#getLine()
-	 */
-	public int getLine() {
-		return error.getNode().getLine();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.emf.ecore.resource.Resource.Diagnostic#getLocation()
-	 */
-	public String getLocation() {
-		if (error.eResource() != null)
-			return error.eResource().getURI().toString();
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.emf.ecore.resource.Resource.Diagnostic#getMessage()
-	 */
 	public String getMessage() {
 		return error.getMessage();
 	}
-
-	@Override
-	public String toString() {
-		StringBuffer b = new StringBuffer();
-		b.append(getClass().getSimpleName());
-		b.append(": ");
-		b.append(getLocation());
-		b.append(":");
-		b.append(getLine());
-		b.append(" ");
-		b.append(getMessage());
-		return b.toString();
+	
+	public String getLocation() {
+		if (error.eResource() != null)
+			return error.eResource().getURI().toString();
+		return super.getLocation();
 	}
-	
-	
-
 }

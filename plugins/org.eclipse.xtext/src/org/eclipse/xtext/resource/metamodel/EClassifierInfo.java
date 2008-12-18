@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -120,14 +119,14 @@ public abstract class EClassifierInfo {
 			EStructuralFeature existingFeature = getEClass().getEStructuralFeature(featureName);
 
 			if (!EcoreUtil2.isFeatureSemanticallyEqualApartFromType(newFeature, existingFeature))
-				throw new TransformationException(ErrorCode.FeatureWithDifferentConfigurationAlreadyExists,
+				throw new TransformationException(TransformationErrorCode.FeatureWithDifferentConfigurationAlreadyExists,
 						"feature with different cardinality or containment configuration already exists " + newFeature,
 						parserElement);
 
 			EClassifier compatibleType = EcoreUtil2
 					.getCompatibleType(existingFeature.getEType(), newFeature.getEType());
 			if (compatibleType == null)
-				throw new TransformationException(ErrorCode.NoCompatibleFeatureTypeAvailable,
+				throw new TransformationException(TransformationErrorCode.NoCompatibleFeatureTypeAvailable,
 						"Cannot find compatible type for features", parserElement);
 
 			// TODO check, whether existing feature can be changed (feature's

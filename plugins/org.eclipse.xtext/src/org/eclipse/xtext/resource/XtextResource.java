@@ -128,12 +128,12 @@ public class XtextResource extends ResourceImpl {
 		if (parseResult.getRootASTElement() == null)
 			return;
 		
-		List<Diagnostic> brokenLinks = linker.linkModel(parseResult.getRootASTElement());
-
-		getErrors().addAll(brokenLinks);
+		final ListBasedDiagnosticConsumer consumer = new ListBasedDiagnosticConsumer();
+		linker.linkModel(parseResult.getRootASTElement(), consumer);
+		getErrors().addAll(consumer.getResult());
 		// logger.debug("errors: " + errors.size());
 	}
-
+	
 	private void addAdaptersToRoot() {
 		NodeContentAdapter.createAdapterAndAddToNode(parseResult.getRootNode());
 	}
@@ -181,12 +181,12 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	/**
-	 * Creates {@link XtextResource.Diagnostic}s from {@link SyntaxError}s in
+	 * Creates {@link Diagnostic}s from {@link SyntaxError}s in
 	 * {@link ParseResult}
 	 * 
 	 * @param list
 	 *            of {@link SyntaxError}s
-	 * @return list of {@link XtextResource.Diagnostic}
+	 * @return list of {@link Diagnostic}
 	 */
 	private List<Diagnostic> createDiagnostics(IParseResult parseResult) {
 		List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
@@ -194,12 +194,6 @@ public class XtextResource extends ResourceImpl {
 			diagnostics.add(new XtextSyntaxDiagnostic(error));
 		}
 		return diagnostics;
-	}
-
-	public interface Diagnostic extends org.eclipse.emf.ecore.resource.Resource.Diagnostic {
-		public int getOffset();
-
-		public int getLength();
 	}
 
 	public IParser getParser() {

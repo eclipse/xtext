@@ -5,17 +5,20 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.crossref;
+package org.eclipse.xtext.resource.metamodel;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
-import org.eclipse.xtext.service.ILanguageService;
-
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-public interface ILinker extends ILanguageService{
-	
-	void linkModel(EObject model, IDiagnosticConsumer diagnosticsConsumer);
-	
+public enum TransformationErrorCode {
+	NoSuchTypeAvailable, 
+	MoreThanOneTypeChangeInOneRule, 
+	CannotLoadMetamodel, 
+	CannotCreateTypeInSealedMetamodel, 
+	FeatureWithDifferentConfigurationAlreadyExists, 
+	NoCompatibleFeatureTypeAvailable, 
+	AliasForMetamodelAlreadyExists, 
+	NoSuchRuleAvailable, 
+	TypeWithCycleInHierarchy, 
+	MoreThanOneFeatureWithSameName,
+	UnknownMetaModelAlias, 
+	InvalidDatatypeRule, 
+	InvalidSupertype
 }

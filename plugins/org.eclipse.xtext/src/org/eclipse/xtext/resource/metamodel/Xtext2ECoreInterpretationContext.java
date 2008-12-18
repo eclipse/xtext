@@ -20,7 +20,9 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.resource.metamodel.ErrorAcceptor.ErrorCode;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.NodeAdapter;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.Function;
 
 /**
@@ -92,14 +94,28 @@ public class Xtext2ECoreInterpretationContext {
 
 
 	private EClassifier getTerminalType(AbstractElement terminal) throws TransformationException {
-		return classifierCalculator.exec(terminal);
+		EClassifier result = classifierCalculator.exec(terminal);
+		if (result == null) {
+			NodeAdapter adapter = NodeUtil.getNodeAdapter(terminal);
+			if (adapter != null) {
+				AbstractNode node = adapter.getParserNode();
+				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for '" + node.serialize() + "'.", terminal);
+			} else
+				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot find type for " + terminal.eClass().getName(), terminal);
+		}
+		return result;
 	}
 
 	private EClassifierInfo getEClassifierInfoOrThrowException(EClassifier type, AbstractElement parserElement)
 			throws TransformationException {
-		EClassifierInfo featureTypeInfo = eClassifierInfos.getInfo(type);
+		EClassifierInfo featureTypeInfo = eClassifierInfos.getInfoOrNull(type);
+		EClassifierInfos parent = eClassifierInfos.getParent();
+		while(featureTypeInfo == null && parent != null) {
+			featureTypeInfo = parent.getInfoOrNull(type);
+			parent = parent.getParent();
+		}
 		if (featureTypeInfo == null) {
-			throw new TransformationException(ErrorCode.NoSuchTypeAvailable, "Cannot resolve type " + type.getName(),
+			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot resolve type " + type.getName(),
 					parserElement);
 		}
 		return featureTypeInfo;
@@ -114,7 +130,7 @@ public class Xtext2ECoreInterpretationContext {
 	public Xtext2ECoreInterpretationContext spawnContextWithCalledRule(EClassifierInfo newType, EObject parserElement)
 			throws TransformationException {
 		if (!isRuleCallAllowed)
-			throw new TransformationException(ErrorCode.MoreThanOneTypeChangeInOneRule,
+			throw new TransformationException(TransformationErrorCode.MoreThanOneTypeChangeInOneRule,
 					"Cannot change type twice within a rule", parserElement);
 
 		return new Xtext2ECoreInterpretationContext(newType, eClassifierInfos, false);

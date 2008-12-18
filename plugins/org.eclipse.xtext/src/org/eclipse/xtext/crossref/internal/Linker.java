@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.crossref.internal;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -24,13 +23,13 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.crossref.ILinker;
 import org.eclipse.xtext.crossref.ILinkingService;
+import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
+import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResource.Diagnostic;
 import org.eclipse.xtext.service.Inject;
 
 /**
@@ -43,7 +42,7 @@ public class Linker implements ILinker {
 	@Inject
 	private ILinkingService linkingService;
 
-	public void ensureLinked(EObject obj, DiagnosticProducer producer) {
+	public void ensureLinked(EObject obj, IDiagnosticProducer producer) {
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
 		if (nodeAdapter == null)
 			return;
@@ -63,8 +62,8 @@ public class Linker implements ILinker {
 		setDefaultValues(obj, handledReferences, producer);
 	}
 	
-	protected DiagnosticProducer decorateDiagnosticProducer(DiagnosticProducer producer) {
-		return producer;
+	protected IDiagnosticProducer createDiagnosticProducer(IDiagnosticConsumer consumer) {
+		return new LinkingDiagnosticProducer(consumer);
 	}
 
 	private void clearReferences(EObject obj) {
@@ -73,7 +72,7 @@ public class Linker implements ILinker {
 				obj.eUnset(ref);
 	}
 	
-	private void setDefaultValues(EObject obj, Set<EReference> references, DiagnosticProducer producer) {
+	private void setDefaultValues(EObject obj, Set<EReference> references, IDiagnosticProducer producer) {
 		for(EReference ref: obj.eClass().getEAllReferences())
 			if (!ref.isContainment() && !ref.isContainer() && !references.contains(ref) && !obj.eIsSet(ref)) {
 				producer.setTarget(obj, ref);
@@ -81,22 +80,22 @@ public class Linker implements ILinker {
 			}
 	}
 	
-	protected final void setDefaultValue(EObject obj, EReference ref, DiagnosticProducer producer) {
+	protected final void setDefaultValue(EObject obj, EReference ref, IDiagnosticProducer producer) {
 		producer.setTarget(obj, ref);
 		setDefaultValueImpl(obj, ref, producer);
 	}
 	
-	protected void setDefaultValueImpl(EObject obj, EReference ref, DiagnosticProducer producer) {
+	protected void setDefaultValueImpl(EObject obj, EReference ref, IDiagnosticProducer producer) {
 		// may be overridden by clients		
 	}
 
-	protected void beforeEnsureIsLinked(EObject obj, EReference ref, DiagnosticProducer producer) {
+	protected void beforeEnsureIsLinked(EObject obj, EReference ref, IDiagnosticProducer producer) {
 		// may be overridden by clients
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void ensureIsLinked(EObject obj, LeafNode node, CrossReference ref, 
-			Set<EReference> handledReferences, DiagnosticProducer producer) {
+	protected void ensureIsLinked(EObject obj, LeafNode node, CrossReference ref, 
+			Set<EReference> handledReferences, IDiagnosticProducer producer) {
 		final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());
 		handledReferences.add(eRef);
 		beforeEnsureIsLinked(obj, eRef, producer);
@@ -104,7 +103,7 @@ public class Linker implements ILinker {
 		final List<EObject> links = linkingService.getLinkedObjects(obj, eRef, (LeafNode) node);
 
 		if (links == null || links.isEmpty()) {
-			producer.addDefaultDiagnostic();
+			producer.addDiagnostic("Cannot resolve reference " + node.getText());
 			return;
 		}
 		
@@ -150,14 +149,12 @@ public class Linker implements ILinker {
 		this.linkingService = linkingService;
 	}
 
-	public List<Diagnostic> linkModel(EObject model) {
-		final List<XtextResource.Diagnostic> brokenLinks = new ArrayList<XtextResource.Diagnostic>();
-		final DiagnosticProducer producer = decorateDiagnosticProducer(new DefaultDiagnosticProducer(brokenLinks));
+	public void linkModel(EObject model, IDiagnosticConsumer consumer) {
+		final IDiagnosticProducer producer = createDiagnosticProducer(consumer);
 		ensureLinked(model, producer);
 		final Iterator<EObject> allContents = model.eAllContents();
 		while (allContents.hasNext())
 			ensureLinked(allContents.next(), producer);
-		return brokenLinks;
 	}
 	
 }

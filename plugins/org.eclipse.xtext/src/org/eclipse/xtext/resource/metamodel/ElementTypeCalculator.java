@@ -81,7 +81,7 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 		final Set<EClassifier> types = new HashSet<EClassifier>();
 		for (AbstractElement group : object.getGroups())
 			types.add(doSwitch(group));
-		return classifierInfos.getCompatibleTypeNameOf(types);
+		return classifierInfos.getCompatibleTypeNameOf(types, true);
 	}
 
 	@Override
@@ -90,10 +90,6 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 	}
 
 	public EClassifier exec(AbstractElement param) {
-		EClassifier classifier = doSwitch(param);
-		if (classifier == null) {
-			throw new NullPointerException("Cannot calculate type of " + param.toString());
-		}
-		return classifier;
+		return doSwitch(param);
 	}
 }

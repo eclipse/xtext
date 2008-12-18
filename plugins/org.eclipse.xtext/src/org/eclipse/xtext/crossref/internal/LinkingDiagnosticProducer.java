@@ -5,17 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.crossref;
+package org.eclipse.xtext.crossref.internal;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.diagnostics.AbstractDiagnosticProducer;
+import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
-import org.eclipse.xtext.service.ILanguageService;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ILinker extends ILanguageService{
-	
-	void linkModel(EObject model, IDiagnosticConsumer diagnosticsConsumer);
+public class LinkingDiagnosticProducer extends AbstractDiagnosticProducer {
+
+	public LinkingDiagnosticProducer(IDiagnosticConsumer consumer) {
+		super(consumer);
+	}
+
+	protected Diagnostic createDiagnostic(String message) {
+		return new XtextLinkingDiagnostic(getNode(), message);
+	}
 	
 }

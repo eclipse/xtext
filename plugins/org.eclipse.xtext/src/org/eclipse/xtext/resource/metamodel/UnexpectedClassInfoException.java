@@ -4,40 +4,37 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
 package org.eclipse.xtext.resource.metamodel;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
- * @author Jan Köhnlein - Initial contribution and API
- *
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TransformationException extends Exception {
+public class UnexpectedClassInfoException extends Exception {
 
-	private static final long serialVersionUID = -6324965070089590590L;
+	private static final long serialVersionUID = 5234853702435638238L;
 
-	private EObject erroneousElement;
+	private final TransformationErrorCode errorCode;
+	private final EClassifierInfo info;
+	private final EClassifierInfo superInfo;
 
-	private TransformationErrorCode errorCode;
-
-	public TransformationException(TransformationErrorCode errorCode, String message, EObject erroneousElement) {
+	public UnexpectedClassInfoException(TransformationErrorCode errorCode, EClassifierInfo info, EClassifierInfo superInfo, String message) {
 		super(message);
 		this.errorCode = errorCode;
-		this.erroneousElement = erroneousElement;
+		this.info = info;
+		this.superInfo = superInfo;
 	}
-	
+
 	public TransformationErrorCode getErrorCode() {
 		return errorCode;
 	}
 
-	public EObject getErroneousElement() {
-		return erroneousElement;
+	public EClassifierInfo getInfo() {
+		return info;
 	}
 
-	public void setErroneousElement(EObject erroneousElement) {
-		this.erroneousElement = erroneousElement;
+	public EClassifierInfo getSuperInfo() {
+		return superInfo;
 	}
-
+	
 }
