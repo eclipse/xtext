@@ -104,8 +104,8 @@ public class XtextResourceChecker {
 		map.put(IMarker.MESSAGE, diagnostic.getMessage());
 		map.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));
 
-		if (diagnostic instanceof XtextResource.Diagnostic) {
-			XtextResource.Diagnostic xtextDiagnostic = (XtextResource.Diagnostic) diagnostic;
+		if (diagnostic instanceof org.eclipse.xtext.diagnostics.Diagnostic) {
+			org.eclipse.xtext.diagnostics.Diagnostic xtextDiagnostic = (org.eclipse.xtext.diagnostics.Diagnostic) diagnostic;
 			map.put(IMarker.CHAR_START, xtextDiagnostic.getOffset());
 			map.put(IMarker.CHAR_END, xtextDiagnostic.getOffset() + xtextDiagnostic.getLength());
 		}
