@@ -29,40 +29,80 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(3);
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group c0Group = (Group)cGroup.eContents().get(0);
-		private final Assignment c00AssignmentId = (Assignment)c0Group.eContents().get(0);
-		private final RuleCall c000ParserRuleCallNestedModelId = (RuleCall)c00AssignmentId.eContents().get(0);
+		private final Group c00Group = (Group)c0Group.eContents().get(0);
+		private final Group c000Group = (Group)c00Group.eContents().get(0);
+		private final Assignment c0000AssignmentId = (Assignment)c000Group.eContents().get(0);
+		private final RuleCall c00000ParserRuleCallNestedModelId = (RuleCall)c0000AssignmentId.eContents().get(0);
+		private final Group c0001Group = (Group)c000Group.eContents().get(1);
+		private final Keyword c00010KeywordColon = (Keyword)c0001Group.eContents().get(0);
+		private final Assignment c00011AssignmentValue = (Assignment)c0001Group.eContents().get(1);
+		private final RuleCall c000110ParserRuleCallFraction = (RuleCall)c00011AssignmentValue.eContents().get(0);
+		private final Group c001Group = (Group)c00Group.eContents().get(1);
+		private final Keyword c0010KeywordNumberSign = (Keyword)c001Group.eContents().get(0);
+		private final Assignment c0011AssignmentVector = (Assignment)c001Group.eContents().get(1);
+		private final RuleCall c00110ParserRuleCallVector = (RuleCall)c0011AssignmentVector.eContents().get(0);
 		private final Group c01Group = (Group)c0Group.eContents().get(1);
-		private final Keyword c010KeywordColon = (Keyword)c01Group.eContents().get(0);
-		private final Assignment c011AssignmentValue = (Assignment)c01Group.eContents().get(1);
-		private final RuleCall c0110ParserRuleCallFraction = (RuleCall)c011AssignmentValue.eContents().get(0);
+		private final Keyword c010KeywordPlusSign = (Keyword)c01Group.eContents().get(0);
+		private final Assignment c011AssignmentDots = (Assignment)c01Group.eContents().get(1);
+		private final RuleCall c0110ParserRuleCallDots = (RuleCall)c011AssignmentDots.eContents().get(0);
 		private final Keyword c1KeywordSemicolon = (Keyword)cGroup.eContents().get(1);
 		
-		// Model : id = NestedModelId ( ':' value = Fraction ) ? ';' ;
+		// Model : id = NestedModelId ( ':' value = Fraction ) ? ( '#' vector = Vector ) ? ( '+' dots = Dots ) ? ';' ;
 		public ParserRule getRule() { return rule; }
 
-		// id = NestedModelId ( ':' value = Fraction ) ? ';'
+		// id = NestedModelId ( ':' value = Fraction ) ? ( '#' vector = Vector ) ? ( '+' dots = Dots ) ? ';'
 		public Group eleGroup() { return cGroup; }
 
-		// id = NestedModelId ( ':' value = Fraction ) ?
+		// id = NestedModelId ( ':' value = Fraction ) ? ( '#' vector = Vector ) ? ( '+' dots = Dots ) ?
 		public Group ele0Group() { return c0Group; }
 
+		// id = NestedModelId ( ':' value = Fraction ) ? ( '#' vector = Vector ) ?
+		public Group ele00Group() { return c00Group; }
+
+		// id = NestedModelId ( ':' value = Fraction ) ?
+		public Group ele000Group() { return c000Group; }
+
 		// id = NestedModelId
-		public Assignment ele00AssignmentId() { return c00AssignmentId; }
+		public Assignment ele0000AssignmentId() { return c0000AssignmentId; }
 
 		// NestedModelId
-		public RuleCall ele000ParserRuleCallNestedModelId() { return c000ParserRuleCallNestedModelId; }
+		public RuleCall ele00000ParserRuleCallNestedModelId() { return c00000ParserRuleCallNestedModelId; }
 
 		// ( ':' value = Fraction ) ?
-		public Group ele01Group() { return c01Group; }
+		public Group ele0001Group() { return c0001Group; }
 
 		// ':'
-		public Keyword ele010KeywordColon() { return c010KeywordColon; }
+		public Keyword ele00010KeywordColon() { return c00010KeywordColon; }
 
 		// value = Fraction
-		public Assignment ele011AssignmentValue() { return c011AssignmentValue; }
+		public Assignment ele00011AssignmentValue() { return c00011AssignmentValue; }
 
 		// Fraction
-		public RuleCall ele0110ParserRuleCallFraction() { return c0110ParserRuleCallFraction; }
+		public RuleCall ele000110ParserRuleCallFraction() { return c000110ParserRuleCallFraction; }
+
+		// ( '#' vector = Vector ) ?
+		public Group ele001Group() { return c001Group; }
+
+		// '#'
+		public Keyword ele0010KeywordNumberSign() { return c0010KeywordNumberSign; }
+
+		// vector = Vector
+		public Assignment ele0011AssignmentVector() { return c0011AssignmentVector; }
+
+		// Vector
+		public RuleCall ele00110ParserRuleCallVector() { return c00110ParserRuleCallVector; }
+
+		// ( '+' dots = Dots ) ?
+		public Group ele01Group() { return c01Group; }
+
+		// '+'
+		public Keyword ele010KeywordPlusSign() { return c010KeywordPlusSign; }
+
+		// dots = Dots
+		public Assignment ele011AssignmentDots() { return c011AssignmentDots; }
+
+		// Dots
+		public RuleCall ele0110ParserRuleCallDots() { return c0110ParserRuleCallDots; }
 
 		// ';'
 		public Keyword ele1KeywordSemicolon() { return c1KeywordSemicolon; }
@@ -148,6 +188,68 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		// INT
 		public RuleCall ele11LexerRuleCallINT() { return c11LexerRuleCallINT; }
 	}
+
+	public class VectorElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(7);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group c0Group = (Group)cGroup.eContents().get(0);
+		private final Group c00Group = (Group)c0Group.eContents().get(0);
+		private final Keyword c000KeywordLeftParenthesis = (Keyword)c00Group.eContents().get(0);
+		private final RuleCall c001LexerRuleCallINT = (RuleCall)c00Group.eContents().get(1);
+		private final RuleCall c01LexerRuleCallINT = (RuleCall)c0Group.eContents().get(1);
+		private final Keyword c1KeywordRightParenthesis = (Keyword)cGroup.eContents().get(1);
+		
+		// Vector returns EString : '(' INT INT ')' ;
+		public ParserRule getRule() { return rule; }
+
+		// '(' INT INT ')'
+		public Group eleGroup() { return cGroup; }
+
+		// '(' INT INT
+		public Group ele0Group() { return c0Group; }
+
+		// '(' INT
+		public Group ele00Group() { return c00Group; }
+
+		// '('
+		public Keyword ele000KeywordLeftParenthesis() { return c000KeywordLeftParenthesis; }
+
+		// INT
+		public RuleCall ele001LexerRuleCallINT() { return c001LexerRuleCallINT; }
+
+		// INT
+		public RuleCall ele01LexerRuleCallINT() { return c01LexerRuleCallINT; }
+
+		// ')'
+		public Keyword ele1KeywordRightParenthesis() { return c1KeywordRightParenthesis; }
+	}
+
+	public class DotsElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) getGrammar().eContents().get(8);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group c0Group = (Group)cAlternatives.eContents().get(0);
+		private final Keyword c00KeywordFullStop = (Keyword)c0Group.eContents().get(0);
+		private final Keyword c01KeywordFullStop = (Keyword)c0Group.eContents().get(1);
+		private final Keyword c1KeywordFullStopFullStop = (Keyword)cAlternatives.eContents().get(1);
+		
+		// Dots returns EString : '.' '.' | '..' ;
+		public ParserRule getRule() { return rule; }
+
+		// '.' '.' | '..'
+		public Alternatives eleAlternatives() { return cAlternatives; }
+
+		// '.' '.'
+		public Group ele0Group() { return c0Group; }
+
+		// '.'
+		public Keyword ele00KeywordFullStop() { return c00KeywordFullStop; }
+
+		// '.'
+		public Keyword ele01KeywordFullStop() { return c01KeywordFullStop; }
+
+		// '..'
+		public Keyword ele1KeywordFullStopFullStop() { return c1KeywordFullStopFullStop; }
+	}
 	
 	public final static DatatypeRulesTestLanguageGrammarAccess INSTANCE = new DatatypeRulesTestLanguageGrammarAccess();
 
@@ -158,6 +260,8 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 	private static ModelIdElements pModelId;
 	private static NestedModelIdElements pNestedModelId;
 	private static FractionElements pFraction;
+	private static VectorElements pVector;
+	private static DotsElements pDots;
 
 	@SuppressWarnings("unused")
 	public synchronized Grammar getGrammar() {	
@@ -179,7 +283,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 		return (pCompositeModel != null) ? pCompositeModel : (pCompositeModel = new CompositeModelElements());
 	} 
 
-	// Model : id = NestedModelId ( ':' value = Fraction ) ? ';' ;
+	// Model : id = NestedModelId ( ':' value = Fraction ) ? ( '#' vector = Vector ) ? ( '+' dots = Dots ) ? ';' ;
 	public ModelElements prModel() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	} 
@@ -197,5 +301,15 @@ public class DatatypeRulesTestLanguageGrammarAccess extends BaseEPackageAccess i
 	// Fraction returns EBigDecimal : INT ( '/' INT ) ? ;
 	public FractionElements prFraction() {
 		return (pFraction != null) ? pFraction : (pFraction = new FractionElements());
+	} 
+
+	// Vector returns EString : '(' INT INT ')' ;
+	public VectorElements prVector() {
+		return (pVector != null) ? pVector : (pVector = new VectorElements());
+	} 
+
+	// Dots returns EString : '.' '.' | '..' ;
+	public DotsElements prDots() {
+		return (pDots != null) ? pDots : (pDots = new DotsElements());
 	} 
 }

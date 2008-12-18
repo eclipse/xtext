@@ -27,7 +27,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.DatatypeRuleToken;
 import org.eclipse.xtext.parser.antlr.ValueConverterException;
+
 }
 
 @parser::members {
@@ -111,11 +113,11 @@ entryRuleModel returns [EObject current=null] :
 ruleModel returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); }:
-(((	
+(((((	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_id=ruleNestedModelId 
 	    {
@@ -134,13 +136,13 @@ ruleModel returns [EObject current=null]
 	
 )(':' 
     {
-        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
 	    }
 	    lv_value=ruleFraction 
 	    {
@@ -152,6 +154,56 @@ ruleModel returns [EObject current=null]
 	        
 	        try {
 	        	factory.set($current, "value", lv_value,"Fraction");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+))?)('#' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	    }
+	    lv_vector=ruleVector 
+	    {
+	        currentNode = currentNode.getParent();
+	        if ($current==null) {
+	            $current = factory.create("Model");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	        	factory.set($current, "vector", lv_vector,"Vector");
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+	
+))?)('+' 
+    {
+        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.1/@alternatives/@abstractTokens.0/@abstractTokens.1/@abstractTokens.1/@terminal" /* xtext::RuleCall */, currentNode); 
+	    }
+	    lv_dots=ruleDots 
+	    {
+	        currentNode = currentNode.getParent();
+	        if ($current==null) {
+	            $current = factory.create("Model");
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	        	factory.set($current, "dots", lv_dots,"Dots");
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -171,32 +223,29 @@ ruleModel returns [EObject current=null]
 entryRuleModelId returns [String current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.2" /* xtext::ParserRule */, currentNode); } 
 	 iv_ruleModelId=ruleModelId 
-	 { $current=$iv_ruleModelId.current; }  
+	 { $current=$iv_ruleModelId.current.getText(); }  
 	 EOF 
 ;
 
 // Rule ModelId
-ruleModelId returns [String current=null] 
-    @init { StringBuilder buffer=new StringBuilder(20); setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); current = buffer.length() > 0 ? buffer.toString() : null; }:
+ruleModelId returns [DatatypeRuleToken current=new DatatypeRuleToken()] 
+    @init { setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 ((    this_ID=RULE_ID    {
-
-		buffer.append($this_ID.text);
-
+		$current.merge(this_ID);
     }
 
     { 
     createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::RuleCall */, null); 
     }
-'.' 
+
+	kw='.' 
     {
-        buffer.append(".");
+        $current.merge(kw);
         createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.2/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )    this_ID=RULE_ID    {
-
-		buffer.append($this_ID.text);
-
+		$current.merge(this_ID);
     }
 
     { 
@@ -213,30 +262,29 @@ ruleModelId returns [String current=null]
 entryRuleNestedModelId returns [String current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.3" /* xtext::ParserRule */, currentNode); } 
 	 iv_ruleNestedModelId=ruleNestedModelId 
-	 { $current=$iv_ruleNestedModelId.current; }  
+	 { $current=$iv_ruleNestedModelId.current.getText(); }  
 	 EOF 
 ;
 
 // Rule NestedModelId
-ruleNestedModelId returns [String current=null] 
-    @init { StringBuilder buffer=new StringBuilder(20); setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); current = buffer.length() > 0 ? buffer.toString() : null; }:
+ruleNestedModelId returns [DatatypeRuleToken current=new DatatypeRuleToken()] 
+    @init { setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 ((
     { 
         currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.0" /* xtext::RuleCall */, currentNode); 
     }
     this_ModelId=ruleModelId    {
-
-		if ($this_ModelId.current != null) buffer.append($this_ModelId.current);
-
+		$current.merge(this_ModelId);
     }
 
     { 
         currentNode = currentNode.getParent();
     }
-'.' 
+
+	kw='.' 
     {
-        buffer.append(".");
+        $current.merge(kw);
         createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::Keyword */, null); 
     }
 )
@@ -244,9 +292,7 @@ ruleNestedModelId returns [String current=null]
         currentNode=createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.3/@alternatives/@abstractTokens.1" /* xtext::RuleCall */, currentNode); 
     }
     this_ModelId=ruleModelId    {
-
-		if ($this_ModelId.current != null) buffer.append($this_ModelId.current);
-
+		$current.merge(this_ModelId);
     }
 
     { 
@@ -263,38 +309,118 @@ ruleNestedModelId returns [String current=null]
 entryRuleFraction returns [String current=null] :
 	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.4" /* xtext::ParserRule */, currentNode); } 
 	 iv_ruleFraction=ruleFraction 
-	 { $current=$iv_ruleFraction.current; }  
+	 { $current=$iv_ruleFraction.current.getText(); }  
 	 EOF 
 ;
 
 // Rule Fraction
-ruleFraction returns [String current=null] 
-    @init { StringBuilder buffer=new StringBuilder(20); setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); current = buffer.length() > 0 ? buffer.toString() : null; }:
+ruleFraction returns [DatatypeRuleToken current=new DatatypeRuleToken()] 
+    @init { setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
 (    this_INT=RULE_INT    {
-
-		buffer.append($this_INT.text);
-
+		$current.merge(this_INT);
     }
 
     { 
     createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.0" /* xtext::RuleCall */, null); 
     }
-('/' 
+(
+	kw='/' 
     {
-        buffer.append("/");
+        $current.merge(kw);
         createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.0" /* xtext::Keyword */, null); 
     }
     this_INT=RULE_INT    {
-
-		buffer.append($this_INT.text);
-
+		$current.merge(this_INT);
     }
 
     { 
     createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.4/@alternatives/@abstractTokens.1/@abstractTokens.1" /* xtext::RuleCall */, null); 
     }
 )?)
+    ;
+
+
+
+
+
+// Entry rule entryRuleVector
+entryRuleVector returns [String current=null] :
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.5" /* xtext::ParserRule */, currentNode); } 
+	 iv_ruleVector=ruleVector 
+	 { $current=$iv_ruleVector.current.getText(); }  
+	 EOF 
+;
+
+// Rule Vector
+ruleVector returns [DatatypeRuleToken current=new DatatypeRuleToken()] 
+    @init { setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
+(((
+	kw='(' 
+    {
+        $current.merge(kw);
+        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+    }
+    this_INT=RULE_INT    {
+		$current.merge(this_INT);
+    }
+
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, null); 
+    }
+)    this_INT=RULE_INT    {
+		$current.merge(this_INT);
+    }
+
+    { 
+    createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.0/@abstractTokens.1" /* xtext::RuleCall */, null); 
+    }
+)
+	kw=')' 
+    {
+        $current.merge(kw);
+        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.5/@alternatives/@abstractTokens.1" /* xtext::Keyword */, null); 
+    }
+)
+    ;
+
+
+
+
+
+// Entry rule entryRuleDots
+entryRuleDots returns [String current=null] :
+	{ currentNode = createCompositeNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.6" /* xtext::ParserRule */, currentNode); } 
+	 iv_ruleDots=ruleDots 
+	 { $current=$iv_ruleDots.current.getText(); }  
+	 EOF 
+;
+
+// Rule Dots
+ruleDots returns [DatatypeRuleToken current=new DatatypeRuleToken()] 
+    @init { setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
+((
+	kw='.' 
+    {
+        $current.merge(kw);
+        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.6/@alternatives/@groups.0/@abstractTokens.0" /* xtext::Keyword */, null); 
+    }
+
+	kw='.' 
+    {
+        $current.merge(kw);
+        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.6/@alternatives/@groups.0/@abstractTokens.1" /* xtext::Keyword */, null); 
+    }
+)
+    |
+	kw='..' 
+    {
+        $current.merge(kw);
+        createLeafNode("classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xmi#//@rules.6/@alternatives/@groups.1" /* xtext::Keyword */, null); 
+    }
+)
     ;
 
 

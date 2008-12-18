@@ -1,4 +1,4 @@
-// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g 2008-12-16 15:27:18
+// $ANTLR 3.0.1 ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g 2008-12-18 11:06:30
 
 package org.eclipse.xtext.parser.datatyperules.parser.internal;
 
@@ -16,16 +16,21 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
     public static final int RULE_ML_COMMENT=7;
     public static final int T14=14;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
     public static final int T11=11;
-    public static final int EOF=-1;
-    public static final int RULE_INT=5;
     public static final int RULE_STRING=6;
     public static final int T12=12;
-    public static final int Tokens=15;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_SL_COMMENT=8;
     public static final int T13=13;
+    public static final int T18=18;
+    public static final int RULE_WS=9;
+    public static final int T15=15;
+    public static final int RULE_INT=5;
+    public static final int EOF=-1;
+    public static final int T17=17;
+    public static final int Tokens=20;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T16=16;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int T19=19;
     public InternalDatatypeRulesTestLanguageLexer() {;} 
     public InternalDatatypeRulesTestLanguageLexer(CharStream input) {
         super(input);
@@ -54,10 +59,10 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
     public final void mT12() throws RecognitionException {
         try {
             int _type = T12;
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:11:5: ( ';' )
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:11:7: ';'
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:11:5: ( '#' )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:11:7: '#'
             {
-            match(';'); 
+            match('#'); 
 
             }
 
@@ -72,10 +77,10 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
     public final void mT13() throws RecognitionException {
         try {
             int _type = T13;
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:12:5: ( '.' )
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:12:7: '.'
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:12:5: ( '+' )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:12:7: '+'
             {
-            match('.'); 
+            match('+'); 
 
             }
 
@@ -90,10 +95,10 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
     public final void mT14() throws RecognitionException {
         try {
             int _type = T14;
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:13:5: ( '/' )
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:13:7: '/'
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:13:5: ( ';' )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:13:7: ';'
             {
-            match('/'); 
+            match(';'); 
 
             }
 
@@ -104,14 +109,105 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
     }
     // $ANTLR end T14
 
+    // $ANTLR start T15
+    public final void mT15() throws RecognitionException {
+        try {
+            int _type = T15;
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:14:5: ( '.' )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:14:7: '.'
+            {
+            match('.'); 
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T15
+
+    // $ANTLR start T16
+    public final void mT16() throws RecognitionException {
+        try {
+            int _type = T16;
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:15:5: ( '/' )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:15:7: '/'
+            {
+            match('/'); 
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T16
+
+    // $ANTLR start T17
+    public final void mT17() throws RecognitionException {
+        try {
+            int _type = T17;
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:16:5: ( '(' )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:16:7: '('
+            {
+            match('('); 
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T17
+
+    // $ANTLR start T18
+    public final void mT18() throws RecognitionException {
+        try {
+            int _type = T18;
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:17:5: ( ')' )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:17:7: ')'
+            {
+            match(')'); 
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T18
+
+    // $ANTLR start T19
+    public final void mT19() throws RecognitionException {
+        try {
+            int _type = T19;
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:18:5: ( '..' )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:18:7: '..'
+            {
+            match(".."); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T19
+
     // $ANTLR start RULE_ID
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:304:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:304:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:430:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:430:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:304:11: ( '^' )?
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:430:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -120,7 +216,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:304:12: '^'
+                    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:430:12: '^'
                     {
                     match('^'); 
 
@@ -139,7 +235,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:304:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:430:41: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -187,10 +283,10 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:306:10: ( ( '0' .. '9' )+ )
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:306:12: ( '0' .. '9' )+
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:432:10: ( ( '0' .. '9' )+ )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:432:12: ( '0' .. '9' )+
             {
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:306:12: ( '0' .. '9' )+
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:432:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -204,7 +300,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:306:13: '0' .. '9'
+            	    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:432:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -234,7 +330,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:308:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:434:13: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -246,16 +342,16 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("308:1: RULE_STRING : ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' );", 6, 0, input);
+                    new NoViableAltException("434:1: RULE_STRING : ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\'' );", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:308:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
+                    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:434:15: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )* '\"'
                     {
                     match('\"'); 
-                    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:308:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
+                    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:434:19: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\"' ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -271,7 +367,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:308:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:434:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -288,7 +384,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:308:65: ~ ( '\\\\' | '\"' )
+                    	    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:434:65: ~ ( '\\\\' | '\"' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -314,10 +410,10 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:308:101: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
+                    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:434:101: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )* '\\''
                     {
                     match('\''); 
-                    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:308:106: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
+                    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:434:106: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' ) | ~ ( '\\\\' | '\\'' ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -333,7 +429,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:308:108: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
+                    	    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:434:108: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\\\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -350,7 +446,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:308:152: ~ ( '\\\\' | '\\'' )
+                    	    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:434:152: ~ ( '\\\\' | '\\'' )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -388,12 +484,12 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:310:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:310:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:436:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:436:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:310:24: ( options {greedy=false; } : . )*
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:436:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -418,7 +514,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:310:52: .
+            	    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:436:52: .
             	    {
             	    matchAny(); 
 
@@ -447,12 +543,12 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:312:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )? )
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:312:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )?
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:438:17: ( '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )? )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:438:19: '//' (~ ( '\\n' | '\\r' ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:312:24: (~ ( '\\n' | '\\r' ) )*
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:438:24: (~ ( '\\n' | '\\r' ) )*
             loop8:
             do {
                 int alt8=2;
@@ -465,7 +561,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:312:24: ~ ( '\\n' | '\\r' )
+            	    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:438:24: ~ ( '\\n' | '\\r' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -486,7 +582,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:312:38: ( ( '\\r' )? '\\n' )?
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:438:38: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -495,9 +591,9 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:312:39: ( '\\r' )? '\\n'
+                    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:438:39: ( '\\r' )? '\\n'
                     {
-                    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:312:39: ( '\\r' )?
+                    // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:438:39: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -506,7 +602,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:312:39: '\\r'
+                            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:438:39: '\\r'
                             {
                             match('\r'); 
 
@@ -537,10 +633,10 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:314:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:314:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:440:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:440:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:314:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:440:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -594,8 +690,8 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:316:16: ( . )
-            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:316:18: .
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:442:16: ( . )
+            // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:442:18: .
             {
             matchAny(); 
 
@@ -609,77 +705,95 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:8: ( T11 | T12 | T13 | T14 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=11;
+        // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=16;
         int LA12_0 = input.LA(1);
 
         if ( (LA12_0==':') ) {
             alt12=1;
         }
-        else if ( (LA12_0==';') ) {
+        else if ( (LA12_0=='#') ) {
             alt12=2;
         }
-        else if ( (LA12_0=='.') ) {
+        else if ( (LA12_0=='+') ) {
             alt12=3;
+        }
+        else if ( (LA12_0==';') ) {
+            alt12=4;
+        }
+        else if ( (LA12_0=='.') ) {
+            int LA12_5 = input.LA(2);
+
+            if ( (LA12_5=='.') ) {
+                alt12=9;
+            }
+            else {
+                alt12=5;}
         }
         else if ( (LA12_0=='/') ) {
             switch ( input.LA(2) ) {
             case '/':
                 {
-                alt12=9;
+                alt12=14;
                 }
                 break;
             case '*':
                 {
-                alt12=8;
+                alt12=13;
                 }
                 break;
             default:
-                alt12=4;}
+                alt12=6;}
 
+        }
+        else if ( (LA12_0=='(') ) {
+            alt12=7;
+        }
+        else if ( (LA12_0==')') ) {
+            alt12=8;
         }
         else if ( (LA12_0=='^') ) {
-            int LA12_5 = input.LA(2);
-
-            if ( ((LA12_5>='A' && LA12_5<='Z')||LA12_5=='_'||(LA12_5>='a' && LA12_5<='z')) ) {
-                alt12=5;
-            }
-            else {
-                alt12=11;}
-        }
-        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='z')) ) {
-            alt12=5;
-        }
-        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
-            alt12=6;
-        }
-        else if ( (LA12_0=='\"') ) {
-            int LA12_8 = input.LA(2);
-
-            if ( ((LA12_8>='\u0000' && LA12_8<='\uFFFE')) ) {
-                alt12=7;
-            }
-            else {
-                alt12=11;}
-        }
-        else if ( (LA12_0=='\'') ) {
             int LA12_9 = input.LA(2);
 
-            if ( ((LA12_9>='\u0000' && LA12_9<='\uFFFE')) ) {
-                alt12=7;
+            if ( ((LA12_9>='A' && LA12_9<='Z')||LA12_9=='_'||(LA12_9>='a' && LA12_9<='z')) ) {
+                alt12=10;
             }
             else {
-                alt12=11;}
+                alt12=16;}
         }
-        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
+        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='z')) ) {
             alt12=10;
         }
-        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='-')||(LA12_0>='<' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFE')) ) {
+        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
             alt12=11;
+        }
+        else if ( (LA12_0=='\"') ) {
+            int LA12_12 = input.LA(2);
+
+            if ( ((LA12_12>='\u0000' && LA12_12<='\uFFFE')) ) {
+                alt12=12;
+            }
+            else {
+                alt12=16;}
+        }
+        else if ( (LA12_0=='\'') ) {
+            int LA12_13 = input.LA(2);
+
+            if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFE')) ) {
+                alt12=12;
+            }
+            else {
+                alt12=16;}
+        }
+        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
+            alt12=15;
+        }
+        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='$' && LA12_0<='&')||LA12_0=='*'||(LA12_0>=',' && LA12_0<='-')||(LA12_0>='<' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFE')) ) {
+            alt12=16;
         }
         else {
             NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
+                new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
 
             throw nvae;
         }
@@ -713,49 +827,84 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
                 }
                 break;
             case 5 :
-                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:26: RULE_ID
+                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:26: T15
+                {
+                mT15(); 
+
+                }
+                break;
+            case 6 :
+                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:30: T16
+                {
+                mT16(); 
+
+                }
+                break;
+            case 7 :
+                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:34: T17
+                {
+                mT17(); 
+
+                }
+                break;
+            case 8 :
+                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:38: T18
+                {
+                mT18(); 
+
+                }
+                break;
+            case 9 :
+                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:42: T19
+                {
+                mT19(); 
+
+                }
+                break;
+            case 10 :
+                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:46: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 6 :
-                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:34: RULE_INT
+            case 11 :
+                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:54: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 7 :
-                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:43: RULE_STRING
+            case 12 :
+                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:63: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 8 :
-                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:55: RULE_ML_COMMENT
+            case 13 :
+                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:75: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 9 :
-                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:71: RULE_SL_COMMENT
+            case 14 :
+                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:91: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 10 :
-                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:87: RULE_WS
+            case 15 :
+                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:107: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 11 :
-                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:95: RULE_ANY_OTHER
+            case 16 :
+                // ./src-gen/org/eclipse/xtext/parser/datatyperules/parser/internal/InternalDatatypeRulesTestLanguage.g:1:115: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
