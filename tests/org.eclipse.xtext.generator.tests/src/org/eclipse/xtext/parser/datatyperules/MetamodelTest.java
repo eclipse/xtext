@@ -45,6 +45,12 @@ public class MetamodelTest extends TestCase {
 		feature = model.getEStructuralFeature("value");
 		assertNotNull(feature);
 		assertEquals(EcorePackage.Literals.EBIG_DECIMAL, feature.getEType());
+		feature = model.getEStructuralFeature("vector");
+		assertNotNull(feature);
+		assertEquals(EcorePackage.Literals.ESTRING, feature.getEType());
+		feature = model.getEStructuralFeature("dots");
+		assertNotNull(feature);
+		assertEquals(EcorePackage.Literals.ESTRING, feature.getEType());
 	}
 	
 	public void testDerivedCompositeModel() {

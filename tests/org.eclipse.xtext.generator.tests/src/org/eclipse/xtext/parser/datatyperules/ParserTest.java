@@ -26,6 +26,8 @@ public class ParserTest extends AbstractGeneratorTest {
 	private EStructuralFeature idFeature;
 	private EStructuralFeature valueFeature;
 	private EStructuralFeature modelFeature;
+	private EStructuralFeature dotsFeature;
+	private EStructuralFeature vectorFeature;
 
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -34,6 +36,8 @@ public class ParserTest extends AbstractGeneratorTest {
 		EClass model = (EClass) pack.getEClassifier("Model");
 		idFeature = model.getEStructuralFeature("id");
 		valueFeature = model.getEStructuralFeature("value");
+		vectorFeature = model.getEStructuralFeature("vector");
+		dotsFeature = model.getEStructuralFeature("dots");
 		EClass compositeModel = (EClass) pack.getEClassifier("CompositeModel");
 		modelFeature = compositeModel.getEStructuralFeature("model");
 	}
@@ -59,7 +63,19 @@ public class ParserTest extends AbstractGeneratorTest {
 		EObject firstModel = ((List<EObject>) parsedModel.eGet(modelFeature)).get(0);
 		String id = (String) firstModel.eGet(idFeature);
 		assertNotNull(id);
-		assertEquals("a.b.c.d", id);
+		assertEquals("a . b . c . d", id);
+		assertFalse(firstModel.eIsSet(valueFeature));
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void testParseSimpleWithMultipleSpaces() throws Exception {
+		String model = "  a  .  b  .  c  .  d  ;";
+		EObject parsedModel = getModel(model);
+		assertNotNull(parsedModel);
+		EObject firstModel = ((List<EObject>) parsedModel.eGet(modelFeature)).get(0);
+		String id = (String) firstModel.eGet(idFeature);
+		assertNotNull(id);
+		assertEquals("a . b . c . d", id);
 		assertFalse(firstModel.eIsSet(valueFeature));
 	}
 	
@@ -119,6 +135,78 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertEquals(model.length() - 1, diag.getOffset());
 		assertEquals(1, diag.getLength());
 	}
+	
+	@SuppressWarnings("unchecked")
+	public void testParseWithVector() throws Exception {
+		String model = "a.b.c.d # (1 2);";
+		EObject parsedModel = getModel(model);
+		assertNotNull(parsedModel);
+		EObject firstModel = ((List<EObject>) parsedModel.eGet(modelFeature)).get(0);
+		assertTrue(firstModel.eIsSet(vectorFeature));
+		String vector = (String) firstModel.eGet(vectorFeature);
+		assertNotNull(vector);
+		assertEquals("(1 2)", vector);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void testParseWithVectorAndComment() throws Exception {
+		String model = "a.b.c.d # (1/*comment*/2);";
+		EObject parsedModel = getModel(model);
+		assertNotNull(parsedModel);
+		EObject firstModel = ((List<EObject>) parsedModel.eGet(modelFeature)).get(0);
+		assertTrue(firstModel.eIsSet(vectorFeature));
+		String vector = (String) firstModel.eGet(vectorFeature);
+		assertNotNull(vector);
+		assertEquals("(1 2)", vector);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void testParseWithDots() throws Exception {
+		String model = "a.b.c.d + . .;";
+		EObject parsedModel = getModel(model);
+		assertNotNull(parsedModel);
+		EObject firstModel = ((List<EObject>) parsedModel.eGet(modelFeature)).get(0);
+		assertTrue(firstModel.eIsSet(dotsFeature));
+		String vector = (String) firstModel.eGet(dotsFeature);
+		assertNotNull(vector);
+		assertEquals(". .", vector);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void testParseWithDotsAndLinebreak() throws Exception {
+		String model = "a.b.c.d + .\n.;";
+		EObject parsedModel = getModel(model);
+		assertNotNull(parsedModel);
+		EObject firstModel = ((List<EObject>) parsedModel.eGet(modelFeature)).get(0);
+		assertTrue(firstModel.eIsSet(dotsFeature));
+		String vector = (String) firstModel.eGet(dotsFeature);
+		assertNotNull(vector);
+		assertEquals(". .", vector);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void testParseWithDotsAndComments() throws Exception {
+		String model = "a.b.c.d + ./*comment*/.;";
+		EObject parsedModel = getModel(model);
+		assertNotNull(parsedModel);
+		EObject firstModel = ((List<EObject>) parsedModel.eGet(modelFeature)).get(0);
+		assertTrue(firstModel.eIsSet(dotsFeature));
+		String vector = (String) firstModel.eGet(dotsFeature);
+		assertNotNull(vector);
+		assertEquals(". .", vector);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void testParseWithDoubleDots() throws Exception {
+		String model = "a.b.c.d + ..;";
+		EObject parsedModel = getModel(model);
+		assertNotNull(parsedModel);
+		EObject firstModel = ((List<EObject>) parsedModel.eGet(modelFeature)).get(0);
+		assertTrue(firstModel.eIsSet(dotsFeature));
+		String vector = (String) firstModel.eGet(dotsFeature);
+		assertNotNull(vector);
+		assertEquals("..", vector);
+	}
 
 	@SuppressWarnings("unchecked")
 	public void testParseErrors_01() throws Exception {
@@ -145,7 +233,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertNotNull(firstModel);
 		String id = (String) firstModel.eGet(idFeature);
 		assertNotNull(id);
-		assertEquals("a.b.", id);
+		assertEquals("a.b.c.", id);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -159,7 +247,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertNotNull(firstModel);
 		String id = (String) firstModel.eGet(idFeature);
 		assertNotNull(id);
-		assertEquals("a.b.c.;", id);
+		assertEquals("a.b.c. ;", id);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -173,7 +261,7 @@ public class ParserTest extends AbstractGeneratorTest {
 		assertNotNull(firstModel);
 		String id = (String) firstModel.eGet(idFeature);
 		assertNotNull(id);
-		assertEquals("a.b.", id);
+		assertEquals("a.b.c", id);
 	}
 
 }

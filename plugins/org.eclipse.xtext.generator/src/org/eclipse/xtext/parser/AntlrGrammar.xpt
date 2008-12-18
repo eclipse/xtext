@@ -47,7 +47,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.DatatypeRuleToken;
 import org.eclipse.xtext.parser.antlr.ValueConverterException;
+
 }
 
 @parser::members {
@@ -108,14 +110,14 @@ import org.eclipse.xtext.parser.antlr.ValueConverterException;
 «entryRuleName()» returns [String current=null] :
 	{ currentNode = «EXPAND createCompositeNode» } 
 	 iv_«ruleName()»=«ruleName()» 
-	 { $current=$iv_«ruleName()».current; }  
+	 { $current=$iv_«ruleName()».current.getText(); }  
 	 EOF 
 ;
 
 // Rule «name»
-«ruleName()» returns [String current=null] 
-    @init { StringBuilder buffer=new StringBuilder(20); setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); current = buffer.length() > 0 ? buffer.toString() : null; }:
+«ruleName()» returns [DatatypeRuleToken current=new DatatypeRuleToken()] 
+    @init { setCurrentLookahead(); resetLookahead(); }
+    @after { resetLookahead(); }:
    «EXPAND dataTypeEbnf FOR this.alternatives»
     ;
 «ENDIF»
@@ -140,9 +142,10 @@ import org.eclipse.xtext.parser.antlr.ValueConverterException;
 
 «DEFINE dataTypeEbnf2 FOR Group»«EXPAND dataTypeEbnf FOREACH abstractTokens»«ENDDEFINE»
 
-«DEFINE dataTypeEbnf2 FOR Keyword»'«value»' 
+«DEFINE dataTypeEbnf2 FOR Keyword»
+	kw='«value»' 
     {
-        buffer.append(«toStringLiteral()»);
+        $current.merge(kw);
         «EXPAND createLeafNode» 
     }
 «ENDDEFINE»
@@ -155,11 +158,7 @@ import org.eclipse.xtext.parser.antlr.ValueConverterException;
 «ENDIF-»
     «localVar()»=«rule.ruleName()-»
     {
-«IF ParserRule.isInstance(rule)»
-		if ($«localVar()».current != null) buffer.append($«localVar()».current);
-«ELSE»
-		buffer.append($«localVar()».text);
-«ENDIF»
+		$current.merge(«localVar()»);
     }
 «IF ParserRule.isInstance(rule) && !isAssigned()»
     { 
