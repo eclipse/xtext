@@ -25,6 +25,8 @@ import org.eclipse.xtext.diagnostics.AbstractDiagnosticProducerDecorator;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
+import org.eclipse.xtext.parsetree.NodeAdapter;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.metamodel.TransformationDiagnosticsProducer;
 import org.eclipse.xtext.resource.metamodel.Xtext2EcoreTransformer;
 import org.eclipse.xtext.service.Inject;
@@ -39,6 +41,14 @@ public class XtextLinker extends Linker {
 	@Inject
 	private IScopeProvider scopeProvider;
 	
+	public IScopeProvider getScopeProvider() {
+		return scopeProvider;
+	}
+
+	public void setScopeProvider(IScopeProvider scopeProvider) {
+		this.scopeProvider = scopeProvider;
+	}
+
 	@Override
 	protected IDiagnosticProducer createDiagnosticProducer(final IDiagnosticConsumer consumer) {
 		return new AbstractDiagnosticProducerDecorator(super.createDiagnosticProducer(consumer)) {
@@ -83,16 +93,21 @@ public class XtextLinker extends Linker {
 		} else
 			super.beforeEnsureIsLinked(obj, ref, producer);
 	}
+	
+	protected Xtext2EcoreTransformer createTransformer(Grammar grammar, IDiagnosticConsumer consumer) {
+		final Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(grammar);
+		transformer.setErrorAcceptor(new TransformationDiagnosticsProducer(consumer));
+		return transformer;
+	}
 
 	@Override
 	public void linkModel(EObject model, IDiagnosticConsumer consumer) {
+		final Xtext2EcoreTransformer transformer = createTransformer((Grammar) model, consumer);
+		transformer.removeGeneratedPackages();
 		super.linkModel(model, consumer);
 		if (!consumer.hasConsumedDiagnostics() && model.eResource().getErrors().isEmpty()) {
-			Grammar grammar = (Grammar) model;
-			Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer();
-			transformer.setErrorAcceptor(new TransformationDiagnosticsProducer(consumer));
 			try {
-				transformer.transform(grammar);
+				transformer.transform();
 			} catch(Exception e) {
 				log.error(e.getMessage(), e);
 				consumer.consume(new ExceptionDiagnostic(e));
@@ -100,7 +115,18 @@ public class XtextLinker extends Linker {
 		}
 	}
 	
+	/**
+	 * We add typeRefs without Nodes on the fly, so we should remove them before
+	 * relinking.
+	 */
+	@Override
+	protected void clearReference(EObject obj, EReference ref) {
+		super.clearReference(obj, ref);
+		if (obj.eIsSet(ref) && ref.getEType().equals(XtextPackage.Literals.TYPE_REF)) {
+			NodeAdapter adapter = NodeUtil.getNodeAdapter((EObject) obj.eGet(ref));
+			if (adapter == null || adapter.getParserNode() == null)
+				obj.eUnset(ref);
+		}
+	}
 	
-	
-
 }

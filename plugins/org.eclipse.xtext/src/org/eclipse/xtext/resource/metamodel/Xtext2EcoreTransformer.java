@@ -70,6 +70,11 @@ public class Xtext2EcoreTransformer {
 	private EClassifierInfos eClassifierInfos;
 	private ErrorAcceptor errorAcceptor = new NullErrorAcceptor();
 
+	public Xtext2EcoreTransformer(Grammar grammar) {
+		this.grammar = grammar;
+		superGrammar = GrammarUtil.getSuperGrammar(grammar);
+	}
+
 	public ErrorAcceptor getErrorAcceptor() {
 		return errorAcceptor;
 	}
@@ -85,14 +90,14 @@ public class Xtext2EcoreTransformer {
 	}
 
 	public static void doTransform(Grammar grammar) {
-		new Xtext2EcoreTransformer().transform(grammar);
+		new Xtext2EcoreTransformer(grammar).transform();
 	}
 
 	public static List<EPackage> doGetGeneratedPackages(final Grammar grammar) {
-		return new Xtext2EcoreTransformer().getGeneratedPackages(grammar);
+		return new Xtext2EcoreTransformer(grammar).getGeneratedPackages();
 	}
 
-	public List<EPackage> getGeneratedPackages(final Grammar grammar) {
+	public List<EPackage> getGeneratedPackages() {
 		final List<EPackage> result = new ArrayList<EPackage>();
 		final ResourceSet resourceSet = grammar.eResource().getResourceSet();
 		if (resourceSet == null)
@@ -111,12 +116,9 @@ public class Xtext2EcoreTransformer {
 	/*
 	 * pre-conditions - ensure non-duplicate aliases - ensure all aliases have matching metamodel declarations
 	 */
-	public void transform(Grammar grammar) {
-		this.grammar = grammar;
-		removeGeneratedPackages();
+	public void transform() {
 		eClassifierInfos = new EClassifierInfos();
 		generatedEPackages = new HashMap<String, EPackage>();
-		superGrammar = GrammarUtil.getSuperGrammar(grammar);
 
 		if (superGrammar != null)
 			collectEClassInfosOfSuperGrammar();
@@ -131,15 +133,20 @@ public class Xtext2EcoreTransformer {
 		normalizeAndValidateGeneratedPackages();
 	}
 
-	private void removeGeneratedPackages() {
+	public void removeGeneratedPackages() {
+		if (superGrammar != null) {
+			final Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(superGrammar);
+			transformer.removeGeneratedPackages();
+		}
+		
 		final ResourceSet resourceSet = grammar.eResource().getResourceSet();
 		final Iterator<Resource> resourceIter = resourceSet.getResources().iterator();
-		final Collection<EPackage> packages = getGeneratedPackages(grammar);
+		final Collection<EPackage> packages = getGeneratedPackages();
 		// TODO check against grammar
 		while (resourceIter.hasNext()) {
 			Resource r = resourceIter.next();
 			CONTENT: for (EObject content : r.getContents()) {
-				if (content instanceof EPackage && packages.contains(content)) {
+				if (content instanceof EPackage && packages.contains(content) || generatedEPackages != null && generatedEPackages.containsValue(content)) {
 					resourceIter.remove();
 					break CONTENT;
 				}
@@ -209,8 +216,8 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private void collectEClassInfosOfSuperGrammar() {
-		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer();
-		transformer.transform(superGrammar);
+		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(superGrammar);
+		transformer.transform();
 		this.getEClassifierInfos().setParent(transformer.getEClassifierInfos());
 	}
 

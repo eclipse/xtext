@@ -47,8 +47,6 @@ public class DeclaredMetamodelAccessFactory extends XtextSwitch<IDeclaredMetamod
 				}
 			}
 		}
-		if (EPackage.Registry.INSTANCE.containsKey(object.getNsURI()))
-			return new PackageBasedMetamodelAccess(EPackage.Registry.INSTANCE.getEPackage(object.getNsURI()));
 		return NullMetamodelAccess.INSTANCE;
 	}
 

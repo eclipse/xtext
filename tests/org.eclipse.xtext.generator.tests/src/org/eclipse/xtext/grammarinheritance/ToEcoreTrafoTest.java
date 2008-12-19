@@ -45,7 +45,6 @@ public class ToEcoreTrafoTest extends AbstractGeneratorTest {
 			logger.debug(lexerRule.getName());
 		}
 
-		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer();
 		List<EPackage> list = Xtext2EcoreTransformer.doGetGeneratedPackages(element);
 		assertNotNull(list);
 		assertEquals(0, list.size());

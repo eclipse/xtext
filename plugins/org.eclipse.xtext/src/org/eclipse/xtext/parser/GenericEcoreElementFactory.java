@@ -19,10 +19,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
+import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.parser.antlr.DatatypeRuleToken;
 import org.eclipse.xtext.parser.antlr.ValueConverterException;
@@ -109,16 +111,25 @@ public class GenericEcoreElementFactory implements IAstFactory {
 		}
 	}
 
-	protected EPackage getEPackage(AbstractMetamodelDeclaration metaModelDecl) {
-		AbstractMetamodelDeclaration decl = metaModelDecl == null ? 
-				GrammarUtil.findDefaultMetaModel(grammarAccess.getGrammar(), true) : metaModelDecl;
-		if (decl == null) {
-			String languageId = GrammarUtil.getLanguageId(grammarAccess.getGrammar());
-			throw new IllegalArgumentException("No EPackage without alias could be found for language "
-					+ languageId);
+	protected EPackage getEPackagePreferableFromRegistry(AbstractMetamodelDeclaration metaModelDecl) {
+		if (metaModelDecl == null)
+			throw new NullPointerException();
+		String nsURI = getNsURI(metaModelDecl);
+		if (EPackage.Registry.INSTANCE.containsKey(nsURI))
+			return EPackage.Registry.INSTANCE.getEPackage(nsURI);
+		
+		if (!(metaModelDecl instanceof GeneratedMetamodel)) {
+			IDeclaredMetamodelAccess access = DeclaredMetamodelAccessFactory.getAccessTo(metaModelDecl);
+			return access.getPackage();		
 		}
-		IDeclaredMetamodelAccess access = DeclaredMetamodelAccessFactory.getAccessTo(decl);
-		return access.getPackage();		
+		throw new NullPointerException("Cannot find package for declared model '" + metaModelDecl.getAlias() + "'");
+	}
+	
+	protected String getNsURI(AbstractMetamodelDeclaration metaModelDecl) {
+		if (metaModelDecl instanceof GeneratedMetamodel)
+			return ((GeneratedMetamodel) metaModelDecl).getNsURI();
+		else
+			return ((ReferencedMetamodel)metaModelDecl).getUri();
 	}
 
 	public EClass getEClass(String fullTypeName) {
@@ -138,7 +149,7 @@ public class GenericEcoreElementFactory implements IAstFactory {
 		EClassifier result = null;
 		for (AbstractMetamodelDeclaration decl : declarations) {
 			if (Strings.isEmpty(alias) || GrammarUtil.isSameAlias(decl.getAlias(), alias)) {
-				EPackage pack = getEPackage(decl);
+				EPackage pack = getEPackagePreferableFromRegistry(decl);
 				if (pack != null) {
 					EClassifier candidate = pack.getEClassifier(type);
 					if (candidate != null) {

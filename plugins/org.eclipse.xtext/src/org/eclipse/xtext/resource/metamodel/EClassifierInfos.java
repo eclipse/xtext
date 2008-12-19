@@ -86,15 +86,16 @@ public class EClassifierInfos {
 
 	public EClassifierInfo getInfo(EClassifier eClassifier) {
 		for (EClassifierInfo info : infoMap.values())
-			if (info.getEClassifier().getName().equals(eClassifier.getName()))
+			if (info.getEClassifier().equals(eClassifier))
 				return info;
 		throw new NullPointerException("cannot find type info for classifier '" + eClassifier.getName() + "'");
 	}
 
 	public EClassifierInfo getInfoOrNull(EClassifier eClassifier) {
-		for (EClassifierInfo info : infoMap.values())
-			if (info.getEClassifier().getName().equals(eClassifier.getName()))
+		for (EClassifierInfo info : infoMap.values()) {
+			if (info.getEClassifier().equals(eClassifier))
 				return info;
+		}
 		return null;
 	}
 	

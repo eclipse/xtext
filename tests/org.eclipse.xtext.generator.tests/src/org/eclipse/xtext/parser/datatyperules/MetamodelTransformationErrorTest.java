@@ -49,7 +49,7 @@ public class MetamodelTransformationErrorTest extends AbstractGeneratorTest {
 				"Failure2 returns ecore::EString: name=Start;";
 		resource = getResourceFromString(model);
 		grammar = (Grammar) resource.getContents().get(0);
-		transformer = new Xtext2EcoreTransformer();
+		transformer = new Xtext2EcoreTransformer(grammar);
 		errorAcceptor = EasyMock.createMock(ErrorAcceptor.class);
 		transformer.setErrorAcceptor(errorAcceptor);
 	}
@@ -69,8 +69,9 @@ public class MetamodelTransformationErrorTest extends AbstractGeneratorTest {
 	
 	private EPackage transform() throws Exception {
 		replay(errorAcceptor);
-		transformer.transform(grammar);
-		List<EPackage> metamodels = transformer.getGeneratedPackages(grammar);
+		transformer.removeGeneratedPackages();
+		transformer.transform();
+		List<EPackage> metamodels = transformer.getGeneratedPackages();
 		verify(errorAcceptor);
 		assertNotNull(metamodels);
 		assertEquals(1, metamodels.size());

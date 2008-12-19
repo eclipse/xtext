@@ -264,7 +264,7 @@ public class GrammarUtil {
 		if (nodeAdapter != null) {
 			final CompositeNode node = nodeAdapter.getParserNode();
 			final List<LeafNode> leafNodes = node.getLeafNodes();
-			for (int i = leafNodes.size() - 1; i >= 0; i++) {
+			for (int i = leafNodes.size() - 1; i >= 0; i--) {
 				final LeafNode leaf = leafNodes.get(i);
 				if (!leaf.isHidden())
 					return leaf.getText();

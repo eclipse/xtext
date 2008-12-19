@@ -4,7 +4,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="nameRefs" upperBound="-1" containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nameRefs" unique="false" upperBound="-1" containment="true">
       <eType xsi:type="ecore:EClass" href="./src-gen/org/eclipse/xtext/metamodelreferencing/tests/OtherTest.ecore#//FooBar"/>
     </eStructuralFeatures>
   </eClassifiers>
