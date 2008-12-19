@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xtext:Grammar xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
+  <idElements>org</idElements>
+  <idElements>eclipse</idElements>
+  <idElements>xtext</idElements>
+  <idElements>resource</idElements>
+  <idElements>metamodel</idElements>
+  <idElements>MultiValueFeatureTestLanguage</idElements>
+  <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="MultiValueFeatureTestLanguage" nsURI="http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage"/>
+  <rules xsi:type="xtext:ParserRule" name="Start">
+    <type metamodel="//@metamodelDeclarations.0">
+      <type xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage#//Start"/>
+    </type>
+    <alternatives xsi:type="xtext:Assignment" cardinality="+" feature="featureA" operator="+=">
+      <terminal xsi:type="xtext:RuleCall">
+        <rule href="classpath:/org/eclipse/xtext/builtin/XtextBuiltin.xmi#//@rules.0"/>
+      </terminal>
+    </alternatives>
+  </rules>
+</xtext:Grammar>

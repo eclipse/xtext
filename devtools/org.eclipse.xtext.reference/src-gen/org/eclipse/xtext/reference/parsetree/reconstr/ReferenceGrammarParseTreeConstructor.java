@@ -25,17 +25,34 @@ public class ReferenceGrammarParseTreeConstructor extends AbstractParseTreeConst
 	protected Solution internalSerialize(EObject obj) {
 		IInstanceDescription inst = getDescr(obj);
 		Solution s;
+
 		if(inst.isInstanceOf("Spielplatz") && (s = new Spielplatz_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Person") && (s = new Person_Alternatives(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Kind") && (s = new Kind_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Erwachsener") && (s = new Erwachsener_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Spielzeug") && (s = new Spielzeug_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Familie") && (s = new Familie_Group(inst, null).firstSolution()) != null) return s;
+
+
 		if(inst.isInstanceOf("Farbe") && (s = new Farbe_Assignment_wert(inst, null).firstSolution()) != null) return s;
-		if(inst.isInstanceOf("ReferenceModel::CustomType") && (s = new CustomTypeParserRule_Group(inst, null).firstSolution()) != null) return s;
+
+
+		if(inst.isInstanceOf("CustomType") && (s = new CustomTypeParserRule_Group(inst, null).firstSolution()) != null) return s;
+
 		return null;
 	}
 	
+
 /************ begin Rule Spielplatz ****************
  *
  * Spielplatz : ( 'spielplatz' groesse = INT ( beschreibung = STRING ) ? '{' ( kinder += Kind | erzieher += Erwachsener | spielzeuge += Spielzeug | familie += Familie | types += CustomTypeParserRule ) * '}' ) ? ;
@@ -354,6 +371,7 @@ protected class Spielplatz_0_1_0_0_0_0_Assignment_kinder extends AssignmentToken
 	protected Solution createSolution() {
 		if((value = current.getConsumable("kinder",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("kinder");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Kind")) {
@@ -364,6 +382,7 @@ protected class Spielplatz_0_1_0_0_0_0_Assignment_kinder extends AssignmentToken
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -382,6 +401,7 @@ protected class Spielplatz_0_1_0_0_0_1_Assignment_erzieher extends AssignmentTok
 	protected Solution createSolution() {
 		if((value = current.getConsumable("erzieher",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("erzieher");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Erwachsener")) {
@@ -392,6 +412,7 @@ protected class Spielplatz_0_1_0_0_0_1_Assignment_erzieher extends AssignmentTok
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -411,6 +432,7 @@ protected class Spielplatz_0_1_0_0_1_Assignment_spielzeuge extends AssignmentTok
 	protected Solution createSolution() {
 		if((value = current.getConsumable("spielzeuge",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spielzeuge");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Spielzeug")) {
@@ -421,6 +443,7 @@ protected class Spielplatz_0_1_0_0_1_Assignment_spielzeuge extends AssignmentTok
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -440,6 +463,7 @@ protected class Spielplatz_0_1_0_1_Assignment_familie extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("familie",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("familie");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Familie")) {
@@ -450,6 +474,7 @@ protected class Spielplatz_0_1_0_1_Assignment_familie extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -469,9 +494,10 @@ protected class Spielplatz_0_1_1_Assignment_types extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("types",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("types");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf("ReferenceModel::CustomType")) {
+			if(param.isInstanceOf("CustomType")) {
 				Solution s = new CustomTypeParserRule_Group(param, this).firstSolution();
 				if(s != null) {
 					type = AssignmentType.PRC; 
@@ -479,6 +505,7 @@ protected class Spielplatz_0_1_1_Assignment_types extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -499,6 +526,7 @@ protected class Spielplatz_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule Spielplatz ****************/
+
 
 /************ begin Rule Person ****************
  *
@@ -566,6 +594,7 @@ protected class Person_1_RuleCall_Erwachsener extends RuleCallToken {
 
 
 /************ end Rule Person ****************/
+
 
 /************ begin Rule Kind ****************
  *
@@ -774,6 +803,7 @@ protected class Kind_1_Keyword extends KeywordToken  {
 
 /************ end Rule Kind ****************/
 
+
 /************ begin Rule Erwachsener ****************
  *
  * Erwachsener : 'erwachsener' '(' name = ID age = INT ')' ;
@@ -981,6 +1011,7 @@ protected class Erwachsener_1_Keyword extends KeywordToken  {
 
 /************ end Rule Erwachsener ****************/
 
+
 /************ begin Rule Spielzeug ****************
  *
  * Spielzeug : 'spielzeug' '(' name = ID farbe = Farbe ')' ;
@@ -1163,6 +1194,7 @@ protected class Spielzeug_0_1_Assignment_farbe extends AssignmentToken  {
 	protected Solution createSolution() {
 		if((value = current.getConsumable("farbe",IS_REQUIRED)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("farbe");
+
 		if(value instanceof EObject) { // xtext::RuleCall
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf("Farbe")) {
@@ -1173,6 +1205,7 @@ protected class Spielzeug_0_1_Assignment_farbe extends AssignmentToken  {
 				} 
 			}
 		}
+
 		return null;
 	}
 }
@@ -1192,6 +1225,7 @@ protected class Spielzeug_1_Keyword extends KeywordToken  {
 
 
 /************ end Rule Spielzeug ****************/
+
 
 /************ begin Rule Familie ****************
  *
@@ -1619,6 +1653,7 @@ protected class Familie_1_Keyword extends KeywordToken  {
 
 /************ end Rule Familie ****************/
 
+
 /************ begin Rule Farbe ****************
  *
  * Farbe : wert = ( 'ROT' | 'BLAU' | 'GELB' | 'GRÜN' ) ;
@@ -1665,6 +1700,7 @@ protected class Farbe_Assignment_wert extends AssignmentToken  {
 }
 
 /************ end Rule Farbe ****************/
+
 
 /************ begin Rule CustomTypeParserRule ****************
  *

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="TestLang" nsURI="http://www.eclipse.org/2008/xtext/TestLang" nsPrefix="TestLang">
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="multiFeature" upperBound="-1" eType="//AbstractElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="multiFeature" unique="false" upperBound="-1" eType="//AbstractElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="ChoiceElement" eSuperTypes="//AbstractElement">
@@ -19,6 +19,6 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReducibleComposite" eSuperTypes="//ReducibleElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actionFeature" upperBound="-1" eType="//TerminalElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actionFeature" unique="false" upperBound="-1" eType="//TerminalElement" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

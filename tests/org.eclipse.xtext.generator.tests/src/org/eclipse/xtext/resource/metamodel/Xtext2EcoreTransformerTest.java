@@ -13,25 +13,36 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.same;
 import static org.easymock.EasyMock.verify;
 
+import java.io.InputStream;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.crossref.internal.Linker;
+import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.EmfFormater;
+import org.eclipse.xtext.xtext.XtextLinker;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -40,13 +51,28 @@ import org.eclipse.xtext.util.EmfFormater;
  */
 public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	private static final Logger logger = Logger.getLogger(Xtext2EcoreTransformerTest.class);
-	private Xtext2EcoreTransformer xtext2EcoreTransformer;
 	private ErrorAcceptor errorAcceptorMock;
 
+	public static class MyErrorAcceptor implements ErrorAcceptor {
+
+		private final ErrorAcceptor first;
+		private final ErrorAcceptor second;
+
+		public MyErrorAcceptor(ErrorAcceptor first, ErrorAcceptor second) {
+			this.first = first;
+			this.second = second;
+		}
+		
+		public void acceptError(TransformationErrorCode errorCode, String message, EObject element) {
+			first.acceptError(errorCode, message, element);
+			second.acceptError(errorCode, message, element);
+		}
+		
+	}
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		xtext2EcoreTransformer = new Xtext2EcoreTransformer();
 		errorAcceptorMock = createMock(ErrorAcceptor.class);
 		with(XtextStandaloneSetup.class);
 	}
@@ -59,15 +85,39 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertNotNull(result);
 		return result;
 	}
+	
+	protected XtextResource getResource(InputStream in) throws Exception {
+		ResourceSet rs = new XtextResourceSet();
+		XtextResource resource = (XtextResource) rs.createResource(URI.createURI("mytestmodel."+getResourceFactory().getModelFileExtensions()[0]));
+		XtextLinker linker = new XtextLinker() {
+			@Override
+			protected Xtext2EcoreTransformer createTransformer(Grammar grammar, IDiagnosticConsumer consumer) {
+				Xtext2EcoreTransformer result = super.createTransformer(grammar, consumer);
+				result.setErrorAcceptor(new MyErrorAcceptor(result.getErrorAcceptor(), errorAcceptorMock));
+				return result;
+			}
+		};
+		linker.setScopeProvider(((XtextLinker) resource.getLinker()).getScopeProvider());
+		linker.setLinkingService(((Linker) resource.getLinker()).getLinkingService());
+		resource.setLinker(linker);
+		resource.load(in, null);
+		
+		for(Diagnostic d: resource.getErrors())
+			System.out.println("Resource Error: "+d);
+		
+		for(Diagnostic d: resource.getWarnings())
+			System.out.println("Resource Warning: "+d);
+		
+		return resource;
+	}
 
 	private List<EPackage> getEPackagesFromGrammar(String xtextGrammar) throws Exception {
-		Grammar grammar = (Grammar) getModel(xtextGrammar);
 		replay(errorAcceptorMock);
-		xtext2EcoreTransformer.setErrorAcceptor(errorAcceptorMock);
-		xtext2EcoreTransformer.transform(grammar);
-		List<EPackage> metamodels = xtext2EcoreTransformer.getGeneratedPackages(grammar);
+		Grammar grammar = (Grammar) getModel(xtextGrammar);
 		verify(errorAcceptorMock);
-
+//		xtext2EcoreTransformer.setErrorAcceptor(errorAcceptorMock);
+//		xtext2EcoreTransformer.transform(grammar);
+		List<EPackage> metamodels = Xtext2EcoreTransformer.doGetGeneratedPackages(grammar);
 		assertNotNull(metamodels);
 		return metamodels;
 	}
@@ -106,8 +156,9 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	public void testTypesOfImplicitSuperGrammar() throws Exception {
 		final String xtextGrammar = "language test generate test 'http://test' MyRule: myFeature=INT;";
 		Grammar grammar = (Grammar) getModel(xtextGrammar);
-		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer();
-		transformer.transform(grammar);
+		Xtext2EcoreTransformer transformer = new Xtext2EcoreTransformer(grammar);
+		transformer.removeGeneratedPackages();
+		transformer.transform();
 		// directly from grammar
 		AbstractRule rule = grammar.getRules().get(0);
 		TypeRef type = rule.getType();
@@ -513,9 +564,9 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		grammar += " RuleA: featureA=ID;"; // no alias => cannot be created
 		grammar += " RuleB returns target::TypeB: featureB=ID;";
 
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.AliasForMetamodelAlreadyExists), (String) anyObject(),	(EObject) anyObject());
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
+//		errorAcceptorMock.acceptError(same(TransformationErrorCode.AliasForMetamodelAlreadyExists), (String) anyObject(),	(EObject) anyObject());
+//		errorAcceptorMock.acceptError(same(TransformationErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
+//		errorAcceptorMock.acceptError(same(TransformationErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
 
 		List<EPackage> ePackages = getEPackagesFromGrammar(grammar);
 		assertEquals(0, ePackages.size());
@@ -523,8 +574,9 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 
 	public void testModifyingSealedModel() throws Exception {
 		final String grammar = "language test generate test 'http://test' import 'http://www.eclipse.org/emf/2002/Ecore' as ecore RuleA returns ecore::SomeNewTypeA: feature=ID;";
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.CannotCreateTypeInSealedMetamodel), (String) anyObject(), (EObject) anyObject());
-		getEPackageFromGrammar(grammar);
+//		errorAcceptorMock.acceptError(same(TransformationErrorCode.CannotCreateTypeInSealedMetamodel), (String) anyObject(), (EObject) anyObject());
+		List<EPackage> result = getEPackagesFromGrammar(grammar);
+		assertTrue(result.isEmpty());
 	}
 
 	public void testImportingUnknownModel() throws Exception {
@@ -652,15 +704,8 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	public void testCallOfUndeclaredRule() throws Exception {
 		String grammar = "language test generate test 'http://test'";
 		grammar += " RuleA: CallOfUndeclaredRule featureA=ID;";
-		
-		errorAcceptorMock.acceptError(same(TransformationErrorCode.NoSuchRuleAvailable), (String) anyObject(),
-				(EObject) anyObject());
-
-		EPackage ePackage = getEPackageFromGrammar(grammar);
-		assertEquals(1, ePackage.getEClassifiers().size());
-		EClass ruleA = (EClass) ePackage.getEClassifier("RuleA");
-		assertNotNull(ruleA);
-		assertTrue(ruleA.getEAttributes().isEmpty());
+		List<EPackage> ePackages = getEPackagesFromGrammar(grammar);
+		assertTrue(ePackages.isEmpty());
 	}
 	
 	public void testCycleInTypeHierarchy() throws Exception {
@@ -699,10 +744,23 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		String grammar = "language test generate test 'http://test'";
 		grammar += " Ex :	Atom  ({ChainExpression.left+=current} operator=('+'|'-'|'*'|'/') right=Atom )*;" +
 				"Atom returns Ex :   Number |  '(' Ex ')';" +
-				"Number : value=INT";
+				"Number : value=INT;";
 		EPackage ePackage = getEPackageFromGrammar(grammar);
 		EClass classifier = (EClass) ePackage.getEClassifier("Ex");
 		logger.debug(EmfFormater.objToStr(ePackage, ""));
 		assertEquals(0,classifier.getEStructuralFeatures().size());
+	}
+	
+	public void testClassNameEString() throws Exception {
+		String grammar = "language test generate test 'http://test'";
+		grammar += "Start returns EString: id=ID;";
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		EClass classifier = (EClass) ePackage.getEClassifier("EString");
+		assertEquals("EString", classifier.getName());
+		EStructuralFeature feature = classifier.getEStructuralFeature("id");
+		assertNotNull(feature);
+		assertEquals("EString", feature.getEType().getName());
+		assertFalse(feature.getEType().equals(classifier));
+		assertEquals(EcorePackage.Literals.ESTRING, feature.getEType());
 	}
 }
