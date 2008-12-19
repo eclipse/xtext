@@ -25,6 +25,7 @@ import org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage;
 import org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage;
 import org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.metamodel.MultiValueFeatureTestLanguage;
 import org.eclipse.xtext.testlanguages.ActionTestLanguage;
 import org.eclipse.xtext.testlanguages.ContentAssistTestLanguage;
 import org.eclipse.xtext.testlanguages.FowlerDslTestLanguage;
@@ -72,7 +73,8 @@ public class GenerateAllTestGrammars {
 			ContentAssistTestLanguage.class, 
 			TransientValuesTest.class,
 			FormatterTestLanguage.class,
-			DatatypeRulesTestLanguage.class
+			DatatypeRulesTestLanguage.class,
+			MultiValueFeatureTestLanguage.class
 			};
 
 	public static void main(String[] args) throws Exception {

@@ -111,11 +111,11 @@ public class XtextResourceTest extends AbstractGeneratorTest {
 	}
 	
 	public void testErrorMarkers() throws Exception {
-		String model = "spielplatz 1 {kind(B 1) erwachsener(E 1) familie(F E E B, B)}";
+		String model = "spielplatz 1 {kind(B 1) erwachsener(E 1) familie(F E E B, C)}";
 		resource.update(0, 0, model);
 		assertEquals(1, resource.getErrors().size());
 		XtextLinkingDiagnostic diag = (XtextLinkingDiagnostic) resource.getErrors().get(0);
-		assertEquals(model.indexOf("B)"), diag.getOffset());
+		assertEquals(model.indexOf("C)"), diag.getOffset());
 		assertEquals(1, diag.getLength());
 	}
 	

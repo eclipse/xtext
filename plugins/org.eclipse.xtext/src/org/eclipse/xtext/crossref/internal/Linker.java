@@ -46,7 +46,6 @@ public class Linker implements ILinker {
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
 		if (nodeAdapter == null)
 			return;
-		clearReferences(obj);
 		final CompositeNode node = nodeAdapter.getParserNode();
 		
 		EList<AbstractNode> children = node.getChildren();
@@ -66,10 +65,14 @@ public class Linker implements ILinker {
 		return new LinkingDiagnosticProducer(consumer);
 	}
 
-	private void clearReferences(EObject obj) {
+	protected void clearReferences(EObject obj) {
 		for(EReference ref: obj.eClass().getEAllReferences())
-			if (!ref.isContainment() && !ref.isContainer())
-				obj.eUnset(ref);
+			clearReference(obj, ref);
+	}
+	
+	protected void clearReference(EObject obj, EReference ref) {
+		if (!ref.isContainment() && !ref.isContainer())
+			obj.eUnset(ref);
 	}
 	
 	private void setDefaultValues(EObject obj, Set<EReference> references, IDiagnosticProducer producer) {
@@ -151,10 +154,17 @@ public class Linker implements ILinker {
 
 	public void linkModel(EObject model, IDiagnosticConsumer consumer) {
 		final IDiagnosticProducer producer = createDiagnosticProducer(consumer);
+		clearAllReferences(model);
 		ensureLinked(model, producer);
 		final Iterator<EObject> allContents = model.eAllContents();
 		while (allContents.hasNext())
 			ensureLinked(allContents.next(), producer);
+	}
+	
+	private void clearAllReferences(EObject model) {
+		final Iterator<EObject> iter = model.eAllContents();
+		while (iter.hasNext())
+			clearReferences(iter.next());	
 	}
 	
 }

@@ -151,6 +151,7 @@ public abstract class EClassifierInfo {
 			newFeature.setEType(featureClassifier);
 			newFeature.setLowerBound(0);
 			newFeature.setUpperBound(isMultivalue ? -1 : 1);
+			newFeature.setUnique(!isMultivalue);
 			return newFeature;
 		}
 
