@@ -564,9 +564,9 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		grammar += " RuleA: featureA=ID;"; // no alias => cannot be created
 		grammar += " RuleB returns target::TypeB: featureB=ID;";
 
-//		errorAcceptorMock.acceptError(same(TransformationErrorCode.AliasForMetamodelAlreadyExists), (String) anyObject(),	(EObject) anyObject());
-//		errorAcceptorMock.acceptError(same(TransformationErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
-//		errorAcceptorMock.acceptError(same(TransformationErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
+		errorAcceptorMock.acceptError(same(TransformationErrorCode.AliasForMetamodelAlreadyExists), (String) anyObject(),	(EObject) anyObject());
+		errorAcceptorMock.acceptError(same(TransformationErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
+		errorAcceptorMock.acceptError(same(TransformationErrorCode.UnknownMetaModelAlias), (String) anyObject(), (EObject) anyObject());
 
 		List<EPackage> ePackages = getEPackagesFromGrammar(grammar);
 		assertEquals(0, ePackages.size());
@@ -574,9 +574,9 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 
 	public void testModifyingSealedModel() throws Exception {
 		final String grammar = "language test generate test 'http://test' import 'http://www.eclipse.org/emf/2002/Ecore' as ecore RuleA returns ecore::SomeNewTypeA: feature=ID;";
-//		errorAcceptorMock.acceptError(same(TransformationErrorCode.CannotCreateTypeInSealedMetamodel), (String) anyObject(), (EObject) anyObject());
-		List<EPackage> result = getEPackagesFromGrammar(grammar);
-		assertTrue(result.isEmpty());
+		errorAcceptorMock.acceptError(same(TransformationErrorCode.CannotCreateTypeInSealedMetamodel), (String) anyObject(), (EObject) anyObject());
+		EPackage result = getEPackageFromGrammar(grammar);
+		assertTrue(result.getEClassifiers().isEmpty());
 	}
 
 	public void testImportingUnknownModel() throws Exception {
@@ -704,8 +704,11 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	public void testCallOfUndeclaredRule() throws Exception {
 		String grammar = "language test generate test 'http://test'";
 		grammar += " RuleA: CallOfUndeclaredRule featureA=ID;";
-		List<EPackage> ePackages = getEPackagesFromGrammar(grammar);
-		assertTrue(ePackages.isEmpty());
+		errorAcceptorMock.acceptError(same(TransformationErrorCode.NoSuchRuleAvailable), (String) anyObject(),
+				(EObject) anyObject());
+		EPackage ePackage = getEPackageFromGrammar(grammar);
+		assertEquals(1, ePackage.getEClassifiers().size());
+		assertEquals("RuleA", ePackage.getEClassifiers().get(0).getName());
 	}
 	
 	public void testCycleInTypeHierarchy() throws Exception {

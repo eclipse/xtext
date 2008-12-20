@@ -73,7 +73,9 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 
 	@Override
 	public EClassifier caseRuleCall(RuleCall ruleCall) {
-		return doSwitch(ruleCall.getRule());
+		if (ruleCall.getRule() != null)
+			return doSwitch(ruleCall.getRule());
+		return null;
 	}
 
 	@Override

@@ -9,10 +9,13 @@ package org.eclipse.xtext.resource;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
+import org.eclipse.xtext.util.Pair;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,17 +23,23 @@ import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 public class ListBasedDiagnosticConsumer implements IDiagnosticConsumer {
 
 	private final List<Diagnostic> diagnostics;
+	
+	private final Set<Pair<Integer, Integer>> coveredNodes;
 
 	private boolean diagnosticsConsumed;
 	
 	public ListBasedDiagnosticConsumer() {
 		this.diagnostics = new ArrayList<Diagnostic>();
+		this.coveredNodes = new HashSet<Pair<Integer,Integer>>();
 		this.diagnosticsConsumed = false;
 	}
 	
 	public void consume(Diagnostic diagnostic) {
-		boolean changed = this.diagnostics.add(diagnostic);
-		diagnosticsConsumed |= changed;
+		final Pair<Integer, Integer> newRange = new Pair<Integer, Integer>(diagnostic.getOffset(), diagnostic.getLength());
+		if (coveredNodes.add(newRange)) {
+			boolean changed = this.diagnostics.add(diagnostic);
+			diagnosticsConsumed |= changed;
+		}
 	}
 
 	public boolean hasConsumedDiagnostics() {
