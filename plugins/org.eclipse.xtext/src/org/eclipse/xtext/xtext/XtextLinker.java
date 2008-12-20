@@ -105,13 +105,11 @@ public class XtextLinker extends Linker {
 		final Xtext2EcoreTransformer transformer = createTransformer((Grammar) model, consumer);
 		transformer.removeGeneratedPackages();
 		super.linkModel(model, consumer);
-		if (!consumer.hasConsumedDiagnostics() && model.eResource().getErrors().isEmpty()) {
-			try {
-				transformer.transform();
-			} catch(Exception e) {
-				log.error(e.getMessage(), e);
-				consumer.consume(new ExceptionDiagnostic(e));
-			}
+		try {
+			transformer.transform();
+		} catch(Exception e) {
+			log.error(e.getMessage(), e);
+			consumer.consume(new ExceptionDiagnostic(e));
 		}
 	}
 	

@@ -50,6 +50,8 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
+import org.eclipse.xtext.parsetree.NodeAdapter;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.Filter;
 import org.eclipse.xtext.util.Function;
 import org.eclipse.xtext.util.Strings;
@@ -316,7 +318,8 @@ public class Xtext2EcoreTransformer {
 			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "No type available for rule " +
 					rule.getName(), rule);
 		Xtext2ECoreInterpretationContext context = new Xtext2ECoreInterpretationContext(eClassifierInfos, classInfo);
-		deriveFeatures(context, rule.getAlternatives());
+		if (rule.getAlternatives() != null) // might happen due to syntax errors
+			deriveFeatures(context, rule.getAlternatives());
 	}
 
 	private TypeRef getOrComputeReturnType(AbstractRule rule) {
@@ -411,9 +414,16 @@ public class Xtext2EcoreTransformer {
 		if (element instanceof RuleCall) {
 			RuleCall ruleCall = (RuleCall) element;
 			AbstractRule calledRule = ruleCall.getRule();
-			if (calledRule == null) // TODO: use NodeAdapter to create error message 
-				throw new TransformationException(TransformationErrorCode.NoSuchRuleAvailable, "Cannot find rule " + ruleCall,
-						ruleCall);
+			if (calledRule == null) {
+				NodeAdapter adapter = NodeUtil.getNodeAdapter(ruleCall);
+				if (adapter != null)
+					throw new TransformationException(
+							TransformationErrorCode.NoSuchRuleAvailable, "Cannot find rule " + 
+							adapter.getParserNode().serialize().trim(), ruleCall);
+				else
+					throw new TransformationException(
+							TransformationErrorCode.NoSuchRuleAvailable, "Cannot find called rule.", ruleCall);
+			}
 			TypeRef calledRuleReturnTypeRef = getOrComputeReturnType(calledRule);
 			addSuperType(calledRuleReturnTypeRef, ruleReturnType);
 		}
@@ -604,6 +614,9 @@ public class Xtext2EcoreTransformer {
 			throw new TransformationException(TransformationErrorCode.AliasForMetamodelAlreadyExists, "alias '" + alias
 					+ "' already exists", generatedMetamodel);
 
+		if (generatedMetamodel.getNsURI() == null)
+			throw new TransformationException(TransformationErrorCode.UnknownMetaModelAlias, "Cannot create EPackage without NsURI.", generatedMetamodel);
+		
 		// instantiate EPackages for generated metamodel
 		EPackage generatedEPackage = EcoreFactory.eINSTANCE.createEPackage();
 		generatedEPackage.setName(generatedMetamodel.getName());

@@ -78,8 +78,12 @@ public class Xtext2ECoreInterpretationContext {
 			isMultivalue = false;
 		}
 		else {
-			EClassifier type = getTerminalType(assignment.getTerminal());
-			isContainment = !(assignment.getTerminal() instanceof CrossReference);
+			AbstractElement terminal = assignment.getTerminal();
+			if (terminal == null) {
+				throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot derive type from incomplete assignment.", assignment);
+			}
+			EClassifier type = getTerminalType(terminal);
+			isContainment = !(terminal instanceof CrossReference);
 			featureTypeInfo = getEClassifierInfoOrThrowException(type, assignment);
 		}
 

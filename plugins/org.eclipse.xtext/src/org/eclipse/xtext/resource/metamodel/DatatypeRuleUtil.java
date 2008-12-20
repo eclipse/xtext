@@ -65,7 +65,7 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 					return true;
 				}
 			}
-			return !visitedRules.add(object) || doSwitch(object.getAlternatives());
+			return !visitedRules.add(object) || (object.getAlternatives() != null && doSwitch(object.getAlternatives()));
 		}
 		
 	}
