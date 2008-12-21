@@ -49,4 +49,32 @@
             label="Task Tags">
         </keyword>
 	</extension>
+	<extension point="org.eclipse.ui.editors.templates">
+		<contextType name="templatesContextTypeEventsName"
+			class="org.eclipse.xtext.ui.common.editor.codecompletion.impl.XtextTemplateContextType"
+			id="org.eclipse.xtext.example.fowlerdsl.ui.templates.contextType.events">
+		</contextType>
+		<contextType name="templatesContextTypeActionsName"
+			class="org.eclipse.xtext.ui.common.editor.codecompletion.impl.XtextTemplateContextType"
+			id="org.eclipse.xtext.example.fowlerdsl.ui.templates.contextType.actions">
+		</contextType>
+		<contextType name="templatesContextTypeStateName"
+			class="org.eclipse.xtext.ui.common.editor.codecompletion.impl.XtextTemplateContextType"
+			id="org.eclipse.xtext.example.fowlerdsl.ui.templates.contextType.state">
+		</contextType>
+		<contextType name="templatesContextTypeEventName"
+			class="org.eclipse.xtext.ui.common.editor.codecompletion.impl.XtextTemplateContextType"
+			id="org.eclipse.xtext.example.fowlerdsl.ui.templates.contextType.Event">
+		</contextType>
+		<contextType name="templatesContextTypeCommandName"
+			class="org.eclipse.xtext.ui.common.editor.codecompletion.impl.XtextTemplateContextType"
+			id="org.eclipse.xtext.example.fowlerdsl.ui.templates.contextType.Command">
+		</contextType>
+		<contextType name="templatesContextTypeTransitionName"
+			class="org.eclipse.xtext.ui.common.editor.codecompletion.impl.XtextTemplateContextType"
+			id="org.eclipse.xtext.example.fowlerdsl.ui.templates.contextType.Transition">
+		</contextType>
+		<include file="templates/templates.xml" /> 
+	</extension>
+	
 </plugin>

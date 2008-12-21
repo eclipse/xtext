@@ -6,11 +6,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.codecompletion;
+package org.eclipse.xtext.ui.common.editor.codecompletion.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,8 +20,9 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.text.templates.TemplateContextType;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
@@ -28,12 +30,14 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext;
+import org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 
 /**
  * Represents a <b>Switch</b> for the Xtext model's inheritance hierarchy to
- * callback and invoke the completion methods of <code>IProposalProvider</code>
+ * callback and invoke the proposal completion methods of interface <code>IProposalProvider</code>
  * implementations to gather and collect <code>ICompletionProposal</code> to be
  * displayed for Content Assist.
  * 
@@ -47,39 +51,32 @@ import org.eclipse.xtext.util.XtextSwitch;
 public class ProposalProviderInvokerSwitch extends XtextSwitch<List<ICompletionProposal>> {
 
 	private List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
+	
+	private List<TemplateContextType> templateContextTypeList = new ArrayList<TemplateContextType>();
 
 	private final IProposalProvider proposalProvider;
 
-	private final IDocument document;
-
-	private final EObject model;
-
-	private final String prefix;
-
-	private int offset;
+	private IContentAssistContext contentAssistContext;
 
 	private static final Map<String, Method> methodLookupMap = new HashMap<String, Method>();
+	
+
+	/**
+	 * @return the templateContextTypeList
+	 */
+	public List<TemplateContextType> getTemplateContextTypeList() {
+		return templateContextTypeList;
+	}
 
 	/**
 	 * 
-	 * @param model the most specific model element under the cursor. 
-	 * @param document
-	 *            the document itself
-	 * @param offset
-	 *            the position in the offset from which CA was triggered
-	 * @param prefix
-	 *            the prefix normally consisting of the text content of the
-	 *            currentLeafNode
+	 * @param contentAssistContext the actual contentAssistContext
+	 *            
 	 * @param proposalProvider
 	 *            the proposalProvider to callback and invoke
 	 */
-	public ProposalProviderInvokerSwitch(EObject model, IDocument document, int offset, String prefix,
-			IProposalProvider proposalProvider) {
-		super();
-		this.model = model;
-		this.document = document;
-		this.offset = offset;
-		this.prefix = prefix;
+	public ProposalProviderInvokerSwitch(IContentAssistContext contentAssistContext, IProposalProvider proposalProvider) {
+		this.contentAssistContext = contentAssistContext;
 		this.proposalProvider = proposalProvider;
 	}
 
@@ -93,11 +90,11 @@ public class ProposalProviderInvokerSwitch extends XtextSwitch<List<ICompletionP
 	 *            <code>ICompletionProposal</code> for
 	 * @return a list of matching <code>ICompletionProposal</code>
 	 */
-	public List<ICompletionProposal> collectCompletionProposalList(List<EObject> elementList) {
+	public List<ICompletionProposal> collectCompletionProposalList(List<AbstractElement> elementList) {
 
 		completionProposalList = new ArrayList<ICompletionProposal>();
 
-		for (Iterator<EObject> elementOrRuleIterator = elementList.iterator(); elementOrRuleIterator.hasNext();) {
+		for (Iterator<AbstractElement> elementOrRuleIterator = elementList.iterator(); elementOrRuleIterator.hasNext();) {
 			EObject abstractElement = elementOrRuleIterator.next();
 			doSwitch(abstractElement);
 		}
@@ -106,38 +103,50 @@ public class ProposalProviderInvokerSwitch extends XtextSwitch<List<ICompletionP
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<ICompletionProposal> caseAssignment(Assignment assignment) {
+		
 		ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
 
-		Method method = findMethod(proposalProvider.getClass(), "complete"
-				+ firstLetterCapitalized(parserRule.getName()) + firstLetterCapitalized(assignment.getFeature()),
-				Assignment.class, model==null? EObject.class : model.getClass(), String.class, document.getClass(), int.class);
+		invokeProposalProvider(
+				"complete"+ firstLetterCapitalized(parserRule.getName()) + firstLetterCapitalized(assignment.getFeature()), 
+				Arrays.asList(Assignment.class, IContentAssistContext.class), 
+				Arrays.asList(assignment, this.contentAssistContext));
+		
+		return null;
+	}
 
-		Collection<? extends ICompletionProposal> assignmentProposalList = null == method ? null : invokeMethod(method,
-				proposalProvider, assignment, model, prefix, document, offset);
+	
+	
+	
+	@Override
+	public List<ICompletionProposal> caseKeyword(Keyword keyword) {
 
-		if (null != assignmentProposalList) {
-			completionProposalList.addAll(assignmentProposalList);
+		nullSafeAddAll(completionProposalList, proposalProvider.completeKeyword(keyword, this.contentAssistContext));
+
+		TemplateContextType contextType = this.proposalProvider.getTemplateContextType(keyword,
+				this.contentAssistContext);
+
+		if (null != contextType) {
+			this.templateContextTypeList.add(contextType);
 		}
 
 		return null;
 	}
 
-	@Override
-	public List<ICompletionProposal> caseKeyword(Keyword keyword) {
-		completionProposalList.addAll(proposalProvider.completeKeyword(keyword, model, prefix, document,offset));
-		return null;
-	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<ICompletionProposal> caseRuleCall(RuleCall ruleCall) {
-		
-		List<? extends ICompletionProposal> ruleCallProposalList = this.proposalProvider.completeRuleCall(ruleCall,
-				model, prefix, document, offset);
 
-		if (null != ruleCallProposalList) {
-			completionProposalList.addAll(ruleCallProposalList);
+		nullSafeAddAll(completionProposalList, this.proposalProvider.completeRuleCall(ruleCall,
+				this.contentAssistContext));
+
+		TemplateContextType contextType = this.proposalProvider.getTemplateContextType(ruleCall,
+				this.contentAssistContext);
+
+		if (null != contextType) {
+			this.templateContextTypeList.add(contextType);
 		}
 
 		AbstractRule calledRule = ruleCall.getRule();
@@ -146,19 +155,23 @@ public class ProposalProviderInvokerSwitch extends XtextSwitch<List<ICompletionP
 
 			TypeRef typeRef = calledRule.getType();
 
-			Method method = findMethod(proposalProvider.getClass(), "complete"
-					+ firstLetterCapitalized(typeRef.getMetamodel().getAlias()) + firstLetterCapitalized(typeRef.getType().getName()),
-					RuleCall.class, model==null? EObject.class : model.getClass(), String.class, document.getClass(), int.class);
-
-			Collection<? extends ICompletionProposal> proposalList = null == method ? null : invokeMethod(method,
-					proposalProvider, ruleCall, model, prefix, document, offset);
-
-			if (null != proposalList) {
-				completionProposalList.addAll(proposalList);
-			}
-
+			invokeProposalProvider(
+					"complete"+ firstLetterCapitalized(typeRef.getMetamodel().getAlias())+ firstLetterCapitalized(typeRef.getType().getName()), 
+					Arrays.asList(RuleCall.class, this.contentAssistContext.getModel() == null ? EObject.class : this.contentAssistContext.getModel().getClass(),IContentAssistContext.class), 
+					Arrays.asList(ruleCall, this.contentAssistContext.getModel(),this.contentAssistContext));
 		}
 		return null;
+	}
+
+	private void invokeProposalProvider(String methodName,List<Class<?>> parameterTypes,List<?> parameterValues) {
+		
+		Method method = findMethod(proposalProvider.getClass(),methodName,parameterTypes.toArray(new Class[]{}));
+
+		Collection<? extends ICompletionProposal> assignmentProposalList = null == method ? null : invokeMethod(method,
+				proposalProvider, parameterValues.toArray(new Object[]{}));
+
+		nullSafeAddAll(completionProposalList, assignmentProposalList);
+		
 	}
 
 	private final Method findMethod(Class<?> clazz, String name, Class<?>... paramTypes) {
@@ -256,6 +269,12 @@ public class ProposalProviderInvokerSwitch extends XtextSwitch<List<ICompletionP
 
 	private final String firstLetterCapitalized(String name) {
 		return Strings.toFirstUpper(name);
+	}
+
+	private void nullSafeAddAll(List<ICompletionProposal> source, Collection<? extends ICompletionProposal> list) {
+		if (null != list) {
+			source.addAll(list);
+		}
 	}
 
 }

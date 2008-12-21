@@ -1,234 +1,180 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.codecompletion;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.Assert;
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ContextInformationValidator;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
-import org.eclipse.swt.custom.StyledText;
+import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.crossref.ILinkingService;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.ParseTreeUtil;
-import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
+import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.ui.common.editor.codecompletion.impl.DefaultContentAssistContext;
+import org.eclipse.xtext.ui.common.editor.codecompletion.impl.DefaultTemplateContentAssistProcessor;
+import org.eclipse.xtext.ui.common.editor.codecompletion.impl.DefaultContentAssistCalculator;
+import org.eclipse.xtext.ui.common.editor.codecompletion.impl.ProposalProviderInvokerSwitch;
 
 /**
+ * The default implementation of interface {@link IContentAssistProcessor} provided with Xtext.
+ * 
  * @author Michael Clay - Initial contribution and API
- * @author Dennis Hübner - Initial contribution and API
  * @author Heiko Behrens
  */
 public class DefaultContentAssistProcessor implements IContentAssistProcessor {
 
 	// logger available to subclasses
 	protected final Logger logger = Logger.getLogger(getClass());
+	
+	@Inject (optional=true)
+	private ITemplateContentAssistProcessor templateContentAssistProcessor;
 
+	@Inject (optional=true)
+	private IContentAssistCalculator contentAssistCalculator;
+	
 	@Inject
 	private IProposalProvider proposalProvider;
 	
 	@Inject
-	private ILinkingService linkingService;
-
+	protected IServiceScope serviceScope;
 
 	/**
-	 * computes the possible grammar elements following the one at the given offset and calls the respective methods on
+	 * Computes the possible grammar elements following the one at the given offset and calls the respective methods on
 	 * the proposal provider.
 	 */
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, final int offset) {
 
 		ICompletionProposal[] completionProposals = null;
 
-		IDocument document = viewer.getDocument();
+		IContentAssistContext contentAssistContext = getContentAssistContext(viewer, offset);
 
-		if (document instanceof IXtextDocument) {
+		List<AbstractElement> computeProposalElements = getContentAssistCalculator().computeProposalElements(
+				contentAssistContext);
 
-			List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
+		ProposalProviderInvokerSwitch proposalProviderInvokerSwitch = new ProposalProviderInvokerSwitch(
+				contentAssistContext, proposalProvider);
 
-			IXtextDocument xtextDocument = (IXtextDocument) document;
+		List<ICompletionProposal> completionProposalList = proposalProviderInvokerSwitch
+				.collectCompletionProposalList(computeProposalElements);
 
-			CompositeNode rootNode = xtextDocument.readOnly(new UnitOfWork<CompositeNode>() {
-				public CompositeNode exec(XtextResource resource) throws Exception {
-					IParseResult parseResult = resource.getParseResult();
-					Assert.isNotNull(parseResult);
-					return parseResult.getRootNode();
-				}
-			});
-
-			Assert.isNotNull(rootNode);
-
-			AbstractNode lastCompleteNode = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, offset);
-
-			AbstractNode currentNode = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(rootNode, offset);
-
-			String prefix = calculatePrefix(viewer, offset, currentNode);
-
-			EObject model = lastCompleteNode instanceof AbstractNode ? NodeUtil
-					.getNearestSemanticObject((AbstractNode) lastCompleteNode) : lastCompleteNode;
-					
-			addOrReplaceCaContextAdapter(model, new ContentAssistContextAdapter(rootNode,currentNode,lastCompleteNode,offset,prefix));
-
-			Set<AbstractElement> nextValidElementSet = new LinkedHashSet<AbstractElement>();
-			/**
-			 * in case of a crossreference which isnt linked properly we evaluate or propose it again
-			 */
-			if (lastCompleteNode.getGrammarElement() instanceof CrossReference && !isLinked(lastCompleteNode)) {
-				nextValidElementSet.add(getAbstractElement(lastCompleteNode));
-				nextValidElementSet.addAll(ParseTreeUtil.getElementSetValidFromOffset(rootNode, lastCompleteNode,
-						offset));
-			}
-			/**
-			 * in case of 'at-the-end' of the previous,completed element we evaluate it again for 
-			 * 'right-to-left-backtracking' cases (e.g. for keyword 'kind' kind>|< |=cursorpos)
-			 */
-			else if (lastCompleteNode == currentNode) {
-				
-				Assignment containingAssignment = GrammarUtil
-						.containingAssignment(lastCompleteNode.getGrammarElement());
-
-				if (lastCompleteNode.getGrammarElement() instanceof RuleCall && containingAssignment != null) {
-					nextValidElementSet.add(containingAssignment);
-					nextValidElementSet.addAll(ParseTreeUtil.getElementSetValidFromOffset(rootNode, lastCompleteNode,
-							offset));
-				}
-				else {
-					nextValidElementSet = ParseTreeUtil.getElementSetValidFromOffset(rootNode, lastCompleteNode, offset);
-					nextValidElementSet.add(getAbstractElement(lastCompleteNode));
-				}
-			}
-			else {
-				nextValidElementSet = ParseTreeUtil.getElementSetValidFromOffset(rootNode, lastCompleteNode, offset);
-			}
-
-			ProposalProviderInvokerSwitch proposalProviderInvokerSwitch = new ProposalProviderInvokerSwitch(model,
-					document, offset, prefix, proposalProvider);
-
-			for (List<EObject> resolvedElementOrRuleList : new ProposalCandidateResolverSwitch(nextValidElementSet)) {
-
-				List<ICompletionProposal> collectedCompletionProposalList = proposalProviderInvokerSwitch
-						.collectCompletionProposalList(resolvedElementOrRuleList);
-
-				completionProposalList.addAll(collectedCompletionProposalList);
-			}
-			
-			if (completionProposalList != null) {
-				List<? extends ICompletionProposal> processedCompletionProposalList = proposalProvider.sortAndFilter(
-						completionProposalList, model, prefix, document, offset);
-				completionProposals = processedCompletionProposalList.toArray(
-						new ICompletionProposal[processedCompletionProposalList.size()]);
-			}
-			
+		for (TemplateContextType templateContextType : proposalProviderInvokerSwitch.getTemplateContextTypeList()) {
+			addTemplates(viewer, offset, contentAssistContext, templateContextType, completionProposalList);
 		}
+
+		List<? extends ICompletionProposal> processedCompletionProposalList = proposalProvider.sortAndFilter(
+				completionProposalList, contentAssistContext);
+
+		completionProposals = processedCompletionProposalList
+				.toArray(new ICompletionProposal[processedCompletionProposalList.size()]);
 
 		return completionProposals;
 	}
 
 	
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.text.contentassist.IContentAssistProcessor#getCompletionProposalAutoActivationCharacters()
+	 */
 	public char[] getCompletionProposalAutoActivationCharacters() {
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.text.contentassist.IContentAssistProcessor#getErrorMessage()
+	 */
 	public String getErrorMessage() {
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.text.contentassist.IContentAssistProcessor#computeContextInformation(org.eclipse.jface.text.ITextViewer, int)
+	 */
 	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.text.contentassist.IContentAssistProcessor#getContextInformationAutoActivationCharacters()
+	 */
 	public char[] getContextInformationAutoActivationCharacters() {
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.text.contentassist.IContentAssistProcessor#getContextInformationValidator()
+	 */
 	public IContextInformationValidator getContextInformationValidator() {
 		return new ContextInformationValidator(this);
 	}
 	
-	protected String calculatePrefix(ITextViewer viewer, final int offset, AbstractNode abstractNode) {
-
-		if (abstractNode == null)
-			return "";
-
-		String prefix = "";
-		StyledText textWidget = viewer.getTextWidget();
-		if (textWidget.getCharCount() > 0) {
-			int boundedOffset = Math.min(offset, textWidget.getCharCount()) - 1;
-			if (abstractNode.getTotalOffset() <= boundedOffset)
-				prefix = textWidget.getText(abstractNode.getTotalOffset(), boundedOffset);
+	/**
+	 * adds templates to the list of proposals
+	 * 
+	 * @param viewer the viewer whose document is used to compute the proposals
+	 * @param offset an offset within the document for which completions should be computed
+	 * @param contentAssistContext the current context of the content assist proposal request
+	 * @param templateContextType within which templates are resolved
+	 * @param completionProposalList list of proposal to add to
+	 */
+	protected void addTemplates(ITextViewer viewer, int offset, IContentAssistContext contentAssistContext,
+			TemplateContextType templateContextType, List<ICompletionProposal> completionProposalList) {
+		if (getTemplateContentAssistProcessor() != null) {
+			getTemplateContentAssistProcessor().setContentAssistContext(contentAssistContext);
+			getTemplateContentAssistProcessor().setContextType(templateContextType);
+			completionProposalList.addAll(Arrays.asList(getTemplateContentAssistProcessor().computeCompletionProposals(
+					viewer, offset)));
 		}
-
-		// if cursor is behind a complete keyword, accept any input => empty
-		// prefix
-		// TODO: Find a way to distinguish between keywords like "+" or "-" and
-		// "extends" or "class"
-		// in the latter case, the prefix "" would not always be sufficient
-		if (abstractNode.getGrammarElement() instanceof Keyword && (abstractNode instanceof LeafNode  && ((LeafNode)abstractNode).getText().equals(prefix))) {
-			prefix = "";
-		}
-
-		return prefix;
 	}
-
 	
-	private void addOrReplaceCaContextAdapter(EObject model, ContentAssistContextAdapter contentAssistContextAdapter) {
+	/**
+	 * @param viewer the viewer whose document is used to compute the proposals
+	 * @param offset an offset within the document for which completions should be computed
+	 * @return an implementation of <code>IContentAssistContext</code>
+	 */
+	protected IContentAssistContext getContentAssistContext(ITextViewer textViewer,int offset) {
+		return new DefaultContentAssistContext(textViewer,offset);
 		
-		if (model != null) {
-
-			Adapter existingAdapter = EcoreUtil.getAdapter(model.eAdapters(), ContentAssistContextAdapter.class);
-
-			if (existingAdapter != null) {
-				model.eAdapters().remove(existingAdapter);
-			}
-
-			model.eAdapters().add(contentAssistContextAdapter);
-		}
-	}
-
-	
-	private boolean isLinked(AbstractNode lastCompleteNode) {
-		EObject semanticModel = NodeUtil.getNearestSemanticObject(lastCompleteNode);
-		CrossReference crossReference = (CrossReference) lastCompleteNode.getGrammarElement();
-		EReference eReference = GrammarUtil.getReference(crossReference, semanticModel.eClass());
-
-		List<EObject> referencedObjects = EcoreUtil2.getAllReferencedObjects(semanticModel, eReference);
-
-		if (referencedObjects.isEmpty())
-			return false;
-		else {
-			List<EObject> linkCandidates = linkingService.getLinkedObjects(semanticModel, eReference,
-					(LeafNode) lastCompleteNode);
-			return !linkCandidates.isEmpty() && referencedObjects.containsAll(linkCandidates);
-		}
 	}
 	
-	private AbstractElement getAbstractElement(AbstractNode lastCompleteNode) {
-		return (AbstractElement) (lastCompleteNode.getGrammarElement() instanceof ParserRule ?
-				((ParserRule)lastCompleteNode.getGrammarElement()).getAlternatives(): lastCompleteNode.getGrammarElement());
+	/**
+	 * @return an implementation of <code>ITemplateContentAssistProcessor</code>
+	 */
+	protected ITemplateContentAssistProcessor getTemplateContentAssistProcessor() {
+		if (templateContentAssistProcessor == null) {
+			templateContentAssistProcessor = new DefaultTemplateContentAssistProcessor();
+			ServiceRegistry.injectServices(this.serviceScope, templateContentAssistProcessor);
+		}
+		return templateContentAssistProcessor;
 	}
+	
+	/**
+	 * @return an implementation of <code>IContentAssistCalculator</code>
+	 */
+	protected IContentAssistCalculator getContentAssistCalculator() {
+		if (this.contentAssistCalculator == null) {
+			contentAssistCalculator = new DefaultContentAssistCalculator();
+			ServiceRegistry.injectServices(this.serviceScope, contentAssistCalculator);
+		}
+		return contentAssistCalculator;
+	}
+	
+
 
 }

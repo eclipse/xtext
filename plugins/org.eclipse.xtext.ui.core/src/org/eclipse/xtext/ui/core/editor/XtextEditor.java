@@ -175,7 +175,7 @@ public class XtextEditor extends TextEditor implements IExecutableExtension {
 		// overwrite superclass implementation to allow folding
 		fAnnotationAccess = createAnnotationAccess();
 		fOverviewRuler = createOverviewRuler(getSharedColors());
-		ISourceViewer projectionViewer = new ProjectionViewer(parent, ruler, getOverviewRuler(),
+		ISourceViewer projectionViewer = new XtextSourceViewer(parent, ruler, getOverviewRuler(),
 				isOverviewRulerVisible(), styles);
 		getSourceViewerDecorationSupport(projectionViewer);
 		return projectionViewer;
