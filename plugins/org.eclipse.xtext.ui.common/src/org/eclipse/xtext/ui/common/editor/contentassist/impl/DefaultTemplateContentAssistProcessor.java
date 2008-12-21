@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.codecompletion.impl;
+package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
@@ -19,10 +19,10 @@ import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext;
-import org.eclipse.xtext.ui.common.editor.codecompletion.ILinkingCandidatesService;
-import org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider;
-import org.eclipse.xtext.ui.common.editor.codecompletion.ITemplateContentAssistProcessor;
+import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
+import org.eclipse.xtext.ui.common.editor.contentassist.ILinkingCandidatesService;
+import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor;
 
 /**
  * Provides a default implementation of interface {@link ITemplateContentAssistProcessor}.
@@ -82,7 +82,7 @@ public class DefaultTemplateContentAssistProcessor extends TemplateCompletionPro
 	
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.ITemplateContentAssistProcessor#setContextType(org.eclipse.jface.text.templates.TemplateContextType)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor#setContextType(org.eclipse.jface.text.templates.TemplateContextType)
 	 */
 	public void setContextType(TemplateContextType contextType) {
 		this.contextType = contextType;
@@ -90,7 +90,7 @@ public class DefaultTemplateContentAssistProcessor extends TemplateCompletionPro
 	
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.ITemplateContentAssistProcessor#setContentAssistContext(org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor#setContentAssistContext(org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext)
 	 */
 	public void setContentAssistContext(IContentAssistContext contentAssistContext) {
 		this.contentAssistContext = contentAssistContext;

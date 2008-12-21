@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.codecompletion.impl;
+package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.ITextViewer;
@@ -14,7 +14,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext;
+import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.IXtextSourceViewer;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 
@@ -41,7 +41,7 @@ public class DefaultContentAssistContext implements IContentAssistContext {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext#getDocument()
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext#getDocument()
 	 */
 	public IXtextDocument getDocument() {
 		return this.xtextDocument;
@@ -49,7 +49,7 @@ public class DefaultContentAssistContext implements IContentAssistContext {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext#getMatchString()
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext#getMatchString()
 	 */
 	public String getMatchString() {
 		if (this.matchString == null) {
@@ -60,7 +60,7 @@ public class DefaultContentAssistContext implements IContentAssistContext {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext#getModel()
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext#getModel()
 	 */
 	public EObject getModel() {
 		return this.xtextSourceViewer.getModel(this.offset);
@@ -68,7 +68,7 @@ public class DefaultContentAssistContext implements IContentAssistContext {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext#getReferenceNode()
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext#getReferenceNode()
 	 */
 	public AbstractNode getReferenceNode() {
 		return this.xtextSourceViewer.getReferenceNode(this.offset);
@@ -76,7 +76,7 @@ public class DefaultContentAssistContext implements IContentAssistContext {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext#getNode()
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext#getNode()
 	 */
 	public AbstractNode getNode() {
 		return this.xtextSourceViewer.getNode(this.offset);
@@ -84,7 +84,7 @@ public class DefaultContentAssistContext implements IContentAssistContext {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext#getOffSet()
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext#getOffSet()
 	 */
 	public int getOffSet() {
 		return this.offset;
@@ -92,7 +92,7 @@ public class DefaultContentAssistContext implements IContentAssistContext {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext#getRootNode()
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext#getRootNode()
 	 */
 	public CompositeNode getRootNode() {
 		return this.xtextSourceViewer.getRootNode();

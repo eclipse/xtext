@@ -4,7 +4,7 @@ import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext;
+import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 
 public class FowlerDslProposalProvider extends FowlerDslGenProposalProvider {
 

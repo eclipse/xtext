@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.codecompletion.impl;
+package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import org.eclipse.jface.text.templates.TemplateVariable;
 import org.eclipse.jface.text.templates.TemplateVariableResolver;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.crossref.IScopedElement;
-import org.eclipse.xtext.ui.common.editor.codecompletion.impl.XtextTemplateContext;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextTemplateContext;
 
 /**
  * Provides a convenience base type for <code>TemplateContextType's</code> preconfigured with several handy 

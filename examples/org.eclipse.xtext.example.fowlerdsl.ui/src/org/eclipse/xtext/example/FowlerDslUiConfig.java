@@ -15,7 +15,7 @@ public class FowlerDslUiConfig extends org.eclipse.xtext.example.GenFowlerDslUiC
 	public Set<IServiceRegistration> registrations() {
 		Set<IServiceRegistration> registrations = super.registrations();
 		registrations.addAll(scope(org.eclipse.xtext.example.IFowlerDsl.SCOPE).with(
-				org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider.class,
+				org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider.class,
 				org.eclipse.xtext.example.FowlerDslProposalProvider.class, ServiceRegistry.PRIORITY_MAX)
 				.registrations());
 		return registrations;

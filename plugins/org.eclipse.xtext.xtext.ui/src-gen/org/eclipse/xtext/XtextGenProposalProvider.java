@@ -7,14 +7,14 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtext.ui.common.editor.codecompletion.AbstractProposalProvider;
-import org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext;
-import org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.AbstractProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
+import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
 
 /**
  * Represents a generated, default implementation of interface {@link IProposalProvider}.
  * 
- * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider
+ * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider
  */
 public class XtextGenProposalProvider  extends AbstractProposalProvider {
 	// constants
