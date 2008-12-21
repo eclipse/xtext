@@ -27,40 +27,18 @@ package «uiGenProposalProviderClass().toJavaPackage()»;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.common.editor.codecompletion.AbstractProposalProvider;
 import org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider;
+import org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext;
 
 /**
  * Represents a generated, default implementation of interface {@link IProposalProvider}.
  * 
- * In addition to the declared methods, the framework tries to call grammar dependent methods for assignments using reflection.
- * The signature of such methods invoked reflectively follows the following pattern:
- * 
- * public List<ICompletionProposal> complete[Typename][featureName](Assignment ele, EObject model, String prefix)
- * 
- * <b>Example</b>
- *  Given the following grammar :
- *  <code>
- *  RuleA returns MyType :
- *  	"myType" name=ID;
- *  </code>
- *
- * One could provide the following method in an implementation of this interface:
- *  <code>
- * 	public List<ICompletionProposal> completeMyTypeName(Assignment ele, EObject model, String prefix, IDocument doc) {...}
- *  </code>
- *  Note that if you have generated Java classes for your domain model (meta model) you can alternatively declare the second parameter using 
- *  a specific type:
- *  <code>
- * 	public List<ICompletionProposal> completeMyTypeName(Assignment ele, MyType model, String prefix, IDocument doc) {...}
- *  </code>
- *   
+ * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider
  */
 public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProposalProvider {
 	// constants
@@ -70,20 +48,20 @@ public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProp
 	«LET assignment.containingParserRule().name.toFirstUpper()+assignment.feature.toFirstUpper() AS fqnFeatureName»
 	«IF null==getGlobalVar(fqnFeatureName)-»
 	«storeGlobalVar(fqnFeatureName,"")-»	 
-	public List<? extends ICompletionProposal> complete«fqnFeatureName»(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
+	public List<? extends ICompletionProposal> complete«fqnFeatureName»(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("complete«fqnFeatureName» feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ prefix.trim() + "'");
+					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		«IF CrossReference.isInstance(assignment.terminal)-»
-		return lookupCrossReference(((CrossReference)assignment.getTerminal()), model, prefix, offset);
+		return lookupCrossReference(((CrossReference)assignment.getTerminal()), contentAssistContext);
 		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="ID" -»
-		return Collections.singletonList(createCompletionProposal(assignment,model,"«fqnFeatureName»", offset));
+		return Collections.singletonList(createCompletionProposal(assignment, "«fqnFeatureName»", contentAssistContext));
 		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="INT" -»
-		return Collections.singletonList(createCompletionProposal(assignment,model,"1", offset));		
+		return Collections.singletonList(createCompletionProposal(assignment, "1", contentAssistContext));		
 		«ELSEIF RuleCall.isInstance(assignment.terminal) && ((RuleCall)assignment.terminal).rule.name=="STRING" -»
-		return Collections.singletonList(createCompletionProposal(assignment,model,"\"«fqnFeatureName»\"", offset));		
+		return Collections.singletonList(createCompletionProposal(assignment, "\"«fqnFeatureName»\"", contentAssistContext));		
 		«ELSE-»
 		return Collections.emptyList();
 		«ENDIF-»
@@ -96,11 +74,10 @@ public class «uiGenProposalProviderClass().toSimpleName()»  extends AbstractProp
     «LET parserRule.type.metamodel.alias.toFirstUpper()+parserRule.type.type.name.toFirstUpper() AS fqnFeatureName»
 	«IF null==getGlobalVar(fqnFeatureName)-»
 	«storeGlobalVar(fqnFeatureName,"")-»	 
-	public List<? extends ICompletionProposal> complete«fqnFeatureName»(RuleCall ruleCall, EObject model, String prefix,
-			IDocument doc, int offset) {
+	public List<? extends ICompletionProposal> complete«fqnFeatureName»(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("complete«fqnFeatureName» '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
-					+ "' for model '" + model + "' and prefix '" + prefix.trim() + "'");
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString() + "'");
 		}
 		return Collections.emptyList();
 	}
