@@ -35,10 +35,6 @@ import org.eclipse.xtend.expression.ExecutionContextImpl;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
 import org.eclipse.xtext.grammaraccess.GrammarAccessUtil;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.SyntaxError;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xtextgen.GenModel;
 import org.eclipse.xtext.xtextgen.GenService;
 import org.eclipse.xtext.xtextgen.XtextgenFactory;
@@ -249,7 +245,7 @@ public class GeneratorFacade {
 			genModel.getServices().add(tokenScannerService);
 			
 			GenService proposalProvider = XtextgenFactory.eINSTANCE.createGenService();
-			proposalProvider.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider");
+			proposalProvider.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider");
 			proposalProvider.setGenClassFQName(namespace +"."+ languageName+"GenProposalProvider");
 			proposalProvider.setUiService(true);
 			genModel.getServices().add(proposalProvider);
@@ -262,13 +258,13 @@ public class GeneratorFacade {
 			
 			GenService contentAssistProcessor = XtextgenFactory.eINSTANCE.createGenService();
 			contentAssistProcessor.setServiceInterfaceFQName("org.eclipse.jface.text.contentassist.IContentAssistProcessor");
-			contentAssistProcessor.setGenClassFQName("org.eclipse.xtext.ui.common.editor.codecompletion.DefaultContentAssistProcessor");
+			contentAssistProcessor.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor");
 			contentAssistProcessor.setUiService(true);
 			genModel.getServices().add(contentAssistProcessor);
 			
 			GenService linkingCandidatesService = XtextgenFactory.eINSTANCE.createGenService();
-			linkingCandidatesService.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.codecompletion.ILinkingCandidatesService");
-			linkingCandidatesService.setGenClassFQName("org.eclipse.xtext.ui.common.editor.codecompletion.impl.DefaultLinkingCandidatesService");
+			linkingCandidatesService.setServiceInterfaceFQName("org.eclipse.xtext.ui.common.editor.contentassist.ILinkingCandidatesService");
+			linkingCandidatesService.setGenClassFQName("org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultLinkingCandidatesService");
 			linkingCandidatesService.setUiService(true);
 			genModel.getServices().add(linkingCandidatesService);
 
