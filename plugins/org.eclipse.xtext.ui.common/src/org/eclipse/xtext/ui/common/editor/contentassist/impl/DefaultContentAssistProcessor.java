@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.codecompletion;
+package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,10 +22,10 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.Inject;
 import org.eclipse.xtext.service.ServiceRegistry;
-import org.eclipse.xtext.ui.common.editor.codecompletion.impl.DefaultContentAssistContext;
-import org.eclipse.xtext.ui.common.editor.codecompletion.impl.DefaultTemplateContentAssistProcessor;
-import org.eclipse.xtext.ui.common.editor.codecompletion.impl.DefaultContentAssistCalculator;
-import org.eclipse.xtext.ui.common.editor.codecompletion.impl.ProposalProviderInvokerSwitch;
+import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistCalculator;
+import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
+import org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider;
+import org.eclipse.xtext.ui.common.editor.contentassist.ITemplateContentAssistProcessor;
 
 /**
  * The default implementation of interface {@link IContentAssistProcessor} provided with Xtext.

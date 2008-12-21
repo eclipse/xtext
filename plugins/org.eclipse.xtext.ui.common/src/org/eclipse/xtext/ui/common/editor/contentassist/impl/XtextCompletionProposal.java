@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.common.editor.codecompletion.impl;
+package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
@@ -24,7 +24,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
-import org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext;
+import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 
 /**
  * Default Xtext implementation of interface <code>ICompletionProposal</code>.

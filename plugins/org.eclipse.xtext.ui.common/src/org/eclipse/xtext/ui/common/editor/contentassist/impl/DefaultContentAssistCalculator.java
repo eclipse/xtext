@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.codecompletion.impl;
+package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,8 +33,8 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistCalculator;
-import org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext;
+import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistCalculator;
+import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
 import org.eclipse.xtext.util.XtextSwitch;
 
 /**

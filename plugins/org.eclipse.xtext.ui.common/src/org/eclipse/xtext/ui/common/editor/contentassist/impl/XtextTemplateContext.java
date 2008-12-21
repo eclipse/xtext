@@ -5,15 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.codecompletion.impl;
+package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.templates.DocumentTemplateContext;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.xtext.IMetamodelAccess;
-import org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext;
-import org.eclipse.xtext.ui.common.editor.codecompletion.ILinkingCandidatesService;
+import org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext;
+import org.eclipse.xtext.ui.common.editor.contentassist.ILinkingCandidatesService;
 
 /**
  * Represents an extended version of class {@link DocumentTemplateContext} to provide additional Xtext related 

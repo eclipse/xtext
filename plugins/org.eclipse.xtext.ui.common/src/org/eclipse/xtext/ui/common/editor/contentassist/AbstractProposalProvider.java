@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.codecompletion;
+package org.eclipse.xtext.ui.common.editor.contentassist;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,7 +36,7 @@ import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.ui.common.editor.codecompletion.impl.XtextCompletionProposal;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.XtextCompletionProposal;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -62,7 +62,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeKeyword(org.eclipse.xtext.Keyword, org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeKeyword(org.eclipse.xtext.Keyword, org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext)
 	 */
 	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
@@ -75,7 +75,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeRuleCall(org.eclipse.xtext.RuleCall, org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#completeRuleCall(org.eclipse.xtext.RuleCall, org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext)
 	 */
 	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
@@ -94,7 +94,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#getTemplateContextType(org.eclipse.xtext.Keyword, org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplateContextType(org.eclipse.xtext.Keyword, org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext)
 	 */
 	public TemplateContextType getTemplateContextType(Keyword keyword, IContentAssistContext contentAssistContext) {
 		return null;
@@ -102,7 +102,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#getTemplateContextType(org.eclipse.xtext.RuleCall, org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplateContextType(org.eclipse.xtext.RuleCall, org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext)
 	 */
 	public TemplateContextType getTemplateContextType(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		return null;
@@ -110,7 +110,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#getTemplates(java.lang.String)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#getTemplates(java.lang.String)
 	 */
 	public Template[] getTemplates(String contextTypeId) {
 		return new Template[]{};
@@ -118,7 +118,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#sortAndFilter(java.util.List, org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext)
+	 * @see org.eclipse.xtext.ui.common.editor.contentassist.IProposalProvider#sortAndFilter(java.util.List, org.eclipse.xtext.ui.common.editor.contentassist.IContentAssistContext)
 	 */
 	public List<? extends ICompletionProposal> sortAndFilter(
 			List<? extends ICompletionProposal> completionProposalList, IContentAssistContext contentAssistContext) {

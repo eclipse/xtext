@@ -11,7 +11,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.codecompletion;
+package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 import org.eclipse.xtext.XtextGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.XtextGrammarTestLanguageUiConfig;
@@ -20,13 +20,14 @@ import org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiConfig;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageUiConfig;
 import org.eclipse.xtext.ui.common.AbstractUiTest;
+import org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor;
 
 
 /**
  * Unit test for class <code>DefaultContentAssistProcessor</code>.
  * 
  * @author Michael Clay - Initial contribution and API
- * @see org.eclipse.xtext.ui.common.editor.codecompletion.DefaultContentAssistProcessor
+ * @see org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor
  */
 public class DefaultContentAssistProcessorTest extends AbstractUiTest 
 {

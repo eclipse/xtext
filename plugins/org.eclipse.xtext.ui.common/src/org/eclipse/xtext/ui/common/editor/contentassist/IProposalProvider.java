@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.common.editor.codecompletion;
+package org.eclipse.xtext.ui.common.editor.contentassist;
 
 import java.util.List;
 

@@ -5,20 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.codecompletion;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.crossref.IScopedElement;
+package org.eclipse.xtext.ui.common.editor.contentassist;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ILinkingCandidatesService {
+public abstract class AbstractLinkingCandidatesService implements ILinkingCandidatesService {
 
-	/**
-	 * Returns all EObjects, that can be referenced in the given context.
-	 */
-	Iterable<IScopedElement> getLinkingCandidates(EObject context, EReference reference);
-	
 }

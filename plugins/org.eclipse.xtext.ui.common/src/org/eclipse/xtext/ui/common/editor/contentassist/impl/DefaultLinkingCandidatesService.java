@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.codecompletion.impl;
+package org.eclipse.xtext.ui.common.editor.contentassist.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -13,7 +13,7 @@ import org.eclipse.xtext.crossref.IScope;
 import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.service.Inject;
-import org.eclipse.xtext.ui.common.editor.codecompletion.AbstractLinkingCandidatesService;
+import org.eclipse.xtext.ui.common.editor.contentassist.AbstractLinkingCandidatesService;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
