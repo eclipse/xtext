@@ -21,7 +21,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.text.templates.Template;
+import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.crossref.IScopedElement;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.service.Inject;
+import org.eclipse.xtext.ui.common.editor.codecompletion.impl.XtextCompletionProposal;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -60,49 +62,67 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeKeyword(org.eclipse.xtext.Keyword,org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeKeyword(org.eclipse.xtext.Keyword, org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext)
 	 */
-	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword, EObject model, String prefix,
-			IDocument doc, int offset) {
+	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("completeKeyword '" + keyword.getValue() + "' for model '" + model + "' and prefix '"
-					+ prefix.trim() + "'");
+			logger.debug("completeKeyword '" + keyword.getValue() + "' for model '" + contentAssistContext.getModel() + "' and prefix '"
+					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		String text = keyword.getValue().length() == 1 ? keyword.getValue() : keyword.getValue() + " ";
-		return Collections.singletonList(createCompletionProposal(keyword, model, text, offset));
+		return Collections.singletonList(createCompletionProposal(keyword, text, contentAssistContext));
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeRuleCall(org.eclipse.xtext.RuleCall, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#completeRuleCall(org.eclipse.xtext.RuleCall, org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext)
 	 */
-	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall, EObject model, String prefix,
-			IDocument doc, int offset) {
+	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeRuleCall '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
-					+ "' for model '" + model + "' and prefix '" + prefix.trim() + "'");
+					+ "' for model '" + contentAssistContext.getModel() + "' and prefix '" + contentAssistContext.getMatchString().trim().trim() + "'");
 		}
 
 		AbstractRule calledRule = ruleCall.getRule();
 
 		if (calledRule instanceof LexerRule) {
-			return doCompleteLexerRuleRuleCall((LexerRule) calledRule, ruleCall, model, offset);
+			return doCompleteLexerRuleRuleCall((LexerRule) calledRule, ruleCall, contentAssistContext);
 		}
 
 		return Collections.emptyList();
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#getTemplateContextType(org.eclipse.xtext.Keyword, org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext)
+	 */
+	public TemplateContextType getTemplateContextType(Keyword keyword, IContentAssistContext contentAssistContext) {
+		return null;
+	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#sortAndFilter(java.util.List, org.eclipse.emf.ecore.EObject, java.lang.String, org.eclipse.jface.text.IDocument, int, org.eclipse.xtext.parsetree.AbstractNode, org.eclipse.xtext.parsetree.LeafNode)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#getTemplateContextType(org.eclipse.xtext.RuleCall, org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext)
+	 */
+	public TemplateContextType getTemplateContextType(RuleCall ruleCall, IContentAssistContext contentAssistContext) {
+		return null;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#getTemplates(java.lang.String)
+	 */
+	public Template[] getTemplates(String contextTypeId) {
+		return new Template[]{};
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider#sortAndFilter(java.util.List, org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext)
 	 */
 	public List<? extends ICompletionProposal> sortAndFilter(
-			List<? extends ICompletionProposal> completionProposalList, EObject model, String prefix,
-			IDocument document, int offset) {
-		return doSortAndFilter(completionProposalList, model, prefix, document, offset);
+			List<? extends ICompletionProposal> completionProposalList, IContentAssistContext contentAssistContext) {
+		return doSortAndFilter(completionProposalList,contentAssistContext);
 	}
 
 	/**
@@ -120,7 +140,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	 * @return a computed list of <code>ICompletionProposal</code> for the given <code>LexerRule</code>
 	 */
 	protected List<? extends ICompletionProposal> doCompleteLexerRuleRuleCall(LexerRule lexerRule, RuleCall ruleCall,
-			EObject model, int offset) {
+			IContentAssistContext contentAssistContext) {
 		ParserRule containingParserRule = GrammarUtil.containingParserRule(ruleCall);
 		Assignment containingAssignment = GrammarUtil.containingAssignment(ruleCall);
 
@@ -135,8 +155,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 			defaultDisplayString = "\"" + defaultDisplayString + "\"";
 		}
 
-		return Collections.singletonList(createCompletionProposal(containingAssignment, model, defaultDisplayString,
-				offset));
+		return Collections.singletonList(createCompletionProposal(containingAssignment, defaultDisplayString, contentAssistContext));
 	}
 
 	/**
@@ -169,8 +188,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	 * 
 	 * @return a list of <code>ICompletionProposal</code> matching the given assignment
 	 */
-	protected List<? extends ICompletionProposal> lookupCrossReference(CrossReference crossReference, EObject model,
-			String prefix, int offset) {
+	protected List<? extends ICompletionProposal> lookupCrossReference(CrossReference crossReference, IContentAssistContext contentAssistContext) {
 
 		List<ICompletionProposal> completionProposalList = new ArrayList<ICompletionProposal>();
 
@@ -179,12 +197,12 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 			if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
 				final EClass eClass = (EClass) containingParserRule.getType().getType();
 				final EReference ref = GrammarUtil.getReference(crossReference, eClass);
-				final String trimmedPrefix = prefix.trim();
-				final Iterable<IScopedElement> candidates = linkingCandidatesService.getLinkingCandidates(model, ref);
+				final String trimmedPrefix = contentAssistContext.getMatchString().trim();
+				final Iterable<IScopedElement> candidates = linkingCandidatesService.getLinkingCandidates(contentAssistContext.getModel(), ref);
 				for (IScopedElement candidate : candidates) {
-					if (candidate.name() != null && isCandidateMatchingPrefix(model, ref, candidate, trimmedPrefix)) {
+					if (candidate.name() != null && isCandidateMatchingPrefix(contentAssistContext.getModel(), ref, candidate, trimmedPrefix)) {
 						completionProposalList.add(
-								createCompletionProposal(crossReference, model, candidate.name(), offset));
+								createCompletionProposal(crossReference, candidate.name(), contentAssistContext));
 					}
 				}	
 			}
@@ -202,10 +220,8 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	/**
 	 * @return a new <code>XtextCompletionProposal</code> for the given text and offset.
 	 */
-	protected final XtextCompletionProposal createCompletionProposal(AbstractElement abstractElement, EObject model,
-			String text, int offset) {
-		return new XtextCompletionProposal(abstractElement, model, text, new StyledString(text), text,
-				getDefaultImageFilePath(), getPluginId(), offset);
+	protected ICompletionProposal createCompletionProposal(AbstractElement abstractElement, String displayString,IContentAssistContext contentAssistContext) {
+		return new XtextCompletionProposal(abstractElement,displayString,contentAssistContext);
 	}
 
 	/**
@@ -218,8 +234,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	 * @see #sortAndFilter(List, EObject, String, IDocument, int, AbstractNode, LeafNode)
 	 */
 	protected List<? extends ICompletionProposal> doSortAndFilter(
-			List<? extends ICompletionProposal> completionProposalList, EObject model, String prefix,
-			IDocument document, int offset) {
+			List<? extends ICompletionProposal> completionProposalList, IContentAssistContext contentAssistContext) {
 
 		Map<String, ICompletionProposal> displayString2ICompletionProposalMap = new HashMap<String, ICompletionProposal>();
 
@@ -233,7 +248,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 				displayString2ICompletionProposalMap.put(completionProposal.getDisplayString(), completionProposal);
 
 				// filter by prefix 
-				if (isFiltered(model, prefix, completionProposal)) {
+				if (isFiltered(completionProposal)) {
 					if (logger.isDebugEnabled()) {
 						logger.debug("filter completionProposal '" + completionProposal + "'");
 					}
@@ -257,18 +272,16 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 	 * The default behaviour of this method delegates to {@link XtextCompletionProposal#matches(String)} to 
 	 * test if the given prefix string matches or not.
 	 * 
-	 * @param model the last semtantically complete object 
-	 * @param prefix
 	 * @param completionProposal contains information used to present the proposed completion to the user
 	 * @return true or false whether the given prefix matches the text of this completion proposal
 	 */
-	protected boolean isFiltered(EObject model, String prefix, ICompletionProposal completionProposal) {
+	protected boolean isFiltered(ICompletionProposal completionProposal) {
 		
 		if (completionProposal instanceof XtextCompletionProposal) {
 		
 			XtextCompletionProposal xtextCompletionProposal = (XtextCompletionProposal) completionProposal;
 			
-			return !xtextCompletionProposal.matches(prefix);
+			return !xtextCompletionProposal.matches();
 		}
 		
 		return false;

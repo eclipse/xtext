@@ -27,6 +27,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
@@ -39,6 +40,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.IServiceScope;
 import org.eclipse.xtext.service.ServiceRegistry;
+import org.eclipse.xtext.ui.core.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
 import org.eclipse.xtext.util.StringInputStream;
@@ -178,20 +180,31 @@ public class ContentAssistProcessorTestBuilder {
 		return this;
 	}
 
-	public ICompletionProposal[] computeCompletionProposals(String currentModelToParse, int cursorPosition)
+	public ICompletionProposal[] computeCompletionProposals(final String currentModelToParse, int cursorPosition)
 			throws Exception {
 		CompositeNode rootNode = getRootNode(currentModelToParse);
 
 		org.easymock.EasyMock.reset(textViewerMock, xtextDocumentMock, textViewerMock);
 
-		expect(textViewerMock.getDocument()).andReturn(xtextDocumentMock);
+		//expect(textViewerMock.getDocument()).andReturn(xtextDocumentMock);
 		expect(xtextDocumentMock.readOnly((UnitOfWork<CompositeNode>) anyObject())).andReturn(rootNode);
-		expect(textViewerMock.getTextWidget()).andReturn(newStyledTextWidgetMock(currentModelToParse));
+		//expect(textViewerMock.getTextWidget()).andReturn(newStyledTextWidgetMock(currentModelToParse));
 
-		replay(textViewerMock, xtextDocumentMock);
+		replay(xtextDocumentMock);
 
 		ICompletionProposal[] computeCompletionProposals = this.contentAssistProcessor.computeCompletionProposals(
-				textViewerMock, cursorPosition);
+				new XtextSourceViewer(null,null,null,false,0) {
+					@Override
+					public IDocument getDocument() {
+						return xtextDocumentMock;
+					}
+					
+					@Override
+					public StyledText getTextWidget() {
+						return newStyledTextWidgetMock(currentModelToParse);
+					}
+					
+				}, cursorPosition);
 		return computeCompletionProposals;
 	}
 

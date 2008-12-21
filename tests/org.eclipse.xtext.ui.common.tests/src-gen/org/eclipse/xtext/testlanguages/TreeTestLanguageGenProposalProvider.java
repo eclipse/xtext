@@ -14,70 +14,50 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.common.editor.codecompletion.AbstractProposalProvider;
 import org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider;
+import org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext;
 
 /**
  * Represents a generated, default implementation of interface {@link IProposalProvider}.
  * 
- * In addition to the declared methods, the framework tries to call grammar dependent methods for assignments using reflection.
- * The signature of such methods invoked reflectively follows the following pattern:
- * 
- * public List<ICompletionProposal> complete[Typename][featureName](Assignment ele, EObject model, String prefix)
- * 
- * <b>Example</b>
- *  Given the following grammar :
- *  <code>
- *  RuleA returns MyType :
- *  	"myType" name=ID;
- *  </code>
- *
- * One could provide the following method in an implementation of this interface:
- *  <code>
- * 	public List<ICompletionProposal> completeMyTypeName(Assignment ele, EObject model, String prefix, IDocument doc) {...}
- *  </code>
- *  Note that if you have generated Java classes for your domain model (meta model) you can alternatively declare the second parameter using 
- *  a specific type:
- *  <code>
- * 	public List<ICompletionProposal> completeMyTypeName(Assignment ele, MyType model, String prefix, IDocument doc) {...}
- *  </code>
- *   
+ * @see org.eclipse.xtext.ui.common.editor.codecompletion.IProposalProvider
  */
 public class TreeTestLanguageGenProposalProvider  extends AbstractProposalProvider {
 	// constants
 	private static final String UI_PLUGIN_ID  = ".";
 
 	
-	public List<? extends ICompletionProposal> completeModelChildren(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
+	public List<? extends ICompletionProposal> completeModelChildren(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeModelChildren feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ prefix.trim() + "'");
+					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}
 	
-	public List<? extends ICompletionProposal> completeNodeName(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
+	public List<? extends ICompletionProposal> completeNodeName(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeNodeName feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ prefix.trim() + "'");
+					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment,model,"NodeName", offset));
+		return Collections.singletonList(createCompletionProposal(assignment, "NodeName", contentAssistContext));
 	}
 	
-	public List<? extends ICompletionProposal> completeNodeAttrib(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
+	public List<? extends ICompletionProposal> completeNodeAttrib(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeNodeAttrib feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ prefix.trim() + "'");
+					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		return Collections.singletonList(createCompletionProposal(assignment,model,"\"NodeAttrib\"", offset));		
+		return Collections.singletonList(createCompletionProposal(assignment, "\"NodeAttrib\"", contentAssistContext));		
 	}
 	
-	public List<? extends ICompletionProposal> completeNodeChildren(Assignment assignment, EObject model, String prefix, IDocument doc,int offset) {
+	public List<? extends ICompletionProposal> completeNodeChildren(Assignment assignment, IContentAssistContext contentAssistContext) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeNodeChildren feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ prefix.trim() + "'");
+					+ contentAssistContext.getMatchString().trim() + "'");
 		}
 		return Collections.emptyList();
 	}

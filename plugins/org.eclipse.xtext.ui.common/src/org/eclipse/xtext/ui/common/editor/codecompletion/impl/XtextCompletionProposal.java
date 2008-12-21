@@ -1,9 +1,7 @@
-package org.eclipse.xtext.ui.common.editor.codecompletion;
+package org.eclipse.xtext.ui.common.editor.codecompletion.impl;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
@@ -22,9 +20,11 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.ui.common.editor.codecompletion.IContentAssistContext;
 
 /**
  * Default Xtext implementation of interface <code>ICompletionProposal</code>.
@@ -41,113 +41,28 @@ public class XtextCompletionProposal implements ICompletionProposal,
 	protected final Logger logger = Logger.getLogger(XtextCompletionProposal.class);
 
 	
-	private EObject model;
 	private AbstractElement abstractElement;
 	private String text;
 	private String description;
 	private Image image;
 	private final StyledString label;
-	private final int offset;
 	private String pluginIdentifier;
+	private IContentAssistContext contentAssistContext;
 
-	/**
-	 * @param element
-	 *            the element for which this CompletionProposal is created for
-	 * @param model the last semtantically complete object 
-	 * @param text the text value to be replaced/inserted
-	 * @param label the label to be displayed
-	 * @param description some additional description for the tooltip
-	 * @param imageFilePath the relative path of the image file, relative to the root of
-	 *            the plug-in; the path must be legal
-	 * @param pluginId the id of the plug-in containing the image file;
-	 * @param offset the offset of the text
-	 */
-	public XtextCompletionProposal(AbstractElement element,EObject model,String text, StyledString label,
-			String description, String imageFilePath, String pluginIdentifier,
-			int offset) {
-		Assert.isNotNull(text, "parameter 'text' must not be null");
-		Assert.isNotNull(pluginIdentifier,
-				"pluginIdentifier 'text' must not be null");
-		this.abstractElement = element;
-		this.model = model;
-		this.text = text;
-		this.description = description;
-		this.offset = offset;
-		this.pluginIdentifier = pluginIdentifier;
-
-		if (label != null) {
-			this.label = label;
-		} else {
-			this.label = new StyledString(this.text);
-		}
-		if (imageFilePath != null) {
-			initializeImage(imageFilePath);
-		}
-	}
 	
-	/**
-	 * 
-	 * Getter for model property.
-	 * 
-	 * @return the associated model object
-	 */
-	public EObject getModel() {
-		return model;
-	}
-	
-	/**
-	 * Setter for model property.
-	 * 
-	 * @param model to set
-	 */
-	public void setModel(EObject model) {
-		this.model = model;
-	}
-
-
-	/**
-	 * Getter for abstractElement property.
-	 * 
-	 * @return the associated element
-	 */
-	public AbstractElement getAbstractElement() {
-		return abstractElement;
-	}
-
-
-	/**
-	 * Setter for abstractElement property.
-	 * @param abstractElement to set
-	 */
-	public void setAbstractElement(AbstractElement abstractElement) {
+	public XtextCompletionProposal(AbstractElement abstractElement, String displayString,
+			IContentAssistContext contentAssistContext) {
 		this.abstractElement = abstractElement;
+		this.text = displayString;
+		this.description = displayString;
+		this.label = new StyledString(displayString);
+		this.contentAssistContext = contentAssistContext;
 	}
 
-
-	/**
-	 * Setter for the text to insert
-	 * 
-	 * @param text
-	 */
-	public void setText(String text) {
-		this.text = text;
-	}
-	
-	
-	/**
-	 * Getter for the text to insert
-	 * @return the text to insert
-	 */
-	public String getText() {
-		return text;
-	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.text.contentassist.ICompletionProposal#apply(org.eclipse
-	 * .jface.text.IDocument)
+	 * @see org.eclipse.jface.text.contentassist.ICompletionProposal#apply(org.eclipse.jface.text.IDocument)
 	 */
 	public void apply(IDocument document) {
 
@@ -155,9 +70,7 @@ public class XtextCompletionProposal implements ICompletionProposal,
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.jface.text.contentassist.ICompletionProposal#
-	 * getAdditionalProposalInfo()
+	 * @see org.eclipse.jface.text.contentassist.ICompletionProposal#getAdditionalProposalInfo()
 	 */
 	public String getAdditionalProposalInfo() {
 		return this.description == null ? null : this.description
@@ -166,9 +79,7 @@ public class XtextCompletionProposal implements ICompletionProposal,
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @seeorg.eclipse.jface.text.contentassist.ICompletionProposal#
-	 * getContextInformation()
+	 * @see org.eclipse.jface.text.contentassist.ICompletionProposal#getContextInformation()
 	 */
 	public IContextInformation getContextInformation() {
 		if (this.description != null)
@@ -179,10 +90,7 @@ public class XtextCompletionProposal implements ICompletionProposal,
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.text.contentassist.ICompletionProposal#getDisplayString
-	 * ()
+	 * @see org.eclipse.jface.text.contentassist.ICompletionProposal#getDisplayString()
 	 */
 	public String getDisplayString() {
 		return this.label.getString();
@@ -199,10 +107,7 @@ public class XtextCompletionProposal implements ICompletionProposal,
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.text.contentassist.ICompletionProposalExtension2#apply
-	 * (org.eclipse.jface.text.ITextViewer, char, int, int)
+	 * @see org.eclipse.jface.text.contentassist.ICompletionProposalExtension2#apply(org.eclipse.jface.text.ITextViewer, char, int, int)
 	 */
 	public void apply(ITextViewer viewer, char trigger, int stateMask,
 			int offset) {
@@ -211,38 +116,37 @@ public class XtextCompletionProposal implements ICompletionProposal,
 			
 			IDocument document = viewer.getDocument();
 			
-			if (model != null) {
+			if (this.contentAssistContext.getModel() != null) {
 				
-				ContentAssistContextAdapter contentAssistContextAdapter = getContextAdapater();
 				
-				AbstractNode abstractNode = contentAssistContextAdapter.getCurrentNode();
+				AbstractNode abstractNode = this.contentAssistContext.getNode();
 				
 				if (abstractNode instanceof LeafNode) {
 					
 					LeafNode currentLeafNode = (LeafNode) abstractNode;
 					
 					if (getDisplayString().toUpperCase().startsWith(currentLeafNode.getText().toUpperCase())) {
-						setText(getText().substring(this.offset - currentLeafNode.getTotalOffset()));
-					} else if (contentAssistContextAdapter.isCusorAtEndOfLastCompleteNode()) {
+						this.text = this.text.substring(this.contentAssistContext.getOffSet() - currentLeafNode.getTotalOffset());
+					} else if (isCusorAtEndOfLastCompleteNode()) {
 
 						if (currentLeafNode.getGrammarElement() instanceof CrossReference
 								&& abstractElement instanceof CrossReference) {
-							setText(" " + getText());
+							this.text =  " " + this.text;
 						}
 						else if (currentLeafNode.getGrammarElement() instanceof RuleCall
 								&& currentLeafNode.getGrammarElement().eContainer() instanceof Assignment
 								&& abstractElement instanceof Assignment) {
-							setText(" " + getText());
+							this.text = " " + this.text;
 						}
 						else if (!GrammarUtil.containingParserRule(abstractElement).equals(
 								  GrammarUtil.containingParserRule(currentLeafNode.getGrammarElement()))) {
-							setText(" " + getText());
+							this.text = " " + this.text;
 						}
 					}
 				} 
 			}
 			
-			document.replace(this.offset, document.getLength()<(this.offset+getText().length()) ? 0:getText().length() , getText());
+			document.replace(this.contentAssistContext.getOffSet(), 0, this.text);
 
 		} catch (BadLocationException e) {
 			logger.error(e);
@@ -251,36 +155,26 @@ public class XtextCompletionProposal implements ICompletionProposal,
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.text.contentassist.ICompletionProposalExtension2#selected
-	 * (org.eclipse.jface.text.ITextViewer, boolean)
+	 * @see org.eclipse.jface.text.contentassist.ICompletionProposalExtension2#selected(org.eclipse.jface.text.ITextViewer, boolean)
 	 */
 	public void selected(ITextViewer viewer, boolean smartToggle) {
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.text.contentassist.ICompletionProposalExtension2#unselected
-	 * (org.eclipse.jface.text.ITextViewer)
+	 * @see org.eclipse.jface.text.contentassist.ICompletionProposalExtension2#unselected(org.eclipse.jface.text.ITextViewer)
 	 */
 	public void unselected(ITextViewer viewer) {
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.text.contentassist.ICompletionProposalExtension2#validate
-	 * (org.eclipse.jface.text.IDocument, int,
-	 * org.eclipse.jface.text.DocumentEvent)
+	 * @see org.eclipse.jface.text.contentassist.ICompletionProposalExtension2#validate(org.eclipse.jface.text.IDocument, int, org.eclipse.jface.text.DocumentEvent)
 	 */
 	public boolean validate(IDocument document, int offset, DocumentEvent event) {
 		boolean startsWith = false;
 		try {
-			String prefix = document.get(this.offset, offset - this.offset);
+			String prefix = document.get(this.contentAssistContext.getOffSet(), offset - this.contentAssistContext.getOffSet());
 			startsWith = getDisplayString().toLowerCase().startsWith(
 					prefix.toLowerCase());
 		} catch (BadLocationException e) {
@@ -301,51 +195,46 @@ public class XtextCompletionProposal implements ICompletionProposal,
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.text.contentassist.ICompletionProposal#getSelection
-	 * (org.eclipse.jface.text.IDocument)
+	 * @see org.eclipse.jface.text.contentassist.ICompletionProposal#getSelection(org.eclipse.jface.text.IDocument)
 	 */
 	public Point getSelection(IDocument document) {
-		return new Point(offset + this.text.length(), 0);
+		return new Point(this.contentAssistContext.getOffSet() + this.text.length(), 0);
 	}
 	
 	/**
 	 * 
-	 * @param prefix to match
 	 * @return true or false whether the given prefix matches the text of this completion proposal
 	 */
-	public boolean matches(String prefix) {
+	public boolean matches() {
 		
 		boolean matches = true;
 		
-		if (model != null) {
+		if (this.contentAssistContext.getModel() != null) {
 			
 			AbstractElement abstractElement = null;
 
-			if (getAbstractElement() instanceof Keyword ||
-				getAbstractElement() instanceof CrossReference) {
-				abstractElement = GrammarUtil.containingAssignment(getAbstractElement());
+			if (this.abstractElement instanceof Keyword ||
+					this.abstractElement instanceof CrossReference) {
+				abstractElement = GrammarUtil.containingAssignment(this.abstractElement);
 			} 
 			
 			if (null==abstractElement) {
-				abstractElement = getAbstractElement();
+				abstractElement = this.abstractElement;
 			}
 			
-			ContentAssistContextAdapter contentAssistContextAdapter = getContextAdapater();
 			
 			boolean candidateToCompare 	= false;
 			
 			// means if we are at the end of a complete token we want to filter only equal grammarelements (not the 'next' ones)
-			if (contentAssistContextAdapter.isCusorAtEndOfLastCompleteNode() && 
-					abstractElement.equals(contentAssistContextAdapter.getCurrentGrammarElement())) {
+			if (isCusorAtEndOfLastCompleteNode() && 
+					abstractElement.equals(getCurrentGrammarElement())) {
 				candidateToCompare = true;
-			} else if (!contentAssistContextAdapter.isCusorAtEndOfLastCompleteNode() ) {
+			} else if (!isCusorAtEndOfLastCompleteNode() ) {
 				candidateToCompare = true;
 			}
 			
-			if ( candidateToCompare && (!"".equals(prefix.trim()) && 
-					!getDisplayString().toUpperCase().trim().startsWith(prefix.toUpperCase().trim()))) {
+			if ( candidateToCompare && (!"".equals(this.contentAssistContext.getMatchString().trim()) && 
+					!getDisplayString().toUpperCase().trim().startsWith(this.contentAssistContext.getMatchString().toUpperCase().trim()))) {
 				matches = false;
 			}	
 		}
@@ -356,7 +245,7 @@ public class XtextCompletionProposal implements ICompletionProposal,
 
 	@Override
 	public String toString() {
-		return "XtextCompletionPoposal[text='"+getText()+"']";
+		return "XtextCompletionPoposal[text='"+this.text+"']";
 	}
 
 	private void initializeImage(String imageName) {
@@ -374,9 +263,26 @@ public class XtextCompletionProposal implements ICompletionProposal,
 		this.image = newImage;
 	}
 	
-	private ContentAssistContextAdapter getContextAdapater() {
-		ContentAssistContextAdapter contentAssistContextAdapter = (ContentAssistContextAdapter) 
-			EcoreUtil.getAdapter(model.eAdapters(), ContentAssistContextAdapter.class);
-		return contentAssistContextAdapter;
+	
+	/**
+	 * @return true or false wheter the cursor is at the the last complete node
+	 */
+	public boolean isCusorAtEndOfLastCompleteNode() {
+		return  this.contentAssistContext.getNode() == this.contentAssistContext.getReferenceNode();
+	}
+
+	/**
+	 * @return the grammar element of the current node
+	 */
+	public EObject getCurrentGrammarElement() {
+
+		EObject grammarElement = GrammarUtil.containingAssignment(this.contentAssistContext.getNode().getGrammarElement());
+
+		if (null == grammarElement) {
+			grammarElement = (this.contentAssistContext.getNode().getGrammarElement() instanceof ParserRule ? ((ParserRule) this.contentAssistContext.getNode()
+					.getGrammarElement()).getAlternatives() : this.contentAssistContext.getNode().getGrammarElement());
+		}
+
+		return grammarElement;
 	}
 }

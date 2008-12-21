@@ -2,12 +2,11 @@ package org.eclipse.xtext.ui.common.editor.codecompletion;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.text.templates.Template;
+import org.eclipse.jface.text.templates.TemplateContextType;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-
 
 /**
  * 
@@ -44,38 +43,60 @@ public interface IProposalProvider {
 	 * Is invoked by the framework if (with respect to the grammar) it is possible that the keyword passed as first parameter
 	 * can occur next up.
 	 * 
-	 * @param keyword - the keyword to be completed
-	 * @param model - the most specific model element under the cursor. 
-	 * @param prefix - the prefix under the cursor or null if there is no prefix
-	 * @param document - the IDocument instance used by the editor
-	 * @param offset - an offset within the document for which completions should be computed
+	 * @param keyword the <code>Keyword</code> to be completed
+	 * @param contentAssistContext the current context of the content assist
 	 * @return a list of matching {@link ICompletionProposal}
 	 */
-	public List<? extends ICompletionProposal> completeKeyword(Keyword keyword, EObject model, String prefix, IDocument document,int offset);
+	List<? extends ICompletionProposal> completeKeyword(Keyword keyword, IContentAssistContext contentAssistContext);
 
 	/**
 	 * Is invoked by the framework if (with respect to the grammar) it is possible that the keyword passed as first parameter
 	 * can occure next up.
 	 * 
-	 * @param ruleCall - the keyword to be completed
-	 * @param model - the most specific model element under the cursor. 
-	 * @param prefix - the prefix under the cursor or null if there is no prefix
-	 * @param document - the IDocument instance used by the editor
-	 * @param offset - an offset within the document for which completions should be computed
+	 * @param ruleCall the <code>RuleCall</code> to be completed
+	 * @param contentAssistContext the current context of the content assist
 	 * @return a list of matching {@link ICompletionProposal}
 	 */
-	public List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall, EObject model, String prefix, IDocument document,int offset);
-
+	List<? extends ICompletionProposal> completeRuleCall(RuleCall ruleCall, IContentAssistContext contentAssistContext);
+	
+	/**
+	 * Returns the context type that can handle template insertion at the given region
+	 * in the viewer's document.
+	 *
+	 * @param keyword the <code>Keyword</code> to be completed
+	 * @param contentAssistContext the current context of the content assist
+	 * @return the context type that can handle template expansion for the given location, or <code>null</code> if none exists
+	 */
+	TemplateContextType getTemplateContextType(Keyword keyword, IContentAssistContext contentAssistContext);
+	
+	/**
+	 * Returns the context type that can handle template insertion at the given region
+	 * in the viewer's document.
+	 *
+	 * @param ruleCall the <code>RuleCall</code> 
+	 * @param contentAssistContext the current context of the content assist
+	 * @return the context type that can handle template expansion for the given location, or <code>null</code> if none exists
+	 */
+	TemplateContextType getTemplateContextType(RuleCall ruleCall, IContentAssistContext contentAssistContext);
+	
+	/**
+	 * Returns the templates valid for the context type specified by <code>contextTypeId</code>.
+	 *
+	 * @param contextTypeId the context type id
+	 * @return the templates valid for this context type id
+	 */
+	Template[] getTemplates(String contextTypeId);
+	
+	
 	/**
 	 * Used to filter and sort a list of completion proposals.
 	 * This method is invoked by the framework after all possible completions have been collected.
 	 * @param completionProposalList matching {@link ICompletionProposal} to sort and filter
-	 * @param model - the most specific model element under the cursor. 
-	 * @param prefix - the prefix under the cursor or null if there is no prefix
-	 * @param document - the IDocument instance used by the editor
-	 * @param offset - an offset within the document for which completions should be computed
+	 * @param contentAssistContext the current context of the content assist
 	 * @return the sorted and filtered <code>ICompletionProposal</code> list.
-	 * 
 	 */
-	public List<? extends ICompletionProposal> sortAndFilter(List<? extends ICompletionProposal> completionProposalList,EObject model, String prefix, IDocument document,int offset);
+	List<? extends ICompletionProposal> sortAndFilter(List<? extends ICompletionProposal> completionProposalList,IContentAssistContext contentAssistContext);
+	
+	
+	
 }
