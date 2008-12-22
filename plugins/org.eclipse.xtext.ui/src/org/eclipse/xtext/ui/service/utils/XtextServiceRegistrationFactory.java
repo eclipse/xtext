@@ -13,9 +13,9 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.IMetamodelAccess;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.crossref.IFragmentProvider;
-import org.eclipse.xtext.crossref.ILinkProvider;
 import org.eclipse.xtext.crossref.ILinker;
-import org.eclipse.xtext.crossref.IURIChecker;
+import org.eclipse.xtext.crossref.ILinkingService;
+import org.eclipse.xtext.crossref.IScopeProvider;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
@@ -68,17 +68,17 @@ public class XtextServiceRegistrationFactory implements IServiceRegistrationFact
 		serviceMap.put("quickFixGenerator", IQuickFixGenerator.class);
 		serviceMap.put("hyperlinkCreator", IHyperlinkCreator.class);
 		serviceMap.put("linker", ILinker.class);
-		serviceMap.put("linkProvider", ILinkProvider.class);
-		serviceMap.put("uriChecker", IURIChecker.class);
+		serviceMap.put("linkProvider", ILinkingService.class);
+		serviceMap.put("uriChecker", IScopeProvider.class);
 		serviceMap.put("fragmentProvider", IFragmentProvider.class);
 	}
 
 	public Set<IServiceRegistration> registrations() {
-		Set<IServiceRegistration> regs = new HashSet<IServiceRegistration>();
+		final Set<IServiceRegistration> regs = new HashSet<IServiceRegistration>();
 		for (final String serviceDef : serviceMap.keySet()) {
-			IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(Activator.PLUGIN_ID,
-					serviceDef);
-			IConfigurationElement[] elements = extensionPoint.getConfigurationElements();
+			final IExtensionPoint extensionPoint = Platform.getExtensionRegistry().getExtensionPoint(
+					Activator.PLUGIN_ID, serviceDef);
+			final IConfigurationElement[] elements = extensionPoint.getConfigurationElements();
 			for (final IConfigurationElement ele : elements) {
 				final String scopeId = ele.getAttribute(SCOPE);
 				final IServiceScope scope = ServiceScopeFactory.get(scopeId);
@@ -88,7 +88,7 @@ public class XtextServiceRegistrationFactory implements IServiceRegistrationFact
 				else {
 					final String prio = ele.getAttribute(PRIO);
 					final IServiceFactory fa = new XtextServiceFactory(serviceMap.get(serviceDef), ele);
-					IServiceRegistration reg = new IServiceRegistration() {
+					final IServiceRegistration reg = new IServiceRegistration() {
 
 						public int priority() {
 							return prio != null ? Integer.valueOf(prio) : 0;

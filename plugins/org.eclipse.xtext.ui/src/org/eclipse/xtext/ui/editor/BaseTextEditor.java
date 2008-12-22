@@ -73,35 +73,12 @@ import org.eclipse.xtext.ui.service.utils.PropertiesResolver;
  */
 public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 
-	private final class PreferenceStorePropertyChangeListener implements IPropertyChangeListener {
-		public void propertyChange(PropertyChangeEvent event) {
-			// language dependent preferences starts with language
-			// id so check if this event is for current language
-			if (event != null
-					&& event.getProperty() != null
-					&& (event.getProperty().startsWith(getLanguageDescriptor().getId()) || event.getProperty()
-							.startsWith("AbstractTextEditor"))) {
-				// syntax highlighting
-				if (event.getProperty().startsWith(PreferenceConstants.syntaxColorerTag(getLanguageDescriptor()))
-						|| event.getProperty().startsWith("AbstractTextEditor")) {
-					if (getSourceViewer() instanceof TextViewer) {
-						// FIXME notify syntax colorer before viewer refreshing
-						ISyntaxColorer colorer = ServiceRegistry.getService(languageDescriptor, ISyntaxColorer.class);
-						colorer.clearCache();
-						TextViewer tv = (TextViewer) getSourceViewer();
-						tv.invalidateTextPresentation();
-					}
-				}
-			}
-		}
-	}
-
 	private abstract class AbstractSelectionChangedListener implements ISelectionChangedListener {
 
-		public void install(ISelectionProvider selectionProvider) {
+		public void install(final ISelectionProvider selectionProvider) {
 			if (selectionProvider != null) {
 				if (selectionProvider instanceof IPostSelectionProvider) {
-					IPostSelectionProvider provider = (IPostSelectionProvider) selectionProvider;
+					final IPostSelectionProvider provider = (IPostSelectionProvider) selectionProvider;
 					provider.addPostSelectionChangedListener(this);
 				}
 				else {
@@ -110,10 +87,10 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 			}
 		}
 
-		public void uninstall(ISelectionProvider selectionProvider) {
+		public void uninstall(final ISelectionProvider selectionProvider) {
 			if (selectionProvider != null) {
 				if (selectionProvider instanceof IPostSelectionProvider) {
-					IPostSelectionProvider provider = (IPostSelectionProvider) selectionProvider;
+					final IPostSelectionProvider provider = (IPostSelectionProvider) selectionProvider;
 					provider.removePostSelectionChangedListener(this);
 				}
 				else {
@@ -125,28 +102,54 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	}
 
 	/**
+	 * This listener listens to selections in the text editor and will update
+	 * the outline selection accordingly.
+	 */
+	private final class EditorSelectionChangedListener extends AbstractSelectionChangedListener {
+		public void selectionChanged(final SelectionChangedEvent event) {
+			handleSelectionChangedSourcePage(event);
+		}
+
+		protected void handleSelectionChangedSourcePage(final SelectionChangedEvent event) {
+			final ISelection selection = event.getSelection();
+			if (!selection.isEmpty() && selection instanceof ITextSelection) {
+
+				final ITextSelection textSel = (ITextSelection) selection;
+
+				// Get the current element from the offset
+				final int offset = textSel.getOffset();
+				final AbstractNode node = ParseTreeUtil.getLastCompleteNodeByOffset(model.getParseTreeRootNode(),
+						offset);
+
+				// Synchronize the outline page
+				synchronizeOutlinePage(node);
+			}
+		}
+	}
+
+	/**
 	 * This listener listens to selections in the outline and will update the
 	 * editor selection accordingly.
 	 */
 	private final class OutlineSelectionChangedListener extends AbstractSelectionChangedListener {
 
-		public void selectionChanged(SelectionChangedEvent event) {
+		public void selectionChanged(final SelectionChangedEvent event) {
 			updateSelection(event);
 		}
 
-		public void updateSelection(SelectionChangedEvent event) {
-			ISelection sel = event.getSelection();
+		public void updateSelection(final SelectionChangedEvent event) {
+			final ISelection sel = event.getSelection();
 			if (sel instanceof IStructuredSelection) {
-				IStructuredSelection structuredSelection = (IStructuredSelection) sel;
-				Object firstElement = structuredSelection.getFirstElement();
+				final IStructuredSelection structuredSelection = (IStructuredSelection) sel;
+				final Object firstElement = structuredSelection.getFirstElement();
 				if (firstElement instanceof EObject) {
-					EObject astNode = (EObject) firstElement;
-					NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(astNode);
-					CompositeNode parserNode = nodeAdapter.getParserNode();
+					final EObject astNode = (EObject) firstElement;
+					final NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(astNode);
+					final CompositeNode parserNode = nodeAdapter.getParserNode();
 
-					AbstractNode selectionNode = findSelectionNode(parserNode);
-					int offset = selectionNode.getOffset();
-					int length = selectionNode.getLength();
+					final AbstractNode selectionNode = findSelectionNode(parserNode);
+					final int offset = selectionNode.getOffset();
+					final int length = selectionNode.getLength();
 
 					getSourceViewer().revealRange(offset, length);
 					getSourceViewer().setSelectedRange(offset, length);
@@ -154,15 +157,15 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 			}
 		}
 
-		private AbstractNode findSelectionNode(CompositeNode startNode) {
-			EList<AbstractNode> leafNodes = startNode.getChildren();
+		private AbstractNode findSelectionNode(final CompositeNode startNode) {
+			final EList<AbstractNode> leafNodes = startNode.getChildren();
 			AbstractNode keywordNode = null;
 			AbstractNode idNode = null;
-			for (AbstractNode leafNode : leafNodes) {
-				EObject grammarElement = leafNode.getGrammarElement();
+			for (final AbstractNode leafNode : leafNodes) {
+				final EObject grammarElement = leafNode.getGrammarElement();
 				if (grammarElement instanceof RuleCall) {
-					RuleCall ruleCall = (RuleCall) grammarElement;
-					String ruleName = ruleCall.getName();
+					final RuleCall ruleCall = (RuleCall) grammarElement;
+					final String ruleName = ruleCall.getRule().getName();
 					if (idNode == null && ruleName.equals("ID")) {
 						idNode = leafNode;
 					}
@@ -174,67 +177,36 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 				}
 			}
 
-			if (idNode != null) {
+			if (idNode != null)
 				return idNode;
-			}
-			else if (keywordNode != null) {
+			else if (keywordNode != null)
 				return keywordNode;
-			}
-			else {
+			else
 				return startNode;
-			}
 		}
 	}
 
-	/**
-	 * This listener listens to selections in the text editor and will update
-	 * the outline selection accordingly.
-	 */
-	private final class EditorSelectionChangedListener extends AbstractSelectionChangedListener {
-		public void selectionChanged(SelectionChangedEvent event) {
-			handleSelectionChangedSourcePage(event);
-		}
-
-		protected void handleSelectionChangedSourcePage(SelectionChangedEvent event) {
-			ISelection selection = event.getSelection();
-			if (!selection.isEmpty() && selection instanceof ITextSelection) {
-
-				ITextSelection textSel = (ITextSelection) selection;
-
-				// Get the current element from the offset
-				int offset = textSel.getOffset();
-				AbstractNode node = ParseTreeUtil.getLastCompleteNodeByOffset(model.getParseTreeRootNode(), offset);
-
-				// Synchronize the outline page
-				synchronizeOutlinePage(node);
-			}
-		}
-	}
-
-	public void synchronizeOutlinePage() {
-		int caretOffset = getSourceViewer().getTextWidget().getCaretOffset();
-		AbstractNode currentNode = ParseTreeUtil.getLastCompleteNodeByOffset(model.getParseTreeRootNode(), caretOffset);
-		synchronizeOutlinePage(currentNode);
-	}
-
-	private boolean shouldSynchronizeOutlinePage() {
-		return Activator.getDefault().getPreferenceStore().getBoolean("ToggleLinkWithEditorAction.isChecked");
-	}
-
-	public void synchronizeOutlinePage(AbstractNode node) {
-		ISelection selection = StructuredSelection.EMPTY;
-
-		if (shouldSynchronizeOutlinePage()) {
-			outlineSelectionChangedListener.uninstall(outlinePage);
-			if (node != null && node instanceof LeafNode) {
-				CompositeNode compositeNode = node.getParent();
-				EObject astElement = NodeUtil.getASTElementForRootNode(compositeNode);
-				if (astElement != null) {
-					selection = new StructuredSelection(astElement);
+	private final class PreferenceStorePropertyChangeListener implements IPropertyChangeListener {
+		public void propertyChange(final PropertyChangeEvent event) {
+			// language dependent preferences starts with language
+			// id so check if this event is for current language
+			if (event != null
+					&& event.getProperty() != null
+					&& (event.getProperty().startsWith(getLanguageDescriptor().getId()) || event.getProperty()
+							.startsWith("AbstractTextEditor"))) {
+				// syntax highlighting
+				if (event.getProperty().startsWith(PreferenceConstants.syntaxColorerTag(getLanguageDescriptor()))
+						|| event.getProperty().startsWith("AbstractTextEditor")) {
+					if (getSourceViewer() instanceof TextViewer) {
+						// FIXME notify syntax colorer before viewer refreshing
+						final ISyntaxColorer colorer = ServiceRegistry.getService(languageDescriptor,
+								ISyntaxColorer.class);
+						colorer.clearCache();
+						final TextViewer tv = (TextViewer) getSourceViewer();
+						tv.invalidateTextPresentation();
+					}
 				}
 			}
-			outlinePage.setSelection(selection);
-			outlineSelectionChangedListener.install(outlinePage);
 		}
 	}
 
@@ -245,64 +217,56 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	protected boolean selectionSetFromOutline;
 
 	private IEditorModel model;
+
 	private XtextContentOutlinePage outlinePage;
 
 	private ProjectionSupport projectionSupport;
-	private FoldingUpdater foldingSupport;
 
+	private FoldingUpdater foldingSupport;
 	@Inject
 	private IServiceScope languageDescriptor;
 
 	private AbstractSelectionChangedListener editorSelectionChangedListener;
-
 	private OutlineSelectionChangedListener outlineSelectionChangedListener;
 
 	@Override
-	public void setInitializationData(IConfigurationElement cfig, String propertyName, Object data) {
-		super.setInitializationData(cfig, propertyName, data);
-		// try plain text editor if problem occurs
-		if (languageDescriptor != null) {
-			// do document provider setup
-			setDocumentProvider(XtextDocumentProviderFactory.getInstance().getDocumentProvider(languageDescriptor));
+	public void createPartControl(final Composite parent) {
+
+		super.createPartControl(parent);
+		// We need ProjectionViewer to support Folding
+		final ProjectionViewer projectionViewer = (ProjectionViewer) getSourceViewer();
+		projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(), getSharedColors());
+		projectionSupport.addSummarizableAnnotationType("org.eclipse.ui.workbench.texteditor.warning"); //$NON-NLS-1$
+		projectionSupport.addSummarizableAnnotationType("org.eclipse.ui.workbench.texteditor.error"); //$NON-NLS-1$
+		projectionSupport.install();
+		// Folding stuff
+		final IFoldingStructureProvider foldingProvider = ServiceRegistry.getService(languageDescriptor,
+				IFoldingStructureProvider.class);
+		if (foldingProvider != null) {
+			projectionViewer.doOperation(ProjectionViewer.TOGGLE);
+			foldingSupport = new FoldingUpdater(foldingProvider);
+			foldingSupport.bind(getModel(), projectionViewer);
 		}
-		else {
-			log.error(XtextUIMessages.getFormattedString("BaseTextEditor.NoLanguageDescriptor", //$NON-NLS-1$
-					this.getConfigurationElement().getNamespaceIdentifier()), new IllegalStateException());
-		}
+
 	}
-	
-	
 
 	@Override
-	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
-		super.init(site, input);
-		// Preference store
-		ScopedPreferenceStore xtextPreferenceStore = PropertiesResolver.getPreferenceStore();
-		ChainedPreferenceStore chainedPreferenceStore = new ChainedPreferenceStore(
-				new org.eclipse.jface.preference.IPreferenceStore[] { xtextPreferenceStore, getPreferenceStore() });
-		chainedPreferenceStore.addPropertyChangeListener(new PreferenceStorePropertyChangeListener());
-
-		// source viewer setup
-		setSourceViewerConfiguration(new XtextSourceViewerConfiguration(this, chainedPreferenceStore));
-
-		log.warn("Initializing Xtext basic text editor.");
-
-		// Error marker
-		IResource resource = getResource();
-		if (resource != null && isEditable() && getModel() != null) {
-			XtextProblemMarkerCreator markerCreator = new XtextProblemMarkerCreator(resource);
-			markerCreator.setProgressMonitor(new NullProgressMonitor());
-			getModel().addModelListener(markerCreator);
-			getModel().addModelListener(
-					new TaskTagsMarkerListener(site.getPluginId(), getResource(), new NullProgressMonitor()));
+	public void dispose() {
+		super.dispose();
+		if (projectionSupport != null) {
+			projectionSupport.dispose();
+		}
+		if (foldingSupport != null) {
+			foldingSupport.unbind();
 		}
 	}
 
-	private IResource getResource() {
-		Object adapter = getEditorInput().getAdapter(IResource.class);
-		if (adapter != null)
-			return (IResource) adapter;
-		return null;
+	@SuppressWarnings("unchecked")
+	@Override
+	public Object getAdapter(final Class adapter) {
+		if (adapter.equals(IContentOutlinePage.class))
+			return getOutlinePage();
+		return super.getAdapter(adapter);
 	}
 
 	public IServiceScope getLanguageDescriptor() {
@@ -317,28 +281,120 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 	 */
 	public IEditorModel getModel() {
 		if (model == null) {
-			IDocumentProvider provider = getDocumentProvider();
+			final IDocumentProvider provider = getDocumentProvider();
 			if (provider instanceof XtextDocumentProvider) {
-				XtextDocumentProvider documentProvider = (XtextDocumentProvider) provider;
+				final XtextDocumentProvider documentProvider = (XtextDocumentProvider) provider;
 				model = documentProvider.getModel(getEditorInput());
 			}
 		}
 		return model;
 	}
 
-	private void setOutlinePageInput() {
-		if (outlinePage != null) {
-			outlinePage.setInput(getModel());
+	@Override
+	public void init(final IEditorSite site, final IEditorInput input) throws PartInitException {
+		super.init(site, input);
+		// Preference store
+		final ScopedPreferenceStore xtextPreferenceStore = PropertiesResolver.getPreferenceStore();
+		final ChainedPreferenceStore chainedPreferenceStore = new ChainedPreferenceStore(
+				new org.eclipse.jface.preference.IPreferenceStore[] { xtextPreferenceStore, getPreferenceStore() });
+		chainedPreferenceStore.addPropertyChangeListener(new PreferenceStorePropertyChangeListener());
+
+		// source viewer setup
+		setSourceViewerConfiguration(new XtextSourceViewerConfiguration(this, chainedPreferenceStore));
+
+		log.warn("Initializing Xtext basic text editor.");
+
+		// Error marker
+		final IResource resource = getResource();
+		if (resource != null && isEditable() && getModel() != null) {
+			final XtextProblemMarkerCreator markerCreator = new XtextProblemMarkerCreator(resource);
+			markerCreator.setProgressMonitor(new NullProgressMonitor());
+			getModel().addModelListener(markerCreator);
+			getModel().addModelListener(
+					new TaskTagsMarkerListener(site.getPluginId(), getResource(), new NullProgressMonitor()));
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public Object getAdapter(Class adapter) {
-		if (adapter.equals(IContentOutlinePage.class)) {
-			return getOutlinePage();
+	public void setInitializationData(final IConfigurationElement cfig, final String propertyName, final Object data) {
+		super.setInitializationData(cfig, propertyName, data);
+		// try plain text editor if problem occurs
+		if (languageDescriptor != null) {
+			// do document provider setup
+			setDocumentProvider(XtextDocumentProviderFactory.getInstance().getDocumentProvider(languageDescriptor));
 		}
-		return super.getAdapter(adapter);
+		else {
+			log.error(XtextUIMessages.getFormattedString("BaseTextEditor.NoLanguageDescriptor", //$NON-NLS-1$
+					getConfigurationElement().getNamespaceIdentifier()), new IllegalStateException());
+		}
+	}
+
+	public void synchronizeOutlinePage() {
+		final int caretOffset = getSourceViewer().getTextWidget().getCaretOffset();
+		final AbstractNode currentNode = ParseTreeUtil.getLastCompleteNodeByOffset(model.getParseTreeRootNode(),
+				caretOffset);
+		synchronizeOutlinePage(currentNode);
+	}
+
+	public void synchronizeOutlinePage(final AbstractNode node) {
+		ISelection selection = StructuredSelection.EMPTY;
+
+		if (shouldSynchronizeOutlinePage()) {
+			outlineSelectionChangedListener.uninstall(outlinePage);
+			if (node != null && node instanceof LeafNode) {
+				final CompositeNode compositeNode = node.getParent();
+				final EObject astElement = NodeUtil.getASTElementForRootNode(compositeNode);
+				if (astElement != null) {
+					selection = new StructuredSelection(astElement);
+				}
+			}
+			outlinePage.setSelection(selection);
+			outlineSelectionChangedListener.install(outlinePage);
+		}
+	}
+
+	@Override
+	protected String[] collectContextMenuPreferencePages() {
+		final String[] ids = super.collectContextMenuPreferencePages();
+		final String[] more = new String[ids.length + 4];
+		// NOTE: preference page at index 0 will be opened, see
+		// PreferencesUtil.createPreferenceDialogOn
+		final String languageId = languageDescriptor.getId();
+		more[0] = languageId + ".editor"; //$NON-NLS-1$
+		more[1] = languageId;
+		more[2] = languageId + ".editor.templates"; //$NON-NLS-1$
+		more[3] = languageId + ".editor.syntaxcoloring"; //$NON-NLS-1$
+		System.arraycopy(ids, 0, more, 4, ids.length);
+		return more;
+	}
+
+	@Override
+	protected void createActions() {
+		super.createActions();
+		Action action = new ContentAssistAction(XtextUIMessages.getResourceBundle(), "ContentAssistProposal.", this);//$NON-NLS-1$
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
+		setAction("ContentAssistProposal", action);//$NON-NLS-1$
+		markAsStateDependentAction("ContentAssistProposal", true); //$NON-NLS-1$
+
+		action = new TextOperationAction(XtextUIMessages.getResourceBundle(), "Format.", this, ISourceViewer.FORMAT); //$NON-NLS-1$
+		action.setActionDefinitionId(Activator.PLUGIN_ID + ".FormatAction");
+		setAction("Format", action); //$NON-NLS-1$
+		markAsStateDependentAction("Format", true); //$NON-NLS-1$
+		markAsSelectionDependentAction("Format", true); //$NON-NLS-1$
+		final SelectMarkerRulerAction markerAction = new XtextMarkerRulerAction(XtextUIMessages.getResourceBundle(),
+				"XtextSelectAnnotationRulerAction.", this, getVerticalRuler()); //$NON-NLS-1$
+		setAction(ITextEditorActionConstants.RULER_CLICK, markerAction);
+	}
+
+	@Override
+	protected ISourceViewer createSourceViewer(final Composite parent, final IVerticalRuler ruler, final int styles) {
+		// overwrite superclass implementation to allow folding
+		fAnnotationAccess = createAnnotationAccess();
+		fOverviewRuler = createOverviewRuler(getSharedColors());
+		final ISourceViewer projectionViewer = new ProjectionViewer(parent, ruler, getOverviewRuler(),
+				isOverviewRulerVisible(), styles);
+		getSourceViewerDecorationSupport(projectionViewer);
+		return projectionViewer;
 	}
 
 	private IContentOutlinePage getOutlinePage() {
@@ -355,77 +411,20 @@ public class BaseTextEditor extends TextEditor implements IEditorModelProvider {
 		return outlinePage;
 	}
 
-	@Override
-	protected void createActions() {
-		super.createActions();
-		Action action = new ContentAssistAction(XtextUIMessages.getResourceBundle(), "ContentAssistProposal.", this);//$NON-NLS-1$
-		action.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
-		setAction("ContentAssistProposal", action);//$NON-NLS-1$
-		markAsStateDependentAction("ContentAssistProposal", true); //$NON-NLS-1$
-
-		action = new TextOperationAction(XtextUIMessages.getResourceBundle(), "Format.", this, ISourceViewer.FORMAT); //$NON-NLS-1$
-		action.setActionDefinitionId(Activator.PLUGIN_ID + ".FormatAction");
-		setAction("Format", action); //$NON-NLS-1$
-		markAsStateDependentAction("Format", true); //$NON-NLS-1$
-		markAsSelectionDependentAction("Format", true); //$NON-NLS-1$
-		SelectMarkerRulerAction markerAction = new XtextMarkerRulerAction(XtextUIMessages.getResourceBundle(),
-				"XtextSelectAnnotationRulerAction.", this, getVerticalRuler()); //$NON-NLS-1$
-		setAction(ITextEditorActionConstants.RULER_CLICK, markerAction);
+	private IResource getResource() {
+		final Object adapter = getEditorInput().getAdapter(IResource.class);
+		if (adapter != null)
+			return (IResource) adapter;
+		return null;
 	}
 
-	@Override
-	protected ISourceViewer createSourceViewer(Composite parent, IVerticalRuler ruler, int styles) {
-		// overwrite superclass implementation to allow folding
-		fAnnotationAccess = createAnnotationAccess();
-		fOverviewRuler = createOverviewRuler(getSharedColors());
-		ISourceViewer projectionViewer = new ProjectionViewer(parent, ruler, getOverviewRuler(),
-				isOverviewRulerVisible(), styles);
-		getSourceViewerDecorationSupport(projectionViewer);
-		return projectionViewer;
-	}
-
-	@Override
-	public void createPartControl(Composite parent) {
-
-		super.createPartControl(parent);
-		// We need ProjectionViewer to support Folding
-		ProjectionViewer projectionViewer = (ProjectionViewer) getSourceViewer();
-		projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(), getSharedColors());
-		projectionSupport.addSummarizableAnnotationType("org.eclipse.ui.workbench.texteditor.warning"); //$NON-NLS-1$
-		projectionSupport.addSummarizableAnnotationType("org.eclipse.ui.workbench.texteditor.error"); //$NON-NLS-1$
-		projectionSupport.install();
-		// Folding stuff
-		IFoldingStructureProvider foldingProvider = ServiceRegistry.getService(languageDescriptor,
-				IFoldingStructureProvider.class);
-		if (foldingProvider != null) {
-			projectionViewer.doOperation(ProjectionViewer.TOGGLE);
-			foldingSupport = new FoldingUpdater(foldingProvider);
-			foldingSupport.bind(getModel(), projectionViewer);
+	private void setOutlinePageInput() {
+		if (outlinePage != null) {
+			outlinePage.setInput(getModel());
 		}
-
 	}
 
-	@Override
-	public void dispose() {
-		super.dispose();
-		if (projectionSupport != null)
-			projectionSupport.dispose();
-		if (foldingSupport != null)
-			foldingSupport.unbind();
-	}
-
-	@Override
-	protected String[] collectContextMenuPreferencePages() {
-		String[] ids = super.collectContextMenuPreferencePages();
-		String[] more = new String[ids.length + 4];
-		// NOTE: preference page at index 0 will be opened, see
-		// PreferencesUtil.createPreferenceDialogOn
-		String languageId = languageDescriptor.getId();
-		more[0] = languageId + ".editor"; //$NON-NLS-1$
-		more[1] = languageId;
-		more[2] = languageId + ".editor.templates"; //$NON-NLS-1$
-		more[3] = languageId + ".editor.syntaxcoloring"; //$NON-NLS-1$
-		System.arraycopy(ids, 0, more, 4, ids.length);
-		return more;
+	private boolean shouldSynchronizeOutlinePage() {
+		return Activator.getDefault().getPreferenceStore().getBoolean("ToggleLinkWithEditorAction.isChecked");
 	}
 }
