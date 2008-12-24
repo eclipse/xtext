@@ -71,10 +71,15 @@ public class Xtext2EcoreTransformer {
 	private Grammar superGrammar;
 	private EClassifierInfos eClassifierInfos;
 	private ErrorAcceptor errorAcceptor = new NullErrorAcceptor();
+	private boolean superGrammarFailed;
 
 	public Xtext2EcoreTransformer(Grammar grammar) {
 		this.grammar = grammar;
-		superGrammar = GrammarUtil.getSuperGrammar(grammar);
+		try {
+			superGrammar = GrammarUtil.getSuperGrammar(grammar);
+		} catch(Exception e) {
+			superGrammarFailed = true;
+		}
 	}
 
 	public ErrorAcceptor getErrorAcceptor() {
@@ -119,6 +124,10 @@ public class Xtext2EcoreTransformer {
 	 * pre-conditions - ensure non-duplicate aliases - ensure all aliases have matching metamodel declarations
 	 */
 	public void transform() {
+		if (superGrammarFailed) {
+			// TODO should not highlight the whole grammar
+			errorAcceptor.acceptError(null, "Could not resolve super grammar", grammar);
+		}
 		eClassifierInfos = new EClassifierInfos();
 		generatedEPackages = new HashMap<String, EPackage>();
 
@@ -188,7 +197,7 @@ public class Xtext2EcoreTransformer {
 					if (rule instanceof ParserRule) {
 						ParserRule parserRule = (ParserRule) rule;
 						if (!GrammarUtil.isDatatypeRule(parserRule)) {
-							deriveTypesAndHierarchy(generatedEClass, parserRule.getAlternatives());
+							deriveTypesAndHierarchy(parserRule, generatedEClass, parserRule.getAlternatives());
 						}
 					}
 				}
@@ -282,6 +291,8 @@ public class Xtext2EcoreTransformer {
 			@Override
 			public Xtext2ECoreInterpretationContext caseAction(Action object) {
 				try {
+					if (object.getFeature() == null)
+						throw new TransformationException(TransformationErrorCode.InvalidFeature, "Name of the feature is not assigned.", object);
 					TypeRef actionTypeRef = object.getTypeName();
 					EClassifierInfo actionType = findOrCreateEClassifierInfo(actionTypeRef, null);
 					EClassifierInfo currentCompatibleType = context.getCurrentCompatibleType();
@@ -409,7 +420,7 @@ public class Xtext2EcoreTransformer {
 		helper.detectDuplicatedFeatures();
 	}
 
-	private void deriveTypesAndHierarchy(EClassifierInfo ruleReturnType, AbstractElement element)
+	private void deriveTypesAndHierarchy(ParserRule rule, EClassifierInfo ruleReturnType, AbstractElement element)
 			throws TransformationException {
 		if (element instanceof RuleCall) {
 			RuleCall ruleCall = (RuleCall) element;
@@ -425,32 +436,34 @@ public class Xtext2EcoreTransformer {
 							TransformationErrorCode.NoSuchRuleAvailable, "Cannot find called rule.", ruleCall);
 			}
 			TypeRef calledRuleReturnTypeRef = getOrComputeReturnType(calledRule);
-			addSuperType(calledRuleReturnTypeRef, ruleReturnType);
+			addSuperType(rule, calledRuleReturnTypeRef, ruleReturnType);
 		}
 		else if (element instanceof Action) {
 			Action action = (Action) element;
 			TypeRef actionTypeRef = action.getTypeName();
-			addSuperType(actionTypeRef, ruleReturnType);
+			addSuperType(rule, actionTypeRef, ruleReturnType);
 		}
 		else if (element instanceof Group) {
 			Group group = (Group) element;
-			deriveTypesAndHierarchy(ruleReturnType, group.getAbstractTokens());
+			for (AbstractElement ele : group.getAbstractTokens()) {
+				deriveTypesAndHierarchy(rule, ruleReturnType, ele);
+			}
 		}
 		else if (element instanceof Alternatives) {
 			Alternatives alternatives = (Alternatives) element;
-			deriveTypesAndHierarchy(ruleReturnType, alternatives.getGroups());
+			for (AbstractElement ele : alternatives.getGroups()) {
+				deriveTypesAndHierarchy(rule, ruleReturnType, ele);
+			}
 		}
 	}
 
-	private void deriveTypesAndHierarchy(EClassifierInfo ruleReturnType, List<AbstractElement> elements)
-			throws TransformationException {
-		for (AbstractElement element : elements) {
-			deriveTypesAndHierarchy(ruleReturnType, element);
-		}
-	}
-
-	private void addSuperType(TypeRef subTypeRef, EClassifierInfo superType) throws TransformationException {
+	private void addSuperType(ParserRule rule, TypeRef subTypeRef, EClassifierInfo superType) throws TransformationException {
 		EClassifierInfo calledRuleReturnType = findOrCreateEClassifierInfo(subTypeRef, null);
+		if (calledRuleReturnType.getEClassifier() instanceof EDataType)
+			throw new TransformationException(TransformationErrorCode.InvalidSupertype, 
+					"Cannot add supertype '"
+					+ superType.getEClassifier().getName() + "' to simple datatype '"
+					+ calledRuleReturnType.getEClassifier().getName() + "'.", rule.getType());
 		calledRuleReturnType.addSupertype(superType);
 	}
 
@@ -567,12 +580,11 @@ public class Xtext2EcoreTransformer {
 		//					+ GrammarUtil.getQualifiedName(typeRef));
 
 		String classifierName = null;
-		//		typeRefName = typeRef.getName();
 		classifierName = GrammarUtil.getTypeRefName(typeRef);
 		if (classifierName == null)
 			classifierName = name;
 		if (classifierName == null)
-			throw new NullPointerException("typeRefName may not be null");
+			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot reference unnamed type.", typeRef);
 
 		AbstractMetamodelDeclaration metaModel = typeRef.getMetamodel();
 		if (metaModel == null)

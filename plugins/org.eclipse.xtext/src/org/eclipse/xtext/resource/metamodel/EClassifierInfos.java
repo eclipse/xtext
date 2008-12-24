@@ -135,7 +135,7 @@ public class EClassifierInfos {
 				lookUp = lookUp.getParent();
 			}
 			if (info == null)
-				throw new NullPointerException("cannot find type info for classifier '" + classifier.getName() + "'");
+				return null;
 			types.add(info);
 		}
 

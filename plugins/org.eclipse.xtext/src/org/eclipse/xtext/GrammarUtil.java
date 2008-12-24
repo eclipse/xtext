@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -42,6 +43,8 @@ import org.eclipse.xtext.util.Strings;
  * @author Sebastian Zarnekow
  */
 public class GrammarUtil {
+	
+	private static final Logger log = Logger.getLogger(GrammarUtil.class);
 
 	private static URI getClasspathURIForLanguageId(String id) {
 		return URI.createURI("classpath:/" + id.replace('.', '/') + (IXtextBuiltin.ID.equals(id) ? ".xmi" : ".xtext"));
@@ -226,7 +229,12 @@ public class GrammarUtil {
 					result.add(decl);
 				}
 			}
-			g = getSuperGrammar(g);
+			try {
+				g = getSuperGrammar(g);
+			} catch (Exception e) {
+				log.debug(e);
+				g = null;
+			}
 		}
 		return result;
 	}

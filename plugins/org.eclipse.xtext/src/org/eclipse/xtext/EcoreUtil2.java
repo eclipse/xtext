@@ -220,8 +220,10 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 
 	public static EStructuralFeature findFeatureByName(Collection<EStructuralFeature> features, String name) {
+		if (name == null)
+			return null;
 		for (EStructuralFeature feature : features)
-			if (feature.getName().equals(name))
+			if (name.equals(feature.getName()))
 				return feature;
 
 		return null;

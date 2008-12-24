@@ -57,7 +57,7 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 					return result;
 				}
 				if (visitedRules.add(object)) {
-					if (doSwitch(object.getAlternatives())) {
+					if (object.getAlternatives() != null && doSwitch(object.getAlternatives())) {
 						typeRef.setType(EcorePackage.Literals.ESTRING);
 						return true;
 					}
@@ -76,7 +76,7 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 		public Boolean caseParserRule(ParserRule object) {
 			if (visitedRules.isEmpty()) {
 				visitedRules.add(object);
-				return doSwitch(object.getAlternatives());
+				return object.getAlternatives() != null && doSwitch(object.getAlternatives());
 			}
 			final TypeRef typeRef = object.getType();
 			if (typeRef.getType() == null) {

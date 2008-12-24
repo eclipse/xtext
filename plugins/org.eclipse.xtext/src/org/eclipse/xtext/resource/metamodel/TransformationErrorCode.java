@@ -20,5 +20,6 @@ public enum TransformationErrorCode {
 	MoreThanOneFeatureWithSameName,
 	UnknownMetaModelAlias, 
 	InvalidDatatypeRule, 
-	InvalidSupertype
+	InvalidSupertype, 
+	InvalidFeature
 }
