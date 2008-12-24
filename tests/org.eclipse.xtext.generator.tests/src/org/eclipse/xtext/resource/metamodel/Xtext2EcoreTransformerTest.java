@@ -37,6 +37,7 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.crossref.internal.Linker;
+import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -765,5 +766,31 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		assertEquals("EString", feature.getEType().getName());
 		assertFalse(feature.getEType().equals(classifier));
 		assertEquals(EcorePackage.Literals.ESTRING, feature.getEType());
+	}
+	
+	public void testNoException_01() throws Exception {
+		String grammar = "language test import 'http://www.eclipse.org/emf/2002/Ecore' as ecore " +
+				"generate test 'http://test'\n" +
+				"CompositeModel: (model+=Model)+;\n" +
+				"Model: id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ';'\n" +
+				"ModelId returns ecore::EString: ID '.' ID;\n" +
+				"NestedModelId : ModelId '.' ModelId;\n" +
+				"Fraction returns EBigDecimal: INT ('/' INT)?;\n" +
+				"Vector : '(' INT I";
+		XtextResource resource = getResourceFromString(grammar);
+		for(Diagnostic d: resource.getErrors()) {
+			assertFalse(d instanceof ExceptionDiagnostic);
+		}
+	}
+	
+	public void testNoException_02() throws Exception {
+		String grammar = "language test generate test 'http://test'\n" +
+				"Model: (children+=Element)*;\n" +
+				"Element returns Type: Item ( { Item.items+=current } items+=Item );\n" +
+				"Item returns Type:	{ T";
+		XtextResource resource = getResourceFromString(grammar);
+		for(Diagnostic d: resource.getErrors()) {
+			assertFalse(d instanceof ExceptionDiagnostic);
+		}
 	}
 }
