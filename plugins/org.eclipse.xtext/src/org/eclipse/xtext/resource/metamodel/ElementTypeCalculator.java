@@ -50,7 +50,7 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 		if (object.getType() == null) {
 			String name = GrammarUtil.getTypeRefName(object);
 			if (Strings.isEmpty(name))
-				throw new NullPointerException("canot find type ref name for: '" + object + "'");
+				return null;
 			EClassifierInfo info = classifierInfos.getInfo(object.getMetamodel(), name);
 			if (info != null)
 				object.setType(info.getEClassifier());
@@ -67,7 +67,7 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 	public EClassifier caseGroup(Group object) {
 		//TODO Too strict. What about : foo(Bar|Foo ';')
 		if (object.getAbstractTokens().size() != 1)
-			throw new IllegalArgumentException("Group must have exactly one element.");
+			return null;
 		return doSwitch(object.getAbstractTokens().get(0));
 	}
 
@@ -83,7 +83,11 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 		final Set<EClassifier> types = new HashSet<EClassifier>();
 		for (AbstractElement group : object.getGroups())
 			types.add(doSwitch(group));
-		return classifierInfos.getCompatibleTypeNameOf(types, true);
+		try {
+			return classifierInfos.getCompatibleTypeNameOf(types, true);
+		} catch (IllegalArgumentException e) {
+			return null;
+		}
 	}
 
 	@Override

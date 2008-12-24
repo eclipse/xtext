@@ -47,4 +47,8 @@ public class ExceptionDiagnostic implements Diagnostic {
 		return getMessage();
 	}
 
+	public Exception getException() {
+		return exception;
+	}
+
 }

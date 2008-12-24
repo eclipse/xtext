@@ -107,13 +107,17 @@ public abstract class EClassifierInfo {
 					isContainment);
 
 			switch (EcoreUtil2.containsSemanticallyEqualFeature(getEClass(), newFeature)) {
-				case FeatureDoesNotExist:
+				case FeatureDoesNotExist: 
+					if (!isGenerated())
+						throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, "Cannot create feature in sealed metamodel.", parserElement);
 					return getEClass().getEStructuralFeatures().add(newFeature);
 				case FeatureExists:
 					// do nothing
 					return false;
 			}
 
+			if (!isGenerated())
+				throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, "Cannot create feature in sealed metamodel.", parserElement);
 			// feature with same name exists, but have a different, potentially
 			// incompatible configuration
 			EStructuralFeature existingFeature = getEClass().getEStructuralFeature(featureName);
