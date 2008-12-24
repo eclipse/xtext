@@ -59,21 +59,30 @@ public class XtextSourceViewer extends ProjectionViewer implements IXtextSourceV
 
 	@Override
 	public void setDocument(IDocument document, IAnnotationModel annotationModel) {
+		if (getDocument() != null)
+			((IXtextDocument) getDocument()).removeModelListener(this);
 		super.setDocument(document, annotationModel);
-		((IXtextDocument) getDocument()).addModelListener(this);
+		if (document != null)
+			((IXtextDocument) getDocument()).addModelListener(this);
 	}
 
 	@Override
 	public void setDocument(IDocument document, IAnnotationModel annotationModel, int modelRangeOffset,
 			int modelRangeLength) {
+		if (getDocument() != null)
+			((IXtextDocument) getDocument()).removeModelListener(this);
 		super.setDocument(document, annotationModel, modelRangeOffset, modelRangeLength);
-		((IXtextDocument) getDocument()).addModelListener(this);
+		if (document != null)
+			((IXtextDocument) getDocument()).addModelListener(this);
 	}
 
 	@Override
 	public void setDocument(IDocument document, int visibleRegionOffset, int visibleRegionLength) {
+		if (getDocument() != null)
+			((IXtextDocument) getDocument()).removeModelListener(this);
 		super.setDocument(document, visibleRegionOffset, visibleRegionLength);
-		((IXtextDocument) getDocument()).addModelListener(this);
+		if (document != null)
+			((IXtextDocument) getDocument()).addModelListener(this);
 	}
 
 	/*
