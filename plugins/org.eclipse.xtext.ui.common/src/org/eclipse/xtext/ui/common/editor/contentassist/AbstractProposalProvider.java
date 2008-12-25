@@ -69,8 +69,7 @@ public abstract class AbstractProposalProvider implements IProposalProvider {
 			logger.debug("completeKeyword '" + keyword.getValue() + "' for model '" + contentAssistContext.getModel() + "' and prefix '"
 					+ contentAssistContext.getMatchString().trim() + "'");
 		}
-		String text = keyword.getValue().length() == 1 ? keyword.getValue() : keyword.getValue() + " ";
-		return Collections.singletonList(createCompletionProposal(keyword, text, contentAssistContext));
+		return Collections.singletonList(createCompletionProposal(keyword, keyword.getValue(), contentAssistContext));
 	}
 
 	/*
