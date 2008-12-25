@@ -25,6 +25,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.crossref.ILinkingService;
@@ -95,7 +96,7 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 		}
 
 		for (Iterator<AbstractElement> iterator = nextValidElementSet.iterator(); iterator.hasNext();) {
-			AbstractElement abstractElement = (AbstractElement) iterator.next();
+			AbstractElement abstractElement = iterator.next();
 			computedElementList.addAll(doSwitch(abstractElement));
 		}
 		
@@ -130,10 +131,11 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 		List<AbstractElement> elementList = new ArrayList<AbstractElement>();
 		if (assignment.getTerminal() instanceof RuleCall) {
 			addWithNullCheck(elementList, doSwitch(assignment.getTerminal()));
-		}
-		else if (assignment.getTerminal() instanceof Alternatives) {
-			addWithNullCheck(elementList, doSwitch(assignment.getTerminal()));
-		}
+		} else if (assignment.getTerminal() instanceof Alternatives) {
+            addWithNullCheck(elementList, doSwitch(assignment.getTerminal()));
+        } else if (assignment.getTerminal() instanceof Keyword) {
+            addWithNullCheck(elementList, doSwitch(assignment.getTerminal()));
+        }
 		elementList.add(assignment);
 		return elementList;
 	}
