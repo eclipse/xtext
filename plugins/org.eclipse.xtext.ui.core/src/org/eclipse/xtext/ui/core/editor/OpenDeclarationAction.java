@@ -7,6 +7,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.action.Action;
@@ -29,7 +30,9 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
+import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.ServiceRegistry;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.UnitOfWork;
@@ -91,12 +94,20 @@ public class OpenDeclarationAction extends Action {
 			if (!linkedObjects.isEmpty()) {
 
 				EObject referenceEObject = linkedObjects.iterator().next();
+		
+				XtextResourceSet resourceSet = (XtextResourceSet) referenceEObject.eResource().getResourceSet();
+
+				URI uri = referenceEObject.eResource().getURI();
 				
-				IFile targetFile = referenceEObject.eResource().getURI().isPlatformResource() ? 
+				if (ClasspathUriUtil.isClassapthUri(uri)) {
+					uri = resourceSet.getClasspathUriResolver().resolve(resourceSet.getClasspathURIContext(), uri);
+				}
+				
+				IFile targetFile = uri.isPlatformResource() ? 
 						ResourcesPlugin.getWorkspace().getRoot().getFile(
-								new Path(referenceEObject.eResource().getURI().toPlatformString(true)))
+								new Path(uri.toPlatformString(true)))
 						: ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(
-								new Path(referenceEObject.eResource().getURI().toFileString()));
+								new Path(uri.toFileString()));
 
 				if (targetFile != null) {
 
