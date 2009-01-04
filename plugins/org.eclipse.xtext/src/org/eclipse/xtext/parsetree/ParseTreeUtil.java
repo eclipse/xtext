@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -129,8 +128,8 @@ public final class ParseTreeUtil {
 
 		assertParameterNotNull(contextNode, "contextNode");
 
-		AbstractNode abstractNode = null;
-
+		AbstractNode abstractNode = contextNode.eContainer()==null ? contextNode : null;
+		
 		if (contextNode.getTotalOffset() < offsetPosition
 				|| (0 == offsetPosition && offsetPosition == contextNode.getTotalOffset())) {
 
@@ -370,13 +369,6 @@ public final class ParseTreeUtil {
 			 * we have completed the rule of the current context.continue at the
 			 * parent context
 			 */
-			boolean hasLeafNodes = false;
-
-			for (Iterator<LeafNode> iterator = contextNode.getLeafNodes().listIterator(); !hasLeafNodes
-					&& iterator.hasNext(); hasLeafNodes = !iterator.next().isHidden()) {
-				;
-			}
-
 			contextNode = contextNode.getParent();
 
 			while (contextNode != null && contextNode.getGrammarElement() == null) {
@@ -391,7 +383,8 @@ public final class ParseTreeUtil {
 			}
 			else if (grammarElement.eContainer() instanceof ParserRule) {
 
-				if (!hasLeafNodes || GrammarUtil.isMultipleCardinality(grammarElement)) {
+				if (isDefaultRule((ParserRule) grammarElement.eContainer()) 
+						|| GrammarUtil.isMultipleCardinality(grammarElement)) {
 					elementSet.add(grammarElement);
 				}
 			}
@@ -456,7 +449,6 @@ public final class ParseTreeUtil {
 
 		return elementSet;
 	}
-	
 
 	/**
 	 * @param abstractNode
@@ -513,5 +505,10 @@ public final class ParseTreeUtil {
 		}
 		return stringBuilder.toString();
 	}
+	
+	private static boolean isDefaultRule(ParserRule parserRule) {
+		return ((Grammar)parserRule.eContainer()).getRules().indexOf(parserRule)==0;
+	}
+
 
 }
