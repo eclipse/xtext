@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IEditorPart;
@@ -90,9 +91,12 @@ public class OpenDeclarationAction extends Action {
 			if (!linkedObjects.isEmpty()) {
 
 				EObject referenceEObject = linkedObjects.iterator().next();
-
-				IFile targetFile = ResourcesPlugin.getWorkspace().getRoot().getFile(
-						new Path(referenceEObject.eResource().getURI().toPlatformString(true)));
+				
+				IFile targetFile = referenceEObject.eResource().getURI().isPlatformResource() ? 
+						ResourcesPlugin.getWorkspace().getRoot().getFile(
+								new Path(referenceEObject.eResource().getURI().toPlatformString(true)))
+						: ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(
+								new Path(referenceEObject.eResource().getURI().toFileString()));
 
 				if (targetFile != null) {
 
@@ -106,6 +110,8 @@ public class OpenDeclarationAction extends Action {
 							NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(referenceEObject);
 							((ITextEditor) openEditor).selectAndReveal(nodeAdapter.getParserNode().getOffset(),
 									nodeAdapter.getParserNode().getLength());
+						} else if (openEditor instanceof ISelectionProvider) {
+							//TODO: use ISelectionProvider instead of ITextEditor
 						}
 					}
 					catch (PartInitException partInitException) {
