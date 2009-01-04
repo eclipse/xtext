@@ -15,6 +15,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.AbstractElement;
@@ -121,7 +122,7 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 				&& includeNext;) {
 			AbstractElement groupElement = iterator.next();
 			addWithNullCheck(elementList, doSwitch(groupElement));
-			includeNext = GrammarUtil.isOptionalCardinality(groupElement);
+			includeNext = isOptional(groupElement);
 		}
 		return elementList;
 	}
@@ -189,6 +190,25 @@ public class DefaultContentAssistCalculator extends XtextSwitch<List<AbstractEle
 					(LeafNode) lastCompleteNode);
 			return !linkCandidates.isEmpty() && referencedObjects.containsAll(linkCandidates);
 		}
+	}
+	
+	private boolean isOptional(AbstractElement groupElement) {
+		boolean isOptional = true;
+		
+		if ((groupElement instanceof Group || groupElement instanceof Alternatives) && !GrammarUtil.isOptionalCardinality(groupElement)) {
+
+			EList<AbstractElement> abstractTokens = groupElement instanceof Group ? ((Group) groupElement)
+					.getAbstractTokens() : ((Alternatives) groupElement).getGroups();
+
+			for (Iterator<AbstractElement> iterator = abstractTokens.iterator(); isOptional && iterator.hasNext();) {
+				AbstractElement abstractElement = iterator.next();
+				isOptional = isOptional(abstractElement);
+			}
+
+		} else {
+			isOptional = GrammarUtil.isOptionalCardinality(groupElement);
+		}
+		return isOptional;
 	}
 
 	

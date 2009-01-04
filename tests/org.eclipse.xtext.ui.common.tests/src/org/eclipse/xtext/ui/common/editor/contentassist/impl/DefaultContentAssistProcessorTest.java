@@ -127,6 +127,13 @@ public class DefaultContentAssistProcessorTest extends AbstractUiTest
 			);
 	}
 	
+	
+	public void testDefaultRule() throws Exception {
+		contentAssistProcessorTestBuilder.assertText("spielplatz");
+		contentAssistProcessorTestBuilder.set(" spielplatz 1 \"SpielplatzBeschreibung\" { } ")
+			.assertTextAtCursorPosition(1, "spielplatz");;
+	}
+	
 	private ContentAssistProcessorTestBuilder newBuilder(Class<?> standAloneSetup, Class<?> uiConfig) throws Exception {
 		withUi(standAloneSetup, uiConfig);
 		return new ContentAssistProcessorTestBuilder(getCurrentServiceScope(), new DefaultContentAssistProcessor());
