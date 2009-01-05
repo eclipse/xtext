@@ -132,7 +132,7 @@ public class XtextResourceChecker {
 		if (causer instanceof EObject) {
 			EObject ele = (EObject) causer;
 			NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(ele);
-			if (nodeAdapter != null) {
+			if (nodeAdapter != null && data.hasNext()) {
 				AbstractNode parserNode = nodeAdapter.getParserNode();
 				// feature is the second element see Diagnostician.getData
 				Object feature = data.next();
